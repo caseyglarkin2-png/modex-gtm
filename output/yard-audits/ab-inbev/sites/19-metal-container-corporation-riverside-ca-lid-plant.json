@@ -1,12 +1,95 @@
 {
   "name": "Metal Container Corporation - Riverside CA Lid Plant",
   "type": "Lid Manufacturing Plant",
-  "coords": { "lat": 33.9480, "lng": -117.4500 },
+  "coords": {
+    "lat": 33.948,
+    "lng": -117.45
+  },
   "geofences": {
-    "perimeter": { "south": 33.94700, "west": -117.45120, "north": 33.94900, "east": -117.44880 },
-    "truckGate": null,
-    "dropYards": [],
-    "dockAprons": [],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.94857,
+          "lng": -117.451373
+        },
+        {
+          "lat": 33.948513,
+          "lng": -117.450137
+        },
+        {
+          "lat": 33.946804,
+          "lng": -117.450206
+        },
+        {
+          "lat": 33.946861,
+          "lng": -117.451442
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.94857,
+          "lng": -117.450343
+        },
+        {
+          "lat": 33.948541,
+          "lng": -117.450069
+        },
+        {
+          "lat": 33.94837,
+          "lng": -117.450103
+        },
+        {
+          "lat": 33.948399,
+          "lng": -117.450378
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 33.948342,
+            "lng": -117.45
+          },
+          {
+            "lat": 33.948313,
+            "lng": -117.449519
+          },
+          {
+            "lat": 33.947146,
+            "lng": -117.449588
+          },
+          {
+            "lat": 33.947174,
+            "lng": -117.450069
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 33.948399,
+            "lng": -117.451236
+          },
+          {
+            "lat": 33.948342,
+            "lng": -117.450343
+          },
+          {
+            "lat": 33.948114,
+            "lng": -117.450378
+          },
+          {
+            "lat": 33.948171,
+            "lng": -117.45127
+          }
+        ]
+      }
+    ],
     "staging": null
   },
   "yardMetrics": {
@@ -15,7 +98,7 @@
     "trailerParkingCapacity": 0,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 0.0,
+    "siteAreaAcres": 0,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.9480,-117.4500,400m/data=!3m1!1e3",
@@ -45,11 +128,27 @@
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "connectivityIssue",
-    "multipleFacilities", "scale", "dropYard", "multiStep"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "connectivityIssue",
+    "multipleFacilities",
+    "scale",
+    "dropYard",
+    "multiStep"
   ],
   "fieldNotes": {
     "_locationUncertainty": "The exact MCC Riverside Lid Plant building could not be positively identified. The roster supplied only city-level coordinates (33.9533, -117.3962, generic Riverside center) and no address. Web research resolved the address to 7155 Central Ave, Riverside, CA 92504 (Yelp, Yahoo Local, Manta, D&B, CommercialCafe; phone 951-354-0444). CommercialCafe describes it as a Class B industrial building, 83,914 SF, completed 1987, in the 'Airport neighborhood' of Riverside (near Riverside Municipal Airport), with ~200 employees per the listing. However, no precise latitude/longitude could be obtained from any source (Waze, EPA FRS/TRI, real-estate listings all lacked coordinates), and extensive satellite + Street View probing of the industrial districts around Riverside Municipal Airport could not isolate a single building confirmable as the MCC lid plant - the airport-adjacent industrial fabric is dense with similar multi-tenant and mid-size industrial buildings, none with confirmable MCC signage. Coordinates recorded here (33.9480, -117.4500) are a best-estimate point in the airport-NE industrial cluster; the perimeter box is a nominal placeholder and yardMetrics are zeroed. Recommend human review with Riverside County parcel/GIS data for 7155 Central Ave, or a direct facility contact, to confirm the building footprint.",

@@ -1,18 +1,128 @@
 {
   "name": "Anheuser-Busch Brewery - Jacksonville FL",
   "type": "Brewery",
-  "coords": { "lat": 30.43250, "lng": -81.64900 },
+  "coords": {
+    "lat": 30.4325,
+    "lng": -81.649
+  },
   "geofences": {
-    "perimeter": { "south": 30.4295, "west": -81.6530, "north": 30.4360, "east": -81.6455 },
-    "truckGate": { "south": 30.43020, "west": -81.65180, "north": 30.43090, "east": -81.65080 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 30.434513,
+          "lng": -81.652159
+        },
+        {
+          "lat": 30.434513,
+          "lng": -81.645841
+        },
+        {
+          "lat": 30.429895,
+          "lng": -81.645841
+        },
+        {
+          "lat": 30.429895,
+          "lng": -81.652159
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 30.430132,
+          "lng": -81.650373
+        },
+        {
+          "lat": 30.430132,
+          "lng": -81.649
+        },
+        {
+          "lat": 30.429658,
+          "lng": -81.649
+        },
+        {
+          "lat": 30.429658,
+          "lng": -81.650373
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 30.43050, "west": -81.65250, "north": 30.43400, "east": -81.65000 },
-      { "south": 30.43250, "west": -81.65000, "north": 30.43520, "east": -81.64820 }
+      {
+        "ring": [
+          {
+            "lat": 30.434158,
+            "lng": -81.651747
+          },
+          {
+            "lat": 30.434039,
+            "lng": -81.649
+          },
+          {
+            "lat": 30.433092,
+            "lng": -81.649137
+          },
+          {
+            "lat": 30.43321,
+            "lng": -81.651884
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 30.431316,
+            "lng": -81.650099
+          },
+          {
+            "lat": 30.431197,
+            "lng": -81.647901
+          },
+          {
+            "lat": 30.430369,
+            "lng": -81.648039
+          },
+          {
+            "lat": 30.430487,
+            "lng": -81.650236
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 30.43130, "west": -81.65050, "north": 30.43280, "east": -81.64880 }
+      {
+        "ring": [
+          {
+            "lat": 30.432974,
+            "lng": -81.649824
+          },
+          {
+            "lat": 30.432974,
+            "lng": -81.647352
+          },
+          {
+            "lat": 30.432263,
+            "lng": -81.647352
+          },
+          {
+            "lat": 30.432263,
+            "lng": -81.649824
+          }
+        ]
+      }
     ],
-    "staging": { "south": 30.43100, "west": -81.64980, "north": 30.43230, "east": -81.64850 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 18,
+        "pano": "UxJV5B7-K-0T2BFFNi2bJA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 18,
+        "pano": "UxJV5B7-K-0T2BFFNi2bJA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 30,
@@ -20,23 +130,42 @@
     "trailerParkingCapacity": 320,
     "truckGateCount": 2,
     "buildingCount": 6,
-    "siteAreaAcres": 128.0,
+    "siteAreaAcres": 128,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@30.43250,-81.64900,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "scale", "truckGateCount"],
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "truckGateCount"
+  ],
   "fieldNotes": {
     "site": "Jacksonville A-B brewery (opened 1969) at 111 Busch Dr; $30M 2026 investment announced. Brewery building with trailer drop yards W/SW, bounded by Busch Dr on the south, I-95 on the east, marshland to the north. 'Budweiser' sign on the building confirmed in Street View.",
     "truckGate": "Site fully fenced with chain-link confirmed in multiple Street Views (trailer yard, employee lot perimeters). Driveway truck entrances from Busch Dr at the SW corner. Controlled gated access - truckGate TRUE.",

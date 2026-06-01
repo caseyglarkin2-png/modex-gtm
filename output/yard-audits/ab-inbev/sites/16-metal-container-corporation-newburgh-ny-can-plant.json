@@ -1,17 +1,108 @@
 {
   "name": "Metal Container Corporation - Newburgh NY Can Plant",
   "type": "Can Manufacturing Plant",
-  "coords": { "lat": 41.4878, "lng": -74.0958 },
+  "coords": {
+    "lat": 41.4878,
+    "lng": -74.0958
+  },
   "geofences": {
-    "perimeter": { "south": 41.48580, "west": -74.09820, "north": 41.49050, "east": -74.09350 },
-    "truckGate": { "south": 41.48670, "west": -74.09760, "north": 41.48710, "east": -74.09710 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.48924,
+          "lng": -74.098135
+        },
+        {
+          "lat": 41.489034,
+          "lng": -74.094701
+        },
+        {
+          "lat": 41.486154,
+          "lng": -74.095113
+        },
+        {
+          "lat": 41.48636,
+          "lng": -74.098547
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.486977,
+          "lng": -74.097723
+        },
+        {
+          "lat": 41.486874,
+          "lng": -74.096624
+        },
+        {
+          "lat": 41.48636,
+          "lng": -74.096761
+        },
+        {
+          "lat": 41.486463,
+          "lng": -74.09786
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 41.48770, "west": -74.09740, "north": 41.48830, "east": -74.09650 }
+      {
+        "ring": [
+          {
+            "lat": 41.488829,
+            "lng": -74.097723
+          },
+          {
+            "lat": 41.488623,
+            "lng": -74.095251
+          },
+          {
+            "lat": 41.4878,
+            "lng": -74.095388
+          },
+          {
+            "lat": 41.488006,
+            "lng": -74.09786
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 41.48780, "west": -74.09720, "north": 41.48870, "east": -74.09660 }
+      {
+        "ring": [
+          {
+            "lat": 41.487594,
+            "lng": -74.097723
+          },
+          {
+            "lat": 41.487491,
+            "lng": -74.095525
+          },
+          {
+            "lat": 41.486977,
+            "lng": -74.095663
+          },
+          {
+            "lat": 41.48708,
+            "lng": -74.09786
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 141,
+        "pano": "qbNXtlRr2yORqKSz16dI5g",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 141,
+        "pano": "qbNXtlRr2yORqKSz16dI5g",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 22,
@@ -19,7 +110,7 @@
     "trailerParkingCapacity": 35,
     "truckGateCount": 2,
     "buildingCount": 1,
-    "siteAreaAcres": 50.0,
+    "siteAreaAcres": 50,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.4878,-74.0958,400m/data=!3m1!1e3",
@@ -48,7 +139,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Main entrance off Breunig Rd (SW) is a wide open driveway with a '130' AB monument sign on a landscaped median - no barrier arm, sliding gate, or checkpoint. Street View Aug 2023 confirms open campus-style frontage with no perimeter fence at the road. A second access road on the NE connects to the broader internal road network; the small peaked-roof structure at that junction is a utility/storage building, not a guard booth.",
     "guardShack": "No staffed booth at either access point. The NE junction structure is a house-like utility building set back from the road, not a checkpoint booth.",

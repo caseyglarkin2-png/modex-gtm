@@ -1,17 +1,108 @@
 {
   "name": "Anheuser-Busch Brewery - Houston TX",
   "type": "Brewery",
-  "coords": { "lat": 29.77150, "lng": -95.26900 },
+  "coords": {
+    "lat": 29.7715,
+    "lng": -95.269
+  },
   "geofences": {
-    "perimeter": { "south": 29.7695, "west": -95.2745, "north": 29.7760, "east": -95.2640 },
-    "truckGate": { "south": 29.76960, "west": -95.26780, "north": 29.77020, "east": -95.26680 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.776983,
+          "lng": -95.275042
+        },
+        {
+          "lat": 29.776268,
+          "lng": -95.265704
+        },
+        {
+          "lat": 29.768639,
+          "lng": -95.266253
+        },
+        {
+          "lat": 29.769593,
+          "lng": -95.275592
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 29.772454,
+          "lng": -95.275317
+        },
+        {
+          "lat": 29.772215,
+          "lng": -95.273669
+        },
+        {
+          "lat": 29.770785,
+          "lng": -95.273944
+        },
+        {
+          "lat": 29.771023,
+          "lng": -95.275592
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 29.76980, "west": -95.26750, "north": 29.77380, "east": -95.26450 }
+      {
+        "ring": [
+          {
+            "lat": 29.773884,
+            "lng": -95.271197
+          },
+          {
+            "lat": 29.773169,
+            "lng": -95.266803
+          },
+          {
+            "lat": 29.770308,
+            "lng": -95.267077
+          },
+          {
+            "lat": 29.771023,
+            "lng": -95.271472
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 29.77040, "west": -95.27200, "north": 29.77110, "east": -95.26880 }
+      {
+        "ring": [
+          {
+            "lat": 29.774838,
+            "lng": -95.273395
+          },
+          {
+            "lat": 29.774361,
+            "lng": -95.269
+          },
+          {
+            "lat": 29.773169,
+            "lng": -95.269275
+          },
+          {
+            "lat": 29.773646,
+            "lng": -95.273669
+          }
+        ]
+      }
     ],
-    "staging": { "south": 29.77020, "west": -95.27000, "north": 29.77130, "east": -95.26800 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 75,
+        "pano": "SXzf0NKcasbA8ijiV-2-hA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 75,
+        "pano": "SXzf0NKcasbA8ijiV-2-hA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 35,
@@ -19,23 +110,42 @@
     "trailerParkingCapacity": 320,
     "truckGateCount": 2,
     "buildingCount": 8,
-    "siteAreaAcres": 181.0,
+    "siteAreaAcres": 181,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@29.77150,-95.26900,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "scale", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "scale",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "site": "Houston A-B brewery (opened 1966) at 775 Gellhorn Dr. Large brewery building with adjacent very large trailer drop yard to the east, bounded by I-610 on the east and Gellhorn Dr on the south.",
     "truckGate": "Perimeter fully fenced (wrought-iron and chain-link) confirmed in multiple Street Views. Brewery building has sliding gates in the fence line at its west entrance. Controlled access to the secured site - truckGate TRUE.",

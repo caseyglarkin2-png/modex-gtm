@@ -1,18 +1,108 @@
 {
   "name": "Anheuser-Busch Brewery - Merrimack NH",
   "type": "Brewery",
-  "coords": { "lat": 42.82530, "lng": -71.48650 },
+  "coords": {
+    "lat": 42.8253,
+    "lng": -71.4865
+  },
   "geofences": {
-    "perimeter": { "south": 42.82050, "west": -71.48950, "north": 42.82900, "east": -71.48150 },
-    "truckGate": { "south": 42.82640, "west": -71.48560, "north": 42.82710, "east": -71.48460 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.827717,
+          "lng": -71.490345
+        },
+        {
+          "lat": 42.827314,
+          "lng": -71.483753
+        },
+        {
+          "lat": 42.822077,
+          "lng": -71.484303
+        },
+        {
+          "lat": 42.82248,
+          "lng": -71.490895
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.823286,
+          "lng": -71.489247
+        },
+        {
+          "lat": 42.823084,
+          "lng": -71.487599
+        },
+        {
+          "lat": 42.822077,
+          "lng": -71.487873
+        },
+        {
+          "lat": 42.822278,
+          "lng": -71.489521
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 42.82700, "west": -71.48800, "north": 42.82850, "east": -71.48500 }
+      {
+        "ring": [
+          {
+            "lat": 42.826912,
+            "lng": -71.488148
+          },
+          {
+            "lat": 42.82671,
+            "lng": -71.484303
+          },
+          {
+            "lat": 42.8253,
+            "lng": -71.484577
+          },
+          {
+            "lat": 42.825501,
+            "lng": -71.488423
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 42.82420, "west": -71.48820, "north": 42.82580, "east": -71.48720 },
-      { "south": 42.82550, "west": -71.48600, "north": 42.82680, "east": -71.48420 }
+      {
+        "ring": [
+          {
+            "lat": 42.826106,
+            "lng": -71.489247
+          },
+          {
+            "lat": 42.825904,
+            "lng": -71.485951
+          },
+          {
+            "lat": 42.824696,
+            "lng": -71.486225
+          },
+          {
+            "lat": 42.824897,
+            "lng": -71.489521
+          }
+        ]
+      }
     ],
-    "staging": { "south": 42.82600, "west": -71.48700, "north": 42.82700, "east": -71.48560 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 133,
+        "pano": "Yi1UPR9GqjFADoKTVjRY8A",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 133,
+        "pano": "Yi1UPR9GqjFADoKTVjRY8A",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 35,
@@ -20,23 +110,42 @@
     "trailerParkingCapacity": 160,
     "truckGateCount": 1,
     "buildingCount": 6,
-    "siteAreaAcres": 65.0,
+    "siteAreaAcres": 65,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@42.82530,-71.48650,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "scale", "entryLanes", "exitLanes", "dockDoorCount"],
+  "uncertainFields": [
+    "guardShack",
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "location": "Confirmed Anheuser-Busch Merrimack Brewery, 221 Daniel Webster Hwy. Roster coords were ~3.2 km off (movedMeters 3205). Locked center on the main brewhouse/warehouse mass at 42.82530,-71.48650. Identity confirmed by the brewing complex layout (brewhouse, tank farm, 400,000+ sq ft processing facility) between the Everett Turnpike and the Merrimack River, with the on-site Budweiser Brewery Experience visitor center and Clydesdale Hamlet.",
     "operatingStatus": "IMPORTANT - AB announced (Dec 2025) the Merrimack brewery will close in early 2026 as part of the same realignment that closed Fairfield CA and Newark NJ; 125 jobs affected. As of the audit date (May 2026) the facility has very likely ceased brewing operations. Audit reflects the physical yard infrastructure from pre-closure imagery.",

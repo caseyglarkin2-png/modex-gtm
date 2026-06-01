@@ -1,18 +1,108 @@
 {
   "name": "Anheuser-Busch Brewery - Baldwinsville NY",
   "type": "Brewery",
-  "coords": { "lat": 43.16800, "lng": -76.31050 },
+  "coords": {
+    "lat": 43.168,
+    "lng": -76.3105
+  },
   "geofences": {
-    "perimeter": { "south": 43.1640, "west": -76.3155, "north": 43.1715, "east": -76.3055 },
-    "truckGate": { "south": 43.16760, "west": -76.31090, "north": 43.16810, "east": -76.31000 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 43.172607,
+          "lng": -76.315993
+        },
+        {
+          "lat": 43.172407,
+          "lng": -76.307753
+        },
+        {
+          "lat": 43.165596,
+          "lng": -76.308028
+        },
+        {
+          "lat": 43.165997,
+          "lng": -76.316268
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 43.166998,
+          "lng": -76.315444
+        },
+        {
+          "lat": 43.166798,
+          "lng": -76.313247
+        },
+        {
+          "lat": 43.165596,
+          "lng": -76.313521
+        },
+        {
+          "lat": 43.165796,
+          "lng": -76.315719
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 43.16600, "west": -76.31280, "north": 43.16720, "east": -76.31000 },
-      { "south": 43.16830, "west": -76.31420, "north": 43.17100, "east": -76.31200 }
+      {
+        "ring": [
+          {
+            "lat": 43.171205,
+            "lng": -76.31874
+          },
+          {
+            "lat": 43.170404,
+            "lng": -76.313247
+          },
+          {
+            "lat": 43.168801,
+            "lng": -76.313796
+          },
+          {
+            "lat": 43.169603,
+            "lng": -76.319289
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 43.16850, "west": -76.31350, "north": 43.16980, "east": -76.31150 }
+      {
+        "ring": [
+          {
+            "lat": 43.171205,
+            "lng": -76.314345
+          },
+          {
+            "lat": 43.171205,
+            "lng": -76.308852
+          },
+          {
+            "lat": 43.170003,
+            "lng": -76.308852
+          },
+          {
+            "lat": 43.170003,
+            "lng": -76.314345
+          }
+        ]
+      }
     ],
-    "staging": { "south": 43.16720, "west": -76.31150, "north": 43.16830, "east": -76.31000 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 297,
+        "pano": "1I-WE-gABHHL0k6N4n8S_w",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 297,
+        "pano": "1I-WE-gABHHL0k6N4n8S_w",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 38,
@@ -20,23 +110,41 @@
     "trailerParkingCapacity": 340,
     "truckGateCount": 1,
     "buildingCount": 7,
-    "siteAreaAcres": 167.0,
+    "siteAreaAcres": 167,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@43.16800,-76.31050,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "scale", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "scale",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "site": "Baldwinsville NY A-B brewery (opened 1983) at 2885 Belgium Rd. Large modern brewery building set back from Belgium Rd in a wooded campus, with extensive trailer drop yards W/SW and rail service.",
     "truckGate": "Site is a controlled industrial campus set back from the public road. A small checkpoint structure sits at the internal road junction between the trailer yards and the brewery (visible at z18). Internal access road from Belgium Rd splits to employee parking and truck operations. truckGate TRUE.",

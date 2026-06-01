@@ -1,18 +1,96 @@
 {
   "name": "Anheuser-Busch Brewery - Fairfield CA",
   "type": "Brewery",
-  "coords": { "lat": 38.23550, "lng": -122.09050 },
+  "coords": {
+    "lat": 38.2355,
+    "lng": -122.0905
+  },
   "geofences": {
-    "perimeter": { "south": 38.23200, "west": -122.09650, "north": 38.23870, "east": -122.08650 },
-    "truckGate": { "south": 38.23700, "west": -122.09250, "north": 38.23770, "east": -122.09150 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.237657,
+          "lng": -122.095307
+        },
+        {
+          "lat": 38.237657,
+          "lng": -122.089813
+        },
+        {
+          "lat": 38.233774,
+          "lng": -122.089813
+        },
+        {
+          "lat": 38.233774,
+          "lng": -122.095307
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 38.2355,
+          "lng": -122.090637
+        },
+        {
+          "lat": 38.2355,
+          "lng": -122.089813
+        },
+        {
+          "lat": 38.234853,
+          "lng": -122.089813
+        },
+        {
+          "lat": 38.234853,
+          "lng": -122.090637
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 38.23330, "west": -122.09150, "north": 38.23480, "east": -122.08900 }
+      {
+        "ring": [
+          {
+            "lat": 38.2355,
+            "lng": -122.091049
+          },
+          {
+            "lat": 38.2355,
+            "lng": -122.089401
+          },
+          {
+            "lat": 38.234637,
+            "lng": -122.089401
+          },
+          {
+            "lat": 38.234637,
+            "lng": -122.091049
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 38.23590, "west": -122.09100, "north": 38.23680, "east": -122.08850 },
-      { "south": 38.23720, "west": -122.09050, "north": 38.23800, "east": -122.08850 }
+      {
+        "ring": [
+          {
+            "lat": 38.237442,
+            "lng": -122.09462
+          },
+          {
+            "lat": 38.237442,
+            "lng": -122.0905
+          },
+          {
+            "lat": 38.236579,
+            "lng": -122.0905
+          },
+          {
+            "lat": 38.236579,
+            "lng": -122.09462
+          }
+        ]
+      }
     ],
-    "staging": { "south": 38.23480, "west": -122.09150, "north": 38.23580, "east": -122.08950 }
+    "staging": null
   },
   "yardMetrics": {
     "dockDoorCount": 40,
@@ -20,23 +98,43 @@
     "trailerParkingCapacity": 130,
     "truckGateCount": 1,
     "buildingCount": 6,
-    "siteAreaAcres": 75.0,
+    "siteAreaAcres": 75,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@38.23550,-122.09050,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": true, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "scale", "entryLanes", "exitLanes", "dockDoorCount", "truckGate"],
+  "uncertainFields": [
+    "guardShack",
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "truckGate"
+  ],
   "fieldNotes": {
     "location": "Confirmed Anheuser-Busch Fairfield Brewery, 3101 Busch Dr. Roster coords were ~3.5 km off (movedMeters 3470). Locked center on the main brewhouse/warehouse mass at 38.23550,-122.09050. Identity confirmed by 'THANK YOU TEAM TRAVIS' painted on the warehouse roof (Travis AFB is adjacent) and the brewing complex layout with tank farm and rail yard.",
     "operatingStatus": "IMPORTANT - this brewery permanently CLOSED on Feb 22, 2026 (production realignment; 238 jobs cut). The site is being sold. Audit reflects the physical yard infrastructure as captured in pre-closure imagery; the facility is no longer operating.",

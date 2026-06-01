@@ -1,15 +1,108 @@
 {
   "name": "Metal Container Corporation - Windsor CO Can Plant",
   "type": "Can Manufacturing Plant",
-  "coords": { "lat": 40.467, "lng": -104.8623 },
+  "coords": {
+    "lat": 40.467,
+    "lng": -104.8623
+  },
   "geofences": {
-    "perimeter": { "south": 40.46530, "west": -104.86360, "north": 40.46830, "east": -104.86120 },
-    "truckGate": { "south": 40.46510, "west": -104.86170, "north": 40.46545, "east": -104.86120 },
-    "dropYards": [],
-    "dockAprons": [
-      { "south": 40.46630, "west": -104.86200, "north": 40.46700, "east": -104.86160 }
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.468045,
+          "lng": -104.863536
+        },
+        {
+          "lat": 40.468045,
+          "lng": -104.861476
+        },
+        {
+          "lat": 40.465433,
+          "lng": -104.861476
+        },
+        {
+          "lat": 40.465433,
+          "lng": -104.863536
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.465746,
+          "lng": -104.863536
+        },
+        {
+          "lat": 40.465746,
+          "lng": -104.862987
+        },
+        {
+          "lat": 40.465433,
+          "lng": -104.862987
+        },
+        {
+          "lat": 40.465433,
+          "lng": -104.863536
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 40.466582,
+            "lng": -104.863399
+          },
+          {
+            "lat": 40.466582,
+            "lng": -104.861751
+          },
+          {
+            "lat": 40.466164,
+            "lng": -104.861751
+          },
+          {
+            "lat": 40.466164,
+            "lng": -104.863399
+          }
+        ]
+      }
     ],
-    "staging": { "south": 40.46540, "west": -104.86170, "north": 40.46620, "east": -104.86130 }
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 40.467522,
+            "lng": -104.863124
+          },
+          {
+            "lat": 40.467522,
+            "lng": -104.861888
+          },
+          {
+            "lat": 40.466687,
+            "lng": -104.861888
+          },
+          {
+            "lat": 40.466687,
+            "lng": -104.863124
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 336,
+        "pano": "umnauFSGTS1HhXhG4yuEPA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 336,
+        "pano": "umnauFSGTS1HhXhG4yuEPA",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 8,
@@ -46,7 +139,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Single truck driveway off the south public road (Eastman Park Dr area) is a wide open paved driveway with a yellow sign post on the median - no barrier arm, sliding gate, guard booth, or checkpoint. Street View Oct 2025 confirms open access; the driveway curves up into the property toward the building with no internal gate visible.",
     "guardShack": "No staffed booth at the entrance in satellite or Street View Oct 2025.",

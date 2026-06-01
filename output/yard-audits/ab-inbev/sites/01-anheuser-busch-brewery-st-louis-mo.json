@@ -1,18 +1,84 @@
 {
   "name": "Anheuser-Busch Brewery - St. Louis MO",
   "type": "Brewery",
-  "coords": { "lat": 38.59650, "lng": -90.20800 },
+  "coords": {
+    "lat": 38.5965,
+    "lng": -90.208
+  },
   "geofences": {
-    "perimeter": { "south": 38.5930, "west": -90.2150, "north": 38.6015, "east": -90.2025 },
-    "truckGate": { "south": 38.59620, "west": -90.20900, "north": 38.59680, "east": -90.20800 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.601437,
+          "lng": -90.213493
+        },
+        {
+          "lat": 38.598003,
+          "lng": -90.20031
+        },
+        {
+          "lat": 38.589416,
+          "lng": -90.201958
+        },
+        {
+          "lat": 38.591348,
+          "lng": -90.214317
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 38.59380, "west": -90.20850, "north": 38.59750, "east": -90.20450 },
-      { "south": 38.59450, "west": -90.20450, "north": 38.59850, "east": -90.20200 }
+      {
+        "ring": [
+          {
+            "lat": 38.595427,
+            "lng": -90.205803
+          },
+          {
+            "lat": 38.594353,
+            "lng": -90.201408
+          },
+          {
+            "lat": 38.591777,
+            "lng": -90.202232
+          },
+          {
+            "lat": 38.592851,
+            "lng": -90.206627
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 38.59560, "west": -90.20950, "north": 38.59700, "east": -90.20800 }
+      {
+        "ring": [
+          {
+            "lat": 38.5965,
+            "lng": -90.210747
+          },
+          {
+            "lat": 38.595641,
+            "lng": -90.206627
+          },
+          {
+            "lat": 38.594139,
+            "lng": -90.207176
+          },
+          {
+            "lat": 38.594997,
+            "lng": -90.211296
+          }
+        ]
+      }
     ],
-    "staging": { "south": 38.59600, "west": -90.20650, "north": 38.59750, "east": -90.20500 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 49,
+        "pano": "oja-qoRbra3Gm47jSSiN5w",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 55,
@@ -20,23 +86,41 @@
     "trailerParkingCapacity": 600,
     "truckGateCount": 3,
     "buildingCount": 40,
-    "siteAreaAcres": 254.0,
+    "siteAreaAcres": 254,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@38.59650,-90.20800,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": true, "dropYard": true, "multiStep": true
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": true
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "multiStep", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "scale",
+    "multiStep",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "site": "Flagship 1852 A-B brewery, world's largest single-site brewery. Sprawling fully-enclosed legacy urban industrial campus on the Mississippi River, bounded by I-55 to the west.",
     "truckGate": "Multiple controlled truck gates confirmed in Street View - sliding/swing metal gates with chain-link/wall perimeter fencing throughout the campus (SV at SW corner off Pestalozzi, internal warehouse gate with yellow-marked swing gate, east trailer-yard gate). Whole campus is fenced/walled.",

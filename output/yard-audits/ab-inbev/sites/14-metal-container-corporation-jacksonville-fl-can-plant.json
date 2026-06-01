@@ -1,18 +1,108 @@
 {
   "name": "Metal Container Corporation - Jacksonville FL Can Plant",
   "type": "Can Manufacturing Plant",
-  "coords": { "lat": 30.33980, "lng": -81.74480 },
+  "coords": {
+    "lat": 30.3398,
+    "lng": -81.7448
+  },
   "geofences": {
-    "perimeter": { "south": 30.33700, "west": -81.74850, "north": 30.34200, "east": -81.74300 },
-    "truckGate": { "south": 30.33760, "west": -81.74680, "north": 30.33820, "east": -81.74600 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 30.340274,
+          "lng": -81.747547
+        },
+        {
+          "lat": 30.340037,
+          "lng": -81.743701
+        },
+        {
+          "lat": 30.336955,
+          "lng": -81.744113
+        },
+        {
+          "lat": 30.337192,
+          "lng": -81.747959
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 30.337904,
+          "lng": -81.747547
+        },
+        {
+          "lat": 30.337785,
+          "lng": -81.746723
+        },
+        {
+          "lat": 30.337192,
+          "lng": -81.74686
+        },
+        {
+          "lat": 30.337311,
+          "lng": -81.747684
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 30.33700, "west": -81.74800, "north": 30.34000, "east": -81.74560 }
+      {
+        "ring": [
+          {
+            "lat": 30.3398,
+            "lng": -81.746173
+          },
+          {
+            "lat": 30.339681,
+            "lng": -81.743976
+          },
+          {
+            "lat": 30.338852,
+            "lng": -81.744113
+          },
+          {
+            "lat": 30.33897,
+            "lng": -81.746311
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 30.34000, "west": -81.74600, "north": 30.34130, "east": -81.74450 },
-      { "south": 30.33880, "west": -81.74640, "north": 30.33980, "east": -81.74540 }
+      {
+        "ring": [
+          {
+            "lat": 30.339563,
+            "lng": -81.746997
+          },
+          {
+            "lat": 30.339444,
+            "lng": -81.745349
+          },
+          {
+            "lat": 30.337904,
+            "lng": -81.745487
+          },
+          {
+            "lat": 30.338022,
+            "lng": -81.747135
+          }
+        ]
+      }
     ],
-    "staging": { "south": 30.33800, "west": -81.74620, "north": 30.33900, "east": -81.74500 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 28,
+        "pano": "XRIvezLRcfaHN03xGz4W5g",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 28,
+        "pano": "XRIvezLRcfaHN03xGz4W5g",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 35,
@@ -20,23 +110,43 @@
     "trailerParkingCapacity": 180,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 40.0,
+    "siteAreaAcres": 40,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@30.33980,-81.74480,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "scale", "dockDoorCount", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "scale",
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "location": "ROSTER ADDRESS CORRECTED. The roster's address (5775 Skinner Lake Dr) and coords (30.2524,-81.5380) were WRONG - that location is a commercial/retail area in SE Jacksonville. The actual MCC Jacksonville can plant is at 1100 Ellis Rd N, West Jacksonville FL 32254 (EPA TRI facility 32205MTLCN1100N; confirmed via Yelp, Jax Daily Record). Locked center on the MCC manufacturing complex at 30.33980,-81.74480. Note: this plant is in WEST Jacksonville, NOT adjacent to the AB Jacksonville brewery (which is on the city's far north side at Busch Dr) - the roster's 'adjacent to brewery' note is incorrect.",
     "truckGate": "Large fully-fenced industrial plant - continuous chain-link perimeter fence confirmed all around the building and trailer yard in Street View (2025). A controlled vehicular entrance with divided entry/exit and directional arrow markings on the SE side; a gate spans the truck lane. Controlled truck gate - true.",
