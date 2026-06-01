@@ -82,8 +82,9 @@ export function InlineRoi({ pack }: { pack: DemoPack }) {
         </dl>
 
         <p className="mt-3 text-[11px] leading-relaxed text-white/45">
-          Modeled from your audited network and industry operating priors. The numbers move with your
-          real shift counts, shipment volumes, and margins. Set those in the calculator to make it yours.
+          Modeled from your audited network and industry operating priors. This is the same estimate the
+          full calculator opens on; set your real shift counts, shipment volumes, and margins there to
+          make it yours.
         </p>
       </div>
     </section>

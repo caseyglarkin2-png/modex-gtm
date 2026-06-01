@@ -67,25 +67,35 @@ export function deriveNetworkCounts(pack: DemoPack): NetworkRoiCounts {
 }
 
 /**
- * Build the canonical-engine `AccountROIModel` for the pack. Partitions the
- * footprint into the engine's three tiers (with-yms / drops-no-yms /
- * without-drops) so they sum to the full network without double-counting.
+ * Build the canonical-engine `AccountROIModel` for the pack.
+ *
+ * The tier split MUST mirror the full RoiCalculatorV2's `deriveArchetypeCounts`
+ * (Flow-State- `src/lib/roi/roiCalcAdapter.ts`) exactly, or the inline estimate
+ * and the full calculator disagree. That calculator treats drop-trailer
+ * facilities as a CUMULATIVE count that includes the YMS ones (its input
+ * enforces drops >= yms >= 0, total >= drops), so the tiers are nested:
+ *
+ *   withYms      = facilitiesWithYms
+ *   dropsNoYms   = facilitiesWithDropTrailers - facilitiesWithYms
+ *   withoutDrops = totalFacilities - facilitiesWithDropTrailers
+ *
+ * Keep this in lockstep with that function. (Verified equal on real packs via
+ * a cross-engine check, 2026-06-01.)
  */
 export function buildAccountRoiModel(pack: DemoPack): AccountROIModel {
-  const { total, facilitiesWithYms, facilitiesWithDropTrailers, averageMarginPerShipment } =
-    deriveNetworkCounts(pack);
+  const counts = deriveNetworkCounts(pack);
 
-  const withYms = Math.max(0, Math.min(facilitiesWithYms, total));
-  const dropsNoYms = Math.max(0, Math.min(facilitiesWithDropTrailers, total - withYms));
-  const withoutDrops = Math.max(0, total - withYms - dropsNoYms);
+  const yms = Math.max(0, Math.round(counts.facilitiesWithYms));
+  const drops = Math.max(yms, Math.round(counts.facilitiesWithDropTrailers));
+  const total = Math.max(drops, Math.round(counts.total));
 
   return {
     sourceOfTruth: 'public-calculator-contract',
-    averageMarginPerShipment,
+    averageMarginPerShipment: counts.averageMarginPerShipment,
     facilityMix: [
-      { archetype: 'with-yms', facilityCount: withYms },
-      { archetype: 'drops-no-yms', facilityCount: dropsNoYms },
-      { archetype: 'without-drops', facilityCount: withoutDrops },
+      { archetype: 'with-yms', facilityCount: yms },
+      { archetype: 'drops-no-yms', facilityCount: drops - yms },
+      { archetype: 'without-drops', facilityCount: total - drops },
     ],
   };
 }
