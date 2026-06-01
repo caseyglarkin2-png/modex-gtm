@@ -322,7 +322,8 @@ export function DemoSurface({
               [
                 { id: 'atlas', label: 'Network atlas' },
                 { id: 'sim', label: 'Network simulator' },
-                ...(hasReplay ? [{ id: 'replay', label: '▶ Watch the run' }] : []),
+                // 'Watch the run' tab retired — the run now auto-plays in the
+                // hero above; ?view=replay deep-links still render below.
               ] as { id: View; label: string }[]
             ).map((tab) => (
               <button
@@ -374,13 +375,33 @@ export function DemoSurface({
         </div>
       )}
 
-      {/* Satellite zoom hero — the opening visual moment. Replaces the
-          North America map as the prospect's first impression with a
-          tight satellite shot of the featured audited site, brand
-          attribution, and quick scale stats. Only renders in standalone
-          mode and only when the server-resolved thumb exists. The
-          network map stays one tap away in the existing Atlas tab. */}
-      {mode === 'standalone' && featuredSiteThumbSrc && (() => {
+      {/* Auto-playing truck-sim hero — the opening moment. The animated run
+          (truck through the oriented geofences + capability narration + Primo
+          proof) auto-loads the featured site and plays on mount, so the most
+          engaging surface is impossible to miss. The network atlas stays the
+          default content tab below. Falls back to the static satellite hero
+          when a network has no scenario-modeled site. */}
+      {mode === 'standalone' && hasReplay && (
+        <section data-ms-section-id="featured-sim-hero" className="shrink-0 border-b border-[#00B4FF]/[0.16] bg-[#070809]">
+          <div className="mx-auto w-full max-w-5xl px-5 pt-4">
+            <div className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-[#00B4FF]">
+              <span className="mr-1.5 inline-block h-[6px] w-[6px] translate-y-[-1px] rounded-full bg-[#00B4FF] align-middle shadow-[0_0_8px_rgba(0,180,255,0.7)]" />
+              ▶ Watch a truck run this yard · {displayName}
+            </div>
+            <p className="mt-1 text-[12.5px] text-white/55">
+              A real audited site, played gate→dock→exit on the true yard geometry. Switch sites with the picker.
+            </p>
+          </div>
+          <div className="mx-auto w-full max-w-5xl px-3 pb-4 pt-3">
+            <div className="flex h-[60vh] min-h-[460px] flex-col overflow-hidden rounded-xl border border-white/10 bg-[#050505]">
+              <DriverJourneySpotlight pack={pack} onExit={() => setView('atlas')} />
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* Fallback static satellite hero — only when there's no playable run. */}
+      {mode === 'standalone' && !hasReplay && featuredSiteThumbSrc && (() => {
         const featuredSite = pack.account.featuredSiteId
           ? pack.network.sites.find((s) => s.id === pack.account.featuredSiteId) ?? pack.network.sites[0]
           : pack.network.sites[0];

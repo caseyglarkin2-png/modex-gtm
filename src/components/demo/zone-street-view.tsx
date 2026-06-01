@@ -61,26 +61,30 @@ export function ZoneStreetView({ geofences }: { geofences: SiteGeofences }) {
   const current = visible[Math.min(active, visible.length - 1)] ?? visible[0]!;
 
   return (
-    <section className="mt-4">
-      <div className="mb-2 flex items-center justify-between">
-        <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/45">Driver&apos;s-eye view</div>
-        <div className="font-mono text-[10px] text-white/35">Google Street View</div>
+    <section className="mb-5 mt-1">
+      <div className="mb-2 flex items-baseline justify-between">
+        <div className="font-mono text-[11px] font-semibold uppercase tracking-[0.18em] text-[#00B4FF]">
+          Driver&apos;s-eye view
+        </div>
+        <div className="font-mono text-[10px] text-white/40">
+          {visible.length > 1 ? `${Math.min(active, visible.length - 1) + 1} / ${visible.length} · ` : ''}Street View
+        </div>
       </div>
 
-      <div className="overflow-hidden rounded-lg border border-white/10 bg-black">
+      <div className="overflow-hidden rounded-xl border border-[#00B4FF]/25 bg-black shadow-[0_0_22px_rgba(0,180,255,0.10)]">
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           key={current.key}
           src={svSrc(current.sv)}
           alt={`Ground-level view at ${current.label}`}
-          className="block aspect-[16/9] w-full object-cover"
+          className="block aspect-[4/3] w-full object-cover sm:aspect-[3/2]"
           loading="lazy"
           onError={() => setBroken((b) => new Set(b).add(current.key))}
         />
-        <div className="flex items-center gap-2 px-3 py-2">
-          <span className="inline-block h-2.5 w-2.5 rounded-sm" style={{ background: current.color }} />
-          <span className="text-[13px] font-semibold text-white">{current.label}</span>
-          <span className="ml-auto font-mono text-[10px] text-white/40">what a driver sees here</span>
+        <div className="flex items-center gap-2 border-t border-white/10 px-3 py-2.5">
+          <span className="inline-block h-3 w-3 rounded-sm" style={{ background: current.color }} />
+          <span className="text-sm font-semibold text-white">{current.label}</span>
+          <span className="ml-auto font-mono text-[10px] text-white/45">what a driver sees pulling in</span>
         </div>
       </div>
 
