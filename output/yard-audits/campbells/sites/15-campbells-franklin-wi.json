@@ -1,38 +1,113 @@
 {
   "name": "Campbell's - Franklin WI",
   "type": "Manufacturing - tortilla chips (Late July; capacity expanded 2024)",
-  "coords": { "lat": 42.8594, "lng": -87.9863 },
+  "coords": {
+    "lat": 42.8594,
+    "lng": -87.9863
+  },
   "geofences": {
-    "perimeter": { "south": 42.8585, "west": -87.9888, "north": 42.8608, "east": -87.9845 },
-    "truckGate": { "south": 42.86055, "west": -87.98875, "north": 42.86075, "east": -87.98835 },
-    "dropYards": [
-      { "south": 42.85895, "west": -87.98775, "north": 42.85935, "east": -87.98730 }
-    ],
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.860205,
+          "lng": -87.988085
+        },
+        {
+          "lat": 42.860105,
+          "lng": -87.985476
+        },
+        {
+          "lat": 42.859299,
+          "lng": -87.985201
+        },
+        {
+          "lat": 42.858796,
+          "lng": -87.985613
+        },
+        {
+          "lat": 42.858997,
+          "lng": -87.988085
+        },
+        {
+          "lat": 42.859702,
+          "lng": -87.988223
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
     "dockAprons": [
-      { "south": 42.85895, "west": -87.98760, "north": 42.85955, "east": -87.98690 },
-      { "south": 42.85910, "west": -87.98520, "north": 42.85945, "east": -87.98480 }
+      {
+        "ring": [
+          {
+            "lat": 42.859903,
+            "lng": -87.987879
+          },
+          {
+            "lat": 42.859853,
+            "lng": -87.986643
+          },
+          {
+            "lat": 42.859551,
+            "lng": -87.986678
+          },
+          {
+            "lat": 42.859601,
+            "lng": -87.987914
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 206,
+        "pano": "ZD2UVNyN3mQHGJnuRuyprg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 14, "trailersVisible": 13, "trailerParkingCapacity": 18,
-    "truckGateCount": 2, "buildingCount": 1, "siteAreaAcres": 16.0,
+    "dockDoorCount": 14,
+    "trailersVisible": 13,
+    "trailerParkingCapacity": 18,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 16,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@42.8594,-87.9863,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoors", "shipRcvSeparate", "dropArea", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoors",
+    "shipRcvSeparate",
+    "dropArea",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "identity": "Roster address 9999 S 60th St is incorrect; the Baptista's Bakery / Campbell Snacks tortilla-chip plant is at 4625 W Oakwood Park Dr in the Franklin Business Park. Locked the large white industrial building at 42.8594,-87.9863 - footprint measures ~205m x 114m (~252,000 sq ft, matches the ~250-300K sq ft reported plant size), has a curved-glass office wing at the NW corner and ~10 dock doors with trailers backed in on the SW face. 2019 Street View showed a 'Central' monument sign (likely a former tenant or office sub-tenant); building footprint, food-plant dock layout, and Franklin Business Park location all match the Campbell snacks plant - medium confidence on identity.",
     "truckGate": "Both driveways from the road (NW truck/parking drive and NE office drive) are open paved entrances with no barrier arm, sliding gate, or pinch-point checkpoint. truckGate=false.",

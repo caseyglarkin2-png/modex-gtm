@@ -1,18 +1,83 @@
 {
   "name": "Lance - Charlotte NC",
   "type": "Manufacturing - crackers/sandwich snacks",
-  "coords": { "lat": 35.12180, "lng": -80.88450 },
+  "coords": {
+    "lat": 35.1218,
+    "lng": -80.8845
+  },
   "geofences": {
-    "perimeter": { "south": 35.11850, "west": -80.88950, "north": 35.12480, "east": -80.88100 },
-    "truckGate": { "south": 35.12110, "west": -80.88260, "north": 35.12160, "east": -80.88190 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.122699,
+          "lng": -80.88862
+        },
+        {
+          "lat": 35.123373,
+          "lng": -80.882852
+        },
+        {
+          "lat": 35.120901,
+          "lng": -80.882303
+        },
+        {
+          "lat": 35.119104,
+          "lng": -80.883813
+        },
+        {
+          "lat": 35.119104,
+          "lng": -80.887796
+        },
+        {
+          "lat": 35.121238,
+          "lng": -80.888895
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 35.12260, "west": -80.88820, "north": 35.12360, "east": -80.88600 },
-      { "south": 35.11920, "west": -80.88560, "north": 35.12020, "east": -80.88420 },
-      { "south": 35.12320, "west": -80.88550, "north": 35.12420, "east": -80.88400 }
+      {
+        "ring": [
+          {
+            "lat": 35.122923,
+            "lng": -80.885873
+          },
+          {
+            "lat": 35.123148,
+            "lng": -80.882852
+          },
+          {
+            "lat": 35.122362,
+            "lng": -80.882921
+          },
+          {
+            "lat": 35.122137,
+            "lng": -80.885942
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.12230, "west": -80.88560, "north": 35.12300, "east": -80.88380 },
-      { "south": 35.11930, "west": -80.88620, "north": 35.11990, "east": -80.88480 }
+      {
+        "ring": [
+          {
+            "lat": 35.1218,
+            "lng": -80.887521
+          },
+          {
+            "lat": 35.122137,
+            "lng": -80.883813
+          },
+          {
+            "lat": 35.121463,
+            "lng": -80.883745
+          },
+          {
+            "lat": 35.121126,
+            "lng": -80.887453
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -22,23 +87,48 @@
     "trailerParkingCapacity": 160,
     "truckGateCount": 1,
     "buildingCount": 6,
-    "siteAreaAcres": 108.0,
+    "siteAreaAcres": 108,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.12180,-80.88450,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "buildingCount", "scale", "postGateStaging", "fastLaneOpportunity"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "buildingCount",
+    "scale",
+    "postGateStaging",
+    "fastLaneOpportunity"
+  ],
   "fieldNotes": {
     "truckGate": "Large 108-acre Campbell's Snacks campus enclosed by a continuous chain-link perimeter fence (clearly visible in 2019-2025 Street View around the bakery building and yards). Access is via a single bridge road off South Boulevard crossing the LYNX light-rail line. Web sources reference a 'Campbell's Snacks Bakery Production Plant Entrance' sign. Classified as a controlled gated entry.",
     "guardShack": "A major 1,500-employee Campbell's production campus with a dedicated plant entrance - a manned gatehouse is the strong norm for this facility profile. However, the specific booth could not be positively pinpointed in available imagery (Street View covers the outer campus loop road but not the inner production-yard gate). Marked true on operational likelihood; flagged uncertain.",

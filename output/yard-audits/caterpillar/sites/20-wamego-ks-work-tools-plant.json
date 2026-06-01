@@ -1,18 +1,108 @@
 {
   "name": "Caterpillar Work Tools - Wamego KS Plant & Distribution",
   "type": "Manufacturing & distribution facility (machine attachments / work tools)",
-  "coords": { "lat": 39.20380, "lng": -96.29330 },
+  "coords": {
+    "lat": 39.2038,
+    "lng": -96.2933
+  },
   "geofences": {
-    "perimeter": { "south": 39.20120, "west": -96.29760, "north": 39.20640, "east": -96.28950 },
-    "truckGate": null,
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.205928,
+          "lng": -96.296321
+        },
+        {
+          "lat": 39.205715,
+          "lng": -96.291103
+        },
+        {
+          "lat": 39.202949,
+          "lng": -96.291377
+        },
+        {
+          "lat": 39.203161,
+          "lng": -96.296596
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.203587,
+          "lng": -96.296047
+        },
+        {
+          "lat": 39.203481,
+          "lng": -96.295223
+        },
+        {
+          "lat": 39.202949,
+          "lng": -96.29536
+        },
+        {
+          "lat": 39.203055,
+          "lng": -96.296184
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 39.20330, "west": -96.29280, "north": 39.20560, "east": -96.28980 },
-      { "south": 39.20180, "west": -96.29420, "north": 39.20330, "east": -96.29130 }
+      {
+        "ring": [
+          {
+            "lat": 39.205077,
+            "lng": -96.294399
+          },
+          {
+            "lat": 39.204864,
+            "lng": -96.291927
+          },
+          {
+            "lat": 39.2038,
+            "lng": -96.292064
+          },
+          {
+            "lat": 39.204013,
+            "lng": -96.294536
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.20360, "west": -96.29440, "north": 39.20480, "east": -96.29300 }
+      {
+        "ring": [
+          {
+            "lat": 39.205503,
+            "lng": -96.296047
+          },
+          {
+            "lat": 39.205396,
+            "lng": -96.293575
+          },
+          {
+            "lat": 39.204864,
+            "lng": -96.293712
+          },
+          {
+            "lat": 39.204971,
+            "lng": -96.296184
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 54,
+        "pano": "Fvqmrl7Ekb-AF5w4bdkb0A",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 54,
+        "pano": "Fvqmrl7Ekb-AF5w4bdkb0A",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 12,
@@ -20,23 +110,43 @@
     "trailerParkingCapacity": 30,
     "truckGateCount": 0,
     "buildingCount": 9,
-    "siteAreaAcres": 104.0,
+    "siteAreaAcres": 104,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@39.20380,-96.29330,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "entryLanes", "exitLanes", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "Roster lat/lng (GEOMETRIC_CENTER, movedMeters 49) sits on the campus - accurate. Confirmed via Wamego EDC for-sale brochure and Panjiva (Caterpillar Work Tools Inc., 400 Work Tools Dr). A 258,112 sq ft crane-served production plant on a ~44-acre core parcel; produces ~50,000 part types - buckets, blades, hooks, brackets - for excavators and large wheel loaders. Note: Caterpillar announced a 2024 closure with Solar Turbines (a Cat subsidiary) taking over operations; same facility.",
     "truckGate": "Open heavy-industrial campus - the production buildings, pole-barn covered storage, and vast outdoor steel laydown yards front directly onto internal/public streets. No perimeter fence or guarded truck gate was positively imaged. Set false - flagged.",

@@ -1,37 +1,142 @@
 {
   "name": "Caterpillar - East Peoria IL Plant",
   "type": "Manufacturing plant (track-type tractors, components)",
-  "coords": { "lat": 40.6730, "lng": -89.5955 },
+  "coords": {
+    "lat": 40.673,
+    "lng": -89.5955
+  },
   "geofences": {
-    "perimeter": { "south": 40.6670, "west": -89.6025, "north": 40.6775, "east": -89.5880 },
-    "truckGate": { "south": 40.6730, "west": -89.5920, "north": 40.6740, "east": -89.5905 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.679249,
+          "lng": -89.599345
+        },
+        {
+          "lat": 40.679249,
+          "lng": -89.593303
+        },
+        {
+          "lat": 40.669667,
+          "lng": -89.592204
+        },
+        {
+          "lat": 40.66925,
+          "lng": -89.600993
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.674458,
+          "lng": -89.597697
+        },
+        {
+          "lat": 40.674458,
+          "lng": -89.596049
+        },
+        {
+          "lat": 40.673625,
+          "lng": -89.596049
+        },
+        {
+          "lat": 40.673625,
+          "lng": -89.597697
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.6745, "west": -89.5985, "north": 40.6765, "east": -89.5895 }
+      {
+        "ring": [
+          {
+            "lat": 40.678832,
+            "lng": -89.595775
+          },
+          {
+            "lat": 40.678832,
+            "lng": -89.592204
+          },
+          {
+            "lat": 40.677166,
+            "lng": -89.592204
+          },
+          {
+            "lat": 40.677166,
+            "lng": -89.595775
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.6735, "west": -89.5925, "north": 40.6755, "east": -89.5905 }
+      {
+        "ring": [
+          {
+            "lat": 40.671958,
+            "lng": -89.598796
+          },
+          {
+            "lat": 40.672375,
+            "lng": -89.594127
+          },
+          {
+            "lat": 40.671542,
+            "lng": -89.593852
+          },
+          {
+            "lat": 40.671125,
+            "lng": -89.598521
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 20, "trailersVisible": 12, "trailerParkingCapacity": 30,
-    "truckGateCount": 2, "buildingCount": 6, "siteAreaAcres": 230.0,
+    "dockDoorCount": 20,
+    "trailersVisible": 12,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 2,
+    "buildingCount": 6,
+    "siteAreaAcres": 230,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@40.6730,-89.5955,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "truckGate", "entryLanes", "exitLanes", "dockDoors", "scale", "shipRcvSeparate"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "truckGate",
+    "entryLanes",
+    "exitLanes",
+    "dockDoors",
+    "scale",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "location": "Roster geocode (40.6733,-89.5990) moved 2.4 km (GEOMETRIC_CENTER) but landed inside the historic Caterpillar East Peoria works on the east bank of the Illinois River. Confirmed: large old multi-building industrial plant with rooftop monitor skylights, Cat component (undercarriage/casting) laydown yards, and an adjacent rail yard with spurs. Address 100 NE Adams St is actually the Caterpillar downtown HQ/Visitors Center across the river; the East Peoria works is the manufacturing campus.",
     "truckGate": "Whole campus enclosed by black metal and chain-link perimeter fencing (confirmed in multiple Street View panos). Truck access is via the east access road through fenced openings into the building/laydown areas; no open uncontrolled driveway. Building face entrance E1 visible from the road.",

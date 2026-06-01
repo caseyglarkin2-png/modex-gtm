@@ -1,18 +1,88 @@
 {
   "name": "Campbell's - Goodyear AZ",
   "type": "Manufacturing - snacks/food production (Snyder's of Hanover pretzel plant)",
-  "coords": { "lat": 33.4595, "lng": -112.3795 },
+  "coords": {
+    "lat": 33.4595,
+    "lng": -112.3795
+  },
   "geofences": {
-    "perimeter": { "south": 33.4580, "west": -112.3818, "north": 33.4609, "east": -112.3768 },
-    "truckGate": { "south": 33.45995, "west": -112.37820, "north": 33.46055, "east": -112.37730 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.460073,
+          "lng": -112.381697
+        },
+        {
+          "lat": 33.459958,
+          "lng": -112.377989
+        },
+        {
+          "lat": 33.458469,
+          "lng": -112.377989
+        },
+        {
+          "lat": 33.457896,
+          "lng": -112.380187
+        },
+        {
+          "lat": 33.458813,
+          "lng": -112.381697
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 33.45935, "west": -112.38170, "north": 33.45995, "east": -112.38090 },
-      { "south": 33.45855, "west": -112.38040, "north": 33.45915, "east": -112.37880 }
+      {
+        "ring": [
+          {
+            "lat": 33.459844,
+            "lng": -112.38156
+          },
+          {
+            "lat": 33.459786,
+            "lng": -112.380599
+          },
+          {
+            "lat": 33.459042,
+            "lng": -112.380633
+          },
+          {
+            "lat": 33.459099,
+            "lng": -112.381594
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 33.45945, "west": -112.38120, "north": 33.46010, "east": -112.38060 }
+      {
+        "ring": [
+          {
+            "lat": 33.458813,
+            "lng": -112.380187
+          },
+          {
+            "lat": 33.458755,
+            "lng": -112.378401
+          },
+          {
+            "lat": 33.458412,
+            "lng": -112.378436
+          },
+          {
+            "lat": 33.458469,
+            "lng": -112.380221
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 232,
+        "pano": "_dx5twgZOcd26f5TOT9k-A",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 32,
@@ -25,18 +95,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@33.4595,-112.3795,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible"
+  ],
   "fieldNotes": {
     "location": "Roster address '13301 W Van Buren St' and roster coords (33.44986,-112.34641) geocoded to a residential block and were wrong. Correct facility is the Campbell Snacks / Snyder's of Hanover pretzel plant at 1200 N Bullard Ave, Goodyear AZ 85338 - confirmed via web search, OSM ('Campbell's Food' node) and satellite, with 'Campbell's Snacks' building signage visible in Street View. Locked center 33.4595,-112.3795.",
     "truckGate": "Entrance is an open driveway off the I-10 south frontage road at the NE corner; no barrier arm or sliding gate visible in z19-z20 satellite. Open-access site.",

@@ -1,16 +1,94 @@
 {
   "name": "Caterpillar - Clayton OH Distribution Center (DC-2)",
   "type": "Parts distribution center (opened 2011)",
-  "coords": { "lat": 39.84250, "lng": -84.33400 },
+  "coords": {
+    "lat": 39.8425,
+    "lng": -84.334
+  },
   "geofences": {
-    "perimeter": { "south": 39.83950, "west": -84.33700, "north": 39.84500, "east": -84.33000 },
-    "truckGate": { "south": 39.84120, "west": -84.33230, "north": 39.84210, "east": -84.33130 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.845663,
+          "lng": -84.337159
+        },
+        {
+          "lat": 39.845452,
+          "lng": -84.332901
+        },
+        {
+          "lat": 39.838493,
+          "lng": -84.333725
+        },
+        {
+          "lat": 39.838809,
+          "lng": -84.337571
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.839548,
+          "lng": -84.337021
+        },
+        {
+          "lat": 39.839442,
+          "lng": -84.336197
+        },
+        {
+          "lat": 39.838915,
+          "lng": -84.336335
+        },
+        {
+          "lat": 39.83902,
+          "lng": -84.337159
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 39.83980, "west": -84.33500, "north": 39.84300, "east": -84.33050 },
-      { "south": 39.84250, "west": -84.33350, "north": 39.84480, "east": -84.33050 }
+      {
+        "ring": [
+          {
+            "lat": 39.843344,
+            "lng": -84.334412
+          },
+          {
+            "lat": 39.843238,
+            "lng": -84.333039
+          },
+          {
+            "lat": 39.841235,
+            "lng": -84.333313
+          },
+          {
+            "lat": 39.84134,
+            "lng": -84.334549
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.84050, "west": -84.33680, "north": 39.84450, "east": -84.33520 }
+      {
+        "ring": [
+          {
+            "lat": 39.843554,
+            "lng": -84.336747
+          },
+          {
+            "lat": 39.843344,
+            "lng": -84.334
+          },
+          {
+            "lat": 39.842922,
+            "lng": -84.334137
+          },
+          {
+            "lat": 39.843133,
+            "lng": -84.336884
+          }
+        ]
+      }
     ],
     "staging": null
   },
@@ -20,23 +98,43 @@
     "trailerParkingCapacity": 150,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 90.0,
+    "siteAreaAcres": 90,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.8425,-84.334,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "dockDoorCount", "trailersVisible", "scale"],
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "trailersVisible",
+    "scale"
+  ],
   "fieldNotes": {
     "site": "Confirmed as Caterpillar Distribution Center DC-2, 6611 Hoke Rd, Clayton OH - a 1.6M sq ft parts DC opened 2011. CATERPILLAR monument sign at the Hoke Rd entrance confirmed in Street View. Roster geocode (39.842875, -84.335057, ROOFTOP, moved 4040m) landed on the building. Imagery is winter/snow-covered, reducing fine-detail confidence.",
     "truckGate": "Defined entry driveway off Hoke Rd leading to a pinch-point at the building; a small structure (blue-roof booth) sits at the entry point - consistent with a controlled gate. truckGate set true.",

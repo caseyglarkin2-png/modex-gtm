@@ -1,37 +1,153 @@
 {
   "name": "Caterpillar - Mapleton IL Foundry",
   "type": "Manufacturing plant (foundry - engine castings for 3500/3600/C175)",
-  "coords": { "lat": 40.5597, "lng": -89.7475 },
+  "coords": {
+    "lat": 40.5597,
+    "lng": -89.7475
+  },
   "geofences": {
-    "perimeter": { "south": 40.5530, "west": -89.7515, "north": 40.5640, "east": -89.7400 },
-    "truckGate": { "south": 40.5602, "west": -89.7468, "north": 40.5612, "east": -89.7455 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.561369,
+          "lng": -89.750796
+        },
+        {
+          "lat": 40.560535,
+          "lng": -89.744753
+        },
+        {
+          "lat": 40.556361,
+          "lng": -89.746127
+        },
+        {
+          "lat": 40.557196,
+          "lng": -89.752169
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.5597,
+          "lng": -89.751345
+        },
+        {
+          "lat": 40.559491,
+          "lng": -89.749972
+        },
+        {
+          "lat": 40.558448,
+          "lng": -89.750247
+        },
+        {
+          "lat": 40.558657,
+          "lng": -89.75162
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.5598, "west": -89.7465, "north": 40.5612, "east": -89.7448 }
+      {
+        "ring": [
+          {
+            "lat": 40.561787,
+            "lng": -89.7475
+          },
+          {
+            "lat": 40.561161,
+            "lng": -89.744204
+          },
+          {
+            "lat": 40.559909,
+            "lng": -89.744479
+          },
+          {
+            "lat": 40.560535,
+            "lng": -89.747775
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.5595, "west": -89.7470, "north": 40.5610, "east": -89.7452 }
+      {
+        "ring": [
+          {
+            "lat": 40.5597,
+            "lng": -89.750521
+          },
+          {
+            "lat": 40.559074,
+            "lng": -89.746127
+          },
+          {
+            "lat": 40.558031,
+            "lng": -89.746401
+          },
+          {
+            "lat": 40.558657,
+            "lng": -89.750796
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 120,
+        "pano": "CXdNuTL0pI-hFWt-43Fw6g",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 120,
+        "pano": "CXdNuTL0pI-hFWt-43Fw6g",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 14, "trailersVisible": 14, "trailerParkingCapacity": 30,
-    "truckGateCount": 1, "buildingCount": 6, "siteAreaAcres": 200.0,
+    "dockDoorCount": 14,
+    "trailersVisible": 14,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 200,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@40.5597,-89.7475,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": true, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "dockDoors", "multiStep"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "dockDoors",
+    "multiStep"
+  ],
   "fieldNotes": {
     "location": "Roster geocode (40.5595,-89.7482) is ROOFTOP and lands on the Caterpillar Mapleton Foundry. Confirmed: large heavy-industrial foundry complex with rust-colored foundry building roofs, sand/material handling structures to the SW, employee parking, and a wastewater treatment plant to the SE - consistent with the gray-iron casting foundry on US-24 (8826 W US-24).",
     "truckGate": "Whole complex enclosed by chain-link perimeter fencing (confirmed in Street View on the south road). Truck access is via the internal access road that connects to US-24; the gate/checkpoint is set inside the property along the entrance drive.",

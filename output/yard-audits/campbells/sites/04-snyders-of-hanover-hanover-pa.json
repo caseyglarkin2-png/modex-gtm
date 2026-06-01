@@ -1,37 +1,128 @@
 {
   "name": "Snyder's of Hanover - Hanover PA",
   "type": "Manufacturing - pretzels/snacks (kettle chip lines added 2024)",
-  "coords": { "lat": 39.805700, "lng": -76.952000 },
+  "coords": {
+    "lat": 39.8057,
+    "lng": -76.952
+  },
   "geofences": {
-    "perimeter": { "south": 39.80300, "west": -76.95560, "north": 39.80850, "east": -76.94850 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.808126,
+          "lng": -76.953373
+        },
+        {
+          "lat": 39.808759,
+          "lng": -76.948979
+        },
+        {
+          "lat": 39.806227,
+          "lng": -76.948155
+        },
+        {
+          "lat": 39.804117,
+          "lng": -76.951313
+        },
+        {
+          "lat": 39.804434,
+          "lng": -76.953923
+        },
+        {
+          "lat": 39.806544,
+          "lng": -76.954747
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [
-      { "south": 39.80470, "west": -76.95480, "north": 39.80710, "east": -76.95280 }
+      {
+        "ring": [
+          {
+            "lat": 39.807388,
+            "lng": -76.954472
+          },
+          {
+            "lat": 39.80781,
+            "lng": -76.952549
+          },
+          {
+            "lat": 39.806227,
+            "lng": -76.952
+          },
+          {
+            "lat": 39.805805,
+            "lng": -76.953923
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.80560, "west": -76.95350, "north": 39.80720, "east": -76.95150 }
+      {
+        "ring": [
+          {
+            "lat": 39.805173,
+            "lng": -76.953373
+          },
+          {
+            "lat": 39.8057,
+            "lng": -76.951313
+          },
+          {
+            "lat": 39.805067,
+            "lng": -76.95097
+          },
+          {
+            "lat": 39.80454,
+            "lng": -76.95303
+          }
+        ]
+      }
     ],
     "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 45, "trailersVisible": 70, "trailerParkingCapacity": 110,
-    "truckGateCount": 0, "buildingCount": 4, "siteAreaAcres": 70.0,
+    "dockDoorCount": 45,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 0,
+    "buildingCount": 4,
+    "siteAreaAcres": 70,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.805700,-76.952000,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Open campus layout - plant set back behind broad grass buffers, no perimeter fence or controlled checkpoint visible from public-road Street View. Classified no gate.",
     "guardShack": "No guard booth observed anywhere along the public-road frontage; office building with a Campbell's monument sign at the SW corner.",

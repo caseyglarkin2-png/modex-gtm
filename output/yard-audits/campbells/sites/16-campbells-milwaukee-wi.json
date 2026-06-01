@@ -1,35 +1,109 @@
 {
   "name": "Campbell's - Milwaukee WI",
   "type": "Manufacturing - spice production (Campbell Soup Supply Co.)",
-  "coords": { "lat": 42.9525, "lng": -87.9182 },
+  "coords": {
+    "lat": 42.9525,
+    "lng": -87.9182
+  },
   "geofences": {
-    "perimeter": { "south": 42.9516, "west": -87.9193, "north": 42.9537, "east": -87.9175 },
-    "truckGate": { "south": 42.95165, "west": -87.91865, "north": 42.95205, "east": -87.91825 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.953304,
+          "lng": -87.919024
+        },
+        {
+          "lat": 42.953204,
+          "lng": -87.917513
+        },
+        {
+          "lat": 42.952249,
+          "lng": -87.917513
+        },
+        {
+          "lat": 42.952198,
+          "lng": -87.918887
+        },
+        {
+          "lat": 42.952802,
+          "lng": -87.919093
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "south": 42.95225, "west": -87.91875, "north": 42.95275, "east": -87.91830 }
+      {
+        "ring": [
+          {
+            "lat": 42.952601,
+            "lng": -87.918887
+          },
+          {
+            "lat": 42.95255,
+            "lng": -87.917651
+          },
+          {
+            "lat": 42.952299,
+            "lng": -87.917685
+          },
+          {
+            "lat": 42.952349,
+            "lng": -87.918921
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 108,
+        "pano": "B332fe1rCqOuMem1rXcoFQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
-    "dockDoorCount": 6, "trailersVisible": 1, "trailerParkingCapacity": 6,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 7.5,
+    "dockDoorCount": 6,
+    "trailersVisible": 1,
+    "trailerParkingCapacity": 6,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 7.5,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@42.9525,-87.9182,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "0-10", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "dockDoors", "dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "truckGate",
+    "dockDoors",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "identity": "Roster address (445 South 32nd Street) and roster coords are wrong - they land in a residential Milwaukee neighborhood. The Campbell's Milwaukee facility is the Campbell Soup Supply Co. spice plant at 500 W Edgerton Ave, Milwaukee WI 53207, operating since 1966 as Campbell's only US spice operation. OSM confirms the building and company at 42.95258,-87.91817; satellite shows a brick/white industrial building with heavy rooftop process silos/tanks. Locked center 42.9525,-87.9182.",
     "truckGate": "The site has chain-link perimeter fencing along the W Edgerton frontage, but the single driveway from W Edgerton Ave appears OPEN (no barrier arm, no closed sliding/swing gate panel, no guard booth) in 2025 Street View and z21 satellite. STOP/wrong-way signage at the throat but no physical control. Called truckGate=false (open driveway despite perimeter fence) - medium confidence; a swing gate could be present and held open.",

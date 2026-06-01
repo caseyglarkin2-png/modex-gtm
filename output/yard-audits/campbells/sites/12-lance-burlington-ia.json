@@ -1,17 +1,92 @@
 {
   "name": "Lance - Burlington IA",
   "type": "Manufacturing - snacks/crackers",
-  "coords": { "lat": 40.82770, "lng": -91.13950 },
+  "coords": {
+    "lat": 40.8277,
+    "lng": -91.1395
+  },
   "geofences": {
-    "perimeter": { "south": 40.82620, "west": -91.14180, "north": 40.82950, "east": -91.13750 },
-    "truckGate": { "south": 40.82780, "west": -91.13880, "north": 40.82820, "east": -91.13820 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.828116,
+          "lng": -91.141011
+        },
+        {
+          "lat": 40.82822,
+          "lng": -91.138127
+        },
+        {
+          "lat": 40.826245,
+          "lng": -91.137852
+        },
+        {
+          "lat": 40.825933,
+          "lng": -91.139157
+        },
+        {
+          "lat": 40.826037,
+          "lng": -91.141148
+        },
+        {
+          "lat": 40.82744,
+          "lng": -91.141217
+        }
+      ]
+    },
+    "truckGate": null,
     "dropYards": [
-      { "south": 40.82790, "west": -91.13870, "north": 40.82870, "east": -91.13770 }
+      {
+        "ring": [
+          {
+            "lat": 40.82744,
+            "lng": -91.1395
+          },
+          {
+            "lat": 40.827492,
+            "lng": -91.137852
+          },
+          {
+            "lat": 40.826869,
+            "lng": -91.137886
+          },
+          {
+            "lat": 40.826817,
+            "lng": -91.139534
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.82790, "west": -91.14000, "north": 40.82850, "east": -91.13820 }
+      {
+        "ring": [
+          {
+            "lat": 40.827908,
+            "lng": -91.140873
+          },
+          {
+            "lat": 40.82796,
+            "lng": -91.1395
+          },
+          {
+            "lat": 40.827596,
+            "lng": -91.139534
+          },
+          {
+            "lat": 40.827544,
+            "lng": -91.140908
+          }
+        ]
+      }
     ],
-    "staging": null
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 148,
+        "pano": "CuiHOYGA8JcZiKn_NSvgfQ",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 22,
@@ -19,23 +94,45 @@
     "trailerParkingCapacity": 25,
     "truckGateCount": 2,
     "buildingCount": 2,
-    "siteAreaAcres": 32.0,
+    "siteAreaAcres": 32,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.82770,-91.13950,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "dockDoors", "dropArea", "buildingCount", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "dockDoors",
+    "dropArea",
+    "buildingCount",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "ownership": "IMPORTANT: This site is the former Lance / Snyder's-Lance private-label cookie/cracker plant, but it was DIVESTED to Shearer's Foods in 2014 (sale of Snyder's-Lance's private-label business) - four years before Campbell's acquired Snyder's-Lance in 2018. The current operator is Shearer's Foods (~800 employees, address 3000 Mt Pleasant St / Roosevelt Ave, Burlington IA). The roster lists it under the Campbell's account; audited as the intended physical site but it is NOT currently a Campbell's facility.",
     "location": "Roster coords (40.832609, -91.14054) were ~1.2 km off in a residential area. Correct plant located via web research at 3000 Mt Pleasant St, Burlington IA - the large industrial snack building.",

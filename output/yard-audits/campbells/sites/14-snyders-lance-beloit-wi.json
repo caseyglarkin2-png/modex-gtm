@@ -1,15 +1,88 @@
 {
   "name": "Snyder's-Lance - Beloit WI",
   "type": "Manufacturing - snacks/potato chips",
-  "coords": { "lat": 42.51210, "lng": -88.99380 },
+  "coords": {
+    "lat": 42.5121,
+    "lng": -88.9938
+  },
   "geofences": {
-    "perimeter": { "south": 42.51130, "west": -88.99500, "north": 42.51320, "east": -88.99280 },
-    "truckGate": { "south": 42.51185, "west": -88.99380, "north": 42.51215, "east": -88.99320 },
-    "dropYards": [],
-    "dockAprons": [
-      { "south": 42.51185, "west": -88.99400, "north": 42.51215, "east": -88.99320 }
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.514327,
+          "lng": -88.995173
+        },
+        {
+          "lat": 42.514125,
+          "lng": -88.990916
+        },
+        {
+          "lat": 42.512353,
+          "lng": -88.991053
+        },
+        {
+          "lat": 42.511999,
+          "lng": -88.993457
+        },
+        {
+          "lat": 42.512505,
+          "lng": -88.995173
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 42.514023,
+            "lng": -88.995036
+          },
+          {
+            "lat": 42.513973,
+            "lng": -88.9938
+          },
+          {
+            "lat": 42.51291,
+            "lng": -88.993834
+          },
+          {
+            "lat": 42.51296,
+            "lng": -88.99507
+          }
+        ]
+      }
     ],
-    "staging": null
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 42.514023,
+            "lng": -88.992427
+          },
+          {
+            "lat": 42.513922,
+            "lng": -88.991053
+          },
+          {
+            "lat": 42.513517,
+            "lng": -88.991088
+          },
+          {
+            "lat": 42.513618,
+            "lng": -88.992461
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 52,
+        "pano": "YbaYhKur4_ma9xf3N1-h0A",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 8,
@@ -17,23 +90,49 @@
     "trailerParkingCapacity": 10,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 10.0,
+    "siteAreaAcres": 10,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@42.51210,-88.99380,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "0-10", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "low",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "dockDoors", "dropArea", "entryLanes", "exitLanes", "siteAreaAcres", "coords"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "dockDoors",
+    "dropArea",
+    "entryLanes",
+    "exitLanes",
+    "siteAreaAcres",
+    "coords"
+  ],
   "fieldNotes": {
     "location": "LOW CONFIDENCE on building identity. The roster address '1101 Willowbrook Road, Beloit WI' does not resolve to any confirmed Campbell's address. Web research establishes the Campbell's/Kettle Foods Beloit potato-chip plant is at 3150 Kettle Way in Gateway Business Park - a 73,000-140,000 sq ft LEED-Gold plant (~300 employees, processes ~50M lbs potatoes/yr, 18 rooftop wind turbines). The large process complex initially examined nearby (with silos/tanks) was positively identified as an IFF (International Flavors & Fragrances) facility, NOT Campbell's. The audited building (~42.5121, -88.9938) is the best-matching candidate: a ~73,000 sq ft white-roof industrial building in Gateway Business Park consistent with the Kettle plant scale - but signage could not be confirmed in Street View and the address mismatch was not resolved.",
     "truckGate": "On the candidate building, the Gateway Business Park access roads are open with no visible barrier arm, gate, or guard booth - typical open business-park access. Flagged uncertain due to building-identity uncertainty.",

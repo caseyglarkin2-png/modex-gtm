@@ -1,38 +1,142 @@
 {
   "name": "Caterpillar - Sanford NC Plant",
   "type": "Manufacturing plant (BCP - skid-steer, multi-terrain, compact track loaders)",
-  "coords": { "lat": 35.5455, "lng": -79.1722 },
+  "coords": {
+    "lat": 35.5455,
+    "lng": -79.1722
+  },
   "geofences": {
-    "perimeter": { "south": 35.5408, "west": -79.1772, "north": 35.5512, "east": -79.1682 },
-    "truckGate": { "south": 35.5448, "west": -79.1760, "north": 35.5458, "east": -79.1748 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.549969,
+          "lng": -79.178517
+        },
+        {
+          "lat": 35.549969,
+          "lng": -79.170827
+        },
+        {
+          "lat": 35.540583,
+          "lng": -79.170827
+        },
+        {
+          "lat": 35.540583,
+          "lng": -79.179066
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.541477,
+          "lng": -79.177693
+        },
+        {
+          "lat": 35.541477,
+          "lng": -79.176045
+        },
+        {
+          "lat": 35.54036,
+          "lng": -79.176045
+        },
+        {
+          "lat": 35.54036,
+          "lng": -79.177693
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 35.5448, "west": -79.1748, "north": 35.5462, "east": -79.1725 },
-      { "south": 35.5468, "west": -79.1712, "north": 35.5482, "east": -79.1692 }
+      {
+        "ring": [
+          {
+            "lat": 35.549522,
+            "lng": -79.175221
+          },
+          {
+            "lat": 35.549522,
+            "lng": -79.1722
+          },
+          {
+            "lat": 35.547735,
+            "lng": -79.1722
+          },
+          {
+            "lat": 35.547735,
+            "lng": -79.175221
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 35.5448, "west": -79.1745, "north": 35.5468, "east": -79.1730 }
+      {
+        "ring": [
+          {
+            "lat": 35.543712,
+            "lng": -79.178242
+          },
+          {
+            "lat": 35.543712,
+            "lng": -79.173573
+          },
+          {
+            "lat": 35.542595,
+            "lng": -79.173573
+          },
+          {
+            "lat": 35.542595,
+            "lng": -79.178242
+          }
+        ]
+      }
     ],
-    "staging": { "south": 35.5440, "west": -79.1755, "north": 35.5450, "east": -79.1742 }
+    "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 32, "trailersVisible": 30, "trailerParkingCapacity": 55,
-    "truckGateCount": 2, "buildingCount": 6, "siteAreaAcres": 220.0,
+    "dockDoorCount": 32,
+    "trailersVisible": 30,
+    "trailerParkingCapacity": 55,
+    "truckGateCount": 2,
+    "buildingCount": 6,
+    "siteAreaAcres": 220,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@35.5455,-79.1722,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "truckGate", "entryLanes", "exitLanes", "scale", "railServed", "multiStep"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "truckGate",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "railServed",
+    "multiStep"
+  ],
   "fieldNotes": {
     "location": "Roster geocode (35.5443,-79.1713) is ROOFTOP and - despite the 6 km movedMeters figure - lands directly on the Caterpillar Sanford manufacturing campus in Central Carolina Enterprise Park. Confirmed: large multi-building manufacturing complex with a long row of dock doors, trailer parking, material laydown yards, employee parking and a slatted perimeter fence. Consistent with the BCP skid-steer / multi-terrain / compact track loader plant (5000 Womack Rd; ~25 years in Sanford, 600 jobs being added).",
     "truckGate": "Whole campus enclosed by a slatted privacy/chain-link perimeter fence (confirmed in Street View on the SW road). Truck access via internal entrance roads off the enterprise-park roads; controlled gates set inside the property.",

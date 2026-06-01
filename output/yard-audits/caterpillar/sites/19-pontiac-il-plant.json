@@ -1,17 +1,108 @@
 {
   "name": "Caterpillar - Pontiac IL Plant",
   "type": "Manufacturing plant (fuel injectors / fuel systems)",
-  "coords": { "lat": 40.88670, "lng": -88.65180 },
+  "coords": {
+    "lat": 40.8867,
+    "lng": -88.6518
+  },
   "geofences": {
-    "perimeter": { "south": 40.88400, "west": -88.65550, "north": 40.88880, "east": -88.64900 },
-    "truckGate": { "south": 40.88720, "west": -88.65090, "north": 40.88790, "east": -88.64990 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.887738,
+          "lng": -88.655371
+        },
+        {
+          "lat": 40.887531,
+          "lng": -88.650152
+        },
+        {
+          "lat": 40.884416,
+          "lng": -88.650427
+        },
+        {
+          "lat": 40.884624,
+          "lng": -88.655645
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.887738,
+          "lng": -88.654547
+        },
+        {
+          "lat": 40.887738,
+          "lng": -88.653723
+        },
+        {
+          "lat": 40.887219,
+          "lng": -88.653723
+        },
+        {
+          "lat": 40.887219,
+          "lng": -88.654547
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 40.88680, "west": -88.65120, "north": 40.88780, "east": -88.65000 }
+      {
+        "ring": [
+          {
+            "lat": 40.887115,
+            "lng": -88.657019
+          },
+          {
+            "lat": 40.887011,
+            "lng": -88.655645
+          },
+          {
+            "lat": 40.885454,
+            "lng": -88.655783
+          },
+          {
+            "lat": 40.885558,
+            "lng": -88.657156
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 40.88650, "west": -88.65160, "north": 40.88720, "east": -88.65040 }
+      {
+        "ring": [
+          {
+            "lat": 40.887115,
+            "lng": -88.655096
+          },
+          {
+            "lat": 40.886908,
+            "lng": -88.6518
+          },
+          {
+            "lat": 40.886492,
+            "lng": -88.651937
+          },
+          {
+            "lat": 40.8867,
+            "lng": -88.655233
+          }
+        ]
+      }
     ],
-    "staging": { "south": 40.88700, "west": -88.65120, "north": 40.88770, "east": -88.65020 }
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 130,
+        "pano": "HUiKrll5XQ7ynqVIsXOoyg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 130,
+        "pano": "HUiKrll5XQ7ynqVIsXOoyg",
+        "hasCoverage": true
+      }
+    }
   },
   "yardMetrics": {
     "dockDoorCount": 10,
@@ -19,23 +110,43 @@
     "trailerParkingCapacity": 20,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 68.0,
+    "siteAreaAcres": 68,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.88670,-88.65180,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "0-10", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "dockDoors", "dropArea", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "dockDoors",
+    "dropArea",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "Roster lat/lng (ROOFTOP, movedMeters 71) landed directly on the plant building - accurate. Confirmed via Panjiva / Illinois State Fire Marshal records (Caterpillar Engine Systems Inc., 1300 4H Park Rd). The plant has operated since 1978, assembling/testing fuel injectors and fuel pumps for Cat products.",
     "truckGate": "Fenced manufacturing facility - chain-link perimeter fence visible around the property in multiple Street Views, with Caterpillar signage and a Caterpillar water tower. A controlled entrance road runs from 4H Park Rd into the property. Set true.",

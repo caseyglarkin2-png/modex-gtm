@@ -1,38 +1,161 @@
 {
   "name": "Caterpillar - Decatur IL Plant",
   "type": "Manufacturing plant (mining trucks, large wheel loaders, motor graders)",
-  "coords": { "lat": 39.8788, "lng": -88.9100 },
+  "coords": {
+    "lat": 39.8788,
+    "lng": -88.91
+  },
   "geofences": {
-    "perimeter": { "south": 39.8725, "west": -88.9180, "north": 39.8862, "east": -88.9020 },
-    "truckGate": { "south": 39.8744, "west": -88.9162, "north": 39.8752, "east": -88.9152 },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.885123,
+          "lng": -88.916317
+        },
+        {
+          "lat": 39.885123,
+          "lng": -88.906155
+        },
+        {
+          "lat": 39.874374,
+          "lng": -88.906704
+        },
+        {
+          "lat": 39.873952,
+          "lng": -88.915493
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.877746,
+          "lng": -88.915493
+        },
+        {
+          "lat": 39.878168,
+          "lng": -88.913845
+        },
+        {
+          "lat": 39.877114,
+          "lng": -88.913571
+        },
+        {
+          "lat": 39.876692,
+          "lng": -88.915219
+        }
+      ]
+    },
     "dropYards": [
-      { "south": 39.8830, "west": -88.9162, "north": 39.8845, "east": -88.9135 },
-      { "south": 39.8826, "west": -88.9105, "north": 39.8842, "east": -88.9088 }
+      {
+        "ring": [
+          {
+            "lat": 39.882805,
+            "lng": -88.909725
+          },
+          {
+            "lat": 39.883015,
+            "lng": -88.906704
+          },
+          {
+            "lat": 39.880908,
+            "lng": -88.906704
+          },
+          {
+            "lat": 39.880697,
+            "lng": -88.909725
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 39.876271,
+            "lng": -88.915493
+          },
+          {
+            "lat": 39.876481,
+            "lng": -88.912197
+          },
+          {
+            "lat": 39.874795,
+            "lng": -88.912197
+          },
+          {
+            "lat": 39.874584,
+            "lng": -88.915493
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "south": 39.8820, "west": -88.9112, "north": 39.8832, "east": -88.9092 }
+      {
+        "ring": [
+          {
+            "lat": 39.879643,
+            "lng": -88.914395
+          },
+          {
+            "lat": 39.879854,
+            "lng": -88.910275
+          },
+          {
+            "lat": 39.879011,
+            "lng": -88.910275
+          },
+          {
+            "lat": 39.8788,
+            "lng": -88.914395
+          }
+        ]
+      }
     ],
-    "staging": { "south": 39.8755, "west": -88.9152, "north": 39.8775, "east": -88.9128 }
+    "staging": null
   },
   "yardMetrics": {
-    "dockDoorCount": 22, "trailersVisible": 38, "trailerParkingCapacity": 70,
-    "truckGateCount": 2, "buildingCount": 9, "siteAreaAcres": 360.0,
+    "dockDoorCount": 22,
+    "trailersVisible": 38,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 2,
+    "buildingCount": 9,
+    "siteAreaAcres": 360,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@39.8788,-88.9100,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "multiStep", "truckGate"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "multiStep",
+    "truckGate"
+  ],
   "fieldNotes": {
     "location": "Roster point (39.8563,-88.9169) landed on a rail yard ~2.3 km SSW. Resolved the true plant to 39.8788,-88.9100 - the large multi-building Caterpillar manufacturing campus at N 27th St & E Pershing Rd, confirmed by web (TruckMap 3000 N 27th St) and satellite (test-track oval, mining-truck staging rows, ~3M sq ft footprint).",
     "truckGate": "Continuous slatted chain-link perimeter fence around the whole campus confirmed in Street View on the west road. Truck access via a wide entrance driveway at the SW corner (~39.8748,-88.9158) feeding a long internal road; gate/checkpoint is set deep inside the property, not visible from the public road.",
