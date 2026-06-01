@@ -51,6 +51,12 @@ const nextConfig: NextConfig = {
         destination: '/studio?tab=microsites',
         permanent: true,
       },
+
+      // Proposals retired (2026-06-01): the /for/<slug> editorial memos are the
+      // canonical prospect artifact. The old /proposal/<slug> "board deck" was
+      // an inferior, rep-flavored duplicate (and never proxied publicly), so any
+      // /proposal link now lands on the memo instead.
+      { source: '/proposal/:slug', destination: '/for/:slug', permanent: true },
     ];
   },
   async headers() {
