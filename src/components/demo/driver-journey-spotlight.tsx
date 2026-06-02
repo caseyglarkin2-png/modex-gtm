@@ -25,12 +25,27 @@ export function DriverJourneySpotlight({
     [pack.network.sites],
   );
 
+  // Prefer a site that actually has a driver's-eye Street View, so the replay
+  // loads with both the map AND the ground-level pane filled (not an empty
+  // half). Falls back to the featured/first site if none have coverage.
+  const hasStreetView = (s: (typeof playable)[number]) => {
+    const m = s.geofences?.streetViewMeta;
+    return Boolean(
+      (m?.truckGate?.pano && m.truckGate.hasCoverage) ||
+        (m?.perimeter?.pano && m.perimeter.hasCoverage),
+    );
+  };
+
   const defaultId = useMemo(() => {
     if (initialSiteId && playable.some((s) => s.id === initialSiteId)) return initialSiteId;
-    if (pack.account.featuredSiteId && playable.some((s) => s.id === pack.account.featuredSiteId)) {
-      return pack.account.featuredSiteId;
-    }
-    return playable[0]?.id ?? null;
+    const featured = pack.account.featuredSiteId
+      ? playable.find((s) => s.id === pack.account.featuredSiteId)
+      : undefined;
+    if (featured && hasStreetView(featured)) return featured.id;
+    const withSV = playable.find(hasStreetView);
+    if (withSV) return withSV.id;
+    return featured?.id ?? playable[0]?.id ?? null;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialSiteId, playable, pack.account.featuredSiteId]);
 
   const [siteId, setSiteId] = useState<string | null>(defaultId);
