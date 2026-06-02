@@ -58,13 +58,13 @@ export function DemoSurface({
   mode,
   initialSiteId = null,
   autoPlay = false,
-  initialView = 'atlas',
   fromGallery = false,
   featuredSiteThumbSrc,
 }: Props) {
-  const [view, setView] = useState<View>(initialView);
   const [selectedSiteId, setSelectedSiteId] = useState<string | null>(initialSiteId);
   const [archetypeFilter, setArchetypeFilter] = useState<Set<ArchetypeId> | null>(null);
+  // Simulator is a stress-test expander now (not a top-level mode), default closed.
+  const [simOpen, setSimOpen] = useState(false);
   // Once a user manually closes the auto-play, we should not re-open it on
   // the next click — track whether the autoPlay flag has been consumed.
   const [autoPlayConsumed, setAutoPlayConsumed] = useState(false);
@@ -315,33 +315,9 @@ export function DemoSurface({
                 data-ms-cta-id={fromGallery ? 'gallery-pack-book-audit' : 'demo-book-audit'}
                 className="hidden min-h-[36px] items-center gap-1.5 rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.12] px-3 py-1.5 text-xs font-bold text-white transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22] hover:shadow-[0_0_22px_rgba(0,180,255,0.32)] md:inline-flex"
               >
-                Is this your yard? →
+                Start a conversation →
               </a>
             </div>
-          </div>
-          {/* View tab toggle */}
-          <div className="mx-auto flex max-w-5xl gap-1 px-5">
-            {(
-              [
-                { id: 'atlas', label: 'Network atlas' },
-                { id: 'sim', label: 'Network simulator' },
-                // 'Watch the run' tab retired — the run now auto-plays in the
-                // hero above; ?view=replay deep-links still render below.
-              ] as { id: View; label: string }[]
-            ).map((tab) => (
-              <button
-                key={tab.id}
-                type="button"
-                onClick={() => setView(tab.id)}
-                className={`border-b-2 px-3 py-2 font-mono text-[11px] uppercase tracking-[0.18em] transition-colors ${
-                  view === tab.id
-                    ? 'border-[#00B4FF] text-[#00B4FF]'
-                    : 'border-transparent text-white/55 hover:text-white'
-                }`}
-              >
-                {tab.label}
-              </button>
-            ))}
           </div>
           <CoverageHonesty pack={pack} />
         </header>
@@ -373,12 +349,60 @@ export function DemoSurface({
             data-ms-cta-id="microsite-sticky-book-audit"
             className="inline-flex min-h-[40px] flex-1 items-center justify-center rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.14] px-3 text-[13px] font-bold text-white"
           >
-            Is this your yard? →
+            Start a conversation →
           </a>
         </div>
       )}
 
-      {/* The reframe — names the siloed-yard problem before showing its cost.
+      {/* §1 Recognition — the network atlas as the opening hero ("we mapped
+          YOUR yards"). Click a pin → the detail panel fills the side. This is
+          a contained section in the single scroll, not a separate tab. */}
+      {mode === 'standalone' && (
+        <section data-ms-section-id="network-atlas" className="shrink-0 border-b border-[#00B4FF]/[0.10] bg-[#070809]">
+          <div className="mx-auto w-full max-w-5xl px-5 pt-6">
+            <div className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-[#00B4FF]/85">
+              Your network, mapped
+            </div>
+            <h2 className="mt-2 text-2xl font-semibold tracking-[-0.01em] text-white max-[480px]:text-xl">
+              We audited every {displayName} yard we could find &mdash; from satellite.
+            </h2>
+            <p className="mt-1.5 text-sm text-white/60">
+              Click any site for its gate, docks, and drop yards. No badge, no NDA &mdash; just what a driver sees.
+            </p>
+          </div>
+          <div className="mx-auto w-full max-w-5xl px-3 pb-5 pt-3">
+            <div className="flex min-h-[460px] flex-col overflow-hidden rounded-xl border border-white/10 bg-[#050505] md:h-[540px] md:flex-row">
+              <div className="relative h-[320px] flex-1 md:h-auto">
+                <NetworkAtlas
+                  pack={pack}
+                  selectedSiteId={selectedSiteId}
+                  archetypeFilter={archetypeFilter}
+                  onSelectSite={setSelectedSiteId}
+                />
+              </div>
+              <aside
+                className="flex w-full shrink-0 flex-col overflow-hidden border-t border-[#00B4FF]/[0.10] md:w-[400px] md:border-l md:border-t-0"
+                style={{ background: 'linear-gradient(180deg, rgba(17, 19, 24, 0.92), rgba(10, 12, 16, 0.92))' }}
+              >
+                {selectedSite ? (
+                  <SiteDetailPanel
+                    site={selectedSite}
+                    onClose={() => {
+                      setSelectedSiteId(null);
+                      setAutoPlayConsumed(true);
+                    }}
+                    autoPlay={shouldAutoPlay}
+                  />
+                ) : (
+                  <ArchetypeMixChart pack={pack} archetypeFilter={archetypeFilter} onToggleArchetype={toggleArchetype} />
+                )}
+              </aside>
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* §2 The reframe — names the siloed-yard problem before showing its cost.
           The cold-email payload: tells the visitor what they're looking at. */}
       {mode === 'standalone' && <DemoReframe displayName={displayName} />}
 
@@ -401,7 +425,7 @@ export function DemoSurface({
           </div>
           <div className="mx-auto w-full max-w-5xl px-3 pb-4 pt-3">
             <div className="flex h-[60vh] min-h-[460px] flex-col overflow-hidden rounded-xl border border-white/10 bg-[#050505]">
-              <DriverJourneySpotlight pack={pack} onExit={() => setView('atlas')} />
+              <DriverJourneySpotlight pack={pack} initialSiteId={initialSiteId} onExit={() => {}} />
             </div>
           </div>
         </section>
@@ -483,53 +507,40 @@ export function DemoSurface({
         );
       })()}
 
-      {/* Network band — the single "what's my opportunity + what's it worth"
-          beat between the sim hook and the atlas/proof. */}
+      {/* §4 Scale — the single "what's my opportunity + what's it worth" beat. */}
       {mode === 'standalone' && <NetworkInsight pack={pack} />}
 
-      {/* Atlas view: split — map + donut/site-panel */}
-      {view === 'atlas' && (
-        <main className="flex flex-1 flex-col overflow-hidden md:flex-row">
-          <div className="relative h-[400px] flex-1 md:h-auto">
-            <NetworkAtlas
-              pack={pack}
-              selectedSiteId={selectedSiteId}
-              archetypeFilter={archetypeFilter}
-              onSelectSite={setSelectedSiteId}
-            />
-          </div>
-          <aside
-            className="flex w-full shrink-0 flex-col overflow-hidden border-t border-[#00B4FF]/[0.10] md:w-[400px] md:border-l md:border-t-0"
-            style={{ background: 'linear-gradient(180deg, rgba(17, 19, 24, 0.92), rgba(10, 12, 16, 0.92))' }}
-          >
-            {selectedSite ? (
-              <SiteDetailPanel
-                site={selectedSite}
-                onClose={() => {
-                  setSelectedSiteId(null);
-                  setAutoPlayConsumed(true);
-                }}
-                autoPlay={shouldAutoPlay}
-              />
-            ) : (
-              <ArchetypeMixChart pack={pack} archetypeFilter={archetypeFilter} onToggleArchetype={toggleArchetype} />
+      {/* §5 Stress-test — the simulator, demoted from a top-level tab to an
+          opt-in expander (power feature, not a parallel mode). */}
+      {mode === 'standalone' && (
+        <section data-ms-section-id="simulator" className="shrink-0 border-b border-[#00B4FF]/[0.10] bg-[#070809]">
+          <div className="mx-auto w-full max-w-5xl px-5 py-5">
+            <button
+              type="button"
+              onClick={() => setSimOpen((o) => !o)}
+              aria-expanded={simOpen}
+              data-ms-cta-id="demo-toggle-simulator"
+              className="flex w-full items-center justify-between gap-4 text-left"
+            >
+              <span>
+                <span className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-[#00B4FF]/85">
+                  Stress-test the network
+                </span>
+                <span className="mt-1 block text-sm text-white/60">
+                  See what peak demand, weather, and carrier cuts do across every yard.
+                </span>
+              </span>
+              <span className="shrink-0 rounded-full border border-white/15 px-3 py-1 text-sm text-white/70">
+                {simOpen ? 'Hide −' : 'Open +'}
+              </span>
+            </button>
+            {simOpen && (
+              <div className="mt-4 flex h-[560px] overflow-hidden rounded-xl border border-white/10 bg-[#050505]">
+                <NetworkSimulator pack={pack} />
+              </div>
             )}
-          </aside>
-        </main>
-      )}
-
-      {/* Simulator view: full-width map + controls */}
-      {view === 'sim' && (
-        <main className="flex flex-1 overflow-hidden">
-          <NetworkSimulator pack={pack} />
-        </main>
-      )}
-
-      {/* Driver-journey view: the truck replay promoted to a primary tab. */}
-      {view === 'replay' && (
-        <main className="flex flex-1 overflow-hidden">
-          <DriverJourneySpotlight pack={pack} initialSiteId={initialSiteId} onExit={() => setView('atlas')} />
-        </main>
+          </div>
+        </section>
       )}
 
       {/* The reply — low-friction conversion close. The whole page funnels to
