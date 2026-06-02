@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-02T14:55:17.843Z",
+  "builtAt": "2026-06-02T16:18:52.122Z",
   "account": {
     "slug": "kimberly-clark",
     "displayName": "Kimberly-Clark",
@@ -922,13 +922,13 @@
           },
           "streetViewMeta": {
             "perimeter": {
-              "heading": 135,
-              "pano": "izvI6rV9j5FcgAdxzlIc4A",
+              "heading": 129,
+              "pano": "-eKtb-GpP9_gW9XXrLhkuQ",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 135,
-              "pano": "izvI6rV9j5FcgAdxzlIc4A",
+              "heading": 129,
+              "pano": "-eKtb-GpP9_gW9XXrLhkuQ",
               "hasCoverage": true
             }
           }
@@ -1396,13 +1396,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 78,
-              "pano": "TsfDpj7d5tJSLetwn_1uvA",
+              "heading": 70,
+              "pano": "g6_I-Dhlc46nmhPWp6Hkvw",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 78,
-              "pano": "TsfDpj7d5tJSLetwn_1uvA",
+              "heading": 70,
+              "pano": "g6_I-Dhlc46nmhPWp6Hkvw",
               "hasCoverage": true
             }
           }
@@ -2239,18 +2239,7 @@
             }
           ],
           "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 237,
-              "pano": "9K8Yt9YthW8uAdV6uTx2bw",
-              "hasCoverage": true
-            },
-            "truckGate": {
-              "heading": 237,
-              "pano": "9K8Yt9YthW8uAdV6uTx2bw",
-              "hasCoverage": true
-            }
-          }
+          "streetViewMeta": {}
         },
         "yardMetrics": {
           "dockDoorCount": 28,
@@ -2830,13 +2819,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 166,
-              "pano": "DKjCDajTbfaxNJ2ZcqKwyg",
+              "heading": 21,
+              "pano": "lqVHdkQu9SuBDeUxna_pFg",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 166,
-              "pano": "DKjCDajTbfaxNJ2ZcqKwyg",
+              "heading": 21,
+              "pano": "lqVHdkQu9SuBDeUxna_pFg",
               "hasCoverage": true
             }
           }

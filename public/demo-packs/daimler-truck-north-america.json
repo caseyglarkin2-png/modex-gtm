@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-01T12:33:42.211Z",
+  "builtAt": "2026-06-02T16:10:18.840Z",
   "account": {
     "slug": "daimler-truck-north-america",
     "displayName": "Daimler Truck North America",
@@ -605,13 +605,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 123,
-              "pano": "35KVBgsmnOSTW_XFPX5MPQ",
+              "heading": 15,
+              "pano": "Kn0CeIVO9qG3OG4S-Eia_A",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 123,
-              "pano": "35KVBgsmnOSTW_XFPX5MPQ",
+              "heading": 15,
+              "pano": "Kn0CeIVO9qG3OG4S-Eia_A",
               "hasCoverage": true
             }
           }
@@ -816,8 +816,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 46,
-              "pano": "4PHfKqSLaoIDCwioG_Ru3w",
+              "heading": 123,
+              "pano": "m9oplxRNRafH1mJRbrCvgQ",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 123,
+              "pano": "m9oplxRNRafH1mJRbrCvgQ",
               "hasCoverage": true
             }
           }
@@ -1440,18 +1445,7 @@
             }
           ],
           "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 352,
-              "pano": "fYFk5hFIKYmu-LqhupWhtg",
-              "hasCoverage": true
-            },
-            "truckGate": {
-              "heading": 352,
-              "pano": "fYFk5hFIKYmu-LqhupWhtg",
-              "hasCoverage": true
-            }
-          }
+          "streetViewMeta": {}
         },
         "yardMetrics": {
           "dockDoorCount": 35,
@@ -1659,13 +1653,7 @@
             }
           ],
           "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 123,
-              "pano": "gaGWV14einylcjgLpO1iAA",
-              "hasCoverage": true
-            }
-          }
+          "streetViewMeta": {}
         },
         "yardMetrics": {
           "dockDoorCount": 14,
@@ -2075,13 +2063,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 215,
-              "pano": "KkjYJexkmVyT9eMCRtby2g",
+              "heading": 213,
+              "pano": "iKwRDoBMDC72mW_ikAhPQw",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 215,
-              "pano": "KkjYJexkmVyT9eMCRtby2g",
+              "heading": 213,
+              "pano": "iKwRDoBMDC72mW_ikAhPQw",
               "hasCoverage": true
             }
           }
@@ -2678,8 +2666,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 40,
-              "pano": "W53ydgqbqviCQ5QpQ2zoSQ",
+              "heading": 76,
+              "pano": "1CqPiJOxfTEsiJfYGgVZog",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 76,
+              "pano": "1CqPiJOxfTEsiJfYGgVZog",
               "hasCoverage": true
             }
           }
@@ -3124,13 +3117,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 297,
-              "pano": "Tsoq5iiEifok4MM-cM4p0Q",
+              "heading": 110,
+              "pano": "xUoFWiOBgLweOHjzEtp05A",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 297,
-              "pano": "Tsoq5iiEifok4MM-cM4p0Q",
+              "heading": 110,
+              "pano": "xUoFWiOBgLweOHjzEtp05A",
               "hasCoverage": true
             }
           }
@@ -3356,13 +3349,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 152,
-              "pano": "41Bab84Vb_7OAeQiw0Jssg",
+              "heading": 166,
+              "pano": "62N1i1jY7OCoVBHp_zVfug",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 152,
-              "pano": "41Bab84Vb_7OAeQiw0Jssg",
+              "heading": 166,
+              "pano": "62N1i1jY7OCoVBHp_zVfug",
               "hasCoverage": true
             }
           }

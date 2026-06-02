@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-01T12:31:18.390Z",
+  "builtAt": "2026-06-02T16:06:31.249Z",
   "account": {
     "slug": "bob-evans-farms",
     "displayName": "Bob Evans Farms",
@@ -161,13 +161,13 @@
           },
           "streetViewMeta": {
             "perimeter": {
-              "heading": 86,
-              "pano": "veOHSrT1_n1M5Ax1SL7BRg",
+              "heading": 82,
+              "pano": "xjrBlvjyVmzdtzA331_egQ",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 86,
-              "pano": "veOHSrT1_n1M5Ax1SL7BRg",
+              "heading": 82,
+              "pano": "xjrBlvjyVmzdtzA331_egQ",
               "hasCoverage": true
             }
           }
@@ -407,13 +407,13 @@
           },
           "streetViewMeta": {
             "perimeter": {
-              "heading": 165,
-              "pano": "X1PuY7mLt0jfTrB49L-BOw",
+              "heading": 171,
+              "pano": "I0Pn6QmTKt461YIFFpORUA",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 165,
-              "pano": "X1PuY7mLt0jfTrB49L-BOw",
+              "heading": 171,
+              "pano": "I0Pn6QmTKt461YIFFpORUA",
               "hasCoverage": true
             }
           }
@@ -683,13 +683,13 @@
           },
           "streetViewMeta": {
             "perimeter": {
-              "heading": 32,
-              "pano": "hD77uVJQhZCAFaE-cGrOHA",
+              "heading": 95,
+              "pano": "WrwcgeZApQ3CKlq29TxGKQ",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 32,
-              "pano": "hD77uVJQhZCAFaE-cGrOHA",
+              "heading": 95,
+              "pano": "WrwcgeZApQ3CKlq29TxGKQ",
               "hasCoverage": true
             }
           }
@@ -932,13 +932,13 @@
           },
           "streetViewMeta": {
             "perimeter": {
-              "heading": 258,
-              "pano": "uw4eGpvTllv4CrgfF0647Q",
+              "heading": 246,
+              "pano": "1ueZ0SeqXLWFXCGi0JcY8w",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 258,
-              "pano": "uw4eGpvTllv4CrgfF0647Q",
+              "heading": 246,
+              "pano": "1ueZ0SeqXLWFXCGi0JcY8w",
               "hasCoverage": true
             }
           }

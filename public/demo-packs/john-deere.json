@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-01T12:39:39.477Z",
+  "builtAt": "2026-06-02T16:17:18.256Z",
   "account": {
     "slug": "john-deere",
     "displayName": "John Deere",
@@ -1022,8 +1022,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 325,
-              "pano": "EIXc1dFdZobzj1EQAx3xxQ",
+              "heading": 30,
+              "pano": "CAoSHENJQUJJaENEdmVqYVAyelZPaUQ1Tm9ZaDhBX3U.",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 30,
+              "pano": "CAoSHENJQUJJaENEdmVqYVAyelZPaUQ1Tm9ZaDhBX3U.",
               "hasCoverage": true
             }
           }
@@ -2339,8 +2344,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 191,
-              "pano": "kcKPDG9tQ9exYH4_kPMAlA",
+              "heading": 178,
+              "pano": "RMPCffdJOZ_h8our-UcLUA",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 178,
+              "pano": "RMPCffdJOZ_h8our-UcLUA",
               "hasCoverage": true
             }
           }
@@ -3323,8 +3333,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 184,
-              "pano": "E280w-6L_MshYV2TtHtR3Q",
+              "heading": 90,
+              "pano": "pVqi0yl5wMmqijBTmou6Xw",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 90,
+              "pano": "pVqi0yl5wMmqijBTmou6Xw",
               "hasCoverage": true
             }
           }

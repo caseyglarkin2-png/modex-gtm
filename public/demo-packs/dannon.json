@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-01T12:32:39.379Z",
+  "builtAt": "2026-06-02T16:10:47.132Z",
   "account": {
     "slug": "dannon",
     "displayName": "Danone / Dannon",
@@ -164,13 +164,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 349,
-              "pano": "JBM0YT3UTLUuoTHURvz_ZA",
+              "heading": 357,
+              "pano": "QQnD17assWnx_rWHa2ygMA",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 349,
-              "pano": "JBM0YT3UTLUuoTHURvz_ZA",
+              "heading": 357,
+              "pano": "QQnD17assWnx_rWHa2ygMA",
               "hasCoverage": true
             }
           }
@@ -625,13 +625,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 233,
-              "pano": "VmSzNJOgvrxP54JFTeyeFA",
+              "heading": 268,
+              "pano": "0SoRwK9aN_4jZ43f6_cfsg",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 233,
-              "pano": "VmSzNJOgvrxP54JFTeyeFA",
+              "heading": 268,
+              "pano": "0SoRwK9aN_4jZ43f6_cfsg",
               "hasCoverage": true
             }
           }
@@ -1017,13 +1017,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 111,
-              "pano": "g38WW-Hu8VwYnQNk9_eUqg",
+              "heading": 143,
+              "pano": "SXGn19VunR8DvqDsuzTBGA",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 111,
-              "pano": "g38WW-Hu8VwYnQNk9_eUqg",
+              "heading": 143,
+              "pano": "SXGn19VunR8DvqDsuzTBGA",
               "hasCoverage": true
             }
           }
@@ -1237,13 +1237,13 @@
           },
           "streetViewMeta": {
             "perimeter": {
-              "heading": 46,
-              "pano": "_IFSq3qlHTBt5ONvyQGboA",
+              "heading": 35,
+              "pano": "JtJt7NYXBXXTyYNff6hwsw",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 46,
-              "pano": "_IFSq3qlHTBt5ONvyQGboA",
+              "heading": 35,
+              "pano": "JtJt7NYXBXXTyYNff6hwsw",
               "hasCoverage": true
             }
           }
@@ -1578,13 +1578,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 356,
-              "pano": "ZJf9GFqdMhONeP7_fjptwQ",
+              "heading": 350,
+              "pano": "1ofgEoGOi8cMwPJ1X7oBmw",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 356,
-              "pano": "ZJf9GFqdMhONeP7_fjptwQ",
+              "heading": 350,
+              "pano": "1ofgEoGOi8cMwPJ1X7oBmw",
               "hasCoverage": true
             }
           }
@@ -1804,13 +1804,13 @@
           },
           "streetViewMeta": {
             "perimeter": {
-              "heading": 218,
-              "pano": "UoA8tZXed8-lbMvj8NWnQg",
+              "heading": 178,
+              "pano": "dDuEteW7FFbvJHfM07CLsg",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 218,
-              "pano": "UoA8tZXed8-lbMvj8NWnQg",
+              "heading": 178,
+              "pano": "dDuEteW7FFbvJHfM07CLsg",
               "hasCoverage": true
             }
           }
@@ -2165,13 +2165,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 93,
-              "pano": "yUlD2mLdGKKyuyF9woYmYA",
+              "heading": 70,
+              "pano": "J78gwk-BMWU9ulfXekn7AQ",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 93,
-              "pano": "yUlD2mLdGKKyuyF9woYmYA",
+              "heading": 70,
+              "pano": "J78gwk-BMWU9ulfXekn7AQ",
               "hasCoverage": true
             }
           }

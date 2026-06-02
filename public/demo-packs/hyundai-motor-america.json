@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-02T14:54:03.296Z",
+  "builtAt": "2026-06-02T16:16:15.544Z",
   "account": {
     "slug": "hyundai-motor-america",
     "displayName": "Hyundai Motor America",
@@ -764,13 +764,7 @@
             }
           ],
           "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 188,
-              "pano": "2Z5VpfiE_o2lpzdOGFZuVw",
-              "hasCoverage": true
-            }
-          }
+          "streetViewMeta": {}
         },
         "yardMetrics": {
           "dockDoorCount": 34,
@@ -965,8 +959,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 216,
-              "pano": "vEGQmV0t8YTVzH9X9sZQhQ",
+              "heading": 183,
+              "pano": "XXfw9vYZ8qT0wYpSY3Xr4w",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 183,
+              "pano": "XXfw9vYZ8qT0wYpSY3Xr4w",
               "hasCoverage": true
             }
           }
@@ -1296,8 +1295,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 80,
-              "pano": "b1-66AS0fWB15IYBN5MdBA",
+              "heading": 126,
+              "pano": "1KH9IJwhjZDYDj754gAyuA",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 126,
+              "pano": "1KH9IJwhjZDYDj754gAyuA",
               "hasCoverage": true
             }
           }
@@ -1471,8 +1475,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 141,
-              "pano": "HBzIDTiUZ3sdU8L6Qhr6Fg",
+              "heading": 201,
+              "pano": "kk0fM4vbI2qmHSe8jeb5fw",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 201,
+              "pano": "kk0fM4vbI2qmHSe8jeb5fw",
               "hasCoverage": true
             }
           }
@@ -1643,6 +1652,11 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
+              "heading": 181,
+              "pano": "FreTNU2bZFgcjE-lBVcbhQ",
+              "hasCoverage": true
+            },
+            "truckGate": {
               "heading": 181,
               "pano": "FreTNU2bZFgcjE-lBVcbhQ",
               "hasCoverage": true

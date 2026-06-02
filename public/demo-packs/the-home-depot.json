@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-02T14:57:35.713Z",
+  "builtAt": "2026-06-02T16:23:28.332Z",
   "account": {
     "slug": "the-home-depot",
     "displayName": "The Home Depot",
@@ -548,13 +548,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 162,
-              "pano": "OZ_Lbk2SnDaqWm0X7s0vEg",
+              "heading": 171,
+              "pano": "SWNAnyhdoMMCEtBJtiquSA",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 162,
-              "pano": "OZ_Lbk2SnDaqWm0X7s0vEg",
+              "heading": 171,
+              "pano": "SWNAnyhdoMMCEtBJtiquSA",
               "hasCoverage": true
             }
           }
@@ -797,13 +797,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 113,
-              "pano": "jEsF8MeWfZCf3XT3_Ru23Q",
+              "heading": 303,
+              "pano": "biDL3eGM0pZdZdsNTBMPPQ",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 113,
-              "pano": "jEsF8MeWfZCf3XT3_Ru23Q",
+              "heading": 303,
+              "pano": "biDL3eGM0pZdZdsNTBMPPQ",
               "hasCoverage": true
             }
           }
@@ -1369,13 +1369,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 63,
-              "pano": "v0xjkh7_Zd-O18j8Uq4q3w",
+              "heading": 92,
+              "pano": "L40YXBOsn84sl5J8w2P7lg",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 63,
-              "pano": "v0xjkh7_Zd-O18j8Uq4q3w",
+              "heading": 92,
+              "pano": "L40YXBOsn84sl5J8w2P7lg",
               "hasCoverage": true
             }
           }

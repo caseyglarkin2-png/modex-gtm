@@ -107,18 +107,7 @@
       }
     ],
     "staging": null,
-    "streetViewMeta": {
-      "perimeter": {
-        "heading": 308,
-        "pano": "rkoEBmzMz6gHjpYP3VtZHg",
-        "hasCoverage": true
-      },
-      "truckGate": {
-        "heading": 308,
-        "pano": "rkoEBmzMz6gHjpYP3VtZHg",
-        "hasCoverage": true
-      }
-    }
+    "streetViewMeta": {}
   },
   "yardMetrics": {
     "dockDoorCount": 90,

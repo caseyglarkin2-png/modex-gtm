@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-02T14:51:03.779Z",
+  "builtAt": "2026-06-02T16:12:15.201Z",
   "account": {
     "slug": "fedex",
     "displayName": "FedEx",
@@ -4530,8 +4530,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 55,
-              "pano": "MfLTWHAFscV16S45K1AaKg",
+              "heading": 330,
+              "pano": "TaGNno0k3PXSaE6A4_uWmw",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 330,
+              "pano": "TaGNno0k3PXSaE6A4_uWmw",
               "hasCoverage": true
             }
           }

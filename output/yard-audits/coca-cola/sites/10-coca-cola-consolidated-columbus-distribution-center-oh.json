@@ -91,13 +91,7 @@
         }
       ]
     },
-    "streetViewMeta": {
-      "perimeter": {
-        "heading": 148,
-        "pano": "Fu_N4WblW7L18p38yRemkA",
-        "hasCoverage": true
-      }
-    }
+    "streetViewMeta": {}
   },
   "yardMetrics": {
     "dockDoorCount": 60,

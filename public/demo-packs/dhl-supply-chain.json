@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-02T14:50:37.004Z",
+  "builtAt": "2026-06-02T16:11:15.112Z",
   "account": {
     "slug": "dhl-supply-chain",
     "displayName": "DHL Supply Chain",
@@ -2550,8 +2550,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 35,
-              "pano": "-3O-1ZydjFm9ep4gvTLrBA",
+              "heading": 283,
+              "pano": "QvO6vHHl7uZcN8v6zBri_A",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 283,
+              "pano": "QvO6vHHl7uZcN8v6zBri_A",
               "hasCoverage": true
             }
           }

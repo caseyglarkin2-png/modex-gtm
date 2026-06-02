@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-02T14:53:14.492Z",
+  "builtAt": "2026-06-02T16:15:14.885Z",
   "account": {
     "slug": "honda",
     "displayName": "Honda",
@@ -159,18 +159,7 @@
             }
           ],
           "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 308,
-              "pano": "rkoEBmzMz6gHjpYP3VtZHg",
-              "hasCoverage": true
-            },
-            "truckGate": {
-              "heading": 308,
-              "pano": "rkoEBmzMz6gHjpYP3VtZHg",
-              "hasCoverage": true
-            }
-          }
+          "streetViewMeta": {}
         },
         "yardMetrics": {
           "dockDoorCount": 90,
@@ -592,18 +581,7 @@
             }
           ],
           "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 65,
-              "pano": "tKrFDINs1nTxJzGjyX6HLw",
-              "hasCoverage": true
-            },
-            "truckGate": {
-              "heading": 65,
-              "pano": "tKrFDINs1nTxJzGjyX6HLw",
-              "hasCoverage": true
-            }
-          }
+          "streetViewMeta": {}
         },
         "yardMetrics": {
           "dockDoorCount": 9,
@@ -817,13 +795,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 185,
-              "pano": "lxvYxxLMWNRJhjdgJBE9kA",
+              "heading": 245,
+              "pano": "Yqizai6uNy8FDd4BISX5jg",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 185,
-              "pano": "lxvYxxLMWNRJhjdgJBE9kA",
+              "heading": 245,
+              "pano": "Yqizai6uNy8FDd4BISX5jg",
               "hasCoverage": true
             }
           }
@@ -2429,18 +2407,7 @@
             }
           ],
           "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 63,
-              "pano": "CFA1i_fadL9lcfU2qGi6HA",
-              "hasCoverage": true
-            },
-            "truckGate": {
-              "heading": 63,
-              "pano": "CFA1i_fadL9lcfU2qGi6HA",
-              "hasCoverage": true
-            }
-          }
+          "streetViewMeta": {}
         },
         "yardMetrics": {
           "dockDoorCount": 60,
@@ -3045,13 +3012,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 181,
-              "pano": "H1Hwthne7tpdUL-pl3QlHw",
+              "heading": 84,
+              "pano": "9PnUmqRfyNQtba-XQ5yBwQ",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 181,
-              "pano": "H1Hwthne7tpdUL-pl3QlHw",
+              "heading": 84,
+              "pano": "9PnUmqRfyNQtba-XQ5yBwQ",
               "hasCoverage": true
             }
           }
@@ -3271,18 +3238,7 @@
             }
           ],
           "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 117,
-              "pano": "eCap5i_Y174eU0SxxF5JjQ",
-              "hasCoverage": true
-            },
-            "truckGate": {
-              "heading": 117,
-              "pano": "eCap5i_Y174eU0SxxF5JjQ",
-              "hasCoverage": true
-            }
-          }
+          "streetViewMeta": {}
         },
         "yardMetrics": {
           "dockDoorCount": 55,
@@ -3528,18 +3484,7 @@
               }
             ]
           },
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 234,
-              "pano": "bpwRuUHxXTdS1pd3GiMkoQ",
-              "hasCoverage": true
-            },
-            "truckGate": {
-              "heading": 234,
-              "pano": "bpwRuUHxXTdS1pd3GiMkoQ",
-              "hasCoverage": true
-            }
-          }
+          "streetViewMeta": {}
         },
         "yardMetrics": {
           "dockDoorCount": 70,
@@ -3770,13 +3715,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 139,
-              "pano": "GLdeVCuRm_6quD7NfwEQAA",
+              "heading": 130,
+              "pano": "neO_XrTMckzWDt4DHGf2oQ",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 139,
-              "pano": "GLdeVCuRm_6quD7NfwEQAA",
+              "heading": 130,
+              "pano": "neO_XrTMckzWDt4DHGf2oQ",
               "hasCoverage": true
             }
           }
@@ -4007,13 +3952,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 336,
-              "pano": "hGsj9LR1nV9P-hQnYN5XJA",
+              "heading": 39,
+              "pano": "PfXv-D2TqZi9Q7VKr4Pjqw",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 336,
-              "pano": "hGsj9LR1nV9P-hQnYN5XJA",
+              "heading": 39,
+              "pano": "PfXv-D2TqZi9Q7VKr4Pjqw",
               "hasCoverage": true
             }
           }

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-01T12:30:59.754Z",
+  "builtAt": "2026-06-02T16:25:00.198Z",
   "account": {
     "slug": "westrock-coffee",
     "displayName": "Westrock Coffee",
@@ -161,13 +161,13 @@
           },
           "streetViewMeta": {
             "perimeter": {
-              "heading": 79,
-              "pano": "IxyBry2YmXnU4akvtIn8Ag",
+              "heading": 66,
+              "pano": "9Kf4CkllegmivlCUjJrGBA",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 79,
-              "pano": "IxyBry2YmXnU4akvtIn8Ag",
+              "heading": 66,
+              "pano": "9Kf4CkllegmivlCUjJrGBA",
               "hasCoverage": true
             }
           }
@@ -611,13 +611,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 123,
-              "pano": "IL_GmNuD-qGmJ9e480LUXA",
+              "heading": 125,
+              "pano": "lHSUV22CpDVaAmmmybPnlQ",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 123,
-              "pano": "IL_GmNuD-qGmJ9e480LUXA",
+              "heading": 125,
+              "pano": "lHSUV22CpDVaAmmmybPnlQ",
               "hasCoverage": true
             }
           }
@@ -1066,13 +1066,13 @@
           },
           "streetViewMeta": {
             "perimeter": {
-              "heading": 33,
-              "pano": "XcFQqGphxW2KivvDUWB9zQ",
+              "heading": 315,
+              "pano": "mbxfeaLK-LQKepOG4fqOOQ",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 33,
-              "pano": "XcFQqGphxW2KivvDUWB9zQ",
+              "heading": 315,
+              "pano": "mbxfeaLK-LQKepOG4fqOOQ",
               "hasCoverage": true
             }
           }
@@ -1290,18 +1290,7 @@
             }
           ],
           "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 169,
-              "pano": "uVxespRzwavoxDgZjwBjZA",
-              "hasCoverage": true
-            },
-            "truckGate": {
-              "heading": 169,
-              "pano": "uVxespRzwavoxDgZjwBjZA",
-              "hasCoverage": true
-            }
-          }
+          "streetViewMeta": {}
         },
         "yardMetrics": {
           "dockDoorCount": 9,

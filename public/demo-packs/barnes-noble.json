@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-01T12:30:16.963Z",
+  "builtAt": "2026-06-02T16:06:00.356Z",
   "account": {
     "slug": "barnes-noble",
     "displayName": "Barnes & Noble",
@@ -316,13 +316,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 327,
-              "pano": "znMxrPPpGw0X0amLLIcwCQ",
+              "heading": 34,
+              "pano": "5v2XLmfO-lv0MMvoJut03w",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 327,
-              "pano": "znMxrPPpGw0X0amLLIcwCQ",
+              "heading": 34,
+              "pano": "5v2XLmfO-lv0MMvoJut03w",
               "hasCoverage": true
             }
           }

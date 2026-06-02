@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-01T12:42:30.820Z",
+  "builtAt": "2026-06-02T16:08:24.190Z",
   "account": {
     "slug": "cj-logistics-america",
     "displayName": "CJ Logistics America",
@@ -1214,13 +1214,7 @@
             }
           ],
           "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 85,
-              "pano": "1x5AaZK7U4spAc-YA5u_qg",
-              "hasCoverage": true
-            }
-          }
+          "streetViewMeta": {}
         },
         "yardMetrics": {
           "dockDoorCount": 110,
@@ -1395,8 +1389,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 60,
-              "pano": "N9Bale0RXockPfX0db0TUw",
+              "heading": 111,
+              "pano": "gr6hC_heHWfz8C5aGhLwqA",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 111,
+              "pano": "gr6hC_heHWfz8C5aGhLwqA",
               "hasCoverage": true
             }
           }
@@ -1730,13 +1729,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 139,
-              "pano": "fW6pP4iW6YH-SobE9CwSvA",
+              "heading": 83,
+              "pano": "bNC_Z-GmAAou5Wq_DcFbrg",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 139,
-              "pano": "fW6pP4iW6YH-SobE9CwSvA",
+              "heading": 83,
+              "pano": "bNC_Z-GmAAou5Wq_DcFbrg",
               "hasCoverage": true
             }
           }
@@ -2419,8 +2418,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 204,
-              "pano": "tNvJpSkl8CEtojKHs95jrg",
+              "heading": 178,
+              "pano": "42nvEiguSkcV_qpvDEJZiA",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 178,
+              "pano": "42nvEiguSkcV_qpvDEJZiA",
               "hasCoverage": true
             }
           }
@@ -3062,8 +3066,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 145,
-              "pano": "a68AswcDjCCP_609_RvPWw",
+              "heading": 200,
+              "pano": "CgY7vKR1fpVrgE2HILLFcg",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 200,
+              "pano": "CgY7vKR1fpVrgE2HILLFcg",
               "hasCoverage": true
             }
           }
@@ -3478,13 +3487,7 @@
             }
           ],
           "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 140,
-              "pano": "aYuM03T9Z6-SBhY8W91qTA",
-              "hasCoverage": true
-            }
-          }
+          "streetViewMeta": {}
         },
         "yardMetrics": {
           "dockDoorCount": 55,

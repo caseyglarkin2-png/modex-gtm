@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-01T12:30:41.384Z",
+  "builtAt": "2026-06-02T16:09:24.074Z",
   "account": {
     "slug": "cost-plus-world-market",
     "displayName": "Cost Plus World Market",
@@ -181,13 +181,13 @@
           },
           "streetViewMeta": {
             "perimeter": {
-              "heading": 49,
-              "pano": "s8KzwjBmctqyuxQa-MA1og",
+              "heading": 71,
+              "pano": "FD1bd9nenwlVMgaaALnv6w",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 49,
-              "pano": "s8KzwjBmctqyuxQa-MA1og",
+              "heading": 71,
+              "pano": "FD1bd9nenwlVMgaaALnv6w",
               "hasCoverage": true
             }
           }
@@ -430,18 +430,7 @@
             }
           ],
           "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 195,
-              "pano": "aQPcAPNr_jd3rMBr-K7MHg",
-              "hasCoverage": true
-            },
-            "truckGate": {
-              "heading": 195,
-              "pano": "aQPcAPNr_jd3rMBr-K7MHg",
-              "hasCoverage": true
-            }
-          }
+          "streetViewMeta": {}
         },
         "yardMetrics": {
           "dockDoorCount": 110,

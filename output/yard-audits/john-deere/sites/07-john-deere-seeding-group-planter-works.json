@@ -53,8 +53,13 @@
     "staging": null,
     "streetViewMeta": {
       "perimeter": {
-        "heading": 325,
-        "pano": "EIXc1dFdZobzj1EQAx3xxQ",
+        "heading": 30,
+        "pano": "CAoSHENJQUJJaENEdmVqYVAyelZPaUQ1Tm9ZaDhBX3U.",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 30,
+        "pano": "CAoSHENJQUJJaENEdmVqYVAyelZPaUQ1Tm9ZaDhBX3U.",
         "hasCoverage": true
       }
     }

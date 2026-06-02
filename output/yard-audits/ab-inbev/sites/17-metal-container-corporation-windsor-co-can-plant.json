@@ -91,18 +91,7 @@
       }
     ],
     "staging": null,
-    "streetViewMeta": {
-      "perimeter": {
-        "heading": 336,
-        "pano": "umnauFSGTS1HhXhG4yuEPA",
-        "hasCoverage": true
-      },
-      "truckGate": {
-        "heading": 336,
-        "pano": "umnauFSGTS1HhXhG4yuEPA",
-        "hasCoverage": true
-      }
-    }
+    "streetViewMeta": {}
   },
   "yardMetrics": {
     "dockDoorCount": 8,

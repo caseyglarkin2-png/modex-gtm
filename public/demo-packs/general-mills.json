@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-02T14:52:22.667Z",
+  "builtAt": "2026-06-02T16:13:16.566Z",
   "account": {
     "slug": "general-mills",
     "displayName": "General Mills",
@@ -1036,13 +1036,7 @@
             }
           ],
           "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 326,
-              "pano": "Wzw-oYvxV9EbKBpcbkSW7g",
-              "hasCoverage": true
-            }
-          }
+          "streetViewMeta": {}
         },
         "yardMetrics": {
           "dockDoorCount": 35,
@@ -1259,13 +1253,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 39,
-              "pano": "iZ2TRWUdHAdBJblsewyKjA",
+              "heading": 100,
+              "pano": "eP8U5uBUFiSYDKRTP5PLJQ",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 39,
-              "pano": "iZ2TRWUdHAdBJblsewyKjA",
+              "heading": 90,
+              "pano": "FEotFClxCbDnFOEnH0v8QA",
               "hasCoverage": true
             }
           }
@@ -1926,8 +1920,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 356,
-              "pano": "o-gSki8owbJERa52-tAflQ",
+              "heading": 180,
+              "pano": "CuPez_eqB0RyorbHGwxhhQ",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 180,
+              "pano": "CuPez_eqB0RyorbHGwxhhQ",
               "hasCoverage": true
             }
           }
@@ -2755,13 +2754,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 142,
-              "pano": "8Vc-Mj55KpfPmQAvMmpaYQ",
+              "heading": 153,
+              "pano": "nLlAWp4_WIc4ArogkFoAQg",
               "hasCoverage": true
             },
             "truckGate": {
-              "heading": 142,
-              "pano": "8Vc-Mj55KpfPmQAvMmpaYQ",
+              "heading": 153,
+              "pano": "nLlAWp4_WIc4ArogkFoAQg",
               "hasCoverage": true
             }
           }
@@ -3130,13 +3129,7 @@
             }
           ],
           "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 134,
-              "pano": "WL4d3bhtoD187gXwgAdmyA",
-              "hasCoverage": true
-            }
-          }
+          "streetViewMeta": {}
         },
         "yardMetrics": {
           "dockDoorCount": 18,
@@ -3307,8 +3300,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 140,
-              "pano": "O9jYOvtcgfhswClHoj2rMA",
+              "heading": 275,
+              "pano": "hi_MBQepOdgQ4WAeXypDyA",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 275,
+              "pano": "hi_MBQepOdgQ4WAeXypDyA",
               "hasCoverage": true
             }
           }
@@ -3644,8 +3642,13 @@
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
-              "heading": 16,
-              "pano": "jeJIZf3GOJQt74OV-Bzf0Q",
+              "heading": 60,
+              "pano": "6v-QuwbFVLem7TLtghhC7Q",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 60,
+              "pano": "6v-QuwbFVLem7TLtghhC7Q",
               "hasCoverage": true
             }
           }
