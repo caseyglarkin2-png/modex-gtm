@@ -217,7 +217,7 @@ export function DriverJourneyReplay({ site, scenario, onClose }: Props) {
       <div className="flex shrink-0 items-start justify-between gap-4 border-b border-[#00B4FF]/[0.16] px-5 py-4">
         <div className="min-w-0">
           <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/55">
-            Driver journey · Archetype {site.archetype}
+            Driver&rsquo;s-eye run
           </div>
           <h2 className="mt-1 truncate text-base font-semibold text-white">{site.name}</h2>
           <div className="mt-0.5 text-xs text-white/70">{site.type}</div>
@@ -325,7 +325,7 @@ export function DriverJourneyReplay({ site, scenario, onClose }: Props) {
             Yard Spot Mgt / Dock Mgt / Appointments). */}
         <div className="mb-3 rounded-lg border border-white/10 bg-white/[0.02] px-4 py-3">
           <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/45">
-            The system behind this run
+            What removes the wait
           </div>
           <div className="mt-2 flex flex-wrap gap-1.5">
             {[
@@ -347,25 +347,7 @@ export function DriverJourneyReplay({ site, scenario, onClose }: Props) {
           </div>
         </div>
 
-        {/* Flagship proof — anchors the modeled per-run delta above in a real,
-            named-customer result so the value reads as proven, not projected.
-            Primo Brands is YardFlow's flagship reference account. */}
-        <div className="mb-3 rounded-lg border border-emerald-400/30 bg-emerald-400/[0.06] px-4 py-3">
-          <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-emerald-400">
-            Flagship result · Primo Brands
-          </div>
-          <p className="mt-1 text-sm leading-relaxed text-white/90">
-            <span className="font-semibold text-white">Drop-and-hook</span> turns cut from{' '}
-            <span className="font-semibold text-white">~48 min</span> to{' '}
-            <span className="font-semibold text-emerald-300">~24 min</span>, measured in pilot.
-          </p>
-          <p className="mt-1 text-[11px] leading-relaxed text-white/55">
-            Live loads are driver- and shipper-paced — but with the right planning, YNS turns more of
-            them into drop-and-hook, where the time is won.
-          </p>
-        </div>
-
-        {/* Conversion CTA — fires right after the prospect sees the YNS-saves
+        {/* Conversion CTA — fires right after the prospect sees the YardFlow-saves
             delta on their own yard. The 30-min audit is the canonical next
             step on yardflow.ai; this just makes it one click away. */}
         <a
@@ -381,10 +363,10 @@ export function DriverJourneyReplay({ site, scenario, onClose }: Props) {
 
         {/* Caveat */}
         <p className="text-[11px] leading-relaxed text-white/55">
-          Movement durations are honest floors set by yard geometry; YNS uplift lands on the wait fields
-          (queue + dispatch + secondary checkpoints). Baseline timings reflect the radios-and-clipboards
-          world; YNS timings reflect the protocol acting end-to-end. We may be wrong about parts of this —
-          your actual numbers will tell us where.
+          Movement durations are honest floors set by yard geometry; the uplift lands on the wait fields
+          (queue + dispatch + secondary checkpoints). &ldquo;Today&rdquo; timings reflect the
+          radios-and-clipboards world; &ldquo;With YardFlow&rdquo; reflects the protocol acting
+          end-to-end. We may be wrong about parts of this — your actual numbers will tell us where.
         </p>
       </div>
     </div>

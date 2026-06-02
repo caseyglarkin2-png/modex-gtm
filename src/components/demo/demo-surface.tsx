@@ -13,6 +13,7 @@ import { RoiCtaButton } from './roi-cta-button';
 import { ShareMicrosite } from './share-microsite';
 import { DriverJourneySpotlight } from './driver-journey-spotlight';
 import { NetworkInsight } from './network-insight';
+import { DemoReframe } from './demo-reframe';
 
 /**
  * Top-level client surface for /demo/[account]. Manages cross-component
@@ -377,6 +378,10 @@ export function DemoSurface({
         </div>
       )}
 
+      {/* The reframe — names the siloed-yard problem before showing its cost.
+          The cold-email payload: tells the visitor what they're looking at. */}
+      {mode === 'standalone' && <DemoReframe displayName={displayName} />}
+
       {/* Auto-playing truck-sim hero — the opening moment. The animated run
           (truck through the oriented geofences + capability narration + Primo
           proof) auto-loads the featured site and plays on mount, so the most
@@ -525,6 +530,44 @@ export function DemoSurface({
         <main className="flex flex-1 overflow-hidden">
           <DriverJourneySpotlight pack={pack} initialSiteId={initialSiteId} onExit={() => setView('atlas')} />
         </main>
+      )}
+
+      {/* The reply — low-friction conversion close. The whole page funnels to
+          a response, not a hard booking. */}
+      {mode === 'standalone' && (
+        <section
+          data-ms-section-id="reply"
+          className="shrink-0 border-t border-[#00B4FF]/[0.16] bg-[#070809]"
+        >
+          <div className="mx-auto flex w-full max-w-5xl flex-col items-start gap-3 px-5 py-9 md:flex-row md:items-center md:justify-between">
+            <div>
+              <h2 className="text-2xl font-semibold tracking-[-0.01em] text-white max-[480px]:text-xl">
+                Is this your yard?
+              </h2>
+              <p className="mt-1.5 max-w-xl text-sm text-white/70">
+                Tell us where we got it wrong, or see what 15 minutes of orchestration looks like on your worst site.
+              </p>
+            </div>
+            <div className="flex shrink-0 flex-wrap items-center gap-2">
+              <Link
+                href={`/for/${pack.account.slug}`}
+                data-ms-cta-id="demo-reply-memo"
+                className="text-xs text-white/45 transition-colors hover:text-[#00B4FF]"
+              >
+                Read the full memo
+              </Link>
+              <a
+                href={bookAuditHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-ms-cta-id="demo-reply-start-conversation"
+                className="inline-flex min-h-[44px] items-center gap-1.5 rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.14] px-5 py-2.5 text-sm font-bold text-white transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.24] hover:shadow-[0_0_22px_rgba(0,180,255,0.32)]"
+              >
+                Start a conversation →
+              </a>
+            </div>
+          </div>
+        </section>
       )}
 
       {/* Footer — only in standalone mode */}
