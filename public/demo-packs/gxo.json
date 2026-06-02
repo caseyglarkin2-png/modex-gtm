@@ -13,7 +13,10 @@
       "capHit": true,
       "note": "GXO operates ~970 sites globally (~400 in NA). We audited 30 representative NA facilities; the rest follow the same gate/dock archetypes."
     },
-    "featuredSiteId": "12-palmyra-pa"
+    "featuredSiteId": "12-palmyra-pa",
+    "roiDefaults": {
+      "averageMarginPerShipment": 480
+    }
   },
   "research": null,
   "network": {

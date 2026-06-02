@@ -13,7 +13,10 @@
       "capHit": false,
       "note": "Audited all 18 identifiable facilities."
     },
-    "featuredSiteId": "06-kc-owensboro-plant"
+    "featuredSiteId": "06-kc-owensboro-plant",
+    "roiDefaults": {
+      "averageMarginPerShipment": 1100
+    }
   },
   "research": null,
   "network": {

@@ -13,7 +13,10 @@
       "capHit": true,
       "note": "Home Depot operates ~70 RDC/SDC/FDC/DFC/BDC facilities supporting ~2,300 stores. We audited 30 representative supply-chain facilities; the audited cohort spans every facility type."
     },
-    "featuredSiteId": "05-monroe-oh-rdc"
+    "featuredSiteId": "05-monroe-oh-rdc",
+    "roiDefaults": {
+      "averageMarginPerShipment": 640
+    }
   },
   "research": null,
   "network": {

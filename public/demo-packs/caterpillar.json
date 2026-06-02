@@ -13,7 +13,10 @@
       "capHit": false,
       "note": "Audited all 21 identifiable facilities."
     },
-    "featuredSiteId": "11-waco-tx-distribution-center"
+    "featuredSiteId": "11-waco-tx-distribution-center",
+    "roiDefaults": {
+      "averageMarginPerShipment": 1400
+    }
   },
   "research": null,
   "network": {

@@ -13,7 +13,10 @@
       "capHit": true,
       "note": "We audited the 30 largest facilities by throughput. The wider network follows the same archetype distribution."
     },
-    "featuredSiteId": "04-gp-broadway-mill-green-bay-wi"
+    "featuredSiteId": "04-gp-broadway-mill-green-bay-wi",
+    "roiDefaults": {
+      "averageMarginPerShipment": 920
+    }
   },
   "research": null,
   "network": {

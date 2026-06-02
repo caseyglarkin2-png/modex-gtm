@@ -13,7 +13,10 @@
       "capHit": false,
       "note": "Audited all 24 identifiable facilities."
     },
-    "featuredSiteId": "02-kentucky-truck-plant"
+    "featuredSiteId": "02-kentucky-truck-plant",
+    "roiDefaults": {
+      "averageMarginPerShipment": 2200
+    }
   },
   "research": null,
   "network": {

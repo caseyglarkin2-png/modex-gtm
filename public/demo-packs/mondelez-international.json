@@ -13,7 +13,10 @@
       "capHit": false,
       "note": "We audited 22 of an estimated 26 Mondelez NA manufacturing and DC facilities. The 4 not shown are co-manufacturer / contract sites that operate inside other companies’ footprints."
     },
-    "featuredSiteId": "07-mondelez-richmond-distribution-center"
+    "featuredSiteId": "07-mondelez-richmond-distribution-center",
+    "roiDefaults": {
+      "averageMarginPerShipment": 720
+    }
   },
   "research": null,
   "network": {

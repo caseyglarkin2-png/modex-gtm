@@ -13,7 +13,10 @@
       "capHit": true,
       "note": "We audited the 30 largest facilities by throughput. The wider network follows the same archetype distribution."
     },
-    "featuredSiteId": "18-lebanon-tn"
+    "featuredSiteId": "18-lebanon-tn",
+    "roiDefaults": {
+      "averageMarginPerShipment": 580
+    }
   },
   "research": null,
   "network": {
