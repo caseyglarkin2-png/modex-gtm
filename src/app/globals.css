@@ -31,10 +31,16 @@
   --ring: #3b82f6;
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+/* Reset lives in @layer base so Tailwind utility classes (margin/padding,
+   incl. mx-auto) win over it. Unlayered, this `* { margin:0 }` beat every
+   margin utility in Tailwind v4's layer order — which silently broke
+   centering (mx-auto resolved to 0) across the app. */
+@layer base {
+  * {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+  }
 }
 
 body {

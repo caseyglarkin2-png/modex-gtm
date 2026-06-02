@@ -359,7 +359,7 @@ export function DemoSurface({
           a contained section in the single scroll, not a separate tab. */}
       {mode === 'standalone' && (
         <section data-ms-section-id="network-atlas" className="shrink-0 border-b border-[#00B4FF]/[0.10] bg-[#070809]">
-          <div className="mx-auto w-full max-w-5xl px-5 pt-6">
+          <div className="mx-auto w-full max-w-7xl px-5 pt-6">
             <div className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-[#00B4FF]/85">
               Your network, mapped
             </div>
@@ -370,8 +370,8 @@ export function DemoSurface({
               Click any site for its gate, docks, and drop yards. No badge, no NDA &mdash; just what a driver sees.
             </p>
           </div>
-          <div className="mx-auto w-full max-w-5xl px-3 pb-5 pt-3">
-            <div className="flex min-h-[460px] flex-col overflow-hidden rounded-xl border border-white/10 bg-[#050505] md:h-[540px] md:flex-row">
+          <div className="mx-auto w-full max-w-7xl px-3 pb-5 pt-3">
+            <div className="flex min-h-[460px] flex-col overflow-hidden rounded-xl border border-white/10 bg-[#050505] md:h-[560px] md:flex-row">
               <div className="relative h-[320px] flex-1 md:h-auto">
                 <NetworkAtlas
                   pack={pack}
@@ -414,7 +414,7 @@ export function DemoSurface({
           when a network has no scenario-modeled site. */}
       {mode === 'standalone' && hasReplay && (
         <section data-ms-section-id="featured-sim-hero" className="shrink-0 border-b border-[#00B4FF]/[0.16] bg-[#070809]">
-          <div className="mx-auto w-full max-w-5xl px-5 pt-4">
+          <div className="mx-auto w-full max-w-7xl px-5 pt-4">
             <div className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-[#00B4FF]">
               <span className="mr-1.5 inline-block h-[6px] w-[6px] translate-y-[-1px] rounded-full bg-[#00B4FF] align-middle shadow-[0_0_8px_rgba(0,180,255,0.7)]" />
               ▶ Watch a truck run this yard · {displayName}
@@ -423,7 +423,7 @@ export function DemoSurface({
               A real audited site, played gate→dock→exit on the true yard geometry. Switch sites with the picker.
             </p>
           </div>
-          <div className="mx-auto w-full max-w-5xl px-3 pb-4 pt-3">
+          <div className="mx-auto w-full max-w-7xl px-3 pb-4 pt-3">
             <div className="flex h-[60vh] min-h-[460px] flex-col overflow-hidden rounded-xl border border-white/10 bg-[#050505]">
               <DriverJourneySpotlight pack={pack} initialSiteId={initialSiteId} onExit={() => {}} />
             </div>

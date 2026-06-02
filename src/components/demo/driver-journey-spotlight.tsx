@@ -99,7 +99,7 @@ export function DriverJourneySpotlight({
       {/* The replay, centered so it reads intentional on wide viewports.
           Keyed by site so switching sites cleanly remounts the animation. */}
       <div className="flex-1 overflow-y-auto">
-        <div className="mx-auto h-full w-full max-w-3xl">
+        <div className="mx-auto h-full w-full max-w-6xl">
           <DriverJourneyReplay key={site.id} site={site} scenario={site.scenario} onClose={onExit} />
         </div>
       </div>
