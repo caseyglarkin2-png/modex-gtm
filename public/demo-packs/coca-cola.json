@@ -8,15 +8,23 @@
     "siteCount": 30,
     "coverageNote": {
       "auditedCount": 30,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 80,
       "droppedStubCount": 0,
       "capHit": true,
-      "note": "We audited the 30 largest facilities by throughput. The wider network follows the same archetype distribution."
+      "note": "The Coca-Cola Company operates ~270 bottling plants worldwide (including independent licensed bottlers) and ~80 across the US bottler system. We audited 30 US sites in the audit window.",
+      "auditedScope": "US",
+      "totalGlobalFootprint": 270
     },
     "featuredSiteId": "10-coca-cola-consolidated-columbus-distribution-center-oh",
     "roiDefaults": {
       "averageMarginPerShipment": 850
-    }
+    },
+    "dossierIntro": "Beverage distribution runs on tight delivery windows and high SKU velocity. Every minute lost at the dock cascades into a missed route. We audited 30 of Coca-Cola Consolidated's 270 US bottling sites. The Columbus DC alone runs 60 dock doors and 170 trailer spots on 60 acres. YardFlow's drop-trailer protocol turns dwell into yield.",
+    "surprisingFindings": [
+      "60 dock doors but only 1 truck gate at Columbus. The choke point isn't the building, it's the gate.",
+      "5 of 30 audited sites use rail. The other 25 burn dray on every inbound shipment.",
+      "Charlotte (Snyder) ties Columbus at 60 docks each. Beverage runs on rebottling cycle, not pure throughput."
+    ]
   },
   "research": null,
   "network": {

@@ -11,12 +11,20 @@
       "estimatedFootprint": 70,
       "droppedStubCount": 0,
       "capHit": true,
-      "note": "Home Depot operates ~70 RDC/SDC/FDC/DFC/BDC facilities supporting ~2,300 stores. We audited 30 representative supply-chain facilities; the audited cohort spans every facility type."
+      "note": "The Home Depot operates ~70 distribution centers across the US + Mexico + Canada (serving ~2,300 stores). We audited 30 representative DCs.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 70
     },
     "featuredSiteId": "05-monroe-oh-rdc",
     "roiDefaults": {
       "averageMarginPerShipment": 640
-    }
+    },
+    "dossierIntro": "Big-box retail runs the highest dock-density network we've audited. Home Depot's 70 RDCs route 4,456 dock doors and 8,030 trailer spots. Monroe OH runs 220 docks. Mira Loma CA runs 360. Dwell time is the KPI. With this many doors, even a 90-second per-trailer reduction compounds into millions annually. YardFlow turns the appointment schedule into a live queue that reshuffles when a trailer is late.",
+    "surprisingFindings": [
+      "Mira Loma CA runs 360 dock doors. That's more docks than three NFL stadiums have parking gates combined.",
+      "2 of 30 audited sites are rail-served. Retail RDCs are truckload pipelines, not multimodal.",
+      "4,456 total dock doors across 30 sites. Retail runs the most dock minutes per site in the dataset."
+    ]
   },
   "research": null,
   "network": {

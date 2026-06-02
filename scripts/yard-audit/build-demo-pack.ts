@@ -412,12 +412,45 @@ async function main() {
     },
   };
 
+  // Preserve GTM-authored fields that this builder does NOT compute, so a
+  // geofence / Street-View regen never silently drops them again. This is the
+  // bug that wiped roiDefaults + dossierIntro + surprisingFindings across every
+  // pack (regen 32dfbaa): the build emits only audit-derived fields, so any
+  // out-of-band content layered on afterward is lost on the next rebuild.
+  // Canonical sources still exist as re-runnable patches/restores
+  // (patch-roi-defaults.mjs, patch-global-footprints.mjs,
+  // restore-pack-narrative.mjs); this just keeps the content across a plain
+  // rebuild so the validate:packs gate stays green without a manual re-run.
+  const outPath = join(OUT_ROOT, `${micrositeSlug}.json`);
+  if (await exists(outPath)) {
+    const prev = await readJson<DemoPack>(outPath).catch(() => null);
+    if (prev?.account) {
+      const a = prev.account;
+      if (a.dossierIntro != null) pack.account.dossierIntro = a.dossierIntro;
+      if (Array.isArray(a.surprisingFindings)) pack.account.surprisingFindings = a.surprisingFindings;
+      if (a.roiDefaults != null) pack.account.roiDefaults = a.roiDefaults;
+      if (a.teardownVideoSrc != null) pack.account.teardownVideoSrc = a.teardownVideoSrc;
+      // coverageNote: keep the patch-global-footprints overrides (scope /
+      // footprint / legacy-YMS / curated note) while letting the builder's
+      // freshly-computed audited counts stand.
+      const prevCov = a.coverageNote;
+      const cov = pack.account.coverageNote;
+      if (prevCov && cov) {
+        if (prevCov.estimatedFootprint != null) cov.estimatedFootprint = prevCov.estimatedFootprint;
+        if (prevCov.note) cov.note = prevCov.note;
+        if (prevCov.totalGlobalFootprint != null) cov.totalGlobalFootprint = prevCov.totalGlobalFootprint;
+        if (prevCov.auditedScope != null) cov.auditedScope = prevCov.auditedScope;
+        if (prevCov.legacyYmsFacilityCount != null) cov.legacyYmsFacilityCount = prevCov.legacyYmsFacilityCount;
+      }
+    }
+    if (prev?.research != null && pack.research == null) pack.research = prev.research;
+  }
+
   // Validate
   const validated = DemoPackSchema.parse(pack);
 
   // Write
   await mkdir(OUT_ROOT, { recursive: true });
-  const outPath = join(OUT_ROOT, `${micrositeSlug}.json`);
   await writeFile(outPath, JSON.stringify(validated, null, 2));
 
   // Stats

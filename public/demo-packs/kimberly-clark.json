@@ -8,15 +8,23 @@
     "siteCount": 18,
     "coverageNote": {
       "auditedCount": 18,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 30,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 18 identifiable facilities."
+      "note": "Kimberly-Clark operates ~150 manufacturing facilities across 35 countries; we audited 18 NA sites. International scope on request.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 150
     },
     "featuredSiteId": "06-kc-owensboro-plant",
     "roiDefaults": {
       "averageMarginPerShipment": 1100
-    }
+    },
+    "dossierIntro": "Kimberly-Clark runs the largest per-site footprints in CPG. 150 plants and DCs averaging 137 acres each. Owensboro KY covers 230 acres with 55 doors and 220 trailer spots. Warren OH advanced manufacturing is 560 acres. YardFlow runs the drop yard as positions, not parking, on networks where the trailer travels half a mile inside the perimeter.",
+    "surprisingFindings": [
+      "Warren OH is 560 acres of advanced manufacturing. The walk from gate to dock is longer than most networks' entire site.",
+      "DuPont WA DC runs 130 dock doors. K-C ships consumer staples at scale.",
+      "Inbound pulp and outbound finished paper both move on the same yard. Two flows, one queue."
+    ]
   },
   "research": null,
   "network": {

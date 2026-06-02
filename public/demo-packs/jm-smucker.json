@@ -8,12 +8,20 @@
     "siteCount": 17,
     "coverageNote": {
       "auditedCount": 17,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 30,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 17 identifiable facilities."
+      "note": "J.M. Smucker operates ~30 NA plants (Jif, Folgers, Smucker, Milk-Bone, etc.). We audited 17 representative sites.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 30
     },
-    "featuredSiteId": "04-uncrustables-longmont-co"
+    "featuredSiteId": "04-uncrustables-longmont-co",
+    "dossierIntro": "J.M. Smucker runs jam, Folgers, Jif peanut butter, and Milk-Bone. 30 facilities; we audited 17. The Uncrustables plant in Longmont CO is 91.3 acres of frozen sandwich manufacturing. Topeka KS pet food is 140 acres. 6 of 17 sites are rail-served. YardFlow runs the frozen, shelf-stable, and pet food flows on three protocols inside one gate.",
+    "surprisingFindings": [
+      "Uncrustables Longmont CO is 91.3 acres. The plant exists for a single product: frozen PB&J sandwiches.",
+      "Topeka KS is 140 acres of pet food production. Milk-Bone and Meow Mix ship from here.",
+      "504 dock doors across 17 audited sites. Smucker runs efficient dock density per SKU."
+    ]
   },
   "research": null,
   "network": {

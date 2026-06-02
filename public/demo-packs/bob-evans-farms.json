@@ -8,12 +8,19 @@
     "siteCount": 6,
     "coverageNote": {
       "auditedCount": 6,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 6,
       "droppedStubCount": 1,
       "capHit": false,
-      "note": "Audited all 6 identifiable facilities (1 additional were unresolvable from public sources)."
+      "note": "Bob Evans Farms operates ~6 US food-manufacturing plants supplying the retail brand + restaurant chain.",
+      "auditedScope": "US"
     },
-    "featuredSiteId": "03-bob-evans-farms-hillsdale-mi-plant"
+    "featuredSiteId": "03-bob-evans-farms-hillsdale-mi-plant",
+    "dossierIntro": "Bob Evans Farms runs a tight 6-facility CPG food network. We audited all of them. The Hillsdale MI plant is the production engine; Springfield OH runs the company's outbound transportation hub. 76 dock doors across the network. Compact footprint, deterministic yard problem. YardFlow runs a 6-site network the same way it runs a 600-site one.",
+    "surprisingFindings": [
+      "Springfield OH Transportation Hub is the network's outbound spine. All other sites pass through it.",
+      "76 dock doors total across 6 sites. Compact footprint, premium SKU mix.",
+      "0 of 6 audited sites are rail-served. Bob Evans is a pure truckload network."
+    ]
   },
   "research": null,
   "network": {

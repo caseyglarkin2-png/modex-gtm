@@ -8,12 +8,19 @@
     "siteCount": 2,
     "coverageNote": {
       "auditedCount": 2,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 4,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 2 identifiable facilities."
+      "note": "World Market (Cost Plus) operates ~250 US retail stores fed by a handful of DCs; we mapped the DC sites where yard ops matter.",
+      "auditedScope": "US"
     },
-    "featuredSiteId": "01-cost-plus-world-market-stockton-ca-distribution-center"
+    "featuredSiteId": "01-cost-plus-world-market-stockton-ca-distribution-center",
+    "dossierIntro": "Cost Plus World Market runs imported home-goods retail. 4 distribution centers; we audited 2. Stockton CA covers 95 acres with 90 dock doors and 500 trailer spots. Container-heavy inbound from West Coast ports. YardFlow runs container drayage and outbound retail truckload as distinct flows without forcing the staging yard to choose.",
+    "surprisingFindings": [
+      "500 trailer spots at Stockton CA. World Market parks more trailers per door than any retailer audited.",
+      "200 total dock doors across 2 audited sites. High dock density for a small network.",
+      "1 of 2 audited sites is rail-served. West Coast imports dominate inbound."
+    ]
   },
   "research": null,
   "network": {

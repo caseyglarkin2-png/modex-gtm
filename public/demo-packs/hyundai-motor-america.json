@@ -8,12 +8,20 @@
     "siteCount": 17,
     "coverageNote": {
       "auditedCount": 17,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 22,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 17 identifiable facilities."
+      "note": "Hyundai Motor Company operates ~30 plants globally; Hyundai Motor America (the NA arm) operates ~22 NA facilities (HMMA Montgomery, HMMC Cibolo TX, HMG Metaplant America in Georgia, Kia Georgia, Genesis suppliers, parts DCs). We audited 17. International scope on request.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 30
     },
-    "featuredSiteId": "10-mobis-parts-america-pdc-sumner-wa"
+    "featuredSiteId": "10-mobis-parts-america-pdc-sumner-wa",
+    "dossierIntro": "Hyundai runs the largest single greenfield auto investment in North America. 30 facilities; we audited 17. HMGMA Ellabell GA is 2,900 acres of EV manufacturing. Glovis Brunswick GA is 1,627 acres of port vehicle processing. 7,461 total audited acres. YardFlow runs port intake, parts logistics, and finished-vehicle outbound as three parallel queues.",
+    "surprisingFindings": [
+      "HMGMA Ellabell GA is 2,900 acres of greenfield EV manufacturing. Largest single auto investment in NA history.",
+      "15,118 trailer spots across 17 audited sites. Hyundai parks more trailers per site than any auto OEM audited.",
+      "Glovis Brunswick GA is 1,627 acres of port vehicle processing. Hyundai owns the port and the plant."
+    ]
   },
   "research": null,
   "network": {

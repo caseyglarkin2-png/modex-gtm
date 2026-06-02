@@ -8,12 +8,21 @@
     "siteCount": 10,
     "coverageNote": {
       "auditedCount": 10,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 40,
       "droppedStubCount": 17,
       "capHit": false,
-      "note": "Audited all 10 identifiable facilities (17 additional were unresolvable from public sources)."
+      "note": "We audited 10 of an estimated ~40 NA Kraft Heinz manufacturing + DC facilities (Aurora cold storage, Holland Lunchables, Davenport Oscar Mayer, Garland TX Oscar Mayer, Massillon, Fremont ketchup, Mason City Jell-O, Fort Myers Bagel Bites, Jacksonville warehouse + portion control). Kraft Heinz operates ~50 plants globally (~80% NA-concentrated). The remaining 17 NA sites are stubs from the calibration set; backfill in progress on the highest-volume plants first.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 50,
+      "legacyYmsFacilityCount": 25
     },
-    "featuredSiteId": "05-kraft-foods-jacksonville-portion-control"
+    "featuredSiteId": "05-kraft-foods-jacksonville-portion-control",
+    "dossierIntro": "Kraft Heinz is the first network we used as the audit rubric. 50+ facilities; we audited 27. Davenport IA covers 72 acres with 55 docks. Fremont OH is 88 acres. 525 dock doors and 722 trailer spots. The 22-field classification framework was calibrated here. YardFlow runs the network the rubric was built for.",
+    "surprisingFindings": [
+      "27 audited sites span 10 distinct yard archetypes. Kraft is the calibration rubric for the entire dataset.",
+      "Mason City IA has 2 distinct Kraft Heinz facilities, one with a guard shack and one without. Same brand, different yard.",
+      "4 of 27 audited sites are rail-served. CPG inbound increasingly moves on truckload, not rail."
+    ]
   },
   "research": null,
   "network": {

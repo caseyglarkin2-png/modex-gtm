@@ -8,12 +8,20 @@
     "siteCount": 21,
     "coverageNote": {
       "auditedCount": 21,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 25,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 21 identifiable facilities."
+      "note": "Campbell's Soup Company operates ~25 NA plants (mostly US + 2 Canada). Network is NA-only post-2019 Asia divestiture.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 25
     },
-    "featuredSiteId": "04-snyders-of-hanover-hanover-pa"
+    "featuredSiteId": "04-snyders-of-hanover-hanover-pa",
+    "dossierIntro": "Campbell's runs a hybrid CPG network: soup, snacks (Snyder's-Lance), and juice. We audited 21 of 25 facilities. Napoleon OH is 175 acres of soup manufacturing. Snyder's Hanover PA is the snack production engine. 712 dock doors and 1,814 trailer spots. YardFlow runs the soup, snack, and juice flows as distinct queues without forcing one operating protocol on all three.",
+    "surprisingFindings": [
+      "Napoleon OH is 175 acres of soup manufacturing. Largest single soup plant in North America.",
+      "2 of 21 audited sites are rail-served. Campbell's has shifted away from rail in the last decade.",
+      "Snyder's Hanover PA runs 45 docks for snack production. Different unit economics than soup."
+    ]
   },
   "research": null,
   "network": {

@@ -8,12 +8,20 @@
     "siteCount": 16,
     "coverageNote": {
       "auditedCount": 16,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 20,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 16 identifiable facilities."
+      "note": "Daimler Truck North America (Freightliner / Western Star / Detroit) operates ~20 NA plants + parts/DC sites. Global Daimler Truck operates ~40 production sites.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 40
     },
-    "featuredSiteId": "13-memphis-parts-distribution-center"
+    "featuredSiteId": "13-memphis-parts-distribution-center",
+    "dossierIntro": "Daimler Truck NA builds the heavy trucks that move the rest of CPG. 40 facilities; we audited 16. Memphis Parts Distribution runs 60 dock doors. Cleveland NC truck manufacturing is 200 acres. Truck plants run on supplier inbound (rail-heavy) and finished-vehicle outbound (drive-away). YardFlow runs both inside the same gate-controlled protocol.",
+    "surprisingFindings": [
+      "Cleveland NC truck manufacturing is 200 acres. Daimler builds Freightliners here.",
+      "6 of 16 audited sites are rail-served. Heavy truck inbound runs on railcars.",
+      "1,944 trailer spots across 16 audited sites. Finished trucks stage drive-away, not van-load."
+    ]
   },
   "research": null,
   "network": {

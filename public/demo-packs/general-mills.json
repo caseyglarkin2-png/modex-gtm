@@ -8,12 +8,20 @@
     "siteCount": 26,
     "coverageNote": {
       "auditedCount": 26,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 30,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 26 identifiable facilities."
+      "note": "General Mills operates ~35 plants globally (~30 in NA). We audited 26 NA sites.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 35
     },
-    "featuredSiteId": "05-general-mills-murfreesboro-tn"
+    "featuredSiteId": "05-general-mills-murfreesboro-tn",
+    "dossierIntro": "General Mills runs the cereal, snacks, pet food, and refrigerated dough network. 35 facilities; we audited 26. Murfreesboro TN covers 186 acres with 60 dock doors. Wellston OH is 328 acres of cereal manufacturing. 10 of 26 audited sites are rail-served. 883 dock doors total. YardFlow runs the four product platforms as four queues on a unified gate protocol.",
+    "surprisingFindings": [
+      "Wellston OH is 328 acres of cereal manufacturing. Cheerios get made here at scale.",
+      "10 of 26 audited sites are rail-served. Inbound oats, corn, and sugar move on rail.",
+      "2,234 trailer spots across 26 audited sites. General Mills runs heavy trailer density for a CPG."
+    ]
   },
   "research": null,
   "network": {

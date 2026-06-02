@@ -8,12 +8,19 @@
     "siteCount": 16,
     "coverageNote": {
       "auditedCount": 16,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 15,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 16 identifiable facilities."
+      "note": "H-E-B operates ~430 stores fed by ~15 DC + production facilities, primarily in Texas + Mexico. We audited the DC/manufacturing network.",
+      "auditedScope": "US"
     },
-    "featuredSiteId": "09-h-e-b-manufacturing-houston-milk-bread-plant"
+    "featuredSiteId": "09-h-e-b-manufacturing-houston-milk-bread-plant",
+    "dossierIntro": "H-E-B runs the Texas grocery network as a vertically integrated operation. 15 facilities; we audited every one. Hempstead TX (in development) is 423 acres of future grocery distribution. Houston Milk & Bread plant runs 35 docks on 22 acres. 832 dock doors across the network. YardFlow runs vertically integrated grocery with the same protocol used at parcel hubs.",
+    "surprisingFindings": [
+      "Hempstead TX is 423 acres in development. H-E-B is building one of the largest grocery DCs in the country.",
+      "Houston Milk & Bread is 22 acres of fresh dairy and bakery. H-E-B owns the supply chain to the SKU.",
+      "832 dock doors across 15 audited sites. H-E-B routes more dock minutes per facility than any audited grocer."
+    ]
   },
   "research": null,
   "network": {

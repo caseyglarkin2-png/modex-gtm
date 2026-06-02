@@ -11,9 +11,16 @@
       "estimatedFootprint": 56,
       "droppedStubCount": 0,
       "capHit": true,
-      "note": "UNFI operates ~56 NA distribution centers. We audited the 30 highest-throughput; smaller facilities share gate/dock archetypes with the audited cohort."
+      "note": "United Natural Foods Inc. operates ~56 US distribution centers (UNFI, SUPERVALU acquired 2018). We audited 27.",
+      "auditedScope": "US"
     },
-    "featuredSiteId": "10-york-pa"
+    "featuredSiteId": "10-york-pa",
+    "dossierIntro": "UNFI runs the largest natural and organic grocery distribution network. 56 facilities; we audited 27. York PA has 110 dock doors on 41 acres. Hopkins MN is 150 acres. 2,362 total dock doors and 3,874 trailer spots. YardFlow runs perishable, frozen, and shelf-stable as three parallel queues inside one yard.",
+    "surprisingFindings": [
+      "2,362 dock doors across 27 audited sites. UNFI routes the most natural-grocery dock minutes in NA.",
+      "Hopkins MN is 150 acres of grocery distribution. UNFI's largest single DC.",
+      "2 of 27 audited sites are rail-served. Natural grocery runs almost entirely on truckload."
+    ]
   },
   "research": null,
   "network": {

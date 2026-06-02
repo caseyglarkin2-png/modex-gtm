@@ -8,12 +8,20 @@
     "siteCount": 11,
     "coverageNote": {
       "auditedCount": 11,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 12,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 11 identifiable facilities."
+      "note": "Constellation Brands operates ~12 NA production facilities (US + Mexico) + a few in Italy / NZ. We audited 11 NA sites; the international count is small enough to call.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 12
     },
-    "featuredSiteId": "02-constellation-beer-dc-wilmer-tx-dallas-i-45"
+    "featuredSiteId": "02-constellation-beer-dc-wilmer-tx-dallas-i-45",
+    "dossierIntro": "Constellation Brands runs the Corona and Modelo import network. 12 distribution centers; we audited 11. Wilmer TX (Dallas I-45) has 64 dock doors. Jurupa Valley CA is 71 acres. 2 of 11 audited sites are rail-served. Mexican imports cross at Texas and California, then fan out to retail. YardFlow runs the cross-dock as a deterministic protocol regardless of which port the trailer crossed at.",
+    "surprisingFindings": [
+      "11 of 12 facilities are import-distribution. Mexican beer flows into Texas and California, then fans out.",
+      "Jurupa Valley CA is 71 acres of beverage cross-dock. Largest single-site beer DC on the West Coast.",
+      "Wilmer TX runs 64 docks. Dallas I-45 is the Mexican beer pipeline."
+    ]
   },
   "research": null,
   "network": {

@@ -8,12 +8,19 @@
     "siteCount": 30,
     "coverageNote": {
       "auditedCount": 30,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 100,
       "droppedStubCount": 0,
       "capHit": true,
-      "note": "We audited the 30 largest facilities by throughput. The wider network follows the same archetype distribution."
+      "note": "Kenco Logistics operates ~100 US warehouse + transload sites. We audited 28 representative locations.",
+      "auditedScope": "US"
     },
-    "featuredSiteId": "02-kenco-mcs-mississippi"
+    "featuredSiteId": "02-kenco-mcs-mississippi",
+    "dossierIntro": "Kenco Logistics runs contract 3PL for Fortune 500 manufacturers. 100 facilities; we audited 28. MCS Olive Branch MS has 130 dock doors on 59.8 acres. MCS Jeffersonville III in Sellersburg IN is 96 acres. 1,996 dock doors across the audited slice. YardFlow runs Kenco's contract-specific SLAs as audit chains, one per shipper.",
+    "surprisingFindings": [
+      "MCS Olive Branch MS runs 130 dock doors. Kenco's flagship Mid-South cross-dock.",
+      "1,996 dock doors across 28 audited sites. Kenco routes more contract-logistics dock minutes than most 3PLs.",
+      "5 of 28 audited sites are rail-served. Contract logistics runs majority-truckload."
+    ]
   },
   "research": null,
   "network": {

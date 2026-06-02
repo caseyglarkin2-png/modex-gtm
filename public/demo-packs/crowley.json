@@ -8,12 +8,20 @@
     "siteCount": 14,
     "coverageNote": {
       "auditedCount": 14,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 40,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 14 identifiable facilities."
+      "note": "Crowley Maritime operates ~270 terminals/ports globally across container, fuel, marine services; we audited 14 US trailer-relevant sites.",
+      "auditedScope": "US",
+      "totalGlobalFootprint": 270
     },
-    "featuredSiteId": "08-holt-terminals-gloucester-terminal"
+    "featuredSiteId": "08-holt-terminals-gloucester-terminal",
+    "dossierIntro": "Crowley runs marine terminals, port logistics, and container distribution across 270+ facilities. We audited 14. JAXPORT Marine Terminal covers 197 acres. Gloucester NJ runs 90 dock doors on 137 acres. 9 of 14 audited sites are rail-served (most of any 3PL we audited). 6,920 trailer spots. YardFlow runs container, dray, and truckload as three parallel protocols on the same yard graph.",
+    "surprisingFindings": [
+      "JAXPORT Marine Terminal is 197 acres of port operations. Crowley dominates Jacksonville's logistics footprint.",
+      "6,920 trailer spots across 14 audited sites. Crowley parks 13x more trailers per site than the average 3PL.",
+      "9 of 14 audited sites are rail-served. Port logistics runs on intermodal."
+    ]
   },
   "research": null,
   "network": {

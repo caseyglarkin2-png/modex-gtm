@@ -8,15 +8,23 @@
     "siteCount": 30,
     "coverageNote": {
       "auditedCount": 30,
-      "estimatedFootprint": 970,
+      "estimatedFootprint": 300,
       "droppedStubCount": 0,
       "capHit": true,
-      "note": "GXO operates ~970 sites globally (~400 in NA). We audited 30 representative NA facilities; the rest follow the same gate/dock archetypes."
+      "note": "GXO Logistics operates ~970 warehouses across 27 countries (US: ~300). We audited 30 representative US sites.",
+      "auditedScope": "US",
+      "totalGlobalFootprint": 970
     },
     "featuredSiteId": "12-palmyra-pa",
     "roiDefaults": {
       "averageMarginPerShipment": 480
-    }
+    },
+    "dossierIntro": "3PL warehousing is the canonical yard problem. GXO runs 970 facilities for hundreds of shippers. We audited 30. Palmyra PA runs 220 dock doors and 350 trailer spots on 117 acres. Conair Hagerstown runs 378 docks. When one yard serves five shippers' trailer pools, the operator becomes the system of record. YardFlow makes the yard the system.",
+    "surprisingFindings": [
+      "Conair Hagerstown runs 378 dock doors. A single building moves more freight than most carriers' annual flow.",
+      "3,107 dock doors across 30 sites. GXO routes more dock minutes than any non-parcel network in the dataset.",
+      "1 of 30 sites is rail-served. 3PL warehousing is overwhelmingly truckload to truckload."
+    ]
   },
   "research": null,
   "network": {

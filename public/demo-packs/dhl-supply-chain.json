@@ -8,12 +8,20 @@
     "siteCount": 24,
     "coverageNote": {
       "auditedCount": 24,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 100,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 24 identifiable facilities."
+      "note": "DHL Supply Chain operates ~1,500 sites in 50+ countries; we audited 24 US sites in the audit window. International scope on request.",
+      "auditedScope": "US",
+      "totalGlobalFootprint": 1500
     },
-    "featuredSiteId": "20-dc-north-las-vegas-nv"
+    "featuredSiteId": "20-dc-north-las-vegas-nv",
+    "dossierIntro": "DHL Supply Chain runs 1,500+ facilities across North America. We audited 24. North Las Vegas has 127 dock doors on 58 acres. The Mann+Hummel auto-parts DC in Cowpens SC covers 90 acres. 1,626 dock doors total. DHL routes Fortune 100 shippers through site-specific contract logistics. YardFlow gives every shipper their own audit trail inside the same yard protocol.",
+    "surprisingFindings": [
+      "1,626 dock doors across 24 audited sites. DHL routes more contract-logistics dock minutes than any audited 3PL.",
+      "0 of 24 audited sites are rail-served. DHL is truckload-only cross-dock.",
+      "North Las Vegas runs 127 docks. Vegas is becoming the new Memphis for parcel-adjacent distribution."
+    ]
   },
   "research": null,
   "network": {

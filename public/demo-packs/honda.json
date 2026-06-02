@@ -8,12 +8,20 @@
     "siteCount": 18,
     "coverageNote": {
       "auditedCount": 18,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 22,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 18 identifiable facilities."
+      "note": "Honda operates ~100 manufacturing plants in 30+ countries; ~22 are in North America (US + Canada + Mexico, incl. Alliston, Celaya, Marysville, East Liberty, Lincoln, Greensburg, parts/engine plants). We audited 18 NA sites. International scope on request.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 100
     },
-    "featuredSiteId": "05-honda-manufacturing-of-alabama"
+    "featuredSiteId": "05-honda-manufacturing-of-alabama",
+    "dossierIntro": "Honda runs the largest greenfield auto manufacturing footprint we audited. 100 facilities; we audited 18. HMA Lincoln AL covers 900 acres. HMIN Greensburg IN is 1,480 acres. 5,675 total acres of audited footprint. YardFlow runs supplier inbound and finished-vehicle outbound on the same protocol regardless of plant size.",
+    "surprisingFindings": [
+      "HMIN Greensburg IN is 1,480 acres. Honda built a city to make Civics here.",
+      "HMA Lincoln AL is 900 acres with 120 dock doors. Largest single Honda plant in the US by dock count.",
+      "4 of 18 audited sites are rail-served. Auto parts move on rail; finished vehicles drive away."
+    ]
   },
   "research": null,
   "network": {

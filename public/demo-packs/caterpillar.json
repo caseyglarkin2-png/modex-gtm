@@ -8,15 +8,23 @@
     "siteCount": 21,
     "coverageNote": {
       "auditedCount": 21,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 30,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 21 identifiable facilities."
+      "note": "Caterpillar operates ~110 manufacturing facilities across 23 countries; we audited 21 NA plants. International scope on request.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 110
     },
     "featuredSiteId": "11-waco-tx-distribution-center",
     "roiDefaults": {
       "averageMarginPerShipment": 1400
-    }
+    },
+    "dossierIntro": "Heavy equipment manufacturing is the remote-check-in archetype. Caterpillar runs 110 facilities. Waco TX has 70 doors and 90 trailer spots on 66 acres. Decatur IL is 360 acres of heavy-equipment final assembly. 10 of 21 audited sites are rail-served. YardFlow's classifier separates heavy-equipment moves from standard loads at the gate.",
+    "surprisingFindings": [
+      "Decatur IL is 360 acres of heavy-equipment final assembly. The pieces leaving don't fit a 53-foot van.",
+      "10 of 21 audited sites are rail-served. Heavy steel components arrive by rail; finished machines leave by flatbed.",
+      "Clayton OH DC runs 80 dock doors. Aftermarket parts move differently from whole goods."
+    ]
   },
   "research": null,
   "network": {

@@ -11,12 +11,21 @@
       "estimatedFootprint": 26,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "We audited 22 of an estimated 26 Mondelez NA manufacturing and DC facilities. The 4 not shown are co-manufacturer / contract sites that operate inside other companies’ footprints."
+      "note": "We audited 22 of an estimated 26 Mondelez NA manufacturing and DC facilities. Mondelez operates ~160 plants globally; international scope (130+ sites across 80 countries) is available on request. The 4 NA sites not shown are co-manufacturer / contract sites that operate inside other companies’ footprints.",
+      "auditedScope": "NA",
+      "totalGlobalFootprint": 160,
+      "legacyYmsFacilityCount": 60
     },
     "featuredSiteId": "07-mondelez-richmond-distribution-center",
     "roiDefaults": {
       "averageMarginPerShipment": 720
-    }
+    },
+    "dossierIntro": "CPG food networks live or die on the drop yard. Mondelez runs 160 plants and DCs feeding retail, grocery, and foodservice. We audited 22 NA sites. Richmond VA runs 90 dock doors on 45 acres with CSX rail spurring in. Fort Worth runs 115 docks. YardFlow makes the yard a deterministic queue for inbound rail and outbound truckload.",
+    "surprisingFindings": [
+      "Fort Worth DC runs 115 dock doors. That's 14 trucks staged per minute at peak.",
+      "6 of 22 audited sites are rail-served. Outbound truckload still dominates inbound rail.",
+      "Nabisco Chicago Bakery is 100 acres of vertical CPG manufacturing. Different yard problem than a DC."
+    ]
   },
   "research": null,
   "network": {

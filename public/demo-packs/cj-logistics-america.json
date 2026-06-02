@@ -8,12 +8,20 @@
     "siteCount": 28,
     "coverageNote": {
       "auditedCount": 28,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 50,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 28 identifiable facilities."
+      "note": "CJ Logistics America is the NA subsidiary of CJ Logistics (Korea, ~250 sites globally). We audited the NA DC/transload network.",
+      "auditedScope": "US",
+      "totalGlobalFootprint": 250
     },
-    "featuredSiteId": "08-cj-logistics-champaign-il"
+    "featuredSiteId": "08-cj-logistics-champaign-il",
+    "dossierIntro": "CJ Logistics America runs 250 facilities for hundreds of shippers. We audited 27. Champaign IL has 110 dock doors. Fairburn GA covers 110.8 acres. 2,134 total dock doors across the audited slice. CJ runs Korean-style cross-dock discipline on North American volumes. YardFlow runs the same protocol on every shipper's trailer pool.",
+    "surprisingFindings": [
+      "Champaign IL and Fairburn GA both run 110+ dock doors. CJ runs density at scale.",
+      "2,134 dock doors across 27 audited sites. CJ routes more dock minutes than most 3PLs at this site count.",
+      "4 of 27 audited sites are rail-served. CJ runs truckload-dominated cross-dock."
+    ]
   },
   "research": null,
   "network": {

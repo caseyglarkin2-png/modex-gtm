@@ -8,15 +8,22 @@
     "siteCount": 30,
     "coverageNote": {
       "auditedCount": 30,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 150,
       "droppedStubCount": 0,
       "capHit": true,
-      "note": "We audited the 30 largest facilities by throughput. The wider network follows the same archetype distribution."
+      "note": "Performance Food Group operates ~150 US distribution centers (Vistar, PFG Foodservice, Reinhart). We audited 30 representative sites.",
+      "auditedScope": "US"
     },
     "featuredSiteId": "18-lebanon-tn",
     "roiDefaults": {
       "averageMarginPerShipment": 580
-    }
+    },
+    "dossierIntro": "Foodservice distribution runs multi-temp networks where the trailer is the production unit. Performance Food Group runs 150 facilities. Nashville Lebanon TN covers 52 acres with 70 dock doors and 150 trailer spots. The yard isn't staging trailers, it's staging routes. YardFlow makes routes addressable: drivers find their assigned pre-loaded trailer without circling or radioing dispatch.",
+    "surprisingFindings": [
+      "1,324 dock doors across 30 sites. Foodservice runs on density.",
+      "Multi-temp trailers turn the yard into a routing problem. Frozen, refrigerated, ambient all park separately.",
+      "150 trailer spots at Lebanon means 50 routes can stage at once. Driver pickup is the cycle bottleneck."
+    ]
   },
   "research": null,
   "network": {
