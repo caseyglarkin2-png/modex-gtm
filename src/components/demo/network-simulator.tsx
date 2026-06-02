@@ -320,14 +320,14 @@ export function NetworkSimulator({ pack }: Props) {
             onClick={toggleYns}
             className={`px-3 py-1.5 transition ${!config.ynsMode ? 'bg-[#00B4FF]/[0.22] text-white' : 'text-white/85 hover:bg-[#00B4FF]/[0.08]'}`}
           >
-            Without YNS
+            Today
           </button>
           <button
             type="button"
             onClick={toggleYns}
             className={`px-3 py-1.5 transition ${config.ynsMode ? 'bg-[#00B4FF]/[0.22] text-white' : 'text-white/85 hover:bg-[#00B4FF]/[0.08]'}`}
           >
-            With YNS
+            With YardFlow
           </button>
         </div>
         {/* Floating utilization readout */}

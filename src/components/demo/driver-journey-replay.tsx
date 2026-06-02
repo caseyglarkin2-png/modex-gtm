@@ -204,8 +204,6 @@ export function DriverJourneyReplay({ site, scenario, onClose }: Props) {
   const step = scenario.steps[stepIdx];
   const narration = step ? NARRATIONS[step.narrationKey] : undefined;
   const narrationLine = narration ? (mode === 'baseline' ? narration.baseline : narration.yns) : '';
-  const totalMs = mode === 'baseline' ? scenario.totalBaselineMs : scenario.totalYnsMs;
-  const altMs = mode === 'baseline' ? scenario.totalYnsMs : scenario.totalBaselineMs;
   const savedMs = scenario.totalBaselineMs - scenario.totalYnsMs;
 
   // #1 fusion — does this site carry ground-level panos? Decided once so the
@@ -259,14 +257,14 @@ export function DriverJourneyReplay({ site, scenario, onClose }: Props) {
             onClick={() => setMode('baseline')}
             className={`px-3 py-1.5 transition ${mode === 'baseline' ? 'bg-[#00B4FF]/[0.22] text-white' : 'text-white/85 hover:bg-[#00B4FF]/[0.08]'}`}
           >
-            Without YNS
+            Today
           </button>
           <button
             type="button"
             onClick={() => setMode('yns')}
             className={`px-3 py-1.5 transition ${mode === 'yns' ? 'bg-[#00B4FF]/[0.22] text-white' : 'text-white/85 hover:bg-[#00B4FF]/[0.08]'}`}
           >
-            With YNS
+            With YardFlow
           </button>
         </div>
         {/* Step counter */}
@@ -297,24 +295,26 @@ export function DriverJourneyReplay({ site, scenario, onClose }: Props) {
         {step && (
           <div className="mb-4 border-l-2 pl-4" style={{ borderColor: mode === 'baseline' ? GEOFENCE_COLORS.truckGate : GEOFENCE_COLORS.dropYard }}>
             <div className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-white/55">
-              {mode === 'baseline' ? 'Without YNS' : 'With YNS'} · {step.step}
+              {mode === 'baseline' ? 'Today' : 'With YardFlow'} · {step.step}
             </div>
             <p className="mt-1 text-sm leading-relaxed text-white/90">{narrationLine}</p>
           </div>
         )}
 
         {/* Totals */}
+        {/* Fixed comparison frame — always Today / With YardFlow / You save,
+            independent of the toggle, so the reference point never shifts. */}
         <div className="mb-3 grid grid-cols-3 gap-3 rounded-lg bg-[#101218] px-4 py-3 text-center">
           <div>
-            <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/55">This run</div>
-            <div className="mt-1 text-base font-semibold tabular-nums text-white">{formatMs(totalMs)}</div>
+            <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/55">Today</div>
+            <div className="mt-1 text-base font-semibold tabular-nums text-white">{formatMs(scenario.totalBaselineMs)}</div>
           </div>
           <div>
-            <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/55">{mode === 'baseline' ? 'Under YNS' : 'Baseline'}</div>
-            <div className="mt-1 text-base font-semibold tabular-nums text-white">{formatMs(altMs)}</div>
+            <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/55">With YardFlow</div>
+            <div className="mt-1 text-base font-semibold tabular-nums text-white">{formatMs(scenario.totalYnsMs)}</div>
           </div>
           <div>
-            <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-emerald-400">YNS saves</div>
+            <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-emerald-400">You save</div>
             <div className="mt-1 text-base font-semibold tabular-nums text-emerald-400">{formatMs(savedMs)}</div>
           </div>
         </div>

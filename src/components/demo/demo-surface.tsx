@@ -232,7 +232,7 @@ export function DemoSurface({
                 <div
                   data-confidence-stamp
                   title="Confidence is the dominant per-site audit rating across the network. Fields resolved is the average count of the 22-field rubric we could read from imagery per site."
-                  className="mb-1.5 hidden items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-white/55 md:inline-flex"
+                  className="mb-1.5 inline-flex items-center gap-1.5 font-mono text-[10px] uppercase tracking-[0.16em] text-white/55"
                 >
                   <span
                     className={
@@ -250,16 +250,19 @@ export function DemoSurface({
                 </div>
               ) : null}
               <div className="font-mono text-[10px] uppercase tracking-[0.20em] text-[#00B4FF]/85">
-                {fromGallery ? `YardFlow · ${galleryIndustryLabel} template` : 'YardFlow · YNS network audit'}
+                {fromGallery ? `YardFlow · ${galleryIndustryLabel} template` : 'YardFlow · public yard audit'}
               </div>
               <h1 className="mt-1 text-xl font-semibold tracking-[-0.01em] text-white">
                 {fromGallery ? galleryHeadline : displayName}
               </h1>
-              <p className="mt-1 text-sm text-white/70">
-                <span className="tabular-nums">{scopeBlurb}</span> ·{' '}
-                <span className="tabular-nums">{dockDoors.toLocaleString()}</span> dock doors ·{' '}
-                <span className="tabular-nums">{trailerCapacity.toLocaleString()}</span> trailer spots ·{' '}
-                <span className="tabular-nums">{railServed}</span> rail-served
+              <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-sm text-white/70">
+                <span className="tabular-nums whitespace-nowrap">{scopeBlurb}</span>
+                <span className="text-white/30" aria-hidden>·</span>
+                <span className="whitespace-nowrap"><span className="tabular-nums">{dockDoors.toLocaleString()}</span> dock doors</span>
+                <span className="text-white/30" aria-hidden>·</span>
+                <span className="whitespace-nowrap"><span className="tabular-nums">{trailerCapacity.toLocaleString()}</span> trailer spots</span>
+                <span className="text-white/30" aria-hidden>·</span>
+                <span className="whitespace-nowrap"><span className="tabular-nums">{railServed}</span> rail-served</span>
               </p>
               {/* A.T5 — brand attribution strip. Sits below the scope/metrics
                   subhead, above any gallery-framing line. Clarifies that we
@@ -281,37 +284,38 @@ export function DemoSurface({
                 </p>
               )}
             </div>
-            {/* L.T3 + L.T5 — next-action cluster: primary Run ROI, secondary
-                Book audit, plus the outbound Share link. */}
+            {/* Next-action cluster — two canonical CTAs only: primary is the
+                low-friction reply ("Is this your yard?"), secondary is Run your
+                ROI. Memo + Share demote to quiet text links. (Redesign §0/CTA) */}
             <div className="flex shrink-0 flex-wrap items-center justify-end gap-2">
               {!fromGallery && (
                 <Link
                   href={`/for/${pack.account.slug}`}
                   data-ms-cta-id="demo-back-to-memo"
-                  className="hidden font-mono text-[10px] uppercase tracking-[0.18em] text-white/55 transition-colors hover:text-[#00B4FF] md:inline"
+                  className="hidden text-xs text-white/45 transition-colors hover:text-[#00B4FF] md:inline"
                 >
-                  ← Read the full memo
+                  Read the memo
                 </Link>
               )}
               <ShareMicrosite slug={pack.account.slug} brand={displayName} />
-              <a
-                href={bookAuditHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                data-ms-cta-id={fromGallery ? 'gallery-pack-book-audit' : 'demo-book-audit'}
-                className="hidden min-h-[36px] items-center gap-1.5 rounded-[10px] border border-white/15 bg-transparent px-3 py-1.5 text-xs font-semibold text-white/85 transition-all hover:border-[#00B4FF]/55 hover:text-white md:inline-flex"
-              >
-                Book a network audit →
-              </a>
               <RoiCtaButton
                 pack={pack}
                 ctaId="microsite-run-roi"
                 utmMedium={fromGallery ? 'gallery-header' : 'demo-header'}
                 source="microsite"
+                className="hidden min-h-[36px] items-center gap-1.5 rounded-[10px] border border-white/15 bg-transparent px-3 py-1.5 text-xs font-semibold text-white/85 transition-all hover:border-[#00B4FF]/55 hover:text-white md:inline-flex"
+              >
+                Run your ROI
+              </RoiCtaButton>
+              <a
+                href={bookAuditHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-ms-cta-id={fromGallery ? 'gallery-pack-book-audit' : 'demo-book-audit'}
                 className="hidden min-h-[36px] items-center gap-1.5 rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.12] px-3 py-1.5 text-xs font-bold text-white transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22] hover:shadow-[0_0_22px_rgba(0,180,255,0.32)] md:inline-flex"
               >
-                Run ROI →
-              </RoiCtaButton>
+                Is this your yard? →
+              </a>
             </div>
           </div>
           {/* View tab toggle */}
@@ -352,24 +356,24 @@ export function DemoSurface({
           className="fixed inset-x-0 bottom-0 z-40 flex items-center gap-2 border-t border-[#00B4FF]/20 bg-[#050505]/95 px-4 py-3 backdrop-blur-md md:hidden"
           style={{ paddingBottom: 'calc(env(safe-area-inset-bottom, 0px) + 12px)' }}
         >
-          <a
-            href={bookAuditHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            data-ms-cta-id="microsite-sticky-book-audit"
-            className="inline-flex min-h-[40px] flex-1 items-center justify-center rounded-[10px] border border-white/15 px-3 text-[13px] font-semibold text-white/85"
-          >
-            Book audit
-          </a>
           <RoiCtaButton
             pack={pack}
             ctaId="microsite-sticky-run-roi"
             utmMedium="demo-sticky"
             source="microsite"
+            className="inline-flex min-h-[40px] flex-1 items-center justify-center rounded-[10px] border border-white/15 px-3 text-[13px] font-semibold text-white/85"
+          >
+            Run your ROI
+          </RoiCtaButton>
+          <a
+            href={bookAuditHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            data-ms-cta-id="microsite-sticky-book-audit"
             className="inline-flex min-h-[40px] flex-1 items-center justify-center rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.14] px-3 text-[13px] font-bold text-white"
           >
-            Run ROI →
-          </RoiCtaButton>
+            Is this your yard? →
+          </a>
         </div>
       )}
 
