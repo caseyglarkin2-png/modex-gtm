@@ -435,7 +435,7 @@ export function NetworkSimulator({ pack }: Props) {
       {/* Disclaimer */}
       <div className="shrink-0 border-t border-[#00B4FF]/[0.16] bg-[#0a0c10] px-4 py-2.5 text-[11px] leading-relaxed text-white/55 sm:px-6">
         Per-site capacity is modeled from public yard geometry — dock doors × shifts × per-archetype turns/door, with
-        archetype-specific YNS uplift when toggled on. Weather events are geographic capacity reductions on affected
+        archetype-specific YardFlow uplift when toggled on. Weather events are geographic capacity reductions on affected
         regions. <strong className="font-semibold text-white/85">All dollar and operational metrics live at{' '}
         <a href="https://yardflow.ai/roi/" target="_blank" rel="noopener noreferrer" className="underline hover:text-white">
           yardflow.ai/roi

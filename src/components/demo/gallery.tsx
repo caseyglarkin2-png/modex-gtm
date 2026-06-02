@@ -890,7 +890,7 @@ function Footer() {
           <span className="text-[#FF2A00]/70">*</span> audited slice — full
           network footprint quoted where global counts are available.
           {' · '}
-          <span className="text-white/55">YardFlow YNS · industry templates</span>
+          <span className="text-white/55">YardFlow · industry templates</span>
         </p>
         {/* F.T6 — provenance attribution + modal trigger (same modal as
             the hero F.T1 trigger). */}
