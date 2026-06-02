@@ -91,7 +91,7 @@ export function SiteDetailPanel({ site, onClose, autoPlay = false }: Props) {
       <div className="flex shrink-0 items-start justify-between gap-4 border-b border-[#00B4FF]/[0.16] px-5 py-4">
         <div className="min-w-0">
           <div className="font-mono text-[10px] uppercase tracking-[0.18em] text-white/55">
-            Archetype {site.archetype} · {site.archetypeName}
+            {site.archetypeName}
           </div>
           <h2 className="mt-1 truncate text-base font-semibold text-white">{site.name}</h2>
           <div className="mt-0.5 truncate text-xs text-white/70">{site.type}</div>
@@ -176,53 +176,57 @@ export function SiteDetailPanel({ site, onClose, autoPlay = false }: Props) {
           </section>
         )}
 
-        {/* Yard metrics */}
-        <div className="mb-4">
-          <div className="mb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-white/55">Yard</div>
-          <dl className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-            {metric('Dock doors', ym.dockDoorCount?.toLocaleString())}
-            {metric('Trailers visible', ym.trailersVisible?.toLocaleString())}
-            {metric('Parking capacity', ym.trailerParkingCapacity?.toLocaleString())}
-            {metric('Truck gates', ym.truckGateCount?.toLocaleString())}
-            {metric('Buildings', ym.buildingCount?.toLocaleString())}
-            {metric('Site (acres)', ym.siteAreaAcres?.toLocaleString())}
-            {metric('Rail served', ym.railServed === null ? '—' : ym.railServed ? 'Yes' : 'No')}
-            {metric('Confidence', site.confidence)}
-          </dl>
-        </div>
+        {/* Full audit detail — the dense metric + classification grids and the
+            raw field notes, collapsed by default so the panel leads with the
+            plain-language read above. (Progressive disclosure, redesign §detail.) */}
+        <details className="group mb-4 rounded-md border border-[#00B4FF]/[0.12] bg-white/[0.02]">
+          <summary className="cursor-pointer list-none px-3 py-2.5 font-mono text-[10.5px] uppercase tracking-[0.18em] text-white/65 transition hover:text-white">
+            <span className="mr-2 inline-block transition-transform group-open:rotate-90">▸</span>
+            Show full audit detail
+          </summary>
+          <div className="border-t border-[#00B4FF]/[0.12] px-4 py-4">
+            {/* Yard metrics */}
+            <div className="mb-4">
+              <div className="mb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-white/55">Yard</div>
+              <dl className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                {metric('Dock doors', ym.dockDoorCount?.toLocaleString())}
+                {metric('Trailers visible', ym.trailersVisible?.toLocaleString())}
+                {metric('Parking capacity', ym.trailerParkingCapacity?.toLocaleString())}
+                {metric('Truck gates', ym.truckGateCount?.toLocaleString())}
+                {metric('Buildings', ym.buildingCount?.toLocaleString())}
+                {metric('Site (acres)', ym.siteAreaAcres?.toLocaleString())}
+                {metric('Rail served', ym.railServed === null ? '—' : ym.railServed ? 'Yes' : 'No')}
+                {metric('Confidence', site.confidence)}
+              </dl>
+            </div>
 
-        {/* Classification — only the bands and key booleans, not all 22 fields */}
-        <div className="mb-4">
-          <div className="mb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-white/55">Classification</div>
-          <dl className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-            {metric('Dock band', c.dockDoors)}
-            {metric('Drop band', c.dropArea)}
-            {metric('Truck gate', c.truckGate ? 'Yes' : 'No')}
-            {metric('Guard shack', c.guardShack ? 'Yes' : 'No')}
-            {metric('Remote check-in', c.remoteGs ? 'Yes' : 'No')}
-            {metric('Backup-sensitive', c.backupSensitive ? 'Yes' : 'No')}
-            {metric('Fast-lane opp', c.fastLaneOpportunity ? 'Yes' : 'No')}
-            {metric('Ship/rcv separate', c.shipRcvSeparate ? 'Yes' : 'No')}
-            {metric('Setting', c.urbanRural)}
-          </dl>
-        </div>
+            {/* Classification — bands and key booleans, not all 22 fields */}
+            <div className={site.dossierExcerpt ? 'mb-4' : ''}>
+              <div className="mb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-white/55">Classification</div>
+              <dl className="grid grid-cols-2 gap-3 sm:grid-cols-3">
+                {metric('Dock band', c.dockDoors)}
+                {metric('Drop band', c.dropArea)}
+                {metric('Truck gate', c.truckGate ? 'Yes' : 'No')}
+                {metric('Guard shack', c.guardShack ? 'Yes' : 'No')}
+                {metric('Remote check-in', c.remoteGs ? 'Yes' : 'No')}
+                {metric('Backup-sensitive', c.backupSensitive ? 'Yes' : 'No')}
+                {metric('Fast-lane opp', c.fastLaneOpportunity ? 'Yes' : 'No')}
+                {metric('Ship/rcv separate', c.shipRcvSeparate ? 'Yes' : 'No')}
+                {metric('Setting', c.urbanRural)}
+              </dl>
+            </div>
 
-        {/* B.T4 — Dossier excerpt collapsed behind details/summary. The
-            raw per-site auditor notes (lat/lng, field codes, internal
-            jargon) read as a debug dump when always-on. Hiding by
-            default preserves their provenance value while keeping the
-            site detail panel calm on first read. Toggle expands inline. */}
-        {site.dossierExcerpt && (
-          <details className="group mb-4 rounded-md border border-[#00B4FF]/[0.12] bg-white/[0.02]">
-            <summary className="cursor-pointer list-none px-3 py-2 font-mono text-[10.5px] uppercase tracking-[0.18em] text-white/65 transition hover:text-white">
-              <span className="mr-2 inline-block transition-transform group-open:rotate-90">▸</span>
-              Show audit field notes
-            </summary>
-            <p className="whitespace-pre-line border-t border-[#00B4FF]/[0.12] px-3 py-3 font-mono text-[11.5px] leading-relaxed text-white/65">
-              {site.dossierExcerpt}
-            </p>
-          </details>
-        )}
+            {/* Raw auditor notes (lat/lng, field codes) — provenance value. */}
+            {site.dossierExcerpt && (
+              <div className="rounded-md border border-white/10 bg-black/20 px-3 py-3">
+                <div className="mb-1 font-mono text-[10px] uppercase tracking-[0.18em] text-white/45">Audit field notes</div>
+                <p className="whitespace-pre-line font-mono text-[11.5px] leading-relaxed text-white/60">
+                  {site.dossierExcerpt}
+                </p>
+              </div>
+            )}
+          </div>
+        </details>
 
         {/* B.T9 — Low-confidence fields with sales@freightroll.com mailto.
             "Happy to be corrected" wrapped in a mailto link so prospects

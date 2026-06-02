@@ -247,8 +247,8 @@ export function NetworkSimulator({ pack }: Props) {
           <div className="min-w-0">
             <div className="text-[10px] font-mono uppercase tracking-[0.18em] text-white/55">Model the dollar value of this network</div>
             <div className="mt-0.5 text-sm">
-              <span className="font-semibold text-white">Approved ROI model</span>
-              <span className="text-white/55"> · 11.5× legacy YMS · $87.4M model across 50 sites</span>
+              <span className="font-semibold text-white">The ROI engine behind the calculator.</span>
+              <span className="text-white/55"> Example: 11.5× legacy YMS, $87.4M across a 50-site network.</span>
             </div>
           </div>
           <div className="flex shrink-0 flex-wrap gap-2 text-xs">
@@ -260,7 +260,7 @@ export function NetworkSimulator({ pack }: Props) {
               style={{ boxShadow: '0 0 0 1px rgba(0, 180, 255, 0.18) inset, 0 6px 18px rgba(0, 0, 0, 0.35)' }}
               data-ms-cta-id="demo-sim-book-audit"
             >
-              Book a 30-min audit →
+              Start a conversation →
             </a>
             <RoiCtaButton
               pack={pack}
@@ -268,7 +268,7 @@ export function NetworkSimulator({ pack }: Props) {
               utmMedium="demo-sim"
               className="inline-flex min-h-[36px] items-center gap-1.5 rounded-[10px] border border-[#00B4FF]/[0.20] bg-transparent px-3 py-1.5 text-xs font-medium text-white transition-all hover:border-[#00B4FF]/55 hover:bg-[#00B4FF]/[0.08]"
             >
-              ROI Calculator →
+              Run your ROI →
             </RoiCtaButton>
             <a
               href={`https://yardflow.ai/YNS/?utm_source=demo&utm_medium=demo-sim&utm_campaign=${pack.account.slug}`}

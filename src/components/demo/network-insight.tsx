@@ -98,10 +98,10 @@ export function NetworkInsight({ pack }: { pack: DemoPack }) {
     >
       <div className="mx-auto max-w-5xl">
         <div className="font-mono text-[10.5px] uppercase tracking-[0.22em] text-[#00B4FF]">
-          What the audit reveals · {pack.account.displayName}
+          The silo tax
         </div>
         <h2 className="mt-1.5 text-xl font-semibold tracking-[-0.01em] text-white max-[480px]:text-lg">
-          Your network&apos;s friction profile — and what removing it is worth
+          What the handoffs cost across your network — and what removing them is worth
         </h2>
 
         {/* Friction signals → YNS levers */}

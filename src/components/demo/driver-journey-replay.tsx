@@ -358,7 +358,7 @@ export function DriverJourneyReplay({ site, scenario, onClose }: Props) {
           className="mb-3 inline-flex min-h-[36px] w-full items-center justify-center gap-1.5 rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.12] px-4 py-2.5 text-sm font-bold text-white transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22] hover:shadow-[0_0_22px_rgba(0,180,255,0.32)]"
           style={{ boxShadow: '0 0 0 1px rgba(0, 180, 255, 0.18) inset, 0 6px 18px rgba(0, 0, 0, 0.35)' }}
         >
-          See your real numbers — book a 30-min audit →
+          See your real numbers — start a conversation →
         </a>
 
         {/* Caveat */}
