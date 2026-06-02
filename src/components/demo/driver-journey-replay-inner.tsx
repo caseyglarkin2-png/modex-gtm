@@ -6,7 +6,6 @@ import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { GeoShape, ScenarioStep, Site, SiteScenario } from '@/lib/demo/pack-schema';
 import { shapeBounds, shapeCentroid, shapePositions } from '@/lib/demo/geofence-geometry';
-import { NARRATIONS } from '@/lib/demo/scenarios';
 import { GEOFENCE_COLORS } from './archetype-palette';
 
 /**

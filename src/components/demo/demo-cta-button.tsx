@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import type { DemoPack } from '@/lib/demo/pack-schema';
 
 /**
  * D3.5 — Microsite CTA pointing to the standalone simulator.

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import type { SiteGeofences, ZoneStreetView as ZoneSV } from '@/lib/demo/pack-schema';
 import { GEOFENCE_COLORS } from './archetype-palette';
 
