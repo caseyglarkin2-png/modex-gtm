@@ -364,7 +364,7 @@ export function DemoSurface({
               Your network, mapped
             </div>
             <h2 className="mt-2 text-2xl font-semibold tracking-[-0.01em] text-white max-[480px]:text-xl">
-              We audited every {displayName} yard we could find &mdash; from satellite.
+              We audited every yard in {displayName}&rsquo;s network &mdash; from satellite.
             </h2>
             <p className="mt-1.5 text-sm text-white/60">
               Click any site for its gate, docks, and drop yards. No badge, no NDA &mdash; just what a driver sees.
