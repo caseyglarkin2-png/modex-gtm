@@ -1,0 +1,1471 @@
+{
+  "generatedAt": "2026-06-03",
+  "gridSizeDegrees": 0.5,
+  "totalFacilitiesLoaded": 834,
+  "totalRosters": 44,
+  "corridorCount": 52,
+  "corridors": [
+    {
+      "id": 4,
+      "name": "Inland Empire CA",
+      "facilityCount": 40,
+      "accounts": [
+        "AB InBev",
+        "CJ Logistics America",
+        "Coca-Cola",
+        "Constellation Brands",
+        "Costco Wholesale",
+        "Dannon",
+        "FedEx",
+        "Ford",
+        "Frito-Lay",
+        "GXO Logistics",
+        "General Mills",
+        "Honda",
+        "Hyundai Motor America",
+        "Kenco Logistics Services",
+        "Keurig Dr Pepper",
+        "Mondelez",
+        "Niagara Bottling",
+        "Performance Food Group",
+        "SC Johnson",
+        "SalSon Logistics",
+        "The Home Depot",
+        "Toyota",
+        "UNFI (United Natural Foods, Inc.)",
+        "Universal Logistics Holdings",
+        "Walmart"
+      ],
+      "accountCount": 25,
+      "verticals": [
+        "3pl",
+        "beverage",
+        "cpg",
+        "grocer-distributor",
+        "logistics-carrier",
+        "oem-automotive",
+        "retailer"
+      ],
+      "verticalCount": 7,
+      "nearestPrimoMiles": 4.1,
+      "nearestPrimoName": "Ontario CA",
+      "centerLat": 34,
+      "centerLng": -117.7,
+      "priority": 5,
+      "scanPriority": 1,
+      "cellCount": 5
+    },
+    {
+      "id": 22,
+      "name": "Dallas-Fort Worth TX",
+      "facilityCount": 37,
+      "accounts": [
+        "CJ Logistics America",
+        "Constellation Brands",
+        "Costco Wholesale",
+        "DHL Supply Chain",
+        "Daimler Truck North America",
+        "Dannon",
+        "FedEx",
+        "Frito-Lay",
+        "GXO Logistics",
+        "Honda",
+        "Hyundai Motor America",
+        "Kenco Logistics Services",
+        "Keurig Dr Pepper",
+        "Mondelez",
+        "Performance Food Group",
+        "SC Johnson",
+        "The Home Depot",
+        "Universal Logistics Holdings",
+        "Walmart"
+      ],
+      "accountCount": 19,
+      "verticals": [
+        "3pl",
+        "beverage",
+        "cpg",
+        "grocer-distributor",
+        "logistics-carrier",
+        "oem-automotive",
+        "retailer"
+      ],
+      "verticalCount": 7,
+      "nearestPrimoMiles": 2.8,
+      "nearestPrimoName": "Dallas TX",
+      "centerLat": 32.7,
+      "centerLng": -97,
+      "priority": 5,
+      "scanPriority": 2,
+      "cellCount": 2
+    },
+    {
+      "id": 21,
+      "name": "Atlanta GA",
+      "facilityCount": 33,
+      "accounts": [
+        "CJ Logistics America",
+        "Caterpillar",
+        "Coca-Cola",
+        "Costco Wholesale",
+        "Crowley",
+        "DHL Supply Chain",
+        "Daimler Truck North America",
+        "FedEx",
+        "GXO Logistics",
+        "General Mills",
+        "Hormel Foods",
+        "Hyundai Motor America",
+        "Kenco Logistics Services",
+        "Mondelez",
+        "Nestlé USA",
+        "Pactiv Evergreen",
+        "Performance Food Group",
+        "SC Johnson",
+        "SalSon Logistics",
+        "The Home Depot",
+        "Walmart"
+      ],
+      "accountCount": 21,
+      "verticals": [
+        "3pl",
+        "beverage",
+        "cpg",
+        "grocer-distributor",
+        "logistics-carrier",
+        "manufacturer",
+        "oem-automotive",
+        "retailer"
+      ],
+      "verticalCount": 8,
+      "nearestPrimoMiles": 234.2,
+      "nearestPrimoName": "McBee SC",
+      "centerLat": 33.7,
+      "centerLng": -84.2,
+      "priority": 4,
+      "scanPriority": 3,
+      "cellCount": 5
+    },
+    {
+      "id": 2,
+      "name": "Houston TX",
+      "facilityCount": 16,
+      "accounts": [
+        "AB InBev",
+        "Frito-Lay",
+        "GXO Logistics",
+        "H-E-B",
+        "Keurig Dr Pepper",
+        "Mondelez",
+        "Performance Food Group",
+        "SalSon Logistics",
+        "The Home Depot",
+        "Universal Logistics Holdings"
+      ],
+      "accountCount": 10,
+      "verticals": [
+        "3pl",
+        "beverage",
+        "cpg",
+        "grocer-distributor",
+        "retailer"
+      ],
+      "verticalCount": 5,
+      "nearestPrimoMiles": 11.5,
+      "nearestPrimoName": "Houston TX",
+      "centerLat": 29.8,
+      "centerLng": -95.5,
+      "priority": 4,
+      "scanPriority": 4,
+      "cellCount": 2
+    },
+    {
+      "id": 9,
+      "name": "Allentown PA",
+      "facilityCount": 11,
+      "accounts": [
+        "CJ Logistics America",
+        "GXO Logistics",
+        "General Mills",
+        "Kenco Logistics Services",
+        "Keurig Dr Pepper",
+        "Mondelez",
+        "Niagara Bottling",
+        "The Boston Beer Company",
+        "The Home Depot",
+        "UNFI (United Natural Foods, Inc.)"
+      ],
+      "accountCount": 10,
+      "verticals": [
+        "3pl",
+        "beverage",
+        "cpg",
+        "grocer-distributor",
+        "retailer"
+      ],
+      "verticalCount": 5,
+      "nearestPrimoMiles": 6.9,
+      "nearestPrimoName": "Breinigsville PA",
+      "centerLat": 40.6,
+      "centerLng": -75.6,
+      "priority": 4,
+      "scanPriority": 5,
+      "cellCount": 2
+    },
+    {
+      "id": 18,
+      "name": "Chicago IL",
+      "facilityCount": 33,
+      "accounts": [
+        "CJ Logistics America",
+        "Caterpillar",
+        "Costco Wholesale",
+        "DHL Supply Chain",
+        "Diageo",
+        "FedEx",
+        "Ford",
+        "Hormel Foods",
+        "Hyundai Motor America",
+        "Keurig Dr Pepper",
+        "Mondelez",
+        "Pactiv Evergreen",
+        "Performance Food Group",
+        "SC Johnson",
+        "The Home Depot",
+        "UNFI (United Natural Foods, Inc.)",
+        "Walmart"
+      ],
+      "accountCount": 17,
+      "verticals": [
+        "3pl",
+        "beverage",
+        "cpg",
+        "grocer-distributor",
+        "logistics-carrier",
+        "manufacturer",
+        "oem-automotive",
+        "retailer"
+      ],
+      "verticalCount": 8,
+      "nearestPrimoMiles": 116.2,
+      "nearestPrimoName": "Madison WI",
+      "centerLat": 41.7,
+      "centerLng": -88,
+      "priority": 4,
+      "scanPriority": 6,
+      "cellCount": 3
+    },
+    {
+      "id": 8,
+      "name": "Columbus OH",
+      "facilityCount": 29,
+      "accounts": [
+        "Bob Evans Farms",
+        "Coca-Cola",
+        "DHL Supply Chain",
+        "Dannon",
+        "FedEx",
+        "Ford",
+        "GXO Logistics",
+        "General Mills",
+        "Honda",
+        "Kenco Logistics Services",
+        "Niagara Bottling",
+        "Pactiv Evergreen",
+        "Performance Food Group",
+        "The Boston Beer Company",
+        "The Home Depot",
+        "Toyota"
+      ],
+      "accountCount": 16,
+      "verticals": [
+        "3pl",
+        "beverage",
+        "cpg",
+        "grocer-distributor",
+        "logistics-carrier",
+        "manufacturer",
+        "oem-automotive",
+        "retailer"
+      ],
+      "verticalCount": 8,
+      "nearestPrimoMiles": 125.2,
+      "nearestPrimoName": "Greenwood IN",
+      "centerLat": 39.8,
+      "centerLng": -83.8,
+      "priority": 4,
+      "scanPriority": 7,
+      "cellCount": 7
+    },
+    {
+      "id": 27,
+      "name": "Indianapolis IN",
+      "facilityCount": 13,
+      "accounts": [
+        "Coca-Cola",
+        "DHL Supply Chain",
+        "Daimler Truck North America",
+        "FedEx",
+        "GXO Logistics",
+        "Keurig Dr Pepper",
+        "Mondelez",
+        "Niagara Bottling",
+        "UNFI (United Natural Foods, Inc.)"
+      ],
+      "accountCount": 9,
+      "verticals": [
+        "3pl",
+        "beverage",
+        "cpg",
+        "grocer-distributor",
+        "logistics-carrier",
+        "oem-automotive"
+      ],
+      "verticalCount": 6,
+      "nearestPrimoMiles": 18.8,
+      "nearestPrimoName": "Greenwood IN",
+      "centerLat": 39.8,
+      "centerLng": -86.3,
+      "priority": 4,
+      "scanPriority": 8,
+      "cellCount": 1
+    },
+    {
+      "id": 12,
+      "name": "Charlotte NC",
+      "facilityCount": 23,
+      "accounts": [
+        "CJ Logistics America",
+        "Campbell's",
+        "Caterpillar",
+        "Coca-Cola",
+        "DHL Supply Chain",
+        "Daimler Truck North America",
+        "FedEx",
+        "Frito-Lay",
+        "GXO Logistics",
+        "John Deere",
+        "Keurig Dr Pepper",
+        "Nestlé USA",
+        "Niagara Bottling",
+        "Pactiv Evergreen",
+        "SC Johnson",
+        "Westrock Coffee"
+      ],
+      "accountCount": 16,
+      "verticals": [
+        "3pl",
+        "beverage",
+        "cpg",
+        "logistics-carrier",
+        "manufacturer",
+        "oem-automotive"
+      ],
+      "verticalCount": 6,
+      "nearestPrimoMiles": 78.7,
+      "nearestPrimoName": "McBee SC",
+      "centerLat": 35.4,
+      "centerLng": -81,
+      "priority": 4,
+      "scanPriority": 9,
+      "cellCount": 5
+    },
+    {
+      "id": 6,
+      "name": "Newark NJ",
+      "facilityCount": 17,
+      "accounts": [
+        "AB InBev",
+        "Barnes & Noble",
+        "CJ Logistics America",
+        "Costco Wholesale",
+        "FedEx",
+        "Hyundai Motor America",
+        "Mondelez",
+        "Performance Food Group",
+        "SalSon Logistics",
+        "The Home Depot",
+        "Toyota",
+        "UNFI (United Natural Foods, Inc.)"
+      ],
+      "accountCount": 12,
+      "verticals": [
+        "3pl",
+        "beverage",
+        "cpg",
+        "grocer-distributor",
+        "logistics-carrier",
+        "oem-automotive",
+        "retailer"
+      ],
+      "verticalCount": 7,
+      "nearestPrimoMiles": 70.9,
+      "nearestPrimoName": "Breinigsville PA",
+      "centerLat": 40.6,
+      "centerLng": -74.3,
+      "priority": 3,
+      "scanPriority": 10,
+      "cellCount": 2
+    },
+    {
+      "id": 33,
+      "name": "Denver CO",
+      "facilityCount": 6,
+      "accounts": [
+        "Coca-Cola",
+        "Frito-Lay",
+        "Mondelez",
+        "Niagara Bottling",
+        "Performance Food Group",
+        "UNFI (United Natural Foods, Inc.)"
+      ],
+      "accountCount": 6,
+      "verticals": [
+        "beverage",
+        "cpg",
+        "grocer-distributor"
+      ],
+      "verticalCount": 3,
+      "nearestPrimoMiles": 9.4,
+      "nearestPrimoName": "Denver CO",
+      "centerLat": 39.8,
+      "centerLng": -104.8,
+      "priority": 3,
+      "scanPriority": 11,
+      "cellCount": 1
+    },
+    {
+      "id": 10,
+      "name": "Harrisburg PA",
+      "facilityCount": 18,
+      "accounts": [
+        "CJ Logistics America",
+        "Campbell's",
+        "Caterpillar",
+        "DHL Supply Chain",
+        "FedEx",
+        "GXO Logistics",
+        "SC Johnson",
+        "UNFI (United Natural Foods, Inc.)"
+      ],
+      "accountCount": 8,
+      "verticals": [
+        "3pl",
+        "cpg",
+        "grocer-distributor",
+        "logistics-carrier",
+        "manufacturer"
+      ],
+      "verticalCount": 5,
+      "nearestPrimoMiles": 81.2,
+      "nearestPrimoName": "Breinigsville PA",
+      "centerLat": 40.1,
+      "centerLng": -77,
+      "priority": 3,
+      "scanPriority": 12,
+      "cellCount": 4
+    },
+    {
+      "id": 3,
+      "name": "Jacksonville FL",
+      "facilityCount": 15,
+      "accounts": [
+        "AB InBev",
+        "Constellation Brands",
+        "Crowley",
+        "DHL Supply Chain",
+        "Dannon",
+        "Hyundai Motor America",
+        "Keurig Dr Pepper",
+        "Niagara Bottling",
+        "Universal Logistics Holdings"
+      ],
+      "accountCount": 9,
+      "verticals": [
+        "3pl",
+        "beverage",
+        "cpg",
+        "logistics-carrier",
+        "oem-automotive"
+      ],
+      "verticalCount": 5,
+      "nearestPrimoMiles": 66.5,
+      "nearestPrimoName": "High Springs FL",
+      "centerLat": 30.3,
+      "centerLng": -81.7,
+      "priority": 3,
+      "scanPriority": 13,
+      "cellCount": 1
+    },
+    {
+      "id": 15,
+      "name": "Sacramento CA",
+      "facilityCount": 10,
+      "accounts": [
+        "Campbell's",
+        "Cost Plus World Market",
+        "FedEx",
+        "GXO Logistics",
+        "Hormel Foods",
+        "Niagara Bottling",
+        "Pactiv Evergreen",
+        "Performance Food Group",
+        "The Home Depot"
+      ],
+      "accountCount": 9,
+      "verticals": [
+        "3pl",
+        "beverage",
+        "cpg",
+        "grocer-distributor",
+        "logistics-carrier",
+        "manufacturer",
+        "retailer"
+      ],
+      "verticalCount": 7,
+      "nearestPrimoMiles": 45.3,
+      "nearestPrimoName": "Sacramento CA",
+      "centerLat": 37.9,
+      "centerLng": -121.3,
+      "priority": 3,
+      "scanPriority": 14,
+      "cellCount": 1
+    },
+    {
+      "id": 25,
+      "name": "Richmond VA",
+      "facilityCount": 10,
+      "accounts": [
+        "CJ Logistics America",
+        "Coca-Cola",
+        "Cost Plus World Market",
+        "Hormel Foods",
+        "Mondelez",
+        "Niagara Bottling",
+        "Performance Food Group",
+        "UNFI (United Natural Foods, Inc.)"
+      ],
+      "accountCount": 8,
+      "verticals": [
+        "3pl",
+        "beverage",
+        "cpg",
+        "grocer-distributor",
+        "retailer"
+      ],
+      "verticalCount": 5,
+      "nearestPrimoMiles": 239.3,
+      "nearestPrimoName": "Breinigsville PA",
+      "centerLat": 37.3,
+      "centerLng": -77.2,
+      "priority": 3,
+      "scanPriority": 15,
+      "cellCount": 3
+    },
+    {
+      "id": 29,
+      "name": "Louisville KY",
+      "facilityCount": 10,
+      "accounts": [
+        "Coca-Cola",
+        "Diageo",
+        "Ford",
+        "General Mills",
+        "Kenco Logistics Services",
+        "Niagara Bottling",
+        "Performance Food Group"
+      ],
+      "accountCount": 7,
+      "verticals": [
+        "3pl",
+        "beverage",
+        "cpg",
+        "grocer-distributor",
+        "oem-automotive"
+      ],
+      "verticalCount": 5,
+      "nearestPrimoMiles": 93,
+      "nearestPrimoName": "Greenwood IN",
+      "centerLat": 38.3,
+      "centerLng": -85.7,
+      "priority": 3,
+      "scanPriority": 16,
+      "cellCount": 1
+    },
+    {
+      "id": 38,
+      "name": "Memphis TN",
+      "facilityCount": 10,
+      "accounts": [
+        "DHL Supply Chain",
+        "Daimler Truck North America",
+        "FedEx",
+        "Frito-Lay",
+        "Kenco Logistics Services",
+        "Mondelez",
+        "Niagara Bottling"
+      ],
+      "accountCount": 7,
+      "verticals": [
+        "3pl",
+        "beverage",
+        "cpg",
+        "logistics-carrier",
+        "oem-automotive"
+      ],
+      "verticalCount": 5,
+      "nearestPrimoMiles": 184.4,
+      "nearestPrimoName": "Hot Springs AR",
+      "centerLat": 35,
+      "centerLng": -89.9,
+      "priority": 3,
+      "scanPriority": 17,
+      "cellCount": 2
+    },
+    {
+      "id": 32,
+      "name": "Salt Lake City UT",
+      "facilityCount": 6,
+      "accounts": [
+        "Coca-Cola",
+        "Costco Wholesale",
+        "DHL Supply Chain",
+        "Daimler Truck North America",
+        "Dannon",
+        "Walmart"
+      ],
+      "accountCount": 6,
+      "verticals": [
+        "3pl",
+        "beverage",
+        "cpg",
+        "oem-automotive",
+        "retailer"
+      ],
+      "verticalCount": 5,
+      "nearestPrimoMiles": 382.7,
+      "nearestPrimoName": "Denver CO",
+      "centerLat": 40.7,
+      "centerLng": -112.1,
+      "priority": 2,
+      "scanPriority": 18,
+      "cellCount": 1
+    },
+    {
+      "id": 34,
+      "name": "Detroit MI",
+      "facilityCount": 16,
+      "accounts": [
+        "Costco Wholesale",
+        "Daimler Truck North America",
+        "Ford",
+        "Performance Food Group",
+        "Universal Logistics Holdings"
+      ],
+      "accountCount": 5,
+      "verticals": [
+        "3pl",
+        "grocer-distributor",
+        "oem-automotive",
+        "retailer"
+      ],
+      "verticalCount": 4,
+      "nearestPrimoMiles": 132.7,
+      "nearestPrimoName": "Stanwood MI",
+      "centerLat": 42.3,
+      "centerLng": -83.2,
+      "priority": 2,
+      "scanPriority": 19,
+      "cellCount": 1
+    },
+    {
+      "id": 16,
+      "name": "Phoenix AZ",
+      "facilityCount": 5,
+      "accounts": [
+        "Campbell's",
+        "FedEx",
+        "GXO Logistics",
+        "Performance Food Group",
+        "The Home Depot"
+      ],
+      "accountCount": 5,
+      "verticals": [
+        "3pl",
+        "cpg",
+        "grocer-distributor",
+        "logistics-carrier",
+        "retailer"
+      ],
+      "verticalCount": 5,
+      "nearestPrimoMiles": 258.8,
+      "nearestPrimoName": "Cabazon CA",
+      "centerLat": 33.4,
+      "centerLng": -112.3,
+      "priority": 2,
+      "scanPriority": 20,
+      "cellCount": 1
+    },
+    {
+      "id": 37,
+      "name": "Portland OR",
+      "facilityCount": 7,
+      "accounts": [
+        "Daimler Truck North America",
+        "Dannon",
+        "Frito-Lay",
+        "GXO Logistics",
+        "Mondelez",
+        "Toyota",
+        "UNFI (United Natural Foods, Inc.)"
+      ],
+      "accountCount": 7,
+      "verticals": [
+        "3pl",
+        "cpg",
+        "grocer-distributor",
+        "oem-automotive"
+      ],
+      "verticalCount": 4,
+      "nearestPrimoMiles": 495.9,
+      "nearestPrimoName": "Sacramento CA",
+      "centerLat": 45.6,
+      "centerLng": -122.7,
+      "priority": 2,
+      "scanPriority": 21,
+      "cellCount": 1
+    },
+    {
+      "id": 14,
+      "name": "Milwaukee WI",
+      "facilityCount": 7,
+      "accounts": [
+        "Campbell's",
+        "Caterpillar",
+        "General Mills",
+        "SC Johnson",
+        "UNFI (United Natural Foods, Inc.)",
+        "Universal Logistics Holdings"
+      ],
+      "accountCount": 6,
+      "verticals": [
+        "3pl",
+        "cpg",
+        "grocer-distributor",
+        "manufacturer"
+      ],
+      "verticalCount": 4,
+      "nearestPrimoMiles": 74.9,
+      "nearestPrimoName": "Madison WI",
+      "centerLat": 42.8,
+      "centerLng": -87.9,
+      "priority": 2,
+      "scanPriority": 22,
+      "cellCount": 1
+    },
+    {
+      "id": 35,
+      "name": "Seattle WA",
+      "facilityCount": 6,
+      "accounts": [
+        "Costco Wholesale",
+        "Hyundai Motor America",
+        "Keurig Dr Pepper",
+        "Niagara Bottling",
+        "UNFI (United Natural Foods, Inc.)"
+      ],
+      "accountCount": 5,
+      "verticals": [
+        "beverage",
+        "grocer-distributor",
+        "oem-automotive",
+        "retailer"
+      ],
+      "verticalCount": 4,
+      "nearestPrimoMiles": 603.2,
+      "nearestPrimoName": "Sacramento CA",
+      "centerLat": 47.2,
+      "centerLng": -122.3,
+      "priority": 2,
+      "scanPriority": 23,
+      "cellCount": 1
+    },
+    {
+      "id": 45,
+      "name": "Charlotte NC",
+      "facilityCount": 4,
+      "accounts": [
+        "Honda",
+        "Niagara Bottling",
+        "Performance Food Group"
+      ],
+      "accountCount": 3,
+      "verticals": [
+        "beverage",
+        "grocer-distributor",
+        "oem-automotive"
+      ],
+      "verticalCount": 3,
+      "nearestPrimoMiles": 33.5,
+      "nearestPrimoName": "McBee SC",
+      "centerLat": 34.2,
+      "centerLng": -79.7,
+      "priority": 2,
+      "scanPriority": 24,
+      "cellCount": 1
+    },
+    {
+      "id": 20,
+      "name": "San Antonio TX",
+      "facilityCount": 8,
+      "accounts": [
+        "Caterpillar",
+        "Frito-Lay",
+        "H-E-B",
+        "Niagara Bottling"
+      ],
+      "accountCount": 4,
+      "verticals": [
+        "beverage",
+        "cpg",
+        "grocer-distributor",
+        "manufacturer"
+      ],
+      "verticalCount": 4,
+      "nearestPrimoMiles": 173,
+      "nearestPrimoName": "Houston TX",
+      "centerLat": 29.5,
+      "centerLng": -98.3,
+      "priority": 2,
+      "scanPriority": 25,
+      "cellCount": 2
+    },
+    {
+      "id": 43,
+      "name": "Savannah GA",
+      "facilityCount": 6,
+      "accounts": [
+        "Georgia Pacific",
+        "Hyundai Motor America",
+        "SalSon Logistics",
+        "The Home Depot"
+      ],
+      "accountCount": 4,
+      "verticals": [
+        "3pl",
+        "manufacturer",
+        "oem-automotive",
+        "retailer"
+      ],
+      "verticalCount": 4,
+      "nearestPrimoMiles": 169.9,
+      "nearestPrimoName": "McBee SC",
+      "centerLat": 32.1,
+      "centerLng": -81.2,
+      "priority": 2,
+      "scanPriority": 26,
+      "cellCount": 1
+    },
+    {
+      "id": 5,
+      "name": "San Francisco Bay CA",
+      "facilityCount": 7,
+      "accounts": [
+        "AB InBev",
+        "Coca-Cola",
+        "Constellation Brands",
+        "FedEx",
+        "Hormel Foods"
+      ],
+      "accountCount": 5,
+      "verticals": [
+        "beverage",
+        "cpg",
+        "logistics-carrier"
+      ],
+      "verticalCount": 3,
+      "nearestPrimoMiles": 55.5,
+      "nearestPrimoName": "Sacramento CA",
+      "centerLat": 38.1,
+      "centerLng": -122.2,
+      "priority": 1,
+      "scanPriority": 27,
+      "cellCount": 2
+    },
+    {
+      "id": 19,
+      "name": "Dallas-Fort Worth TX",
+      "facilityCount": 6,
+      "accounts": [
+        "Caterpillar",
+        "H-E-B",
+        "Niagara Bottling",
+        "Pactiv Evergreen",
+        "Performance Food Group"
+      ],
+      "accountCount": 5,
+      "verticals": [
+        "beverage",
+        "grocer-distributor",
+        "manufacturer"
+      ],
+      "verticalCount": 3,
+      "nearestPrimoMiles": 105.6,
+      "nearestPrimoName": "Dallas TX",
+      "centerLat": 31.2,
+      "centerLng": -97.3,
+      "priority": 1,
+      "scanPriority": 28,
+      "cellCount": 1
+    },
+    {
+      "id": 13,
+      "name": "Milwaukee WI",
+      "facilityCount": 4,
+      "accounts": [
+        "Campbell's",
+        "Frito-Lay",
+        "Georgia Pacific",
+        "Hormel Foods"
+      ],
+      "accountCount": 4,
+      "verticals": [
+        "cpg",
+        "manufacturer"
+      ],
+      "verticalCount": 2,
+      "nearestPrimoMiles": 39.2,
+      "nearestPrimoName": "Madison WI",
+      "centerLat": 42.6,
+      "centerLng": -89,
+      "priority": 1,
+      "scanPriority": 29,
+      "cellCount": 1
+    },
+    {
+      "id": 7,
+      "name": "Memphis TN",
+      "facilityCount": 4,
+      "accounts": [
+        "AB InBev",
+        "Frito-Lay",
+        "Georgia Pacific",
+        "Nestlé USA"
+      ],
+      "accountCount": 4,
+      "verticals": [
+        "beverage",
+        "cpg",
+        "manufacturer"
+      ],
+      "verticalCount": 3,
+      "nearestPrimoMiles": 162.7,
+      "nearestPrimoName": "Hot Springs AR",
+      "centerLat": 35.8,
+      "centerLng": -90.6,
+      "priority": 1,
+      "scanPriority": 30,
+      "cellCount": 1
+    },
+    {
+      "id": 47,
+      "name": "San Francisco Bay CA",
+      "facilityCount": 4,
+      "accounts": [
+        "JM Smucker",
+        "Keurig Dr Pepper",
+        "Performance Food Group",
+        "UNFI (United Natural Foods, Inc.)"
+      ],
+      "accountCount": 4,
+      "verticals": [
+        "beverage",
+        "cpg",
+        "grocer-distributor"
+      ],
+      "verticalCount": 3,
+      "nearestPrimoMiles": 115.9,
+      "nearestPrimoName": "Sacramento CA",
+      "centerLat": 36.8,
+      "centerLng": -121.6,
+      "priority": 1,
+      "scanPriority": 31,
+      "cellCount": 1
+    },
+    {
+      "id": 46,
+      "name": "Memphis TN",
+      "facilityCount": 7,
+      "accounts": [
+        "Hormel Foods",
+        "Kimberly-Clark",
+        "Performance Food Group",
+        "Westrock Coffee"
+      ],
+      "accountCount": 4,
+      "verticals": [
+        "cpg",
+        "grocer-distributor"
+      ],
+      "verticalCount": 2,
+      "nearestPrimoMiles": 44.2,
+      "nearestPrimoName": "Hot Springs AR",
+      "centerLat": 34.9,
+      "centerLng": -92.4,
+      "priority": 1,
+      "scanPriority": 32,
+      "cellCount": 2
+    },
+    {
+      "id": 11,
+      "name": "Newark NJ",
+      "facilityCount": 3,
+      "accounts": [
+        "Campbell's",
+        "Hyundai Motor America",
+        "Niagara Bottling"
+      ],
+      "accountCount": 3,
+      "verticals": [
+        "beverage",
+        "cpg",
+        "oem-automotive"
+      ],
+      "verticalCount": 3,
+      "nearestPrimoMiles": 100.7,
+      "nearestPrimoName": "Saratoga Springs NY",
+      "centerLat": 41.9,
+      "centerLng": -72.7,
+      "priority": 1,
+      "scanPriority": 33,
+      "cellCount": 1
+    },
+    {
+      "id": 24,
+      "name": "Nashville TN",
+      "facilityCount": 3,
+      "accounts": [
+        "CJ Logistics America",
+        "Coca-Cola",
+        "FedEx"
+      ],
+      "accountCount": 3,
+      "verticals": [
+        "3pl",
+        "beverage",
+        "logistics-carrier"
+      ],
+      "verticalCount": 3,
+      "nearestPrimoMiles": 236.5,
+      "nearestPrimoName": "Greenwood IN",
+      "centerLat": 36.2,
+      "centerLng": -86.7,
+      "priority": 1,
+      "scanPriority": 34,
+      "cellCount": 1
+    },
+    {
+      "id": 28,
+      "name": "Pittsburgh PA",
+      "facilityCount": 3,
+      "accounts": [
+        "Coca-Cola",
+        "FedEx",
+        "Nestlé USA"
+      ],
+      "accountCount": 3,
+      "verticals": [
+        "beverage",
+        "cpg",
+        "logistics-carrier"
+      ],
+      "verticalCount": 3,
+      "nearestPrimoMiles": 243.5,
+      "nearestPrimoName": "Stanwood MI",
+      "centerLat": 41.4,
+      "centerLng": -81.5,
+      "priority": 1,
+      "scanPriority": 35,
+      "cellCount": 1
+    },
+    {
+      "id": 51,
+      "name": "Greenville SC",
+      "facilityCount": 3,
+      "accounts": [
+        "Keurig Dr Pepper",
+        "Kimberly-Clark",
+        "Universal Logistics Holdings"
+      ],
+      "accountCount": 3,
+      "verticals": [
+        "3pl",
+        "beverage",
+        "cpg"
+      ],
+      "verticalCount": 3,
+      "nearestPrimoMiles": 237.3,
+      "nearestPrimoName": "McBee SC",
+      "centerLat": 35.8,
+      "centerLng": -84.1,
+      "priority": 1,
+      "scanPriority": 36,
+      "cellCount": 1
+    },
+    {
+      "id": 30,
+      "name": "Birmingham AL",
+      "facilityCount": 4,
+      "accounts": [
+        "Coca-Cola",
+        "Diageo",
+        "Hyundai Motor America"
+      ],
+      "accountCount": 3,
+      "verticals": [
+        "beverage",
+        "oem-automotive"
+      ],
+      "verticalCount": 2,
+      "nearestPrimoMiles": 279,
+      "nearestPrimoName": "High Springs FL",
+      "centerLat": 32.3,
+      "centerLng": -86.3,
+      "priority": 1,
+      "scanPriority": 37,
+      "cellCount": 1
+    },
+    {
+      "id": 1,
+      "name": "St. Louis MO",
+      "facilityCount": 3,
+      "accounts": [
+        "AB InBev",
+        "FedEx",
+        "Keurig Dr Pepper"
+      ],
+      "accountCount": 3,
+      "verticals": [
+        "beverage",
+        "logistics-carrier"
+      ],
+      "verticalCount": 2,
+      "nearestPrimoMiles": 232.6,
+      "nearestPrimoName": "Greenwood IN",
+      "centerLat": 38.7,
+      "centerLng": -90.3,
+      "priority": 1,
+      "scanPriority": 38,
+      "cellCount": 1
+    },
+    {
+      "id": 23,
+      "name": "Kansas City MO",
+      "facilityCount": 3,
+      "accounts": [
+        "CJ Logistics America",
+        "DHL Supply Chain",
+        "Niagara Bottling"
+      ],
+      "accountCount": 3,
+      "verticals": [
+        "3pl",
+        "beverage"
+      ],
+      "verticalCount": 2,
+      "nearestPrimoMiles": 305.2,
+      "nearestPrimoName": "Hot Springs AR",
+      "centerLat": 38.8,
+      "centerLng": -94.8,
+      "priority": 1,
+      "scanPriority": 39,
+      "cellCount": 1
+    },
+    {
+      "id": 26,
+      "name": "Mobile AL",
+      "facilityCount": 3,
+      "accounts": [
+        "Coca-Cola",
+        "Frito-Lay",
+        "Kimberly-Clark"
+      ],
+      "accountCount": 3,
+      "verticals": [
+        "beverage",
+        "cpg"
+      ],
+      "verticalCount": 2,
+      "nearestPrimoMiles": 332.4,
+      "nearestPrimoName": "High Springs FL",
+      "centerLat": 30.7,
+      "centerLng": -88.1,
+      "priority": 1,
+      "scanPriority": 40,
+      "cellCount": 1
+    },
+    {
+      "id": 39,
+      "name": "Pittsburgh PA",
+      "facilityCount": 3,
+      "accounts": [
+        "Ford",
+        "General Mills",
+        "JM Smucker"
+      ],
+      "accountCount": 3,
+      "verticals": [
+        "cpg",
+        "oem-automotive"
+      ],
+      "verticalCount": 2,
+      "nearestPrimoMiles": 230.9,
+      "nearestPrimoName": "Breinigsville PA",
+      "centerLat": 42.8,
+      "centerLng": -78.9,
+      "priority": 1,
+      "scanPriority": 41,
+      "cellCount": 1
+    },
+    {
+      "id": 40,
+      "name": "Kansas City MO",
+      "facilityCount": 3,
+      "accounts": [
+        "Frito-Lay",
+        "JM Smucker",
+        "The Home Depot"
+      ],
+      "accountCount": 3,
+      "verticals": [
+        "cpg",
+        "retailer"
+      ],
+      "verticalCount": 2,
+      "nearestPrimoMiles": 333,
+      "nearestPrimoName": "Hot Springs AR",
+      "centerLat": 39,
+      "centerLng": -95.7,
+      "priority": 1,
+      "scanPriority": 42,
+      "cellCount": 1
+    },
+    {
+      "id": 42,
+      "name": "Milwaukee WI",
+      "facilityCount": 3,
+      "accounts": [
+        "Georgia Pacific",
+        "Kimberly-Clark",
+        "Nestlé USA"
+      ],
+      "accountCount": 3,
+      "verticals": [
+        "cpg",
+        "manufacturer"
+      ],
+      "verticalCount": 2,
+      "nearestPrimoMiles": 102,
+      "nearestPrimoName": "Madison WI",
+      "centerLat": 44.3,
+      "centerLng": -88.3,
+      "priority": 1,
+      "scanPriority": 43,
+      "cellCount": 1
+    },
+    {
+      "id": 44,
+      "name": "Portland ME",
+      "facilityCount": 3,
+      "accounts": [
+        "Georgia Pacific",
+        "Keurig Dr Pepper",
+        "Pactiv Evergreen"
+      ],
+      "accountCount": 3,
+      "verticals": [
+        "beverage",
+        "manufacturer"
+      ],
+      "verticalCount": 2,
+      "nearestPrimoMiles": 110.5,
+      "nearestPrimoName": "Saratoga Springs NY",
+      "centerLat": 44.6,
+      "centerLng": -73.4,
+      "priority": 1,
+      "scanPriority": 44,
+      "cellCount": 1
+    },
+    {
+      "id": 52,
+      "name": "Pittsburgh PA",
+      "facilityCount": 3,
+      "accounts": [
+        "Performance Food Group",
+        "SalSon Logistics",
+        "UNFI (United Natural Foods, Inc.)"
+      ],
+      "accountCount": 3,
+      "verticals": [
+        "3pl",
+        "grocer-distributor"
+      ],
+      "verticalCount": 2,
+      "nearestPrimoMiles": 212.8,
+      "nearestPrimoName": "Breinigsville PA",
+      "centerLat": 40.2,
+      "centerLng": -79.6,
+      "priority": 1,
+      "scanPriority": 45,
+      "cellCount": 1
+    },
+    {
+      "id": 31,
+      "name": "Atlanta GA",
+      "facilityCount": 4,
+      "accounts": [
+        "Coca-Cola",
+        "Kenco Logistics Services"
+      ],
+      "accountCount": 2,
+      "verticals": [
+        "3pl",
+        "beverage"
+      ],
+      "verticalCount": 2,
+      "nearestPrimoMiles": 285.9,
+      "nearestPrimoName": "McBee SC",
+      "centerLat": 35.1,
+      "centerLng": -85.2,
+      "priority": 1,
+      "scanPriority": 46,
+      "cellCount": 1
+    },
+    {
+      "id": 36,
+      "name": "Allentown PA",
+      "facilityCount": 4,
+      "accounts": [
+        "Crowley",
+        "Kimberly-Clark"
+      ],
+      "accountCount": 2,
+      "verticals": [
+        "cpg",
+        "logistics-carrier"
+      ],
+      "verticalCount": 2,
+      "nearestPrimoMiles": 51.5,
+      "nearestPrimoName": "Breinigsville PA",
+      "centerLat": 39.8,
+      "centerLng": -75.3,
+      "priority": 1,
+      "scanPriority": 47,
+      "cellCount": 1
+    },
+    {
+      "id": 41,
+      "name": "Milwaukee WI",
+      "facilityCount": 3,
+      "accounts": [
+        "General Mills",
+        "Pactiv Evergreen"
+      ],
+      "accountCount": 2,
+      "verticals": [
+        "cpg",
+        "manufacturer"
+      ],
+      "verticalCount": 2,
+      "nearestPrimoMiles": 142.2,
+      "nearestPrimoName": "Madison WI",
+      "centerLat": 42,
+      "centerLng": -91.7,
+      "priority": 1,
+      "scanPriority": 48,
+      "cellCount": 1
+    },
+    {
+      "id": 48,
+      "name": "Birmingham AL",
+      "facilityCount": 3,
+      "accounts": [
+        "JM Smucker",
+        "Toyota"
+      ],
+      "accountCount": 2,
+      "verticals": [
+        "cpg",
+        "oem-automotive"
+      ],
+      "verticalCount": 2,
+      "nearestPrimoMiles": 340.1,
+      "nearestPrimoName": "Greenwood IN",
+      "centerLat": 34.7,
+      "centerLng": -86.8,
+      "priority": 1,
+      "scanPriority": 49,
+      "cellCount": 1
+    },
+    {
+      "id": 49,
+      "name": "Minneapolis MN",
+      "facilityCount": 4,
+      "accounts": [
+        "John Deere"
+      ],
+      "accountCount": 1,
+      "verticals": [
+        "manufacturer"
+      ],
+      "verticalCount": 1,
+      "nearestPrimoMiles": 156.3,
+      "nearestPrimoName": "Madison WI",
+      "centerLat": 42.5,
+      "centerLng": -92.3,
+      "priority": 1,
+      "scanPriority": 50,
+      "cellCount": 1
+    },
+    {
+      "id": 17,
+      "name": "Chicago IL",
+      "facilityCount": 3,
+      "accounts": [
+        "Caterpillar"
+      ],
+      "accountCount": 1,
+      "verticals": [
+        "manufacturer"
+      ],
+      "verticalCount": 1,
+      "nearestPrimoMiles": 164.1,
+      "nearestPrimoName": "Madison WI",
+      "centerLat": 40.7,
+      "centerLng": -89.6,
+      "priority": 1,
+      "scanPriority": 51,
+      "cellCount": 1
+    },
+    {
+      "id": 50,
+      "name": "Chicago IL",
+      "facilityCount": 3,
+      "accounts": [
+        "John Deere"
+      ],
+      "accountCount": 1,
+      "verticals": [
+        "manufacturer"
+      ],
+      "verticalCount": 1,
+      "nearestPrimoMiles": 121.7,
+      "nearestPrimoName": "Madison WI",
+      "centerLat": 41.5,
+      "centerLng": -90.5,
+      "priority": 1,
+      "scanPriority": 52,
+      "cellCount": 1
+    }
+  ]
+}
