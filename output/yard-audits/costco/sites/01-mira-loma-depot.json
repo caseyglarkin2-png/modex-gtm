@@ -1,0 +1,292 @@
+{
+  "name": "Costco Mira Loma Depot, Mira Loma CA",
+  "type": "Refrigerated + Dry Depot",
+  "coords": {
+    "lat": 34.0143,
+    "lng": -117.5366
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.01632,
+          "lng": -117.54075
+        },
+        {
+          "lat": 34.01725,
+          "lng": -117.53495
+        },
+        {
+          "lat": 34.01705,
+          "lng": -117.53365
+        },
+        {
+          "lat": 34.0145,
+          "lng": -117.53335
+        },
+        {
+          "lat": 34.01165,
+          "lng": -117.5332
+        },
+        {
+          "lat": 34.0117,
+          "lng": -117.54015
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.0172,
+          "lng": -117.53545
+        },
+        {
+          "lat": 34.01718,
+          "lng": -117.53465
+        },
+        {
+          "lat": 34.01645,
+          "lng": -117.5347
+        },
+        {
+          "lat": 34.01647,
+          "lng": -117.5355
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 34.0137,
+            "lng": -117.54035
+          },
+          {
+            "lat": 34.01365,
+            "lng": -117.5379
+          },
+          {
+            "lat": 34.01185,
+            "lng": -117.53795
+          },
+          {
+            "lat": 34.01188,
+            "lng": -117.5403
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 34.0136,
+            "lng": -117.5376
+          },
+          {
+            "lat": 34.01355,
+            "lng": -117.53495
+          },
+          {
+            "lat": 34.01188,
+            "lng": -117.535
+          },
+          {
+            "lat": 34.01192,
+            "lng": -117.53765
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 34.01355,
+            "lng": -117.5346
+          },
+          {
+            "lat": 34.01352,
+            "lng": -117.5335
+          },
+          {
+            "lat": 34.0119,
+            "lng": -117.53355
+          },
+          {
+            "lat": 34.01193,
+            "lng": -117.53465
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 34.01635,
+            "lng": -117.5399
+          },
+          {
+            "lat": 34.01628,
+            "lng": -117.5377
+          },
+          {
+            "lat": 34.01565,
+            "lng": -117.53775
+          },
+          {
+            "lat": 34.0157,
+            "lng": -117.53995
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 34.0159,
+            "lng": -117.54035
+          },
+          {
+            "lat": 34.01582,
+            "lng": -117.5356
+          },
+          {
+            "lat": 34.01556,
+            "lng": -117.53562
+          },
+          {
+            "lat": 34.01564,
+            "lng": -117.54037
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 34.0146,
+            "lng": -117.53745
+          },
+          {
+            "lat": 34.01245,
+            "lng": -117.5375
+          },
+          {
+            "lat": 34.01243,
+            "lng": -117.53715
+          },
+          {
+            "lat": 34.01458,
+            "lng": -117.5371
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 34.0146,
+            "lng": -117.53585
+          },
+          {
+            "lat": 34.01245,
+            "lng": -117.5359
+          },
+          {
+            "lat": 34.01243,
+            "lng": -117.53555
+          },
+          {
+            "lat": 34.01458,
+            "lng": -117.5355
+          }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        {
+          "lat": 34.01675,
+          "lng": -117.5355
+        },
+        {
+          "lat": 34.0167,
+          "lng": -117.53435
+        },
+        {
+          "lat": 34.01615,
+          "lng": -117.5344
+        },
+        {
+          "lat": 34.0162,
+          "lng": -117.53555
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 201,
+        "pano": "pFfIHk_Fz9Tzg2Hvn_lBcg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 171,
+        "pano": "pFfIHk_Fz9Tzg2Hvn_lBcg",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 150,
+    "trailersVisible": 600,
+    "trailerParkingCapacity": 750,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 93.4,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.0143,-117.5366,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "multiStep",
+    "dockDoorCount"
+  ],
+  "fieldNotes": {
+    "truckGate": "Driver reviews describe checking in at a guard shack ('get in the left lane at the guard shack') and a kiosk for some check-ins; site is fully hedge/chain-link secured on all public frontages with one main controlled truck apron opening off the north I-15 frontage road.",
+    "guardShack": "Confirmed by driver reviews: staffed booth where drivers check in, receive paperwork and a pager. Sits at the pinch point of the north-central entrance apron.",
+    "preGateStaging": "Trailers and bobtails stage along the I-15 frontage road and along the south road outside the gate (visible parked at the curb in Street View and satellite).",
+    "postGateStaging": "Large paved holding apron inside the gate between the north building and the main building before trucks reach dock doors.",
+    "shipRcvSeparate": "Distinct dock banks on multiple building faces: north building south face, main solar building east/west finger faces and south face - shipping and receiving run from physically separate dock clusters.",
+    "entryLanes": "Estimated 2 inbound lanes at the guard shack from driver 'left lane' reference; not directly countable from overhead due to tree cover over the gate.",
+    "exitLanes": "Estimated; exit shares the same gate group (entry/exit together).",
+    "fastLaneOpportunity": "Very wide entrance apron off the frontage road with ample paved width to add an express/appointment bypass lane.",
+    "dockDoors": "150 is an honest overhead estimate across the north building (both faces) and the multi-finger main solar building (east, west and south dock faces); roof solar panels obscure exact counts - band 50+ is firm.",
+    "dropArea": "Hundreds of trailers parked in angled rows across drop yards on every building face; capacity ~750, band 50+ is firm.",
+    "siteAreaAcres": "~92 acres derived from the traced perimeter (cold + ~670k sq ft dry building plus extensive trailer yards).",
+    "railServed": "No rail spur enters the property; nearest rail is unrelated.",
+    "buildingCount": "Two primary structures: north building and the large connected main cold+dry depot (solar-roofed). The white-roofed DC to the east is a separate property and excluded.",
+    "urbanRural": "Dense Inland Empire industrial fabric (Jurupa Valley/Mira Loma) directly on I-15; Urban."
+  },
+  "method": "deep-audit"
+}

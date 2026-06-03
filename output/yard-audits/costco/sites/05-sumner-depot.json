@@ -1,0 +1,269 @@
+{
+  "name": "Costco Depot #285, Sumner WA",
+  "type": "Dry Depot",
+  "coords": {
+    "lat": 47.21955,
+    "lng": -122.2435
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 47.2226,
+          "lng": -122.2456
+        },
+        {
+          "lat": 47.22255,
+          "lng": -122.24165
+        },
+        {
+          "lat": 47.22,
+          "lng": -122.2413
+        },
+        {
+          "lat": 47.2166,
+          "lng": -122.2413
+        },
+        {
+          "lat": 47.2164,
+          "lng": -122.2443
+        },
+        {
+          "lat": 47.2172,
+          "lng": -122.2456
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 47.2213,
+          "lng": -122.245
+        },
+        {
+          "lat": 47.2213,
+          "lng": -122.2436
+        },
+        {
+          "lat": 47.22055,
+          "lng": -122.2436
+        },
+        {
+          "lat": 47.22055,
+          "lng": -122.245
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 47.2198,
+            "lng": -122.2456
+          },
+          {
+            "lat": 47.2198,
+            "lng": -122.2447
+          },
+          {
+            "lat": 47.2166,
+            "lng": -122.2447
+          },
+          {
+            "lat": 47.2166,
+            "lng": -122.2456
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 47.2196,
+            "lng": -122.2431
+          },
+          {
+            "lat": 47.2196,
+            "lng": -122.24165
+          },
+          {
+            "lat": 47.2168,
+            "lng": -122.24165
+          },
+          {
+            "lat": 47.2168,
+            "lng": -122.2431
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 47.22255,
+            "lng": -122.2447
+          },
+          {
+            "lat": 47.22255,
+            "lng": -122.2418
+          },
+          {
+            "lat": 47.2217,
+            "lng": -122.2418
+          },
+          {
+            "lat": 47.2217,
+            "lng": -122.2447
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 47.2201,
+            "lng": -122.2445
+          },
+          {
+            "lat": 47.2201,
+            "lng": -122.244
+          },
+          {
+            "lat": 47.217,
+            "lng": -122.244
+          },
+          {
+            "lat": 47.217,
+            "lng": -122.2445
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 47.22,
+            "lng": -122.2433
+          },
+          {
+            "lat": 47.22,
+            "lng": -122.2429
+          },
+          {
+            "lat": 47.217,
+            "lng": -122.2429
+          },
+          {
+            "lat": 47.217,
+            "lng": -122.2433
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 47.22165,
+            "lng": -122.2447
+          },
+          {
+            "lat": 47.22165,
+            "lng": -122.2418
+          },
+          {
+            "lat": 47.2213,
+            "lng": -122.2418
+          },
+          {
+            "lat": 47.2213,
+            "lng": -122.2447
+          }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        {
+          "lat": 47.2205,
+          "lng": -122.2446
+        },
+        {
+          "lat": 47.2205,
+          "lng": -122.2431
+        },
+        {
+          "lat": 47.2199,
+          "lng": -122.2431
+        },
+        {
+          "lat": 47.2199,
+          "lng": -122.2446
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 192,
+        "pano": "a2c5XTxP5_Gx8T3qSdUWpQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 270,
+        "pano": "IN9diRJmskbGzHSl2a5FxQ",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 280,
+    "trailerParkingCapacity": 350,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 55,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@47.21955,-122.24350,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "guardShack",
+    "scale",
+    "entryLanes",
+    "exitLanes"
+  ],
+  "fieldNotes": {
+    "truckGate": "Single signalized main truck entrance off 142nd Ave E (entrance pano IN9diRJmskbGzHSl2a5FxQ, 2025-03); the access-control checkpoint is an internal canopied gatehouse straddling the truck lanes between the north drop yard and the cross-dock, with orange lane delineators and queued trucks (z18/z20 sat).",
+    "guardShack": "Internal canopied check-in/security building straddling the truck lanes (~47.2210,-122.2443) with cars and a tractor-trailer parked at it; larger than a 1-3-space booth so flagged uncertain, but functions as the staffed driver check-in point.",
+    "postGateStaging": "Striped staging stalls and angled trailer-staging rows in the central yard just inside the internal gatehouse and before the dock faces.",
+    "shipRcvSeparate": "Two distinct cross-dock buildings plus dock banks on multiple faces (north building south face, main building west and east faces) give physically separate ship/receive clusters.",
+    "multipleFacilities": "Campus: a north E-W cross-dock building, the main L/T cross-dock at the roster coords, and a third smaller building at the south end.",
+    "scale": "No distinct weigh-scale pad positively identified in the truck path; left false.",
+    "dropArea": "Hundreds of drop trailers in dense rows on the west edge, east edge, and north yard; well into the 50+ band.",
+    "railServed": "Mainline rail runs N-S in the buffer west of the property but no spur enters the yard; truck-only.",
+    "urbanRural": "Sumner WA edge-of-town industrial park (Sumner Tacoma 142nd Ave E corridor); broader setting is small-town industrial, classified Rural per rubric tie-break.",
+    "fastLaneOpportunity": "Wide entrance apron and multi-lane internal gatehouse give room for an express/bypass lane.",
+    "entryLanes": "Estimated 2 inbound at the internal gatehouse canopy; exact lane count not fully resolvable from overhead."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,239 @@
+{
+  "name": "Costco Depot #288/289, Dallas TX",
+  "type": "Refrigerated Depot",
+  "coords": {
+    "lat": 32.693,
+    "lng": -96.9608
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.68985,
+          "lng": -96.9637
+        },
+        {
+          "lat": 32.68975,
+          "lng": -96.958
+        },
+        {
+          "lat": 32.6968,
+          "lng": -96.9588
+        },
+        {
+          "lat": 32.697,
+          "lng": -96.9634
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.68985,
+          "lng": -96.96045
+        },
+        {
+          "lat": 32.68985,
+          "lng": -96.9596
+        },
+        {
+          "lat": 32.6913,
+          "lng": -96.95975
+        },
+        {
+          "lat": 32.6913,
+          "lng": -96.9606
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 32.6902,
+            "lng": -96.9596
+          },
+          {
+            "lat": 32.6902,
+            "lng": -96.9584
+          },
+          {
+            "lat": 32.6962,
+            "lng": -96.959
+          },
+          {
+            "lat": 32.6962,
+            "lng": -96.96015
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 32.6901,
+            "lng": -96.9636
+          },
+          {
+            "lat": 32.6901,
+            "lng": -96.9623
+          },
+          {
+            "lat": 32.696,
+            "lng": -96.9629
+          },
+          {
+            "lat": 32.696,
+            "lng": -96.9642
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 32.6905,
+            "lng": -96.9623
+          },
+          {
+            "lat": 32.6905,
+            "lng": -96.96185
+          },
+          {
+            "lat": 32.6964,
+            "lng": -96.9624
+          },
+          {
+            "lat": 32.6964,
+            "lng": -96.96285
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 32.6905,
+            "lng": -96.96055
+          },
+          {
+            "lat": 32.6905,
+            "lng": -96.9601
+          },
+          {
+            "lat": 32.6963,
+            "lng": -96.96065
+          },
+          {
+            "lat": 32.6963,
+            "lng": -96.9611
+          }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        {
+          "lat": 32.6915,
+          "lng": -96.96035
+        },
+        {
+          "lat": 32.6915,
+          "lng": -96.95945
+        },
+        {
+          "lat": 32.694,
+          "lng": -96.95975
+        },
+        {
+          "lat": 32.694,
+          "lng": -96.96065
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 347,
+        "pano": "XDAJlOfWbSndrv06dPPq2Q",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 352,
+        "pano": "XDAJlOfWbSndrv06dPPq2Q",
+        "hasCoverage": true
+      },
+      "staging": {
+        "heading": 3,
+        "pano": "XDAJlOfWbSndrv06dPPq2Q",
+        "hasCoverage": true
+      },
+      "dropYards": [
+        {
+          "heading": 10,
+          "pano": "XDAJlOfWbSndrv06dPPq2Q",
+          "hasCoverage": true
+        }
+      ]
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 220,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 94.1,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.69300,-96.96080,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "multiStep",
+    "entryLanes",
+    "exitLanes"
+  ],
+  "fieldNotes": {
+    "truckGate": "Controlled central entrance off the E-W frontage road: painted multi-lane checkpoint with 'COSTCO FLEET ONLY', 'STOP', 'DO NOT BLOCK' and 'FIRE LANE' lane separation and bollard-lined lanes (z20-z21 imagery). Dedicated fleet vs. visitor/vendor lanes confirm a managed checkpoint.",
+    "guardShack": "No discrete staffed booth positively resolved in satellite or Street View; control appears set back inside the property. Costco depots are universally access-controlled, so a kiosk/booth almost certainly exists but could not be imaged - flagged uncertain.",
+    "remoteGs": "Set true as the complement of truckGate=true with no confirmed staffed booth; if a manned booth exists this should flip to guardShack. Uncertain.",
+    "preGateStaging": "Tractors with reefer trailers staged along the road frontage shoulder ahead of the entrance (Street View, Jan 2025).",
+    "postGateStaging": "Wide paved interior queue/staging aprons flank the central drive lane inside the entrance, before the docks (z20/z21).",
+    "drivewayLong": "Central spine drive runs ~600 m from the road into the building between the two drop yards; easily holds 3+ trucks.",
+    "dockDoors": "Cross-dock with loading doors on BOTH long building faces (E and W); trailers backed in along both walls plus the dark-roof cold-dock addition at the north end. Estimated ~120 doors total - 50+ band, count approximate.",
+    "dropArea": "Two large organized drop yards (E and W faces) with painted, numbered angled trailer stalls packed with trailers; well into the 50+ band.",
+    "shipRcvSeparate": "Doors on two distinct opposing building faces (east and west banks) indicate physically separate dock clusters.",
+    "fastLaneOpportunity": "Wide entrance apron with already-separated fleet vs. visitor lanes and ample paved width to add an express bypass.",
+    "entryLanes": "Approx 2 inbound lanes painted at the throat (fleet + visitor); exit lanes similar. Approximate.",
+    "buildingCount": "Main cross-dock building plus a smaller detached structure (gate/fuel-island/maintenance) on the central drive; ~2.",
+    "railServed": "No rail spur enters the property.",
+    "urbanRural": "Southwest Dallas (Mountain Creek industrial district), inside the DFW metro fabric - Urban.",
+    "trailersVisible": "200+ trailers visible across both drop yards and dock faces in z18-z21 captures; approximate.",
+    "coords": "Roster coords (32.692336,-96.960506) land on the south yard; recentered to the building/yard center 32.69300,-96.96080. Address 3730 Mountain Creek Pkwy confirmed via web search."
+  },
+  "method": "deep-audit"
+}

@@ -94,6 +94,12 @@ const PATCHES = {
     global: null,
     note: 'World Market (Cost Plus) operates ~250 US retail stores fed by a handful of DCs; we mapped the DC sites where yard ops matter.',
   },
+  costco: {
+    scope: 'US',
+    inScope: 24,
+    global: 30,
+    note: 'Costco runs ~24 US cross-dock depots (dry, refrigerated, and e-commerce) feeding ~600 US warehouses, plus a handful internationally. We audited 11 representative US depots spanning dry and wet cross-docks.',
+  },
   crowley: {
     scope: 'US',
     inScope: 40,

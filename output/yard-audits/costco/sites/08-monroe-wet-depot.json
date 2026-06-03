@@ -1,0 +1,161 @@
+{
+  "name": "Costco Wet Depot #265, Monroe Township NJ",
+  "type": "Refrigerated Depot",
+  "coords": {
+    "lat": 40.35808,
+    "lng": -74.465
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.35968,
+          "lng": -74.4677
+        },
+        {
+          "lat": 40.35965,
+          "lng": -74.4619
+        },
+        {
+          "lat": 40.357,
+          "lng": -74.46125
+        },
+        {
+          "lat": 40.35535,
+          "lng": -74.4633
+        },
+        {
+          "lat": 40.3556,
+          "lng": -74.4678
+        },
+        {
+          "lat": 40.3574,
+          "lng": -74.46815
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.35735,
+          "lng": -74.46215
+        },
+        {
+          "lat": 40.35733,
+          "lng": -74.4617
+        },
+        {
+          "lat": 40.35685,
+          "lng": -74.46172
+        },
+        {
+          "lat": 40.35687,
+          "lng": -74.46217
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 40.3564,
+            "lng": -74.4677
+          },
+          {
+            "lat": 40.35628,
+            "lng": -74.4656
+          },
+          {
+            "lat": 40.35578,
+            "lng": -74.46568
+          },
+          {
+            "lat": 40.3559,
+            "lng": -74.46778
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 40.35705,
+            "lng": -74.4672
+          },
+          {
+            "lat": 40.35714,
+            "lng": -74.4626
+          },
+          {
+            "lat": 40.3569,
+            "lng": -74.46258
+          },
+          {
+            "lat": 40.35681,
+            "lng": -74.46718
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 190,
+        "pano": "OQa6dk03-14O3aB-N4SE2Q",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 85,
+    "trailersVisible": 42,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 60.1,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.35808,-74.46500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "guardShack",
+    "exitLanes",
+    "postGateStaging"
+  ],
+  "fieldNotes": {
+    "siteIdentity": "Roster coords land on the SE face of the large light-gray-roof building at 12 Costco Dr; reefer condenser bank on that south wall confirms it is the WET/refrigerated depot, distinct from the larger solar-roofed dry depot (#175, 10 Costco Dr) to the north. Audited the wet building/yard only.",
+    "truckGate": "Costco runs a guarded, appointment-only truck check-in (driver reviews cite the best check-in/out on the East Coast). A small ~1-vehicle white booth sits beside the east perimeter truck road at ~40.35708,-74.46199 with a striped/hatched pavement table and crosswalk at the truck pinch-point.",
+    "guardShack": "Small white booth at the east truck-road pinch (z20 imagery); footprint and position consistent with a guard/check-in shack. Medium confidence on staffing vs unmanned kiosk from overhead alone.",
+    "dockDoors": "Continuous dock bank runs the full ~340 m south face with dense, regular leveler rhythm and trailers backed in (z20). Easily 50+; point estimate ~85.",
+    "dropArea": "Marked trailer-drop rows along the SW apron hold orange/white/dark trailers without tractors (z19 SW); a dedicated drop block, banded 25-50.",
+    "fastLaneOpportunity": "Wide paved truck road and apron around the south/east with unused width to add a bypass/express lane.",
+    "urbanRural": "Edge-of-town industrial park beside the NJ Turnpike with a golf course and woods immediately south; broader setting reads Rural per rubric.",
+    "streetView": "Public Street View covers only the internal car road (Costco Dr, north entrance) and the east blank-wall road. The north entrance pano (OQa6dk03-14O3aB-N4SE2Q, 2025-06) shows the building + monument sign and is used for perimeter. No pano confirms the truck gate/booth, so truckGate streetView hasCoverage=false."
+  },
+  "method": "deep-audit"
+}

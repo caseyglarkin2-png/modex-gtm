@@ -1,0 +1,254 @@
+{
+  "name": "Costco Depot, College Park GA",
+  "type": "Dry Depot",
+  "coords": {
+    "lat": 33.616,
+    "lng": -84.5333
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.6188,
+          "lng": -84.536
+        },
+        {
+          "lat": 33.61895,
+          "lng": -84.531
+        },
+        {
+          "lat": 33.6156,
+          "lng": -84.5302
+        },
+        {
+          "lat": 33.6143,
+          "lng": -84.5315
+        },
+        {
+          "lat": 33.61445,
+          "lng": -84.5346
+        },
+        {
+          "lat": 33.6161,
+          "lng": -84.53625
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.6187,
+          "lng": -84.5332
+        },
+        {
+          "lat": 33.61865,
+          "lng": -84.53245
+        },
+        {
+          "lat": 33.61825,
+          "lng": -84.5325
+        },
+        {
+          "lat": 33.6183,
+          "lng": -84.53325
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 33.6187,
+            "lng": -84.53265
+          },
+          {
+            "lat": 33.6173,
+            "lng": -84.5318
+          },
+          {
+            "lat": 33.617,
+            "lng": -84.5324
+          },
+          {
+            "lat": 33.6184,
+            "lng": -84.5333
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.61685,
+            "lng": -84.5352
+          },
+          {
+            "lat": 33.6156,
+            "lng": -84.5344
+          },
+          {
+            "lat": 33.6149,
+            "lng": -84.5354
+          },
+          {
+            "lat": 33.61615,
+            "lng": -84.53615
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.6156,
+            "lng": -84.53155
+          },
+          {
+            "lat": 33.61455,
+            "lng": -84.53185
+          },
+          {
+            "lat": 33.61445,
+            "lng": -84.5331
+          },
+          {
+            "lat": 33.6155,
+            "lng": -84.53285
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 33.61745,
+            "lng": -84.5356
+          },
+          {
+            "lat": 33.6161,
+            "lng": -84.5348
+          },
+          {
+            "lat": 33.6159,
+            "lng": -84.5352
+          },
+          {
+            "lat": 33.61725,
+            "lng": -84.536
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.6156,
+            "lng": -84.53375
+          },
+          {
+            "lat": 33.61475,
+            "lng": -84.53395
+          },
+          {
+            "lat": 33.61465,
+            "lng": -84.53445
+          },
+          {
+            "lat": 33.6155,
+            "lng": -84.53425
+          }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        {
+          "lat": 33.61825,
+          "lng": -84.5331
+        },
+        {
+          "lat": 33.618,
+          "lng": -84.53245
+        },
+        {
+          "lat": 33.6176,
+          "lng": -84.53265
+        },
+        {
+          "lat": 33.61785,
+          "lng": -84.5333
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 193,
+        "pano": "sqDchmDuUdwg5rhCsh3UTA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 193,
+        "pano": "sqDchmDuUdwg5rhCsh3UTA",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 130,
+    "trailersVisible": 320,
+    "trailerParkingCapacity": 420,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 59.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.61600,-84.53330,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "guardShack",
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate"
+  ],
+  "fieldNotes": {
+    "truckGate": "Single private divided entrance road off S Fulton Pkwy (STOP sign + striped median in 2023-01 Street View pano sqDchmDuUdwg5rhCsh3UTA). The outer road entrance is open/uncontrolled, but driver reviews confirm a staffed check-in inside the yard where an attendant issues a pager and assigns a dock door, so the controlled truck gate is set back inside the property.",
+    "guardShack": "Not directly resolvable in satellite at this resolution and screened by trees in Street View, but corroborated by multiple driver reviews describing an attendant check-in / pager system. Medium-confidence inference; flagged.",
+    "remoteGs": "False because a staffed check-in (attendant + pager) is reported, so the gate is manned rather than kiosk/app-only.",
+    "postGateStaging": "Large paved aprons inside the entrance hold queued trucks before dock assignment (pager-call workflow implies an internal waiting area).",
+    "drivewayLong": "Long divided entrance road plus deep internal yard aprons easily hold 3+ trucks between road and docks.",
+    "dockDoors": "50+ band. Main building has continuous dock banks on its NE/N, SW, and S faces with trailers backed in along most; overhead count well above 100 doors across the complex.",
+    "dropArea": "50+ band. Multiple dedicated trailer-storage lots (N, NW, and central) full of trailers without tractors.",
+    "shipRcvSeparate": "Distinct dock banks on opposite building faces (NE/N inbound apron vs SW/S apron) suggest separated ship/receive; medium confidence from overhead only.",
+    "multipleFacilities": "Two distinct large buildings on the Costco property: the primary solar-roof cross-dock plus a secondary building on the SW side, both dock-served.",
+    "fastLaneOpportunity": "Wide divided entrance with striped median and ample paved apron width inside the gate leaves room to add an express/bypass lane.",
+    "railServed": "No rail spur enters the property; no track visible.",
+    "scale": "No truck scale pad identified in available imagery; flagged as uncertain.",
+    "entryLanes": "Entrance road is divided (in/out separated by a median island at the parkway), modeled as ~2 inbound / 2 outbound; exact lane count not confirmable from overhead.",
+    "siteAreaAcres": "~59.6 acres computed from the traced perimeter polygon; approximate.",
+    "urbanRural": "Edge-of-metro industrial park off S Fulton Pkwy surrounded by woods and other warehouses; classified Rural per the small-town/edge-of-town tie-break rule despite Atlanta metro proximity."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,301 @@
+{
+  "name": "Costco Depot, Monrovia MD",
+  "type": "Refrigerated Depot",
+  "coords": {
+    "lat": 39.3754,
+    "lng": -77.2805
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.37735,
+          "lng": -77.28005
+        },
+        {
+          "lat": 39.37725,
+          "lng": -77.27805
+        },
+        {
+          "lat": 39.3763,
+          "lng": -77.27715
+        },
+        {
+          "lat": 39.3743,
+          "lng": -77.27665
+        },
+        {
+          "lat": 39.37255,
+          "lng": -77.2765
+        },
+        {
+          "lat": 39.37155,
+          "lng": -77.2794
+        },
+        {
+          "lat": 39.3716,
+          "lng": -77.2829
+        },
+        {
+          "lat": 39.3724,
+          "lng": -77.28625
+        },
+        {
+          "lat": 39.37315,
+          "lng": -77.2865
+        },
+        {
+          "lat": 39.37395,
+          "lng": -77.28545
+        },
+        {
+          "lat": 39.3757,
+          "lng": -77.28265
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.37685,
+          "lng": -77.27795
+        },
+        {
+          "lat": 39.3768,
+          "lng": -77.27715
+        },
+        {
+          "lat": 39.37605,
+          "lng": -77.27725
+        },
+        {
+          "lat": 39.3761,
+          "lng": -77.27805
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 39.37415,
+            "lng": -77.28575
+          },
+          {
+            "lat": 39.37305,
+            "lng": -77.28435
+          },
+          {
+            "lat": 39.37215,
+            "lng": -77.28535
+          },
+          {
+            "lat": 39.37325,
+            "lng": -77.28675
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 39.37535,
+            "lng": -77.2817
+          },
+          {
+            "lat": 39.3746,
+            "lng": -77.2803
+          },
+          {
+            "lat": 39.37375,
+            "lng": -77.28115
+          },
+          {
+            "lat": 39.3745,
+            "lng": -77.28255
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 39.37605,
+            "lng": -77.27915
+          },
+          {
+            "lat": 39.3756,
+            "lng": -77.27825
+          },
+          {
+            "lat": 39.37495,
+            "lng": -77.2788
+          },
+          {
+            "lat": 39.3754,
+            "lng": -77.2797
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 39.37625,
+            "lng": -77.2827
+          },
+          {
+            "lat": 39.3744,
+            "lng": -77.2791
+          },
+          {
+            "lat": 39.37415,
+            "lng": -77.27935
+          },
+          {
+            "lat": 39.376,
+            "lng": -77.28295
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 39.37535,
+            "lng": -77.28395
+          },
+          {
+            "lat": 39.3735,
+            "lng": -77.28035
+          },
+          {
+            "lat": 39.37325,
+            "lng": -77.2806
+          },
+          {
+            "lat": 39.3751,
+            "lng": -77.2842
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 39.3725,
+            "lng": -77.28395
+          },
+          {
+            "lat": 39.37245,
+            "lng": -77.28065
+          },
+          {
+            "lat": 39.37215,
+            "lng": -77.28065
+          },
+          {
+            "lat": 39.3722,
+            "lng": -77.28395
+          }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        {
+          "lat": 39.37755,
+          "lng": -77.2774
+        },
+        {
+          "lat": 39.37745,
+          "lng": -77.27665
+        },
+        {
+          "lat": 39.37695,
+          "lng": -77.27675
+        },
+        {
+          "lat": 39.37705,
+          "lng": -77.2775
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 258,
+        "pano": "cD2v-OIUlFFs3FKOv64Jqw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 292,
+        "pano": "cD2v-OIUlFFs3FKOv64Jqw",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 260,
+    "trailersVisible": 450,
+    "trailerParkingCapacity": 600,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 84,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.3754,-77.2805,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "dockDoorCount",
+    "trailersVisible"
+  ],
+  "fieldNotes": {
+    "truckGate": "Confirmed controlled truck entrance. Street View at the property entrance shows a 'TRUCK ENTRANCE ONLY' sign and directional lane arrows where the truck route splits from the visitor/employee road; public Street View coverage stops abruptly at the entrance throat (private road beyond), consistent with a gated facility. Trucker reviews (TruckersReport / TruckMap) describe checking in 'at the gate' with on-site security.",
+    "guardShack": "Driver reviews explicitly describe being 'greeted by very friendly security' at the gate and note 'the yard drivers don't have radios to the gate' - confirming a staffed check-in gate. The booth itself sits inside the private entrance throat (~39.3766,-77.2777) beyond public Street View; a small structure cluster is visible near the entrance in satellite.",
+    "remoteGs": "False - the gate is staffed by security per driver reports, so this is a manned guard shack rather than a remote kiosk/call-box check-in.",
+    "preGateStaging": "Driver reviews note 'curb parking outside the gate for waiting on dispatch' and a food truck; the wide paved approach apron and shoulder near the entrance junction provide truck-sized waiting room outside the gate.",
+    "postGateStaging": "Large paved holding aprons inside the property between the gate and the dock faces; trucks queue on the internal loop road and yard apron before being paged to a door.",
+    "drivewayLong": "Long internal approach from the NE entrance throat down to the dock faces (several hundred meters of paved truck road around the building) - easily holds 3+ trucks.",
+    "entryExitTogether": "Single truck entrance/exit point on the NE side off the Intercoastal Dr internal road; no separate dedicated out-gate observed.",
+    "entryLanes": "Estimated 1-2 inbound lanes at the gate; exact count not resolvable - the booth is past public Street View and the entrance throat is partly under construction in the 2024 imagery.",
+    "exitLanes": "Estimated; exit shares the same entrance throat (entry/exit together).",
+    "fastLaneOpportunity": "Very wide entrance apron and multi-lane paved junction at the NE entrance with ample unused paved width to add an appointment/express bypass lane.",
+    "dockDoors": "50+ is firm. Driver reviews reference dock doors numbered in the 500-553 range, and the main cross-dock building has continuous dock doors with trailers backed in along BOTH long faces. 260 is an honest overhead estimate across both faces of the main building plus the south building; band 50+ is certain.",
+    "dropArea": "50+ is firm. Hundreds of trailers parked in long angled rows fill the SW drop yard, the central yard, and a north drop area - clearly a large dedicated drop/spotter-yard operation (yard drivers mentioned in reviews).",
+    "shipRcvSeparate": "The main cross-dock has dock banks on both opposite long faces (NE and SW), and there is a second large building (south) with its own dock face - shipping and receiving run from physically separate dock clusters.",
+    "urbanRural": "Edge-of-town/rural setting: the 84-acre campus is ringed by forest and farmland, set well back from US-40/Old National Pike, with a residential subdivision to the south. Some neighboring light-industrial buildings sit to the NE but the broader setting is rural. Per the rubric tie-breaker, classed Rural.",
+    "connectivityIssue": "False - despite the rural setting it is a major active DC near I-70/US-40 in the Frederick metro fringe; cellular coverage is adequate.",
+    "multipleFacilities": "True - two distinct large buildings on one campus: the long NW-SE cross-dock depot and a separate large rectangular building to the south, plus ancillary canopy/shop structures.",
+    "scale": "Not clearly visible in available imagery; possible scale within the private entrance throat but not confirmed - left false, listed uncertain.",
+    "dropYard": "True - extensive dedicated trailer-storage rows separate from the active dock aprons, full of parked drop trailers.",
+    "railServed": "No rail spur enters the property.",
+    "siteAreaAcres": "~84 acres per the GC project record (Novak Construction), consistent with the traced perimeter.",
+    "trailersVisible": "~450 trailers visible across drop yards and dock faces in the captured imagery; honest overhead estimate, flagged uncertain.",
+    "imageryNote": "Most recent satellite (Airbus/Maxar 2026) and Street View (2024-07) both show the facility built and operating, with some active expansion/construction near the NE entrance and visitor lot in the 2024 Street View."
+  },
+  "method": "deep-audit"
+}

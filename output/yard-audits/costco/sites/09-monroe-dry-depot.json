@@ -1,0 +1,246 @@
+{
+  "name": "Costco Dry Depot #175, Monroe Township NJ",
+  "type": "Dry Depot",
+  "coords": {
+    "lat": 40.356173,
+    "lng": -74.455342
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.35816,
+          "lng": -74.45648
+        },
+        {
+          "lat": 40.35842,
+          "lng": -74.44905
+        },
+        {
+          "lat": 40.35581,
+          "lng": -74.4479
+        },
+        {
+          "lat": 40.3525,
+          "lng": -74.44985
+        },
+        {
+          "lat": 40.35337,
+          "lng": -74.45728
+        },
+        {
+          "lat": 40.35476,
+          "lng": -74.45854
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.3572,
+          "lng": -74.457
+        },
+        {
+          "lat": 40.357,
+          "lng": -74.4562
+        },
+        {
+          "lat": 40.3564,
+          "lng": -74.45655
+        },
+        {
+          "lat": 40.3566,
+          "lng": -74.45735
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 40.35835,
+            "lng": -74.4504
+          },
+          {
+            "lat": 40.3572,
+            "lng": -74.4456
+          },
+          {
+            "lat": 40.3556,
+            "lng": -74.4465
+          },
+          {
+            "lat": 40.35675,
+            "lng": -74.4512
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.3547,
+            "lng": -74.4529
+          },
+          {
+            "lat": 40.3536,
+            "lng": -74.44855
+          },
+          {
+            "lat": 40.35265,
+            "lng": -74.44915
+          },
+          {
+            "lat": 40.35375,
+            "lng": -74.45345
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.3549,
+            "lng": -74.4577
+          },
+          {
+            "lat": 40.3544,
+            "lng": -74.4556
+          },
+          {
+            "lat": 40.35345,
+            "lng": -74.45615
+          },
+          {
+            "lat": 40.35395,
+            "lng": -74.45825
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 40.35795,
+            "lng": -74.4507
+          },
+          {
+            "lat": 40.3576,
+            "lng": -74.4489
+          },
+          {
+            "lat": 40.3573,
+            "lng": -74.44905
+          },
+          {
+            "lat": 40.35765,
+            "lng": -74.45085
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.3556,
+            "lng": -74.4529
+          },
+          {
+            "lat": 40.3546,
+            "lng": -74.44875
+          },
+          {
+            "lat": 40.3543,
+            "lng": -74.4489
+          },
+          {
+            "lat": 40.3553,
+            "lng": -74.45305
+          }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        {
+          "lat": 40.3562,
+          "lng": -74.4553
+        },
+        {
+          "lat": 40.35585,
+          "lng": -74.4532
+        },
+        {
+          "lat": 40.3546,
+          "lng": -74.4539
+        },
+        {
+          "lat": 40.35495,
+          "lng": -74.456
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 135,
+        "pano": "AY6EyDCda2gVrJU2-JkKRQ",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 220,
+    "trailersVisible": 600,
+    "trailerParkingCapacity": 750,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 112.1,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.356173,-74.455342,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "multiStep",
+    "scale"
+  ],
+  "fieldNotes": {
+    "truckGate": "Property is fully fenced (chain-link confirmed in Street View on the west perimeter) with a single controlled vehicular approach off Costco Drive at the NW. Standard Costco depot driver check-in operation. High confidence the property is gated/controlled; the gate barrier itself sits on the private interior road with no Street View and is partly tree-obscured from above.",
+    "guardShack": "Inferred from Costco depot operating standard (staffed driver check-in at the truck entrance) plus the fenced, single-throat approach. Could not positively resolve a distinct booth structure in satellite/Street View; flagged uncertain.",
+    "dockDoors": "50+ band. This is a ~1M+ sq ft cross-dock; dock-leveler rhythm and backed-in trailers visible on the north face and along the building wings. dockDoorCount=220 is an order-of-magnitude overhead estimate.",
+    "dropArea": "50+ band. Hundreds of trailers parked without tractors in dense fanned rows on the NE, SE and SW sides; dropYard=true.",
+    "drivewayLong": "Very deep internal approach and a large central maneuvering apron easily hold a 3+ truck queue inside the gate.",
+    "fastLaneOpportunity": "Abundant unused paved width at the entrance throat and across the central apron to add an express/bypass lane.",
+    "urbanRural": "Edge-of-town/exurban Monroe Township setting (golf course, residential subdivisions, wooded buffers and farmland adjacent); judged Rural per rubric tie-break, though it is a large industrial park.",
+    "shipRcvSeparate": "Single integrated cross-dock operation; docks ring one building, not two physically separate ship/rcv banks.",
+    "multipleFacilities": "Audited the DRY depot building only (10 Costco Dr). The WET depot #265 at 12 Costco Dr is a separate building ~600m west and is NOT included here, so multipleFacilities=false for this geofence.",
+    "railServed": "A rail line runs in the wooded buffer south of the property but does not spur into the yard.",
+    "siteAreaAcres": "112.1 acres derived from the perimeter polygon (fenced building + trailer yards)."
+  },
+  "method": "deep-audit"
+}

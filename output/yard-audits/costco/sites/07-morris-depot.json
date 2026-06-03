@@ -1,0 +1,219 @@
+{
+  "name": "Costco Dry Depot, Morris IL",
+  "type": "Dry Depot",
+  "coords": {
+    "lat": 41.394,
+    "lng": -88.4285
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.3975,
+          "lng": -88.4337
+        },
+        {
+          "lat": 41.39755,
+          "lng": -88.4254
+        },
+        {
+          "lat": 41.3966,
+          "lng": -88.42315
+        },
+        {
+          "lat": 41.3915,
+          "lng": -88.42315
+        },
+        {
+          "lat": 41.3896,
+          "lng": -88.4242
+        },
+        {
+          "lat": 41.38915,
+          "lng": -88.4305
+        },
+        {
+          "lat": 41.3894,
+          "lng": -88.4337
+        },
+        {
+          "lat": 41.394,
+          "lng": -88.4339
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.3962,
+          "lng": -88.42345
+        },
+        {
+          "lat": 41.3953,
+          "lng": -88.42345
+        },
+        {
+          "lat": 41.39525,
+          "lng": -88.4256
+        },
+        {
+          "lat": 41.39615,
+          "lng": -88.4256
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 41.3973,
+            "lng": -88.4325
+          },
+          {
+            "lat": 41.397,
+            "lng": -88.4256
+          },
+          {
+            "lat": 41.3964,
+            "lng": -88.42565
+          },
+          {
+            "lat": 41.3967,
+            "lng": -88.43255
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 41.3947,
+            "lng": -88.4323
+          },
+          {
+            "lat": 41.3944,
+            "lng": -88.4262
+          },
+          {
+            "lat": 41.3938,
+            "lng": -88.42625
+          },
+          {
+            "lat": 41.3941,
+            "lng": -88.43235
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 41.3961,
+            "lng": -88.4318
+          },
+          {
+            "lat": 41.3959,
+            "lng": -88.426
+          },
+          {
+            "lat": 41.3954,
+            "lng": -88.42605
+          },
+          {
+            "lat": 41.3956,
+            "lng": -88.43185
+          }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        {
+          "lat": 41.396,
+          "lng": -88.4236
+        },
+        {
+          "lat": 41.3952,
+          "lng": -88.4236
+        },
+        {
+          "lat": 41.39518,
+          "lng": -88.4253
+        },
+        {
+          "lat": 41.39598,
+          "lng": -88.4253
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 251,
+        "pano": "Sgenh7hQAg6nIKXjmhL46g",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 280,
+        "pano": "9h23R-qxOHD85go7Zha6Hw",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 100,
+    "trailersVisible": 220,
+    "trailerParkingCapacity": 482,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 195,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.39400,-88.42850,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "scale",
+    "shipRcvSeparate",
+    "exitLanes"
+  ],
+  "fieldNotes": {
+    "truckGate": "Dedicated private entrance road (Costco Dr) off N Division St; multi-lane truck approach with directional lane arrows and semis queued in z20/z21 imagery; full chain-link perimeter fence confirmed in 2025 Street View along the Division St frontage.",
+    "guardShack": "Gate-island booth visible in the median between inbound/outbound truck lanes on Costco Dr (z20 gatecheck frame), with a security/admin building set beside the gate. Costco corporate standard; overnight truck parking is gated.",
+    "guardShack_confidence": "Booth island read from overhead at z20; Street View does not enter the private road so the booth is not seen at ground level, but the median structure + lane split is unambiguous.",
+    "fastLaneOpportunity": "Wide multi-lane gate apron (4+ paved truck lanes through the gate throat) with room to dedicate an express/bypass lane.",
+    "postGateStaging": "Wide multi-lane paved staging area on Costco Dr just inside the entrance where semis stack before proceeding to docks (z20 imagery shows several trucks lined up).",
+    "dropYard": "482 marked trailer-parking stalls per facility records; satellite shows multiple long rows of parked trailers/containers (white + colored intermodal-style boxes) in dedicated drop yards north and central of the building.",
+    "dockDoors": "Facility records: 100 overhead doors with 53 precast loading positions; dock doors with trailers backed in visible on multiple building faces. Band 50+.",
+    "buildingCount": "Main 1.1M-sqft cross-dock building plus a detached front security/admin building and a truck-service/canopy structure near the gate; counted as 2 primary structures (a separate neighboring DC to the west is NOT part of this property).",
+    "railServed": "No rail spur runs into the property; nearest rail is not connected to the yard.",
+    "urbanRural": "Edge-of-town industrial park on the north side of Morris IL, adjacent to farm fields on the north and west; classified Rural per rubric (small-town/edge-of-town setting).",
+    "scale": "No truck scale/weigh platform positively identified in the truck path; left uncertain.",
+    "shipRcvSeparate": "Cross-dock with docks on multiple faces but no clearly separate ship vs. receive bank confirmed from overhead; left false/uncertain.",
+    "siteAreaAcres": "~195 acres computed via shoelace on the traced fence-line perimeter (includes detention ponds and a southwest expansion/grading pad).",
+    "trailersVisible": "Approximate count from the captured z16-z18 imagery across the drop yards and dock aprons."
+  },
+  "method": "deep-audit"
+}

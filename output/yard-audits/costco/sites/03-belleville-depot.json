@@ -1,0 +1,248 @@
+{
+  "name": "Costco Van Buren Depot, Belleville MI",
+  "type": "Dry Depot",
+  "coords": {
+    "lat": 42.26255,
+    "lng": -83.493
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.2633,
+          "lng": -83.4968
+        },
+        {
+          "lat": 42.2638,
+          "lng": -83.4955
+        },
+        {
+          "lat": 42.264,
+          "lng": -83.4918
+        },
+        {
+          "lat": 42.26415,
+          "lng": -83.4868
+        },
+        {
+          "lat": 42.26345,
+          "lng": -83.4867
+        },
+        {
+          "lat": 42.2632,
+          "lng": -83.4915
+        },
+        {
+          "lat": 42.2606,
+          "lng": -83.4892
+        },
+        {
+          "lat": 42.26045,
+          "lng": -83.4945
+        },
+        {
+          "lat": 42.2603,
+          "lng": -83.4974
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.26395,
+          "lng": -83.4927
+        },
+        {
+          "lat": 42.26395,
+          "lng": -83.4921
+        },
+        {
+          "lat": 42.2633,
+          "lng": -83.49205
+        },
+        {
+          "lat": 42.2633,
+          "lng": -83.49265
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 42.2637,
+            "lng": -83.4962
+          },
+          {
+            "lat": 42.26375,
+            "lng": -83.4918
+          },
+          {
+            "lat": 42.2633,
+            "lng": -83.4918
+          },
+          {
+            "lat": 42.26325,
+            "lng": -83.4962
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 42.2611,
+            "lng": -83.4968
+          },
+          {
+            "lat": 42.2612,
+            "lng": -83.4915
+          },
+          {
+            "lat": 42.26075,
+            "lng": -83.4915
+          },
+          {
+            "lat": 42.26065,
+            "lng": -83.4968
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 42.2629,
+            "lng": -83.4972
+          },
+          {
+            "lat": 42.263,
+            "lng": -83.4887
+          },
+          {
+            "lat": 42.2627,
+            "lng": -83.4887
+          },
+          {
+            "lat": 42.2626,
+            "lng": -83.4972
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 42.2621,
+            "lng": -83.4972
+          },
+          {
+            "lat": 42.2622,
+            "lng": -83.4887
+          },
+          {
+            "lat": 42.2619,
+            "lng": -83.4887
+          },
+          {
+            "lat": 42.2618,
+            "lng": -83.4972
+          }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        {
+          "lat": 42.264,
+          "lng": -83.4915
+        },
+        {
+          "lat": 42.26415,
+          "lng": -83.4872
+        },
+        {
+          "lat": 42.2635,
+          "lng": -83.48715
+        },
+        {
+          "lat": 42.26335,
+          "lng": -83.4915
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 254,
+        "pano": "o3UOmKrq0scZqXkknXzx7w",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 268,
+        "pano": "D-eDcN9QinBp-WBKjZSCWw",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 180,
+    "trailersVisible": 240,
+    "trailerParkingCapacity": 400,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 57.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.262550,-83.493000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "urbanRural",
+    "scale",
+    "buildingCount",
+    "exitLanes"
+  ],
+  "fieldNotes": {
+    "truckGate": "Long divided entrance boulevard off Belleville Rd ends at a controlled truck entrance ~42.2636,-83.4924 with a peaked-roof check-in canopy spanning the truck lane; whole yard ringed by chain-link perimeter fence (confirmed in Street View). Driver reviews describe an organized check-in / dock-assignment process (~10 min check-in).",
+    "guardShack": "Distinct small peaked-canopy/booth structure over the inbound truck lane at the yard entrance, separate from the main building and from the employee office. Consistent with a staffed check-in point.",
+    "remoteGs": "False because a physical staffed gate canopy is present.",
+    "drivewayLong": "Gate-to-yard approach is a ~300m divided boulevard from Belleville Rd; easily holds 3+ trucks. Trailers observed staged along the boulevard apron.",
+    "preGateStaging": "Wide paved boulevard apron outside the inner yard gate where trailers can wait.",
+    "postGateStaging": "Paved holding area inside the entrance, trailers staged on the apron before docks.",
+    "fastLaneOpportunity": "Very wide divided entrance with large aprons and multiple lanes; ample paved width to add an express/bypass lane.",
+    "dockDoors": "Cross-dock building with dock doors along BOTH long faces (north and south); counted well over 100 bays across both faces - banded 50+.",
+    "dropArea": "Multiple full drop-yard rows north and south of the building holding hundreds of unhitched trailers - banded 50+.",
+    "shipRcvSeparate": "Docks on two opposite building faces (north face and south face) form physically separate dock banks, typical of a cross-dock.",
+    "dropYard": "Dedicated trailer-storage rows north (largest) and south of the building, separate from active dock aprons.",
+    "urbanRural": "Van Buren Township, edge-of-town setting: adjacent wastewater plant, public softball park, farmland/wetland to the south, with a residential subdivision nearby. On Detroit metro's outer fabric - judged Rural per rubric's small-town-industrial tiebreak; low-confidence call.",
+    "railServed": "A rail line runs east-west just south of the property but is separated by a treed buffer with no visible spur entering the yard.",
+    "buildingCount": "Main cross-dock warehouse plus an attached/adjacent office-and-check-in structure at the NE; counted as 2.",
+    "entryLanes": "Divided boulevard presents ~2 inbound lanes at the gate; exit similar. Approximate from overhead.",
+    "scale": "No distinct truck scale pad identified in the truck path; left false.",
+    "trailersVisible": "Hundreds of trailers across north and south drop rows and dock faces; 240 is a conservative honest estimate from the captured crops.",
+    "dockDoorCount": "~180 is an estimate summing both long building faces; overhead resolution limits an exact count."
+  },
+  "method": "deep-audit"
+}

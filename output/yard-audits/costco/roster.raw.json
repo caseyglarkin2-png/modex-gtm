@@ -1,0 +1,106 @@
+{
+  "account": "Costco Wholesale",
+  "generatedAt": "2026-06-03",
+  "facilityCount": 11,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Costco Mira Loma Depot, Mira Loma CA",
+      "city": "Mira Loma",
+      "state": "CA",
+      "type": "Refrigerated + Dry Depot",
+      "address": "11600 Riverside Dr, Mira Loma, CA 91752",
+      "source": "Costco careers posting 'MIRA LOMA (WET DEPOT)'; ~1M sq ft SoCal regional cross-dock (cold + 670k sq ft dry building)"
+    },
+    {
+      "idx": 2,
+      "name": "Costco Depot, Tracy CA",
+      "city": "Tracy",
+      "state": "CA",
+      "type": "Dry Depot",
+      "address": "25862 S Schulte Ct, Tracy, CA 95377",
+      "source": "TruckMap/Waze 'Costco Distribution Center, 25862 S Schulte Ct'; NorCal regional cross-dock"
+    },
+    {
+      "idx": 3,
+      "name": "Costco Van Buren Depot, Belleville MI",
+      "city": "Belleville",
+      "state": "MI",
+      "type": "Dry Depot",
+      "address": "5860 Belleville Rd, Belleville, MI 48111",
+      "source": "Waze 'Costco Van Buren Distribution Depot, 5860 Belleville Rd'; Great Lakes regional cross-dock"
+    },
+    {
+      "idx": 4,
+      "name": "Costco Depot, College Park GA",
+      "city": "College Park",
+      "state": "GA",
+      "type": "Dry Depot",
+      "address": "4250 S Fulton Pkwy, College Park, GA 30349",
+      "source": "TruckMap/Hotfrog 'Costco Distribution Center, 4250 S Fulton Pkwy'; Southeast regional depot"
+    },
+    {
+      "idx": 5,
+      "name": "Costco Depot #285, Sumner WA",
+      "city": "Sumner",
+      "state": "WA",
+      "type": "Dry Depot",
+      "address": "4000 142nd Ave E, Sumner, WA 98390",
+      "source": "Loc8NearMe 'Costco Wholesale Depot, 4000 142nd Ave E'; USA.com 'Sumner Depot #285'; Pacific NW cross-dock"
+    },
+    {
+      "idx": 6,
+      "name": "Costco Depot #288/289, Dallas TX",
+      "city": "Dallas",
+      "state": "TX",
+      "type": "Refrigerated Depot",
+      "address": "3730 Mountain Creek Pkwy, Dallas, TX 75236",
+      "source": "USA.com 'Costco Wholesale Depot #288/289'; 2025 cold-addition permit (16 new cold dock doors); Texas regional wet/cold depot"
+    },
+    {
+      "idx": 7,
+      "name": "Costco Dry Depot, Morris IL",
+      "city": "Morris",
+      "state": "IL",
+      "type": "Dry Depot",
+      "address": "3800 N Division St, Morris, IL 60450",
+      "source": "Waze 'Costco - Dry Depot'; Panjiva 'Costco Morris Depot'; Chicago/Midwest cross-dock"
+    },
+    {
+      "idx": 8,
+      "name": "Costco Wet Depot #265, Monroe Township NJ",
+      "city": "Monroe Township",
+      "state": "NJ",
+      "type": "Refrigerated Depot",
+      "address": "12 Costco Dr, Monroe Township, NJ 08831",
+      "source": "ChamberOfCommerce 'Costco Wet Depot #265, 12 Costco Dr'; Northeast cold-chain depot"
+    },
+    {
+      "idx": 9,
+      "name": "Costco Dry Depot #175, Monroe Township NJ",
+      "city": "Monroe Township",
+      "state": "NJ",
+      "type": "Dry Depot",
+      "address": "10 Costco Dr, Monroe Township, NJ 08831",
+      "source": "Loc8NearMe 'Costco Dry Depot #175, 10 Costco Dr'; Northeast dry cross-dock (paired with #265 wet)"
+    },
+    {
+      "idx": 10,
+      "name": "Costco Depot #584/585, Salt Lake City UT",
+      "city": "Salt Lake City",
+      "state": "UT",
+      "type": "Dry Depot",
+      "address": "5995 W 300 S, Salt Lake City, UT 84104",
+      "source": "TruckMap/Yelp 'Costco Depot, 5995 W 300 S'; USA.com 'Depot #584/585'; Intermountain West cross-dock"
+    },
+    {
+      "idx": 11,
+      "name": "Costco Depot, Monrovia MD",
+      "city": "Monrovia",
+      "state": "MD",
+      "type": "Refrigerated Depot",
+      "address": "5236 Intercoastal Dr, Monrovia, MD 21770",
+      "source": "Panjiva 'Costco Wholesale Depot 171, 5236 Intercoastal Dr'; Novak Construction (84-acre, ~300 truck bays, cooler/freezer); Mid-Atlantic depot"
+    }
+  ]
+}

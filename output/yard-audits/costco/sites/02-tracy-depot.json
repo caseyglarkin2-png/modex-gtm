@@ -1,0 +1,248 @@
+{
+  "name": "Costco Depot, Tracy CA",
+  "type": "Dry Depot",
+  "coords": {
+    "lat": 37.716976,
+    "lng": -121.522634
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.72025,
+          "lng": -121.5258
+        },
+        {
+          "lat": 37.72045,
+          "lng": -121.5172
+        },
+        {
+          "lat": 37.715,
+          "lng": -121.5168
+        },
+        {
+          "lat": 37.7138,
+          "lng": -121.5206
+        },
+        {
+          "lat": 37.71575,
+          "lng": -121.525
+        },
+        {
+          "lat": 37.7186,
+          "lng": -121.5263
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 37.71705,
+          "lng": -121.52258
+        },
+        {
+          "lat": 37.71708,
+          "lng": -121.52168
+        },
+        {
+          "lat": 37.71668,
+          "lng": -121.52166
+        },
+        {
+          "lat": 37.71665,
+          "lng": -121.52256
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 37.7164,
+            "lng": -121.5247
+          },
+          {
+            "lat": 37.7149,
+            "lng": -121.523
+          },
+          {
+            "lat": 37.7142,
+            "lng": -121.5238
+          },
+          {
+            "lat": 37.71565,
+            "lng": -121.52555
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 37.71955,
+            "lng": -121.5192
+          },
+          {
+            "lat": 37.7195,
+            "lng": -121.517
+          },
+          {
+            "lat": 37.715,
+            "lng": -121.51695
+          },
+          {
+            "lat": 37.71505,
+            "lng": -121.51915
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 37.7197,
+            "lng": -121.5224
+          },
+          {
+            "lat": 37.71975,
+            "lng": -121.52055
+          },
+          {
+            "lat": 37.7184,
+            "lng": -121.5205
+          },
+          {
+            "lat": 37.71835,
+            "lng": -121.52235
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 37.7195,
+            "lng": -121.5215
+          },
+          {
+            "lat": 37.71955,
+            "lng": -121.5211
+          },
+          {
+            "lat": 37.7146,
+            "lng": -121.5209
+          },
+          {
+            "lat": 37.71455,
+            "lng": -121.5213
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 37.7192,
+            "lng": -121.5264
+          },
+          {
+            "lat": 37.716,
+            "lng": -121.5226
+          },
+          {
+            "lat": 37.71575,
+            "lng": -121.523
+          },
+          {
+            "lat": 37.71895,
+            "lng": -121.52685
+          }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        {
+          "lat": 37.71815,
+          "lng": -121.5225
+        },
+        {
+          "lat": 37.71818,
+          "lng": -121.5215
+        },
+        {
+          "lat": 37.71715,
+          "lng": -121.52148
+        },
+        {
+          "lat": 37.71712,
+          "lng": -121.52248
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 170,
+        "pano": "wXQePY-JhcdhnUjTG8rQKw",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 140,
+    "trailersVisible": 600,
+    "trailerParkingCapacity": 800,
+    "truckGateCount": 2,
+    "buildingCount": 3,
+    "siteAreaAcres": 120.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.716976,-121.522634,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": true
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "scale",
+    "exitLanes"
+  ],
+  "fieldNotes": {
+    "truckGate": "Central guarded checkpoint deep inside the campus: a large flat canopy spanning the truck lanes with a small ~1-vehicle guard booth beside it, plus E-W lane markings with directional arrows. Confirmed at z19-z20 satellite over roster coords.",
+    "guardShack": "Small windowed booth (~1-vehicle footprint) set beside the canopy lanes at the central checkpoint; a second smaller guard structure controls the SE east-yard entrance.",
+    "remoteGs": "False because a staffed guard booth is present at the gate.",
+    "multiStep": "Two checkpoint stages: a primary canopy guard checkpoint on the central spine, then a separate SE guard/gate controlling access to the east trailer drop yards.",
+    "multipleFacilities": "Campus of 3+ large buildings: the angled cross-dock depot (NW), a giant DC warehouse (center-east), and an annex/DDC building (south).",
+    "dockDoors": "50+. The DC warehouse west face alone has dozens of trailers backed in along a continuous dock line; the cross-dock depot building adds a long bank of doors. Total estimated ~140 across faces, flagged as approximate.",
+    "dropArea": "50+. Multiple large drop yards: a canal-side yard on the SW, a very large multi-row trailer yard on the east, and a north laydown yard. Hundreds of parked trailers visible.",
+    "shipRcvSeparate": "Distinct dock clusters on different building faces (DC west face vs cross-dock depot face) plus separate east drop yards imply separated ship/receive flows.",
+    "entryExitSeparate": "Multiple controlled access points (central canopy checkpoint + SE east-yard checkpoint) with one-way lane arrows indicate separated entry/exit routing through the campus.",
+    "fastLaneOpportunity": "Wide multi-lane canopy apron with substantial paved width at the central checkpoint leaves room for an express/bypass lane.",
+    "urbanRural": "Edge-of-town Tracy industrial park; farmland to the south and east and the Delta-Mendota/California Aqueduct canal on the SW. Per rubric, edge-of-town industrial classes as Rural.",
+    "connectivityIssue": "False; large modern DC in an active industrial park with town/utilities adjacent to the north, so cellular coverage is expected to be adequate despite the rural fringe.",
+    "scale": "No truck scale clearly identified in overhead imagery; left uncertain.",
+    "railServed": "No rail spur enters the property; the nearest linear features are roads and the canal, not track.",
+    "streetView": "Only public-road Street View coverage is the S Schulte Ct cul-de-sac frontage pano (wXQePY-JhcdhnUjTG8rQKw, 2019-03) showing the depot office face; the internal guarded checkpoint has no Street View coverage (ZERO_RESULTS), so truckGate hasCoverage is false."
+  },
+  "method": "deep-audit"
+}

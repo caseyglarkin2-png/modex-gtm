@@ -76,6 +76,17 @@ const ENTRIES: SlugEntry[] = [
   { auditSlug: 'unfi', micrositeSlug: 'unfi', displayName: 'UNFI', archetype: 'grocer-distributor', estimatedFootprint: 56, coverageNote: 'UNFI operates ~56 NA distribution centers. We audited the 30 highest-throughput; smaller facilities share gate/dock archetypes with the audited cohort.' },
   { auditSlug: 'universal-logistics', micrositeSlug: 'universal-logistics-holdings', displayName: 'Universal Logistics Holdings', archetype: '3pl' },
   { auditSlug: 'westrock-coffee', micrositeSlug: 'westrock-coffee', displayName: 'Westrock Coffee', archetype: 'cpg' },
+  // ── Retail / grocery DC networks (2026-06 expansion) ───────────────────────
+  { auditSlug: 'amazon', micrositeSlug: 'amazon', displayName: 'Amazon', archetype: 'retailer' },
+  { auditSlug: 'costco', micrositeSlug: 'costco', displayName: 'Costco Wholesale', archetype: 'retailer' },
+  { auditSlug: 'harris-teeter', micrositeSlug: 'harris-teeter', displayName: 'Harris Teeter', archetype: 'grocer-distributor' },
+  { auditSlug: 'kroger', micrositeSlug: 'kroger', displayName: 'The Kroger Co.', archetype: 'grocer-distributor' },
+  { auditSlug: 'publix', micrositeSlug: 'publix', displayName: 'Publix Super Markets', archetype: 'grocer-distributor' },
+  { auditSlug: 'sams-club', micrositeSlug: 'sams-club', displayName: "Sam's Club", archetype: 'retailer' },
+  { auditSlug: 'seven-eleven', micrositeSlug: 'seven-eleven', displayName: '7-Eleven', archetype: 'grocer-distributor' },
+  { auditSlug: 'stop-and-shop', micrositeSlug: 'stop-and-shop', displayName: 'Stop & Shop', archetype: 'grocer-distributor' },
+  { auditSlug: 'target', micrositeSlug: 'target', displayName: 'Target', archetype: 'retailer' },
+  { auditSlug: 'walmart', micrositeSlug: 'walmart', displayName: 'Walmart', archetype: 'retailer' },
 ];
 
 const BY_AUDIT = new Map(ENTRIES.map((e) => [e.auditSlug, e]));

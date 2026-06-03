@@ -1,0 +1,241 @@
+{
+  "name": "Costco Depot #584/585, Salt Lake City UT",
+  "type": "Dry Depot",
+  "coords": {
+    "lat": 40.75815,
+    "lng": -112.0323
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.7614,
+          "lng": -112.0346
+        },
+        {
+          "lat": 40.7614,
+          "lng": -112.0293
+        },
+        {
+          "lat": 40.7549,
+          "lng": -112.0293
+        },
+        {
+          "lat": 40.7549,
+          "lng": -112.0346
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.76155,
+          "lng": -112.03392
+        },
+        {
+          "lat": 40.76155,
+          "lng": -112.03333
+        },
+        {
+          "lat": 40.75985,
+          "lng": -112.03338
+        },
+        {
+          "lat": 40.75985,
+          "lng": -112.03397
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 40.75985,
+            "lng": -112.03098
+          },
+          {
+            "lat": 40.75985,
+            "lng": -112.02935
+          },
+          {
+            "lat": 40.756,
+            "lng": -112.02935
+          },
+          {
+            "lat": 40.756,
+            "lng": -112.03098
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.76138,
+            "lng": -112.0333
+          },
+          {
+            "lat": 40.76138,
+            "lng": -112.03135
+          },
+          {
+            "lat": 40.76055,
+            "lng": -112.03135
+          },
+          {
+            "lat": 40.76055,
+            "lng": -112.0333
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.7602,
+            "lng": -112.0346
+          },
+          {
+            "lat": 40.7602,
+            "lng": -112.03345
+          },
+          {
+            "lat": 40.7556,
+            "lng": -112.03345
+          },
+          {
+            "lat": 40.7556,
+            "lng": -112.0346
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 40.76101,
+            "lng": -112.03331
+          },
+          {
+            "lat": 40.76101,
+            "lng": -112.03364
+          },
+          {
+            "lat": 40.75515,
+            "lng": -112.03357
+          },
+          {
+            "lat": 40.75515,
+            "lng": -112.03324
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.76101,
+            "lng": -112.03133
+          },
+          {
+            "lat": 40.76101,
+            "lng": -112.031
+          },
+          {
+            "lat": 40.75515,
+            "lng": -112.03093
+          },
+          {
+            "lat": 40.75515,
+            "lng": -112.03126
+          }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        {
+          "lat": 40.76125,
+          "lng": -112.0334
+        },
+        {
+          "lat": 40.76125,
+          "lng": -112.0315
+        },
+        {
+          "lat": 40.76035,
+          "lng": -112.0315
+        },
+        {
+          "lat": 40.76035,
+          "lng": -112.0334
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 165,
+        "pano": "JSzFNVV-enXULm4bbe7BzQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 181,
+        "pano": "JSzFNVV-enXULm4bbe7BzQ",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 180,
+    "trailersVisible": 240,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 79.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.75815,-112.03230,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "trailerParkingCapacity"
+  ],
+  "fieldNotes": {
+    "truckGate": "Single controlled truck entrance off 300 South on the north side; wide paved throat funnels trucks to a manned gatehouse with a red canopy spanning the drive (visible in 2021-05 inner-yard Street View). Perimeter chain-link fencing confirmed.",
+    "guardShack": "Canopied check-in gatehouse in the entry throat with trucks queued at it; corroborated by published driver procedure (check in, receive a pager with the unload door number).",
+    "remoteGs": "False because the gate IS manned with a physical check-in booth, not a kiosk.",
+    "shipRcvSeparate": "Cross-dock: continuous dock-door rows on BOTH long faces (east and west) of the building; inbound and outbound run from physically separate dock banks.",
+    "dockDoors": "Both long faces are packed with dock doors for ~640m; west-face Street View shows a continuous wall of dock seals. Easily 50+; ~180 total is an honest overhead estimate across both faces.",
+    "dropArea": "Extensive trailer drop yards: a large east-side lot full of parked trailers, a north drop yard along 300 South, and a west-side yard. 50+ band.",
+    "fastLaneOpportunity": "Very wide entrance apron with multiple truck-widths of unused paved room at the gate; physical space to add an express/bypass lane.",
+    "entryLanes": "Estimated from the wide throat (~2 effective lanes inbound past the gatehouse); not lane-striped at the road.",
+    "scale": "No truck scale identified in the truck path; left false (low confidence).",
+    "railServed": "No rail spur enters the property.",
+    "trailerParkingCapacity": "Overhead estimate from drop-yard area; approximate."
+  },
+  "method": "deep-audit"
+}
