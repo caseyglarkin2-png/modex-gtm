@@ -27,8 +27,11 @@ export async function GET(req: NextRequest) {
   const pano = req.nextUrl.searchParams.get('pano') ?? '';
   const headingRaw = req.nextUrl.searchParams.get('heading') ?? '0';
 
-  // pano ids are URL-safe base64-ish tokens; reject anything else.
-  if (!pano || !/^[A-Za-z0-9_-]+$/.test(pano) || pano.length > 256) {
+  // pano ids are URL-safe base64-ish tokens. Standard Google-car panos are
+  // [A-Za-z0-9_-]; user-contributed photosphere panos are longer and end with
+  // a '.' (e.g. "CAoSFkNJSE0...Uw."). Both are valid Street View Static API
+  // ids, so allow the dot — rejecting it 400s every photosphere zone.
+  if (!pano || !/^[A-Za-z0-9_.-]+$/.test(pano) || pano.length > 256) {
     return NextResponse.json({ error: 'invalid_pano' }, { status: 400 });
   }
   const heading = Math.max(0, Math.min(359, Math.round(Number(headingRaw) || 0)));
