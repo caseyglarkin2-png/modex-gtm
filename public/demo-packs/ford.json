@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-03T00:45:50.476Z",
+  "builtAt": "2026-06-03T01:13:57.181Z",
   "account": {
     "slug": "ford",
     "displayName": "Ford Motor Company",
@@ -616,8 +616,48 @@
               }
             ]
           },
-          "truckGate": null,
-          "dropYards": [],
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 38.15312,
+                "lng": -85.73356
+              },
+              {
+                "lat": 38.15337,
+                "lng": -85.73338
+              },
+              {
+                "lat": 38.15321,
+                "lng": -85.73298
+              },
+              {
+                "lat": 38.15296,
+                "lng": -85.73316
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 38.1546,
+                  "lng": -85.73295
+                },
+                {
+                  "lat": 38.1546,
+                  "lng": -85.73185
+                },
+                {
+                  "lat": 38.15355,
+                  "lng": -85.73185
+                },
+                {
+                  "lat": 38.15355,
+                  "lng": -85.73295
+                }
+              ]
+            }
+          ],
           "dockAprons": [
             {
               "ring": [
@@ -645,6 +685,11 @@
             "perimeter": {
               "heading": 180,
               "pano": "sbePv_CLAUWZBGqWYquSVA",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 60,
+              "pano": "CAoSFkNJSE0wb2dLRUlDQWdJQ0Jpc0RMVXc.",
               "hasCoverage": true
             }
           }
@@ -681,6 +726,52 @@
           "scale": false,
           "dropYard": true,
           "multiStep": true
+        },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
         },
         "dossierExcerpt": "- Name: Ford - Louisville Assembly Plant, Louisville KY\n- Type: Vehicle Assembly Plant (Ford Escape, Lincoln Corsair)\n- Address: 2000 Fern Valley Rd, Louisville, KY 40213\n- Resolved center: 38.15470, -85.72850",
         "mapsUrl": "https://www.google.com/maps/@38.15470,-85.72850,400m/data=!3m1!1e3",
@@ -903,7 +994,26 @@
               }
             ]
           },
-          "truckGate": null,
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 41.6615,
+                "lng": -87.55955
+              },
+              {
+                "lat": 41.6615,
+                "lng": -87.55905
+              },
+              {
+                "lat": 41.66122,
+                "lng": -87.55905
+              },
+              {
+                "lat": 41.66122,
+                "lng": -87.55955
+              }
+            ]
+          },
           "dropYards": [
             {
               "ring": [
@@ -926,8 +1036,36 @@
               ]
             }
           ],
-          "dockAprons": [],
-          "staging": null
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 41.66127,
+                  "lng": -87.561087
+                },
+                {
+                  "lat": 41.66121,
+                  "lng": -87.559885
+                },
+                {
+                  "lat": 41.66099,
+                  "lng": -87.5599
+                },
+                {
+                  "lat": 41.66105,
+                  "lng": -87.5611
+                }
+              ]
+            }
+          ],
+          "staging": null,
+          "streetViewMeta": {
+            "truckGate": {
+              "heading": 268,
+              "pano": "zqm4M2rf_qN-X66l6pvPUw",
+              "hasCoverage": true
+            }
+          }
         },
         "yardMetrics": {
           "dockDoorCount": 45,
@@ -961,6 +1099,52 @@
           "scale": false,
           "dropYard": true,
           "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
         },
         "dossierExcerpt": "Roster coordinates (geocode ROOFTOP, moved 26 m) landed directly on the main\nplant building. Wide satellite (z15-16) shows a large industrial complex with a\ndistinctive multi-bay sawtooth assembly building along the Calumet River, with\nTorrence Ave running NE-SW along the east side and dense residential\nneighbourhoods east of the road. Street View on the west side of Torrence Ave\n(2024) shows the building wall lettered \"CHICAGO ASSEMBLY PLANT\" with the Ford\noval — positively the right facility. The Hegewisch-neighbourhood / Calumet\nRiver / Torrence Ave context matches all web sources.",
         "mapsUrl": "https://www.google.com/maps/@41.66662,-87.559702,400m/data=!3m1!1e3",
@@ -1039,7 +1223,26 @@
               }
             ]
           },
-          "truckGate": null,
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 41.48628,
+                "lng": -82.07137
+              },
+              {
+                "lat": 41.48626,
+                "lng": -82.07095
+              },
+              {
+                "lat": 41.48589,
+                "lng": -82.07092
+              },
+              {
+                "lat": 41.48591,
+                "lng": -82.07134
+              }
+            ]
+          },
           "dropYards": [
             {
               "ring": [
@@ -1062,8 +1265,36 @@
               ]
             }
           ],
-          "dockAprons": [],
-          "staging": null
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 41.48652,
+                  "lng": -82.06998
+                },
+                {
+                  "lat": 41.4865,
+                  "lng": -82.06948
+                },
+                {
+                  "lat": 41.48636,
+                  "lng": -82.06948
+                },
+                {
+                  "lat": 41.48638,
+                  "lng": -82.06998
+                }
+              ]
+            }
+          ],
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 85,
+              "pano": "tcpHV3EvNhx-RuyCA0cPdw",
+              "hasCoverage": true
+            }
+          }
         },
         "yardMetrics": {
           "dockDoorCount": 45,
@@ -1097,6 +1328,52 @@
           "scale": false,
           "dropYard": true,
           "multiStep": true
+        },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
         },
         "dossierExcerpt": "- Name: Ford - Ohio Assembly Plant, Avon Lake OH\n- Type: Vehicle Assembly Plant (Super Duty chassis cab, F-650/750, E-Series)\n- Address: 650 Miller Rd, Avon Lake, OH 44012\n- Resolved center: 41.48720, -82.06550",
         "mapsUrl": "https://www.google.com/maps/@41.48720,-82.06550,400m/data=!3m1!1e3",
@@ -1179,7 +1456,26 @@
               }
             ]
           },
-          "truckGate": null,
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 42.1071,
+                "lng": -83.2519
+              },
+              {
+                "lat": 42.1071,
+                "lng": -83.2514
+              },
+              {
+                "lat": 42.10682,
+                "lng": -83.2514
+              },
+              {
+                "lat": 42.10682,
+                "lng": -83.2519
+              }
+            ]
+          },
           "dropYards": [
             {
               "ring": [
@@ -1202,7 +1498,28 @@
               ]
             }
           ],
-          "dockAprons": [],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 42.10595,
+                  "lng": -83.2517
+                },
+                {
+                  "lat": 42.10595,
+                  "lng": -83.25192
+                },
+                {
+                  "lat": 42.10435,
+                  "lng": -83.25192
+                },
+                {
+                  "lat": 42.10435,
+                  "lng": -83.2517
+                }
+              ]
+            }
+          ],
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
@@ -1244,6 +1561,52 @@
           "scale": false,
           "dropYard": true,
           "multiStep": true
+        },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
         },
         "dossierExcerpt": "- Name: Ford - Flat Rock Assembly Plant, Flat Rock MI\n- Type: Vehicle Assembly Plant (Ford Mustang — exclusive NA production)\n- Address: 1 International Dr, Flat Rock, MI 48134\n- Resolved center: 42.10560, -83.24820",
         "mapsUrl": "https://www.google.com/maps/@42.10560,-83.24820,400m/data=!3m1!1e3",
