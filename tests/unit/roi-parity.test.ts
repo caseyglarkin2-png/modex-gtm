@@ -57,13 +57,12 @@ describe('inline ROI parity with the full calculator', () => {
 
   it('coca-cola inline annual value equals the calculator output to the dollar', () => {
     // Golden value cross-checked against the actual Flow-State- engine
-    // (buildInputsFromAsks + buildDashboard) on 2026-06-01. If the coca-cola
-    // pack is re-audited this will change — update it deliberately, don't paper
-    // over it; a drift here means inline and calculator disagree.
+    // (buildInputsFromAsks + buildDashboard). Updated 2026-06-03 after
+    // dc08d15 restored totalGlobalFootprint (270) to the coca-cola pack.
     const pack = loadPack('coca-cola.json');
     const dash = buildROIDashboard(buildAccountRoiModel(pack));
-    expect(dash.totalFacilities).toBe(30);
-    expect(Math.round(dash.comparison.yardFlow.total)).toBe(55_864_262);
+    expect(dash.totalFacilities).toBe(270);
+    expect(Math.round(dash.comparison.yardFlow.total)).toBe(431_822_741);
   });
 
   it.each(packFiles)('%s: produces a finite, positive, summing ROI', (file) => {

@@ -1,0 +1,5406 @@
+[
+  {
+    "slug": "toyota",
+    "account": "Toyota",
+    "totalFacilities": 17,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "Toyota",
+          "accountSlug": "toyota",
+          "idx": 16,
+          "name": "Toyota Parts Distribution Center - Ontario CA",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.034814,
+          "lng": -117.584802,
+          "type": "Parts Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 0.5
+      },
+      {
+        "facility": {
+          "account": "Toyota",
+          "accountSlug": "toyota",
+          "idx": 11,
+          "name": "TABC Inc - Long Beach CA",
+          "city": "Long Beach",
+          "state": "CA",
+          "lat": 33.872001,
+          "lng": -118.162735,
+          "type": "Parts/Components Plant (stamping, welding, catalytic converters)"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 34.6
+      },
+      {
+        "facility": {
+          "account": "Toyota",
+          "accountSlug": "toyota",
+          "idx": 13,
+          "name": "Toyota Logistics Services Vehicle Distribution Center - Long Beach CA",
+          "city": "Long Beach",
+          "state": "CA",
+          "lat": 33.779816,
+          "lng": -118.217365,
+          "type": "Vehicle Distribution Center (port processing)"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 40
+      }
+    ],
+    "closestDistance": 0.5,
+    "uniquePrimoSites": [
+      "US PL Ontario Factory",
+      "US PL Cabazon Factory"
+    ],
+    "uniqueRegions": [
+      "Ontario, CA",
+      "Cabazon, CA"
+    ],
+    "solutionsNearby": [
+      "Driver Journey"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "costco",
+    "account": "Costco Wholesale",
+    "totalFacilities": 11,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "Costco Wholesale",
+          "accountSlug": "costco",
+          "idx": 6,
+          "name": "Costco Depot #288/289, Dallas TX",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.692336,
+          "lng": -96.960506,
+          "type": "Refrigerated Depot"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 0.8
+      },
+      {
+        "facility": {
+          "account": "Costco Wholesale",
+          "accountSlug": "costco",
+          "idx": 1,
+          "name": "Costco Mira Loma Depot, Mira Loma CA",
+          "city": "Mira Loma",
+          "state": "CA",
+          "lat": 34.016243,
+          "lng": -117.535734,
+          "type": "Refrigerated + Dry Depot"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 3.6
+      }
+    ],
+    "closestDistance": 0.8,
+    "uniquePrimoSites": [
+      "US PL Ontario Factory",
+      "US PL Cabazon Factory",
+      "US PL Dallas 2 Factory"
+    ],
+    "uniqueRegions": [
+      "Ontario, CA",
+      "Cabazon, CA",
+      "Dallas, TX"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "YMS"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "the-home-depot",
+    "account": "The Home Depot",
+    "totalFacilities": 30,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "The Home Depot",
+          "accountSlug": "the-home-depot",
+          "idx": 9,
+          "name": "Home Depot RDC - Breinigsville PA",
+          "city": "Breinigsville",
+          "state": "PA",
+          "lat": 40.551634,
+          "lng": -75.627668,
+          "type": "Rapid Deployment Center"
+        },
+        "primoSite": {
+          "name": "US DC NFI - Breinigsville",
+          "city": "Breinigsville",
+          "state": "PA",
+          "lat": 40.534,
+          "lng": -75.629,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 1.2
+      },
+      {
+        "facility": {
+          "account": "The Home Depot",
+          "accountSlug": "the-home-depot",
+          "idx": 19,
+          "name": "Home Depot SDC - Mira Loma CA",
+          "city": "Mira Loma",
+          "state": "CA",
+          "lat": 34.028294,
+          "lng": -117.536009,
+          "type": "Stocking Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 3.3
+      },
+      {
+        "facility": {
+          "account": "The Home Depot",
+          "accountSlug": "the-home-depot",
+          "idx": 1,
+          "name": "Home Depot FDC - Dallas TX",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.747894,
+          "lng": -96.923588,
+          "type": "Flatbed Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 3.9
+      },
+      {
+        "facility": {
+          "account": "The Home Depot",
+          "accountSlug": "the-home-depot",
+          "idx": 3,
+          "name": "Home Depot RDC - Dallas TX",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.639055,
+          "lng": -96.852104,
+          "type": "Rapid Deployment Center"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 6.7
+      },
+      {
+        "facility": {
+          "account": "The Home Depot",
+          "accountSlug": "the-home-depot",
+          "idx": 26,
+          "name": "Home Depot SDC - Baytown TX",
+          "city": "Baytown",
+          "state": "TX",
+          "lat": 29.732166,
+          "lng": -94.917884,
+          "type": "Stocking Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Pasadena Factory",
+          "city": "Pasadena",
+          "state": "TX",
+          "lat": 29.5605,
+          "lng": -95.1167,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 16.8
+      },
+      {
+        "facility": {
+          "account": "The Home Depot",
+          "accountSlug": "the-home-depot",
+          "idx": 23,
+          "name": "Home Depot SDC - Jersey Village TX",
+          "city": "Jersey Village",
+          "state": "TX",
+          "lat": 29.87742,
+          "lng": -95.557076,
+          "type": "Stocking Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL S Houston Factory",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.665,
+          "lng": -95.385,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 17.9
+      },
+      {
+        "facility": {
+          "account": "The Home Depot",
+          "accountSlug": "the-home-depot",
+          "idx": 8,
+          "name": "Home Depot RDC - Houston TX",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.940329,
+          "lng": -95.554781,
+          "type": "Rapid Deployment Center"
+        },
+        "primoSite": {
+          "name": "US PL S Houston Factory",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.665,
+          "lng": -95.385,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 21.6
+      },
+      {
+        "facility": {
+          "account": "The Home Depot",
+          "accountSlug": "the-home-depot",
+          "idx": 7,
+          "name": "Home Depot RDC - Redlands CA",
+          "city": "Redlands",
+          "state": "CA",
+          "lat": 34.088222,
+          "lng": -117.204711,
+          "type": "Rapid Deployment Center"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 22.5
+      },
+      {
+        "facility": {
+          "account": "The Home Depot",
+          "accountSlug": "the-home-depot",
+          "idx": 28,
+          "name": "Home Depot DFC - Perris CA",
+          "city": "Perris",
+          "state": "CA",
+          "lat": 33.858141,
+          "lng": -117.215915,
+          "type": "Direct Fulfillment Center"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 24.9
+      }
+    ],
+    "closestDistance": 1.2,
+    "uniquePrimoSites": [
+      "US PL Dallas 2 Factory",
+      "US PL Ontario Factory",
+      "US PL Cabazon Factory",
+      "US PL S Houston Factory",
+      "US PL Pasadena Factory",
+      "US PL Allentown Factory",
+      "US PL Allentown NPL Factory",
+      "US DC NFI - Breinigsville"
+    ],
+    "uniqueRegions": [
+      "Dallas, TX",
+      "Ontario, CA",
+      "Cabazon, CA",
+      "Houston, TX",
+      "Pasadena, TX",
+      "Breinigsville, PA"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "YMS",
+      "RTLS",
+      "Machine Vision Gate"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "unfi",
+    "account": "UNFI (United Natural Foods, Inc.)",
+    "totalFacilities": 30,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "UNFI (United Natural Foods, Inc.)",
+          "accountSlug": "unfi",
+          "idx": 4,
+          "name": "UNFI - Allentown PA DC",
+          "city": "Allentown",
+          "state": "PA",
+          "lat": 40.554158,
+          "lng": -75.632566,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Allentown Factory",
+          "city": "Breinigsville",
+          "state": "PA",
+          "lat": 40.5333,
+          "lng": -75.6333,
+          "solutions": [
+            "Driver Journey",
+            "RTLS",
+            "Machine Vision Gate"
+          ]
+        },
+        "distanceMiles": 1.4
+      },
+      {
+        "facility": {
+          "account": "UNFI (United Natural Foods, Inc.)",
+          "accountSlug": "unfi",
+          "idx": 17,
+          "name": "UNFI - Greenwood IN DC (Indianapolis)",
+          "city": "Greenwood",
+          "state": "IN",
+          "lat": 39.61008,
+          "lng": -86.057658,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Greenwood Indiana",
+          "city": "Greenwood",
+          "state": "IN",
+          "lat": 39.5945,
+          "lng": -86.1167,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 3.3
+      },
+      {
+        "facility": {
+          "account": "UNFI (United Natural Foods, Inc.)",
+          "accountSlug": "unfi",
+          "idx": 14,
+          "name": "UNFI - Aurora CO DC (Denver)",
+          "city": "Aurora",
+          "state": "CO",
+          "lat": 39.774031,
+          "lng": -104.776628,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Denver Factory",
+          "city": "Denver",
+          "state": "CO",
+          "lat": 39.7392,
+          "lng": -104.9903,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 11.6
+      },
+      {
+        "facility": {
+          "account": "UNFI (United Natural Foods, Inc.)",
+          "accountSlug": "unfi",
+          "idx": 20,
+          "name": "UNFI - Moreno Valley CA DC",
+          "city": "Moreno Valley",
+          "state": "CA",
+          "lat": 33.911201,
+          "lng": -117.2788,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 20
+      },
+      {
+        "facility": {
+          "account": "UNFI (United Natural Foods, Inc.)",
+          "accountSlug": "unfi",
+          "idx": 19,
+          "name": "UNFI - Rocklin CA DC (Western Region)",
+          "city": "Rocklin",
+          "state": "CA",
+          "lat": 38.81344,
+          "lng": -121.282819,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Sacramento Factory",
+          "city": "Sacramento",
+          "state": "CA",
+          "lat": 38.5158,
+          "lng": -121.3809,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 21.2
+      },
+      {
+        "facility": {
+          "account": "UNFI (United Natural Foods, Inc.)",
+          "accountSlug": "unfi",
+          "idx": 25,
+          "name": "UNFI - Vernon CA DC (Los Angeles)",
+          "city": "Vernon",
+          "state": "CA",
+          "lat": 34.003903,
+          "lng": -118.230073,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 36.5
+      },
+      {
+        "facility": {
+          "account": "UNFI (United Natural Foods, Inc.)",
+          "accountSlug": "unfi",
+          "idx": 29,
+          "name": "UNFI - Richburg SC DC (Charlotte area)",
+          "city": "Richburg",
+          "state": "SC",
+          "lat": 34.715975,
+          "lng": -81.019526,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL McBee Factory",
+          "city": "McBee",
+          "state": "SC",
+          "lat": 34.47,
+          "lng": -80.2586,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 46.5
+      }
+    ],
+    "closestDistance": 1.4,
+    "uniquePrimoSites": [
+      "US PL Allentown Factory",
+      "US PL Allentown NPL Factory",
+      "US DC NFI - Breinigsville",
+      "US PL Denver Factory",
+      "US PL Greenwood Indiana",
+      "US PL Sacramento Factory",
+      "US PL Ontario Factory",
+      "US PL Cabazon Factory",
+      "US PL McBee Factory"
+    ],
+    "uniqueRegions": [
+      "Breinigsville, PA",
+      "Denver, CO",
+      "Greenwood, IN",
+      "Sacramento, CA",
+      "Ontario, CA",
+      "Cabazon, CA",
+      "McBee, SC"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "RTLS",
+      "Machine Vision Gate"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "sc-johnson",
+    "account": "SC Johnson",
+    "totalFacilities": 10,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "SC Johnson",
+          "accountSlug": "sc-johnson",
+          "idx": 10,
+          "name": "Ontario Distribution Center - Ontario CA",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.046012,
+          "lng": -117.618383,
+          "type": "Distribution Center (aerosol storage)"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 1.6
+      },
+      {
+        "facility": {
+          "account": "SC Johnson",
+          "accountSlug": "sc-johnson",
+          "idx": 8,
+          "name": "Woodland Regional Distribution Center - Woodland CA",
+          "city": "Woodland",
+          "state": "CA",
+          "lat": 38.678343,
+          "lng": -121.72736,
+          "type": "Regional Distribution Center (aerosol storage)"
+        },
+        "primoSite": {
+          "name": "US PL Sacramento Factory",
+          "city": "Sacramento",
+          "state": "CA",
+          "lat": 38.5158,
+          "lng": -121.3809,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 21.8
+      },
+      {
+        "facility": {
+          "account": "SC Johnson",
+          "accountSlug": "sc-johnson",
+          "idx": 6,
+          "name": "Fort Worth Regional Distribution Center - Fort Worth TX",
+          "city": "Fort Worth",
+          "state": "TX",
+          "lat": 32.968943,
+          "lng": -97.331494,
+          "type": "Regional Distribution Center (aerosol storage)"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 29.3
+      }
+    ],
+    "closestDistance": 1.6,
+    "uniquePrimoSites": [
+      "US PL Dallas 2 Factory",
+      "US PL Sacramento Factory",
+      "US PL Ontario Factory",
+      "US PL Cabazon Factory"
+    ],
+    "uniqueRegions": [
+      "Dallas, TX",
+      "Sacramento, CA",
+      "Ontario, CA",
+      "Cabazon, CA"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "YMS"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "dannon",
+    "account": "Dannon",
+    "totalFacilities": 14,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "Dannon",
+          "accountSlug": "dannon",
+          "idx": 6,
+          "name": "Danone - Dallas TX",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.705103,
+          "lng": -96.920756,
+          "type": "Multi-category beverage plant (refrigerated)"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 1.7
+      },
+      {
+        "facility": {
+          "account": "Dannon",
+          "accountSlug": "dannon",
+          "idx": 5,
+          "name": "Danone - City of Industry CA",
+          "city": "City of Industry",
+          "state": "CA",
+          "lat": 34.004462,
+          "lng": -117.905494,
+          "type": "Plant-based & coffee beverage plant (refrigerated)"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 18
+      },
+      {
+        "facility": {
+          "account": "Dannon",
+          "accountSlug": "dannon",
+          "idx": 9,
+          "name": "Danone - Fort Worth TX",
+          "city": "Fort Worth",
+          "state": "TX",
+          "lat": 32.741022,
+          "lng": -97.339329,
+          "type": "Fresh yogurt plant"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 23
+      }
+    ],
+    "closestDistance": 1.7,
+    "uniquePrimoSites": [
+      "US PL Ontario Factory",
+      "US PL Dallas 2 Factory"
+    ],
+    "uniqueRegions": [
+      "Ontario, CA",
+      "Dallas, TX"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "YMS"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "fedex",
+    "account": "FedEx",
+    "totalFacilities": 30,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "FedEx",
+          "accountSlug": "fedex",
+          "idx": 7,
+          "name": "FedEx Express Regional Hub - Ontario CA",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.062813,
+          "lng": -117.592922,
+          "type": "Express regional hub (Ontario International Airport, So. California)"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 1.8
+      },
+      {
+        "facility": {
+          "account": "FedEx",
+          "accountSlug": "fedex",
+          "idx": 2,
+          "name": "FedEx Express National Hub - Indianapolis IN",
+          "city": "Indianapolis",
+          "state": "IN",
+          "lat": 39.715335,
+          "lng": -86.277815,
+          "type": "Express national hub (2.4M sq ft, second-largest cargo facility)"
+        },
+        "primoSite": {
+          "name": "US PL Greenwood Indiana",
+          "city": "Greenwood",
+          "state": "IN",
+          "lat": 39.5945,
+          "lng": -86.1167,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 12
+      },
+      {
+        "facility": {
+          "account": "FedEx",
+          "accountSlug": "fedex",
+          "idx": 13,
+          "name": "FedEx Ground Dallas Hub - Hutchins TX",
+          "city": "Hutchins",
+          "state": "TX",
+          "lat": 32.656667,
+          "lng": -96.706918,
+          "type": "Ground regional distribution hub"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 14.2
+      },
+      {
+        "facility": {
+          "account": "FedEx",
+          "accountSlug": "fedex",
+          "idx": 29,
+          "name": "FedEx Freight Hub - Dallas/Fort Worth TX",
+          "city": "Fort Worth",
+          "state": "TX",
+          "lat": 32.790629,
+          "lng": -97.223508,
+          "type": "Freight LTL hub service center (DFW metro)"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 17.4
+      },
+      {
+        "facility": {
+          "account": "FedEx",
+          "accountSlug": "fedex",
+          "idx": 3,
+          "name": "FedEx Express Regional Hub - Fort Worth TX",
+          "city": "Fort Worth",
+          "state": "TX",
+          "lat": 32.965384,
+          "lng": -97.297344,
+          "type": "Express regional hub (Fort Worth Alliance Airport)"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 27.6
+      },
+      {
+        "facility": {
+          "account": "FedEx",
+          "accountSlug": "fedex",
+          "idx": 30,
+          "name": "FedEx Freight Hub - Stockton CA",
+          "city": "Stockton",
+          "state": "CA",
+          "lat": 37.908392,
+          "lng": -121.244053,
+          "type": "Freight LTL hub service center (Northern California)"
+        },
+        "primoSite": {
+          "name": "US PL Sacramento Factory",
+          "city": "Sacramento",
+          "state": "CA",
+          "lat": 38.5158,
+          "lng": -121.3809,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 42.6
+      }
+    ],
+    "closestDistance": 1.8,
+    "uniquePrimoSites": [
+      "US PL Greenwood Indiana",
+      "US PL Dallas 2 Factory",
+      "US PL Ontario Factory",
+      "US PL Cabazon Factory",
+      "US PL Sacramento Factory"
+    ],
+    "uniqueRegions": [
+      "Greenwood, IN",
+      "Dallas, TX",
+      "Ontario, CA",
+      "Cabazon, CA",
+      "Sacramento, CA"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "YMS"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "h-e-b",
+    "account": "H-E-B",
+    "totalFacilities": 16,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "H-E-B",
+          "accountSlug": "h-e-b",
+          "idx": 10,
+          "name": "H-E-B eCommerce Fulfillment Center - Houston (Holmes Road) - Houston TX",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.682353,
+          "lng": -95.354825,
+          "type": "E-commerce Fulfillment Center"
+        },
+        "primoSite": {
+          "name": "US PL S Houston Factory",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.665,
+          "lng": -95.385,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 2.2
+      },
+      {
+        "facility": {
+          "account": "H-E-B",
+          "accountSlug": "h-e-b",
+          "idx": 3,
+          "name": "H-E-B Houston RSC (Windfern Road) - Houston TX",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.834866,
+          "lng": -95.53754,
+          "type": "Retail Support Center / Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL S Houston Factory",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.665,
+          "lng": -95.385,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 14.9
+      },
+      {
+        "facility": {
+          "account": "H-E-B",
+          "accountSlug": "h-e-b",
+          "idx": 9,
+          "name": "H-E-B Manufacturing - Houston Milk & Bread Plant - Houston TX",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.843857,
+          "lng": -95.537401,
+          "type": "Manufacturing Plant (Dairy / Bakery)"
+        },
+        "primoSite": {
+          "name": "US PL S Houston Factory",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.665,
+          "lng": -95.385,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 15.4
+      },
+      {
+        "facility": {
+          "account": "H-E-B",
+          "accountSlug": "h-e-b",
+          "idx": 8,
+          "name": "H-E-B Manufacturing - Houston Snack Plant (Genard Road) - Houston TX",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.844506,
+          "lng": -95.540654,
+          "type": "Manufacturing Plant (Snacks / Tortilla Chips)"
+        },
+        "primoSite": {
+          "name": "US PL S Houston Factory",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.665,
+          "lng": -95.385,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 15.5
+      },
+      {
+        "facility": {
+          "account": "H-E-B",
+          "accountSlug": "h-e-b",
+          "idx": 11,
+          "name": "H-E-B eCommerce Fulfillment Center - Katy - Katy TX",
+          "city": "Katy",
+          "state": "TX",
+          "lat": 29.803276,
+          "lng": -95.760307,
+          "type": "E-commerce Fulfillment Center"
+        },
+        "primoSite": {
+          "name": "US PL S Houston Factory",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.665,
+          "lng": -95.385,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 24.5
+      },
+      {
+        "facility": {
+          "account": "H-E-B",
+          "accountSlug": "h-e-b",
+          "idx": 12,
+          "name": "H-E-B eCommerce Fulfillment Center - Plano - Plano TX",
+          "city": "Plano",
+          "state": "TX",
+          "lat": 33.055426,
+          "lng": -96.796736,
+          "type": "E-commerce Fulfillment Center"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 26.4
+      },
+      {
+        "facility": {
+          "account": "H-E-B",
+          "accountSlug": "h-e-b",
+          "idx": 15,
+          "name": "H-E-B Frisco Electronic Fulfillment Center (in development) - Frisco TX",
+          "city": "Frisco",
+          "state": "TX",
+          "lat": 33.218724,
+          "lng": -96.88038,
+          "type": "E-commerce Fulfillment Center (planned, construction 2026-2027)"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 36.4
+      }
+    ],
+    "closestDistance": 2.2,
+    "uniquePrimoSites": [
+      "US PL S Houston Factory",
+      "US PL Pasadena Factory",
+      "US PL Dallas 2 Factory"
+    ],
+    "uniqueRegions": [
+      "Houston, TX",
+      "Pasadena, TX",
+      "Dallas, TX"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "YMS"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "frito-lay",
+    "account": "Frito-Lay",
+    "totalFacilities": 30,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "Frito-Lay",
+          "accountSlug": "frito-lay",
+          "idx": 25,
+          "name": "Frito-Lay - Denver CO",
+          "city": "Denver",
+          "state": "CO",
+          "lat": 39.771666,
+          "lng": -104.977696,
+          "type": "Manufacturing Plant"
+        },
+        "primoSite": {
+          "name": "US PL Denver Factory",
+          "city": "Denver",
+          "state": "CO",
+          "lat": 39.7392,
+          "lng": -104.9903,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 2.3
+      },
+      {
+        "facility": {
+          "account": "Frito-Lay",
+          "accountSlug": "frito-lay",
+          "idx": 2,
+          "name": "Frito-Lay - Rancho Cucamonga CA (DC)",
+          "city": "Rancho Cucamonga",
+          "state": "CA",
+          "lat": 34.080051,
+          "lng": -117.591112,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 3
+      },
+      {
+        "facility": {
+          "account": "Frito-Lay",
+          "accountSlug": "frito-lay",
+          "idx": 11,
+          "name": "Frito-Lay - Brookhollow Plant Dallas TX",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.762606,
+          "lng": -96.894419,
+          "type": "Manufacturing Plant"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 5.6
+      },
+      {
+        "facility": {
+          "account": "Frito-Lay",
+          "accountSlug": "frito-lay",
+          "idx": 10,
+          "name": "Frito-Lay - Arlington TX",
+          "city": "Arlington",
+          "state": "TX",
+          "lat": 32.657998,
+          "lng": -97.062805,
+          "type": "Manufacturing Plant"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 7.2
+      },
+      {
+        "facility": {
+          "account": "Frito-Lay",
+          "accountSlug": "frito-lay",
+          "idx": 23,
+          "name": "Frito-Lay - Rosenberg TX",
+          "city": "Rosenberg",
+          "state": "TX",
+          "lat": 29.57769,
+          "lng": -95.86902,
+          "type": "Manufacturing Plant"
+        },
+        "primoSite": {
+          "name": "US PL S Houston Factory",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.665,
+          "lng": -95.385,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 29.7
+      },
+      {
+        "facility": {
+          "account": "Frito-Lay",
+          "accountSlug": "frito-lay",
+          "idx": 12,
+          "name": "Frito-Lay - Beloit WI",
+          "city": "Beloit",
+          "state": "WI",
+          "lat": 42.518064,
+          "lng": -88.981689,
+          "type": "Manufacturing Plant"
+        },
+        "primoSite": {
+          "name": "US PL Madison Factory",
+          "city": "Madison",
+          "state": "WI",
+          "lat": 43.0558,
+          "lng": -89.3268,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 41.1
+      }
+    ],
+    "closestDistance": 2.3,
+    "uniquePrimoSites": [
+      "US PL Ontario Factory",
+      "US PL Cabazon Factory",
+      "US PL Dallas 2 Factory",
+      "US PL Madison Factory",
+      "US PL S Houston Factory",
+      "US PL Pasadena Factory",
+      "US PL Denver Factory"
+    ],
+    "uniqueRegions": [
+      "Ontario, CA",
+      "Cabazon, CA",
+      "Dallas, TX",
+      "Madison, WI",
+      "Houston, TX",
+      "Pasadena, TX",
+      "Denver, CO"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "YMS"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "hyundai-motor-america",
+    "account": "Hyundai Motor America",
+    "totalFacilities": 17,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "Hyundai Motor America",
+          "accountSlug": "hyundai-motor-america",
+          "idx": 4,
+          "name": "Mobis Parts America PDC - Ontario CA",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.040044,
+          "lng": -117.552921,
+          "type": "Parts Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 2.3
+      },
+      {
+        "facility": {
+          "account": "Hyundai Motor America",
+          "accountSlug": "hyundai-motor-america",
+          "idx": 7,
+          "name": "Mobis Parts America PDC - Lancaster TX",
+          "city": "Lancaster",
+          "state": "TX",
+          "lat": 32.639632,
+          "lng": -96.810297,
+          "type": "Parts Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 8.8
+      }
+    ],
+    "closestDistance": 2.3,
+    "uniquePrimoSites": [
+      "US PL Ontario Factory",
+      "US PL Cabazon Factory",
+      "US PL Dallas 2 Factory"
+    ],
+    "uniqueRegions": [
+      "Ontario, CA",
+      "Cabazon, CA",
+      "Dallas, TX"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "YMS"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "cj-logistics-america",
+    "account": "CJ Logistics America",
+    "totalFacilities": 28,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "CJ Logistics America",
+          "accountSlug": "cj-logistics-america",
+          "idx": 15,
+          "name": "CJ Logistics - Mira Loma CA",
+          "city": "Mira Loma",
+          "state": "CA",
+          "lat": 34.032307,
+          "lng": -117.552288,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 2.4
+      },
+      {
+        "facility": {
+          "account": "CJ Logistics America",
+          "accountSlug": "cj-logistics-america",
+          "idx": 10,
+          "name": "CJ Logistics - Breinigsville PA",
+          "city": "Breinigsville",
+          "state": "PA",
+          "lat": 40.571718,
+          "lng": -75.634232,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US DC NFI - Breinigsville",
+          "city": "Breinigsville",
+          "state": "PA",
+          "lat": 40.534,
+          "lng": -75.629,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 2.6
+      },
+      {
+        "facility": {
+          "account": "CJ Logistics America",
+          "accountSlug": "cj-logistics-america",
+          "idx": 12,
+          "name": "CJ Logistics - Fontana CA",
+          "city": "Fontana",
+          "state": "CA",
+          "lat": 34.049016,
+          "lng": -117.517479,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 4.4
+      },
+      {
+        "facility": {
+          "account": "CJ Logistics America",
+          "accountSlug": "cj-logistics-america",
+          "idx": 19,
+          "name": "CJ Logistics - Arlington TX",
+          "city": "Arlington",
+          "state": "TX",
+          "lat": 32.680542,
+          "lng": -97.079388,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 7.8
+      },
+      {
+        "facility": {
+          "account": "CJ Logistics America",
+          "accountSlug": "cj-logistics-america",
+          "idx": 18,
+          "name": "CJ Logistics - Dallas TX (Regal Row)",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.812685,
+          "lng": -96.901636,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 8.6
+      },
+      {
+        "facility": {
+          "account": "CJ Logistics America",
+          "accountSlug": "cj-logistics-america",
+          "idx": 6,
+          "name": "CJ Logistics - Wilmer TX (Southport Logistics Park)",
+          "city": "Wilmer",
+          "state": "TX",
+          "lat": 32.622645,
+          "lng": -96.684933,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 16
+      },
+      {
+        "facility": {
+          "account": "CJ Logistics America",
+          "accountSlug": "cj-logistics-america",
+          "idx": 5,
+          "name": "CJ Logistics - Riverside CA",
+          "city": "Riverside",
+          "state": "CA",
+          "lat": 33.936599,
+          "lng": -117.306961,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 17.8
+      },
+      {
+        "facility": {
+          "account": "CJ Logistics America",
+          "accountSlug": "cj-logistics-america",
+          "idx": 7,
+          "name": "CJ Logistics - Perris CA",
+          "city": "Perris",
+          "state": "CA",
+          "lat": 33.860652,
+          "lng": -117.264993,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 22.4
+      }
+    ],
+    "closestDistance": 2.4,
+    "uniquePrimoSites": [
+      "US PL Ontario Factory",
+      "US PL Cabazon Factory",
+      "US PL Dallas 2 Factory",
+      "US PL Allentown Factory",
+      "US PL Allentown NPL Factory",
+      "US DC NFI - Breinigsville"
+    ],
+    "uniqueRegions": [
+      "Ontario, CA",
+      "Cabazon, CA",
+      "Dallas, TX",
+      "Breinigsville, PA"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "YMS",
+      "RTLS",
+      "Machine Vision Gate"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "niagara-bottling",
+    "account": "Niagara Bottling",
+    "totalFacilities": 30,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "Niagara Bottling",
+          "accountSlug": "niagara-bottling",
+          "idx": 26,
+          "name": "Niagara Bottling - Upper Macungie (Allentown) PA",
+          "city": "Upper Macungie",
+          "state": "PA",
+          "lat": 40.570886,
+          "lng": -75.614395,
+          "type": "Bottling / Manufacturing Plant"
+        },
+        "primoSite": {
+          "name": "US DC NFI - Breinigsville",
+          "city": "Breinigsville",
+          "state": "PA",
+          "lat": 40.534,
+          "lng": -75.629,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 2.7
+      },
+      {
+        "facility": {
+          "account": "Niagara Bottling",
+          "accountSlug": "niagara-bottling",
+          "idx": 1,
+          "name": "Niagara Bottling - Ontario CA",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.074693,
+          "lng": -117.531829,
+          "type": "Bottling / Manufacturing Plant"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 4.4
+      },
+      {
+        "facility": {
+          "account": "Niagara Bottling",
+          "accountSlug": "niagara-bottling",
+          "idx": 2,
+          "name": "Niagara Bottling - Rialto CA",
+          "city": "Rialto",
+          "state": "CA",
+          "lat": 34.133589,
+          "lng": -117.418587,
+          "type": "Bottling / Manufacturing Plant"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 12
+      },
+      {
+        "facility": {
+          "account": "Niagara Bottling",
+          "accountSlug": "niagara-bottling",
+          "idx": 14,
+          "name": "Niagara Bottling - Plainfield IN",
+          "city": "Plainfield",
+          "state": "IN",
+          "lat": 39.683721,
+          "lng": -86.349861,
+          "type": "Bottling / Manufacturing Plant"
+        },
+        "primoSite": {
+          "name": "US PL Greenwood Indiana",
+          "city": "Greenwood",
+          "state": "IN",
+          "lat": 39.5945,
+          "lng": -86.1167,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 13.9
+      },
+      {
+        "facility": {
+          "account": "Niagara Bottling",
+          "accountSlug": "niagara-bottling",
+          "idx": 8,
+          "name": "Niagara Bottling - Aurora CO",
+          "city": "Aurora",
+          "state": "CO",
+          "lat": 39.745028,
+          "lng": -104.708701,
+          "type": "Bottling / Manufacturing Plant"
+        },
+        "primoSite": {
+          "name": "US PL Denver Factory",
+          "city": "Denver",
+          "state": "CO",
+          "lat": 39.7392,
+          "lng": -104.9903,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 15
+      },
+      {
+        "facility": {
+          "account": "Niagara Bottling",
+          "accountSlug": "niagara-bottling",
+          "idx": 22,
+          "name": "Niagara Bottling - Groveland FL",
+          "city": "Groveland",
+          "state": "FL",
+          "lat": 28.638988,
+          "lng": -81.827331,
+          "type": "Bottling / Manufacturing Plant"
+        },
+        "primoSite": {
+          "name": "US PL Zephyrhills Factory",
+          "city": "Zephyrhills",
+          "state": "FL",
+          "lat": 28.2461,
+          "lng": -82.1811,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 34.6
+      },
+      {
+        "facility": {
+          "account": "Niagara Bottling",
+          "accountSlug": "niagara-bottling",
+          "idx": 27,
+          "name": "Niagara Bottling - Florence SC",
+          "city": "Florence",
+          "state": "SC",
+          "lat": 34.265035,
+          "lng": -79.695251,
+          "type": "Bottling / Manufacturing Plant"
+        },
+        "primoSite": {
+          "name": "US PL McBee Factory",
+          "city": "McBee",
+          "state": "SC",
+          "lat": 34.47,
+          "lng": -80.2586,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 35.1
+      },
+      {
+        "facility": {
+          "account": "Niagara Bottling",
+          "accountSlug": "niagara-bottling",
+          "idx": 24,
+          "name": "Niagara Bottling - Hazle Township PA",
+          "city": "Hazle Township",
+          "state": "PA",
+          "lat": 40.931251,
+          "lng": -76.066517,
+          "type": "Bottling / Manufacturing Plant"
+        },
+        "primoSite": {
+          "name": "US PL Allentown Factory",
+          "city": "Breinigsville",
+          "state": "PA",
+          "lat": 40.5333,
+          "lng": -75.6333,
+          "solutions": [
+            "Driver Journey",
+            "RTLS",
+            "Machine Vision Gate"
+          ]
+        },
+        "distanceMiles": 35.6
+      },
+      {
+        "facility": {
+          "account": "Niagara Bottling",
+          "accountSlug": "niagara-bottling",
+          "idx": 3,
+          "name": "Niagara Bottling - Stockton CA (Arch Rd)",
+          "city": "Stockton",
+          "state": "CA",
+          "lat": 37.905639,
+          "lng": -121.197715,
+          "type": "Bottling / Manufacturing Plant"
+        },
+        "primoSite": {
+          "name": "US PL Sacramento Factory",
+          "city": "Sacramento",
+          "state": "CA",
+          "lat": 38.5158,
+          "lng": -121.3809,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 43.3
+      }
+    ],
+    "closestDistance": 2.7,
+    "uniquePrimoSites": [
+      "US PL Ontario Factory",
+      "US PL Cabazon Factory",
+      "US PL Sacramento Factory",
+      "US PL Denver Factory",
+      "US PL Greenwood Indiana",
+      "US PL Zephyrhills Factory",
+      "US PL Allentown Factory",
+      "US PL Allentown NPL Factory",
+      "US DC NFI - Breinigsville",
+      "US PL McBee Factory"
+    ],
+    "uniqueRegions": [
+      "Ontario, CA",
+      "Cabazon, CA",
+      "Sacramento, CA",
+      "Denver, CO",
+      "Greenwood, IN",
+      "Zephyrhills, FL",
+      "Breinigsville, PA",
+      "McBee, SC"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "YMS",
+      "RTLS",
+      "Machine Vision Gate"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "walmart",
+    "account": "Walmart",
+    "totalFacilities": 12,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "Walmart",
+          "accountSlug": "walmart",
+          "idx": 8,
+          "name": "Walmart Import DC 6060, Eastvale CA",
+          "city": "Eastvale",
+          "state": "CA",
+          "lat": 34.010383,
+          "lng": -117.557675,
+          "type": "Import DC"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 2.7
+      },
+      {
+        "facility": {
+          "account": "Walmart",
+          "accountSlug": "walmart",
+          "idx": 4,
+          "name": "Walmart Perishable DC 3006, Lancaster TX",
+          "city": "Lancaster",
+          "state": "TX",
+          "lat": 32.58388,
+          "lng": -96.713855,
+          "type": "Grocery/Perishable DC"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 15.6
+      },
+      {
+        "facility": {
+          "account": "Walmart",
+          "accountSlug": "walmart",
+          "idx": 5,
+          "name": "Walmart Fulfillment Center, McCordsville IN",
+          "city": "McCordsville",
+          "state": "IN",
+          "lat": 39.85349,
+          "lng": -85.905039,
+          "type": "E-commerce/Fulfillment Center"
+        },
+        "primoSite": {
+          "name": "US PL Greenwood Indiana",
+          "city": "Greenwood",
+          "state": "IN",
+          "lat": 39.5945,
+          "lng": -86.1167,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 21.1
+      }
+    ],
+    "closestDistance": 2.7,
+    "uniquePrimoSites": [
+      "US PL Dallas 2 Factory",
+      "US PL Greenwood Indiana",
+      "US PL Ontario Factory",
+      "US PL Cabazon Factory"
+    ],
+    "uniqueRegions": [
+      "Dallas, TX",
+      "Greenwood, IN",
+      "Ontario, CA",
+      "Cabazon, CA"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "YMS"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "keurig-dr-pepper",
+    "account": "Keurig Dr Pepper",
+    "totalFacilities": 22,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "Keurig Dr Pepper",
+          "accountSlug": "keurig-dr-pepper",
+          "idx": 4,
+          "name": "KDP Beverage Manufacturing & Distribution - Allentown PA",
+          "city": "Allentown",
+          "state": "PA",
+          "lat": 40.572414,
+          "lng": -75.605843,
+          "type": "Manufacturing & Distribution - Beverage"
+        },
+        "primoSite": {
+          "name": "US DC NFI - Breinigsville",
+          "city": "Breinigsville",
+          "state": "PA",
+          "lat": 40.534,
+          "lng": -75.629,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 2.9
+      },
+      {
+        "facility": {
+          "account": "Keurig Dr Pepper",
+          "accountSlug": "keurig-dr-pepper",
+          "idx": 8,
+          "name": "KDP Beverage Plant - Houston TX",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.735471,
+          "lng": -95.319727,
+          "type": "Manufacturing - Beverage"
+        },
+        "primoSite": {
+          "name": "US PL S Houston Factory",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.665,
+          "lng": -95.385,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 6.2
+      },
+      {
+        "facility": {
+          "account": "Keurig Dr Pepper",
+          "accountSlug": "keurig-dr-pepper",
+          "idx": 22,
+          "name": "KDP Distribution Center - Fontana CA",
+          "city": "Fontana",
+          "state": "CA",
+          "lat": 34.092233,
+          "lng": -117.435048,
+          "type": "Distribution Center - DSD"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 9.8
+      },
+      {
+        "facility": {
+          "account": "Keurig Dr Pepper",
+          "accountSlug": "keurig-dr-pepper",
+          "idx": 18,
+          "name": "KDP Distribution Center - Irving TX",
+          "city": "Irving",
+          "state": "TX",
+          "lat": 32.843407,
+          "lng": -96.894755,
+          "type": "Distribution Center - Beverage/DSD"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 10.7
+      },
+      {
+        "facility": {
+          "account": "Keurig Dr Pepper",
+          "accountSlug": "keurig-dr-pepper",
+          "idx": 20,
+          "name": "KDP Distribution Center - Indianapolis IN",
+          "city": "Indianapolis",
+          "state": "IN",
+          "lat": 39.76909,
+          "lng": -86.158018,
+          "type": "Distribution Center - Beverage/DSD"
+        },
+        "primoSite": {
+          "name": "US PL Greenwood Indiana",
+          "city": "Greenwood",
+          "state": "IN",
+          "lat": 39.5945,
+          "lng": -86.1167,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 12.3
+      },
+      {
+        "facility": {
+          "account": "Keurig Dr Pepper",
+          "accountSlug": "keurig-dr-pepper",
+          "idx": 5,
+          "name": "KDP Beverage Plant - Victorville CA",
+          "city": "Victorville",
+          "state": "CA",
+          "lat": 34.485332,
+          "lng": -117.310196,
+          "type": "Manufacturing - Beverage"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 35
+      }
+    ],
+    "closestDistance": 2.9,
+    "uniquePrimoSites": [
+      "US PL Allentown Factory",
+      "US PL Allentown NPL Factory",
+      "US DC NFI - Breinigsville",
+      "US PL Ontario Factory",
+      "US PL Cabazon Factory",
+      "US PL S Houston Factory",
+      "US PL Pasadena Factory",
+      "US PL Dallas 2 Factory",
+      "US PL Greenwood Indiana"
+    ],
+    "uniqueRegions": [
+      "Breinigsville, PA",
+      "Ontario, CA",
+      "Cabazon, CA",
+      "Houston, TX",
+      "Pasadena, TX",
+      "Dallas, TX",
+      "Greenwood, IN"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "RTLS",
+      "Machine Vision Gate",
+      "YMS"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "constellation-brands",
+    "account": "Constellation Brands",
+    "totalFacilities": 11,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "Constellation Brands",
+          "accountSlug": "constellation-brands",
+          "idx": 1,
+          "name": "Constellation Beer DC - Jurupa Valley CA",
+          "city": "Jurupa Valley",
+          "state": "CA",
+          "lat": 34.025928,
+          "lng": -117.536455,
+          "type": "Distribution Center (beer/wine/spirits)"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 3.3
+      },
+      {
+        "facility": {
+          "account": "Constellation Brands",
+          "accountSlug": "constellation-brands",
+          "idx": 2,
+          "name": "Constellation Beer DC - Wilmer TX (Dallas I-45)",
+          "city": "Wilmer",
+          "state": "TX",
+          "lat": 32.589661,
+          "lng": -96.678392,
+          "type": "Distribution Center (beer cross-dock, rail-served)"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 17.2
+      }
+    ],
+    "closestDistance": 3.3,
+    "uniquePrimoSites": [
+      "US PL Ontario Factory",
+      "US PL Cabazon Factory",
+      "US PL Dallas 2 Factory"
+    ],
+    "uniqueRegions": [
+      "Ontario, CA",
+      "Cabazon, CA",
+      "Dallas, TX"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "YMS"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "coca-cola",
+    "account": "Coca-Cola",
+    "totalFacilities": 30,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "Coca-Cola",
+          "accountSlug": "coca-cola",
+          "idx": 26,
+          "name": "Reyes Coca-Cola Bottling - Rancho Cucamonga Bottling & Distribution Center, CA",
+          "city": "Rancho Cucamonga",
+          "state": "CA",
+          "lat": 34.084004,
+          "lng": -117.559144,
+          "type": "Bottling / Manufacturing + Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 3.8
+      },
+      {
+        "facility": {
+          "account": "Coca-Cola",
+          "accountSlug": "coca-cola",
+          "idx": 30,
+          "name": "Swire Coca-Cola USA - Denver Production Plant, CO",
+          "city": "Denver",
+          "state": "CO",
+          "lat": 39.770555,
+          "lng": -104.819041,
+          "type": "Bottling / Manufacturing Plant"
+        },
+        "primoSite": {
+          "name": "US PL Denver Factory",
+          "city": "Denver",
+          "state": "CO",
+          "lat": 39.7392,
+          "lng": -104.9903,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 9.4
+      },
+      {
+        "facility": {
+          "account": "Coca-Cola",
+          "accountSlug": "coca-cola",
+          "idx": 8,
+          "name": "Coca-Cola Consolidated - Indianapolis Production Facility, IN",
+          "city": "Indianapolis",
+          "state": "IN",
+          "lat": 39.80343,
+          "lng": -86.245173,
+          "type": "Bottling / Manufacturing Plant"
+        },
+        "primoSite": {
+          "name": "US PL Greenwood Indiana",
+          "city": "Greenwood",
+          "state": "IN",
+          "lat": 39.5945,
+          "lng": -86.1167,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 16
+      },
+      {
+        "facility": {
+          "account": "Coca-Cola",
+          "accountSlug": "coca-cola",
+          "idx": 7,
+          "name": "Coca-Cola Consolidated - Bishopville Production Center, SC",
+          "city": "Bishopville",
+          "state": "SC",
+          "lat": 34.218211,
+          "lng": -80.248406,
+          "type": "Bottling / Manufacturing Plant"
+        },
+        "primoSite": {
+          "name": "US PL McBee Factory",
+          "city": "McBee",
+          "state": "SC",
+          "lat": 34.47,
+          "lng": -80.2586,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 17.4
+      },
+      {
+        "facility": {
+          "account": "Coca-Cola",
+          "accountSlug": "coca-cola",
+          "idx": 24,
+          "name": "Reyes Coca-Cola Bottling - Downey Production Plant, CA",
+          "city": "Downey",
+          "state": "CA",
+          "lat": 33.948887,
+          "lng": -118.072734,
+          "type": "Bottling / Manufacturing Plant"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 28.1
+      },
+      {
+        "facility": {
+          "account": "Coca-Cola",
+          "accountSlug": "coca-cola",
+          "idx": 9,
+          "name": "Coca-Cola Consolidated - Whitestown Distribution & Warehouse, IN",
+          "city": "Whitestown",
+          "state": "IN",
+          "lat": 39.966379,
+          "lng": -86.381749,
+          "type": "Distribution Center / Automated Warehouse"
+        },
+        "primoSite": {
+          "name": "US PL Greenwood Indiana",
+          "city": "Greenwood",
+          "state": "IN",
+          "lat": 39.5945,
+          "lng": -86.1167,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 29.3
+      },
+      {
+        "facility": {
+          "account": "Coca-Cola",
+          "accountSlug": "coca-cola",
+          "idx": 27,
+          "name": "Liberty Coca-Cola Beverages - Philadelphia Production Plant, PA",
+          "city": "Philadelphia",
+          "state": "PA",
+          "lat": 40.006386,
+          "lng": -75.113266,
+          "type": "Bottling / Manufacturing Plant"
+        },
+        "primoSite": {
+          "name": "US PL Allentown NPL Factory",
+          "city": "Breinigsville",
+          "state": "PA",
+          "lat": 40.528,
+          "lng": -75.635,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 45.3
+      }
+    ],
+    "closestDistance": 3.8,
+    "uniquePrimoSites": [
+      "US PL McBee Factory",
+      "US PL Greenwood Indiana",
+      "US PL Ontario Factory",
+      "US PL Cabazon Factory",
+      "US PL Allentown Factory",
+      "US PL Allentown NPL Factory",
+      "US DC NFI - Breinigsville",
+      "US PL Denver Factory"
+    ],
+    "uniqueRegions": [
+      "McBee, SC",
+      "Greenwood, IN",
+      "Ontario, CA",
+      "Cabazon, CA",
+      "Breinigsville, PA",
+      "Denver, CO"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "RTLS",
+      "Machine Vision Gate"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "ab-inbev",
+    "account": "AB InBev",
+    "totalFacilities": 21,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "AB InBev",
+          "accountSlug": "ab-inbev",
+          "idx": 15,
+          "name": "Metal Container Corporation - Mira Loma CA Can Plant",
+          "city": "Mira Loma",
+          "state": "CA",
+          "lat": 34.031509,
+          "lng": -117.521978,
+          "type": "Can Manufacturing Plant"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 4.1
+      },
+      {
+        "facility": {
+          "account": "AB InBev",
+          "accountSlug": "ab-inbev",
+          "idx": 2,
+          "name": "Anheuser-Busch Brewery - Houston TX",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.772469,
+          "lng": -95.26975,
+          "type": "Brewery"
+        },
+        "primoSite": {
+          "name": "US PL S Houston Factory",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.665,
+          "lng": -95.385,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 10.1
+      },
+      {
+        "facility": {
+          "account": "AB InBev",
+          "accountSlug": "ab-inbev",
+          "idx": 19,
+          "name": "Metal Container Corporation - Riverside CA Lid Plant",
+          "city": "Riverside",
+          "state": "CA",
+          "lat": 33.9533,
+          "lng": -117.3962,
+          "type": "Lid Manufacturing Plant"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 12.7
+      },
+      {
+        "facility": {
+          "account": "AB InBev",
+          "accountSlug": "ab-inbev",
+          "idx": 10,
+          "name": "Anheuser-Busch Brewery - Fairfield CA",
+          "city": "Fairfield",
+          "state": "CA",
+          "lat": 38.236267,
+          "lng": -122.093114,
+          "type": "Brewery"
+        },
+        "primoSite": {
+          "name": "US PL Sacramento Factory",
+          "city": "Sacramento",
+          "state": "CA",
+          "lat": 38.5158,
+          "lng": -121.3809,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 43.1
+      }
+    ],
+    "closestDistance": 4.1,
+    "uniquePrimoSites": [
+      "US PL S Houston Factory",
+      "US PL Pasadena Factory",
+      "US PL Sacramento Factory",
+      "US PL Ontario Factory",
+      "US PL Cabazon Factory"
+    ],
+    "uniqueRegions": [
+      "Houston, TX",
+      "Pasadena, TX",
+      "Sacramento, CA",
+      "Ontario, CA",
+      "Cabazon, CA"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "YMS"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "kenco-logistics",
+    "account": "Kenco Logistics Services",
+    "totalFacilities": 30,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "Kenco Logistics Services",
+          "accountSlug": "kenco-logistics",
+          "idx": 3,
+          "name": "Kenco MCS Allentown - Northampton PA",
+          "city": "Northampton",
+          "state": "PA",
+          "lat": 40.598247,
+          "lng": -75.616265,
+          "type": "Multi-Client Distribution Center"
+        },
+        "primoSite": {
+          "name": "US DC NFI - Breinigsville",
+          "city": "Breinigsville",
+          "state": "PA",
+          "lat": 40.534,
+          "lng": -75.629,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 4.5
+      },
+      {
+        "facility": {
+          "account": "Kenco Logistics Services",
+          "accountSlug": "kenco-logistics",
+          "idx": 7,
+          "name": "Kenco MCS Chino - Chino CA",
+          "city": "Chino",
+          "state": "CA",
+          "lat": 33.966541,
+          "lng": -117.661269,
+          "type": "Multi-Client Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 6.2
+      },
+      {
+        "facility": {
+          "account": "Kenco Logistics Services",
+          "accountSlug": "kenco-logistics",
+          "idx": 28,
+          "name": "Kenco / The Shippers Group - Grand Prairie TX",
+          "city": "Grand Prairie",
+          "state": "TX",
+          "lat": 32.781145,
+          "lng": -97.017588,
+          "type": "Distribution Center / 3PL Warehouse"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 7.2
+      },
+      {
+        "facility": {
+          "account": "Kenco Logistics Services",
+          "accountSlug": "kenco-logistics",
+          "idx": 4,
+          "name": "Kenco MCS Dallas I - DeSoto TX",
+          "city": "DeSoto",
+          "state": "TX",
+          "lat": 32.631712,
+          "lng": -96.82947,
+          "type": "Multi-Client Distribution Center / E-Commerce Fulfillment"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 8.1
+      },
+      {
+        "facility": {
+          "account": "Kenco Logistics Services",
+          "accountSlug": "kenco-logistics",
+          "idx": 12,
+          "name": "Kenco MCS Dallas III - Lancaster TX",
+          "city": "Lancaster",
+          "state": "TX",
+          "lat": 32.635612,
+          "lng": -96.802949,
+          "type": "Multi-Client Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 9.3
+      },
+      {
+        "facility": {
+          "account": "Kenco Logistics Services",
+          "accountSlug": "kenco-logistics",
+          "idx": 13,
+          "name": "Kenco MCS Dallas IV - Lancaster TX",
+          "city": "Lancaster",
+          "state": "TX",
+          "lat": 32.635612,
+          "lng": -96.802949,
+          "type": "Multi-Client Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 9.3
+      },
+      {
+        "facility": {
+          "account": "Kenco Logistics Services",
+          "accountSlug": "kenco-logistics",
+          "idx": 14,
+          "name": "Kenco MCS Dallas II - Lancaster TX",
+          "city": "Lancaster",
+          "state": "TX",
+          "lat": 32.635612,
+          "lng": -96.802949,
+          "type": "Multi-Client Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 9.3
+      },
+      {
+        "facility": {
+          "account": "Kenco Logistics Services",
+          "accountSlug": "kenco-logistics",
+          "idx": 23,
+          "name": "Kenco / The Shippers Group - Hutchins TX (HQ campus)",
+          "city": "Hutchins",
+          "state": "TX",
+          "lat": 32.625775,
+          "lng": -96.716523,
+          "type": "Distribution Center / 3PL Warehouse"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 14.2
+      },
+      {
+        "facility": {
+          "account": "Kenco Logistics Services",
+          "accountSlug": "kenco-logistics",
+          "idx": 24,
+          "name": "Kenco American Standard DC - Hutchins TX",
+          "city": "Hutchins",
+          "state": "TX",
+          "lat": 32.635388,
+          "lng": -96.69556,
+          "type": "Dedicated Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 15.2
+      },
+      {
+        "facility": {
+          "account": "Kenco Logistics Services",
+          "accountSlug": "kenco-logistics",
+          "idx": 25,
+          "name": "Kenco / The Shippers Group - Wilmer TX",
+          "city": "Wilmer",
+          "state": "TX",
+          "lat": 32.586422,
+          "lng": -96.683656,
+          "type": "Distribution Center / 3PL Warehouse"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 17.1
+      },
+      {
+        "facility": {
+          "account": "Kenco Logistics Services",
+          "accountSlug": "kenco-logistics",
+          "idx": 6,
+          "name": "Kenco MCS Perris II - Perris CA",
+          "city": "Perris",
+          "state": "CA",
+          "lat": 33.844633,
+          "lng": -117.230351,
+          "type": "Multi-Client Distribution Center / E-Commerce Fulfillment"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 24.7
+      },
+      {
+        "facility": {
+          "account": "Kenco Logistics Services",
+          "accountSlug": "kenco-logistics",
+          "idx": 5,
+          "name": "Kenco MCS Perris I - Perris CA",
+          "city": "Perris",
+          "state": "CA",
+          "lat": 33.841558,
+          "lng": -117.228703,
+          "type": "Multi-Client Distribution Center / E-Commerce Fulfillment"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 24.9
+      }
+    ],
+    "closestDistance": 4.5,
+    "uniquePrimoSites": [
+      "US PL Allentown Factory",
+      "US PL Allentown NPL Factory",
+      "US DC NFI - Breinigsville",
+      "US PL Dallas 2 Factory",
+      "US PL Ontario Factory",
+      "US PL Cabazon Factory"
+    ],
+    "uniqueRegions": [
+      "Breinigsville, PA",
+      "Dallas, TX",
+      "Ontario, CA",
+      "Cabazon, CA"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "RTLS",
+      "Machine Vision Gate",
+      "YMS"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "gxo",
+    "account": "GXO Logistics",
+    "totalFacilities": 30,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "GXO Logistics",
+          "accountSlug": "gxo",
+          "idx": 18,
+          "name": "GXO Logistics Distribution Center - Fontana CA",
+          "city": "Fontana",
+          "state": "CA",
+          "lat": 34.058587,
+          "lng": -117.51381,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 4.8
+      },
+      {
+        "facility": {
+          "account": "GXO Logistics",
+          "accountSlug": "gxo",
+          "idx": 26,
+          "name": "GXO Logistics Distribution Center - Arlington TX",
+          "city": "Arlington",
+          "state": "TX",
+          "lat": 32.678848,
+          "lng": -97.07711,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 7.6
+      },
+      {
+        "facility": {
+          "account": "GXO Logistics",
+          "accountSlug": "gxo",
+          "idx": 25,
+          "name": "GXO Logistics Distribution Center - Grapevine TX",
+          "city": "Grapevine",
+          "state": "TX",
+          "lat": 32.825176,
+          "lng": -97.041109,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 10.5
+      },
+      {
+        "facility": {
+          "account": "GXO Logistics",
+          "accountSlug": "gxo",
+          "idx": 23,
+          "name": "GXO Logistics Distribution Center - Houston TX (Railwood)",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.829072,
+          "lng": -95.252448,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL S Houston Factory",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.665,
+          "lng": -95.385,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 13.8
+      },
+      {
+        "facility": {
+          "account": "GXO Logistics",
+          "accountSlug": "gxo",
+          "idx": 8,
+          "name": "GXO IKEA Customer Distribution Center - Quakertown PA",
+          "city": "Quakertown",
+          "state": "PA",
+          "lat": 40.446872,
+          "lng": -75.360415,
+          "type": "Fulfillment Center"
+        },
+        "primoSite": {
+          "name": "US DC NFI - Breinigsville",
+          "city": "Breinigsville",
+          "state": "PA",
+          "lat": 40.534,
+          "lng": -75.629,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 15.3
+      },
+      {
+        "facility": {
+          "account": "GXO Logistics",
+          "accountSlug": "gxo",
+          "idx": 10,
+          "name": "GXO Logistics Distribution Center - Bethlehem PA",
+          "city": "Bethlehem",
+          "state": "PA",
+          "lat": 40.609939,
+          "lng": -75.315452,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US DC NFI - Breinigsville",
+          "city": "Breinigsville",
+          "state": "PA",
+          "lat": 40.534,
+          "lng": -75.629,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 17.3
+      },
+      {
+        "facility": {
+          "account": "GXO Logistics",
+          "accountSlug": "gxo",
+          "idx": 5,
+          "name": "GXO Super Hub - Clayton IN",
+          "city": "Clayton",
+          "state": "IN",
+          "lat": 39.605914,
+          "lng": -86.483484,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Greenwood Indiana",
+          "city": "Greenwood",
+          "state": "IN",
+          "lat": 39.5945,
+          "lng": -86.1167,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 19.5
+      },
+      {
+        "facility": {
+          "account": "GXO Logistics",
+          "accountSlug": "gxo",
+          "idx": 24,
+          "name": "GXO Logistics Distribution Center - Houston TX (West Greens)",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.944117,
+          "lng": -95.490924,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL S Houston Factory",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.665,
+          "lng": -95.385,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 20.3
+      },
+      {
+        "facility": {
+          "account": "GXO Logistics",
+          "accountSlug": "gxo",
+          "idx": 30,
+          "name": "GXO Logistics Distribution Center - Carrollton TX",
+          "city": "Carrollton",
+          "state": "TX",
+          "lat": 32.989435,
+          "lng": -96.928073,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 20.4
+      },
+      {
+        "facility": {
+          "account": "GXO Logistics",
+          "accountSlug": "gxo",
+          "idx": 22,
+          "name": "GXO Logistics Distribution Center - Fort Worth TX (Everman)",
+          "city": "Fort Worth",
+          "state": "TX",
+          "lat": 32.628941,
+          "lng": -97.30685,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 21.4
+      },
+      {
+        "facility": {
+          "account": "GXO Logistics",
+          "accountSlug": "gxo",
+          "idx": 21,
+          "name": "GXO Logistics Distribution Center - Fort Worth TX (Sylvania)",
+          "city": "Fort Worth",
+          "state": "TX",
+          "lat": 32.819094,
+          "lng": -97.307487,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 22.6
+      },
+      {
+        "facility": {
+          "account": "GXO Logistics",
+          "accountSlug": "gxo",
+          "idx": 7,
+          "name": "GXO Logistics Distribution Center - Whitestown IN",
+          "city": "Whitestown",
+          "state": "IN",
+          "lat": 39.962504,
+          "lng": -86.383939,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Greenwood Indiana",
+          "city": "Greenwood",
+          "state": "IN",
+          "lat": 39.5945,
+          "lng": -86.1167,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 29.1
+      },
+      {
+        "facility": {
+          "account": "GXO Logistics",
+          "accountSlug": "gxo",
+          "idx": 6,
+          "name": "GXO Logistics Distribution Center - Lebanon IN",
+          "city": "Lebanon",
+          "state": "IN",
+          "lat": 40.039161,
+          "lng": -86.483804,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Greenwood Indiana",
+          "city": "Greenwood",
+          "state": "IN",
+          "lat": 39.5945,
+          "lng": -86.1167,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 36.4
+      }
+    ],
+    "closestDistance": 4.8,
+    "uniquePrimoSites": [
+      "US PL Greenwood Indiana",
+      "US PL Allentown Factory",
+      "US PL Allentown NPL Factory",
+      "US DC NFI - Breinigsville",
+      "US PL Ontario Factory",
+      "US PL Cabazon Factory",
+      "US PL Dallas 2 Factory",
+      "US PL S Houston Factory",
+      "US PL Pasadena Factory"
+    ],
+    "uniqueRegions": [
+      "Greenwood, IN",
+      "Breinigsville, PA",
+      "Ontario, CA",
+      "Cabazon, CA",
+      "Dallas, TX",
+      "Houston, TX",
+      "Pasadena, TX"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "RTLS",
+      "Machine Vision Gate",
+      "YMS"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "general-mills",
+    "account": "General Mills",
+    "totalFacilities": 26,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "General Mills",
+          "accountSlug": "general-mills",
+          "idx": 26,
+          "name": "General Mills - Fontana CA Distribution Center",
+          "city": "Fontana",
+          "state": "CA",
+          "lat": 34.041998,
+          "lng": -117.507563,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 4.9
+      },
+      {
+        "facility": {
+          "account": "General Mills",
+          "accountSlug": "general-mills",
+          "idx": 20,
+          "name": "General Mills - Allentown PA",
+          "city": "Allentown",
+          "state": "PA",
+          "lat": 40.57068,
+          "lng": -75.477864,
+          "type": "Manufacturing Plant"
+        },
+        "primoSite": {
+          "name": "US DC NFI - Breinigsville",
+          "city": "Breinigsville",
+          "state": "PA",
+          "lat": 40.534,
+          "lng": -75.629,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 8.3
+      },
+      {
+        "facility": {
+          "account": "General Mills",
+          "accountSlug": "general-mills",
+          "idx": 14,
+          "name": "General Mills - Reed City MI",
+          "city": "Reed City",
+          "state": "MI",
+          "lat": 43.87584,
+          "lng": -85.509751,
+          "type": "Manufacturing Plant"
+        },
+        "primoSite": {
+          "name": "US PL Mecosta Factory",
+          "city": "Stanwood",
+          "state": "MI",
+          "lat": 43.5803,
+          "lng": -85.2097,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 25.3
+      },
+      {
+        "facility": {
+          "account": "General Mills",
+          "accountSlug": "general-mills",
+          "idx": 17,
+          "name": "General Mills - Lodi CA",
+          "city": "Lodi",
+          "state": "CA",
+          "lat": 38.144405,
+          "lng": -121.301375,
+          "type": "Manufacturing Plant"
+        },
+        "primoSite": {
+          "name": "US PL Sacramento Factory",
+          "city": "Sacramento",
+          "state": "CA",
+          "lat": 38.5158,
+          "lng": -121.3809,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 26
+      },
+      {
+        "facility": {
+          "account": "General Mills",
+          "accountSlug": "general-mills",
+          "idx": 19,
+          "name": "General Mills - Hazleton PA",
+          "city": "Hazleton",
+          "state": "PA",
+          "lat": 40.952909,
+          "lng": -75.974562,
+          "type": "Manufacturing Plant"
+        },
+        "primoSite": {
+          "name": "US PL Allentown Factory",
+          "city": "Breinigsville",
+          "state": "PA",
+          "lat": 40.5333,
+          "lng": -75.6333,
+          "solutions": [
+            "Driver Journey",
+            "RTLS",
+            "Machine Vision Gate"
+          ]
+        },
+        "distanceMiles": 34.1
+      },
+      {
+        "facility": {
+          "account": "General Mills",
+          "accountSlug": "general-mills",
+          "idx": 16,
+          "name": "General Mills - Carson CA",
+          "city": "Carson",
+          "state": "CA",
+          "lat": 33.862789,
+          "lng": -118.245132,
+          "type": "Manufacturing Plant"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 39.3
+      }
+    ],
+    "closestDistance": 4.9,
+    "uniquePrimoSites": [
+      "US PL Mecosta Factory",
+      "US PL Ontario Factory",
+      "US PL Sacramento Factory",
+      "US PL Allentown Factory",
+      "US PL Allentown NPL Factory",
+      "US DC NFI - Breinigsville",
+      "US PL Cabazon Factory"
+    ],
+    "uniqueRegions": [
+      "Stanwood, MI",
+      "Ontario, CA",
+      "Sacramento, CA",
+      "Breinigsville, PA",
+      "Cabazon, CA"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "YMS",
+      "RTLS",
+      "Machine Vision Gate"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "honda",
+    "account": "Honda",
+    "totalFacilities": 18,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "Honda",
+          "accountSlug": "honda",
+          "idx": 17,
+          "name": "American Honda - Chino Parts Distribution Center (NA Hub West) - Chino CA",
+          "city": "Chino",
+          "state": "CA",
+          "lat": 34.012023,
+          "lng": -117.678685,
+          "type": "Parts / Accessories Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 5.2
+      },
+      {
+        "facility": {
+          "account": "Honda",
+          "accountSlug": "honda",
+          "idx": 18,
+          "name": "American Honda - Irving Parts Distribution Center - Irving TX",
+          "city": "Irving",
+          "state": "TX",
+          "lat": 32.911717,
+          "lng": -96.99072,
+          "type": "Parts Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 15.2
+      },
+      {
+        "facility": {
+          "account": "Honda",
+          "accountSlug": "honda",
+          "idx": 10,
+          "name": "Honda of South Carolina Mfg. (ATV/UTV Plant) - Timmonsville SC",
+          "city": "Timmonsville",
+          "state": "SC",
+          "lat": 34.110581,
+          "lng": -79.917171,
+          "type": "ATV / UTV / Side-by-Side Plant"
+        },
+        "primoSite": {
+          "name": "US PL McBee Factory",
+          "city": "McBee",
+          "state": "SC",
+          "lat": 34.47,
+          "lng": -80.2586,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 31.6
+      },
+      {
+        "facility": {
+          "account": "Honda",
+          "accountSlug": "honda",
+          "idx": 6,
+          "name": "Honda Manufacturing of Indiana (HMIN) - Greensburg IN",
+          "city": "Greensburg",
+          "state": "IN",
+          "lat": 39.370161,
+          "lng": -85.543533,
+          "type": "Auto Assembly Plant"
+        },
+        "primoSite": {
+          "name": "US PL Greenwood Indiana",
+          "city": "Greenwood",
+          "state": "IN",
+          "lat": 39.5945,
+          "lng": -86.1167,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 34.3
+      }
+    ],
+    "closestDistance": 5.2,
+    "uniquePrimoSites": [
+      "US PL Greenwood Indiana",
+      "US PL McBee Factory",
+      "US PL Ontario Factory",
+      "US PL Dallas 2 Factory"
+    ],
+    "uniqueRegions": [
+      "Greenwood, IN",
+      "McBee, SC",
+      "Ontario, CA",
+      "Dallas, TX"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "YMS"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "universal-logistics",
+    "account": "Universal Logistics Holdings",
+    "totalFacilities": 26,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "Universal Logistics Holdings",
+          "accountSlug": "universal-logistics",
+          "idx": 5,
+          "name": "Universal Logistics - GM Arlington Logistics Center - Grand Prairie TX",
+          "city": "Grand Prairie",
+          "state": "TX",
+          "lat": 32.72008,
+          "lng": -97.03707,
+          "type": "Value-Added Logistics / Sub-Assembly Center"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 5.5
+      },
+      {
+        "facility": {
+          "account": "Universal Logistics Holdings",
+          "accountSlug": "universal-logistics",
+          "idx": 11,
+          "name": "Universal Intermodal Services - Houston Terminal - Houston TX",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.870647,
+          "lng": -95.286077,
+          "type": "Intermodal / Drayage Terminal (owned)"
+        },
+        "primoSite": {
+          "name": "US PL S Houston Factory",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.665,
+          "lng": -95.385,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 15.4
+      },
+      {
+        "facility": {
+          "account": "Universal Logistics Holdings",
+          "accountSlug": "universal-logistics",
+          "idx": 10,
+          "name": "Universal Intermodal Services - Compton/Rancho Dominguez Terminal - Rancho Dominguez CA",
+          "city": "Rancho Dominguez",
+          "state": "CA",
+          "lat": 33.868011,
+          "lng": -118.211837,
+          "type": "Intermodal / Drayage Terminal / Container Yard (owned)"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 37.3
+      }
+    ],
+    "closestDistance": 5.5,
+    "uniquePrimoSites": [
+      "US PL Dallas 2 Factory",
+      "US PL Ontario Factory",
+      "US PL S Houston Factory",
+      "US PL Pasadena Factory"
+    ],
+    "uniqueRegions": [
+      "Dallas, TX",
+      "Ontario, CA",
+      "Houston, TX",
+      "Pasadena, TX"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "YMS"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "mondelez",
+    "account": "Mondelez",
+    "totalFacilities": 22,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "Mondelez",
+          "accountSlug": "mondelez",
+          "idx": 22,
+          "name": "Nabisco Houston Sales Distribution Center - Houston TX",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.7604,
+          "lng": -95.3698,
+          "type": "Distribution center / sales warehouse"
+        },
+        "primoSite": {
+          "name": "US PL S Houston Factory",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.665,
+          "lng": -95.385,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 6.7
+      },
+      {
+        "facility": {
+          "account": "Mondelez",
+          "accountSlug": "mondelez",
+          "idx": 10,
+          "name": "Nabisco Aurora Sales & Distribution Center - Aurora CO",
+          "city": "Aurora",
+          "state": "CO",
+          "lat": 39.754247,
+          "lng": -104.7871,
+          "type": "Sales / distribution center"
+        },
+        "primoSite": {
+          "name": "US PL Denver Factory",
+          "city": "Denver",
+          "state": "CO",
+          "lat": 39.7392,
+          "lng": -104.9903,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 10.8
+      },
+      {
+        "facility": {
+          "account": "Mondelez",
+          "accountSlug": "mondelez",
+          "idx": 5,
+          "name": "Clif Bar Baking Co. of Indianapolis - Indianapolis IN",
+          "city": "Indianapolis",
+          "state": "IN",
+          "lat": 39.888649,
+          "lng": -86.241363,
+          "type": "Manufacturing - energy/nutrition bar bakery"
+        },
+        "primoSite": {
+          "name": "US PL Greenwood Indiana",
+          "city": "Greenwood",
+          "state": "IN",
+          "lat": 39.5945,
+          "lng": -86.1167,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 21.4
+      },
+      {
+        "facility": {
+          "account": "Mondelez",
+          "accountSlug": "mondelez",
+          "idx": 21,
+          "name": "Nabisco Dallas/Garland Sales Distribution Center - Garland TX",
+          "city": "Garland",
+          "state": "TX",
+          "lat": 32.9126,
+          "lng": -96.6389,
+          "type": "Distribution center / sales warehouse"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 23.4
+      },
+      {
+        "facility": {
+          "account": "Mondelez",
+          "accountSlug": "mondelez",
+          "idx": 14,
+          "name": "Mondelez/Nabisco Tatamy Sales Distribution Center - Tatamy PA",
+          "city": "Tatamy",
+          "state": "PA",
+          "lat": 40.7401,
+          "lng": -75.2557,
+          "type": "Distribution center / sales warehouse"
+        },
+        "primoSite": {
+          "name": "US DC NFI - Breinigsville",
+          "city": "Breinigsville",
+          "state": "PA",
+          "lat": 40.534,
+          "lng": -75.629,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 24.2
+      },
+      {
+        "facility": {
+          "account": "Mondelez",
+          "accountSlug": "mondelez",
+          "idx": 24,
+          "name": "Nabisco Los Angeles Sales Distribution Center - Los Angeles CA",
+          "city": "Los Angeles",
+          "state": "CA",
+          "lat": 34.0522,
+          "lng": -118.2437,
+          "type": "Distribution center / sales warehouse"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 37.3
+      }
+    ],
+    "closestDistance": 6.7,
+    "uniquePrimoSites": [
+      "US PL Greenwood Indiana",
+      "US PL Denver Factory",
+      "US PL Allentown Factory",
+      "US PL Allentown NPL Factory",
+      "US DC NFI - Breinigsville",
+      "US PL Dallas 2 Factory",
+      "US PL S Houston Factory",
+      "US PL Pasadena Factory",
+      "US PL Ontario Factory"
+    ],
+    "uniqueRegions": [
+      "Greenwood, IN",
+      "Denver, CO",
+      "Breinigsville, PA",
+      "Dallas, TX",
+      "Houston, TX",
+      "Pasadena, TX",
+      "Ontario, CA"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "RTLS",
+      "Machine Vision Gate",
+      "YMS"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "daimler-truck-north-america",
+    "account": "Daimler Truck North America",
+    "totalFacilities": 16,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "Daimler Truck North America",
+          "accountSlug": "daimler-truck-north-america",
+          "idx": 15,
+          "name": "Dallas Parts Distribution Center - Grand Prairie TX",
+          "city": "Grand Prairie",
+          "state": "TX",
+          "lat": 32.797248,
+          "lng": -97.031664,
+          "type": "Parts distribution center"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 8.6
+      },
+      {
+        "facility": {
+          "account": "Daimler Truck North America",
+          "accountSlug": "daimler-truck-north-america",
+          "idx": 11,
+          "name": "Whitestown Redistribution Center (RDC) - Whitestown IN",
+          "city": "Whitestown",
+          "state": "IN",
+          "lat": 39.978443,
+          "lng": -86.364644,
+          "type": "Parts redistribution center"
+        },
+        "primoSite": {
+          "name": "US PL Greenwood Indiana",
+          "city": "Greenwood",
+          "state": "IN",
+          "lat": 39.5945,
+          "lng": -86.1167,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 29.6
+      },
+      {
+        "facility": {
+          "account": "Daimler Truck North America",
+          "accountSlug": "daimler-truck-north-america",
+          "idx": 12,
+          "name": "Indianapolis Parts Distribution Center - Whitestown IN",
+          "city": "Whitestown",
+          "state": "IN",
+          "lat": 39.979271,
+          "lng": -86.386135,
+          "type": "Parts distribution center"
+        },
+        "primoSite": {
+          "name": "US PL Greenwood Indiana",
+          "city": "Greenwood",
+          "state": "IN",
+          "lat": 39.5945,
+          "lng": -86.1167,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 30.2
+      }
+    ],
+    "closestDistance": 8.6,
+    "uniquePrimoSites": [
+      "US PL Greenwood Indiana",
+      "US PL Dallas 2 Factory"
+    ],
+    "uniqueRegions": [
+      "Greenwood, IN",
+      "Dallas, TX"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "YMS"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "performance-food-group",
+    "account": "Performance Food Group",
+    "totalFacilities": 30,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "Performance Food Group",
+          "accountSlug": "performance-food-group",
+          "idx": 12,
+          "name": "Performance Foodservice - Denver (Commerce City CO)",
+          "city": "Commerce City",
+          "state": "CO",
+          "lat": 39.877035,
+          "lng": -104.864645,
+          "type": "Broadline Foodservice Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Denver Factory",
+          "city": "Denver",
+          "state": "CO",
+          "lat": 39.7392,
+          "lng": -104.9903,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 11.6
+      },
+      {
+        "facility": {
+          "account": "Performance Food Group",
+          "accountSlug": "performance-food-group",
+          "idx": 9,
+          "name": "Performance Foodservice - Dallas Fort Worth (Fort Worth TX)",
+          "city": "Fort Worth",
+          "state": "TX",
+          "lat": 32.767167,
+          "lng": -97.265073,
+          "type": "Broadline Foodservice Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 19.2
+      },
+      {
+        "facility": {
+          "account": "Performance Food Group",
+          "accountSlug": "performance-food-group",
+          "idx": 5,
+          "name": "Performance Foodservice - Southern California (City of Industry)",
+          "city": "City of Industry",
+          "state": "CA",
+          "lat": 34.005031,
+          "lng": -117.941805,
+          "type": "Broadline Foodservice Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 20.1
+      },
+      {
+        "facility": {
+          "account": "Performance Food Group",
+          "accountSlug": "performance-food-group",
+          "idx": 10,
+          "name": "Performance Foodservice - Houston TX",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.978631,
+          "lng": -95.386916,
+          "type": "Broadline Foodservice Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL S Houston Factory",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.665,
+          "lng": -95.385,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 21.7
+      },
+      {
+        "facility": {
+          "account": "Performance Food Group",
+          "accountSlug": "performance-food-group",
+          "idx": 1,
+          "name": "Cheney Brothers - Florence SC (new cold DC)",
+          "city": "Florence",
+          "state": "SC",
+          "lat": 34.271014,
+          "lng": -79.694676,
+          "type": "Refrigerated/Freezer Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL McBee Factory",
+          "city": "McBee",
+          "state": "SC",
+          "lat": 34.47,
+          "lng": -80.2586,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 35
+      },
+      {
+        "facility": {
+          "account": "Performance Food Group",
+          "accountSlug": "performance-food-group",
+          "idx": 2,
+          "name": "Performance Foodservice - Florence SC (legacy DC)",
+          "city": "Florence",
+          "state": "SC",
+          "lat": 34.275934,
+          "lng": -79.688271,
+          "type": "Broadline Foodservice Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL McBee Factory",
+          "city": "McBee",
+          "state": "SC",
+          "lat": 34.47,
+          "lng": -80.2586,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 35.2
+      },
+      {
+        "facility": {
+          "account": "Performance Food Group",
+          "accountSlug": "performance-food-group",
+          "idx": 14,
+          "name": "Performance Foodservice - Northern California (Stockton CA)",
+          "city": "Stockton",
+          "state": "CA",
+          "lat": 37.932725,
+          "lng": -121.323148,
+          "type": "Broadline Foodservice Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Sacramento Factory",
+          "city": "Sacramento",
+          "state": "CA",
+          "lat": 38.5158,
+          "lng": -121.3809,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 40.4
+      },
+      {
+        "facility": {
+          "account": "Performance Food Group",
+          "accountSlug": "performance-food-group",
+          "idx": 29,
+          "name": "Performance Foodservice - Little Rock AR",
+          "city": "Little Rock",
+          "state": "AR",
+          "lat": 34.719308,
+          "lng": -92.326965,
+          "type": "Broadline Foodservice Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Hot Springs 2 Factory",
+          "city": "Hot Springs",
+          "state": "AR",
+          "lat": 34.61,
+          "lng": -93.05,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 41.8
+      },
+      {
+        "facility": {
+          "account": "Performance Food Group",
+          "accountSlug": "performance-food-group",
+          "idx": 22,
+          "name": "Performance Foodservice - Eastern PA (Coal Township PA)",
+          "city": "Coal Township",
+          "state": "PA",
+          "lat": 40.788377,
+          "lng": -76.490986,
+          "type": "Broadline Foodservice Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Allentown Factory",
+          "city": "Breinigsville",
+          "state": "PA",
+          "lat": 40.5333,
+          "lng": -75.6333,
+          "solutions": [
+            "Driver Journey",
+            "RTLS",
+            "Machine Vision Gate"
+          ]
+        },
+        "distanceMiles": 48.3
+      }
+    ],
+    "closestDistance": 11.6,
+    "uniquePrimoSites": [
+      "US PL McBee Factory",
+      "US PL Ontario Factory",
+      "US PL Dallas 2 Factory",
+      "US PL S Houston Factory",
+      "US PL Pasadena Factory",
+      "US PL Denver Factory",
+      "US PL Sacramento Factory",
+      "US PL Allentown Factory",
+      "US PL Allentown NPL Factory",
+      "US DC NFI - Breinigsville",
+      "US PL Hot Springs Factory",
+      "US DC Hot Springs (WHSE)",
+      "US PL Hot Springs 2 Factory"
+    ],
+    "uniqueRegions": [
+      "McBee, SC",
+      "Ontario, CA",
+      "Dallas, TX",
+      "Houston, TX",
+      "Pasadena, TX",
+      "Denver, CO",
+      "Sacramento, CA",
+      "Breinigsville, PA",
+      "Hot Springs, AR"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "YMS",
+      "RTLS",
+      "Machine Vision Gate"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "pactiv-evergreen",
+    "account": "Pactiv Evergreen",
+    "totalFacilities": 30,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "Pactiv Evergreen",
+          "accountSlug": "pactiv-evergreen",
+          "idx": 25,
+          "name": "Pactiv Evergreen - Malvern AR",
+          "city": "Malvern",
+          "state": "AR",
+          "lat": 34.379129,
+          "lng": -92.820078,
+          "type": "Manufacturing Plant (Food Merchandising; ISCC PLUS certified)"
+        },
+        "primoSite": {
+          "name": "US DC Hot Springs (WHSE)",
+          "city": "Hot Springs",
+          "state": "AR",
+          "lat": 34.5037,
+          "lng": -93.0552,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 15.9
+      },
+      {
+        "facility": {
+          "account": "Pactiv Evergreen",
+          "accountSlug": "pactiv-evergreen",
+          "idx": 11,
+          "name": "Pactiv Evergreen - Plant City FL",
+          "city": "Plant City",
+          "state": "FL",
+          "lat": 28.01793,
+          "lng": -82.100535,
+          "type": "Manufacturing Plant (Beverage Merchandising; carton converting)"
+        },
+        "primoSite": {
+          "name": "US PL Zephyrhills Factory",
+          "city": "Zephyrhills",
+          "state": "FL",
+          "lat": 28.2461,
+          "lng": -82.1811,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 16.5
+      },
+      {
+        "facility": {
+          "account": "Pactiv Evergreen",
+          "accountSlug": "pactiv-evergreen",
+          "idx": 29,
+          "name": "Pactiv Evergreen - Stockton CA",
+          "city": "Stockton",
+          "state": "CA",
+          "lat": 37.894422,
+          "lng": -121.260196,
+          "type": "Manufacturing Plant (Foodservice; co-located warehouse)"
+        },
+        "primoSite": {
+          "name": "US PL Sacramento Factory",
+          "city": "Sacramento",
+          "state": "CA",
+          "lat": 38.5158,
+          "lng": -121.3809,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 43.4
+      }
+    ],
+    "closestDistance": 15.9,
+    "uniquePrimoSites": [
+      "US PL Zephyrhills Factory",
+      "US PL Hot Springs Factory",
+      "US DC Hot Springs (WHSE)",
+      "US PL Hot Springs 2 Factory",
+      "US PL Sacramento Factory"
+    ],
+    "uniqueRegions": [
+      "Zephyrhills, FL",
+      "Hot Springs, AR",
+      "Sacramento, CA"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "YMS"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "dhl-supply-chain",
+    "account": "DHL Supply Chain",
+    "totalFacilities": 24,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "DHL Supply Chain",
+          "accountSlug": "dhl-supply-chain",
+          "idx": 2,
+          "name": "DHL Supply Chain - IDS Fulfillment HQ DC - Plainfield IN",
+          "city": "Plainfield",
+          "state": "IN",
+          "lat": 39.739272,
+          "lng": -86.353432,
+          "type": "Multi-Customer E-Commerce Fulfillment Center"
+        },
+        "primoSite": {
+          "name": "US PL Greenwood Indiana",
+          "city": "Greenwood",
+          "state": "IN",
+          "lat": 39.5945,
+          "lng": -86.1167,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 16.1
+      },
+      {
+        "facility": {
+          "account": "DHL Supply Chain",
+          "accountSlug": "dhl-supply-chain",
+          "idx": 9,
+          "name": "DHL Supply Chain - Campbell Soup DC - Fort Worth TX",
+          "city": "Fort Worth",
+          "state": "TX",
+          "lat": 32.846944,
+          "lng": -97.315568,
+          "type": "Dedicated Customer Distribution Center (CPG/food)"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 23.9
+      },
+      {
+        "facility": {
+          "account": "DHL Supply Chain",
+          "accountSlug": "dhl-supply-chain",
+          "idx": 10,
+          "name": "DHL Supply Chain - Whitestown DC - Whitestown IN",
+          "city": "Whitestown",
+          "state": "IN",
+          "lat": 39.967904,
+          "lng": -86.376162,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Greenwood Indiana",
+          "city": "Greenwood",
+          "state": "IN",
+          "lat": 39.5945,
+          "lng": -86.1167,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 29.2
+      },
+      {
+        "facility": {
+          "account": "DHL Supply Chain",
+          "accountSlug": "dhl-supply-chain",
+          "idx": 4,
+          "name": "DHL Supply Chain - East Coast Center of Excellence - Annville PA",
+          "city": "Annville",
+          "state": "PA",
+          "lat": 40.319835,
+          "lng": -76.534502,
+          "type": "Life Sciences & Healthcare Distribution Center (Foreign Trade Zone)"
+        },
+        "primoSite": {
+          "name": "US PL Allentown NPL Factory",
+          "city": "Breinigsville",
+          "state": "PA",
+          "lat": 40.528,
+          "lng": -75.635,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 49.5
+      }
+    ],
+    "closestDistance": 16.1,
+    "uniquePrimoSites": [
+      "US PL Greenwood Indiana",
+      "US PL Allentown Factory",
+      "US PL Allentown NPL Factory",
+      "US DC NFI - Breinigsville",
+      "US PL Dallas 2 Factory"
+    ],
+    "uniqueRegions": [
+      "Greenwood, IN",
+      "Breinigsville, PA",
+      "Dallas, TX"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "RTLS",
+      "Machine Vision Gate",
+      "YMS"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "campbells",
+    "account": "Campbell's",
+    "totalFacilities": 21,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "Campbell's",
+          "accountSlug": "campbells",
+          "idx": 10,
+          "name": "Pepperidge Farm - Lakeland FL",
+          "city": "Lakeland",
+          "state": "FL",
+          "lat": 28.074353,
+          "lng": -81.981258,
+          "type": "Manufacturing - bakery and crackers"
+        },
+        "primoSite": {
+          "name": "US PL Zephyrhills Factory",
+          "city": "Zephyrhills",
+          "state": "FL",
+          "lat": 28.2461,
+          "lng": -82.1811,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 17
+      },
+      {
+        "facility": {
+          "account": "Campbell's",
+          "accountSlug": "campbells",
+          "idx": 17,
+          "name": "Pace / Prego - Dixon CA",
+          "city": "Dixon",
+          "state": "CA",
+          "lat": 38.47074,
+          "lng": -121.803936,
+          "type": "Manufacturing - sauces/food production"
+        },
+        "primoSite": {
+          "name": "US PL Sacramento Factory",
+          "city": "Sacramento",
+          "state": "CA",
+          "lat": 38.5158,
+          "lng": -121.3809,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 23.1
+      },
+      {
+        "facility": {
+          "account": "Campbell's",
+          "accountSlug": "campbells",
+          "idx": 7,
+          "name": "Pepperidge Farm - Denver PA",
+          "city": "Denver",
+          "state": "PA",
+          "lat": 40.222873,
+          "lng": -76.085963,
+          "type": "Manufacturing - bakery (baked goods and cookies)"
+        },
+        "primoSite": {
+          "name": "US PL Allentown NPL Factory",
+          "city": "Breinigsville",
+          "state": "PA",
+          "lat": 40.528,
+          "lng": -75.635,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 31.7
+      },
+      {
+        "facility": {
+          "account": "Campbell's",
+          "accountSlug": "campbells",
+          "idx": 9,
+          "name": "Pepperidge Farm - Downingtown PA",
+          "city": "Downingtown",
+          "state": "PA",
+          "lat": 40.004013,
+          "lng": -75.686531,
+          "type": "Manufacturing - bakery"
+        },
+        "primoSite": {
+          "name": "US PL Allentown NPL Factory",
+          "city": "Breinigsville",
+          "state": "PA",
+          "lat": 40.528,
+          "lng": -75.635,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 36.3
+      },
+      {
+        "facility": {
+          "account": "Campbell's",
+          "accountSlug": "campbells",
+          "idx": 18,
+          "name": "Campbell's - Stockton CA",
+          "city": "Stockton",
+          "state": "CA",
+          "lat": 37.954263,
+          "lng": -121.309958,
+          "type": "Manufacturing - food production"
+        },
+        "primoSite": {
+          "name": "US PL Sacramento Factory",
+          "city": "Sacramento",
+          "state": "CA",
+          "lat": 38.5158,
+          "lng": -121.3809,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 39
+      },
+      {
+        "facility": {
+          "account": "Campbell's",
+          "accountSlug": "campbells",
+          "idx": 14,
+          "name": "Snyder's-Lance - Beloit WI",
+          "city": "Beloit",
+          "state": "WI",
+          "lat": 42.510708,
+          "lng": -88.995032,
+          "type": "Manufacturing - snacks/potato chips"
+        },
+        "primoSite": {
+          "name": "US PL Madison Factory",
+          "city": "Madison",
+          "state": "WI",
+          "lat": 43.0558,
+          "lng": -89.3268,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 41.3
+      }
+    ],
+    "closestDistance": 17,
+    "uniquePrimoSites": [
+      "US PL Allentown Factory",
+      "US PL Allentown NPL Factory",
+      "US DC NFI - Breinigsville",
+      "US PL Zephyrhills Factory",
+      "US PL Madison Factory",
+      "US PL Sacramento Factory"
+    ],
+    "uniqueRegions": [
+      "Breinigsville, PA",
+      "Zephyrhills, FL",
+      "Madison, WI",
+      "Sacramento, CA"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "RTLS",
+      "Machine Vision Gate",
+      "YMS"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "westrock-coffee",
+    "account": "Westrock Coffee",
+    "totalFacilities": 6,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "Westrock Coffee",
+          "accountSlug": "westrock-coffee",
+          "idx": 4,
+          "name": "Westrock Coffee - North Little Rock AR Roasting & Manufacturing",
+          "city": "North Little Rock",
+          "state": "AR",
+          "lat": 34.829921,
+          "lng": -92.388925,
+          "type": "Roasting Plant / Private-Label Manufacturing"
+        },
+        "primoSite": {
+          "name": "US PL Hot Springs 2 Factory",
+          "city": "Hot Springs",
+          "state": "AR",
+          "lat": 34.61,
+          "lng": -93.05,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 40.5
+      },
+      {
+        "facility": {
+          "account": "Westrock Coffee",
+          "accountSlug": "westrock-coffee",
+          "idx": 3,
+          "name": "Westrock Coffee - Conway AR Single-Serve \"Clark\" Plant",
+          "city": "Conway",
+          "state": "AR",
+          "lat": 35.058779,
+          "lng": -92.409215,
+          "type": "Manufacturing Plant (single-serve / K-cup pods)"
+        },
+        "primoSite": {
+          "name": "US PL Hot Springs Factory",
+          "city": "Hot Springs",
+          "state": "AR",
+          "lat": 34.6332,
+          "lng": -93.0672,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 47.5
+      },
+      {
+        "facility": {
+          "account": "Westrock Coffee",
+          "accountSlug": "westrock-coffee",
+          "idx": 2,
+          "name": "Westrock Coffee - Conway AR Distribution Center",
+          "city": "Conway",
+          "state": "AR",
+          "lat": 35.058793,
+          "lng": -92.405415,
+          "type": "Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Hot Springs Factory",
+          "city": "Hot Springs",
+          "state": "AR",
+          "lat": 34.6332,
+          "lng": -93.0672,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 47.7
+      },
+      {
+        "facility": {
+          "account": "Westrock Coffee",
+          "accountSlug": "westrock-coffee",
+          "idx": 1,
+          "name": "Westrock Coffee - Conway AR Roast-to-RTD Plant",
+          "city": "Conway",
+          "state": "AR",
+          "lat": 35.073662,
+          "lng": -92.416857,
+          "type": "Manufacturing Plant (roast-to-ready-to-drink)"
+        },
+        "primoSite": {
+          "name": "US PL Hot Springs Factory",
+          "city": "Hot Springs",
+          "state": "AR",
+          "lat": 34.6332,
+          "lng": -93.0672,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 47.8
+      }
+    ],
+    "closestDistance": 40.5,
+    "uniquePrimoSites": [
+      "US PL Hot Springs Factory",
+      "US PL Hot Springs 2 Factory",
+      "US DC Hot Springs (WHSE)"
+    ],
+    "uniqueRegions": [
+      "Hot Springs, AR"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "YMS"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "hormel-foods",
+    "account": "Hormel Foods",
+    "totalFacilities": 27,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "Hormel Foods",
+          "accountSlug": "hormel-foods",
+          "idx": 16,
+          "name": "Hormel Beloit Plant - Beloit WI",
+          "city": "Beloit",
+          "state": "WI",
+          "lat": 42.532852,
+          "lng": -88.956507,
+          "type": "Production Facility"
+        },
+        "primoSite": {
+          "name": "US PL Madison Factory",
+          "city": "Madison",
+          "state": "WI",
+          "lat": 43.0558,
+          "lng": -89.3268,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 40.7
+      },
+      {
+        "facility": {
+          "account": "Hormel Foods",
+          "accountSlug": "hormel-foods",
+          "idx": 14,
+          "name": "Skippy Foods - Little Rock AR",
+          "city": "Little Rock",
+          "state": "AR",
+          "lat": 34.801934,
+          "lng": -92.230937,
+          "type": "Production Facility"
+        },
+        "primoSite": {
+          "name": "US PL Hot Springs 2 Factory",
+          "city": "Hot Springs",
+          "state": "AR",
+          "lat": 34.61,
+          "lng": -93.05,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 48.4
+      },
+      {
+        "facility": {
+          "account": "Hormel Foods",
+          "accountSlug": "hormel-foods",
+          "idx": 19,
+          "name": "Swiss American Sausage Co. - Lathrop CA",
+          "city": "Lathrop",
+          "state": "CA",
+          "lat": 37.811459,
+          "lng": -121.294505,
+          "type": "Meat Processing Plant"
+        },
+        "primoSite": {
+          "name": "US PL Sacramento Factory",
+          "city": "Sacramento",
+          "state": "CA",
+          "lat": 38.5158,
+          "lng": -121.3809,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 48.9
+      }
+    ],
+    "closestDistance": 40.7,
+    "uniquePrimoSites": [
+      "US PL Hot Springs Factory",
+      "US PL Hot Springs 2 Factory",
+      "US PL Madison Factory",
+      "US PL Sacramento Factory"
+    ],
+    "uniqueRegions": [
+      "Hot Springs, AR",
+      "Madison, WI",
+      "Sacramento, CA"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "YMS"
+    ],
+    "tier": 1
+  },
+  {
+    "slug": "boston-beer-company",
+    "account": "The Boston Beer Company",
+    "totalFacilities": 5,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "The Boston Beer Company",
+          "accountSlug": "boston-beer-company",
+          "idx": 1,
+          "name": "Samuel Adams Pennsylvania Brewery - Breinigsville PA",
+          "city": "Breinigsville",
+          "state": "PA",
+          "lat": 40.5752,
+          "lng": -75.624758,
+          "type": "Brewery / production facility (largest in network; includes ~1M sq ft brewery + warehouse space on ~76 acres)"
+        },
+        "primoSite": {
+          "name": "US PL Allentown Factory",
+          "city": "Breinigsville",
+          "state": "PA",
+          "lat": 40.5333,
+          "lng": -75.6333,
+          "solutions": [
+            "Driver Journey",
+            "RTLS",
+            "Machine Vision Gate"
+          ]
+        },
+        "distanceMiles": 2.9
+      }
+    ],
+    "closestDistance": 2.9,
+    "uniquePrimoSites": [
+      "US PL Allentown Factory",
+      "US PL Allentown NPL Factory",
+      "US DC NFI - Breinigsville"
+    ],
+    "uniqueRegions": [
+      "Breinigsville, PA"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "RTLS",
+      "Machine Vision Gate"
+    ],
+    "tier": 2
+  },
+  {
+    "slug": "ford",
+    "account": "Ford",
+    "totalFacilities": 24,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "Ford",
+          "accountSlug": "ford",
+          "idx": 24,
+          "name": "Ford - Parts Distribution Center, Rancho Cucamonga CA",
+          "city": "Rancho Cucamonga",
+          "state": "CA",
+          "lat": 34.099865,
+          "lng": -117.551907,
+          "type": "Parts Distribution Center"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 5
+      }
+    ],
+    "closestDistance": 5,
+    "uniquePrimoSites": [
+      "US PL Ontario Factory",
+      "US PL Cabazon Factory"
+    ],
+    "uniqueRegions": [
+      "Ontario, CA",
+      "Cabazon, CA"
+    ],
+    "solutionsNearby": [
+      "Driver Journey"
+    ],
+    "tier": 2
+  },
+  {
+    "slug": "salson-logistics",
+    "account": "SalSon Logistics",
+    "totalFacilities": 14,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "SalSon Logistics",
+          "accountSlug": "salson-logistics",
+          "idx": 8,
+          "name": "SalSon Logistics - Houston TX",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.805027,
+          "lng": -95.276484,
+          "type": "Drayage Terminal / Food-Grade Warehouse"
+        },
+        "primoSite": {
+          "name": "US PL S Houston Factory",
+          "city": "Houston",
+          "state": "TX",
+          "lat": 29.665,
+          "lng": -95.385,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 11.7
+      },
+      {
+        "facility": {
+          "account": "SalSon Logistics",
+          "accountSlug": "salson-logistics",
+          "idx": 4,
+          "name": "SalSon Logistics - Compton CA",
+          "city": "Compton",
+          "state": "CA",
+          "lat": 33.859694,
+          "lng": -118.229421,
+          "type": "Intermodal / Transload Warehouse + Secured Yard"
+        },
+        "primoSite": {
+          "name": "US PL Ontario Factory",
+          "city": "Ontario",
+          "state": "CA",
+          "lat": 34.0365,
+          "lng": -117.5931,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 38.5
+      }
+    ],
+    "closestDistance": 11.7,
+    "uniquePrimoSites": [
+      "US PL Ontario Factory",
+      "US PL S Houston Factory",
+      "US PL Pasadena Factory"
+    ],
+    "uniqueRegions": [
+      "Ontario, CA",
+      "Houston, TX",
+      "Pasadena, TX"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "YMS"
+    ],
+    "tier": 2
+  },
+  {
+    "slug": "georgia-pacific",
+    "account": "Georgia Pacific",
+    "totalFacilities": 30,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "Georgia Pacific",
+          "accountSlug": "georgia-pacific",
+          "idx": 30,
+          "name": "GP Corrugated Box Plant - Waxahachie TX",
+          "city": "Waxahachie",
+          "state": "TX",
+          "lat": 32.378277,
+          "lng": -96.770814,
+          "type": "Corrugated Box Plant"
+        },
+        "primoSite": {
+          "name": "US PL Dallas 2 Factory",
+          "city": "Dallas",
+          "state": "TX",
+          "lat": 32.6949,
+          "lng": -96.947,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 24.2
+      },
+      {
+        "facility": {
+          "account": "Georgia Pacific",
+          "accountSlug": "georgia-pacific",
+          "idx": 22,
+          "name": "GP Anchor Packaging Plant - Janesville WI",
+          "city": "Janesville",
+          "state": "WI",
+          "lat": 42.644223,
+          "lng": -88.960536,
+          "type": "Packaging/Film Plant"
+        },
+        "primoSite": {
+          "name": "US PL Madison Factory",
+          "city": "Madison",
+          "state": "WI",
+          "lat": 43.0558,
+          "lng": -89.3268,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 34
+      }
+    ],
+    "closestDistance": 24.2,
+    "uniquePrimoSites": [
+      "US PL Madison Factory",
+      "US PL Dallas 2 Factory"
+    ],
+    "uniqueRegions": [
+      "Madison, WI",
+      "Dallas, TX"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "YMS"
+    ],
+    "tier": 2
+  },
+  {
+    "slug": "jm-smucker",
+    "account": "JM Smucker",
+    "totalFacilities": 17,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "JM Smucker",
+          "accountSlug": "jm-smucker",
+          "idx": 16,
+          "name": "Hostess Bakery - Arkadelphia AR",
+          "city": "Arkadelphia",
+          "state": "AR",
+          "lat": 34.053533,
+          "lng": -93.093879,
+          "type": "Manufacturing - Sweet baked snacks (Hostess Donettes)"
+        },
+        "primoSite": {
+          "name": "US DC Hot Springs (WHSE)",
+          "city": "Hot Springs",
+          "state": "AR",
+          "lat": 34.5037,
+          "lng": -93.0552,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 31.2
+      },
+      {
+        "facility": {
+          "account": "JM Smucker",
+          "accountSlug": "jm-smucker",
+          "idx": 4,
+          "name": "Uncrustables - Longmont CO",
+          "city": "Longmont",
+          "state": "CO",
+          "lat": 40.184331,
+          "lng": -105.178241,
+          "type": "Manufacturing - Frozen handhelds (Uncrustables)"
+        },
+        "primoSite": {
+          "name": "US PL Denver Factory",
+          "city": "Denver",
+          "state": "CO",
+          "lat": 39.7392,
+          "lng": -104.9903,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 32.3
+      }
+    ],
+    "closestDistance": 31.2,
+    "uniquePrimoSites": [
+      "US PL Denver Factory",
+      "US PL Hot Springs Factory",
+      "US DC Hot Springs (WHSE)",
+      "US PL Hot Springs 2 Factory"
+    ],
+    "uniqueRegions": [
+      "Denver, CO",
+      "Hot Springs, AR"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "YMS"
+    ],
+    "tier": 2
+  },
+  {
+    "slug": "kimberly-clark",
+    "account": "Kimberly-Clark",
+    "totalFacilities": 18,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "Kimberly-Clark",
+          "accountSlug": "kimberly-clark",
+          "idx": 7,
+          "name": "K-C Maumelle Plant - Maumelle AR",
+          "city": "Maumelle",
+          "state": "AR",
+          "lat": 34.870005,
+          "lng": -92.397751,
+          "type": "Huggies baby wipes manufacturing plant (~400,000 sq ft)"
+        },
+        "primoSite": {
+          "name": "US PL Hot Springs 2 Factory",
+          "city": "Hot Springs",
+          "state": "AR",
+          "lat": 34.61,
+          "lng": -93.05,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 41.2
+      },
+      {
+        "facility": {
+          "account": "Kimberly-Clark",
+          "accountSlug": "kimberly-clark",
+          "idx": 9,
+          "name": "K-C Chester Mill - Chester PA",
+          "city": "Chester",
+          "state": "PA",
+          "lat": 39.841551,
+          "lng": -75.36939,
+          "type": "Non-integrated tissue mill (Scott 1000 bathroom tissue; ~1.3M sq ft, ~570 employees)"
+        },
+        "primoSite": {
+          "name": "US PL Allentown NPL Factory",
+          "city": "Breinigsville",
+          "state": "PA",
+          "lat": 40.528,
+          "lng": -75.635,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 49.5
+      }
+    ],
+    "closestDistance": 41.2,
+    "uniquePrimoSites": [
+      "US PL Hot Springs Factory",
+      "US DC Hot Springs (WHSE)",
+      "US PL Hot Springs 2 Factory",
+      "US PL Allentown Factory",
+      "US PL Allentown NPL Factory",
+      "US DC NFI - Breinigsville"
+    ],
+    "uniqueRegions": [
+      "Hot Springs, AR",
+      "Breinigsville, PA"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "YMS",
+      "RTLS",
+      "Machine Vision Gate"
+    ],
+    "tier": 2
+  },
+  {
+    "slug": "cost-plus-world-market",
+    "account": "Cost Plus World Market",
+    "totalFacilities": 2,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "Cost Plus World Market",
+          "accountSlug": "cost-plus-world-market",
+          "idx": 1,
+          "name": "Cost Plus World Market - Stockton CA Distribution Center",
+          "city": "Stockton",
+          "state": "CA",
+          "lat": 37.916788,
+          "lng": -121.25568,
+          "type": "Distribution Center / Import Warehouse (West Coast)"
+        },
+        "primoSite": {
+          "name": "US PL Sacramento Factory",
+          "city": "Sacramento",
+          "state": "CA",
+          "lat": 38.5158,
+          "lng": -121.3809,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 41.9
+      }
+    ],
+    "closestDistance": 41.9,
+    "uniquePrimoSites": [
+      "US PL Sacramento Factory"
+    ],
+    "uniqueRegions": [
+      "Sacramento, CA"
+    ],
+    "solutionsNearby": [
+      "Driver Journey"
+    ],
+    "tier": 3
+  },
+  {
+    "slug": "nestle-usa",
+    "account": "Nestlé USA",
+    "totalFacilities": 12,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "Nestlé USA",
+          "accountSlug": "nestle-usa",
+          "idx": 8,
+          "name": "Nestlé Beverage - Anderson IN",
+          "city": "Anderson",
+          "state": "IN",
+          "lat": 40.171509,
+          "lng": -85.766582,
+          "type": "Beverage manufacturing plant + distribution center"
+        },
+        "primoSite": {
+          "name": "US PL Greenwood Indiana",
+          "city": "Greenwood",
+          "state": "IN",
+          "lat": 39.5945,
+          "lng": -86.1167,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 44
+      }
+    ],
+    "closestDistance": 44,
+    "uniquePrimoSites": [
+      "US PL Greenwood Indiana"
+    ],
+    "uniqueRegions": [
+      "Greenwood, IN"
+    ],
+    "solutionsNearby": [
+      "Driver Journey"
+    ],
+    "tier": 3
+  },
+  {
+    "slug": "bob-evans-farms",
+    "account": "Bob Evans Farms",
+    "totalFacilities": 7,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "Bob Evans Farms",
+          "accountSlug": "bob-evans-farms",
+          "idx": 4,
+          "name": "Bob Evans Farms - Sulphur Springs TX Plant",
+          "city": "Sulphur Springs",
+          "state": "TX",
+          "lat": 33.129289,
+          "lng": -95.580222,
+          "type": "Manufacturing plant (refrigerated sides, including Bob Evans Macaroni & Cheese)"
+        },
+        "primoSite": {
+          "name": "US PL Hawkins Factory",
+          "city": "Hawkins",
+          "state": "TX",
+          "lat": 32.569,
+          "lng": -95.215,
+          "solutions": [
+            "Driver Journey",
+            "YMS"
+          ]
+        },
+        "distanceMiles": 44.1
+      }
+    ],
+    "closestDistance": 44.1,
+    "uniquePrimoSites": [
+      "US PL Hawkins Factory"
+    ],
+    "uniqueRegions": [
+      "Hawkins, TX"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "YMS"
+    ],
+    "tier": 3
+  },
+  {
+    "slug": "john-deere",
+    "account": "John Deere",
+    "totalFacilities": 22,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "John Deere",
+          "accountSlug": "john-deere",
+          "idx": 16,
+          "name": "John Deere Horicon Works - Horicon WI",
+          "city": "Horicon",
+          "state": "WI",
+          "lat": 43.453709,
+          "lng": -88.633569,
+          "type": "Assembly Plant"
+        },
+        "primoSite": {
+          "name": "US PL Madison Factory",
+          "city": "Madison",
+          "state": "WI",
+          "lat": 43.0558,
+          "lng": -89.3268,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 44.4
+      }
+    ],
+    "closestDistance": 44.4,
+    "uniquePrimoSites": [
+      "US PL Madison Factory"
+    ],
+    "uniqueRegions": [
+      "Madison, WI"
+    ],
+    "solutionsNearby": [
+      "Driver Journey"
+    ],
+    "tier": 3
+  },
+  {
+    "slug": "crowley",
+    "account": "Crowley",
+    "totalFacilities": 14,
+    "nearbyFacilities": [
+      {
+        "facility": {
+          "account": "Crowley",
+          "accountSlug": "crowley",
+          "idx": 7,
+          "name": "Crowley Penn Terminals - Eddystone PA",
+          "city": "Eddystone",
+          "state": "PA",
+          "lat": 39.853752,
+          "lng": -75.338927,
+          "type": "Marine terminal with dry + refrigerated warehouse"
+        },
+        "primoSite": {
+          "name": "US PL Allentown NPL Factory",
+          "city": "Breinigsville",
+          "state": "PA",
+          "lat": 40.528,
+          "lng": -75.635,
+          "solutions": [
+            "Driver Journey"
+          ]
+        },
+        "distanceMiles": 49.1
+      }
+    ],
+    "closestDistance": 49.1,
+    "uniquePrimoSites": [
+      "US PL Allentown Factory",
+      "US PL Allentown NPL Factory",
+      "US DC NFI - Breinigsville"
+    ],
+    "uniqueRegions": [
+      "Breinigsville, PA"
+    ],
+    "solutionsNearby": [
+      "Driver Journey",
+      "RTLS",
+      "Machine Vision Gate"
+    ],
+    "tier": 3
+  }
+]
