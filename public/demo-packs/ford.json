@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-02T14:51:32.083Z",
+  "builtAt": "2026-06-03T00:45:50.476Z",
   "account": {
     "slug": "ford",
     "displayName": "Ford Motor Company",
@@ -9,22 +9,22 @@
     "coverageNote": {
       "auditedCount": 24,
       "estimatedFootprint": 30,
+      "totalGlobalFootprint": 65,
+      "auditedScope": "NA",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Ford operates ~65 assembly and stamping plants globally; ~30 are in North America. We audited 24 NA plants. International scope on request.",
-      "auditedScope": "NA",
-      "totalGlobalFootprint": 65
+      "note": "Ford operates ~65 assembly and stamping plants globally; ~30 are in North America. We audited 24 NA plants. International scope on request."
     },
     "featuredSiteId": "02-kentucky-truck-plant",
-    "roiDefaults": {
-      "averageMarginPerShipment": 2200
-    },
     "dossierIntro": "Auto OEMs run two yards inside every plant: parts in, vehicles out. Ford runs 65 facilities. Kentucky Truck Plant covers 343 acres with 55 docks and 150 trailer spots. BlueOval City in Tennessee is 950 acres of greenfield EV manufacturing. 20 of 24 audited sites are rail-served. YardFlow runs the supplier inbound and finished-vehicle outbound as two distinct queues on one protocol.",
     "surprisingFindings": [
       "BlueOval City is 950 acres of greenfield. Ford's EV bet is the size of 720 NFL fields.",
       "20 of 24 audited sites are rail-served. Auto inbound runs on railcars, not trucks.",
       "907 dock doors across 24 plants. The auto OEM dock count is parts pacing, not throughput."
-    ]
+    ],
+    "roiDefaults": {
+      "averageMarginPerShipment": 2200
+    }
   },
   "research": null,
   "network": {
@@ -382,7 +382,26 @@
               }
             ]
           },
-          "truckGate": null,
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 39.200641,
+                "lng": -94.472415
+              },
+              {
+                "lat": 39.200476,
+                "lng": -94.472202
+              },
+              {
+                "lat": 39.20059,
+                "lng": -94.472055
+              },
+              {
+                "lat": 39.200755,
+                "lng": -94.472268
+              }
+            ]
+          },
           "dropYards": [
             {
               "ring": [
@@ -433,6 +452,11 @@
               "heading": 150,
               "pano": "iJJ3Z9vfFXFHeqA7HxGguQ",
               "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 30,
+              "pano": "1DLErCjQnlXV80b2GlDLzQ",
+              "hasCoverage": true
             }
           }
         },
@@ -468,6 +492,52 @@
           "scale": false,
           "dropYard": true,
           "multiStep": true
+        },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
         },
         "dossierExcerpt": "- Name: Ford - Kansas City Assembly Plant, Claycomo MO\n- Type: Vehicle Assembly Plant (F-150 + Transit)\n- Address: 8121 US Highway 69, Claycomo, MO 64119\n- Resolved coords: 39.20250, -94.47700",
         "mapsUrl": "https://www.google.com/maps/@39.20250,-94.47700,400m/data=!3m1!1e3",
