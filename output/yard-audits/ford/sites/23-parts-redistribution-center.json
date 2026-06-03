@@ -26,7 +26,26 @@
         }
       ]
     },
-    "truckGate": null,
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.17436,
+          "lng": -83.2862
+        },
+        {
+          "lat": 42.17436,
+          "lng": -83.28555
+        },
+        {
+          "lat": 42.1741,
+          "lng": -83.28555
+        },
+        {
+          "lat": 42.1741,
+          "lng": -83.2862
+        }
+      ]
+    },
     "dropYards": [
       {
         "ring": [
@@ -49,12 +68,38 @@
         ]
       }
     ],
-    "dockAprons": [],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 42.17908,
+            "lng": -83.2849
+          },
+          {
+            "lat": 42.17908,
+            "lng": -83.2796
+          },
+          {
+            "lat": 42.17888,
+            "lng": -83.2796
+          },
+          {
+            "lat": 42.17888,
+            "lng": -83.2849
+          }
+        ]
+      }
+    ],
     "staging": null,
     "streetViewMeta": {
       "perimeter": {
         "heading": 154,
         "pano": "u1yYW-6yyksk16_2pX4B9w",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 90,
+        "pano": "AsXjOdHCXfexTTgK7FfdZw",
         "hasCoverage": true
       }
     }

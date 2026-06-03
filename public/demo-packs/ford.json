@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-03T01:13:57.181Z",
+  "builtAt": "2026-06-03T01:46:14.910Z",
   "account": {
     "slug": "ford",
     "displayName": "Ford Motor Company",
@@ -3308,8 +3308,48 @@
               }
             ]
           },
-          "truckGate": null,
-          "dropYards": [],
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 42.37352,
+                "lng": -83.333253
+              },
+              {
+                "lat": 42.37305,
+                "lng": -83.333253
+              },
+              {
+                "lat": 42.37305,
+                "lng": -83.33372
+              },
+              {
+                "lat": 42.37352,
+                "lng": -83.33372
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 42.3752,
+                  "lng": -83.3385
+                },
+                {
+                  "lat": 42.3752,
+                  "lng": -83.3342
+                },
+                {
+                  "lat": 42.37425,
+                  "lng": -83.3342
+                },
+                {
+                  "lat": 42.37425,
+                  "lng": -83.3385
+                }
+              ]
+            }
+          ],
           "dockAprons": [
             {
               "ring": [
@@ -3337,6 +3377,11 @@
             "perimeter": {
               "heading": 208,
               "pano": "UHzr1s5z6Rvi1cmhyMlxAg",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 270,
+              "pano": "eHtalkbHy7yPYTbOlIRn8g",
               "hasCoverage": true
             }
           }
@@ -3373,6 +3418,50 @@
           "scale": false,
           "dropYard": true,
           "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
         },
         "dossierExcerpt": "- Roster coords (42.3728, -83.33552) land on the east edge of a very large warehouse\n  on Middlebelt Rd — they are essentially correct (the geocode \"movedMeters 3497\" was\n  measured against an earlier wrong point, not a current error).\n- Probed the building and confirmed: a ~1M sq ft distribution warehouse running\n  north-south along Middlebelt Rd, dock doors on the east face, trailers backed in.\n- Web research confirms address 11871 Middlebelt Rd, Livonia, MI 48150 — Ford\n  Customer Service Division National Parts Distribution Center, opened 1951 (once the\n  world's largest parts warehouse under one roof, ~1M sq ft).\n- Locked center: 42.37280, -83.33600.",
         "mapsUrl": "https://www.google.com/maps/@42.37280,-83.33600,400m/data=!3m1!1e3",
@@ -3451,7 +3540,26 @@
               }
             ]
           },
-          "truckGate": null,
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 42.17436,
+                "lng": -83.2862
+              },
+              {
+                "lat": 42.17436,
+                "lng": -83.28555
+              },
+              {
+                "lat": 42.1741,
+                "lng": -83.28555
+              },
+              {
+                "lat": 42.1741,
+                "lng": -83.2862
+              }
+            ]
+          },
           "dropYards": [
             {
               "ring": [
@@ -3474,12 +3582,38 @@
               ]
             }
           ],
-          "dockAprons": [],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 42.17908,
+                  "lng": -83.2849
+                },
+                {
+                  "lat": 42.17908,
+                  "lng": -83.2796
+                },
+                {
+                  "lat": 42.17888,
+                  "lng": -83.2796
+                },
+                {
+                  "lat": 42.17888,
+                  "lng": -83.2849
+                }
+              ]
+            }
+          ],
           "staging": null,
           "streetViewMeta": {
             "perimeter": {
               "heading": 154,
               "pano": "u1yYW-6yyksk16_2pX4B9w",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 90,
+              "pano": "AsXjOdHCXfexTTgK7FfdZw",
               "hasCoverage": true
             }
           }
@@ -3516,6 +3650,50 @@
           "scale": false,
           "dropYard": true,
           "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
         },
         "dossierExcerpt": "- Roster coords (42.176414, -83.281372) land squarely on a massive distribution\n  warehouse — they are correct (the geocode \"movedMeters 5444\" was measured against an\n  earlier wrong point, not a current error).\n- Web research confirms the facility: **Ford Parts Redistribution Center, 25555\n  Pennsylvania Rd, Brownstown Charter Twp / Romulus, MI 48174** — a Ford Customer\n  Service Division redistribution center.\n- Locked center: 42.17640, -83.28120.",
         "mapsUrl": "https://www.google.com/maps/@42.17640,-83.28120,400m/data=!3m1!1e3",
@@ -3595,8 +3773,48 @@
               }
             ]
           },
-          "truckGate": null,
-          "dropYards": [],
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 34.09963,
+                "lng": -117.55418
+              },
+              {
+                "lat": 34.09963,
+                "lng": -117.55402
+              },
+              {
+                "lat": 34.09938,
+                "lng": -117.55402
+              },
+              {
+                "lat": 34.09938,
+                "lng": -117.55418
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 34.09972,
+                  "lng": -117.5549
+                },
+                {
+                  "lat": 34.09972,
+                  "lng": -117.55075
+                },
+                {
+                  "lat": 34.09948,
+                  "lng": -117.55075
+                },
+                {
+                  "lat": 34.09948,
+                  "lng": -117.5549
+                }
+              ]
+            }
+          ],
           "dockAprons": [
             {
               "ring": [
@@ -3624,6 +3842,11 @@
             "perimeter": {
               "heading": 354,
               "pano": "sz9cUYWqqIn2cEKRSt-Z1A",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 0,
+              "pano": "Ja3QbKnqpU_URmlhSXBQ9g",
               "hasCoverage": true
             }
           }
@@ -3660,6 +3883,50 @@
           "scale": false,
           "dropYard": true,
           "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
         },
         "dossierExcerpt": "- Roster coords (34.099865, -117.551907) are ROOFTOP-accurate and land on the correct\n  building — a large solar-roofed cross-dock warehouse on Milliken Ave.\n- Web research confirms 8449 Milliken Ave, Rancho Cucamonga, CA 91730 — a ~449,370\n  sq ft warehouse/distribution building (completed 2000, \"Prologis Rancho Cucamonga\n  Distribution Center\"), leased by Ford as its West Coast Parts Distribution Center.\n- Locked center: 34.09990, -117.55250.",
         "mapsUrl": "https://www.google.com/maps/@34.09990,-117.55250,400m/data=!3m1!1e3",
