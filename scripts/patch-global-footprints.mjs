@@ -100,6 +100,12 @@ const PATCHES = {
     global: 30,
     note: 'Costco runs ~24 US cross-dock depots (dry, refrigerated, and e-commerce) feeding ~600 US warehouses, plus a handful internationally. We audited 11 representative US depots spanning dry and wet cross-docks.',
   },
+  walmart: {
+    scope: 'US',
+    inScope: 150,
+    global: 210,
+    note: 'Walmart runs ~150 US distribution centers (general merchandise, grocery/perishable, e-commerce fulfillment, and import) feeding ~4,700 US stores, plus international DCs. We audited 12 representative US facilities spanning every type.',
+  },
   crowley: {
     scope: 'US',
     inScope: 40,

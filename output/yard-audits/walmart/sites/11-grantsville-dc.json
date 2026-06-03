@@ -1,0 +1,257 @@
+{
+  "name": "Walmart Regional DC 7026, Grantsville UT",
+  "type": "General Merchandise Distribution Center",
+  "coords": {
+    "lat": 40.621,
+    "lng": -112.5075
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.6245,
+          "lng": -112.5132
+        },
+        {
+          "lat": 40.6258,
+          "lng": -112.5088
+        },
+        {
+          "lat": 40.6235,
+          "lng": -112.5048
+        },
+        {
+          "lat": 40.617,
+          "lng": -112.505
+        },
+        {
+          "lat": 40.616,
+          "lng": -112.5085
+        },
+        {
+          "lat": 40.6205,
+          "lng": -112.5135
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.62415,
+          "lng": -112.512
+        },
+        {
+          "lat": 40.6233,
+          "lng": -112.51135
+        },
+        {
+          "lat": 40.6236,
+          "lng": -112.5108
+        },
+        {
+          "lat": 40.62445,
+          "lng": -112.51145
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 40.6232,
+            "lng": -112.5128
+          },
+          {
+            "lat": 40.618,
+            "lng": -112.5074
+          },
+          {
+            "lat": 40.617,
+            "lng": -112.5088
+          },
+          {
+            "lat": 40.6222,
+            "lng": -112.5142
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.6178,
+            "lng": -112.5066
+          },
+          {
+            "lat": 40.6166,
+            "lng": -112.5078
+          },
+          {
+            "lat": 40.6175,
+            "lng": -112.5102
+          },
+          {
+            "lat": 40.6196,
+            "lng": -112.5096
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.6248,
+            "lng": -112.5104
+          },
+          {
+            "lat": 40.6236,
+            "lng": -112.5074
+          },
+          {
+            "lat": 40.6228,
+            "lng": -112.5082
+          },
+          {
+            "lat": 40.624,
+            "lng": -112.5112
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 40.6238,
+            "lng": -112.5126
+          },
+          {
+            "lat": 40.6178,
+            "lng": -112.5063
+          },
+          {
+            "lat": 40.6174,
+            "lng": -112.507
+          },
+          {
+            "lat": 40.6234,
+            "lng": -112.5133
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.624,
+            "lng": -112.5118
+          },
+          {
+            "lat": 40.6232,
+            "lng": -112.5082
+          },
+          {
+            "lat": 40.6238,
+            "lng": -112.5078
+          },
+          {
+            "lat": 40.6246,
+            "lng": -112.5114
+          }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        {
+          "lat": 40.6247,
+          "lng": -112.5106
+        },
+        {
+          "lat": 40.6236,
+          "lng": -112.5101
+        },
+        {
+          "lat": 40.6233,
+          "lng": -112.5108
+        },
+        {
+          "lat": 40.6244,
+          "lng": -112.5113
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 213,
+        "pano": "et-FSFeNRdO6Rm7Y1fLp0w",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 139,
+        "pano": "F1U6o-lWLO7V5DSXtEBdUg",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 600,
+    "trailerParkingCapacity": 700,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 146.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.62100,-112.50750,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "multiStep",
+    "connectivityIssue"
+  ],
+  "fieldNotes": {
+    "truckGate": "Guarded checkpoint set ~250 m down a private access road off SR-138. z19 satellite shows a small booth in the road median with inbound/outbound lanes splitting around it and a semi stopped at the checkpoint. SV from the inner staging lot (2015-09) shows Walmart trailers and the DC dock face.",
+    "guardShack": "Small square booth (~1-2 stall footprint) sitting in the median of the gate, lanes split around it (z19 crop wm11-guard-z19).",
+    "remoteGs": "False because a staffed guard booth is present.",
+    "preGateStaging": "Wide paved approach apron and shoulder room between SR-138 and the gate where trucks can wait.",
+    "postGateStaging": "Large paved staging/check-in lot inside the gate before the dock doors; SV shows trailers staged here.",
+    "drivewayLong": "~250 m private access road from SR-138 to the gate, easily holds a 3+ truck queue.",
+    "entryLanes": "Estimated 2 inbound; lanes split around the booth but exact count is approximate from overhead.",
+    "exitLanes": "Estimated 2 outbound; approximate.",
+    "fastLaneOpportunity": "Very wide gate apron and long approach road with ample unused paved width to add an express/bypass lane.",
+    "dockDoors": "1.2M sqft cross-dock RDC with dock doors and backed-in trailers along both long faces; well over 50 (estimate ~120).",
+    "dropArea": "Hundreds of drop trailers in marked rows filling the SW, S, and N yards; far exceeds 50.",
+    "shipRcvSeparate": "Dock banks on two distinct long building faces (SW and NE), consistent with separate ship/receive clusters.",
+    "urbanRural": "Edge-of-town site west of Grantsville surrounded by open desert/farmland and mountains; a residential subdivision abuts the SE corner but the broader setting is rural.",
+    "connectivityIssue": "Rural but adjacent to a growing subdivision and on a state highway, so cellular coverage is likely adequate; low-confidence inference.",
+    "scale": "No distinct truck-scale pad identified in the truck path.",
+    "dropYard": "Dedicated multi-acre trailer-storage rows wrap the building on three sides.",
+    "siteAreaAcres": "Derived from the perimeter polygon tracing the graded/paved property edge (~146 acres).",
+    "trailersVisible": "Approximate count of trailers visible across captured imagery; honest estimate, hundreds present.",
+    "railServed": "No rail spur enters the property; nearest rail is unrelated."
+  },
+  "method": "deep-audit"
+}

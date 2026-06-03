@@ -1,0 +1,247 @@
+{
+  "name": "Walmart Grocery DC 6055, Monroe GA",
+  "type": "Grocery/Perishable DC",
+  "coords": {
+    "lat": 33.8068,
+    "lng": -83.6795
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.80955,
+          "lng": -83.6785
+        },
+        {
+          "lat": 33.8093,
+          "lng": -83.67755
+        },
+        {
+          "lat": 33.8082,
+          "lng": -83.67615
+        },
+        {
+          "lat": 33.80585,
+          "lng": -83.6752
+        },
+        {
+          "lat": 33.80485,
+          "lng": -83.67615
+        },
+        {
+          "lat": 33.80425,
+          "lng": -83.67865
+        },
+        {
+          "lat": 33.8056,
+          "lng": -83.68135
+        },
+        {
+          "lat": 33.8088,
+          "lng": -83.6818
+        },
+        {
+          "lat": 33.80905,
+          "lng": -83.68
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.80668,
+          "lng": -83.67625
+        },
+        {
+          "lat": 33.80655,
+          "lng": -83.6756
+        },
+        {
+          "lat": 33.80618,
+          "lng": -83.67575
+        },
+        {
+          "lat": 33.80631,
+          "lng": -83.6764
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 33.8088,
+            "lng": -83.68155
+          },
+          {
+            "lat": 33.80835,
+            "lng": -83.6798
+          },
+          {
+            "lat": 33.8067,
+            "lng": -83.68045
+          },
+          {
+            "lat": 33.80715,
+            "lng": -83.6822
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.8092,
+            "lng": -83.6793
+          },
+          {
+            "lat": 33.80895,
+            "lng": -83.678
+          },
+          {
+            "lat": 33.8079,
+            "lng": -83.67835
+          },
+          {
+            "lat": 33.80815,
+            "lng": -83.67965
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 33.8073,
+            "lng": -83.68085
+          },
+          {
+            "lat": 33.8056,
+            "lng": -83.6804
+          },
+          {
+            "lat": 33.80548,
+            "lng": -83.68
+          },
+          {
+            "lat": 33.80718,
+            "lng": -83.68045
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.8047,
+            "lng": -83.67865
+          },
+          {
+            "lat": 33.80445,
+            "lng": -83.6777
+          },
+          {
+            "lat": 33.80418,
+            "lng": -83.67785
+          },
+          {
+            "lat": 33.80443,
+            "lng": -83.6788
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.80795,
+            "lng": -83.6776
+          },
+          {
+            "lat": 33.80785,
+            "lng": -83.6764
+          },
+          {
+            "lat": 33.80758,
+            "lng": -83.67645
+          },
+          {
+            "lat": 33.80768,
+            "lng": -83.67765
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 245,
+        "pano": "Gia3IIPMsLxbTHkVbkJuNg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 285,
+        "pano": "Ml4i0qBRqr-klyi-Y8TPSA",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 150,
+    "trailersVisible": 220,
+    "trailerParkingCapacity": 280,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 63.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.806800,-83.679500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "scale",
+    "shipRcvSeparate"
+  ],
+  "fieldNotes": {
+    "truckGate": "Main entrance off Unisia Dr is an open, divided driveway with a 'Walmart DC 6055' monument sign (2018 + 2021 + 2026 Street View) and NO barrier arm or sliding gate across the public-road throat. Classified false: no controlled checkpoint at the property line.",
+    "guardShack": "No staffed guard booth resolved at the open road entrance in any Street View vintage. A chain-link-fenced tractor/yard-truck compound sits inside the property (visible in 2018 SV looking W/SW from inside), but the security gate to that compound was not clearly imaged; left guardShack false. Low confidence on interior gatehouse.",
+    "remoteGs": "False because truckGate classified false (open entrance). If an interior fenced-yard gate exists it would be kiosk/badge controlled, but not evidenced at the public entrance.",
+    "postGateStaging": "Large paved yard/queue area between the open entrance and the dock faces and fenced trailer yard provides ample interior staging.",
+    "drivewayLong": "Entrance driveway from Unisia Dr to the docks/yard is long (~250m+) and easily holds 3+ trucks; deep approach.",
+    "entryExitTogether": "Single shared entrance/exit off Unisia Dr (the only road frontage; S and E sides are woods/pond). entryLanes/exitLanes ~2 each across the divided drive.",
+    "fastLaneOpportunity": "Wide divided entrance apron with substantial unused paved width; room to add a bypass/express lane.",
+    "dockDoors": "50+ band. Dock doors counted across three faces: west face of the main (south) building (~40-50 doors, trailers backed in), south/SE face of the main building (~30+ doors), and the south face of the north building (~40+ doors). Total estimated ~150.",
+    "dropArea": "50+ band. Extensive trailer drop yard on the NW with many parallel rows of parked drop trailers (no tractors); estimated 200+ drop stalls.",
+    "shipRcvSeparate": "Likely separate ship/receive — distinct dock banks on different building faces (north building south face vs main building west and south faces). Medium confidence from overhead only.",
+    "scale": "No truck scale/weigh pad clearly identified in the entrance path; left false.",
+    "buildingCount": "Two connected structures: a long E-W north building and a large square main distribution building (grocery/perishable). Counted as 2.",
+    "railServed": "No rail spur enters the property; nearest rail is not connected. False.",
+    "urbanRural": "Edge-of-town industrial park outside Monroe GA, surrounded by woods, pond, and farmland; classified Rural per rubric.",
+    "trailersVisible": "~220 trailers visible across drop yard, dock faces, and overflow rows in captured z17-z18 imagery; honest overhead estimate.",
+    "connectivityIssue": "On a developed industrial park with adjacent DCs and a major retailer; cellular coverage likely adequate. False."
+  },
+  "method": "deep-audit"
+}

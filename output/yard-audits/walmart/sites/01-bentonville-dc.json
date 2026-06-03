@@ -1,0 +1,287 @@
+{
+  "name": "Walmart Regional DC 6094, Bentonville AR",
+  "type": "General Merchandise Distribution Center (~1.25M sf)",
+  "coords": {
+    "lat": 36.3205,
+    "lng": -94.2582
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.3253,
+          "lng": -94.2596
+        },
+        {
+          "lat": 36.3258,
+          "lng": -94.2559
+        },
+        {
+          "lat": 36.3233,
+          "lng": -94.2547
+        },
+        {
+          "lat": 36.3192,
+          "lng": -94.255
+        },
+        {
+          "lat": 36.3172,
+          "lng": -94.2556
+        },
+        {
+          "lat": 36.3176,
+          "lng": -94.2598
+        },
+        {
+          "lat": 36.3182,
+          "lng": -94.2612
+        },
+        {
+          "lat": 36.3207,
+          "lng": -94.2606
+        },
+        {
+          "lat": 36.3233,
+          "lng": -94.2601
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 36.31907,
+          "lng": -94.26075
+        },
+        {
+          "lat": 36.319,
+          "lng": -94.25955
+        },
+        {
+          "lat": 36.31862,
+          "lng": -94.2596
+        },
+        {
+          "lat": 36.31868,
+          "lng": -94.2608
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 36.3254,
+            "lng": -94.25895
+          },
+          {
+            "lat": 36.3256,
+            "lng": -94.256
+          },
+          {
+            "lat": 36.3235,
+            "lng": -94.2551
+          },
+          {
+            "lat": 36.32195,
+            "lng": -94.2569
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 36.3233,
+            "lng": -94.2556
+          },
+          {
+            "lat": 36.3236,
+            "lng": -94.2549
+          },
+          {
+            "lat": 36.3196,
+            "lng": -94.2552
+          },
+          {
+            "lat": 36.31955,
+            "lng": -94.2562
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 36.3214,
+            "lng": -94.2568
+          },
+          {
+            "lat": 36.3213,
+            "lng": -94.2553
+          },
+          {
+            "lat": 36.31955,
+            "lng": -94.25545
+          },
+          {
+            "lat": 36.3196,
+            "lng": -94.257
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 36.3243,
+            "lng": -94.259
+          },
+          {
+            "lat": 36.3254,
+            "lng": -94.2575
+          },
+          {
+            "lat": 36.32505,
+            "lng": -94.2571
+          },
+          {
+            "lat": 36.32398,
+            "lng": -94.25862
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 36.3215,
+            "lng": -94.25735
+          },
+          {
+            "lat": 36.31955,
+            "lng": -94.25745
+          },
+          {
+            "lat": 36.31952,
+            "lng": -94.257
+          },
+          {
+            "lat": 36.32148,
+            "lng": -94.2569
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 36.3187,
+            "lng": -94.2592
+          },
+          {
+            "lat": 36.3187,
+            "lng": -94.2564
+          },
+          {
+            "lat": 36.3185,
+            "lng": -94.2564
+          },
+          {
+            "lat": 36.3185,
+            "lng": -94.2592
+          }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        {
+          "lat": 36.32,
+          "lng": -94.26035
+        },
+        {
+          "lat": 36.3199,
+          "lng": -94.25895
+        },
+        {
+          "lat": 36.31905,
+          "lng": -94.25905
+        },
+        {
+          "lat": 36.31915,
+          "lng": -94.26045
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 65,
+        "pano": "sUXJs9zFGWFXQ_N2675TYw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 96,
+        "pano": "sUXJs9zFGWFXQ_N2675TYw",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 240,
+    "trailersVisible": 420,
+    "trailerParkingCapacity": 600,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 107,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.32050,-94.25820,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": true
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "multiStep"
+  ],
+  "fieldNotes": {
+    "truckGate": "Controlled multi-lane truck entrance off SW Regional Airport Blvd at the SW corner; clear lane markings with directional arrows, striped median, and a checkpoint pinch-point (z19/z20 imagery).",
+    "guardShack": "Manned guard booth sitting in the lane median between inbound and outbound lanes (dark-roofed ~1-vehicle-footprint structure, 36.3186,-94.2606), plus a check-in canopy building just inside the gate.",
+    "remoteGs": "False because a physical staffed guard booth is present.",
+    "preGateStaging": "Wide paved apron between the public road and the booth where arriving trucks can stack.",
+    "postGateStaging": "Bobtail/trailer staging lot just inside the gate on the SW (marked stalls, trailers and tractors staged).",
+    "entryLanes": "Approx 2 inbound lanes past the booth; exact split hard to read from overhead - flagged.",
+    "exitLanes": "Approx 2 outbound lanes with directional arrows; flagged as estimate.",
+    "fastLaneOpportunity": "Very wide multi-lane gate apron with unused paved width to add an express/bypass lane.",
+    "dockDoors": "Hundreds of dock doors across multiple faces (upper wing NE face, main building east and south faces); well into 50+ band.",
+    "dropArea": "Massive on-site trailer drop yard - hundreds of trailers parked in long rows east and between the two building wings; 50+.",
+    "shipRcvSeparate": "Distinct dock banks on physically separate building faces (upper-wing NE docks vs main-building east/south docks).",
+    "multipleFacilities": "Two connected large building masses (a long NW-SE upper wing and a larger main block) plus a separate SW annex/transportation building; treated as a campus.",
+    "scale": "No clearly identifiable truck scale pad confirmed from imagery; flagged as uncertain.",
+    "multiStep": "Gate booth followed by a separate inbound check-in canopy suggests a two-stage entry; flagged as inferred.",
+    "railServed": "Line south of the building is a drainage swale, not a rail spur; no rail enters the property.",
+    "urbanRural": "Edge-of-town setting at the SW edge of Bentonville/Centerton with farmland and woods on the south and east; judged Rural per rubric.",
+    "yardMetrics": "Dock/trailer counts are honest overhead estimates; trailersVisible and capacity are order-of-magnitude given the very large multi-row drop yard."
+  },
+  "method": "deep-audit"
+}

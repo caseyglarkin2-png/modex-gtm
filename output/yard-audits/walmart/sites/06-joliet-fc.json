@@ -1,0 +1,202 @@
+{
+  "name": "Walmart Fulfillment Center, Joliet IL",
+  "type": "E-commerce/Fulfillment Center (1.1M sf next-gen FC)",
+  "coords": {
+    "lat": 41.46055,
+    "lng": -88.1
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.4634,
+          "lng": -88.0952
+        },
+        {
+          "lat": 41.4627,
+          "lng": -88.0949
+        },
+        {
+          "lat": 41.4593,
+          "lng": -88.0973
+        },
+        {
+          "lat": 41.4582,
+          "lng": -88.1003
+        },
+        {
+          "lat": 41.4577,
+          "lng": -88.1042
+        },
+        {
+          "lat": 41.4618,
+          "lng": -88.1054
+        },
+        {
+          "lat": 41.463,
+          "lng": -88.1046
+        },
+        {
+          "lat": 41.4636,
+          "lng": -88.0998
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.46255,
+          "lng": -88.0968
+        },
+        {
+          "lat": 41.46255,
+          "lng": -88.09515
+        },
+        {
+          "lat": 41.4619,
+          "lng": -88.09515
+        },
+        {
+          "lat": 41.4619,
+          "lng": -88.0968
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 41.45844,
+            "lng": -88.10395
+          },
+          {
+            "lat": 41.45964,
+            "lng": -88.09855
+          },
+          {
+            "lat": 41.45878,
+            "lng": -88.0981
+          },
+          {
+            "lat": 41.45772,
+            "lng": -88.1034
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 41.46256,
+            "lng": -88.1046
+          },
+          {
+            "lat": 41.46131,
+            "lng": -88.09705
+          },
+          {
+            "lat": 41.46095,
+            "lng": -88.0971
+          },
+          {
+            "lat": 41.4622,
+            "lng": -88.10465
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 41.4588,
+            "lng": -88.104
+          },
+          {
+            "lat": 41.46,
+            "lng": -88.0986
+          },
+          {
+            "lat": 41.45964,
+            "lng": -88.09855
+          },
+          {
+            "lat": 41.45844,
+            "lng": -88.10395
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 248,
+        "pano": "V1Y_D7duke03Z8LVhzipyQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 265,
+        "pano": "V1Y_D7duke03Z8LVhzipyQ",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 180,
+    "trailersVisible": 120,
+    "trailerParkingCapacity": 220,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 102,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.46055,-88.10000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "postGateStaging"
+  ],
+  "fieldNotes": {
+    "truckGate": "Single controlled truck entrance off S Brandon Rd at ~41.4622,-88.0958. Wide, heavily channelized truck approach with diagonal lane-hatching painted at the pinch point (z21 imagery) where the drive meets the internal yard. No physical arm visible in 2021-07 construction-era Street View, but the 2026 channelized, marked, fenced approach reads as a controlled gate.",
+    "guardShack": "No staffed guard booth found at the entrance. The two prominent structures flanking the drive are CenterPoint water tanks, not booths. Channelized lanes with no booth point to automated/kiosk check-in.",
+    "remoteGs": "Gate present, no guard shack -> remote/kiosk/app check-in inferred, consistent with a 2022 next-gen automated FC. Medium confidence.",
+    "dockDoors": "Cross-dock: continuous dock-door banks on both long faces (north and south walls). 50+ band; counted ~80-100 per face from z18-19 imagery (estimate ~180 total).",
+    "dropArea": "Large SW drop yard packed with angled trailer rows plus a second drop area between buildings; well into the 50+ band.",
+    "shipRcvSeparate": "Doors on two physically separate building faces (north wall and south wall) indicate separate ship/receive dock clusters.",
+    "dropYard": "Dedicated trailer-storage lot on the SW side, separate from active dock staging; 100+ trailers visible.",
+    "postGateStaging": "Wide channelized paved approach inside the gate before the docks can hold a truck queue; treated as post-gate staging. Medium confidence.",
+    "fastLaneOpportunity": "Very wide gate apron with painted multi-lane channelization and ample unused paved width to add an express/bypass lane.",
+    "entryLanes": "Channelized approach reads as ~2 inbound lanes; exact count low-confidence from overhead.",
+    "urbanRural": "CenterPoint Intermodal Center on the rural SE edge of Joliet/Elwood; farmland on the east side of Brandon Rd. Judged Rural.",
+    "railServed": "A rail mainline runs east of S Brandon Rd, but no spur enters this FC parcel; the FC is truck-only. The neighboring intermodal building to the north is rail-adjacent, not this parcel.",
+    "buildingCount": "Single 1.1M sf FC building (the tan cross-dock building). The white-roof building to the north is a separate CenterPoint tenant, excluded.",
+    "siteAreaAcres": "~102 acres from the perimeter polygon (building ~25 acres plus drop yards, aprons, associate parking and perimeter road)."
+  },
+  "method": "deep-audit"
+}

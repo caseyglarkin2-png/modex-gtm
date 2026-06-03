@@ -1,0 +1,200 @@
+{
+  "account": "Walmart",
+  "generatedAt": "2026-06-03",
+  "facilityCount": 12,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Walmart Regional DC 6094, Bentonville AR",
+      "city": "Bentonville",
+      "state": "AR",
+      "type": "General Merchandise DC",
+      "address": "5801 SW Regional Airport Blvd, Bentonville, AR 72713",
+      "source": "Waze/Manta + Walmart corp 2017 (~1.25M sf); flagship GM DC in home region",
+      "lat": 36.320045,
+      "lng": -94.25814,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Walmart General Merchandise DC 6016, New Braunfels TX",
+      "city": "New Braunfels",
+      "state": "TX",
+      "type": "General Merchandise DC",
+      "address": "3900 N Interstate 35, New Braunfels, TX 78130",
+      "source": "SPS Commerce DC list (DC 6016) + New Braunfels Chamber",
+      "lat": 29.735123,
+      "lng": -98.063993,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Walmart Perishable DC 3010, Wellford SC",
+      "city": "Wellford",
+      "state": "SC",
+      "type": "Grocery/Perishable DC",
+      "address": "1065 Fort Prince Blvd, Wellford, SC 29385",
+      "source": "SPS Commerce DC list + Walmart corp 2024 (725k sf automated perishable DC, ~180 stores)",
+      "lat": 34.974014,
+      "lng": -82.097687,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Walmart Perishable DC 3006, Lancaster TX",
+      "city": "Lancaster",
+      "state": "TX",
+      "type": "Grocery/Perishable DC",
+      "address": "2500 E Belt Line Rd, Lancaster, TX 75146",
+      "source": "SPS Commerce DC list + DC Velocity (730k sf perishable DC south of Dallas)",
+      "lat": 32.58388,
+      "lng": -96.713855,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Walmart Fulfillment Center, McCordsville IN",
+      "city": "McCordsville",
+      "state": "IN",
+      "type": "E-commerce/Fulfillment Center",
+      "address": "5259 W 500 N, McCordsville, IN 46055",
+      "source": "Walmart corp 2023 + IBJ (2.2M sf next-gen FC, Walmart's largest)",
+      "lat": 39.85349,
+      "lng": -85.905039,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Walmart Fulfillment Center, Joliet IL",
+      "city": "Joliet",
+      "state": "IL",
+      "type": "E-commerce/Fulfillment Center",
+      "address": "3501 S Brandon Rd, Joliet, IL 60436",
+      "source": "Walmart corp 2022 (first next-gen FC, 1.1M sf)",
+      "lat": 41.459972,
+      "lng": -88.09757,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 7,
+      "name": "Walmart Import DC 6088, Williamsburg VA",
+      "city": "Williamsburg",
+      "state": "VA",
+      "type": "Import DC",
+      "address": "9305 Pocahontas Trl, Williamsburg, VA 23185",
+      "source": "SPS Commerce DC list (DC 6088 Import Storage) near Port of Virginia",
+      "lat": 37.201198,
+      "lng": -76.596168,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 8,
+      "name": "Walmart Import DC 6060, Eastvale CA",
+      "city": "Eastvale",
+      "state": "CA",
+      "type": "Import DC",
+      "address": "4250 Hamner Ave, Eastvale, CA 91752",
+      "source": "SPS Commerce DC list (DC 6060 Import / 1582 RDC) serving LA/Long Beach imports",
+      "lat": 34.010383,
+      "lng": -117.557675,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 9,
+      "name": "Walmart Regional DC 4047, Atlanta GA",
+      "city": "Union City",
+      "state": "GA",
+      "type": "General Merchandise DC",
+      "address": "6500 Trade Water Pkwy SW, Atlanta, GA 30331",
+      "source": "SPS Commerce DC list (DC 4047 Regional) serving Southeast metro Atlanta",
+      "lat": 33.714103,
+      "lng": -84.600675,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 10,
+      "name": "Walmart Grocery DC 6055, Monroe GA",
+      "city": "Monroe",
+      "state": "GA",
+      "type": "Grocery/Perishable DC",
+      "address": "655 Unisia Dr, Monroe, GA 30655",
+      "source": "SPS Commerce DC list (DC 6055 Grocery/Fresh)",
+      "lat": 33.805985,
+      "lng": -83.679061,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 11,
+      "name": "Walmart Regional DC 7026, Grantsville UT",
+      "city": "Grantsville",
+      "state": "UT",
+      "type": "General Merchandise DC",
+      "address": "945 Highway 138, Grantsville, UT 84029",
+      "source": "SPS Commerce DC list (DC 7026) serving Intermountain West",
+      "lat": 40.59967,
+      "lng": -112.420335,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 12,
+      "name": "Walmart Regional DC 4020, Conklin NY",
+      "city": "Conklin",
+      "state": "NY",
+      "type": "General Merchandise DC",
+      "address": "101 Broome Corporate Pkwy, Conklin, NY 13748",
+      "source": "SPS Commerce DC list (DC 4020 Regional) serving Northeast",
+      "lat": 42.041849,
+      "lng": -75.815077,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    }
+  ],
+  "geocodedAt": "2026-06-03"
+}

@@ -1,0 +1,259 @@
+{
+  "name": "Walmart Import DC 6088, Williamsburg VA",
+  "type": "Import DC (large, port-fed)",
+  "coords": {
+    "lat": 37.2003,
+    "lng": -76.5969
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.204368,
+          "lng": -76.601414
+        },
+        {
+          "lat": 37.202071,
+          "lng": -76.592007
+        },
+        {
+          "lat": 37.1995,
+          "lng": -76.591252
+        },
+        {
+          "lat": 37.196218,
+          "lng": -76.593655
+        },
+        {
+          "lat": 37.195288,
+          "lng": -76.596813
+        },
+        {
+          "lat": 37.198187,
+          "lng": -76.603611
+        },
+        {
+          "lat": 37.200375,
+          "lng": -76.604092
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 37.202119,
+          "lng": -76.595472
+        },
+        {
+          "lat": 37.201968,
+          "lng": -76.595197
+        },
+        {
+          "lat": 37.201914,
+          "lng": -76.5953
+        },
+        {
+          "lat": 37.202057,
+          "lng": -76.595575
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 37.204039,
+            "lng": -76.603199
+          },
+          {
+            "lat": 37.202071,
+            "lng": -76.600247
+          },
+          {
+            "lat": 37.198898,
+            "lng": -76.602787
+          },
+          {
+            "lat": 37.200484,
+            "lng": -76.604023
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 37.201961,
+            "lng": -76.600178
+          },
+          {
+            "lat": 37.199938,
+            "lng": -76.592556
+          },
+          {
+            "lat": 37.198297,
+            "lng": -76.593517
+          },
+          {
+            "lat": 37.200375,
+            "lng": -76.601551
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 37.203875,
+            "lng": -76.600796
+          },
+          {
+            "lat": 37.201688,
+            "lng": -76.592007
+          },
+          {
+            "lat": 37.201988,
+            "lng": -76.591892
+          },
+          {
+            "lat": 37.204175,
+            "lng": -76.600681
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 37.202071,
+            "lng": -76.600315
+          },
+          {
+            "lat": 37.200047,
+            "lng": -76.591526
+          },
+          {
+            "lat": 37.199747,
+            "lng": -76.591641
+          },
+          {
+            "lat": 37.201771,
+            "lng": -76.60043
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 37.199555,
+            "lng": -76.602993
+          },
+          {
+            "lat": 37.197476,
+            "lng": -76.594479
+          },
+          {
+            "lat": 37.197776,
+            "lng": -76.594364
+          },
+          {
+            "lat": 37.199855,
+            "lng": -76.602878
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 37.198898,
+            "lng": -76.602924
+          },
+          {
+            "lat": 37.19682,
+            "lng": -76.593998
+          },
+          {
+            "lat": 37.19652,
+            "lng": -76.594113
+          },
+          {
+            "lat": 37.198598,
+            "lng": -76.603039
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 168,
+        "pano": "gKodV4lOl3kasSfyzXC7EQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 147,
+        "pano": "gKodV4lOl3kasSfyzXC7EQ",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 500,
+    "trailersVisible": 450,
+    "trailerParkingCapacity": 800,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 191,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.20030,-76.59690,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "shipRcvSeparate"
+  ],
+  "fieldNotes": {
+    "truckGate": "Single consolidated truck gate on the north-central access drive at ~37.20202,-76.59533 where the public approach road pinches into the secured yard; gate apron and island clearly visible at z20.",
+    "guardShack": "Small booth/island structure sits in the gate apron at the pinch point (z20, wm07-z20-gate.png) - a staffed guard shack beside the controlled lane.",
+    "remoteGs": "False because a physical guard shack is present.",
+    "postGateStaging": "Deep paved approach and yard between the gate and the dock faces gives ample inside-gate holding room.",
+    "drivewayLong": "Long tree-lined approach drive from the signalized Pocahontas Trail intersection (~37.2070,-76.5980) to the gate holds well more than 3 trucks.",
+    "fastLaneOpportunity": "Wide gate apron with room for multiple lanes / a bypass at the pinch point.",
+    "dockDoors": "Two ~400m cross-dock buildings with continuous dock walls on both long faces plus a third NE building; well into 50+ band. 500 is an overhead estimate, not exact.",
+    "dropArea": "Hundreds of parked drop trailers in angled rows fill the NW storage yard and the central yard between buildings.",
+    "shipRcvSeparate": "Cross-dock import DC: opposing dock faces / separate buildings function as distinct ship vs receive banks; medium confidence from overhead.",
+    "multipleFacilities": "Campus of 3 buildings - two large parallel cross-docks plus a smaller building to the NE - on one fenced parcel.",
+    "urbanRural": "Edge-of-town / wooded parcel off Pocahontas Trail near I-64; broader setting is rural-industrial despite nearby development.",
+    "scale": "No truck scale visible in the gate path; left false.",
+    "railServed": "No rail spur enters the property; port volume is drayed by truck from Hampton Roads.",
+    "entryLanes": "Estimated 2 inbound at the gate apron; overhead resolution limits exact lane count."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,183 @@
+{
+  "name": "Walmart Import DC 6060, Eastvale CA",
+  "type": "Import DC",
+  "coords": {
+    "lat": 34.010383,
+    "lng": -117.557675
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.01158,
+          "lng": -117.55765
+        },
+        {
+          "lat": 34.01147,
+          "lng": -117.55125
+        },
+        {
+          "lat": 34.00983,
+          "lng": -117.5512
+        },
+        {
+          "lat": 34.00992,
+          "lng": -117.55762
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.01014,
+          "lng": -117.55764
+        },
+        {
+          "lat": 34.01013,
+          "lng": -117.55656
+        },
+        {
+          "lat": 34.00988,
+          "lng": -117.55656
+        },
+        {
+          "lat": 34.00989,
+          "lng": -117.55764
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 34.01288,
+            "lng": -117.5549
+          },
+          {
+            "lat": 34.01284,
+            "lng": -117.5513
+          },
+          {
+            "lat": 34.0119,
+            "lng": -117.5513
+          },
+          {
+            "lat": 34.01193,
+            "lng": -117.5549
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 34.01154,
+            "lng": -117.5576
+          },
+          {
+            "lat": 34.01146,
+            "lng": -117.5513
+          },
+          {
+            "lat": 34.01116,
+            "lng": -117.55132
+          },
+          {
+            "lat": 34.01123,
+            "lng": -117.5576
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 34.01013,
+            "lng": -117.5576
+          },
+          {
+            "lat": 34.01006,
+            "lng": -117.55132
+          },
+          {
+            "lat": 34.00976,
+            "lng": -117.55134
+          },
+          {
+            "lat": 34.00983,
+            "lng": -117.5576
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 281,
+        "pano": "EYeyBC2qdEdgBg3OyMZkPA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 67,
+        "pano": "niKOc3Ebfjc2uZ5XsdmGyQ",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 180,
+    "trailersVisible": 320,
+    "trailerParkingCapacity": 400,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 26.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.010383,-117.557675,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "multipleFacilities"
+  ],
+  "fieldNotes": {
+    "location": "Geocoder returns ROOFTOP for 4250 Hamner Ave at 34.0103834,-117.5576745 (navigation point on Harvest Dr); reverse-geocoding the west frontage road returns '4250 Harvest Dr' - the building's physical frontage is Harvest Dr inside the Goodman/Prologis Commerce Center, mailing address Hamner Ave. NW building corner matches the supplied coords exactly.",
+    "truckGate": "Continuous steel security fence with sliding gate sections confirmed in Street View along the east (I-15) perimeter; truck/yard entry is the Harvest Dr driveway into the secured dock court. Controlled, fenced site.",
+    "guardShack": "No staffed guard booth resolved at the entrance in satellite or Street View; modern Prologis/Goodman spec DC - check-in is likely kiosk/intercom (remoteGs). Low-confidence call.",
+    "remoteGs": "Inferred from gate-present + no visible booth; flagged uncertain.",
+    "shipRcvSeparate": "Cross-dock: dock doors on both the north and south building faces (two distinct dock banks across separate courts).",
+    "fastLaneOpportunity": "Very wide dock courts and ample paved width at the Harvest Dr entry; physical room for an express/bypass lane.",
+    "dockDoors": "180 is a band-level estimate from z18-z20 counts across the north and south faces of the addressed building; reported band 50+.",
+    "dropYard": "Dense dedicated trailer drop/storage yard north of the complex plus drop trailers staged mid-court; 50+ band.",
+    "multipleFacilities": "The addressed building is one of several near-identical large warehouses in the Goodman/Prologis Commerce Center campus; audited the single Walmart-addressed building (Building fronting 4250 Harvest/Hamner). Set false for the audited parcel.",
+    "siteAreaAcres": "~26.5 ac for the addressed building's operational envelope (building + its two dock courts); the broader campus is far larger.",
+    "railServed": "No rail spur enters the property - truck-only import DC fed from LA/Long Beach ports."
+  },
+  "method": "deep-audit"
+}

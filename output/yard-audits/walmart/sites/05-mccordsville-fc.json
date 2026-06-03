@@ -1,0 +1,170 @@
+{
+  "name": "Walmart Fulfillment Center, McCordsville IN",
+  "type": "E-commerce/Fulfillment Center",
+  "coords": {
+    "lat": 39.8532,
+    "lng": -85.9064
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.8564,
+          "lng": -85.9101
+        },
+        {
+          "lat": 39.8564,
+          "lng": -85.9017
+        },
+        {
+          "lat": 39.8509,
+          "lng": -85.9017
+        },
+        {
+          "lat": 39.8509,
+          "lng": -85.9101
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.8532,
+          "lng": -85.91055
+        },
+        {
+          "lat": 39.8532,
+          "lng": -85.9099
+        },
+        {
+          "lat": 39.8523,
+          "lng": -85.9099
+        },
+        {
+          "lat": 39.8523,
+          "lng": -85.91055
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 39.85485,
+            "lng": -85.906
+          },
+          {
+            "lat": 39.85485,
+            "lng": -85.90185
+          },
+          {
+            "lat": 39.85625,
+            "lng": -85.90185
+          },
+          {
+            "lat": 39.85625,
+            "lng": -85.906
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 39.854,
+            "lng": -85.91005
+          },
+          {
+            "lat": 39.854,
+            "lng": -85.9096
+          },
+          {
+            "lat": 39.8554,
+            "lng": -85.9096
+          },
+          {
+            "lat": 39.8554,
+            "lng": -85.91005
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 39.85405,
+            "lng": -85.9095
+          },
+          {
+            "lat": 39.85405,
+            "lng": -85.9032
+          },
+          {
+            "lat": 39.8547,
+            "lng": -85.9032
+          },
+          {
+            "lat": 39.8547,
+            "lng": -85.9095
+          }
+        ]
+      }
+    ],
+    "staging": null
+  },
+  "yardMetrics": {
+    "dockDoorCount": 144,
+    "trailersVisible": 140,
+    "trailerParkingCapacity": 900,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 107,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.85320,-85.90640,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "postGateStaging"
+  ],
+  "fieldNotes": {
+    "truckGate": "Secured yard with numbered, marked trailer drop stalls (B-row / A-row legible at z20) implies controlled access via a single west-side drive throat, but no barrier arm crisply resolves in imagery; classified true on operational evidence, flagged uncertain.",
+    "guardShack": "No manned guard booth identified at any approach across z17-z20 imagery; modern automated FC.",
+    "remoteGs": "Inferred kiosk/app check-in (gate present, no booth) consistent with Walmart next-gen automated FC; medium confidence.",
+    "dockDoors": "Walmart states 144 docks; primary bank runs along the north building face with trailers backed in and a covered truck-court canopy. Band 50+.",
+    "dropArea": "Walmart states spaces for 900+ trailers; large organized numbered drop yard on the NE plus a west-edge trailer row. Band 50+.",
+    "fastLaneOpportunity": "Wide truck court and multiple drive aisles north of the dock face give ample room for an express/bypass lane.",
+    "siteAreaAcres": "Total parcel ~204 acres incl. undeveloped buffer + south spec building; traced perimeter covers the ~107-acre core developed FC operational footprint (building + north yard + ponds).",
+    "railServed": "No rail spur enters the property; nearest is the building's road access only.",
+    "urbanRural": "Edge-of-town McCordsville, surrounded by active farmland on N/E/S; Rural per rubric (small-town industrial -> Rural)."
+  },
+  "method": "deep-audit"
+}

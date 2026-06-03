@@ -1,0 +1,194 @@
+{
+  "name": "Walmart Regional DC 4047, Atlanta GA",
+  "type": "General Merchandise Distribution Center",
+  "coords": {
+    "lat": 33.7146,
+    "lng": -84.6001
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.716256,
+          "lng": -84.603465
+        },
+        {
+          "lat": 33.715914,
+          "lng": -84.598933
+        },
+        {
+          "lat": 33.713629,
+          "lng": -84.598246
+        },
+        {
+          "lat": 33.712829,
+          "lng": -84.598658
+        },
+        {
+          "lat": 33.713172,
+          "lng": -84.604014
+        },
+        {
+          "lat": 33.714372,
+          "lng": -84.604289
+        },
+        {
+          "lat": 33.715343,
+          "lng": -84.603877
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.714521,
+          "lng": -84.59954
+        },
+        {
+          "lat": 33.714407,
+          "lng": -84.599094
+        },
+        {
+          "lat": 33.714236,
+          "lng": -84.599128
+        },
+        {
+          "lat": 33.71435,
+          "lng": -84.599575
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 33.716028,
+            "lng": -84.603327
+          },
+          {
+            "lat": 33.715799,
+            "lng": -84.59907
+          },
+          {
+            "lat": 33.714943,
+            "lng": -84.599345
+          },
+          {
+            "lat": 33.715114,
+            "lng": -84.603602
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 33.7146,
+            "lng": -84.604151
+          },
+          {
+            "lat": 33.714143,
+            "lng": -84.599345
+          },
+          {
+            "lat": 33.713743,
+            "lng": -84.599276
+          },
+          {
+            "lat": 33.7142,
+            "lng": -84.604083
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.713138,
+            "lng": -84.604014
+          },
+          {
+            "lat": 33.712829,
+            "lng": -84.599207
+          },
+          {
+            "lat": 33.71243,
+            "lng": -84.599276
+          },
+          {
+            "lat": 33.712738,
+            "lng": -84.604083
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 280,
+        "pano": "_IsxNyII9-4vuVSrnCDIEw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 278,
+        "pano": "2dN9RCcL7eUg9FXkF4xlOQ",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 75,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 42.8,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.7146,-84.6001,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount"
+  ],
+  "fieldNotes": {
+    "truckGate": "Single access road runs ~0.4km from Trade Water Pkwy through a wooded buffer into the truck yard. At the yard throat (33.7144,-84.5993) the entry is an open paved connection — no barrier arm, sliding gate, or pinch-point checkpoint resolved in z19/z20 satellite, and the 2019/2025 Street View approaches show open roadway. Chain-link perimeter fencing IS present along the south property line (visible in Street View), so the lot is fenced but the truck entrance itself reads as uncontrolled. Flagged uncertain — a manned gate could exist beyond Street View reach.",
+    "guardShack": "No 1-3-space guard booth structure visible beside the yard entrance in satellite. The only small structures at the east end are the office/employee-parking block.",
+    "shipRcvSeparate": "Double-loaded cross-dock: dock doors with trailers backed in along BOTH the north building face (facing the drop yard) and the south building face — two physically separate dock banks.",
+    "dropYard": "Large paved drop yard north of the building holds 40+ trailers in angled rows without tractors, plus an additional trailer-storage strip further north; clearly a dedicated drop lot separate from active dock staging.",
+    "drivewayLong": "Gate-to-dock approach is a long wooded access road plus a deep internal yard; easily holds a 3+ truck queue.",
+    "urbanRural": "Inside the dense Fulton County / Union City logistics corridor SW of Atlanta — surrounded by dozens of large warehouses. Urban industrial fabric.",
+    "dockDoorCount": "Estimated ~70 doors across both faces from z18-z19 imagery (north face the primary bank); overhead estimate, banded 50+.",
+    "entryLanes": "Approach road is ~2 lanes wide at the yard mouth; estimate 2 in / 2 out through the same throat. Not separately striped — estimate.",
+    "railServed": "No rail spur enters the property; building is bounded by a creek and wooded buffer on the west/south."
+  },
+  "method": "deep-audit"
+}

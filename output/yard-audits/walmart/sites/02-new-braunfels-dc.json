@@ -1,0 +1,238 @@
+{
+  "name": "Walmart General Merchandise DC 6016, New Braunfels TX",
+  "type": "General Merchandise DC",
+  "coords": {
+    "lat": 29.7356,
+    "lng": -98.064
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.7385,
+          "lng": -98.065256
+        },
+        {
+          "lat": 29.73686,
+          "lng": -98.0614
+        },
+        {
+          "lat": 29.73286,
+          "lng": -98.06025
+        },
+        {
+          "lat": 29.73119,
+          "lng": -98.06093
+        },
+        {
+          "lat": 29.7311,
+          "lng": -98.06362
+        },
+        {
+          "lat": 29.73212,
+          "lng": -98.06639
+        },
+        {
+          "lat": 29.73444,
+          "lng": -98.06671
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 29.73845,
+          "lng": -98.06645
+        },
+        {
+          "lat": 29.73825,
+          "lng": -98.06595
+        },
+        {
+          "lat": 29.73795,
+          "lng": -98.06615
+        },
+        {
+          "lat": 29.73815,
+          "lng": -98.06665
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 29.736918,
+            "lng": -98.066777
+          },
+          {
+            "lat": 29.733794,
+            "lng": -98.062322
+          },
+          {
+            "lat": 29.733167,
+            "lng": -98.062909
+          },
+          {
+            "lat": 29.736291,
+            "lng": -98.067364
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 29.736065,
+            "lng": -98.061429
+          },
+          {
+            "lat": 29.734112,
+            "lng": -98.061215
+          },
+          {
+            "lat": 29.734019,
+            "lng": -98.061911
+          },
+          {
+            "lat": 29.7356,
+            "lng": -98.061965
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 29.737162,
+            "lng": -98.066549
+          },
+          {
+            "lat": 29.734038,
+            "lng": -98.062094
+          },
+          {
+            "lat": 29.733794,
+            "lng": -98.062322
+          },
+          {
+            "lat": 29.736918,
+            "lng": -98.066777
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 29.737162,
+            "lng": -98.066549
+          },
+          {
+            "lat": 29.737879,
+            "lng": -98.064
+          },
+          {
+            "lat": 29.738178,
+            "lng": -98.064112
+          },
+          {
+            "lat": 29.737461,
+            "lng": -98.066661
+          }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        {
+          "lat": 29.73815,
+          "lng": -98.06615
+        },
+        {
+          "lat": 29.73785,
+          "lng": -98.06565
+        },
+        {
+          "lat": 29.73755,
+          "lng": -98.0659
+        },
+        {
+          "lat": 29.73785,
+          "lng": -98.0664
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 153,
+        "pano": "RGOuNXZiISH58cGvHIZ03w",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 143,
+        "pano": "RGOuNXZiISH58cGvHIZ03w",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 320,
+    "trailerParkingCapacity": 450,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 92.1,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.7356,-98.0640,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate",
+    "multipleFacilities"
+  ],
+  "fieldNotes": {
+    "truckGate": "Controlled NW entrance off I-35 frontage road: curved truck driveway pinches to a checkpoint with guard booth and regulatory placard signs (confirmed in Street View pano RGOuNXZiISH58cGvHIZ03w, 2018-12).",
+    "guardShack": "Small canopied guard booth beside the entry lane, visible in Street View heading 110/250 - ~1-2 space footprint with windows, set against the building NW corner.",
+    "remoteGs": "False - a staffed guard booth is present, so this is a manned gate not a remote/kiosk check-in.",
+    "preGateStaging": "Wide paved apron between the I-35 frontage road and the building face provides ample room for trucks to stage before the checkpoint (seen in Street View).",
+    "postGateStaging": "Large paved yard inside the gate ahead of the dock doors and drop rows.",
+    "drivewayLong": "Long curved approach from the frontage road can hold a queue of 3+ trucks.",
+    "fastLaneOpportunity": "Very wide entry apron with multiple lane widths and unused paved width - physical room to add an express/bypass lane.",
+    "dockDoors": "50+ - dock doors with trailers backed in run the full length of the long SW wall plus the NW short wall; a 1.4M+ sqft GM DC.",
+    "dropArea": "50+ - extensive trailer drop yards: dozens of long parallel trailer rows fill the SW field and additional rows on the E/SE side.",
+    "shipRcvSeparate": "Active dock banks on two distinct building faces (long SW wall and short NW wall) suggest separated ship/receive flows; medium confidence from overhead only.",
+    "entryLanes": "Estimated 2 inbound from apron width; exact lane count not crisply resolved in 2018 Street View.",
+    "exitLanes": "Estimated 2 outbound; same lane group as entry (entryExitTogether).",
+    "multipleFacilities": "Campus: main Walmart GM DC plus two additional large warehouse buildings to the south/southeast with their own dock faces and trailer parking.",
+    "railServed": "No rail spur enters the property; access is road/truck only off I-35.",
+    "urbanRural": "Edge-of-town / open country alongside I-35 north of New Braunfels - surrounded by undeveloped land; classed Rural.",
+    "siteAreaAcres": "92.1 acres from shoelace on the traced perimeter ring (main DC + drop yards + southern annex buildings)."
+  },
+  "method": "deep-audit"
+}

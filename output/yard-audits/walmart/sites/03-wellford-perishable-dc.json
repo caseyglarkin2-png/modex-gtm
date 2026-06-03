@@ -1,0 +1,170 @@
+{
+  "name": "Walmart Perishable DC 3010, Wellford SC",
+  "type": "Grocery/Perishable DC",
+  "coords": {
+    "lat": 34.97365,
+    "lng": -82.1015
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.97623,
+          "lng": -82.10405
+        },
+        {
+          "lat": 34.97631,
+          "lng": -82.10051
+        },
+        {
+          "lat": 34.97464,
+          "lng": -82.09751
+        },
+        {
+          "lat": 34.97175,
+          "lng": -82.09773
+        },
+        {
+          "lat": 34.96981,
+          "lng": -82.10051
+        },
+        {
+          "lat": 34.97052,
+          "lng": -82.10373
+        },
+        {
+          "lat": 34.97368,
+          "lng": -82.10469
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.97195,
+          "lng": -82.10262
+        },
+        {
+          "lat": 34.97188,
+          "lng": -82.10228
+        },
+        {
+          "lat": 34.97155,
+          "lng": -82.10238
+        },
+        {
+          "lat": 34.97162,
+          "lng": -82.10272
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 34.97409,
+            "lng": -82.10311
+          },
+          {
+            "lat": 34.97312,
+            "lng": -82.09893
+          },
+          {
+            "lat": 34.97207,
+            "lng": -82.09957
+          },
+          {
+            "lat": 34.97251,
+            "lng": -82.10311
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 34.97444,
+            "lng": -82.10284
+          },
+          {
+            "lat": 34.97369,
+            "lng": -82.09946
+          },
+          {
+            "lat": 34.97343,
+            "lng": -82.09946
+          },
+          {
+            "lat": 34.97418,
+            "lng": -82.10284
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 15,
+        "pano": "EYDU-J3azbveHLrMwbAs9A",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 110,
+    "trailerParkingCapacity": 250,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 91.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.97365,-82.10150,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "shipRcvSeparate"
+  ],
+  "fieldNotes": {
+    "siteIdentification": "Confirmed the WEST refrigerated complex (not the bare DC to the east) as PDC 3010. Address 1065 Fort Prince Blvd geocodes ROOFTOP to the east-facing office/employee parking of this complex; the building carries roof-mounted refrigeration banks and an ammonia tank farm consistent with a 725k sf perishable/cold DC, and matches the Sept-2025 grand-opening imagery.",
+    "truckGate": "Divided two-lane entrance driveway climbs ~350m from Fort Prince Blvd to a controlled checkpoint at the hilltop yard mouth (~34.9717,-82.1024).",
+    "guardShack": "z20 satellite shows a small booth structure in the median island where the inbound/outbound lanes split, with a service vehicle parked beside it. Classic guard-shack island position.",
+    "remoteGs": "False because a staffed guard shack is present.",
+    "drivewayLong": "Gate-to-dock approach and the long divided entrance driveway easily hold 3+ trucks.",
+    "postGateStaging": "Large paved interior yard between the gate and the dock faces provides ample post-gate holding.",
+    "fastLaneOpportunity": "Wide divided gate apron with unused paved width supports adding an express/bypass lane.",
+    "dockDoors": "Multi-section building; primary dock bank runs along the south wall into the central yard plus an east-section dock bank. Estimated ~120 doors (50+ band) from overhead trailer rhythm; exact count low-confidence.",
+    "dropArea": "Central paved yard holds organized rows of ~100+ parked trailers; a dedicated drop yard (50+).",
+    "shipRcvSeparate": "Could not clearly confirm physically separate ship vs receive dock clusters from overhead; treated as single dock operation.",
+    "buildingCount": "One large connected DC structure plus a separate maintenance/shop building at the south edge.",
+    "railServed": "No rail spur enters the property.",
+    "streetView": "Only the public-road intersection pano (EYDU-J3azbveHLrMwbAs9A, captured 2024-06) resolves; it looks N up the driveway toward the DC. No pano exists at the private hilltop gate (ZERO_RESULTS), so truckGate streetViewMeta omitted/false."
+  },
+  "method": "deep-audit"
+}

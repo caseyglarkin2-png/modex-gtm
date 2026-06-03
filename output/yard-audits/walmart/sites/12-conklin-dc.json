@@ -1,0 +1,224 @@
+{
+  "name": "Walmart Regional DC 4020, Conklin NY",
+  "type": "General Merchandise DC",
+  "coords": {
+    "lat": 42.043,
+    "lng": -75.8113
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.04565,
+          "lng": -75.81345
+        },
+        {
+          "lat": 42.04445,
+          "lng": -75.81455
+        },
+        {
+          "lat": 42.04075,
+          "lng": -75.8116
+        },
+        {
+          "lat": 42.03965,
+          "lng": -75.8099
+        },
+        {
+          "lat": 42.04085,
+          "lng": -75.8087
+        },
+        {
+          "lat": 42.0433,
+          "lng": -75.8072
+        },
+        {
+          "lat": 42.0454,
+          "lng": -75.8079
+        },
+        {
+          "lat": 42.046,
+          "lng": -75.8098
+        },
+        {
+          "lat": 42.0461,
+          "lng": -75.8125
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.0449,
+          "lng": -75.8143
+        },
+        {
+          "lat": 42.0447,
+          "lng": -75.81405
+        },
+        {
+          "lat": 42.04435,
+          "lng": -75.8136
+        },
+        {
+          "lat": 42.04455,
+          "lng": -75.81385
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 42.0451,
+            "lng": -75.80905
+          },
+          {
+            "lat": 42.0444,
+            "lng": -75.80755
+          },
+          {
+            "lat": 42.04205,
+            "lng": -75.8091
+          },
+          {
+            "lat": 42.04275,
+            "lng": -75.8106
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 42.0453,
+            "lng": -75.81245
+          },
+          {
+            "lat": 42.04475,
+            "lng": -75.8113
+          },
+          {
+            "lat": 42.04415,
+            "lng": -75.81175
+          },
+          {
+            "lat": 42.0447,
+            "lng": -75.8129
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 42.045,
+            "lng": -75.81075
+          },
+          {
+            "lat": 42.04445,
+            "lng": -75.8096
+          },
+          {
+            "lat": 42.04085,
+            "lng": -75.8123
+          },
+          {
+            "lat": 42.0414,
+            "lng": -75.81345
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 42.0442,
+            "lng": -75.8142
+          },
+          {
+            "lat": 42.0437,
+            "lng": -75.8132
+          },
+          {
+            "lat": 42.04035,
+            "lng": -75.8156
+          },
+          {
+            "lat": 42.04085,
+            "lng": -75.8166
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 30,
+        "pano": "xQBhsppiQK1K3xvOllWOcg",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 200,
+    "trailersVisible": 320,
+    "trailerParkingCapacity": 450,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 68,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.043,-75.8113,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "scale"
+  ],
+  "fieldNotes": {
+    "truckGate": "Single controlled truck driveway off Broome Corporate Pkwy at the NW corner (~42.0446,-75.8141) leading into the secured trailer yard; the SW dock face is set behind a continuous berm/guardrail with no public-road access, and the SE/E and NE yard edges are bounded by undeveloped land, a creek and a stormwater pond, so the NW driveway is the one gate.",
+    "guardShack": "No guard booth positively resolved in overhead imagery at the NW gate throat; z19/z20 tiles over the gate are roof-shifted and parkway Street View (2019) does not reach the NW entrance. Walmart RDCs are typically guarded, but with no visual confirmation guardShack is left false and flagged uncertain.",
+    "remoteGs": "Set true on the basis that a controlled truck gate exists but no guard shack is confirmed; low-to-medium confidence, paired with guardShack uncertainty.",
+    "postGateStaging": "Wide paved circulation and trailer drop rows immediately inside the NW gate provide ample interior holding before the dock doors.",
+    "drivewayLong": "Long internal yard road from the NW gate to the dock faces easily holds a 3+ truck queue.",
+    "entryExitTogether": "Single gate at the NW driveway serves both in and out; entry/exit not separated.",
+    "entryLanes": "Estimated 2 in / 2 out from the driveway throat width; exact lane count not resolvable from imagery.",
+    "fastLaneOpportunity": "Wide gate apron and generous paved yard width at the NW entrance leave room to add a bypass/express lane.",
+    "dockDoors": "Continuous dock-door banks with dock levelers and backed-in trailers confirmed on BOTH long faces (NE face toward the drop yard and SW face along the parkway) over a ~600m building; total well into the 50+ band (estimate ~200 doors).",
+    "dropArea": "Large striped trailer drop yard on the NE side plus drop rows at the NW corner, hundreds of parked trailers without tractors; 50+ band.",
+    "shipRcvSeparate": "Docks on two distinct building faces (NE and SW) consistent with separate shipping and receiving banks typical of a Walmart GM cross-dock RDC.",
+    "urbanRural": "Edge-of-town industrial park in Conklin NY beside the Susquehanna River, surrounded by woods, water and farmland; Rural per rubric.",
+    "scale": "No truck scale/weigh pad positively identified; flagged uncertain.",
+    "railServed": "An active rail line runs N-S along the NE property edge but no spur enters the yard or docks; railServed false.",
+    "multipleFacilities": "Single Walmart building/cluster on its parcel; neighboring DCs (e.g. 101 Broome / Lineage) are separate properties across the parkway, not part of this site.",
+    "siteAreaAcres": "~68 acres derived from the traced perimeter; approximate.",
+    "trailersVisible": "~320 trailers visible across the NE drop yard, NW drop rows and dock faces; approximate count from overhead imagery."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,202 @@
+{
+  "name": "Walmart Perishable DC 3006, Lancaster TX",
+  "type": "Grocery/Perishable DC (730k sf, refrigerated)",
+  "coords": {
+    "lat": 32.5835,
+    "lng": -96.7115
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.584536,
+          "lng": -96.716905
+        },
+        {
+          "lat": 32.585461,
+          "lng": -96.710313
+        },
+        {
+          "lat": 32.585114,
+          "lng": -96.707155
+        },
+        {
+          "lat": 32.583263,
+          "lng": -96.705095
+        },
+        {
+          "lat": 32.580486,
+          "lng": -96.705781
+        },
+        {
+          "lat": 32.579328,
+          "lng": -96.713747
+        },
+        {
+          "lat": 32.581411,
+          "lng": -96.716493
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.582221,
+          "lng": -96.716905
+        },
+        {
+          "lat": 32.582569,
+          "lng": -96.716219
+        },
+        {
+          "lat": 32.581411,
+          "lng": -96.715669
+        },
+        {
+          "lat": 32.580949,
+          "lng": -96.716356
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 32.581411,
+            "lng": -96.716493
+          },
+          {
+            "lat": 32.582221,
+            "lng": -96.710725
+          },
+          {
+            "lat": 32.580949,
+            "lng": -96.708803
+          },
+          {
+            "lat": 32.579444,
+            "lng": -96.713747
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 32.584073,
+            "lng": -96.716699
+          },
+          {
+            "lat": 32.584767,
+            "lng": -96.710313
+          },
+          {
+            "lat": 32.584478,
+            "lng": -96.710245
+          },
+          {
+            "lat": 32.583784,
+            "lng": -96.71663
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 32.582626,
+            "lng": -96.716699
+          },
+          {
+            "lat": 32.583263,
+            "lng": -96.711
+          },
+          {
+            "lat": 32.582221,
+            "lng": -96.710863
+          },
+          {
+            "lat": 32.581527,
+            "lng": -96.716493
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 125,
+        "pano": "EqjXM3JzatGGrSF24J7QuA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 121,
+        "pano": "wfoIBz455AEj5IcMjKbK-g",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 143.2,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.5835,-96.7115,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "postGateStaging",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "scale",
+    "multiStep"
+  ],
+  "fieldNotes": {
+    "_identity": "Address given (2500 E Belt Line Rd) is Walmart's 1.5M sf fulfillment center; the 730k sf Perishable DC is the adjacent building at 940 E Pleasant Run Rd in the same Lancaster logistics campus. Audited the perishable building (south, diagonal WNW-ESE footprint). Refrigeration confirmed by ammonia/refrigerant tank farm visible in 2026 Street View.",
+    "_imagery": "Satellite is construction-era (Maxar, ~2022-2023): both buildings still bare concrete / under construction, yards ungraded, so dock-door and trailer counts are estimates from footprint + completed 2026 Street View, not exact overhead counts.",
+    "truckGate": "Entire complex is fully fenced (continuous chain-link perimeter visible in 2026 Street View, Walmart trailers parked behind the fence line). Single controlled truck entrance off the west perimeter drive.",
+    "guardShack": "Inferred from facility profile (730k sf high-tech automated DC, 500+ associates, fully fenced) - construction-era satellite cannot resolve a booth and no Street View pano sits at the gate; flagged uncertain.",
+    "postGateStaging": "Large paved truck court between buildings and a south yard provide internal queue/hold room before docks.",
+    "dockDoors": "50+ band: 730k sf cross-dock-style perishable DC with long dock faces on north (shared apron with FC) and south; door rhythm not fully resolvable in construction imagery.",
+    "shipRcvSeparate": "Dock activity on two distinct building faces (north apron between PDC and FC; south yard), consistent with separate ship/receive banks.",
+    "dropArea": "50+ band: long rows of Walmart trailers backed in along the dock face in 2026 Street View, plus a large south drop yard.",
+    "fastLaneOpportunity": "Wide entry apron and deep west perimeter drive with ample paved width to add a bypass/express lane.",
+    "multipleFacilities": "Campus: this Perishable DC shares the site with Walmart's 1.5M sf fulfillment center immediately north/west.",
+    "urbanRural": "Edge-of-town: complex sits among farmland with woods to the north and east (2026 Street View), 15 mi south of Dallas - judged Rural per rubric.",
+    "railServed": "No rail spur into the property visible.",
+    "siteAreaAcres": "143 acres derived from the perimeter polygon (Perishable DC parcel incl. truck yard and landscaped buffers)."
+  },
+  "method": "deep-audit"
+}
