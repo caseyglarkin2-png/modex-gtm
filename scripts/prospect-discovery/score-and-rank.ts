@@ -53,6 +53,8 @@ interface ScoredProspect {
   nearestPrimoSite: { name: string; distanceMiles: number };
   corridor: string;
   discoveredVia: string[];
+  excluded: boolean;
+  excludeReason?: string;
 }
 
 interface Corridor {
@@ -569,6 +571,46 @@ function scoreNetworkComplexity(place: DiscoveredPlace): number {
   return 5;
 }
 
+// Text-search keywords like "truck terminal" and "freight terminal" drag in a
+// lot of non-prospects: truck stops, travel plazas, airports, restaurants,
+// retail outlets. These are not yard-management buyers. We flag them so they
+// drop out of the tiers instead of polluting the ranked list. A brand match
+// always wins — a real "Pilot" logistics DC won't be killed by the travel-stop
+// rule because brand-matched places are checked first by the caller.
+const NOISE_KEYWORDS: string[] = [
+  'truck stop', 'truckstop', 'travel center', 'travel centre', 'travel plaza', 'rest area',
+  'truck parking', 'truck wash', 'car wash', 'parking area', 'service plaza',
+  'airport', 'botanical', 'gardens', 'museum', 'premium outlet', 'outlet mall',
+  'restaurant', 'cafe', 'winery', 'cellars', 'vineyard', 'brewery taproom',
+  'circle k', "love's travel", 'pilot travel', 'flying j', 'ta travel',
+  'ta petro', 'ambest', 'petro-pass', 'travelcenters', 'gas station',
+  'food pantry', 'food bank', 'church', 'general store', 'mini-mart',
+  'mini mart', 'convenience store', 'travel stop', 'truck plaza', 'rv storage',
+  'self storage', 'self-storage', 'boat & rv', 'country corner', 'country store',
+];
+
+// If the NAME itself reads as a logistics facility, it is a prospect regardless
+// of any incidental noise word (e.g. "Darden Restaurants — Orlando Distribution"
+// is a DC, not a restaurant). Checked against the name only, not the address, so
+// a place in "Plant City" isn't rescued by the word "plant".
+const FACILITY_POSITIVE: string[] = [
+  'distribution', 'warehouse', 'fulfillment', 'logistics', 'cold storage',
+  'manufacturing', 'cross dock', 'crossdock', 'cross-dock', 'supply chain',
+  'processing plant', 'production', 'bottling', 'cannery', 'creamery',
+];
+
+function detectNoise(place: DiscoveredPlace): string | null {
+  // Never exclude a recognized enterprise brand.
+  if (matchKnownBrand(place)) return null;
+  const name = place.name.toLowerCase();
+  if (FACILITY_POSITIVE.some(kw => name.includes(kw))) return null;
+  const hay = `${place.name} ${place.address}`.toLowerCase();
+  for (const kw of NOISE_KEYWORDS) {
+    if (hay.includes(kw)) return kw;
+  }
+  return null;
+}
+
 function findNearestPrimo(lat: number, lng: number): { name: string; distanceMiles: number } {
   let best = { name: PRIMO_SITES[0].name, distanceMiles: Infinity };
   for (const ps of PRIMO_SITES) {
@@ -757,22 +799,19 @@ function clusterIntoCorrridors(
     };
   });
 
-  // Sort corridors by total ICP score descending
-  corridors.sort((a, b) => (b.avgIcpScore * b.totalProspects) - (a.avgIcpScore * a.totalProspects));
-
-  // Assign corridor names back to prospects
-  for (let i = 0; i < prospects.length; i++) {
-    const ci = assigned[i];
-    prospects[i].corridor = corridors.find(c => c === corridors[clusters.indexOf(clusters.find(cl => cl.includes(i))!)])?.name || 'Unknown';
-  }
-
-  // Simpler assignment: rebuild lookup
+  // Assign corridor names back to prospects BEFORE sorting — at this point
+  // corridors[] is still index-aligned with clusters[]. (Sorting first is what
+  // previously scrambled the names, e.g. labeling an Allentown prospect "Houston".)
   for (let ci = 0; ci < clusters.length; ci++) {
     const corridorName = corridors[ci].name;
     for (const pi of clusters[ci]) {
       prospects[pi].corridor = corridorName;
     }
   }
+
+  // Sort corridors by total ICP weight for presentation. Safe now that prospect
+  // assignment is done.
+  corridors.sort((a, b) => (b.avgIcpScore * b.totalProspects) - (a.avgIcpScore * a.totalProspects));
 
   return corridors;
 }
@@ -850,6 +889,7 @@ function buildCsv(prospects: ScoredProspect[]): string {
     'Is Existing Account', 'Existing Account Slug',
     'Nearest Primo Site', 'Primo Distance (mi)',
     'Corridor', 'Discovered Via',
+    'Excluded', 'Exclude Reason',
   ];
 
   const rows = prospects.map(p => [
@@ -872,6 +912,8 @@ function buildCsv(prospects: ScoredProspect[]): string {
     p.nearestPrimoSite.distanceMiles,
     escapeCsv(p.corridor),
     escapeCsv(p.discoveredVia.join('; ')),
+    p.excluded,
+    escapeCsv(p.excludeReason),
   ].join(','));
 
   return [headers.join(','), ...rows].join('\n');
@@ -958,6 +1000,12 @@ async function main() {
     // 4. Dedup against existing accounts
     const existingMatch = matchExistingAccount(place, existingFacilities, normalizedAccountNames);
 
+    // 5. Flag obvious non-prospects (truck stops, airports, restaurants, etc.).
+    // Excluded rows keep their score for transparency but are forced to Tier D
+    // so they never surface in the Tier A/B working list.
+    const noiseReason = detectNoise(place);
+    const excluded = noiseReason !== null;
+
     scored.push({
       name: place.name,
       address: place.address,
@@ -965,7 +1013,7 @@ async function main() {
       lng: place.lng,
       placeId: place.placeId,
       icpScore,
-      tier: assignTier(icpScore),
+      tier: excluded ? 'D' : assignTier(icpScore),
       scoreBreakdown: {
         verticalMatch,
         enterpriseScale,
@@ -979,6 +1027,8 @@ async function main() {
       nearestPrimoSite: nearest,
       corridor: '', // populated during clustering
       discoveredVia: place.discoveredVia || [],
+      excluded,
+      excludeReason: noiseReason ?? undefined,
     });
   }
 
@@ -991,7 +1041,9 @@ async function main() {
 
   // 6. Build output
   const existingCount = scored.filter(p => p.isExistingAccount).length;
-  const netNew = scored.filter(p => !p.isExistingAccount);
+  const excludedCount = scored.filter(p => p.excluded).length;
+  // Net-new = not already in CRM and not flagged as noise.
+  const netNew = scored.filter(p => !p.isExistingAccount && !p.excluded);
 
   const today = new Date().toISOString().slice(0, 10);
 
@@ -1028,7 +1080,8 @@ async function main() {
   console.log(`${'='.repeat(110)}`);
   console.log(`Total discoveries: ${scored.length}`);
   console.log(`Existing account matches: ${existingCount}`);
-  console.log(`Net-new prospects: ${netNew.length}`);
+  console.log(`Excluded as noise (truck stops, etc.): ${excludedCount}`);
+  console.log(`Net-new qualified prospects: ${netNew.length}`);
   console.log(`Tier A (>=70): ${output.tierA}  |  Tier B (50-69): ${output.tierB}  |  Tier C (30-49): ${output.tierC}  |  Tier D (<30): ${output.tierD}`);
 
   // Top 50 net-new table
