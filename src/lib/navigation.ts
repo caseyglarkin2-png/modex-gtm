@@ -56,6 +56,7 @@ export const commandRoutes: CommandRoute[] = [
     canonicalOwner: module.label,
   })),
   { label: 'Quick Capture', href: '/capture', icon: Smartphone, keywords: ['Mobile Capture', 'Field Capture', 'Capture'], canonicalOwner: 'Work Queue' },
+  { label: 'Prospect Discovery', href: '/discovery', icon: Compass, keywords: ['Prospects', 'Net-new', 'Corridors', 'ICP', 'Discovery Hub'], canonicalOwner: 'Discovery' },
   { label: 'Personas', href: '/contacts', icon: Users, keywords: ['Personas', 'People'], canonicalOwner: 'Contacts' },
   { label: 'Outreach Waves', href: '/campaigns', icon: Megaphone, keywords: ['Outreach Waves', 'Waves'], canonicalOwner: 'Campaigns' },
   { label: 'Campaign HQ', href: '/campaigns', icon: Megaphone, keywords: ['Campaign HQ'], canonicalOwner: 'Campaigns' },

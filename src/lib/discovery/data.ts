@@ -78,4 +78,4 @@ export function getDiscoverySummary(output: ScoredOutput): DiscoverySummary {
   };
 }
 
-export { filterProspects, type ProspectFilters } from './filters';
+export { filterProspects, formatDiscoveredVia, type ProspectFilters } from './filters';

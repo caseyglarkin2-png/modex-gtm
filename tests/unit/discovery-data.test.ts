@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { loadLatestScored, toProspectRow, getDiscoverySummary, filterProspects, extractCityState } from '@/lib/discovery/data';
+import { loadLatestScored, toProspectRow, getDiscoverySummary, filterProspects, extractCityState, formatDiscoveredVia } from '@/lib/discovery/data';
 
 describe('discovery data layer', () => {
   const output = loadLatestScored();
@@ -53,5 +53,35 @@ describe('discovery data layer', () => {
     const filtered = filterProspects(rows, { q: first.name.slice(0, 5) });
     expect(filtered.length).toBeGreaterThan(0);
     expect(filtered.some((r) => r.name === first.name)).toBe(true);
+  });
+
+  it('filterProspects filters by corridor', () => {
+    const rows = output!.prospects.map(toProspectRow);
+    const corridor = rows[0].corridor;
+    const filtered = filterProspects(rows, { corridor });
+    expect(filtered.length).toBeGreaterThan(0);
+    expect(filtered.every((r) => r.corridor === corridor)).toBe(true);
+  });
+
+  it('filterProspects filters by minScore', () => {
+    const rows = output!.prospects.map(toProspectRow);
+    const filtered = filterProspects(rows, { minScore: 70 });
+    expect(filtered.every((r) => r.icpScore >= 70)).toBe(true);
+    // Composes with tier filter.
+    const both = filterProspects(rows, { minScore: 70, tier: 'A' });
+    expect(both.every((r) => r.icpScore >= 70 && r.tier === 'A')).toBe(true);
+  });
+
+  it('formatDiscoveredVia renders object anchors and dedups', () => {
+    expect(
+      formatDiscoveredVia([
+        { anchor: 'Breinigsville PA', keyword: 'cold storage', distanceMiles: 2.7 },
+        { anchor: 'Breinigsville PA', keyword: 'warehouse', distanceMiles: 3.1 },
+        { anchor: 'Ontario CA', keyword: 'dc', distanceMiles: 1.0 },
+      ]),
+    ).toBe('Breinigsville PA, Ontario CA');
+    // Tolerates plain strings (older/seed data) and never yields [object Object].
+    expect(formatDiscoveredVia(['corridor-seed'])).toBe('corridor-seed');
+    expect(formatDiscoveredVia([])).toBe('');
   });
 });
