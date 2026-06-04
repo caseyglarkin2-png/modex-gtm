@@ -182,6 +182,23 @@ describe('MemoExecutiveBrief', () => {
     const entries = buildTocEntries([executiveBrief, ynsThesis, observation]);
     expect(entries[0]).toEqual(expect.objectContaining({ num: '§01', label: 'The brief' }));
   });
+
+  it('renders the afterFirst slot (audio/video) immediately below §01, not above it', () => {
+    const { container } = render(
+      <MemoSectionList
+        sections={[executiveBrief, observation]}
+        afterFirst={<div data-testid="audio-slot">listen</div>}
+      />,
+    );
+    const html = container.innerHTML;
+    const briefIdx = html.indexOf('last system you haven');
+    const slotIdx = html.indexOf('audio-slot');
+    const obsIdx = html.indexOf('What we observed about your network');
+    // Order in the DOM: brief → audio slot → §02 observation.
+    expect(briefIdx).toBeGreaterThanOrEqual(0);
+    expect(slotIdx).toBeGreaterThan(briefIdx);
+    expect(obsIdx).toBeGreaterThan(slotIdx);
+  });
 });
 
 describe('MemoFootnotes', () => {
@@ -224,6 +241,17 @@ describe('buildTocEntries', () => {
     const entries = buildTocEntries([ynsThesis], { withPreambleFor: undefined });
     expect(entries).toHaveLength(1);
     expect(entries[0].num).toBe('§01');
+  });
+
+  it('places the audio entry after §01 when audioAfterFirst is set', () => {
+    const entries = buildTocEntries([executiveBrief, observation], {
+      withAudio: true,
+      audioAfterFirst: true,
+    });
+    // §01 brief, then ▷ audio, then §02 observation.
+    expect(entries[0].num).toBe('§01');
+    expect(entries[1].num).toBe('▷');
+    expect(entries[2].num).toBe('§02');
   });
 
   it('inserts an "Audio brief" entry marked ▷ before §01 when withAudio is true', () => {

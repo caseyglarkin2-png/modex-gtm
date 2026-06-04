@@ -227,7 +227,7 @@ export const dannon: AccountMicrositeData = {
         sizing:
           'The per-site numbers are measured at Primo Brands — a multi-temp, multi-site beverage network running the hardest freight in CPG. Applied to Danone’s 13 U.S. plants at a conservative 50% turn-time improvement, the network prize lands between $15M and $25M a year in recovered throughput, avoided detention, and freed dock-office capacity.',
         note:
-          'Every supply-chain project competes for the same capital. This one models in the IRR range that wins that competition — we’ll build the exact number against your volumes and margins with your team.',
+          'Every supply-chain project competes for the same capital. Against a SaaS cost, deployments like this model in roughly a 20–40% IRR — the range that wins that competition with robotics, TMS, and automation projects. We’ll build Danone’s exact number against your volumes and margins with your team.',
       },
       ease: {
         label: 'Why this is a no-brainer',
@@ -258,11 +258,14 @@ export const dannon: AccountMicrositeData = {
         'This is built from public Danone disclosures, the Sept 2025 Supply Chain Magazine interview, the Microsoft partnership announcements, and reasonable network inference. We may be wrong about parts of it — the most useful thing you can do is push back on whether the yard layer is already more standardized than we think, whether the Jacksonville hub project has already locked in a yard design, and how Minster and Mount Crawford are absorbing throughput growth at the dock today.',
     },
     {
-      type: 'demo-embed',
-      headline: 'Danone’s network, inside the system',
-      accountSlug: 'dannon',
-      caption: '13 U.S. plants · live network model',
-      source: 'Yard geometry resolved from public satellite and Street-View audits of each Danone plant; yard metrics modeled. The same network view runs live for current customers.',
+      type: 'artifact',
+      headline: 'Five operating systems run to one standard. The yard doesn’t.',
+      artifact: {
+        imageSrc: '/artifacts/dannon-coverage-map.svg',
+        imageAlt: 'Danone North America’s six operating systems. Renew Productivity, the Microsoft AI Academy, S&OP, Quality & Food Safety, and Scope 3 Logistics each run to a single standard. The yard is the one that does not.',
+        caption: 'Danone’s operating systems · 5 standardized · 1 not.',
+        source: 'Composition from public Renew Danone, Microsoft AI Academy, and Climate Transition Plan disclosures. The interactive 13-plant network model is linked in the brief above.',
+      },
     },
     {
       type: 'comparable',
@@ -759,7 +762,7 @@ export const dannon: AccountMicrositeData = {
   audioBrief: {
     src: '/audio/dannon.m4a',
     intro:
-      'Twenty-three minutes, for Heiko Gerling. The operating-discipline-first instinct you carried through the Kraft Heinz Managing Director years now runs Danone North America productivity and plant intelligence — Renew Danone and the Microsoft AI Academy. What follows is about the one system it has not yet reached: the yard.',
+      'Prefer to listen? The same brief, read aloud and chaptered so you can skip to what matters — about twenty minutes end to end. Or watch the short version below. Whichever is easier than reading.',
     chapters: [
       { id: 'thesis', label: 'The plant-level case is closed', start: 0 },
       { id: 'what-renew-made', label: 'What Renew Danone made expensive', start: 280 },

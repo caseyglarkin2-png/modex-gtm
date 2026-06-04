@@ -745,6 +745,11 @@ function MemoDemoEmbed({
 interface MemoSectionListProps {
   sections: MemoMicrositeSection[];
   accentColor?: string;
+  /** Optional node rendered immediately after the first section. Used to slot
+   *  the audio/video brief below §01 (the BLUF) so the punchy text leads and
+   *  the listen/watch option follows — per Mark Shaughnessy's "spend the time
+   *  only if hooked" note. */
+  afterFirst?: ReactNode;
 }
 
 /**
@@ -753,7 +758,7 @@ interface MemoSectionListProps {
  * <MemoFootnotes sections={...} /> so the order in the document column is
  * sections → soft action → footnotes → colophon.
  */
-export function MemoSectionList({ sections, accentColor }: MemoSectionListProps) {
+export function MemoSectionList({ sections, accentColor, afterFirst }: MemoSectionListProps) {
   const accent = getMemoAccent(accentColor);
   const numbered = collectFootnotes(sections);
   const resolved = indexFootnotes(numbered);
@@ -762,7 +767,8 @@ export function MemoSectionList({ sections, accentColor }: MemoSectionListProps)
     <>
       {sections.map((section, i) => {
         const num = i + 1;
-        switch (section.type) {
+        const node = (() => {
+          switch (section.type) {
           case 'executive-brief':
             return (
               <MemoExecutiveBrief
@@ -813,7 +819,14 @@ export function MemoSectionList({ sections, accentColor }: MemoSectionListProps)
             return <MemoArtifact key={i} section={section} index={num} accent={accent} />;
           case 'demo-embed':
             return <MemoDemoEmbed key={i} section={section} index={num} accent={accent} />;
-        }
+          }
+        })();
+        return (
+          <Fragment key={i}>
+            {node}
+            {i === 0 && afterFirst ? afterFirst : null}
+          </Fragment>
+        );
       })}
     </>
   );
@@ -845,7 +858,13 @@ export function MemoFootnotes({ sections }: { sections: MemoMicrositeSection[] }
  */
 export function buildTocEntries(
   sections: MemoMicrositeSection[],
-  options?: { withPreambleFor?: string; withAudio?: boolean | { label?: string; id?: string } },
+  options?: {
+    withPreambleFor?: string;
+    withAudio?: boolean | { label?: string; id?: string };
+    /** Place the audio entry after the first section instead of before §01.
+     *  Mirrors the page rendering the audio brief below the BLUF (afterFirst). */
+    audioAfterFirst?: boolean;
+  },
 ): { id: string; num: string; label: string }[] {
   const entries = sections.map((s, i) => ({
     id: s.sectionId ?? s.type,
@@ -865,6 +884,10 @@ export function buildTocEntries(
         },
       ]
     : [];
+  if (options?.audioAfterFirst && entries.length > 0) {
+    // preamble → §01 → audio → §02…
+    return [...preamble, entries[0], ...audioEntry, ...entries.slice(1)];
+  }
   return [...preamble, ...audioEntry, ...entries];
 }
 

@@ -62,10 +62,30 @@ The live product is the receipt for beat 3. Always include `proofLinks`:
 - `/demo/<slug>` — the account's own network modeled, when a demo pack exists
   under `public/demo-packs/<slug>.json`
 
-Where the account has a demo pack, **replace the static `artifact` coverage-map
-section with a `demo-embed` section** (`accountSlug: '<slug>'`). This both shows
-the real product and avoids the broken-SVG artifact that rendered as raw alt
-text on the live deploy ("looked like a prompt").
+**Keep the heavy interactive map where it belongs — at `/demo/<slug>` — and
+*link* to it from the BLUF. Do NOT embed it in the cream memo.** The dark
+Leaflet `demo-embed` both clashes with the editorial aesthetic and, more
+importantly, renders a dark loading/error stub when the client fetch is slow or
+tiles are unavailable on deploy — recreating exactly the "didn't populate"
+failure Mark flagged. The reliable §04 visual is the **static, server-rendered
+coverage-map artifact** (`/artifacts/<slug>-coverage-map.svg`): it ships, it
+matches the aesthetic, and it reinforces the problem-first thesis (N operating
+systems standardized, the yard not).
+
+### The coverage-map SVG bug (root cause of "looked like a prompt")
+
+The shared coverage-map SVG template carries **raw ampersands** in its
+`aria-label` (`S&OP`, `Quality & Food Safety`). A raw `&` makes the SVG invalid
+XML, so the browser refuses to render it inside an `<img>` and shows the
+broken-image glyph + the long alt text — which reads exactly like an
+un-rendered prompt. **Before using any account's coverage map, escape the
+ampersands (`&` → `&amp;`) in the `aria-label`, and give the `<svg>` explicit
+`width`/`height` so it has intrinsic dimensions.** Verify in a browser that
+`img.naturalWidth > 0`. This affects every `public/artifacts/*-coverage-map.svg`.
+
+While you're in the SVG, de-jargon the copy: "TILES" → "SYSTEMS", "covered" →
+"standardized", "unfilled" → "not standardized", and name the unfilled box
+"THE YARD".
 
 ## Sizing the prize (beat 4)
 
@@ -78,10 +98,22 @@ Pre-compute, don't defer. Pull from the account's `roiModel` + public margins.
   turn-time improvement → an 8-figure annual range (Dannon: $15M–$25M across 13
   plants). Always give a range, always say "modeled."
 - **Payback:** `< 6 months`.
-- **IRR:** soft. "Every supply-chain project competes for the same capital; this
-  models in the IRR range that wins that competition — we'll build the exact
-  number with your team." Do **not** publish a hard implied SaaS price on a
-  shareable page.
+- **IRR:** give the *range*, not a hard price. "Against a SaaS cost, deployments
+  like this model in roughly a 20–40% IRR — the range that wins the competition
+  with robotics, TMS, and automation projects. We'll build your exact number with
+  your team." This satisfies Mark's "every project competes for IRR" point
+  without publishing an implied SaaS price on a shareable page.
+
+## Page order — text first, audio/video second
+
+The audio/video brief must render **below §01 (the BLUF)**, never above it. A
+busy exec decides from the written punchlines; the listen/watch option is for
+*after* they're hooked ("if you'd rather"). Mechanically: the page passes the
+audio brief to `MemoSectionList` via the `afterFirst` prop (renders after the
+first section), and `buildTocEntries(..., { audioAfterFirst: true })` slots the
+TOC entry after §01. Reframe each account's `audioBrief.intro` to be
+account-level (not addressed to one named person on the default link) and honest
+about length — don't claim "short" for a 20-minute narration.
 
 ## Writing rules (from the call)
 
@@ -110,12 +142,17 @@ For each of the remaining accounts:
 2. Rewrite `coverHeadline` + `titleEmphasis` problem-first; drop any "tile" /
    "operating-system surface" jargon.
 3. Refresh `pageTitle` + `metaDescription` to the YNS / shipper-of-choice frame.
-4. If a demo pack exists, swap the static `artifact` for a `demo-embed`.
-5. Sweep the deep sections (`observation`, `comparable`, `about`, `audioBrief`,
+4. Keep §04 as the static coverage-map `artifact`; fix its SVG (escape `&` in
+   `aria-label`, add `width`/`height`, de-jargon copy) and confirm it renders.
+   Link the interactive `/demo/<slug>` from the BLUF instead of embedding it.
+5. Move the audio/video brief below §01 (`afterFirst` + `audioAfterFirst`) and
+   reframe `audioBrief.intro` account-level + honest about length.
+6. Sweep the deep sections (`observation`, `comparable`, `about`, `audioBrief`,
    and every `personVariant`) for the retired "layer above / not a YMS / not
    displacement" framing and the word "tile." Re-spine to replace-forward YNS.
-6. Verify: `npx tsc --noEmit`, the microsite unit tests, and
-   `node scripts/validate-microsite-coverage.mjs`.
+7. Verify: `npx tsc --noEmit`, the microsite unit tests,
+   `node scripts/validate-microsite-coverage.mjs`, and a Playwright render check
+   that the coverage-map `<img>` has `naturalWidth > 0` and `/demo/<slug>` loads.
 
 ## Known follow-ups
 
