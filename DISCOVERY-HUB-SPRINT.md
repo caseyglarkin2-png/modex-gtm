@@ -113,8 +113,13 @@ interface ScoredOutput {
   `scripts/prospect-discovery/score-and-rank.ts` (`resolveInputFile` — readdir,
   filter prefix, sort desc, take first). Use `node:fs` + `path`. Return `null`
   (don't throw) when the dir/file is absent.
+- **Important:** the dated `scored-prospects-*.json` files are **gitignored**
+  (they're regenerated locally and on CI/Vercel they won't exist). Resolution
+  order: (1) newest dated `scored-prospects-*.json`, else (2) the committed
+  `output/prospect-discovery/SAMPLE-scored-prospects.json`, else (3) `null`.
+  This guarantees the Vercel preview and CI tests always have data to render.
 - **Done when:** a unit call returns the parsed object against the committed
-  sample file, and `null` when pointed at an empty dir.
+  `SAMPLE-scored-prospects.json`, and `null` only when even the sample is absent.
 
 ### S0-T3 · View-model mappers
 - **Goal:** Convert `ScoredProspect` → `ProspectRow` (adds `cityState` parsed from
