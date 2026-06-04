@@ -2,6 +2,7 @@
 
 import { getHubSpotClient, withHubSpotRetry, isHubSpotConfigured, getPortalId } from '@/lib/hubspot/client';
 import { searchCompanyByDomain, searchCompanyByName } from '@/lib/hubspot/companies';
+import { ensureYardflowIcpScoreProperty } from '@/lib/hubspot/properties';
 import { assertExternalWriteAllowed } from '@/lib/enrichment/external-write-guard';
 import { HUBSPOT_SYNC_ENABLED } from '@/lib/feature-flags';
 
@@ -41,6 +42,9 @@ export async function pushProspectToHubSpot(input: PushProspectInput): Promise<P
 
   try {
     assertExternalWriteAllowed('hubspot', 'pushProspectToHubSpot');
+
+    // Self-heal: make sure the custom score property exists before stamping it.
+    await ensureYardflowIcpScoreProperty();
 
     const [city, state] = (input.cityState ?? '').split(',').map((s) => s.trim());
     const existing = input.domain
