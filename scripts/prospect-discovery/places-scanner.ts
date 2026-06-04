@@ -66,6 +66,24 @@ interface PlacesTextSearchResponse {
   error_message?: string;
 }
 
+// Places API (New) response types
+interface PlacesNewPlace {
+  id: string;
+  displayName?: { text: string };
+  formattedAddress?: string;
+  location?: { latitude: number; longitude: number };
+  types?: string[];
+  businessStatus?: string;
+  rating?: number;
+  userRatingCount?: number;
+}
+
+interface PlacesNewResponse {
+  places?: PlacesNewPlace[];
+  nextPageToken?: string;
+  error?: { message: string; status: string; code: number };
+}
+
 // ── Anchor points (24 Primo Brands sites) ────────────────────────────────
 
 const PRIMO_ANCHORS: AnchorPoint[] = [
@@ -237,26 +255,59 @@ Options:
   return { anchor, radius, dryRun };
 }
 
-// ── Google Places API ────────────────────────────────────────────────────
+// ── Google Places API (New) ──────────────────────────────────────────────
 
-async function fetchWithRetry(url: string): Promise<PlacesTextSearchResponse> {
+function convertNewToLegacy(place: PlacesNewPlace): PlacesTextSearchResult {
+  return {
+    place_id: place.id,
+    name: place.displayName?.text ?? '',
+    formatted_address: place.formattedAddress ?? '',
+    geometry: {
+      location: {
+        lat: place.location?.latitude ?? 0,
+        lng: place.location?.longitude ?? 0,
+      },
+    },
+    types: place.types ?? [],
+    business_status: place.businessStatus,
+    rating: place.rating,
+    user_ratings_total: place.userRatingCount,
+  };
+}
+
+async function fetchNewApiWithRetry(
+  apiKey: string,
+  body: Record<string, unknown>,
+): Promise<PlacesNewResponse> {
   let lastErr = '';
   for (let attempt = 0; attempt < MAX_RETRIES; attempt++) {
     if (attempt > 0) await sleep(1000 * 2 ** attempt);
     try {
-      const res = await fetch(url);
+      const res = await fetch('https://places.googleapis.com/v1/places:searchText', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Goog-Api-Key': apiKey,
+          'X-Goog-FieldMask': 'places.id,places.displayName,places.formattedAddress,places.location,places.types,places.businessStatus,places.rating,places.userRatingCount,nextPageToken',
+        },
+        body: JSON.stringify(body),
+      });
       if (!res.ok) {
-        lastErr = `HTTP ${res.status}: ${(await res.text()).slice(0, 200)}`;
+        const text = (await res.text()).slice(0, 300);
+        if (res.status === 429) {
+          lastErr = 'RATE_LIMITED — backing off';
+          await sleep(5000 * (attempt + 1));
+          continue;
+        }
+        lastErr = `HTTP ${res.status}: ${text}`;
         continue;
       }
-      const data = (await res.json()) as PlacesTextSearchResponse;
-      if (data.status === 'OK' || data.status === 'ZERO_RESULTS') return data;
-      if (data.status === 'OVER_QUERY_LIMIT') {
-        lastErr = 'OVER_QUERY_LIMIT — backing off';
-        await sleep(5000 * (attempt + 1));
+      const data = (await res.json()) as PlacesNewResponse;
+      if (data.error) {
+        lastErr = `${data.error.status}: ${data.error.message}`;
         continue;
       }
-      lastErr = `Places API status=${data.status}: ${data.error_message ?? ''}`;
+      return data;
     } catch (e) {
       lastErr = e instanceof Error ? e.message : String(e);
     }
@@ -274,29 +325,33 @@ async function searchPlaces(
   const allResults: PlacesTextSearchResult[] = [];
   let apiCalls = 0;
 
-  const baseUrl =
-    `https://maps.googleapis.com/maps/api/place/textsearch/json` +
-    `?query=${encodeURIComponent(query)}` +
-    `&location=${lat},${lng}` +
-    `&radius=${radius}` +
-    `&key=${apiKey}`;
+  const requestBody: Record<string, unknown> = {
+    textQuery: query,
+    locationBias: {
+      circle: {
+        center: { latitude: lat, longitude: lng },
+        radius: radius,
+      },
+    },
+    maxResultCount: 20,
+  };
 
-  const firstPage = await fetchWithRetry(baseUrl);
+  const firstPage = await fetchNewApiWithRetry(apiKey, requestBody);
   apiCalls++;
-  allResults.push(...firstPage.results);
+  if (firstPage.places) {
+    allResults.push(...firstPage.places.map(convertNewToLegacy));
+  }
 
-  let nextToken = firstPage.next_page_token;
+  let nextToken = firstPage.nextPageToken;
   while (nextToken) {
-    // Google requires ~2s before the token is valid
     await sleep(PAGINATION_DELAY_MS);
-    const pageUrl =
-      `https://maps.googleapis.com/maps/api/place/textsearch/json` +
-      `?pagetoken=${nextToken}` +
-      `&key=${apiKey}`;
-    const page = await fetchWithRetry(pageUrl);
+    const pageBody = { ...requestBody, pageToken: nextToken };
+    const page = await fetchNewApiWithRetry(apiKey, pageBody);
     apiCalls++;
-    allResults.push(...page.results);
-    nextToken = page.next_page_token;
+    if (page.places) {
+      allResults.push(...page.places.map(convertNewToLegacy));
+    }
+    nextToken = page.nextPageToken;
   }
 
   return { results: allResults, apiCalls };
