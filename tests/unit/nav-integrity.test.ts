@@ -14,7 +14,7 @@ describe('nav integrity detector', () => {
     expect(report.obsoleteTopLevelModules).toEqual([]);
 
     expect(report.scorecard).toEqual({
-      keepTopLevel: 10,
+      keepTopLevel: 11,
       hiddenCore: 0,
       duplicate: 0,
       shouldBeTab: 0,
