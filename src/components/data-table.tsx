@@ -28,6 +28,12 @@ interface DataTableProps<T> {
   searchPlaceholder?: string;
   onRowClick?: (item: T) => void;
   className?: string;
+  /**
+   * When set, only this many rows are rendered to the DOM at a time (search and
+   * sort still run over the full dataset). Keeps large tables — e.g. the 8k-row
+   * Discovery prospects table — from inlining thousands of <tr> into the HTML.
+   */
+  pageSize?: number;
 }
 
 export function DataTable<T extends object>({
@@ -37,11 +43,13 @@ export function DataTable<T extends object>({
   searchPlaceholder = "Search...",
   onRowClick,
   className,
+  pageSize,
 }: DataTableProps<T>) {
   const [search, setSearch] = React.useState("");
   const [sortKey, setSortKey] = React.useState<string | null>(null);
   const [sortDir, setSortDir] = React.useState<"asc" | "desc">("asc");
   const [focusedIndex, setFocusedIndex] = React.useState<number | null>(null);
+  const [page, setPage] = React.useState(0);
   const tableRef = React.useRef<HTMLDivElement>(null);
 
   const filtered = React.useMemo(() => {
@@ -69,6 +77,13 @@ export function DataTable<T extends object>({
     });
   }, [filtered, sortKey, sortDir]);
 
+  const totalPages = pageSize ? Math.max(1, Math.ceil(sorted.length / pageSize)) : 1;
+  const safePage = Math.min(page, totalPages - 1);
+  const pageRows = pageSize
+    ? sorted.slice(safePage * pageSize, safePage * pageSize + pageSize)
+    : sorted;
+  const pageOffset = pageSize ? safePage * pageSize : 0;
+
   const handleSort = (key: string) => {
     if (sortKey === key) {
       setSortDir((d) => (d === "asc" ? "desc" : "asc"));
@@ -78,10 +93,18 @@ export function DataTable<T extends object>({
     }
   };
 
-  // Reset focus when filtered results change
+  // Reset focus + page when the result set changes (new filter, sort, or data).
   React.useEffect(() => {
     setFocusedIndex(null);
-  }, [search, sortKey, sortDir]);
+    setPage(0);
+  }, [search, sortKey, sortDir, data]);
+
+  // Keep the visible page in sync with keyboard focus so j/k can cross pages.
+  React.useEffect(() => {
+    if (pageSize != null && focusedIndex != null) {
+      setPage(Math.floor(focusedIndex / pageSize));
+    }
+  }, [focusedIndex, pageSize]);
 
   // Keyboard navigation: j/k move focus, Enter selects
   React.useEffect(() => {
@@ -154,30 +177,62 @@ export function DataTable<T extends object>({
                 </TableCell>
               </TableRow>
             ) : (
-              sorted.map((item, i) => (
-                <TableRow
-                  key={i}
-                  className={cn(
-                    "group", // Add group class for hover actions
-                    onRowClick && "cursor-pointer",
-                    focusedIndex === i && "bg-[var(--accent)] outline outline-2 outline-[var(--primary)]"
-                  )}
-                  onClick={onRowClick ? () => { setFocusedIndex(i); onRowClick(item); } : undefined}
-                >
-                  {columns.map((col) => (
-                    <TableCell key={col.key} className={col.className}>
-                      {col.render ? col.render(item) : ((item as Record<string, unknown>)[col.key] as React.ReactNode) ?? "—"}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
+              pageRows.map((item, i) => {
+                const globalIndex = pageOffset + i;
+                return (
+                  <TableRow
+                    key={globalIndex}
+                    className={cn(
+                      "group", // Add group class for hover actions
+                      onRowClick && "cursor-pointer",
+                      focusedIndex === globalIndex && "bg-[var(--accent)] outline outline-2 outline-[var(--primary)]"
+                    )}
+                    onClick={onRowClick ? () => { setFocusedIndex(globalIndex); onRowClick(item); } : undefined}
+                  >
+                    {columns.map((col) => (
+                      <TableCell key={col.key} className={col.className}>
+                        {col.render ? col.render(item) : ((item as Record<string, unknown>)[col.key] as React.ReactNode) ?? "—"}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                );
+              })
             )}
           </TableBody>
         </Table>
       </div>
-      <p className="text-xs text-[var(--muted-foreground)]">
-        {sorted.length} of {data.length} results
-      </p>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <p className="text-xs text-[var(--muted-foreground)]">
+          {pageSize && sorted.length > 0
+            ? `${pageOffset + 1}–${pageOffset + pageRows.length} of ${sorted.length}${sorted.length !== data.length ? ` (filtered from ${data.length})` : ''}`
+            : `${sorted.length} of ${data.length} results`}
+        </p>
+        {pageSize != null && totalPages > 1 && (
+          <div className="flex items-center gap-2 text-xs">
+            <button
+              type="button"
+              onClick={() => setPage((p) => Math.max(0, p - 1))}
+              disabled={safePage === 0}
+              className="rounded-md border border-[var(--border)] px-2 py-1 disabled:opacity-40 enabled:hover:border-[var(--primary)]"
+              aria-label="Previous page"
+            >
+              Prev
+            </button>
+            <span className="tabular-nums text-[var(--muted-foreground)]">
+              Page {safePage + 1} of {totalPages}
+            </span>
+            <button
+              type="button"
+              onClick={() => setPage((p) => Math.min(totalPages - 1, p + 1))}
+              disabled={safePage >= totalPages - 1}
+              className="rounded-md border border-[var(--border)] px-2 py-1 disabled:opacity-40 enabled:hover:border-[var(--primary)]"
+              aria-label="Next page"
+            >
+              Next
+            </button>
+          </div>
+        )}
+      </div>
     </div>
   );
 }
