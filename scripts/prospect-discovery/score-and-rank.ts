@@ -25,11 +25,15 @@ interface DiscoveredPlace {
   types: string[];
   userRatingsTotal: number | null;
   discoveredVia: string[];
+  estimatedRevenue?: string;
+  estimatedFacilities?: number;
+  vertical?: string;
 }
 
 interface ScoreBreakdown {
   verticalMatch: number;
-  scaleProxy: number;
+  enterpriseScale: number;
+  networkComplexity: number;
   primoProximity: number;
   corridorDensity: number;
   placeTypeBonus: number;
@@ -201,40 +205,88 @@ function haversineDistanceMiles(
 // ── ICP vertical keyword sets ────────────────────────────────────────────
 
 const VERTICAL_RULES: { keywords: string[]; points: number }[] = [
-  { keywords: ['food', 'beverage', 'dairy', 'bottling', 'brewery', 'bakery', 'meat', 'poultry', 'snack', 'confection', 'coffee'], points: 25 },
-  { keywords: ['logistics', 'distribution', 'warehouse', 'fulfillment', 'freight', 'supply chain', '3pl', 'cold storage'], points: 25 },
-  { keywords: ['manufacturing', 'industrial', 'plant', 'factory', 'production'], points: 20 },
-  { keywords: ['retail', 'grocery', 'supermarket', 'wholesale', 'club'], points: 20 },
-  { keywords: ['automotive', 'motor', 'truck', 'equipment', 'machinery'], points: 20 },
-  { keywords: ['packaging', 'container', 'bottle', 'can'], points: 15 },
+  { keywords: ['food', 'beverage', 'dairy', 'bottling', 'brewery', 'bakery', 'meat', 'poultry', 'snack', 'confection', 'coffee', 'cereal', 'frozen', 'produce', 'grain', 'flour', 'sugar', 'spice', 'sauce', 'canned', 'deli', 'fresh', 'organic', 'nutrition', 'pet food', 'animal feed'], points: 25 },
+  { keywords: ['logistics', 'distribution', 'warehouse', 'fulfillment', 'freight', 'supply chain', '3pl', 'cold storage', 'intermodal', 'drayage', 'cross-dock', 'crossdock', 'transload', 'last mile', 'courier', 'parcel'], points: 25 },
+  { keywords: ['manufacturing', 'industrial', 'plant', 'factory', 'production', 'assembly', 'fabricat'], points: 20 },
+  { keywords: ['retail', 'grocery', 'supermarket', 'wholesale', 'club', 'pharmacy', 'drug store', 'dollar', 'convenience', 'c-store'], points: 20 },
+  { keywords: ['automotive', 'motor', 'truck', 'equipment', 'machinery', 'vehicle', 'parts', 'tire'], points: 20 },
+  { keywords: ['packaging', 'container', 'bottle', 'can', 'corrugat', 'paper', 'pulp', 'tissue'], points: 15 },
+  { keywords: ['chemical', 'paint', 'adhesive', 'cleaning', 'detergent', 'personal care', 'cosmetic'], points: 15 },
+  { keywords: ['building', 'construction', 'lumber', 'concrete', 'steel', 'hardware', 'home improvement'], points: 12 },
 ];
+
+const KNOWN_BRAND_VERTICALS: Record<string, number> = {
+  'mclane': 25, 'lineage': 25, 'americold': 25, 'sysco': 25, 'us foods': 25,
+  'core-mark': 25, 'dot foods': 25, 'vistar': 25, 'performance food': 25,
+  'bimbo': 25, 'flowers foods': 25, 'pepsi': 25, 'coke': 25, 'nestle': 25,
+  'tyson': 25, 'jbs': 25, 'cargill': 25, 'adm': 25, 'conagra': 25,
+  'xpo': 25, 'ryder': 25, 'penske': 25, 'ceva': 25, 'nfi': 25, 'geodis': 25,
+  'dhl': 25, 'fedex': 25, 'ups': 25, 'amazon': 20, 'walmart': 20,
+  'kroger': 20, 'costco': 20, 'target': 20, 'publix': 20, 'h-e-b': 20,
+  'aldi': 20, 'lidl': 20, 'wakefern': 20, 'shoprite': 20, 'ahold': 20,
+  'albertsons': 20, 'safeway': 20,
+};
 
 // ── Scoring functions ────────────────────────────────────────────────────
 
 function scoreVertical(place: DiscoveredPlace): number {
+  if (place.vertical) {
+    const v = place.vertical.toLowerCase();
+    for (const rule of VERTICAL_RULES) {
+      if (rule.keywords.some(kw => v.includes(kw))) return rule.points;
+    }
+  }
+
   const haystack = [
     place.name,
     place.address,
     ...(place.types || []),
   ].join(' ').toLowerCase();
 
+  for (const [brand, points] of Object.entries(KNOWN_BRAND_VERTICALS)) {
+    if (haystack.includes(brand)) return points;
+  }
+
   for (const rule of VERTICAL_RULES) {
-    if (rule.keywords.some(kw => haystack.includes(kw))) {
-      return rule.points;
-    }
+    if (rule.keywords.some(kw => haystack.includes(kw))) return rule.points;
   }
   return 0;
 }
 
-function scoreScale(place: DiscoveredPlace): number {
-  const r = place.userRatingsTotal;
-  if (r == null) return 0;
-  if (r >= 1000) return 25;
-  if (r >= 500) return 20;
-  if (r >= 200) return 15;
-  if (r >= 100) return 10;
-  if (r >= 50) return 5;
+function scoreEnterpriseScale(place: DiscoveredPlace): number {
+  const rev = place.estimatedRevenue;
+  if (!rev) return 0;
+  const revBillions = parseRevenueBillions(rev);
+  if (revBillions >= 10) return 25;
+  if (revBillions >= 5) return 22;
+  if (revBillions >= 1) return 18;
+  if (revBillions >= 0.5) return 14;
+  if (revBillions >= 0.1) return 10;
+  if (revBillions >= 0.05) return 6;
+  if (revBillions > 0) return 3;
   return 0;
+}
+
+function parseRevenueBillions(rev: string): number {
+  const cleaned = rev.replace(/[,$]/g, '').trim();
+  const match = cleaned.match(/([\d.]+)\s*(B|M|K|billion|million|thousand)?/i);
+  if (!match) return 0;
+  const num = parseFloat(match[1]);
+  const unit = (match[2] || '').toUpperCase();
+  if (unit.startsWith('B')) return num;
+  if (unit.startsWith('M')) return num / 1000;
+  if (unit.startsWith('K') || unit.startsWith('T')) return num / 1_000_000;
+  return num >= 100 ? num / 1000 : num;
+}
+
+function scoreNetworkComplexity(place: DiscoveredPlace): number {
+  const f = place.estimatedFacilities;
+  if (f == null || f <= 0) return 0;
+  if (f >= 50) return 25;
+  if (f >= 25) return 20;
+  if (f >= 10) return 15;
+  if (f >= 5) return 10;
+  return 5;
 }
 
 function findNearestPrimo(lat: number, lng: number): { name: string; distanceMiles: number } {
@@ -249,10 +301,10 @@ function findNearestPrimo(lat: number, lng: number): { name: string; distanceMil
 }
 
 function scorePrimoProximity(distanceMiles: number): number {
-  if (distanceMiles <= 5) return 25;
-  if (distanceMiles <= 10) return 20;
-  if (distanceMiles <= 25) return 15;
-  if (distanceMiles <= 50) return 10;
+  if (distanceMiles <= 5) return 10;
+  if (distanceMiles <= 10) return 8;
+  if (distanceMiles <= 25) return 5;
+  if (distanceMiles <= 50) return 3;
   return 0;
 }
 
@@ -268,9 +320,9 @@ function scoreCorridorDensity(
       neighbors++;
     }
   }
-  if (neighbors >= 10) return 15;
-  if (neighbors >= 5) return 10;
-  if (neighbors >= 2) return 5;
+  if (neighbors >= 10) return 5;
+  if (neighbors >= 5) return 3;
+  if (neighbors >= 2) return 1;
   return 0;
 }
 
@@ -514,7 +566,7 @@ function buildCsv(prospects: ScoredProspect[]): string {
   const headers = [
     'Name', 'Address', 'Lat', 'Lng', 'PlaceId',
     'ICP Score', 'Tier',
-    'Vertical Match', 'Scale Proxy', 'Primo Proximity', 'Corridor Density', 'Place Type Bonus',
+    'Vertical Match', 'Enterprise Scale', 'Network Complexity', 'Primo Proximity', 'Corridor Density', 'Place Type Bonus',
     'Is Existing Account', 'Existing Account Slug',
     'Nearest Primo Site', 'Primo Distance (mi)',
     'Corridor', 'Discovered Via',
@@ -529,7 +581,8 @@ function buildCsv(prospects: ScoredProspect[]): string {
     p.icpScore,
     p.tier,
     p.scoreBreakdown.verticalMatch,
-    p.scoreBreakdown.scaleProxy,
+    p.scoreBreakdown.enterpriseScale,
+    p.scoreBreakdown.networkComplexity,
     p.scoreBreakdown.primoProximity,
     p.scoreBreakdown.corridorDensity,
     p.scoreBreakdown.placeTypeBonus,
@@ -613,13 +666,14 @@ async function main() {
   for (let i = 0; i < discoveries.length; i++) {
     const place = discoveries[i];
     const verticalMatch = scoreVertical(place);
-    const scaleProxy = scoreScale(place);
+    const enterpriseScale = scoreEnterpriseScale(place);
+    const networkComplexity = scoreNetworkComplexity(place);
     const nearest = findNearestPrimo(place.lat, place.lng);
     const primoProximity = scorePrimoProximity(nearest.distanceMiles);
     const corridorDensity = scoreCorridorDensity(i, discoveries);
     const placeTypeBonus = scorePlaceTypes(place);
 
-    const icpScore = verticalMatch + scaleProxy + primoProximity + corridorDensity + placeTypeBonus;
+    const icpScore = verticalMatch + enterpriseScale + networkComplexity + primoProximity + corridorDensity + placeTypeBonus;
 
     // 4. Dedup against existing accounts
     const existingMatch = matchExistingAccount(place, existingFacilities, normalizedAccountNames);
@@ -634,7 +688,8 @@ async function main() {
       tier: assignTier(icpScore),
       scoreBreakdown: {
         verticalMatch,
-        scaleProxy,
+        enterpriseScale,
+        networkComplexity,
         primoProximity,
         corridorDensity,
         placeTypeBonus,
@@ -707,8 +762,10 @@ async function main() {
     pad('City/State', 22),
     pad('ICP', 5),
     pad('Tier', 5),
-    pad('Vertical', 9),
-    pad('Primo mi', 9),
+    pad('Vert', 5),
+    pad('Scale', 5),
+    pad('Net', 5),
+    pad('Primo', 5),
     pad('Corridor', 20),
   ].join(' | ');
   console.log(hdr);
@@ -724,8 +781,10 @@ async function main() {
       pad(cityState.slice(0, 21), 22),
       pad(String(p.icpScore), 5),
       pad(p.tier, 5),
-      pad(String(p.scoreBreakdown.verticalMatch), 9),
-      pad(String(p.nearestPrimoSite.distanceMiles), 9),
+      pad(String(p.scoreBreakdown.verticalMatch), 5),
+      pad(String(p.scoreBreakdown.enterpriseScale), 5),
+      pad(String(p.scoreBreakdown.networkComplexity), 5),
+      pad(String(p.nearestPrimoSite.distanceMiles), 5),
       pad(p.corridor.slice(0, 19), 20),
     ].join(' | '));
   }

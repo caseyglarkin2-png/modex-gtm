@@ -1,0 +1,1961 @@
+{
+  "scanDate": "2026-06-04",
+  "anchorsScanned": 11,
+  "keywordsPerAnchor": 1,
+  "totalApiCalls": 0,
+  "totalDiscovered": 68,
+  "totalAfterDedup": 68,
+  "totalNetNew": 68,
+  "discoveries": [
+    {
+      "placeId": "seed-usfoods.com-40.565--75.593",
+      "name": "US Foods — US Foods Allentown DC",
+      "address": "Upper Macungie Township, PA",
+      "lat": 40.565,
+      "lng": -75.593,
+      "types": [
+        "establishment",
+        "food"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 2700,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Breinigsville PA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Breinigsville PA",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$35B",
+      "estimatedFacilities": 70,
+      "vertical": "Food & Beverage"
+    },
+    {
+      "placeId": "seed-bimbobakeriesusa.com-40.5744--75.5856",
+      "name": "Bimbo Bakeries USA — Bimbo Bakeries Allentown",
+      "address": "Allentown, PA",
+      "lat": 40.5744,
+      "lng": -75.5856,
+      "types": [
+        "establishment",
+        "food"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 2600,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Breinigsville PA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Breinigsville PA",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$20B (Grupo Bimbo)",
+      "estimatedFacilities": 60,
+      "vertical": "Food & Beverage"
+    },
+    {
+      "placeId": "seed-nfiindustries.com-40.5375--75.6495",
+      "name": "NFI Industries — NFI DC Breinigsville",
+      "address": "Breinigsville, PA",
+      "lat": 40.5375,
+      "lng": -75.6495,
+      "types": [
+        "establishment",
+        "storage",
+        "moving_company"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 750,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Breinigsville PA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Breinigsville PA",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$3B",
+      "estimatedFacilities": 50,
+      "vertical": "3PL / Logistics"
+    },
+    {
+      "placeId": "seed-geodis.com-40.541--75.568",
+      "name": "Geodis — Geodis Logistics Allentown",
+      "address": "Allentown, PA",
+      "lat": 40.541,
+      "lng": -75.568,
+      "types": [
+        "establishment",
+        "storage",
+        "moving_company"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 2400,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Breinigsville PA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Breinigsville PA",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$14B",
+      "estimatedFacilities": 40,
+      "vertical": "3PL / Logistics"
+    },
+    {
+      "placeId": "seed-wakefern.com-40.5465--75.6305",
+      "name": "Wakefern Food Corp — Wakefern Distribution Center",
+      "address": "Breinigsville, PA",
+      "lat": 40.5465,
+      "lng": -75.6305,
+      "types": [
+        "establishment",
+        "store"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 2150,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Breinigsville PA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Breinigsville PA",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$19B",
+      "estimatedFacilities": 15,
+      "vertical": "Retail / Grocery"
+    },
+    {
+      "placeId": "seed-bridgestoneamericas.com-40.5595--75.578",
+      "name": "Bridgestone Americas — Bridgestone Americas Distribution Center",
+      "address": "Upper Macungie Township, PA",
+      "lat": 40.5595,
+      "lng": -75.578,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 1300,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Breinigsville PA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Breinigsville PA",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$8B",
+      "estimatedFacilities": 30,
+      "vertical": "Manufacturing"
+    },
+    {
+      "placeId": "seed-oceanspray.com-40.566--75.596",
+      "name": "Ocean Spray — Ocean Spray Distribution",
+      "address": "Breinigsville, PA",
+      "lat": 40.566,
+      "lng": -75.596,
+      "types": [
+        "establishment",
+        "food"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 560,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Breinigsville PA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Breinigsville PA",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$2B",
+      "estimatedFacilities": 12,
+      "vertical": "Food & Beverage"
+    },
+    {
+      "placeId": "seed-uline.com-40.552--75.587",
+      "name": "Uline — Uline Allentown DC",
+      "address": "Upper Macungie Township, PA",
+      "lat": 40.552,
+      "lng": -75.587,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 1130,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Breinigsville PA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Breinigsville PA",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$7B",
+      "estimatedFacilities": 13,
+      "vertical": "Distribution / Industrial Supply"
+    },
+    {
+      "placeId": "seed-sysco.com-32.696--96.978",
+      "name": "Sysco — Sysco Dallas DC",
+      "address": "Grand Prairie, TX",
+      "lat": 32.696,
+      "lng": -96.978,
+      "types": [
+        "establishment",
+        "food"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 5300,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Dallas TX",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Dallas TX",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$76B",
+      "estimatedFacilities": 330,
+      "vertical": "Food & Beverage"
+    },
+    {
+      "placeId": "seed-mclaneco.com-32.976--96.89",
+      "name": "McLane Company — McLane DFW DC",
+      "address": "Carrollton, TX",
+      "lat": 32.976,
+      "lng": -96.89,
+      "types": [
+        "establishment",
+        "store"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 2800,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Dallas TX",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Dallas TX",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$53B",
+      "estimatedFacilities": 80,
+      "vertical": "Distribution / Grocery"
+    },
+    {
+      "placeId": "seed-xpo.com-32.717--96.95",
+      "name": "XPO — XPO DFW Service Center",
+      "address": "Grand Prairie, TX",
+      "lat": 32.717,
+      "lng": -96.95,
+      "types": [
+        "establishment",
+        "storage",
+        "moving_company"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 6900,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Dallas TX",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Dallas TX",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$7.7B",
+      "estimatedFacilities": 590,
+      "vertical": "Freight / Logistics"
+    },
+    {
+      "placeId": "seed-lennoxinternational.com-32.948--96.705",
+      "name": "Lennox International — Lennox HQ & Plant",
+      "address": "Richardson, TX",
+      "lat": 32.948,
+      "lng": -96.705,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 650,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Dallas TX",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Dallas TX",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$4.7B",
+      "estimatedFacilities": 30,
+      "vertical": "Manufacturing"
+    },
+    {
+      "placeId": "seed-cevalogistics.com-32.965--96.975",
+      "name": "CEVA Logistics — CEVA Logistics DFW",
+      "address": "Coppell, TX",
+      "lat": 32.965,
+      "lng": -96.975,
+      "types": [
+        "establishment",
+        "storage",
+        "moving_company"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 3000,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Dallas TX",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Dallas TX",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$17B (CMA CGM parent)",
+      "estimatedFacilities": 100,
+      "vertical": "3PL / Logistics"
+    },
+    {
+      "placeId": "seed-dfamilk.com-32.7767--96.797",
+      "name": "Dean Foods (now DFA facilities) — DFA Dallas Processing Plant",
+      "address": "Dallas, TX",
+      "lat": 32.7767,
+      "lng": -96.797,
+      "types": [
+        "establishment",
+        "food"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 2500,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Dallas TX",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Dallas TX",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$21B",
+      "estimatedFacilities": 50,
+      "vertical": "Food & Beverage"
+    },
+    {
+      "placeId": "seed-estes-express.com-32.72--96.94",
+      "name": "Estes Express Lines — Estes DFW Terminal",
+      "address": "Grand Prairie, TX",
+      "lat": 32.72,
+      "lng": -96.94,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 1800,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Dallas TX",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Dallas TX",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$4B",
+      "estimatedFacilities": 260,
+      "vertical": "Freight / LTL"
+    },
+    {
+      "placeId": "seed-ti.com-32.91--96.75",
+      "name": "Texas Instruments — TI Dallas Fab",
+      "address": "Dallas, TX",
+      "lat": 32.91,
+      "lng": -96.75,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 2150,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Dallas TX",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Dallas TX",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$17.5B",
+      "estimatedFacilities": 15,
+      "vertical": "Manufacturing / Semiconductor"
+    },
+    {
+      "placeId": "seed-lyondellbasell.com-29.777--95.115",
+      "name": "LyondellBasell — LyondellBasell Channelview Complex",
+      "address": "Channelview, TX",
+      "lat": 29.777,
+      "lng": -95.115,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 2550,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Houston TX / Pasadena TX",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Houston TX / Pasadena TX",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$41B",
+      "estimatedFacilities": 55,
+      "vertical": "Chemical / Manufacturing"
+    },
+    {
+      "placeId": "seed-halliburton.com-29.763--95.361",
+      "name": "Halliburton — Halliburton Houston Campus",
+      "address": "Houston, TX",
+      "lat": 29.763,
+      "lng": -95.361,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 10000,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Houston TX / Pasadena TX",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Houston TX / Pasadena TX",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$23B",
+      "estimatedFacilities": 800,
+      "vertical": "Energy / Industrial"
+    },
+    {
+      "placeId": "seed-coremt.com-29.71--95.3",
+      "name": "Core Molding Technologies — Core Molding Matamoros (ships via Houston)",
+      "address": "Houston, TX",
+      "lat": 29.71,
+      "lng": -95.3,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 2060,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Houston TX / Pasadena TX",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Houston TX / Pasadena TX",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$400M",
+      "estimatedFacilities": 6,
+      "vertical": "Manufacturing"
+    },
+    {
+      "placeId": "seed-houstonfoodbank.org-29.748--95.287",
+      "name": "Houston Food Bank — Houston Food Bank Keegan Center",
+      "address": "Houston, TX",
+      "lat": 29.748,
+      "lng": -95.287,
+      "types": [
+        "establishment",
+        "food"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 2030,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Houston TX / Pasadena TX",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Houston TX / Pasadena TX",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$500M (distributed)",
+      "estimatedFacilities": 3,
+      "vertical": "Food Distribution / Nonprofit"
+    },
+    {
+      "placeId": "seed-targaresources.com-29.755--95.458",
+      "name": "Targa Resources — Targa Resources HQ",
+      "address": "Houston, TX",
+      "lat": 29.755,
+      "lng": -95.458,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 2400,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Houston TX / Pasadena TX",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Houston TX / Pasadena TX",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$17B",
+      "estimatedFacilities": 40,
+      "vertical": "Energy / Midstream"
+    },
+    {
+      "placeId": "seed-lilly.com-39.768--86.162",
+      "name": "Eli Lilly and Company — Eli Lilly Indianapolis HQ & Manufacturing",
+      "address": "Indianapolis, IN",
+      "lat": 39.768,
+      "lng": -86.162,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 2250,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Greenwood IN",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Greenwood IN",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$34B",
+      "estimatedFacilities": 25,
+      "vertical": "Pharmaceutical / Manufacturing"
+    },
+    {
+      "placeId": "seed-rolls-royce.com-39.735--86.249",
+      "name": "Rolls-Royce North America — Rolls-Royce Indianapolis",
+      "address": "Indianapolis, IN",
+      "lat": 39.735,
+      "lng": -86.249,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 2150,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Greenwood IN",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Greenwood IN",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$18B",
+      "estimatedFacilities": 15,
+      "vertical": "Aerospace / Manufacturing"
+    },
+    {
+      "placeId": "seed-republicservices.com-39.75--86.13",
+      "name": "Republic Services — Republic Services Indianapolis Hub",
+      "address": "Indianapolis, IN",
+      "lat": 39.75,
+      "lng": -86.13,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 5500,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Greenwood IN",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Greenwood IN",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$14.9B",
+      "estimatedFacilities": 350,
+      "vertical": "Waste Management"
+    },
+    {
+      "placeId": "seed-allegion.com-39.978--86.13",
+      "name": "Allegion — Allegion HQ",
+      "address": "Carmel, IN",
+      "lat": 39.978,
+      "lng": -86.13,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 650,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Greenwood IN",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Greenwood IN",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$3.7B",
+      "estimatedFacilities": 30,
+      "vertical": "Manufacturing / Security"
+    },
+    {
+      "placeId": "seed-ryder.com-39.73--86.095",
+      "name": "Ryder System — Ryder Indianapolis",
+      "address": "Indianapolis, IN",
+      "lat": 39.73,
+      "lng": -86.095,
+      "types": [
+        "establishment",
+        "storage",
+        "moving_company"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 10000,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Greenwood IN",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Greenwood IN",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$12B",
+      "estimatedFacilities": 800,
+      "vertical": "Fleet / Logistics"
+    },
+    {
+      "placeId": "seed-allisontransmission.com-39.743--86.176",
+      "name": "Allison Transmission — Allison Transmission HQ & Plant",
+      "address": "Indianapolis, IN",
+      "lat": 39.743,
+      "lng": -86.176,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 560,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Greenwood IN",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Greenwood IN",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$2.9B",
+      "estimatedFacilities": 12,
+      "vertical": "Manufacturing / Automotive"
+    },
+    {
+      "placeId": "seed-tropicana.com-27.496--82.546",
+      "name": "Tropicana Brands (now part of PAI Partners) — Tropicana Bradenton Plant",
+      "address": "Bradenton, FL",
+      "lat": 27.496,
+      "lng": -82.546,
+      "types": [
+        "establishment",
+        "food"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 1120,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Zephyrhills FL / High Springs FL",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Zephyrhills FL / High Springs FL",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$6B",
+      "estimatedFacilities": 12,
+      "vertical": "Food & Beverage"
+    },
+    {
+      "placeId": "seed-darden.com-28.5383--81.3792",
+      "name": "Darden Restaurants — Darden Orlando Distribution",
+      "address": "Orlando, FL",
+      "lat": 28.5383,
+      "lng": -81.3792,
+      "types": [
+        "establishment",
+        "food"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 2080,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Zephyrhills FL / High Springs FL",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Zephyrhills FL / High Springs FL",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$11.4B",
+      "estimatedFacilities": 8,
+      "vertical": "Food & Beverage / Restaurant"
+    },
+    {
+      "placeId": "seed-floridacrystals.com-26.665--80.717",
+      "name": "Florida Crystals — Florida Crystals Okeelanta Mill",
+      "address": "South Bay, FL",
+      "lat": 26.665,
+      "lng": -80.717,
+      "types": [
+        "establishment",
+        "food"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 540,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Zephyrhills FL / High Springs FL",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Zephyrhills FL / High Springs FL",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$3B (ASR Group parent)",
+      "estimatedFacilities": 8,
+      "vertical": "Agriculture / Food"
+    },
+    {
+      "placeId": "seed-sclogistics.com-28.0395--81.9498",
+      "name": "Saddle Creek Logistics — Saddle Creek Lakeland HQ & DC",
+      "address": "Lakeland, FL",
+      "lat": 28.0395,
+      "lng": -81.9498,
+      "types": [
+        "establishment",
+        "storage",
+        "moving_company"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 750,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Zephyrhills FL / High Springs FL",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Zephyrhills FL / High Springs FL",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$1.5B",
+      "estimatedFacilities": 50,
+      "vertical": "3PL / Logistics"
+    },
+    {
+      "placeId": "seed-wawa.com-28.48--81.45",
+      "name": "Wawa — Wawa FL Distribution Hub",
+      "address": "Orlando, FL",
+      "lat": 28.48,
+      "lng": -81.45,
+      "types": [
+        "establishment",
+        "store"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 2100,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Zephyrhills FL / High Springs FL",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Zephyrhills FL / High Springs FL",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$16B",
+      "estimatedFacilities": 10,
+      "vertical": "Retail / C-Store"
+    },
+    {
+      "placeId": "seed-cheneybrothers.com-26.787--80.085",
+      "name": "Cheney Brothers — Cheney Brothers Riviera Beach DC",
+      "address": "Riviera Beach, FL",
+      "lat": 26.787,
+      "lng": -80.085,
+      "types": [
+        "establishment",
+        "food"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 530,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Zephyrhills FL / High Springs FL",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Zephyrhills FL / High Springs FL",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$3B",
+      "estimatedFacilities": 6,
+      "vertical": "Food & Beverage"
+    },
+    {
+      "placeId": "seed-rossstores.com-33.917--117.226",
+      "name": "Ross Stores — Ross Stores Moreno Valley DC",
+      "address": "Moreno Valley, CA",
+      "lat": 33.917,
+      "lng": -117.226,
+      "types": [
+        "establishment",
+        "store"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 2060,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Ontario CA / Cabazon CA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Ontario CA / Cabazon CA",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$20.4B",
+      "estimatedFacilities": 6,
+      "vertical": "Retail / Apparel"
+    },
+    {
+      "placeId": "seed-newellbrands.com-34.05--117.63",
+      "name": "Newell Brands — Newell Brands Ontario DC",
+      "address": "Ontario, CA",
+      "lat": 34.05,
+      "lng": -117.63,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 1300,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Ontario CA / Cabazon CA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Ontario CA / Cabazon CA",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$8.1B",
+      "estimatedFacilities": 30,
+      "vertical": "Consumer Goods / Manufacturing"
+    },
+    {
+      "placeId": "seed-staterbros.com-34.076--117.289",
+      "name": "Stater Bros. Markets — Stater Bros. San Bernardino DC",
+      "address": "San Bernardino, CA",
+      "lat": 34.076,
+      "lng": -117.289,
+      "types": [
+        "establishment",
+        "store"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 525,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Ontario CA / Cabazon CA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Ontario CA / Cabazon CA",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$4.5B",
+      "estimatedFacilities": 5,
+      "vertical": "Retail / Grocery"
+    },
+    {
+      "placeId": "seed-penskelogistics.com-34.045--117.58",
+      "name": "Penske Logistics — Penske Ontario Yard",
+      "address": "Ontario, CA",
+      "lat": 34.045,
+      "lng": -117.58,
+      "types": [
+        "establishment",
+        "storage",
+        "moving_company"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 10000,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Ontario CA / Cabazon CA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Ontario CA / Cabazon CA",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$10B",
+      "estimatedFacilities": 800,
+      "vertical": "3PL / Fleet"
+    },
+    {
+      "placeId": "seed-spectrumbrands.com-33.981--117.3755",
+      "name": "Spectrum Brands — Spectrum Brands Riverside DC",
+      "address": "Riverside, CA",
+      "lat": 33.981,
+      "lng": -117.3755,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 575,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Ontario CA / Cabazon CA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Ontario CA / Cabazon CA",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$2.9B",
+      "estimatedFacilities": 15,
+      "vertical": "Consumer Goods"
+    },
+    {
+      "placeId": "seed-lineagelogistics.com-34.054--117.31",
+      "name": "Lineage Logistics — Lineage Logistics Colton Cold Storage",
+      "address": "Colton, CA",
+      "lat": 34.054,
+      "lng": -117.31,
+      "types": [
+        "establishment",
+        "storage",
+        "moving_company"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 5800,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Ontario CA / Cabazon CA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Ontario CA / Cabazon CA",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$5.3B",
+      "estimatedFacilities": 480,
+      "vertical": "Cold Storage / 3PL"
+    },
+    {
+      "placeId": "seed-dollargeneral.com-33.9--117.39",
+      "name": "Dollar General — Dollar General Riverside DC",
+      "address": "Riverside, CA",
+      "lat": 33.9,
+      "lng": -117.39,
+      "types": [
+        "establishment",
+        "store"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 2300,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Ontario CA / Cabazon CA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Ontario CA / Cabazon CA",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$39B",
+      "estimatedFacilities": 30,
+      "vertical": "Retail / Discount"
+    },
+    {
+      "placeId": "seed-ball.com-39.939--105.053",
+      "name": "Ball Corporation — Ball Corporation HQ",
+      "address": "Broomfield, CO",
+      "lat": 39.939,
+      "lng": -105.053,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 2300,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Denver CO",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Denver CO",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$14.8B",
+      "estimatedFacilities": 30,
+      "vertical": "Manufacturing / Packaging"
+    },
+    {
+      "placeId": "seed-leprinofoods.com-39.781--104.971",
+      "name": "Leprino Foods — Leprino Foods Denver HQ & Plant",
+      "address": "Denver, CO",
+      "lat": 39.781,
+      "lng": -104.971,
+      "types": [
+        "establishment",
+        "food"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 550,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Denver CO",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Denver CO",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$4B",
+      "estimatedFacilities": 10,
+      "vertical": "Food & Beverage / Dairy"
+    },
+    {
+      "placeId": "seed-molsoncoors.com-39.7555--105.2211",
+      "name": "Molson Coors Beverage Company — Molson Coors Golden Brewery",
+      "address": "Golden, CO",
+      "lat": 39.7555,
+      "lng": -105.2211,
+      "types": [
+        "establishment",
+        "food"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 2150,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Denver CO",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Denver CO",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$11.6B",
+      "estimatedFacilities": 15,
+      "vertical": "Beverage"
+    },
+    {
+      "placeId": "seed-arrow.com-39.588--104.853",
+      "name": "Arrow Electronics — Arrow Electronics HQ",
+      "address": "Centennial, CO",
+      "lat": 39.588,
+      "lng": -104.853,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 5000,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Denver CO",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Denver CO",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$33B",
+      "estimatedFacilities": 300,
+      "vertical": "Electronics Distribution"
+    },
+    {
+      "placeId": "seed-tilray.com-39.554--105.017",
+      "name": "Denver Beer Co / Breckenridge Brewery (Tilray) — Breckenridge Brewery Littleton",
+      "address": "Littleton, CO",
+      "lat": 39.554,
+      "lng": -105.017,
+      "types": [
+        "establishment",
+        "food"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 575,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Denver CO",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Denver CO",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$1.8B",
+      "estimatedFacilities": 15,
+      "vertical": "Beverage"
+    },
+    {
+      "placeId": "seed-naturalgrocers.com-39.707--105.081",
+      "name": "Natural Grocers — Natural Grocers HQ & DC",
+      "address": "Lakewood, CO",
+      "lat": 39.707,
+      "lng": -105.081,
+      "types": [
+        "establishment",
+        "store"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 525,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Denver CO",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Denver CO",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$1.1B",
+      "estimatedFacilities": 5,
+      "vertical": "Retail / Grocery"
+    },
+    {
+      "placeId": "seed-sargento.com-43.7486--87.9765",
+      "name": "Sargento Foods — Sargento Foods HQ & Plant",
+      "address": "Plymouth, WI",
+      "lat": 43.7486,
+      "lng": -87.9765,
+      "types": [
+        "establishment",
+        "food"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 525,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Madison WI",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Madison WI",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$1.5B",
+      "estimatedFacilities": 5,
+      "vertical": "Food & Beverage / Dairy"
+    },
+    {
+      "placeId": "seed-landolakes.com-44.757--90.296",
+      "name": "Land O'Lakes — Land O'Lakes Spencer WI Plant",
+      "address": "Spencer, WI",
+      "lat": 44.757,
+      "lng": -90.296,
+      "types": [
+        "establishment",
+        "food"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 2300,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Madison WI",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Madison WI",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$18B",
+      "estimatedFacilities": 30,
+      "vertical": "Food & Beverage / Dairy"
+    },
+    {
+      "placeId": "seed-saputo.com-45.42--92.03",
+      "name": "Saputo — Saputo Almena WI Cheese Plant",
+      "address": "Almena, WI",
+      "lat": 45.42,
+      "lng": -92.03,
+      "types": [
+        "establishment",
+        "food"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 2600,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Madison WI",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Madison WI",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$12B (CAD)",
+      "estimatedFacilities": 60,
+      "vertical": "Food & Beverage / Dairy"
+    },
+    {
+      "placeId": "seed-schreiberfoods.com-44.5133--88.0133",
+      "name": "Schreiber Foods — Schreiber Foods Green Bay HQ & Plant",
+      "address": "Green Bay, WI",
+      "lat": 44.5133,
+      "lng": -88.0133,
+      "types": [
+        "establishment",
+        "food"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 1300,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Madison WI",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Madison WI",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$7B",
+      "estimatedFacilities": 30,
+      "vertical": "Food & Beverage / Dairy"
+    },
+    {
+      "placeId": "seed-oshkoshcorp.com-44.0247--88.5426",
+      "name": "Oshkosh Corporation — Oshkosh Corporation HQ & Plant",
+      "address": "Oshkosh, WI",
+      "lat": 44.0247,
+      "lng": -88.5426,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 1200,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Madison WI",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Madison WI",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$9.7B",
+      "estimatedFacilities": 20,
+      "vertical": "Manufacturing / Heavy Equipment"
+    },
+    {
+      "placeId": "seed-johnsonville.com-43.7311--87.807",
+      "name": "Johnsonville Sausage — Johnsonville HQ & Plant",
+      "address": "Sheboygan Falls, WI",
+      "lat": 43.7311,
+      "lng": -87.807,
+      "types": [
+        "establishment",
+        "food"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 525,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Madison WI",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Madison WI",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$1B",
+      "estimatedFacilities": 5,
+      "vertical": "Food & Beverage"
+    },
+    {
+      "placeId": "seed-kohler.com-43.7394--87.7817",
+      "name": "Kohler Co. — Kohler HQ & Manufacturing Complex",
+      "address": "Kohler, WI",
+      "lat": 43.7394,
+      "lng": -87.7817,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 1500,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Madison WI",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Madison WI",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$8B",
+      "estimatedFacilities": 50,
+      "vertical": "Manufacturing"
+    },
+    {
+      "placeId": "seed-meijer.com-42.88--85.65",
+      "name": "Meijer — Meijer Grand Rapids DC",
+      "address": "Grand Rapids, MI",
+      "lat": 42.88,
+      "lng": -85.65,
+      "types": [
+        "establishment",
+        "store"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 2070,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Stanwood MI",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Stanwood MI",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$21B",
+      "estimatedFacilities": 7,
+      "vertical": "Retail / Grocery"
+    },
+    {
+      "placeId": "seed-amway.com-42.9554--85.4897",
+      "name": "Amway — Amway World HQ & Manufacturing",
+      "address": "Ada, MI",
+      "lat": 42.9554,
+      "lng": -85.4897,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 1150,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Stanwood MI",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Stanwood MI",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$8.1B",
+      "estimatedFacilities": 15,
+      "vertical": "Consumer Goods / Manufacturing"
+    },
+    {
+      "placeId": "seed-steelcase.com-42.9557--85.6646",
+      "name": "Steelcase — Steelcase Grand Rapids HQ & Plant",
+      "address": "Grand Rapids, MI",
+      "lat": 42.9557,
+      "lng": -85.6646,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 575,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Stanwood MI",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Stanwood MI",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$3.2B",
+      "estimatedFacilities": 15,
+      "vertical": "Manufacturing / Furniture"
+    },
+    {
+      "placeId": "seed-millerknoll.com-42.8125--86.019",
+      "name": "MillerKnoll (Herman Miller) — MillerKnoll Zeeland HQ & Plant",
+      "address": "Zeeland, MI",
+      "lat": 42.8125,
+      "lng": -86.019,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 600,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Stanwood MI",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Stanwood MI",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$3.6B",
+      "estimatedFacilities": 20,
+      "vertical": "Manufacturing / Furniture"
+    },
+    {
+      "placeId": "seed-perrigo.com-42.5292--85.8553",
+      "name": "Perrigo Company — Perrigo Allegan MI Plant",
+      "address": "Allegan, MI",
+      "lat": 42.5292,
+      "lng": -85.8553,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 550,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Stanwood MI",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Stanwood MI",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$4.1B",
+      "estimatedFacilities": 10,
+      "vertical": "Pharmaceutical / Consumer Health"
+    },
+    {
+      "placeId": "seed-spartannash.com-42.9634--85.6681",
+      "name": "SpartanNash — SpartanNash Grand Rapids DC",
+      "address": "Grand Rapids, MI",
+      "lat": 42.9634,
+      "lng": -85.6681,
+      "types": [
+        "establishment",
+        "store"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 1180,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Stanwood MI",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Stanwood MI",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$9.7B",
+      "estimatedFacilities": 18,
+      "vertical": "Distribution / Grocery"
+    },
+    {
+      "placeId": "seed-sonoco.com-34.374--80.074",
+      "name": "Sonoco Products — Sonoco HQ & Plant",
+      "address": "Hartsville, SC",
+      "lat": 34.374,
+      "lng": -80.074,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 4000,
+      "discoveredVia": [
+        {
+          "anchor": "Primo McBee SC",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo McBee SC",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$7.1B",
+      "estimatedFacilities": 300,
+      "vertical": "Manufacturing / Packaging"
+    },
+    {
+      "placeId": "seed-nucor.com-34.31--79.86",
+      "name": "Nucor Corporation — Nucor Darlington SC Mill",
+      "address": "Darlington, SC",
+      "lat": 34.31,
+      "lng": -79.86,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 2300,
+      "discoveredVia": [
+        {
+          "anchor": "Primo McBee SC",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo McBee SC",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$34B",
+      "estimatedFacilities": 30,
+      "vertical": "Manufacturing / Steel"
+    },
+    {
+      "placeId": "seed-foodlion.com-35.671--80.474",
+      "name": "Food Lion (Ahold Delhaize) — Food Lion Salisbury NC DC",
+      "address": "Salisbury, NC",
+      "lat": 35.671,
+      "lng": -80.474,
+      "types": [
+        "establishment",
+        "store"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 2150,
+      "discoveredVia": [
+        {
+          "anchor": "Primo McBee SC",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo McBee SC",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$33B (Ahold Delhaize US)",
+      "estimatedFacilities": 15,
+      "vertical": "Retail / Grocery"
+    },
+    {
+      "placeId": "seed-sealedair.com-35.2271--80.8431",
+      "name": "Sealed Air / SEE — Sealed Air Charlotte HQ",
+      "address": "Charlotte, NC",
+      "lat": 35.2271,
+      "lng": -80.8431,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 1400,
+      "discoveredVia": [
+        {
+          "anchor": "Primo McBee SC",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo McBee SC",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$5.5B",
+      "estimatedFacilities": 40,
+      "vertical": "Manufacturing / Packaging"
+    },
+    {
+      "placeId": "seed-insteel.com-36.4993--80.6073",
+      "name": "Insteel Industries — Insteel Mount Airy Plant",
+      "address": "Mount Airy, NC",
+      "lat": 36.4993,
+      "lng": -80.6073,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 2100,
+      "discoveredVia": [
+        {
+          "anchor": "Primo McBee SC",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo McBee SC",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$600M",
+      "estimatedFacilities": 10,
+      "vertical": "Manufacturing / Steel"
+    },
+    {
+      "placeId": "seed-globalfoundries.com-42.987--73.792",
+      "name": "GlobalFoundries — GlobalFoundries Fab 8",
+      "address": "Malta, NY",
+      "lat": 42.987,
+      "lng": -73.792,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 1050,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Saratoga Springs NY",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Saratoga Springs NY",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$7.4B",
+      "estimatedFacilities": 5,
+      "vertical": "Manufacturing / Semiconductor"
+    },
+    {
+      "placeId": "seed-hannaford.com-42.532--73.705",
+      "name": "Hannaford (Ahold Delhaize) — Hannaford Schodack NY DC",
+      "address": "Schodack, NY",
+      "lat": 42.532,
+      "lng": -73.705,
+      "types": [
+        "establishment",
+        "store"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 1050,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Saratoga Springs NY",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Saratoga Springs NY",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$7B",
+      "estimatedFacilities": 5,
+      "vertical": "Retail / Grocery"
+    },
+    {
+      "placeId": "seed-irvingtissue.com-43.267--73.588",
+      "name": "Irving Tissue — Irving Tissue Fort Edward Plant",
+      "address": "Fort Edward, NY",
+      "lat": 43.267,
+      "lng": -73.588,
+      "types": [
+        "establishment"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 525,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Saratoga Springs NY",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Saratoga Springs NY",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$1B (J.D. Irving parent)",
+      "estimatedFacilities": 5,
+      "vertical": "Manufacturing / Paper"
+    },
+    {
+      "placeId": "seed-stewartsshops.com-43.084--73.7846",
+      "name": "Stewart's Shops — Stewart's Shops Saratoga Springs HQ & Dairy",
+      "address": "Saratoga Springs, NY",
+      "lat": 43.084,
+      "lng": -73.7846,
+      "types": [
+        "establishment",
+        "store"
+      ],
+      "businessStatus": "OPERATIONAL",
+      "rating": null,
+      "userRatingsTotal": 525,
+      "discoveredVia": [
+        {
+          "anchor": "Primo Saratoga Springs NY",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ],
+      "nearestPrimoSite": {
+        "name": "Primo Saratoga Springs NY",
+        "distanceMiles": 0
+      },
+      "isExistingAccount": false,
+      "estimatedRevenue": "$2B",
+      "estimatedFacilities": 5,
+      "vertical": "Retail / C-Store / Dairy"
+    }
+  ]
+}

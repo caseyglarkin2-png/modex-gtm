@@ -47,6 +47,9 @@ for (const corridor of seeds.corridors) {
         discoveredVia: [{ anchor: corridor.anchor, keyword: 'corridor-seed', distanceMiles: 0 }],
         nearestPrimoSite: { name: corridor.anchor, distanceMiles: 0 },
         isExistingAccount: false,
+        estimatedRevenue: company.estimatedRevenue,
+        estimatedFacilities: company.estimatedFacilities,
+        vertical: company.vertical,
       });
     }
   }

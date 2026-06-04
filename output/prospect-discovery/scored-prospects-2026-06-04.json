@@ -1,0 +1,2535 @@
+{
+  "generatedAt": "2026-06-04T00:20:27.489Z",
+  "inputFile": "corridor-scan-2026-06-04.json",
+  "totalDiscoveries": 68,
+  "existingAccountMatches": 2,
+  "netNewProspects": 66,
+  "tierA": 32,
+  "tierB": 33,
+  "tierC": 3,
+  "tierD": 0,
+  "corridors": [
+    {
+      "name": "Upper Macungie Township",
+      "center": {
+        "lat": 40.5552,
+        "lng": -75.5984
+      },
+      "radiusMiles": 2.9,
+      "totalProspects": 8,
+      "tierACount": 8,
+      "avgIcpScore": 84.3,
+      "topProspects": [
+        "US Foods — US Foods Allentown DC",
+        "Bimbo Bakeries USA — Bimbo Bakeries Allentown",
+        "Geodis — Geodis Logistics Allentown",
+        "NFI Industries — NFI DC Breinigsville",
+        "Wakefern Food Corp — Wakefern Distribution Center"
+      ]
+    },
+    {
+      "name": "Grand Prairie",
+      "center": {
+        "lat": 32.8386,
+        "lng": -96.8731
+      },
+      "radiusMiles": 12.3,
+      "totalProspects": 8,
+      "tierACount": 6,
+      "avgIcpScore": 81.4,
+      "topProspects": [
+        "XPO — XPO DFW Service Center",
+        "Sysco — Sysco Dallas DC",
+        "CEVA Logistics — CEVA Logistics DFW",
+        "Dean Foods (now DFA facilities) — DFA Dallas Processing Plant",
+        "McLane Company — McLane DFW DC"
+      ]
+    },
+    {
+      "name": "Indianapolis",
+      "center": {
+        "lat": 39.7452,
+        "lng": -86.1624
+      },
+      "radiusMiles": 4.7,
+      "totalProspects": 5,
+      "tierACount": 2,
+      "avgIcpScore": 69,
+      "topProspects": [
+        "Ryder System — Ryder Indianapolis",
+        "Eli Lilly and Company — Eli Lilly Indianapolis HQ & Manufacturing",
+        "Rolls-Royce North America — Rolls-Royce Indianapolis",
+        "Allison Transmission — Allison Transmission HQ & Plant",
+        "Republic Services — Republic Services Indianapolis Hub"
+      ]
+    },
+    {
+      "name": "Riverside",
+      "center": {
+        "lat": 33.9856,
+        "lng": -117.3181
+      },
+      "radiusMiles": 7.2,
+      "totalProspects": 5,
+      "tierACount": 2,
+      "avgIcpScore": 64.6,
+      "topProspects": [
+        "Lineage Logistics — Lineage Logistics Colton Cold Storage",
+        "Dollar General — Dollar General Riverside DC",
+        "Ross Stores — Ross Stores Moreno Valley DC",
+        "Stater Bros. Markets — Stater Bros. San Bernardino DC",
+        "Spectrum Brands — Spectrum Brands Riverside DC"
+      ]
+    },
+    {
+      "name": "Grand Rapids",
+      "center": {
+        "lat": 42.9386,
+        "lng": -85.6181
+      },
+      "radiusMiles": 6.6,
+      "totalProspects": 4,
+      "tierACount": 1,
+      "avgIcpScore": 61.5,
+      "topProspects": [
+        "SpartanNash — SpartanNash Grand Rapids DC",
+        "Meijer — Meijer Grand Rapids DC",
+        "Amway — Amway World HQ & Manufacturing",
+        "Steelcase — Steelcase Grand Rapids HQ & Plant"
+      ]
+    },
+    {
+      "name": "Houston",
+      "center": {
+        "lat": 29.744,
+        "lng": -95.3515
+      },
+      "radiusMiles": 6.4,
+      "totalProspects": 4,
+      "tierACount": 1,
+      "avgIcpScore": 59.3,
+      "topProspects": [
+        "Halliburton — Halliburton Houston Campus",
+        "Houston Food Bank — Houston Food Bank Keegan Center",
+        "Targa Resources — Targa Resources HQ",
+        "Core Molding Technologies — Core Molding Matamoros (ships via Houston)"
+      ]
+    },
+    {
+      "name": "Golden",
+      "center": {
+        "lat": 39.7478,
+        "lng": -105.091
+      },
+      "radiusMiles": 6.9,
+      "totalProspects": 3,
+      "tierACount": 2,
+      "avgIcpScore": 69.7,
+      "topProspects": [
+        "Molson Coors Beverage Company — Molson Coors Golden Brewery",
+        "Leprino Foods — Leprino Foods Denver HQ & Plant",
+        "Natural Grocers — Natural Grocers HQ & DC"
+      ]
+    },
+    {
+      "name": "Kohler",
+      "center": {
+        "lat": 43.7397,
+        "lng": -87.8551
+      },
+      "radiusMiles": 6.1,
+      "totalProspects": 3,
+      "tierACount": 0,
+      "avgIcpScore": 61,
+      "topProspects": [
+        "Kohler Co. — Kohler HQ & Manufacturing Complex",
+        "Sargento Foods — Sargento Foods HQ & Plant",
+        "Johnsonville Sausage — Johnsonville HQ & Plant"
+      ]
+    },
+    {
+      "name": "Ontario",
+      "center": {
+        "lat": 34.0475,
+        "lng": -117.605
+      },
+      "radiusMiles": 1.4,
+      "totalProspects": 2,
+      "tierACount": 2,
+      "avgIcpScore": 83.5,
+      "topProspects": [
+        "Penske Logistics — Penske Ontario Yard",
+        "Newell Brands — Newell Brands Ontario DC"
+      ]
+    },
+    {
+      "name": "Centennial",
+      "center": {
+        "lat": 39.571,
+        "lng": -104.935
+      },
+      "radiusMiles": 4.5,
+      "totalProspects": 2,
+      "tierACount": 1,
+      "avgIcpScore": 74,
+      "topProspects": [
+        "Arrow Electronics — Arrow Electronics HQ",
+        "Denver Beer Co / Breckenridge Brewery (Tilray) — Breckenridge Brewery Littleton"
+      ]
+    },
+    {
+      "name": "Orlando",
+      "center": {
+        "lat": 28.5092,
+        "lng": -81.4146
+      },
+      "radiusMiles": 2.9,
+      "totalProspects": 2,
+      "tierACount": 0,
+      "avgIcpScore": 66.5,
+      "topProspects": [
+        "Wawa — Wawa FL Distribution Hub",
+        "Darden Restaurants — Darden Orlando Distribution"
+      ]
+    },
+    {
+      "name": "Saratoga Springs",
+      "center": {
+        "lat": 43.0355,
+        "lng": -73.7883
+      },
+      "radiusMiles": 3.4,
+      "totalProspects": 2,
+      "tierACount": 0,
+      "avgIcpScore": 64,
+      "topProspects": [
+        "Stewart's Shops — Stewart's Shops Saratoga Springs HQ & Dairy",
+        "GlobalFoundries — GlobalFoundries Fab 8"
+      ]
+    },
+    {
+      "name": "Lakeland",
+      "center": {
+        "lat": 28.0395,
+        "lng": -81.9498
+      },
+      "radiusMiles": 0,
+      "totalProspects": 1,
+      "tierACount": 1,
+      "avgIcpScore": 83,
+      "topProspects": [
+        "Saddle Creek Logistics — Saddle Creek Lakeland HQ & DC"
+      ]
+    },
+    {
+      "name": "Almena",
+      "center": {
+        "lat": 45.42,
+        "lng": -92.03
+      },
+      "radiusMiles": 0,
+      "totalProspects": 1,
+      "tierACount": 1,
+      "avgIcpScore": 80,
+      "topProspects": [
+        "Saputo — Saputo Almena WI Cheese Plant"
+      ]
+    },
+    {
+      "name": "Channelview",
+      "center": {
+        "lat": 29.777,
+        "lng": -95.115
+      },
+      "radiusMiles": 0,
+      "totalProspects": 1,
+      "tierACount": 1,
+      "avgIcpScore": 75,
+      "topProspects": [
+        "LyondellBasell — LyondellBasell Channelview Complex"
+      ]
+    },
+    {
+      "name": "Spencer",
+      "center": {
+        "lat": 44.757,
+        "lng": -90.296
+      },
+      "radiusMiles": 0,
+      "totalProspects": 1,
+      "tierACount": 1,
+      "avgIcpScore": 75,
+      "topProspects": [
+        "Land O'Lakes — Land O'Lakes Spencer WI Plant"
+      ]
+    },
+    {
+      "name": "Green Bay",
+      "center": {
+        "lat": 44.5133,
+        "lng": -88.0133
+      },
+      "radiusMiles": 0,
+      "totalProspects": 1,
+      "tierACount": 1,
+      "avgIcpScore": 72,
+      "topProspects": [
+        "Schreiber Foods — Schreiber Foods Green Bay HQ & Plant"
+      ]
+    },
+    {
+      "name": "Hartsville",
+      "center": {
+        "lat": 34.374,
+        "lng": -80.074
+      },
+      "radiusMiles": 0,
+      "totalProspects": 1,
+      "tierACount": 1,
+      "avgIcpScore": 72,
+      "topProspects": [
+        "Sonoco Products — Sonoco HQ & Plant"
+      ]
+    },
+    {
+      "name": "Broomfield",
+      "center": {
+        "lat": 39.939,
+        "lng": -105.053
+      },
+      "radiusMiles": 0,
+      "totalProspects": 1,
+      "tierACount": 1,
+      "avgIcpScore": 70,
+      "topProspects": [
+        "Ball Corporation — Ball Corporation HQ"
+      ]
+    },
+    {
+      "name": "Darlington",
+      "center": {
+        "lat": 34.31,
+        "lng": -79.86
+      },
+      "radiusMiles": 0,
+      "totalProspects": 1,
+      "tierACount": 0,
+      "avgIcpScore": 68,
+      "topProspects": [
+        "Nucor Corporation — Nucor Darlington SC Mill"
+      ]
+    },
+    {
+      "name": "Bradenton",
+      "center": {
+        "lat": 27.496,
+        "lng": -82.546
+      },
+      "radiusMiles": 0,
+      "totalProspects": 1,
+      "tierACount": 0,
+      "avgIcpScore": 67,
+      "topProspects": [
+        "Tropicana Brands (now part of PAI Partners) — Tropicana Bradenton Plant"
+      ]
+    },
+    {
+      "name": "Salisbury",
+      "center": {
+        "lat": 35.671,
+        "lng": -80.474
+      },
+      "radiusMiles": 0,
+      "totalProspects": 1,
+      "tierACount": 0,
+      "avgIcpScore": 65,
+      "topProspects": [
+        "Food Lion (Ahold Delhaize) — Food Lion Salisbury NC DC"
+      ]
+    },
+    {
+      "name": "Charlotte",
+      "center": {
+        "lat": 35.2271,
+        "lng": -80.8431
+      },
+      "radiusMiles": 0,
+      "totalProspects": 1,
+      "tierACount": 0,
+      "avgIcpScore": 62,
+      "topProspects": [
+        "Sealed Air / SEE — Sealed Air Charlotte HQ"
+      ]
+    },
+    {
+      "name": "Carmel",
+      "center": {
+        "lat": 39.978,
+        "lng": -86.13
+      },
+      "radiusMiles": 0,
+      "totalProspects": 1,
+      "tierACount": 0,
+      "avgIcpScore": 61,
+      "topProspects": [
+        "Allegion — Allegion HQ"
+      ]
+    },
+    {
+      "name": "Schodack",
+      "center": {
+        "lat": 42.532,
+        "lng": -73.705
+      },
+      "radiusMiles": 0,
+      "totalProspects": 1,
+      "tierACount": 0,
+      "avgIcpScore": 60,
+      "topProspects": [
+        "Hannaford (Ahold Delhaize) — Hannaford Schodack NY DC"
+      ]
+    },
+    {
+      "name": "South Bay",
+      "center": {
+        "lat": 26.665,
+        "lng": -80.717
+      },
+      "radiusMiles": 0,
+      "totalProspects": 1,
+      "tierACount": 0,
+      "avgIcpScore": 58,
+      "topProspects": [
+        "Florida Crystals — Florida Crystals Okeelanta Mill"
+      ]
+    },
+    {
+      "name": "Riviera Beach",
+      "center": {
+        "lat": 26.787,
+        "lng": -80.085
+      },
+      "radiusMiles": 0,
+      "totalProspects": 1,
+      "tierACount": 0,
+      "avgIcpScore": 58,
+      "topProspects": [
+        "Cheney Brothers — Cheney Brothers Riviera Beach DC"
+      ]
+    },
+    {
+      "name": "Oshkosh",
+      "center": {
+        "lat": 44.0247,
+        "lng": -88.5426
+      },
+      "radiusMiles": 0,
+      "totalProspects": 1,
+      "tierACount": 0,
+      "avgIcpScore": 57,
+      "topProspects": [
+        "Oshkosh Corporation — Oshkosh Corporation HQ & Plant"
+      ]
+    },
+    {
+      "name": "Zeeland",
+      "center": {
+        "lat": 42.8125,
+        "lng": -86.019
+      },
+      "radiusMiles": 0,
+      "totalProspects": 1,
+      "tierACount": 0,
+      "avgIcpScore": 53,
+      "topProspects": [
+        "MillerKnoll (Herman Miller) — MillerKnoll Zeeland HQ & Plant"
+      ]
+    },
+    {
+      "name": "Allegan",
+      "center": {
+        "lat": 42.5292,
+        "lng": -85.8553
+      },
+      "radiusMiles": 0,
+      "totalProspects": 1,
+      "tierACount": 0,
+      "avgIcpScore": 53,
+      "topProspects": [
+        "Perrigo Company — Perrigo Allegan MI Plant"
+      ]
+    },
+    {
+      "name": "Fort Edward",
+      "center": {
+        "lat": 43.267,
+        "lng": -73.588
+      },
+      "radiusMiles": 0,
+      "totalProspects": 1,
+      "tierACount": 0,
+      "avgIcpScore": 53,
+      "topProspects": [
+        "Irving Tissue — Irving Tissue Fort Edward Plant"
+      ]
+    },
+    {
+      "name": "Mount Airy",
+      "center": {
+        "lat": 36.4993,
+        "lng": -80.6073
+      },
+      "radiusMiles": 0,
+      "totalProspects": 1,
+      "tierACount": 0,
+      "avgIcpScore": 49,
+      "topProspects": [
+        "Insteel Industries — Insteel Mount Airy Plant"
+      ]
+    }
+  ],
+  "prospects": [
+    {
+      "name": "Penske Logistics — Penske Ontario Yard",
+      "address": "Ontario, CA",
+      "lat": 34.045,
+      "lng": -117.58,
+      "placeId": "seed-penskelogistics.com-34.045--117.58",
+      "icpScore": 95,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 25,
+        "networkComplexity": 25,
+        "primoProximity": 10,
+        "corridorDensity": 0,
+        "placeTypeBonus": 10
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Ontario Factory",
+        "distanceMiles": 1
+      },
+      "corridor": "Upper Macungie Township",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Ontario CA / Cabazon CA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Ryder System — Ryder Indianapolis",
+      "address": "Indianapolis, IN",
+      "lat": 39.73,
+      "lng": -86.095,
+      "placeId": "seed-ryder.com-39.73--86.095",
+      "icpScore": 94,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 25,
+        "networkComplexity": 25,
+        "primoProximity": 8,
+        "corridorDensity": 1,
+        "placeTypeBonus": 10
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Greenwood Indiana",
+        "distanceMiles": 9.4
+      },
+      "corridor": "Grand Prairie",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Greenwood IN",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "US Foods — US Foods Allentown DC",
+      "address": "Upper Macungie Township, PA",
+      "lat": 40.565,
+      "lng": -75.593,
+      "placeId": "seed-usfoods.com-40.565--75.593",
+      "icpScore": 93,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 25,
+        "networkComplexity": 25,
+        "primoProximity": 10,
+        "corridorDensity": 3,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US DC NFI - Breinigsville",
+        "distanceMiles": 2.9
+      },
+      "corridor": "Indianapolis",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Breinigsville PA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Bimbo Bakeries USA — Bimbo Bakeries Allentown",
+      "address": "Allentown, PA",
+      "lat": 40.5744,
+      "lng": -75.5856,
+      "placeId": "seed-bimbobakeriesusa.com-40.5744--75.5856",
+      "icpScore": 93,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 25,
+        "networkComplexity": 25,
+        "primoProximity": 10,
+        "corridorDensity": 3,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US DC NFI - Breinigsville",
+        "distanceMiles": 3.6
+      },
+      "corridor": "Indianapolis",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Breinigsville PA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Geodis — Geodis Logistics Allentown",
+      "address": "Allentown, PA",
+      "lat": 40.541,
+      "lng": -75.568,
+      "placeId": "seed-geodis.com-40.541--75.568",
+      "icpScore": 93,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 25,
+        "networkComplexity": 20,
+        "primoProximity": 10,
+        "corridorDensity": 3,
+        "placeTypeBonus": 10
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US DC NFI - Breinigsville",
+        "distanceMiles": 3.2
+      },
+      "corridor": "Indianapolis",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Breinigsville PA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "XPO — XPO DFW Service Center",
+      "address": "Grand Prairie, TX",
+      "lat": 32.717,
+      "lng": -96.95,
+      "placeId": "seed-xpo.com-32.717--96.95",
+      "icpScore": 93,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 22,
+        "networkComplexity": 25,
+        "primoProximity": 10,
+        "corridorDensity": 1,
+        "placeTypeBonus": 10
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Dallas 2 Factory",
+        "distanceMiles": 1.5
+      },
+      "corridor": "Riverside",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Dallas TX",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "NFI Industries — NFI DC Breinigsville",
+      "address": "Breinigsville, PA",
+      "lat": 40.5375,
+      "lng": -75.6495,
+      "placeId": "seed-nfiindustries.com-40.5375--75.6495",
+      "icpScore": 91,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 18,
+        "networkComplexity": 25,
+        "primoProximity": 10,
+        "corridorDensity": 3,
+        "placeTypeBonus": 10
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Allentown Factory",
+        "distanceMiles": 0.9
+      },
+      "corridor": "Indianapolis",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Breinigsville PA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Sysco — Sysco Dallas DC",
+      "address": "Grand Prairie, TX",
+      "lat": 32.696,
+      "lng": -96.978,
+      "placeId": "seed-sysco.com-32.696--96.978",
+      "icpScore": 91,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 25,
+        "networkComplexity": 25,
+        "primoProximity": 10,
+        "corridorDensity": 1,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Dallas 2 Factory",
+        "distanceMiles": 1.8
+      },
+      "corridor": "Riverside",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Dallas TX",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "CEVA Logistics — CEVA Logistics DFW",
+      "address": "Coppell, TX",
+      "lat": 32.965,
+      "lng": -96.975,
+      "placeId": "seed-cevalogistics.com-32.965--96.975",
+      "icpScore": 90,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 25,
+        "networkComplexity": 25,
+        "primoProximity": 5,
+        "corridorDensity": 0,
+        "placeTypeBonus": 10
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Dallas 2 Factory",
+        "distanceMiles": 18.7
+      },
+      "corridor": "Riverside",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Dallas TX",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Lineage Logistics — Lineage Logistics Colton Cold Storage",
+      "address": "Colton, CA",
+      "lat": 34.054,
+      "lng": -117.31,
+      "placeId": "seed-lineagelogistics.com-34.054--117.31",
+      "icpScore": 87,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 22,
+        "networkComplexity": 25,
+        "primoProximity": 5,
+        "corridorDensity": 0,
+        "placeTypeBonus": 10
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Ontario Factory",
+        "distanceMiles": 16.3
+      },
+      "corridor": "Grand Rapids",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Ontario CA / Cabazon CA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "McLane Company — McLane DFW DC",
+      "address": "Carrollton, TX",
+      "lat": 32.976,
+      "lng": -96.89,
+      "placeId": "seed-mclaneco.com-32.976--96.89",
+      "icpScore": 85,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 25,
+        "networkComplexity": 25,
+        "primoProximity": 5,
+        "corridorDensity": 0,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Dallas 2 Factory",
+        "distanceMiles": 19.7
+      },
+      "corridor": "Riverside",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Dallas TX",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Dean Foods (now DFA facilities) — DFA Dallas Processing Plant",
+      "address": "Dallas, TX",
+      "lat": 32.7767,
+      "lng": -96.797,
+      "placeId": "seed-dfamilk.com-32.7767--96.797",
+      "icpScore": 85,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 25,
+        "networkComplexity": 25,
+        "primoProximity": 5,
+        "corridorDensity": 0,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Dallas 2 Factory",
+        "distanceMiles": 10.4
+      },
+      "corridor": "Riverside",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Dallas TX",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Saddle Creek Logistics — Saddle Creek Lakeland HQ & DC",
+      "address": "Lakeland, FL",
+      "lat": 28.0395,
+      "lng": -81.9498,
+      "placeId": "seed-sclogistics.com-28.0395--81.9498",
+      "icpScore": 83,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 18,
+        "networkComplexity": 25,
+        "primoProximity": 5,
+        "corridorDensity": 0,
+        "placeTypeBonus": 10
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Zephyrhills Factory",
+        "distanceMiles": 20.1
+      },
+      "corridor": "Houston",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Zephyrhills FL / High Springs FL",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Arrow Electronics — Arrow Electronics HQ",
+      "address": "Centennial, CO",
+      "lat": 39.588,
+      "lng": -104.853,
+      "placeId": "seed-arrow.com-39.588--104.853",
+      "icpScore": 80,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 25,
+        "networkComplexity": 25,
+        "primoProximity": 5,
+        "corridorDensity": 0,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Denver Factory",
+        "distanceMiles": 12.7
+      },
+      "corridor": "Golden",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Denver CO",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Saputo — Saputo Almena WI Cheese Plant",
+      "address": "Almena, WI",
+      "lat": 45.42,
+      "lng": -92.03,
+      "placeId": "seed-saputo.com-45.42--92.03",
+      "icpScore": 80,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 25,
+        "networkComplexity": 25,
+        "primoProximity": 0,
+        "corridorDensity": 0,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Madison Factory",
+        "distanceMiles": 211.1
+      },
+      "corridor": "Kohler",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Madison WI",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Estes Express Lines — Estes DFW Terminal",
+      "address": "Grand Prairie, TX",
+      "lat": 32.72,
+      "lng": -96.94,
+      "placeId": "seed-estes-express.com-32.72--96.94",
+      "icpScore": 79,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 18,
+        "networkComplexity": 25,
+        "primoProximity": 10,
+        "corridorDensity": 1,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Dallas 2 Factory",
+        "distanceMiles": 1.8
+      },
+      "corridor": "Riverside",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Dallas TX",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Wakefern Food Corp — Wakefern Distribution Center",
+      "address": "Breinigsville, PA",
+      "lat": 40.5465,
+      "lng": -75.6305,
+      "placeId": "seed-wakefern.com-40.5465--75.6305",
+      "icpScore": 78,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 25,
+        "networkComplexity": 15,
+        "primoProximity": 10,
+        "corridorDensity": 3,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US DC NFI - Breinigsville",
+        "distanceMiles": 0.9
+      },
+      "corridor": "Indianapolis",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Breinigsville PA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Halliburton — Halliburton Houston Campus",
+      "address": "Houston, TX",
+      "lat": 29.763,
+      "lng": -95.361,
+      "placeId": "seed-halliburton.com-29.763--95.361",
+      "icpScore": 78,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 25,
+        "networkComplexity": 25,
+        "primoProximity": 8,
+        "corridorDensity": 0,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL S Houston Factory",
+        "distanceMiles": 6.9
+      },
+      "corridor": "Ontario",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Houston TX / Pasadena TX",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Ocean Spray — Ocean Spray Distribution",
+      "address": "Breinigsville, PA",
+      "lat": 40.566,
+      "lng": -75.596,
+      "placeId": "seed-oceanspray.com-40.566--75.596",
+      "icpScore": 76,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 18,
+        "networkComplexity": 15,
+        "primoProximity": 10,
+        "corridorDensity": 3,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US DC NFI - Breinigsville",
+        "distanceMiles": 2.8
+      },
+      "corridor": "Indianapolis",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Breinigsville PA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Bridgestone Americas — Bridgestone Americas Distribution Center",
+      "address": "Upper Macungie Township, PA",
+      "lat": 40.5595,
+      "lng": -75.578,
+      "placeId": "seed-bridgestoneamericas.com-40.5595--75.578",
+      "icpScore": 75,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 22,
+        "networkComplexity": 20,
+        "primoProximity": 10,
+        "corridorDensity": 3,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US DC NFI - Breinigsville",
+        "distanceMiles": 3.2
+      },
+      "corridor": "Indianapolis",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Breinigsville PA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Uline — Uline Allentown DC",
+      "address": "Upper Macungie Township, PA",
+      "lat": 40.552,
+      "lng": -75.587,
+      "placeId": "seed-uline.com-40.552--75.587",
+      "icpScore": 75,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 22,
+        "networkComplexity": 15,
+        "primoProximity": 10,
+        "corridorDensity": 3,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US DC NFI - Breinigsville",
+        "distanceMiles": 2.5
+      },
+      "corridor": "Indianapolis",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Breinigsville PA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "LyondellBasell — LyondellBasell Channelview Complex",
+      "address": "Channelview, TX",
+      "lat": 29.777,
+      "lng": -95.115,
+      "placeId": "seed-lyondellbasell.com-29.777--95.115",
+      "icpScore": 75,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 25,
+        "networkComplexity": 25,
+        "primoProximity": 5,
+        "corridorDensity": 0,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Pasadena Factory",
+        "distanceMiles": 15
+      },
+      "corridor": "Centennial",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Houston TX / Pasadena TX",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Dollar General — Dollar General Riverside DC",
+      "address": "Riverside, CA",
+      "lat": 33.9,
+      "lng": -117.39,
+      "placeId": "seed-dollargeneral.com-33.9--117.39",
+      "icpScore": 75,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 25,
+        "networkComplexity": 20,
+        "primoProximity": 5,
+        "corridorDensity": 0,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Ontario Factory",
+        "distanceMiles": 15
+      },
+      "corridor": "Grand Rapids",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Ontario CA / Cabazon CA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Molson Coors Beverage Company — Molson Coors Golden Brewery",
+      "address": "Golden, CO",
+      "lat": 39.7555,
+      "lng": -105.2211,
+      "placeId": "seed-molsoncoors.com-39.7555--105.2211",
+      "icpScore": 75,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 25,
+        "networkComplexity": 15,
+        "primoProximity": 5,
+        "corridorDensity": 0,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Denver Factory",
+        "distanceMiles": 12.3
+      },
+      "corridor": "Orlando",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Denver CO",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Land O'Lakes — Land O'Lakes Spencer WI Plant",
+      "address": "Spencer, WI",
+      "lat": 44.757,
+      "lng": -90.296,
+      "placeId": "seed-landolakes.com-44.757--90.296",
+      "icpScore": 75,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 25,
+        "networkComplexity": 20,
+        "primoProximity": 0,
+        "corridorDensity": 0,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Madison Factory",
+        "distanceMiles": 127.1
+      },
+      "corridor": "Saratoga Springs",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Madison WI",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Leprino Foods — Leprino Foods Denver HQ & Plant",
+      "address": "Denver, CO",
+      "lat": 39.781,
+      "lng": -104.971,
+      "placeId": "seed-leprinofoods.com-39.781--104.971",
+      "icpScore": 73,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 18,
+        "networkComplexity": 15,
+        "primoProximity": 10,
+        "corridorDensity": 0,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Denver Factory",
+        "distanceMiles": 3.1
+      },
+      "corridor": "Orlando",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Denver CO",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Newell Brands — Newell Brands Ontario DC",
+      "address": "Ontario, CA",
+      "lat": 34.05,
+      "lng": -117.63,
+      "placeId": "seed-newellbrands.com-34.05--117.63",
+      "icpScore": 72,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 22,
+        "networkComplexity": 20,
+        "primoProximity": 10,
+        "corridorDensity": 0,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Ontario Factory",
+        "distanceMiles": 2.3
+      },
+      "corridor": "Upper Macungie Township",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Ontario CA / Cabazon CA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Schreiber Foods — Schreiber Foods Green Bay HQ & Plant",
+      "address": "Green Bay, WI",
+      "lat": 44.5133,
+      "lng": -88.0133,
+      "placeId": "seed-schreiberfoods.com-44.5133--88.0133",
+      "icpScore": 72,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 22,
+        "networkComplexity": 20,
+        "primoProximity": 0,
+        "corridorDensity": 0,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Madison Factory",
+        "distanceMiles": 120.1
+      },
+      "corridor": "Lakeland",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Madison WI",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Sonoco Products — Sonoco HQ & Plant",
+      "address": "Hartsville, SC",
+      "lat": 34.374,
+      "lng": -80.074,
+      "placeId": "seed-sonoco.com-34.374--80.074",
+      "icpScore": 72,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 22,
+        "networkComplexity": 25,
+        "primoProximity": 5,
+        "corridorDensity": 0,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL McBee Factory",
+        "distanceMiles": 12.4
+      },
+      "corridor": "Almena",
+      "discoveredVia": [
+        {
+          "anchor": "Primo McBee SC",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Eli Lilly and Company — Eli Lilly Indianapolis HQ & Manufacturing",
+      "address": "Indianapolis, IN",
+      "lat": 39.768,
+      "lng": -86.162,
+      "placeId": "seed-lilly.com-39.768--86.162",
+      "icpScore": 71,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 25,
+        "networkComplexity": 20,
+        "primoProximity": 5,
+        "corridorDensity": 1,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": true,
+      "existingAccountSlug": "keurig-dr-pepper",
+      "nearestPrimoSite": {
+        "name": "US PL Greenwood Indiana",
+        "distanceMiles": 12.2
+      },
+      "corridor": "Grand Prairie",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Greenwood IN",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Ball Corporation — Ball Corporation HQ",
+      "address": "Broomfield, CO",
+      "lat": 39.939,
+      "lng": -105.053,
+      "placeId": "seed-ball.com-39.939--105.053",
+      "icpScore": 70,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 25,
+        "networkComplexity": 20,
+        "primoProximity": 5,
+        "corridorDensity": 0,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Denver Factory",
+        "distanceMiles": 14.2
+      },
+      "corridor": "Channelview",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Denver CO",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "SpartanNash — SpartanNash Grand Rapids DC",
+      "address": "Grand Rapids, MI",
+      "lat": 42.9634,
+      "lng": -85.6681,
+      "placeId": "seed-spartannash.com-42.9634--85.6681",
+      "icpScore": 70,
+      "tier": "A",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 22,
+        "networkComplexity": 15,
+        "primoProximity": 3,
+        "corridorDensity": 0,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Mecosta Factory",
+        "distanceMiles": 48.5
+      },
+      "corridor": "Spencer",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Stanwood MI",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Wawa — Wawa FL Distribution Hub",
+      "address": "Orlando, FL",
+      "lat": 28.48,
+      "lng": -81.45,
+      "placeId": "seed-wawa.com-28.48--81.45",
+      "icpScore": 68,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 25,
+        "networkComplexity": 15,
+        "primoProximity": 3,
+        "corridorDensity": 0,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Zephyrhills Factory",
+        "distanceMiles": 47.3
+      },
+      "corridor": "Green Bay",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Zephyrhills FL / High Springs FL",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Denver Beer Co / Breckenridge Brewery (Tilray) — Breckenridge Brewery Littleton",
+      "address": "Littleton, CO",
+      "lat": 39.554,
+      "lng": -105.017,
+      "placeId": "seed-tilray.com-39.554--105.017",
+      "icpScore": 68,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 18,
+        "networkComplexity": 15,
+        "primoProximity": 5,
+        "corridorDensity": 0,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Denver Factory",
+        "distanceMiles": 12.9
+      },
+      "corridor": "Golden",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Denver CO",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Nucor Corporation — Nucor Darlington SC Mill",
+      "address": "Darlington, SC",
+      "lat": 34.31,
+      "lng": -79.86,
+      "placeId": "seed-nucor.com-34.31--79.86",
+      "icpScore": 68,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 25,
+        "networkComplexity": 20,
+        "primoProximity": 3,
+        "corridorDensity": 0,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL McBee Factory",
+        "distanceMiles": 25.3
+      },
+      "corridor": "Hartsville",
+      "discoveredVia": [
+        {
+          "anchor": "Primo McBee SC",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Stewart's Shops — Stewart's Shops Saratoga Springs HQ & Dairy",
+      "address": "Saratoga Springs, NY",
+      "lat": 43.084,
+      "lng": -73.7846,
+      "placeId": "seed-stewartsshops.com-43.084--73.7846",
+      "icpScore": 68,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 18,
+        "networkComplexity": 10,
+        "primoProximity": 10,
+        "corridorDensity": 0,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Saratoga Spring Factory",
+        "distanceMiles": 0.9
+      },
+      "corridor": "Broomfield",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Saratoga Springs NY",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Tropicana Brands (now part of PAI Partners) — Tropicana Bradenton Plant",
+      "address": "Bradenton, FL",
+      "lat": 27.496,
+      "lng": -82.546,
+      "placeId": "seed-tropicana.com-27.496--82.546",
+      "icpScore": 67,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 22,
+        "networkComplexity": 15,
+        "primoProximity": 0,
+        "corridorDensity": 0,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Zephyrhills Factory",
+        "distanceMiles": 56.4
+      },
+      "corridor": "Darlington",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Zephyrhills FL / High Springs FL",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Kohler Co. — Kohler HQ & Manufacturing Complex",
+      "address": "Kohler, WI",
+      "lat": 43.7394,
+      "lng": -87.7817,
+      "placeId": "seed-kohler.com-43.7394--87.7817",
+      "icpScore": 67,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 22,
+        "networkComplexity": 25,
+        "primoProximity": 0,
+        "corridorDensity": 0,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Madison Factory",
+        "distanceMiles": 90.8
+      },
+      "corridor": "Bradenton",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Madison WI",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Texas Instruments — TI Dallas Fab",
+      "address": "Dallas, TX",
+      "lat": 32.91,
+      "lng": -96.75,
+      "placeId": "seed-ti.com-32.91--96.75",
+      "icpScore": 65,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 25,
+        "networkComplexity": 15,
+        "primoProximity": 5,
+        "corridorDensity": 0,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Dallas 2 Factory",
+        "distanceMiles": 18.8
+      },
+      "corridor": "Riverside",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Dallas TX",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Rolls-Royce North America — Rolls-Royce Indianapolis",
+      "address": "Indianapolis, IN",
+      "lat": 39.735,
+      "lng": -86.249,
+      "placeId": "seed-rolls-royce.com-39.735--86.249",
+      "icpScore": 65,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 25,
+        "networkComplexity": 15,
+        "primoProximity": 5,
+        "corridorDensity": 0,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Greenwood Indiana",
+        "distanceMiles": 12
+      },
+      "corridor": "Grand Prairie",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Greenwood IN",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Darden Restaurants — Darden Orlando Distribution",
+      "address": "Orlando, FL",
+      "lat": 28.5383,
+      "lng": -81.3792,
+      "placeId": "seed-darden.com-28.5383--81.3792",
+      "icpScore": 65,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 25,
+        "networkComplexity": 10,
+        "primoProximity": 0,
+        "corridorDensity": 0,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Zephyrhills Factory",
+        "distanceMiles": 52.8
+      },
+      "corridor": "Green Bay",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Zephyrhills FL / High Springs FL",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Ross Stores — Ross Stores Moreno Valley DC",
+      "address": "Moreno Valley, CA",
+      "lat": 33.917,
+      "lng": -117.226,
+      "placeId": "seed-rossstores.com-33.917--117.226",
+      "icpScore": 65,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 25,
+        "networkComplexity": 10,
+        "primoProximity": 5,
+        "corridorDensity": 0,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Ontario Factory",
+        "distanceMiles": 22.6
+      },
+      "corridor": "Grand Rapids",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Ontario CA / Cabazon CA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Food Lion (Ahold Delhaize) — Food Lion Salisbury NC DC",
+      "address": "Salisbury, NC",
+      "lat": 35.671,
+      "lng": -80.474,
+      "placeId": "seed-foodlion.com-35.671--80.474",
+      "icpScore": 65,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 25,
+        "networkComplexity": 15,
+        "primoProximity": 0,
+        "corridorDensity": 0,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL McBee Factory",
+        "distanceMiles": 83.9
+      },
+      "corridor": "Salisbury",
+      "discoveredVia": [
+        {
+          "anchor": "Primo McBee SC",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Lennox International — Lennox HQ & Plant",
+      "address": "Richardson, TX",
+      "lat": 32.948,
+      "lng": -96.705,
+      "placeId": "seed-lennoxinternational.com-32.948--96.705",
+      "icpScore": 63,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 18,
+        "networkComplexity": 20,
+        "primoProximity": 5,
+        "corridorDensity": 0,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Dallas 2 Factory",
+        "distanceMiles": 22.4
+      },
+      "corridor": "Riverside",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Dallas TX",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Sealed Air / SEE — Sealed Air Charlotte HQ",
+      "address": "Charlotte, NC",
+      "lat": 35.2271,
+      "lng": -80.8431,
+      "placeId": "seed-sealedair.com-35.2271--80.8431",
+      "icpScore": 62,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 22,
+        "networkComplexity": 20,
+        "primoProximity": 0,
+        "corridorDensity": 0,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL McBee Factory",
+        "distanceMiles": 61.9
+      },
+      "corridor": "Charlotte",
+      "discoveredVia": [
+        {
+          "anchor": "Primo McBee SC",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Allegion — Allegion HQ",
+      "address": "Carmel, IN",
+      "lat": 39.978,
+      "lng": -86.13,
+      "placeId": "seed-allegion.com-39.978--86.13",
+      "icpScore": 61,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 18,
+        "networkComplexity": 20,
+        "primoProximity": 3,
+        "corridorDensity": 0,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Greenwood Indiana",
+        "distanceMiles": 26.5
+      },
+      "corridor": "Carmel",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Greenwood IN",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Natural Grocers — Natural Grocers HQ & DC",
+      "address": "Lakewood, CO",
+      "lat": 39.707,
+      "lng": -105.081,
+      "placeId": "seed-naturalgrocers.com-39.707--105.081",
+      "icpScore": 61,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 18,
+        "networkComplexity": 10,
+        "primoProximity": 8,
+        "corridorDensity": 0,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Denver Factory",
+        "distanceMiles": 5.3
+      },
+      "corridor": "Orlando",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Denver CO",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Meijer — Meijer Grand Rapids DC",
+      "address": "Grand Rapids, MI",
+      "lat": 42.88,
+      "lng": -85.65,
+      "placeId": "seed-meijer.com-42.88--85.65",
+      "icpScore": 60,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 25,
+        "networkComplexity": 10,
+        "primoProximity": 0,
+        "corridorDensity": 0,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Mecosta Factory",
+        "distanceMiles": 53.2
+      },
+      "corridor": "Spencer",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Stanwood MI",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Amway — Amway World HQ & Manufacturing",
+      "address": "Ada, MI",
+      "lat": 42.9554,
+      "lng": -85.4897,
+      "placeId": "seed-amway.com-42.9554--85.4897",
+      "icpScore": 60,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 22,
+        "networkComplexity": 15,
+        "primoProximity": 3,
+        "corridorDensity": 0,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Mecosta Factory",
+        "distanceMiles": 45.4
+      },
+      "corridor": "Spencer",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Stanwood MI",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "GlobalFoundries — GlobalFoundries Fab 8",
+      "address": "Malta, NY",
+      "lat": 42.987,
+      "lng": -73.792,
+      "placeId": "seed-globalfoundries.com-42.987--73.792",
+      "icpScore": 60,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 22,
+        "networkComplexity": 10,
+        "primoProximity": 8,
+        "corridorDensity": 0,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Saratoga Spring Factory",
+        "distanceMiles": 5.8
+      },
+      "corridor": "Broomfield",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Saratoga Springs NY",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Hannaford (Ahold Delhaize) — Hannaford Schodack NY DC",
+      "address": "Schodack, NY",
+      "lat": 42.532,
+      "lng": -73.705,
+      "placeId": "seed-hannaford.com-42.532--73.705",
+      "icpScore": 60,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 22,
+        "networkComplexity": 10,
+        "primoProximity": 3,
+        "corridorDensity": 0,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": true,
+      "existingAccountSlug": "ford",
+      "nearestPrimoSite": {
+        "name": "US PL Saratoga Spring Factory",
+        "distanceMiles": 37.5
+      },
+      "corridor": "Schodack",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Saratoga Springs NY",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Allison Transmission — Allison Transmission HQ & Plant",
+      "address": "Indianapolis, IN",
+      "lat": 39.743,
+      "lng": -86.176,
+      "placeId": "seed-allisontransmission.com-39.743--86.176",
+      "icpScore": 59,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 18,
+        "networkComplexity": 15,
+        "primoProximity": 5,
+        "corridorDensity": 1,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Greenwood Indiana",
+        "distanceMiles": 10.7
+      },
+      "corridor": "Grand Prairie",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Greenwood IN",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Houston Food Bank — Houston Food Bank Keegan Center",
+      "address": "Houston, TX",
+      "lat": 29.748,
+      "lng": -95.287,
+      "placeId": "seed-houstonfoodbank.org-29.748--95.287",
+      "icpScore": 58,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 14,
+        "networkComplexity": 5,
+        "primoProximity": 8,
+        "corridorDensity": 1,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL S Houston Factory",
+        "distanceMiles": 8.2
+      },
+      "corridor": "Ontario",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Houston TX / Pasadena TX",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Florida Crystals — Florida Crystals Okeelanta Mill",
+      "address": "South Bay, FL",
+      "lat": 26.665,
+      "lng": -80.717,
+      "placeId": "seed-floridacrystals.com-26.665--80.717",
+      "icpScore": 58,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 18,
+        "networkComplexity": 10,
+        "primoProximity": 0,
+        "corridorDensity": 0,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Zephyrhills Factory",
+        "distanceMiles": 141.4
+      },
+      "corridor": "South Bay",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Zephyrhills FL / High Springs FL",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Cheney Brothers — Cheney Brothers Riviera Beach DC",
+      "address": "Riviera Beach, FL",
+      "lat": 26.787,
+      "lng": -80.085,
+      "placeId": "seed-cheneybrothers.com-26.787--80.085",
+      "icpScore": 58,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 18,
+        "networkComplexity": 10,
+        "primoProximity": 0,
+        "corridorDensity": 0,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Zephyrhills Factory",
+        "distanceMiles": 163.3
+      },
+      "corridor": "Riviera Beach",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Zephyrhills FL / High Springs FL",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Stater Bros. Markets — Stater Bros. San Bernardino DC",
+      "address": "San Bernardino, CA",
+      "lat": 34.076,
+      "lng": -117.289,
+      "placeId": "seed-staterbros.com-34.076--117.289",
+      "icpScore": 58,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 18,
+        "networkComplexity": 10,
+        "primoProximity": 5,
+        "corridorDensity": 0,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Ontario Factory",
+        "distanceMiles": 17.6
+      },
+      "corridor": "Grand Rapids",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Ontario CA / Cabazon CA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Sargento Foods — Sargento Foods HQ & Plant",
+      "address": "Plymouth, WI",
+      "lat": 43.7486,
+      "lng": -87.9765,
+      "placeId": "seed-sargento.com-43.7486--87.9765",
+      "icpScore": 58,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 18,
+        "networkComplexity": 10,
+        "primoProximity": 0,
+        "corridorDensity": 0,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Madison Factory",
+        "distanceMiles": 83
+      },
+      "corridor": "Bradenton",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Madison WI",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Johnsonville Sausage — Johnsonville HQ & Plant",
+      "address": "Sheboygan Falls, WI",
+      "lat": 43.7311,
+      "lng": -87.807,
+      "placeId": "seed-johnsonville.com-43.7311--87.807",
+      "icpScore": 58,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 25,
+        "enterpriseScale": 18,
+        "networkComplexity": 10,
+        "primoProximity": 0,
+        "corridorDensity": 0,
+        "placeTypeBonus": 5
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Madison Factory",
+        "distanceMiles": 89.4
+      },
+      "corridor": "Bradenton",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Madison WI",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Oshkosh Corporation — Oshkosh Corporation HQ & Plant",
+      "address": "Oshkosh, WI",
+      "lat": 44.0247,
+      "lng": -88.5426,
+      "placeId": "seed-oshkoshcorp.com-44.0247--88.5426",
+      "icpScore": 57,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 22,
+        "networkComplexity": 15,
+        "primoProximity": 0,
+        "corridorDensity": 0,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Madison Factory",
+        "distanceMiles": 77.6
+      },
+      "corridor": "Oshkosh",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Madison WI",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Republic Services — Republic Services Indianapolis Hub",
+      "address": "Indianapolis, IN",
+      "lat": 39.75,
+      "lng": -86.13,
+      "placeId": "seed-republicservices.com-39.75--86.13",
+      "icpScore": 56,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 0,
+        "enterpriseScale": 25,
+        "networkComplexity": 25,
+        "primoProximity": 5,
+        "corridorDensity": 1,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Greenwood Indiana",
+        "distanceMiles": 10.8
+      },
+      "corridor": "Grand Prairie",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Greenwood IN",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Steelcase — Steelcase Grand Rapids HQ & Plant",
+      "address": "Grand Rapids, MI",
+      "lat": 42.9557,
+      "lng": -85.6646,
+      "placeId": "seed-steelcase.com-42.9557--85.6646",
+      "icpScore": 56,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 18,
+        "networkComplexity": 15,
+        "primoProximity": 3,
+        "corridorDensity": 0,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Mecosta Factory",
+        "distanceMiles": 48.9
+      },
+      "corridor": "Spencer",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Stanwood MI",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Targa Resources — Targa Resources HQ",
+      "address": "Houston, TX",
+      "lat": 29.755,
+      "lng": -95.458,
+      "placeId": "seed-targaresources.com-29.755--95.458",
+      "icpScore": 53,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 0,
+        "enterpriseScale": 25,
+        "networkComplexity": 20,
+        "primoProximity": 8,
+        "corridorDensity": 0,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL S Houston Factory",
+        "distanceMiles": 7.6
+      },
+      "corridor": "Ontario",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Houston TX / Pasadena TX",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "MillerKnoll (Herman Miller) — MillerKnoll Zeeland HQ & Plant",
+      "address": "Zeeland, MI",
+      "lat": 42.8125,
+      "lng": -86.019,
+      "placeId": "seed-millerknoll.com-42.8125--86.019",
+      "icpScore": 53,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 18,
+        "networkComplexity": 15,
+        "primoProximity": 0,
+        "corridorDensity": 0,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Mecosta Factory",
+        "distanceMiles": 66.9
+      },
+      "corridor": "Zeeland",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Stanwood MI",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Perrigo Company — Perrigo Allegan MI Plant",
+      "address": "Allegan, MI",
+      "lat": 42.5292,
+      "lng": -85.8553,
+      "placeId": "seed-perrigo.com-42.5292--85.8553",
+      "icpScore": 53,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 18,
+        "networkComplexity": 15,
+        "primoProximity": 0,
+        "corridorDensity": 0,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Mecosta Factory",
+        "distanceMiles": 79.6
+      },
+      "corridor": "Allegan",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Stanwood MI",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Irving Tissue — Irving Tissue Fort Edward Plant",
+      "address": "Fort Edward, NY",
+      "lat": 43.267,
+      "lng": -73.588,
+      "placeId": "seed-irvingtissue.com-43.267--73.588",
+      "icpScore": 53,
+      "tier": "B",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 18,
+        "networkComplexity": 10,
+        "primoProximity": 5,
+        "corridorDensity": 0,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Saratoga Spring Factory",
+        "distanceMiles": 16.8
+      },
+      "corridor": "Fort Edward",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Saratoga Springs NY",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Insteel Industries — Insteel Mount Airy Plant",
+      "address": "Mount Airy, NC",
+      "lat": 36.4993,
+      "lng": -80.6073,
+      "placeId": "seed-insteel.com-36.4993--80.6073",
+      "icpScore": 49,
+      "tier": "C",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 14,
+        "networkComplexity": 15,
+        "primoProximity": 0,
+        "corridorDensity": 0,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL McBee Factory",
+        "distanceMiles": 141.6
+      },
+      "corridor": "Mount Airy",
+      "discoveredVia": [
+        {
+          "anchor": "Primo McBee SC",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Core Molding Technologies — Core Molding Matamoros (ships via Houston)",
+      "address": "Houston, TX",
+      "lat": 29.71,
+      "lng": -95.3,
+      "placeId": "seed-coremt.com-29.71--95.3",
+      "icpScore": 48,
+      "tier": "C",
+      "scoreBreakdown": {
+        "verticalMatch": 20,
+        "enterpriseScale": 10,
+        "networkComplexity": 10,
+        "primoProximity": 8,
+        "corridorDensity": 0,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL S Houston Factory",
+        "distanceMiles": 6
+      },
+      "corridor": "Ontario",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Houston TX / Pasadena TX",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    },
+    {
+      "name": "Spectrum Brands — Spectrum Brands Riverside DC",
+      "address": "Riverside, CA",
+      "lat": 33.981,
+      "lng": -117.3755,
+      "placeId": "seed-spectrumbrands.com-33.981--117.3755",
+      "icpScore": 38,
+      "tier": "C",
+      "scoreBreakdown": {
+        "verticalMatch": 0,
+        "enterpriseScale": 18,
+        "networkComplexity": 15,
+        "primoProximity": 5,
+        "corridorDensity": 0,
+        "placeTypeBonus": 0
+      },
+      "isExistingAccount": false,
+      "nearestPrimoSite": {
+        "name": "US PL Ontario Factory",
+        "distanceMiles": 13
+      },
+      "corridor": "Grand Rapids",
+      "discoveredVia": [
+        {
+          "anchor": "Primo Ontario CA / Cabazon CA",
+          "keyword": "corridor-seed",
+          "distanceMiles": 0
+        }
+      ]
+    }
+  ]
+}
