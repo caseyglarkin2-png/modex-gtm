@@ -30,9 +30,7 @@ export default function DiscoveryPage() {
   }
 
   const summary = getDiscoverySummary(output);
-  const rows = output.prospects
-    .filter((p) => !p.excluded)
-    .map(toProspectRow);
+  const allRows = output.prospects.map(toProspectRow);
 
   return (
     <div className="space-y-6">
@@ -41,11 +39,17 @@ export default function DiscoveryPage() {
         Net-new prospects discovered via corridor scanning, ranked by ICP fit score.
       </p>
 
-      <div className="grid gap-4 md:grid-cols-4">
+      <div className="grid gap-4 md:grid-cols-5">
         <MetricCard
-          label="Net-new prospects"
-          value={summary.totalNetNew}
+          label="Total discoveries"
+          value={output.totalDiscoveries}
           tone="text-[var(--foreground)]"
+          icon={Radar}
+        />
+        <MetricCard
+          label="Net-new"
+          value={summary.totalNetNew}
+          tone="text-blue-600"
           icon={Radar}
         />
         <MetricCard
@@ -72,7 +76,7 @@ export default function DiscoveryPage() {
         Scored {new Date(summary.generatedAt).toLocaleDateString()} · from {output.inputFile}
       </p>
 
-      <DiscoveryHub rows={rows} corridors={output.corridors} output={output} />
+      <DiscoveryHub rows={allRows} corridors={output.corridors} output={output} />
     </div>
   );
 }

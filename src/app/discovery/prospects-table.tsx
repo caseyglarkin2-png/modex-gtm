@@ -26,7 +26,7 @@ const columns: Column<ProspectRow>[] = [
     label: 'Prospect',
     sortable: true,
     render: (r) => (
-      <span className="flex items-center gap-1.5">
+      <span className={`flex items-center gap-1.5 ${r.excluded ? 'opacity-50' : ''}`}>
         <span className="font-medium">{r.name}</span>
         {r.isExistingAccount && (
           <Link href={`/accounts/${r.existingAccountSlug}`}>
@@ -34,6 +34,11 @@ const columns: Column<ProspectRow>[] = [
               In CRM
             </Badge>
           </Link>
+        )}
+        {r.excluded && (
+          <Badge variant="outline" className="text-[10px] text-neutral-500 border-neutral-500/25">
+            {r.excludeReason ?? 'Excluded'}
+          </Badge>
         )}
       </span>
     ),
