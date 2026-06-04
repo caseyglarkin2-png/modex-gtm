@@ -1,27 +1,38 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import type { ScoredOutput, ScoredProspect, ProspectRow } from './types';
+// Statically imported so the compiler bundles it into the serverless function.
+// This is the ONLY data source guaranteed to exist on Vercel — the dated files
+// below are gitignored, and runtime-fs reads of committed files are NOT reliably
+// shipped by Turbopack builds (outputFileTracingIncludes is ignored there).
+// Cast through unknown: resolveJsonModule infers `tier: string`, wider than the
+// ScoredProspect union, so a direct assignment fails.
+import sampleScoredRaw from '../../../output/prospect-discovery/SAMPLE-scored-prospects.json';
+
+const sampleScored = sampleScoredRaw as unknown as ScoredOutput;
 
 const OUTPUT_DIR = path.join(process.cwd(), 'output', 'prospect-discovery');
-const SAMPLE_FILE = path.join(OUTPUT_DIR, 'SAMPLE-scored-prospects.json');
 
 export function loadLatestScored(): ScoredOutput | null {
-  if (!fs.existsSync(OUTPUT_DIR)) return null;
+  // Prefer a freshly-scanned dated file when present (local dev / CI with a real
+  // scan). These are gitignored, so they only exist where the pipeline has run.
+  try {
+    if (fs.existsSync(OUTPUT_DIR)) {
+      const files = fs.readdirSync(OUTPUT_DIR)
+        .filter((f) => /^scored-prospects-\d{4}-\d{2}-\d{2}\.json$/.test(f))
+        .sort()
+        .reverse();
+      if (files.length > 0) {
+        const raw = fs.readFileSync(path.join(OUTPUT_DIR, files[0]), 'utf-8');
+        return JSON.parse(raw) as ScoredOutput;
+      }
+    }
+  } catch {
+    // fall through to the bundled sample
+  }
 
-  const files = fs.readdirSync(OUTPUT_DIR)
-    .filter((f) => /^scored-prospects-\d{4}-\d{2}-\d{2}\.json$/.test(f))
-    .sort()
-    .reverse();
-
-  const target = files.length > 0
-    ? path.join(OUTPUT_DIR, files[0])
-    : fs.existsSync(SAMPLE_FILE)
-      ? SAMPLE_FILE
-      : null;
-
-  if (!target) return null;
-  const raw = fs.readFileSync(target, 'utf-8');
-  return JSON.parse(raw) as ScoredOutput;
+  // Bundled fallback — always present (Vercel preview/prod, CI).
+  return sampleScored;
 }
 
 export function extractCityState(address: string): string {
