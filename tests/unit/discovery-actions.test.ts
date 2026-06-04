@@ -21,6 +21,11 @@ vi.mock('@/lib/hubspot/companies', () => ({
   searchCompanyByName: (...args: unknown[]) => searchCompanyByName(...args),
 }));
 
+const ensureYardflowIcpScoreProperty = vi.fn();
+vi.mock('@/lib/hubspot/properties', () => ({
+  ensureYardflowIcpScoreProperty: () => ensureYardflowIcpScoreProperty(),
+}));
+
 import { pushProspectToHubSpot } from '@/app/discovery/actions';
 
 const BASE = {
@@ -42,6 +47,7 @@ beforeEach(() => {
   update.mockClear();
   searchCompanyByDomain.mockReset();
   searchCompanyByName.mockReset();
+  ensureYardflowIcpScoreProperty.mockReset();
 });
 
 describe('pushProspectToHubSpot', () => {
@@ -61,6 +67,8 @@ describe('pushProspectToHubSpot', () => {
     expect(res.hubspotId).toBe('new-123');
     expect(create).toHaveBeenCalledTimes(1);
     expect(update).not.toHaveBeenCalled();
+    // The push self-provisions the custom score property first.
+    expect(ensureYardflowIcpScoreProperty).toHaveBeenCalledTimes(1);
     // ICP score is stamped onto the company.
     const props = create.mock.calls[0][0].properties;
     expect(props.yardflow_icp_score).toBe('88');

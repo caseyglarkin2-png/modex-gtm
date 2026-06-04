@@ -3,6 +3,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { getHubSpotClient, withHubSpotRetry, isHubSpotConfigured } from '../../src/lib/hubspot/client';
 import { searchCompanyByDomain, searchCompanyByName } from '../../src/lib/hubspot/companies';
+import { ensureYardflowIcpScoreProperty } from '../../src/lib/hubspot/properties';
 import { assertExternalWriteAllowed } from '../../src/lib/enrichment/external-write-guard';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
@@ -186,6 +187,11 @@ async function main(): Promise<void> {
   }
 
   assertExternalWriteAllowed('hubspot', 'push-to-hubspot');
+
+  // Self-heal: ensure the custom score property exists before stamping it on
+  // companies, so a fresh portal doesn't fail every upsert with PROPERTY_DOESNT_EXIST.
+  await ensureYardflowIcpScoreProperty();
+
   const client = getHubSpotClient();
 
   const results: PushResult[] = [];
