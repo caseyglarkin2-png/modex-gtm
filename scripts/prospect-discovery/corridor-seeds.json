@@ -1,0 +1,820 @@
+{
+  "generatedAt": "2026-06-03",
+  "source": "corridor-intelligence-manual-seed",
+  "corridors": [
+    {
+      "name": "Lehigh Valley PA (Allentown/Breinigsville)",
+      "anchor": "Primo Breinigsville PA",
+      "companies": [
+        {
+          "name": "US Foods",
+          "domain": "usfoods.com",
+          "vertical": "Food & Beverage",
+          "why": "Major foodservice distributor with 70+ DCs. Seen in Allentown corridor satellite imagery. Heavy dock/yard operations.",
+          "estimatedFacilities": 70,
+          "estimatedRevenue": "$35B",
+          "knownLocations": [
+            { "name": "US Foods Allentown DC", "city": "Upper Macungie Township", "state": "PA", "lat": 40.5650, "lng": -75.5930 }
+          ]
+        },
+        {
+          "name": "Bimbo Bakeries USA",
+          "domain": "bimbobakeriesusa.com",
+          "vertical": "Food & Beverage",
+          "why": "Largest baking company in US. 60+ bakeries and distribution facilities. Seen in Allentown corridor.",
+          "estimatedFacilities": 60,
+          "estimatedRevenue": "$20B (Grupo Bimbo)",
+          "knownLocations": [
+            { "name": "Bimbo Bakeries Allentown", "city": "Allentown", "state": "PA", "lat": 40.5744, "lng": -75.5856 }
+          ]
+        },
+        {
+          "name": "NFI Industries",
+          "domain": "nfiindustries.com",
+          "vertical": "3PL / Logistics",
+          "why": "Major 3PL with 50+ warehouses. Seen operating DC in Allentown corridor. Primo already uses NFI at Breinigsville.",
+          "estimatedFacilities": 50,
+          "estimatedRevenue": "$3B",
+          "knownLocations": [
+            { "name": "NFI DC Breinigsville", "city": "Breinigsville", "state": "PA", "lat": 40.5375, "lng": -75.6495 }
+          ]
+        },
+        {
+          "name": "Geodis",
+          "domain": "geodis.com",
+          "vertical": "3PL / Logistics",
+          "why": "Global 3PL with large US warehouse network. Seen in Allentown corridor satellite.",
+          "estimatedFacilities": 40,
+          "estimatedRevenue": "$14B",
+          "knownLocations": [
+            { "name": "Geodis Logistics Allentown", "city": "Allentown", "state": "PA", "lat": 40.5410, "lng": -75.5680 }
+          ]
+        },
+        {
+          "name": "Wakefern Food Corp",
+          "domain": "wakefern.com",
+          "vertical": "Retail / Grocery",
+          "why": "Largest retailer-owned cooperative in US (ShopRite). Major DC operations. Seen in Allentown corridor.",
+          "estimatedFacilities": 15,
+          "estimatedRevenue": "$19B",
+          "knownLocations": [
+            { "name": "Wakefern Distribution Center", "city": "Breinigsville", "state": "PA", "lat": 40.5465, "lng": -75.6305 }
+          ]
+        },
+        {
+          "name": "Bridgestone Americas",
+          "domain": "bridgestoneamericas.com",
+          "vertical": "Manufacturing",
+          "why": "Major tire manufacturer with plants and DCs across US. Distribution center visible in Allentown corridor.",
+          "estimatedFacilities": 30,
+          "estimatedRevenue": "$8B",
+          "knownLocations": [
+            { "name": "Bridgestone Americas Distribution Center", "city": "Upper Macungie Township", "state": "PA", "lat": 40.5595, "lng": -75.5780 }
+          ]
+        },
+        {
+          "name": "Ocean Spray",
+          "domain": "oceanspray.com",
+          "vertical": "Food & Beverage",
+          "why": "Major beverage/food cooperative. DC in Allentown corridor visible in satellite imagery.",
+          "estimatedFacilities": 12,
+          "estimatedRevenue": "$2B",
+          "knownLocations": [
+            { "name": "Ocean Spray Distribution", "city": "Breinigsville", "state": "PA", "lat": 40.5660, "lng": -75.5960 }
+          ]
+        },
+        {
+          "name": "Uline",
+          "domain": "uline.com",
+          "vertical": "Distribution / Industrial Supply",
+          "why": "Massive shipping/industrial supply distributor with 13 mega-DCs. Operates a 1.2M sq ft facility in Allentown corridor. Extremely high dock and trailer counts.",
+          "estimatedFacilities": 13,
+          "estimatedRevenue": "$7B",
+          "knownLocations": [
+            { "name": "Uline Allentown DC", "city": "Upper Macungie Township", "state": "PA", "lat": 40.5520, "lng": -75.5870 }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Dallas-Fort Worth TX (Grand Prairie/Irving)",
+      "anchor": "Primo Dallas TX",
+      "companies": [
+        {
+          "name": "Sysco",
+          "domain": "sysco.com",
+          "vertical": "Food & Beverage",
+          "why": "World's largest foodservice distributor. 330+ distribution sites globally. Massive cold-chain yard operations with high trailer dwell and dock utilization.",
+          "estimatedFacilities": 330,
+          "estimatedRevenue": "$76B",
+          "knownLocations": [
+            { "name": "Sysco Dallas DC", "city": "Grand Prairie", "state": "TX", "lat": 32.6960, "lng": -96.9780 }
+          ]
+        },
+        {
+          "name": "McLane Company",
+          "domain": "mclaneco.com",
+          "vertical": "Distribution / Grocery",
+          "why": "One of largest grocery/foodservice distributors in US. 80+ DCs. HQ in Temple TX. Massive yard operations with 100+ dock doors per facility.",
+          "estimatedFacilities": 80,
+          "estimatedRevenue": "$53B",
+          "knownLocations": [
+            { "name": "McLane DFW DC", "city": "Carrollton", "state": "TX", "lat": 32.9760, "lng": -96.8900 }
+          ]
+        },
+        {
+          "name": "XPO",
+          "domain": "xpo.com",
+          "vertical": "Freight / Logistics",
+          "why": "Major LTL carrier with 590+ service centers. Truck-dense yards with constant trailer staging, high dock-door utilization.",
+          "estimatedFacilities": 590,
+          "estimatedRevenue": "$7.7B",
+          "knownLocations": [
+            { "name": "XPO DFW Service Center", "city": "Grand Prairie", "state": "TX", "lat": 32.7170, "lng": -96.9500 }
+          ]
+        },
+        {
+          "name": "Lennox International",
+          "domain": "lennoxinternational.com",
+          "vertical": "Manufacturing",
+          "why": "HVAC manufacturer HQ'd in Richardson TX. 30+ plants and DCs. Heavy outbound trailer operations from manufacturing to distribution.",
+          "estimatedFacilities": 30,
+          "estimatedRevenue": "$4.7B",
+          "knownLocations": [
+            { "name": "Lennox HQ & Plant", "city": "Richardson", "state": "TX", "lat": 32.9480, "lng": -96.7050 }
+          ]
+        },
+        {
+          "name": "CEVA Logistics",
+          "domain": "cevalogistics.com",
+          "vertical": "3PL / Logistics",
+          "why": "Top-10 global 3PL with 100+ US warehouses. Operates contract logistics and freight management with dense yard footprints.",
+          "estimatedFacilities": 100,
+          "estimatedRevenue": "$17B (CMA CGM parent)",
+          "knownLocations": [
+            { "name": "CEVA Logistics DFW", "city": "Coppell", "state": "TX", "lat": 32.9650, "lng": -96.9750 }
+          ]
+        },
+        {
+          "name": "Dean Foods (now DFA facilities)",
+          "domain": "dfamilk.com",
+          "vertical": "Food & Beverage",
+          "why": "Dairy Farmers of America acquired former Dean Foods plants. 50+ dairy processing/distribution facilities. High dock utilization with cold-chain trailers.",
+          "estimatedFacilities": 50,
+          "estimatedRevenue": "$21B",
+          "knownLocations": [
+            { "name": "DFA Dallas Processing Plant", "city": "Dallas", "state": "TX", "lat": 32.7767, "lng": -96.7970 }
+          ]
+        },
+        {
+          "name": "Estes Express Lines",
+          "domain": "estes-express.com",
+          "vertical": "Freight / LTL",
+          "why": "Top-5 LTL carrier with 260+ terminals. Every terminal is a high-churn yard with constant trailer drops and dock rotation.",
+          "estimatedFacilities": 260,
+          "estimatedRevenue": "$4B",
+          "knownLocations": [
+            { "name": "Estes DFW Terminal", "city": "Grand Prairie", "state": "TX", "lat": 32.7200, "lng": -96.9400 }
+          ]
+        },
+        {
+          "name": "Texas Instruments",
+          "domain": "ti.com",
+          "vertical": "Manufacturing / Semiconductor",
+          "why": "Major semiconductor fab and distribution. Dallas HQ with multiple fabs and outbound shipping yards. High-value cargo drives security/gate automation needs.",
+          "estimatedFacilities": 15,
+          "estimatedRevenue": "$17.5B",
+          "knownLocations": [
+            { "name": "TI Dallas Fab", "city": "Dallas", "state": "TX", "lat": 32.9100, "lng": -96.7500 }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Houston TX (Houston/Pasadena/Baytown)",
+      "anchor": "Primo Houston TX / Pasadena TX",
+      "companies": [
+        {
+          "name": "LyondellBasell",
+          "domain": "lyondellbasell.com",
+          "vertical": "Chemical / Manufacturing",
+          "why": "One of the world's largest plastics/chemicals companies. HQ in Houston. 55+ manufacturing sites. Heavy truck and rail yard operations at chemical plants.",
+          "estimatedFacilities": 55,
+          "estimatedRevenue": "$41B",
+          "knownLocations": [
+            { "name": "LyondellBasell Channelview Complex", "city": "Channelview", "state": "TX", "lat": 29.7770, "lng": -95.1150 }
+          ]
+        },
+        {
+          "name": "Halliburton",
+          "domain": "halliburton.com",
+          "vertical": "Energy / Industrial",
+          "why": "Major oilfield services company HQ'd in Houston. 800+ locations. Equipment yards with heavy truck staging and gate management needs.",
+          "estimatedFacilities": 800,
+          "estimatedRevenue": "$23B",
+          "knownLocations": [
+            { "name": "Halliburton Houston Campus", "city": "Houston", "state": "TX", "lat": 29.7630, "lng": -95.3610 }
+          ]
+        },
+{
+          "name": "Core Molding Technologies",
+          "domain": "coremt.com",
+          "vertical": "Manufacturing",
+          "why": "Composite materials manufacturer with plants in TX and OH. Truck-intensive outbound shipping from molding plants.",
+          "estimatedFacilities": 6,
+          "estimatedRevenue": "$400M",
+          "knownLocations": [
+            { "name": "Core Molding Matamoros (ships via Houston)", "city": "Houston", "state": "TX", "lat": 29.7100, "lng": -95.3000 }
+          ]
+        },
+        {
+          "name": "Houston Food Bank",
+          "domain": "houstonfoodbank.org",
+          "vertical": "Food Distribution / Nonprofit",
+          "why": "Largest food bank in the US. 300K sq ft warehouse with 50+ dock doors. Extremely high truck throughput — good YardFlow reference case.",
+          "estimatedFacilities": 3,
+          "estimatedRevenue": "$500M (distributed)",
+          "knownLocations": [
+            { "name": "Houston Food Bank Keegan Center", "city": "Houston", "state": "TX", "lat": 29.7480, "lng": -95.2870 }
+          ]
+        },
+        {
+          "name": "Targa Resources",
+          "domain": "targaresources.com",
+          "vertical": "Energy / Midstream",
+          "why": "Major midstream natural gas/NGL company. Houston HQ. Truck loading yards at processing plants and fractionators across TX/OK/NM.",
+          "estimatedFacilities": 40,
+          "estimatedRevenue": "$17B",
+          "knownLocations": [
+            { "name": "Targa Resources HQ", "city": "Houston", "state": "TX", "lat": 29.7550, "lng": -95.4580 }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Greater Indianapolis IN (Greenwood/Plainfield)",
+      "anchor": "Primo Greenwood IN",
+      "companies": [
+        {
+          "name": "Eli Lilly and Company",
+          "domain": "lilly.com",
+          "vertical": "Pharmaceutical / Manufacturing",
+          "why": "Major pharma manufacturer HQ'd in Indianapolis. 10+ manufacturing/distribution sites in IN alone. Cold-chain distribution yards with high security gate requirements.",
+          "estimatedFacilities": 25,
+          "estimatedRevenue": "$34B",
+          "knownLocations": [
+            { "name": "Eli Lilly Indianapolis HQ & Manufacturing", "city": "Indianapolis", "state": "IN", "lat": 39.7680, "lng": -86.1620 }
+          ]
+        },
+        {
+          "name": "Rolls-Royce North America",
+          "domain": "rolls-royce.com",
+          "vertical": "Aerospace / Manufacturing",
+          "why": "Major aerospace engine manufacturer. Indianapolis campus is largest Rolls-Royce facility in world. Heavy inbound parts yards and finished-goods staging.",
+          "estimatedFacilities": 15,
+          "estimatedRevenue": "$18B",
+          "knownLocations": [
+            { "name": "Rolls-Royce Indianapolis", "city": "Indianapolis", "state": "IN", "lat": 39.7350, "lng": -86.2490 }
+          ]
+        },
+        {
+          "name": "Republic Services",
+          "domain": "republicservices.com",
+          "vertical": "Waste Management",
+          "why": "2nd largest waste hauler in US. 350+ collection/transfer sites. Every site is a truck yard with high-churn gate traffic. Strong YardFlow fit for fleet staging.",
+          "estimatedFacilities": 350,
+          "estimatedRevenue": "$14.9B",
+          "knownLocations": [
+            { "name": "Republic Services Indianapolis Hub", "city": "Indianapolis", "state": "IN", "lat": 39.7500, "lng": -86.1300 }
+          ]
+        },
+        {
+          "name": "Allegion",
+          "domain": "allegion.com",
+          "vertical": "Manufacturing / Security",
+          "why": "Security products manufacturer HQ'd in Carmel IN. 30+ plants and DCs worldwide. Distribution yards with dock-heavy shipping operations.",
+          "estimatedFacilities": 30,
+          "estimatedRevenue": "$3.7B",
+          "knownLocations": [
+            { "name": "Allegion HQ", "city": "Carmel", "state": "IN", "lat": 39.9780, "lng": -86.1300 }
+          ]
+        },
+        {
+          "name": "Ryder System",
+          "domain": "ryder.com",
+          "vertical": "Fleet / Logistics",
+          "why": "Major fleet management and logistics company. 800+ service locations. Every Ryder yard is a truck staging area — the exact YardFlow use case.",
+          "estimatedFacilities": 800,
+          "estimatedRevenue": "$12B",
+          "knownLocations": [
+            { "name": "Ryder Indianapolis", "city": "Indianapolis", "state": "IN", "lat": 39.7300, "lng": -86.0950 }
+          ]
+        },
+{
+          "name": "Allison Transmission",
+          "domain": "allisontransmission.com",
+          "vertical": "Manufacturing / Automotive",
+          "why": "World's largest manufacturer of fully automatic transmissions for commercial vehicles. Indianapolis HQ with 4 major plants. Heavy parts inbound and finished-goods outbound yards.",
+          "estimatedFacilities": 12,
+          "estimatedRevenue": "$2.9B",
+          "knownLocations": [
+            { "name": "Allison Transmission HQ & Plant", "city": "Indianapolis", "state": "IN", "lat": 39.7430, "lng": -86.1760 }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Central Florida (Zephyrhills/Lakeland/High Springs)",
+      "anchor": "Primo Zephyrhills FL / High Springs FL",
+      "companies": [
+        {
+          "name": "Tropicana Brands (now part of PAI Partners)",
+          "domain": "tropicana.com",
+          "vertical": "Food & Beverage",
+          "why": "Major juice producer with Florida processing plants. Bradenton plant is one of largest juice facilities in world. Heavy trailer staging for bulk juice and finished goods.",
+          "estimatedFacilities": 12,
+          "estimatedRevenue": "$6B",
+          "knownLocations": [
+            { "name": "Tropicana Bradenton Plant", "city": "Bradenton", "state": "FL", "lat": 27.4960, "lng": -82.5460 }
+          ]
+        },
+        {
+          "name": "Darden Restaurants",
+          "domain": "darden.com",
+          "vertical": "Food & Beverage / Restaurant",
+          "why": "Largest full-service restaurant company (Olive Garden, LongHorn). HQ in Orlando. 5 major distribution hubs feeding 1,800+ restaurants. Cold-chain yard management critical.",
+          "estimatedFacilities": 8,
+          "estimatedRevenue": "$11.4B",
+          "knownLocations": [
+            { "name": "Darden Orlando Distribution", "city": "Orlando", "state": "FL", "lat": 28.5383, "lng": -81.3792 }
+          ]
+        },
+        {
+          "name": "Florida Crystals",
+          "domain": "floridacrystals.com",
+          "vertical": "Agriculture / Food",
+          "why": "Largest cane sugar producer in US. Processing plants and DCs in central FL. Rail and truck yard operations at sugar mills and warehouses.",
+          "estimatedFacilities": 8,
+          "estimatedRevenue": "$3B (ASR Group parent)",
+          "knownLocations": [
+            { "name": "Florida Crystals Okeelanta Mill", "city": "South Bay", "state": "FL", "lat": 26.6650, "lng": -80.7170 }
+          ]
+        },
+        {
+          "name": "Saddle Creek Logistics",
+          "domain": "sclogistics.com",
+          "vertical": "3PL / Logistics",
+          "why": "Major 3PL HQ'd in Lakeland FL. 50+ warehouses across US. Deep presence in FL corridor. Dock-intensive operations with heavy trailer pooling.",
+          "estimatedFacilities": 50,
+          "estimatedRevenue": "$1.5B",
+          "knownLocations": [
+            { "name": "Saddle Creek Lakeland HQ & DC", "city": "Lakeland", "state": "FL", "lat": 28.0395, "lng": -81.9498 }
+          ]
+        },
+        {
+          "name": "Wawa",
+          "domain": "wawa.com",
+          "vertical": "Retail / C-Store",
+          "why": "Major convenience store chain expanding rapidly in FL. Central FL distribution hub feeds 300+ FL stores. Fuel and food delivery yard operations.",
+          "estimatedFacilities": 10,
+          "estimatedRevenue": "$16B",
+          "knownLocations": [
+            { "name": "Wawa FL Distribution Hub", "city": "Orlando", "state": "FL", "lat": 28.4800, "lng": -81.4500 }
+          ]
+        },
+        {
+          "name": "Cheney Brothers",
+          "domain": "cheneybrothers.com",
+          "vertical": "Food & Beverage",
+          "why": "Major Southeast foodservice distributor. 6 DCs across FL, GA, SC. Heavy cold-chain dock operations. HQ DC in Riviera Beach FL is 700K+ sq ft.",
+          "estimatedFacilities": 6,
+          "estimatedRevenue": "$3B",
+          "knownLocations": [
+            { "name": "Cheney Brothers Riviera Beach DC", "city": "Riviera Beach", "state": "FL", "lat": 26.7870, "lng": -80.0850 }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Ontario/Inland Empire CA (Ontario/Cabazon/Riverside)",
+      "anchor": "Primo Ontario CA / Cabazon CA",
+      "companies": [
+        {
+          "name": "Ross Stores",
+          "domain": "rossstores.com",
+          "vertical": "Retail / Apparel",
+          "why": "Off-price retailer with 2,000+ stores. 6 mega-DCs, several in Inland Empire. Each DC is 1M+ sq ft with 100+ dock doors and massive trailer yards.",
+          "estimatedFacilities": 6,
+          "estimatedRevenue": "$20.4B",
+          "knownLocations": [
+            { "name": "Ross Stores Moreno Valley DC", "city": "Moreno Valley", "state": "CA", "lat": 33.9170, "lng": -117.2260 }
+          ]
+        },
+        {
+          "name": "Newell Brands",
+          "domain": "newellbrands.com",
+          "vertical": "Consumer Goods / Manufacturing",
+          "why": "Major consumer goods company (Rubbermaid, Sharpie, Graco). 30+ distribution sites. Inland Empire DC is a key West Coast hub.",
+          "estimatedFacilities": 30,
+          "estimatedRevenue": "$8.1B",
+          "knownLocations": [
+            { "name": "Newell Brands Ontario DC", "city": "Ontario", "state": "CA", "lat": 34.0500, "lng": -117.6300 }
+          ]
+        },
+        {
+          "name": "Stater Bros. Markets",
+          "domain": "staterbros.com",
+          "vertical": "Retail / Grocery",
+          "why": "Largest privately owned supermarket chain in Southern CA. 170+ stores fed from 3 major DCs. All DCs in Inland Empire with heavy dock and yard operations.",
+          "estimatedFacilities": 5,
+          "estimatedRevenue": "$4.5B",
+          "knownLocations": [
+            { "name": "Stater Bros. San Bernardino DC", "city": "San Bernardino", "state": "CA", "lat": 34.0760, "lng": -117.2890 }
+          ]
+        },
+        {
+          "name": "Penske Logistics",
+          "domain": "penskelogistics.com",
+          "vertical": "3PL / Fleet",
+          "why": "Top-5 3PL and fleet leasing company. 800+ locations. Every Penske yard is a truck staging and maintenance facility. Major Inland Empire presence.",
+          "estimatedFacilities": 800,
+          "estimatedRevenue": "$10B",
+          "knownLocations": [
+            { "name": "Penske Ontario Yard", "city": "Ontario", "state": "CA", "lat": 34.0450, "lng": -117.5800 }
+          ]
+        },
+        {
+          "name": "Spectrum Brands",
+          "domain": "spectrumbrands.com",
+          "vertical": "Consumer Goods",
+          "why": "Multi-category consumer products (pet, home, garden). 15+ DCs with West Coast hub in Inland Empire. Dock-intensive seasonal shipping surges.",
+          "estimatedFacilities": 15,
+          "estimatedRevenue": "$2.9B",
+          "knownLocations": [
+            { "name": "Spectrum Brands Riverside DC", "city": "Riverside", "state": "CA", "lat": 33.9810, "lng": -117.3755 }
+          ]
+        },
+        {
+          "name": "Lineage Logistics",
+          "domain": "lineagelogistics.com",
+          "vertical": "Cold Storage / 3PL",
+          "why": "World's largest cold-storage REIT/3PL. 480+ facilities. Inland Empire has 10+ Lineage cold-storage warehouses. Extreme dock management complexity with temperature-sensitive cargo.",
+          "estimatedFacilities": 480,
+          "estimatedRevenue": "$5.3B",
+          "knownLocations": [
+            { "name": "Lineage Logistics Colton Cold Storage", "city": "Colton", "state": "CA", "lat": 34.0540, "lng": -117.3100 }
+          ]
+        },
+        {
+          "name": "Dollar General",
+          "domain": "dollargeneral.com",
+          "vertical": "Retail / Discount",
+          "why": "20,000+ stores fed from 30+ DCs. Each DC is 1M+ sq ft with 100+ dock doors. Constant trailer flow — textbook YardFlow use case.",
+          "estimatedFacilities": 30,
+          "estimatedRevenue": "$39B",
+          "knownLocations": [
+            { "name": "Dollar General Riverside DC", "city": "Riverside", "state": "CA", "lat": 33.9000, "lng": -117.3900 }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Denver CO (Commerce City/Henderson)",
+      "anchor": "Primo Denver CO",
+      "companies": [
+        {
+          "name": "Ball Corporation",
+          "domain": "ball.com",
+          "vertical": "Manufacturing / Packaging",
+          "why": "Global aluminum packaging manufacturer HQ'd in Broomfield CO. 30+ plants worldwide. High-volume can/bottle production requires massive outbound trailer staging.",
+          "estimatedFacilities": 30,
+          "estimatedRevenue": "$14.8B",
+          "knownLocations": [
+            { "name": "Ball Corporation HQ", "city": "Broomfield", "state": "CO", "lat": 39.9390, "lng": -105.0530 }
+          ]
+        },
+        {
+          "name": "Leprino Foods",
+          "domain": "leprinofoods.com",
+          "vertical": "Food & Beverage / Dairy",
+          "why": "World's largest mozzarella cheese manufacturer. Denver HQ. 10+ mega-plants. Massive cold-chain yard operations — trailers stage for hours during loading.",
+          "estimatedFacilities": 10,
+          "estimatedRevenue": "$4B",
+          "knownLocations": [
+            { "name": "Leprino Foods Denver HQ & Plant", "city": "Denver", "state": "CO", "lat": 39.7810, "lng": -104.9710 }
+          ]
+        },
+        {
+          "name": "Molson Coors Beverage Company",
+          "domain": "molsoncoors.com",
+          "vertical": "Beverage",
+          "why": "Major brewer HQ'd in Golden CO. 10+ breweries and DCs. Golden brewery is one of the largest single-site breweries in the world. Massive outbound trailer yards.",
+          "estimatedFacilities": 15,
+          "estimatedRevenue": "$11.6B",
+          "knownLocations": [
+            { "name": "Molson Coors Golden Brewery", "city": "Golden", "state": "CO", "lat": 39.7555, "lng": -105.2211 }
+          ]
+        },
+        {
+          "name": "Arrow Electronics",
+          "domain": "arrow.com",
+          "vertical": "Electronics Distribution",
+          "why": "Fortune 500 electronics distributor HQ'd in Centennial CO. 300+ locations worldwide. High-value cargo distribution with dock scheduling and yard security needs.",
+          "estimatedFacilities": 300,
+          "estimatedRevenue": "$33B",
+          "knownLocations": [
+            { "name": "Arrow Electronics HQ", "city": "Centennial", "state": "CO", "lat": 39.5880, "lng": -104.8530 }
+          ]
+        },
+        {
+          "name": "Denver Beer Co / Breckenridge Brewery (Tilray)",
+          "domain": "tilray.com",
+          "vertical": "Beverage",
+          "why": "Tilray Brands owns 10+ craft breweries and beverage brands with Denver-area operations. Consolidating distribution creates yard management complexity.",
+          "estimatedFacilities": 15,
+          "estimatedRevenue": "$1.8B",
+          "knownLocations": [
+            { "name": "Breckenridge Brewery Littleton", "city": "Littleton", "state": "CO", "lat": 39.5540, "lng": -105.0170 }
+          ]
+        },
+        {
+          "name": "Natural Grocers",
+          "domain": "naturalgrocers.com",
+          "vertical": "Retail / Grocery",
+          "why": "Organic grocery chain HQ'd in Lakewood CO. 160+ stores across 20 states fed from Denver-area DC. Growing store count drives yard throughput growth.",
+          "estimatedFacilities": 5,
+          "estimatedRevenue": "$1.1B",
+          "knownLocations": [
+            { "name": "Natural Grocers HQ & DC", "city": "Lakewood", "state": "CO", "lat": 39.7070, "lng": -105.0810 }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Wisconsin (Madison/Milwaukee/Green Bay)",
+      "anchor": "Primo Madison WI",
+      "companies": [
+        {
+          "name": "Sargento Foods",
+          "domain": "sargento.com",
+          "vertical": "Food & Beverage / Dairy",
+          "why": "Major cheese manufacturer in Plymouth WI. 5+ plants and DCs. Cold-chain yard operations with high trailer dwell for temperature management.",
+          "estimatedFacilities": 5,
+          "estimatedRevenue": "$1.5B",
+          "knownLocations": [
+            { "name": "Sargento Foods HQ & Plant", "city": "Plymouth", "state": "WI", "lat": 43.7486, "lng": -87.9765 }
+          ]
+        },
+        {
+          "name": "Land O'Lakes",
+          "domain": "landolakes.com",
+          "vertical": "Food & Beverage / Dairy",
+          "why": "Major dairy cooperative with 30+ plants. Significant Wisconsin operations (multiple cheese plants). Cold-chain dock scheduling is critical to their operations.",
+          "estimatedFacilities": 30,
+          "estimatedRevenue": "$18B",
+          "knownLocations": [
+            { "name": "Land O'Lakes Spencer WI Plant", "city": "Spencer", "state": "WI", "lat": 44.7570, "lng": -90.2960 }
+          ]
+        },
+        {
+          "name": "Saputo",
+          "domain": "saputo.com",
+          "vertical": "Food & Beverage / Dairy",
+          "why": "Top-3 dairy processor in US. 60+ plants across North America. Multiple Wisconsin cheese plants. Constant milk tanker and finished-goods trailer traffic.",
+          "estimatedFacilities": 60,
+          "estimatedRevenue": "$12B (CAD)",
+          "knownLocations": [
+            { "name": "Saputo Almena WI Cheese Plant", "city": "Almena", "state": "WI", "lat": 45.4200, "lng": -92.0300 }
+          ]
+        },
+        {
+          "name": "Schreiber Foods",
+          "domain": "schreiberfoods.com",
+          "vertical": "Food & Beverage / Dairy",
+          "why": "Major dairy processor HQ'd in Green Bay WI. 30+ plants and DCs. Yard management critical for raw-milk intake and finished-goods distribution.",
+          "estimatedFacilities": 30,
+          "estimatedRevenue": "$7B",
+          "knownLocations": [
+            { "name": "Schreiber Foods Green Bay HQ & Plant", "city": "Green Bay", "state": "WI", "lat": 44.5133, "lng": -88.0133 }
+          ]
+        },
+        {
+          "name": "Oshkosh Corporation",
+          "domain": "oshkoshcorp.com",
+          "vertical": "Manufacturing / Heavy Equipment",
+          "why": "Major specialty vehicle manufacturer HQ'd in Oshkosh WI. 20+ plants. Oversize-load yards with complex staging requirements.",
+          "estimatedFacilities": 20,
+          "estimatedRevenue": "$9.7B",
+          "knownLocations": [
+            { "name": "Oshkosh Corporation HQ & Plant", "city": "Oshkosh", "state": "WI", "lat": 44.0247, "lng": -88.5426 }
+          ]
+        },
+        {
+          "name": "Johnsonville Sausage",
+          "domain": "johnsonville.com",
+          "vertical": "Food & Beverage",
+          "why": "Leading US sausage manufacturer in Sheboygan Falls WI. 5+ plants. Cold-chain distribution with heavy trailer staging for retail and foodservice lines.",
+          "estimatedFacilities": 5,
+          "estimatedRevenue": "$1B",
+          "knownLocations": [
+            { "name": "Johnsonville HQ & Plant", "city": "Sheboygan Falls", "state": "WI", "lat": 43.7311, "lng": -87.8070 }
+          ]
+        },
+        {
+          "name": "Kohler Co.",
+          "domain": "kohler.com",
+          "vertical": "Manufacturing",
+          "why": "Major manufacturer of plumbing, engines, and furniture. Kohler WI campus is massive. 50+ facilities globally. Heavy inbound raw materials and outbound finished-goods yards.",
+          "estimatedFacilities": 50,
+          "estimatedRevenue": "$8B",
+          "knownLocations": [
+            { "name": "Kohler HQ & Manufacturing Complex", "city": "Kohler", "state": "WI", "lat": 43.7394, "lng": -87.7817 }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Michigan (Stanwood/Grand Rapids/Mecosta)",
+      "anchor": "Primo Stanwood MI",
+      "companies": [
+        {
+          "name": "Meijer",
+          "domain": "meijer.com",
+          "vertical": "Retail / Grocery",
+          "why": "Major Midwest supercenter chain. 270+ stores served by 7 mega-DCs. Grand Rapids HQ. Each DC is 1M+ sq ft with 150+ dock doors.",
+          "estimatedFacilities": 7,
+          "estimatedRevenue": "$21B",
+          "knownLocations": [
+            { "name": "Meijer Grand Rapids DC", "city": "Grand Rapids", "state": "MI", "lat": 42.8800, "lng": -85.6500 }
+          ]
+        },
+        {
+          "name": "Amway",
+          "domain": "amway.com",
+          "vertical": "Consumer Goods / Manufacturing",
+          "why": "Largest direct-selling company in world. Ada MI HQ with major manufacturing and distribution campus. Global outbound shipping drives yard complexity.",
+          "estimatedFacilities": 15,
+          "estimatedRevenue": "$8.1B",
+          "knownLocations": [
+            { "name": "Amway World HQ & Manufacturing", "city": "Ada", "state": "MI", "lat": 42.9554, "lng": -85.4897 }
+          ]
+        },
+        {
+          "name": "Steelcase",
+          "domain": "steelcase.com",
+          "vertical": "Manufacturing / Furniture",
+          "why": "World's largest office furniture manufacturer. Grand Rapids HQ. 15+ plants and showrooms. Heavy outbound trailer yards for furniture shipments.",
+          "estimatedFacilities": 15,
+          "estimatedRevenue": "$3.2B",
+          "knownLocations": [
+            { "name": "Steelcase Grand Rapids HQ & Plant", "city": "Grand Rapids", "state": "MI", "lat": 42.9557, "lng": -85.6646 }
+          ]
+        },
+        {
+          "name": "MillerKnoll (Herman Miller)",
+          "domain": "millerknoll.com",
+          "vertical": "Manufacturing / Furniture",
+          "why": "Major furniture manufacturer HQ'd in Zeeland MI (near Grand Rapids). 20+ facilities. Similar yard profile to Steelcase — large outbound staging for furniture.",
+          "estimatedFacilities": 20,
+          "estimatedRevenue": "$3.6B",
+          "knownLocations": [
+            { "name": "MillerKnoll Zeeland HQ & Plant", "city": "Zeeland", "state": "MI", "lat": 42.8125, "lng": -86.0190 }
+          ]
+        },
+        {
+          "name": "Perrigo Company",
+          "domain": "perrigo.com",
+          "vertical": "Pharmaceutical / Consumer Health",
+          "why": "World's largest store-brand OTC pharmaceutical manufacturer. Allegan MI HQ. 10+ plants with distribution yards for pharma and consumer goods.",
+          "estimatedFacilities": 10,
+          "estimatedRevenue": "$4.1B",
+          "knownLocations": [
+            { "name": "Perrigo Allegan MI Plant", "city": "Allegan", "state": "MI", "lat": 42.5292, "lng": -85.8553 }
+          ]
+        },
+        {
+          "name": "SpartanNash",
+          "domain": "spartannash.com",
+          "vertical": "Distribution / Grocery",
+          "why": "Major grocery distributor and retailer HQ'd in Grand Rapids. 150+ retail stores + distribution to 2,100+ independent grocers. 18 DCs with heavy dock operations.",
+          "estimatedFacilities": 18,
+          "estimatedRevenue": "$9.7B",
+          "knownLocations": [
+            { "name": "SpartanNash Grand Rapids DC", "city": "Grand Rapids", "state": "MI", "lat": 42.9634, "lng": -85.6681 }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Southeast SC/NC (McBee/Charlotte corridor)",
+      "anchor": "Primo McBee SC",
+      "companies": [
+        {
+          "name": "Sonoco Products",
+          "domain": "sonoco.com",
+          "vertical": "Manufacturing / Packaging",
+          "why": "Global packaging manufacturer HQ'd in Hartsville SC (near McBee). 300+ facilities. Heavy outbound trailer staging for industrial packaging products.",
+          "estimatedFacilities": 300,
+          "estimatedRevenue": "$7.1B",
+          "knownLocations": [
+            { "name": "Sonoco HQ & Plant", "city": "Hartsville", "state": "SC", "lat": 34.3740, "lng": -80.0740 }
+          ]
+        },
+        {
+          "name": "Nucor Corporation",
+          "domain": "nucor.com",
+          "vertical": "Manufacturing / Steel",
+          "why": "Largest steel producer in US. HQ in Charlotte NC. 30+ steel mills and recycling facilities. Truck and rail yards for steel coil/plate shipments — massive yard footprints.",
+          "estimatedFacilities": 30,
+          "estimatedRevenue": "$34B",
+          "knownLocations": [
+            { "name": "Nucor Darlington SC Mill", "city": "Darlington", "state": "SC", "lat": 34.3100, "lng": -79.8600 }
+          ]
+        },
+        {
+          "name": "Food Lion (Ahold Delhaize)",
+          "domain": "foodlion.com",
+          "vertical": "Retail / Grocery",
+          "why": "Major Southeast grocery chain (1,100+ stores). Operates 10+ DCs across Southeast. Parent Ahold Delhaize has 50+ US DCs. Heavy dock scheduling and trailer pooling.",
+          "estimatedFacilities": 15,
+          "estimatedRevenue": "$33B (Ahold Delhaize US)",
+          "knownLocations": [
+            { "name": "Food Lion Salisbury NC DC", "city": "Salisbury", "state": "NC", "lat": 35.6710, "lng": -80.4740 }
+          ]
+        },
+        {
+          "name": "Sealed Air / SEE",
+          "domain": "sealedair.com",
+          "vertical": "Manufacturing / Packaging",
+          "why": "Global packaging company (Cryovac, Bubble Wrap). HQ in Charlotte NC. 40+ manufacturing sites. Heavy trailer yards at foam/film plants.",
+          "estimatedFacilities": 40,
+          "estimatedRevenue": "$5.5B",
+          "knownLocations": [
+            { "name": "Sealed Air Charlotte HQ", "city": "Charlotte", "state": "NC", "lat": 35.2271, "lng": -80.8431 }
+          ]
+        },
+        {
+          "name": "Insteel Industries",
+          "domain": "insteel.com",
+          "vertical": "Manufacturing / Steel",
+          "why": "Major steel wire products manufacturer HQ'd in Mount Airy NC. 10+ plants across Southeast. Heavy truck yards for steel/wire product staging.",
+          "estimatedFacilities": 10,
+          "estimatedRevenue": "$600M",
+          "knownLocations": [
+            { "name": "Insteel Mount Airy Plant", "city": "Mount Airy", "state": "NC", "lat": 36.4993, "lng": -80.6073 }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "Upstate New York (Saratoga Springs/Albany)",
+      "anchor": "Primo Saratoga Springs NY",
+      "companies": [
+        {
+          "name": "GlobalFoundries",
+          "domain": "globalfoundries.com",
+          "vertical": "Manufacturing / Semiconductor",
+          "why": "Major semiconductor fab in Malta NY (near Saratoga Springs). 5 mega-fabs worldwide. Chemical and materials deliveries require secure, scheduled yard access.",
+          "estimatedFacilities": 5,
+          "estimatedRevenue": "$7.4B",
+          "knownLocations": [
+            { "name": "GlobalFoundries Fab 8", "city": "Malta", "state": "NY", "lat": 42.9870, "lng": -73.7920 }
+          ]
+        },
+        {
+          "name": "Hannaford (Ahold Delhaize)",
+          "domain": "hannaford.com",
+          "vertical": "Retail / Grocery",
+          "why": "Northeast grocery chain with 180+ stores. DCs in upstate NY and New England. Parent Ahold Delhaize. Dock-intensive cold-chain distribution.",
+          "estimatedFacilities": 5,
+          "estimatedRevenue": "$7B",
+          "knownLocations": [
+            { "name": "Hannaford Schodack NY DC", "city": "Schodack", "state": "NY", "lat": 42.5320, "lng": -73.7050 }
+          ]
+        },
+        {
+          "name": "Irving Tissue",
+          "domain": "irvingtissue.com",
+          "vertical": "Manufacturing / Paper",
+          "why": "Major tissue manufacturer with plant in Fort Edward NY. Heavy outbound trailer yards for tissue/paper roll shipments.",
+          "estimatedFacilities": 5,
+          "estimatedRevenue": "$1B (J.D. Irving parent)",
+          "knownLocations": [
+            { "name": "Irving Tissue Fort Edward Plant", "city": "Fort Edward", "state": "NY", "lat": 43.2670, "lng": -73.5880 }
+          ]
+        },
+        {
+          "name": "Stewart's Shops",
+          "domain": "stewartsshops.com",
+          "vertical": "Retail / C-Store / Dairy",
+          "why": "Major Northeast convenience store and dairy chain. 350+ stores with dairy plant and DCs near Saratoga. Self-distributes with company-owned fleet — yard management core to operations.",
+          "estimatedFacilities": 5,
+          "estimatedRevenue": "$2B",
+          "knownLocations": [
+            { "name": "Stewart's Shops Saratoga Springs HQ & Dairy", "city": "Saratoga Springs", "state": "NY", "lat": 43.0840, "lng": -73.7846 }
+          ]
+        }
+      ]
+    }
+  ]
+}

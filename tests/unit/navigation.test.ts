@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { canonicalNavModules, commandRoutes, getPageLabelForPath, isActiveNavModule } from '@/lib/navigation';
 
 describe('canonical navigation', () => {
-  it('declares ten unique top-level modules', () => {
+  it('declares eleven unique top-level modules', () => {
     expect(canonicalNavModules.map((module) => module.label)).toEqual([
       'Home',
       'Accounts',
@@ -13,11 +13,12 @@ describe('canonical navigation', () => {
       'Engagement',
       'Work Queue',
       'Analytics',
+      'Discovery',
       'Ops',
     ]);
 
-    expect(new Set(canonicalNavModules.map((module) => module.href)).size).toBe(10);
-    expect(new Set(canonicalNavModules.map((module) => module.label)).size).toBe(10);
+    expect(new Set(canonicalNavModules.map((module) => module.href)).size).toBe(11);
+    expect(new Set(canonicalNavModules.map((module) => module.label)).size).toBe(11);
   });
 
   it('maps legacy routes to their canonical owners', () => {

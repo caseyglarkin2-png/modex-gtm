@@ -2,6 +2,7 @@ import {
   Activity,
   BarChart3,
   Building2,
+  Compass,
   FileText,
   GitBranch,
   HeartPulse,
@@ -42,6 +43,7 @@ export const canonicalNavModules: NavModule[] = [
   { id: 'engagement', label: 'Engagement', href: '/engagement', icon: Inbox, aliases: ['/engagement', '/api/notifications'] },
   { id: 'work-queue', label: 'Work Queue', href: '/queue', icon: ListTodo, aliases: ['/queue', '/queue/generations', '/capture'] },
   { id: 'analytics', label: 'Analytics', href: '/analytics', icon: BarChart3, aliases: ['/analytics', '/analytics/emails', '/analytics/quarterly'] },
+  { id: 'discovery', label: 'Discovery', href: '/discovery', icon: Compass, aliases: ['/discovery'] },
   { id: 'ops', label: 'Ops', href: '/ops', icon: Settings, aliases: ['/ops', '/admin/crons', '/admin/generation-metrics'] },
 ];
 
