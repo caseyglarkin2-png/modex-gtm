@@ -8,6 +8,7 @@ import {
   collectFootnotes,
 } from '@/components/microsites/memo-section';
 import type {
+  ExecutiveBriefSection,
   ObservationSection,
   ComparableSection,
   MethodologySection,
@@ -17,6 +18,42 @@ import type {
 } from '@/lib/microsites/schema';
 
 const ynsThesis: YnsThesisSection = { type: 'yns-thesis' };
+
+const executiveBrief: ExecutiveBriefSection = {
+  type: 'executive-brief',
+  headline: 'The yard is the last system you haven’t standardized.',
+  problem: ['You digitized planning and the warehouse. The yard still runs on radios.'],
+  marketRisk: {
+    label: 'Why now',
+    headline: 'A tightening freight market punishes a slow yard.',
+    body: 'A fast yard makes you the shipper of choice and mitigates carrier-capacity risk.',
+  },
+  identity: {
+    label: 'What YardFlow is',
+    headline: 'The Yard Network System.',
+    body: 'A modern YMS that replaces legacy systems, priced to run every site.',
+    proofLinks: [
+      { label: 'Live network console', href: 'https://www.yardflow.ai/YNS/ui_kits/operator-app/' },
+      { label: 'Your network, modeled', href: '/demo/acme', note: 'your plants' },
+    ],
+  },
+  prize: {
+    label: 'The prize, sized for you',
+    headline: '$15M–$25M a year.',
+    stats: [
+      { value: '−50%', label: 'Truck turn time', context: '48 → 24 min' },
+      { value: '$1M+', label: 'Per plant, per year' },
+    ],
+    sizing: 'Applied to your plants at a conservative 50% improvement.',
+    note: 'We’ll build the exact IRR with your team.',
+  },
+  ease: {
+    label: 'Why this is a no-brainer',
+    headline: 'Start at one plant. Prove it in 60 days.',
+    body: 'You don’t rip anything out to begin.',
+    closingLine: 'That’s the brief.',
+  },
+};
 
 const observation: ObservationSection = {
   type: 'observation',
@@ -111,6 +148,39 @@ describe('MemoSectionList', () => {
     // The [^dot-public-data] token in the hypothesis should resolve to a marker.
     const marker = screen.getByLabelText(/Footnote 1/i);
     expect(marker.getAttribute('href')).toBe('#fn-1');
+  });
+});
+
+describe('MemoExecutiveBrief', () => {
+  it('renders all five beats: problem, why-now, identity, sized prize, ease', () => {
+    render(<MemoSectionList sections={[executiveBrief]} />);
+    // Problem headline (the section H2)
+    expect(screen.getByText(/last system you haven/i)).toBeDefined();
+    // Why-now / shipper-of-choice beat
+    expect(screen.getByText(/shipper of choice/i)).toBeDefined();
+    // Identity / category claim
+    expect(screen.getByText(/^The Yard Network System\.$/)).toBeDefined();
+    // Sized prize — stat values render
+    expect(screen.getByText('−50%')).toBeDefined();
+    expect(screen.getByText('$15M–$25M a year.')).toBeDefined();
+    // Ease close
+    expect(screen.getByText(/That’s the brief\./)).toBeDefined();
+  });
+
+  it('renders product proof links to the live app and the account demo', () => {
+    render(<MemoSectionList sections={[executiveBrief]} />);
+    const console = screen.getByText('Live network console').closest('a');
+    expect(console?.getAttribute('href')).toBe('https://www.yardflow.ai/YNS/ui_kits/operator-app/');
+    expect(console?.getAttribute('target')).toBe('_blank');
+    const demo = screen.getByText('Your network, modeled').closest('a');
+    expect(demo?.getAttribute('href')).toBe('/demo/acme');
+    // Internal links don't open a new tab.
+    expect(demo?.getAttribute('target')).toBeNull();
+  });
+
+  it('leads the memo as §01 when placed first', () => {
+    const entries = buildTocEntries([executiveBrief, ynsThesis, observation]);
+    expect(entries[0]).toEqual(expect.objectContaining({ num: '§01', label: 'The brief' }));
   });
 });
 

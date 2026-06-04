@@ -2,6 +2,7 @@ import { Fragment, type ReactNode } from 'react';
 import {
   type FootnoteData,
   type MemoMicrositeSection,
+  type ExecutiveBriefSection,
   type YnsThesisSection,
   type ObservationSection,
   type ComparableSection,
@@ -86,6 +87,7 @@ export function MemoPullQuote({ children }: { children: ReactNode }) {
 // Section-type → display label for the eyebrow ("§ 01 · OBSERVATION").
 // Kept here (not in the schema module) because it's purely presentational.
 const EYEBROW_LABEL: Record<MemoMicrositeSection['type'], string> = {
+  'executive-brief': 'The brief',
   'yns-thesis': 'The thesis',
   observation: 'Observation',
   comparable: 'Comparable',
@@ -99,6 +101,8 @@ const EYEBROW_LABEL: Record<MemoMicrositeSection['type'], string> = {
 
 function sectionFootnotes(section: MemoMicrositeSection): FootnoteData[] {
   switch (section.type) {
+    case 'executive-brief':
+      return section.footnotes ?? [];
     case 'yns-thesis':
       return YNS_THESIS.footnotes;
     case 'observation':
@@ -248,6 +252,160 @@ function MemoAside({ mark, children }: { mark: string; children: ReactNode }) {
 }
 
 // ── Section variants ──────────────────────────────────────────────────
+
+const BRIEF_KICKER = (numeralClass: string) =>
+  `mb-2 text-[10.5px] uppercase tracking-[0.22em] ${numeralClass} ${FONT_MONO}`;
+
+const BRIEF_SUBHEAD_STYLE = {
+  fontVariationSettings: "'opsz' 32, 'SOFT' 50",
+  fontWeight: 460,
+  fontSize: 'clamp(1.3rem, 1vw + 0.9rem, 1.7rem)',
+  lineHeight: 1.22,
+  letterSpacing: '-0.01em',
+} as const;
+
+/**
+ * "The brief" — the bottom-line-up-front executive summary. Renders the five
+ * beats (problem → why-now → what-we-are → sized-prize → why-it's-easy) as a
+ * single scannable opening section. Punchy register; the deep sections below
+ * carry the citations and depth.
+ */
+function MemoExecutiveBrief({
+  section,
+  index,
+  accent,
+  resolved,
+}: {
+  section: ExecutiveBriefSection;
+  index: number;
+  accent: ReturnType<typeof getMemoAccent>;
+  resolved: Record<string, NumberedFootnote>;
+}) {
+  return (
+    <MemoSectionFrame
+      number={index}
+      numeralClass={accent.numeralClass}
+      sectionId={section.sectionId ?? 'brief'}
+      eyebrow={EYEBROW_LABEL['executive-brief']}
+      heading={section.headline}
+    >
+      {/* 1 · The problem */}
+      {section.problem.map((para, i) => (
+        <p key={i} className={i === 0 ? 'memo-lead' : undefined}>
+          {renderBodyWithFootnotes(para, resolved)}
+        </p>
+      ))}
+
+      {/* 2 · Why now — market timing / carrier-capacity-risk */}
+      {section.marketRisk ? (
+        <div className="my-8 border-l-2 border-[color:var(--memo-accent)] bg-[rgba(255,253,247,0.6)] py-5 pl-6 pr-5">
+          <p className={`mb-2 text-[10.5px] uppercase tracking-[0.22em] text-[#6c9384] ${FONT_MONO}`}>
+            {section.marketRisk.label}
+          </p>
+          <p
+            className={`m-0 mb-2 text-[1.05rem] text-[#1a1a1a] ${FONT_SERIF}`}
+            style={{ fontVariationSettings: "'opsz' 24, 'SOFT' 50", fontWeight: 480 }}
+          >
+            {section.marketRisk.headline}
+          </p>
+          <p className={`m-0 text-[15px] leading-[1.6] text-[#4a4641] ${FONT_SANS}`}>
+            {renderBodyWithFootnotes(section.marketRisk.body, resolved)}
+          </p>
+        </div>
+      ) : null}
+
+      {/* 3 · What YardFlow is — identity / category claim */}
+      <div className="mt-10">
+        <p className={BRIEF_KICKER(accent.numeralClass)}>{section.identity.label}</p>
+        <h3 className={`m-0 mb-3 max-w-[28ch] text-[#1a1a1a] ${FONT_SERIF}`} style={BRIEF_SUBHEAD_STYLE}>
+          {section.identity.headline}
+        </h3>
+        <p>{renderBodyWithFootnotes(section.identity.body, resolved)}</p>
+        {section.identity.proofLinks && section.identity.proofLinks.length > 0 ? (
+          <ul className={`mt-4 flex flex-wrap items-center gap-x-6 gap-y-2 list-none p-0 ${FONT_MONO} text-[12.5px]`}>
+            {section.identity.proofLinks.map((link) => (
+              <li key={link.href} className="flex items-center gap-2">
+                <a
+                  href={link.href}
+                  target={link.href.startsWith('http') ? '_blank' : undefined}
+                  rel={link.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                  className="inline-flex items-center gap-1.5 text-[color:var(--memo-accent)] underline decoration-[#d8d2c2] underline-offset-4 hover:decoration-[color:var(--memo-accent)]"
+                >
+                  {link.label}
+                  <span aria-hidden="true">↗</span>
+                </a>
+                {link.note ? <span className="text-[#a89e8b]">{link.note}</span> : null}
+              </li>
+            ))}
+          </ul>
+        ) : null}
+      </div>
+
+      {/* 4 · The prize, sized */}
+      <div className="mt-12">
+        <p className={BRIEF_KICKER(accent.numeralClass)}>{section.prize.label}</p>
+        <h3 className={`m-0 mb-1 max-w-[28ch] text-[#1a1a1a] ${FONT_SERIF}`} style={BRIEF_SUBHEAD_STYLE}>
+          {section.prize.headline}
+        </h3>
+        {section.prize.stats.length > 0 ? (
+          <dl
+            className="my-6 grid grid-cols-2 gap-px border border-[#d8d2c2] bg-[#d8d2c2] sm:grid-cols-4"
+            style={{ fontVariantNumeric: 'lining-nums tabular-nums' }}
+          >
+            {section.prize.stats.map((s) => (
+              <div key={s.label} className="bg-[#fffdf7] px-4 py-5">
+                <dd
+                  className={`m-0 text-[#1a1a1a] ${FONT_SERIF}`}
+                  style={{
+                    fontVariationSettings: "'opsz' 48, 'SOFT' 0",
+                    fontWeight: 440,
+                    fontSize: 'clamp(1.6rem, 1.4vw + 1rem, 2.3rem)',
+                    lineHeight: 1.05,
+                  }}
+                >
+                  {s.value}
+                </dd>
+                <dt className={`mt-2 text-[11px] uppercase tracking-[0.1em] text-[#8a847b] ${FONT_SANS}`}>
+                  {s.label}
+                </dt>
+                {s.context ? (
+                  <p className={`m-0 mt-1 text-[12px] leading-[1.4] text-[#a89e8b] ${FONT_SANS}`}>{s.context}</p>
+                ) : null}
+              </div>
+            ))}
+          </dl>
+        ) : null}
+        {section.prize.sizing ? <p>{renderBodyWithFootnotes(section.prize.sizing, resolved)}</p> : null}
+        {section.prize.note ? (
+          <p className="mt-2 text-[15px] text-[#8a847b]">{renderBodyWithFootnotes(section.prize.note, resolved)}</p>
+        ) : null}
+      </div>
+
+      {/* 5 · Why it's easy — the close */}
+      <div className="mt-12">
+        <p className={BRIEF_KICKER(accent.numeralClass)}>{section.ease.label}</p>
+        <h3 className={`m-0 mb-3 max-w-[28ch] text-[#1a1a1a] ${FONT_SERIF}`} style={BRIEF_SUBHEAD_STYLE}>
+          {section.ease.headline}
+        </h3>
+        <p>{renderBodyWithFootnotes(section.ease.body, resolved)}</p>
+        {section.ease.closingLine ? (
+          <p
+            className={`mt-6 max-w-[32ch] text-[#1a1a1a] ${FONT_SERIF}`}
+            style={{
+              fontStyle: 'italic',
+              fontVariationSettings: "'opsz' 28, 'SOFT' 100, 'WONK' 1",
+              fontWeight: 400,
+              fontSize: 'clamp(1.2rem, 1vw + 0.8rem, 1.5rem)',
+              lineHeight: 1.3,
+            }}
+          >
+            {section.ease.closingLine}
+          </p>
+        ) : null}
+      </div>
+    </MemoSectionFrame>
+  );
+}
 
 function MemoYnsThesis({
   section,
@@ -605,6 +763,16 @@ export function MemoSectionList({ sections, accentColor }: MemoSectionListProps)
       {sections.map((section, i) => {
         const num = i + 1;
         switch (section.type) {
+          case 'executive-brief':
+            return (
+              <MemoExecutiveBrief
+                key={i}
+                section={section}
+                index={num}
+                accent={accent}
+                resolved={resolved}
+              />
+            );
           case 'yns-thesis':
             return (
               <MemoYnsThesis

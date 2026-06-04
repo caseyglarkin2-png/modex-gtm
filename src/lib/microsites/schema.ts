@@ -33,6 +33,7 @@ export type SectionType =
   | 'roi';
 
 export type MemoSectionType =
+  | 'executive-brief'
   | 'yns-thesis'
   | 'observation'
   | 'comparable'
@@ -395,6 +396,48 @@ export interface FootnoteData {
 }
 
 /**
+ * "The brief" — the bottom-line-up-front executive summary that leads every
+ * memo (Mark Shaughnessy feedback, June 2026). Problem-first, plain-language,
+ * Play-Bigger category framing. Five beats in fixed order:
+ *
+ *   1. problem      — the yard is the un-standardized operating system
+ *   2. marketRisk   — why now: a tightening freight market / shipper-of-choice
+ *   3. identity     — who we are + what we uniquely do (the YNS category claim)
+ *   4. prize        — the sized business case (stats + $ range + soft IRR)
+ *   5. ease         — start at one site, prove in 60 days, no rip-and-replace
+ *
+ * This is the rubric every account fills. Keep each field short and scannable
+ * — USA-Today reading level up top; the deep sections below carry the depth.
+ */
+export interface ExecutiveBriefSection extends BaseMicrositeSection {
+  type: 'executive-brief';
+  /** Problem-first H2 — the lead. Plain language, no internal jargon. */
+  headline: string;
+  /** The problem, in 1-2 short plain-language paragraphs. */
+  problem: string[];
+  /** "Why now" — market timing / carrier-capacity-risk beat. Optional. */
+  marketRisk?: { label: string; headline: string; body: string };
+  /** Who we are + what we uniquely do (the category claim) + product proof. */
+  identity: {
+    label: string;
+    headline: string;
+    body: string;
+    proofLinks?: { label: string; href: string; note?: string }[];
+  };
+  /** The sized prize — the business case the busy exec doesn't have to compute. */
+  prize: {
+    label: string;
+    headline: string;
+    stats: { value: string; label: string; context?: string }[];
+    sizing?: string;
+    note?: string;
+  };
+  /** Why it's easy + the closing line. */
+  ease: { label: string; headline: string; body: string; closingLine?: string };
+  footnotes?: FootnoteData[];
+}
+
+/**
  * The universal YNS thesis (75% of yards run on radios + clipboards;
  * WMS/TMS doesn't see the gate-to-dock; YNS is the missing layer).
  * Content is owned by `src/lib/microsites/yns-thesis.ts` so it stays
@@ -493,6 +536,7 @@ export interface DemoEmbedSection extends BaseMicrositeSection {
 }
 
 export type MemoMicrositeSection =
+  | ExecutiveBriefSection
   | YnsThesisSection
   | ObservationSection
   | ComparableSection

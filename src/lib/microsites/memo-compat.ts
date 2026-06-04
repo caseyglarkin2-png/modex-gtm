@@ -43,9 +43,11 @@ import type {
 } from './schema';
 
 const MEMO_TYPES = new Set<MicrositeSection['type']>([
+  'executive-brief',
   'yns-thesis',
   'observation',
   'artifact',
+  'demo-embed',
   'comparable',
   'methodology',
   'about',
