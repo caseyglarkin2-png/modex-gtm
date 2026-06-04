@@ -215,17 +215,282 @@ const VERTICAL_RULES: { keywords: string[]; points: number }[] = [
   { keywords: ['building', 'construction', 'lumber', 'concrete', 'steel', 'hardware', 'home improvement'], points: 12 },
 ];
 
-const KNOWN_BRAND_VERTICALS: Record<string, number> = {
-  'mclane': 25, 'lineage': 25, 'americold': 25, 'sysco': 25, 'us foods': 25,
-  'core-mark': 25, 'dot foods': 25, 'vistar': 25, 'performance food': 25,
-  'bimbo': 25, 'flowers foods': 25, 'pepsi': 25, 'coke': 25, 'nestle': 25,
-  'tyson': 25, 'jbs': 25, 'cargill': 25, 'adm': 25, 'conagra': 25,
-  'xpo': 25, 'ryder': 25, 'penske': 25, 'ceva': 25, 'nfi': 25, 'geodis': 25,
-  'dhl': 25, 'fedex': 25, 'ups': 25, 'amazon': 20, 'walmart': 20,
-  'kroger': 20, 'costco': 20, 'target': 20, 'publix': 20, 'h-e-b': 20,
-  'aldi': 20, 'lidl': 20, 'wakefern': 20, 'shoprite': 20, 'ahold': 20,
-  'albertsons': 20, 'safeway': 20,
+// Known-brand enrichment. Places API results carry no revenue or facility
+// count, so a discovered "Sysco Dallas DC" would otherwise score 0 on the two
+// dimensions that matter most. This map lets a name match inherit the parent
+// company's vertical points (v, 0-25), approximate revenue ($B), and US
+// facility footprint. Numbers are deliberately banded, not precise — the
+// scorers only read them through threshold bands. Tokens are lowercase
+// substrings chosen to be distinctive enough to avoid false matches.
+interface BrandProfile { v: number; revB: number; fac: number; }
+
+const KNOWN_BRANDS: Record<string, BrandProfile> = {
+  // ── 3PL / logistics / distribution ──
+  'xpo': { v: 25, revB: 8, fac: 100 },
+  'ryder': { v: 25, revB: 12, fac: 300 },
+  'penske': { v: 25, revB: 13, fac: 300 },
+  'ceva': { v: 25, revB: 18, fac: 150 },
+  'nfi': { v: 25, revB: 3, fac: 70 },
+  'geodis': { v: 25, revB: 14, fac: 100 },
+  'dhl': { v: 25, revB: 30, fac: 200 },
+  'fedex': { v: 25, revB: 90, fac: 700 },
+  'united parcel': { v: 25, revB: 90, fac: 1000 },
+  'schneider': { v: 25, revB: 6, fac: 50 },
+  'j.b. hunt': { v: 25, revB: 13, fac: 50 },
+  'jb hunt': { v: 25, revB: 13, fac: 50 },
+  'knight-swift': { v: 25, revB: 7, fac: 100 },
+  'swift transportation': { v: 25, revB: 7, fac: 100 },
+  'old dominion': { v: 25, revB: 6, fac: 250 },
+  'estes': { v: 25, revB: 5, fac: 270 },
+  'saia': { v: 25, revB: 3, fac: 190 },
+  'arcbest': { v: 25, revB: 4, fac: 240 },
+  'abf freight': { v: 25, revB: 4, fac: 240 },
+  'saddle creek': { v: 25, revB: 1, fac: 50 },
+  'americold': { v: 25, revB: 3, fac: 250 },
+  'lineage': { v: 25, revB: 5, fac: 400 },
+  'expeditors': { v: 25, revB: 10, fac: 350 },
+  'c.h. robinson': { v: 25, revB: 17, fac: 40 },
+  'ch robinson': { v: 25, revB: 17, fac: 40 },
+  'uline': { v: 25, revB: 9, fac: 13 },
+  'dsv': { v: 25, revB: 25, fac: 100 },
+  'kuehne': { v: 25, revB: 35, fac: 100 },
+  'kenco': { v: 25, revB: 1, fac: 30 },
+  'gxo': { v: 25, revB: 10, fac: 150 },
+  'wesco': { v: 25, revB: 22, fac: 200 },
+  'grainger': { v: 25, revB: 17, fac: 50 },
+  'fastenal': { v: 25, revB: 7, fac: 100 },
+  'ferguson': { v: 25, revB: 30, fac: 200 },
+  // ── Foodservice distribution ──
+  'sysco': { v: 25, revB: 78, fac: 330 },
+  'us foods': { v: 25, revB: 38, fac: 70 },
+  'performance food': { v: 25, revB: 60, fac: 150 },
+  'mclane': { v: 25, revB: 50, fac: 80 },
+  'core-mark': { v: 25, revB: 17, fac: 30 },
+  'gordon food': { v: 25, revB: 20, fac: 30 },
+  'dot foods': { v: 25, revB: 9, fac: 12 },
+  'ben e keith': { v: 25, revB: 5, fac: 10 },
+  'shamrock foods': { v: 25, revB: 8, fac: 10 },
+  'cheney brothers': { v: 25, revB: 4, fac: 6 },
+  // ── Food & beverage manufacturers ──
+  'pepsi': { v: 25, revB: 91, fac: 300 },
+  'frito-lay': { v: 25, revB: 23, fac: 60 },
+  'coca-cola': { v: 25, revB: 45, fac: 100 },
+  'coca cola': { v: 25, revB: 45, fac: 100 },
+  'nestle': { v: 25, revB: 30, fac: 80 },
+  'tyson': { v: 25, revB: 53, fac: 240 },
+  'jbs': { v: 25, revB: 70, fac: 100 },
+  'cargill': { v: 25, revB: 177, fac: 150 },
+  'archer daniels': { v: 25, revB: 94, fac: 270 },
+  'conagra': { v: 25, revB: 12, fac: 40 },
+  'kraft heinz': { v: 25, revB: 26, fac: 40 },
+  'general mills': { v: 25, revB: 20, fac: 50 },
+  'kellanova': { v: 25, revB: 13, fac: 35 },
+  'kellogg': { v: 25, revB: 13, fac: 35 },
+  'mondelez': { v: 25, revB: 36, fac: 60 },
+  'mars wrigley': { v: 25, revB: 47, fac: 100 },
+  'mars petcare': { v: 25, revB: 20, fac: 40 },
+  'hershey': { v: 25, revB: 11, fac: 20 },
+  'smucker': { v: 25, revB: 8, fac: 20 },
+  'campbell': { v: 25, revB: 10, fac: 30 },
+  'hormel': { v: 25, revB: 12, fac: 50 },
+  'bimbo': { v: 25, revB: 20, fac: 60 },
+  'flowers food': { v: 25, revB: 5, fac: 45 },
+  'danone': { v: 25, revB: 6, fac: 15 },
+  'dannon': { v: 25, revB: 6, fac: 15 },
+  'saputo': { v: 25, revB: 12, fac: 60 },
+  "land o'lakes": { v: 25, revB: 16, fac: 30 },
+  'schreiber': { v: 25, revB: 7, fac: 20 },
+  'leprino': { v: 25, revB: 5, fac: 10 },
+  'dean foods': { v: 25, revB: 20, fac: 50 },
+  'dairy farmers': { v: 25, revB: 20, fac: 50 },
+  'molson coors': { v: 25, revB: 11, fac: 20 },
+  'anheuser': { v: 25, revB: 15, fac: 20 },
+  'ab inbev': { v: 25, revB: 15, fac: 20 },
+  'constellation brands': { v: 25, revB: 10, fac: 15 },
+  'keurig': { v: 25, revB: 15, fac: 40 },
+  'ocean spray': { v: 25, revB: 2, fac: 12 },
+  'ferrero': { v: 25, revB: 18, fac: 30 },
+  'post consumer': { v: 25, revB: 7, fac: 30 },
+  'mccormick': { v: 25, revB: 6, fac: 20 },
+  'smithfield': { v: 25, revB: 15, fac: 50 },
+  'perdue': { v: 25, revB: 8, fac: 30 },
+  'pilgrim': { v: 25, revB: 17, fac: 40 },
+  'niagara bottling': { v: 25, revB: 3, fac: 30 },
+  'red bull': { v: 25, revB: 12, fac: 10 },
+  'utz': { v: 25, revB: 1.4, fac: 15 },
+  'purina': { v: 25, revB: 18, fac: 30 },
+  'blue buffalo': { v: 25, revB: 2, fac: 5 },
+  // ── Retail / grocery / e-commerce ──
+  'walmart': { v: 20, revB: 600, fac: 210 },
+  'amazon': { v: 20, revB: 575, fac: 400 },
+  'costco': { v: 20, revB: 250, fac: 30 },
+  'kroger': { v: 20, revB: 150, fac: 40 },
+  'albertsons': { v: 20, revB: 80, fac: 40 },
+  'ahold': { v: 20, revB: 90, fac: 50 },
+  'food lion': { v: 20, revB: 90, fac: 50 },
+  'hannaford': { v: 20, revB: 90, fac: 50 },
+  'stop & shop': { v: 20, revB: 90, fac: 50 },
+  'stop and shop': { v: 20, revB: 90, fac: 50 },
+  'giant eagle': { v: 20, revB: 10, fac: 10 },
+  'giant food': { v: 20, revB: 90, fac: 50 },
+  'publix': { v: 20, revB: 55, fac: 12 },
+  'h-e-b': { v: 20, revB: 40, fac: 15 },
+  'meijer': { v: 20, revB: 20, fac: 15 },
+  'wakefern': { v: 20, revB: 19, fac: 15 },
+  'shoprite': { v: 20, revB: 19, fac: 15 },
+  'harris teeter': { v: 20, revB: 150, fac: 40 },
+  'target': { v: 20, revB: 107, fac: 50 },
+  'dollar general': { v: 20, revB: 38, fac: 25 },
+  'dollar tree': { v: 20, revB: 30, fac: 25 },
+  'family dollar': { v: 20, revB: 30, fac: 25 },
+  'aldi': { v: 20, revB: 30, fac: 25 },
+  'lidl': { v: 20, revB: 10, fac: 15 },
+  'wegmans': { v: 20, revB: 12, fac: 5 },
+  '7-eleven': { v: 20, revB: 18, fac: 20 },
+  'seven-eleven': { v: 20, revB: 18, fac: 20 },
+  'ross stores': { v: 20, revB: 20, fac: 10 },
+  'ross dress': { v: 20, revB: 20, fac: 10 },
+  'tj maxx': { v: 20, revB: 54, fac: 20 },
+  'marshalls': { v: 20, revB: 54, fac: 20 },
+  'home depot': { v: 20, revB: 157, fac: 130 },
+  "lowe's": { v: 20, revB: 97, fac: 100 },
+  'tractor supply': { v: 20, revB: 14, fac: 10 },
+  'chewy': { v: 20, revB: 11, fac: 20 },
+  'wayfair': { v: 20, revB: 12, fac: 20 },
+  'best buy': { v: 20, revB: 47, fac: 40 },
+  'williams-sonoma': { v: 20, revB: 8, fac: 10 },
+  'ikea': { v: 20, revB: 50, fac: 60 },
+  'cvs': { v: 20, revB: 360, fac: 25 },
+  'walgreens': { v: 20, revB: 130, fac: 20 },
+  // ── Pharma / healthcare distribution ──
+  'mckesson': { v: 25, revB: 309, fac: 30 },
+  'cardinal health': { v: 25, revB: 205, fac: 50 },
+  'cencora': { v: 25, revB: 260, fac: 30 },
+  'amerisourcebergen': { v: 25, revB: 260, fac: 30 },
+  'medline': { v: 25, revB: 23, fac: 50 },
+  'owens & minor': { v: 25, revB: 10, fac: 40 },
+  'henry schein': { v: 25, revB: 12, fac: 30 },
+  'thermo fisher': { v: 20, revB: 45, fac: 100 },
+  'becton': { v: 20, revB: 20, fac: 40 },
+  'abbott': { v: 20, revB: 40, fac: 90 },
+  'baxter': { v: 20, revB: 15, fac: 50 },
+  'perrigo': { v: 20, revB: 4, fac: 20 },
+  // ── Manufacturing / industrial / CPG ──
+  'procter & gamble': { v: 20, revB: 82, fac: 30 },
+  'procter and gamble': { v: 20, revB: 82, fac: 30 },
+  'kimberly-clark': { v: 20, revB: 20, fac: 30 },
+  'kimberly clark': { v: 20, revB: 20, fac: 30 },
+  'sc johnson': { v: 20, revB: 12, fac: 20 },
+  'colgate': { v: 20, revB: 20, fac: 25 },
+  'clorox': { v: 20, revB: 7, fac: 20 },
+  'church & dwight': { v: 20, revB: 6, fac: 15 },
+  'unilever': { v: 20, revB: 60, fac: 40 },
+  'reckitt': { v: 20, revB: 16, fac: 20 },
+  '3m': { v: 20, revB: 35, fac: 80 },
+  'honeywell': { v: 20, revB: 37, fac: 100 },
+  'caterpillar': { v: 20, revB: 67, fac: 100 },
+  'john deere': { v: 20, revB: 61, fac: 60 },
+  'cummins': { v: 20, revB: 34, fac: 60 },
+  'paccar': { v: 20, revB: 35, fac: 30 },
+  'kenworth': { v: 20, revB: 35, fac: 20 },
+  'peterbilt': { v: 20, revB: 35, fac: 20 },
+  'daimler truck': { v: 20, revB: 60, fac: 40 },
+  'navistar': { v: 20, revB: 11, fac: 20 },
+  'bridgestone': { v: 20, revB: 8, fac: 50 },
+  'goodyear': { v: 20, revB: 20, fac: 50 },
+  'michelin': { v: 20, revB: 30, fac: 40 },
+  'ppg': { v: 20, revB: 18, fac: 150 },
+  'sherwin-williams': { v: 20, revB: 23, fac: 100 },
+  'sherwin williams': { v: 20, revB: 23, fac: 100 },
+  'georgia-pacific': { v: 20, revB: 30, fac: 150 },
+  'georgia pacific': { v: 20, revB: 30, fac: 150 },
+  'weyerhaeuser': { v: 20, revB: 10, fac: 30 },
+  'international paper': { v: 15, revB: 19, fac: 350 },
+  'westrock': { v: 15, revB: 20, fac: 300 },
+  'smurfit': { v: 15, revB: 20, fac: 300 },
+  'packaging corp': { v: 15, revB: 8, fac: 100 },
+  'sonoco': { v: 15, revB: 7, fac: 300 },
+  'ball corp': { v: 15, revB: 14, fac: 60 },
+  'ball metal': { v: 15, revB: 14, fac: 60 },
+  'crown holdings': { v: 15, revB: 12, fac: 200 },
+  'sealed air': { v: 15, revB: 5, fac: 100 },
+  'berry global': { v: 15, revB: 13, fac: 290 },
+  'amcor': { v: 15, revB: 14, fac: 200 },
+  'pactiv': { v: 15, revB: 6, fac: 60 },
+  'graphic packaging': { v: 15, revB: 9, fac: 70 },
+  'owens-illinois': { v: 15, revB: 7, fac: 70 },
+  'newell': { v: 20, revB: 8, fac: 50 },
+  'stanley black': { v: 20, revB: 15, fac: 50 },
+  'whirlpool': { v: 20, revB: 19, fac: 30 },
+  'lennox': { v: 20, revB: 5, fac: 50 },
+  'carrier': { v: 20, revB: 22, fac: 60 },
+  'trane': { v: 20, revB: 18, fac: 40 },
+  'illinois tool': { v: 20, revB: 16, fac: 80 },
+  'emerson electric': { v: 20, revB: 17, fac: 80 },
+  'parker hannifin': { v: 20, revB: 19, fac: 100 },
+  'eaton': { v: 20, revB: 23, fac: 100 },
+  'nucor': { v: 20, revB: 35, fac: 300 },
+  'steel dynamics': { v: 20, revB: 18, fac: 50 },
+  'u.s. steel': { v: 20, revB: 18, fac: 30 },
+  'cleveland-cliffs': { v: 20, revB: 22, fac: 30 },
+  'reliance steel': { v: 20, revB: 14, fac: 300 },
+  'oshkosh': { v: 20, revB: 9, fac: 20 },
+  'allison transmission': { v: 20, revB: 3, fac: 10 },
+  'textron': { v: 20, revB: 14, fac: 30 },
+  'generac': { v: 20, revB: 4, fac: 20 },
+  'kohler': { v: 20, revB: 9, fac: 50 },
+  'masco': { v: 20, revB: 8, fac: 40 },
+  'mohawk': { v: 20, revB: 11, fac: 50 },
+  'owens corning': { v: 15, revB: 10, fac: 50 },
+  // ── Chemicals / energy ──
+  'dow chemical': { v: 15, revB: 45, fac: 100 },
+  'dupont': { v: 15, revB: 12, fac: 50 },
+  'lyondellbasell': { v: 15, revB: 40, fac: 50 },
+  'celanese': { v: 15, revB: 11, fac: 50 },
+  'eastman chemical': { v: 15, revB: 9, fac: 40 },
+  'huntsman': { v: 15, revB: 6, fac: 40 },
+  'ecolab': { v: 15, revB: 15, fac: 100 },
+  'chemours': { v: 15, revB: 6, fac: 30 },
+  'westlake': { v: 15, revB: 12, fac: 40 },
+  'linde': { v: 15, revB: 33, fac: 200 },
+  'air products': { v: 15, revB: 12, fac: 100 },
+  'basf': { v: 15, revB: 80, fac: 100 },
+  'halliburton': { v: 20, revB: 23, fac: 50 },
+  'schlumberger': { v: 20, revB: 33, fac: 50 },
+  'baker hughes': { v: 20, revB: 25, fac: 50 },
+  // ── Building materials ──
+  'martin marietta': { v: 12, revB: 6, fac: 100 },
+  'vulcan materials': { v: 12, revB: 8, fac: 100 },
+  'cemex': { v: 12, revB: 17, fac: 100 },
+  'holcim': { v: 12, revB: 30, fac: 100 },
+  // ── Apparel / consumer ──
+  'nike': { v: 20, revB: 51, fac: 10 },
+  'vf corp': { v: 20, revB: 11, fac: 20 },
+  'hanesbrands': { v: 20, revB: 6, fac: 20 },
+  'under armour': { v: 20, revB: 6, fac: 10 },
+  'columbia sportswear': { v: 20, revB: 3, fac: 5 },
+  // ── Auto parts / tech ──
+  'genuine parts': { v: 20, revB: 23, fac: 60 },
+  'napa auto': { v: 20, revB: 23, fac: 60 },
+  'autozone': { v: 20, revB: 18, fac: 15 },
+  "o'reilly auto": { v: 20, revB: 16, fac: 30 },
+  'advance auto': { v: 20, revB: 11, fac: 40 },
+  'lkq': { v: 20, revB: 14, fac: 60 },
+  'rolls-royce': { v: 20, revB: 20, fac: 20 },
+  'arrow electronics': { v: 20, revB: 30, fac: 40 },
+  'texas instruments': { v: 15, revB: 18, fac: 15 },
+  'globalfoundries': { v: 15, revB: 7, fac: 10 },
+  'micron': { v: 15, revB: 25, fac: 15 },
 };
+
+/** First known-brand profile whose token appears in the place's name/address. */
+function matchKnownBrand(place: DiscoveredPlace): BrandProfile | null {
+  const hay = `${place.name} ${place.address}`.toLowerCase();
+  for (const token in KNOWN_BRANDS) {
+    if (hay.includes(token)) return KNOWN_BRANDS[token];
+  }
+  return null;
+}
 
 // ── Scoring functions ────────────────────────────────────────────────────
 
@@ -237,15 +502,14 @@ function scoreVertical(place: DiscoveredPlace): number {
     }
   }
 
+  const brand = matchKnownBrand(place);
+  if (brand) return brand.v;
+
   const haystack = [
     place.name,
     place.address,
     ...(place.types || []),
   ].join(' ').toLowerCase();
-
-  for (const [brand, points] of Object.entries(KNOWN_BRAND_VERTICALS)) {
-    if (haystack.includes(brand)) return points;
-  }
 
   for (const rule of VERTICAL_RULES) {
     if (rule.keywords.some(kw => haystack.includes(kw))) return rule.points;
@@ -254,9 +518,12 @@ function scoreVertical(place: DiscoveredPlace): number {
 }
 
 function scoreEnterpriseScale(place: DiscoveredPlace): number {
-  const rev = place.estimatedRevenue;
-  if (!rev) return 0;
-  const revBillions = parseRevenueBillions(rev);
+  // Prefer seed revenue; fall back to the matched brand's revenue band.
+  let revBillions = place.estimatedRevenue ? parseRevenueBillions(place.estimatedRevenue) : 0;
+  if (revBillions <= 0) {
+    const brand = matchKnownBrand(place);
+    if (brand) revBillions = brand.revB;
+  }
   if (revBillions >= 10) return 25;
   if (revBillions >= 5) return 22;
   if (revBillions >= 1) return 18;
@@ -264,6 +531,14 @@ function scoreEnterpriseScale(place: DiscoveredPlace): number {
   if (revBillions >= 0.1) return 10;
   if (revBillions >= 0.05) return 6;
   if (revBillions > 0) return 3;
+
+  // Last-resort proxy for un-enriched places: Google review volume is a weak
+  // but non-zero signal of facility throughput. Capped low so it never rivals
+  // a real revenue match.
+  const ratings = place.userRatingsTotal ?? 0;
+  if (ratings >= 2000) return 10;
+  if (ratings >= 1000) return 6;
+  if (ratings >= 500) return 3;
   return 0;
 }
 
@@ -280,8 +555,13 @@ function parseRevenueBillions(rev: string): number {
 }
 
 function scoreNetworkComplexity(place: DiscoveredPlace): number {
-  const f = place.estimatedFacilities;
-  if (f == null || f <= 0) return 0;
+  // Prefer seed facility count; fall back to the matched brand's footprint.
+  let f = place.estimatedFacilities ?? 0;
+  if (f <= 0) {
+    const brand = matchKnownBrand(place);
+    if (brand) f = brand.fac;
+  }
+  if (f <= 0) return 0;
   if (f >= 50) return 25;
   if (f >= 25) return 20;
   if (f >= 10) return 15;
