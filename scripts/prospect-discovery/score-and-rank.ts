@@ -594,16 +594,45 @@ const NOISE_KEYWORDS: string[] = [
 // is a DC, not a restaurant). Checked against the name only, not the address, so
 // a place in "Plant City" isn't rescued by the word "plant".
 const FACILITY_POSITIVE: string[] = [
-  'distribution', 'warehouse', 'fulfillment', 'logistics', 'cold storage',
-  'manufacturing', 'cross dock', 'crossdock', 'cross-dock', 'supply chain',
-  'processing plant', 'production', 'bottling', 'cannery', 'creamery',
+  'distribution', 'warehouse', 'fulfillment', 'fulfilment', 'logistics', 'cold storage',
+  'manufacturing', 'manufactur', 'cross dock', 'crossdock', 'cross-dock', 'supply chain',
+  'processing plant', 'processing', 'production', 'bottling', 'cannery', 'creamery',
+  'distributor', 'freight', 'terminal', 'sortation', 'depot', 'wholesale', 'foodservice',
+  'food service', 'provisions', 'packaging', 'dairy', 'refinery', 'bulk mail',
+  'network distribution', 'import', 'export', '3pl', 'distribution center', 'service center',
+];
+
+// Retail / storefront / consumer place types that are NOT yard targets even when
+// the name matches a known enterprise brand (e.g. "FedEx OnSite", "The UPS Store",
+// "Staples" retail). These OVERRIDE the brand-match shortcut below — that shortcut
+// was landing FedEx/UPS/Staples retail dropoff points at Tier A. FACILITY_POSITIVE
+// still wins (a real "Staples Fulfillment Center" survives).
+const RETAIL_STOREFRONT_NOISE: string[] = [
+  'the ups store', 'ups store', 'fedex office', 'fedex ship center', 'fedex onsite',
+  'fedex print', 'pak mail', 'postal annex', 'mailbox', 'notary', 'pack and ship',
+  'pack & ship', 'self storage', 'self-storage', 'public storage', 'extra space',
+  'cubesmart', 'life storage', 'u-haul', 'uhaul', 'storage units', 'post office',
+  'postal service', 'usps', 'gas station', 'fuel station', 'fuel rack', 'fuel stop',
+  'guaranteed scale', 'speedway', '7-eleven', '7 eleven', 'circle k', 'quiktrip',
+  'royal farms', 'cumberland farms', 'wawa', 'sheetz', 'maverik', 'getgo', 'kwik fill',
+  'kum & go', 'sunoco', 'valero', 'citgo', 'conoco', 'phillips 66', 'mobil', 'texaco',
+  'walmart deli', ' deli', 'car wash', 'dealership', 'hotel', 'motel', 'restaurant',
+  'diner', 'credit union', 'church', 'school', 'university', 'college', ' gym',
+  'fitness', 'ymca', 'library', 'golf', 'casino', 'apartment', 'hospital', 'clinic',
+  'supercenter', 'neighborhood market',
 ];
 
 function detectNoise(place: DiscoveredPlace): string | null {
-  // Never exclude a recognized enterprise brand.
-  if (matchKnownBrand(place)) return null;
   const name = place.name.toLowerCase();
+  // A real logistics facility is always a prospect.
   if (FACILITY_POSITIVE.some(kw => name.includes(kw))) return null;
+  // Retail/storefront/consumer places are noise even for known brands
+  // (FedEx OnSite, UPS Store, gas stations, self-storage, etc.).
+  for (const kw of RETAIL_STOREFRONT_NOISE) {
+    if (name.includes(kw)) return `retail/storefront: ${kw.trim()}`;
+  }
+  // Otherwise, never exclude a recognized enterprise brand.
+  if (matchKnownBrand(place)) return null;
   const hay = `${place.name} ${place.address}`.toLowerCase();
   for (const kw of NOISE_KEYWORDS) {
     if (hay.includes(kw)) return kw;
@@ -984,6 +1013,7 @@ async function main() {
   // 3. Score each discovery
   console.log('Scoring discoveries...');
   const scored: ScoredProspect[] = [];
+  const weededOut: { name: string; address: string; reason: string }[] = [];
 
   for (let i = 0; i < discoveries.length; i++) {
     const place = discoveries[i];
@@ -1000,11 +1030,16 @@ async function main() {
     // 4. Dedup against existing accounts
     const existingMatch = matchExistingAccount(place, existingFacilities, normalizedAccountNames);
 
-    // 5. Flag obvious non-prospects (truck stops, airports, restaurants, etc.).
-    // Excluded rows keep their score for transparency but are forced to Tier D
-    // so they never surface in the Tier A/B working list.
+    // 5. Drop obvious non-prospects ENTIRELY (truck stops, airports, restaurants,
+    // and retail/storefront/consumer places like FedEx OnSite, The UPS Store, gas
+    // stations, self-storage). They are written to a weeded-out audit file, not the
+    // working list — so they never clutter the Hub or corridor views. Real
+    // logistics facilities are protected by FACILITY_POSITIVE inside detectNoise.
     const noiseReason = detectNoise(place);
-    const excluded = noiseReason !== null;
+    if (noiseReason !== null) {
+      weededOut.push({ name: place.name, address: place.address, reason: noiseReason });
+      continue;
+    }
 
     scored.push({
       name: place.name,
@@ -1013,7 +1048,7 @@ async function main() {
       lng: place.lng,
       placeId: place.placeId,
       icpScore,
-      tier: excluded ? 'D' : assignTier(icpScore),
+      tier: assignTier(icpScore),
       scoreBreakdown: {
         verticalMatch,
         enterpriseScale,
@@ -1027,8 +1062,8 @@ async function main() {
       nearestPrimoSite: nearest,
       corridor: '', // populated during clustering
       discoveredVia: place.discoveredVia || [],
-      excluded,
-      excludeReason: noiseReason ?? undefined,
+      excluded: false,
+      excludeReason: undefined,
     });
   }
 
@@ -1041,7 +1076,7 @@ async function main() {
 
   // 6. Build output
   const existingCount = scored.filter(p => p.isExistingAccount).length;
-  const excludedCount = scored.filter(p => p.excluded).length;
+  const excludedCount = weededOut.length;
   // Net-new = not already in CRM and not flagged as noise.
   const netNew = scored.filter(p => !p.isExistingAccount && !p.excluded);
 
@@ -1074,13 +1109,18 @@ async function main() {
   fs.writeFileSync(csvPath, buildCsv(scored));
   console.log(`CSV saved:  ${csvPath}`);
 
+  // Audit: the non-target places we dropped (retail/storefront/consumer/noise).
+  const weededPath = path.join(outDir, `weeded-out-${today}.json`);
+  fs.writeFileSync(weededPath, JSON.stringify(weededOut, null, 2));
+  console.log(`Weeded-out audit saved: ${weededPath} (${weededOut.length} dropped)`);
+
   // 7. Console summary
   console.log(`\n${'='.repeat(110)}`);
   console.log('PROSPECT SCORING SUMMARY');
   console.log(`${'='.repeat(110)}`);
   console.log(`Total discoveries: ${scored.length}`);
   console.log(`Existing account matches: ${existingCount}`);
-  console.log(`Excluded as noise (truck stops, etc.): ${excludedCount}`);
+  console.log(`Weeded out (retail/storefront/truck stops/etc.): ${excludedCount}`);
   console.log(`Net-new qualified prospects: ${netNew.length}`);
   console.log(`Tier A (>=70): ${output.tierA}  |  Tier B (50-69): ${output.tierB}  |  Tier C (30-49): ${output.tierC}  |  Tier D (<30): ${output.tierD}`);
 
