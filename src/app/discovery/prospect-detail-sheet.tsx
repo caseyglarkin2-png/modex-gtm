@@ -1,6 +1,8 @@
 'use client';
 
+import { useEffect, useState, useTransition } from 'react';
 import Link from 'next/link';
+import { ExternalLink, Loader2, Check } from 'lucide-react';
 import { BandBadge } from '@/components/band-badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -10,7 +12,9 @@ import {
   SheetTitle,
   SheetDescription,
 } from '@/components/ui/sheet';
+import { formatDiscoveredVia } from '@/lib/discovery/filters';
 import type { ProspectRow } from '@/lib/discovery/types';
+import { pushProspectToHubSpot, type PushResult } from './actions';
 
 const DIMENSIONS: { key: keyof Pick<ProspectRow, 'verticalMatch' | 'enterpriseScale' | 'networkComplexity' | 'primoProximity' | 'corridorDensity' | 'placeTypeBonus'>; label: string; max: number }[] = [
   { key: 'enterpriseScale', label: 'Enterprise Scale', max: 25 },
@@ -27,6 +31,31 @@ interface Props {
 }
 
 export function ProspectDetailSheet({ prospect, onClose }: Props) {
+  const [isPending, startTransition] = useTransition();
+  const [result, setResult] = useState<PushResult | null>(null);
+
+  // Reset push state whenever a different prospect is opened.
+  useEffect(() => {
+    setResult(null);
+  }, [prospect?.placeId]);
+
+  function handlePush() {
+    if (!prospect) return;
+    startTransition(async () => {
+      const res = await pushProspectToHubSpot({
+        name: prospect.name,
+        cityState: prospect.cityState,
+        corridor: prospect.corridor,
+        icpScore: prospect.icpScore,
+        tier: prospect.tier,
+        isExistingAccount: prospect.isExistingAccount,
+      });
+      setResult(res);
+    });
+  }
+
+  const pushed = result?.ok === true;
+
   return (
     <Sheet open={!!prospect} onOpenChange={(open) => { if (!open) onClose(); }}>
       <SheetContent side="right" className="overflow-y-auto sm:max-w-md">
@@ -84,9 +113,9 @@ export function ProspectDetailSheet({ prospect, onClose }: Props) {
                   <span>{prospect.cityState}</span>
                 </div>
                 {prospect.discoveredVia.length > 0 && (
-                  <div className="flex justify-between">
+                  <div className="flex justify-between gap-4">
                     <span className="text-[var(--muted-foreground)]">Discovered via</span>
-                    <span className="text-right text-xs">{prospect.discoveredVia.join(', ')}</span>
+                    <span className="text-right text-xs">{formatDiscoveredVia(prospect.discoveredVia)}</span>
                   </div>
                 )}
               </div>
@@ -95,7 +124,37 @@ export function ProspectDetailSheet({ prospect, onClose }: Props) {
                 <Link href={`/accounts/${prospect.existingAccountSlug}`}>
                   <Button variant="outline" className="w-full">Open in Accounts</Button>
                 </Link>
-              ) : null}
+              ) : (
+                <div className="space-y-2">
+                  <Button
+                    className="w-full"
+                    onClick={handlePush}
+                    disabled={isPending || pushed}
+                  >
+                    {isPending && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                    {pushed && <Check className="mr-2 h-4 w-4" />}
+                    {pushed
+                      ? result?.action === 'updated' ? 'Updated in HubSpot' : 'Pushed to HubSpot'
+                      : isPending ? 'Pushing…' : 'Push to HubSpot'}
+                  </Button>
+
+                  {pushed && result?.url && (
+                    <a
+                      href={result.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-1 text-xs text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
+                    >
+                      <ExternalLink className="h-3 w-3" /> Open company in HubSpot
+                    </a>
+                  )}
+                  {result && !result.ok && (
+                    <p className="text-center text-xs text-red-600">
+                      {result.reason ?? result.error ?? 'Push failed.'}
+                    </p>
+                  )}
+                </div>
+              )}
             </div>
           </>
         )}

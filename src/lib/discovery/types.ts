@@ -1,3 +1,9 @@
+export interface DiscoveredVia {
+  anchor: string;
+  keyword: string;
+  distanceMiles: number;
+}
+
 export interface ScoreBreakdown {
   verticalMatch: number;
   enterpriseScale: number;
@@ -20,7 +26,7 @@ export interface ScoredProspect {
   existingAccountSlug?: string;
   nearestPrimoSite: { name: string; distanceMiles: number };
   corridor: string;
-  discoveredVia: string[];
+  discoveredVia: Array<DiscoveredVia | string>;
   excluded?: boolean;
   excludeReason?: string;
   estimatedRevenue?: number;
@@ -72,7 +78,7 @@ export interface ProspectRow {
   nearestPrimoName: string;
   nearestPrimoDistance: number;
   corridor: string;
-  discoveredVia: string[];
+  discoveredVia: Array<DiscoveredVia | string>;
   excluded: boolean;
   excludeReason?: string;
 }
