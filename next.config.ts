@@ -3,15 +3,6 @@ import { withSentryConfig } from "@sentry/nextjs";
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: ['127.0.0.1', 'localhost'],
-  // The /discovery page reads output/prospect-discovery/SAMPLE-scored-prospects.json
-  // at runtime via fs (see src/lib/discovery/data.ts). Next's file tracing only
-  // bundles files reached through imports, so without this the JSON is absent from
-  // the serverless function on Vercel → loadLatestScored() returns null → the page
-  // shows the "run the pipeline" empty state even though the data is committed.
-  // Ship the sample into the function so production renders the full dataset.
-  outputFileTracingIncludes: {
-    '/discovery': ['./output/prospect-discovery/SAMPLE-scored-prospects.json'],
-  },
   // yardflow.ai (flow-state-site) rewrites /for/* and /proposal/* to this app,
   // but does NOT rewrite /_next/* — so without an absolute assetPrefix the
   // browser would request CSS/JS/fonts from yardflow.ai and 404. Pinning
