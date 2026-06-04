@@ -18,7 +18,13 @@ screenshots/
 # ~1.6k JPEGs — too heavy for the deploy bundle. Tiles are served from a
 # separate CDN (Vercel Blob in D2). Until that's wired up, the demo route
 # falls back to live Google Static Maps URLs.
-output/
+# Ignore output/ EXCEPT the committed discovery sample, which the /discovery
+# page statically imports at build time (src/lib/discovery/data.ts). Use the
+# dir/* + !file form (not `output/`) so negation can re-include the one file.
+output/*
+!output/prospect-discovery
+output/prospect-discovery/*
+!output/prospect-discovery/SAMPLE-scored-prospects.json
 public/demo-packs/tiles/
 
 # Docs and data files not needed by the Next.js build
