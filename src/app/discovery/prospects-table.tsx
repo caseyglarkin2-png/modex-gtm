@@ -92,6 +92,7 @@ export function ProspectsTable({ prospects, onRowClick }: ProspectsTableProps) {
       searchKey="name"
       searchPlaceholder="Search prospects..."
       onRowClick={onRowClick}
+      pageSize={50}
     />
   );
 }

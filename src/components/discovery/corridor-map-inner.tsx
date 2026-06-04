@@ -12,6 +12,10 @@ const TIER_COLORS: Record<string, string> = {
   D: '#737373',
 };
 
+// Leaflet renders one SVG node per marker; ~8.7k markers tanks pan/zoom. Cap to
+// the highest-scoring N and surface a caption so the rest is reachable via filters.
+const MAX_MARKERS = 1500;
+
 interface Props {
   prospects: ProspectRow[];
   corridors: Corridor[];
@@ -41,7 +45,20 @@ export default function CorridorMapInner({ prospects, corridors, onSelectProspec
     [corridors],
   );
 
+  const shown = useMemo(() => {
+    if (prospects.length <= MAX_MARKERS) return prospects;
+    return [...prospects].sort((a, b) => b.icpScore - a.icpScore).slice(0, MAX_MARKERS);
+  }, [prospects]);
+
+  const capped = prospects.length > MAX_MARKERS;
+
   return (
+    <div className="relative h-full w-full">
+    {capped && (
+      <div className="pointer-events-none absolute right-2 top-2 z-[1000] rounded-md bg-black/70 px-2 py-1 text-[10px] font-medium text-white/85 backdrop-blur-sm">
+        Showing top {MAX_MARKERS.toLocaleString()} of {prospects.length.toLocaleString()} by score — filter to narrow
+      </div>
+    )}
     <MapContainer
       style={{ width: '100%', height: '100%', background: '#0f172a' }}
       center={[39.5, -98.35]}
@@ -53,7 +70,7 @@ export default function CorridorMapInner({ prospects, corridors, onSelectProspec
         attribution="Tiles &copy; Esri — Source: Esri, Maxar, Earthstar Geographics"
         maxZoom={19}
       />
-      <FitToBounds prospects={prospects} />
+      <FitToBounds prospects={shown} />
 
       {corridorList.map((c) => (
         <Circle
@@ -69,7 +86,7 @@ export default function CorridorMapInner({ prospects, corridors, onSelectProspec
         />
       ))}
 
-      {prospects.map((p) => (
+      {shown.map((p) => (
         <CircleMarker
           key={p.placeId}
           center={[p.lat, p.lng]}
@@ -96,5 +113,6 @@ export default function CorridorMapInner({ prospects, corridors, onSelectProspec
         </CircleMarker>
       ))}
     </MapContainer>
+    </div>
   );
 }
