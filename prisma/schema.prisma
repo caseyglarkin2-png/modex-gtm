@@ -666,7 +666,55 @@ model EmailLog {
   @@index([status])
   @@index([provider_message_id])
   @@index([thread_id])
+  @@index([to_email])
   @@map("email_logs")
+}
+
+/// Draft Queue (Outbox): staged outreach drafts reviewed in /discovery and sent
+/// via the shared performSend() Gmail path. Populated by Clawd (API) and Casey (UI).
+/// See docs/superpowers/plans/2026-06-05-discovery-draft-queue.md
+model DraftQueueItem {
+  id                  Int       @id @default(autoincrement())
+  to_email            String // ALWAYS lowercased on write
+  account_name        String
+  persona_name        String?
+  persona_id          Int?
+  subject             String
+  body                String
+  image_url           String?
+  status              String    @default("draft") // draft|approved|sending|sent|failed|skipped
+  source              String    @default("casey") // casey|clawd
+  owner               String    @default("casey@freightroll.com")
+  batch_id            String?
+  scheduled_for       DateTime?
+  // backlog-sprint columns (nullable now to avoid later ALTERs)
+  sequence_id         Int?
+  sequence_run_id     String?
+  step_index          Int?
+  parent_item_id      Int?
+  experiment_id       String?
+  variant_key         String?
+  // result + crash-safe recovery
+  idempotency_key     String    @unique // deterministic: owner:to_email:run:step
+  email_log_id        Int?
+  provider_message_id String? // stamped the instant Gmail returns
+  thread_id           String?
+  sideeffects_done    Boolean   @default(false) // false + provider_message_id set => sent-but-postproc-pending
+  skipped_reason      String?
+  error_message       String?
+  created_by          String?
+  approved_at         DateTime?
+  claimed_at          DateTime? // for stuck-sending detection
+  sent_at             DateTime?
+  created_at          DateTime  @default(now())
+  updated_at          DateTime  @updatedAt
+
+  @@index([status, scheduled_for])
+  @@index([batch_id])
+  @@index([owner, status])
+  @@index([to_email])
+  @@index([sequence_run_id, status])
+  @@map("draft_queue_items")
 }
 
 model SendJob {
