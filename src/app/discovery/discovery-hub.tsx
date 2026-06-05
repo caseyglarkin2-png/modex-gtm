@@ -17,6 +17,7 @@ import { ProspectsTable } from './prospects-table';
 import { ScanPanel } from './scan-panel';
 import { WeightControl } from './weight-control';
 import { usePinned } from './use-pinned';
+import { useTouchLog } from './use-touch-log';
 
 const WEIGHT_STORAGE_KEY = 'discovery.weighting';
 const DEFAULT_WEIGHTING = 'proximity-led';
@@ -74,6 +75,7 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
   const [dailySlice, setDailySlice] = useState<boolean>(searchParams.get('all') !== '1');
   const [selectedProspect, setSelectedProspect] = useState<RankedRow | null>(null);
   const { pinned, toggle: togglePinned } = usePinned();
+  const { touches, logTouch } = useTouchLog();
 
   // Restore the persisted weighting on mount (URL wins over localStorage so a
   // shared link is authoritative). Runs client-only — localStorage is unavailable on the server.
@@ -276,6 +278,10 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
       <ProspectDetailSheet
         prospect={selectedProspect}
         onClose={() => setSelectedProspect(null)}
+        pinned={pinned}
+        onTogglePin={togglePinned}
+        touches={touches}
+        onLogTouch={logTouch}
       />
     </>
   );

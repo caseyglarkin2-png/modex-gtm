@@ -99,4 +99,6 @@ export interface CuratedRow extends ProspectRow {
   confidence: Confidence;
   /** How many duplicate / grain-artifact rows (e.g. truck entrances) collapsed into this one. */
   mergedCount: number;
+  /** Slug of a matching YardFlow microsite (/for, /demo), or undefined when none exists. */
+  micrositeSlug?: string;
 }
