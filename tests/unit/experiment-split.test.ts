@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { allocateRecipientsDeterministic, normalizeVariantSplits, previewVariantAllocation } from '@/lib/experiments/split';
+import { normalizeVariantSplits, previewVariantAllocation } from '@/lib/experiments/split';
+import { allocateRecipientsDeterministic } from '@/lib/experiments/allocate';
 
 describe('experiment split allocator', () => {
   it('normalizes split fractions to 1.0', () => {
