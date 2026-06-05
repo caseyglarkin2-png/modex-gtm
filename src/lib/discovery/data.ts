@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
-import type { ScoredOutput, ScoredProspect, ProspectRow } from './types';
+import type { ScoredOutput, ScoredProspect, ProspectRow, CuratedRow } from './types';
+import { curate } from './curate';
 // Statically imported so the compiler bundles it into the serverless function.
 // This is the ONLY data source guaranteed to exist on Vercel — the dated files
 // below are gitignored, and runtime-fs reads of committed files are NOT reliably
@@ -65,6 +66,15 @@ export function toProspectRow(p: ScoredProspect): ProspectRow {
     excluded: p.excluded ?? false,
     excludeReason: p.excludeReason,
   };
+}
+
+/**
+ * Map the raw scored prospects to view rows and curate them into a sellable
+ * target set: one row per physical site (grain artifacts folded), each tagged
+ * with segment + confidence. This is the canonical row set the hub renders.
+ */
+export function buildCuratedRows(output: ScoredOutput): CuratedRow[] {
+  return curate(output.prospects.map(toProspectRow));
 }
 
 export interface DiscoverySummary {

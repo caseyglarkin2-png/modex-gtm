@@ -6,7 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CorridorMap } from '@/components/discovery/corridor-map';
 import { filterProspects } from '@/lib/discovery/filters';
-import type { Corridor, ProspectRow, ScoredOutput } from '@/lib/discovery/types';
+import type { CurationSummary } from '@/lib/discovery/curate';
+import type { Corridor, CuratedRow, ProspectSegment, ScoredOutput } from '@/lib/discovery/types';
 import { CorridorsView } from './corridors-view';
 import { FilterBar } from './filter-bar';
 import { ProspectDetailSheet } from './prospect-detail-sheet';
@@ -14,9 +15,10 @@ import { ProspectsTable } from './prospects-table';
 import { ScanPanel } from './scan-panel';
 
 interface Props {
-  rows: ProspectRow[];
+  rows: CuratedRow[];
   corridors: Corridor[];
   output: ScoredOutput;
+  curation: CurationSummary;
 }
 
 const VALID_TABS = ['prospects', 'corridors', 'scan'] as const;
@@ -38,7 +40,7 @@ function syncUrl(params: Record<string, string | null>) {
   window.history.replaceState(null, '', qs ? `?${qs}` : window.location.pathname);
 }
 
-export function DiscoveryHub({ rows, corridors, output }: Props) {
+export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
   const searchParams = useSearchParams();
 
   const initialTab = VALID_TABS.includes(searchParams.get('tab') as (typeof VALID_TABS)[number])
@@ -54,9 +56,17 @@ export function DiscoveryHub({ rows, corridors, output }: Props) {
   const [tierFilter, setTierFilter] = useState<string | null>(searchParams.get('tier'));
   const [corridorFilter, setCorridorFilter] = useState<string | null>(searchParams.get('corridor'));
   const [minScore, setMinScore] = useState<number | null>(initialMinScore);
-  const [selectedProspect, setSelectedProspect] = useState<ProspectRow | null>(null);
+  const [segmentFilter, setSegmentFilter] = useState<string | null>(searchParams.get('segment'));
+  const [selectedProspect, setSelectedProspect] = useState<CuratedRow | null>(null);
 
   const corridorNames = useMemo(() => corridors.map((c) => c.name).sort(), [corridors]);
+
+  // Per-segment counts for the filter chips (computed over the full curated set).
+  const segmentCounts = useMemo(() => {
+    const counts: Record<ProspectSegment, number> = { shipper: 0, carrier: 0, '3pl': 0, parcel: 0 };
+    for (const r of rows) counts[r.segment] += 1;
+    return counts;
+  }, [rows]);
 
   const filtered = useMemo(
     () =>
@@ -64,8 +74,11 @@ export function DiscoveryHub({ rows, corridors, output }: Props) {
         tier: tierFilter ?? undefined,
         corridor: corridorFilter ?? undefined,
         minScore: minScore ?? undefined,
+        segment: segmentFilter ?? undefined,
+        // Default daily slice hides parcel / last-mile; selecting the Parcel chip reveals it.
+        excludeParcel: true,
       }),
-    [rows, tierFilter, corridorFilter, minScore],
+    [rows, tierFilter, corridorFilter, minScore, segmentFilter],
   );
 
   const handleTabChange = useCallback((value: string) => {
@@ -86,6 +99,11 @@ export function DiscoveryHub({ rows, corridors, output }: Props) {
   const handleMinScoreChange = useCallback((score: number | null) => {
     setMinScore(score);
     syncUrl({ minScore: score == null ? null : String(score) });
+  }, []);
+
+  const handleSegmentChange = useCallback((segment: string | null) => {
+    setSegmentFilter(segment);
+    syncUrl({ segment });
   }, []);
 
   // Clicking a corridor card jumps to the Prospects tab filtered to that corridor.
@@ -120,10 +138,13 @@ export function DiscoveryHub({ rows, corridors, output }: Props) {
             tierFilter={tierFilter}
             corridorFilter={corridorFilter}
             minScore={minScore}
+            segmentFilter={segmentFilter}
+            segmentCounts={segmentCounts}
             corridorNames={corridorNames}
             onTierChange={handleTierChange}
             onCorridorChange={handleCorridorChange}
             onMinScoreChange={handleMinScoreChange}
+            onSegmentChange={handleSegmentChange}
             resultCount={filtered.length}
           />
 
@@ -153,7 +174,7 @@ export function DiscoveryHub({ rows, corridors, output }: Props) {
         </TabsContent>
 
         <TabsContent value="scan">
-          <ScanPanel output={output} />
+          <ScanPanel output={output} curation={curation} />
         </TabsContent>
       </Tabs>
 

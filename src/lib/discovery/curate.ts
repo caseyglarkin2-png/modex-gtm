@@ -221,3 +221,25 @@ export function curate(rows: ProspectRow[]): CuratedRow[] {
     confidence: assessConfidence(r),
   }));
 }
+
+export interface CurationSummary {
+  /** Rows surviving dedup. */
+  curatedTotal: number;
+  /** Duplicate / artifact rows folded away during dedup. */
+  mergedTotal: number;
+  bySegment: Record<ProspectSegment, number>;
+  byConfidence: Record<Confidence, number>;
+}
+
+/** Headline curation counts for the Scan panel / provenance line. */
+export function summarizeCuration(rows: CuratedRow[]): CurationSummary {
+  const bySegment: Record<ProspectSegment, number> = { shipper: 0, carrier: 0, '3pl': 0, parcel: 0 };
+  const byConfidence: Record<Confidence, number> = { high: 0, medium: 0, low: 0 };
+  let mergedTotal = 0;
+  for (const r of rows) {
+    bySegment[r.segment] += 1;
+    byConfidence[r.confidence] += 1;
+    mergedTotal += r.mergedCount;
+  }
+  return { curatedTotal: rows.length, mergedTotal, bySegment, byConfidence };
+}

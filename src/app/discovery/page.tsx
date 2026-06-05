@@ -2,7 +2,8 @@ import { Breadcrumb } from '@/components/breadcrumb';
 import { MetricCard } from '@/components/metric-card';
 import { Card, CardContent } from '@/components/ui/card';
 import { Compass, Layers, Radar, Trophy } from 'lucide-react';
-import { loadLatestScored, getDiscoverySummary, toProspectRow } from '@/lib/discovery/data';
+import { loadLatestScored, getDiscoverySummary, buildCuratedRows } from '@/lib/discovery/data';
+import { summarizeCuration } from '@/lib/discovery/curate';
 import { DiscoveryHub } from './discovery-hub';
 
 export const dynamic = 'force-dynamic';
@@ -30,7 +31,8 @@ export default function DiscoveryPage() {
   }
 
   const summary = getDiscoverySummary(output);
-  const allRows = output.prospects.map(toProspectRow);
+  const curatedRows = buildCuratedRows(output);
+  const curation = summarizeCuration(curatedRows);
 
   return (
     <div className="space-y-6">
@@ -73,10 +75,13 @@ export default function DiscoveryPage() {
       </div>
 
       <p className="text-xs text-[var(--muted-foreground)]">
-        Scored {new Date(summary.generatedAt).toLocaleDateString()} · from {output.inputFile}
+        Scored {new Date(summary.generatedAt).toLocaleDateString()} · from {output.inputFile} ·{' '}
+        curated to {curation.curatedTotal.toLocaleString()} sellable sites
+        {curation.mergedTotal > 0 && ` · ${curation.mergedTotal.toLocaleString()} duplicate/gate rows merged`}
+        {curation.bySegment.parcel > 0 && ` · ${curation.bySegment.parcel.toLocaleString()} parcel/last-mile demoted`}
       </p>
 
-      <DiscoveryHub rows={allRows} corridors={output.corridors} output={output} />
+      <DiscoveryHub rows={curatedRows} corridors={output.corridors} output={output} curation={curation} />
     </div>
   );
 }

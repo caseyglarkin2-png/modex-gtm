@@ -6,6 +6,7 @@ import {
   dedupeByGrain,
   curate,
   normalizeSiteName,
+  summarizeCuration,
 } from '@/lib/discovery/curate';
 import type { ProspectRow } from '@/lib/discovery/types';
 
@@ -144,6 +145,24 @@ describe('curate', () => {
     }
     const parcel = out.find((r) => r.name.includes('Amazon Delivery'));
     expect(parcel?.segment).toBe('parcel');
+  });
+});
+
+describe('summarizeCuration', () => {
+  it('reports curated total, merges, and per-segment / per-confidence counts', () => {
+    const curated = curate([
+      mkRow({ name: 'Nestle Distribution Center', enterpriseScale: 25 }),
+      mkRow({ name: 'GXO Logistics', lat: 30, lng: -90 }),
+      mkRow({ name: 'Amazon Delivery Station', lat: 31, lng: -91 }),
+      mkRow({ name: 'Nestle Distribution Center (Truck Entrance)', enterpriseScale: 25 }), // folds into #1
+    ]);
+    const s = summarizeCuration(curated);
+    expect(s.curatedTotal).toBe(3);
+    expect(s.mergedTotal).toBe(1);
+    expect(s.bySegment.shipper).toBe(1);
+    expect(s.bySegment['3pl']).toBe(1);
+    expect(s.bySegment.parcel).toBe(1);
+    expect(s.byConfidence.high + s.byConfidence.medium + s.byConfidence.low).toBe(3);
   });
 });
 
