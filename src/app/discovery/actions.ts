@@ -266,3 +266,34 @@ export async function inferContactEmail(input: {
   });
   return { ...inferred, domain: ctx.domain };
 }
+
+/**
+ * Web-research decision-makers at a prospect (Gemini + Google Search grounding),
+ * each with an inferred email from the company's pattern. These are PROPOSALS to
+ * verify — the UI flags them and links a LinkedIn search. Empty when unavailable.
+ */
+export async function researchProspectContacts(input: { company: string; accountSlug?: string }): Promise<ProspectContact[]> {
+  const { researchDecisionMakers } = await import('@/lib/discovery/research');
+  const [people, ctx] = await Promise.all([
+    researchDecisionMakers(input.company),
+    resolveCompanyEmailContext(input.company, input.accountSlug),
+  ]);
+
+  return people.map((p) => {
+    const inf = ctx.domain
+      ? inferEmail(p.firstName, p.lastName, ctx.domain, { samples: ctx.samples, storedPattern: ctx.storedPattern })
+      : { email: null, confidence: 'none' as const, basis: 'no company domain known' };
+    return {
+      name: p.name,
+      firstName: p.firstName,
+      lastName: p.lastName,
+      title: p.title,
+      email: inf.email,
+      confidence: inf.confidence,
+      emailBasis: inf.basis,
+      source: 'research' as const,
+      linkedinUrl: p.linkedinUrl,
+      reason: p.reason,
+    };
+  });
+}

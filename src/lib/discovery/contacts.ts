@@ -16,8 +16,10 @@ export interface ProspectContact {
   /** 'known' = real address from our records; otherwise the inference band. */
   confidence: InferConfidence | 'known';
   emailBasis?: string;
-  source: 'records' | 'hubspot' | 'added';
+  source: 'records' | 'hubspot' | 'added' | 'research';
   linkedinUrl?: string;
+  /** Why this person is relevant (from web research). */
+  reason?: string;
 }
 
 const FREE_EMAIL_DOMAINS = new Set([

@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import { Loader2, Mail, Plus, Linkedin } from 'lucide-react';
+import { Loader2, Mail, Plus, Linkedin, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -9,7 +9,26 @@ import { EmailComposer } from '@/components/email/composer';
 import { generateAngle } from '@/lib/discovery/angle';
 import type { RankedRow } from '@/lib/discovery/scoring';
 import type { ProspectContact } from '@/lib/discovery/contacts';
-import { findProspectContacts, inferContactEmail, type ProspectContactsResult } from './actions';
+import { findProspectContacts, inferContactEmail, researchProspectContacts, type ProspectContactsResult } from './actions';
+
+const SOURCE_LABEL: Record<ProspectContact['source'], string> = {
+  records: 'Our records',
+  hubspot: 'HubSpot',
+  added: 'Added',
+  research: 'AI · verify',
+};
+
+/** Reliable LinkedIn people-search for a researched name (model URLs can be wrong). */
+function linkedinHref(c: ProspectContact, company: string): string | undefined {
+  if (c.source === 'research') {
+    return `https://www.linkedin.com/search/results/people/?keywords=${encodeURIComponent(`${c.name} ${company}`)}`;
+  }
+  return c.linkedinUrl;
+}
+
+function nameKey(name: string): string {
+  return name.toLowerCase().replace(/[^a-z]+/g, ' ').trim();
+}
 
 const CONFIDENCE_STYLE: Record<string, { label: string; className: string }> = {
   known: { label: 'verified', className: 'text-emerald-600 border-emerald-600/30' },
@@ -17,12 +36,6 @@ const CONFIDENCE_STYLE: Record<string, { label: string; className: string }> = {
   medium: { label: 'inferred', className: 'text-amber-600 border-amber-600/40' },
   low: { label: 'low conf.', className: 'text-orange-600 border-orange-600/40' },
   none: { label: 'no email', className: 'text-neutral-500 border-neutral-500/30' },
-};
-
-const SOURCE_LABEL: Record<ProspectContact['source'], string> = {
-  records: 'Our records',
-  hubspot: 'HubSpot',
-  added: 'Added',
 };
 
 /** Build the outreach subject + body from the proximity angle. */
@@ -49,6 +62,9 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
   const [data, setData] = useState<ProspectContactsResult | null>(null);
   const [loading, setLoading] = useState(false);
   const [added, setAdded] = useState<ProspectContact[]>([]);
+  const [researched, setResearched] = useState<ProspectContact[]>([]);
+  const [researching, setResearching] = useState(false);
+  const [researchDone, setResearchDone] = useState(false);
   const [form, setForm] = useState({ firstName: '', lastName: '', title: '', linkedinUrl: '' });
   const [adding, setAdding] = useState(false);
   const [composeFor, setComposeFor] = useState<ProspectContact | null>(null);
@@ -58,6 +74,8 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
     let cancelled = false;
     setData(null);
     setAdded([]);
+    setResearched([]);
+    setResearchDone(false);
     setLoading(true);
     findProspectContacts({ company: prospect.name, accountSlug: prospect.existingAccountSlug })
       .then((d) => { if (!cancelled) setData(d); })
@@ -65,7 +83,30 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
     return () => { cancelled = true; };
   }, [prospect.placeId, prospect.name, prospect.existingAccountSlug]);
 
-  const contacts = useMemo(() => [...added, ...(data?.contacts ?? [])], [added, data]);
+  // Merge sources, preferring our real-email record over an inferred duplicate.
+  const contacts = useMemo(() => {
+    const known = new Map((data?.contacts ?? []).map((c) => [nameKey(c.name), c]));
+    const out: ProspectContact[] = [];
+    const seen = new Set<string>();
+    for (const c of [...added, ...researched, ...(data?.contacts ?? [])]) {
+      const k = nameKey(c.name);
+      if (!k || seen.has(k)) continue;
+      seen.add(k);
+      out.push(known.get(k) ?? c);
+    }
+    return out;
+  }, [added, researched, data]);
+
+  async function handleResearch() {
+    setResearching(true);
+    try {
+      const found = await researchProspectContacts({ company: prospect.name, accountSlug: prospect.existingAccountSlug });
+      setResearched(found);
+      setResearchDone(true);
+    } finally {
+      setResearching(false);
+    }
+  }
 
   async function handleAdd() {
     if (!form.firstName.trim() || !form.lastName.trim()) return;
@@ -132,16 +173,20 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
                 <div className="min-w-0">
                   <div className="flex items-center gap-1.5">
                     <span className="truncate font-medium">{c.name}</span>
-                    {c.linkedinUrl && (
-                      <a href={c.linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                    {linkedinHref(c, prospect.name) && (
+                      <a href={linkedinHref(c, prospect.name)} target="_blank" rel="noopener noreferrer" aria-label="Find on LinkedIn">
                         <Linkedin className="h-3 w-3 text-[var(--muted-foreground)] hover:text-[var(--primary)]" />
                       </a>
                     )}
-                    <Badge variant="outline" className="text-[9px] text-[var(--muted-foreground)] border-[var(--border)]">
+                    <Badge
+                      variant="outline"
+                      className={`text-[9px] ${c.source === 'research' ? 'text-violet-600 border-violet-600/40' : 'text-[var(--muted-foreground)] border-[var(--border)]'}`}
+                    >
                       {SOURCE_LABEL[c.source]}
                     </Badge>
                   </div>
                   {c.title && <div className="truncate text-xs text-[var(--muted-foreground)]">{c.title}</div>}
+                  {c.reason && <div className="truncate text-[10px] italic text-[var(--muted-foreground)]" title={c.reason}>{c.reason}</div>}
                   {c.email ? (
                     <div className="flex items-center gap-1.5">
                       <span className="truncate font-mono text-[11px] text-[var(--muted-foreground)]" title={c.emailBasis}>{c.email}</span>
@@ -165,6 +210,18 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
       ) : !loading ? (
         <p className="text-xs text-[var(--muted-foreground)]">No contacts in our records yet — add one below.</p>
       ) : null}
+
+      {/* AI web research — propose decision-makers to verify */}
+      {!researchDone ? (
+        <Button size="sm" variant="outline" className="w-full gap-1.5 text-xs" onClick={handleResearch} disabled={researching}>
+          {researching ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Sparkles className="h-3.5 w-3.5" />}
+          {researching ? 'Researching decision-makers…' : 'Find contacts (AI web research)'}
+        </Button>
+      ) : researched.length === 0 ? (
+        <p className="text-[11px] text-[var(--muted-foreground)]">No contacts found via research — add one manually below.</p>
+      ) : (
+        <p className="text-[11px] text-violet-600">{researched.length} AI-proposed contacts added — verify on LinkedIn before sending.</p>
+      )}
 
       {/* Add contact */}
       <div className="space-y-1.5 rounded-md border border-dashed border-[var(--border)] p-2">
