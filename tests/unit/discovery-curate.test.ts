@@ -43,6 +43,18 @@ describe('classifySegment', () => {
     expect(classifySegment(mkRow({ name: 'FedEx Ground Sortation Center' }))).toBe('parcel');
   });
 
+  it('tags parcel drop points (boxes, lockers, access points) as parcel', () => {
+    expect(classifySegment(mkRow({ name: 'FedEx Drop Box' }))).toBe('parcel');
+    expect(classifySegment(mkRow({ name: 'OnTrac Drop Box' }))).toBe('parcel');
+    expect(classifySegment(mkRow({ name: 'UPS Access Point location' }))).toBe('parcel');
+    expect(classifySegment(mkRow({ name: 'Amazon Hub Locker' }))).toBe('parcel');
+  });
+
+  it('does not flag businesses that merely contain "locker" as a substring', () => {
+    expect(classifySegment(mkRow({ name: "Blocker's Furniture Warehouse" }))).toBe('shipper');
+    expect(classifySegment(mkRow({ name: 'Toy Locker, LLC' }))).not.toBe('parcel');
+  });
+
   it('tags asset carriers as carrier', () => {
     expect(classifySegment(mkRow({ name: 'J.B. Hunt Transport Services' }))).toBe('carrier');
     expect(classifySegment(mkRow({ name: 'Old Dominion Freight Line' }))).toBe('carrier');
@@ -57,6 +69,11 @@ describe('classifySegment', () => {
   it('defaults real shipper facilities to shipper', () => {
     expect(classifySegment(mkRow({ name: 'Nestle Distribution Center' }))).toBe('shipper');
     expect(classifySegment(mkRow({ name: 'Frito-Lay Manufacturing Plant' }))).toBe('shipper');
+  });
+
+  it('does not match brand tokens inside unrelated words (export ≠ XPO)', () => {
+    expect(classifySegment(mkRow({ name: 'U.S. Meat Export Federation' }))).toBe('shipper');
+    expect(classifySegment(mkRow({ name: 'Western Export Services Inc' }))).toBe('shipper');
   });
 });
 

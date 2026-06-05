@@ -1,18 +1,24 @@
 'use client';
 
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CorridorMap } from '@/components/discovery/corridor-map';
 import { filterProspects } from '@/lib/discovery/filters';
 import type { CurationSummary } from '@/lib/discovery/curate';
+import { rankWorklist, WEIGHT_PRESETS } from '@/lib/discovery/scoring';
+import type { RankedRow } from '@/lib/discovery/scoring';
 import type { Corridor, CuratedRow, ProspectSegment, ScoredOutput } from '@/lib/discovery/types';
 import { CorridorsView } from './corridors-view';
 import { FilterBar } from './filter-bar';
 import { ProspectDetailSheet } from './prospect-detail-sheet';
 import { ProspectsTable } from './prospects-table';
 import { ScanPanel } from './scan-panel';
+import { WeightControl } from './weight-control';
+
+const WEIGHT_STORAGE_KEY = 'discovery.weighting';
+const DEFAULT_WEIGHTING = 'proximity-led';
 
 interface Props {
   rows: CuratedRow[];
@@ -57,7 +63,17 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
   const [corridorFilter, setCorridorFilter] = useState<string | null>(searchParams.get('corridor'));
   const [minScore, setMinScore] = useState<number | null>(initialMinScore);
   const [segmentFilter, setSegmentFilter] = useState<string | null>(searchParams.get('segment'));
-  const [selectedProspect, setSelectedProspect] = useState<CuratedRow | null>(null);
+  const [weighting, setWeighting] = useState<string>(searchParams.get('weight') ?? DEFAULT_WEIGHTING);
+  const [selectedProspect, setSelectedProspect] = useState<RankedRow | null>(null);
+
+  // Restore the persisted weighting on mount (URL wins over localStorage so a
+  // shared link is authoritative). Runs client-only — localStorage is unavailable on the server.
+  useEffect(() => {
+    if (searchParams.get('weight')) return;
+    const stored = window.localStorage.getItem(WEIGHT_STORAGE_KEY);
+    if (stored && stored in WEIGHT_PRESETS) setWeighting(stored);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const corridorNames = useMemo(() => corridors.map((c) => c.name).sort(), [corridors]);
 
@@ -79,6 +95,14 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
         excludeParcel: true,
       }),
     [rows, tierFilter, corridorFilter, minScore, segmentFilter],
+  );
+
+  // Re-aim: rank the filtered slice by the proximity-led, re-weightable worklist
+  // score. The table/map render this order by default (DataTable keeps input order
+  // until a column is clicked).
+  const ranked = useMemo<RankedRow[]>(
+    () => rankWorklist(filtered, WEIGHT_PRESETS[weighting] ?? WEIGHT_PRESETS[DEFAULT_WEIGHTING]),
+    [filtered, weighting],
   );
 
   const handleTabChange = useCallback((value: string) => {
@@ -106,6 +130,12 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
     syncUrl({ segment });
   }, []);
 
+  const handleWeightingChange = useCallback((value: string) => {
+    setWeighting(value);
+    window.localStorage.setItem(WEIGHT_STORAGE_KEY, value);
+    syncUrl({ weight: value === DEFAULT_WEIGHTING ? null : value });
+  }, []);
+
   // Clicking a corridor card jumps to the Prospects tab filtered to that corridor.
   const handleSelectCorridor = useCallback(
     (name: string) => {
@@ -118,10 +148,10 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
 
   const handleSelectProspectById = useCallback(
     (placeId: string) => {
-      const prospect = rows.find((r) => r.placeId === placeId);
+      const prospect = ranked.find((r) => r.placeId === placeId);
       if (prospect) setSelectedProspect(prospect);
     },
-    [rows],
+    [ranked],
   );
 
   return (
@@ -134,19 +164,22 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
         </TabsList>
 
         <TabsContent value="prospects" className="space-y-4">
-          <FilterBar
-            tierFilter={tierFilter}
-            corridorFilter={corridorFilter}
-            minScore={minScore}
-            segmentFilter={segmentFilter}
-            segmentCounts={segmentCounts}
-            corridorNames={corridorNames}
-            onTierChange={handleTierChange}
-            onCorridorChange={handleCorridorChange}
-            onMinScoreChange={handleMinScoreChange}
-            onSegmentChange={handleSegmentChange}
-            resultCount={filtered.length}
-          />
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <FilterBar
+              tierFilter={tierFilter}
+              corridorFilter={corridorFilter}
+              minScore={minScore}
+              segmentFilter={segmentFilter}
+              segmentCounts={segmentCounts}
+              corridorNames={corridorNames}
+              onTierChange={handleTierChange}
+              onCorridorChange={handleCorridorChange}
+              onMinScoreChange={handleMinScoreChange}
+              onSegmentChange={handleSegmentChange}
+              resultCount={ranked.length}
+            />
+            <WeightControl weighting={weighting} onChange={handleWeightingChange} />
+          </div>
 
           <div className="grid gap-6 xl:grid-cols-[1fr_1fr]">
             <Card>
@@ -156,7 +189,7 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
               <CardContent className="p-0">
                 <div className="h-[480px]">
                   <CorridorMap
-                    prospects={filtered}
+                    prospects={ranked}
                     corridors={corridors}
                     onSelectProspect={handleSelectProspectById}
                   />
@@ -164,7 +197,7 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
               </CardContent>
             </Card>
             <div className="min-w-0">
-              <ProspectsTable prospects={filtered} onRowClick={setSelectedProspect} />
+              <ProspectsTable prospects={ranked} onRowClick={setSelectedProspect} />
             </div>
           </div>
         </TabsContent>

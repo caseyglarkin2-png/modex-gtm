@@ -4,7 +4,8 @@ import Link from 'next/link';
 import { DataTable, type Column } from '@/components/data-table';
 import { BandBadge } from '@/components/band-badge';
 import { Badge } from '@/components/ui/badge';
-import type { CuratedRow, ProspectSegment, Confidence } from '@/lib/discovery/types';
+import type { ProspectSegment, Confidence } from '@/lib/discovery/types';
+import type { RankedRow } from '@/lib/discovery/scoring';
 
 const SEGMENT_LABEL: Record<ProspectSegment, string> = {
   shipper: 'Shipper',
@@ -19,13 +20,13 @@ const CONFIDENCE_STYLE: Record<Confidence, { label: string; className: string }>
   low: { label: 'Low', className: 'text-amber-600 border-amber-600/40' },
 };
 
-const columns: Column<CuratedRow>[] = [
+const columns: Column<RankedRow>[] = [
   {
-    key: 'icpScore',
+    key: 'worklistScore',
     label: 'Score',
     sortable: true,
     className: 'w-16',
-    render: (r) => <span className="font-mono font-semibold">{r.icpScore}</span>,
+    render: (r) => <span className="font-mono font-semibold">{r.worklistScore.toFixed(1)}</span>,
   },
   {
     key: 'tier',
@@ -105,20 +106,26 @@ const columns: Column<CuratedRow>[] = [
   },
   {
     key: 'nearestPrimoDistance',
-    label: 'Primo',
+    label: 'Proximity',
     sortable: true,
-    className: 'hidden lg:table-cell',
     render: (r) => (
-      <span className="text-xs text-[var(--muted-foreground)]">
+      <span className="font-mono text-xs">
         {r.nearestPrimoDistance.toFixed(1)} mi
       </span>
     ),
   },
+  {
+    key: 'icpScore',
+    label: 'ICP',
+    sortable: true,
+    className: 'hidden xl:table-cell text-center',
+    render: (r) => <span className="font-mono text-xs text-[var(--muted-foreground)]">{r.icpScore}</span>,
+  },
 ];
 
 interface ProspectsTableProps {
-  prospects: CuratedRow[];
-  onRowClick?: (row: CuratedRow) => void;
+  prospects: RankedRow[];
+  onRowClick?: (row: RankedRow) => void;
 }
 
 export function ProspectsTable({ prospects, onRowClick }: ProspectsTableProps) {

@@ -63,6 +63,20 @@ const PARCEL_TOKENS = [
   'fedex ground',
   'package center',
   'ground hub',
+  // parcel drop points — boxes, lockers, access points, regional last-mile carriers.
+  // (Word-boundary matched, so "Blocker's Warehouse" / "Toy Locker" are unaffected.)
+  'drop box',
+  'dropbox',
+  'access point',
+  'amazon locker',
+  'amazon hub',
+  'package locker',
+  'parcel locker',
+  'smartpost',
+  'fedex drop',
+  'ups drop',
+  'ontrac',
+  'lasership',
 ];
 
 const CARRIER_TOKENS = [
@@ -116,12 +130,22 @@ const THREEPL_TOKENS = [
   'lineage',
 ];
 
+/** Compile a token list into a single word-boundary regex (so 'xpo' ≠ 'export'). */
+function tokenRegex(tokens: string[]): RegExp {
+  const escaped = tokens.map((t) => t.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  return new RegExp(`\\b(${escaped.join('|')})\\b`, 'i');
+}
+
+const PARCEL_RE = tokenRegex(PARCEL_TOKENS);
+const CARRIER_RE = tokenRegex(CARRIER_TOKENS);
+const THREEPL_RE = tokenRegex(THREEPL_TOKENS);
+
 /** shipper (default) / carrier / 3pl / parcel. Parcel & carrier are most specific, checked first. */
 export function classifySegment(row: ProspectRow): ProspectSegment {
-  const name = row.name.toLowerCase();
-  if (PARCEL_TOKENS.some((t) => name.includes(t))) return 'parcel';
-  if (CARRIER_TOKENS.some((t) => name.includes(t))) return 'carrier';
-  if (THREEPL_TOKENS.some((t) => name.includes(t))) return '3pl';
+  const name = row.name;
+  if (PARCEL_RE.test(name)) return 'parcel';
+  if (CARRIER_RE.test(name)) return 'carrier';
+  if (THREEPL_RE.test(name)) return '3pl';
   return 'shipper';
 }
 
