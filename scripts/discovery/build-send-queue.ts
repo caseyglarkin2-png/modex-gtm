@@ -13,6 +13,13 @@ import { PrismaClient } from '@prisma/client';
 import { loadLatestScored, buildCuratedRows } from '@/lib/discovery/data';
 import { rankWorklist, DEFAULT_WEIGHTS } from '@/lib/discovery/scoring';
 import { buildOutreach } from '@/lib/discovery/outreach';
+import { REFERENCE_SITES } from '@/lib/discovery/reference-sites';
+
+/** City, state of the nearest live YardFlow (Primo) site — the proximity-hook anchor. */
+function nearestLiveSite(nearestPrimoName: string): string {
+  const s = REFERENCE_SITES.find((r) => r.name === nearestPrimoName);
+  return s ? `${s.city}, ${s.state}` : '';
+}
 
 // --- env: DATABASE_URL from process.env, else the repo-root .env.local ---
 function resolveDbUrl(): string {
@@ -67,6 +74,18 @@ async function main() {
   const logs = await prisma.emailLog.findMany({ select: { to_email: true } });
   const alreadyEmailed = new Set(logs.map((l) => (l.to_email ?? '').toLowerCase()).filter(Boolean));
 
+  // Also exclude anyone the Clawd Gmail agent already emailed (its sends are BCC'd to
+  // HubSpot, not written to our EmailLog). exclude/already-contacted.txt is grepped
+  // from the campaign artifacts (allentown-*.csv/.md). gitignored (PII).
+  let excludedExternal = 0;
+  try {
+    for (const e of fs.readFileSync('exclude/already-contacted.txt', 'utf8').split('\n')) {
+      const addr = e.trim().toLowerCase();
+      if (addr.includes('@') && !alreadyEmailed.has(addr)) { alreadyEmailed.add(addr); excludedExternal += 1; }
+    }
+  } catch { /* no external exclusion list */ }
+  console.log(`excluded from prior campaigns (agent sends): ${excludedExternal}`);
+
   const seenCompany = new Set<string>();
   const seenEmail = new Set<string>();
   type QItem = { row: typeof near[number]; name: string; firstName: string; title: string; email: string; relevance: number };
@@ -115,14 +134,14 @@ async function main() {
   const dir = 'output/prospect-discovery';
   fs.mkdirSync(dir, { recursive: true });
   const csvRows = [
-    ['to', 'contact_name', 'title', 'company', 'facility', 'city_state', 'distance_mi', 'worklist_score', 'subject', 'body', 'image_url'].join(','),
+    ['to', 'contact_name', 'title', 'company', 'facility_city_state', 'distance_mi', 'nearest_live_site', 'email_confidence', 'starter_subject', 'starter_body'].join(','),
   ];
   const md: string[] = [
-    `# Tier-1 outreach send-queue — ${DATE}`,
+    `# Tier-1 outreach data pack — ${DATE}`,
     '',
-    `${queue.length} ready emails: near-reference prospects (<= ${MAX_MI} mi from a live YardFlow site) with a REAL known email in our records, one best contact per company, none previously emailed.`,
+    `${queue.length} prospects: each is near a LIVE YardFlow (Primo) site, with a REAL known email from our records (not inferred — low bounce risk), one best logistics/ops contact per company, deduped against everyone already emailed.`,
     '',
-    'Each is ready to draft + schedule. The proof image is a public URL the email client loads inline.',
+    'Write each email in Casey\'s voice from the facts below (the agent owns the copy). The `starter_*` fields are scaffolding to replace, not final copy.',
     '',
     '---',
     '',
@@ -130,18 +149,21 @@ async function main() {
 
   for (const q of queue) {
     const out = buildOutreach(q.row, q.firstName);
+    const site = nearestLiveSite(q.row.nearestPrimoName);
     csvRows.push([
-      csvCell(q.email), csvCell(q.name), csvCell(q.title), csvCell(q.row.name), csvCell(q.row.name),
-      csvCell(q.row.cityState), q.row.nearestPrimoDistance.toFixed(1), q.row.worklistScore.toFixed(1),
-      csvCell(out.subject), csvCell(out.body), csvCell(out.imageUrl ?? ''),
+      csvCell(q.email), csvCell(q.name), csvCell(q.title), csvCell(q.row.name),
+      csvCell(q.row.cityState), q.row.nearestPrimoDistance.toFixed(1), csvCell(site), 'known (records)',
+      csvCell(out.subject), csvCell(out.body),
     ].join(','));
     md.push(
       `## ${q.row.name} — ${q.name}${q.title ? ` (${q.title})` : ''}`,
-      `- **To:** ${q.email}`,
-      `- **Facility:** ${q.row.cityState} · ${q.row.nearestPrimoDistance.toFixed(1)} mi from a live site · worklist ${q.row.worklistScore.toFixed(1)}`,
-      `- **Subject:** ${out.subject}`,
-      out.imageUrl ? `- **Inline image:** ${out.imageUrl}` : '',
+      `- **To:** ${q.email}  (known email from our records)`,
+      `- **Their facility:** ${q.row.cityState}`,
+      `- **Nearest LIVE YardFlow site:** ${site || '(unresolved)'} — **${q.row.nearestPrimoDistance.toFixed(1)} mi away** (the small-world hook)`,
+      `- **Starter subject:** ${out.subject}`,
+      `- **Image:** drag \`tier1-proof-image.jpg\` where you'd paste the pilot screenshot`,
       '',
+      'Starter body (replace with your best cold copy):',
       '```',
       out.body,
       '```',
