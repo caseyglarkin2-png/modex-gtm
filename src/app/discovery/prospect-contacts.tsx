@@ -7,6 +7,10 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { EmailComposer } from '@/components/email/composer';
 import { facilityNoun, formatMiles } from '@/lib/discovery/angle';
+import { buildAbsoluteUrl } from '@/lib/site-url';
+
+/** Live YardFlow yard-spotter frame (Primo Allentown) — visual proof for near-reference outreach. */
+const PROOF_IMAGE_PATH = '/artifacts/allentown-pilot.jpg';
 import type { RankedRow } from '@/lib/discovery/scoring';
 import type { ProspectContact } from '@/lib/discovery/contacts';
 import { findProspectContacts, inferContactEmail, researchProspectContacts, type ProspectContactsResult } from './actions';
@@ -43,7 +47,7 @@ const CONFIDENCE_STYLE: Record<string, { label: string; className: string }> = {
  * addresses THEIR facility ("your DC in Dallas, TX"), claims only what we deliver
  * (no "proof" without a picture), and uses no em dashes.
  */
-function buildOutreach(prospect: RankedRow, firstName?: string): { subject: string; body: string } {
+function buildOutreach(prospect: RankedRow, firstName?: string): { subject: string; body: string; imageUrl?: string } {
   const near = prospect.nearestPrimoDistance <= 50;
   const noun = facilityNoun(prospect.name);
   const where = prospect.cityState ? ` in ${prospect.cityState}` : '';
@@ -63,7 +67,8 @@ function buildOutreach(prospect: RankedRow, firstName?: string): { subject: stri
     'Best,',
     'Casey',
   ].join('\n');
-  return { subject, body };
+  // Near-reference outreach ships the live yard-spotter frame as proof; far ones don't.
+  return { subject, body, imageUrl: near ? buildAbsoluteUrl(PROOF_IMAGE_PATH) : undefined };
 }
 
 export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
@@ -271,6 +276,7 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
           personaEmail={composeFor.email ?? undefined}
           initialSubject={outreach.subject}
           initialBody={outreach.body}
+          initialImageUrl={outreach.imageUrl}
           open={composerOpen}
           onOpenChange={(o) => { setComposerOpen(o); if (!o) setComposeFor(null); }}
         />

@@ -33,13 +33,25 @@ export function htmlToPlainText(html: string): string {
     .trim();
 }
 
-export function wrapHtml(bodyText: string, accountName: string, recipientEmail?: string, emailLogId?: number): string {
+export function wrapHtml(bodyText: string, accountName: string, recipientEmail?: string, emailLogId?: number, imageUrl?: string): string {
   const escaped = bodyText
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/\n\n/g, '</p><p style="margin:0 0 14px 0; padding:0;">')
     .replace(/\n/g, '<br />');
+
+  // Optional inline proof image (a YardFlow live-yard frame). URL is schema-validated;
+  // strip quotes defensively so it can't break out of the attribute.
+  const safeImageUrl = imageUrl ? imageUrl.replace(/["'<>]/g, '') : '';
+  const imageBlock = safeImageUrl
+    ? `<tr>
+      <td style="padding:4px 24px 8px;">
+        <img src="${safeImageUrl}" alt="YardFlow live yard operations at a Primo Brands plant" width="592" style="width:100%; max-width:592px; height:auto; border-radius:8px; border:1px solid #e8e8e8; display:block;" />
+        <p style="margin:7px 2px 0; font-size:11px; color:#9ca3af; font-style:italic;">YardFlow live at a Primo Brands plant: real-time trailer detection in the yard.</p>
+      </td>
+    </tr>`
+    : '';
 
   // Build unsubscribe link (CAN-SPAM compliance, HMAC-signed)
   const baseUrl = process.env.NEXT_PUBLIC_APP_URL || 'https://modex-gtm.vercel.app';
@@ -62,6 +74,7 @@ export function wrapHtml(bodyText: string, accountName: string, recipientEmail?:
         <p style="margin:0 0 14px 0; padding:0;">${escaped}</p>
       </td>
     </tr>
+    ${imageBlock}
     <!-- Signature — subtle divider, executive style -->
     <tr>
       <td style="padding:0 24px 32px;">
