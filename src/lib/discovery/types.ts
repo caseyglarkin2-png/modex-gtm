@@ -101,4 +101,6 @@ export interface CuratedRow extends ProspectRow {
   mergedCount: number;
   /** Slug of a matching YardFlow microsite (/for, /demo), or undefined when none exists. */
   micrositeSlug?: string;
+  /** Live HubSpot deal state for existing accounts (Sprint 5), when available. */
+  pipeline?: import('./pipeline-format').PipelineState;
 }

@@ -15,7 +15,7 @@ import {
 import { formatDiscoveredVia } from '@/lib/discovery/filters';
 import { generateAngle } from '@/lib/discovery/angle';
 import type { RankedRow } from '@/lib/discovery/scoring';
-import { pushProspectToHubSpot, type PushResult } from './actions';
+import { pushProspectToHubSpot, getAccountContacts, type PushResult, type AccountContact } from './actions';
 
 const DIMENSIONS: { key: keyof Pick<RankedRow, 'verticalMatch' | 'enterpriseScale' | 'networkComplexity' | 'primoProximity' | 'corridorDensity' | 'placeTypeBonus'>; label: string; max: number }[] = [
   { key: 'enterpriseScale', label: 'Enterprise Scale', max: 25 },
@@ -48,12 +48,26 @@ export function ProspectDetailSheet({ prospect, onClose, pinned, onTogglePin, to
   const [isPending, startTransition] = useTransition();
   const [result, setResult] = useState<PushResult | null>(null);
   const [copied, setCopied] = useState(false);
+  const [contacts, setContacts] = useState<AccountContact[] | null>(null);
+  const [contactsLoading, setContactsLoading] = useState(false);
 
   // Reset transient state whenever a different prospect is opened.
   useEffect(() => {
     setResult(null);
     setCopied(false);
+    setContacts(null);
   }, [prospect?.placeId]);
+
+  // Lazily pull contacts for existing accounts when the drawer opens.
+  useEffect(() => {
+    if (!prospect?.isExistingAccount) return;
+    let cancelled = false;
+    setContactsLoading(true);
+    getAccountContacts(prospect.name)
+      .then((c) => { if (!cancelled) setContacts(c); })
+      .finally(() => { if (!cancelled) setContactsLoading(false); });
+    return () => { cancelled = true; };
+  }, [prospect?.placeId, prospect?.isExistingAccount, prospect?.name]);
 
   function handlePush() {
     if (!prospect) return;
@@ -157,6 +171,80 @@ export function ProspectDetailSheet({ prospect, onClose, pinned, onTogglePin, to
                   <p className="text-xs text-[var(--muted-foreground)]">Last touched {relativeTime(lastTouched)}</p>
                 )}
               </div>
+
+              {/* Pipeline (existing accounts) */}
+              {prospect.pipeline && (
+                <div className="space-y-2">
+                  <p className="flex items-center gap-2 text-xs font-medium uppercase tracking-wide text-[var(--muted-foreground)]">
+                    Pipeline
+                    {prospect.pipeline.isStale && (
+                      <span className="rounded border border-amber-600/40 px-1.5 text-[10px] font-medium text-amber-600">
+                        Stale — re-engage
+                      </span>
+                    )}
+                  </p>
+                  <div className="space-y-1.5 text-sm">
+                    <div className="flex justify-between">
+                      <span className="text-[var(--muted-foreground)]">Stage</span>
+                      <span>{prospect.pipeline.stage}</span>
+                    </div>
+                    {prospect.pipeline.owner && (
+                      <div className="flex justify-between">
+                        <span className="text-[var(--muted-foreground)]">Owner</span>
+                        <span>{prospect.pipeline.owner}</span>
+                      </div>
+                    )}
+                    {prospect.pipeline.amount != null && (
+                      <div className="flex justify-between">
+                        <span className="text-[var(--muted-foreground)]">Amount</span>
+                        <span>${prospect.pipeline.amount.toLocaleString()}</span>
+                      </div>
+                    )}
+                    {prospect.pipeline.lastActivity && (
+                      <div className="flex justify-between">
+                        <span className="text-[var(--muted-foreground)]">Last activity</span>
+                        <span>{relativeTime(prospect.pipeline.lastActivity)}</span>
+                      </div>
+                    )}
+                    {prospect.pipeline.nextStep && (
+                      <div className="flex justify-between gap-4">
+                        <span className="text-[var(--muted-foreground)]">Next step</span>
+                        <span className="text-right">{prospect.pipeline.nextStep}</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+
+              {/* Contacts (existing accounts) */}
+              {prospect.isExistingAccount && (
+                <div className="space-y-2">
+                  <p className="text-xs font-medium uppercase tracking-wide text-[var(--muted-foreground)]">
+                    Contacts
+                  </p>
+                  {contactsLoading ? (
+                    <p className="text-xs text-[var(--muted-foreground)]">Loading contacts…</p>
+                  ) : contacts && contacts.length > 0 ? (
+                    <ul className="space-y-1.5">
+                      {contacts.map((c) => (
+                        <li key={c.id} className="flex items-center justify-between text-sm">
+                          <span>
+                            {c.name}
+                            {c.title && <span className="text-[var(--muted-foreground)]"> · {c.title}</span>}
+                          </span>
+                          {c.email && (
+                            <a href={`mailto:${c.email}`} className="text-xs text-[var(--primary)] hover:underline">
+                              email
+                            </a>
+                          )}
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <p className="text-xs text-[var(--muted-foreground)]">No contacts found in HubSpot.</p>
+                  )}
+                </div>
+              )}
 
               {/* Score breakdown */}
               <div className="space-y-3">

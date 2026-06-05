@@ -2,9 +2,41 @@
 
 import { getHubSpotClient, withHubSpotRetry, isHubSpotConfigured, getPortalId } from '@/lib/hubspot/client';
 import { searchCompanyByDomain, searchCompanyByName } from '@/lib/hubspot/companies';
+import { hsSearchContacts } from '@/lib/hubspot/contacts';
 import { ensureYardflowIcpScoreProperty } from '@/lib/hubspot/properties';
 import { assertExternalWriteAllowed } from '@/lib/enrichment/external-write-guard';
 import { HUBSPOT_SYNC_ENABLED } from '@/lib/feature-flags';
+
+export interface AccountContact {
+  id: string;
+  name: string;
+  title: string;
+  email: string;
+}
+
+/**
+ * Contacts for an account, for the drawer's "who to reach" section. Full-text
+ * searches HubSpot by account name; titled contacts first. Empty + safe when
+ * HubSpot is unavailable.
+ */
+export async function getAccountContacts(accountName: string): Promise<AccountContact[]> {
+  if (!isHubSpotConfigured() || !HUBSPOT_SYNC_ENABLED || !accountName.trim()) return [];
+  try {
+    const { contacts } = await hsSearchContacts(accountName, undefined, 25);
+    return contacts
+      .map((c) => ({
+        id: c.id,
+        name: [c.firstname, c.lastname].filter(Boolean).join(' ') || c.email,
+        title: c.jobtitle,
+        email: c.email,
+      }))
+      .filter((c) => c.name)
+      .sort((a, b) => (a.title ? 0 : 1) - (b.title ? 0 : 1)) // titled contacts first
+      .slice(0, 8);
+  } catch {
+    return [];
+  }
+}
 
 export interface PushProspectInput {
   name: string;

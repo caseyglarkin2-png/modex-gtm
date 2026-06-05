@@ -4,12 +4,13 @@ import { Card, CardContent } from '@/components/ui/card';
 import { Compass, Layers, Radar, Trophy } from 'lucide-react';
 import { loadLatestScored, getDiscoverySummary, buildCuratedRows } from '@/lib/discovery/data';
 import { summarizeCuration } from '@/lib/discovery/curate';
+import { enrichRowsWithPipeline } from '@/lib/discovery/enrich';
 import { DiscoveryHub } from './discovery-hub';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Discovery' };
 
-export default function DiscoveryPage() {
+export default async function DiscoveryPage() {
   const output = loadLatestScored();
 
   if (!output) {
@@ -31,7 +32,7 @@ export default function DiscoveryPage() {
   }
 
   const summary = getDiscoverySummary(output);
-  const curatedRows = buildCuratedRows(output);
+  const curatedRows = await enrichRowsWithPipeline(buildCuratedRows(output));
   const curation = summarizeCuration(curatedRows);
 
   return (

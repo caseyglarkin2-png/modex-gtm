@@ -131,6 +131,14 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
     return [...pin, ...rest];
   }, [ranked, pinned]);
 
+  // Stale existing deals near a reference — the re-engage list.
+  const [onlyStale, setOnlyStale] = useState(false);
+  const staleCount = useMemo(() => ordered.filter((r) => r.pipeline?.isStale).length, [ordered]);
+  const displayed = useMemo(
+    () => (onlyStale ? ordered.filter((r) => r.pipeline?.isStale) : ordered),
+    [ordered, onlyStale],
+  );
+
   const handleTabChange = useCallback((value: string) => {
     setTab(value);
     syncUrl({ tab: value === 'prospects' ? null : value });
@@ -213,14 +221,30 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
                 )}
               </p>
             </div>
-            <button
-              type="button"
-              onClick={() => handleToggleSlice(!dailySlice)}
-              aria-pressed={!dailySlice}
-              className="rounded-md border border-[var(--border)] px-2.5 py-1 text-xs font-medium transition hover:border-[var(--primary)]"
-            >
-              {dailySlice ? 'Widen to all sites' : 'Back to my slice'}
-            </button>
+            <div className="flex items-center gap-2">
+              {staleCount > 0 && (
+                <button
+                  type="button"
+                  onClick={() => setOnlyStale((v) => !v)}
+                  aria-pressed={onlyStale}
+                  className={`rounded-md border px-2.5 py-1 text-xs font-medium transition ${
+                    onlyStale
+                      ? 'border-amber-600 bg-amber-600 text-white'
+                      : 'border-amber-600/40 text-amber-600 hover:border-amber-600'
+                  }`}
+                >
+                  Re-engage {staleCount} stale
+                </button>
+              )}
+              <button
+                type="button"
+                onClick={() => handleToggleSlice(!dailySlice)}
+                aria-pressed={!dailySlice}
+                className="rounded-md border border-[var(--border)] px-2.5 py-1 text-xs font-medium transition hover:border-[var(--primary)]"
+              >
+                {dailySlice ? 'Widen to all sites' : 'Back to my slice'}
+              </button>
+            </div>
           </div>
 
           <div className="flex flex-wrap items-center justify-between gap-3">
@@ -235,7 +259,7 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
               onCorridorChange={handleCorridorChange}
               onMinScoreChange={handleMinScoreChange}
               onSegmentChange={handleSegmentChange}
-              resultCount={ordered.length}
+              resultCount={displayed.length}
             />
             <WeightControl weighting={weighting} onChange={handleWeightingChange} />
           </div>
@@ -248,7 +272,7 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
               <CardContent className="p-0">
                 <div className="h-[480px]">
                   <CorridorMap
-                    prospects={ordered}
+                    prospects={displayed}
                     corridors={corridors}
                     onSelectProspect={handleSelectProspectById}
                   />
@@ -257,7 +281,7 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
             </Card>
             <div className="min-w-0">
               <ProspectsTable
-                prospects={ordered}
+                prospects={displayed}
                 onRowClick={setSelectedProspect}
                 pinned={pinned}
                 onTogglePin={togglePinned}

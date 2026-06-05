@@ -83,6 +83,16 @@ function buildColumns(
               </Badge>
             </Link>
           )}
+          {r.pipeline && (
+            <Badge variant="outline" className="text-[10px] text-blue-600 border-blue-600/30">
+              {r.pipeline.stage}
+            </Badge>
+          )}
+          {r.pipeline?.isStale && (
+            <Badge variant="outline" className="text-[10px] text-amber-600 border-amber-600/40">
+              Stale
+            </Badge>
+          )}
           {r.mergedCount > 0 && (
             <span className="text-[10px] text-[var(--muted-foreground)]" title={`${r.mergedCount} duplicate/gate row(s) merged here`}>
               +{r.mergedCount}
