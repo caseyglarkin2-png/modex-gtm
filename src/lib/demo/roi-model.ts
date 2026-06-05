@@ -50,6 +50,17 @@ const FOOTPRINT_OVERRIDE: Record<string, number> = {
 };
 
 /**
+ * Per-account margin-per-truckload override (by slug). The engine defaults to
+ * $1,000/load, which is Primo's BOTTLED-WATER contribution margin and understates
+ * higher-value freight. Dannon ships refrigerated dairy: ~$2,500/load (estimated
+ * bottom-up, ~$50k load value x a conservative yard-capture rate; see Flow-State-
+ * scripts/estimate-margin.ts). Keeps /demo/dannon in lockstep with /for/dannon.
+ */
+const MARGIN_OVERRIDE: Record<string, number> = {
+  dannon: 2500,
+};
+
+/**
  * Derive the network counts that drive every ROI surface from the pack.
  * Extrapolates the audited drop-yard ratio across the full footprint (the
  * audit is a deliberate sample of core facilities, so this is defensible).
@@ -81,7 +92,8 @@ export function deriveNetworkCounts(pack: DemoPack): NetworkRoiCounts {
     total,
     facilitiesWithYms,
     facilitiesWithDropTrailers,
-    averageMarginPerShipment: pack.account.roiDefaults?.averageMarginPerShipment ?? 1000,
+    averageMarginPerShipment:
+      MARGIN_OVERRIDE[pack.account.slug] ?? pack.account.roiDefaults?.averageMarginPerShipment ?? 1000,
   };
 }
 
