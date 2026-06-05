@@ -57,7 +57,10 @@ export default function CorridorMapInner({ prospects, corridors, onSelectProspec
   const capped = prospects.length > MAX_MARKERS;
 
   return (
-    <div className="relative h-full w-full" role="region" aria-label="Corridor map: prospects and live YardFlow reference sites">
+    /* `isolate` keeps Leaflet's panes/controls + the z-[1000] legends in their own
+       stacking context, so they never paint over app overlays (the email composer,
+       dropdowns, the drawer) that portal to body at a lower z-index. */
+    <div className="relative isolate h-full w-full" role="region" aria-label="Corridor map: prospects and live YardFlow reference sites">
       {capped && (
         <div className="pointer-events-none absolute right-2 top-2 z-[1000] rounded-md bg-black/70 px-2 py-1 text-[10px] font-medium text-white/85 backdrop-blur-sm">
           Showing top {MAX_MARKERS.toLocaleString()} of {prospects.length.toLocaleString()} by worklist rank — filter to narrow
