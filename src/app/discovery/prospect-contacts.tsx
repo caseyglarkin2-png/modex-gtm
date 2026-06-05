@@ -9,8 +9,9 @@ import { EmailComposer } from '@/components/email/composer';
 import { facilityNoun, formatMiles } from '@/lib/discovery/angle';
 import { buildAbsoluteUrl } from '@/lib/site-url';
 
-/** Live YardFlow yard-spotter frame (Primo Allentown) — visual proof for near-reference outreach. */
-const PROOF_IMAGE_PATH = '/artifacts/allentown-pilot.jpg';
+/** Live YardFlow yard-spotter frame (Primo Allentown), cropped to the aerial yard +
+ *  AI trailer detections — visual proof for near-reference outreach. */
+const PROOF_IMAGE_PATH = '/artifacts/allentown-yard-proof.jpg';
 import type { RankedRow } from '@/lib/discovery/scoring';
 import type { ProspectContact } from '@/lib/discovery/contacts';
 import { findProspectContacts, inferContactEmail, researchProspectContacts, type ProspectContactsResult } from './actions';
