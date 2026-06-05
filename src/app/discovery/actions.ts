@@ -190,7 +190,7 @@ async function resolveCompanyEmailContext(
     }));
 
   // 2. Domain: corpus → researched seed → (on-demand) web discovery.
-  let domain =
+  let domain: string | null =
     dominantDomain(records.map((r) => r.email).filter((e): e is string => Boolean(e))) ??
     COMPANY_DOMAIN_SEED[companyKey(company)] ??
     null;
