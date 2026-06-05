@@ -6,12 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { EmailComposer } from '@/components/email/composer';
-import { facilityNoun, formatMiles } from '@/lib/discovery/angle';
-import { buildAbsoluteUrl } from '@/lib/site-url';
-
-/** Live YardFlow yard-spotter frame (Primo Allentown), cropped to the aerial yard +
- *  AI trailer detections — visual proof for near-reference outreach. */
-const PROOF_IMAGE_PATH = '/artifacts/allentown-yard-proof.jpg';
+import { buildOutreach } from '@/lib/discovery/outreach';
 import type { RankedRow } from '@/lib/discovery/scoring';
 import type { ProspectContact } from '@/lib/discovery/contacts';
 import { findProspectContacts, inferContactEmail, researchProspectContacts, type ProspectContactsResult } from './actions';
@@ -42,35 +37,6 @@ const CONFIDENCE_STYLE: Record<string, { label: string; className: string }> = {
   low: { label: 'low conf.', className: 'text-orange-600 border-orange-600/40' },
   none: { label: 'no email', className: 'text-neutral-500 border-neutral-500/30' },
 };
-
-/**
- * Recipient-facing outreach subject + body. Distinct from the worklist angle: it
- * addresses THEIR facility ("your DC in Dallas, TX"), claims only what we deliver
- * (no "proof" without a picture), and uses no em dashes.
- */
-function buildOutreach(prospect: RankedRow, firstName?: string): { subject: string; body: string; imageUrl?: string } {
-  const near = prospect.nearestPrimoDistance <= 50;
-  const noun = facilityNoun(prospect.name);
-  const where = prospect.cityState ? ` in ${prospect.cityState}` : '';
-  const subject = near
-    ? `A live YardFlow site ${formatMiles(prospect.nearestPrimoDistance)} mi from your operation`
-    : `YardFlow yard network system for your team`;
-  const opener = near
-    ? `Primo Brands runs YardFlow at a live site just ${formatMiles(prospect.nearestPrimoDistance)} mi from your ${noun}${where}.`
-    : `We run YardFlow's yard network system for shippers and 3PLs across the ${prospect.corridor} corridor.`;
-  const body = [
-    `Hi ${firstName || 'there'},`,
-    '',
-    opener,
-    '',
-    `We'd love to show you the live yard ops and see if it's worth a look for your team. Open to a quick 15 minutes?`,
-    '',
-    'Best,',
-    'Casey',
-  ].join('\n');
-  // Near-reference outreach ships the live yard-spotter frame as proof; far ones don't.
-  return { subject, body, imageUrl: near ? buildAbsoluteUrl(PROOF_IMAGE_PATH) : undefined };
-}
 
 export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
   const [data, setData] = useState<ProspectContactsResult | null>(null);
