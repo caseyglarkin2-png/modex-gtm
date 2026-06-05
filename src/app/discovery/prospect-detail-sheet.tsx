@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useTransition } from 'react';
 import Link from 'next/link';
-import { ExternalLink, Loader2, Check, Star, Copy, FileText, MonitorPlay, ClipboardCheck } from 'lucide-react';
+import { ExternalLink, Loader2, Check, Star, Copy, FileText, MonitorPlay, ClipboardCheck, AlertTriangle } from 'lucide-react';
 import { BandBadge } from '@/components/band-badge';
 import { Button } from '@/components/ui/button';
 import {
@@ -14,6 +14,7 @@ import {
 } from '@/components/ui/sheet';
 import { formatDiscoveredVia } from '@/lib/discovery/filters';
 import { generateAngle } from '@/lib/discovery/angle';
+import { referenceOverlap } from '@/lib/discovery/reference-sites';
 import type { RankedRow } from '@/lib/discovery/scoring';
 import { pushProspectToHubSpot, type PushResult } from './actions';
 import { ProspectContactsPanel } from './prospect-contacts';
@@ -117,6 +118,22 @@ export function ProspectDetailSheet({ prospect, onClose, pinned, onTogglePin, to
               <div className="rounded-md border border-[var(--border)] bg-[var(--accent)] px-3 py-2 text-sm">
                 {generateAngle(prospect)}
               </div>
+
+              {/* Co-location guard — this row may BE a live site; verify before cold outreach */}
+              {(() => {
+                const overlap = referenceOverlap(prospect);
+                if (!overlap) return null;
+                return (
+                  <div className="flex gap-2 rounded-md border border-amber-500/40 bg-amber-500/10 px-3 py-2 text-xs text-amber-700">
+                    <AlertTriangle className="mt-0.5 h-3.5 w-3.5 shrink-0" />
+                    <span>
+                      Only {overlap.distanceMiles.toFixed(2)} mi from our live site
+                      {overlap.site ? ` in ${overlap.site.city}, ${overlap.site.state}` : ''} — this may be the
+                      same or a co-located facility. Verify it isn’t already a YardFlow site before cold outreach.
+                    </span>
+                  </div>
+                );
+              })()}
 
               {/* Action layer */}
               <div className="space-y-2">

@@ -48,6 +48,20 @@ describe('generateAngle', () => {
     expect(a.toLowerCase()).toContain('yardflow');
   });
 
+  it('names the nearest reference site city/state when it resolves', () => {
+    // nearestPrimoName 'US DC NFI - Breinigsville' resolves to Breinigsville, PA
+    const a = generateAngle(mkRow({ name: 'Nestle Distribution Center', nearestPrimoDistance: 2.7 }));
+    expect(a).toContain('Breinigsville, PA');
+  });
+
+  it('falls back to a generic proximity line when the site name does not resolve', () => {
+    const a = generateAngle(mkRow({ nearestPrimoName: 'Some Unknown Site', nearestPrimoDistance: 3 }));
+    expect(a.toLowerCase()).toContain('yardflow');
+    expect(a).toMatch(/3\.0 mi/);
+    expect(a).not.toContain('undefined');
+    expect(a).not.toContain(', ,'); // no empty "in" clause artifact
+  });
+
   it('falls back to a fit/corridor angle when no reference is near', () => {
     const a = generateAngle(mkRow({ nearestPrimoDistance: 220, corridor: 'Dallas, TX' }));
     expect(a).toContain('Dallas, TX');

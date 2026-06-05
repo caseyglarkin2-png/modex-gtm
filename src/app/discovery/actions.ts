@@ -155,7 +155,11 @@ interface CompanyEmailContext {
  * matching Persona records → the corporate domain → same-domain corpus samples,
  * with a researched seed as fallback.
  */
-async function resolveCompanyEmailContext(company: string, accountSlug?: string): Promise<CompanyEmailContext> {
+async function resolveCompanyEmailContext(
+  company: string,
+  accountSlug?: string,
+  opts?: { discover?: boolean },
+): Promise<CompanyEmailContext> {
   const token = brandToken(company) ?? (accountSlug ? brandToken(accountSlug.replace(/-/g, ' ')) : null);
 
   // 1. Persona records for this account (real contacts + their emails).
@@ -185,11 +189,16 @@ async function resolveCompanyEmailContext(company: string, accountSlug?: string)
       linkedinUrl: p.linkedin_url ?? undefined,
     }));
 
-  // 2. Domain: dominant corporate domain from records, else researched seed.
-  const domain =
+  // 2. Domain: corpus → researched seed → (on-demand) web discovery.
+  let domain: string | null =
     dominantDomain(records.map((r) => r.email).filter((e): e is string => Boolean(e))) ??
     COMPANY_DOMAIN_SEED[companyKey(company)] ??
     null;
+
+  if (!domain && opts?.discover) {
+    const { discoverCompanyDomain } = await import('@/lib/discovery/research');
+    domain = await discoverCompanyDomain(company);
+  }
 
   // 3. Corpus samples at the domain (cross-account — same domain, same convention).
   let samples: NameEmailSample[] = [];
@@ -256,7 +265,7 @@ export async function inferContactEmail(input: {
   company: string;
   accountSlug?: string;
 }): Promise<InferredEmail & { domain: string | null }> {
-  const ctx = await resolveCompanyEmailContext(input.company, input.accountSlug);
+  const ctx = await resolveCompanyEmailContext(input.company, input.accountSlug, { discover: true });
   if (!ctx.domain) {
     return { email: null, confidence: 'none', basis: 'no company domain known', domain: null };
   }
@@ -282,7 +291,7 @@ export async function researchProspectContacts(input: {
   const { researchDecisionMakers } = await import('@/lib/discovery/research');
   const [people, ctx] = await Promise.all([
     researchDecisionMakers(input.company, { city: input.city, state: input.state, corridor: input.corridor }),
-    resolveCompanyEmailContext(input.company, input.accountSlug),
+    resolveCompanyEmailContext(input.company, input.accountSlug, { discover: true }),
   ]);
 
   return people.map((p) => {

@@ -1,5 +1,23 @@
 import { describe, expect, it } from 'vitest';
-import { parseResearchedContacts } from '@/lib/discovery/research';
+import { parseResearchedContacts, parseDomainAnswer } from '@/lib/discovery/research';
+
+describe('parseDomainAnswer', () => {
+  it('returns a bare corporate domain', () => {
+    expect(parseDomainAnswer('kuehne-nagel.com')).toBe('kuehne-nagel.com');
+  });
+
+  it('extracts the domain from a sentence and strips www', () => {
+    expect(parseDomainAnswer('The corporate email domain is acme.com.')).toBe('acme.com');
+    expect(parseDomainAnswer('https://www.xpo.com/about')).toBe('xpo.com');
+  });
+
+  it('rejects free providers and non-answers', () => {
+    expect(parseDomainAnswer('gmail.com')).toBeNull();
+    expect(parseDomainAnswer('NONE')).toBeNull();
+    expect(parseDomainAnswer('I am not sure.')).toBeNull();
+    expect(parseDomainAnswer('')).toBeNull();
+  });
+});
 
 describe('parseResearchedContacts', () => {
   it('parses a plain JSON array incl. local/corporate scope', () => {

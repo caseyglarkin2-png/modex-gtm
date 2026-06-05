@@ -45,3 +45,25 @@ export const REFERENCE_SITES: ReferenceSite[] = [
 
 /** Proximity-ring radii (miles) — aligned to the engine's scorePrimoProximity bands. */
 export const PROXIMITY_RING_MILES = [5, 25, 50] as const;
+
+/**
+ * Below this distance (mi) a "prospect" is essentially on top of a live reference
+ * site — likely the same facility, a co-located building, or a geocode artifact.
+ * Cold-pitching such a row is a credibility risk, so the drawer warns before email.
+ */
+export const REFERENCE_OVERLAP_MI = 0.5;
+
+export interface ReferenceOverlap {
+  /** The live site it overlaps, if the name resolves; null when unresolved but still close. */
+  site: ReferenceSite | null;
+  distanceMiles: number;
+}
+
+/** Flag a prospect that sits within REFERENCE_OVERLAP_MI of a live reference site. */
+export function referenceOverlap(row: { nearestPrimoName: string; nearestPrimoDistance: number }): ReferenceOverlap | null {
+  if (!(row.nearestPrimoDistance < REFERENCE_OVERLAP_MI)) return null;
+  return {
+    site: REFERENCE_SITES.find((s) => s.name === row.nearestPrimoName) ?? null,
+    distanceMiles: row.nearestPrimoDistance,
+  };
+}
