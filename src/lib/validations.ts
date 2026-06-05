@@ -158,6 +158,8 @@ export const SendEmailSchema = z.object({
   cc: NormalizedCcSchema.optional().default([]),
   subject: z.string().min(1, 'Subject is required'),
   bodyHtml: z.string().min(1, 'Body is required'),
+  /** Optional inline proof image (absolute https URL); rendered above the signature. */
+  imageUrl: z.string().url().optional(),
   accountName: z.string().optional(),
   personaName: z.string().optional(),
   personaId: z.number().int().positive().optional(),

@@ -53,7 +53,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(serializeSendBlocker(block), { status: block.status });
   }
 
-  const { to, cc, subject, bodyHtml, accountName, personaName, personaId, generatedContentId, workflowMetadata } = parsed.data;
+  const { to, cc, subject, bodyHtml, imageUrl, accountName, personaName, personaId, generatedContentId, workflowMetadata } = parsed.data;
 
   if (!to || to.trim() === '') {
     const block = noEmailSendBlocker();
@@ -226,7 +226,9 @@ export async function POST(req: NextRequest) {
 
     // Wrap plain text or already-composed HTML into branded template
     const isPlainText = !sanitizedBody.trim().startsWith('<');
-    const html = isPlainText ? wrapHtml(sanitizedBody, resolvedRecipient.accountName ?? accountName ?? 'the team', resolvedRecipient.to) : sanitizedBody;
+    const html = isPlainText
+      ? wrapHtml(sanitizedBody, resolvedRecipient.accountName ?? accountName ?? 'the team', resolvedRecipient.to, undefined, imageUrl)
+      : sanitizedBody;
 
     const response = await sendEmail({ to: resolvedRecipient.to, cc: sanitizedCc, subject, html });
 

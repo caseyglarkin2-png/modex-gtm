@@ -21,13 +21,21 @@ import { AgentActionDialog } from '@/components/agent-actions/agent-action-dialo
 import { OnePagerDialog } from '@/components/ai/one-pager-preview';
 import { sanitizeHtml } from '@/lib/sanitize-html';
 
-function buildEmailPreviewHtml(bodyText: string): string {
+function buildEmailPreviewHtml(bodyText: string, imageUrl?: string): string {
   const escaped = bodyText
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
     .replace(/>/g, '&gt;')
     .replace(/\n\n/g, '</p><p style="margin:0 0 12px;">')
     .replace(/\n/g, '<br />');
+
+  const safeImageUrl = imageUrl ? imageUrl.replace(/["'<>]/g, '') : '';
+  const imageBlock = safeImageUrl
+    ? `<tr><td style="padding:0 16px 12px;">
+        <img src="${safeImageUrl}" alt="YardFlow live yard operations" style="width:100%;max-width:528px;height:auto;border-radius:8px;border:1px solid #e8e8e8;display:block;" />
+        <p style="margin:7px 2px 0;font-size:11px;color:#9ca3af;font-style:italic;">YardFlow live at a Primo Brands plant: real-time trailer detection in the yard.</p>
+      </td></tr>`
+    : '';
 
   return `<div style="font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif;background:#ffffff;padding:16px 8px;">
   <table width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;margin:0 auto;">
@@ -36,6 +44,7 @@ function buildEmailPreviewHtml(bodyText: string): string {
         <p style="margin:0 0 12px;">${escaped}</p>
       </td>
     </tr>
+    ${imageBlock}
     <tr>
       <td style="padding:0 16px 20px;">
         <table cellpadding="0" cellspacing="0" style="border-top:1px solid #e0e0e0;width:100%;">
@@ -66,6 +75,8 @@ interface EmailComposerProps {
   personaEmail?: string;
   initialSubject?: string;
   initialBody?: string;
+  /** Optional inline proof image (absolute https URL) shown above the signature. */
+  initialImageUrl?: string;
   trigger?: React.ReactNode;
   open?: boolean;
   onOpenChange?: (open: boolean) => void;
@@ -85,6 +96,7 @@ export function EmailComposer({
   personaEmail,
   initialSubject,
   initialBody,
+  initialImageUrl,
   trigger,
   open: controlledOpen,
   onOpenChange,
@@ -97,6 +109,7 @@ export function EmailComposer({
   const [cc, setCc] = useState('');
   const [subject, setSubject] = useState(initialSubject ?? '');
   const [body, setBody] = useState(initialBody ?? '');
+  const [imageUrl, setImageUrl] = useState(initialImageUrl ?? '');
   const [sending, setSending] = useState(false);
   const [draftingFromIntel, setDraftingFromIntel] = useState(false);
   const [lastStatus, setLastStatus] = useState<{ provider?: string; hubspotId?: string | null } | null>(null);
@@ -116,6 +129,11 @@ export function EmailComposer({
     if (!open) return;
     setBody(initialBody ?? '');
   }, [initialBody, open]);
+
+  useEffect(() => {
+    if (!open) return;
+    setImageUrl(initialImageUrl ?? '');
+  }, [initialImageUrl, open]);
 
   function handleAIDraft(content: string) {
     setBody(content);
@@ -203,6 +221,7 @@ export function EmailComposer({
           cc: cc || undefined,
           subject,
           bodyHtml: body,
+          imageUrl: imageUrl || undefined,
           accountName,
           personaName,
         }),
@@ -218,6 +237,7 @@ export function EmailComposer({
       setCc('');
       setSubject('');
       setBody('');
+      setImageUrl('');
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Email send failed');
     } finally {
@@ -336,7 +356,7 @@ export function EmailComposer({
             {previewMode && body.trim() ? (
               <div
                 className="w-full min-h-[200px] rounded-md border border-input overflow-hidden"
-                  dangerouslySetInnerHTML={{ __html: sanitizeHtml(buildEmailPreviewHtml(body)) }}
+                  dangerouslySetInnerHTML={{ __html: sanitizeHtml(buildEmailPreviewHtml(body, imageUrl)) }}
               />
             ) : (
               <textarea
@@ -345,6 +365,14 @@ export function EmailComposer({
                 value={body}
                 onChange={(e) => setBody(e.target.value)}
               />
+            )}
+            {imageUrl && (
+              <div className="mt-1.5 flex items-center gap-2 rounded-md border border-input bg-muted/40 px-2 py-1.5 text-[11px] text-muted-foreground">
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img src={imageUrl} alt="" className="h-8 w-12 shrink-0 rounded border border-input object-cover" />
+                <span className="flex-1">Live-yard photo will be included above your signature.</span>
+                <button type="button" onClick={() => setImageUrl('')} className="underline hover:text-foreground">Remove</button>
+              </div>
             )}
           </div>
         </div>
