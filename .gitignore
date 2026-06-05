@@ -40,3 +40,6 @@ output/prospect-discovery/scored-prospects-*.csv
 tmp/
 
 .vercel
+
+# Outreach send-queues contain prospect PII — never commit (public repo)
+output/prospect-discovery/send-queue-*
