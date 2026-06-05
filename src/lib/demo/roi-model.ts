@@ -35,6 +35,21 @@ export interface NetworkRoiCounts {
 }
 
 /**
+ * Per-account modeled-footprint override (by slug). Caps the network the ROI is
+ * modeled across, overriding the pack's coverageNote footprint.
+ *
+ * Dannon: the pack carries Danone's full ~190-plant GLOBAL footprint, but the
+ * account is pitched to Danone NORTH AMERICA, so we model the 13 audited US
+ * plants we actually mapped (Casey, 2026-06-05). This keeps /demo/dannon in
+ * lockstep with /for/dannon, which applies the same 13-plant cap. The on-disk
+ * pack stays honest about the 190 global footprint; only the modeled scope is
+ * capped here, so the inline ROI panel + the full-calculator prefill agree.
+ */
+const FOOTPRINT_OVERRIDE: Record<string, number> = {
+  dannon: 13,
+};
+
+/**
  * Derive the network counts that drive every ROI surface from the pack.
  * Extrapolates the audited drop-yard ratio across the full footprint (the
  * audit is a deliberate sample of core facilities, so this is defensible).
@@ -42,7 +57,11 @@ export interface NetworkRoiCounts {
 export function deriveNetworkCounts(pack: DemoPack): NetworkRoiCounts {
   const cov = pack.account.coverageNote;
 
-  const total = cov?.totalGlobalFootprint ?? cov?.estimatedFootprint ?? pack.account.siteCount;
+  const total =
+    FOOTPRINT_OVERRIDE[pack.account.slug] ??
+    cov?.totalGlobalFootprint ??
+    cov?.estimatedFootprint ??
+    pack.account.siteCount;
 
   const auditedSites = pack.network.sites.length;
   const auditedDrops = pack.network.sites.filter((s) => s.classification.dropYard).length;
