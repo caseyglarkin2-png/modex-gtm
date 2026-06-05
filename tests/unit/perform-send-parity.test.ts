@@ -117,6 +117,31 @@ describe('performSend parity', () => {
     }));
   });
 
+  it('uses invariantAccountName (not accountName) for the one-account invariant', async () => {
+    mockedPrisma.unsubscribedEmail.findMany.mockResolvedValue([]);
+    mockedSendEmail.mockResolvedValue({
+      headers: { 'x-message-id': 'msg-1' },
+      provider: 'gmail',
+      threadId: null,
+      hubspotEngagementId: null,
+    });
+    mockedPrisma.account.findUnique.mockResolvedValue(null);
+
+    await performSend(prisma, {
+      to: 'alice@example.com',
+      subject: 'Test',
+      bodyHtml: 'Hello',
+      accountName: null,
+      invariantAccountName: 'Acme Foods',
+      personaName: null,
+    });
+
+    expect(mockedEnforceOneAccountInvariant).toHaveBeenCalledWith(
+      expect.anything(),
+      expect.objectContaining({ accountName: 'Acme Foods' }),
+    );
+  });
+
   it('returns { ok: false, block } for an unsubscribed recipient and does NOT send', async () => {
     mockedPrisma.unsubscribedEmail.findMany.mockResolvedValue([{ email: 'blocked@example.com' }]);
 

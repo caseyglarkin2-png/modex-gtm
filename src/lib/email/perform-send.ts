@@ -31,7 +31,14 @@ export interface PerformSendInput {
   imageUrl?: string;
   /** Recipient's resolved account name (route's `resolvedRecipient.accountName`). */
   accountName: string | null;
+  /**
+   * Account name for the one-account invariant only. Preserves the route's
+   * fuller fallback chain (`resolvedRecipient.accountName ?? generatedAccountName
+   * ?? accountName`). Falls back to `accountName` when unset.
+   */
+  invariantAccountName?: string | null;
   personaName: string | null;
+  personaId?: number;
   generatedContentId?: number;
   workflowMetadata?: unknown;
 }
@@ -94,11 +101,16 @@ export async function performSend(
     );
   };
 
+  // The one-account invariant uses the route's fuller account fallback chain
+  // (recipient → generated-content → request-body account), distinct from the
+  // recipient-only account used for EmailLog + pipeline advance below.
+  const invariantAccountName = input.invariantAccountName ?? input.accountName ?? null;
+
   const accountInvariant = await enforceOneAccountInvariant(prisma, {
-    accountName: resolvedRecipient.accountName ?? null,
+    accountName: invariantAccountName,
     recipients: [{
       to: resolvedRecipient.to,
-      accountName: resolvedRecipient.accountName ?? null,
+      accountName: invariantAccountName,
     }],
     cc,
   });
@@ -106,7 +118,7 @@ export async function performSend(
     await recordSourceBackedMetric({
       metric: 'one_account_invariant_violations',
       endpoint: '/api/email/send',
-      accountName: resolvedRecipient.accountName ?? null,
+      accountName: invariantAccountName,
       details: accountInvariant.details,
     });
     const block = mixedAccountPayloadSendBlocker(accountInvariant.details);
@@ -206,7 +218,7 @@ export async function performSend(
             },
           },
           recipient: {
-            personaId: null,
+            personaId: input.personaId ?? null,
             personaName: resolvedRecipient.personaName ?? null,
             cc: sanitizedCc,
             candidateTrace: recipientCandidateTrace,

@@ -78,6 +78,7 @@ export async function POST(req: NextRequest) {
       };
     }
 
+    let generatedAccountName: string | null = null;
     if (generatedContentId) {
       const generated = await prisma.generatedContent.findUnique({
         where: { id: generatedContentId },
@@ -101,7 +102,7 @@ export async function POST(req: NextRequest) {
         const block = generatedContentMissingSendBlocker(generatedContentId);
         return NextResponse.json(serializeSendBlocker(block), { status: block.status });
       }
-      const generatedAccountName = generated.account_name ?? null;
+      generatedAccountName = generated.account_name ?? null;
       if (SOURCE_APPROVAL_GATE_ENABLED) {
         const approvalDecision = await requiresApprovalForSend(prisma, generatedContentId);
         if (!approvalDecision.approved) {
@@ -124,6 +125,8 @@ export async function POST(req: NextRequest) {
       }
     }
 
+    const invariantAccountName = resolvedRecipient.accountName ?? generatedAccountName ?? accountName ?? null;
+
     const r = await performSend(prisma, {
       to: resolvedRecipient.to,
       cc,
@@ -131,7 +134,9 @@ export async function POST(req: NextRequest) {
       bodyHtml,
       imageUrl,
       accountName: resolvedRecipient.accountName,
+      invariantAccountName,
       personaName: resolvedRecipient.personaName,
+      personaId: personaId ?? undefined,
       generatedContentId,
       workflowMetadata,
     });
