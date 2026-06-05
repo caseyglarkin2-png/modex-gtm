@@ -368,6 +368,10 @@ function formatCurrencyCompact(value: number): string {
   const absolute = Math.abs(value);
   const sign = value < 0 ? '-' : '';
 
+  if (absolute >= 1_000_000_000) {
+    return `${sign}$${parseFloat((absolute / 1_000_000_000).toFixed(1))}B`;
+  }
+
   if (absolute >= 1_000_000) {
     return `${sign}$${parseFloat((absolute / 1_000_000).toFixed(1))}M`;
   }
