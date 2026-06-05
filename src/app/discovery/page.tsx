@@ -2,13 +2,15 @@ import { Breadcrumb } from '@/components/breadcrumb';
 import { MetricCard } from '@/components/metric-card';
 import { Card, CardContent } from '@/components/ui/card';
 import { Compass, Layers, Radar, Trophy } from 'lucide-react';
-import { loadLatestScored, getDiscoverySummary, toProspectRow } from '@/lib/discovery/data';
+import { loadLatestScored, getDiscoverySummary, buildCuratedRows } from '@/lib/discovery/data';
+import { summarizeCuration } from '@/lib/discovery/curate';
+import { enrichRowsWithPipeline } from '@/lib/discovery/enrich';
 import { DiscoveryHub } from './discovery-hub';
 
 export const dynamic = 'force-dynamic';
 export const metadata = { title: 'Discovery' };
 
-export default function DiscoveryPage() {
+export default async function DiscoveryPage() {
   const output = loadLatestScored();
 
   if (!output) {
@@ -30,7 +32,11 @@ export default function DiscoveryPage() {
   }
 
   const summary = getDiscoverySummary(output);
-  const allRows = output.prospects.map(toProspectRow);
+  const curatedRows = await enrichRowsWithPipeline(buildCuratedRows(output));
+  const curation = summarizeCuration(curatedRows);
+  // Distinct accounts with a live deal (each account's pipeline state is a shared
+  // object, so de-duping by reference counts accounts, not sites).
+  const pipelineAccounts = new Set(curatedRows.map((r) => r.pipeline).filter(Boolean)).size;
 
   return (
     <div className="space-y-6">
@@ -73,10 +79,14 @@ export default function DiscoveryPage() {
       </div>
 
       <p className="text-xs text-[var(--muted-foreground)]">
-        Scored {new Date(summary.generatedAt).toLocaleDateString()} · from {output.inputFile}
+        Scored {new Date(summary.generatedAt).toLocaleDateString()} · from {output.inputFile} ·{' '}
+        curated to {curation.curatedTotal.toLocaleString()} sellable sites
+        {curation.mergedTotal > 0 && ` · ${curation.mergedTotal.toLocaleString()} duplicate/gate rows merged`}
+        {curation.bySegment.parcel > 0 && ` · ${curation.bySegment.parcel.toLocaleString()} parcel/last-mile demoted`}
+        {pipelineAccounts > 0 && ` · ${pipelineAccounts} account${pipelineAccounts === 1 ? '' : 's'} with a live HubSpot deal`}
       </p>
 
-      <DiscoveryHub rows={allRows} corridors={output.corridors} output={output} />
+      <DiscoveryHub rows={curatedRows} corridors={output.corridors} output={output} curation={curation} />
     </div>
   );
 }

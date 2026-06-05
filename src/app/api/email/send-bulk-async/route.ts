@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { randomUUID } from 'node:crypto';
 import { BulkSendAsyncSchema } from '@/lib/validations';
 import { rateLimit } from '@/lib/rate-limit';
-import { allocateRecipientsDeterministic } from '@/lib/experiments/split';
+import { allocateRecipientsDeterministic } from '@/lib/experiments/allocate';
 import { getStrategyPreset, validateSendStrategy } from '@/lib/revops/send-strategy';
 import { buildInfographicEvent, parseInfographicMetadata } from '@/lib/revops/infographic-journey';
 import { SOURCE_APPROVAL_GATE_ENABLED } from '@/lib/feature-flags';

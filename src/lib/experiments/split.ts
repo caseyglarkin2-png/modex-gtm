@@ -1,4 +1,6 @@
-import crypto from 'node:crypto';
+// NOTE: this module is imported by a client component (bulk-preview-dialog), so
+// it must stay free of Node built-ins. The crypto-based deterministic allocation
+// lives in ./allocate (server-only). See that file for why.
 
 export type ExperimentMetric = 'reply_rate' | 'meeting_rate' | 'positive_reply_rate';
 
@@ -21,40 +23,6 @@ export function normalizeVariantSplits(variants: ExperimentVariantInput[]): Expe
     return variants.map((variant) => ({ ...variant, split: equal }));
   }
   return variants.map((variant) => ({ ...variant, split: variant.split / total }));
-}
-
-function bucket(seed: string): number {
-  const hex = crypto.createHash('sha256').update(seed).digest('hex').slice(0, 8);
-  const int = Number.parseInt(hex, 16);
-  return (int % 10000) / 10000;
-}
-
-export function allocateRecipientsDeterministic(
-  recipientEmails: string[],
-  variants: ExperimentVariantInput[],
-  seed: string,
-): ExperimentAssignment[] {
-  const normalized = normalizeVariantSplits(variants);
-  const cutoffs: Array<{ variantId: string; variantKey: string; threshold: number }> = [];
-  let running = 0;
-  normalized.forEach((variant, idx) => {
-    running += variant.split;
-    cutoffs.push({
-      variantId: variant.variantId,
-      variantKey: variant.variantKey,
-      threshold: idx === normalized.length - 1 ? 1 : running,
-    });
-  });
-
-  return [...recipientEmails].sort().map((email) => {
-    const b = bucket(`${seed}:${email.toLowerCase()}`);
-    const selected = cutoffs.find((cutoff) => b <= cutoff.threshold) ?? cutoffs[cutoffs.length - 1];
-    return {
-      recipientEmail: email.toLowerCase(),
-      variantId: selected.variantId,
-      variantKey: selected.variantKey,
-    };
-  });
 }
 
 export function previewVariantAllocation(
