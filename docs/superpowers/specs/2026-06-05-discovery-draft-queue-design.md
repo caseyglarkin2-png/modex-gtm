@@ -30,13 +30,72 @@ and then go out the proven send path — immediately or on a schedule.
   its own scheduler in v1.
 - **Fewest clicks:** one click to queue a contact; two clicks to commit a batch.
 
-## Non-goals (v1, YAGNI)
+## Non-goals (explicitly deferred)
 
-- A/B experiments (the `Experiment`/`SendJob` system already exists separately).
-- Multi-step sequences / automated follow-ups.
-- Multi-user / per-rep queues (single operator: Casey).
-- An app-side cron scheduler (Clawd's cron is the trigger; a Vercel-cron backup is
-  a trivial later add, explicitly deferred).
+- **App-side cron backup poller.** Clawd's Railway cron is the sole scheduler
+  trigger. If Railway is down, Casey restores it; the app does not run a backup
+  poller. (Decided 2026-06-05.)
+
+## Final scope — approved additions (2026-06-05)
+
+The v1 program now includes A–D + F–H below (E declined). These layer onto the
+core queue in independent sprints; see the implementation plan for sequencing.
+
+**A. Inline image via `cid:` (not just hosted URL).** Extend
+`buildMimeMessage` (`gmail-sender.ts`) to `multipart/related`: fetch the proof
+image, base64-encode it as an attachment with a `Content-ID`, and have `wrapHtml`
+reference `cid:`. Renders even for recipients who block remote images. Hosted-URL
+remains the fallback.
+
+**B. Reply-aware auto-pause.** Before a *scheduled* item (or sequence step) fires,
+check whether the recipient has sent anything inbound since the item was queued
+(Gmail thread search / `getRecentReplies` in `gmail-inbox.ts`). If so, mark the
+item `skipped` (reason `replied`) and notify — never "did you see my email?" after
+they already wrote back. Does **not** gate explicit "Send now" (Casey's call).
+
+**C. Quiet-hours / send-window guard.** Config: business hours + timezone
+(default 08:00–18:00 ET, Mon–Fri). `approveBatch`/stagger clamps `scheduled_for`
+into the window; at send time an item outside the window defers to the next open.
+Protects deliverability and credibility (no 2am sends).
+
+**D. True comms-awareness (supersedes EmailLog-only dedup).** EmailLog captures
+*app-originated* sends only — not Casey's manual Gmail sends or the Clawd-agent
+sends. A new `recipientCommsStatus(email)` consults, in authority order:
+(1) unsubscribe list (hard block); (2) **Gmail thread search** — ground truth, covers
+manual + agent + app sends/replies; (3) **HubSpot** `searchContactByEmail` →
+last-contacted / recent-engagement; (4) EmailLog (fast local subset). Returns
+`{ state: 'new' | 'emailed' | 'in_thread' | 'unsubscribed', lastAt, detail }`.
+Used in **dedup-on-add** (block/warn) and as a **final pre-send guard**, and shown
+per-row in the Outbox ("New" / "Emailed 3d ago" / "In thread — they replied 2d
+ago"). Results cached per-email with a short TTL to bound API calls.
+
+**F. Sequences (one-time sends + follow-ups).** A `Sequence` definition (linear
+steps with inter-step delays). `DraftQueueItem` gains `sequence_id`, `step_index`,
+`parent_item_id`. A one-time send is a length-1 sequence. When a step sends, the
+next step is scheduled (`scheduled_for = sent_at + delay`) — unless reply-pause
+(B) fires, which cancels remaining steps. v1 sequences are linear; branching is
+out of scope.
+
+**G. A/B experiments, reported in HubSpot (source of truth).** Reuse the existing
+`Experiment`/`ExperimentVariant` tables + `allocateRecipientsDeterministic`.
+Variants (subject / opener) are defined on a batch or sequence step; each
+recipient is assigned deterministically; `variant_key` is stamped onto the send →
+EmailLog.metadata **and** the HubSpot email object, so open/reply reporting by
+variant happens **in HubSpot**, not a bespoke app dashboard. (Ops: Casey gives the
+Clawd team a HubSpot login for reporting — external to this build.)
+
+**H. Multi-user (rig for Jake now, code-only).** `jake@freightroll.com` is already
+allowlisted and the session already carries `role: admin|rep`. Add `owner`
+(defaults to signed-in email) to `DraftQueueItem`; Outbox filters by owner (admins
+see all). **Send identity:** the Gmail refresh token is currently global (Casey's)
+and the sign-in callback *overwrites* a single `__system__` record — so today Jake
+would send as Casey. Fix: store the refresh token **per user** (keyed by email) and
+have the sender resolve the token by the item's `owner`. All code-only — Jake
+captures his token by signing in once. **External dependency (not now):** Jake can
+sign in immediately only if the Google OAuth app is Internal/Published; if it's in
+"Testing" mode, adding Jake needs a 1-minute GCP console test-user add (Casey) —
+deferred until Jake is ready. We build the scoping + per-identity send so it's
+ready.
 
 ## What already exists (reused, not rebuilt)
 
@@ -213,6 +272,6 @@ gets a test that it calls the shared send logic and records result fields.
 
 ## Open questions
 
-- None blocking. Image fidelity: v1 uses hosted-URL `<img>` (works today); a `cid:`
-  inline-attachment enhancement to `buildMimeMessage` is a later, optional upgrade
-  for recipients who block remote images.
+- None blocking. (Image fidelity resolved: `cid:` inline is now in scope — item A.
+  Google OAuth publishing mode for Jake is the only external dependency — item H —
+  and is deferred until Jake onboards.)
