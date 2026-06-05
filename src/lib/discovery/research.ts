@@ -71,6 +71,52 @@ export function parseResearchedContacts(text: string): ResearchedContact[] {
   return out;
 }
 
+const FREE_EMAIL_DOMAINS = new Set([
+  'gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'aol.com', 'icloud.com',
+  'me.com', 'live.com', 'msn.com', 'proton.me', 'protonmail.com',
+]);
+
+/** Extract + validate a corporate email domain from a model answer. Pure. */
+export function parseDomainAnswer(text: string): string | null {
+  if (!text) return null;
+  const m = text.toLowerCase().match(/\b((?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z]{2,})\b/);
+  if (!m) return null;
+  const domain = m[1].replace(/^www\./, '');
+  if (FREE_EMAIL_DOMAINS.has(domain)) return null;
+  return domain;
+}
+
+const domainCache = new Map<string, string | null>();
+
+/**
+ * Discover a company's corporate email domain via Gemini + Google Search grounding,
+ * so email inference works for net-new companies absent from our corpus and seed map.
+ * Cached per process. Returns null when unavailable / not confidently found.
+ */
+export async function discoverCompanyDomain(company: string): Promise<string | null> {
+  const key = process.env.GEMINI_API_KEY;
+  if (!key || !company.trim()) return null;
+  const cacheKey = company.trim().toLowerCase();
+  if (domainCache.has(cacheKey)) return domainCache.get(cacheKey) ?? null;
+
+  let result: string | null = null;
+  try {
+    const client = new GoogleGenerativeAI(key);
+    const model = client.getGenerativeModel({
+      model: 'gemini-2.5-flash',
+      tools: [{ googleSearch: {} } as unknown as never],
+      generationConfig: { temperature: 0, maxOutputTokens: 256 },
+    });
+    const prompt = `What is the primary corporate email domain (the part after @ in employee email addresses) for the company "${company}"? Reply with ONLY the domain, like "acme.com". If you are not confident, reply "NONE".`;
+    const res = await model.generateContent(prompt);
+    result = parseDomainAnswer(res.response.text());
+  } catch {
+    result = null;
+  }
+  domainCache.set(cacheKey, result);
+  return result;
+}
+
 function buildPrompt(company: string, loc?: ResearchLocation): string {
   const place = [loc?.city, loc?.state].filter(Boolean).join(', ');
   const region = loc?.corridor && loc.corridor !== place ? ` (${loc.corridor} corridor)` : '';

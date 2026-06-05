@@ -101,8 +101,16 @@ describe('inferEmail', () => {
     expect(r.confidence).toBe('medium');
   });
 
-  it('returns no email when there is no basis at all', () => {
+  it('falls back to first.last at low confidence when the domain is known but no pattern signal', () => {
+    // Net-new company: we discovered the domain but have zero corpus + no stored pattern.
+    // first.last is the modal US corporate convention — a low-confidence guess beats nothing.
     const r = inferEmail('Casey', 'Larkin', 'acme.com', {});
+    expect(r.email).toBe('casey.larkin@acme.com');
+    expect(r.confidence).toBe('low');
+  });
+
+  it('returns no email only when the domain itself is unknown', () => {
+    const r = inferEmail('Casey', 'Larkin', '', {});
     expect(r.email).toBeNull();
     expect(r.confidence).toBe('none');
   });

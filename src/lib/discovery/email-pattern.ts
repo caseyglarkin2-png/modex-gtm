@@ -117,13 +117,17 @@ export interface InferredEmail {
   pattern?: EmailPattern;
 }
 
+/** Modal US corporate email convention — the assumption when we know nothing else. */
+const DEFAULT_PATTERN: EmailPattern = 'first.last';
+
 /**
- * Infer an email for a new person — always offer the best guess when there's any
- * basis (real conventions are mixed; the composer is the review gate).
+ * Infer an email for a new person — always offer the best guess when we have a
+ * domain (real conventions are mixed; the composer is the review gate). Only the
+ * domain being unknown yields no email.
  *  - high   — ≥2 corpus samples, one pattern explains ≥80% (clean convention)
  *  - medium — a clear plurality pattern (≥45% of ≥2 samples) OR a researched pattern
- *  - low    — a pattern from a single sample, or a weak plurality
- *  - none   — no pattern detected and no researched fallback → email null
+ *  - low    — a pattern from a single sample, a weak plurality, OR an assumed default
+ *  - none   — the domain itself is unknown → email null
  */
 export function inferEmail(
   first: string,
@@ -131,6 +135,10 @@ export function inferEmail(
   domain: string,
   opts: { samples?: NameEmailSample[]; storedPattern?: EmailPattern },
 ): InferredEmail {
+  if (!domain) {
+    return { email: null, confidence: 'none', basis: 'no company domain known' };
+  }
+
   const detected = opts.samples?.length ? detectPattern(opts.samples) : null;
 
   if (detected) {
@@ -152,5 +160,11 @@ export function inferEmail(
     };
   }
 
-  return { email: null, confidence: 'none', basis: 'no known emails at this company' };
+  // Domain known but no pattern signal — assume the modal convention, flag it low.
+  return {
+    email: applyPattern(first, last, domain, DEFAULT_PATTERN),
+    confidence: 'low',
+    basis: `assumed ${DEFAULT_PATTERN} (no known ${domain} emails) — verify`,
+    pattern: DEFAULT_PATTERN,
+  };
 }
