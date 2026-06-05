@@ -19,16 +19,17 @@ export function facilityNoun(name: string): string {
   return 'facility';
 }
 
-function fmtMi(d: number): string {
+/** Distance formatter shared by the worklist angle and the outreach opener. */
+export function formatMiles(d: number): string {
   return d < 10 ? d.toFixed(1) : String(Math.round(d));
 }
 
 /**
- * One-line angle for a worklist row.
- *  - near a reference: proximity proof, naming the specific live site's city when
- *    it resolves ("Primo Brands runs YardFlow at a live site in Breinigsville, PA,
- *    2.7 mi from this DC …") — a named, checkable site reads far more credibly than
- *    a generic claim. Falls back to the generic line when the name doesn't resolve.
+ * One-line angle for a worklist row (Casey-facing). Plain, no em dashes, no claim
+ * we don't back up.
+ *  - near a reference: names the specific live site's city when it resolves
+ *    ("Primo Brands runs YardFlow at a live site in Breinigsville, PA, 2.7 mi from
+ *    this DC.") — a named, checkable site reads far more credibly.
  *  - otherwise: a fit / corridor angle so the row still has a reason to work.
  */
 export function generateAngle(row: CuratedRow): string {
@@ -36,8 +37,8 @@ export function generateAngle(row: CuratedRow): string {
   if (row.nearestPrimoDistance <= NEAR_REFERENCE_MI) {
     const site = REFERENCE_SITES.find((s) => s.name === row.nearestPrimoName);
     const where = site ? ` in ${site.city}, ${site.state}` : '';
-    return `Primo Brands runs YardFlow at a live site${where}, ${fmtMi(row.nearestPrimoDistance)} mi from this ${noun} — proximity proof in the same lane.`;
+    return `Primo Brands runs YardFlow at a live site${where}, ${formatMiles(row.nearestPrimoDistance)} mi from this ${noun}.`;
   }
   const fit = row.verticalMatch + row.enterpriseScale + row.networkComplexity;
-  return `Enterprise ${row.segment === 'shipper' ? '' : `${row.segment} `}target in the ${row.corridor} corridor — strong ICP fit (${fit}/75), no live YardFlow site nearby yet.`;
+  return `Enterprise ${row.segment === 'shipper' ? '' : `${row.segment} `}target in the ${row.corridor} corridor. Strong ICP fit (${fit}/75), no live YardFlow site nearby yet.`;
 }
