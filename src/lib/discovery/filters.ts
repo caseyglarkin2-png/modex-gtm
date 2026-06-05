@@ -21,6 +21,10 @@ export interface ProspectFilters {
   excludeParcel?: boolean;
   /** Keep only rows at or above this confidence (low < medium < high). */
   minConfidence?: Confidence;
+  /** Keep only these ICP tiers (any-of) — used by the daily slice. */
+  tiers?: string[];
+  /** Keep only rows within this many miles of the nearest reference site. */
+  maxDistance?: number;
 }
 
 const CONFIDENCE_RANK: Record<Confidence, number> = { low: 0, medium: 1, high: 2 };
@@ -33,6 +37,13 @@ export function filterProspects<T extends ProspectRow>(rows: T[], filters: Prosp
   let result = rows;
   if (filters.tier) {
     result = result.filter((r) => r.tier === filters.tier);
+  }
+  if (filters.tiers && filters.tiers.length > 0) {
+    const allowed = new Set(filters.tiers);
+    result = result.filter((r) => allowed.has(r.tier));
+  }
+  if (filters.maxDistance != null) {
+    result = result.filter((r) => r.nearestPrimoDistance <= filters.maxDistance!);
   }
   if (filters.corridor) {
     result = result.filter((r) => r.corridor === filters.corridor);

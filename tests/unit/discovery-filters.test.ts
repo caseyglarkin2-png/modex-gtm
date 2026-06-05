@@ -63,3 +63,28 @@ describe('filterProspects — segment & confidence', () => {
     expect(out).toHaveLength(3);
   });
 });
+
+describe('filterProspects — daily slice (tiers + maxDistance)', () => {
+  const rows = [
+    mkCurated({ name: 'A near', tier: 'A', nearestPrimoDistance: 5 }),
+    mkCurated({ name: 'B near', tier: 'B', nearestPrimoDistance: 20 }),
+    mkCurated({ name: 'A far', tier: 'A', nearestPrimoDistance: 200 }),
+    mkCurated({ name: 'C near', tier: 'C', nearestPrimoDistance: 5 }),
+  ];
+
+  it('keeps only the listed tiers', () => {
+    const out = filterProspects(rows, { tiers: ['A', 'B'] });
+    expect(out.map((r) => r.name).sort()).toEqual(['A far', 'A near', 'B near']);
+  });
+
+  it('keeps only rows within maxDistance of a reference', () => {
+    const out = filterProspects(rows, { maxDistance: 25 });
+    expect(out.some((r) => r.name === 'A far')).toBe(false);
+    expect(out).toHaveLength(3);
+  });
+
+  it('composes tiers + maxDistance into the sellable slice', () => {
+    const out = filterProspects(rows, { tiers: ['A', 'B'], maxDistance: 25 });
+    expect(out.map((r) => r.name).sort()).toEqual(['A near', 'B near']);
+  });
+});

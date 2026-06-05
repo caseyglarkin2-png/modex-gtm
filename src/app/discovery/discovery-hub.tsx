@@ -16,9 +16,15 @@ import { ProspectDetailSheet } from './prospect-detail-sheet';
 import { ProspectsTable } from './prospects-table';
 import { ScanPanel } from './scan-panel';
 import { WeightControl } from './weight-control';
+import { usePinned } from './use-pinned';
 
 const WEIGHT_STORAGE_KEY = 'discovery.weighting';
 const DEFAULT_WEIGHTING = 'proximity-led';
+
+// The default "work these today" slice: high-fit (Tier A/B), near a live
+// reference site, no parcel. Widen toggles it off to show the full set.
+const SLICE_TIERS = ['A', 'B'];
+const SLICE_MAX_DISTANCE_MI = 25;
 
 interface Props {
   rows: CuratedRow[];
@@ -64,7 +70,10 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
   const [minScore, setMinScore] = useState<number | null>(initialMinScore);
   const [segmentFilter, setSegmentFilter] = useState<string | null>(searchParams.get('segment'));
   const [weighting, setWeighting] = useState<string>(searchParams.get('weight') ?? DEFAULT_WEIGHTING);
+  // Daily slice on by default; ?all=1 (or the widen toggle) opens the full set.
+  const [dailySlice, setDailySlice] = useState<boolean>(searchParams.get('all') !== '1');
   const [selectedProspect, setSelectedProspect] = useState<RankedRow | null>(null);
+  const { pinned, toggle: togglePinned } = usePinned();
 
   // Restore the persisted weighting on mount (URL wins over localStorage so a
   // shared link is authoritative). Runs client-only — localStorage is unavailable on the server.
@@ -84,6 +93,10 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
     return counts;
   }, [rows]);
 
+  // When the daily slice is on (and the user hasn't drilled into a specific tier
+  // or corridor), narrow to Casey's sellable set: Tier A/B near a reference.
+  const sliceActive = dailySlice && !tierFilter && !corridorFilter;
+
   const filtered = useMemo(
     () =>
       filterProspects(rows, {
@@ -93,8 +106,10 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
         segment: segmentFilter ?? undefined,
         // Default daily slice hides parcel / last-mile; selecting the Parcel chip reveals it.
         excludeParcel: true,
+        tiers: sliceActive ? SLICE_TIERS : undefined,
+        maxDistance: sliceActive ? SLICE_MAX_DISTANCE_MI : undefined,
       }),
-    [rows, tierFilter, corridorFilter, minScore, segmentFilter],
+    [rows, tierFilter, corridorFilter, minScore, segmentFilter, sliceActive],
   );
 
   // Re-aim: rank the filtered slice by the proximity-led, re-weightable worklist
@@ -104,6 +119,15 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
     () => rankWorklist(filtered, WEIGHT_PRESETS[weighting] ?? WEIGHT_PRESETS[DEFAULT_WEIGHTING]),
     [filtered, weighting],
   );
+
+  // Pinned "my targets" float to the top of the worklist regardless of score.
+  const ordered = useMemo<RankedRow[]>(() => {
+    if (pinned.size === 0) return ranked;
+    const pin: RankedRow[] = [];
+    const rest: RankedRow[] = [];
+    for (const r of ranked) (pinned.has(r.placeId) ? pin : rest).push(r);
+    return [...pin, ...rest];
+  }, [ranked, pinned]);
 
   const handleTabChange = useCallback((value: string) => {
     setTab(value);
@@ -136,6 +160,11 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
     syncUrl({ weight: value === DEFAULT_WEIGHTING ? null : value });
   }, []);
 
+  const handleToggleSlice = useCallback((next: boolean) => {
+    setDailySlice(next);
+    syncUrl({ all: next ? null : '1' });
+  }, []);
+
   // Clicking a corridor card jumps to the Prospects tab filtered to that corridor.
   const handleSelectCorridor = useCallback(
     (name: string) => {
@@ -148,22 +177,50 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
 
   const handleSelectProspectById = useCallback(
     (placeId: string) => {
-      const prospect = ranked.find((r) => r.placeId === placeId);
+      const prospect = ordered.find((r) => r.placeId === placeId);
       if (prospect) setSelectedProspect(prospect);
     },
-    [ranked],
+    [ordered],
   );
 
   return (
     <>
       <Tabs value={tab} onValueChange={handleTabChange}>
         <TabsList>
-          <TabsTrigger value="prospects">Prospects</TabsTrigger>
+          <TabsTrigger value="prospects">Worklist</TabsTrigger>
           <TabsTrigger value="corridors">Corridors</TabsTrigger>
           <TabsTrigger value="scan">Scan</TabsTrigger>
         </TabsList>
 
         <TabsContent value="prospects" className="space-y-4">
+          <div className="flex flex-wrap items-center justify-between gap-3">
+            <div>
+              <h2 className="text-base font-semibold">Work these today</h2>
+              <p className="text-xs text-[var(--muted-foreground)]">
+                {sliceActive ? (
+                  <>
+                    Tier A/B within {SLICE_MAX_DISTANCE_MI} mi of a live YardFlow site ·{' '}
+                    {ordered.length.toLocaleString()} of {rows.length.toLocaleString()} sites
+                    {pinned.size > 0 && ` · ${pinned.size} pinned`}
+                  </>
+                ) : (
+                  <>
+                    Full set · {ordered.length.toLocaleString()} sites
+                    {pinned.size > 0 && ` · ${pinned.size} pinned`}
+                  </>
+                )}
+              </p>
+            </div>
+            <button
+              type="button"
+              onClick={() => handleToggleSlice(!dailySlice)}
+              aria-pressed={!dailySlice}
+              className="rounded-md border border-[var(--border)] px-2.5 py-1 text-xs font-medium transition hover:border-[var(--primary)]"
+            >
+              {dailySlice ? 'Widen to all sites' : 'Back to my slice'}
+            </button>
+          </div>
+
           <div className="flex flex-wrap items-center justify-between gap-3">
             <FilterBar
               tierFilter={tierFilter}
@@ -176,7 +233,7 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
               onCorridorChange={handleCorridorChange}
               onMinScoreChange={handleMinScoreChange}
               onSegmentChange={handleSegmentChange}
-              resultCount={ranked.length}
+              resultCount={ordered.length}
             />
             <WeightControl weighting={weighting} onChange={handleWeightingChange} />
           </div>
@@ -189,7 +246,7 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
               <CardContent className="p-0">
                 <div className="h-[480px]">
                   <CorridorMap
-                    prospects={ranked}
+                    prospects={ordered}
                     corridors={corridors}
                     onSelectProspect={handleSelectProspectById}
                   />
@@ -197,7 +254,12 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
               </CardContent>
             </Card>
             <div className="min-w-0">
-              <ProspectsTable prospects={ranked} onRowClick={setSelectedProspect} />
+              <ProspectsTable
+                prospects={ordered}
+                onRowClick={setSelectedProspect}
+                pinned={pinned}
+                onTogglePin={togglePinned}
+              />
             </div>
           </div>
         </TabsContent>
