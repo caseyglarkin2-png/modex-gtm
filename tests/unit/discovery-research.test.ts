@@ -2,18 +2,19 @@ import { describe, expect, it } from 'vitest';
 import { parseResearchedContacts } from '@/lib/discovery/research';
 
 describe('parseResearchedContacts', () => {
-  it('parses a plain JSON array', () => {
+  it('parses a plain JSON array incl. local/corporate scope', () => {
     const out = parseResearchedContacts(
-      '[{"name":"Jane Doe","title":"VP Supply Chain","linkedinUrl":"https://linkedin.com/in/janedoe","reason":"owns network"}]',
+      '[{"name":"Jane Doe","title":"VP Supply Chain","scope":"corporate","linkedinUrl":"https://linkedin.com/in/janedoe","reason":"owns network"},{"name":"Bob Lee","title":"Regional Transportation Mgr","scope":"local"}]',
     );
-    expect(out).toHaveLength(1);
-    expect(out[0]).toMatchObject({
-      name: 'Jane Doe',
-      firstName: 'Jane',
-      lastName: 'Doe',
-      title: 'VP Supply Chain',
-      linkedinUrl: 'https://linkedin.com/in/janedoe',
-    });
+    expect(out).toHaveLength(2);
+    expect(out[0]).toMatchObject({ name: 'Jane Doe', firstName: 'Jane', lastName: 'Doe', scope: 'corporate' });
+    expect(out[1].scope).toBe('local');
+  });
+
+  it('defaults scope to corporate when omitted or invalid', () => {
+    const out = parseResearchedContacts('[{"name":"No Scope"},{"name":"Bad Scope","scope":"nonsense"}]');
+    expect(out[0].scope).toBe('corporate');
+    expect(out[1].scope).toBe('corporate');
   });
 
   it('extracts JSON from a ```json fenced block with surrounding prose', () => {

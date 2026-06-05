@@ -20,6 +20,8 @@ export interface ProspectContact {
   linkedinUrl?: string;
   /** Why this person is relevant (from web research). */
   reason?: string;
+  /** 'local' = regional/site leader near the facility; 'corporate' = HQ. */
+  scope?: 'local' | 'corporate';
 }
 
 const FREE_EMAIL_DOMAINS = new Set([

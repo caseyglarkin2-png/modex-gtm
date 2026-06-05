@@ -16,6 +16,14 @@ export interface ResearchedContact {
   title?: string;
   linkedinUrl?: string;
   reason?: string;
+  /** 'local' = regional/site leader near the facility; 'corporate' = HQ decision-maker. */
+  scope: 'local' | 'corporate';
+}
+
+export interface ResearchLocation {
+  city?: string;
+  state?: string;
+  corridor?: string;
 }
 
 function splitName(name: string): { firstName: string; lastName: string } {
@@ -49,6 +57,7 @@ export function parseResearchedContacts(text: string): ResearchedContact[] {
     if (!name || !/[a-z]/i.test(name)) continue;
     const { firstName, lastName } = splitName(name);
     if (!firstName) continue;
+    const scope = rec.scope === 'local' ? 'local' : 'corporate';
     out.push({
       name,
       firstName,
@@ -56,32 +65,45 @@ export function parseResearchedContacts(text: string): ResearchedContact[] {
       title: typeof rec.title === 'string' ? rec.title.trim() || undefined : undefined,
       linkedinUrl: typeof rec.linkedinUrl === 'string' ? rec.linkedinUrl.trim() || undefined : undefined,
       reason: typeof rec.reason === 'string' ? rec.reason.trim() || undefined : undefined,
+      scope,
     });
   }
   return out;
 }
 
-function buildPrompt(company: string): string {
+function buildPrompt(company: string, loc?: ResearchLocation): string {
+  const place = [loc?.city, loc?.state].filter(Boolean).join(', ');
+  const region = loc?.corridor && loc.corridor !== place ? ` (${loc.corridor} corridor)` : '';
+  const hasGeo = Boolean(place);
   return [
-    `Find current decision-makers and senior managers at "${company}" who would own or influence`,
+    `Find current decision-makers at "${company}" who would own or influence`,
     `YARD / DOCK / TRAILER / gate / logistics / supply chain / transportation / distribution / fleet / operations decisions.`,
     ``,
-    `Return ONLY a JSON array (no prose before or after), each item:`,
-    `{"name": "...", "title": "...", "linkedinUrl": "https://...", "reason": "one short phrase why relevant"}`,
+    hasGeo
+      ? `We are targeting their facility near ${place}${region}. Return TWO kinds of people:`
+      : `Return:`,
+    hasGeo
+      ? `- "local": regional or site leaders responsible for the ${place} area — e.g. Regional VP/Director of Operations/Logistics/Transportation, Distribution Center / site / yard manager covering that region.`
+      : `- "local": regional operations/logistics leaders.`,
+    `- "corporate": enterprise HQ decision-makers — VP/Director of Supply Chain, Transportation, Distribution, Logistics, or Operations.`,
+    ``,
+    `Return ONLY a JSON array (no prose), each item:`,
+    `{"name":"...","title":"...","scope":"local"|"corporate","linkedinUrl":"https://...","reason":"short phrase why relevant"}`,
     ``,
     `Rules:`,
-    `- 5 to 8 people, most relevant first.`,
+    hasGeo ? `- Aim for 2-3 "local" and 2-3 "corporate", best first within each.` : `- 5 to 6 people, most relevant first.`,
     `- Real, currently-employed people you can find evidence for; include a LinkedIn URL when available.`,
-    `- Prefer Director / VP / Sr Manager level in the functions above.`,
-    `- If you are unsure, return fewer people rather than inventing anyone.`,
+    `- Prefer Director / VP / Sr Manager level.`,
+    `- If unsure, return fewer rather than inventing anyone.`,
   ].join('\n');
 }
 
 /**
- * Research decision-makers at a company. Returns [] when GEMINI_API_KEY is unset
- * or the call/parse fails (graceful — the caller falls back to manual add).
+ * Research decision-makers at a company, optionally geography-aware (returns both
+ * a local/regional contact near the facility and a corporate HQ contact). Returns
+ * [] when GEMINI_API_KEY is unset or the call/parse fails (graceful).
  */
-export async function researchDecisionMakers(company: string): Promise<ResearchedContact[]> {
+export async function researchDecisionMakers(company: string, loc?: ResearchLocation): Promise<ResearchedContact[]> {
   const key = process.env.GEMINI_API_KEY;
   if (!key || !company.trim()) return [];
   try {
@@ -92,7 +114,7 @@ export async function researchDecisionMakers(company: string): Promise<Researche
       tools: [{ googleSearch: {} } as unknown as never],
       generationConfig: { temperature: 0.2, maxOutputTokens: 2048 },
     });
-    const result = await model.generateContent(buildPrompt(company));
+    const result = await model.generateContent(buildPrompt(company, loc));
     return parseResearchedContacts(result.response.text()).slice(0, 8);
   } catch {
     return [];

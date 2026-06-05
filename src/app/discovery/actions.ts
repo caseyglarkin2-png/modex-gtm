@@ -272,10 +272,16 @@ export async function inferContactEmail(input: {
  * each with an inferred email from the company's pattern. These are PROPOSALS to
  * verify — the UI flags them and links a LinkedIn search. Empty when unavailable.
  */
-export async function researchProspectContacts(input: { company: string; accountSlug?: string }): Promise<ProspectContact[]> {
+export async function researchProspectContacts(input: {
+  company: string;
+  accountSlug?: string;
+  city?: string;
+  state?: string;
+  corridor?: string;
+}): Promise<ProspectContact[]> {
   const { researchDecisionMakers } = await import('@/lib/discovery/research');
   const [people, ctx] = await Promise.all([
-    researchDecisionMakers(input.company),
+    researchDecisionMakers(input.company, { city: input.city, state: input.state, corridor: input.corridor }),
     resolveCompanyEmailContext(input.company, input.accountSlug),
   ]);
 
@@ -294,6 +300,7 @@ export async function researchProspectContacts(input: { company: string; account
       source: 'research' as const,
       linkedinUrl: p.linkedinUrl,
       reason: p.reason,
+      scope: p.scope,
     };
   });
 }

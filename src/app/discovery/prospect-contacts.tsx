@@ -100,7 +100,14 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
   async function handleResearch() {
     setResearching(true);
     try {
-      const found = await researchProspectContacts({ company: prospect.name, accountSlug: prospect.existingAccountSlug });
+      const [city, state] = (prospect.cityState ?? '').split(',').map((s) => s.trim());
+      const found = await researchProspectContacts({
+        company: prospect.name,
+        accountSlug: prospect.existingAccountSlug,
+        city,
+        state,
+        corridor: prospect.corridor,
+      });
       setResearched(found);
       setResearchDone(true);
     } finally {
@@ -177,6 +184,14 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
                       <a href={linkedinHref(c, prospect.name)} target="_blank" rel="noopener noreferrer" aria-label="Find on LinkedIn">
                         <Linkedin className="h-3 w-3 text-[var(--muted-foreground)] hover:text-[var(--primary)]" />
                       </a>
+                    )}
+                    {c.scope && (
+                      <Badge
+                        variant="outline"
+                        className={`text-[9px] ${c.scope === 'local' ? 'text-blue-600 border-blue-600/40' : 'text-[var(--muted-foreground)] border-[var(--border)]'}`}
+                      >
+                        {c.scope === 'local' ? 'Local' : 'Corporate'}
+                      </Badge>
                     )}
                     <Badge
                       variant="outline"
