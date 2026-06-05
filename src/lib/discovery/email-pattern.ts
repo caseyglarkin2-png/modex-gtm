@@ -118,11 +118,12 @@ export interface InferredEmail {
 }
 
 /**
- * Infer an email for a new person.
- *  - high   — ≥2 corpus samples explained by one pattern (matchRate ≥ 0.8)
- *  - low    — a pattern derived from a single corpus sample
- *  - medium — no usable corpus, but a researched stored pattern for the domain
- *  - none   — no basis → email null (caller shows the person + LinkedIn only)
+ * Infer an email for a new person — always offer the best guess when there's any
+ * basis (real conventions are mixed; the composer is the review gate).
+ *  - high   — ≥2 corpus samples, one pattern explains ≥80% (clean convention)
+ *  - medium — a clear plurality pattern (≥45% of ≥2 samples) OR a researched pattern
+ *  - low    — a pattern from a single sample, or a weak plurality
+ *  - none   — no pattern detected and no researched fallback → email null
  */
 export function inferEmail(
   first: string,
@@ -132,22 +133,14 @@ export function inferEmail(
 ): InferredEmail {
   const detected = opts.samples?.length ? detectPattern(opts.samples) : null;
 
-  if (detected && detected.n >= 2 && detected.matchRate >= 0.8) {
-    return {
-      email: applyPattern(first, last, domain, detected.pattern),
-      confidence: 'high',
-      basis: `from ${detected.n} known ${domain} emails`,
-      pattern: detected.pattern,
-    };
-  }
-
-  if (detected && detected.n === 1) {
-    return {
-      email: applyPattern(first, last, domain, detected.pattern),
-      confidence: 'low',
-      basis: `from 1 known ${domain} email`,
-      pattern: detected.pattern,
-    };
+  if (detected) {
+    const email = applyPattern(first, last, domain, detected.pattern);
+    const basis = `from ${detected.n} known ${domain} email${detected.n === 1 ? '' : 's'} (${Math.round(detected.matchRate * 100)}% ${detected.pattern})`;
+    let confidence: InferConfidence;
+    if (detected.n >= 2 && detected.matchRate >= 0.8) confidence = 'high';
+    else if (detected.n >= 2 && detected.matchRate >= 0.45) confidence = 'medium';
+    else confidence = 'low';
+    return { email, confidence, basis, pattern: detected.pattern };
   }
 
   if (opts.storedPattern) {

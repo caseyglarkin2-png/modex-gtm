@@ -1,0 +1,200 @@
+'use client';
+
+import { useEffect, useMemo, useState } from 'react';
+import { Loader2, Mail, Plus, Linkedin } from 'lucide-react';
+import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Badge } from '@/components/ui/badge';
+import { EmailComposer } from '@/components/email/composer';
+import { generateAngle } from '@/lib/discovery/angle';
+import type { RankedRow } from '@/lib/discovery/scoring';
+import type { ProspectContact } from '@/lib/discovery/contacts';
+import { findProspectContacts, inferContactEmail, type ProspectContactsResult } from './actions';
+
+const CONFIDENCE_STYLE: Record<string, { label: string; className: string }> = {
+  known: { label: 'verified', className: 'text-emerald-600 border-emerald-600/30' },
+  high: { label: 'high', className: 'text-emerald-600 border-emerald-600/30' },
+  medium: { label: 'inferred', className: 'text-amber-600 border-amber-600/40' },
+  low: { label: 'low conf.', className: 'text-orange-600 border-orange-600/40' },
+  none: { label: 'no email', className: 'text-neutral-500 border-neutral-500/30' },
+};
+
+const SOURCE_LABEL: Record<ProspectContact['source'], string> = {
+  records: 'Our records',
+  hubspot: 'HubSpot',
+  added: 'Added',
+};
+
+/** Build the outreach subject + body from the proximity angle. */
+function buildOutreach(prospect: RankedRow, firstName?: string): { subject: string; body: string } {
+  const angle = generateAngle(prospect);
+  const near = prospect.nearestPrimoDistance <= 50;
+  const subject = near
+    ? `A live YardFlow site ${prospect.nearestPrimoDistance.toFixed(1)} mi from your operation`
+    : `YardFlow — yard network system for your team`;
+  const body = [
+    `Hi ${firstName || 'there'},`,
+    '',
+    angle,
+    '',
+    `We run YardFlow's yard network system at live sites near you, and I'd love to show you the live yard ops to see if it's worth a look. Open to a quick 15 minutes?`,
+    '',
+    'Best,',
+    'Casey',
+  ].join('\n');
+  return { subject, body };
+}
+
+export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
+  const [data, setData] = useState<ProspectContactsResult | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [added, setAdded] = useState<ProspectContact[]>([]);
+  const [form, setForm] = useState({ firstName: '', lastName: '', title: '', linkedinUrl: '' });
+  const [adding, setAdding] = useState(false);
+  const [composeFor, setComposeFor] = useState<ProspectContact | null>(null);
+  const [composerOpen, setComposerOpen] = useState(false);
+
+  useEffect(() => {
+    let cancelled = false;
+    setData(null);
+    setAdded([]);
+    setLoading(true);
+    findProspectContacts({ company: prospect.name, accountSlug: prospect.existingAccountSlug })
+      .then((d) => { if (!cancelled) setData(d); })
+      .finally(() => { if (!cancelled) setLoading(false); });
+    return () => { cancelled = true; };
+  }, [prospect.placeId, prospect.name, prospect.existingAccountSlug]);
+
+  const contacts = useMemo(() => [...added, ...(data?.contacts ?? [])], [added, data]);
+
+  async function handleAdd() {
+    if (!form.firstName.trim() || !form.lastName.trim()) return;
+    setAdding(true);
+    try {
+      const inf = await inferContactEmail({
+        firstName: form.firstName,
+        lastName: form.lastName,
+        company: prospect.name,
+        accountSlug: prospect.existingAccountSlug,
+      });
+      setAdded((prev) => [
+        {
+          name: `${form.firstName} ${form.lastName}`.trim(),
+          firstName: form.firstName,
+          lastName: form.lastName,
+          title: form.title || undefined,
+          email: inf.email,
+          confidence: inf.confidence,
+          emailBasis: inf.basis,
+          source: 'added',
+          linkedinUrl: form.linkedinUrl || undefined,
+        },
+        ...prev,
+      ]);
+      setForm({ firstName: '', lastName: '', title: '', linkedinUrl: '' });
+    } finally {
+      setAdding(false);
+    }
+  }
+
+  function handleEmail(contact: ProspectContact) {
+    setComposeFor(contact);
+    setComposerOpen(true);
+  }
+
+  const outreach = composeFor ? buildOutreach(prospect, composeFor.firstName) : null;
+
+  return (
+    <div className="space-y-2">
+      <p className="flex items-center justify-between text-xs font-medium uppercase tracking-wide text-[var(--muted-foreground)]">
+        Contacts
+        {loading && <Loader2 className="h-3 w-3 animate-spin" />}
+      </p>
+
+      {/* Email pattern provenance */}
+      {data && (
+        <p className="text-[11px] text-[var(--muted-foreground)]">
+          {data.domain
+            ? data.pattern
+              ? <>Email pattern: <span className="font-mono">{data.pattern}@{data.domain}</span> · {data.patternBasis}</>
+              : <>Domain <span className="font-mono">{data.domain}</span> · {data.patternBasis}</>
+            : 'No company domain known — add a known email to infer addresses.'}
+        </p>
+      )}
+
+      {/* Contact list */}
+      {contacts.length > 0 ? (
+        <ul className="space-y-1.5">
+          {contacts.map((c, i) => {
+            const conf = CONFIDENCE_STYLE[c.confidence] ?? CONFIDENCE_STYLE.none;
+            return (
+              <li key={`${c.name}-${i}`} className="flex items-start justify-between gap-2 text-sm">
+                <div className="min-w-0">
+                  <div className="flex items-center gap-1.5">
+                    <span className="truncate font-medium">{c.name}</span>
+                    {c.linkedinUrl && (
+                      <a href={c.linkedinUrl} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+                        <Linkedin className="h-3 w-3 text-[var(--muted-foreground)] hover:text-[var(--primary)]" />
+                      </a>
+                    )}
+                    <Badge variant="outline" className="text-[9px] text-[var(--muted-foreground)] border-[var(--border)]">
+                      {SOURCE_LABEL[c.source]}
+                    </Badge>
+                  </div>
+                  {c.title && <div className="truncate text-xs text-[var(--muted-foreground)]">{c.title}</div>}
+                  {c.email ? (
+                    <div className="flex items-center gap-1.5">
+                      <span className="truncate font-mono text-[11px] text-[var(--muted-foreground)]" title={c.emailBasis}>{c.email}</span>
+                      {c.confidence !== 'known' && (
+                        <Badge variant="outline" className={`text-[9px] ${conf.className}`} title={c.emailBasis}>{conf.label}</Badge>
+                      )}
+                    </div>
+                  ) : (
+                    <div className="text-[11px] text-[var(--muted-foreground)]">{c.emailBasis ?? 'no email'}</div>
+                  )}
+                </div>
+                {c.email && (
+                  <Button size="sm" variant="outline" className="h-7 shrink-0 gap-1 text-xs" onClick={() => handleEmail(c)}>
+                    <Mail className="h-3 w-3" /> Email
+                  </Button>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      ) : !loading ? (
+        <p className="text-xs text-[var(--muted-foreground)]">No contacts in our records yet — add one below.</p>
+      ) : null}
+
+      {/* Add contact */}
+      <div className="space-y-1.5 rounded-md border border-dashed border-[var(--border)] p-2">
+        <p className="flex items-center gap-1 text-[11px] font-medium text-[var(--muted-foreground)]">
+          <Plus className="h-3 w-3" /> Add a contact (from LinkedIn) — we infer the email
+        </p>
+        <div className="grid grid-cols-2 gap-1.5">
+          <Input className="h-7 text-xs" placeholder="First name" value={form.firstName} onChange={(e) => setForm({ ...form, firstName: e.target.value })} />
+          <Input className="h-7 text-xs" placeholder="Last name" value={form.lastName} onChange={(e) => setForm({ ...form, lastName: e.target.value })} />
+        </div>
+        <Input className="h-7 text-xs" placeholder="Title (optional)" value={form.title} onChange={(e) => setForm({ ...form, title: e.target.value })} />
+        <Input className="h-7 text-xs" placeholder="LinkedIn URL (optional)" value={form.linkedinUrl} onChange={(e) => setForm({ ...form, linkedinUrl: e.target.value })} />
+        <Button size="sm" variant="outline" className="h-7 w-full gap-1 text-xs" onClick={handleAdd} disabled={adding || !form.firstName.trim() || !form.lastName.trim()}>
+          {adding ? <Loader2 className="h-3 w-3 animate-spin" /> : <Plus className="h-3 w-3" />}
+          {adding ? 'Inferring email…' : 'Add + infer email'}
+        </Button>
+      </div>
+
+      {/* Composer, prefilled with the angle; recipient/subject/body editable */}
+      {composeFor && outreach && (
+        <EmailComposer
+          accountName={prospect.name}
+          personaName={composeFor.name}
+          personaEmail={composeFor.email ?? undefined}
+          initialSubject={outreach.subject}
+          initialBody={outreach.body}
+          open={composerOpen}
+          onOpenChange={(o) => { setComposerOpen(o); if (!o) setComposeFor(null); }}
+        />
+      )}
+    </div>
+  );
+}

@@ -88,6 +88,19 @@ describe('inferEmail', () => {
     expect(r.confidence).toBe('low');
   });
 
+  it('offers the plurality pattern at medium confidence when conventions are mixed', () => {
+    // Real companies mix in middle-name/legacy formats; first.last is still the
+    // best guess and must be offered (not discarded) for review.
+    const mixed = [
+      { firstName: 'Nick', lastName: 'Hobbs', email: 'nick.hobbs@jbhunt.com' },
+      { firstName: 'Rachel', lastName: 'Christensen', email: 'rachel.christensen@jbhunt.com' },
+      { firstName: 'Bettye', lastName: 'Kisor', email: 'bettye_ann_kisor@jbhunt.com' }, // middle name → matches nothing
+    ];
+    const r = inferEmail('Jordan', 'Mitchell', 'jbhunt.com', { samples: mixed });
+    expect(r.email).toBe('jordan.mitchell@jbhunt.com');
+    expect(r.confidence).toBe('medium');
+  });
+
   it('returns no email when there is no basis at all', () => {
     const r = inferEmail('Casey', 'Larkin', 'acme.com', {});
     expect(r.email).toBeNull();

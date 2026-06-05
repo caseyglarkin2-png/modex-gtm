@@ -6,6 +6,25 @@ import { hsSearchContacts } from '@/lib/hubspot/contacts';
 import { ensureYardflowIcpScoreProperty } from '@/lib/hubspot/properties';
 import { assertExternalWriteAllowed } from '@/lib/enrichment/external-write-guard';
 import { HUBSPOT_SYNC_ENABLED } from '@/lib/feature-flags';
+import { prisma } from '@/lib/prisma';
+import { detectPattern, inferEmail, type EmailPattern, type NameEmailSample, type InferredEmail } from '@/lib/discovery/email-pattern';
+import { dominantDomain, dedupeContacts, type ProspectContact } from '@/lib/discovery/contacts';
+import { COMPANY_DOMAIN_SEED, EMAIL_PATTERN_SEED, companyKey } from '@/lib/discovery/company-domains';
+
+const GENERIC_BRAND_WORDS = new Set([
+  'the', 'and', 'inc', 'llc', 'corp', 'company', 'co', 'group', 'logistics',
+  'distribution', 'warehouse', 'transport', 'transportation', 'services', 'supply',
+  'chain', 'foods', 'food', 'north', 'america', 'us', 'usa', 'international',
+]);
+
+/** First distinctive word of a company name, for matching against persona accounts.
+ *  Length ≥3 so short brands (GXO, DHL, UPS) win before trailing city/word tokens. */
+function brandToken(company: string): string | null {
+  for (const w of companyKey(company).split(' ')) {
+    if (w.length >= 3 && !GENERIC_BRAND_WORDS.has(w)) return w;
+  }
+  return null;
+}
 
 export interface AccountContact {
   id: string;
@@ -117,4 +136,133 @@ export async function pushProspectToHubSpot(input: PushProspectInput): Promise<P
   } catch (err) {
     return { ok: false, error: err instanceof Error ? err.message : String(err) };
   }
+}
+
+// ── Prospect contacts + inferred email ───────────────────────────────────────
+
+interface CompanyEmailContext {
+  domain: string | null;
+  /** Named {first,last,email} samples at the domain — drive pattern detection. */
+  samples: NameEmailSample[];
+  /** Researched fallback pattern (used only when corpus can't derive one). */
+  storedPattern?: EmailPattern;
+  /** Real contacts already in our Persona records. */
+  records: ProspectContact[];
+}
+
+/**
+ * Resolve a company's email context from our own data (no enrichment credits):
+ * matching Persona records → the corporate domain → same-domain corpus samples,
+ * with a researched seed as fallback.
+ */
+async function resolveCompanyEmailContext(company: string, accountSlug?: string): Promise<CompanyEmailContext> {
+  const token = brandToken(company) ?? (accountSlug ? brandToken(accountSlug.replace(/-/g, ' ')) : null);
+
+  // 1. Persona records for this account (real contacts + their emails).
+  let personas: Array<{ first_name: string | null; last_name: string | null; title: string | null; email: string | null; linkedin_url: string | null }> = [];
+  if (token) {
+    try {
+      personas = await prisma.persona.findMany({
+        where: { account_name: { contains: token, mode: 'insensitive' }, email: { not: null } },
+        select: { first_name: true, last_name: true, title: true, email: true, linkedin_url: true },
+        take: 50,
+      });
+    } catch {
+      personas = [];
+    }
+  }
+
+  const records: ProspectContact[] = personas
+    .filter((p) => p.email)
+    .map((p) => ({
+      name: [p.first_name, p.last_name].filter(Boolean).join(' ') || (p.email as string),
+      firstName: p.first_name ?? undefined,
+      lastName: p.last_name ?? undefined,
+      title: p.title ?? undefined,
+      email: p.email,
+      confidence: 'known' as const,
+      source: 'records' as const,
+      linkedinUrl: p.linkedin_url ?? undefined,
+    }));
+
+  // 2. Domain: dominant corporate domain from records, else researched seed.
+  const domain =
+    dominantDomain(records.map((r) => r.email).filter((e): e is string => Boolean(e))) ??
+    COMPANY_DOMAIN_SEED[companyKey(company)] ??
+    null;
+
+  // 3. Corpus samples at the domain (cross-account — same domain, same convention).
+  let samples: NameEmailSample[] = [];
+  if (domain) {
+    try {
+      const atDomain = await prisma.persona.findMany({
+        where: { email: { endsWith: `@${domain}`, mode: 'insensitive' }, first_name: { not: null }, last_name: { not: null } },
+        select: { first_name: true, last_name: true, email: true },
+        take: 100,
+      });
+      samples = atDomain
+        .filter((p) => p.first_name && p.last_name && p.email)
+        .map((p) => ({ firstName: p.first_name as string, lastName: p.last_name as string, email: p.email as string }));
+    } catch {
+      samples = [];
+    }
+  }
+
+  return { domain, samples, storedPattern: domain ? EMAIL_PATTERN_SEED[domain] : undefined, records };
+}
+
+export interface ProspectContactsResult {
+  domain: string | null;
+  /** Detected/seeded email pattern for the domain, if any. */
+  pattern: EmailPattern | null;
+  patternBasis: string;
+  contacts: ProspectContact[];
+}
+
+/** The contact waterfall for a prospect: our records + HubSpot read, deduped. */
+export async function findProspectContacts(input: { company: string; accountSlug?: string }): Promise<ProspectContactsResult> {
+  const ctx = await resolveCompanyEmailContext(input.company, input.accountSlug);
+
+  const hubspot: ProspectContact[] = (await getAccountContacts(input.company)).map((c) => ({
+    name: c.name,
+    title: c.title || undefined,
+    email: c.email || null,
+    confidence: 'known' as const,
+    source: 'hubspot' as const,
+  }));
+
+  const detected = ctx.samples.length ? detectPattern(ctx.samples) : null;
+  const pattern = detected?.pattern ?? ctx.storedPattern ?? null;
+  const patternBasis = detected
+    ? `from ${detected.n} known ${ctx.domain} emails`
+    : ctx.storedPattern
+      ? 'researched pattern'
+      : ctx.domain
+        ? 'pattern unknown — add a known email'
+        : 'no company domain known';
+
+  return {
+    domain: ctx.domain,
+    pattern,
+    patternBasis,
+    contacts: dedupeContacts([...ctx.records, ...hubspot]).slice(0, 12),
+  };
+}
+
+/** Infer the email for a manually-added contact at a prospect company. */
+export async function inferContactEmail(input: {
+  firstName: string;
+  lastName: string;
+  company: string;
+  accountSlug?: string;
+}): Promise<InferredEmail & { domain: string | null }> {
+  const ctx = await resolveCompanyEmailContext(input.company, input.accountSlug);
+  if (!ctx.domain) {
+    return { email: null, confidence: 'none', basis: 'no company domain known', domain: null };
+  }
+  const inferred = inferEmail(input.firstName, input.lastName, ctx.domain, {
+    samples: ctx.samples,
+    storedPattern: ctx.storedPattern,
+  });
+  return { ...inferred, domain: ctx.domain };
 }
