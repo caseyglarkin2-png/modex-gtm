@@ -48,6 +48,11 @@ describe('generateAngle', () => {
     expect(a.toLowerCase()).toContain('yardflow');
   });
 
+  it('never uses an em dash (Casey style preference) in either branch', () => {
+    expect(generateAngle(mkRow({ nearestPrimoDistance: 2.7 }))).not.toContain('—');
+    expect(generateAngle(mkRow({ nearestPrimoDistance: 220, corridor: 'Dallas, TX' }))).not.toContain('—');
+  });
+
   it('names the nearest reference site city/state when it resolves', () => {
     // nearestPrimoName 'US DC NFI - Breinigsville' resolves to Breinigsville, PA
     const a = generateAngle(mkRow({ name: 'Nestle Distribution Center', nearestPrimoDistance: 2.7 }));

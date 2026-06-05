@@ -6,7 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { EmailComposer } from '@/components/email/composer';
-import { generateAngle } from '@/lib/discovery/angle';
+import { facilityNoun, formatMiles } from '@/lib/discovery/angle';
 import type { RankedRow } from '@/lib/discovery/scoring';
 import type { ProspectContact } from '@/lib/discovery/contacts';
 import { findProspectContacts, inferContactEmail, researchProspectContacts, type ProspectContactsResult } from './actions';
@@ -38,19 +38,27 @@ const CONFIDENCE_STYLE: Record<string, { label: string; className: string }> = {
   none: { label: 'no email', className: 'text-neutral-500 border-neutral-500/30' },
 };
 
-/** Build the outreach subject + body from the proximity angle. */
+/**
+ * Recipient-facing outreach subject + body. Distinct from the worklist angle: it
+ * addresses THEIR facility ("your DC in Dallas, TX"), claims only what we deliver
+ * (no "proof" without a picture), and uses no em dashes.
+ */
 function buildOutreach(prospect: RankedRow, firstName?: string): { subject: string; body: string } {
-  const angle = generateAngle(prospect);
   const near = prospect.nearestPrimoDistance <= 50;
+  const noun = facilityNoun(prospect.name);
+  const where = prospect.cityState ? ` in ${prospect.cityState}` : '';
   const subject = near
-    ? `A live YardFlow site ${prospect.nearestPrimoDistance.toFixed(1)} mi from your operation`
-    : `YardFlow — yard network system for your team`;
+    ? `A live YardFlow site ${formatMiles(prospect.nearestPrimoDistance)} mi from your operation`
+    : `YardFlow yard network system for your team`;
+  const opener = near
+    ? `Primo Brands runs YardFlow at a live site just ${formatMiles(prospect.nearestPrimoDistance)} mi from your ${noun}${where}.`
+    : `We run YardFlow's yard network system for shippers and 3PLs across the ${prospect.corridor} corridor.`;
   const body = [
     `Hi ${firstName || 'there'},`,
     '',
-    angle,
+    opener,
     '',
-    `We run YardFlow's yard network system at live sites near you, and I'd love to show you the live yard ops to see if it's worth a look. Open to a quick 15 minutes?`,
+    `We'd love to show you the live yard ops and see if it's worth a look for your team. Open to a quick 15 minutes?`,
     '',
     'Best,',
     'Casey',
