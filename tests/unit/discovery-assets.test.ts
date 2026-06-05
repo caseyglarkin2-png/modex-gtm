@@ -40,4 +40,11 @@ describe('resolveMicrositeSlug', () => {
     // the actual brand still links
     expect(resolveMicrositeSlug('Georgia-Pacific Containerboard Plant', undefined, idx, valid)).toBe('georgia-pacific');
   });
+
+  it('does not match a directional leading word (Southern ≠ Southern Glazer’s)', () => {
+    const idx = buildBrandIndex([{ slug: 'southern-glazers', accountName: "Southern Glazer's Wine & Spirits" }]);
+    const valid = new Set(['southern-glazers']);
+    expect(resolveMicrositeSlug('Second Harvest Foodbank of Southern California', undefined, idx, valid)).toBeNull();
+    expect(resolveMicrositeSlug('Goodwill Southern California Distribution', undefined, idx, valid)).toBeNull();
+  });
 });

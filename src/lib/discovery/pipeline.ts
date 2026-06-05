@@ -58,15 +58,22 @@ async function resolveOwnerNames(
   return map;
 }
 
-/**
- * Returns a map of pipelineKey(accountName) → PipelineState for the requested
- * accounts. Empty when HubSpot is unavailable or no deals match.
- */
-export async function loadPipelineForAccounts(accountNames: string[]): Promise<Map<string, PipelineState>> {
-  const result = new Map<string, PipelineState>();
-  if (!isHubSpotConfigured() || !HUBSPOT_SYNC_ENABLED || accountNames.length === 0) return result;
+export interface PipelineDeal {
+  /** Normalized account-name key for matching. */
+  key: string;
+  /** Original account name from the deal (e.g. "GXO Logistics"). */
+  accountName: string;
+  state: PipelineState;
+}
 
-  const wanted = new Set(accountNames.map(pipelineKey));
+/**
+ * Loads every open "YardFlow - {account}" deal with its pipeline state. Empty
+ * when HubSpot is unavailable. Matching deals → worklist rows happens in
+ * enrich.ts by brand name, so a deal surfaces on any matching site, not just
+ * the fixed known-account set.
+ */
+export async function loadYardflowDeals(): Promise<PipelineDeal[]> {
+  if (!isHubSpotConfigured() || !HUBSPOT_SYNC_ENABLED) return [];
   try {
     const client = getHubSpotClient();
     const search = await withHubSpotRetry(
@@ -86,17 +93,21 @@ export async function loadPipelineForAccounts(accountNames: string[]): Promise<M
     const deals = (search.results ?? []) as DealRecord[];
     const owners = await resolveOwnerNames(client);
     const now = Date.now();
+    const out: PipelineDeal[] = [];
+    const seen = new Set<string>();
 
     for (const d of deals) {
       const props = d.properties ?? {};
-      const key = pipelineKey(accountFromDealName(props.dealname ?? ''));
-      if (!wanted.has(key) || result.has(key)) continue;
+      const accountName = accountFromDealName(props.dealname ?? '');
+      const key = pipelineKey(accountName);
+      if (!key || seen.has(key)) continue;
+      seen.add(key);
       const ownerId = props.hubspot_owner_id ? String(props.hubspot_owner_id) : null;
       const ownerName = ownerId ? owners.get(ownerId) ?? null : null;
-      result.set(key, mapDealToPipelineState(props, ownerName, now));
+      out.push({ key, accountName, state: mapDealToPipelineState(props, ownerName, now) });
     }
+    return out;
   } catch {
-    // graceful degradation — return whatever resolved
+    return [];
   }
-  return result;
 }

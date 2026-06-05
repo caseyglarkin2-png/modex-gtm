@@ -1,37 +1,26 @@
 /**
- * Server-side enrichment that attaches live HubSpot pipeline state to the
- * existing-account rows of the worklist. Isolated from data.ts so the HubSpot
- * dependency stays out of the rest of the data layer. Degrades to a no-op when
- * HubSpot is unavailable.
+ * Server-side enrichment that attaches live HubSpot deal/pipeline state to the
+ * worklist. Matches each row to a "YardFlow - {account}" deal by brand name
+ * (reusing the conservative asset matcher), so an open deal surfaces on any
+ * matching site — not just the fixed known-account set. No-op when HubSpot is
+ * unavailable. Isolated from data.ts so the HubSpot dependency stays contained.
  */
-import { getAccountMicrositeData } from '@/lib/microsites/accounts';
-import { loadPipelineForAccounts, pipelineKey } from './pipeline';
+import { loadYardflowDeals } from './pipeline';
+import { buildBrandIndex, resolveMicrositeSlug } from './assets';
 import type { CuratedRow } from './types';
 
-function slugToAccountName(slug: string): string {
-  return (
-    getAccountMicrositeData(slug)?.accountName ??
-    slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
-  );
-}
-
-/** Attach `pipeline` to existing-account rows; returns the rows unchanged when no deals resolve. */
 export async function enrichRowsWithPipeline(rows: CuratedRow[]): Promise<CuratedRow[]> {
-  const slugName = new Map<string, string>();
-  for (const r of rows) {
-    if (r.isExistingAccount && r.existingAccountSlug && !slugName.has(r.existingAccountSlug)) {
-      slugName.set(r.existingAccountSlug, slugToAccountName(r.existingAccountSlug));
-    }
-  }
-  if (slugName.size === 0) return rows;
+  const deals = await loadYardflowDeals();
+  if (deals.length === 0) return rows;
 
-  const pipeline = await loadPipelineForAccounts([...slugName.values()]);
-  if (pipeline.size === 0) return rows;
+  const stateByKey = new Map(deals.map((d) => [d.key, d.state]));
+  // The deal "key" doubles as a pseudo-slug; brand index maps row name → key.
+  const index = buildBrandIndex(deals.map((d) => ({ slug: d.key, accountName: d.accountName })));
+  const valid = new Set(deals.map((d) => d.key));
 
   return rows.map((r) => {
-    if (!r.isExistingAccount || !r.existingAccountSlug) return r;
-    const name = slugName.get(r.existingAccountSlug);
-    const state = name ? pipeline.get(pipelineKey(name)) : undefined;
+    const key = resolveMicrositeSlug(r.name, undefined, index, valid);
+    const state = key ? stateByKey.get(key) : undefined;
     return state ? { ...r, pipeline: state } : r;
   });
 }

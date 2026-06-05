@@ -22,9 +22,11 @@ const COMMON_WORDS = new Set([
   'warehouse', 'international', 'holdings', 'brands', 'north', 'america',
 ]);
 
-// US states / DC — common in facility names, never a brand on their own
-// (e.g. "Cold Storage, Georgia" must not match Georgia-Pacific).
-const US_STATES = new Set([
+// Places / directionals / generic geo words — common in facility names, never a
+// brand on their own (e.g. "Cold Storage, Georgia" ≠ Georgia-Pacific;
+// "Foodbank of Southern California" ≠ Southern Glazer's).
+const PLACE_WORDS = new Set([
+  // states
   'alabama', 'alaska', 'arizona', 'arkansas', 'california', 'colorado', 'connecticut',
   'delaware', 'florida', 'georgia', 'hawaii', 'idaho', 'illinois', 'indiana', 'iowa',
   'kansas', 'kentucky', 'louisiana', 'maine', 'maryland', 'massachusetts', 'michigan',
@@ -32,11 +34,15 @@ const US_STATES = new Set([
   'jersey', 'mexico', 'york', 'carolina', 'dakota', 'ohio', 'oklahoma', 'oregon',
   'pennsylvania', 'rhode', 'tennessee', 'texas', 'utah', 'vermont', 'virginia',
   'washington', 'wisconsin', 'wyoming', 'boston', 'dallas', 'houston',
+  // directionals / generic geo
+  'southern', 'northern', 'eastern', 'western', 'central', 'south', 'north', 'east',
+  'west', 'greater', 'metro', 'valley', 'coastal', 'atlantic', 'pacific', 'mountain',
+  'midwest', 'americas', 'tristate', 'regional', 'county', 'state',
 ]);
 
-/** A single-token key is only safe if it is distinctive: ≥5 chars and not a place. */
+/** A single-token key is only safe if it is distinctive: ≥5 chars and not a place/direction. */
 function isSafeSingleToken(token: string): boolean {
-  return token.length >= 5 && !US_STATES.has(token);
+  return token.length >= 5 && !PLACE_WORDS.has(token);
 }
 
 /** Lowercase, de-accent, strip punctuation, collapse whitespace. */
