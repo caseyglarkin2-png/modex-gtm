@@ -121,6 +121,24 @@ export async function listQueue(): Promise<DraftQueueItem[]> {
   });
 }
 
+/**
+ * Owner-scoped count of ACTIONABLE Outbox items (draft / approved / failed).
+ * Admins count across all owners; reps are scoped to their own. Powers an
+ * accurate Outbox tab badge (the list view caps at 200 and includes sent rows).
+ */
+export async function countActionableQueue(): Promise<number> {
+  const session = (await auth()) as SessionLike;
+  const email = session?.user?.email ?? undefined;
+  const role = session?.user?.role;
+  if (!email && role !== 'admin') return 0;
+  return prisma.draftQueueItem.count({
+    where: {
+      ...(role === 'admin' ? {} : { owner: email }),
+      status: { in: [STATUS.draft, STATUS.approved, STATUS.failed] },
+    },
+  });
+}
+
 /** Owner-scoped edit. Only allowed while the item is draft/approved. */
 export async function updateDraft(
   id: number,
