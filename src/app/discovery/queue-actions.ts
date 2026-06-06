@@ -11,7 +11,21 @@ import { sendQueueItem } from '@/lib/queue/send';
 import { prodSendDeps } from '@/lib/queue/send-deps';
 import { onSendOutcome } from '@/lib/queue/sequence-runtime';
 import { staggerTimes, clampToWindow, selectDue, DEFAULT_WINDOW } from '@/lib/queue/schedule';
+import { assignVariants } from '@/lib/queue/variant';
 import { QueueAddSchema, type QueueAddInput } from '@/lib/validations';
+
+/** Optional A/B experiment attached to an approveBatch call. */
+interface ApproveExperiment {
+  name: string;
+  variants: Array<{
+    variantKey: string;
+    subject?: string;
+    opening?: string;
+    cta?: string;
+    split: number;
+    isControl?: boolean;
+  }>;
+}
 
 /** Minimal session shape we read off `auth()` (it has a `role` we attach). */
 type SessionLike = { user?: { email?: string | null; role?: string } } | null;
@@ -159,16 +173,72 @@ export async function sendNow(id: number) {
  */
 export async function approveBatch(
   ids: number[],
-  opts?: { scheduledFor?: Date; staggerMinutes?: number },
+  opts?: { scheduledFor?: Date; staggerMinutes?: number; experiment?: ApproveExperiment },
 ): Promise<{ ok: true; approved: number } | { ok: false; reason: string }> {
   const session = (await auth()) as SessionLike;
+  const email = session?.user?.email ?? undefined;
+  const role = session?.user?.role;
+
+  // Optional A/B experiment: create the experiment, then deterministically
+  // assign one variant per recipient so each item can be stamped below. Mirrors
+  // the Experiment + ExperimentVariant creation in send-bulk-async/route.ts.
+  let experimentId: string | null = null;
+  // Map<itemId, variant_key> for the per-id stamp below.
+  const variantByItem = new Map<number, string | null>();
+  if (opts?.experiment) {
+    const { name, variants } = opts.experiment;
+    const exp = await prisma.experiment.create({
+      data: {
+        name,
+        primary_metric: 'reply',
+        split: Object.fromEntries(
+          variants.map((v) => [v.variantKey, v.split]),
+        ) as Prisma.InputJsonValue,
+        status: 'active',
+        variants: {
+          create: variants.map((v) => ({
+            variant_key: v.variantKey,
+            // ExperimentVariant.subject is a required column; an omitted subject
+            // means "use the base draft subject" — stored as '' and treated as
+            // no-override by applyVariant at send.
+            subject: v.subject ?? '',
+            opening: v.opening ?? null,
+            cta: v.cta ?? null,
+            split_percent: v.split,
+            is_control: v.isControl ?? false,
+          })),
+        },
+      },
+      select: { id: true },
+    });
+    experimentId = exp.id;
+
+    const rows = await prisma.draftQueueItem.findMany({
+      where: { id: { in: ids }, ...(role !== 'admin' ? { owner: email } : {}) },
+      select: { id: true, to_email: true },
+    });
+    const assignment = assignVariants(
+      rows.map((r) => r.to_email),
+      variants.map((v) => ({ variantKey: v.variantKey, split: v.split })),
+      experimentId,
+    );
+    for (const r of rows) {
+      variantByItem.set(r.id, assignment.get(r.to_email.toLowerCase()) ?? null);
+    }
+  }
+
+  /** Experiment stamp for a given item id (empty when no experiment). */
+  const expData = (id: number): Record<string, unknown> =>
+    experimentId
+      ? { experiment_id: experimentId, variant_key: variantByItem.get(id) ?? null }
+      : {};
 
   if (!opts?.scheduledFor) {
     let total = 0;
     for (const id of ids) {
       const r = await prisma.draftQueueItem.updateMany({
         where: ownerWhere(id, session, [STATUS.draft, STATUS.approved]),
-        data: { status: STATUS.approved, approved_at: new Date() },
+        data: { status: STATUS.approved, approved_at: new Date(), ...expData(id) },
       });
       total += r.count;
     }
@@ -188,6 +258,7 @@ export async function approveBatch(
         approved_at: new Date(),
         scheduled_for: times[i],
         batch_id,
+        ...expData(ids[i]),
       },
     });
     total += r.count;

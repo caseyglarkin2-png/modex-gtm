@@ -17,6 +17,7 @@ const mockedPrisma = {
     deleteMany: vi.fn(),
   },
   sequence: { findUnique: vi.fn(), create: vi.fn(), findMany: vi.fn() },
+  experiment: { create: vi.fn() },
 };
 
 vi.mock('@/lib/prisma', () => ({ prisma: mockedPrisma }));
@@ -165,6 +166,85 @@ describe('approveBatch', () => {
     // owner-scoped, status approved
     expect(calls[0][0].where.owner).toBe('rep@freightroll.com');
     expect(calls[0][0].data.status).toBe('approved');
+  });
+
+  it('with experiment: creates the experiment and stamps experiment_id + assigned variant_key on each item', async () => {
+    mockedPrisma.experiment.create.mockResolvedValue({ id: 'exp_1' });
+    mockedPrisma.draftQueueItem.findMany.mockResolvedValue([
+      { id: 10, to_email: 'a@example.com' },
+      { id: 20, to_email: 'b@example.com' },
+    ]);
+    mockedPrisma.draftQueueItem.updateMany.mockResolvedValue({ count: 1 });
+
+    const variants = [
+      { variantKey: 'A', subject: 'Subj A', split: 50, isControl: true },
+      { variantKey: 'B', subject: 'Subj B', split: 50 },
+    ];
+    const res = await approveBatch([10, 20], { experiment: { name: 'Q3 subject test', variants } });
+
+    expect(res).toEqual({ ok: true, approved: 2 });
+
+    // experiment created with the variants mirrored from send-bulk-async
+    expect(mockedPrisma.experiment.create).toHaveBeenCalledTimes(1);
+    const createArg = mockedPrisma.experiment.create.mock.calls[0][0];
+    expect(createArg.data.name).toBe('Q3 subject test');
+    expect(createArg.data.status).toBe('active');
+    expect(createArg.data.primary_metric).toBe('reply');
+    expect(createArg.data.split).toEqual({ A: 50, B: 50 });
+    const createdVariants = createArg.data.variants.create;
+    expect(createdVariants).toHaveLength(2);
+    expect(createdVariants[0]).toMatchObject({
+      variant_key: 'A',
+      subject: 'Subj A',
+      split_percent: 50,
+      is_control: true,
+    });
+    expect(createdVariants[1]).toMatchObject({
+      variant_key: 'B',
+      subject: 'Subj B',
+      split_percent: 50,
+      is_control: false,
+    });
+
+    // each item's update data carries experiment_id + a variant_key from the assignment
+    const calls = mockedPrisma.draftQueueItem.updateMany.mock.calls;
+    expect(calls).toHaveLength(2);
+    for (const c of calls) {
+      expect(c[0].data.experiment_id).toBe('exp_1');
+      expect(['A', 'B']).toContain(c[0].data.variant_key);
+      expect(c[0].data.status).toBe('approved');
+    }
+    // owner-scoped load for assignment
+    const findManyArg = mockedPrisma.draftQueueItem.findMany.mock.calls[0][0];
+    expect(findManyArg.where.id).toEqual({ in: [10, 20] });
+    expect(findManyArg.where.owner).toBe('rep@freightroll.com');
+  });
+
+  it('with experiment AND scheduledFor: keeps stagger/batch while stamping experiment fields', async () => {
+    mockedPrisma.experiment.create.mockResolvedValue({ id: 'exp_2' });
+    mockedPrisma.draftQueueItem.findMany.mockResolvedValue([
+      { id: 1, to_email: 'a@example.com' },
+      { id: 2, to_email: 'b@example.com' },
+    ]);
+    mockedPrisma.draftQueueItem.updateMany.mockResolvedValue({ count: 1 });
+
+    const scheduledFor = new Date('2026-06-04T14:00:00.000Z');
+    const res = await approveBatch([1, 2], {
+      scheduledFor,
+      staggerMinutes: 2,
+      experiment: { name: 'sched exp', variants: [{ variantKey: 'A', split: 100 }] },
+    });
+
+    expect(res).toEqual({ ok: true, approved: 2 });
+    const calls = mockedPrisma.draftQueueItem.updateMany.mock.calls;
+    // batch + stagger preserved
+    const batchIds = calls.map((c) => c[0].data.batch_id);
+    expect(new Set(batchIds).size).toBe(1);
+    expect(batchIds[0]).toBeTruthy();
+    expect((calls[0][0].data.scheduled_for as Date).getTime()).toBe(scheduledFor.getTime());
+    // experiment fields present
+    expect(calls[0][0].data.experiment_id).toBe('exp_2');
+    expect(calls[0][0].data.variant_key).toBe('A');
   });
 });
 

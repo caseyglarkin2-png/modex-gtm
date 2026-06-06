@@ -9,20 +9,40 @@ import type { SendDeps } from './send';
 import { RateLimitedError } from './errors';
 import { replyPauseDecision } from './sequence';
 import { newestInboundFrom } from '@/lib/email/gmail-inbox';
+import { applyVariant } from './variant';
 
-/** Map a DraftQueueItem row to the shared PerformSendInput. */
-function toInput(item: Record<string, unknown>): PerformSendInput {
+/**
+ * Map a DraftQueueItem row to the shared PerformSendInput.
+ *
+ * `toInput` is sync, so it can't load the experiment variant — that LOAD +
+ * apply happens in the async `send` closure. Here we only attach the variant's
+ * workflowMetadata so the variant is recorded in EmailLog.metadata via the
+ * existing performSend side-effects path. Optionally override subject/body with
+ * an already-applied variant (computed in `send`).
+ */
+function toInput(
+  item: Record<string, unknown>,
+  applied?: { subject: string; body: string },
+): PerformSendInput {
+  const variantKey = (item.variant_key as string | null) ?? null;
   return {
     to: item.to_email as string,
     cc: [],
-    subject: item.subject as string,
-    bodyHtml: item.body as string,
+    subject: applied ? applied.subject : (item.subject as string),
+    bodyHtml: applied ? applied.body : (item.body as string),
     imageUrl: (item.image_url as string | null) ?? undefined,
     accountName: (item.account_name as string | null) ?? null,
     invariantAccountName: (item.account_name as string | null) ?? null,
     personaName: (item.persona_name as string | null) ?? null,
     personaId: (item.persona_id as number | null) ?? undefined,
     headers: { 'X-Queue-Idempotency': item.idempotency_key as string },
+    ...(variantKey
+      ? {
+          workflowMetadata: {
+            queue: { variantKey, experimentId: (item.experiment_id as string | null) ?? null },
+          },
+        }
+      : {}),
   };
 }
 
@@ -62,9 +82,33 @@ export function prodSendDeps(prisma: any): SendDeps {
       return { ok: true };
     },
     send: async (item) => {
+      // A/B: if this item belongs to an experiment, load its assigned variant
+      // and apply subject/opening/cta to the base draft before wrapAndSend.
+      let applied: { subject: string; body: string } | undefined;
+      if (item.experiment_id && item.variant_key) {
+        const v = await prisma.experimentVariant.findFirst({
+          where: { experiment_id: item.experiment_id, variant_key: item.variant_key },
+        });
+        applied = applyVariant(
+          {
+            subject: item.subject as string,
+            body: item.body as string,
+            accountName: (item.account_name as string | null) ?? null,
+          },
+          v
+            ? {
+                variantKey: v.variant_key,
+                subject: v.subject ?? undefined,
+                opening: v.opening ?? undefined,
+                cta: v.cta ?? undefined,
+                isControl: v.is_control,
+              }
+            : null,
+        );
+      }
       let r: Awaited<ReturnType<typeof wrapAndSend>>;
       try {
-        r = await wrapAndSend(toInput(item), ctx?.sanitizedCc ?? []);
+        r = await wrapAndSend(toInput(item, applied), ctx?.sanitizedCc ?? []);
       } catch (err) {
         const msg = err instanceof Error ? err.message : String(err);
         if (/\b429\b|rate.?limit|userRateLimitExceeded|quotaExceeded/i.test(msg)) {
