@@ -76,6 +76,30 @@ Outbox."). `batchId` is optional, for your own tracing.
    Dedup (unsubscribe / already-emailed / already-queued / open Gmail thread) runs app-side on
    intake, so you can post optimistically; skips come back in the response `skipped[]`.
 
+   Full intake contract (response shape, the `due`/`send` polling loop, at-least-once
+   safety): `docs/integrations/clawd-queue-cron.md`. The rules below are the subset a
+   draft-batch implementer must not miss.
+
+## Staging rules (intake constraints)
+
+These live in the intake contract but a draft-batch implementer reading only this doc would
+miss them, so they are restated here:
+
+- **One item per persona.** Step 2 produces per-persona copy, so post one `items[]` entry per
+  contact, each with its own `toEmail` + `personaName` + `subject` + `body`. Dedup is keyed on
+  `toEmail`, so two personas that share one inbox collapse to a single draft — split only when
+  the addresses differ.
+- **Forward `owner`.** Copy the batch-level `owner` from the draft-batch request onto every
+  staged item. It is optional on intake (defaults to `casey@freightroll.com`), but pass it
+  through so multi-user attribution stays correct.
+- **`imageUrl` is the proof frame.** Set it to the public artifact
+  `https://modex-gtm.vercel.app/artifacts/allentown-yard-proof.jpg` to embed the yard-proof
+  image inline. Omit it only if you intend Casey to add the frame by hand in the Outbox.
+- **Caps.** Max **200 items per `/api/cron/queue` POST**; **`subject` may not contain newlines**
+  (single line only). A draft-batch can carry more than 200 targets, and each target can yield
+  multiple personas, so **chunk your stage-back posts into batches of ≤200** rather than the
+  caller's slice size.
+
 ## Failure handling (caller side, already built)
 
 | Clawd response | modex-gtm behavior |
