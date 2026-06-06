@@ -15,6 +15,10 @@ export interface EmailPayload {
   threadId?: string;
   /** Optional inline (cid:) image, forwarded to the Gmail sender. */
   inlineImage?: InlineImage;
+  /** Optional per-identity sender, forwarded to the Gmail sender. When set the
+   *  message sends as this user (their refresh token + From). When absent,
+   *  behavior is exactly as today (env/Casey). */
+  sender?: { refreshToken: string; userEmail: string };
 }
 
 export interface EmailSendResult {

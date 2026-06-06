@@ -47,6 +47,12 @@ export interface PerformSendInput {
    * Queue's idempotency header). The route passes none.
    */
   headers?: Record<string, string>;
+  /**
+   * Optional per-identity sender, forwarded to `sendEmail`. When set the
+   * message sends as this user (their Gmail refresh token + From). The route
+   * passes none → unchanged env/Casey behavior.
+   */
+  sender?: { refreshToken: string; userEmail: string };
 }
 
 export type PerformSendResult =
@@ -229,6 +235,7 @@ export async function wrapAndSend(
     subject,
     html,
     headers: input.headers,
+    ...(input.sender ? { sender: input.sender } : {}),
     ...(inline ? { inlineImage: inline } : {}),
   });
 

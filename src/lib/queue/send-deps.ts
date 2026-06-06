@@ -10,6 +10,7 @@ import { RateLimitedError } from './errors';
 import { replyPauseDecision } from './sequence';
 import { newestInboundFrom } from '@/lib/email/gmail-inbox';
 import { applyVariant } from './variant';
+import { getRefreshTokenFor } from '@/lib/email/gmail-token-store';
 
 /**
  * Map a DraftQueueItem row to the shared PerformSendInput.
@@ -23,9 +24,11 @@ import { applyVariant } from './variant';
 function toInput(
   item: Record<string, unknown>,
   applied?: { subject: string; body: string },
+  sender?: { refreshToken: string; userEmail: string },
 ): PerformSendInput {
   const variantKey = (item.variant_key as string | null) ?? null;
   return {
+    ...(sender ? { sender } : {}),
     to: item.to_email as string,
     cc: [],
     subject: applied ? applied.subject : (item.subject as string),
@@ -106,9 +109,16 @@ export function prodSendDeps(prisma: any): SendDeps {
             : null,
         );
       }
+      // Per-identity send: resolve the owner's stored Gmail refresh token. When
+      // present, the message sends AS the owner (e.g. jake@freightroll.com).
+      // When null (no per-user token / store not configured), `sender` is
+      // undefined → falls back to the Casey env token, exactly as today.
+      const rt = await getRefreshTokenFor(prisma, item.owner as string);
+      const sender = rt ? { refreshToken: rt, userEmail: item.owner as string } : undefined;
+
       let r: Awaited<ReturnType<typeof wrapAndSend>>;
       try {
-        r = await wrapAndSend(toInput(item, applied), ctx?.sanitizedCc ?? []);
+        r = await wrapAndSend(toInput(item, applied, sender), ctx?.sanitizedCc ?? []);
       } catch (err) {
         const msg = err instanceof Error ? err.message : String(err);
         if (/\b429\b|rate.?limit|userRateLimitExceeded|quotaExceeded/i.test(msg)) {

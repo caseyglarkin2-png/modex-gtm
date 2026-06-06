@@ -32,6 +32,10 @@ interface GmailSendPayload {
   /** Optional inline (cid:) image. When present the message becomes
    *  multipart/related wrapping the multipart/alternative block. */
   inlineImage?: InlineImage;
+  /** Per-identity sender. When set, the message is sent using this user's
+   *  refresh token and From/{userEmail}/messages URL instead of the Casey env
+   *  token. When absent, behavior is exactly as before (env/Casey). */
+  sender?: { refreshToken: string; userEmail: string };
 }
 
 interface OAuthTokenResponse {
@@ -89,9 +93,15 @@ export function buildMimeMessage(payload: GmailSendPayload): string {
     ? payload.cc.map((entry) => sanitizeHeader(entry)).join(', ')
     : null;
 
+  // From-line: when a per-identity sender is set, send as that user (bare
+  // address, no display name); otherwise keep the env/Casey From exactly.
+  const fromHeader = payload.sender
+    ? `From: ${sanitizeHeader(payload.sender.userEmail)}`
+    : `From: ${sanitizeHeader(FROM_NAME)} <${sanitizeHeader(FROM_EMAIL)}>`;
+
   // Per-message envelope headers (From/To/Subject/…), shared by both layouts.
   const envelopeHeaders = [
-    `From: ${sanitizeHeader(FROM_NAME)} <${sanitizeHeader(FROM_EMAIL)}>`,
+    fromHeader,
     `To: ${sanitizeHeader(payload.to)}`,
     ccHeader ? `Cc: ${ccHeader}` : null,
     payload.bcc ? `Bcc: ${sanitizeHeader(payload.bcc)}` : null,
@@ -165,8 +175,13 @@ export function buildMimeMessage(payload: GmailSendPayload): string {
   return `${headers.join('\r\n')}\r\n\r\n${parts.join('\r\n')}`;
 }
 
-async function getAccessToken(): Promise<string> {
-  const { clientId, clientSecret, refreshToken } = getGmailConfig();
+async function getAccessToken(overrideRefreshToken?: string): Promise<string> {
+  const cfg = getGmailConfig();
+  const clientId = cfg.clientId;
+  const clientSecret = cfg.clientSecret;
+  // When a per-user refresh token is supplied, mint the access token from it
+  // (send as that identity); otherwise use the env/Casey refresh token.
+  const refreshToken = overrideRefreshToken ?? cfg.refreshToken;
   if (!clientId || !clientSecret || !refreshToken) {
     throw new Error('Gmail sender not configured: missing GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, or GOOGLE_REFRESH_TOKEN');
   }
@@ -193,8 +208,11 @@ async function getAccessToken(): Promise<string> {
 export async function sendViaGmail(
   payload: GmailSendPayload,
 ): Promise<{ provider: 'gmail'; id: string | null; threadId: string | null }> {
-  const { userEmail } = getGmailConfig();
-  const accessToken = await getAccessToken();
+  // Per-identity send: when payload.sender is set, mint the access token from
+  // the sender's refresh token and address the mailbox URL to the sender.
+  // Otherwise send via the env/Casey identity exactly as before.
+  const userEmail = payload.sender?.userEmail ?? getGmailConfig().userEmail;
+  const accessToken = await getAccessToken(payload.sender?.refreshToken);
   const raw = base64Url(buildMimeMessage(payload));
 
   const res = await fetch(
