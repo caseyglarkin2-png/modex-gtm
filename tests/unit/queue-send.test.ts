@@ -1,5 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { sendQueueItem, type SendDeps } from '@/lib/queue/send';
+import { RateLimitedError } from '@/lib/queue/errors';
 
 function baseDeps(over: Partial<SendDeps> = {}): SendDeps {
   return {
@@ -10,6 +11,7 @@ function baseDeps(over: Partial<SendDeps> = {}): SendDeps {
     persistProviderIds: vi.fn().mockResolvedValue(undefined),
     runSideEffects: vi.fn().mockResolvedValue({ emailLogId: 99 }),
     finalize: vi.fn().mockResolvedValue(undefined),
+    reschedule: vi.fn().mockResolvedValue(undefined),
     ...over,
   };
 }
@@ -52,6 +54,28 @@ describe('sendQueueItem', () => {
     if (res.status === 'failed') expect(res.errorMessage).toContain('Gmail 500');
     expect(deps.persistProviderIds).not.toHaveBeenCalled();
     expect(deps.finalize).toHaveBeenCalledWith(1, expect.objectContaining({ status: 'failed' }));
+  });
+
+  it('send throws RateLimitedError (429) -> reschedules to approved, skipped/rate_limited, NOT failed', async () => {
+    const deps = baseDeps({
+      send: vi.fn().mockRejectedValue(new RateLimitedError('Gmail send failed (429): rateLimitExceeded')),
+    });
+    const before = Date.now();
+    const res = await sendQueueItem(1, { deps });
+    expect(res).toEqual({ status: 'skipped', skippedReason: 'rate_limited' });
+
+    expect(deps.reschedule).toHaveBeenCalledTimes(1);
+    const [rescheduledId, retryAt] = (deps.reschedule as ReturnType<typeof vi.fn>).mock.calls[0];
+    expect(rescheduledId).toBe(1);
+    expect(retryAt).toBeInstanceOf(Date);
+    const delta = (retryAt as Date).getTime() - before;
+    // ~15 min in the future (allow a generous window for execution time)
+    expect(delta).toBeGreaterThanOrEqual(14 * 60 * 1000);
+    expect(delta).toBeLessThanOrEqual(16 * 60 * 1000);
+
+    // never terminally failed
+    expect(deps.finalize).not.toHaveBeenCalledWith(1, expect.objectContaining({ status: 'failed' }));
+    expect(deps.persistProviderIds).not.toHaveBeenCalled();
   });
 
   it('TRAP STATE: send succeeds then side-effects throw -> failed, alreadySent:true, provider id persisted, sideeffects_done:false', async () => {
