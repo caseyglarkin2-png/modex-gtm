@@ -23,7 +23,7 @@ vi.mock('@/lib/email/gmail-inbox', () => ({ threadExistsWith: mockedThreadExists
 vi.mock('@/lib/queue/send', () => ({ sendQueueItem: mockedSendQueueItem }));
 vi.mock('@/lib/queue/send-deps', () => ({ prodSendDeps: vi.fn(() => ({})) }));
 
-const { addOne, sendNow } = await import('@/app/discovery/queue-actions');
+const { addOne, sendNow, approveBatch, runDueNow } = await import('@/app/discovery/queue-actions');
 
 const baseInput: QueueAddInput = {
   toEmail: 'Person@Example.com',
@@ -107,5 +107,93 @@ describe('sendNow ownership', () => {
     const whereArg = mockedPrisma.draftQueueItem.updateMany.mock.calls[0][0].where;
     expect(whereArg.owner).toBe('rep@freightroll.com');
     expect(whereArg.id).toBe(123);
+  });
+});
+
+describe('approveBatch', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    mockedAuth.mockResolvedValue({ user: { email: 'rep@freightroll.com', role: 'rep' } });
+  });
+
+  it('without scheduledFor: owner-scoped bulk approve, sums counts, no scheduled_for', async () => {
+    mockedPrisma.draftQueueItem.updateMany
+      .mockResolvedValueOnce({ count: 1 })
+      .mockResolvedValueOnce({ count: 1 });
+
+    const res = await approveBatch([10, 20]);
+
+    expect(res).toEqual({ ok: true, approved: 2 });
+    expect(mockedPrisma.draftQueueItem.updateMany).toHaveBeenCalledTimes(2);
+
+    const call0 = mockedPrisma.draftQueueItem.updateMany.mock.calls[0][0];
+    expect(call0.data.status).toBe('approved');
+    expect(call0.data.approved_at).toBeInstanceOf(Date);
+    // owner predicate present (rep, non-admin)
+    expect(call0.where.owner).toBe('rep@freightroll.com');
+    expect(call0.where.id).toBe(10);
+    // no scheduling fields when scheduledFor is absent
+    expect('scheduled_for' in call0.data).toBe(false);
+    expect('batch_id' in call0.data).toBe(false);
+  });
+
+  it('with scheduledFor + staggerMinutes 2 over 3 ids: shared batch_id, 2-min-apart times', async () => {
+    mockedPrisma.draftQueueItem.updateMany.mockResolvedValue({ count: 1 });
+
+    // Weekday 14:00 UTC = 10:00 ET, inside the window so clampToWindow is a no-op.
+    const scheduledFor = new Date('2026-06-04T14:00:00.000Z'); // Thursday
+
+    const res = await approveBatch([1, 2, 3], { scheduledFor, staggerMinutes: 2 });
+
+    expect(res).toEqual({ ok: true, approved: 3 });
+    expect(mockedPrisma.draftQueueItem.updateMany).toHaveBeenCalledTimes(3);
+
+    const calls = mockedPrisma.draftQueueItem.updateMany.mock.calls;
+    const batchIds = calls.map((c) => c[0].data.batch_id);
+    // shared batch_id across all 3
+    expect(batchIds[0]).toBeTruthy();
+    expect(new Set(batchIds).size).toBe(1);
+
+    const times = calls.map((c) => (c[0].data.scheduled_for as Date).getTime());
+    expect(times[0]).toBe(scheduledFor.getTime());
+    expect(times[1] - times[0]).toBe(2 * 60 * 1000);
+    expect(times[2] - times[1]).toBe(2 * 60 * 1000);
+
+    // owner-scoped, status approved
+    expect(calls[0][0].where.owner).toBe('rep@freightroll.com');
+    expect(calls[0][0].data.status).toBe('approved');
+  });
+});
+
+describe('runDueNow', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+  });
+
+  it('denies a rep and never sends', async () => {
+    mockedAuth.mockResolvedValue({ user: { email: 'rep@freightroll.com', role: 'rep' } });
+
+    const res = await runDueNow();
+
+    expect(res).toEqual({ ok: false, reason: 'forbidden' });
+    expect(mockedPrisma.draftQueueItem.findMany).not.toHaveBeenCalled();
+    expect(mockedSendQueueItem).not.toHaveBeenCalled();
+  });
+
+  it('admin: tallies sent/failed/skipped over due items', async () => {
+    mockedAuth.mockResolvedValue({ user: { email: 'admin@freightroll.com', role: 'admin' } });
+    const now = new Date();
+    mockedPrisma.draftQueueItem.findMany.mockResolvedValue([
+      { id: 1, status: 'approved', scheduled_for: new Date(now.getTime() - 60_000) },
+      { id: 2, status: 'approved', scheduled_for: new Date(now.getTime() - 60_000) },
+    ]);
+    mockedSendQueueItem
+      .mockResolvedValueOnce({ status: 'sent' })
+      .mockResolvedValueOnce({ status: 'failed' });
+
+    const res = await runDueNow();
+
+    expect(res).toEqual({ ok: true, sent: 1, failed: 1, skipped: 0 });
+    expect(mockedSendQueueItem).toHaveBeenCalledTimes(2);
   });
 });

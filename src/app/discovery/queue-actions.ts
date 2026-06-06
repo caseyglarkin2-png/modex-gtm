@@ -9,6 +9,7 @@ import { dedupDecision } from '@/lib/queue/dedup';
 import { STATUS } from '@/lib/queue/types';
 import { sendQueueItem } from '@/lib/queue/send';
 import { prodSendDeps } from '@/lib/queue/send-deps';
+import { staggerTimes, clampToWindow, selectDue, DEFAULT_WINDOW } from '@/lib/queue/schedule';
 import { QueueAddSchema, type QueueAddInput } from '@/lib/validations';
 
 /** Minimal session shape we read off `auth()` (it has a `role` we attach). */
@@ -143,4 +144,79 @@ export async function sendNow(id: number) {
   });
   if (r.count === 0) return { ok: false as const, reason: 'not_found_or_forbidden' };
   return sendQueueItem(id, { deps: prodSendDeps(prisma) });
+}
+
+/**
+ * Owner-scoped bulk approve. Without `scheduledFor` it just flips draft/approved
+ * rows to approved (still requiring an explicit later send). With `scheduledFor`
+ * it staggers the rows across a shared batch, clamped into business hours, so a
+ * later send-due pass dispatches them.
+ */
+export async function approveBatch(
+  ids: number[],
+  opts?: { scheduledFor?: Date; staggerMinutes?: number },
+): Promise<{ ok: true; approved: number } | { ok: false; reason: string }> {
+  const session = (await auth()) as SessionLike;
+
+  if (!opts?.scheduledFor) {
+    let total = 0;
+    for (const id of ids) {
+      const r = await prisma.draftQueueItem.updateMany({
+        where: ownerWhere(id, session, [STATUS.draft, STATUS.approved]),
+        data: { status: STATUS.approved, approved_at: new Date() },
+      });
+      total += r.count;
+    }
+    return { ok: true, approved: total };
+  }
+
+  const times = staggerTimes(opts.scheduledFor, ids.length, opts.staggerMinutes ?? 0).map((t) =>
+    clampToWindow(t, DEFAULT_WINDOW),
+  );
+  const batch_id = randomUUID();
+  let total = 0;
+  for (let i = 0; i < ids.length; i++) {
+    const r = await prisma.draftQueueItem.updateMany({
+      where: ownerWhere(ids[i], session, [STATUS.draft, STATUS.approved]),
+      data: {
+        status: STATUS.approved,
+        approved_at: new Date(),
+        scheduled_for: times[i],
+        batch_id,
+      },
+    });
+    total += r.count;
+  }
+  return { ok: true, approved: total };
+}
+
+/**
+ * Admin-only, operator-triggered send of the currently-due approved items.
+ * (A manual admin trigger, not an autonomous cron.)
+ */
+export async function runDueNow(): Promise<
+  { ok: false; reason: string } | { ok: true; sent: number; failed: number; skipped: number }
+> {
+  const session = (await auth()) as SessionLike;
+  if (session?.user?.role !== 'admin') return { ok: false, reason: 'forbidden' };
+
+  const items = selectDue(
+    await prisma.draftQueueItem.findMany({
+      where: { status: STATUS.approved, scheduled_for: { lte: new Date() } },
+      take: 25,
+      orderBy: { scheduled_for: 'asc' },
+    }),
+    new Date(),
+  );
+
+  let sent = 0;
+  let failed = 0;
+  let skipped = 0;
+  for (const item of items) {
+    const r = await sendQueueItem(item.id, { deps: prodSendDeps(prisma) });
+    if (r.status === 'sent') sent++;
+    else if (r.status === 'failed') failed++;
+    else skipped++;
+  }
+  return { ok: true, sent, failed, skipped };
 }
