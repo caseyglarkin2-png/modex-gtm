@@ -1,7 +1,8 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import { Loader2, Mail, Plus, Linkedin, Sparkles } from 'lucide-react';
+import { ListPlus, Loader2, Mail, Plus, Linkedin, Sparkles } from 'lucide-react';
+import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
@@ -10,6 +11,15 @@ import { buildOutreach } from '@/lib/discovery/outreach';
 import type { RankedRow } from '@/lib/discovery/scoring';
 import type { ProspectContact } from '@/lib/discovery/contacts';
 import { findProspectContacts, inferContactEmail, researchProspectContacts, type ProspectContactsResult } from './actions';
+import { addToQueue } from './queue-actions';
+
+/** Maps dedup reason codes from addToQueue to rep-friendly text. */
+const QUEUE_REASON_LABEL: Record<string, string> = {
+  unsubscribed: 'Unsubscribed',
+  already_emailed: 'Already emailed',
+  already_queued: 'Already queued',
+  unauthenticated: 'Sign in to queue',
+};
 
 const SOURCE_LABEL: Record<ProspectContact['source'], string> = {
   records: 'Our records',
@@ -49,6 +59,8 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
   const [adding, setAdding] = useState(false);
   const [composeFor, setComposeFor] = useState<ProspectContact | null>(null);
   const [composerOpen, setComposerOpen] = useState(false);
+  const [queuingKey, setQueuingKey] = useState<string | null>(null);
+  const [queuedKeys, setQueuedKeys] = useState<Set<string>>(new Set());
 
   useEffect(() => {
     let cancelled = false;
@@ -130,6 +142,31 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
     setComposerOpen(true);
   }
 
+  async function handleQueue(contact: ProspectContact, key: string) {
+    if (!contact.email) return;
+    setQueuingKey(key);
+    try {
+      const o = buildOutreach(prospect, contact.firstName);
+      const res = await addToQueue({
+        toEmail: contact.email,
+        accountName: prospect.name,
+        personaName: contact.name,
+        subject: o.subject,
+        body: o.body,
+        imageUrl: o.imageUrl,
+        source: 'casey',
+      });
+      if (res.ok) {
+        setQueuedKeys((prev) => new Set(prev).add(key));
+        toast.success('Queued');
+      } else {
+        toast.error(QUEUE_REASON_LABEL[res.reason] ?? res.reason);
+      }
+    } finally {
+      setQueuingKey(null);
+    }
+  }
+
   const outreach = composeFor ? buildOutreach(prospect, composeFor.firstName) : null;
 
   return (
@@ -194,9 +231,21 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
                   )}
                 </div>
                 {c.email && (
-                  <Button size="sm" variant="outline" className="h-7 shrink-0 gap-1 text-xs" onClick={() => handleEmail(c)}>
-                    <Mail className="h-3 w-3" /> Email
-                  </Button>
+                  <div className="flex shrink-0 items-center gap-1.5">
+                    <Button size="sm" variant="outline" className="h-7 gap-1 text-xs" onClick={() => handleEmail(c)}>
+                      <Mail className="h-3 w-3" /> Email
+                    </Button>
+                    <Button
+                      size="sm"
+                      variant="outline"
+                      className="h-7 gap-1 text-xs"
+                      onClick={() => handleQueue(c, `${c.name}-${i}`)}
+                      disabled={queuingKey === `${c.name}-${i}` || queuedKeys.has(`${c.name}-${i}`)}
+                    >
+                      {queuingKey === `${c.name}-${i}` ? <Loader2 className="h-3 w-3 animate-spin" /> : <ListPlus className="h-3 w-3" />}
+                      {queuedKeys.has(`${c.name}-${i}`) ? 'Queued' : 'Queue'}
+                    </Button>
+                  </div>
                 )}
               </li>
             );
