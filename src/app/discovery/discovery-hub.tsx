@@ -2,6 +2,8 @@
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
+import { Loader2, Send } from 'lucide-react';
+import { toast } from 'sonner';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CorridorMap } from '@/components/discovery/corridor-map';
@@ -10,6 +12,8 @@ import type { CurationSummary } from '@/lib/discovery/curate';
 import { rankWorklist, WEIGHT_PRESETS } from '@/lib/discovery/scoring';
 import type { RankedRow } from '@/lib/discovery/scoring';
 import type { Corridor, CuratedRow, ProspectSegment, ScoredOutput } from '@/lib/discovery/types';
+import { dispatchSliceToClawd } from './actions';
+import type { DraftBatchRow } from '@/lib/discovery/clawd-dispatch';
 import { CorridorsView } from './corridors-view';
 import { FilterBar } from './filter-bar';
 import { ProspectDetailSheet } from './prospect-detail-sheet';
@@ -147,6 +151,46 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
     [ordered, onlyStale],
   );
 
+  // "Hand to Clawd" — send the current target slice (pinned subset if any pins,
+  // else everything displayed) to Clawd for contact sourcing + drafting.
+  const [dispatching, setDispatching] = useState(false);
+  const clawdTargets = useMemo<DraftBatchRow[]>(() => {
+    const source =
+      pinned.size > 0 ? ordered.filter((r) => pinned.has(r.placeId)) : displayed;
+    return source.map((r) => ({
+      name: r.name,
+      cityState: r.cityState,
+      segment: r.segment,
+      tier: r.tier,
+      nearestPrimoName: r.nearestPrimoName,
+      nearestPrimoDistance: r.nearestPrimoDistance,
+      corridor: r.corridor,
+    }));
+  }, [pinned, ordered, displayed]);
+  const clawdCount = pinned.size > 0 ? pinned.size : displayed.length;
+
+  const handleHandToClawd = useCallback(async () => {
+    setDispatching(true);
+    try {
+      const res = await dispatchSliceToClawd(clawdTargets);
+      if (res.ok) {
+        toast.success(`Handed ${res.accepted} to Clawd. Drafts will appear in your Outbox.`);
+      } else if (res.reason === 'clawd_endpoint_not_ready') {
+        toast.message('Clawd intake is not live yet. Share the draft-batch contract with the Clawd team.');
+      } else if (res.reason === 'clawd_not_configured') {
+        toast.error('Clawd is not configured (MC_API_TOKEN missing).');
+      } else if (res.reason === 'unauthenticated') {
+        toast.error('Sign in to hand off to Clawd.');
+      } else if (res.reason === 'empty') {
+        toast.message('No targets in the current slice.');
+      } else {
+        toast.error(`Could not hand off: ${res.reason}`);
+      }
+    } finally {
+      setDispatching(false);
+    }
+  }, [clawdTargets]);
+
   const handleTabChange = useCallback((value: string) => {
     setTab(value);
     syncUrl({ tab: value === 'prospects' ? null : value });
@@ -252,6 +296,19 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
                 className="rounded-md border border-[var(--border)] px-2.5 py-1 text-xs font-medium transition hover:border-[var(--primary)]"
               >
                 {dailySlice ? 'Widen to all sites' : 'Back to my slice'}
+              </button>
+              <button
+                type="button"
+                onClick={handleHandToClawd}
+                disabled={clawdCount === 0 || dispatching}
+                className="inline-flex items-center gap-1.5 rounded-md border border-[var(--primary)] px-2.5 py-1 text-xs font-medium text-[var(--primary)] transition hover:bg-[var(--primary)] hover:text-white disabled:cursor-not-allowed disabled:opacity-50"
+              >
+                {dispatching ? (
+                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                ) : (
+                  <Send className="h-3.5 w-3.5" />
+                )}
+                Hand {clawdCount} to Clawd
               </button>
             </div>
           </div>

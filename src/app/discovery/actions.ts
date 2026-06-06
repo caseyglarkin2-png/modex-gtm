@@ -10,6 +10,11 @@ import { prisma } from '@/lib/prisma';
 import { detectPattern, inferEmail, type EmailPattern, type NameEmailSample, type InferredEmail } from '@/lib/discovery/email-pattern';
 import { dominantDomain, dedupeContacts, type ProspectContact } from '@/lib/discovery/contacts';
 import { COMPANY_DOMAIN_SEED, EMAIL_PATTERN_SEED, companyKey } from '@/lib/discovery/company-domains';
+import { auth } from '@/lib/auth';
+import { prepareClawdDispatch, dispatchDraftBatch, type DraftBatchRow } from '@/lib/discovery/clawd-dispatch';
+
+/** Minimal session shape we read off `auth()` (it carries an email + attached role). */
+type SessionLike = { user?: { email?: string | null; role?: string } } | null;
 
 const GENERIC_BRAND_WORDS = new Set([
   'the', 'and', 'inc', 'llc', 'corp', 'company', 'co', 'group', 'logistics',
@@ -136,6 +141,21 @@ export async function pushProspectToHubSpot(input: PushProspectInput): Promise<P
   } catch (err) {
     return { ok: false, error: err instanceof Error ? err.message : String(err) };
   }
+}
+
+/**
+ * Hand a slice of worklist rows to Clawd. The client passes the rows it already
+ * has; the OWNER is resolved server-side from the session (never trust a
+ * client-supplied owner). Gates auth + empty, builds the payload, dispatches.
+ */
+export async function dispatchSliceToClawd(
+  rows: DraftBatchRow[],
+): Promise<{ ok: true; accepted: number; batchId?: string } | { ok: false; reason: string }> {
+  const session = (await auth()) as SessionLike;
+  const owner = session?.user?.email;
+  const prepared = prepareClawdDispatch(owner, rows);
+  if (!prepared.ok) return prepared;
+  return dispatchDraftBatch(prepared.payload);
 }
 
 // ── Prospect contacts + inferred email ───────────────────────────────────────
