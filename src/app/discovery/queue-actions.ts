@@ -378,6 +378,42 @@ export async function enrollInSequence(
   return { ok: true, enrolled };
 }
 
+/**
+ * Unenroll drafts from any sequence run, clearing the step-0 stamp. Owner-scoped
+ * (admins bypass) and gated to draft/approved so an in-flight send isn't disturbed.
+ */
+export async function unenrollFromSequence(
+  draftIds: number[],
+): Promise<{ ok: true; unenrolled: number } | { ok: false; reason: string }> {
+  const session = (await auth()) as SessionLike;
+  if (!session?.user?.email && session?.user?.role !== 'admin') {
+    return { ok: false, reason: 'unauthenticated' };
+  }
+  let unenrolled = 0;
+  for (const id of draftIds) {
+    const r = await prisma.draftQueueItem.updateMany({
+      where: ownerWhere(id, session, [STATUS.draft, STATUS.approved]),
+      data: { sequence_id: null, sequence_run_id: null, step_index: null },
+    });
+    unenrolled += r.count;
+  }
+  return { ok: true, unenrolled };
+}
+
+/** Owner-scoped delete of a sequence definition (admins bypass the owner predicate). */
+export async function deleteSequence(
+  id: number,
+): Promise<{ ok: true } | { ok: false; reason: string }> {
+  const session = (await auth()) as SessionLike;
+  const email = session?.user?.email ?? undefined;
+  const role = session?.user?.role;
+  const r = await prisma.sequence.deleteMany({
+    where: { id, ...(role !== 'admin' ? { owner: email } : {}) },
+  });
+  if (r.count === 0) return { ok: false, reason: 'not_found_or_forbidden' };
+  return { ok: true };
+}
+
 /** List sequences owned by the caller (admins: all). */
 export async function listSequences(): Promise<
   Array<{ id: number; name: string; steps: unknown }>
