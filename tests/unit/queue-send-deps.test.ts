@@ -18,12 +18,13 @@ vi.mock('@/lib/source-backed/metrics', () => ({ recordSourceBackedMetric: vi.fn(
 vi.mock('@/lib/hubspot/deals', () => ({ ensureLocalMeetingDealLink: vi.fn(async () => undefined) }));
 vi.mock('@/lib/agent-actions/cache', () => ({ markAgentActionCacheStale: vi.fn(async () => undefined) }));
 
-// ── QUEUE-ONLY comms-awareness pre-send guard ──
-// recipientCommsStatus drives the post-evaluateSendGuards block in prodSendDeps.
-// Default it to the non-blocking 'new' state so the happy path stays green;
-// individual tests override the resolved state.
-const mockedRecipientCommsStatus = vi.fn(async () => ({ state: 'new', lastAt: null, detail: '' }));
-vi.mock('@/lib/queue/comms-status', () => ({ recipientCommsStatus: mockedRecipientCommsStatus }));
+// ── QUEUE-ONLY reply-pause pre-send guard ──
+// newestInboundFrom drives the post-evaluateSendGuards reply-pause in prodSendDeps.
+// Default it to null (no inbound reply) so the happy path stays green; individual
+// tests override the resolved value. Inbound-only: a sequence follow-up's own
+// outbound thread must NOT trip this — only a real reply FROM the recipient does.
+const mockedNewestInboundFrom = vi.fn(async (_email: string): Promise<Date | null> => null);
+vi.mock('@/lib/email/gmail-inbox', () => ({ newestInboundFrom: mockedNewestInboundFrom }));
 
 // ── Prisma mock (the only persistence boundary) ──
 const mockedPrisma = {
@@ -66,11 +67,12 @@ const ITEM = {
   persona_name: 'Alice Ops',
   persona_id: null,
   idempotency_key: 'idem-abc-123',
+  created_at: new Date('2026-06-01T00:00:00Z'),
 };
 
 beforeEach(() => {
   vi.clearAllMocks();
-  mockedRecipientCommsStatus.mockResolvedValue({ state: 'new', lastAt: null, detail: '' });
+  mockedNewestInboundFrom.mockResolvedValue(null);
   mockedEnforceOneAccountInvariant.mockResolvedValue({
     ok: true,
     canonicalAccountName: 'Acme Foods',
@@ -152,29 +154,32 @@ describe('prodSendDeps (real deps, mocked prisma + network)', () => {
     await expect(deps.send({ ...ITEM })).rejects.toBeInstanceOf(RateLimitedError);
   });
 
-  it('QUEUE-ONLY guard blocks an in_thread recipient even after evaluateSendGuards passes', async () => {
-    mockedRecipientCommsStatus.mockResolvedValue({ state: 'in_thread', lastAt: null, detail: '' });
+  it('reply-pause: blocks when the recipient replied AFTER this item was queued', async () => {
+    // Inbound reply post-dates created_at (2026-06-01) — pause and skip the send.
+    mockedNewestInboundFrom.mockResolvedValue(new Date('2026-06-03T00:00:00Z'));
     const prisma = mockedPrisma as any;
     const deps = prodSendDeps(prisma);
 
     const result = await deps.guard({ ...ITEM });
 
-    expect(result).toEqual({ ok: false, reason: 'in_thread' });
-    expect(mockedRecipientCommsStatus).toHaveBeenCalledWith('Alice@Example.com', expect.anything());
+    expect(result).toEqual({ ok: false, reason: 'replied' });
+    expect(mockedNewestInboundFrom).toHaveBeenCalledWith('Alice@Example.com');
+    expect(mockedSendEmail).not.toHaveBeenCalled();
   });
 
-  it('QUEUE-ONLY guard blocks an unsubscribed recipient surfaced only by comms status', async () => {
-    mockedRecipientCommsStatus.mockResolvedValue({ state: 'unsubscribed', lastAt: null, detail: '' });
+  it('reply-pause: allows when there is no inbound reply (null) — e.g. a follow-up whose own outbound thread exists', async () => {
+    mockedNewestInboundFrom.mockResolvedValue(null);
     const prisma = mockedPrisma as any;
     const deps = prodSendDeps(prisma);
 
     const result = await deps.guard({ ...ITEM });
 
-    expect(result).toEqual({ ok: false, reason: 'unsubscribed' });
+    expect(result).toEqual({ ok: true });
   });
 
-  it('QUEUE-ONLY guard allows a brand-new recipient (comms state new)', async () => {
-    mockedRecipientCommsStatus.mockResolvedValue({ state: 'new', lastAt: null, detail: '' });
+  it('reply-pause: allows when the only inbound reply pre-dates the queue time', async () => {
+    // Reply from before we queued (2026-06-01) must NOT pause this send.
+    mockedNewestInboundFrom.mockResolvedValue(new Date('2026-05-20T00:00:00Z'));
     const prisma = mockedPrisma as any;
     const deps = prodSendDeps(prisma);
 

@@ -264,6 +264,49 @@ export async function threadExistsWith(email: string): Promise<{ exists: boolean
 }
 
 /**
+ * Newest INBOUND message timestamp from this address (their replies only — not
+ * Casey's own sends). Used for reply-pause. Best-effort: null on error, never
+ * throws.
+ *
+ * `from:THEM` is inherently inbound — it can only match mail the recipient sent
+ * us, so Casey's own outbound (and a sequence follow-up's own outbound thread)
+ * can never trip it.
+ */
+export async function newestInboundFrom(email: string): Promise<Date | null> {
+  try {
+    const config = getGmailConfig();
+    const accessToken = await getAccessToken();
+
+    const addr = baseAddress(email);
+    const listUrl = new URL(`${GMAIL_API}/users/${encodeURIComponent(config.userEmail)}/messages`);
+    listUrl.searchParams.set('q', `from:${addr}`);
+    listUrl.searchParams.set('maxResults', '1');
+
+    const listRes = await fetch(listUrl.toString(), {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+    if (!listRes.ok) {
+      const body = await listRes.text();
+      Sentry.captureMessage(`Gmail newestInboundFrom list failed: ${listRes.status}`, {
+        extra: { body: body.slice(0, 500) },
+      });
+      return null;
+    }
+
+    const listData = (await listRes.json()) as { messages?: GmailMessage[] };
+    const first = listData.messages?.[0];
+    if (!first) return null;
+
+    const detail = await getMessageDetail(accessToken, config.userEmail, first.id);
+    if (!detail.internalDate) return null;
+    return new Date(parseInt(detail.internalDate, 10));
+  } catch (err) {
+    Sentry.captureException(err, { extra: { context: 'newestInboundFrom' } });
+    return null;
+  }
+}
+
+/**
  * Resolves just the Gmail threadId for a message id — used by the
  * one-shot thread-linkage backfill to thread historical sends.
  */
