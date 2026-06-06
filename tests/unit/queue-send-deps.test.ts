@@ -33,6 +33,9 @@ const mockedPrisma = {
     findUniqueOrThrow: vi.fn(),
     update: vi.fn(),
   },
+  experimentVariant: {
+    findFirst: vi.fn(),
+  },
   unsubscribedEmail: {
     findMany: vi.fn(),
     delete: vi.fn(() => ({ catch: vi.fn() })),
@@ -82,6 +85,7 @@ beforeEach(() => {
   mockedPrisma.draftQueueItem.updateMany.mockResolvedValue({ count: 1 });
   mockedPrisma.draftQueueItem.findUniqueOrThrow.mockResolvedValue({ ...ITEM });
   mockedPrisma.draftQueueItem.update.mockResolvedValue({});
+  mockedPrisma.experimentVariant.findFirst.mockResolvedValue(null);
   mockedPrisma.unsubscribedEmail.findMany.mockResolvedValue([]);
   mockedPrisma.accountContactCandidate.findMany.mockResolvedValue([]);
   mockedPrisma.account.findUnique.mockResolvedValue({
@@ -186,5 +190,49 @@ describe('prodSendDeps (real deps, mocked prisma + network)', () => {
     const result = await deps.guard({ ...ITEM });
 
     expect(result).toEqual({ ok: true });
+  });
+
+  it('applies the assigned variant subject at send and records the variant in EmailLog metadata', async () => {
+    mockedPrisma.experimentVariant.findFirst.mockResolvedValue({
+      variant_key: 'B',
+      subject: 'VARIANT SUBJ',
+      opening: null,
+      cta: null,
+      is_control: false,
+    });
+    const prisma = mockedPrisma as any;
+    const deps = prodSendDeps(prisma);
+
+    await deps.send({ ...ITEM, experiment_id: 'exp_1', variant_key: 'B' });
+
+    // variant loaded for this item's experiment + key
+    expect(mockedPrisma.experimentVariant.findFirst).toHaveBeenCalledWith({
+      where: { experiment_id: 'exp_1', variant_key: 'B' },
+    });
+    // applied subject reaches the Gmail send boundary
+    expect(mockedSendEmail).toHaveBeenCalledWith(expect.objectContaining({ subject: 'VARIANT SUBJ' }));
+
+    // side effects record the variant in EmailLog.metadata via workflowMetadata
+    await deps.runSideEffects(
+      { ...ITEM, experiment_id: 'exp_1', variant_key: 'B' },
+      { providerMessageId: 'msg-1', threadId: null },
+    );
+    const logArg = mockedPrisma.emailLog.create.mock.calls[0][0];
+    expect(logArg.data.metadata?.workflow?.queue).toEqual({
+      variantKey: 'B',
+      experimentId: 'exp_1',
+    });
+  });
+
+  it('uses the base subject when the item has no experiment, and never loads a variant', async () => {
+    const prisma = mockedPrisma as any;
+    const deps = prodSendDeps(prisma);
+
+    await deps.send({ ...ITEM });
+
+    expect(mockedPrisma.experimentVariant.findFirst).not.toHaveBeenCalled();
+    expect(mockedSendEmail).toHaveBeenCalledWith(
+      expect.objectContaining({ subject: 'Quarterly check-in' }),
+    );
   });
 });
