@@ -23,7 +23,9 @@ vi.mock('@/lib/email/gmail-inbox', () => ({ threadExistsWith: mockedThreadExists
 vi.mock('@/lib/queue/send', () => ({ sendQueueItem: mockedSendQueueItem }));
 vi.mock('@/lib/queue/send-deps', () => ({ prodSendDeps: vi.fn(() => ({})) }));
 
-const { addOne, sendNow, approveBatch, runDueNow } = await import('@/app/discovery/queue-actions');
+const { addOne, sendNow, approveBatch, runDueNow, retryDraft } = await import(
+  '@/app/discovery/queue-actions'
+);
 
 const baseInput: QueueAddInput = {
   toEmail: 'Person@Example.com',
@@ -162,6 +164,39 @@ describe('approveBatch', () => {
     // owner-scoped, status approved
     expect(calls[0][0].where.owner).toBe('rep@freightroll.com');
     expect(calls[0][0].data.status).toBe('approved');
+  });
+});
+
+describe('retryDraft', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    mockedAuth.mockResolvedValue({ user: { email: 'rep@freightroll.com', role: 'rep' } });
+  });
+
+  it('retries a failed row that never reached Gmail (provider_message_id null) -> approved', async () => {
+    mockedPrisma.draftQueueItem.updateMany.mockResolvedValue({ count: 1 });
+
+    const res = await retryDraft(55);
+
+    expect(res).toEqual({ ok: true });
+    const call = mockedPrisma.draftQueueItem.updateMany.mock.calls[0][0];
+    // gated on failed + never-sent, owner-scoped (rep, non-admin)
+    expect(call.where.status).toBe('failed');
+    expect(call.where.provider_message_id).toBe(null);
+    expect(call.where.owner).toBe('rep@freightroll.com');
+    expect(call.where.id).toBe(55);
+    // re-arms for sending and clears the prior error
+    expect(call.data.status).toBe('approved');
+    expect(call.data.error_message).toBe(null);
+  });
+
+  it('refuses a failed-but-already-sent row (updateMany count 0) -> not_retryable', async () => {
+    // The provider_message_id:null predicate excludes the already-sent row, so count is 0.
+    mockedPrisma.draftQueueItem.updateMany.mockResolvedValue({ count: 0 });
+
+    const res = await retryDraft(56);
+
+    expect(res).toEqual({ ok: false, reason: 'not_retryable' });
   });
 });
 

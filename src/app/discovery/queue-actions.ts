@@ -190,6 +190,20 @@ export async function approveBatch(
   return { ok: true, approved: total };
 }
 
+/** Retry a failed send. Only items that never reached Gmail (provider_message_id null)
+ *  are retryable; a failed-but-already-sent row must be reconciled by hand, not re-sent. */
+export async function retryDraft(
+  id: number,
+): Promise<{ ok: true } | { ok: false; reason: string }> {
+  const session = (await auth()) as SessionLike;
+  const r = await prisma.draftQueueItem.updateMany({
+    where: { ...ownerWhere(id, session), status: STATUS.failed, provider_message_id: null },
+    data: { status: STATUS.approved, error_message: null },
+  });
+  if (r.count === 0) return { ok: false, reason: 'not_retryable' };
+  return { ok: true };
+}
+
 /**
  * Admin-only, operator-triggered send of the currently-due approved items.
  * (A manual admin trigger, not an autonomous cron.)
