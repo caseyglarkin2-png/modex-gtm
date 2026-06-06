@@ -19,7 +19,7 @@ import { FilterBar } from './filter-bar';
 import { ProspectDetailSheet } from './prospect-detail-sheet';
 import { ProspectsTable } from './prospects-table';
 import { OutboxTab } from './outbox-tab';
-import { listQueue } from './queue-actions';
+import { countActionableQueue } from './queue-actions';
 import { ScanPanel } from './scan-panel';
 import { WeightControl } from './weight-control';
 import { usePinned } from './use-pinned';
@@ -95,7 +95,7 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
 
   // Populate the Outbox badge count on mount so it's visible before the tab opens.
   useEffect(() => {
-    listQueue().then((r) => setOutboxCount(r.length));
+    countActionableQueue().then(setOutboxCount);
   }, []);
 
   const corridorNames = useMemo(() => corridors.map((c) => c.name).sort(), [corridors]);

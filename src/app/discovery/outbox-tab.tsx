@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { ChevronDown, ChevronRight, Loader2, Plus, RotateCcw, Send, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 import type { DraftQueueItem } from '@prisma/client';
@@ -198,11 +198,36 @@ function OutboxRow({ item, onRefresh, selected, onToggleSelect }: OutboxRowProps
                   seq
                 </Badge>
               )}
+              {item.variant_key && (
+                <Badge
+                  variant="outline"
+                  className="text-[9px] text-indigo-600 border-indigo-600/40"
+                  title="A/B variant"
+                >
+                  {item.variant_key}
+                </Badge>
+              )}
             </div>
             <div className="truncate text-xs text-[var(--muted-foreground)]">
               {item.account_name}
               {item.persona_name ? ` · ${item.persona_name}` : ''}
             </div>
+            {item.status === 'approved' && item.scheduled_for && (
+              <div className="text-[11px] text-[var(--muted-foreground)]">
+                Scheduled {new Date(item.scheduled_for).toLocaleString()}
+              </div>
+            )}
+            {item.status === 'sent' && item.sent_at && (
+              <div className="text-[11px] text-[var(--muted-foreground)]">
+                Sent {new Date(item.sent_at).toLocaleString()}
+              </div>
+            )}
+            {item.status === 'failed' && item.error_message && (
+              <div className="text-[11px] text-red-600">{item.error_message}</div>
+            )}
+            {item.status === 'skipped' && item.skipped_reason && (
+              <div className="text-[11px] text-amber-600">{item.skipped_reason}</div>
+            )}
           </div>
         </div>
         <div className="flex shrink-0 items-center gap-1.5">
@@ -338,6 +363,8 @@ export function OutboxTab({ onCountChange }: OutboxTabProps) {
 
   // Batch-action UI state
   const [sendingBatch, setSendingBatch] = useState(false);
+  const [sendProgress, setSendProgress] = useState<{ done: number; total: number } | null>(null);
+  const cancelRef = useRef(false);
   const [retryingBatch, setRetryingBatch] = useState(false);
   const [runningDue, setRunningDue] = useState(false);
   const [showSchedule, setShowSchedule] = useState(false);
@@ -416,7 +443,11 @@ export function OutboxTab({ onCountChange }: OutboxTabProps) {
     listQueue()
       .then((rows) => {
         setItems(rows);
-        onCountChange?.(rows.length);
+        onCountChange?.(
+          rows.filter(
+            (i) => i.status === 'draft' || i.status === 'approved' || i.status === 'failed',
+          ).length,
+        );
         // Drop selections that no longer exist.
         setSelectedIds((prev) => {
           const live = new Set(rows.map((r) => r.id));
@@ -477,24 +508,35 @@ export function OutboxTab({ onCountChange }: OutboxTabProps) {
 
   async function handleSendAll() {
     setSendingBatch(true);
+    cancelRef.current = false;
+    const total = selected.length;
+    setSendProgress({ done: 0, total });
     let sent = 0;
     let skipped = 0;
     let failed = 0;
+    let cancelled = false;
     try {
-      for (const item of selected) {
-        const res = await sendNow(item.id);
+      for (let i = 0; i < selected.length; i++) {
+        if (cancelRef.current) {
+          cancelled = true;
+          break;
+        }
+        const res = await sendNow(selected[i].id);
         if ('status' in res && res.status === 'sent') sent++;
         else if ('status' in res && res.status === 'skipped') skipped++;
         else failed++;
+        setSendProgress({ done: i + 1, total });
       }
       const parts = [`${sent} sent`];
       if (skipped) parts.push(`${skipped} skipped`);
       if (failed) parts.push(`${failed} failed`);
-      toast.message(parts.join(', '));
+      toast.message(`${parts.join(', ')}${cancelled ? ' (cancelled)' : ''}`);
       clearSelection();
       refresh();
     } finally {
       setSendingBatch(false);
+      setSendProgress(null);
+      cancelRef.current = false;
     }
   }
 
@@ -590,6 +632,7 @@ export function OutboxTab({ onCountChange }: OutboxTabProps) {
           <h2 className="text-base font-semibold">Outbox — staged drafts</h2>
           <p className="text-xs text-[var(--muted-foreground)]">
             {items.length.toLocaleString()} {items.length === 1 ? 'draft' : 'drafts'} queued
+            {items.length === 200 ? ' (showing latest 200)' : ''}
           </p>
         </div>
         <div className="flex items-center gap-2">
@@ -740,8 +783,22 @@ export function OutboxTab({ onCountChange }: OutboxTabProps) {
               disabled={batchBusy}
             >
               {sendingBatch ? <Loader2 className="h-3 w-3 animate-spin" /> : <Send className="h-3 w-3" />}
-              Send all now
+              {sendingBatch
+                ? `Sending ${sendProgress?.done ?? 0}/${sendProgress?.total ?? 0}`
+                : 'Send all now'}
             </Button>
+            {sendingBatch && (
+              <Button
+                size="sm"
+                variant="ghost"
+                className="h-7 px-2 text-xs"
+                onClick={() => {
+                  cancelRef.current = true;
+                }}
+              >
+                Cancel
+              </Button>
+            )}
             <Button
               size="sm"
               variant="outline"
