@@ -57,12 +57,14 @@ describe('inline ROI parity with the full calculator', () => {
 
   it('coca-cola inline annual value equals the calculator output to the dollar', () => {
     // Golden value cross-checked against the actual Flow-State- engine
-    // (buildInputsFromAsks + buildDashboard). Updated 2026-06-03 after
-    // dc08d15 restored totalGlobalFootprint (270) to the coca-cola pack.
+    // (buildInputsFromAsks + buildDashboard). Updated 2026-06-05 after d368900
+    // set coca-cola's margin to the beverage band ($2,400/load) instead of the
+    // $1,000 bottled-water default — the prior golden (431_822_741) used the
+    // wrong margin. dc08d15 restored totalGlobalFootprint (270) to the pack.
     const pack = loadPack('coca-cola.json');
     const dash = buildROIDashboard(buildAccountRoiModel(pack));
     expect(dash.totalFacilities).toBe(270);
-    expect(Math.round(dash.comparison.yardFlow.total)).toBe(431_822_741);
+    expect(Math.round(dash.comparison.yardFlow.total)).toBe(1_165_030_764);
   });
 
   it.each(packFiles)('%s: produces a finite, positive, summing ROI', (file) => {
