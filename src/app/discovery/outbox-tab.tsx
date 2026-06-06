@@ -14,6 +14,7 @@ import {
   listQueue,
   listSequences,
   removeDraft,
+  renderDraftPreview,
   retryDraft,
   runDueNow,
   sendNow,
@@ -50,7 +51,11 @@ interface OutboxRowProps {
 function OutboxRow({ item, onRefresh, selected, onToggleSelect }: OutboxRowProps) {
   const [subject, setSubject] = useState(item.subject);
   const [body, setBody] = useState(item.body);
-  const [expanded, setExpanded] = useState(false);
+  // Body pane mode: 'closed' keeps the row compact; 'edit' shows the textarea;
+  // 'preview' shows a faithful render of the real branded email in an iframe.
+  const [mode, setMode] = useState<'closed' | 'edit' | 'preview'>('closed');
+  const [previewHtml, setPreviewHtml] = useState<string | null>(null);
+  const [previewLoading, setPreviewLoading] = useState(false);
   const [sending, setSending] = useState(false);
   const [removing, setRemoving] = useState(false);
   const [retrying, setRetrying] = useState(false);
@@ -63,6 +68,8 @@ function OutboxRow({ item, onRefresh, selected, onToggleSelect }: OutboxRowProps
 
   async function saveSubject() {
     if (subject === item.subject) return;
+    // Subject edits change the rendered email, so drop any cached preview.
+    setPreviewHtml(null);
     const r = await updateDraft(item.id, { subject });
     if (!r.ok) {
       toast.error('Could not save subject');
@@ -72,11 +79,38 @@ function OutboxRow({ item, onRefresh, selected, onToggleSelect }: OutboxRowProps
 
   async function saveBody() {
     if (body === item.body) return;
+    // Body edits change the rendered email, so drop any cached preview.
+    setPreviewHtml(null);
     const r = await updateDraft(item.id, { body });
     if (!r.ok) {
       toast.error('Could not save body');
       setBody(item.body);
     }
+  }
+
+  // Fetch (or re-fetch) the real branded-email render for the Preview pane.
+  const loadPreview = useCallback(async () => {
+    setPreviewLoading(true);
+    try {
+      const r = await renderDraftPreview(item.id);
+      if (r.ok) setPreviewHtml(r.html);
+      else toast.error('Could not render preview');
+    } finally {
+      setPreviewLoading(false);
+    }
+  }, [item.id]);
+
+  function showEdit() {
+    setMode((m) => (m === 'edit' ? 'closed' : 'edit'));
+  }
+
+  function showPreview() {
+    if (mode === 'preview') {
+      setMode('closed');
+      return;
+    }
+    setMode('preview');
+    if (!previewHtml) void loadPreview();
   }
 
   async function handleSend() {
@@ -223,16 +257,34 @@ function OutboxRow({ item, onRefresh, selected, onToggleSelect }: OutboxRowProps
         aria-label="Subject"
       />
 
-      <button
-        type="button"
-        onClick={() => setExpanded((v) => !v)}
-        className="flex items-center gap-1 text-[11px] font-medium text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
-      >
-        {expanded ? <ChevronDown className="h-3 w-3" /> : <ChevronRight className="h-3 w-3" />}
-        {expanded ? 'Hide body' : 'Edit body'}
-      </button>
+      <div className="inline-flex overflow-hidden rounded-md border border-[var(--border)] text-[11px] font-medium">
+        <button
+          type="button"
+          onClick={showEdit}
+          aria-pressed={mode === 'edit'}
+          className={`px-2 py-1 ${
+            mode === 'edit'
+              ? 'bg-[var(--muted)] text-[var(--foreground)]'
+              : 'text-[var(--muted-foreground)] hover:text-[var(--foreground)]'
+          }`}
+        >
+          Edit
+        </button>
+        <button
+          type="button"
+          onClick={showPreview}
+          aria-pressed={mode === 'preview'}
+          className={`border-l border-[var(--border)] px-2 py-1 ${
+            mode === 'preview'
+              ? 'bg-[var(--muted)] text-[var(--foreground)]'
+              : 'text-[var(--muted-foreground)] hover:text-[var(--foreground)]'
+          }`}
+        >
+          Preview
+        </button>
+      </div>
 
-      {expanded && (
+      {mode === 'edit' && (
         <textarea
           className="w-full rounded-md border border-[var(--border)] bg-transparent p-2 text-xs"
           rows={8}
@@ -243,6 +295,24 @@ function OutboxRow({ item, onRefresh, selected, onToggleSelect }: OutboxRowProps
           aria-label="Body"
         />
       )}
+
+      {mode === 'preview' &&
+        (previewLoading ? (
+          <div className="flex items-center gap-2 py-4 text-xs text-[var(--muted-foreground)]">
+            <Loader2 className="h-4 w-4 animate-spin" />
+            Rendering preview...
+          </div>
+        ) : previewHtml ? (
+          <iframe
+            srcDoc={previewHtml}
+            sandbox=""
+            title="Email preview"
+            className="w-full rounded-md border border-[var(--border)] bg-white"
+            style={{ height: 420 }}
+          />
+        ) : (
+          <p className="py-4 text-xs text-[var(--muted-foreground)]">Preview unavailable.</p>
+        ))}
 
       {item.image_url && (
         // eslint-disable-next-line @next/next/no-img-element
