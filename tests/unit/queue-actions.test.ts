@@ -16,7 +16,7 @@ const mockedPrisma = {
     updateMany: vi.fn(),
     deleteMany: vi.fn(),
   },
-  sequence: { findUnique: vi.fn() },
+  sequence: { findUnique: vi.fn(), create: vi.fn(), findMany: vi.fn() },
 };
 
 vi.mock('@/lib/prisma', () => ({ prisma: mockedPrisma }));
@@ -25,9 +25,8 @@ vi.mock('@/lib/email/gmail-inbox', () => ({ threadExistsWith: mockedThreadExists
 vi.mock('@/lib/queue/send', () => ({ sendQueueItem: mockedSendQueueItem }));
 vi.mock('@/lib/queue/send-deps', () => ({ prodSendDeps: vi.fn(() => ({})) }));
 
-const { addOne, sendNow, approveBatch, runDueNow, retryDraft } = await import(
-  '@/app/discovery/queue-actions'
-);
+const { addOne, sendNow, approveBatch, runDueNow, retryDraft, createSequence, enrollInSequence } =
+  await import('@/app/discovery/queue-actions');
 
 const baseInput: QueueAddInput = {
   toEmail: 'Person@Example.com',
@@ -234,5 +233,97 @@ describe('runDueNow', () => {
 
     expect(res).toEqual({ ok: true, sent: 1, failed: 1, skipped: 0 });
     expect(mockedSendQueueItem).toHaveBeenCalledTimes(2);
+  });
+});
+
+describe('createSequence', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    mockedAuth.mockResolvedValue({ user: { email: 'rep@freightroll.com', role: 'rep' } });
+  });
+
+  it('creates a sequence with name + steps scoped to the caller', async () => {
+    mockedPrisma.sequence.create.mockResolvedValue({ id: 17 });
+    const steps = [
+      { stepIndex: 0, delayDays: 0 },
+      { stepIndex: 1, delayDays: 3 },
+    ];
+
+    const res = await createSequence('Cold open', steps);
+
+    expect(res).toEqual({ ok: true, id: 17 });
+    expect(mockedPrisma.sequence.create).toHaveBeenCalledWith({
+      data: { name: 'Cold open', owner: 'rep@freightroll.com', steps },
+    });
+  });
+
+  it('rejects an empty name as invalid and never writes', async () => {
+    const res = await createSequence('  ', [{ stepIndex: 0, delayDays: 0 }]);
+
+    expect(res).toEqual({ ok: false, reason: 'invalid' });
+    expect(mockedPrisma.sequence.create).not.toHaveBeenCalled();
+  });
+
+  it('rejects an empty steps array as invalid', async () => {
+    const res = await createSequence('Has name', []);
+
+    expect(res).toEqual({ ok: false, reason: 'invalid' });
+    expect(mockedPrisma.sequence.create).not.toHaveBeenCalled();
+  });
+
+  it('rejects when unauthenticated', async () => {
+    mockedAuth.mockResolvedValue(null);
+
+    const res = await createSequence('Cold open', [{ stepIndex: 0, delayDays: 0 }]);
+
+    expect(res).toEqual({ ok: false, reason: 'unauthenticated' });
+    expect(mockedPrisma.sequence.create).not.toHaveBeenCalled();
+  });
+});
+
+describe('enrollInSequence', () => {
+  beforeEach(() => {
+    vi.clearAllMocks();
+    mockedAuth.mockResolvedValue({ user: { email: 'rep@freightroll.com', role: 'rep' } });
+  });
+
+  it('enrolls each draft with its OWN sequence_run_id, owner-scoped, summing counts', async () => {
+    mockedPrisma.draftQueueItem.updateMany.mockResolvedValue({ count: 1 });
+
+    const res = await enrollInSequence([10, 11], 5);
+
+    expect(res).toEqual({ ok: true, enrolled: 2 });
+    expect(mockedPrisma.draftQueueItem.updateMany).toHaveBeenCalledTimes(2);
+
+    const calls = mockedPrisma.draftQueueItem.updateMany.mock.calls;
+    const c0 = calls[0][0];
+    const c1 = calls[1][0];
+
+    // owner-scoped per draft id
+    expect(c0.where.owner).toBe('rep@freightroll.com');
+    expect(c0.where.id).toBe(10);
+    expect(c1.where.id).toBe(11);
+
+    // stamps sequence as step 0
+    expect(c0.data.sequence_id).toBe(5);
+    expect(c0.data.step_index).toBe(0);
+    expect(c1.data.sequence_id).toBe(5);
+    expect(c1.data.step_index).toBe(0);
+
+    // each draft gets a DISTINCT run id
+    expect(c0.data.sequence_run_id).toBeTruthy();
+    expect(c1.data.sequence_run_id).toBeTruthy();
+    expect(c0.data.sequence_run_id).not.toBe(c1.data.sequence_run_id);
+  });
+
+  it('excludes another owner\'s draft (updateMany count 0) from the enrolled total', async () => {
+    mockedPrisma.draftQueueItem.updateMany
+      .mockResolvedValueOnce({ count: 1 }) // own draft
+      .mockResolvedValueOnce({ count: 0 }); // another owner's draft -> not enrolled
+
+    const res = await enrollInSequence([10, 99], 5);
+
+    expect(res).toEqual({ ok: true, enrolled: 1 });
+    expect(mockedPrisma.draftQueueItem.updateMany).toHaveBeenCalledTimes(2);
   });
 });
