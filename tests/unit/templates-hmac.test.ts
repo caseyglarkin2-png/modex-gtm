@@ -42,4 +42,31 @@ describe('templates HMAC integration', () => {
     expect(html).toContain('https://test.example.com/unsubscribe');
     expect(html).not.toContain('token=');
   });
+
+  it('wrapHtml uses a cid: src when a cid is provided', async () => {
+    const { wrapHtml } = await loadTemplates();
+    const html = wrapHtml(
+      'Hello world',
+      'Acme Corp',
+      'bob@acme.com',
+      undefined,
+      'https://modex-gtm.vercel.app/artifacts/proof.jpg',
+      'proof@yardflow'
+    );
+    expect(html).toContain('src="cid:proof@yardflow"');
+    expect(html).not.toContain('src="https://modex-gtm.vercel.app/artifacts/proof.jpg"');
+  });
+
+  it('wrapHtml uses the hosted image URL when no cid is provided', async () => {
+    const { wrapHtml } = await loadTemplates();
+    const html = wrapHtml(
+      'Hello world',
+      'Acme Corp',
+      'bob@acme.com',
+      undefined,
+      'https://modex-gtm.vercel.app/artifacts/proof.jpg'
+    );
+    expect(html).toContain('src="https://modex-gtm.vercel.app/artifacts/proof.jpg"');
+    expect(html).not.toContain('cid:');
+  });
 });

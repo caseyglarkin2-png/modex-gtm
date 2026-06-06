@@ -33,7 +33,7 @@ export function htmlToPlainText(html: string): string {
     .trim();
 }
 
-export function wrapHtml(bodyText: string, accountName: string, recipientEmail?: string, emailLogId?: number, imageUrl?: string): string {
+export function wrapHtml(bodyText: string, accountName: string, recipientEmail?: string, emailLogId?: number, imageUrl?: string, cid?: string): string {
   const escaped = bodyText
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
@@ -43,11 +43,16 @@ export function wrapHtml(bodyText: string, accountName: string, recipientEmail?:
 
   // Optional inline proof image (a YardFlow live-yard frame). URL is schema-validated;
   // strip quotes defensively so it can't break out of the attribute.
+  // When a `cid` is supplied, reference the embedded attachment via `cid:<id>`
+  // instead of the hosted URL (so it renders even when remote images are
+  // blocked). The cid token is internal/trusted; still strip quotes defensively.
   const safeImageUrl = imageUrl ? imageUrl.replace(/["'<>]/g, '') : '';
-  const imageBlock = safeImageUrl
+  const safeCid = cid ? cid.replace(/["'<>]/g, '') : '';
+  const imgSrc = safeCid ? `cid:${safeCid}` : safeImageUrl;
+  const imageBlock = imgSrc
     ? `<tr>
       <td style="padding:4px 24px 8px;">
-        <img src="${safeImageUrl}" alt="YardFlow live yard operations at a Primo Brands plant" width="592" style="width:100%; max-width:592px; height:auto; border-radius:8px; border:1px solid #e8e8e8; display:block;" />
+        <img src="${imgSrc}" alt="YardFlow live yard operations at a Primo Brands plant" width="592" style="width:100%; max-width:592px; height:auto; border-radius:8px; border:1px solid #e8e8e8; display:block;" />
         <p style="margin:7px 2px 0; font-size:11px; color:#9ca3af; font-style:italic;">YardFlow live at a Primo Brands plant: real-time trailer detection in the yard.</p>
       </td>
     </tr>`
