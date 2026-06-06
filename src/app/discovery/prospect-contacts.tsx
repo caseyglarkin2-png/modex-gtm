@@ -61,6 +61,7 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
   const [composerOpen, setComposerOpen] = useState(false);
   const [queuingKey, setQueuingKey] = useState<string | null>(null);
   const [queuedKeys, setQueuedKeys] = useState<Set<string>>(new Set());
+  const [queuingAll, setQueuingAll] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -146,7 +147,7 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
     if (!contact.email) return;
     setQueuingKey(key);
     try {
-      const o = buildOutreach(prospect, contact.firstName);
+      const o = buildOutreach(prospect, contact.firstName, contact.title);
       const res = await addToQueue({
         toEmail: contact.email,
         accountName: prospect.name,
@@ -167,14 +168,62 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
     }
   }
 
-  const outreach = composeFor ? buildOutreach(prospect, composeFor.firstName) : null;
+  async function handleQueueAll() {
+    setQueuingAll(true);
+    try {
+      let queued = 0;
+      let skipped = 0;
+      for (let i = 0; i < contacts.length; i++) {
+        const c = contacts[i];
+        const key = `${c.name}-${i}`;
+        if (!c.email || queuedKeys.has(key)) continue;
+        const o = buildOutreach(prospect, c.firstName, c.title);
+        const res = await addToQueue({
+          toEmail: c.email,
+          accountName: prospect.name,
+          personaName: c.name,
+          subject: o.subject,
+          body: o.body,
+          imageUrl: o.imageUrl,
+          source: 'casey',
+        });
+        if (res.ok) {
+          queued += 1;
+          setQueuedKeys((prev) => new Set(prev).add(key));
+        } else {
+          skipped += 1;
+        }
+      }
+      toast.success(`${queued} queued${skipped > 0 ? `, ${skipped} skipped` : ''}`);
+    } finally {
+      setQueuingAll(false);
+    }
+  }
+
+  const emailContactCount = contacts.filter((c) => c.email).length;
+
+  const outreach = composeFor ? buildOutreach(prospect, composeFor.firstName, composeFor.title) : null;
 
   return (
     <div className="space-y-2">
-      <p className="flex items-center justify-between text-xs font-medium uppercase tracking-wide text-[var(--muted-foreground)]">
-        Contacts
-        {loading && <Loader2 className="h-3 w-3 animate-spin" />}
-      </p>
+      <div className="flex items-center justify-between gap-2">
+        <p className="flex items-center gap-1.5 text-xs font-medium uppercase tracking-wide text-[var(--muted-foreground)]">
+          Contacts
+          {loading && <Loader2 className="h-3 w-3 animate-spin" />}
+        </p>
+        {emailContactCount >= 2 && (
+          <Button
+            size="sm"
+            variant="outline"
+            className="h-7 gap-1 text-xs"
+            onClick={handleQueueAll}
+            disabled={queuingAll}
+          >
+            {queuingAll ? <Loader2 className="h-3 w-3 animate-spin" /> : <ListPlus className="h-3 w-3" />}
+            Queue all
+          </Button>
+        )}
+      </div>
 
       {/* Email pattern provenance */}
       {data && (
