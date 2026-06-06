@@ -10,6 +10,7 @@ import { Badge } from '@/components/ui/badge';
 import {
   approveBatch,
   createSequence,
+  deleteSequence,
   enrollInSequence,
   listQueue,
   listSequences,
@@ -18,6 +19,7 @@ import {
   retryDraft,
   runDueNow,
   sendNow,
+  unenrollFromSequence,
   updateDraft,
 } from './queue-actions';
 
@@ -59,6 +61,7 @@ function OutboxRow({ item, onRefresh, selected, onToggleSelect }: OutboxRowProps
   const [sending, setSending] = useState(false);
   const [removing, setRemoving] = useState(false);
   const [retrying, setRetrying] = useState(false);
+  const [unenrolling, setUnenrolling] = useState(false);
 
   const locked = item.status === 'sent';
   const style = STATUS_STYLE[item.status] ?? STATUS_STYLE.draft;
@@ -160,6 +163,24 @@ function OutboxRow({ item, onRefresh, selected, onToggleSelect }: OutboxRowProps
     }
   }
 
+  async function handleUnenroll() {
+    setUnenrolling(true);
+    try {
+      const r = await unenrollFromSequence([item.id]);
+      if (r.ok) {
+        toast.success('Unenrolled');
+        onRefresh();
+      } else {
+        toast.error(`Could not unenroll: ${r.reason}`);
+      }
+    } finally {
+      setUnenrolling(false);
+    }
+  }
+
+  const canUnenroll =
+    item.sequence_id != null && (item.status === 'draft' || item.status === 'approved');
+
   return (
     <li className="space-y-2 rounded-md border border-[var(--border)] p-3 text-sm">
       <div className="flex items-start justify-between gap-2">
@@ -195,7 +216,7 @@ function OutboxRow({ item, onRefresh, selected, onToggleSelect }: OutboxRowProps
                   className="text-[9px] text-purple-600 border-purple-600/40"
                   title="Enrolled in a sequence"
                 >
-                  seq
+                  {`seq · step ${(item.step_index ?? 0) + 1}`}
                 </Badge>
               )}
               {item.variant_key && (
@@ -231,6 +252,18 @@ function OutboxRow({ item, onRefresh, selected, onToggleSelect }: OutboxRowProps
           </div>
         </div>
         <div className="flex shrink-0 items-center gap-1.5">
+          {canUnenroll && (
+            <Button
+              size="sm"
+              variant="ghost"
+              className="h-7 gap-1 px-2 text-xs"
+              onClick={handleUnenroll}
+              disabled={unenrolling || sending || removing || retrying}
+            >
+              {unenrolling ? <Loader2 className="h-3 w-3 animate-spin" /> : null}
+              Unenroll
+            </Button>
+          )}
           {retryable && (
             <Button
               size="sm"
@@ -379,7 +412,9 @@ export function OutboxTab({ onCountChange }: OutboxTabProps) {
   const [sequences, setSequences] = useState<SequenceSummary[]>([]);
   const [showSequences, setShowSequences] = useState(false);
   const [seqName, setSeqName] = useState('');
-  const [seqFollowups, setSeqFollowups] = useState<number[]>([3]);
+  const [seqFollowups, setSeqFollowups] = useState<
+    { delayDays: number; subjectTemplate: string; bodyTemplate: string }[]
+  >([{ delayDays: 3, subjectTemplate: '', bodyTemplate: '' }]);
   const [creatingSeq, setCreatingSeq] = useState(false);
   const [enrollSeqId, setEnrollSeqId] = useState('');
   const [enrolling, setEnrolling] = useState(false);
@@ -401,19 +436,34 @@ export function OutboxTab({ onCountChange }: OutboxTabProps) {
     try {
       const steps = [
         { stepIndex: 0, delayDays: 0 },
-        ...seqFollowups.map((delayDays, i) => ({ stepIndex: i + 1, delayDays })),
+        ...seqFollowups.map((s, i) => ({
+          stepIndex: i + 1,
+          delayDays: s.delayDays,
+          ...(s.subjectTemplate.trim() ? { subjectTemplate: s.subjectTemplate.trim() } : {}),
+          ...(s.bodyTemplate.trim() ? { bodyTemplate: s.bodyTemplate.trim() } : {}),
+        })),
       ];
       const res = await createSequence(seqName.trim(), steps);
       if (res.ok) {
         toast.success('Sequence created');
         setSeqName('');
-        setSeqFollowups([3]);
+        setSeqFollowups([{ delayDays: 3, subjectTemplate: '', bodyTemplate: '' }]);
         refreshSequences();
       } else {
         toast.error(`Could not create: ${res.reason}`);
       }
     } finally {
       setCreatingSeq(false);
+    }
+  }
+
+  async function handleDeleteSequence(id: number) {
+    const res = await deleteSequence(id);
+    if (res.ok) {
+      toast.success('Sequence deleted');
+      refreshSequences();
+    } else {
+      toast.error(`Could not delete: ${res.reason}`);
     }
   }
 
@@ -694,37 +744,72 @@ export function OutboxTab({ onCountChange }: OutboxTabProps) {
                 <span className="text-[var(--muted-foreground)]">
                   Follow-ups (days after prior step)
                 </span>
-                {seqFollowups.map((days, i) => (
-                  <div key={i} className="flex items-center gap-2">
-                    <span className="text-[var(--muted-foreground)]">Step {i + 1}</span>
+                {seqFollowups.map((step, i) => (
+                  <div key={i} className="space-y-1 rounded-md border border-[var(--border)] p-2">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[var(--muted-foreground)]">Step {i + 1}</span>
+                      <Input
+                        type="number"
+                        min={0}
+                        className="h-7 w-20 text-xs"
+                        value={step.delayDays}
+                        onChange={(e) =>
+                          setSeqFollowups((prev) =>
+                            prev.map((s, j) =>
+                              j === i ? { ...s, delayDays: Number(e.target.value) } : s,
+                            ),
+                          )
+                        }
+                        aria-label={`Follow-up step ${i + 1} delay days`}
+                      />
+                      <span className="text-[var(--muted-foreground)]">days</span>
+                      <Button
+                        size="sm"
+                        variant="ghost"
+                        className="ml-auto h-7 px-2 text-xs"
+                        onClick={() => setSeqFollowups((prev) => prev.filter((_, j) => j !== i))}
+                        aria-label={`Remove follow-up step ${i + 1}`}
+                      >
+                        <Trash2 className="h-3 w-3" />
+                      </Button>
+                    </div>
                     <Input
-                      type="number"
-                      min={0}
-                      className="h-7 w-20 text-xs"
-                      value={days}
+                      className="h-7 text-xs"
+                      placeholder="optional subject override"
+                      value={step.subjectTemplate}
                       onChange={(e) =>
                         setSeqFollowups((prev) =>
-                          prev.map((d, j) => (j === i ? Number(e.target.value) : d)),
+                          prev.map((s, j) =>
+                            j === i ? { ...s, subjectTemplate: e.target.value } : s,
+                          ),
                         )
                       }
-                      aria-label={`Follow-up step ${i + 1} delay days`}
+                      aria-label={`Follow-up step ${i + 1} subject override`}
                     />
-                    <Button
-                      size="sm"
-                      variant="ghost"
-                      className="h-7 px-2 text-xs"
-                      onClick={() => setSeqFollowups((prev) => prev.filter((_, j) => j !== i))}
-                      aria-label={`Remove follow-up step ${i + 1}`}
-                    >
-                      <Trash2 className="h-3 w-3" />
-                    </Button>
+                    <textarea
+                      className="w-full rounded-md border border-[var(--border)] bg-transparent p-2 text-xs"
+                      rows={2}
+                      placeholder="optional body override"
+                      value={step.bodyTemplate}
+                      onChange={(e) =>
+                        setSeqFollowups((prev) =>
+                          prev.map((s, j) => (j === i ? { ...s, bodyTemplate: e.target.value } : s)),
+                        )
+                      }
+                      aria-label={`Follow-up step ${i + 1} body override`}
+                    />
                   </div>
                 ))}
                 <Button
                   size="sm"
                   variant="outline"
                   className="h-7 gap-1 text-xs"
-                  onClick={() => setSeqFollowups((prev) => [...prev, 3])}
+                  onClick={() =>
+                    setSeqFollowups((prev) => [
+                      ...prev,
+                      { delayDays: 3, subjectTemplate: '', bodyTemplate: '' },
+                    ])
+                  }
                 >
                   <Plus className="h-3 w-3" />
                   Add step
@@ -744,11 +829,22 @@ export function OutboxTab({ onCountChange }: OutboxTabProps) {
             {sequences.length > 0 && (
               <ul className="space-y-1 border-t border-[var(--border)] pt-2 text-[var(--muted-foreground)]">
                 {sequences.map((s) => (
-                  <li key={s.id} className="truncate">
-                    {s.name}{' '}
-                    <span className="text-[10px]">
-                      ({Array.isArray(s.steps) ? s.steps.length : 0} steps)
+                  <li key={s.id} className="flex items-center gap-1">
+                    <span className="min-w-0 truncate">
+                      {s.name}{' '}
+                      <span className="text-[10px]">
+                        ({Array.isArray(s.steps) ? s.steps.length : 0} steps)
+                      </span>
                     </span>
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      className="ml-auto h-6 px-1 text-xs"
+                      onClick={() => handleDeleteSequence(s.id)}
+                      aria-label={`Delete sequence ${s.name}`}
+                    >
+                      <Trash2 className="h-3 w-3" />
+                    </Button>
                   </li>
                 ))}
               </ul>
