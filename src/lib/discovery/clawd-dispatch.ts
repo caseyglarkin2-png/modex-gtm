@@ -76,6 +76,23 @@ export function buildDraftBatchPayload(
   return { owner, requestedBy: owner, source: 'discovery-worklist', targets };
 }
 
+/**
+ * Auth + empty gates and payload assembly for the "Hand to Clawd" server action.
+ * Pure: the OWNER is resolved server-side from the session and passed in here —
+ * a row-supplied owner is never trusted. The server action calls this, then
+ * forwards a successful result's payload to `dispatchDraftBatch`.
+ */
+export function prepareClawdDispatch(
+  ownerEmail: string | null | undefined,
+  rows: DraftBatchRow[],
+):
+  | { ok: false; reason: string }
+  | { ok: true; payload: DraftBatchPayload } {
+  if (!ownerEmail) return { ok: false, reason: 'unauthenticated' };
+  if (!rows?.length) return { ok: false, reason: 'empty' };
+  return { ok: true, payload: buildDraftBatchPayload(rows, ownerEmail) };
+}
+
 export interface DispatchOptions {
   baseUrl?: string;
   token?: string;
