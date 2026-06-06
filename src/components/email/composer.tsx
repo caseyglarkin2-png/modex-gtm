@@ -13,7 +13,6 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Link2, Loader2, Mail, Send, Sparkles, Eye, Pencil } from 'lucide-react';
-import { addToQueue } from '@/app/discovery/queue-actions';
 import { GeneratorDialog } from '@/components/ai/generator-dialog';
 import { VoicePreviewButton } from '@/components/voice-preview-button';
 import { readApiResponse } from '@/lib/api-response';
@@ -257,6 +256,11 @@ export function EmailComposer({
     const resolvedAccount = accountName.trim() || to.split('@')[1] || to;
     setQueueing(true);
     try {
+      // Lazy-import the server action so this client component does not pull the
+      // 'use server' queue-actions module (and its next-auth chain) into its
+      // static graph. Next strips server code from the client bundle either way;
+      // this also keeps vitest component renders from resolving next/server.
+      const { addToQueue } = await import('@/app/discovery/queue-actions');
       const result = await addToQueue({
         toEmail: to,
         accountName: resolvedAccount,

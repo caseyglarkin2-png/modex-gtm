@@ -25,6 +25,9 @@ const ensureYardflowIcpScoreProperty = vi.fn();
 vi.mock('@/lib/hubspot/properties', () => ({
   ensureYardflowIcpScoreProperty: () => ensureYardflowIcpScoreProperty(),
 }));
+// actions.ts imports `auth` from next-auth at module load; mock it so importing
+// the module under vitest does not pull next-auth's next/server resolution.
+vi.mock('@/lib/auth', () => ({ auth: vi.fn(async () => null) }));
 
 import { pushProspectToHubSpot } from '@/app/discovery/actions';
 
