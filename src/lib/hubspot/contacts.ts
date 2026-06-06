@@ -76,6 +76,60 @@ export async function searchContactByEmail(email: string): Promise<HubSpotContac
   return mapContact(result.results[0] as { id: string; properties: Record<string, string | null> });
 }
 
+/** HubSpot properties carrying the last-touch timestamps (real last-contacted signals). */
+const LAST_CONTACTED_PROPERTIES = [
+  'email',
+  'notes_last_contacted',
+  'hs_last_sales_activity_timestamp',
+] as const;
+
+/**
+ * Whether HubSpot shows a prior engagement with this contact, and when.
+ * Returns `{ configured:false }` when HubSpot isn't set up (so callers treat it
+ * as 'unknown', not 'new'). Best-effort: never throws — on error returns
+ * `{ configured:true, found:false, lastAt:null }`.
+ */
+export async function hubspotLastContacted(
+  email: string,
+): Promise<{ configured: boolean; found: boolean; lastAt: Date | null }> {
+  if (!isHubSpotConfigured()) return { configured: false, found: false, lastAt: null };
+
+  try {
+    const client = getHubSpotClient();
+    const result = await withHubSpotRetry(
+      () =>
+        client.crm.contacts.searchApi.doSearch({
+          filterGroups: [
+            {
+              filters: [
+                { propertyName: 'email', operator: FilterOperatorEnum.Eq, value: email.toLowerCase().trim() },
+              ],
+            },
+          ],
+          properties: [...LAST_CONTACTED_PROPERTIES],
+          limit: 1,
+          after: '0',
+          sorts: [],
+        }),
+      `hubspotLastContacted(${email})`,
+    );
+
+    if (!result.results.length) return { configured: true, found: false, lastAt: null };
+
+    const props = (result.results[0] as { properties: Record<string, string | null> }).properties;
+    const candidates = [props.notes_last_contacted, props.hs_last_sales_activity_timestamp]
+      .map((v) => (v ? new Date(v) : null))
+      .filter((d): d is Date => d !== null && !Number.isNaN(d.getTime()));
+    const lastAt = candidates.length
+      ? candidates.reduce((a, b) => (b.getTime() > a.getTime() ? b : a))
+      : null;
+
+    return { configured: true, found: true, lastAt };
+  } catch {
+    return { configured: true, found: false, lastAt: null };
+  }
+}
+
 /** Fetch a HubSpot contact by ID. */
 export async function getContactById(hubspotId: string): Promise<HubSpotContact | null> {
   if (!isHubSpotConfigured() || !HUBSPOT_SYNC_ENABLED) return null;
