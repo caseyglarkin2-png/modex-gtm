@@ -3,6 +3,7 @@ import { sendEmail } from '@/lib/email/client';
 import { evaluateRecipientEligibility } from '@/lib/email/recipient-guard';
 import { fetchImageAsAttachment } from '@/lib/email/inline-image';
 import { wrapHtml } from '@/lib/email/templates';
+import { resolveSenderIdentity } from '@/lib/email/sender-identity';
 import { sanitizeEmailHtml } from '@/lib/email/sanitize';
 import { ensureLocalMeetingDealLink } from '@/lib/hubspot/deals';
 import { advancePipelineStage, derivePipelineStage } from '@/lib/pipeline';
@@ -223,10 +224,13 @@ export async function wrapAndSend(
   // back to the hosted <img> URL — current behavior, nothing breaks.
   const inline = imageUrl ? await fetchImageAsAttachment(imageUrl) : null;
 
-  // Wrap plain text or already-composed HTML into branded template
+  // Wrap plain text or already-composed HTML into branded template. The
+  // signature is owner-correct: a per-identity sender (e.g. Jake) gets their own
+  // name/role; no sender resolves to Casey (unchanged default behavior).
+  const identity = resolveSenderIdentity(input.sender?.userEmail ?? null);
   const isPlainText = !sanitizedBody.trim().startsWith('<');
   const html = isPlainText
-    ? wrapHtml(sanitizedBody, accountName ?? 'the team', to, undefined, imageUrl, inline?.contentId)
+    ? wrapHtml(sanitizedBody, accountName ?? 'the team', to, undefined, imageUrl, inline?.contentId, identity)
     : sanitizedBody;
 
   const response = await sendEmail({
