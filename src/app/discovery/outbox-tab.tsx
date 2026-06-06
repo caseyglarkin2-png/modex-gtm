@@ -274,6 +274,9 @@ export function OutboxTab({ onCountChange }: OutboxTabProps) {
   const [scheduledFor, setScheduledFor] = useState('');
   const [staggerMinutes, setStaggerMinutes] = useState(2);
   const [scheduling, setScheduling] = useState(false);
+  const [abEnabled, setAbEnabled] = useState(false);
+  const [abSubjectA, setAbSubjectA] = useState('');
+  const [abSubjectB, setAbSubjectB] = useState('');
 
   // Sequences UI state
   const [sequences, setSequences] = useState<SequenceSummary[]>([]);
@@ -430,15 +433,39 @@ export function OutboxTab({ onCountChange }: OutboxTabProps) {
       toast.error('Pick a date and time first');
       return;
     }
+    const aSubject = abSubjectA.trim();
+    const bSubject = abSubjectB.trim();
+    const useExperiment = abEnabled && aSubject !== '' && bSubject !== '';
+    if (abEnabled && !useExperiment) {
+      toast.error('Fill in both Variant A and Variant B subjects, or uncheck A/B');
+      return;
+    }
     setScheduling(true);
     try {
+      const experiment = useExperiment
+        ? {
+            name: `Subject A/B ${new Date().toISOString().slice(0, 10)}`,
+            variants: [
+              { variantKey: 'A', subject: aSubject, split: 50, isControl: true },
+              { variantKey: 'B', subject: bSubject, split: 50 },
+            ],
+          }
+        : undefined;
       const res = await approveBatch([...selectedIds], {
         scheduledFor: new Date(scheduledFor),
         staggerMinutes,
+        ...(experiment ? { experiment } : {}),
       });
       if (res.ok) {
-        toast.success(`${res.approved} approved & scheduled`);
+        toast.success(
+          useExperiment
+            ? `${res.approved} approved & scheduled · A/B: 50/50 on subject`
+            : `${res.approved} approved & scheduled`,
+        );
         setShowSchedule(false);
+        setAbEnabled(false);
+        setAbSubjectA('');
+        setAbSubjectB('');
         clearSelection();
         refresh();
       } else {
@@ -709,38 +736,79 @@ export function OutboxTab({ onCountChange }: OutboxTabProps) {
           </div>
 
           {showSchedule && (
-            <div className="flex flex-wrap items-end gap-2 border-t border-[var(--border)] pt-2">
-              <label className="flex flex-col gap-1">
-                <span className="text-[var(--muted-foreground)]">Schedule for</span>
-                <Input
-                  type="datetime-local"
-                  className="h-7 w-auto text-xs"
-                  value={scheduledFor}
-                  onChange={(e) => setScheduledFor(e.target.value)}
-                  aria-label="Scheduled for"
+            <div className="space-y-2 border-t border-[var(--border)] pt-2">
+              <div className="flex flex-wrap items-end gap-2">
+                <label className="flex flex-col gap-1">
+                  <span className="text-[var(--muted-foreground)]">Schedule for</span>
+                  <Input
+                    type="datetime-local"
+                    className="h-7 w-auto text-xs"
+                    value={scheduledFor}
+                    onChange={(e) => setScheduledFor(e.target.value)}
+                    aria-label="Scheduled for"
+                  />
+                </label>
+                <label className="flex flex-col gap-1">
+                  <span className="text-[var(--muted-foreground)]">Stagger (min)</span>
+                  <Input
+                    type="number"
+                    min={0}
+                    className="h-7 w-20 text-xs"
+                    value={staggerMinutes}
+                    onChange={(e) => setStaggerMinutes(Number(e.target.value))}
+                    aria-label="Stagger minutes"
+                  />
+                </label>
+                <Button
+                  size="sm"
+                  variant="default"
+                  className="h-7 gap-1 text-xs"
+                  onClick={handleApproveSchedule}
+                  disabled={scheduling}
+                >
+                  {scheduling ? <Loader2 className="h-3 w-3 animate-spin" /> : null}
+                  Confirm schedule
+                </Button>
+              </div>
+
+              <label className="flex items-center gap-2 text-[var(--muted-foreground)]">
+                <input
+                  type="checkbox"
+                  checked={abEnabled}
+                  onChange={(e) => setAbEnabled(e.target.checked)}
+                  aria-label="A/B test subject lines"
                 />
+                A/B test subject lines
               </label>
-              <label className="flex flex-col gap-1">
-                <span className="text-[var(--muted-foreground)]">Stagger (min)</span>
-                <Input
-                  type="number"
-                  min={0}
-                  className="h-7 w-20 text-xs"
-                  value={staggerMinutes}
-                  onChange={(e) => setStaggerMinutes(Number(e.target.value))}
-                  aria-label="Stagger minutes"
-                />
-              </label>
-              <Button
-                size="sm"
-                variant="default"
-                className="h-7 gap-1 text-xs"
-                onClick={handleApproveSchedule}
-                disabled={scheduling}
-              >
-                {scheduling ? <Loader2 className="h-3 w-3 animate-spin" /> : null}
-                Confirm schedule
-              </Button>
+
+              {abEnabled && (
+                <div className="space-y-2">
+                  <label className="flex flex-col gap-1">
+                    <span className="text-[var(--muted-foreground)]">Variant A subject</span>
+                    <Input
+                      className="h-7 text-xs"
+                      placeholder="Variant A subject"
+                      value={abSubjectA}
+                      onChange={(e) => setAbSubjectA(e.target.value)}
+                      aria-label="Variant A subject"
+                    />
+                  </label>
+                  <label className="flex flex-col gap-1">
+                    <span className="text-[var(--muted-foreground)]">Variant B subject</span>
+                    <Input
+                      className="h-7 text-xs"
+                      placeholder="Variant B subject"
+                      value={abSubjectB}
+                      onChange={(e) => setAbSubjectB(e.target.value)}
+                      aria-label="Variant B subject"
+                    />
+                  </label>
+                  <p className="text-[10px] text-[var(--muted-foreground)]">
+                    Variants are split 50/50 deterministically; reply/open reporting is in HubSpot
+                    (each variant has its own subject).
+                  </p>
+                </div>
+              )}
             </div>
           )}
         </div>
