@@ -29,12 +29,12 @@ const CASEY_IDENTITY: SenderIdentity = {
   bookingLink: CASEY_BOOKING_LINK,
 };
 
-// Placeholder identity for Jake. Casey must supply Jake's exact name, title,
-// and booking link before this is used in real outreach; the booking link is
-// intentionally omitted here so the audit link falls back to the default.
+// Jake's identity. Role confirmed (Founder and CEO). Still pending from Casey:
+// Jake's last name (the signature shows just "Jake") and his booking link (omitted
+// here, so the audit link falls back to the default). Casey unchanged.
 const JAKE_IDENTITY: SenderIdentity = {
   name: 'Jake',
-  role: 'FreightRoll',
+  role: 'Founder and CEO',
 };
 
 /**
