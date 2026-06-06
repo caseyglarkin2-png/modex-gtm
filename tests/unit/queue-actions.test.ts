@@ -7,14 +7,16 @@ const mockedSendQueueItem = vi.fn();
 
 const mockedPrisma = {
   unsubscribedEmail: { findUnique: vi.fn() },
-  emailLog: { findFirst: vi.fn() },
+  emailLog: { findFirst: vi.fn(), findUnique: vi.fn() },
   draftQueueItem: {
     findFirst: vi.fn(),
+    findUnique: vi.fn(),
     findMany: vi.fn(),
     create: vi.fn(),
     updateMany: vi.fn(),
     deleteMany: vi.fn(),
   },
+  sequence: { findUnique: vi.fn() },
 };
 
 vi.mock('@/lib/prisma', () => ({ prisma: mockedPrisma }));
@@ -225,6 +227,8 @@ describe('runDueNow', () => {
     mockedSendQueueItem
       .mockResolvedValueOnce({ status: 'sent' })
       .mockResolvedValueOnce({ status: 'failed' });
+    // Re-fetch after send returns a non-sequence item -> onSendOutcome no-op.
+    mockedPrisma.draftQueueItem.findUnique.mockResolvedValue({ id: 1, sequence_id: null });
 
     const res = await runDueNow();
 

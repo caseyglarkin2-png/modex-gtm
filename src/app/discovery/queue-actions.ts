@@ -9,6 +9,7 @@ import { dedupDecision } from '@/lib/queue/dedup';
 import { STATUS } from '@/lib/queue/types';
 import { sendQueueItem } from '@/lib/queue/send';
 import { prodSendDeps } from '@/lib/queue/send-deps';
+import { onSendOutcome } from '@/lib/queue/sequence-runtime';
 import { staggerTimes, clampToWindow, selectDue, DEFAULT_WINDOW } from '@/lib/queue/schedule';
 import { QueueAddSchema, type QueueAddInput } from '@/lib/validations';
 
@@ -143,7 +144,11 @@ export async function sendNow(id: number) {
     data: { status: STATUS.approved, approved_at: new Date() },
   });
   if (r.count === 0) return { ok: false as const, reason: 'not_found_or_forbidden' };
-  return sendQueueItem(id, { deps: prodSendDeps(prisma) });
+  const result = await sendQueueItem(id, { deps: prodSendDeps(prisma) });
+  // Sequence follow-through: schedule next step on sent, cancel run on reply/opt-out.
+  const item = await prisma.draftQueueItem.findUnique({ where: { id } });
+  if (item) await onSendOutcome(prisma, item, result);
+  return result;
 }
 
 /**
@@ -231,6 +236,9 @@ export async function runDueNow(): Promise<
     if (r.status === 'sent') sent++;
     else if (r.status === 'failed') failed++;
     else skipped++;
+    // Re-fetch so sent_at / email_log_id are populated, then run follow-through.
+    const fresh = await prisma.draftQueueItem.findUnique({ where: { id: item.id } });
+    if (fresh) await onSendOutcome(prisma, fresh, r);
   }
   return { ok: true, sent, failed, skipped };
 }
