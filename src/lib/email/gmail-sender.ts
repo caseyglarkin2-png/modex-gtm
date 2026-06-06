@@ -16,6 +16,8 @@ function getGmailConfig() {
 const FROM_EMAIL = process.env.FROM_EMAIL ?? 'casey@freightroll.com';
 const FROM_NAME = process.env.FROM_NAME ?? 'Casey Larkin - YardFlow';
 
+import type { InlineImage } from './inline-image';
+
 interface GmailSendPayload {
   to: string;
   cc?: string[];
@@ -27,6 +29,9 @@ interface GmailSendPayload {
   headers?: Record<string, string>;
   /** Gmail threadId — set to thread a reply into an existing conversation. */
   threadId?: string;
+  /** Optional inline (cid:) image. When present the message becomes
+   *  multipart/related wrapping the multipart/alternative block. */
+  inlineImage?: InlineImage;
 }
 
 interface OAuthTokenResponse {
@@ -53,6 +58,15 @@ function sanitizeHeader(value: string): string {
   return String(value).replace(/[\r\n][\s\S]*$/, '').trim();
 }
 
+/** Split a base64 string into 76-char lines joined by CRLF (RFC 2045). */
+function wrap76(b64: string): string {
+  const lines: string[] = [];
+  for (let i = 0; i < b64.length; i += 76) {
+    lines.push(b64.slice(i, i + 76));
+  }
+  return lines.join('\r\n');
+}
+
 export function buildMimeMessage(payload: GmailSendPayload): string {
   const boundary = `boundary_${Date.now()}_${Math.random().toString(36).slice(2)}`;
   const plainText = (payload.text ?? payload.html)
@@ -74,7 +88,9 @@ export function buildMimeMessage(payload: GmailSendPayload): string {
   const ccHeader = payload.cc?.length
     ? payload.cc.map((entry) => sanitizeHeader(entry)).join(', ')
     : null;
-  const headers = [
+
+  // Per-message envelope headers (From/To/Subject/…), shared by both layouts.
+  const envelopeHeaders = [
     `From: ${sanitizeHeader(FROM_NAME)} <${sanitizeHeader(FROM_EMAIL)}>`,
     `To: ${sanitizeHeader(payload.to)}`,
     ccHeader ? `Cc: ${ccHeader}` : null,
@@ -83,10 +99,45 @@ export function buildMimeMessage(payload: GmailSendPayload): string {
     `Subject: ${sanitizeHeader(payload.subject)}`,
     ...customHeaders,
     'MIME-Version: 1.0',
-    `Content-Type: multipart/alternative; boundary="${boundary}"`,
   ].filter(Boolean);
 
-  const parts = [
+  // When there's no inline image, keep the exact byte-for-byte layout we had
+  // before: envelope headers + the multipart/alternative Content-Type, then
+  // the two alternative leaf parts.
+  if (!payload.inlineImage) {
+    const headers = [
+      ...envelopeHeaders,
+      `Content-Type: multipart/alternative; boundary="${boundary}"`,
+    ];
+    const parts = [
+      `--${boundary}`,
+      'Content-Type: text/plain; charset="UTF-8"',
+      '',
+      plainText,
+      `--${boundary}`,
+      'Content-Type: text/html; charset="UTF-8"',
+      '',
+      payload.html,
+      `--${boundary}--`,
+    ];
+    return `${headers.join('\r\n')}\r\n\r\n${parts.join('\r\n')}`;
+  }
+
+  // Inline image present → wrap the multipart/alternative block (as a body,
+  // without its own envelope headers) inside a multipart/related container.
+  const relBoundary = `related_${Date.now()}_${Math.random().toString(36).slice(2)}`;
+  const { contentId, mimeType, base64 } = payload.inlineImage;
+  const safeMimeType = sanitizeHeader(mimeType);
+  const safeContentId = sanitizeHeader(contentId);
+
+  const headers = [
+    ...envelopeHeaders,
+    `Content-Type: multipart/related; boundary="${relBoundary}"`,
+  ];
+
+  const alternativeBlock = [
+    `Content-Type: multipart/alternative; boundary="${boundary}"`,
+    '',
     `--${boundary}`,
     'Content-Type: text/plain; charset="UTF-8"',
     '',
@@ -96,6 +147,19 @@ export function buildMimeMessage(payload: GmailSendPayload): string {
     '',
     payload.html,
     `--${boundary}--`,
+  ].join('\r\n');
+
+  const parts = [
+    `--${relBoundary}`,
+    alternativeBlock,
+    `--${relBoundary}`,
+    `Content-Type: ${safeMimeType}`,
+    'Content-Transfer-Encoding: base64',
+    `Content-ID: <${safeContentId}>`,
+    'Content-Disposition: inline',
+    '',
+    wrap76(base64),
+    `--${relBoundary}--`,
   ];
 
   return `${headers.join('\r\n')}\r\n\r\n${parts.join('\r\n')}`;
