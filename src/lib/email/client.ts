@@ -1,4 +1,5 @@
 import { sendViaGmail, isGmailSenderConfigured } from './gmail-sender';
+import type { InlineImage } from '@/lib/email/inline-image';
 import { logSendToHubSpot } from '@/lib/hubspot/emails';
 
 export interface EmailPayload {
@@ -12,6 +13,8 @@ export interface EmailPayload {
   headers?: Record<string, string>;
   /** Gmail threadId — set to thread a reply into an existing conversation. */
   threadId?: string;
+  /** Optional inline (cid:) image, forwarded to the Gmail sender. */
+  inlineImage?: InlineImage;
 }
 
 export interface EmailSendResult {

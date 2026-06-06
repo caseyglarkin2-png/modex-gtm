@@ -1,6 +1,7 @@
 import type { PrismaClient } from '@prisma/client';
 import { sendEmail } from '@/lib/email/client';
 import { evaluateRecipientEligibility } from '@/lib/email/recipient-guard';
+import { fetchImageAsAttachment } from '@/lib/email/inline-image';
 import { wrapHtml } from '@/lib/email/templates';
 import { sanitizeEmailHtml } from '@/lib/email/sanitize';
 import { ensureLocalMeetingDealLink } from '@/lib/hubspot/deals';
@@ -210,13 +211,26 @@ export async function wrapAndSend(
   // Lightweight sanitization to keep email-safe HTML without pulling jsdom into the runtime.
   const sanitizedBody = sanitizeEmailHtml(bodyHtml);
 
+  // If a proof image is requested, try to fetch it as an inline (cid:) attachment
+  // so it renders even when remote images are blocked. On ANY failure (fetch
+  // error / not allowlisted) `fetchImageAsAttachment` returns null and we fall
+  // back to the hosted <img> URL — current behavior, nothing breaks.
+  const inline = imageUrl ? await fetchImageAsAttachment(imageUrl) : null;
+
   // Wrap plain text or already-composed HTML into branded template
   const isPlainText = !sanitizedBody.trim().startsWith('<');
   const html = isPlainText
-    ? wrapHtml(sanitizedBody, accountName ?? 'the team', to, undefined, imageUrl)
+    ? wrapHtml(sanitizedBody, accountName ?? 'the team', to, undefined, imageUrl, inline?.contentId)
     : sanitizedBody;
 
-  const response = await sendEmail({ to, cc: sanitizedCc, subject, html, headers: input.headers });
+  const response = await sendEmail({
+    to,
+    cc: sanitizedCc,
+    subject,
+    html,
+    headers: input.headers,
+    ...(inline ? { inlineImage: inline } : {}),
+  });
 
   return {
     providerMessageId: (response.headers?.['x-message-id'] as string) ?? null,
