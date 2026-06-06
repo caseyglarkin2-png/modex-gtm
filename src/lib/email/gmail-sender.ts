@@ -43,7 +43,17 @@ function base64Url(input: string): string {
     .replace(/=+$/g, '');
 }
 
-function buildMimeMessage(payload: GmailSendPayload): string {
+/** Sanitize any value interpolated into a MIME header, preventing header
+ *  injection via attacker-influenceable input. A CR/LF in a header value would
+ *  otherwise let a caller smuggle additional headers (silent Bcc, spoofed
+ *  Reply-To); we drop everything from the first CR/LF onward so no injected
+ *  header survives, then trim. Valid header values contain no CR/LF and are
+ *  unaffected. */
+function sanitizeHeader(value: string): string {
+  return String(value).replace(/[\r\n][\s\S]*$/, '').trim();
+}
+
+export function buildMimeMessage(payload: GmailSendPayload): string {
   const boundary = `boundary_${Date.now()}_${Math.random().toString(36).slice(2)}`;
   const plainText = (payload.text ?? payload.html)
     .replace(/<br\s*\/?>/gi, '\n')
@@ -57,18 +67,20 @@ function buildMimeMessage(payload: GmailSendPayload): string {
 
   const customHeaders = Object.entries(payload.headers ?? {}).map(([key, value]) => {
     const safeKey = key.replace(/[\r\n:]+/g, '').trim();
-    const safeValue = String(value).replace(/[\r\n]+/g, ' ').trim();
+    const safeValue = sanitizeHeader(value);
     return `${safeKey}: ${safeValue}`;
   });
 
-  const ccHeader = payload.cc?.length ? payload.cc.join(', ') : null;
+  const ccHeader = payload.cc?.length
+    ? payload.cc.map((entry) => sanitizeHeader(entry)).join(', ')
+    : null;
   const headers = [
-    `From: ${FROM_NAME} <${FROM_EMAIL}>`,
-    `To: ${payload.to}`,
+    `From: ${sanitizeHeader(FROM_NAME)} <${sanitizeHeader(FROM_EMAIL)}>`,
+    `To: ${sanitizeHeader(payload.to)}`,
     ccHeader ? `Cc: ${ccHeader}` : null,
-    payload.bcc ? `Bcc: ${payload.bcc}` : null,
-    payload.replyTo ? `Reply-To: ${payload.replyTo}` : null,
-    `Subject: ${payload.subject}`,
+    payload.bcc ? `Bcc: ${sanitizeHeader(payload.bcc)}` : null,
+    payload.replyTo ? `Reply-To: ${sanitizeHeader(payload.replyTo)}` : null,
+    `Subject: ${sanitizeHeader(payload.subject)}`,
     ...customHeaders,
     'MIME-Version: 1.0',
     `Content-Type: multipart/alternative; boundary="${boundary}"`,

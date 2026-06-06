@@ -43,3 +43,6 @@ tmp/
 
 # Outreach send-queues contain prospect PII — never commit (public repo)
 output/prospect-discovery/send-queue-*
+
+# Already-contacted exclusion lists (prospect PII)
+exclude/

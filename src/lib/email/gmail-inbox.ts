@@ -218,6 +218,51 @@ export async function getRecentReplies(sinceTimestamp?: string | number): Promis
   return replies;
 }
 
+/** Lowercase + strip a `+tag` from the local part: `foo+bar@x` → `foo@x`. */
+function baseAddress(email: string): string {
+  const addr = email.trim().toLowerCase();
+  const at = addr.indexOf('@');
+  if (at < 0) return addr;
+  const local = addr.slice(0, at).split('+')[0];
+  return `${local}${addr.slice(at)}`;
+}
+
+/**
+ * Has Casey ever exchanged email with this address? Ground truth for dedup —
+ * catches manual + agent sends that never reach our EmailLog. Best-effort:
+ * returns { exists:false } on any API error (never block an add on a transient).
+ */
+export async function threadExistsWith(email: string): Promise<{ exists: boolean; lastAt: Date | null }> {
+  try {
+    const config = getGmailConfig();
+    const accessToken = await getAccessToken();
+
+    const addr = baseAddress(email);
+    const listUrl = new URL(`${GMAIL_API}/users/${encodeURIComponent(config.userEmail)}/messages`);
+    listUrl.searchParams.set('q', `(to:${addr} OR from:${addr})`);
+    listUrl.searchParams.set('maxResults', '1');
+
+    const listRes = await fetch(listUrl.toString(), {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    });
+
+    if (!listRes.ok) {
+      const body = await listRes.text();
+      Sentry.captureMessage(`Gmail threadExistsWith list failed: ${listRes.status}`, {
+        extra: { body: body.slice(0, 500) },
+      });
+      return { exists: false, lastAt: null };
+    }
+
+    const listData = (await listRes.json()) as { messages?: GmailMessage[] };
+    const exists = (listData.messages?.length ?? 0) > 0;
+    return { exists, lastAt: null };
+  } catch (err) {
+    Sentry.captureException(err, { extra: { context: 'threadExistsWith' } });
+    return { exists: false, lastAt: null };
+  }
+}
+
 /**
  * Resolves just the Gmail threadId for a message id — used by the
  * one-shot thread-linkage backfill to thread historical sends.

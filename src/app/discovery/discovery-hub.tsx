@@ -14,6 +14,8 @@ import { CorridorsView } from './corridors-view';
 import { FilterBar } from './filter-bar';
 import { ProspectDetailSheet } from './prospect-detail-sheet';
 import { ProspectsTable } from './prospects-table';
+import { OutboxTab } from './outbox-tab';
+import { listQueue } from './queue-actions';
 import { ScanPanel } from './scan-panel';
 import { WeightControl } from './weight-control';
 import { usePinned } from './use-pinned';
@@ -34,7 +36,7 @@ interface Props {
   curation: CurationSummary;
 }
 
-const VALID_TABS = ['prospects', 'corridors', 'scan'] as const;
+const VALID_TABS = ['prospects', 'corridors', 'scan', 'outbox'] as const;
 
 /**
  * Reflect filter/tab state in the URL without triggering a Next.js navigation.
@@ -74,6 +76,7 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
   // Daily slice on by default; ?all=1 (or the widen toggle) opens the full set.
   const [dailySlice, setDailySlice] = useState<boolean>(searchParams.get('all') !== '1');
   const [selectedProspect, setSelectedProspect] = useState<RankedRow | null>(null);
+  const [outboxCount, setOutboxCount] = useState(0);
   const { pinned, toggle: togglePinned } = usePinned();
   const { touches, logTouch } = useTouchLog();
 
@@ -84,6 +87,11 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
     const stored = window.localStorage.getItem(WEIGHT_STORAGE_KEY);
     if (stored && stored in WEIGHT_PRESETS) setWeighting(stored);
     // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Populate the Outbox badge count on mount so it's visible before the tab opens.
+  useEffect(() => {
+    listQueue().then((r) => setOutboxCount(r.length));
   }, []);
 
   const corridorNames = useMemo(() => corridors.map((c) => c.name).sort(), [corridors]);
@@ -200,6 +208,7 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
           <TabsTrigger value="prospects">Worklist</TabsTrigger>
           <TabsTrigger value="corridors">Corridors</TabsTrigger>
           <TabsTrigger value="scan">Scan</TabsTrigger>
+          <TabsTrigger value="outbox">Outbox{outboxCount > 0 ? ` (${outboxCount})` : ''}</TabsTrigger>
         </TabsList>
 
         <TabsContent value="prospects" className="space-y-4">
@@ -296,6 +305,10 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
 
         <TabsContent value="scan">
           <ScanPanel output={output} curation={curation} />
+        </TabsContent>
+
+        <TabsContent value="outbox">
+          <OutboxTab onCountChange={setOutboxCount} />
         </TabsContent>
       </Tabs>
 

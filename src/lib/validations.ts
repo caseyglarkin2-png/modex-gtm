@@ -302,6 +302,21 @@ export const MessageEvolutionUpdateSchema = z.object({
 });
 export type MessageEvolutionUpdateInput = z.infer<typeof MessageEvolutionUpdateSchema>;
 
+// ── Draft Queue ───────────────────────────────────────
+export const QueueAddSchema = z.object({
+  toEmail: z.string().email(),
+  accountName: z.string().min(1),
+  personaName: z.string().optional(),
+  personaId: z.number().int().optional(),
+  subject: z.string().min(1).refine((s) => !/[\r\n]/.test(s), 'Subject may not contain newlines'),
+  body: z.string().min(1),
+  imageUrl: z.string().url().optional(),
+  source: z.enum(['casey', 'clawd']).default('casey'),
+  owner: z.string().email().optional(),
+});
+export const QueueAddBatchSchema = z.object({ items: z.array(QueueAddSchema).min(1).max(200) });
+export type QueueAddInput = z.infer<typeof QueueAddSchema>;
+
 export const CampaignGenerationContractSchema = z.object({
   campaignId: z.number().int().positive(),
   objective: z.string().min(4),
