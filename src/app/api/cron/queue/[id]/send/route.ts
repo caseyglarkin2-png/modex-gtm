@@ -3,6 +3,7 @@ import { isAuthorizedQueueAgent } from '@/lib/queue/agent-auth';
 import { rateLimit } from '@/lib/rate-limit';
 import { sendQueueItem } from '@/lib/queue/send';
 import { prodSendDeps } from '@/lib/queue/send-deps';
+import { onSendOutcome } from '@/lib/queue/sequence-runtime';
 import { prisma } from '@/lib/prisma';
 
 export const dynamic = 'force-dynamic';
@@ -31,5 +32,8 @@ export async function POST(req: NextRequest, { params }: { params: Promise<{ id:
   }
 
   const result = await sendQueueItem(numericId, { deps: prodSendDeps(prisma) });
+  // Sequence follow-through: schedule next step on sent, cancel run on reply/opt-out.
+  const item = await prisma.draftQueueItem.findUnique({ where: { id: numericId } });
+  if (item) await onSendOutcome(prisma, item, result);
   return NextResponse.json(result);
 }

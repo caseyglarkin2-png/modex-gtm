@@ -1,7 +1,7 @@
 'use server';
 
 import { randomUUID } from 'node:crypto';
-import type { DraftQueueItem } from '@prisma/client';
+import { Prisma, type DraftQueueItem } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 import { auth } from '@/lib/auth';
 import { threadExistsWith } from '@/lib/email/gmail-inbox';
@@ -9,6 +9,7 @@ import { dedupDecision } from '@/lib/queue/dedup';
 import { STATUS } from '@/lib/queue/types';
 import { sendQueueItem } from '@/lib/queue/send';
 import { prodSendDeps } from '@/lib/queue/send-deps';
+import { onSendOutcome } from '@/lib/queue/sequence-runtime';
 import { staggerTimes, clampToWindow, selectDue, DEFAULT_WINDOW } from '@/lib/queue/schedule';
 import { QueueAddSchema, type QueueAddInput } from '@/lib/validations';
 
@@ -143,7 +144,11 @@ export async function sendNow(id: number) {
     data: { status: STATUS.approved, approved_at: new Date() },
   });
   if (r.count === 0) return { ok: false as const, reason: 'not_found_or_forbidden' };
-  return sendQueueItem(id, { deps: prodSendDeps(prisma) });
+  const result = await sendQueueItem(id, { deps: prodSendDeps(prisma) });
+  // Sequence follow-through: schedule next step on sent, cancel run on reply/opt-out.
+  const item = await prisma.draftQueueItem.findUnique({ where: { id } });
+  if (item) await onSendOutcome(prisma, item, result);
+  return result;
 }
 
 /**
@@ -204,6 +209,72 @@ export async function retryDraft(
   return { ok: true };
 }
 
+export interface SequenceStepInput {
+  stepIndex: number;
+  delayDays: number;
+  subjectTemplate?: string;
+  bodyTemplate?: string;
+}
+
+/**
+ * Create a reusable sequence definition. step 0 is the initial send (delayDays ignored);
+ * steps 1..N are follow-ups scheduled delayDays after the prior step sends.
+ */
+export async function createSequence(
+  name: string,
+  steps: SequenceStepInput[],
+): Promise<{ ok: true; id: number } | { ok: false; reason: string }> {
+  const session = (await auth()) as SessionLike;
+  const owner = session?.user?.email;
+  if (!owner) return { ok: false, reason: 'unauthenticated' };
+  if (!name?.trim() || !Array.isArray(steps) || steps.length === 0) {
+    return { ok: false, reason: 'invalid' };
+  }
+  const row = await prisma.sequence.create({
+    data: { name: name.trim(), owner, steps: steps as unknown as Prisma.InputJsonValue },
+  });
+  return { ok: true, id: row.id };
+}
+
+/**
+ * Enroll existing draft items as step 0 of new runs of `sequenceId`. Each gets a
+ * fresh sequence_run_id. Owner-scoped (admins bypass).
+ */
+export async function enrollInSequence(
+  draftIds: number[],
+  sequenceId: number,
+): Promise<{ ok: true; enrolled: number } | { ok: false; reason: string }> {
+  const session = (await auth()) as SessionLike;
+  if (!session?.user?.email && session?.user?.role !== 'admin') {
+    return { ok: false, reason: 'unauthenticated' };
+  }
+  let enrolled = 0;
+  for (const id of draftIds) {
+    // Each draft starts its OWN run -> a distinct sequence_run_id per draft.
+    const r = await prisma.draftQueueItem.updateMany({
+      where: ownerWhere(id, session, [STATUS.draft, STATUS.approved]),
+      data: { sequence_id: sequenceId, sequence_run_id: randomUUID(), step_index: 0 },
+    });
+    enrolled += r.count;
+  }
+  return { ok: true, enrolled };
+}
+
+/** List sequences owned by the caller (admins: all). */
+export async function listSequences(): Promise<
+  Array<{ id: number; name: string; steps: unknown }>
+> {
+  const session = (await auth()) as SessionLike;
+  const email = session?.user?.email;
+  const role = session?.user?.role;
+  if (!email && role !== 'admin') return [];
+  return prisma.sequence.findMany({
+    where: role === 'admin' ? {} : { owner: email ?? undefined },
+    orderBy: { created_at: 'desc' },
+    select: { id: true, name: true, steps: true },
+  });
+}
+
 /**
  * Admin-only, operator-triggered send of the currently-due approved items.
  * (A manual admin trigger, not an autonomous cron.)
@@ -231,6 +302,9 @@ export async function runDueNow(): Promise<
     if (r.status === 'sent') sent++;
     else if (r.status === 'failed') failed++;
     else skipped++;
+    // Re-fetch so sent_at / email_log_id are populated, then run follow-through.
+    const fresh = await prisma.draftQueueItem.findUnique({ where: { id: item.id } });
+    if (fresh) await onSendOutcome(prisma, fresh, r);
   }
   return { ok: true, sent, failed, skipped };
 }

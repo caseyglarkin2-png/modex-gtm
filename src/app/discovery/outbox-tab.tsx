@@ -1,7 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { ChevronDown, ChevronRight, Loader2, RotateCcw, Send, Trash2 } from 'lucide-react';
+import { ChevronDown, ChevronRight, Loader2, Plus, RotateCcw, Send, Trash2 } from 'lucide-react';
 import { toast } from 'sonner';
 import type { DraftQueueItem } from '@prisma/client';
 import { Button } from '@/components/ui/button';
@@ -9,13 +9,18 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import {
   approveBatch,
+  createSequence,
+  enrollInSequence,
   listQueue,
+  listSequences,
   removeDraft,
   retryDraft,
   runDueNow,
   sendNow,
   updateDraft,
 } from './queue-actions';
+
+type SequenceSummary = { id: number; name: string; steps: unknown };
 
 const STATUS_STYLE: Record<string, { label: string; className: string }> = {
   draft: { label: 'draft', className: 'text-neutral-500 border-neutral-500/30' },
@@ -150,6 +155,15 @@ function OutboxRow({ item, onRefresh, selected, onToggleSelect }: OutboxRowProps
                   {style.label}
                 </Badge>
               )}
+              {item.sequence_id != null && (
+                <Badge
+                  variant="outline"
+                  className="text-[9px] text-purple-600 border-purple-600/40"
+                  title="Enrolled in a sequence"
+                >
+                  seq
+                </Badge>
+              )}
             </div>
             <div className="truncate text-xs text-[var(--muted-foreground)]">
               {item.account_name}
@@ -260,6 +274,69 @@ export function OutboxTab({ onCountChange }: OutboxTabProps) {
   const [scheduledFor, setScheduledFor] = useState('');
   const [staggerMinutes, setStaggerMinutes] = useState(2);
   const [scheduling, setScheduling] = useState(false);
+
+  // Sequences UI state
+  const [sequences, setSequences] = useState<SequenceSummary[]>([]);
+  const [showSequences, setShowSequences] = useState(false);
+  const [seqName, setSeqName] = useState('');
+  const [seqFollowups, setSeqFollowups] = useState<number[]>([3]);
+  const [creatingSeq, setCreatingSeq] = useState(false);
+  const [enrollSeqId, setEnrollSeqId] = useState('');
+  const [enrolling, setEnrolling] = useState(false);
+
+  const refreshSequences = useCallback(() => {
+    listSequences().then(setSequences);
+  }, []);
+
+  useEffect(() => {
+    refreshSequences();
+  }, [refreshSequences]);
+
+  async function handleCreateSequence() {
+    if (!seqName.trim()) {
+      toast.error('Name the sequence first');
+      return;
+    }
+    setCreatingSeq(true);
+    try {
+      const steps = [
+        { stepIndex: 0, delayDays: 0 },
+        ...seqFollowups.map((delayDays, i) => ({ stepIndex: i + 1, delayDays })),
+      ];
+      const res = await createSequence(seqName.trim(), steps);
+      if (res.ok) {
+        toast.success('Sequence created');
+        setSeqName('');
+        setSeqFollowups([3]);
+        refreshSequences();
+      } else {
+        toast.error(`Could not create: ${res.reason}`);
+      }
+    } finally {
+      setCreatingSeq(false);
+    }
+  }
+
+  async function handleEnroll() {
+    const sequenceId = Number(enrollSeqId);
+    if (!sequenceId) {
+      toast.error('Pick a sequence first');
+      return;
+    }
+    setEnrolling(true);
+    try {
+      const res = await enrollInSequence([...selectedIds], sequenceId);
+      if (res.ok) {
+        toast.success(`${res.enrolled} enrolled`);
+        clearSelection();
+        refresh();
+      } else {
+        toast.error(`Could not enroll: ${res.reason}`);
+      }
+    } finally {
+      setEnrolling(false);
+    }
+  }
 
   const refresh = useCallback(() => {
     setLoading(true);
@@ -448,6 +525,98 @@ export function OutboxTab({ onCountChange }: OutboxTabProps) {
         ))}
       </div>
 
+      {/* Sequences panel */}
+      <div className="rounded-md border border-[var(--border)] text-xs">
+        <button
+          type="button"
+          onClick={() => setShowSequences((v) => !v)}
+          className="flex w-full items-center gap-1 p-2 font-medium text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
+        >
+          {showSequences ? (
+            <ChevronDown className="h-3 w-3" />
+          ) : (
+            <ChevronRight className="h-3 w-3" />
+          )}
+          Sequences ({sequences.length})
+        </button>
+        {showSequences && (
+          <div className="space-y-3 border-t border-[var(--border)] p-2">
+            <div className="space-y-2">
+              <span className="font-medium">New sequence</span>
+              <Input
+                className="h-7 text-xs"
+                placeholder="Sequence name"
+                value={seqName}
+                onChange={(e) => setSeqName(e.target.value)}
+                aria-label="Sequence name"
+              />
+              <div className="space-y-1">
+                <span className="text-[var(--muted-foreground)]">
+                  Follow-ups (days after prior step)
+                </span>
+                {seqFollowups.map((days, i) => (
+                  <div key={i} className="flex items-center gap-2">
+                    <span className="text-[var(--muted-foreground)]">Step {i + 1}</span>
+                    <Input
+                      type="number"
+                      min={0}
+                      className="h-7 w-20 text-xs"
+                      value={days}
+                      onChange={(e) =>
+                        setSeqFollowups((prev) =>
+                          prev.map((d, j) => (j === i ? Number(e.target.value) : d)),
+                        )
+                      }
+                      aria-label={`Follow-up step ${i + 1} delay days`}
+                    />
+                    <Button
+                      size="sm"
+                      variant="ghost"
+                      className="h-7 px-2 text-xs"
+                      onClick={() => setSeqFollowups((prev) => prev.filter((_, j) => j !== i))}
+                      aria-label={`Remove follow-up step ${i + 1}`}
+                    >
+                      <Trash2 className="h-3 w-3" />
+                    </Button>
+                  </div>
+                ))}
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="h-7 gap-1 text-xs"
+                  onClick={() => setSeqFollowups((prev) => [...prev, 3])}
+                >
+                  <Plus className="h-3 w-3" />
+                  Add step
+                </Button>
+              </div>
+              <Button
+                size="sm"
+                variant="default"
+                className="h-7 gap-1 text-xs"
+                onClick={handleCreateSequence}
+                disabled={creatingSeq}
+              >
+                {creatingSeq ? <Loader2 className="h-3 w-3 animate-spin" /> : null}
+                Create
+              </Button>
+            </div>
+            {sequences.length > 0 && (
+              <ul className="space-y-1 border-t border-[var(--border)] pt-2 text-[var(--muted-foreground)]">
+                {sequences.map((s) => (
+                  <li key={s.id} className="truncate">
+                    {s.name}{' '}
+                    <span className="text-[10px]">
+                      ({Array.isArray(s.steps) ? s.steps.length : 0} steps)
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </div>
+        )}
+      </div>
+
       {/* Select-all (visible) */}
       {selectableVisible.length > 0 && (
         <label className="flex items-center gap-2 text-xs text-[var(--muted-foreground)]">
@@ -500,6 +669,33 @@ export function OutboxTab({ onCountChange }: OutboxTabProps) {
                 )}
                 Retry failed ({selectedRetryable.length})
               </Button>
+            )}
+            {sequences.length > 0 && (
+              <span className="flex items-center gap-1">
+                <select
+                  className="h-7 rounded-md border border-[var(--border)] bg-transparent px-1 text-xs"
+                  value={enrollSeqId}
+                  onChange={(e) => setEnrollSeqId(e.target.value)}
+                  aria-label="Sequence to enroll in"
+                >
+                  <option value="">Sequence…</option>
+                  {sequences.map((s) => (
+                    <option key={s.id} value={s.id}>
+                      {s.name}
+                    </option>
+                  ))}
+                </select>
+                <Button
+                  size="sm"
+                  variant="outline"
+                  className="h-7 gap-1 text-xs"
+                  onClick={handleEnroll}
+                  disabled={batchBusy || enrolling || !enrollSeqId}
+                >
+                  {enrolling ? <Loader2 className="h-3 w-3 animate-spin" /> : null}
+                  Enroll in sequence
+                </Button>
+              </span>
             )}
             <Button
               size="sm"

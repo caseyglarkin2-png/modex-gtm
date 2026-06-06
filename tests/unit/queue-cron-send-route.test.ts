@@ -5,9 +5,14 @@ process.env.QUEUE_AGENT_SECRET = 'test-secret';
 
 const mockedSendQueueItem = vi.fn();
 
+const mockedFindUnique = vi.fn();
+
 vi.mock('@/lib/queue/send', () => ({ sendQueueItem: mockedSendQueueItem }));
 vi.mock('@/lib/queue/send-deps', () => ({ prodSendDeps: vi.fn(() => ({})) }));
-vi.mock('@/lib/prisma', () => ({ prisma: {} }));
+// Non-sequence item -> onSendOutcome's scheduleNextStep is a no-op.
+vi.mock('@/lib/prisma', () => ({
+  prisma: { draftQueueItem: { findUnique: mockedFindUnique } },
+}));
 
 const { POST } = await import('@/app/api/cron/queue/[id]/send/route');
 
@@ -24,6 +29,7 @@ describe('POST /api/cron/queue/:id/send (Clawd send one)', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     mockedSendQueueItem.mockResolvedValue(sendResult);
+    mockedFindUnique.mockResolvedValue({ id: 5, sequence_id: null });
   });
 
   it('rejects with 401 when no Authorization header is present (sendQueueItem not called)', async () => {
