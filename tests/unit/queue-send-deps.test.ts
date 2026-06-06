@@ -18,6 +18,13 @@ vi.mock('@/lib/source-backed/metrics', () => ({ recordSourceBackedMetric: vi.fn(
 vi.mock('@/lib/hubspot/deals', () => ({ ensureLocalMeetingDealLink: vi.fn(async () => undefined) }));
 vi.mock('@/lib/agent-actions/cache', () => ({ markAgentActionCacheStale: vi.fn(async () => undefined) }));
 
+// ── QUEUE-ONLY comms-awareness pre-send guard ──
+// recipientCommsStatus drives the post-evaluateSendGuards block in prodSendDeps.
+// Default it to the non-blocking 'new' state so the happy path stays green;
+// individual tests override the resolved state.
+const mockedRecipientCommsStatus = vi.fn(async () => ({ state: 'new', lastAt: null, detail: '' }));
+vi.mock('@/lib/queue/comms-status', () => ({ recipientCommsStatus: mockedRecipientCommsStatus }));
+
 // ── Prisma mock (the only persistence boundary) ──
 const mockedPrisma = {
   draftQueueItem: {
@@ -63,6 +70,7 @@ const ITEM = {
 
 beforeEach(() => {
   vi.clearAllMocks();
+  mockedRecipientCommsStatus.mockResolvedValue({ state: 'new', lastAt: null, detail: '' });
   mockedEnforceOneAccountInvariant.mockResolvedValue({
     ok: true,
     canonicalAccountName: 'Acme Foods',
@@ -142,5 +150,36 @@ describe('prodSendDeps (real deps, mocked prisma + network)', () => {
     const deps = prodSendDeps(prisma);
 
     await expect(deps.send({ ...ITEM })).rejects.toBeInstanceOf(RateLimitedError);
+  });
+
+  it('QUEUE-ONLY guard blocks an in_thread recipient even after evaluateSendGuards passes', async () => {
+    mockedRecipientCommsStatus.mockResolvedValue({ state: 'in_thread', lastAt: null, detail: '' });
+    const prisma = mockedPrisma as any;
+    const deps = prodSendDeps(prisma);
+
+    const result = await deps.guard({ ...ITEM });
+
+    expect(result).toEqual({ ok: false, reason: 'in_thread' });
+    expect(mockedRecipientCommsStatus).toHaveBeenCalledWith('Alice@Example.com', expect.anything());
+  });
+
+  it('QUEUE-ONLY guard blocks an unsubscribed recipient surfaced only by comms status', async () => {
+    mockedRecipientCommsStatus.mockResolvedValue({ state: 'unsubscribed', lastAt: null, detail: '' });
+    const prisma = mockedPrisma as any;
+    const deps = prodSendDeps(prisma);
+
+    const result = await deps.guard({ ...ITEM });
+
+    expect(result).toEqual({ ok: false, reason: 'unsubscribed' });
+  });
+
+  it('QUEUE-ONLY guard allows a brand-new recipient (comms state new)', async () => {
+    mockedRecipientCommsStatus.mockResolvedValue({ state: 'new', lastAt: null, detail: '' });
+    const prisma = mockedPrisma as any;
+    const deps = prodSendDeps(prisma);
+
+    const result = await deps.guard({ ...ITEM });
+
+    expect(result).toEqual({ ok: true });
   });
 });
