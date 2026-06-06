@@ -1,4 +1,7 @@
 import { STATUS, type SendOutcome } from './types';
+import { RateLimitedError } from './errors';
+
+const RATE_LIMIT_BACKOFF_MS = 15 * 60 * 1000; // 15 min
 
 export interface SendDeps {
   /** approved -> sending guarded updateMany; returns rows affected (1 = we own it, 0 = lost). */
@@ -12,6 +15,8 @@ export interface SendDeps {
   /** Logging + CRM side-effects (may throw after the email already went out). */
   runSideEffects: (item: Record<string, unknown>, sent: { providerMessageId: string | null; threadId: string | null }) => Promise<{ emailLogId: number | null }>;
   finalize: (id: number, data: Record<string, unknown>) => Promise<void>;
+  /** Reschedule a transient failure back to approved for a later retry. */
+  reschedule: (id: number, retryAt: Date) => Promise<void>;
 }
 
 export async function sendQueueItem(id: number, opts: { deps: SendDeps }): Promise<SendOutcome> {
@@ -37,6 +42,10 @@ export async function sendQueueItem(id: number, opts: { deps: SendDeps }): Promi
   } catch (err) {
     const errorMessage = err instanceof Error ? err.message : String(err);
     const alreadySent = sent !== null;
+    if (err instanceof RateLimitedError && !alreadySent) {
+      await deps.reschedule(id, new Date(Date.now() + RATE_LIMIT_BACKOFF_MS));
+      return { status: STATUS.skipped, skippedReason: 'rate_limited' };
+    }
     await deps.finalize(id, { status: STATUS.failed, error_message: errorMessage, sideeffects_done: false });
     return { status: STATUS.failed, errorMessage, alreadySent };
   }

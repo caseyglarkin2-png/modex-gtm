@@ -46,6 +46,7 @@ const mockedPrisma = {
 
 const { prodSendDeps } = await import('@/lib/queue/send-deps');
 const { sendQueueItem } = await import('@/lib/queue/send');
+const { RateLimitedError } = await import('@/lib/queue/errors');
 
 const ITEM = {
   id: 5,
@@ -133,5 +134,13 @@ describe('prodSendDeps (real deps, mocked prisma + network)', () => {
     }
     expect(mockedSendEmail).not.toHaveBeenCalled();
     expect(mockedPrisma.emailLog.create).not.toHaveBeenCalled();
+  });
+
+  it('maps a 429 at the Gmail send boundary to a RateLimitedError (retryable)', async () => {
+    mockedSendEmail.mockRejectedValue(new Error('Gmail send failed (429): rateLimitExceeded'));
+    const prisma = mockedPrisma as any;
+    const deps = prodSendDeps(prisma);
+
+    await expect(deps.send({ ...ITEM })).rejects.toBeInstanceOf(RateLimitedError);
   });
 });

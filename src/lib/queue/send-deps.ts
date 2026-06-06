@@ -6,6 +6,7 @@ import {
   type PerformSendInput,
 } from '@/lib/email/perform-send';
 import type { SendDeps } from './send';
+import { RateLimitedError } from './errors';
 
 /** Map a DraftQueueItem row to the shared PerformSendInput. */
 function toInput(item: Record<string, unknown>): PerformSendInput {
@@ -48,7 +49,16 @@ export function prodSendDeps(prisma: any): SendDeps {
       return { ok: true };
     },
     send: async (item) => {
-      const r = await wrapAndSend(toInput(item), ctx?.sanitizedCc ?? []);
+      let r: Awaited<ReturnType<typeof wrapAndSend>>;
+      try {
+        r = await wrapAndSend(toInput(item), ctx?.sanitizedCc ?? []);
+      } catch (err) {
+        const msg = err instanceof Error ? err.message : String(err);
+        if (/\b429\b|rate.?limit|userRateLimitExceeded|quotaExceeded/i.test(msg)) {
+          throw new RateLimitedError(msg);
+        }
+        throw err;
+      }
       ctx = {
         html: r.html,
         hubspotEngagementId: r.hubspotEngagementId,
@@ -68,5 +78,12 @@ export function prodSendDeps(prisma: any): SendDeps {
     },
     finalize: (id, data) =>
       prisma.draftQueueItem.update({ where: { id }, data }).then(() => undefined),
+    reschedule: (id, retryAt) =>
+      prisma.draftQueueItem
+        .update({
+          where: { id },
+          data: { status: STATUS.approved, scheduled_for: retryAt, claimed_at: null },
+        })
+        .then(() => undefined),
   };
 }
