@@ -7,6 +7,24 @@ import {
 } from '@/lib/email/perform-send';
 import type { SendDeps } from './send';
 import { RateLimitedError } from './errors';
+import { recipientCommsStatus, type CommsDeps } from './comms-status';
+import { threadExistsWith } from '@/lib/email/gmail-inbox';
+import { hubspotLastContacted } from '@/lib/hubspot/contacts';
+
+/** Real comms-awareness signals for the QUEUE-ONLY pre-send guard. */
+function prodCommsDeps(prisma: any): CommsDeps {
+  return {
+    isUnsubscribed: async (email) =>
+      !!(await prisma.unsubscribedEmail.findUnique({ where: { email: email.toLowerCase() } })),
+    gmailThread: async (email) => (await threadExistsWith(email)).exists,
+    emailLogHit: async (email) =>
+      !!(await prisma.emailLog.findFirst({
+        where: { to_email: { equals: email.toLowerCase(), mode: 'insensitive' } },
+        select: { id: true },
+      })),
+    hubspot: (email) => hubspotLastContacted(email),
+  };
+}
 
 /** Map a DraftQueueItem row to the shared PerformSendInput. */
 function toInput(item: Record<string, unknown>): PerformSendInput {
@@ -46,6 +64,11 @@ export function prodSendDeps(prisma: any): SendDeps {
       const g = await evaluateSendGuards(prisma, toInput(item));
       if (!g.ok) return { ok: false, reason: g.block.code ?? 'blocked' };
       ctx = { html: '', hubspotEngagementId: null, sanitizedCc: g.sanitizedCc };
+      // QUEUE-ONLY comms guard: don't send to someone now unsubscribed or mid-thread.
+      const comms = await recipientCommsStatus(item.to_email as string, prodCommsDeps(prisma));
+      if (comms.state === 'unsubscribed' || comms.state === 'in_thread') {
+        return { ok: false, reason: comms.state };
+      }
       return { ok: true };
     },
     send: async (item) => {
