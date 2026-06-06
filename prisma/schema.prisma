@@ -714,7 +714,22 @@ model DraftQueueItem {
   @@index([owner, status])
   @@index([to_email])
   @@index([sequence_run_id, status])
+  @@index([parent_item_id])
   @@map("draft_queue_items")
+}
+
+/// A linear outreach sequence (one-time send = length-1). Steps are JSON:
+/// [{ stepIndex, delayDays, subjectTemplate?, bodyTemplate? }]. An enrollment
+/// stamps a sequence_run_id on every DraftQueueItem it creates.
+model Sequence {
+  id         Int      @id @default(autoincrement())
+  name       String
+  owner      String   @default("casey@freightroll.com")
+  steps      Json
+  created_at DateTime @default(now())
+
+  @@index([owner])
+  @@map("sequences")
 }
 
 model SendJob {
