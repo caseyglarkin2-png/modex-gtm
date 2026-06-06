@@ -732,6 +732,21 @@ model Sequence {
   @@map("sequences")
 }
 
+/// Per-user Gmail refresh token, AES-256-GCM encrypted at rest. Lets a non-Casey
+/// operator (e.g. Jake) send as themselves. Captured on Google sign-in; the send
+/// path resolves the token by the queue item's owner, falling back to the Casey
+/// env token when absent. Encryption key: TOKEN_ENCRYPTION_KEY.
+model GmailToken {
+  email      String   @id
+  encrypted  String
+  iv         String
+  auth_tag   String
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("gmail_tokens")
+}
+
 model SendJob {
   id               Int       @id @default(autoincrement())
   status           String    @default("pending") // pending | processing | completed | failed | partial | cancelled

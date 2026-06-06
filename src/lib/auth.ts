@@ -100,6 +100,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             await prisma.generatedContent.create({
               data: { account_name: '__system__', content_type: 'google_refresh_token', content: account.refresh_token, tone: 'system' },
             });
+
+            // Also store this user's refresh token under their own identity
+            // (encrypted) so they can send as themselves. Falls back gracefully
+            // (no-op) when TOKEN_ENCRYPTION_KEY is unset — never blocks sign-in.
+            const signingInEmail = token.email as string | undefined;
+            if (signingInEmail) {
+              const { storeRefreshTokenForUser } = await import('@/lib/email/gmail-token-store');
+              await storeRefreshTokenForUser(prisma, signingInEmail, account.refresh_token);
+            }
           } catch { /* non-blocking */ }
         }
       }

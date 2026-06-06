@@ -26,6 +26,14 @@ vi.mock('@/lib/agent-actions/cache', () => ({ markAgentActionCacheStale: vi.fn(a
 const mockedNewestInboundFrom = vi.fn(async (_email: string): Promise<Date | null> => null);
 vi.mock('@/lib/email/gmail-inbox', () => ({ newestInboundFrom: mockedNewestInboundFrom }));
 
+// ── Per-identity send: owner's stored Gmail refresh token ──
+// Default null (no per-user token) so the happy path falls back to the Casey
+// env token exactly as today. Individual tests override per owner. The resolved
+// `sender` is threaded through wrapAndSend → sendEmail, so we assert on the
+// (mocked) sendEmail payload's `sender` field.
+const mockedGetRefreshTokenFor = vi.fn(async (_prisma: unknown, _email: string): Promise<string | null> => null);
+vi.mock('@/lib/email/gmail-token-store', () => ({ getRefreshTokenFor: mockedGetRefreshTokenFor }));
+
 // ── Prisma mock (the only persistence boundary) ──
 const mockedPrisma = {
   draftQueueItem: {
@@ -76,6 +84,7 @@ const ITEM = {
 beforeEach(() => {
   vi.clearAllMocks();
   mockedNewestInboundFrom.mockResolvedValue(null);
+  mockedGetRefreshTokenFor.mockResolvedValue(null);
   mockedEnforceOneAccountInvariant.mockResolvedValue({
     ok: true,
     canonicalAccountName: 'Acme Foods',
@@ -234,5 +243,33 @@ describe('prodSendDeps (real deps, mocked prisma + network)', () => {
     expect(mockedSendEmail).toHaveBeenCalledWith(
       expect.objectContaining({ subject: 'Quarterly check-in' }),
     );
+  });
+
+  it('Case A: owner with a stored refresh token sends AS themselves (sender threaded)', async () => {
+    // jake owns this item and has a per-user token → send as jake.
+    mockedGetRefreshTokenFor.mockResolvedValue('jake-rt');
+    const prisma = mockedPrisma as any;
+    const deps = prodSendDeps(prisma);
+
+    await deps.send({ ...ITEM, owner: 'jake@freightroll.com' });
+
+    expect(mockedGetRefreshTokenFor).toHaveBeenCalledWith(prisma, 'jake@freightroll.com');
+    expect(mockedSendEmail).toHaveBeenCalledWith(
+      expect.objectContaining({
+        sender: { refreshToken: 'jake-rt', userEmail: 'jake@freightroll.com' },
+      }),
+    );
+  });
+
+  it('Case B: owner without a stored token falls back to the Casey env token (sender undefined)', async () => {
+    // No per-user token → sender omitted → env/Casey behavior, exactly as today.
+    mockedGetRefreshTokenFor.mockResolvedValue(null);
+    const prisma = mockedPrisma as any;
+    const deps = prodSendDeps(prisma);
+
+    await deps.send({ ...ITEM, owner: 'jake@freightroll.com' });
+
+    expect(mockedSendEmail).toHaveBeenCalledTimes(1);
+    expect(mockedSendEmail.mock.calls[0][0].sender).toBeUndefined();
   });
 });
