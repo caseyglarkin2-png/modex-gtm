@@ -5,6 +5,8 @@ import { Prisma, type DraftQueueItem } from '@prisma/client';
 import { prisma } from '@/lib/prisma';
 import { auth } from '@/lib/auth';
 import { threadExistsWith } from '@/lib/email/gmail-inbox';
+import { wrapHtml } from '@/lib/email/templates';
+import { resolveSenderIdentity } from '@/lib/email/sender-identity';
 import { dedupDecision } from '@/lib/queue/dedup';
 import { STATUS } from '@/lib/queue/types';
 import { sendQueueItem } from '@/lib/queue/send';
@@ -136,6 +138,33 @@ export async function updateDraft(
   });
   if (r.count === 0) return { ok: false, reason: 'not_found_or_forbidden' };
   return { ok: true };
+}
+
+/**
+ * Owner-scoped render of the real branded email HTML (signature + inline image)
+ * for an Outbox preview. Never throws: a missing UNSUBSCRIBE_SECRET or any other
+ * render failure resolves to a soft error instead of a 500.
+ */
+export async function renderDraftPreview(
+  id: number,
+): Promise<{ ok: true; html: string } | { ok: false; reason: string }> {
+  try {
+    const session = (await auth()) as SessionLike;
+    const item = await prisma.draftQueueItem.findFirst({ where: ownerWhere(id, session) });
+    if (!item) return { ok: false, reason: 'not_found_or_forbidden' };
+    const html = wrapHtml(
+      item.body,
+      item.account_name || 'the team',
+      item.to_email,
+      undefined,
+      item.image_url || undefined,
+      undefined,
+      resolveSenderIdentity(item.owner),
+    );
+    return { ok: true, html };
+  } catch {
+    return { ok: false, reason: 'render_failed' };
+  }
 }
 
 /** Owner-scoped delete. Refuses to delete an already-sent item. */

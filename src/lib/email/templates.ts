@@ -5,6 +5,7 @@
  */
 
 import { generateToken } from './unsubscribe-token';
+import { resolveSenderIdentity, type SenderIdentity } from './sender-identity';
 
 const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 
@@ -33,7 +34,7 @@ export function htmlToPlainText(html: string): string {
     .trim();
 }
 
-export function wrapHtml(bodyText: string, accountName: string, recipientEmail?: string, emailLogId?: number, imageUrl?: string, cid?: string): string {
+export function wrapHtml(bodyText: string, accountName: string, recipientEmail?: string, emailLogId?: number, imageUrl?: string, cid?: string, identity: SenderIdentity = resolveSenderIdentity()): string {
   const escaped = bodyText
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
@@ -87,8 +88,8 @@ export function wrapHtml(bodyText: string, accountName: string, recipientEmail?:
           <tr>
             <td style="padding-top:16px;">
               <!-- Name + Title -->
-              <p style="margin:0 0 2px; font-size:14px; font-weight:600; color:#1a1a1a;">Casey Larkin</p>
-              <p style="margin:0 0 10px; font-size:13px; color:#6b7280;">GTM Lead · <span style="color:#0e7490; font-weight:600;">Yard</span><span style="font-weight:600; color:#1a1a1a;">Flow</span> by FreightRoll</p>
+              <p style="margin:0 0 2px; font-size:14px; font-weight:600; color:#1a1a1a;">${identity.name}</p>
+              <p style="margin:0 0 10px; font-size:13px; color:#6b7280;">${identity.role} · <span style="color:#0e7490; font-weight:600;">Yard</span><span style="font-weight:600; color:#1a1a1a;">Flow</span> by FreightRoll</p>
               <!-- Value prop — one line, understated -->
               <p style="margin:0 0 10px; font-size:12px; color:#9ca3af; font-style:italic;">The First Yard Network System. Deterministic throughput across every facility.</p>
               <!-- Links -->
@@ -97,7 +98,7 @@ export function wrapHtml(bodyText: string, accountName: string, recipientEmail?:
                 <span style="color:#d1d5db; margin:0 6px;">|</span>
                 <a href="https://yardflow.ai/roi" style="color:#0e7490; text-decoration:none; font-weight:500;">Run ROI</a>
                 <span style="color:#d1d5db; margin:0 6px;">|</span>
-                <a href="${BOOKING_LINK}" style="color:#0e7490; text-decoration:none; font-weight:500;">Book a Network Audit</a>
+                <a href="${identity.bookingLink ?? BOOKING_LINK}" style="color:#0e7490; text-decoration:none; font-weight:500;">Book a Network Audit</a>
               </p>
             </td>
           </tr>

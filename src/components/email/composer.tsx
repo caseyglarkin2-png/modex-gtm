@@ -12,7 +12,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Link2, Mail, Send, Sparkles, Eye, Pencil } from 'lucide-react';
+import { Link2, Loader2, Mail, Send, Sparkles, Eye, Pencil } from 'lucide-react';
 import { GeneratorDialog } from '@/components/ai/generator-dialog';
 import { VoicePreviewButton } from '@/components/voice-preview-button';
 import { readApiResponse } from '@/lib/api-response';
@@ -111,6 +111,7 @@ export function EmailComposer({
   const [body, setBody] = useState(initialBody ?? '');
   const [imageUrl, setImageUrl] = useState(initialImageUrl ?? '');
   const [sending, setSending] = useState(false);
+  const [queueing, setQueueing] = useState(false);
   const [draftingFromIntel, setDraftingFromIntel] = useState(false);
   const [lastStatus, setLastStatus] = useState<{ provider?: string; hubspotId?: string | null } | null>(null);
   const [previewMode, setPreviewMode] = useState(false);
@@ -242,6 +243,54 @@ export function EmailComposer({
       toast.error(err instanceof Error ? err.message : 'Email send failed');
     } finally {
       setSending(false);
+    }
+  }
+
+  async function handleQueue() {
+    if (!to || !subject || !body) {
+      toast.error('Fill in To, Subject, and Body');
+      return;
+    }
+    // accountName is the composer's account prop; fall back to the recipient's
+    // email domain so the queue schema's non-empty accountName always holds.
+    const resolvedAccount = accountName.trim() || to.split('@')[1] || to;
+    setQueueing(true);
+    try {
+      // Lazy-import the server action so this client component does not pull the
+      // 'use server' queue-actions module (and its next-auth chain) into its
+      // static graph. Next strips server code from the client bundle either way;
+      // this also keeps vitest component renders from resolving next/server.
+      const { addToQueue } = await import('@/app/discovery/queue-actions');
+      const result = await addToQueue({
+        toEmail: to,
+        accountName: resolvedAccount,
+        personaName: personaName || undefined,
+        subject,
+        body,
+        imageUrl: imageUrl || undefined,
+        source: 'casey',
+      });
+      if (result.ok) {
+        toast.success('Queued for review in the Outbox.');
+        return;
+      }
+      switch (result.reason) {
+        case 'already_queued':
+          toast.message('Already queued for this recipient.');
+          break;
+        case 'unsubscribed':
+          toast.error('That recipient is unsubscribed.');
+          break;
+        case 'unauthenticated':
+          toast.error('Sign in to queue a draft.');
+          break;
+        default:
+          toast.error(`Could not queue: ${result.reason}`);
+      }
+    } catch (err) {
+      toast.error(err instanceof Error ? err.message : 'Could not queue draft');
+    } finally {
+      setQueueing(false);
     }
   }
 
@@ -392,7 +441,16 @@ export function EmailComposer({
             ) : null}
           </div>
           <Button variant="outline" onClick={() => setOpen(false)}>Cancel</Button>
-          <Button onClick={handleSend} disabled={sending || !to.trim()} className="gap-1.5">
+          <Button
+            variant="outline"
+            onClick={handleQueue}
+            disabled={queueing || sending || !to.trim()}
+            className="gap-1.5"
+          >
+            {queueing ? <Loader2 className="h-3.5 w-3.5 animate-spin" /> : <Pencil className="h-3.5 w-3.5" />}
+            {queueing ? 'Queuing...' : 'Queue draft'}
+          </Button>
+          <Button onClick={handleSend} disabled={sending || queueing || !to.trim()} className="gap-1.5">
             <Send className="h-3.5 w-3.5" />
             {sending ? 'Sending...' : 'Send'}
           </Button>
