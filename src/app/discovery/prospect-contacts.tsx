@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { EmailComposer } from '@/components/email/composer';
 import { buildOutreach } from '@/lib/discovery/outreach';
+import { assignCommitteeAngles } from '@/lib/discovery/angles';
 import type { RankedRow } from '@/lib/discovery/scoring';
 import type { ProspectContact } from '@/lib/discovery/contacts';
 import { findProspectContacts, inferContactEmail, researchProspectContacts, type ProspectContactsResult } from './actions';
@@ -173,11 +174,14 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
     try {
       let queued = 0;
       let skipped = 0;
+      // Give each committee member a distinct angle so the thread isn't N copies
+      // of one template. Single-contact Queue and the composer keep the default.
+      const angleKeys = assignCommitteeAngles(prospect, contacts.length);
       for (let i = 0; i < contacts.length; i++) {
         const c = contacts[i];
         const key = `${c.name}-${i}`;
         if (!c.email || queuedKeys.has(key)) continue;
-        const o = buildOutreach(prospect, c.firstName, c.title);
+        const o = buildOutreach(prospect, c.firstName, c.title, angleKeys[i]);
         const res = await addToQueue({
           toEmail: c.email,
           accountName: prospect.name,
@@ -194,7 +198,7 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
           skipped += 1;
         }
       }
-      toast.success(`${queued} queued${skipped > 0 ? `, ${skipped} skipped` : ''}`);
+      toast.success(`${queued} queued with varied angles${skipped > 0 ? `, ${skipped} skipped` : ''}`);
     } finally {
       setQueuingAll(false);
     }

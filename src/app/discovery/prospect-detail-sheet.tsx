@@ -14,7 +14,9 @@ import {
 } from '@/components/ui/sheet';
 import { formatDiscoveredVia } from '@/lib/discovery/filters';
 import { generateAngle } from '@/lib/discovery/angle';
+import { buildAngleStack } from '@/lib/discovery/angles';
 import { referenceOverlap } from '@/lib/discovery/reference-sites';
+import type { AngleKey } from '@/lib/discovery/types';
 import type { RankedRow } from '@/lib/discovery/scoring';
 import { pushProspectToHubSpot, type PushResult } from './actions';
 import { ProspectContactsPanel } from './prospect-contacts';
@@ -50,12 +52,24 @@ export function ProspectDetailSheet({ prospect, onClose, pinned, onTogglePin, to
   const [isPending, startTransition] = useTransition();
   const [result, setResult] = useState<PushResult | null>(null);
   const [copied, setCopied] = useState(false);
+  const [copiedAngle, setCopiedAngle] = useState<AngleKey | null>(null);
 
   // Reset transient state whenever a different prospect is opened.
   useEffect(() => {
     setResult(null);
     setCopied(false);
+    setCopiedAngle(null);
   }, [prospect?.placeId]);
+
+  async function handleCopyAngle(key: AngleKey, text: string) {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedAngle(key);
+      setTimeout(() => setCopiedAngle(null), 1500);
+    } catch {
+      // clipboard unavailable — no-op
+    }
+  }
 
   function handlePush() {
     if (!prospect) return;
@@ -117,6 +131,35 @@ export function ProspectDetailSheet({ prospect, onClose, pinned, onTogglePin, to
               </div>
               <div className="rounded-md border border-[var(--border)] bg-[var(--accent)] px-3 py-2 text-sm">
                 {generateAngle(prospect)}
+              </div>
+
+              {/* Angle library — alternate framings to fire at different committee members.
+                  Each opener is copy-ready; "backed" angles cite a fact on this row. */}
+              <div className="space-y-1.5">
+                <p className="text-xs font-medium uppercase tracking-wide text-[var(--muted-foreground)]">
+                  Angles
+                </p>
+                <ul className="space-y-1.5">
+                  {buildAngleStack(prospect).map((a) => (
+                    <li
+                      key={a.key}
+                      className="flex items-start gap-2 rounded-md border border-[var(--border)] px-2.5 py-1.5 text-xs"
+                    >
+                      <span className="mt-0.5 shrink-0 rounded bg-[var(--accent)] px-1.5 py-0.5 text-[10px] font-medium">
+                        {a.label}
+                      </span>
+                      <span className="min-w-0 flex-1 text-[var(--muted-foreground)]">{a.opener}</span>
+                      <button
+                        type="button"
+                        aria-label={`Copy ${a.label} angle`}
+                        onClick={() => handleCopyAngle(a.key, a.opener)}
+                        className="mt-0.5 shrink-0 text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
+                      >
+                        {copiedAngle === a.key ? <Check className="h-3.5 w-3.5" /> : <Copy className="h-3.5 w-3.5" />}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
               </div>
 
               {/* Co-location guard — this row may BE a live site; verify before cold outreach */}
