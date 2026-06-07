@@ -22,6 +22,7 @@ import {
   unenrollFromSequence,
   updateDraft,
 } from './queue-actions';
+import { groupSendableByAccount, groupSendableBySequence } from './outbox-grouping';
 
 type SequenceSummary = { id: number; name: string; steps: unknown };
 
@@ -531,6 +532,22 @@ export function OutboxTab({ onCountChange }: OutboxTabProps) {
   const allVisibleSelected =
     selectableVisible.length > 0 && selectableVisible.every((i) => selectedIds.has(i.id));
 
+  // One-click multi-send: committees (>=2 sendable for one account) and sequences
+  // (>=2 sendable enrolled rows). Computed over the full set, not the status filter.
+  const committees = useMemo(
+    () => groupSendableByAccount(items).filter((g) => g.ids.length >= 2),
+    [items],
+  );
+  const seqGroups = useMemo(
+    () => groupSendableBySequence(items).filter((g) => g.ids.length >= 2),
+    [items],
+  );
+  const seqNameById = useMemo(() => {
+    const m = new Map<number, string>();
+    for (const s of sequences) m.set(s.id, s.name);
+    return m;
+  }, [sequences]);
+
   function toggleSelect(id: number) {
     setSelectedIds((prev) => {
       const next = new Set(prev);
@@ -556,22 +573,25 @@ export function OutboxTab({ onCountChange }: OutboxTabProps) {
     setSelectedIds(new Set());
   }
 
-  async function handleSendAll() {
+  // Shared batch-send core: fire each id in turn with live progress + cancel.
+  // Both "Send all selected" and the one-click committee/sequence quick-fire use this.
+  async function sendIds(ids: number[]) {
+    if (ids.length === 0) return;
     setSendingBatch(true);
     cancelRef.current = false;
-    const total = selected.length;
+    const total = ids.length;
     setSendProgress({ done: 0, total });
     let sent = 0;
     let skipped = 0;
     let failed = 0;
     let cancelled = false;
     try {
-      for (let i = 0; i < selected.length; i++) {
+      for (let i = 0; i < ids.length; i++) {
         if (cancelRef.current) {
           cancelled = true;
           break;
         }
-        const res = await sendNow(selected[i].id);
+        const res = await sendNow(ids[i]);
         if ('status' in res && res.status === 'sent') sent++;
         else if ('status' in res && res.status === 'skipped') skipped++;
         else failed++;
@@ -588,6 +608,10 @@ export function OutboxTab({ onCountChange }: OutboxTabProps) {
       setSendProgress(null);
       cancelRef.current = false;
     }
+  }
+
+  async function handleSendAll() {
+    await sendIds(selected.map((i) => i.id));
   }
 
   async function handleApproveSchedule() {
@@ -852,6 +876,54 @@ export function OutboxTab({ onCountChange }: OutboxTabProps) {
           </div>
         )}
       </div>
+
+      {/* One-click multi-send: fire a whole committee or sequence without hand-checking rows */}
+      {(committees.length > 0 || seqGroups.length > 0) && (
+        <div className="space-y-1.5 rounded-md border border-[var(--primary)]/30 bg-[var(--primary)]/5 p-2">
+          <p className="text-[11px] font-medium uppercase tracking-wide text-[var(--muted-foreground)]">
+            Quick fire
+          </p>
+          <div className="flex flex-wrap gap-1.5">
+            {committees.map((g) => (
+              <Button
+                key={`committee-${g.key}`}
+                size="sm"
+                variant="outline"
+                className="h-7 gap-1 text-xs"
+                onClick={() => sendIds(g.ids)}
+                disabled={batchBusy}
+                title={`Send all ${g.ids.length} drafts for ${g.label}`}
+              >
+                <Send className="h-3 w-3" />
+                Send all {g.ids.length} to {g.label}
+              </Button>
+            ))}
+            {seqGroups.map((g) => {
+              const seqId = Number(g.key.replace('seq:', ''));
+              const name = seqNameById.get(seqId) ?? g.label;
+              return (
+                <Button
+                  key={`seq-${g.key}`}
+                  size="sm"
+                  variant="outline"
+                  className="h-7 gap-1 text-xs"
+                  onClick={() => sendIds(g.ids)}
+                  disabled={batchBusy}
+                  title={`Fire ${g.ids.length} ready steps in ${name}`}
+                >
+                  <Send className="h-3 w-3" />
+                  Fire {name} ({g.ids.length})
+                </Button>
+              );
+            })}
+          </div>
+          {sendingBatch && (
+            <p className="text-[11px] text-[var(--muted-foreground)]">
+              Sending {sendProgress?.done ?? 0}/{sendProgress?.total ?? 0}…
+            </p>
+          )}
+        </div>
+      )}
 
       {/* Select-all (visible) */}
       {selectableVisible.length > 0 && (
