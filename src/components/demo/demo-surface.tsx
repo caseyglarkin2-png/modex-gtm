@@ -285,7 +285,7 @@ export function DemoSurface({
               )}
             </div>
             {/* Next-action cluster — two canonical CTAs only: primary is the
-                low-friction reply ("Is this your yard?"), secondary is Run your
+                low-friction reply ("Are these your yards?"), secondary is Run your
                 ROI. Memo + Share demote to quiet text links. (Redesign §0/CTA) */}
             <div className="flex shrink-0 flex-wrap items-center justify-end gap-2">
               {!fromGallery && (
@@ -363,10 +363,10 @@ export function DemoSurface({
               Your network, mapped
             </div>
             <h2 className="mt-2 text-2xl font-semibold tracking-[-0.01em] text-white max-[480px]:text-xl">
-              We audited every yard in {displayName}&rsquo;s network &mdash; from satellite.
+              We audited every yard in {displayName}&rsquo;s network, from satellite.
             </h2>
             <p className="mt-1.5 text-sm text-white/60">
-              Click any site for its gate, docks, and drop yards. No badge, no NDA &mdash; just what a driver sees.
+              Click any site for its gate, docks, and drop yards. No badge, no NDA, just what a driver sees.
             </p>
           </div>
           <div className="mx-auto w-full max-w-7xl px-3 pb-5 pt-3">
@@ -476,7 +476,7 @@ export function DemoSurface({
           <div className="mx-auto flex w-full max-w-5xl flex-col items-start gap-3 px-5 py-9 md:flex-row md:items-center md:justify-between">
             <div>
               <h2 className="text-2xl font-semibold tracking-[-0.01em] text-white max-[480px]:text-xl">
-                Is this your yard?
+                Are these your yards?
               </h2>
               <p className="mt-1.5 max-w-xl text-sm text-white/70">
                 Tell us where we got it wrong, or see what 15 minutes of orchestration looks like on your worst site.

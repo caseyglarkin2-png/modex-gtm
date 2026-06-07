@@ -21,8 +21,12 @@ export function DemoReframe({ displayName }: Props) {
           The frame
         </div>
         <h2 className="mt-2 max-w-3xl text-2xl font-semibold leading-snug tracking-[-0.01em] text-white max-[480px]:text-xl">
-          {displayName}&rsquo;s yard isn&rsquo;t one system. It&rsquo;s five handoffs that don&rsquo;t talk.
+          {displayName}&rsquo;s stack is connected. The yards never were.
         </h2>
+        <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-white/70">
+          Your TMS runs the road. Your WMS runs the building. The yards are the tier between
+          them, and they were never on the network.
+        </p>
 
         {/* Broken-chain diagram: each step is an isolated box; the connectors
             between them are dashed + severed to show the silos don't share. */}
@@ -45,8 +49,8 @@ export function DemoReframe({ displayName }: Props) {
 
         <p className="mt-5 max-w-2xl text-[15px] leading-relaxed text-white/70">
           Every truck gets re-keyed, re-queued, and re-found at each step. The lost time lives{' '}
-          <span className="italic text-white/90">between</span> the steps &mdash; which is why no
-          single tool ever fixed it. The audit below is that gap, measured on your real yards.
+          <span className="italic text-white/90">between</span> the steps, which is why no single
+          tool ever fixed it. The audit below is that gap, measured on your real yards.
         </p>
       </div>
     </section>
