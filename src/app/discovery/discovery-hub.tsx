@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Loader2, Send } from 'lucide-react';
 import { toast } from 'sonner';
@@ -24,6 +24,12 @@ import { ScanPanel } from './scan-panel';
 import { WeightControl } from './weight-control';
 import { usePinned } from './use-pinned';
 import { useTouchLog } from './use-touch-log';
+import {
+  FILTER_STORAGE_KEY,
+  parseStoredFilters,
+  serializeFilters,
+  urlHasFilters,
+} from './filter-persistence';
 
 const WEIGHT_STORAGE_KEY = 'discovery.weighting';
 const DEFAULT_WEIGHTING = 'proximity-led';
@@ -92,6 +98,45 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
     if (stored && stored in WEIGHT_PRESETS) setWeighting(stored);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  // Restore the saved filter set on mount so /discovery opens on Casey's last
+  // view. The URL wins: if the page was opened with any filter param (a shared
+  // or refreshed link), that view is authoritative and storage is left alone.
+  const didRestoreFilters = useRef(false);
+  useEffect(() => {
+    if (!urlHasFilters((k) => searchParams.get(k))) {
+      const stored = parseStoredFilters(window.localStorage.getItem(FILTER_STORAGE_KEY));
+      if (stored) {
+        setTierFilter(stored.tier);
+        setCorridorFilter(stored.corridor);
+        setSegmentFilter(stored.segment);
+        setMinScore(stored.minScore);
+        setDailySlice(!stored.all);
+      }
+    }
+    didRestoreFilters.current = true;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  // Persist the live filter set after the initial restore so the next visit
+  // reopens it. Mirrors how the weighting preset persists.
+  useEffect(() => {
+    if (!didRestoreFilters.current) return;
+    try {
+      window.localStorage.setItem(
+        FILTER_STORAGE_KEY,
+        serializeFilters({
+          tier: tierFilter,
+          corridor: corridorFilter,
+          segment: segmentFilter,
+          minScore,
+          all: !dailySlice,
+        }),
+      );
+    } catch {
+      // ignore unavailable storage
+    }
+  }, [tierFilter, corridorFilter, segmentFilter, minScore, dailySlice]);
 
   // Populate the Outbox badge count on mount so it's visible before the tab opens.
   useEffect(() => {
