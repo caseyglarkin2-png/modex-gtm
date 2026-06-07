@@ -33,4 +33,35 @@ describe('buildOutreach', () => {
   it('falls back to a neutral greeting without a first name', () => {
     expect(buildOutreach(mkRow({}), undefined).body).toContain('Hi there,');
   });
+
+  describe('angle override (additive)', () => {
+    it('omitting the angle is byte-identical to the default near path', () => {
+      const a = buildOutreach(mkRow({}), 'Sal', 'VP Ops');
+      const b = buildOutreach(mkRow({}), 'Sal', 'VP Ops', undefined);
+      expect(b).toEqual(a);
+    });
+
+    it('a non-proximity angle swaps subject + opener and drops the proximity proof image', () => {
+      const o = buildOutreach(mkRow({}), 'Sal', undefined, 'network');
+      expect(o.subject).toBe('One live view across your yards');
+      expect(o.body).toContain('every yard on one live map');
+      expect(o.imageUrl).toBeUndefined(); // proof image is proximity-only
+      // The frame around the opener is preserved.
+      expect(o.body).toContain('Hi Sal,');
+      expect(o.body).toContain('15 minutes');
+      expect(o.body).toContain('Best,');
+      expect(o.body).not.toContain('—');
+    });
+
+    it('the proximity angle keeps the proof image when near a reference', () => {
+      const o = buildOutreach(mkRow({}), 'Sal', undefined, 'proximity');
+      expect(o.imageUrl).toMatch(/allentown-yard-proof\.jpg$/);
+    });
+
+    it('the efficiency angle is a capability framing with no proof image', () => {
+      const o = buildOutreach(mkRow({}), 'Sal', undefined, 'efficiency');
+      expect(o.subject).toBe('Stop losing trailers in your own yard');
+      expect(o.imageUrl).toBeUndefined();
+    });
+  });
 });

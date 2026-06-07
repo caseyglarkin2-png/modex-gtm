@@ -93,6 +93,13 @@ export type ProspectSegment = 'shipper' | 'carrier' | '3pl' | 'parcel';
 /** Our confidence that a row is a real, sellable physical site. */
 export type Confidence = 'high' | 'medium' | 'low';
 
+/**
+ * A distinct outreach framing in the angle library (src/lib/discovery/angles.ts).
+ * proximity/network/scale/corridor cite a fact on the row; efficiency is an honest
+ * capability framing.
+ */
+export type AngleKey = 'proximity' | 'network' | 'scale' | 'corridor' | 'efficiency';
+
 /** A ProspectRow after curation: deduped to one-per-site, segmented, confidence-scored. */
 export interface CuratedRow extends ProspectRow {
   segment: ProspectSegment;
