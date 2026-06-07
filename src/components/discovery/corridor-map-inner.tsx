@@ -5,6 +5,7 @@ import { MapContainer, TileLayer, CircleMarker, Circle, Popup, useMap } from 're
 import 'leaflet/dist/leaflet.css';
 import type { ProspectRow, Corridor } from '@/lib/discovery/types';
 import { REFERENCE_SITES, PROXIMITY_RING_MILES } from '@/lib/discovery/reference-sites';
+import { selectMapMarkers } from '@/lib/discovery/map-markers';
 
 const TIER_COLORS: Record<string, string> = {
   A: '#10b981',
@@ -16,8 +17,9 @@ const TIER_COLORS: Record<string, string> = {
 const REFERENCE_COLOR = '#22d3ee'; // cyan — live YardFlow reference sites
 
 // Leaflet renders one SVG node per marker; ~8.7k markers tanks pan/zoom. Cap to
-// the worklist-top N (the input is already proximity-ranked, so the most
-// relevant — Tier A near a reference — are always kept) and caption the rest.
+// a marker budget, but never drop a Tier A: selectMapMarkers keeps every Tier A
+// (a sellable site must never hide on the map) and fills the rest by worklist
+// rank. See src/lib/discovery/map-markers.ts.
 const MAX_MARKERS = 1500;
 
 interface Props {
@@ -49,12 +51,9 @@ export default function CorridorMapInner({ prospects, corridors, onSelectProspec
     [corridors],
   );
 
-  // Preserve the incoming worklist order; just take the top N when over the cap.
-  const shown = useMemo(
-    () => (prospects.length <= MAX_MARKERS ? prospects : prospects.slice(0, MAX_MARKERS)),
-    [prospects],
-  );
-  const capped = prospects.length > MAX_MARKERS;
+  // Keep every Tier A, then fill the marker budget by worklist rank (order preserved).
+  const shown = useMemo(() => selectMapMarkers(prospects, MAX_MARKERS), [prospects]);
+  const capped = shown.length < prospects.length;
 
   return (
     /* `isolate` keeps Leaflet's panes/controls + the z-[1000] legends in their own
@@ -63,7 +62,7 @@ export default function CorridorMapInner({ prospects, corridors, onSelectProspec
     <div className="relative isolate h-full w-full" role="region" aria-label="Corridor map: prospects and live YardFlow reference sites">
       {capped && (
         <div className="pointer-events-none absolute right-2 top-2 z-[1000] rounded-md bg-black/70 px-2 py-1 text-[10px] font-medium text-white/85 backdrop-blur-sm">
-          Showing top {MAX_MARKERS.toLocaleString()} of {prospects.length.toLocaleString()} by worklist rank — filter to narrow
+          Showing {shown.length.toLocaleString()} of {prospects.length.toLocaleString()} — every Tier A kept, rest by rank. Filter to narrow.
         </div>
       )}
 
