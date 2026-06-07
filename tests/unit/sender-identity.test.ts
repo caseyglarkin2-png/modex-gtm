@@ -25,7 +25,7 @@ describe('resolveSenderIdentity', () => {
 
   it('returns the Jake identity (no bookingLink) for jake@freightroll.com', () => {
     const id = resolveSenderIdentity('jake@freightroll.com');
-    expect(id.name).toBe('Jake');
+    expect(id.name).toBe('Jake Koppinger');
     expect(id.role).toBe('Founder and CEO');
     expect(id.bookingLink).toBeUndefined();
   });

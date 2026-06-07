@@ -29,11 +29,11 @@ const CASEY_IDENTITY: SenderIdentity = {
   bookingLink: CASEY_BOOKING_LINK,
 };
 
-// Jake's identity. Role confirmed (Founder and CEO). Still pending from Casey:
-// Jake's last name (the signature shows just "Jake") and his booking link (omitted
-// here, so the audit link falls back to the default). Casey unchanged.
+// Jake's identity. Name + role confirmed. Still pending from Casey: Jake's own
+// booking link (omitted here, so the audit link falls back to the default
+// Casey link until provided). Casey's identity unchanged.
 const JAKE_IDENTITY: SenderIdentity = {
-  name: 'Jake',
+  name: 'Jake Koppinger',
   role: 'Founder and CEO',
 };
 
