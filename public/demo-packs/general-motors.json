@@ -11,7 +11,8 @@
       "estimatedFootprint": 50,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "We audited 41 of GM's freight-relevant US facilities: every assembly, powertrain, stamping and casting, Ultium battery, parts-processing, and parts-distribution site with a real truck yard. Pure offices and the Milford R&D campus carry no freight gate and are excluded. The wider footprint follows the same archetype distribution."
+      "note": "We audited 41 of GM's freight-relevant US facilities: every assembly, powertrain, stamping and casting, Ultium battery, parts-processing, and parts-distribution site with a real truck yard. Pure offices and the Milford R&D campus carry no freight gate and are excluded. The wider footprint follows the same archetype distribution.",
+      "auditedScope": "US"
     },
     "featuredSiteId": "01-general-motors",
     "dossierIntro": "Auto OEMs run two yards inside every plant: parts in, vehicles out. GM runs 41 freight-relevant US sites. Spring Hill is the largest plant in North America at 720 acres. Factory ZERO is GM's $2.2B EV flagship. A coast-to-coast parts network adds 14 processing and distribution hubs, and 24 of the 41 sites are rail-served. The Davison Road hub alone runs 84 docks behind a 132-foot automated tower. YardFlow runs supplier inbound and finished-vehicle outbound as two distinct queues on one protocol, across every site at once.",

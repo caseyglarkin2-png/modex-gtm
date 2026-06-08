@@ -41,6 +41,9 @@ pack.account.roiDefaults = { averageMarginPerShipment: 2200 };
 if (pack.account.coverageNote) {
   pack.account.coverageNote.note =
     "We audited 41 of GM's freight-relevant US facilities: every assembly, powertrain, stamping and casting, Ultium battery, parts-processing, and parts-distribution site with a real truck yard. Pure offices and the Milford R&D campus carry no freight gate and are excluded. The wider footprint follows the same archetype distribution.";
+  // Scope marker for the /for builder (ForPackLite types coverageNote as a weak
+  // { auditedScope? } type; without a shared property TS2559 fails the build).
+  pack.account.coverageNote.auditedScope = 'US';
 }
 
 writeFileSync(file, JSON.stringify(pack, null, 2));
