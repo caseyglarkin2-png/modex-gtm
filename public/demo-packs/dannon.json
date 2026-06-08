@@ -8,15 +8,14 @@
     "siteCount": 13,
     "coverageNote": {
       "auditedCount": 13,
-      "estimatedFootprint": 15,
+      "estimatedFootprint": 13,
       "droppedStubCount": 1,
       "capHit": false,
-      "note": "Dannon (US subsidiary of Danone) operates ~15 US plants. Parent Danone operates ~190 plants globally; international scope on request.",
-      "auditedScope": "US",
-      "totalGlobalFootprint": 190
+      "note": "We audited 13 Dannon US factory sites.",
+      "auditedScope": "US"
     },
     "featuredSiteId": "02-danone-minster-oh",
-    "dossierIntro": "Danone / Dannon runs the yogurt and plant-based dairy network across 190 sites globally. We audited 13. Minster OH covers 58 acres with 38 dock doors. Mount Crawford VA is 93 acres. 0 of 13 audited sites are rail-served (yogurt doesn't ride rail). YardFlow runs cold-chain trailer staging without forcing the yard to manage temperature itself.",
+    "dossierIntro": "Dannon runs its US yogurt and plant-based dairy network across 13 factory sites. Minster OH covers 58 acres with 38 dock doors. Mount Crawford VA is 93 acres. 0 of 13 sites are rail-served (yogurt doesn't ride rail). YardFlow runs cold-chain trailer staging without forcing the yard to manage temperature itself.",
     "surprisingFindings": [
       "Mount Crawford VA is 93 acres of yogurt manufacturing. Dannon's flagship US plant.",
       "0 of 13 audited sites are rail-served. Cold chain runs entirely on truckload.",

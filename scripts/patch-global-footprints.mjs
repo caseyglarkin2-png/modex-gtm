@@ -119,10 +119,15 @@ const PATCHES = {
     note: 'Daimler Truck North America (Freightliner / Western Star / Detroit) operates ~20 NA plants + parts/DC sites. Global Daimler Truck operates ~40 production sites.',
   },
   dannon: {
+    // Pitch is to Dannon US. Scope the whole coverage frame to the 13 audited
+    // US factory sites; drop the parent ~190-plant global footprint (Casey,
+    // 2026-06-08: the global number does nothing for us and reads as "you
+    // mapped 7% of our network"). global:null removes totalGlobalFootprint so
+    // every surface collapses to "13 facilities".
     scope: 'US',
-    inScope: 15,
-    global: 190,
-    note: 'Dannon (US subsidiary of Danone) operates ~15 US plants. Parent Danone operates ~190 plants globally; international scope on request.',
+    inScope: 13,
+    global: null,
+    note: 'We audited 13 Dannon US factory sites.',
   },
   'dhl-supply-chain': {
     scope: 'US',
