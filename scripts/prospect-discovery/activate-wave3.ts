@@ -35,6 +35,7 @@ interface Row {
 
 const args = process.argv.slice(2);
 const LIVE = args.includes('--live');
+const TOP = args.includes('--top') ? Number(args[args.indexOf('--top') + 1]) : null;
 const csvPath =
   args[args.indexOf('--csv') + 1] && args.includes('--csv')
     ? args[args.indexOf('--csv') + 1]
@@ -102,9 +103,28 @@ async function postQueueBatch(items: object[]): Promise<{ added: number; skipped
   return res.json() as Promise<{ added: number; skipped: unknown[] }>;
 }
 
+/** Select the N highest-ICP distinct companies (tie-break: first appearance). */
+function topCompanies(rows: Row[], n: number): Set<string> {
+  const meta = new Map<string, { score: number; idx: number }>();
+  rows.forEach((r, i) => {
+    const score = Number(r.icp_score) || 0;
+    const cur = meta.get(r.company);
+    if (!cur) meta.set(r.company, { score, idx: i });
+    else if (score > cur.score) meta.set(r.company, { score, idx: cur.idx });
+  });
+  return new Set(
+    [...meta.entries()]
+      .sort((a, b) => b[1].score - a[1].score || a[1].idx - b[1].idx)
+      .slice(0, n)
+      .map(([c]) => c),
+  );
+}
+
 async function main() {
   const csv = readFileSync(csvPath, 'utf8');
-  const rows = parse(csv, { columns: true, skip_empty_lines: true, trim: true }) as Row[];
+  const allRows = parse(csv, { columns: true, skip_empty_lines: true, trim: true }) as Row[];
+  const rows = TOP ? allRows.filter((r) => topCompanies(allRows, TOP).has(r.company)) : allRows;
+  if (TOP) console.log(`(pilot: top ${TOP} accounts by ICP)`);
   const drafts = buildDrafts(rows);
 
   const companies = [...new Map(rows.map((r) => [r.domain || r.company, r])).values()];
