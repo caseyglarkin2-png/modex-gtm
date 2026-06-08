@@ -1,0 +1,186 @@
+{
+  "name": "GM CCA - Minneapolis Parts Distribution Center, Hudson WI",
+  "type": "Parts Distribution Center",
+  "coords": {
+    "lat": 44.9466,
+    "lng": -92.7015
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 44.9477,
+          "lng": -92.7053
+        },
+        {
+          "lat": 44.948,
+          "lng": -92.6982
+        },
+        {
+          "lat": 44.9456,
+          "lng": -92.6981
+        },
+        {
+          "lat": 44.9451,
+          "lng": -92.7052
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 44.94575,
+          "lng": -92.70485
+        },
+        {
+          "lat": 44.94575,
+          "lng": -92.70435
+        },
+        {
+          "lat": 44.94535,
+          "lng": -92.70435
+        },
+        {
+          "lat": 44.94535,
+          "lng": -92.70485
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 44.94605,
+            "lng": -92.70435
+          },
+          {
+            "lat": 44.94615,
+            "lng": -92.69885
+          },
+          {
+            "lat": 44.94585,
+            "lng": -92.69885
+          },
+          {
+            "lat": 44.94575,
+            "lng": -92.70435
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 44.94605,
+            "lng": -92.70435
+          },
+          {
+            "lat": 44.94615,
+            "lng": -92.69885
+          },
+          {
+            "lat": 44.9460,
+            "lng": -92.69885
+          },
+          {
+            "lat": 44.9459,
+            "lng": -92.70435
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 44.94775,
+            "lng": -92.70395
+          },
+          {
+            "lat": 44.94785,
+            "lng": -92.69885
+          },
+          {
+            "lat": 44.94765,
+            "lng": -92.69885
+          },
+          {
+            "lat": 44.94755,
+            "lng": -92.70395
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 360,
+        "pano": "Z7NLlxwIkmBxeEhhDoGrPQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 358,
+        "pano": "4eM4AtLgOwXB_Kxu286tbA",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 75,
+    "trailersVisible": 18,
+    "trailerParkingCapacity": 45,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 39,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@44.94660,-92.70150,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "dropArea"
+  ],
+  "fieldNotes": {
+    "truckGate": "Open corporate-campus PDC. 2024 Street View along Willis Miller Dr shows a deep landscaped lawn setback with no perimeter fence, no barrier arm and no checkpoint at the truck driveway. Trucks enter the south dock apron directly off the public road - no controlled truck gate.",
+    "guardShack": "No staffed booth anywhere along the road frontage or at the driveway in Street View. The only structure at the SE corner is the building's own office entry, not a gate booth.",
+    "remoteGs": "False - there is no truck gate at all, so neither a manned booth nor a remote kiosk applies.",
+    "postGateStaging": "Wide paved dock aprons on both the south and north faces give ample inside-property staging room before backing into the docks.",
+    "dockDoors": "Cross-dock building: a long continuous bank of dock doors runs the full SOUTH face (~40+ doors with dock-leveler shadows and trailers backed in, confirmed in Street View) and a second bank runs the full NORTH face (~30+ doors, trailers backed in on the north apron). Combined well over 50 -> 50+ band. Count is an overhead estimate.",
+    "dropArea": "Trailers are staged at the dock aprons rather than in a dedicated marked drop lot; ~18 trailers visible across both aprons -> 10-25 band. No separate fenced trailer-storage lot on the parcel.",
+    "dropYard": "False - no dedicated standalone trailer-storage yard; trailers sit on the active dock aprons.",
+    "shipRcvSeparate": "Dock banks sit on two physically separate building faces (south apron and north apron), consistent with split shipping/receiving flows.",
+    "entryExitTogether": "Single truck driveway off Willis Miller Dr at the SW serves both inbound and outbound trucks.",
+    "drivewayLong": "The driveway and dock apron are deep enough to stack 3+ trucks well inside the property before the docks.",
+    "fastLaneOpportunity": "Very wide aprons and an open, ungated driveway leave abundant paved width to add an express/bypass lane or a self-check kiosk.",
+    "railServed": "No rail spur enters the parcel - the site is truck-served only. The nearest rail is unrelated.",
+    "urbanRural": "Edge-of-town St. Croix Business Park in Hudson WI, bordered by I-94 and open land; small-town industrial setting -> Rural.",
+    "siteAreaAcres": "~404,000 sq ft building (opened 2004) on a roughly 39-acre parcel, estimated from the traced perimeter ring.",
+    "buildingCount": "Single large distribution building with an attached office wing at the SE corner."
+  },
+  "method": "deep-audit"
+}

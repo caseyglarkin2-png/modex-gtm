@@ -1,0 +1,175 @@
+{
+  "name": "GM - Defiance Operations, Defiance OH",
+  "type": "Foundry / Casting Plant",
+  "coords": {
+    "lat": 41.2843,
+    "lng": -84.3168
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.28135,
+          "lng": -84.32055
+        },
+        {
+          "lat": 41.28145,
+          "lng": -84.30835
+        },
+        {
+          "lat": 41.28855,
+          "lng": -84.30790
+        },
+        {
+          "lat": 41.29010,
+          "lng": -84.31130
+        },
+        {
+          "lat": 41.28960,
+          "lng": -84.31850
+        },
+        {
+          "lat": 41.28560,
+          "lng": -84.32060
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.28210,
+          "lng": -84.31985
+        },
+        {
+          "lat": 41.28210,
+          "lng": -84.31880
+        },
+        {
+          "lat": 41.28270,
+          "lng": -84.31880
+        },
+        {
+          "lat": 41.28270,
+          "lng": -84.31985
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 41.28245,
+            "lng": -84.32075
+          },
+          {
+            "lat": 41.28245,
+            "lng": -84.31975
+          },
+          {
+            "lat": 41.28395,
+            "lng": -84.31975
+          },
+          {
+            "lat": 41.28395,
+            "lng": -84.32075
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 41.28290,
+            "lng": -84.31895
+          },
+          {
+            "lat": 41.28290,
+            "lng": -84.31760
+          },
+          {
+            "lat": 41.28330,
+            "lng": -84.31760
+          },
+          {
+            "lat": 41.28330,
+            "lng": -84.31895
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 350,
+        "pano": "FH9VnAH3jRua6BR8Q11AcA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 350,
+        "pano": "FH9VnAH3jRua6BR8Q11AcA",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18,
+    "trailersVisible": 36,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 235,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.2843,-84.3168,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoors",
+    "entryLanes",
+    "exitLanes",
+    "trailerParkingCapacity"
+  ],
+  "fieldNotes": {
+    "site": "GM Defiance Operations (GM Powertrain Defiance Foundry / Casting), 26427 State Route 281, Defiance (Defiance County) OH 43512. Aluminum/iron foundry and machining center, ~1.9M sq ft, opened 1948 (first iron poured Aug 1948), ~530 hourly (UAW Local 211) per 2022 figures; casts cylinder blocks and heads for GM engines. The roster default geocode (41.2825,-84.4488) landed on farmland/Maumee River bend ~10km west of the plant - WRONG. State Route 281 runs east-west and the foundry sits on the SOUTH bank of the Maumee River about 5 miles east-northeast of downtown Defiance. Resolved the true plant center to ~41.2843,-84.3168 by satellite (large multi-roof foundry building, settling/cooling ponds, slag and sand storage to the north, employee lots fronting SR-281, rail sidings to the NE) corroborated by whereorg/americanautoworker listings at the SR-281 address.",
+    "truckGate": "Marked FALSE (medium confidence). The active truck entrance is on the WEST end of the SR-281 frontage (~41.2823,-84.3192): a wide paved driveway opens straight off SR-281 into an open truck yard. Street View (2025-05) and z19/z20 satellite show NO barrier arm, NO sliding gate, and NO guard booth at the road - the frontage is open. Foundry property does not present a fenced/gated truck checkpoint at this entrance. Flagged uncertain because a foundry of this scale may run an internal check-in not resolvable from the road.",
+    "guardShack": "FALSE. No staffed booth structure resolved at the west truck entrance in Street View or z19/z20 satellite. The eastern entrance (~41.2823,-84.3138) is an open employee/visitor drive into the parking lots with no booth. remoteGs FALSE as a consequence (no gate established).",
+    "postGateStaging": "True - a very large open paved truck yard sits inside the property between the SR-281 frontage and the dock/freight buildings, providing ample internal holding/queue room before the docks.",
+    "drivewayLong": "True - the open paved approach from SR-281 into the west truck yard is long and deep with room to queue well more than 3 trucks before reaching docks.",
+    "dropArea": "West drop yard holds organized rows of parked drop trailers - counted ~24 trailers in the west columns (z19) plus additional staged trailers along the building, banding 25-50. dropYard true.",
+    "dockDoors": "Estimated ~18 dock doors (band 10-25) across the west and southwest freight building faces; trailers seen backed in (red tractors at docks). Foundry freight docks are modest relative to the 1.9M sq ft building. Exact count partly obscured by roof structures - flagged uncertain.",
+    "entryExitTogether": "True - inbound and outbound truck movements use the same open west driveway off SR-281; no separate dedicated out-gate identified.",
+    "fastLaneOpportunity": "True - the west entrance is a very wide open paved apron with substantial unused width; ample physical room to add an express/bypass lane or a controlled check-in lane.",
+    "shipRcvSeparate": "Marked false - freight (docks + drop yard) is concentrated on the west/southwest side; no clearly separate second dock cluster for ship vs receive confirmed.",
+    "railServed": "True - extensive rail sidings and spurs run into the north and northeast of the plant (multiple parallel tracks at ~41.2875,-84.310) serving the foundry's raw materials (sand, scrap, coke) and shipping.",
+    "urbanRural": "Rural - the plant sits on the rural northeast edge of Defiance, surrounded by farmland and the Maumee River corridor, ~5 miles from the small downtown.",
+    "multipleFacilities": "False - a single large interconnected multi-roof foundry complex; buildingCount 1.",
+    "siteAreaAcres": "~235 acres for the traced active industrial footprint (building + truck yard + ponds + slag/sand storage). The full owned parcel including outlying land may be larger; perimeter excludes the farmland south of SR-281."
+  },
+  "method": "deep-audit"
+}

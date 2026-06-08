@@ -1,0 +1,198 @@
+{
+  "name": "GM - Fort Wayne Assembly, Roanoke IN",
+  "type": "Vehicle Assembly Plant",
+  "coords": {
+    "lat": 40.9655,
+    "lng": -85.2995
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.97075,
+          "lng": -85.30620
+        },
+        {
+          "lat": 40.97075,
+          "lng": -85.29130
+        },
+        {
+          "lat": 40.96660,
+          "lng": -85.29050
+        },
+        {
+          "lat": 40.96050,
+          "lng": -85.29200
+        },
+        {
+          "lat": 40.95930,
+          "lng": -85.29850
+        },
+        {
+          "lat": 40.95930,
+          "lng": -85.30700
+        },
+        {
+          "lat": 40.96450,
+          "lng": -85.30740
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.96075,
+          "lng": -85.30560
+        },
+        {
+          "lat": 40.96075,
+          "lng": -85.30460
+        },
+        {
+          "lat": 40.96010,
+          "lng": -85.30460
+        },
+        {
+          "lat": 40.96010,
+          "lng": -85.30560
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 40.96420,
+            "lng": -85.30700
+          },
+          {
+            "lat": 40.96420,
+            "lng": -85.30420
+          },
+          {
+            "lat": 40.96150,
+            "lng": -85.30420
+          },
+          {
+            "lat": 40.96150,
+            "lng": -85.30700
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.97000,
+            "lng": -85.30100
+          },
+          {
+            "lat": 40.97000,
+            "lng": -85.29250
+          },
+          {
+            "lat": 40.96820,
+            "lng": -85.29250
+          },
+          {
+            "lat": 40.96820,
+            "lng": -85.30100
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 40.96400,
+            "lng": -85.30380
+          },
+          {
+            "lat": 40.96400,
+            "lng": -85.30320
+          },
+          {
+            "lat": 40.95980,
+            "lng": -85.30320
+          },
+          {
+            "lat": 40.95980,
+            "lng": -85.30380
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 20,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "truckGate": {
+        "heading": 350,
+        "pano": "",
+        "hasCoverage": false
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 45,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 2,
+    "buildingCount": 4,
+    "siteAreaAcres": 716.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.96550,-85.29950,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": true
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "guardShack"
+  ],
+  "fieldNotes": {
+    "facility": "GM Fort Wayne Assembly, Roanoke IN (former Pontiac Truck & Bus, operating since 1986). Builds the Chevrolet Silverado 1500 / GMC Sierra 1500 on the GMT T1XX platform. ~4.6M sq ft under roof on a ~716-acre site. Roster's approximate coords (40.923,-85.301) landed in farmland ~5 km south; re-pinned to the real plant complex at 40.9655,-85.2995, confirmed by the unmistakable multi-million-sq-ft assembly building, the multi-track auto-rack rail yard along the north edge, and the vast finished-vehicle storage lots ringing the plant.",
+    "truckGate": "Fully fenced, controlled-access GM assembly campus set well back from public roads behind wide grassy berms. A perimeter ring road circles the entire property; truck/material entrances feed from Lafayette Center Rd on the south and a separate access on the west. Standard GM plant security posture (guarded entries) inferred; Street View does not penetrate the private drives so the booth itself is not directly imaged.",
+    "guardShack": "Inferred from GM assembly-plant security standard and the controlled entry geometry; the booth structure is not directly resolvable in available imagery, so flagged uncertain.",
+    "remoteGs": "False because a staffed guard presence is assumed at this scale of plant; if check-in is actually kiosk-based this would flip.",
+    "entryExitSeparate": "Large campus with multiple gate/road points (south Lafayette Center Rd entry, west material entry, plus rail) implies separate in/out flows for truck vs employee traffic.",
+    "dockDoors": "50+ band: loading docks distributed across multiple faces of the assembly complex plus parts-receiving banks on the west and southwest. Trailers visibly backed in at the SW dock bank. Overhead-only estimate.",
+    "dropArea": "Numerous trailers staged in drop lots on the west side and along the north near the rail yard; 25-50 band of bare trailers without tractors.",
+    "railServed": "Multiple parallel rail tracks run the full length of the north edge of the property serving auto-rack loading of finished trucks — unambiguous in the wide and north (rail) satellite crops.",
+    "multipleFacilities": "Body shops (x2), paint shop, general assembly and a sequence center form a connected multi-building manufacturing campus.",
+    "multiStep": "Campus-scale security: outer perimeter gate then internal plant checkpoints before docks, typical of GM assembly plants.",
+    "scale": "No truck scale clearly identified in imagery; left uncertain.",
+    "fastLaneOpportunity": "Wide entry aprons and generous paved width at the south entry leave room for an express/bypass lane.",
+    "urbanRural": "Rural/edge-of-town setting: the plant is surrounded by farmland and an interstate (I-469/US-24) interchange in Roanoke, well outside Fort Wayne's dense urban fabric.",
+    "geofence": "Perimeter traced to the fenced property edge (rail yard north, Lafayette Center Rd / berm south, storage lots east and west). Roughly grid-aligned with a slight bend on the south and east edges. Site area ~716 acres per GM published figure."
+  },
+  "method": "deep-audit"
+}

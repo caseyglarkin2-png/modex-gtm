@@ -1,0 +1,205 @@
+{
+  "name": "GM CCA - Memphis Processing Center, Memphis TN",
+  "type": "CCA Parts Processing Center",
+  "coords": {
+    "lat": 35.00885,
+    "lng": -89.90035
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.011250,
+          "lng": -89.901850
+        },
+        {
+          "lat": 35.011200,
+          "lng": -89.898750
+        },
+        {
+          "lat": 35.006450,
+          "lng": -89.898650
+        },
+        {
+          "lat": 35.006550,
+          "lng": -89.901600
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.011180,
+          "lng": -89.901780
+        },
+        {
+          "lat": 35.011180,
+          "lng": -89.901150
+        },
+        {
+          "lat": 35.010650,
+          "lng": -89.901150
+        },
+        {
+          "lat": 35.010650,
+          "lng": -89.901780
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 35.010600,
+            "lng": -89.899250
+          },
+          {
+            "lat": 35.010600,
+            "lng": -89.898950
+          },
+          {
+            "lat": 35.006700,
+            "lng": -89.898850
+          },
+          {
+            "lat": 35.006700,
+            "lng": -89.899150
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 35.007150,
+            "lng": -89.901450
+          },
+          {
+            "lat": 35.007150,
+            "lng": -89.900950
+          },
+          {
+            "lat": 35.006600,
+            "lng": -89.900950
+          },
+          {
+            "lat": 35.006600,
+            "lng": -89.901450
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 35.010700,
+            "lng": -89.901400
+          },
+          {
+            "lat": 35.010700,
+            "lng": -89.901150
+          },
+          {
+            "lat": 35.006650,
+            "lng": -89.901050
+          },
+          {
+            "lat": 35.006650,
+            "lng": -89.901300
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 35.010650,
+            "lng": -89.899650
+          },
+          {
+            "lat": 35.010650,
+            "lng": -89.899400
+          },
+          {
+            "lat": 35.006700,
+            "lng": -89.899300
+          },
+          {
+            "lat": 35.006700,
+            "lng": -89.899550
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 67,
+        "pano": "SV0NGTBNDcwozb9G6nmW5A",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 110,
+        "pano": "eeDFiro5tEfWwC_Qli9r1w",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 120,
+    "trailerParkingCapacity": 150,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 35.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.00885,-89.90035,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
+  "fieldNotes": {
+    "truckGate": "Continuous chain-link perimeter fence rings the property along Pleasant Hill Rd (confirmed in 2025 Street View from several headings). The single controlled vehicle access is the loop driveway at the NE/north corner; the west dock bank and yard are fully fenced off from the public road.",
+    "guardShack": "No clearly identifiable staffed guard booth at the north loop entrance in 2025 Street View or z20 satellite - the entrance opens onto marked visitor/office parking. Set false, flagged uncertain.",
+    "remoteGs": "Gate/fenced controlled entrance present with no confirmed staffed booth - set true (kiosk/badge/app check-in implied) at medium confidence.",
+    "dockDoors": "Full bank of dock doors with dock levelers and trailers backed in along the entire west face (facing Pleasant Hill Rd, confirmed in Street View) AND a second full bank along the east/back face (satellite). Combined well over 50 -> 50+ band; ~90 estimated.",
+    "dropArea": "Dozens of trailers backed at docks on both faces, plus an outer drop row of parked trailers staged in the east yard and marked trailer stalls at the SW corner. Over 50 -> 50+ band.",
+    "dropYard": "Dedicated trailer-storage staging: outer row of drop trailers along the east yard behind the dock-backed trailers, plus marked stalls at the SW corner.",
+    "shipRcvSeparate": "Two distinct dock clusters on opposite building faces (west front and east back), consistent with separate inbound/outbound flows at this 676k sq ft PDC.",
+    "railServed": "No rail spur; a creek and wooded buffer run along the entire east property line. No tracks visible anywhere on the parcel.",
+    "postGateStaging": "Wide paved perimeter drive and apron inside the fence between the gate and the dock faces give ample interior queue/holding room.",
+    "fastLaneOpportunity": "Single loop driveway with limited road frontage devoted to vehicle access; no obvious wide multi-lane apron for an express bypass - set false.",
+    "urbanRural": "Dense Memphis (Hickory Hill / SE Memphis) industrial-warehouse corridor on Pleasant Hill Rd with large DCs on all sides -> Urban.",
+    "siteAreaAcres": "Shelby County parcel record (APN 09-4200-0-0465C) lists 35.69 acres, 676,150 sq ft building built 1999; matches the traced perimeter."
+  },
+  "method": "deep-audit"
+}

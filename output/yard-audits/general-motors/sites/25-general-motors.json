@@ -1,0 +1,192 @@
+{
+  "name": "GM - Brownstown Battery Assembly, Brownstown Township MI",
+  "type": "Battery Assembly Plant",
+  "coords": {
+    "lat": 42.1035,
+    "lng": -83.249
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.10775,
+          "lng": -83.25465
+        },
+        {
+          "lat": 42.10795,
+          "lng": -83.24395
+        },
+        {
+          "lat": 42.10010,
+          "lng": -83.24345
+        },
+        {
+          "lat": 42.09855,
+          "lng": -83.24590
+        },
+        {
+          "lat": 42.09870,
+          "lng": -83.25540
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.10055,
+          "lng": -83.24805
+        },
+        {
+          "lat": 42.10050,
+          "lng": -83.24690
+        },
+        {
+          "lat": 42.09945,
+          "lng": -83.24695
+        },
+        {
+          "lat": 42.09950,
+          "lng": -83.24810
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 42.10590,
+            "lng": -83.25430
+          },
+          {
+            "lat": 42.10595,
+            "lng": -83.25255
+          },
+          {
+            "lat": 42.10215,
+            "lng": -83.25250
+          },
+          {
+            "lat": 42.10210,
+            "lng": -83.25425
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 42.10640,
+            "lng": -83.25250
+          },
+          {
+            "lat": 42.10645,
+            "lng": -83.25180
+          },
+          {
+            "lat": 42.10230,
+            "lng": -83.25175
+          },
+          {
+            "lat": 42.10225,
+            "lng": -83.25245
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 42.09905,
+            "lng": -83.24895
+          },
+          {
+            "lat": 42.09895,
+            "lng": -83.24560
+          },
+          {
+            "lat": 42.09865,
+            "lng": -83.24565
+          },
+          {
+            "lat": 42.09875,
+            "lng": -83.24900
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 327,
+        "pano": "9pSofkhImAu_xiKxUdmGrQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 304,
+        "pano": "9pSofkhImAu_xiKxUdmGrQ",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 175.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.10350,-83.24900,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "scale",
+    "guardShack"
+  ],
+  "fieldNotes": {
+    "facility": "GM Brownstown Battery Assembly, 20001 Brownstown Center Dr, Brownstown Charter Twp MI 48183 (roster address 21500 Allen Rd is the adjacent arterial). Roster seed coords were ~6 km off (rural Huron River farmland). Re-pinned to 42.1035,-83.2490 - the large GM white/dark-roof manufacturing complex bounded by I-75 on the east, the Allen Rd corridor on the SE, and a perimeter access loop road. Identity confirmed by satellite (auto-plant scale, GM-style stenciled lot text reading 'MUSTANG'/employee lots), the Allen Rd Street View sightline to the plant NW, and the documented GM Brownstown campus address. The plant assembles battery packs and electric drive units (historically Volt/Bolt packs; now Corvette E-Ray drive units and Cadillac CELESTIQ packs) and includes legacy fuel-cell operations.",
+    "truckGate": "True. The property is ringed by a continuous private perimeter loop road; truck and employee traffic funnels through a single controlled south entry off the public road where the entry drive pinches between a gatehouse structure and landscaping. A small booth-footprint building with adjacent circular tanks sits beside the south entry lane (z18/z19).",
+    "guardShack": "True (medium confidence). A small multi-window booth-scale structure is present at the south entry beside the lane; consistent with a staffed gatehouse standard for a secured GM manufacturing campus. Not positively resolved to door level, so flagged uncertain. remoteGs false as a consequence.",
+    "preGateStaging": "True. Wide paved aprons and the long internal multi-lane entry artery provide ample room for trucks to wait before/at the gate.",
+    "postGateStaging": "True. A large paved interior yard and the multi-lane internal road between the gate and the dock banks hold queued trucks inside the fence.",
+    "drivewayLong": "True. The gate-to-dock internal artery is a long multi-lane road easily holding 3+ trucks in queue.",
+    "dockDoors": "Banded 50+. A long continuous dock bank with 15-20 trailers backed in runs along the west building face (z18/z19), a second sawtooth dock canopy line with trucks runs along the south face (z19), plus additional bays on the north building - cumulative count comfortably exceeds 50. Exact total flagged uncertain.",
+    "dropArea": "Banded 50+. The west-side drop yard holds many rows of unattached trailers; a single z19 crop of the west yard shows ~50-70 trailers parked in multiple parallel rows. dropYard true.",
+    "shipRcvSeparate": "True. Distinct dock clusters on physically separate building faces (west drop-yard dock bank vs. south sawtooth dock line) imply separate inbound material receiving and outbound shipping operations.",
+    "trailersVisible": "~70 trailers counted across the west drop yard and dock banks in captured imagery; trailerParkingCapacity ~120 given the striped trailer rows and apron width.",
+    "buildingCount": "Counted 2: the primary contiguous manufacturing mega-building (white + dark roof sections read as one structure) plus the south gatehouse/utility structure. A large separate dark/solar-roof building sits just south of the perimeter on an adjacent parcel and was excluded from the perimeter.",
+    "railServed": "No rail spur runs into the property; the site is served entirely by truck (I-75 frontage). railServed false.",
+    "urbanRural": "Edge-of-town industrial on the Detroit metro fringe in Brownstown Twp - open farmland and a retention pond border the west/SE, high-tension transmission corridor alongside Allen Rd. Judged Rural per the small-town/edge-industrial tiebreak.",
+    "fastLaneOpportunity": "True. The south entry has wide paved apron width and a multi-lane internal artery with unused width to add an express/bypass lane.",
+    "scale": "No truck scale positively identified in imagery; left false and flagged uncertain.",
+    "geofence": "Perimeter traced to the private loop road enclosing the main building and its west drop yard / south parking (~175 acres), excluding the separate dark-roof building on the adjacent southern parcel. dropYards = west trailer storage rows; dockAprons = west dock bank and south sawtooth dock line, traced as thin quads parallel to each building face. truckGate quad covers the south controlled entry. Street View coverage exists only on the public Allen Rd corridor (pano 9pSofkhImAu_xiKxUdmGrQ, 2024-07) at the SE; no public pano inside the property."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,144 @@
+{
+  "name": "GM CCA - Jacksonville Parts Distribution Center, Jacksonville FL",
+  "type": "Parts Distribution Center",
+  "coords": {
+    "lat": 30.13745,
+    "lng": -81.5286
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 30.13888,
+          "lng": -81.5298
+        },
+        {
+          "lat": 30.13858,
+          "lng": -81.52735
+        },
+        {
+          "lat": 30.13585,
+          "lng": -81.528
+        },
+        {
+          "lat": 30.13615,
+          "lng": -81.53
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 30.13855,
+          "lng": -81.52785
+        },
+        {
+          "lat": 30.13845,
+          "lng": -81.5274
+        },
+        {
+          "lat": 30.13818,
+          "lng": -81.52748
+        },
+        {
+          "lat": 30.13828,
+          "lng": -81.52792
+        }
+      ]
+    },
+    "dropYards": [],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 30.13862,
+            "lng": -81.52758
+          },
+          {
+            "lat": 30.13857,
+            "lng": -81.52723
+          },
+          {
+            "lat": 30.13622,
+            "lng": -81.52788
+          },
+          {
+            "lat": 30.13627,
+            "lng": -81.52823
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 90,
+        "pano": "SIQPfuBofa2aUf2HD97gZA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 45,
+        "pano": "5KU1HyYtINAUcfI334k8Kw",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 38,
+    "trailersVisible": 28,
+    "trailerParkingCapacity": 45,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 22.45,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@30.13745,-81.52860,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes"
+  ],
+  "fieldNotes": {
+    "facility": "363,041 SF spec distribution building on a 22.45-acre parcel at 12751 Gran Bay Pkwy W in the master-planned Flagler Center (Mandarin/Southside submarket), immediately off I-95. Listed as General Motors Service Parts Operations; GM CCA parts processing/distribution is run here through 3PL Saddle Creek Logistics (dedicated Jacksonville-Gran Bay facility). Resolved via Yelp/LoopNet/Saddle Creek listings, confirmed against satellite + 2024 Street View.",
+    "truckGate": "No controlled truck gate. West frontage on Gran Bay Pkwy is an open campus-style office/parking front (glass curtain wall, palm-tree landscaping, open lot - confirmed in Street View). Dock yard on the east face is open paved apron reached by an internal drive with no barrier arm, sliding gate, or fence line. Set false.",
+    "guardShack": "No staffed booth at any approach. The only freestanding structure near the dock-yard entrance is a circular utility/retention tank pad, not a guard booth. Set false.",
+    "remoteGs": "No gate present, so no remote check-in either. Set false.",
+    "dockDoors": "Single long dock bank runs the full ~1,000 ft east/northeast face of the building with a regular rhythm of doors and ~28 trailers backed in across the captured imagery; estimated ~38 doors -> 25-50 band. Count is an overhead estimate.",
+    "dropArea": "No dedicated trailer-storage lot. Trailers are backed into the dock apron (active staging); only an occasional trailer parked in the south-end paved lot (otherwise a car park). Set 0-10.",
+    "dropYard": "No separate trailer-storage yard - the narrow tree-lined apron between this building and the neighboring warehouse holds only the active dock-staged trailers. Set false.",
+    "drivewayLong": "Internal dock drive runs the length of the building and easily holds a 3+ truck queue; entry is from the campus loop road. Set drivewayLong true.",
+    "fastLaneOpportunity": "No gate to bypass; open ungated apron, so no express-lane opportunity in the gate sense. Set false.",
+    "shipRcvSeparate": "All dock doors are on a single building face (one continuous bank); no physically separate ship/receive clusters. Set false.",
+    "urbanRural": "Inside the 1,022-acre Flagler Center business park off I-95 with dense surrounding office, warehouse, apartment, and retail development in suburban Jacksonville -> Urban.",
+    "railServed": "No rail spur into the property; nearest intermodal is offsite. Set false.",
+    "multipleFacilities": "Single distribution building on the parcel (office front + warehouse are one structure). Adjacent warehouses are separate parcels/tenants. Set false."
+  },
+  "method": "deep-audit"
+}

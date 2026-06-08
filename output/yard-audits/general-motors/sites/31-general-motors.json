@@ -1,0 +1,126 @@
+{
+  "name": "GM CCA - Ypsilanti Processing Center, Ypsilanti MI",
+  "type": "Parts Processing / Distribution Center",
+  "coords": {
+    "lat": 42.24995,
+    "lng": -83.57075
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        { "lat": 42.25140, "lng": -83.57315 },
+        { "lat": 42.25140, "lng": -83.56960 },
+        { "lat": 42.24960, "lng": -83.56950 },
+        { "lat": 42.24930, "lng": -83.57000 },
+        { "lat": 42.24880, "lng": -83.57000 },
+        { "lat": 42.24855, "lng": -83.57175 },
+        { "lat": 42.24990, "lng": -83.57300 }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        { "lat": 42.24905, "lng": -83.57090 },
+        { "lat": 42.24905, "lng": -83.57050 },
+        { "lat": 42.24855, "lng": -83.57050 },
+        { "lat": 42.24855, "lng": -83.57090 }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          { "lat": 42.25110, "lng": -83.57300 },
+          { "lat": 42.25110, "lng": -83.57180 },
+          { "lat": 42.24980, "lng": -83.57180 },
+          { "lat": 42.24980, "lng": -83.57300 }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          { "lat": 42.25125, "lng": -83.57175 },
+          { "lat": 42.25125, "lng": -83.56980 },
+          { "lat": 42.25095, "lng": -83.56980 },
+          { "lat": 42.25095, "lng": -83.57175 }
+        ]
+      },
+      {
+        "ring": [
+          { "lat": 42.25095, "lng": -83.57195 },
+          { "lat": 42.25095, "lng": -83.57165 },
+          { "lat": 42.24935, "lng": -83.57165 },
+          { "lat": 42.24935, "lng": -83.57195 }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 359,
+        "pano": "A0Cq0Kh7KfVrLkSBq-XfYg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 6,
+        "pano": "A0Cq0Kh7KfVrLkSBq-XfYg",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 36,
+    "trailersVisible": 45,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 19,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.24995,-83.57075,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "shipRcvSeparate",
+    "multipleFacilities"
+  ],
+  "fieldNotes": {
+    "truckGate": "Open campus. The building sits well back behind a large open lawn off E Michigan Ave; multiple driveways enter from the road with no barrier arm, sliding gate, or perimeter fence at the frontage (confirmed in 2025-08 Street View). Trucks reach the north and west dock faces via open internal drives and a shared campus loop road. No controlled truck entrance.",
+    "guardShack": "No staffed booth at any driveway. The only small standalone structure on the property is a dark-roofed office/support building at the NE corner, set back from the road - not a gate booth beside a controlled lane.",
+    "remoteGs": "No gate exists, so no remote check-in either - false.",
+    "postGateStaging": "Large paved aprons and the NW trailer yard inside the property give ample room to hold trucks before the docks - set true at medium confidence.",
+    "dockDoors": "Long banks of dock doors with trailers backed in along the entire north wall (~12-15 doors) and the west wall (~15-18 doors). Estimated ~36 total -> 25-50 band. Low-confidence exact count from overhead roof imagery.",
+    "dropArea": "Dedicated trailer-staging yard on the NW corner holds rows of drop trailers (no tractors) plus trailers staged along the west apron; well into the 25-50 band.",
+    "dropYard": "Distinct trailer-storage lot NW of the building, separate from the active west/north dock aprons.",
+    "shipRcvSeparate": "Two physically separate dock banks on different building faces (north wall and west wall) suggest split ship/receive flows - medium confidence.",
+    "railServed": "An active rail line runs SE of the property on the far side of E Michigan Ave, but no spur enters this property - false.",
+    "multipleFacilities": "The processing center is a single large building. It shares a campus to the north with a separate domed GM training/engagement facility, but that is a distinct operation, so multipleFacilities is left false for the processing yard itself.",
+    "urbanRural": "Ypsilanti, within the dense Detroit-Ann Arbor metro fabric along the E Michigan Ave corridor -> Urban.",
+    "siteAreaAcres": "~19 acres for the processing operation footprint (building + NW trailer yard + employee parking), measured from the traced perimeter ring."
+  },
+  "method": "deep-audit"
+}

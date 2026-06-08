@@ -30,6 +30,7 @@ import {
   type Tile,
   type ArchetypeId,
   type Confidence,
+  type ZoneStreetView,
 } from '../../src/lib/demo/pack-schema';
 import { shapeBounds } from '../../src/lib/demo/geofence-geometry';
 import { buildScenario } from '../../src/lib/demo/scenarios';
@@ -246,6 +247,43 @@ async function loadTiles(micrositeSlug: string, siteId: string): Promise<Record<
   return Object.keys(out).length > 0 ? out : undefined;
 }
 
+/**
+ * Sanitize the auditor-written `streetViewMeta` so it validates against
+ * `ZoneStreetView` (heading in [0,360), pano min length 1). Auditors sometimes
+ * emit a zone with an empty `pano` (no usable Street View), a `heading` of
+ * exactly 360, or a single `dropYards`/`dockApron` object instead of an array.
+ * We drop pano-less zones (they can't render a walkthrough anyway), wrap stray
+ * objects into arrays, and fold heading into range. Returns undefined when
+ * nothing usable remains so the key is omitted entirely.
+ */
+type RawZone = { heading?: number; pano?: string; hasCoverage?: boolean };
+function cleanZone(z: RawZone | null | undefined): ZoneStreetView | undefined {
+  if (!z || typeof z.pano !== 'string' || z.pano.length < 1) return undefined;
+  const heading = ((Number(z.heading ?? 0) % 360) + 360) % 360;
+  return { heading, pano: z.pano, hasCoverage: z.hasCoverage === true };
+}
+function cleanZoneArray(v: unknown): ZoneStreetView[] | undefined {
+  const arr = Array.isArray(v) ? v : v && typeof v === 'object' ? [v] : [];
+  const cleaned = arr.map((z) => cleanZone(z as RawZone)).filter((z): z is ZoneStreetView => z != null);
+  return cleaned.length > 0 ? cleaned : undefined;
+}
+function sanitizeStreetViewMeta(svm: unknown): SiteGeofences['streetViewMeta'] | undefined {
+  if (!svm || typeof svm !== 'object') return undefined;
+  const raw = svm as Record<string, unknown>;
+  const out: NonNullable<SiteGeofences['streetViewMeta']> = {};
+  const perimeter = cleanZone(raw.perimeter as RawZone);
+  const truckGate = cleanZone(raw.truckGate as RawZone);
+  const staging = cleanZone(raw.staging as RawZone);
+  const dropYards = cleanZoneArray(raw.dropYards);
+  const dockAprons = cleanZoneArray(raw.dockAprons);
+  if (perimeter) out.perimeter = perimeter;
+  if (truckGate) out.truckGate = truckGate;
+  if (staging) out.staging = staging;
+  if (dropYards) out.dropYards = dropYards;
+  if (dockAprons) out.dockAprons = dockAprons;
+  return Object.keys(out).length > 0 ? out : undefined;
+}
+
 async function buildSite(
   auditDir: string,
   micrositeSlug: string,
@@ -275,7 +313,10 @@ async function buildSite(
     dropYards: raw.geofences.dropYards ?? [],
     dockAprons: raw.geofences.dockAprons ?? [],
     staging: raw.geofences.staging ?? null,
-    ...(raw.geofences.streetViewMeta ? { streetViewMeta: raw.geofences.streetViewMeta } : {}),
+    ...((): { streetViewMeta?: SiteGeofences['streetViewMeta'] } => {
+      const svm = sanitizeStreetViewMeta(raw.geofences.streetViewMeta);
+      return svm ? { streetViewMeta: svm } : {};
+    })(),
   };
 
   const tiles = await loadTiles(micrositeSlug, id);

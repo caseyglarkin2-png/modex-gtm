@@ -1,0 +1,130 @@
+{
+  "name": "Ultium Cells - Lordstown (Warren), OH",
+  "type": "Battery Cell Plant (GM / LG Energy Solution JV)",
+  "coords": {
+    "lat": 41.1538,
+    "lng": -80.8635
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        { "lat": 41.15820, "lng": -80.86760 },
+        { "lat": 41.15870, "lng": -80.86050 },
+        { "lat": 41.15640, "lng": -80.85870 },
+        { "lat": 41.15180, "lng": -80.85870 },
+        { "lat": 41.14760, "lng": -80.86230 },
+        { "lat": 41.14820, "lng": -80.86700 },
+        { "lat": 41.15300, "lng": -80.86880 }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        { "lat": 41.14930, "lng": -80.86320 },
+        { "lat": 41.14930, "lng": -80.86230 },
+        { "lat": 41.14870, "lng": -80.86230 },
+        { "lat": 41.14870, "lng": -80.86320 }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          { "lat": 41.15010, "lng": -80.86280 },
+          { "lat": 41.15010, "lng": -80.86090 },
+          { "lat": 41.14910, "lng": -80.86090 },
+          { "lat": 41.14910, "lng": -80.86280 }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          { "lat": 41.14970, "lng": -80.86560 },
+          { "lat": 41.14970, "lng": -80.86150 },
+          { "lat": 41.14900, "lng": -80.86150 },
+          { "lat": 41.14900, "lng": -80.86560 }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 270,
+        "pano": "74GAaClbbaTB0N8e1IOlRA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35,
+    "trailersVisible": 30,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 156.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.1538,-80.8635,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "dockDoors",
+    "trailerParkingCapacity",
+    "railServed",
+    "scale",
+    "multiStep",
+    "shipRcvSeparate"
+  ],
+  "fieldNotes": {
+    "facility": "Positively identified as the Ultium Cells Lordstown battery cell plant (GM / LG Energy Solution JV), the ~2.8M sq ft, ~156-acre cell-manufacturing facility off Tod Ave SW / Ohltown Rd in Lordstown (mailing city Warren), OH. The roster address 2440 Ohltown Rd geocodes to a residential subdivision ~2.5 km NE; re-pinned to the large white-roof plant building at ~41.1538,-80.8635, immediately east of the former GM Lordstown Assembly complex and its rail yard. Confirmed by Ultium / GM / GMAuthority sources (156 acres, 2.8M+ sq ft, ~30 GWh, production since Aug 2022, >100M cells produced by late 2024).",
+    "geofence": "Perimeter traces the developed/fenced plant parcel: the main plant building runs roughly N-S with a slight rotation; the ring also captures the west-side process/utility yards, the SE employee parking field, the south staging/laydown area, and retention ponds. ~156 acres consistent with published site size.",
+    "truckGate": "Marked true (medium confidence). The plant frontage on public Ohltown Rd (E side) is open grass/field with no public truck approach (2025-07 Street View shows the building set far back across an open field). Truck circulation enters from the SW/south via internal Lordstown-complex roads to a fenced, controlled gate near the SW corner of the building. A secured battery-cell campus (valuable IP, lithium hazmat) operates controlled gated access; exact gate hardware not crisply resolved from overhead, so flagged uncertain.",
+    "guardShack": "Marked true (medium confidence). A small gatehouse-footprint structure consistent with a staffed booth sits at the SW truck approach; standard for a GM/LG JV cell plant of this security profile. Not positively resolved as a booth, so flagged; remoteGs false as a consequence.",
+    "dockDoors": "Estimated 25-50 (count ~35). A single principal material-handling dock bank runs along the SOUTH face of the building with trailers and intermodal containers (orange/blue/white) backed in (sgate/sdock/swdock z18 imagery). No second large dock bank on a separate face was resolved, so shipRcvSeparate left false (flagged).",
+    "dropArea": "Banded 10-25. Trailers and containers are staged/dropped on the south apron and SW corner lots without tractors; a dedicated trailer-storage row is present (dropYard true). Much surrounding flat ground is contractor laydown/expansion area rather than marked trailer stalls.",
+    "dropYard": "True — dedicated trailer/container drop area on the south apron separate from active dock positions.",
+    "postGateStaging": "True — deep paved aprons and perimeter loop road inside the fence before the dock face provide internal staging/queue space.",
+    "drivewayLong": "True — the internal approach from the SW gate to the south dock face is long and can hold a multi-truck queue without spilling to a public road; backupSensitive false (gate is internal, far from public Ohltown Rd).",
+    "railServed": "Marked true (flagged). An extensive multi-track rail yard (former GM Lordstown Assembly yard) sits immediately NW of the plant, and a rail line runs the wooded corridor along the west property edge; the complex is rail-served. A spur running directly into the Ultium cell building was not positively confirmed from imagery, so flagged uncertain.",
+    "buildingCount": "Counted 2 — the single large plant building dominates; a smaller separate ancillary/process building sits to the south near the entrance. Functionally one integrated plant, so multipleFacilities false.",
+    "fastLaneOpportunity": "True — wide paved aprons and surplus graded width around the SW entrance and south loop road leave ample room to add an express/bypass lane.",
+    "entryLanes": "Approximate (~2 in / 1 out) from overhead; low confidence — flagged.",
+    "scale": "No truck scale/weigh pad positively identified; left false and flagged.",
+    "urbanRural": "Lordstown is a small rural township; the plant is surrounded by farmland, woods, and the low-density Lordstown industrial corridor. Rural.",
+    "connectivityIssue": "False — rural but immediately adjacent to a major active industrial complex with strong infrastructure and transmission corridors; cellular coverage expected adequate."
+  },
+  "method": "deep-audit"
+}

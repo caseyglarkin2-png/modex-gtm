@@ -1,0 +1,164 @@
+{
+  "name": "GM CCA - Philadelphia Parts Distribution Center, Langhorne PA",
+  "type": "Parts Distribution Center",
+  "coords": {
+    "lat": 40.193557,
+    "lng": -74.835017
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.19452,
+          "lng": -74.836889
+        },
+        {
+          "lat": 40.194062,
+          "lng": -74.832676
+        },
+        {
+          "lat": 40.192349,
+          "lng": -74.833322
+        },
+        {
+          "lat": 40.193013,
+          "lng": -74.836603
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.193905,
+          "lng": -74.833116
+        },
+        {
+          "lat": 40.193832,
+          "lng": -74.832789
+        },
+        {
+          "lat": 40.193609,
+          "lng": -74.832948
+        },
+        {
+          "lat": 40.193688,
+          "lng": -74.833281
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 40.193143,
+            "lng": -74.834699
+          },
+          {
+            "lat": 40.193553,
+            "lng": -74.833708
+          },
+          {
+            "lat": 40.193336,
+            "lng": -74.833541
+          },
+          {
+            "lat": 40.192933,
+            "lng": -74.834528
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 40.193698,
+            "lng": -74.835468
+          },
+          {
+            "lat": 40.194097,
+            "lng": -74.834472
+          },
+          {
+            "lat": 40.193879,
+            "lng": -74.834306
+          },
+          {
+            "lat": 40.193481,
+            "lng": -74.835302
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 235,
+        "pano": "Ism-wluyMRVTM4dKDFjb_A",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 235,
+        "pano": "Ism-wluyMRVTM4dKDFjb_A",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 34,
+    "trailersVisible": 45,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 27.5,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.19356,-74.83502,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "railServed"
+  ],
+  "fieldNotes": {
+    "facility": "GM Customer Care & Aftersales (legacy SPO/Service Parts Operations) Philadelphia Parts Distribution Center at 200 Cabot Blvd E, Langhorne PA 19047. Rooftop geocode (40.193957,-74.834983) lands on the building; a single large single-story distribution warehouse confirmed by satellite, set back from US-1 in the Cabot industrial area off the NS Morrisville rail yard. Verified via business directories (193 employees, 267-580-2301) and UAW local listings (SPO Philadelphia).",
+    "truckGate": "Single private access drive curls SW off Cabot Blvd E into the property; long fenced, tree-buffered approach. No public Street View penetrates the drive (private), so the physical gate hardware is inferred from the controlled-access layout, not directly imaged.",
+    "guardShack": "No guard booth identifiable at the property entrance in satellite; access is via the long private drive. Treated as likely kiosk/app check-in (remoteGs) rather than a staffed booth; flagged uncertain.",
+    "drivewayLong": "Access drive from Cabot Blvd to the truck court is several hundred feet and can stack 3+ trucks; the internal perimeter road around the building adds deep queuing room.",
+    "postGateStaging": "Large paved truck court on the SE/south side between the dock apron and the rail buffer holds queued and dropped trailers inside the fence.",
+    "dockDoors": "Estimate ~34 dock positions along the single long SE building face (regular bay rhythm with trailers backed in across the dock apron); band 25-50.",
+    "dropArea": "A second row of free-standing nose-out drop trailers sits in the truck court ahead of the docked row; consistent with 25-50 dropped trailers. dropYard true.",
+    "railServed": "A rail spur enters the property from the SE and runs along the building (clearly visible at z20 near the NE/E corner) off the adjacent NS/Conrail Morrisville Yard. Spur present though primary inbound today is truck; flagged uncertain on current activity.",
+    "urbanRural": "Edge-of-town industrial parcel beside US-1 and a rail yard, with farmland to the NW and a tree buffer around; judged Rural per rubric (small-town industrial leans Rural).",
+    "shipRcvSeparate": "Single dock bank on one building face; shipping and receiving share the same dock line.",
+    "scale": "No truck scale identified in imagery."
+  },
+  "method": "deep-audit"
+}

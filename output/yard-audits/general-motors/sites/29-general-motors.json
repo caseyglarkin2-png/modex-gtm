@@ -1,0 +1,131 @@
+{
+  "name": "GM CCA - Davison Road Processing Center, Burton MI",
+  "type": "CCA Parts Processing Center",
+  "coords": {
+    "lat": 43.0272,
+    "lng": -83.6411
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        { "lat": 43.02525, "lng": -83.64575 },
+        { "lat": 43.02525, "lng": -83.63660 },
+        { "lat": 43.02985, "lng": -83.63660 },
+        { "lat": 43.02985, "lng": -83.64575 }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        { "lat": 43.02615, "lng": -83.63730 },
+        { "lat": 43.02615, "lng": -83.63660 },
+        { "lat": 43.02985, "lng": -83.63660 },
+        { "lat": 43.02985, "lng": -83.63730 }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          { "lat": 43.02985, "lng": -83.64500 },
+          { "lat": 43.02985, "lng": -83.63700 },
+          { "lat": 43.02830, "lng": -83.63700 },
+          { "lat": 43.02830, "lng": -83.64500 }
+        ]
+      },
+      {
+        "ring": [
+          { "lat": 43.02720, "lng": -83.63810 },
+          { "lat": 43.02720, "lng": -83.63680 },
+          { "lat": 43.02560, "lng": -83.63680 },
+          { "lat": 43.02560, "lng": -83.63810 }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          { "lat": 43.02830, "lng": -83.64560 },
+          { "lat": 43.02830, "lng": -83.63760 },
+          { "lat": 43.02795, "lng": -83.63760 },
+          { "lat": 43.02795, "lng": -83.64560 }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 30,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "truckGate": {
+        "heading": 270,
+        "pano": "",
+        "hasCoverage": false
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 84,
+    "trailersVisible": 25,
+    "trailerParkingCapacity": 250,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 141,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@43.02720,-83.64110,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "shipRcvSeparate",
+    "scale"
+  ],
+  "fieldNotes": {
+    "_facility": "Positively confirmed GM CCA Davison Road Processing Center: 1.1M sq ft modern (opened 2019) ACDelco/GM Genuine parts processing hub on a 141-acre lot at the corner of Genesee Rd and Davison Rd, Burton MI. The documented 132-ft ASRS storage tower added on the east side toward Davison Rd / Genesee corner matches the imagery; the white-roof building runs E-W with the GM water tower at its SW corner and an enormous legacy GM concrete apron extending north to a residential street.",
+    "truckGate": "Continuous perimeter fence rings the property (confirmed in 2025 Street View along Genesee Rd, separating the paved yard from residential lots). Controlled industrial driveways through the fence; gate marked true. Two principal access points (east off Genesee Rd into the north yard, and a west driveway) -> truckGateCount 2.",
+    "guardShack": "No staffed guard booth positively identifiable in available Street View; the gate driveways sit back from the public road and panos did not capture a booth -> guardShack false, flagged uncertain.",
+    "remoteGs": "Gate present, no confirmed booth -> set true (kiosk/app check-in assumed) at low confidence.",
+    "dockDoors": "84 shipping and receiving dock doors documented for the 1.1M sq ft facility (GM/automotive-logistics reporting), distributed across the building faces (docks and trailers visible along the north and the east end in satellite) -> 50+ band.",
+    "dropArea": "Vast paved legacy GM concrete yard (tens of acres) on the north and east used for trailer staging; capacity well into the hundreds -> 50+ band. Visible trailer count modest in the captured imagery (~25) but the lot holds far more.",
+    "dropYard": "Dedicated trailer-storage capacity on the enormous north apron, separate from the active dock aprons -> true.",
+    "railServed": "Active rail line with a siding/switch runs along the entire south edge of the property between the building and Davison Rd (confirmed at z19 with visible turnout). Direct spur into the building not clearly resolved, but the siding serves the site -> true.",
+    "entryExitSeparate": "Site is large with multiple gated driveways at different points of the property line (west road and Genesee Rd) -> entry/exit treated as separate; lane counts not individually resolved.",
+    "fastLaneOpportunity": "Massive unused paved width on the north apron and wide driveway aprons leave ample room for an express/bypass lane.",
+    "postGateStaging": "Large paved internal yard inside the fence and before the dock doors provides post-gate staging/queueing.",
+    "drivewayLong": "Deep internal approach across the north apron easily holds a 3+ truck queue.",
+    "urbanRural": "Inside Burton/Flint metro industrial-residential fabric (dense neighborhoods directly abut the north and east) -> Urban.",
+    "shipRcvSeparate": "Facility has both shipping and receiving docks; whether they are on physically distinct building faces is not conclusively resolved -> set false, flagged uncertain.",
+    "siteAreaAcres": "Documented 141-acre lot; traced fenced yard polygon is ~90-100 acres, value set to the documented 141 acres for the full parcel.",
+    "buildingCount": "Single very large processing building (with the attached ASRS tower) dominates the parcel -> buildingCount 1; multipleFacilities false."
+  },
+  "method": "deep-audit"
+}

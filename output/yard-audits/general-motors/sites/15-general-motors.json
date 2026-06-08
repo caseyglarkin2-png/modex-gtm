@@ -1,0 +1,164 @@
+{
+  "name": "GM - Toledo Propulsion Systems, Toledo OH",
+  "type": "Transmission Plant",
+  "coords": {
+    "lat": 41.7106,
+    "lng": -83.5748
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.71400,
+          "lng": -83.57780
+        },
+        {
+          "lat": 41.71405,
+          "lng": -83.57130
+        },
+        {
+          "lat": 41.70790,
+          "lng": -83.57120
+        },
+        {
+          "lat": 41.70770,
+          "lng": -83.57760
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.70840,
+          "lng": -83.57560
+        },
+        {
+          "lat": 41.70840,
+          "lng": -83.57500
+        },
+        {
+          "lat": 41.70760,
+          "lng": -83.57500
+        },
+        {
+          "lat": 41.70760,
+          "lng": -83.57560
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 41.71390,
+            "lng": -83.57560
+          },
+          {
+            "lat": 41.71390,
+            "lng": -83.57350
+          },
+          {
+            "lat": 41.71150,
+            "lng": -83.57350
+          },
+          {
+            "lat": 41.71150,
+            "lng": -83.57560
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 41.71270,
+            "lng": -83.57560
+          },
+          {
+            "lat": 41.71270,
+            "lng": -83.57500
+          },
+          {
+            "lat": 41.71050,
+            "lng": -83.57500
+          },
+          {
+            "lat": 41.71050,
+            "lng": -83.57560
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 12,
+        "pano": "ZKbQ2JR7BrT0TnShsrdvdw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 5,
+        "pano": "ZKbQ2JR7BrT0TnShsrdvdw",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 2,
+    "buildingCount": 3,
+    "siteAreaAcres": 151.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.71060,-83.57480,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "guardShack"
+  ],
+  "fieldNotes": {
+    "facility": "Positively identified as GM Toledo Propulsion Systems (formerly Toledo Transmission), 1455 W Alexis Rd. The roster's approximate coords landed in a residential block east of the plant; re-pinned to the large industrial complex on the west side of the N-S rail corridor along W Alexis Rd. Web sources confirm a ~2.8M sq ft, ~151-acre GM transmission factory at this address (Wikipedia 'Toledo Transmission'; GM facilities page).",
+    "truckGate": "Site is fully fenced (perimeter chain-link visible in every Street View frame along W Alexis Rd). Main truck/freight circulation enters via a fenced driveway on the SW/west side of the property; gated, lane-controlled access. Employee/visitor frontage with a GM monument sign and office building is a separate point on the south (W Alexis) face.",
+    "guardShack": "Controlled fenced auto-plant entry; a small structure consistent with a gatehouse sits at the west truck driveway. Booth not crisply resolved in available imagery, so flagged uncertain, but guarded access is standard for a GM assembly/powertrain plant of this scale.",
+    "dockDoors": "Estimate from overhead imagery: long banks of dock doors with trailers backed in along the north and west faces of the main building (50+ band). Distributed across multiple building faces.",
+    "dropArea": "Large organized drop/trailer-storage yard north of the main building with dozens of parked trailers in marked rows (50+); separate from active dock staging.",
+    "shipRcvSeparate": "Trailers backed into docks on distinct north and west building faces indicate physically separate shipping/receiving dock clusters.",
+    "railServed": "Multiple active rail spurs run N-S directly through the property between the plant and the eastern storage lot; rail boxcars visible parked on the spurs in tight imagery.",
+    "fastLaneOpportunity": "Wide paved truck aprons and deep internal circulation drives provide room to add a bypass/express lane at the gate.",
+    "entryLanes": "Approximate; west truck driveway reads as roughly 2 inbound lanes, 1 outbound — low confidence from overhead.",
+    "scale": "No truck scale clearly identified in imagery; left uncertain.",
+    "urbanRural": "Inside the dense Toledo metro fabric, surrounded by residential street grid and other industry on all sides; classified Urban.",
+    "multipleFacilities": "Single integrated plant complex (one large connected building plus minor outbuildings); the eastern lot across the rail is a vehicle/trailer marshalling/storage area of the same site, not a second plant cluster."
+  },
+  "method": "deep-audit"
+}

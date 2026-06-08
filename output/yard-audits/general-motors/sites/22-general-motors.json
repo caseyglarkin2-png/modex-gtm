@@ -1,0 +1,126 @@
+{
+  "name": "GM - Saginaw Metal Casting Operations, Saginaw MI",
+  "type": "Metal Casting Plant",
+  "coords": {
+    "lat": 43.4489,
+    "lng": -83.9190
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        { "lat": 43.45230, "lng": -83.92140 },
+        { "lat": 43.45170, "lng": -83.91560 },
+        { "lat": 43.45050, "lng": -83.91480 },
+        { "lat": 43.44700, "lng": -83.91560 },
+        { "lat": 43.44600, "lng": -83.91720 },
+        { "lat": 43.44610, "lng": -83.91940 },
+        { "lat": 43.44830, "lng": -83.92090 },
+        { "lat": 43.45050, "lng": -83.92250 }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        { "lat": 43.44690, "lng": -83.91855 },
+        { "lat": 43.44690, "lng": -83.91790 },
+        { "lat": 43.44630, "lng": -83.91790 },
+        { "lat": 43.44630, "lng": -83.91855 }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          { "lat": 43.45020, "lng": -83.91720 },
+          { "lat": 43.45010, "lng": -83.91560 },
+          { "lat": 43.44880, "lng": -83.91580 },
+          { "lat": 43.44890, "lng": -83.91740 }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          { "lat": 43.44980, "lng": -83.91840 },
+          { "lat": 43.44930, "lng": -83.91770 },
+          { "lat": 43.44870, "lng": -83.91820 },
+          { "lat": 43.44920, "lng": -83.91890 }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 348,
+        "pano": "uLQq0M9x0QJFyrcATSzZWQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 14,
+        "pano": "uLQq0M9x0QJFyrcATSzZWQ",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14,
+    "trailersVisible": 8,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 110.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@43.4489,-83.9190,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoors",
+    "entryLanes",
+    "exitLanes",
+    "postGateStaging",
+    "dropArea",
+    "trailerParkingCapacity"
+  ],
+  "fieldNotes": {
+    "facility": "GM Saginaw Metal Casting Operations (SMCO), 1629 N Washington Ave, Saginaw MI. Aluminum foundry: precision sand + semi-permanent mold casting of V6 engine blocks, cylinder heads and 4WD front-axle castings, plus pre/final machining; ~1.9M sq ft, historically on a ~490-acre land parcel but the active fenced manufacturing footprint is far smaller (~110 acres). Coords re-pinned from the roster address point to the true plant core at 43.4489,-83.9190 via Wikipedia (43.4529,-83.9159) cross-checked against satellite identification of the large multi-building foundry mass on the east bank of the Saginaw River with a flanking rail spur. Confirmed = the correct GM industrial building.",
+    "site": "Active foundry that has been heavily downsized: large areas of the parcel are now vacant cracked-concrete former-building footprints (clear demolition scars E and SE of the core) and open laydown yard. The remaining production mass is a dense cluster of connected foundry buildings (6+ distinct roof sections) center-right of the parcel.",
+    "truckGate": "Controlled fenced campus. Continuous chain-link perimeter fence confirmed in 2023/2024 Street View along the N Washington Ave / west and south frontage (fence + employee picnic pavilion visible inside the line). Primary controlled access is a divided boulevard drive off N Washington at ~43.4466,-83.9180; an open public truck gate is not present - access is through the secured campus drive. truckGate=true.",
+    "guardShack": "No guard booth positively resolved at the entrance in available imagery; the divided entry drive feeds the secured interior. Marked uncertain. Set guardShack=false / remoteGs=true (gate present, no clearly staffed booth visible -> implies kiosk/badge/app check-in), flagged for human review.",
+    "postGateStaging": "Large paved interior yards inside the fence (former demolished footprints now open pavement, plus the central laydown apron) give ample post-gate holding before the docks; medium confidence.",
+    "drivewayLong": "Long internal approach from the Washington Ave entry drive through the interior road network to the dock/laydown courts - easily holds a 3+ truck queue.",
+    "dockDoors": "10-25 band, estimated ~14. Foundry truck docks are modest and distributed on the interior building faces (sand/alloy inbound, finished-casting outbound); much material moves by rail rather than truck, so exterior dock count is low for a plant this size. Low-confidence overhead estimate.",
+    "dropArea": "10-25. Trailers and containers visible parked in the north/northeast laydown yard (~8 trailers visible) with room for ~40; classified as a drop yard. dropYard=true.",
+    "dropYard": "Dedicated trailer/container storage and material laydown in the open paved yard north and northeast of the building core, separate from active dock staging.",
+    "railServed": "Rail spur runs diagonally (NW-SE) directly alongside the plant's west face into the property (visible dark linear feature with material-handling/silo structures and an electrical substation at the NW corner). Foundries of this type receive bulk material and ship by rail. railServed=true, high confidence.",
+    "shipRcvSeparate": "Could not confirm physically separate shipping vs receiving dock clusters; ship/rcv likely share interior dock courts. Set false.",
+    "multipleFacilities": "Single integrated foundry complex (one building cluster), not a multi-building campus of separate plants; multipleFacilities=false.",
+    "urbanRural": "Inside the City of Saginaw - residential neighborhoods abut the south and west frontage across N Washington Ave; classified Urban.",
+    "entryLanes": "Lane counts (1/1) are overhead estimates of the entry boulevard, flagged uncertain.",
+    "streetView": "Public Street View coverage exists on N Washington Ave at the SW frontage (pano uLQq0M9x0QJFyrcATSzZWQ @ 43.44622,-83.91826, captured 2023-05) and shows the perimeter fence; no pano inside the secured campus, so both zone panos point from this frontage pano toward the gate/perimeter."
+  },
+  "method": "deep-audit"
+}

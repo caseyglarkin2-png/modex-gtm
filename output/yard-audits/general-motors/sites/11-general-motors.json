@@ -1,0 +1,132 @@
+{
+  "name": "GM - Lansing Delta Township Assembly, Lansing MI",
+  "type": "Vehicle Assembly Plant",
+  "coords": {
+    "lat": 42.6921,
+    "lng": -84.6798
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        { "lat": 42.69655, "lng": -84.68410 },
+        { "lat": 42.69640, "lng": -84.67560 },
+        { "lat": 42.69080, "lng": -84.67520 },
+        { "lat": 42.68480, "lng": -84.67760 },
+        { "lat": 42.68360, "lng": -84.68160 },
+        { "lat": 42.68720, "lng": -84.68420 },
+        { "lat": 42.69200, "lng": -84.68440 }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        { "lat": 42.68500, "lng": -84.68165 },
+        { "lat": 42.68505, "lng": -84.68095 },
+        { "lat": 42.68450, "lng": -84.68090 },
+        { "lat": 42.68445, "lng": -84.68160 }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          { "lat": 42.69380, "lng": -84.68060 },
+          { "lat": 42.69385, "lng": -84.67910 },
+          { "lat": 42.69300, "lng": -84.67905 },
+          { "lat": 42.69295, "lng": -84.68055 }
+        ]
+      },
+      {
+        "ring": [
+          { "lat": 42.69230, "lng": -84.67930 },
+          { "lat": 42.69235, "lng": -84.67800 },
+          { "lat": 42.69150, "lng": -84.67795 },
+          { "lat": 42.69145, "lng": -84.67925 }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          { "lat": 42.69345, "lng": -84.68130 },
+          { "lat": 42.69350, "lng": -84.67960 },
+          { "lat": 42.69310, "lng": -84.67958 },
+          { "lat": 42.69305, "lng": -84.68128 }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 347,
+        "pano": "CAoSF0NJSE0wb2dLRUlDQWdJRGFxWTNnX2dF",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 347,
+        "pano": "CAoSF0NJSE0wb2dLRUlDQWdJRGFxWTNnX2dF",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 35,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 320,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.69210,-84.67980,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "scale"
+  ],
+  "fieldNotes": {
+    "facility": "Lansing Delta Township Assembly (LDT), 8175 Millett Hwy, Lansing MI 48917 - GM's newest US assembly plant (opened 2006, LEED Gold), ~3.4-3.6M sq ft, builds Buick Enclave / Chevrolet Traverse / GMC Acadia full-size crossovers. The roster coordinate (42.7361,-84.5838) is ~7km off in urban Lansing; the plant is actually in Delta Township SW of the I-69/I-96 interchange. Positively re-pinned the large white-roofed assembly complex centered at 42.6921,-84.6798, set back ~600m west of Canal Rd between Millett Hwy and the interchange. The adjacent south building cluster is Lansing Regional Stamping (audited separately as idx 18) but physically shares the campus and truck court.",
+    "truckGate": "Single controlled truck/personnel entrance at the SW corner (~42.6848,-84.6812): a green-roofed gatehouse canopy spans the inbound/outbound lanes with a channelizing island and lane striping. The plant sits ~600m back from the Guinea Rd / access-road intersection behind continuous chain-link perimeter fence (confirmed in Street View from multiple headings).",
+    "guardShack": "Canopy gatehouse structure straddling the gate lanes is consistent with a staffed guard booth; GM assembly plants run staffed security gatehouses. Marked uncertain because overhead imagery shows the canopy but cannot crisply confirm an occupied booth window line.",
+    "preGateStaging": "Long approach drive and wide paved aprons outside the gate provide ample room for arriving trucks to wait before the checkpoint.",
+    "postGateStaging": "Large paved lot immediately inside the gate (east of the gatehouse) plus the wide internal truck court give holding space before the docks.",
+    "drivewayLong": "Gate-to-dock approach is several hundred meters of internal road and can easily hold a queue of 3+ trucks.",
+    "fastLaneOpportunity": "Wide multi-lane gate apron and broad internal driveways carry unused paved width for an express/bypass lane.",
+    "dockDoors": "Counted roughly 45 loading-dock doors: a bank of ~10-12 trailers backed into the assembly building's south face, a second dock bank along the cross-court building face, plus additional doors on the west face of the south building. Estimate from overhead imagery - marked uncertain.",
+    "dropArea": "25-50 trailers visible across the inter-building truck court and west-face staging; multiple parked trailers without tractors indicate a working drop operation.",
+    "dropYard": "Dedicated trailer staging rows in the truck court between the assembly and stamping buildings, separate from active dock backing.",
+    "shipRcvSeparate": "Distinct dock banks on physically separate building faces (assembly south face and the cross-court/stamping faces) - shipping and receiving run from separate clusters.",
+    "multipleFacilities": "Campus of multiple connected large buildings on one fenced property: the assembly plant, the paint/body shops, and the adjoining Lansing Regional Stamping plant sharing the truck court.",
+    "railServed": "No rail spur enters the property; inbound JIT parts and outbound finished-vehicle movements are truck-served (with a large finished-vehicle marshalling lot on the NE/NW grounds). Off-site rail exists in the region but no spur crosses the fence line.",
+    "urbanRural": "Edge-of-town / semi-rural Delta Township setting - the plant is surrounded by open fields, a solar array, and farmland on the north and west, with the I-69/I-96 interchange to the east. Judged Rural per the rubric's small-town-industrial tie-break.",
+    "scale": "No truck scale clearly identified in the gate or truck-court imagery; left uncertain.",
+    "entryLanes": "Gate apron appears to carry ~2 inbound lanes; exact lane count not crisply resolvable - marked uncertain.",
+    "coords": "Re-pinned from the roster's imprecise coordinate to the confirmed assembly-complex centroid."
+  },
+  "method": "deep-audit"
+}

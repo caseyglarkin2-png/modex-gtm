@@ -1,0 +1,206 @@
+{
+  "name": "DMAX (GM diesel), Moraine OH",
+  "type": "Engine Plant (GM JV)",
+  "coords": {
+    "lat": 39.70505,
+    "lng": -84.22185
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.706852,
+          "lng": -84.224035
+        },
+        {
+          "lat": 39.706795,
+          "lng": -84.220015
+        },
+        {
+          "lat": 39.703330,
+          "lng": -84.219760
+        },
+        {
+          "lat": 39.703560,
+          "lng": -84.224290
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.706905,
+          "lng": -84.224010
+        },
+        {
+          "lat": 39.706880,
+          "lng": -84.223560
+        },
+        {
+          "lat": 39.706560,
+          "lng": -84.223600
+        },
+        {
+          "lat": 39.706585,
+          "lng": -84.224050
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 39.704430,
+            "lng": -84.220870
+          },
+          {
+            "lat": 39.704330,
+            "lng": -84.219980
+          },
+          {
+            "lat": 39.703470,
+            "lng": -84.220150
+          },
+          {
+            "lat": 39.703560,
+            "lng": -84.221060
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 39.706090,
+            "lng": -84.224170
+          },
+          {
+            "lat": 39.704720,
+            "lng": -84.224280
+          },
+          {
+            "lat": 39.704690,
+            "lng": -84.223830
+          },
+          {
+            "lat": 39.706060,
+            "lng": -84.223720
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 39.706060,
+            "lng": -84.220620
+          },
+          {
+            "lat": 39.704460,
+            "lng": -84.220730
+          },
+          {
+            "lat": 39.704445,
+            "lng": -84.220360
+          },
+          {
+            "lat": 39.706045,
+            "lng": -84.220250
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 39.706070,
+            "lng": -84.223600
+          },
+          {
+            "lat": 39.704700,
+            "lng": -84.223700
+          },
+          {
+            "lat": 39.704690,
+            "lng": -84.223360
+          },
+          {
+            "lat": 39.706060,
+            "lng": -84.223260
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 180,
+        "pano": "AHvJNboPH4NikryDbtI_Wg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 135,
+        "pano": "CvcXabIhcUviMHwYg0r22g",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 34,
+    "trailersVisible": 24,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 37.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.70505,-84.22185,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "scale"
+  ],
+  "fieldNotes": {
+    "facility": "Positively identified: Street View on the west perimeter road shows the DMAX logo on the building face with red dock doors and a Duramax-branded tractor in the fenced yard (pano CvcXabIhcUviMHwYg0r22g). This is the DMAX Ltd diesel engine plant at 3100 Dryden Rd, a distinct building from the former GM Moraine Assembly (now Fuyao Glass America) further south.",
+    "truckGate": "Continuous chain-link perimeter fence confirmed on all sides via multiple Street View angles. The truck/yard entrance is at the NW corner off the Dryden Rd intersection where the internal loop/perimeter road enters the secured yard.",
+    "guardShack": "No staffed guard booth at the truck lane positively visible in satellite or Street View; entrances read as fenced/gated. Auto-plant sites at this scale frequently have a gatehouse, so this is flagged uncertain.",
+    "remoteGs": "Inferred from a gated, fully fenced entrance with no clearly visible staffed booth at the truck lane; uncertain (see guardShack).",
+    "dockDoors": "Dock doors on two faces: a long red-doored bank on the west/SW face (visible in Street View, ~trailers backed in) and a row on the east/SE face with multiple trailers backed in (zoom-19 imagery). 25-50 band; exact count approximate.",
+    "shipRcvSeparate": "Two physically separate dock clusters on the west and east building faces.",
+    "dropYard": "Dedicated trailer-parking lots with trailers parked in marked rows: a drop yard SE of the building (toward the rail/solar buffer) and trailer rows along the west yard. dropArea 25-50.",
+    "postGateStaging": "Large paved yard apron inside the fence on west and south faces provides post-gate holding before docks.",
+    "fastLaneOpportunity": "Wide gated apron at the NW entrance and broad internal perimeter roads leave ample paved width for a bypass/express lane.",
+    "railServed": "A multi-track main-line rail corridor runs immediately east of the property, but a wooded buffer separates it from the plant and no spur is visible entering the fenced DMAX property; railServed set false.",
+    "urbanRural": "Within the Dayton OH metro industrial fabric (Moraine), surrounded by other plants, rail, and dense residential; Urban.",
+    "scale": "No truck scale/weigh pad clearly identified; left uncertain.",
+    "siteAreaAcres": "~37.5 acres derived from the fenced-perimeter polygon; building footprint plus surrounding yards and parking."
+  },
+  "method": "deep-audit"
+}

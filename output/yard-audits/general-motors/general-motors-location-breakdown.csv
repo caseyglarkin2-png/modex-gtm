@@ -1,0 +1,72 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+"GM - Factory ZERO (Detroit-Hamtramck Assembly), Detroit MI",Vehicle Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,,YES,2,2,YES,,,YES,,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@42.38050,-83.04750,400m/data=!3m1!1e3"
+"GM - Flint Assembly, Flint MI",Vehicle Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,,YES,2,2,YES,,,YES,,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@42.98510,-83.71690,400m/data=!3m1!1e3"
+"GM - Orion Assembly, Lake Orion MI",Vehicle Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,,YES,2,2,YES,,,,YES,,,YES,,YES,Rural,,YES,,YES,"https://www.google.com/maps/@42.71550,-83.25900,400m/data=!3m1!1e3"
+"GM - Fairfax Assembly, Kansas City KS",Vehicle Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,,YES,2,2,YES,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@39.14480,-94.60750,400m/data=!3m1!1e3"
+"GM - Spring Hill Manufacturing, Spring Hill TN",Vehicle Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,,YES,2,2,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@35.73500,-86.96150,400m/data=!3m1!1e3"
+"GM - Bowling Green Assembly, Bowling Green KY",Vehicle Assembly Plant,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,YES,,,,YES,,,YES,Rural,,,,YES,"https://www.google.com/maps/@37.01030,-86.36580,400m/data=!3m1!1e3"
+"GM - Fort Wayne Assembly, Roanoke IN",Vehicle Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,,YES,2,2,YES,,,,YES,,,YES,,YES,Rural,,YES,,YES,"https://www.google.com/maps/@40.96550,-85.29950,400m/data=!3m1!1e3"
+"GM - Wentzville Assembly, Wentzville MO",Vehicle Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,YES,,YES,Rural,,YES,,YES,"https://www.google.com/maps/@38.81810,-90.82110,400m/data=!3m1!1e3"
+"GM - Arlington Assembly, Arlington TX",Vehicle Assembly Plant,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,,YES,2,2,YES,,,YES,,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@32.73880,-97.07120,400m/data=!3m1!1e3"
+"GM - Lansing Grand River Assembly, Lansing MI",Vehicle Assembly + Stamping,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,,YES,2,2,YES,,,YES,,,,YES,,YES,Urban,,YES,,YES,"https://www.google.com/maps/@42.72280,-84.56000,400m/data=!3m1!1e3"
+"GM - Lansing Delta Township Assembly, Lansing MI",Vehicle Assembly Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,2,YES,,,YES,,,,YES,,YES,Rural,,YES,,YES,"https://www.google.com/maps/@42.69210,-84.67980,400m/data=!3m1!1e3"
+"GM - Flint Engine South, Flint MI",Engine/Propulsion Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,YES,,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@42.97680,-83.71550,400m/data=!3m1!1e3"
+"GM - Romulus Propulsion Systems, Romulus MI",Propulsion Systems (Engine / Transmission) Plant,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,YES,,,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@42.2552,-83.4008,400m/data=!3m1!1e3"
+"GM - Tonawanda Propulsion, Buffalo NY",Engine/Propulsion Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,YES,,,YES,,,YES,Urban,,YES,,YES,"https://www.google.com/maps/@42.96700,-78.89600,400m/data=!3m1!1e3"
+"GM - Toledo Propulsion Systems, Toledo OH",Transmission Plant,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@41.71060,-83.57480,400m/data=!3m1!1e3"
+"GM - Bay City Powertrain, Bay City MI",Powertrain Components Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,,,YES,,YES,,1,1,,,YES,,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@43.6052,-83.88,400m/data=!3m1!1e3"
+"DMAX (GM diesel), Moraine OH",Engine Plant (GM JV),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,YES,,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@39.70505,-84.22185,400m/data=!3m1!1e3"
+"GM - Lansing Regional Stamping, Delta Township MI",Stamping Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,YES,,,YES,,,YES,Rural,,YES,,YES,"https://www.google.com/maps/@42.68750,-84.68000,400m/data=!3m1!1e3"
+"GM - Marion Metal Center, Marion IN",Metal Stamping Plant,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,YES,,YES,Rural,,,,YES,"https://www.google.com/maps/@40.56381,-85.69851,400m/data=!3m1!1e3"
+"GM - Parma Metal Center, Parma OH",Stamping/Metal Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,YES,,,,YES,,,YES,Urban,,,,YES,"https://www.google.com/maps/@41.41555,-81.77355,400m/data=!3m1!1e3"
+"GM - Flint Metal Center, Flint MI",Stamping/Metal Center,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,,YES,2,2,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@42.97480,-83.79350,400m/data=!3m1!1e3"
+"GM - Saginaw Metal Casting Operations, Saginaw MI",Metal Casting Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,YES,,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@43.4489,-83.9190,400m/data=!3m1!1e3"
+"GM - Bedford Casting Operations, Bedford IN",Aluminum Casting Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,,YES,,1,1,,YES,,,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@38.8788,-86.4845,400m/data=!3m1!1e3"
+"GM - Defiance Operations, Defiance OH",Foundry / Casting Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,YES,,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@41.2843,-84.3168,400m/data=!3m1!1e3"
+"GM - Brownstown Battery Assembly, Brownstown Township MI",Battery Assembly Plant,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@42.10350,-83.24900,400m/data=!3m1!1e3"
+"Ultium Cells - Lordstown (Warren), OH",Battery Cell Plant (GM / LG Energy Solution JV),#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,1,YES,,,YES,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@41.1538,-80.8635,400m/data=!3m1!1e3"
+Ultium Cells - Spring Hill TN,Battery Cell Plant (GM JV),#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,2,YES,,,YES,,,YES,,,YES,Rural,,YES,,YES,"https://www.google.com/maps/@35.749,-86.9525,400m/data=!3m1!1e3"
+Ultium Cells - Lansing/Delta Township MI,Battery Cell Plant (GM JV),#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,,,YES,,YES,,,,,,,,Rural,,,,,"https://www.google.com/maps/@42.71600,-84.64700,400m/data=!3m1!1e3"
+"GM CCA - Davison Road Processing Center, Burton MI",CCA Parts Processing Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,1,1,YES,,,,YES,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@43.02720,-83.64110,400m/data=!3m1!1e3"
+"GM CCA - Memphis Processing Center, Memphis TN",CCA Parts Processing Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@35.00885,-89.90035,400m/data=!3m1!1e3"
+"GM CCA - Ypsilanti Processing Center, Ypsilanti MI",Parts Processing / Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@42.24995,-83.57075,400m/data=!3m1!1e3"
+"GM CCA - Chicago Parts Distribution Center, Bolingbrook IL",Parts Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@41.65960,-88.12780,400m/data=!3m1!1e3"
+"GM CCA - Charlotte Parts Distribution Center, Charlotte NC",Parts Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@35.13930,-80.98790,400m/data=!3m1!1e3"
+"GM Customer Care & Aftersales - Rancho Cucamonga Parts Distribution Center, CA",Parts Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,1,1,YES,,,,YES,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@34.10015,-117.55255,400m/data=!3m1!1e3"
+"GM CCA - Reno Parts Distribution Center, Reno NV",Parts Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@39.65720,-119.89850,400m/data=!3m1!1e3"
+"GM CCA - Boston Parts Distribution Center, Mansfield MA",Parts Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,YES,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@41.95920,-71.13920,400m/data=!3m1!1e3"
+"GM CCA - Philadelphia Parts Distribution Center, Langhorne PA",Parts Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@40.19356,-74.83502,400m/data=!3m1!1e3"
+"GM CCA - Fort Worth Parts Distribution Center, Fort Worth TX",Parts Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,YES,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@32.99887,-97.24617,400m/data=!3m1!1e3"
+"GM CCA - Denver Parts Distribution Center, Aurora CO",Parts Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,YES,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@39.74680,-104.71240,400m/data=!3m1!1e3"
+"GM CCA - Minneapolis Parts Distribution Center, Hudson WI",Parts Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,,YES,,YES,,,YES,Rural,,,,,"https://www.google.com/maps/@44.94660,-92.70150,400m/data=!3m1!1e3"
+"GM CCA - Jacksonville Parts Distribution Center, Jacksonville FL",Parts Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,,,YES,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@30.13745,-81.52860,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,6,15%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,12,29%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,2,5%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,14,34%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,7,17%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,41,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,29,71%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,20,49%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,21,51%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,20,49%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,41,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,41,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

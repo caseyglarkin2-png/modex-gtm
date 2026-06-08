@@ -1,0 +1,175 @@
+{
+  "name": "GM - Marion Metal Center, Marion IN",
+  "type": "Metal Stamping Plant",
+  "coords": {
+    "lat": 40.56381,
+    "lng": -85.69851
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.567000,
+          "lng": -85.701800
+        },
+        {
+          "lat": 40.566900,
+          "lng": -85.692300
+        },
+        {
+          "lat": 40.561300,
+          "lng": -85.692300
+        },
+        {
+          "lat": 40.559700,
+          "lng": -85.694600
+        },
+        {
+          "lat": 40.559700,
+          "lng": -85.701900
+        },
+        {
+          "lat": 40.562500,
+          "lng": -85.702300
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.561850,
+          "lng": -85.692650
+        },
+        {
+          "lat": 40.561850,
+          "lng": -85.692050
+        },
+        {
+          "lat": 40.561350,
+          "lng": -85.692050
+        },
+        {
+          "lat": 40.561350,
+          "lng": -85.692650
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 40.564900,
+            "lng": -85.695200
+          },
+          {
+            "lat": 40.564900,
+            "lng": -85.692600
+          },
+          {
+            "lat": 40.562600,
+            "lng": -85.692600
+          },
+          {
+            "lat": 40.562600,
+            "lng": -85.695200
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 40.566000,
+            "lng": -85.701600
+          },
+          {
+            "lat": 40.566000,
+            "lng": -85.699900
+          },
+          {
+            "lat": 40.561600,
+            "lng": -85.699900
+          },
+          {
+            "lat": 40.561600,
+            "lng": -85.701600
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 350,
+        "pano": "v3GdZxOD8VrfieLrKxo_Ug",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 325,
+        "pano": "kcslOUspOk6UWvlhemU9CA",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30,
+    "trailersVisible": 35,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 3,
+    "buildingCount": 1,
+    "siteAreaAcres": 260,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.56381,-85.69851,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoors",
+    "scale"
+  ],
+  "fieldNotes": {
+    "site": "GM Marion Metal Center, 2400 W 2nd St, Marion (Grant County) IN 46952 - an active GM metal-stamping plant founded 1956 as Fisher Body, ~750+ employees, producing steel/aluminum blanks, stampings and sub-assemblies (doors, hoods, deck lids, quarter panels, Tahoe/Suburban roof panels) for GM assembly plants across North America. GM announced a $491M investment to retool for EV stampings (plus a prior $91M/$90M upgrade). Roster address geocodes onto W 2nd St in a residential block ~1.5 km east of the actual plant; the correct plant center is 40.56381,-85.69851 (from Mapcarta/GM Authority and confirmed by satellite as the large multi-roof stamping building fronting W 2nd St, bounded on the north by the rail line and on the east by a residential street).",
+    "truckGate": "Confirmed - chain-link perimeter fencing rings the entire property on every street-view frame (W 2nd St south frontage, the east residential-street frontage, and the west/SW frontage). Multiple controlled truck entrances: the primary SW truck/rail drive off W 2nd St, plus perimeter gates on the east side serving the trailer/material yard. truckGateCount estimated 3 (front employee/visitor + SW freight/rail drive + east yard gate).",
+    "guardShack": "Marked true at medium confidence - a fenced active GM stamping plant of this scale (750+ employees, JIT stamping shipments to multiple assembly plants) conventionally runs a staffed gatehouse at the freight entrance. Small structures sit beside the entrances but a guard booth could not be individually resolved from overhead; flagged uncertain along with remoteGs.",
+    "preGateStaging": "Marked false - no dedicated paved truck-waiting apron outside the gates was identified; the W 2nd St frontage is grass setback to the fence line.",
+    "postGateStaging": "True - the large internal paved yards (west truck drive and the east material/trailer yard) give ample post-gate holding/queue room before docks.",
+    "drivewayLong": "True - internal drives from each gate to the docks/yards are long and deep, easily holding 3+ trucks.",
+    "fastLaneOpportunity": "True - very wide paved truck drives and gate aprons (SW drive and east yard) have unused width to add an express/bypass lane.",
+    "dockDoors": "Estimated 25-50 dock doors distributed across the west and north/NW building faces serving the rail-side laydown and the inbound material drive; exact count partly obscured by roof overhang - flagged uncertain. dockDoorCount ~30.",
+    "dropArea": "Extensive trailer parking and outdoor steel-coil/stamping-stock racking fill the east yard in long rows, plus trailers along the west drive; banded 25-50 (capacity well over 50 if the large empty SE paved lot is counted). dropYard true. trailersVisible ~35.",
+    "shipRcvSeparate": "True - inbound steel/material handling and rail are concentrated on the west/NW side (rail spurs + coil racks), while finished-stamping trailer shipping uses the east material/trailer yard; two physically separate freight clusters on different building faces.",
+    "railServed": "Confirmed rail-served - multiple rail spurs branch off the mainline on the north property edge and curve into the west/NW side of the plant serving the inbound steel laydown; visible in the NW and west satellite crops.",
+    "scale": "Possible truck scale near the SW/west freight drive but not positively resolved - flagged uncertain, left false.",
+    "multipleFacilities": "False - one very large interconnected multi-roof stamping building; buildingCount 1.",
+    "urbanRural": "Marion is a small Indiana city; the plant sits at the western edge of town with farm fields immediately west and south and only a residential strip to the east - judged Rural per rubric (small-town/edge-of-town industrial)."
+  },
+  "method": "deep-audit"
+}

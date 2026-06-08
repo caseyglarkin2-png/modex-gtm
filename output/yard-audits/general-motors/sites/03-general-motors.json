@@ -1,0 +1,182 @@
+{
+  "name": "GM - Orion Assembly, Lake Orion MI",
+  "type": "Vehicle Assembly Plant",
+  "coords": {
+    "lat": 42.7155,
+    "lng": -83.259
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.72345,
+          "lng": -83.26715
+        },
+        {
+          "lat": 42.72385,
+          "lng": -83.25255
+        },
+        {
+          "lat": 42.71865,
+          "lng": -83.24705
+        },
+        {
+          "lat": 42.71165,
+          "lng": -83.24705
+        },
+        {
+          "lat": 42.70885,
+          "lng": -83.25665
+        },
+        {
+          "lat": 42.70925,
+          "lng": -83.26555
+        },
+        {
+          "lat": 42.71565,
+          "lng": -83.27035
+        },
+        {
+          "lat": 42.72075,
+          "lng": -83.27015
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.71165,
+          "lng": -83.26485
+        },
+        {
+          "lat": 42.71165,
+          "lng": -83.26345
+        },
+        {
+          "lat": 42.71055,
+          "lng": -83.26345
+        },
+        {
+          "lat": 42.71055,
+          "lng": -83.26485
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 42.71315,
+            "lng": -83.26405
+          },
+          {
+            "lat": 42.71315,
+            "lng": -83.25685
+          },
+          {
+            "lat": 42.71035,
+            "lng": -83.25685
+          },
+          {
+            "lat": 42.71035,
+            "lng": -83.26405
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 42.71385,
+            "lng": -83.26305
+          },
+          {
+            "lat": 42.71385,
+            "lng": -83.26095
+          },
+          {
+            "lat": 42.71245,
+            "lng": -83.26095
+          },
+          {
+            "lat": 42.71245,
+            "lng": -83.26305
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 110,
+        "pano": "",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 155,
+        "pano": "",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 25,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 3,
+    "buildingCount": 8,
+    "siteAreaAcres": 410.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.71550,-83.25900,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": true
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "truckGateCount"
+  ],
+  "fieldNotes": {
+    "facility": "GM Orion Assembly, 4555 Giddings Rd, Lake Orion MI. The given city coords (42.7847,-83.2483) land on Lake Orion village; the plant is ~8 km south near the Brown Rd / Giddings Rd / Joslyn Rd corner. Confirmed by the unmistakable signature: a ~4M sq ft assembly building ringed by a vehicle test/proving oval, finished-vehicle marshalling lots, on-site wastewater clarifiers and a rail spur. Center locked at 42.7155,-83.2590.",
+    "truckGate": "Fully fenced controlled-access GM campus. Chain-link perimeter fence with the plant behind a berm is directly visible in Street View on both Brown Rd (south) and the Giddings Rd frontage. Site has numbered controlled gates (Waze lists Gate 3 and Gate 4); a temporary truck entrance is currently on Brown Rd during the ongoing expansion construction.",
+    "guardShack": "GM assembly plants operate staffed security gatehouses at controlled entries; standard for the campus and consistent with the fenced perimeter and numbered gates. Booth-scale structures sit at the entry drives.",
+    "remoteGs": "False because guard shack present (staffed gates).",
+    "multiStep": "Campus security plus a separate finished-vehicle shipping yard imply staged checkpoints: outer plant gate, then internal marshalling/shipping control before docks.",
+    "entryExitSeparate": "Multiple numbered gates around the ring road give distinct entry/exit points rather than one shared lane.",
+    "dockDoors": "50+ band. Material-receiving docks are distributed across multiple building faces of the very large assembly building plus a south truck-terminal dock building and a covered rail receiving structure; total well exceeds 50.",
+    "dropYard": "Large paved finished-vehicle marshalling yard SE of the plant (hundreds of finished units in rows) plus trailer staging at the truck terminal; functions as on-site drop/storage.",
+    "railServed": "Active single-track rail spur curves into the property from the NE to a covered rail receiving / auto-rack structure; clearly visible in imagery.",
+    "multipleFacilities": "Campus: main assembly building, south truck terminal, paint/utility buildings, wastewater treatment plant, battery/expansion buildings under construction to the north, and rail dock.",
+    "urbanRural": "Edge-of-town industrial set among woods, wetlands and a lake with low-density residential nearby; classified Rural per rubric (small-town/edge-of-town setting).",
+    "scale": "No truck scale positively identified in overhead imagery; left uncertain.",
+    "streetView": "Best driver-arrival pano is on the Giddings Rd frontage at ~42.7187,-83.2689 (captured 2025-06), showing the perimeter fence and plant; pano_id not embedded here, headings computed toward zone centroids.",
+    "construction": "Site is mid-expansion (GM retooling Orion for EV/ICE truck and Cadillac Escalade production ~2027); northern parcels show active grading. Gate locations may shift as construction completes."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,196 @@
+{
+  "name": "GM - Arlington Assembly, Arlington TX",
+  "type": "Vehicle Assembly Plant",
+  "coords": {
+    "lat": 32.7388,
+    "lng": -97.0712
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.743,
+          "lng": -97.0779
+        },
+        {
+          "lat": 32.7434,
+          "lng": -97.0705
+        },
+        {
+          "lat": 32.742,
+          "lng": -97.066
+        },
+        {
+          "lat": 32.7378,
+          "lng": -97.0648
+        },
+        {
+          "lat": 32.7358,
+          "lng": -97.0668
+        },
+        {
+          "lat": 32.7347,
+          "lng": -97.0712
+        },
+        {
+          "lat": 32.735,
+          "lng": -97.0779
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.7356,
+          "lng": -97.0722
+        },
+        {
+          "lat": 32.7356,
+          "lng": -97.0713
+        },
+        {
+          "lat": 32.7349,
+          "lng": -97.0713
+        },
+        {
+          "lat": 32.7349,
+          "lng": -97.0722
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 32.7424,
+            "lng": -97.0708
+          },
+          {
+            "lat": 32.7426,
+            "lng": -97.0678
+          },
+          {
+            "lat": 32.7414,
+            "lng": -97.0676
+          },
+          {
+            "lat": 32.7412,
+            "lng": -97.0706
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 32.7398,
+            "lng": -97.0658
+          },
+          {
+            "lat": 32.74,
+            "lng": -97.0641
+          },
+          {
+            "lat": 32.7362,
+            "lng": -97.0648
+          },
+          {
+            "lat": 32.736,
+            "lng": -97.0665
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 32.7405,
+            "lng": -97.0784
+          },
+          {
+            "lat": 32.7405,
+            "lng": -97.0778
+          },
+          {
+            "lat": 32.7372,
+            "lng": -97.0778
+          },
+          {
+            "lat": 32.7372,
+            "lng": -97.0784
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 357,
+        "pano": "NhbYTIDkD40KDE2CGzoStA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 7,
+        "pano": "52aRze8lZkT8uHxYHwBtag",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 40,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 3,
+    "buildingCount": 5,
+    "siteAreaAcres": 251.2,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.73880,-97.07120,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": true
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "multiStep"
+  ],
+  "fieldNotes": {
+    "facility": "Positively identified as GM Arlington Assembly, the ~250-acre / 3.75M sq-ft full-size SUV plant (Tahoe, Suburban, Yukon, Escalade). Wikipedia infobox coords 32.7383,-97.0736 land directly on the main assembly building. Site is bounded by E Abram St on the south, TX-360 on the east, an active rail corridor on the north, and a wooded buffer behind a residential neighborhood on the west.",
+    "truckGate": "Entire property is fully fenced and access-controlled (masonry wall topped with steel fence visible along E Abram in Street View; perimeter fence/gates at all internal road tie-ins). Material-receiving and finished-vehicle traffic run through controlled GM gates (Waze tags a 'Gate 11' on Abram). Public Street View does not penetrate the gates, consistent with a guarded campus.",
+    "guardShack": "GM auto-assembly plants of this scale operate staffed security gatehouses at truck/material gates (same baseline confirmed at Ford Dearborn). Booth-scale structures sit beside the controlled internal-road entrances; high-confidence inference from fencing + GM standard practice.",
+    "railServed": "Multiple active rail spurs penetrate the north side of the property; long covered rail loading/auto-rack structures and strings of rail cars are clearly visible along the north/NE edge feeding the plant and the finished-vehicle marshalling area.",
+    "dropArea": "Vast finished-vehicle marshalling lots (thousands of stalls) along the east side fronting TX-360, plus trailer/auto-hauler staging near the north rail docks; trailer drop capacity is large (50+ band).",
+    "dropYard": "Dedicated finished-vehicle and trailer staging lots separate from the active dock aprons, on the east and north of the building.",
+    "shipRcvSeparate": "Inbound parts/material receiving concentrates on the west and north building faces near rail; finished-vehicle (shipping) marshalling is a physically separate cluster on the east toward TX-360.",
+    "fastLaneOpportunity": "Wide internal perimeter roads and large gate aprons give ample paved width to add express/bypass lanes.",
+    "multiStep": "Campus-scale security implies an outer perimeter gate then internal checkpoints before docks; not directly visible in Street View, flagged uncertain.",
+    "scale": "No truck scale positively identified in overhead imagery; left uncertain.",
+    "dockDoorCount": "Estimate from overhead imagery; loading doors distributed across multiple building faces of a very large assembly building plus rail/parts receiving banks.",
+    "urbanRural": "Inside the dense DFW metro fabric, immediately adjacent to the Arlington entertainment district (AT&T Stadium / Globe Life Field) and surrounded by residential and commercial development."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,209 @@
+{
+  "name": "GM - Flint Assembly, Flint MI",
+  "type": "Vehicle Assembly Plant",
+  "coords": {
+    "lat": 42.9851,
+    "lng": -83.7169
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.99065,
+          "lng": -83.71855
+        },
+        {
+          "lat": 42.99005,
+          "lng": -83.71275
+        },
+        {
+          "lat": 42.98555,
+          "lng": -83.71205
+        },
+        {
+          "lat": 42.97755,
+          "lng": -83.71245
+        },
+        {
+          "lat": 42.97045,
+          "lng": -83.71285
+        },
+        {
+          "lat": 42.97005,
+          "lng": -83.71565
+        },
+        {
+          "lat": 42.97505,
+          "lng": -83.71775
+        },
+        {
+          "lat": 42.98095,
+          "lng": -83.72055
+        },
+        {
+          "lat": 42.98575,
+          "lng": -83.72075
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.97425,
+          "lng": -83.71435
+        },
+        {
+          "lat": 42.97425,
+          "lng": -83.71345
+        },
+        {
+          "lat": 42.97345,
+          "lng": -83.71345
+        },
+        {
+          "lat": 42.97345,
+          "lng": -83.71435
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 42.97215,
+            "lng": -83.71565
+          },
+          {
+            "lat": 42.97195,
+            "lng": -83.71375
+          },
+          {
+            "lat": 42.96985,
+            "lng": -83.71385
+          },
+          {
+            "lat": 42.97005,
+            "lng": -83.71575
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 42.98335,
+            "lng": -83.72015
+          },
+          {
+            "lat": 42.98305,
+            "lng": -83.71765
+          },
+          {
+            "lat": 42.97955,
+            "lng": -83.71795
+          },
+          {
+            "lat": 42.97985,
+            "lng": -83.72045
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 42.97275,
+            "lng": -83.71375
+          },
+          {
+            "lat": 42.97265,
+            "lng": -83.71255
+          },
+          {
+            "lat": 42.97185,
+            "lng": -83.71260
+          },
+          {
+            "lat": 42.97195,
+            "lng": -83.71380
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 270,
+        "pano": "uJIvAjBoMLv_culaXrN_KA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 205,
+        "pano": "xXgQ6Z3bfvjk8mIdFwhHHg",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 110,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 3,
+    "buildingCount": 8,
+    "siteAreaAcres": 320,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.98510,-83.71690,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": true
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "guardShack",
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "truckGateCount"
+  ],
+  "fieldNotes": {
+    "facility": "Flint Truck Assembly (Flint Assembly), 3100 Van Slyke Rd, Flint MI. GM's oldest operating assembly plant (since 1947), ~5.2M sq ft of building on a fenced ~159-acre core plant parcel that sits inside a larger multi-parcel campus of ~300+ acres counting the finished-vehicle lots, rail yard, and south logistics/cross-dock yard. Builds Chevrolet Silverado HD and GMC Sierra HD heavy-duty pickups (sole source for dually HD). Geocode at the roof centroid; confirmed against Wikipedia coordinate 42.9851,-83.7169 and Street View of the brick administration building on Van Slyke Rd reading 'Flint Assembly'.",
+    "truckGate": "Entire campus is fenced (chain-link perimeter clearly visible in Street View at the Van Slyke admin building, with gated openings in the fence line). Controlled truck access: a fenced south logistics yard off the access road (Street View pano xXgQ6Z3bfvjk8mIdFwhHHg shows XTRA and other trailers parked behind perimeter chain-link), plus plant truck gates on the west/rail side and the south Bristol-side access. Multiple controlled entrances - truckGateCount estimated at 3 and marked uncertain.",
+    "guardShack": "GM assembly plants of this scale run staffed security gatehouses at controlled truck entrances. A clean overhead isolation of the individual booth structure was not possible at this resolution (residential streets along Van Slyke prevent a tight Street View of the truck lanes), so guardShack is marked uncertain but assessed true given fenced perimeter + multiple controlled gates.",
+    "multiStep": "Outer perimeter truck gate plus internal vehicle-control checkpoints between the plant, finished-vehicle marshalling lots, and the south logistics yard - typical multi-stage flow for an integrated assembly campus.",
+    "railServed": "Active rail corridor and internal rail yard run the full length of the west boundary parallel to I-475, with auto-rack and box-car spurs serving the plant; finished-vehicle rail-load lots on the north end.",
+    "dropYard": "Dedicated trailer storage confirmed in two areas: (1) the south logistics/cross-dock yard off the access road - dozens of trailers in organized rows alongside a large white cross-dock building, plus outdoor steel/frame material storage; (2) trailer rows along the west buildings near the rail yard. Separate from active dock staging.",
+    "dropArea": "50+ trailers visible across the south logistics yard rows and west-side trailer lines; capacity easily 150-200.",
+    "dockDoors": "Counted ~45 loading doors across the south cross-dock building faces and the multiple dock aprons on the main plant - estimate from overhead imagery, marked uncertain given the dense 1947-era roofline obscures some bays.",
+    "shipRcvSeparate": "Inbound parts/material cross-dock and trailer staging run from the dedicated south logistics yard, while finished-vehicle shipping marshals from the north rail-load and vehicle lots - physically separate clusters on different ends of the campus.",
+    "fastLaneOpportunity": "Wide multi-lane internal access roads and a large gate apron at the south logistics entrance with unused paved width to add an express/bypass lane.",
+    "multipleFacilities": "Multiple large building clusters on one campus - the original main assembly building (dark 1947 roofline), the 2016 paint shop, the south cross-dock/logistics building, and ancillary structures - a campus.",
+    "urbanRural": "Inside the Flint metro fabric, hard against I-475 with dense residential subdivisions immediately east across Van Slyke Rd and commercial development to the south on Bristol Rd - Urban.",
+    "scale": "No truck scale clearly identified in the imagery; left uncertain.",
+    "entryLanes": "Estimated 2 inbound at the main logistics gate; not crisply countable from overhead - uncertain.",
+    "exitLanes": "Estimated 2 outbound; uncertain.",
+    "truckGateCount": "At least 3 controlled truck entrances inferred (south logistics, west/rail plant gate, Bristol/south access); exact count uncertain."
+  },
+  "method": "deep-audit"
+}

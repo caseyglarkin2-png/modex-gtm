@@ -1,0 +1,168 @@
+{
+  "name": "GM CCA - Chicago Parts Distribution Center, Bolingbrook IL",
+  "type": "Parts Distribution Center",
+  "coords": {
+    "lat": 41.6596,
+    "lng": -88.1278
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.66005,
+          "lng": -88.1297
+        },
+        {
+          "lat": 41.6602,
+          "lng": -88.126
+        },
+        {
+          "lat": 41.65815,
+          "lng": -88.1263
+        },
+        {
+          "lat": 41.658,
+          "lng": -88.12995
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.65838,
+          "lng": -88.1267
+        },
+        {
+          "lat": 41.65838,
+          "lng": -88.12648
+        },
+        {
+          "lat": 41.65818,
+          "lng": -88.12648
+        },
+        {
+          "lat": 41.65818,
+          "lng": -88.1267
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 41.6589,
+            "lng": -88.12955
+          },
+          {
+            "lat": 41.65893,
+            "lng": -88.12645
+          },
+          {
+            "lat": 41.65838,
+            "lng": -88.12648
+          },
+          {
+            "lat": 41.65835,
+            "lng": -88.12958
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 41.65918,
+            "lng": -88.12955
+          },
+          {
+            "lat": 41.65922,
+            "lng": -88.12642
+          },
+          {
+            "lat": 41.6589,
+            "lng": -88.12645
+          },
+          {
+            "lat": 41.65888,
+            "lng": -88.12958
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 249,
+        "pano": "CAoSFkNJSE0wb2dLRUlDQWdJQ0UtSzNkUmc.",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 283,
+        "pano": "CAoSFkNJSE0wb2dLRUlDQWdJQ0UtSXUtQ0E.",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 20,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.65960,-88.12780,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
+  "fieldNotes": {
+    "truckGate": "GM-operated parts DC (404k sq ft, opened 2001) on Remington Blvd. The truck yard wraps the entire south face and is enclosed by a chain-link perimeter fence (clearly visible along the east edge in z19/z20 imagery). The truck drive enters/exits the fenced south yard at the SE corner off the cul-de-sac service drive. Controlled entrance.",
+    "guardShack": "No staffed guard booth could be confirmed at the SE yard entrance. 2018 Street View of the access road is heavily screened by a grassy/tree buffer and the yard entrance is set well back. Flagged uncertain.",
+    "remoteGs": "Gated/fenced truck yard with no confirmable manned booth -> set true (kiosk/app check-in implied) at low confidence.",
+    "dockDoors": "Continuous dock-door bank runs the full ~400 ft+ south face of the building with trailers backed in; yellow dock-door markings visible on the wall in z20 imagery. Estimated ~55 doors -> 50+ band.",
+    "dropArea": "Two to three rows of parked drop trailers fill the south yard south of the dock apron; well over 50 trailer positions -> 50+ band.",
+    "dropYard": "Dedicated paved trailer-storage yard south of the dock apron, separate from the active dock line, holding multiple long rows of trailers.",
+    "shipRcvSeparate": "Single continuous dock face on the south wall only (north side is roof + loop road, no docks) -> shipping and receiving share one dock bank.",
+    "entryExitTogether": "Single fenced truck-yard access at the SE corner serves both in and out movements.",
+    "fastLaneOpportunity": "Very wide paved south yard and a deep gate-to-dock approach leave ample room to add an express/bypass lane.",
+    "drivewayLong": "Deep paved approach from the SE yard entrance to the dock face can stack 3+ trucks.",
+    "postGateStaging": "Large paved holding area inside the fenced yard before the dock doors.",
+    "railServed": "No rail spur enters the property; this Remington Blvd logistics park is served entirely by truck.",
+    "urbanRural": "Modern logistics/distribution park in the Bolingbrook (SW Chicago metro) industrial corridor off I-55 -> Urban.",
+    "trailerParkingCapacity": "Honest overhead estimate (~110) from row counts in the south yard; flagged uncertain.",
+    "siteAreaAcres": "~404k sq ft building (~9 acre footprint) plus the south truck yard and buffer; fenced operational parcel ~20 acres (perimeter polygon estimate)."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,193 @@
+{
+  "name": "GM - Fairfax Assembly, Kansas City KS",
+  "type": "Vehicle Assembly Plant",
+  "coords": {
+    "lat": 39.1448,
+    "lng": -94.6075
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.1502,
+          "lng": -94.616
+        },
+        {
+          "lat": 39.15,
+          "lng": -94.602
+        },
+        {
+          "lat": 39.138,
+          "lng": -94.601
+        },
+        {
+          "lat": 39.1345,
+          "lng": -94.6055
+        },
+        {
+          "lat": 39.134,
+          "lng": -94.6095
+        },
+        {
+          "lat": 39.139,
+          "lng": -94.616
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.13598,
+          "lng": -94.60905
+        },
+        {
+          "lat": 39.13598,
+          "lng": -94.60815
+        },
+        {
+          "lat": 39.13558,
+          "lng": -94.60815
+        },
+        {
+          "lat": 39.13558,
+          "lng": -94.60905
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 39.1396,
+            "lng": -94.6094
+          },
+          {
+            "lat": 39.1389,
+            "lng": -94.6079
+          },
+          {
+            "lat": 39.1351,
+            "lng": -94.6062
+          },
+          {
+            "lat": 39.1358,
+            "lng": -94.6078
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 39.1424,
+            "lng": -94.6065
+          },
+          {
+            "lat": 39.1424,
+            "lng": -94.602
+          },
+          {
+            "lat": 39.1382,
+            "lng": -94.6018
+          },
+          {
+            "lat": 39.1382,
+            "lng": -94.6062
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 39.1392,
+            "lng": -94.6088
+          },
+          {
+            "lat": 39.1385,
+            "lng": -94.6073
+          },
+          {
+            "lat": 39.1348,
+            "lng": -94.6057
+          },
+          {
+            "lat": 39.1355,
+            "lng": -94.6072
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "truckGate": {
+        "heading": 355,
+        "pano": "5xU3ZvxDXiPnGmIirLEcEA",
+        "hasCoverage": true
+      },
+      "perimeter": {
+        "heading": 355,
+        "pano": "5xU3ZvxDXiPnGmIirLEcEA",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 130,
+    "trailersVisible": 110,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 3,
+    "buildingCount": 8,
+    "siteAreaAcres": 494.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.14480,-94.60750,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": true
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "guardShack"
+  ],
+  "fieldNotes": {
+    "facility": "GM Fairfax Assembly & Stamping, Kansas City KS (3201 Fairfax Trafficway). Confirmed via web research (4.9M sq ft, building Cadillac XT4 / Chevy Malibu, retooling for the 2027 Bolt EV/Equinox) and satellite: a massive integrated automotive campus in the Fairfax Industrial District beside the Missouri River, with a multi-million-sq-ft assembly/body/paint complex, thousands of finished vehicles in staging lots, and rail auto-rack loading tracks. The supplied address point landed ~2km SW in a residential neighborhood; the true campus is NE in the industrial district, re-pinned to the main assembly building.",
+    "truckGate": "Campus is fully perimeter-fenced (chain-link with GM/XPO banners visible in Street View). Truck traffic enters via controlled drives; the XPO Logistics inbound-parts building on the south side has a fenced, gated truck entrance off the public road.",
+    "guardShack": "Automotive assembly plants of this scale operate staffed security gatehouses at controlled entries; booth structures consistent with guarded entry are present, though the exact booth was not isolated in a single frame, so flagged uncertain.",
+    "dockDoors": "50+ band. The XPO sequencing/cross-dock building (a long diagonal structure on the south end) has continuous dock banks down BOTH long faces with dozens of trailers backed in; combined with parts-receiving docks on the assembly building, total easily exceeds 100 doors. Count is an overhead estimate.",
+    "dropArea": "50+ band. Extensive trailer drop/staging around the XPO building and the assembly building's receiving aprons; well over 50 dropped trailers visible.",
+    "dropYard": "Dedicated trailer storage/staging lots adjacent to the XPO logistics building and on the assembly building's receiving side.",
+    "railServed": "Multiple active rail spurs and long parallel auto-rack loading tracks run into the SE of the property; finished-vehicle rail loading clearly visible.",
+    "multipleFacilities": "Integrated campus: separate assembly/body building, paint, the XPO inbound-logistics/sequencing building, stamping/older industrial buildings on the west, plus finished-vehicle and rail yards.",
+    "shipRcvSeparate": "Inbound parts receiving (XPO logistics building, south) is physically separate from finished-vehicle outbound (rail/truck loading from the staging lots, east).",
+    "multiStep": "Plant-scale security implies an outer fenced perimeter checkpoint plus internal building access control before docks.",
+    "fastLaneOpportunity": "Wide multi-lane drives and large gate aprons at the XPO entrance leave room for a dedicated express/bypass lane.",
+    "scale": "No truck scale clearly identified in imagery; left uncertain.",
+    "urbanRural": "Urban — inside the Kansas City metro's dense Fairfax Industrial District."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,151 @@
+{
+  "name": "GM - Bay City Powertrain, Bay City MI",
+  "type": "Powertrain Components Plant",
+  "coords": {
+    "lat": 43.6052,
+    "lng": -83.88
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 43.6069,
+          "lng": -83.8836
+        },
+        {
+          "lat": 43.6066,
+          "lng": -83.8756
+        },
+        {
+          "lat": 43.6034,
+          "lng": -83.8756
+        },
+        {
+          "lat": 43.6033,
+          "lng": -83.8824
+        },
+        {
+          "lat": 43.6052,
+          "lng": -83.8837
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 43.60405,
+          "lng": -83.88025
+        },
+        {
+          "lat": 43.60405,
+          "lng": -83.87975
+        },
+        {
+          "lat": 43.6038,
+          "lng": -83.87975
+        },
+        {
+          "lat": 43.6038,
+          "lng": -83.88025
+        }
+      ]
+    },
+    "dropYards": [],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 43.60665,
+            "lng": -83.8826
+          },
+          {
+            "lat": 43.6065,
+            "lng": -83.8788
+          },
+          {
+            "lat": 43.6063,
+            "lng": -83.8788
+          },
+          {
+            "lat": 43.60645,
+            "lng": -83.8826
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 321,
+        "pano": "hEsgbulIk5gpsvD5rNOtSQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 0,
+        "pano": "8BUm90_1JoEF6xvPb2f9Cg",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18,
+    "trailersVisible": 4,
+    "trailerParkingCapacity": 20,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 58,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@43.6052,-83.88,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "dropArea",
+    "trailerParkingCapacity"
+  ],
+  "fieldNotes": {
+    "location": "Roster point and a ROOFTOP geocode of 1001 Woodside Ave landed at 43.60418,-83.87910, the south frontage of the active GM Bay City Powertrain plant. Locked site center to 43.6052,-83.8800, the centroid of the large single manufacturing complex (older north-light/sawtooth bays on the west, newer flat-roof big-box section on the east) fronting Woodside Ave on the Saginaw River. Confirmed active via GM Authority and DBusiness: ~975,000 sq ft, ~420 UAW Local 362 workers, building camshafts/connecting rods/block-and-head machining for V8 propulsion, with a recent $216M+ investment. The cleared/debris land immediately WEST and NW of the building (settling ponds, foundation remnants, dirt service roads) is the separate ~10-acre RACER Trust 'Bay City Powertrain Industrial Land' parcel (former GM equipment-storage area + filled river slip), not part of the active fenced plant.",
+    "perimeter": "Active fenced GM parcel traced from the Saginaw-River/RACER-land edge on the west, rail corridor and ponds on the north, residential street on the east, and Woodside Ave on the south. ~58 acres. Street View (2023-07) shows a continuous chain-link perimeter fence along the entire Woodside Ave frontage.",
+    "truckGate": "Site is fully perimeter-fenced (continuous chain-link confirmed in Street View along Woodside Ave). Access from Woodside is a controlled curb-cut gate opening into the paved south lot; treated as a truck gate. No barrier-arm detail resolvable from overhead or Street View at this zoom.",
+    "guardShack": "No distinct staffed guard booth resolved at the Woodside frontage in z20 satellite or 2023 Street View. Low confidence on absence at an older urban plant where a booth may sit just inside the fence line.",
+    "remoteGs": "Set true: there is a controlled fenced truck entrance but no visible staffed booth, implying kiosk / call-box / badge check-in. Low confidence.",
+    "drivewayShort": "Gate-to-building approach across the south lot is short with little dedicated truck-queue depth; trucks would proceed into the yard rather than stack 3+ deep at the gate.",
+    "dockDoors": "Truck/material handling is concentrated on the NORTH building face along the rail spine, not the parking-side south face. Estimated ~18 dock/material doors across the rail-served north face and west service road; band 10-25. Old-plant roof clutter and the rail canopy obscure an exact count.",
+    "dropArea": "Very few trailers visible anywhere in captured imagery (roughly 4, along the west service road / RACER-land edge). No dedicated marked trailer-storage lot full of dropped trailers; band 0-10 and dropYard false. This is a components plant fed largely by rail plus modest truck dock activity, not a high-throughput cross-dock.",
+    "dropYard": "No dedicated trailer-storage yard observed; the large south paved area is employee/visitor car parking (rows of cars, landscaped diagonal islands), not a trailer drop yard.",
+    "railServed": "Confirmed: rail tracks run E-W along the north edge of the building with a covered rail dock/material spine hugging the north face; spurs curve in from the NW. Classic 1900s-era rail-served components plant.",
+    "shipRcvSeparate": "Material in/out appears consolidated on the north rail-served face; no clearly separate second dock cluster on a different face was resolved. Left false.",
+    "entryLanes": "Estimated 1 in / 1 out at the Woodside gate from curb-cut width; not precisely countable.",
+    "urbanRural": "Plant is embedded in the Bay City urban grid: residential blocks abut the east and south, downtown is a few blocks NE. Urban.",
+    "siteAreaAcres": "~58 acres for the active fenced GM parcel only; the full historic site footprint was larger before ~10 acres transferred to RACER Trust."
+  },
+  "method": "deep-audit"
+}

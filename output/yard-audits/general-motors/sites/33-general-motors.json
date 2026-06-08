@@ -1,0 +1,209 @@
+{
+  "name": "GM CCA - Charlotte Parts Distribution Center, Charlotte NC",
+  "type": "Parts Distribution Center",
+  "coords": {
+    "lat": 35.1393,
+    "lng": -80.9879
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.141,
+          "lng": -80.9888
+        },
+        {
+          "lat": 35.1409,
+          "lng": -80.9862
+        },
+        {
+          "lat": 35.1375,
+          "lng": -80.9869
+        },
+        {
+          "lat": 35.1376,
+          "lng": -80.9895
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.14052,
+          "lng": -80.98742
+        },
+        {
+          "lat": 35.14052,
+          "lng": -80.98714
+        },
+        {
+          "lat": 35.1402,
+          "lng": -80.98714
+        },
+        {
+          "lat": 35.1402,
+          "lng": -80.98742
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 35.14075,
+            "lng": -80.98905
+          },
+          {
+            "lat": 35.14025,
+            "lng": -80.98815
+          },
+          {
+            "lat": 35.13955,
+            "lng": -80.98865
+          },
+          {
+            "lat": 35.14005,
+            "lng": -80.98955
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 35.13815,
+            "lng": -80.98605
+          },
+          {
+            "lat": 35.13755,
+            "lng": -80.98505
+          },
+          {
+            "lat": 35.13685,
+            "lng": -80.98555
+          },
+          {
+            "lat": 35.13745,
+            "lng": -80.98655
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 35.14045,
+            "lng": -80.98875
+          },
+          {
+            "lat": 35.13955,
+            "lng": -80.98715
+          },
+          {
+            "lat": 35.13925,
+            "lng": -80.98735
+          },
+          {
+            "lat": 35.14015,
+            "lng": -80.98895
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 35.13905,
+            "lng": -80.98645
+          },
+          {
+            "lat": 35.13815,
+            "lng": -80.98485
+          },
+          {
+            "lat": 35.13785,
+            "lng": -80.98505
+          },
+          {
+            "lat": 35.13875,
+            "lng": -80.98665
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 211,
+        "pano": "jyGYBIvdIk0vZ-4uXv39vQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 257,
+        "pano": "2FptZQDWZgSNY4czzR6hBg",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 65,
+    "trailersVisible": 50,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 22,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.13930,-80.98790,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
+  "fieldNotes": {
+    "facility": "Positively identified as GM Customer Care & Aftersales (CCA) Charlotte Parts Distribution Center, 10815 Quality Dr, Charlotte NC 28278 (Steele Creek). ROOFTOP geocode 35.1391925,-80.9879849. Web-confirmed: 352,000 sq ft, opened 1999, ships ~420,000 customer orders/month; GM announced a $23M modernization investment in 2024. Note the prompt's 28269 zip was wrong - correct zip is 28278.",
+    "truckGate": "Chain-link perimeter fence rings the truck-yard side of the building. 2022/2019 Street View shows a sliding gate across the driveway where it leaves the office/employee-parking area and enters the fenced truck court. The truck yard itself (SE/shared court) is reached through this controlled fence line.",
+    "guardShack": "No staffed guard booth visible at the gate in Street View or in z20 satellite (no separate booth footprint beside the lane). Office front is open employee parking; the truck-side gate is unmanned-appearing. Flagged uncertain.",
+    "remoteGs": "Gate present, no confirmed booth -> set true (kiosk/badge/remote check-in implied) at low confidence.",
+    "dockDoors": "Long dock-door banks on BOTH long faces of the building: the NW face (with a drop-trailer row + trailers backed in) and the SE face (trailers backed in along the shared court). ~30-35 doors per face, ~65 total -> 50+ band.",
+    "dropArea": "Dedicated trailer drop row along the NW apron plus a large shared trailer court on the SE side between GM and the neighboring warehouse; ~50 trailers visible -> 25-50 band (borderline 50+, called 25-50 conservatively).",
+    "dropYard": "Yes - a dedicated trailer-storage row on the NW apron and a sizeable SE trailer court hold dropped trailers separate from active dock staging.",
+    "shipRcvSeparate": "Cross-dock-style layout with dock banks on two physically separate (NW and SE) building faces, each with its own truck court -> ship/receive can run from separate clusters.",
+    "entryExitTogether": "Single controlled site access off Quality Dr feeding the office area and the gated truck court; trucks enter and exit through the same gate group.",
+    "postGateStaging": "Wide paved truck courts inside the fence on both the NW and SE faces give ample post-gate holding before docks.",
+    "drivewayLong": "Long internal driveway/court from the gate to the dock faces holds 3+ trucks.",
+    "fastLaneOpportunity": "Wide gate apron and deep truck courts leave room for an express/bypass lane.",
+    "railServed": "An active rail line (CSX-type, rail cars + a locomotive present) runs along the SW edge in the treed buffer OUTSIDE the property; it does NOT spur into the GM building. The PDC is truck-served. Set false.",
+    "urbanRural": "Dense Steele Creek industrial/logistics park in southwest Charlotte metro, surrounded by other large warehouses -> Urban.",
+    "trailerParkingCapacity": "~90 estimate combining the NW drop row and SE court; overhead estimate, flagged.",
+    "siteAreaAcres": "~22 acres for the building (~352k sq ft footprint), two truck courts, office/employee parking, and the treed buffer inside the perimeter (derived from the perimeter polygon)."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,128 @@
+{
+  "name": "Ultium Cells - Spring Hill TN",
+  "type": "Battery Cell Plant (GM JV)",
+  "coords": {
+    "lat": 35.749,
+    "lng": -86.9525
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        { "lat": 35.75175, "lng": -86.95720 },
+        { "lat": 35.75205, "lng": -86.94980 },
+        { "lat": 35.74780, "lng": -86.94850 },
+        { "lat": 35.74560, "lng": -86.95010 },
+        { "lat": 35.74700, "lng": -86.95300 },
+        { "lat": 35.74705, "lng": -86.95740 }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        { "lat": 35.74600, "lng": -86.95210 },
+        { "lat": 35.74630, "lng": -86.95120 },
+        { "lat": 35.74560, "lng": -86.95080 },
+        { "lat": 35.74525, "lng": -86.95175 }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          { "lat": 35.75135, "lng": -86.95560 },
+          { "lat": 35.75150, "lng": -86.95300 },
+          { "lat": 35.75065, "lng": -86.95285 },
+          { "lat": 35.75055, "lng": -86.95545 }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          { "lat": 35.75060, "lng": -86.95280 },
+          { "lat": 35.75050, "lng": -86.95155 },
+          { "lat": 35.74995, "lng": -86.95160 },
+          { "lat": 35.75005, "lng": -86.95285 }
+        ]
+      },
+      {
+        "ring": [
+          { "lat": 35.75050, "lng": -86.95620 },
+          { "lat": 35.75055, "lng": -86.95565 },
+          { "lat": 35.74720, "lng": -86.95560 },
+          { "lat": 35.74715, "lng": -86.95615 }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
+      "truckGate": { "heading": 32, "pano": "lJqlAsn9x1G-4w_9ESbyVg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 28,
+    "trailersVisible": 22,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 110,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.749,-86.9525,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "dockDoors",
+    "trailerParkingCapacity",
+    "fastLaneOpportunity",
+    "shipRcvSeparate",
+    "multiStep"
+  ],
+  "fieldNotes": {
+    "site": "Ultium Cells - Spring Hill TN, the GM / LG Energy Solution JV 2.8M sq ft battery-cell plant built on land leased from GM at the Spring Hill Manufacturing campus, 100 Saturn Pkwy, Spring Hill (Maury County) TN. The roster/address geocode pin (the red marker in probe imagery) lands at the SW corner of the bright white-roof plant building. The Ultium complex is the NE corner of the broader GM campus, ~1.2 km NE of the main Cadillac assembly plant cluster. Center locked at 35.7490,-86.9525.",
+    "confirm": "Confirmed by satellite + Street View + web research. The complex is two connected large industrial buildings: a bright white-roof main battery plant (E, ~35.749,-86.951, brand-new clean construction) and an adjoining gray-roof logistics/warehouse building (W, ~35.749,-86.956). 2026-02/03 Street View shows the operational white plant building, employee lots full of cars, chain-link perimeter fencing along the access road, and campus checkpoint signage. The DOE Environmental Assessment for the Spring Hill battery plant explicitly lists 'shipping and receiving areas... a guard house, hazardous materials storage' as attendant structures.",
+    "truckGate": "True. Chain-link perimeter fence is clearly visible along the public approach road in 2026-03 Street View; the truck approach runs from a controlled campus road network (STOP sign, bollard delineators, blue directional/checkpoint signage) into the fenced plant. A battery plant of this security/IP/hazmat profile inside a secured GM campus operates a controlled truck gate.",
+    "guardShack": "True (medium confidence). The DOE EA for this plant lists a 'guard house' among attendant structures, and a small booth-footprint structure sits beside the entrance road at the campus checkpoint (~35.7480,-86.9508). The exact booth could not be resolved crisply in overhead imagery, hence medium. remoteGs false as a consequence.",
+    "dockDoors": "Banded 25-50 (est. ~28). A dock apron with trailers backed in runs along the inner/north face in the gap between the two buildings (multiple red/white trailers visible at z19), plus a dock bank facing the north trailer yard. Roof angle and the building-to-building gap obscure an exact count; flagged uncertain.",
+    "shipRcvSeparate": "True (medium). Two distinct building faces serve trucks: the main white plant's dock face (cell shipping / finished goods) and the gray logistics building's dock face on the west, implying physically separate ship/receive clusters. Flagged uncertain.",
+    "dropArea": "Banded 10-25. A dedicated paved trailer drop yard sits north of the building gap (~35.7510,-86.9540) with ~15-22 trailers parked in angled and straight rows in the captured imagery. dropYard true.",
+    "trailerParkingCapacity": "~60 est. across the north drop yard and dock apron staging; approximate.",
+    "preGateStaging": "True - the access road and laydown/staging apron south of the gate provide truck-sized waiting room before the fenced entrance.",
+    "postGateStaging": "True - paved internal yard between the gate and the dock banks holds queued trucks.",
+    "drivewayLong": "True - the gate-to-dock internal approach is long (several hundred meters of campus road), easily holding a 3+ truck queue.",
+    "fastLaneOpportunity": "True (medium) - the campus entrance has wide paved/graded width and a multi-lane road network with room for an express/bypass lane.",
+    "entryLanes": "Est. 2 in / 2 out at the entrance road (medium confidence).",
+    "railServed": "True - an active rail line runs along the NW edge of the complex (visible diagonally in z18 imagery just past the trailer drop yard), serving the GM Spring Hill campus.",
+    "multipleFacilities": "True - the Ultium complex is two large connected buildings (white battery plant + gray logistics/warehouse) plus utility structures; and it sits within the larger multi-building GM campus.",
+    "urbanRural": "Rural - Spring Hill / Maury County is a small-town / edge-of-town setting; the campus is greenfield with surrounding farmland.",
+    "imagery": "Some surrounding ground in the Maxar/Airbus tiles still shows construction-era grading and laydown, but the plant buildings, dock apron, trailer drop yard, employee lots and fencing are all clearly built out and operational. Counts are honest overhead estimates.",
+    "geofence": "perimeter ring (~110 acres) traces the fenced Ultium complex core: both buildings, the north trailer drop yard, the dock aprons and the south employee lots, oriented to the slightly-rotated building grid. truckGate quad aligns to the entrance drive at the SE; dropYards covers the north trailer lot; dockAprons covers the inter-building dock strip and the gray building's west dock face."
+  },
+  "method": "deep-audit"
+}

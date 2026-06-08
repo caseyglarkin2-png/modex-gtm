@@ -1,0 +1,193 @@
+{
+  "name": "GM - Romulus Propulsion Systems, Romulus MI",
+  "type": "Propulsion Systems (Engine / Transmission) Plant",
+  "coords": {
+    "lat": 42.2552,
+    "lng": -83.4008
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.2596,
+          "lng": -83.4068
+        },
+        {
+          "lat": 42.2596,
+          "lng": -83.3962
+        },
+        {
+          "lat": 42.2524,
+          "lng": -83.3962
+        },
+        {
+          "lat": 42.2516,
+          "lng": -83.4005
+        },
+        {
+          "lat": 42.2516,
+          "lng": -83.4068
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.25245,
+          "lng": -83.39845
+        },
+        {
+          "lat": 42.25255,
+          "lng": -83.39790
+        },
+        {
+          "lat": 42.25215,
+          "lng": -83.39775
+        },
+        {
+          "lat": 42.25205,
+          "lng": -83.39830
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 42.25800,
+            "lng": -83.39820
+          },
+          {
+            "lat": 42.25800,
+            "lng": -83.39680
+          },
+          {
+            "lat": 42.25720,
+            "lng": -83.39680
+          },
+          {
+            "lat": 42.25720,
+            "lng": -83.39820
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 42.25560,
+            "lng": -83.39880
+          },
+          {
+            "lat": 42.25560,
+            "lng": -83.39700
+          },
+          {
+            "lat": 42.25470,
+            "lng": -83.39700
+          },
+          {
+            "lat": 42.25470,
+            "lng": -83.39880
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 42.25640,
+            "lng": -83.40090
+          },
+          {
+            "lat": 42.25640,
+            "lng": -83.39900
+          },
+          {
+            "lat": 42.25610,
+            "lng": -83.39900
+          },
+          {
+            "lat": 42.25610,
+            "lng": -83.40090
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 6,
+        "pano": "EtWGBMSiWQy5gJfEN0yNHg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 24,
+        "pano": "_kRUz1qqn0Mh9DSTCv19LA",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 24,
+    "trailersVisible": 40,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 180,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.2552,-83.4008,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "guardShack",
+    "truckGateCount",
+    "entryLanes",
+    "exitLanes",
+    "dockDoors",
+    "shipRcvSeparate",
+    "preGateStaging",
+    "postGateStaging",
+    "multiStep"
+  ],
+  "fieldNotes": {
+    "site": "GM Romulus Propulsion Systems, 36880 Ecorse Rd, Romulus (Wayne County) MI 48174 - opened 1976, ~1.4M sq ft. Produces the HFV6 (3.6L) V6 engine and the GM 10-speed (10L) automatic transmission for Chevrolet/Buick/GMC/Cadillac vehicles (Blazer, XT5/XT6, CT5; Escalade, Tahoe, Yukon, Silverado/Sierra). UAW Local 163. Roster/web geocode (42.2521,-83.4018) is the Ecorse Rd address point; refined center to the main plant building cluster at ~42.2552,-83.4008. Positively identified via GM facility pages and matching satellite footprint.",
+    "layout": "One massive continuous plant building (~1.4M sq ft) oriented roughly square to N-S, set on a large ~180-acre parcel. Employee parking fronts Ecorse Rd on the south and Vining Rd on the west. Freight operations are concentrated on the NORTH and NORTHEAST faces: a dock bank along the north wall with trailers backed in, plus a large NE trailer/laydown yard (parked trailers + stacked returnable-container/steel racks) and a second trailer row mid-east. A powerhouse/utility complex with tanks and two water-retention ponds occupies the north of the parcel. A heavily wooded buffer and undeveloped land sit on the SE. The two large white logistics warehouses immediately west across Vining Rd are SEPARATE (off-property) buildings, not counted here.",
+    "truckGate": "Marked true. Freight enters via an east/NE perimeter access road that loops from Ecorse Rd (driveway at ~42.2522,-83.3982) up to the NE freight yard. The gate itself sits deep inside the parcel behind a thick tree buffer and is not resolvable from public Street View (2025-09 panos show only the wooded setback). A secured GM powertrain plant of this scale operates a controlled truck gate; truckGateCount estimated 1 primary freight gate (flagged uncertain - employee entrances off Ecorse/Vining are separate).",
+    "guardShack": "Marked true at medium confidence - a fenced ~1.4M sq ft GM propulsion plant conventionally runs a staffed gatehouse at its controlled freight entry. A booth structure could not be positively resolved in overhead imagery (a small blue-roofed structure on the east perimeter road near 42.2548,-83.3968 is a candidate). Flagged uncertain; remoteGs false as a consequence.",
+    "dockDoors": "Estimated 10-25 (count ~24). A clear dock bank with trailers backed in is visible along the north building face; additional dock/trailer activity on the NE. Exact count partly obscured by roof overhang - flagged uncertain.",
+    "dropArea": "Banded 25-50. The NE freight yard holds an extensive set of parked drop trailers (one long row of ~20+ angled/backed trailers plus a second mid-east row), amid a material laydown area. trailersVisible ~40 across captured imagery; capacity ~70. dropYard true.",
+    "shipRcvSeparate": "Marked true (medium confidence) - dock/trailer activity is present on physically separate areas (north dock bank vs NE trailer yard / east laydown). Flagged uncertain.",
+    "preGateStaging": "Marked false (uncertain) - no clear dedicated pre-gate truck staging apron outside the gate on the public road; the freight drive runs straight in from Ecorse Rd. Flagged uncertain.",
+    "postGateStaging": "Marked true - the long internal east perimeter road and large paved NE yard provide ample post-gate queue/holding room between the gate and the docks. Flagged uncertain.",
+    "railServed": "Marked true. A rail line (double-track mainline/siding with parked boxcars/autoracks observed) runs along the east property edge. A rail spur appears to serve the parcel; rail historically served this site (originally GM Detroit Diesel Allison). Counted railServed true.",
+    "multipleFacilities": "Marked false - the plant is one continuous interconnected building. buildingCount 2 accounts for the main plant plus the detached north powerhouse/utility building. The adjacent west warehouses are off-property and excluded.",
+    "urbanRural": "Romulus is within the dense Detroit metro / Detroit Metro Airport (DTW) industrial corridor, ringed by continuous industrial and residential development - Urban.",
+    "siteAreaAcres": "~180 acres estimated from the traced perimeter (parcel from Vining Rd west to the rail line east, Ecorse Rd south to the north ponds/utility area), excluding the off-property west warehouses and trimming the SE undeveloped wooded triangle."
+  },
+  "method": "deep-audit"
+}

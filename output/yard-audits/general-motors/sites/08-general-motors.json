@@ -1,0 +1,126 @@
+{
+  "name": "GM - Wentzville Assembly, Wentzville MO",
+  "type": "Vehicle Assembly Plant",
+  "coords": {
+    "lat": 38.8181,
+    "lng": -90.8211
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        { "lat": 38.8255, "lng": -90.8265 },
+        { "lat": 38.8260, "lng": -90.8175 },
+        { "lat": 38.8175, "lng": -90.8120 },
+        { "lat": 38.8120, "lng": -90.8175 },
+        { "lat": 38.8135, "lng": -90.8285 },
+        { "lat": 38.8205, "lng": -90.8320 }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        { "lat": 38.82360, "lng": -90.82110 },
+        { "lat": 38.82345, "lng": -90.82040 },
+        { "lat": 38.82270, "lng": -90.82075 },
+        { "lat": 38.82285, "lng": -90.82145 }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          { "lat": 38.82150, "lng": -90.82550 },
+          { "lat": 38.82250, "lng": -90.82430 },
+          { "lat": 38.82340, "lng": -90.82570 },
+          { "lat": 38.82240, "lng": -90.82690 }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          { "lat": 38.82120, "lng": -90.82360 },
+          { "lat": 38.82175, "lng": -90.82255 },
+          { "lat": 38.82085, "lng": -90.82160 },
+          { "lat": 38.82030, "lng": -90.82265 }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 111,
+        "pano": "x5uxcaAo3qQ2nxw3TRJZZQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 194,
+        "pano": "mIjMjF5N2Oi8ADmhAOvjqA",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 35,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 2,
+    "buildingCount": 4,
+    "siteAreaAcres": 470.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.81810,-90.82110,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": true
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "dropArea"
+  ],
+  "fieldNotes": {
+    "facility": "GM Wentzville Assembly, 1500 E Route A, Wentzville MO. Geocode point (38.8181,-90.8211) lands on the main contiguous assembly + stamping building - identity unambiguous. 3.7M sq ft under roof on ~440-569 acres; builds Chevrolet Colorado / GMC Canyon midsize pickups and Chevrolet Express / GMC Savana full-size vans. Opened 1983.",
+    "truckGate": "Site is fully fenced/walled: Street View on the west perimeter road shows continuous chain-link fence; the SW public approach shows a long white screening wall with a manicured gated entry drive. Main plant entrance road meets Route A at a signalized intersection (pano mIjMjF5N2Oi8ADmhAOvjqA); the manned guard gate sits inboard on plant property beyond public Street View reach. Controlled truck entrance confirmed by perimeter security + auto-plant standard.",
+    "guardShack": "Not directly visible in Street View (guard post is inside the fence line, off public roads), but a secured OEM assembly plant of this scale with full perimeter fencing/walls and a single controlled material-receiving entrance is universally manned-gate. Called true at high confidence per facility type and security evidence; the booth structure itself was not individually resolved.",
+    "remoteGs": "False - manned guard gate assumed, not a kiosk-only remote check-in.",
+    "entryExitTogether": "Trucks enter/exit through the same controlled material-gate group near the NW building face off the Route A access road.",
+    "postGateStaging": "Wide paved aprons inside the fence in front of the NW dock face provide internal queue/holding room.",
+    "drivewayLong": "Long internal approach from the Route A intersection to the receiving docks easily holds 3+ trucks.",
+    "fastLaneOpportunity": "The Route A access road and internal aprons are very wide with unused paved width - room to add a bypass/express lane.",
+    "dockDoors": "50+ band. Integrated 3.7M sq ft plant with material-receiving docks tucked under canopies and recessed faces on multiple building faces plus a detached east warehouse/body building; individual doors are obscured by roof canopies from overhead so the count (estimated ~70) is approximate - flagged uncertain.",
+    "dropArea": "25-50 band estimate. Trailer drop/parking along the NW material yard separate from the vast finished-vehicle marshalling lots (those hold cars, not trailers). Count is an overhead estimate - flagged uncertain.",
+    "dropYard": "Dedicated trailer staging along the NW dock yard, distinct from the finished-vehicle storage lots that dominate the north and northeast.",
+    "shipRcvSeparate": "Inbound parts/material receiving (truck + rail material docks on the W/NW/E faces) is physically separate from outbound finished-vehicle shipping (rail autorack loading at the SW rail yard and vehicle haulaway from the marshalling lots).",
+    "railServed": "Major multi-track rail classification yard immediately SW of the plant with autorack rail cars staged; rail spurs run into the property along the south. Definitive rail service.",
+    "multipleFacilities": "Integrated campus: main assembly building, contiguous stamping facility, a large detached building on the east face, and a north sequencing/supplier building - multiple large structures on one property.",
+    "multiStep": "Controlled perimeter gate plus internal yard checkpoints typical of a secured OEM plant; layered access. Medium-confidence inference.",
+    "scale": "No truck scale clearly resolved in the imagery; left false and flagged uncertain.",
+    "urbanRural": "Wentzville is an outer-edge exurb ~40 mi west of St. Louis off I-70; the plant is bordered by farmland, woods, and a rail corridor. Per rubric, choose Rural over small-town industrial.",
+    "entryLanes": "Wide divided access road suggests ~2 inbound lanes at the gate; overhead estimate, flagged uncertain.",
+    "exitLanes": "~2 outbound lanes estimate; flagged uncertain.",
+    "siteAreaAcres": "470 acres computed from the traced perimeter ring, consistent with the cited ~440-569 acre site."
+  },
+  "method": "deep-audit"
+}

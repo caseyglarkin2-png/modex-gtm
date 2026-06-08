@@ -1,0 +1,168 @@
+{
+  "name": "GM Customer Care & Aftersales - Rancho Cucamonga Parts Distribution Center, CA",
+  "type": "Parts Distribution Center",
+  "coords": {
+    "lat": 34.10015,
+    "lng": -117.55255
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.100500,
+          "lng": -117.554950
+        },
+        {
+          "lat": 34.100500,
+          "lng": -117.550150
+        },
+        {
+          "lat": 34.099200,
+          "lng": -117.550150
+        },
+        {
+          "lat": 34.099200,
+          "lng": -117.554950
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.099620,
+          "lng": -117.552520
+        },
+        {
+          "lat": 34.099620,
+          "lng": -117.552320
+        },
+        {
+          "lat": 34.099360,
+          "lng": -117.552320
+        },
+        {
+          "lat": 34.099360,
+          "lng": -117.552520
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 34.099400,
+            "lng": -117.554800
+          },
+          {
+            "lat": 34.099400,
+            "lng": -117.550400
+          },
+          {
+            "lat": 34.099230,
+            "lng": -117.550400
+          },
+          {
+            "lat": 34.099230,
+            "lng": -117.554800
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 34.099850,
+            "lng": -117.554850
+          },
+          {
+            "lat": 34.099850,
+            "lng": -117.550300
+          },
+          {
+            "lat": 34.099550,
+            "lng": -117.550300
+          },
+          {
+            "lat": 34.099550,
+            "lng": -117.554850
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 4,
+        "pano": "uhrZ1pmOhoWs6j0a9VcdmQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 12,
+        "pano": "sz9cUYWqqIn2cEKRSt-Z1A",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 30,
+    "trailerParkingCapacity": 45,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 20,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.10015,-117.55255,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
+  "fieldNotes": {
+    "identification": "Confirmed via GM media/pressroom pages: GM Customer Care & Aftersales Rancho Cucamonga Parts Distribution Center, 9150 Hermosa Ave, opened 2002, ~404,000 sq ft, UAW Local 6645. Located it as the large solar-roofed tilt-up DC running E-W with its dock face and screen-walled truck yard along the south public road (6th St), confirmed in 2025 Street View. Note: an earlier Ford PDC audit in this repo reused the same building/coords; the address 9150 Hermosa is GM's facility.",
+    "truckGate": "Continuous concrete tilt-up screen/parapet wall rings the south truck yard along the public road (2025 Street View). Truck access is through two driveway breaks in the wall; the east driveway shows a dark sliding gate across the opening with a small marker post - controlled entry, set true.",
+    "guardShack": "No staffed guard booth visible at either driveway in Street View; openings are gated but appear unmanned. Flagged uncertain.",
+    "remoteGs": "Gate present, no confirmed booth -> remote/kiosk check-in implied; set true at low confidence.",
+    "dockDoors": "Long continuous dock-door bank runs the full south face of the building with many trailers (green/red/blue/white) backed in across the truck court; ~55 estimated -> 50+ band. Single-load building (docks on south face only).",
+    "dropArea": "Row of drop trailers (no tractors) parked along the inside of the south screen wall in addition to dock-staged units; ~15-20 in the parking row -> 10-25 band.",
+    "dropYard": "Dedicated trailer-parking row along the south frontage inside the wall, separate from the active dock apron.",
+    "postGateStaging": "Wide paved truck court between the dock face and the drop-trailer row gives inside-the-gate holding room.",
+    "drivewayLong": "Deep truck court off each driveway holds a 3+ truck queue before the docks.",
+    "entryExitSeparate": "Two separate driveway breaks in the south wall (west and east) serve the yard, supporting split in/out flow.",
+    "fastLaneOpportunity": "Wide paved truck court and two driveway aprons leave room for an express/bypass lane.",
+    "railServed": "No rail spur into the property; dense Inland Empire warehouse district served entirely by truck.",
+    "urbanRural": "Dense Rancho Cucamonga industrial/logistics district off arterial roads -> Urban.",
+    "siteAreaAcres": "~404k sq ft building plus south truck court / drop yard on a ~20-acre parcel (overhead estimate from the perimeter ring).",
+    "truckGateCount": "Two driveway breaks in the south screen wall."
+  },
+  "method": "deep-audit"
+}

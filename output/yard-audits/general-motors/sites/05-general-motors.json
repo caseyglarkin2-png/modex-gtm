@@ -1,0 +1,140 @@
+{
+  "name": "GM - Spring Hill Manufacturing, Spring Hill TN",
+  "type": "Vehicle Assembly Plant",
+  "coords": {
+    "lat": 35.735,
+    "lng": -86.9615
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        { "lat": 35.74480, "lng": -86.96000 },
+        { "lat": 35.74300, "lng": -86.95300 },
+        { "lat": 35.73650, "lng": -86.95350 },
+        { "lat": 35.73150, "lng": -86.95650 },
+        { "lat": 35.72720, "lng": -86.96130 },
+        { "lat": 35.72780, "lng": -86.96560 },
+        { "lat": 35.73250, "lng": -86.96950 },
+        { "lat": 35.73900, "lng": -86.97050 },
+        { "lat": 35.74270, "lng": -86.96650 }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        { "lat": 35.73210, "lng": -86.96340 },
+        { "lat": 35.73230, "lng": -86.96230 },
+        { "lat": 35.73100, "lng": -86.96190 },
+        { "lat": 35.73080, "lng": -86.96310 }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          { "lat": 35.73520, "lng": -86.96870 },
+          { "lat": 35.73470, "lng": -86.96720 },
+          { "lat": 35.73330, "lng": -86.96810 },
+          { "lat": 35.73380, "lng": -86.96960 }
+        ]
+      },
+      {
+        "ring": [
+          { "lat": 35.72500, "lng": -86.96720 },
+          { "lat": 35.72440, "lng": -86.96560 },
+          { "lat": 35.72280, "lng": -86.96660 },
+          { "lat": 35.72340, "lng": -86.96820 }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          { "lat": 35.73780, "lng": -86.96120 },
+          { "lat": 35.73760, "lng": -86.95970 },
+          { "lat": 35.73680, "lng": -86.95990 },
+          { "lat": 35.73700, "lng": -86.96140 }
+        ]
+      },
+      {
+        "ring": [
+          { "lat": 35.73460, "lng": -86.96780 },
+          { "lat": 35.73430, "lng": -86.96660 },
+          { "lat": 35.73360, "lng": -86.96690 },
+          { "lat": 35.73390, "lng": -86.96810 }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 300,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "truckGate": {
+        "heading": 320,
+        "pano": "",
+        "hasCoverage": false
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 1,
+    "buildingCount": 8,
+    "siteAreaAcres": 720.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.73500,-86.96150,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": true
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "multiStep"
+  ],
+  "fieldNotes": {
+    "facility": "GM Spring Hill Manufacturing (former Saturn complex), 100 Saturn Pkwy. Largest GM facility in North America at ~11M sq ft on ~2,100 acres. Coords re-pinned from the roster's office-area point (35.7045,-86.922) to the true manufacturing core at 35.735,-86.9615 via Wikipedia (35.7371,-86.9579) plus satellite confirmation of the multi-building assembly/powertrain/paint/stamping campus. The audited perimeter covers the fenced manufacturing core, not the full 2,100-acre land holding.",
+    "truckGate": "Access is via Saturn Parkway, a four-lane divided highway that dead-ends at the plant and is restricted to truck and employee traffic only (per Saturn Pkwy extension reporting). A signalized truck-entry intersection feeds an internal approach road network with a controlled checkpoint before the secured core; classic guarded-campus geometry.",
+    "guardShack": "Controlled-access automotive campus of this scale operates staffed security gatehouse(s) at the truck entry; booth-scale structures present at the road convergence inside the property line.",
+    "drivewayLong": "Long internal approach from the Saturn Pkwy entry to the dock courts (hundreds of meters of internal road), easily holding a 3+ truck queue.",
+    "entryExitSeparate": "Internal road network presents distinct in/out routing at the entry complex; loop road allows separated entry/exit. Lane counts (2/2) estimated from overhead, flagged uncertain.",
+    "fastLaneOpportunity": "Very wide gate apron and multi-lane internal approach with ample unused paved width to add an express/bypass lane.",
+    "dockDoors": "50+. Dock doors distributed across many faces of the integrated assembly, paint, powertrain and stamping/logistics buildings; banks of trailers backed in visible in the inter-building dock courts. Total count (~90) is an overhead estimate.",
+    "dropArea": "50+. Multiple trailer-storage/staging lots on-site, including the west-face dock courts and the south stamping/logistics yard; well over 50 trailer positions.",
+    "shipRcvSeparate": "Inbound material receiving and finished-vehicle/parts shipping run from physically separate dock clusters on different building faces across the campus.",
+    "multipleFacilities": "True campus: assembly, engine/powertrain, paint/plastics, and a separate large stamping/logistics building to the SW (~35.724,-86.969), plus the adjacent Ultium Cells battery plant cluster to the north.",
+    "railServed": "On-site CSX rail spur serves the plant (confirmed by GM facility material-handling cross-dock references and the documented CSX grade-separation/overpass project on the access route).",
+    "urbanRural": "Spring Hill is a small/edge-of-town setting surrounded by farmland; classified Rural per rubric tie-break despite suburban growth nearby.",
+    "multiStep": "Campus-scale security implies an outer entry checkpoint then internal plant-specific checkpoints before docks; not individually resolved in imagery, flagged uncertain.",
+    "scale": "No truck scale positively identified in imagery; left uncertain.",
+    "streetView": "Street View coverage exists on the public Saturn Pkwy approach (pano ~35.7312,-86.9628, captured 2026-02) but not at the interior gate/dock zones inside the secured campus; zone panos set hasCoverage:false to avoid attributing an off-zone pano."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,148 @@
+{
+  "name": "Ultium Cells - Lansing/Delta Township MI",
+  "type": "Battery Cell Plant (GM JV)",
+  "coords": {
+    "lat": 42.716,
+    "lng": -84.647
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.7198,
+          "lng": -84.6512
+        },
+        {
+          "lat": 42.7201,
+          "lng": -84.6456
+        },
+        {
+          "lat": 42.718,
+          "lng": -84.6418
+        },
+        {
+          "lat": 42.7148,
+          "lng": -84.6408
+        },
+        {
+          "lat": 42.7125,
+          "lng": -84.6436
+        },
+        {
+          "lat": 42.7115,
+          "lng": -84.649
+        },
+        {
+          "lat": 42.7127,
+          "lng": -84.6518
+        },
+        {
+          "lat": 42.7165,
+          "lng": -84.6523
+        }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 42.714423,
+            "lng": -84.646326
+          },
+          {
+            "lat": 42.715243,
+            "lng": -84.643601
+          },
+          {
+            "lat": 42.714754,
+            "lng": -84.643181
+          },
+          {
+            "lat": 42.713934,
+            "lng": -84.645906
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 0,
+        "pano": "P-4lIMoyM6bmEUrW-U8xyw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 20,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 171.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.71600,-84.64700,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "postGateStaging",
+    "drivewayLong",
+    "entryExitTogether",
+    "fastLaneOpportunity",
+    "entryLanes",
+    "exitLanes",
+    "dockDoors",
+    "dockDoorCount",
+    "dropArea",
+    "dropYard",
+    "trailerParkingCapacity",
+    "shipRcvSeparate"
+  ],
+  "fieldNotes": {
+    "facility": "Ultium Cells Lansing battery cell plant (2.8M sq ft, 41 GWh, $2.6B), the GM/LG Energy Solution JV plant on ~590 acres of former GM land immediately NW of GM's Lansing Delta Township Assembly, bounded by the I-69/I-496 interchange on the N and Millett Hwy on the S. Positively identified by the unmistakable single large light-roofed gigafactory mass and its location adjacent to LDT Assembly (web-confirmed). NOTE: GM agreed to sell its stake to LG Energy Solution in Q1 2025; the plant is now LG-operated (planned to build NCMA modules for Toyota), but was a GM JV when the roster was built.",
+    "imagery": "All available Google/Maxar satellite tiles and Street View (2023-05) are CONSTRUCTION-ERA: the roof membrane is still being installed, the surrounding lot is raw graded earth, and there is no paved/striped yard, no installed perimeter fence/gate, and no parked trailers. Operational yard features could not be directly observed and are inferred from the building design + gigafactory class. Production was pushed to late 2025/2026.",
+    "truckGate": "No operational gate visible in the construction imagery (perimeter fence posts only just being set in Street View). Inferred true: a controlled, fully-fenced secured campus is the universal standard for a battery-cell gigafactory of this value and adjacency to a GM assembly plant. Flagged uncertain.",
+    "guardShack": "Inferred true on the same gigafactory-security basis; no booth observable in construction-era imagery. Flagged uncertain.",
+    "dockDoors": "A multi-bay dock structure is under construction on the SE end of the building (regular bay rhythm visible in z17). Banded 10-25 as a conservative estimate for a single-building cell plant; uncertain because docks were unfinished.",
+    "dropArea": "NONE / dropYard false: no paved trailer-parking lot existed in the captured imagery (raw earth and a contractor laydown yard only). Likely to exist once operational; flagged uncertain.",
+    "fastLaneOpportunity": "Large undeveloped graded apron around the building gives ample room to lay express/bypass lanes at a future gate; inferred from open space.",
+    "urbanRural": "Edge-of-town Delta Township industrial setting beside a freeway interchange, farmland and residential subdivisions nearby; classified Rural per the small-town-industrial tiebreak.",
+    "railServed": "No rail spur runs into the parcel in the imagery; the site is served by truck/highway (I-69/I-496). LDT Assembly to the SE is also road-served. Set false.",
+    "siteAreaAcres": "171.6 ac traced for the active developed plant site (building + immediate graded lot between the freeway and Millett Hwy); the full GM/Ultium land holding is ~590 ac including shared/expansion acreage."
+  },
+  "method": "deep-audit"
+}

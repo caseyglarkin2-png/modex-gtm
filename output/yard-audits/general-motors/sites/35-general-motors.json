@@ -1,0 +1,172 @@
+{
+  "name": "GM CCA - Reno Parts Distribution Center, Reno NV",
+  "type": "Parts Distribution Center",
+  "coords": {
+    "lat": 39.6572,
+    "lng": -119.8985
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.659,
+          "lng": -119.8997
+        },
+        {
+          "lat": 39.6589,
+          "lng": -119.8985
+        },
+        {
+          "lat": 39.6588,
+          "lng": -119.89705
+        },
+        {
+          "lat": 39.6556,
+          "lng": -119.89705
+        },
+        {
+          "lat": 39.655,
+          "lng": -119.8985
+        },
+        {
+          "lat": 39.6551,
+          "lng": -119.8997
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.65595,
+          "lng": -119.89775
+        },
+        {
+          "lat": 39.65595,
+          "lng": -119.89705
+        },
+        {
+          "lat": 39.65535,
+          "lng": -119.89705
+        },
+        {
+          "lat": 39.65535,
+          "lng": -119.89775
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 39.65885,
+            "lng": -119.89815
+          },
+          {
+            "lat": 39.65885,
+            "lng": -119.8972
+          },
+          {
+            "lat": 39.65605,
+            "lng": -119.8972
+          },
+          {
+            "lat": 39.65605,
+            "lng": -119.89815
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 39.65875,
+            "lng": -119.8984
+          },
+          {
+            "lat": 39.65875,
+            "lng": -119.89805
+          },
+          {
+            "lat": 39.6561,
+            "lng": -119.89805
+          },
+          {
+            "lat": 39.6561,
+            "lng": -119.8984
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 285,
+        "pano": "hbrkPuVcVb24l_eYKDoBRA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 310,
+        "pano": "NXQylA-OtvQ62M_m9fAvmA",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 45,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 23.2,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.65720,-119.89850,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes"
+  ],
+  "fieldNotes": {
+    "facility": "GM Customer Care & Aftersales (CCA) Service Parts Operations Reno PDC, ~404,000 sq ft single-tenant warehouse opened 2003, in the Stead industrial area near Reno-Stead Airport. OSM geocode for 6565 Echo Ave lands on this central N-S warehouse; building footprint (~330m x 105m) matches the published ~404k sq ft, blue corporate signage visible on the NE-corner office in 2019 Street View.",
+    "truckGate": "No barrier arm, sliding gate, or guard booth visible across the truck approach in satellite imagery. Single-tenant DC with an open dock apron running off the internal east-side drive; public Street View is set back from the truck yard so a gate cannot be positively confirmed, but none is apparent - left false and flagged uncertain.",
+    "guardShack": "No standalone booth structure beside the truck approach. Office function is integrated into the NE corner of the main building.",
+    "postGateStaging": "Wide paved apron on the east face between the dock doors and the access drive provides interior staging/queue room before docks.",
+    "dockDoors": "Continuous dock bank along nearly the full ~330m east face with ~45 mixed-carrier trailers backed in; door count estimated 50+ from overhead imagery, flagged uncertain.",
+    "dropArea": "Numerous parked trailers on the east apron without tractors - a working drop/storage yard; banded 25-50.",
+    "dropYard": "Dedicated trailer storage along the east apron beyond the active dock positions.",
+    "fastLaneOpportunity": "Wide unused paved width and open apron geometry leave room to add a bypass/express check-in lane.",
+    "urbanRural": "Edge-of-town Stead logistics park north of Reno, abutting high-desert open land and the Reno-Stead general-aviation airport; judged Rural per rubric.",
+    "railServed": "No rail spur enters the property; nearest rail is not adjacent.",
+    "scale": "No truck scale/weigh pad identified in the truck path.",
+    "entryLanes": "Single combined in/out access off the internal east drive; lane counts estimated and flagged uncertain."
+  },
+  "method": "deep-audit"
+}

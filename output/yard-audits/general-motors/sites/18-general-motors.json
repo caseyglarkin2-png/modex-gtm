@@ -1,0 +1,204 @@
+{
+  "name": "GM - Lansing Regional Stamping, Delta Township MI",
+  "type": "Stamping Plant",
+  "coords": {
+    "lat": 42.6875,
+    "lng": -84.6800
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.69460,
+          "lng": -84.68330
+        },
+        {
+          "lat": 42.69470,
+          "lng": -84.67430
+        },
+        {
+          "lat": 42.69100,
+          "lng": -84.67360
+        },
+        {
+          "lat": 42.68720,
+          "lng": -84.67480
+        },
+        {
+          "lat": 42.68300,
+          "lng": -84.67620
+        },
+        {
+          "lat": 42.68270,
+          "lng": -84.68160
+        },
+        {
+          "lat": 42.68420,
+          "lng": -84.68340
+        },
+        {
+          "lat": 42.68900,
+          "lng": -84.68360
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.68285,
+          "lng": -84.68210
+        },
+        {
+          "lat": 42.68290,
+          "lng": -84.68120
+        },
+        {
+          "lat": 42.68420,
+          "lng": -84.68130
+        },
+        {
+          "lat": 42.68420,
+          "lng": -84.68215
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 42.69240,
+            "lng": -84.68170
+          },
+          {
+            "lat": 42.69240,
+            "lng": -84.67950
+          },
+          {
+            "lat": 42.69110,
+            "lng": -84.67950
+          },
+          {
+            "lat": 42.69110,
+            "lng": -84.68170
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 42.68690,
+            "lng": -84.68155
+          },
+          {
+            "lat": 42.68690,
+            "lng": -84.68020
+          },
+          {
+            "lat": 42.68590,
+            "lng": -84.68020
+          },
+          {
+            "lat": 42.68590,
+            "lng": -84.68155
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 42.69180,
+            "lng": -84.68130
+          },
+          {
+            "lat": 42.69180,
+            "lng": -84.67980
+          },
+          {
+            "lat": 42.69130,
+            "lng": -84.67980
+          },
+          {
+            "lat": 42.69130,
+            "lng": -84.68130
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 14,
+        "pano": "CAoSF0NJSE0wb2dLRUlDQWdJRGFtYy13NmdF",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 32,
+        "pano": "CAoSF0NJSE0wb2dLRUlDQWdJRGFtYy13NmdF",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30,
+    "trailersVisible": 12,
+    "trailerParkingCapacity": 50,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 320.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.68750,-84.68000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "dockDoorCount",
+    "railServed",
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "multiStep"
+  ],
+  "fieldNotes": {
+    "facility": "Lansing Regional Stamping (LRS) is the large stamping building forming the southern half of GM's Lansing Delta Township (LDT) complex off 8400 Millett Hwy, Delta Township MI. The address-supplied/aggregator coords (42.7361, -84.5838) are wrong; the real complex is at ~42.687, -84.680, positively identified by the matching 3.6M-sq-ft twin-building layout on Millett Hwy west of I-69/I-96, with the boulevard security entrance and shared truck courts visible in imagery. LRS shares the controlled-access campus with LDT Assembly to its north.",
+    "truckGate": "Single divided-boulevard main entrance off Millett Hwy. Street View (2021/2023) up the boulevard shows perimeter chain-link fencing along the approach and a low gate/security plaza structure spanning the entrance ahead. A teal-canopied guard/gate structure sits beside the secured access drive (visible in z19 satellite at ~42.6837,-84.6810).",
+    "guardShack": "Teal-canopied booth structure beside the secured entrance drive plus the gate/security plaza at the head of the boulevard; consistent with a staffed guarded entry standard for a GM assembly/stamping campus.",
+    "drivewayLong": "Long divided boulevard from Millett Hwy to the buildings (several hundred feet of approach) easily holds a queue of 3+ trucks before reaching docks.",
+    "postGateStaging": "Wide paved truck courts inside the gate between the stamping and assembly buildings provide holding/queue room before the dock banks.",
+    "fastLaneOpportunity": "Divided boulevard entrance with wide paved aprons and multiple lanes leaves clear room to add a dedicated truck/express bypass lane.",
+    "dockDoors": "Dock banks distributed across the shared truck courts (north court between LDT Assembly and LRS shows trailers backed into door banks; west court of LRS shows additional apron/doors). 25-50 band is an overhead estimate across the stamping building faces; total complex docks are higher.",
+    "dropArea": "A row of staged/dropped trailers in the north shared court and trailers in the west LRS court; estimated 10-25 dropped trailers, capacity ~50.",
+    "shipRcvSeparate": "Raw coiled steel is received at one end and stampings ship from another; receiving and shipping dock clusters sit on physically distinct building faces (north court vs west court).",
+    "multipleFacilities": "Campus: LRS stamping building plus the adjacent LDT Assembly plant and connector/body structures share the same secured property (~320 developed acres).",
+    "railServed": "No active rail spur was clearly seen entering the developed footprint in the captured imagery; a rail line runs east of the site beyond the employee parking but does not visibly serve the docks. Left uncertain/false pending better imagery.",
+    "urbanRural": "Edge-of-town/farmland setting in Delta Township west of Lansing; surrounded by agricultural fields and wetland on a ~1,100-acre parcel. Classified Rural per rubric (small-town-industrial leans Rural).",
+    "scale": "No truck scale/weigh pad clearly identified in imagery; left false/uncertain.",
+    "multiStep": "Boulevard gate/security plaza is the clear first checkpoint; a distinct second post-gate checkpoint was not unambiguously confirmed, so multiStep left false.",
+    "entryLanes": "Divided boulevard reads as ~2 inbound / ~2 outbound lanes; exact count estimated."
+  },
+  "method": "deep-audit"
+}

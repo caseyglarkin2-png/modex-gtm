@@ -1,0 +1,141 @@
+{
+  "name": "GM - Factory ZERO (Detroit-Hamtramck Assembly), Detroit MI",
+  "type": "Vehicle Assembly Plant",
+  "coords": {
+    "lat": 42.3805,
+    "lng": -83.0475
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        { "lat": 42.3855, "lng": -83.0530 },
+        { "lat": 42.3885, "lng": -83.0470 },
+        { "lat": 42.3855, "lng": -83.0360 },
+        { "lat": 42.3800, "lng": -83.0345 },
+        { "lat": 42.3762, "lng": -83.0400 },
+        { "lat": 42.3765, "lng": -83.0470 },
+        { "lat": 42.3782, "lng": -83.0528 }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        { "lat": 42.38415, "lng": -83.04985 },
+        { "lat": 42.38395, "lng": -83.04895 },
+        { "lat": 42.38330, "lng": -83.04935 },
+        { "lat": 42.38350, "lng": -83.05025 }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          { "lat": 42.38010, "lng": -83.04000 },
+          { "lat": 42.38030, "lng": -83.03780 },
+          { "lat": 42.37820, "lng": -83.03740 },
+          { "lat": 42.37800, "lng": -83.03960 }
+        ]
+      },
+      {
+        "ring": [
+          { "lat": 42.38390, "lng": -83.03760 },
+          { "lat": 42.38330, "lng": -83.03640 },
+          { "lat": 42.38240, "lng": -83.03720 },
+          { "lat": 42.38300, "lng": -83.03840 }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          { "lat": 42.38260, "lng": -83.05130 },
+          { "lat": 42.38120, "lng": -83.05095 },
+          { "lat": 42.38110, "lng": -83.05015 },
+          { "lat": 42.38250, "lng": -83.05050 }
+        ]
+      },
+      {
+        "ring": [
+          { "lat": 42.38130, "lng": -83.04250 },
+          { "lat": 42.38110, "lng": -83.04050 },
+          { "lat": 42.38020, "lng": -83.04075 },
+          { "lat": 42.38040, "lng": -83.04275 }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 235,
+        "pano": "jnWp2cncPSxrA-CoSC4AYg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 200,
+        "pano": "sAYPIeSwj-VBW93rYLUufQ",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 180,
+    "truckGateCount": 2,
+    "buildingCount": 4,
+    "siteAreaAcres": 380,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.38050,-83.04750,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": true
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "scale"
+  ],
+  "fieldNotes": {
+    "facility": "GM Factory ZERO (Detroit-Hamtramck Assembly), 2500 E Grand Blvd / E General Motors Blvd, Detroit MI 48211. GM's $2.2B EV plant (3.5M sq ft) building GMC Hummer EV, Cadillac Escalade IQ, Chevrolet Silverado EV and GMC Sierra EV. Geocode for the street address landed near the residential SE edge; web-confirmed and re-pinned on the large light-roofed assembly complex centered ~42.3805,-83.0475. Site is a rounded ~380-acre parcel bounded by a multi-track rail corridor on the N/NW, the I-94 (Edsel Ford) freeway on the S, and St Aubin / industrial streets on the E.",
+    "truckGate": "Secured GM assembly campus with continuous perimeter fencing (Street View shows chain-link with concrete jersey-barrier base along the NE industrial street, dock doors behind). Truck access is via controlled internal roads off the perimeter ring rather than directly from a public street; the main staffed entrances are set back inside the buffer. Multiple controlled access drives (NW dock approach and E/NE yard approach) - entry and exit run from separate points of the property line. Verdict: truckGate true.",
+    "guardShack": "GM assembly plants of this scale uniformly run staffed security gatehouses at controlled entrances. The public roads encircling the campus (rail corridor N, freeway S, buffer/embankment W) do not give a clean frontal Street View of the interior guard gate, so the booth could not be crisply isolated - marked uncertain, but guardShack true is the high-confidence call for a $2.2B secured assembly plant.",
+    "entryExitSeparate": "Distinct controlled access drives at different points of the perimeter - a NW approach serving the west dock/material face and a NE/E approach serving the rail-served yard and finished-vehicle lots.",
+    "postGateStaging": "Large paved internal aprons and holding lanes inside the perimeter ahead of the dock faces provide queue space for inbound material trailers.",
+    "drivewayLong": "Internal perimeter and approach roads are long and deep - easily hold a 3+ truck queue between the property line and the dock faces.",
+    "fastLaneOpportunity": "Wide multi-lane internal driveways and oversized paved aprons on the west and east faces leave unused width to add an express/bypass lane.",
+    "dockDoors": "Counted ~45 loading doors across the west material-receiving face and the east dock banks / supplier building - estimate from overhead imagery, marked uncertain.",
+    "shipRcvSeparate": "Material receiving / inbound docks cluster on the west building face (dock aprons + retention-pond side); finished-vehicle outbound staging and the trailer/rail yard are on the east - physically separate shipping and receiving clusters.",
+    "dropYard": "Multiple rows of dry-van / drop trailers parked in the east yard (z18 imagery shows dozens of trailers backed against dock structures and staged in rows), plus a rail-served trailer area on the NE - dedicated trailer storage separate from active dock staging.",
+    "dropArea": "50+ trailers visible across the east drop-trailer rows and rail-served NE yard.",
+    "trailerParkingCapacity": "East yard and NE rail-served area could hold ~180 trailers; the same paved acreage also stages finished EVs, so capacity is shared - approximate.",
+    "railServed": "Active multi-track rail corridor (Conrail/CN) runs the full N/NW boundary with loaded railcars visible in Street View; rail spur tracks run down into the E side of the property (z17 NE view) - rail served true.",
+    "multipleFacilities": "Multiple large building clusters on one fenced property - the main assembly complex plus a separate body-shop / supplier building cluster on the NE and the battery/EV shops - a campus.",
+    "multiStep": "Outer controlled perimeter access plus internal vehicle-control checkpoints typical of an assembly plant of this scale and security level.",
+    "urbanRural": "Inside the dense Detroit/Hamtramck urban fabric - surrounded by residential blocks, industrial streets, and freeway - Urban.",
+    "scale": "No truck scale clearly isolated in the imagery; left uncertain.",
+    "siteAreaAcres": "Perimeter polygon yields ~380 acres including the rail/freeway buffer; documented historical site is ~365 acres - honest overhead estimate."
+  },
+  "method": "deep-audit"
+}

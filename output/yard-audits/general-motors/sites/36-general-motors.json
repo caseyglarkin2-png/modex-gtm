@@ -1,0 +1,113 @@
+{
+  "name": "GM CCA - Boston Parts Distribution Center, Mansfield MA",
+  "type": "Parts Distribution Center",
+  "coords": {
+    "lat": 41.9592,
+    "lng": -71.1392
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        { "lat": 41.96120, "lng": -71.14110 },
+        { "lat": 41.96080, "lng": -71.13660 },
+        { "lat": 41.95900, "lng": -71.13620 },
+        { "lat": 41.95680, "lng": -71.13760 },
+        { "lat": 41.95730, "lng": -71.13980 },
+        { "lat": 41.95900, "lng": -71.14210 }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [
+      {
+        "ring": [
+          { "lat": 41.95812, "lng": -71.13905 },
+          { "lat": 41.95760, "lng": -71.13822 },
+          { "lat": 41.95705, "lng": -71.13868 },
+          { "lat": 41.95758, "lng": -71.13951 }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          { "lat": 41.96015, "lng": -71.14165 },
+          { "lat": 41.95808, "lng": -71.13948 },
+          { "lat": 41.95775, "lng": -71.13990 },
+          { "lat": 41.95982, "lng": -71.14207 }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 309,
+        "pano": "ZF8vPrre5Gzyge1-otLhLw",
+        "hasCoverage": true
+      },
+      "dropYards": {
+        "heading": 248,
+        "pano": "ZF8vPrre5Gzyge1-otLhLw",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 42,
+    "trailersVisible": 30,
+    "trailerParkingCapacity": 45,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 41.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.95920,-71.13920,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "dropArea",
+    "entryLanes",
+    "exitLanes"
+  ],
+  "fieldNotes": {
+    "_facility": "The GM CCA Boston PDC was the ~404,000 sq ft GM Service & Parts Operations distribution center built ~2004-2005 in the Norton Commerce Center, Norton MA (just north of Mansfield), serving 400+ New England/NY dealers. GM closed it end of 2009 in bankruptcy; Condyne rehabbed/expanded it and Horizon Beverage bought it in 2012 and now occupies it as their HQ/DC (solar-covered roof added). The audited building is the original GM PDC structure at ~15/45 Commerce Way, Norton MA 02766 (41.9592,-71.1392). No GM-operated parts DC currently exists at/near Mansfield-Boston.",
+    "truckGate": "No barrier arm, sliding gate, or guard checkpoint at the property edge. Street View along Commerce Way (Aug 2025) shows open lawn frontage with no perimeter fence; the dock yard and drop area sit set back behind the building. Open suburban industrial-park access. truckGate=false.",
+    "guardShack": "No staffed booth at any entrance. A small round white structure and a rectangular shed sit in the dock apron (utility silo / electrical, not a gatehouse). guardShack=false.",
+    "remoteGs": "No gate present, so remoteGs=false (no kiosk/call-box check-in either).",
+    "dockDoors": "Loading docks line the long southwest face of the building; trailers backed in at the NW and south ends with a continuous dock wall ~600 ft long. Estimated ~42 doors across the SW face -> 25-50 band (could reach 50+); flagged uncertain.",
+    "dropArea": "Curving access drive at the SW/south end holds rows of parked trailers without tractors plus a striped trailer-parking lane; ~20-30 trailers visible -> 10-25 band drop area.",
+    "dropYard": "Dedicated trailer-storage along the southern loop drive, separate from the active dock apron. dropYard=true.",
+    "postGateStaging": "Large paved apron between the SW dock wall and the access loop gives ample interior holding room before docks; postGateStaging=true.",
+    "drivewayLong": "Deep paved apron / loop drive can stack 3+ trucks approaching the dock face; drivewayLong=true.",
+    "railServed": "No rail spur into the property; nearest rail is the MBTA/Amtrak Northeast Corridor well to the west, not connected. railServed=false.",
+    "urbanRural": "Edge-of-town suburban industrial park in Norton MA off Route 140 / near I-495, surrounded by woods and wetland; judged Rural per rubric (small-town industrial).",
+    "fastLaneOpportunity": "No truck gate exists, so no express-lane opportunity at a checkpoint; set false.",
+    "entryLanes": "Single shared two-way driveway loop serves the dock yard; entry/exit lane counts inferred as 1/1, flagged uncertain."
+  },
+  "method": "deep-audit"
+}

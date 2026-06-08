@@ -1,0 +1,168 @@
+{
+  "name": "GM CCA - Denver Parts Distribution Center, Aurora CO",
+  "type": "Parts Distribution Center",
+  "coords": {
+    "lat": 39.7468,
+    "lng": -104.7124
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.7481,
+          "lng": -104.71492
+        },
+        {
+          "lat": 39.74822,
+          "lng": -104.71012
+        },
+        {
+          "lat": 39.7459,
+          "lng": -104.71008
+        },
+        {
+          "lat": 39.74572,
+          "lng": -104.71488
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.74678,
+          "lng": -104.7148
+        },
+        {
+          "lat": 39.74678,
+          "lng": -104.71452
+        },
+        {
+          "lat": 39.74648,
+          "lng": -104.71452
+        },
+        {
+          "lat": 39.74648,
+          "lng": -104.7148
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 39.74612,
+            "lng": -104.71452
+          },
+          {
+            "lat": 39.74616,
+            "lng": -104.71048
+          },
+          {
+            "lat": 39.74592,
+            "lng": -104.71048
+          },
+          {
+            "lat": 39.74588,
+            "lng": -104.71452
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 39.74642,
+            "lng": -104.71452
+          },
+          {
+            "lat": 39.74646,
+            "lng": -104.71048
+          },
+          {
+            "lat": 39.74618,
+            "lng": -104.71048
+          },
+          {
+            "lat": 39.74614,
+            "lng": -104.71452
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 176,
+        "pano": "k9mWso8IPDvxz2eGot4JnQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 100,
+        "pano": "_D8O53Iiv_BcP66Zsq1_FQ",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 52,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 27,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.74680,-104.71240,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount"
+  ],
+  "fieldNotes": {
+    "identity": "GM Customer Care & Aftersales (CCA) Denver Parts Distribution Center, 23400 E Smith Rd, Aurora CO 80019. ~404,000 sq ft, opened 2003, built at the E-470 / I-70 interchange (Saunders/GM media). UAW Local 431 site. Positively matched to the large white-roof warehouse at 39.7468, -104.7124 - confirmed by the E-470 frontage, the long single south dock face, and the office/parking on the NW end.",
+    "truckGate": "Whole property is enclosed by a continuous black ornamental metal fence with masonry pilasters (clearly visible in three Street View frames along the north and west roads). The truck court on the south side is secured behind this fence; the truck lane enters at the SW corner of the building where the secured court meets the perimeter road. Open driveway-with-control = true.",
+    "guardShack": "No distinct staffed guard booth resolvable at the truck entrance in available overhead or Street View imagery; the fence/pilaster screening obscures the inner gate. Flagged uncertain.",
+    "remoteGs": "Gate present, no confirmable guard booth -> set true at lower confidence (kiosk / badge / app check-in implied for a secured GM PDC).",
+    "preGateStaging": "No dedicated paved truck stalls outside the fence on the public road; set false.",
+    "postGateStaging": "Wide paved truck court inside the fence between the dock wall and the drop-trailer row gives ample inside queuing before the doors.",
+    "drivewayLong": "The internal south truck court is long and deep (full building length), easily holds a 3+ truck queue.",
+    "dockDoors": "Single long continuous dock-door bank along the entire SOUTH building face with ~30+ trailers backed in plus a parallel drop row; door rhythm runs the full ~900 ft wall -> estimated ~52 doors -> 50+ band. Count is an overhead estimate, flagged uncertain.",
+    "dropArea": "Two trailer rows in the south court (dock-backed + a parallel drop/staging row); ~40-50 trailers without tractors -> 25-50 band.",
+    "dropYard": "Dedicated trailer-storage row in the south truck court separate from the active dock apron.",
+    "shipRcvSeparate": "All loading is from one south dock face (single dock bank) -> ship/receive not physically separated.",
+    "entryExitTogether": "Single truck court with one controlled entry at the SW; trucks enter and exit through the same point.",
+    "railServed": "A single rail spur curves off the mainline north of the site and runs SOUTH through the gap between this building and the eastern neighbor. The track hugs the GM property's east edge but does NOT visibly enter the GM building (no rail dock door / car-spot inside the fence); it appears to serve the broader Porteos/Majestic rail-served park. Set railServed=false for this building; flagged as adjacent rail in notes.",
+    "urbanRural": "Edge-of-metro logistics park at E-470/I-70 with open prairie immediately north and east of the site; classified Rural per the small-town/edge-of-town rule despite proximity to Denver.",
+    "fastLaneOpportunity": "Single secured entry with limited apron width; no obvious room for a dedicated express bypass lane -> false.",
+    "siteAreaAcres": "~404k sq ft building on a ~27-acre fenced parcel (overhead estimate from the perimeter ring)."
+  },
+  "method": "deep-audit"
+}

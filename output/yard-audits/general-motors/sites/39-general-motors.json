@@ -1,0 +1,170 @@
+{
+  "name": "GM CCA - Fort Worth Parts Distribution Center, Fort Worth TX",
+  "type": "Parts Distribution Center",
+  "coords": {
+    "lat": 32.99887,
+    "lng": -97.24617
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.0006,
+          "lng": -97.2472
+        },
+        {
+          "lat": 33.0005,
+          "lng": -97.245
+        },
+        {
+          "lat": 32.997,
+          "lng": -97.2456
+        },
+        {
+          "lat": 32.997,
+          "lng": -97.2478
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.00045,
+          "lng": -97.24685
+        },
+        {
+          "lat": 33.0004,
+          "lng": -97.24615
+        },
+        {
+          "lat": 32.9999,
+          "lng": -97.24625
+        },
+        {
+          "lat": 32.99995,
+          "lng": -97.24695
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 33.00035,
+            "lng": -97.24735
+          },
+          {
+            "lat": 33.0003,
+            "lng": -97.2467
+          },
+          {
+            "lat": 32.99725,
+            "lng": -97.24735
+          },
+          {
+            "lat": 32.9973,
+            "lng": -97.248
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 33.0002,
+            "lng": -97.24705
+          },
+          {
+            "lat": 33.00015,
+            "lng": -97.2469
+          },
+          {
+            "lat": 32.99725,
+            "lng": -97.24755
+          },
+          {
+            "lat": 32.9973,
+            "lng": -97.2477
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 235,
+        "pano": "yfHQpkluMWYhOQY6Axpl0A",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 141,
+        "pano": "VF1RgYzst7vJSJufP56gcA",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 32,
+    "trailersVisible": 30,
+    "trailerParkingCapacity": 50,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 20,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.99887,-97.24617,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
+  "fieldNotes": {
+    "identity": "GM Customer Care & Aftersales (CCA) Fort Worth Parts Distribution Center, 301 Freedom Dr, Roanoke TX 76262 (in the AllianceTexas logistics district NE of Fort Worth). Rooftop geocode + building footprint + web research confirm a ~404,000 sq ft GM PDC opened 2001, staffed by UAW Local 816; a 2024 TDLR-permitted ~$2.25M renovation added truck storage, paving/striping/lighting and a storm-sewer connection.",
+    "truckGate": "Whole property is enclosed by a perimeter wall/fence (visible behind the tree buffer in Freedom Dr Street View). The truck yard is reached through a single controlled entry corridor on the NW side off the access road; no open public-road curb cut into the dock yard. Set true.",
+    "guardShack": "No clearly staffed guard booth resolvable in satellite or the available Street View (coverage is on Freedom Dr to the east and the interior employee/office lot to the NW). Flagged uncertain.",
+    "remoteGs": "Controlled, fenced entry with no visible manned booth -> set true (kiosk/remote check-in implied) at low confidence.",
+    "dockDoors": "Long continuous dock-door bank runs the full WEST face of the building with a near-solid row of trailers backed in; ~30 trailers/doors counted across the captured tight crops -> 25-50 band.",
+    "dropArea": "Trailer-storage rows along the west dock yard and an additional staging row off the north access drive; ~30 trailers visible with room for ~50 -> 25-50 band. The 2024 renovation explicitly added truck storage.",
+    "dropYard": "Dedicated trailer-storage lanes on the west yard and north staging strip, separate from the active dock face.",
+    "postGateStaging": "Wide paved yard between the entry corridor and the dock face provides interior staging/queue room.",
+    "drivewayLong": "Deep paved approach from the NW entry corridor down the west yard easily holds a 3+ truck queue.",
+    "fastLaneOpportunity": "Wide west yard and north staging apron leave unused paved width for an express/bypass lane.",
+    "entryExitTogether": "Single entry corridor on the NW serves both in and out; no separate out-gate observed.",
+    "railServed": "A rail spur curves off the E-W through-line along the south boundary and runs north up the WEST side of the building (confirmed in the SW Street View and z19 satellite). Set true.",
+    "shipRcvSeparate": "Docks are concentrated on a single (west) building face; no second distinct dock bank -> false.",
+    "urbanRural": "Dense AllianceTexas warehouse/logistics district off Freedom Dr with large neighboring DCs on all sides -> Urban.",
+    "siteAreaAcres": "~20 acres derived from the traced perimeter ring; ~404k sq ft (~9.3 acre) building footprint plus west dock yard, north parking and east access strip.",
+    "entryLanes": "Single inbound lane assumed at the controlled corridor; not separately resolvable -> uncertain.",
+    "trailerParkingCapacity": "Overhead estimate (~50) from west yard + north staging; flagged uncertain."
+  },
+  "method": "deep-audit"
+}

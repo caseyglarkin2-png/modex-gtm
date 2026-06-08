@@ -1,0 +1,135 @@
+{
+  "name": "GM - Flint Metal Center, Flint MI",
+  "type": "Stamping/Metal Center",
+  "coords": {
+    "lat": 42.9748,
+    "lng": -83.7935
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        { "lat": 42.9798, "lng": -83.7990 },
+        { "lat": 42.9805, "lng": -83.7905 },
+        { "lat": 42.9793, "lng": -83.7862 },
+        { "lat": 42.9712, "lng": -83.7868 },
+        { "lat": 42.9715, "lng": -83.7990 }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        { "lat": 42.9722, "lng": -83.7952 },
+        { "lat": 42.9722, "lng": -83.7938 },
+        { "lat": 42.9713, "lng": -83.7938 },
+        { "lat": 42.9713, "lng": -83.7952 }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          { "lat": 42.9802, "lng": -83.7960 },
+          { "lat": 42.9802, "lng": -83.7895 },
+          { "lat": 42.9784, "lng": -83.7895 },
+          { "lat": 42.9784, "lng": -83.7960 }
+        ]
+      },
+      {
+        "ring": [
+          { "lat": 42.9756, "lng": -83.7905 },
+          { "lat": 42.9756, "lng": -83.7876 },
+          { "lat": 42.9730, "lng": -83.7876 },
+          { "lat": 42.9730, "lng": -83.7905 }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          { "lat": 42.9742, "lng": -83.7998 },
+          { "lat": 42.9742, "lng": -83.7988 },
+          { "lat": 42.9722, "lng": -83.7988 },
+          { "lat": 42.9722, "lng": -83.7998 }
+        ]
+      },
+      {
+        "ring": [
+          { "lat": 42.9758, "lng": -83.7872 },
+          { "lat": 42.9760, "lng": -83.7862 },
+          { "lat": 42.9728, "lng": -83.7866 },
+          { "lat": 42.9726, "lng": -83.7876 }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "truckGate": {
+        "heading": 355,
+        "pano": "lIkENTcM7MVxHhnqt24lgA",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 2,
+    "buildingCount": 3,
+    "siteAreaAcres": 244.7,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.97480,-83.79350,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": true
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "guardShack",
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "multiStep"
+  ],
+  "fieldNotes": {
+    "facility": "Roster address (6200 Bristol Rd, Swartz Creek 48473) was imprecise. Step 0 re-pinned the real GM Flint Metal Center at 2238 W Bristol Rd, Flint MI (~42.9748, -83.7935), confirmed via GM/Waze listings and the unmistakable 1.6M-sq-ft stamping plant on the satellite imagery. The fenced campus also abuts GM Flint Engine South operations to the east.",
+    "truckGate": "Fully fenced, controlled-access GM legacy manufacturing campus. Truck/employee entrance drives come off W Bristol Rd at the south frontage behind a deep tree-screened lawn buffer; paved secured truck routes and fence lines visible around the building. Street View cannot reach the interior gates (heavy frontage screening).",
+    "guardShack": "GM stamping/engine campuses of this era operate staffed security gatehouses at entrances (standard). A gatehouse/booth structure is consistent with the entrance layout but could not be individually resolved through the tree-screened frontage in Street View, so it is flagged uncertain.",
+    "dockDoors": "50+ band. Long rows of trailers backed into dock doors are visible on the SW face of the west (stamping) building, along the south frontage face, and along the SE face of the east building (15+ trailers per face). Total estimated ~70 from overhead imagery.",
+    "dropArea": "Large north trailer/material drop yard (steel coil / die laydown plus parked trailers) and a separate east lot with parked trailers and solar canopies; well over 50 trailer positions.",
+    "shipRcvSeparate": "Dock clusters on physically separate building faces (west stamping face vs. east face) support separate shipping/receiving flows.",
+    "railServed": "Active rail line runs along the north/northeast edge of the property with rail loading at the building's north face; a parallel line runs along the SE edge. Inbound steel coil and die movements are rail-served.",
+    "multipleFacilities": "Campus comprises multiple large connected building masses (stamping center plus adjoining engine/propulsion operations) under one fenced perimeter.",
+    "multiStep": "Campus-scale security implies an outer perimeter gate then internal plant checkpoints before the docks; not individually confirmed in imagery, flagged uncertain.",
+    "urbanRural": "Edge-of-town setting on the Flint/Swartz Creek line: surrounded by farmland, woods, a golf course, and low-density single-family residential. Judged Rural per rubric.",
+    "fastLaneOpportunity": "Wide paved aprons and multiple entrance drives provide room to add an express/bypass lane.",
+    "scale": "No truck scale clearly identified in the imagery; left uncertain.",
+    "entryLanes": "Estimated; the south entrance carries multiple paved lanes but exact in/out lane counts were not crisply resolvable."
+  },
+  "method": "deep-audit"
+}

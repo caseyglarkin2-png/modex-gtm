@@ -1,0 +1,204 @@
+{
+  "name": "GM - Lansing Grand River Assembly, Lansing MI",
+  "type": "Vehicle Assembly + Stamping",
+  "coords": {
+    "lat": 42.7228,
+    "lng": -84.56
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.72755,
+          "lng": -84.56455
+        },
+        {
+          "lat": 42.72705,
+          "lng": -84.55485
+        },
+        {
+          "lat": 42.72515,
+          "lng": -84.55425
+        },
+        {
+          "lat": 42.72205,
+          "lng": -84.55505
+        },
+        {
+          "lat": 42.71845,
+          "lng": -84.55755
+        },
+        {
+          "lat": 42.71795,
+          "lng": -84.56275
+        },
+        {
+          "lat": 42.72115,
+          "lng": -84.56475
+        },
+        {
+          "lat": 42.72515,
+          "lng": -84.56565
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.72575,
+          "lng": -84.56085
+        },
+        {
+          "lat": 42.72575,
+          "lng": -84.55995
+        },
+        {
+          "lat": 42.72505,
+          "lng": -84.55995
+        },
+        {
+          "lat": 42.72505,
+          "lng": -84.56085
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 42.72415,
+            "lng": -84.56565
+          },
+          {
+            "lat": 42.72415,
+            "lng": -84.56275
+          },
+          {
+            "lat": 42.72205,
+            "lng": -84.56275
+          },
+          {
+            "lat": 42.72205,
+            "lng": -84.56565
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 42.72075,
+            "lng": -84.55735
+          },
+          {
+            "lat": 42.72035,
+            "lng": -84.55545
+          },
+          {
+            "lat": 42.71925,
+            "lng": -84.55575
+          },
+          {
+            "lat": 42.71965,
+            "lng": -84.55765
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 42.72375,
+            "lng": -84.56055
+          },
+          {
+            "lat": 42.72375,
+            "lng": -84.55915
+          },
+          {
+            "lat": 42.72315,
+            "lng": -84.55915
+          },
+          {
+            "lat": 42.72315,
+            "lng": -84.56055
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 95,
+        "pano": "",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 95,
+        "pano": "",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 22,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 2,
+    "buildingCount": 4,
+    "siteAreaAcres": 111.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.72280,-84.56000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "multiStep"
+  ],
+  "fieldNotes": {
+    "facility": "Positively identified GM Lansing Grand River Assembly (LGR), 920 Townsend St. Coords from Wikipedia (42 deg 43'22\"N 84 deg 33'42\"W = 42.7228,-84.5617) land on a 3.4M-sq-ft integrated assembly+stamping complex on the Grand River, between I-496 (N) and the river/rail (S). Confirmed in satellite: one continuous fenced manufacturing campus, finished-vehicle marshaling lots, internal trailer staging, conveyor/ped bridges between buildings. Verlinden Ave Street View (2025-07) shows the plant wall + perimeter fence + a signalized controlled intersection at the truck entrance.",
+    "truckGate": "Fully fenced controlled-access GM assembly plant. Street View on Verlinden Ave shows continuous chain-link/wall perimeter fencing and a signalized gated intersection at the truck entry; satellite shows internal lane markings and a controlled pinch-point where the main drive meets the building courtyard.",
+    "guardShack": "Standard for an integrated GM assembly plant of this scale; controlled gates with security booths at the truck/employee entrances (guarded campus). Booth-scale structures present at the main entries.",
+    "entryExitSeparate": "Large campus with multiple gates: a north/visitor entry off the office side and a separate freight/employee entry on the Verlinden/courtyard side; in and out flows split across gates.",
+    "fastLaneOpportunity": "Wide gate aprons and multi-lane internal drives with unused paved width; physical room to add a JIT express/bypass lane for the high-frequency inbound supplier trailers.",
+    "postGateStaging": "Paved internal courtyards and lanes inside the fence between the gate and the dock faces provide trailer queueing/holding before docks.",
+    "dockDoors": "Estimate ~45 from overhead imagery; docks are distributed across multiple connected building faces and internal courtyards (assembly, body, stamping, logistics center), some tucked between building masses, so band 25-50 is the honest call.",
+    "dropArea": "Trailer drop/staging seen in the west-central lot near the dirt parcel (8-10 trailers staged) plus trailer rows near the SW rail/river edge; banded 25-50 across the site.",
+    "dropYard": "Dedicated trailer-storage / drop lots present (west-central paved lot with parked trailers, and SW trailer/container staging beside the rail spur), separate from active dock staging.",
+    "railServed": "Active rail line runs along the south/SW edge of the property on the Grand River bank with a spur and rail-served trailer/container staging visible; GM operates an inbound logistics/sequencing center at LGR (corroborated by Automotive Logistics and GM facility pages).",
+    "multipleFacilities": "Integrated campus: body shop, paint, general assembly, an on-site stamping plant, and a $44.5M logistics optimization/sequencing center, all on the one 111-acre property.",
+    "urbanRural": "Inside the City of Lansing dense urban fabric, surrounded by residential neighborhoods, downtown, and the river; clearly Urban.",
+    "scale": "No truck scale clearly identified in imagery; left uncertain.",
+    "multiStep": "Plausible outer-gate-then-internal-checkpoint flow on a guarded auto campus, but not clearly resolvable in imagery; left false and flagged.",
+    "siteAreaAcres": "111 acres per GM/Wikipedia; perimeter ring traced to the fenced footprint between I-496, Verlinden/Townsend, and the Grand River/rail edge.",
+    "streetViewMeta": "Best ground view is the Verlinden Ave road pano at 42.72552,-84.56047 (captured 2025-07) looking E (~95 deg) toward the plant wall, fence, and the controlled truck-entry intersection; pano id not captured in this pass."
+  },
+  "method": "deep-audit"
+}

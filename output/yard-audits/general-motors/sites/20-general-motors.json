@@ -1,0 +1,121 @@
+{
+  "name": "GM - Parma Metal Center, Parma OH",
+  "type": "Stamping/Metal Center",
+  "coords": {
+    "lat": 41.41555,
+    "lng": -81.77355
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        { "lat": 41.41805, "lng": -81.77695 },
+        { "lat": 41.41770, "lng": -81.76885 },
+        { "lat": 41.41420, "lng": -81.76845 },
+        { "lat": 41.41265, "lng": -81.77205 },
+        { "lat": 41.41280, "lng": -81.77660 },
+        { "lat": 41.41560, "lng": -81.77735 }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        { "lat": 41.41800, "lng": -81.77480 },
+        { "lat": 41.41800, "lng": -81.77415 },
+        { "lat": 41.41760, "lng": -81.77415 },
+        { "lat": 41.41760, "lng": -81.77480 }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          { "lat": 41.41450, "lng": -81.77250 },
+          { "lat": 41.41445, "lng": -81.77080 },
+          { "lat": 41.41405, "lng": -81.77082 },
+          { "lat": 41.41410, "lng": -81.77252 }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          { "lat": 41.41480, "lng": -81.77620 },
+          { "lat": 41.41476, "lng": -81.77270 },
+          { "lat": 41.41452, "lng": -81.77272 },
+          { "lat": 41.41456, "lng": -81.77622 }
+        ]
+      },
+      {
+        "ring": [
+          { "lat": 41.41700, "lng": -81.77735 },
+          { "lat": 41.41450, "lng": -81.77735 },
+          { "lat": 41.41450, "lng": -81.77700 },
+          { "lat": 41.41700, "lng": -81.77700 }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 230, "pano": "gt5d9WvQr0j3gw5uCZRBzw", "hasCoverage": true },
+      "truckGate": { "heading": 180, "pano": "VXaQPa3o7pxHVdXqy0-k_g", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 18,
+    "trailerParkingCapacity": 45,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 110,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.41555,-81.77355,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "dockDoors",
+    "entryLanes",
+    "exitLanes",
+    "guardShack",
+    "trailerParkingCapacity"
+  ],
+  "fieldNotes": {
+    "site": "GM Parma Metal Center, 5400 Chevrolet Blvd, Parma OH 44130 (Cleveland metro). 2.3M sq ft stamping/metal-assembly plant operating since 1948, just south of I-480 between W 130th St and Tiedeman Rd. Roster coords pointed at a residential area ~2.5 km N; relocated via satellite + web to the large light-roofed stamping complex at 41.41555,-81.77355. Building positively identified by its monolithic stamping-plant roof, west-side multi-track rail yard with railcars and spurs into the building, covered conveyor bridge across the south apron, and the 2-story brick administration building fronting Chevrolet Blvd on the east.",
+    "truckGate": "Whole property is enclosed by chain-link security fence - confirmed in 2024 Street View along the Chevrolet Blvd (north) frontage, where the fence runs the full building length with the metal-clad plant wall set back behind it. As a UAW/GM stamping plant, access is controlled; truck/rail entrances pinch through the fence line on the NW (rail-served material side) and a second on the south/SE. truckGate true.",
+    "guardShack": "Medium confidence. Standard for GM plants of this vintage and size to staff a guard booth at the main controlled gate; Street View does not have a pano at the interior truck entrances to image the booth directly, but the fenced, single-controlled-entry layout is consistent with a manned gate. guardShack true, remoteGs false. Flagged uncertain.",
+    "dockDoors": "10-25 band. Covered dock/truck apron runs along the south face of the main building (z19 imagery shows a long covered dock canopy and a conveyor bridge); additional truck doors on the west face near the rail yard. Counted ~22 doors across south + west faces; flagged uncertain because much material moves by rail and some doors are under canopy.",
+    "shipRcvSeparate": "true - inbound steel arrives by rail and truck on the WEST/NW side (multi-track rail yard with coil cars, spurs into building); outbound stampings ship from truck docks on the SOUTH face. Two physically separate material faces.",
+    "railServed": "true - definitive. A multi-track rail yard with railcars (boxcars/coil cars) runs the full west edge of the plant with spurs entering the building (steel coil inbound). Clearly visible in z18 west-side imagery.",
+    "dropYard": "true - a band of drop trailers and material containers is staged along the south building face, plus marked trailer parking between the dock apron and the employee lot. dropArea 10-25.",
+    "dropArea": "10-25 - rows of staged trailers/containers visible along the south apron in z18-z19 imagery, separate from the dock-active trailers.",
+    "multipleFacilities": "false - one integrated stamping + metal-assembly building. The separate building clusters immediately south (own parking) and the self-storage/RV-style building to the SE are NOT GM and are excluded. The administration block is attached to the main plant on the east.",
+    "siteAreaAcres": "~110 acres for the fenced GM perimeter (main plant, rail yard, dock aprons, drop staging, and employee parking). Derived from the perimeter polygon.",
+    "trailerParkingCapacity": "~45 estimate combining the south drop band and west material staging; flagged approximate.",
+    "urbanRural": "Urban - dense Cleveland/Parma metro industrial fabric, adjacent residential and I-480.",
+    "perimeter": "Oriented ring traces the fenced GM property: NW corner at the rail yard, NE along Chevrolet Blvd past the office, south down the east employee-lot edge, SW across the south yard, and north up the west rail edge.",
+    "truckGate box": "NW rail-side controlled entrance off the Chevrolet Blvd corridor where the material/rail drive crosses the fence line.",
+    "dockAprons": "Two: a long thin strip along the south building face (primary outbound docks) and a strip on the west face beside the rail yard (inbound)."
+  },
+  "method": "deep-audit"
+}

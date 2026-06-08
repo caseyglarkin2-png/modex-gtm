@@ -1,0 +1,169 @@
+{
+  "name": "GM - Tonawanda Propulsion, Buffalo NY",
+  "type": "Engine/Propulsion Plant",
+  "coords": {
+    "lat": 42.9670,
+    "lng": -78.8960
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.969850,
+          "lng": -78.900500
+        },
+        {
+          "lat": 42.969350,
+          "lng": -78.889800
+        },
+        {
+          "lat": 42.965600,
+          "lng": -78.890600
+        },
+        {
+          "lat": 42.965700,
+          "lng": -78.900900
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.967600,
+          "lng": -78.899300
+        },
+        {
+          "lat": 42.967480,
+          "lng": -78.898450
+        },
+        {
+          "lat": 42.967050,
+          "lng": -78.898650
+        },
+        {
+          "lat": 42.967150,
+          "lng": -78.899450
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 42.969200,
+            "lng": -78.892900
+          },
+          {
+            "lat": 42.969050,
+            "lng": -78.891200
+          },
+          {
+            "lat": 42.968150,
+            "lng": -78.891450
+          },
+          {
+            "lat": 42.968300,
+            "lng": -78.893150
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 42.968650,
+            "lng": -78.898800
+          },
+          {
+            "lat": 42.968450,
+            "lng": -78.893900
+          },
+          {
+            "lat": 42.968150,
+            "lng": -78.893950
+          },
+          {
+            "lat": 42.968350,
+            "lng": -78.898850
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 280,
+        "pano": "Kygql-B2L6N_3Qc4fl8mnw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 280,
+        "pano": "Kygql-B2L6N_3Qc4fl8mnw",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 28,
+    "trailersVisible": 22,
+    "trailerParkingCapacity": 45,
+    "truckGateCount": 2,
+    "buildingCount": 4,
+    "siteAreaAcres": 102,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.96700,-78.89600,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "truckGateCount",
+    "scale"
+  ],
+  "fieldNotes": {
+    "truckGate": "Continuous perimeter fencing confirmed in Street View along the River Road frontage (2025-07 pano Kygql-B2L6N_3Qc4fl8mnw): black ornamental fence rings the employee lot and a controlled drive curves into the complex past the historic 1938 brick admin building. The Street View car was able to drive interior service lanes, indicating a controlled but largely open vehicle gate rather than a hard barrier checkpoint.",
+    "guardShack": "No clearly identifiable guard booth resolved at the main River Road entrance from Street View; the entrance reads as a marquee/sign-and-fence employee/visitor gate. Flagged uncertain - a booth may exist at a dedicated truck gate not captured by Street View.",
+    "remoteGs": "Set true on the basis that a controlled fenced entrance exists but no staffed booth is confirmed; low confidence.",
+    "multipleFacilities": "True - this is a multi-plant campus (Plant #1 at 2995 River Rd plus Plant #4 / Plant #5 and ancillary buildings); web sources confirm 3.1M sq ft across three plants on a 190-acre site. The traced perimeter covers the dominant River Road operational footprint.",
+    "shipRcvSeparate": "Dock activity is split across faces: a long dock apron runs along the north building face near the rail, while a separate drop/storage yard with trailers and a maroon-roof building sits at the NE corner - distinct clusters on different faces.",
+    "railServed": "A large multi-track rail yard sits immediately north of the plant with spurs curving into the NE corner of the property (visible at z18-19). Classic engine/propulsion plant rail service (inbound castings/components, outbound engines).",
+    "dropArea": "NE-corner drop yard holds roughly 15-25 parked trailers/containers in rows plus a maroon-roofed building; counted from z19 imagery. Estimated band 10-25.",
+    "dockDoorCount": "Dock doors line the north and east building faces near the rail and the staging apron; ~28 is an overhead estimate (band 25-50).",
+    "trailerParkingCapacity": "Drop yard plus staged trailers along the River Road service lane could hold ~45 trailers; estimate.",
+    "fastLaneOpportunity": "Wide paved frontage and a deep interior parking/staging apron along River Road leave ample room to add an express/bypass lane at the gate.",
+    "drivewayLong": "The entrance drive off River Road runs deep past the admin building into the interior lot before reaching docks - holds a queue of 3+ trucks.",
+    "urbanRural": "Site sits inside the Buffalo/Town of Tonawanda metro fabric, bordered by River Road, dense residential street grid to the south, and active industry to the east -> Urban.",
+    "scale": "No truck scale positively identified from overhead imagery; flagged uncertain.",
+    "buildingCount": "Multiple large connected/adjacent manufacturing buildings plus the brick admin block and the NE drop-yard structure; counted ~4 distinct masses.",
+    "siteAreaAcres": "Traced perimeter (~102 acres) covers the main fenced Plant #1 operational footprint; the full GM-cited campus is ~190 acres including the northern rail yard and Plant #4/#5."
+  },
+  "method": "deep-audit"
+}

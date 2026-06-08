@@ -1,0 +1,106 @@
+{
+  "name": "GM - Bedford Casting Operations, Bedford IN",
+  "type": "Aluminum Casting Plant",
+  "coords": {
+    "lat": 38.8788,
+    "lng": -86.4845
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        { "lat": 38.88195, "lng": -86.48600 },
+        { "lat": 38.88155, "lng": -86.48175 },
+        { "lat": 38.87880, "lng": -86.48120 },
+        { "lat": 38.87690, "lng": -86.48230 },
+        { "lat": 38.87520, "lng": -86.48360 },
+        { "lat": 38.87490, "lng": -86.48620 },
+        { "lat": 38.87650, "lng": -86.48790 },
+        { "lat": 38.87980, "lng": -86.48760 }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        { "lat": 38.87800, "lng": -86.48270 },
+        { "lat": 38.87800, "lng": -86.48205 },
+        { "lat": 38.87755, "lng": -86.48205 },
+        { "lat": 38.87755, "lng": -86.48270 }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          { "lat": 38.87760, "lng": -86.48560 },
+          { "lat": 38.87740, "lng": -86.48420 },
+          { "lat": 38.87680, "lng": -86.48440 },
+          { "lat": 38.87700, "lng": -86.48575 }
+        ]
+      }
+    ],
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 270, "pano": "", "hasCoverage": true },
+      "truckGate": { "heading": 270, "pano": "", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 8,
+    "trailersVisible": 10,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 152,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.8788,-86.4845,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoors",
+    "entryLanes",
+    "exitLanes",
+    "dropArea",
+    "trailerParkingCapacity"
+  ],
+  "fieldNotes": {
+    "site": "GM Bedford Casting Operations, 105 GM Dr, Bedford (Shawswick Twp, Lawrence County) IN 47421. Positively confirmed: Street View (2026-04) on the east perimeter road shows the GM logo on the administration building facade plus a 'Bedford Casting Operations' GM monument sign with US/Indiana flags; foundry smokestacks and two water towers are visible from multiple angles. Roster/address geocode (38.8795,-86.4851) lands on a large interconnected multi-roof casting complex. ~1M sq ft aluminum die-casting foundry on ~152.5 acres straddling GM Drive; ~680-900 workers; casts cylinder blocks, transmission cases, structural and EV drive-unit housings.",
+    "type": "Aluminum die-casting foundry, not a distribution warehouse - inbound aluminum/ingot/scrap and outbound castings to GM powertrain/assembly plants. Freight is handled through internal material bays plus an outdoor laydown/container/scrap yard rather than a long warehouse dock bank.",
+    "truckGate": "True - the property is fully chain-link fenced (confirmed in Street View along the east perimeter road). A controlled fenced truck/material gate with a small canopy structure is visible on the southeast perimeter (~38.8778,-86.4823); trucks enter the fenced yard at a controlled pinch point. Banded as a true gate.",
+    "guardShack": "Marked false / remoteGs true at medium confidence - no clearly staffed multi-window guard booth could be positively resolved at the truck gate; the visible checkpoint reads as a gated/kiosk-style control. A foundry of this scale may run a staffed gatehouse, so flagged uncertain.",
+    "postGateStaging": "True - inside the fence there is open paved/gravel yard and a material laydown area between the main plant and the south warehouse where inbound trucks can hold before backing to bays.",
+    "drivewayShort": "True - the gate-to-building approach is short (1-2 trucks); the fenced yard is compact and abuts the buildings, not a long deep approach.",
+    "dockDoors": "Estimated 0-10 truck-serving dock doors - this is a foundry with a continuous-roof manufacturing complex, not a multi-bay DC; overhead imagery shows few discrete dock positions, mostly material handling at the SE/SW building faces. Flagged uncertain.",
+    "dropArea": "A modest trailer/container drop-and-storage area sits on the west/southwest yard between the main plant and the south (1107) warehouse, with stacked containers and a row of trailers (~10 visible). Banded 10-25; dropYard true. Capacity ~25 estimated, flagged uncertain.",
+    "buildingCount": "3 - the main interconnected casting complex (counted as one), the detached east administration/office building, and the large detached south metal-clad warehouse ('1107', visible in Street View with concrete barrier blocks). Not classified as a multi-building campus (multipleFacilities false) since the casting complex dominates.",
+    "railServed": "Marked false - no active rail spur clearly running into the fenced property was resolved; an old limestone-era rail corridor and a long covered conveyor/pipe bridge cross the SE area but read as utility/process infrastructure, not a freight rail spur. Inbound aluminum appears to arrive by truck. Medium confidence.",
+    "urbanRural": "Rural - the plant sits on the northwest edge of Bedford (pop. ~13k small town), bordered by a residential neighborhood to the west and open farmland/quarry land to the north and east. Per rubric, small-town edge industrial = Rural.",
+    "scale": "Not positively resolved; left false. A canopy/checkpoint structure exists at the SE gate but no clear weigh platform was confirmed.",
+    "fastLaneOpportunity": "False - the single controlled gate and compact fenced yard offer little unused paved width for a dedicated express/bypass lane."
+  },
+  "method": "deep-audit"
+}

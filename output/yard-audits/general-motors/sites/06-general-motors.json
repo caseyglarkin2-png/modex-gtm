@@ -1,0 +1,185 @@
+{
+  "name": "GM - Bowling Green Assembly, Bowling Green KY",
+  "type": "Vehicle Assembly Plant",
+  "coords": {
+    "lat": 37.0103,
+    "lng": -86.3658
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.0143,
+          "lng": -86.37015
+        },
+        {
+          "lat": 37.014,
+          "lng": -86.3645
+        },
+        {
+          "lat": 37.01245,
+          "lng": -86.36175
+        },
+        {
+          "lat": 37.0095,
+          "lng": -86.3615
+        },
+        {
+          "lat": 37.00765,
+          "lng": -86.3623
+        },
+        {
+          "lat": 37.00715,
+          "lng": -86.3668
+        },
+        {
+          "lat": 37.008,
+          "lng": -86.37005
+        },
+        {
+          "lat": 37.01005,
+          "lng": -86.37055
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 37.00735,
+          "lng": -86.3669
+        },
+        {
+          "lat": 37.0076,
+          "lng": -86.36675
+        },
+        {
+          "lat": 37.00775,
+          "lng": -86.36615
+        },
+        {
+          "lat": 37.0075,
+          "lng": -86.3663
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 37.01,
+            "lng": -86.3692
+          },
+          {
+            "lat": 37.0097,
+            "lng": -86.36855
+          },
+          {
+            "lat": 37.00895,
+            "lng": -86.36905
+          },
+          {
+            "lat": 37.00925,
+            "lng": -86.3697
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 37.01115,
+            "lng": -86.36895
+          },
+          {
+            "lat": 37.01075,
+            "lng": -86.36815
+          },
+          {
+            "lat": 37.00895,
+            "lng": -86.36915
+          },
+          {
+            "lat": 37.00935,
+            "lng": -86.36995
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 39,
+        "pano": "DrC_CnhoEgpDBk8vKD7WCQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 6,
+        "pano": "QvxE3Y0xBGNNMmMgMlOdaA",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 14,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 235,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.01030,-86.36580,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "dockDoors",
+    "dropArea",
+    "scale",
+    "multiStep",
+    "trailerParkingCapacity"
+  ],
+  "fieldNotes": {
+    "facility": "GM Bowling Green Assembly Plant, 600 Corvette Dr, Bowling Green KY 42101 - the sole U.S. plant building the Chevrolet Corvette (since 1981, ~1.7M sq ft). Positively confirmed: Street View off the south frontage shows the building face carrying a large 'PROUDLY ASSEMBLED IN BOWLING GREEN' Corvette mural; the site sits immediately off I-65 Exit 28 directly across from the National Corvette Museum, with the NCM Motorsports Park track to the SE - all consistent with the published location. Geocode for the street address lands near the south employee/visitor entrance; the true building centroid is ~37.0103,-86.3658.",
+    "truckGate": "Secured single-building GM assembly campus. Perimeter is fenced/landscaped-buffered with controlled access; the truck/materials approach runs in from the SW off the Corvette Dr / I-65 frontage and feeds enclosed truck wells on the NW building face. Public Street View panos sit on the south frontage and employee-lot loops and do not reach the interior truck gate itself, so the gate structure is inferred from layout plus standard GM plant security practice rather than directly imaged - marked uncertain.",
+    "guardShack": "GM assembly plants run staffed security gatehouses at controlled truck entrances. A small control-booth footprint is consistent with the SW materials approach, but it could not be crisply isolated in overhead imagery (tree cover and the secured interior); Street View cannot reach it. Held at guardShack:true with remoteGs:false on plant-class precedent but flagged uncertain.",
+    "dockDoors": "Materials docks are largely enclosed truck wells integrated into the NW/W building face rather than an open banked dock wall; ~20-25 door positions estimated from roof penetrations, dock canopies and the trailers staged against the NW face. Band 10-25, marked uncertain - overhead-only estimate.",
+    "dropYard": "A modest trailer drop/marshalling area sits against the NW building face (just-in-time/just-in-sequence parts staging) with ~14 trailers visible and room for ~40. This is active sequencing staging, not a large standalone trailer storage lot - hence dropArea 10-25, dropYard true, scale false.",
+    "shipRcvSeparate": "Inbound parts/materials are received on the NW/W truck-well side; finished Corvettes dispatch from the opposite (E/SE) side adjacent to the large finished-vehicle storage lots - shipping and receiving run from physically separate clusters.",
+    "railServed": "The CSX mainline runs along the NW/N edge of the property; a siding/spur curves toward the plant's NW corner. Inbound rail materials staging is consistent with the rail buffer inside the north fence line. railServed:true.",
+    "fastLaneOpportunity": "Wide paved aprons and a long internal approach drive from the frontage to the docks leave unused width for an express/bypass lane - fastLaneOpportunity true.",
+    "drivewayLong": "Long internal gate-to-dock approach (several hundred feet from the frontage to the NW truck wells) can hold a 3+ truck queue - drivewayLong true.",
+    "urbanRural": "Edge-of-town interstate-exit setting on the north side of Bowling Green (a small Kentucky city), surrounded by I-65, open fields, the Corvette Museum and a motorsports park rather than dense metro fabric - classed Rural per rubric.",
+    "buildingCount": "Treated as 2: the main integrated assembly building plus the NW production wing/annex reaching toward the rail. Ancillary structures (wastewater plant, lobby) not counted as primary buildings.",
+    "siteAreaAcres": "~235 acres derived from the traced perimeter polygon (building + employee parking + finished-vehicle lots + rail buffer inside the fence).",
+    "scale": "No truck scale/weigh platform clearly identified in the truck path - scale false.",
+    "multiStep": "No clearly imaged second checkpoint after the gate; left false."
+  },
+  "method": "deep-audit"
+}

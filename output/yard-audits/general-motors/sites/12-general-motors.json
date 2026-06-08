@@ -1,0 +1,171 @@
+{
+  "name": "GM - Flint Engine South, Flint MI",
+  "type": "Engine/Propulsion Plant",
+  "coords": {
+    "lat": 42.9768,
+    "lng": -83.7155
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.97905,
+          "lng": -83.71775
+        },
+        {
+          "lat": 42.97905,
+          "lng": -83.71355
+        },
+        {
+          "lat": 42.97565,
+          "lng": -83.71330
+        },
+        {
+          "lat": 42.97475,
+          "lng": -83.71360
+        },
+        {
+          "lat": 42.97475,
+          "lng": -83.71780
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.97615,
+          "lng": -83.71355
+        },
+        {
+          "lat": 42.97615,
+          "lng": -83.71320
+        },
+        {
+          "lat": 42.97560,
+          "lng": -83.71320
+        },
+        {
+          "lat": 42.97560,
+          "lng": -83.71355
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 42.97640,
+            "lng": -83.71430
+          },
+          {
+            "lat": 42.97640,
+            "lng": -83.71345
+          },
+          {
+            "lat": 42.97540,
+            "lng": -83.71345
+          },
+          {
+            "lat": 42.97540,
+            "lng": -83.71430
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 42.97740,
+            "lng": -83.71430
+          },
+          {
+            "lat": 42.97740,
+            "lng": -83.71395
+          },
+          {
+            "lat": 42.97560,
+            "lng": -83.71395
+          },
+          {
+            "lat": 42.97560,
+            "lng": -83.71430
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 270,
+        "pano": "",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 289,
+        "pano": "",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18,
+    "trailersVisible": 12,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 38.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.97680,-83.71550,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate"
+  ],
+  "fieldNotes": {
+    "site": "GM Flint Engine Operations (formerly Flint Engine South), 2100 W Bristol Rd, Flint MI. A ~1.16M sq ft GM propulsion plant opened 2002 that machines/assembles the 1.5L SGE Turbo I4 and the 3.0L 'Baby Duramax' I6 (Wikipedia). It sits inside GM's integrated Flint complex along the east side of Van Slyke Rd, immediately south of Flint Assembly and just north of W Bristol Rd. Roster geocode (Bristol Rd) is imprecise; Step 0 re-pinned the building to ~42.9768,-83.7155, the distinct large sawtooth-roof manufacturing building - confirmed correct. The much larger acreage figures used at GM assembly plants do not apply: this is the single engine-plant footprint plus its east-side truck yard, ~38 acres.",
+    "truckGate": "Confirmed. Street View (2025) along Van Slyke Rd shows a continuous chain-link perimeter fence wrapping the east truck yard, with a gated entrance drive/apron crossing the fence into the freight yard (~42.9760,-83.7135). Yellow bollards and lane control visible at the opening.",
+    "guardShack": "Could not positively resolve a dedicated guard booth at the truck gate in Street View. A blue/white modular office trailer sits inside the fence further north, but it is not clearly a gate guard shack. Marked guardShack false / remoteGs true (controlled fenced gate, likely badge/kiosk truck check-in) at medium confidence; both flagged uncertain. GM plants commonly staff a main personnel gate, so this may understate.",
+    "postGateStaging": "True - inside the fence on the east face there is a large paved apron between the gate and the dock doors where trucks can hold and stage; ample internal queue room.",
+    "drivewayLong": "True - the gated approach opens onto a deep internal paved yard with room to queue 3+ trucks before the docks.",
+    "dockDoors": "Estimated 10-25 (banded). The east/NE building face shows a blue dock band with several doors and trailers/dumpsters backed in; exact count partly obscured by roof angle and shadow - flagged uncertain. dockDoorCount ~18.",
+    "dropArea": "10-25. The fenced east yard holds an estimated 10-20 parked trailers/containers in the apron (z19 imagery) staged off the docks; banded 10-25, dropYard true. trailersVisible ~12, capacity ~30.",
+    "shipRcvSeparate": "Marked false (medium confidence) - freight activity is concentrated on the single east/NE dock band along Van Slyke; no clearly separate second ship/rcv dock cluster confirmed on a different face. Flagged uncertain.",
+    "railServed": "No rail spur runs into the engine-plant footprint in the imagery. (Mainline/complex rail exists west of Van Slyke serving the broader GM Flint complex, but it does not enter this building's yard.) railServed false.",
+    "urbanRural": "Inside the City of Flint's dense industrial/commercial/residential fabric, with subdivisions and retail directly across Van Slyke Rd to the east - Urban.",
+    "multipleFacilities": "False for this audit scope - the engine plant is one building. It is physically integrated into the larger GM Flint complex (Flint Assembly to the north, metal/stamping to the SW), but those are separate roster sites (idx 2, 21); buildingCount 1 here.",
+    "entryLanes": "Single combined entry/exit lane at the gated drive off Van Slyke estimated; flagged uncertain.",
+    "fastLaneOpportunity": "False - the gate apron is modest; no obvious unused paved width for an express bypass lane at this entrance."
+  },
+  "method": "deep-audit"
+}
