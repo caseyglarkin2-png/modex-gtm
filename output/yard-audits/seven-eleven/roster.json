@@ -1,7 +1,7 @@
 {
   "account": "7-Eleven",
   "generatedAt": "2026-06-09",
-  "facilityCount": 13,
+  "facilityCount": 11,
   "facilities": [
     {
       "idx": 1,
@@ -116,22 +116,6 @@
       }
     },
     {
-      "idx": 8,
-      "name": "7-Eleven Combined Distribution Center Moore OK (E.A. Sween)",
-      "city": "Moore",
-      "state": "OK",
-      "type": "Combined Distribution Center",
-      "address": "110 NW 1st Street, Moore, OK 73160",
-      "source": "E.A. Sween Moore VAS/CDC location list (operator of 7-Eleven Combined Distribution Centers)",
-      "lat": 35.338977,
-      "lng": -97.487348,
-      "geocode": {
-        "source": "geocoding-api",
-        "precision": "ROOFTOP",
-        "movedMeters": null
-      }
-    },
-    {
       "idx": 9,
       "name": "7-Eleven Combined Distribution Center Woodridge IL (E.A. Sween Chicago)",
       "city": "Woodridge",
@@ -141,22 +125,6 @@
       "source": "E.A. Sween Chicago VAS/CDC location list (operator of 7-Eleven Combined Distribution Centers)",
       "lat": 41.696892,
       "lng": -88.035613,
-      "geocode": {
-        "source": "geocoding-api",
-        "precision": "ROOFTOP",
-        "movedMeters": null
-      }
-    },
-    {
-      "idx": 10,
-      "name": "7-Eleven Distribution Warehouse Mishawaka IN (E.A. Sween)",
-      "city": "Mishawaka",
-      "state": "IN",
-      "type": "Grocery DC",
-      "address": "2402 West 6th Street, Mishawaka, IN 46544",
-      "source": "E.A. Sween Indiana warehouse location list (operator of 7-Eleven distribution)",
-      "lat": 41.656893,
-      "lng": -86.209828,
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",

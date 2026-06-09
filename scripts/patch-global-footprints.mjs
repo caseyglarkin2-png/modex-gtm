@@ -106,6 +106,12 @@ const PATCHES = {
     global: 210,
     note: 'Walmart runs ~150 US distribution centers (general merchandise, grocery/perishable, e-commerce fulfillment, and import) feeding ~4,700 US stores, plus international DCs. We audited 12 representative US facilities spanning every type.',
   },
+  'seven-eleven': {
+    scope: 'US',
+    inScope: 40,
+    global: null,
+    note: "7-Eleven's ~13,000 US stores are supplied through partner-operated distribution: E.A. Sween fresh-food combined distribution centers plus McLane grocery DCs. We audited 11 representative US facilities.",
+  },
   crowley: {
     scope: 'US',
     inScope: 40,

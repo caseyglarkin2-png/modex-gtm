@@ -1,0 +1,42 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+7-Eleven Combined Distribution Center Bohemia NY,Fresh Food Commissary,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,,,,,,YES,,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@40.77695,-73.0914,400m/data=!3m1!1e3"
+7-Eleven Distribution Co Cold Storage DC Santa Fe Springs CA,Grocery DC,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@33.93065,-118.0685,400m/data=!3m1!1e3"
+7-Eleven Combined Distribution Center Austin TX (E.A. Sween),Combined Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,,,,,YES,,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@30.340827,-97.672565,400m/data=!3m1!1e3"
+7-Eleven Combined Distribution Center Salt Lake City UT (E.A. Sween),Combined Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,YES,,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@40.74408,-111.95258,400m/data=!3m1!1e3"
+7-Eleven Combined Distribution Center North Las Vegas NV (E.A. Sween),Combined Distribution Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,,,YES,,,,YES,,YES,Rural,,,,YES,"https://www.google.com/maps/@36.27817,-115.03283,400m/data=!3m1!1e3"
+7-Eleven Combined Distribution Center Commerce City CO (E.A. Sween Denver),Combined Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,,,,,YES,,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@39.79592,-104.92080,400m/data=!3m1!1e3"
+7-Eleven Combined Distribution Center Lewisville TX (E.A. Sween Dallas),Combined Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@33.025900,-96.981250,400m/data=!3m1!1e3"
+7-Eleven Combined Distribution Center Woodridge IL (E.A. Sween Chicago),Combined Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,YES,,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@41.696970,-88.035200,400m/data=!3m1!1e3"
+7-Eleven Fresh Food Production & Distribution Eden Prairie MN (E.A. Sween),Fresh Food Commissary,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,,YES,,YES,,1,1,,,,YES,,,YES,,,YES,Urban,,YES,,YES,"https://www.google.com/maps/@44.86065,-93.4823,400m/data=!3m1!1e3"
+7-Eleven Grocery DC Fredericksburg VA (McLane Mid-Atlantic),Grocery DC,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,YES,,YES,Rural,,YES,,YES,"https://www.google.com/maps/@38.3493,-77.4963,400m/data=!3m1!1e3"
+7-Eleven Grocery DC Fort Worth TX (McLane North Texas),Grocery DC,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@32.64015,-97.30985,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,8,73%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,2,18%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,1,9%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,11,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,4,36%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,2,18%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,1,9%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,10,91%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,11,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,11,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
