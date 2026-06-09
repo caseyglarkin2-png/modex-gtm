@@ -131,3 +131,26 @@ body {
   transform-origin: center;
   transform-box: fill-box;
 }
+
+/* Audited-site city labels on the network atlas. Permanent tooltips, but
+   gated by zoom (the map container gets `.show-city-labels` past zoom ~5) so
+   the network view stays clean for any account size and the city names become
+   evident as the prospect zooms in. */
+.demo-city-label.leaflet-tooltip {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: 0;
+  color: #d6ecff;
+  font: 600 10px/1.1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.04em;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.95), 0 1px 2px rgba(0, 0, 0, 0.95);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.demo-city-label.leaflet-tooltip::before {
+  display: none; /* no callout arrow */
+}
+.leaflet-container.show-city-labels .demo-city-label.leaflet-tooltip {
+  opacity: 1;
+}

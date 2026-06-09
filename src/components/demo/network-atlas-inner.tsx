@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo } from 'react';
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup, Tooltip, useMap } from 'react-leaflet';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import type { ArchetypeId, DemoPack } from '@/lib/demo/pack-schema';
@@ -92,6 +92,32 @@ function ClosePopupOnSelectChange({ selectedSiteId }: { selectedSiteId: string |
   return null;
 }
 
+/**
+ * Reveal the permanent per-site city labels once the prospect zooms past the
+ * network overview (zoom >= 5). Keeps the all-sites view clean for any network
+ * size while making the cities evident on exploration. Toggles a class on the
+ * Leaflet container that the global `.demo-city-label` CSS reads.
+ */
+function CityLabelZoom() {
+  const map = useMap();
+  useEffect(() => {
+    const el = map.getContainer();
+    const update = () => el.classList.toggle('show-city-labels', map.getZoom() >= 5);
+    update();
+    map.on('zoomend', update);
+    return () => {
+      map.off('zoomend', update);
+    };
+  }, [map]);
+  return null;
+}
+
+/** Short, human city label from a site name (e.g. "Danone - Minster OH" -> "Minster OH"). */
+function cityLabel(name: string): string {
+  const s = (name.includes(' - ') ? name.slice(name.lastIndexOf(' - ') + 3) : name).split(',')[0].trim();
+  return s.length > 24 ? `${s.slice(0, 24)}…` : s;
+}
+
 export default function NetworkAtlasInner({ pack, selectedSiteId, archetypeFilter, onSelectSite }: Props) {
   const visibleSites = useMemo(() => {
     if (!archetypeFilter || archetypeFilter.size === 0) return pack.network.sites;
@@ -123,6 +149,7 @@ export default function NetworkAtlasInner({ pack, selectedSiteId, archetypeFilte
         />
         <FitBounds bbox={pack.network.bbox} />
         <ClosePopupOnSelectChange selectedSiteId={selectedSiteId} />
+        <CityLabelZoom />
         {visibleSites.map((site) => {
           const ci = intensities.get(site.id);
           const intensity = site.id === selectedSiteId ? Math.max(ci?.intensity ?? 0, 0.12) : ci?.intensity ?? 0;
@@ -139,6 +166,9 @@ export default function NetworkAtlasInner({ pack, selectedSiteId, archetypeFilte
                 click: () => onSelectSite(site.id === selectedSiteId ? null : site.id),
               }}
             >
+              <Tooltip permanent direction="right" offset={[7, 0]} opacity={1} className="demo-city-label">
+                {cityLabel(site.name)}
+              </Tooltip>
               <Popup>
                 <div className="bg-[#101218] text-white -m-[14px] -mb-[15px] rounded-[4px] px-3 py-2">
                   <div className="text-xs font-medium text-white">{site.name}</div>
