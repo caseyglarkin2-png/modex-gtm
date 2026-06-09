@@ -1,0 +1,110 @@
+{
+  "name": "7-Eleven Combined Distribution Center North Las Vegas NV (E.A. Sween)",
+  "type": "Combined Distribution Center",
+  "coords": { "lat": 36.27817, "lng": -115.03283 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 36.27950, "lng": -115.03285 },
+      { "lat": 36.27925, "lng": -115.03175 },
+      { "lat": 36.27675, "lng": -115.03185 },
+      { "lat": 36.27690, "lng": -115.03370 },
+      { "lat": 36.27845, "lng": -115.03400 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 36.27718, "lng": -115.03230 },
+      { "lat": 36.27718, "lng": -115.03192 },
+      { "lat": 36.27672, "lng": -115.03190 },
+      { "lat": 36.27672, "lng": -115.03228 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 36.27905, "lng": -115.03300 },
+        { "lat": 36.27918, "lng": -115.03205 },
+        { "lat": 36.27858, "lng": -115.03198 },
+        { "lat": 36.27848, "lng": -115.03295 }
+      ] },
+      { "ring": [
+        { "lat": 36.27855, "lng": -115.03195 },
+        { "lat": 36.27860, "lng": -115.03178 },
+        { "lat": 36.27700, "lng": -115.03182 },
+        { "lat": 36.27698, "lng": -115.03200 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 36.27838, "lng": -115.03360 },
+        { "lat": 36.27842, "lng": -115.03318 },
+        { "lat": 36.27760, "lng": -115.03312 },
+        { "lat": 36.27758, "lng": -115.03355 }
+      ] },
+      { "ring": [
+        { "lat": 36.27838, "lng": -115.03250 },
+        { "lat": 36.27840, "lng": -115.03222 },
+        { "lat": 36.27758, "lng": -115.03218 },
+        { "lat": 36.27756, "lng": -115.03246 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 36.27758, "lng": -115.03300 },
+      { "lat": 36.27760, "lng": -115.03215 },
+      { "lat": 36.27700, "lng": -115.03212 },
+      { "lat": 36.27698, "lng": -115.03298 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 339, "pano": "Ff0KxKbS6oiJbkA0sBUNNw", "hasCoverage": true },
+      "truckGate": { "heading": 353, "pano": "Ff0KxKbS6oiJbkA0sBUNNw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 44,
+    "trailersVisible": 38,
+    "trailerParkingCapacity": 55,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 12.1,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.27817,-115.03283,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Single controlled truck entrance at the SE corner off E. Centennial Pkwy. Street View (2026-02) shows a cantilever sliding gate spanning the drive, fully fenced perimeter.",
+    "guardShack": "Small red/white 7-Eleven-branded guard booth sits in the median of the entrance drive between the in and out lanes (1-vehicle footprint, windows on multiple sides) - clearly visible in Street View and z21 satellite.",
+    "remoteGs": "False - a manned guard booth is present, so this is not a remote/kiosk check-in.",
+    "entryExitTogether": "Single entrance point with an inbound lane left of the booth and an outbound lane right of the booth; both gated at the same property point.",
+    "fastLaneOpportunity": "Wide paved gate apron with a deep approach drive and a divided in/out layout - physical room to add an express/appointment bypass lane.",
+    "dockDoors": "Two dock banks: a west-face bank along the orange apron loop and an east-face bank, each with trailers backed in. Counted ~44 doors total across both faces from z20 imagery; band 25-50. Count is an estimate.",
+    "shipRcvSeparate": "Two physically separate dock clusters on different building faces (west apron loop vs east apron) suggest split ship/receive flows; inferred from layout, medium confidence.",
+    "dropArea": "Diagonal trailer-drop rows fill the north yard and along the east fence line; ~38 trailers visible parked without tractors, capacity ~55. Band 25-50.",
+    "dropYard": "Dedicated trailer-storage rows in the north/east yard separate from the active dock aprons.",
+    "urbanRural": "Edge-of-town desert parcel on the North Las Vegas periphery beside I-15; vacant desert on the east and across the highway. Judged Rural per rubric (small-town/edge-of-town industrial).",
+    "connectivityIssue": "False - although the immediate east is vacant desert, the site sits in the North Las Vegas metro beside I-15 with adjacent industrial development; cellular coverage is expected to be adequate.",
+    "railServed": "No rail spur enters the property.",
+    "trailerParkingCapacity": "Estimated from row lengths in z18/z19 imagery."
+  },
+  "method": "deep-audit"
+}

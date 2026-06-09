@@ -1,0 +1,116 @@
+{
+  "name": "7-Eleven Grocery DC Fredericksburg VA (McLane Mid-Atlantic)",
+  "type": "Grocery DC",
+  "coords": { "lat": 38.3493, "lng": -77.4963 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 38.35140, "lng": -77.49680 },
+      { "lat": 38.35050, "lng": -77.49475 },
+      { "lat": 38.34800, "lng": -77.49450 },
+      { "lat": 38.34685, "lng": -77.49560 },
+      { "lat": 38.34730, "lng": -77.49700 },
+      { "lat": 38.34950, "lng": -77.49770 },
+      { "lat": 38.35080, "lng": -77.49730 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 38.35170, "lng": -77.49645 },
+      { "lat": 38.35150, "lng": -77.49600 },
+      { "lat": 38.35095, "lng": -77.49625 },
+      { "lat": 38.35115, "lng": -77.49670 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 38.34930, "lng": -77.49490 },
+        { "lat": 38.34855, "lng": -77.49475 },
+        { "lat": 38.34800, "lng": -77.49545 },
+        { "lat": 38.34875, "lng": -77.49560 }
+      ] },
+      { "ring": [
+        { "lat": 38.35040, "lng": -77.49380 },
+        { "lat": 38.34955, "lng": -77.49355 },
+        { "lat": 38.34915, "lng": -77.49460 },
+        { "lat": 38.35000, "lng": -77.49485 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 38.35060, "lng": -77.49490 },
+        { "lat": 38.34960, "lng": -77.49560 },
+        { "lat": 38.34945, "lng": -77.49530 },
+        { "lat": 38.35045, "lng": -77.49460 }
+      ] },
+      { "ring": [
+        { "lat": 38.34835, "lng": -77.49600 },
+        { "lat": 38.34740, "lng": -77.49640 },
+        { "lat": 38.34728, "lng": -77.49608 },
+        { "lat": 38.34823, "lng": -77.49568 }
+      ] },
+      { "ring": [
+        { "lat": 38.35075, "lng": -77.49730 },
+        { "lat": 38.34980, "lng": -77.49770 },
+        { "lat": 38.34968, "lng": -77.49738 },
+        { "lat": 38.35063, "lng": -77.49698 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 232, "pano": "5LnyuKg47Pi3P5MPwCaWfg", "hasCoverage": true },
+      "truckGate": { "heading": 118, "pano": "DzFX2ZTKyuCDOigR29qaBg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 95,
+    "trailerParkingCapacity": 140,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 25.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.3493,-77.4963,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoors", "shipRcvSeparate", "connectivityIssue"],
+  "fieldNotes": {
+    "truckGate": "Property is fully perimeter-fenced (chain-link visible in multiple Street View frames around the dock yard), but no barrier arm, sliding gate, or staffed checkpoint was observed at any imaged drive mouth. The 1973-era campus uses open driveways from the public loop road into the fenced yard. Called false but flagged: some drive mouths are partially obscured by the fence-line buffer in Street View.",
+    "guardShack": "No standalone guard booth (1-3 vehicle footprint, multi-side windows) observed at any entrance across full Street View perimeter coverage. The only standalone yard structures are a fenced equipment/container compound and dock canopies, not a gatehouse.",
+    "remoteGs": "False because no truck gate was confirmed; if a controlled gate exists at an obscured drive, it would more likely be remote/kiosk given the absence of a booth, but not confirmed.",
+    "dockDoors": "50+ band estimated from a large grocery DC (~500k+ sqft) with dock banks on the NE (sawtooth/angled), east, and south faces plus a long south dock row; count is approximate from overhead imagery.",
+    "shipRcvSeparate": "Two distinct dock clusters on different building faces (NE/east angled docks vs. the long south dock bank), consistent with separate ship/receive flows at a grocery DC; inferred.",
+    "dropArea": "25-50 band from trailer rows in the SE/south drop yard plus the eastern overflow trailer lot; many trailers parked bobtail without tractors.",
+    "dropYard": "Dedicated trailer-storage areas: an SE drop yard adjacent to the building and a large eastern overflow trailer lot (separated by a wooded buffer, connected by internal drive).",
+    "multipleFacilities": "Campus: main DC plus secondary long buildings/cross-dock structures and a maintenance/shop cluster to the SE, sharing the parcel and parking.",
+    "fastLaneOpportunity": "Wide open paved aprons and multiple open drive mouths give ample room to add an express/bypass lane if a controlled gate were installed.",
+    "entryExitTogether": "Inferred — the front yard connects to the public loop road via shared open drives; no separate dedicated in/out gates observed.",
+    "entryLanes": "Approximate; open drive mouths roughly two trucks wide, no painted lane control.",
+    "urbanRural": "Edge-of-town industrial park off US-17 (Warrenton Rd) on the Stafford/Fredericksburg fringe with woods buffering the parcel; classified Rural per the small-town-industrial tie-break rule.",
+    "connectivityIssue": "False — sits in an active industrial park with adjacent development and retail, so cellular coverage is likely adequate; low confidence.",
+    "railServed": "No rail spur runs into the property in any imagery.",
+    "postGateStaging": "Large paved interior aprons/yard between the building and the property edge provide deep internal queuing/staging room.",
+    "buildingCount": "Main DC plus ~3 secondary structures (SE long buildings/cross-dock + maintenance/shop)."
+  },
+  "method": "deep-audit"
+}

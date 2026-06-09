@@ -1,0 +1,106 @@
+{
+  "name": "7-Eleven Combined Distribution Center Salt Lake City UT (E.A. Sween)",
+  "type": "Combined Distribution Center",
+  "coords": { "lat": 40.74408, "lng": -111.95258 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 40.74482, "lng": -111.95158 },
+      { "lat": 40.74482, "lng": -111.95362 },
+      { "lat": 40.74333, "lng": -111.95362 },
+      { "lat": 40.74333, "lng": -111.95158 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 40.74388, "lng": -111.95170 },
+      { "lat": 40.74388, "lng": -111.95150 },
+      { "lat": 40.74352, "lng": -111.95150 },
+      { "lat": 40.74352, "lng": -111.95170 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 40.74452, "lng": -111.95248 },
+        { "lat": 40.74452, "lng": -111.95352 },
+        { "lat": 40.74360, "lng": -111.95352 },
+        { "lat": 40.74360, "lng": -111.95248 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 40.74438, "lng": -111.95238 },
+        { "lat": 40.74438, "lng": -111.95248 },
+        { "lat": 40.74388, "lng": -111.95248 },
+        { "lat": 40.74388, "lng": -111.95238 }
+      ] },
+      { "ring": [
+        { "lat": 40.74386, "lng": -111.95238 },
+        { "lat": 40.74386, "lng": -111.95205 },
+        { "lat": 40.74378, "lng": -111.95205 },
+        { "lat": 40.74378, "lng": -111.95238 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 40.74360, "lng": -111.95248 },
+      { "lat": 40.74360, "lng": -111.95352 },
+      { "lat": 40.74336, "lng": -111.95352 },
+      { "lat": 40.74336, "lng": -111.95248 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 304, "pano": "u3lvMh_ZOrLa2xYuXjdoVA", "hasCoverage": true },
+      "truckGate": { "heading": 298, "pano": "_pS_4fGUb6U5gIbuGy9Ghg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 2,
+    "buildingCount": 2,
+    "siteAreaAcres": 6.9,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.74408,-111.95258,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Open, uncontrolled access. The Google Street View car drove the entire interior truck yard freely (multiple interior panos), which only happens at open sites. No barrier arm, sliding/swing gate, or checkpoint pinch-point where the property meets Swaner Road. Only a low decorative chain-link fence with a hedge along the employee-parking edge; the truck driveways open directly off the road.",
+    "guardShack": "No staffed booth at any entrance. No 1-3-space windowed structure beside the truck lane in satellite or any Street View frame. The only small structure near the entrance is a fleet fuel-island canopy and the Penske fleet-maintenance building, not a gatehouse.",
+    "remoteGs": "False because there is no truck gate at all (no gate => no remote check-in). No kiosk or call box observed.",
+    "postGateStaging": "Large open paved yard inside the property between the road and the dock faces where trucks queue/stage; ample holding room.",
+    "drivewayLong": "Deep internal approach from Swaner Road across the yard to the dock faces easily holds a queue of 3+ trucks.",
+    "entryExitTogether": "Two open driveway connections to Swaner Road serve both in and out; no dedicated separate in/out gates. Counted truckGateCount as 2 driveways but they are uncontrolled openings.",
+    "entryLanes": "Open driveways ~1 truck-lane wide each; lane count is nominal at an uncontrolled site.",
+    "dockDoors": "Main building shows a regular rhythm of dock doors on its west and south faces with reefer trailers backed in; counted ~22 across faces from z20-z21 imagery, placing it in the 10-25 band (flagged as estimate).",
+    "dropArea": "Very dense reefer-trailer drop/parking yard west of the building in a fan/herringbone pattern; well over 50 trailers + tractors visible, so 50+ band.",
+    "dropYard": "Dedicated on-site reefer-trailer storage lot, distinct from the active dock apron.",
+    "shipRcvSeparate": "Docks read as one operational cluster wrapping the west/south building faces; no clearly separate ship vs receive banks on different faces.",
+    "urbanRural": "Inside Salt Lake City's dense Glendale industrial fabric just west of I-15; Urban.",
+    "scale": "No truck scale / weigh pad observed in the truck path.",
+    "multipleFacilities": "Two buildings on the audited property (main distribution building + adjoining Penske fleet-maintenance/office building), but a single operation, not a multi-cluster campus.",
+    "railServed": "A rail line runs along the far (east) side of Swaner Road serving a neighboring materials yard; no spur enters the E.A. Sween property.",
+    "location": "Confirmed via address 1172 S Swaner Rd, UT 84104 and Nominatim geocode 40.7441475, -111.9520720. On-site Penske Truck Leasing (Yelp) and fleet-maintenance bays match the E.A. Sween CDC. Neighboring lumber/materials yards to west and south were excluded from the geofence."
+  },
+  "method": "deep-audit"
+}

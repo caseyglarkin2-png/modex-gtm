@@ -1,0 +1,68 @@
+{
+  "name": "7-Eleven Combined Distribution Center Moore OK (E.A. Sween)",
+  "type": "Combined Distribution Center",
+  "coords": { "lat": 35.339155, "lng": -97.487195 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 35.339560, "lng": -97.487460 },
+      { "lat": 35.339545, "lng": -97.486880 },
+      { "lat": 35.338770, "lng": -97.486930 },
+      { "lat": 35.338785, "lng": -97.487475 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 35.339565, "lng": -97.487380 },
+      { "lat": 35.339560, "lng": -97.487180 },
+      { "lat": 35.339470, "lng": -97.487185 },
+      { "lat": 35.339475, "lng": -97.487385 }
+    ] },
+    "dropYards": [],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 35.339130, "lng": -97.487010 },
+        { "lat": 35.339120, "lng": -97.486920 },
+        { "lat": 35.338830, "lng": -97.486945 },
+        { "lat": 35.338840, "lng": -97.487035 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 178, "pano": "l3RIv6fypDmSw2D8mPc9CA", "hasCoverage": true },
+      "truckGate": { "heading": 335, "pano": "l3RIv6fypDmSw2D8mPc9CA", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 4,
+    "trailersVisible": 3,
+    "trailerParkingCapacity": 6,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 1.09,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.339155,-97.487195,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["backupSensitive", "dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "facility": "E.A. Sween 'Moore-VAS' fresh-food route-delivery depot for 7-Eleven, not a large combined distribution center. Address 110 NW 1st St geocodes ROOFTOP to 35.33898,-97.48735 (the supplied coords were already rooftop-accurate, not city-level). Footprint is a single ~1.1-acre downtown block: depot building + covered loading canopy on the east, a small metal warehouse, and a route-van/box-truck fleet lot on the west.",
+    "truckGate": "No gate, barrier arm, or checkpoint anywhere. The lot is fully open with multiple curb cuts directly onto NW 1st St and the west cross street. Street View (2024-03/06) and z20 satellite confirm open access.",
+    "guardShack": "No booth of any kind at any entrance.",
+    "backupSensitive": "Medium confidence. The depot fronts a dense downtown grid one block off the 4-lane Broadway; any truck queue at the curb cuts would back onto NW 1st St with minimal on-site stacking room.",
+    "dockDoors": "Small covered loading canopy on the building's east side with ~3-4 trailer/truck positions visible in Street View; no large multi-door dock bank. Count is approximate.",
+    "dropArea": "A few 53' trailers staged near the canopy plus the route-van fleet; no marked drop stalls. dropYard left false (no dedicated trailer-storage lot).",
+    "urbanRural": "Small-town downtown Moore (OKC metro edge). Per rubric, small-town industrial resolves to Rural.",
+    "railServed": "A BNSF rail line runs ~2 blocks east (Broadway corridor) but no spur enters this property.",
+    "buildingCount": "Main depot building plus a small metal warehouse/shop on the lot."
+  },
+  "method": "deep-audit"
+}

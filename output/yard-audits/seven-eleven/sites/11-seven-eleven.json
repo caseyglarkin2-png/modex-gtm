@@ -1,0 +1,115 @@
+{
+  "name": "7-Eleven Fresh Food Production & Distribution Eden Prairie MN (E.A. Sween)",
+  "type": "Fresh Food Commissary",
+  "coords": { "lat": 44.86065, "lng": -93.4823 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 44.8615, "lng": -93.4842 },
+      { "lat": 44.86155, "lng": -93.4815 },
+      { "lat": 44.8613, "lng": -93.48075 },
+      { "lat": 44.8604, "lng": -93.48055 },
+      { "lat": 44.85958, "lng": -93.4812 },
+      { "lat": 44.85972, "lng": -93.48285 },
+      { "lat": 44.8601, "lng": -93.4843 },
+      { "lat": 44.86095, "lng": -93.48445 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 44.86082, "lng": -93.48075 },
+      { "lat": 44.86078, "lng": -93.48052 },
+      { "lat": 44.86038, "lng": -93.48058 },
+      { "lat": 44.86042, "lng": -93.48081 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 44.86108, "lng": -93.48345 },
+        { "lat": 44.86095, "lng": -93.4818 },
+        { "lat": 44.86048, "lng": -93.48188 },
+        { "lat": 44.86062, "lng": -93.48352 }
+      ] },
+      { "ring": [
+        { "lat": 44.86138, "lng": -93.48405 },
+        { "lat": 44.86128, "lng": -93.48315 },
+        { "lat": 44.86095, "lng": -93.48322 },
+        { "lat": 44.86105, "lng": -93.48412 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 44.86072, "lng": -93.48118 },
+        { "lat": 44.8603, "lng": -93.48128 },
+        { "lat": 44.86026, "lng": -93.48098 },
+        { "lat": 44.86068, "lng": -93.48088 }
+      ] },
+      { "ring": [
+        { "lat": 44.86058, "lng": -93.48402 },
+        { "lat": 44.86038, "lng": -93.48405 },
+        { "lat": 44.86034, "lng": -93.4837 },
+        { "lat": 44.86054, "lng": -93.48367 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 44.86048, "lng": -93.4817 },
+      { "lat": 44.8604, "lng": -93.48092 },
+      { "lat": 44.86012, "lng": -93.48098 },
+      { "lat": 44.8602, "lng": -93.48176 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 255, "pano": "", "hasCoverage": true },
+      "truckGate": { "heading": 259, "pano": "", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30,
+    "trailersVisible": 30,
+    "trailerParkingCapacity": 55,
+    "truckGateCount": 2,
+    "buildingCount": 3,
+    "siteAreaAcres": 13.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@44.86065,-93.4823,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "dropArea"],
+  "fieldNotes": {
+    "truckGate": "No controlled truck entrance. Both dock entrances open directly off the W 78th St frontage road with no barrier arm, sliding/swing gate, or checkpoint pinch-point. Street View (2025-04) at the east dock face shows box trucks and trailers backing straight to the docks from an open street-side apron.",
+    "guardShack": "No staffed booth at any entrance. The only road-side small structure is a passenger bus shelter at the office front, not a guard booth.",
+    "remoteGs": "False because there is no truck gate at all (no gate => not a remote/kiosk-controlled gate).",
+    "postGateStaging": "Paved holding area inside the dock entrance between the frontage road and the dock doors where arriving trucks can stage.",
+    "drivewayShort": "Open dock aprons sit immediately off the public road; the approach holds only 1-2 trucks before the dock face.",
+    "entryExitTogether": "Trucks use the same open driveways to enter and leave; no separate in/out gates.",
+    "dockDoors": "25-50 band. Counted ~8-10 doors on the east road-facing brick dock bank, ~4-6 at the west secondary building (red overhead door), and ~10-15 more along the production building's west/north faces with trailers backed in. ~30 total is an estimate from overhead imagery.",
+    "dropArea": "10-25 band. Rows of parked trailers without tractors in the central/NW staging yard; exact stall count uncertain from overhead.",
+    "shipRcvSeparate": "Two distinct dock clusters on different building faces/buildings (east production dock bank vs. the west secondary warehouse dock), consistent with separate ship/receive flows.",
+    "multipleFacilities": "Campus of 3 connected/adjacent E.A. Sween buildings: the east brick production/distribution building, a connected/adjacent warehouse section, and the west secondary warehouse (red dock door) serving the trailer drop yard.",
+    "dropYard": "Dedicated trailer-storage rows in the central and NW paved lots, separate from active dock staging.",
+    "urbanRural": "Urban - inside the Eden Prairie / SW Twin Cities metro fabric, dense commercial/industrial surroundings, adjacent multifamily and offices, on US-212 (Flying Cloud Dr).",
+    "truckGateCount": "Two open truck access points: the east dock entrance off the frontage road and the west yard/dock access; neither is gated.",
+    "siteAreaAcres": "~13.7 acres for the traced E.A. Sween operational footprint (production building + warehouse + trailer yard + truck-side parking); excludes neighboring tenants (K.R. Stokes etc.).",
+    "railServed": "No rail spur enters the property."
+  },
+  "method": "deep-audit"
+}

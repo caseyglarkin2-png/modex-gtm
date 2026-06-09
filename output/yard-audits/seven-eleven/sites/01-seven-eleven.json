@@ -1,0 +1,106 @@
+{
+  "name": "7-Eleven Combined Distribution Center Bohemia NY",
+  "type": "Fresh Food Commissary",
+  "coords": { "lat": 40.77695, "lng": -73.09140 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 40.77815, "lng": -73.09345 },
+      { "lat": 40.77792, "lng": -73.08948 },
+      { "lat": 40.77665, "lng": -73.08922 },
+      { "lat": 40.77600, "lng": -73.08968 },
+      { "lat": 40.77578, "lng": -73.09190 },
+      { "lat": 40.77628, "lng": -73.09338 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 40.77648, "lng": -73.09340 },
+      { "lat": 40.77646, "lng": -73.09300 },
+      { "lat": 40.77620, "lng": -73.09302 },
+      { "lat": 40.77622, "lng": -73.09342 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 40.77648, "lng": -73.09232 },
+        { "lat": 40.77628, "lng": -73.08975 },
+        { "lat": 40.77598, "lng": -73.08982 },
+        { "lat": 40.77618, "lng": -73.09238 }
+      ] },
+      { "ring": [
+        { "lat": 40.77735, "lng": -73.08948 },
+        { "lat": 40.77738, "lng": -73.08918 },
+        { "lat": 40.77665, "lng": -73.08920 },
+        { "lat": 40.77662, "lng": -73.08950 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 40.77678, "lng": -73.09238 },
+        { "lat": 40.77662, "lng": -73.08972 },
+        { "lat": 40.77648, "lng": -73.08975 },
+        { "lat": 40.77664, "lng": -73.09240 }
+      ] },
+      { "ring": [
+        { "lat": 40.77735, "lng": -73.08962 },
+        { "lat": 40.77738, "lng": -73.08948 },
+        { "lat": 40.77665, "lng": -73.08950 },
+        { "lat": 40.77662, "lng": -73.08964 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 197, "pano": "UaTlER7gaFDlMeQwClMvhQ", "hasCoverage": true },
+      "truckGate": { "heading": 266, "pano": "UaTlER7gaFDlMeQwClMvhQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 38,
+    "trailersVisible": 42,
+    "trailerParkingCapacity": 55,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 19.4,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.77695,-73.0914,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "No barrier arm, sliding/swing gate, or checkpoint anywhere. Open suburban industrial-park access: trucks turn off McCormick Dr onto open private pavement and wrap to the south/east dock yards with no control point. Street View from McCormick frontage and the south service road shows no fence or pinch-point.",
+    "guardShack": "No staffed booth at any entrance. North office frontage on McCormick Dr is open landscaped parking; no booth beside any truck lane.",
+    "remoteGs": "False because there is no truck gate at all (no kiosk/call-box either).",
+    "shipRcvSeparate": "Two physically distinct dock clusters on different building faces: a long dock bank on the south face (~26 doors) and a second dock bank on the east face (~12 doors, trailers backed into the east wall), consistent with separate commissary inbound vs DC outbound flows.",
+    "dockDoors": "~38 total: ~26 along the south face + ~12 along the east face. 25-50 band, counted from z19-z20 imagery.",
+    "dropArea": "Angled trailer-storage rows in the south yard (~12 dropped trailers) plus an east trailer yard (~12 backed-in); marked stalls present. 25-50 band.",
+    "drivewayLong": "Deep open paved yard between the building dock faces and the south service road / tree line easily holds a 3+ truck queue.",
+    "entryExitTogether": "Same open driveways off McCormick Dr serve both directions; no separate in/out gates.",
+    "urbanRural": "Dense Long Island (Islip/Bohemia) metro industrial fabric, surrounded by warehouses, flex buildings and residential; cellular coverage strong.",
+    "multipleFacilities": "Single large multi-tenant building (Constance Food Group = 7-Eleven CDC operator, Gold Glass-ALP and others share it), not a multi-building campus.",
+    "trailerParkingCapacity": "Estimate from yard footprint; low confidence.",
+    "buildingCount": "One large multi-tenant industrial building on the audited parcel; small neighboring buildings (Packaging Dynamics) are separate parcels.",
+    "railServed": "No rail spur into the property; nearest rail is the LIRR Main Line well to the north, not connected."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,73 @@
+{
+  "name": "7-Eleven Combined Distribution Center Austin TX (E.A. Sween)",
+  "type": "Combined Distribution Center",
+  "coords": { "lat": 30.340827, "lng": -97.672565 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 30.341500, "lng": -97.673350 },
+      { "lat": 30.341780, "lng": -97.672520 },
+      { "lat": 30.340150, "lng": -97.671780 },
+      { "lat": 30.339880, "lng": -97.672610 }
+    ] },
+    "truckGate": null,
+    "dropYards": [
+      { "ring": [
+        { "lat": 30.341050, "lng": -97.672950 },
+        { "lat": 30.341180, "lng": -97.672560 },
+        { "lat": 30.340450, "lng": -97.672230 },
+        { "lat": 30.340330, "lng": -97.672620 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 30.341050, "lng": -97.672950 },
+        { "lat": 30.341180, "lng": -97.672560 },
+        { "lat": 30.340450, "lng": -97.672230 },
+        { "lat": 30.340330, "lng": -97.672620 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 340, "pano": "dqmsaKkN-jISlA27mXq8QA", "hasCoverage": true },
+      "truckGate": { "heading": 315, "pano": "dqmsaKkN-jISlA27mXq8QA", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18,
+    "trailersVisible": 6,
+    "trailerParkingCapacity": 10,
+    "truckGateCount": 0,
+    "buildingCount": 2,
+    "siteAreaAcres": 4.1,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@30.340827,-97.672565,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoors", "multipleFacilities"],
+  "fieldNotes": {
+    "facility": "8606 Wall St is a multi-tenant tilt-wall warehouse in the Prologis Walnut Creek Business Park; E.A. Sween operates a 7-Eleven Combined Distribution Center (CDC, fresh-food cross-dock) from Suite 450. The audited footprint is the central two-building cluster sharing an open truck court; other suites (e.g. CEVA) share the same court.",
+    "truckGate": "Street View (pano dqmsaKkN-jISlA27mXq8QA, 2022-04) and satellite show driveways opening directly onto Wall St with no barrier arm, sliding gate, or pinch-point. Open business-park access.",
+    "guardShack": "No staffed booth anywhere at the entrances; only a decorative stone monument pillar and some low metal fence panels along the road edge, not a guard checkpoint.",
+    "remoteGs": "No gate present, so no remote check-in.",
+    "drivewayShort": "Approach from Wall St into the shared truck court is short (1-2 trucks) before reaching dock face.",
+    "entryExitTogether": "Single open court serves both inbound and outbound truck movements; uncontrolled.",
+    "dockDoors": "Rear-load dock wall on the court-facing (SW) face of the central building shows ~12-18 doors with trailers/box trucks backed in; the full multi-tenant block could reach 25-50 across both dock walls. Banded conservatively at 10-25 for the audited building face.",
+    "dropArea": "A handful of trailers (CEVA-branded) parked at/near dock doors in the shared court; no marked stand-alone trailer stalls. 0-10.",
+    "dropYard": "No dedicated trailer-storage lot separate from active docks; trailers sit at the dock apron.",
+    "multipleFacilities": "Two large buildings frame the truck court, but the tenant occupies one suite in a shared park rather than a single-occupant campus; set false. Flagged as uncertain.",
+    "urbanRural": "Dense Austin industrial fabric inside the 700-acre Walnut Creek Business District, near US-183/US-290/I-35. Urban.",
+    "railServed": "No rail spur on or into the parcel."
+  },
+  "method": "deep-audit"
+}

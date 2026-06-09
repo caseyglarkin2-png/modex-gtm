@@ -1,0 +1,96 @@
+{
+  "name": "7-Eleven Combined Distribution Center Lewisville TX (E.A. Sween Dallas)",
+  "type": "Combined Distribution Center",
+  "coords": { "lat": 33.025900, "lng": -96.981250 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 33.027055, "lng": -96.981964 },
+      { "lat": 33.027055, "lng": -96.980288 },
+      { "lat": 33.025368, "lng": -96.980288 },
+      { "lat": 33.024967, "lng": -96.980336 },
+      { "lat": 33.025007, "lng": -96.981869 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 33.025505, "lng": -96.979340 },
+      { "lat": 33.025505, "lng": -96.979060 },
+      { "lat": 33.025380, "lng": -96.979060 },
+      { "lat": 33.025380, "lng": -96.979340 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 33.025760, "lng": -96.981010 },
+        { "lat": 33.025690, "lng": -96.980360 },
+        { "lat": 33.025090, "lng": -96.980470 },
+        { "lat": 33.025150, "lng": -96.981080 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 33.026790, "lng": -96.981020 },
+        { "lat": 33.026810, "lng": -96.980790 },
+        { "lat": 33.025120, "lng": -96.980960 },
+        { "lat": 33.025100, "lng": -96.981180 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 33.026840, "lng": -96.980740 },
+      { "lat": 33.026850, "lng": -96.980330 },
+      { "lat": 33.025760, "lng": -96.980340 },
+      { "lat": 33.025760, "lng": -96.980720 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 168, "pano": "hRvBXvOPn3GQl8_I4H-sdg", "hasCoverage": true },
+      "truckGate": { "heading": 280, "pano": "gJ4XoG4YpHw35OFyMNGvOg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 34,
+    "trailersVisible": 38,
+    "trailerParkingCapacity": 55,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 8.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.025900,-96.981250,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "shipRcvSeparate"],
+  "fieldNotes": {
+    "site": "1301 Ridgeview Dr, Lewisville TX 75057. Large multi-tenant flex/industrial building (north frontage carries Staples/Xerox/CPI/Bakery Express tenant signage). E.A. Sween operates the fresh-food Combined Distribution Center that serves 7-Eleven; its truck dock and refrigerated route-fleet drop yard occupy the east / southeast side of the building. Geofences cover that E.A. Sween operating footprint, not the whole park.",
+    "truckGate": "Black sliding/swing metal gate across the truck driveway into the SE yard, set between precast screen walls; confirmed in Street View pano gJ4XoG4YpHw35OFyMNGvOg from the eastern public street (May 2025).",
+    "guardShack": "No staffed booth structure beside the gate in any Street View heading; gate is unattended.",
+    "remoteGs": "Gate present with no guard shack implies kiosk / call-box / app check-in.",
+    "dockDoors": "Long bank of dock doors along the east building face with trailers/box trucks backed in; counted ~34 from overhead, banded 25-50. Door count is an overhead estimate.",
+    "dropArea": "SE yard holds diagonal rows of refrigerated box trucks and trailers (route fleet) parked without tractors; 25-50 band.",
+    "dropYard": "Dedicated route-fleet / trailer storage lot on the SE, separate from the active dock apron.",
+    "shipRcvSeparate": "Single dock cluster on the east face; could not confirm a separate ship/rcv bank.",
+    "siteAreaAcres": "8.6 ac is the traced E.A. Sween operating footprint (building + east/SE yard), not the full multi-tenant parcel.",
+    "railServed": "No rail spur enters the property.",
+    "urbanRural": "Dense Lewisville / north-DFW industrial park; clearly Urban."
+  },
+  "method": "deep-audit"
+}

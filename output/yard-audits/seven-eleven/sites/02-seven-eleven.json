@@ -1,0 +1,100 @@
+{
+  "name": "7-Eleven Distribution Co Cold Storage DC Santa Fe Springs CA",
+  "type": "Grocery DC",
+  "coords": { "lat": 33.93065, "lng": -118.0685 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 33.93155, "lng": -118.06995 },
+      { "lat": 33.93168, "lng": -118.06745 },
+      { "lat": 33.92985, "lng": -118.06690 },
+      { "lat": 33.92950, "lng": -118.06880 },
+      { "lat": 33.92965, "lng": -118.06990 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 33.93150, "lng": -118.07000 },
+      { "lat": 33.93150, "lng": -118.06970 },
+      { "lat": 33.93095, "lng": -118.06968 },
+      { "lat": 33.93095, "lng": -118.06998 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 33.93000, "lng": -118.06940 },
+        { "lat": 33.93005, "lng": -118.06700 },
+        { "lat": 33.92958, "lng": -118.06695 },
+        { "lat": 33.92955, "lng": -118.06935 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 33.93015, "lng": -118.06945 },
+        { "lat": 33.93020, "lng": -118.06700 },
+        { "lat": 33.93005, "lng": -118.06698 },
+        { "lat": 33.93000, "lng": -118.06943 }
+      ] },
+      { "ring": [
+        { "lat": 33.93120, "lng": -118.06968 },
+        { "lat": 33.93010, "lng": -118.06962 },
+        { "lat": 33.93010, "lng": -118.06950 },
+        { "lat": 33.93120, "lng": -118.06956 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 179, "pano": "Ic32PK_vo0QwbZNqyR5FbQ", "hasCoverage": true },
+      "truckGate": { "heading": 174, "pano": "TitYWlr0p01pOtxRd9dP1A", "hasCoverage": true },
+      "dropYards": { "heading": 80, "pano": "TnuhyeO0YDAJMdepupEjXg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 75,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 14.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.93065,-118.0685,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dropArea", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "West driveway off Lakeland Rd is open pavement with only a painted STOP bar at the property line; no barrier arm, sliding/swing gate, or checkpoint pinch-point. Confirmed in z21 satellite and Street View (Jan 2025) looking south down the drive.",
+    "guardShack": "No booth structure anywhere at the entrance or along the drive in satellite or Street View. Building office front and employee lobby face Lakeland Rd, but there is no truck-gate guard shack.",
+    "remoteGs": "False because there is no controlled truck gate at all (no gate => not a remote/kiosk gate either).",
+    "postGateStaging": "Deep paved truck court south of the dock face holds queued/staged trailers before the doors.",
+    "drivewayLong": "Approach from Lakeland down the west drive into the court easily holds 3+ trucks; trailers were staged single-file along the drive in Street View.",
+    "dockDoors": "South face of the DC carries one long continuous dock bank; counted well over 50 doors with trailers backed in across the building width (z19 imagery). Additional E-series dock doors on the west wall.",
+    "dropArea": "Large truck court packed with rows of parked trailers (no tractor) plus trailers backed at docks; estimated 50+ drop stalls. Count is an overhead estimate.",
+    "dropYard": "Dedicated trailer-storage rows fill the interior court, distinct from the active dock apron.",
+    "shipRcvSeparate": "Could not confirm two physically separate dock clusters; main dock bank is one continuous south face, so marked false (low confidence).",
+    "urbanRural": "Dense Santa Fe Springs / Los Angeles County industrial fabric, abundant surrounding development and an adjacent apartment complex.",
+    "connectivityIssue": "Dense metro LA area; cellular coverage expected to be strong.",
+    "railServed": "No rail spur enters the property.",
+    "siteAreaAcres": "~14 acres for the fenced property (building + court + parking) derived from the perimeter polygon."
+  },
+  "method": "deep-audit"
+}

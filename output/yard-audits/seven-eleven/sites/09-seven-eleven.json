@@ -1,0 +1,96 @@
+{
+  "name": "7-Eleven Combined Distribution Center Woodridge IL (E.A. Sween Chicago)",
+  "type": "Combined Distribution Center",
+  "coords": { "lat": 41.696970, "lng": -88.035200 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 41.697521, "lng": -88.035924 },
+      { "lat": 41.697461, "lng": -88.035066 },
+      { "lat": 41.697321, "lng": -88.034610 },
+      { "lat": 41.696399, "lng": -88.034556 },
+      { "lat": 41.696327, "lng": -88.034905 },
+      { "lat": 41.696359, "lng": -88.035897 },
+      { "lat": 41.696960, "lng": -88.035962 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 41.696367, "lng": -88.035012 },
+      { "lat": 41.696359, "lng": -88.034664 },
+      { "lat": 41.696239, "lng": -88.034621 },
+      { "lat": 41.696247, "lng": -88.034985 }
+    ] },
+    "dropYards": [],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 41.697381, "lng": -88.035114 },
+        { "lat": 41.697321, "lng": -88.034889 },
+        { "lat": 41.696459, "lng": -88.034889 },
+        { "lat": 41.696488, "lng": -88.035114 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 93, "pano": "P_sr0uUyx6xtCZxHzek5Hw", "hasCoverage": true },
+      "truckGate": { "heading": 277, "pano": "yibpTTpnOOToUOQelGptWw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18,
+    "trailersVisible": 4,
+    "trailerParkingCapacity": 12,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 3.42,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.696970,-88.035200,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "dockDoors",
+    "dropArea",
+    "trailerParkingCapacity",
+    "dockDoorCount",
+    "postGateStaging"
+  ],
+  "fieldNotes": {
+    "siteIdentity": "E.A. Sween occupies Unit 200 of a multi-tenant cross-park distribution building at 10441 Beaudin Blvd, Woodridge IL (Internationale Centre industrial park). Address geocodes ROOFTOP to this building; E.A. Sween's corporate/contact listing also appears at 10350 Argonne Dr in the same park, but the operational unit pinned by the supplied address is this Beaudin building. Audited the center building (the one the coords point to), ~37m x 114m, NNW-SSE orientation, single east-facing dock bank.",
+    "truckGate": "Open driveway from Beaudin Blvd into the shared truck court between the center and east buildings. 2025-05 Street View at the south driveway throat shows a wide open entrance with no barrier arm, no gate, no booth at the public road.",
+    "guardShack": "No staffed booth at any entrance to this unit's yard.",
+    "remoteGs": "No controlled truck gate at the road, so no remote/kiosk check-in implied.",
+    "internalFence": "An ornamental steel perimeter fence with a gate separates the employee parking lot from the dock truck-yard (visible in 2022-10 Street View, with a SWIFT trailer behind it). This is an internal yard fence, not a road-edge controlled truck gate, so truckGate remains false.",
+    "postGateStaging": "Wide paved court east of the building between the dock face and the neighboring building provides ample inside-the-property holding/queue room before the docks; medium confidence.",
+    "drivewayLong": "Approach from Beaudin into the court is long/open and can hold 3+ trucks queued.",
+    "fastLaneOpportunity": "Large open court apron with unused paved width; physical room to add an express/bypass lane exists.",
+    "dockDoors": "Single east-facing dock bank along ~114m wall; estimated ~18 doors (band 10-25) from z20 imagery. Light trailer presence at capture; the heavily-docked trailers visible across the court belong to the neighboring (east) building.",
+    "dropArea": "A few trailers in the court near this unit's docks; no dedicated marked drop-stall lot for this unit, so 0-10.",
+    "dropYard": "No dedicated trailer-storage lot belonging to this unit; trailers sit at docks / in the shared court.",
+    "urbanRural": "Dense Chicago-metro industrial fabric immediately off I-355; clearly Urban.",
+    "railServed": "No rail spur into the property.",
+    "multipleFacilities": "The park has several large warehouses, but this audit covers the single building/unit the address pins; treated as one facility.",
+    "shipRcvSeparate": "Single dock bank on one face; shipping and receiving are not on physically separate clusters."
+  },
+  "method": "deep-audit"
+}

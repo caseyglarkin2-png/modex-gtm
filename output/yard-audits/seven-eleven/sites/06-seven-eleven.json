@@ -1,0 +1,78 @@
+{
+  "name": "7-Eleven Combined Distribution Center Commerce City CO (E.A. Sween Denver)",
+  "type": "Combined Distribution Center",
+  "coords": { "lat": 39.79592, "lng": -104.92080 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 39.796442, "lng": -104.921873 },
+      { "lat": 39.79645, "lng": -104.920612 },
+      { "lat": 39.796442, "lng": -104.92021 },
+      { "lat": 39.795267, "lng": -104.920199 },
+      { "lat": 39.795156, "lng": -104.920521 },
+      { "lat": 39.795172, "lng": -104.92183 },
+      { "lat": 39.795782, "lng": -104.921884 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 39.796627, "lng": -104.921175 },
+      { "lat": 39.796627, "lng": -104.920585 },
+      { "lat": 39.796442, "lng": -104.920585 },
+      { "lat": 39.796442, "lng": -104.921175 }
+    ] },
+    "dropYards": [],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 39.796401, "lng": -104.921524 },
+        { "lat": 39.796401, "lng": -104.921417 },
+        { "lat": 39.795403, "lng": -104.92139 },
+        { "lat": 39.795403, "lng": -104.921508 }
+      ] },
+      { "ring": [
+        { "lat": 39.796401, "lng": -104.920596 },
+        { "lat": 39.796401, "lng": -104.920264 },
+        { "lat": 39.795391, "lng": -104.920253 },
+        { "lat": 39.795391, "lng": -104.920585 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 172, "pano": "3uPQg8iaeDd39YKn8rWGuA", "hasCoverage": true },
+      "truckGate": { "heading": 178, "pano": "3uPQg8iaeDd39YKn8rWGuA", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 16,
+    "trailersVisible": 9,
+    "trailerParkingCapacity": 14,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 4.98,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.79592,-104.92080,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "facility": "E.A. Sween 'Denver VAS' fresh-food / value-added-services distribution operation occupying a unit (5700 Unit D) of the multi-tenant Park Industrial Center flex park (5690 / 5700 / 5710 E 56th Ave), just north of I-270. Audited building is the center N-S flex building; this is the 7-Eleven fresh/commissary supply node, not a tractor-trailer regional DC.",
+    "truckGate": "Open driveway off E 56th Ave directly into the shared truck court; Street View from 2020-2024 shows no barrier arm, sliding/swing gate, booth, or checkpoint at any complex entry. Open-access flex park.",
+    "guardShack": "No booth anywhere at the entries.",
+    "dockDoors": "Center 5700 building has docks on both west and east faces (mix of dock-height and grade-level overhead doors). Counted ~12-18 across both faces from overhead + Street View; banded 10-25. Tenant's own unit uses only a subset.",
+    "dropArea": "A handful of trailers (incl. at least one reefer) parked without tractor in the shared courts; well under 10 dedicated drop stalls.",
+    "dropYard": "No dedicated trailer-storage lot; shallow shared aprons flanking the building, not a standalone drop yard.",
+    "truckGateCount": "Two open vehicular accesses serve the building's courts (north drive off 56th Ave and the through-drive on the east), neither controlled.",
+    "urbanRural": "Dense Denver-metro industrial fabric, fully built-up corridor along I-270 / 56th Ave.",
+    "railServed": "No rail spur enters the property; nearest rail is unrelated.",
+    "streetViewMeta": "Best driver's-eye is the 56th Ave arrival pano (3uPQg8iaeDd39YKn8rWGuA, 2020-11) looking south into the open complex entrance."
+  },
+  "method": "deep-audit"
+}
