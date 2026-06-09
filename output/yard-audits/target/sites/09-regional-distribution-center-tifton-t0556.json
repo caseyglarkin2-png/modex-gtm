@@ -1,0 +1,86 @@
+{
+  "name": "Target Regional Distribution Center Tifton (T0556)",
+  "type": "RDC",
+  "coords": { "lat": 31.42050, "lng": -83.52080 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 31.42490, "lng": -83.52320 },
+      { "lat": 31.42430, "lng": -83.51920 },
+      { "lat": 31.42060, "lng": -83.51880 },
+      { "lat": 31.41720, "lng": -83.52140 },
+      { "lat": 31.41770, "lng": -83.52380 },
+      { "lat": 31.42230, "lng": -83.52420 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 31.42400, "lng": -83.51985 },
+      { "lat": 31.42385, "lng": -83.51935 },
+      { "lat": 31.42345, "lng": -83.51950 },
+      { "lat": 31.42360, "lng": -83.52000 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 31.42060, "lng": -83.52320 },
+        { "lat": 31.41880, "lng": -83.52195 },
+        { "lat": 31.41760, "lng": -83.52330 },
+        { "lat": 31.41940, "lng": -83.52450 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 31.42330, "lng": -83.52200 },
+        { "lat": 31.42345, "lng": -83.51960 },
+        { "lat": 31.42305, "lng": -83.51955 },
+        { "lat": 31.42290, "lng": -83.52195 }
+      ] },
+      { "ring": [
+        { "lat": 31.42235, "lng": -83.52345 },
+        { "lat": 31.41980, "lng": -83.52160 },
+        { "lat": 31.41950, "lng": -83.52195 },
+        { "lat": 31.42205, "lng": -83.52380 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 180, "pano": "", "hasCoverage": true },
+      "truckGate": { "heading": 200, "pano": "", "hasCoverage": true },
+      "dropYards": { "heading": 180, "pano": "", "hasCoverage": false },
+      "dockAprons": { "heading": 180, "pano": "", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 320,
+    "trailerParkingCapacity": 450,
+    "truckGateCount": 2,
+    "buildingCount": 2,
+    "siteAreaAcres": 83.5,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@31.42050,-83.52080,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Fenced perimeter with defined truck-lane driveways into the yard; NE dock-road driveway and W office boulevard both serve as controlled property entrances. Classed TRUE for a fenced retail RDC of this scale.",
+    "guardShack": "No staffed guard booth visible at any Target truck entrance in 2026 Street View. The booth-footprint structure on the W boulevard belongs to the adjacent feed-mill operation up the shared road, not Target.",
+    "remoteGs": "Gate present, no manned booth -> kiosk/app/call-box check-in implied.",
+    "shipRcvSeparate": "Two distinct dock banks on different building faces (north face + west/southwest face).",
+    "dropYard": "Very large dedicated trailer-storage lot on the SW face, hundreds of trailers in marked rows.",
+    "railServed": "Rail spur curves through the NW of the property (visible track in z19).",
+    "fastLaneOpportunity": "Wide open paved driveway apron at the NE entrance with ample width to add a bypass lane.",
+    "multipleFacilities": "Single Target campus; the silo/feed-mill complex to the NW is a separate unrelated operation, not counted.",
+    "buildingCount": "Main RDC plus the east office annex.",
+    "dockDoorCount": "Estimate from north + west dock faces; large RDC, low-confidence exact count."
+  },
+  "method": "deep-audit"
+}

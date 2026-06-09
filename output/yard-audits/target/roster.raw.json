@@ -1,0 +1,200 @@
+{
+  "account": "Target",
+  "generatedAt": "2026-06-09",
+  "note": "Freight-relevant US DC footprint; Step 0 re-pins exact coords.",
+  "facilityCount": 24,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Target Import Warehouse Savannah (T3684)",
+      "city": "Savannah",
+      "state": "GA",
+      "type": "Import Warehouse",
+      "address": "110 Little Hearst Pkwy, Savannah, GA 31407"
+    },
+    {
+      "idx": 2,
+      "name": "Target Import Distribution Center Lacey",
+      "city": "Lacey",
+      "state": "WA",
+      "type": "Import Warehouse",
+      "address": "3500 Marvin Rd NE, Lacey, WA 98516"
+    },
+    {
+      "idx": 3,
+      "name": "Target Import Distribution Center Rialto (T3806)",
+      "city": "Rialto",
+      "state": "CA",
+      "type": "Import Warehouse",
+      "address": "3105 N Mango Ave, Rialto, CA 92377"
+    },
+    {
+      "idx": 4,
+      "name": "Target Import Warehouse Suffolk (T3841)",
+      "city": "Suffolk",
+      "state": "VA",
+      "type": "Import Warehouse",
+      "address": "300 Manning Bridge Rd, Suffolk, VA 23434"
+    },
+    {
+      "idx": 5,
+      "name": "Target Regional Distribution Center Logan Township (T3857)",
+      "city": "Logan Township",
+      "state": "NJ",
+      "type": "RDC",
+      "address": "300 Creekview Ave, Bldg H, Logan Township, NJ 08085"
+    },
+    {
+      "idx": 6,
+      "name": "Target Regional Distribution Center Fontana (T0553)",
+      "city": "Fontana",
+      "state": "CA",
+      "type": "RDC",
+      "address": "14750 Miller Ave, Fontana, CA 92336"
+    },
+    {
+      "idx": 7,
+      "name": "Target Regional Distribution Center Shafter (T0593)",
+      "city": "Shafter",
+      "state": "CA",
+      "type": "RDC",
+      "address": "3880 Zachary Ave, Shafter, CA 93263"
+    },
+    {
+      "idx": 8,
+      "name": "Target Regional Distribution Center Madison (T0580)",
+      "city": "Madison",
+      "state": "AL",
+      "type": "RDC",
+      "address": "6175 Greenbrier Pkwy NW, Madison, AL 35756"
+    },
+    {
+      "idx": 9,
+      "name": "Target Regional Distribution Center Tifton (T0556)",
+      "city": "Tifton",
+      "state": "GA",
+      "type": "RDC",
+      "address": "4502 Union Rd, Tifton, GA 31794"
+    },
+    {
+      "idx": 10,
+      "name": "Target Regional Distribution Center Indianapolis (T0559)",
+      "city": "Indianapolis",
+      "state": "IN",
+      "type": "RDC",
+      "address": "7551 W Morris St, Indianapolis, IN 46231"
+    },
+    {
+      "idx": 11,
+      "name": "Target Regional Distribution Center Stuarts Draft (T0560)",
+      "city": "Stuarts Draft",
+      "state": "VA",
+      "type": "RDC",
+      "address": "345 Mount Vernon Rd, Stuarts Draft, VA 24477"
+    },
+    {
+      "idx": 12,
+      "name": "Target Regional Distribution Center Tyler (T0578)",
+      "city": "Tyler",
+      "state": "TX",
+      "type": "RDC",
+      "address": "13786 County Rd 433, Tyler, TX 75706"
+    },
+    {
+      "idx": 13,
+      "name": "Target Regional Distribution Center Chambersburg (T0589)",
+      "city": "Chambersburg",
+      "state": "PA",
+      "type": "RDC",
+      "address": "3001 Archer Dr, Chambersburg, PA 17201"
+    },
+    {
+      "idx": 14,
+      "name": "Target Regional Distribution Center Phoenix (T0588)",
+      "city": "Phoenix",
+      "state": "AZ",
+      "type": "RDC",
+      "address": "25 N 75th Ave, Phoenix, AZ 85043"
+    },
+    {
+      "idx": 15,
+      "name": "Target Regional Distribution Center Lugoff (T0594)",
+      "city": "Lugoff",
+      "state": "SC",
+      "type": "RDC",
+      "address": "22 Corporate Dr, Lugoff, SC 29078"
+    },
+    {
+      "idx": 16,
+      "name": "Target Regional Distribution Center Oconomowoc (T0557)",
+      "city": "Oconomowoc",
+      "state": "WI",
+      "type": "RDC",
+      "address": "1100 E Valley Rd, Oconomowoc, WI 53066"
+    },
+    {
+      "idx": 17,
+      "name": "Target Regional Distribution Center Albany (T0558)",
+      "city": "Albany",
+      "state": "OR",
+      "type": "RDC",
+      "address": "875 Beta Dr SW, Albany, OR 97322"
+    },
+    {
+      "idx": 18,
+      "name": "Target Regional Distribution Center Wilton (T0579)",
+      "city": "Wilton",
+      "state": "NY",
+      "type": "RDC",
+      "address": "129 North Rd, Wilton, NY 12831"
+    },
+    {
+      "idx": 19,
+      "name": "Target Regional Distribution Center Galesburg (T0587)",
+      "city": "Galesburg",
+      "state": "MI",
+      "type": "RDC",
+      "address": "12735 E L Ave, Galesburg, MI 49053"
+    },
+    {
+      "idx": 20,
+      "name": "Target Flow Center Pueblo (T0554)",
+      "city": "Pueblo",
+      "state": "CO",
+      "type": "Flow Center",
+      "address": "34800 United Ave, Pueblo, CO 81001"
+    },
+    {
+      "idx": 21,
+      "name": "Target Food Distribution Center Cedar Falls (T0590)",
+      "city": "Cedar Falls",
+      "state": "IA",
+      "type": "Food Distribution Center",
+      "address": "3400 Cedar Heights Dr, Cedar Falls, IA 50613"
+    },
+    {
+      "idx": 22,
+      "name": "Target Food Distribution Center West Jefferson (T3804)",
+      "city": "West Jefferson",
+      "state": "OH",
+      "type": "Food Distribution Center",
+      "address": "42 Commerce Pkwy, West Jefferson, OH 43162"
+    },
+    {
+      "idx": 23,
+      "name": "Target Food Distribution Center Lake City",
+      "city": "Lake City",
+      "state": "FL",
+      "type": "Food Distribution Center",
+      "address": "3049 N US Hwy 441, Lake City, FL 32055"
+    },
+    {
+      "idx": 24,
+      "name": "Target Food Distribution Center Denton",
+      "city": "Denton",
+      "state": "TX",
+      "type": "Food Distribution Center",
+      "address": "Airport Rd, Denton, TX 76207"
+    }
+  ]
+}

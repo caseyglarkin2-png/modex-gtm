@@ -1,0 +1,77 @@
+{
+  "name": "Target Regional Distribution Center Chambersburg (T0589)",
+  "type": "RDC",
+  "coords": { "lat": 39.8878, "lng": -77.6735 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 39.89150, "lng": -77.67880 },
+      { "lat": 39.89130, "lng": -77.67250 },
+      { "lat": 39.88450, "lng": -77.67080 },
+      { "lat": 39.88410, "lng": -77.67640 },
+      { "lat": 39.88540, "lng": -77.67920 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 39.88460, "lng": -77.67820 },
+      { "lat": 39.88455, "lng": -77.67720 },
+      { "lat": 39.88410, "lng": -77.67725 },
+      { "lat": 39.88415, "lng": -77.67825 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 39.89110, "lng": -77.67850 },
+        { "lat": 39.89090, "lng": -77.67560 },
+        { "lat": 39.88620, "lng": -77.67430 },
+        { "lat": 39.88560, "lng": -77.67880 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 39.89080, "lng": -77.67520 },
+        { "lat": 39.89070, "lng": -77.67460 },
+        { "lat": 39.88560, "lng": -77.67340 },
+        { "lat": 39.88555, "lng": -77.67400 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 291, "pano": "ohwicw_ypxHrrsj1qjVuUg", "hasCoverage": true },
+      "truckGate": { "heading": 290, "pano": "mlac-CAWOgXfcDblQC8HTQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 350,
+    "trailerParkingCapacity": 500,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 120.4,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.8878,-77.6735,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["exitLanes", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Guarded truck entrance at the SW/south property line: Street View (pano mlac-CAWOgXfcDblQC8HTQ, 2012-09) and z19 satellite both show a gatehouse canopy straddling the inbound lane with a tractor-trailer queued at it, yellow lane markings, and perimeter chain-link fence.",
+    "guardShack": "A staffed booth with a flat canopy roof spanning the entry lane is clearly visible in Street View beside the gate and as a small structure on the road at z19 satellite (~39.8843,-77.6777). Distinct from the larger office/amenity building just north of it.",
+    "remoteGs": "False because a manned guard booth is present at the gate.",
+    "dockDoors": "50+ — the long west building face shows continuous dock doors with dozens of trailers backed in; an RDC of ~1.3M sq ft. ~120 is an honest estimate, low precision.",
+    "dropArea": "50+ — extensive west/north-side trailer drop yards with hundreds of parked trailers in marked rows.",
+    "shipRcvSeparate": "Docks appear concentrated on the single west building face; east face (toward I-81) has no docks. Marked uncertain.",
+    "fastLaneOpportunity": "Wide entry apron and multiple lanes at the gate with room for a bypass lane.",
+    "urbanRural": "Edge-of-town industrial park (Rita Tech Park) along I-81 outside Chambersburg, surrounded by farmland — Rural per rubric.",
+    "postGateStaging": "Large paved apron and internal yard immediately inside the gate before the docks.",
+    "railServed": "A rail line runs along the west property edge (Archer Dr corridor) but no spur appears to enter the property; railServed=false."
+  },
+  "method": "deep-audit"
+}

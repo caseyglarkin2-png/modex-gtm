@@ -1,0 +1,100 @@
+{
+  "name": "Target Regional Distribution Center Wilton (T0579)",
+  "type": "RDC",
+  "coords": { "lat": 43.17760, "lng": -73.71680 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 43.18130, "lng": -73.71990 },
+      { "lat": 43.18095, "lng": -73.71790 },
+      { "lat": 43.17640, "lng": -73.71370 },
+      { "lat": 43.17430, "lng": -73.71430 },
+      { "lat": 43.17200, "lng": -73.71350 },
+      { "lat": 43.17120, "lng": -73.71530 },
+      { "lat": 43.17260, "lng": -73.71720 },
+      { "lat": 43.17480, "lng": -73.71800 },
+      { "lat": 43.17880, "lng": -73.72060 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 43.17520, "lng": -73.71770 },
+      { "lat": 43.17515, "lng": -73.71720 },
+      { "lat": 43.17470, "lng": -73.71730 },
+      { "lat": 43.17475, "lng": -73.71780 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 43.17390, "lng": -73.71530 },
+        { "lat": 43.17330, "lng": -73.71390 },
+        { "lat": 43.17170, "lng": -73.71440 },
+        { "lat": 43.17230, "lng": -73.71580 }
+      ] },
+      { "ring": [
+        { "lat": 43.17480, "lng": -73.71700 },
+        { "lat": 43.17440, "lng": -73.71560 },
+        { "lat": 43.17280, "lng": -73.71620 },
+        { "lat": 43.17320, "lng": -73.71760 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 43.18060, "lng": -73.71880 },
+        { "lat": 43.18030, "lng": -73.71830 },
+        { "lat": 43.17560, "lng": -73.71570 },
+        { "lat": 43.17540, "lng": -73.71640 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
+      "truckGate": { "heading": 0, "pano": "", "hasCoverage": false }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 350,
+    "trailerParkingCapacity": 500,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 95.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@43.17760,-73.71680,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "postGateStaging"],
+  "fieldNotes": {
+    "truckGate": "Truck driveway from the SW dock yard crosses a continuous east-west perimeter fence at a single defined pinch-point gate (43.1749,-73.7174); fence rails visible running across the grass strips on both sides of the drive in gate-cross-z20.png.",
+    "guardShack": "A small light-colored booth-sized structure sits beside the truck lane at the gate crossing (booth-z21.png / gate-cross-z20.png). Footprint is small and partly shadowed so this is medium-confidence visually, but corroborated by Target's published on-site Target Security Specialist (TSS) staffing for this RDC.",
+    "remoteGs": "False because guardShack is true (staffed booth present).",
+    "dockDoors": "Dozens of angled dock bays with trailers backed in run the full length of the building's SW/west face across two long banks (wide-z16, nw-corner-z18); easily 50+ doors.",
+    "dropArea": "Two large trailer-storage drop yards: one south of the building and a dense SE trailer-storage lot (se-yard-z19, main-entrance-z19) holding several hundred trailers without tractors; well into the 50+ band.",
+    "fastLaneOpportunity": "Wide paved gate apron and ample yard width at the entrance allow an express/bypass lane.",
+    "buildingCount": "Main RDC plus a separate maintenance/fleet building near the SE yard; campus is a single operation so multipleFacilities=false.",
+    "urbanRural": "Edge-of-town Wilton/Saratoga, surrounded by woods, farmland and the I-87 Northway corridor; rural setting.",
+    "siteAreaAcres": "~95 ac estimated from the perimeter polygon spanning the building, west dock yards, south + SE drop yards and employee parking.",
+    "streetView": "No Street View coverage at the gate or perimeter (private property; nearest panos are 2007/2022 rural-road shots that do not reach the entrance), so streetViewMeta hasCoverage=false for both zones."
+  },
+  "method": "deep-audit"
+}

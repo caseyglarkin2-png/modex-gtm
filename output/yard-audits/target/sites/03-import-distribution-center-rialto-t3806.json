@@ -1,0 +1,90 @@
+{
+  "name": "Target Import Distribution Center Rialto (T3806)",
+  "type": "Import Warehouse",
+  "coords": { "lat": 34.15315, "lng": -117.42600 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 34.15580, "lng": -117.43160 },
+      { "lat": 34.15575, "lng": -117.41920 },
+      { "lat": 34.15060, "lng": -117.41910 },
+      { "lat": 34.15065, "lng": -117.43160 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 34.15330, "lng": -117.42490 },
+      { "lat": 34.15330, "lng": -117.42405 },
+      { "lat": 34.15235, "lng": -117.42410 },
+      { "lat": 34.15235, "lng": -117.42495 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 34.15540, "lng": -117.42710 },
+        { "lat": 34.15540, "lng": -117.42360 },
+        { "lat": 34.15180, "lng": -117.42360 },
+        { "lat": 34.15180, "lng": -117.42710 }
+      ] },
+      { "ring": [
+        { "lat": 34.15555, "lng": -117.42230 },
+        { "lat": 34.15555, "lng": -117.42050 },
+        { "lat": 34.15090, "lng": -117.42050 },
+        { "lat": 34.15090, "lng": -117.42230 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 34.15555, "lng": -117.42830 },
+        { "lat": 34.15555, "lng": -117.42790 },
+        { "lat": 34.15095, "lng": -117.42790 },
+        { "lat": 34.15095, "lng": -117.42830 }
+      ] },
+      { "ring": [
+        { "lat": 34.15555, "lng": -117.42330 },
+        { "lat": 34.15555, "lng": -117.42290 },
+        { "lat": 34.15095, "lng": -117.42290 },
+        { "lat": 34.15095, "lng": -117.42330 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
+      "truckGate": { "heading": 0, "pano": "", "hasCoverage": false }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 320,
+    "trailersVisible": 600,
+    "trailerParkingCapacity": 800,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 160.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.15315,-117.42600,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "entryLanes", "exitLanes", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Channelized lane group with painted islands and a queue of tractor-trailers funneling through a single checkpoint mid-campus at ~34.1531,-117.4244; classic controlled truck entrance.",
+    "guardShack": "Gatehouse building with a canopy extending over the inbound truck lanes (z20/z21), windows on multiple sides, set beside the lanes — a staffed guard booth, not the main warehouse.",
+    "remoteGs": "False because a physical guard booth is present.",
+    "multipleFacilities": "Two ~1.5M-sqft warehouses (west + east) on one fenced 3.1M-sqft / 240-acre campus.",
+    "dropYard": "Massive central drop yard between the two buildings holding many hundreds of parked trailers in herringbone rows.",
+    "shipRcvSeparate": "Two distinct dock banks face the central yard (west building east wall, east building west wall) plus perimeter dock faces — physically separate clusters.",
+    "scale": "No truck scale positively identified in imagery; flagged uncertain.",
+    "railServed": "No rail spur enters the property.",
+    "drivewayLong": "Long approach road runs north from the public road into the campus before reaching the gate, with deep stacking room.",
+    "fastLaneOpportunity": "Wide multi-lane gate apron with ample paved width to add an express/bypass lane.",
+    "siteAreaAcres": "~160 ac for the fenced operational rectangle measured from the perimeter ring; full campus parcel is ~240 ac including southern graded land.",
+    "streetView": "Only public pano is a 2007 capture on the south access road predating the built facility and not showing the gate; no interior coverage. hasCoverage set false rather than invent a pano."
+  },
+  "method": "deep-audit"
+}

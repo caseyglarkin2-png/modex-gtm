@@ -1,0 +1,89 @@
+{
+  "name": "Target Regional Distribution Center Indianapolis (T0559)",
+  "type": "RDC",
+  "coords": { "lat": 39.74650, "lng": -86.29600 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 39.74875, "lng": -86.29985 },
+      { "lat": 39.74840, "lng": -86.29130 },
+      { "lat": 39.74660, "lng": -86.29070 },
+      { "lat": 39.74435, "lng": -86.29050 },
+      { "lat": 39.74455, "lng": -86.29560 },
+      { "lat": 39.74490, "lng": -86.29900 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 39.74865, "lng": -86.29775 },
+      { "lat": 39.74865, "lng": -86.29735 },
+      { "lat": 39.74820, "lng": -86.29735 },
+      { "lat": 39.74820, "lng": -86.29775 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 39.74835, "lng": -86.29900 },
+        { "lat": 39.74835, "lng": -86.29760 },
+        { "lat": 39.74470, "lng": -86.29760 },
+        { "lat": 39.74470, "lng": -86.29900 }
+      ] },
+      { "ring": [
+        { "lat": 39.74650, "lng": -86.29470 },
+        { "lat": 39.74650, "lng": -86.29130 },
+        { "lat": 39.74480, "lng": -86.29150 },
+        { "lat": 39.74470, "lng": -86.29490 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 39.74870, "lng": -86.29760 },
+        { "lat": 39.74870, "lng": -86.29200 },
+        { "lat": 39.74855, "lng": -86.29200 },
+        { "lat": 39.74855, "lng": -86.29760 }
+      ] },
+      { "ring": [
+        { "lat": 39.74840, "lng": -86.29770 },
+        { "lat": 39.74480, "lng": -86.29770 },
+        { "lat": 39.74480, "lng": -86.29750 },
+        { "lat": 39.74840, "lng": -86.29750 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 187, "pano": "", "hasCoverage": true },
+      "truckGate": { "heading": 190, "pano": "", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 180,
+    "trailersVisible": 320,
+    "trailerParkingCapacity": 450,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 72.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.7465,-86.296,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "scale", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Property is fully fenced (tall chain-link + jersey barriers, confirmed in multiple Street View frames). Sliding/swing gates cross the truck drives at the west face (pano 39.74897,-86.29739) and west yard entrance. Gated controlled access = true.",
+    "guardShack": "No standalone guard-booth structure resolved in any satellite (z20-21) or Street View frame at the truck entrances. Access appears badge/kiosk controlled. Set false; flagged uncertain.",
+    "remoteGs": "Truck gate present but no manned booth visible -> remote/kiosk check-in inferred = true.",
+    "dockDoors": "Continuous dock-door banks run the full west face and the long south face of the 1.4M sq ft building; well over 50 doors (~180 est.).",
+    "dropArea": "Massive multi-row trailer drop yards on the west and south sides, hundreds of Target-branded trailers in marked stalls -> 50+.",
+    "shipRcvSeparate": "Two distinct dock banks on different building faces (long west face and long south face) -> ship/rcv likely on separate faces.",
+    "scale": "No truck scale/weigh pad resolved at the entrances; set false.",
+    "entryExitSeparate": "Multiple separated truck access points (west drive + west-yard drive + SE circulation road) rather than one consolidated in/out gate.",
+    "siteAreaAcres": "~72 acres of fenced, paved truck-operations area from the perimeter ring (building ~1.4M sq ft plus surrounding yards); approximate."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,93 @@
+{
+  "name": "Target Import Distribution Center Lacey",
+  "type": "Import Warehouse",
+  "coords": { "lat": 47.08185, "lng": -122.77385 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 47.08318, "lng": -122.77865 },
+      { "lat": 47.08305, "lng": -122.76880 },
+      { "lat": 47.07985, "lng": -122.76865 },
+      { "lat": 47.07975, "lng": -122.77205 },
+      { "lat": 47.07980, "lng": -122.77555 },
+      { "lat": 47.07990, "lng": -122.77895 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 47.08178, "lng": -122.77855 },
+      { "lat": 47.08178, "lng": -122.77790 },
+      { "lat": 47.08128, "lng": -122.77790 },
+      { "lat": 47.08128, "lng": -122.77855 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 47.08118, "lng": -122.77810 },
+        { "lat": 47.08108, "lng": -122.76905 },
+        { "lat": 47.07995, "lng": -122.76915 },
+        { "lat": 47.08000, "lng": -122.77815 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 47.08145, "lng": -122.77815 },
+        { "lat": 47.08135, "lng": -122.76900 },
+        { "lat": 47.08118, "lng": -122.76905 },
+        { "lat": 47.08128, "lng": -122.77815 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
+      "truckGate": { "heading": 0, "pano": "", "hasCoverage": false }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 130,
+    "trailersVisible": 120,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 62.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@47.08185,-122.77385,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "postGateStaging", "fastLaneOpportunity"],
+  "fieldNotes": {
+    "truckGate": "Fully enclosed private import-DC campus. The south drop yard is reached by a single wrap-around pinch point at the building's west end (north campus drive -> around west wall -> south yard); the rest of the property is bounded by the building (N) and wooded/landscaped buffers (S, E). No public through-access. A barrier-arm/booth could not be positively resolved in satellite, but a bonded import DC of this class operates controlled truck entry - marked true at medium confidence.",
+    "guardShack": "No small staffed-booth structure (1-3 stall footprint) could be identified at any entrance pinch point in z19-z21 imagery; the only small structure near the SW gate area is yard equipment (a yellow dock ramp/container handler against the dock wall).",
+    "remoteGs": "Gate present without a visible guard booth -> implies kiosk / call-box / app check-in.",
+    "dockDoors": "Continuous dock-door run along the entire ~600 m south wall with trailers backed in across the full length; clearly 50+ (estimate ~130 doors).",
+    "dropArea": "Dozens of trailers parked in marked drop stalls without tractors across the south yard; clearly 50+.",
+    "postGateStaging": "Large paved aprons between the dock wall and the drop-yard rows provide internal queue/staging; inferred.",
+    "fastLaneOpportunity": "Very wide paved yard aprons at the west wrap-around entry leave ample room to add an express/bypass lane.",
+    "entryLanes": "Single shared wrap-around entry pinch point inferred (entry/exit together); lane counts not directly resolvable.",
+    "urbanRural": "Hawks Prairie / Lacey Gateway industrial park on the edge of Lacey, WA near I-5; large-warehouse cluster surrounded by woods, retention ponds and some residential - judged Rural per the small-town-industrial tiebreak.",
+    "siteAreaAcres": "Perimeter ring (building footprint + south drop yard) traced from z16 imagery ~ 62 acres; the building alone is the ~1.7M sq ft Target import warehouse.",
+    "buildingCount": "One contiguous import warehouse is the truck-operations facility; the adjacent warehouses N/S/E are separate properties in the same business park.",
+    "streetView": "Nearest Street View panos sit on the perimeter public roads set back behind wooded buffers (e.g. 47.0833,-122.7794 captured 2026-04); none directly faces the internal truck gate and pano_ids could not be retrieved without the Maps key, so hasCoverage is left false rather than inventing an id."
+  },
+  "method": "deep-audit"
+}

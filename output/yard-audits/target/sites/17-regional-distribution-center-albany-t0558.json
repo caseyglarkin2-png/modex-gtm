@@ -1,0 +1,86 @@
+{
+  "name": "Target Regional Distribution Center Albany (T0558)",
+  "type": "RDC",
+  "coords": { "lat": 44.580200, "lng": -123.114000 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 44.57810, "lng": -123.11700 },
+      { "lat": 44.58080, "lng": -123.11705 },
+      { "lat": 44.58235, "lng": -123.11680 },
+      { "lat": 44.58285, "lng": -123.11510 },
+      { "lat": 44.58290, "lng": -123.11185 },
+      { "lat": 44.58265, "lng": -123.11150 },
+      { "lat": 44.57955, "lng": -123.11080 },
+      { "lat": 44.57795, "lng": -123.11075 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 44.58020, "lng": -123.11100 },
+      { "lat": 44.58020, "lng": -123.11050 },
+      { "lat": 44.57940, "lng": -123.11055 },
+      { "lat": 44.57940, "lng": -123.11105 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 44.58285, "lng": -123.11510 },
+        { "lat": 44.58288, "lng": -123.11185 },
+        { "lat": 44.58095, "lng": -123.11185 },
+        { "lat": 44.58090, "lng": -123.11515 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 44.58085, "lng": -123.11650 },
+        { "lat": 44.58075, "lng": -123.11150 },
+        { "lat": 44.58040, "lng": -123.11150 },
+        { "lat": 44.58050, "lng": -123.11650 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 44.57960, "lng": -123.11100 },
+      { "lat": 44.57960, "lng": -123.11050 },
+      { "lat": 44.57870, "lng": -123.11050 },
+      { "lat": 44.57870, "lng": -123.11100 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 270, "pano": "", "hasCoverage": true },
+      "truckGate": { "heading": 290, "pano": "", "hasCoverage": false }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 320,
+    "trailerParkingCapacity": 360,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 61.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@44.580200,-123.114000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "scale", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Truck yard fully fenced (perimeter chain-link visible throughout); controlled entry funnels through a divided multi-lane private drive then a fenced checkpoint with STOP pavement markings between the public-accessible apron and the secured yard.",
+    "guardShack": "Inferred high-confidence: fully fenced secured yard + controlled checkpoint + Target hires on-site Security Specialists at this RDC (job listings). A distinct booth footprint could not be pixel-confirmed through tree/canopy cover at the gate, so flagged uncertain; Target RDCs of this scale are uniformly manned-gate operations.",
+    "preGateStaging": "Long striped apron lanes outside the yard checkpoint where trucks can queue.",
+    "postGateStaging": "Wide paved yard between the gate and the dock aprons.",
+    "dockDoors": "Long bank of dock doors with Target trailers backed in along the north face of the main building (50+); 90 is an estimate.",
+    "dropArea": "Massive multi-row trailer drop yard north of the building holding 300+ trailers; 50+ band.",
+    "scale": "No truck scale/weigh pad identified in imagery; left false.",
+    "shipRcvSeparate": "Dock doors appear concentrated on the north face; could not confirm a physically separate second dock bank, so false.",
+    "railServed": "Mainline rail runs along the east boundary outside the property but no spur enters the yard.",
+    "buildingCount": "Main DC building plus a separate fleet maintenance/wash building on the SE.",
+    "siteAreaAcres": "Derived from perimeter polygon (~61.5 acres inside the fence via shoelace)."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,88 @@
+{
+  "name": "Target Regional Distribution Center Lugoff (T0594)",
+  "type": "RDC",
+  "coords": { "lat": 34.17950, "lng": -80.67980 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 34.18210, "lng": -80.68130 },
+      { "lat": 34.18175, "lng": -80.67960 },
+      { "lat": 34.18120, "lng": -80.67840 },
+      { "lat": 34.17980, "lng": -80.67660 },
+      { "lat": 34.17700, "lng": -80.67740 },
+      { "lat": 34.17580, "lng": -80.67970 },
+      { "lat": 34.17640, "lng": -80.68230 },
+      { "lat": 34.17900, "lng": -80.68260 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 34.17790, "lng": -80.68285 },
+      { "lat": 34.17775, "lng": -80.68225 },
+      { "lat": 34.17735, "lng": -80.68240 },
+      { "lat": 34.17750, "lng": -80.68300 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 34.18120, "lng": -80.67830 },
+        { "lat": 34.18000, "lng": -80.67680 },
+        { "lat": 34.17760, "lng": -80.67790 },
+        { "lat": 34.17880, "lng": -80.67960 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 34.18030, "lng": -80.68155 },
+        { "lat": 34.17730, "lng": -80.68035 },
+        { "lat": 34.17710, "lng": -80.68080 },
+        { "lat": 34.18010, "lng": -80.68200 }
+      ] },
+      { "ring": [
+        { "lat": 34.18110, "lng": -80.67890 },
+        { "lat": 34.17890, "lng": -80.67960 },
+        { "lat": 34.17875, "lng": -80.68000 },
+        { "lat": 34.18095, "lng": -80.67930 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 17, "pano": "7r69Owm32ovhJKvwrJmvUQ", "hasCoverage": true },
+      "truckGate": { "heading": 17, "pano": "7r69Owm32ovhJKvwrJmvUQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 238,
+    "trailersVisible": 420,
+    "trailerParkingCapacity": 1200,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 68.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.17950,-80.67980,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Controlled truck entrance at the SW corner of the building: the truck driveway pinches around a guard-booth island (~34.17760,-80.68250) before fanning out to the dock apron and the east trailer yard. Single point of vehicular access to the property (all other sides are wooded buffer).",
+    "guardShack": "Small square ~1-vehicle-footprint booth visible at z20 sitting in the landscaped island where the in/out truck lanes split, beside the dock-yard entrance.",
+    "remoteGs": "False because a physical guard booth is present.",
+    "fastLaneOpportunity": "Wide paved apron at the gate split and a very wide internal truck court give ample room to add a bypass/express lane.",
+    "dockDoors": "Web sources state 238 overhead doors; satellite confirms long banks of dock doors with trailers backed in along the SW wall and the SE-facing walls. Band 50+.",
+    "dropArea": "Massive on-site trailer drop yard on the E/SE filling the apron with hundreds of parked trailers; facility designed for 1,200+ trailers. Band 50+.",
+    "entryLanes": "Single combined entry/exit drive at the gate split; lane count approximate from overhead.",
+    "exitLanes": "Same combined drive; approximate.",
+    "urbanRural": "Edge-of-town site in Lugoff SC surrounded by woods in Heritage Pointe Industrial Park, off US-1. Rural.",
+    "connectivityIssue": "Set in an industrial park near US-1 with adjacent development; cellular coverage likely adequate, so false.",
+    "postGateStaging": "Wide internal truck court between the gate and the dock doors provides inside-gate queuing room.",
+    "siteAreaAcres": "68.5 ac is the traced operational footprint (building + paved trailer yard + auto parking). County/Target sources cite a 184-ac parcel; the balance is wooded buffer outside the active fence line."
+  },
+  "method": "deep-audit"
+}

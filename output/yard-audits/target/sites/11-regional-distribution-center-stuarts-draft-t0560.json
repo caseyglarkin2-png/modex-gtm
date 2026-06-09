@@ -1,0 +1,75 @@
+{
+  "name": "Target Regional Distribution Center Stuarts Draft (T0560)",
+  "type": "RDC",
+  "coords": { "lat": 38.03055, "lng": -78.99880 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 38.03235, "lng": -79.00115 },
+      { "lat": 38.03238, "lng": -78.99520 },
+      { "lat": 38.02870, "lng": -78.99490 },
+      { "lat": 38.02855, "lng": -79.00110 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 38.02960, "lng": -78.99560 },
+      { "lat": 38.02955, "lng": -78.99490 },
+      { "lat": 38.02905, "lng": -78.99495 },
+      { "lat": 38.02910, "lng": -78.99565 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 38.02955, "lng": -79.00110 },
+        { "lat": 38.02960, "lng": -78.99655 },
+        { "lat": 38.02880, "lng": -78.99650 },
+        { "lat": 38.02875, "lng": -79.00105 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 38.02985, "lng": -79.00120 },
+        { "lat": 38.02988, "lng": -78.99625 },
+        { "lat": 38.02968, "lng": -78.99625 },
+        { "lat": 38.02965, "lng": -79.00120 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 250, "pano": "3Q-R_jUmE5xLJmHuTfNrgw", "hasCoverage": true },
+      "truckGate": { "heading": 245, "pano": "Z-gTTeWquTahLtvjgc9VhQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 140,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 260,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 53.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.03055,-78.99880,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "shipRcvSeparate", "postGateStaging"],
+  "fieldNotes": {
+    "truckGate": "Fully fenced perimeter (chain-link confirmed in multiple Street-View frames along Mount Vernon Rd). Single controlled vehicular entrance drive off Mount Vernon Rd with Target bullseye monument sign; truck route enters the secured south yard. Not an open site.",
+    "guardShack": "No staffed guard booth visible at the road entrance in satellite or Street View; entrance is a wide controlled drive without a roadside 1-3-space booth structure. Marked false at medium confidence.",
+    "remoteGs": "Gate control without a visible staffed booth at the road implies kiosk/remote/app check-in at this large RDC; set true. Medium confidence.",
+    "shipRcvSeparate": "Primary dock bank on the long south face; a second dock bank with trailers is visible on the west end face — likely separate ship/receive clusters.",
+    "fastLaneOpportunity": "Very wide entrance apron and deep drive with ample paved width to add a bypass/express lane.",
+    "postGateStaging": "Large paved yard between the fence/gate and the dock doors provides internal queuing room.",
+    "dockDoorCount": "Estimated from 1.65M sq ft footprint with dock doors on south and west faces; ~140 is an overhead estimate.",
+    "siteAreaAcres": "Traced fenced/developed footprint (~53 ac). County/news sources describe a ~110-acre parcel including grassy buffer farmland and a ~38-39-acre building pad (1.65M sq ft, completed 1996).",
+    "railServed": "No rail spur enters the property."
+  },
+  "method": "deep-audit"
+}

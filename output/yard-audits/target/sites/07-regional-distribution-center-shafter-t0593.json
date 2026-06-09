@@ -1,0 +1,80 @@
+{
+  "name": "Target Regional Distribution Center Shafter (T0593)",
+  "type": "RDC",
+  "coords": { "lat": 35.44514, "lng": -119.18478 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 35.44265, "lng": -119.18865 },
+      { "lat": 35.44775, "lng": -119.18870 },
+      { "lat": 35.44765, "lng": -119.18085 },
+      { "lat": 35.44250, "lng": -119.18090 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 35.44560, "lng": -119.18855 },
+      { "lat": 35.44520, "lng": -119.18857 },
+      { "lat": 35.44519, "lng": -119.18800 },
+      { "lat": 35.44559, "lng": -119.18798 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 35.44485, "lng": -119.18840 },
+        { "lat": 35.44770, "lng": -119.18845 },
+        { "lat": 35.44762, "lng": -119.18105 },
+        { "lat": 35.44480, "lng": -119.18100 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 35.44455, "lng": -119.18830 },
+        { "lat": 35.44485, "lng": -119.18831 },
+        { "lat": 35.44478, "lng": -119.18110 },
+        { "lat": 35.44448, "lng": -119.18109 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 95, "pano": "", "hasCoverage": true },
+      "truckGate": { "heading": 89, "pano": "", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 350,
+    "trailerParkingCapacity": 450,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 99.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.44514,-119.18478,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Closed double-leaf chain-link rolling/swing gate across the truck driveway on Zachary Ave (west frontage), lined with yellow bollards, clearly visible in Street View (captured 2026-02). Fenced perimeter throughout.",
+    "guardShack": "No compact staffed guard booth at the gate lane. The small tan/gray structure beside the gate is a louvered utility/electrical enclosure in its own fenced pen (no attendant windows/door to the lane). The larger modular building is a yard/admin office set back behind the fence, not a lane-side booth.",
+    "remoteGs": "Gate present but no guard shack -> kiosk/app/appointment-based check-in (consistent with an automated Target RDC). Medium confidence on the exact check-in mechanism.",
+    "postGateStaging": "Large open paved staging/turnaround apron inside the gate, west of the trailer rows, ample room to hold multiple trucks before the docks.",
+    "drivewayLong": "Deep paved approach from the gate into the yard can stack well beyond 3 trucks.",
+    "fastLaneOpportunity": "Very wide gate apron and open internal yard provide room for a dedicated express/bypass lane.",
+    "dockDoors": "1M sq ft RDC; continuous dock-door bank across the full north building face (trailers backed in along entire wall) plus west/south dock banks - well into 50+. Count of 120 is an overhead estimate.",
+    "dropArea": "Hundreds of Target-branded trailers parked in marked rows across the north drop yard (red bullseye logos confirmed in Street View). 50+.",
+    "dropYard": "Dedicated multi-acre trailer-storage lot filling the north of the property, separate from the dock apron.",
+    "exitLanes": "Single combined entry/exit at the one west gate; outbound lane count not separately distinguishable.",
+    "scale": "No truck scale / weigh pad observed in the truck path.",
+    "railServed": "No rail spur enters the property; surrounded by farmland on the east.",
+    "urbanRural": "Edge-of-town Shafter, surrounded by orchards/farmland in an industrial park; Rural setting.",
+    "siteAreaAcres": "Perimeter polygon ~99.7 acres, matching the documented 99-acre Target site (Walsh Group build record)."
+  },
+  "method": "deep-audit"
+}

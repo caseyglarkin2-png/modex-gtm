@@ -77,7 +77,20 @@ export default async function AccountMicrositePage({
   const tocEntries = buildTocEntries(memoSections, {
     withPreambleFor: reader ? readerFirstName : undefined,
     withAudio: true,
+    audioAfterFirst: true,
   });
+
+  const audioBrief = (
+    <MemoAudioBrief
+      src={data.audioBrief?.src ?? AUDIO_BRIEF_SRC}
+      chapters={data.audioBrief?.chapters ?? AUDIO_BRIEF_CHAPTERS}
+      heading={data.audioBrief?.heading}
+      intro={data.audioBrief?.intro}
+      accentColor={data.theme?.accentColor}
+      expectedDuration={data.audioBrief ? undefined : AUDIO_BRIEF_DURATION}
+      videoFollowUp={data.audioBrief?.videoFollowUp}
+    />
+  );
 
   return (
     <>
@@ -103,16 +116,11 @@ export default async function AccountMicrositePage({
         marginaliaItems={marginaliaItems}
       >
         {reader ? <MemoPreamble variant={reader.variant} /> : null}
-        <MemoAudioBrief
-          src={data.audioBrief?.src ?? AUDIO_BRIEF_SRC}
-          chapters={data.audioBrief?.chapters ?? AUDIO_BRIEF_CHAPTERS}
-          heading={data.audioBrief?.heading}
-          intro={data.audioBrief?.intro}
+        <MemoSectionList
+          sections={memoSections}
           accentColor={data.theme?.accentColor}
-          expectedDuration={data.audioBrief ? undefined : AUDIO_BRIEF_DURATION}
-          videoFollowUp={data.audioBrief?.videoFollowUp}
+          afterFirst={audioBrief}
         />
-        <MemoSectionList sections={memoSections} accentColor={data.theme?.accentColor} />
         <MemoSoftAction
           accountName={data.accountName}
           accountSlug={account}

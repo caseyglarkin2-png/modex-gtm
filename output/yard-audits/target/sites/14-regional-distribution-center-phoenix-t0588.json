@@ -1,0 +1,86 @@
+{
+  "name": "Target Regional Distribution Center Phoenix (T0588)",
+  "type": "RDC",
+  "coords": { "lat": 33.44760, "lng": -112.21810 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 33.45075, "lng": -112.21490 },
+      { "lat": 33.45078, "lng": -112.22225 },
+      { "lat": 33.44600, "lng": -112.22230 },
+      { "lat": 33.44578, "lng": -112.21490 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 33.45110, "lng": -112.21560 },
+      { "lat": 33.45112, "lng": -112.21480 },
+      { "lat": 33.45010, "lng": -112.21482 },
+      { "lat": 33.45008, "lng": -112.21560 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 33.45055, "lng": -112.21620 },
+        { "lat": 33.45060, "lng": -112.22210 },
+        { "lat": 33.44905, "lng": -112.22215 },
+        { "lat": 33.44900, "lng": -112.21620 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 33.44900, "lng": -112.21560 },
+        { "lat": 33.44903, "lng": -112.22215 },
+        { "lat": 33.44875, "lng": -112.22215 },
+        { "lat": 33.44872, "lng": -112.21560 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 242, "pano": "CAoSHENJQUJJaEFBM2pVM253bjZ5R2VwVDZvQURYYjM.", "hasCoverage": true },
+      "truckGate": { "heading": 178, "pano": "o3f1SoY53XDlnhpXE4iO5w", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 260,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 88.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.44760,-112.21810,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": true
+  },
+  "confidence": "high",
+  "uncertainFields": ["multiStep", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Controlled entrance at NE corner off the access road: a guard building with multiple inbound/outbound lanes (z19) plus tall steel perimeter fencing around the whole property (Street View). truckGate=true.",
+    "guardShack": "z20 shows a small standalone booth (black roof, ~1-2 stall footprint) seated between hatched lane islands with painted directional arrows in the truck driveway just inside the gate. Classic staffed guard shack. guardShack=true, so remoteGs=false.",
+    "multiStep": "Two distinct checkpoints visible: a guard building at the road entrance and a second interior booth at the truck-yard pinch-point with lane arrows. Medium confidence on the second being a separate staffed stage.",
+    "dockDoors": "Long north building face with ~90 dock positions; dozens of trailers backed in (z17 north view). 50+ band.",
+    "dropArea": "Large north drop yard with many rows of unmanned trailers parked in marked stalls; well over 50.",
+    "fastLaneOpportunity": "Wide gate apron with 2+2 lanes and ample paved width to add an express bypass.",
+    "shipRcvSeparate": "Docks appear concentrated on the north face; no clearly separate second dock bank confirmed."
+  },
+  "method": "deep-audit"
+}

@@ -8,6 +8,7 @@ import {
   collectFootnotes,
 } from '@/components/microsites/memo-section';
 import type {
+  ExecutiveBriefSection,
   ObservationSection,
   ComparableSection,
   MethodologySection,
@@ -17,6 +18,42 @@ import type {
 } from '@/lib/microsites/schema';
 
 const ynsThesis: YnsThesisSection = { type: 'yns-thesis' };
+
+const executiveBrief: ExecutiveBriefSection = {
+  type: 'executive-brief',
+  headline: 'The yard is the last system you haven’t standardized.',
+  problem: ['You digitized planning and the warehouse. The yard still runs on radios.'],
+  marketRisk: {
+    label: 'Why now',
+    headline: 'A tightening freight market punishes a slow yard.',
+    body: 'A fast yard makes you the shipper of choice and mitigates carrier-capacity risk.',
+  },
+  identity: {
+    label: 'What YardFlow is',
+    headline: 'The Yard Network System.',
+    body: 'A modern YMS that replaces legacy systems, priced to run every site.',
+    proofLinks: [
+      { label: 'Live network console', href: 'https://www.yardflow.ai/YNS/ui_kits/operator-app/' },
+      { label: 'Your network, modeled', href: '/demo/acme', note: 'your plants' },
+    ],
+  },
+  prize: {
+    label: 'The prize, sized for you',
+    headline: '$15M–$25M a year.',
+    stats: [
+      { value: '−50%', label: 'Truck turn time', context: '48 → 24 min' },
+      { value: '$1M+', label: 'Per plant, per year' },
+    ],
+    sizing: 'Applied to your plants at a conservative 50% improvement.',
+    note: 'We’ll build the exact IRR with your team.',
+  },
+  ease: {
+    label: 'Why this is a no-brainer',
+    headline: 'Start at one plant. Prove it in 60 days.',
+    body: 'You don’t rip anything out to begin.',
+    closingLine: 'That’s the brief.',
+  },
+};
 
 const observation: ObservationSection = {
   type: 'observation',
@@ -114,6 +151,56 @@ describe('MemoSectionList', () => {
   });
 });
 
+describe('MemoExecutiveBrief', () => {
+  it('renders all five beats: problem, why-now, identity, sized prize, ease', () => {
+    render(<MemoSectionList sections={[executiveBrief]} />);
+    // Problem headline (the section H2)
+    expect(screen.getByText(/last system you haven/i)).toBeDefined();
+    // Why-now / shipper-of-choice beat
+    expect(screen.getByText(/shipper of choice/i)).toBeDefined();
+    // Identity / category claim
+    expect(screen.getByText(/^The Yard Network System\.$/)).toBeDefined();
+    // Sized prize — stat values render
+    expect(screen.getByText('−50%')).toBeDefined();
+    expect(screen.getByText('$15M–$25M a year.')).toBeDefined();
+    // Ease close
+    expect(screen.getByText(/That’s the brief\./)).toBeDefined();
+  });
+
+  it('renders product proof links to the live app and the account demo', () => {
+    render(<MemoSectionList sections={[executiveBrief]} />);
+    const console = screen.getByText('Live network console').closest('a');
+    expect(console?.getAttribute('href')).toBe('https://www.yardflow.ai/YNS/ui_kits/operator-app/');
+    expect(console?.getAttribute('target')).toBe('_blank');
+    const demo = screen.getByText('Your network, modeled').closest('a');
+    expect(demo?.getAttribute('href')).toBe('/demo/acme');
+    // Internal links don't open a new tab.
+    expect(demo?.getAttribute('target')).toBeNull();
+  });
+
+  it('leads the memo as §01 when placed first', () => {
+    const entries = buildTocEntries([executiveBrief, ynsThesis, observation]);
+    expect(entries[0]).toEqual(expect.objectContaining({ num: '§01', label: 'The brief' }));
+  });
+
+  it('renders the afterFirst slot (audio/video) immediately below §01, not above it', () => {
+    const { container } = render(
+      <MemoSectionList
+        sections={[executiveBrief, observation]}
+        afterFirst={<div data-testid="audio-slot">listen</div>}
+      />,
+    );
+    const html = container.innerHTML;
+    const briefIdx = html.indexOf('last system you haven');
+    const slotIdx = html.indexOf('audio-slot');
+    const obsIdx = html.indexOf('What we observed about your network');
+    // Order in the DOM: brief → audio slot → §02 observation.
+    expect(briefIdx).toBeGreaterThanOrEqual(0);
+    expect(slotIdx).toBeGreaterThan(briefIdx);
+    expect(obsIdx).toBeGreaterThan(slotIdx);
+  });
+});
+
 describe('MemoFootnotes', () => {
   it('renders the Sources block when sections carry footnotes', () => {
     render(<MemoFootnotes sections={[observation]} />);
@@ -154,6 +241,17 @@ describe('buildTocEntries', () => {
     const entries = buildTocEntries([ynsThesis], { withPreambleFor: undefined });
     expect(entries).toHaveLength(1);
     expect(entries[0].num).toBe('§01');
+  });
+
+  it('places the audio entry after §01 when audioAfterFirst is set', () => {
+    const entries = buildTocEntries([executiveBrief, observation], {
+      withAudio: true,
+      audioAfterFirst: true,
+    });
+    // §01 brief, then ▷ audio, then §02 observation.
+    expect(entries[0].num).toBe('§01');
+    expect(entries[1].num).toBe('▷');
+    expect(entries[2].num).toBe('§02');
   });
 
   it('inserts an "Audio brief" entry marked ▷ before §01 when withAudio is true', () => {

@@ -1,0 +1,94 @@
+{
+  "name": "Target Regional Distribution Center Galesburg (T0587)",
+  "type": "RDC",
+  "coords": { "lat": 42.27620, "lng": -85.38230 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 42.27905, "lng": -85.38255 },
+      { "lat": 42.27890, "lng": -85.37945 },
+      { "lat": 42.27845, "lng": -85.37925 },
+      { "lat": 42.27575, "lng": -85.37930 },
+      { "lat": 42.27465, "lng": -85.37965 },
+      { "lat": 42.27435, "lng": -85.38120 },
+      { "lat": 42.27440, "lng": -85.38470 },
+      { "lat": 42.27640, "lng": -85.38475 },
+      { "lat": 42.27855, "lng": -85.38455 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 42.27540, "lng": -85.37915 },
+      { "lat": 42.27535, "lng": -85.37875 },
+      { "lat": 42.27500, "lng": -85.37880 },
+      { "lat": 42.27505, "lng": -85.37920 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 42.27895, "lng": -85.38255 },
+        { "lat": 42.27880, "lng": -85.38055 },
+        { "lat": 42.27815, "lng": -85.38060 },
+        { "lat": 42.27830, "lng": -85.38260 }
+      ] },
+      { "ring": [
+        { "lat": 42.27815, "lng": -85.38400 },
+        { "lat": 42.27810, "lng": -85.38280 },
+        { "lat": 42.27740, "lng": -85.38285 },
+        { "lat": 42.27745, "lng": -85.38405 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 42.27800, "lng": -85.38440 },
+        { "lat": 42.27815, "lng": -85.38040 },
+        { "lat": 42.27775, "lng": -85.38035 },
+        { "lat": 42.27760, "lng": -85.38435 }
+      ] },
+      { "ring": [
+        { "lat": 42.27840, "lng": -85.37935 },
+        { "lat": 42.27580, "lng": -85.37950 },
+        { "lat": 42.27575, "lng": -85.37995 },
+        { "lat": 42.27840, "lng": -85.37980 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 340, "pano": "", "hasCoverage": true },
+      "truckGate": { "heading": 320, "pano": "", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 75,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 92.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.27620,-85.38230,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Single controlled truck route into the yard: the wide divided entrance drive off E L Ave leads ~250 ft north to a guard booth in the median where the perimeter road pinches into the trailer/dock yard. Confirmed via z18-z20 satellite + Street View of the entrance.",
+    "guardShack": "Small standalone ~25-30 ft white gatehouse with paved pad/sidewalk and apron connecting to the perimeter road, sitting in the grass median at the SE entry to the trailer-yard perimeter road (42.2752,-85.3789). Clear single-structure booth, not the main building.",
+    "remoteGs": "False because a physical guard booth is present.",
+    "backupSensitive": "False: very deep landscaped entrance apron off a low-traffic rural road provides ample stacking before the gate.",
+    "fastLaneOpportunity": "Wide divided concrete entrance apron with unused paved width and a long approach; room to add an express lane.",
+    "dockDoors": "Continuous dock-door bank with 40-50 trailers backed in along the north face plus a ~20-door east-face bank; total well into 50+.",
+    "dropArea": "Large L-shaped trailer parking field on the NW/N holding 60+ trailers without tractors = 50+ band; dedicated drop yard present.",
+    "shipRcvSeparate": "Two distinct dock banks on different building faces (north and east) suggest separated ship/receive, though door function not directly confirmable from imagery.",
+    "siteAreaAcres": "Estimated from perimeter polygon (~92 acres of fenced/maintained property).",
+    "buildingCount": "Main DC plus a separate office/support building ~600m SE on the same parcel frontage; campus character is minor so multipleFacilities left false.",
+    "railServed": "No rail spur enters the property; nearest rail is the I-94 corridor, not a siding."
+  },
+  "method": "deep-audit"
+}
