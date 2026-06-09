@@ -1,0 +1,101 @@
+{
+  "name": "Stop & Shop Fresh DC Schodack Landing NY (ADUSA DC02)",
+  "type": "Fresh DC",
+  "coords": { "lat": 42.49530, "lng": -73.66950 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 42.49755, "lng": -73.67295 },
+      { "lat": 42.49785, "lng": -73.66880 },
+      { "lat": 42.49670, "lng": -73.66700 },
+      { "lat": 42.49380, "lng": -73.66760 },
+      { "lat": 42.49300, "lng": -73.66890 },
+      { "lat": 42.49380, "lng": -73.67140 },
+      { "lat": 42.49600, "lng": -73.67250 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 42.49735, "lng": -73.67270 },
+      { "lat": 42.49720, "lng": -73.67215 },
+      { "lat": 42.49685, "lng": -73.67235 },
+      { "lat": 42.49700, "lng": -73.67290 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 42.49490, "lng": -73.66830 },
+        { "lat": 42.49430, "lng": -73.66700 },
+        { "lat": 42.49330, "lng": -73.66760 },
+        { "lat": 42.49390, "lng": -73.66895 }
+      ] },
+      { "ring": [
+        { "lat": 42.49690, "lng": -73.66790 },
+        { "lat": 42.49640, "lng": -73.66700 },
+        { "lat": 42.49560, "lng": -73.66745 },
+        { "lat": 42.49610, "lng": -73.66840 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 42.49720, "lng": -73.66835 },
+        { "lat": 42.49710, "lng": -73.66810 },
+        { "lat": 42.49490, "lng": -73.66930 },
+        { "lat": 42.49500, "lng": -73.66958 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 159, "pano": "XgRDyOPCKP-gb1CSsQz2EA", "hasCoverage": true },
+      "truckGate": { "heading": 108, "pano": "OKN39rLh2ODGor9noaGf6Q", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 130,
+    "trailerParkingCapacity": 180,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 46.4,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.49530,-73.66950,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["truckGate", "guardShack", "connectivityIssue"],
+  "fieldNotes": {
+    "truckGate": "Entrance road off NY Route 9 is an open driveway. Street View (2025-08) at the road mouth shows an ADUSA monument sign, guardrail, and chain-link perimeter fencing flanking the drive, but NO barrier arm, sliding gate, or staffed checkpoint across the truck lane at the public road. Street View does not penetrate past the entrance approach onto the private yard, and no gate or booth structure is visible in zoom-19/20 satellite at the office-to-yard transition or on the perimeter service drive. Classed open; flagged uncertain because a movable gate deep in the yard cannot be fully ruled out from above.",
+    "guardShack": "No 1-3-vehicle-footprint booth visible at the entrance, at the office/yard transition, or on the perimeter loop in zoom-19/20 satellite or in Street View. A small structure first suspected near the road fork resolved to tree shadow on closer zoom.",
+    "postGateStaging": "Large paved aprons and internal drives inside the property line provide ample queue/holding room before the dock face.",
+    "drivewayLong": "Long internal approach from the Route 9 entrance through the office area to the dock yard easily holds a 3+ truck queue.",
+    "entryLanes": "Open multi-lane apron at the entrance fork; lane count estimated, not striped-confirmed (counted 2).",
+    "fastLaneOpportunity": "Wide unmarked entrance apron and open internal drives leave physical room to add a bypass/express lane.",
+    "dockDoors": "Continuous dock-door rhythm with trailers backed in runs the full length of the building complex's east/southeast face (300m+); estimated ~90 doors, well into the 50+ band.",
+    "dropArea": "Dedicated multi-row drop yards: a 3-row trailer-storage lot to the southeast plus trailer rows east of the building and along the west edge; ~130 trailers visible, capacity ~180. Far into 50+ band.",
+    "multipleFacilities": "Campus: main L-shaped/stepped DC plus attached north warehouse sections, a separate satellite building with its own docks to the south, and office/maintenance buildings on the west.",
+    "buildingCount": "Counted 4 distinct building footprints (main DC, attached north section reads as part of main, south satellite dock building, west office/maintenance).",
+    "railServed": "No rail spur enters the property; nearest tracks not adjacent.",
+    "connectivityIssue": "Rural wooded setting on the edge of a small hamlet (Schodack Landing) along Route 9; some adjacent industrial/commercial development on Route 9, so cellular is likely adequate. Marked false but low confidence.",
+    "siteAreaAcres": "Derived from the traced perimeter ring (~46 acres of active fenced/paved campus); excludes the cleared scrub land east of the wood line."
+  },
+  "method": "deep-audit"
+}

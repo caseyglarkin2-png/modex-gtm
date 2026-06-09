@@ -1,0 +1,203 @@
+{
+  "name": "Stop & Shop Grocery Distribution Center Bethlehem PA",
+  "type": "Grocery Distribution Center",
+  "coords": {
+    "lat": 40.686742,
+    "lng": -75.369157
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.690603,
+          "lng": -75.372539
+        },
+        {
+          "lat": 40.690638,
+          "lng": -75.367458
+        },
+        {
+          "lat": 40.689649,
+          "lng": -75.367
+        },
+        {
+          "lat": 40.689649,
+          "lng": -75.365283
+        },
+        {
+          "lat": 40.687479,
+          "lng": -75.364025
+        },
+        {
+          "lat": 40.686959,
+          "lng": -75.363841
+        },
+        {
+          "lat": 40.685744,
+          "lng": -75.365856
+        },
+        {
+          "lat": 40.684008,
+          "lng": -75.371692
+        },
+        {
+          "lat": 40.685223,
+          "lng": -75.37318
+        },
+        {
+          "lat": 40.688,
+          "lng": -75.373134
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.687688,
+          "lng": -75.364368
+        },
+        {
+          "lat": 40.687479,
+          "lng": -75.363681
+        },
+        {
+          "lat": 40.686959,
+          "lng": -75.364025
+        },
+        {
+          "lat": 40.687167,
+          "lng": -75.364711
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 40.690603,
+            "lng": -75.372493
+          },
+          {
+            "lat": 40.690603,
+            "lng": -75.367687
+          },
+          {
+            "lat": 40.689649,
+            "lng": -75.367229
+          },
+          {
+            "lat": 40.689302,
+            "lng": -75.370433
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 40.686126,
+            "lng": -75.373363
+          },
+          {
+            "lat": 40.689076,
+            "lng": -75.365627
+          },
+          {
+            "lat": 40.688729,
+            "lng": -75.365352
+          },
+          {
+            "lat": 40.685779,
+            "lng": -75.372951
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.684911,
+            "lng": -75.372493
+          },
+          {
+            "lat": 40.687826,
+            "lng": -75.364826
+          },
+          {
+            "lat": 40.687479,
+            "lng": -75.364528
+          },
+          {
+            "lat": 40.684564,
+            "lng": -75.37215
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 337,
+        "pano": "itriHdfD9lzm2y62ZFpYTA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 342,
+        "pano": "qJlF9ElT_txQpyLddDEF6Q",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 140,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 220,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 104.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.686742,-75.369157,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "postGateStaging",
+    "shipRcvSeparate"
+  ],
+  "fieldNotes": {
+    "truckGate": "No barrier arm, sliding/swing gate, or checkpoint at the public road. Access is via open, signalized intersections off Hanoverville Rd into a shared business-park road network; the building's truck courts open directly off the internal road. Street View from Hanoverville Rd (pano 2024-07) shows only a deep grassed/treed buffer and monument sign, no gate.",
+    "guardShack": "No staffed booth found at any access point across satellite z18-z20 and multiple Street View headings. The only small structure near the south frontage is a private residence (house with pool) on the far side of Hanoverville Rd.",
+    "postGateStaging": "Marked true on the strength of the very large internal paved truck courts on both long faces where trucks queue before backing to docks; there is no gate so this is internal staging, not a gated holding pad (hence listed uncertain).",
+    "shipRcvSeparate": "Two distinct dock banks on opposing building faces (NW and SE long walls), consistent with separate shipping vs receiving operations at a high-throughput grocery DC; inferred from layout, listed uncertain.",
+    "dockDoors": "Continuous dock-door banks with trailers backed in along both the NW and SE long walls; well over 100 doors total for a ~1.2-1.3M sq ft DC. Count is an honest overhead estimate.",
+    "dropArea": "Large dedicated trailer drop yard NW of the building with dense rows of parked trailers (100+ visible), plus additional staged trailers along the apron.",
+    "dropYard": "Dedicated trailer-storage lot on the NW side, separate from active dock staging.",
+    "railServed": "Rail line and a tank/silo complex sit north of the property, but the spur serves that separate northern facility, not the 4820 building; no rail enters this property.",
+    "urbanRural": "Lower Nazareth Township, edge-of-town setting surrounded by farm fields despite being in a warehouse park; per rubric (small-town industrial vs Urban) classified Rural.",
+    "siteAreaAcres": "Derived from the traced perimeter polygon (~104 acres); building footprint alone ~31 acres (~1.3M sq ft, consistent with published figure)."
+  },
+  "method": "deep-audit"
+}

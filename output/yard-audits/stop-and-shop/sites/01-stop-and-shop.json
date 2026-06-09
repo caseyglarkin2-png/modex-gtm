@@ -1,0 +1,114 @@
+{
+  "name": "Stop & Shop Grocery Distribution Center Freetown MA",
+  "type": "Grocery Distribution Center",
+  "coords": { "lat": 41.7798, "lng": -71.0945 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 41.78140, "lng": -71.09650 },
+      { "lat": 41.78080, "lng": -71.09250 },
+      { "lat": 41.78010, "lng": -71.09080 },
+      { "lat": 41.77880, "lng": -71.09080 },
+      { "lat": 41.77800, "lng": -71.09180 },
+      { "lat": 41.77735, "lng": -71.09430 },
+      { "lat": 41.77850, "lng": -71.09640 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 41.77945, "lng": -71.09270 },
+      { "lat": 41.77930, "lng": -71.09210 },
+      { "lat": 41.77895, "lng": -71.09225 },
+      { "lat": 41.77910, "lng": -71.09285 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 41.78010, "lng": -71.09230 },
+        { "lat": 41.77955, "lng": -71.09095 },
+        { "lat": 41.77855, "lng": -71.09140 },
+        { "lat": 41.77905, "lng": -71.09280 }
+      ] },
+      { "ring": [
+        { "lat": 41.77855, "lng": -71.09140 },
+        { "lat": 41.77800, "lng": -71.09185 },
+        { "lat": 41.77745, "lng": -71.09330 },
+        { "lat": 41.77800, "lng": -71.09360 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 41.78020, "lng": -71.09380 },
+        { "lat": 41.77800, "lng": -71.09530 },
+        { "lat": 41.77775, "lng": -71.09490 },
+        { "lat": 41.77995, "lng": -71.09340 }
+      ] },
+      { "ring": [
+        { "lat": 41.78050, "lng": -71.09290 },
+        { "lat": 41.77820, "lng": -71.09155 },
+        { "lat": 41.77800, "lng": -71.09195 },
+        { "lat": 41.78030, "lng": -71.09330 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 41.77930, "lng": -71.09330 },
+      { "lat": 41.77895, "lng": -71.09255 },
+      { "lat": 41.77855, "lng": -71.09275 },
+      { "lat": 41.77890, "lng": -71.09350 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
+      "truckGate": { "heading": 283, "pano": "9vK0XofNciTX-CyslbAdOg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 260,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 38.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.7798,-71.0945,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["exitLanes", "scale", "shipRcvSeparate"],
+  "fieldNotes": {
+    "campusSplit": "Freetown ADUSA/Stop & Shop campus holds two abutting buildings: the center/NW building is the Fresh (perishable) DC (covered by a sister agent) and the larger SE building is the audited Grocery (dry) DC, ~1.1M sq ft, opened 2004. The two share one fenced footprint and one guarded truck entrance; this audit scopes the grocery building, its dock faces, and the drop yards serving it.",
+    "truckGate": "Confirmed in Street View (pano 9vK0XofNciTX-CyslbAdOg, captured 2023-07): a staffed guard booth on a center island with barrier arm(s) across the truck lanes, lane markings, cones and red checkpoint signage where the campus access drive meets the public approach.",
+    "guardShack": "Small multi-window staffed booth on the gate island, ~1-vehicle footprint, set beside the lanes - classic guard shack, not the main building.",
+    "remoteGs": "False - a staffed booth is present, so this is not a kiosk/remote check-in gate.",
+    "entryLanes": "Approximately 2 inbound lanes plus a separate outbound lane split around the booth island; exact split slightly obscured, exitLanes estimated.",
+    "fastLaneOpportunity": "Wide gate apron with multiple lanes and unused paved width past the booth gives room for an express/bypass lane.",
+    "dockDoors": "50+ band - high confidence. Long dock faces with continuous trailer rows on both the SW and NE building faces of a 1.1M sq ft DC; door count well into the hundreds across the building, estimate ~120 attributable to the grocery building.",
+    "dropArea": "50+ band - extensive drop/trailer-storage rows fill the NE and SE yards; many trailers parked bobtail without tractors.",
+    "shipRcvSeparate": "Likely - distinct dock banks on opposite (SW vs NE) building faces; medium confidence on whether they are formally split ship vs receive.",
+    "scale": "No clear truck scale/weigh pad identified in the imagery; the gate complex is a booth + barrier only.",
+    "multiStep": "Single checkpoint (the guarded gate); no clearly visible second booth/scale stage before the docks.",
+    "urbanRural": "Edge-of-town/rural setting - the DC sits among woods, a pond, fields and scattered residences off South Main St in Assonet/Freetown, not dense metro fabric.",
+    "connectivityIssue": "Set false - rural but within a developed corridor near Rt 24/Fall River; cellular coverage likely adequate.",
+    "trailerCounts": "trailersVisible/capacity are honest overhead estimates from the 2026 Airbus/Maxar imagery; dock-line and drop-yard rows counted by band, not exact.",
+    "perimeter": "Oriented polygon traced to the tree/fence line around the grocery building and its NE/SE drop yards; the long axis runs NW-SE (building rotated ~30-40 deg off north). ~38.7 acres for the grocery portion of the shared campus."
+  },
+  "method": "deep-audit"
+}

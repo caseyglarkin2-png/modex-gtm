@@ -1,0 +1,131 @@
+{
+  "name": "Stop & Shop Cross-Dock Chester NY",
+  "type": "Cross-Dock",
+  "coords": {
+    "lat": 41.34525,
+    "lng": -74.28625
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        { "lat": 41.34735, "lng": -74.28825 },
+        { "lat": 41.3476, "lng": -74.2832 },
+        { "lat": 41.3447, "lng": -74.2825 },
+        { "lat": 41.3438, "lng": -74.2841 },
+        { "lat": 41.34395, "lng": -74.28805 }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        { "lat": 41.34745, "lng": -74.28595 },
+        { "lat": 41.34745, "lng": -74.28525 },
+        { "lat": 41.34705, "lng": -74.28525 },
+        { "lat": 41.34705, "lng": -74.28595 }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          { "lat": 41.34655, "lng": -74.28475 },
+          { "lat": 41.3463, "lng": -74.28285 },
+          { "lat": 41.34445, "lng": -74.28315 },
+          { "lat": 41.34465, "lng": -74.28505 }
+        ]
+      },
+      {
+        "ring": [
+          { "lat": 41.34415, "lng": -74.28785 },
+          { "lat": 41.3441, "lng": -74.28525 },
+          { "lat": 41.34385, "lng": -74.28525 },
+          { "lat": 41.3439, "lng": -74.28785 }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          { "lat": 41.34455, "lng": -74.28805 },
+          { "lat": 41.3445, "lng": -74.28515 },
+          { "lat": 41.34435, "lng": -74.28515 },
+          { "lat": 41.3444, "lng": -74.28805 }
+        ]
+      },
+      {
+        "ring": [
+          { "lat": 41.34595, "lng": -74.28805 },
+          { "lat": 41.34595, "lng": -74.28785 },
+          { "lat": 41.34465, "lng": -74.28785 },
+          { "lat": 41.34465, "lng": -74.28805 }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 326, "pano": "qcM5cMJnu1xXQKJwb0DOYg", "hasCoverage": true },
+      "truckGate": { "heading": 157, "pano": "dnFXL_hH9MtzIqX-ljFXew", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 95,
+    "trailersVisible": 280,
+    "trailerParkingCapacity": 350,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 43.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.34525,-74.28625,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "truckGate",
+    "shipRcvSeparate"
+  ],
+  "fieldNotes": {
+    "truckGate": "Property is fully fenced (chain-link confirmed along the south dock face and the Elizabeth Drive frontage in multiple Street View frames). Truck flow is consolidated onto a perimeter ring road that breaks the fence at a single paved apron on the north frontage off Elizabeth Drive. Controlled access is strongly implied for a fenced ~600K sq ft cold-chain DC, but the private ring road has no Street View coverage and the public-road panos are set back across a wide lawn, so a barrier arm could not be directly resolved. Called true on the fenced perimeter + single consolidated access point.",
+    "guardShack": "No guard-booth structure resolvable at the entrance throat in satellite z20-z21; the north entry area reads as office + employee/visitor parking. Likely kiosk / app check-in for an automated cold-chain DC. Low confidence.",
+    "remoteGs": "Set true because truckGate=true and no guard shack was visible; consistent with kiosk/call-box/app check-in. Pairs with guardShack uncertainty.",
+    "dockDoors": "Long continuous dock banks on the south face (trailers backed in end-to-end, SV-b) and a second bank on the north/interior face; web release states ~100 dock doors. Counted band 50+.",
+    "dropArea": "Extensive trailer drop yard on the east side (rows of unhitched trailers, ss07_dc_z18 / ss07_east_z18) plus a south overflow row; web release states 350+ trailer spots. Band 50+.",
+    "trailersVisible": "Estimate ~280 trailers visible across the east drop yard, south dock line, and NW lot in the captured imagery; honest overhead estimate.",
+    "trailerParkingCapacity": "ADUSA/C&S release states yard has 350+ trailer spots; used as capacity.",
+    "dockDoorCount": "~95 doors; corroborated by the 'nearly 100 dock doors' figure in the ADUSA Aug-2023 release.",
+    "entryLanes": "Wide paved entrance apron; estimated 2 inbound lanes, low confidence (no ground view of the throat).",
+    "exitLanes": "Estimated 1 outbound; low confidence.",
+    "fastLaneOpportunity": "Very wide gate apron and large open paved frontage off Elizabeth Drive give ample room to add an express/bypass lane.",
+    "drivewayLong": "Deep approach from the Elizabeth Drive fence break to the dock faces; can hold 3+ trucks.",
+    "postGateStaging": "Large interior paved yard between the gate apron and the dock faces serves as inside staging.",
+    "railServed": "A rail line runs along the east property edge (ss07_east_z18) but no spur enters the property; not rail-served.",
+    "shipRcvSeparate": "As a cross-dock both inbound and outbound move through the same dock banks; no clearly separate ship vs receive cluster. Low confidence.",
+    "urbanRural": "Edge-of-town industrial park outside the village of Chester, NY, surrounded by open land, wetlands, and a quarry; judged Rural per rubric.",
+    "siteAreaAcres": "~43 acres from the traced perimeter polygon (building + east drop yard + south yard inside the fence)."
+  },
+  "method": "deep-audit"
+}

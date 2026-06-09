@@ -1,0 +1,120 @@
+{
+  "name": "Stop & Shop Frozen DC Plainville CT",
+  "type": "Frozen DC",
+  "coords": {
+    "lat": 41.69255,
+    "lng": -72.85825
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        { "lat": 41.69432, "lng": -72.86012 },
+        { "lat": 41.69333, "lng": -72.85628 },
+        { "lat": 41.69178, "lng": -72.85708 },
+        { "lat": 41.69128, "lng": -72.85878 },
+        { "lat": 41.69262, "lng": -72.86058 }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        { "lat": 41.69318, "lng": -72.85698 },
+        { "lat": 41.69300, "lng": -72.85648 },
+        { "lat": 41.69262, "lng": -72.85672 },
+        { "lat": 41.69280, "lng": -72.85722 }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          { "lat": 41.69408, "lng": -72.85988 },
+          { "lat": 41.69342, "lng": -72.85738 },
+          { "lat": 41.69288, "lng": -72.85768 },
+          { "lat": 41.69354, "lng": -72.86018 }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          { "lat": 41.69330, "lng": -72.85918 },
+          { "lat": 41.69262, "lng": -72.85740 },
+          { "lat": 41.69238, "lng": -72.85758 },
+          { "lat": 41.69306, "lng": -72.85936 }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 160,
+        "pano": "A63EADtHJMJrj0mxfRx3mQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 210,
+        "pano": "10-P9heB94U13HZVtUXi6g",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 32,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 23.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.69255,-72.85825,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "scale"
+  ],
+  "fieldNotes": {
+    "site": "Positively identified as the Americold automated frozen warehouse at 24 Northwest Drive, Plainville CT (Ahold Delhaize / ADUSA Supply Chain, serving Stop & Shop and Hannaford). Street View shows the AMERICOLD logo and a '24' address marker on the tall building. ~130 ft tall, 230K+ sq ft, fully automated case-pick frozen DC; the tall ASRS high-bay casts the large shadow seen in satellite.",
+    "truckGate": "Whole property is enclosed by continuous chain-link perimeter fence confirmed in Street View along the entire Northwest Drive frontage (employee-parking side, drop-yard side, and east elevation). Main truck/visitor entrance is a divided in/out road around a landscaped median at the SE/east end of the property where the access drive meets Northwest Drive (~41.6929,-72.8567). Controlled, fenced entry.",
+    "guardShack": "Americold staffs a dedicated 'Gate Guard' role at this site (job posting: opens gates for truckers, checks credentials / approved roster before admitting through gates). The Street View car never enters the private divided drive, so the booth structure is not directly resolved in imagery; booth is inside the entrance throat. Guarded entry called true on operational + geometric evidence; flagged uncertain because the booth itself is not pixel-confirmed.",
+    "remoteGs": "False because a staffed gate guard is present (not a kiosk/app-only check-in).",
+    "postGateStaging": "Large paved yard between the gate and the dock face on the west/drop-yard side gives ample inside-the-fence holding room before docks.",
+    "drivewayLong": "Deep approach: the divided access drive plus the long internal perimeter road and large yard easily hold 3+ trucks between road and docks.",
+    "entryExitSeparate": "Entrance is a divided road split around a center median (separate in and out lanes at the same property-line point); counted as entry/exit separate with 1 lane each.",
+    "dockDoors": "Dock bank runs along the SW/west wall of the building; counted roughly 30-35 doors with multiple trailers backed in (z19 west-dock imagery). Banded 25-50.",
+    "dropArea": "Large drop yard NW of the building full of parked trailers in long diagonal rows; ~70 trailers visible across the yard, capacity ~110. Banded 50+ for parked drop trailers.",
+    "dropYard": "Dedicated trailer-storage drop yard NW of the building, distinct from the active dock apron.",
+    "trailersVisible": "Honest overhead estimate (~70) across the drop yard and dock face; counts vary by imagery date.",
+    "siteAreaAcres": "~23 acres derived from the traced perimeter (building footprint + drop yard + parking + perimeter drive); compact single-building cold-storage site.",
+    "railServed": "No rail spur enters the property; nearest rail line runs past the area but does not serve the facility.",
+    "urbanRural": "Edge-of-town industrial park in Plainville CT bordered by woods/wetland to the E and S; judged Rural per the small-town tie-breaker.",
+    "scale": "No truck scale resolved in the imagery; flagged uncertain (could exist on the private drive not covered by Street View).",
+    "multipleFacilities": "Single Americold building; the gray-roof building and office north of Northwest Drive are separate properties, not part of this campus."
+  },
+  "method": "deep-audit"
+}

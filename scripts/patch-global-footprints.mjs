@@ -118,6 +118,12 @@ const PATCHES = {
     global: null,
     note: "Sam's Club runs a lean US network of ~12 distribution and fulfillment centers (several 3PL-operated by Saddle Creek / Prologis) feeding ~600 clubs. We audited 10 representative facilities.",
   },
+  'stop-and-shop': {
+    scope: 'US',
+    inScope: 8,
+    global: null,
+    note: 'Stop & Shop is supplied by ADUSA Supply Chain (Ahold Delhaize) out of ~8 Northeast DCs. We audited 7 ADUSA DCs serving Stop & Shop across MA, CT, NY, and PA.',
+  },
   crowley: {
     scope: 'US',
     inScope: 40,

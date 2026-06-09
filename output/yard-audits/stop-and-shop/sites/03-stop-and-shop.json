@@ -1,0 +1,98 @@
+{
+  "name": "Stop & Shop Grocery Distribution Center Manchester CT",
+  "type": "Grocery Distribution Center",
+  "coords": { "lat": 41.79950, "lng": -72.56450 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 41.80190, "lng": -72.56720 },
+      { "lat": 41.80235, "lng": -72.56260 },
+      { "lat": 41.80090, "lng": -72.55980 },
+      { "lat": 41.79780, "lng": -72.56020 },
+      { "lat": 41.79565, "lng": -72.56185 },
+      { "lat": 41.79555, "lng": -72.56430 },
+      { "lat": 41.79650, "lng": -72.56600 },
+      { "lat": 41.79900, "lng": -72.56740 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 41.80330, "lng": -72.56185 },
+      { "lat": 41.80315, "lng": -72.56135 },
+      { "lat": 41.80265, "lng": -72.56160 },
+      { "lat": 41.80280, "lng": -72.56210 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 41.79770, "lng": -72.56470 },
+        { "lat": 41.79740, "lng": -72.56230 },
+        { "lat": 41.79615, "lng": -72.56270 },
+        { "lat": 41.79640, "lng": -72.56520 }
+      ] },
+      { "ring": [
+        { "lat": 41.80265, "lng": -72.56185 },
+        { "lat": 41.80250, "lng": -72.55995 },
+        { "lat": 41.80130, "lng": -72.56025 },
+        { "lat": 41.80145, "lng": -72.56215 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 41.79735, "lng": -72.56305 },
+        { "lat": 41.79710, "lng": -72.56120 },
+        { "lat": 41.79665, "lng": -72.56135 },
+        { "lat": 41.79690, "lng": -72.56320 }
+      ] },
+      { "ring": [
+        { "lat": 41.80210, "lng": -72.56430 },
+        { "lat": 41.80195, "lng": -72.56270 },
+        { "lat": 41.80150, "lng": -72.56285 },
+        { "lat": 41.80165, "lng": -72.56445 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 327, "pano": "Sa8fi6hCRwwRNpUm5P74OQ", "hasCoverage": true },
+      "truckGate": { "heading": 113, "pano": "2apIDFN15pFRgnMZk3JXLg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 170,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 93.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.79950,-72.56450,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["remoteGs", "entryLanes", "exitLanes", "siteAreaAcres", "dockDoorCount", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Chain-link sliding gates across the fenced truck/trailer yards (Street View pano 2apIDFN15pFRgnMZk3JXLg, 2023-11, shows a rolling gate over a tractor/trailer yard) plus continuous perimeter fence. The public-road mouth at Tolland Turnpike is open; control is at the fenced yard gates.",
+    "guardShack": "No staffed booth visible at the property entrance or at any fenced yard gate in Street View or satellite. Gates are plain rolling chain-link.",
+    "remoteGs": "Gate present, no guard shack -> badge/kiosk/app check-in implied. Medium confidence.",
+    "postGateStaging": "Wide paved aprons and internal ring road inside the fence line give ample queue room before the dock faces.",
+    "drivewayLong": "Long private entrance drive sets the property well back from Tolland Turnpike (~250 m), holding 3+ trucks.",
+    "entryExitTogether": "Single principal entrance drive off Tolland Turnpike serves both directions.",
+    "entryLanes": "Estimated from drive width at the public-road intersection; ~2 lanes each way. Low confidence.",
+    "fastLaneOpportunity": "Very wide internal aprons and multiple gate openings leave room for an express/bypass lane.",
+    "dockDoors": "Counted dock-door rhythm + backed trailers along south and north building faces; well over 50 across the site. dockDoorCount ~170 is an overhead estimate.",
+    "dropArea": "Multiple large lots of parked trailers without tractors (south drop yard and north/east fenced lots); 50+.",
+    "shipRcvSeparate": "Distinct dock banks on separate building faces (long south face and north face), consistent with split ship/receive; medium confidence given multi-tenant building.",
+    "urbanRural": "Suburban Hartford metro fabric: adjacent retail center, dense residential to NW, at the I-84/I-291 crossroads. Urban.",
+    "multipleFacilities": "Single very large building (1.97M sq ft, multi-tenant: ADUSA/Stop & Shop, Amazon, J.C. Penney) - one structure, not a campus of separate buildings.",
+    "dropYard": "Dedicated fenced trailer-storage lots distinct from active dock staging.",
+    "railServed": "Rail line runs along the I-84 corridor on the south/east edge but does not spur into the property.",
+    "siteAreaAcres": "Perimeter polygon computes to ~93 acres (the developed operating envelope: building plus all parking, drop yards and fenced buffer); the full parcel is ~162 acres including undeveloped woods per the Winstanley listing."
+  },
+  "method": "deep-audit"
+}

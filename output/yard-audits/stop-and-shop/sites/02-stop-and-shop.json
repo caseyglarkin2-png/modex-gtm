@@ -1,0 +1,108 @@
+{
+  "name": "Stop & Shop Fresh DC Freetown MA",
+  "type": "Fresh DC",
+  "coords": { "lat": 41.77930, "lng": -71.09380 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 41.78075, "lng": -71.09600 },
+      { "lat": 41.78010, "lng": -71.09420 },
+      { "lat": 41.78010, "lng": -71.09210 },
+      { "lat": 41.77930, "lng": -71.09060 },
+      { "lat": 41.77800, "lng": -71.09080 },
+      { "lat": 41.77770, "lng": -71.09230 },
+      { "lat": 41.77800, "lng": -71.09470 },
+      { "lat": 41.77855, "lng": -71.09640 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 41.77930, "lng": -71.09135 },
+      { "lat": 41.77930, "lng": -71.09095 },
+      { "lat": 41.77855, "lng": -71.09100 },
+      { "lat": 41.77855, "lng": -71.09140 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 41.78000, "lng": -71.09330 },
+        { "lat": 41.77930, "lng": -71.09180 },
+        { "lat": 41.77835, "lng": -71.09250 },
+        { "lat": 41.77905, "lng": -71.09400 }
+      ] },
+      { "ring": [
+        { "lat": 41.77820, "lng": -71.09420 },
+        { "lat": 41.77795, "lng": -71.09350 },
+        { "lat": 41.77745, "lng": -71.09385 },
+        { "lat": 41.77770, "lng": -71.09455 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 41.78005, "lng": -71.09430 },
+        { "lat": 41.77945, "lng": -71.09295 },
+        { "lat": 41.77930, "lng": -71.09310 },
+        { "lat": 41.77990, "lng": -71.09445 }
+      ] },
+      { "ring": [
+        { "lat": 41.77930, "lng": -71.09590 },
+        { "lat": 41.77825, "lng": -71.09530 },
+        { "lat": 41.77818, "lng": -71.09558 },
+        { "lat": 41.77923, "lng": -71.09618 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 41.77870, "lng": -71.09060 },
+      { "lat": 41.77855, "lng": -71.08990 },
+      { "lat": 41.77760, "lng": -71.09030 },
+      { "lat": 41.77775, "lng": -71.09100 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 261, "pano": "uI2zHoCYzOkXe-FV-6zJfw", "hasCoverage": true },
+      "truckGate": { "heading": 319, "pano": "uI2zHoCYzOkXe-FV-6zJfw", "hasCoverage": true },
+      "dropYards": { "heading": 250, "pano": "9vK0XofNciTX-CyslbAdOg", "hasCoverage": true },
+      "staging": { "heading": 135, "pano": "2TdyzFCP_cMTZxsP3di1ug", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 95,
+    "trailersVisible": 240,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 58.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.77930,-71.09380,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes", "shipRcvSeparate"],
+  "fieldNotes": {
+    "campusSplit": "The Freetown/Assonet campus holds TWO contiguous large DCs joined by a central office/connector spine and a shared entrance plaza: the larger northern building (ADUSA 'Freetown Grocery', dry, ~1.1M sq ft) and the southern building audited here ('Freetown Fresh', refrigerated/perishable). They are NOT one combined building - two clearly separable masses share the property and the single guarded gate. This audit covers the FRESH (southern) building and the trailer drop yard on its east/southeast side. A sister agent covers the grocery DC.",
+    "truckGate": "Staffed checkpoint plaza ~250m inside the property where the internal access road forks then funnels north past a center guard-booth island. Street View (pano uI2zHoCYzOkXe-FV-6zJfw, 2023-07) shows a low single-story guard booth on a hatched concrete median island, red STOP/check-in signage on posts, channelizing bollards, and inbound/outbound lanes splitting around the booth.",
+    "guardShack": "Confirmed staffed guard booth on the gate island (1-vehicle footprint, windows, red signage). Driver review corroborates: 'a guard at the gate gives drivers assigned parking spots in the staging area; only allows entry with a PO number.'",
+    "remoteGs": "False - there is a manned guard booth, so this is not a kiosk/remote-check-in gate.",
+    "postGateStaging": "Trailers staged along the internal road and a large paved overflow/staging lot east of the gate (inside the property, before the docks).",
+    "preGateStaging": "No dedicated paved truck-staging stalls outside/before the gate; the gate sits far back on a private access road off the public road, so external pre-gate staging is not present.",
+    "drivewayLong": "Deep approach - the access road from the public road to the gate is long, and the post-gate plaza/overflow lot holds well more than 3 trucks queued.",
+    "backupSensitive": "False - gate is set ~250m back from the public road via a private drive, so a queue cannot spill onto a public road or intersection.",
+    "entryLanes": "Approximately 1 inbound lane channeled past the booth island; 1 outbound lane on the opposite side. Counts are estimates from a single ground-level pano.",
+    "fastLaneOpportunity": "Wide paved gate plaza with ample unused width around the booth island - room to add an express/bypass lane for pre-cleared/appointment trucks.",
+    "dockDoors": "50+ band. Counted dock doors across the south building's SW face and NE face plus connector; honest overhead estimate ~90-100 total, well into the 50+ band.",
+    "dropArea": "50+ band. Extensive trailer-only drop rows fill the east and southeast yard (hundreds of stalls), characteristic of a reefer/perishable operation.",
+    "shipRcvSeparate": "Likely separate dock banks on two different building faces (SW face and NE/E face). Medium confidence from overhead only.",
+    "scale": "No truck scale/weigh pad identified in the truck path on available imagery.",
+    "railServed": "No rail spur runs into the property; nearest rail is unrelated.",
+    "urbanRural": "Rural - edge-of-town wooded setting in Assonet (Freetown), MA; surrounded by woods, fields, a pond, and scattered residential, off Route 79.",
+    "multipleFacilities": "True - two large DC buildings (Fresh + Grocery) on one campus.",
+    "refrigeratedConfirmation": "Street View frames inside the yard show Carrier-reefer trailers (e.g. 'Atlantic Capes' seafood reefer), consistent with a refrigerated/perishable Fresh DC.",
+    "siteAreaAcres": "~58 acres for the fresh-DC portion (south building + its drop yards + gate plaza) derived from the perimeter polygon; approximate, as the campus boundary between fresh and grocery is drawn at the connector spine."
+  },
+  "method": "deep-audit"
+}
