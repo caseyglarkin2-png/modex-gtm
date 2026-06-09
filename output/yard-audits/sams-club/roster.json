@@ -1,7 +1,7 @@
 {
   "account": "Sam's Club",
   "generatedAt": "2026-06-09",
-  "facilityCount": 11,
+  "facilityCount": 10,
   "facilities": [
     {
       "idx": 1,
@@ -157,22 +157,6 @@
       "source": "Georgia.org / Gov. Kemp release (Feb 2023, 600 jobs, $142M); AJC; SupplierWiki DC 4993",
       "lat": 33.760294,
       "lng": -84.610591,
-      "geocode": {
-        "source": "geocoding-api",
-        "precision": "ROOFTOP",
-        "movedMeters": null
-      }
-    },
-    {
-      "idx": 11,
-      "name": "Sam's Club Perishable DC Hutchins TX",
-      "city": "Hutchins",
-      "state": "TX",
-      "type": "Perishable DC",
-      "address": "1359 W Wintergreen Rd, Hutchins, TX 75141",
-      "source": "SupplierWiki DC receiving addresses (DC 8874, listed as Perishable DC); City of Hutchins major-businesses page",
-      "lat": 32.621233,
-      "lng": -96.716167,
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",

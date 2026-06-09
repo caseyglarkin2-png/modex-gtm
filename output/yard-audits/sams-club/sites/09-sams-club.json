@@ -1,0 +1,97 @@
+{
+  "name": "Sam's Club Distribution Center Shakopee MN",
+  "type": "Distribution Center",
+  "coords": { "lat": 44.79255, "lng": -93.42620 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 44.79368, "lng": -93.42860 },
+      { "lat": 44.79386, "lng": -93.42470 },
+      { "lat": 44.79356, "lng": -93.42396 },
+      { "lat": 44.79238, "lng": -93.42378 },
+      { "lat": 44.79172, "lng": -93.42421 },
+      { "lat": 44.79129, "lng": -93.42498 },
+      { "lat": 44.79130, "lng": -93.42849 },
+      { "lat": 44.79232, "lng": -93.42862 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 44.79356, "lng": -93.42402 },
+      { "lat": 44.79355, "lng": -93.42378 },
+      { "lat": 44.79318, "lng": -93.42380 },
+      { "lat": 44.79320, "lng": -93.42404 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 44.79388, "lng": -93.42820 },
+        { "lat": 44.79398, "lng": -93.42498 },
+        { "lat": 44.79380, "lng": -93.42495 },
+        { "lat": 44.79372, "lng": -93.42818 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 44.79366, "lng": -93.42818 },
+        { "lat": 44.79376, "lng": -93.42492 },
+        { "lat": 44.79350, "lng": -93.42489 },
+        { "lat": 44.79340, "lng": -93.42815 }
+      ] },
+      { "ring": [
+        { "lat": 44.79150, "lng": -93.42806 },
+        { "lat": 44.79158, "lng": -93.42505 },
+        { "lat": 44.79135, "lng": -93.42502 },
+        { "lat": 44.79127, "lng": -93.42803 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 44.79352, "lng": -93.42388 },
+      { "lat": 44.79320, "lng": -93.42384 },
+      { "lat": 44.79250, "lng": -93.42398 },
+      { "lat": 44.79252, "lng": -93.42420 },
+      { "lat": 44.79320, "lng": -93.42408 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 265, "pano": "_yxeEf5Q8DXVansnuK76jw", "hasCoverage": true },
+      "truckGate": { "heading": 290, "pano": "_yxeEf5Q8DXVansnuK76jw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 95,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 33.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@44.79255,-93.42620,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "exitLanes", "connectivityIssue"],
+  "fieldNotes": {
+    "truckGate": "Single controlled truck lane at the NE corner off Hentges Way; chevron/crosshatch gore markings at the entry throat and two tractor-trailers queued in-lane in current satellite imagery.",
+    "guardShack": "Small standalone white booth (~1-2 stall footprint) set beside the truck entry lane at the NE pinch point, distinct from the main office building.",
+    "remoteGs": "False because a physical guard booth is present at the gate.",
+    "postGateStaging": "Wide paved truck court inside the gate before the dock aprons gives deep internal queuing room.",
+    "drivewayLong": "Perimeter truck drive from the NE gate to the docks holds well more than 3 trucks.",
+    "fastLaneOpportunity": "Wide gate apron and generous paved truck-court width leave room for a dedicated express/bypass lane.",
+    "dockDoors": "Dock banks on both the north and south building faces; north face alone shows 25-30 doors with trailers plus continuation off-frame, total clearly 50+. Count of 110 is an overhead estimate.",
+    "dropArea": "Dedicated trailer staging row along the north apron plus loaded south apron; 50+ staged/parked trailers across the site.",
+    "shipRcvSeparate": "Two physically distinct dock clusters on opposite (north and south) building faces.",
+    "urbanRural": "Edge-of-town Southwest Logistics Center, Shakopee MN, surrounded by farmland, rail yard, ponds and aggregate lots, not dense metro fabric.",
+    "railServed": "A multi-track rail yard runs along the south boundary but is separated from the building by a vegetated buffer; no spur enters the docks. DC is truck-served.",
+    "scale": "No truck scale/weigh pad positively identified in the truck path; left uncertain.",
+    "exitLanes": "Entry and exit share the single NE gate lane group; exit lane count inferred as 1.",
+    "siteAreaAcres": "Derived from the perimeter polygon (~33-34 acres of fenced paved property); overhead estimate.",
+    "streetViewMeta": "Only road-level coverage is a 2022-04 pano on Hentges Way at the roundabout, captured before the building was built (opened March 2024), so it shows empty land; gate/guard determinations rely on current high-res satellite, not Street View."
+  },
+  "method": "deep-audit"
+}

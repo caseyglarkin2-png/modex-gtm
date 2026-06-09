@@ -1,0 +1,106 @@
+{
+  "name": "Sam's Club Distribution Center Edwardsville IL",
+  "type": "Distribution Center",
+  "coords": { "lat": 38.7659, "lng": -90.0513 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 38.76790, "lng": -90.05235 },
+      { "lat": 38.76795, "lng": -90.04960 },
+      { "lat": 38.76470, "lng": -90.04945 },
+      { "lat": 38.76315, "lng": -90.04985 },
+      { "lat": 38.76310, "lng": -90.05215 },
+      { "lat": 38.76600, "lng": -90.05230 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 38.76810, "lng": -90.05095 },
+      { "lat": 38.76808, "lng": -90.05040 },
+      { "lat": 38.76770, "lng": -90.05042 },
+      { "lat": 38.76772, "lng": -90.05097 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 38.76690, "lng": -90.05010 },
+        { "lat": 38.76695, "lng": -90.04955 },
+        { "lat": 38.76360, "lng": -90.04965 },
+        { "lat": 38.76358, "lng": -90.05015 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 38.76318, "lng": -90.05205 },
+        { "lat": 38.76322, "lng": -90.05010 },
+        { "lat": 38.76300, "lng": -90.05008 },
+        { "lat": 38.76296, "lng": -90.05203 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 38.76296, "lng": -90.05203 },
+      { "lat": 38.76300, "lng": -90.05008 },
+      { "lat": 38.76250, "lng": -90.05012 },
+      { "lat": 38.76246, "lng": -90.05200 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 148, "pano": "HynqAHaV96KQ1s-UvAkkJg", "hasCoverage": true },
+      "truckGate": { "heading": 89, "pano": "HynqAHaV96KQ1s-UvAkkJg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 44,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 30.9,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.7659,-90.0513,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoors",
+    "dropArea",
+    "dropYard",
+    "trailerParkingCapacity"
+  ],
+  "fieldNotes": {
+    "truckGate": "No barrier arm, sliding/swing gate, or controlled checkpoint visible at any entrance in current (c2026) satellite imagery. Access from Inner Park Drive is an open driveway over a landscaped causeway between two stormwater ponds. Site is bounded by canals/ponds (natural barriers) on W and E rather than a security fence.",
+    "guardShack": "No 1-3-car guard booth at the truck entrance. The only small structure on site is an elongated dark-roofed utility/maintenance building (~30m) set inside the NW parking lot near a pond, not at a gate pinch-point.",
+    "remoteGs": "False because there is no truck gate at all (not because of a kiosk).",
+    "postGateStaging": "Vast empty paved aprons (east yard and south apron) inside the property provide ample queue/holding space before docks.",
+    "dockDoors": "Continuous dock canopy with regular door rhythm across the full south (short) face, ~175m wide; estimated ~44 doors from overhead imagery -> 25-50 band. Low-confidence exact count.",
+    "dropArea": "No marked drop-trailer stalls observed; the east and south aprons are open undelineated concrete. Essentially no trailers parked in the c2026 imagery (lightly utilized, opened Jan 2024).",
+    "dropYard": "No dedicated striped trailer-storage lot; large empty aprons could function as drop space but are not configured/used as one.",
+    "trailerParkingCapacity": "Estimate of what the open east+south aprons could hold if striped; the lot is not currently marked for trailers.",
+    "urbanRural": "Edge-of-town industrial park (Exeter Inner Park, Edwardsville) surrounded by farmland and new-build warehouses; greater St. Louis metro fringe -> Rural per rubric.",
+    "fastLaneOpportunity": "Very wide gate apron and oversized paved yards give abundant room to add express/bypass lanes.",
+    "entryLanes": "Entry driveway is a wide two-lane causeway with a center median; in/out share the same point.",
+    "streetView": "Only Aug 2023 Street View coverage exists (pano HynqAHaV96KQ1s-UvAkkJg), captured during construction before the building was completed/occupied; it shows the Exeter Inner Park monument and graded earth, not the finished gate. Gate/guard-shack calls therefore rest on current satellite, hence medium confidence."
+  },
+  "method": "deep-audit"
+}

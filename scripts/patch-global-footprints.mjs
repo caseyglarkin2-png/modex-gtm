@@ -112,6 +112,12 @@ const PATCHES = {
     global: null,
     note: "7-Eleven's ~13,000 US stores are supplied through partner-operated distribution: E.A. Sween fresh-food combined distribution centers plus McLane grocery DCs. We audited 11 representative US facilities.",
   },
+  'sams-club': {
+    scope: 'US',
+    inScope: 12,
+    global: null,
+    note: "Sam's Club runs a lean US network of ~12 distribution and fulfillment centers (several 3PL-operated by Saddle Creek / Prologis) feeding ~600 clubs. We audited 10 representative facilities.",
+  },
   crowley: {
     scope: 'US',
     inScope: 40,

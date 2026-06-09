@@ -1,0 +1,145 @@
+{
+  "name": "Sam's Club Distribution Center Jacksonville FL",
+  "type": "Distribution Center",
+  "coords": {
+    "lat": 30.4247,
+    "lng": -81.6235
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        { "lat": 30.42925, "lng": -81.62460 },
+        { "lat": 30.42900, "lng": -81.62190 },
+        { "lat": 30.42470, "lng": -81.62160 },
+        { "lat": 30.42360, "lng": -81.62195 },
+        { "lat": 30.42215, "lng": -81.62258 },
+        { "lat": 30.42210, "lng": -81.62513 },
+        { "lat": 30.42360, "lng": -81.62535 },
+        { "lat": 30.42900, "lng": -81.62513 }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        { "lat": 30.42345, "lng": -81.62245 },
+        { "lat": 30.42345, "lng": -81.62185 },
+        { "lat": 30.42285, "lng": -81.62188 },
+        { "lat": 30.42285, "lng": -81.62248 }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          { "lat": 30.42892, "lng": -81.62432 },
+          { "lat": 30.42892, "lng": -81.62337 },
+          { "lat": 30.42437, "lng": -81.62337 },
+          { "lat": 30.42437, "lng": -81.62432 }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          { "lat": 30.42855, "lng": -81.62213 },
+          { "lat": 30.42855, "lng": -81.62166 },
+          { "lat": 30.42470, "lng": -81.62166 },
+          { "lat": 30.42470, "lng": -81.62213 }
+        ]
+      },
+      {
+        "ring": [
+          { "lat": 30.42849, "lng": -81.62513 },
+          { "lat": 30.42849, "lng": -81.62460 },
+          { "lat": 30.42433, "lng": -81.62460 },
+          { "lat": 30.42433, "lng": -81.62513 }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        { "lat": 30.42405, "lng": -81.62320 },
+        { "lat": 30.42400, "lng": -81.62187 },
+        { "lat": 30.42326, "lng": -81.62191 },
+        { "lat": 30.42331, "lng": -81.62320 }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 58,
+        "pano": "ZxfUJDM5MMv-7nrIKL6_NA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 318,
+        "pano": "9zGaaLAI_ema5j_BjXO11A",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 85,
+    "trailersVisible": 80,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 62.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@30.42470,-81.62350,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "trailerParkingCapacity"
+  ],
+  "fieldNotes": {
+    "siteConfirmation": "Building E / Building 300 at 1511 Zoo Pkwy, Imeson Park South. Supplied coords (30.4192,-81.6225) landed on undeveloped woodland south of the park (pre-construction imagery); the real 1M-sqft Sam's Club DC building center is ~30.4247,-81.6235. Confirmed via Jax Daily Record / JAXUSA grand-opening coverage (opened Apr 2025, $61M, 1M sqft, ~23-acre footprint, fully operational Feb 2025) and by tracing the gate drive off the road named 'Sam's Club Range Blvd' to the largest building in the park; distinguished from the adjacent Amazon-branded building immediately to the west and from Primark (Bldg 200) and Sub-Zero (Bldg 100).",
+    "truckGate": "Guarded truck checkpoint on the SE entrance drive off Sam's Club Range Blvd. 2023-01 and 2025-02 Street View both show gate arms across the truck lanes, a 'DO NOT BLOCK' painted apron, a STOP sign, and tractors/trailers (black tractor + XTRA trailer) queued at the gate. Satellite z19/z20 shows the booth island and lane striping.",
+    "guardShack": "A small modular guard booth (~1-2-vehicle footprint, windows, set on the median between the in/out truck lanes) is clearly visible at the gate in Street View and overhead at z20.",
+    "entryExitTogether": "Single guarded gate point on the SE drive handles both inbound and outbound trucks (booth island splits the lanes).",
+    "entryLanes": "Read ~2 inbound lanes split by the gate-island booth; not perfectly resolved at ground level, flagged uncertain.",
+    "exitLanes": "Estimated ~2 outbound lanes opposite the booth; flagged uncertain.",
+    "fastLaneOpportunity": "Wide multi-lane paved gate apron with the booth on a center island and unused paved width; room to add an express/bypass lane.",
+    "postGateStaging": "Paved holding/staging area inside the gate at the SE corner before trucks proceed to the east dock bank along the canal.",
+    "drivewayLong": "Deep approach: the truck drive runs a long way from the public road through the gate and around to the dock yards; ample room to stack 3+ trucks.",
+    "dockDoors": "1M-sqft cross-dock. East face along the retention canal carries a continuous bank of ~30-35 dock positions (most with trailers backed in, counted across two z19 frames); west face carries an additional dock bank facing the shared central truck corridor. Total estimated ~85 doors -> band 50+.",
+    "dropArea": "Dedicated trailer-parking rows in the central truck corridor between the Sam's building and the Amazon building (labeled bays full of parked trailers), plus drop trailers backed at the east dock wall; 50+.",
+    "dropYard": "Yes - dedicated trailer-storage rows in the central corridor, separate from active dock staging.",
+    "shipRcvSeparate": "Docks run from two physically separate banks on different building faces (east-along-canal and west); corroborated by reporting that the DC is split into an import side (feeds other warehouses) and a direct-to-club retail side.",
+    "urbanRural": "North Jacksonville metro: dense VanTrust logistics park (Imeson Park South, ~3.3M sqft across 7 buildings) just off I-95/I-295, minutes from Jacksonville International Airport and Blount Island port. Major-metro industrial fabric -> Urban.",
+    "connectivityIssue": "Urban metro location with strong carrier coverage; false.",
+    "multipleFacilities": "Single Sam's Club building (Building E/300). The neighboring Amazon, Primark, and Sub-Zero buildings are separate parcels/tenants in the same park, not part of this property.",
+    "scale": "No truck scale/weigh platform positively identified in the truck path; flagged uncertain.",
+    "railServed": "No rail spur enters the property; the park is not rail-served.",
+    "siteAreaAcres": "~62 acres via shoelace on the traced fence-line perimeter (building + employee parking + east canal-side dock yard + central drop corridor). The building footprint alone is ~23 acres per press coverage.",
+    "trailersVisible": "Approximate count (~80) across the captured z16-z19 imagery: east dock wall ~30-35, central drop corridor ~25-35, west dock apron ~15.",
+    "trailerParkingCapacity": "Rough estimate (~160) of drop/parking capacity across the central corridor and dock aprons; flagged uncertain.",
+    "perimeter": "Property line traced inside the fence: west edge follows the centerline of the drop-yard corridor shared with the Amazon building; east edge runs just beyond the dock wall along the retention canal; the SE wastewater-treatment plant is excluded.",
+    "imageryNote": "Most overhead imagery is recent (building complete). The clearest gate Street View is 2023-01 (gate already built, trucks queued); 2025-02 Street View confirms the completed checkpoint. The DC opened Apr 2025 / operational Feb 2025."
+  },
+  "method": "deep-audit"
+}

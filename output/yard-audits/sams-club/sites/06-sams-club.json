@@ -1,0 +1,82 @@
+{
+  "name": "Sam's Club Distribution Center Oklahoma City OK",
+  "type": "Distribution Center",
+  "coords": { "lat": 35.439775, "lng": -97.651625 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 35.44210, "lng": -97.65340 },
+      { "lat": 35.44195, "lng": -97.64985 },
+      { "lat": 35.43745, "lng": -97.64985 },
+      { "lat": 35.43760, "lng": -97.65335 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 35.44192, "lng": -97.65362 },
+      { "lat": 35.44192, "lng": -97.65300 },
+      { "lat": 35.44150, "lng": -97.65300 },
+      { "lat": 35.44150, "lng": -97.65362 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 35.44150, "lng": -97.65040 },
+        { "lat": 35.44140, "lng": -97.64990 },
+        { "lat": 35.43770, "lng": -97.64990 },
+        { "lat": 35.43780, "lng": -97.65040 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 35.44150, "lng": -97.65075 },
+        { "lat": 35.44140, "lng": -97.65045 },
+        { "lat": 35.43790, "lng": -97.65045 },
+        { "lat": 35.43795, "lng": -97.65075 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 96, "pano": "4U4fpAp5XvQwPpOY0a2bEg", "hasCoverage": true },
+      "truckGate": { "heading": 98, "pano": "G-gXkTnPw1FlcHSrE7IWZQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 110,
+    "trailerParkingCapacity": 140,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 39.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.439775,-97.651625,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "postGateStaging", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Property is enclosed by a black metal perimeter fence along the S Council Rd frontage and around the truck/dock yard (clearly visible in 2025-05 Street View). Trucks pass through a controlled fence opening off the main entrance drive; classified as a truck gate. No barrier arm is visible across the public-road throat itself, but the secured fence line with vehicle gates is the access control.",
+    "guardShack": "No staffed guard booth visible at the entrance in 2025-05 Street View or 2026 satellite. The main entry is an open paved approach with the Sam's Club monument sign; access control is the fence/sliding gate at the yard, implying kiosk/app/badge check-in rather than a manned shack. Low-medium confidence.",
+    "remoteGs": "Set true because there is a gated/fenced truck yard but no visible guard shack.",
+    "postGateStaging": "Wide paved truck court between the building dock faces and the drop yard provides interior holding room; inferred.",
+    "entryLanes": "Main entrance drive is wide (2 effective inbound lanes at the throat); exit shares the same drive. Estimated from imagery.",
+    "exitLanes": "Shared single outbound lane at the same entrance; estimate.",
+    "fastLaneOpportunity": "Very wide gate apron and generous paved entrance with room to stripe an express/bypass lane.",
+    "dockDoors": "Two large cross-dock buildings, each with a long continuous bank of dock doors (east face of north building plus west/east faces of south building). Total well above 50; counted ~80-100 across the complex.",
+    "dropArea": "Large dedicated trailer drop yard east of the buildings with multiple long rows of parked trailers; capacity 100+.",
+    "shipRcvSeparate": "Dock banks appear on opposing faces of the complex (east-facing dock on north building, west-facing Werner dock on south building) but cannot confirm a formal ship/receive split; left false.",
+    "urbanRural": "Edge-of-town industrial corridor on the far SW side of Oklahoma City (S Council Rd) surrounded by open fields and scattered industrial buildings; judged Rural per the small-town/edge-of-town tiebreak.",
+    "multipleFacilities": "Two distinct large white-roof DC buildings on the same Sam's Club property separated by employee parking; a campus.",
+    "scale": "No truck scale / weigh pad identified in the truck path.",
+    "buildingCount": "Two primary DC buildings (north and south) plus minor ancillary structures and a tank farm in the SE.",
+    "trailersVisible": "Estimate from 2026 satellite: ~110 trailers across dock apron and drop-yard rows.",
+    "railServed": "No rail spur enters the property."
+  },
+  "method": "deep-audit"
+}

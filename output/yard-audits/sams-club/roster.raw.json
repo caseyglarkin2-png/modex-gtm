@@ -1,0 +1,106 @@
+{
+  "account": "Sam's Club",
+  "generatedAt": "2026-06-09",
+  "facilityCount": 11,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Sam's Club Distribution Center New Braunfels TX",
+      "city": "New Braunfels",
+      "state": "TX",
+      "type": "Distribution Center",
+      "address": "4002 N IH 35, New Braunfels, TX 78130",
+      "source": "SPS Commerce/SupplierWiki Sam's Club DC receiving addresses (DC 4889); TruckMap facility listing"
+    },
+    {
+      "idx": 2,
+      "name": "Sam's Club Distribution Center Searcy AR",
+      "city": "Searcy",
+      "state": "AR",
+      "type": "Distribution Center",
+      "address": "3301 E Park and Blass Ave, Searcy, AR 72143",
+      "source": "SupplierWiki DC receiving addresses (DC 8234/4026); Searcy Regional Chamber of Commerce listing; Yelp/Manta"
+    },
+    {
+      "idx": 3,
+      "name": "Sam's Club Distribution Center Lakeland FL",
+      "city": "Lakeland",
+      "state": "FL",
+      "type": "Distribution Center",
+      "address": "3010 Saddle Creek Rd, Bldg 19, Lakeland, FL 33801",
+      "source": "SupplierWiki DC receiving addresses (DC 8229, c/o Saddle Creek Corp); Saddle Creek Logistics 3PL-of-the-year release"
+    },
+    {
+      "idx": 4,
+      "name": "Sam's Club Distribution Center Hattiesburg MS",
+      "city": "Hattiesburg",
+      "state": "MS",
+      "type": "Distribution Center",
+      "address": "185 J M Tatum Industrial Dr, Hattiesburg, MS 39401",
+      "source": "SupplierWiki DC receiving addresses (DC 4792); Saddle Creek Logistics (operates Sam's Club Hattiesburg DC)"
+    },
+    {
+      "idx": 5,
+      "name": "Sam's Club Distribution Center Villa Rica GA",
+      "city": "Villa Rica",
+      "state": "GA",
+      "type": "Distribution Center",
+      "address": "140 Fleet Dr, Villa Rica, GA 30180",
+      "source": "SupplierWiki DC receiving addresses (DC 6499); Saddle Creek Logistics (operates Sam's Club Villa Rica DC)"
+    },
+    {
+      "idx": 6,
+      "name": "Sam's Club Distribution Center Oklahoma City OK",
+      "city": "Oklahoma City",
+      "state": "OK",
+      "type": "Distribution Center",
+      "address": "2400 S Council Rd, Oklahoma City, OK 73128",
+      "source": "Walmart corporate newsroom (Aug 2023) + OK Business Voice ribbon-cutting (Jan 2024); SupplierWiki DC 4714/4965"
+    },
+    {
+      "idx": 7,
+      "name": "Sam's Club Distribution Center Jacksonville FL",
+      "city": "Jacksonville",
+      "state": "FL",
+      "type": "Distribution Center",
+      "address": "1511 Zoo Pkwy, Bldg 300, Jacksonville, FL 32226",
+      "source": "Jax Daily Record + Supply Chain Dive (1M sq ft grand opening Apr 2025); JAXUSA; SupplierWiki DC 4823/4964"
+    },
+    {
+      "idx": 8,
+      "name": "Sam's Club Distribution Center Edwardsville IL",
+      "city": "Edwardsville",
+      "state": "IL",
+      "type": "Distribution Center",
+      "address": "5710 Inner Park Dr, Ste 200, Edwardsville, IL 62025",
+      "source": "Walmart corporate newsroom (Nov 2023, St. Louis area); Retail Dive; SupplierWiki DC 4951/4966"
+    },
+    {
+      "idx": 9,
+      "name": "Sam's Club Distribution Center Shakopee MN",
+      "city": "Shakopee",
+      "state": "MN",
+      "type": "Distribution Center",
+      "address": "7400 Hentges Way, Shakopee, MN 55379",
+      "source": "Walmart corporate newsroom (Nov 2023, Minneapolis area); Supermarket News; SupplierWiki DC 4937/4968"
+    },
+    {
+      "idx": 10,
+      "name": "Sam's Club Fulfillment Center Lithia Springs GA",
+      "city": "Lithia Springs",
+      "state": "GA",
+      "type": "Fulfillment Center",
+      "address": "1000 Douglas Hills Rd, Lithia Springs, GA 30122",
+      "source": "Georgia.org / Gov. Kemp release (Feb 2023, 600 jobs, $142M); AJC; SupplierWiki DC 4993"
+    },
+    {
+      "idx": 11,
+      "name": "Sam's Club Perishable DC Hutchins TX",
+      "city": "Hutchins",
+      "state": "TX",
+      "type": "Perishable DC",
+      "address": "1359 W Wintergreen Rd, Hutchins, TX 75141",
+      "source": "SupplierWiki DC receiving addresses (DC 8874, listed as Perishable DC); City of Hutchins major-businesses page"
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "name": "Sam's Club Distribution Center New Braunfels TX",
+  "type": "Distribution Center",
+  "coords": { "lat": 29.73430, "lng": -98.06410 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 29.73850, "lng": -98.06540 },
+      { "lat": 29.73610, "lng": -98.06730 },
+      { "lat": 29.73180, "lng": -98.06600 },
+      { "lat": 29.73020, "lng": -98.06420 },
+      { "lat": 29.73080, "lng": -98.06170 },
+      { "lat": 29.73420, "lng": -98.06140 },
+      { "lat": 29.73730, "lng": -98.06330 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 29.73845, "lng": -98.06560 },
+      { "lat": 29.73815, "lng": -98.06520 },
+      { "lat": 29.73770, "lng": -98.06465 },
+      { "lat": 29.73755, "lng": -98.06480 },
+      { "lat": 29.73800, "lng": -98.06535 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 29.73480, "lng": -98.06710 },
+        { "lat": 29.73310, "lng": -98.06820 },
+        { "lat": 29.73120, "lng": -98.06560 },
+        { "lat": 29.73290, "lng": -98.06450 }
+      ] },
+      { "ring": [
+        { "lat": 29.73330, "lng": -98.06380 },
+        { "lat": 29.73150, "lng": -98.06490 },
+        { "lat": 29.73040, "lng": -98.06340 },
+        { "lat": 29.73070, "lng": -98.06190 },
+        { "lat": 29.73310, "lng": -98.06200 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 29.73600, "lng": -98.06640 },
+        { "lat": 29.73320, "lng": -98.06520 },
+        { "lat": 29.73305, "lng": -98.06555 },
+        { "lat": 29.73585, "lng": -98.06675 }
+      ] },
+      { "ring": [
+        { "lat": 29.73480, "lng": -98.06250 },
+        { "lat": 29.73340, "lng": -98.06320 },
+        { "lat": 29.73325, "lng": -98.06290 },
+        { "lat": 29.73465, "lng": -98.06220 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 29.73760, "lng": -98.06490 },
+      { "lat": 29.73690, "lng": -98.06560 },
+      { "lat": 29.73620, "lng": -98.06490 },
+      { "lat": 29.73690, "lng": -98.06420 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 328, "pano": "CAoSFENJSE0wb2dLRUlDQWdJRFI4NDli", "hasCoverage": true },
+      "truckGate": { "heading": 128, "pano": "6YhsOK6P85aaVVAVb_aohg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 180,
+    "trailersVisible": 600,
+    "trailerParkingCapacity": 750,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 86.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.73430,-98.06410,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "scale", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Guarded truck checkpoint at the N corner off the I-35 frontage road; Street View (pano 6YhsOK6P85aaVVAVb_aohg, 2018-12, heading ~230) shows striped truck lanes with painted STOP, channelizing bollards, and gate infrastructure across the lanes against the WAL-MART Distribution Services building wall.",
+    "guardShack": "Small single-footprint metal guard booth with side windows and a covered canopy walkway sits beside the inbound lane at the gate; clearly visible in Street View heading 290 and 230.",
+    "entryLanes": "Approx 2 inbound lanes at the checkpoint apron; exact lane split partly obscured by sun glare in the 2018 pano - estimate.",
+    "exitLanes": "Approx 2 outbound lanes; combined gate so in/out share the same checkpoint apron.",
+    "postGateStaging": "Wide paved apron inside the gate between the booth and the building before trucks fan out to docks/yard - room to queue.",
+    "fastLaneOpportunity": "Very wide gate apron with multiple striped lanes and unused paved width - physical room to add an express/appointment bypass lane.",
+    "dockDoors": "Cross-dock building with continuous dock-door rhythm and trailers backed in along both long faces (SW and NE) plus the secondary building - well into the 50+ band, est ~180 doors total.",
+    "dropArea": "Enormous trailer drop/storage operation: dozens of long rows of parked drop trailers fill the SW and SE yards - hundreds of stalls, 50+ band.",
+    "shipRcvSeparate": "Docks run from two distinct building faces (SW long face and NE long face) on the main cross-dock, consistent with separate ship/receive clusters - inferred from overhead.",
+    "buildingCount": "Main DC plus a separate secondary building (maintenance/transportation) to the SE on the same property.",
+    "multipleFacilities": "Campus: main distribution building plus a separate building cluster to the SE sharing the same fenced yard.",
+    "urbanRural": "Edge-of-town industrial site on the I-35 corridor NE of New Braunfels with open farmland on the E and S; judged Rural per rubric tie-break.",
+    "railServed": "No rail spur enters the property; nearest rail is not connected to the site.",
+    "scale": "No clear truck scale/weigh pad identified in the truck path; left false, flagged uncertain.",
+    "trailersVisible": "Estimate from z17-z19 imagery across SW and SE yards - approximate count of parked trailers in the captured frames.",
+    "dockDoorCount": "Honest overhead estimate across both faces of the cross-dock plus the secondary building."
+  },
+  "method": "deep-audit"
+}
