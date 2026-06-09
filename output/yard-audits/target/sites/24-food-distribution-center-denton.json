@@ -1,0 +1,77 @@
+{
+  "name": "Target Food Distribution Center Denton",
+  "type": "Food Distribution Center",
+  "coords": { "lat": 33.19990, "lng": -97.18020 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 33.20160, "lng": -97.18170 },
+      { "lat": 33.20155, "lng": -97.17790 },
+      { "lat": 33.19950, "lng": -97.17775 },
+      { "lat": 33.19840, "lng": -97.17850 },
+      { "lat": 33.19840, "lng": -97.18155 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 33.20098, "lng": -97.17880 },
+      { "lat": 33.20092, "lng": -97.17820 },
+      { "lat": 33.20060, "lng": -97.17824 },
+      { "lat": 33.20066, "lng": -97.17884 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 33.20070, "lng": -97.17920 },
+        { "lat": 33.20055, "lng": -97.17800 },
+        { "lat": 33.19850, "lng": -97.17830 },
+        { "lat": 33.19862, "lng": -97.17948 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 33.20055, "lng": -97.17985 },
+        { "lat": 33.20050, "lng": -97.17935 },
+        { "lat": 33.19852, "lng": -97.17965 },
+        { "lat": 33.19856, "lng": -97.18015 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 245, "pano": "Oi9tpXmMCVgDstO6SY4uZQ", "hasCoverage": true },
+      "truckGate": { "heading": 268, "pano": "kxxnsKTYgGxLwYeEvcPzhQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 30.1,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.1999,-97.1802,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "scale", "dockDoorCount"],
+  "fieldNotes": {
+    "truckGate": "Perimeter fence with a cantilever/swing vehicle gate across the single entrance drive, confirmed in Street View (pano kxxnsKTYgGxLwYeEvcPzhQ, 2022-12) looking W/SW at ~260-270 deg.",
+    "guardShack": "Small white booth structure beside the gate visible in Street View; staffed-booth call is medium confidence given camera distance, but structure footprint and placement beside the gate are consistent with a guard shack at a major Target food DC.",
+    "remoteGs": "False because a guard booth is present at the gate.",
+    "fastLaneOpportunity": "Wide gate apron and deep approach drive with unused paved width to add a bypass lane.",
+    "dockDoors": "Long bank of dock doors along the east building face with ~50-70 reefer trailers backed in; counted from zoom-20/21 imagery, banded 50+.",
+    "dropArea": "Dedicated striped trailer drop yard east of the building holding two long rows of reefers (40+ stalls).",
+    "scale": "No truck scale clearly visible in the entrance path; listed uncertain.",
+    "urbanRural": "Edge-of-town industrial park near Denton Enterprise Airport with open fields adjacent; judged Rural per rubric tie-break.",
+    "postGateStaging": "Wide paved apron between the gate and the dock doors provides interior queuing room.",
+    "perimeter": "Traced inside the fence line / property edge; ~30 acres. North bound is the Airport Rd setback, east bound the curving access drive, west bound the shared property line with the neighbor lot."
+  },
+  "method": "deep-audit"
+}

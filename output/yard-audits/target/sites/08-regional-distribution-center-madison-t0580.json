@@ -1,0 +1,84 @@
+{
+  "name": "Target Regional Distribution Center Madison (T0580)",
+  "type": "RDC",
+  "coords": { "lat": 34.6455, "lng": -86.8485 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 34.64830, "lng": -86.85195 },
+      { "lat": 34.64800, "lng": -86.84520 },
+      { "lat": 34.64430, "lng": -86.84480 },
+      { "lat": 34.64310, "lng": -86.84585 },
+      { "lat": 34.64305, "lng": -86.85205 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 34.64445, "lng": -86.84605 },
+      { "lat": 34.64430, "lng": -86.84470 },
+      { "lat": 34.64360, "lng": -86.84490 },
+      { "lat": 34.64375, "lng": -86.84620 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 34.64790, "lng": -86.85180 },
+        { "lat": 34.64760, "lng": -86.84560 },
+        { "lat": 34.64600, "lng": -86.84575 },
+        { "lat": 34.64620, "lng": -86.85190 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 34.64600, "lng": -86.85180 },
+        { "lat": 34.64585, "lng": -86.84560 },
+        { "lat": 34.64560, "lng": -86.84565 },
+        { "lat": 34.64575, "lng": -86.85185 }
+      ] },
+      { "ring": [
+        { "lat": 34.64755, "lng": -86.84500 },
+        { "lat": 34.64470, "lng": -86.84490 },
+        { "lat": 34.64470, "lng": -86.84450 },
+        { "lat": 34.64755, "lng": -86.84460 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 321, "pano": "QGzBfqC7p0k8GjTdbkqoiQ", "hasCoverage": true },
+      "truckGate": { "heading": 0, "pano": "", "hasCoverage": false }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 250,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 88.4,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.6455,-86.8485,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": true, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "scale", "entryLanes", "exitLanes", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Fully fenced property (black ornamental metal perimeter fence confirmed in 2016 & 2026 Street View). Single controlled truck entrance off the Greenbrier Pkwy loop road at the SE; Target monument/bullseye sign at the entrance throat (2026-04 SV). Drive is set back well beyond public-road SV coverage so the gate arm itself is not directly imaged, but the secured single-throat layout is unambiguous.",
+    "guardShack": "Inferred true. Could not positively image a small dedicated booth at the road pinch (SV does not reach the private drive), but a yard-operations building with an adjacent truck-scale pad sits at the SE throat (34.6446,-86.8446); modern Target RDCs of this class are built with an exterior guard house (corroborated by Walsh Group's Target DC build spec). Flagged uncertain.",
+    "scale": "A long rectangular gridded concrete pad adjacent to the SE yard-operations building (34.6446,-86.8446) reads as a truck scale / weigh pad. Medium confidence.",
+    "dropArea": "Large NW drop yard packed with 100+ marked trailer stalls, many green Target trailers, no tractors — 50+ band.",
+    "dockDoors": "Continuous dock banks on the building's north face (facing the drop yard) and east face (trailers backed in along the east wall), well over 50 doors total.",
+    "shipRcvSeparate": "Two physically distinct dock clusters on different building faces (north face into drop yard, east face apron) suggest separate ship/receive flows.",
+    "postGateStaging": "Wide paved aprons inside the fence between the gate and the dock banks provide ample interior queuing.",
+    "fastLaneOpportunity": "Wide multi-lane entrance apron at the loop-road throat with unused paved width.",
+    "urbanRural": "Edge-of-town industrial on the Madison/Huntsville fringe, bordered by active farm fields to the west and a tree line to the south — Rural per rubric.",
+    "railServed": "No rail spur enters the property.",
+    "yardMetrics": "Door/trailer counts are honest overhead estimates from zoom-19/20 imagery, not exact. buildingCount=3 (main DC, SE yard-ops/transportation office, SW pump house)."
+  },
+  "method": "deep-audit"
+}

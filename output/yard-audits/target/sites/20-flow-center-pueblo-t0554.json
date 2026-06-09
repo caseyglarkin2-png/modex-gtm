@@ -1,0 +1,107 @@
+{
+  "name": "Target Flow Center Pueblo (T0554)",
+  "type": "Flow Center",
+  "coords": { "lat": 38.279662, "lng": -104.467883 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 38.28245, "lng": -104.47025 },
+      { "lat": 38.28235, "lng": -104.46375 },
+      { "lat": 38.27760, "lng": -104.46360 },
+      { "lat": 38.27705, "lng": -104.46390 },
+      { "lat": 38.27690, "lng": -104.46670 },
+      { "lat": 38.27695, "lng": -104.46965 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 38.28272, "lng": -104.46545 },
+      { "lat": 38.28272, "lng": -104.46485 },
+      { "lat": 38.28130, "lng": -104.46498 },
+      { "lat": 38.28130, "lng": -104.46558 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 38.28205, "lng": -104.46560 },
+        { "lat": 38.28205, "lng": -104.46375 },
+        { "lat": 38.27840, "lng": -104.46368 },
+        { "lat": 38.27840, "lng": -104.46553 }
+      ] },
+      { "ring": [
+        { "lat": 38.27815, "lng": -104.46615 },
+        { "lat": 38.27815, "lng": -104.46395 },
+        { "lat": 38.27695, "lng": -104.46400 },
+        { "lat": 38.27695, "lng": -104.46620 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 38.28210, "lng": -104.46588 },
+        { "lat": 38.27845, "lng": -104.46578 },
+        { "lat": 38.27845, "lng": -104.46548 },
+        { "lat": 38.28210, "lng": -104.46558 }
+      ] },
+      { "ring": [
+        { "lat": 38.27838, "lng": -104.46720 },
+        { "lat": 38.27838, "lng": -104.46455 },
+        { "lat": 38.27812, "lng": -104.46455 },
+        { "lat": 38.27812, "lng": -104.46720 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 38.28258, "lng": -104.46555 },
+      { "lat": 38.28258, "lng": -104.46485 },
+      { "lat": 38.28210, "lng": -104.46490 },
+      { "lat": 38.28210, "lng": -104.46560 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 200, "pano": "C-dKnSGksGFHPLIOjkSgIw", "hasCoverage": true },
+      "truckGate": { "heading": 191, "pano": "C-dKnSGksGFHPLIOjkSgIw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 230,
+    "trailerParkingCapacity": 300,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 82.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.279662,-104.467883,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "shipRcvSeparate", "multiStep"],
+  "fieldNotes": {
+    "truckGate": "Fully fenced facility (continuous chain-link perimeter confirmed in 6+ Street-View frames). Wide lane-marked truck entrance apron off United Ave at the NE (pano C-dKnSGksGFHPLIOjkSgIw, 38.2827,-104.4650) with bobtail/tractor staging visible. Only public road touching the property; US-50 to the south is limited-access with no driveway.",
+    "guardShack": "Inferred true at medium confidence: major 24/7 Target regional DC (~600 staff, $61.8M volume per chamber data), fully fenced, with a small checkpoint structure at the south yard edge (~38.2768,-104.4666). The north entrance apron in 2022 imagery is open to the road with the security gate/booth set back inside; top-down resolution did not crisply isolate the booth, hence medium confidence.",
+    "dockDoors": "50+ — dock banks on the building's east face (trailers backed in along the full east wall) and a long south-face dock bank; estimated ~120 doors total across both faces.",
+    "dropArea": "50+ — extensive trailer drop/storage yard on the east and SE with many double rows of parked trailers; 200+ trailers visible in z18-z20 imagery.",
+    "shipRcvSeparate": "Two physically distinct dock clusters (east-face bank and south-face bank) suggest separate ship/receive operations; medium confidence.",
+    "entryLanes": "Entry/exit share one wide apron; estimated ~2 in / 2 out from apron width. Low confidence.",
+    "fastLaneOpportunity": "Very wide entrance apron and large paved staging area inside the gate — ample room for an express/bypass lane.",
+    "railServed": "No rail spur enters the property; nearest rail is the BNSF/UP main line along US-50 corridor but it does not serve the site.",
+    "urbanRural": "Edge-of-Pueblo industrial site surrounded by open scrub/farmland; classified Rural."
+  },
+  "method": "deep-audit"
+}

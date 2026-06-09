@@ -1,0 +1,94 @@
+{
+  "name": "Target Import Warehouse Suffolk (T3841)",
+  "type": "Import Warehouse",
+  "coords": { "lat": 36.70680, "lng": -76.66330 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 36.71090, "lng": -76.66700 },
+      { "lat": 36.71100, "lng": -76.66330 },
+      { "lat": 36.71150, "lng": -76.66180 },
+      { "lat": 36.70720, "lng": -76.66060 },
+      { "lat": 36.70420, "lng": -76.66020 },
+      { "lat": 36.70370, "lng": -76.66150 },
+      { "lat": 36.70750, "lng": -76.66560 },
+      { "lat": 36.70920, "lng": -76.66700 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 36.71110, "lng": -76.66700 },
+      { "lat": 36.71100, "lng": -76.66610 },
+      { "lat": 36.71020, "lng": -76.66640 },
+      { "lat": 36.71030, "lng": -76.66730 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 36.71010, "lng": -76.66290 },
+        { "lat": 36.71090, "lng": -76.66170 },
+        { "lat": 36.70470, "lng": -76.66030 },
+        { "lat": 36.70430, "lng": -76.66130 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 36.71010, "lng": -76.66430 },
+        { "lat": 36.71030, "lng": -76.66350 },
+        { "lat": 36.70410, "lng": -76.66050 },
+        { "lat": 36.70390, "lng": -76.66130 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 141, "pano": "TqG0JuES9NOxZ2DmH18gjg", "hasCoverage": true },
+      "truckGate": { "heading": 102, "pano": "TqG0JuES9NOxZ2DmH18gjg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 160,
+    "trailerParkingCapacity": 250,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 74.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.70680,-76.66330,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "connectivityIssue"],
+  "fieldNotes": {
+    "truckGate": "Single private access road off Manning Bridge Rd feeds a fully tree-lined / fenced property with a continuous perimeter loop road; the driveway pinches to one throat at the NW. No public Street View coverage onto the private drive, so the barrier-arm itself is not directly imaged, but a Target upstream import DC of this scale is access-controlled.",
+    "guardShack": "No 1-3-car guard booth structure is visible at the entrance throat or anywhere along the perimeter in z18-z20 satellite. The small structures seen are a stormwater detention control (twin circular ponds, north end) and a paved laydown/maintenance area inside the yard, neither a gatehouse.",
+    "remoteGs": "Gate present but no guard shack imaged -> kiosk / appointment / app check-in implied, consistent with modern Target upstream DC operations.",
+    "postGateStaging": "Wide paved apron and an internal laydown area on the NE yard side provide inside-gate holding before the dock doors.",
+    "dockDoors": "Dock apron with dock-leveler rhythm and trailers backed in runs essentially the full ~1 km NE building face; conservative estimate ~120 doors -> 50+ band.",
+    "dropArea": "Large marked trailer drop yard on the NE with many rows of parked trailers; capacity well into the hundreds -> 50+ band.",
+    "fastLaneOpportunity": "Very wide gate apron and ample paved width on the perimeter drive give room to add an express/bypass lane.",
+    "entryLanes": "Lane count at the gate not resolvable from overhead imagery; assumed 1 in / 1 out at a single shared gate.",
+    "scale": "No truck scale pad identified in the truck path; low confidence given imagery limits.",
+    "siteAreaAcres": "~74.6 ac computed by shoelace from the perimeter ring (building footprint ~24 ac / ~1.0-1.05M sq ft).",
+    "railServed": "No rail spur enters the property."
+  },
+  "method": "deep-audit"
+}

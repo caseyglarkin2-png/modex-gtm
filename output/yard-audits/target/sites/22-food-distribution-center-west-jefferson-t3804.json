@@ -1,0 +1,76 @@
+{
+  "name": "Target Food Distribution Center West Jefferson (T3804)",
+  "type": "Food Distribution Center",
+  "coords": { "lat": 39.94645, "lng": -83.35120 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 39.94740, "lng": -83.35370 },
+      { "lat": 39.94772, "lng": -83.35000 },
+      { "lat": 39.94745, "lng": -83.34830 },
+      { "lat": 39.94560, "lng": -83.34780 },
+      { "lat": 39.94500, "lng": -83.34860 },
+      { "lat": 39.94560, "lng": -83.35360 },
+      { "lat": 39.94620, "lng": -83.35400 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 39.94705, "lng": -83.34880 },
+      { "lat": 39.94720, "lng": -83.34800 },
+      { "lat": 39.94675, "lng": -83.34780 },
+      { "lat": 39.94660, "lng": -83.34860 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 39.94780, "lng": -83.35260 },
+        { "lat": 39.94800, "lng": -83.34870 },
+        { "lat": 39.94748, "lng": -83.34850 },
+        { "lat": 39.94740, "lng": -83.35250 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 39.94730, "lng": -83.35330 },
+        { "lat": 39.94742, "lng": -83.35010 },
+        { "lat": 39.94718, "lng": -83.35005 },
+        { "lat": 39.94708, "lng": -83.35325 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 329, "pano": "ZO10oCf_QQCnIYI9UWZ35Q", "hasCoverage": true },
+      "truckGate": { "heading": 7, "pano": "ZO10oCf_QQCnIYI9UWZ35Q", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45, "trailersVisible": 220, "trailerParkingCapacity": 350,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 30.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.94645,-83.35120,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoors", "postGateStaging", "connectivityIssue"],
+  "fieldNotes": {
+    "siteId": "Building correctly identified as the Target FOOD DC at 42 Commerce Pkwy (Target's internal id for the food DC is T3880; the task title carries T3804, which is the adjacent regional/GM DC). Confirmed via Street View: the long building immediately south carries a JLL/Stonemont 'Available - 44 Commerce Parkway, 1,090,000 s.f.' banner, fixing 42 Commerce as the audited center building.",
+    "truckGate": "TRUE. Fence contractor (Lannis Fence Co.) documents '2,000+ ft of chain-link security perimeter fence with a fully equipped operated entrance gate and access controls system' plus a decorative ornamental gate at the employee/office entrance. Truck yard is fenced and access-controlled; truck entry is at the NE corner where the yard meets the campus interior drive.",
+    "guardShack": "FALSE (medium confidence). No staffed guard booth was visible at any truck lane in satellite imagery; the only small detached structure (tan-roof) sits by the SE retention pond away from the truck path and reads as a utility/pump building. Contractor language emphasizes an 'access controls system', not a manned booth.",
+    "remoteGs": "TRUE. Gate present but no guard shack observed -> automated/kiosk/card access control implied by the documented 'access controls system'.",
+    "dockDoors": "25-50 (uncertain). Dock bank is on the NORTH face only, facing the shared trailer yard; counted roughly 40-50 doors across the ~700 ft north wall of this 438,000 sf refrigerated DC. South/west walls are blank (rooftop refrigeration units only).",
+    "dropYard": "TRUE. The food DC docks open onto an enormous shared drop/trailer yard (with the adjacent regional DC) holding hundreds of trailers in dense rows; dropArea banded 50+.",
+    "shipRcvSeparate": "FALSE. Single north-face dock bank; no second dock cluster on a different building face.",
+    "postGateStaging": "TRUE (inferred). Wide paved apron between the gate/yard entry and the dock face provides interior holding room.",
+    "siteArea": "Traced fenced operational perimeter ~30.7 acres. Published parcel is 47 acres (includes undeveloped buffer land and the property's share of the shared trailer yard not enclosed in the operational ring).",
+    "urbanRural": "Rural - edge-of-town logistics park off I-70 / SR-29 near West Jefferson, surrounded by farmland.",
+    "connectivityIssue": "FALSE - rural but within an active, dense industrial park; cellular coverage expected adequate."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,97 @@
+{
+  "name": "Target Import Warehouse Savannah (T3684)",
+  "type": "Import Warehouse",
+  "coords": { "lat": 32.17420, "lng": -81.17620 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 32.174872, "lng": -81.180892 },
+      { "lat": 32.176397, "lng": -81.179734 },
+      { "lat": 32.176724, "lng": -81.171365 },
+      { "lat": 32.174545, "lng": -81.171108 },
+      { "lat": 32.170404, "lng": -81.172266 },
+      { "lat": 32.169968, "lng": -81.179862 },
+      { "lat": 32.171603, "lng": -81.181343 },
+      { "lat": 32.173455, "lng": -81.181472 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 32.177016, "lng": -81.177522 },
+      { "lat": 32.176812, "lng": -81.177120 },
+      { "lat": 32.176580, "lng": -81.177280 },
+      { "lat": 32.176785, "lng": -81.177683 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 32.173237, "lng": -81.180377 },
+        { "lat": 32.173673, "lng": -81.174455 },
+        { "lat": 32.170731, "lng": -81.173425 },
+        { "lat": 32.170077, "lng": -81.179862 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 32.174000, "lng": -81.180313 },
+        { "lat": 32.174436, "lng": -81.172138 },
+        { "lat": 32.173346, "lng": -81.172266 },
+        { "lat": 32.172910, "lng": -81.180377 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 165, "pano": "cnLRlAnQsxxOWFsZNErvBA", "hasCoverage": true },
+      "truckGate": { "heading": 209, "pano": "cnLRlAnQsxxOWFsZNErvBA", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 160,
+    "trailerParkingCapacity": 250,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 154.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.17420,-81.17620,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Single controlled truck entrance on the NE side off Little Hearst Pkwy. Street View (pano cnLRlAnQsxxOWFsZNErvBA, 2025-12, heading ~135) shows the entrance apron with concrete jersey barriers, signage panels and a check-in kiosk/call-box pole. Whole 154-acre property is fenced with a continuous treeline buffer; trucks cannot reach docks without passing this pinch point.",
+    "guardShack": "No booth-sized structure could be positively resolved at the entrance: the actual check-in point sits beyond the public-road treeline, outside Street View reach, and no guard-booth footprint is visible in satellite at the apron. Called false with low confidence; a staffed booth set back inside the gate cannot be ruled out.",
+    "remoteGs": "Set true as the complement of truckGate=true with no visible guard shack (kiosk/call-box pole seen at the apron implies remote/automated check-in). Flagged uncertain alongside guardShack.",
+    "dockDoors": "Continuous dock-door band runs the full ~1000+ ft south face of the building with trailers backed in along its entire length; far into the 50+ band. Door count ~120 is an honest overhead estimate.",
+    "dropArea": "Very large dedicated drop yard south of the dock apron with many angled trailer rows (50+ band). Capacity ~250 trailers estimated from striped stalls.",
+    "postGateStaging": "Deep paved truck court between the gate/apron and the dock face provides ample internal holding before docks.",
+    "drivewayLong": "Long NE approach drive from the public road wrapping to the truck court holds well more than 3 trucks of stacking depth.",
+    "fastLaneOpportunity": "Wide gate apron and ample paved width at the entrance leave physical room to add a bypass/express lane.",
+    "entryLanes": "Gate apron width supports ~2 inbound lanes; exact lane striping not resolvable in Street View — estimate.",
+    "exitLanes": "Estimated single outbound lane; not directly resolvable.",
+    "urbanRural": "Edge-of-town industrial park (Savannah River International Trade Park, Port Wentworth) surrounded by woods, marsh and a tidal creek; per rubric, small-town/edge-of-town industrial = Rural.",
+    "railServed": "No rail spur enters the property; access is road-only off Little Hearst Pkwy (port-drayage import DC).",
+    "siteAreaAcres": "Perimeter polygon yields 154.3 acres, matching the Chatham County assessor land size of 6,534,000 sq ft (~150 acres) for 211 Little Hearst Pkwy (Target), confirming correct building identification.",
+    "buildingId": "Confirmed as Target's 2,048,125 sq ft import distribution warehouse (built 2006, opened 2007) at 211 Little Hearst Pkwy, Savannah/Port Wentworth GA 31407 — distinct from the adjacent smaller IKEA DC at 202 Little Hearst Pkwy (750,480 sq ft). Provided address '110' and geocoded point were off; corrected via assessor land-area match."
+  },
+  "method": "deep-audit"
+}

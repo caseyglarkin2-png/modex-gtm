@@ -1,0 +1,94 @@
+{
+  "name": "Target Regional Distribution Center Oconomowoc (T0557)",
+  "type": "RDC",
+  "coords": { "lat": 43.0793, "lng": -88.4773 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 43.08135, "lng": -88.47985 },
+      { "lat": 43.08140, "lng": -88.47460 },
+      { "lat": 43.07720, "lng": -88.47455 },
+      { "lat": 43.07685, "lng": -88.47720 },
+      { "lat": 43.07690, "lng": -88.47985 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 43.07705, "lng": -88.47770 },
+      { "lat": 43.07705, "lng": -88.47715 },
+      { "lat": 43.07670, "lng": -88.47715 },
+      { "lat": 43.07670, "lng": -88.47770 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 43.07995, "lng": -88.47640 },
+        { "lat": 43.07995, "lng": -88.47465 },
+        { "lat": 43.07735, "lng": -88.47460 },
+        { "lat": 43.07735, "lng": -88.47635 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 43.08000, "lng": -88.47930 },
+        { "lat": 43.08000, "lng": -88.47660 },
+        { "lat": 43.07930, "lng": -88.47660 },
+        { "lat": 43.07930, "lng": -88.47930 }
+      ] },
+      { "ring": [
+        { "lat": 43.07840, "lng": -88.47930 },
+        { "lat": 43.07840, "lng": -88.47660 },
+        { "lat": 43.07770, "lng": -88.47660 },
+        { "lat": 43.07770, "lng": -88.47930 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 357, "pano": "KQ1IRr57y1yuED4jGBAT1g", "hasCoverage": true },
+      "truckGate": { "heading": 0, "pano": "KQ1IRr57y1yuED4jGBAT1g", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 320,
+    "trailerParkingCapacity": 400,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 53.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@43.0793,-88.4773,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "No barrier arm, sliding gate, or guard booth could be positively identified at any vehicular entrance in z18-z21 satellite or in multiple Street View passes along the entire E Valley Rd south frontage. The frontage is a continuous landscaped lawn/tree buffer with paved driveway breaks (office/visitor entry on the SE) and the truck yard accessed via open internal drives. Per the rubric (open driveway with no visible control = false) classified false, but flagged uncertain: a 1.5M sqft secured Target RDC plausibly has an internal/manned truck checkpoint not resolvable from this imagery.",
+    "guardShack": "No small multi-window booth (1-3 vehicle footprint) found beside any lane in any high-zoom crop.",
+    "dockDoors": "Central cross-dock bank shows two long rows of trailers backed in on both faces plus a dock row on the east building face; well over 50 doors. dockDoorCount=120 is an estimate from the cross-dock + east-face rhythm.",
+    "dropArea": "Large dedicated trailer-storage lot on the east/SE holds hundreds of trailers in dense rows (z18 east-entrance crop). 50+ band, dropYard=true.",
+    "shipRcvSeparate": "Cross-dock layout with trailer banks on opposing N and S faces of the central dock plus an east-face dock suggests separate inbound/outbound clusters; inferred, flagged uncertain.",
+    "fastLaneOpportunity": "Wide open paved yard aprons at the entrances leave ample room to add an express/bypass lane.",
+    "urbanRural": "Edge-of-town Oconomowoc (Pabst Farms) industrial setting bordered by farmland and a lake to the SW; classified Rural per rubric's small-town guidance, though served by a developed commercial/industrial corridor so cellular connectivity is fine.",
+    "siteAreaAcres": "Derived from perimeter polygon (~500m N-S x ~430m E-W), approx 53 acres."
+  },
+  "method": "deep-audit"
+}

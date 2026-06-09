@@ -1,0 +1,88 @@
+{
+  "name": "Target Food Distribution Center Lake City",
+  "type": "Food Distribution Center",
+  "coords": { "lat": 30.2318, "lng": -82.6360 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 30.2356, "lng": -82.6388 },
+      { "lat": 30.2352, "lng": -82.6340 },
+      { "lat": 30.2300, "lng": -82.6332 },
+      { "lat": 30.2288, "lng": -82.6345 },
+      { "lat": 30.2287, "lng": -82.6358 },
+      { "lat": 30.2295, "lng": -82.6390 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 30.2289, "lng": -82.6356 },
+      { "lat": 30.2289, "lng": -82.6351 },
+      { "lat": 30.2311, "lng": -82.6344 },
+      { "lat": 30.2312, "lng": -82.6349 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 30.2348, "lng": -82.6388 },
+        { "lat": 30.2348, "lng": -82.6382 },
+        { "lat": 30.2302, "lng": -82.6380 },
+        { "lat": 30.2302, "lng": -82.6387 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 30.2348, "lng": -82.6380 },
+        { "lat": 30.2348, "lng": -82.6373 },
+        { "lat": 30.2302, "lng": -82.6371 },
+        { "lat": 30.2302, "lng": -82.6378 }
+      ] },
+      { "ring": [
+        { "lat": 30.2340, "lng": -82.6347 },
+        { "lat": 30.2340, "lng": -82.6342 },
+        { "lat": 30.2305, "lng": -82.6341 },
+        { "lat": 30.2305, "lng": -82.6346 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 343, "pano": "ezpN_K3qtb9Iv1Dt6pVD1A", "hasCoverage": true },
+      "truckGate": { "heading": 10, "pano": "ezpN_K3qtb9Iv1Dt6pVD1A", "hasCoverage": true },
+      "dropYards": { "heading": 316, "pano": "ezpN_K3qtb9Iv1Dt6pVD1A", "hasCoverage": true },
+      "dockAprons": { "heading": 321, "pano": "ezpN_K3qtb9Iv1Dt6pVD1A", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 110,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 89.4,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@30.2318,-82.6360,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "scale", "shipRcvSeparate"],
+  "fieldNotes": {
+    "location": "Geocoded point (30.44245,-82.646011) was ~28 km too far north in open forest. Real facility resolved via Wikimedia geocoords (30.2312N, 82.6383W) + Target bullseye sign confirmed in 2026 Street View at the entrance. Center 30.2318,-82.6360, NE Lake City just SW of I-75/US-441.",
+    "truckGate": "Controlled truck entrance: divided entry/exit drive with chevron-striped median, painted stop bar, and a small canopy/checkpoint structure at the yard-entry pinch point (~30.2312,-82.6345). Whole parcel is chain-link fenced (confirmed in Street View).",
+    "guardShack": "No clearly-resolved staffed booth. The interior checkpoint shows only a small canopy/structure at z21 — could be an unmanned kiosk canopy; imagery is borderline, hence remoteGs assumed.",
+    "remoteGs": "Assumed because there is a controlled gate/checkpoint but no definitively manned guard shack; flagged uncertain.",
+    "postGateStaging": "Wide paved truck court between the interior checkpoint and the dock aprons holds queuing trucks.",
+    "dockDoors": "460,000 sq ft refrigerated DC; long west dock wall plus east and south dock banks with dozens of trailers backed in across multiple faces — clearly 50+.",
+    "dropArea": "Large arrays of trailers parked in marked rows along the west apron and east side; 50+ band.",
+    "shipRcvSeparate": "Distinct dock banks on the west wall and the east/south faces suggest separate ship/receive clusters; inferred, flagged uncertain.",
+    "fastLaneOpportunity": "Wide divided entry apron with ample paved width to add a bypass/express lane.",
+    "scale": "No truck scale pad clearly identified; flagged uncertain.",
+    "urbanRural": "Edge-of-town / rural setting — surrounded by woods, retention pond, and scattered rural residential along US-441.",
+    "counts": "dockDoorCount/trailers are honest overhead estimates from z16-z21 imagery, not exact."
+  },
+  "method": "deep-audit"
+}

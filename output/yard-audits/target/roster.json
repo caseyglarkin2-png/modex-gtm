@@ -1,0 +1,369 @@
+{
+  "account": "Target",
+  "generatedAt": "2026-06-09",
+  "note": "Freight-relevant US DC footprint; Step 0 re-pins exact coords.",
+  "facilityCount": 24,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Target Import Warehouse Savannah (T3684)",
+      "city": "Savannah",
+      "state": "GA",
+      "type": "Import Warehouse",
+      "address": "110 Little Hearst Pkwy, Savannah, GA 31407",
+      "lat": 32.17856,
+      "lng": -81.177928,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Target Import Distribution Center Lacey",
+      "city": "Lacey",
+      "state": "WA",
+      "type": "Import Warehouse",
+      "address": "3500 Marvin Rd NE, Lacey, WA 98516",
+      "lat": 47.08229,
+      "lng": -122.771529,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Target Import Distribution Center Rialto (T3806)",
+      "city": "Rialto",
+      "state": "CA",
+      "type": "Import Warehouse",
+      "address": "3105 N Mango Ave, Rialto, CA 92377",
+      "lat": 34.153258,
+      "lng": -117.430557,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Target Import Warehouse Suffolk (T3841)",
+      "city": "Suffolk",
+      "state": "VA",
+      "type": "Import Warehouse",
+      "address": "300 Manning Bridge Rd, Suffolk, VA 23434",
+      "lat": 36.707537,
+      "lng": -76.665095,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Target Regional Distribution Center Logan Township (T3857)",
+      "city": "Logan Township",
+      "state": "NJ",
+      "type": "RDC",
+      "address": "300 Creekview Ave, Bldg H, Logan Township, NJ 08085",
+      "lat": 39.781271,
+      "lng": -75.344213,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Target Regional Distribution Center Fontana (T0553)",
+      "city": "Fontana",
+      "state": "CA",
+      "type": "RDC",
+      "address": "14750 Miller Ave, Fontana, CA 92336",
+      "lat": 34.113343,
+      "lng": -117.482445,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 7,
+      "name": "Target Regional Distribution Center Shafter (T0593)",
+      "city": "Shafter",
+      "state": "CA",
+      "type": "RDC",
+      "address": "3880 Zachary Ave, Shafter, CA 93263",
+      "lat": 35.444229,
+      "lng": -119.184852,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 8,
+      "name": "Target Regional Distribution Center Madison (T0580)",
+      "city": "Madison",
+      "state": "AL",
+      "type": "RDC",
+      "address": "6175 Greenbrier Pkwy NW, Madison, AL 35756",
+      "lat": 34.64515,
+      "lng": -86.850299,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 9,
+      "name": "Target Regional Distribution Center Tifton (T0556)",
+      "city": "Tifton",
+      "state": "GA",
+      "type": "RDC",
+      "address": "4502 Union Rd, Tifton, GA 31794",
+      "lat": 31.421362,
+      "lng": -83.518147,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 10,
+      "name": "Target Regional Distribution Center Indianapolis (T0559)",
+      "city": "Indianapolis",
+      "state": "IN",
+      "type": "RDC",
+      "address": "7551 W Morris St, Indianapolis, IN 46231",
+      "lat": 39.745747,
+      "lng": -86.296794,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 11,
+      "name": "Target Regional Distribution Center Stuarts Draft (T0560)",
+      "city": "Stuarts Draft",
+      "state": "VA",
+      "type": "RDC",
+      "address": "345 Mount Vernon Rd, Stuarts Draft, VA 24477",
+      "lat": 38.03055,
+      "lng": -78.998809,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 12,
+      "name": "Target Regional Distribution Center Tyler (T0578)",
+      "city": "Tyler",
+      "state": "TX",
+      "type": "RDC",
+      "address": "13786 County Rd 433, Tyler, TX 75706",
+      "lat": 32.464374,
+      "lng": -95.411627,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 13,
+      "name": "Target Regional Distribution Center Chambersburg (T0589)",
+      "city": "Chambersburg",
+      "state": "PA",
+      "type": "RDC",
+      "address": "3001 Archer Dr, Chambersburg, PA 17201",
+      "lat": 39.891039,
+      "lng": -77.671691,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 14,
+      "name": "Target Regional Distribution Center Phoenix (T0588)",
+      "city": "Phoenix",
+      "state": "AZ",
+      "type": "RDC",
+      "address": "25 N 75th Ave, Phoenix, AZ 85043",
+      "lat": 33.44619,
+      "lng": -112.217864,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 15,
+      "name": "Target Regional Distribution Center Lugoff (T0594)",
+      "city": "Lugoff",
+      "state": "SC",
+      "type": "RDC",
+      "address": "22 Corporate Dr, Lugoff, SC 29078",
+      "lat": 34.179839,
+      "lng": -80.68179,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 16,
+      "name": "Target Regional Distribution Center Oconomowoc (T0557)",
+      "city": "Oconomowoc",
+      "state": "WI",
+      "type": "RDC",
+      "address": "1100 E Valley Rd, Oconomowoc, WI 53066",
+      "lat": 43.080753,
+      "lng": -88.479589,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 17,
+      "name": "Target Regional Distribution Center Albany (T0558)",
+      "city": "Albany",
+      "state": "OR",
+      "type": "RDC",
+      "address": "875 Beta Dr SW, Albany, OR 97322",
+      "lat": 44.579319,
+      "lng": -123.115058,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 18,
+      "name": "Target Regional Distribution Center Wilton (T0579)",
+      "city": "Wilton",
+      "state": "NY",
+      "type": "RDC",
+      "address": "129 North Rd, Wilton, NY 12831",
+      "lat": 43.177592,
+      "lng": -73.716211,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 19,
+      "name": "Target Regional Distribution Center Galesburg (T0587)",
+      "city": "Galesburg",
+      "state": "MI",
+      "type": "RDC",
+      "address": "12735 E L Ave, Galesburg, MI 49053",
+      "lat": 42.275643,
+      "lng": -85.381154,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 20,
+      "name": "Target Flow Center Pueblo (T0554)",
+      "city": "Pueblo",
+      "state": "CO",
+      "type": "Flow Center",
+      "address": "34800 United Ave, Pueblo, CO 81001",
+      "lat": 38.279662,
+      "lng": -104.467883,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 21,
+      "name": "Target Food Distribution Center Cedar Falls (T0590)",
+      "city": "Cedar Falls",
+      "state": "IA",
+      "type": "Food Distribution Center",
+      "address": "3400 Cedar Heights Dr, Cedar Falls, IA 50613",
+      "lat": 42.5077,
+      "lng": -92.41034,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 22,
+      "name": "Target Food Distribution Center West Jefferson (T3804)",
+      "city": "West Jefferson",
+      "state": "OH",
+      "type": "Food Distribution Center",
+      "address": "42 Commerce Pkwy, West Jefferson, OH 43162",
+      "lat": 39.946572,
+      "lng": -83.351404,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 23,
+      "name": "Target Food Distribution Center Lake City",
+      "city": "Lake City",
+      "state": "FL",
+      "type": "Food Distribution Center",
+      "address": "3049 N US Hwy 441, Lake City, FL 32055",
+      "lat": 30.44245,
+      "lng": -82.646011,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 24,
+      "name": "Target Food Distribution Center Denton",
+      "city": "Denton",
+      "state": "TX",
+      "type": "Food Distribution Center",
+      "address": "Airport Rd, Denton, TX 76207",
+      "lat": 33.201667,
+      "lng": -97.178575,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    }
+  ],
+  "geocodedAt": "2026-06-09"
+}

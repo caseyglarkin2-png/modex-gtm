@@ -1,0 +1,99 @@
+{
+  "name": "Target Regional Distribution Center Tyler (T0578)",
+  "type": "RDC",
+  "coords": { "lat": 32.46437, "lng": -95.41160 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 32.46765, "lng": -95.41545 },
+      { "lat": 32.46778, "lng": -95.41060 },
+      { "lat": 32.46775, "lng": -95.40720 },
+      { "lat": 32.46330, "lng": -95.40690 },
+      { "lat": 32.46300, "lng": -95.41080 },
+      { "lat": 32.46310, "lng": -95.41530 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 32.46760, "lng": -95.41560 },
+      { "lat": 32.46755, "lng": -95.41435 },
+      { "lat": 32.46700, "lng": -95.41440 },
+      { "lat": 32.46705, "lng": -95.41565 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 32.46758, "lng": -95.41420 },
+        { "lat": 32.46768, "lng": -95.40760 },
+        { "lat": 32.46650, "lng": -95.40755 },
+        { "lat": 32.46640, "lng": -95.41410 }
+      ] },
+      { "ring": [
+        { "lat": 32.46620, "lng": -95.40775 },
+        { "lat": 32.46625, "lng": -95.40700 },
+        { "lat": 32.46345, "lng": -95.40695 },
+        { "lat": 32.46340, "lng": -95.40775 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 32.46640, "lng": -95.41500 },
+        { "lat": 32.46655, "lng": -95.40790 },
+        { "lat": 32.46625, "lng": -95.40788 },
+        { "lat": 32.46610, "lng": -95.41498 }
+      ] },
+      { "ring": [
+        { "lat": 32.46610, "lng": -95.40788 },
+        { "lat": 32.46615, "lng": -95.40758 },
+        { "lat": 32.46350, "lng": -95.40755 },
+        { "lat": 32.46347, "lng": -95.40785 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 32.46700, "lng": -95.41440 },
+      { "lat": 32.46705, "lng": -95.41100 },
+      { "lat": 32.46660, "lng": -95.41100 },
+      { "lat": 32.46655, "lng": -95.41440 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 120, "pano": "0Jg9kmSlp8EDDtrDYM1lsg", "hasCoverage": true },
+      "truckGate": { "heading": 120, "pano": "0Jg9kmSlp8EDDtrDYM1lsg", "hasCoverage": true },
+      "dropYards": { "heading": 162, "pano": "CAoSHENJQUJJaERKYmJqcERGMjhQdHhLMnFDcVlhVjc.", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 220,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 97.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.46437,-95.41160,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "shipRcvSeparate", "dockDoorCount"],
+  "fieldNotes": {
+    "truckGate": "Single controlled truck entrance at the NW corner: the access road off US-69 pinches through a checkpoint with painted lane markings and a canopied gatehouse straddling the lanes (sat z19 entryseq/toproad).",
+    "guardShack": "Small white-roofed booth with a lane canopy set between inbound/outbound lanes at the gate, ~1-2 vehicle footprint, flanked by employee parking — classic staffed guard booth, not the main building.",
+    "remoteGs": "False because a physical staffed guard booth is present at the gate.",
+    "entryLanes": "~2 inbound lanes estimated from gate apron width; lane stripes visible but exact split not fully resolved.",
+    "exitLanes": "~2 outbound lanes estimated; mirror of inbound at the single gate.",
+    "fastLaneOpportunity": "Wide multi-lane gate apron with ample unused paved width to add an express/bypass lane.",
+    "dockDoors": "Continuous dock line along the full ~600m north face with trailers backed in, plus a dock bank on the east face — well into the 50+ band; door count ~120 is an overhead estimate.",
+    "dropYard": "Large dedicated trailer-storage yard north of the building and a second trailer lot off the east end, both full of parked trailers without tractors.",
+    "shipRcvSeparate": "Docks read as one continuous operation on the north face with an east-face extension; no clearly distinct ship vs rcv bank, so false (low confidence).",
+    "buildingCount": "Main DC plus a small separate annex building inside the north trailer yard (sat z18 NE) — counted as 2; not a true multi-large-building campus so multipleFacilities=false.",
+    "urbanRural": "Edge of Tyler metro on US-69 surrounded by farmland and forest — Rural.",
+    "connectivityIssue": "Directly on US-69 highway frontage near Tyler; cellular coverage expected adequate, so false.",
+    "scale": "No truck scale/weigh pad identified in the truck path."
+  },
+  "method": "deep-audit"
+}

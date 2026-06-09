@@ -1,0 +1,82 @@
+{
+  "name": "Target Regional Distribution Center Logan Township (T3857)",
+  "type": "RDC",
+  "coords": { "lat": 39.78155, "lng": -75.34450 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 39.78645, "lng": -75.34440 },
+      { "lat": 39.78560, "lng": -75.34320 },
+      { "lat": 39.78060, "lng": -75.34315 },
+      { "lat": 39.77785, "lng": -75.34160 },
+      { "lat": 39.77735, "lng": -75.34270 },
+      { "lat": 39.77895, "lng": -75.34565 },
+      { "lat": 39.78490, "lng": -75.34560 },
+      { "lat": 39.78560, "lng": -75.34520 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 39.77880, "lng": -75.34235 },
+      { "lat": 39.77865, "lng": -75.34175 },
+      { "lat": 39.77820, "lng": -75.34195 },
+      { "lat": 39.77835, "lng": -75.34255 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 39.78635, "lng": -75.34450 },
+        { "lat": 39.78560, "lng": -75.34325 },
+        { "lat": 39.78415, "lng": -75.34410 },
+        { "lat": 39.78490, "lng": -75.34535 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 39.78460, "lng": -75.34540 },
+        { "lat": 39.78440, "lng": -75.34505 },
+        { "lat": 39.77905, "lng": -75.34520 },
+        { "lat": 39.77920, "lng": -75.34555 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 270, "pano": "", "hasCoverage": false },
+      "truckGate": { "heading": 295, "pano": "", "hasCoverage": false }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 240,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 78.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.78155,-75.34450,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Multi-lane canopied gatehouse at the south truck entrance (z20/z21 sat): a wide overhead canopy spans the lanes with a booth island beneath and lane striping running through it where the access drive meets the property.",
+    "guardShack": "Staffed booth visible under the entrance canopy island (small white structure set between the truck lanes beside the gate), distinct from the main building ~700 m to the north.",
+    "remoteGs": "False because a physical guard booth is present at the gate.",
+    "dockDoors": "West face has a continuous line of trailers backed into dock doors along the entire ~700 m wall (z18 west/SW views) plus doors on the NW face; well into 50+.",
+    "dropArea": "Dedicated fenced drop yard north of the building packed with rows of parked trailers (z18 dropyard view), 100+ trailer stalls; 50+ band.",
+    "dropYard": "Separate gated trailer-storage lot on the north side of the property, distinct from the active west dock apron.",
+    "shipRcvSeparate": "Single-sided dock building (docks on west face only); east face is employee/auto parking, so no separate ship/rcv dock clusters.",
+    "drivewayLong": "Long looping access drive from the Rt 322 / interchange ramp to the gate provides deep stacking for 3+ trucks.",
+    "fastLaneOpportunity": "Wide multi-lane canopied gate apron with room for an express/bypass lane.",
+    "entryLanes": "Estimated 2 inbound from canopy lane striping; exact split with exit lanes not fully resolvable from overhead.",
+    "urbanRural": "Logan Township edge-of-town setting surrounded by farmland, wetlands and woods despite the industrial park; classified Rural per rubric tie-breaker.",
+    "siteAreaAcres": "~78 acres derived from the traced perimeter polygon (1.1M sq ft building footprint plus yard, drop yard, and parking)."
+  },
+  "method": "deep-audit"
+}

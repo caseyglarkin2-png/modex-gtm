@@ -1,0 +1,92 @@
+{
+  "name": "Target Regional Distribution Center Fontana (T0553)",
+  "type": "RDC",
+  "coords": { "lat": 34.111500, "lng": -117.480700 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 34.113850, "lng": -117.483450 },
+      { "lat": 34.113600, "lng": -117.481550 },
+      { "lat": 34.111900, "lng": -117.477200 },
+      { "lat": 34.110000, "lng": -117.477850 },
+      { "lat": 34.109800, "lng": -117.480500 },
+      { "lat": 34.110100, "lng": -117.482800 },
+      { "lat": 34.111850, "lng": -117.483450 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 34.110620, "lng": -117.482780 },
+      { "lat": 34.110480, "lng": -117.482550 },
+      { "lat": 34.110330, "lng": -117.482700 },
+      { "lat": 34.110470, "lng": -117.482930 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 34.111250, "lng": -117.479200 },
+        { "lat": 34.110600, "lng": -117.477900 },
+        { "lat": 34.109950, "lng": -117.478450 },
+        { "lat": 34.110600, "lng": -117.479760 }
+      ] },
+      { "ring": [
+        { "lat": 34.111950, "lng": -117.483300 },
+        { "lat": 34.111550, "lng": -117.482450 },
+        { "lat": 34.111000, "lng": -117.482850 },
+        { "lat": 34.111400, "lng": -117.483700 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 34.111180, "lng": -117.481020 },
+        { "lat": 34.109880, "lng": -117.478050 },
+        { "lat": 34.109760, "lng": -117.478230 },
+        { "lat": 34.111060, "lng": -117.481200 }
+      ] },
+      { "ring": [
+        { "lat": 34.113250, "lng": -117.481680 },
+        { "lat": 34.111480, "lng": -117.480950 },
+        { "lat": 34.111390, "lng": -117.481200 },
+        { "lat": 34.113160, "lng": -117.481930 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 133, "pano": "JTybK9rQjFr8tuiUcXS9mA", "hasCoverage": true },
+      "truckGate": { "heading": 82, "pano": "7I-BwY47jJ_o__3Pocxrmw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 140,
+    "trailersVisible": 360,
+    "trailerParkingCapacity": 450,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 46.1,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.111500,-117.480700,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["exitLanes", "shipRcvSeparate", "postGateStaging"],
+  "fieldNotes": {
+    "truckGate": "Posted sign at the Miller Ave office entrance reads 'NO TRUCKS - TRUCKS USE ENTRANCE ON MEYER CANYON RD'; the truck yard is fully enclosed by chain-link/decorative wall perimeter fence, and trucks enter through a controlled pinch-point on the SW (Meyer Canyon Rd) side with median islands.",
+    "guardShack": "z19-z20 satellite shows a small booth/canopy structure (green-roofed) at the SW truck-yard entry checkpoint (~34.1105,-117.4827) separating employee parking from the secured yard; corroborated by driver reviews describing check-in with gate passes at the gate/shipping office.",
+    "remoteGs": "False because a staffed booth is present at the gate.",
+    "dockDoors": "Very large RDC; dock doors line the entire SW (west) face and the long south face with trailers backed in across both, easily 50+ (estimated ~140 total).",
+    "dropArea": "Extensive trailer drop yard wraps the building south/east plus a separate west drop yard; hundreds of parked trailers without tractors, far exceeding 50.",
+    "shipRcvSeparate": "Two distinct dock banks on different building faces (long south face and west face) suggest separate ship/receive clusters - medium confidence.",
+    "fastLaneOpportunity": "Wide gate apron and broad internal yard pavement leave ample room for a bypass/express lane.",
+    "postGateStaging": "Large paved yard between the gate and the dock doors provides inside-gate holding; inferred from yard geometry.",
+    "entryLanes": "Gate apron appears to support ~2 inbound lanes; exit lanes not separately confirmed.",
+    "railServed": "No rail spur enters the property; the NE diagonal corridor is a separate utility/road right-of-way.",
+    "urbanRural": "Dense Inland Empire industrial/residential fabric of Fontana - Urban."
+  },
+  "method": "deep-audit"
+}

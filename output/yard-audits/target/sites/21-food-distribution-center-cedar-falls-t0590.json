@@ -1,0 +1,101 @@
+{
+  "name": "Target Food Distribution Center Cedar Falls (T0590)",
+  "type": "Food Distribution Center",
+  "coords": { "lat": 42.47660, "lng": -92.47030 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 42.47840, "lng": -92.47215 },
+      { "lat": 42.47855, "lng": -92.47010 },
+      { "lat": 42.47835, "lng": -92.46895 },
+      { "lat": 42.47595, "lng": -92.46850 },
+      { "lat": 42.47520, "lng": -92.46862 },
+      { "lat": 42.47480, "lng": -92.47075 },
+      { "lat": 42.47500, "lng": -92.47220 },
+      { "lat": 42.47700, "lng": -92.47230 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 42.47578, "lng": -92.46980 },
+      { "lat": 42.47572, "lng": -92.46905 },
+      { "lat": 42.47535, "lng": -92.46912 },
+      { "lat": 42.47540, "lng": -92.46985 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 42.47505, "lng": -92.47205 },
+        { "lat": 42.47498, "lng": -92.46975 },
+        { "lat": 42.47478, "lng": -92.46980 },
+        { "lat": 42.47485, "lng": -92.47208 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 42.47820, "lng": -92.47195 },
+        { "lat": 42.47812, "lng": -92.46985 },
+        { "lat": 42.47792, "lng": -92.46988 },
+        { "lat": 42.47800, "lng": -92.47198 }
+      ] },
+      { "ring": [
+        { "lat": 42.47555, "lng": -92.47190 },
+        { "lat": 42.47548, "lng": -92.46992 },
+        { "lat": 42.47528, "lng": -92.46996 },
+        { "lat": 42.47535, "lng": -92.47193 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 323, "pano": "7h8eZAquVwBdmbGDBdrMzg", "hasCoverage": true },
+      "truckGate": { "heading": 319, "pano": "7h8eZAquVwBdmbGDBdrMzg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 58,
+    "trailersVisible": 95,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 28.1,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.4766,-92.4703,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["postGateStaging", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "location": "Geocoded point (42.5077,-92.41034 / 3400 Cedar Heights Dr) was wrong - landed in a residential/retail area ~6km NE. Correct facility is the Target Food Distribution Center at 2115 Technology Pkwy / 6601 Hudson Rd, Cedar Falls, confirmed by Iowa DNR Facility Explorer (facID 311387103, coords 42.47508,-92.46961) sitting on this building's SE office wing.",
+    "truckGate": "Truck yard is fully enclosed by black metal perimeter fence (visible in 2026-04 Street View along the east side). Single controlled truck entrance off the SE internal access drive. Driver reviews explicitly reference 'the security gate' and a 'guard shack'.",
+    "guardShack": "Driver reviews describe a staffed guard shack at the gate with a pneumatic-tube ('cylinders that you put the bills in and gets shot to the office like at a bank') document-exchange system - a manned booth, not a kiosk.",
+    "remoteGs": "False because a staffed guard shack is present (per driver reviews); not an unmanned kiosk/app check-in.",
+    "dockDoors": "Three dock banks: north face (facing the GM DC shared aisle), south face (over the drop yard), and a west apron. Combined door count well over 50; estimate ~58.",
+    "shipRcvSeparate": "Distinct dock banks on opposite (north and south) building faces.",
+    "dropArea": "Multiple full rows of reefer trailers parked without tractors in the south yard (z19/z20 imagery); 25-50 band.",
+    "scale": "No truck scale/weigh pad visible in the truck path.",
+    "urbanRural": "Edge-of-town site on Hudson Rd surrounded by farmland and a retention pond; Rural.",
+    "connectivityIssue": "False - large Target campus on a developed industrial parkway with adjacent office buildings; cellular coverage expected to be fine.",
+    "postGateStaging": "Wide paved apron between the gate and the dock faces can hold queued trucks (inferred from overhead); flagged uncertain.",
+    "railServed": "No rail spur enters the property."
+  },
+  "method": "deep-audit"
+}
