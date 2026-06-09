@@ -1,0 +1,72 @@
+{
+  "account": "Harris Teeter",
+  "generatedAt": "2026-06-09",
+  "facilityCount": 4,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Harris Teeter Perishable Distribution Center Indian Trail NC",
+      "city": "Indian Trail",
+      "state": "NC",
+      "type": "Perishable DC",
+      "address": "6001 W Highway 74, Indian Trail, NC 28079",
+      "source": "Harris Teeter careers/distribution portal lists Indian Trail Perishable + Grocery warehouses; address verified via TruckMap and Union County / Waze listings (6001 W Hwy 74). Historically the company's all-perishables hub for the chain.",
+      "lat": 35.065177,
+      "lng": -80.645931,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Harris Teeter Grocery Distribution Center Indian Trail NC",
+      "city": "Indian Trail",
+      "state": "NC",
+      "type": "Grocery Distribution Center",
+      "address": "6001 W Highway 74, Indian Trail, NC 28079",
+      "source": "Harris Teeter careers/distribution portal lists separate Grocery Warehouse at the Indian Trail campus; expanded 317,000 sq ft to handle dry grocery (Supermarket News). Same campus address as perishable DC.",
+      "lat": 35.065177,
+      "lng": -80.645931,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Harris Teeter Distribution Center Greensboro NC",
+      "city": "Greensboro",
+      "state": "NC",
+      "type": "Frozen DC",
+      "address": "200 Distribution Dr, Greensboro, NC 27410",
+      "source": "Address verified via TruckMap, Yelp, Waze, county chamber listings (200 Distribution Dr). Historically the chain's frozen + dry grocery depot; added 174,000 sq ft of perishable capacity (Supermarket News). 24/7 distribution operation.",
+      "lat": 36.093784,
+      "lng": -79.929764,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Harris Teeter Distribution Center Ruther Glen VA",
+      "city": "Ruther Glen",
+      "state": "VA",
+      "type": "Grocery Distribution Center",
+      "address": "Cool Water Dr, Ruther Glen, VA 22546",
+      "source": "Caroline County (Carmel Church) 1.5M sq ft mixed-temp DC near I-95 Exit 104; Caroline County Board of Supervisors rezoning and Virginia Business / Fredericksburg Regional Alliance confirm location on Cool Water Dr at north end of Loop Road. First VA distribution operation, $200M buildout, ~500 jobs.",
+      "lat": 37.962869,
+      "lng": -77.476173,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    }
+  ],
+  "geocodedAt": "2026-06-09"
+}

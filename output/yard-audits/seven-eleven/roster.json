@@ -1,0 +1,216 @@
+{
+  "account": "7-Eleven",
+  "generatedAt": "2026-06-09",
+  "facilityCount": 13,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "7-Eleven Combined Distribution Center Bohemia NY",
+      "city": "Bohemia",
+      "state": "NY",
+      "type": "Fresh Food Commissary",
+      "address": "545 Johnson Avenue, Bohemia, NY 11716",
+      "source": "7-Eleven 2009 press release (GlobeNewswire/Franchising.com) describing the 130,000 sq ft Long Island Commissary & CDC operated by Norris Food Services; address confirmed by 545 Johnson Ave '7-11, CDC Distribution' facility listing",
+      "lat": 40.777146,
+      "lng": -73.093362,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 2,
+      "name": "7-Eleven Distribution Co Cold Storage DC Santa Fe Springs CA",
+      "city": "Santa Fe Springs",
+      "state": "CA",
+      "type": "Grocery DC",
+      "address": "12330 Lakeland Road, Santa Fe Springs, CA 90670",
+      "source": "Dun & Bradstreet / IndustryNet / Manta business-directory listings for '7-Eleven Distribution Company,' cold-storage / frozen prepackaged foods warehouse",
+      "lat": 33.930856,
+      "lng": -118.068625,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 3,
+      "name": "7-Eleven Combined Distribution Center Austin TX (E.A. Sween)",
+      "city": "Austin",
+      "state": "TX",
+      "type": "Combined Distribution Center",
+      "address": "8606 Wall Street, Suite 450, Austin, TX 78754",
+      "source": "E.A. Sween CDC locations (operator of 7-Eleven CDCs); Yellowpages 'E A Sween Co CDC' Austin listing",
+      "lat": 30.341858,
+      "lng": -97.673059,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 4,
+      "name": "7-Eleven Combined Distribution Center Salt Lake City UT (E.A. Sween)",
+      "city": "Salt Lake City",
+      "state": "UT",
+      "type": "Combined Distribution Center",
+      "address": "1172 South Swaner Road, Salt Lake City, UT 84104",
+      "source": "E.A. Sween CDC location list (operator of 7-Eleven Combined Distribution Centers)",
+      "lat": 40.744129,
+      "lng": -111.952622,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 5,
+      "name": "7-Eleven Combined Distribution Center North Las Vegas NV (E.A. Sween)",
+      "city": "North Las Vegas",
+      "state": "NV",
+      "type": "Combined Distribution Center",
+      "address": "6350 E. Centennial Parkway, North Las Vegas, NV 89115",
+      "source": "E.A. Sween CDS/CDC location list (operator of 7-Eleven Combined Distribution Centers)",
+      "lat": 36.278044,
+      "lng": -115.032883,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 6,
+      "name": "7-Eleven Combined Distribution Center Commerce City CO (E.A. Sween Denver)",
+      "city": "Commerce City",
+      "state": "CO",
+      "type": "Combined Distribution Center",
+      "address": "5700 E. 56th Avenue, Unit D, Commerce City, CO 80022",
+      "source": "E.A. Sween Denver VAS/CDC location list (operator of 7-Eleven Combined Distribution Centers)",
+      "lat": 39.795841,
+      "lng": -104.920816,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 7,
+      "name": "7-Eleven Combined Distribution Center Lewisville TX (E.A. Sween Dallas)",
+      "city": "Lewisville",
+      "state": "TX",
+      "type": "Combined Distribution Center",
+      "address": "1301-A Ridgeview Drive, Suite 100, Lewisville, TX 75057",
+      "source": "E.A. Sween Dallas-area CDC location list (operator of 7-Eleven Combined Distribution Centers serving the Dallas Metroplex)",
+      "lat": 33.026075,
+      "lng": -96.981654,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 8,
+      "name": "7-Eleven Combined Distribution Center Moore OK (E.A. Sween)",
+      "city": "Moore",
+      "state": "OK",
+      "type": "Combined Distribution Center",
+      "address": "110 NW 1st Street, Moore, OK 73160",
+      "source": "E.A. Sween Moore VAS/CDC location list (operator of 7-Eleven Combined Distribution Centers)",
+      "lat": 35.338977,
+      "lng": -97.487348,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 9,
+      "name": "7-Eleven Combined Distribution Center Woodridge IL (E.A. Sween Chicago)",
+      "city": "Woodridge",
+      "state": "IL",
+      "type": "Combined Distribution Center",
+      "address": "10441 Beaudin Boulevard, Unit 200, Woodridge, IL 60517",
+      "source": "E.A. Sween Chicago VAS/CDC location list (operator of 7-Eleven Combined Distribution Centers)",
+      "lat": 41.696892,
+      "lng": -88.035613,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 10,
+      "name": "7-Eleven Distribution Warehouse Mishawaka IN (E.A. Sween)",
+      "city": "Mishawaka",
+      "state": "IN",
+      "type": "Grocery DC",
+      "address": "2402 West 6th Street, Mishawaka, IN 46544",
+      "source": "E.A. Sween Indiana warehouse location list (operator of 7-Eleven distribution)",
+      "lat": 41.656893,
+      "lng": -86.209828,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 11,
+      "name": "7-Eleven Fresh Food Production & Distribution Eden Prairie MN (E.A. Sween)",
+      "city": "Eden Prairie",
+      "state": "MN",
+      "type": "Fresh Food Commissary",
+      "address": "16101 West 78th Street, Eden Prairie, MN 55344",
+      "source": "E.A. Sween corporate production facility and CDC network HQ (easween.com/contact); E.A. Sween developed and operates 7-Eleven's Combined Distribution Center model",
+      "lat": 44.860781,
+      "lng": -93.481294,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 12,
+      "name": "7-Eleven Grocery DC Fredericksburg VA (McLane Mid-Atlantic)",
+      "city": "Fredericksburg",
+      "state": "VA",
+      "type": "Grocery DC",
+      "address": "56 McLane Drive, Fredericksburg, VA 22406",
+      "source": "McLane Mid-Atlantic DC, opened 1973 as Southland (7-Eleven) Distribution Center; McLane 50th-anniversary release and Fredericksburg Chamber listing",
+      "lat": 38.348274,
+      "lng": -77.496559,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 13,
+      "name": "7-Eleven Grocery DC Fort Worth TX (McLane North Texas)",
+      "city": "Fort Worth",
+      "state": "TX",
+      "type": "Grocery DC",
+      "address": "7550 Oak Grove Road, Fort Worth, TX 76140",
+      "source": "McLane North Texas 625,000 sq ft grocery DC (opened March 2019, serves 7-Eleven and other c-stores); Fort Worth City Council economic-development agreement and FleetOwner/CSNews coverage",
+      "lat": 32.640398,
+      "lng": -97.309625,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    }
+  ],
+  "geocodedAt": "2026-06-09"
+}

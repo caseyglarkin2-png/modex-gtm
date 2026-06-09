@@ -1,0 +1,120 @@
+{
+  "account": "Stop & Shop",
+  "generatedAt": "2026-06-09",
+  "facilityCount": 7,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Stop & Shop Grocery Distribution Center Freetown MA",
+      "city": "Assonet (Freetown)",
+      "state": "MA",
+      "type": "Grocery Distribution Center",
+      "address": "136 South Main Street, Assonet, MA 02702",
+      "source": "ADUSA Supply Chain / Ahold Delhaize self-distribution releases (Freetown Grocery, 1.1M sq ft serving 200+ Stop & Shop stores); address verified via Yelp/Waze/Foursquare business listings at 136 S Main St, Assonet MA 02702",
+      "lat": 41.779383,
+      "lng": -71.091412,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Stop & Shop Fresh DC Freetown MA",
+      "city": "Assonet (Freetown)",
+      "state": "MA",
+      "type": "Fresh DC",
+      "address": "136 South Main Street, Assonet, MA 02702",
+      "source": "ADUSA / Ahold Delhaize releases list 'Freetown Fresh' as a separate perishable facility at the Assonet campus (Supermarket News 'readies six facilities' article); same 136 S Main St campus address per business listings and driver receiving notes",
+      "lat": 41.779383,
+      "lng": -71.091412,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Stop & Shop Grocery Distribution Center Manchester CT",
+      "city": "Manchester",
+      "state": "CT",
+      "type": "Grocery Distribution Center",
+      "address": "1339 Tolland Turnpike, Manchester, CT 06042",
+      "source": "ADUSA Supply Chain news release (1M sq ft, 88M cases/yr of nonperishable grocery for 450+ Stop & Shop stores); address 1339 Tolland Tpke confirmed via Winstanley property portfolio listing and CT business license record",
+      "lat": 41.800132,
+      "lng": -72.566458,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Stop & Shop Fresh DC Schodack Landing NY",
+      "city": "Schodack Landing",
+      "state": "NY",
+      "type": "Fresh DC",
+      "address": "970 Route 9, Schodack Landing, NY 12156",
+      "source": "ADUSA Distribution facility DC02 serving Stop & Shop & Hannaford (fresh/frozen/grocery mix); address 970 Route 9 confirmed via ADUSA jobs page, Yahoo Local business listing, and TruckMap",
+      "lat": 42.494917,
+      "lng": -73.669953,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Stop & Shop Grocery Distribution Center Bethlehem PA",
+      "city": "Bethlehem",
+      "state": "PA",
+      "type": "Grocery Distribution Center",
+      "address": "4820-4950 Hanoverville Road, Bethlehem, PA 18020",
+      "source": "ADUSA Supply Chain release (1.2M sq ft, 200M cases/yr nonperishable for 210+ Stop & Shop and GIANT stores; former C&S facility); address verified via Yahoo Local / Dun & Bradstreet ADUSA Distribution Bethlehem listing",
+      "lat": 40.687688,
+      "lng": -75.364725,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Stop & Shop Frozen DC Plainville CT",
+      "city": "Plainville",
+      "state": "CT",
+      "type": "Frozen DC",
+      "address": "24 Northwest Drive, Plainville, CT 06062",
+      "source": "Ahold Delhaize / Americold automated frozen warehouse (229K sq ft, 12-story) serving Stop & Shop & Hannaford in the Northeast; address 24 Northwest Dr per Shelton Herald and Bristol Press coverage of the facility",
+      "lat": 41.693397,
+      "lng": -72.858617,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 7,
+      "name": "Stop & Shop Cross-Dock Chester NY",
+      "city": "Chester",
+      "state": "NY",
+      "type": "Cross-Dock",
+      "address": "14 Elizabeth Drive, Chester, NY 10918",
+      "source": "ADUSA Distribution news release (Aug 2023, former C&S; ~600K sq ft multi-temperature & freezer, 65M cases/yr serving Stop & Shop & Hannaford; yard with 350+ trailer spots and ~100 dock doors); address 14 Elizabeth Dr confirmed via GlobeNewswire release and City-Data listing",
+      "lat": 41.349722,
+      "lng": -74.28646,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    }
+  ],
+  "geocodedAt": "2026-06-09"
+}
