@@ -1,16 +1,10 @@
 'use client';
 
-import { useCallback, useEffect, useId, useRef, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 
 const FONT_SERIF = 'font-[family-name:var(--font-memo-serif)]';
 const FONT_SANS = 'font-[family-name:var(--font-memo-sans)]';
 const FONT_MONO = 'font-[family-name:var(--font-memo-mono)]';
-
-const PLAYBACK_SPEEDS: readonly number[] = [1, 1.25, 1.5, 2, 0.75];
-
-function formatSpeed(rate: number): string {
-  return `${Number.isInteger(rate) ? rate : rate.toString().replace(/\.?0+$/, '')}×`;
-}
 
 export interface AudioChapter {
   /** Stable id used for the active-chapter state and section anchoring. */
@@ -31,7 +25,7 @@ export interface VideoFollowUp {
 }
 
 interface MemoAudioBriefProps {
-  /** Public path to the mp3 (e.g. "/audio/yard-network-brief.mp3"). */
+  /** Public path to the audio (e.g. "/audio/yard-network-brief.mp3"). */
   src: string;
   /** Chapter table — rendered as the click-to-seek list. */
   chapters: AudioChapter[];
@@ -45,39 +39,33 @@ interface MemoAudioBriefProps {
   accentColor?: string;
   /** Section id for anchor + tracking. Default "audio". */
   sectionId?: string;
-  /** Optional total-length hint shown next to "Run time" before audio metadata loads. */
+  /** @deprecated The native control shows duration on its own; kept so existing
+   *  call sites that still pass it don't break. No longer rendered. */
   expectedDuration?: string;
   /** Optional follow-up video CTA rendered as a hairline-separated footer below chapters. */
   videoFollowUp?: VideoFollowUp;
 }
 
 /**
- * "Audio register" — a parallel section (like the personalized preamble) that
- * sits below the §-numbered registers but above the soft-action close.
+ * "Audio register" — the spoken version of the memo.
  *
- * The shape mirrors the rest of the memo: eyebrow, Fraunces heading, a brief
- * editorial intro, then the working surface — in this case, an inline tape
- * player with a hairline scrub strip and a Roman-numeraled chapter list. The
- * controls are styled as part of the document, not pasted-on web chrome:
- * a single accent-bordered play disk, a 2px-tall progress hairline that
- * matches the document rules, and time/chapter labels typeset in JetBrains
- * Mono with tabular numerals.
+ * The player is the browser's own native `<audio controls>`. We used to wrap
+ * it in a bespoke accent-colored play disk, tape-strip scrubber, and speed
+ * toggle; that chrome was decorative and did not reliably play, so it's gone.
+ * The real control does the talking. The chapter list below still click-to-
+ * seeks the same element, and the optional follow-up video uses native
+ * `<video controls>` too.
  *
  * Tracking surfaces:
  *   data-ms-section-id="audio"     — counted as a viewed section by the
- *                                    intersection-observer in
- *                                    use-microsite-tracker.tsx.
- *   data-ms-cta-id="audio-play"    — first play click counted as a CTA.
+ *                                    intersection-observer in use-microsite-tracker.
  *   data-ms-cta-id="audio-chapter" — chapter seek counted as a CTA (the
  *                                    chapter id rides on data-chapter-id).
+ *   audioProgressPct               — captured by the tracker directly off the
+ *                                    <audio> element (querySelector + timeupdate),
+ *                                    so playback engagement is still measured.
  *
- * Hydration safety: every dynamic readout (currentTime, duration, playing
- * state, active chapter) is initialized to deterministic defaults that match
- * what the server renders. Audio metadata is loaded after mount via
- * `loadedmetadata`; until then, the run-time slot shows `expectedDuration`
- * (or em-dashes) so layout doesn't shift.
- *
- * Mobile: play button is 44×44; chapter rows have ≥44px tap height.
+ * The playhead is tracked here only to highlight the active chapter row.
  */
 export function MemoAudioBrief({
   src,
@@ -87,62 +75,20 @@ export function MemoAudioBrief({
   intro,
   accentColor,
   sectionId = 'audio',
-  expectedDuration,
   videoFollowUp,
 }: MemoAudioBriefProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
-  const stripRef = useRef<HTMLDivElement | null>(null);
-  const [playing, setPlaying] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
-  const [duration, setDuration] = useState(0);
-  const [scrubFraction, setScrubFraction] = useState<number | null>(null);
-  const [playbackRate, setPlaybackRate] = useState(1);
-  const playStripId = useId();
-
-  const cycleSpeed = useCallback(() => {
-    setPlaybackRate((curr) => {
-      const idx = PLAYBACK_SPEEDS.indexOf(curr);
-      const next = PLAYBACK_SPEEDS[(idx + 1) % PLAYBACK_SPEEDS.length] ?? 1;
-      const a = audioRef.current;
-      if (a) a.playbackRate = next;
-      return next;
-    });
-  }, []);
 
   const accentStyle = accentColor ? ({ ['--memo-accent']: accentColor } as React.CSSProperties) : undefined;
 
-  // Wire up audio element listeners after mount.
+  // Track the playhead only to highlight the active chapter row.
   useEffect(() => {
     const a = audioRef.current;
     if (!a) return;
-    const onPlay = () => setPlaying(true);
-    const onPause = () => setPlaying(false);
-    const onEnded = () => setPlaying(false);
-    const onLoaded = () => setDuration(a.duration);
     const onTime = () => setCurrentTime(a.currentTime);
-    a.addEventListener('play', onPlay);
-    a.addEventListener('pause', onPause);
-    a.addEventListener('ended', onEnded);
-    a.addEventListener('loadedmetadata', onLoaded);
     a.addEventListener('timeupdate', onTime);
-    if (a.readyState >= 1) onLoaded();
-    return () => {
-      a.removeEventListener('play', onPlay);
-      a.removeEventListener('pause', onPause);
-      a.removeEventListener('ended', onEnded);
-      a.removeEventListener('loadedmetadata', onLoaded);
-      a.removeEventListener('timeupdate', onTime);
-    };
-  }, []);
-
-  const togglePlay = useCallback(() => {
-    const a = audioRef.current;
-    if (!a) return;
-    if (a.paused) {
-      void a.play();
-    } else {
-      a.pause();
-    }
+    return () => a.removeEventListener('timeupdate', onTime);
   }, []);
 
   const seekTo = useCallback((t: number) => {
@@ -152,53 +98,11 @@ export function MemoAudioBrief({
     setCurrentTime(a.currentTime);
   }, []);
 
-  // Pointer-driven scrubbing on the tape strip.
-  const fractionFromEvent = useCallback((e: React.PointerEvent<HTMLDivElement>) => {
-    const strip = stripRef.current;
-    if (!strip) return 0;
-    const rect = strip.getBoundingClientRect();
-    const x = e.clientX - rect.left;
-    return Math.max(0, Math.min(1, x / rect.width));
-  }, []);
-
-  const onStripPointerDown = useCallback(
-    (e: React.PointerEvent<HTMLDivElement>) => {
-      const f = fractionFromEvent(e);
-      setScrubFraction(f);
-      (e.target as Element).setPointerCapture?.(e.pointerId);
-    },
-    [fractionFromEvent],
-  );
-  const onStripPointerMove = useCallback(
-    (e: React.PointerEvent<HTMLDivElement>) => {
-      if (scrubFraction === null) return;
-      setScrubFraction(fractionFromEvent(e));
-    },
-    [scrubFraction, fractionFromEvent],
-  );
-  const onStripPointerUp = useCallback(
-    (e: React.PointerEvent<HTMLDivElement>) => {
-      if (scrubFraction === null) return;
-      const f = fractionFromEvent(e);
-      setScrubFraction(null);
-      const total = duration || audioRef.current?.duration || 0;
-      if (total > 0) seekTo(f * total);
-    },
-    [scrubFraction, duration, fractionFromEvent, seekTo],
-  );
-
   // Active chapter: the last chapter whose start <= currentTime.
   const activeChapterIdx = chapters.reduce(
     (acc, ch, i) => (ch.start <= currentTime ? i : acc),
     0,
   );
-
-  const playProgress =
-    scrubFraction !== null
-      ? scrubFraction
-      : duration > 0
-        ? Math.min(1, currentTime / duration)
-        : 0;
 
   return (
     <section
@@ -242,123 +146,22 @@ export function MemoAudioBrief({
         )}
       </p>
 
-      {/* Player band ── hairline borders top/bottom, like the soft-action close. */}
-      <div
-        className="my-9 border-y border-[#d8d2c2] py-7"
-        aria-labelledby={`${playStripId}-label`}
-      >
-        <audio ref={audioRef} src={src} preload="metadata" data-testid="memo-audio-brief-element" />
-
-        <div className="flex items-center gap-5 sm:gap-6">
-          <button
-            type="button"
-            onClick={togglePlay}
-            data-ms-cta-id="audio-play"
-            aria-label={playing ? 'Pause audio brief' : 'Play audio brief'}
-            aria-pressed={playing}
-            className={[
-              'flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-[color:var(--memo-accent)] transition-colors',
-              'focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--memo-accent)]',
-              playing
-                ? 'bg-[color:var(--memo-accent)] text-[#fffdf7]'
-                : 'text-[color:var(--memo-accent)] hover:bg-[color:var(--memo-accent)] hover:text-[#fffdf7]',
-            ].join(' ')}
-          >
-            {playing ? <PauseGlyph /> : <PlayGlyph />}
-          </button>
-
-          <div className="flex min-w-0 flex-1 flex-col gap-2">
-            <div
-              id={`${playStripId}-label`}
-              className={`flex min-w-0 items-baseline justify-between gap-3 text-[11.5px] uppercase tracking-[0.18em] text-[#8a847b] ${FONT_MONO}`}
-            >
-              <span className="min-w-0 truncate">
-                {chapters[activeChapterIdx]
-                  ? `${toRoman(activeChapterIdx + 1)} · ${chapters[activeChapterIdx].label}`
-                  : 'Run time'}
-              </span>
-              <span className="flex items-baseline gap-3 shrink-0">
-                <span className="tabular-nums text-[#4a4641]">
-                  {duration > 0
-                    ? `${formatTime(currentTime)} / ${formatTime(duration)}`
-                    : `0:00 / ${expectedDuration ?? '—:—'}`}
-                </span>
-                <button
-                  type="button"
-                  onClick={cycleSpeed}
-                  data-ms-cta-id="audio-speed"
-                  aria-label={`Playback speed ${formatSpeed(playbackRate)}. Click to change.`}
-                  className="tabular-nums tracking-[0.04em] text-[#8a847b] transition-colors hover:text-[color:var(--memo-accent)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[color:var(--memo-accent)]"
-                >
-                  {formatSpeed(playbackRate)}
-                </button>
-              </span>
-            </div>
-
-            {/* Tape strip — the click/drag surface is a fat invisible band around
-                a 2px hairline so finger-touch hits don't have to be pixel-perfect. */}
-            <div
-              className="relative -my-2 cursor-pointer touch-none py-2"
-              onPointerDown={onStripPointerDown}
-              onPointerMove={onStripPointerMove}
-              onPointerUp={onStripPointerUp}
-              onPointerCancel={() => setScrubFraction(null)}
-              role="slider"
-              aria-valuemin={0}
-              aria-valuemax={duration > 0 ? Math.round(duration) : 100}
-              aria-valuenow={Math.round(scrubFraction !== null ? scrubFraction * (duration || 0) : currentTime)}
-              aria-label="Seek audio brief"
-              tabIndex={0}
-              onKeyDown={(e) => {
-                if (!duration) return;
-                if (e.key === 'ArrowRight') {
-                  seekTo(currentTime + 5);
-                  e.preventDefault();
-                } else if (e.key === 'ArrowLeft') {
-                  seekTo(currentTime - 5);
-                  e.preventDefault();
-                }
-              }}
-            >
-              <div ref={stripRef} className="relative h-[2px] w-full bg-[#d8d2c2]">
-                {/* Chapter ticks — hairline marks where each chapter starts. */}
-                {duration > 0
-                  ? chapters.slice(1).map((ch) => (
-                      <span
-                        key={ch.id}
-                        aria-hidden="true"
-                        className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2"
-                        style={{
-                          left: `${(ch.start / duration) * 100}%`,
-                          height: '6px',
-                          width: '1px',
-                          background: '#a89e8b',
-                        }}
-                      />
-                    ))
-                  : null}
-                <div
-                  className="absolute left-0 top-0 h-full"
-                  style={{
-                    width: `${playProgress * 100}%`,
-                    background: 'var(--memo-accent)',
-                  }}
-                />
-                <div
-                  aria-hidden="true"
-                  className="absolute top-1/2 size-2 -translate-x-1/2 -translate-y-1/2 rounded-full"
-                  style={{
-                    left: `${playProgress * 100}%`,
-                    background: 'var(--memo-accent)',
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-        </div>
+      {/* Player band ── the browser's native audio control, hairline-bordered
+          top/bottom to sit inside the document rules. No custom chrome. */}
+      <div className="my-9 border-y border-[#d8d2c2] py-7">
+        <audio
+          ref={audioRef}
+          src={src}
+          controls
+          preload="metadata"
+          data-testid="memo-audio-brief-element"
+          className="w-full"
+        >
+          Your browser does not support the audio element.
+        </audio>
       </div>
 
-      {/* Chapter list */}
+      {/* Chapter list — each row seeks the same native element. */}
       <ol className={`mt-2 ${FONT_SANS} text-[15px] text-[#4a4641]`}>
         {chapters.map((ch, i) => {
           const active = i === activeChapterIdx;
@@ -466,21 +269,4 @@ function toRoman(n: number): string {
     }
   }
   return out;
-}
-
-function PlayGlyph() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">
-      <path d="M4 3 L13 8 L4 13 Z" fill="currentColor" />
-    </svg>
-  );
-}
-
-function PauseGlyph() {
-  return (
-    <svg width="14" height="14" viewBox="0 0 16 16" aria-hidden="true">
-      <rect x="4" y="3" width="3" height="10" fill="currentColor" />
-      <rect x="9" y="3" width="3" height="10" fill="currentColor" />
-    </svg>
-  );
 }

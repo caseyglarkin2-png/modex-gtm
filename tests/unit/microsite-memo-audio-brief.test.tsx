@@ -1,4 +1,4 @@
-import { render, screen, fireEvent } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import { describe, expect, it } from 'vitest';
 import {
   MemoAudioBrief,
@@ -33,7 +33,7 @@ describe('MemoAudioBrief', () => {
     expect(section?.getAttribute('data-ms-section-id')).toBe('audio');
   });
 
-  it('mounts an <audio> element with the provided src', () => {
+  it('mounts a native <audio controls> element with the provided src', () => {
     const { container } = render(
       <MemoAudioBrief src="/audio/yard-network-brief.mp3" chapters={chapters} />,
     );
@@ -41,16 +41,16 @@ describe('MemoAudioBrief', () => {
     expect(audio).not.toBeNull();
     expect(audio?.getAttribute('src')).toBe('/audio/yard-network-brief.mp3');
     expect(audio?.getAttribute('preload')).toBe('metadata');
+    // The real play button is the browser's own control — no bespoke chrome.
+    expect((audio as HTMLAudioElement)?.controls).toBe(true);
   });
 
-  it('renders the play button as a 44×44 tap target with audio-play CTA tracking', () => {
+  it('no longer renders the custom play disk or scrub strip (native controls only)', () => {
     render(<MemoAudioBrief src="/audio/yard-network-brief.mp3" chapters={chapters} />);
-    const btn = screen.getByLabelText(/play audio brief/i);
-    // Tailwind h-11 w-11 = 44×44.
-    expect(btn.className).toMatch(/h-11/);
-    expect(btn.className).toMatch(/w-11/);
-    expect(btn.getAttribute('data-ms-cta-id')).toBe('audio-play');
-    expect(btn.getAttribute('aria-pressed')).toBe('false');
+    expect(screen.queryByLabelText(/play audio brief/i)).toBeNull();
+    expect(screen.queryByRole('slider', { name: /seek audio brief/i })).toBeNull();
+    expect(document.querySelector('[data-ms-cta-id="audio-play"]')).toBeNull();
+    expect(document.querySelector('[data-ms-cta-id="audio-speed"]')).toBeNull();
   });
 
   it('renders all chapters with Roman-numeraled markers and timestamps', () => {
@@ -81,24 +81,18 @@ describe('MemoAudioBrief', () => {
     expect(ctas[1].getAttribute('aria-current')).toBeNull();
   });
 
-  it('renders a slider role for the scrub strip with arrow-key seek wired up', () => {
-    render(<MemoAudioBrief src="/audio/yard-network-brief.mp3" chapters={chapters} />);
-    const slider = screen.getByRole('slider', { name: /seek audio brief/i });
-    expect(slider).toBeDefined();
-    // ArrowLeft / ArrowRight should be handled (no-op pre-metadata is fine — just no exception).
-    fireEvent.keyDown(slider, { key: 'ArrowRight' });
-    fireEvent.keyDown(slider, { key: 'ArrowLeft' });
-  });
-
-  it('falls back to the expectedDuration hint until audio metadata loads', () => {
-    render(
+  it('still accepts the deprecated expectedDuration prop without rendering custom chrome', () => {
+    const { container } = render(
       <MemoAudioBrief
         src="/audio/yard-network-brief.mp3"
         chapters={chapters}
         expectedDuration="7:12"
       />,
     );
-    expect(screen.getByText('0:00 / 7:12')).toBeDefined();
+    // Prop is accepted for call-site compatibility but no longer renders a
+    // custom time readout — the native control owns the duration display.
+    expect(screen.queryByText('0:00 / 7:12')).toBeNull();
+    expect(container.querySelector('audio')).not.toBeNull();
   });
 });
 
