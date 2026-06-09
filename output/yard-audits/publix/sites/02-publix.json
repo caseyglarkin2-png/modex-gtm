@@ -1,0 +1,110 @@
+{
+  "name": "Publix Frozen DC Lakeland FL",
+  "type": "Frozen DC",
+  "coords": { "lat": 28.0070, "lng": -82.0420 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 28.00885, "lng": -82.04465 },
+      { "lat": 28.00910, "lng": -82.04055 },
+      { "lat": 28.00445, "lng": -82.04025 },
+      { "lat": 28.00425, "lng": -82.04445 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 28.00050, "lng": -82.04640 },
+      { "lat": 28.00030, "lng": -82.04590 },
+      { "lat": 27.99940, "lng": -82.04660 },
+      { "lat": 27.99960, "lng": -82.04710 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 28.00880, "lng": -82.04130 },
+        { "lat": 28.00895, "lng": -82.04020 },
+        { "lat": 28.00760, "lng": -82.04010 },
+        { "lat": 28.00755, "lng": -82.04120 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 28.00735, "lng": -82.04185 },
+        { "lat": 28.00640, "lng": -82.04085 },
+        { "lat": 28.00610, "lng": -82.04120 },
+        { "lat": 28.00705, "lng": -82.04220 }
+      ] },
+      { "ring": [
+        { "lat": 28.00805, "lng": -82.04355 },
+        { "lat": 28.00770, "lng": -82.04250 },
+        { "lat": 28.00735, "lng": -82.04275 },
+        { "lat": 28.00770, "lng": -82.04380 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 144, "pano": "YB-55VL3YqcUw6acqLF9zA", "hasCoverage": true },
+      "truckGate": { "heading": 32, "pano": "-LayFXJPmfxr4auF-oDVqw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 52.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@28.0070,-82.0420,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate",
+    "scale",
+    "multiStep"
+  ],
+  "fieldNotes": {
+    "_location": "Roster coords (28.004224,-82.017896) were wrong - that point is a US-98/Polk Pkwy interchange NE of Lakeland Linder Airport. The Publix Frozen Foods Warehouse (3300 Airport Rd, phone 863-688-1188) is part of the Publix Lakeland logistics complex WEST of the airport in the Drane Field / County Line corridor. The frozen DC is the refrigerated building cluster at ~28.007,-82.043, the ONLY sub-cluster in the area served by a full industrial ammonia refrigeration plant + tank farm (6+ horizontal ammonia tanks at 28.0050,-82.0428). It is distinct from roster idx1 'County Line' DC (28.014,-82.051, a separate large building 1.5km NW).",
+    "truckGate": "Whole DC sub-campus ringed by chain-link perimeter fencing (clear in Street View along the SW rural lane and z18/z19 sat). Trucks enter via fenced gate off the internal campus drive; no open public-road-to-dock driveway.",
+    "guardShack": "No staffed guard booth resolved at the truck entrance in available Street View - SV does not penetrate the gated interior, and the public-road approach shows fence gates without a beside-lane booth. Set false but flagged uncertain.",
+    "remoteGs": "Inferred: gate present, no visible staffed shack implies kiosk/app/remote check-in. Medium confidence.",
+    "postGateStaging": "Wide paved aprons and internal drives inside the fence give ample queue/holding room before the dock faces.",
+    "drivewayLong": "Long internal entrance drive from the public lane to the dock faces easily holds 3+ trucks.",
+    "dockDoors": "Counted from z19 imagery: east building south face ~25-35 dock positions, north building south face ~15-20, plus the long west/big building dock bank. Total comfortably 50+. Estimate.",
+    "dropArea": "Large trailer drop yard NE of the east building (28.0082,-82.0407) packed with ~50-70 trailers in angled rows; counted from z19. 50+ band.",
+    "dropYard": "Dedicated trailer-storage lot NE of the east DC, separate from the active dock aprons.",
+    "shipRcvSeparate": "Two-to-three distinct dock banks on different building faces (east bldg south face, north bldg south face, big west bldg NE face) suggest separate ship/receive clusters. Medium confidence.",
+    "fastLaneOpportunity": "Wide gate apron and generous internal paved width leave physical room to add a bypass/express lane.",
+    "multipleFacilities": "Three large warehouse buildings + a shared refrigeration plant form a multi-building campus.",
+    "urbanRural": "Edge-of-town / rural setting: open fields, scattered single-family homes and low-traffic rural lanes immediately SW/S of the campus (Drane Field area S of Lakeland near the airport).",
+    "connectivityIssue": "Set false - although rural-edge, it is a major built-up logistics corridor with adjacent development, so cellular coverage is likely adequate.",
+    "yardMetrics.railServed": "No rail spur runs into the property in any imagery.",
+    "yardMetrics.trailersVisible": "Approx count of parked trailers across the drop yard and dock faces in captured imagery; estimate.",
+    "siteAreaAcres": "Derived from the perimeter polygon (~52 acres) covering the frozen DC sub-cluster (3 buildings + refrigeration plant + drop yard)."
+  },
+  "method": "deep-audit"
+}

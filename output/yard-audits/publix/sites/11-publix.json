@@ -1,0 +1,101 @@
+{
+  "name": "Publix Grocery Distribution Center McLeansville NC (Greensboro)",
+  "type": "Grocery Distribution Center",
+  "coords": { "lat": 36.0814, "lng": -79.6612 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 36.08370, "lng": -79.66585 },
+      { "lat": 36.08340, "lng": -79.65605 },
+      { "lat": 36.07995, "lng": -79.65590 },
+      { "lat": 36.07915, "lng": -79.66505 },
+      { "lat": 36.08210, "lng": -79.66640 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 36.08300, "lng": -79.66520 },
+      { "lat": 36.08255, "lng": -79.66425 },
+      { "lat": 36.08230, "lng": -79.66440 },
+      { "lat": 36.08272, "lng": -79.66535 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 36.08305, "lng": -79.65880 },
+        { "lat": 36.08300, "lng": -79.65610 },
+        { "lat": 36.08075, "lng": -79.65615 },
+        { "lat": 36.08080, "lng": -79.65885 }
+      ] },
+      { "ring": [
+        { "lat": 36.08345, "lng": -79.66450 },
+        { "lat": 36.08335, "lng": -79.65945 },
+        { "lat": 36.08300, "lng": -79.65948 },
+        { "lat": 36.08308, "lng": -79.66452 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 36.08210, "lng": -79.66520 },
+        { "lat": 36.08185, "lng": -79.65760 },
+        { "lat": 36.08150, "lng": -79.65762 },
+        { "lat": 36.08175, "lng": -79.66522 }
+      ] },
+      { "ring": [
+        { "lat": 36.07960, "lng": -79.66480 },
+        { "lat": 36.07935, "lng": -79.65730 },
+        { "lat": 36.07905, "lng": -79.65732 },
+        { "lat": 36.07930, "lng": -79.66482 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 36.08360, "lng": -79.66610 },
+      { "lat": 36.08330, "lng": -79.66555 },
+      { "lat": 36.08285, "lng": -79.66600 },
+      { "lat": 36.08315, "lng": -79.66655 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 125, "pano": "VQFdCteLBS0VAstfzxrZHw", "hasCoverage": true },
+      "truckGate": { "heading": 119, "pano": "OwYE7-23FR9mJ9aXo5Rn3Q", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 210,
+    "trailersVisible": 140,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 1,
+    "buildingCount": 5,
+    "siteAreaAcres": 98.8,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.0814,-79.6612,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "scale"],
+  "fieldNotes": {
+    "truckGate": "Whole campus is ringed by chain-link perimeter fence on a graded berm (confirmed in Street View along Burlington Rd frontage). A single divided access boulevard off Burlington Rd is the only way in; it is fenced on both sides and ends at a controlled checkpoint before the secure truck yard.",
+    "guardShack": "Publix newsroom/Gray/Procon project pages list a dedicated 'security post' on the campus. A small 1-2-vehicle-footprint structure with rooftop HVAC and a landscaped island sits at the throat between the employee lot, the entry boulevard and the secure truck yard (~36.0826,-79.6643). Satellite cannot resolve a booth window pattern at this resolution, so flagged uncertain, but the documented security post + the checkpoint structure strongly support a staffed guard shack.",
+    "preGateStaging": "Divided entry boulevard with wide aprons and the adjacent grassed pad gives ample room for trucks to stack outside the inner checkpoint.",
+    "postGateStaging": "Large paved courtyard between the two main buildings and wide perimeter drives provide holding room inside the gate before backing to docks.",
+    "drivewayLong": "The gate-to-dock approach is several hundred feet of wide internal drive; easily holds 3+ trucks.",
+    "entryLanes": "Entry boulevard is divided into 2 inbound lanes; exact lane split at the inner checkpoint not resolvable from overhead, flagged uncertain.",
+    "exitLanes": "Outbound appears single-lane at the boulevard; uncertain.",
+    "fastLaneOpportunity": "Wide divided boulevard and large aprons leave unused paved width to add an express/bypass lane.",
+    "dockDoors": "Two ~1M+ sq ft cross-dock buildings, each with long dock rows on multiple faces (north building south face into courtyard; south building both the courtyard face and the south-perimeter face). Counted bays band well into 50+ (estimate ~200+ total across the campus).",
+    "dropArea": "Dedicated marked trailer-parking lots east of the buildings and along the north drive are full of dropped trailers; far more than 50 stalls.",
+    "shipRcvSeparate": "Dock banks sit on physically separate faces/buildings (refrigerated vs dry-grocery cross-docks plus a return center), so shipping and receiving run from distinct clusters.",
+    "urbanRural": "Edge-of-town McLeansville, surrounded by woods, farmland and scattered houses outside the Greensboro metro fabric.",
+    "multipleFacilities": "Campus has 5 distinct buildings: refrigerated warehouse, dry-grocery warehouse, fleet-maintenance building, return center/dispatch, and the security post (corroborated by Publix/Gray/Procon project pages).",
+    "scale": "No truck scale/weigh pad identified in the truck path; flagged uncertain because the inner checkpoint area is partly obscured.",
+    "dropYard": "Dedicated trailer-storage lots on the east end and north drive, separate from active dock staging.",
+    "railServed": "No rail spur enters the property; no tracks visible anywhere on or adjacent to the campus.",
+    "yardMetrics": "Counts are honest overhead estimates: dockDoorCount and trailer figures are approximate given the two very large multi-face cross-docks; siteAreaAcres derived from the traced perimeter ring (~99 ac)."
+  },
+  "method": "deep-audit"
+}

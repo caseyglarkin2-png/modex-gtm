@@ -1,0 +1,121 @@
+{
+  "name": "Publix Grocery Distribution Center Jacksonville FL",
+  "type": "Grocery Distribution Center",
+  "coords": { "lat": 30.31480, "lng": -81.81880 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 30.31555, "lng": -81.82150 },
+      { "lat": 30.31600, "lng": -81.81950 },
+      { "lat": 30.31590, "lng": -81.81680 },
+      { "lat": 30.31470, "lng": -81.81600 },
+      { "lat": 30.31360, "lng": -81.81640 },
+      { "lat": 30.31350, "lng": -81.81950 },
+      { "lat": 30.31370, "lng": -81.82150 },
+      { "lat": 30.31470, "lng": -81.82175 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 30.31545, "lng": -81.81925 },
+      { "lat": 30.31545, "lng": -81.81885 },
+      { "lat": 30.31505, "lng": -81.81885 },
+      { "lat": 30.31505, "lng": -81.81925 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 30.31470, "lng": -81.81935 },
+        { "lat": 30.31460, "lng": -81.81830 },
+        { "lat": 30.31385, "lng": -81.81845 },
+        { "lat": 30.31395, "lng": -81.81950 }
+      ] },
+      { "ring": [
+        { "lat": 30.31430, "lng": -81.82055 },
+        { "lat": 30.31415, "lng": -81.81985 },
+        { "lat": 30.31330, "lng": -81.82010 },
+        { "lat": 30.31345, "lng": -81.82080 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 30.31455, "lng": -81.81995 },
+        { "lat": 30.31435, "lng": -81.81880 },
+        { "lat": 30.31420, "lng": -81.81885 },
+        { "lat": 30.31440, "lng": -81.82000 }
+      ] },
+      { "ring": [
+        { "lat": 30.31400, "lng": -81.82130 },
+        { "lat": 30.31385, "lng": -81.82035 },
+        { "lat": 30.31368, "lng": -81.82040 },
+        { "lat": 30.31383, "lng": -81.82135 }
+      ] },
+      { "ring": [
+        { "lat": 30.31525, "lng": -81.81790 },
+        { "lat": 30.31515, "lng": -81.81660 },
+        { "lat": 30.31498, "lng": -81.81662 },
+        { "lat": 30.31508, "lng": -81.81792 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 30.31555, "lng": -81.81935 },
+      { "lat": 30.31555, "lng": -81.81880 },
+      { "lat": 30.31510, "lng": -81.81880 },
+      { "lat": 30.31510, "lng": -81.81935 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 350, "pano": "_w3EL1iYqzN9eOSlWCGSEg", "hasCoverage": true },
+      "truckGate": { "heading": 174, "pano": "ba70TEhy8FfAY1dNFB0fLw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 140,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 250,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 32.3,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@30.31480,-81.81880,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "exitLanes", "entryLanes"],
+  "fieldNotes": {
+    "truckGate": "Controlled gated entry on the internal access road just south of the at-grade rail crossing; z20-z21 satellite shows a canopy/checkpoint spanning the lanes with a semi and cars stopped at the control point, plus directional lane arrows. Driveway approach from the road is long and deep.",
+    "guardShack": "Distinctive zigzag-roofed security/admin building sits immediately beside the gate lanes on the inbound side; vehicles queue at the checkpoint canopy beside it. Staffed manned entry.",
+    "entryExitTogether": "Single gate complex on the north access road; inbound (up-arrow) and outbound (down-arrow) lanes are split within the same checkpoint footprint, so entry/exit are co-located, not at separate property points.",
+    "entryLanes": "Estimated 2 inbound lanes at the checkpoint from arrow markings; medium confidence on exact count.",
+    "exitLanes": "Estimated 2 outbound lanes; medium confidence.",
+    "fastLaneOpportunity": "Wide multi-lane gate apron with unused paved width and an undivided approach; room to add a bypass/express lane.",
+    "dockDoors": "50+ band easily met across the campus: the west building has a very long continuous dock bank (east face) with 30+ trailers backed in plus a south-face bank; the east building has a full south-face dock bank. Total estimated ~140 doors.",
+    "dropArea": "50+; extensive striped trailer drop rows north/east of the docks and along the yard with well over 100 parked trailers visible.",
+    "shipRcvSeparate": "Two separate large DC buildings (perishable + grocery) with dock banks on different faces and a third maintenance/repair structure; ship and receive run from physically distinct dock clusters.",
+    "multipleFacilities": "Campus with at least two large DC buildings plus a zigzag admin/security building and a SW maintenance/trailer-shop building.",
+    "railServed": "An active rail line/spur runs along the north edge of the property with an at-grade crossing on the entrance road; corroborated by directory listing (rail-and-highway accessible).",
+    "scale": "No clearly identifiable truck scale pad in the gate path from overhead imagery; left false but flagged uncertain.",
+    "buildingCount": "Counted 3 principal structures: west DC, east DC, and the SW maintenance building (zigzag admin building not counted as a DC).",
+    "siteAreaAcres": "32.3 ac from the traced fenced operational footprint; the broader parcel including grass/tree buffers to W Beaver St is larger.",
+    "urbanRural": "West Jacksonville metro fabric: subdivisions immediately north and south across W Beaver St, a major divided arterial frontage. Urban."
+  },
+  "method": "deep-audit"
+}

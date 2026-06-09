@@ -1,0 +1,110 @@
+{
+  "name": "Publix Distribution Campus Lakeland FL (County Line)",
+  "type": "Distribution Campus",
+  "coords": { "lat": 28.0145, "lng": -82.0510 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 28.0152, "lng": -82.0556 },
+      { "lat": 28.0160, "lng": -82.0475 },
+      { "lat": 28.0152, "lng": -82.0468 },
+      { "lat": 28.0124, "lng": -82.0485 },
+      { "lat": 28.0122, "lng": -82.0535 },
+      { "lat": 28.0132, "lng": -82.0553 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 28.01418, "lng": -82.05428 },
+      { "lat": 28.01418, "lng": -82.05405 },
+      { "lat": 28.01390, "lng": -82.05405 },
+      { "lat": 28.01390, "lng": -82.05428 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 28.01585, "lng": -82.04835 },
+        { "lat": 28.01560, "lng": -82.04700 },
+        { "lat": 28.01470, "lng": -82.04740 },
+        { "lat": 28.01495, "lng": -82.04875 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 28.01560, "lng": -82.05230 },
+        { "lat": 28.01595, "lng": -82.04830 },
+        { "lat": 28.01560, "lng": -82.04820 },
+        { "lat": 28.01525, "lng": -82.05225 }
+      ] },
+      { "ring": [
+        { "lat": 28.01290, "lng": -82.05300 },
+        { "lat": 28.01270, "lng": -82.04880 },
+        { "lat": 28.01235, "lng": -82.04890 },
+        { "lat": 28.01255, "lng": -82.05305 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 28.01435, "lng": -82.05395 },
+      { "lat": 28.01430, "lng": -82.05310 },
+      { "lat": 28.01360, "lng": -82.05315 },
+      { "lat": 28.01365, "lng": -82.05400 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 88, "pano": "qBprwoTqTFz7mau3j4dsqg", "hasCoverage": true },
+      "truckGate": { "heading": 85, "pano": "72xVFOCkwfKwy1yeLvc21w", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 180,
+    "trailersVisible": 140,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 68.1,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@28.0145,-82.0510,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "trailerParkingCapacity", "connectivityIssue"],
+  "fieldNotes": {
+    "truckGate": "Confirmed in Street View (pano 72xVFOCkwfKwy1yeLvc21w, 2023-12): staffed island guard booth straddling the entry road with raised barrier-arm mechanisms and bollards on both lanes; PRIVATE PROPERTY / NO TRESPASSING signage. Visible as a small green-roofed structure straddling the drive in z21 satellite.",
+    "guardShack": "Same pano shows a guard in uniform (blue shirt, clipboard) standing at the booth window; classic 1-vehicle-footprint booth with windows on multiple sides set in the center of the entry road island.",
+    "entryExitTogether": "Single controlled entry complex off the County Line Rd access road; in-lane and out-lane pass either side of the central booth at one point of the property line.",
+    "entryLanes": "Island booth with one lane each side; counted 1 inbound, low confidence from imagery.",
+    "exitLanes": "Estimated 1 outbound lane past the booth island.",
+    "fastLaneOpportunity": "Wide paved apron approaching the booth with room either side; gate island layout leaves unused paved width to add an express/bypass lane.",
+    "postGateStaging": "Large paved apron and internal yard between the guard booth and the dock faces gives ample inside-the-gate queuing room.",
+    "drivewayLong": "Long approach from County Line Rd across the pond causeway to the gate, then a deep internal yard before the docks; easily holds 3+ trucks.",
+    "dockDoors": "Continuous dock-door rhythm runs the full length of BOTH the north and south building faces (building is ~600 m long). Estimated ~180 total doors across both faces; 50+ band. Count is an overhead estimate.",
+    "dropArea": "Dedicated trailer-storage rows on the east end (z17/z18 eyard imagery) hold dozens of bobtail trailers; well into 50+ across the yard.",
+    "shipRcvSeparate": "Two distinct dock banks on opposite (north and south) building faces, consistent with separate shipping vs receiving operations on a HV/LV warehouse.",
+    "dropYard": "Dedicated east-end trailer storage lot full of parked trailers, separate from the active dock aprons.",
+    "urbanRural": "Edge-of-town industrial corridor SW of Lakeland; property is an island ringed by retention ponds and woods, surrounded by other large DCs but not dense metro fabric. Judged Rural per rubric tie-break.",
+    "connectivityIssue": "Site is large and partly tree-ringed but sits in an active industrial corridor near I-4 / US-92; cellular coverage likely adequate. Low-confidence inference, marked false.",
+    "scale": "No truck scale / weigh platform identified in the truck path.",
+    "railServed": "No rail spur runs into the property; nearest rail is unrelated.",
+    "trailerParkingCapacity": "Estimate of dedicated drop-yard stall capacity (~90) from east-yard rows; overhead estimate, low confidence.",
+    "trailersVisible": "Count of trailers visible across captured imagery (docks + drop yard + north/south rows); ~140, approximate."
+  },
+  "method": "deep-audit"
+}

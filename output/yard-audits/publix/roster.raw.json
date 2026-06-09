@@ -1,0 +1,106 @@
+{
+  "account": "Publix Super Markets",
+  "generatedAt": "2026-06-09",
+  "facilityCount": 11,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Publix Distribution Campus Lakeland FL (County Line)",
+      "city": "Lakeland",
+      "state": "FL",
+      "type": "Distribution Campus",
+      "address": "2600 County Line Rd, Lakeland, FL 33811",
+      "source": "Yelp 'Publix HV/LV Warehouse' and Waze listings for Publix High Velocity/Low Velocity Distribution Center at 2600 County Line Rd, Lakeland FL"
+    },
+    {
+      "idx": 2,
+      "name": "Publix Frozen DC Lakeland FL",
+      "city": "Lakeland",
+      "state": "FL",
+      "type": "Frozen DC",
+      "address": "3300 Airport Rd, Lakeland, FL 33811",
+      "source": "Hub.biz / Baxter Bailey business listings for Publix Frozen Foods Warehouse at 3300 Airport Rd, Lakeland FL"
+    },
+    {
+      "idx": 3,
+      "name": "Publix Produce DC Lakeland FL (Fresh/Deli)",
+      "city": "Lakeland",
+      "state": "FL",
+      "type": "Produce DC",
+      "address": "3045 New Tampa Hwy, Lakeland, FL 33815",
+      "source": "Waze listings for Publix Deli Warehouse / Publix Fresh Foods Warehouse at 3045 New Tampa Hwy, Lakeland FL"
+    },
+    {
+      "idx": 4,
+      "name": "Publix Refrigerated DC Deerfield Beach FL",
+      "city": "Deerfield Beach",
+      "state": "FL",
+      "type": "Refrigerated DC",
+      "address": "777 SW 12th Ave, Deerfield Beach, FL 33442",
+      "source": "Yelp and Waze listings for Publix Distribution Center at 777 SW 12th Ave, Deerfield Beach FL"
+    },
+    {
+      "idx": 5,
+      "name": "Publix Grocery Distribution Center Boynton Beach FL",
+      "city": "Boynton Beach",
+      "state": "FL",
+      "type": "Grocery Distribution Center",
+      "address": "5500 Park Ridge Blvd, Boynton Beach, FL 33426",
+      "source": "Yelp, Waze and Manta listings for Publix Distribution Center at 5500 Park Ridge Blvd, Boynton Beach FL"
+    },
+    {
+      "idx": 6,
+      "name": "Publix Refrigerated DC Orlando FL",
+      "city": "Orlando",
+      "state": "FL",
+      "type": "Refrigerated DC",
+      "address": "7350 Hazeltine National Dr, Orlando, FL 32822",
+      "source": "Yelp listing for Publix Distribution Center at 7350 Hazeltine National Dr, Orlando FL; Whiting-Turner/LEO A DALY project pages for Publix Orlando Refrigerated Distribution Center (Lee Vista)"
+    },
+    {
+      "idx": 7,
+      "name": "Publix Grocery Distribution Center Jacksonville FL",
+      "city": "Jacksonville",
+      "state": "FL",
+      "type": "Grocery Distribution Center",
+      "address": "9786 W Beaver St, Jacksonville, FL 32220",
+      "source": "Waze and Chamber of Commerce listings for Publix Distribution Center at 9786 W Beaver St, Jacksonville FL"
+    },
+    {
+      "idx": 8,
+      "name": "Publix Distribution Center Sarasota FL",
+      "city": "Sarasota",
+      "state": "FL",
+      "type": "Grocery Distribution Center",
+      "address": "6123 Sawyer Rd, Sarasota, FL 34238",
+      "source": "Yelp and Yellow Pages listings for Publix Sarasota Warehouse at 6123 Sawyer Rd, Sarasota FL"
+    },
+    {
+      "idx": 9,
+      "name": "Publix Distribution Campus Dacula GA (Atlanta)",
+      "city": "Dacula",
+      "state": "GA",
+      "type": "Distribution Campus",
+      "address": "445 Hurricane Trl, Dacula, GA 30019",
+      "source": "TruckMap and Yelp listings for Publix Super Market Atlanta Warehouse / Distribution Center at 445 Hurricane Trl, Dacula GA"
+    },
+    {
+      "idx": 10,
+      "name": "Publix Refrigerated DC McCalla AL",
+      "city": "McCalla",
+      "state": "AL",
+      "type": "Refrigerated DC",
+      "address": "7200 Jefferson Metro Pkwy, McCalla, AL 35111",
+      "source": "Waze, Apple Maps and Alabama News Center coverage of 638,000 sq ft Publix Distribution Center at 7200 Jefferson Metro Pkwy, McCalla AL (opened 2017)"
+    },
+    {
+      "idx": 11,
+      "name": "Publix Grocery Distribution Center McLeansville NC (Greensboro)",
+      "city": "McLeansville",
+      "state": "NC",
+      "type": "Grocery Distribution Center",
+      "address": "5544 Burlington Rd, McLeansville, NC 27301",
+      "source": "Google Maps and Birdeye listings for Publix Grocery Distribution Center at 5544 Burlington Rd, McLeansville NC; corporate.publix.com newsroom on the ~2.1M sq ft Greensboro-area campus"
+    }
+  ]
+}

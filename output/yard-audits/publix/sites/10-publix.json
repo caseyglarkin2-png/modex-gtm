@@ -1,0 +1,101 @@
+{
+  "name": "Publix Refrigerated DC McCalla AL",
+  "type": "Refrigerated DC",
+  "coords": { "lat": 33.300700, "lng": -87.050100 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 33.302909, "lng": -87.049276 },
+      { "lat": 33.301159, "lng": -87.046976 },
+      { "lat": 33.298634, "lng": -87.048589 },
+      { "lat": 33.298979, "lng": -87.051473 },
+      { "lat": 33.300557, "lng": -87.052194 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 33.302680, "lng": -87.049001 },
+      { "lat": 33.302393, "lng": -87.048624 },
+      { "lat": 33.302134, "lng": -87.049001 },
+      { "lat": 33.302393, "lng": -87.049379 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 33.300011, "lng": -87.052125 },
+        { "lat": 33.298979, "lng": -87.050787 },
+        { "lat": 33.298634, "lng": -87.051405 },
+        { "lat": 33.299610, "lng": -87.052469 }
+      ] },
+      { "ring": [
+        { "lat": 33.300930, "lng": -87.047834 },
+        { "lat": 33.301102, "lng": -87.047045 },
+        { "lat": 33.299552, "lng": -87.047766 },
+        { "lat": 33.299782, "lng": -87.048452 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 33.300700, "lng": -87.051988 },
+        { "lat": 33.300930, "lng": -87.051370 },
+        { "lat": 33.299782, "lng": -87.050169 },
+        { "lat": 33.299438, "lng": -87.050787 }
+      ] },
+      { "ring": [
+        { "lat": 33.299438, "lng": -87.050787 },
+        { "lat": 33.299524, "lng": -87.049722 },
+        { "lat": 33.298979, "lng": -87.049001 },
+        { "lat": 33.298806, "lng": -87.050100 }
+      ] },
+      { "ring": [
+        { "lat": 33.302393, "lng": -87.049448 },
+        { "lat": 33.301389, "lng": -87.048178 },
+        { "lat": 33.301102, "lng": -87.048452 },
+        { "lat": 33.302106, "lng": -87.049722 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 33.302680, "lng": -87.049001 },
+      { "lat": 33.302393, "lng": -87.048300 },
+      { "lat": 33.301900, "lng": -87.048500 },
+      { "lat": 33.302134, "lng": -87.049200 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 227, "pano": "8WBC_aXzo6AEPR4bJWP_Qg", "hasCoverage": true },
+      "truckGate": { "heading": 266, "pano": "8WBC_aXzo6AEPR4bJWP_Qg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 95,
+    "trailerParkingCapacity": 140,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 34.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.300700,-87.050100,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "remoteGs"],
+  "fieldNotes": {
+    "truckGate": "Street View (pano 8WBC_aXzo6AEPR4bJWP_Qg, heading ~280deg) shows a chain-link sliding gate across the truck drive at the NE/east entrance, perimeter fencing, a 'TRUCK ENTRANCE' sign and a stone Publix monument. Open campus-road approach, but a controlled gate at the fence line.",
+    "guardShack": "No staffed booth (1-3 car footprint) visible at the gate in any Street View heading; only slim pole-mounted pedestals (kiosk / call-box) flank the lanes.",
+    "remoteGs": "Inferred remote check-in: gate present, no guard shack, kiosk/call-box pedestals at the lanes. Medium confidence on whether check-in is fully unmanned vs. occasionally staffed.",
+    "entryExitSeparate": "Entrance drive is divided by a landscaped median into distinct inbound and outbound lanes at the gate.",
+    "fastLaneOpportunity": "Wide divided gate apron with unused paved width before the gate; room to add an express/bypass lane.",
+    "dockDoors": "Cross-dock: dock banks with trailers backed in along the north/NE, west/SW and south faces. Counted ~80-120+ doors across faces from z18 imagery; reported band 50+. Exact count is an overhead estimate.",
+    "dropArea": "Two large trailer drop lots (SW lot by the pond and the east apron) holding dozens of parked trailers without tractors.",
+    "shipRcvSeparate": "Distinct dock clusters on different building faces (north/NE bank vs. south/west bank), consistent with separate ship/receive operations at a refrigerated cross-dock.",
+    "urbanRural": "Edge-of-town McCalla AL inside Jefferson Metropolitan Park, surrounded by woods/farmland and a few industrial neighbors; broader setting is rural.",
+    "railServed": "A rail line runs NW-SE through the trees off the west property edge but does not spur into the site; no rail dock on the property.",
+    "yardMetrics": "dockDoorCount/trailersVisible/trailerParkingCapacity are overhead estimates from z17-z18 satellite, flagged as approximate."
+  },
+  "method": "deep-audit"
+}

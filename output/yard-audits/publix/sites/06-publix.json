@@ -1,0 +1,105 @@
+{
+  "name": "Publix Refrigerated DC Orlando FL",
+  "type": "Refrigerated DC",
+  "coords": { "lat": 28.45565, "lng": -81.28175 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 28.4587, "lng": -81.2796 },
+      { "lat": 28.4586, "lng": -81.2820 },
+      { "lat": 28.4575, "lng": -81.2848 },
+      { "lat": 28.4535, "lng": -81.2843 },
+      { "lat": 28.4530, "lng": -81.2805 },
+      { "lat": 28.4562, "lng": -81.2786 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 28.45610, "lng": -81.28030 },
+      { "lat": 28.45588, "lng": -81.27995 },
+      { "lat": 28.45558, "lng": -81.28020 },
+      { "lat": 28.45580, "lng": -81.28055 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 28.45720, "lng": -81.28370 },
+        { "lat": 28.45680, "lng": -81.28300 },
+        { "lat": 28.45520, "lng": -81.28430 },
+        { "lat": 28.45560, "lng": -81.28500 }
+      ] },
+      { "ring": [
+        { "lat": 28.45520, "lng": -81.28010 },
+        { "lat": 28.45470, "lng": -81.27940 },
+        { "lat": 28.45360, "lng": -81.28040 },
+        { "lat": 28.45410, "lng": -81.28110 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 28.45770, "lng": -81.28340 },
+        { "lat": 28.45735, "lng": -81.28290 },
+        { "lat": 28.45470, "lng": -81.28490 },
+        { "lat": 28.45505, "lng": -81.28540 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 28.45590, "lng": -81.28100 },
+      { "lat": 28.45555, "lng": -81.28050 },
+      { "lat": 28.45470, "lng": -81.28120 },
+      { "lat": 28.45505, "lng": -81.28170 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 217, "pano": "2ARGANYJSJybj67KqsG7CQ", "hasCoverage": true },
+      "truckGate": { "heading": 237, "pano": "jFRJNyVIzq81PddqrXV-WQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 72.4,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@28.45565,-81.28175,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "shipRcvSeparate", "scale", "multiStep"],
+  "fieldNotes": {
+    "truckGate": "Single landscaped entrance boulevard off Hazeltine National Dr feeds a controlled, fully-fenced campus; Street View cannot enter the property and the truck approach is screened by hedge/berm with yellow bollards and a checkpoint. Controlled gated entry confirmed.",
+    "guardShack": "Driver reviews of this DC explicitly reference a staffed 'guard station' ('nice guys at guard station'); consistent with a manned booth at the truck check-in on the entrance drive. Booth itself is screened by landscaping in satellite, so footprint not directly resolved.",
+    "shipRcvSeparate": "Continuous dock banks run along multiple faces of the warehouse complex (long west face plus north/return faces); refrigerated DCs of this size typically split inbound/outbound across distinct dock clusters. Marked uncertain — exact ship vs rcv split not visually confirmed.",
+    "dockDoors": "50+ band. West face alone is a continuous bank of dozens of doors with trailers backed in across a ~700 ft wall; additional dock banks on adjoining faces. Count of 110 is an honest overhead estimate, not exact.",
+    "dropArea": "50+ band. Extensive marked trailer rows on the west apron and a second drop block to the SE; overnight driver parking is advertised. trailersVisible (~180) and capacity (~320) are approximate counts from zoom-20/21 imagery.",
+    "fastLaneOpportunity": "Wide entrance boulevard with palm-lined median and ample paved width at the gate apron leaves physical room to add an express/bypass lane.",
+    "entryLanes": "Estimated 2 inbound at the gate apron from the boulevard width; not precisely resolvable through landscaping. exitLanes ~1.",
+    "postGateStaging": "Large internal paved yard between the gate/office plaza and the dock face provides post-gate holding before doors.",
+    "drivewayLong": "Gate-to-dock approach across the internal yard easily holds 3+ trucks.",
+    "multipleFacilities": "Campus comprises the main 720k SF refrigerated warehouse plus a central ammonia refrigeration plant and ancillary buildings (Whiting-Turner project notes 9 buildings); treated as a multi-building campus.",
+    "siteAreaAcres": "72.4 ac is the traced fenced/paved operational core. Public project pages cite a ~120-acre full campus including retention ponds, buffers, and undeveloped land.",
+    "railServed": "No rail spur visible entering the property.",
+    "urbanRural": "Lee Vista / Orlando International Airport industrial corridor, dense metro industrial fabric — Urban."
+  },
+  "method": "deep-audit"
+}

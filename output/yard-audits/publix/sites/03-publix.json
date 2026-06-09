@@ -1,0 +1,144 @@
+{
+  "name": "Publix Produce DC Lakeland FL (Fresh/Deli)",
+  "type": "Produce DC",
+  "coords": {
+    "lat": 28.042098,
+    "lng": -82.007792
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        { "lat": 28.039050, "lng": -82.011900 },
+        { "lat": 28.044600, "lng": -82.011400 },
+        { "lat": 28.044800, "lng": -82.006800 },
+        { "lat": 28.043300, "lng": -82.003400 },
+        { "lat": 28.041000, "lng": -82.003300 },
+        { "lat": 28.039600, "lng": -82.005500 },
+        { "lat": 28.038900, "lng": -82.007000 }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        { "lat": 28.039300, "lng": -82.007250 },
+        { "lat": 28.039680, "lng": -82.007180 },
+        { "lat": 28.039700, "lng": -82.006850 },
+        { "lat": 28.039320, "lng": -82.006920 }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          { "lat": 28.043050, "lng": -82.010350 },
+          { "lat": 28.044450, "lng": -82.010200 },
+          { "lat": 28.044550, "lng": -82.008100 },
+          { "lat": 28.043150, "lng": -82.008250 }
+        ]
+      },
+      {
+        "ring": [
+          { "lat": 28.040750, "lng": -82.008700 },
+          { "lat": 28.041750, "lng": -82.008600 },
+          { "lat": 28.041850, "lng": -82.006400 },
+          { "lat": 28.040850, "lng": -82.006500 }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          { "lat": 28.040450, "lng": -82.004900 },
+          { "lat": 28.041850, "lng": -82.004750 },
+          { "lat": 28.041880, "lng": -82.004250 },
+          { "lat": 28.040480, "lng": -82.004400 }
+        ]
+      },
+      {
+        "ring": [
+          { "lat": 28.040150, "lng": -82.008950 },
+          { "lat": 28.040250, "lng": -82.007050 },
+          { "lat": 28.040000, "lng": -82.007030 },
+          { "lat": 28.039900, "lng": -82.008930 }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 341,
+        "pano": "LG3KSHrUjuj2o7LcGTFJiw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 348,
+        "pano": "LG3KSHrUjuj2o7LcGTFJiw",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 130,
+    "trailersVisible": 320,
+    "trailerParkingCapacity": 450,
+    "truckGateCount": 3,
+    "buildingCount": 9,
+    "siteAreaAcres": 113,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@28.04210,-82.00779,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "dockDoorCount",
+    "truckGateCount"
+  ],
+  "fieldNotes": {
+    "site": "Confirmed at 3045 New Tampa Hwy, Lakeland FL - Publix Manufacturing Central Warehouse (MCW) / Fresh Foods, Deli, Dairy and Produce complex. USDA FSIS lists it as Publix Supermarkets Deli Plant (large meat/poultry processing). A multi-building manufacturing-plus-distribution campus, distinct from the County Line HV/LV DC (idx 1) to the south. Supplied coords landed on the campus core and were kept.",
+    "truckGate": "TRUE. Satellite z20 at the central N-S access drive (28.0395,-82.0070) shows a controlled checkpoint: a small guard booth in the drive median with a long white sliding/swing barrier across the lanes. Street View on the internal access road shows a green 'GATE 5' sign and chain-link perimeter fencing on both sides of every approach - a fully fenced, numbered-gate campus.",
+    "guardShack": "TRUE. Small dark booth (~1-2 car footprint) sits in the median of the checkpoint drive beside the barrier (z20 gate1 crop). Numbered gates ('GATE 5' sign) on a fenced campus indicate staffed/controlled entry.",
+    "remoteGs": "FALSE - guard shack is present.",
+    "truckGateCount": "Multiple numbered gates ('GATE 5' observed); estimated 3 controlled truck/employee gates around the perimeter. Flagged uncertain - only the central checkpoint was directly resolved.",
+    "dockDoors": "50+. Several large warehouses each with long dock banks. East warehouse south/west face shows 20+ doors with trailers backed in; additional dock faces on the central buildings and processing plant. Total ~130 estimated across the campus - flagged uncertain (rooftops obscure exact counts at z20).",
+    "dropArea": "50+. Dedicated NW trailer drop yard holds 100+ trailers in dense rows; a second large drop yard sits in the south-central spine. Easily 50+ dropped trailers.",
+    "dropYard": "TRUE - dedicated trailer-storage lots separate from active dock staging, full of parked trailers (NW yard z19).",
+    "shipRcvSeparate": "TRUE - dock banks on multiple different building faces across the campus (multi-building manufacturing + DC).",
+    "multipleFacilities": "TRUE - campus of many large buildings (manufacturing plants, warehouses, processing with refrigeration silos/tanks).",
+    "postGateStaging": "TRUE - large paved internal yards and roadways behind the gate provide deep staging before docks.",
+    "drivewayLong": "TRUE - internal access drive from Gate 5 to the dock zones is long with room for a 3+ truck queue.",
+    "fastLaneOpportunity": "TRUE - wide gate aprons and multiple controlled gates give physical room for express/bypass lanes.",
+    "backupSensitive": "FALSE - gate checkpoint is set well inside the property off New Tampa Hwy with extensive internal stacking room; a queue would not spill onto the public road.",
+    "entryLanes": "Estimated 1 inbound at the resolved checkpoint; not precisely countable from imagery - flagged uncertain.",
+    "exitLanes": "Estimated 1 outbound - flagged uncertain.",
+    "scale": "FALSE - no truck scale/weigh pad resolved in imagery; flagged uncertain.",
+    "railServed": "FALSE - no rail spur runs into the property; surrounded by golf course, retention ponds and roads.",
+    "urbanRural": "Urban - within the Lakeland metro, surrounded by mobile-home parks, commercial development and a golf community.",
+    "siteAreaAcres": "~113 acres for the operational footprint inside the fence line (excludes adjacent golf course/ponds). Derived from the perimeter polygon.",
+    "streetView": "Only one pano covers the property (LG3KSHrUjuj2o7LcGTFJiw, 2011-04) on the internal Gate-5 access road; both perimeter and truckGate streetViewMeta use it. heading 348 frames the fenced approach toward the gate - the arrival view a driver sees."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,103 @@
+{
+  "name": "Publix Distribution Campus Dacula GA (Atlanta)",
+  "type": "Distribution Campus",
+  "coords": { "lat": 33.99080, "lng": -83.92950 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 33.9938, "lng": -83.9352 },
+      { "lat": 33.9942, "lng": -83.9288 },
+      { "lat": 33.9905, "lng": -83.9268 },
+      { "lat": 33.9868, "lng": -83.9288 },
+      { "lat": 33.9866, "lng": -83.9320 },
+      { "lat": 33.9878, "lng": -83.9355 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 33.99010, "lng": -83.93470 },
+      { "lat": 33.99030, "lng": -83.93330 },
+      { "lat": 33.98975, "lng": -83.93315 },
+      { "lat": 33.98955, "lng": -83.93455 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 33.98985, "lng": -83.93215 },
+        { "lat": 33.98920, "lng": -83.93145 },
+        { "lat": 33.98800, "lng": -83.93285 },
+        { "lat": 33.98865, "lng": -83.93355 }
+      ] },
+      { "ring": [
+        { "lat": 33.99270, "lng": -83.93470 },
+        { "lat": 33.99230, "lng": -83.93330 },
+        { "lat": 33.99080, "lng": -83.93410 },
+        { "lat": 33.99120, "lng": -83.93550 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 33.99300, "lng": -83.93340 },
+        { "lat": 33.99340, "lng": -83.93310 },
+        { "lat": 33.98920, "lng": -83.92990 },
+        { "lat": 33.98880, "lng": -83.93020 }
+      ] },
+      { "ring": [
+        { "lat": 33.99280, "lng": -83.93180 },
+        { "lat": 33.99320, "lng": -83.93150 },
+        { "lat": 33.98900, "lng": -83.92840 },
+        { "lat": 33.98860, "lng": -83.92870 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 33.98935, "lng": -83.93120 },
+      { "lat": 33.98885, "lng": -83.93055 },
+      { "lat": 33.98800, "lng": -83.93150 },
+      { "lat": 33.98850, "lng": -83.93215 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 347, "pano": "j2motd7Pj5uOlEf6_Rthxg", "hasCoverage": true },
+      "truckGate": { "heading": 0, "pano": "", "hasCoverage": false }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 140,
+    "trailersVisible": 360,
+    "trailerParkingCapacity": 420,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 136.1,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.99080,-83.92950,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "scale", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Single controlled truck entrance off the SW campus access road (Hurricane Trail spur off Sugarloaf Pkwy). Whole industrial property is chain-link fenced (confirmed in Street View along the south frontage). All truck traffic funnels through the SW access drive; rest of the perimeter is continuous fence + wooded buffer.",
+    "guardShack": "No standalone guard booth positively identified in satellite at the entrance drive; the entrance is set well back behind a tree buffer with no Street View coverage on the internal access road (ZERO_RESULTS at the gate). Marked false / remoteGs true as best evidence, but low confidence on the booth call.",
+    "remoteGs": "Gate present but no visible guard shack -> implies kiosk/app/call-box check-in. Borderline with guardShack; flagged uncertain.",
+    "preGateStaging": "Large overnight 'bullpen' parking and apron space outside/before the secured yard (confirmed by driver forum: 'huge bullpen for overnight parking').",
+    "postGateStaging": "Wide internal truck artery and staging lanes between the drop yards and the dock faces.",
+    "drivewayLong": "Long deep approach from the public road up the SW access drive into the yard; easily holds 3+ trucks.",
+    "entryLanes/exitLanes": "Estimated 2/2 from the wide SW access drive width; not separately barrier-counted, flagged uncertain.",
+    "fastLaneOpportunity": "Wide access drive apron and large paved yard provide ample room for an express/bypass lane.",
+    "dockDoors": "50+ band: both long faces of the main DC plus the dairy/processing and south warehouse buildings carry continuous dock-door banks; trailers backed in across all faces (z18/z19). Estimated ~140 total, low precision on exact count.",
+    "dropArea": "50+ band: SW gravel drop yard plus west and north trailer lots hold well over 100 parked trailers (z19 truck-artery view shows dozens in angled rows in one lot alone).",
+    "shipRcvSeparate": "Distinct dock banks on physically separate building faces / separate buildings (main DC dry vs dairy/processing complex).",
+    "multipleFacilities": "Campus: main DC building + connected dairy/processing complex + south warehouse + maintenance/utility building = 4+ distinct structures.",
+    "scale": "No truck scale/weigh pad positively identified in available imagery; flagged uncertain.",
+    "urbanRural": "Inside dense suburban Atlanta metro fabric (Dacula/Lawrenceville, Gwinnett Co.) surrounded by subdivisions, parkway, and retail -> Urban.",
+    "dropYard": "Dedicated trailer-storage lots (SW gravel bullpen + west/north paved lots) separate from active dock staging.",
+    "siteAreaAcres": "~136 acres for the fenced industrial campus, derived from the traced perimeter polygon (excludes the rec fields/woods to the north).",
+    "trailersVisible": "Estimate ~360 across all drop yards and dock faces; honest overhead estimate, not exact.",
+    "railServed": "No rail spur enters the property."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,126 @@
+{
+  "name": "Publix Grocery Distribution Center Boynton Beach FL",
+  "type": "Grocery Distribution Center",
+  "coords": { "lat": 26.54345, "lng": -80.07825 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 26.54120, "lng": -80.08140 },
+      { "lat": 26.54500, "lng": -80.08120 },
+      { "lat": 26.54510, "lng": -80.07555 },
+      { "lat": 26.54400, "lng": -80.07440 },
+      { "lat": 26.54130, "lng": -80.07490 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 26.54135, "lng": -80.08075 },
+      { "lat": 26.54135, "lng": -80.08025 },
+      { "lat": 26.54195, "lng": -80.08025 },
+      { "lat": 26.54195, "lng": -80.08075 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 26.54435, "lng": -80.08120 },
+        { "lat": 26.54500, "lng": -80.08115 },
+        { "lat": 26.54500, "lng": -80.07880 },
+        { "lat": 26.54435, "lng": -80.07880 }
+      ] },
+      { "ring": [
+        { "lat": 26.54235, "lng": -80.08135 },
+        { "lat": 26.54420, "lng": -80.08130 },
+        { "lat": 26.54420, "lng": -80.08035 },
+        { "lat": 26.54235, "lng": -80.08040 }
+      ] },
+      { "ring": [
+        { "lat": 26.54215, "lng": -80.08000 },
+        { "lat": 26.54260, "lng": -80.08000 },
+        { "lat": 26.54260, "lng": -80.07520 },
+        { "lat": 26.54215, "lng": -80.07520 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 26.54250, "lng": -80.08030 },
+        { "lat": 26.54285, "lng": -80.08030 },
+        { "lat": 26.54285, "lng": -80.07530 },
+        { "lat": 26.54250, "lng": -80.07530 }
+      ] },
+      { "ring": [
+        { "lat": 26.54290, "lng": -80.08135 },
+        { "lat": 26.54430, "lng": -80.08130 },
+        { "lat": 26.54430, "lng": -80.08095 },
+        { "lat": 26.54290, "lng": -80.08100 }
+      ] },
+      { "ring": [
+        { "lat": 26.54430, "lng": -80.07880 },
+        { "lat": 26.54465, "lng": -80.07880 },
+        { "lat": 26.54465, "lng": -80.07560 },
+        { "lat": 26.54430, "lng": -80.07560 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 26.54130, "lng": -80.08075 },
+      { "lat": 26.54130, "lng": -80.07520 },
+      { "lat": 26.54200, "lng": -80.07520 },
+      { "lat": 26.54200, "lng": -80.08075 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
+      "truckGate": { "heading": 4, "pano": "Ie_RTboQCNAI3UHAjRDdYQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 140,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 68.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@26.54345,-80.07825,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "SW divided-boulevard entrance off Park Ridge Blvd with a sliding/swing gate and fencing across the inbound truck lanes; confirmed in Street View (a parked Publix trailer sits just inside).",
+    "guardShack": "Small tan peaked-roof guard booth in the entrance median beside the lanes (~1-vehicle footprint), visible in both Street View and zoom-20 satellite at ~26.5417,-80.0806.",
+    "remoteGs": "False - staffed booth present.",
+    "postGateStaging": "Large paved apron/yard inside the gate before the dock faces provides interior holding.",
+    "drivewayLong": "Divided entrance drive plus deep interior yard easily holds a 3+ truck queue before docks.",
+    "entryExitTogether": "Single gated entrance point handles both in and out via the divided (median-split) driveway.",
+    "entryLanes": "Estimated 2 inbound lanes from satellite lane markings at the gate; medium confidence on exact count.",
+    "exitLanes": "Estimated 2 outbound lanes on the east side of the median; medium confidence.",
+    "fastLaneOpportunity": "Wide multi-lane gate apron with median and unused paved width - room for an express/bypass lane.",
+    "dockDoors": "Two long dock banks on the south faces (~40-50 doors each) plus west-face and north-face docks; total well over 100 doors -> 50+.",
+    "dropArea": "Extensive trailer drop yards north of the west building, west end, and along the south yard - dozens of parked trailers without tractors -> 50+.",
+    "shipRcvSeparate": "Dock banks on multiple building faces (south, west, north) suggest separated ship/receive clusters; medium confidence.",
+    "urbanRural": "Within the dense Boynton Beach / Palm Beach metro fabric (residential, school, I-95, adjacent industrial parks) -> Urban.",
+    "connectivityIssue": "Dense metro location, strong cellular coverage expected -> false.",
+    "buildingCount": "Two large connected building masses (tan-roof west, white-roof east) read as 2 structures.",
+    "railServed": "Rail line runs east of the site beyond I-95 but no spur enters the Publix property.",
+    "siteAreaAcres": "~68 acres computed from the traced perimeter polygon (fenced property only, excludes adjacent school/industrial)."
+  },
+  "method": "deep-audit"
+}
