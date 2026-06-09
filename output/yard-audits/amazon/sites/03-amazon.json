@@ -1,0 +1,97 @@
+{
+  "name": "Amazon MEM1 Fulfillment Center Memphis TN",
+  "type": "Fulfillment Center",
+  "coords": { "lat": 35.00820, "lng": -89.95000 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 35.00990, "lng": -89.95360 },
+      { "lat": 35.00940, "lng": -89.94560 },
+      { "lat": 35.00740, "lng": -89.94470 },
+      { "lat": 35.00630, "lng": -89.94560 },
+      { "lat": 35.00615, "lng": -89.95200 },
+      { "lat": 35.00640, "lng": -89.95430 },
+      { "lat": 35.00760, "lng": -89.95470 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 35.00640, "lng": -89.94625 },
+      { "lat": 35.00642, "lng": -89.94545 },
+      { "lat": 35.00690, "lng": -89.94550 },
+      { "lat": 35.00688, "lng": -89.94630 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 35.00960, "lng": -89.94720 },
+        { "lat": 35.00935, "lng": -89.94560 },
+        { "lat": 35.00800, "lng": -89.94600 },
+        { "lat": 35.00825, "lng": -89.94770 }
+      ] },
+      { "ring": [
+        { "lat": 35.00735, "lng": -89.94620 },
+        { "lat": 35.00730, "lng": -89.94490 },
+        { "lat": 35.00640, "lng": -89.94500 },
+        { "lat": 35.00645, "lng": -89.94625 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 35.00935, "lng": -89.95255 },
+        { "lat": 35.00845, "lng": -89.94905 },
+        { "lat": 35.00815, "lng": -89.94925 },
+        { "lat": 35.00905, "lng": -89.95275 }
+      ] },
+      { "ring": [
+        { "lat": 35.00800, "lng": -89.95205 },
+        { "lat": 35.00715, "lng": -89.94870 },
+        { "lat": 35.00688, "lng": -89.94890 },
+        { "lat": 35.00773, "lng": -89.95225 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 2, "pano": "hv6WqdT1mz9s1O6kVIRobQ", "hasCoverage": true },
+      "truckGate": { "heading": 14, "pano": "7J51MIzepx4-aitQa9OAuQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 180,
+    "trailersVisible": 360,
+    "trailerParkingCapacity": 450,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 78.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.00820,-89.95000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "multiStep"],
+  "fieldNotes": {
+    "truckGate": "Single dedicated truck entrance off E Holmes Rd at the SE corner (~35.0063,-89.9456), marked by an Amazon monument sign; Street View pano coverage stops at the public road because the gated private drive blocks the camera car. Whole property is fenced (black metal perimeter fence visible in multiple SV frames).",
+    "guardShack": "No standalone guard booth is resolvable at the truck gate throat in z20 imagery; a small booth WAS seen at the separate associate-parking entrance (~35.0066,-89.9515) but that controls car parking, not the truck yard. Truck gate is treated as kiosk/remote check-in (remoteGs=true). Medium confidence on shack absence.",
+    "remoteGs": "Set true because there is a controlled truck gate but no resolvable manned booth at the truck throat — implies kiosk/app/call-box check-in typical of modern Amazon FC truck gates.",
+    "dropYard": "Massive dedicated trailer-storage yard on the NE side (hundreds of Amazon orange/blue trailers in angled rows) plus a SE overflow trailer lot fronting E Holmes — clearly separate from active dock staging.",
+    "shipRcvSeparate": "Dock banks on two distinct building faces — a long dock line on the NE/north face (inbound, served by the NE drop yard) and a long dock line on the SW/south face (outbound), classic Amazon FC inbound/outbound split.",
+    "dockDoors": "50+ band easily exceeded; doors run nearly the full length of both long faces. ~180 is an order-of-magnitude estimate from z18 imagery, not an exact count.",
+    "dropArea": "50+ band; NE drop yard alone holds several hundred trailers in marked angled rows.",
+    "trailersVisible": "~360 estimate combining the NE drop yard rows, SE overflow lot, and trailers backed into both dock faces in the captured imagery; approximate.",
+    "siteAreaAcres": "~78 acres derived from the perimeter polygon (large FC parcel bounded by E Holmes Rd south, residential tree line NW, power-line easement E).",
+    "entryLanes": "Estimated 2 in / 2 out at the truck throat from z20; not directly confirmable because pano coverage stops before the gate.",
+    "fastLaneOpportunity": "Wide entrance apron and long internal truck road from gate to yard give ample room for an express/bypass lane.",
+    "preGateStaging": "Wide paved apron and shoulder room outside the gate on E Holmes where trucks were observed staged/parked.",
+    "postGateStaging": "Long internal truck road and large yard inside the gate before the dock faces.",
+    "multiStep": "No clearly visible second checkpoint (scale house / second booth) after the gate; left false.",
+    "railServed": "No rail spur enters the property; nearest rail is unrelated. False.",
+    "urbanRural": "Within the Memphis metro dense industrial/residential fabric (subdivisions immediately NW, other DCs across E Holmes) -> Urban."
+  },
+  "method": "deep-audit"
+}

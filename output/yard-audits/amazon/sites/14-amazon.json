@@ -1,0 +1,107 @@
+{
+  "name": "Amazon TPA1 Fulfillment Center Ruskin FL",
+  "type": "Fulfillment Center",
+  "coords": { "lat": 27.726800, "lng": -82.387200 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 27.73000, "lng": -82.39050 },
+      { "lat": 27.72930, "lng": -82.38780 },
+      { "lat": 27.72460, "lng": -82.38440 },
+      { "lat": 27.72340, "lng": -82.38540 },
+      { "lat": 27.72360, "lng": -82.38780 },
+      { "lat": 27.72400, "lng": -82.38960 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 27.72560, "lng": -82.38640 },
+      { "lat": 27.72525, "lng": -82.38555 },
+      { "lat": 27.72475, "lng": -82.38595 },
+      { "lat": 27.72510, "lng": -82.38680 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 27.72860, "lng": -82.38640 },
+        { "lat": 27.72540, "lng": -82.38415 },
+        { "lat": 27.72470, "lng": -82.38500 },
+        { "lat": 27.72790, "lng": -82.38725 }
+      ] },
+      { "ring": [
+        { "lat": 27.72500, "lng": -82.38790 },
+        { "lat": 27.72475, "lng": -82.38640 },
+        { "lat": 27.72390, "lng": -82.38690 },
+        { "lat": 27.72415, "lng": -82.38835 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 27.72895, "lng": -82.38690 },
+        { "lat": 27.72545, "lng": -82.38450 },
+        { "lat": 27.72525, "lng": -82.38490 },
+        { "lat": 27.72875, "lng": -82.38730 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 27.72420, "lng": -82.38895 },
+      { "lat": 27.72385, "lng": -82.38760 },
+      { "lat": 27.72330, "lng": -82.38790 },
+      { "lat": 27.72365, "lng": -82.38925 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 117, "pano": "PsJUzMPaQhpFtpbdQe5R0g", "hasCoverage": true },
+      "truckGate": { "heading": 57, "pano": "N_lPZyK0j_8mB--1Gie8pQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 140,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 65.4,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@27.726800,-82.387200,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "multiStep"],
+  "fieldNotes": {
+    "truckGate": "Controlled truck entrance on the south access road off Laurel Ridge Ave: the truck drive pinches at a checkpoint with lane striping/crosswalk markings before entering the secured east drop yard (visible at z19, ~27.7252,-82.3858).",
+    "guardShack": "Small booth-sized structure(s) sit beside the truck lane at the checkpoint pinch-point; consistent with a staffed guard booth at an Amazon FC, but exact roofline is at the edge of satellite resolution (no Street View reaches the internal gate), so flagged uncertain.",
+    "preGateStaging": "Paved staging apron on the public-accessible SW approach holds tractors/trucks before the gate; Street View (pano N_lPZyK0j_8mB--1Gie8pQ, 2025-01) shows red sleeper-cab tractors staged on the apron by the water tank.",
+    "postGateStaging": "Wide paved truck court between the dock apron and the second trailer row inside the fence gives an internal queue/hold area before docks.",
+    "drivewayLong": "Long internal truck court running the full east face easily holds a 3+ truck queue from gate to docks.",
+    "entryLanes": "Estimated ~2 inbound lanes at the gate apron from overhead; not crisply countable, flagged uncertain.",
+    "exitLanes": "Estimated ~1 outbound lane; entry and exit share the same south gate (entryExitTogether).",
+    "fastLaneOpportunity": "Wide gate apron and broad paved truck court leave room to add an express/bypass lane.",
+    "dockDoors": "Continuous dock-door rhythm runs the entire east building face with trailers backed in along its full length (z19 eastmid views); well into the 50+ band, estimated ~120 doors.",
+    "dropArea": "Second trailer row east of the dock apron plus the SE drop lot hold many parked trailers without tractors; 50+ band.",
+    "dropYard": "Dedicated trailer-storage rows in the east yard and SE corner separate from active dock staging.",
+    "urbanRural": "Edge-of-town site on rural fringe SE of Tampa beside I-75, bordered by open land, farmland, and a wastewater plant; judged Rural.",
+    "railServed": "No rail spur enters the property; nearest tracks are unrelated.",
+    "multiStep": "No clearly distinct second checkpoint (scale house / second booth) after the gate is visible; left false.",
+    "yardMetrics": "Counts are overhead estimates: dock doors ~120 (50+), trailers visible ~140, capacity ~200, area ~65 ac from the perimeter polygon."
+  },
+  "method": "deep-audit"
+}

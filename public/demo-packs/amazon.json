@@ -1,0 +1,4204 @@
+{
+  "schemaVersion": "2",
+  "builtAt": "2026-06-09T22:36:56.264Z",
+  "account": {
+    "slug": "amazon",
+    "displayName": "Amazon",
+    "archetype": "retailer",
+    "siteCount": 16,
+    "coverageNote": {
+      "auditedCount": 16,
+      "estimatedFootprint": 110,
+      "droppedStubCount": 0,
+      "capHit": false,
+      "note": "Amazon runs 100+ large US fulfillment centers plus sortation centers, inbound cross-docks, and the Amazon Air hub network, feeding thousands of delivery stations. We audited 16 of the largest freight sites.",
+      "auditedScope": "US"
+    },
+    "featuredSiteId": "15-amazon",
+    "dossierIntro": "Amazon runs the most heavily gated freight network we have mapped. We audited 16 of its largest US sites, a mix of robotics fulfillment centers, an inbound cross-dock, a sortation center, and the Amazon Air hub at CVG, holding 1,890 dock doors and room for about 3,825 trailers. Fifteen of the sixteen gate the yard and twelve run a staffed guard booth, and none touch rail, so every trailer enters through a controlled checkpoint and leaves by truck. YardFlow turns those checkpoints into one orchestrated gate-to-dock flow across every node.",
+    "surprisingFindings": [
+      "Fifteen of the 16 Amazon sites gate the yard and twelve staff a guard booth. No network we have mapped controls its gates this tightly.",
+      "The 16 sites span four node types: robotics fulfillment, an inbound cross-dock, a sortation center, and the CVG air hub, each with its own yard rhythm.",
+      "Across 16 sites we counted 1,890 dock doors and 3,825 trailer spots on 1,053 acres, with no rail. Every trailer moves by truck."
+    ]
+  },
+  "research": null,
+  "network": {
+    "bbox": [
+      -122.26015,
+      27.7234,
+      -74.56215,
+      47.41632
+    ],
+    "archetypeMix": {
+      "#7": 3,
+      "#10": 6,
+      "#9": 3,
+      "#6": 2,
+      "#4": 1,
+      "#3": 1
+    },
+    "totals": {
+      "dockDoors": 1890,
+      "trailerCapacity": 3825,
+      "gates": 17,
+      "railServed": 0,
+      "acres": 1053.2
+    },
+    "sites": [
+      {
+        "id": "01-amazon",
+        "name": "Amazon BFI4 Fulfillment Center Kent WA",
+        "type": "Fulfillment Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "trailerParkingCapacity",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 47.41452,
+          "lng": -122.25782
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 47.41632,
+                "lng": -122.26015
+              },
+              {
+                "lat": 47.41618,
+                "lng": -122.2547
+              },
+              {
+                "lat": 47.41285,
+                "lng": -122.25455
+              },
+              {
+                "lat": 47.4128,
+                "lng": -122.2601
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 47.41568,
+                "lng": -122.2556
+              },
+              {
+                "lat": 47.41566,
+                "lng": -122.25505
+              },
+              {
+                "lat": 47.41525,
+                "lng": -122.25508
+              },
+              {
+                "lat": 47.41527,
+                "lng": -122.25562
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 47.41618,
+                  "lng": -122.2601
+                },
+                {
+                  "lat": 47.41606,
+                  "lng": -122.2551
+                },
+                {
+                  "lat": 47.41578,
+                  "lng": -122.25512
+                },
+                {
+                  "lat": 47.4159,
+                  "lng": -122.26012
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 47.41585,
+                  "lng": -122.2601
+                },
+                {
+                  "lat": 47.41573,
+                  "lng": -122.25515
+                },
+                {
+                  "lat": 47.41552,
+                  "lng": -122.25517
+                },
+                {
+                  "lat": 47.41564,
+                  "lng": -122.26012
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 47.4156,
+                "lng": -122.2556
+              },
+              {
+                "lat": 47.41558,
+                "lng": -122.25445
+              },
+              {
+                "lat": 47.4151,
+                "lng": -122.25448
+              },
+              {
+                "lat": 47.41512,
+                "lng": -122.25562
+              }
+            ]
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 75,
+          "trailerParkingCapacity": 110,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 47.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#7",
+          "steps": [
+            {
+              "step": "Arrive at gate (fast-lane bypass possible)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter dispatch (fast-lane priority for live loads)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch.fastlane",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4440000,
+          "totalYnsMs": 2730000
+        },
+        "dossierExcerpt": "The supplied approximate coords (47.413802, -122.257825) landed directly on a single very\nlarge white-roofed distribution building in Kent's industrial valley. Web search confirmed\n21005 64th Ave S = Amazon FC BFI4, a 9th-generation Amazon Robotics fulfillment center\n(launched March 2016, open 24h). Street View from the north service road shows the building\naddress number \"21005\" on the wall and Amazon \"smile\" branding on trailers/building behind the\nlandscaped median, positively confirming the building. Center adjusted slightly to the building\ncentroid at 47.41452, -122.25782.",
+        "mapsUrl": "https://www.google.com/maps/@47.41452,-122.25782,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Controlled, guarded truck gate at NE corner off the north service road: channelized lanes with crosshatch markings, barrier arms/bollards (yellow+orange) across the lanes, chain-link perimeter fencing both sides. Confirmed in satellite (z20) and 2025-05 Street View at the gate.",
+          "guardShack": "Small white guard booth structure beside the gate lanes, ~1-2 vehicle footprint, visible in z20 satellite and Street View.",
+          "remoteGs": "False - staffed guard booth present, so not a remote/kiosk-only check-in.",
+          "postGateStaging": "Large paved yard equipment / staging area inside the gate before the dock apron (visible parked yard tractors and open paved holding area).",
+          "drivewayLong": "Deep paved gate-to-dock approach and a wide internal truck drive can stack well more than 3 trucks.",
+          "entryLanes": "~2 inbound lanes estimated from overhead channelization; flagged uncertain.",
+          "exitLanes": "~2 outbound lanes estimated; flagged uncertain.",
+          "fastLaneOpportunity": "Wide gate apron with multiple channelized lanes and unused paved width - room to add an express/bypass lane.",
+          "dockDoors": "Continuous bank of dock doors runs the full north building face with trailers backed in along its entire length; well into the 50+ band (estimated ~90 doors).",
+          "dropArea": "Long row of parked trailers without tractors staged along the north fence line in addition to docked trailers; 50+ band.",
+          "dropYard": "Dedicated north trailer drop/storage row distinct from the active dock apron.",
+          "urbanRural": "Kent industrial valley within the Seattle metro - dense surrounding industrial/distribution fabric = Urban.",
+          "railServed": "No rail spur enters the property in any imagery.",
+          "siteAreaAcres": "~47.5 acres derived from the traced perimeter polygon.",
+          "shipRcvSeparate": "Single continuous dock bank on the north face; shipping/receiving not on physically separate building faces.",
+          "streetViewMeta": "Google Street View coverage exists along the north service road (panos captured 2025-05); pano ids not hard-coded - heading values point the camera from the road toward each zone."
+        }
+      },
+      {
+        "id": "02-amazon",
+        "name": "Amazon ONT8 Fulfillment Center Moreno Valley CA",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 33.86836,
+          "lng": -117.23708
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 33.87,
+                "lng": -117.23925
+              },
+              {
+                "lat": 33.87,
+                "lng": -117.2349
+              },
+              {
+                "lat": 33.86672,
+                "lng": -117.2349
+              },
+              {
+                "lat": 33.86672,
+                "lng": -117.23925
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 33.87,
+                "lng": -117.23895
+              },
+              {
+                "lat": 33.87,
+                "lng": -117.2385
+              },
+              {
+                "lat": 33.86975,
+                "lng": -117.2385
+              },
+              {
+                "lat": 33.86975,
+                "lng": -117.23895
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 33.86705,
+                  "lng": -117.239
+                },
+                {
+                  "lat": 33.86705,
+                  "lng": -117.2356
+                },
+                {
+                  "lat": 33.86672,
+                  "lng": -117.2356
+                },
+                {
+                  "lat": 33.86672,
+                  "lng": -117.239
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 33.87,
+                  "lng": -117.239
+                },
+                {
+                  "lat": 33.87,
+                  "lng": -117.2356
+                },
+                {
+                  "lat": 33.86978,
+                  "lng": -117.2356
+                },
+                {
+                  "lat": 33.86978,
+                  "lng": -117.239
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 33.86978,
+                  "lng": -117.239
+                },
+                {
+                  "lat": 33.86978,
+                  "lng": -117.2356
+                },
+                {
+                  "lat": 33.86948,
+                  "lng": -117.2356
+                },
+                {
+                  "lat": 33.86948,
+                  "lng": -117.239
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 33.86734,
+                  "lng": -117.239
+                },
+                {
+                  "lat": 33.86734,
+                  "lng": -117.2356
+                },
+                {
+                  "lat": 33.86705,
+                  "lng": -117.2356
+                },
+                {
+                  "lat": 33.86705,
+                  "lng": -117.239
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 33.8698,
+                "lng": -117.23925
+              },
+              {
+                "lat": 33.8698,
+                "lng": -117.23905
+              },
+              {
+                "lat": 33.867,
+                "lng": -117.23905
+              },
+              {
+                "lat": 33.867,
+                "lng": -117.23925
+              }
+            ]
+          },
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 273,
+              "pano": "_XyVu-d1jCMKtlARiIhQzA",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 210,
+              "pano": "7VvwH31NgV58HTc4Q3CSmw",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 180,
+          "trailersVisible": 120,
+          "trailerParkingCapacity": 350,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 36.3,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#10",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct (shipping vs receiving) drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 120000,
+              "narrationKey": "shiprcv.split",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron on correct side",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1320000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
+        },
+        "dossierExcerpt": "The supplied approximate coordinates (33.869115, -117.235436) landed on a road\nintersection inside a dense Inland Empire industrial park crowded with large\ndistribution buildings, so the exact building had to be pinned down. Web research\nconfirmed the address (24300 Nandina Ave, Moreno Valley, CA 92551) and an\nOSM/Mapcarta-tagged centroid of ~33.86829, -117.23712. Satellite probes at that\npoint centered cleanly on one very large warehouse.\n\nIdentity was then positively confirmed from the ground: a Street View frame on the\neast road looking west (pano `_XyVu-d1jCMKtlARiIhQzA`, captured 2026-02) shows the\nbuilding's east face carrying the \"amazon fulfillment\" logo and signage, with\nthe 2-story office and fenced employee parking in front. This is unambiguously the\nAmazon FC. Locked center at the building centroid 33.86836, -117.23708.",
+        "mapsUrl": "https://www.google.com/maps/@33.86836,-117.23708,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "guardShack": "Walled/fenced truck yard with a controlled pinch-point entrance off the north road (west perimeter drive throat ~33.8697,-117.2386); STOP striping and a small booth-footprint structure beside the inbound lane at the throat. Amazon FCs of this scale staff a guard booth at the inbound truck check-in. Backlit morning Street View partly obscures the booth, so flagged uncertain, but evidence supports guardShack:true over remote check-in.",
+          "truckGate": "Yard is screened by tilt-up concrete walls along the south and west streets and palisade fence on the east; the only truck-side opening is the controlled NW throat off the north road. Open driveway ruled out.",
+          "entryLanes": "Wide entrance apron; estimated ~2 inbound lanes from overhead striping, low confidence.",
+          "fastLaneOpportunity": "Very wide gate apron and deep internal yard provide ample paved width to add an express/bypass lane.",
+          "dockDoors": "Cross-dock FC: long dock-door rows on the building's north and south faces plus a detached south dock structure; honest overhead estimate ~180 doors total, well into the 50+ band.",
+          "shipRcvSeparate": "Distinct dock banks on physically separate building faces (north and south), consistent with separated inbound/outbound flow.",
+          "postGateStaging": "Deep paved yard inside the gate (west perimeter drive + numbered trailer stalls 300+) holds queued trucks well before the dock doors.",
+          "dropArea": "Numbered trailer-storage stalls observed into the 300-365 range across north and south yards; 50+ band.",
+          "railServed": "No rail spur enters the property; nearest rail is unrelated.",
+          "siteAreaAcres": "Derived from perimeter polygon (~365m x ~402m secured property) ≈ 36 acres."
+        }
+      },
+      {
+        "id": "03-amazon",
+        "name": "Amazon MEM1 Fulfillment Center Memphis TN",
+        "type": "Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 35.0082,
+          "lng": -89.95
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 35.0099,
+                "lng": -89.9536
+              },
+              {
+                "lat": 35.0094,
+                "lng": -89.9456
+              },
+              {
+                "lat": 35.0074,
+                "lng": -89.9447
+              },
+              {
+                "lat": 35.0063,
+                "lng": -89.9456
+              },
+              {
+                "lat": 35.00615,
+                "lng": -89.952
+              },
+              {
+                "lat": 35.0064,
+                "lng": -89.9543
+              },
+              {
+                "lat": 35.0076,
+                "lng": -89.9547
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 35.0064,
+                "lng": -89.94625
+              },
+              {
+                "lat": 35.00642,
+                "lng": -89.94545
+              },
+              {
+                "lat": 35.0069,
+                "lng": -89.9455
+              },
+              {
+                "lat": 35.00688,
+                "lng": -89.9463
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 35.0096,
+                  "lng": -89.9472
+                },
+                {
+                  "lat": 35.00935,
+                  "lng": -89.9456
+                },
+                {
+                  "lat": 35.008,
+                  "lng": -89.946
+                },
+                {
+                  "lat": 35.00825,
+                  "lng": -89.9477
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 35.00735,
+                  "lng": -89.9462
+                },
+                {
+                  "lat": 35.0073,
+                  "lng": -89.9449
+                },
+                {
+                  "lat": 35.0064,
+                  "lng": -89.945
+                },
+                {
+                  "lat": 35.00645,
+                  "lng": -89.94625
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 35.00935,
+                  "lng": -89.95255
+                },
+                {
+                  "lat": 35.00845,
+                  "lng": -89.94905
+                },
+                {
+                  "lat": 35.00815,
+                  "lng": -89.94925
+                },
+                {
+                  "lat": 35.00905,
+                  "lng": -89.95275
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 35.008,
+                  "lng": -89.95205
+                },
+                {
+                  "lat": 35.00715,
+                  "lng": -89.9487
+                },
+                {
+                  "lat": 35.00688,
+                  "lng": -89.9489
+                },
+                {
+                  "lat": 35.00773,
+                  "lng": -89.95225
+                }
+              ]
+            }
+          ],
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 2,
+              "pano": "hv6WqdT1mz9s1O6kVIRobQ",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 14,
+              "pano": "7J51MIzepx4-aitQa9OAuQ",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 180,
+          "trailersVisible": 360,
+          "trailerParkingCapacity": 450,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 78,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
+        "dossierExcerpt": "The supplied approximate coordinates (35.006546, -89.951836) sat on E Holmes Rd\nitself, just south of the facility. A z16/z17 satellite sweep showed a single\nvery large white-roofed industrial building to the NE, with dock-door lines and\nhundreds of trailers — consistent with a fulfillment center. Web search\nconfirmed the address: Amazon MEM1, 3292 E Holmes Rd, Memphis TN 38118 (24/7\noperation; multiple Amazon FC address directories and Waze list this exact\nbuilding). Street View along the frontage shows an Amazon monument sign at the\nSE driveway, positively identifying the parcel. Locked center: 35.00820,\n-89.95000. The building's long axis runs NW->SE, rotated ~35deg off north, so\nevery geofence below is traced as a rotated quad rather than a north-aligned box.",
+        "mapsUrl": "https://www.google.com/maps/@35.00820,-89.95000,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single dedicated truck entrance off E Holmes Rd at the SE corner (~35.0063,-89.9456), marked by an Amazon monument sign; Street View pano coverage stops at the public road because the gated private drive blocks the camera car. Whole property is fenced (black metal perimeter fence visible in multiple SV frames).",
+          "guardShack": "No standalone guard booth is resolvable at the truck gate throat in z20 imagery; a small booth WAS seen at the separate associate-parking entrance (~35.0066,-89.9515) but that controls car parking, not the truck yard. Truck gate is treated as kiosk/remote check-in (remoteGs=true). Medium confidence on shack absence.",
+          "remoteGs": "Set true because there is a controlled truck gate but no resolvable manned booth at the truck throat — implies kiosk/app/call-box check-in typical of modern Amazon FC truck gates.",
+          "dropYard": "Massive dedicated trailer-storage yard on the NE side (hundreds of Amazon orange/blue trailers in angled rows) plus a SE overflow trailer lot fronting E Holmes — clearly separate from active dock staging.",
+          "shipRcvSeparate": "Dock banks on two distinct building faces — a long dock line on the NE/north face (inbound, served by the NE drop yard) and a long dock line on the SW/south face (outbound), classic Amazon FC inbound/outbound split.",
+          "dockDoors": "50+ band easily exceeded; doors run nearly the full length of both long faces. ~180 is an order-of-magnitude estimate from z18 imagery, not an exact count.",
+          "dropArea": "50+ band; NE drop yard alone holds several hundred trailers in marked angled rows.",
+          "trailersVisible": "~360 estimate combining the NE drop yard rows, SE overflow lot, and trailers backed into both dock faces in the captured imagery; approximate.",
+          "siteAreaAcres": "~78 acres derived from the perimeter polygon (large FC parcel bounded by E Holmes Rd south, residential tree line NW, power-line easement E).",
+          "entryLanes": "Estimated 2 in / 2 out at the truck throat from z20; not directly confirmable because pano coverage stops before the gate.",
+          "fastLaneOpportunity": "Wide entrance apron and long internal truck road from gate to yard give ample room for an express/bypass lane.",
+          "preGateStaging": "Wide paved apron and shoulder room outside the gate on E Holmes where trucks were observed staged/parked.",
+          "postGateStaging": "Long internal truck road and large yard inside the gate before the dock faces.",
+          "multiStep": "No clearly visible second checkpoint (scale house / second booth) after the gate; left false.",
+          "railServed": "No rail spur enters the property; nearest rail is unrelated. False.",
+          "urbanRural": "Within the Memphis metro dense industrial/residential fabric (subdivisions immediately NW, other DCs across E Holmes) -> Urban."
+        }
+      },
+      {
+        "id": "04-amazon",
+        "name": "Amazon CVG1 Fulfillment Center Hebron KY",
+        "type": "Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 39.0846,
+          "lng": -84.7129
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 39.08745,
+                "lng": -84.71485
+              },
+              {
+                "lat": 39.08765,
+                "lng": -84.71205
+              },
+              {
+                "lat": 39.0863,
+                "lng": -84.71135
+              },
+              {
+                "lat": 39.08335,
+                "lng": -84.71165
+              },
+              {
+                "lat": 39.08195,
+                "lng": -84.71335
+              },
+              {
+                "lat": 39.082,
+                "lng": -84.7148
+              },
+              {
+                "lat": 39.085,
+                "lng": -84.71515
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 39.08682,
+                "lng": -84.71275
+              },
+              {
+                "lat": 39.08678,
+                "lng": -84.71215
+              },
+              {
+                "lat": 39.08635,
+                "lng": -84.7122
+              },
+              {
+                "lat": 39.08638,
+                "lng": -84.7128
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 39.0863,
+                  "lng": -84.71195
+                },
+                {
+                  "lat": 39.08615,
+                  "lng": -84.7115
+                },
+                {
+                  "lat": 39.08355,
+                  "lng": -84.7118
+                },
+                {
+                  "lat": 39.08365,
+                  "lng": -84.71225
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 39.0865,
+                  "lng": -84.71245
+                },
+                {
+                  "lat": 39.08645,
+                  "lng": -84.71215
+                },
+                {
+                  "lat": 39.0834,
+                  "lng": -84.71245
+                },
+                {
+                  "lat": 39.08345,
+                  "lng": -84.71275
+                }
+              ]
+            }
+          ],
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 200,
+              "pano": "hQN79MxhzqdX3b7M4uvqRA",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 200,
+              "pano": "hQN79MxhzqdX3b7M4uvqRA",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 8,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 42.4,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
+        "dossierExcerpt": "The supplied coordinates (39.084682, -84.713515) landed on the correct\nbuilding. A z16/z17 satellite sweep around the point shows one large\nsingle-building distribution center in Prologis Park West, immediately NW of\nthe I-275 / I-71-75 interchange. Web search (FLEX Fulfillment, fbanearme,\nWaze) corroborates 1155 Worldwide Blvd = Prologis Park West Building F, a\n1M+ sq ft Amazon FC ~5 miles from the CVG air hub. This is a distinct site\nfrom roster idx 5 (KCVG Air Hub, ~5 km SE on Wendell H Ford Blvd) — the\nbuilding audited here is the Worldwide Blvd fulfillment center, not the air\ncargo sort.\n\nTrue building center locked at 39.0846, -84.7129. The structure is a long\nrectangle whose long axis runs roughly NNW–SSE, tilted ~15–20° east of north,\n~520 m long.",
+        "mapsUrl": "https://www.google.com/maps/@39.0846,-84.7129,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "2024-09 Street View shows a continuous black chain-link security fence (Amazon-added; absent in 2016/2021 panos) wrapping the trailer yard and dock apron, breached by a single controlled entry drive off Worldwide Blvd at the north end. Fence + single gated opening into the secured yard = controlled truck gate.",
+          "guardShack": "No standalone guard-booth footprint positively confirmed at the gate throat in satellite (z20-21) or Street View; entrance trees partially obscure. A small structure sits on the dock apron but reads as a yard-control/equipment shed, not a road-side gatehouse. Marked false with low confidence.",
+          "remoteGs": "Gate present but no confirmed booth -> treated as kiosk/app check-in (Amazon driver app). Uncertain; could flip to guardShack if a manned booth exists behind the tree line.",
+          "postGateStaging": "Large paved apron/yard inside the fence between the gate and the dock doors provides ample internal queueing room.",
+          "drivewayLong": "Entry drive descends a long ramp from Worldwide Blvd into a deep internal yard; easily holds 3+ trucks before the docks.",
+          "entryExitTogether": "Single entry/exit drive off Worldwide Blvd at the north; the drive has a center median splitting in/out lanes but is one gate point.",
+          "entryLanes": "Center median at the entry suggests ~1 in / 1 out; exact lane count obscured by trees - estimate.",
+          "fastLaneOpportunity": "Wide entry apron and a deep, wide internal yard give physical room to add an express/bypass lane.",
+          "dockDoors": "Single continuous dock bank runs the full ~520m east face; no trailers backed in to count individually, but a 1M+ sq ft FC of this length implies well over 50 doors. Count 110 is an order-of-magnitude estimate.",
+          "dropArea": "Long row of marked angled trailer-parking stalls runs the full east drop yard (~90-stall capacity); mostly empty in captured imagery.",
+          "urbanRural": "Edge-of-town industrial park (Prologis Park West) in Hebron KY beside the I-275/I-71-75 interchange; broader setting is exurban/rural-industrial, not dense metro fabric.",
+          "shipRcvSeparate": "All dock doors are on a single (east) building face; west face is roof/employee-parking only. One dock cluster.",
+          "scale": "No truck scale / weigh pad visible in the truck path.",
+          "siteAreaAcres": "~42 acres derived (shoelace) from the traced 7-vertex perimeter ring (building + east drop yard + dock apron + west employee lot + entry drive); approximate.",
+          "streetViewMeta": "Live 2024-09 panos exist on Worldwide Blvd overlooking the gate (perimeter/truckGate hasCoverage true); panos nearest the interior drop yard/dock apron resolve to 2016 pre-Amazon imagery, so those zones marked hasCoverage false. pano ids left empty per instruction (never invent)."
+        }
+      },
+      {
+        "id": "05-amazon",
+        "name": "Amazon KCVG Air Hub Hebron KY",
+        "type": "Air Hub",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "multiStep",
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 39.03135,
+          "lng": -84.65965
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 39.0352,
+                "lng": -84.66095
+              },
+              {
+                "lat": 39.0347,
+                "lng": -84.6576
+              },
+              {
+                "lat": 39.029,
+                "lng": -84.65755
+              },
+              {
+                "lat": 39.0262,
+                "lng": -84.658
+              },
+              {
+                "lat": 39.0266,
+                "lng": -84.6606
+              },
+              {
+                "lat": 39.0306,
+                "lng": -84.6611
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 39.0288,
+                "lng": -84.6582
+              },
+              {
+                "lat": 39.0288,
+                "lng": -84.6576
+              },
+              {
+                "lat": 39.0274,
+                "lng": -84.65762
+              },
+              {
+                "lat": 39.0274,
+                "lng": -84.65822
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 39.02905,
+                  "lng": -84.66075
+                },
+                {
+                  "lat": 39.02905,
+                  "lng": -84.6587
+                },
+                {
+                  "lat": 39.0272,
+                  "lng": -84.65878
+                },
+                {
+                  "lat": 39.0272,
+                  "lng": -84.66082
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 39.0298,
+                  "lng": -84.6565
+                },
+                {
+                  "lat": 39.0298,
+                  "lng": -84.6548
+                },
+                {
+                  "lat": 39.0285,
+                  "lng": -84.65485
+                },
+                {
+                  "lat": 39.0285,
+                  "lng": -84.65655
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 39.0347,
+                  "lng": -84.6585
+                },
+                {
+                  "lat": 39.0347,
+                  "lng": -84.65815
+                },
+                {
+                  "lat": 39.02945,
+                  "lng": -84.65818
+                },
+                {
+                  "lat": 39.02945,
+                  "lng": -84.65853
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 39.0301,
+                  "lng": -84.6564
+                },
+                {
+                  "lat": 39.0301,
+                  "lng": -84.656
+                },
+                {
+                  "lat": 39.0286,
+                  "lng": -84.65603
+                },
+                {
+                  "lat": 39.0286,
+                  "lng": -84.65643
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 39.0289,
+                "lng": -84.6608
+              },
+              {
+                "lat": 39.0289,
+                "lng": -84.6576
+              },
+              {
+                "lat": 39.027,
+                "lng": -84.6577
+              },
+              {
+                "lat": 39.027,
+                "lng": -84.66085
+              }
+            ]
+          },
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 288,
+              "pano": "CAoSFkNJSE0wb2dLRUlDQWdJRDIxcXZGR0E.",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 4,
+              "pano": "CAoSF0NJSE0wb2dLRUlDQWdJRDJodjd0blFF",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 70,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 6,
+          "siteAreaAcres": 118,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": true
+        },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
+        "dossierExcerpt": "The supplied coordinates (39.033118, -84.658603) land on the large Amazon sort\nbuilding on the south/landside of Cincinnati/Northern Kentucky International\nAirport (CVG). Web research confirms this is **Amazon Air's KCVG primary US\nsort hub**: an 800,000 sq ft sortation building on a 600+ acre, $1.5B campus\nwith seven buildings, an aircraft ramp, and a multi-story employee parking\ngarage, opened August 2021 and operating 24/7.\n\nCVG is a multi-tenant cargo airport. Street View at the campus access road\n(39.0300, -84.65806, heading ~70°) clearly shows a building marked DHL\nbehind a barbed-wire chain-link fence to the southeast — that is the DHL US\nhub, not Amazon. I re-anchored the audit on the genuine Amazon sort\nbuilding to the northwest (the long N-S white high-bay building visible at",
+        "mapsUrl": "https://www.google.com/maps/@39.03135,-84.65965,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "site": "Amazon KCVG air cargo sort hub on the landside of Cincinnati/Northern Kentucky International Airport (CVG). Audited the Amazon sort building and its landside truck/ground-ops footprint, NOT the airside ramp or the adjacent DHL hub (DHL building confirmed by signage in Street View to the southeast).",
+          "truckGate": "Whole campus sits inside CVG's secured airfield perimeter; ground-ops/cargo footprint is enclosed by chain-link fencing with barbed-wire top (clearly visible in 2022 Street View along the access road). Vehicle access is airport-controlled (SIDA/AOA). Treated as a controlled truck gate.",
+          "guardShack": "Inferred from facility class — a $1.5B 24/7 secured air cargo hub uses manned vehicle checkpoints — but no individual guard booth was resolvable in overhead imagery at this scale; flagged uncertain.",
+          "multiStep": "Airport security gate plus a separate ramp-access (airside) control point implies a multi-stage check; inferred, flagged uncertain.",
+          "dockDoors": "Sort building east face and cargo-building faces show 50+ truck dock positions with trailers backed in; band 50+. Exact count approximate.",
+          "dropArea": "Extensive trailer/container and ground-service-equipment staging lots across the landside; 50+.",
+          "shipRcvSeparate": "Inbound/outbound handled at physically separate dock banks (sort building east face vs cargo-building docks).",
+          "multipleFacilities": "Campus: 800k sq ft sort building plus additional cargo/support buildings and a large second building under construction to the north.",
+          "urbanRural": "Edge-of-town airport setting surrounded by farmland to the south; classed Rural per rubric tie-break.",
+          "siteAreaAcres": "~118 acres for the traced landside ground-ops perimeter (the overall Amazon campus is cited at ~600 acres including airside ramp, which is excluded here).",
+          "railServed": "No rail spur into the landside truck yard."
+        }
+      },
+      {
+        "id": "06-amazon",
+        "name": "Amazon FTW1 Fulfillment Center, Dallas TX",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 32.66185,
+          "lng": -96.7363
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 32.6629,
+                "lng": -96.738
+              },
+              {
+                "lat": 32.663,
+                "lng": -96.7347
+              },
+              {
+                "lat": 32.6625,
+                "lng": -96.7338
+              },
+              {
+                "lat": 32.6606,
+                "lng": -96.733
+              },
+              {
+                "lat": 32.6597,
+                "lng": -96.7338
+              },
+              {
+                "lat": 32.6598,
+                "lng": -96.7362
+              },
+              {
+                "lat": 32.6606,
+                "lng": -96.7379
+              },
+              {
+                "lat": 32.662,
+                "lng": -96.7387
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 32.66268,
+                "lng": -96.73805
+              },
+              {
+                "lat": 32.66262,
+                "lng": -96.73725
+              },
+              {
+                "lat": 32.66205,
+                "lng": -96.73745
+              },
+              {
+                "lat": 32.66212,
+                "lng": -96.73815
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 32.66262,
+                  "lng": -96.73705
+                },
+                {
+                  "lat": 32.66285,
+                  "lng": -96.73468
+                },
+                {
+                  "lat": 32.66232,
+                  "lng": -96.73452
+                },
+                {
+                  "lat": 32.66212,
+                  "lng": -96.73682
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 32.66188,
+                  "lng": -96.73838
+                },
+                {
+                  "lat": 32.66192,
+                  "lng": -96.73772
+                },
+                {
+                  "lat": 32.66112,
+                  "lng": -96.73762
+                },
+                {
+                  "lat": 32.66108,
+                  "lng": -96.73828
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 32.66232,
+                  "lng": -96.73692
+                },
+                {
+                  "lat": 32.66252,
+                  "lng": -96.7348
+                },
+                {
+                  "lat": 32.66228,
+                  "lng": -96.73473
+                },
+                {
+                  "lat": 32.66208,
+                  "lng": -96.73685
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 32.66192,
+                  "lng": -96.73762
+                },
+                {
+                  "lat": 32.66108,
+                  "lng": -96.73752
+                },
+                {
+                  "lat": 32.66102,
+                  "lng": -96.73722
+                },
+                {
+                  "lat": 32.66186,
+                  "lng": -96.73732
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 32.66068,
+                  "lng": -96.73682
+                },
+                {
+                  "lat": 32.66052,
+                  "lng": -96.73482
+                },
+                {
+                  "lat": 32.66028,
+                  "lng": -96.73492
+                },
+                {
+                  "lat": 32.66044,
+                  "lng": -96.73692
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 32.66272,
+                "lng": -96.7378
+              },
+              {
+                "lat": 32.66285,
+                "lng": -96.73582
+              },
+              {
+                "lat": 32.66262,
+                "lng": -96.73578
+              },
+              {
+                "lat": 32.6625,
+                "lng": -96.73775
+              }
+            ]
+          },
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 177,
+              "pano": "b2htTSym2Jjb268EC7fjNQ",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 172,
+              "pano": "TZ9CQadRcX6Z838b4kfBZw",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 130,
+          "trailersVisible": 140,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 36.8,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#10",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct (shipping vs receiving) drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 120000,
+              "narrationKey": "shiprcv.split",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron on correct side",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1320000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
+        },
+        "dossierExcerpt": "The supplied approximate coordinates (32.661003, -96.736098) landed directly on\na large industrial building. Web search confirmed Amazon Fulfillment Center FTW1\nat 33333 LBJ Freeway, Dallas TX 75241 (~500,000 sq ft, on the Lyndon B. Johnson\nFreeway / I-635 / US-175 corridor in southern Dallas). Satellite at z16-z18\n(06-step0-z16, 06-full-z17, 06-overview-z18) showed a single large rectangular\ndistribution building with multi-face dock walls, a trailer drop yard on the\nnorth, a retention pond on the SW, and employee parking on the south/east —\nfully consistent with an Amazon FC.\n\nStreet View along the access boulevard and north road positively identified the\nsite: the building behind a black palisade security fence with blue/yellow\nAmazon trailers in the yard (06-sv-nwentry, 06-sv-gate-sw). A neighboring",
+        "mapsUrl": "https://www.google.com/maps/@32.66185,-96.7363,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Fully fenced perimeter (black palisade fence) around the entire trailer yard, confirmed in Street View (06-sv-nwentry, 06-sv-gate-s, 06-sv-gate-sw). The main truck entrance is a controlled driveway off the north public road at the NW corner, channelized with orange traffic barrels/cones funneling trucks through a checkpoint (06-sv-mainentry, 06-sv-mainentry2).",
+          "guardShack": "Small tan guard booth sits beside the entry lane at the NW gate, visible in Street View (06-sv-mainentry2) and in satellite at the SW pinch of the entry (06-wcorner-z20, 06-boothtight-z21) as a small 1-2-space-footprint structure with channelizing barrels and a staged tractor-trailer.",
+          "remoteGs": "Guard shack present, so false.",
+          "preGateStaging": "Wide paved apron outside the gate where the public road meets the entry driveway, with room for trucks to wait before the checkpoint (06-nwcorner-entry-z20, 06-sv-mainentry).",
+          "postGateStaging": "Very large interior paved yard between the gate and the dock doors / drop rows - ample post-gate holding (06-northdocks-z19).",
+          "drivewayLong": "Deep gate-to-dock approach across a wide apron can hold a queue of 3+ trucks.",
+          "entryExitSeparate": "Two separate curb cuts / driveways off the north road - distinct in-gate (NW) and a second driveway/exit further east (06-northdocks-z19, 06-nwcorner-entry-z20).",
+          "entryLanes": "Estimated ~2 inbound lanes at the wide gate apron; exact count not directly resolvable overhead due to barrel placement. Listed uncertain.",
+          "exitLanes": "Estimated ~2 outbound lanes; uncertain.",
+          "fastLaneOpportunity": "Very wide gate apron with substantial unused paved width - clear room to add an express/appointment bypass lane.",
+          "dockDoors": "Loading docks on the north, west and SE building faces with regular dock-door rhythm and 100+ trailers backed in across faces (06-northdocks-z19, 06-westdocks-z19, 06-southdocks-z19). dockDoorCount ~130 is an honest overhead estimate; band 50+ is firm.",
+          "dropArea": "Dedicated trailer drop rows north of the dock walls and along the west yard, dozens of trailers parked without tractors; capacity 50+ is firm.",
+          "shipRcvSeparate": "Distinct dock banks on physically separate building faces (north wall vs west wall vs SE wall) - shipping and receiving run from different clusters.",
+          "urbanRural": "Within the Dallas metro directly on LBJ Freeway (I-635 / US-175) interchange; Urban.",
+          "connectivityIssue": "Major metro freight corridor, strong cellular coverage; false.",
+          "multipleFacilities": "Only the single large Amazon fulfillment building is on this parcel. The neighboring building to the SE is American Textile Co (confirmed by Street View signage, 06-sv-boulevard2) on a separate parcel/loop and is excluded.",
+          "scale": "No truck scale / weigh pad visible in the truck path.",
+          "dropYard": "Dedicated trailer-storage drop rows separate from active dock staging, full of parked trailers (06-northdocks-z19, 06-westdocks-z19).",
+          "siteAreaAcres": "~36.8 acres derived from the traced Amazon parcel perimeter (building + fenced yard + drop rows + south employee parking).",
+          "railServed": "No rail spur enters the property."
+        }
+      },
+      {
+        "id": "07-amazon",
+        "name": "Amazon DFW7 Fulfillment Center Fort Worth TX",
+        "type": "Fulfillment Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 32.9701,
+          "lng": -97.3358
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 32.9735,
+                "lng": -97.3371
+              },
+              {
+                "lat": 32.97335,
+                "lng": -97.3318
+              },
+              {
+                "lat": 32.9672,
+                "lng": -97.3323
+              },
+              {
+                "lat": 32.9674,
+                "lng": -97.337
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 32.9732,
+                "lng": -97.33695
+              },
+              {
+                "lat": 32.97318,
+                "lng": -97.33648
+              },
+              {
+                "lat": 32.97292,
+                "lng": -97.3365
+              },
+              {
+                "lat": 32.97294,
+                "lng": -97.33697
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 32.973,
+                  "lng": -97.3369
+                },
+                {
+                  "lat": 32.97298,
+                  "lng": -97.33658
+                },
+                {
+                  "lat": 32.96775,
+                  "lng": -97.33672
+                },
+                {
+                  "lat": 32.96777,
+                  "lng": -97.33704
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 32.9677,
+                  "lng": -97.3366
+                },
+                {
+                  "lat": 32.96762,
+                  "lng": -97.3352
+                },
+                {
+                  "lat": 32.9672,
+                  "lng": -97.33525
+                },
+                {
+                  "lat": 32.96728,
+                  "lng": -97.33665
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 32.97302,
+                  "lng": -97.33658
+                },
+                {
+                  "lat": 32.973,
+                  "lng": -97.3364
+                },
+                {
+                  "lat": 32.96768,
+                  "lng": -97.33652
+                },
+                {
+                  "lat": 32.9677,
+                  "lng": -97.3367
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 32.97348,
+                "lng": -97.337
+              },
+              {
+                "lat": 32.97346,
+                "lng": -97.33672
+              },
+              {
+                "lat": 32.97322,
+                "lng": -97.33674
+              },
+              {
+                "lat": 32.97324,
+                "lng": -97.33702
+              }
+            ]
+          },
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 289,
+              "pano": "hhLEDVfXmFPYHQbSKyDZGg",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 165,
+              "pano": "6k8519RXsITmkFC3Q48auw",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 140,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 160,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 78.8,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#7",
+          "steps": [
+            {
+              "step": "Arrive at gate (fast-lane bypass possible)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter dispatch (fast-lane priority for live loads)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch.fastlane",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4440000,
+          "totalYnsMs": 2730000
+        },
+        "dossierExcerpt": "The supplied pin (32.971437, -97.335757) landed on the building. Web search\nconfirmed DFW7 at 700 Westport Pkwy in the AllianceTexas logistics hub near\nI-35W / SH-170 / Perot Field Alliance Airport — a ~1.1M sq ft robotics sortable\nFC on ~68 acres developed by Hillwood. Satellite probing (z16-z21) positively\nidentified a single large white-roofed warehouse whose long axis runs roughly\nN-S, tilted ~10° east of north, spanning ~32.9730 (north) to ~32.9676 (south),\n~600 m long. Building footprint traces to ~880k sq ft, consistent with a\nmulti-floor 1.1M sq ft FC. Neighboring blue/grey/brown warehouses to the NW, NE,\nand SE are separate parcels (different roofs, own trailer yards), so this is a\nsingle-building site, not a campus. Center locked at 32.9701, -97.3358.",
+        "mapsUrl": "https://www.google.com/maps/@32.9701,-97.3358,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Controlled truck entrance on the west drive off Westport Pkwy: guard booth straddling the lanes with yellow barrier arms and bollards, confirmed in Street View (2023-02). Yellow-striped lane dividers and red-curbed median.",
+          "guardShack": "Small staffed gatehouse structure sitting between the inbound/outbound lanes at the west gate, ~1-2 vehicle footprint, distinct from the main building.",
+          "drivewayLong": "Entry drive runs ~120m+ from the Westport Pkwy stop bar south to the gate, easily holding 3+ trucks before the booth.",
+          "entryLanes": "Estimated 2 inbound from the multi-lane gate apron in Street View; exact split between in/out lanes not fully resolvable overhead.",
+          "fastLaneOpportunity": "Wide multi-lane gate apron with red-curbed median and unused paved width — room to add an express/bypass lane.",
+          "dockDoors": "West wall is lined with a near-continuous row of dock doors for the building's full ~600m length; 50+ band is firm, point estimate ~140 is approximate.",
+          "dropArea": "West apron holds dozens of drop trailers (no tractor) plus a south van/trailer lot; well into the 50+ band.",
+          "urbanRural": "AllianceTexas logistics park on the edge of Fort Worth/Haslet — large industrial setting surrounded by warehouses and open land rather than dense metro fabric; judged Rural per rubric tie-break.",
+          "connectivityIssue": "Large modern Amazon FC in an active industrial park near Alliance Airport; cellular coverage almost certainly fine — false.",
+          "dropYard": "Dedicated trailer staging along the west apron and south lot, separate from active dock backing.",
+          "railServed": "No rail spur enters the property; site is truck/air-served (adjacent Perot Field Alliance Airport).",
+          "siteAreaAcres": "78.8 ac from the traced perimeter incl. yard and parking; published figure ~68 ac for the building parcel."
+        }
+      },
+      {
+        "id": "08-amazon",
+        "name": "Amazon PHX6 Fulfillment Center, Phoenix AZ",
+        "type": "Fulfillment Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 33.43215,
+          "lng": -112.16655
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 33.43513,
+                "lng": -112.16885
+              },
+              {
+                "lat": 33.43507,
+                "lng": -112.16048
+              },
+              {
+                "lat": 33.43072,
+                "lng": -112.16048
+              },
+              {
+                "lat": 33.43072,
+                "lng": -112.16885
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 33.4318,
+                "lng": -112.1686
+              },
+              {
+                "lat": 33.4318,
+                "lng": -112.1677
+              },
+              {
+                "lat": 33.43095,
+                "lng": -112.1677
+              },
+              {
+                "lat": 33.43095,
+                "lng": -112.1686
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 33.43135,
+                  "lng": -112.1683
+                },
+                {
+                  "lat": 33.43135,
+                  "lng": -112.1608
+                },
+                {
+                  "lat": 33.43098,
+                  "lng": -112.1608
+                },
+                {
+                  "lat": 33.43098,
+                  "lng": -112.1683
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 33.43168,
+                  "lng": -112.16835
+                },
+                {
+                  "lat": 33.43168,
+                  "lng": -112.16075
+                },
+                {
+                  "lat": 33.43138,
+                  "lng": -112.16075
+                },
+                {
+                  "lat": 33.43138,
+                  "lng": -112.16835
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 33.43095,
+                "lng": -112.16855
+              },
+              {
+                "lat": 33.43095,
+                "lng": -112.1677
+              },
+              {
+                "lat": 33.43055,
+                "lng": -112.1677
+              },
+              {
+                "lat": 33.43055,
+                "lng": -112.16855
+              }
+            ]
+          },
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 60,
+              "pano": "QYC0WAXQoSn6fA1-CtfvnA",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 41,
+              "pano": "QYC0WAXQoSn6fA1-CtfvnA",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 93.7,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
+        "dossierExcerpt": "Supplied coordinates (33.434708, -112.167239) geocoded as GEOMETRIC_CENTER and\nlanded on the street grid near 47th Ave / W Mohave St in southwest Phoenix's\ndense industrial belt by I-10. Wide z15/z16 satellite showed several large\nboxes. Web research (warehouserating, FLEX Fulfillment, Waze, Tripadvisor tour\nlisting) confirms PHX6 is a ~1.2M sq ft fulfillment center at 4750/5050 W\nMohave St (a sibling sort facility TFC1 shares the 5050 address). The colossal\nsingle building immediately south of the supplied point — single ~370 m long\nbox, dock bank with trailers along its south face, employee parking to the\nnorth off Mohave St — matches the PHX6 description. Dec-2025 Street View of the\nwest truck gate shows the building number placard and Amazon equipment-entrance\nsignage, positively identifying it. Locked center 33.43215, -112.16655.",
+        "mapsUrl": "https://www.google.com/maps/@33.43215,-112.16655,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Confirmed in Dec-2025 Street View (pano QYC0WAXQoSn6fA1-CtfvnA): a long white cantilever/sliding gate spans the truck (equipment) entrance off the west drive, set in a masonry perimeter screen wall, with red NO TRESPASSING / EQUIPMENT ENTRANCE signage and an Amazon site placard. Controlled truck gate = true.",
+          "guardShack": "No staffed guard booth at the truck gate in any Street View heading (N/NE/ENE/E). The structure adjacent to the gate is the building's glass lobby/office entrance, not a 1-3-space guard booth. Classified false.",
+          "remoteGs": "Gate present, no manned booth -> remote check-in (signage + sliding gate, Amazon Carrier Central appointment system). True; flagged uncertain.",
+          "postGateStaging": "Wide paved truck court inside the gate between the dock face and the south fence holds a deep drop-trailer row plus circulation, ample queue space before docks.",
+          "drivewayLong": "Truck court is very deep and long (>300 m of paved apron); easily holds a 3+ truck queue inside the gate. Long.",
+          "fastLaneOpportunity": "Very wide gate apron and multiple drive lanes at the SW entry give clear room to add an express/bypass lane.",
+          "dockDoors": "Continuous dock bank runs the full ~370 m south face of the building with trailers backed in across z19-z20 imagery; well over 50 doors. Exact count ~120 estimated, flagged.",
+          "dropArea": "Second full-length row of drop trailers parked nose-out in the truck court in addition to the docked row; 50+ band. dropYard true.",
+          "trailerParkingCapacity": "Drop capacity is the single long court row (~no separate multi-acre trailer lot on-parcel); estimated ~200, flagged uncertain.",
+          "railServed": "No rail spur enters the property; truck-only site.",
+          "urbanRural": "Dense southwest-Phoenix industrial fabric inside the metro, adjacent to I-10; Urban.",
+          "siteAreaAcres": "~93.7 ac developed footprint (building + north employee parking + south truck court) from the traced perimeter; the ~1.2M sq ft building dominates.",
+          "buildingCount": "Single very large (~1.2M sq ft) FC building; the warehouses north and south across the public roads are separate parcels/tenants, excluded."
+        }
+      },
+      {
+        "id": "09-amazon",
+        "name": "Amazon MDW2 Fulfillment Center Joliet IL",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 41.48334,
+          "lng": -88.07153
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 41.4848,
+                "lng": -88.0735
+              },
+              {
+                "lat": 41.4863,
+                "lng": -88.0701
+              },
+              {
+                "lat": 41.4815,
+                "lng": -88.0701
+              },
+              {
+                "lat": 41.4815,
+                "lng": -88.0735
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 41.48605,
+                "lng": -88.07205
+              },
+              {
+                "lat": 41.48615,
+                "lng": -88.07095
+              },
+              {
+                "lat": 41.48575,
+                "lng": -88.0709
+              },
+              {
+                "lat": 41.48565,
+                "lng": -88.072
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 41.48625,
+                  "lng": -88.07355
+                },
+                {
+                  "lat": 41.4863,
+                  "lng": -88.07255
+                },
+                {
+                  "lat": 41.48455,
+                  "lng": -88.0725
+                },
+                {
+                  "lat": 41.4845,
+                  "lng": -88.0735
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 41.4862,
+                  "lng": -88.07235
+                },
+                {
+                  "lat": 41.4863,
+                  "lng": -88.0706
+                },
+                {
+                  "lat": 41.4849,
+                  "lng": -88.07055
+                },
+                {
+                  "lat": 41.48485,
+                  "lng": -88.0723
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 41.4847,
+                  "lng": -88.0731
+                },
+                {
+                  "lat": 41.48475,
+                  "lng": -88.0727
+                },
+                {
+                  "lat": 41.48195,
+                  "lng": -88.0726
+                },
+                {
+                  "lat": 41.4819,
+                  "lng": -88.073
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 41.48385,
+                  "lng": -88.07035
+                },
+                {
+                  "lat": 41.4839,
+                  "lng": -88.06995
+                },
+                {
+                  "lat": 41.48195,
+                  "lng": -88.0699
+                },
+                {
+                  "lat": 41.4819,
+                  "lng": -88.0703
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 41.4856,
+                "lng": -88.0723
+              },
+              {
+                "lat": 41.48565,
+                "lng": -88.0706
+              },
+              {
+                "lat": 41.4849,
+                "lng": -88.07055
+              },
+              {
+                "lat": 41.48485,
+                "lng": -88.07225
+              }
+            ]
+          },
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 269,
+              "pano": "Cxh1mjZ1NjW5Nb4KuxYKpw",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 5,
+              "pano": "hf5GHdqeCiB5yrOdWqgVCQ",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 140,
+          "trailerParkingCapacity": 260,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 31.6,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#10",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct (shipping vs receiving) drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 120000,
+              "narrationKey": "shiprcv.split",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron on correct side",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1320000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
+        },
+        "dossierExcerpt": "The supplied coordinates (41.483289, -88.071143) landed squarely on the correct\nbuilding. Confirmed three ways:\n\n1. Address / web. 250 Emerald Dr, Joliet IL 60433 is MDW2, inside the\n   CenterPoint Intermodal Center (North America's largest inland port), minutes\n   from I-55/I-80. Multiple directories (youramazonguy, fbanearme, Apple Maps,\n   Waze \"MDW2 entrance for trucks\") agree on the address.\n2. Satellite. A single very large rectangular distribution building, long\n   axis roughly N–S with a slight east-leaning tilt, dock doors and backed-in\n   trailers along both long faces — consistent with a ~1M sq ft fulfillment\n   center, not an office.\n3. Street View branding (decisive). Ground panos on the north access road\n   show the building wall with the Amazon \"fulfillment\" / Prime smile logo",
+        "mapsUrl": "https://www.google.com/maps/@41.48334,-88.07153,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Confirmed in z21 satellite (41.4858,-88.0716) and Street View (pano hf5GHdqeCiB5yrOdWqgVCQ, 2025-05): striped barrier line across multiple gate lanes with gate-arm posts, chain-link perimeter fence along Emerald Dr frontage, hatched approach pavement.",
+          "guardShack": "Small white-roofed booth (~1-2 car footprint) sits on the gate island between the entry/exit lanes at ~41.4860,-88.0714, visible in mdw2_gate_final z21 with a dark canopy; classic staffed guard shack beside the barrier.",
+          "remoteGs": "False because a physical guard shack is present at the gate.",
+          "postGateStaging": "Large paved truck court with numbered trailer staging stalls (402-410+ painted) immediately inside the gate, north of the dock face.",
+          "drivewayLong": "Gate-to-dock approach across the north truck court holds well more than 3 trucks of queue depth.",
+          "entryLanes": "Estimated 2 inbound from striped lane markings at the gate; exact split between in/out lanes not fully resolved from overhead.",
+          "exitLanes": "Estimated 2 outbound; entry and exit share the one gate complex (entryExitTogether).",
+          "fastLaneOpportunity": "Wide multi-lane gate apron with unused paved width supports adding an express/bypass lane.",
+          "dockDoors": "Dock doors line both the long west wall and the long east wall with trailers backed in along each; total well over 100 (band 50+).",
+          "dropArea": "Two large drop areas: a herringbone trailer drop yard NW between MDW2 and the neighboring building, plus the numbered staging court north of the building; combined trailer count is in the hundreds (band 50+).",
+          "shipRcvSeparate": "Two distinct dock banks on opposite (west and east) building faces, consistent with separate ship/receive flows; medium confidence from overhead.",
+          "urbanRural": "Edge-of-town CenterPoint Intermodal industrial park; farmland and residential homes immediately south, open grass parcels east. Broader setting is rural/edge-of-metro, so Rural per rubric.",
+          "connectivityIssue": "Large industrial park with carrier coverage; not isolated, so false.",
+          "railServed": "No rail spur enters this parcel (intermodal rail is elsewhere in CenterPoint, not into MDW2).",
+          "siteAreaAcres": "~31.6 acres for the fenced truck-side operation (building + drop yards + truck court + dock aprons); the full deeded parcel including the eastern grass buffer is larger."
+        }
+      },
+      {
+        "id": "10-amazon",
+        "name": "Amazon EWR4 Fulfillment Center Robbinsville NJ",
+        "type": "Fulfillment Center",
+        "archetype": "#4",
+        "archetypeName": "Gate + GS (BU sens.)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 40.19565,
+          "lng": -74.56495
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 40.19905,
+                "lng": -74.56735
+              },
+              {
+                "lat": 40.1973,
+                "lng": -74.563
+              },
+              {
+                "lat": 40.19265,
+                "lng": -74.56215
+              },
+              {
+                "lat": 40.19305,
+                "lng": -74.5686
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 40.1988,
+                "lng": -74.5669
+              },
+              {
+                "lat": 40.19905,
+                "lng": -74.5664
+              },
+              {
+                "lat": 40.1985,
+                "lng": -74.5659
+              },
+              {
+                "lat": 40.19825,
+                "lng": -74.5664
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 40.19754,
+                  "lng": -74.56619
+                },
+                {
+                  "lat": 40.194085,
+                  "lng": -74.563089
+                },
+                {
+                  "lat": 40.194288,
+                  "lng": -74.562701
+                },
+                {
+                  "lat": 40.197743,
+                  "lng": -74.565802
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 40.19743,
+                  "lng": -74.566505
+                },
+                {
+                  "lat": 40.1939,
+                  "lng": -74.563337
+                },
+                {
+                  "lat": 40.194038,
+                  "lng": -74.563075
+                },
+                {
+                  "lat": 40.197567,
+                  "lng": -74.566243
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 40.197588,
+                "lng": -74.566618
+              },
+              {
+                "lat": 40.197033,
+                "lng": -74.56612
+              },
+              {
+                "lat": 40.197287,
+                "lng": -74.565635
+              },
+              {
+                "lat": 40.197842,
+                "lng": -74.566133
+              }
+            ]
+          },
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 193,
+              "pano": "SkbdDspcyf4DKOFiPq4R3g",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 209,
+              "pano": "vnQDj8UiC2RjN389B_x46g",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 55,
+          "trailerParkingCapacity": 45,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 67.8,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": true,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#4",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue spills into traffic",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive.backup",
+              "baselineWaitMs": 1500000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Pass through gate",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
+        },
+        "dossierExcerpt": "The supplied coordinates (40.195353, -74.566306) landed on the SW corner / employee-parking\nedge of the correct building. Satellite probes (z16–z20) around the point show one dominant\nlarge white-roofed warehouse with its long axis running NW→SE, surrounded by Matrix Business\nPark. Web search confirmed EWR4 = 50 New Canton Way, ~1.2M sq ft robotics sortable FC in\nMatrix Business Park near NJTP exit 7A, serving the NY–NJ–Philadelphia corridor. Street View\nat the SW face (40.1928, -74.5632) shows the \"amazon · fulfillment\" building logo,\npositively identifying the building.\n\nThe long axis runs NW(40.1976, -74.5667) → SE(40.1937, -74.5632), ~526 m long, rotated\n≈34° clockwise from north. Building width ≈210 m (consistent with 1.2M sq ft).\n\n---",
+        "mapsUrl": "https://www.google.com/maps/@40.19565,-74.56495,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Secured, fenced truck yard on the NE dock side. Driver reviews and a Command Security 'Amazon - Robbinsville - EWR4' guard post confirm a manned checkpoint; drivers present BOL/appointment on arrival and report 30+ min checkpoint waits. Street View does not enter the truck yard (private/gated) — only the SW employee perimeter and Sharon Rd are publicly driveable.",
+          "guardShack": "Inferred manned booth at the truck gate (Command Security staffs the post; standard for a 1.2M sqft Amazon FC). The booth structure could not be individually resolved in satellite because the gate sits deep inside the yard behind a tree buffer — hence medium confidence on the physical shack vs. remote kiosk.",
+          "backupSensitive": "Driver reviews report 30+ minute checkpoint queues; tight single-gate intake.",
+          "dockDoors": "Continuous row of trailers backed into dock doors along the full ~500m NE wall; 50+ band is conservative for a 1.2M sqft robotics FC.",
+          "dropArea": "Wide truck court / drop yard on the NE side holding many parked trailers; 25-50 band estimated from overhead trailer count.",
+          "urbanRural": "Matrix Business Park at the edge of Robbinsville Twp, bordered by active farmland and a tree nursery on the N/NE; edge-of-town industrial classified Rural per rubric.",
+          "entryLanes": "Estimated; exact lane count at the gate not visible in available imagery.",
+          "multipleFacilities": "Single EWR4 building. Adjacent large warehouses (incl. a heavily solar-roofed building to the south) are separate Matrix Business Park parcels/companies, not part of this property.",
+          "scale": "No truck scale/weigh pad observed in the truck path.",
+          "railServed": "No rail spur enters the property."
+        }
+      },
+      {
+        "id": "11-amazon",
+        "name": "Amazon CMH1 Fulfillment Center Etna OH",
+        "type": "Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "shipRcvSeparate",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 39.9525,
+          "lng": -82.7122
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 39.9558,
+                "lng": -82.7152
+              },
+              {
+                "lat": 39.9564,
+                "lng": -82.7088
+              },
+              {
+                "lat": 39.9515,
+                "lng": -82.7084
+              },
+              {
+                "lat": 39.94995,
+                "lng": -82.7096
+              },
+              {
+                "lat": 39.9499,
+                "lng": -82.7146
+              },
+              {
+                "lat": 39.953,
+                "lng": -82.7153
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 39.95648,
+                "lng": -82.7101
+              },
+              {
+                "lat": 39.95648,
+                "lng": -82.70955
+              },
+              {
+                "lat": 39.95585,
+                "lng": -82.70958
+              },
+              {
+                "lat": 39.95585,
+                "lng": -82.71012
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 39.95205,
+                  "lng": -82.71095
+                },
+                {
+                  "lat": 39.95195,
+                  "lng": -82.70915
+                },
+                {
+                  "lat": 39.95005,
+                  "lng": -82.7096
+                },
+                {
+                  "lat": 39.95015,
+                  "lng": -82.71135
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 39.9547,
+                  "lng": -82.71505
+                },
+                {
+                  "lat": 39.95205,
+                  "lng": -82.7143
+                },
+                {
+                  "lat": 39.95185,
+                  "lng": -82.71475
+                },
+                {
+                  "lat": 39.9545,
+                  "lng": -82.7155
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 39.95205,
+                  "lng": -82.7143
+                },
+                {
+                  "lat": 39.9504,
+                  "lng": -82.71385
+                },
+                {
+                  "lat": 39.95025,
+                  "lng": -82.7143
+                },
+                {
+                  "lat": 39.9519,
+                  "lng": -82.71478
+                }
+              ]
+            }
+          ],
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 206,
+              "pano": "ReUzacbaFDYuKmXYl7MuiA",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 206,
+              "pano": "ReUzacbaFDYuKmXYl7MuiA",
+              "hasCoverage": true
+            },
+            "dropYards": [
+              {
+                "heading": 250,
+                "pano": "FFKxUiKHw-QuJ6uHRtVanQ",
+                "hasCoverage": true
+              }
+            ]
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 2,
+          "buildingCount": 1,
+          "siteAreaAcres": 92.8,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
+        "dossierExcerpt": "The supplied approximate coords (39.9534, -82.7133) landed on the north edge of\na large white-roof distribution building. Web search confirmed the address\n\"11999 National Rd SW, Etna, OH 43062\" maps to Amazon Fulfillment Center CMH1\n(Waze/Pataskala Chamber/Warehouse Worker Network listings). Satellite at z16/z17\nshowed one very large multi-story FC bounded by National Rd SW on the north and\nI-70 on the south — consistent with a large Amazon sortable FC. Locked center at\n39.9525, -82.7122 (the supplied point was ~120m too far north).",
+        "mapsUrl": "https://www.google.com/maps/@39.9525,-82.7122,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Both public-road entrances (signalized NE drive off National Rd SW and the NW dock drive) are open: 2024-2025 Street View and z19 satellite show no barrier arm, sliding gate, or checkpoint pinch-point at either road. Open Amazon FC campus.",
+          "guardShack": "No staffed booth at either entrance. The NE entrance Street View shows an open multi-lane internal road straight into employee parking and the building, no booth beside the lane.",
+          "remoteGs": "False because there is no controlled truck gate at all; check-in is handled internally at the yard, not at a road gate.",
+          "postGateStaging": "Wide paved internal aprons and the SE drop yard provide ample interior holding before the docks.",
+          "drivewayLong": "The NE entrance drive runs ~250m from National Rd to the parking/yard, easily holding 3+ trucks.",
+          "entryExitSeparate": "Two separate property entrances off National Rd SW: a signalized main drive on the NE (~39.9563,-82.7099) and a NW dock drive (~39.9548,-82.7138). Lane counts approximate from overhead.",
+          "fastLaneOpportunity": "Very wide entrance aprons and multi-lane internal roads leave ample paved width to add an express/bypass lane.",
+          "dockDoors": "Continuous trailer rows backed into the entire SW/west building face (two long dock banks, 60+ positions per z19 crops) plus additional doors; total well into 50+ band.",
+          "dropArea": "Dedicated SE drop yard with ~40-50 angled trailer stalls plus long dock-side trailer rows; combined trailer parking is 50+.",
+          "shipRcvSeparate": "Distinct dock clusters on different building faces (long SW/west dock banks vs. SE drop-yard-served face); medium confidence on the ship/receive split.",
+          "urbanRural": "Edge-of-town/rural setting flanked by farmland and I-70; nearest fabric is a small residential pocket and the Etna industrial corridor. Per rubric, choose Rural when torn.",
+          "buildingCount": "Single very large multi-story fulfillment building; the SE area is a drop yard, not a separate structure.",
+          "railServed": "No rail spur enters the property.",
+          "trailerParkingCapacity": "Estimate combines SE drop-yard angled stalls and dock-side trailer rows; approximate from overhead imagery."
+        }
+      },
+      {
+        "id": "12-amazon",
+        "name": "Amazon LGB3 Fulfillment Center Eastvale CA",
+        "type": "Fulfillment Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "guardShack"
+        ],
+        "center": {
+          "lat": 33.9972,
+          "lng": -117.5528
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 33.99955,
+                "lng": -117.55465
+              },
+              {
+                "lat": 33.99935,
+                "lng": -117.5506
+              },
+              {
+                "lat": 33.99505,
+                "lng": -117.5509
+              },
+              {
+                "lat": 33.9952,
+                "lng": -117.55485
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 33.99835,
+                "lng": -117.55455
+              },
+              {
+                "lat": 33.99835,
+                "lng": -117.55395
+              },
+              {
+                "lat": 33.99775,
+                "lng": -117.55395
+              },
+              {
+                "lat": 33.99775,
+                "lng": -117.55455
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 33.9992,
+                  "lng": -117.5519
+                },
+                {
+                  "lat": 33.99905,
+                  "lng": -117.55065
+                },
+                {
+                  "lat": 33.9956,
+                  "lng": -117.55095
+                },
+                {
+                  "lat": 33.9957,
+                  "lng": -117.55215
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 33.99925,
+                  "lng": -117.55205
+                },
+                {
+                  "lat": 33.9992,
+                  "lng": -117.55175
+                },
+                {
+                  "lat": 33.9956,
+                  "lng": -117.55205
+                },
+                {
+                  "lat": 33.99565,
+                  "lng": -117.55235
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 33.99545,
+                  "lng": -117.5543
+                },
+                {
+                  "lat": 33.9954,
+                  "lng": -117.5523
+                },
+                {
+                  "lat": 33.9951,
+                  "lng": -117.55232
+                },
+                {
+                  "lat": 33.99515,
+                  "lng": -117.55432
+                }
+              ]
+            }
+          ],
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 359,
+              "pano": "GrITUw3fPxk727PT30Hi3g",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 89,
+              "pano": "GF_R5YPSsNzYH9gDa4gNHw",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 160,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 47,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#10",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct (shipping vs receiving) drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 120000,
+              "narrationKey": "shiprcv.split",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron on correct side",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1320000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
+        },
+        "dossierExcerpt": "The supplied coordinates (33.996348, -117.554022) landed inside the Goodman\nLogistics Center cluster in Eastvale, at the SW corner of a very large\nsolar-roofed industrial building. Web research (Amazon Tours, Waze, Yelp,\nbusinessyab) confirms LGB3 is at 4950 Goodman Way. Street View on Goodman Way\nshows the building's office face carrying the \"amazon\" logo and a monument\nsign reading \"4950 Goodman Way,\" and an elevated pedestrian bridge over\nGoodman Way linking the FC to a west office annex — positively identifying the\nsolar-roofed building as LGB3. The large gray-roof building immediately south is\na separate tenant (no solar, distinct trailer yard) and is excluded.\n\nThe FC building runs roughly N–S, rotated ~10° clockwise from north, so all\ngeofences are traced as rotated quads, not north-aligned boxes.",
+        "mapsUrl": "https://www.google.com/maps/@33.9972,-117.5528,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Controlled entry. Amazon Tours guidance states drivers/visitors enter at the main guard post at the intersection of Goodman Way and The Station; the signalized main driveway (NW corner, monument sign '4950 Goodman Way') is the single controlled checkpoint into a fully fenced campus.",
+          "guardShack": "Amazon explicitly references a staffed 'main guard post' at the entrance. Booth structure not individually resolvable in overhead imagery (entrance canopy/landscaping obscures it) and the truck side faces I-15 with no Street View, so flagged uncertain, but staffed-guard operation is corroborated by the operator.",
+          "guardShackEvidence": "Web (events.amazontours.com / help.amazontours.com LGB3): 'enter at the main guard post, which is at the intersection of Goodman Way and The Station.'",
+          "postGateStaging": "Wide internal truck court between the FC south face and the east drop yard provides ample inside-the-gate queue/staging room before docks.",
+          "drivewayLong": "Long internal approach from the Goodman Way entrance around to the east-side dock apron and drop yard easily holds 3+ trucks.",
+          "entryExitTogether": "Single controlled entrance off Goodman Way serves both in and out; no separate out-gate observed.",
+          "entryLanes": "Estimated 2 in / 2 out at the main signalized driveway; exact lane split partly obscured by landscaping — flagged uncertain.",
+          "fastLaneOpportunity": "Wide entrance apron and large internal truck court leave clear paved width to add an express/bypass lane.",
+          "dockDoors": "Continuous dock-door banks run the full east wall and the full south wall with trailers backed in; total well into the 50+ band (est. ~120 doors across both faces).",
+          "dropArea": "Dense trailer drop yard runs the entire east side between the building and I-15, dozens of trailers parked nose-out in rows plus yard hostlers staging — clearly 50+.",
+          "shipRcvSeparate": "Two distinct dock clusters on different building faces (east wall + south wall) operate as physically separate dock banks.",
+          "urbanRural": "Eastvale is dense Inland Empire metro logistics fabric (Goodman Logistics Center, adjacent Costco and multiple big-box DCs) bordering I-15 — Urban.",
+          "scale": "No truck scale/weigh pad observed in the truck path.",
+          "multipleFacilities": "LGB3 is one FC building (connected to a west office annex by a pedestrian bridge over Goodman Way); the large gray-roof building to the south is a separate tenant, not counted here.",
+          "railServed": "No rail spur enters the property; I-15 freeway bounds the east edge.",
+          "siteAreaAcres": "~47 acres from the traced perimeter polygon (building + west parking + east drop yard).",
+          "yardMetrics": "Door/trailer counts are honest overhead estimates from z19-z20 crops; ranges are confident but exact integers approximate."
+        }
+      },
+      {
+        "id": "13-amazon",
+        "name": "Amazon SBD2 Fulfillment Center San Bernardino CA",
+        "type": "Fulfillment Center",
+        "archetype": "#6",
+        "archetypeName": "Gate + GS (not BU sens.) + campus",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "shipRcvSeparate",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 34.0728,
+          "lng": -117.2835
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 34.0762,
+                "lng": -117.28
+              },
+              {
+                "lat": 34.0708,
+                "lng": -117.2795
+              },
+              {
+                "lat": 34.0705,
+                "lng": -117.282
+              },
+              {
+                "lat": 34.0703,
+                "lng": -117.2858
+              },
+              {
+                "lat": 34.0745,
+                "lng": -117.2862
+              },
+              {
+                "lat": 34.0762,
+                "lng": -117.285
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 34.07505,
+                "lng": -117.27955
+              },
+              {
+                "lat": 34.07505,
+                "lng": -117.2789
+              },
+              {
+                "lat": 34.0743,
+                "lng": -117.2789
+              },
+              {
+                "lat": 34.0743,
+                "lng": -117.27955
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 34.0762,
+                  "lng": -117.2815
+                },
+                {
+                  "lat": 34.0762,
+                  "lng": -117.2847
+                },
+                {
+                  "lat": 34.0753,
+                  "lng": -117.2847
+                },
+                {
+                  "lat": 34.0753,
+                  "lng": -117.2815
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 34.0747,
+                  "lng": -117.2849
+                },
+                {
+                  "lat": 34.0747,
+                  "lng": -117.2859
+                },
+                {
+                  "lat": 34.0715,
+                  "lng": -117.2856
+                },
+                {
+                  "lat": 34.0715,
+                  "lng": -117.2847
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 34.07115,
+                  "lng": -117.281
+                },
+                {
+                  "lat": 34.07115,
+                  "lng": -117.2843
+                },
+                {
+                  "lat": 34.07065,
+                  "lng": -117.2843
+                },
+                {
+                  "lat": 34.07065,
+                  "lng": -117.281
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 34.0752,
+                  "lng": -117.2815
+                },
+                {
+                  "lat": 34.0752,
+                  "lng": -117.2843
+                },
+                {
+                  "lat": 34.07475,
+                  "lng": -117.2843
+                },
+                {
+                  "lat": 34.07475,
+                  "lng": -117.2815
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 34.0746,
+                "lng": -117.2796
+              },
+              {
+                "lat": 34.0746,
+                "lng": -117.2825
+              },
+              {
+                "lat": 34.0737,
+                "lng": -117.2825
+              },
+              {
+                "lat": 34.0737,
+                "lng": -117.2796
+              }
+            ]
+          },
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 247,
+              "pano": "lCEQhIYK8lAI2ARkJB0yEQ",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 246,
+              "pano": "lCEQhIYK8lAI2ARkJB0yEQ",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 260,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 88.9,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#6",
+          "steps": [
+            {
+              "step": "Arrive at outer campus gate",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct building / drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 180000,
+              "narrationKey": "campus.route",
+              "baselineWaitMs": 900000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5460000,
+          "totalYnsMs": 2910000
+        },
+        "dossierExcerpt": "The roster supplied approximate coordinates 34.07233, -117.28174 (GEOMETRIC_CENTER\nprecision). Satellite probes at z15–z18 around that point landed directly on a very\nlarge warehouse with a partial solar-panel roof, dock banks, and trailer drop yards,\nbounded by the Santa Ana River wash to the south/west, S Waterman Ave (multi-lane\narterial) to the east, and the I-215 corridor beyond. A web search for \"Amazon SBD2\n1494 S Waterman Ave San Bernardino\" corroborated this exact address (Waze, FLEX\nFulfillment, Chamber of Commerce, youramazonguy all list 1494 S Waterman Ave,\n92408; reviews note long driver check-in wait times). The address pin sits on the\nsouthern solar-roof building — that is SBD2. An adjacent large warehouse to the\nnorth shares the drop yard between the two buildings, making this a two-building",
+        "mapsUrl": "https://www.google.com/maps/@34.07280,-117.28350,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Black metal sliding/swing gate across the controlled entrance drive off S Waterman Ave (east side); continuous metal perimeter fence confirmed in Street View along the full Waterman frontage.",
+          "guardShack": "Staffed security building (red/maroon hip roof, multi-window) sits just inside the gate beside the entrance auto-court; visible in satellite z20 and Street View behind the gate.",
+          "remoteGs": "False because a staffed guard building is present; a call-box/kiosk pedestal also sits at the curb cut (belt-and-suspenders), but the booth makes this guarded, not remote.",
+          "postGateStaging": "Large paved auto-court / interior staging plaza inside the gate before docks, with landscaped islands.",
+          "drivewayLong": "Deep gate-to-dock approach across a wide auto court and internal yard roads; easily holds 3+ trucks queued.",
+          "fastLaneOpportunity": "Wide multi-lane gate apron and large auto court with unused paved width to add an express/bypass lane.",
+          "dockDoors": "50+ band; long dock banks on the south and west/north faces of the SBD2 building with trailers backed in. Exact count (~90) is an overhead estimate.",
+          "dropArea": "50+ band; extensive organized trailer-drop rows north (between buildings) and along the west edge.",
+          "shipRcvSeparate": "Dock activity on physically distinct building faces (south bank vs north/west bank) suggests separate ship/receive clusters; medium confidence from overhead only.",
+          "entryExitTogether": "Single consolidated entrance/exit point at the NE auto-court off Waterman; in/out share the same gate group.",
+          "multipleFacilities": "Two large building clusters on the campus (southern solar-roof SBD2 building plus the adjacent northern warehouse) sharing the drop yard between them.",
+          "scale": "No truck scale / weigh pad identified in the truck path.",
+          "railServed": "No rail spur enters the property; nearest rail is not connected.",
+          "siteAreaAcres": "Derived from the traced perimeter polygon (~89 acres) covering the southern building and its dock/drop yards.",
+          "connectivityIssue": "Dense Inland Empire industrial corridor adjacent to I-215/I-10; strong cellular coverage expected."
+        }
+      },
+      {
+        "id": "14-amazon",
+        "name": "Amazon TPA1 Fulfillment Center Ruskin FL",
+        "type": "Fulfillment Center",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "entryLanes",
+          "exitLanes",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 27.7268,
+          "lng": -82.3872
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 27.73,
+                "lng": -82.3905
+              },
+              {
+                "lat": 27.7293,
+                "lng": -82.3878
+              },
+              {
+                "lat": 27.7246,
+                "lng": -82.3844
+              },
+              {
+                "lat": 27.7234,
+                "lng": -82.3854
+              },
+              {
+                "lat": 27.7236,
+                "lng": -82.3878
+              },
+              {
+                "lat": 27.724,
+                "lng": -82.3896
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 27.7256,
+                "lng": -82.3864
+              },
+              {
+                "lat": 27.72525,
+                "lng": -82.38555
+              },
+              {
+                "lat": 27.72475,
+                "lng": -82.38595
+              },
+              {
+                "lat": 27.7251,
+                "lng": -82.3868
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 27.7286,
+                  "lng": -82.3864
+                },
+                {
+                  "lat": 27.7254,
+                  "lng": -82.38415
+                },
+                {
+                  "lat": 27.7247,
+                  "lng": -82.385
+                },
+                {
+                  "lat": 27.7279,
+                  "lng": -82.38725
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 27.725,
+                  "lng": -82.3879
+                },
+                {
+                  "lat": 27.72475,
+                  "lng": -82.3864
+                },
+                {
+                  "lat": 27.7239,
+                  "lng": -82.3869
+                },
+                {
+                  "lat": 27.72415,
+                  "lng": -82.38835
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 27.72895,
+                  "lng": -82.3869
+                },
+                {
+                  "lat": 27.72545,
+                  "lng": -82.3845
+                },
+                {
+                  "lat": 27.72525,
+                  "lng": -82.3849
+                },
+                {
+                  "lat": 27.72875,
+                  "lng": -82.3873
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 27.7242,
+                "lng": -82.38895
+              },
+              {
+                "lat": 27.72385,
+                "lng": -82.3876
+              },
+              {
+                "lat": 27.7233,
+                "lng": -82.3879
+              },
+              {
+                "lat": 27.72365,
+                "lng": -82.38925
+              }
+            ]
+          },
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 117,
+              "pano": "PsJUzMPaQhpFtpbdQe5R0g",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 57,
+              "pano": "N_lPZyK0j_8mB--1Gie8pQ",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 140,
+          "trailerParkingCapacity": 200,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 65.4,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#7",
+          "steps": [
+            {
+              "step": "Arrive at gate (fast-lane bypass possible)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter dispatch (fast-lane priority for live loads)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch.fastlane",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4440000,
+          "totalYnsMs": 2730000
+        },
+        "dossierExcerpt": "The supplied coordinates (27.727553, -82.388056) landed on the NW corner of a\nvery large white distribution building. Probing satellite z16–z18 around that\npoint and cross-checking the street address confirmed the right building: a\nsingle ~1M+ sq ft fulfillment center oriented NNW–SSE, set on the rural fringe\nSE of Tampa with I-75 running along its east side, employee parking wrapping the\nnorth/west, and a truck dock/drop yard along the east face. Web research\n(Tampa Bay Chamber, FLEX Fulfillment, youramazonguy, nmfclist) all place Amazon\nTPA1 at 3350 Laurel Ridge Ave, Ruskin FL 33570 — consistent with this building.\nThe supplied coords sit on the building's NW roof corner; I locked the true site\ncenter at 27.7268, -82.3872.\n\n---",
+        "mapsUrl": "https://www.google.com/maps/@27.726800,-82.387200,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Controlled truck entrance on the south access road off Laurel Ridge Ave: the truck drive pinches at a checkpoint with lane striping/crosswalk markings before entering the secured east drop yard (visible at z19, ~27.7252,-82.3858).",
+          "guardShack": "Small booth-sized structure(s) sit beside the truck lane at the checkpoint pinch-point; consistent with a staffed guard booth at an Amazon FC, but exact roofline is at the edge of satellite resolution (no Street View reaches the internal gate), so flagged uncertain.",
+          "preGateStaging": "Paved staging apron on the public-accessible SW approach holds tractors/trucks before the gate; Street View (pano N_lPZyK0j_8mB--1Gie8pQ, 2025-01) shows red sleeper-cab tractors staged on the apron by the water tank.",
+          "postGateStaging": "Wide paved truck court between the dock apron and the second trailer row inside the fence gives an internal queue/hold area before docks.",
+          "drivewayLong": "Long internal truck court running the full east face easily holds a 3+ truck queue from gate to docks.",
+          "entryLanes": "Estimated ~2 inbound lanes at the gate apron from overhead; not crisply countable, flagged uncertain.",
+          "exitLanes": "Estimated ~1 outbound lane; entry and exit share the same south gate (entryExitTogether).",
+          "fastLaneOpportunity": "Wide gate apron and broad paved truck court leave room to add an express/bypass lane.",
+          "dockDoors": "Continuous dock-door rhythm runs the entire east building face with trailers backed in along its full length (z19 eastmid views); well into the 50+ band, estimated ~120 doors.",
+          "dropArea": "Second trailer row east of the dock apron plus the SE drop lot hold many parked trailers without tractors; 50+ band.",
+          "dropYard": "Dedicated trailer-storage rows in the east yard and SE corner separate from active dock staging.",
+          "urbanRural": "Edge-of-town site on rural fringe SE of Tampa beside I-75, bordered by open land, farmland, and a wastewater plant; judged Rural.",
+          "railServed": "No rail spur enters the property; nearest tracks are unrelated.",
+          "multiStep": "No clearly distinct second checkpoint (scale house / second booth) after the gate is visible; left false.",
+          "yardMetrics": "Counts are overhead estimates: dock doors ~120 (50+), trailers visible ~140, capacity ~200, area ~65 ac from the perimeter polygon."
+        }
+      },
+      {
+        "id": "15-amazon",
+        "name": "Amazon SCK4 Inbound Cross-Dock Stockton CA",
+        "type": "Inbound Cross-Dock (IXD)",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "trailerParkingCapacity",
+          "dockDoorCount"
+        ],
+        "center": {
+          "lat": 37.91015,
+          "lng": -121.18875
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 37.91285,
+                "lng": -121.19235
+              },
+              {
+                "lat": 37.913,
+                "lng": -121.1876
+              },
+              {
+                "lat": 37.91255,
+                "lng": -121.18605
+              },
+              {
+                "lat": 37.9085,
+                "lng": -121.1861
+              },
+              {
+                "lat": 37.90835,
+                "lng": -121.1901
+              },
+              {
+                "lat": 37.9087,
+                "lng": -121.19235
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 37.90905,
+                "lng": -121.18915
+              },
+              {
+                "lat": 37.90905,
+                "lng": -121.1884
+              },
+              {
+                "lat": 37.9084,
+                "lng": -121.1884
+              },
+              {
+                "lat": 37.9084,
+                "lng": -121.18915
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 37.91245,
+                  "lng": -121.19175
+                },
+                {
+                  "lat": 37.9125,
+                  "lng": -121.19035
+                },
+                {
+                  "lat": 37.90895,
+                  "lng": -121.1905
+                },
+                {
+                  "lat": 37.9089,
+                  "lng": -121.19185
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 37.91195,
+                  "lng": -121.1876
+                },
+                {
+                  "lat": 37.912,
+                  "lng": -121.1862
+                },
+                {
+                  "lat": 37.90955,
+                  "lng": -121.18625
+                },
+                {
+                  "lat": 37.9095,
+                  "lng": -121.1876
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 37.9112,
+                  "lng": -121.19055
+                },
+                {
+                  "lat": 37.91125,
+                  "lng": -121.18675
+                },
+                {
+                  "lat": 37.911,
+                  "lng": -121.18675
+                },
+                {
+                  "lat": 37.91095,
+                  "lng": -121.19055
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 37.90945,
+                  "lng": -121.1906
+                },
+                {
+                  "lat": 37.9095,
+                  "lng": -121.1868
+                },
+                {
+                  "lat": 37.90925,
+                  "lng": -121.1868
+                },
+                {
+                  "lat": 37.9092,
+                  "lng": -121.1906
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 37.90905,
+                "lng": -121.19035
+              },
+              {
+                "lat": 37.9091,
+                "lng": -121.18815
+              },
+              {
+                "lat": 37.90855,
+                "lng": -121.18815
+              },
+              {
+                "lat": 37.9085,
+                "lng": -121.19035
+              }
+            ]
+          },
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 180,
+              "pano": "rZTcwm6IsN1SzzPIResi8g",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 0,
+              "pano": "zcj0gcMLPMyROF2LebnmWw",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 200,
+          "trailersVisible": 420,
+          "trailerParkingCapacity": 600,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 60,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#10",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct (shipping vs receiving) drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 120000,
+              "narrationKey": "shiprcv.split",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron on correct side",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1320000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
+        },
+        "dossierExcerpt": "The supplied coordinates (37.910233, -121.186541) landed on the east edge of the\ncorrect building inside a multi-building industrial park southeast of Stockton.\nWeb search confirmed SCK4 is a 638,000 sq ft Amazon Inbound Cross-Dock that\nopened October 2023 at 6001 S Austin Rd, operating 24/7, consolidating vendor\ninbound and shipping to fulfillment centers (abc10; loc8nearme; youramazonguy).\n\nSatellite at z16-z18 positively identified the building: a single large\nwhite-roofed cross-dock with a faint \"SCK4\" roof marking, dock doors and\ntrailers backed in along BOTH long faces, a massive trailer drop yard on the\nwest side, and employee car parking to the east/north. This is unambiguously a\ntrailer-heavy cross-dock, consistent with an IXD. Precise center re-pinned ~340m\nwest of the supplied point at 37.91015, -121.18875.",
+        "mapsUrl": "https://www.google.com/maps/@37.91015,-121.18875,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Multi-lane controlled gate ~150m up the entrance drive from the public frontage road: guard island with STOP pavement markings on both inbound and outbound lanes, yellow hatched safety striping (37.9086,-121.1888).",
+          "guardShack": "Staffed booth structure(s) on a raised concrete center island splitting in/out lanes, ~1-2 car footprint with canopy - visible at z21.",
+          "remoteGs": "False - physical guard booth present.",
+          "preGateStaging": "Trucks/trailers staged along the public frontage road shoulder (seen in Street View) and a deep paved approach drive before the gate.",
+          "postGateStaging": "Large paved apron inside the gate before the dock/yard rows.",
+          "drivewayLong": "Entrance drive runs ~150m from the public road across a vacant buffer to the gate, then into a wide apron - holds well over 3 trucks.",
+          "entryExitTogether": "Single guarded gate complex handles both in and out via paired lanes split by the guard island.",
+          "entryLanes": "Approx 2 inbound lanes at the guard island; counted from overhead striping, medium confidence.",
+          "exitLanes": "Approx 2 outbound lanes on the other side of the guard island.",
+          "fastLaneOpportunity": "Wide multi-lane gate apron with extra paved width and queue stalls - room for an express/bypass lane.",
+          "dockDoors": "Cross-dock with dock doors and trailers backed in along both the north and south long building faces; well over 50 doors total (estimate ~200).",
+          "dropArea": "Hundreds of trailers parked without tractors in the large west drop yard plus north/east rows - far over 50.",
+          "shipRcvSeparate": "Classic IXD cross-dock: doors on opposite (north and south) building faces serve receiving vs. outbound to FCs.",
+          "urbanRural": "Edge-of-Stockton industrial park surrounded by farmland and vacant land to the east; judged Rural per rubric tie-break.",
+          "scale": "No truck scale / weigh pad visible in the truck path.",
+          "dropYard": "Dedicated large trailer-storage drop yard west of the building, separate from active dock staging.",
+          "railServed": "No rail spur enters the property; nearest linear corridors are roads.",
+          "yardMetrics": "dockDoorCount, trailersVisible and trailerParkingCapacity are overhead estimates - the trailer rows are dense and partly cut off at frame edges; treat as approximate."
+        }
+      },
+      {
+        "id": "16-amazon",
+        "name": "Amazon SCK6 Sortation Center Tracy CA",
+        "type": "Sortation Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 37.7518,
+          "lng": -121.4035
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 37.75418,
+                "lng": -121.40525
+              },
+              {
+                "lat": 37.75409,
+                "lng": -121.39945
+              },
+              {
+                "lat": 37.7526,
+                "lng": -121.39895
+              },
+              {
+                "lat": 37.7497,
+                "lng": -121.399
+              },
+              {
+                "lat": 37.74945,
+                "lng": -121.40495
+              },
+              {
+                "lat": 37.751,
+                "lng": -121.4053
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 37.75325,
+                "lng": -121.40072
+              },
+              {
+                "lat": 37.75318,
+                "lng": -121.40032
+              },
+              {
+                "lat": 37.7529,
+                "lng": -121.40036
+              },
+              {
+                "lat": 37.75296,
+                "lng": -121.40076
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 37.75308,
+                  "lng": -121.40023
+                },
+                {
+                  "lat": 37.75298,
+                  "lng": -121.39897
+                },
+                {
+                  "lat": 37.74976,
+                  "lng": -121.39908
+                },
+                {
+                  "lat": 37.7497,
+                  "lng": -121.40037
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 37.75015,
+                  "lng": -121.40478
+                },
+                {
+                  "lat": 37.75009,
+                  "lng": -121.40105
+                },
+                {
+                  "lat": 37.74982,
+                  "lng": -121.40106
+                },
+                {
+                  "lat": 37.74988,
+                  "lng": -121.40479
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 37.75065,
+                  "lng": -121.40476
+                },
+                {
+                  "lat": 37.75059,
+                  "lng": -121.40108
+                },
+                {
+                  "lat": 37.75041,
+                  "lng": -121.40109
+                },
+                {
+                  "lat": 37.75047,
+                  "lng": -121.40477
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 37.753,
+                  "lng": -121.4006
+                },
+                {
+                  "lat": 37.7527,
+                  "lng": -121.40062
+                },
+                {
+                  "lat": 37.7508,
+                  "lng": -121.4007
+                },
+                {
+                  "lat": 37.75081,
+                  "lng": -121.4009
+                },
+                {
+                  "lat": 37.7527,
+                  "lng": -121.40082
+                },
+                {
+                  "lat": 37.75301,
+                  "lng": -121.4008
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 37.7529,
+                "lng": -121.4014
+              },
+              {
+                "lat": 37.75285,
+                "lng": -121.40078
+              },
+              {
+                "lat": 37.7519,
+                "lng": -121.40082
+              },
+              {
+                "lat": 37.75195,
+                "lng": -121.40144
+              }
+            ]
+          },
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 244,
+              "pano": "Ibf-84PqjROvdsHVSOdG_g",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 275,
+              "pano": "dvkowtervoQ0-ev7HnD5Tg",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 60,
+          "trailersVisible": 230,
+          "trailerParkingCapacity": 260,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 68.2,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#10",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct (shipping vs receiving) drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 120000,
+              "narrationKey": "shiprcv.split",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron on correct side",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1320000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
+        },
+        "dossierExcerpt": "- Address: 1500 E Grant Line Rd, Tracy, CA 95304 (95376 also used)\n- Confirmed center: 37.751800, -121.403500\n- How confirmed: Supplied coords (37.752275, -121.402884) landed on the\n  north car-parking apron of the correct parcel. Satellite probes at z16-z18\n  positively identified the building as the large white 5-story Amazon\n  sortation/fulfillment building. Web research corroborated: SCK6 (\"Big Byrd\")\n  is a 3.5M sqft, 100-ft-tall, 5-story robotics building at 1500 E Grant Line\n  Rd with published specs of ~230 trailer parking, 40 dock bays, 1,800 car\n  spaces (abc10 / Tracy Press / TruckMap / datacenter.fyi). I shifted the audit\n  center ~160 m south to the true building centroid.",
+        "mapsUrl": "https://www.google.com/maps/@37.751800,-121.403500,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Entire truck yard is enclosed by black steel palisade fencing plus precast concrete screen walls (confirmed in Street View along the east access road, panos dvkowtervoQ0-ev7HnD5Tg and Ibf-84PqjROvdsHVSOdG_g). Trucks enter through a single controlled driveway throat off the NE access road (~37.7531,-121.4006) that feeds the secured dock/drop area.",
+          "guardShack": "Small booth-footprint structure with a painted STOP and yellow checkpoint striping at the gate throat (~37.75215,-121.40015), seen at z21 satellite beside the controlled lane between the parking apron and the secured building/dock area.",
+          "postGateStaging": "Wide paved apron inside the gate between the building east face and the drop yard provides interior queue/staging room before docks.",
+          "drivewayLong": "Deep paved approach from the gate to the dock faces easily holds 3+ trucks stacked.",
+          "entryExitTogether": "Single truck gate serves both entry and exit; no separate out-gate observed.",
+          "entryLanes": "Estimated 2 inbound lanes at the gate throat from overhead width; low confidence.",
+          "exitLanes": "Estimated 2 outbound lanes; low confidence.",
+          "fastLaneOpportunity": "Wide multi-lane gate apron with unused paved width to add an express/bypass lane.",
+          "dockDoors": "50+ band. Continuous dock banks on the south face and additional doors on the east/north faces of the building; published spec cites 40 loading dock bays but overhead imagery shows more dock positions across multiple faces, so 50+ is the honest band.",
+          "dropArea": "50+ band. Large fenced trailer drop yards on the east (numbered stalls 580s-760s observed) and south sides; ~230 trailers visible, consistent with the published 230-trailer parking spec.",
+          "shipRcvSeparate": "Dock activity runs from physically separate banks (south face dock apron and east-side dock/drop apron), indicating split ship/receive flows.",
+          "urbanRural": "Edge-of-town industrial park on the SE edge of Tracy, CA, surrounded by other large DCs and open farmland to the N/E. Per rubric tie-break (small-town industrial vs urban) classified Rural.",
+          "railServed": "No rail spur enters the property.",
+          "siteAreaAcres": "68.2 acres derived from the traced perimeter polygon; the truck-yard portion of a larger campus parcel.",
+          "trailersVisible": "~230 trailers counted across east and south drop yards in the captured tight imagery; approximate.",
+          "multiStep": "No clear second checkpoint (scale house / second booth) after the gate; left false."
+        }
+      }
+    ]
+  }
+}

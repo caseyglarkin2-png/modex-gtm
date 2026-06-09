@@ -1,0 +1,116 @@
+{
+  "name": "Amazon SCK4 Inbound Cross-Dock Stockton CA",
+  "type": "Inbound Cross-Dock (IXD)",
+  "coords": { "lat": 37.91015, "lng": -121.18875 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 37.91285, "lng": -121.19235 },
+      { "lat": 37.91300, "lng": -121.18760 },
+      { "lat": 37.91255, "lng": -121.18605 },
+      { "lat": 37.90850, "lng": -121.18610 },
+      { "lat": 37.90835, "lng": -121.19010 },
+      { "lat": 37.90870, "lng": -121.19235 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 37.90905, "lng": -121.18915 },
+      { "lat": 37.90905, "lng": -121.18840 },
+      { "lat": 37.90840, "lng": -121.18840 },
+      { "lat": 37.90840, "lng": -121.18915 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 37.91245, "lng": -121.19175 },
+        { "lat": 37.91250, "lng": -121.19035 },
+        { "lat": 37.90895, "lng": -121.19050 },
+        { "lat": 37.90890, "lng": -121.19185 }
+      ] },
+      { "ring": [
+        { "lat": 37.91195, "lng": -121.18760 },
+        { "lat": 37.91200, "lng": -121.18620 },
+        { "lat": 37.90955, "lng": -121.18625 },
+        { "lat": 37.90950, "lng": -121.18760 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 37.91120, "lng": -121.19055 },
+        { "lat": 37.91125, "lng": -121.18675 },
+        { "lat": 37.91100, "lng": -121.18675 },
+        { "lat": 37.91095, "lng": -121.19055 }
+      ] },
+      { "ring": [
+        { "lat": 37.90945, "lng": -121.19060 },
+        { "lat": 37.90950, "lng": -121.18680 },
+        { "lat": 37.90925, "lng": -121.18680 },
+        { "lat": 37.90920, "lng": -121.19060 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 37.90905, "lng": -121.19035 },
+      { "lat": 37.90910, "lng": -121.18815 },
+      { "lat": 37.90855, "lng": -121.18815 },
+      { "lat": 37.90850, "lng": -121.19035 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 180, "pano": "rZTcwm6IsN1SzzPIResi8g", "hasCoverage": true },
+      "truckGate": { "heading": 0, "pano": "zcj0gcMLPMyROF2LebnmWw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 200,
+    "trailersVisible": 420,
+    "trailerParkingCapacity": 600,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 60.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.91015,-121.18875,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "trailerParkingCapacity", "dockDoorCount"],
+  "fieldNotes": {
+    "truckGate": "Multi-lane controlled gate ~150m up the entrance drive from the public frontage road: guard island with STOP pavement markings on both inbound and outbound lanes, yellow hatched safety striping (37.9086,-121.1888).",
+    "guardShack": "Staffed booth structure(s) on a raised concrete center island splitting in/out lanes, ~1-2 car footprint with canopy - visible at z21.",
+    "remoteGs": "False - physical guard booth present.",
+    "preGateStaging": "Trucks/trailers staged along the public frontage road shoulder (seen in Street View) and a deep paved approach drive before the gate.",
+    "postGateStaging": "Large paved apron inside the gate before the dock/yard rows.",
+    "drivewayLong": "Entrance drive runs ~150m from the public road across a vacant buffer to the gate, then into a wide apron - holds well over 3 trucks.",
+    "entryExitTogether": "Single guarded gate complex handles both in and out via paired lanes split by the guard island.",
+    "entryLanes": "Approx 2 inbound lanes at the guard island; counted from overhead striping, medium confidence.",
+    "exitLanes": "Approx 2 outbound lanes on the other side of the guard island.",
+    "fastLaneOpportunity": "Wide multi-lane gate apron with extra paved width and queue stalls - room for an express/bypass lane.",
+    "dockDoors": "Cross-dock with dock doors and trailers backed in along both the north and south long building faces; well over 50 doors total (estimate ~200).",
+    "dropArea": "Hundreds of trailers parked without tractors in the large west drop yard plus north/east rows - far over 50.",
+    "shipRcvSeparate": "Classic IXD cross-dock: doors on opposite (north and south) building faces serve receiving vs. outbound to FCs.",
+    "urbanRural": "Edge-of-Stockton industrial park surrounded by farmland and vacant land to the east; judged Rural per rubric tie-break.",
+    "scale": "No truck scale / weigh pad visible in the truck path.",
+    "dropYard": "Dedicated large trailer-storage drop yard west of the building, separate from active dock staging.",
+    "railServed": "No rail spur enters the property; nearest linear corridors are roads.",
+    "yardMetrics": "dockDoorCount, trailersVisible and trailerParkingCapacity are overhead estimates - the trailer rows are dense and partly cut off at frame edges; treat as approximate."
+  },
+  "method": "deep-audit"
+}

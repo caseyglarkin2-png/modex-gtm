@@ -1,0 +1,102 @@
+{
+  "name": "Amazon CMH1 Fulfillment Center Etna OH",
+  "type": "Fulfillment Center",
+  "coords": { "lat": 39.9525, "lng": -82.7122 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 39.95580, "lng": -82.71520 },
+      { "lat": 39.95640, "lng": -82.70880 },
+      { "lat": 39.95150, "lng": -82.70840 },
+      { "lat": 39.94995, "lng": -82.70960 },
+      { "lat": 39.94990, "lng": -82.71460 },
+      { "lat": 39.95300, "lng": -82.71530 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 39.95648, "lng": -82.71010 },
+      { "lat": 39.95648, "lng": -82.70955 },
+      { "lat": 39.95585, "lng": -82.70958 },
+      { "lat": 39.95585, "lng": -82.71012 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 39.95205, "lng": -82.71095 },
+        { "lat": 39.95195, "lng": -82.70915 },
+        { "lat": 39.95005, "lng": -82.70960 },
+        { "lat": 39.95015, "lng": -82.71135 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 39.95470, "lng": -82.71505 },
+        { "lat": 39.95205, "lng": -82.71430 },
+        { "lat": 39.95185, "lng": -82.71475 },
+        { "lat": 39.95450, "lng": -82.71550 }
+      ] },
+      { "ring": [
+        { "lat": 39.95205, "lng": -82.71430 },
+        { "lat": 39.95040, "lng": -82.71385 },
+        { "lat": 39.95025, "lng": -82.71430 },
+        { "lat": 39.95190, "lng": -82.71478 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 206, "pano": "ReUzacbaFDYuKmXYl7MuiA", "hasCoverage": true },
+      "truckGate": { "heading": 206, "pano": "ReUzacbaFDYuKmXYl7MuiA", "hasCoverage": true },
+      "dropYards": { "heading": 250, "pano": "FFKxUiKHw-QuJ6uHRtVanQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 130,
+    "trailerParkingCapacity": 220,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 92.8,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.9525,-82.7122,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "shipRcvSeparate", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Both public-road entrances (signalized NE drive off National Rd SW and the NW dock drive) are open: 2024-2025 Street View and z19 satellite show no barrier arm, sliding gate, or checkpoint pinch-point at either road. Open Amazon FC campus.",
+    "guardShack": "No staffed booth at either entrance. The NE entrance Street View shows an open multi-lane internal road straight into employee parking and the building, no booth beside the lane.",
+    "remoteGs": "False because there is no controlled truck gate at all; check-in is handled internally at the yard, not at a road gate.",
+    "postGateStaging": "Wide paved internal aprons and the SE drop yard provide ample interior holding before the docks.",
+    "drivewayLong": "The NE entrance drive runs ~250m from National Rd to the parking/yard, easily holding 3+ trucks.",
+    "entryExitSeparate": "Two separate property entrances off National Rd SW: a signalized main drive on the NE (~39.9563,-82.7099) and a NW dock drive (~39.9548,-82.7138). Lane counts approximate from overhead.",
+    "fastLaneOpportunity": "Very wide entrance aprons and multi-lane internal roads leave ample paved width to add an express/bypass lane.",
+    "dockDoors": "Continuous trailer rows backed into the entire SW/west building face (two long dock banks, 60+ positions per z19 crops) plus additional doors; total well into 50+ band.",
+    "dropArea": "Dedicated SE drop yard with ~40-50 angled trailer stalls plus long dock-side trailer rows; combined trailer parking is 50+.",
+    "shipRcvSeparate": "Distinct dock clusters on different building faces (long SW/west dock banks vs. SE drop-yard-served face); medium confidence on the ship/receive split.",
+    "urbanRural": "Edge-of-town/rural setting flanked by farmland and I-70; nearest fabric is a small residential pocket and the Etna industrial corridor. Per rubric, choose Rural when torn.",
+    "buildingCount": "Single very large multi-story fulfillment building; the SE area is a drop yard, not a separate structure.",
+    "railServed": "No rail spur enters the property.",
+    "trailerParkingCapacity": "Estimate combines SE drop-yard angled stalls and dock-side trailer rows; approximate from overhead imagery."
+  },
+  "method": "deep-audit"
+}

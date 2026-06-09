@@ -1,0 +1,117 @@
+{
+  "name": "Amazon PHX6 Fulfillment Center, Phoenix AZ",
+  "type": "Fulfillment Center",
+  "coords": {
+    "lat": 33.43215,
+    "lng": -112.16655
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        { "lat": 33.43513, "lng": -112.16885 },
+        { "lat": 33.43507, "lng": -112.16048 },
+        { "lat": 33.43072, "lng": -112.16048 },
+        { "lat": 33.43072, "lng": -112.16885 }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        { "lat": 33.43180, "lng": -112.16860 },
+        { "lat": 33.43180, "lng": -112.16770 },
+        { "lat": 33.43095, "lng": -112.16770 },
+        { "lat": 33.43095, "lng": -112.16860 }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          { "lat": 33.43135, "lng": -112.16830 },
+          { "lat": 33.43135, "lng": -112.16080 },
+          { "lat": 33.43098, "lng": -112.16080 },
+          { "lat": 33.43098, "lng": -112.16830 }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          { "lat": 33.43168, "lng": -112.16835 },
+          { "lat": 33.43168, "lng": -112.16075 },
+          { "lat": 33.43138, "lng": -112.16075 },
+          { "lat": 33.43138, "lng": -112.16835 }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        { "lat": 33.43095, "lng": -112.16855 },
+        { "lat": 33.43095, "lng": -112.16770 },
+        { "lat": 33.43055, "lng": -112.16770 },
+        { "lat": 33.43055, "lng": -112.16855 }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": { "heading": 60, "pano": "QYC0WAXQoSn6fA1-CtfvnA", "hasCoverage": true },
+      "truckGate": { "heading": 41, "pano": "QYC0WAXQoSn6fA1-CtfvnA", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 130,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 93.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.43215,-112.16655,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
+  "fieldNotes": {
+    "truckGate": "Confirmed in Dec-2025 Street View (pano QYC0WAXQoSn6fA1-CtfvnA): a long white cantilever/sliding gate spans the truck (equipment) entrance off the west drive, set in a masonry perimeter screen wall, with red NO TRESPASSING / EQUIPMENT ENTRANCE signage and an Amazon site placard. Controlled truck gate = true.",
+    "guardShack": "No staffed guard booth at the truck gate in any Street View heading (N/NE/ENE/E). The structure adjacent to the gate is the building's glass lobby/office entrance, not a 1-3-space guard booth. Classified false.",
+    "remoteGs": "Gate present, no manned booth -> remote check-in (signage + sliding gate, Amazon Carrier Central appointment system). True; flagged uncertain.",
+    "postGateStaging": "Wide paved truck court inside the gate between the dock face and the south fence holds a deep drop-trailer row plus circulation, ample queue space before docks.",
+    "drivewayLong": "Truck court is very deep and long (>300 m of paved apron); easily holds a 3+ truck queue inside the gate. Long.",
+    "fastLaneOpportunity": "Very wide gate apron and multiple drive lanes at the SW entry give clear room to add an express/bypass lane.",
+    "dockDoors": "Continuous dock bank runs the full ~370 m south face of the building with trailers backed in across z19-z20 imagery; well over 50 doors. Exact count ~120 estimated, flagged.",
+    "dropArea": "Second full-length row of drop trailers parked nose-out in the truck court in addition to the docked row; 50+ band. dropYard true.",
+    "trailerParkingCapacity": "Drop capacity is the single long court row (~no separate multi-acre trailer lot on-parcel); estimated ~200, flagged uncertain.",
+    "railServed": "No rail spur enters the property; truck-only site.",
+    "urbanRural": "Dense southwest-Phoenix industrial fabric inside the metro, adjacent to I-10; Urban.",
+    "siteAreaAcres": "~93.7 ac developed footprint (building + north employee parking + south truck court) from the traced perimeter; the ~1.2M sq ft building dominates.",
+    "buildingCount": "Single very large (~1.2M sq ft) FC building; the warehouses north and south across the public roads are separate parcels/tenants, excluded."
+  },
+  "method": "deep-audit"
+}

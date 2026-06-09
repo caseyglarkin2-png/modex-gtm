@@ -1,0 +1,99 @@
+{
+  "name": "Amazon CVG1 Fulfillment Center Hebron KY",
+  "type": "Fulfillment Center",
+  "coords": { "lat": 39.084600, "lng": -84.712900 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 39.087450, "lng": -84.714850 },
+      { "lat": 39.087650, "lng": -84.712050 },
+      { "lat": 39.086300, "lng": -84.711350 },
+      { "lat": 39.083350, "lng": -84.711650 },
+      { "lat": 39.081950, "lng": -84.713350 },
+      { "lat": 39.082000, "lng": -84.714800 },
+      { "lat": 39.085000, "lng": -84.715150 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 39.086820, "lng": -84.712750 },
+      { "lat": 39.086780, "lng": -84.712150 },
+      { "lat": 39.086350, "lng": -84.712200 },
+      { "lat": 39.086380, "lng": -84.712800 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 39.086300, "lng": -84.711950 },
+        { "lat": 39.086150, "lng": -84.711500 },
+        { "lat": 39.083550, "lng": -84.711800 },
+        { "lat": 39.083650, "lng": -84.712250 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 39.086500, "lng": -84.712450 },
+        { "lat": 39.086450, "lng": -84.712150 },
+        { "lat": 39.083400, "lng": -84.712450 },
+        { "lat": 39.083450, "lng": -84.712750 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 200, "pano": "hQN79MxhzqdX3b7M4uvqRA", "hasCoverage": true },
+      "truckGate": { "heading": 200, "pano": "hQN79MxhzqdX3b7M4uvqRA", "hasCoverage": true },
+      "dropYards": { "heading": 250, "pano": "", "hasCoverage": false },
+      "dockAprons": { "heading": 250, "pano": "", "hasCoverage": false }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 8,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 42.4,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.0846,-84.7129,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount"],
+  "fieldNotes": {
+    "truckGate": "2024-09 Street View shows a continuous black chain-link security fence (Amazon-added; absent in 2016/2021 panos) wrapping the trailer yard and dock apron, breached by a single controlled entry drive off Worldwide Blvd at the north end. Fence + single gated opening into the secured yard = controlled truck gate.",
+    "guardShack": "No standalone guard-booth footprint positively confirmed at the gate throat in satellite (z20-21) or Street View; entrance trees partially obscure. A small structure sits on the dock apron but reads as a yard-control/equipment shed, not a road-side gatehouse. Marked false with low confidence.",
+    "remoteGs": "Gate present but no confirmed booth -> treated as kiosk/app check-in (Amazon driver app). Uncertain; could flip to guardShack if a manned booth exists behind the tree line.",
+    "postGateStaging": "Large paved apron/yard inside the fence between the gate and the dock doors provides ample internal queueing room.",
+    "drivewayLong": "Entry drive descends a long ramp from Worldwide Blvd into a deep internal yard; easily holds 3+ trucks before the docks.",
+    "entryExitTogether": "Single entry/exit drive off Worldwide Blvd at the north; the drive has a center median splitting in/out lanes but is one gate point.",
+    "entryLanes": "Center median at the entry suggests ~1 in / 1 out; exact lane count obscured by trees - estimate.",
+    "fastLaneOpportunity": "Wide entry apron and a deep, wide internal yard give physical room to add an express/bypass lane.",
+    "dockDoors": "Single continuous dock bank runs the full ~520m east face; no trailers backed in to count individually, but a 1M+ sq ft FC of this length implies well over 50 doors. Count 110 is an order-of-magnitude estimate.",
+    "dropArea": "Long row of marked angled trailer-parking stalls runs the full east drop yard (~90-stall capacity); mostly empty in captured imagery.",
+    "urbanRural": "Edge-of-town industrial park (Prologis Park West) in Hebron KY beside the I-275/I-71-75 interchange; broader setting is exurban/rural-industrial, not dense metro fabric.",
+    "shipRcvSeparate": "All dock doors are on a single (east) building face; west face is roof/employee-parking only. One dock cluster.",
+    "scale": "No truck scale / weigh pad visible in the truck path.",
+    "siteAreaAcres": "~42 acres derived (shoelace) from the traced 7-vertex perimeter ring (building + east drop yard + dock apron + west employee lot + entry drive); approximate.",
+    "streetViewMeta": "Live 2024-09 panos exist on Worldwide Blvd overlooking the gate (perimeter/truckGate hasCoverage true); panos nearest the interior drop yard/dock apron resolve to 2016 pre-Amazon imagery, so those zones marked hasCoverage false. pano ids left empty per instruction (never invent)."
+  },
+  "method": "deep-audit"
+}

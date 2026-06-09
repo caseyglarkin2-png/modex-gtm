@@ -1,0 +1,47 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+Amazon BFI4 Fulfillment Center Kent WA,Fulfillment Center,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@47.41452,-122.25782,400m/data=!3m1!1e3"
+Amazon ONT8 Fulfillment Center Moreno Valley CA,Fulfillment Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@33.86836,-117.23708,400m/data=!3m1!1e3"
+Amazon MEM1 Fulfillment Center Memphis TN,Fulfillment Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,YES,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@35.00820,-89.95000,400m/data=!3m1!1e3"
+Amazon CVG1 Fulfillment Center Hebron KY,Fulfillment Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@39.0846,-84.7129,400m/data=!3m1!1e3"
+Amazon KCVG Air Hub Hebron KY,Air Hub,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@39.03135,-84.65965,400m/data=!3m1!1e3"
+"Amazon FTW1 Fulfillment Center, Dallas TX",Fulfillment Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,YES,YES,YES,,,,YES,2,2,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@32.66185,-96.7363,400m/data=!3m1!1e3"
+Amazon DFW7 Fulfillment Center Fort Worth TX,Fulfillment Center,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@32.9701,-97.3358,400m/data=!3m1!1e3"
+"Amazon PHX6 Fulfillment Center, Phoenix AZ",Fulfillment Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@33.43215,-112.16655,400m/data=!3m1!1e3"
+Amazon MDW2 Fulfillment Center Joliet IL,Fulfillment Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@41.48334,-88.07153,400m/data=!3m1!1e3"
+Amazon EWR4 Fulfillment Center Robbinsville NJ,Fulfillment Center,#4,Gate + GS (BU sens.),,,,,,,,,,,YES,YES,,,YES,YES,,YES,YES,,2,1,YES,,,,YES,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@40.19565,-74.56495,400m/data=!3m1!1e3"
+Amazon CMH1 Fulfillment Center Etna OH,Fulfillment Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,,YES,2,2,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@39.9525,-82.7122,400m/data=!3m1!1e3"
+Amazon LGB3 Fulfillment Center Eastvale CA,Fulfillment Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@33.9972,-117.5528,400m/data=!3m1!1e3"
+Amazon SBD2 Fulfillment Center San Bernardino CA,Fulfillment Center,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@34.07280,-117.28350,400m/data=!3m1!1e3"
+Amazon TPA1 Fulfillment Center Ruskin FL,Fulfillment Center,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@27.726800,-82.387200,400m/data=!3m1!1e3"
+Amazon SCK4 Inbound Cross-Dock Stockton CA,Inbound Cross-Dock (IXD),#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@37.91015,-121.18875,400m/data=!3m1!1e3"
+Amazon SCK6 Sortation Center Tracy CA,Sortation Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@37.751800,-121.403500,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,1,6%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,1,6%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,2,13%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,3,19%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,3,19%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,6,38%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,16,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,16,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,9,56%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,12,75%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,4,25%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,16,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,16,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

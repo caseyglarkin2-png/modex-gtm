@@ -1,0 +1,102 @@
+{
+  "name": "Amazon DFW7 Fulfillment Center Fort Worth TX",
+  "type": "Fulfillment Center",
+  "coords": { "lat": 32.9701, "lng": -97.3358 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 32.97350, "lng": -97.33710 },
+      { "lat": 32.97335, "lng": -97.33180 },
+      { "lat": 32.96720, "lng": -97.33230 },
+      { "lat": 32.96740, "lng": -97.33700 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 32.97320, "lng": -97.33695 },
+      { "lat": 32.97318, "lng": -97.33648 },
+      { "lat": 32.97292, "lng": -97.33650 },
+      { "lat": 32.97294, "lng": -97.33697 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 32.97300, "lng": -97.33690 },
+        { "lat": 32.97298, "lng": -97.33658 },
+        { "lat": 32.96775, "lng": -97.33672 },
+        { "lat": 32.96777, "lng": -97.33704 }
+      ] },
+      { "ring": [
+        { "lat": 32.96770, "lng": -97.33660 },
+        { "lat": 32.96762, "lng": -97.33520 },
+        { "lat": 32.96720, "lng": -97.33525 },
+        { "lat": 32.96728, "lng": -97.33665 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 32.97302, "lng": -97.33658 },
+        { "lat": 32.97300, "lng": -97.33640 },
+        { "lat": 32.96768, "lng": -97.33652 },
+        { "lat": 32.96770, "lng": -97.33670 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 32.97348, "lng": -97.33700 },
+      { "lat": 32.97346, "lng": -97.33672 },
+      { "lat": 32.97322, "lng": -97.33674 },
+      { "lat": 32.97324, "lng": -97.33702 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 289, "pano": "hhLEDVfXmFPYHQbSKyDZGg", "hasCoverage": true },
+      "truckGate": { "heading": 165, "pano": "6k8519RXsITmkFC3Q48auw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 140,
+    "trailersVisible": 95,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 78.8,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.9701,-97.3358,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Controlled truck entrance on the west drive off Westport Pkwy: guard booth straddling the lanes with yellow barrier arms and bollards, confirmed in Street View (2023-02). Yellow-striped lane dividers and red-curbed median.",
+    "guardShack": "Small staffed gatehouse structure sitting between the inbound/outbound lanes at the west gate, ~1-2 vehicle footprint, distinct from the main building.",
+    "drivewayLong": "Entry drive runs ~120m+ from the Westport Pkwy stop bar south to the gate, easily holding 3+ trucks before the booth.",
+    "entryLanes": "Estimated 2 inbound from the multi-lane gate apron in Street View; exact split between in/out lanes not fully resolvable overhead.",
+    "fastLaneOpportunity": "Wide multi-lane gate apron with red-curbed median and unused paved width — room to add an express/bypass lane.",
+    "dockDoors": "West wall is lined with a near-continuous row of dock doors for the building's full ~600m length; 50+ band is firm, point estimate ~140 is approximate.",
+    "dropArea": "West apron holds dozens of drop trailers (no tractor) plus a south van/trailer lot; well into the 50+ band.",
+    "urbanRural": "AllianceTexas logistics park on the edge of Fort Worth/Haslet — large industrial setting surrounded by warehouses and open land rather than dense metro fabric; judged Rural per rubric tie-break.",
+    "connectivityIssue": "Large modern Amazon FC in an active industrial park near Alliance Airport; cellular coverage almost certainly fine — false.",
+    "dropYard": "Dedicated trailer staging along the west apron and south lot, separate from active dock backing.",
+    "railServed": "No rail spur enters the property; site is truck/air-served (adjacent Perot Field Alliance Airport).",
+    "siteAreaAcres": "78.8 ac from the traced perimeter incl. yard and parking; published figure ~68 ac for the building parcel."
+  },
+  "method": "deep-audit"
+}

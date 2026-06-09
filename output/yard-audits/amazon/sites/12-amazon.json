@@ -1,0 +1,102 @@
+{
+  "name": "Amazon LGB3 Fulfillment Center Eastvale CA",
+  "type": "Fulfillment Center",
+  "coords": { "lat": 33.9972, "lng": -117.5528 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 33.99955, "lng": -117.55465 },
+      { "lat": 33.99935, "lng": -117.55060 },
+      { "lat": 33.99505, "lng": -117.55090 },
+      { "lat": 33.99520, "lng": -117.55485 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 33.99835, "lng": -117.55455 },
+      { "lat": 33.99835, "lng": -117.55395 },
+      { "lat": 33.99775, "lng": -117.55395 },
+      { "lat": 33.99775, "lng": -117.55455 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 33.99920, "lng": -117.55190 },
+        { "lat": 33.99905, "lng": -117.55065 },
+        { "lat": 33.99560, "lng": -117.55095 },
+        { "lat": 33.99570, "lng": -117.55215 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 33.99925, "lng": -117.55205 },
+        { "lat": 33.99920, "lng": -117.55175 },
+        { "lat": 33.99560, "lng": -117.55205 },
+        { "lat": 33.99565, "lng": -117.55235 }
+      ] },
+      { "ring": [
+        { "lat": 33.99545, "lng": -117.55430 },
+        { "lat": 33.99540, "lng": -117.55230 },
+        { "lat": 33.99510, "lng": -117.55232 },
+        { "lat": 33.99515, "lng": -117.55432 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 359, "pano": "GrITUw3fPxk727PT30Hi3g", "hasCoverage": true },
+      "truckGate": { "heading": 89, "pano": "GF_R5YPSsNzYH9gDa4gNHw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 160,
+    "trailerParkingCapacity": 220,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 47.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.9972,-117.5528,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "guardShack"],
+  "fieldNotes": {
+    "truckGate": "Controlled entry. Amazon Tours guidance states drivers/visitors enter at the main guard post at the intersection of Goodman Way and The Station; the signalized main driveway (NW corner, monument sign '4950 Goodman Way') is the single controlled checkpoint into a fully fenced campus.",
+    "guardShack": "Amazon explicitly references a staffed 'main guard post' at the entrance. Booth structure not individually resolvable in overhead imagery (entrance canopy/landscaping obscures it) and the truck side faces I-15 with no Street View, so flagged uncertain, but staffed-guard operation is corroborated by the operator.",
+    "guardShackEvidence": "Web (events.amazontours.com / help.amazontours.com LGB3): 'enter at the main guard post, which is at the intersection of Goodman Way and The Station.'",
+    "postGateStaging": "Wide internal truck court between the FC south face and the east drop yard provides ample inside-the-gate queue/staging room before docks.",
+    "drivewayLong": "Long internal approach from the Goodman Way entrance around to the east-side dock apron and drop yard easily holds 3+ trucks.",
+    "entryExitTogether": "Single controlled entrance off Goodman Way serves both in and out; no separate out-gate observed.",
+    "entryLanes": "Estimated 2 in / 2 out at the main signalized driveway; exact lane split partly obscured by landscaping — flagged uncertain.",
+    "fastLaneOpportunity": "Wide entrance apron and large internal truck court leave clear paved width to add an express/bypass lane.",
+    "dockDoors": "Continuous dock-door banks run the full east wall and the full south wall with trailers backed in; total well into the 50+ band (est. ~120 doors across both faces).",
+    "dropArea": "Dense trailer drop yard runs the entire east side between the building and I-15, dozens of trailers parked nose-out in rows plus yard hostlers staging — clearly 50+.",
+    "shipRcvSeparate": "Two distinct dock clusters on different building faces (east wall + south wall) operate as physically separate dock banks.",
+    "urbanRural": "Eastvale is dense Inland Empire metro logistics fabric (Goodman Logistics Center, adjacent Costco and multiple big-box DCs) bordering I-15 — Urban.",
+    "scale": "No truck scale/weigh pad observed in the truck path.",
+    "multipleFacilities": "LGB3 is one FC building (connected to a west office annex by a pedestrian bridge over Goodman Way); the large gray-roof building to the south is a separate tenant, not counted here.",
+    "railServed": "No rail spur enters the property; I-15 freeway bounds the east edge.",
+    "siteAreaAcres": "~47 acres from the traced perimeter polygon (building + west parking + east drop yard).",
+    "yardMetrics": "Door/trailer counts are honest overhead estimates from z19-z20 crops; ranges are confident but exact integers approximate."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,96 @@
+{
+  "name": "Amazon EWR4 Fulfillment Center Robbinsville NJ",
+  "type": "Fulfillment Center",
+  "coords": { "lat": 40.19565, "lng": -74.56495 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 40.19905, "lng": -74.56735 },
+      { "lat": 40.19730, "lng": -74.56300 },
+      { "lat": 40.19265, "lng": -74.56215 },
+      { "lat": 40.19305, "lng": -74.56860 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 40.19880, "lng": -74.56690 },
+      { "lat": 40.19905, "lng": -74.56640 },
+      { "lat": 40.19850, "lng": -74.56590 },
+      { "lat": 40.19825, "lng": -74.56640 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 40.197540, "lng": -74.566190 },
+        { "lat": 40.194085, "lng": -74.563089 },
+        { "lat": 40.194288, "lng": -74.562701 },
+        { "lat": 40.197743, "lng": -74.565802 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 40.197430, "lng": -74.566505 },
+        { "lat": 40.193900, "lng": -74.563337 },
+        { "lat": 40.194038, "lng": -74.563075 },
+        { "lat": 40.197567, "lng": -74.566243 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 40.197588, "lng": -74.566618 },
+      { "lat": 40.197033, "lng": -74.566120 },
+      { "lat": 40.197287, "lng": -74.565635 },
+      { "lat": 40.197842, "lng": -74.566133 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 193, "pano": "SkbdDspcyf4DKOFiPq4R3g", "hasCoverage": true },
+      "truckGate": { "heading": 209, "pano": "vnQDj8UiC2RjN389B_x46g", "hasCoverage": true },
+      "dockApron": { "heading": 38, "pano": "MWSDMrVY6Essjk88zGn1IA", "hasCoverage": true },
+      "dropYard": { "heading": 225, "pano": "jjjSe5GiHcdsNj4IvdDsVw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 45,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 67.8,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.19565,-74.56495,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Secured, fenced truck yard on the NE dock side. Driver reviews and a Command Security 'Amazon - Robbinsville - EWR4' guard post confirm a manned checkpoint; drivers present BOL/appointment on arrival and report 30+ min checkpoint waits. Street View does not enter the truck yard (private/gated) — only the SW employee perimeter and Sharon Rd are publicly driveable.",
+    "guardShack": "Inferred manned booth at the truck gate (Command Security staffs the post; standard for a 1.2M sqft Amazon FC). The booth structure could not be individually resolved in satellite because the gate sits deep inside the yard behind a tree buffer — hence medium confidence on the physical shack vs. remote kiosk.",
+    "backupSensitive": "Driver reviews report 30+ minute checkpoint queues; tight single-gate intake.",
+    "dockDoors": "Continuous row of trailers backed into dock doors along the full ~500m NE wall; 50+ band is conservative for a 1.2M sqft robotics FC.",
+    "dropArea": "Wide truck court / drop yard on the NE side holding many parked trailers; 25-50 band estimated from overhead trailer count.",
+    "urbanRural": "Matrix Business Park at the edge of Robbinsville Twp, bordered by active farmland and a tree nursery on the N/NE; edge-of-town industrial classified Rural per rubric.",
+    "entryLanes": "Estimated; exact lane count at the gate not visible in available imagery.",
+    "multipleFacilities": "Single EWR4 building. Adjacent large warehouses (incl. a heavily solar-roofed building to the south) are separate Matrix Business Park parcels/companies, not part of this property.",
+    "scale": "No truck scale/weigh pad observed in the truck path.",
+    "railServed": "No rail spur enters the property."
+  },
+  "method": "deep-audit"
+}

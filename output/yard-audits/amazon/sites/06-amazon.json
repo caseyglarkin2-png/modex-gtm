@@ -1,0 +1,158 @@
+{
+  "name": "Amazon FTW1 Fulfillment Center, Dallas TX",
+  "type": "Fulfillment Center",
+  "coords": {
+    "lat": 32.66185,
+    "lng": -96.7363
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        { "lat": 32.6629, "lng": -96.738 },
+        { "lat": 32.663, "lng": -96.7347 },
+        { "lat": 32.6625, "lng": -96.7338 },
+        { "lat": 32.6606, "lng": -96.733 },
+        { "lat": 32.6597, "lng": -96.7338 },
+        { "lat": 32.6598, "lng": -96.7362 },
+        { "lat": 32.6606, "lng": -96.7379 },
+        { "lat": 32.662, "lng": -96.7387 }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        { "lat": 32.66268, "lng": -96.73805 },
+        { "lat": 32.66262, "lng": -96.73725 },
+        { "lat": 32.66205, "lng": -96.73745 },
+        { "lat": 32.66212, "lng": -96.73815 }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          { "lat": 32.66262, "lng": -96.73705 },
+          { "lat": 32.66285, "lng": -96.73468 },
+          { "lat": 32.66232, "lng": -96.73452 },
+          { "lat": 32.66212, "lng": -96.73682 }
+        ]
+      },
+      {
+        "ring": [
+          { "lat": 32.66188, "lng": -96.73838 },
+          { "lat": 32.66192, "lng": -96.73772 },
+          { "lat": 32.66112, "lng": -96.73762 },
+          { "lat": 32.66108, "lng": -96.73828 }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          { "lat": 32.66232, "lng": -96.73692 },
+          { "lat": 32.66252, "lng": -96.7348 },
+          { "lat": 32.66228, "lng": -96.73473 },
+          { "lat": 32.66208, "lng": -96.73685 }
+        ]
+      },
+      {
+        "ring": [
+          { "lat": 32.66192, "lng": -96.73762 },
+          { "lat": 32.66108, "lng": -96.73752 },
+          { "lat": 32.66102, "lng": -96.73722 },
+          { "lat": 32.66186, "lng": -96.73732 }
+        ]
+      },
+      {
+        "ring": [
+          { "lat": 32.66068, "lng": -96.73682 },
+          { "lat": 32.66052, "lng": -96.73482 },
+          { "lat": 32.66028, "lng": -96.73492 },
+          { "lat": 32.66044, "lng": -96.73692 }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        { "lat": 32.66272, "lng": -96.7378 },
+        { "lat": 32.66285, "lng": -96.73582 },
+        { "lat": 32.66262, "lng": -96.73578 },
+        { "lat": 32.6625, "lng": -96.73775 }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 177,
+        "pano": "b2htTSym2Jjb268EC7fjNQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 172,
+        "pano": "TZ9CQadRcX6Z838b4kfBZw",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 130,
+    "trailersVisible": 140,
+    "trailerParkingCapacity": 220,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 36.8,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.66185,-96.7363,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "multiStep"
+  ],
+  "fieldNotes": {
+    "truckGate": "Fully fenced perimeter (black palisade fence) around the entire trailer yard, confirmed in Street View (06-sv-nwentry, 06-sv-gate-s, 06-sv-gate-sw). The main truck entrance is a controlled driveway off the north public road at the NW corner, channelized with orange traffic barrels/cones funneling trucks through a checkpoint (06-sv-mainentry, 06-sv-mainentry2).",
+    "guardShack": "Small tan guard booth sits beside the entry lane at the NW gate, visible in Street View (06-sv-mainentry2) and in satellite at the SW pinch of the entry (06-wcorner-z20, 06-boothtight-z21) as a small 1-2-space-footprint structure with channelizing barrels and a staged tractor-trailer.",
+    "remoteGs": "Guard shack present, so false.",
+    "preGateStaging": "Wide paved apron outside the gate where the public road meets the entry driveway, with room for trucks to wait before the checkpoint (06-nwcorner-entry-z20, 06-sv-mainentry).",
+    "postGateStaging": "Very large interior paved yard between the gate and the dock doors / drop rows - ample post-gate holding (06-northdocks-z19).",
+    "drivewayLong": "Deep gate-to-dock approach across a wide apron can hold a queue of 3+ trucks.",
+    "entryExitSeparate": "Two separate curb cuts / driveways off the north road - distinct in-gate (NW) and a second driveway/exit further east (06-northdocks-z19, 06-nwcorner-entry-z20).",
+    "entryLanes": "Estimated ~2 inbound lanes at the wide gate apron; exact count not directly resolvable overhead due to barrel placement. Listed uncertain.",
+    "exitLanes": "Estimated ~2 outbound lanes; uncertain.",
+    "fastLaneOpportunity": "Very wide gate apron with substantial unused paved width - clear room to add an express/appointment bypass lane.",
+    "dockDoors": "Loading docks on the north, west and SE building faces with regular dock-door rhythm and 100+ trailers backed in across faces (06-northdocks-z19, 06-westdocks-z19, 06-southdocks-z19). dockDoorCount ~130 is an honest overhead estimate; band 50+ is firm.",
+    "dropArea": "Dedicated trailer drop rows north of the dock walls and along the west yard, dozens of trailers parked without tractors; capacity 50+ is firm.",
+    "shipRcvSeparate": "Distinct dock banks on physically separate building faces (north wall vs west wall vs SE wall) - shipping and receiving run from different clusters.",
+    "urbanRural": "Within the Dallas metro directly on LBJ Freeway (I-635 / US-175) interchange; Urban.",
+    "connectivityIssue": "Major metro freight corridor, strong cellular coverage; false.",
+    "multipleFacilities": "Only the single large Amazon fulfillment building is on this parcel. The neighboring building to the SE is American Textile Co (confirmed by Street View signage, 06-sv-boulevard2) on a separate parcel/loop and is excluded.",
+    "scale": "No truck scale / weigh pad visible in the truck path.",
+    "dropYard": "Dedicated trailer-storage drop rows separate from active dock staging, full of parked trailers (06-northdocks-z19, 06-westdocks-z19).",
+    "siteAreaAcres": "~36.8 acres derived from the traced Amazon parcel perimeter (building + fenced yard + drop rows + south employee parking).",
+    "railServed": "No rail spur enters the property."
+  },
+  "method": "deep-audit"
+}

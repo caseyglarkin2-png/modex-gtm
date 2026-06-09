@@ -1,0 +1,151 @@
+{
+  "account": "Amazon",
+  "generatedAt": "2026-06-09",
+  "facilityCount": 16,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Amazon BFI4 Fulfillment Center Kent WA",
+      "city": "Kent",
+      "state": "WA",
+      "type": "Fulfillment Center",
+      "address": "21005 64th Ave S, Kent, WA 98032",
+      "source": "youramazonguy FC address list + Chamber of Commerce listing; Amazon flagship 1M+ items/day FC"
+    },
+    {
+      "idx": 2,
+      "name": "Amazon ONT8 Fulfillment Center Moreno Valley CA",
+      "city": "Moreno Valley",
+      "state": "CA",
+      "type": "Fulfillment Center",
+      "address": "24300 Nandina Ave, Moreno Valley, CA 92551",
+      "source": "nmfclist FBA locations + TruckMap + businessyab listings"
+    },
+    {
+      "idx": 3,
+      "name": "Amazon MEM1 Fulfillment Center Memphis TN",
+      "city": "Memphis",
+      "state": "TN",
+      "type": "Fulfillment Center",
+      "address": "3292 E Holmes Rd, Memphis, TN 38118",
+      "source": "youramazonguy FC list + Amazon hiring.amazon.com job posting + Panjiva buyer report"
+    },
+    {
+      "idx": 4,
+      "name": "Amazon CVG1 Fulfillment Center Hebron KY",
+      "city": "Hebron",
+      "state": "KY",
+      "type": "Fulfillment Center",
+      "address": "1155 Worldwide Blvd, Hebron, KY 41048",
+      "source": "fbanearme + Waze + FLEX fulfillment listing (Prologis Park West Bldg F)"
+    },
+    {
+      "idx": 5,
+      "name": "Amazon KCVG Air Hub Hebron KY",
+      "city": "Hebron",
+      "state": "KY",
+      "type": "Air Hub",
+      "address": "289 Wendell H Ford Blvd, Hebron, KY 41048",
+      "source": "Waze + Chamber of Commerce listing; Amazon Air central US cargo hub, 800k sq ft sort on 600-acre campus"
+    },
+    {
+      "idx": 6,
+      "name": "Amazon FTW1 Fulfillment Center Dallas TX",
+      "city": "Dallas",
+      "state": "TX",
+      "type": "Fulfillment Center",
+      "address": "33333 LBJ Fwy, Dallas, TX 75241",
+      "source": "FLEX fulfillment listing + Amazon IPEX FC operating-times PDF"
+    },
+    {
+      "idx": 7,
+      "name": "Amazon DFW7 Fulfillment Center Fort Worth TX",
+      "city": "Fort Worth",
+      "state": "TX",
+      "type": "Fulfillment Center",
+      "address": "700 Westport Pkwy, Fort Worth, TX 76177",
+      "source": "Waze + Chamber of Commerce + Venture Mechanical project listing"
+    },
+    {
+      "idx": 8,
+      "name": "Amazon PHX6 Fulfillment Center Phoenix AZ",
+      "city": "Phoenix",
+      "state": "AZ",
+      "type": "Fulfillment Center",
+      "address": "4750 W Mohave St, Phoenix, AZ 85043",
+      "source": "Forest Shipping Arizona FC address blog + commercecanal/taxjar FC lists"
+    },
+    {
+      "idx": 9,
+      "name": "Amazon MDW2 Fulfillment Center Joliet IL",
+      "city": "Joliet",
+      "state": "IL",
+      "type": "Fulfillment Center",
+      "address": "250 Emerald Dr, Joliet, IL 60433",
+      "source": "Panjiva buyer report + FBA Wiki + warehouse.ninja (listed as cross-dock FC)"
+    },
+    {
+      "idx": 10,
+      "name": "Amazon EWR4 Fulfillment Center Robbinsville NJ",
+      "city": "Robbinsville",
+      "state": "NJ",
+      "type": "Fulfillment Center",
+      "address": "50 New Canton Way, Robbinsville, NJ 08691",
+      "source": "youramazonguy FC list + Amazon Tours + Waze (1.2M sq ft robotics FC, Matrix Business Park)"
+    },
+    {
+      "idx": 11,
+      "name": "Amazon CMH1 Fulfillment Center Etna OH",
+      "city": "Etna",
+      "state": "OH",
+      "type": "Fulfillment Center",
+      "address": "11999 National Rd SW, Etna, OH 43062",
+      "source": "SafelyHQ + Waze + Pataskala Chamber listing"
+    },
+    {
+      "idx": 12,
+      "name": "Amazon LGB3 Fulfillment Center Eastvale CA",
+      "city": "Eastvale",
+      "state": "CA",
+      "type": "Fulfillment Center",
+      "address": "4950 Goodman Way, Eastvale, CA 91752",
+      "source": "Amazon Tours official + Waze + multiple business listings (robotics sortable FC)"
+    },
+    {
+      "idx": 13,
+      "name": "Amazon SBD2 Fulfillment Center San Bernardino CA",
+      "city": "San Bernardino",
+      "state": "CA",
+      "type": "Fulfillment Center",
+      "address": "1494 S Waterman Ave, San Bernardino, CA 92408",
+      "source": "taxjar/worldclassshipping FC location lists"
+    },
+    {
+      "idx": 14,
+      "name": "Amazon TPA1 Fulfillment Center Ruskin FL",
+      "city": "Ruskin",
+      "state": "FL",
+      "type": "Fulfillment Center",
+      "address": "3350 Laurel Ridge Ave, Ruskin, FL 33570",
+      "source": "findlatitudeandlongitude + Waze + Tampa Bay Chamber listing"
+    },
+    {
+      "idx": 15,
+      "name": "Amazon SCK4 Inbound Cross-Dock Stockton CA",
+      "city": "Stockton",
+      "state": "CA",
+      "type": "Inbound Cross-Dock (IXD)",
+      "address": "6001 S Austin Rd, Stockton, CA 95215",
+      "source": "Amazon IPEX FC operating-times PDF (6/20/2025) + youramazonguy; 638k sq ft IXD opened Oct 2023"
+    },
+    {
+      "idx": 16,
+      "name": "Amazon SCK6 Sortation Center Tracy CA",
+      "city": "Tracy",
+      "state": "CA",
+      "type": "Sortation Center",
+      "address": "1500 E Grant Line Rd, Tracy, CA 95304",
+      "source": "datacenter.fyi public record + Moovit; 5-story robotics sorting facility serving NorCal/Bay Area"
+    }
+  ]
+}

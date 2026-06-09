@@ -1,0 +1,116 @@
+{
+  "name": "Amazon SCK6 Sortation Center Tracy CA",
+  "type": "Sortation Center",
+  "coords": { "lat": 37.751800, "lng": -121.403500 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 37.754180, "lng": -121.405250 },
+      { "lat": 37.754090, "lng": -121.399450 },
+      { "lat": 37.752600, "lng": -121.398950 },
+      { "lat": 37.749700, "lng": -121.399000 },
+      { "lat": 37.749450, "lng": -121.404950 },
+      { "lat": 37.751000, "lng": -121.405300 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 37.753250, "lng": -121.400720 },
+      { "lat": 37.753180, "lng": -121.400320 },
+      { "lat": 37.752900, "lng": -121.400360 },
+      { "lat": 37.752960, "lng": -121.400760 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 37.753080, "lng": -121.400230 },
+        { "lat": 37.752980, "lng": -121.398970 },
+        { "lat": 37.749760, "lng": -121.399080 },
+        { "lat": 37.749700, "lng": -121.400370 }
+      ] },
+      { "ring": [
+        { "lat": 37.750150, "lng": -121.404780 },
+        { "lat": 37.750090, "lng": -121.401050 },
+        { "lat": 37.749820, "lng": -121.401060 },
+        { "lat": 37.749880, "lng": -121.404790 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 37.750650, "lng": -121.404760 },
+        { "lat": 37.750590, "lng": -121.401080 },
+        { "lat": 37.750410, "lng": -121.401090 },
+        { "lat": 37.750470, "lng": -121.404770 }
+      ] },
+      { "ring": [
+        { "lat": 37.753000, "lng": -121.400600 },
+        { "lat": 37.752700, "lng": -121.400620 },
+        { "lat": 37.750800, "lng": -121.400700 },
+        { "lat": 37.750810, "lng": -121.400900 },
+        { "lat": 37.752700, "lng": -121.400820 },
+        { "lat": 37.753010, "lng": -121.400800 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 37.752900, "lng": -121.401400 },
+      { "lat": 37.752850, "lng": -121.400780 },
+      { "lat": 37.751900, "lng": -121.400820 },
+      { "lat": 37.751950, "lng": -121.401440 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 244, "pano": "Ibf-84PqjROvdsHVSOdG_g", "hasCoverage": true },
+      "truckGate": { "heading": 275, "pano": "dvkowtervoQ0-ev7HnD5Tg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 230,
+    "trailerParkingCapacity": 260,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 68.2,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.751800,-121.403500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "multiStep"],
+  "fieldNotes": {
+    "truckGate": "Entire truck yard is enclosed by black steel palisade fencing plus precast concrete screen walls (confirmed in Street View along the east access road, panos dvkowtervoQ0-ev7HnD5Tg and Ibf-84PqjROvdsHVSOdG_g). Trucks enter through a single controlled driveway throat off the NE access road (~37.7531,-121.4006) that feeds the secured dock/drop area.",
+    "guardShack": "Small booth-footprint structure with a painted STOP and yellow checkpoint striping at the gate throat (~37.75215,-121.40015), seen at z21 satellite beside the controlled lane between the parking apron and the secured building/dock area.",
+    "postGateStaging": "Wide paved apron inside the gate between the building east face and the drop yard provides interior queue/staging room before docks.",
+    "drivewayLong": "Deep paved approach from the gate to the dock faces easily holds 3+ trucks stacked.",
+    "entryExitTogether": "Single truck gate serves both entry and exit; no separate out-gate observed.",
+    "entryLanes": "Estimated 2 inbound lanes at the gate throat from overhead width; low confidence.",
+    "exitLanes": "Estimated 2 outbound lanes; low confidence.",
+    "fastLaneOpportunity": "Wide multi-lane gate apron with unused paved width to add an express/bypass lane.",
+    "dockDoors": "50+ band. Continuous dock banks on the south face and additional doors on the east/north faces of the building; published spec cites 40 loading dock bays but overhead imagery shows more dock positions across multiple faces, so 50+ is the honest band.",
+    "dropArea": "50+ band. Large fenced trailer drop yards on the east (numbered stalls 580s-760s observed) and south sides; ~230 trailers visible, consistent with the published 230-trailer parking spec.",
+    "shipRcvSeparate": "Dock activity runs from physically separate banks (south face dock apron and east-side dock/drop apron), indicating split ship/receive flows.",
+    "urbanRural": "Edge-of-town industrial park on the SE edge of Tracy, CA, surrounded by other large DCs and open farmland to the N/E. Per rubric tie-break (small-town industrial vs urban) classified Rural.",
+    "railServed": "No rail spur enters the property.",
+    "siteAreaAcres": "68.2 acres derived from the traced perimeter polygon; the truck-yard portion of a larger campus parcel.",
+    "trailersVisible": "~230 trailers counted across east and south drop yards in the captured tight imagery; approximate.",
+    "multiStep": "No clear second checkpoint (scale house / second booth) after the gate; left false."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,113 @@
+{
+  "name": "Amazon SBD2 Fulfillment Center San Bernardino CA",
+  "type": "Fulfillment Center",
+  "coords": { "lat": 34.07280, "lng": -117.28350 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 34.0762, "lng": -117.2800 },
+      { "lat": 34.0708, "lng": -117.2795 },
+      { "lat": 34.0705, "lng": -117.2820 },
+      { "lat": 34.0703, "lng": -117.2858 },
+      { "lat": 34.0745, "lng": -117.2862 },
+      { "lat": 34.0762, "lng": -117.2850 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 34.07505, "lng": -117.27955 },
+      { "lat": 34.07505, "lng": -117.27890 },
+      { "lat": 34.07430, "lng": -117.27890 },
+      { "lat": 34.07430, "lng": -117.27955 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 34.07620, "lng": -117.28150 },
+        { "lat": 34.07620, "lng": -117.28470 },
+        { "lat": 34.07530, "lng": -117.28470 },
+        { "lat": 34.07530, "lng": -117.28150 }
+      ] },
+      { "ring": [
+        { "lat": 34.07470, "lng": -117.28490 },
+        { "lat": 34.07470, "lng": -117.28590 },
+        { "lat": 34.07150, "lng": -117.28560 },
+        { "lat": 34.07150, "lng": -117.28470 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 34.07115, "lng": -117.28100 },
+        { "lat": 34.07115, "lng": -117.28430 },
+        { "lat": 34.07065, "lng": -117.28430 },
+        { "lat": 34.07065, "lng": -117.28100 }
+      ] },
+      { "ring": [
+        { "lat": 34.07520, "lng": -117.28150 },
+        { "lat": 34.07520, "lng": -117.28430 },
+        { "lat": 34.07475, "lng": -117.28430 },
+        { "lat": 34.07475, "lng": -117.28150 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 34.07460, "lng": -117.27960 },
+      { "lat": 34.07460, "lng": -117.28250 },
+      { "lat": 34.07370, "lng": -117.28250 },
+      { "lat": 34.07370, "lng": -117.27960 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 247, "pano": "lCEQhIYK8lAI2ARkJB0yEQ", "hasCoverage": true },
+      "truckGate": { "heading": 246, "pano": "lCEQhIYK8lAI2ARkJB0yEQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 260,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 88.9,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.07280,-117.28350,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "shipRcvSeparate", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Black metal sliding/swing gate across the controlled entrance drive off S Waterman Ave (east side); continuous metal perimeter fence confirmed in Street View along the full Waterman frontage.",
+    "guardShack": "Staffed security building (red/maroon hip roof, multi-window) sits just inside the gate beside the entrance auto-court; visible in satellite z20 and Street View behind the gate.",
+    "remoteGs": "False because a staffed guard building is present; a call-box/kiosk pedestal also sits at the curb cut (belt-and-suspenders), but the booth makes this guarded, not remote.",
+    "postGateStaging": "Large paved auto-court / interior staging plaza inside the gate before docks, with landscaped islands.",
+    "drivewayLong": "Deep gate-to-dock approach across a wide auto court and internal yard roads; easily holds 3+ trucks queued.",
+    "fastLaneOpportunity": "Wide multi-lane gate apron and large auto court with unused paved width to add an express/bypass lane.",
+    "dockDoors": "50+ band; long dock banks on the south and west/north faces of the SBD2 building with trailers backed in. Exact count (~90) is an overhead estimate.",
+    "dropArea": "50+ band; extensive organized trailer-drop rows north (between buildings) and along the west edge.",
+    "shipRcvSeparate": "Dock activity on physically distinct building faces (south bank vs north/west bank) suggests separate ship/receive clusters; medium confidence from overhead only.",
+    "entryExitTogether": "Single consolidated entrance/exit point at the NE auto-court off Waterman; in/out share the same gate group.",
+    "multipleFacilities": "Two large building clusters on the campus (southern solar-roof SBD2 building plus the adjacent northern warehouse) sharing the drop yard between them.",
+    "scale": "No truck scale / weigh pad identified in the truck path.",
+    "railServed": "No rail spur enters the property; nearest rail is not connected.",
+    "siteAreaAcres": "Derived from the traced perimeter polygon (~89 acres) covering the southern building and its dock/drop yards.",
+    "connectivityIssue": "Dense Inland Empire industrial corridor adjacent to I-215/I-10; strong cellular coverage expected."
+  },
+  "method": "deep-audit"
+}

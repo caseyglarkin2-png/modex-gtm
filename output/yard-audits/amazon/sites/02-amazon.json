@@ -1,0 +1,106 @@
+{
+  "name": "Amazon ONT8 Fulfillment Center Moreno Valley CA",
+  "type": "Fulfillment Center",
+  "coords": { "lat": 33.86836, "lng": -117.23708 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 33.87000, "lng": -117.23925 },
+      { "lat": 33.87000, "lng": -117.23490 },
+      { "lat": 33.86672, "lng": -117.23490 },
+      { "lat": 33.86672, "lng": -117.23925 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 33.87000, "lng": -117.23895 },
+      { "lat": 33.87000, "lng": -117.23850 },
+      { "lat": 33.86975, "lng": -117.23850 },
+      { "lat": 33.86975, "lng": -117.23895 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 33.86705, "lng": -117.23900 },
+        { "lat": 33.86705, "lng": -117.23560 },
+        { "lat": 33.86672, "lng": -117.23560 },
+        { "lat": 33.86672, "lng": -117.23900 }
+      ] },
+      { "ring": [
+        { "lat": 33.87000, "lng": -117.23900 },
+        { "lat": 33.87000, "lng": -117.23560 },
+        { "lat": 33.86978, "lng": -117.23560 },
+        { "lat": 33.86978, "lng": -117.23900 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 33.86978, "lng": -117.23900 },
+        { "lat": 33.86978, "lng": -117.23560 },
+        { "lat": 33.86948, "lng": -117.23560 },
+        { "lat": 33.86948, "lng": -117.23900 }
+      ] },
+      { "ring": [
+        { "lat": 33.86734, "lng": -117.23900 },
+        { "lat": 33.86734, "lng": -117.23560 },
+        { "lat": 33.86705, "lng": -117.23560 },
+        { "lat": 33.86705, "lng": -117.23900 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 33.86980, "lng": -117.23925 },
+      { "lat": 33.86980, "lng": -117.23905 },
+      { "lat": 33.86700, "lng": -117.23905 },
+      { "lat": 33.86700, "lng": -117.23925 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 273, "pano": "_XyVu-d1jCMKtlARiIhQzA", "hasCoverage": true },
+      "truckGate": { "heading": 210, "pano": "7VvwH31NgV58HTc4Q3CSmw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 180,
+    "trailersVisible": 120,
+    "trailerParkingCapacity": 350,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 36.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.86836,-117.23708,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "dockDoorCount"],
+  "fieldNotes": {
+    "guardShack": "Walled/fenced truck yard with a controlled pinch-point entrance off the north road (west perimeter drive throat ~33.8697,-117.2386); STOP striping and a small booth-footprint structure beside the inbound lane at the throat. Amazon FCs of this scale staff a guard booth at the inbound truck check-in. Backlit morning Street View partly obscures the booth, so flagged uncertain, but evidence supports guardShack:true over remote check-in.",
+    "truckGate": "Yard is screened by tilt-up concrete walls along the south and west streets and palisade fence on the east; the only truck-side opening is the controlled NW throat off the north road. Open driveway ruled out.",
+    "entryLanes": "Wide entrance apron; estimated ~2 inbound lanes from overhead striping, low confidence.",
+    "fastLaneOpportunity": "Very wide gate apron and deep internal yard provide ample paved width to add an express/bypass lane.",
+    "dockDoors": "Cross-dock FC: long dock-door rows on the building's north and south faces plus a detached south dock structure; honest overhead estimate ~180 doors total, well into the 50+ band.",
+    "shipRcvSeparate": "Distinct dock banks on physically separate building faces (north and south), consistent with separated inbound/outbound flow.",
+    "postGateStaging": "Deep paved yard inside the gate (west perimeter drive + numbered trailer stalls 300+) holds queued trucks well before the dock doors.",
+    "dropArea": "Numbered trailer-storage stalls observed into the 300-365 range across north and south yards; 50+ band.",
+    "railServed": "No rail spur enters the property; nearest rail is unrelated.",
+    "siteAreaAcres": "Derived from perimeter polygon (~365m x ~402m secured property) ≈ 36 acres."
+  },
+  "method": "deep-audit"
+}

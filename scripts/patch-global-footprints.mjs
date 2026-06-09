@@ -124,6 +124,12 @@ const PATCHES = {
     global: null,
     note: 'Stop & Shop is supplied by ADUSA Supply Chain (Ahold Delhaize) out of ~8 Northeast DCs. We audited 7 ADUSA DCs serving Stop & Shop across MA, CT, NY, and PA.',
   },
+  amazon: {
+    scope: 'US',
+    inScope: 110,
+    global: null,
+    note: 'Amazon runs 100+ large US fulfillment centers plus sortation centers, inbound cross-docks, and the Amazon Air hub network, feeding thousands of delivery stations. We audited 16 of the largest freight sites.',
+  },
   kroger: {
     scope: 'US',
     inScope: 33,

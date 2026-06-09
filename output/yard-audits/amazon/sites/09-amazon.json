@@ -1,0 +1,111 @@
+{
+  "name": "Amazon MDW2 Fulfillment Center Joliet IL",
+  "type": "Fulfillment Center",
+  "coords": { "lat": 41.48334, "lng": -88.07153 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 41.4848, "lng": -88.0735 },
+      { "lat": 41.4863, "lng": -88.0701 },
+      { "lat": 41.4815, "lng": -88.0701 },
+      { "lat": 41.4815, "lng": -88.0735 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 41.48605, "lng": -88.07205 },
+      { "lat": 41.48615, "lng": -88.07095 },
+      { "lat": 41.48575, "lng": -88.07090 },
+      { "lat": 41.48565, "lng": -88.07200 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 41.48625, "lng": -88.07355 },
+        { "lat": 41.48630, "lng": -88.07255 },
+        { "lat": 41.48455, "lng": -88.07250 },
+        { "lat": 41.48450, "lng": -88.07350 }
+      ] },
+      { "ring": [
+        { "lat": 41.48620, "lng": -88.07235 },
+        { "lat": 41.48630, "lng": -88.07060 },
+        { "lat": 41.48490, "lng": -88.07055 },
+        { "lat": 41.48485, "lng": -88.07230 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 41.48470, "lng": -88.07310 },
+        { "lat": 41.48475, "lng": -88.07270 },
+        { "lat": 41.48195, "lng": -88.07260 },
+        { "lat": 41.48190, "lng": -88.07300 }
+      ] },
+      { "ring": [
+        { "lat": 41.48385, "lng": -88.07035 },
+        { "lat": 41.48390, "lng": -88.06995 },
+        { "lat": 41.48195, "lng": -88.06990 },
+        { "lat": 41.48190, "lng": -88.07030 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 41.48560, "lng": -88.07230 },
+      { "lat": 41.48565, "lng": -88.07060 },
+      { "lat": 41.48490, "lng": -88.07055 },
+      { "lat": 41.48485, "lng": -88.07225 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 269, "pano": "Cxh1mjZ1NjW5Nb4KuxYKpw", "hasCoverage": true },
+      "truckGate": { "heading": 5, "pano": "hf5GHdqeCiB5yrOdWqgVCQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 140,
+    "trailerParkingCapacity": 260,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 31.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.48334,-88.07153,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Confirmed in z21 satellite (41.4858,-88.0716) and Street View (pano hf5GHdqeCiB5yrOdWqgVCQ, 2025-05): striped barrier line across multiple gate lanes with gate-arm posts, chain-link perimeter fence along Emerald Dr frontage, hatched approach pavement.",
+    "guardShack": "Small white-roofed booth (~1-2 car footprint) sits on the gate island between the entry/exit lanes at ~41.4860,-88.0714, visible in mdw2_gate_final z21 with a dark canopy; classic staffed guard shack beside the barrier.",
+    "remoteGs": "False because a physical guard shack is present at the gate.",
+    "postGateStaging": "Large paved truck court with numbered trailer staging stalls (402-410+ painted) immediately inside the gate, north of the dock face.",
+    "drivewayLong": "Gate-to-dock approach across the north truck court holds well more than 3 trucks of queue depth.",
+    "entryLanes": "Estimated 2 inbound from striped lane markings at the gate; exact split between in/out lanes not fully resolved from overhead.",
+    "exitLanes": "Estimated 2 outbound; entry and exit share the one gate complex (entryExitTogether).",
+    "fastLaneOpportunity": "Wide multi-lane gate apron with unused paved width supports adding an express/bypass lane.",
+    "dockDoors": "Dock doors line both the long west wall and the long east wall with trailers backed in along each; total well over 100 (band 50+).",
+    "dropArea": "Two large drop areas: a herringbone trailer drop yard NW between MDW2 and the neighboring building, plus the numbered staging court north of the building; combined trailer count is in the hundreds (band 50+).",
+    "shipRcvSeparate": "Two distinct dock banks on opposite (west and east) building faces, consistent with separate ship/receive flows; medium confidence from overhead.",
+    "urbanRural": "Edge-of-town CenterPoint Intermodal industrial park; farmland and residential homes immediately south, open grass parcels east. Broader setting is rural/edge-of-metro, so Rural per rubric.",
+    "connectivityIssue": "Large industrial park with carrier coverage; not isolated, so false.",
+    "railServed": "No rail spur enters this parcel (intermodal rail is elsewhere in CenterPoint, not into MDW2).",
+    "siteAreaAcres": "~31.6 acres for the fenced truck-side operation (building + drop yards + truck court + dock aprons); the full deeded parcel including the eastern grass buffer is larger."
+  },
+  "method": "deep-audit"
+}
