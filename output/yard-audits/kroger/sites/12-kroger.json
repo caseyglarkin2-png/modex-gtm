@@ -1,0 +1,94 @@
+{
+  "name": "Kroger Customer Fulfillment Center Monroe OH",
+  "type": "Customer Fulfillment Center (Ocado-automated)",
+  "coords": { "lat": 39.44755, "lng": -84.40615 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 39.44946, "lng": -84.40776 },
+      { "lat": 39.44951, "lng": -84.40508 },
+      { "lat": 39.44855, "lng": -84.40433 },
+      { "lat": 39.44615, "lng": -84.40379 },
+      { "lat": 39.44581, "lng": -84.40433 },
+      { "lat": 39.44588, "lng": -84.40776 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 39.44572, "lng": -84.40460 },
+      { "lat": 39.44572, "lng": -84.40415 },
+      { "lat": 39.44598, "lng": -84.40418 },
+      { "lat": 39.44598, "lng": -84.40463 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 39.44892, "lng": -84.40478 },
+        { "lat": 39.44905, "lng": -84.40455 },
+        { "lat": 39.44758, "lng": -84.40408 },
+        { "lat": 39.44745, "lng": -84.40431 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 39.44910, "lng": -84.40512 },
+        { "lat": 39.44918, "lng": -84.40498 },
+        { "lat": 39.44742, "lng": -84.40448 },
+        { "lat": 39.44734, "lng": -84.40462 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 323, "pano": "jt3VnFFgOWXHsxAO-zZg2w", "hasCoverage": true },
+      "truckGate": { "heading": 0, "pano": "BrJGvc6qhrNY6H6je0-_nw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 18,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 41.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.44755,-84.40615,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "remoteGs"],
+  "fieldNotes": {
+    "truckGate": "Open divided-boulevard entrance off Hamilton Lebanon Rd with a landscaped median and monument sign; no barrier arm, sliding/swing gate, or pinch-point checkpoint at the property line in 2025-07 Street View or 2026 Maxar satellite. Property is ringed by a continuous white perimeter wall/fence and internal one-way painted lane circulation, but the entry itself is uncontrolled.",
+    "guardShack": "No staffed guard booth at the truck entrance. The small white ancillary building inside the SE yard is a maintenance/utility structure beside a fenced screened equipment enclosure (refrigeration/generator/solar grid), not a multi-window guard booth set beside a gate.",
+    "remoteGs": "False because there is no controlled truck gate at all; an automated CFC like this manages dock scheduling via app rather than a physical checkpoint, but no kiosk/call-box is visible to confirm remote check-in.",
+    "postGateStaging": "Wide paved internal yard and circulation roadway between the entrance and the east-face docks gives ample interior holding room.",
+    "drivewayLong": "Long divided entrance boulevard plus deep internal yard can stack well over 3 trucks before the dock face.",
+    "fastLaneOpportunity": "Generous unused paved apron width at the entrance boulevard and across the east yard; room to add an express/bypass lane.",
+    "dockDoors": "Counted ~18-22 dock positions / trailers backed along the east building face at z20; reported as 10-25 band. Single dock cluster, no separate ship/receive banks.",
+    "dropArea": "Two-plus rows of marked angled trailer stalls along the east yard hold ~25-35 trailers without tractors; reported 25-50 band.",
+    "dropYard": "Dedicated marked drop-trailer rows east of the building, separate from the active dock apron.",
+    "urbanRural": "Edge-of-town / rural setting: two-lane Hamilton Lebanon Rd frontage with open farmland directly across the road; broader area is industrial-park-on-farmland, not dense metro.",
+    "scale": "No truck scale / weigh pad visible in the truck path.",
+    "railServed": "No rail spur enters the property.",
+    "siteAreaAcres": "Derived from the traced perimeter polygon (~41 acres of the ~68-acre parcel that is fenced/developed)."
+  },
+  "method": "deep-audit"
+}

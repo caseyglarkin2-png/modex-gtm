@@ -1,0 +1,126 @@
+{
+  "name": "King Soopers Grocery Distribution Center Aurora CO",
+  "type": "Grocery Distribution Center",
+  "coords": { "lat": 39.74440, "lng": -104.77750 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 39.74720, "lng": -104.78090 },
+      { "lat": 39.74730, "lng": -104.77520 },
+      { "lat": 39.74600, "lng": -104.77430 },
+      { "lat": 39.74480, "lng": -104.77410 },
+      { "lat": 39.74360, "lng": -104.77410 },
+      { "lat": 39.74060, "lng": -104.77440 },
+      { "lat": 39.74055, "lng": -104.78030 },
+      { "lat": 39.74300, "lng": -104.78085 },
+      { "lat": 39.74540, "lng": -104.78100 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 39.74532, "lng": -104.77478 },
+      { "lat": 39.74530, "lng": -104.77432 },
+      { "lat": 39.74478, "lng": -104.77430 },
+      { "lat": 39.74480, "lng": -104.77476 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 39.74470, "lng": -104.77432 },
+        { "lat": 39.74470, "lng": -104.77352 },
+        { "lat": 39.74352, "lng": -104.77352 },
+        { "lat": 39.74352, "lng": -104.77432 }
+      ] },
+      { "ring": [
+        { "lat": 39.74720, "lng": -104.77860 },
+        { "lat": 39.74720, "lng": -104.77470 },
+        { "lat": 39.74628, "lng": -104.77470 },
+        { "lat": 39.74628, "lng": -104.77860 }
+      ] },
+      { "ring": [
+        { "lat": 39.74310, "lng": -104.77470 },
+        { "lat": 39.74310, "lng": -104.77380 },
+        { "lat": 39.74095, "lng": -104.77400 },
+        { "lat": 39.74095, "lng": -104.77490 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 39.74360, "lng": -104.78010 },
+        { "lat": 39.74360, "lng": -104.77470 },
+        { "lat": 39.74345, "lng": -104.77470 },
+        { "lat": 39.74345, "lng": -104.78010 }
+      ] },
+      { "ring": [
+        { "lat": 39.74250, "lng": -104.78010 },
+        { "lat": 39.74250, "lng": -104.77470 },
+        { "lat": 39.74235, "lng": -104.77470 },
+        { "lat": 39.74235, "lng": -104.78010 }
+      ] },
+      { "ring": [
+        { "lat": 39.74600, "lng": -104.78060 },
+        { "lat": 39.74600, "lng": -104.77640 },
+        { "lat": 39.74585, "lng": -104.77640 },
+        { "lat": 39.74585, "lng": -104.78060 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 250, "pano": "", "hasCoverage": true },
+      "truckGate": { "heading": 302, "pano": "", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 320,
+    "trailersVisible": 240,
+    "trailerParkingCapacity": 420,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 102.2,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.74440,-104.77750,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "railServed"],
+  "fieldNotes": {
+    "truckGate": "Street View (Tower Rd pano, 2023-05) shows a controlled gate: brick guard booth between channelized lanes, STOP signs both directions, yellow jersey-barrier islands forming a checkpoint pinch-point.",
+    "guardShack": "Brick masonry guard house with wraparound windows, peaked roof and a camera/comms mast on top, set between the in and out lanes at the Tower Rd entrance. Clearly a staffed booth.",
+    "remoteGs": "False - a staffed guard shack is present.",
+    "postGateStaging": "Large paved yard between the gate and the dock faces gives ample interior queue room before docks.",
+    "drivewayLong": "Deep interior approach from the gate across the campus apron easily holds 3+ trucks.",
+    "entryExitTogether": "Single gate complex on Tower Rd handles both directions (booth flanked by an in lane and an out lane).",
+    "entryLanes": "~1 inbound lane at the booth from overhead + Street View; flagged uncertain.",
+    "exitLanes": "~1 outbound lane; flagged uncertain.",
+    "fastLaneOpportunity": "Wide paved gate apron and multiple barrier-defined lanes leave room to add an express/bypass lane.",
+    "dockDoors": "Multiple full-size DC buildings each with long banks of dock doors on opposing faces; campus total well into the hundreds -> 50+.",
+    "dropArea": "Extensive trailer drop yards along Tower Rd and between buildings hold many bobtail-dropped trailers -> 50+.",
+    "shipRcvSeparate": "Dock banks on opposite faces of the large DC buildings indicate physically separate shipping/receiving clusters.",
+    "multipleFacilities": "Campus of 4 large DC buildings (north automated DC w/ rooftop solar, central DC, the very long south DC, plus a smaller warehouse) under one fenced King Soopers/Kroger operation.",
+    "dropYard": "Dedicated trailer-storage lots full of parked trailers separate from active dock staging.",
+    "railServed": "A through rail corridor runs along the north edge but no spur enters any building; marked false, flagged uncertain.",
+    "urbanRural": "Within the Denver-Aurora metro; residential and industrial development on all sides.",
+    "siteAreaAcres": "~102 acres from the traced perimeter polygon enclosing all four DC buildings and their yards.",
+    "streetViewMeta": "Only one Street View pano exists within range (Tower Rd at the gate, 39.74490,-104.77424, captured 2023-05); used for both perimeter and truckGate with computed headings."
+  },
+  "method": "deep-audit"
+}

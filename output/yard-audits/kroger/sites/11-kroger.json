@@ -1,0 +1,129 @@
+{
+  "name": "Smith's Grocery Distribution Center Layton UT",
+  "type": "Grocery Distribution Center",
+  "coords": {
+    "lat": 41.0648,
+    "lng": -111.9838
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        { "lat": 41.067104, "lng": -111.986444 },
+        { "lat": 41.067156, "lng": -111.980916 },
+        { "lat": 41.065835, "lng": -111.980607 },
+        { "lat": 41.062574, "lng": -111.981397 },
+        { "lat": 41.062522, "lng": -111.985173 },
+        { "lat": 41.062522, "lng": -111.986444 }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        { "lat": 41.065007, "lng": -111.986444 },
+        { "lat": 41.065059, "lng": -111.98586 },
+        { "lat": 41.064696, "lng": -111.985826 },
+        { "lat": 41.064645, "lng": -111.986444 }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          { "lat": 41.066068, "lng": -111.985379 },
+          { "lat": 41.066068, "lng": -111.982701 },
+          { "lat": 41.065162, "lng": -111.982701 },
+          { "lat": 41.065162, "lng": -111.985379 }
+        ]
+      },
+      {
+        "ring": [
+          { "lat": 41.063765, "lng": -111.983457 },
+          { "lat": 41.063816, "lng": -111.981465 },
+          { "lat": 41.062677, "lng": -111.981397 },
+          { "lat": 41.062626, "lng": -111.983388 }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          { "lat": 41.066586, "lng": -111.986409 },
+          { "lat": 41.06669, "lng": -111.983113 },
+          { "lat": 41.066327, "lng": -111.983079 },
+          { "lat": 41.066224, "lng": -111.986375 }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 101,
+        "pano": "CgSbthrtbapZsvp6GChSMA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 95,
+        "pano": "CgSbthrtbapZsvp6GChSMA",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 130,
+    "trailersVisible": 220,
+    "trailerParkingCapacity": 350,
+    "truckGateCount": 2,
+    "buildingCount": 6,
+    "siteAreaAcres": 58,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.06480,-111.98380,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "scale",
+    "railServed",
+    "truckGateCount",
+    "trailerParkingCapacity"
+  ],
+  "fieldNotes": {
+    "site": "Smith's (Kroger division) Layton regional grocery distribution campus on the east side of N Sugar St, between the BNSF/UTA rail corridor (NE/E) and a residential subdivision (S). Confirmed by the 'Smith's' wordmark on the white-and-red warehouse and Smith's-branded trailers in Street View.",
+    "truckGate": "FALSE. The main truck/yard entrance off N Sugar St (~41.0651, -111.9858) is a wide, open paved driveway with NO barrier arm and NO sliding/swing gate across the truck lane (Street View 2022-11, multiple headings looking E down the drive). The campus is ringed with chain-link fence and trailers along the Sugar St frontage, but the entry drive itself is uncontrolled. A secondary office/shop driveway further south (~41.0635) is also open.",
+    "guardShack": "FALSE. No staffed guard booth set astride the entry lane in any Street View frame; a small reddish sign/structure sits beside the drive but is not a multi-window booth controlling traffic.",
+    "remoteGs": "FALSE because there is no truck gate at all (gate must exist for remoteGs).",
+    "postGateStaging": "Large interior paved yard between the Sugar St entrance and the dock faces gives ample on-site queuing room before docks.",
+    "drivewayLong": "Deep gate-to-dock approach across the central yard easily holds 3+ trucks.",
+    "backupSensitive": "FALSE. Expansive interior paved yard absorbs any inbound queue; trucks do not stack onto Sugar St.",
+    "dockDoors": "50+. Long continuous dock-door rows with trailers backed in along the south faces of the north warehouses plus the south/refrigerated buildings; total well over 100 doors across the multi-building campus (estimate ~130).",
+    "dropArea": "50+. Hundreds of trailers parked in marked rows across the central drop yard and a second south drop yard; estimate ~220 trailers visible, ~350 capacity.",
+    "shipRcvSeparate": "Distinct dock banks on multiple separate buildings/faces (north grocery warehouse vs south refrigerated building) indicate physically separated ship/receive operations.",
+    "multipleFacilities": "Campus of ~6 distinct large buildings (north solar-roof warehouses, south refrigerated DC, central/SW shop and office structures).",
+    "urbanRural": "Urban — within the Layton / Salt Lake City metro industrial fabric, immediately bordered by a residential subdivision to the south and dense industrial parks to the west.",
+    "railServed": "Mainline rail (BNSF/UTA corridor) runs diagonally along the NE/E edge of the property, but no clear spur enters the yard in the imagery; marked FALSE / uncertain.",
+    "scale": "No truck scale / weigh pad resolved in the imagery; flagged uncertain.",
+    "truckGateCount": "Two open vehicle entrances off N Sugar St (main yard drive ~41.0651 and a southern office/shop drive ~41.0635); neither is a controlled gate.",
+    "siteAreaAcres": "~58 acres for the fenced operational campus derived from the perimeter polygon (bounded W by Sugar St, E by the rail corridor, S by residential)."
+  },
+  "method": "deep-audit"
+}

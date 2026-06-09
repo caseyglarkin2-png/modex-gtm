@@ -1,0 +1,85 @@
+{
+  "name": "Kroger Customer Fulfillment Center Dallas TX",
+  "type": "Customer Fulfillment Center (Ocado-automated)",
+  "coords": { "lat": 32.63794, "lng": -96.75375 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 32.63965, "lng": -96.75405 },
+      { "lat": 32.63915, "lng": -96.75250 },
+      { "lat": 32.63770, "lng": -96.75100 },
+      { "lat": 32.63585, "lng": -96.75270 },
+      { "lat": 32.63545, "lng": -96.75355 },
+      { "lat": 32.63600, "lng": -96.75545 },
+      { "lat": 32.63790, "lng": -96.75590 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 32.63565, "lng": -96.75405 },
+      { "lat": 32.63560, "lng": -96.75345 },
+      { "lat": 32.63635, "lng": -96.75360 },
+      { "lat": 32.63638, "lng": -96.75420 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 32.63635, "lng": -96.75330 },
+        { "lat": 32.63600, "lng": -96.75250 },
+        { "lat": 32.63700, "lng": -96.75175 },
+        { "lat": 32.63735, "lng": -96.75255 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 32.63700, "lng": -96.75470 },
+        { "lat": 32.63815, "lng": -96.75560 },
+        { "lat": 32.63790, "lng": -96.75600 },
+        { "lat": 32.63675, "lng": -96.75510 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 32.63905, "lng": -96.75400 },
+      { "lat": 32.63880, "lng": -96.75300 },
+      { "lat": 32.63820, "lng": -96.75330 },
+      { "lat": 32.63845, "lng": -96.75430 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 317, "pano": "5qHwwndjarKOefd_cm6WYg", "hasCoverage": true },
+      "truckGate": { "heading": 0, "pano": "JN2dM160Jh-ODXOFYRZS_A", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 20,
+    "trailersVisible": 6,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 33.8,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.63794,-96.75375,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "dropArea", "dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Main entrance off the south access road (Cleveland Rd) is an open, uncontrolled driveway gap in the perimeter fence. Confirmed in Street View (pano JN2dM160Jh-ODXOFYRZS_A, 2026-04, heading 0): wide paved opening, a Kroger monument sign on the right, rows of blue Kroger Delivery vans inside, no barrier arm and no checkpoint pinch-point at the property line.",
+    "guardShack": "No staffed booth at the entrance in any Street View heading along the south road or Telephone Rd. The only small structures on site are utility/MEP buildings (generator/refrigeration plant) deep in the SW truck court, not a gatehouse.",
+    "remoteGs": "False because there is no controlled truck gate at all.",
+    "dropArea": "Site outbound is via small Kroger Delivery vans (this is an e-grocery CFC, not a trailer-heavy DC). The south van staging lot holds ~20-30 marked van stalls; banded 10-25. Few full trailers (drop trailers without tractor) seen.",
+    "dropYard": "No dedicated trailer-storage lot; the lots hold delivery vans, not parked trailers.",
+    "dockDoors": "Modest dock bank along the building's west/southwest wall (~15-25 doors estimated from z20-21; a couple of trailers/box trucks backed in). Automated CFCs receive bulk inbound by trailer and ship by van, so dock count is lower than a conventional 350k sq ft DC.",
+    "entryLanes": "Wide open entrance apron; estimated ~2 inbound / 1 outbound at the street, but lanes are unstriped at the property line so this is approximate.",
+    "urbanRural": "South Dallas (75241), inside the dense I-20 logistics corridor near other large DCs; clearly Urban.",
+    "scale": "No truck scale / weigh pad visible in the truck path.",
+    "siteAreaAcres": "33.8 acres is the fenced/paved operational footprint traced from the perimeter polygon; press reporting cites a 55-acre tract (the balance is undeveloped wooded land to the west, outside the operating geofence).",
+    "railServed": "No rail spur enters the property."
+  },
+  "method": "deep-audit"
+}

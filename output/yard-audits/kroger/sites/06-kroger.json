@@ -1,0 +1,103 @@
+{
+  "name": "Ralphs/Food4Less Grocery Distribution Center Compton CA",
+  "type": "Grocery Distribution Center",
+  "coords": { "lat": 33.871300, "lng": -118.239800 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 33.872550, "lng": -118.241300 },
+      { "lat": 33.872350, "lng": -118.235900 },
+      { "lat": 33.869850, "lng": -118.236100 },
+      { "lat": 33.870000, "lng": -118.241500 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 33.871400, "lng": -118.237000 },
+      { "lat": 33.871380, "lng": -118.236000 },
+      { "lat": 33.870750, "lng": -118.236050 },
+      { "lat": 33.870770, "lng": -118.237050 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 33.871650, "lng": -118.237200 },
+        { "lat": 33.871600, "lng": -118.236000 },
+        { "lat": 33.870100, "lng": -118.236150 },
+        { "lat": 33.870150, "lng": -118.237350 }
+      ] },
+      { "ring": [
+        { "lat": 33.870850, "lng": -118.240800 },
+        { "lat": 33.870830, "lng": -118.240100 },
+        { "lat": 33.869950, "lng": -118.240180 },
+        { "lat": 33.869970, "lng": -118.240880 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 33.871800, "lng": -118.240850 },
+        { "lat": 33.871790, "lng": -118.240350 },
+        { "lat": 33.871620, "lng": -118.240360 },
+        { "lat": 33.871630, "lng": -118.240860 }
+      ] },
+      { "ring": [
+        { "lat": 33.870250, "lng": -118.240950 },
+        { "lat": 33.870240, "lng": -118.240050 },
+        { "lat": 33.870080, "lng": -118.240060 },
+        { "lat": 33.870090, "lng": -118.240960 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 277, "pano": "u9ks4NWck1522ecgs_UfFg", "hasCoverage": true },
+      "truckGate": { "heading": 261, "pano": "IWSCxU0z7InXt1--9qD82g", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 220,
+    "truckGateCount": 1,
+    "buildingCount": 5,
+    "siteAreaAcres": 34.8,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.8713,-118.2398,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 3,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "exitLanes", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Signalized truck entrance off S Wilmington Ave; multi-lane gated apron with marked inbound/outbound lanes, perimeter fencing on both sides, confirmed in Street View (panos u9ks4NWck1522ecgs_UfFg and IWSCxU0z7InXt1--9qD82g).",
+    "guardShack": "Small white square guard booth (~1-2 stall footprint) set in the middle of the entry lanes under a lane canopy, visible in z20 satellite and Street View. Classic staffed check-in booth.",
+    "fastLaneOpportunity": "Wide gate apron with multiple lanes and unused paved width; room for an express/bypass lane.",
+    "dockDoors": "1M+ sqft multi-building DC; dock banks on multiple building faces (west face ~12, SW faces 20+, south face ~15, plus interior bays). 90 is a conservative honest estimate across all faces; band 50+.",
+    "dropArea": "Extensive trailer-storage lots: dense organized rows in the east yard (60+) and SW rows (30+); capacity well over 50, band 50+.",
+    "trailersVisible": "Approximate overhead count across captured imagery (east yard + SW rows + docks); ~180.",
+    "scale": "No truck scale/weigh pad clearly identified in imagery; flagged uncertain. Possible scale structure near gate not confirmed.",
+    "shipRcvSeparate": "Multiple distinct dock banks on different building faces suggest separate ship/receive clusters; medium confidence.",
+    "exitLanes": "Lane count estimated from gate imagery (~3 in / ~2 out); approximate.",
+    "multipleFacilities": "Campus of multiple large DC buildings plus office and ancillary structures (cooling tower house, fuel island) within one gated property.",
+    "urbanRural": "Dense industrial fabric of Compton/Rancho Dominguez, immediately south of CA-91 freeway; clearly Urban.",
+    "railServed": "No rail spur enters the property; urban infill site."
+  },
+  "method": "deep-audit"
+}

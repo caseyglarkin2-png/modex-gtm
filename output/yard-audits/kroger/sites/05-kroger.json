@@ -1,0 +1,90 @@
+{
+  "name": "Kroger Grocery Distribution Center Keller TX",
+  "type": "Grocery Distribution Center",
+  "coords": { "lat": 32.91320, "lng": -97.26340 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 32.91585, "lng": -97.26830 },
+      { "lat": 32.91560, "lng": -97.25880 },
+      { "lat": 32.91240, "lng": -97.25880 },
+      { "lat": 32.91200, "lng": -97.26230 },
+      { "lat": 32.91120, "lng": -97.26560 },
+      { "lat": 32.91120, "lng": -97.26830 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 32.91230, "lng": -97.26645 },
+      { "lat": 32.91230, "lng": -97.26565 },
+      { "lat": 32.91150, "lng": -97.26565 },
+      { "lat": 32.91150, "lng": -97.26645 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 32.91580, "lng": -97.26825 },
+        { "lat": 32.91560, "lng": -97.26430 },
+        { "lat": 32.91240, "lng": -97.26430 },
+        { "lat": 32.91240, "lng": -97.26825 }
+      ] },
+      { "ring": [
+        { "lat": 32.91230, "lng": -97.26825 },
+        { "lat": 32.91230, "lng": -97.26680 },
+        { "lat": 32.91130, "lng": -97.26680 },
+        { "lat": 32.91130, "lng": -97.26825 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 32.91262, "lng": -97.26560 },
+        { "lat": 32.91258, "lng": -97.26010 },
+        { "lat": 32.91230, "lng": -97.26010 },
+        { "lat": 32.91234, "lng": -97.26560 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 32.91240, "lng": -97.26690 },
+      { "lat": 32.91240, "lng": -97.26560 },
+      { "lat": 32.91140, "lng": -97.26560 },
+      { "lat": 32.91140, "lng": -97.26690 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 0, "pano": "Kcq5JcP7UF86HrSZkcOoSA", "hasCoverage": true },
+      "truckGate": { "heading": 26, "pano": "rDgwO4hHMhRZ7I5EtCZXDg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 260,
+    "trailerParkingCapacity": 350,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 98.1,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.91320,-97.26340,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["shipRcvSeparate", "entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Staffed check-in guardhouse with drive-through canopy sits ~150m inside the entrance off Kroger Dr, controlling the truck lanes (confirmed in Street View 2024-12 and z20 satellite). Entrance from the public arterial is open but all trucks funnel through the guardhouse checkpoint.",
+    "guardShack": "Tan canopy-roofed booth in the median between inbound/outbound truck lanes at ~32.9119,-97.2661; multi-side windows, ~1-2 vehicle footprint, drive-through canopy. Clearly a staffed guard/check-in shack, not the main office.",
+    "fastLaneOpportunity": "Very wide paved gate apron with substantial unused width around the guardhouse; ample room to add an express/bypass lane.",
+    "shipRcvSeparate": "Long dock bank on the south face plus a separate dock cluster at the SE corner and along the west building face; likely separate ship/receive banks but not definitively confirmed from overhead (medium confidence).",
+    "dropArea": "Massive dedicated trailer drop yard fills the entire north/northwest of the site with hundreds of parked trailers in rows.",
+    "buildingCount": "Main warehouse (very large, tan/white roof), an attached/adjacent 2-story corporate office on the south frontage, and a separate maintenance/fuel building within the west drop yard (~32.9128,-97.2674).",
+    "dockDoorCount": "Estimate from the long south dock face + SE bank; building south wall runs ~650m. Approximate.",
+    "entryLanes": "Inbound/outbound lanes split around the guardhouse booth; ~2 each, estimated from overhead.",
+    "urbanRural": "Embedded in dense Fort Worth/Keller suburban metro fabric, surrounded on north and west by large residential subdivisions.",
+    "railServed": "No rail spur visible entering the property.",
+    "siteAreaAcres": "Derived from the perimeter polygon (~98 acres), traced inside the fence/buffer lines."
+  },
+  "method": "deep-audit"
+}

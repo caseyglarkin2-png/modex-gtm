@@ -1,0 +1,102 @@
+{
+  "name": "Fred Meyer Grocery Distribution Center Puyallup WA",
+  "type": "Grocery Distribution Center",
+  "coords": { "lat": 47.20985, "lng": -122.29855 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 47.21175, "lng": -122.30130 },
+      { "lat": 47.21185, "lng": -122.29700 },
+      { "lat": 47.21010, "lng": -122.29560 },
+      { "lat": 47.20840, "lng": -122.29615 },
+      { "lat": 47.20810, "lng": -122.29870 },
+      { "lat": 47.20905, "lng": -122.30015 },
+      { "lat": 47.21010, "lng": -122.30120 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 47.20905, "lng": -122.29940 },
+      { "lat": 47.20905, "lng": -122.29855 },
+      { "lat": 47.20855, "lng": -122.29855 },
+      { "lat": 47.20855, "lng": -122.29940 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 47.21010, "lng": -122.30010 },
+        { "lat": 47.21015, "lng": -122.29680 },
+        { "lat": 47.20890, "lng": -122.29655 },
+        { "lat": 47.20890, "lng": -122.30000 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 47.21035, "lng": -122.30095 },
+        { "lat": 47.21048, "lng": -122.29615 },
+        { "lat": 47.21018, "lng": -122.29610 },
+        { "lat": 47.21005, "lng": -122.30090 }
+      ] },
+      { "ring": [
+        { "lat": 47.20985, "lng": -122.29630 },
+        { "lat": 47.20865, "lng": -122.29615 },
+        { "lat": 47.20860, "lng": -122.29655 },
+        { "lat": 47.20980, "lng": -122.29670 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 26, "pano": "", "hasCoverage": true },
+      "truckGate": { "heading": 36, "pano": "", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 95,
+    "trailersVisible": 240,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 34.1,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@47.20985,-122.29855,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "shipRcvSeparate", "multiStep"],
+  "fieldNotes": {
+    "truckGate": "Single controlled truck entrance off the SW signalized intersection on Valley Ave NW; the drop yard is fully fenced off from the public road and adjacent car lots by a landscaped buffer, and a yard-jockey/spotter truck is visible working the drop yard (controlled operation).",
+    "guardShack": "No guard booth positively visible from satellite or Street View; the check-in point is set back from the public road behind a tree/landscape buffer so it cannot be confirmed from available imagery. Marked false on visible evidence and flagged for review.",
+    "remoteGs": "Set true on the rule (gate present, no visible guard shack); could flip to false if a setback guard booth exists at the internal checkpoint.",
+    "postGateStaging": "Deep paved truck court between the gate and the dock faces gives ample internal queue room.",
+    "drivewayLong": "Internal approach from the gate to the docks can hold well more than 3 trucks.",
+    "fastLaneOpportunity": "Wide entrance apron and large internal truck court provide room to add an express/bypass lane.",
+    "dockDoors": "Continuous dock face along the entire south wall of the main building (~50-60 doors) plus a second dock bank on the west face of the second building; total well into the 50+ band.",
+    "dropArea": "Very large dedicated trailer drop yard south/between the two buildings, hundreds of trailers in rows (50+ band).",
+    "shipRcvSeparate": "Two distinct dock banks on different building faces (main south wall + second building west face) suggest separate ship/receive clusters; inferred, flagged.",
+    "multipleFacilities": "Two large connected DC buildings sharing one fenced truck court / drop yard = campus.",
+    "railServed": "A through rail corridor (BNSF/Tacoma line) runs along the east edge of the property but no spur enters either building; not rail-served.",
+    "urbanRural": "Inside the Tacoma-Puyallup metro industrial fabric, dense surrounding development (dealerships, warehouses, retail) = Urban.",
+    "entryLanes": "Estimated 1 inbound from the entrance geometry; not separately countable from imagery.",
+    "exitLanes": "Estimated 1 outbound; entry and exit share the same gate point."
+  },
+  "method": "deep-audit"
+}

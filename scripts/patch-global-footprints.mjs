@@ -124,6 +124,12 @@ const PATCHES = {
     global: null,
     note: 'Stop & Shop is supplied by ADUSA Supply Chain (Ahold Delhaize) out of ~8 Northeast DCs. We audited 7 ADUSA DCs serving Stop & Shop across MA, CT, NY, and PA.',
   },
+  kroger: {
+    scope: 'US',
+    inScope: 33,
+    global: null,
+    note: 'Kroger runs ~33 distribution centers across its banners (Kroger, Ralphs, Fred Meyer, King Soopers, Fry\'s, Smith\'s) plus a growing network of Ocado-automated CFCs, feeding ~2,700 stores. We audited 18 representative facilities.',
+  },
   crowley: {
     scope: 'US',
     inScope: 40,

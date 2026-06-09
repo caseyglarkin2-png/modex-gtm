@@ -1,0 +1,84 @@
+{
+  "name": "Kroger Customer Fulfillment Center Romulus MI",
+  "type": "Customer Fulfillment Center (Ocado-automated)",
+  "coords": { "lat": 42.18820, "lng": -83.38120 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 42.189239, "lng": -83.383788 },
+      { "lat": 42.189302, "lng": -83.381556 },
+      { "lat": 42.189302, "lng": -83.380557 },
+      { "lat": 42.188709, "lng": -83.380156 },
+      { "lat": 42.187479, "lng": -83.380156 },
+      { "lat": 42.187479, "lng": -83.383673 },
+      { "lat": 42.188200, "lng": -83.383845 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 42.187628, "lng": -83.381493 },
+      { "lat": 42.187628, "lng": -83.381250 },
+      { "lat": 42.187533, "lng": -83.381250 },
+      { "lat": 42.187533, "lng": -83.381493 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 42.187395, "lng": -83.383158 },
+        { "lat": 42.187395, "lng": -83.380900 },
+        { "lat": 42.187183, "lng": -83.380900 },
+        { "lat": 42.187183, "lng": -83.383158 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 42.187882, "lng": -83.382557 },
+        { "lat": 42.187924, "lng": -83.380585 },
+        { "lat": 42.187691, "lng": -83.380585 },
+        { "lat": 42.187649, "lng": -83.382557 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 42.187649, "lng": -83.382557 },
+      { "lat": 42.187691, "lng": -83.380585 },
+      { "lat": 42.187479, "lng": -83.380585 },
+      { "lat": 42.187479, "lng": -83.382557 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 51, "pano": "sgX8pqz1jq_xVFW3GlG3ag", "hasCoverage": true },
+      "truckGate": { "heading": 75, "pano": "2onzkvUC-Pcp9yu11M9cGQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 10,
+    "trailersVisible": 16,
+    "trailerParkingCapacity": 24,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 14.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.18820,-83.38120,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "0-10", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "dropArea"],
+  "fieldNotes": {
+    "facilityId": "Confirmed as the 135,000 sq ft Kroger/Ocado CFC at 15675 Wahrman Rd (the COMPACT west building with the tall automated 'hive' roof and 250-stall employee lot), NOT the much larger separate Kroger/Penske distribution building (~16005 Wahrman) immediately to the east, which is a different property.",
+    "truckGate": "Controlled internal truck gate: a small guard booth sits inside a fenced island at the mouth of the south dock yard (approx 42.18758,-83.38137), pinching the truck path between the south perimeter/drop lot and the dock apron.",
+    "guardShack": "~1-2 vehicle-footprint white booth in the fenced island with a vehicle parked beside it; classic staffed gatehouse, not the main building.",
+    "fastLaneOpportunity": "Very wide multi-lane entrance apron off Wahrman Rd and a large open paved yard give ample room for an express/bypass lane.",
+    "dockDoors": "South face shows roughly 8-10 dock positions with several trailers backed in; small automated CFC ships heavily via vans/box trucks, so dock count is modest.",
+    "dropArea": "Trailers parked without tractors along the south perimeter strip; counted ~16 trailers, capacity ~24 -> band 10-25 (medium confidence).",
+    "entryLanes": "Single inbound lane at the booth; exit single lane. Lane count inferred from imagery, not certain.",
+    "urbanRural": "Edge-of-town industrial park near Detroit Metro Airport, bordered by woods/open land; per rubric (when torn choose Rural) classified Rural.",
+    "buildingCount": "Main CFC plus one small attached/adjacent annex building on the north side = 2; the large DC to the east is excluded as a separate property.",
+    "railServed": "No rail spur runs into the property."
+  },
+  "method": "deep-audit"
+}

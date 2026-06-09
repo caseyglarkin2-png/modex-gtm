@@ -1,0 +1,169 @@
+{
+  "account": "The Kroger Co.",
+  "generatedAt": "2026-06-09",
+  "facilityCount": 18,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Kroger Great Lakes Grocery Distribution Center Delaware OH",
+      "city": "Delaware",
+      "state": "OH",
+      "type": "Grocery Distribution Center",
+      "address": "2000 Nutter Farm Ln, Delaware, OH 43015",
+      "source": "Delaware Area Chamber of Commerce listing + Yelp/Waze 'Kroger Great Lakes Distribution Center' at 2000 Nutter Farm Ln"
+    },
+    {
+      "idx": 2,
+      "name": "Kroger Grocery Distribution Center Indianapolis IN",
+      "city": "Indianapolis",
+      "state": "IN",
+      "type": "Grocery Distribution Center",
+      "address": "7025 English Ave, Indianapolis, IN 46219",
+      "source": "Waze place 'Kroger Distribution Center, 7025 English Ave, Indianapolis'"
+    },
+    {
+      "idx": 3,
+      "name": "Kroger Grocery Distribution Center Shelbyville IN",
+      "city": "Shelbyville",
+      "state": "IN",
+      "type": "Grocery Distribution Center",
+      "address": "4301 N County Rd 125 W, Shelbyville, IN 46176",
+      "source": "Loc8NearMe/Waze/TruckMap 'Kroger Distribution / Warehouse' at 4301 County Rd 125 W"
+    },
+    {
+      "idx": 4,
+      "name": "Kroger Grocery Distribution Center Nashville TN",
+      "city": "Nashville",
+      "state": "TN",
+      "type": "Grocery Distribution Center",
+      "address": "1116 Polk Ave, Nashville, TN 37210",
+      "source": "Chamber of Commerce business directory 'Kroger Distribution Center' at 1116 Polk Ave"
+    },
+    {
+      "idx": 5,
+      "name": "Kroger Grocery Distribution Center Keller TX",
+      "city": "Keller",
+      "state": "TX",
+      "type": "Grocery Distribution Center",
+      "address": "5801 Kroger Dr, Keller, TX 76244",
+      "source": "TruckMap 'Kroger Distribution Center Warehouse, 5801 Kroger Dr, Keller TX' + Facebook page"
+    },
+    {
+      "idx": 6,
+      "name": "Ralphs/Food4Less Grocery Distribution Center Compton CA",
+      "city": "Compton",
+      "state": "CA",
+      "type": "Grocery Distribution Center",
+      "address": "1100 W Artesia Blvd, Compton, CA 90220",
+      "source": "Waze place 'Ralphs/Food4Less/Kroger Distribution Center, 1100 W Artesia Blvd, Compton' (Kroger SoCal division)"
+    },
+    {
+      "idx": 7,
+      "name": "Fred Meyer Grocery Distribution Center Clackamas OR",
+      "city": "Clackamas",
+      "state": "OR",
+      "type": "Grocery Distribution Center",
+      "address": "11500 SE Hwy 212, Clackamas, OR 97015",
+      "source": "Yelp/Loc8NearMe 'Fred Meyer Distribution Center, 11500 SE Hwy 212' (Kroger Fred Meyer division)"
+    },
+    {
+      "idx": 8,
+      "name": "Fred Meyer Grocery Distribution Center Puyallup WA",
+      "city": "Puyallup",
+      "state": "WA",
+      "type": "Grocery Distribution Center",
+      "address": "349 Valley Ave NW, Puyallup, WA 98371",
+      "source": "TruckMap 'Fred Meyer Distribution Center, 349 Valley Ave NW, Puyallup WA' + LinkedIn company page"
+    },
+    {
+      "idx": 9,
+      "name": "King Soopers Grocery Distribution Center Aurora CO",
+      "city": "Aurora",
+      "state": "CO",
+      "type": "Grocery Distribution Center",
+      "address": "1933 Tower Rd, Aurora, CO 80011",
+      "source": "BusinessYab/Waze 'King Soopers Distribution Center, 1933 Tower Rd, Aurora' (Kroger King Soopers division)"
+    },
+    {
+      "idx": 10,
+      "name": "Fry's Southwest Grocery Distribution Center Tolleson AZ",
+      "city": "Tolleson",
+      "state": "AZ",
+      "type": "Grocery Distribution Center",
+      "address": "500 S 99th Ave, Tolleson, AZ 85353",
+      "source": "Yelp 'Fry's Food Stores of Arizona, 500 S 99th Ave, Tolleson' + YellowPages 'Frys/Krogers Southwest Distribution Center, Tolleson'"
+    },
+    {
+      "idx": 11,
+      "name": "Smith's Grocery Distribution Center Layton UT",
+      "city": "Layton",
+      "state": "UT",
+      "type": "Grocery Distribution Center",
+      "address": "500 N Sugar St, Layton, UT 84041",
+      "source": "Waze/Chamber of Commerce 'Smith's Layton Distribution Center, 500 N Sugar St' (Kroger Smith's division)"
+    },
+    {
+      "idx": 12,
+      "name": "Kroger Customer Fulfillment Center Monroe OH",
+      "city": "Monroe",
+      "state": "OH",
+      "type": "Customer Fulfillment Center",
+      "address": "6266 Hamilton Lebanon Rd, Monroe, OH 45050",
+      "source": "Kroger.com Ocado FC store page + Journal-News reporting on Kroger/Ocado $55M Monroe CFC"
+    },
+    {
+      "idx": 13,
+      "name": "Kroger Customer Fulfillment Center Forest Park GA",
+      "city": "Forest Park",
+      "state": "GA",
+      "type": "Customer Fulfillment Center",
+      "address": "2000 Anvil Block Rd, Forest Park, GA 30297",
+      "source": "Kroger.com Atlanta loyalty-fulfillment page + Kroger/Ocado Clayton County press release (Gillem Logistics Center)"
+    },
+    {
+      "idx": 14,
+      "name": "Kroger Customer Fulfillment Center Pleasant Prairie WI",
+      "city": "Pleasant Prairie",
+      "state": "WI",
+      "type": "Customer Fulfillment Center",
+      "address": "9091 88th Ave, Pleasant Prairie, WI 53158",
+      "source": "Kroger IR / Kenosha News reporting on 6th Kroger-Ocado CFC at 9091 88th Ave"
+    },
+    {
+      "idx": 15,
+      "name": "Kroger Customer Fulfillment Center Aurora CO",
+      "city": "Aurora",
+      "state": "CO",
+      "type": "Customer Fulfillment Center",
+      "address": "6125 N Jackson Gap Way, Aurora, CO 80019",
+      "source": "Kroger IR / Supermarket News reporting on Denver-metro Kroger-Ocado CFC at 6125 N Jackson Gap Way"
+    },
+    {
+      "idx": 16,
+      "name": "Kroger Customer Fulfillment Center Groveland FL",
+      "city": "Groveland",
+      "state": "FL",
+      "type": "Customer Fulfillment Center",
+      "address": "7925 American Way, Groveland, FL 34736",
+      "source": "Kroger/Ocado central Florida CFC press release (US-27 & American Way) + FOX 35 Orlando reporting"
+    },
+    {
+      "idx": 17,
+      "name": "Kroger Customer Fulfillment Center Romulus MI",
+      "city": "Romulus",
+      "state": "MI",
+      "type": "Customer Fulfillment Center",
+      "address": "15675 Wahrman Rd, Romulus, MI 48174",
+      "source": "Kroger IR press release 'Kroger and Ocado Announce Location of High-Tech CFC in Romulus' (15675 Wahrman)"
+    },
+    {
+      "idx": 18,
+      "name": "Kroger Customer Fulfillment Center Dallas TX",
+      "city": "Dallas",
+      "state": "TX",
+      "type": "Customer Fulfillment Center",
+      "address": "4200 Cleveland Rd, Dallas, TX 75216",
+      "source": "Kroger/Ocado 5th CFC press release + Dallas City News reporting (I-20 at 4200 Cleveland Rd)"
+    }
+  ]
+}

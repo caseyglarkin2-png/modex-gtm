@@ -1,0 +1,109 @@
+{
+  "name": "Kroger Grocery Distribution Center Shelbyville IN",
+  "type": "Grocery Distribution Center",
+  "coords": { "lat": 39.5888, "lng": -85.8092 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 39.5851, "lng": -85.8128 },
+      { "lat": 39.5878, "lng": -85.8120 },
+      { "lat": 39.5910, "lng": -85.8098 },
+      { "lat": 39.5912, "lng": -85.8082 },
+      { "lat": 39.5905, "lng": -85.8067 },
+      { "lat": 39.5876, "lng": -85.8067 },
+      { "lat": 39.5860, "lng": -85.8078 },
+      { "lat": 39.5852, "lng": -85.8100 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 39.58432, "lng": -85.81262 },
+      { "lat": 39.58452, "lng": -85.81232 },
+      { "lat": 39.58502, "lng": -85.81195 },
+      { "lat": 39.58482, "lng": -85.81225 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 39.5856, "lng": -85.8125 },
+        { "lat": 39.5873, "lng": -85.8120 },
+        { "lat": 39.5882, "lng": -85.8108 },
+        { "lat": 39.5864, "lng": -85.8112 }
+      ] },
+      { "ring": [
+        { "lat": 39.5887, "lng": -85.8104 },
+        { "lat": 39.5901, "lng": -85.8092 },
+        { "lat": 39.5904, "lng": -85.8082 },
+        { "lat": 39.5890, "lng": -85.8093 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 39.58940, "lng": -85.81110 },
+        { "lat": 39.58970, "lng": -85.80720 },
+        { "lat": 39.58952, "lng": -85.80718 },
+        { "lat": 39.58922, "lng": -85.81108 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 39.58540, "lng": -85.81100 },
+      { "lat": 39.58575, "lng": -85.81015 },
+      { "lat": 39.58560, "lng": -85.81000 },
+      { "lat": 39.58525, "lng": -85.81085 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 274, "pano": "G3Gw9fpzJTeTVLO8QcASzA", "hasCoverage": true },
+      "truckGate": { "heading": 0, "pano": "K5evSTQ4ZAhonQqEbiNukg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 140,
+    "trailerParkingCapacity": 220,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 60.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.5888,-85.8092,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["connectivityIssue", "scale", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Open access. Street View (Aug 2024, pano K5evSTQ4ZAhonQqEbiNukg on County Rd 125 W) shows the public road running straight into the property past a Kroger monument sign with no barrier arm, sliding gate, or checkpoint pinch-point. The drive opens directly onto the yard.",
+    "guardShack": "No staffed booth visible at the entrance in Street View or satellite. The only small structures near the truck path are the office/break facilities attached to the main building, not a gate booth.",
+    "remoteGs": "False because there is no controlled gate at all (remoteGs requires a gate without a shack).",
+    "preGateStaging": "A separate oval staging/parking loop with a small structure sits south of the yard (~39.5843,-85.8110), usable for trucks to wait before entering; modeled as staging.",
+    "postGateStaging": "Wide internal paved yard between the north dock apron and the annex provides ample inside-the-property queueing before docks.",
+    "drivewayLong": "The entrance drive from County Rd 125 W runs several hundred meters of open paved approach into the yard, easily holding 3+ trucks.",
+    "dockDoors": "Long continuous dock bank along the main building's north face with trailers backed in across its full length, plus annex docks. Counted bands well over 50; estimate ~110 total. Honest overhead estimate.",
+    "dropArea": "Large west-end drop yard plus annex trailer lot, both packed with dozens of drop trailers (no tractors). Clearly 50+.",
+    "multipleFacilities": "Campus: main ~600k sqft refrigerated DC plus a separate annex building (own docks/parking/trailer lot) to the north, and a small ancillary building east.",
+    "railServed": "No rail spur runs into the property; nearest linear feature east is the Shelbyville Municipal Airport runway, not rail.",
+    "scale": "No clearly identifiable truck scale pad in the truck path; left false but listed uncertain.",
+    "shipRcvSeparate": "Dock doors appear concentrated on the main building's north face (single cluster); annex has its own docks but reads as overflow rather than a separate ship/rcv split. Low confidence, left false.",
+    "connectivityIssue": "Rural setting (farmland) but adjacent to Shelbyville and a municipal airport, so cellular coverage is likely adequate; left false, flagged uncertain.",
+    "siteAreaAcres": "~60 acres is the polygon-traced developed/paved footprint; public sources cite a ~100-acre owned campus including surrounding buffer land.",
+    "trailersVisible": "Approx count across drop yard + dock apron + annex from z18-20 imagery; honest estimate."
+  },
+  "method": "deep-audit"
+}

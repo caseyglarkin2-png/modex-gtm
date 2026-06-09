@@ -1,0 +1,82 @@
+{
+  "name": "Kroger Grocery Distribution Center Nashville TN",
+  "type": "Grocery Distribution Center",
+  "coords": { "lat": 36.13690, "lng": -86.74270 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 36.137510, "lng": -86.744324 },
+      { "lat": 36.138073, "lng": -86.743787 },
+      { "lat": 36.137640, "lng": -86.741105 },
+      { "lat": 36.137380, "lng": -86.740998 },
+      { "lat": 36.136600, "lng": -86.741159 },
+      { "lat": 36.135647, "lng": -86.742232 },
+      { "lat": 36.136210, "lng": -86.744324 },
+      { "lat": 36.136860, "lng": -86.744646 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 36.136773, "lng": -86.744431 },
+      { "lat": 36.136860, "lng": -86.743841 },
+      { "lat": 36.136383, "lng": -86.743787 },
+      { "lat": 36.136253, "lng": -86.744378 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 36.136817, "lng": -86.743787 },
+        { "lat": 36.136730, "lng": -86.741373 },
+        { "lat": 36.135734, "lng": -86.742071 },
+        { "lat": 36.136210, "lng": -86.744163 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 36.137033, "lng": -86.743841 },
+        { "lat": 36.136929, "lng": -86.741481 },
+        { "lat": 36.136773, "lng": -86.741427 },
+        { "lat": 36.136860, "lng": -86.743787 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 99, "pano": "Yja1It9jk5M1KjnB3OVoXw", "hasCoverage": true },
+      "truckGate": { "heading": 285, "pano": "x1m2EKPQ-HezeIOfVwybXw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 16,
+    "trailersVisible": 6,
+    "trailerParkingCapacity": 10,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 15.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.13690,-86.74270,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoors", "dropArea", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Open paved apron meets the public road (Polk/Foster Ave frontage) with no barrier arm, swing/sliding gate, or checkpoint. Only orange traffic cones channel vehicles across the apron (2025-09 Street View). Uncontrolled access.",
+    "guardShack": "No booth structure of any kind at the road frontage or anywhere on the apron; confirmed in Street View from multiple headings.",
+    "remoteGs": "False because there is no truck gate at all.",
+    "drivewayShort": "Building sits one short apron-depth (~1-2 trucks) back from the road; vehicles reach the dock face or van staging almost immediately after leaving the road.",
+    "dockDoors": "South building face shows ~14-18 dock bays in tight z19/z20 imagery, several with Kroger blue delivery vans / box trucks backed in; banded 10-25. Estimated from overhead, flagged.",
+    "dropArea": "This is a last-mile fulfillment spoke operating mostly small Kroger delivery vans, not 53' trailers. A few trailers/box trucks sit in the south yard; most trailers along the SE edge belong to the adjacent property along the rail line. Banded 0-10.",
+    "dropYard": "No dedicated trailer-storage lot for this tenant; the operation is van-based last-mile, so false.",
+    "railServed": "A mainline rail runs along the SE property edge but does NOT spur into the Kroger property; trailers/railcars seen there are adjacent, not served by a Kroger spur.",
+    "urbanRural": "Inside Nashville's dense industrial fabric near the airport/Foster Ave corridor; clearly Urban.",
+    "buildingCount": "One physical warehouse structure (multi-tenant; Kroger leases ~40,000 SF of it per public records). Footprint measured ~250m x ~34m.",
+    "siteAreaAcres": "15.3 acres derived from the traced perimeter polygon (building + south operational yard inside the property line bounded by the road SW and rail SE).",
+    "facilityContext": "Confirmed as Kroger Fulfillment Network LLC, 1116 Polk Ave, Nashville TN 37210 (Ocado-linked grocery e-commerce / last-mile spoke). Per WARN notice the site is slated to permanently close 2026-02-01 (132 employees); audited from 2025-09 imagery while still operating."
+  },
+  "method": "deep-audit"
+}

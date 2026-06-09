@@ -1,0 +1,49 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+Kroger Great Lakes Grocery Distribution Center Delaware OH,Grocery Distribution Center,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,,YES,2,1,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@40.28280,-83.02200,400m/data=!3m1!1e3"
+Kroger Grocery Distribution Center Indianapolis IN,Grocery Distribution Center,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@39.75935,-86.04555,400m/data=!3m1!1e3"
+Kroger Grocery Distribution Center Shelbyville IN,Grocery Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,YES,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,,Rural,,YES,,YES,"https://www.google.com/maps/@39.5888,-85.8092,400m/data=!3m1!1e3"
+Kroger Grocery Distribution Center Nashville TN,Grocery Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,,,,,YES,,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@36.13690,-86.74270,400m/data=!3m1!1e3"
+Kroger Grocery Distribution Center Keller TX,Grocery Distribution Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@32.91320,-97.26340,400m/data=!3m1!1e3"
+Ralphs/Food4Less Grocery Distribution Center Compton CA,Grocery Distribution Center,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,3,2,YES,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@33.8713,-118.2398,400m/data=!3m1!1e3"
+Fred Meyer Grocery Distribution Center Clackamas OR,Grocery Distribution Center,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,3,2,YES,,,,YES,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@45.40632,-122.5466,400m/data=!3m1!1e3"
+Fred Meyer Grocery Distribution Center Puyallup WA,Grocery Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@47.20985,-122.29855,400m/data=!3m1!1e3"
+King Soopers Grocery Distribution Center Aurora CO,Grocery Distribution Center,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@39.74440,-104.77750,400m/data=!3m1!1e3"
+Fry's Southwest Grocery Distribution Center Tolleson AZ,Grocery Distribution Center,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@33.4404,-112.2775,400m/data=!3m1!1e3"
+Smith's Grocery Distribution Center Layton UT,Grocery Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,,,,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@41.06480,-111.98380,400m/data=!3m1!1e3"
+Kroger Customer Fulfillment Center Monroe OH,Customer Fulfillment Center (Ocado-automated),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,YES,,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@39.44755,-84.40615,400m/data=!3m1!1e3"
+Kroger Customer Fulfillment Center Forest Park GA,Customer Fulfillment Center (Ocado-automated),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@33.615400,-84.334000,400m/data=!3m1!1e3"
+Kroger Customer Fulfillment Center Pleasant Prairie WI,Customer Fulfillment Center (Ocado-automated),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,YES,,YES,Rural,,,,YES,"https://www.google.com/maps/@42.54320,-87.91120,400m/data=!3m1!1e3"
+Kroger Customer Fulfillment Center Aurora CO,Customer Fulfillment Center (Ocado-automated),#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@39.80755,-104.69228,400m/data=!3m1!1e3"
+Kroger Customer Fulfillment Center Groveland FL,Customer Fulfillment Center (Ocado-automated),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,2,YES,,,YES,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@28.64018,-81.82035,400m/data=!3m1!1e3"
+Kroger Customer Fulfillment Center Romulus MI,Customer Fulfillment Center (Ocado-automated),#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,YES,,,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@42.18820,-83.38120,400m/data=!3m1!1e3"
+Kroger Customer Fulfillment Center Dallas TX,Customer Fulfillment Center (Ocado-automated),#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,2,1,,,YES,,,,YES,,,,Urban,,,,,"https://www.google.com/maps/@32.63794,-96.75375,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,6,33%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,6,33%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,1,6%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,4,22%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,1,6%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,18,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,14,78%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,8,44%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,8,44%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,10,56%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,18,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,18,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

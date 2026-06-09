@@ -1,0 +1,100 @@
+{
+  "name": "Kroger Customer Fulfillment Center Forest Park GA",
+  "type": "Customer Fulfillment Center (Ocado-automated)",
+  "coords": { "lat": 33.615400, "lng": -84.334000 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 33.617026, "lng": -84.334966 },
+      { "lat": 33.617053, "lng": -84.334000 },
+      { "lat": 33.615981, "lng": -84.332176 },
+      { "lat": 33.615489, "lng": -84.332337 },
+      { "lat": 33.614328, "lng": -84.332981 },
+      { "lat": 33.614417, "lng": -84.335127 },
+      { "lat": 33.615757, "lng": -84.335931 },
+      { "lat": 33.616517, "lng": -84.335609 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 33.616003, "lng": -84.335334 },
+      { "lat": 33.616003, "lng": -84.335076 },
+      { "lat": 33.615877, "lng": -84.335076 },
+      { "lat": 33.615877, "lng": -84.335334 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 33.615847, "lng": -84.335609 },
+        { "lat": 33.615802, "lng": -84.334376 },
+        { "lat": 33.614507, "lng": -84.334536 },
+        { "lat": 33.614864, "lng": -84.335609 }
+      ] },
+      { "ring": [
+        { "lat": 33.616740, "lng": -84.333303 },
+        { "lat": 33.615981, "lng": -84.332176 },
+        { "lat": 33.615534, "lng": -84.332337 },
+        { "lat": 33.615802, "lng": -84.333249 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 33.615311, "lng": -84.334966 },
+        { "lat": 33.615400, "lng": -84.332981 },
+        { "lat": 33.615087, "lng": -84.332873 },
+        { "lat": 33.614953, "lng": -84.334858 }
+      ] },
+      { "ring": [
+        { "lat": 33.615713, "lng": -84.334000 },
+        { "lat": 33.615132, "lng": -84.332498 },
+        { "lat": 33.614864, "lng": -84.332659 },
+        { "lat": 33.615445, "lng": -84.334107 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 33.616293, "lng": -84.335127 },
+      { "lat": 33.616472, "lng": -84.333356 },
+      { "lat": 33.615802, "lng": -84.333195 },
+      { "lat": 33.615579, "lng": -84.334966 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
+      "truckGate": { "heading": 172, "pano": "LisMFidlEnQ8ld0nKR9Yxg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 120,
+    "trailerParkingCapacity": 170,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 19.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.615400,-84.334000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "remoteGs"],
+  "fieldNotes": {
+    "truckGate": "Chain-link perimeter fence with a sliding gate across the single entry driveway off the complex road (Kroger Dr) on the NW side; confirmed in Street View pano LisMFidlEnQ8ld0nKR9Yxg (2025-03, heading ~172 looking S).",
+    "guardShack": "No booth/shack structure visible at the gate in Street View or satellite z21; gate is unmanned.",
+    "remoteGs": "Inferred: controlled gate but no guard booth implies kiosk/badge/app check-in. Medium confidence on the check-in mechanism.",
+    "postGateStaging": "Wide paved holding area inside the gate between employee parking and the dock wings provides queue/staging room before docks.",
+    "drivewayLong": "Deep paved approach from gate to docks holds well over 3 trucks.",
+    "fastLaneOpportunity": "Wide gate apron and large open paved yard give physical room to add a bypass/express lane.",
+    "dockDoors": "50+ band: long dock banks with trailers backed in herringbone on multiple building wings (east wing both faces, south face). Exact count is an overhead estimate.",
+    "dropArea": "50+ band: dense trailer drop rows in the west, south and east/NE yards, many trailers parked without tractors.",
+    "dropYard": "Dedicated trailer-storage rows separate from active dock staging, west and NE of the building.",
+    "urbanRural": "Inside metro Atlanta's dense industrial fabric (Gillem Logistics Center, former Fort Gillem), 9 mi south of downtown Atlanta.",
+    "buildingCount": "1 building on this property (the cross/T-shaped CFC/fulfillment building). The separate 1.3M sq ft Kroger DC to the north is a distinct adjacent facility, not counted here.",
+    "railServed": "No rail spur runs into this property.",
+    "siteAreaAcres": "~19 acres for the active fenced footprint (building + paved yards), from the perimeter polygon."
+  },
+  "method": "deep-audit"
+}

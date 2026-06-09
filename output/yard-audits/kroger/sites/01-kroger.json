@@ -1,0 +1,122 @@
+{
+  "name": "Kroger Great Lakes Grocery Distribution Center Delaware OH",
+  "type": "Grocery Distribution Center",
+  "coords": { "lat": 40.28280, "lng": -83.02200 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 40.28710, "lng": -83.02470 },
+      { "lat": 40.28720, "lng": -83.02110 },
+      { "lat": 40.28630, "lng": -83.01985 },
+      { "lat": 40.28180, "lng": -83.01935 },
+      { "lat": 40.28000, "lng": -83.02050 },
+      { "lat": 40.28010, "lng": -83.02360 },
+      { "lat": 40.28300, "lng": -83.02490 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 40.28760, "lng": -83.02090 },
+      { "lat": 40.28760, "lng": -83.02045 },
+      { "lat": 40.28640, "lng": -83.02050 },
+      { "lat": 40.28640, "lng": -83.02095 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 40.28680, "lng": -83.02180 },
+        { "lat": 40.28640, "lng": -83.02035 },
+        { "lat": 40.28560, "lng": -83.02055 },
+        { "lat": 40.28600, "lng": -83.02200 }
+      ] },
+      { "ring": [
+        { "lat": 40.28230, "lng": -83.01985 },
+        { "lat": 40.28235, "lng": -83.01945 },
+        { "lat": 40.28110, "lng": -83.01950 },
+        { "lat": 40.28110, "lng": -83.01990 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 40.28560, "lng": -83.02355 },
+        { "lat": 40.28560, "lng": -83.02300 },
+        { "lat": 40.28330, "lng": -83.02300 },
+        { "lat": 40.28330, "lng": -83.02355 }
+      ] },
+      { "ring": [
+        { "lat": 40.28080, "lng": -83.02360 },
+        { "lat": 40.28080, "lng": -83.02300 },
+        { "lat": 40.28020, "lng": -83.02300 },
+        { "lat": 40.28020, "lng": -83.02360 }
+      ] },
+      { "ring": [
+        { "lat": 40.28250, "lng": -83.02010 },
+        { "lat": 40.28250, "lng": -83.01975 },
+        { "lat": 40.28030, "lng": -83.01975 },
+        { "lat": 40.28030, "lng": -83.02010 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 40.28680, "lng": -83.02360 },
+      { "lat": 40.28680, "lng": -83.02240 },
+      { "lat": 40.28620, "lng": -83.02240 },
+      { "lat": 40.28620, "lng": -83.02360 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 56, "pano": "MfQPGujuc4uWOvUY5IGbBA", "hasCoverage": true },
+      "truckGate": { "heading": 185, "pano": "QTw3nP6ij-E3GnXCUCEf_w", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 220,
+    "trailersVisible": 260,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 95.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.28280,-83.02200,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "connectivityIssue", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Single controlled main entrance on the north side off Nutter Farm Ln. Street View (2026-04) down the drive shows channelized lanes with a row of traffic bollards across the approach, a divided in/out median, and trucks queued single-file in the inbound lane on z20 satellite.",
+    "guardShack": "Small tan booth structure beside the entry lanes visible in Street View (pano QTw3nP6ij-E3GnXCUCEf_w) just past the GREAT LAKES DISTRIBUTION monument sign, with light poles and a checkpoint canopy. Footprint ~1-2 vehicles.",
+    "entryExitSeparate": "Entry drive splits around a large teardrop median island into separate inbound and outbound lanes; channelized with bollards.",
+    "exitLanes": "Outbound lane count estimated from the median split; could not isolate exactly.",
+    "preGateStaging": "Curved paved truck-parking loop on the NW side of the entry (outside the inner yard) holds queued trucks/trailers before the checkpoint.",
+    "postGateStaging": "Large paved aprons and yard lanes inside the gate before the dock faces provide deep internal staging.",
+    "drivewayLong": "Long entry approach plus deep internal yard easily holds 3+ trucks before docks.",
+    "fastLaneOpportunity": "Wide divided gate apron with multiple lanes and unused paved width to add an express/bypass lane.",
+    "dockDoors": "Continuous dock-door banks on multiple faces of both buildings; well over 50 doors total (estimate ~220).",
+    "dropArea": "Extensive trailer drop yards: a large north drop lot near the entry plus east-side and apron rows, hundreds of parked trailers without tractors.",
+    "shipRcvSeparate": "Two distinct large buildings (NW and SE) each with their own dock clusters on different faces, indicating separate ship/receive operations.",
+    "multipleFacilities": "Campus of two large distribution buildings (NW and SE) on one property.",
+    "urbanRural": "Isolated DC surrounded by farmland on the edge of Delaware, OH; broader setting is rural.",
+    "connectivityIssue": "Rural setting but on a developed corridor near Delaware/US-23; cellular coverage likely adequate, so left false (medium confidence).",
+    "scale": "No clear truck scale/weigh pad identified in available imagery; left false but flagged uncertain.",
+    "railServed": "A rail line runs along the SW property boundary/right-of-way but does not spur into the buildings or docks; no rail-served docks observed.",
+    "siteAreaAcres": "Approximate from the operational/paved footprint perimeter; the owned parcel including buffer farmland and retention ponds is larger."
+  },
+  "method": "deep-audit"
+}

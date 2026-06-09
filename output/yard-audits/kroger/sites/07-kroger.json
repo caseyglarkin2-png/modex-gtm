@@ -1,0 +1,111 @@
+{
+  "name": "Fred Meyer Grocery Distribution Center Clackamas OR",
+  "type": "Grocery Distribution Center",
+  "coords": { "lat": 45.40632, "lng": -122.5466 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 45.40775, "lng": -122.55060 },
+      { "lat": 45.40790, "lng": -122.54235 },
+      { "lat": 45.40470, "lng": -122.54235 },
+      { "lat": 45.40460, "lng": -122.55060 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 45.40762, "lng": -122.54568 },
+      { "lat": 45.40762, "lng": -122.54492 },
+      { "lat": 45.40672, "lng": -122.54492 },
+      { "lat": 45.40672, "lng": -122.54568 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 45.40718, "lng": -122.55015 },
+        { "lat": 45.40720, "lng": -122.54300 },
+        { "lat": 45.40648, "lng": -122.54300 },
+        { "lat": 45.40646, "lng": -122.55015 }
+      ] },
+      { "ring": [
+        { "lat": 45.40632, "lng": -122.54310 },
+        { "lat": 45.40632, "lng": -122.54238 },
+        { "lat": 45.40478, "lng": -122.54238 },
+        { "lat": 45.40478, "lng": -122.54310 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 45.40648, "lng": -122.55010 },
+        { "lat": 45.40648, "lng": -122.54710 },
+        { "lat": 45.40632, "lng": -122.54710 },
+        { "lat": 45.40632, "lng": -122.55010 }
+      ] },
+      { "ring": [
+        { "lat": 45.40648, "lng": -122.54680 },
+        { "lat": 45.40648, "lng": -122.54320 },
+        { "lat": 45.40632, "lng": -122.54320 },
+        { "lat": 45.40632, "lng": -122.54680 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 45.40775, "lng": -122.54600 },
+      { "lat": 45.40775, "lng": -122.54480 },
+      { "lat": 45.40735, "lng": -122.54480 },
+      { "lat": 45.40735, "lng": -122.54600 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 180, "pano": "l3D5_wuFUzeq8ASQKvOTGA", "hasCoverage": true },
+      "truckGate": { "heading": 178, "pano": "aQW2NR0V4EEYMAkS0iz3Lg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 180,
+    "trailersVisible": 320,
+    "trailerParkingCapacity": 420,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 56.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@45.40632,-122.5466,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 3,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["exitLanes", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Controlled multi-lane truck entrance off SE Hwy 212. Street View (2019-10) shows an overhead gantry signed LANE 1 / LANE 2 / LANE 3 with STOP signs and a sign reading USE ALL THREE LANES / LEAVE 30 FOOT SAFETY GAP BEHIND TRUCKS.",
+    "guardShack": "Small blue-roofed booth (~1-2 vehicle footprint) seated in the middle of the gate lanes, visible in both satellite z20 and Street View, controlling the three lanes.",
+    "entryLanes": "Three inbound lanes confirmed by the gantry lane signage and pavement striping at the checkpoint.",
+    "exitLanes": "Estimated 2 outbound lanes from the apron width; not separately signed, hence flagged uncertain.",
+    "fastLaneOpportunity": "Already 3 inbound lanes plus a very wide gate apron with unused paved width - ample room for an express/bypass lane.",
+    "drivewayLong": "Deep apron between Hwy 212 and the guard booth easily stacks 3+ trucks before the checkpoint.",
+    "dockDoors": "50+ band. Two large warehouses each present long banks of dock doors along their north faces with trailers backed in; total well into the 100+ range across the complex.",
+    "dropArea": "50+ band. A full-width drop-trailer strip runs between the buildings and Hwy 212, plus a large angled-row drop yard east of the east building - hundreds of parked trailers.",
+    "dropYard": "Dedicated trailer-storage lots both north of the buildings and on the east end, separate from active dock staging.",
+    "multipleFacilities": "Campus: a west warehouse, an east (solar-roofed) warehouse, and a connecting/cooler building between them, all on one secured property.",
+    "shipRcvSeparate": "Docks appear concentrated on the north faces of both buildings; could not confirm a physically separate ship vs receive bank, flagged uncertain.",
+    "urbanRural": "Inside the dense Clackamas/Portland-metro industrial fabric - Urban.",
+    "railServed": "No rail spur enters the property in the imagery.",
+    "siteAreaAcres": "~56 acres computed from the traced perimeter polygon (roughly 640m x 355m core), honest estimate.",
+    "entryExitTogether": "Inbound and outbound both pass through the single gantry checkpoint at one point on the property line."
+  },
+  "method": "deep-audit"
+}
