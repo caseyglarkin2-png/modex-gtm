@@ -1,7 +1,7 @@
 {
   "account": "Harris Teeter",
   "generatedAt": "2026-06-09",
-  "facilityCount": 4,
+  "facilityCount": 3,
   "facilities": [
     {
       "idx": 1,
@@ -45,22 +45,6 @@
       "source": "Address verified via TruckMap, Yelp, Waze, county chamber listings (200 Distribution Dr). Historically the chain's frozen + dry grocery depot; added 174,000 sq ft of perishable capacity (Supermarket News). 24/7 distribution operation.",
       "lat": 36.093784,
       "lng": -79.929764,
-      "geocode": {
-        "source": "geocoding-api",
-        "precision": "GEOMETRIC_CENTER",
-        "movedMeters": null
-      }
-    },
-    {
-      "idx": 4,
-      "name": "Harris Teeter Distribution Center Ruther Glen VA",
-      "city": "Ruther Glen",
-      "state": "VA",
-      "type": "Grocery Distribution Center",
-      "address": "Cool Water Dr, Ruther Glen, VA 22546",
-      "source": "Caroline County (Carmel Church) 1.5M sq ft mixed-temp DC near I-95 Exit 104; Caroline County Board of Supervisors rezoning and Virginia Business / Fredericksburg Regional Alliance confirm location on Cool Water Dr at north end of Loop Road. First VA distribution operation, $200M buildout, ~500 jobs.",
-      "lat": 37.962869,
-      "lng": -77.476173,
       "geocode": {
         "source": "geocoding-api",
         "precision": "GEOMETRIC_CENTER",

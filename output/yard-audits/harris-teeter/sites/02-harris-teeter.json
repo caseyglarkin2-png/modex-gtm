@@ -1,0 +1,102 @@
+{
+  "name": "Harris Teeter Grocery Distribution Center Indian Trail NC",
+  "type": "Grocery Distribution Center",
+  "coords": { "lat": 35.06480, "lng": -80.64920 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 35.066237, "lng": -80.650633 },
+      { "lat": 35.066237, "lng": -80.644568 },
+      { "lat": 35.065394, "lng": -80.644110 },
+      { "lat": 35.063052, "lng": -80.645827 },
+      { "lat": 35.062115, "lng": -80.648344 },
+      { "lat": 35.062490, "lng": -80.649947 },
+      { "lat": 35.064270, "lng": -80.650908 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 35.065712, "lng": -80.644453 },
+      { "lat": 35.065525, "lng": -80.644041 },
+      { "lat": 35.065263, "lng": -80.644270 },
+      { "lat": 35.065450, "lng": -80.644682 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 35.065300, "lng": -80.647200 },
+        { "lat": 35.064176, "lng": -80.645140 },
+        { "lat": 35.063052, "lng": -80.646170 },
+        { "lat": 35.064176, "lng": -80.648230 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 35.065487, "lng": -80.650290 },
+        { "lat": 35.064176, "lng": -80.646170 },
+        { "lat": 35.063839, "lng": -80.646399 },
+        { "lat": 35.065150, "lng": -80.650519 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 35.063801, "lng": -80.649489 },
+      { "lat": 35.063052, "lng": -80.647200 },
+      { "lat": 35.062153, "lng": -80.647887 },
+      { "lat": 35.062527, "lng": -80.649832 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 237, "pano": "rwhp4WnvSx-haTD0vStnaA", "hasCoverage": true },
+      "truckGate": { "heading": 272, "pano": "rwhp4WnvSx-haTD0vStnaA", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 140,
+    "trailerParkingCapacity": 180,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 53.2,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.0648,-80.6492,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "entryLanes", "exitLanes", "shipRcvSeparate"],
+  "fieldNotes": {
+    "campusSplit": "6001 W Hwy 74 is ONE fenced campus holding both Harris Teeter's perishable (refrigerated) DC and its dry-grocery DC. The two are joined under one continuous stepped/L-shaped roof, not two free-standing buildings: the bright-white reflective-roof western mass reads as the older perishable/refrigerated section, the gray-roof southeastern mass is the ~317,000 sf dry-grocery expansion. This audit covers the dry-grocery (gray-roof) portion plus the shared gate, drop yard, and dock face; a sister agent covers the perishable building. Gate/yard/scale infrastructure is shared between both halves.",
+    "guardShack": "Confirmed in Street View (2018-11 pano rwhp4WnvSx-haTD0vStnaA): a manned guard booth with windows on multiple sides and a US flag sits in the center of the checkpoint, with a guard standing beside an inbound truck. Yellow/black barrier arms span the lanes on both sides of the booth. Also visible in z20 satellite as a small canopied structure with a truck queued at it.",
+    "truckGate": "Barrier-arm gates across the lanes plus chain-link perimeter fencing visible in Street View; satellite shows the access drive pinching into a controlled checkpoint at the booth.",
+    "drivewayLong": "Long tree-lined private approach drive runs ~250m from the W Hwy 74 intersection (NE) down through a wooded buffer to the gate; easily stacks 3+ trucks. Street View shows a tractor-trailer climbing the drive toward the gate.",
+    "postGateStaging": "Large paved apron immediately inside the gate (between booth and the drop yard / dock face) gives ample inside-the-fence staging before docks.",
+    "entryLanes": "Two lanes read as inbound at the booth in Street View; exit appears single-lane. Approximate.",
+    "fastLaneOpportunity": "Wide multi-lane gate apron with barrier arms and unused paved width beside the booth — physical room for an express/bypass lane.",
+    "dockDoors": "Very long continuous dock line along the entire NE face of the L-shaped complex (perishable + dry-grocery halves), with dozens of trailers backed in across multiple banks; combined door count well into 50+. The dry-grocery half alone is a large bank; the 50+ band reflects the shared dock face of the full complex.",
+    "dropArea": "Massive on-site trailer drop yard of long parallel rows holding well over 100 parked trailers (50+ band).",
+    "scale": "A rectangular pad near the checkpoint may be a truck scale but could not be confirmed as a weigh platform from imagery; flagged uncertain, left false.",
+    "shipRcvSeparate": "Docks read as one continuous face serving the complex rather than two clearly separated ship/receive banks; left false, flagged uncertain.",
+    "railServed": "A rail line runs along the SW edge of the property (next to the long apron) but no spur appears to enter the yard / building; treated as not rail-served.",
+    "urbanRural": "Edge-of-town setting on the rural fringe of Indian Trail: woods and a rail corridor on the property's south/west, light commercial along W Hwy 74 to the NE. Judged Rural per the small-town-industrial tiebreak.",
+    "multipleFacilities": "True — two large building masses (perishable + dry grocery) plus an office/maintenance cluster on one campus.",
+    "siteAreaAcres": "~53 acres from the perimeter polygon (the full shared fenced campus, since the yard is not separately fenced per building)."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,101 @@
+{
+  "name": "Harris Teeter Perishable Distribution Center Indian Trail NC",
+  "type": "Perishable DC",
+  "coords": { "lat": 35.06564, "lng": -80.64932 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 35.06695, "lng": -80.65030 },
+      { "lat": 35.06640, "lng": -80.64870 },
+      { "lat": 35.06560, "lng": -80.64760 },
+      { "lat": 35.06460, "lng": -80.64850 },
+      { "lat": 35.06470, "lng": -80.65010 },
+      { "lat": 35.06560, "lng": -80.65070 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 35.06628, "lng": -80.64470 },
+      { "lat": 35.06618, "lng": -80.64440 },
+      { "lat": 35.06598, "lng": -80.64455 },
+      { "lat": 35.06608, "lng": -80.64485 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 35.06600, "lng": -80.64790 },
+        { "lat": 35.06560, "lng": -80.64700 },
+        { "lat": 35.06480, "lng": -80.64760 },
+        { "lat": 35.06520, "lng": -80.64850 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 35.06660, "lng": -80.64960 },
+        { "lat": 35.06470, "lng": -80.64840 },
+        { "lat": 35.06450, "lng": -80.64875 },
+        { "lat": 35.06640, "lng": -80.64995 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 35.06620, "lng": -80.64640 },
+      { "lat": 35.06585, "lng": -80.64545 },
+      { "lat": 35.06535, "lng": -80.64580 },
+      { "lat": 35.06570, "lng": -80.64680 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
+      "truckGate": { "heading": 258, "pano": "LewhTCax-ZFpoxel2VkUmQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 38,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 11.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.06564,-80.64932,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "urbanRural", "shipRcvSeparate"],
+  "fieldNotes": {
+    "campusSplit": "6001 W Hwy 74 is ONE shared Harris Teeter DC campus holding a refrigerated/perishable section and a dry grocery section in a single connected mega-structure, plus a separate fleet/fuel support building near the entrance. This audit covers the PERISHABLE (refrigerated) portion: the bright white high-albedo cool-roof NW half of the main building and its NE/NW dock face and adjacent reefer drop yard. The grey-roof SE half is the dry grocery DC (covered by sister agent). Perimeter/dock/drop geofences are drawn around the perishable section only; the truck gate, access drive and guard shack are shared by the whole campus.",
+    "truckGate": "Controlled inner gate at the throat where the ~250m private access drive opens into the yard. Satellite z21 shows a guard booth beside the lane with a yellow barrier arm and a channelizing island; Street View pano LewhTCax-ZFpoxel2VkUmQ (2025-11) shows the gatehouse, STOP sign, pedestrian-crossing caution sign, lane markings and chain-link perimeter fencing.",
+    "guardShack": "Staffed booth (~1-2 vehicle footprint, multi-window) sitting beside the truck lane at the inner gate, with STOP/check-in signage. Clearly a manned guard shack, not the main building.",
+    "fastLaneOpportunity": "Gate throat opens into a very wide multi-lane paved apron with substantial unused width beside the single guarded lane; physical room to add an express/bypass lane.",
+    "postGateStaging": "Large deep paved yard inside the gate before the dock doors; trucks visibly staged there in Street View.",
+    "drivewayLong": "Approach yard easily holds 3+ trucks; plus the ~250m tree-lined private drive from US-74 to the gate gives deep buffering.",
+    "backupSensitive": "Long private drive plus deep internal yard means a gate queue would not spill onto US-74; not backup-sensitive.",
+    "dockDoorCount": "~38 doors estimated along the perishable building's NE and NW faces from z18/z19 imagery (reefer trailers backed in); band 25-50. Exact count uncertain where the perishable dock line transitions into the grocery section.",
+    "dropArea": "Dedicated reefer trailer drop/parking lot NE of the perishable docks; ~60 trailers visible, capacity ~90; band 25-50.",
+    "shipRcvSeparate": "Perishable building works from a single continuous dock bank (NE/NW face); shipping and receiving not on physically separate building faces, so false. Some uncertainty given the connected grocery docks.",
+    "urbanRural": "Indian Trail is on the southeast fringe of the Charlotte metro. Site itself is wooded edge-of-town with retention ponds and a railroad on the west edge; commercial/retail strip across US-74 to the NE and a residential subdivision to the SE. Judged Rural per rubric tie-break (small-town/edge-of-town industrial over Urban).",
+    "multipleFacilities": "Campus: connected perishable+grocery mega-DC, a separate fleet/fuel/maintenance building near the entrance, and a third large building in the SW corner.",
+    "railServed": "A rail line runs along the western edge of the property but no spur visibly enters the buildings; treated as not rail-served.",
+    "scale": "No truck scale/weigh pad visible in the truck path at the gate or in the yard.",
+    "coords": "Pinned to the perishable building centroid (white-roof NW section), confirmed via satellite z16-z21 and Street View; the supplied campus coords (35.065177, -80.645931) landed near the shared entrance/parking area, not the perishable building."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,116 @@
+{
+  "name": "Harris Teeter Distribution Center Greensboro NC",
+  "type": "Frozen DC",
+  "coords": { "lat": 36.09312, "lng": -79.93022 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 36.09565, "lng": -79.93090 },
+      { "lat": 36.09498, "lng": -79.92880 },
+      { "lat": 36.09360, "lng": -79.92815 },
+      { "lat": 36.09225, "lng": -79.92880 },
+      { "lat": 36.09120, "lng": -79.93010 },
+      { "lat": 36.09110, "lng": -79.93190 },
+      { "lat": 36.09200, "lng": -79.93250 },
+      { "lat": 36.09360, "lng": -79.93215 },
+      { "lat": 36.09470, "lng": -79.93150 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 36.09548, "lng": -79.93075 },
+      { "lat": 36.09538, "lng": -79.93038 },
+      { "lat": 36.09512, "lng": -79.93050 },
+      { "lat": 36.09522, "lng": -79.93087 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 36.09300, "lng": -79.93175 },
+        { "lat": 36.09255, "lng": -79.93085 },
+        { "lat": 36.09145, "lng": -79.93145 },
+        { "lat": 36.09190, "lng": -79.93235 }
+      ] },
+      { "ring": [
+        { "lat": 36.09430, "lng": -79.93120 },
+        { "lat": 36.09388, "lng": -79.93035 },
+        { "lat": 36.09300, "lng": -79.93080 },
+        { "lat": 36.09342, "lng": -79.93165 }
+      ] },
+      { "ring": [
+        { "lat": 36.09460, "lng": -79.92905 },
+        { "lat": 36.09418, "lng": -79.92825 },
+        { "lat": 36.09335, "lng": -79.92872 },
+        { "lat": 36.09377, "lng": -79.92952 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 36.09470, "lng": -79.93060 },
+        { "lat": 36.09360, "lng": -79.92995 },
+        { "lat": 36.09345, "lng": -79.93025 },
+        { "lat": 36.09455, "lng": -79.93090 }
+      ] },
+      { "ring": [
+        { "lat": 36.09300, "lng": -79.93015 },
+        { "lat": 36.09210, "lng": -79.92960 },
+        { "lat": 36.09195, "lng": -79.92990 },
+        { "lat": 36.09285, "lng": -79.93045 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 115, "pano": "4TaWhntilHiB2vO9CQM4wA", "hasCoverage": true },
+      "truckGate": { "heading": 210, "pano": "eF5GpytxFciQATf0oIlVrw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 95,
+    "trailersVisible": 240,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 33.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.09312,-79.93022,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "trailerParkingCapacity", "siteAreaAcres", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Continuous chain-link perimeter fence runs along Distribution Dr (confirmed in 2026-02 Street View). Truck drive enters through a gap with sliding/swing gate panels at the NE off Distribution Dr (~36.0954,-79.9306).",
+    "guardShack": "No staffed booth at the truck entrance in any Street View heading; entrance is open paved drive with fence, light poles and a fire-dept standpipe only.",
+    "remoteGs": "Gate present but no guard shack, so access is via kiosk/badge/call-box. Set true per rubric (gate true + guardShack false).",
+    "postGateStaging": "Large paved yard between buildings inside the fence provides ample inside-gate staging before docks.",
+    "drivewayLong": "Wide internal apron and deep yard hold well over 3 trucks between gate and docks.",
+    "fastLaneOpportunity": "Wide gate apron and unused paved width at the Distribution Dr entrance leave room for a bypass/express lane.",
+    "shipRcvSeparate": "Dock banks on opposite long faces of the main building (NE and SW), plus a separate perishable building with its own docks; medium confidence on strict ship/rcv split.",
+    "dockDoors": "50+ across the campus: long dock rows on both long faces of the main frozen/grocery building and on the perishable building to the NE. ~95 is a rough campus total.",
+    "dropArea": "50+ parked trailers in fenced drop rows on the W/SW and N of the campus; hundreds visible.",
+    "multipleFacilities": "Campus of 3 large warehouse buildings (frozen, dry grocery, perishable) plus an office; corroborated by web research (174k sf + 50k sf perishable additions).",
+    "urbanRural": "Dense industrial park inside the Greensboro/PTI metro fabric adjacent to Piedmont Triad International Airport.",
+    "railServed": "No rail spur visible on the property.",
+    "entryLanes": "Single combined in/out truck drive observed; lane count approximate.",
+    "siteAreaAcres": "Derived from the fenced perimeter polygon; approximate."
+  },
+  "method": "deep-audit"
+}
