@@ -13,7 +13,13 @@
       "capHit": false,
       "note": "Audited all 24 identifiable facilities."
     },
-    "featuredSiteId": "10-regional-distribution-center-indianapolis-t0559"
+    "featuredSiteId": "10-regional-distribution-center-indianapolis-t0559",
+    "dossierIntro": "Target moves almost all of its inbound through a coastal import network that feeds regional distribution centers, then pushes to stores on a tight replenishment clock, so a trailer stuck at the gate ripples straight to the shelf. We mapped all 24 of Target's identifiable US facilities: 4 import warehouses, 15 regional DCs, 4 food DCs, and a flow center, totaling 2,961 dock doors and roughly 8,640 trailer positions across 1,907 acres. Only one of those 24 sites touches rail, so nearly every load in or out moves by truck through 26 gates. YardFlow turns that gate-to-dock handoff into one orchestrated move across the whole network.",
+    "surprisingFindings": [
+      "Across 24 facilities we found exactly one rail link, at Tifton GA. Every other load in or out moves by truck through the gate.",
+      "Rialto CA carries 320 dock doors on 160 acres behind a single truck gate, so the network's largest building has its narrowest entrance.",
+      "Lugoff SC holds 1,200 trailer spots against 238 dock doors on under 70 acres, the tightest trailer-to-door ratio we measured."
+    ]
   },
   "research": null,
   "network": {
