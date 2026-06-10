@@ -7,6 +7,16 @@ import { assertExternalWriteAllowed } from '@/lib/enrichment/external-write-guar
 
 const DEAL_PROPERTIES = ['dealname', 'dealstage', 'amount', 'pipeline', 'closedate'] as const;
 
+/**
+ * Default owner stamped onto deals THIS engine creates, so GTM-generated
+ * opportunities never land ownerless (the unassigned-deal pileup that had to be
+ * cleaned up by hand). Overridable via env for owner rotation; falls back to
+ * Casey (founding AE, owner id 85093129). Applied on CREATE only — updates
+ * deliberately omit owner so a deal reassigned to another rep (e.g. Jake) is
+ * never clobbered back.
+ */
+const DEFAULT_DEAL_OWNER_ID = process.env.HUBSPOT_DEFAULT_DEAL_OWNER_ID ?? '85093129';
+
 export interface EnsureDealInput {
   accountName: string;
   stage: PipelineStage;
@@ -67,6 +77,7 @@ export async function upsertDealForAccount(input: EnsureDealInput): Promise<stri
           dealstage: dealStage,
           amount,
           pipeline: 'default',
+          ...(DEFAULT_DEAL_OWNER_ID ? { hubspot_owner_id: DEFAULT_DEAL_OWNER_ID } : {}),
         },
         associations: [],
       }),
