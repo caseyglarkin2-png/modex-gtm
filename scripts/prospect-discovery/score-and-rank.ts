@@ -126,6 +126,10 @@ const PRIMO_SITES: PrimoSite[] = [
   { name: "US PL Saratoga Spring Factory", city: "Saratoga Springs", state: "NY", lat: 43.0710, lng: -73.7846 },
   { name: "US PL Hot Springs 2 Factory", city: "Hot Springs", state: "AR", lat: 34.6100, lng: -93.0500 },
   { name: "US DC NFI - Breinigsville", city: "Breinigsville", state: "PA", lat: 40.5340, lng: -75.6290 },
+  // Canada (synced from the site spreadsheet 2026-06-10)
+  { name: "CA PL Guelph Factory", city: "Guelph", state: "ON", lat: 43.5448, lng: -80.2482 },
+  { name: "CA PL Hope Factory", city: "Hope", state: "BC", lat: 49.3827, lng: -121.4414 },
+  { name: "CA DC Chilliwack Whse", city: "Chilliwack", state: "BC", lat: 49.1579, lng: -121.9515 },
 ];
 
 // ── Known account slugs and display names ────────────────────────────────

@@ -36,6 +36,10 @@ const PRIMO_SITES: PrimoSite[] = [
   { name: "US PL Saratoga Spring Factory", city: "Saratoga Springs", state: "NY", lat: 43.0710, lng: -73.7846, solutions: ["Driver Journey"] },
   { name: "US PL Hot Springs 2 Factory", city: "Hot Springs", state: "AR", lat: 34.6100, lng: -93.0500, solutions: ["Driver Journey", "YMS"] },
   { name: "US DC NFI - Breinigsville", city: "Breinigsville", state: "PA", lat: 40.5340, lng: -75.6290, solutions: ["Driver Journey"] },
+  // Canada (synced from the site spreadsheet 2026-06-10; Driver Journey live)
+  { name: "CA PL Guelph Factory", city: "Guelph", state: "ON", lat: 43.5448, lng: -80.2482, solutions: ["Driver Journey"] },
+  { name: "CA PL Hope Factory", city: "Hope", state: "BC", lat: 49.3827, lng: -121.4414, solutions: ["Driver Journey"] },
+  { name: "CA DC Chilliwack Whse", city: "Chilliwack", state: "BC", lat: 49.1579, lng: -121.9515, solutions: ["Driver Journey"] },
 ];
 
 interface PrimoSite {

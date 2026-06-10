@@ -1,8 +1,10 @@
 /**
- * Live YardFlow reference sites — Primo Brands' 24 facilities (the live customer
- * the proximity play anchors on). Mirrored from PRIMO_SITES in
+ * Live YardFlow reference sites — Primo Brands' 27 facilities (24 US + 3 Canada),
+ * the live customer the proximity play anchors on. Synced to Casey's site
+ * spreadsheet (table (1).xlsx, 2026-06-10). Mirrored from PRIMO_SITES in
  * scripts/prospect-discovery/score-and-rank.ts so the map can pin them as a
- * visible reference layer with proximity rings.
+ * visible reference layer with proximity rings. NOTE: this list is duplicated in
+ * score-and-rank.ts + primo-proximity-gtm.ts; keep all three in sync.
  *
  * `status` is 'live' for all Primo sites today; the field exists so a broader
  * live/deploying set can be layered in later (per the Sprint 0 reference-set fork).
@@ -41,6 +43,10 @@ export const REFERENCE_SITES: ReferenceSite[] = [
   { name: 'US PL Saratoga Spring Factory', city: 'Saratoga Springs', state: 'NY', lat: 43.0710, lng: -73.7846, status: 'live' },
   { name: 'US PL Hot Springs 2 Factory', city: 'Hot Springs', state: 'AR', lat: 34.6100, lng: -93.0500, status: 'live' },
   { name: 'US DC NFI - Breinigsville', city: 'Breinigsville', state: 'PA', lat: 40.5340, lng: -75.6290, status: 'live' },
+  // Canada (added 2026-06-10 from the site spreadsheet; Driver Journey live)
+  { name: 'CA PL Guelph Factory', city: 'Guelph', state: 'ON', lat: 43.5448, lng: -80.2482, status: 'live' },
+  { name: 'CA PL Hope Factory', city: 'Hope', state: 'BC', lat: 49.3827, lng: -121.4414, status: 'live' },
+  { name: 'CA DC Chilliwack Whse', city: 'Chilliwack', state: 'BC', lat: 49.1579, lng: -121.9515, status: 'live' },
 ];
 
 /** Proximity-ring radii (miles) — aligned to the engine's scorePrimoProximity bands. */
