@@ -46,9 +46,9 @@ Project = top-prospect truck-yard audits for YardFlow by FreightRoll.
   building), 22 Gary IN.
 - salson-logistics idx 13 Oakland CA (only a Stockton back-office found).
 
-**Possible duplicates — reconcile:**
-- cj-logistics-america idx 21 (Carlisle PA) ≈ idx 3 (Newville).
-- crowley idx 1/3/4 — three roster addresses for one Talleyrand terminal.
+**Possible duplicates — RECONCILED 2026-06-10:**
+- cj-logistics-america idx 21 (Carlisle PA) — confirmed duplicate of idx 3 (Newville); dossier was UNRESOLVED 0-acre stub, no address. **Dropped** (idx gap left). Pack rebuilt: 27 sites.
+- crowley idx 3 + idx 4 — both dossiers confirm "same physical Talleyrand terminal as idx 1"; idx 1 already audits the whole ~1km terminal. **Dropped idx 3 + 4, kept idx 1** (idx gaps left). Pack rebuilt: 12 sites.
 
 **Roster coordinate/address corrections applied in the site JSONs (roster.json not updated):**
 - pactiv-evergreen idx 27 Kinston NC, idx 30 Plattsburgh NY.

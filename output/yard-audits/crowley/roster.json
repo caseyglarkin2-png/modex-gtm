@@ -1,7 +1,7 @@
 {
   "account": "Crowley",
   "generatedAt": "2026-05-18",
-  "facilityCount": 14,
+  "facilityCount": 12,
   "facilities": [
     {
       "idx": 1,
@@ -33,38 +33,6 @@
         "source": "geocoding-api",
         "precision": "ROOFTOP",
         "movedMeters": null
-      }
-    },
-    {
-      "idx": 3,
-      "name": "Crowley JAXPORT Terminal Office #3 - Jacksonville FL",
-      "city": "Jacksonville",
-      "state": "FL",
-      "type": "Marine terminal / container yard",
-      "address": "3001 Talleyrand Avenue, Jacksonville, FL 32206",
-      "lat": 30.35699,
-      "lng": -81.625431,
-      "source": "crowley.com/port-terminals and /locations - JAXPORT Port Office #3 on the Talleyrand terminal complex",
-      "geocode": {
-        "source": "geocoding-api",
-        "precision": "ROOFTOP",
-        "movedMeters": 68
-      }
-    },
-    {
-      "idx": 4,
-      "name": "Crowley JAXPORT Terminal Office #4 - Jacksonville FL",
-      "city": "Jacksonville",
-      "state": "FL",
-      "type": "Marine terminal / container yard",
-      "address": "2085 Talleyrand Avenue, Jacksonville, FL 32206",
-      "lat": 30.348098,
-      "lng": -81.622531,
-      "source": "crowley.com/port-terminals and /locations - JAXPORT Port Office #4 on the Talleyrand terminal complex",
-      "geocode": {
-        "source": "geocoding-api",
-        "precision": "ROOFTOP",
-        "movedMeters": 370
       }
     },
     {

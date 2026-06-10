@@ -1,19 +1,19 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-02T16:08:24.190Z",
+  "builtAt": "2026-06-10T14:31:47.604Z",
   "account": {
     "slug": "cj-logistics-america",
     "displayName": "CJ Logistics America",
     "archetype": "3pl",
-    "siteCount": 28,
+    "siteCount": 27,
     "coverageNote": {
-      "auditedCount": 28,
+      "auditedCount": 27,
       "estimatedFootprint": 50,
+      "totalGlobalFootprint": 250,
+      "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "CJ Logistics America is the NA subsidiary of CJ Logistics (Korea, ~250 sites globally). We audited the NA DC/transload network.",
-      "auditedScope": "US",
-      "totalGlobalFootprint": 250
+      "note": "CJ Logistics America is the NA subsidiary of CJ Logistics (Korea, ~250 sites globally). We audited the NA DC/transload network."
     },
     "featuredSiteId": "08-cj-logistics-champaign-il",
     "dossierIntro": "CJ Logistics America runs 250 facilities for hundreds of shippers. We audited 27. Champaign IL has 110 dock doors. Fairburn GA covers 110.8 acres. 2,134 total dock doors across the audited slice. CJ runs Korean-style cross-dock discipline on North American volumes. YardFlow runs the same protocol on every shipper's trailer pool.",
@@ -35,7 +35,7 @@
       "#10": 8,
       "#7": 1,
       "#9": 8,
-      "#3": 11
+      "#3": 10
     },
     "totals": {
       "dockDoors": 2134,
@@ -1221,8 +1221,7 @@
               ]
             }
           ],
-          "staging": null,
-          "streetViewMeta": {}
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 110,
@@ -3325,110 +3324,6 @@
         }
       },
       {
-        "id": "21-cj-logistics-carlisle-pa",
-        "name": "CJ Logistics - Carlisle PA",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "low",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "remoteGs",
-          "preGateStaging",
-          "postGateStaging",
-          "drivewayLong",
-          "drivewayShort",
-          "backupSensitive",
-          "entryExitTogether",
-          "entryExitSeparate",
-          "entryLanes",
-          "exitLanes",
-          "fastLaneOpportunity",
-          "dockDoors",
-          "dropArea",
-          "shipRcvSeparate",
-          "urbanRural",
-          "connectivityIssue",
-          "multipleFacilities",
-          "scale",
-          "dropYard",
-          "multiStep"
-        ],
-        "center": {
-          "lat": 40.2015,
-          "lng": -77.1886
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 40.202339,
-                "lng": -77.189973
-              },
-              {
-                "lat": 40.202339,
-                "lng": -77.187227
-              },
-              {
-                "lat": 40.200241,
-                "lng": -77.187227
-              },
-              {
-                "lat": 40.200241,
-                "lng": -77.189973
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 0,
-          "trailersVisible": 0,
-          "trailerParkingCapacity": 0,
-          "truckGateCount": 0,
-          "buildingCount": 0,
-          "siteAreaAcres": 0,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": false,
-          "drivewayLong": false,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": false,
-          "entryExitSeparate": false,
-          "entryLanes": null,
-          "exitLanes": null,
-          "fastLaneOpportunity": false,
-          "dockDoors": "NONE",
-          "dropArea": "NONE",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "dossierExcerpt": "- Name: CJ Logistics - Carlisle PA\n- Type: Distribution Center\n- Address: null (not published in roster)\n- Roster coordinate: 40.2015, -77.1886 (city-level, geocode source \"none\")",
-        "mapsUrl": "https://www.google.com/maps/@40.2015,-77.1886,400m/data=!3m1!1e3",
-        "fieldNotes": {
-          "UNRESOLVED": "Could not positively identify a distinct CJ Logistics building in Carlisle PA. The roster entry has a null address and only a city-level coordinate (40.2015, -77.1886, geocode source 'none').",
-          "research": "Genuine effort: searched CJ Logistics newsroom, Indeed/Glassdoor/Snagajob job postings, Panjiva/ImportYeti shipping records, TruckMap, and the CJ US network page. CJ Logistics' documented 'facility near Carlisle, PA' is explicitly the DSC/CJ site at 801 Centerville Road, Newville, PA 17241 (CJ newsroom Dec 2019 article headline: 'facility near Carlisle, Pennsylvania', body address: '801 Centerville Road, Newville, PA'). Newville is in Cumberland County in the greater Carlisle area.",
-          "likelyDuplicate": "This 'Carlisle PA' roster entry (idx 21) is most likely an alternate city-label of the same facility as roster idx 3 (CJ Logistics - Newville PA, 801 Centerville Road, Newville PA - audited separately). CJ markets the Newville DC as 'near Carlisle' and Carlisle-labeled job postings map to it.",
-          "noDistinctSite": "No independently documented, distinct CJ Logistics warehouse physically within Carlisle proper was found. Per deep-audit-prompt guidance, the wrong site was NOT audited; classification fields are left default and flagged. Recommend human review / dedup against idx 3.",
-          "urbanRural": "Default 'Rural' is a placeholder only - not a real classification (no site located)."
-        }
-      },
-      {
         "id": "22-cj-logistics-middletown-pa",
         "name": "CJ Logistics - Middletown PA",
         "type": "Distribution Center",
@@ -3494,8 +3389,7 @@
               ]
             }
           ],
-          "staging": null,
-          "streetViewMeta": {}
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 55,

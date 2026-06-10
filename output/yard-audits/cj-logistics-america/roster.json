@@ -1,7 +1,7 @@
 {
   "account": "CJ Logistics America",
   "generatedAt": "2026-05-18",
-  "facilityCount": 28,
+  "facilityCount": 27,
   "facilities": [
     {
       "idx": 1,
@@ -321,21 +321,6 @@
         "source": "geocoding-api",
         "precision": "ROOFTOP",
         "movedMeters": 101
-      }
-    },
-    {
-      "idx": 21,
-      "name": "CJ Logistics - Carlisle PA",
-      "city": "Carlisle",
-      "state": "PA",
-      "type": "Distribution Center",
-      "address": null,
-      "lat": 40.2015,
-      "lng": -77.1886,
-      "source": "Indeed locations list + CJ hiring posts; Cumberland Valley PA logistics hub; specific street address not published",
-      "geocode": {
-        "source": "none",
-        "precision": "no-address"
       }
     },
     {

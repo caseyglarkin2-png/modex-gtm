@@ -2,8 +2,6 @@
 Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
 Crowley JAXPORT Marine Terminal - Jacksonville FL,Marine terminal / container port,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,3,2,YES,,YES,,,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@30.354400,-81.623900,400m/data=!3m1!1e3"
 Crowley JAXPORT Terminal Office #2 - Jacksonville FL,Marine terminal / container yard,#4,Gate + GS (BU sens.),,,,,,,,,,,YES,YES,,,YES,YES,,YES,YES,,1,1,,YES,,,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@30.337571,-81.628575,400m/data=!3m1!1e3"
-Crowley JAXPORT Terminal Office #3 - Jacksonville FL,Marine terminal / container yard,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,3,2,YES,YES,,,,,,,YES,,Urban,,YES,YES,YES,"https://www.google.com/maps/@30.356990,-81.625431,400m/data=!3m1!1e3"
-Crowley JAXPORT Terminal Office #4 - Jacksonville FL,Marine terminal / container yard,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,3,2,YES,,YES,,,,,,YES,,Urban,,YES,YES,YES,"https://www.google.com/maps/@30.348098,-81.622531,400m/data=!3m1!1e3"
 Crowley Port Everglades Terminal - Fort Lauderdale FL,Marine terminal / container port,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,4,4,YES,,,,,,,,YES,,Urban,,YES,YES,YES,"https://www.google.com/maps/@26.065508,-80.124022,400m/data=!3m1!1e3"
 Crowley Isla Grande Terminal - San Juan PR,"Marine terminal / container port (LNG-fueled microgrid, ConRo)",#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,YES,,YES,3,2,YES,,YES,,,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@18.45400,-66.10050,400m/data=!3m1!1e3"
 Crowley Penn Terminals - Eddystone PA,Marine terminal with dry + refrigerated warehouse,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,,,,YES,,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@39.85300,-75.33800,400m/data=!3m1!1e3"
@@ -19,27 +17,27 @@ Crowley CrowleyFresh Distribution Center (Temperature Controlled) - Medley FL,Te
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,#3,1,7%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,#4,1,7%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,1,8%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,1,8%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,#6,10,71%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,8,67%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,#7,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,#9,2,14%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,2,17%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,#10,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,Total,14,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,12,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,Fast Lane Opportunity,9,64%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,7,58%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,Rural / connectivity,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,Guarded,11,79%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,Not-Guarded,3,21%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,9,75%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,3,25%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,NA,14,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,Total,14,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,12,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,12,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
