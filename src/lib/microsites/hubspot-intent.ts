@@ -16,7 +16,7 @@
 import { prisma } from '@/lib/prisma';
 import { slugify } from '@/lib/data';
 import { createNote } from '@/lib/hubspot/notes';
-import { searchContactByEmail } from '@/lib/hubspot/contacts';
+import { searchContactByEmail, updateContactIntent } from '@/lib/hubspot/contacts';
 import type { MicrositeTrackingSnapshot } from './tracking';
 import type { MicrositeEngagementAnalyticsInput } from './analytics';
 
@@ -60,6 +60,27 @@ async function resolveHubSpotContactId(
   return null;
 }
 
+/**
+ * Map a qualifying engagement session to a 0-100 intent score. This only runs
+ * once a session has already crossed the intent threshold, so it starts from a
+ * floor and adds weight for depth (time, scroll, sections), rich-media
+ * consumption (audio/video past halfway), and explicit CTA clicks (the
+ * strongest signal). Latest qualifying session wins (recency-weighted).
+ */
+function computeIntentScore(
+  merged: MicrositeEngagementAnalyticsInput,
+  audioPct: number,
+  videoPct: number,
+): number {
+  let s = 10; // floor for crossing the threshold at all
+  s += Math.min(merged.duration_seconds / 3, 40); // up to +40 (~120s)
+  s += Math.min(merged.scroll_depth_pct / 5, 20); // up to +20 (full scroll)
+  s += Math.min(merged.sections_viewed.length * 3, 15);
+  if (audioPct >= 50 || videoPct >= 50) s += 10;
+  s += Math.min(merged.cta_ids.length * 8, 25); // CTA clicks weigh heaviest
+  return Math.min(Math.round(s), 100);
+}
+
 export async function logIntentToHubSpot(
   snapshot: MicrositeTrackingSnapshot,
   merged: MicrositeEngagementAnalyticsInput,
@@ -95,6 +116,15 @@ export async function logIntentToHubSpot(
     `<i>Path:</i> ${snapshot.path}`,
     `<i>Stats:</i> ${facts.join(' · ')}`,
   ].join('<br>');
+
+  // Write the numeric intent signal onto the contact (sortable hot-accounts
+  // view) alongside the human-readable Note. Best-effort; never blocks the Note.
+  const intentScore = computeIntentScore(merged, audioPct, videoPct);
+  await updateContactIntent(contactId, {
+    score: intentScore,
+    source: snapshot.path,
+    at: new Date(),
+  });
 
   return createNote({ contactId, body });
 }

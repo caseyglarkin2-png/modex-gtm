@@ -185,6 +185,32 @@ export async function upsertContact(properties: {
   return result.id;
 }
 
+/**
+ * Write YardFlow intent signals onto a contact: the numeric `intent_score`
+ * (sortable "hottest accounts"), plus when and on what surface the signal fired.
+ * Best-effort — never throws (intent logging must not break a page view).
+ */
+export async function updateContactIntent(
+  contactId: string,
+  intent: { score: number; source: string; at: Date },
+): Promise<void> {
+  if (!isHubSpotConfigured() || !HUBSPOT_SYNC_ENABLED) return;
+  assertExternalWriteAllowed('hubspot', 'updateContactIntent');
+
+  const client = getHubSpotClient();
+  await withHubSpotRetry(
+    () =>
+      client.crm.contacts.basicApi.update(contactId, {
+        properties: {
+          intent_score: String(Math.round(intent.score)),
+          last_intent_at: String(intent.at.getTime()),
+          last_intent_source: intent.source,
+        },
+      }),
+    `updateContactIntent(${contactId})`,
+  ).catch(() => undefined);
+}
+
 /** Fetch all contacts modified after a given date (for incremental sync). */
 export async function listRecentContacts(
   after?: string,
