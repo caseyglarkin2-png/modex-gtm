@@ -1,24 +1,25 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-10T15:27:35.440Z",
+  "builtAt": "2026-06-10T16:23:17.642Z",
   "account": {
     "slug": "tractor-supply",
     "displayName": "Tractor Supply Company",
     "archetype": "retailer",
-    "siteCount": 10,
+    "siteCount": 11,
     "coverageNote": {
-      "auditedCount": 10,
+      "auditedCount": 11,
       "estimatedFootprint": null,
+      "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 10 identifiable facilities."
+      "note": "Audited all 11 identifiable distribution centers."
     },
     "featuredSiteId": "05-tractor-supply",
-    "dossierIntro": "Tractor Supply self-distributes to its stores from a national network of large regional distribution centers. We mapped 10 of them, from the 900,000 square foot Navarre flagship to DCs in Texas, Arizona and Idaho, holding 1,049 dock doors and room for about 2,240 trailers. The yards are tightly run. Eight of the 10 sit behind a truck gate and 6 keep a staffed booth, and every one sits on rural, open-field land where trailers stage outside the fence. YardFlow turns those manual gate stops into one orchestrated gate-to-dock flow across the whole network.",
+    "dossierIntro": "Tractor Supply self-distributes to its stores from a national network of large regional distribution centers. We mapped 11 of them, from the 900,000 square foot Navarre flagship to DCs in Texas, Arizona and Idaho, holding 1,119 dock doors and room for about 2,390 trailers. The yards are tightly run. Nine of the 11 sit behind a truck gate and 7 keep a staffed booth, and every one sits on rural, open-field land where trailers stage outside the fence. YardFlow turns those manual gate stops into one orchestrated gate-to-dock flow across the whole network.",
     "surprisingFindings": [
-      "Eight of Tractor Supply’s 10 DCs sit behind a truck gate and 6 run a staffed booth. That is tighter yard control than most grocers we have mapped.",
-      "All 10 DCs sit on rural, open-field sites, where trailers stage outside the fence line before a single gate. The check-in pinch is the choke point.",
-      "The network holds 1,049 dock doors and about 2,240 trailer spots across 10 sites, and only one touches rail. Nearly everything moves by truck."
+      "Nine of Tractor Supply's 11 DCs sit behind a truck gate and 7 run a staffed booth. That is tighter yard control than most grocers we have mapped.",
+      "All 11 DCs sit on rural, open-field sites, where trailers stage outside the fence line before a single gate. The check-in pinch is the choke point.",
+      "The network holds 1,119 dock doors and about 2,390 trailer spots across 11 sites, and only one touches rail. Nearly everything moves by truck."
     ]
   },
   "research": null,
@@ -26,20 +27,20 @@
     "bbox": [
       -116.591,
       31.484603,
-      -77.7652,
+      -75.084487,
       43.634
     ],
     "archetypeMix": {
       "#9": 2,
-      "#10": 6,
+      "#10": 7,
       "#3": 2
     },
     "totals": {
-      "dockDoors": 1049,
-      "trailerCapacity": 2240,
-      "gates": 10,
+      "dockDoors": 1119,
+      "trailerCapacity": 2390,
+      "gates": 11,
       "railServed": 1,
-      "acres": 588.3
+      "acres": 655.3
     },
     "sites": [
       {
@@ -1725,6 +1726,276 @@
           "dropYard": "Dedicated on-site trailer-storage lots separate from active dock staging.",
           "trailersVisible": "Approximate count across all captured drop yards and dock faces.",
           "railServed": "No rail spur enters the property; I-81 borders the SE side."
+        }
+      },
+      {
+        "id": "07-tractor-supply",
+        "name": "Tractor Supply Distribution Center Frankfort NY",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 43.03564,
+          "lng": -75.08858
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 43.036809,
+                "lng": -75.091835
+              },
+              {
+                "lat": 43.037963,
+                "lng": -75.088401
+              },
+              {
+                "lat": 43.036809,
+                "lng": -75.086204
+              },
+              {
+                "lat": 43.035002,
+                "lng": -75.084487
+              },
+              {
+                "lat": 43.03179,
+                "lng": -75.085243
+              },
+              {
+                "lat": 43.032844,
+                "lng": -75.088813
+              },
+              {
+                "lat": 43.034952,
+                "lng": -75.092247
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 43.0368,
+                "lng": -75.089967
+              },
+              {
+                "lat": 43.0369,
+                "lng": -75.089555
+              },
+              {
+                "lat": 43.03675,
+                "lng": -75.089487
+              },
+              {
+                "lat": 43.036649,
+                "lng": -75.089899
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 43.036925,
+                  "lng": -75.089487
+                },
+                {
+                  "lat": 43.037377,
+                  "lng": -75.087255
+                },
+                {
+                  "lat": 43.037202,
+                  "lng": -75.087255
+                },
+                {
+                  "lat": 43.03675,
+                  "lng": -75.089487
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 43.033251,
+                  "lng": -75.089045
+                },
+                {
+                  "lat": 43.032322,
+                  "lng": -75.086745
+                },
+                {
+                  "lat": 43.032122,
+                  "lng": -75.086745
+                },
+                {
+                  "lat": 43.03305,
+                  "lng": -75.089045
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 43.036298,
+                  "lng": -75.090345
+                },
+                {
+                  "lat": 43.03675,
+                  "lng": -75.087186
+                },
+                {
+                  "lat": 43.037001,
+                  "lng": -75.087186
+                },
+                {
+                  "lat": 43.036549,
+                  "lng": -75.090345
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 43.033652,
+                  "lng": -75.089148
+                },
+                {
+                  "lat": 43.032749,
+                  "lng": -75.08647
+                },
+                {
+                  "lat": 43.032498,
+                  "lng": -75.08647
+                },
+                {
+                  "lat": 43.033402,
+                  "lng": -75.089148
+                }
+              ]
+            }
+          ],
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 186,
+              "pano": "RX2H0-J0Z3fYjFID88gVjw",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 232,
+              "pano": "RX2H0-J0Z3fYjFID88gVjw",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 150,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 67,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#10",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct (shipping vs receiving) drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 120000,
+              "narrationKey": "shiprcv.split",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron on correct side",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1320000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
+        },
+        "dossierExcerpt": "The supplied approximate point (43.036086, -75.089492) landed on the north/parking\ncorner of the correct building. Satellite at z16–z17 shows a single very large\nrectangular DC consistent with a regional distribution center, with branded\nTractor Supply orange trailers confirmed in Street View (pano\n`RX2H0-J0Z3fYjFID88gVjw`, captured 2024-08) — positively identifying TSC. Web\nsources (TruckMap, Manta, Yelp) corroborate the address and that this is the\nFrankfort DC. The building long axis runs **NW–SE, rotated ~35° clockwise from\nnorth**; all zone polygons were traced to that orientation.",
+        "mapsUrl": "https://www.google.com/maps/@43.035640,-75.088580,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Controlled entrance at the NW corner: a gatehouse/booth with a canopy and lane-line pinch point sits across the truck lane where the access loop road meets the yard (z19/z20 imagery, ~43.0367,-75.0899). Full chain-link perimeter fence confirmed in Street View along the entire road frontage.",
+          "guardShack": "Small white-roofed booth (~1-2 stall footprint) beside the gate lane with an adjacent canopy structure; a vehicle is parked at it. Classic staffed gatehouse.",
+          "remoteGs": "False because a physical guard booth is present.",
+          "postGateStaging": "Wide paved truck drive between the gate and the dock aprons on the NE side provides interior queue room.",
+          "drivewayLong": "Long internal apron/drive from the NW gate down the NE face holds well over 3 trucks; deep approach.",
+          "entryExitTogether": "Single gate complex at the NW corner serves both directions; no separate out-gate observed.",
+          "entryLanes": "Estimated 1-2 inbound lanes through the gate from overhead imagery; exact count low-confidence.",
+          "exitLanes": "Estimated 1 outbound; low-confidence from overhead only.",
+          "fastLaneOpportunity": "Very wide paved gate apron and multi-lane throat at the NW entrance with unused width to add a bypass/express lane.",
+          "dockDoors": "Dock doors on BOTH long faces (NE and SW) at a tight regular rhythm along a ~350m building; combined count well into the 50+ band (est. ~70).",
+          "dropArea": "Extensive marked trailer-drop stalls: NE center-island row + far row near the road, plus a full SW-face drop row; combined 50+.",
+          "shipRcvSeparate": "Two distinct dock banks on opposite (NE and SW) building faces suggests separate ship/receive operations; medium confidence.",
+          "urbanRural": "Edge-of-town / rural setting: bordered by woods and an open farm field to the W and S, just off the NY-5S expressway outside Frankfort.",
+          "buildingCount": "Main DC plus a separate office/ancillary building with its own parking near the NE access road.",
+          "dropYard": "Dedicated trailer-storage rows on both NE and SW sides, separate from active dock staging.",
+          "railServed": "No rail spur enters the property.",
+          "scale": "No truck scale clearly identified; flagged uncertain.",
+          "trailersVisible": "Honest overhead estimate (~95) across both drop yards and dock positions in the captured imagery."
         }
       },
       {
