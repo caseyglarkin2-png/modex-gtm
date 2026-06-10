@@ -1,0 +1,88 @@
+{
+  "name": "NFI Distribution Center Ontario CA",
+  "type": "Distribution Center",
+  "coords": { "lat": 34.039350, "lng": -117.633900 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 34.040861, "lng": -117.633010 },
+      { "lat": 34.037880, "lng": -117.632980 },
+      { "lat": 34.037760, "lng": -117.634640 },
+      { "lat": 34.040680, "lng": -117.634980 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 34.040806, "lng": -117.634720 },
+      { "lat": 34.040806, "lng": -117.634900 },
+      { "lat": 34.040420, "lng": -117.634860 },
+      { "lat": 34.040420, "lng": -117.634690 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 34.040580, "lng": -117.634740 },
+        { "lat": 34.037900, "lng": -117.634830 },
+        { "lat": 34.037900, "lng": -117.635080 },
+        { "lat": 34.040600, "lng": -117.634990 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 34.040580, "lng": -117.634470 },
+        { "lat": 34.037900, "lng": -117.634560 },
+        { "lat": 34.037900, "lng": -117.634830 },
+        { "lat": 34.040580, "lng": -117.634740 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 264, "pano": "ossBCthVBjdMyX3SQEzHog", "hasCoverage": true },
+      "truckGate": { "heading": 181, "pano": "9sdJy8zNwdwS5Nj3-wyyuQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 80,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 45,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 13.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.039350,-117.633900,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "location": "Supplied coords (34.055371,-117.727269) are a misgeocode: Google resolves '1450 E Mission Blvd' to Pomona CA 91766 (a retail strip, confirmed via Street View) because Mission Blvd straddles Pomona/Ontario. The actual operational NFI Inland Empire DC reverse-geocodes to 1990 S Cucamonga Ave, Ontario CA 91761 (cross street E Francis St). Confirmed NFI via NFI-branded tractors at the gate in Street View.",
+    "truckGate": "Controlled entrance off E Francis St at the building's NW: z21 satellite shows a barrier line across the drive throat with a small gatehouse island; Street View shows the entry median with signage and NFI tractors queued.",
+    "guardShack": "Small white ~1-vehicle-footprint booth sitting on a median island in the middle of the entry drive (z21), lanes split around it.",
+    "entryExitTogether": "Single gate throat at NW; lanes split around the booth island for in/out at one point.",
+    "dockDoors": "Continuous dock line along the entire ~345m west wall with trailers backed in at regular spacing; far exceeds 50 — banded 50+. Exact count uncertain from overhead.",
+    "dropArea": "Dedicated trailer-storage strip west of the dock apron holds bobtail trailers; estimated 25-50.",
+    "postGateStaging": "Wide paved truck court inside the gate before the dock line provides queue/staging room.",
+    "railServed": "No rail spur enters the property; the line near the south road is curb/drainage, not track.",
+    "siteAreaAcres": "13.7 ac from traced perimeter (building + east landscape buffer to Cucamonga + west truck court/drop yard). Note the D&B record's 10.76 ac / 168,361 sqft belongs to the separate '1450 E Mission' corporate listing; the operational DC building footprint here is ~560k sqft."
+  },
+  "method": "deep-audit"
+}

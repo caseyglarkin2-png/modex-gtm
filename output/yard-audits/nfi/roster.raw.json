@@ -1,0 +1,151 @@
+{
+  "account": "NFI Industries",
+  "generatedAt": "2026-06-10",
+  "facilityCount": 16,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "NFI Distribution Center Breinigsville PA",
+      "city": "Breinigsville",
+      "state": "PA",
+      "type": "Distribution Center",
+      "address": "200 Nestle Way, Breinigsville, PA 18031",
+      "source": "NFI facility profile PDF (nfiindustries.com/wp-content/uploads/2021/04/Breinigsville-PA-200-Nestle-Way-Facility-Profile)"
+    },
+    {
+      "idx": 2,
+      "name": "NFI Distribution Center Breinigsville PA (910 Nestle)",
+      "city": "Breinigsville",
+      "state": "PA",
+      "type": "Distribution Center",
+      "address": "910 Nestle Way, Breinigsville, PA 18031",
+      "source": "TruckMap listing + NFI Lehigh Valley lease (254,000 SF, Ocean Spray)"
+    },
+    {
+      "idx": 3,
+      "name": "NFI Cross-Dock Bethlehem PA",
+      "city": "Bethlehem",
+      "state": "PA",
+      "type": "Cross-Dock",
+      "address": "3051 Commerce Center Blvd, Bethlehem, PA 18015",
+      "source": "Waze place listing 'NFI - Cal Cartage' + Lehigh Valley logistics directory"
+    },
+    {
+      "idx": 4,
+      "name": "NFI Distribution Center Florence NJ",
+      "city": "Florence",
+      "state": "NJ",
+      "type": "Distribution Center",
+      "address": "1 Crossings Blvd, Florence, NJ 08518",
+      "source": "NFI Park at Florence Crossings campus; NFI news release on QPSI HQ groundbreaking in Florence"
+    },
+    {
+      "idx": 5,
+      "name": "NFI Port Logistics Eastvale CA",
+      "city": "Eastvale",
+      "state": "CA",
+      "type": "Port Logistics",
+      "address": "13000 Mission Blvd, Eastvale, CA 92509",
+      "source": "CoStar + Commercial Observer (761,000 SF, $220M owner-user purchase from Sares-Regis, 2022)"
+    },
+    {
+      "idx": 6,
+      "name": "NFI Distribution Center Perris CA",
+      "city": "Perris",
+      "state": "CA",
+      "type": "Distribution Center",
+      "address": "657 Nance St, Perris, CA 92571",
+      "source": "REBusinessOnline + theRegistrySoCal (864,000 SF lease renewal; 112 docks, 224 trailer spots)"
+    },
+    {
+      "idx": 7,
+      "name": "NFI Distribution Center Perris CA (Indian Ave)",
+      "city": "Perris",
+      "state": "CA",
+      "type": "Distribution Center",
+      "address": "3700 Indian Ave, Perris, CA 92571",
+      "source": "Yelp business listing for NFI Industries Perris"
+    },
+    {
+      "idx": 8,
+      "name": "NFI Distribution Center Ontario CA",
+      "city": "Ontario",
+      "state": "CA",
+      "type": "Distribution Center",
+      "address": "1450 E Mission Blvd, Ontario, CA 91761",
+      "source": "Dun & Bradstreet company profile (NFI Industries Ontario CA)"
+    },
+    {
+      "idx": 9,
+      "name": "NFI Distribution Center Moreno Valley CA",
+      "city": "Moreno Valley",
+      "state": "CA",
+      "type": "Distribution Center",
+      "address": "24385 Nandina Ave, Moreno Valley, CA 92551",
+      "source": "Moreno Valley Chamber of Commerce member directory (NFI Industries Warehousing)"
+    },
+    {
+      "idx": 10,
+      "name": "NFI Port Logistics Port Wentworth GA",
+      "city": "Port Wentworth",
+      "state": "GA",
+      "type": "Port Logistics",
+      "address": "120 Crossgate Road, Port Wentworth, GA 31407",
+      "source": "NFI Savannah Tour Handout PDF + Georgia Ports Authority blog (300,000 SF transload, 900 trailer spots, <1 mi from Garden City Terminal)"
+    },
+    {
+      "idx": 11,
+      "name": "NFI Import Warehouse Pooler GA",
+      "city": "Pooler",
+      "state": "GA",
+      "type": "Import Warehouse",
+      "address": "1030 S H Morgan Parkway, Pooler, GA 31322",
+      "source": "Savannah Business Journal (PCCP/NFI JV acquired two facilities totaling 565,000 SF, within 12 mi of Garden City & Ocean terminals)"
+    },
+    {
+      "idx": 12,
+      "name": "NFI Distribution Center Savannah GA",
+      "city": "Savannah",
+      "state": "GA",
+      "type": "Distribution Center",
+      "address": "1200 Logistics Parkway, Savannah, GA 31407",
+      "source": "JLL newsroom (1M SF DC, 10.7 mi from Garden City Terminal, 4.9 mi from I-95)"
+    },
+    {
+      "idx": 13,
+      "name": "NFI Distribution Center Lancaster TX",
+      "city": "Lancaster",
+      "state": "TX",
+      "type": "Distribution Center",
+      "address": "510 E Pleasant Run Rd, Lancaster, TX 75146",
+      "source": "Yellow Pages NFI Lancaster TX listing + NFI/Rent-A-Center DFW DC news release"
+    },
+    {
+      "idx": 14,
+      "name": "NFI Fulfillment Center Fairburn GA",
+      "city": "Fairburn",
+      "state": "GA",
+      "type": "Fulfillment Center",
+      "address": "2000 Logistics Center Dr, Fairburn, GA 30213",
+      "source": "Waze place listing 'NFI Industries Inc - Truck Check-In', Fairburn (Atlanta metro)"
+    },
+    {
+      "idx": 15,
+      "name": "NFI Distribution Center McDonough GA",
+      "city": "McDonough",
+      "state": "GA",
+      "type": "Distribution Center",
+      "address": "165 Greenwood Industrial Pkwy, McDonough, GA 30253",
+      "source": "ChamberofCommerce.com business directory (NFI - McDonough)"
+    },
+    {
+      "idx": 16,
+      "name": "NFI Distribution Center Elwood IL",
+      "city": "Elwood",
+      "state": "IL",
+      "type": "Distribution Center",
+      "address": "27143 S Elwood International Port Rd, Elwood, IL 60421",
+      "source": "Waze + Manta listings (NFI National Distribution Center, CenterPoint Intermodal Center, BNSF rail hub)"
+    }
+  ]
+}

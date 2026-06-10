@@ -1,0 +1,101 @@
+{
+  "name": "NFI Distribution Center Lancaster TX",
+  "type": "Distribution Center",
+  "coords": { "lat": 32.6366, "lng": -96.7955 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 32.638566, "lng": -96.797423 },
+      { "lat": 32.639260, "lng": -96.795843 },
+      { "lat": 32.638566, "lng": -96.794676 },
+      { "lat": 32.636600, "lng": -96.793440 },
+      { "lat": 32.635675, "lng": -96.794813 },
+      { "lat": 32.636253, "lng": -96.796736 },
+      { "lat": 32.637641, "lng": -96.797697 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 32.637178, "lng": -96.797560 },
+      { "lat": 32.636600, "lng": -96.796599 },
+      { "lat": 32.636253, "lng": -96.796873 },
+      { "lat": 32.636831, "lng": -96.797835 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 32.636484, "lng": -96.796873 },
+        { "lat": 32.635906, "lng": -96.795775 },
+        { "lat": 32.635675, "lng": -96.794951 },
+        { "lat": 32.635444, "lng": -96.796187 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 32.638277, "lng": -96.797148 },
+        { "lat": 32.638797, "lng": -96.796187 },
+        { "lat": 32.638335, "lng": -96.795775 },
+        { "lat": 32.637756, "lng": -96.796736 }
+      ] },
+      { "ring": [
+        { "lat": 32.638219, "lng": -96.795157 },
+        { "lat": 32.638508, "lng": -96.794401 },
+        { "lat": 32.636600, "lng": -96.793440 },
+        { "lat": 32.636311, "lng": -96.794127 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
+      "truckGate": { "heading": 338, "pano": "FEPx5udOzj6zfDwjKnXT8Q", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 24.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.6366,-96.7955,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "_location": "Audited the operational NFI/Rent-A-Center cross-dock DC at 1901 Danieldale Rd in ProLogis Park 20/35 (~32.6366,-96.7955), NOT the supplied 510 E Pleasant Run Rd coords (32.6037,-96.7508), which resolve to a small unrelated industrial/contractor yard. The researchHint (NFI/Rent-A-Center DFW DC news release, ~650k SF) matches only the Danieldale building.",
+    "truckGate": "Continuous chain-link perimeter fence around the parcel; sliding gate at the auto/office entrance (SV pano j0sagb07-UCR3pXu55zgPw) and a fence-line gate where the SW internal drive enters the trailer/dock yard. Access is controlled.",
+    "guardShack": "No small staffed booth (1-3 vehicle footprint) identifiable at the truck lane in satellite z19-z21 or Street View; medium confidence.",
+    "remoteGs": "Inferred true because a gate exists but no guard shack is visible, implying kiosk/call-box/app check-in (typical modern ProLogis cross-dock). Medium confidence.",
+    "shipRcvSeparate": "Cross-dock building: dock banks on BOTH long faces (SW face and NE face), so ship and receive run from physically separate dock clusters.",
+    "fastLaneOpportunity": "Very wide multi-lane internal park drives and a deep gate apron (Walmart tractor-trailer seen on the open drive in SV); ample paved width to add an express/bypass lane.",
+    "dockDoors": "Counted regular dock-door rhythm with trailers backed in along both long faces (each ~430m); well over 50 doors total. Band 50+.",
+    "dropArea": "Marked trailer-parking stalls in the SE drop yard and along the aprons holding trailers without tractors; estimate in the 25-50 band.",
+    "postGateStaging": "Deep paved drive aisles and aprons inside the fence between the gate and the dock faces give large interior staging/queue room.",
+    "drivewayLong": "Gate-to-dock approach is long; the internal drive can hold 3+ trucks before reaching the dock faces.",
+    "urbanRural": "Lancaster is part of the Dallas-Fort Worth metro; dense residential subdivisions abut the park to the E/S. Urban.",
+    "yardMetrics": "Dock-door/trailer counts are honest estimates from overhead imagery (Maxar/Vexcel via Google Static API). siteAreaAcres (24.5) derived from the perimeter polygon shoelace area; building alone ~650k SF per public reporting.",
+    "railServed": "No rail spur runs into the parcel; the BNSF/DART line ~1km east does not enter the property."
+  },
+  "method": "deep-audit"
+}

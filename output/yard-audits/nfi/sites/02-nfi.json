@@ -1,0 +1,123 @@
+{
+  "name": "NFI Distribution Center Breinigsville PA (910 Nestle)",
+  "type": "Distribution Center",
+  "coords": { "lat": 40.56815, "lng": -75.65055 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 40.56882, "lng": -75.65245 },
+      { "lat": 40.56845, "lng": -75.64910 },
+      { "lat": 40.56838, "lng": -75.64720 },
+      { "lat": 40.56735, "lng": -75.64525 },
+      { "lat": 40.56612, "lng": -75.64615 },
+      { "lat": 40.56640, "lng": -75.64880 },
+      { "lat": 40.56678, "lng": -75.65150 },
+      { "lat": 40.56795, "lng": -75.65275 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 40.56672, "lng": -75.64905 },
+      { "lat": 40.56672, "lng": -75.64862 },
+      { "lat": 40.56628, "lng": -75.64868 },
+      { "lat": 40.56628, "lng": -75.64910 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 40.56835, "lng": -75.64760 },
+        { "lat": 40.56795, "lng": -75.64560 },
+        { "lat": 40.56700, "lng": -75.64615 },
+        { "lat": 40.56745, "lng": -75.64810 }
+      ] },
+      { "ring": [
+        { "lat": 40.56760, "lng": -75.64560 },
+        { "lat": 40.56690, "lng": -75.64470 },
+        { "lat": 40.56600, "lng": -75.64560 },
+        { "lat": 40.56670, "lng": -75.64640 }
+      ] },
+      { "ring": [
+        { "lat": 40.56680, "lng": -75.64955 },
+        { "lat": 40.56668, "lng": -75.64835 },
+        { "lat": 40.56625, "lng": -75.64842 },
+        { "lat": 40.56638, "lng": -75.64962 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 40.56792, "lng": -75.65235 },
+        { "lat": 40.56758, "lng": -75.64940 },
+        { "lat": 40.56748, "lng": -75.64945 },
+        { "lat": 40.56782, "lng": -75.65240 }
+      ] },
+      { "ring": [
+        { "lat": 40.56838, "lng": -75.65195 },
+        { "lat": 40.56808, "lng": -75.64930 },
+        { "lat": 40.56798, "lng": -75.64935 },
+        { "lat": 40.56828, "lng": -75.65200 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 40.56805, "lng": -75.64935 },
+      { "lat": 40.56792, "lng": -75.64790 },
+      { "lat": 40.56720, "lng": -75.64820 },
+      { "lat": 40.56735, "lng": -75.64960 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
+      "truckGate": { "heading": 0, "pano": "", "hasCoverage": false }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 47,
+    "trailersVisible": 150,
+    "trailerParkingCapacity": 180,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 30.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.56815,-75.65055,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "trailerParkingCapacity", "connectivityIssue"],
+  "fieldNotes": {
+    "truckGate": "South driveway connects the open trailer yard directly to the public road (Nestle Way) with no barrier arm, sliding/swing gate, or checkpoint pinch-point. Eastern access road junctions are likewise open. Yard is an open-access cross-dock trailer lot inside the Liberty Park / Nestle Way industrial complex.",
+    "guardShack": "No booth structure of any kind found at any entrance across z19/z20 imagery of the south driveway, east access road, or NE drop-yard road.",
+    "remoteGs": "No truck gate present, so remoteGs is false by definition.",
+    "dockDoors": "Cross-dock terminal with loading doors on BOTH long faces (north and south); NFI marketing flyer lists 47 dock doors w/ levelers. Band 25-50.",
+    "dropArea": "Extensive dedicated drop yards: diagonal trailer rows NE of the building, a second cluster to the east, and a row along the south edge — well over 50 parked trailers in the captured imagery.",
+    "shipRcvSeparate": "Cross-dock layout means inbound and outbound run from physically separate dock banks on opposite (north vs south) building faces.",
+    "entryExitSeparate": "Multiple open access points to the public road network (south driveway + eastern access road), so entry and exit are not forced through a single controlled point.",
+    "postGateStaging": "Large paved internal staging/parking lot east of the building between the docks and the drop yards.",
+    "drivewayLong": "Deep internal approach from the public-road driveway across the lot to the dock faces easily holds 3+ trucks.",
+    "entryLanes": "Single-carriageway driveway; lane count is an estimate from overhead imagery (no on-site Street View of the entrance).",
+    "exitLanes": "Estimate; see entryLanes.",
+    "truckGateCount": "Two open vehicular access points observed (south driveway to Nestle Way + eastern access road); neither is controlled.",
+    "siteAreaAcres": "~30.5 acres derived (shoelace) from the traced perimeter polygon (building + cross-dock aprons + drop yards + staging); approximate.",
+    "trailerParkingCapacity": "Estimated from drop-yard stall geometry; approximate.",
+    "connectivityIssue": "Site is rural/edge-of-town but sits within an active large industrial park near I-78, so cellular coverage is likely adequate; flagged as low-confidence inference.",
+    "railServed": "No rail spur enters the property in any captured imagery.",
+    "location": "Confirmed 910 Nestle Way via Google rooftop geocode (40.5673153, -75.6493462) and the NFI/LoopNet profile (cross-dock terminal, 47 dock doors w/ levelers, 51 off-wall trailer parking) — matches the long narrow cross-dock building, NOT the larger single-footprint DC to the NE (the sister site, idx 01). coords field re-centered on the building itself."
+  },
+  "method": "deep-audit"
+}

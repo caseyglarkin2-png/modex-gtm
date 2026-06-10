@@ -1,0 +1,110 @@
+{
+  "name": "Tractor Supply Distribution Center Waco TX",
+  "type": "Distribution Center",
+  "coords": { "lat": 31.48635, "lng": -97.16035 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 31.488336, "lng": -97.160618 },
+      { "lat": 31.486433, "lng": -97.158655 },
+      { "lat": 31.485774, "lng": -97.157936 },
+      { "lat": 31.485152, "lng": -97.158741 },
+      { "lat": 31.484603, "lng": -97.162174 },
+      { "lat": 31.485518, "lng": -97.163483 },
+      { "lat": 31.486232, "lng": -97.163408 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 31.486570, "lng": -97.158934 },
+      { "lat": 31.486433, "lng": -97.158569 },
+      { "lat": 31.486195, "lng": -97.158676 },
+      { "lat": 31.486332, "lng": -97.159041 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 31.486140, "lng": -97.163354 },
+        { "lat": 31.485930, "lng": -97.160243 },
+        { "lat": 31.484878, "lng": -97.160565 },
+        { "lat": 31.484621, "lng": -97.162174 },
+        { "lat": 31.485500, "lng": -97.163461 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 31.488080, "lng": -97.161015 },
+        { "lat": 31.488098, "lng": -97.160565 },
+        { "lat": 31.486570, "lng": -97.158741 },
+        { "lat": 31.486433, "lng": -97.158955 }
+      ] },
+      { "ring": [
+        { "lat": 31.486433, "lng": -97.162710 },
+        { "lat": 31.486113, "lng": -97.159974 },
+        { "lat": 31.485866, "lng": -97.160028 },
+        { "lat": 31.486177, "lng": -97.162764 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 31.486433, "lng": -97.159277 },
+      { "lat": 31.486341, "lng": -97.158934 },
+      { "lat": 31.486021, "lng": -97.159063 },
+      { "lat": 31.486140, "lng": -97.159406 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 223, "pano": "XL_4LnFTXma6MOih6Mxf8Q", "hasCoverage": true },
+      "truckGate": { "heading": 306, "pano": "4FCsQp4AotyqmOmfOonT_A", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 220,
+    "trailerParkingCapacity": 180,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 31.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@31.48635,-97.16035,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "trailerParkingCapacity", "shipRcvSeparate", "connectivityIssue"],
+  "fieldNotes": {
+    "truckGate": "Street View (pano 4FCsQp4AotyqmOmfOonT_A, 2022-04, heading ~306-340) shows two red/white striped barrier arms across separate lanes with a raised concrete median island where the truck drive meets Corporation Pkwy.",
+    "guardShack": "Same gate frame shows a small staffed booth on the left with a STOP sign and traffic cones, ~1-2 vehicle footprint, windows on multiple sides, set beside the gate lanes. Classic guard shack.",
+    "remoteGs": "False because a manned guard shack is present at the gate.",
+    "entryExitTogether": "Single combined gate complex with an in lane and an out lane split by a median island at one point on the property line off Corporation Pkwy.",
+    "entryLanes": "Estimated 1 inbound lane at the gate; barrier-arm split suggests one in / one out. Low confidence on exact lane split.",
+    "exitLanes": "Estimated 1 outbound lane (the second barrier-arm lane).",
+    "postGateStaging": "Wide paved apron just inside the gate before the dock approach; trucks can hold here. Pre-gate (street-side) staging not present, road frontage is narrow.",
+    "drivewayLong": "Deep gate-to-dock approach and large internal yard easily holds a 3+ truck queue.",
+    "dockDoors": "Long NE building face has trailers backed into a continuous dock bank (40+ doors) and a second dock bank on the SW face with trailers backed in; total across both faces is well into 50+ band. Count is an overhead estimate.",
+    "dropArea": "Very large dedicated trailer-storage lot on the SW/W side with many rows of parked trailers (well over 50 stalls). 50+ band.",
+    "shipRcvSeparate": "Two physically distinct dock banks on different building faces (NE wall and SW wall), consistent with separate ship/receive flows. Medium confidence; could be one continuous operation.",
+    "dropYard": "Dedicated trailer-storage lot full of parked trailers separate from active dock staging on the SW side.",
+    "railServed": "A rail line/spur runs along the NE side parallel to Corporation Pkwy adjacent to the property; treated as rail-served. Spur may serve the corridor rather than terminating in the building.",
+    "urbanRural": "Edge-of-town industrial park SW of Waco against open land and a wooded creek to the south; judged Rural per rubric tie-break toward small-town industrial.",
+    "connectivityIssue": "False; sits in an active business park with adjacent office/medical development, so cellular coverage is likely adequate.",
+    "siteAreaAcres": "~31 acres from the traced perimeter polygon (building + drop yard + parking + apron)."
+  },
+  "method": "deep-audit"
+}

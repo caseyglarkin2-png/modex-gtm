@@ -1,0 +1,2729 @@
+{
+  "schemaVersion": "2",
+  "builtAt": "2026-06-10T15:27:35.440Z",
+  "account": {
+    "slug": "tractor-supply",
+    "displayName": "Tractor Supply Company",
+    "archetype": "retailer",
+    "siteCount": 10,
+    "coverageNote": {
+      "auditedCount": 10,
+      "estimatedFootprint": null,
+      "droppedStubCount": 0,
+      "capHit": false,
+      "note": "Audited all 10 identifiable facilities."
+    },
+    "featuredSiteId": "05-tractor-supply",
+    "dossierIntro": "Tractor Supply self-distributes to its stores from a national network of large regional distribution centers. We mapped 10 of them, from the 900,000 square foot Navarre flagship to DCs in Texas, Arizona and Idaho, holding 1,049 dock doors and room for about 2,240 trailers. The yards are tightly run. Eight of the 10 sit behind a truck gate and 6 keep a staffed booth, and every one sits on rural, open-field land where trailers stage outside the fence. YardFlow turns those manual gate stops into one orchestrated gate-to-dock flow across the whole network.",
+    "surprisingFindings": [
+      "Eight of Tractor Supply’s 10 DCs sit behind a truck gate and 6 run a staffed booth. That is tighter yard control than most grocers we have mapped.",
+      "All 10 DCs sit on rural, open-field sites, where trailers stage outside the fence line before a single gate. The check-in pinch is the choke point.",
+      "The network holds 1,049 dock doors and about 2,240 trailer spots across 10 sites, and only one touches rail. Nearly everything moves by truck."
+    ]
+  },
+  "research": null,
+  "network": {
+    "bbox": [
+      -116.591,
+      31.484603,
+      -77.7652,
+      43.634
+    ],
+    "archetypeMix": {
+      "#9": 2,
+      "#10": 6,
+      "#3": 2
+    },
+    "totals": {
+      "dockDoors": 1049,
+      "trailerCapacity": 2240,
+      "gates": 10,
+      "railServed": 1,
+      "acres": 588.3
+    },
+    "sites": [
+      {
+        "id": "01-tractor-supply",
+        "name": "Tractor Supply Distribution Center Pendleton IN",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "shipRcvSeparate",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 39.9982,
+          "lng": -85.7728
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 40.00045,
+                "lng": -85.77455
+              },
+              {
+                "lat": 40.00065,
+                "lng": -85.77095
+              },
+              {
+                "lat": 39.9995,
+                "lng": -85.7708
+              },
+              {
+                "lat": 39.9962,
+                "lng": -85.771
+              },
+              {
+                "lat": 39.99685,
+                "lng": -85.7746
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 39.99995,
+                "lng": -85.77135
+              },
+              {
+                "lat": 40.00005,
+                "lng": -85.77095
+              },
+              {
+                "lat": 39.99955,
+                "lng": -85.7708
+              },
+              {
+                "lat": 39.99945,
+                "lng": -85.7712
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 39.9994,
+                  "lng": -85.7714
+                },
+                {
+                  "lat": 39.99935,
+                  "lng": -85.77085
+                },
+                {
+                  "lat": 39.9963,
+                  "lng": -85.77105
+                },
+                {
+                  "lat": 39.99635,
+                  "lng": -85.7716
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 39.9972,
+                  "lng": -85.77445
+                },
+                {
+                  "lat": 39.9972,
+                  "lng": -85.7717
+                },
+                {
+                  "lat": 39.9969,
+                  "lng": -85.7717
+                },
+                {
+                  "lat": 39.9969,
+                  "lng": -85.77445
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 40.00015,
+                  "lng": -85.77455
+                },
+                {
+                  "lat": 39.9971,
+                  "lng": -85.7744
+                },
+                {
+                  "lat": 39.9971,
+                  "lng": -85.77405
+                },
+                {
+                  "lat": 40.00015,
+                  "lng": -85.7742
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 39.997,
+                  "lng": -85.7743
+                },
+                {
+                  "lat": 39.997,
+                  "lng": -85.7713
+                },
+                {
+                  "lat": 39.9968,
+                  "lng": -85.7713
+                },
+                {
+                  "lat": 39.9968,
+                  "lng": -85.7743
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 39.9994,
+                  "lng": -85.77145
+                },
+                {
+                  "lat": 39.9972,
+                  "lng": -85.77155
+                },
+                {
+                  "lat": 39.9972,
+                  "lng": -85.77185
+                },
+                {
+                  "lat": 39.9994,
+                  "lng": -85.77175
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 40.0001,
+                "lng": -85.77135
+              },
+              {
+                "lat": 40.0002,
+                "lng": -85.77085
+              },
+              {
+                "lat": 39.99998,
+                "lng": -85.7708
+              },
+              {
+                "lat": 39.9999,
+                "lng": -85.7713
+              }
+            ]
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 180,
+          "trailersVisible": 240,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 34.9,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
+        "dossierExcerpt": "The supplied approximate coordinates (39.998337, -85.772929) landed directly on\nthe roof of the correct building — no correction needed. A zoom-17 satellite\ncrop at the point showed a single very large distribution building ringed by\nloading docks and trailers on three faces, consistent with a DC (not an office).\nA zoom-15/16 context pull placed it on the west edge of Pendleton IN, hard\nagainst I-69, with farm fields to the west and south and apartment/light-\nindustrial development to the east. Web search confirmed 320 Enterprise Dr,\nPendleton IN 46064 as the Tractor Supply Pendleton Distribution Center\n(TruckMap, Waze, Nextdoor, Yellowpages all corroborate the address and that it\nis a TSC distribution center). Building positively identified.",
+        "mapsUrl": "https://www.google.com/maps/@39.99820,-85.77280,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Street View (2025-06) shows a chain-link perimeter fence with slatted privacy panels and a wide sliding/swing gate opening across the truck drive at the NE entrance off Enterprise Dr; concrete jersey barriers channel traffic into the lanes.",
+          "guardShack": "No staffed booth visible at the entrance in any Street View heading; entry control is fence + gate + barriers only.",
+          "remoteGs": "Gate present but unmanned (no shack) implies kiosk / call-box / app check-in.",
+          "preGateStaging": "Curved paved apron on Enterprise Dr immediately outside the gate gives room for arriving trucks to wait.",
+          "postGateStaging": "Large paved yard inside the gate before docks for queueing/maneuvering.",
+          "fastLaneOpportunity": "Wide gate apron and ample paved entry width; room to add a bypass/express lane.",
+          "entryLanes": "Single combined gate lane controlled by jersey barriers; in/out share the one opening (estimate).",
+          "exitLanes": "Shared with entry through the same gate (estimate).",
+          "dockDoors": "Loading docks run along the west, south, and east building faces with trailers backed in across all three; total well into the 50+ band (estimated ~180 doors).",
+          "dropArea": "Dedicated drop yard with fishbone/angled trailer rows on the east side plus a large south trailer yard; 50+ band.",
+          "shipRcvSeparate": "Docks split across separate building faces (west long bank vs south/east banks) consistent with separate shipping/receiving clusters; medium confidence.",
+          "dropYard": "Dedicated trailer-storage lot full of parked trailers separate from active dock staging.",
+          "urbanRural": "Edge-of-town Pendleton IN: bordered by I-69 and farm fields with some adjacent apartment/industrial development; broader setting is rural.",
+          "railServed": "No rail spur enters the property.",
+          "trailerParkingCapacity": "Estimated from visible drop-yard rows and open paved yard; approximate."
+        }
+      },
+      {
+        "id": "02-tractor-supply",
+        "name": "Tractor Supply Distribution Center Waco TX",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "trailerParkingCapacity",
+          "shipRcvSeparate",
+          "connectivityIssue"
+        ],
+        "center": {
+          "lat": 31.48635,
+          "lng": -97.16035
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 31.488336,
+                "lng": -97.160618
+              },
+              {
+                "lat": 31.486433,
+                "lng": -97.158655
+              },
+              {
+                "lat": 31.485774,
+                "lng": -97.157936
+              },
+              {
+                "lat": 31.485152,
+                "lng": -97.158741
+              },
+              {
+                "lat": 31.484603,
+                "lng": -97.162174
+              },
+              {
+                "lat": 31.485518,
+                "lng": -97.163483
+              },
+              {
+                "lat": 31.486232,
+                "lng": -97.163408
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 31.48657,
+                "lng": -97.158934
+              },
+              {
+                "lat": 31.486433,
+                "lng": -97.158569
+              },
+              {
+                "lat": 31.486195,
+                "lng": -97.158676
+              },
+              {
+                "lat": 31.486332,
+                "lng": -97.159041
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 31.48614,
+                  "lng": -97.163354
+                },
+                {
+                  "lat": 31.48593,
+                  "lng": -97.160243
+                },
+                {
+                  "lat": 31.484878,
+                  "lng": -97.160565
+                },
+                {
+                  "lat": 31.484621,
+                  "lng": -97.162174
+                },
+                {
+                  "lat": 31.4855,
+                  "lng": -97.163461
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 31.48808,
+                  "lng": -97.161015
+                },
+                {
+                  "lat": 31.488098,
+                  "lng": -97.160565
+                },
+                {
+                  "lat": 31.48657,
+                  "lng": -97.158741
+                },
+                {
+                  "lat": 31.486433,
+                  "lng": -97.158955
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 31.486433,
+                  "lng": -97.16271
+                },
+                {
+                  "lat": 31.486113,
+                  "lng": -97.159974
+                },
+                {
+                  "lat": 31.485866,
+                  "lng": -97.160028
+                },
+                {
+                  "lat": 31.486177,
+                  "lng": -97.162764
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 31.486433,
+                "lng": -97.159277
+              },
+              {
+                "lat": 31.486341,
+                "lng": -97.158934
+              },
+              {
+                "lat": 31.486021,
+                "lng": -97.159063
+              },
+              {
+                "lat": 31.48614,
+                "lng": -97.159406
+              }
+            ]
+          },
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 223,
+              "pano": "XL_4LnFTXma6MOih6Mxf8Q",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 306,
+              "pano": "4FCsQp4AotyqmOmfOonT_A",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 31,
+          "railServed": true
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#10",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct (shipping vs receiving) drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 120000,
+              "narrationKey": "shiprcv.split",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron on correct side",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1320000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
+        },
+        "dossierExcerpt": "The supplied coordinates (31.486413, -97.160092) landed directly on a single very\nlarge rectangular distribution building with extensive trailer parking — consistent\nwith a regional DC, not an office. Web search confirmed Tractor Supply Co.\nDistribution Center at 2801 Corporation Pkwy, Waco, TX 76712 (Greater Waco Chamber,\nWaze, Yelp, Birdeye listings all match the address and the DC use). The building sits\nin a business park SW of central Waco, just west of I-35, with the access road\n(Corporation Pkwy) running along its NE side. Locked center at 31.48635, -97.16035.\nThe parcel is rotated roughly 30° off north (long axis NW-SE), so all geofences were\ntraced as oriented polygons rather than north-aligned boxes.",
+        "mapsUrl": "https://www.google.com/maps/@31.48635,-97.16035,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Street View (pano 4FCsQp4AotyqmOmfOonT_A, 2022-04, heading ~306-340) shows two red/white striped barrier arms across separate lanes with a raised concrete median island where the truck drive meets Corporation Pkwy.",
+          "guardShack": "Same gate frame shows a small staffed booth on the left with a STOP sign and traffic cones, ~1-2 vehicle footprint, windows on multiple sides, set beside the gate lanes. Classic guard shack.",
+          "remoteGs": "False because a manned guard shack is present at the gate.",
+          "entryExitTogether": "Single combined gate complex with an in lane and an out lane split by a median island at one point on the property line off Corporation Pkwy.",
+          "entryLanes": "Estimated 1 inbound lane at the gate; barrier-arm split suggests one in / one out. Low confidence on exact lane split.",
+          "exitLanes": "Estimated 1 outbound lane (the second barrier-arm lane).",
+          "postGateStaging": "Wide paved apron just inside the gate before the dock approach; trucks can hold here. Pre-gate (street-side) staging not present, road frontage is narrow.",
+          "drivewayLong": "Deep gate-to-dock approach and large internal yard easily holds a 3+ truck queue.",
+          "dockDoors": "Long NE building face has trailers backed into a continuous dock bank (40+ doors) and a second dock bank on the SW face with trailers backed in; total across both faces is well into 50+ band. Count is an overhead estimate.",
+          "dropArea": "Very large dedicated trailer-storage lot on the SW/W side with many rows of parked trailers (well over 50 stalls). 50+ band.",
+          "shipRcvSeparate": "Two physically distinct dock banks on different building faces (NE wall and SW wall), consistent with separate ship/receive flows. Medium confidence; could be one continuous operation.",
+          "dropYard": "Dedicated trailer-storage lot full of parked trailers separate from active dock staging on the SW side.",
+          "railServed": "A rail line/spur runs along the NE side parallel to Corporation Pkwy adjacent to the property; treated as rail-served. Spur may serve the corridor rather than terminating in the building.",
+          "urbanRural": "Edge-of-town industrial park SW of Waco against open land and a wooded creek to the south; judged Rural per rubric tie-break toward small-town industrial.",
+          "connectivityIssue": "False; sits in an active business park with adjacent office/medical development, so cellular coverage is likely adequate.",
+          "siteAreaAcres": "~31 acres from the traced perimeter polygon (building + drop yard + parking + apron)."
+        }
+      },
+      {
+        "id": "03-tractor-supply",
+        "name": "Tractor Supply Distribution Center Macon GA",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 32.7253,
+          "lng": -83.7318
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 32.7286,
+                "lng": -83.7314
+              },
+              {
+                "lat": 32.7284,
+                "lng": -83.72995
+              },
+              {
+                "lat": 32.727,
+                "lng": -83.7296
+              },
+              {
+                "lat": 32.7238,
+                "lng": -83.72985
+              },
+              {
+                "lat": 32.72345,
+                "lng": -83.7323
+              },
+              {
+                "lat": 32.724,
+                "lng": -83.7352
+              },
+              {
+                "lat": 32.7257,
+                "lng": -83.73575
+              },
+              {
+                "lat": 32.7282,
+                "lng": -83.73385
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 32.72846,
+                "lng": -83.7304
+              },
+              {
+                "lat": 32.72838,
+                "lng": -83.72995
+              },
+              {
+                "lat": 32.72792,
+                "lng": -83.73003
+              },
+              {
+                "lat": 32.728,
+                "lng": -83.73048
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 32.7276,
+                  "lng": -83.7343
+                },
+                {
+                  "lat": 32.7269,
+                  "lng": -83.7328
+                },
+                {
+                  "lat": 32.7256,
+                  "lng": -83.7337
+                },
+                {
+                  "lat": 32.7263,
+                  "lng": -83.7352
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 32.7256,
+                  "lng": -83.7351
+                },
+                {
+                  "lat": 32.725,
+                  "lng": -83.73385
+                },
+                {
+                  "lat": 32.7242,
+                  "lng": -83.7344
+                },
+                {
+                  "lat": 32.72475,
+                  "lng": -83.7356
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 32.72685,
+                  "lng": -83.73175
+                },
+                {
+                  "lat": 32.7262,
+                  "lng": -83.7304
+                },
+                {
+                  "lat": 32.726,
+                  "lng": -83.73055
+                },
+                {
+                  "lat": 32.72665,
+                  "lng": -83.7319
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 32.7247,
+                  "lng": -83.7343
+                },
+                {
+                  "lat": 32.72405,
+                  "lng": -83.733
+                },
+                {
+                  "lat": 32.72385,
+                  "lng": -83.73315
+                },
+                {
+                  "lat": 32.7245,
+                  "lng": -83.73445
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 32.7279,
+                "lng": -83.7313
+              },
+              {
+                "lat": 32.72775,
+                "lng": -83.73055
+              },
+              {
+                "lat": 32.72735,
+                "lng": -83.73065
+              },
+              {
+                "lat": 32.7275,
+                "lng": -83.7314
+              }
+            ]
+          },
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 212,
+              "pano": "470APtXRgYZeHxRS6JXZIg",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 19,
+              "pano": "R6Z3cYYaPISRIt_RoDrTKQ",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 230,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 64.7,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": true,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#10",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct (shipping vs receiving) drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 120000,
+              "narrationKey": "shiprcv.split",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron on correct side",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1320000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
+        },
+        "dossierExcerpt": "The supplied coordinates (32.725721, -83.731072) landed directly on a large\nwhite-roof distribution building with extensive trailer drop yards — correct\non the first probe. Web search for \"151 Tractor Dr, Macon GA\" corroborated the\nidentity (maconchamber.com, TruckMap, driver-review aggregators) as the Tractor\nSupply Co. Macon Distribution Center, a 24/7 drop-and-hook DC with on-site CAT\nScale and security staff. The building sits in an I-75-corridor industrial park\nsouth of Macon alongside several other large DCs.\n\nThe structure is rotated roughly 30° off north (long axis running WSW–ENE), so\nall geofences were traced as oriented polygons rather than north-aligned boxes.\n\n---",
+        "mapsUrl": "https://www.google.com/maps/@32.72530,-83.73180,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Divided-boulevard truck entrance off Tractor Dr; gate arms / sliding gates span both inbound and outbound lanes with a perimeter fence line continuing to either side (z21 imagery at 32.7281,-83.7301).",
+          "guardShack": "White booth structure seated in the median island straddling the gate lanes, ~1-2 vehicle footprint; staff vehicles parked on the median beside it. Driver reviews cite helpful on-site security staff.",
+          "entryExitSeparate": "The entrance is a divided boulevard with a landscaped median; the guard booth sits on the median with a gated inbound lane on one side and a gated outbound lane on the other.",
+          "fastLaneOpportunity": "Wide divided gate apron with generous paved width on the outbound side and a large pre-gate truck turnaround/staging apron, leaving room to add an express/bypass lane.",
+          "scale": "Web/driver sources (TruckMap, maconchamber) report a CAT Scale on site; consistent with a 24/7 drop-and-hook DC.",
+          "shipRcvSeparate": "Two distinct dock banks on different building faces: a long dock line on the NW face and a second dock line on the SW face.",
+          "dockDoors": "Counted from z18-z20 rhythm of bays/trailers across the NW and SW faces; well over 50 doors total (estimate ~110, flagged uncertain).",
+          "dropArea": "Multiple large drop-yard lots NW and W of the building with many rows of parked trailers (drop-and-hook); far exceeds 50 stalls.",
+          "urbanRural": "Edge-of-Macon industrial park along the I-75 corridor surrounded by woods and open fields; small-town-industrial setting, classified Rural per rubric.",
+          "multiStep": "No clearly visible second checkpoint after the gate in overhead imagery; left false. The CAT scale is in the yard but a discrete second guard stage is not confirmed.",
+          "railServed": "No rail spur enters the property; nearest rail is unrelated.",
+          "streetViewMeta": "Both nearest panos are 2012-05 pre-construction frames of the then-empty pad (Google has not re-driven the internal road), but metadata status is OK within 400m, so hasCoverage=true with the real pano ids recorded."
+        }
+      },
+      {
+        "id": "04-tractor-supply",
+        "name": "Tractor Supply Distribution Center Casa Grande AZ",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "exitLanes",
+          "connectivityIssue",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 32.8617,
+          "lng": -111.7891
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 32.864343,
+                "lng": -111.791135
+              },
+              {
+                "lat": 32.86406,
+                "lng": -111.78635
+              },
+              {
+                "lat": 32.8589,
+                "lng": -111.78635
+              },
+              {
+                "lat": 32.8589,
+                "lng": -111.79105
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 32.864043,
+                "lng": -111.78808
+              },
+              {
+                "lat": 32.864043,
+                "lng": -111.78749
+              },
+              {
+                "lat": 32.863368,
+                "lng": -111.78749
+              },
+              {
+                "lat": 32.863368,
+                "lng": -111.78808
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 32.86305,
+                  "lng": -111.79076
+                },
+                {
+                  "lat": 32.86305,
+                  "lng": -111.79018
+                },
+                {
+                  "lat": 32.85915,
+                  "lng": -111.79018
+                },
+                {
+                  "lat": 32.85915,
+                  "lng": -111.79076
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 32.8634,
+                  "lng": -111.7879
+                },
+                {
+                  "lat": 32.8634,
+                  "lng": -111.78715
+                },
+                {
+                  "lat": 32.8601,
+                  "lng": -111.78715
+                },
+                {
+                  "lat": 32.8601,
+                  "lng": -111.7879
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 32.8636,
+                  "lng": -111.79004
+                },
+                {
+                  "lat": 32.8636,
+                  "lng": -111.78976
+                },
+                {
+                  "lat": 32.85995,
+                  "lng": -111.78976
+                },
+                {
+                  "lat": 32.85995,
+                  "lng": -111.79004
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 32.8636,
+                  "lng": -111.78813
+                },
+                {
+                  "lat": 32.8636,
+                  "lng": -111.78785
+                },
+                {
+                  "lat": 32.8601,
+                  "lng": -111.78785
+                },
+                {
+                  "lat": 32.8601,
+                  "lng": -111.78813
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 32.86406,
+                "lng": -111.7884
+              },
+              {
+                "lat": 32.86406,
+                "lng": -111.78715
+              },
+              {
+                "lat": 32.86355,
+                "lng": -111.78715
+              },
+              {
+                "lat": 32.86355,
+                "lng": -111.7884
+              }
+            ]
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 90,
+          "trailersVisible": 140,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 64.7,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#10",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct (shipping vs receiving) drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 120000,
+              "narrationKey": "shiprcv.split",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron on correct side",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1320000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
+        },
+        "dossierExcerpt": "The supplied coordinates (32.86227, -111.788668) landed directly on a large\nwhite-roofed distribution building. Web search confirmed this is **Tractor\nSupply Company DC #111**, 1337 N Peters Rd, Casa Grande AZ 85193 — a regional\ndistribution center known for 24/7 drop-and-hook operations (driver reviews,\nCasa Grande Chamber of Commerce listing, USGBC project page). Street View\n(captured Jan 2025) shows the \"TSC\" logo on the building's north wall, removing\nany ambiguity. Resolved building center fixed at 32.8617, -111.7891.\n\nSetting: edge-of-town Casa Grande industrial fringe — active farmland abuts the\nwest fence, open desert to the east and south, other large DCs nearby to the\nNE. Judged Rural.",
+        "mapsUrl": "https://www.google.com/maps/@32.8617,-111.7891,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Controlled multi-lane truck entry at NE corner off Peters Rd: satellite z20 shows painted lane islands/medians with directional arrows where the drive meets the public road; full chain-link perimeter fence confirmed in Street View (Jan 2025).",
+          "guardShack": "Small ~1-vehicle-footprint booth structure sits in the paved entry island on the NW gatehouse drive (z21 satellite @ 32.86343,-111.79052), positioned to control inbound truck circulation. 24/7 staffed per driver reviews.",
+          "postGateStaging": "Deep paved apron between the gate line and the building face provides interior queue room before docks.",
+          "drivewayLong": "Gate-to-dock approach is long with a large paved apron; easily holds 3+ trucks.",
+          "entryLanes": "Two inbound lanes read from z20 lane arrows; outbound lane count partly obscured, estimated 1.",
+          "exitLanes": "Outbound lane count not fully resolvable from imagery; estimate 1.",
+          "fastLaneOpportunity": "Wide multi-lane gate apron with spare paved width to add an express/bypass lane.",
+          "dockDoors": "Long dock banks on both the west and east building faces with trailers backed in; total well over 50 (est ~90).",
+          "dropArea": "Two large drop yards (west and east) packed with parked trailers without tractors; 50+ band.",
+          "shipRcvSeparate": "Dock clusters on opposite (west and east) building faces suggest separate ship/receive flows; medium confidence.",
+          "urbanRural": "Edge-of-town Casa Grande industrial area bordered by active farmland to the west and open desert E/S; Rural.",
+          "connectivityIssue": "Within Casa Grande's industrial fringe near other large DCs; cellular coverage likely adequate, so false (low confidence).",
+          "buildingCount": "Main DC plus a separate smaller building at the south/SE; counted 2.",
+          "railServed": "No rail spur enters the property."
+        }
+      },
+      {
+        "id": "05-tractor-supply",
+        "name": "Tractor Supply Distribution Center Franklin KY",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 36.7072,
+          "lng": -86.5135
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 36.7108,
+                "lng": -86.5156
+              },
+              {
+                "lat": 36.7109,
+                "lng": -86.5119
+              },
+              {
+                "lat": 36.7097,
+                "lng": -86.5111
+              },
+              {
+                "lat": 36.7045,
+                "lng": -86.5115
+              },
+              {
+                "lat": 36.7043,
+                "lng": -86.5133
+              },
+              {
+                "lat": 36.7047,
+                "lng": -86.5165
+              },
+              {
+                "lat": 36.7079,
+                "lng": -86.5166
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 36.71065,
+                "lng": -86.5133
+              },
+              {
+                "lat": 36.71065,
+                "lng": -86.51275
+              },
+              {
+                "lat": 36.71025,
+                "lng": -86.51275
+              },
+              {
+                "lat": 36.71025,
+                "lng": -86.5133
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 36.7093,
+                  "lng": -86.5159
+                },
+                {
+                  "lat": 36.7092,
+                  "lng": -86.5151
+                },
+                {
+                  "lat": 36.7051,
+                  "lng": -86.5156
+                },
+                {
+                  "lat": 36.7052,
+                  "lng": -86.5164
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 36.7051,
+                  "lng": -86.5154
+                },
+                {
+                  "lat": 36.7051,
+                  "lng": -86.5133
+                },
+                {
+                  "lat": 36.7045,
+                  "lng": -86.5128
+                },
+                {
+                  "lat": 36.7044,
+                  "lng": -86.515
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 36.7088,
+                  "lng": -86.5126
+                },
+                {
+                  "lat": 36.7087,
+                  "lng": -86.5116
+                },
+                {
+                  "lat": 36.7051,
+                  "lng": -86.512
+                },
+                {
+                  "lat": 36.7052,
+                  "lng": -86.5133
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 36.7095,
+                  "lng": -86.5149
+                },
+                {
+                  "lat": 36.7093,
+                  "lng": -86.5143
+                },
+                {
+                  "lat": 36.705,
+                  "lng": -86.5149
+                },
+                {
+                  "lat": 36.7052,
+                  "lng": -86.5155
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 36.7091,
+                  "lng": -86.5127
+                },
+                {
+                  "lat": 36.70895,
+                  "lng": -86.5133
+                },
+                {
+                  "lat": 36.70485,
+                  "lng": -86.5141
+                },
+                {
+                  "lat": 36.705,
+                  "lng": -86.5135
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 36.7099,
+                "lng": -86.5142
+              },
+              {
+                "lat": 36.7099,
+                "lng": -86.5125
+              },
+              {
+                "lat": 36.7094,
+                "lng": -86.5125
+              },
+              {
+                "lat": 36.7094,
+                "lng": -86.5142
+              }
+            ]
+          },
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 198,
+              "pano": "Ijlh1UQlta8VZfeXAJj06w",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 241,
+              "pano": "Ijlh1UQlta8VZfeXAJj06w",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 140,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 78.4,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#10",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct (shipping vs receiving) drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 120000,
+              "narrationKey": "shiprcv.split",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron on correct side",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1320000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
+        },
+        "dossierExcerpt": "Supplied approximate coords (36.710524, -86.513061) landed just NE of the\ntarget, on the access-road / gate corridor. A z16 sweep showed a single very\nlarge rectangular distribution building immediately south, with trailer rows\nwrapping it — the only DC-scale structure in this Franklin industrial park.\nWeb search for \"100 Raines Dr Franklin KY 42134\" confirms the Tractor Supply\nCompany Franklin Distribution Center at this address (TruckMap, Facebook, Manta,\ndriver reviews), described as a 24/7 DC with \"professional security personnel\"\nand easy docking — consistent with what the imagery shows. Locked building\ncenter at 36.7072, -86.5135.",
+        "mapsUrl": "https://www.google.com/maps/@36.70720,-86.51350,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Guarded checkpoint ~250m south of the public road on the dedicated DC drive: a multi-lane gate canopy spans the truck lanes with trailers queued at it (z18/z19 sat).",
+          "guardShack": "Small square guard booth on a curbed median island splitting inbound/outbound lanes at the canopy (z20 sat).",
+          "entryLanes": "~2 inbound lanes under the canopy; exact split from overhead is approximate.",
+          "exitLanes": "~2 outbound lanes; approximate.",
+          "fastLaneOpportunity": "Wide multi-lane gate apron plus a large landscaped median and loop drive give ample room for an express/bypass lane.",
+          "postGateStaging": "Large paved apron between the gate canopy and the building's north end where trucks queue before docks.",
+          "shipRcvSeparate": "Dock doors with trailers backed in run along BOTH long faces (west and east) of the building, consistent with separate shipping/receiving banks; medium confidence which face is which.",
+          "dockDoors": "Cross-dock with trailers backed in along both ~1000ft+ long faces; total well into 50+ band (est. ~120).",
+          "dropArea": "Dedicated marked trailer-parking lots wrap the west, south, and east of the building, holding 100+ drop trailers (z19 south yard).",
+          "urbanRural": "Edge-of-town Franklin KY industrial park surrounded by farmland and open fields (Street View confirms big-sky rural setting); a few neighboring industrial buildings but broader setting is rural.",
+          "connectivityIssue": "Industrial park on the edge of Franklin with cell towers visible near the entrance; coverage likely adequate, so false.",
+          "railServed": "No rail spur enters the property.",
+          "streetViewMeta": "Best ground pano on arrival is on the access road at 36.71094,-86.51195 (captured 2026-03); headings aim it toward the gate (241) and toward the property/building (198)."
+        }
+      },
+      {
+        "id": "06-tractor-supply",
+        "name": "Tractor Supply Distribution Center Hagerstown MD",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "connectivityIssue"
+        ],
+        "center": {
+          "lat": 39.639765,
+          "lng": -77.767044
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 39.64205,
+                "lng": -77.76755
+              },
+              {
+                "lat": 39.6412,
+                "lng": -77.7652
+              },
+              {
+                "lat": 39.6384,
+                "lng": -77.766
+              },
+              {
+                "lat": 39.6377,
+                "lng": -77.7679
+              },
+              {
+                "lat": 39.6376,
+                "lng": -77.7707
+              },
+              {
+                "lat": 39.6393,
+                "lng": -77.7711
+              },
+              {
+                "lat": 39.6414,
+                "lng": -77.7696
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 39.63905,
+                "lng": -77.77075
+              },
+              {
+                "lat": 39.63892,
+                "lng": -77.77035
+              },
+              {
+                "lat": 39.63858,
+                "lng": -77.77055
+              },
+              {
+                "lat": 39.63871,
+                "lng": -77.77095
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 39.63905,
+                  "lng": -77.76995
+                },
+                {
+                  "lat": 39.63842,
+                  "lng": -77.76845
+                },
+                {
+                  "lat": 39.63792,
+                  "lng": -77.7688
+                },
+                {
+                  "lat": 39.63855,
+                  "lng": -77.7703
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 39.64135,
+                  "lng": -77.76935
+                },
+                {
+                  "lat": 39.6408,
+                  "lng": -77.768
+                },
+                {
+                  "lat": 39.64038,
+                  "lng": -77.7683
+                },
+                {
+                  "lat": 39.64093,
+                  "lng": -77.76965
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 39.6409,
+                  "lng": -77.7677
+                },
+                {
+                  "lat": 39.63905,
+                  "lng": -77.7667
+                },
+                {
+                  "lat": 39.6389,
+                  "lng": -77.767
+                },
+                {
+                  "lat": 39.64075,
+                  "lng": -77.768
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 39.6405,
+                  "lng": -77.7666
+                },
+                {
+                  "lat": 39.63875,
+                  "lng": -77.7659
+                },
+                {
+                  "lat": 39.63862,
+                  "lng": -77.76622
+                },
+                {
+                  "lat": 39.64037,
+                  "lng": -77.76692
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 39.6393,
+                "lng": -77.7701
+              },
+              {
+                "lat": 39.63905,
+                "lng": -77.76948
+              },
+              {
+                "lat": 39.63868,
+                "lng": -77.7697
+              },
+              {
+                "lat": 39.63893,
+                "lng": -77.77032
+              }
+            ]
+          },
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 311,
+              "pano": "kojRZMu68Y0ShRZuW6DNrA",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 120,
+              "pano": "e_YUFCIQxiVUzC6xiPUoGA",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 220,
+          "trailerParkingCapacity": 260,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 44.7,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
+        "dossierExcerpt": "The supplied coordinates landed exactly on the target. Satellite at z16-z17 shows a\nsingle large rectangular distribution building (flat gray roof, ~280 m × ~120 m)\nringed by trailer parking on all four sides, bounded by I-81 on the SE and Hopewell\nRd looping along the W/SW. Web search corroborates the Tractor Supply Hagerstown DC\nat 11935 Hopewell Rd (TruckMap, Yelp, Manta), nav coordinates 39.639835, -77.767017,\nwhich agree to within a building length. Building positively identified — no relocation\nneeded.",
+        "mapsUrl": "https://www.google.com/maps/@39.639765,-77.767044,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Wide open paved entrance off Hopewell Rd into the yard. Confirmed via Street View (pano e_YUFCIQxiVUzC6xiPUoGA, 2024-10) and z18-z19 satellite: monument sign and flagpole flank an uncontrolled drive, no barrier arm, sliding gate, or pinch-point at the property line.",
+          "guardShack": "No staffed booth on the truck lane. The red/blue-roofed building beside the entrance is a separate Firestone tire / retail outlet (signage visible in Street View), not a guard shack.",
+          "remoteGs": "False because there is no controlled truck gate at all.",
+          "postGateStaging": "Large paved apron inside the entrance before the dock doors gives ample internal queue/holding room.",
+          "drivewayLong": "Entrance apron and internal yard easily hold a 3+ truck queue before reaching docks.",
+          "entryLanes": "Wide single open mouth read as ~2 effective inbound lanes; no painted lane control, so approximate.",
+          "exitLanes": "Approximate; shared open entrance, ~1 outbound lane.",
+          "fastLaneOpportunity": "Very wide unmarked entrance apron with abundant paved width to add an express/bypass lane.",
+          "dockDoors": "Trailers backed in densely along BOTH long building faces (NW/SW face and SE face along I-81); count well into 50+ band. Estimate ~120 doors total, flagged approximate.",
+          "dropArea": "Dedicated trailer drop yards on the SW/W side (dozens of trailers nose-to-tail, c-w probe) plus a second NW drop block; 50+ band.",
+          "shipRcvSeparate": "Two distinct dock banks on opposite long faces of the building (NW/SW vs SE), consistent with separate ship/receive flows.",
+          "urbanRural": "Edge-of-town industrial on Hopewell Rd off I-81, surrounded by open fields and farmland; broader setting is Rural.",
+          "connectivityIssue": "Industrial corridor along I-81 with adjacent development and good highway access; cellular coverage likely adequate, so false. Medium confidence.",
+          "buildingCount": "Main DC plus the small separate Firestone/retail building near the entrance.",
+          "dropYard": "Dedicated on-site trailer-storage lots separate from active dock staging.",
+          "trailersVisible": "Approximate count across all captured drop yards and dock faces.",
+          "railServed": "No rail spur enters the property; I-81 borders the SE side."
+        }
+      },
+      {
+        "id": "08-tractor-supply",
+        "name": "Tractor Supply Distribution Center Waverly NE",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "connectivityIssue",
+          "scale",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 40.90155,
+          "lng": -96.54755
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 40.90418,
+                "lng": -96.54878
+              },
+              {
+                "lat": 40.9043,
+                "lng": -96.54618
+              },
+              {
+                "lat": 40.9033,
+                "lng": -96.54612
+              },
+              {
+                "lat": 40.90332,
+                "lng": -96.54648
+              },
+              {
+                "lat": 40.89958,
+                "lng": -96.54635
+              },
+              {
+                "lat": 40.89952,
+                "lng": -96.54895
+              },
+              {
+                "lat": 40.90328,
+                "lng": -96.54905
+              },
+              {
+                "lat": 40.9033,
+                "lng": -96.5488
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 40.90372,
+                "lng": -96.54772
+              },
+              {
+                "lat": 40.90372,
+                "lng": -96.54738
+              },
+              {
+                "lat": 40.90338,
+                "lng": -96.54738
+              },
+              {
+                "lat": 40.90338,
+                "lng": -96.54772
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 40.90428,
+                  "lng": -96.54838
+                },
+                {
+                  "lat": 40.9043,
+                  "lng": -96.54632
+                },
+                {
+                  "lat": 40.90382,
+                  "lng": -96.5463
+                },
+                {
+                  "lat": 40.9038,
+                  "lng": -96.54836
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 40.90378,
+                  "lng": -96.54836
+                },
+                {
+                  "lat": 40.90378,
+                  "lng": -96.54632
+                },
+                {
+                  "lat": 40.90338,
+                  "lng": -96.54632
+                },
+                {
+                  "lat": 40.90338,
+                  "lng": -96.54836
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 40.90318,
+                  "lng": -96.54878
+                },
+                {
+                  "lat": 40.90318,
+                  "lng": -96.54848
+                },
+                {
+                  "lat": 40.89962,
+                  "lng": -96.54845
+                },
+                {
+                  "lat": 40.89962,
+                  "lng": -96.54875
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 40.9032,
+                  "lng": -96.54652
+                },
+                {
+                  "lat": 40.9032,
+                  "lng": -96.54622
+                },
+                {
+                  "lat": 40.89964,
+                  "lng": -96.5462
+                },
+                {
+                  "lat": 40.89964,
+                  "lng": -96.5465
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 40.90332,
+                "lng": -96.54838
+              },
+              {
+                "lat": 40.90332,
+                "lng": -96.54652
+              },
+              {
+                "lat": 40.9025,
+                "lng": -96.54652
+              },
+              {
+                "lat": 40.9025,
+                "lng": -96.54838
+              }
+            ]
+          },
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 179,
+              "pano": "RGnDKxqxrHrPtpObdlgGdw",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 179,
+              "pano": "RGnDKxqxrHrPtpObdlgGdw",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 110,
+          "trailersVisible": 230,
+          "trailerParkingCapacity": 180,
+          "truckGateCount": 1,
+          "buildingCount": 2,
+          "siteAreaAcres": 78,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#10",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct (shipping vs receiving) drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 120000,
+              "narrationKey": "shiprcv.split",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron on correct side",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1320000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
+        },
+        "dossierExcerpt": "Supplied approximate coords (40.901501, -96.547517) landed directly on a large\ndistribution building, only slightly south of true building center. Web search\non the address (\"12851 Dovers St, Waverly NE\") returned multiple listings for\nthe Tractor Supply Co. Waverly Distribution Center, confirming the address\nand facility. Satellite at z16-z18 shows a single very large rectangular\nwarehouse (long axis nearly N-S, a few degrees clockwise of north) consistent\nwith a regional DC — not an office or retail box. Center locked at\n40.90155, -96.54755. (Note: a separate Tractor Supply retail store sits at\nthe corner across the public road to the NE — the red-roofed building visible\nin Street View — and is NOT the DC.)",
+        "mapsUrl": "https://www.google.com/maps/@40.90155,-96.54755,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Controlled checkpoint where the entry boulevard pinches between the employee parking lot and the secured trailer yard; chain-link perimeter fence rings the whole truck yard (clearly visible in 2025 Street View frames).",
+          "guardShack": "Small ~1-2 vehicle-footprint gatehouse on a median island at the parking/yard checkpoint, visible at z20 satellite (40.9035, -96.5476) splitting inbound/outbound lanes.",
+          "shipRcvSeparate": "Dock doors run the full length of BOTH the east and west long walls (cross-dock layout), so shipping and receiving operate from physically separate dock banks.",
+          "fastLaneOpportunity": "Wide divided entry boulevard with landscaped median and ample paved apron at the gate; physical room to add a bypass/express lane.",
+          "postGateStaging": "Large paved apron between the inner gate and the dock faces provides interior queue/holding space.",
+          "dropArea": "Two large banks of marked trailer-parking rows at the north end full of bobtail trailers, plus a second drop row along the west dock side.",
+          "dockDoors": "Estimated ~50-60 doors per long face (east + west) from z19 imagery; both walls fully docked. Banded 50+; exact count approximate.",
+          "scale": "No truck scale/weigh pad identified in the truck path; left false, flagged uncertain.",
+          "connectivityIssue": "Rural setting but inside a developed industrial park near Waverly/I-80 corridor; cellular coverage likely adequate, so left false (medium confidence).",
+          "railServed": "A through rail line runs ~300m+ south of the property through farmland but no spur enters the site.",
+          "buildingCount": "Main DC plus a smaller secondary building at the NW (offices/maintenance) inside the property.",
+          "entryLanes": "Divided boulevard reads as roughly 1 in / 1 out at the checkpoint; lane count approximate from overhead."
+        }
+      },
+      {
+        "id": "09-tractor-supply",
+        "name": "Tractor Supply Distribution Center Navarre OH",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "trailersVisible",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 40.733,
+          "lng": -81.5083
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 40.73642,
+                "lng": -81.51126
+              },
+              {
+                "lat": 40.73647,
+                "lng": -81.50667
+              },
+              {
+                "lat": 40.73553,
+                "lng": -81.5065
+              },
+              {
+                "lat": 40.73211,
+                "lng": -81.50654
+              },
+              {
+                "lat": 40.73062,
+                "lng": -81.50731
+              },
+              {
+                "lat": 40.72997,
+                "lng": -81.50971
+              },
+              {
+                "lat": 40.73085,
+                "lng": -81.51122
+              },
+              {
+                "lat": 40.7339,
+                "lng": -81.5116
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 40.73642,
+                "lng": -81.50682
+              },
+              {
+                "lat": 40.73605,
+                "lng": -81.50624
+              },
+              {
+                "lat": 40.73529,
+                "lng": -81.5065
+              },
+              {
+                "lat": 40.73553,
+                "lng": -81.5071
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 40.73621,
+                  "lng": -81.51089
+                },
+                {
+                  "lat": 40.73626,
+                  "lng": -81.50682
+                },
+                {
+                  "lat": 40.73569,
+                  "lng": -81.50682
+                },
+                {
+                  "lat": 40.73553,
+                  "lng": -81.51089
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 40.73524,
+                  "lng": -81.5074
+                },
+                {
+                  "lat": 40.73488,
+                  "lng": -81.50671
+                },
+                {
+                  "lat": 40.73211,
+                  "lng": -81.50718
+                },
+                {
+                  "lat": 40.73244,
+                  "lng": -81.50783
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 40.73524,
+                  "lng": -81.50761
+                },
+                {
+                  "lat": 40.73504,
+                  "lng": -81.50718
+                },
+                {
+                  "lat": 40.73122,
+                  "lng": -81.50939
+                },
+                {
+                  "lat": 40.73146,
+                  "lng": -81.5098
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 40.7352,
+                  "lng": -81.51089
+                },
+                {
+                  "lat": 40.73507,
+                  "lng": -81.51053
+                },
+                {
+                  "lat": 40.73114,
+                  "lng": -81.51126
+                },
+                {
+                  "lat": 40.73133,
+                  "lng": -81.5116
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 40.73553,
+                "lng": -81.5074
+              },
+              {
+                "lat": 40.73524,
+                "lng": -81.50682
+              },
+              {
+                "lat": 40.73309,
+                "lng": -81.50718
+              },
+              {
+                "lat": 40.73337,
+                "lng": -81.50772
+              }
+            ]
+          },
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 262,
+              "pano": "dLzT00mZbY1CE4pzETc4wA",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 283,
+              "pano": "5HwWJZ6FVgOQO7yJKYfCUg",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 89,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 220,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 67.1,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
+        "dossierExcerpt": "The point landed on a single very large distribution building on the southeast\nside of Navarre OH, open fields to the east and south. Web research confirms\nTractor Supply's Navarre DC — a ~900,000 sq ft building, the chain's largest\ndistribution center, with 89 loading docks. Satellite and Street View confirm a\nfully fenced freight yard with dock banks on both long building faces. Locked\ncenter ~40.7330, -81.5083.",
+        "mapsUrl": "https://www.google.com/maps/@40.7330,-81.5083,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Continuous chain-link perimeter fence confirmed in Street View (2024-06) along the entire east edge; the truck entrance is a controlled gap in the fence at the NE corner served by a striped, diagonal pre-gate staging lane (lane markings = checkpoint pinch). Modern fenced freight yard, not an open driveway.",
+          "guardShack": "No booth structure visible at the entrance in z19-z21 satellite or in any of the ~10 Street View frames walked along the entrance. A modern automated/kiosk check-in is consistent with the layout.",
+          "remoteGs": "Gate present but no guard shack -> kiosk / app / call-box check-in implied.",
+          "fastLaneOpportunity": "Wide gate apron and a long dedicated staging lane outside the fence leave ample paved width to add an express bypass.",
+          "shipRcvSeparate": "Dock doors run along BOTH long building faces (east and west), two distinct dock banks -> ship/receive can run from separate clusters.",
+          "dockDoors": "Web-confirmed 89 loading docks (900,000 sq ft DC, chain's largest); doors visible on both long faces -> 50+ band.",
+          "dropArea": "Large trailer drop rows north of the building and along the east perimeter road; well into the 50+ band.",
+          "entryLanes": "Estimated 1 in / 1 out at the single NE gate; not individually countable from overhead, flagged uncertain.",
+          "trailersVisible": "~180 trailers estimated across the captured tight imagery; approximate overhead count.",
+          "trailerParkingCapacity": "~220 trailer positions estimated across north + east drop yards and dock aprons; approximate.",
+          "urbanRural": "Edge-of-town / farmland setting on the southeast side of Navarre OH; open fields east and south.",
+          "railServed": "No rail spur enters the property; a rail line runs ~well west of the site but does not serve it."
+        }
+      },
+      {
+        "id": "10-tractor-supply",
+        "name": "Tractor Supply Distribution Center Maumelle AR",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "shipRcvSeparate",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 34.8695,
+          "lng": -92.3805
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 34.8713,
+                "lng": -92.3833
+              },
+              {
+                "lat": 34.8715,
+                "lng": -92.37745
+              },
+              {
+                "lat": 34.86835,
+                "lng": -92.3773
+              },
+              {
+                "lat": 34.8677,
+                "lng": -92.3788
+              },
+              {
+                "lat": 34.8666,
+                "lng": -92.3825
+              },
+              {
+                "lat": 34.86655,
+                "lng": -92.3841
+              },
+              {
+                "lat": 34.8692,
+                "lng": -92.3843
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 34.86735,
+                "lng": -92.3839
+              },
+              {
+                "lat": 34.86735,
+                "lng": -92.38335
+              },
+              {
+                "lat": 34.868,
+                "lng": -92.38345
+              },
+              {
+                "lat": 34.868,
+                "lng": -92.38395
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 34.86785,
+                  "lng": -92.3824
+                },
+                {
+                  "lat": 34.86805,
+                  "lng": -92.37885
+                },
+                {
+                  "lat": 34.867,
+                  "lng": -92.37895
+                },
+                {
+                  "lat": 34.8669,
+                  "lng": -92.38235
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 34.8684,
+                  "lng": -92.37865
+                },
+                {
+                  "lat": 34.87075,
+                  "lng": -92.37855
+                },
+                {
+                  "lat": 34.8708,
+                  "lng": -92.3776
+                },
+                {
+                  "lat": 34.86845,
+                  "lng": -92.3777
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 34.8682,
+                  "lng": -92.38245
+                },
+                {
+                  "lat": 34.8684,
+                  "lng": -92.37875
+                },
+                {
+                  "lat": 34.86805,
+                  "lng": -92.3788
+                },
+                {
+                  "lat": 34.86785,
+                  "lng": -92.38248
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 34.87065,
+                  "lng": -92.3825
+                },
+                {
+                  "lat": 34.87085,
+                  "lng": -92.3786
+                },
+                {
+                  "lat": 34.8711,
+                  "lng": -92.37855
+                },
+                {
+                  "lat": 34.8709,
+                  "lng": -92.38255
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 34.86805,
+                "lng": -92.3832
+              },
+              {
+                "lat": 34.8681,
+                "lng": -92.3823
+              },
+              {
+                "lat": 34.8677,
+                "lng": -92.38228
+              },
+              {
+                "lat": 34.86765,
+                "lng": -92.38318
+              }
+            ]
+          },
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 46,
+              "pano": "QmOXdrHzAUarCWtaWv3Q0Q",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 30,
+              "pano": "QmOXdrHzAUarCWtaWv3Q0Q",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 320,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 69.9,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#10",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct (shipping vs receiving) drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 120000,
+              "narrationKey": "shiprcv.split",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron on correct side",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1320000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
+        },
+        "dossierExcerpt": "Approximate supplied coords (34.866597, -92.384598) sat ~300 m SW of the actual\nbuilding, in the entrance/road area. Wide z16 satellite showed two industrial\nbuildings; the correct one is the large structure to the NE distinguished by a\nfull-roof solar array. Web research confirmed: this is Tractor Supply's\n1.15M sq ft Maumelle DC (DC #850), a $175M LEED-Gold facility opened 2023 with a\n~10,000-panel rooftop solar array, serving ~250 stores across the Southeast,\nMidwest, and Texas. The rooftop solar array is the unmistakable fingerprint and\nmatches the building at 34.8695, -92.3805. Center locked there.\n\nSources: corporate.tractorsupply.com newsroom (construction/opening release),\nmaumellechamber.com member directory (DC #850, 150 Champs Blvd), usgbc.org\n(LEED project), KATV (grand opening, 500 jobs, solar array on Champs Blvd).",
+        "mapsUrl": "https://www.google.com/maps/@34.8695,-92.3805,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Channelized multi-lane entrance drive off Champs Blvd with painted directional lane arrows, gate barrier cross-bars spanning the lanes, and a median equipment cabinet, visible at z20 satellite (34.8676,-92.3837). Controlled checkpoint, not an open driveway.",
+          "guardShack": "Small white booth structure at the head of the entrance drive where lanes open into the yard (~34.8680,-92.3835), with a separate median gate-equipment cabinet beside the inbound lanes. New $175M corporate DC; staffed-booth footprint consistent on satellite.",
+          "fastLaneOpportunity": "Entrance apron is very wide with multiple channelized lanes and ample unused paved width to add an express/bypass lane.",
+          "shipRcvSeparate": "Dock banks present on both the south face and the north face of the building (trailers backed in on both), consistent with separate shipping/receiving clusters; medium confidence from overhead only.",
+          "dockDoors": "1.15M sq ft building with continuous dock aprons on south and north faces; full-length bays put total well into the 50+ band (estimate ~120 doors).",
+          "dropArea": "Dozens of marked trailer-drop stalls filled across the south yard and the east wrap-around yard; clearly 50+.",
+          "entryLanes": "~2 inbound lanes read from painted arrows at z20; exact split low confidence.",
+          "exitLanes": "~1 outbound lane read from painted arrows; low confidence.",
+          "urbanRural": "Edge-of-town industrial park at the north edge of Maumelle, bounded by woodland on the east/south; broader setting is small-town/rural per rubric.",
+          "railServed": "No rail spur enters the property; nearest rail is offsite.",
+          "postGateStaging": "Wide paved apron inside the gate before the dock approach provides queue/holding room.",
+          "drivewayLong": "Gate-to-dock approach is long and can stack 3+ trucks."
+        }
+      },
+      {
+        "id": "11-tractor-supply",
+        "name": "Tractor Supply Distribution Center Nampa ID",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "low",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "preGateStaging",
+          "postGateStaging",
+          "drivewayLong",
+          "drivewayShort",
+          "backupSensitive",
+          "entryExitTogether",
+          "entryExitSeparate",
+          "entryLanes",
+          "exitLanes",
+          "fastLaneOpportunity",
+          "dockDoors",
+          "dropArea",
+          "shipRcvSeparate",
+          "connectivityIssue",
+          "multipleFacilities",
+          "scale",
+          "dropYard",
+          "multiStep"
+        ],
+        "center": {
+          "lat": 43.63125,
+          "lng": -116.58875
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 43.634,
+                "lng": -116.591
+              },
+              {
+                "lat": 43.634,
+                "lng": -116.5865
+              },
+              {
+                "lat": 43.6285,
+                "lng": -116.5865
+              },
+              {
+                "lat": 43.6285,
+                "lng": -116.591
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 43.6327,
+                "lng": -116.591
+              },
+              {
+                "lat": 43.6327,
+                "lng": -116.5904
+              },
+              {
+                "lat": 43.6321,
+                "lng": -116.5904
+              },
+              {
+                "lat": 43.6321,
+                "lng": -116.591
+              }
+            ]
+          },
+          "dropYards": [],
+          "dockAprons": [],
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 263,
+              "pano": "_OAi25c09UnWzkgzx1OnmA",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 198,
+              "pano": "CZaUHNAjeiKc0KMZlLjSdg",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 0,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 0,
+          "truckGateCount": 1,
+          "buildingCount": 0,
+          "siteAreaAcres": 54.9,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": false,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "NONE",
+          "dropArea": "NONE",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": false,
+          "multiStep": false
+        },
+        "dossierExcerpt": "Supplied coords (43.634786, -116.586452) land on a road intersection at the NE\nedge of a greenfield parcel south of Ustick Rd. Web research confirmed this is\nTractor Supply's 11th distribution center (\"Project Spud\" on the architectural\ndrawings): groundbreaking 2025-04-22, 865,000 sq ft, ~$225M investment, 500+\njobs, LEED, serving 200+ PNW stores, target ops late 2026 / early 2027, at the\nNE corner of Ustick Rd and Midland Blvd — exactly this parcel.\n\nImportant disambiguation: a separate, fully-built long white-roofed warehouse\nsits ~700m to the SE (employee parking with solar carports on its west face,\nconsistent with an Amazon facility). That is NOT this site and was excluded.\nThe TSC parcel is the graded greenfield directly at the Ustick/collector corner.\n\nLocked center on the active graded development parcel: 43.63125, -116.58875.",
+        "mapsUrl": "https://www.google.com/maps/@43.63125,-116.58875,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "_status": "CONSTRUCTION-ERA. Tractor Supply broke ground 2025-04-22 on its 11th DC (865,000 sq ft, ~$225M, 500+ jobs, internal codename 'Project Spud') at the NE corner of Ustick Rd and Midland Blvd, 9640 Ustick Rd, Nampa ID. Target ops late 2026/early 2027. Maxar 2026 satellite shows only early earthwork: a graded oval pad, construction trailers, concrete tilt-up forms, pipe/material stockpiles, a temporary water-treatment pond, and a perimeter haul road. The Aug-2025 Street View caught the very start of tilt-up concrete wall panels being erected along the SW edge.",
+          "truckGate": "No gate exists yet. truckGate ring is the PLANNED/most-likely truck entrance off the new N-S collector road on the west edge; not yet built or controlled.",
+          "guardShack": "No guard booth present in any imagery; site has no built entrance structure yet.",
+          "dockDoors": "Building shell not yet erected; only partial tilt-up wall panels visible Aug-2025. No dock doors countable. Final DC will have a large dock bank (50+) once built.",
+          "dropArea": "No striped trailer parking yet; site is graded dirt.",
+          "dropYard": "Planned DC will almost certainly have a large drop yard given its 865k sq ft scale and PNW hub role serving 200+ stores, but none exists in current imagery.",
+          "buildingCount": "0 completed buildings; only construction trailers and partial wall panels. Note: a separate completed warehouse (likely an Amazon facility) sits ~700m SE and is NOT this site.",
+          "urbanRural": "Edge-of-town greenfield surrounded by farmland on Nampa's NW fringe; classified Rural.",
+          "siteAreaAcres": "54.9 ac measured over the visibly graded development parcel; the full assembled site is larger (~150+ ac with future 150k sq ft expansion pad).",
+          "perimeter": "Traced to the graded development parcel, square to the orthogonal Ustick(N)/collector-road(W) grid. Exact fenced boundary not yet established on the ground.",
+          "streetViewMeta": "Both panos are real Aug-2025 captures on the public roads bordering the parcel (perimeter pano on east-edge road; gate pano on Ustick near the NW roundabout/collector entrance)."
+        }
+      }
+    ]
+  }
+}

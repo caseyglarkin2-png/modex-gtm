@@ -1,0 +1,99 @@
+{
+  "name": "NFI Port Logistics Eastvale CA",
+  "type": "Port Logistics",
+  "coords": { "lat": 34.029780, "lng": -117.556720 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 34.031734, "lng": -117.558590 },
+      { "lat": 34.031254, "lng": -117.555307 },
+      { "lat": 34.027413, "lng": -117.554921 },
+      { "lat": 34.026773, "lng": -117.555951 },
+      { "lat": 34.027093, "lng": -117.558525 },
+      { "lat": 34.028267, "lng": -117.558719 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 34.028427, "lng": -117.558912 },
+      { "lat": 34.028373, "lng": -117.558525 },
+      { "lat": 34.028053, "lng": -117.558551 },
+      { "lat": 34.028107, "lng": -117.558937 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 34.027520, "lng": -117.558397 },
+        { "lat": 34.027253, "lng": -117.555629 },
+        { "lat": 34.026773, "lng": -117.555951 },
+        { "lat": 34.027040, "lng": -117.558525 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 34.028267, "lng": -117.558719 },
+        { "lat": 34.028213, "lng": -117.558525 },
+        { "lat": 34.031681, "lng": -117.558719 },
+        { "lat": 34.031628, "lng": -117.558912 }
+      ] },
+      { "ring": [
+        { "lat": 34.028053, "lng": -117.558268 },
+        { "lat": 34.027786, "lng": -117.555178 },
+        { "lat": 34.027253, "lng": -117.555307 },
+        { "lat": 34.027520, "lng": -117.558397 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 72, "pano": "t1kHi4rjQI93iA709y89qg", "hasCoverage": true },
+      "truckGate": { "heading": 53, "pano": "EL2DL0jl7LnkDFHAjQ0J4Q", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 140,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 40.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.029780,-117.556720,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Sliding steel gate across the truck drive at the SW corner on Mission Blvd; full black ornamental-steel perimeter fence confirmed on all street frontages in 2025-11 Street View.",
+    "guardShack": "No staffed booth visible at the gate in overhead (z20-21) or Street View; gate is an unmanned sliding gate with stop/check-in signage.",
+    "remoteGs": "Gate present but no guard booth -> remote/kiosk/app check-in implied.",
+    "shipRcvSeparate": "Two distinct dock banks on different faces: long west-wall dock bank and a south-face dock bank.",
+    "fastLaneOpportunity": "Wide gated apron and deep internal drive aisle along the west docks; room for a bypass/express lane.",
+    "dockDoors": "~50-60 doors on the west face plus ~10-15 on the south face = 50+ band; count is an overhead estimate.",
+    "dropArea": "Large dedicated trailer drop yard south/SE of the building with 80-100 trailers parked in rows; 50+ band.",
+    "entryLanes": "Estimated from gate apron width; low confidence.",
+    "exitLanes": "Estimated; low confidence.",
+    "postGateStaging": "Paved apron and drive aisle inside the gate before the west dock bank can hold a truck queue.",
+    "siteAreaAcres": "Derived from perimeter polygon (40.6 ac); matches the documented ~42.8-acre / 761,000 SF parcel.",
+    "railServed": "No rail spur enters the property."
+  },
+  "method": "deep-audit"
+}

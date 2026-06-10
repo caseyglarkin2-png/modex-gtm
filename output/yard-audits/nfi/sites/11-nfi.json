@@ -1,0 +1,95 @@
+{
+  "name": "NFI Import Warehouse Pooler GA",
+  "type": "Import Warehouse",
+  "coords": { "lat": 32.10858, "lng": -81.27360 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 32.109780, "lng": -81.274780 },
+      { "lat": 32.109700, "lng": -81.272880 },
+      { "lat": 32.107520, "lng": -81.272820 },
+      { "lat": 32.107320, "lng": -81.273900 },
+      { "lat": 32.107260, "lng": -81.275060 },
+      { "lat": 32.108000, "lng": -81.275180 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 32.107780, "lng": -81.275320 },
+      { "lat": 32.107560, "lng": -81.275000 },
+      { "lat": 32.107360, "lng": -81.275180 },
+      { "lat": 32.107560, "lng": -81.275500 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 32.109560, "lng": -81.274900 },
+        { "lat": 32.109460, "lng": -81.274180 },
+        { "lat": 32.107760, "lng": -81.274560 },
+        { "lat": 32.107900, "lng": -81.275260 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 32.109600, "lng": -81.274760 },
+        { "lat": 32.109540, "lng": -81.274460 },
+        { "lat": 32.107540, "lng": -81.273860 },
+        { "lat": 32.107600, "lng": -81.274160 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 60, "pano": "N_DgCNrIRk6T3U-h6l4IYw", "hasCoverage": true },
+      "truckGate": { "heading": 43, "pano": "N_DgCNrIRk6T3U-h6l4IYw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 54,
+    "trailersVisible": 14,
+    "trailerParkingCapacity": 95,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 13.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.10858,-81.27360,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Open shared truck court between Building I (1030, NFI) and the adjacent Building II (1240). 2025-12 Street View at the SW court intersection shows no barrier arm, sliding gate, or checkpoint pinch-point across the truck drive — the park road opens directly into the dock court. A chain-link perimeter fence is visible around the building landscaping but the truck court entry itself is uncontrolled.",
+    "guardShack": "No guard booth at the court entrance in 2025-12 Street View; the only structures are a monument sign and light poles. Class A spec building with no staffed gate.",
+    "remoteGs": "False because there is no truck gate at all (no controlled entrance), so this cannot be a gate-without-guard configuration.",
+    "postGateStaging": "Large paved truck court west of the dock face provides interior holding/queue space before the docks.",
+    "drivewayLong": "The court approach from the park road into the dock apron easily holds 3+ trucks.",
+    "fastLaneOpportunity": "Wide open court apron with ample unused paved width — physical room to add an express/bypass lane if access control were installed.",
+    "dockDoors": "Savannah Business Journal / CBRE listing: Building I has 54 dock doors. Satellite confirms a continuous dock line with dock levelers and trailers backed in along the west face → 50+ band.",
+    "dropArea": "Listing states 95 trailer-parking spaces for Building I; satellite z19 shows extensive marked trailer stalls in the shared court → 50+.",
+    "trailersVisible": "~14 trailers counted backed-in / parked in the captured imagery (approximate; some hidden by building shadow).",
+    "trailerParkingCapacity": "95 trailer stalls per the CBRE/SBJ spec; honest estimate, not counted door-by-door.",
+    "entryLanes": "Single shared court drive lane in and out; lanes not individually striped at an entrance, so counts are low-confidence.",
+    "urbanRural": "Edge-of-town spec logistics park off S H Morgan Pkwy near I-95; tree-lined with a residential subdivision to the SW. Small-town/edge-of-metro industrial → Rural per rubric.",
+    "dropYard": "Dedicated shared trailer-storage court with 95 marked stalls separate from active dock staging.",
+    "railServed": "No rail spur enters the property; this is a truck/transload import warehouse."
+  },
+  "method": "deep-audit"
+}

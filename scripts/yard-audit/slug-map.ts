@@ -34,6 +34,9 @@ interface SlugEntry {
 
 const ENTRIES: SlugEntry[] = [
   { auditSlug: 'ab-inbev', micrositeSlug: 'ab-inbev', displayName: 'AB InBev', archetype: 'beverage' },
+  { auditSlug: 'tractor-supply', micrositeSlug: 'tractor-supply', displayName: 'Tractor Supply Company', archetype: 'retailer' },
+  { auditSlug: 'nfi', micrositeSlug: 'nfi', displayName: 'NFI Industries', archetype: '3pl', estimatedFootprint: 300, coverageNote: 'NFI operates 300+ North American facilities; we audited 10 of the largest and most yard-intensive (dedicated DCs, port logistics, a fulfillment center). The rest follow the same gate/dock archetypes.' },
+  { auditSlug: 'niagara', micrositeSlug: 'niagara', displayName: 'Niagara Bottling', archetype: 'beverage' },
   { auditSlug: 'barnes-noble', micrositeSlug: 'barnes-noble', displayName: 'Barnes & Noble', archetype: 'retailer' },
   { auditSlug: 'bob-evans-farms', micrositeSlug: 'bob-evans-farms', displayName: 'Bob Evans Farms', archetype: 'cpg' },
   { auditSlug: 'boston-beer-company', micrositeSlug: 'boston-beer-company', displayName: 'The Boston Beer Company', archetype: 'beverage' },

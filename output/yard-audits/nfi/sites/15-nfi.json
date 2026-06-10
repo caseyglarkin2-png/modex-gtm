@@ -1,0 +1,97 @@
+{
+  "name": "NFI Distribution Center McDonough GA",
+  "type": "Distribution Center",
+  "coords": { "lat": 33.39195, "lng": -84.1644 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 33.39318, "lng": -84.16562 },
+      { "lat": 33.393125, "lng": -84.16278 },
+      { "lat": 33.389985, "lng": -84.163155 },
+      { "lat": 33.390055, "lng": -84.16590 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 33.390640, "lng": -84.164520 },
+      { "lat": 33.390625, "lng": -84.163960 },
+      { "lat": 33.390195, "lng": -84.163975 },
+      { "lat": 33.390210, "lng": -84.164535 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 33.393020, "lng": -84.165290 },
+        { "lat": 33.392985, "lng": -84.164940 },
+        { "lat": 33.390640, "lng": -84.165200 },
+        { "lat": 33.390670, "lng": -84.165560 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 33.392990, "lng": -84.164900 },
+        { "lat": 33.392965, "lng": -84.164640 },
+        { "lat": 33.390700, "lng": -84.164880 },
+        { "lat": 33.390730, "lng": -84.165150 }
+      ] },
+      { "ring": [
+        { "lat": 33.393055, "lng": -84.163880 },
+        { "lat": 33.393030, "lng": -84.163590 },
+        { "lat": 33.390780, "lng": -84.163840 },
+        { "lat": 33.390810, "lng": -84.164130 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 2, "pano": "PGqZa3fJ6vf1CBTcs4Q9NA", "hasCoverage": true },
+      "truckGate": { "heading": 358, "pano": "enukeumPm4kp9kmXgmgdsw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 98,
+    "trailersVisible": 130,
+    "trailerParkingCapacity": 86,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 22.4,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.39195,-84.1644,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["trailersVisible", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Open distribution center. No barrier arm or sliding/swing gate across any truck drive. The south-central driveway has only a Greenwood monument sign (no booth, no arm); the SW and SE perimeter-loop connections to Greenwood Industrial Pkwy are open curving drives. Trucks observed staging on the public road shoulder (Jack Rabbit Transport tractor-trailer parked at curb in Feb-2025 Street View), implying no on-property gate control.",
+    "guardShack": "No staffed booth at any entrance in satellite or Street View. The visible structure to the NW/SW belongs to the neighboring facility, not NFI.",
+    "remoteGs": "False because there is no truck gate at all.",
+    "shipRcvSeparate": "Loading docks run along BOTH long faces of the building (east and west walls), each a dense bank of doors with trailers backed in - two physically separate dock clusters.",
+    "dockDoors": "Colliers/Greenwood DC listing states 98 dock doors (561,140 SF building). Satellite confirms a dense regular rhythm of doors with trailers on both long faces - 50+ band.",
+    "dropArea": "Listing states 86 trailer parks. Satellite confirms a dedicated trailer drop yard along the west side plus dense parked-trailer rows - 50+ band.",
+    "dropYard": "Dedicated trailer-storage lot west of the building, full of parked trailers, separate from active dock staging.",
+    "entryExitSeparate": "Multiple open driveway connections to Greenwood Industrial Pkwy (SW dock-side drive, south-central auto/visitor drive, SE loop drive) feeding a full perimeter loop road, so entry and exit can occur at different points.",
+    "urbanRural": "Dense McDonough / I-75 logistics park ~2 mi from I-75, ringed by big-box distribution buildings - Urban industrial fabric.",
+    "trailersVisible": "Approximate count from overhead imagery across both dock faces and the west drop yard; low-confidence exact figure.",
+    "trailerParkingCapacity": "Taken from the published 86 trailer-park figure for the building.",
+    "railServed": "No rail spur enters the property; nearest rail is unrelated."
+  },
+  "method": "deep-audit"
+}

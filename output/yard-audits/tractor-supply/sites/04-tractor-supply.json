@@ -1,0 +1,110 @@
+{
+  "name": "Tractor Supply Distribution Center Casa Grande AZ",
+  "type": "Distribution Center",
+  "coords": { "lat": 32.8617, "lng": -111.7891 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 32.864343, "lng": -111.791135 },
+      { "lat": 32.864060, "lng": -111.786350 },
+      { "lat": 32.858900, "lng": -111.786350 },
+      { "lat": 32.858900, "lng": -111.791050 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 32.864043, "lng": -111.788080 },
+      { "lat": 32.864043, "lng": -111.787490 },
+      { "lat": 32.863368, "lng": -111.787490 },
+      { "lat": 32.863368, "lng": -111.788080 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 32.863050, "lng": -111.790760 },
+        { "lat": 32.863050, "lng": -111.790180 },
+        { "lat": 32.859150, "lng": -111.790180 },
+        { "lat": 32.859150, "lng": -111.790760 }
+      ] },
+      { "ring": [
+        { "lat": 32.863400, "lng": -111.787900 },
+        { "lat": 32.863400, "lng": -111.787150 },
+        { "lat": 32.860100, "lng": -111.787150 },
+        { "lat": 32.860100, "lng": -111.787900 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 32.863600, "lng": -111.790040 },
+        { "lat": 32.863600, "lng": -111.789760 },
+        { "lat": 32.859950, "lng": -111.789760 },
+        { "lat": 32.859950, "lng": -111.790040 }
+      ] },
+      { "ring": [
+        { "lat": 32.863600, "lng": -111.788130 },
+        { "lat": 32.863600, "lng": -111.787850 },
+        { "lat": 32.860100, "lng": -111.787850 },
+        { "lat": 32.860100, "lng": -111.788130 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 32.864060, "lng": -111.788400 },
+      { "lat": 32.864060, "lng": -111.787150 },
+      { "lat": 32.863550, "lng": -111.787150 },
+      { "lat": 32.863550, "lng": -111.788400 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 186, "pano": "", "hasCoverage": true },
+      "truckGate": { "heading": 153, "pano": "", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 140,
+    "trailerParkingCapacity": 220,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 64.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.8617,-111.7891,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["exitLanes", "connectivityIssue", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Controlled multi-lane truck entry at NE corner off Peters Rd: satellite z20 shows painted lane islands/medians with directional arrows where the drive meets the public road; full chain-link perimeter fence confirmed in Street View (Jan 2025).",
+    "guardShack": "Small ~1-vehicle-footprint booth structure sits in the paved entry island on the NW gatehouse drive (z21 satellite @ 32.86343,-111.79052), positioned to control inbound truck circulation. 24/7 staffed per driver reviews.",
+    "postGateStaging": "Deep paved apron between the gate line and the building face provides interior queue room before docks.",
+    "drivewayLong": "Gate-to-dock approach is long with a large paved apron; easily holds 3+ trucks.",
+    "entryLanes": "Two inbound lanes read from z20 lane arrows; outbound lane count partly obscured, estimated 1.",
+    "exitLanes": "Outbound lane count not fully resolvable from imagery; estimate 1.",
+    "fastLaneOpportunity": "Wide multi-lane gate apron with spare paved width to add an express/bypass lane.",
+    "dockDoors": "Long dock banks on both the west and east building faces with trailers backed in; total well over 50 (est ~90).",
+    "dropArea": "Two large drop yards (west and east) packed with parked trailers without tractors; 50+ band.",
+    "shipRcvSeparate": "Dock clusters on opposite (west and east) building faces suggest separate ship/receive flows; medium confidence.",
+    "urbanRural": "Edge-of-town Casa Grande industrial area bordered by active farmland to the west and open desert E/S; Rural.",
+    "connectivityIssue": "Within Casa Grande's industrial fringe near other large DCs; cellular coverage likely adequate, so false (low confidence).",
+    "buildingCount": "Main DC plus a separate smaller building at the south/SE; counted 2.",
+    "railServed": "No rail spur enters the property."
+  },
+  "method": "deep-audit"
+}

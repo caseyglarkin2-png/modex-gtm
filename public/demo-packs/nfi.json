@@ -1,0 +1,2576 @@
+{
+  "schemaVersion": "2",
+  "builtAt": "2026-06-10T15:30:09.367Z",
+  "account": {
+    "slug": "nfi",
+    "displayName": "NFI Industries",
+    "archetype": "3pl",
+    "siteCount": 10,
+    "coverageNote": {
+      "auditedCount": 10,
+      "estimatedFootprint": 300,
+      "droppedStubCount": 0,
+      "capHit": false,
+      "note": "NFI operates 300+ North American facilities; we audited 10 of the largest and most yard-intensive (dedicated DCs, port logistics, a Port of Savannah terminal, a fulfillment center). The rest follow the same gate/dock archetypes."
+    },
+    "featuredSiteId": "12-nfi",
+    "dossierIntro": "NFI runs freight yards on behalf of the retailers and manufacturers it serves, across more than 300 North American facilities. We mapped 10 of its largest and most yard-intensive sites, from Lehigh Valley cross-docks to Inland Empire import DCs and a Port of Savannah logistics terminal, holding 1,363 dock doors and room for about 3,205 trailers. Control across the network is uneven. Six of the 10 sit behind a truck gate, but only 3 run a staffed booth, and several sit open to the road. YardFlow puts one gate-to-dock standard across every yard NFI operates, no matter whose freight is moving through it.",
+    "surprisingFindings": [
+      "Only 6 of NFI’s 10 audited yards sit behind a truck gate, and 3 run a staffed booth. The rest sit open to the road, so most trailers roll in unchecked.",
+      "The 10 yards hold 1,363 dock doors and room for about 3,205 trailers, and not one is rail-served. Every load moves by truck.",
+      "Ten sites span four yard types, from a Port of Savannah terminal to Inland Empire DCs and Lehigh Valley cross-docks, each with its own gate routine."
+    ]
+  },
+  "research": null,
+  "network": {
+    "bbox": [
+      -117.2418,
+      32.14772,
+      -74.8114,
+      41.3928
+    ],
+    "archetypeMix": {
+      "#9": 3,
+      "#7": 1,
+      "#3": 4,
+      "#10": 2
+    },
+    "totals": {
+      "dockDoors": 1363,
+      "trailerCapacity": 3205,
+      "gates": 8,
+      "railServed": 0,
+      "acres": 406.8
+    },
+    "sites": [
+      {
+        "id": "01-nfi",
+        "name": "NFI Distribution Center Breinigsville PA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "shipRcvSeparate"
+        ],
+        "center": {
+          "lat": 40.5679,
+          "lng": -75.635
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 40.56945,
+                "lng": -75.6369
+              },
+              {
+                "lat": 40.5693,
+                "lng": -75.6325
+              },
+              {
+                "lat": 40.56875,
+                "lng": -75.63185
+              },
+              {
+                "lat": 40.5673,
+                "lng": -75.63235
+              },
+              {
+                "lat": 40.56745,
+                "lng": -75.637
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 40.56872,
+                "lng": -75.63268
+              },
+              {
+                "lat": 40.56865,
+                "lng": -75.63232
+              },
+              {
+                "lat": 40.56842,
+                "lng": -75.63238
+              },
+              {
+                "lat": 40.56849,
+                "lng": -75.63273
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 40.5693,
+                  "lng": -75.6362
+                },
+                {
+                  "lat": 40.56918,
+                  "lng": -75.6352
+                },
+                {
+                  "lat": 40.56892,
+                  "lng": -75.63528
+                },
+                {
+                  "lat": 40.56904,
+                  "lng": -75.63628
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 40.56918,
+                  "lng": -75.6338
+                },
+                {
+                  "lat": 40.56908,
+                  "lng": -75.633
+                },
+                {
+                  "lat": 40.56882,
+                  "lng": -75.63308
+                },
+                {
+                  "lat": 40.56892,
+                  "lng": -75.63388
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 40.56848,
+                  "lng": -75.6324
+                },
+                {
+                  "lat": 40.56838,
+                  "lng": -75.6319
+                },
+                {
+                  "lat": 40.56808,
+                  "lng": -75.632
+                },
+                {
+                  "lat": 40.56818,
+                  "lng": -75.6325
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 40.56812,
+                  "lng": -75.63685
+                },
+                {
+                  "lat": 40.56802,
+                  "lng": -75.63312
+                },
+                {
+                  "lat": 40.56792,
+                  "lng": -75.63313
+                },
+                {
+                  "lat": 40.56802,
+                  "lng": -75.63686
+                }
+              ]
+            }
+          ],
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 10,
+              "pano": "8e6EvxSowR8LTYuOqkemJw",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 270,
+              "pano": "eK1Ypep7U5qFhimzTfVzJw",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 70,
+          "trailersVisible": 28,
+          "trailerParkingCapacity": 90,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 22.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "25-50",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
+        "dossierExcerpt": "The supplied coordinates (40.567597, -75.636086) landed on the south wall of a\nlong white-roofed industrial building inside a dense Lehigh Valley industrial\npark (Breinigsville / Upper Macungie Twp). Web research confirms 200 Nestle Way\nis an NFI Industries distribution center: 384,500 SF, built 2021, 36 ft clear,\noff I-78 Exit 49 (NFI facility profile PDF; LoopNet; bippermedia listing).\n\nPositive building ID was clinched in Street View: looking west into the truck\nentrance off Nestle Way (pano `eK1Ypep7U5qFhimzTfVzJw`, panos along the road),\nthe building face carries the blue \"NFI\" logo and NFI-blue accent panels.\nThe same blue/white NFI building is seen from the south perimeter road (pano\n`8e6EvxSowR8LTYuOqkemJw`). This is the correct building, not an office or\nneighbor. Locked center ~40.56790, -75.63500.",
+        "mapsUrl": "https://www.google.com/maps/@40.56790,-75.63500,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single divided truck entrance off Nestle Way at the SE corner. z21 satellite shows two yellow/black striped barrier arms, one across the inbound lane and one across the outbound lane, separated by a landscaped median. Confirmed in Street View (pano eK1Ypep7U5qFhimzTfVzJw, 2025-05).",
+          "guardShack": "No staffed booth visible at the gate from satellite or Street View. The barrier arms appear automated with a kiosk/call-box; no 1-3-space guard structure beside the lane. Hence remoteGs = true.",
+          "remoteGs": "Gate present, no guard shack -> remote/automated check-in (kiosk/app).",
+          "entryExitTogether": "Set false / entryExitSeparate false because the gate is a single divided in/out point at one location rather than two distinct gates at different property points; in and out share the same entrance throat with split lanes (1 in, 1 out).",
+          "drivewayLong": "Divided entrance drive runs ~120m from Nestle Way to the dock-yard apron; easily holds 3+ trucks stacked between gate and docks.",
+          "postGateStaging": "Large paved apron between the gate arms and the north dock face provides interior queue/holding room before docks.",
+          "dockDoors": "Single continuous dock face along the building's NORTH side (~700ft) with a regular door rhythm and trailers backed in across z19/z20 crops; comfortably in the 50+ band. Count ~70 is an overhead estimate.",
+          "dropArea": "Three diagonal trailer-parking rows in the north/east yard hold parked trailers without tractors; 25-50 band.",
+          "shipRcvSeparate": "Main dock bank on the north face plus a separate angled dock/trailer cluster on the building's EAST end (eastend-z19) suggests physically separate dock clusters; medium confidence.",
+          "dropYard": "Dedicated diagonal trailer-storage rows separate from active dock staging, in the north and east yard.",
+          "urbanRural": "Edge-of-town Lehigh Valley industrial park surrounded by farmland, woods, a stormwater pond, and a residential subdivision to the south; broader setting is Rural per the tie-break rule.",
+          "railServed": "No rail spur enters the property.",
+          "trailerParkingCapacity": "Estimate of diagonal-stall capacity across the three drop rows plus dock apron; overhead approximation.",
+          "siteAreaAcres": "Derived from the perimeter polygon (~22.5 acres inside the fence line)."
+        }
+      },
+      {
+        "id": "03-nfi",
+        "name": "NFI Cross-Dock Bethlehem PA",
+        "type": "Cross-Dock",
+        "archetype": "#7",
+        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
+        "confidence": "high",
+        "uncertainFields": [
+          "shipRcvSeparate",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 40.6074017,
+          "lng": -75.3243256
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 40.6109,
+                "lng": -75.3243
+              },
+              {
+                "lat": 40.6105,
+                "lng": -75.3223
+              },
+              {
+                "lat": 40.6072,
+                "lng": -75.3227
+              },
+              {
+                "lat": 40.6059,
+                "lng": -75.323
+              },
+              {
+                "lat": 40.6058,
+                "lng": -75.324
+              },
+              {
+                "lat": 40.6066,
+                "lng": -75.3248
+              },
+              {
+                "lat": 40.6081,
+                "lng": -75.3247
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 40.6088,
+                "lng": -75.32495
+              },
+              {
+                "lat": 40.60878,
+                "lng": -75.32455
+              },
+              {
+                "lat": 40.60835,
+                "lng": -75.32458
+              },
+              {
+                "lat": 40.60837,
+                "lng": -75.32498
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 40.607,
+                  "lng": -75.3243
+                },
+                {
+                  "lat": 40.6068,
+                  "lng": -75.3223
+                },
+                {
+                  "lat": 40.606,
+                  "lng": -75.3225
+                },
+                {
+                  "lat": 40.6061,
+                  "lng": -75.32445
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 40.6108,
+                  "lng": -75.3246
+                },
+                {
+                  "lat": 40.61075,
+                  "lng": -75.32435
+                },
+                {
+                  "lat": 40.6084,
+                  "lng": -75.32468
+                },
+                {
+                  "lat": 40.60845,
+                  "lng": -75.32493
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 40.61055,
+                  "lng": -75.32235
+                },
+                {
+                  "lat": 40.6105,
+                  "lng": -75.3221
+                },
+                {
+                  "lat": 40.60735,
+                  "lng": -75.3225
+                },
+                {
+                  "lat": 40.6074,
+                  "lng": -75.32275
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 40.6081,
+                "lng": -75.3247
+              },
+              {
+                "lat": 40.60805,
+                "lng": -75.3235
+              },
+              {
+                "lat": 40.6072,
+                "lng": -75.3236
+              },
+              {
+                "lat": 40.60725,
+                "lng": -75.32475
+              }
+            ]
+          },
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 87,
+              "pano": "K9ZwPR-rxYjIYW3GM6rIqg",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 267,
+              "pano": "sJU29OkVMO1mfD_IUCv4CA",
+              "hasCoverage": true
+            },
+            "dropYards": [
+              {
+                "heading": 172,
+                "pano": "Lwj0h0bHB_OnJcRZxHb_qg",
+                "hasCoverage": true
+              }
+            ]
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 78,
+          "trailersVisible": 95,
+          "trailerParkingCapacity": 130,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 24,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#7",
+          "steps": [
+            {
+              "step": "Arrive at gate (fast-lane bypass possible)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter dispatch (fast-lane priority for live loads)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch.fastlane",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4440000,
+          "totalYnsMs": 2730000
+        },
+        "dossierExcerpt": "The supplied approximate coords (40.608848, -75.324584) landed inside the\nMajestic Bethlehem Center big-box industrial park (built on the former\nBethlehem Steel land in South Bethlehem), between several large distribution\nbuildings. Web research resolved the exact address: 3051 Commerce Center Blvd =\nMajestic Bethlehem Center Building 1B, a ~538,650 sf Class-A\nwarehouse/distribution building on a ~24-acre lot, 78 dock-high doors,\n36' clear, with a guard house. It is operated by NFI - Cal Cartage (the\ngeocode 40.6074017,-75.3243256 returns \"NFI - Cal Cartage, 3051 Commerce Center\nBlvd\"). Some stale directory listings mislabel the entrance \"Lowe's DC\" — the\ncurrent operator at the address is NFI.\n\nThe park contains multiple neighbors (Walmart DC at 3215, Lowe's, others), so I",
+        "mapsUrl": "https://www.google.com/maps/@40.6074017,-75.3243256,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Gatehouse on a median island splits the central truck court into an in-lane and out-lane at a pinch-point between landscaped islands and perimeter chain-link fence (z20 sat 40.60855,-75.32475). Court is fully fenced; entry from Commerce Center Blvd at the south.",
+          "guardShack": "Small 1-2-vehicle-footprint booth sitting on the median island mid-court, windows on multiple sides, vehicle parked at it. Listing brochure also cites a guard house with restroom on the parcel.",
+          "remoteGs": "False because a staffed guard booth is present.",
+          "fastLaneOpportunity": "Wide central truck court and double-wide approach lanes around the median booth give unused paved width to add an express/bypass lane.",
+          "postGateStaging": "Paved court between the gatehouse and the dock faces holds a deep queue of trucks inside the fence before docks.",
+          "drivewayLong": "Central court runs ~300m, easily holds 3+ trucks staging between gate and docks.",
+          "dockDoors": "Building 1B listing = 78 dock-high doors; satellite shows dense dock-door rhythm with trailers backed in on the west (court) face and a second bank on the east face. Band 50+.",
+          "dropArea": "Large unpaved gravel drop yard south of the perimeter road packed with 60-80 parked trailers without tractors (sat 40.6066,-75.3236). Band 50+.",
+          "dropYard": "Dedicated gravel trailer-storage lot on the south parcel, separate from active court staging.",
+          "shipRcvSeparate": "Docks on both the west (central court) and east faces of the building, but cannot confirm they run as physically separate ship vs receive clusters from overhead; left false, flagged uncertain.",
+          "urbanRural": "Majestic Bethlehem Center is an edge-of-town big-box industrial park on the former Bethlehem Steel land, bordered by ravine/woodland and rail yards; setting reads Rural per rubric.",
+          "railServed": "A multi-track rail yard sits south of the property but it is separated by a ravine and tree line and is regional/legacy infrastructure, not a private spur into the NFI docks. False.",
+          "buildingCount": "Audited the NFI 3051 / Majestic Bldg 1B leased parcel as one building; the park has several adjacent big-box DCs but they are separate addresses.",
+          "siteAreaAcres": "Listing cites ~24-acre lot for Bldg 1B; perimeter ring drawn to that leased parcel including the south gravel drop yard."
+        }
+      },
+      {
+        "id": "04-nfi",
+        "name": "NFI Distribution Center Florence NJ",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "entryLanes",
+          "exitLanes",
+          "urbanRural"
+        ],
+        "center": {
+          "lat": 40.10685,
+          "lng": -74.81385
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 40.10918,
+                "lng": -74.813
+              },
+              {
+                "lat": 40.10895,
+                "lng": -74.8172
+              },
+              {
+                "lat": 40.1056,
+                "lng": -74.8156
+              },
+              {
+                "lat": 40.1043,
+                "lng": -74.8131
+              },
+              {
+                "lat": 40.1054,
+                "lng": -74.8116
+              },
+              {
+                "lat": 40.1072,
+                "lng": -74.8114
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 40.10905,
+                "lng": -74.8162
+              },
+              {
+                "lat": 40.1088,
+                "lng": -74.8169
+              },
+              {
+                "lat": 40.1084,
+                "lng": -74.8166
+              },
+              {
+                "lat": 40.10865,
+                "lng": -74.8159
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 40.10905,
+                  "lng": -74.81595
+                },
+                {
+                  "lat": 40.10845,
+                  "lng": -74.8174
+                },
+                {
+                  "lat": 40.10745,
+                  "lng": -74.8168
+                },
+                {
+                  "lat": 40.10805,
+                  "lng": -74.8154
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 40.1088,
+                  "lng": -74.81525
+                },
+                {
+                  "lat": 40.1056,
+                  "lng": -74.8139
+                },
+                {
+                  "lat": 40.10548,
+                  "lng": -74.8143
+                },
+                {
+                  "lat": 40.10868,
+                  "lng": -74.81565
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 40.10865,
+                "lng": -74.81595
+              },
+              {
+                "lat": 40.10565,
+                "lng": -74.81465
+              },
+              {
+                "lat": 40.10555,
+                "lng": -74.815
+              },
+              {
+                "lat": 40.10855,
+                "lng": -74.8163
+              }
+            ]
+          },
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 346,
+              "pano": "iA_Q0KZKtWn73NgJAiliHw",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 83,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 260,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 43.6,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": false,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": true,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
+        "dossierExcerpt": "The supplied coordinates (40.11814, -74.80977) were wrong. A z16 satellite probe\nthere showed a residential neighborhood with municipal ball fields in central\nFlorence Township — no industrial building. The real facility is **NFI Park at\nFlorence Crossings**, an NFI-developed multi-tenant logistics campus at\n2020 US-130 North, \"less than half a mile from NJ Turnpike Exit 6A,\" about\n1.5 km SSW of the bad pin (NFI Industries and Florence Township sources).\n\nWorking SW from the bad point, a z15 probe at 40.105, -74.825 surfaced the campus:\na cluster of large distribution buildings between the Delaware River and US-130 /\nthe NJ Turnpike. The campus comprises ~1.65M SF across four tenant buildings\n(Subaru parts DC, QPSI, and others). The audited building is the **Subaru of\nAmerica parts distribution + training center** that NFI built-to-suit here:",
+        "mapsUrl": "https://www.google.com/maps/@40.10685,-74.81385,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Open business-park campus (NFI Park at Florence Crossings). No barrier arm, sliding gate, or checkpoint anywhere along the internal access road (Crossings Blvd) or at the building's truck court. Street View on the south loop road and satellite of every access point confirm open driveways from public road to docks.",
+          "guardShack": "No staffed booth at any entrance. No 1-3-space structure beside any drive. Confirmed in Street View (open landscaped frontage) and satellite.",
+          "postGateStaging": "Wide shared truck court between the Subaru/NFI building and the adjacent DC; trailers staged along a central landscaped median inside the property.",
+          "drivewayLong": "Truck court / dock-approach aisle is deep and wide, easily holding 3+ trucks in queue.",
+          "dockDoors": "Subaru/NFI build-to-suit spec is 83 loading doors (NFI/Florence Township sources); satellite shows a long bank of doors with trailers backed in along the west face plus additional doors at the north end. Banded 50+.",
+          "dropArea": "Large dedicated trailer drop yard at the NW of the parcel plus heavy trailer staging through the court; well over 50 drop trailers visible without tractors.",
+          "multipleFacilities": "Audited building is one tenant building within the 4-building, ~1.65M SF NFI Park at Florence Crossings campus (Subaru, QPSI, and others share the property).",
+          "urbanRural": "Planned logistics park on the edge of Florence Township (a small town) beside US-130 and NJ Turnpike Exit 6A, with farmland/open land and residential adjacent. Per rubric (small-town industrial -> Rural). Listed uncertain given the heavy surrounding logistics development.",
+          "entryLanes": "No gate present, so no controlled inbound lane count; the internal road and court are open 2-way pavement.",
+          "exitLanes": "No gate present, so no controlled outbound lane count.",
+          "railServed": "No rail spur enters the property.",
+          "siteAreaAcres": "Estimated from the perimeter polygon enclosing the audited Subaru/NFI building, its west truck court, north drop yard, and south office parking (~44 ac from the polygon); the full multi-tenant park is larger.",
+          "trailersVisible": "Approximate count of trailers in captured imagery (docks + drop yard + court staging).",
+          "streetViewMeta": "Only Street View coverage on the parcel is pano iA_Q0KZKtWn73NgJAiliHw on the southern internal loop road (2022-10), used for the perimeter view (camera heading 346 toward the building south end). No pano within 300m of the north truck court, so truckGate has no coverage."
+        }
+      },
+      {
+        "id": "07-nfi",
+        "name": "NFI Distribution Center Perris CA (Indian Ave)",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailersVisible",
+          "trailerParkingCapacity",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 33.838887,
+          "lng": -117.2294
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 33.84045,
+                "lng": -117.2336
+              },
+              {
+                "lat": 33.84045,
+                "lng": -117.2266
+              },
+              {
+                "lat": 33.8371,
+                "lng": -117.2266
+              },
+              {
+                "lat": 33.8371,
+                "lng": -117.2336
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 33.8376,
+                "lng": -117.23135
+              },
+              {
+                "lat": 33.8376,
+                "lng": -117.23065
+              },
+              {
+                "lat": 33.83722,
+                "lng": -117.23065
+              },
+              {
+                "lat": 33.83722,
+                "lng": -117.23135
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 33.8404,
+                  "lng": -117.2331
+                },
+                {
+                  "lat": 33.8404,
+                  "lng": -117.227
+                },
+                {
+                  "lat": 33.83975,
+                  "lng": -117.227
+                },
+                {
+                  "lat": 33.83975,
+                  "lng": -117.2331
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 33.83975,
+                  "lng": -117.2331
+                },
+                {
+                  "lat": 33.83975,
+                  "lng": -117.227
+                },
+                {
+                  "lat": 33.83955,
+                  "lng": -117.227
+                },
+                {
+                  "lat": 33.83955,
+                  "lng": -117.2331
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 33.83745,
+                  "lng": -117.2331
+                },
+                {
+                  "lat": 33.83745,
+                  "lng": -117.2272
+                },
+                {
+                  "lat": 33.83725,
+                  "lng": -117.2272
+                },
+                {
+                  "lat": 33.83725,
+                  "lng": -117.2331
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 33.83955,
+                "lng": -117.2331
+              },
+              {
+                "lat": 33.83955,
+                "lng": -117.2272
+              },
+              {
+                "lat": 33.83745,
+                "lng": -117.2272
+              },
+              {
+                "lat": 33.83745,
+                "lng": -117.2331
+              }
+            ]
+          },
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 359,
+              "pano": "iXuuomuvtIyvU46FHs2BoQ",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 350,
+              "pano": "Rnef4CsRjQalQndj73Zxfg",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 200,
+          "trailersVisible": 250,
+          "trailerParkingCapacity": 350,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 59.6,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
+        "dossierExcerpt": "The supplied coordinates landed directly on a single, very large gray-roofed\ndistribution building, which web research positively identifies as the\nHanesBrands West Coast Distribution Center, operated by NFI (the 3PL).\nCorroborating sources: a LoopNet listing (\"3700 Indian Ave — Hanesbrands\nDistribution Center\"), the NFI Industries grand-opening press release, and the\nCity of Perris news archive. The NFI release gives hard dimensions: the\nbuilding is **over 2,152 ft long, 654 ft wide, with a ~1-mile interior\nperimeter (~1.3M sq ft)**, opened January 2009, built to LEED standard. Yelp /\ndirectory listings also label it \"NFI-Hanes, 3700 Indian Ave.\"\n\nThe building sits between Indian Ave (north-south, the east property line)\nand Morgan St (east-west, the south property line) in the Perris industrial",
+        "mapsUrl": "https://www.google.com/maps/@33.838887,-117.2294,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Dec-2025 Street View at the south driveway off Morgan St shows a black sliding/swing metal gate spanning the full truck-lane throat; perimeter fencing wraps the property.",
+          "guardShack": "No staffed booth anywhere beside the lane in any Street View heading; the building wall and fence are the only structures at the entrance.",
+          "remoteGs": "A bank of self-service check-in kiosks/pedestals is mounted just inside the gate (visible in the N / NNW / NNE frames), implying app/kiosk driver check-in rather than a guard.",
+          "shipRcvSeparate": "Two distinct dock banks on opposite building faces: a long north dock row (with a deep multi-row trailer drop yard) and a separate south dock row.",
+          "dropYard": "Deep north yard is filled with multiple long rows of parked trailers (no tractors) = dedicated trailer storage, separate from active dock staging.",
+          "fastLaneOpportunity": "Very wide single gate apron with ample unused paved width to stripe an express/bypass lane.",
+          "dockDoorCount": "Estimate from overhead; building is 2,152 ft long with near-continuous dock rows on both N and S faces. ~200 doors total is approximate (band 50+ is firm).",
+          "trailersVisible": "Approximate count across north drop-yard rows, dock-backed trailers, and south apron.",
+          "trailerParkingCapacity": "Approximate; comparable nearby NFI Perris (Nance St) was reported at 224 spots, this larger 1.3M-sf site estimated higher.",
+          "entryLanes": "Single combined in/out driveway; lane split not clearly markable from imagery.",
+          "urbanRural": "Edge-of-town Perris industrial park; open scrubland immediately south and east of the property along Morgan St."
+        }
+      },
+      {
+        "id": "09-nfi",
+        "name": "NFI Distribution Center Moreno Valley CA",
+        "type": "Distribution Center",
+        "archetype": "#9",
+        "archetypeName": "Gate + No GS (remote check-in)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "postGateStaging",
+          "trailersVisible"
+        ],
+        "center": {
+          "lat": 33.86465,
+          "lng": -117.23858
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 33.86618,
+                "lng": -117.2418
+              },
+              {
+                "lat": 33.8662,
+                "lng": -117.237
+              },
+              {
+                "lat": 33.86618,
+                "lng": -117.2356
+              },
+              {
+                "lat": 33.8654,
+                "lng": -117.23545
+              },
+              {
+                "lat": 33.8633,
+                "lng": -117.23555
+              },
+              {
+                "lat": 33.86255,
+                "lng": -117.2369
+              },
+              {
+                "lat": 33.8625,
+                "lng": -117.2405
+              },
+              {
+                "lat": 33.8625,
+                "lng": -117.2418
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 33.86628,
+                "lng": -117.2388
+              },
+              {
+                "lat": 33.86628,
+                "lng": -117.2383
+              },
+              {
+                "lat": 33.86585,
+                "lng": -117.23832
+              },
+              {
+                "lat": 33.86585,
+                "lng": -117.23882
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 33.86345,
+                  "lng": -117.2416
+                },
+                {
+                  "lat": 33.86348,
+                  "lng": -117.2372
+                },
+                {
+                  "lat": 33.86268,
+                  "lng": -117.2372
+                },
+                {
+                  "lat": 33.86262,
+                  "lng": -117.2416
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 33.86598,
+                  "lng": -117.2416
+                },
+                {
+                  "lat": 33.866,
+                  "lng": -117.2362
+                },
+                {
+                  "lat": 33.8656,
+                  "lng": -117.2362
+                },
+                {
+                  "lat": 33.86558,
+                  "lng": -117.2416
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 33.8656,
+                  "lng": -117.2414
+                },
+                {
+                  "lat": 33.86561,
+                  "lng": -117.236
+                },
+                {
+                  "lat": 33.86552,
+                  "lng": -117.236
+                },
+                {
+                  "lat": 33.86551,
+                  "lng": -117.2414
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 33.86385,
+                  "lng": -117.2414
+                },
+                {
+                  "lat": 33.86386,
+                  "lng": -117.2362
+                },
+                {
+                  "lat": 33.86377,
+                  "lng": -117.2362
+                },
+                {
+                  "lat": 33.86376,
+                  "lng": -117.2414
+                }
+              ]
+            }
+          ],
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 178,
+              "pano": "5r3YRjxfMxN_v6R4Xgh50A",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 198,
+              "pano": "EWLTXQ393YrwRnPLrc9l4A",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 224,
+          "trailersVisible": 180,
+          "trailerParkingCapacity": 653,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 57.8,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": false,
+          "remoteGs": true,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#9",
+          "steps": [
+            {
+              "step": "Arrive at gate (no guard, kiosk or call box)",
+              "geofenceTarget": "truckGate",
+              "durationMs": 60000,
+              "narrationKey": "gate.through.kiosk",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Pass through to drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Spotter pulls to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1200000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 4560000,
+          "totalYnsMs": 2730000
+        },
+        "dossierExcerpt": "The approximate point landed in the dense Inland Empire industrial fabric south\nof March ARB / the Meridian business park (Moreno Valley). The LoopNet listing\nfor 24385 Nandina Ave — a Class-A cross-dock with 224 dock-high doors and 653\ntrailer stalls — pins the building. Satellite (z18) shows a single large\nscreen-walled distribution building with interior truck courts on the north and\nsouth faces, consistent with the spec. Locked center ~33.86465, -117.23858.",
+        "mapsUrl": "https://www.google.com/maps/@33.86465,-117.23858,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Property is fully fenced/screen-walled; truck dock courts are interior and entered through a defined opening in the north screen wall off Nandina Ave (~33.8660,-117.2385). Controlled pinch-point. No barrier arm visible at the public road line in Feb-2026 Street View.",
+          "guardShack": "No standalone staffed guard booth visible at the truck entrance in any satellite (z20) or Street View frame. The two public frontages (north Nandina, east street) are landscaped office faces with screen walls, not gated truck lanes.",
+          "remoteGs": "Inferred kiosk/app/remote check-in: there is a controlled truck entrance but no guard booth structure, typical of a modern Class-A spec cross-dock.",
+          "entryLanes": "Could not see lane striping inside the screened truck entrance; 2 each direction estimated from the width of the entry throat.",
+          "exitLanes": "Same as entryLanes; entry and exit share the entrance opening.",
+          "postGateStaging": "Wide interior aprons in both north and south dock courts provide deep queueing/holding room before docks.",
+          "shipRcvSeparate": "True cross-dock: dock banks on both the north and south building faces (224 total doors per LoopNet spec).",
+          "dockDoors": "LoopNet listing for 24385 Nandina states 224 dock-high doors (band 50+). Counts confirmed visually as continuous dock lines on N and S faces.",
+          "dropArea": "LoopNet states 653 trailer stalls. Large drop yards on the south/southwest and north courts full of parked trailers; band 50+.",
+          "trailersVisible": "~180 trailers counted across captured imagery; approximate.",
+          "fastLaneOpportunity": "Wide aprons and multiple drive lanes wrapping the building give ample room for a bypass/express lane.",
+          "siteAreaAcres": "~57.8 acres from perimeter polygon (shoelace).",
+          "railServed": "No rail spur into the property; nearest rail unrelated.",
+          "urbanRural": "Dense Inland Empire industrial fabric adjacent to March ARB / Meridian business park, Moreno Valley metro."
+        }
+      },
+      {
+        "id": "10-nfi",
+        "name": "NFI Port Logistics Port Wentworth GA",
+        "type": "Port Logistics",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "medium",
+        "uncertainFields": [
+          "truckGate",
+          "guardShack",
+          "remoteGs",
+          "entryLanes",
+          "exitLanes",
+          "scale",
+          "multiStep",
+          "trailersVisible",
+          "preGateStaging",
+          "postGateStaging"
+        ],
+        "center": {
+          "lat": 32.1503,
+          "lng": -81.1504
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 32.152844,
+                "lng": -81.153711
+              },
+              {
+                "lat": 32.153498,
+                "lng": -81.151586
+              },
+              {
+                "lat": 32.153171,
+                "lng": -81.149398
+              },
+              {
+                "lat": 32.1511,
+                "lng": -81.147144
+              },
+              {
+                "lat": 32.148974,
+                "lng": -81.147853
+              },
+              {
+                "lat": 32.147829,
+                "lng": -81.150428
+              },
+              {
+                "lat": 32.14772,
+                "lng": -81.153067
+              },
+              {
+                "lat": 32.149846,
+                "lng": -81.153775
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 32.14832,
+                "lng": -81.153775
+              },
+              {
+                "lat": 32.148211,
+                "lng": -81.15223
+              },
+              {
+                "lat": 32.147557,
+                "lng": -81.152166
+              },
+              {
+                "lat": 32.147666,
+                "lng": -81.153775
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 32.153225,
+                  "lng": -81.151586
+                },
+                {
+                  "lat": 32.15268,
+                  "lng": -81.148625
+                },
+                {
+                  "lat": 32.150718,
+                  "lng": -81.147724
+                },
+                {
+                  "lat": 32.151045,
+                  "lng": -81.151586
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 32.1505,
+                  "lng": -81.149655
+                },
+                {
+                  "lat": 32.149846,
+                  "lng": -81.147466
+                },
+                {
+                  "lat": 32.148429,
+                  "lng": -81.148046
+                },
+                {
+                  "lat": 32.149192,
+                  "lng": -81.149848
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 32.150827,
+                  "lng": -81.153389
+                },
+                {
+                  "lat": 32.150718,
+                  "lng": -81.1512
+                },
+                {
+                  "lat": 32.149846,
+                  "lng": -81.1512
+                },
+                {
+                  "lat": 32.149846,
+                  "lng": -81.153389
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 32.150718,
+                  "lng": -81.151071
+                },
+                {
+                  "lat": 32.150718,
+                  "lng": -81.15017
+                },
+                {
+                  "lat": 32.147993,
+                  "lng": -81.150106
+                },
+                {
+                  "lat": 32.147993,
+                  "lng": -81.151007
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 32.147666,
+                "lng": -81.154419
+              },
+              {
+                "lat": 32.147666,
+                "lng": -81.153389
+              },
+              {
+                "lat": 32.147012,
+                "lng": -81.15326
+              },
+              {
+                "lat": 32.147012,
+                "lng": -81.154354
+              }
+            ]
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 308,
+          "trailersVisible": 0,
+          "trailerParkingCapacity": 876,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 77.2,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#10",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct (shipping vs receiving) drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 120000,
+              "narrationKey": "shiprcv.split",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron on correct side",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1320000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
+        },
+        "dossierExcerpt": "The supplied coordinates (32.15001, -81.151175) landed squarely on the site. I\nprobed satellite at z15–z19 around the point and cross-checked the street\naddress and NFI's published material. The cross/T-shaped warehouse footprint in\nthe imagery matches NFI's Savannah transload building, and web research\nconfirms the address and specs. Positively identified.\n\nThe site sits on a peninsula formed by a bend in the Savannah River (bounding\nit on the north and east), with a residential neighborhood (Crossgate) and a\nrail/utility corridor to the west, and Crossgate Road along the south/SE.\nNFI states the facility is less than 1 mile from the GPA Garden City Terminal\n— consistent with the location.\n\n---",
+        "mapsUrl": "https://www.google.com/maps/@32.150300,-81.150400,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "imagery": "Static Maxar satellite available via probe.ts captures the site MID-CONSTRUCTION (bare graded dirt, partially-erected steel/precast warehouse roofs, stacked construction materials, no final pavement striping). The facility opened Dec 5 2023; current imagery predates completion. Street View near the entrance is dated 2019-05 and shows raw, fenced vacant land (no operational coverage). Location, building footprint and graded property boundary are positively confirmed; gate-detail fields are inferred from facility type + documented specs and flagged.",
+          "location": "Positively confirmed as 120 Crossgate Road, Port Wentworth GA. The cross/T-shaped warehouse footprint in the imagery matches NFI's transload building; site sits on a peninsula bounded by the Savannah River (N/E) and the residential Crossgate neighborhood (W), <1 mi from GPA Garden City Terminal.",
+          "dockDoors": "308 shipping doors per NFI's published facility specs (counted as 50+ band). Two long dock faces visible on the building's main E-W bar and its N-S wing.",
+          "shipRcvSeparate": "Two distinct dock banks on different building faces (main bar south face + perpendicular wing), consistent with separate inbound/outbound transload flows.",
+          "dropArea": "876 trailer spots per published specs plus 9,500-TEU container stacking; large graded drop-yard areas flank the building N and NE (50+ band). dropYard: true.",
+          "truckGate": "Inferred true: secured port transload container yard (9,500 TEU) is fenced (2019 SV shows full perimeter chain-link) with a single controlled access from the SE off Crossgate Road; small structures cluster at the SE corner of the truck court. Barrier arm not directly visible in construction imagery.",
+          "guardShack": "Inferred true: small structure cluster at the SE corner of the truck court (~32.1483,-81.1518) is consistent with a gatehouse/check-in; a manned booth is near-certain for a bonded/secured port container yard. Not directly confirmable in construction imagery.",
+          "railServed": "A rail line runs NW-SE along the western edge by the neighborhood but appears to be a through-line, not a spur into the property. railServed: false (drayage/transload by truck from the port terminal).",
+          "entryLanes": "Estimated 2 in / 1 out from the wide access apron at the SE entrance; exact lane count not confirmable in construction imagery.",
+          "fastLaneOpportunity": "Wide paved gate apron and very large yard footprint leave ample room for an express/bypass lane.",
+          "urbanRural": "Edge-of-town industrial peninsula adjacent to a small residential neighborhood and the port; not dense metro fabric -> Rural per rubric tie-break.",
+          "trailersVisible": "0 trailers visible because imagery predates operations (site under construction)."
+        }
+      },
+      {
+        "id": "12-nfi",
+        "name": "NFI Distribution Center Savannah GA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "guardShack",
+          "truckGate",
+          "connectivityIssue",
+          "entryLanes",
+          "exitLanes"
+        ],
+        "center": {
+          "lat": 32.257032,
+          "lng": -81.202145
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 32.25975,
+                "lng": -81.20055
+              },
+              {
+                "lat": 32.2596,
+                "lng": -81.19915
+              },
+              {
+                "lat": 32.2549,
+                "lng": -81.20405
+              },
+              {
+                "lat": 32.25445,
+                "lng": -81.2053
+              },
+              {
+                "lat": 32.2584,
+                "lng": -81.2066
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 32.25895,
+                "lng": -81.1994
+              },
+              {
+                "lat": 32.25885,
+                "lng": -81.19905
+              },
+              {
+                "lat": 32.25825,
+                "lng": -81.1996
+              },
+              {
+                "lat": 32.25835,
+                "lng": -81.19995
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 32.25955,
+                  "lng": -81.2012
+                },
+                {
+                  "lat": 32.2594,
+                  "lng": -81.19985
+                },
+                {
+                  "lat": 32.2569,
+                  "lng": -81.20255
+                },
+                {
+                  "lat": 32.25705,
+                  "lng": -81.2039
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 32.25895,
+                  "lng": -81.19995
+                },
+                {
+                  "lat": 32.2552,
+                  "lng": -81.20455
+                },
+                {
+                  "lat": 32.255,
+                  "lng": -81.2049
+                },
+                {
+                  "lat": 32.25875,
+                  "lng": -81.2003
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 32.25845,
+                  "lng": -81.20105
+                },
+                {
+                  "lat": 32.2547,
+                  "lng": -81.20565
+                },
+                {
+                  "lat": 32.2545,
+                  "lng": -81.206
+                },
+                {
+                  "lat": 32.25825,
+                  "lng": -81.2014
+                }
+              ]
+            }
+          ],
+          "staging": null
+        },
+        "yardMetrics": {
+          "dockDoorCount": 102,
+          "trailersVisible": 45,
+          "trailerParkingCapacity": 270,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 48.5,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 2,
+          "exitLanes": 2,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
+        "dossierExcerpt": "The point landed in the Old Augusta Commerce Center, a master-planned ~4.7M SF /\n6-building logistics park on the Rincon / Effingham County edge of the Savannah\nmetro, off the I-95 / Hwy 21 corridor that feeds the Port of Savannah. JLL / sale\nlistings describe the NFI building as a modern 2022 Class-A spec cross-dock with\n102 dock levelers and 270 trailer parking spaces (expandable to 307). Satellite\nconfirms a single large cross-dock building with dock banks on both long faces,\nfronting the internal Logistics Pkwy. Locked center ~32.25703, -81.20215.",
+        "mapsUrl": "https://www.google.com/maps/@32.257032,-81.202145,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "No barrier arm, slide gate, or checkpoint structure visible across the truck path in z19-z20 satellite. The site access drive connects openly to the internal commerce-park parkway (Logistics Pkwy). Modern 2022 Class-A spec cross-dock with open access; if a slide gate exists it is not resolvable in imagery. Called false.",
+          "guardShack": "No 1-3-stall guard booth visible at the entrance throat or anywhere on the truck path (z19/z20). The only structures are the main building and a small electrical/utility enclosure. Called false.",
+          "remoteGs": "False because truckGate is false (no gate present to be remotely controlled).",
+          "postGateStaging": "Deep paved truck courts (~190 ft per JLL) on both long dock faces give ample inside-property holding before the docks.",
+          "drivewayLong": "Approach from the parkway into the NE-end court easily holds 3+ trucks before the dock line.",
+          "entryExitTogether": "Single access drive off the parkway at the NE end serves both in and out.",
+          "entryLanes": "Drive width supports ~2 lanes; exact lane striping not resolvable - estimate.",
+          "exitLanes": "Estimate, paired with entryLanes.",
+          "fastLaneOpportunity": "Wide drive apron and large NE-end paved court leave clear room to add a bypass/express lane.",
+          "dockDoors": "JLL/sale listings state 102 dock levelers; doors counted on both long faces in imagery are consistent (>50).",
+          "dropArea": "270 trailer parking spaces (expandable to 307) per JLL; drop trailers visible in the NW drop yard and along courts. 50+ band.",
+          "shipRcvSeparate": "Cross-dock: dock banks on both opposite long faces (NE and SW), enabling separate ship/receive operations.",
+          "urbanRural": "Old Augusta Commerce Center, Rincon/Effingham County edge of Savannah metro, surrounded by pine forest and undeveloped parcels; Street View shows a rural two-lane road. Rural.",
+          "connectivityIssue": "Rural but inside an active master-planned commerce park near I-95/Hwy 21 corridor; carrier coverage likely adequate. Low-confidence call of false.",
+          "dropYard": "Dedicated trailer-storage area in the broad paved/graded expanse NW of the building between the NFI building and the adjacent DC, plus drop rows along the courts.",
+          "trailersVisible": "~45 trailers counted backed into docks and parked across captured imagery; approximate.",
+          "siteAreaAcres": "Derived from perimeter polygon (~48.5 ac); the leased parcel within the larger 4.7M SF / 6-building park.",
+          "railServed": "No rail spur enters the property; nearest rail is the GPA/CSX network off-site."
+        }
+      },
+      {
+        "id": "14-nfi",
+        "name": "NFI Fulfillment Center Fairburn GA",
+        "type": "Fulfillment Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "dockDoorCount",
+          "trailerParkingCapacity",
+          "remoteGs"
+        ],
+        "center": {
+          "lat": 33.539865,
+          "lng": -84.594177
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 33.541835,
+                "lng": -84.594265
+              },
+              {
+                "lat": 33.540776,
+                "lng": -84.592617
+              },
+              {
+                "lat": 33.539918,
+                "lng": -84.592205
+              },
+              {
+                "lat": 33.538945,
+                "lng": -84.593167
+              },
+              {
+                "lat": 33.537973,
+                "lng": -84.59454
+              },
+              {
+                "lat": 33.539346,
+                "lng": -84.59629
+              },
+              {
+                "lat": 33.540261,
+                "lng": -84.596153
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 33.541749,
+                "lng": -84.593853
+              },
+              {
+                "lat": 33.541549,
+                "lng": -84.593167
+              },
+              {
+                "lat": 33.541091,
+                "lng": -84.593441
+              },
+              {
+                "lat": 33.54132,
+                "lng": -84.594128
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 33.539775,
+                  "lng": -84.592617
+                },
+                {
+                  "lat": 33.539918,
+                  "lng": -84.592205
+                },
+                {
+                  "lat": 33.538945,
+                  "lng": -84.593167
+                },
+                {
+                  "lat": 33.538716,
+                  "lng": -84.594265
+                },
+                {
+                  "lat": 33.538459,
+                  "lng": -84.594814
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 33.541263,
+                  "lng": -84.593784
+                },
+                {
+                  "lat": 33.539804,
+                  "lng": -84.592617
+                },
+                {
+                  "lat": 33.540004,
+                  "lng": -84.592308
+                },
+                {
+                  "lat": 33.541492,
+                  "lng": -84.593441
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 33.539918,
+                  "lng": -84.595741
+                },
+                {
+                  "lat": 33.538459,
+                  "lng": -84.594814
+                },
+                {
+                  "lat": 33.53823,
+                  "lng": -84.595226
+                },
+                {
+                  "lat": 33.539689,
+                  "lng": -84.596153
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 33.54132,
+                "lng": -84.594265
+              },
+              {
+                "lat": 33.541091,
+                "lng": -84.593441
+              },
+              {
+                "lat": 33.540691,
+                "lng": -84.593784
+              },
+              {
+                "lat": 33.540891,
+                "lng": -84.594677
+              }
+            ]
+          },
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 324,
+              "pano": "B9R37PNancr7aRHY2PkTKw",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 178,
+              "pano": "9-bPJUW1MLDTBecblaaReg",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 80,
+          "trailersVisible": 6,
+          "trailerParkingCapacity": 40,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 23.6,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "10-25",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
+        "dossierExcerpt": "The supplied coords (33.539632, -84.594265) landed directly on a large\nsingle-story distribution building inside the Fairburn / Atlanta South\nlogistics corridor. Web research confirms this is **Fairburn Logistics\nCenter**, a 495,625 SF Class-A warehouse built 2016 (LoopNet, Cushman &\nWakefield listings). Waze lists \"NFI Industries Inc - Truck Check-In\" at\n2000 Logistics Center Dr, and a chamber-of-commerce directory lists the same\nNFI truck check-in address — so this building is NFI's operation. Building\nidentity is unambiguous. Precise center pinned at 33.539865, -84.594177.",
+        "mapsUrl": "https://www.google.com/maps/@33.539865,-84.594177,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Entry off Logistics Center Dr is an open driveway with painted lane arrows but no barrier arm or sliding/swing gate across the lane (Street View 2025-10 + z20 satellite). Truck yard is screened by a tree-line buffer/fence but the entrance itself is uncontrolled.",
+          "guardShack": "No staffed booth at the entrance. The only small structures near the throat are utility cabinets/transformers (green box visible in Street View), not a multi-window guard booth.",
+          "remoteGs": "False because there is no controlled gate at all; not a kiosk/app check-in situation.",
+          "shipRcvSeparate": "Cross-dock building: dock banks run along both long faces (NE wall and SW wall), implying physically separate shipping/receiving clusters.",
+          "dockDoors": "495,625 SF cross-dock building (LoopNet/C&W); door rhythm visible on both long faces. 50+ band; exact count ~80 is an overhead estimate (roof overexposed in tight crops).",
+          "dropArea": "Striped trailer-parking stalls at the SE end of the yard near the highway buffer and at the NE corner; only a handful of trailers parked in current imagery.",
+          "fastLaneOpportunity": "Wide open entry apron and deep internal yard give ample paved width to add an express/bypass lane.",
+          "trailerParkingCapacity": "Estimate from striped SE/NE stall areas plus deep apron; approximate."
+        }
+      },
+      {
+        "id": "15-nfi",
+        "name": "NFI Distribution Center McDonough GA",
+        "type": "Distribution Center",
+        "archetype": "#3",
+        "archetypeName": "No Gate / No GS",
+        "confidence": "high",
+        "uncertainFields": [
+          "trailersVisible",
+          "trailerParkingCapacity"
+        ],
+        "center": {
+          "lat": 33.39195,
+          "lng": -84.1644
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 33.39318,
+                "lng": -84.16562
+              },
+              {
+                "lat": 33.393125,
+                "lng": -84.16278
+              },
+              {
+                "lat": 33.389985,
+                "lng": -84.163155
+              },
+              {
+                "lat": 33.390055,
+                "lng": -84.1659
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 33.39064,
+                "lng": -84.16452
+              },
+              {
+                "lat": 33.390625,
+                "lng": -84.16396
+              },
+              {
+                "lat": 33.390195,
+                "lng": -84.163975
+              },
+              {
+                "lat": 33.39021,
+                "lng": -84.164535
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 33.39302,
+                  "lng": -84.16529
+                },
+                {
+                  "lat": 33.392985,
+                  "lng": -84.16494
+                },
+                {
+                  "lat": 33.39064,
+                  "lng": -84.1652
+                },
+                {
+                  "lat": 33.39067,
+                  "lng": -84.16556
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 33.39299,
+                  "lng": -84.1649
+                },
+                {
+                  "lat": 33.392965,
+                  "lng": -84.16464
+                },
+                {
+                  "lat": 33.3907,
+                  "lng": -84.16488
+                },
+                {
+                  "lat": 33.39073,
+                  "lng": -84.16515
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 33.393055,
+                  "lng": -84.16388
+                },
+                {
+                  "lat": 33.39303,
+                  "lng": -84.16359
+                },
+                {
+                  "lat": 33.39078,
+                  "lng": -84.16384
+                },
+                {
+                  "lat": 33.39081,
+                  "lng": -84.16413
+                }
+              ]
+            }
+          ],
+          "staging": null,
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 2,
+              "pano": "PGqZa3fJ6vf1CBTcs4Q9NA",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 358,
+              "pano": "enukeumPm4kp9kmXgmgdsw",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 98,
+          "trailersVisible": 130,
+          "trailerParkingCapacity": 86,
+          "truckGateCount": 0,
+          "buildingCount": 1,
+          "siteAreaAcres": 22.4,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": false,
+          "guardShack": false,
+          "remoteGs": false,
+          "preGateStaging": false,
+          "postGateStaging": false,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": false,
+          "entryExitSeparate": true,
+          "entryLanes": null,
+          "exitLanes": null,
+          "fastLaneOpportunity": false,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Urban",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#3",
+          "steps": [
+            {
+              "step": "Arrive on site (no gate)",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "gate.through"
+            },
+            {
+              "step": "Drive to dock apron",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 60000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 480000,
+              "ynsWaitMs": 90000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit",
+              "geofenceTarget": "exit",
+              "durationMs": 30000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 3030000,
+          "totalYnsMs": 2640000
+        },
+        "dossierExcerpt": "The supplied coordinate (33.392022, -84.1644) lands directly on a large bright-white-roofed\ndistribution building in the McDonough / I-75 Greenwood Industrial Pkwy logistics park. Web\nresearch confirms this is the Greenwood Distribution Center occupied by NFI: a 561,140 SF\nbuilding, 32' clear, 98 dock doors, 4 drive-in doors, 86 trailer parks, ~2 mi from I-75\n(Colliers Atlanta listing; ChamberofCommerce \"NFI - McDonough\"; TruckMap). The building footprint,\ndual-face dock banks, and west trailer drop yard all match a high-throughput DC consistent with the\nfacility type. Center refined slightly north to the roof centroid (33.39195). Right building locked.",
+        "mapsUrl": "https://www.google.com/maps/@33.39195,-84.1644,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Open distribution center. No barrier arm or sliding/swing gate across any truck drive. The south-central driveway has only a Greenwood monument sign (no booth, no arm); the SW and SE perimeter-loop connections to Greenwood Industrial Pkwy are open curving drives. Trucks observed staging on the public road shoulder (Jack Rabbit Transport tractor-trailer parked at curb in Feb-2025 Street View), implying no on-property gate control.",
+          "guardShack": "No staffed booth at any entrance in satellite or Street View. The visible structure to the NW/SW belongs to the neighboring facility, not NFI.",
+          "remoteGs": "False because there is no truck gate at all.",
+          "shipRcvSeparate": "Loading docks run along BOTH long faces of the building (east and west walls), each a dense bank of doors with trailers backed in - two physically separate dock clusters.",
+          "dockDoors": "Colliers/Greenwood DC listing states 98 dock doors (561,140 SF building). Satellite confirms a dense regular rhythm of doors with trailers on both long faces - 50+ band.",
+          "dropArea": "Listing states 86 trailer parks. Satellite confirms a dedicated trailer drop yard along the west side plus dense parked-trailer rows - 50+ band.",
+          "dropYard": "Dedicated trailer-storage lot west of the building, full of parked trailers, separate from active dock staging.",
+          "entryExitSeparate": "Multiple open driveway connections to Greenwood Industrial Pkwy (SW dock-side drive, south-central auto/visitor drive, SE loop drive) feeding a full perimeter loop road, so entry and exit can occur at different points.",
+          "urbanRural": "Dense McDonough / I-75 logistics park ~2 mi from I-75, ringed by big-box distribution buildings - Urban industrial fabric.",
+          "trailersVisible": "Approximate count from overhead imagery across both dock faces and the west drop yard; low-confidence exact figure.",
+          "trailerParkingCapacity": "Taken from the published 86 trailer-park figure for the building.",
+          "railServed": "No rail spur enters the property; nearest rail is unrelated."
+        }
+      },
+      {
+        "id": "16-nfi",
+        "name": "NFI Distribution Center Elwood IL",
+        "type": "Distribution Center",
+        "archetype": "#10",
+        "archetypeName": "Ship/Rcv Separate (Gate+GS)",
+        "confidence": "high",
+        "uncertainFields": [
+          "multiStep",
+          "connectivityIssue"
+        ],
+        "center": {
+          "lat": 41.3914,
+          "lng": -88.1431
+        },
+        "geofences": {
+          "perimeter": {
+            "ring": [
+              {
+                "lat": 41.3928,
+                "lng": -88.1449
+              },
+              {
+                "lat": 41.39235,
+                "lng": -88.1416
+              },
+              {
+                "lat": 41.392,
+                "lng": -88.1397
+              },
+              {
+                "lat": 41.38995,
+                "lng": -88.1412
+              },
+              {
+                "lat": 41.3894,
+                "lng": -88.1431
+              },
+              {
+                "lat": 41.39055,
+                "lng": -88.145
+              }
+            ]
+          },
+          "truckGate": {
+            "ring": [
+              {
+                "lat": 41.3919,
+                "lng": -88.145
+              },
+              {
+                "lat": 41.39188,
+                "lng": -88.14455
+              },
+              {
+                "lat": 41.39158,
+                "lng": -88.14457
+              },
+              {
+                "lat": 41.3916,
+                "lng": -88.14502
+              }
+            ]
+          },
+          "dropYards": [
+            {
+              "ring": [
+                {
+                  "lat": 41.39268,
+                  "lng": -88.1447
+                },
+                {
+                  "lat": 41.3923,
+                  "lng": -88.14
+                },
+                {
+                  "lat": 41.392,
+                  "lng": -88.1401
+                },
+                {
+                  "lat": 41.39238,
+                  "lng": -88.1447
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 41.3906,
+                  "lng": -88.1448
+                },
+                {
+                  "lat": 41.38995,
+                  "lng": -88.1416
+                },
+                {
+                  "lat": 41.38945,
+                  "lng": -88.1431
+                },
+                {
+                  "lat": 41.39,
+                  "lng": -88.1447
+                }
+              ]
+            }
+          ],
+          "dockAprons": [
+            {
+              "ring": [
+                {
+                  "lat": 41.39233,
+                  "lng": -88.14455
+                },
+                {
+                  "lat": 41.39198,
+                  "lng": -88.1406
+                },
+                {
+                  "lat": 41.39183,
+                  "lng": -88.14063
+                },
+                {
+                  "lat": 41.39218,
+                  "lng": -88.14458
+                }
+              ]
+            },
+            {
+              "ring": [
+                {
+                  "lat": 41.39165,
+                  "lng": -88.1447
+                },
+                {
+                  "lat": 41.3913,
+                  "lng": -88.14085
+                },
+                {
+                  "lat": 41.39115,
+                  "lng": -88.14088
+                },
+                {
+                  "lat": 41.3915,
+                  "lng": -88.14473
+                }
+              ]
+            }
+          ],
+          "staging": {
+            "ring": [
+              {
+                "lat": 41.392,
+                "lng": -88.14525
+              },
+              {
+                "lat": 41.39198,
+                "lng": -88.14505
+              },
+              {
+                "lat": 41.3915,
+                "lng": -88.14508
+              },
+              {
+                "lat": 41.39152,
+                "lng": -88.14528
+              }
+            ]
+          },
+          "streetViewMeta": {
+            "perimeter": {
+              "heading": 103,
+              "pano": "UXPONWUmZVukdZA3Zcq5BQ",
+              "hasCoverage": true
+            },
+            "truckGate": {
+              "heading": 95,
+              "pano": "UXPONWUmZVukdZA3Zcq5BQ",
+              "hasCoverage": true
+            },
+            "staging": {
+              "heading": 90,
+              "pano": "UXPONWUmZVukdZA3Zcq5BQ",
+              "hasCoverage": true
+            }
+          }
+        },
+        "yardMetrics": {
+          "dockDoorCount": 120,
+          "trailersVisible": 360,
+          "trailerParkingCapacity": 450,
+          "truckGateCount": 1,
+          "buildingCount": 1,
+          "siteAreaAcres": 27.6,
+          "railServed": false
+        },
+        "classification": {
+          "truckGate": true,
+          "guardShack": true,
+          "remoteGs": false,
+          "preGateStaging": true,
+          "postGateStaging": true,
+          "drivewayLong": true,
+          "drivewayShort": false,
+          "backupSensitive": false,
+          "entryExitTogether": true,
+          "entryExitSeparate": false,
+          "entryLanes": 1,
+          "exitLanes": 1,
+          "fastLaneOpportunity": true,
+          "dockDoors": "50+",
+          "dropArea": "50+",
+          "shipRcvSeparate": true,
+          "urbanRural": "Rural",
+          "connectivityIssue": false,
+          "multipleFacilities": false,
+          "scale": false,
+          "dropYard": true,
+          "multiStep": false
+        },
+        "scenario": {
+          "archetypeId": "#10",
+          "steps": [
+            {
+              "step": "Arrive at gate, queue for guard",
+              "geofenceTarget": "truckGate",
+              "durationMs": 30000,
+              "narrationKey": "gate.arrive",
+              "baselineWaitMs": 600000,
+              "ynsWaitMs": 30000
+            },
+            {
+              "step": "Route to correct (shipping vs receiving) drop yard",
+              "geofenceTarget": "dropYard",
+              "targetIndex": 0,
+              "durationMs": 120000,
+              "narrationKey": "shiprcv.split",
+              "baselineWaitMs": 720000,
+              "ynsWaitMs": 0
+            },
+            {
+              "step": "Spotter pulls to dock apron on correct side",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 90000,
+              "narrationKey": "spotter.dispatch",
+              "baselineWaitMs": 1320000,
+              "ynsWaitMs": 120000
+            },
+            {
+              "step": "Dock load",
+              "geofenceTarget": "dockApron",
+              "targetIndex": 0,
+              "durationMs": 2400000,
+              "narrationKey": "dock.load"
+            },
+            {
+              "step": "Exit through gate",
+              "geofenceTarget": "exit",
+              "durationMs": 60000,
+              "narrationKey": "gate.exit"
+            }
+          ],
+          "totalBaselineMs": 5340000,
+          "totalYnsMs": 2850000
+        },
+        "dossierExcerpt": "The supplied approximate coordinates (41.391118, -88.143016) landed directly on\nthe correct building: a large NW-SE oriented distribution warehouse inside the\nCenterPoint Intermodal Center (Joliet/Elwood), ringed by extensive trailer\ndrop yards. Web search corroborated NFI Distribution / National Distribution\nCenters at this exact address and phone (815-423-5399). The parcel is bounded on\nthe west by S Elwood International Port Rd (across which sits the CenterPoint\nintermodal container yard — rows of stacked containers), and on the **north,\neast and south** by grass buffer, woods and a wetland/pond. No ambiguity: this is\nthe NFI DC, not an office or unrelated property.",
+        "mapsUrl": "https://www.google.com/maps/@41.39140,-88.14310,400m/data=!3m1!1e3",
+        "fieldNotes": {
+          "truckGate": "Single controlled truck entrance off S Elwood International Port Rd at the NW corner. Satellite z21 shows a barrier/gate arm across the inbound lane plus a check-in pad; Street View (May 2025) shows the wide entrance throat with a yard hostler staged at the booth island.",
+          "guardShack": "Small dark-roofed guard booth in the center of the entrance drive, ~1-2 stall footprint, set on a concrete check-in island with the gate arm beside it (satellite z21 @ 41.39173,-88.14476).",
+          "remoteGs": "False because a staffed guard shack is present at the gate.",
+          "shipRcvSeparate": "Cross-dock building: dock doors with trailers backed in on BOTH the long north wall and the long south wall (two opposing dock banks), confirmed in north-wall and south-wall z19 crops.",
+          "fastLaneOpportunity": "Very wide gate apron and large internal yard with room to add a dedicated bypass/express lane around the single booth island.",
+          "drivewayLong": "Deep approach from road to docks (~50m+ throat plus expansive interior yard) easily holds a 3+ truck queue.",
+          "preGateStaging": "Paved shoulder/apron outside the gate along the access road where trailers stage (a Schneider trailer was parked there in Street View).",
+          "postGateStaging": "Large paved interior yard between the gate and the dock faces serves as a holding/queue area.",
+          "dockDoors": "Continuous dock doors along both ~450m long walls; total well into 50+ band (est. ~120).",
+          "dropArea": "Hundreds of unhitched trailers parked in marked rows across north and south drop yards; 50+ band (est. capacity ~450).",
+          "railServed": "No rail spur enters the NFI parcel. The adjacent CenterPoint Intermodal container yard across S Elwood International Port Rd is rail-served, but the DC building itself is truck/drayage fed.",
+          "urbanRural": "Edge-of-town industrial setting at the CenterPoint Intermodal park near Elwood/Joliet IL, surrounded by farmland, woods and wetland; classified Rural per the small-town-industrial tie-break.",
+          "connectivityIssue": "Within a major intermodal logistics park (heavy infrastructure) so coverage is likely adequate; marked uncertain but set false.",
+          "multiStep": "No clearly visible second checkpoint (scale house or second booth) after the gate; set false.",
+          "scale": "No truck scale/weigh pad visible in the truck path.",
+          "siteAreaAcres": "~27.6 acres derived from the traced perimeter polygon (NW-SE oriented, ~443m diagonal).",
+          "streetViewMeta": "Only public-road panos exist (S Elwood International Port Rd, May 2025); the same entrance pano (41.39176,-88.14527) is the best ground view for the gate, perimeter entrance and pre-gate staging."
+        }
+      }
+    ]
+  }
+}

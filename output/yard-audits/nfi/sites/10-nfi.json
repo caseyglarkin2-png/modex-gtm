@@ -1,0 +1,123 @@
+{
+  "name": "NFI Port Logistics Port Wentworth GA",
+  "type": "Port Logistics",
+  "coords": { "lat": 32.150300, "lng": -81.150400 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 32.152844, "lng": -81.153711 },
+      { "lat": 32.153498, "lng": -81.151586 },
+      { "lat": 32.153171, "lng": -81.149398 },
+      { "lat": 32.151100, "lng": -81.147144 },
+      { "lat": 32.148974, "lng": -81.147853 },
+      { "lat": 32.147829, "lng": -81.150428 },
+      { "lat": 32.147720, "lng": -81.153067 },
+      { "lat": 32.149846, "lng": -81.153775 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 32.148320, "lng": -81.153775 },
+      { "lat": 32.148211, "lng": -81.152230 },
+      { "lat": 32.147557, "lng": -81.152166 },
+      { "lat": 32.147666, "lng": -81.153775 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 32.153225, "lng": -81.151586 },
+        { "lat": 32.152680, "lng": -81.148625 },
+        { "lat": 32.150718, "lng": -81.147724 },
+        { "lat": 32.151045, "lng": -81.151586 }
+      ] },
+      { "ring": [
+        { "lat": 32.150500, "lng": -81.149655 },
+        { "lat": 32.149846, "lng": -81.147466 },
+        { "lat": 32.148429, "lng": -81.148046 },
+        { "lat": 32.149192, "lng": -81.149848 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 32.150827, "lng": -81.153389 },
+        { "lat": 32.150718, "lng": -81.151200 },
+        { "lat": 32.149846, "lng": -81.151200 },
+        { "lat": 32.149846, "lng": -81.153389 }
+      ] },
+      { "ring": [
+        { "lat": 32.150718, "lng": -81.151071 },
+        { "lat": 32.150718, "lng": -81.150170 },
+        { "lat": 32.147993, "lng": -81.150106 },
+        { "lat": 32.147993, "lng": -81.151007 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 32.147666, "lng": -81.154419 },
+      { "lat": 32.147666, "lng": -81.153389 },
+      { "lat": 32.147012, "lng": -81.153260 },
+      { "lat": 32.147012, "lng": -81.154354 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
+      "truckGate": { "heading": 0, "pano": "", "hasCoverage": false }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 308,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 876,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 77.2,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.150300,-81.150400,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "multiStep",
+    "trailersVisible",
+    "preGateStaging",
+    "postGateStaging"
+  ],
+  "fieldNotes": {
+    "imagery": "Static Maxar satellite available via probe.ts captures the site MID-CONSTRUCTION (bare graded dirt, partially-erected steel/precast warehouse roofs, stacked construction materials, no final pavement striping). The facility opened Dec 5 2023; current imagery predates completion. Street View near the entrance is dated 2019-05 and shows raw, fenced vacant land (no operational coverage). Location, building footprint and graded property boundary are positively confirmed; gate-detail fields are inferred from facility type + documented specs and flagged.",
+    "location": "Positively confirmed as 120 Crossgate Road, Port Wentworth GA. The cross/T-shaped warehouse footprint in the imagery matches NFI's transload building; site sits on a peninsula bounded by the Savannah River (N/E) and the residential Crossgate neighborhood (W), <1 mi from GPA Garden City Terminal.",
+    "dockDoors": "308 shipping doors per NFI's published facility specs (counted as 50+ band). Two long dock faces visible on the building's main E-W bar and its N-S wing.",
+    "shipRcvSeparate": "Two distinct dock banks on different building faces (main bar south face + perpendicular wing), consistent with separate inbound/outbound transload flows.",
+    "dropArea": "876 trailer spots per published specs plus 9,500-TEU container stacking; large graded drop-yard areas flank the building N and NE (50+ band). dropYard: true.",
+    "truckGate": "Inferred true: secured port transload container yard (9,500 TEU) is fenced (2019 SV shows full perimeter chain-link) with a single controlled access from the SE off Crossgate Road; small structures cluster at the SE corner of the truck court. Barrier arm not directly visible in construction imagery.",
+    "guardShack": "Inferred true: small structure cluster at the SE corner of the truck court (~32.1483,-81.1518) is consistent with a gatehouse/check-in; a manned booth is near-certain for a bonded/secured port container yard. Not directly confirmable in construction imagery.",
+    "railServed": "A rail line runs NW-SE along the western edge by the neighborhood but appears to be a through-line, not a spur into the property. railServed: false (drayage/transload by truck from the port terminal).",
+    "entryLanes": "Estimated 2 in / 1 out from the wide access apron at the SE entrance; exact lane count not confirmable in construction imagery.",
+    "fastLaneOpportunity": "Wide paved gate apron and very large yard footprint leave ample room for an express/bypass lane.",
+    "urbanRural": "Edge-of-town industrial peninsula adjacent to a small residential neighborhood and the port; not dense metro fabric -> Rural per rubric tie-break.",
+    "trailersVisible": "0 trailers visible because imagery predates operations (site under construction)."
+  },
+  "method": "deep-audit"
+}

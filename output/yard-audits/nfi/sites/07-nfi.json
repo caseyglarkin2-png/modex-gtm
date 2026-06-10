@@ -1,0 +1,101 @@
+{
+  "name": "NFI Distribution Center Perris CA (Indian Ave)",
+  "type": "Distribution Center",
+  "coords": { "lat": 33.838887, "lng": -117.2294 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 33.84045, "lng": -117.23360 },
+      { "lat": 33.84045, "lng": -117.22660 },
+      { "lat": 33.83710, "lng": -117.22660 },
+      { "lat": 33.83710, "lng": -117.23360 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 33.83760, "lng": -117.23135 },
+      { "lat": 33.83760, "lng": -117.23065 },
+      { "lat": 33.83722, "lng": -117.23065 },
+      { "lat": 33.83722, "lng": -117.23135 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 33.84040, "lng": -117.23310 },
+        { "lat": 33.84040, "lng": -117.22700 },
+        { "lat": 33.83975, "lng": -117.22700 },
+        { "lat": 33.83975, "lng": -117.23310 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 33.83975, "lng": -117.23310 },
+        { "lat": 33.83975, "lng": -117.22700 },
+        { "lat": 33.83955, "lng": -117.22700 },
+        { "lat": 33.83955, "lng": -117.23310 }
+      ] },
+      { "ring": [
+        { "lat": 33.83745, "lng": -117.23310 },
+        { "lat": 33.83745, "lng": -117.22720 },
+        { "lat": 33.83725, "lng": -117.22720 },
+        { "lat": 33.83725, "lng": -117.23310 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 33.83955, "lng": -117.23310 },
+      { "lat": 33.83955, "lng": -117.22720 },
+      { "lat": 33.83745, "lng": -117.22720 },
+      { "lat": 33.83745, "lng": -117.23310 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 359, "pano": "iXuuomuvtIyvU46FHs2BoQ", "hasCoverage": true },
+      "truckGate": { "heading": 350, "pano": "Rnef4CsRjQalQndj73Zxfg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 200,
+    "trailersVisible": 250,
+    "trailerParkingCapacity": 350,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 59.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.838887,-117.2294,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Dec-2025 Street View at the south driveway off Morgan St shows a black sliding/swing metal gate spanning the full truck-lane throat; perimeter fencing wraps the property.",
+    "guardShack": "No staffed booth anywhere beside the lane in any Street View heading; the building wall and fence are the only structures at the entrance.",
+    "remoteGs": "A bank of self-service check-in kiosks/pedestals is mounted just inside the gate (visible in the N / NNW / NNE frames), implying app/kiosk driver check-in rather than a guard.",
+    "shipRcvSeparate": "Two distinct dock banks on opposite building faces: a long north dock row (with a deep multi-row trailer drop yard) and a separate south dock row.",
+    "dropYard": "Deep north yard is filled with multiple long rows of parked trailers (no tractors) = dedicated trailer storage, separate from active dock staging.",
+    "fastLaneOpportunity": "Very wide single gate apron with ample unused paved width to stripe an express/bypass lane.",
+    "dockDoorCount": "Estimate from overhead; building is 2,152 ft long with near-continuous dock rows on both N and S faces. ~200 doors total is approximate (band 50+ is firm).",
+    "trailersVisible": "Approximate count across north drop-yard rows, dock-backed trailers, and south apron.",
+    "trailerParkingCapacity": "Approximate; comparable nearby NFI Perris (Nance St) was reported at 224 spots, this larger 1.3M-sf site estimated higher.",
+    "entryLanes": "Single combined in/out driveway; lane split not clearly markable from imagery.",
+    "urbanRural": "Edge-of-town Perris industrial park; open scrubland immediately south and east of the property along Morgan St."
+  },
+  "method": "deep-audit"
+}

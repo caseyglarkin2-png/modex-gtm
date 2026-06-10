@@ -1,0 +1,184 @@
+{
+  "account": "Tractor Supply Company",
+  "generatedAt": "2026-06-10",
+  "facilityCount": 11,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Tractor Supply Distribution Center Pendleton IN",
+      "city": "Pendleton",
+      "state": "IN",
+      "type": "Distribution Center",
+      "address": "320 Enterprise Dr, Pendleton, IN 46064",
+      "source": "DC #114; address confirmed via CMac.ws, Waze, Loc8NearMe business listings",
+      "lat": 39.998337,
+      "lng": -85.772929,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Tractor Supply Distribution Center Waco TX",
+      "city": "Waco",
+      "state": "TX",
+      "type": "Distribution Center",
+      "address": "2801 Corporation Pkwy, Waco, TX 76712",
+      "source": "Greater Waco Chamber directory; Waze; Manta business listing",
+      "lat": 31.486413,
+      "lng": -97.160092,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Tractor Supply Distribution Center Macon GA",
+      "city": "Macon",
+      "state": "GA",
+      "type": "Distribution Center",
+      "address": "151 Tractor Dr, Macon, GA 31216",
+      "source": "Macon-Bibb County Chamber of Commerce member listing (maconchamber.com)",
+      "lat": 32.725721,
+      "lng": -83.731072,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Tractor Supply Distribution Center Casa Grande AZ",
+      "city": "Casa Grande",
+      "state": "AZ",
+      "type": "Distribution Center",
+      "address": "1337 N Peters Rd, Casa Grande, AZ 85193",
+      "source": "DC #111; Casa Grande Chamber of Commerce member profile",
+      "lat": 32.86227,
+      "lng": -111.788668,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Tractor Supply Distribution Center Franklin KY",
+      "city": "Franklin",
+      "state": "KY",
+      "type": "Distribution Center",
+      "address": "100 Raines Dr, Franklin, KY 42134",
+      "source": "TruckMap; Chamberofcommerce.com listing; Franklin-Simpson Chamber",
+      "lat": 36.710524,
+      "lng": -86.513061,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Tractor Supply Distribution Center Hagerstown MD",
+      "city": "Hagerstown",
+      "state": "MD",
+      "type": "Distribution Center",
+      "address": "11935 Hopewell Rd, Hagerstown, MD 21740",
+      "source": "TruckMap; Yelp; Waze business listings",
+      "lat": 39.639765,
+      "lng": -77.767044,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 7,
+      "name": "Tractor Supply Distribution Center Frankfort NY",
+      "city": "Frankfort",
+      "state": "NY",
+      "type": "Distribution Center",
+      "address": "1938 Country Mile, Frankfort, NY 13340",
+      "source": "TruckMap; Manta; TSC IR press release (Northeast DC opening 2019)",
+      "lat": 43.036086,
+      "lng": -75.089492,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 8,
+      "name": "Tractor Supply Distribution Center Waverly NE",
+      "city": "Waverly",
+      "state": "NE",
+      "type": "Distribution Center",
+      "address": "12851 Dovers St, Waverly, NE 68462",
+      "source": "Waze; Loc8NearMe; Yelp business listings",
+      "lat": 40.901501,
+      "lng": -96.547517,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 9,
+      "name": "Tractor Supply Distribution Center Navarre OH",
+      "city": "Navarre",
+      "state": "OH",
+      "type": "Distribution Center",
+      "address": "3001 Sterilite St SE, Navarre, OH 44662",
+      "source": "Waze; Canton Regional Chamber directory; TSC press release (2023 opening)",
+      "lat": 40.73309,
+      "lng": -81.506495,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 10,
+      "name": "Tractor Supply Distribution Center Maumelle AR",
+      "city": "Maumelle",
+      "state": "AR",
+      "type": "Distribution Center",
+      "address": "150 Champs Blvd, Maumelle, AR 72113",
+      "source": "TSC IR press release (10th/largest DC grand opening 2024); Arkansas EDC; USGBC project record",
+      "lat": 34.866597,
+      "lng": -92.384598,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 11,
+      "name": "Tractor Supply Distribution Center Nampa ID",
+      "city": "Nampa",
+      "state": "ID",
+      "type": "Distribution Center",
+      "address": "9640 Ustick Rd, Nampa, ID 83687",
+      "source": "TSC press releases (announced 2025, broke ground Apr 2025, ~865K sq ft, ops Q4 2026); under construction",
+      "lat": 43.634786,
+      "lng": -116.586452,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    }
+  ],
+  "geocodedAt": "2026-06-10"
+}

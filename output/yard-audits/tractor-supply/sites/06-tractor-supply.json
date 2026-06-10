@@ -1,0 +1,116 @@
+{
+  "name": "Tractor Supply Distribution Center Hagerstown MD",
+  "type": "Distribution Center",
+  "coords": { "lat": 39.639765, "lng": -77.767044 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 39.64205, "lng": -77.76755 },
+      { "lat": 39.64120, "lng": -77.76520 },
+      { "lat": 39.63840, "lng": -77.76600 },
+      { "lat": 39.63770, "lng": -77.76790 },
+      { "lat": 39.63760, "lng": -77.77070 },
+      { "lat": 39.63930, "lng": -77.77110 },
+      { "lat": 39.64140, "lng": -77.76960 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 39.63905, "lng": -77.77075 },
+      { "lat": 39.63892, "lng": -77.77035 },
+      { "lat": 39.63858, "lng": -77.77055 },
+      { "lat": 39.63871, "lng": -77.77095 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 39.63905, "lng": -77.76995 },
+        { "lat": 39.63842, "lng": -77.76845 },
+        { "lat": 39.63792, "lng": -77.76880 },
+        { "lat": 39.63855, "lng": -77.77030 }
+      ] },
+      { "ring": [
+        { "lat": 39.64135, "lng": -77.76935 },
+        { "lat": 39.64080, "lng": -77.76800 },
+        { "lat": 39.64038, "lng": -77.76830 },
+        { "lat": 39.64093, "lng": -77.76965 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 39.64090, "lng": -77.76770 },
+        { "lat": 39.63905, "lng": -77.76670 },
+        { "lat": 39.63890, "lng": -77.76700 },
+        { "lat": 39.64075, "lng": -77.76800 }
+      ] },
+      { "ring": [
+        { "lat": 39.64050, "lng": -77.76660 },
+        { "lat": 39.63875, "lng": -77.76590 },
+        { "lat": 39.63862, "lng": -77.76622 },
+        { "lat": 39.64037, "lng": -77.76692 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 39.63930, "lng": -77.77010 },
+      { "lat": 39.63905, "lng": -77.76948 },
+      { "lat": 39.63868, "lng": -77.76970 },
+      { "lat": 39.63893, "lng": -77.77032 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 311, "pano": "kojRZMu68Y0ShRZuW6DNrA", "hasCoverage": true },
+      "truckGate": { "heading": 120, "pano": "e_YUFCIQxiVUzC6xiPUoGA", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 220,
+    "trailerParkingCapacity": 260,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 44.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.639765,-77.767044,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity", "connectivityIssue"],
+  "fieldNotes": {
+    "truckGate": "Wide open paved entrance off Hopewell Rd into the yard. Confirmed via Street View (pano e_YUFCIQxiVUzC6xiPUoGA, 2024-10) and z18-z19 satellite: monument sign and flagpole flank an uncontrolled drive, no barrier arm, sliding gate, or pinch-point at the property line.",
+    "guardShack": "No staffed booth on the truck lane. The red/blue-roofed building beside the entrance is a separate Firestone tire / retail outlet (signage visible in Street View), not a guard shack.",
+    "remoteGs": "False because there is no controlled truck gate at all.",
+    "postGateStaging": "Large paved apron inside the entrance before the dock doors gives ample internal queue/holding room.",
+    "drivewayLong": "Entrance apron and internal yard easily hold a 3+ truck queue before reaching docks.",
+    "entryLanes": "Wide single open mouth read as ~2 effective inbound lanes; no painted lane control, so approximate.",
+    "exitLanes": "Approximate; shared open entrance, ~1 outbound lane.",
+    "fastLaneOpportunity": "Very wide unmarked entrance apron with abundant paved width to add an express/bypass lane.",
+    "dockDoors": "Trailers backed in densely along BOTH long building faces (NW/SW face and SE face along I-81); count well into 50+ band. Estimate ~120 doors total, flagged approximate.",
+    "dropArea": "Dedicated trailer drop yards on the SW/W side (dozens of trailers nose-to-tail, c-w probe) plus a second NW drop block; 50+ band.",
+    "shipRcvSeparate": "Two distinct dock banks on opposite long faces of the building (NW/SW vs SE), consistent with separate ship/receive flows.",
+    "urbanRural": "Edge-of-town industrial on Hopewell Rd off I-81, surrounded by open fields and farmland; broader setting is Rural.",
+    "connectivityIssue": "Industrial corridor along I-81 with adjacent development and good highway access; cellular coverage likely adequate, so false. Medium confidence.",
+    "buildingCount": "Main DC plus the small separate Firestone/retail building near the entrance.",
+    "dropYard": "Dedicated on-site trailer-storage lots separate from active dock staging.",
+    "trailersVisible": "Approximate count across all captured drop yards and dock faces.",
+    "railServed": "No rail spur enters the property; I-81 borders the SE side."
+  },
+  "method": "deep-audit"
+}

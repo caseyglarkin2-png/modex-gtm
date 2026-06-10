@@ -1,0 +1,106 @@
+{
+  "name": "NFI Distribution Center Breinigsville PA",
+  "type": "Distribution Center",
+  "coords": { "lat": 40.56790, "lng": -75.63500 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 40.56945, "lng": -75.63690 },
+      { "lat": 40.56930, "lng": -75.63250 },
+      { "lat": 40.56875, "lng": -75.63185 },
+      { "lat": 40.56730, "lng": -75.63235 },
+      { "lat": 40.56745, "lng": -75.63700 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 40.56872, "lng": -75.63268 },
+      { "lat": 40.56865, "lng": -75.63232 },
+      { "lat": 40.56842, "lng": -75.63238 },
+      { "lat": 40.56849, "lng": -75.63273 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 40.56930, "lng": -75.63620 },
+        { "lat": 40.56918, "lng": -75.63520 },
+        { "lat": 40.56892, "lng": -75.63528 },
+        { "lat": 40.56904, "lng": -75.63628 }
+      ] },
+      { "ring": [
+        { "lat": 40.56918, "lng": -75.63380 },
+        { "lat": 40.56908, "lng": -75.63300 },
+        { "lat": 40.56882, "lng": -75.63308 },
+        { "lat": 40.56892, "lng": -75.63388 }
+      ] },
+      { "ring": [
+        { "lat": 40.56848, "lng": -75.63240 },
+        { "lat": 40.56838, "lng": -75.63190 },
+        { "lat": 40.56808, "lng": -75.63200 },
+        { "lat": 40.56818, "lng": -75.63250 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 40.56812, "lng": -75.63685 },
+        { "lat": 40.56802, "lng": -75.63312 },
+        { "lat": 40.56792, "lng": -75.63313 },
+        { "lat": 40.56802, "lng": -75.63686 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 10, "pano": "8e6EvxSowR8LTYuOqkemJw", "hasCoverage": true },
+      "truckGate": { "heading": 270, "pano": "eK1Ypep7U5qFhimzTfVzJw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 28,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 22.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.56790,-75.63500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Single divided truck entrance off Nestle Way at the SE corner. z21 satellite shows two yellow/black striped barrier arms, one across the inbound lane and one across the outbound lane, separated by a landscaped median. Confirmed in Street View (pano eK1Ypep7U5qFhimzTfVzJw, 2025-05).",
+    "guardShack": "No staffed booth visible at the gate from satellite or Street View. The barrier arms appear automated with a kiosk/call-box; no 1-3-space guard structure beside the lane. Hence remoteGs = true.",
+    "remoteGs": "Gate present, no guard shack -> remote/automated check-in (kiosk/app).",
+    "entryExitTogether": "Set false / entryExitSeparate false because the gate is a single divided in/out point at one location rather than two distinct gates at different property points; in and out share the same entrance throat with split lanes (1 in, 1 out).",
+    "drivewayLong": "Divided entrance drive runs ~120m from Nestle Way to the dock-yard apron; easily holds 3+ trucks stacked between gate and docks.",
+    "postGateStaging": "Large paved apron between the gate arms and the north dock face provides interior queue/holding room before docks.",
+    "dockDoors": "Single continuous dock face along the building's NORTH side (~700ft) with a regular door rhythm and trailers backed in across z19/z20 crops; comfortably in the 50+ band. Count ~70 is an overhead estimate.",
+    "dropArea": "Three diagonal trailer-parking rows in the north/east yard hold parked trailers without tractors; 25-50 band.",
+    "shipRcvSeparate": "Main dock bank on the north face plus a separate angled dock/trailer cluster on the building's EAST end (eastend-z19) suggests physically separate dock clusters; medium confidence.",
+    "dropYard": "Dedicated diagonal trailer-storage rows separate from active dock staging, in the north and east yard.",
+    "urbanRural": "Edge-of-town Lehigh Valley industrial park surrounded by farmland, woods, a stormwater pond, and a residential subdivision to the south; broader setting is Rural per the tie-break rule.",
+    "railServed": "No rail spur enters the property.",
+    "trailerParkingCapacity": "Estimate of diagonal-stall capacity across the three drop rows plus dock apron; overhead approximation.",
+    "siteAreaAcres": "Derived from the perimeter polygon (~22.5 acres inside the fence line)."
+  },
+  "method": "deep-audit"
+}

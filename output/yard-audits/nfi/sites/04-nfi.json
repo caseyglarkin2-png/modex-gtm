@@ -1,0 +1,100 @@
+{
+  "name": "NFI Distribution Center Florence NJ",
+  "type": "Distribution Center",
+  "coords": { "lat": 40.10685, "lng": -74.81385 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 40.10918, "lng": -74.81300 },
+      { "lat": 40.10895, "lng": -74.81720 },
+      { "lat": 40.10560, "lng": -74.81560 },
+      { "lat": 40.10430, "lng": -74.81310 },
+      { "lat": 40.10540, "lng": -74.81160 },
+      { "lat": 40.10720, "lng": -74.81140 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 40.10905, "lng": -74.81620 },
+      { "lat": 40.10880, "lng": -74.81690 },
+      { "lat": 40.10840, "lng": -74.81660 },
+      { "lat": 40.10865, "lng": -74.81590 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 40.10905, "lng": -74.81595 },
+        { "lat": 40.10845, "lng": -74.81740 },
+        { "lat": 40.10745, "lng": -74.81680 },
+        { "lat": 40.10805, "lng": -74.81540 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 40.10880, "lng": -74.81525 },
+        { "lat": 40.10560, "lng": -74.81390 },
+        { "lat": 40.10548, "lng": -74.81430 },
+        { "lat": 40.10868, "lng": -74.81565 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 40.10865, "lng": -74.81595 },
+      { "lat": 40.10565, "lng": -74.81465 },
+      { "lat": 40.10555, "lng": -74.81500 },
+      { "lat": 40.10855, "lng": -74.81630 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 346, "pano": "iA_Q0KZKtWn73NgJAiliHw", "hasCoverage": true },
+      "truckGate": { "heading": 0, "pano": "", "hasCoverage": false }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 83,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 260,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 43.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.10685,-74.81385,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "urbanRural"],
+  "fieldNotes": {
+    "truckGate": "Open business-park campus (NFI Park at Florence Crossings). No barrier arm, sliding gate, or checkpoint anywhere along the internal access road (Crossings Blvd) or at the building's truck court. Street View on the south loop road and satellite of every access point confirm open driveways from public road to docks.",
+    "guardShack": "No staffed booth at any entrance. No 1-3-space structure beside any drive. Confirmed in Street View (open landscaped frontage) and satellite.",
+    "postGateStaging": "Wide shared truck court between the Subaru/NFI building and the adjacent DC; trailers staged along a central landscaped median inside the property.",
+    "drivewayLong": "Truck court / dock-approach aisle is deep and wide, easily holding 3+ trucks in queue.",
+    "dockDoors": "Subaru/NFI build-to-suit spec is 83 loading doors (NFI/Florence Township sources); satellite shows a long bank of doors with trailers backed in along the west face plus additional doors at the north end. Banded 50+.",
+    "dropArea": "Large dedicated trailer drop yard at the NW of the parcel plus heavy trailer staging through the court; well over 50 drop trailers visible without tractors.",
+    "multipleFacilities": "Audited building is one tenant building within the 4-building, ~1.65M SF NFI Park at Florence Crossings campus (Subaru, QPSI, and others share the property).",
+    "urbanRural": "Planned logistics park on the edge of Florence Township (a small town) beside US-130 and NJ Turnpike Exit 6A, with farmland/open land and residential adjacent. Per rubric (small-town industrial -> Rural). Listed uncertain given the heavy surrounding logistics development.",
+    "entryLanes": "No gate present, so no controlled inbound lane count; the internal road and court are open 2-way pavement.",
+    "exitLanes": "No gate present, so no controlled outbound lane count.",
+    "railServed": "No rail spur enters the property.",
+    "siteAreaAcres": "Estimated from the perimeter polygon enclosing the audited Subaru/NFI building, its west truck court, north drop yard, and south office parking (~44 ac from the polygon); the full multi-tenant park is larger.",
+    "trailersVisible": "Approximate count of trailers in captured imagery (docks + drop yard + court staging).",
+    "streetViewMeta": "Only Street View coverage on the parcel is pano iA_Q0KZKtWn73NgJAiliHw on the southern internal loop road (2022-10), used for the perimeter view (camera heading 346 toward the building south end). No pano within 300m of the north truck court, so truckGate has no coverage."
+  },
+  "method": "deep-audit"
+}

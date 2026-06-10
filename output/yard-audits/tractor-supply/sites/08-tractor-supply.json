@@ -1,0 +1,99 @@
+{
+  "name": "Tractor Supply Distribution Center Waverly NE",
+  "type": "Distribution Center",
+  "coords": { "lat": 40.90155, "lng": -96.54755 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 40.90418, "lng": -96.54878 },
+      { "lat": 40.90430, "lng": -96.54618 },
+      { "lat": 40.90330, "lng": -96.54612 },
+      { "lat": 40.90332, "lng": -96.54648 },
+      { "lat": 40.89958, "lng": -96.54635 },
+      { "lat": 40.89952, "lng": -96.54895 },
+      { "lat": 40.90328, "lng": -96.54905 },
+      { "lat": 40.90330, "lng": -96.54880 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 40.90372, "lng": -96.54772 },
+      { "lat": 40.90372, "lng": -96.54738 },
+      { "lat": 40.90338, "lng": -96.54738 },
+      { "lat": 40.90338, "lng": -96.54772 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 40.90428, "lng": -96.54838 },
+        { "lat": 40.90430, "lng": -96.54632 },
+        { "lat": 40.90382, "lng": -96.54630 },
+        { "lat": 40.90380, "lng": -96.54836 }
+      ] },
+      { "ring": [
+        { "lat": 40.90378, "lng": -96.54836 },
+        { "lat": 40.90378, "lng": -96.54632 },
+        { "lat": 40.90338, "lng": -96.54632 },
+        { "lat": 40.90338, "lng": -96.54836 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 40.90318, "lng": -96.54878 },
+        { "lat": 40.90318, "lng": -96.54848 },
+        { "lat": 40.89962, "lng": -96.54845 },
+        { "lat": 40.89962, "lng": -96.54875 }
+      ] },
+      { "ring": [
+        { "lat": 40.90320, "lng": -96.54652 },
+        { "lat": 40.90320, "lng": -96.54622 },
+        { "lat": 40.89964, "lng": -96.54620 },
+        { "lat": 40.89964, "lng": -96.54650 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 40.90332, "lng": -96.54838 },
+      { "lat": 40.90332, "lng": -96.54652 },
+      { "lat": 40.90250, "lng": -96.54652 },
+      { "lat": 40.90250, "lng": -96.54838 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 179, "pano": "RGnDKxqxrHrPtpObdlgGdw", "hasCoverage": true },
+      "truckGate": { "heading": 179, "pano": "RGnDKxqxrHrPtpObdlgGdw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 230,
+    "trailerParkingCapacity": 180,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 78.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.90155,-96.54755,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["connectivityIssue", "scale", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Controlled checkpoint where the entry boulevard pinches between the employee parking lot and the secured trailer yard; chain-link perimeter fence rings the whole truck yard (clearly visible in 2025 Street View frames).",
+    "guardShack": "Small ~1-2 vehicle-footprint gatehouse on a median island at the parking/yard checkpoint, visible at z20 satellite (40.9035, -96.5476) splitting inbound/outbound lanes.",
+    "shipRcvSeparate": "Dock doors run the full length of BOTH the east and west long walls (cross-dock layout), so shipping and receiving operate from physically separate dock banks.",
+    "fastLaneOpportunity": "Wide divided entry boulevard with landscaped median and ample paved apron at the gate; physical room to add a bypass/express lane.",
+    "postGateStaging": "Large paved apron between the inner gate and the dock faces provides interior queue/holding space.",
+    "dropArea": "Two large banks of marked trailer-parking rows at the north end full of bobtail trailers, plus a second drop row along the west dock side.",
+    "dockDoors": "Estimated ~50-60 doors per long face (east + west) from z19 imagery; both walls fully docked. Banded 50+; exact count approximate.",
+    "scale": "No truck scale/weigh pad identified in the truck path; left false, flagged uncertain.",
+    "connectivityIssue": "Rural setting but inside a developed industrial park near Waverly/I-80 corridor; cellular coverage likely adequate, so left false (medium confidence).",
+    "railServed": "A through rail line runs ~300m+ south of the property through farmland but no spur enters the site.",
+    "buildingCount": "Main DC plus a smaller secondary building at the NW (offices/maintenance) inside the property.",
+    "entryLanes": "Divided boulevard reads as roughly 1 in / 1 out at the checkpoint; lane count approximate from overhead."
+  },
+  "method": "deep-audit"
+}

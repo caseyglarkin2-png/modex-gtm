@@ -1,0 +1,111 @@
+{
+  "name": "Tractor Supply Distribution Center Maumelle AR",
+  "type": "Distribution Center",
+  "coords": { "lat": 34.8695, "lng": -92.3805 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 34.87130, "lng": -92.38330 },
+      { "lat": 34.87150, "lng": -92.37745 },
+      { "lat": 34.86835, "lng": -92.37730 },
+      { "lat": 34.86770, "lng": -92.37880 },
+      { "lat": 34.86660, "lng": -92.38250 },
+      { "lat": 34.86655, "lng": -92.38410 },
+      { "lat": 34.86920, "lng": -92.38430 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 34.86735, "lng": -92.38390 },
+      { "lat": 34.86735, "lng": -92.38335 },
+      { "lat": 34.86800, "lng": -92.38345 },
+      { "lat": 34.86800, "lng": -92.38395 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 34.86785, "lng": -92.38240 },
+        { "lat": 34.86805, "lng": -92.37885 },
+        { "lat": 34.86700, "lng": -92.37895 },
+        { "lat": 34.86690, "lng": -92.38235 }
+      ] },
+      { "ring": [
+        { "lat": 34.86840, "lng": -92.37865 },
+        { "lat": 34.87075, "lng": -92.37855 },
+        { "lat": 34.87080, "lng": -92.37760 },
+        { "lat": 34.86845, "lng": -92.37770 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 34.86820, "lng": -92.38245 },
+        { "lat": 34.86840, "lng": -92.37875 },
+        { "lat": 34.86805, "lng": -92.37880 },
+        { "lat": 34.86785, "lng": -92.38248 }
+      ] },
+      { "ring": [
+        { "lat": 34.87065, "lng": -92.38250 },
+        { "lat": 34.87085, "lng": -92.37860 },
+        { "lat": 34.87110, "lng": -92.37855 },
+        { "lat": 34.87090, "lng": -92.38255 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 34.86805, "lng": -92.38320 },
+      { "lat": 34.86810, "lng": -92.38230 },
+      { "lat": 34.86770, "lng": -92.38228 },
+      { "lat": 34.86765, "lng": -92.38318 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 46, "pano": "QmOXdrHzAUarCWtaWv3Q0Q", "hasCoverage": true },
+      "truckGate": { "heading": 30, "pano": "QmOXdrHzAUarCWtaWv3Q0Q", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 69.9,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.8695,-92.3805,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "shipRcvSeparate", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Channelized multi-lane entrance drive off Champs Blvd with painted directional lane arrows, gate barrier cross-bars spanning the lanes, and a median equipment cabinet, visible at z20 satellite (34.8676,-92.3837). Controlled checkpoint, not an open driveway.",
+    "guardShack": "Small white booth structure at the head of the entrance drive where lanes open into the yard (~34.8680,-92.3835), with a separate median gate-equipment cabinet beside the inbound lanes. New $175M corporate DC; staffed-booth footprint consistent on satellite.",
+    "fastLaneOpportunity": "Entrance apron is very wide with multiple channelized lanes and ample unused paved width to add an express/bypass lane.",
+    "shipRcvSeparate": "Dock banks present on both the south face and the north face of the building (trailers backed in on both), consistent with separate shipping/receiving clusters; medium confidence from overhead only.",
+    "dockDoors": "1.15M sq ft building with continuous dock aprons on south and north faces; full-length bays put total well into the 50+ band (estimate ~120 doors).",
+    "dropArea": "Dozens of marked trailer-drop stalls filled across the south yard and the east wrap-around yard; clearly 50+.",
+    "entryLanes": "~2 inbound lanes read from painted arrows at z20; exact split low confidence.",
+    "exitLanes": "~1 outbound lane read from painted arrows; low confidence.",
+    "urbanRural": "Edge-of-town industrial park at the north edge of Maumelle, bounded by woodland on the east/south; broader setting is small-town/rural per rubric.",
+    "railServed": "No rail spur enters the property; nearest rail is offsite.",
+    "postGateStaging": "Wide paved apron inside the gate before the dock approach provides queue/holding room.",
+    "drivewayLong": "Gate-to-dock approach is long and can stack 3+ trucks."
+  },
+  "method": "deep-audit"
+}

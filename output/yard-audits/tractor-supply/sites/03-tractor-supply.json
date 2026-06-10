@@ -1,0 +1,99 @@
+{
+  "name": "Tractor Supply Distribution Center Macon GA",
+  "type": "Distribution Center",
+  "coords": { "lat": 32.72530, "lng": -83.73180 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 32.72860, "lng": -83.73140 },
+      { "lat": 32.72840, "lng": -83.72995 },
+      { "lat": 32.72700, "lng": -83.72960 },
+      { "lat": 32.72380, "lng": -83.72985 },
+      { "lat": 32.72345, "lng": -83.73230 },
+      { "lat": 32.72400, "lng": -83.73520 },
+      { "lat": 32.72570, "lng": -83.73575 },
+      { "lat": 32.72820, "lng": -83.73385 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 32.72846, "lng": -83.73040 },
+      { "lat": 32.72838, "lng": -83.72995 },
+      { "lat": 32.72792, "lng": -83.73003 },
+      { "lat": 32.72800, "lng": -83.73048 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 32.72760, "lng": -83.73430 },
+        { "lat": 32.72690, "lng": -83.73280 },
+        { "lat": 32.72560, "lng": -83.73370 },
+        { "lat": 32.72630, "lng": -83.73520 }
+      ] },
+      { "ring": [
+        { "lat": 32.72560, "lng": -83.73510 },
+        { "lat": 32.72500, "lng": -83.73385 },
+        { "lat": 32.72420, "lng": -83.73440 },
+        { "lat": 32.72475, "lng": -83.73560 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 32.72685, "lng": -83.73175 },
+        { "lat": 32.72620, "lng": -83.73040 },
+        { "lat": 32.72600, "lng": -83.73055 },
+        { "lat": 32.72665, "lng": -83.73190 }
+      ] },
+      { "ring": [
+        { "lat": 32.72470, "lng": -83.73430 },
+        { "lat": 32.72405, "lng": -83.73300 },
+        { "lat": 32.72385, "lng": -83.73315 },
+        { "lat": 32.72450, "lng": -83.73445 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 32.72790, "lng": -83.73130 },
+      { "lat": 32.72775, "lng": -83.73055 },
+      { "lat": 32.72735, "lng": -83.73065 },
+      { "lat": 32.72750, "lng": -83.73140 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 212, "pano": "470APtXRgYZeHxRS6JXZIg", "hasCoverage": true },
+      "truckGate": { "heading": 19, "pano": "R6Z3cYYaPISRIt_RoDrTKQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 230,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 64.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.72530,-83.73180,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": true, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "multiStep"],
+  "fieldNotes": {
+    "truckGate": "Divided-boulevard truck entrance off Tractor Dr; gate arms / sliding gates span both inbound and outbound lanes with a perimeter fence line continuing to either side (z21 imagery at 32.7281,-83.7301).",
+    "guardShack": "White booth structure seated in the median island straddling the gate lanes, ~1-2 vehicle footprint; staff vehicles parked on the median beside it. Driver reviews cite helpful on-site security staff.",
+    "entryExitSeparate": "The entrance is a divided boulevard with a landscaped median; the guard booth sits on the median with a gated inbound lane on one side and a gated outbound lane on the other.",
+    "fastLaneOpportunity": "Wide divided gate apron with generous paved width on the outbound side and a large pre-gate truck turnaround/staging apron, leaving room to add an express/bypass lane.",
+    "scale": "Web/driver sources (TruckMap, maconchamber) report a CAT Scale on site; consistent with a 24/7 drop-and-hook DC.",
+    "shipRcvSeparate": "Two distinct dock banks on different building faces: a long dock line on the NW face and a second dock line on the SW face.",
+    "dockDoors": "Counted from z18-z20 rhythm of bays/trailers across the NW and SW faces; well over 50 doors total (estimate ~110, flagged uncertain).",
+    "dropArea": "Multiple large drop-yard lots NW and W of the building with many rows of parked trailers (drop-and-hook); far exceeds 50 stalls.",
+    "urbanRural": "Edge-of-Macon industrial park along the I-75 corridor surrounded by woods and open fields; small-town-industrial setting, classified Rural per rubric.",
+    "multiStep": "No clearly visible second checkpoint after the gate in overhead imagery; left false. The CAT scale is in the yard but a discrete second guard stage is not confirmed.",
+    "railServed": "No rail spur enters the property; nearest rail is unrelated.",
+    "streetViewMeta": "Both nearest panos are 2012-05 pre-construction frames of the then-empty pad (Google has not re-driven the internal road), but metadata status is OK within 400m, so hasCoverage=true with the real pano ids recorded."
+  },
+  "method": "deep-audit"
+}

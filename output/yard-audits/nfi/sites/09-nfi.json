@@ -1,0 +1,109 @@
+{
+  "name": "NFI Distribution Center Moreno Valley CA",
+  "type": "Distribution Center",
+  "coords": { "lat": 33.86465, "lng": -117.23858 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 33.86618, "lng": -117.24180 },
+      { "lat": 33.86620, "lng": -117.23700 },
+      { "lat": 33.86618, "lng": -117.23560 },
+      { "lat": 33.86540, "lng": -117.23545 },
+      { "lat": 33.86330, "lng": -117.23555 },
+      { "lat": 33.86255, "lng": -117.23690 },
+      { "lat": 33.86250, "lng": -117.24050 },
+      { "lat": 33.86250, "lng": -117.24180 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 33.86628, "lng": -117.23880 },
+      { "lat": 33.86628, "lng": -117.23830 },
+      { "lat": 33.86585, "lng": -117.23832 },
+      { "lat": 33.86585, "lng": -117.23882 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 33.86345, "lng": -117.24160 },
+        { "lat": 33.86348, "lng": -117.23720 },
+        { "lat": 33.86268, "lng": -117.23720 },
+        { "lat": 33.86262, "lng": -117.24160 }
+      ] },
+      { "ring": [
+        { "lat": 33.86598, "lng": -117.24160 },
+        { "lat": 33.86600, "lng": -117.23620 },
+        { "lat": 33.86560, "lng": -117.23620 },
+        { "lat": 33.86558, "lng": -117.24160 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 33.86560, "lng": -117.24140 },
+        { "lat": 33.86561, "lng": -117.23600 },
+        { "lat": 33.86552, "lng": -117.23600 },
+        { "lat": 33.86551, "lng": -117.24140 }
+      ] },
+      { "ring": [
+        { "lat": 33.86385, "lng": -117.24140 },
+        { "lat": 33.86386, "lng": -117.23620 },
+        { "lat": 33.86377, "lng": -117.23620 },
+        { "lat": 33.86376, "lng": -117.24140 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 178, "pano": "5r3YRjxfMxN_v6R4Xgh50A", "hasCoverage": true },
+      "truckGate": { "heading": 198, "pano": "EWLTXQ393YrwRnPLrc9l4A", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 224,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 653,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 57.8,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.86465,-117.23858,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "postGateStaging", "trailersVisible"],
+  "fieldNotes": {
+    "truckGate": "Property is fully fenced/screen-walled; truck dock courts are interior and entered through a defined opening in the north screen wall off Nandina Ave (~33.8660,-117.2385). Controlled pinch-point. No barrier arm visible at the public road line in Feb-2026 Street View.",
+    "guardShack": "No standalone staffed guard booth visible at the truck entrance in any satellite (z20) or Street View frame. The two public frontages (north Nandina, east street) are landscaped office faces with screen walls, not gated truck lanes.",
+    "remoteGs": "Inferred kiosk/app/remote check-in: there is a controlled truck entrance but no guard booth structure, typical of a modern Class-A spec cross-dock.",
+    "entryLanes": "Could not see lane striping inside the screened truck entrance; 2 each direction estimated from the width of the entry throat.",
+    "exitLanes": "Same as entryLanes; entry and exit share the entrance opening.",
+    "postGateStaging": "Wide interior aprons in both north and south dock courts provide deep queueing/holding room before docks.",
+    "shipRcvSeparate": "True cross-dock: dock banks on both the north and south building faces (224 total doors per LoopNet spec).",
+    "dockDoors": "LoopNet listing for 24385 Nandina states 224 dock-high doors (band 50+). Counts confirmed visually as continuous dock lines on N and S faces.",
+    "dropArea": "LoopNet states 653 trailer stalls. Large drop yards on the south/southwest and north courts full of parked trailers; band 50+.",
+    "trailersVisible": "~180 trailers counted across captured imagery; approximate.",
+    "fastLaneOpportunity": "Wide aprons and multiple drive lanes wrapping the building give ample room for a bypass/express lane.",
+    "siteAreaAcres": "~57.8 acres from perimeter polygon (shoelace).",
+    "railServed": "No rail spur into the property; nearest rail unrelated.",
+    "urbanRural": "Dense Inland Empire industrial fabric adjacent to March ARB / Meridian business park, Moreno Valley metro."
+  },
+  "method": "deep-audit"
+}

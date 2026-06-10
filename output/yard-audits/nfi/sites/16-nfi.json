@@ -1,0 +1,116 @@
+{
+  "name": "NFI Distribution Center Elwood IL",
+  "type": "Distribution Center",
+  "coords": { "lat": 41.39140, "lng": -88.14310 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 41.39280, "lng": -88.14490 },
+      { "lat": 41.39235, "lng": -88.14160 },
+      { "lat": 41.39200, "lng": -88.13970 },
+      { "lat": 41.38995, "lng": -88.14120 },
+      { "lat": 41.38940, "lng": -88.14310 },
+      { "lat": 41.39055, "lng": -88.14500 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 41.39190, "lng": -88.14500 },
+      { "lat": 41.39188, "lng": -88.14455 },
+      { "lat": 41.39158, "lng": -88.14457 },
+      { "lat": 41.39160, "lng": -88.14502 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 41.39268, "lng": -88.14470 },
+        { "lat": 41.39230, "lng": -88.14000 },
+        { "lat": 41.39200, "lng": -88.14010 },
+        { "lat": 41.39238, "lng": -88.14470 }
+      ] },
+      { "ring": [
+        { "lat": 41.39060, "lng": -88.14480 },
+        { "lat": 41.38995, "lng": -88.14160 },
+        { "lat": 41.38945, "lng": -88.14310 },
+        { "lat": 41.39000, "lng": -88.14470 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 41.39233, "lng": -88.14455 },
+        { "lat": 41.39198, "lng": -88.14060 },
+        { "lat": 41.39183, "lng": -88.14063 },
+        { "lat": 41.39218, "lng": -88.14458 }
+      ] },
+      { "ring": [
+        { "lat": 41.39165, "lng": -88.14470 },
+        { "lat": 41.39130, "lng": -88.14085 },
+        { "lat": 41.39115, "lng": -88.14088 },
+        { "lat": 41.39150, "lng": -88.14473 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 41.39200, "lng": -88.14525 },
+      { "lat": 41.39198, "lng": -88.14505 },
+      { "lat": 41.39150, "lng": -88.14508 },
+      { "lat": 41.39152, "lng": -88.14528 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 103, "pano": "UXPONWUmZVukdZA3Zcq5BQ", "hasCoverage": true },
+      "truckGate": { "heading": 95, "pano": "UXPONWUmZVukdZA3Zcq5BQ", "hasCoverage": true },
+      "staging": { "heading": 90, "pano": "UXPONWUmZVukdZA3Zcq5BQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 360,
+    "trailerParkingCapacity": 450,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 27.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.39140,-88.14310,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["multiStep", "connectivityIssue"],
+  "fieldNotes": {
+    "truckGate": "Single controlled truck entrance off S Elwood International Port Rd at the NW corner. Satellite z21 shows a barrier/gate arm across the inbound lane plus a check-in pad; Street View (May 2025) shows the wide entrance throat with a yard hostler staged at the booth island.",
+    "guardShack": "Small dark-roofed guard booth in the center of the entrance drive, ~1-2 stall footprint, set on a concrete check-in island with the gate arm beside it (satellite z21 @ 41.39173,-88.14476).",
+    "remoteGs": "False because a staffed guard shack is present at the gate.",
+    "shipRcvSeparate": "Cross-dock building: dock doors with trailers backed in on BOTH the long north wall and the long south wall (two opposing dock banks), confirmed in north-wall and south-wall z19 crops.",
+    "fastLaneOpportunity": "Very wide gate apron and large internal yard with room to add a dedicated bypass/express lane around the single booth island.",
+    "drivewayLong": "Deep approach from road to docks (~50m+ throat plus expansive interior yard) easily holds a 3+ truck queue.",
+    "preGateStaging": "Paved shoulder/apron outside the gate along the access road where trailers stage (a Schneider trailer was parked there in Street View).",
+    "postGateStaging": "Large paved interior yard between the gate and the dock faces serves as a holding/queue area.",
+    "dockDoors": "Continuous dock doors along both ~450m long walls; total well into 50+ band (est. ~120).",
+    "dropArea": "Hundreds of unhitched trailers parked in marked rows across north and south drop yards; 50+ band (est. capacity ~450).",
+    "railServed": "No rail spur enters the NFI parcel. The adjacent CenterPoint Intermodal container yard across S Elwood International Port Rd is rail-served, but the DC building itself is truck/drayage fed.",
+    "urbanRural": "Edge-of-town industrial setting at the CenterPoint Intermodal park near Elwood/Joliet IL, surrounded by farmland, woods and wetland; classified Rural per the small-town-industrial tie-break.",
+    "connectivityIssue": "Within a major intermodal logistics park (heavy infrastructure) so coverage is likely adequate; marked uncertain but set false.",
+    "multiStep": "No clearly visible second checkpoint (scale house or second booth) after the gate; set false.",
+    "scale": "No truck scale/weigh pad visible in the truck path.",
+    "siteAreaAcres": "~27.6 acres derived from the traced perimeter polygon (NW-SE oriented, ~443m diagonal).",
+    "streetViewMeta": "Only public-road panos exist (S Elwood International Port Rd, May 2025); the same entrance pano (41.39176,-88.14527) is the best ground view for the gate, perimeter entrance and pre-gate staging."
+  },
+  "method": "deep-audit"
+}

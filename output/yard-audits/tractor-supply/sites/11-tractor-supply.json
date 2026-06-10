@@ -1,0 +1,98 @@
+{
+  "name": "Tractor Supply Distribution Center Nampa ID",
+  "type": "Distribution Center",
+  "coords": { "lat": 43.63125, "lng": -116.58875 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 43.63400, "lng": -116.59100 },
+      { "lat": 43.63400, "lng": -116.58650 },
+      { "lat": 43.62850, "lng": -116.58650 },
+      { "lat": 43.62850, "lng": -116.59100 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 43.63270, "lng": -116.59100 },
+      { "lat": 43.63270, "lng": -116.59040 },
+      { "lat": 43.63210, "lng": -116.59040 },
+      { "lat": 43.63210, "lng": -116.59100 }
+    ] },
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 263, "pano": "_OAi25c09UnWzkgzx1OnmA", "hasCoverage": true },
+      "truckGate": { "heading": 198, "pano": "CZaUHNAjeiKc0KMZlLjSdg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 1,
+    "buildingCount": 0,
+    "siteAreaAcres": 54.9,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@43.63125,-116.58875,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "connectivityIssue",
+    "multipleFacilities",
+    "scale",
+    "dropYard",
+    "multiStep"
+  ],
+  "fieldNotes": {
+    "_status": "CONSTRUCTION-ERA. Tractor Supply broke ground 2025-04-22 on its 11th DC (865,000 sq ft, ~$225M, 500+ jobs, internal codename 'Project Spud') at the NE corner of Ustick Rd and Midland Blvd, 9640 Ustick Rd, Nampa ID. Target ops late 2026/early 2027. Maxar 2026 satellite shows only early earthwork: a graded oval pad, construction trailers, concrete tilt-up forms, pipe/material stockpiles, a temporary water-treatment pond, and a perimeter haul road. The Aug-2025 Street View caught the very start of tilt-up concrete wall panels being erected along the SW edge.",
+    "truckGate": "No gate exists yet. truckGate ring is the PLANNED/most-likely truck entrance off the new N-S collector road on the west edge; not yet built or controlled.",
+    "guardShack": "No guard booth present in any imagery; site has no built entrance structure yet.",
+    "dockDoors": "Building shell not yet erected; only partial tilt-up wall panels visible Aug-2025. No dock doors countable. Final DC will have a large dock bank (50+) once built.",
+    "dropArea": "No striped trailer parking yet; site is graded dirt.",
+    "dropYard": "Planned DC will almost certainly have a large drop yard given its 865k sq ft scale and PNW hub role serving 200+ stores, but none exists in current imagery.",
+    "buildingCount": "0 completed buildings; only construction trailers and partial wall panels. Note: a separate completed warehouse (likely an Amazon facility) sits ~700m SE and is NOT this site.",
+    "urbanRural": "Edge-of-town greenfield surrounded by farmland on Nampa's NW fringe; classified Rural.",
+    "siteAreaAcres": "54.9 ac measured over the visibly graded development parcel; the full assembled site is larger (~150+ ac with future 150k sq ft expansion pad).",
+    "perimeter": "Traced to the graded development parcel, square to the orthogonal Ustick(N)/collector-road(W) grid. Exact fenced boundary not yet established on the ground.",
+    "streetViewMeta": "Both panos are real Aug-2025 captures on the public roads bordering the parcel (perimeter pano on east-edge road; gate pano on Ustick near the NW roundabout/collector entrance)."
+  },
+  "method": "deep-audit"
+}

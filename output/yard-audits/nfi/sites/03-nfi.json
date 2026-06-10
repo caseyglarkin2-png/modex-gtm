@@ -1,0 +1,108 @@
+{
+  "name": "NFI Cross-Dock Bethlehem PA",
+  "type": "Cross-Dock",
+  "coords": { "lat": 40.6074017, "lng": -75.3243256 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 40.61090, "lng": -75.32430 },
+      { "lat": 40.61050, "lng": -75.32230 },
+      { "lat": 40.60720, "lng": -75.32270 },
+      { "lat": 40.60590, "lng": -75.32300 },
+      { "lat": 40.60580, "lng": -75.32400 },
+      { "lat": 40.60660, "lng": -75.32480 },
+      { "lat": 40.60810, "lng": -75.32470 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 40.60880, "lng": -75.32495 },
+      { "lat": 40.60878, "lng": -75.32455 },
+      { "lat": 40.60835, "lng": -75.32458 },
+      { "lat": 40.60837, "lng": -75.32498 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 40.60700, "lng": -75.32430 },
+        { "lat": 40.60680, "lng": -75.32230 },
+        { "lat": 40.60600, "lng": -75.32250 },
+        { "lat": 40.60610, "lng": -75.32445 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 40.61080, "lng": -75.32460 },
+        { "lat": 40.61075, "lng": -75.32435 },
+        { "lat": 40.60840, "lng": -75.32468 },
+        { "lat": 40.60845, "lng": -75.32493 }
+      ] },
+      { "ring": [
+        { "lat": 40.61055, "lng": -75.32235 },
+        { "lat": 40.61050, "lng": -75.32210 },
+        { "lat": 40.60735, "lng": -75.32250 },
+        { "lat": 40.60740, "lng": -75.32275 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 40.60810, "lng": -75.32470 },
+      { "lat": 40.60805, "lng": -75.32350 },
+      { "lat": 40.60720, "lng": -75.32360 },
+      { "lat": 40.60725, "lng": -75.32475 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 87, "pano": "K9ZwPR-rxYjIYW3GM6rIqg", "hasCoverage": true },
+      "truckGate": { "heading": 267, "pano": "sJU29OkVMO1mfD_IUCv4CA", "hasCoverage": true },
+      "dropYards": { "heading": 172, "pano": "Lwj0h0bHB_OnJcRZxHb_qg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 78,
+    "trailersVisible": 95,
+    "trailerParkingCapacity": 130,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 24.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.6074017,-75.3243256,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["shipRcvSeparate", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Gatehouse on a median island splits the central truck court into an in-lane and out-lane at a pinch-point between landscaped islands and perimeter chain-link fence (z20 sat 40.60855,-75.32475). Court is fully fenced; entry from Commerce Center Blvd at the south.",
+    "guardShack": "Small 1-2-vehicle-footprint booth sitting on the median island mid-court, windows on multiple sides, vehicle parked at it. Listing brochure also cites a guard house with restroom on the parcel.",
+    "remoteGs": "False because a staffed guard booth is present.",
+    "fastLaneOpportunity": "Wide central truck court and double-wide approach lanes around the median booth give unused paved width to add an express/bypass lane.",
+    "postGateStaging": "Paved court between the gatehouse and the dock faces holds a deep queue of trucks inside the fence before docks.",
+    "drivewayLong": "Central court runs ~300m, easily holds 3+ trucks staging between gate and docks.",
+    "dockDoors": "Building 1B listing = 78 dock-high doors; satellite shows dense dock-door rhythm with trailers backed in on the west (court) face and a second bank on the east face. Band 50+.",
+    "dropArea": "Large unpaved gravel drop yard south of the perimeter road packed with 60-80 parked trailers without tractors (sat 40.6066,-75.3236). Band 50+.",
+    "dropYard": "Dedicated gravel trailer-storage lot on the south parcel, separate from active court staging.",
+    "shipRcvSeparate": "Docks on both the west (central court) and east faces of the building, but cannot confirm they run as physically separate ship vs receive clusters from overhead; left false, flagged uncertain.",
+    "urbanRural": "Majestic Bethlehem Center is an edge-of-town big-box industrial park on the former Bethlehem Steel land, bordered by ravine/woodland and rail yards; setting reads Rural per rubric.",
+    "railServed": "A multi-track rail yard sits south of the property but it is separated by a ravine and tree line and is regional/legacy infrastructure, not a private spur into the NFI docks. False.",
+    "buildingCount": "Audited the NFI 3051 / Majestic Bldg 1B leased parcel as one building; the park has several adjacent big-box DCs but they are separate addresses.",
+    "siteAreaAcres": "Listing cites ~24-acre lot for Bldg 1B; perimeter ring drawn to that leased parcel including the south gravel drop yard."
+  },
+  "method": "deep-audit"
+}

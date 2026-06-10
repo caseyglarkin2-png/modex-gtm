@@ -1,0 +1,118 @@
+{
+  "name": "Tractor Supply Distribution Center Franklin KY",
+  "type": "Distribution Center",
+  "coords": { "lat": 36.70720, "lng": -86.51350 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 36.71080, "lng": -86.51560 },
+      { "lat": 36.71090, "lng": -86.51190 },
+      { "lat": 36.70970, "lng": -86.51110 },
+      { "lat": 36.70450, "lng": -86.51150 },
+      { "lat": 36.70430, "lng": -86.51330 },
+      { "lat": 36.70470, "lng": -86.51650 },
+      { "lat": 36.70790, "lng": -86.51660 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 36.71065, "lng": -86.51330 },
+      { "lat": 36.71065, "lng": -86.51275 },
+      { "lat": 36.71025, "lng": -86.51275 },
+      { "lat": 36.71025, "lng": -86.51330 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 36.70930, "lng": -86.51590 },
+        { "lat": 36.70920, "lng": -86.51510 },
+        { "lat": 36.70510, "lng": -86.51560 },
+        { "lat": 36.70520, "lng": -86.51640 }
+      ] },
+      { "ring": [
+        { "lat": 36.70510, "lng": -86.51540 },
+        { "lat": 36.70510, "lng": -86.51330 },
+        { "lat": 36.70450, "lng": -86.51280 },
+        { "lat": 36.70440, "lng": -86.51500 }
+      ] },
+      { "ring": [
+        { "lat": 36.70880, "lng": -86.51260 },
+        { "lat": 36.70870, "lng": -86.51160 },
+        { "lat": 36.70510, "lng": -86.51200 },
+        { "lat": 36.70520, "lng": -86.51330 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 36.70950, "lng": -86.51490 },
+        { "lat": 36.70930, "lng": -86.51430 },
+        { "lat": 36.70500, "lng": -86.51490 },
+        { "lat": 36.70520, "lng": -86.51550 }
+      ] },
+      { "ring": [
+        { "lat": 36.70910, "lng": -86.51270 },
+        { "lat": 36.70895, "lng": -86.51330 },
+        { "lat": 36.70485, "lng": -86.51410 },
+        { "lat": 36.70500, "lng": -86.51350 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 36.70990, "lng": -86.51420 },
+      { "lat": 36.70990, "lng": -86.51250 },
+      { "lat": 36.70940, "lng": -86.51250 },
+      { "lat": 36.70940, "lng": -86.51420 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 198, "pano": "Ijlh1UQlta8VZfeXAJj06w", "hasCoverage": true },
+      "truckGate": { "heading": 241, "pano": "Ijlh1UQlta8VZfeXAJj06w", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 120,
+    "trailersVisible": 140,
+    "trailerParkingCapacity": 220,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 78.4,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.70720,-86.51350,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Guarded checkpoint ~250m south of the public road on the dedicated DC drive: a multi-lane gate canopy spans the truck lanes with trailers queued at it (z18/z19 sat).",
+    "guardShack": "Small square guard booth on a curbed median island splitting inbound/outbound lanes at the canopy (z20 sat).",
+    "entryLanes": "~2 inbound lanes under the canopy; exact split from overhead is approximate.",
+    "exitLanes": "~2 outbound lanes; approximate.",
+    "fastLaneOpportunity": "Wide multi-lane gate apron plus a large landscaped median and loop drive give ample room for an express/bypass lane.",
+    "postGateStaging": "Large paved apron between the gate canopy and the building's north end where trucks queue before docks.",
+    "shipRcvSeparate": "Dock doors with trailers backed in run along BOTH long faces (west and east) of the building, consistent with separate shipping/receiving banks; medium confidence which face is which.",
+    "dockDoors": "Cross-dock with trailers backed in along both ~1000ft+ long faces; total well into 50+ band (est. ~120).",
+    "dropArea": "Dedicated marked trailer-parking lots wrap the west, south, and east of the building, holding 100+ drop trailers (z19 south yard).",
+    "urbanRural": "Edge-of-town Franklin KY industrial park surrounded by farmland and open fields (Street View confirms big-sky rural setting); a few neighboring industrial buildings but broader setting is rural.",
+    "connectivityIssue": "Industrial park on the edge of Franklin with cell towers visible near the entrance; coverage likely adequate, so false.",
+    "railServed": "No rail spur enters the property.",
+    "streetViewMeta": "Best ground pano on arrival is on the access road at 36.71094,-86.51195 (captured 2026-03); headings aim it toward the gate (241) and toward the property/building (198)."
+  },
+  "method": "deep-audit"
+}

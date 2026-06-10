@@ -1,0 +1,99 @@
+{
+  "name": "Tractor Supply Distribution Center Navarre OH",
+  "type": "Distribution Center",
+  "coords": { "lat": 40.7330, "lng": -81.5083 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 40.73642, "lng": -81.51126 },
+      { "lat": 40.73647, "lng": -81.50667 },
+      { "lat": 40.73553, "lng": -81.5065 },
+      { "lat": 40.73211, "lng": -81.50654 },
+      { "lat": 40.73062, "lng": -81.50731 },
+      { "lat": 40.72997, "lng": -81.50971 },
+      { "lat": 40.73085, "lng": -81.51122 },
+      { "lat": 40.7339, "lng": -81.5116 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 40.73642, "lng": -81.50682 },
+      { "lat": 40.73605, "lng": -81.50624 },
+      { "lat": 40.73529, "lng": -81.5065 },
+      { "lat": 40.73553, "lng": -81.5071 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 40.73621, "lng": -81.51089 },
+        { "lat": 40.73626, "lng": -81.50682 },
+        { "lat": 40.73569, "lng": -81.50682 },
+        { "lat": 40.73553, "lng": -81.51089 }
+      ] },
+      { "ring": [
+        { "lat": 40.73524, "lng": -81.5074 },
+        { "lat": 40.73488, "lng": -81.50671 },
+        { "lat": 40.73211, "lng": -81.50718 },
+        { "lat": 40.73244, "lng": -81.50783 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 40.73524, "lng": -81.50761 },
+        { "lat": 40.73504, "lng": -81.50718 },
+        { "lat": 40.73122, "lng": -81.50939 },
+        { "lat": 40.73146, "lng": -81.5098 }
+      ] },
+      { "ring": [
+        { "lat": 40.7352, "lng": -81.51089 },
+        { "lat": 40.73507, "lng": -81.51053 },
+        { "lat": 40.73114, "lng": -81.51126 },
+        { "lat": 40.73133, "lng": -81.5116 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 40.73553, "lng": -81.5074 },
+      { "lat": 40.73524, "lng": -81.50682 },
+      { "lat": 40.73309, "lng": -81.50718 },
+      { "lat": 40.73337, "lng": -81.50772 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 262, "pano": "dLzT00mZbY1CE4pzETc4wA", "hasCoverage": true },
+      "truckGate": { "heading": 283, "pano": "5HwWJZ6FVgOQO7yJKYfCUg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 89,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 220,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 67.1,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.7330,-81.5083,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "trailersVisible", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Continuous chain-link perimeter fence confirmed in Street View (2024-06) along the entire east edge; the truck entrance is a controlled gap in the fence at the NE corner served by a striped, diagonal pre-gate staging lane (lane markings = checkpoint pinch). Modern fenced freight yard, not an open driveway.",
+    "guardShack": "No booth structure visible at the entrance in z19-z21 satellite or in any of the ~10 Street View frames walked along the entrance. A modern automated/kiosk check-in is consistent with the layout.",
+    "remoteGs": "Gate present but no guard shack -> kiosk / app / call-box check-in implied.",
+    "fastLaneOpportunity": "Wide gate apron and a long dedicated staging lane outside the fence leave ample paved width to add an express bypass.",
+    "shipRcvSeparate": "Dock doors run along BOTH long building faces (east and west), two distinct dock banks -> ship/receive can run from separate clusters.",
+    "dockDoors": "Web-confirmed 89 loading docks (900,000 sq ft DC, chain's largest); doors visible on both long faces -> 50+ band.",
+    "dropArea": "Large trailer drop rows north of the building and along the east perimeter road; well into the 50+ band.",
+    "entryLanes": "Estimated 1 in / 1 out at the single NE gate; not individually countable from overhead, flagged uncertain.",
+    "trailersVisible": "~180 trailers estimated across the captured tight imagery; approximate overhead count.",
+    "trailerParkingCapacity": "~220 trailer positions estimated across north + east drop yards and dock aprons; approximate.",
+    "urbanRural": "Edge-of-town / farmland setting on the southeast side of Navarre OH; open fields east and south.",
+    "railServed": "No rail spur enters the property; a rail line runs ~well west of the site but does not serve it."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,118 @@
+{
+  "name": "Tractor Supply Distribution Center Pendleton IN",
+  "type": "Distribution Center",
+  "coords": { "lat": 39.99820, "lng": -85.77280 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 40.00045, "lng": -85.77455 },
+      { "lat": 40.00065, "lng": -85.77095 },
+      { "lat": 39.99950, "lng": -85.77080 },
+      { "lat": 39.99620, "lng": -85.77100 },
+      { "lat": 39.99685, "lng": -85.77460 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 39.99995, "lng": -85.77135 },
+      { "lat": 40.00005, "lng": -85.77095 },
+      { "lat": 39.99955, "lng": -85.77080 },
+      { "lat": 39.99945, "lng": -85.77120 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 39.99940, "lng": -85.77140 },
+        { "lat": 39.99935, "lng": -85.77085 },
+        { "lat": 39.99630, "lng": -85.77105 },
+        { "lat": 39.99635, "lng": -85.77160 }
+      ] },
+      { "ring": [
+        { "lat": 39.99720, "lng": -85.77445 },
+        { "lat": 39.99720, "lng": -85.77170 },
+        { "lat": 39.99690, "lng": -85.77170 },
+        { "lat": 39.99690, "lng": -85.77445 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 40.00015, "lng": -85.77455 },
+        { "lat": 39.99710, "lng": -85.77440 },
+        { "lat": 39.99710, "lng": -85.77405 },
+        { "lat": 40.00015, "lng": -85.77420 }
+      ] },
+      { "ring": [
+        { "lat": 39.99700, "lng": -85.77430 },
+        { "lat": 39.99700, "lng": -85.77130 },
+        { "lat": 39.99680, "lng": -85.77130 },
+        { "lat": 39.99680, "lng": -85.77430 }
+      ] },
+      { "ring": [
+        { "lat": 39.99940, "lng": -85.77145 },
+        { "lat": 39.99720, "lng": -85.77155 },
+        { "lat": 39.99720, "lng": -85.77185 },
+        { "lat": 39.99940, "lng": -85.77175 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 40.00010, "lng": -85.77135 },
+      { "lat": 40.00020, "lng": -85.77085 },
+      { "lat": 39.99998, "lng": -85.77080 },
+      { "lat": 39.99990, "lng": -85.77130 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 225, "pano": "", "hasCoverage": true },
+      "truckGate": { "heading": 220, "pano": "", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 180,
+    "trailersVisible": 240,
+    "trailerParkingCapacity": 320,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 34.9,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.99820,-85.77280,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "shipRcvSeparate", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Street View (2025-06) shows a chain-link perimeter fence with slatted privacy panels and a wide sliding/swing gate opening across the truck drive at the NE entrance off Enterprise Dr; concrete jersey barriers channel traffic into the lanes.",
+    "guardShack": "No staffed booth visible at the entrance in any Street View heading; entry control is fence + gate + barriers only.",
+    "remoteGs": "Gate present but unmanned (no shack) implies kiosk / call-box / app check-in.",
+    "preGateStaging": "Curved paved apron on Enterprise Dr immediately outside the gate gives room for arriving trucks to wait.",
+    "postGateStaging": "Large paved yard inside the gate before docks for queueing/maneuvering.",
+    "fastLaneOpportunity": "Wide gate apron and ample paved entry width; room to add a bypass/express lane.",
+    "entryLanes": "Single combined gate lane controlled by jersey barriers; in/out share the one opening (estimate).",
+    "exitLanes": "Shared with entry through the same gate (estimate).",
+    "dockDoors": "Loading docks run along the west, south, and east building faces with trailers backed in across all three; total well into the 50+ band (estimated ~180 doors).",
+    "dropArea": "Dedicated drop yard with fishbone/angled trailer rows on the east side plus a large south trailer yard; 50+ band.",
+    "shipRcvSeparate": "Docks split across separate building faces (west long bank vs south/east banks) consistent with separate shipping/receiving clusters; medium confidence.",
+    "dropYard": "Dedicated trailer-storage lot full of parked trailers separate from active dock staging.",
+    "urbanRural": "Edge-of-town Pendleton IN: bordered by I-69 and farm fields with some adjacent apartment/industrial development; broader setting is rural.",
+    "railServed": "No rail spur enters the property.",
+    "trailerParkingCapacity": "Estimated from visible drop-yard rows and open paved yard; approximate."
+  },
+  "method": "deep-audit"
+}

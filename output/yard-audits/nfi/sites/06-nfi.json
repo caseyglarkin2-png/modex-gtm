@@ -1,0 +1,90 @@
+{
+  "name": "NFI Distribution Center Perris CA",
+  "type": "Distribution Center",
+  "coords": { "lat": 33.853513, "lng": -117.239060 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 33.855300, "lng": -117.241300 },
+      { "lat": 33.855360, "lng": -117.237600 },
+      { "lat": 33.851550, "lng": -117.237600 },
+      { "lat": 33.851500, "lng": -117.241300 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 33.852258, "lng": -117.241326 },
+      { "lat": 33.852258, "lng": -117.240845 },
+      { "lat": 33.851859, "lng": -117.240845 },
+      { "lat": 33.851859, "lng": -117.241326 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 33.855338, "lng": -117.241223 },
+        { "lat": 33.855395, "lng": -117.236828 },
+        { "lat": 33.854796, "lng": -117.236828 },
+        { "lat": 33.854739, "lng": -117.241223 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 33.854767, "lng": -117.241085 },
+        { "lat": 33.854824, "lng": -117.237034 },
+        { "lat": 33.854482, "lng": -117.237034 },
+        { "lat": 33.854425, "lng": -117.241085 }
+      ] },
+      { "ring": [
+        { "lat": 33.852543, "lng": -117.241085 },
+        { "lat": 33.852600, "lng": -117.237034 },
+        { "lat": 33.852258, "lng": -117.237034 },
+        { "lat": 33.852201, "lng": -117.241085 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 33.854425, "lng": -117.241257 },
+      { "lat": 33.854425, "lng": -117.239987 },
+      { "lat": 33.852572, "lng": -117.239987 },
+      { "lat": 33.852572, "lng": -117.241257 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 40, "pano": "XD2_EEmoJ-ak0GS2vqwaEw", "hasCoverage": true },
+      "truckGate": { "heading": 216, "pano": "XD2_EEmoJ-ak0GS2vqwaEw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 112,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 224,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 35.8,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.853513,-117.239060,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["trailersVisible", "exitLanes", "fastLaneOpportunity"],
+  "fieldNotes": {
+    "truckGate": "Sliding wrought-iron gate across the entrance driveway off W Nance St at the SW corner; red signage on the gate panel. Confirmed in Street View (pano 2026-02) and z21 satellite of the throat.",
+    "guardShack": "No staffed booth beside the entrance lane in satellite (z20/z21) or Street View - the gated throat has only landscaped islands, no 1-3-stall structure.",
+    "remoteGs": "Gate present but no guard booth, so check-in is kiosk/call-box/app (remote).",
+    "shipRcvSeparate": "Cross-dock building: dock aprons with trailers on BOTH the north and south long faces (published as cross-dock); shipping and receiving run from physically separate dock banks.",
+    "dockDoors": "Published 112 dock-high doors (REBusinessOnline/Newmark); visually consistent - long rows of trailers backed in along both N and S faces. Band 50+.",
+    "dropArea": "Published 224 trailer-parking spaces; large striped truck yard north of the north dock apron plus south yard. Band 50+.",
+    "trailersVisible": "~70 trailers visible across N apron, S apron and yards in the captured imagery (estimate).",
+    "fastLaneOpportunity": "Wide entrance apron and deep driveway with unused paved width inside the gate - room to add an express/bypass lane.",
+    "drivewayLong": "Deep gate-to-yard/dock approach holds 3+ trucks; large post-gate apron.",
+    "backupSensitive": "W Nance St is a wide divided road with turn lanes and the gate is set well back - a queue would not spill onto the road.",
+    "urbanRural": "Edge-of-town Perris IE logistics corridor; ranch/residential lots with open land directly across Nance St. Judged Rural per rubric tiebreak.",
+    "railServed": "No rail spur enters the property.",
+    "siteAreaAcres": "Fenced operational yard ~35.8 acres from the perimeter polygon; full assessor parcel published as ~43 acres incl. the vacant expansion lot to the west (excluded from the active geofence)."
+  },
+  "method": "deep-audit"
+}
