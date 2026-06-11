@@ -25,7 +25,8 @@ export async function GET(request: Request) {
 
   const url = new URL(request.url);
   const mode = url.searchParams.get('mode') === 'apply' ? 'apply' : 'dryrun';
-  const minScore = Number(url.searchParams.get('minScore') || '70');
+  // Trailing `|| 70` collapses NaN (e.g. ?minScore=garbage) back to the safe default.
+  const minScore = Number(url.searchParams.get('minScore') || '70') || 70;
 
   const startedAt = Date.now();
   await markCronStarted(CRON_NAME, { path: CRON_PATH, schedule: CRON_SCHEDULE }).catch(() => undefined);
@@ -44,6 +45,7 @@ export async function GET(request: Request) {
       counts: result.counts,
       changes: result.changes,
       applied: applied.updated,
+      warnings: result.warnings.length,
     };
     await markCronSuccess(CRON_NAME, {
       path: CRON_PATH,
@@ -57,6 +59,7 @@ export async function GET(request: Request) {
       ...stats,
       evaluatedAt: result.evaluatedAt,
       sample: changedRows.slice(0, 50),
+      warningSample: result.warnings.slice(0, 20),
     });
   } catch (error) {
     await markCronFailure(CRON_NAME, {

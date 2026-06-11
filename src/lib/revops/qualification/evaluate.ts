@@ -114,9 +114,8 @@ export async function fetchAssociatedContactIds(companyId: string): Promise<stri
     );
 
     for (const item of page.results) {
-      ids.push(
-        (item as { toObjectId: string }).toObjectId,
-      );
+      // toObjectId may be returned as number or string depending on SDK version — coerce.
+      ids.push(String((item as { toObjectId: string | number }).toObjectId));
     }
 
     after = page.paging?.next?.after;
@@ -180,6 +179,29 @@ export async function readContacts(ids: string[]): Promise<QualContact[]> {
 // Task 2.2 — buildDiff + evaluateQualification
 // ---------------------------------------------------------------------------
 
+const VERDICT_RANK: Record<Verdict, number> = { none: 0, mql: 1, sql: 2 };
+
+/**
+ * A contact can be associated with multiple TAM companies, producing multiple rows for the
+ * same contactId. The verdict is the MINIMUM tier the contact should hold, so the correct
+ * single verdict is the MAX across all its qualifying companies. Collapse to one row per
+ * contact, keeping the highest-verdict row (and, on ties, the highest ICP company).
+ */
+export function dedupeByContact(diff: VerdictDiff[]): VerdictDiff[] {
+  const byContact = new Map<string, VerdictDiff>();
+  for (const d of diff) {
+    const prev = byContact.get(d.contactId);
+    if (
+      !prev ||
+      VERDICT_RANK[d.newVerdict] > VERDICT_RANK[prev.newVerdict] ||
+      (VERDICT_RANK[d.newVerdict] === VERDICT_RANK[prev.newVerdict] && d.icpScore > prev.icpScore)
+    ) {
+      byContact.set(d.contactId, d);
+    }
+  }
+  return [...byContact.values()];
+}
+
 export function buildDiff(pairs: { company: QualCompany; contact: QualContact }[]): VerdictDiff[] {
   return pairs.map(({ company, contact }) => {
     const newVerdict = classifyContact(company, contact);
@@ -207,23 +229,33 @@ export async function evaluateQualification(minScore = 70): Promise<EvaluateResu
   const evaluatedAt = new Date().toISOString();
   const companies = await fetchTamCompanies(minScore);
   const pairs: { company: QualCompany; contact: QualContact }[] = [];
+  const warnings: string[] = [];
 
+  // Per-company isolation: a transient failure on one company must not discard the whole run.
   for (const company of companies) {
-    const ids = await fetchAssociatedContactIds(company.id);
-    const contacts = await readContacts(ids);
-    for (const contact of contacts) pairs.push({ company, contact });
+    try {
+      const ids = await fetchAssociatedContactIds(company.id);
+      const contacts = await readContacts(ids);
+      for (const contact of contacts) pairs.push({ company, contact });
+    } catch (err) {
+      warnings.push(
+        `company ${company.id} (${company.name}): ${err instanceof Error ? err.message : String(err)}`,
+      );
+    }
   }
 
-  const diff = buildDiff(pairs);
+  // Collapse multi-company contacts to one row each (max verdict) before counting/applying.
+  const diff = dedupeByContact(buildDiff(pairs));
   const counts: Record<Verdict, number> = { none: 0, mql: 0, sql: 0 };
   for (const d of diff) counts[d.newVerdict] += 1;
 
   return {
     evaluatedAt,
     companies: companies.length,
-    contacts: pairs.length,
+    contacts: diff.length,
     counts,
     changes: diff.filter((d) => d.changed).length,
     diff,
+    warnings,
   };
 }

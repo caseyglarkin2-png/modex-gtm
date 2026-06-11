@@ -51,4 +51,6 @@ export interface EvaluateResult {
   counts: Record<Verdict, number>;
   changes: number;
   diff: VerdictDiff[];
+  /** Per-company fetch failures that were isolated so the run could continue. */
+  warnings: string[];
 }
