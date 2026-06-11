@@ -6,6 +6,7 @@ import { getHubSpotClient, withHubSpotRetry, isHubSpotConfigured } from './clien
 import { HUBSPOT_SYNC_ENABLED } from '@/lib/feature-flags';
 import { FilterOperatorEnum } from '@hubspot/api-client/lib/codegen/crm/companies/models/Filter';
 import { assertExternalWriteAllowed } from '@/lib/enrichment/external-write-guard';
+import { ensureCompanyIntentProperties } from './properties';
 
 const COMPANY_PROPERTIES = [
   'name',
@@ -151,4 +152,38 @@ export async function upsertCompany(properties: {
     `createCompany(${properties.name})`,
   );
   return result.id;
+}
+
+/**
+ * Write account-level YardFlow intent signals onto a COMPANY: intent_score
+ * (sortable hot-accounts view), plus when and on what surface the signal fired.
+ * Mirrors updateContactIntent for the account level. Best-effort — never throws
+ * (intent logging must not break a page view). Ensures the company intent
+ * properties exist first.
+ */
+export async function updateCompanyIntent(
+  companyId: string,
+  intent: { score: number; source: string; at: Date },
+): Promise<void> {
+  if (!isHubSpotConfigured() || !HUBSPOT_SYNC_ENABLED) return;
+  assertExternalWriteAllowed('hubspot', 'updateCompanyIntent');
+
+  try {
+    await ensureCompanyIntentProperties();
+  } catch {
+    return; // can't write the values without their properties
+  }
+
+  const client = getHubSpotClient();
+  await withHubSpotRetry(
+    () =>
+      client.crm.companies.basicApi.update(companyId, {
+        properties: {
+          intent_score: String(Math.round(intent.score)),
+          last_intent_at: String(intent.at.getTime()),
+          last_intent_source: intent.source,
+        },
+      }),
+    `updateCompanyIntent(${companyId})`,
+  ).catch(() => undefined);
 }

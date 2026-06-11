@@ -17,6 +17,7 @@ import { prisma } from '@/lib/prisma';
 import { slugify } from '@/lib/data';
 import { createNote } from '@/lib/hubspot/notes';
 import { searchContactByEmail, updateContactIntent } from '@/lib/hubspot/contacts';
+import { searchCompanyByName, updateCompanyIntent } from '@/lib/hubspot/companies';
 import type { MicrositeTrackingSnapshot } from './tracking';
 import type { MicrositeEngagementAnalyticsInput } from './analytics';
 
@@ -86,6 +87,31 @@ export async function logIntentToHubSpot(
   merged: MicrositeEngagementAnalyticsInput,
   reason: string,
 ): Promise<string | null> {
+  const audioPct = readProgress(merged.metadata, 'audioProgressPct');
+  const videoPct = readProgress(merged.metadata, 'videoProgressPct');
+  const intentScore = computeIntentScore(merged, audioPct, videoPct);
+  const at = new Date();
+
+  // Account-level intent: ALWAYS stamp the COMPANY for this account, so demo /
+  // microsite engagement registers even when the session has no resolvable
+  // person (anonymous or account-only /demo/<account> links — the common case).
+  // Best-effort; never blocks. Requires the account to exist as a HubSpot
+  // company (true for our demo targets); silently no-ops if not found.
+  try {
+    const company = await searchCompanyByName(snapshot.accountName);
+    if (company) {
+      await updateCompanyIntent(company.id, {
+        score: intentScore,
+        source: snapshot.path,
+        at,
+      });
+    }
+  } catch {
+    // never let account-level intent break the page view
+  }
+
+  // Person-level intent + a timeline Note only when the session resolves to a
+  // known contact (person-specific microsite link).
   if (!snapshot.personSlug) return null;
   const contactId = await resolveHubSpotContactId(snapshot.accountName, snapshot.personSlug);
   if (!contactId) return null;
@@ -94,8 +120,6 @@ export async function logIntentToHubSpot(
     ? `clicked <b>${reason.slice(4)}</b>`
     : 'hit a high-intent read';
 
-  const audioPct = readProgress(merged.metadata, 'audioProgressPct');
-  const videoPct = readProgress(merged.metadata, 'videoProgressPct');
   const facts: string[] = [
     `${formatSecs(merged.duration_seconds)} on page`,
     `${merged.scroll_depth_pct}% scroll`,
@@ -119,11 +143,10 @@ export async function logIntentToHubSpot(
 
   // Write the numeric intent signal onto the contact (sortable hot-accounts
   // view) alongside the human-readable Note. Best-effort; never blocks the Note.
-  const intentScore = computeIntentScore(merged, audioPct, videoPct);
   await updateContactIntent(contactId, {
     score: intentScore,
     source: snapshot.path,
-    at: new Date(),
+    at,
   });
 
   return createNote({ contactId, body });
