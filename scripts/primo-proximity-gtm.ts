@@ -8,39 +8,36 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import ExcelJS from 'exceljs';
+import { REFERENCE_SITES } from '../src/lib/discovery/reference-sites';
 
-// ── Primo Brands sites with known coordinates ──────────────────────────
-// Geocoded from public factory addresses (Primo Brands / BlueTriton / Nestle Waters NA)
-const PRIMO_SITES: PrimoSite[] = [
-  { name: "US PL Ontario Factory", city: "Ontario", state: "CA", lat: 34.0365, lng: -117.5931, solutions: ["Driver Journey"] },
-  { name: "US PL Hot Springs Factory", city: "Hot Springs", state: "AR", lat: 34.6332, lng: -93.0672, solutions: ["Driver Journey", "YMS"] },
-  { name: "US DC Hot Springs (WHSE)", city: "Hot Springs", state: "AR", lat: 34.5037, lng: -93.0552, solutions: ["Driver Journey", "YMS"] },
-  { name: "US PL Allentown Factory", city: "Breinigsville", state: "PA", lat: 40.5333, lng: -75.6333, solutions: ["Driver Journey", "RTLS", "Machine Vision Gate"] },
-  { name: "US PL Cabazon Factory", city: "Cabazon", state: "CA", lat: 33.9164, lng: -116.7873, solutions: ["Driver Journey"] },
-  { name: "US PL Hawkins Factory", city: "Hawkins", state: "TX", lat: 32.5690, lng: -95.2150, solutions: ["Driver Journey", "YMS"] },
-  { name: "US PL Hollis Factory", city: "Hollis", state: "ME", lat: 43.5950, lng: -70.6450, solutions: ["Driver Journey", "YMS"] },
-  { name: "US PL Madison Factory", city: "Madison", state: "WI", lat: 43.0558, lng: -89.3268, solutions: ["Driver Journey"] },
-  { name: "US PL Mecosta Factory", city: "Stanwood", state: "MI", lat: 43.5803, lng: -85.2097, solutions: ["Driver Journey", "YMS"] },
-  { name: "US PL Poland Spring Factory", city: "Poland Spring", state: "ME", lat: 44.0558, lng: -70.3475, solutions: ["Driver Journey", "YMS"] },
-  { name: "US PL S Houston Factory", city: "Houston", state: "TX", lat: 29.6650, lng: -95.3850, solutions: ["Driver Journey"] },
-  { name: "US PL Zephyrhills Factory", city: "Zephyrhills", state: "FL", lat: 28.2461, lng: -82.1811, solutions: ["Driver Journey", "YMS"] },
-  { name: "US PL Allentown NPL Factory", city: "Breinigsville", state: "PA", lat: 40.5280, lng: -75.6350, solutions: ["Driver Journey"] },
-  { name: "US PL Dallas 2 Factory", city: "Dallas", state: "TX", lat: 32.6949, lng: -96.9470, solutions: ["Driver Journey", "YMS"] },
-  { name: "US PL Kingfield Factory", city: "Kingfield", state: "ME", lat: 44.9580, lng: -70.1530, solutions: ["Driver Journey"] },
-  { name: "US PL Denver Factory", city: "Denver", state: "CO", lat: 39.7392, lng: -104.9903, solutions: ["Driver Journey"] },
-  { name: "US PL Greenwood Indiana", city: "Greenwood", state: "IN", lat: 39.5945, lng: -86.1167, solutions: ["Driver Journey"] },
-  { name: "US PL McBee Factory", city: "McBee", state: "SC", lat: 34.4700, lng: -80.2586, solutions: ["Driver Journey"] },
-  { name: "US PL Sacramento Factory", city: "Sacramento", state: "CA", lat: 38.5158, lng: -121.3809, solutions: ["Driver Journey"] },
-  { name: "US PL Pasadena Factory", city: "Pasadena", state: "TX", lat: 29.5605, lng: -95.1167, solutions: ["Driver Journey", "YMS"] },
-  { name: "US PL High Springs Factory", city: "High Springs", state: "FL", lat: 29.8283, lng: -82.5967, solutions: ["Driver Journey"] },
-  { name: "US PL Saratoga Spring Factory", city: "Saratoga Springs", state: "NY", lat: 43.0710, lng: -73.7846, solutions: ["Driver Journey"] },
-  { name: "US PL Hot Springs 2 Factory", city: "Hot Springs", state: "AR", lat: 34.6100, lng: -93.0500, solutions: ["Driver Journey", "YMS"] },
-  { name: "US DC NFI - Breinigsville", city: "Breinigsville", state: "PA", lat: 40.5340, lng: -75.6290, solutions: ["Driver Journey"] },
-  // Canada (synced from the site spreadsheet 2026-06-10; Driver Journey live)
-  { name: "CA PL Guelph Factory", city: "Guelph", state: "ON", lat: 43.5448, lng: -80.2482, solutions: ["Driver Journey"] },
-  { name: "CA PL Hope Factory", city: "Hope", state: "BC", lat: 49.3827, lng: -121.4414, solutions: ["Driver Journey"] },
-  { name: "CA DC Chilliwack Whse", city: "Chilliwack", state: "BC", lat: 49.1579, lng: -121.9515, solutions: ["Driver Journey"] },
-];
+// ── Primo Brands sites — single source of truth (S5-T3) ────────────────
+// Coordinates + names + status come from src/lib/discovery/reference-sites.ts
+// (the canonical 27, synced to table (1).xlsx). The per-site `solutions` (which
+// YardFlow modules are live where) is the one thing not in the canonical, so it
+// lives here as a name->solutions map and is joined on. Default is Driver Journey
+// (live network-wide). Validate against the xlsx via scripts/sync-reference-sites.ts.
+const SOLUTIONS_BY_SITE: Record<string, string[]> = {
+  "US PL Hot Springs Factory": ["Driver Journey", "YMS"],
+  "US DC Hot Springs (WHSE)": ["Driver Journey", "YMS"],
+  "US PL Allentown Factory": ["Driver Journey", "RTLS", "Machine Vision Gate"],
+  "US PL Hawkins Factory": ["Driver Journey", "YMS"],
+  "US PL Hollis Factory": ["Driver Journey", "YMS"],
+  "US PL Mecosta Factory": ["Driver Journey", "YMS"],
+  "US PL Poland Spring Factory": ["Driver Journey", "YMS"],
+  "US PL Zephyrhills Factory": ["Driver Journey", "YMS"],
+  "US PL Dallas 2 Factory": ["Driver Journey", "YMS"],
+  "US PL Pasadena Factory": ["Driver Journey", "YMS"],
+  "US PL Hot Springs 2 Factory": ["Driver Journey", "YMS"],
+};
+
+const PRIMO_SITES: PrimoSite[] = REFERENCE_SITES.map((s) => ({
+  name: s.name,
+  city: s.city,
+  state: s.state,
+  lat: s.lat,
+  lng: s.lng,
+  solutions: SOLUTIONS_BY_SITE[s.name] ?? ["Driver Journey"],
+}));
 
 interface PrimoSite {
   name: string;

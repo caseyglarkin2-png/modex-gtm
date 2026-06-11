@@ -1,10 +1,15 @@
 /**
  * Live YardFlow reference sites — Primo Brands' 27 facilities (24 US + 3 Canada),
  * the live customer the proximity play anchors on. Synced to Casey's site
- * spreadsheet (table (1).xlsx, 2026-06-10). Mirrored from PRIMO_SITES in
- * scripts/prospect-discovery/score-and-rank.ts so the map can pin them as a
- * visible reference layer with proximity rings. NOTE: this list is duplicated in
- * score-and-rank.ts + primo-proximity-gtm.ts; keep all three in sync.
+ * spreadsheet (table (1).xlsx, 2026-06-10).
+ *
+ * SINGLE SOURCE OF TRUTH (S5-T3). This was previously copy-pasted across
+ * scripts/prospect-discovery/score-and-rank.ts, scripts/primo-proximity-gtm.ts,
+ * and scripts/prospect-discovery/corridor-heatmap.ts — which drifted. Those
+ * scripts now import REFERENCE_SITES from here. The xlsx holds the authoritative
+ * site list + per-site solutions (no coordinates); coordinates are geocoded and
+ * live only here. Run `npx tsx scripts/sync-reference-sites.ts` to validate this
+ * list against the spreadsheet.
  *
  * `status` is 'live' for all Primo sites today; the field exists so a broader
  * live/deploying set can be layered in later (per the Sprint 0 reference-set fork).

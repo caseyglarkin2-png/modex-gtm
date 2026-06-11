@@ -13,6 +13,7 @@
 
 import * as fs from 'fs';
 import * as path from 'path';
+import { REFERENCE_SITES } from '../../src/lib/discovery/reference-sites';
 
 // ── Types ────────────────────────────────────────────────────────────────
 
@@ -91,46 +92,11 @@ interface ExistingFacility {
   lng: number;
 }
 
-// ── Primo Brands anchor sites (mirrored from primo-proximity-gtm.ts) ─────
+// ── Primo Brands anchor sites — single source of truth (S5-T3) ───────────
+// Imported from src/lib/discovery/reference-sites.ts. ReferenceSite carries
+// name/city/state/lat/lng (+ status), which is everything this scorer needs.
 
-interface PrimoSite {
-  name: string;
-  city: string;
-  state: string;
-  lat: number;
-  lng: number;
-}
-
-const PRIMO_SITES: PrimoSite[] = [
-  { name: "US PL Ontario Factory", city: "Ontario", state: "CA", lat: 34.0365, lng: -117.5931 },
-  { name: "US PL Hot Springs Factory", city: "Hot Springs", state: "AR", lat: 34.6332, lng: -93.0672 },
-  { name: "US DC Hot Springs (WHSE)", city: "Hot Springs", state: "AR", lat: 34.5037, lng: -93.0552 },
-  { name: "US PL Allentown Factory", city: "Breinigsville", state: "PA", lat: 40.5333, lng: -75.6333 },
-  { name: "US PL Cabazon Factory", city: "Cabazon", state: "CA", lat: 33.9164, lng: -116.7873 },
-  { name: "US PL Hawkins Factory", city: "Hawkins", state: "TX", lat: 32.5690, lng: -95.2150 },
-  { name: "US PL Hollis Factory", city: "Hollis", state: "ME", lat: 43.5950, lng: -70.6450 },
-  { name: "US PL Madison Factory", city: "Madison", state: "WI", lat: 43.0558, lng: -89.3268 },
-  { name: "US PL Mecosta Factory", city: "Stanwood", state: "MI", lat: 43.5803, lng: -85.2097 },
-  { name: "US PL Poland Spring Factory", city: "Poland Spring", state: "ME", lat: 44.0558, lng: -70.3475 },
-  { name: "US PL S Houston Factory", city: "Houston", state: "TX", lat: 29.6650, lng: -95.3850 },
-  { name: "US PL Zephyrhills Factory", city: "Zephyrhills", state: "FL", lat: 28.2461, lng: -82.1811 },
-  { name: "US PL Allentown NPL Factory", city: "Breinigsville", state: "PA", lat: 40.5280, lng: -75.6350 },
-  { name: "US PL Dallas 2 Factory", city: "Dallas", state: "TX", lat: 32.6949, lng: -96.9470 },
-  { name: "US PL Kingfield Factory", city: "Kingfield", state: "ME", lat: 44.9580, lng: -70.1530 },
-  { name: "US PL Denver Factory", city: "Denver", state: "CO", lat: 39.7392, lng: -104.9903 },
-  { name: "US PL Greenwood Indiana", city: "Greenwood", state: "IN", lat: 39.5945, lng: -86.1167 },
-  { name: "US PL McBee Factory", city: "McBee", state: "SC", lat: 34.4700, lng: -80.2586 },
-  { name: "US PL Sacramento Factory", city: "Sacramento", state: "CA", lat: 38.5158, lng: -121.3809 },
-  { name: "US PL Pasadena Factory", city: "Pasadena", state: "TX", lat: 29.5605, lng: -95.1167 },
-  { name: "US PL High Springs Factory", city: "High Springs", state: "FL", lat: 29.8283, lng: -82.5967 },
-  { name: "US PL Saratoga Spring Factory", city: "Saratoga Springs", state: "NY", lat: 43.0710, lng: -73.7846 },
-  { name: "US PL Hot Springs 2 Factory", city: "Hot Springs", state: "AR", lat: 34.6100, lng: -93.0500 },
-  { name: "US DC NFI - Breinigsville", city: "Breinigsville", state: "PA", lat: 40.5340, lng: -75.6290 },
-  // Canada (synced from the site spreadsheet 2026-06-10)
-  { name: "CA PL Guelph Factory", city: "Guelph", state: "ON", lat: 43.5448, lng: -80.2482 },
-  { name: "CA PL Hope Factory", city: "Hope", state: "BC", lat: 49.3827, lng: -121.4414 },
-  { name: "CA DC Chilliwack Whse", city: "Chilliwack", state: "BC", lat: 49.1579, lng: -121.9515 },
-];
+const PRIMO_SITES = REFERENCE_SITES;
 
 // ── Known account slugs and display names ────────────────────────────────
 // Mirrors scripts/yard-audit/slug-map.ts ENTRIES so we do not need a TS

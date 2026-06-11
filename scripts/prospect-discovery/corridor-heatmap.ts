@@ -12,6 +12,7 @@
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, existsSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { REFERENCE_SITES } from '../../src/lib/discovery/reference-sites';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..', '..');
 
@@ -127,28 +128,15 @@ const ARCHETYPE_MAP: Record<string, string> = {
   'westrock-coffee': 'cpg',
 };
 
-const PRIMO_SITES: { name: string; lat: number; lng: number }[] = [
-  { name: 'Ontario CA', lat: 34.0365, lng: -117.5931 },
-  { name: 'Hot Springs AR', lat: 34.6332, lng: -93.0672 },
-  { name: 'Breinigsville PA', lat: 40.5333, lng: -75.6333 },
-  { name: 'Cabazon CA', lat: 33.9164, lng: -116.7873 },
-  { name: 'Hawkins TX', lat: 32.5690, lng: -95.2150 },
-  { name: 'Hollis ME', lat: 43.5950, lng: -70.6450 },
-  { name: 'Madison WI', lat: 43.0558, lng: -89.3268 },
-  { name: 'Stanwood MI', lat: 43.5803, lng: -85.2097 },
-  { name: 'Poland Spring ME', lat: 44.0558, lng: -70.3475 },
-  { name: 'Houston TX', lat: 29.6650, lng: -95.3850 },
-  { name: 'Zephyrhills FL', lat: 28.2461, lng: -82.1811 },
-  { name: 'Dallas TX', lat: 32.6949, lng: -96.9470 },
-  { name: 'Kingfield ME', lat: 44.9580, lng: -70.1530 },
-  { name: 'Denver CO', lat: 39.7392, lng: -104.9903 },
-  { name: 'Greenwood IN', lat: 39.5945, lng: -86.1167 },
-  { name: 'McBee SC', lat: 34.4700, lng: -80.2586 },
-  { name: 'Sacramento CA', lat: 38.5158, lng: -121.3809 },
-  { name: 'Pasadena TX', lat: 29.5605, lng: -95.1167 },
-  { name: 'High Springs FL', lat: 29.8283, lng: -82.5967 },
-  { name: 'Saratoga Springs NY', lat: 43.0710, lng: -73.7846 },
-];
+// Single source of truth (S5-T3/T4): derive the anchor set from the canonical
+// 27 reference sites instead of a hand-maintained subset, so the heatmap's
+// proximity reflects every live YardFlow site (incl. Canada). Name is rendered
+// "City ST" to match this script's label style.
+const PRIMO_SITES: { name: string; lat: number; lng: number }[] = REFERENCE_SITES.map((s) => ({
+  name: `${s.city} ${s.state}`,
+  lat: s.lat,
+  lng: s.lng,
+}));
 
 const MAJOR_METROS: { name: string; lat: number; lng: number }[] = [
   { name: 'Allentown PA', lat: 40.6084, lng: -75.4902 },
