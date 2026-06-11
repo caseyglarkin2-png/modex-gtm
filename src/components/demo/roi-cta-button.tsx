@@ -2,6 +2,7 @@
 
 import type { DemoPack } from '@/lib/demo/pack-schema';
 import { deriveNetworkCounts } from '@/lib/demo/roi-model';
+import { trackEvent } from '@/lib/analytics';
 
 /**
  * D8.1 — ROI Calculator CTA that pre-fills the V2 calculator with the
@@ -138,6 +139,14 @@ export function RoiCtaButton({ pack, ctaId, utmMedium, className, children, sour
       // localStorage unavailable (private mode, disabled, etc.) — silently
       // fall through to a normal link navigation. Calculator uses defaults.
     }
+    // Funnel middle-step: record the CTA click in PostHog (rides the for_slug +
+    // surface super-properties set by the page beacon). Same event name as the
+    // Flow-State- /for CTAs so /demo + /for share one funnel.
+    trackEvent('cta_click', {
+      location: ctaId,
+      href: url,
+      account: pack.account.slug,
+    });
     // Don't preventDefault; let the anchor navigate normally so middle-
     // click / cmd-click / new-tab behavior is preserved.
     void e;

@@ -10,6 +10,7 @@ import { MicrositeViewEvent } from '@/components/demo/microsite-view-event';
 import { RelatedIndustries } from '@/components/demo/related-industries';
 import { getIndustryFromSlug } from '@/lib/demo/industry-tags';
 import { MicrositeTracker } from '@/components/microsites/microsite-tracker';
+import MicrositePostHogBeacon from '@/components/microsites/microsite-posthog-beacon';
 import { getAccountMicrositeData } from '@/lib/microsites/accounts';
 import { buildPublicShareMetadata } from '@/lib/microsites/share';
 
@@ -163,6 +164,7 @@ export default async function DemoAccountPage({
         path={`/demo/${account}`}
         variantSlug={fromGallery ? 'gallery-pack-view' : undefined}
       />
+      <MicrositePostHogBeacon slug={account} surface="demo" />
       <MicrositeViewEvent anchorSlug={account} archetype={getIndustryFromSlug(account)?.archetype ?? null} />
       <DemoSurface
         pack={pack}

@@ -23,6 +23,7 @@ import {
   AUDIO_BRIEF_DURATION,
 } from '@/lib/microsites/audio-brief';
 import { MicrositeTracker } from '@/components/microsites/microsite-tracker';
+import MicrositePostHogBeacon from '@/components/microsites/microsite-posthog-beacon';
 
 const PREPARED_DATE = new Date().toISOString().slice(0, 10); // ISO; MemoShell formats display
 
@@ -102,6 +103,7 @@ export default async function AccountMicrositePage({
         personSlug={reader?.personSlug}
         variantSlug={reader?.variant.variantSlug}
       />
+      <MicrositePostHogBeacon slug={account} surface="for" />
       <MemoShell
         accountName={data.accountName}
         accentColor={data.theme?.accentColor}
