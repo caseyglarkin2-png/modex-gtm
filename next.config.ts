@@ -3,6 +3,12 @@ import { withSentryConfig } from "@sentry/nextjs";
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: ['127.0.0.1', 'localhost'],
+  // trailingSlash must match flow-state-site (yardflow.ai), which is trailingSlash:true.
+  // yardflow.ai proxies /demo/<account> here keeping the canonical trailing slash; with
+  // modex defaulting to false it 308-stripped the slash, ping-ponging against yardflow's
+  // add-slash redirect into an infinite /demo redirect loop. Aligning both apps to true
+  // makes modex serve /demo/<account>/ directly. (assetPrefix/_next + /api are unaffected.)
+  trailingSlash: true,
   // yardflow.ai (flow-state-site) rewrites /for/* and /proposal/* to this app,
   // but does NOT rewrite /_next/* — so without an absolute assetPrefix the
   // browser would request CSS/JS/fonts from yardflow.ai and 404. Pinning
