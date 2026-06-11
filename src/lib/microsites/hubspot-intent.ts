@@ -18,8 +18,22 @@ import { slugify } from '@/lib/data';
 import { createNote } from '@/lib/hubspot/notes';
 import { searchContactByEmail, updateContactIntent } from '@/lib/hubspot/contacts';
 import { searchCompanyByName, updateCompanyIntent } from '@/lib/hubspot/companies';
+import { getAccountMicrositeData } from './accounts';
 import type { MicrositeTrackingSnapshot } from './tracking';
 import type { MicrositeEngagementAnalyticsInput } from './analytics';
+
+/**
+ * Resolve the HubSpot company name for a tracking snapshot. `searchCompanyByName`
+ * is an EXACT match, so a surface that sends a display-style name (e.g. the
+ * native Flow-State- /for page sends `entity` = "Danone North America") would
+ * never resolve the "Dannon" company. The microsite account registry is the
+ * canonical slug → HubSpot-company-name map (the modex /demo + /for pages already
+ * write intent with it), so prefer it by slug and fall back to whatever name the
+ * caller sent for slugs not yet in the registry.
+ */
+function resolveCompanyNameForSearch(snapshot: MicrositeTrackingSnapshot): string {
+  return getAccountMicrositeData(snapshot.accountSlug)?.accountName ?? snapshot.accountName;
+}
 
 function formatSecs(s: number): string {
   if (s < 60) return `${s}s`;
@@ -98,7 +112,7 @@ export async function logIntentToHubSpot(
   // Best-effort; never blocks. Requires the account to exist as a HubSpot
   // company (true for our demo targets); silently no-ops if not found.
   try {
-    const company = await searchCompanyByName(snapshot.accountName);
+    const company = await searchCompanyByName(resolveCompanyNameForSearch(snapshot));
     if (company) {
       await updateCompanyIntent(company.id, {
         score: intentScore,
