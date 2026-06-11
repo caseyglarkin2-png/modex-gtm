@@ -25,11 +25,15 @@ const STAGE_LABEL: Record<string, string> = {
 const DIGEST_TO = process.env.DIGEST_TO_EMAIL || 'casey@freightroll.com';
 
 const dealUrl = (id: string) => `https://app.hubspot.com/contacts/${PORTAL_ID}/record/0-3/${id}`;
+const contactUrl = (id: string) => `https://app.hubspot.com/contacts/${PORTAL_ID}/record/0-1/${id}`;
+const gmailUrl = (email: string) => `https://mail.google.com/mail/u/0/#search/${encodeURIComponent(email)}`;
 const boardUrl = `https://app.hubspot.com/contacts/${PORTAL_ID}/objects/0-3/views/all/board`;
 const hotAccountsUrl = `https://app.hubspot.com/contacts/${PORTAL_ID}/objectLists/72`;
+const sqlListUrl = `https://app.hubspot.com/contacts/${PORTAL_ID}/objects/0-1/views/all/list`;
 const taskQueueUrl = `https://app.hubspot.com/tasks/${PORTAL_ID}/view/all`;
 
 const money = (n: number) => `$${Math.round(n).toLocaleString()}`;
+const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 function parseHsDate(v?: string | null): Date | null {
   if (!v) return null;
   const d = /^\d+$/.test(v) ? new Date(Number(v)) : new Date(v);
@@ -101,6 +105,43 @@ async function fetchDealDigest(now: Date): Promise<DealDigest | null> {
   return { count: results.length, totalAmount, byStage, decisions: decisions.slice(0, 6) };
 }
 
+interface SqlLead {
+  id: string;
+  name: string;
+  company: string;
+  title: string;
+}
+
+/** Pull a starting worklist of un-worked SQLs (lifecycle = SQL, lead status = New). */
+async function fetchSqlWorklist(): Promise<{ total: number; leads: SqlLead[] } | null> {
+  if (!isHubSpotConfigured()) return null;
+  const client = getHubSpotClient();
+  const res = await withHubSpotRetry(
+    () =>
+      client.crm.contacts.searchApi.doSearch({
+        filterGroups: [
+          {
+            filters: [
+              { propertyName: 'lifecyclestage', operator: FilterOperatorEnum.Eq, value: 'salesqualifiedlead' },
+              { propertyName: 'hs_lead_status', operator: FilterOperatorEnum.Eq, value: 'NEW' },
+            ],
+          },
+        ],
+        properties: ['firstname', 'lastname', 'company', 'jobtitle'],
+        limit: 8,
+        after: '0',
+        sorts: [],
+      }),
+    'dailyDigest:sqlWorklist',
+  );
+  const leads: SqlLead[] = (res.results ?? []).map((c) => {
+    const p = c.properties as Record<string, string | null>;
+    const name = [p.firstname, p.lastname].filter(Boolean).join(' ') || (p.company ?? 'Unknown contact');
+    return { id: c.id, name, company: p.company ?? '', title: p.jobtitle ?? '' };
+  });
+  return { total: res.total ?? leads.length, leads };
+}
+
 export async function GET(request: Request) {
   if (!isAuthorizedCronRequest(request)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -120,6 +161,22 @@ export async function GET(request: Request) {
     } catch (err) {
       console.error('daily-digest: HubSpot deal fetch failed', err);
     }
+
+    // New-SQL worklist (best-effort)
+    let sqlQueue: { total: number; leads: SqlLead[] } | null = null;
+    try {
+      sqlQueue = await fetchSqlWorklist();
+    } catch (err) {
+      console.error('daily-digest: SQL worklist fetch failed', err);
+    }
+
+    // Replies to chase — the hottest outbound signal (local DB)
+    const replyNotifications = await prisma.notification.findMany({
+      where: { type: 'reply', created_at: { gte: yesterday } },
+      orderBy: { created_at: 'desc' },
+      take: 8,
+      select: { persona_email: true, account_name: true, subject: true, preview: true },
+    });
 
     // Outreach stats (local DB) — secondary section
     const [totalSent, sentYesterday, openedYesterday, repliesYesterday, bouncedYesterday, campaignFollowUpsReady] =
@@ -168,6 +225,48 @@ export async function GET(request: Request) {
       pipelineHtml = `<p style="color:#999">HubSpot pipeline unavailable this run. <a href="${boardUrl}" style="color:#2563eb">Open board</a></p>`;
     }
 
+    // ── Replies to chase (hottest signal) ────────────────────────────
+    const replyRows = replyNotifications.length
+      ? replyNotifications
+          .map((r) => {
+            const who = esc(r.persona_email || 'Unknown sender');
+            const acct = r.account_name ? ` &middot; ${esc(r.account_name)}` : '';
+            const subj = r.subject ? `<div style="color:#666;font-size:13px;margin:2px 0">${esc(r.subject)}</div>` : '';
+            const prev = r.preview ? `<div style="color:#888;font-size:12px;margin-bottom:6px">${esc(r.preview.slice(0, 140))}</div>` : '';
+            const link = r.persona_email
+              ? `<a href="${gmailUrl(r.persona_email)}" style="color:#2563eb;font-size:13px">Reply in Gmail</a>`
+              : '';
+            return `
+          <div style="border:1px solid #eee;border-left:3px solid #16a34a;border-radius:6px;padding:10px 14px;margin-bottom:8px">
+            <div style="font-weight:700">${who}${acct}</div>${subj}${prev}${link}
+          </div>`;
+          })
+          .join('')
+      : `<p style="color:#666">No new replies in the last 24h.</p>`;
+    const replyHtml = `
+      <div style="font-size:11px;font-weight:700;letter-spacing:.06em;color:#16a34a;text-transform:uppercase;margin:18px 0 8px">Replies to chase &mdash; last 24h</div>
+      ${replyRows}`;
+
+    // ── Work these today: New SQLs ───────────────────────────────────
+    let sqlHtml = '';
+    if (sqlQueue && sqlQueue.leads.length) {
+      const rows = sqlQueue.leads
+        .map((l) => {
+          const meta = [l.company, l.title].filter(Boolean).map(esc).join(' &middot; ');
+          return `
+          <div style="border:1px solid #eee;border-left:3px solid #2563eb;border-radius:6px;padding:9px 14px;margin-bottom:7px">
+            <div style="font-weight:700">${esc(l.name)}</div>
+            ${meta ? `<div style="color:#666;font-size:13px;margin:2px 0 6px">${meta}</div>` : ''}
+            <a href="${contactUrl(l.id)}" style="color:#2563eb;font-size:13px">Open contact</a>
+          </div>`;
+        })
+        .join('');
+      sqlHtml = `
+        <div style="font-size:11px;font-weight:700;letter-spacing:.06em;color:#2563eb;text-transform:uppercase;margin:18px 0 8px">Work these today &mdash; New SQLs</div>
+        <p style="margin:0 0 10px;font-size:13px;color:#444"><b>${sqlQueue.total.toLocaleString()}</b> SQLs sit at lead status &ldquo;New.&rdquo; Start with these ${sqlQueue.leads.length} &middot; <a href="${sqlListUrl}" style="color:#2563eb">full queue</a></p>
+        ${rows}`;
+    }
+
     const html = `
       <div style="font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;max-width:600px;color:#111;line-height:1.5">
         <h2 style="margin:0 0 2px;font-size:20px">YardFlow daily — ${dateStr}</h2>
@@ -175,10 +274,15 @@ export async function GET(request: Request) {
 
         ${pipelineHtml}
 
-        <div style="font-size:11px;font-weight:700;letter-spacing:.06em;color:#555;text-transform:uppercase;margin:18px 0 6px">Intent &amp; queues</div>
+        ${replyHtml}
+
+        ${sqlHtml}
+
+        <div style="font-size:11px;font-weight:700;letter-spacing:.06em;color:#555;text-transform:uppercase;margin:18px 0 6px">Queues</div>
         <p style="margin:0 0 14px;font-size:13px">
-          Hot accounts (intent score): <a href="${hotAccountsUrl}" style="color:#2563eb">YardFlow Hot Accounts</a><br>
-          Open tasks: <a href="${taskQueueUrl}" style="color:#2563eb">Task queue</a>
+          <a href="${hotAccountsUrl}" style="color:#2563eb">Hot Accounts</a> (lights up as intent fires) &middot;
+          <a href="${taskQueueUrl}" style="color:#2563eb">Task queue</a> &middot;
+          <a href="${boardUrl}" style="color:#2563eb">Pipeline board</a>
         </p>
 
         <div style="font-size:11px;font-weight:700;letter-spacing:.06em;color:#555;text-transform:uppercase;margin:18px 0 6px">Outreach — last 24h</div>
@@ -195,9 +299,16 @@ export async function GET(request: Request) {
       </div>
     `;
 
+    const replyCount = replyNotifications.length;
+    const decisionCount = deals?.decisions.length ?? 0;
+    const subjectBits = [
+      replyCount ? `${replyCount} repl${replyCount === 1 ? 'y' : 'ies'} to chase` : '',
+      decisionCount ? `${decisionCount} decision${decisionCount === 1 ? '' : 's'}` : '',
+    ].filter(Boolean);
+
     await sendEmail({
       to: DIGEST_TO,
-      subject: `YardFlow daily — ${dateStr}${deals ? ` · ${deals.decisions.length} deal(s) need a decision` : ''}`,
+      subject: `YardFlow daily — ${dateStr}${subjectBits.length ? ` · ${subjectBits.join(' · ')}` : ''}`,
       html,
     });
 
