@@ -16,8 +16,10 @@ export interface ProspectContact {
   /** 'known' = real address from our records; otherwise the inference band. */
   confidence: InferConfidence | 'known';
   emailBasis?: string;
-  source: 'records' | 'hubspot' | 'added' | 'research';
+  source: 'records' | 'hubspot' | 'added' | 'research' | 'saved';
   linkedinUrl?: string;
+  /** Link to the HubSpot contact record, when the save round-trip created/found one. */
+  hubspotUrl?: string;
   /** Why this person is relevant (from web research). */
   reason?: string;
   /** 'local' = regional/site leader near the facility; 'corporate' = HQ. */
@@ -58,6 +60,7 @@ function rank(c: ProspectContact): number {
   else if (c.email) score += 10;
   if (c.source === 'records') score += 3;
   else if (c.source === 'hubspot') score += 2;
+  else if (c.source === 'saved') score += 1;
   return score;
 }
 

@@ -1171,3 +1171,23 @@ model SystemConfig {
 
   @@map("system_config")
 }
+
+/// Durable contacts found in the /discovery prospect drawer (manual add + AI
+/// research). FK-free on purpose: most discovery prospects have no Account row,
+/// so Persona (account_name FK) can't hold them.
+model DiscoveryContact {
+  id            Int      @id @default(autoincrement())
+  prospect_name String
+  name          String
+  title         String?
+  email         String?  // lowercased on write
+  linkedin_url  String?
+  source        String   // 'added' | 'research'
+  confidence    String?  // known|high|medium|low|none
+  hubspot_id    String?
+  created_at    DateTime @default(now())
+
+  @@unique([prospect_name, email])
+  @@index([prospect_name])
+  @@map("discovery_contacts")
+}

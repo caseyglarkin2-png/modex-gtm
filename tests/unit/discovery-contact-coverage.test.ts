@@ -8,6 +8,9 @@ const mockedPrisma = {
   draftQueueItem: {
     groupBy: vi.fn(),
   },
+  discoveryContact: {
+    findMany: vi.fn(),
+  },
 };
 
 vi.mock('@/lib/prisma', () => ({ prisma: mockedPrisma }));
@@ -145,6 +148,7 @@ describe('loadContactCoverage', () => {
       { account_name: 'Acme Co', to_email: 'jane@acme.com' },
       { account_name: 'Acme Co', to_email: 'john@acme.com' },
     ]);
+    mockedPrisma.discoveryContact.findMany.mockResolvedValue([]);
 
     const row = mkCurated({ name: 'Acme Co', placeId: 'acme' });
     const out = await loadContactCoverage([row]);
@@ -157,10 +161,31 @@ describe('loadContactCoverage', () => {
     expect(groupByArgs.where).toEqual({ status: { not: 'skipped' } });
   });
 
+  it('unions saved DiscoveryContact rows: emails dedup across sources, email-less rows count once', async () => {
+    mockedPrisma.persona.findMany.mockResolvedValue([
+      { persona_id: 'p1', account_name: 'Acme Co', email: 'jane@acme.com' },
+    ]);
+    mockedPrisma.draftQueueItem.groupBy.mockResolvedValue([]);
+    mockedPrisma.discoveryContact.findMany.mockResolvedValue([
+      // Same person as the Persona row (case differs) — must not double count.
+      { id: 1, prospect_name: 'Acme Co', email: 'Jane@acme.com' },
+      // New person with an email.
+      { id: 2, prospect_name: 'Acme Co', email: 'vp.ops@acme.com' },
+      // Email-less saved find — counts once via its saved:<id> identity.
+      { id: 3, prospect_name: 'Acme Co', email: null },
+    ]);
+
+    const row = mkCurated({ name: 'Acme Co', placeId: 'acme' });
+    const out = await loadContactCoverage([row]);
+
+    expect(out.get('acme')).toBe(3);
+  });
+
   it('fails soft: any Prisma error returns an empty Map and warns', async () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
     mockedPrisma.persona.findMany.mockRejectedValue(new Error('no database'));
     mockedPrisma.draftQueueItem.groupBy.mockResolvedValue([]);
+    mockedPrisma.discoveryContact.findMany.mockResolvedValue([]);
 
     const out = await loadContactCoverage([mkCurated({ placeId: 'x' })]);
 

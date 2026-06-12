@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
-import { ListPlus, Loader2, Mail, Plus, Linkedin, Sparkles } from 'lucide-react';
+import { Check, ListPlus, Loader2, Mail, Plus, Linkedin, Save, Sparkles } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -11,7 +11,7 @@ import { buildOutreach } from '@/lib/discovery/outreach';
 import { assignCommitteeAngles } from '@/lib/discovery/angles';
 import type { RankedRow } from '@/lib/discovery/scoring';
 import type { ProspectContact } from '@/lib/discovery/contacts';
-import { findProspectContacts, inferContactEmail, researchProspectContacts, type ProspectContactsResult } from './actions';
+import { findProspectContacts, inferContactEmail, researchProspectContacts, saveProspectContact, type ProspectContactsResult } from './actions';
 import { addToQueue } from './queue-actions';
 
 /** Maps dedup reason codes from addToQueue to rep-friendly text. */
@@ -27,6 +27,7 @@ const SOURCE_LABEL: Record<ProspectContact['source'], string> = {
   hubspot: 'HubSpot',
   added: 'Added',
   research: 'AI · verify',
+  saved: 'Saved',
 };
 
 /** Reliable LinkedIn people-search for a researched name (model URLs can be wrong). */
@@ -63,6 +64,10 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
   const [queuingKey, setQueuingKey] = useState<string | null>(null);
   const [queuedKeys, setQueuedKeys] = useState<Set<string>>(new Set());
   const [queuingAll, setQueuingAll] = useState(false);
+  // nameKey -> save round-trip result, for the per-row "Saved" state.
+  const [savedByKey, setSavedByKey] = useState<Map<string, { hubspotUrl?: string }>>(new Map());
+  const [savingKey, setSavingKey] = useState<string | null>(null);
+  const [savingAll, setSavingAll] = useState(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -70,6 +75,7 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
     setAdded([]);
     setResearched([]);
     setResearchDone(false);
+    setSavedByKey(new Map());
     setLoading(true);
     findProspectContacts({ company: prospect.name, accountSlug: prospect.existingAccountSlug })
       .then((d) => { if (!cancelled) setData(d); })
@@ -109,6 +115,50 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
     }
   }
 
+  /** Persist a panel contact as a durable DiscoveryContact (+ guarded HubSpot upsert). */
+  async function persistContact(c: ProspectContact): Promise<boolean> {
+    const res = await saveProspectContact({
+      prospectName: prospect.name,
+      name: c.name,
+      title: c.title,
+      email: c.email ?? undefined,
+      linkedinUrl: c.linkedinUrl,
+      source: c.source === 'added' ? 'added' : 'research',
+      confidence: c.confidence,
+    });
+    if (res.ok) {
+      const key = nameKey(c.name);
+      setSavedByKey((prev) => new Map(prev).set(key, { hubspotUrl: res.hubspotUrl }));
+      return true;
+    }
+    toast.error(res.reason === 'unauthenticated' ? 'Sign in to save' : 'Save failed');
+    return false;
+  }
+
+  async function handleSave(c: ProspectContact) {
+    const key = nameKey(c.name);
+    setSavingKey(key);
+    try {
+      await persistContact(c);
+    } finally {
+      setSavingKey(null);
+    }
+  }
+
+  async function handleSaveAll() {
+    setSavingAll(true);
+    try {
+      let saved = 0;
+      for (const c of researched) {
+        if (savedByKey.has(nameKey(c.name))) continue;
+        if (await persistContact(c)) saved += 1;
+      }
+      if (saved > 0) toast.success(`${saved} saved`);
+    } finally {
+      setSavingAll(false);
+    }
+  }
+
   async function handleAdd() {
     if (!form.firstName.trim() || !form.lastName.trim()) return;
     setAdding(true);
@@ -119,21 +169,22 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
         company: prospect.name,
         accountSlug: prospect.existingAccountSlug,
       });
-      setAdded((prev) => [
-        {
-          name: `${form.firstName} ${form.lastName}`.trim(),
-          firstName: form.firstName,
-          lastName: form.lastName,
-          title: form.title || undefined,
-          email: inf.email,
-          confidence: inf.confidence,
-          emailBasis: inf.basis,
-          source: 'added',
-          linkedinUrl: form.linkedinUrl || undefined,
-        },
-        ...prev,
-      ]);
+      const contact: ProspectContact = {
+        name: `${form.firstName} ${form.lastName}`.trim(),
+        firstName: form.firstName,
+        lastName: form.lastName,
+        title: form.title || undefined,
+        email: inf.email,
+        confidence: inf.confidence,
+        emailBasis: inf.basis,
+        source: 'added',
+        linkedinUrl: form.linkedinUrl || undefined,
+      };
+      setAdded((prev) => [contact, ...prev]);
       setForm({ firstName: '', lastName: '', title: '', linkedinUrl: '' });
+      // The user already acted; persist without an extra confirm. Fire-and-forget
+      // so the form frees up immediately; the row flips to Saved when it lands.
+      void persistContact(contact);
     } finally {
       setAdding(false);
     }
@@ -245,6 +296,10 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
         <ul className="space-y-1.5">
           {contacts.map((c, i) => {
             const conf = CONFIDENCE_STYLE[c.confidence] ?? CONFIDENCE_STYLE.none;
+            const saveKey = nameKey(c.name);
+            const savedInfo =
+              savedByKey.get(saveKey) ?? (c.source === 'saved' ? { hubspotUrl: c.hubspotUrl } : undefined);
+            const savable = (c.source === 'research' || c.source === 'added') && !savedInfo;
             return (
               <li key={`${c.name}-${i}`} className="flex items-start justify-between gap-2 text-sm">
                 <div className="min-w-0">
@@ -283,11 +338,40 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
                     <div className="text-[11px] text-[var(--muted-foreground)]">{c.emailBasis ?? 'no email'}</div>
                   )}
                 </div>
-                {c.email && (
+                {(c.email || savable || savedInfo) && (
                   <div className="flex shrink-0 items-center gap-1.5">
+                    {savedInfo ? (
+                      <span className="flex items-center gap-1 text-[10px] text-emerald-600">
+                        <Check className="h-3 w-3" /> Saved
+                        {savedInfo.hubspotUrl && (
+                          <a
+                            href={savedInfo.hubspotUrl}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="underline hover:text-emerald-700"
+                          >
+                            HubSpot
+                          </a>
+                        )}
+                      </span>
+                    ) : savable ? (
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="h-7 gap-1 text-xs"
+                        onClick={() => handleSave(c)}
+                        disabled={savingKey === saveKey || savingAll}
+                      >
+                        {savingKey === saveKey ? <Loader2 className="h-3 w-3 animate-spin" /> : <Save className="h-3 w-3" />}
+                        Save
+                      </Button>
+                    ) : null}
+                    {c.email && (
                     <Button size="sm" variant="outline" className="h-7 gap-1 text-xs" onClick={() => handleEmail(c)}>
                       <Mail className="h-3 w-3" /> Email
                     </Button>
+                    )}
+                    {c.email && (
                     <Button
                       size="sm"
                       variant="outline"
@@ -298,6 +382,7 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
                       {queuingKey === `${c.name}-${i}` ? <Loader2 className="h-3 w-3 animate-spin" /> : <ListPlus className="h-3 w-3" />}
                       {queuedKeys.has(`${c.name}-${i}`) ? 'Queued' : 'Queue'}
                     </Button>
+                    )}
                   </div>
                 )}
               </li>
@@ -317,7 +402,21 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
       ) : researched.length === 0 ? (
         <p className="text-[11px] text-[var(--muted-foreground)]">No contacts found via research — add one manually below.</p>
       ) : (
-        <p className="text-[11px] text-violet-600">{researched.length} AI-proposed contacts added — verify on LinkedIn before sending.</p>
+        <div className="flex items-center justify-between gap-2">
+          <p className="text-[11px] text-violet-600">{researched.length} AI-proposed contacts added — verify on LinkedIn before sending.</p>
+          {researched.some((c) => !savedByKey.has(nameKey(c.name))) && (
+            <Button
+              size="sm"
+              variant="outline"
+              className="h-7 shrink-0 gap-1 text-xs"
+              onClick={handleSaveAll}
+              disabled={savingAll || savingKey !== null}
+            >
+              {savingAll ? <Loader2 className="h-3 w-3 animate-spin" /> : <Save className="h-3 w-3" />}
+              Save all
+            </Button>
+          )}
+        </div>
       )}
 
       {/* Add contact */}

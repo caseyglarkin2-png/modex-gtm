@@ -12,6 +12,7 @@ import { dominantDomain, dedupeContacts, type ProspectContact } from '@/lib/disc
 import { COMPANY_DOMAIN_SEED, EMAIL_PATTERN_SEED, companyKey } from '@/lib/discovery/company-domains';
 import { auth } from '@/lib/auth';
 import { prepareClawdDispatch, dispatchDraftBatch, type DraftBatchRow } from '@/lib/discovery/clawd-dispatch';
+import { upsertContactFromQueueItem } from '@/lib/queue/contact-upsert';
 
 /** Minimal session shape we read off `auth()` (it carries an email + attached role). */
 type SessionLike = { user?: { email?: string | null; role?: string } } | null;
@@ -248,9 +249,45 @@ export interface ProspectContactsResult {
   contacts: ProspectContact[];
 }
 
-/** The contact waterfall for a prospect: our records + HubSpot read, deduped. */
+/** Confidence bands a saved row may carry back into the panel. */
+const SAVED_CONFIDENCES = new Set(['known', 'high', 'medium', 'low', 'none']);
+
+/** Saved drawer finds (manual add + AI research) for this prospect, fail-soft. */
+async function loadSavedContacts(prospectName: string): Promise<ProspectContact[]> {
+  try {
+    const rows = await prisma.discoveryContact.findMany({
+      where: { prospect_name: prospectName },
+      orderBy: { created_at: 'desc' },
+      take: 25,
+    });
+    const portal = getPortalId();
+    return rows.map((r) => ({
+      name: r.name,
+      title: r.title ?? undefined,
+      email: r.email,
+      confidence: (r.confidence && SAVED_CONFIDENCES.has(r.confidence)
+        ? r.confidence
+        : r.email
+          ? 'medium'
+          : 'none') as ProspectContact['confidence'],
+      source: 'saved' as const,
+      linkedinUrl: r.linkedin_url ?? undefined,
+      hubspotUrl:
+        r.hubspot_id && portal
+          ? `https://app.hubspot.com/contacts/${portal}/contact/${r.hubspot_id}`
+          : undefined,
+    }));
+  } catch {
+    return [];
+  }
+}
+
+/** The contact waterfall for a prospect: our records + HubSpot read + saved drawer finds, deduped. */
 export async function findProspectContacts(input: { company: string; accountSlug?: string }): Promise<ProspectContactsResult> {
-  const ctx = await resolveCompanyEmailContext(input.company, input.accountSlug);
+  const [ctx, saved] = await Promise.all([
+    resolveCompanyEmailContext(input.company, input.accountSlug),
+    loadSavedContacts(input.company),
+  ]);
 
   const hubspot: ProspectContact[] = (await getAccountContacts(input.company)).map((c) => ({
     name: c.name,
@@ -274,8 +311,130 @@ export async function findProspectContacts(input: { company: string; accountSlug
     domain: ctx.domain,
     pattern,
     patternBasis,
-    contacts: dedupeContacts([...ctx.records, ...hubspot]).slice(0, 12),
+    contacts: dedupeContacts([...ctx.records, ...hubspot, ...saved]).slice(0, 12),
   };
+}
+
+export interface SaveProspectContactInput {
+  prospectName: string;
+  name: string;
+  title?: string;
+  email?: string | null;
+  linkedinUrl?: string;
+  source: 'added' | 'research';
+  confidence?: string;
+}
+
+export type SaveProspectContactResult =
+  | { ok: true; id: number; hubspotId?: string; hubspotUrl?: string }
+  | { ok: false; reason: string };
+
+/**
+ * Persist a contact found in the prospect drawer (manual add or AI research)
+ * as a durable DiscoveryContact row, so it survives the drawer closing.
+ * When an email is present, also runs the guarded Persona + HubSpot contact
+ * upsert (fill-only on existing CRM records, no create for low confidence,
+ * blocked-domain guard) and stores any returned HubSpot id. Never throws to
+ * the client; a failed CRM round-trip still saves the local row.
+ */
+export async function saveProspectContact(
+  input: SaveProspectContactInput,
+): Promise<SaveProspectContactResult> {
+  try {
+    const session = (await auth()) as SessionLike;
+    if (!session?.user?.email) return { ok: false, reason: 'unauthenticated' };
+
+    const prospectName = input.prospectName?.trim();
+    const name = input.name?.trim();
+    if (!prospectName || !name) return { ok: false, reason: 'invalid' };
+    if (input.source !== 'added' && input.source !== 'research') {
+      return { ok: false, reason: 'invalid' };
+    }
+    const email = input.email?.trim().toLowerCase() || null;
+    const confidence =
+      input.confidence && SAVED_CONFIDENCES.has(input.confidence) ? input.confidence : null;
+
+    // Best-effort Persona + guarded HubSpot upsert first, so a returned id can
+    // land on the row in one write. A blocked or failed upsert never blocks
+    // the local save.
+    let hubspotId: string | undefined;
+    if (email) {
+      try {
+        const up = await upsertContactFromQueueItem({
+          toEmail: email,
+          personaName: name,
+          personaTitle: input.title ?? null,
+          accountName: prospectName,
+          contactConfidence: confidence,
+        });
+        hubspotId = up.hubspotId;
+      } catch {
+        // fail-soft: the durable local row still saves below
+      }
+    }
+
+    // Dedup: by (prospect, lowercased email) when an email exists, falling
+    // back to (prospect, name) so a later save with an email upgrades an
+    // earlier email-less row instead of duplicating the person.
+    const existing =
+      (email
+        ? await prisma.discoveryContact.findFirst({
+            where: { prospect_name: prospectName, email },
+            select: { id: true },
+          })
+        : null) ??
+      (await prisma.discoveryContact.findFirst({
+        where: { prospect_name: prospectName, name },
+        select: { id: true },
+      }));
+
+    const title = input.title?.trim() || null;
+    const linkedinUrl = input.linkedinUrl?.trim() || null;
+
+    const row = existing
+      ? await prisma.discoveryContact.update({
+          where: { id: existing.id },
+          // Re-saves only add information: a sparse save never nulls out an
+          // email/title/link (or hubspot_id) a prior save stored.
+          data: {
+            name,
+            source: input.source,
+            ...(email ? { email } : {}),
+            ...(title ? { title } : {}),
+            ...(linkedinUrl ? { linkedin_url: linkedinUrl } : {}),
+            ...(confidence ? { confidence } : {}),
+            ...(hubspotId ? { hubspot_id: hubspotId } : {}),
+          },
+          select: { id: true, hubspot_id: true },
+        })
+      : await prisma.discoveryContact.create({
+          data: {
+            prospect_name: prospectName,
+            name,
+            title,
+            email,
+            linkedin_url: linkedinUrl,
+            source: input.source,
+            confidence,
+            ...(hubspotId ? { hubspot_id: hubspotId } : {}),
+          },
+          select: { id: true, hubspot_id: true },
+        });
+
+    const finalHubspotId = row.hubspot_id ?? undefined;
+    const portal = finalHubspotId ? getPortalId() : null;
+    return {
+      ok: true,
+      id: row.id,
+      hubspotId: finalHubspotId,
+      hubspotUrl:
+        finalHubspotId && portal
+          ? `https://app.hubspot.com/contacts/${portal}/contact/${finalHubspotId}`
+          : undefined,
+    };
+  } catch (err) {
+    return { ok: false, reason: err instanceof Error ? err.message : String(err) };
+  }
 }
 
 /** Infer the email for a manually-added contact at a prospect company. */

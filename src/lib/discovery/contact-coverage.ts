@@ -1,8 +1,9 @@
 /**
  * Per-row contact coverage for the discovery worklist. Counts the distinct
- * reachable people we already hold for each prospect — Persona research rows
- * plus clawd-sourced draft-queue recipients — unioned by lowercased email so
- * the same person never counts twice across sources. A persona without an
+ * reachable people we already hold for each prospect — Persona research rows,
+ * clawd-sourced draft-queue recipients, plus saved drawer finds
+ * (DiscoveryContact: manual add + AI research) — unioned by lowercased email
+ * so the same person never counts twice across sources. A record without an
  * email still counts as 1: a known person without an address is a contact
  * lead, not a gap.
  *
@@ -92,13 +93,16 @@ export function computeContactCoverage(
 export async function loadContactCoverage(rows: CuratedRow[]): Promise<Map<string, number>> {
   if (rows.length === 0) return new Map();
   try {
-    const [personas, drafts] = await Promise.all([
+    const [personas, drafts, saved] = await Promise.all([
       prisma.persona.findMany({
         select: { persona_id: true, account_name: true, email: true },
       }),
       prisma.draftQueueItem.groupBy({
         by: ['account_name', 'to_email'],
         where: { status: { not: 'skipped' } },
+      }),
+      prisma.discoveryContact.findMany({
+        select: { id: true, prospect_name: true, email: true },
       }),
     ]);
     const records: ContactSourceRecord[] = [
@@ -108,6 +112,13 @@ export async function loadContactCoverage(rows: CuratedRow[]): Promise<Map<strin
         fallbackId: p.persona_id,
       })),
       ...drafts.map((d) => ({ accountName: d.account_name, email: d.to_email })),
+      // Drawer finds (manual add + AI research): the email dedups against the
+      // other sources; an email-less find still counts as one known person.
+      ...saved.map((s) => ({
+        accountName: s.prospect_name,
+        email: s.email,
+        fallbackId: `saved:${s.id}`,
+      })),
     ];
     return computeContactCoverage(rows, records);
   } catch (err) {
