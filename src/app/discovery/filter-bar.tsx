@@ -18,12 +18,16 @@ interface Props {
   minScore: number | null;
   segmentFilter: string | null;
   segmentCounts: Record<ProspectSegment, number>;
+  needsContacts: boolean;
+  needsContactsCount: number;
   corridorNames: string[];
   onTierChange: (tier: string | null) => void;
   onCorridorChange: (corridor: string | null) => void;
   onMinScoreChange: (score: number | null) => void;
   onSegmentChange: (segment: string | null) => void;
+  onNeedsContactsChange: (next: boolean) => void;
   resultCount: number;
+  withContactsCount: number;
 }
 
 const TIERS = ['A', 'B', 'C', 'D'] as const;
@@ -50,14 +54,20 @@ export function FilterBar({
   minScore,
   segmentFilter,
   segmentCounts,
+  needsContacts,
+  needsContactsCount,
   corridorNames,
   onTierChange,
   onCorridorChange,
   onMinScoreChange,
   onSegmentChange,
+  onNeedsContactsChange,
   resultCount,
+  withContactsCount,
 }: Props) {
-  const hasFilters = Boolean(tierFilter || corridorFilter || minScore != null || segmentFilter);
+  const hasFilters = Boolean(
+    tierFilter || corridorFilter || minScore != null || segmentFilter || needsContacts,
+  );
 
   return (
     <div className="flex flex-wrap items-center gap-3" role="group" aria-label="Prospect filters">
@@ -106,6 +116,21 @@ export function FilterBar({
         })}
       </div>
 
+      <button
+        type="button"
+        aria-pressed={needsContacts}
+        aria-label="Needs contacts"
+        onClick={() => onNeedsContactsChange(!needsContacts)}
+        className={`rounded-md border px-2 py-0.5 text-xs font-medium transition ${
+          needsContacts
+            ? 'border-amber-600 bg-amber-600 text-white'
+            : 'border-amber-600/40 text-amber-600 hover:border-amber-600'
+        }`}
+      >
+        Needs contacts
+        <span className="ml-1 text-[10px] opacity-70">{needsContactsCount.toLocaleString()}</span>
+      </button>
+
       <Select
         value={corridorFilter ?? '__all__'}
         onValueChange={(v) => onCorridorChange(v === '__all__' ? null : v)}
@@ -147,6 +172,7 @@ export function FilterBar({
             onCorridorChange(null);
             onMinScoreChange(null);
             onSegmentChange(null);
+            onNeedsContactsChange(false);
           }}
           className="inline-flex items-center gap-1 text-xs text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
         >
@@ -164,7 +190,8 @@ export function FilterBar({
       )}
 
       <span className="ml-auto text-xs text-[var(--muted-foreground)]" aria-live="polite">
-        {resultCount.toLocaleString()} {resultCount === 1 ? 'prospect' : 'prospects'}
+        {resultCount.toLocaleString()} {resultCount === 1 ? 'prospect' : 'prospects'} ·{' '}
+        {withContactsCount.toLocaleString()} of {resultCount.toLocaleString()} have contacts
       </span>
     </div>
   );

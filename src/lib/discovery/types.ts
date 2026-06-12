@@ -110,4 +110,6 @@ export interface CuratedRow extends ProspectRow {
   micrositeSlug?: string;
   /** Live HubSpot deal state for existing accounts (Sprint 5), when available. */
   pipeline?: import('./pipeline-format').PipelineState;
+  /** Distinct known contacts (Persona + draft-queue recipients) attributed to this row. */
+  contactCount?: number;
 }

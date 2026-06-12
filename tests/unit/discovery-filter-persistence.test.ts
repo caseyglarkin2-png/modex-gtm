@@ -13,6 +13,7 @@ const sample: PersistedFilters = {
   segment: 'shipper',
   minScore: 60,
   all: false,
+  needsContacts: true,
 };
 
 describe('filter-persistence', () => {
@@ -34,7 +35,14 @@ describe('filter-persistence', () => {
 
   it('coerces missing or wrong-typed fields to safe defaults', () => {
     const out = parseStoredFilters('{"tier":"B","minScore":"high","corridor":123}');
-    expect(out).toEqual({ tier: 'B', corridor: null, segment: null, minScore: null, all: false });
+    expect(out).toEqual({
+      tier: 'B',
+      corridor: null,
+      segment: null,
+      minScore: null,
+      all: false,
+      needsContacts: false,
+    });
   });
 
   it('preserves a finite minScore of zero', () => {
@@ -44,7 +52,7 @@ describe('filter-persistence', () => {
 
   describe('urlHasFilters', () => {
     it('is true when any filter param is present', () => {
-      for (const key of ['tier', 'corridor', 'segment', 'minScore', 'all']) {
+      for (const key of ['tier', 'corridor', 'segment', 'minScore', 'all', 'needsContacts']) {
         expect(urlHasFilters((k) => (k === key ? 'x' : null))).toBe(true);
       }
     });

@@ -82,6 +82,9 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
   const [corridorFilter, setCorridorFilter] = useState<string | null>(searchParams.get('corridor'));
   const [minScore, setMinScore] = useState<number | null>(initialMinScore);
   const [segmentFilter, setSegmentFilter] = useState<string | null>(searchParams.get('segment'));
+  const [needsContacts, setNeedsContacts] = useState<boolean>(
+    searchParams.get('needsContacts') === '1',
+  );
   const [weighting, setWeighting] = useState<string>(searchParams.get('weight') ?? DEFAULT_WEIGHTING);
   // Daily slice on by default; ?all=1 (or the widen toggle) opens the full set.
   const [dailySlice, setDailySlice] = useState<boolean>(searchParams.get('all') !== '1');
@@ -112,6 +115,7 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
         setSegmentFilter(stored.segment);
         setMinScore(stored.minScore);
         setDailySlice(!stored.all);
+        setNeedsContacts(stored.needsContacts);
       }
     }
     didRestoreFilters.current = true;
@@ -131,12 +135,13 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
           segment: segmentFilter,
           minScore,
           all: !dailySlice,
+          needsContacts,
         }),
       );
     } catch {
       // ignore unavailable storage
     }
-  }, [tierFilter, corridorFilter, segmentFilter, minScore, dailySlice]);
+  }, [tierFilter, corridorFilter, segmentFilter, minScore, dailySlice, needsContacts]);
 
   // Populate the Outbox badge count on mount so it's visible before the tab opens.
   useEffect(() => {
@@ -151,6 +156,13 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
     for (const r of rows) counts[r.segment] += 1;
     return counts;
   }, [rows]);
+
+  // Rows with no known contacts, for the "Needs contacts" chip (computed over
+  // the full curated set, like the segment counts).
+  const needsContactsCount = useMemo(
+    () => rows.reduce((n, r) => n + ((r.contactCount ?? 0) === 0 ? 1 : 0), 0),
+    [rows],
+  );
 
   // When the daily slice is on (and the user hasn't drilled into a specific tier
   // or corridor), narrow to Casey's sellable set: Tier A/B near a reference.
@@ -167,8 +179,9 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
         excludeParcel: true,
         tiers: sliceActive ? SLICE_TIERS : undefined,
         maxDistance: sliceActive ? SLICE_MAX_DISTANCE_MI : undefined,
+        needsContacts,
       }),
-    [rows, tierFilter, corridorFilter, minScore, segmentFilter, sliceActive],
+    [rows, tierFilter, corridorFilter, minScore, segmentFilter, sliceActive, needsContacts],
   );
 
   // Re-aim: rank the filtered slice by the proximity-led, re-weightable worklist
@@ -194,6 +207,12 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
   const displayed = useMemo(
     () => (onlyStale ? ordered.filter((r) => r.pipeline?.isStale) : ordered),
     [ordered, onlyStale],
+  );
+
+  // Coverage summary over the shown rows: how many already have a person to reach.
+  const withContactsCount = useMemo(
+    () => displayed.filter((r) => (r.contactCount ?? 0) > 0).length,
+    [displayed],
   );
 
   // "Hand to Clawd" — send the current target slice (pinned subset if any pins,
@@ -259,6 +278,11 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
   const handleSegmentChange = useCallback((segment: string | null) => {
     setSegmentFilter(segment);
     syncUrl({ segment });
+  }, []);
+
+  const handleNeedsContactsChange = useCallback((next: boolean) => {
+    setNeedsContacts(next);
+    syncUrl({ needsContacts: next ? '1' : null });
   }, []);
 
   const handleWeightingChange = useCallback((value: string) => {
@@ -365,12 +389,16 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
               minScore={minScore}
               segmentFilter={segmentFilter}
               segmentCounts={segmentCounts}
+              needsContacts={needsContacts}
+              needsContactsCount={needsContactsCount}
               corridorNames={corridorNames}
               onTierChange={handleTierChange}
               onCorridorChange={handleCorridorChange}
               onMinScoreChange={handleMinScoreChange}
               onSegmentChange={handleSegmentChange}
+              onNeedsContactsChange={handleNeedsContactsChange}
               resultCount={displayed.length}
+              withContactsCount={withContactsCount}
             />
             <WeightControl weighting={weighting} onChange={handleWeightingChange} />
           </div>

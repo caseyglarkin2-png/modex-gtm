@@ -25,6 +25,8 @@ export interface ProspectFilters {
   tiers?: string[];
   /** Keep only rows within this many miles of the nearest reference site. */
   maxDistance?: number;
+  /** Keep only rows with no known contacts (an undefined contactCount counts as 0). */
+  needsContacts?: boolean;
 }
 
 const CONFIDENCE_RANK: Record<Confidence, number> = { low: 0, medium: 1, high: 2 };
@@ -55,6 +57,11 @@ export function filterProspects<T extends ProspectRow>(rows: T[], filters: Prosp
     result = result.filter((r) => (r as Partial<{ segment: string }>).segment === filters.segment);
   } else if (filters.excludeParcel) {
     result = result.filter((r) => (r as Partial<{ segment: string }>).segment !== 'parcel');
+  }
+  if (filters.needsContacts) {
+    result = result.filter(
+      (r) => ((r as Partial<{ contactCount: number }>).contactCount ?? 0) === 0,
+    );
   }
   if (filters.minConfidence) {
     const floor = CONFIDENCE_RANK[filters.minConfidence];

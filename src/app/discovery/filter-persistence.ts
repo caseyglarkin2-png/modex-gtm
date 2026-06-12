@@ -16,10 +16,12 @@ export interface PersistedFilters {
   minScore: number | null;
   /** true when widened to all sites (the daily slice is off). */
   all: boolean;
+  /** true when narrowed to rows with no known contacts. */
+  needsContacts: boolean;
 }
 
 /** The URL params that, when present, make the URL authoritative for the view. */
-const FILTER_URL_KEYS = ['tier', 'corridor', 'segment', 'minScore', 'all'] as const;
+const FILTER_URL_KEYS = ['tier', 'corridor', 'segment', 'minScore', 'all', 'needsContacts'] as const;
 
 /**
  * True when the URL already carries any filter param — then the URL is the
@@ -54,5 +56,6 @@ export function parseStoredFilters(raw: string | null): PersistedFilters | null 
     segment: typeof o.segment === 'string' ? o.segment : null,
     minScore: typeof o.minScore === 'number' && Number.isFinite(o.minScore) ? o.minScore : null,
     all: o.all === true,
+    needsContacts: o.needsContacts === true,
   };
 }

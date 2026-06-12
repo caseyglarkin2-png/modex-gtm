@@ -88,3 +88,31 @@ describe('filterProspects — daily slice (tiers + maxDistance)', () => {
     expect(out.map((r) => r.name).sort()).toEqual(['A near', 'B near']);
   });
 });
+
+describe('filterProspects — needsContacts', () => {
+  const rows = [
+    mkCurated({ name: 'Covered', contactCount: 3 }),
+    mkCurated({ name: 'Zero', contactCount: 0 }),
+    mkCurated({ name: 'Unknown' }),
+  ];
+
+  it('keeps only rows with no known contacts, treating undefined as 0', () => {
+    const out = filterProspects(rows, { needsContacts: true });
+    expect(out.map((r) => r.name).sort()).toEqual(['Unknown', 'Zero']);
+  });
+
+  it('is a no-op when the flag is off', () => {
+    expect(filterProspects(rows, { needsContacts: false })).toHaveLength(3);
+    expect(filterProspects(rows, {})).toHaveLength(3);
+  });
+
+  it('composes with other predicates', () => {
+    const mixed = [
+      mkCurated({ name: 'A no contacts', tier: 'A', contactCount: 0 }),
+      mkCurated({ name: 'A covered', tier: 'A', contactCount: 2 }),
+      mkCurated({ name: 'C no contacts', tier: 'C', contactCount: 0 }),
+    ];
+    const out = filterProspects(mixed, { tier: 'A', needsContacts: true });
+    expect(out.map((r) => r.name)).toEqual(['A no contacts']);
+  });
+});

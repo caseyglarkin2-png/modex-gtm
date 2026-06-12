@@ -111,6 +111,25 @@ function buildColumns(
     ),
   },
   {
+    key: 'contactCount',
+    label: 'Contacts',
+    sortable: true,
+    className: 'w-20 text-center',
+    render: (r) => {
+      const count = r.contactCount ?? 0;
+      return count === 0 ? (
+        <span
+          className="font-mono text-xs font-semibold text-amber-600"
+          title="No known contacts. Source people before outreach."
+        >
+          0
+        </span>
+      ) : (
+        <span className="font-mono text-xs">{count}</span>
+      );
+    },
+  },
+  {
     key: 'confidence',
     label: 'Conf.',
     sortable: true,

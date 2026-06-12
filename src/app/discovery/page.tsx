@@ -5,6 +5,7 @@ import { Compass, Layers, Radar, Trophy } from 'lucide-react';
 import { loadLatestScored, getDiscoverySummary, buildCuratedRows } from '@/lib/discovery/data';
 import { summarizeCuration } from '@/lib/discovery/curate';
 import { enrichRowsWithPipeline } from '@/lib/discovery/enrich';
+import { loadContactCoverage } from '@/lib/discovery/contact-coverage';
 import { DiscoveryHub } from './discovery-hub';
 
 export const dynamic = 'force-dynamic';
@@ -32,7 +33,15 @@ export default async function DiscoveryPage() {
   }
 
   const summary = getDiscoverySummary(output);
-  const curatedRows = await enrichRowsWithPipeline(buildCuratedRows(output));
+  const baseRows = buildCuratedRows(output);
+  const [enrichedRows, contactCoverage] = await Promise.all([
+    enrichRowsWithPipeline(baseRows),
+    loadContactCoverage(baseRows),
+  ]);
+  const curatedRows = enrichedRows.map((r) => ({
+    ...r,
+    contactCount: contactCoverage.get(r.placeId) ?? 0,
+  }));
   const curation = summarizeCuration(curatedRows);
   // Distinct accounts with a live deal (each account's pipeline state is a shared
   // object, so de-duping by reference counts accounts, not sites).
