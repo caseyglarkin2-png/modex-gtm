@@ -38,6 +38,7 @@ function toInput(
     invariantAccountName: (item.account_name as string | null) ?? null,
     personaName: (item.persona_name as string | null) ?? null,
     personaId: (item.persona_id as number | null) ?? undefined,
+    campaignTag: (item.campaign_tag as string | null) ?? null,
     headers: { 'X-Queue-Idempotency': item.idempotency_key as string },
     ...(variantKey
       ? {
@@ -57,7 +58,7 @@ function toInput(
  * `SendDeps.send` signature stays `{ providerMessageId, threadId }`).
  */
 export function prodSendDeps(prisma: any): SendDeps {
-  let ctx: { html: string; hubspotEngagementId: string | null; sanitizedCc: string[] } | null = null;
+  let ctx: { html: string; hubspotEngagementId: string | null; sanitizedCc: string[]; trackingId: string | null } | null = null;
   return {
     claim: (id) =>
       prisma.draftQueueItem
@@ -70,7 +71,7 @@ export function prodSendDeps(prisma: any): SendDeps {
     guard: async (item) => {
       const g = await evaluateSendGuards(prisma, toInput(item));
       if (!g.ok) return { ok: false, reason: g.block.code ?? 'blocked' };
-      ctx = { html: '', hubspotEngagementId: null, sanitizedCc: g.sanitizedCc };
+      ctx = { html: '', hubspotEngagementId: null, sanitizedCc: g.sanitizedCc, trackingId: null };
       // Reply-pause: don't send if the recipient has replied since this item was queued.
       // (Inbound-only — a sequence follow-up's own outbound thread must NOT trip this.)
       const inboundAt = await newestInboundFrom(item.to_email as string);
@@ -130,6 +131,7 @@ export function prodSendDeps(prisma: any): SendDeps {
         html: r.html,
         hubspotEngagementId: r.hubspotEngagementId,
         sanitizedCc: ctx?.sanitizedCc ?? [],
+        trackingId: r.trackingId,
       };
       return { providerMessageId: r.providerMessageId, threadId: r.threadId };
     },
@@ -140,6 +142,7 @@ export function prodSendDeps(prisma: any): SendDeps {
         ...sent,
         html: ctx?.html ?? '',
         hubspotEngagementId: ctx?.hubspotEngagementId ?? null,
+        trackingId: ctx?.trackingId ?? null,
       });
       return { emailLogId: r.emailLogId };
     },

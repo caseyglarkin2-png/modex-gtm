@@ -82,6 +82,7 @@ export async function addOne(
         subject: input.subject,
         body: input.body,
         image_url: input.imageUrl ?? null,
+        campaign_tag: input.campaignTag ?? null,
         source: input.source ?? 'casey',
         owner,
         created_by: owner,

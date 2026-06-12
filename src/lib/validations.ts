@@ -321,6 +321,8 @@ export const QueueAddSchema = z.object({
   imageUrl: z.string().url().optional(),
   source: z.enum(['casey', 'clawd']).default('casey'),
   owner: z.string().email().optional(),
+  /** Free-form campaign cohort label (e.g. 'allentown-tour'); rolls up engagement per campaign. */
+  campaignTag: z.string().min(1).max(120).optional(),
 });
 export const QueueAddBatchSchema = z.object({ items: z.array(QueueAddSchema).min(1).max(200) });
 export type QueueAddInput = z.infer<typeof QueueAddSchema>;
