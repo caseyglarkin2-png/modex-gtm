@@ -6,6 +6,11 @@ on:
   push:
     branches: [main]
 
+# Burst pushes cancel superseded runs instead of billing for stale ones.
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   typecheck:
     runs-on: ubuntu-latest

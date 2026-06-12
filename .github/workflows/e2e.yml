@@ -1,12 +1,17 @@
 name: E2E Click Tests
 
+# Cost note (2026-06-12): per-push E2E was ~100 min/day of Actions
+# at this repo's push cadence. Nightly + manual covers the regression
+# net; run `gh workflow run e2e.yml` before a risky ship.
 on:
-  push:
-    branches: [main]
   workflow_dispatch:
   schedule:
-    # Every Monday at 7am ET (12:00 UTC) — weekly health check before outreach day
-    - cron: '0 12 * * 1'
+    # Nightly at 6am ET (10:00 UTC) — daily health check before the workday
+    - cron: '0 10 * * *'
+
+concurrency:
+  group: e2e-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   e2e:
