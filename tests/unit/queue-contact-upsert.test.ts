@@ -8,11 +8,17 @@ const prismaMock = vi.hoisted(() => ({
   },
 }));
 const upsertContactMock = vi.hoisted(() => vi.fn());
+const searchContactByEmailMock = vi.hoisted(() => vi.fn());
+const updateContactPropertiesMock = vi.hoisted(() => vi.fn());
 const isConfiguredMock = vi.hoisted(() => vi.fn(() => true));
 const flags = vi.hoisted(() => ({ HUBSPOT_SYNC_ENABLED: true }));
 
 vi.mock('@/lib/prisma', () => ({ prisma: prismaMock }));
-vi.mock('@/lib/hubspot/contacts', () => ({ upsertContact: upsertContactMock }));
+vi.mock('@/lib/hubspot/contacts', () => ({
+  upsertContact: upsertContactMock,
+  searchContactByEmail: searchContactByEmailMock,
+  updateContactProperties: updateContactPropertiesMock,
+}));
 vi.mock('@/lib/hubspot/client', () => ({ isHubSpotConfigured: isConfiguredMock }));
 vi.mock('@/lib/feature-flags', () => ({
   get HUBSPOT_SYNC_ENABLED() {
@@ -29,6 +35,23 @@ const baseItem = {
   accountName: 'Acme',
 };
 
+/** An existing HubSpot contact with every clawd-sourced property curated. */
+function curatedHubSpotContact(overrides: Record<string, string | boolean> = {}) {
+  return {
+    id: 'hs-existing-42',
+    email: 'jane.doe@acme.com',
+    firstname: 'Jane',
+    lastname: 'Doe',
+    company: 'Acme Corporation (curated)',
+    jobtitle: 'Chief Operating Officer',
+    phone: '',
+    hs_lead_status: '',
+    lifecyclestage: '',
+    hs_email_optout: false,
+    ...overrides,
+  };
+}
+
 describe('upsertContactFromQueueItem', () => {
   beforeEach(() => {
     vi.clearAllMocks();
@@ -37,13 +60,15 @@ describe('upsertContactFromQueueItem', () => {
     prismaMock.persona.findFirst.mockResolvedValue(null);
     prismaMock.persona.create.mockResolvedValue({ id: 7 });
     prismaMock.persona.update.mockResolvedValue({ id: 7 });
+    searchContactByEmailMock.mockResolvedValue(null);
     upsertContactMock.mockResolvedValue('hs-501');
+    updateContactPropertiesMock.mockResolvedValue(undefined);
   });
 
   it('creates a persona when none exists and persists the HubSpot id', async () => {
     const result = await upsertContactFromQueueItem(baseItem);
 
-    expect(result).toEqual({ ok: true, personaCreated: true, hubspotId: 'hs-501' });
+    expect(result).toEqual({ ok: true, personaCreated: true, personaOk: true, hubspotId: 'hs-501' });
     expect(prismaMock.persona.findFirst).toHaveBeenCalledWith(
       expect.objectContaining({ where: { email: 'jane.doe@acme.com' } }),
     );
@@ -58,6 +83,7 @@ describe('upsertContactFromQueueItem', () => {
         }),
       }),
     );
+    expect(searchContactByEmailMock).toHaveBeenCalledWith('jane.doe@acme.com');
     expect(prismaMock.persona.update).toHaveBeenCalledWith({
       where: { id: 7 },
       data: { hubspot_contact_id: 'hs-501' },
@@ -73,7 +99,7 @@ describe('upsertContactFromQueueItem', () => {
 
     const result = await upsertContactFromQueueItem(baseItem);
 
-    expect(result).toEqual({ ok: true, personaCreated: false, hubspotId: 'hs-501' });
+    expect(result).toEqual({ ok: true, personaCreated: false, personaOk: true, hubspotId: 'hs-501' });
     expect(prismaMock.persona.create).not.toHaveBeenCalled();
     expect(prismaMock.persona.update).toHaveBeenCalledTimes(1);
     expect(prismaMock.persona.update).toHaveBeenCalledWith({
@@ -102,7 +128,8 @@ describe('upsertContactFromQueueItem', () => {
 
     const result = await upsertContactFromQueueItem(baseItem);
 
-    expect(result).toEqual({ ok: true, personaCreated: true, hubspotId: undefined });
+    expect(result).toEqual({ ok: true, personaCreated: true, personaOk: true, hubspotId: undefined });
+    expect(searchContactByEmailMock).not.toHaveBeenCalled();
     expect(upsertContactMock).not.toHaveBeenCalled();
   });
 
@@ -111,7 +138,7 @@ describe('upsertContactFromQueueItem', () => {
 
     const result = await upsertContactFromQueueItem(baseItem);
 
-    expect(result).toEqual({ ok: true, personaCreated: true, hubspotId: undefined });
+    expect(result).toEqual({ ok: true, personaCreated: true, personaOk: true, hubspotId: undefined });
     expect(upsertContactMock).not.toHaveBeenCalled();
   });
 
@@ -121,9 +148,9 @@ describe('upsertContactFromQueueItem', () => {
 
     const result = await upsertContactFromQueueItem(baseItem);
 
-    expect(result).toEqual({ ok: true, personaCreated: true, hubspotId: undefined });
+    expect(result).toEqual({ ok: true, personaCreated: true, personaOk: true, hubspotId: undefined });
     expect(warn).toHaveBeenCalledWith(
-      expect.stringContaining('[queue/contact-upsert]'),
+      expect.stringContaining('hubspot upsert failed'),
       expect.any(Error),
     );
     warn.mockRestore();
@@ -135,14 +162,14 @@ describe('upsertContactFromQueueItem', () => {
 
     const result = await upsertContactFromQueueItem(baseItem);
 
-    expect(result).toEqual({ ok: true, personaCreated: false, hubspotId: 'hs-501' });
+    expect(result).toEqual({ ok: true, personaCreated: false, personaOk: false, hubspotId: 'hs-501' });
     expect(upsertContactMock).toHaveBeenCalledWith(
       expect.objectContaining({ email: 'jane.doe@acme.com', company: 'Acme' }),
     );
     // no persona row to backfill, so the id is not persisted locally
     expect(prismaMock.persona.update).not.toHaveBeenCalled();
     expect(warn).toHaveBeenCalledWith(
-      expect.stringContaining('[queue/contact-upsert]'),
+      expect.stringContaining('persona upsert failed'),
       expect.any(Error),
     );
     warn.mockRestore();
@@ -161,7 +188,7 @@ describe('upsertContactFromQueueItem', () => {
       accountName: 'Nestle Distribution Center (Truck Entrance)',
     });
 
-    expect(result).toEqual({ ok: true, personaCreated: false, hubspotId: 'hs-501' });
+    expect(result).toEqual({ ok: true, personaCreated: false, personaOk: false, hubspotId: 'hs-501' });
     expect(upsertContactMock).toHaveBeenCalledWith(
       expect.objectContaining({
         email: 'jane.doe@acme.com',
@@ -184,16 +211,16 @@ describe('upsertContactFromQueueItem', () => {
 
     const result = await upsertContactFromQueueItem(baseItem);
 
-    expect(result).toEqual({ ok: false, personaCreated: false, hubspotId: undefined });
+    expect(result).toEqual({ ok: false, personaCreated: false, personaOk: false, hubspotId: undefined });
     expect(warn).toHaveBeenCalledTimes(2);
     warn.mockRestore();
   });
 
-  it('splits a two-token name into firstname and lastname', async () => {
+  it('splits names like every other intake path: first token + last token', async () => {
     await upsertContactFromQueueItem({ ...baseItem, personaName: 'Jane van Doe' });
 
     expect(upsertContactMock).toHaveBeenCalledWith(
-      expect.objectContaining({ firstname: 'Jane van', lastname: 'Doe', company: 'Acme' }),
+      expect.objectContaining({ firstname: 'Jane', lastname: 'Doe', company: 'Acme' }),
     );
   });
 
@@ -212,5 +239,103 @@ describe('upsertContactFromQueueItem', () => {
     expect(call).not.toHaveProperty('firstname');
     expect(call).not.toHaveProperty('lastname');
     expect(call.email).toBe('jane.doe@acme.com');
+  });
+
+  it('still returns ok with the hubspotId when only the local backfill fails', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    // persona create succeeds (id 7); the only persona.update call is the
+    // hubspot_contact_id backfill, which rejects.
+    prismaMock.persona.update.mockRejectedValue(new Error('db went away'));
+
+    const result = await upsertContactFromQueueItem(baseItem);
+
+    expect(result).toEqual({ ok: true, personaCreated: true, personaOk: true, hubspotId: 'hs-501' });
+    expect(warn).toHaveBeenCalledTimes(1);
+    expect(warn).toHaveBeenCalledWith(
+      expect.stringContaining('hubspot_contact_id backfill failed'),
+      expect.any(Error),
+    );
+    warn.mockRestore();
+  });
+
+  it('flag off + persona failure -> counted in neither (personaOk false, no hubspotId)', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    flags.HUBSPOT_SYNC_ENABLED = false;
+    prismaMock.persona.findFirst.mockRejectedValue(new Error('db down'));
+
+    const result = await upsertContactFromQueueItem(baseItem);
+
+    expect(result).toEqual({ ok: false, personaCreated: false, personaOk: false, hubspotId: undefined });
+    expect(searchContactByEmailMock).not.toHaveBeenCalled();
+    expect(upsertContactMock).not.toHaveBeenCalled();
+    warn.mockRestore();
+  });
+
+  it('never overwrites curated properties on an existing HubSpot contact', async () => {
+    searchContactByEmailMock.mockResolvedValue(curatedHubSpotContact());
+
+    const result = await upsertContactFromQueueItem(baseItem);
+
+    // every clawd-sourced property is already curated -> no API update at all
+    expect(updateContactPropertiesMock).not.toHaveBeenCalled();
+    expect(upsertContactMock).not.toHaveBeenCalled();
+    expect(result.hubspotId).toBe('hs-existing-42');
+    expect(result.ok).toBe(true);
+  });
+
+  it('fills only the empty properties on an existing HubSpot contact', async () => {
+    searchContactByEmailMock.mockResolvedValue(
+      curatedHubSpotContact({ lastname: '', jobtitle: '' }),
+    );
+
+    const result = await upsertContactFromQueueItem(baseItem);
+
+    expect(updateContactPropertiesMock).toHaveBeenCalledTimes(1);
+    expect(updateContactPropertiesMock).toHaveBeenCalledWith('hs-existing-42', {
+      lastname: 'Doe',
+      jobtitle: 'VP Operations',
+    });
+    // curated company/firstname were NOT in the patch, and no full upsert ran
+    expect(upsertContactMock).not.toHaveBeenCalled();
+    expect(result.hubspotId).toBe('hs-existing-42');
+  });
+
+  it('low confidence -> never creates a new HubSpot contact, persona still attempted', async () => {
+    const result = await upsertContactFromQueueItem({ ...baseItem, contactConfidence: 'low' });
+
+    expect(searchContactByEmailMock).toHaveBeenCalledWith('jane.doe@acme.com');
+    expect(upsertContactMock).not.toHaveBeenCalled();
+    expect(updateContactPropertiesMock).not.toHaveBeenCalled();
+    expect(prismaMock.persona.create).toHaveBeenCalledTimes(1);
+    expect(result).toEqual({ ok: true, personaCreated: true, personaOk: true, hubspotId: undefined });
+  });
+
+  it('low confidence still fill-updates an existing HubSpot contact (the email evidently exists)', async () => {
+    searchContactByEmailMock.mockResolvedValue(curatedHubSpotContact({ jobtitle: '' }));
+
+    const result = await upsertContactFromQueueItem({ ...baseItem, contactConfidence: 'low' });
+
+    expect(updateContactPropertiesMock).toHaveBeenCalledWith('hs-existing-42', {
+      jobtitle: 'VP Operations',
+    });
+    expect(upsertContactMock).not.toHaveBeenCalled();
+    expect(result.hubspotId).toBe('hs-existing-42');
+  });
+
+  it('blocked recipient domain -> neither persona nor HubSpot is written', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+
+    const result = await upsertContactFromQueueItem({
+      ...baseItem,
+      toEmail: 'someone@freightroll.com',
+    });
+
+    expect(result).toEqual({ ok: false, personaCreated: false, personaOk: false });
+    expect(prismaMock.persona.findFirst).not.toHaveBeenCalled();
+    expect(prismaMock.persona.create).not.toHaveBeenCalled();
+    expect(searchContactByEmailMock).not.toHaveBeenCalled();
+    expect(upsertContactMock).not.toHaveBeenCalled();
+    expect(warn).toHaveBeenCalledWith(expect.stringContaining('blocked recipient domain'));
+    warn.mockRestore();
   });
 });

@@ -309,6 +309,11 @@ export const QueueAddSchema = z.object({
   personaName: z.string().optional(),
   personaId: z.number().int().optional(),
   personaTitle: z.string().optional(),
+  // Clawd contact-sourcing metadata. contactConfidence ('high'|'medium'|'low')
+  // gates the HubSpot write in upsertContactFromQueueItem: 'low' marks a
+  // pattern-guessed email, which must never CREATE a new CRM contact.
+  // contactSource is accepted but currently unused — kept so the clawd wire
+  // contract stays stable.
   contactSource: z.string().optional(),
   contactConfidence: z.string().optional(),
   subject: z.string().min(1).refine((s) => !/[\r\n]/.test(s), 'Subject may not contain newlines'),

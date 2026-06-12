@@ -45,7 +45,8 @@ export async function POST(req: NextRequest) {
   }
 
   let added = 0;
-  let contactsUpserted = 0;
+  let personasUpserted = 0;
+  let hubspotUpserted = 0;
   const skipped: Array<{ toEmail: string; reason: string }> = [];
 
   // Sequential by design: dedup does DB lookups but batches are ≤200 and this
@@ -62,12 +63,14 @@ export async function POST(req: NextRequest) {
         personaName: item.personaName ?? null,
         personaTitle: item.personaTitle ?? null,
         accountName: item.accountName,
+        contactConfidence: item.contactConfidence ?? null,
       });
-      if (u.ok) contactsUpserted++;
+      if (u.personaOk) personasUpserted++;
+      if (u.hubspotId !== undefined) hubspotUpserted++;
     } else {
       skipped.push({ toEmail: item.toEmail, reason: r.reason });
     }
   }
 
-  return NextResponse.json({ added, skipped, contactsUpserted });
+  return NextResponse.json({ added, skipped, personasUpserted, hubspotUpserted });
 }

@@ -4,7 +4,14 @@ import { NextRequest } from 'next/server';
 process.env.QUEUE_AGENT_SECRET = 'test-secret';
 
 const mockedAddOne = vi.fn(async () => ({ ok: true as const, id: 1 }));
-const mockedUpsertContact = vi.fn(async () => ({ ok: true, personaCreated: true }));
+const mockedUpsertContact = vi.fn(
+  async (): Promise<{ ok: boolean; personaCreated: boolean; personaOk: boolean; hubspotId?: string }> => ({
+    ok: true,
+    personaCreated: true,
+    personaOk: true,
+    hubspotId: 'hs-1',
+  }),
+);
 
 vi.mock('@/app/discovery/queue-actions', () => ({ addOne: mockedAddOne }));
 vi.mock('@/lib/queue/contact-upsert', () => ({
@@ -42,7 +49,12 @@ describe('POST /api/cron/queue (Clawd bulk-add)', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     mockedAddOne.mockResolvedValue({ ok: true as const, id: 1 });
-    mockedUpsertContact.mockResolvedValue({ ok: true, personaCreated: true });
+    mockedUpsertContact.mockResolvedValue({
+      ok: true,
+      personaCreated: true,
+      personaOk: true,
+      hubspotId: 'hs-1',
+    });
   });
 
   it('rejects with 401 when no Authorization header is present', async () => {
@@ -69,7 +81,7 @@ describe('POST /api/cron/queue (Clawd bulk-add)', () => {
 
     expect(res.status).toBe(200);
     expect(mockedAddOne).toHaveBeenCalledTimes(2);
-    expect(payload).toEqual({ added: 2, skipped: [], contactsUpserted: 2 });
+    expect(payload).toEqual({ added: 2, skipped: [], personasUpserted: 2, hubspotUpserted: 2 });
     // forces source: 'clawd' and applies the default owner
     expect(mockedAddOne).toHaveBeenCalledWith(
       expect.objectContaining({ toEmail: 'ops@example.com', source: 'clawd' }),
@@ -82,10 +94,11 @@ describe('POST /api/cron/queue (Clawd bulk-add)', () => {
       personaName: null,
       personaTitle: null,
       accountName: 'Acme',
+      contactConfidence: null,
     });
   });
 
-  it('passes personaName and personaTitle through to the contact upsert', async () => {
+  it('passes persona fields and contactConfidence through to the contact upsert', async () => {
     const res = await POST(
       makeReq({
         headers: { authorization: 'Bearer test-secret' },
@@ -97,7 +110,7 @@ describe('POST /api/cron/queue (Clawd bulk-add)', () => {
               personaName: 'Jane Doe',
               personaTitle: 'VP Operations',
               contactSource: 'clawd-enrichment',
-              contactConfidence: 'high',
+              contactConfidence: 'low',
               subject: 'Hello',
               body: 'Body copy',
             },
@@ -112,6 +125,7 @@ describe('POST /api/cron/queue (Clawd bulk-add)', () => {
       personaName: 'Jane Doe',
       personaTitle: 'VP Operations',
       accountName: 'Acme',
+      contactConfidence: 'low',
     });
   });
 
@@ -133,17 +147,35 @@ describe('POST /api/cron/queue (Clawd bulk-add)', () => {
     );
   });
 
-  it('does not count failed contact upserts in contactsUpserted', async () => {
+  it('counts personas and HubSpot contacts independently', async () => {
     mockedUpsertContact
-      .mockResolvedValueOnce({ ok: true, personaCreated: true })
-      .mockResolvedValueOnce({ ok: false, personaCreated: false });
+      // persona landed, HubSpot did not (flag off / API down / low confidence)
+      .mockResolvedValueOnce({ ok: true, personaCreated: true, personaOk: true, hubspotId: undefined })
+      // persona FK failed, HubSpot landed
+      .mockResolvedValueOnce({ ok: true, personaCreated: false, personaOk: false, hubspotId: 'hs-9' });
 
     const res = await POST(makeReq({ headers: { authorization: 'Bearer test-secret' } }));
     const payload = await res.json();
 
     expect(res.status).toBe(200);
     expect(payload.added).toBe(2);
-    expect(payload.contactsUpserted).toBe(1);
+    expect(payload.personasUpserted).toBe(1);
+    expect(payload.hubspotUpserted).toBe(1);
+    expect(payload).not.toHaveProperty('contactsUpserted');
+  });
+
+  it('counts a fully failed upsert (blocked domain / both writes failed) in neither field', async () => {
+    mockedUpsertContact
+      .mockResolvedValueOnce({ ok: true, personaCreated: true, personaOk: true, hubspotId: 'hs-1' })
+      .mockResolvedValueOnce({ ok: false, personaCreated: false, personaOk: false, hubspotId: undefined });
+
+    const res = await POST(makeReq({ headers: { authorization: 'Bearer test-secret' } }));
+    const payload = await res.json();
+
+    expect(res.status).toBe(200);
+    expect(payload.added).toBe(2);
+    expect(payload.personasUpserted).toBe(1);
+    expect(payload.hubspotUpserted).toBe(1);
   });
 
   it('returns 400 on invalid JSON', async () => {

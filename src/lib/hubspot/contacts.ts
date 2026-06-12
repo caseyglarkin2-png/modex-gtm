@@ -186,6 +186,25 @@ export async function upsertContact(properties: {
 }
 
 /**
+ * Update ONLY the given properties on an existing HubSpot contact (unlike
+ * upsertContact, which re-sends the full property set). Lets callers that
+ * must not stomp curated CRM data send a fill-only patch.
+ */
+export async function updateContactProperties(
+  hubspotId: string,
+  properties: Record<string, string>,
+): Promise<void> {
+  if (!isHubSpotConfigured() || !HUBSPOT_SYNC_ENABLED) return;
+  assertExternalWriteAllowed('hubspot', 'updateContactProperties');
+
+  const client = getHubSpotClient();
+  await withHubSpotRetry(
+    () => client.crm.contacts.basicApi.update(hubspotId, { properties }),
+    `updateContactProperties(${hubspotId})`,
+  );
+}
+
+/**
  * Write YardFlow intent signals onto a contact: the numeric `intent_score`
  * (sortable "hottest accounts"), plus when and on what surface the signal fired.
  * Best-effort — never throws (intent logging must not break a page view).

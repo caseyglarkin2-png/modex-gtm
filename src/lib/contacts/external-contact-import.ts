@@ -6,19 +6,8 @@ import {
   normalizeCompanyDomain,
 } from '@/lib/accounts/import-guardrails';
 import { syncCanonicalRecords } from '@/lib/revops/canonical-sync';
+import { isBlockedRecipientDomain } from '@/lib/contacts/blocked-domains';
 import type { EnrichmentSource } from '@prisma/client';
-
-const BLOCKED_DOMAINS = new Set([
-  'dannon.com',
-  'danone.com',
-  'bluetriton.com',
-  'yardflow.ai',
-  'niagarawater.com',
-  'lpcorp.com',
-  'xpo.com',
-  'kraftheinz.com',
-  'freightroll.com',
-]);
 
 export type ContactImportSource = 'apollo' | 'hubspot' | 'manual' | 'csv';
 
@@ -199,8 +188,7 @@ async function upsertEnrichmentFields(
 
 export async function importExternalContact(input: ExternalContactInput): Promise<ExternalContactImportResult> {
   const email = cleanEmail(input.email);
-  const blockedDomain = parseDomainFromEmail(email);
-  if (blockedDomain && BLOCKED_DOMAINS.has(blockedDomain)) {
+  if (isBlockedRecipientDomain(email)) {
     return { status: 'blocked', reason: 'blocked-domain' };
   }
 
