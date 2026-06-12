@@ -639,6 +639,15 @@ model EmailLog {
   id                    Int       @id @default(autoincrement())
   account_name          String
   campaign_id           Int?
+  /// Free-form campaign cohort label (e.g. 'allentown-tour'), carried from the
+  /// originating DraftQueueItem. Distinct from campaign_id (the Campaign relation):
+  /// this needs no Campaign row, so a cold-email cohort can roll up engagement
+  /// without one. Additive; indexed for the campaign-stats aggregation.
+  campaign_tag          String?
+  /// Opaque random handle for the open-tracking pixel. Generated at send time and
+  /// HMAC-signed into the pixel URL (we never expose the raw row id). The open
+  /// route verifies the token then resolves the row by this value.
+  tracking_id           String?
   persona_name          String?
   to_email              String
   subject               String
@@ -663,6 +672,8 @@ model EmailLog {
 
   @@index([account_name])
   @@index([campaign_id])
+  @@index([campaign_tag])
+  @@index([tracking_id])
   @@index([status])
   @@index([provider_message_id])
   @@index([thread_id])
@@ -682,6 +693,9 @@ model DraftQueueItem {
   subject             String
   body                String
   image_url           String?
+  /// Free-form campaign cohort label (e.g. 'allentown-tour'). Stamped onto the
+  /// EmailLog at send so engagement rolls up per campaign. Additive; indexed.
+  campaign_tag        String?
   status              String    @default("draft") // draft|approved|sending|sent|failed|skipped
   source              String    @default("casey") // casey|clawd
   owner               String    @default("casey@freightroll.com")
@@ -713,6 +727,7 @@ model DraftQueueItem {
   @@index([batch_id])
   @@index([owner, status])
   @@index([to_email])
+  @@index([campaign_tag])
   @@index([sequence_run_id, status])
   @@index([parent_item_id])
   @@map("draft_queue_items")
