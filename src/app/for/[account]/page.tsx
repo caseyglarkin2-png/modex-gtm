@@ -41,7 +41,8 @@ export async function generateMetadata({
   // deliberate noindex capture surface beats a 200-streamed not-found shell.
   if (!data) {
     return {
-      title: 'Yard network briefs — YardFlow by FreightRoll',
+      // Bare title: the root layout template appends "— YardFlow by FreightRoll".
+      title: 'Yard network briefs',
       description:
         'Private field briefs are built per account and shared directly. See a live network demo or get one built for your yards.',
       robots: { index: false, follow: false },
