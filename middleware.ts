@@ -24,6 +24,7 @@ export const config = {
      * - /demo (public YNS network demo — same prospect-facing audience as /for)
      * - /demo-packs (public demo pack JSON + satellite tiles consumed by /demo)
      * - /opengraph-image, /twitter-image (public social metadata images)
+     * - /docs (public tracked sales docs - same prospect audience as /for)
      * - /audio (public audio briefs served alongside /for/* memos)
      * - /video (public video codas served alongside /for/* memos)
      * - /artifacts (public artifact SVGs embedded in /for/* memos)
@@ -31,6 +32,6 @@ export const config = {
      * - /api/microsites/roi-lead (public ROI->pipeline ingest; ROI_LEAD_SECRET-gated)
      * - /manifest.json, /robots.txt, /favicon.ico (static assets)
      */
-    '/((?!login|api/auth|api/webhooks|api/unsubscribe|api/microsites/track|api/microsites/roi-lead|api/demo|api/cron|api/proposal|api/proof|unsubscribe|proposal|for|demo|demo-packs|opengraph-image|twitter-image|audio|video|artifacts|_next|manifest\\.json|robots\\.txt|favicon\\.ico).*)',
+    '/((?!login|api/auth|api/webhooks|api/unsubscribe|api/microsites/track|api/microsites/roi-lead|api/demo|api/cron|api/proposal|api/proof|unsubscribe|proposal|for|demo|demo-packs|opengraph-image|twitter-image|docs|audio|video|artifacts|_next|manifest\\.json|robots\\.txt|favicon\\.ico).*)',
   ],
 };
