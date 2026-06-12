@@ -1,0 +1,120 @@
+{"id":"54771862560","verdict":"out","segment":"","tier":"","reason":"Victoria's Secret — lingerie/personal care retail chain; no freight-heavy yard network."}
+{"id":"54771912012","verdict":"out","segment":"","tier":"","reason":"IDQ (ID Quantique) — quantum computing/cybersecurity tech company; software/SaaS, out."}
+{"id":"54772598304","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"Enterprise Products (mfa.eprod.com) — major midstream NGL/crude oil pipeline and terminal operator; large North American infrastructure footprint."}
+{"id":"54771853426","verdict":"review","segment":"","tier":"","reason":"vmcmail.com — no company identity found; domain search returned only generic VMC certificate info, not a company."}
+{"id":"54772644210","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Cornerstone Building Brands — largest North American exterior building products manufacturer; 10k+ employees, multiple plants."}
+{"id":"54736049820","verdict":"out","segment":"","tier":"","reason":"American Express Global Business Travel — corporate travel management services; professional services, out."}
+{"id":"54755794778","verdict":"out","segment":"","tier":"","reason":"Hims (forhims.com) — telehealth/consumer health company; healthcare/SaaS, out."}
+{"id":"54774155430","verdict":"out","segment":"","tier":"","reason":"GD-MS (General Dynamics Mission Systems) — aerospace & defense prime; Casey's call = out."}
+{"id":"54698624376","verdict":"out","segment":"","tier":"","reason":"McDonald's South Africa (za.mcd.com) — QSR restaurant chain; hospitality/restaurants, out."}
+{"id":"54756924560","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Bimbo Bakeries USA (bbumail.com) — US arm of Grupo Bimbo; large-scale bakery with many plants and DCs nationwide."}
+{"id":"54771810425","verdict":"in","segment":"agriculture_food_processing","tier":"A","reason":"Simmons Foods (simfoods.com) — top-15 US poultry producer, ~8k employees; plants and DCs across multiple states."}
+{"id":"54771856944","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"CRH/Oldcastle (oldcastle.com) — world's largest building materials company; hundreds of NA plants, quarries, and distribution facilities."}
+{"id":"54772559412","verdict":"out","segment":"","tier":"","reason":"Whataburger (wbhq.com) — fast food QSR chain; restaurants/hospitality, out."}
+{"id":"54772623414","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"TTM Technologies (ttmtech.com) — printed circuit board manufacturer; multiple plants in North America serving defense/automotive/industrial."}
+{"id":"54774564212","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Bridgestone Americas (bfusa.com) — major tire manufacturer with many NA plants and distribution centers."}
+{"id":"9338067244","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Echo Global Logistics — asset-light freight brokerage/3PL; large North American shipping network."}
+{"id":"54406078246","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"EnerSys (pl.enersys.com) — global industrial battery manufacturer; plants on multiple continents including North America."}
+{"id":"54771914321","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Techtronic Industries NA (ttigroupna.com) — Milwaukee Tool/Ryobi power tools manufacturer; large NA manufacturing and distribution footprint."}
+{"id":"54771960897","verdict":"out","segment":"","tier":"","reason":"Textron Aviation (txtav.com) — Cessna/Beechcraft aerospace manufacturer; aerospace & defense prime, Casey's call = out."}
+{"id":"54784767085","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"McCormick Poland (pl.mccormick.com) — McCormick spices/seasonings; major global CPG food company with plants and DCs worldwide."}
+{"id":"55554505038","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Sysco (corp.sysco.com) — largest North American foodservice distributor; 300+ distribution facilities, massive truck fleet."}
+{"id":"9645453319","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Dawn Foods — global bakery ingredients manufacturer and distributor; multiple plants and DCs in North America."}
+{"id":"54757112152","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Bath and Body Works (bbw.com) — major national retailer with large DCs and high-volume inbound freight from global suppliers."}
+{"id":"54771833658","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"HP Hood (hphood.com) — major dairy company; multiple processing plants and distribution facilities in eastern US."}
+{"id":"54772621575","verdict":"review","segment":"","tier":"","reason":"precastcorp.com — no specific company identity confirmed; generic precast concrete search returned no unique match."}
+{"id":"54773835798","verdict":"out","segment":"","tier":"","reason":"Rockwell Automation (ra.rockwell.com) — industrial automation software and hardware; tech/SaaS provider, out."}
+{"id":"54774126670","verdict":"out","segment":"","tier":"","reason":"American Enterprise Institute (aei.com) — conservative think tank/nonprofit; nonprofit, out."}
+{"id":"54774567000","verdict":"out","segment":"","tier":"","reason":"Princess Cruises (princesscruises.com) — cruise line; passenger cruise line, out."}
+{"id":"54419661190","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Continental AG (continental-corporation.com) — global tire and automotive parts manufacturer; massive North American plant and distribution footprint."}
+{"id":"54734364261","verdict":"out","segment":"","tier":"","reason":"VCA (vca.com) — veterinary hospital/clinic chain; healthcare providers, out."}
+{"id":"54771831138","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"QuidelOrtho (quidelortho.com) — in vitro diagnostics/medical device manufacturer; multiple manufacturing sites and distribution facilities."}
+{"id":"54771904430","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Whole Foods Market (wholefoods.com) — major grocery retailer; multiple DCs and high inbound freight volume nationwide."}
+{"id":"54784086928","verdict":"out","segment":"","tier":"","reason":"Carnival Cruise Line (carnival.com) — cruise line; passenger cruise line, out."}
+{"id":"54773822241","verdict":"out","segment":"","tier":"","reason":"PGA Tour (pgatourhq.com) — professional golf sports organization; sports/hospitality, out."}
+{"id":"54785074062","verdict":"out","segment":"","tier":"","reason":"Dunkin' Brands (dunkinbrands.com) — QSR franchisor (Dunkin', Baskin-Robbins); restaurants/QSR, out."}
+{"id":"45140914607","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"NTB Trucking (ntbtrk.com) — trucking carrier; asset-based freight carrier in North America."}
+{"id":"54757112107","verdict":"out","segment":"","tier":"","reason":"ADB Companies (adb-us.com) — telecom/utility infrastructure contractor; construction/telecom services, not a DC/yard network operator, out."}
+{"id":"54771897134","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Liverpool (liverpool.com.mx) — Mexico's largest department store chain; major retail DCs and logistics network throughout Mexico."}
+{"id":"54772606212","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Saint-Gobain (saint-gobain.com) — world's largest building materials company; hundreds of manufacturing and distribution sites globally."}
+{"id":"54772640185","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"WK Kellogg (kellogg.com) — major cereal/CPG manufacturer; multiple plants and DCs across North America."}
+{"id":"54773877298","verdict":"out","segment":"","tier":"","reason":"Veolia Energy North America (veoliaenergyna.com) — district energy/utility operator (steam, chilled water); electric/gas utility, out."}
+{"id":"54728407709","verdict":"in","segment":"paper_packaging","tier":"A","reason":"International Paper (ipaper.com) — world's largest paper/packaging company; dozens of mills and distribution facilities in North America."}
+{"id":"54771815168","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"ebm-papst (de.ebmpapst.com) — world's leading manufacturer of fans and motors; ~20k employees, 30+ global sites including NA plants."}
+{"id":"54771853419","verdict":"out","segment":"","tier":"","reason":"Graham Construction (graham.ca) — Canadian general contractor; project/jobsite-based construction, no fixed DC/yard network, out."}
+{"id":"54771971461","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Fossil Group (fossil.com) — fashion watches/accessories manufacturer; global supply chain with warehousing and distribution operations."}
+{"id":"54772680629","verdict":"out","segment":"","tier":"","reason":"Five Guys (fiveguys.com) — fast-casual restaurant chain; restaurants/QSR, out."}
+{"id":"54776347148","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Red Bull (redbull.com) — global energy drink manufacturer; major production and distribution network across North America."}
+{"id":"54734204951","verdict":"out","segment":"","tier":"","reason":"MTA (mtahq.org) — Metropolitan Transportation Authority; government/public transit agency, out."}
+{"id":"54758389886","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Bunzl Distribution USA (bunzlusa.com) — 190+ warehouses across all 50 states; major B2B distributor of packaging, food service, and industrial supplies."}
+{"id":"54771856945","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"Diversified Energy (dgoc.com) — largest US well owner, oil and gas production/transportation in Appalachian and Central US; major midstream assets."}
+{"id":"54771963048","verdict":"out","segment":"","tier":"","reason":"SBM Management Services (sbmcorp.com) — janitorial/facilities management services; facilities/janitorial services, out."}
+{"id":"54772463018","verdict":"review","segment":"","tier":"","reason":"Domain pcg.com does not match listed name Dahmer Brothers Construction; unclear identity, review."}
+{"id":"54772562069","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Transcontinental (tc.tc) — Canada's largest printer and flexible packaging manufacturer; plants and distribution across North America."}
+{"id":"54428085610","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Continental AG (conti.de) — global tire and automotive components manufacturer; large NA plant and distribution footprint."}
+{"id":"54734987599","verdict":"out","segment":"","tier":"","reason":"Sonida Senior Living (sonidaliving.com) — senior living/assisted living operator; healthcare, out."}
+{"id":"54762315944","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Wolverine World Wide (wwwinc.com) — footwear manufacturer (Merrell, Saucony, Wolverine); global supply chain with warehousing and distribution."}
+{"id":"54771857215","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"BlueGrace Logistics (bluegracegroup.com) — non-asset 3PL/freight brokerage with managed transportation services."}
+{"id":"54771872631","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Avery Dennison Asia Pacific (ap.averydennison.com) — global labeling/RFID/packaging materials manufacturer; 50+ country footprint including NA."}
+{"id":"54771951779","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Universal Logistics Holdings (goutsi.com) — 3PL/truckload/intermodal carrier; ~8k employees, $1.6B revenue, major NA network."}
+{"id":"54771954756","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Sigma Alimentos (sigma-alimentos.com) — major Mexican food company (meats, dairy, deli); multiple plants and distribution across Mexico and Americas."}
+{"id":"54772590378","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"RJ Reynolds Tobacco (rjrt.com) — major tobacco manufacturer (Winston, Camel); large NA manufacturing and distribution network."}
+{"id":"54772627875","verdict":"out","segment":"","tier":"","reason":"Freeman (freemanco.com) — trade show/events services company; events/facilities services, out."}
+{"id":"54772680582","verdict":"out","segment":"","tier":"","reason":"Elbit Systems US (elbitsystems-us.com) — defense electronics/aerospace; aerospace & defense prime, out."}
+{"id":"54772680752","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Sony Group (sony.com) — global electronics/entertainment manufacturer; massive global supply chain with warehousing and distribution facilities."}
+{"id":"54772710978","verdict":"out","segment":"","tier":"","reason":"United Rentals (ur.com) — equipment rental company; rental depots, not traditional freight-yard DC network, out."}
+{"id":"54773677871","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Avery Dennison EU (eu.averydennison.com) — same entity, EU region; global labeling/RFID/packaging materials manufacturer."}
+{"id":"54106388344","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Hormel Foods (hormel.com) — major meat/CPG manufacturer (Spam, Skippy); multiple plants and DCs across North America."}
+{"id":"54771833887","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Nestlé Purina (purina.nestle.com) — world's largest pet food company; multiple large manufacturing plants and DCs in North America."}
+{"id":"54771847969","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Carpenter Technology (cartech.com) — specialty alloys/metals manufacturer; multiple manufacturing facilities in PA and worldwide."}
+{"id":"54771978375","verdict":"out","segment":"","tier":"","reason":"Emergent BioSolutions (ebsi.com) — biopharmaceutical/vaccine manufacturer; healthcare/pharma, out."}
+{"id":"54772736921","verdict":"out","segment":"","tier":"","reason":"Granite Construction (gcinc.com) — heavy infrastructure general contractor (roads, bridges); jobsite-based, no DC/yard network, out."}
+{"id":"54773621558","verdict":"out","segment":"","tier":"","reason":"The Aerospace Corporation (aero.org) — nonprofit FFRDC supporting US space programs; aerospace & defense, out."}
+{"id":"54773755658","verdict":"out","segment":"","tier":"","reason":"Parsons Corporation (parsons.us) — defense/infrastructure engineering and technology firm; engineering/defense services, out."}
+{"id":"9636507913","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Nolan Transportation Group — freight brokerage/3PL with large carrier network in North America."}
+{"id":"54772701351","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"Dexter Axle (dexteraxle.com) — axle and brake systems manufacturer for trailers/RVs; multiple NA manufacturing plants."}
+{"id":"54773802362","verdict":"out","segment":"","tier":"","reason":"General Dynamics (generaldynamics.com) — defense prime contractor; aerospace & defense prime, Casey's call = out."}
+{"id":"54774126930","verdict":"out","segment":"","tier":"","reason":"SRS News / Savannah River Site (srs.gov) — US government nuclear facility; government/military, out."}
+{"id":"54774465194","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Jackson Family Wines (jfwmail.com) — major winery group (Kendall-Jackson); 30+ wineries, 5M+ cases/year, distribution network."}
+{"id":"54784803162","verdict":"out","segment":"","tier":"","reason":"TWO MEN AND A TRUCK (twomen.com) — residential/commercial moving services; household goods mover, not freight/yard-network, out."}
+{"id":"54415134541","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"CJ Logistics America (cjlogisticsamerica.com) — 3PL with warehousing, transportation, and fulfillment services across North America."}
+{"id":"54720786493","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"Praxair/Linde — world's largest industrial gas company; extensive distribution infrastructure across North America."}
+{"id":"54755795033","verdict":"out","segment":"","tier":"","reason":"ResMed (resmed.com.au) — medical device company (CPAP/ventilators); healthcare/medical device, primarily software+device, out."}
+{"id":"54771833744","verdict":"in","segment":"paper_packaging","tier":"B","reason":"INX International Ink (inxintl.com) — major ink/coatings manufacturer; 25+ plants in North America across 50+ global locations."}
+{"id":"54771930997","verdict":"in","segment":"retail_grocery","tier":"B","reason":"Transform SR Brands/Sears (searshc.com) — Sears Holdings successor; still operates DCs and distribution infrastructure for retail fulfillment."}
+{"id":"54771939112","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Rehrig Pacific (rehrig.com) — reusable plastic container/pallet manufacturer for supply chain; multiple NA manufacturing facilities."}
+{"id":"54771960857","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Glanbia (glanbia.com) — global nutrition/ingredients/dairy company; multiple manufacturing and distribution sites in North America."}
+{"id":"54772598194","verdict":"out","segment":"","tier":"","reason":"Park Lawn (plcorp.com) — funeral homes and cemeteries operator; death care services, out."}
+{"id":"54772621340","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"National DCP (natdcp.com) — exclusive supply chain provider for 10k+ Dunkin' locations; 9 DCs, 700k+ annual deliveries, $3B revenue."}
+{"id":"54772644479","verdict":"out","segment":"","tier":"","reason":"HomeServe USA (homeserveusa.com) — home repair warranty/service company; home services, out."}
+{"id":"54772660750","verdict":"out","segment":"","tier":"","reason":"Leslie's (lesl.com) — pool and spa care retail chain; specialty retail, not freight-heavy, out."}
+{"id":"54772663411","verdict":"out","segment":"","tier":"","reason":"TELUS (telus.com) — Canadian telecommunications company; telecom services, out."}
+{"id":"54772734095","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Tektronix (tektronix.com) — test and measurement equipment manufacturer; industrial electronics mfg with NA distribution."}
+{"id":"54773704960","verdict":"out","segment":"","tier":"","reason":"Hu-Friedy (hu-friedy.com) — dental instruments manufacturer; medical devices/healthcare, relatively small scale, out."}
+{"id":"54783822892","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Franklin Electric (fele.com) — water/fuel systems manufacturer (pumps, motors); global manufacturing with NA distribution."}
+{"id":"54784405925","verdict":"out","segment":"","tier":"","reason":"Bridgewater Associates (bwater.com) — world's largest hedge fund; finance/investment management, out."}
+{"id":"55554504358","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"WD-40 Company (wd40.com) — consumer/industrial lubricant manufacturer; global distribution with NA warehousing."}
+{"id":"54734674511","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Do It Best (doitbest.com) — hardware/home improvement cooperative; distributes to 4k+ member stores, multiple DCs."}
+{"id":"54735414177","verdict":"out","segment":"","tier":"","reason":"CWT/Carlson Wagonlit Travel (mycwt.com) — corporate travel management services; professional services, out."}
+{"id":"54736061490","verdict":"out","segment":"","tier":"","reason":"Milwaukee Brewers (brewers.com) — professional baseball team; sports/entertainment, out."}
+{"id":"54757111883","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Carlisle Construction Materials (carlisleccm.com) — roofing/waterproofing materials manufacturer; 24 NA plants, $1.7B division of Carlisle Companies."}
+{"id":"54758389521","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"NGL Energy Partners (nglep.com) — midstream MLP; crude oil, NGL, and water solutions logistics with terminals, pipelines, and rail assets."}
+{"id":"54762597481","verdict":"out","segment":"","tier":"","reason":"Canadian Armed Forces (forces.gc.ca) — government military; government/military, out."}
+{"id":"54771777676","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Coke Florida (cocacolaflorida.com) — Coca-Cola bottler and distributor in Florida; large production and distribution network."}
+{"id":"54771780241","verdict":"out","segment":"","tier":"","reason":"Enlyte (enlyte.com) — healthcare technology/managed care services (Mitchell, Genex); healthcare/insurance tech, out."}
+{"id":"54771860083","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Energizer Holdings (energizer.com) — battery/auto care consumer goods manufacturer; multiple plants and global distribution."}
+{"id":"54771874132","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Nidec Motor (nidec-motor.com) — electric motor manufacturer; multiple NA plants serving industrial/HVAC/automotive markets."}
+{"id":"54771886194","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Reyes Coca-Cola Bottling (reyesccb.com) — Coca-Cola bottler in 10 states; 57 facilities, major beverage production and distribution."}
+{"id":"54772439370","verdict":"out","segment":"","tier":"","reason":"Aramark (aramark.com) — food/facility/uniform services company; services-based, not freight-yard-focused, out."}
+{"id":"54772663654","verdict":"out","segment":"","tier":"","reason":"MTF Biologics (mtf.org) — world's largest tissue bank (nonprofit); healthcare/nonprofit, out."}
+{"id":"54772669501","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Dover Corporation (dovercorp.com) — diversified industrial manufacturer ($8B+ revenue); pumps, fueling, refrigeration equipment with global plants."}
+{"id":"54772701044","verdict":"out","segment":"","tier":"","reason":"Perry Ellis International (pery.com) — fashion apparel brand; light freight/apparel, no significant yard network, out."}
+{"id":"54772737144","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Lakeside Book Company (lakesidebook.com) — largest NA book manufacturer; 500M books/year, warehousing/fulfillment/distribution services."}
+{"id":"54773714451","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Harsco Corporation (harsco.com) — industrial environmental services (metals, rail, environmental); multiple NA processing and service locations."}
+{"id":"54773716858","verdict":"out","segment":"","tier":"","reason":"Pratt & Whitney Canada (pwc.ca) — aircraft engine manufacturer; aerospace & defense, out."}
+{"id":"54773732870","verdict":"out","segment":"","tier":"","reason":"Brown and Caldwell (brwncald.com) — environmental engineering consultancy; professional services/engineering, out."}
+{"id":"54784273678","verdict":"out","segment":"","tier":"","reason":"Focus Brands (focusbrands.com) — QSR franchisor (Auntie Anne's, Jamba, Carvel); restaurants/QSR, out."}
+{"id":"54784329793","verdict":"out","segment":"","tier":"","reason":"Hendrick Collision / Hendrick Automotive (hendrickauto.com) — auto dealership group; automotive retail, not a freight/yard network, out."}
+{"id":"54784336472","verdict":"out","segment":"","tier":"","reason":"HITT Contracting (hitt-gc.com) — commercial general contractor; jobsite-based construction, no fixed DC/yard network, out."}
+{"id":"54784343352","verdict":"out","segment":"","tier":"","reason":"Sitel Group (sitel.com) — customer experience/BPO/call center services; business services, out."}
+{"id":"54784822596","verdict":"out","segment":"","tier":"","reason":"General Atomics (ga.com) — defense/nuclear/aerospace research company; aerospace & defense, out."}

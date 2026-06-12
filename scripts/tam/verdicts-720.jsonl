@@ -1,0 +1,120 @@
+{"id":"9392925702","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"Ancor Automotive - automotive tier supplier with multiple NA manufacturing facilities"}
+{"id":"9392926102","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"Henkel - global specialty chemicals/adhesives manufacturer with large NA distribution and production footprint"}
+{"id":"9392959826","verdict":"out","segment":"","tier":"","reason":"Liberty Energy - oilfield services company, not a freight-heavy DC/warehouse operator"}
+{"id":"9399965258","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Classic Transportation & Warehousing - regional 3PL with warehousing operations"}
+{"id":"9399965342","verdict":"in","segment":"wholesale_distribution","tier":"C","reason":"Cantoni LP - Dallas-based furniture/home goods retailer-distributor with warehousing and delivery ops"}
+{"id":"9399965599","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"Ashland - global specialty chemicals manufacturer with large NA plant and DC network"}
+{"id":"9400027257","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Torn & Glasser - food importer/packer/distributor of nuts, dried fruits, spices with warehousing"}
+{"id":"9400257814","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Catalent Pharma Solutions - large pharma CDMO with dozens of NA manufacturing and distribution sites"}
+{"id":"9400257899","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"JBS Logistics & Warehousing - logistics/warehousing arm tied to JBS meat operations, multiple facilities"}
+{"id":"9400258130","verdict":"review","segment":"","tier":"","reason":"Intuitive - name alone ambiguous; could be Intuitive Surgical (medical devices, out) or another entity"}
+{"id":"9400258410","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Better Made - Detroit-based snack food manufacturer with plant and distribution operations"}
+{"id":"9400376191","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"North American Warehousing Company - dedicated 3PL warehousing operator"}
+{"id":"9400376590","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Matson Logistics - large asset-based 3PL/intermodal carrier with broad NA network"}
+{"id":"9400377462","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Midwest Warehousing - regional 3PL warehousing operator"}
+{"id":"9408312701","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"Multimatic Inc - Canadian-HQ automotive tier-1 supplier with multiple NA manufacturing plants"}
+{"id":"9408329001","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Serta Simmons Bedding - large mattress manufacturer with plants and distribution centers across NA"}
+{"id":"9408329228","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Flex-N-Gate - major automotive stamping/assembly supplier with 60+ NA manufacturing facilities"}
+{"id":"9408558352","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"Chassix - automotive structural stampings manufacturer with multiple NA plants"}
+{"id":"9408558494","verdict":"out","segment":"","tier":"","reason":"Dell Technologies - IT/computing company, no freight-heavy manufacturing or DC TAM fit"}
+{"id":"9408559166","verdict":"in","segment":"wholesale_distribution","tier":"C","reason":"Rejoice International Corp - private-label consumer/household products OEM manufacturer with NA facilities"}
+{"id":"9408559752","verdict":"in","segment":"ports_intermodal","tier":"A","reason":"Maersk - global logistics giant operating ports, terminals, 3PL warehouses, and intermodal facilities"}
+{"id":"9408560216","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"First Logistics Management Services - 3PL with warehousing operations"}
+{"id":"9408674140","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"DNC Logistics - regional 3PL carrier/logistics operator"}
+{"id":"9408674895","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Paschall Logistics - regional carrier/3PL with terminal and yard operations"}
+{"id":"9417393933","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"Kuka - industrial robot manufacturer with large NA manufacturing and assembly facilities"}
+{"id":"9417423913","verdict":"in","segment":"agriculture_food_processing","tier":"B","reason":"Foremost Farms USA - dairy cooperative with multiple processing plants across Midwest"}
+{"id":"9417594162","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"National Food Group - multi-facility food distribution and processing company"}
+{"id":"9417594288","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Navistar Inc - commercial truck and bus manufacturer with large NA manufacturing and distribution network"}
+{"id":"9417718122","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Indiana Sugars - food ingredient distributor/wholesaler with warehouse facilities"}
+{"id":"9417856616","verdict":"in","segment":"wholesale_distribution","tier":"C","reason":"Rexair LLC - consumer appliance manufacturer (Rainbow vacuums) with NA manufacturing and distribution"}
+{"id":"9437963130","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Claw Freight - freight carrier/3PL operator"}
+{"id":"9437963574","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Bridgestone - tire manufacturer with numerous NA plants, DCs, and distribution facilities"}
+{"id":"9438113612","verdict":"out","segment":"","tier":"","reason":"GE Healthcare - medical imaging and health IT company, healthcare provider sector"}
+{"id":"9438113901","verdict":"in","segment":"agriculture_food_processing","tier":"A","reason":"Bayer Crop Science - agricultural chemicals division with large NA manufacturing and distribution facilities"}
+{"id":"9438114621","verdict":"review","segment":"","tier":"","reason":"Seteed Inc. - no identifiable company found via search; insufficient info to classify"}
+{"id":"9438455127","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"Auto Warehousing Company Inc. - finished vehicle logistics/yard operations for automotive OEMs"}
+{"id":"9438455461","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"PACE Inc. (Pace Industries) - large die-casting manufacturer with 18 NA facilities in auto and industrial"}
+{"id":"9438456719","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"Fontaine Modification Company - truck/vehicle modification company with multiple plant locations"}
+{"id":"9438457092","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"Oxy Corporation - major oil/chemicals company (Occidental) with large NA industrial facility network"}
+{"id":"9438457469","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Kenco Logistic Services - large 3PL with warehousing and distribution operations across NA"}
+{"id":"9438457940","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Metal Ox Warehousing - warehousing 3PL operator"}
+{"id":"9438458283","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Lipari Foods - Michigan-based food wholesale distributor with multiple DCs"}
+{"id":"9438458736","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Airport Trucking & Warehousing - freight carrier and warehousing 3PL"}
+{"id":"9438514978","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"Durex Products Inc. - industrial seals/gaskets manufacturer with NA production and distribution"}
+{"id":"9438515343","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"International Extrusions - aluminum extrusion manufacturer with large NA plant operations"}
+{"id":"9438516324","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"RedE Parts Inc. - automotive/industrial parts supplier with manufacturing, logistics, and warehousing in Auburn Hills MI"}
+{"id":"9438516915","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"General Trucking Inc. - regional truckload carrier with terminal operations"}
+{"id":"9438765458","verdict":"out","segment":"","tier":"","reason":"De Nora Water Technologies - water treatment tech/equipment OEM, not a freight-heavy DC/yard operator"}
+{"id":"9438765624","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"AA Warehousing & Logistics - 3PL warehousing and logistics provider"}
+{"id":"9438766748","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Pellerito Foods - regional food distributor with warehouse distribution operations"}
+{"id":"9438786172","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Garden Fresh Gourmet - fresh food manufacturer (Campbell's sub) with multi-plant operations"}
+{"id":"9438787731","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"HARMAN International - consumer electronics manufacturer (Samsung sub) with large NA mfg and distribution footprint"}
+{"id":"9438851358","verdict":"out","segment":"","tier":"","reason":"Corrigan Moving Systems - household/commercial moving company, not a freight yard/DC operator"}
+{"id":"9445159484","verdict":"in","segment":"building_materials_industrial","tier":"C","reason":"Renk America - industrial gearbox/drive systems manufacturer with NA production facility"}
+{"id":"9445159831","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"Martinrea International - large automotive stampings/assemblies tier-1 with many NA plants"}
+{"id":"9445160363","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"Covestro - large specialty plastics/chemicals manufacturer with multiple NA production and distribution sites"}
+{"id":"9445220693","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Day & Ross - major Canadian LTL/TL carrier with terminals across Canada and US"}
+{"id":"9445221015","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"United Steel Storage Inc. - industrial warehousing/storage operator"}
+{"id":"9445221962","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Newell Brands - large consumer goods mfg (Rubbermaid, Coleman) with extensive NA plant and DC network"}
+{"id":"9445950296","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Stanley (Stanley Black & Decker brand) - hand tools/consumer goods mfg with large NA distribution infrastructure"}
+{"id":"9446423715","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Ghost energy drink (acquired by Keurig Dr Pepper) - beverage brand with warehouse and national distribution network"}
+{"id":"9446423938","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Temco Logistics (owned by Home Depot) - last-mile delivery and warehousing for big/bulky goods, many NA facilities"}
+{"id":"9446478721","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"AGC Automotive Americas - automotive glass manufacturer with multiple NA production plants"}
+{"id":"9446479781","verdict":"out","segment":"","tier":"","reason":"Little Caesars Pizza - QSR/restaurant chain, OUT per criteria"}
+{"id":"9446619449","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"Mayco International - automotive plastics/injection molding tier-1 with multiple NA facilities"}
+{"id":"9446619924","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"HBPO North America - automotive front-end module assembler with NA production plants"}
+{"id":"9446643349","verdict":"in","segment":"building_materials_industrial","tier":"C","reason":"Virginia Tile Company - building materials distributor with multiple showroom/warehouse locations"}
+{"id":"9453445182","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"Grupo Antolin - global automotive interior components supplier with multiple NA manufacturing plants"}
+{"id":"9453494570","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Graymont - North American lime/minerals producer with multiple quarries, plants, and distribution terminals"}
+{"id":"9453494787","verdict":"out","segment":"","tier":"","reason":"Zoox Inc. - autonomous vehicle R&D company (Amazon subsidiary), software/IT sector"}
+{"id":"9453495379","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"DSV Global Transport & Logistics - top-5 global 3PL with massive NA warehousing and transport network"}
+{"id":"9453495720","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"PCS Company - mold base/plastics injection component manufacturer-distributor with multi-location NA ops"}
+{"id":"9453542992","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Brasscraft Mfg - plumbing products manufacturer (Masco sub) with NA manufacturing and DC operations"}
+{"id":"9453543211","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Elberta Logistics International - international 3PL logistics provider with freight operations"}
+{"id":"9453543433","verdict":"out","segment":"","tier":"","reason":"StarTech.com - IT accessories/peripherals company, software/IT sector"}
+{"id":"9453543603","verdict":"review","segment":"","tier":"","reason":"Minghua - no identifiable NA company found; name alone insufficient to classify"}
+{"id":"9453544339","verdict":"in","segment":"cold_chain","tier":"B","reason":"Wolverine Packing Co. - Michigan-based meat packer with cold-chain processing and distribution"}
+{"id":"9453544461","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Constellum - aluminum products manufacturer with multiple NA rolling/extrusion plants"}
+{"id":"9453667410","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"HMS Mfg Co - Michigan plastics/consumer goods manufacturer with production and distribution facilities"}
+{"id":"9461729969","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"Axis Group - automotive finished vehicle logistics and yard management specialist"}
+{"id":"9461730103","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Renaissance Global Logistics - international freight forwarding and logistics services provider"}
+{"id":"9461730156","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Tesla - major EV manufacturer with Gigafactories and large NA parts/finished-vehicle logistics operations"}
+{"id":"9461730933","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Bravo Logistics - 3PL logistics and freight services operator"}
+{"id":"9462285710","verdict":"in","segment":"cold_chain","tier":"B","reason":"Hoogwegt US - dairy commodity trader/distributor with cold-storage warehouse operations"}
+{"id":"9462286636","verdict":"out","segment":"","tier":"","reason":"Marlo Beauty Supply - small niche beauty wholesale distributor, insufficient freight-yard scale for TAM"}
+{"id":"9497338899","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Stubbs Logistics - small 3PL logistics provider with freight operations"}
+{"id":"9497339046","verdict":"out","segment":"","tier":"","reason":"Oracle - enterprise software/IT company, OUT per criteria"}
+{"id":"9497339268","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Corrigan Air & Sea Cargo - freight forwarding and cargo logistics with terminal operations"}
+{"id":"9497378198","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"Driveway Automotive Logistics - automotive finished vehicle transportation and yard logistics"}
+{"id":"9497393772","verdict":"in","segment":"chemicals_plastics","tier":"B","reason":"Gen Oil Company - petroleum products distributor/terminal operator with truck freight operations"}
+{"id":"9497473135","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"ASAP Express & Logistics Inc. - carrier/3PL with expedited freight and terminal operations"}
+{"id":"9497473442","verdict":"in","segment":"wholesale_distribution","tier":"C","reason":"Arden Companies - outdoor cushions manufacturer with 3 NA plants and major retail DC partnerships"}
+{"id":"9497491514","verdict":"out","segment":"","tier":"","reason":"EDI.ai - supply chain software/IT company, OUT per criteria"}
+{"id":"9497511499","verdict":"in","segment":"building_materials_industrial","tier":"C","reason":"Interpower Induction USA - industrial induction heating equipment manufacturer with NA operations"}
+{"id":"9497532592","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Edge Logistics - Chicago-based 3PL freight brokerage with managed transportation operations"}
+{"id":"9497532800","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Danone - global CPG food/beverage company with large NA manufacturing and DC network"}
+{"id":"9497532849","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Kari-Out - foodservice packaging manufacturer/distributor with warehouse distribution operations"}
+{"id":"9497567039","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"NDLX Logistics - 3PL logistics provider with freight management operations"}
+{"id":"9497567293","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"Autokiniton - automotive structural stampings tier-1 with multiple NA manufacturing plants"}
+{"id":"9497567569","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Aptiv - global automotive electronics company with numerous NA manufacturing and DC facilities"}
+{"id":"9497567860","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"Visscher-Caravelle - automotive floor mat/textile tier-1 supplier with NA production facility in Brownsburg IN"}
+{"id":"9497629192","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"Piston Automotive - Michigan-based automotive tier-1 supplier with multiple assembly plants"}
+{"id":"9497629490","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Morgan Corporation - truck body manufacturer with multiple NA production plants"}
+{"id":"9497629614","verdict":"in","segment":"cpg_food_beverage","tier":"C","reason":"Better Choice Company - pet food brand with manufacturing/distribution operations"}
+{"id":"9497629804","verdict":"in","segment":"paper_packaging","tier":"C","reason":"MCC Label - label/pressure-sensitive packaging manufacturer with production and distribution facilities"}
+{"id":"9542759787","verdict":"out","segment":"","tier":"","reason":"Locomotion (locomotion.ai) - autonomous vehicle/trucking software startup, IT/software sector"}
+{"id":"9636329379","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Ryder Supply Chain Solutions - major 3PL with large NA warehousing, fleet, and distribution center network"}
+{"id":"9636746527","verdict":"out","segment":"","tier":"","reason":"Global Executive Solutions - executive recruiting/staffing firm, professional services OUT per criteria"}
+{"id":"9967704089","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Gerdau - major steel manufacturer with multiple NA mills and distribution centers"}
+{"id":"45002449029","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"American National Logistics (anlinc.com) - regional 3PL carrier with terminal and freight operations"}
+{"id":"45002449051","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"James Transportation - regional trucking carrier with terminal yard operations"}
+{"id":"45003061156","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Western Flyer Xpress - regional LTL/TL carrier with terminal network"}
+{"id":"45004451120","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Hartt Transportation Systems - regional carrier with terminal and yard operations"}
+{"id":"45005078147","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Garner Trucking - regional truckload carrier with terminal yard operations"}
+{"id":"45008950392","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"J&R Schugel Trucking - regional TL carrier with driver facility/terminal operations"}
+{"id":"45010032658","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Sabal Transport - regional truckload carrier with terminal operations"}
+{"id":"45010493185","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Wiley Sanders Truck Lines - Alabama-based TL carrier with terminal yard operations"}
+{"id":"45013904137","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Bulldog and Sons Transport - Canadian carrier with cross-border freight and terminal operations"}
+{"id":"45057819392","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Big M Transportation - regional TL carrier with terminal and yard operations"}
+{"id":"45058130455","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"OutWest Express - regional carrier with terminal yard operations"}

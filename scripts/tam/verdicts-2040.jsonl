@@ -1,0 +1,120 @@
+{"id":"54784404511","verdict":"out","segment":"","tier":"","reason":"UK coach/bus passenger transport operator, not a freight yard operator"}
+{"id":"54784406668","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Major Mexican cement manufacturer (Cementos Moctezuma) with multiple plants and large inbound/outbound bulk freight"}
+{"id":"54784406789","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"ConMet de Mexico — heavy-duty truck component manufacturer with NA facilities including Monterrey plant"}
+{"id":"54784407304","verdict":"out","segment":"","tier":"","reason":"Culligan water treatment service franchise; residential/commercial service routes, no fixed DC/yard network"}
+{"id":"54784407901","verdict":"out","segment":"","tier":"","reason":"WeightWatchers is a consumer wellness/diet program brand; no freight-heavy physical facilities"}
+{"id":"54784408581","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Aurora Casket — large casket manufacturer with 5 US/Canada plants and 60+ distribution service centers"}
+{"id":"54784414745","verdict":"out","segment":"","tier":"","reason":"Team Lyders is a Taco Bell/Arby's QSR franchisee; restaurant operations, no yard network"}
+{"id":"54784419466","verdict":"out","segment":"","tier":"","reason":"Fix Auto USA is a collision repair franchise network; service-based, no DC/yard"}
+{"id":"54784419492","verdict":"out","segment":"","tier":"","reason":"EYM Group is a multi-brand QSR franchisee (Denny's, Pizza Hut, KFC); restaurant operations, no yard"}
+{"id":"54784421211","verdict":"out","segment":"","tier":"","reason":"Clarion is automotive electronics OEM supplier; US entity is sales/distribution only, not TAM scale"}
+{"id":"54784421457","verdict":"out","segment":"","tier":"","reason":"Meyer Group UK is a cookware/kitchenware supplier; consumer goods import distributor, not freight-heavy yard network"}
+{"id":"54784424078","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"chn.dupont.com is DuPont China entity — DuPont is global chemicals/materials manufacturer with massive NA freight footprint"}
+{"id":"54784424087","verdict":"out","segment":"","tier":"","reason":"ns.sympatico.ca is Bell Canada legacy ISP domain; telecom/IT services, out of TAM"}
+{"id":"54784425804","verdict":"out","segment":"","tier":"","reason":"TURPAK is Turkey-based fuel station automation/POS technology company; software/technology, out of TAM"}
+{"id":"54784427008","verdict":"out","segment":"","tier":"","reason":"TTM Consulting is Australian consulting firm; professional services, out of TAM"}
+{"id":"54784427158","verdict":"out","segment":"","tier":"","reason":"aztacos.com is a restaurant/taco chain; food service QSR, out of TAM"}
+{"id":"54784427182","verdict":"out","segment":"","tier":"","reason":"1800Mattress/mattress.com is mattress e-retailer; no freight-heavy distribution network at yard management scale"}
+{"id":"54784427803","verdict":"out","segment":"","tier":"","reason":"Strada Services (KGR Plumbing) is residential HVAC/plumbing/electrical services company; no DC/yard network"}
+{"id":"54784428402","verdict":"out","segment":"","tier":"","reason":"Walbridge de Mexico is industrial construction company (GC); jobsite-based, no fixed DC/yard network"}
+{"id":"54784429127","verdict":"out","segment":"","tier":"","reason":"Ohio State University is a university; education, out of TAM"}
+{"id":"54784432658","verdict":"out","segment":"","tier":"","reason":"SUNY Old Westbury is a college; education, out of TAM"}
+{"id":"54784434203","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"Compass Minerals — major salt/minerals mining and distribution company with large North American plant and distribution network"}
+{"id":"54784434511","verdict":"out","segment":"","tier":"","reason":"CEC Computech is IT/computer technology company; software/IT, out of TAM"}
+{"id":"54784438181","verdict":"out","segment":"","tier":"","reason":"Conduent is business process outsourcing/IT services company; no physical freight operations"}
+{"id":"54784438952","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Dreyer's (Nestle ice cream) — major CPG ice cream manufacturer with multiple US production/distribution facilities"}
+{"id":"54784439344","verdict":"out","segment":"","tier":"","reason":"mednet.ucla.edu is UCLA Medical Network; healthcare provider, out of TAM"}
+{"id":"54784439681","verdict":"out","segment":"","tier":"","reason":"The Oterra is a hotel in Bangalore India; hospitality, out of TAM"}
+{"id":"54784440442","verdict":"in","segment":"chemicals_plastics","tier":"B","reason":"CIRCON Environmental — industrial/hazardous waste management, petrochemical recovery, kiln network; waste/environmental with transfer stations and trucking operations"}
+{"id":"54784441864","verdict":"out","segment":"","tier":"","reason":"Challenger Singapore is consumer electronics retailer in Singapore; outside North America"}
+{"id":"54784441880","verdict":"out","segment":"","tier":"","reason":"moussahaidar.com appears to be a personal/consulting site; out of TAM"}
+{"id":"54784441923","verdict":"out","segment":"","tier":"","reason":"EVI Industries distributes/services commercial laundry equipment; equipment dealer/service, not a yard-network operator"}
+{"id":"54784445778","verdict":"out","segment":"","tier":"","reason":"IMX Medical Management Services is healthcare/medical management services firm; out of TAM"}
+{"id":"54784446621","verdict":"review","segment":"","tier":"","reason":"perkinsrb.com — domain unresolvable, company name unknown; cannot classify"}
+{"id":"54784447314","verdict":"out","segment":"","tier":"","reason":"Staples Technology Solutions is IT/office products reseller; technology services, out of TAM"}
+{"id":"54784447601","verdict":"out","segment":"","tier":"","reason":"bingoquebec/loto-quebec.com is Loto-Quebec, government lottery/gaming corporation; out of TAM"}
+{"id":"54784448882","verdict":"out","segment":"","tier":"","reason":"The Reformation is sustainable fashion/apparel brand; retail apparel, no freight-heavy yard network"}
+{"id":"54784449350","verdict":"out","segment":"","tier":"","reason":"prodigy.net.mx is Telmex ISP domain in Mexico; telecom, out of TAM"}
+{"id":"54784449351","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"ntnusa.com is NTN USA — bearings/precision components distributor/manufacturer with NA distribution centers"}
+{"id":"54784449450","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"USSCO — wholesale distributor of transportation equipment and supplies; multi-site distribution operation"}
+{"id":"54784449864","verdict":"out","segment":"","tier":"","reason":"dfwsub.com appears to be DFW area Subway franchise operator; QSR, out of TAM"}
+{"id":"54784450398","verdict":"in","segment":"paper_packaging","tier":"B","reason":"The Central Group — Canadian manufacturer of retail packaging/displays with 8 locations in North America"}
+{"id":"54784450921","verdict":"out","segment":"","tier":"","reason":"UNRWA is a UN relief agency for Palestinian refugees; nonprofit/government, out of TAM"}
+{"id":"54784451106","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"AmerisourceBergen (now Cencora) — one of largest pharmaceutical distributors in US with extensive distribution center network"}
+{"id":"54784452491","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"IEnova (Sempra subsidiary) — Mexico's largest private energy infrastructure company with natural gas pipelines, LNG storage, and refined product terminals across Mexico"}
+{"id":"54784453179","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Mallinckrodt Pharmaceuticals — specialty pharma manufacturer with multiple NA manufacturing/distribution facilities"}
+{"id":"54784460712","verdict":"out","segment":"","tier":"","reason":"sonicfinancial.com appears to be financial services company; finance, out of TAM"}
+{"id":"54784460719","verdict":"out","segment":"","tier":"","reason":"Skip Hop is baby/toddler products consumer brand (Carter's subsidiary); light consumer goods, distribution outsourced, not yard network operator"}
+{"id":"54784461119","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Midwest Warehouse — 3PL warehousing and distribution company with multiple Missouri facilities totaling 1M+ sq ft"}
+{"id":"54784461734","verdict":"out","segment":"","tier":"","reason":"USANA Health Sciences — nutritional supplements direct-sales company; consumer wellness, no freight-heavy yard network"}
+{"id":"54784461931","verdict":"out","segment":"","tier":"","reason":"Unetgrp — unresolvable/unknown small firm; cannot confirm IN vertical"}
+{"id":"54784461932","verdict":"out","segment":"","tier":"","reason":"supercutstx.com is Supercuts Texas franchise; hair salon, out of TAM"}
+{"id":"54784462943","verdict":"out","segment":"","tier":"","reason":"Lettuce Entertain You is restaurant group; hospitality/food service, out of TAM"}
+{"id":"54784463447","verdict":"out","segment":"","tier":"","reason":"ci-pinkerton.com is Pinkerton security/risk management; security consulting services, out of TAM"}
+{"id":"54784464174","verdict":"out","segment":"","tier":"","reason":"Rackson Restaurants is QSR/restaurant franchisee; food service, out of TAM"}
+{"id":"54784464752","verdict":"in","segment":"retail_grocery","tier":"B","reason":"Red River Co-op — Winnipeg-based retail cooperative with fuel distribution, bulk fuel delivery, food stores across Manitoba; multi-site with meaningful freight"}
+{"id":"54784466549","verdict":"out","segment":"","tier":"","reason":"Green Home Solutions is residential indoor air quality/mold remediation franchise; service-based, no DC/yard"}
+{"id":"54784466612","verdict":"review","segment":"","tier":"","reason":"johnstoneps.com — domain/company unclear; cannot determine industry"}
+{"id":"54784466829","verdict":"out","segment":"","tier":"","reason":"Domino's Pizza Taiwan franchise; QSR restaurant operations, out of TAM"}
+{"id":"54784467258","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Silgan Holdings — world's largest metal food container manufacturer with 123 facilities on 4 continents, major NA packaging footprint"}
+{"id":"54784469533","verdict":"out","segment":"","tier":"","reason":"ncelec.com appears to be electrical services/contractor company; trades services, out of TAM"}
+{"id":"54784469936","verdict":"out","segment":"","tier":"","reason":"Moto Mart (fkgoil.com) is convenience store/gas station chain; retail fuel/C-store, out of TAM"}
+{"id":"54784470060","verdict":"out","segment":"","tier":"","reason":"US Security Associates is security guard/services company; professional security services, out of TAM"}
+{"id":"54784470273","verdict":"review","segment":"","tier":"","reason":"hlgllc.com — company identity unclear; cannot classify without more information"}
+{"id":"54784470649","verdict":"out","segment":"","tier":"","reason":"Self Esteem Brands operates fitness franchises (Anytime Fitness, Waxing the City); fitness/services, out of TAM"}
+{"id":"54784471186","verdict":"out","segment":"","tier":"","reason":"Middleby Worldwide Philippines entity — food equipment manufacturer/distributor; Philippine entity, outside NA"}
+{"id":"54784471200","verdict":"review","segment":"","tier":"","reason":"Spectra with no domain — insufficient info to classify"}
+{"id":"54784471201","verdict":"out","segment":"","tier":"","reason":"O'Reilly MCD oreillymcd.com appears to be McDonald's franchise operator; QSR, out of TAM"}
+{"id":"54784472635","verdict":"out","segment":"","tier":"","reason":"Hobart UK is commercial food equipment manufacturer/service provider; UK entity, equipment service, outside scope"}
+{"id":"54784472886","verdict":"out","segment":"","tier":"","reason":"terminixquebec.com is Terminix pest control franchise in Quebec; residential pest services, out of TAM"}
+{"id":"54784472900","verdict":"out","segment":"","tier":"","reason":"nlecstl.org appears to be nonprofit/community organization; out of TAM"}
+{"id":"54784473111","verdict":"out","segment":"","tier":"","reason":"rireaid.com — likely Rite Aid pharmacy domain variant; retail pharmacy, out of TAM"}
+{"id":"54784474177","verdict":"in","segment":"cold_chain","tier":"B","reason":"Polar Speed (UPS Healthcare) — UK cold-chain pharmaceutical distribution company with 118 temperature-controlled vehicles and national GDP-compliant warehousing"}
+{"id":"54784474411","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"Sage Automotive Interiors — global automotive seat fabric manufacturer with US, South America, EMEA, and Asia manufacturing sites"}
+{"id":"54784475275","verdict":"out","segment":"","tier":"","reason":"Hartlepool College is UK further education institution; education, out of TAM"}
+{"id":"54784476531","verdict":"out","segment":"","tier":"","reason":"noleo.com — unclear/likely small consumer brand; cannot confirm IN vertical"}
+{"id":"54784476535","verdict":"out","segment":"","tier":"","reason":"mclean.harvard.edu is McLean Hospital (Harvard psychiatric facility); healthcare provider, out of TAM"}
+{"id":"54784477005","verdict":"out","segment":"","tier":"","reason":"newtonsatx.com appears to be San Antonio restaurant; food service, out of TAM"}
+{"id":"54784482365","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"conti-na.com is Continental North America (ContiTech) — massive automotive/industrial rubber/components manufacturer with extensive NA manufacturing network"}
+{"id":"54784482684","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"FinishMaster — largest national distributor of automotive refinishing products with 200+ locations serving collision repair shops across NA"}
+{"id":"54784483335","verdict":"out","segment":"","tier":"","reason":"Daifuku/Jervis B. Webb is material handling systems integrator/equipment OEM; capital equipment manufacturing, not a yard-network user"}
+{"id":"54784483511","verdict":"out","segment":"","tier":"","reason":"mcdonaldmazdawest.motosnap.com is McDonald Mazda auto dealership; automotive retail, out of TAM"}
+{"id":"54784483633","verdict":"out","segment":"","tier":"","reason":"Federal Bureau of Prisons is government/corrections agency; government, out of TAM"}
+{"id":"54784489587","verdict":"out","segment":"","tier":"","reason":"Pivotworks is software/technology consulting company; IT/SaaS, out of TAM"}
+{"id":"54784489834","verdict":"review","segment":"","tier":"","reason":"jneinc.com — company name unknown, domain unclear; cannot classify without more info"}
+{"id":"54784495764","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Zeeland Lumber & Supply — regional building materials/lumber dealer with multiple Michigan locations and distribution yards"}
+{"id":"54784495953","verdict":"out","segment":"","tier":"","reason":"GSR Group (gsrgroup.us) is food franchise operator; QSR/restaurant, out of TAM"}
+{"id":"54784500322","verdict":"out","segment":"","tier":"","reason":"LanguageLine UK is language interpretation/translation services company; professional services, out of TAM"}
+{"id":"54784500376","verdict":"out","segment":"","tier":"","reason":"Sears Auto Center is automotive service/tire center chain; retail auto service, out of TAM"}
+{"id":"54784500604","verdict":"out","segment":"","tier":"","reason":"mpihq.com is MPI (Meeting Professionals International) — events/meetings industry association; out of TAM"}
+{"id":"54784504614","verdict":"out","segment":"","tier":"","reason":"jellamcd.com appears to be McDonald's franchise operator; QSR, out of TAM"}
+{"id":"54784504671","verdict":"out","segment":"","tier":"","reason":"Jabez Telecom is telecom services company; telecommunications, out of TAM"}
+{"id":"54784504947","verdict":"out","segment":"","tier":"","reason":"marshpm.com appears to be property management company; real estate services, out of TAM"}
+{"id":"54784505484","verdict":"out","segment":"","tier":"","reason":"hotchickenidaho.com is a restaurant; food service, out of TAM"}
+{"id":"54784505711","verdict":"out","segment":"","tier":"","reason":"Pennsubs is Subway franchisee; QSR, out of TAM"}
+{"id":"54784505768","verdict":"out","segment":"","tier":"","reason":"Unity Works (unityworksmedia.com) is UK media/events production company; media/entertainment, out of TAM"}
+{"id":"54784506665","verdict":"out","segment":"","tier":"","reason":"Jacobs Engineering is professional engineering/construction management firm; engineering/consulting services, out of TAM"}
+{"id":"54784507186","verdict":"in","segment":"paper_packaging","tier":"B","reason":"American Packaging Corporation — flexible packaging manufacturer with 6 US facilities; food/pharma packaging converter"}
+{"id":"54784507785","verdict":"out","segment":"","tier":"","reason":"Mattress Warehouse (sleephappens.com) is mattress retail chain; furniture/mattress retail, out of TAM"}
+{"id":"54784510617","verdict":"in","segment":"chemicals_plastics","tier":"B","reason":"petrogascorp.com — Petrogas Energy Corp, Canadian NGL wholesale distributor with North American pipeline/terminal operations"}
+{"id":"54784510899","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Tenere — contract manufacturer of metal/plastic precision components for cloud, network, and energy OEMs; 2000 employees, multiple NA facilities"}
+{"id":"54784510989","verdict":"out","segment":"","tier":"","reason":"gpi.com (SERA) appears to be architecture/planning firm; professional services, out of TAM"}
+{"id":"54784514195","verdict":"out","segment":"","tier":"","reason":"nolimitpizza.com is pizza restaurant; food service, out of TAM"}
+{"id":"54784514947","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Martignetti Enterprises — 6th largest wine/spirits distributor in US; large beverage distribution operation in New England with significant freight movement"}
+{"id":"54784515211","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Wurth Industry North America — industrial distribution division with 110+ locations across US, Canada, Mexico; fasteners, MRO, safety products"}
+{"id":"54784515973","verdict":"out","segment":"","tier":"","reason":"ServiceMaster (servicemastermo.com) is restoration/cleaning franchise; janitorial/facilities services, out of TAM"}
+{"id":"54784521794","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Shaw Industries — world's largest carpet/flooring manufacturer (Berkshire Hathaway); extensive NA manufacturing/distribution network"}
+{"id":"54784521868","verdict":"out","segment":"","tier":"","reason":"Playnation UK is children's playground equipment retailer; outside TAM scope and not North America"}
+{"id":"54784523178","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Dorel Industries — global juvenile products/furniture manufacturer with facilities in Canada, US, and Brazil; multi-site physical manufacturing and distribution"}
+{"id":"54784523387","verdict":"out","segment":"","tier":"","reason":"Amphenol Interconnect India is India-based connector manufacturer; outside North America"}
+{"id":"54784524400","verdict":"out","segment":"","tier":"","reason":"mtabsc.org appears to be transit/bus authority organization; public transit/government, out of TAM"}
+{"id":"54784527174","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"SemGroup — Tulsa-based midstream oil/gas company with pipelines, processing plants, crude oil terminals, and marine terminals across North America"}
+{"id":"54784527527","verdict":"in","segment":"chemicals_plastics","tier":"B","reason":"Tronox — world's largest integrated titanium dioxide producer with manufacturing in US, Netherlands, South Africa"}
+{"id":"54784528964","verdict":"out","segment":"","tier":"","reason":"Kenworth del Rio Bravo is Mexican Kenworth truck dealership; vehicle dealer, not a yard-network freight operator"}
+{"id":"54784529712","verdict":"out","segment":"","tier":"","reason":"Renewal by Andersen is window/door replacement franchise; home improvement services, out of TAM"}
+{"id":"54784534444","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Pilot Flying J — largest North American travel center network with 750+ locations, 72000+ truck parking spaces; massive yard/freight infrastructure"}
+{"id":"54784536585","verdict":"out","segment":"","tier":"","reason":"BELFOR Canada is property restoration/disaster recovery company; construction/restoration services, out of TAM"}
+{"id":"54784536602","verdict":"out","segment":"","tier":"","reason":"Groeneveld-Beka is automatic lubrication systems manufacturer; industrial equipment OEM, not a yard-network freight operator"}
+{"id":"54784536893","verdict":"out","segment":"","tier":"","reason":"Gator Domino's is Domino's Pizza franchisee; QSR restaurant, out of TAM"}
+{"id":"54784537345","verdict":"out","segment":"","tier":"","reason":"cn.skechers.com is Skechers China; consumer footwear brand, outside North America scope"}
+{"id":"54784540795","verdict":"out","segment":"","tier":"","reason":"Centria Healthcare is ABA therapy/autism services provider; healthcare services, out of TAM"}

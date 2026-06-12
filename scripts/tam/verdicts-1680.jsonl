@@ -1,0 +1,120 @@
+{"id":"54772606506","verdict":"out","segment":"","tier":"","reason":"asurairports.com — airport services/passenger aviation, out vertical"}
+{"id":"54772618561","verdict":"out","segment":"","tier":"","reason":"NCG Care — healthcare provider, out vertical"}
+{"id":"54772618843","verdict":"out","segment":"","tier":"","reason":"Employment Screening Services — HR/background check services, out vertical"}
+{"id":"54772621240","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Toyota Industries Engineering & Mfg (TIEM) — Toyota group automotive/industrial equipment manufacturing, large NA footprint"}
+{"id":"54772621576","verdict":"in","segment":"chemicals_plastics","tier":"B","reason":"Plastic Industries — plastics manufacturing, operates physical mfg facilities with inbound/outbound freight"}
+{"id":"54772621592","verdict":"out","segment":"","tier":"","reason":"Retired.com — retirement info/media website, no physical freight operations"}
+{"id":"54772628638","verdict":"out","segment":"","tier":"","reason":"Kindle Energy — independent power producer, natural gas generation assets; electric utility/energy vertical, out"}
+{"id":"54772631181","verdict":"out","segment":"","tier":"","reason":"nrec.net — unclear but resolves to government/tech/robotics entities, no freight/distribution profile"}
+{"id":"54772633871","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Saladino's — foodservice wholesale distributor serving Western US, multiple DCs with heavy inbound freight"}
+{"id":"54772634010","verdict":"out","segment":"","tier":"","reason":"prokey.com — crypto hardware wallet/IT company, out vertical"}
+{"id":"54772664405","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Priority 1 Courier — courier/carrier, operates fleet with freight activity"}
+{"id":"54772669548","verdict":"out","segment":"","tier":"","reason":"Nicor Gas — natural gas utility/distribution utility, out vertical"}
+{"id":"54772669559","verdict":"out","segment":"","tier":"","reason":"ALCAN Systems — German antenna/telecom tech company (liquidated 2023), out vertical"}
+{"id":"54772669864","verdict":"out","segment":"","tier":"","reason":"Screenmobile Corporation — mobile screen repair franchise (home improvement), no freight yard network"}
+{"id":"54772671827","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Silver Line Windows — major vinyl window/door manufacturer (Ply Gem), multiple NA manufacturing & distribution facilities"}
+{"id":"54772671881","verdict":"out","segment":"","tier":"","reason":"Jacent — retail merchandising/services company, out vertical"}
+{"id":"54772672028","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"MBM Foodservice — foodservice distributor, multi-site distribution operations with heavy truck freight"}
+{"id":"54772675165","verdict":"out","segment":"","tier":"","reason":"Danaher — life sciences/diagnostics/biotech conglomerate, primary business is lab instruments not freight-heavy mfg/distribution"}
+{"id":"54772681053","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Gehr Industries (gehr.com) — wire/cable manufacturing and distribution across US/Canada, multi-site industrial operations"}
+{"id":"54772682658","verdict":"out","segment":"","tier":"","reason":"Cypress Five Star — Five Guys/Blaze Pizza franchisee operator, QSR/restaurant vertical, out"}
+{"id":"54772685485","verdict":"out","segment":"","tier":"","reason":"Mr. Stax — IHOP restaurant operator, QSR/restaurant vertical, out"}
+{"id":"54772701029","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"SDR Distribution — 3PL specializing in fashion/apparel fulfillment, 2M+ sq ft facilities in US/Canada, acquired by NFI"}
+{"id":"54772703322","verdict":"out","segment":"","tier":"","reason":"Amentum — government professional/technical services contractor (defense, nuclear, env), out vertical"}
+{"id":"54772710947","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Green Bay Packaging Coated Products — pressure-sensitive label stock mfg, 11 DCs across US/Canada/Mexico, large paper/packaging operation"}
+{"id":"54772714056","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Harley Marine Services (now Centerline Logistics) — petroleum marine transportation, multi-port terminal/yard operations"}
+{"id":"54772714379","verdict":"out","segment":"","tier":"","reason":"Culligan by Waterco — water treatment services/dealership, no freight yard network"}
+{"id":"54772717350","verdict":"in","segment":"paper_packaging","tier":"A","reason":"SWM International — global specialty paper/materials manufacturer (tobacco, packaging, battery), multi-continent mfg facilities"}
+{"id":"54772736658","verdict":"out","segment":"","tier":"","reason":"Primoris Services — specialty construction/infrastructure EPC contractor (solar, utility), jobsite-based general contractor, out"}
+{"id":"54772736910","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Johnstone Supply NW — HVAC wholesale distributor, 14+ locations in Northwest US, major distribution network"}
+{"id":"54772736920","verdict":"out","segment":"","tier":"","reason":"FCI (fcicyber.com) — cybersecurity/IT managed services, out vertical"}
+{"id":"54772737302","verdict":"out","segment":"","tier":"","reason":"Lake Elsinore Unified School District — K-12 education, out vertical"}
+{"id":"54772737844","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"WESCO International — $22B electrical/industrial/comms wholesale distributor, 500 branches + 10 automated DCs in NA"}
+{"id":"54772741689","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Franz Bakery (US Bakery) — large Pacific NW commercial bakery with multiple plants and distribution routes"}
+{"id":"54772749617","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Canada Post — national postal carrier with massive logistics/parcel network and dozens of processing facilities across Canada"}
+{"id":"54773326508","verdict":"out","segment":"","tier":"","reason":"STANLEY Security — security systems/services provider, out vertical"}
+{"id":"54773480571","verdict":"in","segment":"cold_chain","tier":"B","reason":"Ice Cream Specialties — ice cream manufacturer/distributor, cold-chain CPG with frozen distribution"}
+{"id":"54773556535","verdict":"out","segment":"","tier":"","reason":"California State University Long Beach — higher education, out vertical"}
+{"id":"54773621511","verdict":"out","segment":"","tier":"","reason":"NINDS (NIH) — federal government/healthcare research, out vertical"}
+{"id":"54773621805","verdict":"out","segment":"","tier":"","reason":"tifs.com — TI Fluid Systems, automotive parts mfg but primarily UK-listed entity acquired by ABC Technologies; primarily non-NA operations, borderline but core mfg is automotive supplier tier-1 — classify out as non-NA HQ focus"}
+{"id":"54773622017","verdict":"out","segment":"","tier":"","reason":"Atypon — academic/digital publishing software platform, out vertical"}
+{"id":"54773641530","verdict":"out","segment":"","tier":"","reason":"Broad Reach Power — battery energy storage developer, electric utility/energy vertical, out"}
+{"id":"54773646009","verdict":"out","segment":"","tier":"","reason":"Texas Department of Criminal Justice — government/corrections, out vertical"}
+{"id":"54773646220","verdict":"in","segment":"agriculture_food_processing","tier":"A","reason":"Agrium — major NA agricultural inputs company (fertilizers, crop nutrients), large plant/distribution network across NA (now Nutrien)"}
+{"id":"54773646618","verdict":"out","segment":"","tier":"","reason":"OSI Foods Australia (osifoods.com.au) — Australian food manufacturer, outside NA"}
+{"id":"54773646994","verdict":"out","segment":"","tier":"","reason":"europeanappliances.com — appliance retail/distribution, unclear NA presence, no freight network signal"}
+{"id":"54773649202","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Silgan PFC (Silgan Plastic Food Containers) — leading food container/packaging mfg, multiple NA plants serving major CPG brands"}
+{"id":"54773654584","verdict":"out","segment":"","tier":"","reason":"e.marlboro.com — Marlboro/Altria consumer domain, not a freight-operating entity"}
+{"id":"54773654647","verdict":"out","segment":"","tier":"","reason":"Fusus — public safety/security camera platform SaaS, out vertical"}
+{"id":"54773654938","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Sequa Corporation — Precoat Metals (largest NA independent metal coil coater) + Chromalloy aerospace parts, industrial mfg with multi-site NA operations"}
+{"id":"54773666321","verdict":"out","segment":"","tier":"","reason":"elceurope.com — ELC Brands, European brand licensing/entertainment agency, out vertical"}
+{"id":"54773671852","verdict":"out","segment":"","tier":"","reason":"caemilusa.com — CAE USA, defense simulation/training technology, out vertical"}
+{"id":"54773674526","verdict":"out","segment":"","tier":"","reason":"Medallion Midstream — crude oil/natural gas gathering pipeline (acquired by ONEOK), midstream pipeline, out vertical"}
+{"id":"54773678149","verdict":"out","segment":"","tier":"","reason":"austinindl.com — Austin Industrial, industrial maintenance/construction services contractor, jobsite-based, out"}
+{"id":"54773692330","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"UPS Israel (ups.co.il) — UPS international parcel/logistics, massive global freight network; NA parent qualifies"}
+{"id":"54773698924","verdict":"out","segment":"","tier":"","reason":"Modern Restaurant Concepts — restaurant group (QSR), out vertical"}
+{"id":"54773704857","verdict":"out","segment":"","tier":"","reason":"Performance Technologies (perf-tec.com) — IT/networking technology services, out vertical"}
+{"id":"54773704858","verdict":"out","segment":"","tier":"","reason":"Access Midstream — natural gas gathering/processing MLP (acquired by Williams), midstream pipeline, out vertical"}
+{"id":"54773708125","verdict":"out","segment":"","tier":"","reason":"Seabulk Offshore — offshore energy support marine services, primarily offshore oil/gas vessels, not a yard-network operation"}
+{"id":"54773709062","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Weir Minerals — global mining/mineral processing equipment manufacturer and service (pumps, hydrocyclones), multi-site NA mfg/service"}
+{"id":"54773709223","verdict":"out","segment":"","tier":"","reason":"ERA Home Security — home security/alarm services, out vertical"}
+{"id":"54773714342","verdict":"out","segment":"","tier":"","reason":"Nobel Biocare — dental implant manufacturer, medical device but no freight-heavy distribution profile"}
+{"id":"54773716823","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Dover Corporation — S&P 500 diversified industrial mfg conglomerate (OPW, pumps, fueling, engineered products), large multi-facility NA operations"}
+{"id":"54773727337","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"OPW Global — fueling/fluid-handling equipment manufacturer (Dover subsidiary), mfg operations in NA serving petroleum/chemical distribution"}
+{"id":"54773730179","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Arc International — global glass tableware manufacturer (Luminarc, Arcoroc), has US production + mass distribution network"}
+{"id":"54773730680","verdict":"out","segment":"","tier":"","reason":"dhwaterquality.com — Danaher water quality division, primarily instruments/testing, out vertical"}
+{"id":"54773736194","verdict":"out","segment":"","tier":"","reason":"Hermetic Solutions Group (now Qnnect) — hermetic electronic components for defense/aerospace/medical, small precision mfg, not freight-heavy"}
+{"id":"54773737901","verdict":"out","segment":"","tier":"","reason":"VergeSense — workplace IoT/occupancy analytics SaaS, out vertical"}
+{"id":"54773747235","verdict":"out","segment":"","tier":"","reason":"Dragados Canada (FlatironDragados) — heavy civil/infrastructure construction contractor, jobsite-based, out"}
+{"id":"54773751435","verdict":"out","segment":"","tier":"","reason":"La Plata High School (ccboe.com) — K-12 education, out vertical"}
+{"id":"54773753921","verdict":"in","segment":"chemicals_plastics","tier":"B","reason":"Ohmstede — heat exchanger mfg/repair for refinery/petrochemical, industrial mfg with multiple NA shop locations"}
+{"id":"54773754421","verdict":"out","segment":"","tier":"","reason":"Burger King India — QSR/restaurant (India), out vertical and out geography"}
+{"id":"54773755707","verdict":"out","segment":"","tier":"","reason":"brandtequipment.com.au — Australian equipment dealer, outside NA"}
+{"id":"54773755945","verdict":"out","segment":"","tier":"","reason":"Big Star Transit — non-emergency medical transportation/paratransit company, out vertical"}
+{"id":"54773757823","verdict":"out","segment":"","tier":"","reason":"mtacc.info — medical transcription training/education or government transit capital construction, either way out vertical"}
+{"id":"54773757825","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Marmon Keystone Canada — carbon/alloy pipe/tubing/bar wholesale distributor (Berkshire Hathaway), multi-location distribution across Canada"}
+{"id":"54773774081","verdict":"out","segment":"","tier":"","reason":"hdlao.com — HdL Companies, government revenue management/tax software for municipalities, out vertical"}
+{"id":"54773775945","verdict":"out","segment":"","tier":"","reason":"King County Metro — public transit agency (government), out vertical"}
+{"id":"54773775947","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Sysco Canada (Vancouver) — world's largest foodservice distributor, massive multi-DC freight operation in Canada"}
+{"id":"54773779610","verdict":"out","segment":"","tier":"","reason":"Jet Propulsion Laboratory (NASA/Caltech) — aerospace/government research lab, out vertical"}
+{"id":"54773787764","verdict":"out","segment":"","tier":"","reason":"Tata Consultancy Services — IT services/consulting conglomerate, out vertical"}
+{"id":"54773787954","verdict":"out","segment":"","tier":"","reason":"Roto-Rooter — plumbing/drain services, out vertical"}
+{"id":"54773795464","verdict":"out","segment":"","tier":"","reason":"Super Restoration — property restoration services, out vertical"}
+{"id":"54773810262","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Norris Food Services — prepared foods manufacturer/distributor serving 7-Eleven stores in NY/NJ/PA, 130k sq ft facility with distribution"}
+{"id":"54773823887","verdict":"out","segment":"","tier":"","reason":"Royal Canadian Mounted Police — federal law enforcement/government, out vertical"}
+{"id":"54773851701","verdict":"out","segment":"","tier":"","reason":"Dealer Services Network (dsn.net) — automotive dealer financial/insurance services, out vertical"}
+{"id":"54773863272","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"The Step2 Company — largest US plastic toy/consumer goods manufacturer, 2 large Ohio mfg plants, ships to 70+ countries"}
+{"id":"54774126686","verdict":"out","segment":"","tier":"","reason":"Continental Film (continental-film.hr) — Croatian film/media company, outside NA and out vertical"}
+{"id":"54774126695","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Ewing Outdoor Supply — largest family-owned landscape products wholesale distributor in US, 260+ locations nationwide"}
+{"id":"54774126753","verdict":"out","segment":"","tier":"","reason":"Dexter Construction (dexter.ca) — Canadian civil construction/asphalt contractor, jobsite-based, out"}
+{"id":"54774126889","verdict":"out","segment":"","tier":"","reason":"Fractional CTO Now — fractional executive/consulting services, out vertical"}
+{"id":"54774155809","verdict":"out","segment":"","tier":"","reason":"Kinetics (kinetics.com.br) — Brazilian company, outside NA"}
+{"id":"54774155843","verdict":"out","segment":"","tier":"","reason":"Interface Systems — managed security/network services for multi-site businesses, out vertical"}
+{"id":"54774155857","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Luxco — spirits/distillery company (MGP Ingredients), multiple distilleries in KY/IN/DC plus distribution, CPG beverage"}
+{"id":"54774200860","verdict":"out","segment":"","tier":"","reason":"MacDermid Alpha Electronics Solutions — specialty chemicals for electronics/semiconductor mfg, niche precision chemical, not freight-yard-heavy"}
+{"id":"54774200937","verdict":"out","segment":"","tier":"","reason":"Cogentix Medical — medical device company, out vertical"}
+{"id":"54774200944","verdict":"out","segment":"","tier":"","reason":"Deployed Resources — temporary life support facilities for government/emergency, services company, out vertical"}
+{"id":"54774211589","verdict":"out","segment":"","tier":"","reason":"Intercon Security — security guard/physical security services, out vertical"}
+{"id":"54774269784","verdict":"out","segment":"","tier":"","reason":"Savant — smart home automation/AV technology, out vertical"}
+{"id":"54774352953","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"FRAM — #1 US oil/air/fuel filter brand for automotive aftermarket, mfg and wide distribution (parent First Brands Group)"}
+{"id":"54774398497","verdict":"out","segment":"","tier":"","reason":"IE University — Spanish business school/education, out vertical"}
+{"id":"54774428073","verdict":"out","segment":"","tier":"","reason":"Captronic Systems — Indian electronics mfg/distribution, outside NA"}
+{"id":"54774429774","verdict":"out","segment":"","tier":"","reason":"Luxshare Precision Industry — Chinese electronics/connector manufacturer (Apple supplier), primary ops outside NA"}
+{"id":"54774439858","verdict":"out","segment":"","tier":"","reason":"Dazz — cloud security SaaS, out vertical"}
+{"id":"54774452405","verdict":"out","segment":"","tier":"","reason":"contractor.victoria.com — unclear/likely Australian government contractor portal, outside NA"}
+{"id":"54774457000","verdict":"out","segment":"","tier":"","reason":"Airmar Technology — marine transducer/sensor manufacturer, niche marine electronics, not a freight-yard operator"}
+{"id":"54774457244","verdict":"out","segment":"","tier":"","reason":"ch.estee.com — Estee Lauder Switzerland regional domain, cosmetics/beauty, out vertical"}
+{"id":"54774465285","verdict":"out","segment":"","tier":"","reason":"NeXolve — aerospace materials/films manufacturer (NASA contractor), aerospace prime, out vertical"}
+{"id":"54774471018","verdict":"out","segment":"","tier":"","reason":"Burson-Marsteller AU — PR/communications consulting firm, out vertical"}
+{"id":"54774477371","verdict":"out","segment":"","tier":"","reason":"Accident Fund — workers compensation insurance, out vertical"}
+{"id":"54774486690","verdict":"out","segment":"","tier":"","reason":"Amtrol Alfa — pressure vessel/water heater manufacturer (Portuguese), primarily European ops, borderline but NA footprint unclear"}
+{"id":"54774487574","verdict":"out","segment":"","tier":"","reason":"Time Inc — media/publishing company, out vertical"}
+{"id":"54774493773","verdict":"out","segment":"","tier":"","reason":"AmSpec — petroleum/chemical inspection and testing services company, out vertical (services, not freight operator)"}
+{"id":"54774496858","verdict":"out","segment":"","tier":"","reason":"Vercara (Neustar Security) — DNS/cybersecurity services, out vertical"}
+{"id":"54774508822","verdict":"out","segment":"","tier":"","reason":"Gaston County Schools — K-12 education, out vertical"}
+{"id":"54774511521","verdict":"out","segment":"","tier":"","reason":"Saddleback Valley Unified School District — K-12 education, out vertical"}
+{"id":"54774514468","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Greg Poole Equipment Company — authorized Caterpillar dealer + forklift/lift equipment distributor, 25 locations in Eastern NC, industrial distribution"}
+{"id":"54774517689","verdict":"out","segment":"","tier":"","reason":"World Fuel Services (World Kinect) — fuel/energy commodity broker and distributor to aviation/marine/commercial customers, primarily fuel trading/logistics services not a yard-network operator"}
+{"id":"54774517780","verdict":"out","segment":"","tier":"","reason":"orix.ie — ORIX Ireland, financial services/leasing, out vertical"}
+{"id":"54774526491","verdict":"out","segment":"","tier":"","reason":"esab.ch — ESAB Switzerland, welding products/Swiss entity; ESAB HQ is Swedish with US ops but this is a regional domain, marginal"}
+{"id":"54774531085","verdict":"out","segment":"","tier":"","reason":"Calibre Mining — gold mining company operating in Nicaragua/Nevada/Canada, mining extract not a yard-network operation"}

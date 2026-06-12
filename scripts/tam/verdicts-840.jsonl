@@ -1,0 +1,120 @@
+{"id":"45058595982","name":"Keller Logistics Group","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Asset-based 3PL/carrier with warehousing and freight brokerage operations across NA"}
+{"id":"45061843101","name":"Voyager Express","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Regional trucking/carrier operating NA freight lanes"}
+{"id":"45063695659","name":"Tenaxx Group","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Asset-based 3PL with 50+ trucks, 200k sqft warehousing, drayage/shunting across NA"}
+{"id":"45066091688","name":"Hoffman Transport","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Trucking/transport carrier operating NA freight"}
+{"id":"45066245180","name":"Reed TMS Logistics","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"TMS-backed logistics/carrier with freight operations"}
+{"id":"45067334473","name":"Sunrise Freight Systems","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Freight carrier/3PL operating NA lanes"}
+{"id":"45070118552","name":"Interstate Transport","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Interstate trucking carrier with NA freight operations"}
+{"id":"45133928252","name":"LMB TRANSPORT","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Trucking carrier operating NA freight"}
+{"id":"45134235011","name":"Giltner Transportation","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Mid-size truckload carrier with significant NA fleet"}
+{"id":"45139997605","name":"Jrw Trucking","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Small trucking carrier operating NA freight"}
+{"id":"45139997615","name":"Security Transport","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Trucking/transport carrier operating NA freight"}
+{"id":"45140762034","name":"Capital Logistics Group","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Logistics/carrier group with freight delivery operations"}
+{"id":"45146042432","name":"Fraley and Schilling","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Asset-based carrier/3PL with tank and bulk freight operations"}
+{"id":"45146506264","name":"First Call Logistics","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Freight logistics/carrier with NA delivery operations"}
+{"id":"54039429016","name":"Solidea Capital","verdict":"out","segment":"","tier":"","reason":"Private equity/finance firm, not a freight operator"}
+{"id":"54040284544","name":"Covestro","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"Large global chemicals/plastics manufacturer with major NA production and distribution facilities"}
+{"id":"54188151193","name":"Ben Keith","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Food and beverage wholesale distributor serving TX/SW with large DC network"}
+{"id":"54408148118","name":"Eagle Express Lines","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Regional trucking/express carrier with NA freight operations"}
+{"id":"54421055081","name":"Comcast","verdict":"out","segment":"","tier":"","reason":"Telecom/media company, not a freight-heavy physical goods operator"}
+{"id":"54430098532","name":"WK Kellogg Co","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Large CPG cereal/snack manufacturer with multiple NA plants and DCs"}
+{"id":"54431027545","name":"Agc","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"AGC is a major global glass/building materials manufacturer with large NA production facilities"}
+{"id":"54434432532","name":"Gefco","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Automotive-focused 3PL/logistics provider with significant NA yard and terminal operations"}
+{"id":"54481331753","name":"CRC Group","verdict":"out","segment":"","tier":"","reason":"Specialty insurance/financial services, not a freight operator"}
+{"id":"54688617729","name":"Depot Connect International","verdict":"in","segment":"ports_intermodal","tier":"B","reason":"Tank container depot/intermodal services operator with NA terminal facilities"}
+{"id":"54697075882","name":"MGM Resorts International","verdict":"out","segment":"","tier":"","reason":"Hospitality/entertainment company, not a freight-heavy physical goods operator"}
+{"id":"54697231111","name":"Ascent Hospitality Management","verdict":"out","segment":"","tier":"","reason":"Hospitality management company, not a freight operator"}
+{"id":"54703947143","name":"","verdict":"out","segment":"","tier":"","reason":"food-concepts.com is a restaurant/food service concept operator, not a freight operator"}
+{"id":"54707346446","name":"Food Concepts International / Abuelo's","verdict":"out","segment":"","tier":"","reason":"Restaurant chain operator, not a freight-heavy physical goods operator"}
+{"id":"54728252070","name":"Securitas Electronic Security","verdict":"out","segment":"","tier":"","reason":"Security technology/services company, not a freight operator"}
+{"id":"54734204983","name":"Irving Shipbuilding","verdict":"out","segment":"","tier":"","reason":"Defense/naval shipbuilding, not a standard freight-heavy facility operator"}
+{"id":"54735414067","name":"American Standard Brands","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Plumbing/HVAC products manufacturer with NA plants and distribution"}
+{"id":"54735414167","name":"Turlock Unified School District","verdict":"out","segment":"","tier":"","reason":"Public school district/education, not a freight operator"}
+{"id":"54736061993","name":"SavATree","verdict":"out","segment":"","tier":"","reason":"Tree/lawn care services company, not a freight-heavy operator"}
+{"id":"54755299485","name":"Byrne Dairy","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Regional dairy manufacturer and distributor with processing facilities and cold chain distribution"}
+{"id":"54755299678","name":"","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"reg.sysco.ca = Sysco Canada, major foodservice distribution with large DC network across NA"}
+{"id":"54755315318","name":"Exail","verdict":"out","segment":"","tier":"","reason":"Robotics/defense technology company, not a physical freight operator"}
+{"id":"54755354918","name":"","verdict":"out","segment":"","tier":"","reason":"tw.mcd.com = McDonald's Taiwan, restaurant operator, out of TAM"}
+{"id":"54755794760","name":"","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"matthewsintl.com = Matthews International, industrial brand solutions/memorialization mfg with NA facilities"}
+{"id":"54755794811","name":"TNG Retail Services","verdict":"out","segment":"","tier":"","reason":"Retail merchandising/services company, not a freight-heavy operator"}
+{"id":"54756924226","name":"Elior North America","verdict":"out","segment":"","tier":"","reason":"Food service/contract catering company, not a freight-heavy facility operator"}
+{"id":"54756924794","name":"","verdict":"out","segment":"","tier":"","reason":"bathsaver.com = bath remodeling services, not a freight operator"}
+{"id":"54756992410","name":"","verdict":"review","segment":"","tier":"","reason":"holidaycompanies.com = Holiday Companies, convenience/fuel retail; unclear if sufficient freight-heavy yard ops"}
+{"id":"54756992543","name":"","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"ap.pall.com = Pall Corporation, large filtration/industrial manufacturing with NA plant and distribution network"}
+{"id":"54757126059","name":"First Quantum Minerals","verdict":"review","segment":"","tier":"","reason":"Global mining company; NA operations exist but primarily non-NA freight; boundary case"}
+{"id":"54757164624","name":"JBuild","verdict":"out","segment":"","tier":"","reason":"Construction/building services, not a freight-heavy yard operator"}
+{"id":"54758077527","name":"Dan.com - a GoDaddy brand","verdict":"out","segment":"","tier":"","reason":"Domain registrar/internet company, not a freight operator"}
+{"id":"54758439737","name":"Save the Stacks","verdict":"review","segment":"","tier":"","reason":"stacktest.com is unidentifiable; insufficient info to classify"}
+{"id":"54758440288","name":"PGT Industries","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Window and door manufacturer with NA plants and distribution"}
+{"id":"54762181667","name":"Western States Equipment","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Caterpillar equipment dealer with multiple facilities and heavy freight distribution across western NA"}
+{"id":"54762225563","name":"","verdict":"out","segment":"","tier":"","reason":"ic.fbi.gov = FBI/government agency, out of TAM"}
+{"id":"54762315841","name":"Americaneagle.com","verdict":"out","segment":"","tier":"","reason":"Digital/web agency, not a freight operator"}
+{"id":"54762388282","name":"CKE Restaurants","verdict":"out","segment":"","tier":"","reason":"Restaurant chain operator (Hardee's/Carl's Jr.), not a freight-heavy physical goods operator"}
+{"id":"54762471290","name":"Centuri Group,","verdict":"out","segment":"","tier":"","reason":"Utility infrastructure construction services, not a freight-heavy yard operator"}
+{"id":"54762656914","name":"GNC Franchising","verdict":"out","segment":"","tier":"","reason":"Retail supplement franchise, not a freight-heavy operator"}
+{"id":"54762656931","name":"Simon Property Group","verdict":"out","segment":"","tier":"","reason":"Real estate investment trust/mall operator, not a freight operator"}
+{"id":"54762657149","name":"","verdict":"out","segment":"","tier":"","reason":"it.mcd.com = McDonald's Italy, restaurant operator, out of TAM"}
+{"id":"54763837500","name":"","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"ryobi.com = Ryobi, power tools manufacturer with NA distribution warehouses"}
+{"id":"54763838272","name":"Royal Building Products","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Building products/siding manufacturer with NA plants and distribution"}
+{"id":"54763839136","name":"Neenah Foundry","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Industrial castings/infrastructure products manufacturer with NA foundry facilities"}
+{"id":"54763839235","name":"Computershare","verdict":"out","segment":"","tier":"","reason":"Financial services/share registry company, not a freight operator"}
+{"id":"54769746035","name":"Marion Technical Institute","verdict":"out","segment":"","tier":"","reason":"Technical education institution, not a freight operator"}
+{"id":"54770650208","name":"","verdict":"out","segment":"","tier":"","reason":"safran.fr = Safran, aerospace/defense manufacturer, out of TAM"}
+{"id":"54770655020","name":"A2LA","verdict":"out","segment":"","tier":"","reason":"Accreditation/standards nonprofit, not a freight operator"}
+{"id":"54771709325","name":"Half Price Books","verdict":"out","segment":"","tier":"","reason":"Used book retail chain, not a freight-heavy operator"}
+{"id":"54771804301","name":"CCC Group,","verdict":"in","segment":"building_materials_industrial","tier":"C","reason":"Industrial construction and maintenance services with physical facility presence"}
+{"id":"54771804328","name":"Manitoba Hydro","verdict":"out","segment":"","tier":"","reason":"Electric utility/Crown corporation, not a freight-heavy operator"}
+{"id":"54771812382","name":"","verdict":"out","segment":"","tier":"","reason":"tvusd.us = school district domain, education, out of TAM"}
+{"id":"54771812939","name":"Baker Concrete Construction","verdict":"out","segment":"","tier":"","reason":"Concrete construction contractor, not a freight-heavy yard operator"}
+{"id":"54771834008","name":"Red Lobster","verdict":"out","segment":"","tier":"","reason":"Restaurant chain, not a freight-heavy physical goods operator"}
+{"id":"54771841852","name":"TEMECULA VALLEY UNIFIED SCHOOL DISTRICT","verdict":"out","segment":"","tier":"","reason":"Public school district/education, out of TAM"}
+{"id":"54771844366","name":"","verdict":"review","segment":"","tier":"","reason":"vacv.com is unidentifiable; insufficient info to classify"}
+{"id":"54771856981","name":"","verdict":"review","segment":"","tier":"","reason":"wvcc.com is unidentifiable; insufficient info to classify"}
+{"id":"54771862577","name":"Makita U.S.A.","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Power tools manufacturer/distributor with NA warehouses and distribution centers"}
+{"id":"54771868553","name":"Hampton City Schools","verdict":"out","segment":"","tier":"","reason":"Public school district/education, out of TAM"}
+{"id":"54771897185","name":"Spellman China","verdict":"in","segment":"building_materials_industrial","tier":"C","reason":"High voltage power supply manufacturer with production facilities"}
+{"id":"54771909509","name":"Superior Plus Energy Services","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Propane/energy distribution with large NA terminal and distribution network"}
+{"id":"54771917401","name":"ADAC Automotive","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"Automotive parts/components manufacturer with NA production facilities"}
+{"id":"54771917599","name":"Dummy","verdict":"out","segment":"","tier":"","reason":"Test/dummy record, not a real company"}
+{"id":"54771929155","name":"Dorchester County Adult Ed","verdict":"out","segment":"","tier":"","reason":"Adult education institution, out of TAM"}
+{"id":"54771930910","name":"Video Gaming Technologies","verdict":"out","segment":"","tier":"","reason":"Gaming technology/entertainment company, out of TAM"}
+{"id":"54771943538","name":"Diamond Pet Foods","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Pet food manufacturer with multiple NA production facilities and distribution"}
+{"id":"54771947278","name":"Merchants Distributors","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Grocery/food wholesale distributor with large NA distribution center network"}
+{"id":"54771955053","name":"Gulf Interstate Engineering","verdict":"out","segment":"","tier":"","reason":"Engineering/pipeline consulting services, not a freight-heavy yard operator"}
+{"id":"54771955084","name":"Pacific Seafood","verdict":"in","segment":"cold_chain","tier":"B","reason":"Seafood processing and cold-chain distribution with multiple NA processing/cold storage facilities"}
+{"id":"54771955088","name":"","verdict":"out","segment":"","tier":"","reason":"rentokil-terminix.com = pest control services, not a freight-heavy operator"}
+{"id":"54771960406","name":"Hays CISD","verdict":"out","segment":"","tier":"","reason":"Public school district/education, out of TAM"}
+{"id":"54771978326","name":"PIM Brands","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"CPG candy/snack manufacturer with NA production and distribution"}
+{"id":"54772405252","name":"AIM-RECYCLING","verdict":"in","segment":"building_materials_industrial","tier":"C","reason":"Recycling/waste processing facilities with physical yard and freight ops; closest segment is building_materials_industrial"}
+{"id":"54772524441","name":"","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"de.ttiinc.com = TTI Inc, large electronics/components distributor with NA warehouses and DCs"}
+{"id":"54772524472","name":"American Furniture Warehouse","verdict":"out","segment":"","tier":"","reason":"Furniture retail chain, not a freight-heavy operator in target verticals"}
+{"id":"54772570184","name":"B. Braun","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Medical device/pharma manufacturer and distributor with NA plants and distribution; using wholesale_distribution as closest segment"}
+{"id":"54772590196","name":"Yellow","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Yellow Corp / YRC Worldwide, major LTL carrier with large NA terminal network"}
+{"id":"54772601878","name":"","verdict":"in","segment":"paper_packaging","tier":"B","reason":"cfpwood.com = wood/forest products manufacturer with NA mills and distribution"}
+{"id":"54772606214","name":"Mission Essential","verdict":"out","segment":"","tier":"","reason":"Defense/government services contractor, out of TAM"}
+{"id":"54772644390","name":"RevZilla","verdict":"out","segment":"","tier":"","reason":"Motorcycle gear ecommerce retailer, not a freight-heavy operator in target verticals"}
+{"id":"54772663426","name":"FORT ZUMWALT SCHOOL DISTRICT","verdict":"out","segment":"","tier":"","reason":"Public school district/education, out of TAM"}
+{"id":"54772663440","name":"Frozen Food Express","verdict":"in","segment":"cold_chain","tier":"B","reason":"Temperature-controlled/refrigerated trucking carrier with NA terminal and cold storage network"}
+{"id":"54772664227","name":"VTech USA","verdict":"out","segment":"","tier":"","reason":"Consumer electronics company, not a freight-heavy operator in target verticals"}
+{"id":"54772672090","name":"Sunrise Coal","verdict":"review","segment":"","tier":"","reason":"Coal mining operation; freight-heavy but primarily extractive/non-standard NA freight vertical"}
+{"id":"54772675115","name":"","verdict":"review","segment":"","tier":"","reason":"prkmc.com is unidentifiable; insufficient info to classify"}
+{"id":"54772680287","name":"B&H PHOTO","verdict":"out","segment":"","tier":"","reason":"Electronics/photo retail, not a freight-heavy operator in target verticals"}
+{"id":"54772680624","name":"","verdict":"review","segment":"","tier":"","reason":"pcoastp.com is unidentifiable; insufficient info to classify"}
+{"id":"54772682787","name":"","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"us.ebmpapst.com = ebm-papst, industrial fan/motor manufacturer with NA production and distribution"}
+{"id":"54772698760","name":"Lake County Schools","verdict":"out","segment":"","tier":"","reason":"Public school district/education, out of TAM"}
+{"id":"54772701359","name":"Werner Electric Supply","verdict":"in","segment":"wholesale_distribution","tier":"C","reason":"Electrical wholesale distributor with NA branch and distribution network"}
+{"id":"54772704011","name":"","verdict":"in","segment":"retail_grocery","tier":"B","reason":"saq.qc.ca = SAQ, Quebec liquor board retailer with large distribution infrastructure across Quebec"}
+{"id":"54772707105","name":"","verdict":"out","segment":"","tier":"","reason":"duqlight.com = Duquesne Light, electric utility, out of TAM"}
+{"id":"54772714355","name":"","verdict":"out","segment":"","tier":"","reason":"big5corp.com = Big 5 Sporting Goods, sporting goods retail chain, out of TAM"}
+{"id":"54773031097","name":"","verdict":"review","segment":"","tier":"","reason":"redcedarventures.com is unidentifiable; appears to be a small venture entity"}
+{"id":"54773586603","name":"","verdict":"out","segment":"","tier":"","reason":"pw.utc.com = Pratt & Whitney, aerospace/defense engine manufacturer, out of TAM"}
+{"id":"54773638829","name":"Ceres Unified School District","verdict":"out","segment":"","tier":"","reason":"Public school district/education, out of TAM"}
+{"id":"54773674845","name":"ERT","verdict":"out","segment":"","tier":"","reason":"ert.com = clinical research/CRO technology company, not a freight operator"}
+{"id":"54773674857","name":"Boardwalk Pipeline Partners","verdict":"out","segment":"","tier":"","reason":"Natural gas pipeline utility/MLP, not a freight-heavy truck yard operator"}
+{"id":"54773698649","name":"","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"xtra.com = XTRA Lease, large trailer leasing/fleet company with NA terminal and depot network"}
+{"id":"54773698737","name":"Curtis Electric","verdict":"out","segment":"","tier":"","reason":"curtisinst.com = Curtis Instruments, industrial controls electronics manufacturer; small, no large NA freight yard"}
+{"id":"54773714099","name":"BMW Deutschland","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"BMW, major global automotive manufacturer with large NA plants and distribution yards"}
+{"id":"54773721169","name":"","verdict":"out","segment":"","tier":"","reason":"worldbankgroup.org = World Bank, multilateral finance/nonprofit, out of TAM"}
+{"id":"54773730681","name":"McCormick & Company","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Major global spices/flavors CPG manufacturer with multiple NA plants and distribution centers"}
+{"id":"54773733487","name":"Sanborns","verdict":"out","segment":"","tier":"","reason":"Mexican retail/restaurant chain, not NA-focused freight operator"}
+{"id":"54773755814","name":"","verdict":"out","segment":"","tier":"","reason":"aecomhunt.com = AECOM Hunt, construction/engineering services, not a freight-heavy yard operator"}

@@ -1,0 +1,120 @@
+{"id":"54784233621","verdict":"out","segment":"","tier":"","reason":"Indiana Media Group - media company, OUT vertical"}
+{"id":"54784237697","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Penske Corp - major fleet/truck leasing and logistics provider with national footprint"}
+{"id":"54784242257","verdict":"out","segment":"","tier":"","reason":"Go the Extra Mile - automotive marketing/consulting firm, professional services OUT"}
+{"id":"54784242258","verdict":"out","segment":"","tier":"","reason":"Discount Car & Truck Rentals - consumer/retail vehicle rental, not freight yard operator"}
+{"id":"54784244260","verdict":"out","segment":"","tier":"","reason":"RG&E - Rochester Gas and Electric, electric/gas utility OUT per rules"}
+{"id":"54784245008","verdict":"out","segment":"","tier":"","reason":"CMS Law Group - legal/professional services OUT"}
+{"id":"54784245430","verdict":"out","segment":"","tier":"","reason":"Quench Water - water-as-a-service/equipment rental for offices, no freight yard network"}
+{"id":"54784261290","verdict":"in","segment":"agriculture_food_processing","tier":"B","reason":"Sanderson Farms - major poultry processor with multiple processing plants and distribution"}
+{"id":"54784261531","verdict":"in","segment":"paper_packaging","tier":"B","reason":"PCMC Paper Converting Machine Company - manufactures packaging/converting machinery, industrial mfg with facilities"}
+{"id":"54784263515","verdict":"out","segment":"","tier":"","reason":"Travlead.com - corporate travel management company, professional services OUT"}
+{"id":"54784264355","verdict":"in","segment":"chemicals_plastics","tier":"B","reason":"Quaker Chemical/Quaker Houghton - specialty industrial fluids/chemicals manufacturer with multi-site operations"}
+{"id":"54784267911","verdict":"out","segment":"","tier":"","reason":"FX5 Utility - small utility construction contractor serving local TX counties, no DC/yard network"}
+{"id":"54784268070","verdict":"in","segment":"chemicals_plastics","tier":"B","reason":"Veeder-Root - industrial instruments/petroleum equipment manufacturer, part of Fortive industrial mfg"}
+{"id":"54784269335","verdict":"out","segment":"","tier":"","reason":"INSEAD - business school/education OUT"}
+{"id":"54784270126","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Almo Corporation - largest independent appliance/electronics distributor in US with multiple distribution centers"}
+{"id":"54784270234","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Novexco - Canada's largest office products distributor with 6 DCs and 220 locations nationwide"}
+{"id":"54784270361","verdict":"out","segment":"","tier":"","reason":"em.aus.com - Allied Universal Electronic Monitoring, government/justice services OUT"}
+{"id":"54784272929","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"JUST Egg - plant-based egg brand with food manufacturing and national distribution operations"}
+{"id":"54784273226","verdict":"out","segment":"","tier":"","reason":"Precise ParkLink - parking management technology/services OUT"}
+{"id":"54784278161","verdict":"out","segment":"","tier":"","reason":"Reach Partners - management consulting firm, professional services OUT"}
+{"id":"54784279183","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"TTI Inc. - Berkshire Hathaway electronic components distributor with 3M+ sq ft warehouse space and 30 DCs globally"}
+{"id":"54784281203","verdict":"out","segment":"","tier":"","reason":"Information Resources/Circana - data analytics/market research SaaS OUT"}
+{"id":"54784282439","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Rolls-Royce - industrial/aerospace engine manufacturer with major global manufacturing facilities"}
+{"id":"54784284215","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Crown Cork EUR - global metal packaging manufacturer with multiple plants across Europe"}
+{"id":"54784286871","verdict":"out","segment":"","tier":"","reason":"Safran Passenger Innovations - aerospace/cabin entertainment systems, aerospace prime OUT"}
+{"id":"54784293790","verdict":"out","segment":"","tier":"","reason":"DCMP/Dulles Metro - local transit/government entity OUT"}
+{"id":"54784293895","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Lindt Chocolate - global chocolate manufacturer with production plants and distribution network"}
+{"id":"54784294184","verdict":"out","segment":"","tier":"","reason":"Analytik Jena - analytical instruments/lab equipment, scientific instruments not freight-heavy"}
+{"id":"54784297778","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Hafele - global hardware fittings manufacturer/distributor with DCs serving North America"}
+{"id":"54784298664","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Tilray - major craft beer brewer with 20 breweries and national distribution network"}
+{"id":"54784300321","verdict":"out","segment":"","tier":"","reason":"Autogrill - airport/highway food service operator, hospitality/QSR OUT"}
+{"id":"54784304167","verdict":"in","segment":"agriculture_food_processing","tier":"B","reason":"Ceres Solutions cooperative - large Indiana/Michigan ag cooperative with 60 locations handling grain, feed, fuel"}
+{"id":"54784307579","verdict":"in","segment":"agriculture_food_processing","tier":"B","reason":"Southern States sscoop.com - farmer-owned ag cooperative with feed, fuel, grain distribution"}
+{"id":"54784307844","verdict":"in","segment":"retail_grocery","tier":"B","reason":"Houchens Industries - diversified food retail/wholesale with grocery stores and distribution"}
+{"id":"54784317464","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"BMW NA bmwna.com - auto manufacturer North America arm with major distribution and logistics network"}
+{"id":"54784317623","verdict":"out","segment":"","tier":"","reason":"Best Travel Services - travel agency OUT"}
+{"id":"54784319806","verdict":"out","segment":"","tier":"","reason":"Liberator Medical - medical supplies direct-to-consumer, healthcare OUT"}
+{"id":"54784320014","verdict":"out","segment":"","tier":"","reason":"Chapman Monument Co. - monument/memorial stone company, no freight yard network"}
+{"id":"54784320280","verdict":"out","segment":"","tier":"","reason":"Austin Sonic - Sonic Drive-In restaurant franchisee, QSR OUT"}
+{"id":"54784320314","verdict":"out","segment":"","tier":"","reason":"Martin Engineering Co martinengineeringco.com - civil engineering/land surveying consulting, professional services OUT"}
+{"id":"54784322648","verdict":"out","segment":"","tier":"","reason":"Turpin's of Geneseo - auto dealership, retail OUT"}
+{"id":"54784324455","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Assa Abloy DSS - security/door hardware manufacturer with multi-site industrial manufacturing operations"}
+{"id":"54784324529","verdict":"out","segment":"","tier":"","reason":"IAP Worldwide Services - government/defense contractor OUT"}
+{"id":"54784325950","verdict":"in","segment":"chemicals_plastics","tier":"B","reason":"C&J Energy Services - oilfield services company with equipment and multi-site field operations"}
+{"id":"54784325960","verdict":"out","segment":"","tier":"","reason":"East Greenwich High School - education OUT"}
+{"id":"54784326561","verdict":"out","segment":"","tier":"","reason":"TX Family Fitness - fitness club OUT"}
+{"id":"54784328456","verdict":"in","segment":"chemicals_plastics","tier":"C","reason":"Verdun Oil - private E&P company with 288K acres Eagle Ford operations, oil production"}
+{"id":"54784332415","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Ellwood Specialty Metals - specialty steel manufacturer with melting, forging, heat treating facilities"}
+{"id":"54784334344","verdict":"out","segment":"","tier":"","reason":"The Outlier Project - coaching/consulting, professional services OUT"}
+{"id":"54784337430","verdict":"in","segment":"retail_grocery","tier":"B","reason":"PAQ Inc. - employee-owned grocery retailer operating 17 Food 4 Less and 7 Rancho San Miguel stores in CA"}
+{"id":"54784337811","verdict":"out","segment":"","tier":"","reason":"Montrose Environmental montrose-env.ca - environmental consulting services, professional services OUT"}
+{"id":"54784340246","verdict":"out","segment":"","tier":"","reason":"Blackboard - EdTech/SaaS for education OUT"}
+{"id":"54784340248","verdict":"in","segment":"retail_grocery","tier":"A","reason":"PetSmart ssg.petsmart.com - large national pet supply retailer with extensive DC network"}
+{"id":"54784340854","verdict":"out","segment":"","tier":"","reason":"Lewis Tree Service - utility vegetation management/tree trimming, general contractor OUT"}
+{"id":"54784341549","verdict":"out","segment":"","tier":"","reason":"Washington Redskins - NFL sports franchise, entertainment OUT"}
+{"id":"54784341853","verdict":"review","segment":"","tier":"","reason":"Grayco mcgrayco.com - insufficient info to determine industry"}
+{"id":"54784341887","verdict":"out","segment":"","tier":"","reason":"NOLEO - personal care/cosmetics brand, no clear yard-worthy distribution network"}
+{"id":"54784342625","verdict":"out","segment":"","tier":"","reason":"Chaparral USD 361 - school district, education OUT"}
+{"id":"54784343703","verdict":"in","segment":"building_materials_industrial","tier":"C","reason":"BituCore - asphalt manufacturing technology company with industrial materials processing"}
+{"id":"54784343717","verdict":"out","segment":"","tier":"","reason":"McLarty Auto Group - auto dealership group, retail OUT"}
+{"id":"54784346939","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Imperial Tobacco us.imptob.com - major international tobacco manufacturer with large distribution network"}
+{"id":"54784351647","verdict":"out","segment":"","tier":"","reason":"Daifuku Cleanroom America - semiconductor/cleanroom automation equipment, specialized mfg not freight-heavy verticals"}
+{"id":"54784353297","verdict":"review","segment":"","tier":"","reason":"scekc.com - could not identify company from domain"}
+{"id":"54784353824","verdict":"out","segment":"","tier":"","reason":"Air System Components - HVAC/air distribution equipment manufacturer, not a freight-heavy vertical"}
+{"id":"54784357296","verdict":"out","segment":"","tier":"","reason":"DSI Aero - aircraft modification/engineering services, aerospace OUT"}
+{"id":"54784357524","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Santa Cruz Nutritionals - gummy vitamins/nutraceutical manufacturer with 200K+ sq ft CA facility"}
+{"id":"54784358664","verdict":"out","segment":"","tier":"","reason":"Kodak Moments - photo printing/retail kiosk service, consumer retail OUT"}
+{"id":"54784358991","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Molycop molycop.ca - global mining consumables manufacturer with 15 major operational sites in multiple countries"}
+{"id":"54784359314","verdict":"out","segment":"","tier":"","reason":"mcdswla.com - McDonald's regional franchisee, QSR OUT"}
+{"id":"54784359728","verdict":"out","segment":"","tier":"","reason":"Defense.Net - cybersecurity/defense tech OUT"}
+{"id":"54784360837","verdict":"out","segment":"","tier":"","reason":"Brunswick Bowling - bowling center operator, entertainment OUT"}
+{"id":"54784367446","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Tree of Life - natural/organic food wholesale distributor with 12 DCs in US and Canada"}
+{"id":"54784367486","verdict":"out","segment":"","tier":"","reason":"DQ Indiana - Dairy Queen multi-unit franchisee, QSR OUT"}
+{"id":"54784372511","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Interplex in.interplex.com - global precision engineered components manufacturer with 25 sites across 13 countries"}
+{"id":"54784372559","verdict":"out","segment":"","tier":"","reason":"Snow Marketing Collective - marketing agency OUT"}
+{"id":"54784373629","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Grupo Bafar - major Mexican meat processor/distributor with integrated production and national distribution"}
+{"id":"54784375209","verdict":"out","segment":"","tier":"","reason":"Road Ready Advanced Telematics - trailer tracking SaaS/telematics provider, technology OUT"}
+{"id":"54784375900","verdict":"in","segment":"paper_packaging","tier":"B","reason":"Crown Cork Mexico - metal beverage can manufacturing with multiple plants in Mexico"}
+{"id":"54784376440","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Sysco Winnipeg wpg.sysco.ca - Sysco foodservice distribution, 242K sq ft facility serving 3000+ customers"}
+{"id":"54784378481","verdict":"out","segment":"","tier":"","reason":"Burger King Colombia - QSR franchisee OUT"}
+{"id":"54784378897","verdict":"out","segment":"","tier":"","reason":"Premiair Aviation - aviation/passenger services OUT"}
+{"id":"54784380444","verdict":"in","segment":"chemicals_plastics","tier":"B","reason":"ZEP Europe - industrial maintenance chemicals manufacturer serving food/beverage and industrial verticals"}
+{"id":"54784380467","verdict":"out","segment":"","tier":"","reason":"LSG Sky Chefs Egypt - airline catering at Cairo airport, passenger airline catering OUT"}
+{"id":"54784380932","verdict":"out","segment":"","tier":"","reason":"WEND American Group - Wendy's restaurant franchisee, QSR OUT"}
+{"id":"54784381991","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Massey Builders Supply/US LBM - specialty building materials distributor serving contractors across mid-Atlantic"}
+{"id":"54784382852","verdict":"out","segment":"","tier":"","reason":"Applebees Brasil - restaurant franchisee, hospitality OUT"}
+{"id":"54784383385","verdict":"out","segment":"","tier":"","reason":"Seattle Char - Habit Burger Grill franchisee, QSR OUT"}
+{"id":"54784384139","verdict":"out","segment":"","tier":"","reason":"Dairy Queen Long Island - QSR franchisee OUT"}
+{"id":"54784384329","verdict":"out","segment":"","tier":"","reason":"Pac Pizza - pizza restaurant franchisee, QSR OUT"}
+{"id":"54784384431","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Taiga Building Products exteriorwood.com - wholesale pressure-treated lumber distributor with fleet and regional operations"}
+{"id":"54784385688","verdict":"out","segment":"","tier":"","reason":"University of Arts Norway - education OUT"}
+{"id":"54784386188","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"ESAB India - global welding/cutting equipment manufacturer with international manufacturing and distribution"}
+{"id":"54784386847","verdict":"out","segment":"","tier":"","reason":"Massey McDonald's - McDonald's franchisee, QSR OUT"}
+{"id":"54784389168","verdict":"out","segment":"","tier":"","reason":"Calpine Energy Solutions - retail energy procurement/advisory for commercial clients, energy services OUT"}
+{"id":"54784391561","verdict":"out","segment":"","tier":"","reason":"KDS - travel management software/SaaS OUT"}
+{"id":"54784392018","verdict":"out","segment":"","tier":"","reason":"utilservllc.com - utility substation construction services, small contractor OUT"}
+{"id":"54784392032","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Cox Automotive - world's largest auto services company with massive vehicle remarketing/auction/logistics network"}
+{"id":"54784392045","verdict":"out","segment":"","tier":"","reason":"marines.usmc.mil - US Marine Corps, government/military OUT"}
+{"id":"54784392855","verdict":"out","segment":"","tier":"","reason":"DeWitt Excavation - excavation contractor, general contractor OUT"}
+{"id":"54784393279","verdict":"out","segment":"","tier":"","reason":"Jugo Juice - smoothie/juice bar chain, QSR OUT"}
+{"id":"54784395047","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"BASF Catalysts - BASF chemical division, global chemicals manufacturer with major production facilities"}
+{"id":"54784395789","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Estee Lauder France fr.estee.com - global cosmetics manufacturer/distributor with large distribution network"}
+{"id":"54784395825","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Hogan Transportation Companies - regional trucking/leasing/3PL with 100 locations and dedicated fleet services"}
+{"id":"54784395842","verdict":"out","segment":"","tier":"","reason":"bmwmc.com - BMW Motorcycles dealer/club domain, auto retail OUT"}
+{"id":"54784395848","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Estee Lauder Illinois il.estee.com - Estee Lauder US distribution/manufacturing facility"}
+{"id":"54784396203","verdict":"review","segment":"","tier":"","reason":"Kyong LLC Missoula MT - insufficient info to determine industry from domain"}
+{"id":"54784396357","verdict":"out","segment":"","tier":"","reason":"FTI Consulting - management/financial consulting, professional services OUT"}
+{"id":"54784396943","verdict":"out","segment":"","tier":"","reason":"Moe's Southwest Grill Triangle franchisee - QSR OUT"}
+{"id":"54784398442","verdict":"out","segment":"","tier":"","reason":"us.mcdonalds.com - McDonald's corporate US, QSR OUT"}
+{"id":"54784398489","verdict":"out","segment":"","tier":"","reason":"Top Line Restaurants - Denny's multi-unit franchisee, QSR OUT"}
+{"id":"54784399180","verdict":"review","segment":"","tier":"","reason":"ssss.com - domain unclear, could not identify a freight-relevant company"}
+{"id":"54784400264","verdict":"out","segment":"","tier":"","reason":"Greeley and Hansen/TYLin - water/wastewater engineering consulting, professional services OUT"}
+{"id":"54784400516","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Litehouse Inc. - salad dressing and blue cheese manufacturer with plants in ID, UT, MI"}
+{"id":"54784400752","verdict":"out","segment":"","tier":"","reason":"Christina School District - K-12 education OUT"}
+{"id":"54784401036","verdict":"out","segment":"","tier":"","reason":"Dominoes dominoes.com - pizza/QSR restaurant, OUT"}
+{"id":"54784401968","verdict":"out","segment":"","tier":"","reason":"ARC UK - print/design/document scanning services, professional services OUT"}
+{"id":"54784402436","verdict":"out","segment":"","tier":"","reason":"Ciocca Automotive - auto dealership group PA/NJ 53 locations, retail OUT"}
+{"id":"54784402495","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Schweid and Sons - ground beef manufacturer/purveyor supplying restaurants and grocers from Carlstadt NJ facility"}
+{"id":"54784402956","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"Chart Industries chart-ind.com - global industrial gas/clean energy equipment manufacturer with major facilities worldwide"}
+{"id":"54784404117","verdict":"out","segment":"","tier":"","reason":"Enel - Italian electric/gas utility, OUT per rules"}

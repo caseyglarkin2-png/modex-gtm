@@ -1,0 +1,120 @@
+﻿{"verdict":"in","reason":"Canadian Tire - major Canadian retailer with large DC/distribution network","id":"54773765800","tier":"A","segment":"retail_grocery"}
+{"verdict":"in","reason":"Hyundai Motor America - large auto OEM with plants and port/distribution facilities","id":"54773768107","tier":"A","segment":"automotive_heavy_mfg"}
+{"verdict":"in","reason":"Inductotherm - industrial furnace manufacturer with multiple production facilities","id":"54773784733","tier":"B","segment":"building_materials_industrial"}
+{"verdict":"in","reason":"Barry-Wehmiller - large diversified industrial manufacturing conglomerate many plants globally","id":"54773784741","tier":"A","segment":"building_materials_industrial"}
+{"verdict":"out","reason":"NIH - federal government health agency no freight/yard operations","id":"54773790036","tier":"","segment":""}
+{"verdict":"in","reason":"Superior Essex - large wire/cable manufacturer with multiple North American plants","id":"54773804610","tier":"A","segment":"building_materials_industrial"}
+{"verdict":"out","reason":"Municipal Group CA - municipal construction/services contractor not freight-heavy","id":"54773816117","tier":"","segment":""}
+{"verdict":"in","reason":"Stant Manufacturing - auto parts manufacturer with multiple production facilities","id":"54773822271","tier":"B","segment":"automotive_heavy_mfg"}
+{"verdict":"review","reason":"tawa.com - insufficient information to identify company or industry","id":"54774212001","tier":"","segment":""}
+{"verdict":"out","reason":"AAA Northern California - auto club/insurance no yard operations","id":"54774212111","tier":"","segment":""}
+{"verdict":"in","reason":"Chassix - automotive stamped chassis components manufacturer multiple plants","id":"54774218604","tier":"B","segment":"automotive_heavy_mfg"}
+{"verdict":"in","reason":"Lasco Products - plumbing products manufacturer with production and distribution","id":"54774427978","tier":"B","segment":"building_materials_industrial"}
+{"verdict":"in","reason":"Lennox Industries - large HVAC manufacturer with multiple North American plants","id":"54774487863","tier":"A","segment":"building_materials_industrial"}
+{"verdict":"out","reason":"Murrieta Valley USD - K-12 school district education","id":"54774493824","tier":"","segment":""}
+{"verdict":"in","reason":"Cimarron Energy - oil and gas processing equipment manufacturer with field facilities","id":"54774523566","tier":"B","segment":"chemicals_plastics"}
+{"verdict":"in","reason":"Fruitist/AgroVision - fresh berry/produce company with growing and distribution operations","id":"54774531451","tier":"B","segment":"agriculture_food_processing"}
+{"verdict":"out","reason":"ENSR/AECOM - environmental consulting firm professional services","id":"54774538387","tier":"","segment":""}
+{"verdict":"in","reason":"Sysco Canada - massive food distribution company with large DCs and fleet operations","id":"54774546268","tier":"A","segment":"wholesale_distribution"}
+{"verdict":"out","reason":"Adaptive Energy LLC - small energy services company no significant freight/yard footprint","id":"54774563246","tier":"","segment":""}
+{"verdict":"out","reason":"NL Health - provincial healthcare provider not freight-heavy","id":"54774563926","tier":"","segment":""}
+{"verdict":"out","reason":"National Fuel Gas - natural gas utility pipeline not yard-management relevant","id":"54774569292","tier":"","segment":""}
+{"verdict":"in","reason":"Mosaic Company - large potash/phosphate fertilizer producer with major mining and processing","id":"54774569840","tier":"A","segment":"chemicals_plastics"}
+{"verdict":"in","reason":"OK Foods - poultry processing company with multiple plant and distribution facilities","id":"54776347809","tier":"B","segment":"agriculture_food_processing"}
+{"verdict":"in","reason":"Bogopa USA - regional grocery supermarket chain with warehouse/distribution operations","id":"54776350904","tier":"B","segment":"retail_grocery"}
+{"verdict":"out","reason":"Indiana BMV - state government motor vehicle agency","id":"54776351526","tier":"","segment":""}
+{"verdict":"out","reason":"Fireflies.ai - AI meeting assistant software no physical freight operations","id":"54776442492","tier":"","segment":""}
+{"verdict":"in","reason":"All Weather Windows - Canadian window/door manufacturer with production and distribution","id":"54776522016","tier":"B","segment":"building_materials_industrial"}
+{"verdict":"out","reason":"CXLoyalty - software/loyalty platform no physical freight operations","id":"54777712825","tier":"","segment":""}
+{"verdict":"in","reason":"KaVo Kerr - dental equipment/supplies manufacturer with manufacturing and distribution","id":"54777875255","tier":"B","segment":"building_materials_industrial"}
+{"verdict":"out","reason":"RS Construction - general contractor out of TAM","id":"54783742817","tier":"","segment":""}
+{"verdict":"out","reason":"Rainbow.us - apparel retail minimal freight yard footprint","id":"54783748472","tier":"","segment":""}
+{"verdict":"out","reason":"GHSC-PSM - global health supply chain nonprofit/government program","id":"54783778370","tier":"","segment":""}
+{"verdict":"out","reason":"Erie Home - residential roofing/home improvement contractor","id":"54783888673","tier":"","segment":""}
+{"verdict":"in","reason":"Weber-Stephen - consumer goods manufacturer with manufacturing and distribution","id":"54784016024","tier":"B","segment":"cpg_food_beverage"}
+{"verdict":"out","reason":"Anchorage AK government - municipal government","id":"54784097704","tier":"","segment":""}
+{"verdict":"in","reason":"ConocoPhillips - major oil and gas company with large upstream/downstream facilities","id":"54784113486","tier":"A","segment":"chemicals_plastics"}
+{"verdict":"in","reason":"Micheldever - large UK tire wholesale distributor with multiple distribution depots","id":"54784128081","tier":"B","segment":"wholesale_distribution"}
+{"verdict":"out","reason":"Auburn School District 408 - K-12 education","id":"54784138269","tier":"","segment":""}
+{"verdict":"in","reason":"Ziegler Companies - large Caterpillar dealer with service/parts distribution yards","id":"54784155967","tier":"B","segment":"building_materials_industrial"}
+{"verdict":"in","reason":"Matheson Tri-Gas - industrial/specialty gas distributor with fill plants and distribution","id":"54784157863","tier":"B","segment":"chemicals_plastics"}
+{"verdict":"out","reason":"New York Jets - NFL sports/entertainment","id":"54784158726","tier":"","segment":""}
+{"verdict":"in","reason":"NSK - global bearings/precision components manufacturer with many plants and DCs","id":"54784162393","tier":"A","segment":"automotive_heavy_mfg"}
+{"verdict":"in","reason":"Mattress Firm - large retail chain with significant DC/warehouse distribution network","id":"54784163411","tier":"A","segment":"retail_grocery"}
+{"verdict":"in","reason":"Boots UK - major pharmacy/health and beauty retailer with large distribution network","id":"54784180076","tier":"A","segment":"retail_grocery"}
+{"verdict":"in","reason":"Yageo - large electronic passive components manufacturer with multiple factories","id":"54784180771","tier":"A","segment":"building_materials_industrial"}
+{"verdict":"out","reason":"McDonalds APMEA - QSR restaurant operator","id":"54784183972","tier":"","segment":""}
+{"verdict":"in","reason":"Toyota Material Handling USA - forklift manufacturer/distributor with plants and parts DCs","id":"54784188779","tier":"A","segment":"automotive_heavy_mfg"}
+{"verdict":"out","reason":"Estee Lauder Singapore - cosmetics brand outside freight-heavy vertical","id":"54784189788","tier":"","segment":""}
+{"verdict":"in","reason":"Anthropologie (URBN) - specialty retail with national DC network and fulfillment centers","id":"54784190062","tier":"A","segment":"retail_grocery"}
+{"verdict":"in","reason":"Mexichem/Orbia - large chemicals/plastics manufacturer with multiple plants across Americas","id":"54784202419","tier":"A","segment":"chemicals_plastics"}
+{"verdict":"out","reason":"Alpine School District - K-12 education","id":"54784205473","tier":"","segment":""}
+{"verdict":"in","reason":"BlueScope Buildings - steel building products manufacturer with plants and distribution","id":"54784223598","tier":"B","segment":"building_materials_industrial"}
+{"verdict":"in","reason":"PetSafe Brands - pet products manufacturer/distributor with distribution facilities","id":"54784223642","tier":"B","segment":"cpg_food_beverage"}
+{"verdict":"out","reason":"McDonalds Portugal - QSR restaurant operator","id":"54784228780","tier":"","segment":""}
+{"verdict":"out","reason":"TC Energy/TransCanada - pipeline utility not truck-freight yard relevant","id":"54784231683","tier":"","segment":""}
+{"verdict":"out","reason":"CHA Consulting - engineering/consulting professional services","id":"54784231742","tier":"","segment":""}
+{"verdict":"review","reason":"clarkinc.biz - unidentifiable company insufficient information","id":"54784238503","tier":"","segment":""}
+{"verdict":"in","reason":"Doosan - large heavy industrial/construction equipment manufacturer with multiple global facilities","id":"54784241738","tier":"A","segment":"automotive_heavy_mfg"}
+{"verdict":"in","reason":"MDU Resources - utility and construction services with materials distribution operations","id":"54784257708","tier":"B","segment":"building_materials_industrial"}
+{"verdict":"out","reason":"AS\u0026E - security screening equipment maker small manufacturer not freight-heavy yard ops","id":"54784263476","tier":"","segment":""}
+{"verdict":"review","reason":"360bhmail.com - unidentifiable domain insufficient information","id":"54784270206","tier":"","segment":""}
+{"verdict":"out","reason":"Retail Business Services - IT/shared services division of Ahold Delhaize software entity","id":"54784273990","tier":"","segment":""}
+{"verdict":"review","reason":"cbhi.net - unidentifiable domain insufficient information","id":"54784282443","tier":"","segment":""}
+{"verdict":"in","reason":"Pacific Logistics - 3PL/logistics company with warehousing and freight operations","id":"54784283720","tier":"B","segment":"3pl_carrier"}
+{"verdict":"in","reason":"Pharmavite (Nature Made) - large vitamins/supplements manufacturer with manufacturing and distribution","id":"54784286854","tier":"B","segment":"cpg_food_beverage"}
+{"verdict":"out","reason":"Comfort Keepers - in-home senior care services not freight-heavy","id":"54784294701","tier":"","segment":""}
+{"verdict":"out","reason":"Rusnak Auto Group - auto dealership not freight-heavy yard operation","id":"54784294921","tier":"","segment":""}
+{"verdict":"in","reason":"Schnitzer Steel - large metal recycling/scrap company with processing yards and facilities","id":"54784297537","tier":"B","segment":"building_materials_industrial"}
+{"verdict":"in","reason":"Volvo - major automotive/heavy truck manufacturer with plants DCs and marshaling yards","id":"54784299394","tier":"A","segment":"automotive_heavy_mfg"}
+{"verdict":"out","reason":"McDonalds Morocco - QSR restaurant operator","id":"54784300076","tier":"","segment":""}
+{"verdict":"review","reason":"impaad.com - unidentifiable domain insufficient information","id":"54784307745","tier":"","segment":""}
+{"verdict":"out","reason":"National Geographic - media/publishing company","id":"54784326507","tier":"","segment":""}
+{"verdict":"out","reason":"Forever Living Products - MLM consumer products minimal freight yard footprint","id":"54784337977","tier":"","segment":""}
+{"verdict":"review","reason":"key-stone.com - possibly Keystone Automotive parts distributor but domain unconfirmed","id":"54784361308","tier":"","segment":""}
+{"verdict":"review","reason":"ramacometc.com - unidentifiable domain insufficient information","id":"54784365324","tier":"","segment":""}
+{"verdict":"in","reason":"PLZ Aeroscience - large aerosol contract manufacturer with multiple production facilities","id":"54784368163","tier":"B","segment":"chemicals_plastics"}
+{"verdict":"out","reason":"Casino Quebec - gaming/entertainment/hospitality","id":"54784379001","tier":"","segment":""}
+{"verdict":"in","reason":"FEMSA - large Mexican beverage/retail conglomerate with extensive logistics and distribution","id":"54784379716","tier":"A","segment":"cpg_food_beverage"}
+{"verdict":"in","reason":"Central Alberta Co-op - Canadian retail co-op with fuel grocery and agro distribution","id":"54784383119","tier":"B","segment":"retail_grocery"}
+{"verdict":"review","reason":"thetownsendcorp.com - unidentifiable insufficient information","id":"54784391306","tier":"","segment":""}
+{"verdict":"out","reason":"Tampa Bay Buccaneers - NFL sports/entertainment","id":"54784391493","tier":"","segment":""}
+{"verdict":"out","reason":"Cowen - investment banking/financial services","id":"54784392079","tier":"","segment":""}
+{"verdict":"in","reason":"Teledyne Technologies - large instruments manufacturer with multiple NA plants and distribution","id":"54784394649","tier":"A","segment":"building_materials_industrial"}
+{"verdict":"in","reason":"Northern Offshore - offshore drilling company with marine/port yard logistics","id":"54784395168","tier":"B","segment":"chemicals_plastics"}
+{"verdict":"review","reason":"col-care.com - unidentifiable domain insufficient information","id":"54784397169","tier":"","segment":""}
+{"verdict":"out","reason":"San Francisco 49ers - NFL sports/entertainment","id":"54784397692","tier":"","segment":""}
+{"verdict":"in","reason":"Arrow Building Center - building materials dealer/distributor with multiple locations","id":"54784398433","tier":"B","segment":"building_materials_industrial"}
+{"verdict":"out","reason":"Honeywell Intelligrated - warehouse automation vendor/software not a freight operator","id":"54784399933","tier":"","segment":""}
+{"verdict":"in","reason":"Clipper Logistics UK - major 3PL with large warehouse/DC network across UK/Europe","id":"54784399959","tier":"A","segment":"3pl_carrier"}
+{"verdict":"in","reason":"Indorama Ventures - large global PET resin/petrochemicals manufacturer with many plants","id":"54784406101","tier":"A","segment":"chemicals_plastics"}
+{"verdict":"out","reason":"Altour UK - corporate travel agency professional services","id":"54784410449","tier":"","segment":""}
+{"verdict":"out","reason":"Dundee Precious Metals - gold mining company not truck-freight yard focused","id":"54784410628","tier":"","segment":""}
+{"verdict":"out","reason":"Alamo Mexico - car rental company","id":"54784416054","tier":"","segment":""}
+{"verdict":"in","reason":"AirBorn - aerospace connector manufacturer with production and distribution facilities","id":"54784468283","tier":"B","segment":"building_materials_industrial"}
+{"verdict":"out","reason":"Fitzgerald Auto Mall - auto dealership","id":"54784471157","tier":"","segment":""}
+{"verdict":"out","reason":"PennDOT - state government transportation department","id":"54784472201","tier":"","segment":""}
+{"verdict":"out","reason":"Napleton Auto Group - auto dealership chain","id":"54784472452","tier":"","segment":""}
+{"verdict":"out","reason":"Nelson Worldwide - design/marketing/branding firm professional services","id":"54784473957","tier":"","segment":""}
+{"verdict":"in","reason":"Braskem - largest petrochemicals/plastics producer in Americas with major plants","id":"54784474260","tier":"A","segment":"chemicals_plastics"}
+{"verdict":"out","reason":"noemail.com - placeholder domain no real company","id":"54784495986","tier":"","segment":""}
+{"verdict":"review","reason":"psdayton.com - unidentifiable domain insufficient information","id":"54784496225","tier":"","segment":""}
+{"verdict":"in","reason":"Lactalis/Parmalat Canada - large global dairy manufacturer with multiple plants and DCs","id":"54784512589","tier":"A","segment":"cpg_food_beverage"}
+{"verdict":"out","reason":"HarperCollins UK - book publisher/media company","id":"54784521837","tier":"","segment":""}
+{"verdict":"in","reason":"QuickChek - convenience store chain with distribution/supply chain operations in NJ/NY","id":"54784523799","tier":"B","segment":"retail_grocery"}
+{"verdict":"out","reason":"Oak View Group - sports venues/entertainment management company","id":"54784527524","tier":"","segment":""}
+{"verdict":"review","reason":"gocbs.com - unidentifiable domain insufficient information","id":"54784529423","tier":"","segment":""}
+{"verdict":"out","reason":"Sheehy Auto Stores - auto dealership group","id":"54784529668","tier":"","segment":""}
+{"verdict":"in","reason":"Lantic/Rogers Sugar - Canadian sugar manufacturer with processing plants and distribution","id":"54784668975","tier":"B","segment":"cpg_food_beverage"}
+{"verdict":"out","reason":"McDonalds Saudi Arabia - QSR restaurant operator","id":"54784742923","tier":"","segment":""}
+{"verdict":"in","reason":"Lund Food Holdings (Lunds and Byerlys) - regional grocery chain with DC/distribution operations","id":"54784785041","tier":"B","segment":"retail_grocery"}
+{"verdict":"out","reason":"SynergEyes - specialty contact lens manufacturer small scale not freight-heavy","id":"54784785154","tier":"","segment":""}
+{"verdict":"in","reason":"Dassault Falcon Jet - business jet manufacturer and MRO with large maintenance facilities","id":"54784791604","tier":"B","segment":"automotive_heavy_mfg"}
+{"verdict":"in","reason":"GSI Commerce/Radial - large ecommerce fulfillment operator with major fulfillment centers","id":"54784800815","tier":"A","segment":"ecommerce_parcel"}
+{"verdict":"in","reason":"Calvin Klein (PVH) - large apparel brand with major DC/fulfillment network","id":"54784804907","tier":"A","segment":"retail_grocery"}
+{"verdict":"in","reason":"Leclerc Foods - Canadian cookie/snack manufacturer with production and distribution","id":"54784810163","tier":"B","segment":"cpg_food_beverage"}
+{"verdict":"in","reason":"Burlington Stores - large off-price retailer with major DC network and high trailer volume","id":"54784816488","tier":"A","segment":"retail_grocery"}
+{"verdict":"out","reason":"Scholastic - book publisher/education company","id":"54784827040","tier":"","segment":""}
+{"verdict":"out","reason":"KOA - campground/outdoor hospitality company","id":"54784829960","tier":"","segment":""}
+{"verdict":"in","reason":"Design Group Americas - toy/consumer products sourcing/design with distribution ops","id":"54784830282","tier":"B","segment":"cpg_food_beverage"}
+{"verdict":"in","reason":"Jamieson Vitamins - large Canadian vitamins/supplements manufacturer with plants and distribution","id":"54784830299","tier":"B","segment":"cpg_food_beverage"}

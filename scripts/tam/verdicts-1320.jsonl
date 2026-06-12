@@ -1,0 +1,120 @@
+{"id":"9636507558","name":"Meritor","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Major truck/trailer axle & brake manufacturer with large North American production and distribution network"}
+{"id":"9636507775","name":"Dayco","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Global automotive belts/hoses/tensioners manufacturer with multiple NA plants and distribution facilities"}
+{"id":"9636507793","name":"FXI","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Leading foam manufacturer with 18+ US/Mexico facilities producing polyurethane foam products"}
+{"id":"9636508182","name":"Synter Resource Group","verdict":"out","segment":"","tier":"","reason":"BPO/back-office services firm for logistics industry; no own physical yard operations"}
+{"id":"9636508232","name":"Pactiv Evergreen","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Major paper/packaging manufacturer with extensive North American plant and distribution network"}
+{"id":"9636609361","name":"Arvato Supply Chain Solutions","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Large 3PL with multi-site warehouse and fulfillment operations across North America"}
+{"id":"9636609549","name":"Atlas Trucking","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Regional trucking carrier with multi-terminal operations"}
+{"id":"9636609792","name":"Tupperware Brands","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Consumer goods manufacturer/distributor with multiple NA distribution centers and manufacturing plants"}
+{"id":"9636694111","name":"Cadillac Asphalt","verdict":"out","segment":"","tier":"","reason":"Asphalt/paving contractor; jobsite-based construction, no fixed DC/yard network"}
+{"id":"9636694146","name":"Ziyar Express Inc.","verdict":"out","segment":"","tier":"","reason":"Small single-entity express carrier, insufficient yard network scale"}
+{"id":"9636694178","name":"Mohawk Industries","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Largest global flooring manufacturer/distributor with extensive NA plant and distribution network"}
+{"id":"9636746573","name":"Syncreon.US","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Automotive-focused 3PL with multi-site warehouse/logistics operations across North America"}
+{"id":"9636999802","name":"Allen Lund Company","verdict":"out","segment":"","tier":"","reason":"Freight brokerage only; no owned yard operations or physical facilities"}
+{"id":"9637000192","name":"Transportation Solutions Inc.","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Multi-service transportation company with terminal operations"}
+{"id":"9637000319","name":"Wabtec","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Major rail equipment manufacturer with large NA manufacturing and distribution footprint"}
+{"id":"9637319487","name":"GE","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Industrial conglomerate with massive NA manufacturing, warehousing, and distribution network"}
+{"id":"9637319512","name":"L & R Group","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Liquid/industrial waste transport with multi-location operations in Western US"}
+{"id":"9638885701","name":"Global Transportation Group","verdict":"in","segment":"cold_chain","tier":"B","reason":"Temperature-controlled freight carrier with reefer fleet serving 48 states"}
+{"id":"9668973398","name":"Shelving + Rack Systems, Inc.","verdict":"out","segment":"","tier":"","reason":"Material handling equipment distributor/installer; no freight yard operations"}
+{"id":"9791096139","name":"Perfection Pet Foods","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Pet food manufacturer with plant and distribution operations"}
+{"id":"10036757775","name":"Road Runner","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"LTL carrier with 40+ service centers/terminals across North America including cross-dock facilities"}
+{"id":"10036812912","name":"One Rail","verdict":"in","segment":"ports_intermodal","tier":"B","reason":"Rail/intermodal logistics operator with terminal and ramp operations"}
+{"id":"10053891727","name":"Worlds IO","verdict":"out","segment":"","tier":"","reason":"Gaming/virtual worlds tech platform; no physical freight operations"}
+{"id":"10191192137","name":"Instil Bio","verdict":"out","segment":"","tier":"","reason":"Clinical-stage biotech company; no distribution-scale physical operations"}
+{"id":"10210069156","name":"Catalent Pharma Solutions","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Large pharma CDMO with 30+ NA manufacturing and distribution facilities requiring yard management"}
+{"id":"10210404956","name":"McKesson","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Largest pharma distributor in North America with massive DC network and high truck freight volume"}
+{"id":"44998572395","name":"","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"macombertrans.com - Macomber Transport, regional trucking carrier with multi-terminal operations"}
+{"id":"44998572423","name":"AM Transport","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Mid-size truckload carrier with regional terminal network"}
+{"id":"44999344514","name":"Vesyl","verdict":"out","segment":"","tier":"","reason":"SaaS e-commerce shipping rate-shopping software platform; no physical yard operations"}
+{"id":"45000123968","name":"TransPak","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Global crating/packaging/logistics company with multiple NA facilities and freight operations"}
+{"id":"45000897345","name":"CMF Transportation","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Regional truckload carrier with terminal operations"}
+{"id":"45001355160","name":"Anchor Freight Management and Logistics","verdict":"out","segment":"","tier":"","reason":"Freight brokerage/management firm; no owned physical yard or terminal operations"}
+{"id":"45001511438","name":"CoVar Transport","verdict":"out","segment":"","tier":"","reason":"Small carrier/broker; insufficient scale for yard management software"}
+{"id":"45001821248","name":"DLR Freight","verdict":"out","segment":"","tier":"","reason":"Small freight carrier; insufficient yard network scale"}
+{"id":"45002449009","name":"","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"rti1.com - RTI (Road Transport Inc.), mid-size carrier with terminal operations"}
+{"id":"45002749289","name":"Bettaway Logistics","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Regional trucking/logistics company with multi-location terminal operations"}
+{"id":"45002749318","name":"VSS Transportation Group","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Multi-service transportation group with terminal network"}
+{"id":"45003995170","name":"Zeitner & Sons","verdict":"out","segment":"","tier":"","reason":"Small regional carrier; insufficient scale for yard management"}
+{"id":"45003995171","name":"Paper Transport","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Truckload carrier with multiple service centers and terminal facilities across the Midwest"}
+{"id":"45003995180","name":"Amx Trucking","verdict":"out","segment":"","tier":"","reason":"Small trucking company; insufficient yard network scale"}
+{"id":"45004613641","name":"Mark-It Express","verdict":"out","segment":"","tier":"","reason":"Small regional carrier; insufficient scale for yard management software"}
+{"id":"45005078131","name":"Pinnacle Freight Lines","verdict":"out","segment":"","tier":"","reason":"Small freight carrier; insufficient yard network scale"}
+{"id":"45005228291","name":"Arnold Transportation Services","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Mid-size truckload carrier with terminal operations across the Southeast/Midwest"}
+{"id":"45005382744","name":"Holland Special Delivery","verdict":"out","segment":"","tier":"","reason":"Small specialty delivery carrier; insufficient yard network scale"}
+{"id":"45005696153","name":"Acerra Transportation Group","verdict":"out","segment":"","tier":"","reason":"Small transportation group; insufficient scale for yard management"}
+{"id":"45005853853","name":"Road Scholar Transport","verdict":"out","segment":"","tier":"","reason":"Small regional truckload carrier; insufficient yard network scale"}
+{"id":"45006001224","name":"CoreTrans","verdict":"out","segment":"","tier":"","reason":"Small carrier/broker; insufficient yard network scale"}
+{"id":"45006619224","name":"Talmix","verdict":"out","segment":"","tier":"","reason":"Digital talent marketplace platform (SaaS/staffing); no physical freight operations"}
+{"id":"45006775142","name":"","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"neweralog.net - New Era Logistics, 3PL with warehousing and distribution operations"}
+{"id":"45006931282","name":"Loadsmith","verdict":"out","segment":"","tier":"","reason":"Digital freight network/tech platform; primarily software-based broker model, no owned yard operations"}
+{"id":"45008015212","name":"Togo Supply Chain Resource Group","verdict":"out","segment":"","tier":"","reason":"Supply chain consulting and managed services firm; no owned physical facility/yard operations"}
+{"id":"45008787861","name":"HAP Group","verdict":"in","segment":"ports_intermodal","tier":"B","reason":"Canadian port drayage/intermodal carrier with container yard, warehousing, and terminal operations at Port of Vancouver"}
+{"id":"45010032642","name":"","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"pridegrouplogistics.com - Pride Group Logistics, 3PL with multi-location warehousing and transportation operations"}
+{"id":"45010657326","name":"Kodiak Transportation","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Truckload carrier with terminal and yard operations"}
+{"id":"45013125658","name":"Smith Transport","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"National truckload carrier with multiple terminals and service centers across North America"}
+{"id":"45013749295","name":"John J Jerue Companies","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Multi-service trucking/logistics company with terminal operations in Florida region"}
+{"id":"45013904138","name":"Gan Trans","verdict":"out","segment":"","tier":"","reason":"Small carrier; insufficient yard network scale"}
+{"id":"45013904167","name":"Wincorp International","verdict":"out","segment":"","tier":"","reason":"Small international freight forwarder; insufficient owned yard scale"}
+{"id":"45014678661","name":"RR.com","verdict":"out","segment":"","tier":"","reason":"Generic RR.com domain entry; appears to be a misentry or non-company record"}
+{"id":"45014826810","name":"","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"freedomtsi.com - Freedom Transportation Services, mid-size carrier with terminal operations"}
+{"id":"45014826834","name":"SPC Transport","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Regional truckload carrier with multi-location terminal operations"}
+{"id":"45014826842","name":"The Evans Network","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Multi-carrier network/3PL with terminal operations across the Northeast and Mid-Atlantic"}
+{"id":"45015290370","name":"Paystar Logistics","verdict":"out","segment":"","tier":"","reason":"Small logistics company; insufficient yard network scale"}
+{"id":"45058130435","name":"BMM Logistics","verdict":"out","segment":"","tier":"","reason":"Small logistics/brokerage firm; insufficient yard network scale"}
+{"id":"45058130464","name":"Bradway Trucking","verdict":"out","segment":"","tier":"","reason":"Small regional trucking company; insufficient scale for yard management"}
+{"id":"45058596099","name":"Keltic Transport","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Mid-size truckload carrier with multi-terminal operations in the Midwest/Southeast"}
+{"id":"45058748506","name":"","verdict":"out","segment":"","tier":"","reason":"vitotrucking.com - Vito Trucking, small trucking company; insufficient yard network scale"}
+{"id":"45058748516","name":"CERTIFIED CLAIMS PROFESSIONAL ACCREDITATION COUNCIL","verdict":"out","segment":"","tier":"","reason":"Professional accreditation organization for claims professionals; no freight operations"}
+{"id":"45059821693","name":"Grand Island Express","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Regional carrier with terminal operations serving the Midwest"}
+{"id":"45059821696","name":"K&B Transportation","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Mid-size flatbed/specialty carrier with multi-terminal operations"}
+{"id":"45060452929","name":"JNJ Express","verdict":"out","segment":"","tier":"","reason":"Small regional carrier; insufficient yard network scale"}
+{"id":"45061373256","name":"Ready-2-xecute","verdict":"out","segment":"","tier":"","reason":"Small consulting/services firm; no freight yard operations"}
+{"id":"45061843059","name":"t-jtransport.com","verdict":"out","segment":"","tier":"","reason":"Small carrier based on domain name alone; insufficient yard network scale"}
+{"id":"45064388233","name":"Hiel Trucking","verdict":"out","segment":"","tier":"","reason":"Small regional trucking company; insufficient yard network scale"}
+{"id":"45065015559","name":"Ralph Moyle","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Established flatbed/specialized carrier with multi-terminal yard operations in the Midwest"}
+{"id":"45065015560","name":"Gingerich Trucking","verdict":"out","segment":"","tier":"","reason":"Small regional carrier; insufficient yard network scale"}
+{"id":"45065317538","name":"","verdict":"out","segment":"","tier":"","reason":"rfpmg.com - appears to be professional/financial services, not freight operations"}
+{"id":"45065470287","name":"Apollo Freight Systems","verdict":"out","segment":"","tier":"","reason":"Small carrier owner-operator network; insufficient yard network scale"}
+{"id":"45065630068","name":"Chapman Trucking","verdict":"out","segment":"","tier":"","reason":"Small regional trucking company; insufficient yard network scale"}
+{"id":"45067334547","name":"Ingram","verdict":"out","segment":"","tier":"","reason":"Ingram Micro - IT/technology product distributor; tech vertical is OUT per rules"}
+{"id":"45067796483","name":"С1Transportation","verdict":"out","segment":"","tier":"","reason":"Small carrier; insufficient yard network scale"}
+{"id":"45068878382","name":"Logistics and Transportation","verdict":"out","segment":"","tier":"","reason":"atcship.com - ATC, appears to be small brokerage/carrier; insufficient yard network scale"}
+{"id":"45070118561","name":"Lazerspot","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Lazer Spot - major yard management service provider with hundreds of customer sites and its own yard truck fleet across North America"}
+{"id":"45070733866","name":"Royal Transportation Services","verdict":"out","segment":"","tier":"","reason":"Small regional transportation company; insufficient yard network scale"}
+{"id":"45127963492","name":"","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"daiminc.com - DAIM Trucking, full-service truckload carrier with warehousing and brokerage serving major retailers like Walmart/Target"}
+{"id":"45131678047","name":"H & S Transport,","verdict":"out","segment":"","tier":"","reason":"Small carrier; insufficient yard network scale"}
+{"id":"45131833014","name":"TransAm Trucking","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Mid-size truckload carrier with terminal network in the Midwest/Plains region"}
+{"id":"45132295169","name":"Equity Transportation","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Regional carrier with multi-terminal operations"}
+{"id":"45133463816","name":"Wolf River Express","verdict":"out","segment":"","tier":"","reason":"Small regional carrier; insufficient yard network scale"}
+{"id":"45133463840","name":"Monarch Transport","verdict":"out","segment":"","tier":"","reason":"Small carrier; insufficient yard network scale"}
+{"id":"45133928247","name":"Sibley Transportation","verdict":"out","segment":"","tier":"","reason":"Small regional carrier; insufficient yard network scale"}
+{"id":"45134084439","name":"","verdict":"out","segment":"","tier":"","reason":"direct-transport.us - small direct transport carrier; insufficient yard network scale"}
+{"id":"45135318366","name":"ECM Transport","verdict":"out","segment":"","tier":"","reason":"Small regional carrier; insufficient yard network scale"}
+{"id":"45135318372","name":"R.C. Moore","verdict":"out","segment":"","tier":"","reason":"Small carrier/hauler; insufficient yard network scale"}
+{"id":"45139997621","name":"","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"primelogisticsolutions.com - Prime Logistics Solutions, 3PL with multi-location operations"}
+{"id":"45140762112","name":"DAIM Logistics","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Full-service truckload, warehousing, and brokerage carrier serving major retailers (see daiminc.com entry; same entity)"}
+{"id":"45140762131","name":"R&R Express","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Mid-size regional carrier with terminal operations"}
+{"id":"45140914697","name":"SEND Transportation","verdict":"out","segment":"","tier":"","reason":"Small carrier; insufficient yard network scale"}
+{"id":"45141999198","name":"Scott Logistics","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Regional 3PL/carrier with warehousing and distribution facilities"}
+{"id":"45144000681","name":"Andrus Transportation","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Established regional carrier with multi-terminal yard operations"}
+{"id":"45144000688","name":"Traffix","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Canadian cross-border carrier/3PL with multi-terminal operations"}
+{"id":"45144155537","name":"Razir Transport Services","verdict":"out","segment":"","tier":"","reason":"Small carrier; insufficient yard network scale"}
+{"id":"45144155541","name":"Jacko Logistics","verdict":"out","segment":"","tier":"","reason":"Small logistics company; insufficient yard network scale"}
+{"id":"45144155556","name":"Metropolitan Trucking","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Mid-size carrier with terminal facilities serving the Northeast market"}
+{"id":"45144620095","name":"Stryder","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Award-winning 3PL with transportation, warehousing, and JIT distribution for food/beverage/packaging in Western Canada and Pacific NW USA"}
+{"id":"45146042460","name":"M&W Logistics","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"3PL with multi-location warehousing and transportation operations"}
+{"id":"45146351644","name":"National Carriers","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"National truckload carrier with multiple terminals and significant fleet across North America"}
+{"id":"45146661175","name":"Truline Trucking","verdict":"out","segment":"","tier":"","reason":"Small regional carrier; insufficient yard network scale"}
+{"id":"45146816035","name":"Millis Transfer","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Multi-state truckload carrier with multiple terminals and significant fleet operations"}
+{"id":"45147715365","name":"Grand Rapids Trucking Company","verdict":"out","segment":"","tier":"","reason":"Small regional carrier (kuperustrucking.com); insufficient yard network scale"}
+{"id":"45147869868","name":"Fremont Contract Carriers","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Established regional carrier with multi-terminal yard operations in the Midwest"}
+{"id":"45149491781","name":"Hoekstra Transportation","verdict":"out","segment":"","tier":"","reason":"Small carrier; insufficient yard network scale"}
+{"id":"46441632341","name":"Michigan Central","verdict":"out","segment":"","tier":"","reason":"Ford's mobility innovation campus/real estate development; not a freight-operating company"}
+{"id":"47336842600","name":"","verdict":"out","segment":"","tier":"","reason":"isye.gatech.edu - Georgia Tech Industrial & Systems Engineering academic department; education vertical is OUT"}
+{"id":"49751997974","name":"Atlanta Bonded Warehouse","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"3PL warehousing and distribution company with bonded warehouse facilities in Atlanta region"}
+{"id":"51557609832","name":"UACL Logistics","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"3PL with multi-location warehousing, cross-docking, and transportation operations"}
+{"id":"53559517096","name":"Allbirds","verdict":"out","segment":"","tier":"","reason":"DTC footwear brand primarily selling through e-commerce and retail; no yard network scale"}
+{"id":"54036195162","name":"MJL Capital","verdict":"out","segment":"","tier":"","reason":"Finance/investment firm; no freight operations"}
+{"id":"54062347643","name":"","verdict":"review","segment":"","tier":"","reason":"threefletch.com - no information found; unable to determine industry"}
+{"id":"54192874798","name":"FlavorCloud","verdict":"out","segment":"","tier":"","reason":"SaaS international shipping/e-commerce platform; no physical yard operations"}

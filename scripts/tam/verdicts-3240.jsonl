@@ -1,0 +1,120 @@
+{"id":"55459212351","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Family Dollar (Dollar Tree) national DC network"}
+{"id":"55459213729","verdict":"in","segment":"cold_chain","tier":"A","reason":"Americold national cold storage 3PL - Indianapolis node"}
+{"id":"55459214087","verdict":"out","segment":"","tier":"","reason":"Infinity Industrial Controls - industrial automation controls, not a freight facility operator"}
+{"id":"55459215499","verdict":"in","segment":"retail_grocery","tier":"A","reason":"IKEA distribution center, large format retail DC"}
+{"id":"55459215512","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"PepsiCo national CPG beverage manufacturer/distributor"}
+{"id":"55459217497","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Bimbo Bakeries (Grupo Bimbo) DC, major CPG bakery"}
+{"id":"55459217530","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Best Buy warehouse Ontario - national electronics retailer DC"}
+{"id":"55459217707","verdict":"in","segment":"cold_chain","tier":"A","reason":"Americold national cold storage 3PL - Houston node"}
+{"id":"55459217822","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Pepsi Beverage bottling/distribution facility Ocala FL"}
+{"id":"55459219978","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Sysco Albany - national foodservice distribution"}
+{"id":"55459220016","verdict":"in","segment":"cold_chain","tier":"A","reason":"Americold national cold storage 3PL - N Little Rock node"}
+{"id":"55459222186","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Nestle Waters Dallas delivery/distribution - national CPG"}
+{"id":"55459222298","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Pepsi Beverages Co - national beverage manufacturer/distributor"}
+{"id":"55459222797","verdict":"in","segment":"ports_intermodal","tier":"B","reason":"JAXPORT Blount Island Marine Terminal - active port cargo terminal"}
+{"id":"55459224504","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"DHL warehouse for Verizon - global 3PL operator"}
+{"id":"55459224586","verdict":"in","segment":"ecommerce_parcel","tier":"A","reason":"Ryder/Whiplash e-commerce fulfillment node"}
+{"id":"55459224659","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Next Carriers - carrier company with freight operations"}
+{"id":"55459224700","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Amcor Flexibles Madison - global packaging manufacturer"}
+{"id":"55459224898","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Crown Packaging Corp - paper/corrugated packaging"}
+{"id":"55459231343","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"DSV (formerly Panalpina) - global 3PL Shell warehouse"}
+{"id":"55459232635","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Sysco Houston - national foodservice distribution"}
+{"id":"55459232650","verdict":"out","segment":"","tier":"","reason":"Panera Bread Warehouse - QSR/restaurant chain supply operation"}
+{"id":"55459232775","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Chambers Warehouse - third-party warehousing/storage"}
+{"id":"55459235439","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Owens & Minor Houston DC - national medical supply distributor"}
+{"id":"55459235444","verdict":"in","segment":"cold_chain","tier":"A","reason":"Americold national cold storage 3PL - Plant City node"}
+{"id":"55459236360","verdict":"in","segment":"cpg_food_beverage","tier":"C","reason":"Culinaire Foods - food manufacturing/distribution"}
+{"id":"55459236376","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Kellogg Co - national CPG food manufacturer"}
+{"id":"55459238042","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Schneider National Operating Center - top-10 US carrier"}
+{"id":"55459238161","verdict":"in","segment":"cold_chain","tier":"A","reason":"Americold national cold storage 3PL - Anaheim node"}
+{"id":"55459238200","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Swift Transportation (Knight-Swift) - major national carrier"}
+{"id":"55459238219","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"DuPont Industrial Center - major chemical/materials company"}
+{"id":"55459238225","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Ball Metal Beverage Packaging - national can/packaging manufacturer"}
+{"id":"55459238257","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"Dow Chemical Co - major national chemical manufacturer"}
+{"id":"55459240026","verdict":"in","segment":"cold_chain","tier":"A","reason":"Americold national cold storage 3PL - Leesport node"}
+{"id":"55459241800","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Wakefern Foods - major grocery cooperative (ShopRite)"}
+{"id":"55459241821","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Pepsi Beverages Company PBC - national beverage distributor"}
+{"id":"55459243847","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Sysco Arkansas - national foodservice distribution"}
+{"id":"55459245886","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Sysco warehouse - national foodservice distribution"}
+{"id":"55459245938","verdict":"in","segment":"paper_packaging","tier":"A","reason":"WestRock corrugated container - major national packaging company"}
+{"id":"55459245948","verdict":"out","segment":"","tier":"","reason":"Warehouse Coffee Co - small coffee roaster/distributor, not freight scale"}
+{"id":"55459247535","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Crete Carrier Corporation - major national TL carrier"}
+{"id":"55459247637","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"The Storage Guy/Schneider Storage - contract storage operation"}
+{"id":"55459247695","verdict":"out","segment":"","tier":"","reason":"Bulk Book Warehouse - media/books distribution, out vertical"}
+{"id":"55459249294","verdict":"in","segment":"ecommerce_parcel","tier":"A","reason":"Flexport EWR1 Fulfillment Center - e-commerce fulfillment"}
+{"id":"55459249442","verdict":"out","segment":"","tier":"","reason":"USPS distribution center - government postal service"}
+{"id":"55459249455","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"Sherwin-Williams manufacturing plant - national coatings manufacturer"}
+{"id":"55459249457","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Bridgestone Distribution Center - national tire/auto parts DC"}
+{"id":"55459251998","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Geodis Logistics (H&M) - global 3PL operator"}
+{"id":"55459252035","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Ryder Truck Terminal - national fleet/logistics operator"}
+{"id":"55459253920","verdict":"in","segment":"cold_chain","tier":"A","reason":"Americold Allentown Snowdrift - national cold storage 3PL"}
+{"id":"55459254089","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Sherwin-Williams Aurora DC - national coatings distribution"}
+{"id":"55459254276","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Berner Food & Beverage DC - multi-site food manufacturer"}
+{"id":"55459255656","verdict":"in","segment":"ecommerce_parcel","tier":"A","reason":"Chewy DFW1 fulfillment center - national pet e-commerce"}
+{"id":"55459255674","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Western Logistics Inc - specialized furniture carrier"}
+{"id":"55459256918","verdict":"in","segment":"ecommerce_parcel","tier":"A","reason":"Staples Fulfillment Center - national office supply retailer"}
+{"id":"55459256999","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Ross Stores DC - national off-price retail distribution"}
+{"id":"55459259810","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Blue Eagle Logistics - regional logistics/carrier company"}
+{"id":"55459259832","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Superior Carriers Inc - regional bulk liquid carrier"}
+{"id":"55459259929","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Regal Beloit (Regal Rexnord) Logistics - industrial mfg/logistics"}
+{"id":"55459259979","verdict":"in","segment":"ecommerce_parcel","tier":"A","reason":"Flexport LAX1 Fulfillment Center - e-commerce fulfillment"}
+{"id":"55459261528","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Old Dominion Freight Line - top-5 national LTL carrier"}
+{"id":"55459261559","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Packaging Corporation of America - major national paper packaging"}
+{"id":"55459263234","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Sysco Houston Medical Centre - national foodservice distribution"}
+{"id":"55459263536","verdict":"in","segment":"cpg_food_beverage","tier":"C","reason":"Good Food Made Simple - natural foods manufacturer/distributor"}
+{"id":"55459264441","verdict":"in","segment":"retail_grocery","tier":"A","reason":"United Supermarkets/Albertsons DC - national grocery distribution"}
+{"id":"55459264521","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Newell Brands Logistics - national consumer goods distribution"}
+{"id":"55459266601","verdict":"in","segment":"ports_intermodal","tier":"B","reason":"Western Export Services - freight export/container services"}
+{"id":"55459266700","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Swift Transportation Ocala Terminal - major national carrier"}
+{"id":"55459268169","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"PPG Paints DC - national coatings manufacturer/distribution"}
+{"id":"55459268373","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Pegasus Foods Inc - food distribution company"}
+{"id":"55459268414","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Shamrock Foods DC - major foodservice distributor Southwest"}
+{"id":"55459270057","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Aker BioMarine manufacturing - marine ingredient manufacturer"}
+{"id":"55459270066","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Walgreens Micro Fulfillment Center - national pharmacy/retail"}
+{"id":"55459272828","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Kellogg's APL Logistics warehouse - CPG food w/ 3PL partner"}
+{"id":"55459272983","verdict":"in","segment":"cold_chain","tier":"A","reason":"Americold Jefferson - national cold storage 3PL"}
+{"id":"55459273119","verdict":"in","segment":"retail_grocery","tier":"A","reason":"CVS DC Greenfield IN - national pharmacy/retail distribution"}
+{"id":"55459276439","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"BASF Corporation - major global chemical manufacturer"}
+{"id":"55459278205","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Nestle Waters North America - national beverage manufacturer"}
+{"id":"55459278256","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Medline Industries DC - national medical supply distributor"}
+{"id":"55459278756","verdict":"in","segment":"paper_packaging","tier":"C","reason":"Volk Packaging Corporation - regional packaging company"}
+{"id":"55459280258","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"US Foods Allentown DC - national foodservice distributor"}
+{"id":"55459280441","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"CWC Logistics - contract warehousing/carrier"}
+{"id":"55459280752","verdict":"out","segment":"","tier":"","reason":"Rolls-Royce Banded Stator Facility - aerospace & defense prime, out per rules"}
+{"id":"55459282439","verdict":"in","segment":"ports_intermodal","tier":"B","reason":"Empire Container Freight Station - export CFS operation"}
+{"id":"55459282441","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Fastenal Fulfillment Center - national industrial distribution"}
+{"id":"55459282491","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Tyson Foods Barber Foods - major national meat/food manufacturer"}
+{"id":"55459284333","verdict":"in","segment":"cpg_food_beverage","tier":"C","reason":"Baxter Brewing Co - craft brewery with distribution"}
+{"id":"55459284398","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Grainger DC - national industrial/MRO distributor"}
+{"id":"55459285673","verdict":"in","segment":"cold_chain","tier":"A","reason":"Americold Meacham Ft Worth - national cold storage 3PL"}
+{"id":"55459289655","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Best Buy Warehouse - national electronics retailer DC"}
+{"id":"55459289669","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Yusen Logistics IND4 Warehouse - global 3PL operator"}
+{"id":"55459289724","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Peer Foods Greenfield - meat packing/processing facility"}
+{"id":"55459289780","verdict":"in","segment":"building_materials_industrial","tier":"C","reason":"JacksonFill Contract Manufacturing - contract industrial mfg"}
+{"id":"55459291311","verdict":"in","segment":"cold_chain","tier":"A","reason":"Americold Baytown - national cold storage 3PL"}
+{"id":"55459291508","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"R&L Carriers - major national LTL carrier"}
+{"id":"55459291936","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Nikel Precision Group - precision industrial manufacturing"}
+{"id":"55459294760","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"J.B. Hunt Transport Dallas Terminal - top national carrier"}
+{"id":"55459295048","verdict":"in","segment":"retail_grocery","tier":"A","reason":"AutoZone Distribution - national auto parts retail DC"}
+{"id":"55459296667","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Schneider cross dock - major national carrier cross-dock"}
+{"id":"55459296817","verdict":"review","segment":"","tier":"","reason":"Infinix 12 - name appears to be a smartphone model, cannot identify as a company"}
+{"id":"55459296868","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Dollar General Receiving - national discount retail distribution"}
+{"id":"55459296930","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Owens Corning Warehouse - national insulation/building products"}
+{"id":"55459299512","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Ryder Integrated Logistics - national fleet/3PL operator"}
+{"id":"55459299628","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Land O'Lakes/Purina DC - national agricultural/pet food distributor"}
+{"id":"55459299640","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Saddle Creek Distribution Warehouse - national 3PL"}
+{"id":"55459299666","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Sysco Jacksonville - national foodservice distributor"}
+{"id":"55459299733","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Ozburn-Hessey (OHL/XPO) Logistics - national 3PL"}
+{"id":"55459304727","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Home Depot Flatbed DC - national home improvement retail"}
+{"id":"55459304790","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Meijer DC 86 - regional grocery/general merchandise chain"}
+{"id":"55459304821","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Transport Arthur Cuming - Canadian regional carrier"}
+{"id":"55459307431","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Ben E. Keith Foods Gulf Coast DC - major foodservice distributor"}
+{"id":"55459307439","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Pepsi Cola Bottling of Bennettsville - regional Pepsi bottler"}
+{"id":"55459307440","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Roadtex Transportation - regional freight carrier/logistics"}
+{"id":"55459307553","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Sonoco Products Co - national packaging manufacturer"}
+{"id":"55459310084","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Ben E. Keith Foods Mid-South DC - major foodservice distributor"}
+{"id":"55459311423","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"National Carriers Inc - refrigerated/temperature-controlled trucking"}
+{"id":"55459311433","verdict":"in","segment":"cold_chain","tier":"A","reason":"Americold Dallas - national cold storage 3PL"}
+{"id":"55459312793","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"PRIME/C.H. Robinson Warehouse - major 3PL/brokerage"}
+{"id":"55459312967","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Swift Transportation drop yard - Knight-Swift major carrier"}
+{"id":"55459326096","verdict":"in","segment":"cold_chain","tier":"B","reason":"PL Cold Inc - cold storage logistics operator"}

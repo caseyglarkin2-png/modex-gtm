@@ -1,0 +1,120 @@
+{"id":"54785099676","verdict":"out","segment":"","tier":"","reason":"Elite Gunite Shotcrete; specialty concrete contractor, field-based, no distribution yard network"}
+{"id":"54785099919","verdict":"out","segment":"","tier":"","reason":"Tetra Tech RPS; environmental engineering/consulting services, no freight operations"}
+{"id":"54785100165","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Toyota Motor Europe; major automotive OEM with extensive plant and DC network globally"}
+{"id":"54785103202","verdict":"out","segment":"","tier":"","reason":"ometro.com appears to be a transit/metro system, not a freight yard operation"}
+{"id":"54785104799","verdict":"out","segment":"","tier":"","reason":"Eureden is a French agri-food cooperative; no North American facilities"}
+{"id":"54785105838","verdict":"out","segment":"","tier":"","reason":"Global Industrial Services (Pritchard); facilities/janitorial maintenance, no freight distribution infrastructure"}
+{"id":"54785108766","verdict":"out","segment":"","tier":"","reason":"Personal or unknown domain subbu.us with no identifiable business operations"}
+{"id":"54785108772","verdict":"out","segment":"","tier":"","reason":"Delaware state government; not a freight/logistics operation"}
+{"id":"54785114039","verdict":"out","segment":"","tier":"","reason":"Estee Lauder Russia subdomain; cosmetics brand, non-North American entity"}
+{"id":"54785115315","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Maxxis Canada; tire manufacturer/distributor with warehouses and distribution in North America"}
+{"id":"54785115393","verdict":"out","segment":"","tier":"","reason":"VIEATS appears to be a restaurant/food service brand, not a freight operation"}
+{"id":"54785116448","verdict":"out","segment":"","tier":"","reason":"Pacific Bells is a Taco Bell QSR franchise operator; restaurant, not freight/distribution"}
+{"id":"54785116681","verdict":"in","segment":"paper_packaging","tier":"C","reason":"Liberty Packaging; packaging manufacturer with manufacturing/distribution operations"}
+{"id":"54785116851","verdict":"out","segment":"","tier":"","reason":"Laws of Motion is an apparel/fashion brand; no freight yard operations"}
+{"id":"54785116855","verdict":"out","segment":"","tier":"","reason":"Music4 is entertainment/media; not in freight operations"}
+{"id":"54785119244","verdict":"out","segment":"","tier":"","reason":"McDonald's Argentina subdomain; QSR franchisor, non-North American entity"}
+{"id":"54785119659","verdict":"out","segment":"","tier":"","reason":"TLC Austria (tlc.co.at); non-North American entity, unclear business"}
+{"id":"54785121895","verdict":"out","segment":"","tier":"","reason":"Hunter Douglas Asia entity; window coverings manufacturer, non-North American subdomain"}
+{"id":"54785123464","verdict":"out","segment":"","tier":"","reason":"Triad Retail is a retail media/digital marketing firm, not a freight operation"}
+{"id":"54785123669","verdict":"out","segment":"","tier":"","reason":"Everett Public Schools; education sector, not freight/logistics"}
+{"id":"54785123679","verdict":"out","segment":"","tier":"","reason":"Outbound UK-based company; non-North American entity"}
+{"id":"54785123728","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"BDI Worldwide; industrial bearing/power transmission distributor with warehouses across North America"}
+{"id":"54785126405","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Quality Food Centers (Kroger subsidiary); grocery chain with regional DC network in Pacific Northwest"}
+{"id":"54785126538","verdict":"out","segment":"","tier":"","reason":"Poliquin Group is a fitness/strength coaching company; no freight operations"}
+{"id":"54785128218","verdict":"out","segment":"","tier":"","reason":"Canadian Armed Forces government domain; military/government, not a commercial freight operation"}
+{"id":"54785128345","verdict":"out","segment":"","tier":"","reason":"Karman Space & Defense; aerospace & defense prime, explicitly out per rules"}
+{"id":"54785128566","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"BMW North America; major automotive OEM with plants and distribution network in North America"}
+{"id":"54785128567","verdict":"out","segment":"","tier":"","reason":"Renewal by Andersen is a window replacement/installation service; no freight yard network"}
+{"id":"54785130389","verdict":"out","segment":"","tier":"","reason":"Performance Contractors; industrial construction contractor, site-based work, no fixed yard network"}
+{"id":"54785134181","verdict":"out","segment":"","tier":"","reason":"LSG Group is airline catering/inflight services; hospitality/food service sector"}
+{"id":"54785134235","verdict":"out","segment":"","tier":"","reason":"Bath Fitter is a bathroom renovation service; no freight distribution network"}
+{"id":"54785136392","verdict":"out","segment":"","tier":"","reason":"USG Omaha is a construction company; jobsite-based, no fixed DC/yard network"}
+{"id":"54785136405","verdict":"out","segment":"","tier":"","reason":"Keller Williams Capital Properties; real estate brokerage, explicitly out"}
+{"id":"54785136542","verdict":"out","segment":"","tier":"","reason":"Branch Builds is a construction/building company; no freight yard operations"}
+{"id":"54785136643","verdict":"out","segment":"","tier":"","reason":"Alvarado Restaurant Nation is a QSR restaurant franchise operator; hospitality/food service"}
+{"id":"54785136655","verdict":"out","segment":"","tier":"","reason":"MCR is a hotel ownership/management company; hospitality sector"}
+{"id":"54785140375","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Young's Market Co; beverage/spirits distributor with warehouses and distribution across western US"}
+{"id":"54785141084","verdict":"review","segment":"","tier":"","reason":"No identifiable business information found for ozarkendeavors.com"}
+{"id":"54785142036","verdict":"out","segment":"","tier":"","reason":"Tru Tech Doors is a garage door installation/service company; no freight distribution"}
+{"id":"54785142169","verdict":"in","segment":"building_materials_industrial","tier":"C","reason":"Dormont Manufacturing; makes gas connectors/tubing for foodservice/industrial; manufacturing and distribution"}
+{"id":"54785143921","verdict":"out","segment":"","tier":"","reason":"Medecins Sans Frontieres Argentina; nonprofit/NGO"}
+{"id":"54785144068","verdict":"out","segment":"","tier":"","reason":"Circle K convenience store/fuel retail chain; C-store retail, not a freight yard operation"}
+{"id":"54785144090","verdict":"out","segment":"","tier":"","reason":"Acumed Spain; orthopedic medical device company, non-North American entity"}
+{"id":"54785144092","verdict":"out","segment":"","tier":"","reason":"SunMed is a medical device/respiratory products company; healthcare sector"}
+{"id":"54785144421","verdict":"out","segment":"","tier":"","reason":"Jollibee is a QSR fast food chain; hospitality/restaurants sector"}
+{"id":"54785144710","verdict":"out","segment":"","tier":"","reason":"Ciocca Dealerships is an automotive retail dealership group; not freight/distribution"}
+{"id":"54785146489","verdict":"out","segment":"","tier":"","reason":"us.stores.com is an unclear/generic domain; no identifiable freight operation"}
+{"id":"54785148254","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Verder Group; industrial pump and fluid equipment manufacturer with global distribution including North America"}
+{"id":"54785148935","verdict":"out","segment":"","tier":"","reason":"trulymail.net is an email/ISP domain; technology/communications service"}
+{"id":"54785150631","verdict":"out","segment":"","tier":"","reason":"EnerSys Brazil subdomain; battery manufacturer, non-North American entity"}
+{"id":"54785153295","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Sylvania General Lighting; lighting products manufacturer/distributor with distribution network in North America"}
+{"id":"54785153318","verdict":"out","segment":"","tier":"","reason":"ECTISP is an internet service provider; technology/telecom sector"}
+{"id":"54785157401","verdict":"out","segment":"","tier":"","reason":"Santa Fe Public Schools; education sector"}
+{"id":"54785161761","verdict":"review","segment":"","tier":"","reason":"hastings-ent.com unclear; possible trucking/carrier but identity unconfirmed"}
+{"id":"54785162250","verdict":"review","segment":"","tier":"","reason":"otrba.com unclear; OTR prefix suggests possible trucking but identity unconfirmed"}
+{"id":"54785163951","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Indel (Inductotherm Group); 65+ industrial mfg subsidiaries with multiple NA plants"}
+{"id":"54785164037","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Home Depot Mexico; major home improvement retailer with distribution centers across Mexico"}
+{"id":"54785164304","verdict":"out","segment":"","tier":"","reason":"Fleet Feet PNW is a running shoe/specialty retail franchise; no freight yard operations"}
+{"id":"54785164364","verdict":"out","segment":"","tier":"","reason":"Drake Air is an HVAC service company; no freight distribution network"}
+{"id":"54785164711","verdict":"out","segment":"","tier":"","reason":"The Sample Room NYC is a design showroom; no freight yard operations"}
+{"id":"54785166912","verdict":"out","segment":"","tier":"","reason":"dvdolcevita.com appears to be an Italian lifestyle/brand domain; no freight operations"}
+{"id":"54785167474","verdict":"out","segment":"","tier":"","reason":"Anthraper Restaurants is a restaurant group; hospitality/QSR sector"}
+{"id":"54785169957","verdict":"out","segment":"","tier":"","reason":"US Office of Management and Budget; federal government"}
+{"id":"54785171601","verdict":"out","segment":"","tier":"","reason":"Cinnabon is a QSR/bakery franchise chain; hospitality/restaurants sector"}
+{"id":"54785171869","verdict":"out","segment":"","tier":"","reason":"Textron Financial Services subdomain; financial/insurance services"}
+{"id":"54785173916","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Ridout Lumber; building materials/lumber retailer and distributor in Arkansas with multiple locations"}
+{"id":"54785173938","verdict":"in","segment":"paper_packaging","tier":"A","reason":"RockTenn (now WestRock); major corrugated/containerboard manufacturer with numerous mills and DCs across NA"}
+{"id":"54785178226","verdict":"out","segment":"","tier":"","reason":"Valcoustics is an acoustical consulting/engineering firm; professional services"}
+{"id":"54785178455","verdict":"out","segment":"","tier":"","reason":"Yelp is a consumer review/local business software platform; SaaS/tech sector"}
+{"id":"54785194554","verdict":"out","segment":"","tier":"","reason":"nelawn.com appears to be a lawn care/landscaping service; no freight yard operations"}
+{"id":"54785198172","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Genie Industries (Terex); aerial lift manufacturer with major mfg and parts distribution network in North America"}
+{"id":"54785202975","verdict":"out","segment":"","tier":"","reason":"Tommy Bahama Hong Kong subdomain; fashion/apparel retail, non-North American entity"}
+{"id":"54785203272","verdict":"out","segment":"","tier":"","reason":"Out West RG is a small regional business with no identifiable freight operations"}
+{"id":"54785217123","verdict":"out","segment":"","tier":"","reason":"Wolak Group is a Dunkin' and McDonald's QSR franchise operator; hospitality/restaurants"}
+{"id":"54785219181","verdict":"in","segment":"agriculture_food_processing","tier":"B","reason":"McEntire Produce; regional produce wholesaler/distributor with distribution facilities in South Carolina"}
+{"id":"54785229489","verdict":"in","segment":"chemicals_plastics","tier":"B","reason":"Prince International; specialty chemicals manufacturer and distributor with NA facilities"}
+{"id":"54785234053","verdict":"out","segment":"","tier":"","reason":"WhoopConnect is a telecom/wireless reseller; technology/communications sector"}
+{"id":"54785242241","verdict":"out","segment":"","tier":"","reason":"Heat and Control Australia; food processing equipment maker, non-North American entity"}
+{"id":"54785256818","verdict":"out","segment":"","tier":"","reason":"Edward Jones is a financial advisory/investment firm; finance/banking sector"}
+{"id":"54785279660","verdict":"out","segment":"","tier":"","reason":"The Arc of Indian River County is a nonprofit disability services organization; nonprofit sector"}
+{"id":"54785368223","verdict":"out","segment":"","tier":"","reason":"Continental Finance is a consumer credit card company; finance/banking sector"}
+{"id":"54785368473","verdict":"out","segment":"","tier":"","reason":"Passaic Valley Sewerage Commission; public utility/government wastewater"}
+{"id":"54785376261","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Total Logistics; 3PL/managed transportation provider with warehousing and distribution operations"}
+{"id":"54785382233","verdict":"out","segment":"","tier":"","reason":"McKay Drilling is an Australian drilling company; non-North American entity"}
+{"id":"54785382517","verdict":"out","segment":"","tier":"","reason":"Jackery is a portable power/battery electronics brand; consumer electronics, no freight yard network"}
+{"id":"54785383976","verdict":"in","segment":"building_materials_industrial","tier":"C","reason":"Bentek; contract manufacturer of power distribution and electrical equipment in San Jose CA"}
+{"id":"54785384579","verdict":"out","segment":"","tier":"","reason":"McDonald's China subdomain; QSR franchisor, non-North American entity"}
+{"id":"54785384720","verdict":"out","segment":"","tier":"","reason":"The Morse Group is an electrical contracting conglomerate; construction/contracting, no fixed DC/yard network"}
+{"id":"54785388439","verdict":"out","segment":"","tier":"","reason":"Coca-Cola Vietnam; CPG beverage company, non-North American entity"}
+{"id":"54785388472","verdict":"out","segment":"","tier":"","reason":"The Genie Company makes garage door openers; consumer products brand, limited freight yard relevance"}
+{"id":"54785391156","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"BODYARMOR (Coca-Cola owned); sports drink brand with co-manufacturing and distribution network in NA"}
+{"id":"54785393795","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"PetSafe Brand (Radio Systems Corp); pet product manufacturer and distributor with warehouse operations"}
+{"id":"54785408813","verdict":"out","segment":"","tier":"","reason":"andreus.com is a small marketing/creative agency; professional services sector"}
+{"id":"54785420183","verdict":"out","segment":"","tier":"","reason":"Tarzana Treatment Centers is a healthcare/addiction treatment nonprofit; healthcare sector"}
+{"id":"54785420197","verdict":"out","segment":"","tier":"","reason":"La-Z-Boy Southeast is a furniture retail dealer; no distribution yard network"}
+{"id":"54785425224","verdict":"out","segment":"","tier":"","reason":"Norfolk Public Schools; education sector"}
+{"id":"54785425276","verdict":"out","segment":"","tier":"","reason":"YTB is a travel agency/booking network; travel/tourism sector"}
+{"id":"54785432098","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Diamond Crystal Brands; foodservice portion-control products with manufacturing and distribution facilities"}
+{"id":"54785433459","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Ahold Nederland (parent of Stop & Shop, Giant, Food Lion); major grocery retailer with extensive DC network in NA"}
+{"id":"54785434795","verdict":"out","segment":"","tier":"","reason":"ASC NYC is a nonprofit social services organization; nonprofit sector"}
+{"id":"54785438125","verdict":"out","segment":"","tier":"","reason":"CCM Europe (Carlisle); roofing/waterproofing manufacturer with European-only operations"}
+{"id":"54785441286","verdict":"out","segment":"","tier":"","reason":"McDonald's Malaysia subdomain; QSR, non-North American entity"}
+{"id":"54785443917","verdict":"out","segment":"","tier":"","reason":"Team Global Express New Zealand; logistics company but non-North American entity"}
+{"id":"54785443921","verdict":"in","segment":"wholesale_distribution","tier":"C","reason":"Gil-Bar Industries; HVAC equipment distributor in NY/NJ with warehouse staging for large equipment"}
+{"id":"54785443926","verdict":"out","segment":"","tier":"","reason":"Aegion is an infrastructure rehabilitation contractor; project/site-based, no fixed DC network"}
+{"id":"54785450294","verdict":"out","segment":"","tier":"","reason":"DuPont Capital Management is an investment/asset management firm; finance sector"}
+{"id":"54785450411","verdict":"in","segment":"cold_chain","tier":"C","reason":"Rastelli's; premium meat/seafood distributor with cold storage and fulfillment operations in New Jersey"}
+{"id":"54785454698","verdict":"out","segment":"","tier":"","reason":"Regional Homes is a manufactured/modular home retailer; real estate/housing sector"}
+{"id":"54785456681","verdict":"out","segment":"","tier":"","reason":"Cleveland Group appears to be a consulting/professional services firm; no freight operations"}
+{"id":"54785460839","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"OSI Systems; security/inspection equipment manufacturer with manufacturing and distribution facilities in NA"}
+{"id":"54785462960","verdict":"in","segment":"agriculture_food_processing","tier":"B","reason":"Rose Acre Farms; one of largest US egg producers with multiple farms and distribution operations"}
+{"id":"54785463400","verdict":"out","segment":"","tier":"","reason":"NHLBI is a US federal research institute (NIH); government/healthcare research"}
+{"id":"54785464618","verdict":"out","segment":"","tier":"","reason":"IW Consulting Group is a management consulting firm; professional services"}
+{"id":"54785465237","verdict":"out","segment":"","tier":"","reason":"Pace Suburban Bus is a public transit/bus agency; government transit, not freight"}
+{"id":"54785470034","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Mitsubishi Electric Americas; major industrial/consumer electronics manufacturer with NA distribution network"}
+{"id":"54785471157","verdict":"out","segment":"","tier":"","reason":"LTIMindtree is an IT services and consulting firm; software/tech sector"}
+{"id":"54785471306","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Lopez Foods; McDonald's beef supplier/food manufacturer with processing plants in Oklahoma and other states"}
+{"id":"54785476260","verdict":"out","segment":"","tier":"","reason":"Chumash Casino Resort is a tribal gaming/hospitality venue; entertainment sector"}
+{"id":"54785480278","verdict":"out","segment":"","tier":"","reason":"Digital Strategy is a marketing/events company; professional services"}
+{"id":"54785485450","verdict":"in","segment":"wholesale_distribution","tier":"C","reason":"ZWILLING J.A. Henckels Canada; premium kitchenware/cookware brand with Canadian distribution operations"}

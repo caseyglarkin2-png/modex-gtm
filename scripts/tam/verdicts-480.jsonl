@@ -1,0 +1,120 @@
+{"id":"54774560913","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Grupo LALA — major Mexican dairy/CPG producer with dozens of plants across Mexico and Latin America, heavy inbound/outbound freight."}
+{"id":"54776348004","verdict":"out","segment":"","tier":"","reason":"PIMCO — global investment management firm, no physical freight yards."}
+{"id":"54776348040","verdict":"out","segment":"","tier":"","reason":"Faith Technologies — electrical/technology contractor, professional services; no freight yard ops."}
+{"id":"54783773032","verdict":"out","segment":"","tier":"","reason":"Dominion Energy — regulated electric utility; power plants not freight yards, OUT vertical."}
+{"id":"54783994160","verdict":"out","segment":"","tier":"","reason":"Dallas Mavericks — NBA sports franchise, no freight/yard operations."}
+{"id":"54784069262","verdict":"out","segment":"","tier":"","reason":"Kansas City Chiefs — NFL sports franchise, no freight/yard operations."}
+{"id":"54784136285","verdict":"out","segment":"","tier":"","reason":"Hermitage High School / Henrico County Schools — public K-12 education, OUT vertical."}
+{"id":"54784168307","verdict":"out","segment":"","tier":"","reason":"OpenRoad Auto Group — car dealership group, no freight yard or DC network."}
+{"id":"54784180820","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Equipment Depot — large material handling/forklift dealership and service network with multiple DCs across the US."}
+{"id":"54784220295","verdict":"out","segment":"","tier":"","reason":"Authority Brands — home services franchise operator (plumbing, HVAC, lawn care); no freight yard ops."}
+{"id":"54784233116","verdict":"out","segment":"","tier":"","reason":"National Airlines — cargo/passenger airline; passenger airline is OUT; cargo airline borderline but no yard-network use case."}
+{"id":"54784233625","verdict":"out","segment":"","tier":"","reason":"Hare Krishna Exports / hk.co — domain suggests software/tech or generic holding; no identifiable freight-heavy ops."}
+{"id":"54784236872","verdict":"out","segment":"","tier":"","reason":"mspmac.org — Metropolitan Airports Commission (Minneapolis-St. Paul); government/public authority, OUT vertical."}
+{"id":"54784244822","verdict":"out","segment":"","tier":"","reason":"Evans General Contractors — general contractor/construction; OUT vertical."}
+{"id":"54784283456","verdict":"out","segment":"","tier":"","reason":"dph.ga.gov — Georgia Department of Public Health; government/healthcare provider, OUT vertical."}
+{"id":"54784286855","verdict":"out","segment":"","tier":"","reason":"BSNC / Bering Straits Native Corporation — Alaska Native Corp serving federal government contracts; government-services focus, OUT."}
+{"id":"54784320860","verdict":"out","segment":"","tier":"","reason":"Hydro-Quebec — Quebec electric utility; OUT vertical (utilities)."}
+{"id":"54784325955","verdict":"in","segment":"chemicals_plastics","tier":"B","reason":"Calumet Specialty Products Partners — specialty refining/chemicals MLP with multiple refineries and storage terminals across the US."}
+{"id":"54784372013","verdict":"out","segment":"","tier":"","reason":"Nova Biomedical (novabio.com) — medical device/IVD manufacturer; healthcare device, borderline but primarily lab instruments, distribution not freight-yard scale."}
+{"id":"54784434216","verdict":"out","segment":"","tier":"","reason":"Alsea — QSR/restaurant operator (Domino's, Burger King in Latin America); hospitality/restaurant, OUT vertical."}
+{"id":"54784438912","verdict":"out","segment":"","tier":"","reason":"Birmingham City Schools — public K-12 education, OUT vertical."}
+{"id":"54784463405","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Foxconn (mail.foxconn.com) — massive electronics/EV contract manufacturer with huge plant network; consumer goods/electronics mfg, heavy inbound logistics."}
+{"id":"54784489912","verdict":"out","segment":"","tier":"","reason":"Noble Food Group / dominospizza.com — Domino's pizza franchise operator; QSR/restaurant, OUT vertical."}
+{"id":"54784784502","verdict":"out","segment":"","tier":"","reason":"Enterprise Holdings — car rental/fleet management; no freight yard network."}
+{"id":"54784806204","verdict":"in","segment":"retail_grocery","tier":"A","reason":"HEB Mexico (hebmex.com) — major Mexican grocery retailer with large DC and store network."}
+{"id":"54784811556","verdict":"out","segment":"","tier":"","reason":"Spacelabs Healthcare — patient monitoring medical devices; healthcare devices/software, OUT."}
+{"id":"54784822894","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"VVG Truck / Velocity Vehicle Group — large commercial truck dealer network (2500+ employees, $1B+ rev) across US/Canada/Australia; serves freight ops, multiple distribution locations."}
+{"id":"54784823047","verdict":"out","segment":"","tier":"","reason":"Reliance Home Comfort — residential HVAC/water heater service provider; consumer services, no freight yard ops."}
+{"id":"54784846235","verdict":"in","segment":"retail_grocery","tier":"B","reason":"Cumberland Farms — convenience store/fuel retail chain with ~600 locations and distribution ops in the Northeast."}
+{"id":"54785005177","verdict":"out","segment":"","tier":"","reason":"Juniper Landscaping — landscaping services company; professional/facilities services, OUT."}
+{"id":"54785006712","verdict":"out","segment":"","tier":"","reason":"PSAV Exhibits + Specialty Events — event production/AV services; events/facilities services, OUT."}
+{"id":"54785034014","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"H&E Equipment Services — large heavy equipment rental company with branch network across the US; equipment distribution with freight-heavy yard ops."}
+{"id":"54785083537","verdict":"in","segment":"chemicals_plastics","tier":"B","reason":"Groupe Filgo-Sonic — Quebec petroleum products distributor (1.6B litres/year, 300 service stations, 24 business locations); fuel distribution with significant yard/terminal ops."}
+{"id":"54785150769","verdict":"out","segment":"","tier":"","reason":"USACE / US Army Corps of Engineers — military/government, OUT vertical."}
+{"id":"54795090341","verdict":"out","segment":"","tier":"","reason":"Beehiiv (mail.beehiiv.com) — email newsletter software platform; software/IT, OUT vertical."}
+{"id":"54884480375","verdict":"out","segment":"","tier":"","reason":"500 Startups — venture capital/startup accelerator; finance/software, OUT vertical."}
+{"id":"54999990319","verdict":"out","segment":"","tier":"","reason":"LinkedIn — professional social network/software; software/IT, OUT vertical."}
+{"id":"55344322670","verdict":"out","segment":"","tier":"","reason":"Boston Dynamics — robotics R&D company; technology/software/engineering, OUT vertical."}
+{"id":"55554494074","verdict":"out","segment":"","tier":"","reason":"SupportYourApp — customer support outsourcing/BPO; professional services, OUT vertical."}
+{"id":"55554508192","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Danone — global CPG/dairy/water company with large manufacturing and DC network worldwide; top-tier TAM account."}
+{"id":"55554508717","verdict":"in","segment":"chemicals_plastics","tier":"B","reason":"Umicore — Belgian materials/chemicals company (battery materials, recycling); multiple processing facilities, industrial freight ops."}
+{"id":"9392960044","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Interstate Batteries — large battery distribution company with national distribution network and multiple DCs."}
+{"id":"9400257357","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Bosch USA — massive industrial/automotive parts manufacturer with dozens of US plants and distribution facilities."}
+{"id":"9407692155","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Dart Container — largest manufacturer of foam and rigid plastic cups/containers in the world; multiple large manufacturing plants, heavy freight volume."}
+{"id":"9417725442","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Benteler — global automotive structural components manufacturer; dozens of plants worldwide including multiple North American facilities."}
+{"id":"9438766415","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"Dow Chemical — Fortune 50 chemical/materials company with large plant and terminal network across North America."}
+{"id":"9453667856","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"Brose — German Tier-1 automotive supplier (door systems, seat structures) with multiple North American plants."}
+{"id":"9497533594","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Ferrous Processing & Trading Co — large scrap metal processor and trader with multiple processing yards in Michigan/Midwest."}
+{"id":"45003995168","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"KBX Logistics — Koch Industries' 3PL arm with multimodal freight brokerage and terminal operations."}
+{"id":"45004613500","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Regency Transportation — regional truckload carrier; freight-heavy but smaller single-terminal operation."}
+{"id":"45004763764","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Kingsgate Logistics — regional 3PL/freight broker; multiple facilities, in TAM."}
+{"id":"45005077593","verdict":"in","segment":"building_materials_industrial","tier":"C","reason":"Yarmouth Lumber — lumber dealer/distributor; building materials with yard-based operations."}
+{"id":"45005382771","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"CW Carriers — trucking/carrier company; freight operations in TAM."}
+{"id":"45005696107","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"FreightRoll — YardFlow's own parent company; 3PL/carrier software/ops, in TAM by definition."}
+{"id":"45008324974","verdict":"out","segment":"","tier":"","reason":"Uber — rideshare/technology platform; software/IT, OUT vertical (Uber Freight is a broker but parent is tech/software)."}
+{"id":"45057673086","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"SpeedEE Transport — small carrier/trucking company; freight ops, in TAM."}
+{"id":"45058287422","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"NAPA Transportation — regional truckload carrier with terminal network; solid freight volume."}
+{"id":"45061843107","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Updike Distribution Logistics — regional distribution/logistics company; in TAM."}
+{"id":"45064542046","verdict":"out","segment":"","tier":"","reason":"Emerge — digital freight marketplace/software platform; software/IT, OUT vertical."}
+{"id":"45146661159","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Knight Transportation — major national TL carrier (now Knight-Swift); large yard and terminal network."}
+{"id":"49420832279","verdict":"out","segment":"","tier":"","reason":"GenLogs — logistics software/tech platform (genlogs.io); software/IT, OUT vertical."}
+{"id":"50177300345","verdict":"out","segment":"","tier":"","reason":"IDScan.net — identity verification software; software/IT, OUT vertical."}
+{"id":"51119866984","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Aspire Bakeries — large North American bakery manufacturer (La Brea, Otis Spunkmeyer brands) with multiple plants and DCs."}
+{"id":"51723121415","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"East Coast Warehouse & Distribution — 3PL warehousing company with multiple large facilities on the East Coast."}
+{"id":"51743533998","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Bunzl BRS (bunzlbrs.com) — Bunzl distribution subsidiary; large wholesale distribution network, multiple DCs."}
+{"id":"54410073456","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"YRC Freight — major national LTL carrier with large terminal network (now Estes absorbed some lanes); large yard ops."}
+{"id":"54416527942","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Watco Companies — short-line railroad and industrial terminal operator; rail/intermodal yard ops, strong TAM fit."}
+{"id":"54417957936","verdict":"review","segment":"","tier":"","reason":"Nrsonline.com — NRS (National Retail Solutions) point-of-sale tech, or possibly NRS Group; unclear freight-heavy ops from name alone."}
+{"id":"54419816451","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Tagg Logistics — 3PL fulfillment and warehousing company with multiple facilities; in TAM."}
+{"id":"54697231115","verdict":"in","segment":"ecommerce_parcel","tier":"A","reason":"ShipBob — large e-commerce fulfillment 3PL with 30+ fulfillment centers across North America and globally."}
+{"id":"54717725779","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"thyssenkrupp Materials — metals service center division with large distribution network in North America."}
+{"id":"54726254431","verdict":"in","segment":"paper_packaging","tier":"B","reason":"American Fuji Seal (afseal.com) — shrink sleeve/packaging manufacturer with multiple plants in US; paper_packaging segment."}
+{"id":"54735413928","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Maines Paper & Food Service — large foodservice distributor (Sysco-acquired) with multiple DCs serving Northeast/Midwest."}
+{"id":"54736049833","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Alta Equipment (altg.com) — large heavy equipment dealer network (construction/material handling) with multiple locations."}
+{"id":"54736061986","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Qualtia — Mexican meat/food processing company with manufacturing facilities and distribution ops."}
+{"id":"54756941364","verdict":"out","segment":"","tier":"","reason":"Transport for Wales Rail — UK passenger rail operator; passenger rail, OUT vertical."}
+{"id":"54756941372","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Broan — ventilation/exhaust fan manufacturer (NuTone brand); industrial mfg with multiple plants and distribution."}
+{"id":"54762166431","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Averitt Express — major Southeast regional LTL carrier with large terminal network across 100+ service centers."}
+{"id":"54762224898","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Vigor Industrial — large industrial shipyard and manufacturing/repair facility operator on the West Coast."}
+{"id":"54762470940","verdict":"out","segment":"","tier":"","reason":"99 Restaurants — casual dining restaurant chain; hospitality/restaurant, OUT vertical."}
+{"id":"54762597280","verdict":"in","segment":"chemicals_plastics","tier":"B","reason":"Cudd Energy Services — oilfield/energy services company with equipment yards and chemical ops; chemicals/energy services."}
+{"id":"54763837325","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Daifuku America — automated material handling/conveyor systems manufacturer with North American facilities and large project logistics."}
+{"id":"54770646842","verdict":"out","segment":"","tier":"","reason":"Abiomed — cardiac medical device manufacturer (J&J subsidiary); medical devices/healthcare, borderline but primarily hospital-facing, not freight-yard scale."}
+{"id":"54771804172","verdict":"in","segment":"retail_grocery","tier":"B","reason":"West Elm — home furnishings retail brand (Williams-Sonoma subsidiary) with DCs and retail stores; retail with distribution network."}
+{"id":"54771831702","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"State Window Corporation — large window/door manufacturer with manufacturing plant and distribution ops."}
+{"id":"54771844132","verdict":"out","segment":"","tier":"","reason":"New Apr Energy — small/unknown energy company; insufficient info for TAM qualification, OUT pending more data."}
+{"id":"54771857214","verdict":"out","segment":"","tier":"","reason":"Branch Civil — civil construction contractor; general contractor, OUT vertical."}
+{"id":"54771861847","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"KSS / Key Safety Systems (kss-sep.com) — global automotive safety components manufacturer (airbags, seatbelts) with 34+ facilities worldwide."}
+{"id":"54771874489","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"MEI Industrial Solutions (meigroup.com) — large industrial rigging/machinery moving company with 26 locations across 21 states."}
+{"id":"54771898486","verdict":"out","segment":"","tier":"","reason":"EIG (eig.ca) — energy investment/private equity firm; finance/investment, OUT vertical."}
+{"id":"54771898727","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Reliance Steel & Aluminum — largest metals service center in North America with 300+ locations; massive freight volume."}
+{"id":"54771898792","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"JAKKS Pacific (jakks.com.hk) — consumer toy/goods manufacturer with manufacturing and distribution facilities; consumer goods/electronics mfg."}
+{"id":"54771904875","verdict":"out","segment":"","tier":"","reason":"McDonald's UAE — QSR restaurant operator; hospitality/restaurant, OUT vertical."}
+{"id":"54771906838","verdict":"in","segment":"chemicals_plastics","tier":"B","reason":"Rockwater Energy — oilfield water management company with multiple operational sites and heavy logistics."}
+{"id":"54771909381","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Advanced Drainage Systems — largest producer of drainage pipes/infrastructure in North America with 60+ plants and DCs."}
+{"id":"54771911743","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Sysco Canada Toronto (tor.sysco.ca) — Sysco's Canadian foodservice distribution; large DCs, heavy freight volume."}
+{"id":"54771911788","verdict":"out","segment":"","tier":"","reason":"Great Canadian Gaming — casino/gaming entertainment company; hospitality, OUT vertical."}
+{"id":"54771917571","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"GLCCD / Great Lakes Coca-Cola Distribution — Reyes Holdings Coca-Cola bottler/distributor with large distribution network across Midwest."}
+{"id":"54771920235","verdict":"out","segment":"","tier":"","reason":"Gannett Fleming — infrastructure engineering/consulting firm; professional/engineering services, OUT vertical."}
+{"id":"54771920266","verdict":"out","segment":"","tier":"","reason":"BOND Building — construction management/general contractor; OUT vertical."}
+{"id":"54771939338","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Sysco International Food Group — foodservice distribution subsidiary of Sysco; large DC network, strong TAM fit."}
+{"id":"54771943728","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"ITW Automotive (awtx-itw.com) — Illinois Tool Works automotive division; dozens of manufacturing plants, heavy freight volume."}
+{"id":"54771947106","verdict":"in","segment":"retail_grocery","tier":"B","reason":"Northgate Gonzalez Markets — Southern California Hispanic grocery chain with DCs and ~40 stores; retail grocery with distribution ops."}
+{"id":"54771952039","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Bradford White Water Heaters — US water heater manufacturer with large manufacturing facilities and distribution."}
+{"id":"54771971161","verdict":"in","segment":"retail_grocery","tier":"B","reason":"Ingles Markets — regional Southeastern US grocery chain with ~200 stores and company-owned distribution/warehousing."}
+{"id":"54771971928","verdict":"in","segment":"agriculture_food_processing","tier":"B","reason":"Amalgamated Sugar (amalsugar.com) — second largest US sugar beet processor with 3 processing facilities in Idaho/Oregon."}
+{"id":"54771971995","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Resolute Forest Products — large North American pulp/paper/tissue manufacturer with mills and distribution across Canada and US."}
+{"id":"54771978525","verdict":"out","segment":"","tier":"","reason":"CyberPower Systems — UPS/power electronics manufacturer; IT/electronics, primarily software/IT customer base, OUT."}
+{"id":"54772015361","verdict":"out","segment":"","tier":"","reason":"Progressive Roofing — commercial roofing contractor; general contractor/construction services, OUT vertical."}
+{"id":"54772020540","verdict":"in","segment":"agriculture_food_processing","tier":"B","reason":"J.D. Heiskell — large grain merchandising and feed milling company with multiple mills and elevators in the West."}
+{"id":"54772596000","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Bimbo Bakeries / Grupo Bimbo — world's largest baking company; massive plant and DC network across North America."}
+{"id":"54772596040","verdict":"out","segment":"","tier":"","reason":"Pittsburgh Regional Transit — public transit authority; government/transit, OUT vertical."}
+{"id":"54772596226","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Ole Mexican Foods (olemexicanfoods.net) — large tortilla/Mexican food manufacturer with 45 locations, $315M revenue."}
+{"id":"54772601425","verdict":"out","segment":"","tier":"","reason":"dpsk12.net — Denver Public Schools; K-12 education, OUT vertical."}
+{"id":"54772606294","verdict":"in","segment":"retail_grocery","tier":"B","reason":"Giant/Martin's (giantmartins.com) — large Mid-Atlantic grocery chain (Ahold Delhaize) with DCs and 150+ stores."}
+{"id":"54772606340","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"CM Foods (cmfoods.com) — food distribution company; cpg/food distribution, in TAM."}
+{"id":"54772616079","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Ashley DSG (ashleydsg.com) — Ashley Furniture distribution services group; large furniture DC and delivery network."}
+{"id":"54772631199","verdict":"out","segment":"","tier":"","reason":"Avista Corp — Pacific Northwest electric/gas utility; OUT vertical (utilities)."}
+{"id":"54772640081","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"ABC Technologies (abctech.com) — Tier-1 automotive plastic components manufacturer with multiple plants in North America."}
+{"id":"54772644499","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"HISCO (hiscoinc.com) — large specialty industrial distributor with 32 stocking locations in US/Mexico/Canada serving electronics, aerospace, automotive mfg."}

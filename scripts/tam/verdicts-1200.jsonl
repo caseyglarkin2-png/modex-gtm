@@ -1,0 +1,120 @@
+{"id":"9348405913","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Atlantis Trucking - carrier with physical freight terminal operations in NA."}
+{"id":"9355097659","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Red Cap Transportation - regional transportation company with physical freight operations."}
+{"id":"9355661437","verdict":"out","segment":"","tier":"","reason":"HMD LLC - too generic/unidentifiable without domain; insufficient info."}
+{"id":"9355807298","verdict":"out","segment":"","tier":"","reason":"Photosharp Industries appears to be photography/imaging services, not freight."}
+{"id":"9355807760","verdict":"out","segment":"","tier":"","reason":"Arrival Ground Transport sounds like passenger ground transport, not freight yard ops."}
+{"id":"9361573767","verdict":"out","segment":"","tier":"","reason":"Promethean Software Services - software/IT firm, explicitly out."}
+{"id":"9361574006","verdict":"review","segment":"","tier":"","reason":"Revolution Group Inc is ambiguous - could be distribution/mfg or professional services without domain."}
+{"id":"9361574812","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Kinetic FT - freight/transportation company with physical freight operations."}
+{"id":"9361575535","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"GKN Automotive is a major global automotive driveline components manufacturer with dozens of plants worldwide."}
+{"id":"9361575808","verdict":"in","segment":"building_materials_industrial","tier":"C","reason":"Integrity Welding & Fabrication - industrial fabrication shop receiving and shipping heavy freight."}
+{"id":"9361667459","verdict":"out","segment":"","tier":"","reason":"Capelin Solutions appears to be a consulting/technology solutions firm, not a freight operator."}
+{"id":"9361989403","verdict":"out","segment":"","tier":"","reason":"Timeline Consulting - consulting firm, explicitly out."}
+{"id":"9361993807","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"California Freight Sales - freight brokerage/carrier with physical freight operations."}
+{"id":"9361994157","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Pahoa Express - regional trucking/express carrier with freight terminal operations."}
+{"id":"9361994323","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Priority Expedite - expedited freight carrier with physical freight operations."}
+{"id":"9392441388","verdict":"out","segment":"","tier":"","reason":"CRATE Modular - modular construction company, not freight/yard ops focused."}
+{"id":"9392926891","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Whiplash is a 3PL/fulfillment provider with multiple DCs across NA serving ecommerce brands."}
+{"id":"9392959597","verdict":"in","segment":"paper_packaging","tier":"B","reason":"AJM Packaging is a major US paper products manufacturer with multiple production facilities."}
+{"id":"9399702686","verdict":"in","segment":"medical_device_pharma","tier":"A","reason":"Avantor is a Fortune 500 life sciences company with global manufacturing and distribution facilities."}
+{"id":"9400028028","verdict":"in","segment":"chemicals_plastics","tier":"C","reason":"Eco Energy LLC VOC Carrier - chemicals/hazmat hauler with physical freight operations."}
+{"id":"9400079460","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Mount Franklin Foods is a snack food manufacturer with production and distribution facilities."}
+{"id":"9400216651","verdict":"out","segment":"","tier":"","reason":"Deloitte is a professional services/consulting firm - explicitly out."}
+{"id":"9400299674","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Goodyear is a Fortune 500 tire manufacturer with dozens of plants, DCs, and distribution yards globally."}
+{"id":"9400299902","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Bay Logistics Inc - regional logistics/carrier with physical freight terminal operations."}
+{"id":"9400439196","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Esco Corporation manufactures ground-engaging tools and industrial components with multiple plants and global distribution."}
+{"id":"9400542362","verdict":"in","segment":"chemicals_plastics","tier":"B","reason":"Quantix is a bulk liquid and dry chemical logistics provider with tanker truck operations and terminal facilities."}
+{"id":"9407692339","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Hanon Systems is a global automotive thermal management manufacturer with many NA plants."}
+{"id":"9408313229","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"iShared Transportation - shared truckload freight carrier with physical freight operations."}
+{"id":"9408557376","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Universal Logistics Holdings is a large public carrier and 3PL with extensive terminal/DC network across NA."}
+{"id":"9408557716","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Kerry Group is a global food ingredients company with large manufacturing and distribution footprint."}
+{"id":"9408559399","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"NBHX Trim Group is an automotive interior components supplier with NA manufacturing plants."}
+{"id":"9408645816","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Hanzo Logistics - freight logistics company with physical operations."}
+{"id":"9408646688","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"JCL Integrated Logistics - logistics provider with physical freight operations."}
+{"id":"9408674336","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Krystal Transport - trucking carrier with physical freight terminal operations."}
+{"id":"9417393516","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Leprino Foods is the world's largest mozzarella producer with multiple large dairy/cheese plants in the US."}
+{"id":"9417393693","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"FANUC America is the US robotics/CNC subsidiary with large manufacturing and distribution centers."}
+{"id":"9417423276","verdict":"out","segment":"","tier":"","reason":"Logistics Initiatives appears to be a consulting/advisory firm focused on logistics, not a freight operator."}
+{"id":"9417423778","verdict":"out","segment":"","tier":"","reason":"Truce appears to be a workplace safety software company - out per software vertical rules."}
+{"id":"9417594229","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"A2B Logistics Inc - trucking/freight carrier with physical freight operations."}
+{"id":"9417594480","verdict":"out","segment":"","tier":"","reason":"Confidential Contract (TBD) - placeholder record, no company info."}
+{"id":"9417595661","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"Sun Chemical is one of the world's largest ink/coatings/pigments producers with global manufacturing facilities."}
+{"id":"9417717528","verdict":"in","segment":"waste_environmental","tier":"A","reason":"Republic Services is a Fortune 500 waste management company with hundreds of facilities and trucking fleets nationwide."}
+{"id":"9417717877","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Forvia (Faurecia/Hella merged) is a global top-5 automotive supplier with dozens of NA manufacturing plants."}
+{"id":"9417718171","verdict":"out","segment":"","tier":"","reason":"New View Strategies - consulting/training firm for warehouse operations, not a freight operator."}
+{"id":"9417725985","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Robopac USA - stretch film and packaging equipment manufacturer/distributor with distribution facilities."}
+{"id":"9417856292","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"Eberspacher is a global automotive exhaust and climate systems manufacturer with NA plants."}
+{"id":"9437970782","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Direct Warehousing Inc - contract warehousing provider with physical DC operations."}
+{"id":"9438455891","verdict":"out","segment":"","tier":"","reason":"Spartan 5S Solutions - workplace organization/consulting services firm, not a freight operator."}
+{"id":"9438456133","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Brighton Express LLC - regional express trucking carrier with physical freight operations."}
+{"id":"9438456624","verdict":"out","segment":"","tier":"","reason":"Bizstride LLC - unidentifiable generic business, no domain; insufficient info."}
+{"id":"9438515243","verdict":"out","segment":"","tier":"","reason":"S & J Products and Services - too generic/unidentifiable without domain."}
+{"id":"9438764924","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"National Food Group is a large institutional food manufacturer and distributor with production facilities."}
+{"id":"9438766596","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"JAS Forwarding Worldwide is a global freight forwarder with major NA facilities and operations."}
+{"id":"9438786841","verdict":"in","segment":"ports_intermodal","tier":"C","reason":"Dray Depot - drayage/intermodal trucking company with yard and terminal operations near ports."}
+{"id":"9438787194","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Hollingsworth is a Michigan-based 3PL with automotive-focused warehousing and logistics facilities."}
+{"id":"9438787434","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"AMB Logistic - freight logistics company with physical trucking operations."}
+{"id":"9438787584","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Johns Manville is a Berkshire Hathaway insulation/roofing materials manufacturer with multiple large plants and DCs."}
+{"id":"9438851096","verdict":"review","segment":"","tier":"","reason":"UPPRO - unidentifiable without domain; could be logistics tech or freight operator."}
+{"id":"9438851657","verdict":"in","segment":"building_materials_industrial","tier":"C","reason":"CK Power - industrial power equipment manufacturer/distributor with facilities receiving and shipping freight."}
+{"id":"9438851939","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Lear Corporation is a Fortune 500 automotive seating and electrical systems manufacturer with dozens of NA plants."}
+{"id":"9445151138","verdict":"out","segment":"","tier":"","reason":"SuperStroke Golf - small golf equipment brand, insufficient freight scale for TAM."}
+{"id":"9445159264","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"NEXT Trucking is a digital freight network/carrier platform for drayage and trucking capacity with physical ops."}
+{"id":"9445159597","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Propak Logistics is a Canadian-based 3PL with cross-border warehousing and distribution facilities."}
+{"id":"9445220174","verdict":"in","segment":"ecommerce_parcel","tier":"B","reason":"Fulfillment Plus Inc - ecommerce fulfillment provider with multiple warehouse/DC operations."}
+{"id":"9445222448","verdict":"review","segment":"","tier":"","reason":"Harvey Holdings Inc - unidentifiable holding company without domain; insufficient info."}
+{"id":"9446619783","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"RJ Logistics - freight carrier/logistics provider with physical truck operations."}
+{"id":"9453495073","verdict":"out","segment":"","tier":"","reason":"CommonSpirit Health is a large hospital/healthcare system - healthcare provider, explicitly out."}
+{"id":"9453543560","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"England Logistics is a major freight brokerage and 3PL with extensive carrier network and physical operations."}
+{"id":"9453544300","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Molex (Koch Industries) is a major global electronics connector manufacturer with large NA manufacturing and distribution."}
+{"id":"9453667485","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"ABB is a Fortune 500 electrification and automation company with dozens of NA plants, DCs, and service facilities."}
+{"id":"9453667640","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"Paslin is a Michigan automotive welding systems integrator with manufacturing facilities."}
+{"id":"9453667681","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Load One is a Michigan-based specialty carrier and 3PL with terminal operations and significant fleet."}
+{"id":"9453668178","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Global Logistics Services GLS - freight logistics provider with physical warehousing and distribution."}
+{"id":"9461730668","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"SFL Companies - integrated supply chain and logistics firm with physical freight operations and facilities."}
+{"id":"9461730992","verdict":"out","segment":"","tier":"","reason":"LaFontaine Automotive Group is an automotive dealership group - retail automotive, out of TAM."}
+{"id":"9461731100","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Reliable Carriers Inc is a premium vehicle transport company with significant fleet and terminal operations."}
+{"id":"9461731251","verdict":"review","segment":"","tier":"","reason":"Aniva Enterprises - unidentifiable without domain; insufficient info to classify."}
+{"id":"9461731501","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Michigan Paving & Materials is a large asphalt/construction materials producer with quarries and plants."}
+{"id":"9462285177","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Adidas is a Fortune 500 global sportswear company with major DCs and distribution network across NA."}
+{"id":"9462285409","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Logistics+ is an international 3PL and freight management company with warehousing and freight operations."}
+{"id":"9462285666","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Steam Logistics is a freight brokerage and 3PL with growing operations and physical freight activities."}
+{"id":"9462285831","verdict":"review","segment":"","tier":"","reason":"Venture Solutions - too generic without domain; could be logistics or professional services."}
+{"id":"9462285890","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Leaf Logistics is a freight capacity optimization platform operating physical freight across NA."}
+{"id":"9462286505","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Eaton is a Fortune 500 power management company with dozens of NA manufacturing plants and DCs."}
+{"id":"9462286759","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Radiant Logistics is a publicly-traded freight management and 3PL with extensive North American network."}
+{"id":"9462286891","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"American Furukawa is the NA subsidiary of Furukawa Electric making wiring harnesses with US manufacturing."}
+{"id":"9497161820","verdict":"out","segment":"","tier":"","reason":"T-Mobile is a wireless telecommunications company - telecom/software vertical, out."}
+{"id":"9497162005","verdict":"out","segment":"","tier":"","reason":"Logistics of Logistics is a podcast/media brand about logistics - media, not a freight operator."}
+{"id":"9497162065","verdict":"out","segment":"","tier":"","reason":"SAIC is a defense and government IT services company - explicitly out."}
+{"id":"9497162108","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"CFI (Contract Freighters Inc) is a major NA truckload carrier with significant terminal and fleet operations."}
+{"id":"9497338491","verdict":"out","segment":"","tier":"","reason":"Lume Cannabis is a cannabis retail dispensary chain - out of TAM."}
+{"id":"9497338983","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Rock City Logistics - regional freight carrier/logistics company with physical freight operations."}
+{"id":"9497378348","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Imperium Logistics - freight logistics company with physical trucking operations."}
+{"id":"9497378619","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Becker Logistics is a Chicago-based 3PL with warehousing, transportation, and supply chain services across NA."}
+{"id":"9497472834","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Royalty Logistics LLC - regional carrier/logistics company with physical freight operations."}
+{"id":"9497473054","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Flexe is an on-demand warehousing and fulfillment network with physical warehouse capacity across NA."}
+{"id":"9497473301","verdict":"out","segment":"","tier":"","reason":"Livegistics Inc is a construction materials tracking software platform - software, explicitly out."}
+{"id":"9497491571","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Guardian Industries (Koch Industries) is a major glass manufacturer with large NA float glass plants and distribution."}
+{"id":"9497511541","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Infineon Technologies is a global semiconductor manufacturer with major fab and backend facilities in NA."}
+{"id":"9497511768","verdict":"in","segment":"cpg_food_beverage","tier":"C","reason":"North American Kitchen Solutions - commercial kitchen equipment distributor with warehousing and freight operations."}
+{"id":"9497511854","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"United Road Services is a major vehicle transport/auto hauling company with terminals across NA."}
+{"id":"9497511992","verdict":"review","segment":"","tier":"","reason":"TOP Worldwide LLC - unidentifiable without domain; insufficient info."}
+{"id":"9497567084","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Quality Freight Logistics - freight carrier/broker with physical operations."}
+{"id":"9497567779","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Cali Bamboo is a flooring and fencing manufacturer with DCs and distribution operations across NA."}
+{"id":"9542735661","verdict":"out","segment":"","tier":"","reason":"PopCapacity is a digital freight marketplace/tech platform - software, out."}
+{"id":"9542759528","verdict":"out","segment":"","tier":"","reason":"Plus AI is an autonomous trucking technology company - AI/software, not a freight operator, out."}
+{"id":"9544182676","verdict":"out","segment":"","tier":"","reason":"Warehouse Automation appears to be a consulting or tech solutions firm - not a freight operator."}
+{"id":"9636329119","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"American Axle is a Fortune 500 automotive driveline/powertrain supplier with dozens of NA plants."}
+{"id":"9636329248","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Bravo Transportation - regional trucking/carrier company with physical freight operations."}
+{"id":"9636329271","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"Henkel is a global adhesives/sealants/consumer products company with large NA manufacturing and DC network."}
+{"id":"9636345449","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Ebsco Industries is a large private conglomerate with manufacturing and distribution operations across verticals."}
+{"id":"9636345481","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"SC Johnson is a Fortune 500 consumer products company (Windex/Raid/Ziploc) with major NA plants and DCs."}
+{"id":"9636345617","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Constellation Brands is a Fortune 500 beer/wine/spirits company with large breweries, wineries, and DCs."}
+{"id":"9636345762","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"GMT Logistics - freight carrier/logistics company with physical operations."}
+{"id":"9636345872","verdict":"out","segment":"","tier":"","reason":"DO & CO AG is a premium airline catering and hospitality company - hospitality/food service, explicitly out."}
+{"id":"9636346013","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"TreeHouse Foods is a Fortune 500 private-label food manufacturer with dozens of production facilities across NA."}
+{"id":"9636346130","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Vector Pipeline - pipeline/energy logistics operator with physical freight infrastructure."}
+{"id":"9636346167","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Ryan Transportation - regional trucking carrier/broker with physical freight operations."}
+{"id":"9636346201","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Bronco Transportation - regional trucking carrier with physical freight operations."}
+{"id":"9636507512","verdict":"out","segment":"","tier":"","reason":"Hungry Howie's is a pizza franchise restaurant chain - QSR/hospitality, explicitly out."}

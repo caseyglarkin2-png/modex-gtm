@@ -1,0 +1,120 @@
+{"id":"55341326149","verdict":"out","segment":"","tier":"","reason":"Estee Lauder CH subdomain — cosmetics brand, no freight yard network"}
+{"id":"55341332054","verdict":"out","segment":"","tier":"","reason":"SJF Ventures — venture capital firm"}
+{"id":"55341377113","verdict":"out","segment":"","tier":"","reason":"peopleagainstdirty.com — Method Products brand/marketing entity, no owned freight network"}
+{"id":"55341387093","verdict":"out","segment":"","tier":"","reason":"pdindiana.com — Proximo Spirits Indiana entity, spirits importer/holding, no yard network footprint"}
+{"id":"55341387103","verdict":"out","segment":"","tier":"","reason":"K2 Mediaworks — media production company"}
+{"id":"55341400931","verdict":"out","segment":"","tier":"","reason":"Turbine Controls — MRO/maintenance for turbines, aerospace-adjacent, no freight yard network"}
+{"id":"55341443224","verdict":"out","segment":"","tier":"","reason":"Chartwells K12 — school food service/hospitality, out vertical"}
+{"id":"55341719654","verdict":"out","segment":"","tier":"","reason":"Epsilon — marketing data/advertising technology, SaaS/IT vertical"}
+{"id":"55341729565","verdict":"in","segment":"paper_packaging","tier":"B","reason":"INX International Ink Co. European domain — global printing inks/coatings manufacturer, 50+ locations NA and global, multi-plant freight"}
+{"id":"55341745686","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Mars/Wrigley — global CPG giant, massive NA manufacturing and distribution network"}
+{"id":"55341753687","verdict":"out","segment":"","tier":"","reason":"Valiant Oman Oilfield Services — oilfield services based in Oman, not NA operations"}
+{"id":"55341773065","verdict":"out","segment":"","tier":"","reason":"fitnessintl.com — Fitness International, gym chain, no freight yard network"}
+{"id":"55341809739","verdict":"out","segment":"","tier":"","reason":"ServiceMaster — facilities/cleaning/restoration services, out vertical"}
+{"id":"55341809828","verdict":"out","segment":"","tier":"","reason":"Leidos UK subdomain — defense/IT services, out vertical"}
+{"id":"55341812658","verdict":"out","segment":"","tier":"","reason":"ayvazpizza.com — pizza restaurant, out vertical"}
+{"id":"55341814550","verdict":"out","segment":"","tier":"","reason":"Canada Goose — luxury apparel brand, limited owned distribution network"}
+{"id":"55341830462","verdict":"out","segment":"","tier":"","reason":"Hallmark Labs — Hallmark streaming/digital media unit, not freight"}
+{"id":"55341834766","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"ITW Global Brands (Illinois Tool Works) — large industrial manufacturer, multi-plant NA distribution network"}
+{"id":"55341843063","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Hanes — major apparel/CPG manufacturer, large NA distribution center network"}
+{"id":"55341845163","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Simon Roofing Products — roofing materials manufacturer with multi-site distribution"}
+{"id":"55341856517","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Auto Express Frontera Norte — Mexico trucking/transportation company with NA cross-border freight"}
+{"id":"55341858849","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Raymond Building Supply — building materials distributor with multiple yard/branch locations"}
+{"id":"55341863188","verdict":"out","segment":"","tier":"","reason":"American Amicable Life Insurance — insurance company, out vertical"}
+{"id":"55341865906","verdict":"out","segment":"","tier":"","reason":"MNP — accounting and consulting firm, out vertical"}
+{"id":"55341868092","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Cardinal Logistics — 3PL/dedicated carrier with large NA fleet and multi-site operations"}
+{"id":"55341871158","verdict":"out","segment":"","tier":"","reason":"LATICRETE Australia — Australian entity, not North America"}
+{"id":"55341876533","verdict":"out","segment":"","tier":"","reason":"Dejana Truck & Utility Equipment — truck upfitter, single-facility, no yard network"}
+{"id":"55341880350","verdict":"out","segment":"","tier":"","reason":"MWB Restaurants/mwburger.com — restaurant chain, out vertical"}
+{"id":"55341882509","verdict":"out","segment":"","tier":"","reason":"UCAR — nonprofit academic research institution, out vertical"}
+{"id":"55341889183","verdict":"out","segment":"","tier":"","reason":"Laird Technologies — wireless/electronic components, SaaS/tech out vertical"}
+{"id":"55341905666","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Royal Canin USA — Mars subsidiary, major pet food manufacturing and distribution network"}
+{"id":"55341917011","verdict":"out","segment":"","tier":"","reason":"Troy Construction — general contractor, jobsite-based, no fixed DC/yard network"}
+{"id":"55341935029","verdict":"out","segment":"","tier":"","reason":"Aviall — aviation parts distribution, aerospace vertical, out per rules"}
+{"id":"55341937470","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Border States Electric — large electrical wholesale distributor with multi-branch NA network"}
+{"id":"55341959243","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"BHP — global mining giant with major NA industrial/materials operations and freight volume"}
+{"id":"55341959303","verdict":"in","segment":"ecommerce_parcel","tier":"B","reason":"HelloFresh Canada — meal kit with regional fulfillment centers and high-frequency inbound freight"}
+{"id":"55342179090","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Primo Water Corp — bottled water/beverage distribution with large NA distribution network"}
+{"id":"55342186512","verdict":"out","segment":"","tier":"","reason":"SnS Pet — small regional wholesale pet supplies distributor, <$5M revenue, single facility"}
+{"id":"55342190425","verdict":"out","segment":"","tier":"","reason":"cooperativapemex.com.mx — Pemex cooperative entity in Mexico, not primary freight operator"}
+{"id":"55342192515","verdict":"in","segment":"ports_intermodal","tier":"B","reason":"Ohio Intermodal Services — intermodal/rail ramp operator in Ohio with multi-modal freight"}
+{"id":"55342196339","verdict":"out","segment":"","tier":"","reason":"Onboard/Conservice Internet Management — internet/utilities management for real estate, IT vertical"}
+{"id":"55342200631","verdict":"out","segment":"","tier":"","reason":"grandcrestmontcapital.com — finance/capital advisory, out vertical"}
+{"id":"55342203652","verdict":"out","segment":"","tier":"","reason":"PropFlow — real estate technology, out vertical"}
+{"id":"55342209941","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Redwood SCS — Redwood Logistics unit, freight brokerage/3PL with multi-site NA operations"}
+{"id":"55342223515","verdict":"out","segment":"","tier":"","reason":"kelloggalumni.northwestern.edu — university alumni domain, education vertical"}
+{"id":"55342459289","verdict":"out","segment":"","tier":"","reason":"mx0b-001a8001.pphosted.com — email relay/MTA domain, not a company"}
+{"id":"55342535328","verdict":"out","segment":"","tier":"","reason":"Emerald Fox Productions — media/video production company"}
+{"id":"55342665904","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Eli Lilly — major pharma manufacturer with large NA manufacturing plants and distribution"}
+{"id":"55344343096","verdict":"out","segment":"","tier":"","reason":"mx0b-004e2d01.pphosted.com — email relay/MTA domain, not a company"}
+{"id":"55344345505","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Vesuvius Plc — industrial ceramics/refractories manufacturer serving steel/foundry with multi-plant NA operations"}
+{"id":"55344386135","verdict":"out","segment":"","tier":"","reason":"mx0a-0003ca03.pphosted.com — email relay/MTA domain, not a company"}
+{"id":"55344599158","verdict":"out","segment":"","tier":"","reason":"mx08-0046a901.pphosted.com — email relay/MTA domain, not a company"}
+{"id":"55344664641","verdict":"out","segment":"","tier":"","reason":"capitaladdvisors.com — capital/financial advisory, out vertical"}
+{"id":"55349765911","verdict":"out","segment":"","tier":"","reason":"Talon Group LLC — diversified private equity investor, finance vertical"}
+{"id":"55349787433","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Navistar (navistarinc.onmicrosoft.com) — truck/engine manufacturer with large NA manufacturing and parts distribution"}
+{"id":"55349881780","verdict":"out","segment":"","tier":"","reason":"nexstarco.com — Nexstar Media Group, TV broadcasting company, out vertical"}
+{"id":"55349931606","verdict":"out","segment":"","tier":"","reason":"Cambridge International Securities — fixed income broker-dealer, finance vertical"}
+{"id":"55350272100","verdict":"out","segment":"","tier":"","reason":"Jones Lang LaSalle (JLL) — commercial real estate services, out vertical"}
+{"id":"55354012592","verdict":"out","segment":"","tier":"","reason":"OutboundLabs — AI-powered outbound sales platform, SaaS/IT vertical"}
+{"id":"55354251030","verdict":"out","segment":"","tier":"","reason":"Bristlecone — supply chain consulting/IT services, out vertical"}
+{"id":"55354265960","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Aliaxis — global plastic pipe and flow system manufacturer with NA plants and distribution"}
+{"id":"55354290016","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Johns Manville — major insulation and building materials manufacturer, multi-plant NA network (Berkshire subsidiary)"}
+{"id":"55354301092","verdict":"out","segment":"","tier":"","reason":"example.com — placeholder domain, not a real company"}
+{"id":"55354327454","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Puratos Group — bakery/patisserie ingredients CPG with NA manufacturing and distribution"}
+{"id":"55357015830","verdict":"out","segment":"","tier":"","reason":"getecom-interatorsonline.co — spam/fake domain"}
+{"id":"55359490432","verdict":"out","segment":"","tier":"","reason":"Plethora Businesses — M&A advisory/business brokerage firm, professional services"}
+{"id":"55367787896","verdict":"out","segment":"","tier":"","reason":"clearbuildlink.info — spam/junk domain"}
+{"id":"55368022417","verdict":"out","segment":"","tier":"","reason":"benefitsgowhole.info — spam/junk domain"}
+{"id":"55368035651","verdict":"out","segment":"","tier":"","reason":"us.abb.com — ABB USA, industrial automation/electrical technology, IT/automation out vertical"}
+{"id":"55368654124","verdict":"out","segment":"","tier":"","reason":"simpsoncpaaccountingsolutions.com — CPA/accounting services, out vertical"}
+{"id":"55381020787","verdict":"out","segment":"","tier":"","reason":"localcommsvc.com — local communications service, likely telecom/IT, out vertical"}
+{"id":"55382571580","verdict":"out","segment":"","tier":"","reason":"Avolta (Dufry) — duty-free travel retail in airports/seaports, hospitality/retail out vertical"}
+{"id":"55382573228","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Coca-Cola European Partners — major Coke bottler with significant NA manufacturing and distribution operations"}
+{"id":"55383450703","verdict":"out","segment":"","tier":"","reason":"canda.com — C&A fashion retail, primarily European, no NA yard network"}
+{"id":"55383505414","verdict":"out","segment":"","tier":"","reason":"Schindler Holding — elevator/escalator manufacturer, field-service model, no large yard network"}
+{"id":"55383508051","verdict":"out","segment":"","tier":"","reason":"thejonathanfounderscap.digital — spam/fake finance domain"}
+{"id":"55388553369","verdict":"out","segment":"","tier":"","reason":"sick-india.com — SICK India subdomain, sensor tech, India entity, not NA"}
+{"id":"55391525186","verdict":"out","segment":"","tier":"","reason":"Agfa — imaging/printing tech, limited NA freight footprint, not a yard-network vertical"}
+{"id":"55398910038","verdict":"out","segment":"","tier":"","reason":"elevatrixor.com — spam/junk domain"}
+{"id":"55399132714","verdict":"out","segment":"","tier":"","reason":"Marvell Technology — semiconductor design company, fabless, no manufacturing/distribution yards"}
+{"id":"55399157106","verdict":"out","segment":"","tier":"","reason":"Colruyt Group — Belgian grocery retail, primarily European, not NA operations"}
+{"id":"55399260504","verdict":"out","segment":"","tier":"","reason":"Viessmann — European heating/energy systems manufacturer, minimal NA freight presence"}
+{"id":"55399577191","verdict":"out","segment":"","tier":"","reason":"JPMorgan Chase — financial services, out vertical"}
+{"id":"55399856696","verdict":"out","segment":"","tier":"","reason":"nassaugroupadvguidegrp.info — spam/junk domain"}
+{"id":"55406058034","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Hikma Pharmaceuticals — generic pharma manufacturer with NA manufacturing and distribution facilities"}
+{"id":"55406973097","verdict":"out","segment":"","tier":"","reason":"thegetproservice.co — spam/junk domain"}
+{"id":"55408258884","verdict":"out","segment":"","tier":"","reason":"Foley & Lardner — law firm, professional services out vertical"}
+{"id":"55408791465","verdict":"out","segment":"","tier":"","reason":"e.lucid.co — Lucid software email/notification domain, SaaS out vertical"}
+{"id":"55410245955","verdict":"out","segment":"","tier":"","reason":"nassaustreetadvassetpro.info — spam/junk domain"}
+{"id":"55410864469","verdict":"out","segment":"","tier":"","reason":"ronrathe.com — personal/individual domain, not a company"}
+{"id":"55411492256","verdict":"out","segment":"","tier":"","reason":"New Relic — software/observability platform, SaaS out vertical"}
+{"id":"55411966977","verdict":"in","segment":"ports_intermodal","tier":"A","reason":"CMA CGM awards subdomain — global ocean shipping carrier with major NA port/intermodal operations"}
+{"id":"55412682054","verdict":"out","segment":"","tier":"","reason":"Silicon Road — venture capital firm, finance out vertical"}
+{"id":"55413844097","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Mercedes-Benz USA — automotive manufacturer/distributor with large NA parts distribution and vehicle logistics network"}
+{"id":"55414766150","verdict":"out","segment":"","tier":"","reason":"tekhqs.co — spam/junk domain"}
+{"id":"55416245132","verdict":"out","segment":"","tier":"","reason":"superchargedai.org — spam/AI tool, out vertical"}
+{"id":"55416309599","verdict":"out","segment":"","tier":"","reason":"ledgermora.help — spam/junk domain"}
+{"id":"55416920173","verdict":"out","segment":"","tier":"","reason":"advanced-janitorial-services.com — janitorial services, out vertical"}
+{"id":"55417627463","verdict":"out","segment":"","tier":"","reason":"mx0b-004d9501.pphosted.com — email relay/MTA domain, not a company"}
+{"id":"55417961807","verdict":"out","segment":"","tier":"","reason":"Oakridge Fabrication — small CNC machine shop, <$10M revenue single facility, no yard network"}
+{"id":"55418649934","verdict":"out","segment":"","tier":"","reason":"eemeraldlabs.com — spam/junk domain"}
+{"id":"55419417930","verdict":"out","segment":"","tier":"","reason":"slightedgecaplogic.org — spam/junk domain"}
+{"id":"55419579058","verdict":"out","segment":"","tier":"","reason":"worldwisemarketing.net — marketing services, out vertical"}
+{"id":"55419735980","verdict":"out","segment":"","tier":"","reason":"nexa-techai.online — spam/AI domain"}
+{"id":"55419966568","verdict":"out","segment":"","tier":"","reason":"ScadCo — South African entity, not North America"}
+{"id":"55420421922","verdict":"out","segment":"","tier":"","reason":"closebridgeapp.com — sales consulting/app, professional services out vertical"}
+{"id":"55421473630","verdict":"out","segment":"","tier":"","reason":"GFS (gfs.com.kw) — Kuwait entity, not North America"}
+{"id":"55423296395","verdict":"out","segment":"","tier":"","reason":"news.codenewsletter.ai — tech newsletter, media/IT out vertical"}
+{"id":"55424155922","verdict":"out","segment":"","tier":"","reason":"bytnexus.com — likely software/IT company, out vertical"}
+{"id":"55424881508","verdict":"out","segment":"","tier":"","reason":"FindMyAITool — AI tool directory, tech/media out vertical"}
+{"id":"55425513097","verdict":"out","segment":"","tier":"","reason":"Substack — publishing/media platform, out vertical"}
+{"id":"55425772801","verdict":"out","segment":"","tier":"","reason":"notifications.transactional.hubspot.com — HubSpot notification subdomain, not a company"}
+{"id":"55427829903","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Barilla — major pasta/CPG manufacturer with NA manufacturing plants and distribution centers"}
+{"id":"55428213821","verdict":"out","segment":"","tier":"","reason":"drfortin.com — medical/individual practitioner, out vertical"}
+{"id":"55428724099","verdict":"out","segment":"","tier":"","reason":"eroticd.com — adult content domain, out vertical"}
+{"id":"55431254640","verdict":"out","segment":"","tier":"","reason":"service.jpmorgan.com — JPMorgan Chase service subdomain, finance out vertical"}
+{"id":"55435908938","verdict":"out","segment":"","tier":"","reason":"Intercomp USA — weighing equipment manufacturer, small single-site, no yard network"}
+{"id":"55436029274","verdict":"out","segment":"","tier":"","reason":"buffassoc.com — likely consulting/association, not a freight-heavy company"}
+{"id":"55443636737","verdict":"out","segment":"","tier":"","reason":"actopan.gob.mx — Mexican municipal government, out vertical"}
+{"id":"55446072946","verdict":"out","segment":"","tier":"","reason":"whizzbridge-soft.website — software/staffing company, out vertical"}
