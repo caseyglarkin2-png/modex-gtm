@@ -1,0 +1,588 @@
+{
+  "triggers": [
+    {
+      "slug": "pepsico",
+      "account": "PepsiCo",
+      "title": "Gatik to bring autonomous freight to PepsiCo’s North American supply chain - The Robot Report",
+      "url": "https://news.google.com/rss/articles/CBMioAFBVV95cUxORy12NlExTHR2cm91bkdYaTNwZU5GcUJhSXVYNkZZdnBWaHdCSFFFWThnLXJSOVJ1YTJhWlRtY0FmbkVEenlmTkp2RTlDTnZjY0dMbVJJd0J3bnZJMnJzb2t4STlsLVVWb3dTVGdWQXNkem5QaHlBNkNNaTViZmxPODVEN3RaM0VGZ0VMd3Q0NHZ2aFJMWGFvelQ1Tl82a1FQ?oc=5",
+      "source": "The Robot Report",
+      "publishedAt": "2026-06-12T17:51:35.000Z",
+      "score": 10,
+      "categories": [
+        "AUTONOMY",
+        "FREIGHT"
+      ]
+    },
+    {
+      "slug": "pepsico",
+      "account": "PepsiCo",
+      "title": "How PepsiCo’s Fully Driverless Freight Rollout With Gatik At PepsiCo (PEP) Has Changed Its Investment Story - simplywall.st",
+      "url": "https://news.google.com/rss/articles/CBMi0wFBVV95cUxQRnJsalRXell4cFhaQlJxYkpmM0ZmUU4yZVhLX28zODRUTkNqeElLZkJ1bzlydENPSG5YOGlDclBQbnFjUE1rVXJ6Z0pTVzBIcXRUcDlQVTliaXlOX3NKU0N2d195cDZYQ3NIR1JjZTU4akc2NENINENwa1lCajF5dFZiRE53ei1oREFFY1lKVWQwX0hpVmFaSHBPZER4cGpPeGU1MUs3aklodERIdjNpbThHWkZmT0dkS0wwT1FpUkxjVmwtbEhScmNnSHZZSmdEbVZr0gHYAUFVX3lxTE1XQVY1eDRGaHVydmk1SnVjQkpiejM3bFpBQ3cwbkh1NzVDQ0tGcEVwMHhXWFpGTmgzUTU2U0R1NE5Da29VSTNUR2lfdTZRcDlsQlF6STFqbHROUnRzSC0wMFBzZzZVeDFJMGhGamc5MEJiQW1IbDYxNmJHUzdFckdBaF9oQU9wZ05aRG55SV91Wmg4NDJIa1RFNUwyeXNkYXdNOWV3RldaYlhUdVBsSWlZNWctdzR4ZjYxc2R2X0ZSTmkyNE1EMGh3M3c3R1JScWcydU0takhJcw?oc=5",
+      "source": "simplywall.st",
+      "publishedAt": "2026-06-12T15:33:41.000Z",
+      "score": 10,
+      "categories": [
+        "AUTONOMY",
+        "FREIGHT"
+      ]
+    },
+    {
+      "slug": "pepsico",
+      "account": "PepsiCo",
+      "title": "PepsiCo partners with Gatik for landmark commercial autonomous freight deployment - Milling Middle East & Africa",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxPa1VxcXlzUy1vTkdGY1lJNGVfdGVYX2g4RXVGUElrZUhadlRCRzBZenhQWTlXUkV1RUJHZDk2LXJsZ055U19KQUtfVHZfOW9uLUpwdDlIcjZvcktEcHJPM0VDT2o4NHYzUFVxQ2JDMVZsc05aNE13RFY5Vkx5djBLc1ZZYXItejhWSDZ3ZnJvbHd2YnotUHByYWJPamNsb1NYTVFENGtQWEU?oc=5",
+      "source": "Milling Middle East & Africa",
+      "publishedAt": "2026-06-11T13:08:03.000Z",
+      "score": 10,
+      "categories": [
+        "AUTONOMY",
+        "FREIGHT"
+      ]
+    },
+    {
+      "slug": "pepsico",
+      "account": "PepsiCo",
+      "title": "PepsiCo Steps Up Autonomous Freight Use As Valuation Gap Persists - Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxQM1gwbThsTjJPUjA4cUxYMHBVeDRsa0dJN01WSlpSRGJ0OWZ0MXNMdXBBbzVaWjk5clNqN2Vzd2lYTmNUWWFRXzIySEJTN3NPLUQ1Q1RPREJjbHlFUU9DeHFoUVM3aWhvZFZ4S29acnF4ZTlROXJmLUhMQXZUNWJfQmdtVjY1OExVOFMwY3VndElKblpLSXR0WGlRc0RWOHJRN2VqMTRnamV1Wlk?oc=5",
+      "source": "Yahoo Finance",
+      "publishedAt": "2026-06-11T11:09:50.000Z",
+      "score": 10,
+      "categories": [
+        "AUTONOMY",
+        "FREIGHT"
+      ]
+    },
+    {
+      "slug": "pepsico",
+      "account": "PepsiCo",
+      "title": "PepsiCo (NASDAQ: PEP) And Gatik Deploy The Largest Commercial Autonomous Trucking Network In History - foreignpolicyjournal.com",
+      "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxQRXhVSW5NdjJ5NEFFMWFWMnk4bFV5MFUycXB0ZmxqblpTSm1HVm5BMWh5YVJ4Sm9kRE1Pc0RtT0FZeHBGRGlyazZ0YWxlVEFRT3FpWWloNkx5ZEJRZERIc3FRREtKVzhNbU02OFBaTGU2U0JiSUluVmU0b1BYZzJ2aTh0TEh6VThRYnktZ1VFNkFFTU1EUnljdkJ2U0dfU2NNa081Nk45NEUyYURfSElMTVNTZHFjWUJZSTE0SzJ2d0hJdENxVWcxTFBlMGxxV3VnbXo4Uk55LWFNb0FUMktn?oc=5",
+      "source": "foreignpolicyjournal.com",
+      "publishedAt": "2026-06-10T17:22:00.000Z",
+      "score": 10,
+      "categories": [
+        "AUTONOMY",
+        "FREIGHT"
+      ]
+    },
+    {
+      "slug": "pepsico",
+      "account": "PepsiCo",
+      "title": "PepsiCo Scales Autonomous Freight to Tackle Complex Logistics - Consumer Goods Technology",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPR3Nrd0xEOUdLd0lXRDRFRWJXTjZyMlVHOGM1enlfOWJhS3hXSnZBTTZ4ZVNBSFhRZ0xTUWU1UW8yQzU1RHNXZ3RyTlE1bUZhSE9mcVRhSXlZOEh2QnJqSjEwa1Z1Y1pQbXMzSjNLbDF3aHVnN3lVSDFSRmxEcTVmbnhNemlFR0hhanR2dA?oc=5",
+      "source": "Consumer Goods Technology",
+      "publishedAt": "2026-06-09T15:34:29.000Z",
+      "score": 10,
+      "categories": [
+        "AUTONOMY",
+        "FREIGHT"
+      ]
+    },
+    {
+      "slug": "pepsico",
+      "account": "PepsiCo",
+      "title": "PepsiCo and Gatik launch commercial driverless trucking deployment - FreightWaves",
+      "url": "https://news.google.com/rss/articles/CBMihAFBVV95cUxNdlZqa0oxckhnUUhGUlJpZ2lUOWJ3NTRNZlRXaHFGc2VqS0ZBY01DUzZwbS1oODl5TGlQd1hCcW41Rk96dHFrbm0waTAwZW1iakk3dmR4TmdUMDRsM3pWMF9FWjMyaU5yM0Q5eWlCNElWdUZESHE4ZktwQjdEVWd6clEtbFk?oc=5",
+      "source": "FreightWaves",
+      "publishedAt": "2026-06-09T14:26:10.000Z",
+      "score": 10,
+      "categories": [
+        "AUTONOMY",
+        "FREIGHT"
+      ]
+    },
+    {
+      "slug": "pepsico",
+      "account": "PepsiCo",
+      "title": "PepsiCo scales autonomous freight deployment with multi-year Gatik partnership - New Food",
+      "url": "https://news.google.com/rss/articles/CBMiywFBVV95cUxPYVJtLWRrdUQ1VmJnQ3FidHQ0a2htbV9xTVItMDUwWEotVnEwOE1rRnBidHlEWURBLXVtQ2pBbXc4UDZWUmFxZVdoMkU2by10OEtoVGtoXzI2QjlGMGwtZ08tWTY5NXJNQmhYOFBJZDczYXVNNFNaS3VyeWlkSU9HMTl2U0pfSmlNeFdLVmg4RV9WSmY0MmpZcFlVSDZieXlDeU9kRnNub3BoeFJpQ2lBbGJaaW00X05zRTFuN2RzTFYxdWd6RVI3QU5vTQ?oc=5",
+      "source": "New Food",
+      "publishedAt": "2026-06-09T09:49:42.000Z",
+      "score": 10,
+      "categories": [
+        "AUTONOMY",
+        "FREIGHT"
+      ]
+    },
+    {
+      "slug": "pepsico",
+      "account": "PepsiCo",
+      "title": "Gatik and PepsiCo lay claim to largest commercial driverless freight deployment in the United States - Retail Technology Innovation Hub",
+      "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxQWWJzekNaNjVUVU5iWHluanV3bEZkTlo0eWZxTUk1OUI0MlNNX2hPUWh6cjVkUGNZdTE2N1ZzMFhkRDk0bVBoVmw0RjN0ZmdoeVJvZWlVQUJNZFBXWHZNZXlxdVRRWGY4NVFvaHNFOE9XZFc4TVQtaXhqc3ZNX0NraDczT1phZU9BWFdwa3VvUEhTNldQNWlETC1veGJGRDZ3a2Fvbk8zY21QaE43Vm1QS3VmQlA2RWFtR3lqbEo0UWJydktfYUUwbm01SnBySU5wb2tPdzFDLXNWNTFQV0o1SmViaGU?oc=5",
+      "source": "Retail Technology Innovation Hub",
+      "publishedAt": "2026-06-09T04:31:26.000Z",
+      "score": 10,
+      "categories": [
+        "AUTONOMY",
+        "FREIGHT"
+      ]
+    },
+    {
+      "slug": "pepsico",
+      "account": "PepsiCo",
+      "title": "PepsiCo Deploys Gatik Autonomous Trucks in Regional Freight Network - act-news.com",
+      "url": "https://news.google.com/rss/articles/CBMiekFVX3lxTE1NTkhvS3JCNnlROEowWFN1UlQ0Tm9LYV80NkxYZ0xDX1hnQU90aVFXOFhab1VZNWlPSDdaa3pjdGtZRG12ZlQ2LWVNU0JOcEhldndHLU9oV3dFSDN2d2ZhS1hqSDdJaXZ6enlSaGVKazN4TlFwZE5kcTBR?oc=5",
+      "source": "act-news.com",
+      "publishedAt": "2026-06-08T20:00:49.000Z",
+      "score": 10,
+      "categories": [
+        "AUTONOMY",
+        "FREIGHT"
+      ]
+    },
+    {
+      "slug": "pepsico",
+      "account": "PepsiCo",
+      "title": "PepsiCo, Gatik announce agreement on autonomous freight - paxtonmedia.com",
+      "url": "https://news.google.com/rss/articles/CBMi5gFBVV95cUxOcGlFNzBMYUFDckZiQWJQVGEtR3NJRzBGSEg5dEIyU0dDLU9OME1wRkNrN3RVTUN5cmJJX3lEaVA0WUxFaG9kYXNRMGxmU1dwYjIxd0hESEZkeFRxMmpIUE91MldQOFUxRHF3UDdyeW9WOFpTQkNwZTZfcnpsWE95NVZKbkFZOTlMTGdVeFJVRlFmNU9xTkNuTW5vejBmTERzbk9CNDRQMWhmQUxzYWtkZkQzdDVsQXctZ3JONGVTRzlOUnBOY1R0c0piek1ucVcwNmVhdlNhWm0tamxwem1BdXpJdTZ5UQ?oc=5",
+      "source": "paxtonmedia.com",
+      "publishedAt": "2026-06-08T17:00:00.000Z",
+      "score": 10,
+      "categories": [
+        "AUTONOMY",
+        "FREIGHT"
+      ]
+    },
+    {
+      "slug": "pepsico",
+      "account": "PepsiCo",
+      "title": "PepsiCo partners with Gatik for largest driverless freight rollout - MSN",
+      "url": "https://news.google.com/rss/articles/CBMi_AFBVV95cUxPMzFnLTFZb2xFajgybURmNW5nNDJUNnIxUmV0Uk9mNFlBb1dkTVJRUjZQQXJURHZIbUc5X0VKOHVta0xzUC1nd21pRnZsZVBRbXJJLTY1LXdBWElFMFlOTkV0dW5JcHpZenRFSk52Tk5VYUphV05yR2VxejZ4TTdpeTNTODZNWW16MU5LcF9zU2o2SFRyQmdmVnlZRm11Nnl2RzJhbFdYMHVqeVA4RXF4a2hOM2NaXzJkdTQyWGQxTWQxWDF5NUdHQi1obXVTT0Vual96M1lLN21FRkNWaHZSUnZnbVVNdHY2d2lJUUtRX3BROFdkTHUybm1sU00?oc=5",
+      "source": "MSN",
+      "publishedAt": "2026-06-08T16:27:00.000Z",
+      "score": 10,
+      "categories": [
+        "AUTONOMY",
+        "FREIGHT"
+      ]
+    },
+    {
+      "slug": "pepsico",
+      "account": "PepsiCo",
+      "title": "PepsiCo, Gatik launch autonomous trucking deployment in North America - Truck News",
+      "url": "https://news.google.com/rss/articles/CBMitwFBVV95cUxPX2tlcnQ4SEFYUHNKclRERkU1ZTdVUkNSYnkyUFNUcDNzWWtFNGpjWkRTdlJSb05DVXlRVU9TUGd0MmthTTBiV1RFMHJEODhMWjBMb0VkdjNLbWtOdHhJaHF2R0FyWDlveC1zRVlEV0t5eGh5ZXh2bjNzWFdRdU0yUlllUzRUTUVBUkxNcXd1WWFVMmIwTVc1UnlwSDJWRTlRMFFIZFNBX1FlTkxMWHNINE92bjFmTXM?oc=5",
+      "source": "Truck News",
+      "publishedAt": "2026-06-08T16:17:53.000Z",
+      "score": 10,
+      "categories": [
+        "AUTONOMY",
+        "FREIGHT"
+      ]
+    },
+    {
+      "slug": "pepsico",
+      "account": "PepsiCo",
+      "title": "PepsiCo and Gatik announce multi-year agreement to deploy autonomous freight in North America - PepsiCo",
+      "url": "https://news.google.com/rss/articles/CBMi3wFBVV95cUxQYlVMaGlZMWk5RFpLQm1zUjZGVHJGX3BEenpFUnpMcUlZN1dWLUg0WV9aOXF3MTZoOUJLdnVyMHI0SWFRWk9SSWpYdFFHNkpDdWdhWV80VWNKSzdSRXF0U1Y3SDBkOHJBZ1V6YTloRldOR0kxbmtGT3JRYVczMW90a1RCSXYyRTgwRXlEU3Y1dkwtekJDbDlpdnI0ekJ4TEF2WjJ5M3NhdlZHZUJpbnpTWmlCVUhLNDh0a29VOUxJNG9tWTZGWVNUcHlPX1NtemR6VXNPdi1BUy1ldWRHNGlB?oc=5",
+      "source": "PepsiCo",
+      "publishedAt": "2026-06-08T00:00:00.000Z",
+      "score": 10,
+      "categories": [
+        "AUTONOMY",
+        "FREIGHT"
+      ]
+    },
+    {
+      "slug": "pepsico",
+      "account": "PepsiCo",
+      "title": "PepsiCo deploys 41 autonomous trucks across three U.S. states - Mugglehead Investment Magazine",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxQT2pXR1hYbmxLRFBiTTFaRHFINkFGaVU3TGIzSnExdmtQYWJvUnBsbUlfNUhVZmxsYlJHVEJ1clBQdVd6MVp2dVI0M1l3aWtkZmlFTHREai1FOE9Ld0pLNHhSWkF3a1ZVTW5oZEVvNzlCYmltc3NPQUV4RnB4UmN3SHlPTlhZTFZlVXNuNw?oc=5",
+      "source": "Mugglehead Investment Magazine",
+      "publishedAt": "2026-06-12T01:44:31.000Z",
+      "score": 8,
+      "categories": [
+        "AUTONOMY"
+      ]
+    },
+    {
+      "slug": "pepsico",
+      "account": "PepsiCo",
+      "title": "PepsiCo and Gatik Multi-Year Agreement for Autonomous Trucks in Supply Chain - News and Statistics - IndexBox",
+      "url": "https://news.google.com/rss/articles/CBMiogFBVV95cUxNbURBRm5DMEZJZHJEaW5xT1FVbHdQSTJzYXFfTktSbFl2N01JX2g3ZHVFd0M3NXBwbHhwc19LNUdjT3hvQWRvN0hKYld3blN6QWVCNTVNTVpoRDZfSmlKeEU0dHFHMUhTZmdMbHluUWM5cmRES1FJREVZallfeDJ6dWxnM2dDSXlxeVdBTHZIc3NnVVR2Y2Ric3hzc2FPcVQ3OHc?oc=5",
+      "source": "IndexBox",
+      "publishedAt": "2026-06-11T17:31:00.000Z",
+      "score": 8,
+      "categories": [
+        "AUTONOMY"
+      ]
+    },
+    {
+      "slug": "pepsico",
+      "account": "PepsiCo",
+      "title": "PepsiCo expanding autonomous truck use in its supply chain - Supply Chain Dive",
+      "url": "https://news.google.com/rss/articles/CBMipgFBVV95cUxPcDhvVzkteHZHSjRmVkNNaTg2ZEh1WWZkQVE4VHA5Tm9hSmo1NkJxUXJPb1EybjExQk1Cbk1KS0dYei1uNXMweXBuSDQ4VGY0aDBBcEFjNDZvWGpUcThFUFJlZUJGakpydW1acF94c2NCbENzRkR0NkJtQzg1LUJYbzBFandEcWFfMm1GM2lPMkdQZW1tVG1EMUFRRVd4VEpsd0U1bTJ3?oc=5",
+      "source": "Supply Chain Dive",
+      "publishedAt": "2026-06-11T17:00:28.000Z",
+      "score": 8,
+      "categories": [
+        "AUTONOMY"
+      ]
+    },
+    {
+      "slug": "pepsico",
+      "account": "PepsiCo",
+      "title": "Snacks go driverless: PepsiCo launches autonomous fleet - Audacy",
+      "url": "https://news.google.com/rss/articles/CBMie0FVX3lxTFBqdDQ5WHV6Z3RIQVZPOFViZk5hMm1TYnQxSHJqXzZ6Nk8yeU9SM1U1Y3M0a21WZmc1UERWdFdBT2wyU1JYanR4ODhJVk4wMkRWVnlEb0tKSXI1WExzdE9hcUZzbVJDM0w0ZE1BQXFpYjQ5WWlRLUJVYkZGTQ?oc=5",
+      "source": "Audacy",
+      "publishedAt": "2026-06-11T03:56:15.000Z",
+      "score": 8,
+      "categories": [
+        "AUTONOMY"
+      ]
+    },
+    {
+      "slug": "pepsico",
+      "account": "PepsiCo",
+      "title": "PepsiCo Expands Driverless Delivery Network Across Three States, Including Texas - Dallas Express",
+      "url": "https://news.google.com/rss/articles/CBMiwAFBVV95cUxQNjdSVmRhd1BEYXRyb1U1RjFRSGVvVjB5M1hJMTYteTNuWUF4QXVrOHF6Q3NIeTI1bXd5cjBGc1lMVjU4OXJoX2RHNHRTWmhtcnNrYUxBRlZ3ZWxOQzhfa2F4MV9ZaU94UG9UTzhPc0hmaEJqaHktMDZXS1Y2RWxJQnljSWF5azlRZjBFdk9tVG5zVXNDTnRCQ2owTTluS1NrRmhBOTlxM20xb0pPeUYwWkF6cDhhTjVkY2ttdHk3aUw?oc=5",
+      "source": "Dallas Express",
+      "publishedAt": "2026-06-10T19:02:52.000Z",
+      "score": 8,
+      "categories": [
+        "AUTONOMY"
+      ]
+    },
+    {
+      "slug": "pepsico",
+      "account": "PepsiCo",
+      "title": "PepsiCo Deploys Driverless Truck Fleet - NACS",
+      "url": "https://news.google.com/rss/articles/CBMinAFBVV95cUxNb1lIY3p3MEdZOWdqeHlCVGRBUmVKOFdCekdqRmd5eFZ5RGJlLUxBM1UzOTYwN2d4Uk9lQlZncDZvbU1JVkl5d2tIM25oWW5HZU1CUlprSVNqdHk0UHI1b1M4MUE2V0h5Zlgyd0VlMU5yemxCSlFOdUxyQktYR1RMN2h1TmpZT3BsZnpMWHJiYnppX3pfNUZoSml3eFI?oc=5",
+      "source": "NACS",
+      "publishedAt": "2026-06-10T14:39:13.000Z",
+      "score": 8,
+      "categories": [
+        "AUTONOMY"
+      ]
+    },
+    {
+      "slug": "amazon",
+      "account": "Amazon",
+      "title": "Amazon LTL expansion hits Old Dominion, Saia, FedEx Freight stocks - qz.com",
+      "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE1rY0FrUlJkb3Q3cUl5WTVOM3JzUXduWDdCbVRZNG00cXpQMkt5MExwZ0I1S0diUTVMbUwxMTVpSUhsaHhkRS1nbzF1Ulo1OC1rZDl6SzNrMmo3RWIwVzl0NkhwRzB3SXJvRHJBWm91WVlFVXdFUGc?oc=5",
+      "source": "qz.com",
+      "publishedAt": "2026-06-10T14:20:02.000Z",
+      "score": 8,
+      "categories": [
+        "NETWORK_CAPEX",
+        "FREIGHT"
+      ]
+    },
+    {
+      "slug": "amazon",
+      "account": "Amazon",
+      "title": "Amazon trucking expansion sparks freight stock sell-off - CNBC",
+      "url": "https://news.google.com/rss/articles/CBMijAFBVV95cUxPeFF3eExnenBldld3T3lmVVNEM0lXb2E5dDAwOVFyYk5sVXlZXzJCajdOdXNWUGFpT1k3RGxYMHB1ZEJhRnJOOVFwZ3ZFUmE4TzBwRDZiUDRSRDFHMVQ5TTduWTF1bkFCSkQyZEVNQjJ4V2Z2VU9iTk1uSXlEZVp4cTNrVy01UXNHamd2T9IBkgFBVV95cUxNNXRuS29hVFhSUEg2d1B1SFBidld2djhIVi1qU3JZWU5Sb1k5T3FKMFQ3dHB6MFJJOXRzemxZT1NQeUlRcHFTLXNydGlmQk51RktfMGp5STZwVVgtQk1lMVUzOF80ODZkeHhFOU9fczI3cncwd2s4UnNCNHc4X0tYbkJlRTZZam9HUXpiMHFiT1FMUQ?oc=5",
+      "source": "CNBC",
+      "publishedAt": "2026-06-10T13:50:19.000Z",
+      "score": 8,
+      "categories": [
+        "NETWORK_CAPEX",
+        "FREIGHT"
+      ]
+    },
+    {
+      "slug": "pepsico",
+      "account": "PepsiCo",
+      "title": "PepsiCo’s driverless Doritos fleet outpaces Tesla’s robotaxis in North Texas - Audacy",
+      "url": "https://news.google.com/rss/articles/CBMiswFBVV95cUxQQVhaOXZmaDY1dWRzODJsMEpqeDRGNlZ6SWpBN0phNnRBMy12djJ6QWJUaVVvZFNpT0VZVTJYaWlVMGg1UDlqelFuX3ZZdlJYWUZIWU42MGdmRU9mYndhR0NzOWF1VEpwYnZQV0p1T205aDhwQ0xjSTE3ZWdTaHM5RmlWS0pOTTRWUEJ2SlRpWnBaeTN1OTk5VzUyUnRsa3p1aXI4R0t2TnhlRmMzQk0zaG9WRQ?oc=5",
+      "source": "Audacy",
+      "publishedAt": "2026-06-10T10:28:35.000Z",
+      "score": 8,
+      "categories": [
+        "AUTONOMY"
+      ]
+    },
+    {
+      "slug": "pepsico",
+      "account": "PepsiCo",
+      "title": "PepsiCo deploys 41 driverless trucks across three states - MSN",
+      "url": "https://news.google.com/rss/articles/CBMi7wFBVV95cUxPZUM1LTl6QWpTZHJsbEtWT2hxZUYzazAzNVlZM053dDh3R3F0M2NCZHlnSTdOeFMxbk40SWh1bnVPaUFibE1WWExwQlBBQ1NpVl9LbzA4UzdLSjgwdFNaVlhfelNZV3JVLWEwanlzY3huTk5MeDdDRm9XUGV3ZURUQk13NlpRUzN3eXBEeEZSbTluY0pqWmlyYXNQZmxURktCUmVBSUVmbkdwZ1JVcV8xR0NVcnRjX1pWcHRDYVctSGQ3aVB0ay1uSTA3X2pfWWlXSDBWVXhRZC1WOUt6UHJVYVZUY1JDSEh4UnlaNkdBaw?oc=5",
+      "source": "MSN",
+      "publishedAt": "2026-06-10T08:46:12.000Z",
+      "score": 8,
+      "categories": [
+        "AUTONOMY"
+      ]
+    },
+    {
+      "slug": "pepsico",
+      "account": "PepsiCo",
+      "title": "PepsiCo deploys fleet of driverless trucks to deliver Doritos and drinks in three states - TechSpot",
+      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxPM1g0TUtzQUNZZzNaNDJtX1RXMUZubzBQZVYwUlpXRVBiUlVTc0hLSEcxQjh3ZDVfRUdldFdBQkJNWmlsTEZNQzNMcGdSQTVlYWR1YVNISi1qWDVDZHdhd05rb3VDZXN1QVJtZlEyeHM0RkVTWWtZSVplMTE5RldzdFIwa1ZvNzRMS3RaNGh1U0F2N2NyNmpoUl9fMlNXckNYdnNQei1GUQ?oc=5",
+      "source": "TechSpot",
+      "publishedAt": "2026-06-09T10:19:00.000Z",
+      "score": 8,
+      "categories": [
+        "AUTONOMY"
+      ]
+    },
+    {
+      "slug": "pepsico",
+      "account": "PepsiCo",
+      "title": "Doritos without drivers? PepsiCo’s autonomous truck rollout sparks logistics debate - BakeryAndSnacks.com",
+      "url": "https://news.google.com/rss/articles/CBMi3AFBVV95cUxPRGlqQWJLVHZ6MWlReHpobmZzNl9OMm5oLVFhcTZCbjM0WWRFVUVydlk1SE5wX0lNaUFlSDhKWklKTUVxT2IwS1pjdjlKY1F0MXBXUlREa3NvTm1BWTlZeGdZdXlBZzFXTHhTaklzZW4yakVnYnI2ZkQ2TzlnS1loSWpHOHZYbUpXZXFNX2FKTlBHR1VfUTBlSUFrcUV2eno1dGs1UVlqa2ZpUElWQXZYR1VoLWtOalBnN05nakNzS2hxRms1S3JIaUM0dUR2QlNQN1d6UGJHWmkxYkRj?oc=5",
+      "source": "BakeryAndSnacks.com",
+      "publishedAt": "2026-06-09T10:09:10.000Z",
+      "score": 8,
+      "categories": [
+        "AUTONOMY"
+      ]
+    },
+    {
+      "slug": "pepsico",
+      "account": "PepsiCo",
+      "title": "PepsiCo partners with Gatik to roll out driverless trucks across North America supply chain - FoodBev Media",
+      "url": "https://news.google.com/rss/articles/CBMiqAFBVV95cUxQaFdJeFI3UEp2VzlGb3NWRXZKSE1ISTNwX0ZKc3pIVkx6ZFlLai1YcU44cnRZQ19wRlJLYks4eU1Cb0xWUW9uQzk2MXRPU1JLZnlTazlXZlBSbzlSMW9iTDNLZlZIWVlmN2Nsb1ZVeFJSbmhxMG95eE1kV0c2dFlyQ2c0emdHWTI0TzI1dXhfczM5U09JM1VKTmR6S2xleEJHRy16eHFpd2g?oc=5",
+      "source": "FoodBev Media",
+      "publishedAt": "2026-06-09T08:29:56.000Z",
+      "score": 8,
+      "categories": [
+        "AUTONOMY"
+      ]
+    },
+    {
+      "slug": "pepsico",
+      "account": "PepsiCo",
+      "title": "PepsiCo Deploys Driverless Box Trucks for Regional Deliveries - Let's Data Science",
+      "url": "https://news.google.com/rss/articles/CBMipAFBVV95cUxQYVFCRGJJZkJ2NmdDMjRPT2EwenJ2MEtUN0RIZ2tMSlJ0UV81eEJOc0p3dEg2TzluY3R2Nnc0eUJnNkY3cXd6S0dkNDZhM2hGUUJTdjRiQXMxc1RmeklkX1dWdFZZWG16OW15WUdfWEdSUmZhRnNXdTA2RmVWWlRXNUxTeXNYUFBNYll5V2tEX1A2VDhhc25xd0RJc3FuTUJsYll5MQ?oc=5",
+      "source": "Let's Data Science",
+      "publishedAt": "2026-06-09T07:59:21.000Z",
+      "score": 8,
+      "categories": [
+        "AUTONOMY"
+      ]
+    },
+    {
+      "slug": "pepsico",
+      "account": "PepsiCo",
+      "title": "PepsiCo Is Now Moving Soda And Snacks Using Driverless Box Trucks - InsideEVs",
+      "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQWWc1RlFwMmhHMlZJZi1FZDFxXzNrVVlKUVpTdExJYmpwQ1hyWUdsSFNhcUliMzBGUEExVFgwa3Fma1NvZHdPeUd6aHBPN2JjWjBvd2dmdk1UdVFGYWgxNENHc0FudjlSd0F3OFVaTnRUd2c4Nzc2OVlpMDJaZFM2MQ?oc=5",
+      "source": "InsideEVs",
+      "publishedAt": "2026-06-09T07:59:00.000Z",
+      "score": 8,
+      "categories": [
+        "AUTONOMY"
+      ]
+    },
+    {
+      "slug": "dhl-supply-chain",
+      "account": "DHL Supply Chain",
+      "title": "DHL Supply Chain to close Rural Hall warehouse, lay off 80 - The Business Journals",
+      "url": "https://news.google.com/rss/articles/CBMipwFBVV95cUxOWURXVko1bUQ1eVJRWmowUVlmRG1aTVJLSzB5RUJIOGJJUWJzU0xjMDNyWVJrMEZDLWVpSEdTQVJWTDlteWpVNXFHX0N2Z3ZFMG9VbUI2Vkx4WmRpbDVER09TS2t6V3I4dlI4UV8xMkRzREE4S0tJOFA5YXJqUnRaRlR6NW9Gdk9OcEk1RFBjU1FnbFNnem56bWh2UE9yMHlpb09Dc3k1TQ?oc=5",
+      "source": "The Business Journals",
+      "publishedAt": "2026-06-12T18:32:00.000Z",
+      "score": 6,
+      "categories": [
+        "COST_RESTRUCTURE"
+      ]
+    },
+    {
+      "slug": "gxo",
+      "account": "GXO Logistics",
+      "title": "Automation & Opportunity: GXO’s Latest Phase of Growth - Supply Chain Digital",
+      "url": "https://news.google.com/rss/articles/CBMijwFBVV95cUxOS2lrdGNGajlVRVZkbUtxb3gwc0c3YXZxZlotZFhjN3Z3TW9ZSlJYRERUX0VoeERMYllIQjBtakhkeWlCenVuV2xfd1R5cnkxVWVTN09MNzdEblZSY1RQVklsbFJxZjRzNHprdmNUeC1TQmt5LXZRVUFBSlZIczFrQ3RLczkxUUM3M184MEJKRQ?oc=5",
+      "source": "Supply Chain Digital",
+      "publishedAt": "2026-06-11T15:57:30.000Z",
+      "score": 6,
+      "categories": [
+        "DIGITAL_OPS"
+      ]
+    },
+    {
+      "slug": "dhl-supply-chain",
+      "account": "DHL Supply Chain",
+      "title": "DHL Supply Chain Breaks Ground on European Battery Logistics Hub in the Netherlands - LM - Logistics Manager",
+      "url": "https://news.google.com/rss/articles/CBMitAFBVV95cUxOMUJ2SlBBUk03ZjZDS2NCZ0ZZbjRlQjI1bHdvcGpKazdTVHM2Zm1haGZ3QnVEU0FMOHlIMTBTOVA5ZF8wNEI0d08wU2ZnWlFybWk3c3ZXeHFVZ2tVNjFjN05VZHNXOElUcS13ZmdkNjRMTkZsWmd2T1paSGc1RU9uaUNwU0o5MTE3ZjBlNElNLWlVX2U0U0l6X3BNcFpQZzAxLVJ3UEZocFRBZDkxOHBWcmxpMnk?oc=5",
+      "source": "LM - Logistics Manager",
+      "publishedAt": "2026-06-11T15:56:17.000Z",
+      "score": 6,
+      "categories": [
+        "NETWORK_CAPEX"
+      ]
+    },
+    {
+      "slug": "dhl-supply-chain",
+      "account": "DHL Supply Chain",
+      "title": "DHL Supply Chain to support Metso’s Queensland expansion - mhdsupplychain.com.au",
+      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxPQzhZUWRtZDZiTzYyOWxaeHpZSHdQb3pkazd6R2p6MFVMNlE5ZDg3bWNVWkw5XzlFR1RnaWVQUGxPRGRyNTE3M1RTbVd3TmdhOEFpeFZudzFQY0Z6cXNZaFNXM1ZtODlGMmNOR3VaUUhtTm9XeXVZX08ySDdtQk5MM0tZMmZWNGNEaHlUTWhVVkd5QnFwNFNzOUkzd1B0dw?oc=5",
+      "source": "mhdsupplychain.com.au",
+      "publishedAt": "2026-06-10T23:10:39.000Z",
+      "score": 6,
+      "categories": [
+        "NETWORK_CAPEX"
+      ]
+    },
+    {
+      "slug": "walmart",
+      "account": "Walmart",
+      "title": "Walmart's AI-powered warehouses are slashing the time it takes store employees to unload trucks - Business Insider",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxQRm5fMk51enRyUUtXZUpQUlNIZUcwRmVhNjJ3NGJoWmJwWXBZNkhKZzc0WTc4dXlkbGVuSG9iUlJqdTlkR0xvRkJPcmR3M0lsd0hHU0dJRVlQVG1kR2RQaC15ZWdCRXlsX3hIQlNqdlJuWDRQRGhwbmpURXJNQ0o4UEVJUU10OGxyc3JBWS1iUGxNb3QwT0JzNldRQ0VrVnBpemhN?oc=5",
+      "source": "Business Insider",
+      "publishedAt": "2026-06-10T14:33:00.000Z",
+      "score": 6,
+      "categories": [
+        "DIGITAL_OPS"
+      ]
+    },
+    {
+      "slug": "target",
+      "account": "Target",
+      "title": "Target debuts $367M food distribution center in Colorado - KUSA.com",
+      "url": "https://news.google.com/rss/articles/CBMivAFBVV95cUxOXzFlRkVyZkdMRXE2Wmk4MVprdklxSzUxRjd3VW05VkM4T183bWdDVldHVDZkMy1NZ0VIWHhsbUc2bGhHbVJGVHJPOXdUQXRWMXJScW1WWGY4VW55MUJGMEJtZ0RvVGtjY1RfR2FRUWtjVzJlLWhlMlZwTElNczVoaV9QeDN1V2k3TFNsdXlVUkozZ1B4aDl1bnhOQmtZZ09EZmI5elplNFRiTDhSR2I0T2NFc1otaWYtb2RfRg?oc=5",
+      "source": "KUSA.com",
+      "publishedAt": "2026-06-10T14:07:00.000Z",
+      "score": 6,
+      "categories": [
+        "NETWORK_CAPEX"
+      ]
+    },
+    {
+      "slug": "nestle-usa",
+      "account": "Nestlé USA",
+      "title": "Nestlé USA Opens Its Largest and Most Technologically Advanced Distribution Center in Arvin, California - Nestlé USA",
+      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxOTkMzMXBadWlFaUhuR09venVlUDFtbF9EV3V2UTFHZDNiSXBZYkxrNUwzQ25mRnMwWnd3MnI4RU5JV1NHbWtUMUUwaXYwMkxyazVCZzBxUVZuUFozNU9zVDRFYXh5S3I2emExcEdLdWdwS2VNQ0h4dVBqY3Q2U1ZmOXlnUC0xQQ?oc=5",
+      "source": "Nestlé USA",
+      "publishedAt": "2026-06-10T05:00:00.000Z",
+      "score": 6,
+      "categories": [
+        "NETWORK_CAPEX"
+      ]
+    },
+    {
+      "slug": "walmart",
+      "account": "Walmart",
+      "title": "Walmart, Wing add 7 markets to drone delivery expansion plan - Grocery Dive",
+      "url": "https://news.google.com/rss/articles/CBMingFBVV95cUxNOWM1OVFhVFFWbWRldkJGUzlBZnF1NkE5d2ZKRjlfcGgyZDVtRUZYVUhaMXN1aHVuNEZhUHNlVjRpVkowUHhqcGZnSy05YnBTT0NiR3pXVWVoVWttd1BKSGNMVlBDaUUtZlE5VV9IRnFzSVFWaTE2QXprN1EtSUdMT0lGYmFTTnlDbHpJOVVZTjFNaFJJYTdqekEtbzRTdw?oc=5",
+      "source": "Grocery Dive",
+      "publishedAt": "2026-06-09T20:56:41.000Z",
+      "score": 6,
+      "categories": [
+        "NETWORK_CAPEX"
+      ]
+    },
+    {
+      "slug": "target",
+      "account": "Target",
+      "title": "Target Opens $367M Food Distribution Center in Thornton - Mile High CRE",
+      "url": "https://news.google.com/rss/articles/CBMihgFBVV95cUxPSTh3ZTdHMzNBdTk4Z2xtSmhiVlk2V3djR3dka0tERjJ5V2xlWFphUGN0MWxjaGdaMG15Ui15MlEwa3RnSGlCeUhNM2cwZU1MOVdVdl9FaVhjUWR6cmc5Z2xVZ1hNUGRsWHN3VXRKTWpoR0c4RUVFOUQ0aFJMM3Z5N1FZRnVKQQ?oc=5",
+      "source": "Mile High CRE",
+      "publishedAt": "2026-06-04T18:36:48.000Z",
+      "score": 6,
+      "categories": [
+        "NETWORK_CAPEX"
+      ]
+    },
+    {
+      "slug": "target",
+      "account": "Target",
+      "title": "Target debuts $367M food distribution center in Colorado - FreightWaves",
+      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPTl9Vby1VSTFCLWc1UWtjcVJQVVJ2NGpFLVV1UGFvNlVmaWxkWm91QW5udGpCSjRIY25rUjFyWEFYWkxlR2xFaE5Uc3BZMDJUYVpGcXkySlU4cUJ2RWpGbUFnem1lTklxMGxTT1FuQ3Y5Um1ISk5uLTdzaWN5eXFabHRZazYwd3RlNUc5OHdNcDBkRkk?oc=5",
+      "source": "FreightWaves",
+      "publishedAt": "2026-06-03T11:15:54.000Z",
+      "score": 6,
+      "categories": [
+        "NETWORK_CAPEX"
+      ]
+    },
+    {
+      "slug": "target",
+      "account": "Target",
+      "title": "Target’s Upgraded Outlook and Supply Chain Expansion Might Change The Case For Investing In Target (TGT) - Yahoo Finance",
+      "url": "https://news.google.com/rss/articles/CBMiowFBVV95cUxOdjFia3RzbWFRVVFMMFV6cWtNVUFKUlZMb3hfZU0yd1JhXzJYX2pwMWJuck1xRWFWXzVHSm5Mamh5N2JrRGtxTDQ1cVM5WHlfeHZBaG9ua1dYOXZGMElTXzRaWEpMN2Q1bnd3LTNCN3lUMGNuN1oxaVItSTFVRUZtUmo4VjVKRkU0UnJ0NjAyUmUtV3pzeDRYaU5DWG5ZN0ZkR3FF?oc=5",
+      "source": "Yahoo Finance",
+      "publishedAt": "2026-06-03T07:00:00.000Z",
+      "score": 6,
+      "categories": [
+        "NETWORK_CAPEX"
+      ]
+    },
+    {
+      "slug": "target",
+      "account": "Target",
+      "title": "Target Cuts Ribbon on Its Largest Food Distribution Center Yet - Progressive Grocer",
+      "url": "https://news.google.com/rss/articles/CBMikwFBVV95cUxPWEFiQUZDRUc5cF9zckVjaFpSVlVTT0M1aWRXTU1uaE5KUVVaSmszUHdRU2xvOWVXblpvM1FoWUlIMjFIQnh5X2xZR0VEWnNPOUo3ejNEZG9fUXh1eWx5VE8yQ05QaXB6TlpFelNPWUhDeVhvcENVbUlRNl9oMy13TWdlMl9SemZ0QXZYY0QtUzdiblU?oc=5",
+      "source": "Progressive Grocer",
+      "publishedAt": "2026-06-01T18:17:21.000Z",
+      "score": 6,
+      "categories": [
+        "NETWORK_CAPEX"
+      ]
+    },
+    {
+      "slug": "target",
+      "account": "Target",
+      "title": "Target Opens Its Largest Food Distribution Center In Denver Suburb - Bisnow",
+      "url": "https://news.google.com/rss/articles/CBMiqwFBVV95cUxOOE1yZVZJYXJPY3VBSDVDZmJiUk9qcnZ0NmdZN0NBbXUxN280S2tKVjJtTWdfTGU0RnJpRjItU0I3cXRIenlQclpBenhlN25ucVJmUmo4MzdkdzlLSWV2d1JmRzhlckttcHhBLVZPRnFCeHViemljYVZMQmMxZXFuSmtSNWItaVB5UlJLVFR4dmVRUzdXWDFtOC1ianFwWHRGUkpiczg1WGhHTm8?oc=5",
+      "source": "Bisnow",
+      "publishedAt": "2026-06-01T16:57:37.000Z",
+      "score": 6,
+      "categories": [
+        "NETWORK_CAPEX"
+      ]
+    },
+    {
+      "slug": "target",
+      "account": "Target",
+      "title": "Target’s New Food Distribution Center in Thornton, Colorado - Target",
+      "url": "https://news.google.com/rss/articles/CBMinwFBVV95cUxNZ2hKVThyVkZiQlpkOEpkOUVIZFVEQ3BIOG1GRDVOUEI3bk9sV0t1OEU1MURubnFXMUVZT3NrUmVIbXpmZkYybXB5R05teDlvN2l4Ui1BQTlrY3JocG1fc1luVDFyTVRtV2hMRmt4QUxzRXpxM2J3LXYzTGl1ZU9TZGREN2lQWmw1QzdLWkFMMWlHenR4X21HQlpBUGs0RUE?oc=5",
+      "source": "Target",
+      "publishedAt": "2026-06-01T07:00:00.000Z",
+      "score": 6,
+      "categories": [
+        "NETWORK_CAPEX"
+      ]
+    },
+    {
+      "slug": "target",
+      "account": "Target",
+      "title": "Target opens its largest food distribution center in Colorado - Supermarket News",
+      "url": "https://news.google.com/rss/articles/CBMiqgFBVV95cUxOYlM1R0ROX3I4aXlFU185UFdSUTZEQTRmSjN3dWhodVBHeXNEQzBnSWhROEZsa0pTZVZyYk1GeDdlM0toR09GVElHTkFJd01PN0thbDE2RVVmZWV3YnBqVzNRRnZXV0F0Y1hsNW5pbVY1dExoZzFUek5LWW4wcGtKMDJ0WU5Fd2F1TXR0Qk1zRUtaMm8wSVcxZUh2ME9JTFJVYWJiSTkyMEFmZw?oc=5",
+      "source": "Supermarket News",
+      "publishedAt": "2026-06-01T07:00:00.000Z",
+      "score": 6,
+      "categories": [
+        "NETWORK_CAPEX"
+      ]
+    },
+    {
+      "slug": "target",
+      "account": "Target",
+      "title": "New food distribution center improves service for Target shoppers - New Hope Network",
+      "url": "https://news.google.com/rss/articles/CBMimgFBVV95cUxNTjFTRWFWVEN4T0pxdGhyaDFwaHVxYnFCUXVSWlI3ZjFkWG16eWs0NENhWmV0UzVDMzVuY2lnVGlySXJtT0FUYkZIdjY5Qkt4ZHRlTXRtNXRsVXJROHBoWXJLeC1HNGtEMVo2bjkzcFZobVZIbEc4Y2d6c0RtLVAxRTRsR0c2SGdJcmpHUlZPMld1bF96SnVwb2pn?oc=5",
+      "source": "New Hope Network",
+      "publishedAt": "2026-06-01T07:00:00.000Z",
+      "score": 6,
+      "categories": [
+        "NETWORK_CAPEX"
+      ]
+    },
+    {
+      "slug": "walmart",
+      "account": "Walmart",
+      "title": "Walmart launches prepaid consolidation to speed supply chain - MSN",
+      "url": "https://news.google.com/rss/articles/CBMi5AFBVV95cUxORHhicGVXQkJyUjk1TGlFRkh3aW1yOWE4YVRMWExBOENSWUx2aFRKU2Vub3ZjU1hiWDZLbERKbDVtSlVaOURZaUQ5eHBoWkxLVGstT2Vqb2pRajM1MWswLXR1RVFORU42RWNJbHg2eHZPSWIzUFZqam9rRjlCZjQycUJqSEIyRWVaR2JWRDhKVlpLNDVvazZkN3VOSVdueElTbG1fM3Uxb0lQR1U1Q0RlSmhaekN3S293QURTZEdnd2hnNnJnSFVRWXFxdGc4S0dlZndBQkgtNFdpUGJEZ0dzZ3plTE0?oc=5",
+      "source": "MSN",
+      "publishedAt": "2026-05-31T07:00:00.000Z",
+      "score": 6,
+      "categories": [
+        "COST_RESTRUCTURE"
+      ]
+    },
+    {
+      "slug": "h-e-b",
+      "account": "H-E-B",
+      "title": "Bexar County is negotiating a $15M tax incentive package for H-E-B expansion - San Antonio Report",
+      "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTE81Skg2TkduRTdNckt0THJUVVozZU13V3Z2cWJ4dnVPWjcyVmVKSHZ0WE5uVnVhZGJWUTFiRF9EY3JHUFhXX3ozZ3pSMjhlZXpFeW9Sbzhqd2p2c1U2NVFvVGhrTmlwU1loTnJtNUN1Qks?oc=5",
+      "source": "San Antonio Report",
+      "publishedAt": "2026-05-30T16:00:00.000Z",
+      "score": 6,
+      "categories": [
+        "NETWORK_CAPEX"
+      ]
+    }
+  ],
+  "accountsScanned": 57,
+  "itemsSeen": 4134,
+  "windowHours": 336,
+  "errors": []
+}
