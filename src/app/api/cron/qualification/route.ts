@@ -4,6 +4,7 @@ import { markCronStarted, markCronSuccess, markCronFailure } from '@/lib/cron-mo
 import { ensureQualificationProperties } from '@/lib/hubspot/properties';
 import { evaluateQualification } from '@/lib/revops/qualification/evaluate';
 import { applyVerdicts } from '@/lib/revops/qualification/apply';
+import { notifyNewSqls } from '@/lib/revops/qualification/notify';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 300;
@@ -35,6 +36,7 @@ export async function GET(request: Request) {
     const changedRows = result.diff.filter((d) => d.changed);
 
     const applied = mode === 'apply' ? await applyVerdicts(changedRows) : { updated: 0 };
+    if (mode === 'apply') await notifyNewSqls(changedRows).catch(() => undefined);
 
     const stats = {
       mode,
