@@ -277,7 +277,8 @@ async function loadSavedContacts(prospectName: string): Promise<ProspectContact[
           ? `https://app.hubspot.com/contacts/${portal}/contact/${r.hubspot_id}`
           : undefined,
     }));
-  } catch {
+  } catch (err) {
+    console.warn('[discovery] saved contacts unavailable, rendering without them:', err);
     return [];
   }
 }
@@ -391,35 +392,58 @@ export async function saveProspectContact(
     const title = input.title?.trim() || null;
     const linkedinUrl = input.linkedinUrl?.trim() || null;
 
-    const row = existing
-      ? await prisma.discoveryContact.update({
-          where: { id: existing.id },
-          // Re-saves only add information: a sparse save never nulls out an
-          // email/title/link (or hubspot_id) a prior save stored.
-          data: {
-            name,
-            source: input.source,
-            ...(email ? { email } : {}),
-            ...(title ? { title } : {}),
-            ...(linkedinUrl ? { linkedin_url: linkedinUrl } : {}),
-            ...(confidence ? { confidence } : {}),
-            ...(hubspotId ? { hubspot_id: hubspotId } : {}),
-          },
-          select: { id: true, hubspot_id: true },
-        })
-      : await prisma.discoveryContact.create({
-          data: {
-            prospect_name: prospectName,
-            name,
-            title,
-            email,
-            linkedin_url: linkedinUrl,
-            source: input.source,
-            confidence,
-            ...(hubspotId ? { hubspot_id: hubspotId } : {}),
-          },
-          select: { id: true, hubspot_id: true },
-        });
+    let row: { id: number; hubspot_id: string | null };
+    try {
+      row = existing
+        ? await prisma.discoveryContact.update({
+            where: { id: existing.id },
+            // Re-saves only add information: a sparse save never nulls out an
+            // email/title/link (or hubspot_id) a prior save stored.
+            data: {
+              name,
+              source: input.source,
+              ...(email ? { email } : {}),
+              ...(title ? { title } : {}),
+              ...(linkedinUrl ? { linkedin_url: linkedinUrl } : {}),
+              ...(confidence ? { confidence } : {}),
+              ...(hubspotId ? { hubspot_id: hubspotId } : {}),
+            },
+            select: { id: true, hubspot_id: true },
+          })
+        : await prisma.discoveryContact.create({
+            data: {
+              prospect_name: prospectName,
+              name,
+              title,
+              email,
+              linkedin_url: linkedinUrl,
+              source: input.source,
+              confidence,
+              ...(hubspotId ? { hubspot_id: hubspotId } : {}),
+            },
+            select: { id: true, hubspot_id: true },
+          });
+    } catch (e: unknown) {
+      // P2002: a concurrent save of the same contact won the race on the
+      // (prospect_name, email) unique index. The row exists; adopt it as
+      // success instead of surfacing a false "Save failed".
+      if ((e as { code?: string })?.code !== 'P2002') throw e;
+      const winner = await prisma.discoveryContact.findFirst({
+        where: email
+          ? { prospect_name: prospectName, email }
+          : { prospect_name: prospectName, name },
+        select: { id: true, hubspot_id: true },
+      });
+      if (!winner) throw e;
+      row =
+        hubspotId && !winner.hubspot_id
+          ? await prisma.discoveryContact.update({
+              where: { id: winner.id },
+              data: { hubspot_id: hubspotId },
+              select: { id: true, hubspot_id: true },
+            })
+          : winner;
+    }
 
     const finalHubspotId = row.hubspot_id ?? undefined;
     const portal = finalHubspotId ? getPortalId() : null;

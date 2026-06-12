@@ -50,7 +50,7 @@ beforeEach(() => {
   authMock.mockReset().mockResolvedValue({ user: { email: 'casey@freightroll.com' } });
   findFirst.mockReset().mockResolvedValue(null);
   create.mockReset().mockImplementation(async ({ data }) => ({ id: 7, hubspot_id: data.hubspot_id ?? null }));
-  update.mockReset().mockImplementation(async ({ data }) => ({ id: 5, hubspot_id: data.hubspot_id ?? null }));
+  update.mockReset().mockImplementation(async ({ where, data }) => ({ id: where.id, hubspot_id: data.hubspot_id ?? null }));
   upsertContactFromQueueItem.mockReset().mockResolvedValue({
     ok: true,
     personaCreated: true,
@@ -163,6 +163,38 @@ describe('saveProspectContact — dedup and upsert', () => {
     const res = await saveProspectContact({ ...BASE, email: 'jane@acme.com' });
     expect(res.ok).toBe(true);
     expect(create).toHaveBeenCalledTimes(1);
+  });
+
+  it('upgrades an earlier email-less row when a save with an email matches by name', async () => {
+    // Email lookup misses, name fallback hits the email-less row.
+    findFirst.mockResolvedValueOnce(null).mockResolvedValueOnce({ id: 9 });
+    const res = await saveProspectContact({ ...BASE, email: 'Jane@Acme.com' });
+    expect(res.ok).toBe(true);
+    if (res.ok) expect(res.id).toBe(9);
+    expect(findFirst).toHaveBeenCalledTimes(2);
+    expect(findFirst.mock.calls[1][0].where).toEqual({
+      prospect_name: 'Acme Logistics',
+      name: 'Jane Doe',
+    });
+    expect(create).not.toHaveBeenCalled();
+    expect(update.mock.calls[0][0].where).toEqual({ id: 9 });
+    expect(update.mock.calls[0][0].data.email).toBe('jane@acme.com');
+  });
+
+  it('treats a P2002 race on create as success by adopting the concurrent winner row', async () => {
+    create.mockRejectedValue(Object.assign(new Error('unique constraint'), { code: 'P2002' }));
+    // Lookups: email miss, name miss, then the post-conflict re-read finds the winner.
+    findFirst
+      .mockResolvedValueOnce(null)
+      .mockResolvedValueOnce(null)
+      .mockResolvedValueOnce({ id: 11, hubspot_id: 'hs-7' });
+    const res = await saveProspectContact({ ...BASE, email: 'jane@acme.com' });
+    expect(res.ok).toBe(true);
+    if (res.ok) {
+      expect(res.id).toBe(11);
+      expect(res.hubspotId).toBe('hs-7');
+    }
+    expect(update).not.toHaveBeenCalled();
   });
 
   it('returns a tagged failure instead of throwing when the database write fails', async () => {

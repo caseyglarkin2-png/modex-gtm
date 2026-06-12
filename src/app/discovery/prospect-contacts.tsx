@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 import { Check, ListPlus, Loader2, Mail, Plus, Linkedin, Save, Sparkles } from 'lucide-react';
 import { toast } from 'sonner';
 import { Button } from '@/components/ui/button';
@@ -42,6 +42,12 @@ function nameKey(name: string): string {
   return name.toLowerCase().replace(/[^a-z]+/g, ' ').trim();
 }
 
+/** Prospect-scoped saved-state key, so an in-flight save resolving after the
+ *  drawer moved to another prospect can never mark a same-named contact there. */
+function savedKey(prospectName: string, contactName: string): string {
+  return `${prospectName}::${nameKey(contactName)}`;
+}
+
 const CONFIDENCE_STYLE: Record<string, { label: string; className: string }> = {
   known: { label: 'verified', className: 'text-emerald-600 border-emerald-600/30' },
   high: { label: 'high', className: 'text-emerald-600 border-emerald-600/30' },
@@ -64,12 +70,16 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
   const [queuingKey, setQueuingKey] = useState<string | null>(null);
   const [queuedKeys, setQueuedKeys] = useState<Set<string>>(new Set());
   const [queuingAll, setQueuingAll] = useState(false);
-  // nameKey -> save round-trip result, for the per-row "Saved" state.
+  // savedKey(prospect, name) -> save round-trip result, for the per-row "Saved" state.
   const [savedByKey, setSavedByKey] = useState<Map<string, { hubspotUrl?: string }>>(new Map());
   const [savingKey, setSavingKey] = useState<string | null>(null);
   const [savingAll, setSavingAll] = useState(false);
+  // The prospect the drawer currently shows; gates stale save toasts.
+  const activeProspectRef = useRef(prospect.name);
+  const savingAllRef = useRef(false);
 
   useEffect(() => {
+    activeProspectRef.current = prospect.name;
     let cancelled = false;
     setData(null);
     setAdded([]);
@@ -117,8 +127,11 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
 
   /** Persist a panel contact as a durable DiscoveryContact (+ guarded HubSpot upsert). */
   async function persistContact(c: ProspectContact): Promise<boolean> {
+    // Capture the prospect at call time: the result must land under (and toast
+    // for) the prospect the save was issued from, not whatever is open later.
+    const forProspect = prospect.name;
     const res = await saveProspectContact({
-      prospectName: prospect.name,
+      prospectName: forProspect,
       name: c.name,
       title: c.title,
       email: c.email ?? undefined,
@@ -127,16 +140,17 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
       confidence: c.confidence,
     });
     if (res.ok) {
-      const key = nameKey(c.name);
-      setSavedByKey((prev) => new Map(prev).set(key, { hubspotUrl: res.hubspotUrl }));
+      setSavedByKey((prev) => new Map(prev).set(savedKey(forProspect, c.name), { hubspotUrl: res.hubspotUrl }));
       return true;
     }
-    toast.error(res.reason === 'unauthenticated' ? 'Sign in to save' : 'Save failed');
+    if (activeProspectRef.current === forProspect) {
+      toast.error(res.reason === 'unauthenticated' ? 'Sign in to save' : 'Save failed');
+    }
     return false;
   }
 
   async function handleSave(c: ProspectContact) {
-    const key = nameKey(c.name);
+    const key = savedKey(prospect.name, c.name);
     setSavingKey(key);
     try {
       await persistContact(c);
@@ -146,15 +160,19 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
   }
 
   async function handleSaveAll() {
+    // Ref guard: a double-click in the same tick beats the disabled re-render.
+    if (savingAllRef.current) return;
+    savingAllRef.current = true;
     setSavingAll(true);
     try {
       let saved = 0;
       for (const c of researched) {
-        if (savedByKey.has(nameKey(c.name))) continue;
+        if (savedByKey.has(savedKey(prospect.name, c.name))) continue;
         if (await persistContact(c)) saved += 1;
       }
       if (saved > 0) toast.success(`${saved} saved`);
     } finally {
+      savingAllRef.current = false;
       setSavingAll(false);
     }
   }
@@ -296,7 +314,7 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
         <ul className="space-y-1.5">
           {contacts.map((c, i) => {
             const conf = CONFIDENCE_STYLE[c.confidence] ?? CONFIDENCE_STYLE.none;
-            const saveKey = nameKey(c.name);
+            const saveKey = savedKey(prospect.name, c.name);
             const savedInfo =
               savedByKey.get(saveKey) ?? (c.source === 'saved' ? { hubspotUrl: c.hubspotUrl } : undefined);
             const savable = (c.source === 'research' || c.source === 'added') && !savedInfo;
@@ -367,21 +385,21 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
                       </Button>
                     ) : null}
                     {c.email && (
-                    <Button size="sm" variant="outline" className="h-7 gap-1 text-xs" onClick={() => handleEmail(c)}>
-                      <Mail className="h-3 w-3" /> Email
-                    </Button>
+                      <Button size="sm" variant="outline" className="h-7 gap-1 text-xs" onClick={() => handleEmail(c)}>
+                        <Mail className="h-3 w-3" /> Email
+                      </Button>
                     )}
                     {c.email && (
-                    <Button
-                      size="sm"
-                      variant="outline"
-                      className="h-7 gap-1 text-xs"
-                      onClick={() => handleQueue(c, `${c.name}-${i}`)}
-                      disabled={queuingKey === `${c.name}-${i}` || queuedKeys.has(`${c.name}-${i}`)}
-                    >
-                      {queuingKey === `${c.name}-${i}` ? <Loader2 className="h-3 w-3 animate-spin" /> : <ListPlus className="h-3 w-3" />}
-                      {queuedKeys.has(`${c.name}-${i}`) ? 'Queued' : 'Queue'}
-                    </Button>
+                      <Button
+                        size="sm"
+                        variant="outline"
+                        className="h-7 gap-1 text-xs"
+                        onClick={() => handleQueue(c, `${c.name}-${i}`)}
+                        disabled={queuingKey === `${c.name}-${i}` || queuedKeys.has(`${c.name}-${i}`)}
+                      >
+                        {queuingKey === `${c.name}-${i}` ? <Loader2 className="h-3 w-3 animate-spin" /> : <ListPlus className="h-3 w-3" />}
+                        {queuedKeys.has(`${c.name}-${i}`) ? 'Queued' : 'Queue'}
+                      </Button>
                     )}
                   </div>
                 )}
@@ -404,7 +422,7 @@ export function ProspectContactsPanel({ prospect }: { prospect: RankedRow }) {
       ) : (
         <div className="flex items-center justify-between gap-2">
           <p className="text-[11px] text-violet-600">{researched.length} AI-proposed contacts added — verify on LinkedIn before sending.</p>
-          {researched.some((c) => !savedByKey.has(nameKey(c.name))) && (
+          {researched.some((c) => !savedByKey.has(savedKey(prospect.name, c.name))) && (
             <Button
               size="sm"
               variant="outline"
