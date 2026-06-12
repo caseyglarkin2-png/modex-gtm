@@ -18,6 +18,7 @@ const COMPANY_PROPERTIES = [
   'description',
   'phone',
   'website',
+  'yardflow_tam',
 ] as const;
 
 export interface HubSpotCompany {
@@ -31,6 +32,7 @@ export interface HubSpotCompany {
   description: string;
   phone: string;
   website: string;
+  yardflow_tam: string;
 }
 
 function mapCompany(raw: { id: string; properties: Record<string, string | null> }): HubSpotCompany {
@@ -45,6 +47,7 @@ function mapCompany(raw: { id: string; properties: Record<string, string | null>
     description: raw.properties.description || '',
     phone: raw.properties.phone || '',
     website: raw.properties.website || '',
+    yardflow_tam: raw.properties.yardflow_tam || '',
   };
 }
 

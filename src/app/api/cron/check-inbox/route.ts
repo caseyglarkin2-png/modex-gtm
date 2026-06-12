@@ -4,6 +4,8 @@ import { prisma } from '@/lib/prisma';
 import { getRecentReplies, markAsProcessed } from '@/lib/email/gmail-inbox';
 import { logReplyToHubSpot } from '@/lib/hubspot/emails';
 import { searchContactByEmail, stampContactReplyIntent } from '@/lib/hubspot/contacts';
+import { searchCompanyByDomain } from '@/lib/hubspot/companies';
+import { sendSlackNotification } from '@/lib/microsites/intent-notifications';
 import { INBOX_POLLING_ENABLED } from '@/lib/feature-flags';
 import { markCronFailure, markCronSkipped, markCronStarted, markCronSuccess } from '@/lib/cron-monitor';
 import { ensureLocalMeetingDealLink } from '@/lib/hubspot/deals';
@@ -78,6 +80,32 @@ export async function GET(request: Request) {
         where: { email: reply.fromEmail },
         include: { account: true },
       });
+
+      // 4.7 (audit 2026-06-12): UNSOLICITED inbound - an unknown sender is
+      // potentially a new logo knocking, the hottest signal there is, but
+      // it previously landed only in the in-app bell. Precision gate: only
+      // page when the sender's domain is a TAM-in company (keeps vendor
+      // spam and newsletters out of #yardflow-intent).
+      if (!persona) {
+        try {
+          const fromLocal = (reply.fromEmail.split('@')[0] || '').toLowerCase();
+          const fromDomain = (reply.fromEmail.split('@')[1] || '').toLowerCase();
+          const robotic = /^(no-?reply|mailer-daemon|notifications?|newsletter|marketing|donotreply|bounce|postmaster)/.test(fromLocal);
+          const own = ['freightroll.com', 'yardflow.ai', 'dwtb.dev'].includes(fromDomain);
+          if (fromDomain && !robotic && !own) {
+            const company = await searchCompanyByDomain(fromDomain);
+            if (company?.yardflow_tam === 'in') {
+              await sendSlackNotification(
+                `:fire: *Unsolicited inbound from a TAM account* - ${reply.fromEmail} (${company.name})` +
+                String.fromCharCode(10) + `Subject: ${reply.subject}` +
+                String.fromCharCode(10) + reply.snippet.slice(0, 200),
+              );
+            }
+          }
+        } catch (tamError) {
+          console.error('TAM inbound check failed', tamError);
+        }
+      }
 
       // Create Notification
       await prisma.notification.create({
