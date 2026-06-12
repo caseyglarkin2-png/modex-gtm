@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { isAuthorizedQueueAgent } from '@/lib/queue/agent-auth';
 import { rateLimit } from '@/lib/rate-limit';
 import { addOne } from '@/app/discovery/queue-actions';
+import { upsertContactFromQueueItem } from '@/lib/queue/contact-upsert';
 import { QueueAddBatchSchema } from '@/lib/validations';
 
 export const dynamic = 'force-dynamic';
@@ -41,6 +42,7 @@ export async function POST(req: NextRequest) {
   }
 
   let added = 0;
+  let contactsUpserted = 0;
   const skipped: Array<{ toEmail: string; reason: string }> = [];
 
   // Sequential by design: dedup does DB lookups but batches are ≤200 and this
@@ -50,10 +52,19 @@ export async function POST(req: NextRequest) {
     const r = await addOne({ ...item, source: 'clawd' }, owner);
     if (r.ok) {
       added++;
+      // Dedup-skipped items don't reach here: their contact was already
+      // handled when first queued. Fail-soft, never blocks the intake.
+      const u = await upsertContactFromQueueItem({
+        toEmail: item.toEmail,
+        personaName: item.personaName ?? null,
+        personaTitle: item.personaTitle ?? null,
+        accountName: item.accountName,
+      });
+      if (u.ok) contactsUpserted++;
     } else {
       skipped.push({ toEmail: item.toEmail, reason: r.reason });
     }
   }
 
-  return NextResponse.json({ added, skipped });
+  return NextResponse.json({ added, skipped, contactsUpserted });
 }
