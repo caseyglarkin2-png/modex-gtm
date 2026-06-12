@@ -129,17 +129,63 @@ describe('upsertContactFromQueueItem', () => {
     warn.mockRestore();
   });
 
-  it('fails soft and never throws when the persona write fails', async () => {
+  it('still attempts HubSpot when the persona write fails (Prisma error fail-soft)', async () => {
     const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
     prismaMock.persona.findFirst.mockRejectedValue(new Error('db down'));
 
     const result = await upsertContactFromQueueItem(baseItem);
 
-    expect(result).toEqual({ ok: false, personaCreated: false });
+    expect(result).toEqual({ ok: true, personaCreated: false, hubspotId: 'hs-501' });
+    expect(upsertContactMock).toHaveBeenCalledWith(
+      expect.objectContaining({ email: 'jane.doe@acme.com', company: 'Acme' }),
+    );
+    // no persona row to backfill, so the id is not persisted locally
+    expect(prismaMock.persona.update).not.toHaveBeenCalled();
     expect(warn).toHaveBeenCalledWith(
       expect.stringContaining('[queue/contact-upsert]'),
       expect.any(Error),
     );
+    warn.mockRestore();
+  });
+
+  it('no Account row -> persona skipped, HubSpot contact still created', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    // Persona.account_name is a required FK to Account.name; net-new
+    // discovery facilities have no Account row, so the create fails.
+    prismaMock.persona.create.mockRejectedValue(
+      new Error('Foreign key constraint violated: `account_name`'),
+    );
+
+    const result = await upsertContactFromQueueItem({
+      ...baseItem,
+      accountName: 'Nestle Distribution Center (Truck Entrance)',
+    });
+
+    expect(result).toEqual({ ok: true, personaCreated: false, hubspotId: 'hs-501' });
+    expect(upsertContactMock).toHaveBeenCalledWith(
+      expect.objectContaining({
+        email: 'jane.doe@acme.com',
+        company: 'Nestle Distribution Center (Truck Entrance)',
+      }),
+    );
+    expect(prismaMock.persona.update).not.toHaveBeenCalled();
+    expect(warn).toHaveBeenCalledTimes(1);
+    expect(warn).toHaveBeenCalledWith(
+      expect.stringContaining('[queue/contact-upsert]'),
+      expect.any(Error),
+    );
+    warn.mockRestore();
+  });
+
+  it('returns ok: false only when both the persona write and HubSpot fail', async () => {
+    const warn = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    prismaMock.persona.findFirst.mockRejectedValue(new Error('db down'));
+    upsertContactMock.mockRejectedValue(new Error('hubspot down'));
+
+    const result = await upsertContactFromQueueItem(baseItem);
+
+    expect(result).toEqual({ ok: false, personaCreated: false, hubspotId: undefined });
+    expect(warn).toHaveBeenCalledTimes(2);
     warn.mockRestore();
   });
 

@@ -25,8 +25,10 @@ function splitPersonaName(name?: string | null): { firstname?: string; lastname?
 
 /**
  * Upsert the person behind a queue item: Persona row first (so a HubSpot
- * outage never costs the local record), then the HubSpot contact. Never
- * throws; any failure is logged and reported through `ok`.
+ * outage never costs the local record), then the HubSpot contact. The two
+ * writes are independent: a Persona failure (e.g. a net-new discovery
+ * facility with no Account row backing the `account_name` FK) must never
+ * block the CRM upsert. Never throws; `ok` is true if either write landed.
  */
 export async function upsertContactFromQueueItem(item: {
   toEmail: string;
@@ -39,6 +41,7 @@ export async function upsertContactFromQueueItem(item: {
   let personaId: number | null = null;
   let personaHubspotId: string | null = null;
   let personaCreated = false;
+  let personaOk = false;
 
   try {
     const existing = await prisma.persona.findFirst({
@@ -70,9 +73,11 @@ export async function upsertContactFromQueueItem(item: {
       personaId = created.id;
       personaCreated = true;
     }
+    personaOk = true;
   } catch (err) {
+    // Fail-soft: most clawd hand-off accounts have no Account row backing
+    // the Persona FK. Skip the local record and still upsert into HubSpot.
     console.warn(`${WARN_PREFIX} persona upsert failed for ${email}:`, err);
-    return { ok: false, personaCreated: false };
   }
 
   let hubspotId: string | undefined;
@@ -98,5 +103,5 @@ export async function upsertContactFromQueueItem(item: {
     }
   }
 
-  return { ok: true, personaCreated, hubspotId };
+  return { ok: personaOk || hubspotId !== undefined, personaCreated, hubspotId };
 }
