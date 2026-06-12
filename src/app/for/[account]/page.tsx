@@ -37,7 +37,10 @@ export async function generateMetadata({
   const { account } = await params;
   const sp = await searchParams;
   const data = getAccountMicrositeData(account);
-  if (!data) return { title: 'YardFlow' };
+  // notFound() here, not just in the page body: metadata resolves before the
+  // response starts streaming (loading.tsx), so this is what makes an unknown
+  // slug return a real HTTP 404 instead of a 200-streamed not-found shell.
+  if (!data) notFound();
   const reader = resolveReader(data, sp.p);
   const personSlug = reader?.personSlug;
   const imagePath = personSlug

@@ -39,16 +39,19 @@ const memoMono = JetBrains_Mono({
   variable: "--font-memo-mono",
 });
 
+// NOTE: no "RevOps OS" anywhere in <title>/OG — /for/* and /demo/* are
+// proxied through yardflow.ai and prospects see these strings. Internal
+// branding stays in the UI chrome (sidebar, login), not in metadata.
 export const metadata: Metadata = {
   metadataBase: new URL(getSiteUrl()),
   title: {
-    default: "YardFlow by FreightRoll — RevOps OS",
-    template: "%s — YardFlow by FreightRoll RevOps OS",
+    default: "YardFlow by FreightRoll",
+    template: "%s — YardFlow by FreightRoll",
   },
-  description: "YardFlow by FreightRoll RevOps OS",
+  description: "YardFlow by FreightRoll — the Yard Network System",
   openGraph: {
-    title: "YardFlow by FreightRoll — RevOps OS",
-    description: "YardFlow by FreightRoll RevOps OS",
+    title: "YardFlow by FreightRoll",
+    description: "YardFlow by FreightRoll — the Yard Network System",
     type: "website",
     images: [
       {
@@ -61,8 +64,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "YardFlow by FreightRoll — RevOps OS",
-    description: "YardFlow by FreightRoll RevOps OS",
+    title: "YardFlow by FreightRoll",
+    description: "YardFlow by FreightRoll — the Yard Network System",
     images: ["/opengraph-image"],
   },
 };

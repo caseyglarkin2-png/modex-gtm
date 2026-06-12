@@ -70,7 +70,9 @@ function firstSentence(s?: string): string | null {
 export async function generateMetadata({ params }: { params: Promise<Params> }): Promise<Metadata> {
   const { account } = await params;
   const pack = await loadPack(account);
-  if (!pack) return { title: 'Network not found · YardFlow' };
+  // notFound() in metadata (pre-stream) so unknown demo slugs return a real
+  // HTTP 404 instead of a 200-streamed not-found shell. Same fix as /for.
+  if (!pack) notFound();
 
   const { displayName, siteCount } = pack.account;
   const title = `${displayName} · yard network · YardFlow`;
