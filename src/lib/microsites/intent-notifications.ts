@@ -39,6 +39,14 @@ export interface IntentDecisionInput {
 
 export interface IntentDecision {
   notify: boolean;
+  /**
+   * True when the session qualifies as real intent worth STAMPING to the
+   * CRM (intent_score / last_intent_at on the contact or company), even
+   * when it is too short to page a rep. Audit finding 2026-06-12: stamps
+   * were coupled to the ping decision, so the 45s ping dwell-floor was
+   * silently dropping CRM intent capture for short genuine engagements.
+   */
+  stamp: boolean;
   /** Machine-readable trigger reason, for logging. */
   reason: string;
 }
@@ -48,33 +56,32 @@ export function decideIntentNotification({
   snapshot,
   mergedSession,
 }: IntentDecisionInput): IntentDecision {
-  // One ping per session — never re-notify.
-  if (existing && readIntentNotified(existing.metadata)) {
-    return { notify: false, reason: 'already-notified' };
-  }
   // Human traffic only. The route stamps trafficQuality before this runs.
   if (readTrafficQuality(snapshot.metadata) !== 'human') {
-    return { notify: false, reason: 'non-human' };
-  }
-  // Acute-noise floor (2026-06-12): a 7-second bounce that clicks a CTA is
-  // curiosity, not buying intent — pings were firing on sub-10s sessions
-  // while the daily Account Pulse digest now carries the rolled-up view.
-  // Real-time pings are reserved for sessions with actual dwell.
-  const minDwell = Number.parseInt(process.env.INTENT_PING_MIN_SECONDS ?? '45', 10);
-  if ((mergedSession.duration_seconds ?? 0) < minDwell) {
-    return { notify: false, reason: 'below-dwell-floor' };
+    return { notify: false, stamp: false, reason: 'non-human' };
   }
   // A freshly-tripped CTA is the strongest same-session signal.
   const newCta =
     !!snapshot.lastCtaId && !(existing?.cta_ids ?? []).includes(snapshot.lastCtaId);
-  if (newCta) {
-    return { notify: true, reason: `cta:${snapshot.lastCtaId}` };
+  const highIntent = isHighIntentMicrositeSession(mergedSession);
+  const stamp = newCta || highIntent;
+  if (!stamp) {
+    return { notify: false, stamp: false, reason: 'below-threshold' };
   }
-  // Otherwise, fire once the merged session reads as high intent.
-  if (isHighIntentMicrositeSession(mergedSession)) {
-    return { notify: true, reason: 'high-intent' };
+  const reason = newCta ? `cta:${snapshot.lastCtaId}` : 'high-intent';
+  // One ping per session — never re-notify (stamps stay idempotent: a
+  // re-stamp just refreshes recency on the CRM record).
+  if (existing && readIntentNotified(existing.metadata)) {
+    return { notify: false, stamp, reason: 'already-notified' };
   }
-  return { notify: false, reason: 'below-threshold' };
+  // Acute-noise floor (2026-06-12): a 7-second bounce that clicks a CTA is
+  // curiosity, not a page-the-rep moment — PINGS require real dwell. The
+  // CRM stamp above is NOT gated by this; Account Pulse decays it properly.
+  const minDwell = Number.parseInt(process.env.INTENT_PING_MIN_SECONDS ?? '45', 10);
+  if ((mergedSession.duration_seconds ?? 0) < minDwell) {
+    return { notify: false, stamp, reason: 'below-dwell-floor' };
+  }
+  return { notify: true, stamp, reason };
 }
 
 function formatDuration(seconds: number): string {
