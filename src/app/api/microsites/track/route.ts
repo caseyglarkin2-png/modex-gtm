@@ -184,9 +184,13 @@ export async function POST(req: NextRequest) {
       } catch (notifyError) {
         console.error('Failed to send intent notification', notifyError);
       }
-      // D7.2 — also post a Note to the HubSpot contact timeline so sales
-      // sees demo/microsite engagement inline on the contact record.
-      // Fail-open: HubSpot failure must not block the request.
+    }
+    // CRM intent capture is decoupled from paging (audit 2026-06-12): a
+    // short genuine engagement still stamps intent_score/last_intent_at
+    // plus the timeline Note so Account Pulse and qualification see it,
+    // even below the ping dwell floor.
+    // Fail-open: HubSpot failure must not block the request.
+    if (intentDecision.stamp) {
       try {
         await logIntentToHubSpot(snapshot, mergedSession, intentDecision.reason);
       } catch (hubspotError) {
