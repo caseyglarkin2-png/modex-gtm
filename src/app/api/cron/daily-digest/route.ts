@@ -120,6 +120,13 @@ async function fetchSqlWorklist(): Promise<{ total: number; leads: SqlLead[] } |
     () =>
       client.crm.contacts.searchApi.doSearch({
         filterGroups: [
+          // Engine-qualified SQLs (TAM fit + role + intent) — the priority worklist.
+          {
+            filters: [
+              { propertyName: 'yardflow_qual_verdict', operator: FilterOperatorEnum.Eq, value: 'sql' },
+            ],
+          },
+          // Plus manually-staged new SQLs that predate the engine (filterGroups are ORed).
           {
             filters: [
               { propertyName: 'lifecyclestage', operator: FilterOperatorEnum.Eq, value: 'salesqualifiedlead' },

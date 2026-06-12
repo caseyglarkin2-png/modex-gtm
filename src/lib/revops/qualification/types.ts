@@ -45,6 +45,8 @@ export interface VerdictDiff {
   changed: boolean;
   reason: string;
   tamTier: string;
+  /** Any email engagement (open/reply) — gates MQL lifecycle promotion (SQLs promote regardless). */
+  hasPulse: boolean;
 }
 
 export interface EvaluateResult {

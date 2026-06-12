@@ -211,6 +211,29 @@ export async function updateContactIntent(
   ).catch(() => undefined);
 }
 
+/**
+ * Stamp reply-intent on a contact WITHOUT touching intent_score (web/demo intent owns the
+ * score; overwriting it here could downgrade a hot session). Sets last_intent_at +
+ * last_intent_source so the qualification engine's SQL gate sees email replies — the drip
+ * runs through Gmail, so HubSpot's native hs_sales_email_last_replied never fires for it.
+ */
+export async function stampContactReplyIntent(contactId: string): Promise<void> {
+  if (!isHubSpotConfigured() || !HUBSPOT_SYNC_ENABLED) return;
+  assertExternalWriteAllowed('hubspot', 'stampContactReplyIntent');
+
+  const client = getHubSpotClient();
+  await withHubSpotRetry(
+    () =>
+      client.crm.contacts.basicApi.update(contactId, {
+        properties: {
+          last_intent_at: String(Date.now()),
+          last_intent_source: 'email_reply',
+        },
+      }),
+    `stampContactReplyIntent(${contactId})`,
+  ).catch(() => undefined);
+}
+
 /** Fetch all contacts modified after a given date (for incremental sync). */
 export async function listRecentContacts(
   after?: string,
