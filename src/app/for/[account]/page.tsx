@@ -1,6 +1,5 @@
 export const dynamic = 'force-dynamic';
 
-import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 import { getAccountMicrositeData } from '@/lib/microsites/accounts';
 import { isAccountHandTuned, resolveMemoSections } from '@/lib/microsites/memo-compat';
@@ -37,10 +36,17 @@ export async function generateMetadata({
   const { account } = await params;
   const sp = await searchParams;
   const data = getAccountMicrositeData(account);
-  // notFound() here, not just in the page body: metadata resolves before the
-  // response starts streaming (loading.tsx), so this is what makes an unknown
-  // slug return a real HTTP 404 instead of a 200-streamed not-found shell.
-  if (!data) notFound();
+  // Unknown slug: serve the capture page (see the page component). The root
+  // loading.tsx streams a 200 before notFound() could set a 404 status, so a
+  // deliberate noindex capture surface beats a 200-streamed not-found shell.
+  if (!data) {
+    return {
+      title: 'Yard network briefs — YardFlow by FreightRoll',
+      description:
+        'Private field briefs are built per account and shared directly. See a live network demo or get one built for your yards.',
+      robots: { index: false, follow: false },
+    };
+  }
   const reader = resolveReader(data, sp.p);
   const personSlug = reader?.personSlug;
   const imagePath = personSlug
@@ -67,7 +73,38 @@ export default async function AccountMicrositePage({
   const { account } = await params;
   const sp = await searchParams;
   const data = getAccountMicrositeData(account);
-  if (!data) notFound();
+  // Unknown slug → capture page, not a 404 shell. /for/* is prospect-facing
+  // through the yardflow.ai proxy; a mistyped or stale link should land on
+  // an honest "this brief isn't live" with a route back to the live surfaces.
+  if (!data) {
+    return (
+      <div className="flex min-h-[70vh] flex-col items-center justify-center px-6 text-center">
+        <p className="font-mono text-xs uppercase tracking-[0.2em] text-[var(--muted-foreground)]">
+          YardFlow by FreightRoll
+        </p>
+        <h1 className="mt-4 text-2xl font-semibold">This brief isn&apos;t live.</h1>
+        <p className="mt-3 max-w-md text-sm text-[var(--muted-foreground)]">
+          Private field briefs are built per account and shared directly. If someone
+          sent you a link, check it with them. If you want one for your network, we
+          map your yards from satellite and build it.
+        </p>
+        <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
+          <a
+            href="https://yardflow.ai/demo/"
+            className="rounded-md bg-[var(--foreground)] px-4 py-2 text-sm font-medium text-[var(--background)]"
+          >
+            See a live network demo
+          </a>
+          <a
+            href="https://meetings.hubspot.com/casey416"
+            className="rounded-md border border-[var(--border)] px-4 py-2 text-sm font-medium"
+          >
+            Book 30 minutes
+          </a>
+        </div>
+      </div>
+    );
+  }
 
   const memoSections = resolveMemoSections(data);
   const marginaliaItems = data.marginaliaItems ?? extractMarginaliaItems(memoSections);
