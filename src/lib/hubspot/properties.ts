@@ -155,3 +155,48 @@ export async function ensureYardflowIcpScoreProperty(): Promise<void> {
 
   ensured = true;
 }
+
+export const YARDFLOW_QUAL_VERDICT_PROPERTY = 'yardflow_qual_verdict';
+export const YARDFLOW_QUAL_EVALUATED_AT_PROPERTY = 'yardflow_qual_evaluated_at';
+
+/**
+ * Ensure the qualification-engine contact properties exist.
+ * yardflow_qual_verdict: enumeration none/mql/sql (the engine's opinion).
+ * yardflow_qual_evaluated_at: datetime audit stamp.
+ * Idempotent: ignores "already exists" (409) errors.
+ */
+export async function ensureQualificationProperties(): Promise<void> {
+  const client = getHubSpotClient();
+  const defs = [
+    {
+      name: YARDFLOW_QUAL_VERDICT_PROPERTY,
+      label: 'YardFlow Qualification Verdict',
+      type: PropertyCreateTypeEnum.Enumeration,
+      fieldType: PropertyCreateFieldTypeEnum.Select,
+      groupName: 'contactinformation',
+      options: [
+        { label: 'None', value: 'none', displayOrder: 0, hidden: false },
+        { label: 'MQL', value: 'mql', displayOrder: 1, hidden: false },
+        { label: 'SQL', value: 'sql', displayOrder: 2, hidden: false },
+      ],
+    },
+    {
+      name: YARDFLOW_QUAL_EVALUATED_AT_PROPERTY,
+      label: 'YardFlow Qualification Evaluated At',
+      type: PropertyCreateTypeEnum.Datetime,
+      fieldType: PropertyCreateFieldTypeEnum.Date,
+      groupName: 'contactinformation',
+    },
+  ];
+  for (const def of defs) {
+    try {
+      await withHubSpotRetry(
+        () => client.crm.properties.coreApi.create('contacts', def as never),
+        `ensureQualificationProperties(${def.name})`,
+      );
+    } catch (err) {
+      const msg = err instanceof Error ? err.message : String(err);
+      if (!/already exists|PROPERTY_ALREADY_EXISTS|409/i.test(msg)) throw err;
+    }
+  }
+}
