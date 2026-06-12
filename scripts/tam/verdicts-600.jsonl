@@ -1,0 +1,120 @@
+{"id": "54772658102", "verdict": "out", "segment": "", "tier": "", "reason": "John Moriarty Associates - general contractor/construction management firm"}
+{"id": "54772663923", "verdict": "out", "segment": "", "tier": "", "reason": "AJAX Paving - paving/road construction contractor, no freight yard operations"}
+{"id": "54772666939", "verdict": "out", "segment": "", "tier": "", "reason": "RTI Surgical - medical device/surgical implant manufacturer, healthcare sector"}
+{"id": "54772669442", "verdict": "in", "segment": "paper_packaging", "tier": "B", "reason": "Lindenmeyr Munroe - major paper/packaging distributor with multiple DCs across NA"}
+{"id": "54772671889", "verdict": "in", "segment": "building_materials_industrial", "tier": "B", "reason": "Metal Sales Manufacturing - metal roofing/building materials mfg with multiple plants"}
+{"id": "54772685240", "verdict": "out", "segment": "", "tier": "", "reason": "Redlands Unified School District - education"}
+{"id": "54772703490", "verdict": "out", "segment": "", "tier": "", "reason": "JAKKS Pacific - toy company, primarily IP/consumer goods with outsourced mfg"}
+{"id": "54772706056", "verdict": "out", "segment": "", "tier": "", "reason": "Quidel (QuidelOrtho) - medical diagnostics/healthcare, not freight-heavy"}
+{"id": "54772706393", "verdict": "out", "segment": "", "tier": "", "reason": "NV5 - engineering/infrastructure consulting firm, no physical freight yards"}
+{"id": "54773586610", "verdict": "in", "segment": "building_materials_industrial", "tier": "B", "reason": "NN Inc - precision industrial components manufacturer with multiple NA plants"}
+{"id": "54773641532", "verdict": "out", "segment": "", "tier": "", "reason": "Master Lock Company - consumer security products mfg, limited NA manufacturing footprint"}
+{"id": "54773694761", "verdict": "in", "segment": "building_materials_industrial", "tier": "A", "reason": "Alcan (Rio Tinto aluminum) - large aluminum smelting/mfg with many NA plants and heavy freight"}
+{"id": "54773714437", "verdict": "out", "segment": "", "tier": "", "reason": "AgaOne/aga.gold - precious metals/bullion trading and fintech, no physical freight yards"}
+{"id": "54773716992", "verdict": "in", "segment": "building_materials_industrial", "tier": "A", "reason": "Nidec - large motor/industrial mfg conglomerate with many NA manufacturing plants"}
+{"id": "54773733497", "verdict": "out", "segment": "", "tier": "", "reason": "Democratic National Committee - political/government organization"}
+{"id": "54773735706", "verdict": "out", "segment": "", "tier": "", "reason": "Sargent & Lundy - engineering/consulting firm, no freight yard operations"}
+{"id": "54773741864", "verdict": "in", "segment": "automotive_heavy_mfg", "tier": "B", "reason": "ATC Drivetrain (atcdt.com) - large automotive parts remanufacturer with 8 plants"}
+{"id": "54773762665", "verdict": "out", "segment": "", "tier": "", "reason": "Miami International Airport - passenger airport, not freight-yard focused"}
+{"id": "54773776397", "verdict": "out", "segment": "", "tier": "", "reason": "SPINX Co. - regional convenience store/fuel retailer, not freight-yard driven"}
+{"id": "54773781923", "verdict": "in", "segment": "chemicals_plastics", "tier": "A", "reason": "Magellan Midstream Partners - major petroleum pipeline/terminal operator with many tank farms"}
+{"id": "54773784360", "verdict": "out", "segment": "", "tier": "", "reason": "Edge Autonomy - defense/aerospace tech company (autonomous systems)"}
+{"id": "54773784599", "verdict": "out", "segment": "", "tier": "", "reason": "Trustwave - cybersecurity/IT services company"}
+{"id": "54773798839", "verdict": "out", "segment": "", "tier": "", "reason": "PGIM - Prudential Global Investment Management, finance/asset management"}
+{"id": "54773826896", "verdict": "out", "segment": "", "tier": "", "reason": "NY State Dept of Health - government/healthcare agency"}
+{"id": "54773838646", "verdict": "out", "segment": "", "tier": "", "reason": "Newark Public Schools - education"}
+{"id": "54773852015", "verdict": "out", "segment": "", "tier": "", "reason": "Yulista - aerospace/defense services company"}
+{"id": "54773874307", "verdict": "in", "segment": "chemicals_plastics", "tier": "A", "reason": "NuStar Energy - major petroleum storage and pipeline operator with many NA terminals"}
+{"id": "54774200936", "verdict": "out", "segment": "", "tier": "", "reason": "Vicor - power component manufacturer (electronics), small footprint"}
+{"id": "54774201170", "verdict": "out", "segment": "", "tier": "", "reason": "MLGW (mlgw.org) - Memphis Light Gas & Water, municipal utility"}
+{"id": "54774398486", "verdict": "out", "segment": "", "tier": "", "reason": "OffSec (Offensive Security) - cybersecurity training/IT company"}
+{"id": "54774452522", "verdict": "out", "segment": "", "tier": "", "reason": "Applied Aerospace - aerospace/defense engineering services"}
+{"id": "54774461022", "verdict": "in", "segment": "building_materials_industrial", "tier": "B", "reason": "C&D Technologies - industrial battery manufacturer with multiple NA plants and heavy freight"}
+{"id": "54774477873", "verdict": "in", "segment": "wholesale_distribution", "tier": "B", "reason": "Edward Don & Company - large foodservice equipment/supply distributor with DCs across NA"}
+{"id": "54774486543", "verdict": "out", "segment": "", "tier": "", "reason": "fr.mcd.com - McDonalds France, QSR/hospitality, not freight-yard driven"}
+{"id": "54774487458", "verdict": "in", "segment": "3pl_carrier", "tier": "B", "reason": "Roadrunner Transportation - LTL trucking carrier with multiple terminals across NA"}
+{"id": "54774487466", "verdict": "in", "segment": "building_materials_industrial", "tier": "B", "reason": "A.O. Smith - water heater/boiler mfg with multiple NA manufacturing plants"}
+{"id": "54774493779", "verdict": "in", "segment": "automotive_heavy_mfg", "tier": "B", "reason": "McNeilus Companies (mcneilusco.com) - heavy truck body/mixer mfg, multiple manufacturing plants"}
+{"id": "54774512194", "verdict": "in", "segment": "building_materials_industrial", "tier": "B", "reason": "Actuant (Enerpac) - industrial tools/equipment mfg with multiple NA facilities"}
+{"id": "54774526592", "verdict": "out", "segment": "", "tier": "", "reason": "Moss & Associates - general contractor/construction management, no freight yard ops"}
+{"id": "54774550160", "verdict": "in", "segment": "building_materials_industrial", "tier": "A", "reason": "API Group Inc - large specialty construction/fire protection with industrial distribution network"}
+{"id": "54774560436", "verdict": "out", "segment": "", "tier": "", "reason": "R2Net - online jewelry/diamond retailer, e-commerce only, no physical freight yards"}
+{"id": "54776183643", "verdict": "out", "segment": "", "tier": "", "reason": "API Technologies - electronic components mfg for defense/aerospace, small footprint"}
+{"id": "54776184667", "verdict": "in", "segment": "3pl_carrier", "tier": "A", "reason": "Covenant Transport - large TL trucking carrier with significant terminal/yard network"}
+{"id": "54776517384", "verdict": "in", "segment": "3pl_carrier", "tier": "B", "reason": "Intelcom Express - Canadian last-mile parcel delivery with multiple depots"}
+{"id": "54777057957", "verdict": "out", "segment": "", "tier": "", "reason": "USD 259 Wichita Public Schools - education"}
+{"id": "54783691587", "verdict": "out", "segment": "", "tier": "", "reason": "komatsuna.com - Komatsu America Industries (machine tools), equipment sales not freight yard ops"}
+{"id": "54783721554", "verdict": "out", "segment": "", "tier": "", "reason": "hk.mcd.com - McDonalds Hong Kong, QSR/hospitality"}
+{"id": "54783750838", "verdict": "in", "segment": "ecommerce_parcel", "tier": "B", "reason": "PFSweb (now GXO) - ecommerce fulfillment 3PL with 2.2M sqft warehouse space"}
+{"id": "54783750838", "verdict": "out", "segment": "", "tier": "", "reason": "Universal Weather and Aviation (univ-wea.com) - aviation trip support services"}
+{"id": "54783968608", "verdict": "out", "segment": "", "tier": "", "reason": "Rockwall ISD - education"}
+{"id": "54784103549", "verdict": "in", "segment": "building_materials_industrial", "tier": "A", "reason": "Ternium Argentina - large flat steel mfg with heavy industrial plant/yard operations"}
+{"id": "54784111106", "verdict": "in", "segment": "retail_grocery", "tier": "A", "reason": "QVC Group - large home shopping/retail with major distribution/fulfillment centers"}
+{"id": "54784113673", "verdict": "out", "segment": "", "tier": "", "reason": "Amazon Lab126 - Amazon hardware R&D division only, not a standalone DC operator"}
+{"id": "54784127889", "verdict": "in", "segment": "automotive_heavy_mfg", "tier": "B", "reason": "Wyman-Gordon - aerospace/heavy industrial forgings mfg with large plants and heavy freight"}
+{"id": "54784179292", "verdict": "out", "segment": "", "tier": "", "reason": "Natures Sunshine Products - nutritional supplements, light assembly/small-scale distribution"}
+{"id": "54784180090", "verdict": "out", "segment": "", "tier": "", "reason": "Boston Celtics - sports/entertainment"}
+{"id": "54784198487", "verdict": "out", "segment": "", "tier": "", "reason": "Linktree - social media/software company"}
+{"id": "54784208482", "verdict": "review", "segment": "", "tier": "", "reason": "PGN pgn.com - ambiguous identity, could not confirm industry from name+domain alone"}
+{"id": "54784208488", "verdict": "out", "segment": "", "tier": "", "reason": "Vertex Aerospace - aerospace/defense MRO services, not freight yard focused"}
+{"id": "54784215595", "verdict": "out", "segment": "", "tier": "", "reason": "eu.skechers.com - Skechers Europe, footwear retail/brand, no NA freight yard ops"}
+{"id": "54784215629", "verdict": "out", "segment": "", "tier": "", "reason": "Takko Holding - European discount fashion retailer, no NA freight yard ops"}
+{"id": "54784215883", "verdict": "out", "segment": "", "tier": "", "reason": "inpac.com - Nordic pharma/health packaging company, no large NA yard operations"}
+{"id": "54784219514", "verdict": "in", "segment": "building_materials_industrial", "tier": "A", "reason": "Radius Recycling (rdus.com, formerly Schnitzer Steel) - large scrap metal recycler with many NA shredding yards"}
+{"id": "54784242300", "verdict": "review", "segment": "", "tier": "", "reason": "McKee mckee.com - ambiguous; could be McKee Foods (snack mfg) or construction; need more context"}
+{"id": "54784274459", "verdict": "out", "segment": "", "tier": "", "reason": "Weed Man Lawncare - lawn care franchise services, no freight yard operations"}
+{"id": "54784281529", "verdict": "in", "segment": "retail_grocery", "tier": "A", "reason": "TJX Companies Europe (tjxeurope.com) - large off-price retailer with major DC network"}
+{"id": "54784294262", "verdict": "out", "segment": "", "tier": "", "reason": "Duncan Aviation - business jet MRO/FBO, aviation services not freight yard focused"}
+{"id": "54784296210", "verdict": "out", "segment": "", "tier": "", "reason": "JAC Products - automotive roof rack mfg for OEMs, limited standalone yard ops"}
+{"id": "54784297867", "verdict": "in", "segment": "agriculture_food_processing", "tier": "B", "reason": "Grain & Protein Technologies - grain/protein processing with freight-heavy agricultural operations"}
+{"id": "54784300368", "verdict": "out", "segment": "", "tier": "", "reason": "PSI psi.works - professional testing/credentialing services, no freight yard ops"}
+{"id": "54784315479", "verdict": "out", "segment": "", "tier": "", "reason": "MTA Bridges and Tunnels (mtabt.org) - toll authority/government transit agency"}
+{"id": "54784321397", "verdict": "in", "segment": "3pl_carrier", "tier": "A", "reason": "Groupe Morneau/Morneau Global - Canadian trucking/3PL with 23 terminals across Eastern Canada"}
+{"id": "54784321851", "verdict": "in", "segment": "cpg_food_beverage", "tier": "B", "reason": "Herdez - major Mexican CPG/food brand with manufacturing and distribution in NA"}
+{"id": "54784343649", "verdict": "out", "segment": "", "tier": "", "reason": "Freddys Frozen Custard - QSR restaurant chain, hospitality/restaurant sector"}
+{"id": "54784383552", "verdict": "in", "segment": "chemicals_plastics", "tier": "A", "reason": "Alpek Polyester Canada - large PET resin/polyester mfg with major industrial plants and heavy freight"}
+{"id": "54784384772", "verdict": "in", "segment": "cpg_food_beverage", "tier": "A", "reason": "Bonduelle - major French/NA vegetable processing/food mfg with multiple NA canning plants"}
+{"id": "54784395604", "verdict": "out", "segment": "", "tier": "", "reason": "Estee Lauder UK - cosmetics/beauty brand entity, no significant NA freight yard ops at this entity"}
+{"id": "54784403714", "verdict": "in", "segment": "building_materials_industrial", "tier": "B", "reason": "ITW Food Equipment Group - foodservice equipment mfg (ITW division) with multiple plants"}
+{"id": "54784410678", "verdict": "out", "segment": "", "tier": "", "reason": "llsa.com - Life Line Screening, preventive health screening services"}
+{"id": "54784411054", "verdict": "out", "segment": "", "tier": "", "reason": "Aqua Tots Swim Schools - swim school franchise, hospitality/services"}
+{"id": "54784414739", "verdict": "in", "segment": "wholesale_distribution", "tier": "B", "reason": "Briggs Equipment - material handling equipment dealer/distributor with service centers across NA"}
+{"id": "54784416326", "verdict": "out", "segment": "", "tier": "", "reason": "Kinetics (kinetics.net) - industrial piping/process systems contractor, no freight yard ops"}
+{"id": "54784462931", "verdict": "out", "segment": "", "tier": "", "reason": "vtaig.com - Berkshire Hathaway Automotive/Van Tuyl, automotive dealership group"}
+{"id": "54784471121", "verdict": "in", "segment": "wholesale_distribution", "tier": "B", "reason": "First Supply Group - wholesale plumbing/HVAC distributor with multiple DCs in Midwest"}
+{"id": "54784490358", "verdict": "out", "segment": "", "tier": "", "reason": "se.mcd.com - McDonalds Sweden, QSR/hospitality"}
+{"id": "54784512697", "verdict": "in", "segment": "3pl_carrier", "tier": "A", "reason": "UPS Europe (europe.ups.com) - large parcel carrier with major hub-and-spoke yard/terminal network"}
+{"id": "54784782616", "verdict": "out", "segment": "", "tier": "", "reason": "Universal Music Group - media/entertainment company"}
+{"id": "54784790031", "verdict": "in", "segment": "cold_chain", "tier": "B", "reason": "MNX - time-critical/medical cold chain logistics with specialized temperature-controlled facilities"}
+{"id": "54784822405", "verdict": "out", "segment": "", "tier": "", "reason": "Hornblower Cruises & Events - event/cruise hospitality company"}
+{"id": "54785015892", "verdict": "out", "segment": "", "tier": "", "reason": "Springfield Public Schools Oregon - education"}
+{"id": "54785017671", "verdict": "out", "segment": "", "tier": "", "reason": "TeleTech Philippines (teletech.com) - customer service/BPO, services company"}
+{"id": "54785017671", "verdict": "out", "segment": "", "tier": "", "reason": "dcsms.org - likely school district, education"}
+{"id": "54785041585", "verdict": "out", "segment": "", "tier": "", "reason": "EPCOR (epcor.ca) - Canadian municipal water/electricity utility"}
+{"id": "54785068915", "verdict": "in", "segment": "agriculture_food_processing", "tier": "B", "reason": "Grain & Protein Technologies (dup, no domain) - grain processing, freight-heavy agricultural"}
+{"id": "54785115408", "verdict": "in", "segment": "automotive_heavy_mfg", "tier": "A", "reason": "Progress Rail (Caterpillar, emdiesels.com) - locomotive/railcar mfg with large industrial sites"}
+{"id": "54785308932", "verdict": "out", "segment": "", "tier": "", "reason": "au.mcd.com - McDonalds Australia, QSR/hospitality"}
+{"id": "54785553459", "verdict": "out", "segment": "", "tier": "", "reason": "Belfor US (us.belfor.com) - property damage restoration services"}
+{"id": "54786109572", "verdict": "out", "segment": "", "tier": "", "reason": "Trican Well Services - oilfield pressure pumping services, not physical yard/terminal freight"}
+{"id": "54799585434", "verdict": "in", "segment": "retail_grocery", "tier": "B", "reason": "Niemann Foods - 100+ grocery/convenience stores with distribution centers in Midwest"}
+{"id": "54799622039", "verdict": "out", "segment": "", "tier": "", "reason": "1.reutersevents.com - Reuters Events, media/events company"}
+{"id": "54890486969", "verdict": "out", "segment": "", "tier": "", "reason": "Synetic (synetic.ai) - AI/software company"}
+{"id": "54896654909", "verdict": "out", "segment": "", "tier": "", "reason": "Terminal (withterminal.com) - software/fintech company"}
+{"id": "54908259331", "verdict": "out", "segment": "", "tier": "", "reason": "Hong Kong Trade Development Council - government trade promotion organization"}
+{"id": "55349827108", "verdict": "in", "segment": "cpg_food_beverage", "tier": "A", "reason": "FrieslandCampina - major global dairy/CPG cooperative with large processing plants and distribution"}
+{"id": "55353156961", "verdict": "out", "segment": "", "tier": "", "reason": "engage.canva.com - Canva, software/design platform"}
+{"id": "55375089313", "verdict": "out", "segment": "", "tier": "", "reason": "Eurofins - laboratory testing/scientific services company"}
+{"id": "55390121581", "verdict": "in", "segment": "chemicals_plastics", "tier": "A", "reason": "Univar Solutions - large chemical/ingredient distributor with 500+ distribution locations globally"}
+{"id": "55399168792", "verdict": "out", "segment": "", "tier": "", "reason": "UCB - Belgian biopharmaceutical company, pharma R&D not freight-heavy enough"}
+{"id": "55474842767", "verdict": "out", "segment": "", "tier": "", "reason": "Neon (neon.tech) - cloud database/software company"}
+{"id": "55554491556", "verdict": "in", "segment": "chemicals_plastics", "tier": "B", "reason": "AOC Resins (aocresins.com) - composite resins/specialty chemicals mfg with multiple NA manufacturing plants"}
+{"id": "55554491677", "verdict": "in", "segment": "3pl_carrier", "tier": "A", "reason": "Rhenus Group (pl.rhenus.com) - major European 3PL with warehousing, ports, and global logistics network"}
+{"id": "55554494004", "verdict": "in", "segment": "building_materials_industrial", "tier": "B", "reason": "Beko (Arcelik) - large appliance manufacturer with significant production/distribution network"}
+{"id": "55554511663", "verdict": "out", "segment": "", "tier": "", "reason": "STS Aviation Group - aviation MRO and staffing services"}
+{"id": "55554513979", "verdict": "in", "segment": "automotive_heavy_mfg", "tier": "A", "reason": "Honda North America (hna.honda.com) - major auto OEM with large manufacturing plants and complex yard operations"}
+{"id": "8974635547", "verdict": "in", "segment": "automotive_heavy_mfg", "tier": "A", "reason": "Yanfeng - global tier-1 automotive supplier with many NA plants serving major OEMs"}
+{"id": "8981888131", "verdict": "review", "segment": "", "tier": "", "reason": "Qualianz - cold storage acquired by Emergent Cold LatAm; operations in Mexico, not clearly NA per criteria"}
+{"id": "9177873579", "verdict": "out", "segment": "", "tier": "", "reason": "AEFES Army Air Force Exchange - military retail exchange, government"}
+{"id": "9337771776", "verdict": "in", "segment": "3pl_carrier", "tier": "C", "reason": "McClay Logistics - name indicates freight/logistics carrier, likely small/regional"}
+{"id": "9392377938", "verdict": "in", "segment": "3pl_carrier", "tier": "C", "reason": "Leeway Transport - name clearly indicates freight transport company"}
+{"id": "9392793192", "verdict": "out", "segment": "", "tier": "", "reason": "Healthmark Industries - medical device/infection control products for healthcare facilities"}

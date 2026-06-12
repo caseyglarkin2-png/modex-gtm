@@ -1,0 +1,120 @@
+{"id":"54784554420","name":"Velocity Ventures","verdict":"out","segment":"","tier":"","reason":"Venture capital / investment firm, no physical freight-moving facilities"}
+{"id":"54784554670","name":"University of New Brunswick","verdict":"out","segment":"","tier":"","reason":"Higher education institution, no freight yard network"}
+{"id":"54784556665","name":"Revere Industries","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Multi-site industrial manufacturer (metal/plastic components) with plants in US and Canada"}
+{"id":"54784556701","name":"Jersey Mike's","verdict":"out","segment":"","tier":"","reason":"QSR restaurant chain, no DC/yard network in scope"}
+{"id":"54784559132","name":"rayrodriguez.org","verdict":"out","segment":"","tier":"","reason":"Personal/individual website, not a company"}
+{"id":"54784563288","name":"Poulin Lumber","verdict":"in","segment":"building_materials_industrial","tier":"C","reason":"Regional lumber/building materials dealer in Vermont/New England with distribution yards"}
+{"id":"54784572038","name":"Staats Solutions","verdict":"out","segment":"","tier":"","reason":"Virtual real estate operations management firm, no physical freight facilities"}
+{"id":"54784576602","name":"University of Tulsa","verdict":"out","segment":"","tier":"","reason":"University, out of scope"}
+{"id":"54784598027","name":"North Penn School District","verdict":"out","segment":"","tier":"","reason":"K-12 school district, government/education, out of scope"}
+{"id":"54784604212","name":"Ruby Tuesday Restaurants","verdict":"out","segment":"","tier":"","reason":"Restaurant chain (QSR/casual dining), no freight yard network"}
+{"id":"54784690535","name":"Medesto Health / Perigon Health","verdict":"out","segment":"","tier":"","reason":"Healthcare provider, out of scope"}
+{"id":"54784714402","name":"Arcelik","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Major Turkish consumer electronics/appliance manufacturer with North American distribution network"}
+{"id":"54784727464","name":"Upstate Niagara Cooperative","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Large dairy cooperative with 6+ production/distribution facilities across NY and PA"}
+{"id":"54784738152","name":"AgReliant Genetics","verdict":"in","segment":"agriculture_food_processing","tier":"B","reason":"Largest North American seed company with 24 locations and significant logistics/distribution"}
+{"id":"54784740959","name":"Metra","verdict":"out","segment":"","tier":"","reason":"Commuter rail transit authority, passenger transportation, out of scope"}
+{"id":"54784749832","name":"TOTO","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Global plumbing/fixture manufacturer with North American manufacturing and distribution facilities"}
+{"id":"54784753057","name":"Ingram Micro Services","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Global IT/electronics wholesale distributor with massive North American DC network"}
+{"id":"54784767045","name":"ikonet.co.jp","verdict":"out","segment":"","tier":"","reason":"Japanese company, domain suggests IT/software, no North American freight presence identified"}
+{"id":"54784767871","name":"Invenco","verdict":"out","segment":"","tier":"","reason":"Payment solutions technology company for convenience stores, no freight yard network"}
+{"id":"54784774300","name":"VinFast","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"EV manufacturer with North American assembly plant (NC) and growing distribution network"}
+{"id":"54784775854","name":"SGC Sunshine PCB","verdict":"out","segment":"","tier":"","reason":"Chinese PCB manufacturer, no significant North American freight yard footprint identified"}
+{"id":"54784776242","name":"a123systems.eu","verdict":"out","segment":"","tier":"","reason":"European battery systems company, no North American yard network identified"}
+{"id":"54784778673","name":"Scranton/Wilkes-Barre RailRiders","verdict":"out","segment":"","tier":"","reason":"Minor league baseball team, sports/entertainment, out of scope"}
+{"id":"54784782224","name":"Peapod Digital Labs","verdict":"out","segment":"","tier":"","reason":"Digital/technology arm of Ahold Delhaize, software/IT, not a freight operator itself"}
+{"id":"54784782602","name":"IndiGo","verdict":"out","segment":"","tier":"","reason":"Indian passenger airline, passenger aviation, out of scope"}
+{"id":"54784784526","name":"ECCA","verdict":"out","segment":"","tier":"","reason":"HR/insurance software company in Erie PA, no freight facilities"}
+{"id":"54784785080","name":"NanoString","verdict":"out","segment":"","tier":"","reason":"Life sciences/genomics technology company, not a freight-heavy manufacturer or distributor"}
+{"id":"54784785974","name":"St. Dominic Hospital","verdict":"out","segment":"","tier":"","reason":"Hospital/healthcare provider, out of scope"}
+{"id":"54784786050","name":"Digital Lab Consulting","verdict":"out","segment":"","tier":"","reason":"IT consulting firm, out of scope"}
+{"id":"54784789944","name":"harvardservices.com","verdict":"out","segment":"","tier":"","reason":"Domain suggests facilities/janitorial services, out of scope"}
+{"id":"54784790078","name":"Nalcor Energy","verdict":"out","segment":"","tier":"","reason":"Newfoundland electric/hydro utility, out of scope"}
+{"id":"54784791329","name":"Aisin","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Major Japanese automotive parts manufacturer with multiple North American plants (IN, KY, TX, etc.)"}
+{"id":"54784797200","name":"Topcon Healthcare Solutions","verdict":"out","segment":"","tier":"","reason":"Healthcare/ophthalmic imaging technology, no freight yard network"}
+{"id":"54784797601","name":"New York Jets (NFL)","verdict":"out","segment":"","tier":"","reason":"Professional sports franchise, out of scope"}
+{"id":"54784797705","name":"vertime.ch","verdict":"out","segment":"","tier":"","reason":"Swiss watch/time company, no North American freight yard network"}
+{"id":"54784801894","name":"Global Franchise Group","verdict":"out","segment":"","tier":"","reason":"QSR franchise management (Round Table Pizza, etc.), restaurant sector, out of scope"}
+{"id":"54784801901","name":"Familiprix","verdict":"out","segment":"","tier":"","reason":"Quebec pharmacy cooperative chain, retail pharmacy, out of scope"}
+{"id":"54784804906","name":"FNIH","verdict":"out","segment":"","tier":"","reason":"Foundation for NIH, nonprofit research funding organization, out of scope"}
+{"id":"54784805134","name":"cambro.com.tr","verdict":"out","segment":"","tier":"","reason":"Turkish branch of Cambro foodservice equipment, insufficient North American freight footprint at this entity level"}
+{"id":"54784805926","name":"Lycette Designs","verdict":"out","segment":"","tier":"","reason":"Small design/apparel firm, no freight yard network"}
+{"id":"54784807337","name":"Dynetics","verdict":"out","segment":"","tier":"","reason":"Aerospace and defense contractor (Leidos subsidiary), out of scope"}
+{"id":"54784808464","name":"pplguard.com","verdict":"out","segment":"","tier":"","reason":"Security guard/services company, out of scope"}
+{"id":"54784809996","name":"Yusen Logistics Canada","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"3PL with multiple Canadian DC/warehouse facilities (Brampton, Surrey, Montreal) and freight operations"}
+{"id":"54784810841","name":"eAviation","verdict":"out","segment":"","tier":"","reason":"Electric aviation startup, no freight yard network in scope"}
+{"id":"54784810848","name":"Shard International (shardaintl.com)","verdict":"out","segment":"","tier":"","reason":"Indian agrochemical export company, no North American physical yard network"}
+{"id":"54784812406","name":"Bunzl Retail USA","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"National consolidated distributor with 12+ warehouses and 3M+ sq ft across North America"}
+{"id":"54784814138","name":"Dollar Tree Stores","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Large national discount retailer with massive DC network across North America"}
+{"id":"54784817050","name":"Barclays","verdict":"out","segment":"","tier":"","reason":"Major UK/global bank, financial services, out of scope"}
+{"id":"54784820998","name":"Gold's Gym TX","verdict":"out","segment":"","tier":"","reason":"Fitness gym operator/franchise, no freight yard network"}
+{"id":"54784821028","name":"Rusnak Auto Group","verdict":"out","segment":"","tier":"","reason":"Luxury auto dealership group, retail automotive, not a manufacturer/distributor with yards"}
+{"id":"54784821112","name":"Amphenol (FCI)","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Global connector/electronics components manufacturer with multiple North American plants"}
+{"id":"54784822406","name":"Bully Pulpit International","verdict":"out","segment":"","tier":"","reason":"Political/PR communications firm, out of scope"}
+{"id":"54784832167","name":"Wolak Group","verdict":"out","segment":"","tier":"","reason":"Dunkin' franchisee operator (95+ restaurants), QSR/food service, out of scope"}
+{"id":"54784832634","name":"Light Links Inc.","verdict":"out","segment":"","tier":"","reason":"Small telecom/IT company, no freight yard network"}
+{"id":"54784832806","name":"Emerson Process Management","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Industrial automation/process control manufacturer (Emerson subsidiary) with significant NA manufacturing and distribution"}
+{"id":"54784834909","name":"Culver's","verdict":"out","segment":"","tier":"","reason":"QSR burger chain franchisee/operator, out of scope"}
+{"id":"54784834994","name":"StimWrx Energy Services (CES)","verdict":"out","segment":"","tier":"","reason":"Oilfield well stimulation services (chemical pumping), service company without fixed yard network in scope"}
+{"id":"54784836429","name":"Lehman's","verdict":"out","segment":"","tier":"","reason":"Specialty retail/e-commerce for non-electric goods, small retailer, out of scope"}
+{"id":"54784839332","name":"Amentum (global.amentum.com)","verdict":"out","segment":"","tier":"","reason":"Government services/defense contractor, out of scope"}
+{"id":"54784845739","name":"Direct Supply","verdict":"out","segment":"","tier":"","reason":"Healthcare/senior living procurement tech and supply company, not freight-heavy industrial distribution"}
+{"id":"54785005142","name":"Lumber Liquidators","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"National flooring/lumber retailer with distribution centers and high freight volume"}
+{"id":"54785008961","name":"Morris Home Furniture","verdict":"out","segment":"","tier":"","reason":"Regional furniture retailer (Ohio), insufficient multi-facility yard network"}
+{"id":"54785009258","name":"Seaboard Solutions","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Miami-based 3PL/freight forwarding company with warehousing and distribution operations"}
+{"id":"54785009810","name":"Brandwatch","verdict":"out","segment":"","tier":"","reason":"Social media analytics/SaaS platform, out of scope"}
+{"id":"54785011317","name":"Great Lakes Wine & Spirits","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Michigan's largest beverage alcohol distributor with statewide warehouse/distribution network and 800+ employees"}
+{"id":"54785011883","name":"Missouri DOT (modot.mo.gov)","verdict":"out","segment":"","tier":"","reason":"State government transportation department, out of scope"}
+{"id":"54785012127","name":"sug.biz","verdict":"out","segment":"","tier":"","reason":"Unknown small company, insufficient information, likely out of scope"}
+{"id":"54785012849","name":"GP Mobile","verdict":"out","segment":"","tier":"","reason":"T-Mobile authorized dealer/retail, no freight yard network"}
+{"id":"54785012906","name":"Minnesota Power","verdict":"out","segment":"","tier":"","reason":"Electric utility, out of scope"}
+{"id":"54785014026","name":"Grupo Phoenix","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Major rigid packaging manufacturer with 16 production plants across Americas including US and Mexico"}
+{"id":"54785019701","name":"Inscape Publishing","verdict":"out","segment":"","tier":"","reason":"Publishing/assessment tools company, out of scope"}
+{"id":"54785020029","name":"Celebrity Cruises","verdict":"out","segment":"","tier":"","reason":"Cruise line, passenger maritime, out of scope"}
+{"id":"54785020299","name":"Trinity Logistics MN","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Regional logistics/trucking broker in Minnesota with freight operations"}
+{"id":"54785024100","name":"Beyond Hello","verdict":"out","segment":"","tier":"","reason":"Cannabis dispensary retail chain, out of scope"}
+{"id":"54785024926","name":"MAGNA (magnaglobal.com)","verdict":"out","segment":"","tier":"","reason":"Magna Global is a media investment/advertising agency (IPG/McCann), not Magna International; out of scope"}
+{"id":"54785025123","name":"AECOM Hunt","verdict":"out","segment":"","tier":"","reason":"Construction management/general contractor (project-based), no fixed DC/yard network"}
+{"id":"54785030802","name":"SP Domino's","verdict":"out","segment":"","tier":"","reason":"Domino's Pizza franchisee operator, QSR, out of scope"}
+{"id":"54785034410","name":"Quality Beverage","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Massachusetts beverage alcohol distributor (Martignetti) with multiple distribution centers and fleet"}
+{"id":"54785035072","name":"General Cable","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Global wire/cable manufacturer (Prysmian subsidiary) with multiple North American manufacturing plants"}
+{"id":"54785035603","name":"Emerald Hills Funeral Home","verdict":"out","segment":"","tier":"","reason":"Funeral home, out of scope"}
+{"id":"54785036084","name":"Holman Automotive","verdict":"out","segment":"","tier":"","reason":"Auto dealership group / fleet management, retail automotive, out of scope"}
+{"id":"54785036306","name":"Bluestem Brands","verdict":"in","segment":"ecommerce_parcel","tier":"B","reason":"E-commerce retailer (~$2B revenue, Fingerhut etc.) with multiple fulfillment/distribution centers"}
+{"id":"54785040690","name":"Estee Lauder (be.estee.com)","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Global beauty/CPG company with extensive North American manufacturing and distribution network"}
+{"id":"54785041286","name":"Spectrum Brands (EU)","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Global consumer goods/CPG manufacturer with North American plants and DC network"}
+{"id":"54785041432","name":"MIH Systems Group","verdict":"out","segment":"","tier":"","reason":"IT systems/technology integration company, out of scope"}
+{"id":"54785043461","name":"Compass Group Careers","verdict":"out","segment":"","tier":"","reason":"Contract food service/catering company, hospitality/food services, out of scope"}
+{"id":"54785044333","name":"Trident (Sonoco-Trident)","verdict":"out","segment":"","tier":"","reason":"Graphics pre-media/packaging design services firm, professional services, not a freight operator"}
+{"id":"54785055392","name":"IHOP Lucinda","verdict":"out","segment":"","tier":"","reason":"IHOP restaurant franchisee, QSR/casual dining, out of scope"}
+{"id":"54785058841","name":"Ferman (ferman.com)","verdict":"out","segment":"","tier":"","reason":"Auto dealership group in Florida, retail automotive, out of scope"}
+{"id":"54785058990","name":"Penn-Co Construction (grahamus.com)","verdict":"out","segment":"","tier":"","reason":"General contractor (civil/heavy construction), project-based, no fixed DC/yard network"}
+{"id":"54785058991","name":"Plastipak (plastipak.com.br)","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Major plastic packaging manufacturer with plants in US, Brazil and globally; high freight volume"}
+{"id":"54785059590","name":"Safeway Parking CA","verdict":"out","segment":"","tier":"","reason":"Parking services company in Canada, out of scope"}
+{"id":"54785059877","name":"Resonetics (memry.com)","verdict":"out","segment":"","tier":"","reason":"Medical device precision manufacturing (Nitinol), not a freight-heavy distribution operation"}
+{"id":"54785064300","name":"AEGL (aegl.net)","verdict":"out","segment":"","tier":"","reason":"Environmental/landfill services contractor, project-based, not a fixed yard network operator"}
+{"id":"54785064706","name":"MaRS Discovery District","verdict":"out","segment":"","tier":"","reason":"Innovation hub/startup accelerator in Toronto, out of scope"}
+{"id":"54785064879","name":"Phoenix Leisure Group","verdict":"out","segment":"","tier":"","reason":"Australian leisure/hospitality company, no North American freight yard network"}
+{"id":"54785065539","name":"Senior Aerospace Spencer","verdict":"out","segment":"","tier":"","reason":"Aerospace components manufacturer, aerospace/defense, out of scope"}
+{"id":"54785065739","name":"Ash City (ashcity.com)","verdict":"out","segment":"","tier":"","reason":"Corporate apparel/promotional products brand, not a freight-heavy operation"}
+{"id":"54785069967","name":"Vectura","verdict":"out","segment":"","tier":"","reason":"UK pharmaceutical/drug delivery company, pharma R&D, insufficient NA freight yard network"}
+{"id":"54785071397","name":"Howard Power Solutions","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Major transformer manufacturer (Howard Industries) with large NA manufacturing plants serving utilities and industry"}
+{"id":"54785071647","name":"3 Principles Integrated","verdict":"out","segment":"","tier":"","reason":"Consulting/professional services firm, out of scope"}
+{"id":"54785071650","name":"Ellis House Group (UK)","verdict":"out","segment":"","tier":"","reason":"UK-based company, no North American freight yard operations identified"}
+{"id":"54785074301","name":"Hunt Energy","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"Hunt Oil/Hunt Consolidated, large privately-held E&P company with refining, LNG, and extensive NA operations"}
+{"id":"54785075075","name":"San Diego McDonald's (sandiegomcd.com)","verdict":"out","segment":"","tier":"","reason":"McDonald's franchise operator, QSR, out of scope"}
+{"id":"54785079714","name":"ODL Europe (odleurope.com)","verdict":"out","segment":"","tier":"","reason":"European building products company, insufficient North American freight yard presence"}
+{"id":"54785080737","name":"Nidec (nidec-mk.com)","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Global electric motor manufacturer with multiple North American plants and distribution"}
+{"id":"54785080755","name":"Guernsey Holdings","verdict":"out","segment":"","tier":"","reason":"QSR franchise holding company, food service, out of scope"}
+{"id":"54785085335","name":"Georgia Department of Labor","verdict":"out","segment":"","tier":"","reason":"State government agency, out of scope"}
+{"id":"54785085993","name":"bbcgrp.com","verdict":"review","segment":"","tier":"","reason":"Cannot determine company identity or industry from domain alone"}
+{"id":"54785086384","name":"Nordia","verdict":"out","segment":"","tier":"","reason":"Canadian call center/CX outsourcing provider, no freight yard network"}
+{"id":"54785086577","name":"Alta Material Handling","verdict":"out","segment":"","tier":"","reason":"Forklift dealer/service company in Ontario/Quebec, not a freight operator with yards"}
+{"id":"54785086636","name":"nbem.ca","verdict":"review","segment":"","tier":"","reason":"Unknown company from domain alone, insufficient information to classify"}
+{"id":"54785086747","name":"Caliper","verdict":"out","segment":"","tier":"","reason":"HR/talent assessment software company, out of scope"}
+{"id":"54785086804","name":"Independent Reserve","verdict":"out","segment":"","tier":"","reason":"Australian cryptocurrency exchange, out of scope"}
+{"id":"54785088151","name":"Champion Home Exteriors","verdict":"out","segment":"","tier":"","reason":"Home improvement/windows/siding retailer and installer, no freight yard DC network"}
+{"id":"54785088340","name":"nipromed.com","verdict":"out","segment":"","tier":"","reason":"Medical/pharmaceutical company, insufficient NA freight yard footprint identified"}
+{"id":"54785088620","name":"Sunrise Fresh Produce","verdict":"in","segment":"agriculture_food_processing","tier":"C","reason":"Regional fresh produce distributor in Mississippi with warehouse fleet serving restaurants and markets"}
+{"id":"54785090711","name":"United Engines","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Industrial engine/transmission manufacturer and oilfield equipment maker (Kirby subsidiary) with multiple NA facilities"}
+{"id":"54785096837","name":"Nichols Management","verdict":"out","segment":"","tier":"","reason":"Management/consulting company, out of scope"}
+{"id":"54785099447","name":"icsecurity.com.ve","verdict":"out","segment":"","tier":"","reason":"Venezuelan security company, no North American freight yard network"}

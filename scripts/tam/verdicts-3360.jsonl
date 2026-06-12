@@ -1,0 +1,120 @@
+{"id":"55459326101","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Kohl's DC — major national retailer distribution center with high freight volume"}
+{"id":"55459326102","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Tyson Foods DC — national meat processor distribution center"}
+{"id":"55459326132","verdict":"out","segment":"","tier":"","reason":"Twin Leaf Farms — small-batch maple syrup producer, no significant yard network"}
+{"id":"55459326210","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Sysco East Texas — large broadline foodservice distributor with high truck volume"}
+{"id":"55459344201","verdict":"in","segment":"cold_chain","tier":"A","reason":"Lineage Logistics Jacksonville West — national cold storage network, enterprise tier"}
+{"id":"55459344253","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Smithfield Foods DC — major pork processor distribution center"}
+{"id":"55459344434","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Uline Shipping Supplies — national industrial/packaging distributor with large DCs"}
+{"id":"55459352832","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Ben E. Keith Foods — regional foodservice distributor, multiple DCs"}
+{"id":"55459352882","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Whirlpool DC — major appliance manufacturer distribution center"}
+{"id":"55459352909","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Albertsons Manufacturing Plant — major grocery chain production/distribution facility"}
+{"id":"55459352916","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Sonoco Products Co — major packaging manufacturer, multiple plants"}
+{"id":"55459415891","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Ocean Spray — national cranberry cooperative with processing plants and DCs"}
+{"id":"55459418445","verdict":"out","segment":"","tier":"","reason":"Mohawk Travel Plaza — highway travel plaza/fuel stop, not a freight yard operator"}
+{"id":"55459434341","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Pepsi-Cola of Florence — regional Pepsi bottler/distributor with warehouse operations"}
+{"id":"55459434374","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Conagra Brands Russellville — major CPG manufacturer plant"}
+{"id":"55459434420","verdict":"in","segment":"paper_packaging","tier":"C","reason":"Rios Packaging Corporation — small bakery/corrugated box manufacturer, single facility"}
+{"id":"55459441023","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Pepsi bottling warehouse — Pepsi distribution/bottling facility"}
+{"id":"55459441194","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Smurfit Westrock Longview — major paper/packaging manufacturer plant"}
+{"id":"55459441213","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Amcor Rigid Plastics — global packaging manufacturer, multiple facilities"}
+{"id":"55459441226","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Tractor Supply Company DC — national farm/ranch retail chain distribution center"}
+{"id":"55459443337","verdict":"out","segment":"","tier":"","reason":"Blu LNG — LNG fueling station operator for trucks, not a freight yard/DC operator"}
+{"id":"55459447409","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Bimbo Bakeries/Sara Lee DC — major national bakery distribution center"}
+{"id":"55459447455","verdict":"in","segment":"cold_chain","tier":"B","reason":"P & B Cold Storage Georgia — cold storage/logistics facility"}
+{"id":"55459447671","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Shamrock Foodservice Warehouse Denver — regional foodservice distributor warehouse"}
+{"id":"55459447859","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Schreiber Foods — major global dairy/cheese manufacturer with numerous plants and DCs"}
+{"id":"55459456847","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"PepsiCo truck entrance — PepsiCo plant/distribution facility"}
+{"id":"55459456880","verdict":"in","segment":"ecommerce_parcel","tier":"A","reason":"Flexport DFW1 Fulfillment Center — major 3PL/ecommerce fulfillment operator"}
+{"id":"55459456929","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Sysco Central Florida — large broadline foodservice distributor with high truck volume"}
+{"id":"55459457035","verdict":"out","segment":"","tier":"","reason":"MHC Kenworth Denver — heavy truck dealership, not a freight yard/DC operator"}
+{"id":"55459460949","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Penske Warehouse — major 3PL/logistics provider warehouse facility"}
+{"id":"55459461003","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Ashley HomeStore DC — major furniture manufacturer/retailer distribution center"}
+{"id":"55459461040","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Damascus Warehouse (Sonoco) — Sonoco packaging storage/distribution facility"}
+{"id":"55459463350","verdict":"in","segment":"paper_packaging","tier":"A","reason":"International Paper Co — major paper/packaging manufacturer with numerous mills and DCs"}
+{"id":"55459465081","verdict":"in","segment":"cold_chain","tier":"A","reason":"Sysco Cold Storage — cold chain storage operated by Sysco, major foodservice distributor"}
+{"id":"55459465274","verdict":"in","segment":"cold_chain","tier":"B","reason":"Pioneer Cold Logistic Services — cold storage logistics provider"}
+{"id":"55459467597","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Sysco Alachua FL — Sysco foodservice distribution facility"}
+{"id":"55459467688","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Sonoco Recycling — Sonoco packaging subsidiary with recycling facilities"}
+{"id":"55459469609","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Pepsi Tampa — regional Pepsi bottling/distribution facility"}
+{"id":"55459469669","verdict":"in","segment":"ecommerce_parcel","tier":"A","reason":"Chewy Fulfillment Center CFC1 — large pet supply ecommerce fulfillment center"}
+{"id":"55459469680","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Smurfit Westrock Houston Sheet Plant — major paper/packaging manufacturer plant"}
+{"id":"55459473746","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Ryder Distribution Center — national 3PL/logistics provider distribution facility"}
+{"id":"55459473762","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Pepsi Truck Entrance/Exit — Pepsi plant/distribution facility with active truck gate"}
+{"id":"55459476345","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Pepsi Bottling Ventures LLC — regional Pepsi bottling/distribution operation"}
+{"id":"55459476375","verdict":"in","segment":"paper_packaging","tier":"B","reason":"Highland Packaging Solutions (Toppan) — packaging manufacturer, part of global Toppan group"}
+{"id":"55459482656","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Swift Transportation Terminal II — major truckload carrier terminal"}
+{"id":"55459482710","verdict":"in","segment":"ecommerce_parcel","tier":"A","reason":"Chewy Fulfillment Center MDT1 — large pet supply ecommerce fulfillment center"}
+{"id":"55459484470","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Penske Logistics — national 3PL/dedicated contract logistics provider"}
+{"id":"55459484519","verdict":"in","segment":"ecommerce_parcel","tier":"A","reason":"UPS Offices & Warehouse — national parcel carrier with large sort/distribution facility"}
+{"id":"55459484676","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Tyson Processing Plant Monroe NC — major poultry processing facility"}
+{"id":"55459484682","verdict":"in","segment":"ecommerce_parcel","tier":"A","reason":"Chewy Fulfillment Center HOU1 — large pet supply ecommerce fulfillment center"}
+{"id":"55459486807","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"PepsiCo Mt. Creek — PepsiCo manufacturing/distribution facility"}
+{"id":"55459486839","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Tyson Foods Russellville DC — major poultry processor distribution center"}
+{"id":"55459489591","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Lowe's Flatbed DC — national home improvement retailer distribution center"}
+{"id":"55459489624","verdict":"in","segment":"paper_packaging","tier":"B","reason":"Corrugated Concepts & Packaging — corrugated packaging manufacturer with plant operations"}
+{"id":"55459489637","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Mars Petcare Warehouse — major CPG pet food company warehouse facility"}
+{"id":"55459489663","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Lowe's Regional DC — national home improvement retailer regional distribution center"}
+{"id":"55459489698","verdict":"out","segment":"","tier":"","reason":"Linder Industrial Machinery — construction/mining equipment dealer, no freight yard network"}
+{"id":"55459489708","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Tractor Supply Longview DC — national farm/ranch retail chain distribution center"}
+{"id":"55459491461","verdict":"in","segment":"cold_chain","tier":"A","reason":"Americold Cold Storage — largest publicly traded cold storage REIT, national network"}
+{"id":"55459491480","verdict":"out","segment":"","tier":"","reason":"Newaygo Co DHS Food Distribution Center — government/county DHS food program, not commercial freight"}
+{"id":"55459491489","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Tractor Supply Co Distribution — national farm/ranch retail chain distribution facility"}
+{"id":"55459493944","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Hershey's Annville Fulfillment Center — major confectionery company fulfillment facility"}
+{"id":"55459493956","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Red Bull Distribution Center — major energy drink company distribution facility"}
+{"id":"55459498543","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Sysco Northern New England — Sysco broadline foodservice distributor facility"}
+{"id":"55459500864","verdict":"in","segment":"cold_chain","tier":"A","reason":"Lineage Logistics Lancaster TX — national cold storage network enterprise facility"}
+{"id":"55459501101","verdict":"in","segment":"retail_grocery","tier":"B","reason":"Meijer Roasting & Packaging — Meijer grocery chain manufacturing/packaging facility"}
+{"id":"55459505219","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"KeHE Distributors LHV — national natural/organic food distributor with large DCs"}
+{"id":"55459506528","verdict":"in","segment":"retail_grocery","tier":"A","reason":"TJ Maxx DC — major off-price retailer distribution center"}
+{"id":"55459506537","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Smurfit Westrock Conway Folding Carton Plant — major paper/packaging manufacturer plant"}
+{"id":"55459508080","verdict":"in","segment":"cold_chain","tier":"A","reason":"Americold Logistics Russellville Elmira — Americold national cold storage network facility"}
+{"id":"55459508119","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Gordon Food Service DC — major foodservice distributor distribution center"}
+{"id":"55459508125","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Pepsi-Cola Co — major beverage manufacturer/distributor facility"}
+{"id":"55459513765","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Dollar General DC OTR Gate — national discount retailer distribution center with high truck volume"}
+{"id":"55459513766","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Shamrock Foodservice Warehouse — regional foodservice distributor warehouse"}
+{"id":"55459513858","verdict":"in","segment":"paper_packaging","tier":"B","reason":"Multicell North Inc — packaging manufacturer (chipboard partitions) with plant operations"}
+{"id":"55459515188","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Cardinal Health at Home DC — major healthcare products distributor"}
+{"id":"55459515208","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Bridgestone Firestone DC — major tire manufacturer distribution center"}
+{"id":"55459515213","verdict":"in","segment":"retail_grocery","tier":"A","reason":"ALDI DC — national grocery chain distribution center"}
+{"id":"55459515265","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Crossdock in Elk Grove Village — dedicated crossdock facility, freight-heavy operation"}
+{"id":"55459515300","verdict":"out","segment":"","tier":"","reason":"FreightRun — freight rate comparison SaaS/marketplace, not a physical yard operator"}
+{"id":"55459517474","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Progressive Logistics Inc — 3PL warehousing/logistics provider with ~1M sq ft warehouse space"}
+{"id":"55459518485","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Grainger Industrial Supply — national MRO distributor with large DCs and high freight volume"}
+{"id":"55459518875","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"AM Logistics Group — 3PL provider with warehousing and distribution services"}
+{"id":"55459521937","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Ryder Warehouse — national 3PL/logistics provider warehouse facility"}
+{"id":"55459522053","verdict":"in","segment":"paper_packaging","tier":"A","reason":"International Paper Beltline Container Plant — major paper/packaging manufacturer plant"}
+{"id":"55459522059","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Crossdock 24/365 — dedicated crossdock freight facility"}
+{"id":"55459522847","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Hoosier Freight and Warehouse — 3PL with ~1M sq ft warehousing, food-grade certified, Indiana"}
+{"id":"55459525294","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Flexport Denver — major 3PL/freight forwarding and fulfillment operator"}
+{"id":"55459525432","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Walgreens DC — national pharmacy/retail chain distribution center"}
+{"id":"55459528820","verdict":"in","segment":"cold_chain","tier":"A","reason":"Americold Logistics Grand Rapids — Americold national cold storage network facility"}
+{"id":"55459528972","verdict":"out","segment":"","tier":"","reason":"Wisconsin Kenworth Madison — heavy truck dealership, not a freight yard/DC operator"}
+{"id":"55459529090","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Graphic Packaging — major consumer packaging manufacturer with numerous plants"}
+{"id":"55459532894","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"R+L Carriers — major regional LTL carrier with terminal network"}
+{"id":"55459532937","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Home Depot warehouse — major home improvement retailer warehouse/distribution facility"}
+{"id":"55459533075","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Hershey's Weaver Popcorn Manufacturing — Hershey's snack food manufacturing plant"}
+{"id":"55459533076","verdict":"in","segment":"paper_packaging","tier":"B","reason":"Neway Packaging Corporation — corrugated/packaging manufacturer with plant operations"}
+{"id":"55459533199","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"UTZ Quality Foods Inc — regional snack food manufacturer with plants and DCs"}
+{"id":"55459533209","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Meijer DC-92 — major Midwest grocery/supercenter chain distribution center"}
+{"id":"55459534944","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Amcor plastic — Amcor global packaging manufacturer, plastic packaging facility"}
+{"id":"55459534984","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Dollar Tree DC — national discount retailer distribution center"}
+{"id":"55459535018","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Earnest Machine — industrial fastener distributor with multiple DCs, freight-heavy wholesale ops"}
+{"id":"55459538230","verdict":"in","segment":"ecommerce_parcel","tier":"A","reason":"US Postal Service — national parcel/mail carrier with large processing and distribution facilities"}
+{"id":"55459540349","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"CEVA Logistics Pelican DC — global 3PL provider distribution center"}
+{"id":"55459540350","verdict":"in","segment":"ecommerce_parcel","tier":"B","reason":"Cart.com Longview Fulfillment Center — 3PL ecommerce fulfillment with multiple US facilities"}
+{"id":"55459540378","verdict":"in","segment":"cold_chain","tier":"A","reason":"Americold Logistics Hatfield — Americold national cold storage network facility"}
+{"id":"55459540383","verdict":"in","segment":"cold_chain","tier":"A","reason":"Americold Logistics C of I 14890 — Americold national cold storage network facility"}
+{"id":"55459540400","verdict":"in","segment":"cold_chain","tier":"A","reason":"Americold Logistics Russellville 324 — Americold national cold storage network facility"}
+{"id":"55459540542","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Mohawk Global — freight forwarding/3PL with 9 offices, intermodal/customs brokerage services"}
+{"id":"55459542588","verdict":"out","segment":"","tier":"","reason":"Scott's Auto Carrier Denver — vehicle/car transport broker, no fixed yard/DC network"}
+{"id":"55459542603","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Sysco West Coast Florida — Sysco broadline foodservice distributor facility"}
+{"id":"55459542644","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Double A Logistics — small interstate freight carrier/broker, limited scale"}
+{"id":"55459542651","verdict":"in","segment":"ecommerce_parcel","tier":"A","reason":"Chewy Fulfillment Center DAY1 — large pet supply ecommerce fulfillment center"}
+{"id":"55459544942","verdict":"in","segment":"retail_grocery","tier":"A","reason":"AutoZone DC — national auto parts retailer distribution center"}
+{"id":"55459544954","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Best Buy Warehouse Polk City — major consumer electronics retailer warehouse"}
+{"id":"55459545000","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Ball Metal Beverage Container — major aluminum can manufacturer with large plants"}
+{"id":"55459545102","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"XPO Global Logistics — major global 3PL/LTL carrier with large terminal network"}
+{"id":"55459546004","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Bridgestone Americas DC — major tire manufacturer national distribution center"}
+{"id":"55459546151","verdict":"in","segment":"paper_packaging","tier":"B","reason":"Baxter Packaging LLC — corrugated box manufacturer in East Texas with plant operations"}
+{"id":"55459546223","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Nfinity Courier And Logistics — small interstate carrier, 6 trucks, limited scale"}
+{"id":"55459548714","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Pepsi Beverages Co Tyler TX — regional Pepsi bottling/distribution facility"}

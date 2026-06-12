@@ -1,0 +1,120 @@
+{"id":"54785491490","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"FIFCO is a Costa Rican beer/beverage conglomerate with NA distribution operations and multiple production facilities"}
+{"id":"54785492135","verdict":"out","segment":"","tier":"","reason":"New Jersey Democratic Party is a political organization, not a freight-heavy commercial operator"}
+{"id":"54785494138","verdict":"out","segment":"","tier":"","reason":"Gil-Bar Health and Life Sciences is a healthcare consulting/life sciences services firm"}
+{"id":"54785496697","verdict":"out","segment":"","tier":"","reason":"Sendero Health Plans is a health insurance provider"}
+{"id":"54785499303","verdict":"out","segment":"","tier":"","reason":"Arkansas State University is a higher education institution"}
+{"id":"54785504044","verdict":"out","segment":"","tier":"","reason":"WGL Energy is a natural gas/electric utility, out per rules"}
+{"id":"54785506720","verdict":"out","segment":"","tier":"","reason":"AWP Safety provides traffic control/work zone safety services; no fixed DC yard network"}
+{"id":"54785509730","verdict":"out","segment":"","tier":"","reason":"BMW Hellas is BMW's Greek automotive retail/dealer subsidiary, no NA yard network"}
+{"id":"54785527557","verdict":"out","segment":"","tier":"","reason":"hk.estee.com is Estee Lauder Hong Kong subdomain; non-NA entity, no qualifying yard network"}
+{"id":"54785536336","verdict":"out","segment":"","tier":"","reason":"PECO Energy is a Philadelphia electric/gas utility, out per rules"}
+{"id":"54785540929","verdict":"out","segment":"","tier":"","reason":"monsterenergy.fr is Monster Energy France subdomain; non-NA entity"}
+{"id":"54785553769","verdict":"out","segment":"","tier":"","reason":"Encore Software is a software/technology company"}
+{"id":"54785569575","verdict":"out","segment":"","tier":"","reason":"birdcohandymab.com domain is unidentifiable; no evidence of qualifying industrial/freight operations"}
+{"id":"54785569582","verdict":"out","segment":"","tier":"","reason":"D.E. Harvey Builders is a general contractor with jobsite-based operations, no fixed DC/yard network"}
+{"id":"54785627457","verdict":"out","segment":"","tier":"","reason":"inVentiv Health is a pharma CRO/consulting services firm"}
+{"id":"54785639769","verdict":"out","segment":"","tier":"","reason":"Atlas Prep is an education/test prep company"}
+{"id":"54786111083","verdict":"out","segment":"","tier":"","reason":"GoAuto Insurance is an auto insurance provider"}
+{"id":"54786118762","verdict":"in","segment":"retail_grocery","tier":"B","reason":"RH (Restoration Hardware Holdings) is a large home furnishings retailer with multiple DCs and distribution network"}
+{"id":"54786121008","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"johnstoneoc.com is a Johnstone Supply HVAC wholesale distributor franchise with 450+ locations and regional DCs"}
+{"id":"54786122881","verdict":"out","segment":"","tier":"","reason":"Flogistix provides oil/gas compression field services; no fixed DC/yard network qualifying for YardFlow"}
+{"id":"54786123811","verdict":"out","segment":"","tier":"","reason":"Houston Foods Inc. is a small 2-10 person food/restaurant operation, insufficient scale"}
+{"id":"54786128464","verdict":"out","segment":"","tier":"","reason":"L3 Technologies is an aerospace and defense prime contractor, out per rules"}
+{"id":"54786148991","verdict":"out","segment":"","tier":"","reason":"rcab.org is the Roman Catholic Archdiocese of Boston, a nonprofit religious organization"}
+{"id":"54786150209","verdict":"out","segment":"","tier":"","reason":"Valiant Integrated Services is a defense/government mission support contractor"}
+{"id":"54786157339","verdict":"out","segment":"","tier":"","reason":"Arrowstreet Capital is a quantitative investment management firm"}
+{"id":"54786165602","verdict":"out","segment":"","tier":"","reason":"The Helix is an Irish concert venue/performing arts center"}
+{"id":"54786170992","verdict":"out","segment":"","tier":"","reason":"LTSNet is the Laboratory for Telecommunication Sciences, a government/defense research lab"}
+{"id":"54786173346","verdict":"out","segment":"","tier":"","reason":"bm1.brandsmart.com is BrandsMart USA electronics/appliance retail, small regional chain without qualifying yard network"}
+{"id":"54786175793","verdict":"out","segment":"","tier":"","reason":"planetfitnesswest.com is a Planet Fitness franchise operator, fitness/hospitality sector"}
+{"id":"54786175910","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"River States Truck is a truck dealership and fleet service operation with yard/logistics operations"}
+{"id":"54788406147","verdict":"review","segment":"","tier":"","reason":"secmsev.com is unidentifiable; no search results match this domain to any known company"}
+{"id":"54796376498","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Tempo Freight Systems is an active carrier with 215 tractors and drivers hauling general freight interstate"}
+{"id":"54796946486","verdict":"review","segment":"","tier":"","reason":"ecargorates.com returns no identifiable company; may be a freight rate tool or small operator"}
+{"id":"54797102981","verdict":"out","segment":"","tier":"","reason":"nassaustreethubsol.help is a spam/junk domain with no legitimate company identity"}
+{"id":"54797172861","verdict":"out","segment":"","tier":"","reason":"Oremota is unidentifiable as a freight-relevant company; no search results confirm industrial/logistics operations"}
+{"id":"54797200767","verdict":"out","segment":"","tier":"","reason":"youngstartupmailercampaign.com is a spam/marketing campaign domain"}
+{"id":"54797220222","verdict":"out","segment":"","tier":"","reason":"LedgerLync is a financial technology/accounting software company"}
+{"id":"54797227110","verdict":"out","segment":"","tier":"","reason":"financefactoryfundingcollective.com is a spam/finance domain"}
+{"id":"54797272984","verdict":"out","segment":"","tier":"","reason":"Mustang Optics appears to be a small optics/defense equipment supplier, insufficient scale for yard network"}
+{"id":"54797274251","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Colgate-Palmolive is a global CPG giant with dozens of NA manufacturing plants and distribution centers"}
+{"id":"54797671323","verdict":"out","segment":"","tier":"","reason":"nassaustreetfundpillarbest.help is a spam/junk domain"}
+{"id":"54797992097","verdict":"out","segment":"","tier":"","reason":"NFX is a venture capital/startup network firm"}
+{"id":"54798618999","verdict":"out","segment":"","tier":"","reason":"nassaustreetfundraisingfront.help is a spam/junk domain"}
+{"id":"54798709595","verdict":"out","segment":"","tier":"","reason":"brighthavennow.info is a spam/junk domain"}
+{"id":"54798836307","verdict":"out","segment":"","tier":"","reason":"financebankey.com is a spam/finance domain"}
+{"id":"54798880605","verdict":"out","segment":"","tier":"","reason":"nassaukeybridgeplus.info is a spam/junk domain"}
+{"id":"54798880606","verdict":"out","segment":"","tier":"","reason":"tryrevenuemarketingteam.help is a spam/junk domain"}
+{"id":"54799062796","verdict":"out","segment":"","tier":"","reason":"Growth Warrior Capital is a venture capital firm"}
+{"id":"54799068338","verdict":"out","segment":"","tier":"","reason":"businessdevelopmentconsultantsdc.info is a spam/consulting domain"}
+{"id":"54799171976","verdict":"out","segment":"","tier":"","reason":"olsd.us appears to be a school district (Olmsted Local School District), education sector"}
+{"id":"54799177037","verdict":"out","segment":"","tier":"","reason":"Arnett Carbis Toothman is a CPA/accounting firm"}
+{"id":"54799179412","verdict":"out","segment":"","tier":"","reason":"Orion Security Solutions is a security services/integration firm"}
+{"id":"54799179595","verdict":"out","segment":"","tier":"","reason":"1898 & Co. is an engineering/consulting firm (Burns & McDonnell subsidiary)"}
+{"id":"54799179803","verdict":"out","segment":"","tier":"","reason":"east.pharmasave.ca is a Pharmasave pharmacy retail chain subdomain, not freight-intensive"}
+{"id":"54799194452","verdict":"out","segment":"","tier":"","reason":"School Town of Speedway is a public school district"}
+{"id":"54799225231","verdict":"out","segment":"","tier":"","reason":"castro.co.il is an Israeli apparel retail chain, non-NA"}
+{"id":"54799229250","verdict":"out","segment":"","tier":"","reason":"Coppell Independent School District is a public school district"}
+{"id":"54799238562","verdict":"out","segment":"","tier":"","reason":"infretailers.com (INFRA) is a purchasing cooperative association for independent natural food retailers, not a freight operator"}
+{"id":"54799239694","verdict":"out","segment":"","tier":"","reason":"GetGo Cafe + Market is a convenience/fuel retail chain (Giant Eagle subsidiary), QSR/hospitality sector"}
+{"id":"54799242246","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"INOAC Corporation is a major Japanese automotive/industrial foam and plastics manufacturer with global production including NA facilities"}
+{"id":"54799251007","verdict":"out","segment":"","tier":"","reason":"Infor is an enterprise software/ERP company"}
+{"id":"54799256934","verdict":"out","segment":"","tier":"","reason":"kr.mcd.com is McDonald's Korea subdomain, QSR/restaurant sector"}
+{"id":"54799271461","verdict":"out","segment":"","tier":"","reason":"Grease Monkey International is an automotive quick-lube service franchise, no yard/DC network"}
+{"id":"54799272739","verdict":"out","segment":"","tier":"","reason":"Be Specialty Coffee is a small NZ specialty coffee roaster/shop"}
+{"id":"54799280404","verdict":"out","segment":"","tier":"","reason":"Aesculap AG is a German surgical instruments manufacturer, non-NA primary operations"}
+{"id":"54799292766","verdict":"out","segment":"","tier":"","reason":"Bloomberg L.P. is a financial data/media company"}
+{"id":"54799303488","verdict":"out","segment":"","tier":"","reason":"envistaco.cn is Envista dental products China subdomain, non-NA medical device entity"}
+{"id":"54799304570","verdict":"out","segment":"","tier":"","reason":"Compaid (compaid.com) is Computer Aid Inc., an IT consulting/software development firm"}
+{"id":"54799403343","verdict":"out","segment":"","tier":"","reason":"trytaxloans.help is a spam/finance domain"}
+{"id":"54799447733","verdict":"out","segment":"","tier":"","reason":"lockheedmartin.fr is Lockheed Martin France, aerospace and defense prime, out per rules"}
+{"id":"54799462458","verdict":"out","segment":"","tier":"","reason":"Alpine Immune Sciences is a clinical-stage biopharmaceutical company"}
+{"id":"54799464850","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Metsä Group is a major Finnish forest industry company with significant NA paper/pulp/packaging operations and distribution"}
+{"id":"54799477587","verdict":"out","segment":"","tier":"","reason":"nassauteamwise.info is a spam/junk domain"}
+{"id":"54799478785","verdict":"out","segment":"","tier":"","reason":"applied-aerospace.com is an aerospace company, out per rules"}
+{"id":"54799495011","verdict":"out","segment":"","tier":"","reason":"bk-tulsa.com appears to be a Burger King franchise operator, QSR sector"}
+{"id":"54799498868","verdict":"out","segment":"","tier":"","reason":"nassaustreetglobalgroupco.info is a spam/junk domain"}
+{"id":"54799499132","verdict":"out","segment":"","tier":"","reason":"gcrta.org is the Greater Cleveland Regional Transit Authority, government/public transit"}
+{"id":"54799502992","verdict":"out","segment":"","tier":"","reason":"visiontoexit.com is a business consulting/advisory firm"}
+{"id":"54799506548","verdict":"in","segment":"building_materials_industrial","tier":"C","reason":"Groupe AGF (acieragf.com) is a Canadian structural steel fabricator with manufacturing and distribution operations"}
+{"id":"54799512596","verdict":"out","segment":"","tier":"","reason":"IES Commercial & Industrial is an electrical/mechanical contractor, jobsite-based with no fixed DC yard network"}
+{"id":"54799530017","verdict":"out","segment":"","tier":"","reason":"Consol Energy is a coal mining/methane production company; mining verticals are not in TAM"}
+{"id":"54799532411","verdict":"out","segment":"","tier":"","reason":"STERIS (medivators.com) provides medical device sterilization/reprocessing services, healthcare services sector"}
+{"id":"54799544188","verdict":"out","segment":"","tier":"","reason":"eastern.usta.com is the USTA Eastern section, a sports/tennis organization"}
+{"id":"54799547815","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Bar-S Foods is a major meat/hot dog processor with multiple production plants and distribution across the US"}
+{"id":"54799550049","verdict":"out","segment":"","tier":"","reason":"ru.mccormick.com is McCormick Russia subdomain; non-NA entity for this entry"}
+{"id":"54799555097","verdict":"out","segment":"","tier":"","reason":"E&M Holdings (emhllc.com) appears to be a small food/beverage holding company in Ketchum, ID; insufficient scale/facilities"}
+{"id":"54799555104","verdict":"in","segment":"automotive_heavy_mfg","tier":"C","reason":"Foxconn Ohio FEVSYS is Foxconn's EV manufacturing systems operation in Ohio with large-scale assembly facility"}
+{"id":"54799561997","verdict":"out","segment":"","tier":"","reason":"Puyallup School District is a public school district"}
+{"id":"54799568485","verdict":"out","segment":"","tier":"","reason":"INX Digital International provides digital printing inks/software, not a freight-intensive manufacturer"}
+{"id":"54799575598","verdict":"out","segment":"","tier":"","reason":"Leidos QTC provides government health/disability exam services, not a freight operator"}
+{"id":"54799584847","verdict":"in","segment":"agriculture_food_processing","tier":"C","reason":"seaboardtrinidad.com is Seaboard Corp's Trinidad operations; Seaboard is a major pork/food processing and transport company"}
+{"id":"54799598240","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Noble (noble.ca) is a major Canadian HVAC/plumbing/industrial wholesale distributor with 84 locations and 1M+ sq ft warehouse space"}
+{"id":"54799603305","verdict":"out","segment":"","tier":"","reason":"Eugene School District 4J is a public school district"}
+{"id":"54799610154","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Luck Stone is a major quarried stone/aggregate producer with multiple quarries and distribution yards across Mid-Atlantic/Southeast"}
+{"id":"54799610493","verdict":"review","segment":"","tier":"","reason":"iam-mcds.com domain is unresolved; IIS default page only, possibly a McDonald's franchisee portal or internal system"}
+{"id":"54799616049","verdict":"out","segment":"","tier":"","reason":"Waypoint (asmwaypoint.com) is a foodservice sales/marketing agency brokering between manufacturers and distributors, not an operator"}
+{"id":"54799617918","verdict":"out","segment":"","tier":"","reason":"Middleby China is the China subdomain of Middleby Corp restaurant equipment; non-NA, no qualifying yard network"}
+{"id":"54799629126","verdict":"out","segment":"","tier":"","reason":"Fayette County Public Schools is a public school district"}
+{"id":"54799632392","verdict":"out","segment":"","tier":"","reason":"Whittier Union High School District is a public school district"}
+{"id":"54799640458","verdict":"out","segment":"","tier":"","reason":"Aruza Pest Control is a pest control service company"}
+{"id":"54799640469","verdict":"out","segment":"","tier":"","reason":"GM Financial is the auto finance/lending subsidiary of General Motors"}
+{"id":"54799648111","verdict":"out","segment":"","tier":"","reason":"edisonintl.com is Edison International, a California electric utility, out per rules"}
+{"id":"54799652733","verdict":"out","segment":"","tier":"","reason":"MAPCO Express is a fuel/convenience retail chain, not a freight-intensive yard operator"}
+{"id":"54799653531","verdict":"out","segment":"","tier":"","reason":"northernoffshoreltd.com appears to be an offshore oil/energy services company, not in TAM verticals"}
+{"id":"54799654156","verdict":"out","segment":"","tier":"","reason":"sccompanies.com is a real estate development/property management company"}
+{"id":"54799657069","verdict":"out","segment":"","tier":"","reason":"Jollibee Vietnam is a QSR restaurant chain, out per rules"}
+{"id":"54799663128","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"ftpc.fpcusa.com is Formosa Plastics Corporation USA, a major petrochemical/plastics manufacturer with large production facilities"}
+{"id":"54799665170","verdict":"out","segment":"","tier":"","reason":"nassaupeakwealthfund.info is a spam/junk domain"}
+{"id":"54799672406","verdict":"out","segment":"","tier":"","reason":"Wind Creek Hospitality operates casinos and hotels, hospitality sector"}
+{"id":"54799681068","verdict":"out","segment":"","tier":"","reason":"pss.boeing.com is a Boeing subdomain; Boeing is an aerospace and defense prime, out per rules"}
+{"id":"54799681463","verdict":"in","segment":"retail_grocery","tier":"A","reason":"L Brands (Bath & Body Works/Victoria's Secret parent) is a major national retail operator with large distribution center network"}
+{"id":"54799681568","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"NFI Cal Cartage is a freight carrier and 3PL subsidiary of NFI Industries with significant fleet and yard operations"}
+{"id":"54799688552","verdict":"out","segment":"","tier":"","reason":"sloan.com.mx is Sloan Valve Mexico subdomain; small plumbing fixtures manufacturer, non-NA subsidiary"}
+{"id":"54799688602","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"us.hyosung.com is Hyosung USA; Hyosung operates large-scale US industrial manufacturing (power transformers, textiles) with multiple facilities"}
+{"id":"54799693331","verdict":"out","segment":"","tier":"","reason":"Magnaflux makes NDT inspection equipment; small industrial supplier without qualifying yard network"}
+{"id":"54799700851","verdict":"out","segment":"","tier":"","reason":"pbbd-inc.com is unresolvable to a known freight-relevant company; likely HR consulting based on search results"}
+{"id":"54799707447","verdict":"out","segment":"","tier":"","reason":"wynwoodgrant.info is a spam/junk domain"}
+{"id":"54799728397","verdict":"out","segment":"","tier":"","reason":"CSC ServiceWorks provides commercial laundry equipment/services; service company without qualifying yard network"}
+{"id":"54799781479","verdict":"out","segment":"","tier":"","reason":"Or Whatever You Do is a food/recipe content website"}
+{"id":"54799789951","verdict":"out","segment":"","tier":"","reason":"mastec.net is MasTec, an infrastructure/construction contractor; jobsite-based with no fixed DC yard network"}

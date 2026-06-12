@@ -1,0 +1,120 @@
+{"id":"45065317172","verdict":"in","segment":"ports_intermodal","tier":"B","reason":"Atlantic Intermodal — intermodal container services, operates terminals/depots across North America with significant truck activity"}
+{"id":"45067947084","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Saddle Creek Logistics — major national 3PL with dozens of warehousing/distribution/fulfillment facilities across the US"}
+{"id":"45069961302","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Pilgrim's Pride Corp — one of the largest US chicken processors with many plants and distribution facilities"}
+{"id":"54725620587","verdict":"out","segment":"","tier":"","reason":"Casa de Gobierno del Estado de Mexico — state government entity, not a freight/logistics operation"}
+{"id":"54727912064","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Grupo Elektra — major Mexican retail/financial conglomerate with hundreds of stores and distribution network across Mexico"}
+{"id":"54728249686","verdict":"out","segment":"","tier":"","reason":"Knight Therapeutics — pharmaceutical company focused on drug commercialization, no yard/freight network"}
+{"id":"54750793820","verdict":"out","segment":"","tier":"","reason":"DAE-IL Corporation — South Korean auto/heavy equipment parts manufacturer, no North American yard network"}
+{"id":"54758074021","verdict":"in","segment":"ports_intermodal","tier":"A","reason":"FTAI Infrastructure — owns and operates deep-water ports, rail terminals, and intermodal/transloading facilities in North America"}
+{"id":"54762609793","verdict":"out","segment":"","tier":"","reason":"Poder Judicial del Estado de Mexico — state judicial government entity, not a freight operation"}
+{"id":"54773417573","verdict":"out","segment":"","tier":"","reason":"FIT Holding Co. — Taiwanese holding company for optoelectronics/imaging tech subsidiaries, no North American yard network"}
+{"id":"54773436220","verdict":"out","segment":"","tier":"","reason":"Securitas Critical Infrastructure Services — security/guard services company, not a freight or distribution operation"}
+{"id":"54773460525","verdict":"out","segment":"","tier":"","reason":"Premium Water — Japanese water delivery company, not in North America with qualifying yard network"}
+{"id":"54773495572","verdict":"out","segment":"","tier":"","reason":"Shizuoka Financial Group — Japanese banking/financial institution, out vertical"}
+{"id":"54773507229","verdict":"out","segment":"","tier":"","reason":"Connecticut Light and Power — electric utility company, out vertical per rules"}
+{"id":"54773516393","verdict":"out","segment":"","tier":"","reason":"Asti — Japanese automotive electronics manufacturer, no North American yard/freight network qualifying"}
+{"id":"54773548097","verdict":"out","segment":"","tier":"","reason":"Vintage Wine Estates — wine company in bankruptcy (epiq11.com is bankruptcy admin), limited distribution scale"}
+{"id":"54773560100","verdict":"out","segment":"","tier":"","reason":"AECOM/URS/EG&G — engineering/defense/government contractor, out vertical (professional services + A&D adjacent)"}
+{"id":"54773568618","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Owens-Illinois — major global glass container manufacturer with multiple plants and distribution centers in North America"}
+{"id":"54774164013","verdict":"out","segment":"","tier":"","reason":"Indofood Agri Resources — Indonesian palm oil/agri company, no North American presence qualifying"}
+{"id":"54774252032","verdict":"out","segment":"","tier":"","reason":"MEDNAX — healthcare staffing/physician practice management company, out vertical"}
+{"id":"54774252034","verdict":"out","segment":"","tier":"","reason":"Noranda Income Fund — zinc processing facility (single site), insufficient yard network for TAM"}
+{"id":"54774256920","verdict":"out","segment":"","tier":"","reason":"Command Security (Prosegur) — security services company, not a freight/logistics operation"}
+{"id":"54774260022","verdict":"out","segment":"","tier":"","reason":"VM / VirtualBox.org — open source virtualization software project, out vertical (software/IT)"}
+{"id":"54774307389","verdict":"out","segment":"","tier":"","reason":"Anhui Fuhuang Steel Structure Co — Chinese steel structure manufacturer, no North American yard network"}
+{"id":"54774328462","verdict":"out","segment":"","tier":"","reason":"Apple Flavor & Fragrance Group — Chinese flavor/fragrance manufacturer, no qualifying North American facilities"}
+{"id":"54774365620","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Kerry Group PLC — major global food ingredient/flavor manufacturer with multiple North American plants and DCs"}
+{"id":"54777712931","verdict":"out","segment":"","tier":"","reason":"WGD Consulting Inc. — consulting firm, out vertical (professional services)"}
+{"id":"55441096231","verdict":"in","segment":"retail_grocery","tier":"B","reason":"Home Depot Distribution Center — single DC record of Home Depot, a tier-A retail chain with large yard-heavy distribution network"}
+{"id":"55441408837","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Kellogg's Snacks — single site record of Kellogg's, major CPG with multiple plants and DCs"}
+{"id":"55441408861","verdict":"in","segment":"retail_grocery","tier":"B","reason":"CVS Health Distribution Center — single DC of CVS Health, large retail pharmacy chain with major distribution network"}
+{"id":"55441408897","verdict":"out","segment":"","tier":"","reason":"Rolls-Royce Excellence Building Plant 8 — aerospace/defense manufacturing, out vertical"}
+{"id":"55441565450","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"ContiTech USA Warehouse — ContiTech is major industrial rubber/hose/belt manufacturer with North American facilities"}
+{"id":"55441565738","verdict":"in","segment":"paper_packaging","tier":"C","reason":"A-1 Creative Packaging Corporation Plant-4 — packaging manufacturer, single plant record with truck activity"}
+{"id":"55441703464","verdict":"in","segment":"retail_grocery","tier":"B","reason":"Dollar General Distribution Center — single DC of Dollar General, major US discount retailer with 20+ large DCs"}
+{"id":"55441703685","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Swift Transportation Detroit/New Boston Terminal — terminal of Swift, one of the largest US truckload carriers"}
+{"id":"55441703723","verdict":"in","segment":"paper_packaging","tier":"C","reason":"Stearns Packaging Corporation — packaging company with manufacturing/distribution operations, truck freight activity"}
+{"id":"55441857172","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Pepsi TRUCK ENTRANCE — Pepsi facility (CPG beverage), significant truck yard activity"}
+{"id":"55442005634","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Geodis logistic 1624 — Geodis facility, major global 3PL with extensive North American DC network"}
+{"id":"55442005661","verdict":"in","segment":"building_materials_industrial","tier":"C","reason":"Southwark Metal Manufacturing Co — HVAC sheet metal manufacturer with 7 facilities, significant inbound/outbound freight"}
+{"id":"55442005829","verdict":"in","segment":"retail_grocery","tier":"B","reason":"Tractor Supply Company - Pendleton Distribution Center — Tractor Supply DC, farm/rural retail chain with large distribution network"}
+{"id":"55442138179","verdict":"in","segment":"cold_chain","tier":"B","reason":"Americold Logistics Allentown - Ambassador — Americold cold storage facility, largest US public refrigerated warehouse operator"}
+{"id":"55442138251","verdict":"out","segment":"","tier":"","reason":"U.S. Meat Export Federation (USMEF) — trade association/nonprofit, not an operator of yards or freight facilities"}
+{"id":"55442138276","verdict":"out","segment":"","tier":"","reason":"Pilot Travel Center — truck stop/fuel/convenience, not a freight shipper or receiver with yard management needs"}
+{"id":"55442138406","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Weyerhaeuser Distribution Center — Weyerhaeuser DC, major US forest products/building materials company with large yard network"}
+{"id":"55442138408","verdict":"in","segment":"paper_packaging","tier":"B","reason":"Smurfit Kappa Fort Worth Packaging Solutions — Smurfit Kappa corrugated packaging plant, global paper packaging leader with many NA plants"}
+{"id":"55442299397","verdict":"in","segment":"paper_packaging","tier":"B","reason":"Shorr Packaging Corp — large independent packaging distributor with 18 locations and active inbound/outbound freight"}
+{"id":"55442932063","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Sysco Indianapolis — Sysco broadline foodservice distribution facility, Sysco is the largest US foodservice distributor"}
+{"id":"55442932070","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Best Carrier Tampa Warehouse & Transload — transload/warehouse carrier facility with active truck freight"}
+{"id":"55442932278","verdict":"in","segment":"cpg_food_beverage","tier":"C","reason":"Bartush Schnitzius Foods Company — food manufacturer (condiments/sauces), single plant with on-site warehousing and truck freight"}
+{"id":"55442932409","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Prime Distribution Services (Ascent Global Logistics) — 3PL distribution services company with warehousing and freight operations"}
+{"id":"55442932510","verdict":"out","segment":"","tier":"","reason":"Circle K Truck Stop — fuel/convenience retail, not a freight shipper/receiver with yard management needs"}
+{"id":"55443092327","verdict":"in","segment":"cold_chain","tier":"B","reason":"Americold Logistics Ontario 5401 — Americold cold storage facility, largest US public refrigerated warehouse operator"}
+{"id":"55443389978","verdict":"in","segment":"paper_packaging","tier":"B","reason":"WestRock Secondary Warehouse — WestRock facility, major US paper/packaging company with many plants and DCs"}
+{"id":"55443545528","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Tyson Foods Indianapolis Distribution Center — Tyson DC, one of the largest US protein/meat processors with major distribution network"}
+{"id":"55443545890","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Lennox Distribution Center — Lennox International DC, major HVAC/refrigeration manufacturer with North American distribution network"}
+{"id":"55443545892","verdict":"out","segment":"","tier":"","reason":"Onvo — NIO sub-brand EV company based in China, no North American yard/freight network"}
+{"id":"55443694489","verdict":"in","segment":"retail_grocery","tier":"B","reason":"CVS Warehouse Distribution Center — CVS Health DC, large retail pharmacy with major distribution infrastructure"}
+{"id":"55443694599","verdict":"in","segment":"paper_packaging","tier":"C","reason":"Crown Packaging Corp. Indianapolis office — Crown packaging company, corrugated/packaging manufacturer with plant/distribution operations"}
+{"id":"55459084660","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Exchange Logistics — asset-based 3PL with warehousing, distribution, and trucking across the US"}
+{"id":"55459114858","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Swift Transportation - Lancaster Terminal — Swift truckload carrier terminal, one of the largest US carriers with extensive terminal network"}
+{"id":"55459114915","verdict":"in","segment":"chemicals_plastics","tier":"B","reason":"P&G Chemicals — Procter & Gamble chemicals manufacturing/distribution facility with significant freight activity"}
+{"id":"55459119744","verdict":"in","segment":"cold_chain","tier":"B","reason":"Sysco Frozen Warehouse — Sysco cold/frozen storage facility, national foodservice distributor with many temperature-controlled DCs"}
+{"id":"55459122239","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Penske Work — Penske Logistics/Truck facility, major carrier and logistics provider with extensive terminal/yard network"}
+{"id":"55459126784","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Pepsi off site — PepsiCo offsite facility with active truck activity for beverage distribution"}
+{"id":"55459126832","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Procter & Gamble Tambrands — P&G manufacturing/distribution facility, large CPG company with many NA plants and DCs"}
+{"id":"55459126883","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"NAMIC Medline — Medline Industries medical device/supply distribution facility with significant truck freight"}
+{"id":"55459138578","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Swift Transportation - Jonestown Terminal — Swift truckload carrier terminal, major US carrier"}
+{"id":"55459140438","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Geodis Allentown — Geodis 3PL facility, major global 3PL with large North American DC network"}
+{"id":"55459143023","verdict":"in","segment":"retail_grocery","tier":"B","reason":"Kwik Trip Distribution Center-DeForest — Kwik Trip convenience store chain DC, regional chain with significant distribution infrastructure"}
+{"id":"55459144843","verdict":"in","segment":"cold_chain","tier":"B","reason":"Americold Logistics Portland — Americold cold storage facility, largest US public refrigerated warehouse network"}
+{"id":"55459144854","verdict":"in","segment":"cold_chain","tier":"B","reason":"Americold Logistics Mansfield — Americold cold storage facility, largest US public refrigerated warehouse network"}
+{"id":"55459144866","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Sysco Grand Rapids — Sysco broadline foodservice distribution facility, largest US foodservice distributor"}
+{"id":"55459149447","verdict":"out","segment":"","tier":"","reason":"Holiday Homes Transporting LLC — specialized oversize hauler for manufactured/modular homes, niche transport, not a fixed-yard operation"}
+{"id":"55459151248","verdict":"in","segment":"cold_chain","tier":"B","reason":"Americold Logistics Ontario CA — Americold cold storage facility, largest US public refrigerated warehouse network"}
+{"id":"55459157352","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Werner Enterprises — major US truckload carrier with nationwide terminal network and significant yard operations"}
+{"id":"55459159158","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Schneider — major US trucking/logistics/intermodal company with large terminal and yard network across North America"}
+{"id":"55459159378","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Owens Corning warehouse (logisticsone) — Owens Corning distribution facility, major US insulation/roofing/composites manufacturer with many DCs"}
+{"id":"55459159384","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Sherwin-Williams Manufacturing Plant & Distribution Center — Sherwin-Williams mfg/DC, large industrial coatings company with many North American plants"}
+{"id":"55459159413","verdict":"in","segment":"paper_packaging","tier":"B","reason":"Smurfit Westrock Columbus Container Plant — Smurfit WestRock corrugated plant, major paper/packaging company with large North American network"}
+{"id":"55459163539","verdict":"review","segment":"","tier":"","reason":"Quest Warehouse — insufficient info to determine if this is Quest Diagnostics, Quest Nutrition, or another entity"}
+{"id":"55459163728","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Sysco Sacramento — Sysco broadline foodservice distribution facility, largest US foodservice distributor"}
+{"id":"55459165031","verdict":"out","segment":"","tier":"","reason":"Warehouse Wine Liquor & Cigars — retail liquor/specialty store, not a freight distribution operation"}
+{"id":"55459167804","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"ABF Freight System — major US LTL carrier (ArcBest subsidiary) with extensive terminal network across North America"}
+{"id":"55459169963","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Exel/Owens Corning Warehouse — 3PL-managed Owens Corning warehouse, building materials with truck-heavy freight"}
+{"id":"55459169966","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Ceva Freight — major global 3PL/freight management company with extensive North American distribution network"}
+{"id":"55459170371","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Bison Transport USA — major Canadian/US truckload carrier with terminal network in North America"}
+{"id":"55459170403","verdict":"out","segment":"","tier":"","reason":"ChargeUP 34 — EV charging station location, not a freight shipper/receiver with yard management needs"}
+{"id":"55459174763","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"NicePak Customer Fulfillment Center — Nice-Pak Products fulfillment center, major consumer wipes/hygiene manufacturer with multiple plants"}
+{"id":"55459174942","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Swift Transportation - Jurupa Valley Terminal — Swift truckload carrier terminal, major US carrier with large yard operations"}
+{"id":"55459175227","verdict":"in","segment":"building_materials_industrial","tier":"C","reason":"Griot's Garage Distribution & Manufacturing Center — auto care product manufacturer with own US mfg/distribution center"}
+{"id":"55459175245","verdict":"in","segment":"ecommerce_parcel","tier":"B","reason":"Chewy Fulfillment Center AVP1 — Chewy e-commerce fulfillment center, major online pet retailer with large high-throughput yards"}
+{"id":"55459177060","verdict":"out","segment":"","tier":"","reason":"BDA Midwest Fulfillment Center — branded merchandise/promotional products fulfillment, not a freight-heavy distribution operation qualifying for TAM"}
+{"id":"55459179625","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Sherwin-Williams Garland-Shiloh Manufacturing Site — Sherwin-Williams mfg facility, large industrial coatings company"}
+{"id":"55459181828","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"XPO Logistics — major global 3PL/LTL carrier with hundreds of terminals and large yard operations across North America"}
+{"id":"55459181874","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Geodis 1602 — Geodis 3PL facility, major global 3PL with large North American DC network"}
+{"id":"55459182201","verdict":"in","segment":"retail_grocery","tier":"B","reason":"Walgreens Warehouse Distribution Center — Walgreens DC, major US retail pharmacy chain with significant distribution infrastructure"}
+{"id":"55459182226","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"XPO Logistics Columbia — XPO facility, major 3PL/LTL carrier with extensive North American terminal network"}
+{"id":"55459182259","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Hood Packaging Corporation — major NA flexible packaging manufacturer with 16 plants in US and Canada"}
+{"id":"55459183886","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Nestle Water North America — Nestle water/beverage distribution, major CPG company with large North American distribution network"}
+{"id":"55459183901","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Swift Transportation - Denver Terminal — Swift truckload carrier terminal, major US carrier with large yard operations"}
+{"id":"55459183903","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Sysco Indianapolis Shipping and Receiving — Sysco foodservice facility, largest US broadline foodservice distributor"}
+{"id":"55459184010","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"MSI Express Inc. — major US food co-manufacturer with 15 locations across 6 states, high inbound/outbound truck activity"}
+{"id":"55459184251","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Sherwin-Williams Distribution Center — Sherwin-Williams DC, large industrial coatings company with many North American DCs"}
+{"id":"55459186462","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Sysco Denver — Sysco broadline foodservice distribution facility, largest US foodservice distributor"}
+{"id":"55459186742","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Total Logistics eCommerce Fulfillment Solutions — 3PL fulfillment provider with multi-location warehousing and distribution operations"}
+{"id":"55459191978","verdict":"in","segment":"cold_chain","tier":"B","reason":"Roadtex shopping office — Roadtex is a temperature-controlled 3PL/carrier with 30+ food-grade terminals nationwide"}
+{"id":"55459193780","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"US Foods CHEF'STORE — US Foods facility, second-largest US foodservice distributor with major distribution network"}
+{"id":"55459193782","verdict":"in","segment":"retail_grocery","tier":"B","reason":"Home Depot FDC Flatbed Distribution Center 5824 — Home Depot flatbed DC, major US home improvement retailer with large yard-heavy distribution"}
+{"id":"55459194142","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"CRC Indiana LLC — logistics/trucking facility in Plainfield IN (near major distribution corridor), active truck freight operation"}
+{"id":"55459198358","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Pepsi Warehouse Guard Shack — PepsiCo warehouse facility with active truck yard activity"}
+{"id":"55459198619","verdict":"in","segment":"agriculture_food_processing","tier":"C","reason":"Cornerstone Organic Feed LLC — organic livestock feed manufacturer in PA, small but has inbound grain and outbound feed truck freight"}
+{"id":"55459200542","verdict":"out","segment":"","tier":"","reason":"TFG Truck Parking — commercial truck parking lot, not a freight shipper/receiver with yard management software needs"}
+{"id":"55459200655","verdict":"in","segment":"automotive_heavy_mfg","tier":"C","reason":"Raybestos Powertrain Manufacturing Plant — automotive transmission parts manufacturer in Crawfordsville IN with active freight activity"}
+{"id":"55459202486","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Sherwin-Williams Manufacturing Plant — Sherwin-Williams mfg facility, major industrial coatings company with many North American plants"}
+{"id":"55459205396","verdict":"in","segment":"chemicals_plastics","tier":"C","reason":"Greenfield Manufacturing Inc. — contract chemical/coatings manufacturer serving industrial clients, has inbound/outbound freight"}
+{"id":"55459205424","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"O'Reilly Auto Parts Distribution Center — O'Reilly DC, major US auto parts retailer with large distribution center network"}
+{"id":"55459207782","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Universe Carrier Warehouse — 3PL with cross-docking, fulfillment, kitting, and temperature-controlled warehousing in Illinois"}
+{"id":"55459209861","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"GEODIS Contract Logistics — Geodis 3PL facility, major global contract logistics provider with large North American network"}
+{"id":"55459210057","verdict":"out","segment":"","tier":"","reason":"Kwik-Kut Manufacturing Co — small kitchen tool manufacturer (~4 employees, single plant), too small/niche for TAM"}
+{"id":"55459212300","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Pepsi Bottling Facility — PepsiCo bottling/manufacturing plant with significant inbound ingredients and outbound finished goods truck activity"}

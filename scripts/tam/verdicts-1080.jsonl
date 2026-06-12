@@ -1,0 +1,120 @@
+{"id":"54784834224","verdict":"out","segment":"","tier":"","reason":"GSP North America: retail marketing and print/signage services for retail stores, no physical freight yards"}
+{"id":"54784837224","verdict":"out","segment":"","tier":"","reason":"BCW Global: PR and communications agency, professional services"}
+{"id":"54784837235","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Distribution International: industrial insulation/specialty products distributor, multiple DCs across NA"}
+{"id":"54785005680","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"PAM Transport: large truckload carrier with terminals and drop-yard network across NA"}
+{"id":"54785006876","verdict":"out","segment":"","tier":"","reason":"Bouygues E&S Canada: facilities/energy services company, no freight-yard operations"}
+{"id":"54785012100","verdict":"out","segment":"","tier":"","reason":"cabi: direct-sales womens fashion brand, no industrial freight operations"}
+{"id":"54785016969","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Toyota Industries EU: global forklift/material handling mfg, large plants and logistics yards"}
+{"id":"54785023788","verdict":"out","segment":"","tier":"","reason":"Middleby Residential: residential kitchen appliance brand, consumer products, no industrial yards"}
+{"id":"54785034072","verdict":"out","segment":"","tier":"","reason":"WSJ Barrons: financial news media outlet"}
+{"id":"54785041409","verdict":"out","segment":"","tier":"","reason":"Signature Aviation: FBO network for private/business aviation, not truck freight"}
+{"id":"54785052956","verdict":"out","segment":"","tier":"","reason":"Forever Living Products: MLM health/beauty brand, no freight-heavy yard operations"}
+{"id":"54785055570","verdict":"out","segment":"","tier":"","reason":"USCIS: federal immigration agency, government entity"}
+{"id":"54785066304","verdict":"in","segment":"agriculture_food_processing","tier":"B","reason":"Co-Alliance: ag cooperative with grain elevators, energy, and agronomy facilities across Indiana/Ohio"}
+{"id":"54785080908","verdict":"out","segment":"","tier":"","reason":"D.L. Rogers Corp: large Sonic Drive-In QSR franchisee, restaurant operations not freight yards"}
+{"id":"54785085307","verdict":"out","segment":"","tier":"","reason":"s5a.com: appears linked to Saks Fifth Avenue retail or analytics firm, not freight-heavy verticals"}
+{"id":"54785088815","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Janus International: manufacturer of commercial building products (roll-up doors, modular walls), multiple plants"}
+{"id":"54785089804","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"OMEGA Engineering: industrial sensors/measurement instruments mfg, multiple manufacturing facilities"}
+{"id":"54785090117","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"E&J Gallo: worlds largest wine producer, massive winery/bottling/distribution network across NA"}
+{"id":"54785100828","verdict":"in","segment":"wholesale_distribution","tier":"C","reason":"World Kitchen Canada (EHI): cookware/housewares distributor, warehouse distribution operations in Canada"}
+{"id":"54785116435","verdict":"out","segment":"","tier":"","reason":"Toks: Mexican QSR/restaurant chain, food service not freight yards"}
+{"id":"54785120346","verdict":"out","segment":"","tier":"","reason":"Premier Pools & Spas: pool construction franchise, no freight-heavy operations"}
+{"id":"54785122312","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Steel Warehouse: steel service center with multiple processing/distribution facilities across NA"}
+{"id":"54785122482","verdict":"out","segment":"","tier":"","reason":"Fintech Global Consultants: financial technology consulting firm"}
+{"id":"54785123166","verdict":"out","segment":"","tier":"","reason":"Defence Australia: Australian government military department"}
+{"id":"54785147143","verdict":"out","segment":"","tier":"","reason":"Lawrence Public Schools: K-12 school district, education"}
+{"id":"54785153197","verdict":"in","segment":"chemicals_plastics","tier":"B","reason":"Oil States Industries: oilfield equipment mfg, multiple manufacturing plants serving oil/gas verticals"}
+{"id":"54785160266","verdict":"out","segment":"","tier":"","reason":"Hardees: QSR restaurant chain, food service not freight yard operations"}
+{"id":"54785203104","verdict":"out","segment":"","tier":"","reason":"BTG plc: specialty pharma/medical devices company, primarily healthcare provider-facing"}
+{"id":"54785357843","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Sumitomo Riko US: auto parts manufacturer (rubber/vibration control), multiple NA plants"}
+{"id":"54785387151","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Aphria (Tilray): large Canadian cannabis mfg/distributor with production facilities and distribution network"}
+{"id":"54785407551","verdict":"out","segment":"","tier":"","reason":"DRS Technologies Canada: defense electronics/military systems, aerospace and defense prime"}
+{"id":"54785461067","verdict":"in","segment":"retail_grocery","tier":"B","reason":"United Supermarkets: regional grocery chain (Texas), DCs and store network with significant freight"}
+{"id":"54785462707","verdict":"out","segment":"","tier":"","reason":"Industry Dive: B2B digital media/business journalism company"}
+{"id":"54785467463","verdict":"out","segment":"","tier":"","reason":"McDonalds Japan: QSR restaurant chain, food service not yard management"}
+{"id":"54785476456","verdict":"out","segment":"","tier":"","reason":"JPMS Consultoria: professional consulting firm, Brazil"}
+{"id":"54785492060","verdict":"out","segment":"","tier":"","reason":"WCAA: trade association (Window Coverings) or waste company, not identifiable as freight-heavy operator"}
+{"id":"54786114580","verdict":"out","segment":"","tier":"","reason":"Comoto Holdings: powersports/motorcycle gear retailer, primarily retail/ecom not heavy freight yards"}
+{"id":"54786120507","verdict":"review","segment":"","tier":"","reason":"Hovo (hovo.com): unidentifiable from name/domain search"}
+{"id":"54786145162","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Premium Brands Holdings (PBH): specialty food mfg/distribution across Canada/US, multiple plants and DCs"}
+{"id":"54786173339","verdict":"out","segment":"","tier":"","reason":"Exail (iXblue): French defense/maritime navigation technology company"}
+{"id":"54793874548","verdict":"out","segment":"","tier":"","reason":"offshorebylegends.co.uk: offshore fishing/leisure company UK, not freight"}
+{"id":"54796931607","verdict":"out","segment":"","tier":"","reason":"Health Advocate (UHC): healthcare patient advocacy/benefits navigation service"}
+{"id":"54797004660","verdict":"out","segment":"","tier":"","reason":"Cruise Planners: travel/cruise planning agency franchise"}
+{"id":"54797589900","verdict":"out","segment":"","tier":"","reason":"UC Berkeley: university/education institution"}
+{"id":"54799232061","verdict":"out","segment":"","tier":"","reason":"NPL Construction: underground utility/pipeline contractor, general contractors vertical"}
+{"id":"54799526325","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Kruger Products: major Canadian tissue/paper consumer products mfg, multiple mills and distribution"}
+{"id":"54799581580","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"Praxair (Linde): industrial gas producer/distributor, hundreds of NA plants and distribution points"}
+{"id":"54799634944","verdict":"in","segment":"retail_grocery","tier":"B","reason":"El Super: regional Hispanic grocery chain with DCs serving Southwest US stores"}
+{"id":"54799637921","verdict":"out","segment":"","tier":"","reason":"Pitt County Schools: K-12 school district, education"}
+{"id":"54800225951","verdict":"out","segment":"","tier":"","reason":"Cherokee County School District: K-12 school district, education"}
+{"id":"54800306544","verdict":"out","segment":"","tier":"","reason":"Zachry Corp: industrial EPC/construction contractor, general contractors vertical"}
+{"id":"54803746886","verdict":"out","segment":"","tier":"","reason":"SaaStr: B2B SaaS media/community/conference company"}
+{"id":"54824571048","verdict":"out","segment":"","tier":"","reason":"Snowflake: cloud data warehousing/analytics software company"}
+{"id":"54828621615","verdict":"out","segment":"","tier":"","reason":"Jackson Dearborn Partners: private equity/investment firm, finance"}
+{"id":"54847364662","verdict":"out","segment":"","tier":"","reason":"Wolsen Real Estate: real estate firm"}
+{"id":"54857202222","verdict":"out","segment":"","tier":"","reason":"Diginatives Services: custom software and AI development agency, IT services"}
+{"id":"54866831659","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"McCormick France (fr.mccormick.com): global spices/flavor CPG mfg, multiple plants and DCs across NA and Europe"}
+{"id":"54869693362","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Estee Lauder (pa.estee.com): global cosmetics/beauty CPG, major manufacturing plants and distribution centers"}
+{"id":"54872017269","verdict":"out","segment":"","tier":"","reason":"Alumni Ventures: venture capital investment firm, finance"}
+{"id":"54894712217","verdict":"out","segment":"","tier":"","reason":"Arizent (dg.arizent.com): financial services media/information company"}
+{"id":"54901068420","verdict":"out","segment":"","tier":"","reason":"Tribute Studio: creative/strategic marketing studio, professional services"}
+{"id":"54913330343","verdict":"out","segment":"","tier":"","reason":"Tribute Studio: creative/strategic marketing studio, professional services"}
+{"id":"54947358230","verdict":"in","segment":"cold_chain","tier":"A","reason":"RealCold: cold storage and refrigerated 3PL warehousing with multiple NA facilities"}
+{"id":"54947996784","verdict":"out","segment":"","tier":"","reason":"NMFTA: freight industry trade association/nonprofit organization"}
+{"id":"54950503077","verdict":"out","segment":"","tier":"","reason":"Calder Capital: lower-middle market M&A advisory firm, finance/professional services"}
+{"id":"54965197832","verdict":"out","segment":"","tier":"","reason":"University of Michigan: major research university, education"}
+{"id":"54995051071","verdict":"out","segment":"","tier":"","reason":"shared1.ccsend.com: Constant Contact shared email domain, not a company record"}
+{"id":"55227836840","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"Schaeffler: global precision bearings/automotive components mfg, major plants and logistics across NA"}
+{"id":"55317106044","verdict":"out","segment":"","tier":"","reason":"Pesti Group: PR/marketing agency serving supply chain industry, professional services"}
+{"id":"55341849170","verdict":"in","segment":"building_materials_industrial","tier":"C","reason":"Emtek: door hardware/architectural products mfg, manufacturing and distribution operations"}
+{"id":"55349836112","verdict":"out","segment":"","tier":"","reason":"Plug and Play Tech Center: tech startup accelerator/venture capital, not freight operations"}
+{"id":"55382685485","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"Solvay: major global specialty chemicals mfg (nylon, composites, soda ash), plants across NA"}
+{"id":"55399071091","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Etex: global building materials mfg (fiber cement, plasterboard), multiple plants and DCs"}
+{"id":"55399214085","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"Syensqo: specialty materials/advanced chemicals company (Solvay spinoff), plants across NA"}
+{"id":"55403368318","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"SalSon Logistics: 3PL with focus on food/bev and consumer goods, multiple warehouse facilities"}
+{"id":"55460581753","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Hershey: major chocolate/confectionery CPG mfg, multiple plants and DCs across NA"}
+{"id":"55460976455","verdict":"in","segment":"retail_grocery","tier":"A","reason":"OReilly Auto Parts: large auto parts retailer, massive DC network with 30+ distribution centers"}
+{"id":"55545684644","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Penske: Penske Truck Leasing/Automotive, massive fleet/logistics operations with facilities nationwide"}
+{"id":"55554491150","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"ESAB Europe (esab.pl): global welding/cutting solutions mfg, manufacturing plants and distribution across NA/Europe"}
+{"id":"55554496899","verdict":"out","segment":"","tier":"","reason":"Arbys: QSR restaurant chain, food service not freight yard operations"}
+{"id":"55554497806","verdict":"out","segment":"","tier":"","reason":"Dominos Pizza Poland: QSR pizza chain/restaurant, food service"}
+{"id":"55554506836","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Hasbro UK: global toys/games CPG, DCs and distribution facilities across NA/Europe"}
+{"id":"55554506847","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"Senior Flexonics Czech: auto/industrial exhaust and vibration components mfg, multiple plants"}
+{"id":"55554507561","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Coca-Cola Israel: beverage bottling and distribution operations with plants and fleet"}
+{"id":"55554509153","verdict":"in","segment":"agriculture_food_processing","tier":"B","reason":"Driscolls EU: fresh berry grower and distributor, cold-chain facilities in EU"}
+{"id":"8974733420","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Biewer Lumber: large lumber mfg and distribution with multiple mills and logistics operations"}
+{"id":"8974744978","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"JSR Supply Chain Solutions: 3PL/supply chain services with warehouse and distribution operations"}
+{"id":"8981928040","verdict":"in","segment":"cold_chain","tier":"A","reason":"Agro Merchants (now Lineage Logistics): major global cold storage 3PL, large refrigerated warehouse network"}
+{"id":"9155838267","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Maccaferri: Italian global mfg of gabions/geosynthetics, 30 plants worldwide with NA operations"}
+{"id":"9177675127","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Altria: major tobacco CPG (Marlboro), multiple manufacturing plants and large freight operations"}
+{"id":"9178570379","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Altria: major tobacco CPG (Marlboro), multiple manufacturing plants and large freight operations"}
+{"id":"9178571033","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Hy-Vee: large Midwest grocery chain with significant DC network and freight operations"}
+{"id":"9178986113","verdict":"out","segment":"","tier":"","reason":"Carlton Scale: industrial scale sales/service company, distributor not freight-yard operator at scale"}
+{"id":"9178986340","verdict":"in","segment":"retail_grocery","tier":"A","reason":"7-Eleven: global convenience store chain with large DC and fresh-food distribution network"}
+{"id":"9185931778","verdict":"in","segment":"retail_grocery","tier":"A","reason":"Meijer: large Midwest supercenter/grocer with major private-fleet DCs across the region"}
+{"id":"9186567436","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"KAG Logistics (Kenan Advantage Group): largest NA tank truck/bulk liquid carrier with many terminals"}
+{"id":"9186567522","verdict":"out","segment":"","tier":"","reason":"Kyndryl: IT infrastructure managed services (IBM spinoff), software/IT vertical"}
+{"id":"9314527589","verdict":"out","segment":"","tier":"","reason":"SPS Commerce Warm Introductions: EDI/supply chain software company, software/IT vertical"}
+{"id":"9337110389","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Sweetie Boy Transportation: auto transport/vehicle hauler with terminals across NA"}
+{"id":"9337110428","verdict":"in","segment":"chemicals_plastics","tier":"B","reason":"Chemson: PVC stabilizer/polymer additive mfg, multiple plants in NA and globally"}
+{"id":"9337110538","verdict":"out","segment":"","tier":"","reason":"Daniel Paul Chairs: small hospitality seating mfg (~23 employees), insufficient scale for YardFlow"}
+{"id":"9337172747","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Freight Management Plus: freight brokerage/3PL, freight-heavy operations"}
+{"id":"9337172774","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"Trafigura: worlds 3rd largest commodities trader, owns terminals, ports, storage facilities globally"}
+{"id":"9337709423","verdict":"out","segment":"","tier":"","reason":"Superior Play Systems: outdoor playground/recreational equipment retail installer, not freight-heavy"}
+{"id":"9337710860","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Sierra Mountain Express: auto transport carrier with 200+ trucks and terminals across NA"}
+{"id":"9337711893","verdict":"in","segment":"building_materials_industrial","tier":"C","reason":"Marsh Industries: specialty silicone rubber products mfg, industrial manufacturing facility"}
+{"id":"9337770642","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Diageo: worlds largest premium spirits company, major NA distillery/brewery/DC operations"}
+{"id":"9338066596","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Sure Shot Logistics: freight broker/3PL, NA-wide truckload brokerage operations"}
+{"id":"9338066833","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"BakeMark: leading bakery ingredients mfg/distributor, 7 plants and 39 DCs in NA"}
+{"id":"9345845594","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"UNIS: major 3PL with 12M sqft warehouse space, asset-based fulfillment and transportation"}
+{"id":"9345856140","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Opermex: automotive supply chain logistics provider, cross-border USMCA freight services"}
+{"id":"9345941594","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"Workhorse Group: electric medium-duty truck mfg, manufacturing plant in Union City IN"}
+{"id":"9345942609","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Autos in Motion: auto transport/vehicle logistics carrier"}
+{"id":"9347335718","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Supreme Auto Transport: vehicle transport carrier, freight-heavy auto hauling operations"}
+{"id":"9347336212","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Global Logistics and Fulfillment LLC: 3PL/fulfillment services company"}
+{"id":"9347375539","verdict":"review","segment":"","tier":"","reason":"Logistics Supply: ambiguous name only, could be equipment supplier or 3PL, insufficient info"}
+{"id":"9347568914","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Venture Logistics: large IN-based truckload carrier with 1000+ tractors and 4000+ trailers"}
+{"id":"9347584050","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Axis Global Logistics: freight forwarding/logistics company with NA operations"}
+{"id":"9348367960","verdict":"out","segment":"","tier":"","reason":"General Munition: defense/munitions company, aerospace and defense vertical"}
+{"id":"9348368157","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"LiVe Logistics: freight broker/3PL specializing in food/bev and retail freight"}

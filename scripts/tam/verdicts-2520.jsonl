@@ -1,0 +1,120 @@
+{"id":"54800190115","verdict":"out","segment":"","tier":"","reason":"Yield App — crypto/DeFi yield platform, fintech software"}
+{"id":"54800193946","verdict":"out","segment":"","tier":"","reason":"Maran Shuttle — passenger shuttle/transportation service, no yard network"}
+{"id":"54800194205","verdict":"in","segment":"paper_packaging","tier":"A","reason":"Canfor Pulp — major Canadian pulp & paper producer with multiple mills and high freight throughput"}
+{"id":"54800197045","verdict":"out","segment":"","tier":"","reason":"RHM / rhmail.org — email/messaging service domain, not a freight-relevant company"}
+{"id":"54800203654","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Foxworth-Galbraith Lumber — regional building materials distributor with multiple yards across SW US"}
+{"id":"54800203661","verdict":"out","segment":"","tier":"","reason":"slightedgeadvisorylaunch.co — advisory/consulting launch domain, no physical operations"}
+{"id":"54800209319","verdict":"out","segment":"","tier":"","reason":"goabl.org — Academy of Business Leadership, nonprofit youth education org, no freight ops"}
+{"id":"54800212074","verdict":"out","segment":"","tier":"","reason":"Sports Illustrated — media/publishing, no distribution yards"}
+{"id":"54800216185","verdict":"in","segment":"chemicals_plastics","tier":"B","reason":"Koch-Glitsch (kochglitsch.com) — industrial separation equipment manufacturer, part of Koch Industries, heavy industrial mfg"}
+{"id":"54800219041","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Estee Lauder (ae.estee.com subdomain) — global CPG/beauty conglomerate with major US distribution network"}
+{"id":"54800229449","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"ESAB — global welding and cutting equipment manufacturer with multiple manufacturing and distribution facilities"}
+{"id":"54800235144","verdict":"out","segment":"","tier":"","reason":"Financial Guide — financial services/insurance content, no physical freight operations"}
+{"id":"54800235174","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"Indorama Ventures — global chemicals/PET resin manufacturer with plants across North America and worldwide"}
+{"id":"54800236035","verdict":"out","segment":"","tier":"","reason":"CTC Programs — Acadia Healthcare's Comprehensive Treatment Centers, healthcare/addiction treatment, not freight"}
+{"id":"54800238892","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Ascent Global Logistics (ascentgl.net) — Top 100 global 3PL, domestic TMS + international freight forwarding, multi-site"}
+{"id":"54800238932","verdict":"in","segment":"chemicals_plastics","tier":"B","reason":"Select Energy Services — oilfield water/fluid management with tank farms and trucking fleet, heavy freight ops"}
+{"id":"54800239196","verdict":"out","segment":"","tier":"","reason":"ValueOptions — behavioral health managed care/insurance, no yard network"}
+{"id":"54800242214","verdict":"out","segment":"","tier":"","reason":"EASL / Engineering Analysis Services — structural integrity engineering consultancy, professional services"}
+{"id":"54800248213","verdict":"out","segment":"","tier":"","reason":"urbanout.com — likely Urban Outfitters subdomain/retail brand, no large DC network qualifying on its own"}
+{"id":"54800267622","verdict":"out","segment":"","tier":"","reason":"Fox Head — motocross/action sports apparel brand, consumer goods but no significant yard network"}
+{"id":"54800280324","verdict":"out","segment":"","tier":"","reason":"Watchguard 24/7 — physical security guarding services, not a freight-relevant operation"}
+{"id":"54800285297","verdict":"out","segment":"","tier":"","reason":"Atlanta Fitness — gym/fitness facility, no distribution yards"}
+{"id":"54800299111","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Hilton Food Group — food processing and packing company supplying major UK/international retailers, manufacturing facilities"}
+{"id":"54800303919","verdict":"out","segment":"","tier":"","reason":"Weedman — lawn care franchise network, service-based, no freight-heavy yards"}
+{"id":"54800315732","verdict":"in","segment":"paper_packaging","tier":"B","reason":"The BoxMaker — custom packaging manufacturer with multiple production/distribution locations in Pacific Northwest"}
+{"id":"54800315912","verdict":"out","segment":"","tier":"","reason":"Regence — BlueCross BlueShield health insurance plan, no freight operations"}
+{"id":"54800329003","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Johnstone Supply #39 — HVACR wholesale distributor with 450+ branches and regional DCs across US/Canada"}
+{"id":"54800505361","verdict":"out","segment":"","tier":"","reason":"Frost Gear Sports — sports apparel brand, no significant distribution infrastructure"}
+{"id":"54801466011","verdict":"out","segment":"","tier":"","reason":"firstmidwestadviser.com — financial advisory firm, no physical freight operations"}
+{"id":"54812540002","verdict":"out","segment":"","tier":"","reason":"myimaginaryspace.info — junk/spam domain, not a real company"}
+{"id":"54822599948","verdict":"out","segment":"","tier":"","reason":"trycamelotcx.com — CX/SaaS marketing domain, not freight-relevant"}
+{"id":"54822900240","verdict":"out","segment":"","tier":"","reason":"trepadvisorss.shop — spam/fake domain"}
+{"id":"54824062113","verdict":"out","segment":"","tier":"","reason":"expertlyco.com — appears to be a services/SaaS company, no freight ops"}
+{"id":"54824836196","verdict":"out","segment":"","tier":"","reason":"Laughlin USA — business incorporation/registered agent legal services, no physical freight ops"}
+{"id":"54827220653","verdict":"out","segment":"","tier":"","reason":"signalworkstech.com — technology/telecom services domain, not freight-relevant"}
+{"id":"54827845524","verdict":"out","segment":"","tier":"","reason":"nassaustreetforecastridge.help — spam/phishing domain"}
+{"id":"54830860701","verdict":"out","segment":"","tier":"","reason":"The Founder's Journey — media/podcast/coaching for entrepreneurs, no freight ops"}
+{"id":"54831370069","verdict":"out","segment":"","tier":"","reason":"Peakstone Group — investment banking/M&A advisory, professional services"}
+{"id":"54843433044","verdict":"out","segment":"","tier":"","reason":"riipengo.net — Riipen, experiential learning/edtech SaaS platform, not freight-relevant"}
+{"id":"54845629958","verdict":"out","segment":"","tier":"","reason":"Trigent Software — IT/software services company, no freight operations"}
+{"id":"54847615053","verdict":"out","segment":"","tier":"","reason":"enroll.webinarstalk.com — webinar/marketing subdomain, not a real company"}
+{"id":"54850053268","verdict":"out","segment":"","tier":"","reason":"thirtyfive-capital.com — venture capital/finance firm, no freight ops"}
+{"id":"54852053861","verdict":"out","segment":"","tier":"","reason":"meetphisite.com — appears to be SaaS/tech marketing domain, not freight-relevant"}
+{"id":"54853106024","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Vertiv Co. — global critical infrastructure/data center hardware manufacturer with large US and global mfg/dist network"}
+{"id":"54853415602","verdict":"out","segment":"","tier":"","reason":"Din Tai Fung — restaurant/QSR chain, hospitality vertical, out"}
+{"id":"54854043409","verdict":"out","segment":"","tier":"","reason":"trycleanharborfunding.info — spam/phishing domain mimicking Clean Harbors"}
+{"id":"54854212767","verdict":"out","segment":"","tier":"","reason":"imaginaryspaceplatform.info — spam/junk domain"}
+{"id":"54855009567","verdict":"out","segment":"","tier":"","reason":"alignclearflux.info — spam/junk domain"}
+{"id":"54855948689","verdict":"out","segment":"","tier":"","reason":"StartEngine — equity crowdfunding platform, fintech/SaaS, no freight ops"}
+{"id":"54856462627","verdict":"out","segment":"","tier":"","reason":"listas.nodo50.org — Spanish activist nonprofit email list server, not freight-relevant"}
+{"id":"54856572854","verdict":"out","segment":"","tier":"","reason":"promomomentum.help — spam/marketing domain"}
+{"id":"54857908657","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"JMP Solutions — industrial automation and systems integrator serving manufacturing, multiple facilities across Canada/US"}
+{"id":"54858135988","verdict":"out","segment":"","tier":"","reason":"ppgpautomationexperts.info — spam domain mimicking PPG, not a real company"}
+{"id":"54859925021","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"Valvoline — automotive lubricants manufacturer and distributor with large US distribution network and service center chain"}
+{"id":"54862485036","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"GSO Golden State Overnight — regional parcel/overnight carrier with sort hubs and delivery network in Western US"}
+{"id":"54863568033","verdict":"out","segment":"","tier":"","reason":"Arbonne International — MLM beauty/wellness brand, direct sales model, no freight yard network"}
+{"id":"54863901456","verdict":"out","segment":"","tier":"","reason":"The Hashmi Group — investor marketing/fundraising advisory for startups, professional services"}
+{"id":"54865650053","verdict":"out","segment":"","tier":"","reason":"shayan-solutions.net — IT/software solutions domain, not freight-relevant"}
+{"id":"54865745158","verdict":"in","segment":"agriculture_food_processing","tier":"B","reason":"RDS Technology — manufactures on-board weighing and control systems for agricultural/industrial mobile machinery"}
+{"id":"54868919418","verdict":"out","segment":"","tier":"","reason":"DocGo — mobile health/medical staffing services, healthcare provider, not freight-relevant"}
+{"id":"54868934242","verdict":"out","segment":"","tier":"","reason":"nassauvisionteam.info — spam/phishing domain"}
+{"id":"54870627250","verdict":"out","segment":"","tier":"","reason":"csrliving.com — senior living/real estate, not freight-relevant"}
+{"id":"54871092372","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"NutriCorp — contract manufacturing division of Jamieson Wellness, nutraceutical mfg with facilities in Windsor and Scarborough ON"}
+{"id":"54871247389","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"DPI Specialty Foods — specialty food wholesale distributor serving independent grocers and foodservice across multiple regions"}
+{"id":"54871980866","verdict":"out","segment":"","tier":"","reason":"NOW CFO — outsourced CFO/accounting consulting services, professional services"}
+{"id":"54872795443","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Premium Brands Holdings — Canadian specialty food manufacturer and distributor, $5B+ revenue, multiple plants and DCs across NA"}
+{"id":"54873726542","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Natumi AG / Hain-Celestial Europe — natural/organic food CPG manufacturer with European and North American distribution"}
+{"id":"54873828020","verdict":"out","segment":"","tier":"","reason":"original-roofing-service.com — roofing contractor, jobsite-based general contractor, out"}
+{"id":"54874346375","verdict":"out","segment":"","tier":"","reason":"antechmail.com — Antech Diagnostics email domain, veterinary diagnostics services, not freight-relevant"}
+{"id":"54874463503","verdict":"out","segment":"","tier":"","reason":"getpro-painting-solutions.com — painting contractor, jobsite-based, no fixed DC/yard network"}
+{"id":"54875344438","verdict":"out","segment":"","tier":"","reason":"wytpro.com — unclear marketing/SaaS domain, no evidence of freight operations"}
+{"id":"54876203419","verdict":"out","segment":"","tier":"","reason":"nassaukeyplus.info — spam/phishing domain"}
+{"id":"54878454593","verdict":"out","segment":"","tier":"","reason":"Atlantic Training — online safety training/compliance content provider, no freight ops"}
+{"id":"54879046585","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Bella+Canvas — large apparel blank manufacturer with US manufacturing and distribution operations"}
+{"id":"54879879506","verdict":"out","segment":"","tier":"","reason":"parallaxmarketsystems.info — spam/junk domain"}
+{"id":"54881071737","verdict":"out","segment":"","tier":"","reason":"infinytics-ai.store — AI/SaaS .store domain, not a freight-relevant company"}
+{"id":"54882860801","verdict":"out","segment":"","tier":"","reason":"novumreach.com — marketing/lead gen agency domain, no freight ops"}
+{"id":"54883603332","verdict":"out","segment":"","tier":"","reason":"Startup to Scaleup — startup coaching/consulting media brand, no freight ops"}
+{"id":"54890273067","verdict":"out","segment":"","tier":"","reason":"softteco.tech — software development/IT outsourcing firm, no freight ops"}
+{"id":"54890617987","verdict":"out","segment":"","tier":"","reason":"openphihq.com — no identifiable company found, appears to be SaaS/tech domain; insufficient info"}
+{"id":"54890621450","verdict":"out","segment":"","tier":"","reason":"Escuela de Tango de Buenos Aires — dance school/entertainment, not freight-relevant"}
+{"id":"54890704205","verdict":"out","segment":"","tier":"","reason":"getsuccessupo.com — spam/marketing domain"}
+{"id":"54890751041","verdict":"out","segment":"","tier":"","reason":"weareemssdigital.com — digital marketing agency, no freight ops"}
+{"id":"54891115324","verdict":"out","segment":"","tier":"","reason":"Deep Tech Showcase — tech events/media brand, no freight ops"}
+{"id":"54891348142","verdict":"out","segment":"","tier":"","reason":"growthflareadvising.info — spam/advisory junk domain"}
+{"id":"54891605866","verdict":"out","segment":"","tier":"","reason":"mailsap.com — email services domain, not freight-relevant"}
+{"id":"54891645194","verdict":"out","segment":"","tier":"","reason":"familycapitalbureau.info — spam/financial fraud domain"}
+{"id":"54892376394","verdict":"out","segment":"","tier":"","reason":"info.freightwaves.com — FreightWaves media/SaaS subdomain, freight intelligence software company not a shipper/carrier"}
+{"id":"54892596838","verdict":"out","segment":"","tier":"","reason":"news.houlihan-lokey.com — Houlihan Lokey investment bank news subdomain, financial services"}
+{"id":"54892917330","verdict":"out","segment":"","tier":"","reason":"userapidmarketing.help — spam/marketing junk domain"}
+{"id":"54893071436","verdict":"out","segment":"","tier":"","reason":"nassaustreetindexcollect.help — spam/phishing domain"}
+{"id":"54893445437","verdict":"out","segment":"","tier":"","reason":"coldemailmarketingagencydc.info — spam/cold email agency junk domain"}
+{"id":"54893491601","verdict":"out","segment":"","tier":"","reason":"crestmont-capital.com — capital/private equity finance firm, no freight ops"}
+{"id":"54893499217","verdict":"out","segment":"","tier":"","reason":"familyassetcollective.info — spam/financial fraud domain"}
+{"id":"54893500733","verdict":"out","segment":"","tier":"","reason":"ali-healthcare.pro — healthcare services domain, not freight-relevant"}
+{"id":"54894702361","verdict":"out","segment":"","tier":"","reason":"approvalshift.co — SaaS/tech approval workflow tool, no freight ops"}
+{"id":"54895286603","verdict":"out","segment":"","tier":"","reason":"nassaustreetfintechgateway.help — spam/phishing domain"}
+{"id":"54895594921","verdict":"out","segment":"","tier":"","reason":"ercvalidatormonitor.help — spam/ERC tax credit scam domain"}
+{"id":"54895892137","verdict":"out","segment":"","tier":"","reason":"advocate.uhc.com — UnitedHealthcare subdomain, health insurance provider, not freight-relevant"}
+{"id":"54895920172","verdict":"out","segment":"","tier":"","reason":"notifications.hubspot.com — HubSpot platform notification subdomain, SaaS, not a company"}
+{"id":"54897194589","verdict":"out","segment":"","tier":"","reason":"saasfunding.help — spam/SaaS funding junk domain"}
+{"id":"54897343056","verdict":"out","segment":"","tier":"","reason":"Breeze Hill Therapy — therapy/mental health practice, healthcare provider, not freight-relevant"}
+{"id":"54897663345","verdict":"out","segment":"","tier":"","reason":"serioussoftwarepartners.info — spam/software junk domain"}
+{"id":"54898338823","verdict":"out","segment":"","tier":"","reason":"digitalpeak.help — spam/junk domain"}
+{"id":"54899045768","verdict":"out","segment":"","tier":"","reason":"zynerp.com — ERP software vendor, SaaS/IT, not freight-relevant"}
+{"id":"54901288251","verdict":"out","segment":"","tier":"","reason":"nassaustreethedgefundstreet.help — spam/phishing domain"}
+{"id":"54901344002","verdict":"out","segment":"","tier":"","reason":"JP Sales Company — sales rep/business development firm serving automotive and industrial OEMs, professional services not a shipper"}
+{"id":"54901455120","verdict":"out","segment":"","tier":"","reason":"keystonehrpro.com — HR services/consulting, no freight ops"}
+{"id":"54903600556","verdict":"out","segment":"","tier":"","reason":"bid.fbxcapital.co.uk — UK finance/capital bidding platform, not freight-relevant"}
+{"id":"54903624718","verdict":"out","segment":"","tier":"","reason":"familyfundofficegroup.info — spam/financial fraud domain"}
+{"id":"54905978173","verdict":"out","segment":"","tier":"","reason":"Peak Zone (peakzone.com) — startup accelerator/market intelligence platform, not freight-relevant"}
+{"id":"54906108163","verdict":"in","segment":"wholesale_distribution","tier":"C","reason":"Amigo Mobility International — manufactures electric personal mobility scooters/carts, sold to retailers; US-based mfg and distribution"}
+{"id":"54906650669","verdict":"out","segment":"","tier":"","reason":"offshorecrewforce.shop — offshore staffing/outsourcing spam domain"}
+{"id":"54907827376","verdict":"out","segment":"","tier":"","reason":"Eton Venture Services — legal/financial advisory for startups, professional services"}
+{"id":"54907891828","verdict":"out","segment":"","tier":"","reason":"digitalmediadaily.com — digital media/advertising news site, media company"}
+{"id":"54914146674","verdict":"out","segment":"","tier":"","reason":"info.sap.com — SAP enterprise software subdomain, SaaS/IT, not freight-relevant"}
+{"id":"54914312490","verdict":"out","segment":"","tier":"","reason":"theremoterepsforce.com — remote sales outsourcing/staffing, professional services"}
+{"id":"54914545492","verdict":"out","segment":"","tier":"","reason":"mkto.lightercapital.com — Lighter Capital fintech/SaaS marketing subdomain, not freight-relevant"}
+{"id":"54915925427","verdict":"out","segment":"","tier":"","reason":"CCG Automation (ccg-oh.com) — building automation systems/controls contractor, professional services not a shipper"}
+{"id":"54916166790","verdict":"out","segment":"","tier":"","reason":"nassaustreetpartglobalgrpco.info — spam/phishing domain"}

@@ -1,0 +1,120 @@
+{"id":"54236390710","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Go2 Logistics - US asset carrier with multiple temp-controlled terminals, LTL/TL/cold storage, nationwide reach"}
+{"id":"54270839670","verdict":"out","segment":"","tier":"","reason":"Bradford Commercial Real Estate Services - commercial real estate brokerage, no yard network"}
+{"id":"54401066404","verdict":"out","segment":"","tier":"","reason":"CSL Behring - biologic/pharma manufacturer, small yard footprint, out of TAM verticals scope"}
+{"id":"54401376077","verdict":"out","segment":"","tier":"","reason":"Freedom Grooming - small DTC grooming brand, no facilities"}
+{"id":"54403388820","verdict":"out","segment":"","tier":"","reason":"Pointplm - PLM software, SaaS, out"}
+{"id":"54403388825","verdict":"out","segment":"","tier":"","reason":"Equinix - data center colocation, not a freight-moving vertical"}
+{"id":"54404007988","verdict":"out","segment":"","tier":"","reason":"Boulder Developments - real estate development, no yard network"}
+{"id":"54405401756","verdict":"in","segment":"chemicals_plastics","tier":"C","reason":"TRI Chemicals - specialty chemical manufacturer/distributor with facility-based freight operations"}
+{"id":"54406697353","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Wallenius Wilhelmsen (walwil.com) - global RoRo shipping and vehicle logistics, 66 processing centers and 7 marine terminals worldwide"}
+{"id":"54407528373","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Gorilla Glue - consumer adhesive/CPG manufacturer with multi-site US manufacturing and distribution"}
+{"id":"54408457333","verdict":"out","segment":"","tier":"","reason":"Rinoceria - unidentifiable company, no freight/facilities profile found"}
+{"id":"54408457336","verdict":"out","segment":"","tier":"","reason":"Christian Louboutin - luxury fashion brand, boutique retail distribution, no yard network"}
+{"id":"54408770213","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Logistics Xpress - US freight carrier/3PL with trucking operations"}
+{"id":"54409234790","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Zurich Transport LLC - US trucking/carrier company"}
+{"id":"54409389470","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Lima Logistics - US-based logistics/trucking company"}
+{"id":"54409389471","verdict":"out","segment":"","tier":"","reason":"Trans Sped - Hungarian European logistics company, not North America"}
+{"id":"54409544775","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"MerchSource - wholesale consumer products/electronics distributor with US DC network"}
+{"id":"54410073454","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Sloan Valve - US manufacturer of commercial plumbing products with multi-plant production and distribution"}
+{"id":"54410228905","verdict":"out","segment":"","tier":"","reason":"Vlantana - Lithuanian/European trucking and logistics, not North America"}
+{"id":"54410228906","verdict":"out","segment":"","tier":"","reason":"Sccgov (faf.sccgov.org) - Santa Clara County government, out"}
+{"id":"54410228909","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"King of Freight - US freight broker/carrier with trucking operations"}
+{"id":"54410538252","verdict":"out","segment":"","tier":"","reason":"Esger/Elm AI - AI-powered supply chain audit software, SaaS, out"}
+{"id":"54410693551","verdict":"out","segment":"","tier":"","reason":"Columbia Tech - contract electronics manufacturing for defense/medical, small scale, out"}
+{"id":"54410848375","verdict":"out","segment":"","tier":"","reason":"Cargogo - European digital freight platform, not North America"}
+{"id":"54411003157","verdict":"in","segment":"cpg_food_beverage","tier":"C","reason":"Quinn Snacks - CPG snack food brand with US distribution, smaller scale"}
+{"id":"54411158287","verdict":"out","segment":"","tier":"","reason":"Anti Fragility Health - health/wellness services, no freight operations"}
+{"id":"54411622753","verdict":"out","segment":"","tier":"","reason":"Virgin (fly.virgin.com) - passenger airline, explicitly out per rules"}
+{"id":"54411777148","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Sony - major consumer electronics manufacturer with large US distribution and warehouse network"}
+{"id":"54411931960","verdict":"out","segment":"","tier":"","reason":"Iscea - supply chain education/certification organization, not an operator"}
+{"id":"54413275663","verdict":"out","segment":"","tier":"","reason":"Fulcrum Inc - manufacturing and supply chain consulting firm, services not operations"}
+{"id":"54413895331","verdict":"out","segment":"","tier":"","reason":"Visualforecast - software/forecasting SaaS, out"}
+{"id":"54414049846","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Experior Global - Chicago asset 3PL with 500+ trailers and 1M+ sq ft warehousing nationwide"}
+{"id":"54414979221","verdict":"out","segment":"","tier":"","reason":"Intereuropa - Slovenian/European logistics, not North America"}
+{"id":"54415908278","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Forceget - US digital freight forwarder with warehousing, ocean/air freight, and US trucking operations"}
+{"id":"54416527940","verdict":"out","segment":"","tier":"","reason":"LHI Logistik - European logistics company, not North America"}
+{"id":"54416837703","verdict":"out","segment":"","tier":"","reason":"Qualcomm - semiconductor/wireless tech, no yard network"}
+{"id":"54416991813","verdict":"out","segment":"","tier":"","reason":"AIO Egypt - Egyptian company, not North America"}
+{"id":"54417456397","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Wardini H.A. Company (wardinihacompany.com) - US drayage and trucking carrier in Carson, CA"}
+{"id":"54419041967","verdict":"out","segment":"","tier":"","reason":"Ketone - DTC supplements brand, no yard network"}
+{"id":"54419196994","verdict":"out","segment":"","tier":"","reason":"Mail.ru - Russian email/tech company, out"}
+{"id":"54419661191","verdict":"out","segment":"","tier":"","reason":"Loop Global - EV charging infrastructure, not a freight/yard vertical"}
+{"id":"54419971343","verdict":"out","segment":"","tier":"","reason":"Tractafric - African heavy equipment dealer, not North America"}
+{"id":"54420745869","verdict":"out","segment":"","tier":"","reason":"Marketlab (marketlab.by) - Belarusian company, not North America"}
+{"id":"54421364388","verdict":"out","segment":"","tier":"","reason":"Levelsusa - small DTC sports nutrition supplements brand, no yard network"}
+{"id":"54421519640","verdict":"out","segment":"","tier":"","reason":"TMC (uth.tmc.edu) - Texas Medical Center, healthcare provider, out"}
+{"id":"54421674058","verdict":"out","segment":"","tier":"","reason":"Airfreight 2100 (aai.com.ph) - Philippine airline/air cargo, not North America"}
+{"id":"54421984079","verdict":"out","segment":"","tier":"","reason":"Rhenus (lt.rhenus.com) - European 3PL/logistics, not North America"}
+{"id":"54421984085","verdict":"out","segment":"","tier":"","reason":"Emeria (emeria.be) - Belgian company, not North America"}
+{"id":"54422293789","verdict":"out","segment":"","tier":"","reason":"RR (kc.rr.com) - Time Warner/Spectrum cable/telecom, out"}
+{"id":"54422603401","verdict":"out","segment":"","tier":"","reason":"Air Logistics Group (airlogistics.co.uk) - UK air freight company, not North America"}
+{"id":"54422758303","verdict":"out","segment":"","tier":"","reason":"Intuitive Surgical (intusurg.com) - robotic surgical systems, medical devices, no large yard network"}
+{"id":"54424459795","verdict":"out","segment":"","tier":"","reason":"2020 Digital Analytics - digital analytics/marketing software, out"}
+{"id":"54425233988","verdict":"out","segment":"","tier":"","reason":"Altana Technologies - supply chain AI/SaaS, not an operator"}
+{"id":"54428550293","verdict":"review","segment":"","tier":"","reason":"CDS Net (cds-net.com) - could not determine company identity from name/domain"}
+{"id":"54428860030","verdict":"out","segment":"","tier":"","reason":"Journey Delivers - freight sales training/recruiting resource, not an operator"}
+{"id":"54429169534","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"AIM Transportation Solutions - US trucking/carrier with multi-site terminal network"}
+{"id":"54430098534","verdict":"out","segment":"","tier":"","reason":"WA (commerce.wa.gov) - Washington state government, out"}
+{"id":"54430253630","verdict":"out","segment":"","tier":"","reason":"BioNTech Rwanda - biotech/pharma Rwanda, not North America"}
+{"id":"54430717721","verdict":"out","segment":"","tier":"","reason":"Sunrise Kitchens - Canadian kitchen cabinet manufacturer, small scale, no freight-heavy yard network"}
+{"id":"54431492392","verdict":"out","segment":"","tier":"","reason":"Crumbl - QSR/cookie chain, hospitality/restaurant, out"}
+{"id":"54431801963","verdict":"out","segment":"","tier":"","reason":"Ace World Wide - household goods moving/relocation, not a freight yard operator"}
+{"id":"54431956536","verdict":"out","segment":"","tier":"","reason":"Bed Bath and Beyond - defunct retail brand, no active operations"}
+{"id":"54434122797","verdict":"out","segment":"","tier":"","reason":"Auto-Garland (autogarland.eu) - European auto company, not North America"}
+{"id":"54434432526","verdict":"out","segment":"","tier":"","reason":"STG Solar - solar installation company, no fixed yard network"}
+{"id":"54434742128","verdict":"out","segment":"","tier":"","reason":"Danaco Solutions - perishable supply chain consulting, services not operations"}
+{"id":"54434742129","verdict":"out","segment":"","tier":"","reason":"iSee (ext.isee.ai) - AI software/SaaS, out"}
+{"id":"54434742130","verdict":"out","segment":"","tier":"","reason":"FA Maik (fa-maik.com) - unknown small company, insufficient data to classify"}
+{"id":"54434896978","verdict":"out","segment":"","tier":"","reason":"HHS (hhs.nl) - Dutch university/education institution, out"}
+{"id":"54462777767","verdict":"out","segment":"","tier":"","reason":"Venture 53 - logistics venture capital fund, not an operator"}
+{"id":"54547089055","verdict":"out","segment":"","tier":"","reason":"Guideline - HR/401k software platform, out"}
+{"id":"54562941722","verdict":"out","segment":"","tier":"","reason":"Resend - transactional email API/SaaS, out"}
+{"id":"54585550217","verdict":"out","segment":"","tier":"","reason":"Kapnick Insurance Group - commercial insurance brokerage, out"}
+{"id":"54625582503","verdict":"review","segment":"","tier":"","reason":"goasd.com - no company name, domain unidentifiable"}
+{"id":"54686790170","verdict":"out","segment":"","tier":"","reason":"AT&T - telecom carrier, no freight yard network"}
+{"id":"54695218840","verdict":"out","segment":"","tier":"","reason":"Zipline (flyzipline.com) - drone delivery tech, not a traditional freight yard operator"}
+{"id":"54696455960","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Danone (external.danone.com) - global CPG/food company with large US manufacturing and distribution network"}
+{"id":"54697075877","verdict":"out","segment":"","tier":"","reason":"Shake Shack - QSR restaurant chain, out"}
+{"id":"54697075883","verdict":"out","segment":"","tier":"","reason":"The ONE Group - restaurant/hospitality group, out"}
+{"id":"54697231114","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Zipline (zipline.com) - Zipline Logistics, US 3PL built for CPG retail compliance, nationwide transportation network"}
+{"id":"54698035471","verdict":"out","segment":"","tier":"","reason":"Handel's Ice Cream - QSR/ice cream franchise, hospitality, out"}
+{"id":"54699553874","verdict":"out","segment":"","tier":"","reason":"ARIA Hotel and Casino (mgmmirage.com) - MGM hospitality/gaming, out"}
+{"id":"54700172471","verdict":"in","segment":"agriculture_food_processing","tier":"B","reason":"Monterey Mushrooms - large-scale mushroom farming and distribution across multiple US growing facilities"}
+{"id":"54700172544","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Great Dane - major US trailer manufacturer with multiple plants and nationwide distribution network"}
+{"id":"54700172545","verdict":"out","segment":"","tier":"","reason":"7 Brew Coffee - QSR coffee drive-through chain, out"}
+{"id":"54701592928","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"thyssenkrupp Supply Chain Services - enterprise industrial supply chain 3PL with global multi-site operations"}
+{"id":"54701592930","verdict":"out","segment":"","tier":"","reason":"Robeks - juice bar QSR chain, out"}
+{"id":"54701592932","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"LiDestri Foods - private-label food and beverage manufacturer with multiple US production plants"}
+{"id":"54701592933","verdict":"out","segment":"","tier":"","reason":"The Halal Guys - QSR chain, out"}
+{"id":"54706737488","verdict":"in","segment":"chemicals_plastics","tier":"A","reason":"Koch (kochcompanies.com) - Koch Industries, massive industrial conglomerate with refining, chemicals, and distribution across hundreds of US facilities"}
+{"id":"54707346442","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Coca-Cola Southwest Beverages - large Coke bottler/distributor covering TX/NM with major DSD distribution network"}
+{"id":"54707346447","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Ashley Distribution Services - large furniture manufacturer dedicated carrier with multi-DC distribution network"}
+{"id":"54707346450","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Koch Trucking (kochtrucking.us) - US trucking carrier with multi-terminal operations"}
+{"id":"54707346451","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Federal Express Corporation - FedEx, global express carrier with massive US ground/freight network and hundreds of terminals"}
+{"id":"54709937205","verdict":"out","segment":"","tier":"","reason":"VillaKuyaya - appears to be a resort/hospitality property, out"}
+{"id":"54714445749","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"PepsiCo (intl.pepsico.com) - global CPG giant with massive US manufacturing and distribution network"}
+{"id":"54717078609","verdict":"in","segment":"agriculture_food_processing","tier":"B","reason":"Monterey Mushrooms (montmush.com) - large-scale mushroom producer with multiple US facilities"}
+{"id":"54723039352","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Caesarstone - engineered quartz surface manufacturer with US manufacturing plant and distribution network"}
+{"id":"54723055385","verdict":"in","segment":"automotive_heavy_mfg","tier":"B","reason":"Nifco (us.nifco.com) - US operations of Japanese automotive plastic fastener manufacturer with NA plants"}
+{"id":"54723055761","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Tyman Plc - building products manufacturer (door/window hardware) with multiple NA manufacturing sites"}
+{"id":"54726254714","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"Quality Distribution - largest bulk liquid chemical tanker carrier in US with 100+ terminals and large fleet"}
+{"id":"54726254953","verdict":"out","segment":"","tier":"","reason":"Orion Marine Group - marine construction contractor, project-based, no fixed yard network"}
+{"id":"54728238932","verdict":"out","segment":"","tier":"","reason":"forbesadvisor.com - Forbes media/publishing, out"}
+{"id":"54728252492","verdict":"out","segment":"","tier":"","reason":"PTL Marine - marine services/boat dealer, not freight yard vertical"}
+{"id":"54728407733","verdict":"out","segment":"","tier":"","reason":"Struc-Tech - structural engineering/construction, general contractor, out"}
+{"id":"54728408111","verdict":"out","segment":"","tier":"","reason":"Colorado Engineering - engineering services firm, out"}
+{"id":"54728427631","verdict":"out","segment":"","tier":"","reason":"WashingtonCoSchools - county school system, education, out"}
+{"id":"54734205014","verdict":"in","segment":"cpg_food_beverage","tier":"B","reason":"Playtex - consumer goods brand (Edgewell) with US manufacturing and distribution operations"}
+{"id":"54734205339","verdict":"in","segment":"paper_packaging","tier":"B","reason":"Anchor Packaging - US manufacturer of food service packaging with multiple production facilities"}
+{"id":"54734205482","verdict":"out","segment":"","tier":"","reason":"Auntie Anne's (auntieannesinc.com) - QSR/pretzel franchise, out"}
+{"id":"54734674301","verdict":"out","segment":"","tier":"","reason":"Hathaway Dinwiddie - general contractor, jobsite-based, out per rules"}
+{"id":"54734674731","verdict":"out","segment":"","tier":"","reason":"Dunkin Donuts Indonesia (dunkindonuts.co.id) - QSR, not North America, out"}
+{"id":"54734987698","verdict":"out","segment":"","tier":"","reason":"TFXNY/Fame Fashion House - small apparel brand, no freight yard network"}
+{"id":"54735414355","verdict":"out","segment":"","tier":"","reason":"Aris Mining - gold mining in Colombia/Latin America, not in NA freight verticals"}
+{"id":"54735414397","verdict":"out","segment":"","tier":"","reason":"Serta Restokraft - Indonesian mattress brand, not North America"}
+{"id":"54736049731","verdict":"out","segment":"","tier":"","reason":"Mehler Engineered Products - German technical textiles manufacturer, primarily European operations"}
+{"id":"54736049742","verdict":"review","segment":"","tier":"","reason":"sequel-us.com - multiple companies share Sequel name, cannot determine which entity without more context"}
+{"id":"54736061796","verdict":"out","segment":"","tier":"","reason":"Workterra - HR/benefits software platform, out"}
+{"id":"54750362895","verdict":"out","segment":"","tier":"","reason":"Global Core Technologies - IT services/consulting, out"}
+{"id":"54750831191","verdict":"out","segment":"","tier":"","reason":"OEG Inc. (oeg.us.com) - electrical contractor for commercial/industrial construction, not a yard operator"}
+{"id":"54752322959","verdict":"out","segment":"","tier":"","reason":"Velocity Ventures Inc. (vvexpressoil.com) - owns Express Oil Change auto service centers, not freight yard vertical"}
