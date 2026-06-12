@@ -17,9 +17,9 @@ import { classifyContact } from './model';
 import type { QualCompany, QualContact, VerdictDiff, EvaluateResult, Verdict } from './types';
 
 // ---------------------------------------------------------------------------
-// Contact properties the evaluate pipeline reads
+// Contact properties the evaluate pipeline reads (shared with incremental.ts)
 // ---------------------------------------------------------------------------
-const CONTACT_READ_PROPS = [
+export const CONTACT_READ_PROPS = [
   'email',
   'firstname',
   'lastname',
