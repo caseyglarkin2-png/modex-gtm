@@ -6,6 +6,9 @@ import { upsertContactFromQueueItem } from '@/lib/queue/contact-upsert';
 import { QueueAddBatchSchema } from '@/lib/validations';
 
 export const dynamic = 'force-dynamic';
+// A 200-item clawd chunk does up to 2 sequential HubSpot calls per item; the
+// default function timeout would 504 mid-loop with items already queued.
+export const maxDuration = 300;
 
 const DEFAULT_OWNER = 'casey@freightroll.com';
 
