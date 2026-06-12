@@ -56,6 +56,14 @@ export function decideIntentNotification({
   if (readTrafficQuality(snapshot.metadata) !== 'human') {
     return { notify: false, reason: 'non-human' };
   }
+  // Acute-noise floor (2026-06-12): a 7-second bounce that clicks a CTA is
+  // curiosity, not buying intent — pings were firing on sub-10s sessions
+  // while the daily Account Pulse digest now carries the rolled-up view.
+  // Real-time pings are reserved for sessions with actual dwell.
+  const minDwell = Number.parseInt(process.env.INTENT_PING_MIN_SECONDS ?? '45', 10);
+  if ((mergedSession.duration_seconds ?? 0) < minDwell) {
+    return { notify: false, reason: 'below-dwell-floor' };
+  }
   // A freshly-tripped CTA is the strongest same-session signal.
   const newCta =
     !!snapshot.lastCtaId && !(existing?.cta_ids ?? []).includes(snapshot.lastCtaId);
