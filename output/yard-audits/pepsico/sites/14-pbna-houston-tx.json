@@ -1,0 +1,92 @@
+{
+  "name": "PBNA - Houston TX",
+  "type": "Bottling Plant",
+  "coords": { "lat": 29.70720, "lng": -95.26630 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 29.708107, "lng": -95.268133 },
+      { "lat": 29.708465, "lng": -95.266897 },
+      { "lat": 29.708465, "lng": -95.265661 },
+      { "lat": 29.708286, "lng": -95.264425 },
+      { "lat": 29.706198, "lng": -95.265112 },
+      { "lat": 29.704946, "lng": -95.265936 },
+      { "lat": 29.704946, "lng": -95.268064 },
+      { "lat": 29.706616, "lng": -95.268167 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 29.705600, "lng": -95.268220 },
+      { "lat": 29.705600, "lng": -95.267960 },
+      { "lat": 29.705300, "lng": -95.267960 },
+      { "lat": 29.705300, "lng": -95.268220 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 29.706910, "lng": -95.268000 },
+        { "lat": 29.706910, "lng": -95.266970 },
+        { "lat": 29.706140, "lng": -95.266970 },
+        { "lat": 29.706140, "lng": -95.268000 }
+      ] },
+      { "ring": [
+        { "lat": 29.705970, "lng": -95.267080 },
+        { "lat": 29.705970, "lng": -95.265600 },
+        { "lat": 29.705730, "lng": -95.265600 },
+        { "lat": 29.705730, "lng": -95.267080 }
+      ] },
+      { "ring": [
+        { "lat": 29.708230, "lng": -95.268410 },
+        { "lat": 29.708230, "lng": -95.267860 },
+        { "lat": 29.707820, "lng": -95.267860 },
+        { "lat": 29.707820, "lng": -95.268410 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 29.706160, "lng": -95.266800 },
+        { "lat": 29.706160, "lng": -95.265900 },
+        { "lat": 29.705970, "lng": -95.265900 },
+        { "lat": 29.705970, "lng": -95.266800 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 29.705300, "lng": -95.268200 },
+      { "lat": 29.705300, "lng": -95.267980 },
+      { "lat": 29.704950, "lng": -95.267980 },
+      { "lat": 29.704950, "lng": -95.268200 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 218, "pano": "GNMvQXjP1wKE6bMH6-Ujdw", "hasCoverage": true },
+      "truckGate": { "heading": 0, "pano": "", "hasCoverage": false }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30, "trailersVisible": 110, "trailerParkingCapacity": 150,
+    "truckGateCount": 2, "buildingCount": 4, "siteAreaAcres": 28.2,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.70720,-95.26630,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoors", "entryLanes", "exitLanes", "shipRcvSeparate", "scale", "preGateStaging"],
+  "fieldNotes": {
+    "truckGate": "Canopied multi-lane gate complex on the south access road (z20, 29.70546,-95.26809): a large white canopy spans the roadway with lane arrows painted on the approach and a separate small white building immediately east of the canopy.",
+    "guardShack": "Dedicated small flat-roof building beside the gate canopy - guard office. Could also house automated check-in; staffing not verifiable (no Street View on the private road).",
+    "entryLanes": "Approach striping shows ~4 lanes under the canopy (apparent 2-in / 2-out); counted from z20 overhead only.",
+    "fastLaneOpportunity": "Wide canopy with 3+ total lanes and unused paved width on the approach.",
+    "dockDoors": "Clear dock row on the south face of the dark-roof south section (~18-22 trailers backed in) plus docks on the west inner court; total estimated ~30. Inner-court detail partly obscured by canopies/equipment.",
+    "dropArea": "Very large drop operation: ~8 rows of trailers in the west yard (~70), a ~35-trailer row south of the building, more in the NW corner.",
+    "preGateStaging": "Long striped approach south of the canopy with room for several trucks before the gate; no marked stalls.",
+    "truckGateCount": "South canopy gate is the truck gate; the NE drive off the La Porte Fwy frontage road serves the employee/visitor car lots.",
+    "multipleFacilities": "Single campus cluster: main plant plus a detached west warehouse and sheds; the container laydown further west appears to be a different business and was excluded."
+  },
+  "method": "deep-audit"
+}

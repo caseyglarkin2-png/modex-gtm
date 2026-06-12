@@ -1,0 +1,88 @@
+{
+  "name": "PBNA - Cheverly MD",
+  "type": "Bottling Plant",
+  "coords": { "lat": 38.92670, "lng": -76.92560 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 38.92752, "lng": -76.92710 },
+      { "lat": 38.92760, "lng": -76.92560 },
+      { "lat": 38.92790, "lng": -76.92470 },
+      { "lat": 38.92740, "lng": -76.92420 },
+      { "lat": 38.92655, "lng": -76.92425 },
+      { "lat": 38.92600, "lng": -76.92440 },
+      { "lat": 38.92549, "lng": -76.92520 },
+      { "lat": 38.92545, "lng": -76.92610 },
+      { "lat": 38.92645, "lng": -76.92725 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 38.92670, "lng": -76.92450 },
+      { "lat": 38.92670, "lng": -76.92410 },
+      { "lat": 38.92640, "lng": -76.92410 },
+      { "lat": 38.92640, "lng": -76.92450 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 38.92620, "lng": -76.92610 },
+        { "lat": 38.92620, "lng": -76.92460 },
+        { "lat": 38.92550, "lng": -76.92460 },
+        { "lat": 38.92550, "lng": -76.92610 }
+      ] },
+      { "ring": [
+        { "lat": 38.92790, "lng": -76.92500 },
+        { "lat": 38.92790, "lng": -76.92430 },
+        { "lat": 38.92700, "lng": -76.92430 },
+        { "lat": 38.92700, "lng": -76.92500 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 38.92645, "lng": -76.92590 },
+        { "lat": 38.92645, "lng": -76.92510 },
+        { "lat": 38.92620, "lng": -76.92510 },
+        { "lat": 38.92620, "lng": -76.92590 }
+      ] },
+      { "ring": [
+        { "lat": 38.92720, "lng": -76.92480 },
+        { "lat": 38.92720, "lng": -76.92435 },
+        { "lat": 38.92660, "lng": -76.92435 },
+        { "lat": 38.92660, "lng": -76.92480 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 278, "pano": "WV-YVxAC68KEbfCndGwawg", "hasCoverage": true },
+      "truckGate": { "heading": 277, "pano": "WV-YVxAC68KEbfCndGwawg", "hasCoverage": true },
+      "dropYards": { "heading": 65, "pano": "SGg2YVQZB5OhuMDBnCjd1g", "hasCoverage": true },
+      "dockAprons": { "heading": 0, "pano": "", "hasCoverage": false }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 26, "trailersVisible": 75, "trailerParkingCapacity": 90,
+    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 13.2,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.92670,-76.92560,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "dockDoors", "postGateStaging", "backupSensitive", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Single truck entrance at the west end of the Pepsi Pl cul-de-sac roundabout: chain-link fence both sides, gate hardware, 5-mph and STOP signage, and trucks pass under a large steel check-in canopy (Street View 2022-07).",
+    "guardShack": "A small tan booth-sized structure with a STOP sign sits beside the lane at the canopy; reads as a staffed check-in booth but could be a utility/office shed - flagged.",
+    "backupSensitive": "Gate sits ~40-50m from the public roundabout terminating Pepsi Pl; a 3+ truck queue would block the circle. Pepsi Pl is a low-traffic dead-end, so impact is mostly self-inflicted.",
+    "dockDoors": "South-face bank (~12 trailers docked) + east-face angled bank (~12-15); ~26 doors estimated, near the 25-50 band lower edge.",
+    "dropArea": "Large SE drop yard with dense angled rows (~45 trailers in one z19 frame) plus a NE trailer/shell yard north of the canopy.",
+    "coords": "Roster geocode (RANGE_INTERPOLATED, 38.926196,-76.927503) landed ~150m SW of the plant on the road; corrected center to the building at 38.9267,-76.9256.",
+    "railServed": "No rail spur visible; site is bounded by BW Parkway greenery and local roads."
+  },
+  "method": "deep-audit"
+}

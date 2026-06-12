@@ -1,0 +1,83 @@
+{
+  "name": "PBNA - Munster IN",
+  "type": "Bottling Plant",
+  "coords": { "lat": 41.54480, "lng": -87.51130 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 41.545970, "lng": -87.513600 },
+      { "lat": 41.545970, "lng": -87.509900 },
+      { "lat": 41.545600, "lng": -87.509900 },
+      { "lat": 41.545600, "lng": -87.509250 },
+      { "lat": 41.543680, "lng": -87.509350 },
+      { "lat": 41.543680, "lng": -87.512100 },
+      { "lat": 41.544700, "lng": -87.513100 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 41.546150, "lng": -87.509500 },
+      { "lat": 41.546150, "lng": -87.509050 },
+      { "lat": 41.545850, "lng": -87.509050 },
+      { "lat": 41.545850, "lng": -87.509500 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 41.545820, "lng": -87.513500 },
+        { "lat": 41.545820, "lng": -87.513100 },
+        { "lat": 41.545280, "lng": -87.513100 },
+        { "lat": 41.545280, "lng": -87.513500 }
+      ] },
+      { "ring": [
+        { "lat": 41.544060, "lng": -87.510580 },
+        { "lat": 41.544060, "lng": -87.509890 },
+        { "lat": 41.543680, "lng": -87.509890 },
+        { "lat": 41.543680, "lng": -87.510580 }
+      ] },
+      { "ring": [
+        { "lat": 41.545250, "lng": -87.513150 },
+        { "lat": 41.545150, "lng": -87.512900 },
+        { "lat": 41.544350, "lng": -87.512300 },
+        { "lat": 41.544450, "lng": -87.512550 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 41.545740, "lng": -87.512920 },
+        { "lat": 41.545740, "lng": -87.512500 },
+        { "lat": 41.544970, "lng": -87.512500 },
+        { "lat": 41.544970, "lng": -87.512920 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 280, "pano": "7WmUvJWZvK9hS-000PNYOw", "hasCoverage": true },
+      "truckGate": { "heading": 270, "pano": "BAwH2gEW76qUs_5fpuMkxQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30, "trailersVisible": 45, "trailerParkingCapacity": 60,
+    "truckGateCount": 2, "buildingCount": 3, "siteAreaAcres": 19.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.54480,-87.51130,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoors", "railServed", "shipRcvSeparate", "multipleFacilities", "dropArea"],
+  "fieldNotes": {
+    "truckGate": "No gate found at any access: the north entrance drive off Calumet Ave (by the Starbucks outparcel, where an Averitt semi was turning in on 2024-06 Street View) is an open yellow-hatched drive; the inner court entries off the east-west access road show no barrier; the south Calumet drive is also open. Open-campus pattern.",
+    "guardShack": "No booth structure at any entrance in satellite or 2024-06 Street View.",
+    "dockDoors": "Trailers backed on the plant's west face (~10), north court (~8), plus route-loading positions on the east building; ~20 trailers visibly docked, estimated ~30 doors across faces.",
+    "dropArea": "Distinctive silver Pepsi side-loader route trailers in herringbone rows: NW yard (~20), center-east yard (~15), plus a diagonal row staged along the rail corridor (~6).",
+    "railServed": "A rail line runs along the SW boundary with what may be an old spur alignment toward the plant's SW corner; no active spur into the property could be confirmed - set false, flagged.",
+    "multipleFacilities": "The audited parcel is the Pepsi complex (main multi-section plant + east building + south warehouse). The large DC north of the access road and the flex/office buildings south of the south drive are separate properties and were excluded."
+  },
+  "method": "deep-audit"
+}

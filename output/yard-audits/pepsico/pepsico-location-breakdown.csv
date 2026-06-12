@@ -1,0 +1,61 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,
+Gatorade - Tolleson AZ,Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,,,YES,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@33.4451,-112.2827,400m/data=!3m1!1e3"
+Gatorade - Wytheville VA,Manufacturing Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@36.9663,-81.0145,400m/data=!3m1!1e3"
+Gatorade - Indianapolis IN,Manufacturing Plant,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@39.6817,-86.2990,400m/data=!3m1!1e3"
+Gatorade - Atlanta GA,Manufacturing Plant,#4,Gate + GS (BU sens.),,,,,,,,,,,YES,YES,,,YES,YES,,YES,YES,,1,1,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@33.7113,-84.5961,400m/data=!3m1!1e3"
+Gatorade - Kissimmee FL,Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,,YES,,YES,,,,YES,Urban,,,,,"https://www.google.com/maps/@28.2578,-81.4888,400m/data=!3m1!1e3"
+Gatorade - Dallas TX,Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,YES,,YES,,,,,,YES,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@32.7172,-96.8706,400m/data=!3m1!1e3"
+Gatorade - Mountain Top PA,Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,,,YES,,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@41.129431,-75.886141,400m/data=!3m1!1e3"
+Gatorade - Oakland CA,Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,YES,YES,,1,1,,YES,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@37.76445,-122.20475,400m/data=!3m1!1e3"
+PBNA - Denver CO (High Point),Bottling Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,,,YES,,,,YES,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@39.8256,-104.7615,400m/data=!3m1!1e3"
+PBNA - Tucker GA,Bottling Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,YES,,YES,,,YES,Urban,,YES,,YES,"https://www.google.com/maps/@33.825483,-84.185547,400m/data=!3m1!1e3"
+PBNA - Mesquite TX,Bottling Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,1,1,YES,,,YES,,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@32.802466,-96.665808,400m/data=!3m1!1e3"
+PBNA - Tampa FL,Bottling Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,,,YES,YES,,YES,1,1,,,YES,,,,YES,,,,Urban,,,,,"https://www.google.com/maps/@28.05135,-82.42505,400m/data=!3m1!1e3"
+PBNA - Burnsville MN,Bottling Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,,YES,1,1,,,YES,,,,YES,,,,Urban,,YES,,YES,"https://www.google.com/maps/@44.79126,-93.25670,400m/data=!3m1!1e3"
+PBNA - Houston TX,Bottling Plant,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,2,YES,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@29.70720,-95.26630,400m/data=!3m1!1e3"
+PBNA - Phoenix AZ,Bottling Plant,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,1,YES,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@33.41368,-111.98742,400m/data=!3m1!1e3"
+PBNA - Sacramento CA,Bottling Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,YES,,,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@38.48324,-121.39854,400m/data=!3m1!1e3"
+PBNA - Las Vegas NV,Bottling Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,YES,Urban,,,,YES,"https://www.google.com/maps/@36.07220,-115.23410,400m/data=!3m1!1e3"
+PBNA - Munster IN,Bottling Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,,YES,1,1,,,,YES,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@41.54480,-87.51130,400m/data=!3m1!1e3"
+PBNA - Twinsburg OH,Bottling Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,,,YES,,,YES,,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@41.29349,-81.447631,400m/data=!3m1!1e3"
+PBNA - Cheverly MD,Bottling Plant,#4,Gate + GS (BU sens.),,,,,,,,,,,YES,YES,,,YES,YES,,YES,YES,,1,1,,,,YES,,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@38.92670,-76.92560,400m/data=!3m1!1e3"
+PBNA - Piscataway NJ,Bottling Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,,,YES,,,YES,,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@40.57735,-74.44230,400m/data=!3m1!1e3"
+PBNA - Knoxville TN,Bottling Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,YES,YES,,1,1,,,YES,,,,YES,,,YES,Urban,,,,YES,"https://www.google.com/maps/@35.96240,-83.96690,400m/data=!3m1!1e3"
+Quaker Oats - Cedar Rapids IA,Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,YES,YES,,,,,,YES,,,,,YES,,YES,Urban,,YES,,YES,"https://www.google.com/maps/@41.98220,-91.67100,400m/data=!3m1!1e3"
+Quaker Oats - Bridgeview IL,Manufacturing Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,,,YES,,YES,,,YES,,,,YES,Urban,,,,,"https://www.google.com/maps/@41.763445,-87.812487,400m/data=!3m1!1e3"
+Quaker Oats - Columbia MO,Manufacturing Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@38.99655,-92.28245,400m/data=!3m1!1e3"
+PBNA - Smyrna TN (DC),Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,,,,,,YES,,,,,,,Rural,,,,,"https://www.google.com/maps/@35.93745,-86.53895,400m/data=!3m1!1e3"
+PepsiCo - Brookshire TX (1NA Mixing Center DC),Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,,YES,,,YES,,,,YES,,,YES,,YES,Rural,,,,YES,"https://www.google.com/maps/@29.7663,-95.9152,400m/data=!3m1!1e3"
+Quaker - Lakeland FL (DC),Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@28.1527,-81.8908,400m/data=!3m1!1e3"
+PBNA - Portland OR (Clackamas DC),Distribution Center,#4,Gate + GS (BU sens.),,,,,,,,,,,YES,YES,,,YES,YES,,YES,YES,,1,1,,,YES,,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@45.39865,-122.54465,400m/data=!3m1!1e3"
+PBNA - Detroit MI (DC),Distribution Center,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@42.3553,-83.0442,400m/data=!3m1!1e3"
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,14,47%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,3,10%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,2,7%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,2,7%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,8,27%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,1,3%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,12,40%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,6,20%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,8,27%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,22,73%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,30,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

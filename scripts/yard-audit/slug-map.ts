@@ -72,6 +72,7 @@ const ENTRIES: SlugEntry[] = [
   { auditSlug: 'niagara-bottling', micrositeSlug: 'niagara-bottling', displayName: 'Niagara Bottling', archetype: 'beverage' },
   { auditSlug: 'pactiv-evergreen', micrositeSlug: 'pactiv-evergreen', displayName: 'Pactiv Evergreen', archetype: 'manufacturer' },
   { auditSlug: 'performance-food-group', micrositeSlug: 'performance-food-group', displayName: 'Performance Food Group', archetype: 'grocer-distributor' },
+  { auditSlug: 'pepsico', micrositeSlug: 'pepsico', displayName: 'PepsiCo', archetype: 'beverage', estimatedFootprint: 500, coverageNote: 'PepsiCo\'s company-owned beverage and foods network (PBNA, Gatorade, Quaker) last disclosed ~65 plants and ~440 distribution facilities for the beverage division alone (FY2017 10-K; current counts undisclosed). We audited 30 flagship company-owned plants and DCs. Frito-Lay is audited separately.' },
   { auditSlug: 'salson-logistics', micrositeSlug: 'salson-logistics', displayName: 'SalSon Logistics', archetype: '3pl' },
   { auditSlug: 'sc-johnson', micrositeSlug: 'sc-johnson', displayName: 'SC Johnson', archetype: 'cpg' },
   { auditSlug: 'the-home-depot', micrositeSlug: 'the-home-depot', displayName: 'The Home Depot', archetype: 'retailer', estimatedFootprint: 70, coverageNote: 'Home Depot operates ~70 RDC/SDC/FDC/DFC/BDC facilities supporting ~2,300 stores. We audited 30 representative supply-chain facilities; the audited cohort spans every facility type.' },

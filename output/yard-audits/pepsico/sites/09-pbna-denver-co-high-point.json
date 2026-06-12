@@ -1,0 +1,56 @@
+{
+  "name": "PBNA - Denver CO (High Point)",
+  "type": "Bottling Plant",
+  "coords": { "lat": 39.8256, "lng": -104.7615 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 39.827371, "lng": -104.765899 },
+      { "lat": 39.827561, "lng": -104.752953 },
+      { "lat": 39.82408, "lng": -104.752953 },
+      { "lat": 39.822815, "lng": -104.757073 },
+      { "lat": 39.822182, "lng": -104.760507 },
+      { "lat": 39.822519, "lng": -104.763152 },
+      { "lat": 39.823363, "lng": -104.765624 },
+      { "lat": 39.824945, "lng": -104.766173 }
+    ] },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 10, "pano": "oXaA5J0Bxgvze5kvnXVHlw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60, "trailersVisible": 0, "trailerParkingCapacity": 150,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 140.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.8256,-104.7615,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
+    "drivewayLong", "entryExitTogether", "entryLanes", "exitLanes",
+    "fastLaneOpportunity", "dockDoors", "dropArea", "shipRcvSeparate",
+    "dropYard", "multiStep", "dockDoorCount", "trailerParkingCapacity", "truckGateCount"
+  ],
+  "fieldNotes": {
+    "imagery": "All available Maxar satellite is MID-CONSTRUCTION (steel framing exposed, laydown yards); nearest Street View is 2021-08 pre-construction (barricaded road stub). The plant opened ~2025 per Denverite, so the finished gate/dock/yard layout is NOT verifiable from current imagery. Gate and yard flags are inferred from scale and typical new-build PBNA design, not observed.",
+    "truckGate": "Not observable. A 1.2M sq ft flagship plant is very likely gated in reality; left false per visible-evidence rule and flagged. Re-audit when post-2025 imagery lands.",
+    "dockDoors": "Building is ~1.2M sq ft (largest PBNA US plant); 50+ doors inferred from footprint, not counted.",
+    "perimeter": "Traced from grading limits: E 72nd Ave corridor (N), cultivated field line (E), drainage canal diagonal (SE), roundabout access road (S), creek corridor pad edge (W). Shoelace 140.6 acres vs 152 reported - consistent.",
+    "urbanRural": "High Point district at Denver metro's eastern edge near DIA; new residential subdivisions immediately west."
+  },
+  "method": "deep-audit"
+}

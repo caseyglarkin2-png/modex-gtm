@@ -1,0 +1,86 @@
+{
+  "name": "PBNA - Piscataway NJ",
+  "type": "Bottling Plant",
+  "coords": { "lat": 40.57735, "lng": -74.44230 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 40.57905, "lng": -74.44450 },
+      { "lat": 40.57950, "lng": -74.44280 },
+      { "lat": 40.57935, "lng": -74.44010 },
+      { "lat": 40.57725, "lng": -74.43940 },
+      { "lat": 40.57615, "lng": -74.43950 },
+      { "lat": 40.57600, "lng": -74.44190 },
+      { "lat": 40.57595, "lng": -74.44430 },
+      { "lat": 40.57770, "lng": -74.44455 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 40.57905, "lng": -74.44330 },
+      { "lat": 40.57905, "lng": -74.44290 },
+      { "lat": 40.57860, "lng": -74.44290 },
+      { "lat": 40.57860, "lng": -74.44330 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 40.57775, "lng": -74.44435 },
+        { "lat": 40.57775, "lng": -74.44360 },
+        { "lat": 40.57655, "lng": -74.44360 },
+        { "lat": 40.57655, "lng": -74.44435 }
+      ] },
+      { "ring": [
+        { "lat": 40.57650, "lng": -74.44400 },
+        { "lat": 40.57650, "lng": -74.44230 },
+        { "lat": 40.57620, "lng": -74.44230 },
+        { "lat": 40.57620, "lng": -74.44400 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 40.57690, "lng": -74.44330 },
+        { "lat": 40.57690, "lng": -74.44200 },
+        { "lat": 40.57660, "lng": -74.44200 },
+        { "lat": 40.57660, "lng": -74.44330 }
+      ] },
+      { "ring": [
+        { "lat": 40.57785, "lng": -74.44330 },
+        { "lat": 40.57785, "lng": -74.44220 },
+        { "lat": 40.57762, "lng": -74.44220 },
+        { "lat": 40.57762, "lng": -74.44330 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 169, "pano": "_0qpR6tiaid3We13FlWJZg", "hasCoverage": true },
+      "truckGate": { "heading": 159, "pano": "_0qpR6tiaid3We13FlWJZg", "hasCoverage": true },
+      "dropYards": { "heading": 0, "pano": "", "hasCoverage": false },
+      "dockAprons": { "heading": 0, "pano": "", "hasCoverage": false }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45, "trailersVisible": 85, "trailerParkingCapacity": 120,
+    "truckGateCount": 2, "buildingCount": 3, "siteAreaAcres": 37.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.57735,-74.44230,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "entryLanes", "exitLanes", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Both road entrances (north drive off New Brunswick Ave, east car entrance with monument sign) are open driveways with no barrier or booth visible from Street View (2025-09/10) or z20 satellite. The perimeter IS fenced (black fence along the east road), so an internal control point deeper in the yard is possible but not visible - flagged.",
+    "dockDoors": "Long south-face dock bank (~25-35 positions) plus a north-face bank (~15-20); ~45 total estimated from overhead.",
+    "dropArea": "West trailer yard (~25), a long south trailer row (~25), plus rows along the north pad; 85 trailers visible across frames.",
+    "shipRcvSeparate": "North-face and south-face dock banks are physically distinct clusters; inferred from overhead.",
+    "northPad": "Rows under what appear to be solar carport canopies on the north pad may also hold trailers; excluded from drop-yard rings due to canopy ambiguity.",
+    "coords": "Roster geocode (GEOMETRIC_CENTER) was on the property; locked center adjusted to the main building rooftop at 40.57735,-74.44230."
+  },
+  "method": "deep-audit"
+}

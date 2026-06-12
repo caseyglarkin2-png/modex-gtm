@@ -1,0 +1,86 @@
+{
+  "name": "PBNA - Sacramento CA",
+  "type": "Bottling Plant",
+  "coords": { "lat": 38.48324, "lng": -121.39854 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 38.483987, "lng": -121.401763 },
+      { "lat": 38.483987, "lng": -121.396579 },
+      { "lat": 38.482456, "lng": -121.396579 },
+      { "lat": 38.482456, "lng": -121.401763 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 38.484120, "lng": -121.396680 },
+      { "lat": 38.484120, "lng": -121.396320 },
+      { "lat": 38.483900, "lng": -121.396320 },
+      { "lat": 38.483900, "lng": -121.396680 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 38.483930, "lng": -121.401690 },
+        { "lat": 38.483930, "lng": -121.400110 },
+        { "lat": 38.482590, "lng": -121.400110 },
+        { "lat": 38.482590, "lng": -121.401690 }
+      ] },
+      { "ring": [
+        { "lat": 38.482660, "lng": -121.399550 },
+        { "lat": 38.482660, "lng": -121.397660 },
+        { "lat": 38.482520, "lng": -121.397660 },
+        { "lat": 38.482520, "lng": -121.399550 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 38.483060, "lng": -121.400120 },
+        { "lat": 38.483060, "lng": -121.399020 },
+        { "lat": 38.482750, "lng": -121.399020 },
+        { "lat": 38.482750, "lng": -121.400120 }
+      ] },
+      { "ring": [
+        { "lat": 38.483800, "lng": -121.399910 },
+        { "lat": 38.483800, "lng": -121.398880 },
+        { "lat": 38.483520, "lng": -121.398880 },
+        { "lat": 38.483520, "lng": -121.399910 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 38.483970, "lng": -121.398760 },
+      { "lat": 38.483970, "lng": -121.397830 },
+      { "lat": 38.483810, "lng": -121.397830 },
+      { "lat": 38.483810, "lng": -121.398760 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 281, "pano": "emDFKT5tDcjgu5xpbsf76g", "hasCoverage": true },
+      "truckGate": { "heading": 280, "pano": "tDsNagiukGn2S0qz6dc0zA", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 24, "trailersVisible": 60, "trailerParkingCapacity": 80,
+    "truckGateCount": 2, "buildingCount": 1, "siteAreaAcres": 19.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.48324,-121.39854,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoors", "shipRcvSeparate", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Both Reese Rd entrances are fenced with sliding vehicle gates (Street View 2025-03): the NE drive into the north truck court and the south front drive (chain-link gate rolled open, safety/check-in placards on the fence, yellow bollard).",
+    "guardShack": "No staffed booth visible at either gate in 2025-03 Street View or z19/z20 overhead; a small red kiosk-sized post sits beside the NE drive throat - reads as card-reader/kiosk check-in, so remoteGs=true. Flagged: a guard could sit inside the adjacent office wing.",
+    "dockDoors": "Dock rows on the SW face (solar-roof section, ~12 positions), south center (~6 under canopy), and north face (~8); ~19 trailers visibly backed in. Estimated ~24-26 total doors; band 10-25 chosen conservatively.",
+    "shipRcvSeparate": "North-face docks face the shared truck court (receiving) while south/SW docks face the fleet yard (route loading) - distinct dock clusters on opposite faces.",
+    "dropArea": "Large west fleet yard: rows of trailers along the north fence plus ~100 route trucks; trailer-only stalls est 25-50. South fence row holds route trucks.",
+    "railServed": "A rail line runs along the south boundary but no spur enters the property.",
+    "multipleFacilities": "The large DC immediately north (own dock row facing south) is a separate property; the shared-looking court is split along the drive line used as the north perimeter edge."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,64 @@
+{
+  "name": "Gatorade - Oakland CA",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 37.76445, "lng": -122.20475 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 37.76377, "lng": -122.2053 },
+      { "lat": 37.76438, "lng": -122.20572 },
+      { "lat": 37.76505, "lng": -122.20505 },
+      { "lat": 37.76503, "lng": -122.20455 },
+      { "lat": 37.76488, "lng": -122.2044 },
+      { "lat": 37.76445, "lng": -122.20419 },
+      { "lat": 37.7639, "lng": -122.20388 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 37.7639, "lng": -122.20532 },
+      { "lat": 37.76388, "lng": -122.20516 },
+      { "lat": 37.76376, "lng": -122.2052 },
+      { "lat": 37.76378, "lng": -122.20536 }
+    ] },
+    "dropYards": [],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 37.76392, "lng": -122.2051 },
+        { "lat": 37.76396, "lng": -122.2042 },
+        { "lat": 37.76388, "lng": -122.20418 },
+        { "lat": 37.76384, "lng": -122.20508 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 359, "pano": "a1plsuIKsFdihaL7LdRrWQ", "hasCoverage": true },
+      "truckGate": { "heading": 304, "pano": "5DsSXmn5cvdHeQX_mX1ORA", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 8, "trailersVisible": 4, "trailerParkingCapacity": 8,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 3.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.76445,-122.20475,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "0-10", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["dockDoors", "dockDoorCount", "trailerParkingCapacity", "perimeter west boundary"],
+  "fieldNotes": {
+    "truckGate": "No barrier or gate across the SW drive off 57th Ave in 2025-05 Street View; trailers back into street-side docks directly from 57th Ave. A check-in window office with CCTV sits at the building's SW corner facing the drive, but there is no controlled vehicle gate.",
+    "guardShack": "The corner check-in office is attached to the main building, not a freestanding booth beside a gate; classified false.",
+    "backupSensitive": "Docks face the public street; trucks queue and back from 57th Ave itself (Cheema, tanker, and Gatorade-liveried trailers parked at street docks in SV).",
+    "dockDoors": "1929-era 157k sq ft urban plant; ~4-6 street-side dock positions on the 57th Ave front plus a few openings inside the SW drive; west side is refrigeration/utility equipment, not docks.",
+    "dropArea": "No trailer storage on the parcel; the lined trailer stalls west of the plant belong to the neighboring warehouse property.",
+    "perimeter": "West boundary set along the drive between the plant's equipment strip and the neighbor's lined stalls; parcel line not visible, flagged."
+  },
+  "method": "deep-audit"
+}

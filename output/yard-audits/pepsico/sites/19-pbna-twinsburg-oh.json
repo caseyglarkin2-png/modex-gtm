@@ -1,0 +1,79 @@
+{
+  "name": "PBNA - Twinsburg OH",
+  "type": "Bottling Plant",
+  "coords": { "lat": 41.29349, "lng": -81.447631 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 41.29448, "lng": -81.44890 },
+      { "lat": 41.29448, "lng": -81.44555 },
+      { "lat": 41.29300, "lng": -81.44555 },
+      { "lat": 41.29300, "lng": -81.44460 },
+      { "lat": 41.29175, "lng": -81.44460 },
+      { "lat": 41.29175, "lng": -81.44890 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 41.29230, "lng": -81.44700 },
+      { "lat": 41.29230, "lng": -81.44650 },
+      { "lat": 41.29180, "lng": -81.44650 },
+      { "lat": 41.29180, "lng": -81.44700 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 41.29430, "lng": -81.44660 },
+        { "lat": 41.29430, "lng": -81.44550 },
+        { "lat": 41.29200, "lng": -81.44550 },
+        { "lat": 41.29200, "lng": -81.44660 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 41.29390, "lng": -81.44675 },
+        { "lat": 41.29390, "lng": -81.44610 },
+        { "lat": 41.29360, "lng": -81.44610 },
+        { "lat": 41.29360, "lng": -81.44675 }
+      ] },
+      { "ring": [
+        { "lat": 41.29345, "lng": -81.44780 },
+        { "lat": 41.29345, "lng": -81.44725 },
+        { "lat": 41.29315, "lng": -81.44725 },
+        { "lat": 41.29315, "lng": -81.44780 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 352, "pano": "DJADuchKN8yZy_VUUJIIZg", "hasCoverage": true },
+      "truckGate": { "heading": 2, "pano": "DJADuchKN8yZy_VUUJIIZg", "hasCoverage": true },
+      "dropYards": { "heading": 352, "pano": "mvyETOiKWgpDX5bM3yVv5Q", "hasCoverage": true },
+      "dockAprons": { "heading": 0, "pano": "", "hasCoverage": false }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35, "trailersVisible": 70, "trailerParkingCapacity": 110,
+    "truckGateCount": 2, "buildingCount": 2, "siteAreaAcres": 24,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.29349,-81.447631,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoors", "shipRcvSeparate", "entryLanes", "exitLanes", "multipleFacilities"],
+  "fieldNotes": {
+    "truckGate": "Main truck drive off E Highland Rd (west curb cut) is a wide open multi-lane concrete drive with no barrier, gate, or booth (Street View 2021-09). A secondary east drive has a manual chain-link sliding gate with a Pepsi sign, but it is not the primary controlled entrance.",
+    "entryLanes": "Main drive is a very wide unmarked concrete apron; no painted lane separation, so lane counts left null.",
+    "dockDoors": "Dock banks on the NE (gray) building face (~12-14 trailers docked) plus the main building SE corner bank (~8-10) and east-face positions; band 25-50 is an overhead estimate.",
+    "dropArea": "Dense trailer rows fill the east yard between the building and the pond, running from the rail corridor to E Highland Rd; 60+ drop positions plus a long nose-in row along the pond edge.",
+    "multipleFacilities": "A dark-roof warehouse parcel at the SE corner sits inside the traced perimeter; Pepsi blue bottle shells are stacked around it (Street View), so it appears operationally Pepsi, but parcel ownership was not verified.",
+    "shipRcvSeparate": "Two physically distinct dock clusters (NE gray-building bank vs main-building SE/east banks) suggest separate ship/receive; inferred from overhead only.",
+    "railServed": "A rail corridor runs along the north boundary but no spur visibly enters the property."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,88 @@
+{
+  "name": "PBNA - Detroit MI (DC)",
+  "type": "Distribution Center",
+  "coords": { "lat": 42.3553, "lng": -83.0442 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 42.356939, "lng": -83.046362 },
+      { "lat": 42.357574, "lng": -83.044577 },
+      { "lat": 42.357574, "lng": -83.043066 },
+      { "lat": 42.354656, "lng": -83.04183 },
+      { "lat": 42.353743, "lng": -83.041555 },
+      { "lat": 42.353058, "lng": -83.044989 },
+      { "lat": 42.354149, "lng": -83.04595 },
+      { "lat": 42.355671, "lng": -83.04619 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 42.354103, "lng": -83.042989 },
+      { "lat": 42.354091, "lng": -83.042817 },
+      { "lat": 42.353989, "lng": -83.042834 },
+      { "lat": 42.354002, "lng": -83.043006 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 42.35425, "lng": -83.045195 },
+        { "lat": 42.354605, "lng": -83.043478 },
+        { "lat": 42.35354, "lng": -83.043135 },
+        { "lat": 42.353185, "lng": -83.044851 }
+      ] },
+      { "ring": [
+        { "lat": 42.357142, "lng": -83.046499 },
+        { "lat": 42.357142, "lng": -83.044439 },
+        { "lat": 42.356686, "lng": -83.044439 },
+        { "lat": 42.356686, "lng": -83.046499 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 42.354656, "lng": -83.044851 },
+        { "lat": 42.354453, "lng": -83.044027 },
+        { "lat": 42.354199, "lng": -83.044096 },
+        { "lat": 42.354402, "lng": -83.04492 }
+      ] },
+      { "ring": [
+        { "lat": 42.35628, "lng": -83.044577 },
+        { "lat": 42.355975, "lng": -83.043478 },
+        { "lat": 42.355722, "lng": -83.043615 },
+        { "lat": 42.356026, "lng": -83.044714 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 321, "pano": "AZXLWwDtkbYvPFEm3UJ91g", "hasCoverage": true },
+      "truckGate": { "heading": 336, "pano": "AZXLWwDtkbYvPFEm3UJ91g", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35, "trailersVisible": 90, "trailerParkingCapacity": 120,
+    "truckGateCount": 2, "buildingCount": 2, "siteAreaAcres": 35.4,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.3553,-83.0442,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "dockDoors", "shipRcvSeparate", "truckGateCount"],
+  "fieldNotes": {
+    "truckGate": "fully fenced campus (chain-link visible along all road frontages in 2023-2025 SV); main SE entrance off Mack Ave has a sliding vehicle gate + stop-sign checkpoint (2025-09 SV) with a small white booth-size structure beside the lane at z20",
+    "guardShack": "small white checkpoint structure (~3x4m) beside the entrance drive just inside the SE gate; read as a guard booth from z20 overhead + SV context, flagged since the SV view partially obscures it",
+    "truckGateCount": "main SE gate plus a curb cut from Mack Ave directly into the S trailer field (open in 2025-09 SV; any inner gate not visible) - counted 2",
+    "dockDoors": "two dock banks: N face (angled backed trailers, ~18-22 positions) and S face near the trailer field (~10-12), plus doors on the NW warehouse; ~35 estimated",
+    "dropArea": "large angled-row trailer field in the SW quadrant (~50-60 trailers parked) plus N-side trailer rows (~20-25)",
+    "shipRcvSeparate": "opposing N and S dock banks on different building faces; operational split inferred",
+    "operationalNote": "production ended Sept 2025 (CBS Detroit/Food Dive) but warehouse/distribution continues; 2025-09 SV shows an active, secured site. Rooftop tanks from the bottling era remain on the E wing",
+    "railServed": "rail corridor parallels the NE boulevard outside the fence; no spur enters",
+    "fastLaneOpportunity": "wide entrance apron + abundant internal pavement at the SE gate",
+    "urbanRural": "Detroit east side, dense urban fabric -> Urban"
+  },
+  "method": "deep-audit"
+}

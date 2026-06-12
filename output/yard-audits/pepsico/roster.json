@@ -1,0 +1,488 @@
+{
+  "account": "PepsiCo",
+  "generatedAt": "2026-06-12",
+  "facilityCount": 30,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Gatorade - Tolleson AZ",
+      "city": "Tolleson",
+      "state": "AZ",
+      "type": "Manufacturing Plant",
+      "address": "409 S 104th Ave, Tolleson, AZ 85353",
+      "lat": 33.444955,
+      "lng": -112.282683,
+      "source": "City of Tolleson business directory (SVC Manufacturing / Stokely-Van Camp, the PepsiCo Gatorade subsidiary); Waze/TruckMap confirm site; West Valley View covered the PepsiCo Tolleson expansion",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Gatorade - Wytheville VA",
+      "city": "Wytheville",
+      "state": "VA",
+      "type": "Manufacturing Plant",
+      "address": "316 Gator Ln, Wytheville, VA 24382",
+      "lat": 36.966413,
+      "lng": -81.016208,
+      "source": "Wythe County Joint IDA ('Gatorade Finds Eighth Home in Wythe County', Progress Park at I-77/I-81); listings show PepsiCo Blue Ridge Gatorade at 316 Gator Lane; adjacent 200 Pepsi Way is a separate Pepsi bottling site",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Gatorade - Indianapolis IN",
+      "city": "Indianapolis",
+      "state": "IN",
+      "type": "Manufacturing Plant",
+      "address": "5858 Decatur Blvd, Indianapolis, IN 46241",
+      "lat": 39.681969,
+      "lng": -86.298368,
+      "source": "US DOE Better Plants project profile (2020 Better Project Award) names it one of eight PBNA Gatorade facilities; EnergyStar 'PepsiCo Indianapolis Hotfill Plant' (Gatorade/Propel); AmeriPlex near Indianapolis airport",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Gatorade - Atlanta GA",
+      "city": "Atlanta",
+      "state": "GA",
+      "type": "Manufacturing Plant",
+      "address": "1635 Westgate Pkwy SW, Atlanta, GA 30336",
+      "lat": 33.711066,
+      "lng": -84.596268,
+      "source": "Fulton Industrial CID business spotlight confirms the PepsiCo Gatorade plant on Westgate Parkway (400+ employees, 45M+ cases/yr); some listings give 1650 - street number is the only uncertainty",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Gatorade - Kissimmee FL",
+      "city": "Kissimmee",
+      "state": "FL",
+      "type": "Manufacturing Plant",
+      "address": "1650 S Poinciana Blvd, Kissimmee, FL 34758",
+      "lat": 28.25802,
+      "lng": -81.488307,
+      "source": "Osceola County government news release on the $30M Gatorade plant expansion (operated by SVC Manufacturing Inc., PepsiCo subsidiary); Kissimmee Chamber directory",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Gatorade - Dallas TX",
+      "city": "Dallas",
+      "state": "TX",
+      "type": "Manufacturing Plant",
+      "address": "3030 Glenfield Ave, Dallas, TX 75233",
+      "lat": 32.717296,
+      "lng": -96.870954,
+      "source": "US DOE Better Plants showcase ('PepsiCo: Dallas Gatorade Plant Water Reduction Upgrades') confirms active plant; City of Dallas industrial pretreatment user list places Gatorade at 3030 Glenfield Ave",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 7,
+      "name": "Gatorade - Mountain Top PA",
+      "city": "Mountain Top",
+      "state": "PA",
+      "type": "Manufacturing Plant",
+      "address": "750 Oak Hill Rd, Mountain Top, PA 18707",
+      "lat": 41.129431,
+      "lng": -75.886141,
+      "source": "Cleveland Brothers (Caterpillar) case study on the plant's CHP system producing 140M gallons of Gatorade annually; Crestwood Industrial Park; directories list PepsiCo at 750 Oak Hill Rd",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 8,
+      "name": "Gatorade - Oakland CA",
+      "city": "Oakland",
+      "state": "CA",
+      "type": "Manufacturing Plant",
+      "address": "1175 57th Ave, Oakland, CA 94621",
+      "lat": 37.764114,
+      "lng": -122.205174,
+      "source": "StopWaste/Upstream Solutions case study: PepsiCo acquired the plant in the 2001 Quaker merger and dedicated it to bottling Gatorade; directory listings confirm address; fewer recent (2024+) sources than other Gatorade plants - medium confidence",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 9,
+      "name": "PBNA - Denver CO (High Point)",
+      "city": "Denver",
+      "state": "CO",
+      "type": "Bottling Plant",
+      "address": "19300 E 72nd Ave, Denver, CO 80249",
+      "lat": 39.825346,
+      "lng": -104.75776,
+      "source": "New greenfield mega-plant: PR Newswire land acquisition (152 acres, 1.2M sq ft, High Point district at E 72nd & Tower Rd near DIA); BusinessDen parcel filing (also 6972 N Argonne St); Denverite Mar 2025 confirms plant active. Largest PBNA US plant, replaced the RiNo Denver plant",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 10,
+      "name": "PBNA - Tucker GA",
+      "city": "Tucker",
+      "state": "GA",
+      "type": "Bottling Plant",
+      "address": "1644 Rock Mountain Blvd, Tucker, GA 30083",
+      "lat": 33.825483,
+      "lng": -84.185547,
+      "source": "GA Governor's office 2022: PBNA invested $260M to expand this company-owned DeKalb County plant 5x; one of the largest plants in PBNA's portfolio",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 11,
+      "name": "PBNA - Mesquite TX",
+      "city": "Mesquite",
+      "state": "TX",
+      "type": "Bottling Plant",
+      "address": "4532 Interstate 30 E, Mesquite, TX 75150",
+      "lat": 32.802466,
+      "lng": -96.665808,
+      "source": "Gray Construction bottling-line expansion project page for Pepsi Beverages Mesquite; Waze/BBB/D&B listings (Pepsi-Cola Metropolitan Bottling Co, the PBNA legal entity)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 12,
+      "name": "PBNA - Tampa FL",
+      "city": "Tampa",
+      "state": "FL",
+      "type": "Bottling Plant",
+      "address": "11315 N 30th St, Tampa, FL 33612",
+      "lat": 28.051399,
+      "lng": -82.42576,
+      "source": "Yelp/Waze/D&B 'PepsiCo Tampa' bottling plant; PBNA company-owned (ex-Pepsi Bottling Group) Florida production site",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 13,
+      "name": "PBNA - Burnsville MN",
+      "city": "Burnsville",
+      "state": "MN",
+      "type": "Bottling Plant",
+      "address": "1300 Cliff Rd E, Burnsville, MN 55337",
+      "lat": 44.791272,
+      "lng": -93.256578,
+      "source": "D&B: Pepsi-Cola Metropolitan Bottling Co beverage manufacturing; Yelp/Waze listings. Nearby 11601 12th Ave S is a separate Pepsi warehouse",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 14,
+      "name": "PBNA - Houston TX",
+      "city": "Houston",
+      "state": "TX",
+      "type": "Bottling Plant",
+      "address": "9300 La Porte Fwy, Houston, TX 77017",
+      "lat": 29.706914,
+      "lng": -95.266485,
+      "source": "Gray Construction beverage warehouse expansion project for Pepsi Beverages Houston; NLRB case records and business listings at this address",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 15,
+      "name": "PBNA - Phoenix AZ",
+      "city": "Phoenix",
+      "state": "AZ",
+      "type": "Bottling Plant",
+      "address": "4242 E Raymond St, Phoenix, AZ 85040",
+      "lat": 33.413682,
+      "lng": -111.987423,
+      "source": "Buzzfile/IndustryNet list Pepsi-Cola Metropolitan Bottling manufacturing here, ~450 employees; multiple directory listings",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 16,
+      "name": "PBNA - Sacramento CA",
+      "city": "Sacramento",
+      "state": "CA",
+      "type": "Bottling Plant",
+      "address": "7550 Reese Rd, Sacramento, CA 95828",
+      "lat": 38.483235,
+      "lng": -121.398536,
+      "source": "D&B Pepsi-Cola Metropolitan Bottling Co profile at this address; Yelp/CalRest listings",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 17,
+      "name": "PBNA - Las Vegas NV",
+      "city": "Las Vegas",
+      "state": "NV",
+      "type": "Bottling Plant",
+      "address": "6500 W Sunset Rd, Las Vegas, NV 89118",
+      "lat": 36.071804,
+      "lng": -115.234118,
+      "source": "Packaging Gateway project profile (387,400 sq ft bottling + distribution, built 2008, Rainbow Blvd & Sunset Rd); Clark County business license at this address. 3333 Sirius Ave is the superseded old facility",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 18,
+      "name": "PBNA - Munster IN",
+      "city": "Munster",
+      "state": "IN",
+      "type": "Bottling Plant",
+      "address": "9300 Calumet Ave, Munster, IN 46321",
+      "lat": 41.544577,
+      "lng": -87.509931,
+      "source": "Yelp/BBB/Munster Chamber; 350+ employee bottling facility, ex-PepsiAmericas now PBNA company-owned; key Chicagoland plant after the Chicago 51st St plant closed Oct 2024",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 19,
+      "name": "PBNA - Twinsburg OH",
+      "city": "Twinsburg",
+      "state": "OH",
+      "type": "Bottling Plant",
+      "address": "1999 Enterprise Pkwy, Twinsburg, OH 44087",
+      "lat": 41.29349,
+      "lng": -81.447631,
+      "source": "D&B Pepsi-Cola Metropolitan Bottling Co (PBNA legal entity); production plus distribution center for Northeast Ohio",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 20,
+      "name": "PBNA - Cheverly MD",
+      "city": "Cheverly",
+      "state": "MD",
+      "type": "Bottling Plant",
+      "address": "2511 Pepsi Pl, Cheverly, MD 20781",
+      "lat": 38.926196,
+      "lng": -76.927503,
+      "source": "Bottling Group LLC (PBNA legal entity) per D&B/YellowPages; landmark Pepsi plant along the Baltimore-Washington Pkwy serving the DC metro",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 21,
+      "name": "PBNA - Piscataway NJ",
+      "city": "Piscataway",
+      "state": "NJ",
+      "type": "Bottling Plant",
+      "address": "2200 New Brunswick Ave, Piscataway, NJ 08854",
+      "lat": 40.577202,
+      "lng": -74.441571,
+      "source": "D&B Pepsi-Cola Metropolitan Bottling Co (PBNA entity) at this address; company-owned NJ production site (Pennsauken NJ is Honickman-owned, excluded as independent)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 22,
+      "name": "PBNA - Knoxville TN",
+      "city": "Knoxville",
+      "state": "TN",
+      "type": "Bottling Plant",
+      "address": "3501 Middlebrook Pike, Knoxville, TN 37921",
+      "lat": 35.962273,
+      "lng": -83.966785,
+      "source": "D&B Pepsi-Cola Metropolitan Bottling Co (PBNA entity) at Middlebrook Pike; Knoxville Chamber lists Pepsi Beverages Company",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 23,
+      "name": "Quaker Oats - Cedar Rapids IA",
+      "city": "Cedar Rapids",
+      "state": "IA",
+      "type": "Manufacturing Plant",
+      "address": "418 2nd Street NE, Cedar Rapids, IA 52401",
+      "lat": 41.982507,
+      "lng": -91.671818,
+      "source": "Wikipedia (Quaker Oats Plant, operational, coords given) + Iowa DNR Facility Explorer + Cedar Rapids Metro Economic Alliance; world's largest cereal mill, ~740 employees, PepsiCo/Quaker Foods",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 124
+      }
+    },
+    {
+      "idx": 24,
+      "name": "Quaker Oats - Bridgeview IL",
+      "city": "Bridgeview",
+      "state": "IL",
+      "type": "Manufacturing Plant",
+      "address": "7700 W 71st St, Bridgeview, IL 60455",
+      "lat": 41.763445,
+      "lng": -87.812487,
+      "source": "D&B company profile + Food Business News / Baking Business (Oct 2021 PepsiCo production-line expansion); makes Rice-A-Roni, Pasta Roni, Near East, Cheetos Mac 'N Cheese; Quaker Foods plant, not Frito-Lay",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 25,
+      "name": "Quaker Oats - Columbia MO",
+      "city": "Columbia",
+      "state": "MO",
+      "type": "Manufacturing Plant",
+      "address": "4501 Paris Rd, Columbia, MO 65202",
+      "lat": 38.996817,
+      "lng": -92.282298,
+      "source": "Columbia MO Chamber of Commerce member listing + COMO Business Times; rice cakes / baking plant, named by PepsiCo as a receiving plant for production shifted from the closed Danville IL plant (Food Dive, Apr 2024)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 26,
+      "name": "PBNA - Smyrna TN (DC)",
+      "city": "Smyrna",
+      "state": "TN",
+      "type": "Distribution Center",
+      "address": "2020 Midway Ln, Smyrna, TN 37167",
+      "lat": 35.937045,
+      "lng": -86.539323,
+      "source": "PBNA press release Aug 2024: ~400k sq ft, largest PBNA DC in the Southeast and 2nd largest nationally; replaced the sold Nashville Westbelt Dr warehouse",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 27,
+      "name": "PepsiCo - Brookshire TX (1NA Mixing Center DC)",
+      "city": "Brookshire",
+      "state": "TX",
+      "type": "Distribution Center",
+      "address": "31270 Kingsland Blvd, Brookshire, TX 77423",
+      "lat": 29.764425,
+      "lng": -95.917778,
+      "source": "Houston Business Journal/KHOU + Traded.co lease record (2025): ~1.05M sq ft, PepsiCo's first 'One North America' mixing center combining Pepsi + Frito-Lay + Quaker under one roof. Shared facility (carries Frito-Lay volume too); not on the Frito-Lay roster",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 28,
+      "name": "Quaker - Lakeland FL (DC)",
+      "city": "Lakeland",
+      "state": "FL",
+      "type": "Distribution Center",
+      "address": "3401 Old Polk City Rd, Lakeland, FL 33805",
+      "lat": 28.152441,
+      "lng": -81.889084,
+      "source": "Griffin Capital press release (2018): 605,412 sq ft cross-dock DC, tenant Quaker Sales & Distribution Inc. (PepsiCo subsidiary), NNN lease through Jul 2028; CenterState Logistics Park East. Distributes Quaker, Gatorade, Aquafina",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 29,
+      "name": "PBNA - Portland OR (Clackamas DC)",
+      "city": "Clackamas",
+      "state": "OR",
+      "type": "Distribution Center",
+      "address": "11650 SE Capps Rd, Clackamas, OR 97015",
+      "lat": 45.398811,
+      "lng": -122.544699,
+      "source": "VLMK Engineering + Perlo Construction project pages: new 126,360 sq ft Pepsi distribution center replacing the demolished NE Portland plant (Pepsi Blocks redevelopment); operates under Pepsi Northwest Beverages LLC, a PepsiCo-majority JV",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 30,
+      "name": "PBNA - Detroit MI (DC)",
+      "city": "Detroit",
+      "state": "MI",
+      "type": "Distribution Center",
+      "address": "1555 Mack Ave, Detroit, MI 48207",
+      "lat": 42.355265,
+      "lng": -83.04389,
+      "source": "CBS Detroit / Food Dive 2025: PepsiCo ended production at the Mack Ave plant in Sept 2025 but continues running the warehouse/distribution operation there; was the PBNA Detroit bottling plant",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    }
+  ],
+  "geocodedAt": "2026-06-12"
+}

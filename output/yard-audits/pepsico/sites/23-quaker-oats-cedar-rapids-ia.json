@@ -1,0 +1,86 @@
+{
+  "name": "Quaker Oats - Cedar Rapids IA",
+  "type": "Manufacturing Plant",
+  "coords": { "lat": 41.98220, "lng": -91.67100 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 41.98430, "lng": -91.67280 },
+      { "lat": 41.98470, "lng": -91.67180 },
+      { "lat": 41.98430, "lng": -91.67080 },
+      { "lat": 41.98300, "lng": -91.66980 },
+      { "lat": 41.98180, "lng": -91.66920 },
+      { "lat": 41.98080, "lng": -91.66920 },
+      { "lat": 41.98040, "lng": -91.67060 },
+      { "lat": 41.98000, "lng": -91.67200 },
+      { "lat": 41.98010, "lng": -91.67240 },
+      { "lat": 41.98150, "lng": -91.67230 },
+      { "lat": 41.98300, "lng": -91.67260 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 41.98075, "lng": -91.67085 },
+      { "lat": 41.98075, "lng": -91.67050 },
+      { "lat": 41.98045, "lng": -91.67050 },
+      { "lat": 41.98045, "lng": -91.67085 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 41.98375, "lng": -91.67160 },
+        { "lat": 41.98375, "lng": -91.67065 },
+        { "lat": 41.98305, "lng": -91.67065 },
+        { "lat": 41.98305, "lng": -91.67160 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 41.98190, "lng": -91.67165 },
+        { "lat": 41.98155, "lng": -91.67090 },
+        { "lat": 41.98135, "lng": -91.67105 },
+        { "lat": 41.98170, "lng": -91.67180 }
+      ] },
+      { "ring": [
+        { "lat": 41.98150, "lng": -91.67010 },
+        { "lat": 41.98150, "lng": -91.66950 },
+        { "lat": 41.98110, "lng": -91.66950 },
+        { "lat": 41.98110, "lng": -91.67010 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 351, "pano": "eaS0R8qNXbpCQG_L1UbZaQ", "hasCoverage": true },
+      "truckGate": { "heading": 20, "pano": "eaS0R8qNXbpCQG_L1UbZaQ", "hasCoverage": true },
+      "dropYards": { "heading": 0, "pano": "", "hasCoverage": false },
+      "dockAprons": { "heading": 337, "pano": "eaS0R8qNXbpCQG_L1UbZaQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22, "trailersVisible": 40, "trailerParkingCapacity": 60,
+    "truckGateCount": 2, "buildingCount": 8, "siteAreaAcres": 26.5,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.98220,-91.67100,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "dropArea", "scale", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "The visible truck access - the SE dock apron curb cut off the public street (PEPSICO/QUAKER signed building, SV 2021-09) - is an open apron with no barrier or booth; trucks back to docks essentially off the street. An interior control for the north rail-side trailer yard could not be observed (no SV coverage inside) - flagged.",
+    "backupSensitive": "Downtown setting: dock maneuvering and any queue happens at the public street edge next to a freeway ramp block.",
+    "dockDoors": "South dock building (~10-14 angled positions) + an east-face bank (~8); mill buildings load via rail and internal bays; ~22 truck doors estimated.",
+    "dropArea": "Main trailer rows sit in the north yard between the elevator/silos and the rail corridor (~20-25), plus scattered south positions; ~40 visible.",
+    "multipleFacilities": "Two distinct large clusters on one property: the downtown mill cluster (silos + production + docks) and the north warehouse/elevator with its own yard, linked by an overhead conveyor.",
+    "railServed": "Heavily rail-served: mainline + multiple spurs with hopper-car strings along the east side; unit-train loading at the north elevator.",
+    "scale": "A truck scale is plausible at a mill this size but none was identifiable overhead.",
+    "perimeter": "Bounded by the Cedar River (west), the rail corridor (east), the north elevator yard, and the downtown street (south). Parcel lines vs operational footprint are approximate in the NE rail zone.",
+    "coords": "Roster geocode (GEOMETRIC_CENTER, moved 124m) was on the complex; locked center set mid-complex at 41.98220,-91.67100."
+  },
+  "method": "deep-audit"
+}
