@@ -207,11 +207,19 @@ export function dedupeByContact(diff: VerdictDiff[]): VerdictDiff[] {
   return [...byContact.values()];
 }
 
+const pulseNum = (s: string): number => {
+  const n = parseFloat(s);
+  return Number.isNaN(n) ? 0 : n;
+};
+
 export function buildDiff(pairs: { company: QualCompany; contact: QualContact }[]): VerdictDiff[] {
   return pairs.map(({ company, contact }) => {
     const newVerdict = classifyContact(company, contact);
     const currentVerdict = (contact.yardflow_qual_verdict || 'none') as Verdict;
+    const hasPulse =
+      pulseNum(contact.hs_email_open) >= 1 || pulseNum(contact.hs_email_replied) >= 1;
     return {
+      hasPulse,
       contactId: contact.id,
       name: `${contact.firstname} ${contact.lastname}`.trim(),
       email: contact.email,

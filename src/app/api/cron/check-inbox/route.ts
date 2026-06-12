@@ -3,6 +3,7 @@ import { isAuthorizedCronRequest } from '@/lib/cron-auth';
 import { prisma } from '@/lib/prisma';
 import { getRecentReplies, markAsProcessed } from '@/lib/email/gmail-inbox';
 import { logReplyToHubSpot } from '@/lib/hubspot/emails';
+import { searchContactByEmail, stampContactReplyIntent } from '@/lib/hubspot/contacts';
 import { INBOX_POLLING_ENABLED } from '@/lib/feature-flags';
 import { markCronFailure, markCronSkipped, markCronStarted, markCronSuccess } from '@/lib/cron-monitor';
 import { ensureLocalMeetingDealLink } from '@/lib/hubspot/deals';
@@ -192,6 +193,15 @@ export async function GET(request: Request) {
         await logReplyToHubSpot(reply.subject, reply.snippet, reply.fromEmail);
       } catch {
         // Non-fatal: HubSpot failure shouldn't block processing
+      }
+
+      // Stamp reply-intent so the qualification engine's SQL gate sees it (drip replies
+      // arrive via Gmail and never set HubSpot's native reply fields).
+      try {
+        const hsContact = await searchContactByEmail(reply.fromEmail);
+        if (hsContact) await stampContactReplyIntent(hsContact.id);
+      } catch {
+        // Non-fatal
       }
 
       created++;

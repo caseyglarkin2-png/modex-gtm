@@ -5,7 +5,7 @@ import { ensureQualificationProperties } from '@/lib/hubspot/properties';
 import { evaluateQualification } from '@/lib/revops/qualification/evaluate';
 import { evaluateIncremental, resolveSinceHours } from '@/lib/revops/qualification/incremental';
 import { applyVerdicts } from '@/lib/revops/qualification/apply';
-import { notifyNewSqls } from '@/lib/revops/qualification/notify';
+import { notifyNewSqls, notifyDailyStats } from '@/lib/revops/qualification/notify';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 300;
@@ -46,8 +46,25 @@ export async function GET(request: Request) {
       scope === 'full' ? await evaluateQualification() : await evaluateIncremental(sinceHours);
     const changedRows = result.diff.filter((d) => d.changed);
 
-    const applied = mode === 'apply' ? await applyVerdicts(changedRows) : { updated: 0 };
-    if (mode === 'apply') await notifyNewSqls(changedRows).catch(() => undefined);
+    const applied =
+      mode === 'apply' ? await applyVerdicts(changedRows) : { updated: 0, promoted: 0 };
+    const newSqls = changedRows.filter(
+      (d) => d.newVerdict === 'sql' && d.currentVerdict !== 'sql',
+    ).length;
+    if (mode === 'apply') {
+      await notifyNewSqls(changedRows).catch(() => undefined);
+      await notifyDailyStats({
+        scope,
+        sinceHours: scope === 'incremental' ? sinceHours : undefined,
+        contacts: result.contacts,
+        counts: result.counts,
+        changes: result.changes,
+        applied: applied.updated,
+        promoted: applied.promoted,
+        newSqls,
+        warnings: result.warnings,
+      }).catch(() => undefined);
+    }
 
     const stats = {
       mode,
@@ -58,6 +75,7 @@ export async function GET(request: Request) {
       counts: result.counts,
       changes: result.changes,
       applied: applied.updated,
+      promoted: applied.promoted,
       warnings: result.warnings.length,
     };
     await markCronSuccess(CRON_NAME, {

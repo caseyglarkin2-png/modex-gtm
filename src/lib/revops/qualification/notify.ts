@@ -46,3 +46,37 @@ export async function notifyNewSqls(rows: VerdictDiff[]): Promise<boolean> {
   if (!msg) return false;
   return sendSlackNotification(msg);
 }
+
+export interface DailyStatsInput {
+  scope: string;
+  sinceHours?: number;
+  contacts: number;
+  counts: { none: number; mql: number; sql: number };
+  changes: number;
+  applied: number;
+  promoted: number;
+  newSqls: number;
+  warnings: string[];
+}
+
+/**
+ * Build the daily qualification health post for #yardflow-intent. Pure.
+ * Posted on every apply run (quiet days included — silence would be indistinguishable
+ * from a broken cron).
+ */
+export function buildDailyStats(s: DailyStatsInput): string {
+  const window = s.scope === 'incremental' ? ` (last ${s.sinceHours ?? '?'}h)` : ' (full sweep)';
+  const lines = [
+    `📊 Daily qualification run${window}`,
+    `• Evaluated ${s.contacts} contacts at TAM accounts: ${s.counts.sql} sql / ${s.counts.mql} mql / ${s.counts.none} none`,
+    `• ${s.changes} verdict change(s), ${s.applied} written, ${s.promoted} lifecycle promotion(s)`,
+    s.newSqls > 0 ? `• 🔥 ${s.newSqls} NEW SQL(s) — details above` : '• No new SQLs today',
+  ];
+  for (const w of s.warnings.slice(0, 3)) lines.push(`• ⚠️ ${w}`);
+  return lines.join('\n');
+}
+
+/** Post the daily stats summary. Returns false when SLACK_WEBHOOK_URL is unset. */
+export async function notifyDailyStats(s: DailyStatsInput): Promise<boolean> {
+  return sendSlackNotification(buildDailyStats(s));
+}

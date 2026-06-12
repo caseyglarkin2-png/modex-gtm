@@ -10,6 +10,7 @@ const base: VerdictDiff = {
   companyName: 'Acme',
   icpScore: 90,
   tamTier: '1',
+  hasPulse: false,
   seniority: 'director',
   role: 'operations',
   jobtitle: 'Director of Operations',

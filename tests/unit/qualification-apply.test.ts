@@ -6,7 +6,7 @@ const row = { contactId: '1', newVerdict: 'mql' } as VerdictDiff;
 
 describe('applyVerdicts', () => {
   it('no-ops on empty input', async () => {
-    expect(await applyVerdicts([])).toEqual({ updated: 0 });
+    expect(await applyVerdicts([])).toEqual({ updated: 0, promoted: 0 });
   });
   it('is blocked by the external-write-guard in test mode', async () => {
     // NODE_ENV=test + default BLOCK_EXTERNAL_WRITES_IN_TEST -> throws before any live write
