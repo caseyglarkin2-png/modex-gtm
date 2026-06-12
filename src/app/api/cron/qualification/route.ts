@@ -3,6 +3,7 @@ import { isAuthorizedCronRequest } from '@/lib/cron-auth';
 import { markCronStarted, markCronSuccess, markCronFailure } from '@/lib/cron-monitor';
 import { ensureQualificationProperties } from '@/lib/hubspot/properties';
 import { evaluateQualification } from '@/lib/revops/qualification/evaluate';
+import { evaluateIncremental, resolveSinceHours } from '@/lib/revops/qualification/incremental';
 import { applyVerdicts } from '@/lib/revops/qualification/apply';
 import { notifyNewSqls } from '@/lib/revops/qualification/notify';
 
@@ -11,13 +12,17 @@ export const maxDuration = 300;
 
 const CRON_NAME = 'qualification';
 const CRON_PATH = '/api/cron/qualification';
-const CRON_SCHEDULE = '0 11 * * *';
+const CRON_SCHEDULE = '30 11 * * *';
 
 /**
  * MQL/SQL qualification engine.
- * - mode=dryrun (default): evaluate the TAM, return counts + a sample of changed rows. Writes nothing.
- * - mode=apply: also write yardflow_qual_verdict to changed contacts (advisory field; native
- *   workflows do the lifecycle actuation). The verdict write has no CRM side effects on its own.
+ * - scope=incremental (default): evaluate only contacts/companies modified in the lookback
+ *   window (?sinceHours=, default 26). Fits the 300s serverless budget — this is what the
+ *   daily Vercel cron runs. scope=full walks the whole TAM (LOCAL USE ONLY: ~40min, will
+ *   time out on Vercel — use scripts/tam/backfill-qualification.mjs instead).
+ * - mode=dryrun: counts + sample, writes nothing. mode=apply: writes yardflow_qual_verdict
+ *   and posts new SQLs to #yardflow-intent. Vercel-SCHEDULED invocations (Bearer auth, no
+ *   explicit mode param) default to apply; manual ?secret= calls default to dryrun.
  */
 export async function GET(request: Request) {
   if (!isAuthorizedCronRequest(request)) {
@@ -25,14 +30,20 @@ export async function GET(request: Request) {
   }
 
   const url = new URL(request.url);
-  const mode = url.searchParams.get('mode') === 'apply' ? 'apply' : 'dryrun';
+  const isScheduled =
+    (request.headers.get('authorization') ?? '').startsWith('Bearer ') &&
+    !url.searchParams.get('mode');
+  const mode = url.searchParams.get('mode') === 'apply' || isScheduled ? 'apply' : 'dryrun';
+  const scope = url.searchParams.get('scope') === 'full' ? 'full' : 'incremental';
+  const sinceHours = resolveSinceHours(url.searchParams.get('sinceHours'));
 
   const startedAt = Date.now();
   await markCronStarted(CRON_NAME, { path: CRON_PATH, schedule: CRON_SCHEDULE }).catch(() => undefined);
 
   try {
     await ensureQualificationProperties();
-    const result = await evaluateQualification();
+    const result =
+      scope === 'full' ? await evaluateQualification() : await evaluateIncremental(sinceHours);
     const changedRows = result.diff.filter((d) => d.changed);
 
     const applied = mode === 'apply' ? await applyVerdicts(changedRows) : { updated: 0 };
@@ -40,6 +51,8 @@ export async function GET(request: Request) {
 
     const stats = {
       mode,
+      scope,
+      sinceHours: scope === 'incremental' ? sinceHours : undefined,
       companies: result.companies,
       contacts: result.contacts,
       counts: result.counts,
@@ -51,7 +64,7 @@ export async function GET(request: Request) {
       path: CRON_PATH,
       schedule: CRON_SCHEDULE,
       durationMs: Date.now() - startedAt,
-      message: `${mode}: ${result.changes} changes (${result.counts.mql} mql / ${result.counts.sql} sql), applied ${applied.updated}`,
+      message: `${mode}/${scope}: ${result.changes} changes (${result.counts.mql} mql / ${result.counts.sql} sql), applied ${applied.updated}`,
       stats,
     }).catch(() => undefined);
 
