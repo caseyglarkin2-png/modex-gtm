@@ -25,6 +25,8 @@ export interface QualCompany {
   id: string;
   name: string;
   icpScore: number;
+  tam: string;
+  tier: string;
 }
 
 export interface VerdictDiff {
@@ -42,6 +44,7 @@ export interface VerdictDiff {
   newVerdict: Verdict;
   changed: boolean;
   reason: string;
+  tamTier: string;
 }
 
 export interface EvaluateResult {

@@ -10,8 +10,8 @@ const noIntent = {
   engagements_last_meeting_booked: '',
 };
 
-const tam: QualCompany = { id: 'c1', name: 'Acme', icpScore: 85 };
-const offTam: QualCompany = { id: 'c2', name: 'Tiny', icpScore: 40 };
+const tam: QualCompany = { id: 'c1', name: 'Acme', icpScore: 85, tam: 'in', tier: '1' };
+const offTam: QualCompany = { id: 'c2', name: 'Tiny', icpScore: 40, tam: 'out', tier: '' };
 const opsDir = { ...noIntent, hs_seniority: 'director', hs_role: 'operations', jobtitle: 'Director of Operations' } as QualContact;
 
 describe('hasRoleGate', () => {
@@ -45,7 +45,7 @@ describe('hasIntent', () => {
 });
 
 describe('classifyContact', () => {
-  it('none when account below ICP threshold', () => {
+  it('none when account is not in TAM', () => {
     expect(classifyContact(offTam, opsDir)).toBe('none');
   });
   it('none when no company', () => {

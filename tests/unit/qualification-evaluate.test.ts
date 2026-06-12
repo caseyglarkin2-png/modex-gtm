@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { buildDiff, dedupeByContact } from '@/lib/revops/qualification/evaluate';
 import type { QualCompany, QualContact } from '@/lib/revops/qualification/types';
 
-const co: QualCompany = { id: 'c1', name: 'Acme', icpScore: 90 };
+const co: QualCompany = { id: 'c1', name: 'Acme', icpScore: 90, tam: 'in', tier: '1' };
 const mk = (over: Partial<QualContact>): QualContact => ({
   id: 'x', email: 'a@acme.com', firstname: 'A', lastname: 'B', jobtitle: '', lifecyclestage: 'lead',
   hs_seniority: '', hs_role: '', yardflow_qual_verdict: 'none', intent_score: '', last_intent_at: '',
@@ -32,8 +32,8 @@ describe('buildDiff', () => {
 });
 
 describe('dedupeByContact', () => {
-  const lowMql: QualCompany = { id: 'lo', name: 'Low', icpScore: 75 };
-  const highSql: QualCompany = { id: 'hi', name: 'High', icpScore: 95 };
+  const lowMql: QualCompany = { id: 'lo', name: 'Low', icpScore: 75, tam: 'in', tier: '2' };
+  const highSql: QualCompany = { id: 'hi', name: 'High', icpScore: 95, tam: 'in', tier: '1' };
 
   it('collapses a contact at two companies to one row, keeping the higher verdict', () => {
     // same contactId at two TAM companies: mql via Low (no intent), sql via High (intent)

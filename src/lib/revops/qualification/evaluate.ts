@@ -10,6 +10,9 @@
 import { getHubSpotClient, withHubSpotRetry, isHubSpotConfigured } from '@/lib/hubspot/client';
 import { YARDFLOW_ICP_SCORE_PROPERTY } from '@/lib/hubspot/properties';
 import { FilterOperatorEnum } from '@hubspot/api-client/lib/codegen/crm/companies/models/Filter';
+
+const YARDFLOW_TAM_PROPERTY = 'yardflow_tam';
+const TAM_TIER_PROPERTY = 'tam_tier';
 import { classifyContact } from './model';
 import type { QualCompany, QualContact, VerdictDiff, EvaluateResult, Verdict } from './types';
 
@@ -39,11 +42,11 @@ const CONTACT_READ_PROPS = [
 // ---------------------------------------------------------------------------
 
 /**
- * Paginate through all companies with yardflow_icp_score >= minScore.
- * Returns QualCompany[] with id, name, icpScore as a number.
+ * Paginate through all companies tagged yardflow_tam = 'in'.
+ * Returns QualCompany[] with id, name, icpScore, tam, tier.
  * Returns [] when HubSpot is not configured.
  */
-export async function fetchTamCompanies(minScore = 70): Promise<QualCompany[]> {
+export async function fetchTamCompanies(): Promise<QualCompany[]> {
   if (!isHubSpotConfigured()) return [];
 
   const client = getHubSpotClient();
@@ -58,19 +61,19 @@ export async function fetchTamCompanies(minScore = 70): Promise<QualCompany[]> {
             {
               filters: [
                 {
-                  propertyName: YARDFLOW_ICP_SCORE_PROPERTY,
-                  operator: FilterOperatorEnum.Gte,
-                  value: String(minScore),
+                  propertyName: YARDFLOW_TAM_PROPERTY,
+                  operator: FilterOperatorEnum.Eq,
+                  value: 'in',
                 },
               ],
             },
           ],
-          properties: ['name', YARDFLOW_ICP_SCORE_PROPERTY],
+          properties: ['name', YARDFLOW_TAM_PROPERTY, TAM_TIER_PROPERTY, YARDFLOW_ICP_SCORE_PROPERTY],
           limit: 100,
           after: after ?? '0',
           sorts: [],
         }),
-      `fetchTamCompanies(minScore=${minScore})`,
+      `fetchTamCompanies()`,
     );
 
     for (const raw of page.results) {
@@ -79,6 +82,8 @@ export async function fetchTamCompanies(minScore = 70): Promise<QualCompany[]> {
         id: (raw as { id: string }).id,
         name: props.name || '',
         icpScore: parseFloat(props[YARDFLOW_ICP_SCORE_PROPERTY] || '0') || 0,
+        tam: props[YARDFLOW_TAM_PROPERTY] || '',
+        tier: props[TAM_TIER_PROPERTY] || '',
       });
     }
 
@@ -213,6 +218,7 @@ export function buildDiff(pairs: { company: QualCompany; contact: QualContact }[
       companyId: company.id,
       companyName: company.name,
       icpScore: company.icpScore,
+      tamTier: company.tier,
       seniority: contact.hs_seniority,
       role: contact.hs_role,
       jobtitle: contact.jobtitle,
@@ -220,14 +226,14 @@ export function buildDiff(pairs: { company: QualCompany; contact: QualContact }[
       currentVerdict,
       newVerdict,
       changed: newVerdict !== currentVerdict,
-      reason: `icp=${company.icpScore} seniority=${contact.hs_seniority || '-'} role=${contact.hs_role || '-'} -> ${newVerdict}`,
+      reason: `tam=${company.tam} tier=${company.tier || '-'} icp=${company.icpScore} seniority=${contact.hs_seniority || '-'} role=${contact.hs_role || '-'} -> ${newVerdict}`,
     };
   });
 }
 
-export async function evaluateQualification(minScore = 70): Promise<EvaluateResult> {
+export async function evaluateQualification(): Promise<EvaluateResult> {
   const evaluatedAt = new Date().toISOString();
-  const companies = await fetchTamCompanies(minScore);
+  const companies = await fetchTamCompanies();
   const pairs: { company: QualCompany; contact: QualContact }[] = [];
   const warnings: string[] = [];
 

@@ -25,15 +25,13 @@ export async function GET(request: Request) {
 
   const url = new URL(request.url);
   const mode = url.searchParams.get('mode') === 'apply' ? 'apply' : 'dryrun';
-  // Trailing `|| 70` collapses NaN (e.g. ?minScore=garbage) back to the safe default.
-  const minScore = Number(url.searchParams.get('minScore') || '70') || 70;
 
   const startedAt = Date.now();
   await markCronStarted(CRON_NAME, { path: CRON_PATH, schedule: CRON_SCHEDULE }).catch(() => undefined);
 
   try {
     await ensureQualificationProperties();
-    const result = await evaluateQualification(minScore);
+    const result = await evaluateQualification();
     const changedRows = result.diff.filter((d) => d.changed);
 
     const applied = mode === 'apply' ? await applyVerdicts(changedRows) : { updated: 0 };

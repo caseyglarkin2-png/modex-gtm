@@ -37,7 +37,7 @@ export function hasIntent(c: IntentInput): boolean {
 }
 
 export function classifyContact(company: QualCompany | null, contact: QualContact): Verdict {
-  if (!company || company.icpScore < ICP_THRESHOLD) return 'none';
+  if (!company || company.tam !== 'in') return 'none';
   if (!hasRoleGate(contact)) return 'none';
   if (hasIntent(contact)) return 'sql';
   return 'mql';
