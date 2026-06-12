@@ -1,3 +1,4 @@
+import { randomUUID } from 'node:crypto';
 import type { PrismaClient } from '@prisma/client';
 import { sendEmail } from '@/lib/email/client';
 import { evaluateRecipientEligibility } from '@/lib/email/recipient-guard';
@@ -42,6 +43,12 @@ export interface PerformSendInput {
   personaName: string | null;
   personaId?: number;
   generatedContentId?: number;
+  /**
+   * Free-form campaign cohort label (e.g. 'allentown-tour') carried from the
+   * originating DraftQueueItem. Stamped onto the EmailLog at creation so
+   * engagement rolls up per campaign. Optional; unset for non-campaign sends.
+   */
+  campaignTag?: string | null;
   workflowMetadata?: unknown;
   /**
    * Extra transport headers passed straight to `sendEmail` (e.g. the Draft
@@ -210,10 +217,17 @@ export async function wrapAndSend(
   threadId: string | null;
   hubspotEngagementId: string | null;
   html: string;
+  trackingId: string | null;
   provider: string | null;
   hubspotError: string | null;
 }> {
   const { to, subject, bodyHtml, imageUrl, accountName } = input;
+
+  // Mint an opaque open-tracking handle for this send. It is HMAC-signed into
+  // the pixel URL and persisted on the EmailLog (we never expose the raw row
+  // id). Generated here so the pixel can be embedded BEFORE the (irreversible)
+  // send, and threaded into the side-effects so the row stores the same handle.
+  const trackingId = randomUUID();
 
   // Lightweight sanitization to keep email-safe HTML without pulling jsdom into the runtime.
   const sanitizedBody = sanitizeEmailHtml(bodyHtml);
@@ -229,8 +243,12 @@ export async function wrapAndSend(
   // name/role; no sender resolves to Casey (unchanged default behavior).
   const identity = resolveSenderIdentity(input.sender?.userEmail ?? null);
   const isPlainText = !sanitizedBody.trim().startsWith('<');
+  // The open pixel is injected by wrapHtml (the single outbound-HTML builder), so
+  // it only rides on the plain-text wrap path. Pre-composed HTML bodies pass
+  // through untouched and carry no pixel; trackingId is still persisted so the row
+  // is consistent (just never opened-tracked).
   const html = isPlainText
-    ? wrapHtml(sanitizedBody, accountName ?? 'the team', to, undefined, imageUrl, inline?.contentId, identity)
+    ? wrapHtml(sanitizedBody, accountName ?? 'the team', to, undefined, imageUrl, inline?.contentId, identity, trackingId)
     : sanitizedBody;
 
   const response = await sendEmail({
@@ -248,6 +266,7 @@ export async function wrapAndSend(
     threadId: response.threadId ?? null,
     hubspotEngagementId: response.hubspotEngagementId ?? null,
     html,
+    trackingId,
     provider: response.provider ?? null,
     hubspotError: response.hubspotError ?? null,
   };
@@ -270,6 +289,7 @@ export async function recordSendSideEffects(
     threadId: string | null;
     hubspotEngagementId: string | null;
     html: string;
+    trackingId?: string | null;
   },
   traceContext?: CandidateTraceContext,
 ): Promise<{ emailLogId: number | null }> {
@@ -354,6 +374,11 @@ export async function recordSendSideEffects(
         thread_id: sent.threadId,
         hubspot_engagement_id: sent.hubspotEngagementId,
         metadata: logMetadata,
+        // Campaign cohort label + open-tracking handle ride from the draft/send
+        // path onto the row so engagement rolls up per campaign and an open
+        // pixel can resolve back to this row.
+        ...(input.campaignTag ? { campaign_tag: input.campaignTag } : {}),
+        ...(sent.trackingId ? { tracking_id: sent.trackingId } : {}),
         ...(generatedContentId ? { generated_content_id: generatedContentId } : {}),
       },
     });
@@ -428,6 +453,7 @@ export async function performSend(
       threadId: string | null;
       hubspotEngagementId: string | null;
       html: string;
+      trackingId?: string | null;
       provider?: string | null;
       hubspotError?: string | null;
     };

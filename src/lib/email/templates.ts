@@ -5,7 +5,29 @@
  */
 
 import { generateToken } from './unsubscribe-token';
+import { generateOpenToken } from './open-token';
+import { getSiteUrl } from '@/lib/site-url';
 import { resolveSenderIdentity, type SenderIdentity } from './sender-identity';
+
+/**
+ * Build the open-tracking pixel <img> for an outbound email.
+ *
+ * The route lives at `/api/e/open/route.ts`, so its canonical URL is
+ * slash-terminated (`/api/e/open/`) — modex-gtm runs trailingSlash:true and
+ * email clients do NOT follow the 308 a non-slash path would emit, so the id
+ * MUST ride as a query param on the slash-terminated path. We pass the opaque
+ * HMAC-signed token (never the raw EmailLog id).
+ *
+ * Caveat (do not try to defeat): Gmail proxies and pre-fetches remote images,
+ * so an "open" is approximate (the proxy may fetch without a human viewing, and
+ * blocked-image clients never fetch). First-open timestamp + a count is still
+ * real signal, so we record it.
+ */
+export function buildOpenPixel(trackingId: string): string {
+  const token = generateOpenToken(trackingId);
+  const url = `${getSiteUrl()}/api/e/open/?l=${encodeURIComponent(token)}`;
+  return `<img src="${url}" alt="" width="1" height="1" style="display:none; width:1px; height:1px; max-height:1px; max-width:1px; overflow:hidden; border:0; margin:0; padding:0;" />`;
+}
 
 const BOOKING_LINK = 'https://calendar.google.com/calendar/u/0/appointments/schedules/AcZssZ2UyZRVDBYFwV3QOTx7-WK4APujmADpAGspAqeR5qAmK4KJjN2P1QNIrsVj0SPO0qMZIWKzuPoW';
 
@@ -34,7 +56,7 @@ export function htmlToPlainText(html: string): string {
     .trim();
 }
 
-export function wrapHtml(bodyText: string, accountName: string, recipientEmail?: string, emailLogId?: number, imageUrl?: string, cid?: string, identity: SenderIdentity = resolveSenderIdentity()): string {
+export function wrapHtml(bodyText: string, accountName: string, recipientEmail?: string, emailLogId?: number, imageUrl?: string, cid?: string, identity: SenderIdentity = resolveSenderIdentity(), trackingId?: string): string {
   const escaped = bodyText
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
@@ -64,6 +86,9 @@ export function wrapHtml(bodyText: string, accountName: string, recipientEmail?:
   const unsubscribeUrl = recipientEmail
     ? `${baseUrl}/unsubscribe?email=${encodeURIComponent(recipientEmail)}&token=${generateToken(recipientEmail)}${emailLogId ? `&id=${emailLogId}` : ''}`
     : `${baseUrl}/unsubscribe`;
+
+  // Open-tracking pixel (only when a tracking id is minted for this send).
+  const openPixel = trackingId ? buildOpenPixel(trackingId) : '';
 
   return `<!DOCTYPE html>
 <html lang="en">
@@ -116,6 +141,7 @@ export function wrapHtml(bodyText: string, accountName: string, recipientEmail?:
     </tr>
   </table>
   <!--[if mso]></td></tr></table><![endif]-->
+  ${openPixel}
 </body>
 </html>`;
 }
