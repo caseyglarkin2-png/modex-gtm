@@ -1200,6 +1200,9 @@ model DiscoveryContact {
   source        String   // 'added' | 'research'
   confidence    String?  // known|high|medium|low|none
   hubspot_id    String?
+  /// Free-form qualification note: who the contact is and why they qualify.
+  /// Surfaced per-contact in the campaign stats dossier. Additive (nullable).
+  reason        String?
   created_at    DateTime @default(now())
 
   @@unique([prospect_name, email])
