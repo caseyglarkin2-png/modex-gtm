@@ -2390,6 +2390,55 @@
 .cc-scope .cc-person-action svg { width: 12px; height: 12px; color: var(--neon); }
 .cc-scope .cc-person:hover .cc-person-action { color: #cfe0f0; }
 
+/* 3b - INVITE TRUTH chip (Outbox + Casey's Gmail merged) */
+.cc-scope .cc-invite-truth {
+  display: inline-flex; align-items: center; gap: 5px; align-self: flex-start;
+  margin-top: 4px; padding: 2px 8px 2px 7px; border-radius: 999px;
+  font-family: var(--font-mono); font-size: 9px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.06em; border: 1px solid transparent;
+}
+.cc-scope .cc-invite-truth .iv-dot { width: 6px; height: 6px; border-radius: 50%; }
+.cc-scope .cc-invite-truth .cc-src { margin-left: 2px; }
+.cc-scope .cc-invite-truth.iv-replied { color: var(--hot); background: rgba(52, 211, 153, 0.1); border-color: rgba(52, 211, 153, 0.34); }
+.cc-scope .cc-invite-truth.iv-replied .iv-dot { background: var(--hot); box-shadow: 0 0 6px rgba(52, 211, 153, 0.8); }
+.cc-scope .cc-invite-truth.iv-invited { color: var(--neon); background: rgba(0, 180, 255, 0.1); border-color: rgba(0, 180, 255, 0.32); }
+.cc-scope .cc-invite-truth.iv-invited .iv-dot { background: var(--neon); }
+.cc-scope .cc-invite-truth.iv-none { color: var(--steel-dim); background: rgba(124, 138, 160, 0.1); border-color: rgba(124, 138, 160, 0.28); }
+.cc-scope .cc-invite-truth.iv-none .iv-dot { background: var(--steel-dim); }
+
+/* 3c - WATCHED ACCOUNTS (invited outside the committee) */
+.cc-scope .cc-watched {
+  margin: 14px 18px 0;
+  border: 1px solid rgba(255, 138, 61, 0.18);
+  border-radius: 14px;
+  background:
+    radial-gradient(420px 110px at 0% 0%, rgba(255, 138, 61, 0.05), transparent 70%),
+    linear-gradient(180deg, rgba(17, 19, 24, 0.82), rgba(10, 12, 16, 0.82));
+  padding: 12px 15px 13px;
+  flex: 0 0 auto;
+}
+.cc-scope .cc-watched-head { display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 10px; }
+.cc-scope .cc-watched-head .lbl {
+  display: inline-flex; align-items: center; gap: 7px;
+  font-family: var(--font-mono); font-size: 11px; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.09em; color: var(--warm);
+}
+.cc-scope .cc-watched-head .lbl svg { width: 14px; height: 14px; }
+.cc-scope .cc-watched-head .sub { font-family: var(--font-mono); font-size: 10px; color: var(--steel-dim); }
+.cc-scope .cc-watched-list { display: flex; flex-direction: column; gap: 7px; }
+.cc-scope .cc-watched-row {
+  display: flex; align-items: flex-start; gap: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.06); border-radius: 11px;
+  background: rgba(10, 12, 16, 0.5); padding: 9px 11px;
+}
+.cc-scope .cc-watched-row .cc-watched-mark { width: 4px; align-self: stretch; border-radius: 2px; background: var(--warm); flex: 0 0 auto; }
+.cc-scope .cc-watched-row.temp-replied .cc-watched-mark { background: var(--hot); box-shadow: 0 0 6px rgba(52, 211, 153, 0.6); }
+.cc-scope .cc-watched-body { display: flex; flex-direction: column; gap: 3px; min-width: 0; flex: 1; }
+.cc-scope .cc-watched-top { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; }
+.cc-scope .cc-watched-top .nm { font-size: 13px; font-weight: 700; color: #fff; letter-spacing: -0.01em; }
+.cc-scope .cc-watched-body .note { font-family: var(--font-mono); font-size: 10.5px; color: #c8b39c; }
+.cc-scope .cc-watched-body .dom { font-family: var(--font-mono); font-size: 9.5px; color: var(--steel-dim); }
+
 /* 4 - COMMITTEE COVERAGE METER */
 .cc-scope .cc-acct-undercard { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; }
 .cc-scope .cc-acct-undercard .cc-signal-line { flex: 1; min-width: 0; }

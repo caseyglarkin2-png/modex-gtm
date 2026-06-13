@@ -15,7 +15,7 @@ import { Funnel, SourceHealth } from './primitives';
 import { AccountRow, ContactDetail, AccountDetail } from './spine';
 import { CampaignMap } from './campaign-map';
 import { InvitedPeople } from './invited-people';
-import { NextMoves, TourGoal, NextToInvite } from './intel';
+import { NextMoves, TourGoal, NextToInvite, WatchedAccounts } from './intel';
 
 function BrandMark() {
   return (
@@ -184,7 +184,9 @@ export function CommandCenter({
             onSelectContact={selectContact}
             heatByPersonId={intel.heatByPersonId}
             actionByPersonId={intel.actionByPersonId}
+            inviteByPersonId={intel.inviteByPersonId}
           />
+          <WatchedAccounts accounts={intel.watchedAccounts} />
           <div className="cc-filters">
             <div className="cc-stage-pills">
               {STAGE_PILLS.map((s) => (

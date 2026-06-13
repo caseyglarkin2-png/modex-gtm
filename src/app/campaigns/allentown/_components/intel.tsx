@@ -19,9 +19,11 @@ import type {
   NextBestAction,
   CommitteeCoverage,
   InviteCandidate,
+  InviteIndicator,
+  WatchedAccountView,
   Temperature,
 } from '@/lib/campaigns/campaign-intel';
-import { Ico } from './primitives';
+import { Ico, SourceChip } from './primitives';
 
 /* ─── temperature color key (shared across the layer) ───────────── */
 export const TEMP_META: Record<Temperature, { label: string; cls: string }> = {
@@ -148,6 +150,83 @@ export function PersonAction({ action }: { action: NextBestAction }) {
     <span className="cc-person-action" title={action.detail}>
       <Ico.arrow /> {action.verb}
     </span>
+  );
+}
+
+/* ════════════════════════════════════════════════════════════════
+   3b · INVITE TRUTH - has this person/account ACTUALLY been invited
+   Merges the modex Outbox with Casey's own Gmail. "Invited (email)"
+   means a manual Gmail send that never went through the Outbox.
+   ════════════════════════════════════════════════════════════════ */
+const INVITE_STATE_META: Record<InviteIndicator['state'], { cls: string }> = {
+  replied: { cls: 'iv-replied' },
+  invited: { cls: 'iv-invited' },
+  none: { cls: 'iv-none' },
+};
+
+export function InviteTruthChip({
+  indicator,
+  showSource = true,
+}: {
+  indicator: InviteIndicator;
+  showSource?: boolean;
+}) {
+  const meta = INVITE_STATE_META[indicator.state];
+  const title =
+    indicator.state === 'replied'
+      ? indicator.gmailOnly
+        ? 'Replied in Gmail'
+        : 'Replied'
+      : indicator.state === 'invited'
+        ? indicator.gmailOnly
+          ? 'Invited by hand from Gmail, not the Outbox'
+          : 'Invited via the Outbox'
+        : 'No invite has gone out yet';
+  return (
+    <span className={'cc-invite-truth ' + meta.cls} title={title}>
+      <span className="iv-dot" />
+      {indicator.label}
+      {showSource && indicator.gmailOnly && <SourceChip code="GM" />}
+    </span>
+  );
+}
+
+/* ════════════════════════════════════════════════════════════════
+   3c · WATCHED ACCOUNTS - invited outside the committee
+   Boston Beer + NFI: Casey invited these by hand from his own Gmail.
+   They are not canonical committee accounts, but they are real warm
+   seats, so they render first-class with their Gmail-derived state
+   and the config note.
+   ════════════════════════════════════════════════════════════════ */
+export function WatchedAccounts({ accounts }: { accounts: WatchedAccountView[] }) {
+  if (accounts.length === 0) return null;
+  return (
+    <section className="cc-watched">
+      <div className="cc-watched-head">
+        <span className="lbl">
+          <Ico.mail /> Invited outside the committee
+        </span>
+        <span className="sub">Manual Gmail invites · {accounts.length} warm</span>
+      </div>
+      <div className="cc-watched-list">
+        {accounts.map((w) => (
+          <div key={w.domain} className={'cc-watched-row temp-' + w.temp}>
+            <span className="cc-watched-mark" />
+            <span className="cc-watched-body">
+              <span className="cc-watched-top">
+                <span className="nm">{w.name}</span>
+                <InviteTruthChip indicator={w.indicator} />
+              </span>
+              <span className="note">
+                {w.note}
+                {w.lastSubject ? ` · ${w.lastSubject}` : ''}
+              </span>
+              <span className="dom">{w.domain}</span>
+            </span>
+          </div>
+        ))}
+      </div>
+    </section>
   );
 }
 

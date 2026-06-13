@@ -8,12 +8,16 @@ import {
   emptyIntel,
   engagementTemperature,
   inferCommitteeRole,
+  inviteIndicator,
   nextAccountsToInvite,
   nextBestAction,
   nextMoves,
   tourFunnel,
+  watchedAccountViews,
+  watchedScanDomains,
   type CampaignEmailLog,
   type DiscoveryIntelRow,
+  type InviteTruthInput,
   type Temperature,
 } from '@/lib/campaigns/campaign-intel';
 import type { ViewAccount, ViewContact } from '@/lib/campaigns/canonical-view';
@@ -172,7 +176,7 @@ describe('nextBestAction', () => {
     const a = nextBestAction(person(), { temp: 'replied', score: 95, why: '' });
     expect(a.verb).toBe('Respond to Shawn');
     expect(a.leverage).toBe(95);
-    expect(a.detail).toContain('the 29th');
+    expect(a.detail).toContain('June 29th');
     expect(a.detail).toContain('Breinigsville');
   });
 
@@ -467,5 +471,178 @@ describe('buildCampaignIntel', () => {
     const e = emptyIntel();
     expect(e.funnel.target).toBe(ALLENTOWN_TOUR_TARGET);
     expect(e.moves).toEqual([]);
+    expect(e.inviteByPersonId).toEqual({});
+    // the watched accounts (Boston Beer, NFI) render even with no Gmail data
+    expect(e.watchedAccounts.map((w) => w.name)).toContain('Boston Beer Company');
+    expect(e.watchedAccounts.map((w) => w.name)).toContain('NFI');
+  });
+});
+
+/* ─── Phase 5c · Gmail invite-truth into the campaign picture ─────────────── */
+
+function truth(over: Partial<InviteTruthInput> = {}): InviteTruthInput {
+  return { domain: 'unfi.com', invited: true, source: 'gmail', ...over };
+}
+
+describe('config: watchedScanDomains + watchedAccounts', () => {
+  it('tourDate is the spoken June 29th', () => {
+    expect(ALLENTOWN_CAMPAIGN.tourDate).toBe('June 29th');
+  });
+
+  it('the scan domains = the 5 canonical account domains + the 2 watched ones', () => {
+    const d = watchedScanDomains(ALLENTOWN_CAMPAIGN);
+    expect(d).toContain('unfi.com');
+    expect(d).toContain('homedepot.com');
+    expect(d).toContain('walgreens.com');
+    expect(d).toContain('keurigdrpepper.com');
+    expect(d).toContain('rednersmarkets.com');
+    expect(d).toContain('bostonbeer.com');
+    expect(d).toContain('nfiindustries.com');
+    expect(d).toHaveLength(7);
+    expect(new Set(d).size).toBe(7); // deduped
+  });
+
+  it('Boston Beer + NFI are the watched accounts with their notes', () => {
+    const names = ALLENTOWN_CAMPAIGN.watchedAccounts.map((w) => w.name);
+    expect(names).toEqual(['Boston Beer Company', 'NFI']);
+    const bb = ALLENTOWN_CAMPAIGN.watchedAccounts.find((w) => w.domain === 'bostonbeer.com');
+    expect(bb!.note).toBe('confirming Monday');
+  });
+});
+
+describe('engagementTemperature with Gmail invite-truth', () => {
+  it('a Gmail outbound (no Outbox send) reads SENT - invited by email, not staged', () => {
+    const h = engagementTemperature(person(), null, NOW, truth({ invitedAt: new Date(NOW - 1).toISOString() }));
+    expect(h.temp).toBe('sent');
+    expect(h.why.toLowerCase()).toContain('invited by email');
+  });
+
+  it('a Gmail outbound 2+ days old with no reply is COOLING (by email)', () => {
+    const h = engagementTemperature(person(), null, NOW, truth({ invitedAt: new Date(NOW - 3 * DAY).toISOString() }));
+    expect(h.temp).toBe('cooling');
+    expect(h.why.toLowerCase()).toContain('invited by email');
+  });
+
+  it('a Gmail inbound (their reply) makes the person REPLIED even with no Outbox row', () => {
+    const h = engagementTemperature(person(), null, NOW, truth({ repliedAt: new Date(NOW - DAY).toISOString() }));
+    expect(h.temp).toBe('replied');
+    expect(h.why).toContain('Gmail');
+  });
+
+  it('Gmail truth never downgrades a hotter Outbox signal (a real open stays WARM)', () => {
+    const h = engagementTemperature(person(), log({ status: 'opened', openCount: 1 }), NOW, truth({ invitedAt: new Date(NOW).toISOString() }));
+    expect(h.temp).toBe('warm');
+  });
+
+  it('no em dashes in the Gmail-invited reasons', () => {
+    const cases = [
+      truth({ invitedAt: new Date(NOW - 1).toISOString() }),
+      truth({ invitedAt: new Date(NOW - 4 * DAY).toISOString() }),
+      truth({ repliedAt: new Date(NOW).toISOString() }),
+    ];
+    for (const t of cases) {
+      expect(engagementTemperature(person(), null, NOW, t).why).not.toContain('—');
+    }
+  });
+});
+
+describe('inviteIndicator', () => {
+  it('nothing sent + no Gmail -> not yet invited', () => {
+    const iv = inviteIndicator(null, null);
+    expect(iv.state).toBe('none');
+    expect(iv.label).toBe('Not yet invited');
+  });
+
+  it('a Gmail-only outbound -> Invited (email), via gmail', () => {
+    const iv = inviteIndicator(null, truth({ invitedAt: new Date(NOW).toISOString() }));
+    expect(iv.state).toBe('invited');
+    expect(iv.label).toBe('Invited (email)');
+    expect(iv.via).toBe('gmail');
+    expect(iv.gmailOnly).toBe(true);
+  });
+
+  it('an Outbox send -> Invited via outbox, not gmail-only', () => {
+    const iv = inviteIndicator(log({ status: 'sent', sentAt: NOW - DAY }), null);
+    expect(iv.state).toBe('invited');
+    expect(iv.label).toBe('Invited');
+    expect(iv.via).toBe('outbox');
+    expect(iv.gmailOnly).toBe(false);
+  });
+
+  it('replied beats invited; a Gmail reply -> Replied gmailOnly', () => {
+    const iv = inviteIndicator(null, truth({ invitedAt: new Date(NOW - DAY).toISOString(), repliedAt: new Date(NOW).toISOString() }));
+    expect(iv.state).toBe('replied');
+    expect(iv.gmailOnly).toBe(true);
+  });
+
+  it('an Outbox reply wins over a Gmail reply for provenance', () => {
+    const iv = inviteIndicator(log({ replyCount: 1 }), truth({ repliedAt: new Date(NOW).toISOString() }));
+    expect(iv.state).toBe('replied');
+    expect(iv.via).toBe('outbox');
+    expect(iv.gmailOnly).toBe(false);
+  });
+});
+
+describe('watchedAccountViews', () => {
+  it('renders Boston Beer + NFI as invited/warm even with no Gmail data (from the config note)', () => {
+    const views = watchedAccountViews(ALLENTOWN_CAMPAIGN, new Map());
+    const bb = views.find((v) => v.domain === 'bostonbeer.com')!;
+    expect(bb.name).toBe('Boston Beer Company');
+    expect(bb.note).toBe('confirming Monday');
+    expect(bb.temp).toBe('warm');
+    expect(bb.indicator.state).toBe('invited');
+  });
+
+  it('a Gmail reply lifts a watched account to replied/warm with the reply timestamp', () => {
+    const map = new Map<string, InviteTruthInput>([
+      ['bostonbeer.com', truth({ domain: 'bostonbeer.com', repliedAt: new Date(NOW).toISOString() })],
+    ]);
+    const bb = watchedAccountViews(ALLENTOWN_CAMPAIGN, map).find((v) => v.domain === 'bostonbeer.com')!;
+    expect(bb.temp).toBe('replied');
+    expect(bb.indicator.state).toBe('replied');
+    expect(bb.repliedAt).toBeDefined();
+  });
+});
+
+describe('buildCampaignIntel with Gmail invite-truth', () => {
+  it('a person Casey emailed by hand reads invited, not staged, and the action says follow up', () => {
+    const p = person({ id: 'p1', accId: 'a1' });
+    const acc = account({ id: 'a1', domain: 'unfi.com', committee: ['p1'] });
+    const intel = buildCampaignIntel({
+      accounts: [acc],
+      persons: [p],
+      logByPersonId: new Map(), // nothing in the Outbox
+      discoveryRows: [],
+      inviteTruthByDomain: new Map([['unfi.com', truth({ invitedAt: new Date(NOW - 1).toISOString() })]]),
+      now: NOW,
+    });
+    // Gmail outbound -> SENT (invited by email), not staged
+    expect(intel.heatByPersonId['p1'].temp).toBe('sent');
+    expect(intel.inviteByPersonId['p1'].state).toBe('invited');
+    expect(intel.inviteByPersonId['p1'].gmailOnly).toBe(true);
+    // the move reflects truth: follow up, NOT "send the staged draft"
+    const personMove = intel.moves.find((m) => m.kind === 'person')!;
+    expect(personMove.verb).toContain('Follow up');
+    expect(personMove.verb).not.toContain('staged draft');
+  });
+
+  it('a staged person with no Gmail signal still reads send the staged draft', () => {
+    const p = person({ id: 'p1', accId: 'a1' });
+    const acc = account({ id: 'a1', domain: 'unfi.com', committee: ['p1'] });
+    const intel = buildCampaignIntel({
+      accounts: [acc],
+      persons: [p],
+      logByPersonId: new Map(),
+      discoveryRows: [],
+      inviteTruthByDomain: new Map(), // Gmail silent
+      now: NOW,
+    });
+    expect(intel.heatByPersonId['p1'].temp).toBe('staged');
+    expect(intel.moves.find((m) => m.kind === 'person')!.verb).toContain('staged draft');
+  });
+
+  it('the watched accounts ride along on the bundle', () => {
+    const intel = buildCampaignIntel({ accounts: [], persons: [], logByPersonId: new Map(), discoveryRows: [], now: NOW });
+    expect(intel.watchedAccounts.map((w) => w.name)).toEqual(['Boston Beer Company', 'NFI']);
   });
 });

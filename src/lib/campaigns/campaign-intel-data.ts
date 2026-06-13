@@ -19,12 +19,15 @@ import type { ViewAccount, ViewContact } from './canonical-view';
 import {
   buildCampaignIntel,
   emptyIntel,
+  watchedScanDomains,
   ALLENTOWN_CAMPAIGN,
   type CampaignConfig,
   type CampaignEmailLog,
   type CampaignIntel,
   type DiscoveryIntelRow,
+  type InviteTruthInput,
 } from './campaign-intel';
+import { scanInviteTruth } from './gmail-invite-scan';
 
 /** Normalized person/persona name key for matching the ledger to canonical persons. */
 function nameKey(name: string): string {
@@ -127,8 +130,38 @@ export async function loadCampaignLogs(
 }
 
 /**
+ * Scan Casey's Gmail (casey@freightroll.com) for the invite truth across the
+ * watched domains, mapping the scan result to the InviteTruthInput the intel
+ * module consumes. Fail-soft: empty map on any Gmail error (the scan itself is
+ * already wrapped + cached). This is what lets the command center know who has
+ * ACTUALLY been invited, including the invites Casey sent by hand outside the
+ * modex Outbox.
+ */
+export async function loadInviteTruth(config: CampaignConfig): Promise<Map<string, InviteTruthInput>> {
+  try {
+    const domains = watchedScanDomains(config);
+    const truth = await scanInviteTruth(domains);
+    const out = new Map<string, InviteTruthInput>();
+    for (const [domain, t] of truth) {
+      out.set(domain, {
+        domain: t.domain,
+        invited: t.invited,
+        invitedAt: t.invitedAt,
+        repliedAt: t.repliedAt,
+        lastSubject: t.lastSubject,
+        source: 'gmail',
+      });
+    }
+    return out;
+  } catch (err) {
+    console.warn('[campaign-intel] Gmail invite-truth scan unavailable, rendering without it:', err);
+    return new Map();
+  }
+}
+
+/**
  * Compose the full intel bundle for a campaign from the canonical view +
- * the live ledger + the corridor worklist. Never throws.
+ * the live ledger + the corridor worklist + the Gmail invite truth. Never throws.
  */
 export async function loadCampaignIntel(args: {
   accounts: ViewAccount[];
@@ -138,15 +171,17 @@ export async function loadCampaignIntel(args: {
 }): Promise<CampaignIntel> {
   const config = args.config ?? ALLENTOWN_CAMPAIGN;
   try {
-    const [discoveryRows, logByPersonId] = await Promise.all([
+    const [discoveryRows, logByPersonId, inviteTruthByDomain] = await Promise.all([
       loadCorridorIntelRows(args.corridor),
       loadCampaignLogs(args.persons, config.tag),
+      loadInviteTruth(config),
     ]);
     return buildCampaignIntel({
       accounts: args.accounts,
       persons: args.persons,
       logByPersonId,
       discoveryRows,
+      inviteTruthByDomain,
       config,
     });
   } catch (err) {

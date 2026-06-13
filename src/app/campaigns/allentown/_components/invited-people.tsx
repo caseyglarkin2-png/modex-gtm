@@ -11,9 +11,9 @@
 
 import React from 'react';
 import type { ViewAccount, ViewContact } from '@/lib/campaigns/canonical-view';
-import type { EngagementHeat, NextBestAction } from '@/lib/campaigns/campaign-intel';
+import type { EngagementHeat, NextBestAction, InviteIndicator } from '@/lib/campaigns/campaign-intel';
 import { Avatar, Ico } from './primitives';
-import { HeatDot, PersonAction } from './intel';
+import { HeatDot, PersonAction, InviteTruthChip } from './intel';
 
 /**
  * Mirror the /discovery worklist badge language (outline pill, stage-tinted).
@@ -44,6 +44,7 @@ export function InvitedPeople({
   onSelectContact,
   heatByPersonId,
   actionByPersonId,
+  inviteByPersonId,
 }: {
   contacts: ViewContact[];
   accountById: (id: string) => ViewAccount | undefined;
@@ -51,8 +52,13 @@ export function InvitedPeople({
   onSelectContact: (id: string) => void;
   heatByPersonId: Record<string, EngagementHeat>;
   actionByPersonId: Record<string, NextBestAction>;
+  inviteByPersonId: Record<string, InviteIndicator>;
 }) {
-  const sentCount = contacts.filter((c) => c.engagement !== 'draft').length;
+  // Invite truth (Outbox + Casey's Gmail merged): how many have ACTUALLY been
+  // invited, not just how many ran through the Outbox.
+  const invitedCount = contacts.filter(
+    (c) => inviteByPersonId[c.id] && inviteByPersonId[c.id].state !== 'none',
+  ).length;
 
   return (
     <section className="cc-people">
@@ -61,7 +67,7 @@ export function InvitedPeople({
           <Ico.mail /> Invited people
         </span>
         <span className="sub">
-          {contacts.length} staged · {sentCount} contacted
+          {contacts.length} staged · {invitedCount} actually invited
         </span>
       </div>
 
@@ -76,6 +82,7 @@ export function InvitedPeople({
             const selected = selectedContactId === c.id;
             const heat = heatByPersonId[c.id];
             const action = actionByPersonId[c.id];
+            const invite = inviteByPersonId[c.id];
             return (
               <button
                 type="button"
@@ -91,6 +98,7 @@ export function InvitedPeople({
                   </span>
                   <span className="ti">{c.title.v && c.title.v !== '—' ? c.title.v : c.role}</span>
                   <span className="acct">{acct ? acct.name : c.accId}</span>
+                  {invite && <InviteTruthChip indicator={invite} />}
                   {action ? (
                     <PersonAction action={action} />
                   ) : (
