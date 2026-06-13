@@ -28,7 +28,7 @@ output/prospect-discovery/*
 public/demo-packs/tiles/
 
 # Docs and data files not needed by the Next.js build
-docs/
+/docs/
 *.csv
 *.xlsx
 .vercel/
