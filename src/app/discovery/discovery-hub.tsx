@@ -1,6 +1,7 @@
 'use client';
 
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import { Loader2, Send } from 'lucide-react';
 import { toast } from 'sonner';
@@ -344,6 +345,12 @@ export function DiscoveryHub({ rows, corridors, output, curation }: Props) {
               </p>
             </div>
             <div className="flex items-center gap-2">
+              <Link
+                href="/campaigns/allentown"
+                className="rounded-md border border-[var(--border)] px-2.5 py-1 text-xs font-medium transition hover:border-[var(--primary)] hover:text-[var(--primary)]"
+              >
+                Allentown command center
+              </Link>
               {staleCount > 0 && (
                 <button
                   type="button"
