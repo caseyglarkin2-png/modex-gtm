@@ -16,6 +16,7 @@ export const config = {
      * - /api/microsites/track (public microsite engagement endpoint)
      * - /api/demo (public demo Street View image proxy for /demo microsites)
      * - /api/cron (Vercel cron endpoints with their own auth)
+     * - /api/pounce (Pounce Spine ingest; own x-pounce-token auth)
      * - /api/proof (local deterministic e2e seed helpers)
      * - /unsubscribe (public unsubscribe page)
      * - /proposal (public proposal decks)
@@ -32,6 +33,6 @@ export const config = {
      * - /api/microsites/roi-lead (public ROI->pipeline ingest; ROI_LEAD_SECRET-gated)
      * - /manifest.json, /robots.txt, /favicon.ico (static assets)
      */
-    '/((?!login|api/auth|api/webhooks|api/unsubscribe|api/microsites/track|api/microsites/roi-lead|api/demo|api/cron|api/campaigns|api/e|api/proposal|api/proof|unsubscribe|proposal|for|demo|demo-packs|opengraph-image|twitter-image|docs|audio|video|artifacts|_next|manifest\\.json|robots\\.txt|favicon\\.ico).*)',
+    '/((?!login|api/auth|api/webhooks|api/unsubscribe|api/microsites/track|api/microsites/roi-lead|api/demo|api/cron|api/campaigns|api/e|api/pounce|api/proposal|api/proof|unsubscribe|proposal|for|demo|demo-packs|opengraph-image|twitter-image|docs|audio|video|artifacts|_next|manifest\\.json|robots\\.txt|favicon\\.ico).*)',
   ],
 };
