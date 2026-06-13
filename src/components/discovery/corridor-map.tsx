@@ -26,6 +26,12 @@ interface CorridorMapProps {
   prospects: ProspectRow[];
   corridors: Corridor[];
   onSelectProspect?: (placeId: string) => void;
+  /**
+   * placeIds to visually distinguish (a campaign's accounts). Highlighted pins
+   * get a stronger marker + a halo ring so they stand out from the corridor.
+   * Optional — /discovery passes nothing and renders unchanged.
+   */
+  highlightPlaceIds?: Set<string>;
 }
 
 export function CorridorMap(props: CorridorMapProps) {

@@ -8,7 +8,6 @@
 
 import React from 'react';
 import type {
-  ViewAccount,
   ViewContact,
   ViewFunnelStage,
   ViewSourceHealth,
@@ -291,83 +290,3 @@ export function SourceHealth({ health }: { health: ViewSourceHealth[] }) {
   );
 }
 
-/* ─── Map motif — the live site is the anchor ───────────────────── */
-export function MapMotif({
-  accounts,
-  liveSite,
-  selectedAcctId,
-  onPick,
-}: {
-  accounts: ViewAccount[];
-  liveSite: { name: string; city: string; left: string; top: string };
-  selectedAcctId: string;
-  onPick: (id: string) => void;
-}) {
-  const pct = (v: string) => parseFloat(v) / 100;
-  return (
-    <div className="cc-map">
-      <div className="cc-map-grid" />
-      <div className="cc-map-label">
-        <Ico.pin /> Lehigh Valley · <span className="pa">PA footprint</span>
-      </div>
-
-      <svg className="cc-map-svg" viewBox="0 0 100 100" preserveAspectRatio="none">
-        {accounts.map((a) => {
-          const active = a.id === selectedAcctId;
-          return (
-            <line
-              key={a.id}
-              x1={pct(a.pa.left) * 100}
-              y1={pct(a.pa.top) * 100}
-              x2={pct(liveSite.left) * 100}
-              y2={pct(liveSite.top) * 100}
-              className={'cc-map-link' + (active ? ' active' : '')}
-              vectorEffect="non-scaling-stroke"
-            />
-          );
-        })}
-      </svg>
-
-      {accounts.map((a) => (
-        <div
-          key={a.id}
-          className={'cc-pin acct ' + a.stage + (a.id === selectedAcctId ? ' is-selected' : '')}
-          style={{ left: a.pa.left, top: a.pa.top }}
-          onClick={() => onPick(a.id)}
-          title={`${a.name} · ${a.domain}`}
-        >
-          <span className="node" />
-          {a.id === selectedAcctId && <span className="tag">{a.name}</span>}
-        </div>
-      ))}
-
-      <div className="cc-pin live" style={{ left: liveSite.left, top: liveSite.top }} title="Live YardFlow site">
-        <span className="ring" />
-        <span className="node" />
-        <span className="tag">
-          LIVE · {liveSite.name}
-          <span className="sub">{liveSite.city}</span>
-        </span>
-      </div>
-
-      <div className="cc-map-legend">
-        <span>
-          <i style={{ background: '#fff', boxShadow: '0 0 6px #00B4FF' }} />
-          Live site
-        </span>
-        <span>
-          <i style={{ background: '#34D399' }} />
-          Replied
-        </span>
-        <span>
-          <i style={{ background: '#00B4FF' }} />
-          Engaged
-        </span>
-        <span>
-          <i style={{ background: 'transparent', border: '1.5px solid #FFB000' }} />
-          Staged
-        </span>
-      </div>
-    </div>
-  );
-}

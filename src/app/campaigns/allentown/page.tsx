@@ -10,9 +10,14 @@ import {
   type CommandCenterView,
   type RawCanonicalCampaign,
 } from '@/lib/campaigns/canonical-view';
+import { loadLatestScored, buildCuratedRows, filterProspects } from '@/lib/discovery/data';
+import type { Corridor, ProspectRow } from '@/lib/discovery/types';
 import { CommandCenter } from './_components/console';
 
 export const dynamic = 'force-dynamic';
+
+// The discovery corridor this campaign anchors on (Breinigsville / Lehigh Valley).
+const ALLENTOWN_CORRIDOR = 'Allentown, PA';
 
 export const metadata: Metadata = {
   title: 'Allentown Tour — Command Center',
@@ -56,8 +61,26 @@ async function loadCanonicalView(): Promise<FetchResult> {
   }
 }
 
+/**
+ * Load the Allentown-corridor prospects + corridors from the discovery pipeline
+ * for the real corridor map. Fail-soft: any error yields empty arrays so the map
+ * renders an empty state and the page still loads.
+ */
+function loadCorridorProspects(): { prospects: ProspectRow[]; corridors: Corridor[] } {
+  try {
+    const output = loadLatestScored();
+    if (!output) return { prospects: [], corridors: [] };
+    const rows = buildCuratedRows(output);
+    const prospects = filterProspects(rows, { corridor: ALLENTOWN_CORRIDOR });
+    return { prospects, corridors: output.corridors ?? [] };
+  } catch {
+    return { prospects: [], corridors: [] };
+  }
+}
+
 export default async function AllentownCommandCenterPage() {
   const { view, error } = await loadCanonicalView();
+  const { prospects, corridors } = loadCorridorProspects();
   const scopeClass = `cc-scope ${inter.variable} ${jetbrainsMono.variable}`;
 
   if (!view) {
@@ -77,7 +100,7 @@ export default async function AllentownCommandCenterPage() {
 
   return (
     <div className={scopeClass}>
-      <CommandCenter view={view} />
+      <CommandCenter view={view} prospects={prospects} corridors={corridors} />
     </div>
   );
 }

@@ -26,7 +26,10 @@ interface Props {
   prospects: ProspectRow[];
   corridors: Corridor[];
   onSelectProspect?: (placeId: string) => void;
+  highlightPlaceIds?: Set<string>;
 }
+
+const HIGHLIGHT_COLOR = '#facc15'; // amber — the campaign's own accounts
 
 function FitToBounds({ prospects }: { prospects: ProspectRow[] }) {
   const map = useMap();
@@ -45,15 +48,40 @@ function FitToBounds({ prospects }: { prospects: ProspectRow[] }) {
   return null;
 }
 
-export default function CorridorMapInner({ prospects, corridors, onSelectProspect }: Props) {
+export default function CorridorMapInner({
+  prospects,
+  corridors,
+  onSelectProspect,
+  highlightPlaceIds,
+}: Props) {
   const corridorList = useMemo(
     () => corridors.filter((c) => c.center.lat && c.center.lng),
     [corridors],
   );
 
+  const hasHighlights = !!highlightPlaceIds && highlightPlaceIds.size > 0;
+
   // Keep every Tier A, then fill the marker budget by worklist rank (order preserved).
-  const shown = useMemo(() => selectMapMarkers(prospects, MAX_MARKERS), [prospects]);
+  // When highlighting a campaign's accounts, force every highlighted row into the
+  // shown set so a campaign pin can never be dropped by the marker budget.
+  const shown = useMemo(() => {
+    const base = selectMapMarkers(prospects, MAX_MARKERS);
+    if (!hasHighlights) return base;
+    const present = new Set(base.map((p) => p.placeId));
+    const missing = prospects.filter(
+      (p) => highlightPlaceIds!.has(p.placeId) && !present.has(p.placeId),
+    );
+    return missing.length > 0 ? [...base, ...missing] : base;
+  }, [prospects, hasHighlights, highlightPlaceIds]);
   const capped = shown.length < prospects.length;
+
+  // When highlighting, frame the map on the highlighted accounts (the campaign's
+  // own footprint) rather than the whole corridor; fall back to all shown rows.
+  const fitTarget = useMemo(() => {
+    if (!hasHighlights) return shown;
+    const hi = shown.filter((p) => highlightPlaceIds!.has(p.placeId));
+    return hi.length > 0 ? hi : shown;
+  }, [shown, hasHighlights, highlightPlaceIds]);
 
   return (
     /* `isolate` keeps Leaflet's panes/controls + the z-[1000] legends in their own
@@ -72,6 +100,12 @@ export default function CorridorMapInner({ prospects, corridors, onSelectProspec
           <span className="inline-block h-2.5 w-2.5 rounded-full ring-2 ring-white" style={{ background: REFERENCE_COLOR }} />
           Live YardFlow site (Primo)
         </div>
+        {hasHighlights && (
+          <div className="flex items-center gap-1.5">
+            <span className="inline-block h-2.5 w-2.5 rounded-full ring-2 ring-white" style={{ background: HIGHLIGHT_COLOR }} />
+            Campaign account
+          </div>
+        )}
         <div className="flex items-center gap-2">
           {(['A', 'B', 'C'] as const).map((t) => (
             <span key={t} className="flex items-center gap-1">
@@ -94,7 +128,7 @@ export default function CorridorMapInner({ prospects, corridors, onSelectProspec
           attribution="Tiles &copy; Esri — Source: Esri, Maxar, Earthstar Geographics"
           maxZoom={19}
         />
-        <FitToBounds prospects={shown} />
+        <FitToBounds prospects={fitTarget} />
 
         {/* Corridor hulls */}
         {corridorList.map((c) => (
@@ -129,33 +163,79 @@ export default function CorridorMapInner({ prospects, corridors, onSelectProspec
           )),
         )}
 
-        {/* Prospect markers */}
-        {shown.map((p) => (
-          <CircleMarker
-            key={p.placeId}
-            center={[p.lat, p.lng]}
-            radius={p.tier === 'A' ? 7 : p.tier === 'B' ? 5 : 4}
-            pathOptions={{
-              color: '#ffffff',
-              weight: 1,
-              fillColor: TIER_COLORS[p.tier] ?? TIER_COLORS.D,
-              fillOpacity: 0.85,
-            }}
-            eventHandlers={{
-              click: () => onSelectProspect?.(p.placeId),
-            }}
-          >
-            <Popup>
-              <div className="bg-[#101218] text-white -m-[14px] -mb-[15px] rounded-[4px] px-3 py-2">
-                <div className="text-xs font-medium">{p.name}</div>
-                <div className="text-[11px] text-white/55">{p.cityState}</div>
-                <div className="mt-1 text-[11px] text-white/70">
-                  Score {p.icpScore} · Tier {p.tier} · {p.nearestPrimoDistance.toFixed(1)} mi to Primo
+        {/* Prospect markers. Highlighted (campaign) rows draw last + bigger with a
+            halo ring so they stand out from the rest of the corridor. */}
+        {shown
+          .filter((p) => !(hasHighlights && highlightPlaceIds!.has(p.placeId)))
+          .map((p) => (
+            <CircleMarker
+              key={p.placeId}
+              center={[p.lat, p.lng]}
+              radius={p.tier === 'A' ? 7 : p.tier === 'B' ? 5 : 4}
+              pathOptions={{
+                color: '#ffffff',
+                weight: 1,
+                fillColor: TIER_COLORS[p.tier] ?? TIER_COLORS.D,
+                fillOpacity: hasHighlights ? 0.5 : 0.85,
+              }}
+              eventHandlers={{
+                click: () => onSelectProspect?.(p.placeId),
+              }}
+            >
+              <Popup>
+                <div className="bg-[#101218] text-white -m-[14px] -mb-[15px] rounded-[4px] px-3 py-2">
+                  <div className="text-xs font-medium">{p.name}</div>
+                  <div className="text-[11px] text-white/55">{p.cityState}</div>
+                  <div className="mt-1 text-[11px] text-white/70">
+                    Score {p.icpScore} · Tier {p.tier} · {p.nearestPrimoDistance.toFixed(1)} mi to Primo
+                  </div>
                 </div>
-              </div>
-            </Popup>
-          </CircleMarker>
-        ))}
+              </Popup>
+            </CircleMarker>
+          ))}
+
+        {/* Highlighted campaign accounts — halo ring then an emphasized amber
+            marker on top (drawn last so they sit above the corridor + reference
+            markers). Two sibling CircleMarkers per row: the outer ring + the dot. */}
+        {hasHighlights &&
+          shown
+            .filter((p) => highlightPlaceIds!.has(p.placeId))
+            .flatMap((p) => [
+              <CircleMarker
+                key={`halo-${p.placeId}`}
+                center={[p.lat, p.lng]}
+                radius={11}
+                pathOptions={{
+                  color: HIGHLIGHT_COLOR,
+                  opacity: 0.7,
+                  weight: 2,
+                  fill: false,
+                }}
+                interactive={false}
+              />,
+              <CircleMarker
+                key={`hi-${p.placeId}`}
+                center={[p.lat, p.lng]}
+                radius={6}
+                pathOptions={{
+                  color: '#ffffff',
+                  weight: 2,
+                  fillColor: HIGHLIGHT_COLOR,
+                  fillOpacity: 1,
+                }}
+                eventHandlers={{ click: () => onSelectProspect?.(p.placeId) }}
+              >
+                <Popup>
+                  <div className="bg-[#101218] text-white -m-[14px] -mb-[15px] rounded-[4px] px-3 py-2">
+                    <div className="text-xs font-medium">{p.name}</div>
+                    <div className="text-[11px] text-white/55">{p.cityState}</div>
+                    <div className="mt-1 text-[11px]" style={{ color: HIGHLIGHT_COLOR }}>
+                      Campaign account · Tier {p.tier} · {p.nearestPrimoDistance.toFixed(1)} mi to Primo
+                    </div>
+                  </div>
+                </Popup>
+              </CircleMarker>,
+            ])}
 
         {/* Reference site markers (drawn last so they sit on top) */}
         {REFERENCE_SITES.map((site) => (

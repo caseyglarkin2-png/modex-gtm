@@ -8,8 +8,12 @@
 
 import React, { useMemo, useState } from 'react';
 import type { CommandCenterView, ViewAccount, ViewContact } from '@/lib/campaigns/canonical-view';
-import { Funnel, SourceHealth, MapMotif } from './primitives';
+import type { Corridor, ProspectRow } from '@/lib/discovery/types';
+import type { CampaignAccountInput } from '@/lib/campaigns/account-match';
+import { Funnel, SourceHealth } from './primitives';
 import { AccountRow, ContactDetail, AccountDetail } from './spine';
+import { CampaignMap } from './campaign-map';
+import { InvitedPeople } from './invited-people';
 
 function BrandMark() {
   return (
@@ -34,8 +38,22 @@ const STAGE_PILLS: Array<[string, string]> = [
   ['booked', 'Booked'],
 ];
 
-export function CommandCenter({ view }: { view: CommandCenterView }) {
+export function CommandCenter({
+  view,
+  prospects,
+  corridors,
+}: {
+  view: CommandCenterView;
+  prospects: ProspectRow[];
+  corridors: Corridor[];
+}) {
   const { accounts, contacts, funnel, sourceHealth, liveSite } = view;
+
+  // The campaign's accounts as the matcher expects them (id/name/domain).
+  const campaignAccounts = useMemo<CampaignAccountInput[]>(
+    () => accounts.map((a) => ({ id: a.id, name: a.name, domain: a.domain })),
+    [accounts],
+  );
 
   const contactById = useMemo(() => {
     const m = new Map(contacts.map((c) => [c.id, c]));
@@ -153,6 +171,12 @@ export function CommandCenter({ view }: { view: CommandCenterView }) {
       {/* ─── BODY ─── */}
       <div className="cc-body">
         <div className="cc-spine-col">
+          <InvitedPeople
+            contacts={contacts}
+            accountById={accountById}
+            selectedContactId={selectedContactId}
+            onSelectContact={selectContact}
+          />
           <div className="cc-filters">
             <div className="cc-stage-pills">
               {STAGE_PILLS.map((s) => (
@@ -208,9 +232,10 @@ export function CommandCenter({ view }: { view: CommandCenterView }) {
 
         {/* ─── RIGHT RAIL ─── */}
         <div className="cc-rail-col">
-          <MapMotif
-            accounts={accounts}
-            liveSite={liveSite}
+          <CampaignMap
+            prospects={prospects}
+            corridors={corridors}
+            accounts={campaignAccounts}
             selectedAcctId={selectedAcctId}
             onPick={pickMapAccount}
           />
