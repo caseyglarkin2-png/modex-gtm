@@ -17,6 +17,7 @@ import type {
   ViewEvent,
   ViewFact,
 } from '@/lib/campaigns/canonical-view';
+import type { CommitteeCoverage } from '@/lib/campaigns/campaign-intel';
 import {
   SOURCES,
   SourceChip,
@@ -26,6 +27,7 @@ import {
   srcIcon,
   hexA,
 } from './primitives';
+import { CommitteeMeter } from './intel';
 
 type ContactLookup = (id: string) => ViewContact | undefined;
 type AccountLookup = (id: string) => ViewAccount | undefined;
@@ -184,6 +186,7 @@ export function AccountRow({
   selectedAcctId,
   selectedContactId,
   contactById,
+  coverage,
   onToggle,
   onSelectAccount,
   onSelectContact,
@@ -193,6 +196,7 @@ export function AccountRow({
   selectedAcctId: string;
   selectedContactId: string | null;
   contactById: ContactLookup;
+  coverage?: CommitteeCoverage;
   onToggle: () => void;
   onSelectAccount: (id: string) => void;
   onSelectContact: (id: string) => void;
@@ -276,7 +280,12 @@ export function AccountRow({
         </div>
       </div>
 
-      {!open && <SignalLine signals={acct.signals} />}
+      {!open && (
+        <div className="cc-acct-undercard">
+          <SignalLine signals={acct.signals} />
+          {coverage && <CommitteeMeter coverage={coverage} accountName={acct.name} />}
+        </div>
+      )}
 
       {open && (
         <div className="cc-acct-body">
@@ -301,6 +310,11 @@ export function AccountRow({
             <div className="cc-panel-label" style={{ marginTop: '14px' }}>
               Buying committee <span className="ln" />
             </div>
+            {coverage && (
+              <div style={{ marginBottom: '10px' }}>
+                <CommitteeMeter coverage={coverage} accountName={acct.name} />
+              </div>
+            )}
             <div className="cc-committee">
               {committee.length === 0 && (
                 <div className="cc-sig-empty">No committee members resolved yet.</div>

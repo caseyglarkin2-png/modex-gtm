@@ -11,7 +11,9 @@
 
 import React from 'react';
 import type { ViewAccount, ViewContact } from '@/lib/campaigns/canonical-view';
+import type { EngagementHeat, NextBestAction } from '@/lib/campaigns/campaign-intel';
 import { Avatar, Ico } from './primitives';
+import { HeatDot, PersonAction } from './intel';
 
 /**
  * Mirror the /discovery worklist badge language (outline pill, stage-tinted).
@@ -40,11 +42,15 @@ export function InvitedPeople({
   accountById,
   selectedContactId,
   onSelectContact,
+  heatByPersonId,
+  actionByPersonId,
 }: {
   contacts: ViewContact[];
   accountById: (id: string) => ViewAccount | undefined;
   selectedContactId: string | null;
   onSelectContact: (id: string) => void;
+  heatByPersonId: Record<string, EngagementHeat>;
+  actionByPersonId: Record<string, NextBestAction>;
 }) {
   const sentCount = contacts.filter((c) => c.engagement !== 'draft').length;
 
@@ -68,6 +74,8 @@ export function InvitedPeople({
           {contacts.map((c) => {
             const acct = accountById(c.accId);
             const selected = selectedContactId === c.id;
+            const heat = heatByPersonId[c.id];
+            const action = actionByPersonId[c.id];
             return (
               <button
                 type="button"
@@ -79,14 +87,18 @@ export function InvitedPeople({
                 <span className="cc-person-body">
                   <span className="cc-person-top">
                     <span className="nm">{c.name}</span>
-                    <EngagementBadge engagement={c.engagement} />
+                    {heat ? <HeatDot heat={heat} /> : <EngagementBadge engagement={c.engagement} />}
                   </span>
                   <span className="ti">{c.title.v && c.title.v !== '—' ? c.title.v : c.role}</span>
                   <span className="acct">{acct ? acct.name : c.accId}</span>
-                  {c.draft.subject && (
-                    <span className="subj" title={c.draft.subject}>
-                      <Ico.mail /> {c.draft.subject}
-                    </span>
+                  {action ? (
+                    <PersonAction action={action} />
+                  ) : (
+                    c.draft.subject && (
+                      <span className="subj" title={c.draft.subject}>
+                        <Ico.mail /> {c.draft.subject}
+                      </span>
+                    )
                   )}
                 </span>
               </button>

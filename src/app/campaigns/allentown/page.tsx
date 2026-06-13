@@ -12,6 +12,8 @@ import {
 } from '@/lib/campaigns/canonical-view';
 import { loadLatestScored, buildCuratedRows, filterProspects } from '@/lib/discovery/data';
 import type { Corridor, ProspectRow } from '@/lib/discovery/types';
+import { loadCampaignIntel } from '@/lib/campaigns/campaign-intel-data';
+import { emptyIntel, ALLENTOWN_CAMPAIGN, type CampaignIntel } from '@/lib/campaigns/campaign-intel';
 import { CommandCenter } from './_components/console';
 
 export const dynamic = 'force-dynamic';
@@ -83,6 +85,19 @@ export default async function AllentownCommandCenterPage() {
   const { prospects, corridors } = loadCorridorProspects();
   const scopeClass = `cc-scope ${inter.variable} ${jetbrainsMono.variable}`;
 
+  // The intelligence/action layer — pure intel composed from the canonical view,
+  // the live campaign ledger, and the corridor worklist. Fail-soft: empty intel
+  // if any source is missing, the page still renders.
+  let intel: CampaignIntel = emptyIntel(ALLENTOWN_CAMPAIGN);
+  if (view) {
+    intel = await loadCampaignIntel({
+      accounts: view.accounts,
+      persons: view.contacts,
+      corridor: ALLENTOWN_CORRIDOR,
+      config: ALLENTOWN_CAMPAIGN,
+    });
+  }
+
   if (!view) {
     return (
       <div className={`${scopeClass} cc-unavailable`}>
@@ -100,7 +115,7 @@ export default async function AllentownCommandCenterPage() {
 
   return (
     <div className={scopeClass}>
-      <CommandCenter view={view} prospects={prospects} corridors={corridors} />
+      <CommandCenter view={view} prospects={prospects} corridors={corridors} intel={intel} />
     </div>
   );
 }

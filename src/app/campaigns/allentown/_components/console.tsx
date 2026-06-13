@@ -9,11 +9,13 @@
 import React, { useMemo, useState } from 'react';
 import type { CommandCenterView, ViewAccount, ViewContact } from '@/lib/campaigns/canonical-view';
 import type { Corridor, ProspectRow } from '@/lib/discovery/types';
+import type { CampaignIntel } from '@/lib/campaigns/campaign-intel';
 import type { CampaignAccountInput } from '@/lib/campaigns/account-match';
 import { Funnel, SourceHealth } from './primitives';
 import { AccountRow, ContactDetail, AccountDetail } from './spine';
 import { CampaignMap } from './campaign-map';
 import { InvitedPeople } from './invited-people';
+import { NextMoves, TourGoal, NextToInvite } from './intel';
 
 function BrandMark() {
   return (
@@ -42,10 +44,12 @@ export function CommandCenter({
   view,
   prospects,
   corridors,
+  intel,
 }: {
   view: CommandCenterView;
   prospects: ProspectRow[];
   corridors: Corridor[];
+  intel: CampaignIntel;
 }) {
   const { accounts, contacts, funnel, sourceHealth, liveSite } = view;
 
@@ -171,11 +175,15 @@ export function CommandCenter({
       {/* ─── BODY ─── */}
       <div className="cc-body">
         <div className="cc-spine-col">
+          <TourGoal funnel={intel.funnel} />
+          <NextMoves moves={intel.moves} />
           <InvitedPeople
             contacts={contacts}
             accountById={accountById}
             selectedContactId={selectedContactId}
             onSelectContact={selectContact}
+            heatByPersonId={intel.heatByPersonId}
+            actionByPersonId={intel.actionByPersonId}
           />
           <div className="cc-filters">
             <div className="cc-stage-pills">
@@ -222,6 +230,7 @@ export function CommandCenter({
                 selectedAcctId={selectedAcctId}
                 selectedContactId={selectedContactId}
                 contactById={contactById}
+                coverage={intel.coverageByAccountId[a.id]}
                 onToggle={() => toggleOpen(a.id)}
                 onSelectAccount={selectAccount}
                 onSelectContact={selectContact}
@@ -239,6 +248,7 @@ export function CommandCenter({
             selectedAcctId={selectedAcctId}
             onPick={pickMapAccount}
           />
+          <NextToInvite invites={intel.invites} />
           <div className="cc-rail">
             {selContact ? (
               <ContactDetail
