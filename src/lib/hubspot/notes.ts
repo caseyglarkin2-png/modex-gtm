@@ -17,6 +17,8 @@ import * as Sentry from '@sentry/nextjs';
 
 /** HubSpot standard association type id: note → contact. */
 const NOTE_TO_CONTACT_ASSOC_TYPE_ID = 202;
+/** HubSpot standard association type id: note → company. */
+const NOTE_TO_COMPANY_ASSOC_TYPE_ID = 190;
 
 export interface CreateNotePayload {
   /** HTML body of the note. HubSpot supports basic HTML + line breaks. */
@@ -79,6 +81,54 @@ export async function createNote(payload: CreateNotePayload): Promise<string | n
       error: error instanceof Error ? error.message : String(error),
     });
     Sentry.captureException(error, { extra: { contactId: payload.contactId } });
+    return null;
+  }
+}
+
+/**
+ * Create a Note and associate it with a COMPANY (the Pounce Spine stamps
+ * account-level triggers on the company record). Same fail-open semantics as
+ * createNote; returns the note id or null.
+ */
+export async function createCompanyNote(payload: { body: string; companyId: string; timestamp?: string }): Promise<string | null> {
+  if (!isHubSpotConfigured() || !HUBSPOT_LOGGING_ENABLED) {
+    return null;
+  }
+  assertExternalWriteAllowed('hubspot', 'createCompanyNote');
+  try {
+    const client = getHubSpotClient();
+    const note = await withHubSpotRetry(
+      () =>
+        client.crm.objects.notes.basicApi.create({
+          properties: {
+            hs_note_body: payload.body.slice(0, 65535),
+            hs_timestamp: payload.timestamp ?? new Date().toISOString(),
+          },
+          associations: [],
+        }),
+      'createCompanyNote:create',
+    );
+    try {
+      await withHubSpotRetry(
+        () =>
+          client.crm.associations.v4.basicApi.create('notes', note.id, 'companies', payload.companyId, [
+            {
+              associationCategory: AssociationSpecAssociationCategoryEnum.HubspotDefined,
+              associationTypeId: NOTE_TO_COMPANY_ASSOC_TYPE_ID,
+            },
+          ]),
+        'createCompanyNote:associate',
+      );
+    } catch (assocErr) {
+      Sentry.captureException(assocErr, { extra: { noteId: note.id, companyId: payload.companyId } });
+    }
+    return note.id;
+  } catch (error) {
+    console.error('HubSpot company note creation failed', {
+      companyId: payload.companyId,
+      error: error instanceof Error ? error.message : String(error),
+    });
+    Sentry.captureException(error, { extra: { companyId: payload.companyId } });
     return null;
   }
 }

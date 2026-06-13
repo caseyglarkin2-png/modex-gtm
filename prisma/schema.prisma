@@ -1209,3 +1209,31 @@ model DiscoveryContact {
   @@index([prospect_name])
   @@map("discovery_contacts")
 }
+
+/// The Pounce Spine — one durable store every trigger source writes to and
+/// every consumer reads from (news cron, the local X-rig scan, clawd, web
+/// intent). Dedupe rides on `url_hash` (sha256 of the normalized URL), so a
+/// given story pings Slack + stamps HubSpot EXACTLY ONCE no matter how many
+/// sources or runs surface it. `actioned_*` columns make "already handled"
+/// real state instead of a re-scan guess.
+model PounceTrigger {
+  id             Int       @id @default(autoincrement())
+  url_hash       String    @unique // sha256(normalizedUrl)
+  account_slug   String
+  account_name   String
+  title          String
+  url            String
+  source         String    // 'news' | 'x' | 'clawd' | 'web'
+  score          Int
+  categories     String[]  // taxonomy keys: AUTONOMY, YARD, CAPEX, ...
+  published_at   DateTime?
+  first_seen_at  DateTime  @default(now())
+  slack_ping_at  DateTime? // set when pinged to #yardflow-intent (once)
+  hubspot_note_at DateTime? // set when stamped on the HubSpot company (once)
+  dismissed      Boolean   @default(false)
+
+  @@index([account_slug])
+  @@index([score])
+  @@index([first_seen_at])
+  @@map("pounce_triggers")
+}

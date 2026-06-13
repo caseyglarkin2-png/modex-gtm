@@ -2,22 +2,23 @@ import { NextRequest, NextResponse } from 'next/server';
 import { isAuthorizedCronRequest } from '@/lib/cron-auth';
 import { runPounceScan } from '@/lib/pounce/scan';
 import { PING_THRESHOLD } from '@/lib/pounce/score';
-import { sendSlackNotification } from '@/lib/microsites/intent-notifications';
+import { ingestTriggers, type RawTrigger } from '@/lib/pounce/ingest';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 300;
 
 /**
- * Pounce Engine — daily account-trigger scan (Phase 1, Task 4).
+ * Pounce Engine — daily account-trigger scan (news source).
  *
  * Scheduled (Vercel cron, Bearer auth): scans the last 36h of news for every
- * audited /for account, scores each story on the pounce taxonomy, and pings
- * #yardflow-intent with the top triggers (capped) so outreach timing rides
- * the prospect's own news cycle.
+ * audited /for account, scores each story, and routes the hits through the
+ * shared spine (ingestTriggers) — which dedupes against the PounceTrigger
+ * table and fires Slack + HubSpot EXACTLY ONCE per story, across all sources
+ * and runs. This route no longer pings Slack itself; the spine owns that.
  *
- * Manual (?secret=CRON_SECRET) defaults to DRYRUN (report only, no pings) —
- * same idiom as /api/cron/qualification. Override with &mode=apply.
- * Params: &hours=336 (backfill, max 720) &minScore=8 &account=<slug>.
+ * Manual (?secret=CRON_SECRET) defaults to DRYRUN (scan + report, NO ingest /
+ * no pings). Override with &mode=apply. Params: &hours=336 (max 720)
+ * &minScore=6 &account=<slug>.
  */
 export async function GET(request: NextRequest) {
   if (!isAuthorizedCronRequest(request)) {
@@ -37,22 +38,20 @@ export async function GET(request: NextRequest) {
     slugs: account ? [account] : undefined,
   });
 
-  const PING_CAP = 6;
-  let pinged = 0;
+  let ingest = null;
   if (mode === 'apply') {
-    for (const t of result.triggers.slice(0, PING_CAP)) {
-      const date = t.publishedAt.slice(0, 10);
-      const ok = await sendSlackNotification(
-        `🎯 POUNCE — *${t.account}*\n"${t.title}"\n${t.source} · ${date} · score ${t.score} [${t.categories.join(', ')}]\n${t.url}\nSpear: https://yardflow.ai/for/${t.slug}/`,
-      );
-      if (ok) pinged += 1;
-    }
+    const raw: RawTrigger[] = result.triggers.map((t) => ({
+      accountSlug: t.slug,
+      accountName: t.account,
+      title: t.title,
+      url: t.url,
+      source: 'news',
+      score: t.score,
+      categories: t.categories,
+      publishedAt: t.publishedAt,
+    }));
+    ingest = await ingestTriggers(raw);
   }
 
-  return NextResponse.json({
-    ok: true,
-    mode,
-    pinged,
-    ...result,
-  });
+  return NextResponse.json({ ok: true, mode, ingest, ...result });
 }
