@@ -3,11 +3,15 @@
  * account heat (for clawd's outreach-queue prioritization) and per-account
  * latest triggers (for the /for LIVE SIGNAL ribbon).
  *
- * Heat is recency-weighted: each trigger contributes score * exp(-ageDays/H),
- * so a fresh high-score story lights an account up and decays over ~2 weeks.
- * That makes "who's hot right now" a live ranking, not a lifetime tally.
+ * Heat = Σ (normScore · fit · recency):
+ *   - normScore normalizes each source's raw score to 0-100 (clawd is already
+ *     0-100; the news/X taxonomy scales up) so producers are comparable.
+ *   - fit is the audited yard footprint (dock doors) — a hot signal on a
+ *     yard-heavy account outranks the same signal on a vendor with no yards.
+ *   - recency decays each trigger over ~2 weeks, so "who's hot" is live.
  */
 import { prisma } from '@/lib/prisma';
+import { accountFit, normalizeScore } from './fit';
 
 const HALFLIFE_DAYS = 14;
 
@@ -15,7 +19,8 @@ export interface RankedTrigger {
   title: string;
   url: string;
   source: string;
-  score: number;
+  score: number; // raw, as the source emitted it
+  normScore: number; // normalized to 0-100 across sources
   categories: string[];
   seenAt: string;
   publishedAt: string | null;
@@ -24,7 +29,8 @@ export interface RankedTrigger {
 export interface RankedAccount {
   accountSlug: string;
   accountName: string;
-  heat: number;
+  heat: number; // Σ normScore · fit · recency
+  fit: number; // 0.1 (no audited pack) .. 1.0 (>=2000 audited dock doors)
   triggerCount: number;
   topTrigger: RankedTrigger;
   lastSeenAt: string;
@@ -33,6 +39,22 @@ export interface RankedAccount {
 function decay(ageMs: number): number {
   const ageDays = ageMs / 86_400_000;
   return Math.exp(-ageDays / HALFLIFE_DAYS);
+}
+
+function toTrigger(r: {
+  title: string; url: string; source: string; score: number;
+  categories: string[]; first_seen_at: Date; published_at: Date | null;
+}): RankedTrigger {
+  return {
+    title: r.title,
+    url: r.url,
+    source: r.source,
+    score: r.score,
+    normScore: normalizeScore(r.score, r.source),
+    categories: r.categories,
+    seenAt: r.first_seen_at.toISOString(),
+    publishedAt: r.published_at ? r.published_at.toISOString() : null,
+  };
 }
 
 export async function rankAccounts(opts: {
@@ -53,22 +75,16 @@ export async function rankAccounts(opts: {
   const now = Date.now();
   const byAccount = new Map<string, RankedAccount>();
   for (const r of rows) {
-    const t: RankedTrigger = {
-      title: r.title,
-      url: r.url,
-      source: r.source,
-      score: r.score,
-      categories: r.categories,
-      seenAt: r.first_seen_at.toISOString(),
-      publishedAt: r.published_at ? r.published_at.toISOString() : null,
-    };
-    const weighted = r.score * decay(now - r.first_seen_at.getTime());
+    const t = toTrigger(r);
+    const fit = accountFit(r.account_slug);
+    const weighted = t.normScore * fit * decay(now - r.first_seen_at.getTime());
     const cur = byAccount.get(r.account_slug);
     if (!cur) {
       byAccount.set(r.account_slug, {
         accountSlug: r.account_slug,
         accountName: r.account_name,
         heat: weighted,
+        fit,
         triggerCount: 1,
         topTrigger: t,
         lastSeenAt: t.seenAt,
@@ -76,9 +92,8 @@ export async function rankAccounts(opts: {
     } else {
       cur.heat += weighted;
       cur.triggerCount += 1;
-      // rows are first_seen_at desc, so the first-seen per account is the latest;
-      // keep the highest-score trigger as the headline.
-      if (t.score > cur.topTrigger.score) cur.topTrigger = t;
+      // rows are first_seen_at desc; keep the highest normScore as the headline.
+      if (t.normScore > cur.topTrigger.normScore) cur.topTrigger = t;
     }
   }
 
@@ -94,14 +109,5 @@ export async function latestForAccount(slug: string): Promise<RankedTrigger | nu
     where: { account_slug: slug, dismissed: false },
     orderBy: { first_seen_at: 'desc' },
   });
-  if (!r) return null;
-  return {
-    title: r.title,
-    url: r.url,
-    source: r.source,
-    score: r.score,
-    categories: r.categories,
-    seenAt: r.first_seen_at.toISOString(),
-    publishedAt: r.published_at ? r.published_at.toISOString() : null,
-  };
+  return r ? toTrigger(r) : null;
 }
