@@ -40,6 +40,7 @@ current, complete set and is the source of truth.
 {
   "account_domain": "bostonbeer.com",
   "account_name": "The Boston Beer Company",
+  "composite_score": 0-100,
   "proximity_score": 0-100,
   "nearest_distance_mi": 12.4,
   "corridor_density": 3,
@@ -58,10 +59,19 @@ current, complete set and is the source of truth.
 }
 ```
 
-- `proximity_score` and `fit_score` are `compositeScore`/`fitComponent`
-  scaled to 0-100. `proximity_score` is the only required field besides the
-  account keys; everything else is nullable (a scored account with no yard
-  audit yet still flows).
+- `composite_score` is the COMPLETE discovery score (`compositeScore` =
+  proximity 0.55 + fit 0.30 + density 0.15, scaled to 0-100). **This is the
+  number the brain fuses into the homescreen** when present. `proximity_score`,
+  `fit_score`, `corridor_density` are the component breakdown, surfaced for
+  display/explainability.
+- **v1 / v2:** v1 may send `proximity_score` only (pure proximity axis) with
+  `composite_score`/`fit_score`/`corridor_density` null, because the full
+  scored set is not bundled on Vercel. The brain falls back to `proximity_score`
+  when `composite_score` is null, and **upgrades to the complete score with no
+  redeploy the moment `composite_score` is populated** (commit the scored set).
+- At least one of `composite_score`/`proximity_score` is required besides the
+  account keys; everything else is nullable (a scored account with no yard audit
+  yet still flows).
 - `yard_audit` mirrors the master-index fields (`output/yard-audits/
   YardFlow-Master-Index.csv`).
 - `idempotency_key` should encode the score version (`<domain>:<updated_at>`)

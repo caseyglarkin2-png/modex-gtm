@@ -9,10 +9,11 @@ const ACCOUNT = {
   slug: 'boston-beer-company',
   account_name: 'The Boston Beer Company',
   account_domain: 'bostonbeer.com',
+  composite_score: 84.2,
   proximity_score: 91,
   nearest_distance_mi: 2.9,
-  corridor_density: null,
-  fit_score: null,
+  corridor_density: 3.1,
+  fit_score: 72.5,
   yard_audit: {
     facilities: 5,
     truck_gated_pct: 20,
@@ -32,11 +33,14 @@ describe('buildProximityRecord', () => {
     expect(rec.updated_at).toBe(GEN);
   });
 
-  it('carries the account keys, proximity, and the yard_audit block', () => {
+  it('carries the complete composite plus the breakdown and yard_audit block', () => {
     const rec = buildProximityRecord(ACCOUNT, GEN);
     expect(rec.account_name).toBe('The Boston Beer Company');
     expect(rec.account_domain).toBe('bostonbeer.com');
+    expect(rec.composite_score).toBe(84.2); // the number clawd fuses
     expect(rec.proximity_score).toBe(91);
+    expect(rec.fit_score).toBe(72.5);
+    expect(rec.corridor_density).toBe(3.1);
     expect(rec.nearest_distance_mi).toBe(2.9);
     expect((rec.yard_audit as Record<string, unknown>).top_archetype).toBe('#3 (No Gate / No GS)');
     expect((rec.yard_audit as Record<string, unknown>).truck_gated_pct).toBe(20);
@@ -59,7 +63,11 @@ describe('exportProximity (live snapshot)', () => {
     for (const item of env.items) {
       expect(typeof item.proximity_score).toBe('number');
       expect(item.idempotency_key).toContain(env.watermark);
+      expect('composite_score' in item).toBe(true); // present, number or null
     }
+    // The composite upgrade: a real share of accounts carry the complete score.
+    const withComposite = env.items.filter((i) => typeof i.composite_score === 'number');
+    expect(withComposite.length).toBeGreaterThan(10);
   });
 
   it('keyset-pages through the whole snapshot exactly once, in order, no overlap', () => {

@@ -29,11 +29,12 @@ interface ProximityAccount {
   slug: string;
   account_name: string;
   account_domain: string | null;
+  composite_score: number | null;
   proximity_score: number;
   nearest_distance_mi: number;
   corridor_density: number | null;
   fit_score: number | null;
-  yard_audit: YardAudit;
+  yard_audit: YardAudit | null;
   dossier_url: string | null;
 }
 interface ProximitySnapshot {
@@ -59,6 +60,10 @@ export function buildProximityRecord(a: ProximityAccount, generatedAt: string): 
   };
   if (a.account_name) rec.account_name = a.account_name;
   if (a.account_domain) rec.account_domain = a.account_domain;
+  // composite_score is the COMPLETE discovery score (proximity+fit+density) and
+  // the number clawd fuses; null when the account has no scored rows yet, where
+  // the brain falls back to proximity_score.
+  rec.composite_score = a.composite_score;
   rec.proximity_score = a.proximity_score;
   rec.nearest_distance_mi = a.nearest_distance_mi;
   rec.corridor_density = a.corridor_density;
