@@ -190,3 +190,34 @@ export async function updateCompanyIntent(
     `updateCompanyIntent(${companyId})`,
   ).catch(() => undefined);
 }
+
+/**
+ * Stamp the Pounce trigger-heat properties on a company (the sortable
+ * hot-accounts surface, mirroring the intent trio). The 6 properties are
+ * created out-of-band; this is the single writer (the spine ingest).
+ * `score` should be the normalized 0-100 value; `category` the locked-vocab
+ * key. Fail-open like the intent writer.
+ */
+export async function updateCompanyTrigger(
+  companyId: string,
+  t: { score: number; at: Date; headline: string; source: string; url: string; category: string },
+): Promise<void> {
+  if (!isHubSpotConfigured() || !HUBSPOT_SYNC_ENABLED) return;
+  assertExternalWriteAllowed('hubspot', 'updateCompanyTrigger');
+
+  const client = getHubSpotClient();
+  await withHubSpotRetry(
+    () =>
+      client.crm.companies.basicApi.update(companyId, {
+        properties: {
+          trigger_score: String(Math.round(t.score)),
+          last_trigger_at: String(t.at.getTime()),
+          last_trigger_headline: t.headline.slice(0, 250),
+          last_trigger_source: t.source,
+          last_trigger_url: t.url.slice(0, 500),
+          last_trigger_category: t.category,
+        },
+      }),
+    `updateCompanyTrigger(${companyId})`,
+  ).catch(() => undefined);
+}

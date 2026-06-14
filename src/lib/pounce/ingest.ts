@@ -14,10 +14,11 @@
 import { createHash } from 'node:crypto';
 import { prisma } from '@/lib/prisma';
 import { sendSlackNotification } from '@/lib/microsites/intent-notifications';
-import { searchCompanyByName } from '@/lib/hubspot/companies';
+import { searchCompanyByName, updateCompanyTrigger } from '@/lib/hubspot/companies';
 import { createCompanyNote } from '@/lib/hubspot/notes';
 import { getAccountMicrositeData } from '@/lib/microsites/accounts';
 import { PING_THRESHOLD } from './score';
+import { normalizeScore } from './fit';
 
 export interface RawTrigger {
   accountSlug: string;
@@ -96,7 +97,8 @@ export async function ingestTriggers(
       if (ok) { res.pinged += 1; await prisma.pounceTrigger.update({ where: { id: row.id }, data: { slack_ping_at: new Date() } }); }
     }
 
-    // HubSpot — best-effort timeline Note on the resolved company, once.
+    // HubSpot — on the resolved company, once: a timeline Note (human-readable)
+    // AND the sortable trigger-heat properties (mirroring the intent trio).
     try {
       const company = await searchCompanyByName(companyName(t));
       if (company) {
@@ -107,6 +109,16 @@ export async function ingestTriggers(
           `Categories: ${t.categories.join(', ')}`,
         ].join('<br>');
         const noteId = await createCompanyNote({ companyId: company.id, body });
+        // Trigger-heat properties carry the NORMALIZED 0-100 score (so HubSpot
+        // sorts consistently across sources) + the primary locked-vocab category.
+        await updateCompanyTrigger(company.id, {
+          score: normalizeScore(t.score, t.source),
+          at: new Date(),
+          headline: t.title,
+          source: t.source,
+          url: t.url,
+          category: t.categories[0] ?? '',
+        });
         if (noteId) { res.stamped += 1; await prisma.pounceTrigger.update({ where: { id: row.id }, data: { hubspot_note_at: new Date() } }); }
       }
     } catch {

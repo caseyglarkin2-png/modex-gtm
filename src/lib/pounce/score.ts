@@ -22,37 +22,37 @@ interface Category {
 
 const CATEGORIES: Category[] = [
   {
-    key: 'AUTONOMY',
+    key: 'autonomy',
     weight: 6,
     patterns: /\b(gatik|autonomous|driverless|self-driving|robot truck|robotruck|waymo|aurora innovation|kodiak|plus\.ai|einride)\b/i,
   },
   {
-    key: 'YARD_DIRECT',
+    key: 'yard_direct',
     weight: 6,
     patterns: /\b(truck yard|yards?\b.{0,30}(automat|digit|manag)|yard management|yms\b|dock door|dock schedul|detention|dwell time|gate automation|trailer pool|drop trailer)\b/i,
   },
   {
-    key: 'DIGITAL_OPS',
+    key: 'digital_ops',
     weight: 4,
     patterns: /\b(digital twin|omniverse|ai-powered|artificial intelligence|automat\w*|robotics|industry 4\.0|machine vision|computer vision)\b/i,
   },
   {
-    key: 'NETWORK_CAPEX',
+    key: 'network_capex',
     weight: 4,
     patterns: /\b(new plant|new factory|distribution center|fulfillment center|greenfield|breaks ground|broke ground|expansion|million[- ]square[- ]f(oo|ee)t|opens? (a )?(new )?facility|mega[- ]?site|capex|capital investment)\b/i,
   },
   {
-    key: 'COST_RESTRUCTURE',
+    key: 'cost_restructure',
     weight: 4,
     patterns: /\b(clos(e[sd]?|ing|ures?)\b.{0,30}(plants?|facilit|warehouse|distribution)|closure|shutting down|restructur\w*|layoffs?|activist investor|elliott|productivity (program|initiative|target)|cost[- ]cut\w*|network optimization|consolidat\w*)\b/i,
   },
   {
-    key: 'LEADERSHIP',
+    key: 'leadership',
     weight: 3,
     patterns: /\b(chief supply chain|csco\b|(svp|vp|vice president)[^.]{0,40}supply chain|appoints?|names? new (ceo|cfo|coo|chief))\b/i,
   },
   {
-    key: 'FREIGHT',
+    key: 'freight',
     weight: 2,
     patterns: /\b(private fleet|trucking|freight|carrier|transportation network|middle[- ]mile|logistics network)\b/i,
   },
