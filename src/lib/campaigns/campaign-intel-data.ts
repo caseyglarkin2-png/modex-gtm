@@ -72,10 +72,13 @@ export async function loadCorridorIntelRows(corridor: string): Promise<Discovery
 }
 
 /**
- * Match the campaign's EmailLog rows to the canonical persons by normalized
- * persona name, falling back to a draft-queue lookup for the to_email. Returns a
- * person.id -> EmailLog map (null when no send has fired for that person). Empty
- * map on any DB failure.
+ * Match the campaign's EmailLog rows to the canonical persons by `person.email`
+ * -> EmailLog.to_email (lowercased) — the robust join now that the canonical
+ * view carries email (clawd deploy d810abac). The kdrp.com alias is preserved on
+ * the person while the account still canonicalizes, so the email join is stable.
+ * Falls back to the normalized-persona-name match only for persons with no email
+ * (or no email-keyed send). Returns a person.id -> EmailLog map (null when no
+ * send has fired for that person). Empty map on any DB failure.
  */
 export async function loadCampaignLogs(
   persons: ViewContact[],
@@ -98,11 +101,13 @@ export async function loadCampaignLogs(
       },
     });
 
-    // persona name -> the most-engaged log row (a person may have several sends;
-    // keep the warmest: replied > opened > sent, newest first).
-    const byName = new Map<string, CampaignEmailLog>();
     const heat = (l: CampaignEmailLog) =>
       (l.replyCount > 0 ? 3 : 0) + (l.openedAt != null || l.openCount > 0 ? 2 : 0) + (l.sentAt != null ? 1 : 0);
+
+    // Primary index: lowercased to_email -> warmest log row. Name index kept as a
+    // fallback for persons we have no email for.
+    const byEmail = new Map<string, CampaignEmailLog>();
+    const byName = new Map<string, CampaignEmailLog>();
     for (const l of logs) {
       const mapped: CampaignEmailLog = {
         toEmail: (l.to_email || '').toLowerCase(),
@@ -112,15 +117,22 @@ export async function loadCampaignLogs(
         replyCount: l.reply_count ?? 0,
         sentAt: l.sent_at ? l.sent_at.getTime() : null,
       };
-      const key = nameKey(l.persona_name || '');
-      if (!key) continue;
-      const prev = byName.get(key);
-      if (!prev || heat(mapped) >= heat(prev)) byName.set(key, mapped);
+      if (mapped.toEmail) {
+        const prev = byEmail.get(mapped.toEmail);
+        if (!prev || heat(mapped) >= heat(prev)) byEmail.set(mapped.toEmail, mapped);
+      }
+      const nkey = nameKey(l.persona_name || '');
+      if (nkey) {
+        const prevN = byName.get(nkey);
+        if (!prevN || heat(mapped) >= heat(prevN)) byName.set(nkey, mapped);
+      }
     }
 
     for (const p of persons) {
-      const key = nameKey(p.name);
-      const log = byName.get(key) ?? null;
+      const email = (p.email || '').toLowerCase();
+      let log: CampaignEmailLog | null = email ? byEmail.get(email) ?? null : null;
+      // Name fallback only when email is absent or matched nothing.
+      if (!log) log = byName.get(nameKey(p.name)) ?? null;
       out.set(p.id, log);
     }
   } catch (err) {

@@ -94,6 +94,10 @@ export interface RawPerson {
   id: number;
   accountId: number;
   name: string;
+  /** Canonical person email (clawd deploy d810abac). Preserves the kdrp.com
+   *  alias on the person while the account still canonicalizes to
+   *  keurigdrpepper.com — so the EmailLog join on email is stable. */
+  email?: string | null;
   role: string;
   facts: {
     title?: RawFact;
@@ -186,6 +190,9 @@ export interface ViewContact {
   id: string;
   accId: string;
   name: string;
+  /** Canonical email; the robust key for joining the EmailLog/DraftQueueItem
+   *  ledger (to_email) instead of the lossier normalized-persona-name match. */
+  email?: string | null;
   initials: string;
   role: string;
   engagement: string; // replied | opened | sent | draft | contacts
@@ -531,6 +538,7 @@ export function adaptCanonicalView(raw: RawCanonicalCampaign): CommandCenterView
       id: personKey(p.id),
       accId: accountKey(p.accountId),
       name: p.name,
+      email: p.email ?? null,
       initials: initialsOf(p.name),
       role: p.role,
       engagement,
