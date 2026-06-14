@@ -28,7 +28,9 @@ import {
   type IntelRecord,
 } from './records';
 
-export const STREAMS = ['replies', 'email_events', 'engagements', 'captures', 'outcomes'] as const;
+import { exportProximity } from './proximity';
+
+export const STREAMS = ['replies', 'email_events', 'engagements', 'captures', 'outcomes', 'proximity'] as const;
 export type StreamName = (typeof STREAMS)[number];
 
 export interface ExportEnvelope {
@@ -144,6 +146,9 @@ export async function exportStream(args: ExportArgs): Promise<ExportEnvelope> {
         return await exportCaptures(since, cursor, limit);
       case 'outcomes':
         return await exportOutcomes(since, cursor, limit);
+      case 'proximity':
+        // Standing-state full snapshot; ignores `since`, keysets by slug.
+        return exportProximity(args.cursor, limit);
       default:
         // Unknown stream -> 200 empty envelope.
         return emptyEnvelope(args.stream, since);

@@ -1,0 +1,761 @@
+{
+  "generatedAt": "2026-06-14T20:56:01.369Z",
+  "accounts": [
+    {
+      "slug": "ab-inbev",
+      "account_name": "AB InBev",
+      "account_domain": "anheuser-busch.com",
+      "proximity_score": 87,
+      "nearest_distance_mi": 4.1,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 21,
+        "truck_gated_pct": 62,
+        "dock_doors": 614,
+        "trailer_cap": 4072,
+        "top_archetype": "#3 (No Gate / No GS)",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/ab-inbev"
+    },
+    {
+      "slug": "barnes-noble",
+      "account_name": "Barnes & Noble",
+      "account_domain": "barnesandnoble.com",
+      "proximity_score": 12,
+      "nearest_distance_mi": 62.4,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 2,
+        "truck_gated_pct": 100,
+        "dock_doors": 148,
+        "trailer_cap": 125,
+        "top_archetype": "#9 (Gate + No GS (remote check-in))",
+        "recommended_entry": "Lead with drop-yard visibility — large trailer pools mean trailer-location tracking is the fastest pain to quantify."
+      },
+      "dossier_url": "https://yardflow.ai/for/barnes-noble"
+    },
+    {
+      "slug": "bob-evans-farms",
+      "account_name": "Bob Evans Farms",
+      "account_domain": "bobevans.com",
+      "proximity_score": 23,
+      "nearest_distance_mi": 44.1,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 7,
+        "truck_gated_pct": 29,
+        "dock_doors": 76,
+        "trailer_cap": 298,
+        "top_archetype": "#3 (No Gate / No GS)",
+        "recommended_entry": "Lead with offline-tolerant check-in — a rural-heavy footprint needs YardFlow to work through connectivity gaps."
+      },
+      "dossier_url": "https://yardflow.ai/for/bob-evans-farms"
+    },
+    {
+      "slug": "boston-beer-company",
+      "account_name": "The Boston Beer Company",
+      "account_domain": "bostonbeer.com",
+      "proximity_score": 91,
+      "nearest_distance_mi": 2.9,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 5,
+        "truck_gated_pct": 20,
+        "dock_doors": 71,
+        "trailer_cap": 300,
+        "top_archetype": "#3 (No Gate / No GS)",
+        "recommended_entry": "Lead with offline-tolerant check-in — a rural-heavy footprint needs YardFlow to work through connectivity gaps."
+      },
+      "dossier_url": "https://yardflow.ai/for/boston-beer-company"
+    },
+    {
+      "slug": "campbells",
+      "account_name": "Campbell's",
+      "account_domain": "campbells.com",
+      "proximity_score": 57,
+      "nearest_distance_mi": 17,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 21,
+        "truck_gated_pct": 57,
+        "dock_doors": 712,
+        "trailer_cap": 1814,
+        "top_archetype": "#3 (No Gate / No GS)",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/campbell-s"
+    },
+    {
+      "slug": "caterpillar",
+      "account_name": "Caterpillar",
+      "account_domain": "caterpillar.com",
+      "proximity_score": 11,
+      "nearest_distance_mi": 67.1,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 21,
+        "truck_gated_pct": 95,
+        "dock_doors": 628,
+        "trailer_cap": 1340,
+        "top_archetype": "#9 (Gate + No GS (remote check-in))",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/caterpillar"
+    },
+    {
+      "slug": "cj-logistics-america",
+      "account_name": "CJ Logistics America",
+      "account_domain": "cjlogisticsamerica.com",
+      "proximity_score": 92,
+      "nearest_distance_mi": 2.4,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 28,
+        "truck_gated_pct": 61,
+        "dock_doors": 2134,
+        "trailer_cap": 3005,
+        "top_archetype": "#3 (No Gate / No GS)",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/cj-logistics-america"
+    },
+    {
+      "slug": "coca-cola",
+      "account_name": "Coca-Cola",
+      "account_domain": "coca-colacompany.com",
+      "proximity_score": 88,
+      "nearest_distance_mi": 3.8,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 30,
+        "truck_gated_pct": 57,
+        "dock_doors": 1059,
+        "trailer_cap": 2630,
+        "top_archetype": "#3 (No Gate / No GS)",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/coca-cola"
+    },
+    {
+      "slug": "constellation-brands",
+      "account_name": "Constellation Brands",
+      "account_domain": "cbrands.com",
+      "proximity_score": 90,
+      "nearest_distance_mi": 3.3,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 11,
+        "truck_gated_pct": 18,
+        "dock_doors": 148,
+        "trailer_cap": 179,
+        "top_archetype": "#3 (No Gate / No GS)",
+        "recommended_entry": "Lead with offline-tolerant check-in — a rural-heavy footprint needs YardFlow to work through connectivity gaps."
+      },
+      "dossier_url": "https://yardflow.ai/for/constellation-brands"
+    },
+    {
+      "slug": "cost-plus-world-market",
+      "account_name": "Cost Plus World Market",
+      "account_domain": "worldmarket.com",
+      "proximity_score": 25,
+      "nearest_distance_mi": 41.9,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 2,
+        "truck_gated_pct": 100,
+        "dock_doors": 200,
+        "trailer_cap": 500,
+        "top_archetype": "#9 (Gate + No GS (remote check-in))",
+        "recommended_entry": "Lead with offline-tolerant check-in — a rural-heavy footprint needs YardFlow to work through connectivity gaps."
+      },
+      "dossier_url": "https://yardflow.ai/for/cost-plus-world-market"
+    },
+    {
+      "slug": "crowley",
+      "account_name": "Crowley",
+      "account_domain": "crowley.com",
+      "proximity_score": 19,
+      "nearest_distance_mi": 49.1,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 14,
+        "truck_gated_pct": 93,
+        "dock_doors": 333,
+        "trailer_cap": 6920,
+        "top_archetype": "#6 (Gate + GS (not BU sens.) + campus)",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/crowley"
+    },
+    {
+      "slug": "daimler-truck-north-america",
+      "account_name": "Daimler Truck North America",
+      "account_domain": "daimlertruck.com",
+      "proximity_score": 75,
+      "nearest_distance_mi": 8.6,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 16,
+        "truck_gated_pct": 44,
+        "dock_doors": 562,
+        "trailer_cap": 1944,
+        "top_archetype": "#3 (No Gate / No GS)",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/daimler-truck-north-america"
+    },
+    {
+      "slug": "dannon",
+      "account_name": "Dannon",
+      "account_domain": "dannon.com",
+      "proximity_score": 95,
+      "nearest_distance_mi": 1.7,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 14,
+        "truck_gated_pct": 57,
+        "dock_doors": 300,
+        "trailer_cap": 556,
+        "top_archetype": "#9 (Gate + No GS (remote check-in))",
+        "recommended_entry": "Lead with drop-yard visibility — large trailer pools mean trailer-location tracking is the fastest pain to quantify."
+      },
+      "dossier_url": "https://yardflow.ai/for/dannon"
+    },
+    {
+      "slug": "dhl-supply-chain",
+      "account_name": "DHL Supply Chain",
+      "account_domain": "dhl.com",
+      "proximity_score": 59,
+      "nearest_distance_mi": 16.1,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 24,
+        "truck_gated_pct": 54,
+        "dock_doors": 1626,
+        "trailer_cap": 1790,
+        "top_archetype": "#9 (Gate + No GS (remote check-in))",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/dhl-supply-chain"
+    },
+    {
+      "slug": "diageo",
+      "account_name": "Diageo",
+      "account_domain": "diageo.com",
+      "proximity_score": 7,
+      "nearest_distance_mi": 79.9,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 10,
+        "truck_gated_pct": 30,
+        "dock_doors": 295,
+        "trailer_cap": 567,
+        "top_archetype": "#3 (No Gate / No GS)",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/diageo"
+    },
+    {
+      "slug": "fedex",
+      "account_name": "FedEx",
+      "account_domain": "fedex.com",
+      "proximity_score": 94,
+      "nearest_distance_mi": 1.8,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 30,
+        "truck_gated_pct": 87,
+        "dock_doors": 4115,
+        "trailer_cap": 9810,
+        "top_archetype": "#7 (Gate + GS (not BU sens.) + fast lane opp)",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/fedex"
+    },
+    {
+      "slug": "ford",
+      "account_name": "Ford",
+      "account_domain": "ford.com",
+      "proximity_score": 85,
+      "nearest_distance_mi": 5,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 24,
+        "truck_gated_pct": 100,
+        "dock_doors": 907,
+        "trailer_cap": 2692,
+        "top_archetype": "#6 (Gate + GS (not BU sens.) + campus)",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/ford"
+    },
+    {
+      "slug": "frito-lay",
+      "account_name": "Frito-Lay",
+      "account_domain": "fritolay.com",
+      "proximity_score": 92,
+      "nearest_distance_mi": 2.3,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 30,
+        "truck_gated_pct": 80,
+        "dock_doors": 1301,
+        "trailer_cap": 5027,
+        "top_archetype": "#9 (Gate + No GS (remote check-in))",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/frito-lay"
+    },
+    {
+      "slug": "general-mills",
+      "account_name": "General Mills",
+      "account_domain": "generalmills.com",
+      "proximity_score": 85,
+      "nearest_distance_mi": 4.9,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 26,
+        "truck_gated_pct": 69,
+        "dock_doors": 883,
+        "trailer_cap": 2234,
+        "top_archetype": "#9 (Gate + No GS (remote check-in))",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/general-mills"
+    },
+    {
+      "slug": "georgia-pacific",
+      "account_name": "Georgia Pacific",
+      "account_domain": "gp.com",
+      "proximity_score": 45,
+      "nearest_distance_mi": 24.2,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 30,
+        "truck_gated_pct": 80,
+        "dock_doors": 721,
+        "trailer_cap": 3402,
+        "top_archetype": "#6 (Gate + GS (not BU sens.) + campus)",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/georgia-pacific"
+    },
+    {
+      "slug": "gxo",
+      "account_name": "GXO Logistics",
+      "account_domain": "gxo.com",
+      "proximity_score": 85,
+      "nearest_distance_mi": 4.8,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 30,
+        "truck_gated_pct": 33,
+        "dock_doors": 3107,
+        "trailer_cap": 3586,
+        "top_archetype": "#3 (No Gate / No GS)",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/gxo"
+    },
+    {
+      "slug": "h-e-b",
+      "account_name": "H-E-B",
+      "account_domain": "heb.com",
+      "proximity_score": 93,
+      "nearest_distance_mi": 2.2,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 16,
+        "truck_gated_pct": 44,
+        "dock_doors": 832,
+        "trailer_cap": 1854,
+        "top_archetype": "#3 (No Gate / No GS)",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/h-e-b"
+    },
+    {
+      "slug": "honda",
+      "account_name": "Honda",
+      "account_domain": "honda.com",
+      "proximity_score": 84,
+      "nearest_distance_mi": 5.2,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 18,
+        "truck_gated_pct": 83,
+        "dock_doors": 1019,
+        "trailer_cap": 3895,
+        "top_archetype": "#6 (Gate + GS (not BU sens.) + campus)",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/honda"
+    },
+    {
+      "slug": "hormel-foods",
+      "account_name": "Hormel Foods",
+      "account_domain": "hormelfoods.com",
+      "proximity_score": 26,
+      "nearest_distance_mi": 40.7,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 27,
+        "truck_gated_pct": 41,
+        "dock_doors": 766,
+        "trailer_cap": 1609,
+        "top_archetype": "#3 (No Gate / No GS)",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/hormel-foods"
+    },
+    {
+      "slug": "hyundai-motor-america",
+      "account_name": "Hyundai Motor America",
+      "account_domain": "hyundaiusa.com",
+      "proximity_score": 93,
+      "nearest_distance_mi": 2.3,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 17,
+        "truck_gated_pct": 59,
+        "dock_doors": 548,
+        "trailer_cap": 15118,
+        "top_archetype": "#3 (No Gate / No GS)",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/hyundai-motor-america"
+    },
+    {
+      "slug": "jm-smucker",
+      "account_name": "JM Smucker",
+      "account_domain": "jmsmucker.com",
+      "proximity_score": 35,
+      "nearest_distance_mi": 31.2,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 17,
+        "truck_gated_pct": 47,
+        "dock_doors": 504,
+        "trailer_cap": 1252,
+        "top_archetype": "#3 (No Gate / No GS)",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/jm-smucker"
+    },
+    {
+      "slug": "john-deere",
+      "account_name": "John Deere",
+      "account_domain": "deere.com",
+      "proximity_score": 23,
+      "nearest_distance_mi": 44.4,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 22,
+        "truck_gated_pct": 55,
+        "dock_doors": 666,
+        "trailer_cap": 1999,
+        "top_archetype": "#3 (No Gate / No GS)",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/john-deere"
+    },
+    {
+      "slug": "kenco-logistics",
+      "account_name": "Kenco Logistics Services",
+      "account_domain": "kencogroup.com",
+      "proximity_score": 86,
+      "nearest_distance_mi": 4.5,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 30,
+        "truck_gated_pct": 27,
+        "dock_doors": 1996,
+        "trailer_cap": 2614,
+        "top_archetype": "#3 (No Gate / No GS)",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/kenco-logistics-services"
+    },
+    {
+      "slug": "keurig-dr-pepper",
+      "account_name": "Keurig Dr Pepper",
+      "account_domain": "keurigdrpepper.com",
+      "proximity_score": 91,
+      "nearest_distance_mi": 2.9,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 22,
+        "truck_gated_pct": 32,
+        "dock_doors": 851,
+        "trailer_cap": 1838,
+        "top_archetype": "#3 (No Gate / No GS)",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/keurig-dr-pepper"
+    },
+    {
+      "slug": "kimberly-clark",
+      "account_name": "Kimberly-Clark",
+      "account_domain": "kimberly-clark.com",
+      "proximity_score": 25,
+      "nearest_distance_mi": 41.2,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 18,
+        "truck_gated_pct": 72,
+        "dock_doors": 807,
+        "trailer_cap": 2264,
+        "top_archetype": "#9 (Gate + No GS (remote check-in))",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/kimberly-clark"
+    },
+    {
+      "slug": "mondelez",
+      "account_name": "Mondelez",
+      "account_domain": "mondelezinternational.com",
+      "proximity_score": 80,
+      "nearest_distance_mi": 6.7,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 22,
+        "truck_gated_pct": 50,
+        "dock_doors": 698,
+        "trailer_cap": 1292,
+        "top_archetype": "#3 (No Gate / No GS)",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/mondelez"
+    },
+    {
+      "slug": "nestle-usa",
+      "account_name": "Nestlé USA",
+      "account_domain": "nestleusa.com",
+      "proximity_score": 23,
+      "nearest_distance_mi": 44,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 12,
+        "truck_gated_pct": 83,
+        "dock_doors": 534,
+        "trailer_cap": 1180,
+        "top_archetype": "#9 (Gate + No GS (remote check-in))",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/nestle-usa"
+    },
+    {
+      "slug": "niagara-bottling",
+      "account_name": "Niagara Bottling",
+      "account_domain": "niagarawater.com",
+      "proximity_score": 92,
+      "nearest_distance_mi": 2.7,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 30,
+        "truck_gated_pct": 53,
+        "dock_doors": 1703,
+        "trailer_cap": 2518,
+        "top_archetype": "#3 (No Gate / No GS)",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/niagara-bottling"
+    },
+    {
+      "slug": "pactiv-evergreen",
+      "account_name": "Pactiv Evergreen",
+      "account_domain": "pactivevergreen.com",
+      "proximity_score": 59,
+      "nearest_distance_mi": 15.9,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 30,
+        "truck_gated_pct": 53,
+        "dock_doors": 950,
+        "trailer_cap": 2408,
+        "top_archetype": "#3 (No Gate / No GS)",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/pactiv-evergreen"
+    },
+    {
+      "slug": "performance-food-group",
+      "account_name": "Performance Food Group",
+      "account_domain": "pfgc.com",
+      "proximity_score": 68,
+      "nearest_distance_mi": 11.6,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 30,
+        "truck_gated_pct": 50,
+        "dock_doors": 1324,
+        "trailer_cap": 2240,
+        "top_archetype": "#3 (No Gate / No GS)",
+        "recommended_entry": "Lead with offline-tolerant check-in — a rural-heavy footprint needs YardFlow to work through connectivity gaps."
+      },
+      "dossier_url": "https://yardflow.ai/for/performance-food-group"
+    },
+    {
+      "slug": "salson-logistics",
+      "account_name": "SalSon Logistics",
+      "account_domain": "salson.com",
+      "proximity_score": 68,
+      "nearest_distance_mi": 11.7,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 14,
+        "truck_gated_pct": 57,
+        "dock_doors": 470,
+        "trailer_cap": 3150,
+        "top_archetype": "#3 (No Gate / No GS)",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/salson-logistics"
+    },
+    {
+      "slug": "sc-johnson",
+      "account_name": "SC Johnson",
+      "account_domain": "scjohnson.com",
+      "proximity_score": 95,
+      "nearest_distance_mi": 1.6,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 10,
+        "truck_gated_pct": 50,
+        "dock_doors": 630,
+        "trailer_cap": 1178,
+        "top_archetype": "#3 (No Gate / No GS)",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/sc-johnson"
+    },
+    {
+      "slug": "the-home-depot",
+      "account_name": "The Home Depot",
+      "account_domain": "homedepot.com",
+      "proximity_score": 96,
+      "nearest_distance_mi": 1.2,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 30,
+        "truck_gated_pct": 90,
+        "dock_doors": 4456,
+        "trailer_cap": 8030,
+        "top_archetype": "#10 (Ship/Rcv Separate (Gate+GS))",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/the-home-depot"
+    },
+    {
+      "slug": "toyota",
+      "account_name": "Toyota",
+      "account_domain": "toyota.com",
+      "proximity_score": 98,
+      "nearest_distance_mi": 0.5,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 17,
+        "truck_gated_pct": 94,
+        "dock_doors": 1063,
+        "trailer_cap": 4577,
+        "top_archetype": "#7 (Gate + GS (not BU sens.) + fast lane opp)",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/toyota"
+    },
+    {
+      "slug": "unfi",
+      "account_name": "UNFI (United Natural Foods, Inc.)",
+      "account_domain": "unfi.com",
+      "proximity_score": 95,
+      "nearest_distance_mi": 1.4,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 30,
+        "truck_gated_pct": 47,
+        "dock_doors": 2362,
+        "trailer_cap": 3874,
+        "top_archetype": "#3 (No Gate / No GS)",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/unfi"
+    },
+    {
+      "slug": "universal-logistics",
+      "account_name": "Universal Logistics Holdings",
+      "account_domain": "universallogistics.com",
+      "proximity_score": 83,
+      "nearest_distance_mi": 5.5,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 26,
+        "truck_gated_pct": 42,
+        "dock_doors": 1186,
+        "trailer_cap": 5260,
+        "top_archetype": "#3 (No Gate / No GS)",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/universal-logistics-holdings"
+    },
+    {
+      "slug": "westrock-coffee",
+      "account_name": "Westrock Coffee",
+      "account_domain": "westrockcoffee.com",
+      "proximity_score": 26,
+      "nearest_distance_mi": 40.5,
+      "corridor_density": null,
+      "fit_score": null,
+      "yard_audit": {
+        "facilities": 6,
+        "truck_gated_pct": 50,
+        "dock_doors": 211,
+        "trailer_cap": 339,
+        "top_archetype": "#9 (Gate + No GS (remote check-in))",
+        "recommended_entry": "Lead with drop-yard turn-time — heavy trailer pools plus room to add fast lanes makes detention the clearest ROI story."
+      },
+      "dossier_url": "https://yardflow.ai/for/westrock-coffee"
+    }
+  ]
+}

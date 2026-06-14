@@ -8,13 +8,16 @@ import { exportStream, clampLimit } from '@/lib/intel/export/streams';
  *   GET /api/intel/export/<stream>?since=<ISO8601>&cursor=<opaque>&limit=<=500
  *   Header: x-queue-secret: <QUEUE_AGENT_SECRET>   (Bearer of the same secret also accepted)
  *
- * Five streams: replies | email_events | engagements | captures | outcomes.
+ * Six streams: replies | email_events | engagements | captures | outcomes
+ * (incremental, Prisma-backed) + proximity (standing-state snapshot of the
+ * audited accounts; ignores `since`, keysets by slug).
  * Keyset pagination on (occurred_at, id); stable per-record idempotency_key.
  * Fail-soft: never 5xx — on any error returns 200 with an empty envelope so a
  * bad batch never wedges the poller. Unknown stream -> 200 empty envelope.
  *
- * Read-only: no writes, no app-behavior change. (Contract:
- * docs/superpowers/specs/2026-06-13-modex-intel-export-contract.md)
+ * Read-only: no writes, no app-behavior change. (Contracts:
+ * docs/superpowers/specs/2026-06-13-modex-intel-export-contract.md,
+ * docs/superpowers/specs/2026-06-14-modex-proximity-export-contract.md)
  */
 
 export const dynamic = 'force-dynamic';
