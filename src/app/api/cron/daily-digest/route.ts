@@ -26,6 +26,7 @@ const DIGEST_TO = process.env.DIGEST_TO_EMAIL || 'casey@freightroll.com';
 
 const dealUrl = (id: string) => `https://app.hubspot.com/contacts/${PORTAL_ID}/record/0-3/${id}`;
 const contactUrl = (id: string) => `https://app.hubspot.com/contacts/${PORTAL_ID}/record/0-1/${id}`;
+const companyUrl = (id: string) => `https://app.hubspot.com/contacts/${PORTAL_ID}/record/0-2/${id}`;
 const gmailUrl = (email: string) => `https://mail.google.com/mail/u/0/#search/${encodeURIComponent(email)}`;
 const boardUrl = `https://app.hubspot.com/contacts/${PORTAL_ID}/objects/0-3/views/all/board`;
 const hotAccountsUrl = `https://app.hubspot.com/contacts/${PORTAL_ID}/objectLists/72`;
@@ -149,6 +150,69 @@ async function fetchSqlWorklist(): Promise<{ total: number; leads: SqlLead[] } |
   return { total: res.total ?? leads.length, leads };
 }
 
+interface TriggerHeat {
+  id: string;
+  account: string;
+  score: number;
+  headline: string;
+  url: string;
+  source: string;
+  category: string;
+  at: Date | null;
+}
+
+/**
+ * Pull the accounts that announced pounce-able news since `since`, read straight
+ * from the company trigger-heat properties the pounce spine stamps
+ * (trigger_score / last_trigger_*). Read-only consumer — the spine is the sole
+ * writer. Sorted by score so the hottest trigger leads. Best-effort: the digest
+ * still sends if this fails.
+ */
+async function fetchTriggerHeat(since: Date): Promise<TriggerHeat[]> {
+  if (!isHubSpotConfigured()) return [];
+  const client = getHubSpotClient();
+  const res = await withHubSpotRetry(
+    () =>
+      client.crm.companies.searchApi.doSearch({
+        filterGroups: [
+          {
+            filters: [
+              { propertyName: 'last_trigger_at', operator: FilterOperatorEnum.Gte, value: String(since.getTime()) },
+            ],
+          },
+        ],
+        properties: [
+          'name',
+          'trigger_score',
+          'last_trigger_at',
+          'last_trigger_headline',
+          'last_trigger_source',
+          'last_trigger_url',
+          'last_trigger_category',
+        ],
+        limit: 50,
+        after: '0',
+        sorts: [],
+      }),
+    'dailyDigest:triggerHeat',
+  );
+  const rows: TriggerHeat[] = (res.results ?? []).map((c) => {
+    const p = c.properties as Record<string, string | null>;
+    return {
+      id: c.id,
+      account: p.name ?? 'Unknown account',
+      score: Number(p.trigger_score ?? 0) || 0,
+      headline: p.last_trigger_headline ?? '',
+      url: p.last_trigger_url ?? '',
+      source: p.last_trigger_source ?? '',
+      category: p.last_trigger_category ?? '',
+      at: parseHsDate(p.last_trigger_at),
+    };
+  });
+  rows.sort((a, b) => b.score - a.score);
+  return rows.slice(0, 6);
+}
+
 export async function GET(request: Request) {
   if (!isAuthorizedCronRequest(request)) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -175,6 +239,16 @@ export async function GET(request: Request) {
       sqlQueue = await fetchSqlWorklist();
     } catch (err) {
       console.error('daily-digest: SQL worklist fetch failed', err);
+    }
+
+    // Account trigger-heat — what prospects announced (best-effort). 36h window
+    // matches the pounce scan so a story the scan caught never slips the digest.
+    const triggerSince = new Date(now.getTime() - 36 * 60 * 60 * 1000);
+    let triggers: TriggerHeat[] = [];
+    try {
+      triggers = await fetchTriggerHeat(triggerSince);
+    } catch (err) {
+      console.error('daily-digest: trigger heat fetch failed', err);
     }
 
     // Replies to chase — the hottest outbound signal (local DB)
@@ -274,6 +348,32 @@ export async function GET(request: Request) {
         ${rows}`;
     }
 
+    // ── What your accounts announced (pounce trigger-heat) ───────────
+    let triggerHtml = '';
+    if (triggers.length) {
+      const rows = triggers
+        .map((t) => {
+          const cat = t.category
+            ? `<span style="display:inline-block;background:#f3e8ff;color:#7c3aed;font-size:10px;font-weight:700;letter-spacing:.04em;padding:1px 7px;border-radius:10px;vertical-align:middle">${esc(t.category.replace(/_/g, ' ').toUpperCase())}</span>`
+            : '';
+          const headline = t.headline ? esc(t.headline) : 'New signal';
+          const headlineHtml = t.url
+            ? `<a href="${esc(t.url)}" style="color:#111;text-decoration:underline">${headline}</a>`
+            : headline;
+          const meta = [t.source, t.at ? shortDate(t.at) : ''].filter(Boolean).map(esc).join(' &middot; ');
+          return `
+          <div style="border:1px solid #eee;border-left:3px solid #7c3aed;border-radius:6px;padding:10px 14px;margin-bottom:8px">
+            <div style="font-weight:700">${esc(t.account)} <span style="color:#7c3aed;font-size:12px;font-weight:700">trigger ${t.score}</span> ${cat}</div>
+            <div style="font-size:13px;margin:3px 0">${headlineHtml}</div>
+            <div style="color:#888;font-size:12px">${meta ? `${meta} &middot; ` : ''}<a href="${companyUrl(t.id)}" style="color:#2563eb">Open company</a></div>
+          </div>`;
+        })
+        .join('');
+      triggerHtml = `
+        <div style="font-size:11px;font-weight:700;letter-spacing:.06em;color:#7c3aed;text-transform:uppercase;margin:18px 0 8px">What your accounts announced &mdash; last 24h</div>
+        ${rows}`;
+    }
+
     const html = `
       <div style="font-family:-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;max-width:600px;color:#111;line-height:1.5">
         <h2 style="margin:0 0 2px;font-size:20px">YardFlow daily — ${dateStr}</h2>
@@ -282,6 +382,8 @@ export async function GET(request: Request) {
         ${pipelineHtml}
 
         ${replyHtml}
+
+        ${triggerHtml}
 
         ${sqlHtml}
 
@@ -308,8 +410,10 @@ export async function GET(request: Request) {
 
     const replyCount = replyNotifications.length;
     const decisionCount = deals?.decisions.length ?? 0;
+    const triggerCount = triggers.length;
     const subjectBits = [
       replyCount ? `${replyCount} repl${replyCount === 1 ? 'y' : 'ies'} to chase` : '',
+      triggerCount ? `${triggerCount} account trigger${triggerCount === 1 ? '' : 's'}` : '',
       decisionCount ? `${decisionCount} decision${decisionCount === 1 ? '' : 's'}` : '',
     ].filter(Boolean);
 
@@ -323,11 +427,11 @@ export async function GET(request: Request) {
       path: CRON_PATH,
       schedule: CRON_SCHEDULE,
       durationMs: Date.now() - startedAt,
-      message: `Digest sent. Pipeline ${deals ? money(deals.totalAmount) : 'n/a'}, ${deals?.decisions.length ?? 0} decisions, ${sentYesterday} sends.`,
-      stats: { openDeals: deals?.count ?? null, decisions: deals?.decisions.length ?? null, sentYesterday, repliesYesterday },
+      message: `Digest sent. Pipeline ${deals ? money(deals.totalAmount) : 'n/a'}, ${deals?.decisions.length ?? 0} decisions, ${triggers.length} triggers, ${sentYesterday} sends.`,
+      stats: { openDeals: deals?.count ?? null, decisions: deals?.decisions.length ?? null, triggers: triggers.length, sentYesterday, repliesYesterday },
     }).catch(() => undefined);
 
-    return NextResponse.json({ success: true, openDeals: deals?.count ?? null, decisions: deals?.decisions.length ?? null, sentYesterday });
+    return NextResponse.json({ success: true, openDeals: deals?.count ?? null, decisions: deals?.decisions.length ?? null, triggers: triggers.length, sentYesterday });
   } catch (error) {
     Sentry.captureException(error);
     await markCronFailure(CRON_NAME, {
