@@ -13,6 +13,7 @@ import { MicrositeTracker } from '@/components/microsites/microsite-tracker';
 import MicrositePostHogBeacon from '@/components/microsites/microsite-posthog-beacon';
 import { getAccountMicrositeData } from '@/lib/microsites/accounts';
 import { buildPublicShareMetadata } from '@/lib/microsites/share';
+import { getRemoteDemoPack } from '@/lib/demo/remote-pack';
 
 /**
  * D2.1 — The canonical demo route: `/demo/<account>`.
@@ -53,10 +54,13 @@ async function loadPack(slug: string): Promise<DemoPack | null> {
     const raw = await fs.readFile(file, 'utf8');
     return DemoPackSchema.parse(JSON.parse(raw));
   } catch {
-    // Either the file is missing (most common: unknown slug) or it failed
-    // schema validation (would mean our build process shipped bad data —
-    // never expected to reach a user, but we 404 gracefully if it ever does).
-    return null;
+    // Not on disk — try the runtime store (no-deploy demos).
+    try {
+      const remote = await getRemoteDemoPack(slug);
+      return remote ? DemoPackSchema.parse(remote) : null;
+    } catch {
+      return null;
+    }
   }
 }
 
