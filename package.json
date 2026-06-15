@@ -23,6 +23,7 @@
     "research:facility-import": "tsx scripts/import-facility-facts.ts",
     "research:facility-report": "tsx scripts/report-facility-facts.ts",
     "campaign:generate": "tsx scripts/generate-campaign.ts",
+    "gen:page": "tsx scripts/for/gen-page.ts",
     "campaign:monday-bump": "tsx scripts/monday-bump.ts",
     "suppress:bounces": "tsx scripts/sync-bounce-domain-suppressions.ts",
     "test:click": "playwright test",
