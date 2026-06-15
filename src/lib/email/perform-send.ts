@@ -6,7 +6,6 @@ import { fetchImageAsAttachment } from '@/lib/email/inline-image';
 import { wrapHtml } from '@/lib/email/templates';
 import { resolveSenderIdentity } from '@/lib/email/sender-identity';
 import { sanitizeEmailHtml } from '@/lib/email/sanitize';
-import { ensureLocalMeetingDealLink } from '@/lib/hubspot/deals';
 import { advancePipelineStage, derivePipelineStage } from '@/lib/pipeline';
 import { markAgentActionCacheStale } from '@/lib/agent-actions/cache';
 import { enforceOneAccountInvariant } from '@/lib/revops/one-account-invariant';
@@ -407,7 +406,10 @@ export async function recordSendSideEffects(
         },
       }).catch(() => {});
 
-      await ensureLocalMeetingDealLink(resolvedRecipient.accountName, nextStage).catch(() => {});
+      // No HubSpot deal on a cold outbound. A deal opens only once there's a
+      // real conversation: the inbound-reply path (cron/check-inbox) creates +
+      // advances it, and manual pipeline/meeting actions create it deliberately.
+      // Sending an invite tracks outreach_status='Contacted' locally, nothing more.
     }
 
     // Auto-log activity for the send

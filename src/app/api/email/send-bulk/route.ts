@@ -5,7 +5,6 @@ import { sendBulk } from '@/lib/email/client';
 import { evaluateRecipientEligibility, getEmailDomain } from '@/lib/email/recipient-guard';
 import { wrapHtml } from '@/lib/email/templates';
 import { rateLimit } from '@/lib/rate-limit';
-import { ensureLocalMeetingDealLink } from '@/lib/hubspot/deals';
 import { advancePipelineStage, derivePipelineStage } from '@/lib/pipeline';
 import { markAgentActionCacheStale } from '@/lib/agent-actions/cache';
 import { SOURCE_APPROVAL_GATE_ENABLED } from '@/lib/feature-flags';
@@ -348,7 +347,10 @@ export async function POST(req: NextRequest) {
         },
       }).catch(() => {});
 
-      await ensureLocalMeetingDealLink(acctName, nextStage).catch(() => {});
+      // No HubSpot deal on a cold outbound — a deal opens only when a real
+      // conversation starts (inbound reply via cron/check-inbox) or on a
+      // deliberate manual pipeline/meeting action. Sending just marks
+      // outreach_status='Contacted' locally.
       await markAgentActionCacheStale(acctName).catch(() => undefined);
     }
 
