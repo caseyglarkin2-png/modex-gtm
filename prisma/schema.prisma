@@ -1237,3 +1237,21 @@ model PounceTrigger {
   @@index([first_seen_at])
   @@map("pounce_triggers")
 }
+
+/// Runtime store for no-deploy /for and /demo pages. A row is everything
+/// buildForContent (Flow-State) and loadPack (/demo) need to render an account
+/// with no commit. Written by the generator / Slack flow, read by both apps.
+model ForPage {
+  id         Int      @id @default(autoincrement())
+  slug       String   @unique
+  status     String   @default("draft") // draft | live — only live is served
+  pack       Json     // ForPackLite (lean account fields)
+  snap       Json     // ForSnapshot (gen-for-prize shape)
+  override   Json     // ForOverride (the ~6-field spear)
+  geo        Json?    // HeroMapData (hero renders from this, no PNG)
+  demo_pack  Json?    // full modex DemoPack for /demo no-deploy
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@map("for_pages")
+}
