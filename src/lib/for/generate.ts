@@ -78,7 +78,11 @@ export async function generatePageRow(
   if (!demoPack) throw new Error(`generatePageRow: no demo pack for "${slug}" — build the audit first`);
 
   const snap = buildSnapshot(demoPack);
-  const geo = buildHeroMap(demoPack);
+  // Geo is best-effort: the projection reads a us-atlas JSON that a serverless
+  // route's file-tracing can miss. If it fails, the page still ships (the hero
+  // falls back to the assetless panel) rather than failing the whole generate.
+  let geo: ReturnType<typeof buildHeroMap> | null = null;
+  try { geo = buildHeroMap(demoPack); } catch { geo = null; }
   const override = opts.override ?? templateOverride(demoPack, snap);
 
   // Flow-State's render only reads pack.account.*; strip the heavy network to
