@@ -167,8 +167,15 @@ export async function POST(req: NextRequest) {
 
     // Fire the intent alerts after the dedup flag is persisted — a missed
     // alert is better than a duplicate, and the flag is now written. The
-    // in-app Notification row surfaces in the bell + Engagement Inbox;
-    // the Slack ping is the out-of-app mirror.
+    // in-app Notification row surfaces in the bell + Engagement Inbox.
+    //
+    // The raw Slack ping to #yardflow-intent is OFF by default (2026-06-15):
+    // clawd is now the single voice in that channel, posting an enriched,
+    // identity-aware, deduped reaction off the engagement export bridge. A
+    // direct per-session ping here would double-fire the same signal without
+    // the identity or the dedup. Everything else stays: the in-app
+    // Notification below, plus the HubSpot Note + intent_score stamp further
+    // down. Set MICROSITE_INTENT_SLACK_PING=true to resume direct pings.
     if (intentDecision.notify) {
       try {
         await prisma.notification.create({
@@ -177,12 +184,14 @@ export async function POST(req: NextRequest) {
       } catch (notifyError) {
         console.error('Failed to record intent notification', notifyError);
       }
-      try {
-        await sendSlackNotification(
-          buildIntentMessage(snapshot, mergedSession, intentDecision.reason),
-        );
-      } catch (notifyError) {
-        console.error('Failed to send intent notification', notifyError);
+      if (process.env.MICROSITE_INTENT_SLACK_PING === 'true') {
+        try {
+          await sendSlackNotification(
+            buildIntentMessage(snapshot, mergedSession, intentDecision.reason),
+          );
+        } catch (notifyError) {
+          console.error('Failed to send intent notification', notifyError);
+        }
       }
     }
     // CRM intent capture is decoupled from paging (audit 2026-06-12): a
