@@ -419,10 +419,11 @@ git commit -m "feat(tam-geo): score-pending + stamp-pending + orchestrator"
 
 ## How to run it (the long, resumable loop)
 1. `npx tsx scripts/intel/tam-geo/seed-ledger.ts` (727 → ledger).
-2. Loop until `status` shows 0 pending: `discover-batch.ts --limit=20` → dispatch ~20 discovery agents → re-run to reconcile. (The long pole; resumable — roster.json is the checkpoint.)
-3. `geocode-pending.ts --limit=50` (repeat until 0 roster-status).
+2. Loop until `status` shows 0 pending: `discover-batch.ts --limit=20` lists the next batch → dispatch discovery agents **in waves of ~5 concurrent** → re-run to reconcile. (The long pole; resumable — roster.json is the checkpoint.)
+   - **Throttle (learned in the 2026-06-15 pilot):** a 17-wide concurrent dispatch tripped a server-side rate limit and 13 of 17 agents returned empty. Keep concurrency at ~5; the rate limit is on simultaneous agent spawns, not total volume. List 20 with `--limit=20`, then fan out 5 at a time.
+3. `geocode-pending.ts --limit=50` (repeat until 0 roster-status). Retries `error`-status accounts automatically.
 4. `score-pending.ts` (one pass once geocoding is done; re-runnable).
-5. `stamp-pending.ts --dry-run` → review → `stamp-pending.ts`.
+5. `stamp-pending.ts --dry-run` → review → `stamp-pending.ts`. Run all steps **from the repo root** (the scripts resolve paths via `process.cwd()`).
 6. `run.ts --phase=status` any time for the progress + cost report.
 Crash/reboot safe at every step: the ledger + filesystem rosters are the durable state.
 
