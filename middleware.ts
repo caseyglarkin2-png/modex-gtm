@@ -34,6 +34,6 @@ export const config = {
      * - /api/microsites/roi-lead (public ROI->pipeline ingest; ROI_LEAD_SECRET-gated)
      * - /manifest.json, /robots.txt, /favicon.ico (static assets)
      */
-    '/((?!login|api/auth|api/webhooks|api/unsubscribe|api/microsites/track|api/microsites/roi-lead|api/demo|api/cron|api/intel|api/campaigns|api/e|api/pounce|api/proposal|api/proof|unsubscribe|proposal|for|demo|demo-packs|opengraph-image|twitter-image|docs|audio|video|artifacts|_next|manifest\\.json|robots\\.txt|favicon\\.ico).*)',
+    '/((?!login|api/auth|api/webhooks|api/unsubscribe|api/microsites/track|api/microsites/roi-lead|api/demo|api/cron|api/intel|api/campaigns|api/e|api/pounce|api/proposal|api/proof|api/for|api/slack|unsubscribe|proposal|for|demo|demo-packs|opengraph-image|twitter-image|docs|audio|video|artifacts|_next|manifest\\.json|robots\\.txt|favicon\\.ico).*)',
   ],
 };
