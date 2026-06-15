@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { isAuthorizedIntelExport } from '@/lib/intel/export/auth';
-import { lookupAccount, listAccounts } from '@/lib/intel/export/accounts';
+import { lookupAccount, listAccounts, type Include } from '@/lib/intel/export/accounts';
 
 /**
  * Account research — modex's half of a sniper job (Contract: the account-research
@@ -30,7 +30,8 @@ export async function GET(request: Request): Promise<Response> {
 
   try {
     if (domain || slug) {
-      return NextResponse.json(lookupAccount(domain, slug));
+      const include = (url.searchParams.get('include') ?? '').split(',').map((s) => s.trim()).filter(Boolean) as Include[];
+      return NextResponse.json(lookupAccount(domain, slug, include));
     }
     const raw = url.searchParams.get('limit');
     const n = raw == null ? DEFAULT_LIMIT : Number.parseInt(raw, 10);

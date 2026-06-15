@@ -11,6 +11,14 @@
  */
 import research from './account-research.json';
 import deduped from './deduped-accounts.json';
+import dossiersBundle from './account-intel-dossiers.json';
+import geometryBundle from './account-intel-geometry.json';
+import micrositeBundle from './account-intel-microsite.json';
+
+const DOSSIERS = (dossiersBundle as { data: Record<string, Record<string, string>> }).data;
+const GEOMETRY = (geometryBundle as { data: Record<string, unknown[]> }).data;
+const MICROSITE = (micrositeBundle as { data: Record<string, unknown> }).data;
+export type Include = 'dossiers' | 'geometry' | 'microsite';
 
 interface ResearchAccount {
   slug: string;
@@ -55,11 +63,18 @@ export interface AccountLookup {
 
 /** One account by domain or slug. Full yard-audit research for the 56 audited
  * accounts; the scored deduped row otherwise; null if unknown. */
-export function lookupAccount(domain: string | null, slug: string | null): AccountLookup {
+export function lookupAccount(domain: string | null, slug: string | null, include: Include[] = []): AccountLookup {
   const d = (domain ?? '').toLowerCase().trim();
   const s = (slug ?? '').toLowerCase().trim();
   const full = (d && byDomain.get(d)) || (s && bySlug.get(s)) || null;
-  if (full) return { found: true, detail_level: 'full', account: full };
+  if (full) {
+    if (!include.length) return { found: true, detail_level: 'full', account: full };
+    const enriched: Record<string, unknown> = { ...full };
+    if (include.includes('dossiers')) enriched.dossiers = DOSSIERS[full.slug] ?? {};
+    if (include.includes('geometry')) enriched.geometry = GEOMETRY[full.slug] ?? [];
+    if (include.includes('microsite')) enriched.microsite = MICROSITE[full.slug] ?? null;
+    return { found: true, detail_level: 'full', account: enriched as unknown as typeof full };
+  }
   const scored = d ? dedupByDomain.get(d) : undefined;
   if (scored) return { found: true, detail_level: 'scored', account: scored };
   return { found: false, detail_level: 'none', account: null };
