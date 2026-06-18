@@ -19,6 +19,7 @@
  */
 
 import { readFile, readdir, writeFile, mkdir, stat } from 'node:fs/promises';
+import { writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import {
@@ -356,6 +357,74 @@ async function buildSite(
   return site;
 }
 
+// ── FOV (field-of-view) verification build gate ──────────────────────────────
+// Quarantines sites whose `verification` block is missing/invalid or whose
+// verdict is `rejected` so a divested/closed/unverified yard can never ship in
+// a demo pack. Two modes via FOV_GATE env:
+//   warn    (default) — log + report flagged sites but KEEP them (so existing
+//                        packs don't empty out before the Task 0.4 backfill)
+//   enforce            — DROP flagged sites; if the hero (featuredSiteId) is
+//                        flagged, refuse to build (exit 1)
+// In BOTH modes a verification-rejections.md report is (over)written per build.
+const RESTRUCTURED_COMPANIES = new Set(['general-motors']);
+
+function fovGate(slug: string, featuredSiteId: string | undefined, sites: Site[]): Site[] {
+  const mode = process.env.FOV_GATE === 'enforce' ? 'enforce' : 'warn';
+  const kept: Site[] = [];
+  const flagged: { id: string; reason: string }[] = [];
+
+  for (const s of sites) {
+    const v = (s as unknown as { verification?: any }).verification;
+    const bad =
+      !v ||
+      !v.verdict ||
+      (v.verdict !== 'rejected' &&
+        (!v.citations?.length || v.citations.some((c: any) => !c.url || !c.date))) ||
+      v.checkedDivestiture !== true ||
+      (RESTRUCTURED_COMPANIES.has(slug) && v.checkedBankruptcyEra !== true);
+    const drop = v?.verdict === 'rejected' || bad;
+    if (drop) {
+      flagged.push({
+        id: s.id,
+        reason:
+          v?.verdict === 'rejected'
+            ? v.rationale || 'rejected'
+            : 'failed FOV gate (missing/invalid verification)',
+      });
+      if (mode === 'enforce') continue; // drop it
+    }
+    kept.push(s);
+  }
+
+  // Write the rejections report (overwrite each build).
+  const dir = join(AUDIT_ROOT, slug);
+  const lines =
+    `# FOV ${mode} report — ${slug}\n\n` +
+    (flagged.length ? flagged.map((f) => `- ${f.id}: ${f.reason}`).join('\n') : '_none_') +
+    '\n';
+  try {
+    mkdirSync(dir, { recursive: true });
+    writeFileSync(join(dir, 'verification-rejections.md'), lines);
+  } catch {
+    /* report write is best-effort */
+  }
+
+  if (flagged.length) {
+    console.warn(`⚠ FOV ${mode}: ${flagged.length} site(s) flagged for ${slug}`);
+    for (const f of flagged) console.warn(`    - ${f.id}: ${f.reason}`);
+  }
+
+  // Never ship a pack whose hero failed verification.
+  if (mode === 'enforce' && featuredSiteId && flagged.some((f) => f.id === featuredSiteId)) {
+    console.error(
+      `FOV: featured/hero site ${featuredSiteId} failed verification for ${slug} — refusing to build.`,
+    );
+    process.exit(1);
+  }
+
+  return mode === 'enforce' ? kept : sites; // warn mode keeps all
+}
+
 // ── Main ────────────────────────────────────────────────────────────────────
 
 async function main() {
@@ -423,6 +492,22 @@ async function main() {
         .sort((a, b) => (b.yardMetrics.dockDoorCount ?? 0) - (a.yardMetrics.dockDoorCount ?? 0))[0]?.id
     : undefined;
 
+  // FOV verification gate: quarantine unverified/rejected sites before writing.
+  // In enforce mode this drops sites (and exits if the hero is among them), so
+  // recompute the network-derived fields from the gated set.
+  const gatedSites = fovGate(auditSlug, featuredSiteId, sites);
+  let gatedBbox = networkBbox;
+  let gatedMix = archetypeMix;
+  let gatedTotals = totals;
+  if (gatedSites.length !== sites.length) {
+    gatedBbox = null;
+    for (const s of gatedSites) gatedBbox = expandShape(gatedBbox, s.geofences.perimeter);
+    if (!gatedBbox) throw new Error(`No sites survived the FOV gate for ${auditSlug} — pack not written.`);
+    gatedMix = computeArchetypeMix(gatedSites);
+    gatedTotals = computeTotals(gatedSites);
+  }
+  const gatedCount = gatedSites.length;
+
   const pack: DemoPack = {
     schemaVersion: '2',
     builtAt: new Date().toISOString(),
@@ -430,10 +515,10 @@ async function main() {
       slug: micrositeSlug,
       displayName,
       archetype,
-      siteCount: auditedCount,
+      siteCount: gatedCount,
       ...(featuredSiteId ? { featuredSiteId } : {}),
       coverageNote: {
-        auditedCount,
+        auditedCount: gatedCount,
         estimatedFootprint: estimatedFootprint ?? null,
         droppedStubCount,
         capHit,
