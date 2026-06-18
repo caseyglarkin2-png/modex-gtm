@@ -127,6 +127,13 @@ export const INDUSTRY_ANCHORS: IndustryAnchor[] = [
     blurb: 'Hubs and terminals. The biggest networks in the dataset, thousands of docks and trailers.',
     archetype: 'logistics',
   },
+  {
+    id: 'beverage-snacks',
+    label: 'CPG · Beverage & Snacks',
+    slug: 'pepsico',
+    blurb: 'The largest CPG yard footprint in the set. Driverless lanes inbound, multi-temp plants, drop-yard heavy.',
+    archetype: 'cpg',
+  },
 ];
 
 const ANCHOR_BY_SLUG = new Map(INDUSTRY_ANCHORS.map((a) => [a.slug, a]));
