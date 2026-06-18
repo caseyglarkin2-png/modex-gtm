@@ -151,5 +151,24 @@
     "buildingCount": "Main DC plus a smaller secondary structure to the west/north on the same parcel.",
     "fastLaneOpportunity": "Wide curving gate apron and ample paved width at the entrance leave room for an express/bypass lane."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.performancefoodservice.com/our-locations/arizona/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Performance Foodservice - Arizona at 455 S. 75th Avenue, Phoenix, AZ 85043, active contact form."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Performance Foodservice (broadline) Arizona division active at exact address; no divestiture/closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

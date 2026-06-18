@@ -119,5 +119,24 @@
     "entryLanes": "Single-lane open driveways; no formal multi-lane gate to count — estimate 1 in / 1 out.",
     "railServed": "No rail spur enters the property; nearest rail is not adjacent."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.performancefoodservice.com/Our-Locations/Nashville",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Performance Foodservice - Nashville at 401 Maddox-Simpson Pkwy, Lebanon, TN 37090, active DC delivering across TN/AL/KY/MS."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Performance Foodservice (broadline) Nashville division active at exact address; PA 'Lebanon county' WARN is Lebanon PA, not this site.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

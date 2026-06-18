@@ -156,5 +156,24 @@
     "buildingCount": "One long main DC building plus a small attached/secondary section — counted 2.",
     "urbanRural": "Inside Little Rock's developed fabric on Asher Avenue with single-family houses immediately adjacent to the west — Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.performancefoodservice.com/Our-Locations/Little-Rock",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Performance Foodservice Little Rock at 4901 Asher Ave, Little Rock, AR 72204."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Performance Foodservice Little Rock (cold-storage broadline DC, leased to PFGC); on official locator.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -153,5 +153,24 @@
     "scale": "No truck scale visible in overhead imagery.",
     "buildingCount": "Single large L-shaped distribution building."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.performancefoodservice.com/Our-Locations/Twin-Cities",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Performance Foodservice Twin Cities at 13400 Commerce Boulevard, Rogers, MN 55374 active location, MN/Fargo ND footprint."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Performance Foodservice - Twin Cities broadline DC confirmed on PFG locator; Cheney FTC divestiture does not touch Rogers MN.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

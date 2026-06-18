@@ -124,5 +124,24 @@
     "urbanRural": "Edge-of-metro setting on a rural-feeling road (Farrell Rd) bordered by woods, a golf course (Lochinvar GC), and scattered rural homes. Classified Rural per rubric tie-break guidance.",
     "scale": "No truck scale visible in construction-era imagery; cannot rule out installation as the yard is completed."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.performancefoodservice.com/Our-Locations/Houston",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Performance Foodservice - Houston at 1616 Farrell Rd, Houston, TX 77073 shown as active location."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Performance Foodservice - Houston broadline DC, confirmed on PFG locator; Cheney FTC divestiture excludes Houston; NJ WARN hits were an unrelated Customized Distribution site.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

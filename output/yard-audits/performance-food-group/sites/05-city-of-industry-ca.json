@@ -154,5 +154,24 @@
     "fastLaneOpportunity": "Tight, fully built-out urban industrial parcel; the gate apron has little spare width for an express lane.",
     "urbanRural": "Dense City of Industry industrial corridor — Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.performancefoodservice.com/Our-Locations/Southern-California",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Performance Foodservice Southern California at 16639 Gale Ave, City of Industry CA 91745 shown as active location."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Performance Foodservice - Southern California (PFG broadline) at 16639 Gale Ave City of Industry, live on PFG locator; no negative found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

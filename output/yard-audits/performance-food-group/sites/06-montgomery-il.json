@@ -150,5 +150,24 @@
     "buildingCount": "Single long PFG distribution building (~325,000 sq ft per web research). Adjacent large buildings to the east are separate ownership/operations.",
     "railServed": "No rail spur runs into the PFG parcel."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.performancefoodservice.com/Our-Locations/Chicago",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Performance Foodservice Chicago (Fox River) at 5030 Baseline Rd, Montgomery, IL 60538 shown as active location."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Performance Foodservice - Chicago / Fox River (PFG broadline) at 5030 Baseline Rd Montgomery IL, live on PFG locator; no negative found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

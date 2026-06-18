@@ -138,5 +138,24 @@
     "urbanRural": "Dense Elmwood/Harahan metro New Orleans industrial fabric — Urban.",
     "buildingCount": "Reads as one large DC building; the dense multi-tenant context makes a precise count low-confidence."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.performancefoodservice.com/Our-Locations/New-Orleans",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Performance Foodservice New Orleans at 918 Edwards Avenue, Harahan, LA 70123."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Performance Foodservice New Orleans (broadline, ex-Reinhart Foodservice Louisiana); on official locator. Not a Cheney facility; Cheney FTC divestiture footprint was FL/NC only.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

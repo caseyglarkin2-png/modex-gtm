@@ -158,5 +158,24 @@
     "railServed": "A rail line / spur runs in the wooded strip along the east edge of the property — likely rail-served; true (medium confidence).",
     "urbanRural": "Small-city Hickory industrial district — Rural per the rubric tie-break."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.performancefoodservice.com/Our-Locations/Hickory",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Performance Foodservice Hickory at 543 12th Street Drive NW, Hickory, NC 28601."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Performance Foodservice Hickory (broadline); on official locator at exact address. Cheney FTC divestiture footprint did not include this PFG legacy DC.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

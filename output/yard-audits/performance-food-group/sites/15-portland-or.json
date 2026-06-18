@@ -99,5 +99,24 @@
     "dropYard": "Yard south of the building is full of PFG white reefer box trucks (the outbound foodservice fleet) parked in fanned rows.",
     "urbanRural": "Located within the Portland metro industrial fabric (Gresham/NE Portland), surrounded by dense warehousing."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.performancefoodservice.com/our-locations/pacific-northwest",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Performance Foodservice - Pacific Northwest at 19606 NE San Rafael St, Portland, OR 97230; active local job openings."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Performance Foodservice (broadline) Pacific Northwest division active at exact address; no closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

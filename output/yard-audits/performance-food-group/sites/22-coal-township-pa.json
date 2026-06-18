@@ -144,5 +144,24 @@
     "multiStep": "No second checkpoint stage observed; default false.",
     "connectivityIssue": "Site is in an industrial park with a town (Coal Township / Shamokin) nearby; not truly isolated, so cellular coverage likely adequate — connectivityIssue false but listed as inferred."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.performancefoodservice.com/our-locations/eastern-pa",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Performance Foodservice Eastern PA at 100 Industrial Park Road, Coal Township, PA 17866."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Performance Foodservice (broadline) Eastern PA DC at Coal Township; current locator confirms exact address.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -143,5 +143,24 @@
     "railServed": "A rail line runs through the wooded corridor north of the property, but no spur enters the PFG site — railServed false.",
     "entryExitTogether": "Single driveway off East View Drive serves as both entry and exit."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.performancefoodservice.com/Our-Locations/Pittsburgh",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Performance Foodservice Pittsburgh at 226 East View Drive, Mt. Pleasant, PA 15666."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Performance Foodservice (broadline) Pittsburgh division DC at Mt. Pleasant; current locator confirms exact address.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

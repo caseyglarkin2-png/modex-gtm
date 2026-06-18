@@ -153,5 +153,31 @@
     "multiStep": "No second checkpoint stage observed; false.",
     "general": "Imagery shows the site mid-finish-out (2024-2026 captures): construction barriers/materials still staged in the truck yard. Counts are honest estimates."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.performancefoodservice.com/Our-Locations/Virginia",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Performance Foodservice Virginia operating at 10399 Washington Hwy, Glen Allen, VA 23059."
+      },
+      {
+        "tier": 2,
+        "url": "https://richmondbizsense.com/2023/10/05/performance-food-group-begins-operations-at-new-hanover-distribution-facility/",
+        "date": "2023-10-05",
+        "type": "press",
+        "claim": "PFG began operations at new ~332,000 sf Glen Allen (Cardinal Commerce) DC in Aug 2023."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Performance Foodservice (Virginia broadline); new-build 2023 Cardinal Commerce DC, on official locator.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

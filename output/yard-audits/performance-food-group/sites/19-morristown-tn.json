@@ -133,5 +133,31 @@
     "urbanRural": "Facility sits in the airport-adjacent East Tennessee Progress Center / Air Park business area on the edge of Morristown, surrounded by airport land, open fields, and woods — Rural per rubric.",
     "railServed": "A rail line runs along the northwest near the airport but does not appear to enter the PFG property with a spur."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.performancefoodservice.com/Our-Locations/East-Tennessee",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Performance Foodservice East Tennessee at 5262 Air Park Blvd, Morristown, TN 37813."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.tn.gov/ecd/news/2024/12/18/governor-lee--commissioner-mcwhorter-announce-performance-food-group-s-expansion-in-hamblen-county.html",
+        "date": "2024-12-18",
+        "type": "press",
+        "claim": "TN ECD announces $33.2M PFG expansion at existing 5262 Air Park Blvd Morristown facility."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Performance Foodservice (broadline) East Tennessee DC; Dec 2024 state-announced expansion at exact address.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

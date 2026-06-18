@@ -145,5 +145,24 @@
     "urbanRural": "Edge-of-town Gilroy, farmland immediately south and east, adjacent to Hwy 101 — classified Rural.",
     "railServed": "A rail line runs along the north edge of the property but no spur appears to enter the site; railServed false."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.performancefoodservice.com/Our-Locations/Gilroy",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Performance Foodservice Gilroy at 5480 Monterey Road, Gilroy CA 95020 shown as active location serving Northern California."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Performance Foodservice (PFG broadline) Gilroy DC, live on PFG locator; no negative found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

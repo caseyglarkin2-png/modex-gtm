@@ -96,5 +96,32 @@
     "urbanRural": "Rural - edge-of-town industrial park off I-95, surrounded by farmland and scattered DCs.",
     "buildingCount": "0 - no structure stands yet."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://governor.sc.gov/news/2026-03/cheney-brothers-expands-florence-county-operations",
+        "date": "2026-03",
+        "type": "press",
+        "claim": "SC Governor announcement of Cheney Brothers Florence County expansion, project still in build-out (cumulative $108.5M, 365 jobs)."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.areadevelopment.com/newsItems/3-20-2026/cheney-brothers-florence-south-carolina.shtml",
+        "date": "2026-03-20",
+        "type": "press",
+        "claim": "Cheney Brothers $42.5M expansion at 2491 Florence Harllee Blvd, 85 new jobs; facility first broke ground 2023 and is still being built out."
+      }
+    ],
+    "imageryDate": "2024-02",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Cheney Brothers (PFG broadline) greenfield/expansion at 2491 Florence Harllee Blvd, broke ground 2023 and still under construction per March 2026 announcement; current-ops audit rejects under-construction. Not part of FTC divestiture.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

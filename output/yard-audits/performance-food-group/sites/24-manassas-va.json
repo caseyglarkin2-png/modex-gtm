@@ -133,5 +133,24 @@
     "multipleFacilities": "One PFG building. Adjacent warehouses west and southwest are separate properties, not part of this site.",
     "siteArea": "Relatively compact ~11.5-acre parcel; the building fills much of the lot with truck yard wrapping the south and west."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.performancefoodservice.com/Our-Locations/Manassas",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Performance Foodservice Manassas at 11777 Balls Ford Road, Manassas, VA 20109."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Performance Foodservice (broadline) Manassas DC; current locator + active careers req at the ZIP.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

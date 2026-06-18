@@ -160,5 +160,31 @@
     "urbanRural": "Edge-of-town Temple business park surrounded by open land and scattered industrial — Rural per the rubric tie-break.",
     "railServed": "No rail spur into the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.performancefoodservice.com/Our-Locations/Temple",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Performance Foodservice Temple at 4141 Lucius McCelvey Dr, Temple, TX 76504."
+      },
+      {
+        "tier": 2,
+        "url": "https://templeedc.com/performance-food-group-invests-10-million-expand-temple-facility/",
+        "date": "2024",
+        "type": "press",
+        "claim": "PFG investing $10M / 76,000 sf expansion at 4141 Lucius McCelvey Dr, Temple."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Performance Foodservice Temple (broadline, ROMA division roots); on official locator + recent expansion PR.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

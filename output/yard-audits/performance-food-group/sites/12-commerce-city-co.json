@@ -159,5 +159,31 @@
     "scale": "No truck scale visible in construction-era imagery; cannot rule out.",
     "railServed": "A rail line runs along the east side of the broader corridor but no spur visibly enters the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.performancefoodservice.com/Our-Locations/Denver",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Performance Foodservice Denver at 9940 Havana St, Commerce City, CO 80640, delivering across CO/NM/WY."
+      },
+      {
+        "tier": 1,
+        "url": "https://investors.pfgc.com/press-releases/press-release-details/2022/Performance-Foodservice--Denver-to-Break-Ground-for-New-Facility/default.aspx",
+        "date": "2022-09-27",
+        "type": "press",
+        "claim": "PFG investor PR: Performance Foodservice Denver new 265,000 sq ft facility."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Performance Foodservice - Denver broadline DC; Tier-1 locator + 2022 PFG PR; Cheney FTC divestiture is Southeast-only.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

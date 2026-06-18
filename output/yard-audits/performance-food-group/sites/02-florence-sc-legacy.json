@@ -135,5 +135,31 @@
     "fastLaneOpportunity": "Wide unused paved apron along the dock yard and loop road provides room to add lanes.",
     "urbanRural": "Edge-of-town industrial park surrounded by woodland and retention ponds outside Florence SC; classified Rural per rubric tie-break."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.performancefoodservice.com/Our-Locations/Florence",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Performance Foodservice Florence at 2801 Alex Lee Blvd, Florence, SC 29506 shown as active location."
+      },
+      {
+        "tier": 1,
+        "url": "https://governor.sc.gov/news/2021-06/performance-foodservice-expanding-operations-florence-county",
+        "date": "2021-06",
+        "type": "press",
+        "claim": "Performance Foodservice $11M expansion at the Alex Lee Blvd Florence DC adding 150 jobs."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Performance Foodservice (PFG broadline) legacy Florence DC, live on PFG locator; not part of Cheney/FTC divestiture, no closure/WARN.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

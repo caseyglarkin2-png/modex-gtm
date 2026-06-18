@@ -130,5 +130,24 @@
     "dropYard": "Striped trailer-parking lanes in the truck court east of the building hold drop trailers.",
     "siteAreaAcres": "Estimated from perimeter box around the PFG-occupied building and its east truck court."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.performancefoodservice.com/Our-Locations/Northern-California",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Performance Foodservice - Northern California at 1624 Army Court, Stockton, CA 95206, delivering across California."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Performance Foodservice (broadline) Northern California division active at exact address; not in Cheney divestiture set.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

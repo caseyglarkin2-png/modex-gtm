@@ -136,5 +136,24 @@
     "multipleFacilities": "Single PFG building. Other large buildings nearby (NW and SE) are separate occupants of the same industrial park.",
     "railServed": "No rail spur runs into the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.performancefoodservice.com/Our-Locations/Boston",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Performance Foodservice - Boston active DC at 225 John Hancock Road, Taunton, MA 02780, delivering across New England."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Performance Foodservice - Boston broadline DC; PFG locator lists exact Taunton address; not among Cheney FTC divestitures, no WARN/closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

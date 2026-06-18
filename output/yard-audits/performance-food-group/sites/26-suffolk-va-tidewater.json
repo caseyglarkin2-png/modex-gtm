@@ -136,5 +136,24 @@
     "entryExitSeparate": "Two separate driveways off Progress Road (NE and N) plus circulation; classed entry/exit separate, low confidence.",
     "urbanRural": "Edge-of-town Suffolk industrial park beside a residential subdivision and marshland — judged Rural per the rubric tie-break."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.performancefoodservice.com/Our-Locations/Tidewater",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Performance Foodservice Tidewater at 1201 Progress Road, Suffolk, VA 23434, serving NC/VA."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Performance Foodservice Tidewater (broadline, ex-Reinhart); on official locator at exact address.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

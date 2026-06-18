@@ -157,5 +157,24 @@
     "fastLaneOpportunity": "Tight urban site with limited unused paved width at the entrance; no clear room for an express lane.",
     "urbanRural": "Dense Elizabeth NJ port-industrial fabric — Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.performancefoodservice.com/our-locations/metro-ny/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Performance Foodservice Metro NY at 1 Ikea Drive, Elizabeth, NJ shown as active location delivering across NY/NJ/CT/PA."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Performance Foodservice - Metro NY (PFG broadline) at 1 Ikea Drive Elizabeth NJ, live on PFG locator; no negative. Tenancy leased inferred (Elizabeth NJ logistics park), specifics unverified.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

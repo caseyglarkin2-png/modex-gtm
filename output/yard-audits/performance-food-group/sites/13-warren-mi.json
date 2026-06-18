@@ -136,5 +136,24 @@
     "scale": "No truck scale visible in overhead imagery.",
     "railServed": "No rail spur enters the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.performancefoodservice.com/Our-Locations/Detroit",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Performance Foodservice - Detroit at 24838 Ryan Road, Warren, MI 48091, active contact form."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Performance Foodservice (broadline) Detroit division active at exact address; no divestiture/closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

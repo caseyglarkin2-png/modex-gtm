@@ -126,5 +126,24 @@
     "railServed": "No rail spur — none visible in imagery and not mentioned in project documentation.",
     "scale": "No truck scale confirmed; not verifiable from available imagery."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.performancefoodservice.com/our-locations/dallas-fort-worth",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Performance Foodservice 'Dallas Fort Worth' at 5401 East First St, Fort Worth, TX 76103 active broadline DC serving TX/OK."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Performance Foodservice - Dallas Fort Worth broadline DC; live locator confirms exact address; Cheney FTC divestiture excludes Fort Worth, no closure/WARN.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

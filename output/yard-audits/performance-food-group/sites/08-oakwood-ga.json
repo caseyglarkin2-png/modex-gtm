@@ -119,5 +119,24 @@
     "railServed": "No rail spur runs into the campus.",
     "_locationNote": "A warehouserating.com listing places 3501 Old Oakwood Rd at 34.238252,-83.875948, but Street View at that point shows a small retail strip, not a DC. The actual PFG Milton's campus is ~290 m ESE at the locked coordinate, confirmed by Street View dock-face imagery of trailers backed into a multi-temp food DC."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.performancefoodservice.com/our-locations/atlanta/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Performance Foodservice locator lists Atlanta location at 3501 Old Oakwood Rd, Oakwood, GA 30566, serving GA/AL/SC."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Performance Foodservice - Atlanta broadline DC, live on PFG locator; Cheney FTC divestiture footprint excludes Oakwood GA, no closure/WARN/sale.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -151,5 +151,24 @@
     "urbanRural": "Semi-rural / edge-of-town setting — SE Thompson Dr is a narrow road with adjacent farmland, woods and scattered rural housing; classified Rural per the small-town-vs-urban tiebreak.",
     "vistar": "A trailer at the dock carries Vistar branding — PFG's Vistar segment operates from this Kansas City DC alongside broadline."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.performancefoodservice.com/Our-Locations/Kansas-City",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Performance Foodservice - Kansas City at 290 SE Thompson Drive, Lee's Summit, MO 64082, active contact form."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Performance Foodservice (broadline) Kansas City division active at exact address; no closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
