@@ -1,54 +1,158 @@
 {
   "name": "Sam's Club Distribution Center Villa Rica GA",
   "type": "Distribution Center",
-  "coords": { "lat": 33.74110, "lng": -84.94720 },
+  "coords": {
+    "lat": 33.7411,
+    "lng": -84.9472
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 33.74255, "lng": -84.94985 },
-      { "lat": 33.74270, "lng": -84.94560 },
-      { "lat": 33.74250, "lng": -84.94540 },
-      { "lat": 33.74010, "lng": -84.94510 },
-      { "lat": 33.73955, "lng": -84.94585 },
-      { "lat": 33.73935, "lng": -84.94850 },
-      { "lat": 33.73990, "lng": -84.95005 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 33.74295, "lng": -84.94680 },
-      { "lat": 33.74295, "lng": -84.94640 },
-      { "lat": 33.74235, "lng": -84.94640 },
-      { "lat": 33.74235, "lng": -84.94685 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.74255,
+          "lng": -84.94985
+        },
+        {
+          "lat": 33.7427,
+          "lng": -84.9456
+        },
+        {
+          "lat": 33.7425,
+          "lng": -84.9454
+        },
+        {
+          "lat": 33.7401,
+          "lng": -84.9451
+        },
+        {
+          "lat": 33.73955,
+          "lng": -84.94585
+        },
+        {
+          "lat": 33.73935,
+          "lng": -84.9485
+        },
+        {
+          "lat": 33.7399,
+          "lng": -84.95005
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.74295,
+          "lng": -84.9468
+        },
+        {
+          "lat": 33.74295,
+          "lng": -84.9464
+        },
+        {
+          "lat": 33.74235,
+          "lng": -84.9464
+        },
+        {
+          "lat": 33.74235,
+          "lng": -84.94685
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 33.74230, "lng": -84.94920 },
-        { "lat": 33.74230, "lng": -84.95000 },
-        { "lat": 33.73980, "lng": -84.95005 },
-        { "lat": 33.73975, "lng": -84.94915 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.7423,
+            "lng": -84.9492
+          },
+          {
+            "lat": 33.7423,
+            "lng": -84.95
+          },
+          {
+            "lat": 33.7398,
+            "lng": -84.95005
+          },
+          {
+            "lat": 33.73975,
+            "lng": -84.94915
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 33.73985, "lng": -84.94860 },
-        { "lat": 33.73980, "lng": -84.94640 },
-        { "lat": 33.73960, "lng": -84.94645 },
-        { "lat": 33.73965, "lng": -84.94865 }
-      ] },
-      { "ring": [
-        { "lat": 33.74230, "lng": -84.94605 },
-        { "lat": 33.74230, "lng": -84.94560 },
-        { "lat": 33.74010, "lng": -84.94565 },
-        { "lat": 33.74010, "lng": -84.94610 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.73985,
+            "lng": -84.9486
+          },
+          {
+            "lat": 33.7398,
+            "lng": -84.9464
+          },
+          {
+            "lat": 33.7396,
+            "lng": -84.94645
+          },
+          {
+            "lat": 33.73965,
+            "lng": -84.94865
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.7423,
+            "lng": -84.94605
+          },
+          {
+            "lat": 33.7423,
+            "lng": -84.9456
+          },
+          {
+            "lat": 33.7401,
+            "lng": -84.94565
+          },
+          {
+            "lat": 33.7401,
+            "lng": -84.9461
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 33.74245, "lng": -84.94700 },
-      { "lat": 33.74245, "lng": -84.94600 },
-      { "lat": 33.74120, "lng": -84.94600 },
-      { "lat": 33.74120, "lng": -84.94705 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 33.74245,
+          "lng": -84.947
+        },
+        {
+          "lat": 33.74245,
+          "lng": -84.946
+        },
+        {
+          "lat": 33.7412,
+          "lng": -84.946
+        },
+        {
+          "lat": 33.7412,
+          "lng": -84.94705
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 145, "pano": "jg9KdcvqVQ0-6czolnFMZg", "hasCoverage": true },
-      "truckGate": { "heading": 181, "pano": "pb9v7eEbu4Oo6Zh_pz1kWA", "hasCoverage": true }
+      "perimeter": {
+        "heading": 145,
+        "pano": "jg9KdcvqVQ0-6czolnFMZg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 181,
+        "pano": "pb9v7eEbu4Oo6Zh_pz1kWA",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -62,18 +166,36 @@
   },
   "mapsUrl": "https://www.google.com/maps/@33.74110,-84.94720,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "buildingCount"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "buildingCount"
+  ],
   "fieldNotes": {
     "truckGate": "Sliding chain-link gate across the gravel truck drive at the NE corner off Fleet Dr; seen open in 2024-02 Street View with tractors/trailers inside the fenced yard.",
     "guardShack": "No booth beside the entrance lane in any Street View heading; the only structure inside is a maintenance/shop building set deep in the yard, not a gate booth.",
@@ -88,5 +210,24 @@
     "urbanRural": "Edge-of-town small-industrial setting in Villa Rica surrounded by woods; classed Rural per the tie-break rule.",
     "siteAreaAcres": "~36.9 acres from the fenced perimeter polygon (shoelace)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.sclogistics.com/resource-center/blog-posts/sams-club-names-saddle-creek-3pl-service-provider-year/",
+        "date": "2026-05",
+        "type": "press",
+        "claim": "Saddle Creek named Sam's Club 3PL Service Provider of the Year, operating Sam's Club DCs incl. Villa Rica GA."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Operating ~430k sqft Sam's Club DC at ~140 Fleet Dr, Villa Rica, run by 3PL Saddle Creek; no closure/WARN.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

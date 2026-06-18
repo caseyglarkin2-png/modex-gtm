@@ -1,40 +1,107 @@
 {
   "name": "Sam's Club Distribution Center Oklahoma City OK",
   "type": "Distribution Center",
-  "coords": { "lat": 35.439775, "lng": -97.651625 },
+  "coords": {
+    "lat": 35.439775,
+    "lng": -97.651625
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 35.44210, "lng": -97.65340 },
-      { "lat": 35.44195, "lng": -97.64985 },
-      { "lat": 35.43745, "lng": -97.64985 },
-      { "lat": 35.43760, "lng": -97.65335 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 35.44192, "lng": -97.65362 },
-      { "lat": 35.44192, "lng": -97.65300 },
-      { "lat": 35.44150, "lng": -97.65300 },
-      { "lat": 35.44150, "lng": -97.65362 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.4421,
+          "lng": -97.6534
+        },
+        {
+          "lat": 35.44195,
+          "lng": -97.64985
+        },
+        {
+          "lat": 35.43745,
+          "lng": -97.64985
+        },
+        {
+          "lat": 35.4376,
+          "lng": -97.65335
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.44192,
+          "lng": -97.65362
+        },
+        {
+          "lat": 35.44192,
+          "lng": -97.653
+        },
+        {
+          "lat": 35.4415,
+          "lng": -97.653
+        },
+        {
+          "lat": 35.4415,
+          "lng": -97.65362
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 35.44150, "lng": -97.65040 },
-        { "lat": 35.44140, "lng": -97.64990 },
-        { "lat": 35.43770, "lng": -97.64990 },
-        { "lat": 35.43780, "lng": -97.65040 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 35.4415,
+            "lng": -97.6504
+          },
+          {
+            "lat": 35.4414,
+            "lng": -97.6499
+          },
+          {
+            "lat": 35.4377,
+            "lng": -97.6499
+          },
+          {
+            "lat": 35.4378,
+            "lng": -97.6504
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 35.44150, "lng": -97.65075 },
-        { "lat": 35.44140, "lng": -97.65045 },
-        { "lat": 35.43790, "lng": -97.65045 },
-        { "lat": 35.43795, "lng": -97.65075 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 35.4415,
+            "lng": -97.65075
+          },
+          {
+            "lat": 35.4414,
+            "lng": -97.65045
+          },
+          {
+            "lat": 35.4379,
+            "lng": -97.65045
+          },
+          {
+            "lat": 35.43795,
+            "lng": -97.65075
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 96, "pano": "4U4fpAp5XvQwPpOY0a2bEg", "hasCoverage": true },
-      "truckGate": { "heading": 98, "pano": "G-gXkTnPw1FlcHSrE7IWZQ", "hasCoverage": true }
+      "perimeter": {
+        "heading": 96,
+        "pano": "4U4fpAp5XvQwPpOY0a2bEg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 98,
+        "pano": "G-gXkTnPw1FlcHSrE7IWZQ",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -48,18 +115,38 @@
   },
   "mapsUrl": "https://www.google.com/maps/@35.439775,-97.651625,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "postGateStaging", "shipRcvSeparate"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "postGateStaging",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Property is enclosed by a black metal perimeter fence along the S Council Rd frontage and around the truck/dock yard (clearly visible in 2025-05 Street View). Trucks pass through a controlled fence opening off the main entrance drive; classified as a truck gate. No barrier arm is visible across the public-road throat itself, but the secured fence line with vehicle gates is the access control.",
     "guardShack": "No staffed guard booth visible at the entrance in 2025-05 Street View or 2026 satellite. The main entry is an open paved approach with the Sam's Club monument sign; access control is the fence/sliding gate at the yard, implying kiosk/app/badge check-in rather than a manned shack. Low-medium confidence.",
@@ -78,5 +165,31 @@
     "trailersVisible": "Estimate from 2026 satellite: ~110 trailers across dock apron and drop-yard rows.",
     "railServed": "No rail spur enters the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://okbusinessvoice.com/2024/01/25/walmart-inc-cuts-ribbon-on-oklahomas-first-sams-club-distribution-center/",
+        "date": "2024-01-25",
+        "type": "press",
+        "claim": "Walmart cut ribbon on Oklahoma's first Sam's Club DC, 300k sqft at 2400 S Council Rd, OKC; operations began Feb 14 2024."
+      },
+      {
+        "tier": 1,
+        "url": "https://oklahoma.gov/governor/newsroom/newsroom/2023/july2023/sam-s-club-to-open-new-distribution-center-in-oklahoma-city.html",
+        "date": "2023-07",
+        "type": "econ-dev",
+        "claim": "State of Oklahoma announces Sam's Club new DC in OKC Logistics Park."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Self-operated Sam's Club multi-DC at 2400 S Council Rd, OKC; live since Feb 14 2024 (LIVE, not just announced). Re-pin to ~35.43,-97.66.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

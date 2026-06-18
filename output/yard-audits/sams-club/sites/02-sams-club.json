@@ -1,55 +1,162 @@
 {
   "name": "Sam's Club Distribution Center Searcy AR",
   "type": "Distribution Center",
-  "coords": { "lat": 35.24130, "lng": -91.70080 },
+  "coords": {
+    "lat": 35.2413,
+    "lng": -91.7008
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 35.24300, "lng": -91.70460 },
-      { "lat": 35.24295, "lng": -91.70010 },
-      { "lat": 35.24290, "lng": -91.69740 },
-      { "lat": 35.24010, "lng": -91.69760 },
-      { "lat": 35.23955, "lng": -91.69830 },
-      { "lat": 35.23980, "lng": -91.70180 },
-      { "lat": 35.24010, "lng": -91.70450 },
-      { "lat": 35.24160, "lng": -91.70470 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 35.24300, "lng": -91.70230 },
-      { "lat": 35.24300, "lng": -91.70150 },
-      { "lat": 35.24230, "lng": -91.70150 },
-      { "lat": 35.24230, "lng": -91.70230 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.243,
+          "lng": -91.7046
+        },
+        {
+          "lat": 35.24295,
+          "lng": -91.7001
+        },
+        {
+          "lat": 35.2429,
+          "lng": -91.6974
+        },
+        {
+          "lat": 35.2401,
+          "lng": -91.6976
+        },
+        {
+          "lat": 35.23955,
+          "lng": -91.6983
+        },
+        {
+          "lat": 35.2398,
+          "lng": -91.7018
+        },
+        {
+          "lat": 35.2401,
+          "lng": -91.7045
+        },
+        {
+          "lat": 35.2416,
+          "lng": -91.7047
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.243,
+          "lng": -91.7023
+        },
+        {
+          "lat": 35.243,
+          "lng": -91.7015
+        },
+        {
+          "lat": 35.2423,
+          "lng": -91.7015
+        },
+        {
+          "lat": 35.2423,
+          "lng": -91.7023
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 35.24270, "lng": -91.70450 },
-        { "lat": 35.24255, "lng": -91.70010 },
-        { "lat": 35.24130, "lng": -91.70015 },
-        { "lat": 35.24145, "lng": -91.70455 }
-      ] },
-      { "ring": [
-        { "lat": 35.24035, "lng": -91.70330 },
-        { "lat": 35.24025, "lng": -91.69835 },
-        { "lat": 35.23965, "lng": -91.69845 },
-        { "lat": 35.23975, "lng": -91.70340 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 35.2427,
+            "lng": -91.7045
+          },
+          {
+            "lat": 35.24255,
+            "lng": -91.7001
+          },
+          {
+            "lat": 35.2413,
+            "lng": -91.70015
+          },
+          {
+            "lat": 35.24145,
+            "lng": -91.70455
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 35.24035,
+            "lng": -91.7033
+          },
+          {
+            "lat": 35.24025,
+            "lng": -91.69835
+          },
+          {
+            "lat": 35.23965,
+            "lng": -91.69845
+          },
+          {
+            "lat": 35.23975,
+            "lng": -91.7034
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 35.24075, "lng": -91.70330 },
-        { "lat": 35.24065, "lng": -91.69830 },
-        { "lat": 35.24035, "lng": -91.69835 },
-        { "lat": 35.24045, "lng": -91.70335 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 35.24075,
+            "lng": -91.7033
+          },
+          {
+            "lat": 35.24065,
+            "lng": -91.6983
+          },
+          {
+            "lat": 35.24035,
+            "lng": -91.69835
+          },
+          {
+            "lat": 35.24045,
+            "lng": -91.70335
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 35.24040, "lng": -91.70330 },
-      { "lat": 35.24035, "lng": -91.70020 },
-      { "lat": 35.23985, "lng": -91.70025 },
-      { "lat": 35.23990, "lng": -91.70335 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 35.2404,
+          "lng": -91.7033
+        },
+        {
+          "lat": 35.24035,
+          "lng": -91.7002
+        },
+        {
+          "lat": 35.23985,
+          "lng": -91.70025
+        },
+        {
+          "lat": 35.2399,
+          "lng": -91.70335
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 194, "pano": "tptvfohUgfw72ZkD88gqOg", "hasCoverage": true },
-      "truckGate": { "heading": 192, "pano": "h1lVYMvnaD0FAfXlbuO5jQ", "hasCoverage": true }
+      "perimeter": {
+        "heading": 194,
+        "pano": "tptvfohUgfw72ZkD88gqOg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 192,
+        "pano": "h1lVYMvnaD0FAfXlbuO5jQ",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -63,18 +170,38 @@
   },
   "mapsUrl": "https://www.google.com/maps/@35.24130,-91.70080,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "connectivityIssue"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "location": "Supplied coords (35.243754,-91.736442, APPROXIMATE) landed in downtown Searcy ~3.5km too far west. Resolved the real DC to 3301 E Park Ave at 35.2419,-91.6976 via warehouserating/opengovny listings, confirmed on satellite as a large white-roof DC with fenced drop yards, dock apron, retention ponds and a rail spur.",
     "truckGate": "Perimeter is fully chain-link fenced (confirmed in Street View). Single controlled access is a gravel/paved crossing over the rail spur from the north access road into the drop/truck yard (~35.2426,-91.7020). No barrier arm visible from overhead; classed as a gate on the strength of the full fence + single pinch-point crossing + web listing stating 'gate, entrance security, strict appointment requirements'. Medium confidence.",
@@ -91,5 +218,31 @@
     "entryLanes": "Single crossing point; lane count not separately markable from overhead, estimated 1 in / 1 out at one combined gate.",
     "siteAreaAcres": "Derived from the perimeter polygon (~664m x ~395m envelope, minus ponds/irregular SW); ~58 acres, approximate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.spscommerce.com/community/articles/sams-club-dc-receiving-addresses",
+        "date": "2026-05",
+        "type": "locator",
+        "claim": "Official Sam's Club DC receiving-address list includes Sam's DC 4026/8234 at 3301 E Park Ave, Searcy, AR 72143."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.kark.com/news/big-honor-for-searcy-sams-club-distribution-center/",
+        "date": "2017-03",
+        "type": "press",
+        "claim": "Searcy Sam's Club DC named Sam's network Distribution Center of the Year."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Confirmed self-operated Sam's Club DC 4026/8234 at 3301 E Park Ave, Searcy; no closure/WARN. Re-pin to ~35.245,-91.717.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

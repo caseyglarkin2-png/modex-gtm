@@ -8,58 +8,142 @@
   "geofences": {
     "perimeter": {
       "ring": [
-        { "lat": 30.42925, "lng": -81.62460 },
-        { "lat": 30.42900, "lng": -81.62190 },
-        { "lat": 30.42470, "lng": -81.62160 },
-        { "lat": 30.42360, "lng": -81.62195 },
-        { "lat": 30.42215, "lng": -81.62258 },
-        { "lat": 30.42210, "lng": -81.62513 },
-        { "lat": 30.42360, "lng": -81.62535 },
-        { "lat": 30.42900, "lng": -81.62513 }
+        {
+          "lat": 30.42925,
+          "lng": -81.6246
+        },
+        {
+          "lat": 30.429,
+          "lng": -81.6219
+        },
+        {
+          "lat": 30.4247,
+          "lng": -81.6216
+        },
+        {
+          "lat": 30.4236,
+          "lng": -81.62195
+        },
+        {
+          "lat": 30.42215,
+          "lng": -81.62258
+        },
+        {
+          "lat": 30.4221,
+          "lng": -81.62513
+        },
+        {
+          "lat": 30.4236,
+          "lng": -81.62535
+        },
+        {
+          "lat": 30.429,
+          "lng": -81.62513
+        }
       ]
     },
     "truckGate": {
       "ring": [
-        { "lat": 30.42345, "lng": -81.62245 },
-        { "lat": 30.42345, "lng": -81.62185 },
-        { "lat": 30.42285, "lng": -81.62188 },
-        { "lat": 30.42285, "lng": -81.62248 }
+        {
+          "lat": 30.42345,
+          "lng": -81.62245
+        },
+        {
+          "lat": 30.42345,
+          "lng": -81.62185
+        },
+        {
+          "lat": 30.42285,
+          "lng": -81.62188
+        },
+        {
+          "lat": 30.42285,
+          "lng": -81.62248
+        }
       ]
     },
     "dropYards": [
       {
         "ring": [
-          { "lat": 30.42892, "lng": -81.62432 },
-          { "lat": 30.42892, "lng": -81.62337 },
-          { "lat": 30.42437, "lng": -81.62337 },
-          { "lat": 30.42437, "lng": -81.62432 }
+          {
+            "lat": 30.42892,
+            "lng": -81.62432
+          },
+          {
+            "lat": 30.42892,
+            "lng": -81.62337
+          },
+          {
+            "lat": 30.42437,
+            "lng": -81.62337
+          },
+          {
+            "lat": 30.42437,
+            "lng": -81.62432
+          }
         ]
       }
     ],
     "dockAprons": [
       {
         "ring": [
-          { "lat": 30.42855, "lng": -81.62213 },
-          { "lat": 30.42855, "lng": -81.62166 },
-          { "lat": 30.42470, "lng": -81.62166 },
-          { "lat": 30.42470, "lng": -81.62213 }
+          {
+            "lat": 30.42855,
+            "lng": -81.62213
+          },
+          {
+            "lat": 30.42855,
+            "lng": -81.62166
+          },
+          {
+            "lat": 30.4247,
+            "lng": -81.62166
+          },
+          {
+            "lat": 30.4247,
+            "lng": -81.62213
+          }
         ]
       },
       {
         "ring": [
-          { "lat": 30.42849, "lng": -81.62513 },
-          { "lat": 30.42849, "lng": -81.62460 },
-          { "lat": 30.42433, "lng": -81.62460 },
-          { "lat": 30.42433, "lng": -81.62513 }
+          {
+            "lat": 30.42849,
+            "lng": -81.62513
+          },
+          {
+            "lat": 30.42849,
+            "lng": -81.6246
+          },
+          {
+            "lat": 30.42433,
+            "lng": -81.6246
+          },
+          {
+            "lat": 30.42433,
+            "lng": -81.62513
+          }
         ]
       }
     ],
     "staging": {
       "ring": [
-        { "lat": 30.42405, "lng": -81.62320 },
-        { "lat": 30.42400, "lng": -81.62187 },
-        { "lat": 30.42326, "lng": -81.62191 },
-        { "lat": 30.42331, "lng": -81.62320 }
+        {
+          "lat": 30.42405,
+          "lng": -81.6232
+        },
+        {
+          "lat": 30.424,
+          "lng": -81.62187
+        },
+        {
+          "lat": 30.42326,
+          "lng": -81.62191
+        },
+        {
+          "lat": 30.42331,
+          "lng": -81.6232
+        }
       ]
     },
     "streetViewMeta": {
@@ -141,5 +225,31 @@
     "perimeter": "Property line traced inside the fence: west edge follows the centerline of the drop-yard corridor shared with the Amazon building; east edge runs just beyond the dock wall along the retention canal; the SE wastewater-treatment plant is excluded.",
     "imageryNote": "Most overhead imagery is recent (building complete). The clearest gate Street View is 2023-01 (gate already built, trucks queued); 2025-02 Street View confirms the completed checkpoint. The DC opened Apr 2025 / operational Feb 2025."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.supplychaindive.com/news/walmart-sams-club-opens-distribution-center-jacksonville-florida/746505/",
+        "date": "2025-04",
+        "type": "press",
+        "claim": "Walmart opened the 1M-sqft Sam's Club DC in Jacksonville; fully operational since February 2025."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.jaxdailyrecord.com/news/2025/apr/17/ceremony-celebrates-opening-of-1-million-square-foot-sams-club-distribution-center/",
+        "date": "2025-04-17",
+        "type": "press",
+        "claim": "Grand-opening of the Sam's Club DC at 1511 Zoo Parkway Bldg 300, Imeson Park South."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Self-operated Sam's Club DC at 1511 Zoo Parkway, operational Feb 2025; no negative. Re-pin to 1511 Zoo Parkway (Imeson Park South) - generic Jacksonville coords.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

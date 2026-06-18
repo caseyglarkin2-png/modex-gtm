@@ -1,51 +1,146 @@
 {
   "name": "Sam's Club Distribution Center Lakeland FL",
   "type": "Distribution Center",
-  "coords": { "lat": 28.0763, "lng": -81.8972 },
+  "coords": {
+    "lat": 28.0763,
+    "lng": -81.8972
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 28.07835, "lng": -81.89865 },
-      { "lat": 28.07835, "lng": -81.89585 },
-      { "lat": 28.07475, "lng": -81.89580 },
-      { "lat": 28.07470, "lng": -81.89870 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 28.07745, "lng": -81.89680 },
-      { "lat": 28.07745, "lng": -81.89635 },
-      { "lat": 28.07695, "lng": -81.89635 },
-      { "lat": 28.07695, "lng": -81.89680 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 28.07835,
+          "lng": -81.89865
+        },
+        {
+          "lat": 28.07835,
+          "lng": -81.89585
+        },
+        {
+          "lat": 28.07475,
+          "lng": -81.8958
+        },
+        {
+          "lat": 28.0747,
+          "lng": -81.8987
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 28.07745,
+          "lng": -81.8968
+        },
+        {
+          "lat": 28.07745,
+          "lng": -81.89635
+        },
+        {
+          "lat": 28.07695,
+          "lng": -81.89635
+        },
+        {
+          "lat": 28.07695,
+          "lng": -81.8968
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 28.07690, "lng": -81.89705 },
-        { "lat": 28.07690, "lng": -81.89595 },
-        { "lat": 28.07490, "lng": -81.89590 },
-        { "lat": 28.07490, "lng": -81.89705 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 28.0769,
+            "lng": -81.89705
+          },
+          {
+            "lat": 28.0769,
+            "lng": -81.89595
+          },
+          {
+            "lat": 28.0749,
+            "lng": -81.8959
+          },
+          {
+            "lat": 28.0749,
+            "lng": -81.89705
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 28.07795, "lng": -81.89865 },
-        { "lat": 28.07795, "lng": -81.89835 },
-        { "lat": 28.07490, "lng": -81.89830 },
-        { "lat": 28.07490, "lng": -81.89860 }
-      ] },
-      { "ring": [
-        { "lat": 28.07770, "lng": -81.89790 },
-        { "lat": 28.07770, "lng": -81.89755 },
-        { "lat": 28.07490, "lng": -81.89750 },
-        { "lat": 28.07490, "lng": -81.89785 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 28.07795,
+            "lng": -81.89865
+          },
+          {
+            "lat": 28.07795,
+            "lng": -81.89835
+          },
+          {
+            "lat": 28.0749,
+            "lng": -81.8983
+          },
+          {
+            "lat": 28.0749,
+            "lng": -81.8986
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 28.0777,
+            "lng": -81.8979
+          },
+          {
+            "lat": 28.0777,
+            "lng": -81.89755
+          },
+          {
+            "lat": 28.0749,
+            "lng": -81.8975
+          },
+          {
+            "lat": 28.0749,
+            "lng": -81.89785
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 28.07695, "lng": -81.89685 },
-      { "lat": 28.07695, "lng": -81.89625 },
-      { "lat": 28.07635, "lng": -81.89625 },
-      { "lat": 28.07635, "lng": -81.89685 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 28.07695,
+          "lng": -81.89685
+        },
+        {
+          "lat": 28.07695,
+          "lng": -81.89625
+        },
+        {
+          "lat": 28.07635,
+          "lng": -81.89625
+        },
+        {
+          "lat": 28.07635,
+          "lng": -81.89685
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 282, "pano": "jnVJdZH8DV4CYemTd3sUXg", "hasCoverage": true },
-      "truckGate": { "heading": 278, "pano": "yOhYGx5dBt43nJbNqvT22g", "hasCoverage": true }
+      "perimeter": {
+        "heading": 282,
+        "pano": "jnVJdZH8DV4CYemTd3sUXg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 278,
+        "pano": "yOhYGx5dBt43nJbNqvT22g",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -59,32 +154,76 @@
   },
   "mapsUrl": "https://www.google.com/maps/@28.0763,-81.8972,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "scale", "multiStep"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "multiStep"
+  ],
   "fieldNotes": {
     "step0": "Resolved the exact Sam's Club / Walmart DC operating block inside the multi-tenant Saddle Creek Logistics campus on Saddle Creek Rd, Lakeland. Confirmed by Street View trailers carrying the Walmart 'spark' logo and Saddle Creek 3PL trailers along the internal road fence; SupplierWiki lists this as Sam's Club DC 8229 c/o Saddle Creek Corp (Bldg 19).",
     "guardShack": "Hip/pyramid-roofed booth sitting in the median island between the inbound and outbound truck lanes at ~28.0772,-81.8966 (z20 satellite), confirmed from ground level as a low canopied gatehouse with lane markings and perimeter fencing.",
     "truckGate": "Controlled checkpoint: median guard booth, fenced drive, lane markings; trucks queue on both approaches. Gate sits deep inside the campus off the signalized internal Saddle Creek Rd intersection.",
     "fastLaneOpportunity": "Very wide paved gate apron with room to add an express/bypass lane around the single booth.",
-    "shipRcvSeparate": "Main DC building has dock banks on both its west and east faces, plus a separate N-S cross-dock finger building with doors on both sides — distinct dock clusters.",
+    "shipRcvSeparate": "Main DC building has dock banks on both its west and east faces, plus a separate N-S cross-dock finger building with doors on both sides \u2014 distinct dock clusters.",
     "dockDoorCount": "~140 is an overhead estimate across the main building's two faces plus the cross-dock finger; flagged approximate.",
     "trailersVisible": "~320 trailers counted across drop rows and dock positions; capacity ~420. Approximate from z18-z20 imagery.",
-    "urbanRural": "Lakeland eastern edge among retention ponds, fields and low-density residential; large industrial campus on a rural arterial — Rural per the small-town-vs-urban tiebreak.",
+    "urbanRural": "Lakeland eastern edge among retention ponds, fields and low-density residential; large industrial campus on a rural arterial \u2014 Rural per the small-town-vs-urban tiebreak.",
     "multipleFacilities": "Sam's Club block is one operating unit within a much larger multi-building 3PL campus; multiple large building clusters on the same property.",
     "railServed": "A rail line runs along the west edge of the campus but no spur enters this DC's yard/docks; set false.",
     "scale": "No truck scale identified in the gate path; flagged uncertain.",
     "entryLanes/exitLanes": "Booth flanked by one lane each side at the checkpoint; lane count is a best estimate.",
     "multiStep": "Single checkpoint observed; no clear second booth/scale stage before the docks."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.spscommerce.com/community/articles/sams-club-dc-receiving-addresses",
+        "date": "2026-05",
+        "type": "locator",
+        "claim": "Official Sam's Club DC receiving-address list includes 'Sams Distribution Center 8229, 3010 Saddlecreek Rd Bld 19, C/O Saddle Creek Corp, Lakeland, FL 33801'."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.sclogistics.com/resource-center/blog-posts/sams-club-names-saddle-creek-3pl-service-provider-year/",
+        "date": "2023-01",
+        "type": "press",
+        "claim": "Saddle Creek Logistics named Sam's Club 3PL Service Provider of the Year; operates the Lakeland DC."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Confirmed Sam's Club DC 8229 operated by 3PL Saddle Creek Logistics at 3010 Saddle Creek Rd, Lakeland; no closure. Operator=Saddle Creek (do not confuse with the Lakeland retail club).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

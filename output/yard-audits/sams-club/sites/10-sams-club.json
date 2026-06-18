@@ -1,59 +1,174 @@
 {
   "name": "Sam's Club Fulfillment Center Lithia Springs GA",
   "type": "Fulfillment Center",
-  "coords": { "lat": 33.7620, "lng": -84.6105 },
+  "coords": {
+    "lat": 33.762,
+    "lng": -84.6105
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 33.7642, "lng": -84.6115 },
-      { "lat": 33.7641, "lng": -84.6095 },
-      { "lat": 33.7600, "lng": -84.6088 },
-      { "lat": 33.7581, "lng": -84.6089 },
-      { "lat": 33.7588, "lng": -84.6112 },
-      { "lat": 33.7615, "lng": -84.6115 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 33.75845, "lng": -84.60945 },
-      { "lat": 33.75845, "lng": -84.60905 },
-      { "lat": 33.75805, "lng": -84.60895 },
-      { "lat": 33.75805, "lng": -84.60935 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.7642,
+          "lng": -84.6115
+        },
+        {
+          "lat": 33.7641,
+          "lng": -84.6095
+        },
+        {
+          "lat": 33.76,
+          "lng": -84.6088
+        },
+        {
+          "lat": 33.7581,
+          "lng": -84.6089
+        },
+        {
+          "lat": 33.7588,
+          "lng": -84.6112
+        },
+        {
+          "lat": 33.7615,
+          "lng": -84.6115
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.75845,
+          "lng": -84.60945
+        },
+        {
+          "lat": 33.75845,
+          "lng": -84.60905
+        },
+        {
+          "lat": 33.75805,
+          "lng": -84.60895
+        },
+        {
+          "lat": 33.75805,
+          "lng": -84.60935
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 33.76405, "lng": -84.60955 },
-        { "lat": 33.76400, "lng": -84.60905 },
-        { "lat": 33.76010, "lng": -84.60885 },
-        { "lat": 33.76015, "lng": -84.60935 }
-      ] },
-      { "ring": [
-        { "lat": 33.76420, "lng": -84.61150 },
-        { "lat": 33.76415, "lng": -84.61110 },
-        { "lat": 33.76160, "lng": -84.61120 },
-        { "lat": 33.76165, "lng": -84.61160 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.76405,
+            "lng": -84.60955
+          },
+          {
+            "lat": 33.764,
+            "lng": -84.60905
+          },
+          {
+            "lat": 33.7601,
+            "lng": -84.60885
+          },
+          {
+            "lat": 33.76015,
+            "lng": -84.60935
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.7642,
+            "lng": -84.6115
+          },
+          {
+            "lat": 33.76415,
+            "lng": -84.6111
+          },
+          {
+            "lat": 33.7616,
+            "lng": -84.6112
+          },
+          {
+            "lat": 33.76165,
+            "lng": -84.6116
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 33.76400, "lng": -84.60995 },
-        { "lat": 33.76398, "lng": -84.60975 },
-        { "lat": 33.76005, "lng": -84.60955 },
-        { "lat": 33.76007, "lng": -84.60975 }
-      ] },
-      { "ring": [
-        { "lat": 33.76410, "lng": -84.61120 },
-        { "lat": 33.76408, "lng": -84.61102 },
-        { "lat": 33.76160, "lng": -84.61108 },
-        { "lat": 33.76162, "lng": -84.61126 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.764,
+            "lng": -84.60995
+          },
+          {
+            "lat": 33.76398,
+            "lng": -84.60975
+          },
+          {
+            "lat": 33.76005,
+            "lng": -84.60955
+          },
+          {
+            "lat": 33.76007,
+            "lng": -84.60975
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.7641,
+            "lng": -84.6112
+          },
+          {
+            "lat": 33.76408,
+            "lng": -84.61102
+          },
+          {
+            "lat": 33.7616,
+            "lng": -84.61108
+          },
+          {
+            "lat": 33.76162,
+            "lng": -84.61126
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 33.76000, "lng": -84.60945 },
-      { "lat": 33.75995, "lng": -84.60895 },
-      { "lat": 33.75900, "lng": -84.60890 },
-      { "lat": 33.75905, "lng": -84.60940 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 33.76,
+          "lng": -84.60945
+        },
+        {
+          "lat": 33.75995,
+          "lng": -84.60895
+        },
+        {
+          "lat": 33.759,
+          "lng": -84.6089
+        },
+        {
+          "lat": 33.75905,
+          "lng": -84.6094
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 2, "pano": "vJMckEfuINlzLq1mxhgN0A", "hasCoverage": true },
-      "truckGate": { "heading": 306, "pano": "6MrZOhUEnkS93WqUkQUKbg", "hasCoverage": true }
+      "perimeter": {
+        "heading": 2,
+        "pano": "vJMckEfuINlzLq1mxhgN0A",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 306,
+        "pano": "6MrZOhUEnkS93WqUkQUKbg",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -67,18 +182,36 @@
   },
   "mapsUrl": "https://www.google.com/maps/@33.7620,-84.6105,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "trailerParkingCapacity", "dockDoorCount"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "trailerParkingCapacity",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "truckGate": "Controlled entry at SW corner where private drive meets public road: pinch point with lane/stop-bar markings, perimeter chain-link fence, and a Prologis/Sam's Club monument sign listing separate 'Associate/Visitor' and 'Truck' lanes (confirmed in 2025-03 Street View).",
     "guardShack": "Small white ~1-vehicle-footprint booth set beside the entry lane at the SW gate, visible in z20 satellite.",
@@ -92,5 +225,31 @@
     "railServed": "No rail spur enters the property.",
     "trailerParkingCapacity": "Estimate from combined east+west truck-court paved area; approximate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://georgia.org/press-release/sams-club-create-600-new-jobs-douglas-county-fulfillment-center",
+        "date": "2023-02-27",
+        "type": "econ-dev",
+        "claim": "State of Georgia: Sam's Club to create 600 jobs at a Douglas County (Lithia Springs) fulfillment center, $142M, at 1000 Douglas Hill Road."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.chamberofcommerce.com/business-directory/georgia/lithia-springs/warehouse/2026659539-sam-s-club-fulfillment-center",
+        "date": "2025",
+        "type": "locator",
+        "claim": "Active directory listing: Sam's Club Fulfillment Center, 1000 Douglas Hills Rd, Lithia Springs GA 30122."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Sam's Club is tenant/self-operator of the ~1.1M-sqft RiverWest building leased from PROLOGIS (landlord/REIT, NOT a 3PL operator; gate monument = REIT-tenant signage). PROBABLE: only the 2023 announcement + 2025 directory, no clean dated 'now-open' press. FLAG: confirm a 2024-25 opening hit to upgrade.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

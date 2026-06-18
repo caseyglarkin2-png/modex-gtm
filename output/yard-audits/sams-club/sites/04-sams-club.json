@@ -1,55 +1,159 @@
 {
   "name": "Sam's Club Distribution Center Hattiesburg MS",
   "type": "Distribution Center",
-  "coords": { "lat": 31.265540, "lng": -89.268450 },
+  "coords": {
+    "lat": 31.26554,
+    "lng": -89.26845
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 31.266226, "lng": -89.270170 },
-      { "lat": 31.266387, "lng": -89.268728 },
-      { "lat": 31.266226, "lng": -89.267527 },
-      { "lat": 31.265330, "lng": -89.267458 },
-      { "lat": 31.264744, "lng": -89.268728 },
-      { "lat": 31.264832, "lng": -89.270273 },
-      { "lat": 31.265653, "lng": -89.270445 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 31.266387, "lng": -89.270153 },
-      { "lat": 31.266372, "lng": -89.269947 },
-      { "lat": 31.266093, "lng": -89.269981 },
-      { "lat": 31.266123, "lng": -89.270222 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 31.266226,
+          "lng": -89.27017
+        },
+        {
+          "lat": 31.266387,
+          "lng": -89.268728
+        },
+        {
+          "lat": 31.266226,
+          "lng": -89.267527
+        },
+        {
+          "lat": 31.26533,
+          "lng": -89.267458
+        },
+        {
+          "lat": 31.264744,
+          "lng": -89.268728
+        },
+        {
+          "lat": 31.264832,
+          "lng": -89.270273
+        },
+        {
+          "lat": 31.265653,
+          "lng": -89.270445
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 31.266387,
+          "lng": -89.270153
+        },
+        {
+          "lat": 31.266372,
+          "lng": -89.269947
+        },
+        {
+          "lat": 31.266093,
+          "lng": -89.269981
+        },
+        {
+          "lat": 31.266123,
+          "lng": -89.270222
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 31.266123, "lng": -89.270170 },
-        { "lat": 31.266005, "lng": -89.267870 },
-        { "lat": 31.265712, "lng": -89.267870 },
-        { "lat": 31.265829, "lng": -89.270170 }
-      ] },
-      { "ring": [
-        { "lat": 31.265154, "lng": -89.270239 },
-        { "lat": 31.264978, "lng": -89.267939 },
-        { "lat": 31.264773, "lng": -89.267939 },
-        { "lat": 31.264920, "lng": -89.270239 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 31.266123,
+            "lng": -89.27017
+          },
+          {
+            "lat": 31.266005,
+            "lng": -89.26787
+          },
+          {
+            "lat": 31.265712,
+            "lng": -89.26787
+          },
+          {
+            "lat": 31.265829,
+            "lng": -89.27017
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 31.265154,
+            "lng": -89.270239
+          },
+          {
+            "lat": 31.264978,
+            "lng": -89.267939
+          },
+          {
+            "lat": 31.264773,
+            "lng": -89.267939
+          },
+          {
+            "lat": 31.26492,
+            "lng": -89.270239
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 31.265732, "lng": -89.269155 },
-        { "lat": 31.265600, "lng": -89.267782 },
-        { "lat": 31.265527, "lng": -89.267782 },
-        { "lat": 31.265659, "lng": -89.269155 }
-      ] },
-      { "ring": [
-        { "lat": 31.265424, "lng": -89.269138 },
-        { "lat": 31.265292, "lng": -89.267765 },
-        { "lat": 31.265189, "lng": -89.267765 },
-        { "lat": 31.265321, "lng": -89.269138 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 31.265732,
+            "lng": -89.269155
+          },
+          {
+            "lat": 31.2656,
+            "lng": -89.267782
+          },
+          {
+            "lat": 31.265527,
+            "lng": -89.267782
+          },
+          {
+            "lat": 31.265659,
+            "lng": -89.269155
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 31.265424,
+            "lng": -89.269138
+          },
+          {
+            "lat": 31.265292,
+            "lng": -89.267765
+          },
+          {
+            "lat": 31.265189,
+            "lng": -89.267765
+          },
+          {
+            "lat": 31.265321,
+            "lng": -89.269138
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 274, "pano": "CAoSHENJQUJJaEFVemFxRXBaak51WDJVVXBXUGx2R1Y.", "hasCoverage": true },
-      "truckGate": { "heading": 163, "pano": "KRg-ik6V6TZ3JfxYJHcDQw", "hasCoverage": true }
+      "perimeter": {
+        "heading": 274,
+        "pano": "CAoSHENJQUJJaEFVemFxRXBaak51WDJVVXBXUGx2R1Y.",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 163,
+        "pano": "KRg-ik6V6TZ3JfxYJHcDQw",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -63,20 +167,39 @@
   },
   "mapsUrl": "https://www.google.com/maps/@31.265540,-89.268450,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["connectivityIssue", "dockDoorCount", "trailersVisible", "trailerParkingCapacity", "shipRcvSeparate"],
+  "uncertainFields": [
+    "connectivityIssue",
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
-    "truckGate": "Open, uncontrolled driveway. Street View (pano KRg-ik6V6TZ3JfxYJHcDQw, Feb 2025) at the entrance throat shows a paved drive curving in from J M Tatum Industrial Dr with only a property/directional sign on a post — no barrier arm, sliding/swing gate, or pinch-point checkpoint. No perimeter fence; the lot is bounded by an open grassy buffer and woods.",
+    "truckGate": "Open, uncontrolled driveway. Street View (pano KRg-ik6V6TZ3JfxYJHcDQw, Feb 2025) at the entrance throat shows a paved drive curving in from J M Tatum Industrial Dr with only a property/directional sign on a post \u2014 no barrier arm, sliding/swing gate, or pinch-point checkpoint. No perimeter fence; the lot is bounded by an open grassy buffer and woods.",
     "guardShack": "No staffed booth at the entrance. The row of small white rectangular structures visible on the inner perimeter (z20/z21) are evenly-spaced utility/storage sheds along the yard edge, not a 1-3-stall guard booth set beside a gate lane.",
     "remoteGs": "False because there is no truck gate at all.",
     "drivewayLong": "Gate-to-dock approach crosses a ~300m+ open buffer plus an internal access loop; easily holds a 3+ truck queue.",
@@ -91,5 +214,24 @@
     "siteAreaAcres": "10.5 ac derived from the perimeter polygon (cleared/paved operating lot inside the tree line).",
     "facilityConfirmation": "Confirmed via address (185 J M Tatum Industrial Dr) and web (Saddle Creek-operated Sam's Club DC #4792). Long cross-dock building with trailers backed in on both faces and surrounding drop-yard rows is unmistakably the DC, not the office listing (45k sqft listing is the registration footprint)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.sclogistics.com/resource-center/blog-posts/sams-club-names-saddle-creek-3pl-service-provider-year/",
+        "date": "2026-05",
+        "type": "press",
+        "claim": "Saddle Creek Logistics operates Sam's Club DCs in Lakeland FL, Hattiesburg MS, and Villa Rica GA; named Sam's Club 3PL Service Provider of the Year, relationship continuing as of 2026."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Operating Sam's Club DC at ~185 J M Tatum Industrial Dr, Hattiesburg, run by 3PL Saddle Creek; no closure/WARN. Re-pin to the DC (~31.31,-89.31), distinct from the retail club on US Hwy 98.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

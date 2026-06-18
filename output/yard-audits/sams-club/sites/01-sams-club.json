@@ -1,62 +1,186 @@
 {
   "name": "Sam's Club Distribution Center New Braunfels TX",
   "type": "Distribution Center",
-  "coords": { "lat": 29.73430, "lng": -98.06410 },
+  "coords": {
+    "lat": 29.7343,
+    "lng": -98.0641
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 29.73850, "lng": -98.06540 },
-      { "lat": 29.73610, "lng": -98.06730 },
-      { "lat": 29.73180, "lng": -98.06600 },
-      { "lat": 29.73020, "lng": -98.06420 },
-      { "lat": 29.73080, "lng": -98.06170 },
-      { "lat": 29.73420, "lng": -98.06140 },
-      { "lat": 29.73730, "lng": -98.06330 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 29.73845, "lng": -98.06560 },
-      { "lat": 29.73815, "lng": -98.06520 },
-      { "lat": 29.73770, "lng": -98.06465 },
-      { "lat": 29.73755, "lng": -98.06480 },
-      { "lat": 29.73800, "lng": -98.06535 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.7385,
+          "lng": -98.0654
+        },
+        {
+          "lat": 29.7361,
+          "lng": -98.0673
+        },
+        {
+          "lat": 29.7318,
+          "lng": -98.066
+        },
+        {
+          "lat": 29.7302,
+          "lng": -98.0642
+        },
+        {
+          "lat": 29.7308,
+          "lng": -98.0617
+        },
+        {
+          "lat": 29.7342,
+          "lng": -98.0614
+        },
+        {
+          "lat": 29.7373,
+          "lng": -98.0633
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 29.73845,
+          "lng": -98.0656
+        },
+        {
+          "lat": 29.73815,
+          "lng": -98.0652
+        },
+        {
+          "lat": 29.7377,
+          "lng": -98.06465
+        },
+        {
+          "lat": 29.73755,
+          "lng": -98.0648
+        },
+        {
+          "lat": 29.738,
+          "lng": -98.06535
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 29.73480, "lng": -98.06710 },
-        { "lat": 29.73310, "lng": -98.06820 },
-        { "lat": 29.73120, "lng": -98.06560 },
-        { "lat": 29.73290, "lng": -98.06450 }
-      ] },
-      { "ring": [
-        { "lat": 29.73330, "lng": -98.06380 },
-        { "lat": 29.73150, "lng": -98.06490 },
-        { "lat": 29.73040, "lng": -98.06340 },
-        { "lat": 29.73070, "lng": -98.06190 },
-        { "lat": 29.73310, "lng": -98.06200 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 29.7348,
+            "lng": -98.0671
+          },
+          {
+            "lat": 29.7331,
+            "lng": -98.0682
+          },
+          {
+            "lat": 29.7312,
+            "lng": -98.0656
+          },
+          {
+            "lat": 29.7329,
+            "lng": -98.0645
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 29.7333,
+            "lng": -98.0638
+          },
+          {
+            "lat": 29.7315,
+            "lng": -98.0649
+          },
+          {
+            "lat": 29.7304,
+            "lng": -98.0634
+          },
+          {
+            "lat": 29.7307,
+            "lng": -98.0619
+          },
+          {
+            "lat": 29.7331,
+            "lng": -98.062
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 29.73600, "lng": -98.06640 },
-        { "lat": 29.73320, "lng": -98.06520 },
-        { "lat": 29.73305, "lng": -98.06555 },
-        { "lat": 29.73585, "lng": -98.06675 }
-      ] },
-      { "ring": [
-        { "lat": 29.73480, "lng": -98.06250 },
-        { "lat": 29.73340, "lng": -98.06320 },
-        { "lat": 29.73325, "lng": -98.06290 },
-        { "lat": 29.73465, "lng": -98.06220 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 29.736,
+            "lng": -98.0664
+          },
+          {
+            "lat": 29.7332,
+            "lng": -98.0652
+          },
+          {
+            "lat": 29.73305,
+            "lng": -98.06555
+          },
+          {
+            "lat": 29.73585,
+            "lng": -98.06675
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 29.7348,
+            "lng": -98.0625
+          },
+          {
+            "lat": 29.7334,
+            "lng": -98.0632
+          },
+          {
+            "lat": 29.73325,
+            "lng": -98.0629
+          },
+          {
+            "lat": 29.73465,
+            "lng": -98.0622
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 29.73760, "lng": -98.06490 },
-      { "lat": 29.73690, "lng": -98.06560 },
-      { "lat": 29.73620, "lng": -98.06490 },
-      { "lat": 29.73690, "lng": -98.06420 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 29.7376,
+          "lng": -98.0649
+        },
+        {
+          "lat": 29.7369,
+          "lng": -98.0656
+        },
+        {
+          "lat": 29.7362,
+          "lng": -98.0649
+        },
+        {
+          "lat": 29.7369,
+          "lng": -98.0642
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 328, "pano": "CAoSFENJSE0wb2dLRUlDQWdJRFI4NDli", "hasCoverage": true },
-      "truckGate": { "heading": 128, "pano": "6YhsOK6P85aaVVAVb_aohg", "hasCoverage": true }
+      "perimeter": {
+        "heading": 328,
+        "pano": "CAoSFENJSE0wb2dLRUlDQWdJRFI4NDli",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 128,
+        "pano": "6YhsOK6P85aaVVAVb_aohg",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -94,7 +218,12 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "scale", "shipRcvSeparate"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Guarded truck checkpoint at the N corner off the I-35 frontage road; Street View (pano 6YhsOK6P85aaVVAVb_aohg, 2018-12, heading ~230) shows striped truck lanes with painted STOP, channelizing bollards, and gate infrastructure across the lanes against the WAL-MART Distribution Services building wall.",
     "guardShack": "Small single-footprint metal guard booth with side windows and a covered canopy walkway sits beside the inbound lane at the gate; clearly visible in Street View heading 290 and 230.",
@@ -113,5 +242,24 @@
     "trailersVisible": "Estimate from z17-z19 imagery across SW and SE yards - approximate count of parked trailers in the captured frames.",
     "dockDoorCount": "Honest overhead estimate across both faces of the cross-dock plus the secondary building."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.spscommerce.com/community/articles/sams-club-dc-receiving-addresses",
+        "date": "2026-05",
+        "type": "locator",
+        "claim": "Official Sam's Club DC receiving-address list includes 'Sams Distribution Center 4889, 4002 N IH 35, New Braunfels, TX 78130'."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Confirmed Sam's Club DC 4889 at the audited I-35 site (self-operated); 'WAL-MART Distribution Services' street-view signage is the parent corporate entity on a combined Walmart/Sam's campus, not a Walmart-only DC.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -1,56 +1,166 @@
 {
   "name": "Sam's Club Distribution Center Shakopee MN",
   "type": "Distribution Center",
-  "coords": { "lat": 44.79255, "lng": -93.42620 },
+  "coords": {
+    "lat": 44.79255,
+    "lng": -93.4262
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 44.79368, "lng": -93.42860 },
-      { "lat": 44.79386, "lng": -93.42470 },
-      { "lat": 44.79356, "lng": -93.42396 },
-      { "lat": 44.79238, "lng": -93.42378 },
-      { "lat": 44.79172, "lng": -93.42421 },
-      { "lat": 44.79129, "lng": -93.42498 },
-      { "lat": 44.79130, "lng": -93.42849 },
-      { "lat": 44.79232, "lng": -93.42862 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 44.79356, "lng": -93.42402 },
-      { "lat": 44.79355, "lng": -93.42378 },
-      { "lat": 44.79318, "lng": -93.42380 },
-      { "lat": 44.79320, "lng": -93.42404 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 44.79368,
+          "lng": -93.4286
+        },
+        {
+          "lat": 44.79386,
+          "lng": -93.4247
+        },
+        {
+          "lat": 44.79356,
+          "lng": -93.42396
+        },
+        {
+          "lat": 44.79238,
+          "lng": -93.42378
+        },
+        {
+          "lat": 44.79172,
+          "lng": -93.42421
+        },
+        {
+          "lat": 44.79129,
+          "lng": -93.42498
+        },
+        {
+          "lat": 44.7913,
+          "lng": -93.42849
+        },
+        {
+          "lat": 44.79232,
+          "lng": -93.42862
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 44.79356,
+          "lng": -93.42402
+        },
+        {
+          "lat": 44.79355,
+          "lng": -93.42378
+        },
+        {
+          "lat": 44.79318,
+          "lng": -93.4238
+        },
+        {
+          "lat": 44.7932,
+          "lng": -93.42404
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 44.79388, "lng": -93.42820 },
-        { "lat": 44.79398, "lng": -93.42498 },
-        { "lat": 44.79380, "lng": -93.42495 },
-        { "lat": 44.79372, "lng": -93.42818 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 44.79388,
+            "lng": -93.4282
+          },
+          {
+            "lat": 44.79398,
+            "lng": -93.42498
+          },
+          {
+            "lat": 44.7938,
+            "lng": -93.42495
+          },
+          {
+            "lat": 44.79372,
+            "lng": -93.42818
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 44.79366, "lng": -93.42818 },
-        { "lat": 44.79376, "lng": -93.42492 },
-        { "lat": 44.79350, "lng": -93.42489 },
-        { "lat": 44.79340, "lng": -93.42815 }
-      ] },
-      { "ring": [
-        { "lat": 44.79150, "lng": -93.42806 },
-        { "lat": 44.79158, "lng": -93.42505 },
-        { "lat": 44.79135, "lng": -93.42502 },
-        { "lat": 44.79127, "lng": -93.42803 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 44.79366,
+            "lng": -93.42818
+          },
+          {
+            "lat": 44.79376,
+            "lng": -93.42492
+          },
+          {
+            "lat": 44.7935,
+            "lng": -93.42489
+          },
+          {
+            "lat": 44.7934,
+            "lng": -93.42815
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 44.7915,
+            "lng": -93.42806
+          },
+          {
+            "lat": 44.79158,
+            "lng": -93.42505
+          },
+          {
+            "lat": 44.79135,
+            "lng": -93.42502
+          },
+          {
+            "lat": 44.79127,
+            "lng": -93.42803
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 44.79352, "lng": -93.42388 },
-      { "lat": 44.79320, "lng": -93.42384 },
-      { "lat": 44.79250, "lng": -93.42398 },
-      { "lat": 44.79252, "lng": -93.42420 },
-      { "lat": 44.79320, "lng": -93.42408 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 44.79352,
+          "lng": -93.42388
+        },
+        {
+          "lat": 44.7932,
+          "lng": -93.42384
+        },
+        {
+          "lat": 44.7925,
+          "lng": -93.42398
+        },
+        {
+          "lat": 44.79252,
+          "lng": -93.4242
+        },
+        {
+          "lat": 44.7932,
+          "lng": -93.42408
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 265, "pano": "_yxeEf5Q8DXVansnuK76jw", "hasCoverage": true },
-      "truckGate": { "heading": 290, "pano": "_yxeEf5Q8DXVansnuK76jw", "hasCoverage": true }
+      "perimeter": {
+        "heading": 265,
+        "pano": "_yxeEf5Q8DXVansnuK76jw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 290,
+        "pano": "_yxeEf5Q8DXVansnuK76jw",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -64,18 +174,35 @@
   },
   "mapsUrl": "https://www.google.com/maps/@44.79255,-93.42620,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "exitLanes", "connectivityIssue"],
+  "uncertainFields": [
+    "scale",
+    "exitLanes",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "truckGate": "Single controlled truck lane at the NE corner off Hentges Way; chevron/crosshatch gore markings at the entry throat and two tractor-trailers queued in-lane in current satellite imagery.",
     "guardShack": "Small standalone white booth (~1-2 stall footprint) set beside the truck entry lane at the NE pinch point, distinct from the main office building.",
@@ -93,5 +220,31 @@
     "siteAreaAcres": "Derived from the perimeter polygon (~33-34 acres of fenced paved property); overhead estimate.",
     "streetViewMeta": "Only road-level coverage is a 2022-04 pano on Hentges Way at the roundabout, captured before the building was built (opened March 2024), so it shows empty land; gate/guard determinations rely on current high-res satellite, not Street View."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://corporate.walmart.com/about/samsclub/news/2023/11/30/sams-club-to-open-two-new-distribution-centers-in-st-louis-and-minneapolis-areas",
+        "date": "2023-11-30",
+        "type": "press",
+        "claim": "Sam's Club corporate announces new Minneapolis-area (Shakopee MN) DC/fulfillment center."
+      },
+      {
+        "tier": 2,
+        "url": "https://tcbmag.com/sams-club-to-open-distribution-center-in-shakopee/",
+        "date": "2023-12",
+        "type": "press",
+        "claim": "365k sqft DC/FC at 7400 Hentges Way, Shakopee Logistics Center, opened March 2024."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Sam's Club-operated DC/FC at 7400 Hentges Way, Shakopee (leased shell in a spec park), live March 2024; no Shakopee-specific closure (a MN WARN surfaced but not pinned to this site - the era's confirmed Sam's closure was Swedesboro NJ).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

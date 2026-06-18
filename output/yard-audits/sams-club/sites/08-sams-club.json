@@ -1,47 +1,134 @@
 {
   "name": "Sam's Club Distribution Center Edwardsville IL",
   "type": "Distribution Center",
-  "coords": { "lat": 38.7659, "lng": -90.0513 },
+  "coords": {
+    "lat": 38.7659,
+    "lng": -90.0513
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 38.76790, "lng": -90.05235 },
-      { "lat": 38.76795, "lng": -90.04960 },
-      { "lat": 38.76470, "lng": -90.04945 },
-      { "lat": 38.76315, "lng": -90.04985 },
-      { "lat": 38.76310, "lng": -90.05215 },
-      { "lat": 38.76600, "lng": -90.05230 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 38.76810, "lng": -90.05095 },
-      { "lat": 38.76808, "lng": -90.05040 },
-      { "lat": 38.76770, "lng": -90.05042 },
-      { "lat": 38.76772, "lng": -90.05097 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.7679,
+          "lng": -90.05235
+        },
+        {
+          "lat": 38.76795,
+          "lng": -90.0496
+        },
+        {
+          "lat": 38.7647,
+          "lng": -90.04945
+        },
+        {
+          "lat": 38.76315,
+          "lng": -90.04985
+        },
+        {
+          "lat": 38.7631,
+          "lng": -90.05215
+        },
+        {
+          "lat": 38.766,
+          "lng": -90.0523
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 38.7681,
+          "lng": -90.05095
+        },
+        {
+          "lat": 38.76808,
+          "lng": -90.0504
+        },
+        {
+          "lat": 38.7677,
+          "lng": -90.05042
+        },
+        {
+          "lat": 38.76772,
+          "lng": -90.05097
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 38.76690, "lng": -90.05010 },
-        { "lat": 38.76695, "lng": -90.04955 },
-        { "lat": 38.76360, "lng": -90.04965 },
-        { "lat": 38.76358, "lng": -90.05015 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 38.7669,
+            "lng": -90.0501
+          },
+          {
+            "lat": 38.76695,
+            "lng": -90.04955
+          },
+          {
+            "lat": 38.7636,
+            "lng": -90.04965
+          },
+          {
+            "lat": 38.76358,
+            "lng": -90.05015
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 38.76318, "lng": -90.05205 },
-        { "lat": 38.76322, "lng": -90.05010 },
-        { "lat": 38.76300, "lng": -90.05008 },
-        { "lat": 38.76296, "lng": -90.05203 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 38.76318,
+            "lng": -90.05205
+          },
+          {
+            "lat": 38.76322,
+            "lng": -90.0501
+          },
+          {
+            "lat": 38.763,
+            "lng": -90.05008
+          },
+          {
+            "lat": 38.76296,
+            "lng": -90.05203
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 38.76296, "lng": -90.05203 },
-      { "lat": 38.76300, "lng": -90.05008 },
-      { "lat": 38.76250, "lng": -90.05012 },
-      { "lat": 38.76246, "lng": -90.05200 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 38.76296,
+          "lng": -90.05203
+        },
+        {
+          "lat": 38.763,
+          "lng": -90.05008
+        },
+        {
+          "lat": 38.7625,
+          "lng": -90.05012
+        },
+        {
+          "lat": 38.76246,
+          "lng": -90.052
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 148, "pano": "HynqAHaV96KQ1s-UvAkkJg", "hasCoverage": true },
-      "truckGate": { "heading": 89, "pano": "HynqAHaV96KQ1s-UvAkkJg", "hasCoverage": true }
+      "perimeter": {
+        "heading": 148,
+        "pano": "HynqAHaV96KQ1s-UvAkkJg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 89,
+        "pano": "HynqAHaV96KQ1s-UvAkkJg",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -102,5 +189,31 @@
     "entryLanes": "Entry driveway is a wide two-lane causeway with a center median; in/out share the same point.",
     "streetView": "Only Aug 2023 Street View coverage exists (pano HynqAHaV96KQ1s-UvAkkJg), captured during construction before the building was completed/occupied; it shows the Exeter Inner Park monument and graded earth, not the finished gate. Gate/guard-shack calls therefore rest on current satellite, hence medium confidence."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://corporate.walmart.com/about/samsclub/news/2023/11/30/sams-club-to-open-two-new-distribution-centers-in-st-louis-and-minneapolis-areas",
+        "date": "2023-11-30",
+        "type": "press",
+        "claim": "Sam's Club corporate announces new St. Louis-area (Edwardsville IL) DC/fulfillment center."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.thefreightway.com/sams-club-to-open-new-distribution-center-in-edwardsville/",
+        "date": "2023-12",
+        "type": "econ-dev",
+        "claim": "Sam's Club DC at 5710 Inner Park Drive, Gateway Commerce Center, ~370k sqft, opened January 2024."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Sam's Club DC at 5710 Inner Park Dr, Gateway Commerce Center, opened Jan 2024; read as self-operated. NOTE: a separate Saddle Creek 3PL building exists in the same park - do not conflate. Tenancy unconfirmed.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
