@@ -135,5 +135,24 @@
     "railServed": "A rail line runs along the south edge of the terminal corridor but no spur enters the FedEx truck yard; classified false.",
     "siteAreaAcres": "Derived from the perimeter box around the terminal complex; FedEx Freight's leased portion is a subset of this."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.fedexfreight.fedex.com/locationsCC.do?ccid=FTW&city=FORT+WORTH&state=TX&zipcd=76106-2223",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "FedEx Freight Priority service center FTW at 1909 Great Southwest Pkwy, Fort Worth TX 76106, manager and phone (operating)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FedEx Freight (LTL) DFW hub (FTW) at 1909 Great Southwest Pkwy (matches coords); live on locator; spun off June 2026 as FDXF but still operates; no closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

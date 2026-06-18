@@ -133,5 +133,31 @@
     "urbanRural": "Crossroads Distribution Center, Olive Branch MS - dense industrial park in the Memphis metro - Urban.",
     "buildingCount": "One long cross-dock building audited; the adjacent parallel building is a separate facility."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://chamber.olivebranchms.com/list/member/fedex-ground-454",
+        "date": "2024-01",
+        "type": "locator",
+        "claim": "FedEx Ground listed as operating logistics facility (8505 Nail Rd) in Olive Branch MS"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/co/Fedex/Jobs/-in-Olive-Branch,MS",
+        "date": "2026-04",
+        "type": "careers",
+        "claim": "Active FedEx Ground linehaul/CDL and ops hiring at Olive Branch MS hub Apr 2026"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Large FedEx Ground distribution hub (8505 Nail Rd); actively hiring 2026, no closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

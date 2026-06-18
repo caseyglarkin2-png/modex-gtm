@@ -146,5 +146,31 @@
     "_searchEffort": "Probed Richfield village, the Wheatley/Brecksville intersection, the South Wheatley triangle, and the Brecksville/Richfield-Township border industrial area (z15-z18) and walked Street View. The South Wheatley zone is largely undeveloped/wooded. Candidate large cross-dock distribution buildings exist near the Brecksville/Richfield border (~41.276,-81.615) but NONE showed FedEx branding or the distinctive ~144-van FedEx Ground P&D fleet, so the exact building could not be confirmed. The placeholder coords point to that candidate vicinity.",
     "_recommendation": "Roster address/coords need correction to the Richfield 44286 location (3245 Henry Rd / 3900 Brecksville Rd). A re-audit with corrected coordinates is required. All classification fields left at safe defaults and flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.truckinginfo.com/news/fedex-ground-opens-automated-facility-in-cleveland",
+        "date": "2024-01",
+        "type": "press",
+        "claim": "FedEx Ground largest most-automated Cleveland-area operation in Richfield OH, 229k sqft, 144 vans"
+      },
+      {
+        "tier": 3,
+        "url": "https://reichbros.com/portfolio/3201-columbia-rd-richfield-oh/",
+        "date": "2024-01",
+        "type": "locator",
+        "claim": "100% leased by FedEx Ground; lease guaranteed by FedEx Corp through Sept 2031"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Major automated FedEx Ground hub at I-77/I-80; lease to 2031, no closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

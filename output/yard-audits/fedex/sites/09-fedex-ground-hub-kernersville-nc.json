@@ -152,13 +152,39 @@
     "location": "Confirmed FedEx Ground regional sortation hub in Triad Business Park, ~493,000 sq ft on a ~125-acre site (opened 2011 at 410K sq ft, expanded 2015 to 493K sq ft). Roster coordinate landed directly on the hub building despite a 9.1 km geocode move from the listed Old Greensboro Rd address.",
     "truckGate": "Controlled truck gate confirmed on the north access road off the public road. z20 satellite shows a checkpoint with painted multi-lane markings and a small booth structure straddling the entrance lanes.",
     "guardShack": "Small guard-booth structure visible centered in the gate lanes in z20 imagery (footprint of ~1-2 vehicle spaces, set between in/out lanes). Standard FedEx Ground guarded hub entry.",
-    "drivewayLong": "Long curved private access road from the public road to the gate, then a deep paved approach into the yard — easily holds 3+ trucks.",
+    "drivewayLong": "Long curved private access road from the public road to the gate, then a deep paved approach into the yard \u2014 easily holds 3+ trucks.",
     "fastLaneOpportunity": "Wide multi-lane gate apron with painted lanes and ample paved width for an express bypass.",
-    "dockDoors": "Very large hub: dock doors on multiple wrapping faces of the central building, well over 50 — estimated ~200 total from z18 imagery. Honest overhead estimate.",
-    "dropArea": "Extensive trailer-parking rows surround the building on all sides, hundreds of drop trailers — clearly 50+. Estimated ~600 trailers visible / ~700 capacity.",
+    "dockDoors": "Very large hub: dock doors on multiple wrapping faces of the central building, well over 50 \u2014 estimated ~200 total from z18 imagery. Honest overhead estimate.",
+    "dropArea": "Extensive trailer-parking rows surround the building on all sides, hundreds of drop trailers \u2014 clearly 50+. Estimated ~600 trailers visible / ~700 capacity.",
     "urbanRural": "Edge-of-town industrial business park (Triad Business Park) outside Kernersville's dense fabric, surrounded by woods and other large warehouses. Classed Rural per the small-town-industrial guidance.",
     "entryLanes": "~2 inbound lanes at the gate from painted markings; exitLanes ~2. Medium confidence on exact lane count.",
     "siteAreaAcres": "~116 acres from the perimeter box; documented site is ~125 acres in Triad Business Park."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://businessfacilities.com/fedex-ground-cuts-ribbon-on-100-million-hub-in-kernersville-nc/",
+        "date": "2018-09",
+        "type": "press",
+        "claim": "FedEx Ground opened a $100M, 410,000 sq ft hub on 125 acres at 1544 Old Greensboro Rd, Kernersville NC"
+      },
+      {
+        "tier": 1,
+        "url": "https://journalnow.com/news/local/fedex-ground-buys-25-acres-near-massive-kernersville-facility/article_f9aa563c-6c06-11eb-8346-2fd54bc84814.html",
+        "date": "2021-02",
+        "type": "press",
+        "claim": "FedEx Ground bought ~25 adjacent acres for expansion of the Kernersville hub"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Large Ground hub in expansion mode; NC Network 2.0 closures hit Durham/Raleigh/Greensboro ship centers, not this hub.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

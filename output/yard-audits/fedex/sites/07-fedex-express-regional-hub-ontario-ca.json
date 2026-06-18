@@ -124,12 +124,31 @@
     "guardShack": "No FedEx guard booth identified at a property line; airport AOA badge/credential control implies remoteGs=true rather than a staffed FedEx shack.",
     "dockDoors": "FedEx press confirms 18 truck docks at the new facility; band 10-25.",
     "dropArea": "A long row of feeder trailers parked along the southern apron edge; ~25-50 trailer positions estimated from overhead imagery.",
-    "dropYard": "Trailers stage on the apron edge alongside ULD container rows rather than in a discrete fenced drop lot — dropYard=false.",
+    "dropYard": "Trailers stage on the apron edge alongside ULD container rows rather than in a discrete fenced drop lot \u2014 dropYard=false.",
     "multiStep": "Airport perimeter security followed by FedEx ramp control implies staged entry; no second booth directly imaged; flagged uncertain.",
     "multipleFacilities": "Single integrated sort/cargo building; the large warehouses south of Airport Drive are unrelated third-party logistics buildings, not part of this campus.",
     "scale": "No truck scale visible.",
     "railServed": "No rail spur enters the property.",
     "streetView": "Airport Drive panos (2018-2025) show a screen/retaining wall along the hub's south edge with FedEx aircraft visible behind it; the hub interior is not street-accessible."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.prnewswire.com/news-releases/new-fedex-facility-shines-at-ontario-international-airport-301176874.html",
+        "date": "2020-11",
+        "type": "press",
+        "claim": "FedEx Express opened a $100M, 251,000 sq ft sort complex (9 wide-body gates, 18 truck docks) at Ontario Intl"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Durable Express air hub at ONT; $100M facility opened 2020, no closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -147,15 +147,41 @@
   "fieldNotes": {
     "location": "Confirmed FedEx Ground regional sortation hub at 6000 Riverside Dr, Keasbey NJ (Woodbridge Township), a 24/7 NY/NJ-metro hub on the Raritan River. Roster coordinate (GEOMETRIC_CENTER, moved 1.2 km) landed correctly on the FedEx complex. FedEx Ground branding directly confirmed on the office building and on numerous trailers in Street View.",
     "campus": "The property is a large FedEx Ground campus with two distinct large sort-building clusters (a northwest building with a big solar roof and a southeast building cluster), each with continuous dock banks and surrounding trailer fields, plus a central office building with a curved entry canopy. multipleFacilities marked true.",
-    "truckGate": "FedEx trailer yard is enclosed by chain-link fencing (confirmed in 2019/2021 Street View — fenced trailer yard behind the office building). Controlled private campus access off Riverside Dr. Counted as a controlled truck gate.",
-    "guardShack": "A guard booth could not be isolated in satellite — the truck gate is internal to the secured campus and Street View (2019/2021 vintage) does not penetrate it. Marked true with medium confidence: a fenced FedEx Ground metro hub of this scale is universally guard-staffed at its truck entrance. Flagged in uncertainFields.",
-    "truckGateCount": "Likely 2 — separate employee-vehicle and truck-yard entrances, plus possibly a gate per building cluster; exact count is an estimate.",
+    "truckGate": "FedEx trailer yard is enclosed by chain-link fencing (confirmed in 2019/2021 Street View \u2014 fenced trailer yard behind the office building). Controlled private campus access off Riverside Dr. Counted as a controlled truck gate.",
+    "guardShack": "A guard booth could not be isolated in satellite \u2014 the truck gate is internal to the secured campus and Street View (2019/2021 vintage) does not penetrate it. Marked true with medium confidence: a fenced FedEx Ground metro hub of this scale is universally guard-staffed at its truck entrance. Flagged in uncertainFields.",
+    "truckGateCount": "Likely 2 \u2014 separate employee-vehicle and truck-yard entrances, plus possibly a gate per building cluster; exact count is an estimate.",
     "drivewayLong": "Long private campus access roads and deep paved internal yard approaches.",
     "fastLaneOpportunity": "Very large paved gate/yard aprons with abundant bypass-lane width.",
-    "dockDoors": "Two large sort buildings with continuous dock banks and hundreds of trailers backed in — far over 50, estimated ~320 total across both buildings. Honest overhead estimate.",
-    "dropArea": "Extensive trailer-parking fields surround both buildings — hundreds of drop trailers, clearly 50+. Estimated ~750 visible / ~900 capacity.",
-    "urbanRural": "Dense NY/NJ-metro industrial corridor (Woodbridge Township) — classed Urban.",
+    "dockDoors": "Two large sort buildings with continuous dock banks and hundreds of trailers backed in \u2014 far over 50, estimated ~320 total across both buildings. Honest overhead estimate.",
+    "dropArea": "Extensive trailer-parking fields surround both buildings \u2014 hundreds of drop trailers, clearly 50+. Estimated ~750 visible / ~900 capacity.",
+    "urbanRural": "Dense NY/NJ-metro industrial corridor (Woodbridge Township) \u2014 classed Urban.",
     "siteAreaAcres": "~125 acres from the perimeter box (developed FedEx campus footprint); no published figure found, estimated from imagery."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://local.fedex.com/en-us/nj",
+        "date": "2026-05",
+        "type": "locator",
+        "claim": "FedEx Ground distribution center, 6000 Riverside Dr, Keasbey NJ 08832, open 24h"
+      },
+      {
+        "tier": 1,
+        "url": "https://careers.fedex.com/package-handler-part-time-warehouse-like/job/P25-95094-121",
+        "date": "2025-11",
+        "type": "careers",
+        "claim": "FedEx Ground package-handler req at Keasbey/Woodbridge NJ hub (6000 Riverside Dr)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FedEx Ground Woodbridge hub at 6000 Riverside Dr; active 2025-2026 hiring, no closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

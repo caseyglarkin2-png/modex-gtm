@@ -119,5 +119,24 @@
     "entryLanes": "Street View shows multiple striped lanes through the checkpoint; ~2 inbound / 2 outbound estimated, flagged uncertain.",
     "urbanRural": "Inside the AllianceTexas industrial development at a major-metro airport (DFW); Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.glassdoor.com/Job/fort-worth-tx-fedex-jobs-SRCH_IL.0,13_IC1139993_KO14,19.htm",
+        "date": "2025-12",
+        "type": "locator",
+        "claim": "Active FedEx sort/handler reqs at Fort Worth corroborate the Southwest Regional Hub at Perot Field/Alliance"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FedEx Express Southwest Regional Hub at Alliance, ~800 staff 24/7; no closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -110,5 +110,24 @@
     "siteAreaAcres": "~30 acres per PGAL/GRAEF FedEx Cargo Distribution Center Expansion project descriptions (17 acres of site development on a 30-acre site).",
     "railServed": "No rail spur; airport air-cargo facility."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://newsroom.fedex.com/newsroom/global/fedex-express-completes-major-expansion-at-miami-international-airport",
+        "date": "2021-12",
+        "type": "press",
+        "claim": "FedEx Express completed a $72.2M expansion of its MIA air cargo hub; Americas gateway to Latin America"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Durable Express Americas gateway at MIA; expanded 2021, new routes 2024, no closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

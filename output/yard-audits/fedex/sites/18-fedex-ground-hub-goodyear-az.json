@@ -130,5 +130,24 @@
     "multipleFacilities": "FedEx occupies a single building (Building 2); the other Prologis park buildings are separate tenants - not a FedEx campus.",
     "buildingCount": "One FedEx cross-dock building (~425K sq ft) confirmed by FedEx logo on the office front in 2024 Street View."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://inbusinessphx.com/growth-enterprise/fedex-opens-phoenix-area-facility",
+        "date": "2021-11",
+        "type": "press",
+        "claim": "FedEx Ground opened 425,000 sf regional sortation center at 890 S 143rd Ave, Goodyear (Prologis), 7,500 pkgs/hr"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FedEx Ground Goodyear regional sortation center at 890 S 143rd Ave (Prologis lease, matches coords); opened 2021, still hiring, no closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

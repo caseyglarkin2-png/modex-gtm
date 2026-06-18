@@ -133,5 +133,24 @@
     "railServed": "No rail spur enters the property; classified false.",
     "siteAreaAcres": "Derived from the perimeter box (~534m x ~650m), ~86 acres."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.fedexfreight.fedex.com/locationsAll.do?opco=&shipperCountryCode=US&shipperStateList=MO",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "FedEx Freight maintains a St. Louis-area LTL service center in the Earth City/Hazelwood (63045) corridor"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FLAG: FedEx Freight (LTL, FDXF since June 2026) runs the St. Louis-area LTL hub in the Earth City corridor; locator confirms metro STL presence but exact street address at the coord not pinned to a dated Tier-1 page; no closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

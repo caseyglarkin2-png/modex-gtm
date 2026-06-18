@@ -128,7 +128,7 @@
     "siteConfirmation": "Roster point lands on the main sort building of the FedEx Express National Hub at Indianapolis International Airport. Confirmed via satellite (one very large dark-roofed sort building with airside aircraft positions and extensive ULD/air-container staging) and web research (Encyclopedia of Indianapolis / FedEx aviation page: built 1988, second-largest cargo facility in the FedEx Express system, ~6,000 employees, ~650 flights/month).",
     "truckGate": "Web research explicitly references a 'Truck Gate' and a 'South Perimeter Security Station' controlling access to the hub. The facility sits entirely inside the secured airport perimeter; the support/parking area connects to the airside hub only through the staffed security station. Internal roads have no public Street View coverage (secured property).",
     "guardShack": "The South Perimeter Security Station is a staffed checkpoint controlling vehicle entry into the secured airside hub.",
-    "remoteGs": "False — entry is staffed/screened, not kiosk-only.",
+    "remoteGs": "False \u2014 entry is staffed/screened, not kiosk-only.",
     "dockDoors": "Air-to-ground hub; landside truck/road-feeder docks line the sort building face. Door count is an estimate from imagery, well into the 50+ band.",
     "dropArea": "Z20 imagery shows hundreds of ULD air containers and dollies plus straight trucks and trailers staged along the landside dock face; trailer (no-tractor) drop stalls estimated in the 25-50 band.",
     "multipleFacilities": "Campus includes the main sort building, several support/office buildings, and maintenance structures.",
@@ -136,5 +136,24 @@
     "entryLanes": "Lane counts at the security station could not be directly observed (no Street View on internal roads); estimated.",
     "railServed": "No rail spur into the property; airside facility."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.ind.com/about/media/media-releases/mayor-airport-officials-announce-federal-express-hub-expansion",
+        "date": "2021-04",
+        "type": "press",
+        "claim": "FedEx Express National Hub, 2nd-largest cargo facility, 7-year $1.5B expansion at IND"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Second-largest Express hub in active multi-year expansion at IND; no closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

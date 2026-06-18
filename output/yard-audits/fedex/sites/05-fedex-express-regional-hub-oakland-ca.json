@@ -129,5 +129,24 @@
     "urbanRural": "Major-metro airport (Oakland) in the dense Bay Area; Urban.",
     "confidenceNote": "Medium overall: facility positively identified (FedEx freighters on the ramp are conclusive), but the truck-gate and guard-shack specifics could not be directly imaged - the FedEx access point is inside the secured airport and not covered by public Street View. Gate/guard-shack calls are inferred and flagged."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://local.fedex.com/en-us/ca/oakland/oakrt",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "FedEx Air Freight Center, 9190 Edes Ave Oakland 94603, active air freight at OAK regional hub"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Flagged and cleared: June 2025 Network 2.0 closure was the Pardee Dr Ship Center, not the OAK airport air hub which remains locator-listed.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

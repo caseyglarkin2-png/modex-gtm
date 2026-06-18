@@ -136,5 +136,24 @@
     "multipleFacilities": "FedEx occupies a single cross-dock building plus its drop yard; the separate white building to the NE is a different tenant.",
     "buildingCount": "One FedEx cross-dock building; confirmed by FedEx-branded trailers and a FedEx dropbox/mailbox in 2022 Street View along the access road."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.fedex.com/package-handler-warehouse-like/job/P25-95252-55",
+        "date": "2025-11",
+        "type": "careers",
+        "claim": "FedEx Ground package-handler req at Charlotte NC hub, 6604 CSX Way, CSX Industrial Park 28214"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FedEx Ground Charlotte hub at 6604 CSX Way (matches coords); active 2025-2026 reqs; NC Network 2.0 closure was Greensboro, not Charlotte.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

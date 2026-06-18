@@ -134,5 +134,24 @@
     "postGateStaging": "Large paved apron inside the gate before the dock faces for queuing.",
     "siteAreaAcres": "Derived from perimeter box (~612 m N-S x ~718 m E-W), discounted for the irregular footprint and wooded N buffer."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.fedex.com/package-handler-warehouse-like/job/P25-95229-49",
+        "date": "2025-11",
+        "type": "careers",
+        "claim": "FedEx Ground package-handler req at Nashville TN hub (Whites Creek area)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FedEx Ground Nashville hub (Whites Creek, matches coords); active 2025 reqs; only TN Network 2.0 closure was Blountville ship center, not Nashville.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -136,5 +136,24 @@
     "entryLanes": "Estimated 2 inbound lanes at the controlled gate; exact count not fully resolvable from overhead imagery due to privacy fencing.",
     "railServed": "A rail line runs along the east edge of the property but no spur enters the FedEx yard; classified false."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.fedexfreight.fedex.com/locationsCC.do?ccid=NEM&city=MEMPHIS&zipcd=38116",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "FedEx Freight service center NEM at 3050 Carrier St, Memphis TN 38116, manager and phone listed (operating)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FedEx Freight (LTL) Memphis terminal (NEM) at 3050 Carrier St; live on locator; spun off June 2026 as FDXF but still operates; no closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

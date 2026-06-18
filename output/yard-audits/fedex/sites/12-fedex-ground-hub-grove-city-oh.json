@@ -135,5 +135,24 @@
     "multipleFacilities": "FedEx occupies one long building; adjacent big-box warehouses are separate tenants, not part of the FedEx campus.",
     "buildingCount": "Single FedEx cross-dock building; FedEx branding confirmed on the building face in 2025 Street View."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://truckmap.com/place/fedex-ground-6120-s-meadows-dr-grove-city-oh-43123-usa",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "FedEx Ground 6120 S Meadows Dr, Grove City OH (Columbus area) corroborated as an active facility"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FLAG: FedEx Ground Columbus-area hub at the coords; current directory corroboration only, no dated Tier-1, no closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

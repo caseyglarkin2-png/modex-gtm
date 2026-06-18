@@ -133,14 +133,33 @@
   "fieldNotes": {
     "location": "Confirmed FedEx Ground regional sortation hub at 11825 Newgate Blvd, Newgate Industrial Park, Hagerstown MD. 325,000 sq ft on a 114-acre site, ~22,500 packages/hour, one of FedEx Ground's centralized distribution hubs. Roster coordinate moved 8.4 km (GEOMETRIC_CENTER geocode) but landed correctly on the hub. FedEx Ground branding directly confirmed on the building face and on dozens of trailers in Street View along Newgate Blvd.",
     "truckGate": "Site is fully enclosed by a chain-link perimeter fence (confirmed in multiple 2024 Street View frames along Newgate Blvd). Single controlled private access road off the Newgate Blvd intersection, with painted dashed lane markings on the approach and a sign monument. Counted as a controlled truck gate.",
-    "guardShack": "A guard booth could not be isolated in satellite imagery at the entry point (the checkpoint sits well back from the public road and Street View does not penetrate the private access drive). Marked true with medium confidence — a fenced FedEx Ground regional hub of this scale is universally guard-staffed at the main truck entrance.",
-    "drivewayLong": "Long private access road from the public-road intersection, then a deep paved approach into the yard before the docks — holds 3+ trucks.",
+    "guardShack": "A guard booth could not be isolated in satellite imagery at the entry point (the checkpoint sits well back from the public road and Street View does not penetrate the private access drive). Marked true with medium confidence \u2014 a fenced FedEx Ground regional hub of this scale is universally guard-staffed at the main truck entrance.",
+    "drivewayLong": "Long private access road from the public-road intersection, then a deep paved approach into the yard before the docks \u2014 holds 3+ trucks.",
     "fastLaneOpportunity": "Wide multi-lane paved gate apron with room for an express bypass.",
-    "dockDoors": "Large hub: continuous dock banks with FedEx trailers backed in along multiple building faces, well over 50 — estimated ~160 total from z17-z19 imagery.",
-    "dropArea": "Hundreds of trailers in marked parking rows on the west, north and east of the building — clearly 50+. Estimated ~400 visible / ~500 capacity.",
-    "urbanRural": "Edge-of-town industrial park surrounded by farmland and woods west of Hagerstown — classed Rural per small-town-industrial guidance.",
+    "dockDoors": "Large hub: continuous dock banks with FedEx trailers backed in along multiple building faces, well over 50 \u2014 estimated ~160 total from z17-z19 imagery.",
+    "dropArea": "Hundreds of trailers in marked parking rows on the west, north and east of the building \u2014 clearly 50+. Estimated ~400 visible / ~500 capacity.",
+    "urbanRural": "Edge-of-town industrial park surrounded by farmland and woods west of Hagerstown \u2014 classed Rural per small-town-industrial guidance.",
     "entryLanes": "~2 inbound / ~2 outbound estimated from the access-road width; medium confidence.",
     "siteAreaAcres": "~115 acres from the perimeter box; documented site is 114 acres."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.mhlnews.com/archive/article/22033086/fedex-ground-continues-national-expansion-with-new-hagerstown-maryland-hub",
+        "date": "2005-10",
+        "type": "press",
+        "claim": "FedEx Ground opened a 325,000 sq ft, $70M hub on 114 acres in Hagerstown MD, one of 29 centralized distribution hubs"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FLAG: durable Ground distribution hub, no closure signal, but cleanest Tier-1 positive is dated 2005; no recent dated press located.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

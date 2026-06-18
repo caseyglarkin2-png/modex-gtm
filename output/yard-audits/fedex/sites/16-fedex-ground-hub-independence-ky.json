@@ -139,5 +139,31 @@
     "buildingCount": "One large cross/H-shaped sortation building plus a small ancillary structure; counted as 2.",
     "siteAreaAcres": "Derived from perimeter box (~612 m N-S x ~1169 m E-W), discounted for the irregular L-shaped property footprint."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.stantec.com/en/projects/united-states-projects/f/fedex-northern-kentucky-hub",
+        "date": "2024-06",
+        "type": "press",
+        "claim": "FedEx Northern Kentucky (Independence, 11000 Toebben Dr) Ground hub + adjacent 355,000 sf expansion"
+      },
+      {
+        "tier": 1,
+        "url": "https://careers.fedex.com/package-handler-part-time-warehouse-like/job/P25-95254-32",
+        "date": "2025-11",
+        "type": "careers",
+        "claim": "FedEx Ground package-handler req at Independence KY (NOKY) hub, 11000 Toebben Dr"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FedEx Ground NOKY hub at 11000 Toebben Dr; active 2025 reqs plus ongoing expansion, no closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -132,5 +132,24 @@
     "scale": "No truck scale clearly identified - flagged uncertain.",
     "buildingCount": "2 - main LTL cross-dock terminal plus truck-maintenance shop."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://local.fedex.com/en-us/md/hagerstown",
+        "date": "2024-01",
+        "type": "locator",
+        "claim": "FedEx Freight HGR terminal at 16114 Transportation Circle, Hagerstown MD"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FedEx Freight (LTL) HGR, largest FedEx Freight terminal in NA; spun off June 2026 as FDXF but still operates; no closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

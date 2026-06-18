@@ -157,7 +157,27 @@
     "truckGate": "No perimeter fencing or controlled gate observed; the industrial park has open road access. Set false (uncertain).",
     "dockDoors": "Big-box warehouse buildings in the park have dock doors and some trailers backed in along the central drive aisle; banded 10-25 as a rough best-effort estimate for any single tenant, not a confirmed FedEx count.",
     "urbanRural": "Hodgkins/McCook is within the dense Chicago metro industrial fabric; classified Urban.",
-    "recommendation": "Flag for human review. The correct active FedEx Freight Chicago-area facility is most likely the Bolingbrook (BOL) service center at 310 E Crossroads Pkwy, Bolingbrook IL 60440 — the roster entry/address should be verified and possibly re-pointed there."
+    "recommendation": "Flag for human review. The correct active FedEx Freight Chicago-area facility is most likely the Bolingbrook (BOL) service center at 310 E Crossroads Pkwy, Bolingbrook IL 60440 \u2014 the roster entry/address should be verified and possibly re-pointed there."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.fedexfreight.fedex.com/locationsAll.do?opco=&shipperCountryCode=US&shipperStateList=IL",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "FedEx Freight IL service-center roster lists CGX Summit-Argo (5101 S Lawndale), CGT Chicago Heights, BOL Bolingbrook, but NONE in Hodgkins"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "No FedEx Freight LTL terminal at the Hodgkins coordinate; the real Chicago FedEx Freight hub is CGX Summit-Argo (~7mi east). Audit itself flagged FACILITY NOT POSITIVELY IDENTIFIED (generic multi-tenant industrial park, no FedEx signage).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "rejectionReason": "Misgeocoded/phantom: no FedEx Freight facility at 41.7912,-87.8567 (UPS CACH / BNSF intermodal corridor); FedEx Freight locator lists no Hodgkins center. Real Chicago hub is CGX Summit-Argo."
+  }
 }

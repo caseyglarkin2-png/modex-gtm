@@ -156,5 +156,24 @@
     "entryLanes": "Entry/exit lane counts estimated at 2 each from the wide entry driveway; not crisply resolved.",
     "trailersVisible": "Overhead count across all drop yards and dock aprons is approximate (~420)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://local.fedex.com/en-us/pa/middletown",
+        "date": "2026-05",
+        "type": "locator",
+        "claim": "FedEx Ground facility at 111 Fulling Mill Rd, Middletown PA listed as operating"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FLAG: Ground hub at 111 Fulling Mill Rd is distinct from the closing Express Ship Center at 200 Fulling Mill Rd (closes Mar 2026); Ground site active but flagged for the adjacent Network 2.0 closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

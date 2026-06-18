@@ -129,5 +129,24 @@
     "buildingCount": "Main long LTL cross-dock building plus a separate shop/maintenance building on the SE; 2 buildings.",
     "entryLanes": "Single combined entry/exit driveway through the gate; lane split not crisply resolved."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.fedexfreight.fedex.com/maps/CMH.pdf",
+        "date": "2024-01",
+        "type": "locator",
+        "claim": "FedEx Freight service center CMH at 10 Commerce Pkwy, West Jefferson OH; Priority+Economy dual hub"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FedEx Freight (LTL) CMH dual-hub (1 of 12); FedEx Freight spun off June 2026 as FDXF but still operates this terminal; no closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -146,5 +146,24 @@
     "railServed": "No rail spur enters the terminal yard; classified false.",
     "siteAreaAcres": "Derived from the perimeter box around the terminal complex; FedEx Freight's portion is a subset."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.fedexfreight.fedex.com/locationsCC.do?ccid=STK",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "FedEx Freight service center STK at 4520 S Hwy 99 Frontage Rd, Stockton CA 95215, manager and phone (operating)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FedEx Freight (LTL) Central Valley terminal (STK) at 4520 S Hwy 99 Frontage Rd (matches coords); live on locator; spun off June 2026 as FDXF but still operates; no closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

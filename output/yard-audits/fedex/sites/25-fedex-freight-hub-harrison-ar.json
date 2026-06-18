@@ -143,5 +143,24 @@
     "postGateStaging": "Large internal paved yard could serve as a post-gate holding area; inferred, medium confidence.",
     "siteAreaAcres": "Derived from the perimeter box; includes corporate offices, large employee parking, ponds, and lawns in addition to the truck-operations area."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.fedexfreight.fedex.com/locationsCC.do?ccid=HRO&city=HARRISON&state=AR&zipcd=72601-2004",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "FedEx Freight service center HRO at 2200 Forward Dr, Harrison AR 72601, manager and phone listed (operating)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FedEx Freight (LTL) HQ-city major hub at 2200 Forward Dr; live on locator; spun off June 2026 as FDXF but still operates; 2023/24 closures hit small AR feeders, not Harrison.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

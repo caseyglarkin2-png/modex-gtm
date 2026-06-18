@@ -106,12 +106,31 @@
     "siteConfirmation": "Roster point lands on the main sort building of the FedEx Express World Hub on the west side of Memphis International Airport. Confirmed via satellite (multiple sort buildings, 100+ parked freighter aircraft positions, ULD/container staging acres) and web research (FedEx newsroom: largest sort facility in the global network, ~940 acres, 171 aircraft gates, 13,000 team members, 84 miles of conveyor).",
     "truckGate": "Hardened secured campus. FedEx Main Screening Facility (Flintco-built, 44,000 SF) is the main controlled point of entry. Street View shows steel anti-ram palisade fencing with outriggers, chain-link with coiled razor wire, Jersey-barrier lane channelization on internal roads, and a canopied vehicle checkpoint with multiple lanes.",
     "guardShack": "Dedicated 44,000 SF Main Screening Facility staffed checkpoint = staffed guard facility (well beyond a simple booth). Multiple manned checkpoints exist for the 5-mile perimeter.",
-    "multiStep": "Vehicle screening checkpoint at perimeter, then secondary controlled access into airside operations areas — multi-stage controlled access.",
+    "multiStep": "Vehicle screening checkpoint at perimeter, then secondary controlled access into airside operations areas \u2014 multi-stage controlled access.",
     "dockDoorCount": "This is an air-to-ground hub; primary cargo transfer is aircraft-side. Landside truck docks for road feeder vehicles exist but are dispersed across sort buildings; door count is an estimate from imagery (50+ band).",
     "dropArea": "Extensive road feeder vehicle / trailer staging visible between sort buildings and in landside lots; well into 50+ band. Counts approximate.",
     "multipleFacilities": "Campus of 8+ large buildings: original superhub sort building, new 1.3M sq ft automated sort facility (2024), maintenance hangars, screening facility, support/office buildings.",
     "siteAreaAcres": "940 acres per FedEx newsroom; perimeter box is an approximation of the core landside operations footprint and the published campus figure was used.",
     "railServed": "No rail spur into the property; airside facility."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://newsroom.fedex.com/newsroom/global-english/fedex-unveils-new-automated-sorting-facility-at-memphis-world-hub",
+        "date": "2024-10",
+        "type": "press",
+        "claim": "Memphis World Hub is the 940-acre heart of the global network; new Secondary 25 sort facility operational"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Global Express superhub; dated FedEx Tier-1 press Oct 2024, no closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

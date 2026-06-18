@@ -136,5 +136,31 @@
     "railServed": "No rail spur enters the property; classified false.",
     "siteAreaAcres": "Derived from the perimeter box (~813m x ~602m); large but consistent with one of the largest break-bulk hubs in the FedEx Freight network."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://local.fedex.com/ga/conley/freight-ATL/",
+        "date": "2025-01",
+        "type": "locator",
+        "claim": "FedEx Freight ATL service center/transit hub at 4290 Thurman Rd, Conley GA"
+      },
+      {
+        "tier": 1,
+        "url": "https://careers.fedex.com/supv-operations/job/P25-178824-1",
+        "date": "2025-01",
+        "type": "careers",
+        "claim": "FedEx Freight Supv-Operations req at 4290 Thurman Rd, Conley GA"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FedEx Freight (LTL) ATL Atlanta hub at 4290 Thurman Rd; active 2025 reqs; spun off June 2026 as FDXF but still operates; no closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

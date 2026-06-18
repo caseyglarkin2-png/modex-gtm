@@ -139,5 +139,24 @@
     "postGateStaging": "Paved holding area inside the gate before the dock aprons.",
     "buildingCount": "Main sort building, a secondary NW dock building, plus 1-2 small ancillary structures (gatehouse, maintenance)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://truckmap.com/place/fedex-drop-box-510-industrial-dr-lewisberry-pa-17339-usa",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "FedEx Ground facility at 510 Industrial Dr, Lewisberry PA (Harrisburg Hub) corroborated as active"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FLAG: FedEx Ground Harrisburg Hub at 510 Industrial Dr; only Tier-3 corroborating sources (no dated Tier-1 press), but no closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -124,5 +124,24 @@
     "urbanRural": "Major-metro airport (Newark) in dense NY/NJ fabric; Urban.",
     "confidenceNote": "Medium overall: facility positively identified, but truck-gate / guard-shack specifics could not be directly imaged because the FedEx access point is inside the secured airport and not covered by public Street View."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.panynj.gov/airports/en/air-cargo/newark.html",
+        "date": "2025-01",
+        "type": "press",
+        "claim": "FedEx cargo complex in the Newark Liberty air cargo area; EWR is a FedEx Express regional hub"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FedEx Express regional hub at EWR cargo area; named current regional hub, no closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

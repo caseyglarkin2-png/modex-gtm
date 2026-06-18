@@ -103,15 +103,34 @@
   ],
   "fieldNotes": {
     "location": "FedEx Express Mid-Atlantic regional air hub on the secured airside of Piedmont Triad International Airport (GSO), Greensboro NC. Roster geocode (36.1043,-79.9838) landed ~4 km west on unrelated warehouses; corrected via web research (hub opened June 2009, ~1M sq ft, 24,000 pkg/hr) and satellite confirmation of the main sort building plus aircraft apron.",
-    "truckGate": "No street-level imagery of a dedicated FedEx truck gate is available — the hub sits inside the airport AOA, so vehicle access is controlled at airport-wide SIDA security checkpoints rather than a single FedEx booth. Marked truckGate=true (controlled access exists) but this is an airport-security control, not a typical yard gate; flagged uncertain.",
+    "truckGate": "No street-level imagery of a dedicated FedEx truck gate is available \u2014 the hub sits inside the airport AOA, so vehicle access is controlled at airport-wide SIDA security checkpoints rather than a single FedEx booth. Marked truckGate=true (controlled access exists) but this is an airport-security control, not a typical yard gate; flagged uncertain.",
     "guardShack": "No discrete FedEx guard booth identified at a property entrance in satellite imagery; airport AOA access is badge/credential controlled, hence remoteGs=true rather than guardShack.",
-    "multiStep": "Airport access (perimeter security) followed by FedEx ramp control implies a multi-stage entry, but no second booth is directly visible — flagged uncertain.",
+    "multiStep": "Airport access (perimeter security) followed by FedEx ramp control implies a multi-stage entry, but no second booth is directly visible \u2014 flagged uncertain.",
     "dockDoors": "Counted ~25-50 landside cargo dock positions along the southwest face of the sort building (canopied bays); airside cargo wings handle container-to-aircraft transfer. Estimate from overhead imagery.",
     "dropArea": "Feeder trailers parked along apron/dock edge; ~10-25 trailer positions visible. Approximate.",
-    "multipleFacilities": "Campus has the main sort building, a separate NW office building, and airside cargo wings — multiple distinct structures.",
+    "multipleFacilities": "Campus has the main sort building, a separate NW office building, and airside cargo wings \u2014 multiple distinct structures.",
     "scale": "No truck scale visible on airport property.",
     "railServed": "No rail spur enters the property.",
     "streetView": "Available Street View on adjacent airport service roads (2015/2023 panos) shows only open field/airport land; the hub interior is not street-accessible."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://flyfrompti.com/facts-about-the-fedex-expansion-at-piedmont-triad-international-airport/",
+        "date": "2024-01",
+        "type": "press",
+        "claim": "FedEx Express Mid-Atlantic Hub on a 165-acre eight-building complex at PTI, 1,000+ workers"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FedEx Express Mid-Atlantic air hub at PTI; the Network 2.0 closure was a station ~2mi away, not the airport hub.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
