@@ -139,5 +139,31 @@
     "railServed": "A rail line runs along the SW edge between Hwy 42 and the property, but no spur is visible entering the DC — set false.",
     "siteAreaAcres": "130 acres per the Monmouth REIT acquisition disclosure (authoritative)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://corporate.homedepot.com/news/company/new-distribution-center-creates-over-700-jobs-speeds-replenishment",
+        "date": "2020-12-16",
+        "type": "press",
+        "claim": "Home Depot opened a new distribution center in Locust Grove GA, ~700 jobs."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+        "date": "2026-06",
+        "type": "DC list",
+        "claim": "RDC 5250 at 3150 Hwy 42 South, Locust Grove GA 30248."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active HD RDC 5250 at 3150 GA-42; recent company announcement; 20-yr lease; no closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

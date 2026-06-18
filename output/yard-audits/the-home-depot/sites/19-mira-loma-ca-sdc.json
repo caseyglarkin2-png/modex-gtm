@@ -146,5 +146,31 @@
     "truckGateCount": "Estimated 2 truck entrances (one per long-face yard); not all positively confirmed.",
     "dockDoorCount": "~360 doors estimated across both faces of this ~700m-long building; approximate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.homedepot.com/job/6961510/warehouse-associate-mira-loma-ca/",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active HD warehouse-associate role at 11650 Venture Drive, Mira Loma CA."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+        "date": "2026-06",
+        "type": "DC list",
+        "claim": "SDC DCs 5556/5557/5558/5559/5645 at 11650 Venture Drive, Mira Loma CA 91752."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Multi-building SDC complex at 11650 Venture Dr (Jurupa Valley/Mira Loma, Inland Empire); DC list + live company hiring; no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

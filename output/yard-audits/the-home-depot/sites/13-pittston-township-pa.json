@@ -125,5 +125,31 @@
     "entryLanes": "Estimated from imagery; lane count at the gate not fully resolved.",
     "trailersVisible": "Approximate count from z17-z19 imagery across dock faces and drop yard."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+        "date": "2026-06",
+        "type": "DC list",
+        "claim": "RDC 5089 at 300 Enterprise Way; IFC XD09 on the same campus, Pittston Township PA 18640."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.pittstonchamber.info/list/member/home-depot-the-pittston-518",
+        "date": "2025",
+        "type": "chamber listing",
+        "claim": "The Home Depot warehouse & distribution member, Pittston PA."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "RDC 5089 + co-located IFC XD09 at 300 Enterprise Way; active chamber membership; no closure/WARN.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

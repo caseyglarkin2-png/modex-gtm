@@ -143,5 +143,31 @@
     "scale": "No truck scale visible in satellite imagery.",
     "siteAreaAcres": "Derived from perimeter box (~820m x ~360m developed footprint within the Gateway business park)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+        "date": "2026-06",
+        "type": "DC list",
+        "claim": "RDC 5084 at 500 Gateway Blvd, Monroe OH 45050 (IFC XD05 same address)."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.daytondailynews.com/business/home-depot-distribution-center-opens/RRAF4D0FMScx4CNgoUbGyI/",
+        "date": "2011",
+        "type": "press",
+        "claim": "HD opened a 657,600 sq ft RDC at 500 Gateway Blvd, Monroe OH (Corridor 75 Premier Logistics Park)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "HD RDC 5084 at 500 Gateway Blvd, Monroe 45050; coords match; active DC, no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

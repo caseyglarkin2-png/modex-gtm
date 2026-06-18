@@ -130,5 +130,31 @@
     "urbanRural": "Perris is within the Inland Empire metro fabric; dense residential subdivisions border the site to the east — Urban.",
     "fastLaneOpportunity": "Wide gate apron and generous paved width support adding an express lane."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://corporate.homedepot.com/news/company/california-direct-fulfilmment-center-opens-support-online-business",
+        "date": "2014-10-02",
+        "type": "press",
+        "claim": "859,000 sq ft Home Depot Direct Fulfillment Center opened in Perris CA, second of three DFCs."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.constructiondive.com/news/home-depot-opens-giant-fulfillment-center-in-california/317697/",
+        "date": "2014",
+        "type": "trade press",
+        "claim": "~850,000 sq ft HD fulfillment center at 350 W Markham St, Perris, serving West Coast online, with BNSF rail."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "HD corporate newsroom confirms the Perris DFC (350 W Markham St); large rail-served e-commerce building; no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

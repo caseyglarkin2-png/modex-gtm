@@ -124,5 +124,38 @@
     "urbanRural": "Edge-of-Winchester industrial park beside I-81 with adjacent farmland and a mobile-home neighborhood; Rural per rubric.",
     "geocode": "Roster lat/lng geocode had an 8493 m offset; verified pin still lands on the correct HD RDC building. ZIP corrected to 22603 (roster says 22602)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.homedepot.com/job/22299733/logistics-engineer-rdc-engineering-winchester-va",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Current Home Depot \"Logistics Engineer, RDC Engineering - Winchester VA\" posting - explicit active RDC."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+        "date": "2026-06",
+        "type": "DC list",
+        "claim": "RDC 5030 at 480 Park Center Drive, Winchester VA 22603."
+      },
+      {
+        "tier": 2,
+        "url": "https://oceanwestcp.com/properties/home-depot-distribution-center/",
+        "date": "2022-09",
+        "type": "CRE owner listing",
+        "claim": "466,000 SF Rapid Deployment Center leased to Home Depot."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active RDC 5030 at 480 Park Center Dr; HD's own RDC-Engineering Winchester job plus landlord listing confirm current operation; leased.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

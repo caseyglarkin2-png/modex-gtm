@@ -132,5 +132,31 @@
     "postGateStaging": "Wide paved truck courts inside the fence provide ample post-gate holding before the dock doors.",
     "scale": "No truck scale identified in the truck path."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.homedepot.com/job/21920226/dc-production-planning-manager-lathrop-sdc-lathrop-ca/",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Live \"DC Production Planning Manager - Lathrop SDC\" posting (HD names the SDC directly)."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.commercialsearch.com/news/centerpoint-sells-central-valley-asset-for-85m/",
+        "date": "2025-03",
+        "type": "CRE trade press",
+        "claim": "935,120 SF Lathrop facility, sole tenant Home Depot DC since 2007, sold to investor for $85M (HD remains tenant)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Lathrop SDC 5363 at 18300 Harlan Rd; HD careers names the SDC; HD sole tenant since 2007, building sold 2025 but HD stays - leased.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

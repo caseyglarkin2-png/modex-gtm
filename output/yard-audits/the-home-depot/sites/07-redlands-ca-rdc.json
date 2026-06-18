@@ -158,5 +158,31 @@
     "siteAreaAcres": "Derived from the perimeter box (~700 m x ~330 m developed footprint).",
     "buildingCount": "Single very large RDC building; neighboring DC buildings are separate properties and excluded."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.homedepot.com/job/6961479/warehouse-associate-redlands-ca/",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Current Home Depot Warehouse Associate posting in Redlands CA - active DC staffing."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+        "date": "2026-06",
+        "type": "DC list",
+        "claim": "RDC 5087 at 27352 River Bluff Ave, Redlands CA 92374."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active RDC 5087 at 27352 River Bluff Ave with live HD hiring; coords sit near downtown Redlands so verify geofence to River Bluff address; no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

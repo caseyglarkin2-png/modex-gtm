@@ -161,5 +161,38 @@
     "classification": "All classification values are inferred from the HD FDC archetype (press: 800,000 sq ft drive-through building handling 65-75 flatbeds/day, both-sides loading, 75-mile radius delivery) rather than confirmed imagery of the correct building. HD distribution facilities are universally gated; FDC throughput design implies long internal staging and bypass-lane room — hence fastLaneOpportunity true. dockDoors/dropArea bands reflect FDC scale assumptions.",
     "yardMetrics": "All counts are FDC-archetype estimates, not measured from confirmed imagery."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://corporate.homedepot.com/news/company/supply-chain-unveils-first-flatbed-distribution-center-fdc",
+        "date": "2020-01-28",
+        "type": "press",
+        "claim": "Home Depot opened its first-ever Flatbed Distribution Center (FDC) in Dallas."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+        "date": "2026-06",
+        "type": "DC list",
+        "claim": "Home Depot FDC 5824 at 9222 W Jefferson Blvd, Dallas TX 75211 (flatbed distribution center)."
+      },
+      {
+        "tier": 1,
+        "url": "https://careers.homedepot.com/job/22458871/warehouse-operations-dallas-tx/",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active Home Depot warehouse-operations postings for a Dallas distribution center."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "HD definitively operates its flagship Dallas FDC (5824, 9222 W Jefferson Blvd 75211); roster coords sit in the right corridor but the exact building was not pin-resolved, so probable with a location flag.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

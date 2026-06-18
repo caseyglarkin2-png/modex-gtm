@@ -142,5 +142,31 @@
     "dockDoorCount": "~70 estimate across both long faces; high-resolution count obscured by the solar array shading and trailer clutter — listed uncertain.",
     "fastLaneOpportunity": "Wide paved aprons and deep approach roads at this purpose-built 2021 facility leave room for a bypass/express lane."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://corporate.homedepot.com/news/company/supply-chain-expansion-brings-faster-delivery-baltimore-region",
+        "date": "2021-08",
+        "type": "press",
+        "claim": "HD completed three DCs at Tradepoint Atlantic, Sparrows Point, including a flatbed delivery center."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+        "date": "2026-06",
+        "type": "DC list",
+        "claim": "FDC 5830 at 6311 Trade Point Ave, Sparrows Point MD 21219."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "HD operates flatbed delivery center FDC 5830 at Tradepoint Atlantic / Sparrows Point; coords match the industrial park; build-to-suit lease.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

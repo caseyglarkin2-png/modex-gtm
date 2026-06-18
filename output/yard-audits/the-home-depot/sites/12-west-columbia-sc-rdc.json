@@ -127,5 +127,31 @@
     "urbanRural": "Logistics park in the Saxe Gotha / Southport area of West Columbia with surrounding woodland and a residential edge; Rural per rubric.",
     "geocode": "Roster geocode had a 3918 m offset flag; verified pin lands on the correct HD RDC building."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+        "date": "2026-06",
+        "type": "DC list",
+        "claim": "RDC 5088 at 420 Foster Brothers Drive, West Columbia SC 29172."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.wltx.com/article/news/home-depot-distribution-center-opens/101-379829930",
+        "date": "2010",
+        "type": "press",
+        "claim": "HD RDC opened at 420 Foster Brothers Dr, 200 jobs, services ~90 stores VA/NC/GA/SC."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "RDC 5088 at 420 Foster Brothers Dr; on the DC list with an HD-held FCC radio license and opening press; no closure/WARN.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

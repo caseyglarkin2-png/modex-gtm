@@ -153,5 +153,31 @@
     "dockDoorCount": "~130 estimate across both long elevations of a ~550K sq ft RDC; exact count obscured by backed-in trailers — listed uncertain.",
     "fastLaneOpportunity": "Wide gate apron and deep approach leave room for an express bypass lane."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://corporate.homedepot.com/news/company/supply-chain-growth-texas-creates-over-1500-jobs-expands-delivery-options",
+        "date": "2021-02",
+        "type": "press",
+        "claim": "HD 1.5M sq ft Dallas DC at 2300 Beckleymeade Ave, 75232; DFW footprint grew to 4.5M sq ft."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+        "date": "2026-06",
+        "type": "DC list",
+        "claim": "RDC 5023 at 2300 Beckleymeade Ave, Dallas TX 75232."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Coords match the Beckleymeade Ave campus in SW Dallas 75232 where HD runs RDC 5023; no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

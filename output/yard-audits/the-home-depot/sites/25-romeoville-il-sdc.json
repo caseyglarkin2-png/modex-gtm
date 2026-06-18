@@ -127,5 +127,31 @@
     "postGateStaging": "Paved truck court inside the gate before the dock doors provides holding room.",
     "railServed": "No rail spur enters the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+        "date": "2026-06",
+        "type": "DC list",
+        "claim": "SDC 5061 at 1070 Windham Pkwy, Romeoville IL 60446."
+      },
+      {
+        "tier": 2,
+        "url": "https://fclbuilders.com/projects/home-depot-sdc/",
+        "date": "2024",
+        "type": "GC project page",
+        "claim": "Home Depot SDC build project in the Romeoville/Chicago area."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Romeoville SDC 5061 at 1070 Windham Pkwy; on the DC list with live HD DC roles; the only \"closing\" hit was Sam's Club, not HD.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

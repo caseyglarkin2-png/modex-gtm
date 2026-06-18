@@ -147,5 +147,31 @@
     "siteAreaAcres": "Derived from the perimeter box (~540 m N-S x ~770 m E-W developed footprint incl. north drop yard).",
     "buildingCount": "Single RDC building; the smaller building to the east is a separate property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.homedepot.com/job/13022386/warehouse-associate-houston-tx/",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Current Home Depot Warehouse Associate posting, Houston TX - active DC staffing."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+        "date": "2026-06",
+        "type": "DC list",
+        "claim": "RDC 5521 at 11333 N. Gessner Road, Houston TX 77064."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Coords fall in the NW-Houston 77064 cluster where HD runs RDC 5521 (Gessner) and RDC 5520 (Fallbrook); active hiring, no negative signal; verify which polygon the geofence covers.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

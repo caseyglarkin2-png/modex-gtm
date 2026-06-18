@@ -128,5 +128,31 @@
     "entryLanes": "Estimated 2 inbound; the road splits around the booth island. No painted lane control, count approximate.",
     "urbanRural": "Rural McCalla AL industrial park with surrounding woodland and a rail line alongside; Rural per rubric."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.homedepot.com/job/6961478/warehouse-associate-onsite/",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active warehouse associate posting at the McCalla AL DC."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+        "date": "2026-06",
+        "type": "DC list",
+        "claim": "RDC 5086 at 6400 Jefferson Metro Pkwy, McCalla AL 35111."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "RDC 5086 on the DC list with active HD careers posting; no closure/WARN found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

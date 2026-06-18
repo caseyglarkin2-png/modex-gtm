@@ -127,5 +127,31 @@
     "preGateStaging": "Paved driveway width outside the gate where a truck can hold; modest stacking room.",
     "postGateStaging": "Paved yard inside the gate before the dock aprons."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+        "date": "2026-06",
+        "type": "DC list",
+        "claim": "SDC 5965/5966 at 61 Cranbury Station Rd and SDC 5960 at 66 Cranbury Station Rd, Cranbury NJ 08512."
+      },
+      {
+        "tier": 1,
+        "url": "https://careers.homedepot.com/job/6961526/warehouse-associate-cranbury-nj/",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Live Home Depot Cranbury NJ warehouse associate posting."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Cranbury SDCs at 61/66 Cranbury Station Rd match the coords; live HD careers posting; no negative signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

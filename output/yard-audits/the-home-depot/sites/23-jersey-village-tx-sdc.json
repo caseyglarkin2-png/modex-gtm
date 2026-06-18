@@ -127,5 +127,31 @@
     "postGateStaging": "Paved truck court inside the gate before the dock doors provides holding room.",
     "multipleFacilities": "The HD SDC occupies one building (7301 Security Way, 'Prologis Jersey Village 4'); neighboring large warehouses in the same Prologis park are separate facilities/tenants."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+        "date": "2026-06",
+        "type": "DC list",
+        "claim": "SDC 5501 (and MDO 5822) at 7301 Security Way, Jersey Village TX 77040."
+      },
+      {
+        "tier": 1,
+        "url": "https://careers.homedepot.com/job/8496696/warehouse-associate-jersey-village-tx/",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "June 2026 Warehouse Associate posting, Jersey Village TX, operated by Temco Logistics within HD's distribution network."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "HD SDC 5501 at 7301 Security Way; June-2026 HD careers posting confirms active operation run by Temco Logistics (3PL).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

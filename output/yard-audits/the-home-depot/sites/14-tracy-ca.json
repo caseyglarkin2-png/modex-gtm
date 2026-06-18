@@ -125,5 +125,31 @@
     "entryLanes": "Estimated; exact lane count at the gate not fully resolved from imagery.",
     "trailersVisible": "Approximate count from z16-z20 imagery."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+        "date": "2026-06",
+        "type": "DC list",
+        "claim": "RDC 5641 at 1400 Pescadero Avenue, Tracy CA 95304."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.mmh.com/article/the_home_depot_builds_an_omni_channel_supply_chain",
+        "date": "2018",
+        "type": "trade press",
+        "claim": "HD operates a network of RDCs for same-day flow-through crossdocking."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "RDC 5641 at 1400 Pescadero Ave; on the DC list; no closure/WARN (a separate HD DC 5857 also exists in Tracy on Hopkins Rd - distinct site).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -135,5 +135,31 @@
     "dockDoorCount": "~200 doors estimated across both long faces of the 1.4M sq ft building; approximate.",
     "entryLanes": "Single access drive serving as both entry and exit; lane counts estimated."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://corporate.homedepot.com/news/company/home-depot-strengthens-savannah-presence-distribution-center-purchase",
+        "date": "2025-01",
+        "type": "press",
+        "claim": "Home Depot acquired its 1.4M sq ft Savannah DC (leased since 1995) plus 100+ acres on 2025-01-29; ~250 associates, currently operating."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+        "date": "2026-06",
+        "type": "DC list",
+        "claim": "SDC DCs 5150/5155/5157 at 125 Crossroads Pkwy and DC 5160 at 309 Little Hearst Pkwy, Savannah GA 31407."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Import/stocking DC at 125 Crossroads Pkwy near the Port of Savannah; HD's own 2025 newsroom confirms current operation and now ownership.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -129,5 +129,31 @@
     "urbanRural": "Tradepoint Atlantic sits within the Baltimore metro on the Sparrows Point peninsula — Urban.",
     "railServed": "Tradepoint Atlantic is heavily rail-served campus-wide; no spur confirmed running into this specific building's footprint, set false pending confirmation."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://ir.homedepot.com/news-releases/2021/08-10-2021-130106598",
+        "date": "2021-08-10",
+        "type": "press",
+        "claim": "Home Depot opened a 1.5M sq ft, 3-building DC campus at Sparrows Point/Tradepoint Atlantic Baltimore, including a flatbed/bulk delivery center; ~500 jobs."
+      },
+      {
+        "tier": 1,
+        "url": "https://corporate.homedepot.com/news/company/supply-chain-expansion-brings-faster-delivery-baltimore-region",
+        "date": "2021-08-10",
+        "type": "press",
+        "claim": "HD campus at 6311 Tradepoint Ave with flatbed (bulk/oversized) center, appliance center, and online fulfillment center."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "HD's own IR + newsroom confirm a bulk/flatbed delivery center within the 2021 Sparrows Point campus at 6311 Tradepoint Ave; Tradepoint Atlantic is a build-to-lease park (leased); no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

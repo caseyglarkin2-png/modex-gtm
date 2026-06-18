@@ -132,5 +132,31 @@
     "connectivityIssue": "Isolated rural setting far from any town center; cellular coverage may be marginal. Medium-confidence inference.",
     "fastLaneOpportunity": "Generous internal paved width and a wide approach drive support an express lane."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.woodcountyedc.com/home-depot-warehouse/",
+        "date": "2015",
+        "type": "econ-dev",
+        "claim": "1.6M sq ft Home Depot DC, Troy Township off Pemberville Rd, 157 acres, 700+ jobs, developed by Seefried Properties + Home Depot."
+      },
+      {
+        "tier": 1,
+        "url": "https://corporate.homedepot.com/document/4273",
+        "date": "2024",
+        "type": "company DC reference",
+        "claim": "Home Depot supply-chain reference listing including the Wood County OH (Luckey/Pemberville Rd) fulfillment facility."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Wood County EDC confirms the 1.6M sq ft HD DFC at Pemberville Rd (coords match Luckey/Troy Township); Seefried build-to-suit (leased); no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

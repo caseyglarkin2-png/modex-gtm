@@ -124,5 +124,31 @@
     "dropYard": "Dedicated trailer-storage rows at the SW corner of the property, separate from the dock aprons.",
     "entryLanes": "Single inbound lane at the checkpoint; exit shares the same gate group."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.homedepot.com/job/6961490/warehouse-associate-onsite/",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active Home Depot warehouse-associate role in Westfield MA - DC currently staffed."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+        "date": "2026-06",
+        "type": "DC list",
+        "claim": "RDC 5221 at 50 Campanelli Drive, Westfield MA 01085."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "RDC 5221 on the DC list, actively hiring, and holds a Home-Depot-named FCC radio license; no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

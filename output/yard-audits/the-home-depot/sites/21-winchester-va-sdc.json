@@ -146,5 +146,31 @@
     "preGateStaging": "Paved apron / access-road width outside the gate where a truck can wait; a truck was observed staged on the access road in Street View.",
     "postGateStaging": "Paved yard area inside the gate before the dock aprons."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+        "date": "2026-06",
+        "type": "DC list",
+        "claim": "SDC DCs 5362/5364/5365/5366 at 280 Maranto Manor Drive, Winchester VA 22602."
+      },
+      {
+        "tier": 1,
+        "url": "https://careers.homedepot.com/job/6961473/warehouse-associate-onsite/",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Live Home Depot Winchester VA warehouse/distribution associate posting."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Winchester SDC complex (DC 5362/64/65/66) at Maranto Manor Dr - distinct from the RDC at 480 Park Center Dr; coords map to the SDC; live HD careers; no closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

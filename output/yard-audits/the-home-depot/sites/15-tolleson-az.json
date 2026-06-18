@@ -133,5 +133,31 @@
     "entryLanes": "Estimated; exact lane count at the gate not fully resolved.",
     "trailersVisible": "Approximate count from z16-z19 imagery across dock face and drop yard."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+        "date": "2026-06",
+        "type": "DC list",
+        "claim": "RDC 5643 at 9081 W Washington Street, Tolleson AZ 85353."
+      },
+      {
+        "tier": 2,
+        "url": "https://graycor.com/project/home-depot-distribution-center/",
+        "date": "2018",
+        "type": "GC project page",
+        "claim": "466,700 sq ft HD distribution facility on 46 acres receiving from suppliers and shipping to HD stores."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "RDC 5643 at 9081 W Washington St; on the DC list with GC project description; AZ WARN search returned no Tolleson HD notice.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

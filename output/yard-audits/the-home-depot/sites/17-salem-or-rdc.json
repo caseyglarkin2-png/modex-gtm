@@ -125,5 +125,31 @@
     "entryLanes": "Lane count at the checkpoint estimated from overhead gate-island markings; not crisply resolved.",
     "buildingCount": "HD RDC is the single ~467k sq ft building; the larger building to the SW is a separate tenant in the Mill Creek Corporate Center industrial park, excluded from the HD perimeter."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+        "date": "2026-06",
+        "type": "DC list",
+        "claim": "RDC 5639 at 4999 Depot Court SE, Salem OR 97317."
+      },
+      {
+        "tier": 2,
+        "url": "https://katu.com/archive/home-depot-opens-its-new-distribution-center",
+        "date": "2010",
+        "type": "press",
+        "claim": "HD opened a 467,000 sq ft RDC at 4999 Depot Court SE serving WA/OR/MT/ID/WY, 200+ jobs."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "RDC 5639 at 4999 Depot Ct SE; on the DC list, no closure/relocation signal (coords map to the Turner/Salem corridor consistent with this address).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

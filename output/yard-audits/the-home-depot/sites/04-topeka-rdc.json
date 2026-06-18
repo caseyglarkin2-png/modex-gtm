@@ -176,5 +176,24 @@
     "dockDoorCount": "~120 estimate across both long elevations of a ~550K sq ft RDC; backed-in trailers obscure exact count.",
     "extra": "A Plug Power hydrogen fuel station for fuel-cell forklifts sits at the building's office/SW side — a hallmark of HD RDC operations, corroborating HD tenancy."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+        "date": "2026-06",
+        "type": "DC list",
+        "claim": "RDC 5024 at 5200 SW Wenger Drive, Topeka KS 66609."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "HD RDC 5024 at 5200 SW Wenger St, Topeka 66609; coords match; no closure/relocation found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

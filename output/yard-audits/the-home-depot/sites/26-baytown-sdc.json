@@ -130,5 +130,31 @@
     "urbanRural": "Edge-of-town greenfield industrial park east of Baytown, surrounded by farmland — Rural per rubric.",
     "fastLaneOpportunity": "Wide gate apron and generous internal paved width; room to add an express lane."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.homedepot.com/job/6961502/warehouse-associate-baytown-tx/",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active 2026 HD warehouse-associate posting for the Baytown TX supply-chain facility."
+      },
+      {
+        "tier": 2,
+        "url": "https://cca.baytownchamber.com/the-home-depot-baytown-sdc-_5005962_3_1_5105977_memberprofile2.aspx",
+        "date": "2025",
+        "type": "chamber profile",
+        "claim": "The Home Depot - Baytown SDC, 6115 FM 1405, DC #5565."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "HD SDC 5565 at 6115 FM 1405 confirmed by active 2026 careers + chamber profile; no closure/WARN for Baytown.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

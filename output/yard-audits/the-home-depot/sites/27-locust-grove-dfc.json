@@ -125,5 +125,31 @@
     "urbanRural": "Locust Grove / Henry County logistics corridor — edge-of-town industrial amid woods and farmland; Rural per rubric.",
     "fastLaneOpportunity": "Wide gate aprons and generous internal paved width support an express bypass."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://ir.homedepot.com/news-releases/2014/02-10-2014-014522120",
+        "date": "2014-02-10",
+        "type": "press",
+        "claim": "Home Depot opened its first Direct Fulfillment Center in Locust Grove GA, first of three DFCs."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.areadevelopment.com/newsitems/2-10-2014/the-home-depot-new-direct-fulfillment-center-locust-grove-georgia289232.shtml",
+        "date": "2014-02-10",
+        "type": "trade press",
+        "claim": "DFC in Locust Grove GA (Atlanta suburb) supporting HomeDepot.com."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "HD's own IR release documents this flagship DFC; no closure/relocation found (Mexico MO DC and TN HD Supply closures are unrelated).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

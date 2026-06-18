@@ -126,5 +126,31 @@
     "railServed": "The CenterPoint Intermodal Center has major intermodal rail yards, but no rail spur runs into this RDC's own property — railServed = false for this facility.",
     "entryLanes": "Three inbound lanes estimated from gate imagery; exact count not fully resolved."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+        "date": "2026-06",
+        "type": "DC list",
+        "claim": "RDC 5851 and SDC 5852 at 2950 Centerpoint Way, Elwood IL 60436 (CenterPoint Intermodal Center)."
+      },
+      {
+        "tier": 1,
+        "url": "https://careers.homedepot.com/job/6961521/warehouse-associate-joliet-il/",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active HD warehouse-associate roles at the Joliet/Elwood (Centerpoint) DC."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "RDC 5851/SDC 5852 at the CenterPoint Intermodal Center; on the DC list and actively hiring; no closure/relocation found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

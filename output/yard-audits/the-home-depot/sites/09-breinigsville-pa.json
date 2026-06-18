@@ -143,5 +143,31 @@
     "entryLanes": "Estimated 2 inbound from the SE driveway; no painted lane control so count is approximate.",
     "urbanRural": "Edge-of-town Lehigh Valley logistics park; farmland on the west and south sides — Rural per rubric."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.homedepot.com/job/6961535/warehouse-support-onsite",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Current Home Depot Warehouse Support posting, Breinigsville PA - active DC staffing."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+        "date": "2026-06",
+        "type": "DC list",
+        "claim": "RDC 5034 at 8500 Willard Drive, Breinigsville PA 18031."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active RDC 5034 at 8500 Willard Dr with live HD hiring; the PA-DC-closure headline in results was Saks, not Home Depot.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
