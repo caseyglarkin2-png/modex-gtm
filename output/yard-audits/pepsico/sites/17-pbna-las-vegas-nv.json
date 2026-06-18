@@ -1,73 +1,193 @@
 {
   "name": "PBNA - Las Vegas NV",
   "type": "Bottling Plant",
-  "coords": { "lat": 36.07220, "lng": -115.23410 },
+  "coords": {
+    "lat": 36.0722,
+    "lng": -115.2341
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 36.073441, "lng": -115.236350 },
-      { "lat": 36.073441, "lng": -115.231886 },
-      { "lat": 36.070888, "lng": -115.231886 },
-      { "lat": 36.070888, "lng": -115.236350 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 36.073600, "lng": -115.232150 },
-      { "lat": 36.073600, "lng": -115.231800 },
-      { "lat": 36.073300, "lng": -115.231800 },
-      { "lat": 36.073300, "lng": -115.232150 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.073441,
+          "lng": -115.23635
+        },
+        {
+          "lat": 36.073441,
+          "lng": -115.231886
+        },
+        {
+          "lat": 36.070888,
+          "lng": -115.231886
+        },
+        {
+          "lat": 36.070888,
+          "lng": -115.23635
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 36.0736,
+          "lng": -115.23215
+        },
+        {
+          "lat": 36.0736,
+          "lng": -115.2318
+        },
+        {
+          "lat": 36.0733,
+          "lng": -115.2318
+        },
+        {
+          "lat": 36.0733,
+          "lng": -115.23215
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 36.073160, "lng": -115.235600 },
-        { "lat": 36.073160, "lng": -115.234600 },
-        { "lat": 36.072600, "lng": -115.234600 },
-        { "lat": 36.072600, "lng": -115.235600 }
-      ] },
-      { "ring": [
-        { "lat": 36.072190, "lng": -115.235980 },
-        { "lat": 36.072190, "lng": -115.235460 },
-        { "lat": 36.071910, "lng": -115.235460 },
-        { "lat": 36.071910, "lng": -115.235980 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 36.07316,
+            "lng": -115.2356
+          },
+          {
+            "lat": 36.07316,
+            "lng": -115.2346
+          },
+          {
+            "lat": 36.0726,
+            "lng": -115.2346
+          },
+          {
+            "lat": 36.0726,
+            "lng": -115.2356
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 36.07219,
+            "lng": -115.23598
+          },
+          {
+            "lat": 36.07219,
+            "lng": -115.23546
+          },
+          {
+            "lat": 36.07191,
+            "lng": -115.23546
+          },
+          {
+            "lat": 36.07191,
+            "lng": -115.23598
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 36.072100, "lng": -115.235450 },
-        { "lat": 36.072100, "lng": -115.235050 },
-        { "lat": 36.071330, "lng": -115.235050 },
-        { "lat": 36.071330, "lng": -115.235450 }
-      ] },
-      { "ring": [
-        { "lat": 36.072500, "lng": -115.233150 },
-        { "lat": 36.072500, "lng": -115.232850 },
-        { "lat": 36.071690, "lng": -115.232850 },
-        { "lat": 36.071690, "lng": -115.233150 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 36.0721,
+            "lng": -115.23545
+          },
+          {
+            "lat": 36.0721,
+            "lng": -115.23505
+          },
+          {
+            "lat": 36.07133,
+            "lng": -115.23505
+          },
+          {
+            "lat": 36.07133,
+            "lng": -115.23545
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 36.0725,
+            "lng": -115.23315
+          },
+          {
+            "lat": 36.0725,
+            "lng": -115.23285
+          },
+          {
+            "lat": 36.07169,
+            "lng": -115.23285
+          },
+          {
+            "lat": 36.07169,
+            "lng": -115.23315
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 11, "pano": "Mi7YzqB9wQkhTyeW-1_Z5A", "hasCoverage": true },
-      "truckGate": { "heading": 200, "pano": "UXt-OUoE1L0zk9N6Gprx_w", "hasCoverage": true }
+      "perimeter": {
+        "heading": 11,
+        "pano": "Mi7YzqB9wQkhTyeW-1_Z5A",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 200,
+        "pano": "UXt-OUoE1L0zk9N6Gprx_w",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
-    "dockDoorCount": 32, "trailersVisible": 55, "trailerParkingCapacity": 75,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 28.0,
+    "dockDoorCount": 32,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 75,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 28,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@36.07220,-115.23410,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoors", "shipRcvSeparate", "preGateStaging", "truckGateCount"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoors",
+    "shipRcvSeparate",
+    "preGateStaging",
+    "truckGateCount"
+  ],
   "fieldNotes": {
     "truckGate": "The entire operational yard is enclosed by a tall tan block wall (confirmed on the Sunset Rd, north, and east sides in Street View). The only truck access is the NE-corner curb cut off the east street into the perimeter drive - a walled single-throat yard implies a controlled gate, but the gate hardware itself was not resolvable in z20 overhead or reachable Street View; flagged.",
     "guardShack": "No booth observed at the NE throat or front; front visitor lot on Sunset Rd is open car parking with the Pepsi-globe lobby (blue canopy). remoteGs=true follows from gate-without-shack but inherits the gate uncertainty.",
@@ -77,5 +197,24 @@
     "preGateStaging": "Semis were queued curbside on the west street in 2022 Street View, but that street fronts a separate (ex-Helix Electric) laydown parcel - not counted as Pepsi staging.",
     "multipleFacilities": "Main plant plus a SW outbuilding inside one walled campus; the trailer strip west of the wall is a separate parcel and was excluded from the perimeter."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.gray.com/projects/pepsi-beverages-company-las-vegas-nev/",
+        "date": "2023",
+        "type": "press",
+        "claim": "Pepsi Beverages Company Las Vegas bottling + distribution center (387,400 sqft, two buildings)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Purpose-built PBNA bottling+distribution campus, no closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -1,71 +1,190 @@
 {
   "name": "PBNA - Tucker GA",
   "type": "Bottling Plant",
-  "coords": { "lat": 33.825483, "lng": -84.185547 },
+  "coords": {
+    "lat": 33.825483,
+    "lng": -84.185547
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 33.827594, "lng": -84.188088 },
-      { "lat": 33.828164, "lng": -84.186577 },
-      { "lat": 33.828078, "lng": -84.183899 },
-      { "lat": 33.823315, "lng": -84.18383 },
-      { "lat": 33.823087, "lng": -84.185204 },
-      { "lat": 33.823601, "lng": -84.186714 },
-      { "lat": 33.824228, "lng": -84.18692 },
-      { "lat": 33.824342, "lng": -84.188088 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 33.82364, "lng": -84.18408 },
-      { "lat": 33.82364, "lng": -84.18382 },
-      { "lat": 33.8235, "lng": -84.18382 },
-      { "lat": 33.8235, "lng": -84.18408 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.827594,
+          "lng": -84.188088
+        },
+        {
+          "lat": 33.828164,
+          "lng": -84.186577
+        },
+        {
+          "lat": 33.828078,
+          "lng": -84.183899
+        },
+        {
+          "lat": 33.823315,
+          "lng": -84.18383
+        },
+        {
+          "lat": 33.823087,
+          "lng": -84.185204
+        },
+        {
+          "lat": 33.823601,
+          "lng": -84.186714
+        },
+        {
+          "lat": 33.824228,
+          "lng": -84.18692
+        },
+        {
+          "lat": 33.824342,
+          "lng": -84.188088
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.82364,
+          "lng": -84.18408
+        },
+        {
+          "lat": 33.82364,
+          "lng": -84.18382
+        },
+        {
+          "lat": 33.8235,
+          "lng": -84.18382
+        },
+        {
+          "lat": 33.8235,
+          "lng": -84.18408
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 33.823886, "lng": -84.186577 },
-        { "lat": 33.823886, "lng": -84.185204 },
-        { "lat": 33.823315, "lng": -84.185204 },
-        { "lat": 33.823315, "lng": -84.186577 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.823886,
+            "lng": -84.186577
+          },
+          {
+            "lat": 33.823886,
+            "lng": -84.185204
+          },
+          {
+            "lat": 33.823315,
+            "lng": -84.185204
+          },
+          {
+            "lat": 33.823315,
+            "lng": -84.186577
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 33.827365, "lng": -84.186577 },
-        { "lat": 33.827365, "lng": -84.186165 },
-        { "lat": 33.824913, "lng": -84.186165 },
-        { "lat": 33.824913, "lng": -84.186577 }
-      ] },
-      { "ring": [
-        { "lat": 33.825768, "lng": -84.186165 },
-        { "lat": 33.825768, "lng": -84.185822 },
-        { "lat": 33.824228, "lng": -84.185822 },
-        { "lat": 33.824228, "lng": -84.186165 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.827365,
+            "lng": -84.186577
+          },
+          {
+            "lat": 33.827365,
+            "lng": -84.186165
+          },
+          {
+            "lat": 33.824913,
+            "lng": -84.186165
+          },
+          {
+            "lat": 33.824913,
+            "lng": -84.186577
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.825768,
+            "lng": -84.186165
+          },
+          {
+            "lat": 33.825768,
+            "lng": -84.185822
+          },
+          {
+            "lat": 33.824228,
+            "lng": -84.185822
+          },
+          {
+            "lat": 33.824228,
+            "lng": -84.186165
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 243, "pano": "zP_bBv-97Z2QXrsr1zTkIQ", "hasCoverage": true },
-      "truckGate": { "heading": 282, "pano": "MkP3WgjTzTMwR2pDfKUWcQ", "hasCoverage": true }
+      "perimeter": {
+        "heading": 243,
+        "pano": "zP_bBv-97Z2QXrsr1zTkIQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 282,
+        "pano": "MkP3WgjTzTMwR2pDfKUWcQ",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
-    "dockDoorCount": 55, "trailersVisible": 70, "trailerParkingCapacity": 100,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 47.8,
+    "dockDoorCount": 55,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 100,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 47.8,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.825483,-84.185547,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "10-25",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "shipRcvSeparate", "west property boundary", "dockDoorCount", "entryExitTogether"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate",
+    "west property boundary",
+    "dockDoorCount",
+    "entryExitTogether"
+  ],
   "fieldNotes": {
     "truckGate": "Entire Rock Mountain Blvd frontage is secured with continuous black ornamental security fence (2026-01 SV); single truck entrance is the south drive off the blvd, a fenced pinch-point with traffic cones. No barrier arm clearly visible from the public-road pano; classified gated based on the full fence + single controlled pinch-point.",
     "guardShack": "No freestanding booth visible at the south drive throat; site is mid-expansion and a gatehouse may exist deeper in or be under construction - remoteGs set true (gate without visible shack), both flagged.",
@@ -74,5 +193,24 @@
     "dockDoors": "Canyon west bank ~30+ positions with trailers, east-building west face ~15, plus west-face docks on the old building; 50+ band.",
     "westBoundary": "West property line vs the neighboring building's lot is not visible; set mid-aisle west of the old plant's west dock trailers and flagged."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://georgia.org/press-release/pepsico-beverages-north-america-invest-260-million-dekalb-county-manufacturing",
+        "date": "2022-08",
+        "type": "press",
+        "claim": "PBNA $260M expansion of the Tucker (1644 Rock Mountain Blvd) manufacturing facility, +136 jobs"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Actively EXPANDING PBNA plant ($260M, 5x output by 2025); distinct from the older Atlanta bottling plant that ended production Oct 2024.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

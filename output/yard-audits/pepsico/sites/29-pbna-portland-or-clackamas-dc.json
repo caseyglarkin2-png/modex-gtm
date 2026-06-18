@@ -1,56 +1,137 @@
 {
   "name": "PBNA - Portland OR (Clackamas DC)",
   "type": "Distribution Center",
-  "coords": { "lat": 45.39865, "lng": -122.54465 },
+  "coords": {
+    "lat": 45.39865,
+    "lng": -122.54465
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 45.39951, "lng": -122.546519 },
-      { "lat": 45.399558, "lng": -122.5436 },
-      { "lat": 45.399148, "lng": -122.543326 },
-      { "lat": 45.39775, "lng": -122.543463 },
-      { "lat": 45.397557, "lng": -122.544287 },
-      { "lat": 45.398811, "lng": -122.545866 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 45.399543, "lng": -122.544354 },
-      { "lat": 45.399519, "lng": -122.544157 },
-      { "lat": 45.399422, "lng": -122.544183 },
-      { "lat": 45.399446, "lng": -122.54438 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 45.39951,
+          "lng": -122.546519
+        },
+        {
+          "lat": 45.399558,
+          "lng": -122.5436
+        },
+        {
+          "lat": 45.399148,
+          "lng": -122.543326
+        },
+        {
+          "lat": 45.39775,
+          "lng": -122.543463
+        },
+        {
+          "lat": 45.397557,
+          "lng": -122.544287
+        },
+        {
+          "lat": 45.398811,
+          "lng": -122.545866
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 45.399543,
+          "lng": -122.544354
+        },
+        {
+          "lat": 45.399519,
+          "lng": -122.544157
+        },
+        {
+          "lat": 45.399422,
+          "lng": -122.544183
+        },
+        {
+          "lat": 45.399446,
+          "lng": -122.54438
+        }
+      ]
+    },
     "dropYards": [],
     "dockAprons": [
-      { "ring": [
-        { "lat": 45.399269, "lng": -122.545145 },
-        { "lat": 45.399529, "lng": -122.544733 },
-        { "lat": 45.39842, "lng": -122.543291 },
-        { "lat": 45.39816, "lng": -122.543703 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 45.399269,
+            "lng": -122.545145
+          },
+          {
+            "lat": 45.399529,
+            "lng": -122.544733
+          },
+          {
+            "lat": 45.39842,
+            "lng": -122.543291
+          },
+          {
+            "lat": 45.39816,
+            "lng": -122.543703
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 228, "pano": "sUHhDB5Tt6E2FRc1mDVXUw", "hasCoverage": true },
-      "truckGate": { "heading": 254, "pano": "sUHhDB5Tt6E2FRc1mDVXUw", "hasCoverage": true }
+      "perimeter": {
+        "heading": 228,
+        "pano": "sUHhDB5Tt6E2FRc1mDVXUw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 254,
+        "pano": "sUHhDB5Tt6E2FRc1mDVXUw",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
-    "dockDoorCount": 20, "trailersVisible": 25, "trailerParkingCapacity": 25,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 8.6,
+    "dockDoorCount": 20,
+    "trailersVisible": 25,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 8.6,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@45.39865,-122.54465,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "backupSensitive", "dropArea"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "backupSensitive",
+    "dropArea"
+  ],
   "fieldNotes": {
     "truckGate": "fenced dock court with gate hardware/posts at the court throat off the Capps Rd cul-de-sac; PepsiCo wayfinding sign at the entrance (2025-06 SV) directs trucks to 'Shipping & Receiving / Visitors / Market & Gate Office'",
     "guardShack": "the entrance sign names a 'Gate Office' (staffed gate function) but no freestanding booth is visible in sat or SV - the office may be integrated in the building corner; guardShack=true on operational evidence, flagged",
@@ -60,5 +141,31 @@
     "siteIdentity": "building fascia carries PEPSICO branding (2025-06 SV); new ~126k sq ft DC built after the NE Portland plant demolition (VLMK/Perlo project pages); operates as Pepsi Northwest Beverages",
     "urbanRural": "Clackamas industrial district inside the Portland metro fabric -> Urban; site backs onto the Clackamas River greenway"
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.vlmk.com/portfolio-items/pepsi-distribution-center/",
+        "date": "2023",
+        "type": "trade-press",
+        "claim": "New 126,360 sq ft Pepsi DC in Clackamas County replacing the Portland facility; 12 docks, trailer parking/charging"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/q-pepsico-pepsico-l-clackamas,-or-jobs.html",
+        "date": "2026-02",
+        "type": "careers",
+        "claim": "Active PepsiCo job reqs in Clackamas OR (current hiring)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "PBNA-operated Clackamas DC (replaced old Portland facility); current careers reqs confirm active operation.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

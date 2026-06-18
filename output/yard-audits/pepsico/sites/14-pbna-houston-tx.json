@@ -1,82 +1,227 @@
 {
   "name": "PBNA - Houston TX",
   "type": "Bottling Plant",
-  "coords": { "lat": 29.70720, "lng": -95.26630 },
+  "coords": {
+    "lat": 29.7072,
+    "lng": -95.2663
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 29.708107, "lng": -95.268133 },
-      { "lat": 29.708465, "lng": -95.266897 },
-      { "lat": 29.708465, "lng": -95.265661 },
-      { "lat": 29.708286, "lng": -95.264425 },
-      { "lat": 29.706198, "lng": -95.265112 },
-      { "lat": 29.704946, "lng": -95.265936 },
-      { "lat": 29.704946, "lng": -95.268064 },
-      { "lat": 29.706616, "lng": -95.268167 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 29.705600, "lng": -95.268220 },
-      { "lat": 29.705600, "lng": -95.267960 },
-      { "lat": 29.705300, "lng": -95.267960 },
-      { "lat": 29.705300, "lng": -95.268220 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.708107,
+          "lng": -95.268133
+        },
+        {
+          "lat": 29.708465,
+          "lng": -95.266897
+        },
+        {
+          "lat": 29.708465,
+          "lng": -95.265661
+        },
+        {
+          "lat": 29.708286,
+          "lng": -95.264425
+        },
+        {
+          "lat": 29.706198,
+          "lng": -95.265112
+        },
+        {
+          "lat": 29.704946,
+          "lng": -95.265936
+        },
+        {
+          "lat": 29.704946,
+          "lng": -95.268064
+        },
+        {
+          "lat": 29.706616,
+          "lng": -95.268167
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 29.7056,
+          "lng": -95.26822
+        },
+        {
+          "lat": 29.7056,
+          "lng": -95.26796
+        },
+        {
+          "lat": 29.7053,
+          "lng": -95.26796
+        },
+        {
+          "lat": 29.7053,
+          "lng": -95.26822
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 29.706910, "lng": -95.268000 },
-        { "lat": 29.706910, "lng": -95.266970 },
-        { "lat": 29.706140, "lng": -95.266970 },
-        { "lat": 29.706140, "lng": -95.268000 }
-      ] },
-      { "ring": [
-        { "lat": 29.705970, "lng": -95.267080 },
-        { "lat": 29.705970, "lng": -95.265600 },
-        { "lat": 29.705730, "lng": -95.265600 },
-        { "lat": 29.705730, "lng": -95.267080 }
-      ] },
-      { "ring": [
-        { "lat": 29.708230, "lng": -95.268410 },
-        { "lat": 29.708230, "lng": -95.267860 },
-        { "lat": 29.707820, "lng": -95.267860 },
-        { "lat": 29.707820, "lng": -95.268410 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 29.70691,
+            "lng": -95.268
+          },
+          {
+            "lat": 29.70691,
+            "lng": -95.26697
+          },
+          {
+            "lat": 29.70614,
+            "lng": -95.26697
+          },
+          {
+            "lat": 29.70614,
+            "lng": -95.268
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 29.70597,
+            "lng": -95.26708
+          },
+          {
+            "lat": 29.70597,
+            "lng": -95.2656
+          },
+          {
+            "lat": 29.70573,
+            "lng": -95.2656
+          },
+          {
+            "lat": 29.70573,
+            "lng": -95.26708
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 29.70823,
+            "lng": -95.26841
+          },
+          {
+            "lat": 29.70823,
+            "lng": -95.26786
+          },
+          {
+            "lat": 29.70782,
+            "lng": -95.26786
+          },
+          {
+            "lat": 29.70782,
+            "lng": -95.26841
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 29.706160, "lng": -95.266800 },
-        { "lat": 29.706160, "lng": -95.265900 },
-        { "lat": 29.705970, "lng": -95.265900 },
-        { "lat": 29.705970, "lng": -95.266800 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 29.70616,
+            "lng": -95.2668
+          },
+          {
+            "lat": 29.70616,
+            "lng": -95.2659
+          },
+          {
+            "lat": 29.70597,
+            "lng": -95.2659
+          },
+          {
+            "lat": 29.70597,
+            "lng": -95.2668
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 29.705300, "lng": -95.268200 },
-      { "lat": 29.705300, "lng": -95.267980 },
-      { "lat": 29.704950, "lng": -95.267980 },
-      { "lat": 29.704950, "lng": -95.268200 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 29.7053,
+          "lng": -95.2682
+        },
+        {
+          "lat": 29.7053,
+          "lng": -95.26798
+        },
+        {
+          "lat": 29.70495,
+          "lng": -95.26798
+        },
+        {
+          "lat": 29.70495,
+          "lng": -95.2682
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 218, "pano": "GNMvQXjP1wKE6bMH6-Ujdw", "hasCoverage": true },
-      "truckGate": { "heading": 0, "pano": "", "hasCoverage": false }
+      "perimeter": {
+        "heading": 218,
+        "pano": "GNMvQXjP1wKE6bMH6-Ujdw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      }
     }
   },
   "yardMetrics": {
-    "dockDoorCount": 30, "trailersVisible": 110, "trailerParkingCapacity": 150,
-    "truckGateCount": 2, "buildingCount": 4, "siteAreaAcres": 28.2,
+    "dockDoorCount": 30,
+    "trailersVisible": 110,
+    "trailerParkingCapacity": 150,
+    "truckGateCount": 2,
+    "buildingCount": 4,
+    "siteAreaAcres": 28.2,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@29.70720,-95.26630,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoors", "entryLanes", "exitLanes", "shipRcvSeparate", "scale", "preGateStaging"],
+  "uncertainFields": [
+    "dockDoors",
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate",
+    "scale",
+    "preGateStaging"
+  ],
   "fieldNotes": {
     "truckGate": "Canopied multi-lane gate complex on the south access road (z20, 29.70546,-95.26809): a large white canopy spans the roadway with lane arrows painted on the approach and a separate small white building immediately east of the canopy.",
     "guardShack": "Dedicated small flat-roof building beside the gate canopy - guard office. Could also house automated check-in; staffing not verifiable (no Street View on the private road).",
@@ -88,5 +233,24 @@
     "truckGateCount": "South canopy gate is the truck gate; the NE drive off the La Porte Fwy frontage road serves the employee/visitor car lots.",
     "multipleFacilities": "Single campus cluster: main plant plus a detached west warehouse and sheds; the container laydown further west appears to be a different business and was excluded."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.gray.com/projects/pepsi-beverages-company-houston-texas/",
+        "date": "2023",
+        "type": "press",
+        "claim": "Pepsi Beverages Company Houston beverage warehouse facility expansion (existing PBNA Houston operation)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "PepsiCo is expanding, not closing, Houston-area beverage operations.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

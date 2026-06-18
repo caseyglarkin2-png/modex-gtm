@@ -1,68 +1,173 @@
 {
   "name": "Quaker Oats - Columbia MO",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 38.99655, "lng": -92.28245 },
+  "coords": {
+    "lat": 38.99655,
+    "lng": -92.28245
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 38.997911, "lng": -92.282882 },
-      { "lat": 38.997884, "lng": -92.280787 },
-      { "lat": 38.995376, "lng": -92.281508 },
-      { "lat": 38.995163, "lng": -92.281783 },
-      { "lat": 38.995163, "lng": -92.283603 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 38.995761, "lng": -92.282248 },
-      { "lat": 38.995744, "lng": -92.282111 },
-      { "lat": 38.995677, "lng": -92.282119 },
-      { "lat": 38.995694, "lng": -92.282257 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.997911,
+          "lng": -92.282882
+        },
+        {
+          "lat": 38.997884,
+          "lng": -92.280787
+        },
+        {
+          "lat": 38.995376,
+          "lng": -92.281508
+        },
+        {
+          "lat": 38.995163,
+          "lng": -92.281783
+        },
+        {
+          "lat": 38.995163,
+          "lng": -92.283603
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 38.995761,
+          "lng": -92.282248
+        },
+        {
+          "lat": 38.995744,
+          "lng": -92.282111
+        },
+        {
+          "lat": 38.995677,
+          "lng": -92.282119
+        },
+        {
+          "lat": 38.995694,
+          "lng": -92.282257
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 38.99615, "lng": -92.283362 },
-        { "lat": 38.996257, "lng": -92.281955 },
-        { "lat": 38.99551, "lng": -92.281852 },
-        { "lat": 38.995403, "lng": -92.283431 }
-      ] },
-      { "ring": [
-        { "lat": 38.996794, "lng": -92.281747 },
-        { "lat": 38.996633, "lng": -92.281335 },
-        { "lat": 38.995993, "lng": -92.281541 },
-        { "lat": 38.996233, "lng": -92.281884 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 38.99615,
+            "lng": -92.283362
+          },
+          {
+            "lat": 38.996257,
+            "lng": -92.281955
+          },
+          {
+            "lat": 38.99551,
+            "lng": -92.281852
+          },
+          {
+            "lat": 38.995403,
+            "lng": -92.283431
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 38.996794,
+            "lng": -92.281747
+          },
+          {
+            "lat": 38.996633,
+            "lng": -92.281335
+          },
+          {
+            "lat": 38.995993,
+            "lng": -92.281541
+          },
+          {
+            "lat": 38.996233,
+            "lng": -92.281884
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 38.996607, "lng": -92.28209 },
-        { "lat": 38.996527, "lng": -92.281713 },
-        { "lat": 38.9961, "lng": -92.28185 },
-        { "lat": 38.99618, "lng": -92.282228 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 38.996607,
+            "lng": -92.28209
+          },
+          {
+            "lat": 38.996527,
+            "lng": -92.281713
+          },
+          {
+            "lat": 38.9961,
+            "lng": -92.28185
+          },
+          {
+            "lat": 38.99618,
+            "lng": -92.282228
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 333, "pano": "aXBKDKxqJWWlf1oP390Azg", "hasCoverage": true },
-      "truckGate": { "heading": 306, "pano": "aXBKDKxqJWWlf1oP390Azg", "hasCoverage": true }
+      "perimeter": {
+        "heading": 333,
+        "pano": "aXBKDKxqJWWlf1oP390Azg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 306,
+        "pano": "aXBKDKxqJWWlf1oP390Azg",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
-    "dockDoorCount": 28, "trailersVisible": 75, "trailerParkingCapacity": 110,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 13.0,
+    "dockDoorCount": 28,
+    "trailersVisible": 75,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 13,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@38.99655,-92.28245,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["remoteGs", "scale", "dockDoors"],
+  "uncertainFields": [
+    "remoteGs",
+    "scale",
+    "dockDoors"
+  ],
   "fieldNotes": {
     "truckGate": "z21 satellite shows a fence line crossing the inner truck drive ~70m in from Paris Rd, with gate posts/hardware on both sides of the lane (sliding gate); no barrier at the public road itself",
     "remoteGs": "no booth-sized structure at the gate in z20/z21 imagery; gate appears card/remote-operated. No ground-level view of the gate (Street View network only covers Paris Rd)",
@@ -71,5 +176,24 @@
     "railServed": "active rail corridor runs along the W property edge but no spur visibly enters the site",
     "urbanRural": "NE edge-of-town industrial corridor on US-63 business (Paris Rd), open farmland across the highway -> Rural per rubric"
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://business.comochamber.com/list/member/pepsico-quaker-oats-4381",
+        "date": "2024",
+        "type": "locator",
+        "claim": "PepsiCo Quaker Oats active manufacturer at 4501 Paris Rd, Columbia MO; rice-cake plant ~260 employees 24/7"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Real PepsiCo/Quaker rice-cake plant in Columbia MO (distinct from the closed Danville IL plant); not a mis-geocode.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -1,69 +1,189 @@
 {
   "name": "Quaker Oats - Bridgeview IL",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 41.763445, "lng": -87.812487 },
+  "coords": {
+    "lat": 41.763445,
+    "lng": -87.812487
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 41.76455, "lng": -87.81400 },
-      { "lat": 41.76455, "lng": -87.81210 },
-      { "lat": 41.76485, "lng": -87.81130 },
-      { "lat": 41.76470, "lng": -87.81075 },
-      { "lat": 41.76255, "lng": -87.81075 },
-      { "lat": 41.76250, "lng": -87.81400 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 41.76270, "lng": -87.81405 },
-      { "lat": 41.76270, "lng": -87.81375 },
-      { "lat": 41.76240, "lng": -87.81375 },
-      { "lat": 41.76240, "lng": -87.81405 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.76455,
+          "lng": -87.814
+        },
+        {
+          "lat": 41.76455,
+          "lng": -87.8121
+        },
+        {
+          "lat": 41.76485,
+          "lng": -87.8113
+        },
+        {
+          "lat": 41.7647,
+          "lng": -87.81075
+        },
+        {
+          "lat": 41.76255,
+          "lng": -87.81075
+        },
+        {
+          "lat": 41.7625,
+          "lng": -87.814
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.7627,
+          "lng": -87.81405
+        },
+        {
+          "lat": 41.7627,
+          "lng": -87.81375
+        },
+        {
+          "lat": 41.7624,
+          "lng": -87.81375
+        },
+        {
+          "lat": 41.7624,
+          "lng": -87.81405
+        }
+      ]
+    },
     "dropYards": [],
     "dockAprons": [
-      { "ring": [
-        { "lat": 41.76285, "lng": -87.81320 },
-        { "lat": 41.76285, "lng": -87.81250 },
-        { "lat": 41.76260, "lng": -87.81250 },
-        { "lat": 41.76260, "lng": -87.81320 }
-      ] },
-      { "ring": [
-        { "lat": 41.76450, "lng": -87.81240 },
-        { "lat": 41.76450, "lng": -87.81180 },
-        { "lat": 41.76415, "lng": -87.81180 },
-        { "lat": 41.76415, "lng": -87.81240 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 41.76285,
+            "lng": -87.8132
+          },
+          {
+            "lat": 41.76285,
+            "lng": -87.8125
+          },
+          {
+            "lat": 41.7626,
+            "lng": -87.8125
+          },
+          {
+            "lat": 41.7626,
+            "lng": -87.8132
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 41.7645,
+            "lng": -87.8124
+          },
+          {
+            "lat": 41.7645,
+            "lng": -87.8118
+          },
+          {
+            "lat": 41.76415,
+            "lng": -87.8118
+          },
+          {
+            "lat": 41.76415,
+            "lng": -87.8124
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 41.76440, "lng": -87.81395 },
-      { "lat": 41.76440, "lng": -87.81270 },
-      { "lat": 41.76360, "lng": -87.81270 },
-      { "lat": 41.76360, "lng": -87.81395 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 41.7644,
+          "lng": -87.81395
+        },
+        {
+          "lat": 41.7644,
+          "lng": -87.8127
+        },
+        {
+          "lat": 41.7636,
+          "lng": -87.8127
+        },
+        {
+          "lat": 41.7636,
+          "lng": -87.81395
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 45, "pano": "QNs50FDMiTBz2ycYsHxrKQ", "hasCoverage": true },
-      "truckGate": { "heading": 20, "pano": "QNs50FDMiTBz2ycYsHxrKQ", "hasCoverage": true },
-      "dockAprons": { "heading": 344, "pano": "1vqOsrMhx29F1AG5lV1a4g", "hasCoverage": true },
-      "staging": { "heading": 0, "pano": "", "hasCoverage": false }
+      "perimeter": {
+        "heading": 45,
+        "pano": "QNs50FDMiTBz2ycYsHxrKQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 20,
+        "pano": "QNs50FDMiTBz2ycYsHxrKQ",
+        "hasCoverage": true
+      },
+      "dockAprons": {
+        "heading": 344,
+        "pano": "1vqOsrMhx29F1AG5lV1a4g",
+        "hasCoverage": true
+      },
+      "staging": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      }
     }
   },
   "yardMetrics": {
-    "dockDoorCount": 24, "trailersVisible": 12, "trailerParkingCapacity": 30,
-    "truckGateCount": 2, "buildingCount": 2, "siteAreaAcres": 15.6,
+    "dockDoorCount": 24,
+    "trailersVisible": 12,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 2,
+    "buildingCount": 2,
+    "siteAreaAcres": 15.6,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@41.763445,-87.812487,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "dropArea", "shipRcvSeparate", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "No barrier, gate, or booth visible at any street curb cut: the west truck drive off 71st St is open (SV 2025-04, trucks rolling straight in to the SW dock pocket), the east drive serves the office/employee lots. Interior control deeper in the yard cannot be ruled out - flagged.",
     "dockDoors": "South-face canopy bank (~8-12 doors), NE dock court on the north building (~6-10), plus a SW dock pocket off the west drive (~6); ~24 total, at the 10-25/25-50 boundary.",
@@ -73,5 +193,31 @@
     "westDrive": "The west drive is shared with the neighboring distribution building (excluded from the perimeter); the boundary is drawn at the drive edge.",
     "northBoundary": "Quaker parcel ends at the fence/green strip ~41.7646; the big white DC north of it is a separate facility."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.fooddive.com/news/pepsicos-quaker-plant-illinois-closing-layoffs/712954/",
+        "date": "2024-04",
+        "type": "trade-press",
+        "claim": "The closed Quaker IL plant was DANVILLE (510 layoffs), not Bridgeview"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.powderbulksolids.com/food-beverage/quaker-oats-boosts-production-capabilities-at-illinois-plant",
+        "date": "2021-10",
+        "type": "trade-press",
+        "claim": "Quaker (PepsiCo) EXPANDED Bridgeview IL with a new production line"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Closed IL Quaker plant was Danville, not Bridgeview; Bridgeview was expanded with a new line — active PepsiCo/Quaker plant.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

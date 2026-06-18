@@ -1,49 +1,119 @@
 {
   "name": "PBNA - Smyrna TN (DC)",
   "type": "Distribution Center",
-  "coords": { "lat": 35.93745, "lng": -86.53895 },
+  "coords": {
+    "lat": 35.93745,
+    "lng": -86.53895
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 35.936823, "lng": -86.540696 },
-      { "lat": 35.940047, "lng": -86.538224 },
-      { "lat": 35.939269, "lng": -86.536988 },
-      { "lat": 35.936823, "lng": -86.53795 },
-      { "lat": 35.936378, "lng": -86.539323 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.936823,
+          "lng": -86.540696
+        },
+        {
+          "lat": 35.940047,
+          "lng": -86.538224
+        },
+        {
+          "lat": 35.939269,
+          "lng": -86.536988
+        },
+        {
+          "lat": 35.936823,
+          "lng": -86.53795
+        },
+        {
+          "lat": 35.936378,
+          "lng": -86.539323
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [],
     "dockAprons": [
-      { "ring": [
-        { "lat": 35.936934, "lng": -86.539529 },
-        { "lat": 35.938324, "lng": -86.537744 },
-        { "lat": 35.938101, "lng": -86.5374 },
-        { "lat": 35.936711, "lng": -86.539186 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 35.936934,
+            "lng": -86.539529
+          },
+          {
+            "lat": 35.938324,
+            "lng": -86.537744
+          },
+          {
+            "lat": 35.938101,
+            "lng": -86.5374
+          },
+          {
+            "lat": 35.936711,
+            "lng": -86.539186
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 10, "pano": "aEViVbtQF_twuPYXPZQ0tA", "hasCoverage": true }
+      "perimeter": {
+        "heading": 10,
+        "pano": "aEViVbtQF_twuPYXPZQ0tA",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
-    "dockDoorCount": 30, "trailersVisible": 0, "trailerParkingCapacity": 60,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 17.1,
+    "dockDoorCount": 30,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 17.1,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.93745,-86.53895,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging", "entryLanes", "exitLanes", "fastLaneOpportunity", "dockDoors", "dropArea", "dropYard", "trailersVisible", "trailerParkingCapacity", "scale"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "dropYard",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "scale"
+  ],
   "fieldNotes": {
     "imagery": "ALL available satellite imagery and Street View (latest pano 2023-10) predate completion — the site is mid-construction in every source. The DC opened Aug 2024 (PBNA press release). Yard-control features (gate, guard booth, trailer rows, striping) are NOT yet visible and the gate fields below are honest defaults, not observations.",
     "truckGate": "not visible in construction-stage imagery; PBNA standard design and the single-access geometry make a controlled gate at the SE truck-court entrance likely once operational — flagged, not asserted",
@@ -53,5 +123,24 @@
     "urbanRural": "new logistics park on the I-24 frontage at Smyrna's edge, subdivisions nearby but edge-of-town setting -> Rural per rubric",
     "buildingIdentity": "rooftop geocode of 2020 Midway Ln lands on the SE-most building of the 3-building park; ~400k sq ft footprint matches the PBNA press release (largest PBNA DC in the Southeast)"
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.prnewswire.com/news-releases/pepsico-beverages-north-america-invests-in-greater-nashville-with-new-warehouse-and-distribution-center-in-smyrna-tennessee-302215784.html",
+        "date": "2024-08",
+        "type": "press",
+        "claim": "PBNA official PR: new ~400,000 sq ft Smyrna TN warehouse/DC, second-largest PBNA in US, grand opening Aug 2024"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Brand-new PBNA-operated DC opened Aug 2024, self-attested; no negatives.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

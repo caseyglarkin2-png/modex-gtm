@@ -1,73 +1,189 @@
 {
   "name": "Quaker - Lakeland FL (DC)",
   "type": "Distribution Center",
-  "coords": { "lat": 28.1527, "lng": -81.8908 },
+  "coords": {
+    "lat": 28.1527,
+    "lng": -81.8908
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 28.155165, "lng": -81.892586 },
-      { "lat": 28.153955, "lng": -81.889427 },
-      { "lat": 28.150443, "lng": -81.889427 },
-      { "lat": 28.150201, "lng": -81.892586 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 28.154335, "lng": -81.889603 },
-      { "lat": 28.154312, "lng": -81.889397 },
-      { "lat": 28.154199, "lng": -81.889414 },
-      { "lat": 28.154221, "lng": -81.88962 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 28.155165,
+          "lng": -81.892586
+        },
+        {
+          "lat": 28.153955,
+          "lng": -81.889427
+        },
+        {
+          "lat": 28.150443,
+          "lng": -81.889427
+        },
+        {
+          "lat": 28.150201,
+          "lng": -81.892586
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 28.154335,
+          "lng": -81.889603
+        },
+        {
+          "lat": 28.154312,
+          "lng": -81.889397
+        },
+        {
+          "lat": 28.154199,
+          "lng": -81.889414
+        },
+        {
+          "lat": 28.154221,
+          "lng": -81.88962
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 28.153955, "lng": -81.889702 },
-        { "lat": 28.153955, "lng": -81.889462 },
-        { "lat": 28.151715, "lng": -81.889462 },
-        { "lat": 28.151715, "lng": -81.889702 }
-      ] },
-      { "ring": [
-        { "lat": 28.154681, "lng": -81.890869 },
-        { "lat": 28.154681, "lng": -81.890045 },
-        { "lat": 28.154378, "lng": -81.890045 },
-        { "lat": 28.154378, "lng": -81.890869 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 28.153955,
+            "lng": -81.889702
+          },
+          {
+            "lat": 28.153955,
+            "lng": -81.889462
+          },
+          {
+            "lat": 28.151715,
+            "lng": -81.889462
+          },
+          {
+            "lat": 28.151715,
+            "lng": -81.889702
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 28.154681,
+            "lng": -81.890869
+          },
+          {
+            "lat": 28.154681,
+            "lng": -81.890045
+          },
+          {
+            "lat": 28.154378,
+            "lng": -81.890045
+          },
+          {
+            "lat": 28.154378,
+            "lng": -81.890869
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 28.154197, "lng": -81.89008 },
-        { "lat": 28.154197, "lng": -81.889702 },
-        { "lat": 28.15123, "lng": -81.889702 },
-        { "lat": 28.15123, "lng": -81.89008 }
-      ] },
-      { "ring": [
-        { "lat": 28.154136, "lng": -81.891934 },
-        { "lat": 28.154136, "lng": -81.891556 },
-        { "lat": 28.15123, "lng": -81.891556 },
-        { "lat": 28.15123, "lng": -81.891934 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 28.154197,
+            "lng": -81.89008
+          },
+          {
+            "lat": 28.154197,
+            "lng": -81.889702
+          },
+          {
+            "lat": 28.15123,
+            "lng": -81.889702
+          },
+          {
+            "lat": 28.15123,
+            "lng": -81.89008
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 28.154136,
+            "lng": -81.891934
+          },
+          {
+            "lat": 28.154136,
+            "lng": -81.891556
+          },
+          {
+            "lat": 28.15123,
+            "lng": -81.891556
+          },
+          {
+            "lat": 28.15123,
+            "lng": -81.891934
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 309, "pano": "I7vdoqEleif2XsiAv6rrLg", "hasCoverage": true },
-      "truckGate": { "heading": 219, "pano": "rFJzyzwW8fJK0RXgbI_AxA", "hasCoverage": true }
+      "perimeter": {
+        "heading": 309,
+        "pano": "I7vdoqEleif2XsiAv6rrLg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 219,
+        "pano": "rFJzyzwW8fJK0RXgbI_AxA",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
-    "dockDoorCount": 110, "trailersVisible": 80, "trailerParkingCapacity": 130,
-    "truckGateCount": 3, "buildingCount": 1, "siteAreaAcres": 36.0,
+    "dockDoorCount": 110,
+    "trailersVisible": 80,
+    "trailerParkingCapacity": 130,
+    "truckGateCount": 3,
+    "buildingCount": 1,
+    "siteAreaAcres": 36,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@28.1527,-81.8908,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "truckGateCount", "dropArea"],
+  "uncertainFields": [
+    "guardShack",
+    "truckGateCount",
+    "dropArea"
+  ],
   "fieldNotes": {
     "truckGate": "site is fully fenced (chain-link visible in 2024-01 Street View on the east road); 2021-02 SV down the NE drive shows a swing/slide gate across the lane with jersey barriers; z20 shows the fence line + gate at the NE throat with a small call-box-size object, no booth",
     "guardShack": "no guard booth visible at any access in SV or satellite -> remote/keypad check-in; flagged because the W-side and S-office accesses were only checked from overhead",
@@ -77,5 +193,24 @@
     "tenantNote": "Saddle Creek Logistics tractor observed inside the fence (2024-01 SV) - local 3PL/dray partner serving the Gatorade/Quaker operation",
     "urbanRural": "CenterState Logistics Park at I-4/SR-33 NE of Lakeland, surrounded by woods and pasture -> Rural"
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.sec.gov/Archives/edgar/data/1456016/000145601618000006/exhibit993quakerpressrelea.htm",
+        "date": "2018-03",
+        "type": "press",
+        "claim": "605,412 sq ft Lakeland FL DC leased to Quaker Sales and Distribution Inc (wholly-owned PepsiCo subsidiary), regional DC for Gatorade"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Quaker (PepsiCo subsidiary) operates the Lakeland DC; the 2025 Frito-Lay closures were in Orlando, not Lakeland.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

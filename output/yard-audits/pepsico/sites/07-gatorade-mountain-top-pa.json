@@ -1,83 +1,226 @@
 {
   "name": "Gatorade - Mountain Top PA",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 41.129431, "lng": -75.886141 },
+  "coords": {
+    "lat": 41.129431,
+    "lng": -75.886141
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 41.13031, "lng": -75.888132 },
-      { "lat": 41.130672, "lng": -75.887926 },
-      { "lat": 41.130698, "lng": -75.88463 },
-      { "lat": 41.130465, "lng": -75.883875 },
-      { "lat": 41.129431, "lng": -75.883463 },
-      { "lat": 41.128603, "lng": -75.8836 },
-      { "lat": 41.128241, "lng": -75.884493 },
-      { "lat": 41.128293, "lng": -75.888064 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 41.13031, "lng": -75.88842 },
-      { "lat": 41.13031, "lng": -75.88806 },
-      { "lat": 41.13017, "lng": -75.88806 },
-      { "lat": 41.13017, "lng": -75.88842 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.13031,
+          "lng": -75.888132
+        },
+        {
+          "lat": 41.130672,
+          "lng": -75.887926
+        },
+        {
+          "lat": 41.130698,
+          "lng": -75.88463
+        },
+        {
+          "lat": 41.130465,
+          "lng": -75.883875
+        },
+        {
+          "lat": 41.129431,
+          "lng": -75.883463
+        },
+        {
+          "lat": 41.128603,
+          "lng": -75.8836
+        },
+        {
+          "lat": 41.128241,
+          "lng": -75.884493
+        },
+        {
+          "lat": 41.128293,
+          "lng": -75.888064
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.13031,
+          "lng": -75.88842
+        },
+        {
+          "lat": 41.13031,
+          "lng": -75.88806
+        },
+        {
+          "lat": 41.13017,
+          "lng": -75.88806
+        },
+        {
+          "lat": 41.13017,
+          "lng": -75.88842
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 41.130595, "lng": -75.887961 },
-        { "lat": 41.130595, "lng": -75.887446 },
-        { "lat": 41.129638, "lng": -75.887446 },
-        { "lat": 41.129638, "lng": -75.887961 }
-      ] },
-      { "ring": [
-        { "lat": 41.130672, "lng": -75.88463 },
-        { "lat": 41.130672, "lng": -75.883978 },
-        { "lat": 41.130103, "lng": -75.883978 },
-        { "lat": 41.130103, "lng": -75.88463 }
-      ] },
-      { "ring": [
-        { "lat": 41.129845, "lng": -75.884356 },
-        { "lat": 41.129845, "lng": -75.883463 },
-        { "lat": 41.128759, "lng": -75.883463 },
-        { "lat": 41.128759, "lng": -75.884356 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 41.130595,
+            "lng": -75.887961
+          },
+          {
+            "lat": 41.130595,
+            "lng": -75.887446
+          },
+          {
+            "lat": 41.129638,
+            "lng": -75.887446
+          },
+          {
+            "lat": 41.129638,
+            "lng": -75.887961
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 41.130672,
+            "lng": -75.88463
+          },
+          {
+            "lat": 41.130672,
+            "lng": -75.883978
+          },
+          {
+            "lat": 41.130103,
+            "lng": -75.883978
+          },
+          {
+            "lat": 41.130103,
+            "lng": -75.88463
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 41.129845,
+            "lng": -75.884356
+          },
+          {
+            "lat": 41.129845,
+            "lng": -75.883463
+          },
+          {
+            "lat": 41.128759,
+            "lng": -75.883463
+          },
+          {
+            "lat": 41.128759,
+            "lng": -75.884356
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 41.130491, "lng": -75.887205 },
-        { "lat": 41.130491, "lng": -75.886931 },
-        { "lat": 41.13, "lng": -75.886931 },
-        { "lat": 41.13, "lng": -75.887205 }
-      ] },
-      { "ring": [
-        { "lat": 41.129793, "lng": -75.887549 },
-        { "lat": 41.129793, "lng": -75.886999 },
-        { "lat": 41.129612, "lng": -75.886999 },
-        { "lat": 41.129612, "lng": -75.887549 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 41.130491,
+            "lng": -75.887205
+          },
+          {
+            "lat": 41.130491,
+            "lng": -75.886931
+          },
+          {
+            "lat": 41.13,
+            "lng": -75.886931
+          },
+          {
+            "lat": 41.13,
+            "lng": -75.887205
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 41.129793,
+            "lng": -75.887549
+          },
+          {
+            "lat": 41.129793,
+            "lng": -75.886999
+          },
+          {
+            "lat": 41.129612,
+            "lng": -75.886999
+          },
+          {
+            "lat": 41.129612,
+            "lng": -75.887549
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 66, "pano": "_xS9zSVbgiB1YdO0yJn1hw", "hasCoverage": true },
-      "truckGate": { "heading": 73, "pano": "vwqXchYZyM3F98EMb_6mqw", "hasCoverage": true }
+      "perimeter": {
+        "heading": 66,
+        "pano": "_xS9zSVbgiB1YdO0yJn1hw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 73,
+        "pano": "vwqXchYZyM3F98EMb_6mqw",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
-    "dockDoorCount": 30, "trailersVisible": 75, "trailerParkingCapacity": 110,
-    "truckGateCount": 2, "buildingCount": 1, "siteAreaAcres": 24.3,
+    "dockDoorCount": 30,
+    "trailersVisible": 75,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 24.3,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.129431,-75.886141,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["shipRcvSeparate", "entryExitTogether", "dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "shipRcvSeparate",
+    "entryExitTogether",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Open site. Street View (2019-08) drives straight up the NW driveway from Oak Hill Rd into the trailer yard and along the internal north road; no barrier arm, gate, or checkpoint structure at any entrance in SV or 2026 satellite.",
     "guardShack": "No booth at either the NW truck driveway or the south office entrance; only a gazebo-style smoking shelter beside the north internal road.",
@@ -86,5 +229,24 @@
     "entryExitTogether": "Trucks appear to enter and exit via the paired NW driveways off Oak Hill Rd; south drive is the office/visitor entrance with flagpoles.",
     "railServed": "Active rail line runs along the southern property line but no spur enters the parcel."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.talentify.io/job/gatorade-regional-tpm-manager-mountain-top-pennsylvania-pepsico-302008-2",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active PepsiCo Gatorade careers req (Regional TPM Manager) at Mountain Top PA"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Gatorade manufacturing plant with current PepsiCo careers req; not on any closure list (the PA closure was Harrisburg).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

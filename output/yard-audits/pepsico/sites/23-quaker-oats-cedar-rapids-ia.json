@@ -1,76 +1,211 @@
 {
   "name": "Quaker Oats - Cedar Rapids IA",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 41.98220, "lng": -91.67100 },
+  "coords": {
+    "lat": 41.9822,
+    "lng": -91.671
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 41.98430, "lng": -91.67280 },
-      { "lat": 41.98470, "lng": -91.67180 },
-      { "lat": 41.98430, "lng": -91.67080 },
-      { "lat": 41.98300, "lng": -91.66980 },
-      { "lat": 41.98180, "lng": -91.66920 },
-      { "lat": 41.98080, "lng": -91.66920 },
-      { "lat": 41.98040, "lng": -91.67060 },
-      { "lat": 41.98000, "lng": -91.67200 },
-      { "lat": 41.98010, "lng": -91.67240 },
-      { "lat": 41.98150, "lng": -91.67230 },
-      { "lat": 41.98300, "lng": -91.67260 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 41.98075, "lng": -91.67085 },
-      { "lat": 41.98075, "lng": -91.67050 },
-      { "lat": 41.98045, "lng": -91.67050 },
-      { "lat": 41.98045, "lng": -91.67085 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.9843,
+          "lng": -91.6728
+        },
+        {
+          "lat": 41.9847,
+          "lng": -91.6718
+        },
+        {
+          "lat": 41.9843,
+          "lng": -91.6708
+        },
+        {
+          "lat": 41.983,
+          "lng": -91.6698
+        },
+        {
+          "lat": 41.9818,
+          "lng": -91.6692
+        },
+        {
+          "lat": 41.9808,
+          "lng": -91.6692
+        },
+        {
+          "lat": 41.9804,
+          "lng": -91.6706
+        },
+        {
+          "lat": 41.98,
+          "lng": -91.672
+        },
+        {
+          "lat": 41.9801,
+          "lng": -91.6724
+        },
+        {
+          "lat": 41.9815,
+          "lng": -91.6723
+        },
+        {
+          "lat": 41.983,
+          "lng": -91.6726
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.98075,
+          "lng": -91.67085
+        },
+        {
+          "lat": 41.98075,
+          "lng": -91.6705
+        },
+        {
+          "lat": 41.98045,
+          "lng": -91.6705
+        },
+        {
+          "lat": 41.98045,
+          "lng": -91.67085
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 41.98375, "lng": -91.67160 },
-        { "lat": 41.98375, "lng": -91.67065 },
-        { "lat": 41.98305, "lng": -91.67065 },
-        { "lat": 41.98305, "lng": -91.67160 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 41.98375,
+            "lng": -91.6716
+          },
+          {
+            "lat": 41.98375,
+            "lng": -91.67065
+          },
+          {
+            "lat": 41.98305,
+            "lng": -91.67065
+          },
+          {
+            "lat": 41.98305,
+            "lng": -91.6716
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 41.98190, "lng": -91.67165 },
-        { "lat": 41.98155, "lng": -91.67090 },
-        { "lat": 41.98135, "lng": -91.67105 },
-        { "lat": 41.98170, "lng": -91.67180 }
-      ] },
-      { "ring": [
-        { "lat": 41.98150, "lng": -91.67010 },
-        { "lat": 41.98150, "lng": -91.66950 },
-        { "lat": 41.98110, "lng": -91.66950 },
-        { "lat": 41.98110, "lng": -91.67010 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 41.9819,
+            "lng": -91.67165
+          },
+          {
+            "lat": 41.98155,
+            "lng": -91.6709
+          },
+          {
+            "lat": 41.98135,
+            "lng": -91.67105
+          },
+          {
+            "lat": 41.9817,
+            "lng": -91.6718
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 41.9815,
+            "lng": -91.6701
+          },
+          {
+            "lat": 41.9815,
+            "lng": -91.6695
+          },
+          {
+            "lat": 41.9811,
+            "lng": -91.6695
+          },
+          {
+            "lat": 41.9811,
+            "lng": -91.6701
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 351, "pano": "eaS0R8qNXbpCQG_L1UbZaQ", "hasCoverage": true },
-      "truckGate": { "heading": 20, "pano": "eaS0R8qNXbpCQG_L1UbZaQ", "hasCoverage": true },
-      "dropYards": { "heading": 0, "pano": "", "hasCoverage": false },
-      "dockAprons": { "heading": 337, "pano": "eaS0R8qNXbpCQG_L1UbZaQ", "hasCoverage": true }
+      "perimeter": {
+        "heading": 351,
+        "pano": "eaS0R8qNXbpCQG_L1UbZaQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 20,
+        "pano": "eaS0R8qNXbpCQG_L1UbZaQ",
+        "hasCoverage": true
+      },
+      "dropYards": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "dockAprons": {
+        "heading": 337,
+        "pano": "eaS0R8qNXbpCQG_L1UbZaQ",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
-    "dockDoorCount": 22, "trailersVisible": 40, "trailerParkingCapacity": 60,
-    "truckGateCount": 2, "buildingCount": 8, "siteAreaAcres": 26.5,
+    "dockDoorCount": 22,
+    "trailersVisible": 40,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 2,
+    "buildingCount": 8,
+    "siteAreaAcres": 26.5,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@41.98220,-91.67100,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "dropArea", "scale", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoors",
+    "dropArea",
+    "scale",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "The visible truck access - the SE dock apron curb cut off the public street (PEPSICO/QUAKER signed building, SV 2021-09) - is an open apron with no barrier or booth; trucks back to docks essentially off the street. An interior control for the north rail-side trailer yard could not be observed (no SV coverage inside) - flagged.",
     "backupSensitive": "Downtown setting: dock maneuvering and any queue happens at the public street edge next to a freeway ramp block.",
@@ -82,5 +217,31 @@
     "perimeter": "Bounded by the Cedar River (west), the rail corridor (east), the north elevator yard, and the downtown street (south). Parcel lines vs operational footprint are approximate in the NE rail zone.",
     "coords": "Roster geocode (GEOMETRIC_CENTER, moved 124m) was on the complex; locked center set mid-complex at 41.98220,-91.67100."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.foodbusinessnews.net/articles/25875-after-recall-quaker-decides-to-close-facility",
+        "date": "2024-04",
+        "type": "trade-press",
+        "claim": "The 2023-24 salmonella recall/closure was the DANVILLE IL Quaker plant, not Cedar Rapids; production shifted to Cedar Rapids"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/Jobs/Quaker-Oats-Pepsico",
+        "date": "2025-11",
+        "type": "careers",
+        "claim": "Active Quaker/PepsiCo Cedar Rapids reqs confirm the plant is operating"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "The recall/shutdown was Danville IL, not Cedar Rapids — Cedar Rapids absorbed Danville’s production; large long-running plant still operating.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -1,78 +1,220 @@
 {
   "name": "Gatorade - Indianapolis IN",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 39.6817, "lng": -86.2990 },
+  "coords": {
+    "lat": 39.6817,
+    "lng": -86.299
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 39.68400, "lng": -86.29980 },
-      { "lat": 39.68421, "lng": -86.29891 },
-      { "lat": 39.68342, "lng": -86.29733 },
-      { "lat": 39.68236, "lng": -86.29596 },
-      { "lat": 39.68109, "lng": -86.29651 },
-      { "lat": 39.68004, "lng": -86.29760 },
-      { "lat": 39.67898, "lng": -86.29843 },
-      { "lat": 39.67835, "lng": -86.30090 },
-      { "lat": 39.67919, "lng": -86.30213 },
-      { "lat": 39.68131, "lng": -86.30254 },
-      { "lat": 39.68321, "lng": -86.30144 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 39.67880, "lng": -86.30120 },
-      { "lat": 39.67900, "lng": -86.30075 },
-      { "lat": 39.67935, "lng": -86.30090 },
-      { "lat": 39.67915, "lng": -86.30135 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.684,
+          "lng": -86.2998
+        },
+        {
+          "lat": 39.68421,
+          "lng": -86.29891
+        },
+        {
+          "lat": 39.68342,
+          "lng": -86.29733
+        },
+        {
+          "lat": 39.68236,
+          "lng": -86.29596
+        },
+        {
+          "lat": 39.68109,
+          "lng": -86.29651
+        },
+        {
+          "lat": 39.68004,
+          "lng": -86.2976
+        },
+        {
+          "lat": 39.67898,
+          "lng": -86.29843
+        },
+        {
+          "lat": 39.67835,
+          "lng": -86.3009
+        },
+        {
+          "lat": 39.67919,
+          "lng": -86.30213
+        },
+        {
+          "lat": 39.68131,
+          "lng": -86.30254
+        },
+        {
+          "lat": 39.68321,
+          "lng": -86.30144
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.6788,
+          "lng": -86.3012
+        },
+        {
+          "lat": 39.679,
+          "lng": -86.30075
+        },
+        {
+          "lat": 39.67935,
+          "lng": -86.3009
+        },
+        {
+          "lat": 39.67915,
+          "lng": -86.30135
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 39.68400, "lng": -86.29980 },
-        { "lat": 39.68421, "lng": -86.29891 },
-        { "lat": 39.68342, "lng": -86.29733 },
-        { "lat": 39.68236, "lng": -86.29596 },
-        { "lat": 39.68173, "lng": -86.29651 },
-        { "lat": 39.68257, "lng": -86.30090 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 39.684,
+            "lng": -86.2998
+          },
+          {
+            "lat": 39.68421,
+            "lng": -86.29891
+          },
+          {
+            "lat": 39.68342,
+            "lng": -86.29733
+          },
+          {
+            "lat": 39.68236,
+            "lng": -86.29596
+          },
+          {
+            "lat": 39.68173,
+            "lng": -86.29651
+          },
+          {
+            "lat": 39.68257,
+            "lng": -86.3009
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 39.68276, "lng": -86.29681 },
-        { "lat": 39.68170, "lng": -86.29488 },
-        { "lat": 39.68203, "lng": -86.29457 },
-        { "lat": 39.68309, "lng": -86.29650 }
-      ] },
-      { "ring": [
-        { "lat": 39.68318, "lng": -86.30153 },
-        { "lat": 39.68281, "lng": -86.29995 },
-        { "lat": 39.68306, "lng": -86.29985 },
-        { "lat": 39.68343, "lng": -86.30143 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 39.68276,
+            "lng": -86.29681
+          },
+          {
+            "lat": 39.6817,
+            "lng": -86.29488
+          },
+          {
+            "lat": 39.68203,
+            "lng": -86.29457
+          },
+          {
+            "lat": 39.68309,
+            "lng": -86.2965
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 39.68318,
+            "lng": -86.30153
+          },
+          {
+            "lat": 39.68281,
+            "lng": -86.29995
+          },
+          {
+            "lat": 39.68306,
+            "lng": -86.29985
+          },
+          {
+            "lat": 39.68343,
+            "lng": -86.30143
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 19, "pano": "MoTyKXL2BXBk-sTquCmDHA", "hasCoverage": true },
-      "truckGate": { "heading": 14, "pano": "MoTyKXL2BXBk-sTquCmDHA", "hasCoverage": true },
-      "dropYards": { "heading": 0, "pano": "", "hasCoverage": false },
-      "dockAprons": { "heading": 0, "pano": "", "hasCoverage": false }
+      "perimeter": {
+        "heading": 19,
+        "pano": "MoTyKXL2BXBk-sTquCmDHA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 14,
+        "pano": "MoTyKXL2BXBk-sTquCmDHA",
+        "hasCoverage": true
+      },
+      "dropYards": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "dockAprons": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      }
     }
   },
   "yardMetrics": {
-    "dockDoorCount": 55, "trailersVisible": 250, "trailerParkingCapacity": 350,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 60.3,
+    "dockDoorCount": 55,
+    "trailersVisible": 250,
+    "trailerParkingCapacity": 350,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 60.3,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.6817,-86.2990,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "scale", "entryLanes", "exitLanes", "shipRcvSeparate", "preGateStaging"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate",
+    "preGateStaging"
+  ],
   "fieldNotes": {
     "truckGate": "SW truck entrance off S Decatur Blvd: a divided pair of parallel approach lanes with a grass median and a small blue-roofed booth-sized structure at the junction (z20); the only ground-level pano nearby is an interior service-drive frame that does not show the checkpoint, so the gate call is satellite-only.",
     "guardShack": "The ~3x6 m blue-roof structure beside the entrance lanes is booth-scale; not verified at ground level.",
@@ -81,5 +223,31 @@
     "shipRcvSeparate": "Production-side docks (north face of the plant section) vs finished-goods docks (NE face of the dark-roof warehouse) are distinct clusters on different faces.",
     "preGateStaging": "A rounded dead-end stub lane parallel to the entrance drive may be a queue/scale lane; could not confirm function."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.energy.gov/sites/default/files/2023-03/IndianapolisGatorade-Project_Profile.pdf",
+        "date": "2023-03",
+        "type": "press",
+        "claim": "DOE profile: Indianapolis is one of eight Gatorade manufacturing facilities in PBNA US operations"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.foodmanufacturing.com/capital-investment/news/21172325/pepsico-beverages-opens-new-indianapolis-distribution-center",
+        "date": "2021",
+        "type": "press",
+        "claim": "PepsiCo Beverages opened a new Indianapolis distribution center adjacent to the Gatorade plant"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "PBNA Gatorade hotfill plant + adjacent DC, ongoing PepsiCo investment, no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -1,76 +1,203 @@
 {
   "name": "PBNA - Munster IN",
   "type": "Bottling Plant",
-  "coords": { "lat": 41.54480, "lng": -87.51130 },
+  "coords": {
+    "lat": 41.5448,
+    "lng": -87.5113
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 41.545970, "lng": -87.513600 },
-      { "lat": 41.545970, "lng": -87.509900 },
-      { "lat": 41.545600, "lng": -87.509900 },
-      { "lat": 41.545600, "lng": -87.509250 },
-      { "lat": 41.543680, "lng": -87.509350 },
-      { "lat": 41.543680, "lng": -87.512100 },
-      { "lat": 41.544700, "lng": -87.513100 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 41.546150, "lng": -87.509500 },
-      { "lat": 41.546150, "lng": -87.509050 },
-      { "lat": 41.545850, "lng": -87.509050 },
-      { "lat": 41.545850, "lng": -87.509500 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.54597,
+          "lng": -87.5136
+        },
+        {
+          "lat": 41.54597,
+          "lng": -87.5099
+        },
+        {
+          "lat": 41.5456,
+          "lng": -87.5099
+        },
+        {
+          "lat": 41.5456,
+          "lng": -87.50925
+        },
+        {
+          "lat": 41.54368,
+          "lng": -87.50935
+        },
+        {
+          "lat": 41.54368,
+          "lng": -87.5121
+        },
+        {
+          "lat": 41.5447,
+          "lng": -87.5131
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.54615,
+          "lng": -87.5095
+        },
+        {
+          "lat": 41.54615,
+          "lng": -87.50905
+        },
+        {
+          "lat": 41.54585,
+          "lng": -87.50905
+        },
+        {
+          "lat": 41.54585,
+          "lng": -87.5095
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 41.545820, "lng": -87.513500 },
-        { "lat": 41.545820, "lng": -87.513100 },
-        { "lat": 41.545280, "lng": -87.513100 },
-        { "lat": 41.545280, "lng": -87.513500 }
-      ] },
-      { "ring": [
-        { "lat": 41.544060, "lng": -87.510580 },
-        { "lat": 41.544060, "lng": -87.509890 },
-        { "lat": 41.543680, "lng": -87.509890 },
-        { "lat": 41.543680, "lng": -87.510580 }
-      ] },
-      { "ring": [
-        { "lat": 41.545250, "lng": -87.513150 },
-        { "lat": 41.545150, "lng": -87.512900 },
-        { "lat": 41.544350, "lng": -87.512300 },
-        { "lat": 41.544450, "lng": -87.512550 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 41.54582,
+            "lng": -87.5135
+          },
+          {
+            "lat": 41.54582,
+            "lng": -87.5131
+          },
+          {
+            "lat": 41.54528,
+            "lng": -87.5131
+          },
+          {
+            "lat": 41.54528,
+            "lng": -87.5135
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 41.54406,
+            "lng": -87.51058
+          },
+          {
+            "lat": 41.54406,
+            "lng": -87.50989
+          },
+          {
+            "lat": 41.54368,
+            "lng": -87.50989
+          },
+          {
+            "lat": 41.54368,
+            "lng": -87.51058
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 41.54525,
+            "lng": -87.51315
+          },
+          {
+            "lat": 41.54515,
+            "lng": -87.5129
+          },
+          {
+            "lat": 41.54435,
+            "lng": -87.5123
+          },
+          {
+            "lat": 41.54445,
+            "lng": -87.51255
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 41.545740, "lng": -87.512920 },
-        { "lat": 41.545740, "lng": -87.512500 },
-        { "lat": 41.544970, "lng": -87.512500 },
-        { "lat": 41.544970, "lng": -87.512920 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 41.54574,
+            "lng": -87.51292
+          },
+          {
+            "lat": 41.54574,
+            "lng": -87.5125
+          },
+          {
+            "lat": 41.54497,
+            "lng": -87.5125
+          },
+          {
+            "lat": 41.54497,
+            "lng": -87.51292
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 280, "pano": "7WmUvJWZvK9hS-000PNYOw", "hasCoverage": true },
-      "truckGate": { "heading": 270, "pano": "BAwH2gEW76qUs_5fpuMkxQ", "hasCoverage": true }
+      "perimeter": {
+        "heading": 280,
+        "pano": "7WmUvJWZvK9hS-000PNYOw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 270,
+        "pano": "BAwH2gEW76qUs_5fpuMkxQ",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
-    "dockDoorCount": 30, "trailersVisible": 45, "trailerParkingCapacity": 60,
-    "truckGateCount": 2, "buildingCount": 3, "siteAreaAcres": 19.0,
+    "dockDoorCount": 30,
+    "trailersVisible": 45,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 2,
+    "buildingCount": 3,
+    "siteAreaAcres": 19,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@41.54480,-87.51130,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoors", "railServed", "shipRcvSeparate", "multipleFacilities", "dropArea"],
+  "uncertainFields": [
+    "dockDoors",
+    "railServed",
+    "shipRcvSeparate",
+    "multipleFacilities",
+    "dropArea"
+  ],
   "fieldNotes": {
     "truckGate": "No gate found at any access: the north entrance drive off Calumet Ave (by the Starbucks outparcel, where an Averitt semi was turning in on 2024-06 Street View) is an open yellow-hatched drive; the inner court entries off the east-west access road show no barrier; the south Calumet drive is also open. Open-campus pattern.",
     "guardShack": "No booth structure at any entrance in satellite or 2024-06 Street View.",
@@ -79,5 +206,24 @@
     "railServed": "A rail line runs along the SW boundary with what may be an old spur alignment toward the plant's SW corner; no active spur into the property could be confirmed - set false, flagged.",
     "multipleFacilities": "The audited parcel is the Pepsi complex (main multi-section plant + east building + south warehouse). The large DC north of the access road and the flex/office buildings south of the south drive are separate properties and were excluded."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/co/Pepsico/Jobs/-in-Munster,IN",
+        "date": "2026-04",
+        "type": "careers",
+        "claim": "Active PepsiCo fleet/electro-mechanical technician + ops reqs at Munster IN"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "PBNA Munster bottling plant actively hiring; the IN closure was Muncie (different city), not Munster.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

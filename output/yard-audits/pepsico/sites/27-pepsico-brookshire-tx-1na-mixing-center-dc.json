@@ -1,62 +1,153 @@
 {
   "name": "PepsiCo - Brookshire TX (1NA Mixing Center DC)",
   "type": "Distribution Center",
-  "coords": { "lat": 29.7663, "lng": -95.9152 },
+  "coords": {
+    "lat": 29.7663,
+    "lng": -95.9152
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 29.763699, "lng": -95.918897 },
-      { "lat": 29.769123, "lng": -95.918924 },
-      { "lat": 29.768765, "lng": -95.91556 },
-      { "lat": 29.767573, "lng": -95.911303 },
-      { "lat": 29.76501, "lng": -95.912676 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 29.763699,
+          "lng": -95.918897
+        },
+        {
+          "lat": 29.769123,
+          "lng": -95.918924
+        },
+        {
+          "lat": 29.768765,
+          "lng": -95.91556
+        },
+        {
+          "lat": 29.767573,
+          "lng": -95.911303
+        },
+        {
+          "lat": 29.76501,
+          "lng": -95.912676
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [
-      { "ring": [
-        { "lat": 29.768571, "lng": -95.912933 },
-        { "lat": 29.768392, "lng": -95.912143 },
-        { "lat": 29.767349, "lng": -95.912281 },
-        { "lat": 29.767528, "lng": -95.91307 }
-      ] },
-      { "ring": [
-        { "lat": 29.768583, "lng": -95.913931 },
-        { "lat": 29.768494, "lng": -95.913313 },
-        { "lat": 29.768196, "lng": -95.913382 },
-        { "lat": 29.768285, "lng": -95.914 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 29.768571,
+            "lng": -95.912933
+          },
+          {
+            "lat": 29.768392,
+            "lng": -95.912143
+          },
+          {
+            "lat": 29.767349,
+            "lng": -95.912281
+          },
+          {
+            "lat": 29.767528,
+            "lng": -95.91307
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 29.768583,
+            "lng": -95.913931
+          },
+          {
+            "lat": 29.768494,
+            "lng": -95.913313
+          },
+          {
+            "lat": 29.768196,
+            "lng": -95.913382
+          },
+          {
+            "lat": 29.768285,
+            "lng": -95.914
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 29.76494, "lng": -95.91798 },
-        { "lat": 29.76705, "lng": -95.91238 },
-        { "lat": 29.76659, "lng": -95.91215 },
-        { "lat": 29.76448, "lng": -95.91775 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 29.76494,
+            "lng": -95.91798
+          },
+          {
+            "lat": 29.76705,
+            "lng": -95.91238
+          },
+          {
+            "lat": 29.76659,
+            "lng": -95.91215
+          },
+          {
+            "lat": 29.76448,
+            "lng": -95.91775
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 15, "pano": "ndYKn7z02I5zML3Gwu9gDA", "hasCoverage": true }
+      "perimeter": {
+        "heading": 15,
+        "pano": "ndYKn7z02I5zML3Gwu9gDA",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
-    "dockDoorCount": 120, "trailersVisible": 40, "trailerParkingCapacity": 200,
-    "truckGateCount": 2, "buildingCount": 1, "siteAreaAcres": 76.6,
+    "dockDoorCount": 120,
+    "trailersVisible": 40,
+    "trailerParkingCapacity": 200,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 76.6,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@29.7663,-95.9152,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dropArea", "entryLanes", "exitLanes", "dockDoorCount"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dropArea",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "truckGate": "as of the latest imagery (sat + Street View 2025-04, pre-PepsiCo move-in Oct 2025) the site is a completely open spec build: no perimeter fence along Kingsland Blvd, no gate, no booth at either access. PepsiCo may have added gating during fit-out — flagged",
     "entryExitSeparate": "multiple uncontrolled access points: E end onto the NE-SW park road and W end onto the western park road; S dock court reached around either building end",
@@ -66,5 +157,24 @@
     "buildingIdentity": "geocode pin sits on Kingsland Blvd between this building and the Ross DC complex to the south; footprint measurement (~650m x 150m = ~1.05M sq ft) plus news coverage (largest Houston industrial lease 2025, move-in Oct 2025) pins PepsiCo to the NE building",
     "urbanRural": "I-10 logistics corridor at Brookshire, open fields and prairie around the park -> Rural"
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://austincountynewsonline.com/pepsico-and-frito-lay-open-1-million-square-foot-distribution-center-in-brookshire/",
+        "date": "2025-10",
+        "type": "press",
+        "claim": "PepsiCo/Frito-Lay 1M sq ft 1NA Mixing Center combining Pepsi/Frito-Lay/Quaker under one roof in Brookshire TX"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Confirmed PepsiCo-operated 1NA Mixing Center DC in Brookshire/Katy area, leased and newly opened 2025.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -1,79 +1,215 @@
 {
   "name": "Gatorade - Atlanta GA",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 33.7113, "lng": -84.5961 },
+  "coords": {
+    "lat": 33.7113,
+    "lng": -84.5961
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 33.711523, "lng": -84.598328 },
-      { "lat": 33.713236, "lng": -84.597779 },
-      { "lat": 33.713693, "lng": -84.596131 },
-      { "lat": 33.712208, "lng": -84.594208 },
-      { "lat": 33.710952, "lng": -84.594345 },
-      { "lat": 33.709809, "lng": -84.594757 },
-      { "lat": 33.709581, "lng": -84.597092 },
-      { "lat": 33.710495, "lng": -84.598053 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 33.711650, "lng": -84.598800 },
-      { "lat": 33.711750, "lng": -84.598450 },
-      { "lat": 33.711350, "lng": -84.598200 },
-      { "lat": 33.711250, "lng": -84.598550 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.711523,
+          "lng": -84.598328
+        },
+        {
+          "lat": 33.713236,
+          "lng": -84.597779
+        },
+        {
+          "lat": 33.713693,
+          "lng": -84.596131
+        },
+        {
+          "lat": 33.712208,
+          "lng": -84.594208
+        },
+        {
+          "lat": 33.710952,
+          "lng": -84.594345
+        },
+        {
+          "lat": 33.709809,
+          "lng": -84.594757
+        },
+        {
+          "lat": 33.709581,
+          "lng": -84.597092
+        },
+        {
+          "lat": 33.710495,
+          "lng": -84.598053
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.71165,
+          "lng": -84.5988
+        },
+        {
+          "lat": 33.71175,
+          "lng": -84.59845
+        },
+        {
+          "lat": 33.71135,
+          "lng": -84.5982
+        },
+        {
+          "lat": 33.71125,
+          "lng": -84.59855
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 33.713122, "lng": -84.596268 },
-        { "lat": 33.712094, "lng": -84.594345 },
-        { "lat": 33.711180, "lng": -84.594895 },
-        { "lat": 33.712437, "lng": -84.596611 }
-      ] },
-      { "ring": [
-        { "lat": 33.712208, "lng": -84.597985 },
-        { "lat": 33.713351, "lng": -84.597641 },
-        { "lat": 33.713008, "lng": -84.596268 },
-        { "lat": 33.712094, "lng": -84.596611 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.713122,
+            "lng": -84.596268
+          },
+          {
+            "lat": 33.712094,
+            "lng": -84.594345
+          },
+          {
+            "lat": 33.71118,
+            "lng": -84.594895
+          },
+          {
+            "lat": 33.712437,
+            "lng": -84.596611
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.712208,
+            "lng": -84.597985
+          },
+          {
+            "lat": 33.713351,
+            "lng": -84.597641
+          },
+          {
+            "lat": 33.713008,
+            "lng": -84.596268
+          },
+          {
+            "lat": 33.712094,
+            "lng": -84.596611
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 33.711360, "lng": -84.597990 },
-        { "lat": 33.712330, "lng": -84.596610 },
-        { "lat": 33.712640, "lng": -84.596920 },
-        { "lat": 33.711670, "lng": -84.598300 }
-      ] },
-      { "ring": [
-        { "lat": 33.710040, "lng": -84.596130 },
-        { "lat": 33.711070, "lng": -84.594760 },
-        { "lat": 33.710770, "lng": -84.594430 },
-        { "lat": 33.709740, "lng": -84.595800 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.71136,
+            "lng": -84.59799
+          },
+          {
+            "lat": 33.71233,
+            "lng": -84.59661
+          },
+          {
+            "lat": 33.71264,
+            "lng": -84.59692
+          },
+          {
+            "lat": 33.71167,
+            "lng": -84.5983
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.71004,
+            "lng": -84.59613
+          },
+          {
+            "lat": 33.71107,
+            "lng": -84.59476
+          },
+          {
+            "lat": 33.71077,
+            "lng": -84.59443
+          },
+          {
+            "lat": 33.70974,
+            "lng": -84.5958
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 65, "pano": "CAoSHENJQUJJaENHMXVWZmxPd292M2s4TWwtdGp2alg.", "hasCoverage": true },
-      "truckGate": { "heading": 36, "pano": "CAoSHENJQUJJaENHMXVWZmxPd292M2s4TWwtdGp2alg.", "hasCoverage": true },
-      "dropYards": { "heading": 0, "pano": "", "hasCoverage": false },
-      "dockAprons": { "heading": 0, "pano": "", "hasCoverage": false }
+      "perimeter": {
+        "heading": 65,
+        "pano": "CAoSHENJQUJJaENHMXVWZmxPd292M2s4TWwtdGp2alg.",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 36,
+        "pano": "CAoSHENJQUJJaENHMXVWZmxPd292M2s4TWwtdGp2alg.",
+        "hasCoverage": true
+      },
+      "dropYards": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "dockAprons": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      }
     }
   },
   "yardMetrics": {
-    "dockDoorCount": 55, "trailersVisible": 180, "trailerParkingCapacity": 220,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 32.4,
+    "dockDoorCount": 55,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 220,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 32.4,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.7113,-84.5961,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoors", "entryExitTogether", "scale"],
+  "uncertainFields": [
+    "dockDoors",
+    "entryExitTogether",
+    "scale"
+  ],
   "fieldNotes": {
     "guardShack": "Booth with a teal canopy beside the inbound lane at the Westgate Pkwy teardrop entrance (z20); a gate/fence line runs from the booth across to the island; 2025-03 ground photosphere confirms full chain-link perimeter and the gated entrance.",
     "backupSensitive": "Only ~30-50 m between Westgate Pkwy and the booth (2-truck stack); a check-in queue spills onto the parkway that also serves the neighboring DC campus.",
@@ -82,5 +218,24 @@
     "entryExitTogether": "Main teardrop gate handles both directions; a possible secondary service access to the SE apron from the south road could not be confirmed.",
     "postGateStaging": "Striped overflow/staging strip just inside the booth plus a wide apron before the NW dock bank."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://boulevardcid.org/the-district/business-spotlights/pepsico-gatorade/",
+        "date": "2023",
+        "type": "press",
+        "claim": "PepsiCo Gatorade plant on Westgate Pkwy is one of PepsiCo’s US Gatorade manufacturing plants, ~250 trucks/day at peak"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Gatorade plant (Westgate Pkwy) is DISTINCT from the Atlanta bottling plant PepsiCo closed Oct 2024; manufacturing site remains operating.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

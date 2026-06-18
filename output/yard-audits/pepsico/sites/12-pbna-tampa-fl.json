@@ -1,65 +1,168 @@
 {
   "name": "PBNA - Tampa FL",
   "type": "Bottling Plant",
-  "coords": { "lat": 28.05135, "lng": -82.42505 },
+  "coords": {
+    "lat": 28.05135,
+    "lng": -82.42505
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 28.052581, "lng": -82.426069 },
-      { "lat": 28.052611, "lng": -82.424936 },
-      { "lat": 28.052247, "lng": -82.424387 },
-      { "lat": 28.051702, "lng": -82.424146 },
-      { "lat": 28.051096, "lng": -82.424181 },
-      { "lat": 28.050672, "lng": -82.424318 },
-      { "lat": 28.050126, "lng": -82.424387 },
-      { "lat": 28.050126, "lng": -82.426 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 28.05076, "lng": -82.42602 },
-      { "lat": 28.05076, "lng": -82.42584 },
-      { "lat": 28.05062, "lng": -82.42584 },
-      { "lat": 28.05062, "lng": -82.42602 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 28.052581,
+          "lng": -82.426069
+        },
+        {
+          "lat": 28.052611,
+          "lng": -82.424936
+        },
+        {
+          "lat": 28.052247,
+          "lng": -82.424387
+        },
+        {
+          "lat": 28.051702,
+          "lng": -82.424146
+        },
+        {
+          "lat": 28.051096,
+          "lng": -82.424181
+        },
+        {
+          "lat": 28.050672,
+          "lng": -82.424318
+        },
+        {
+          "lat": 28.050126,
+          "lng": -82.424387
+        },
+        {
+          "lat": 28.050126,
+          "lng": -82.426
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 28.05076,
+          "lng": -82.42602
+        },
+        {
+          "lat": 28.05076,
+          "lng": -82.42584
+        },
+        {
+          "lat": 28.05062,
+          "lng": -82.42584
+        },
+        {
+          "lat": 28.05062,
+          "lng": -82.42602
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 28.0525, "lng": -82.4247 },
-        { "lat": 28.0525, "lng": -82.4242 },
-        { "lat": 28.0522, "lng": -82.4242 },
-        { "lat": 28.0522, "lng": -82.4247 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 28.0525,
+            "lng": -82.4247
+          },
+          {
+            "lat": 28.0525,
+            "lng": -82.4242
+          },
+          {
+            "lat": 28.0522,
+            "lng": -82.4242
+          },
+          {
+            "lat": 28.0522,
+            "lng": -82.4247
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 28.05165, "lng": -82.42435 },
-        { "lat": 28.05165, "lng": -82.42415 },
-        { "lat": 28.05135, "lng": -82.42415 },
-        { "lat": 28.05135, "lng": -82.42435 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 28.05165,
+            "lng": -82.42435
+          },
+          {
+            "lat": 28.05165,
+            "lng": -82.42415
+          },
+          {
+            "lat": 28.05135,
+            "lng": -82.42415
+          },
+          {
+            "lat": 28.05135,
+            "lng": -82.42435
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 44, "pano": "CAoSF0NJSE0wb2dLRUlDQWdJRGV1T1NzendF", "hasCoverage": true },
-      "truckGate": { "heading": 91, "pano": "CAoSF0NJSE0wb2dLRUlDQWdJRGV1T1NzendF", "hasCoverage": true }
+      "perimeter": {
+        "heading": 44,
+        "pano": "CAoSF0NJSE0wb2dLRUlDQWdJRGV1T1NzendF",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 91,
+        "pano": "CAoSF0NJSE0wb2dLRUlDQWdJRGV1T1NzendF",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
-    "dockDoorCount": 12, "trailersVisible": 15, "trailerParkingCapacity": 30,
-    "truckGateCount": 2, "buildingCount": 3, "siteAreaAcres": 11.5,
+    "dockDoorCount": 12,
+    "trailersVisible": 15,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 2,
+    "buildingCount": 3,
+    "siteAreaAcres": 11.5,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@28.05135,-82.42505,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "trailerParkingCapacity", "railServed", "east boundary ownership"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "railServed",
+    "east boundary ownership"
+  ],
   "fieldNotes": {
     "truckGate": "Confirmed gated: the signed S entrance off N 30th St (Pepsi globe + wordmark on the facade) has a closed ornamental swing/slide gate across the drive (2022-09 photosphere); the N drive has a closed chain-link slide gate. Black ornamental fence runs along the 30th St frontage.",
     "guardShack": "A small structure sits just inside the S gate but cannot be confirmed as a staffed booth from available views; remoteGs set true, both flagged.",
@@ -68,5 +171,24 @@
     "eastBoundary": "The large trailer yard + blue/white building EAST of the rail corridor is a separate complex (likely a trucking terminal); excluded from the perimeter.",
     "dockDoors": "~12 visible positions (east-face dock bank with canopy + north apron); 1936-era urban bottling plant, modest dock count."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/co/Pepsico/Jobs/-in-Tampa,FL",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active PepsiCo/PBNA Tampa reqs incl. production, Senior Maintenance, Industrial Electrician (plant-level roles)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Operating PBNA bottling facility in Tampa with current plant-level careers reqs; not on any closure list.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

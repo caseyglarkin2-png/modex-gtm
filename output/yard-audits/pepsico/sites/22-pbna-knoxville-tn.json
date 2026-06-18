@@ -1,72 +1,193 @@
 {
   "name": "PBNA - Knoxville TN",
   "type": "Bottling Plant",
-  "coords": { "lat": 35.96240, "lng": -83.96690 },
+  "coords": {
+    "lat": 35.9624,
+    "lng": -83.9669
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 35.96330, "lng": -83.96790 },
-      { "lat": 35.96330, "lng": -83.96590 },
-      { "lat": 35.96270, "lng": -83.96565 },
-      { "lat": 35.96150, "lng": -83.96570 },
-      { "lat": 35.96145, "lng": -83.96760 },
-      { "lat": 35.96220, "lng": -83.96820 },
-      { "lat": 35.96290, "lng": -83.96820 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 35.96285, "lng": -83.96600 },
-      { "lat": 35.96285, "lng": -83.96560 },
-      { "lat": 35.96260, "lng": -83.96560 },
-      { "lat": 35.96260, "lng": -83.96600 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.9633,
+          "lng": -83.9679
+        },
+        {
+          "lat": 35.9633,
+          "lng": -83.9659
+        },
+        {
+          "lat": 35.9627,
+          "lng": -83.96565
+        },
+        {
+          "lat": 35.9615,
+          "lng": -83.9657
+        },
+        {
+          "lat": 35.96145,
+          "lng": -83.9676
+        },
+        {
+          "lat": 35.9622,
+          "lng": -83.9682
+        },
+        {
+          "lat": 35.9629,
+          "lng": -83.9682
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.96285,
+          "lng": -83.966
+        },
+        {
+          "lat": 35.96285,
+          "lng": -83.9656
+        },
+        {
+          "lat": 35.9626,
+          "lng": -83.9656
+        },
+        {
+          "lat": 35.9626,
+          "lng": -83.966
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 35.96290, "lng": -83.96640 },
-        { "lat": 35.96290, "lng": -83.96580 },
-        { "lat": 35.96258, "lng": -83.96580 },
-        { "lat": 35.96258, "lng": -83.96640 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 35.9629,
+            "lng": -83.9664
+          },
+          {
+            "lat": 35.9629,
+            "lng": -83.9658
+          },
+          {
+            "lat": 35.96258,
+            "lng": -83.9658
+          },
+          {
+            "lat": 35.96258,
+            "lng": -83.9664
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 35.96255, "lng": -83.96660 },
-        { "lat": 35.96255, "lng": -83.96620 },
-        { "lat": 35.96205, "lng": -83.96620 },
-        { "lat": 35.96205, "lng": -83.96660 }
-      ] },
-      { "ring": [
-        { "lat": 35.96325, "lng": -83.96730 },
-        { "lat": 35.96325, "lng": -83.96650 },
-        { "lat": 35.96305, "lng": -83.96650 },
-        { "lat": 35.96305, "lng": -83.96730 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 35.96255,
+            "lng": -83.9666
+          },
+          {
+            "lat": 35.96255,
+            "lng": -83.9662
+          },
+          {
+            "lat": 35.96205,
+            "lng": -83.9662
+          },
+          {
+            "lat": 35.96205,
+            "lng": -83.9666
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 35.96325,
+            "lng": -83.9673
+          },
+          {
+            "lat": 35.96325,
+            "lng": -83.9665
+          },
+          {
+            "lat": 35.96305,
+            "lng": -83.9665
+          },
+          {
+            "lat": 35.96305,
+            "lng": -83.9673
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 257, "pano": "_js7aX8Kddho6S3mSpszdQ", "hasCoverage": true },
-      "truckGate": { "heading": 266, "pano": "_js7aX8Kddho6S3mSpszdQ", "hasCoverage": true },
-      "dropYards": { "heading": 269, "pano": "_js7aX8Kddho6S3mSpszdQ", "hasCoverage": true },
-      "dockAprons": { "heading": 17, "pano": "rhVRvR4zXuZcrDNkKxIi6g", "hasCoverage": true }
+      "perimeter": {
+        "heading": 257,
+        "pano": "_js7aX8Kddho6S3mSpszdQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 266,
+        "pano": "_js7aX8Kddho6S3mSpszdQ",
+        "hasCoverage": true
+      },
+      "dropYards": {
+        "heading": 269,
+        "pano": "_js7aX8Kddho6S3mSpszdQ",
+        "hasCoverage": true
+      },
+      "dockAprons": {
+        "heading": 17,
+        "pano": "rhVRvR4zXuZcrDNkKxIi6g",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
-    "dockDoorCount": 22, "trailersVisible": 25, "trailerParkingCapacity": 40,
-    "truckGateCount": 1, "buildingCount": 3, "siteAreaAcres": 10.6,
+    "dockDoorCount": 22,
+    "trailersVisible": 25,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 10.6,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.96240,-83.96690,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoors", "dropArea", "shipRcvSeparate"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Signed 'TRUCK ENTRANCE' on the east road (Street View 2026-01): chain-link fence with a sliding gate across the truck drive (open at capture). Perimeter is fenced with barbed wire.",
     "remoteGs": "No guard booth visible at the gate in SV or z20 satellite, implying remote/uncontrolled check-in; a booth deeper in the yard cannot be fully ruled out.",
@@ -76,5 +197,24 @@
     "shipRcvSeparate": "Route-truck loading (north canopy) is physically separate from OTR docks (east face).",
     "coords": "Roster GEOMETRIC_CENTER point was on-property; locked center moved to the main building rooftop."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/q-pepsico-l-knoxville,-tn-jobs.html",
+        "date": "2026-03",
+        "type": "careers",
+        "claim": "Active PBNA reqs in Knoxville (Warehouse Order Selector, Transport Unloader, CDL-A Local Delivery Driver, Merchandiser)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "No closure/divestiture found; multiple current PBNA warehouse + transport reqs confirm self-operated freight/DC facility.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

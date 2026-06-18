@@ -1,80 +1,219 @@
 {
   "name": "PBNA - Phoenix AZ",
   "type": "Bottling Plant",
-  "coords": { "lat": 33.41368, "lng": -111.98742 },
+  "coords": {
+    "lat": 33.41368,
+    "lng": -111.98742
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 33.414255, "lng": -111.989655 },
-      { "lat": 33.414685, "lng": -111.987972 },
-      { "lat": 33.414828, "lng": -111.986599 },
-      { "lat": 33.414628, "lng": -111.985672 },
-      { "lat": 33.412450, "lng": -111.985672 },
-      { "lat": 33.412450, "lng": -111.989655 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 33.413450, "lng": -111.989750 },
-      { "lat": 33.413450, "lng": -111.989350 },
-      { "lat": 33.413100, "lng": -111.989350 },
-      { "lat": 33.413100, "lng": -111.989750 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.414255,
+          "lng": -111.989655
+        },
+        {
+          "lat": 33.414685,
+          "lng": -111.987972
+        },
+        {
+          "lat": 33.414828,
+          "lng": -111.986599
+        },
+        {
+          "lat": 33.414628,
+          "lng": -111.985672
+        },
+        {
+          "lat": 33.41245,
+          "lng": -111.985672
+        },
+        {
+          "lat": 33.41245,
+          "lng": -111.989655
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.41345,
+          "lng": -111.98975
+        },
+        {
+          "lat": 33.41345,
+          "lng": -111.98935
+        },
+        {
+          "lat": 33.4131,
+          "lng": -111.98935
+        },
+        {
+          "lat": 33.4131,
+          "lng": -111.98975
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 33.413830, "lng": -111.989920 },
-        { "lat": 33.413830, "lng": -111.989090 },
-        { "lat": 33.413370, "lng": -111.989090 },
-        { "lat": 33.413370, "lng": -111.989920 }
-      ] },
-      { "ring": [
-        { "lat": 33.414310, "lng": -111.988000 },
-        { "lat": 33.414310, "lng": -111.987040 },
-        { "lat": 33.414130, "lng": -111.987040 },
-        { "lat": 33.414130, "lng": -111.988000 }
-      ] },
-      { "ring": [
-        { "lat": 33.414170, "lng": -111.990880 },
-        { "lat": 33.414170, "lng": -111.990090 },
-        { "lat": 33.413830, "lng": -111.990090 },
-        { "lat": 33.413830, "lng": -111.990880 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.41383,
+            "lng": -111.98992
+          },
+          {
+            "lat": 33.41383,
+            "lng": -111.98909
+          },
+          {
+            "lat": 33.41337,
+            "lng": -111.98909
+          },
+          {
+            "lat": 33.41337,
+            "lng": -111.98992
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.41431,
+            "lng": -111.988
+          },
+          {
+            "lat": 33.41431,
+            "lng": -111.98704
+          },
+          {
+            "lat": 33.41413,
+            "lng": -111.98704
+          },
+          {
+            "lat": 33.41413,
+            "lng": -111.988
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.41417,
+            "lng": -111.99088
+          },
+          {
+            "lat": 33.41417,
+            "lng": -111.99009
+          },
+          {
+            "lat": 33.41383,
+            "lng": -111.99009
+          },
+          {
+            "lat": 33.41383,
+            "lng": -111.99088
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 33.413980, "lng": -111.988280 },
-        { "lat": 33.413980, "lng": -111.987040 },
-        { "lat": 33.413750, "lng": -111.987040 },
-        { "lat": 33.413750, "lng": -111.988280 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.41398,
+            "lng": -111.98828
+          },
+          {
+            "lat": 33.41398,
+            "lng": -111.98704
+          },
+          {
+            "lat": 33.41375,
+            "lng": -111.98704
+          },
+          {
+            "lat": 33.41375,
+            "lng": -111.98828
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 33.413300, "lng": -111.989900 },
-      { "lat": 33.413300, "lng": -111.989200 },
-      { "lat": 33.412900, "lng": -111.989200 },
-      { "lat": 33.412900, "lng": -111.989900 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 33.4133,
+          "lng": -111.9899
+        },
+        {
+          "lat": 33.4133,
+          "lng": -111.9892
+        },
+        {
+          "lat": 33.4129,
+          "lng": -111.9892
+        },
+        {
+          "lat": 33.4129,
+          "lng": -111.9899
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 52, "pano": "pwTIkJO85ILVWaX5AH34LA", "hasCoverage": true },
-      "truckGate": { "heading": 70, "pano": "8yIGnXj-43lG0uT4e1Xxzw", "hasCoverage": true }
+      "perimeter": {
+        "heading": 52,
+        "pano": "pwTIkJO85ILVWaX5AH34LA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 70,
+        "pano": "8yIGnXj-43lG0uT4e1Xxzw",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
-    "dockDoorCount": 30, "trailersVisible": 70, "trailerParkingCapacity": 90,
-    "truckGateCount": 2, "buildingCount": 3, "siteAreaAcres": 22.2,
+    "dockDoorCount": 30,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 2,
+    "buildingCount": 3,
+    "siteAreaAcres": 22.2,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.41368,-111.98742,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "dockDoors", "shipRcvSeparate", "truckGateCount", "multipleFacilities"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "dockDoors",
+    "shipRcvSeparate",
+    "truckGateCount",
+    "multipleFacilities"
+  ],
   "fieldNotes": {
     "truckGate": "South entrance off the property's south street: fence/sliding-gate line across the drive with a check-in pedestal, wide paved throat, gate signage. Street View 2025-11 pano sits right at the approach.",
     "guardShack": "Posted red Pepsi-branded sign at the south entrance: 'STOP! ALL VENDORS AND VISITORS MUST CHECK IN AT THE GUARD SHACK' - explicit confirmation a staffed guard shack runs check-in. Small structure visible at the gate throat in z20.",
@@ -84,5 +223,24 @@
     "dropArea": "Herringbone drop rows in the center yard (~36 stalls), trailer row along the north fence (~18), west fleet rows; 50+ total positions.",
     "multipleFacilities": "Plant + small office + narrow west cross-dock on one contiguous fenced campus; counted as a single facility. Property line on the far west edge is the main uncertainty."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/co/pepsico/Jobs/-in-Phoenix,AZ",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active PepsiCo production/warehouse/CDL driver reqs in Phoenix AZ"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Current PBNA reqs in Phoenix; not on the Oct-2024 closure list.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

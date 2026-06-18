@@ -1,67 +1,171 @@
 {
   "name": "PBNA - Burnsville MN",
   "type": "Bottling Plant",
-  "coords": { "lat": 44.79126, "lng": -93.25670 },
+  "coords": {
+    "lat": 44.79126,
+    "lng": -93.2567
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 44.792027, "lng": -93.258089 },
-      { "lat": 44.792027, "lng": -93.255445 },
-      { "lat": 44.790492, "lng": -93.255445 },
-      { "lat": 44.790492, "lng": -93.258089 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 44.790550, "lng": -93.255600 },
-      { "lat": 44.790550, "lng": -93.255250 },
-      { "lat": 44.790250, "lng": -93.255250 },
-      { "lat": 44.790250, "lng": -93.255600 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 44.792027,
+          "lng": -93.258089
+        },
+        {
+          "lat": 44.792027,
+          "lng": -93.255445
+        },
+        {
+          "lat": 44.790492,
+          "lng": -93.255445
+        },
+        {
+          "lat": 44.790492,
+          "lng": -93.258089
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 44.79055,
+          "lng": -93.2556
+        },
+        {
+          "lat": 44.79055,
+          "lng": -93.25525
+        },
+        {
+          "lat": 44.79025,
+          "lng": -93.25525
+        },
+        {
+          "lat": 44.79025,
+          "lng": -93.2556
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 44.791980, "lng": -93.257460 },
-        { "lat": 44.791980, "lng": -93.256000 },
-        { "lat": 44.791860, "lng": -93.256000 },
-        { "lat": 44.791860, "lng": -93.257460 }
-      ] },
-      { "ring": [
-        { "lat": 44.792100, "lng": -93.258150 },
-        { "lat": 44.792100, "lng": -93.257850 },
-        { "lat": 44.791370, "lng": -93.257850 },
-        { "lat": 44.791370, "lng": -93.258150 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 44.79198,
+            "lng": -93.25746
+          },
+          {
+            "lat": 44.79198,
+            "lng": -93.256
+          },
+          {
+            "lat": 44.79186,
+            "lng": -93.256
+          },
+          {
+            "lat": 44.79186,
+            "lng": -93.25746
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 44.7921,
+            "lng": -93.25815
+          },
+          {
+            "lat": 44.7921,
+            "lng": -93.25785
+          },
+          {
+            "lat": 44.79137,
+            "lng": -93.25785
+          },
+          {
+            "lat": 44.79137,
+            "lng": -93.25815
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 44.791700, "lng": -93.255900 },
-        { "lat": 44.791700, "lng": -93.255500 },
-        { "lat": 44.790950, "lng": -93.255500 },
-        { "lat": 44.790950, "lng": -93.255900 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 44.7917,
+            "lng": -93.2559
+          },
+          {
+            "lat": 44.7917,
+            "lng": -93.2555
+          },
+          {
+            "lat": 44.79095,
+            "lng": -93.2555
+          },
+          {
+            "lat": 44.79095,
+            "lng": -93.2559
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 356, "pano": "9kL5z7Ft-5eEyLnPgH4iMw", "hasCoverage": true },
-      "truckGate": { "heading": 336, "pano": "7BuTnKf5yFsHLv5uypa-OA", "hasCoverage": true }
+      "perimeter": {
+        "heading": 356,
+        "pano": "9kL5z7Ft-5eEyLnPgH4iMw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 336,
+        "pano": "7BuTnKf5yFsHLv5uypa-OA",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
-    "dockDoorCount": 14, "trailersVisible": 28, "trailerParkingCapacity": 40,
-    "truckGateCount": 3, "buildingCount": 1, "siteAreaAcres": 8.8,
+    "dockDoorCount": 14,
+    "trailersVisible": 28,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 3,
+    "buildingCount": 1,
+    "siteAreaAcres": 8.8,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@44.79126,-93.25670,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoors", "dropArea", "multipleFacilities", "shipRcvSeparate", "postGateStaging"],
+  "uncertainFields": [
+    "dockDoors",
+    "dropArea",
+    "multipleFacilities",
+    "shipRcvSeparate",
+    "postGateStaging"
+  ],
   "fieldNotes": {
     "truckGate": "All three driveways (2 off 12th Ave S, 1 off Cliff Rd E between the plant and the flex building to its east) are open curb cuts - Street View 2022/2023 shows no barrier arm, gate, or checkpoint at any of them.",
     "guardShack": "No booth structure at any entrance in satellite or Street View.",
@@ -70,5 +174,24 @@
     "dropArea": "Trailer rows: parallel-parked row along the plant's north wall (~8), strip along 12th Ave fence (~10, Pepsi-branded trailers in Street View), plus trailers staged along the east drive.",
     "postGateStaging": "Ample paved yard staging north of the plant, but with no gate the pre/post-gate distinction does not apply; marked false."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/cmp/PepsiCo/locations/MN/Burnsville",
+        "date": "2025-06",
+        "type": "careers",
+        "claim": "Active PepsiCo warehouse/QC/maintenance reqs at Burnsville MN"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active PBNA facility with current careers reqs; not on any closure list.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -1,63 +1,163 @@
 {
   "name": "Gatorade - Tolleson AZ",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 33.4451, "lng": -112.2827 },
+  "coords": {
+    "lat": 33.4451,
+    "lng": -112.2827
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 33.44674, "lng": -112.28390 },
-      { "lat": 33.44674, "lng": -112.28112 },
-      { "lat": 33.44350, "lng": -112.28112 },
-      { "lat": 33.44350, "lng": -112.28390 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 33.44692, "lng": -112.28180 },
-      { "lat": 33.44692, "lng": -112.28145 },
-      { "lat": 33.44662, "lng": -112.28145 },
-      { "lat": 33.44662, "lng": -112.28180 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.44674,
+          "lng": -112.2839
+        },
+        {
+          "lat": 33.44674,
+          "lng": -112.28112
+        },
+        {
+          "lat": 33.4435,
+          "lng": -112.28112
+        },
+        {
+          "lat": 33.4435,
+          "lng": -112.2839
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.44692,
+          "lng": -112.2818
+        },
+        {
+          "lat": 33.44692,
+          "lng": -112.28145
+        },
+        {
+          "lat": 33.44662,
+          "lng": -112.28145
+        },
+        {
+          "lat": 33.44662,
+          "lng": -112.2818
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 33.44655, "lng": -112.28155 },
-        { "lat": 33.44655, "lng": -112.28125 },
-        { "lat": 33.44390, "lng": -112.28125 },
-        { "lat": 33.44390, "lng": -112.28155 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.44655,
+            "lng": -112.28155
+          },
+          {
+            "lat": 33.44655,
+            "lng": -112.28125
+          },
+          {
+            "lat": 33.4439,
+            "lng": -112.28125
+          },
+          {
+            "lat": 33.4439,
+            "lng": -112.28155
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 33.44655, "lng": -112.28185 },
-        { "lat": 33.44655, "lng": -112.28155 },
-        { "lat": 33.44395, "lng": -112.28155 },
-        { "lat": 33.44395, "lng": -112.28185 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.44655,
+            "lng": -112.28185
+          },
+          {
+            "lat": 33.44655,
+            "lng": -112.28155
+          },
+          {
+            "lat": 33.44395,
+            "lng": -112.28155
+          },
+          {
+            "lat": 33.44395,
+            "lng": -112.28185
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 91, "pano": "UXEImEz5XWw8tugVO_1Olg", "hasCoverage": true },
-      "truckGate": { "heading": 0, "pano": "", "hasCoverage": false },
-      "dockAprons": { "heading": 0, "pano": "", "hasCoverage": false },
-      "dropYards": { "heading": 0, "pano": "", "hasCoverage": false }
+      "perimeter": {
+        "heading": 91,
+        "pano": "UXEImEz5XWw8tugVO_1Olg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "dockAprons": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "dropYards": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      }
     }
   },
   "yardMetrics": {
-    "dockDoorCount": 35, "trailersVisible": 55, "trailerParkingCapacity": 70,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 22.7,
+    "dockDoorCount": 35,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 22.7,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.4451,-112.2827,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dropArea", "dockDoors", "entryExitTogether", "shipRcvSeparate"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dropArea",
+    "dockDoors",
+    "entryExitTogether",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Truck entry is a curve drive off a private E-W industrial road at the NE corner; perimeter is chain-link fenced (confirmed from 104th Ave Street View) but no barrier arm or booth resolvable at z20, and the private road has zero Street View coverage so the call could not be ground-truthed.",
     "dockDoors": "Single continuous dock face along the full ~345 m east wall; ~35 positions estimated from z19, exact count not resolvable under dock canopies.",
@@ -65,5 +165,24 @@
     "shipRcvSeparate": "Only the east dock face is clearly active; a possible canopy band on the north wall could not be confirmed as docks.",
     "entryExitTogether": "A secondary connection may exist at the SE laydown/contractor area to the private east road; main flow appears to be the single NE entrance."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://stevensleinweber.com/delivered-pepsico-gatorade-at-tolleson-commerce-park/",
+        "date": "2021",
+        "type": "press",
+        "claim": "PepsiCo/Gatorade completed a 735,687 sq ft warehouse/distribution building at Tolleson, more than doubling its footprint"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Major Gatorade manufacturing+distribution site, recent PepsiCo expansion, no closure/sale signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

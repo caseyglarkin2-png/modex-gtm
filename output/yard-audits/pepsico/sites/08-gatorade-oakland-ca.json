@@ -1,57 +1,141 @@
 {
   "name": "Gatorade - Oakland CA",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 37.76445, "lng": -122.20475 },
+  "coords": {
+    "lat": 37.76445,
+    "lng": -122.20475
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 37.76377, "lng": -122.2053 },
-      { "lat": 37.76438, "lng": -122.20572 },
-      { "lat": 37.76505, "lng": -122.20505 },
-      { "lat": 37.76503, "lng": -122.20455 },
-      { "lat": 37.76488, "lng": -122.2044 },
-      { "lat": 37.76445, "lng": -122.20419 },
-      { "lat": 37.7639, "lng": -122.20388 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 37.7639, "lng": -122.20532 },
-      { "lat": 37.76388, "lng": -122.20516 },
-      { "lat": 37.76376, "lng": -122.2052 },
-      { "lat": 37.76378, "lng": -122.20536 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.76377,
+          "lng": -122.2053
+        },
+        {
+          "lat": 37.76438,
+          "lng": -122.20572
+        },
+        {
+          "lat": 37.76505,
+          "lng": -122.20505
+        },
+        {
+          "lat": 37.76503,
+          "lng": -122.20455
+        },
+        {
+          "lat": 37.76488,
+          "lng": -122.2044
+        },
+        {
+          "lat": 37.76445,
+          "lng": -122.20419
+        },
+        {
+          "lat": 37.7639,
+          "lng": -122.20388
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 37.7639,
+          "lng": -122.20532
+        },
+        {
+          "lat": 37.76388,
+          "lng": -122.20516
+        },
+        {
+          "lat": 37.76376,
+          "lng": -122.2052
+        },
+        {
+          "lat": 37.76378,
+          "lng": -122.20536
+        }
+      ]
+    },
     "dropYards": [],
     "dockAprons": [
-      { "ring": [
-        { "lat": 37.76392, "lng": -122.2051 },
-        { "lat": 37.76396, "lng": -122.2042 },
-        { "lat": 37.76388, "lng": -122.20418 },
-        { "lat": 37.76384, "lng": -122.20508 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 37.76392,
+            "lng": -122.2051
+          },
+          {
+            "lat": 37.76396,
+            "lng": -122.2042
+          },
+          {
+            "lat": 37.76388,
+            "lng": -122.20418
+          },
+          {
+            "lat": 37.76384,
+            "lng": -122.20508
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 359, "pano": "a1plsuIKsFdihaL7LdRrWQ", "hasCoverage": true },
-      "truckGate": { "heading": 304, "pano": "5DsSXmn5cvdHeQX_mX1ORA", "hasCoverage": true }
+      "perimeter": {
+        "heading": 359,
+        "pano": "a1plsuIKsFdihaL7LdRrWQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 304,
+        "pano": "5DsSXmn5cvdHeQX_mX1ORA",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
-    "dockDoorCount": 8, "trailersVisible": 4, "trailerParkingCapacity": 8,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 3.7,
+    "dockDoorCount": 8,
+    "trailersVisible": 4,
+    "trailerParkingCapacity": 8,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 3.7,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@37.76445,-122.20475,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "0-10", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["dockDoors", "dockDoorCount", "trailerParkingCapacity", "perimeter west boundary"],
+  "uncertainFields": [
+    "dockDoors",
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "perimeter west boundary"
+  ],
   "fieldNotes": {
     "truckGate": "No barrier or gate across the SW drive off 57th Ave in 2025-05 Street View; trailers back into street-side docks directly from 57th Ave. A check-in window office with CCTV sits at the building's SW corner facing the drive, but there is no controlled vehicle gate.",
     "guardShack": "The corner check-in office is attached to the main building, not a freestanding booth beside a gate; classified false.",
@@ -60,5 +144,24 @@
     "dropArea": "No trailer storage on the parcel; the lined trailer stalls west of the plant belong to the neighboring warehouse property.",
     "perimeter": "West boundary set along the drive between the plant's equipment strip and the neighbor's lined stalls; parcel line not visible, flagged."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.theladders.com/job-listing/-1419749299340040313/production-operator-oakland-gatorade.htm",
+        "date": "2025-09",
+        "type": "careers",
+        "claim": "Active PepsiCo Production Operator - Oakland Gatorade req at the Oakland Gatorade plant"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active PepsiCo Gatorade plant in the Oakland industrial corridor (1175 57th Ave); coords in same area; no closure/sale found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

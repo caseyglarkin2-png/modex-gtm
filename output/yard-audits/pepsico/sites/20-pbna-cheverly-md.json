@@ -1,80 +1,221 @@
 {
   "name": "PBNA - Cheverly MD",
   "type": "Bottling Plant",
-  "coords": { "lat": 38.92670, "lng": -76.92560 },
+  "coords": {
+    "lat": 38.9267,
+    "lng": -76.9256
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 38.92752, "lng": -76.92710 },
-      { "lat": 38.92760, "lng": -76.92560 },
-      { "lat": 38.92790, "lng": -76.92470 },
-      { "lat": 38.92740, "lng": -76.92420 },
-      { "lat": 38.92655, "lng": -76.92425 },
-      { "lat": 38.92600, "lng": -76.92440 },
-      { "lat": 38.92549, "lng": -76.92520 },
-      { "lat": 38.92545, "lng": -76.92610 },
-      { "lat": 38.92645, "lng": -76.92725 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 38.92670, "lng": -76.92450 },
-      { "lat": 38.92670, "lng": -76.92410 },
-      { "lat": 38.92640, "lng": -76.92410 },
-      { "lat": 38.92640, "lng": -76.92450 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.92752,
+          "lng": -76.9271
+        },
+        {
+          "lat": 38.9276,
+          "lng": -76.9256
+        },
+        {
+          "lat": 38.9279,
+          "lng": -76.9247
+        },
+        {
+          "lat": 38.9274,
+          "lng": -76.9242
+        },
+        {
+          "lat": 38.92655,
+          "lng": -76.92425
+        },
+        {
+          "lat": 38.926,
+          "lng": -76.9244
+        },
+        {
+          "lat": 38.92549,
+          "lng": -76.9252
+        },
+        {
+          "lat": 38.92545,
+          "lng": -76.9261
+        },
+        {
+          "lat": 38.92645,
+          "lng": -76.92725
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 38.9267,
+          "lng": -76.9245
+        },
+        {
+          "lat": 38.9267,
+          "lng": -76.9241
+        },
+        {
+          "lat": 38.9264,
+          "lng": -76.9241
+        },
+        {
+          "lat": 38.9264,
+          "lng": -76.9245
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 38.92620, "lng": -76.92610 },
-        { "lat": 38.92620, "lng": -76.92460 },
-        { "lat": 38.92550, "lng": -76.92460 },
-        { "lat": 38.92550, "lng": -76.92610 }
-      ] },
-      { "ring": [
-        { "lat": 38.92790, "lng": -76.92500 },
-        { "lat": 38.92790, "lng": -76.92430 },
-        { "lat": 38.92700, "lng": -76.92430 },
-        { "lat": 38.92700, "lng": -76.92500 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 38.9262,
+            "lng": -76.9261
+          },
+          {
+            "lat": 38.9262,
+            "lng": -76.9246
+          },
+          {
+            "lat": 38.9255,
+            "lng": -76.9246
+          },
+          {
+            "lat": 38.9255,
+            "lng": -76.9261
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 38.9279,
+            "lng": -76.925
+          },
+          {
+            "lat": 38.9279,
+            "lng": -76.9243
+          },
+          {
+            "lat": 38.927,
+            "lng": -76.9243
+          },
+          {
+            "lat": 38.927,
+            "lng": -76.925
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 38.92645, "lng": -76.92590 },
-        { "lat": 38.92645, "lng": -76.92510 },
-        { "lat": 38.92620, "lng": -76.92510 },
-        { "lat": 38.92620, "lng": -76.92590 }
-      ] },
-      { "ring": [
-        { "lat": 38.92720, "lng": -76.92480 },
-        { "lat": 38.92720, "lng": -76.92435 },
-        { "lat": 38.92660, "lng": -76.92435 },
-        { "lat": 38.92660, "lng": -76.92480 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 38.92645,
+            "lng": -76.9259
+          },
+          {
+            "lat": 38.92645,
+            "lng": -76.9251
+          },
+          {
+            "lat": 38.9262,
+            "lng": -76.9251
+          },
+          {
+            "lat": 38.9262,
+            "lng": -76.9259
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 38.9272,
+            "lng": -76.9248
+          },
+          {
+            "lat": 38.9272,
+            "lng": -76.92435
+          },
+          {
+            "lat": 38.9266,
+            "lng": -76.92435
+          },
+          {
+            "lat": 38.9266,
+            "lng": -76.9248
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 278, "pano": "WV-YVxAC68KEbfCndGwawg", "hasCoverage": true },
-      "truckGate": { "heading": 277, "pano": "WV-YVxAC68KEbfCndGwawg", "hasCoverage": true },
-      "dropYards": { "heading": 65, "pano": "SGg2YVQZB5OhuMDBnCjd1g", "hasCoverage": true },
-      "dockAprons": { "heading": 0, "pano": "", "hasCoverage": false }
+      "perimeter": {
+        "heading": 278,
+        "pano": "WV-YVxAC68KEbfCndGwawg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 277,
+        "pano": "WV-YVxAC68KEbfCndGwawg",
+        "hasCoverage": true
+      },
+      "dropYards": {
+        "heading": 65,
+        "pano": "SGg2YVQZB5OhuMDBnCjd1g",
+        "hasCoverage": true
+      },
+      "dockAprons": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      }
     }
   },
   "yardMetrics": {
-    "dockDoorCount": 26, "trailersVisible": 75, "trailerParkingCapacity": 90,
-    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 13.2,
+    "dockDoorCount": 26,
+    "trailersVisible": 75,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 13.2,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@38.92670,-76.92560,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "dockDoors", "postGateStaging", "backupSensitive", "shipRcvSeparate"],
+  "uncertainFields": [
+    "guardShack",
+    "dockDoors",
+    "postGateStaging",
+    "backupSensitive",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Single truck entrance at the west end of the Pepsi Pl cul-de-sac roundabout: chain-link fence both sides, gate hardware, 5-mph and STOP signage, and trucks pass under a large steel check-in canopy (Street View 2022-07).",
     "guardShack": "A small tan booth-sized structure with a STOP sign sits beside the lane at the canopy; reads as a staffed check-in booth but could be a utility/office shed - flagged.",
@@ -84,5 +225,24 @@
     "coords": "Roster geocode (RANGE_INTERPOLATED, 38.926196,-76.927503) landed ~150m SW of the plant on the road; corrected center to the building at 38.9267,-76.9256.",
     "railServed": "No rail spur visible; site is bounded by BW Parkway greenery and local roads."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/q-pepsico-l-cheverly,-md-jobs.html",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active PepsiCo reqs (Warehouse Supervisor, Inventory Coordinator, Production Coordinator) at 2611 Pepsi Place, Cheverly MD"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active PepsiCo warehouse/production reqs at the Cheverly Pepsi Place address confirm current self-operation (DC/bottling).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

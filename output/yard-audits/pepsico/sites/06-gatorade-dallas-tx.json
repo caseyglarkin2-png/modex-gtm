@@ -1,71 +1,188 @@
 {
   "name": "Gatorade - Dallas TX",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 32.7172, "lng": -96.8706 },
+  "coords": {
+    "lat": 32.7172,
+    "lng": -96.8706
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 32.71790, "lng": -96.87225 },
-      { "lat": 32.71790, "lng": -96.86900 },
-      { "lat": 32.71660, "lng": -96.86900 },
-      { "lat": 32.71650, "lng": -96.87060 },
-      { "lat": 32.71600, "lng": -96.87112 },
-      { "lat": 32.71700, "lng": -96.87225 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 32.71795, "lng": -96.87120 },
-      { "lat": 32.71795, "lng": -96.87085 },
-      { "lat": 32.71765, "lng": -96.87085 },
-      { "lat": 32.71765, "lng": -96.87120 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.7179,
+          "lng": -96.87225
+        },
+        {
+          "lat": 32.7179,
+          "lng": -96.869
+        },
+        {
+          "lat": 32.7166,
+          "lng": -96.869
+        },
+        {
+          "lat": 32.7165,
+          "lng": -96.8706
+        },
+        {
+          "lat": 32.716,
+          "lng": -96.87112
+        },
+        {
+          "lat": 32.717,
+          "lng": -96.87225
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.71795,
+          "lng": -96.8712
+        },
+        {
+          "lat": 32.71795,
+          "lng": -96.87085
+        },
+        {
+          "lat": 32.71765,
+          "lng": -96.87085
+        },
+        {
+          "lat": 32.71765,
+          "lng": -96.8712
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 32.71785, "lng": -96.87220 },
-        { "lat": 32.71785, "lng": -96.87140 },
-        { "lat": 32.71680, "lng": -96.87140 },
-        { "lat": 32.71700, "lng": -96.87220 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 32.71785,
+            "lng": -96.8722
+          },
+          {
+            "lat": 32.71785,
+            "lng": -96.8714
+          },
+          {
+            "lat": 32.7168,
+            "lng": -96.8714
+          },
+          {
+            "lat": 32.717,
+            "lng": -96.8722
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 32.71795, "lng": -96.87060 },
-        { "lat": 32.71795, "lng": -96.86950 },
-        { "lat": 32.71750, "lng": -96.86950 },
-        { "lat": 32.71750, "lng": -96.87060 }
-      ] },
-      { "ring": [
-        { "lat": 32.71770, "lng": -96.86940 },
-        { "lat": 32.71770, "lng": -96.86895 },
-        { "lat": 32.71690, "lng": -96.86895 },
-        { "lat": 32.71690, "lng": -96.86940 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 32.71795,
+            "lng": -96.8706
+          },
+          {
+            "lat": 32.71795,
+            "lng": -96.8695
+          },
+          {
+            "lat": 32.7175,
+            "lng": -96.8695
+          },
+          {
+            "lat": 32.7175,
+            "lng": -96.8706
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 32.7177,
+            "lng": -96.8694
+          },
+          {
+            "lat": 32.7177,
+            "lng": -96.86895
+          },
+          {
+            "lat": 32.7169,
+            "lng": -96.86895
+          },
+          {
+            "lat": 32.7169,
+            "lng": -96.8694
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 153, "pano": "JdY5_c1ic0gKvx0TJuZeJA", "hasCoverage": true },
-      "truckGate": { "heading": 170, "pano": "JdY5_c1ic0gKvx0TJuZeJA", "hasCoverage": true },
-      "dockAprons": { "heading": 161, "pano": "_IFwhjxiGoi-cIBN8O0MVw", "hasCoverage": true },
-      "dropYards": { "heading": 179, "pano": "AoeTdU99bDNWJaQGpkI2Ag", "hasCoverage": true }
+      "perimeter": {
+        "heading": 153,
+        "pano": "JdY5_c1ic0gKvx0TJuZeJA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 170,
+        "pano": "JdY5_c1ic0gKvx0TJuZeJA",
+        "hasCoverage": true
+      },
+      "dockAprons": {
+        "heading": 161,
+        "pano": "_IFwhjxiGoi-cIBN8O0MVw",
+        "hasCoverage": true
+      },
+      "dropYards": {
+        "heading": 179,
+        "pano": "AoeTdU99bDNWJaQGpkI2Ag",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
-    "dockDoorCount": 30, "trailersVisible": 75, "trailerParkingCapacity": 90,
-    "truckGateCount": 3, "buildingCount": 1, "siteAreaAcres": 11.9,
+    "dockDoorCount": 30,
+    "trailersVisible": 75,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 3,
+    "buildingCount": 1,
+    "siteAreaAcres": 11.9,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.7172,-96.8706,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["shipRcvSeparate", "dockDoors", "railServed", "truckGate"],
+  "uncertainFields": [
+    "shipRcvSeparate",
+    "dockDoors",
+    "railServed",
+    "truckGate"
+  ],
   "fieldNotes": {
     "truckGate": "2025-02 Street View shows the north dock court opening directly onto Glenfield Ave with no barrier, booth, or checkpoint — Google's camera shoots straight into the court (trailers at doors, tractor parked). Chain-link frontage has open driveway gaps; parked-open slide gates may exist for after-hours closure but there is no active control.",
     "backupSensitive": "North-face docks are one truck-length off the public street; trucks set up for backing from Glenfield Ave itself, and any queue sits on the street.",
@@ -75,5 +192,24 @@
     "shipRcvSeparate": "A single 'Shipping/Receiving' directional sign at the west drive suggests one combined check-in flow despite two dock faces.",
     "entryExitSeparate": "Three independent open accesses: west-yard drive, north dock court, east apron street access."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://betterbuildingssolutioncenter.energy.gov/showcase-projects/pepsico-dallas-gatorade-plant-water-reduction-upgrades",
+        "date": "2023",
+        "type": "press",
+        "claim": "DOE Better Plants profiles the PepsiCo Dallas Gatorade plant as a current PepsiCo site"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Operating PepsiCo Dallas Gatorade plant; NOTE supplied coords (32.7172,-96.8706) are downtown Dallas, a mis-geocode — actual plant is East Dallas (Forney Rd); re-pin before yard modeling.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

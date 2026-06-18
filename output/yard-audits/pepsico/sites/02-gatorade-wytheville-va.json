@@ -1,78 +1,214 @@
 {
   "name": "Gatorade - Wytheville VA",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 36.9663, "lng": -81.0145 },
+  "coords": {
+    "lat": 36.9663,
+    "lng": -81.0145
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 36.968463, "lng": -81.019954 },
-      { "lat": 36.968956, "lng": -81.014324 },
-      { "lat": 36.968353, "lng": -81.010753 },
-      { "lat": 36.966762, "lng": -81.007595 },
-      { "lat": 36.963744, "lng": -81.007526 },
-      { "lat": 36.963305, "lng": -81.012813 },
-      { "lat": 36.964183, "lng": -81.018307 },
-      { "lat": 36.966268, "lng": -81.020160 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 36.968350, "lng": -81.014450 },
-      { "lat": 36.968350, "lng": -81.014050 },
-      { "lat": 36.967950, "lng": -81.014050 },
-      { "lat": 36.967950, "lng": -81.014450 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.968463,
+          "lng": -81.019954
+        },
+        {
+          "lat": 36.968956,
+          "lng": -81.014324
+        },
+        {
+          "lat": 36.968353,
+          "lng": -81.010753
+        },
+        {
+          "lat": 36.966762,
+          "lng": -81.007595
+        },
+        {
+          "lat": 36.963744,
+          "lng": -81.007526
+        },
+        {
+          "lat": 36.963305,
+          "lng": -81.012813
+        },
+        {
+          "lat": 36.964183,
+          "lng": -81.018307
+        },
+        {
+          "lat": 36.966268,
+          "lng": -81.02016
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 36.96835,
+          "lng": -81.01445
+        },
+        {
+          "lat": 36.96835,
+          "lng": -81.01405
+        },
+        {
+          "lat": 36.96795,
+          "lng": -81.01405
+        },
+        {
+          "lat": 36.96795,
+          "lng": -81.01445
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 36.966158, "lng": -81.019542 },
-        { "lat": 36.964074, "lng": -81.010479 },
-        { "lat": 36.963902, "lng": -81.010543 },
-        { "lat": 36.965986, "lng": -81.019606 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 36.966158,
+            "lng": -81.019542
+          },
+          {
+            "lat": 36.964074,
+            "lng": -81.010479
+          },
+          {
+            "lat": 36.963902,
+            "lng": -81.010543
+          },
+          {
+            "lat": 36.965986,
+            "lng": -81.019606
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 36.967256, "lng": -81.019611 },
-        { "lat": 36.965445, "lng": -81.011921 },
-        { "lat": 36.965118, "lng": -81.012042 },
-        { "lat": 36.966929, "lng": -81.019732 }
-      ] },
-      { "ring": [
-        { "lat": 36.966600, "lng": -81.011800 },
-        { "lat": 36.966600, "lng": -81.011380 },
-        { "lat": 36.964100, "lng": -81.011300 },
-        { "lat": 36.964100, "lng": -81.011720 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 36.967256,
+            "lng": -81.019611
+          },
+          {
+            "lat": 36.965445,
+            "lng": -81.011921
+          },
+          {
+            "lat": 36.965118,
+            "lng": -81.012042
+          },
+          {
+            "lat": 36.966929,
+            "lng": -81.019732
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 36.9666,
+            "lng": -81.0118
+          },
+          {
+            "lat": 36.9666,
+            "lng": -81.01138
+          },
+          {
+            "lat": 36.9641,
+            "lng": -81.0113
+          },
+          {
+            "lat": 36.9641,
+            "lng": -81.01172
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 36.968900, "lng": -81.014500 },
-      { "lat": 36.968900, "lng": -81.014200 },
-      { "lat": 36.968400, "lng": -81.014100 },
-      { "lat": 36.968400, "lng": -81.014400 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 36.9689,
+          "lng": -81.0145
+        },
+        {
+          "lat": 36.9689,
+          "lng": -81.0142
+        },
+        {
+          "lat": 36.9684,
+          "lng": -81.0141
+        },
+        {
+          "lat": 36.9684,
+          "lng": -81.0144
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 208, "pano": "be-wFsOq000e1jjBjgZq_Q", "hasCoverage": true },
-      "truckGate": { "heading": 183, "pano": "TbX8e7SOQPK_aPuKrrBIWQ", "hasCoverage": true },
-      "dockAprons": { "heading": 0, "pano": "", "hasCoverage": false },
-      "dropYards": { "heading": 0, "pano": "", "hasCoverage": false }
+      "perimeter": {
+        "heading": 208,
+        "pano": "be-wFsOq000e1jjBjgZq_Q",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 183,
+        "pano": "TbX8e7SOQPK_aPuKrrBIWQ",
+        "hasCoverage": true
+      },
+      "dockAprons": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "dropYards": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      }
     }
   },
   "yardMetrics": {
-    "dockDoorCount": 75, "trailersVisible": 120, "trailerParkingCapacity": 180,
-    "truckGateCount": 1, "buildingCount": 3, "siteAreaAcres": 139.0,
+    "dockDoorCount": 75,
+    "trailersVisible": 120,
+    "trailerParkingCapacity": 180,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 139,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@36.9663,-81.0145,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "postGateStaging", "exitLanes"],
+  "uncertainFields": [
+    "scale",
+    "postGateStaging",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "guardShack": "Square guard house (~8x8 m) beside the inbound lane ~160 m inside the Gator Ln entrance; z20 shows a tractor-trailer stopped at the booth with chevron-striped median; 2019 Street View down the drive shows a truck held at the orange/red checkpoint structure.",
     "preGateStaging": "Wide paved shoulders on the long entrance drive before the booth; a trailer is parked on the shoulder in the 2019 SV frame and a truck queues ahead of the booth in current satellite.",
@@ -81,5 +217,24 @@
     "scale": "No scale pad resolvable near the gate; not visible does not rule it out.",
     "dockDoors": "Plant south face ~50 doors plus warehouse ~25; banding 50+ is safe even if per-building counts are off."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://wytheida.org/gatorade-finds-eighth-home-in-wythe-county/",
+        "date": "2005-06",
+        "type": "press",
+        "claim": "Gatorade 950,000 sq ft manufacturing/distribution facility at 200 Pepsi Way, Wytheville"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Anchor Gatorade plant in Wythe County; no closure/divestiture found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

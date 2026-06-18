@@ -1,79 +1,218 @@
 {
   "name": "PBNA - Piscataway NJ",
   "type": "Bottling Plant",
-  "coords": { "lat": 40.57735, "lng": -74.44230 },
+  "coords": {
+    "lat": 40.57735,
+    "lng": -74.4423
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 40.57905, "lng": -74.44450 },
-      { "lat": 40.57950, "lng": -74.44280 },
-      { "lat": 40.57935, "lng": -74.44010 },
-      { "lat": 40.57725, "lng": -74.43940 },
-      { "lat": 40.57615, "lng": -74.43950 },
-      { "lat": 40.57600, "lng": -74.44190 },
-      { "lat": 40.57595, "lng": -74.44430 },
-      { "lat": 40.57770, "lng": -74.44455 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 40.57905, "lng": -74.44330 },
-      { "lat": 40.57905, "lng": -74.44290 },
-      { "lat": 40.57860, "lng": -74.44290 },
-      { "lat": 40.57860, "lng": -74.44330 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.57905,
+          "lng": -74.4445
+        },
+        {
+          "lat": 40.5795,
+          "lng": -74.4428
+        },
+        {
+          "lat": 40.57935,
+          "lng": -74.4401
+        },
+        {
+          "lat": 40.57725,
+          "lng": -74.4394
+        },
+        {
+          "lat": 40.57615,
+          "lng": -74.4395
+        },
+        {
+          "lat": 40.576,
+          "lng": -74.4419
+        },
+        {
+          "lat": 40.57595,
+          "lng": -74.4443
+        },
+        {
+          "lat": 40.5777,
+          "lng": -74.44455
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.57905,
+          "lng": -74.4433
+        },
+        {
+          "lat": 40.57905,
+          "lng": -74.4429
+        },
+        {
+          "lat": 40.5786,
+          "lng": -74.4429
+        },
+        {
+          "lat": 40.5786,
+          "lng": -74.4433
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 40.57775, "lng": -74.44435 },
-        { "lat": 40.57775, "lng": -74.44360 },
-        { "lat": 40.57655, "lng": -74.44360 },
-        { "lat": 40.57655, "lng": -74.44435 }
-      ] },
-      { "ring": [
-        { "lat": 40.57650, "lng": -74.44400 },
-        { "lat": 40.57650, "lng": -74.44230 },
-        { "lat": 40.57620, "lng": -74.44230 },
-        { "lat": 40.57620, "lng": -74.44400 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 40.57775,
+            "lng": -74.44435
+          },
+          {
+            "lat": 40.57775,
+            "lng": -74.4436
+          },
+          {
+            "lat": 40.57655,
+            "lng": -74.4436
+          },
+          {
+            "lat": 40.57655,
+            "lng": -74.44435
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.5765,
+            "lng": -74.444
+          },
+          {
+            "lat": 40.5765,
+            "lng": -74.4423
+          },
+          {
+            "lat": 40.5762,
+            "lng": -74.4423
+          },
+          {
+            "lat": 40.5762,
+            "lng": -74.444
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 40.57690, "lng": -74.44330 },
-        { "lat": 40.57690, "lng": -74.44200 },
-        { "lat": 40.57660, "lng": -74.44200 },
-        { "lat": 40.57660, "lng": -74.44330 }
-      ] },
-      { "ring": [
-        { "lat": 40.57785, "lng": -74.44330 },
-        { "lat": 40.57785, "lng": -74.44220 },
-        { "lat": 40.57762, "lng": -74.44220 },
-        { "lat": 40.57762, "lng": -74.44330 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 40.5769,
+            "lng": -74.4433
+          },
+          {
+            "lat": 40.5769,
+            "lng": -74.442
+          },
+          {
+            "lat": 40.5766,
+            "lng": -74.442
+          },
+          {
+            "lat": 40.5766,
+            "lng": -74.4433
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.57785,
+            "lng": -74.4433
+          },
+          {
+            "lat": 40.57785,
+            "lng": -74.4422
+          },
+          {
+            "lat": 40.57762,
+            "lng": -74.4422
+          },
+          {
+            "lat": 40.57762,
+            "lng": -74.4433
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 169, "pano": "_0qpR6tiaid3We13FlWJZg", "hasCoverage": true },
-      "truckGate": { "heading": 159, "pano": "_0qpR6tiaid3We13FlWJZg", "hasCoverage": true },
-      "dropYards": { "heading": 0, "pano": "", "hasCoverage": false },
-      "dockAprons": { "heading": 0, "pano": "", "hasCoverage": false }
+      "perimeter": {
+        "heading": 169,
+        "pano": "_0qpR6tiaid3We13FlWJZg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 159,
+        "pano": "_0qpR6tiaid3We13FlWJZg",
+        "hasCoverage": true
+      },
+      "dropYards": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "dockAprons": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      }
     }
   },
   "yardMetrics": {
-    "dockDoorCount": 45, "trailersVisible": 85, "trailerParkingCapacity": 120,
-    "truckGateCount": 2, "buildingCount": 3, "siteAreaAcres": 37.6,
+    "dockDoorCount": 45,
+    "trailersVisible": 85,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 2,
+    "buildingCount": 3,
+    "siteAreaAcres": 37.6,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.57735,-74.44230,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "entryLanes", "exitLanes", "shipRcvSeparate"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoors",
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Both road entrances (north drive off New Brunswick Ave, east car entrance with monument sign) are open driveways with no barrier or booth visible from Street View (2025-09/10) or z20 satellite. The perimeter IS fenced (black fence along the east road), so an internal control point deeper in the yard is possible but not visible - flagged.",
     "dockDoors": "Long south-face dock bank (~25-35 positions) plus a north-face bank (~15-20); ~45 total estimated from overhead.",
@@ -82,5 +221,31 @@
     "northPad": "Rows under what appear to be solar carport canopies on the north pad may also hold trailers; excluded from drop-yard rings due to canopy ambiguity.",
     "coords": "Roster geocode (GEOMETRIC_CENTER) was on the property; locked center adjusted to the main building rooftop at 40.57735,-74.44230."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.foodmanufacturing.com/facility/news/22925074/pepsico-closing-4-bottling-plants",
+        "date": "2024-10",
+        "type": "press",
+        "claim": "PepsiCo 2024 bottling closures were Cincinnati, Chicago, Harrisburg PA, Atlanta — Piscataway NOT among them"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.cbsnews.com/newyork/news/piscataway-pepsi-plant-closed-after-fire/",
+        "date": "2022-03",
+        "type": "press",
+        "claim": "2022 fire caused a temporary closure of the Piscataway Pepsi plant; plant since reopened"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Only negative is a temporary 2022 fire (reopened); not on the 2024 closure list — active PepsiCo bottling plant.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -1,68 +1,184 @@
 {
   "name": "Gatorade - Kissimmee FL",
   "type": "Manufacturing Plant",
-  "coords": { "lat": 28.2578, "lng": -81.4888 },
+  "coords": {
+    "lat": 28.2578,
+    "lng": -81.4888
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 28.258322, "lng": -81.491534 },
-      { "lat": 28.258504, "lng": -81.486316 },
-      { "lat": 28.257294, "lng": -81.486316 },
-      { "lat": 28.256810, "lng": -81.486934 },
-      { "lat": 28.256327, "lng": -81.489337 },
-      { "lat": 28.257052, "lng": -81.491466 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 28.257950, "lng": -81.486500 },
-      { "lat": 28.257950, "lng": -81.486250 },
-      { "lat": 28.257650, "lng": -81.486250 },
-      { "lat": 28.257650, "lng": -81.486500 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 28.258322,
+          "lng": -81.491534
+        },
+        {
+          "lat": 28.258504,
+          "lng": -81.486316
+        },
+        {
+          "lat": 28.257294,
+          "lng": -81.486316
+        },
+        {
+          "lat": 28.25681,
+          "lng": -81.486934
+        },
+        {
+          "lat": 28.256327,
+          "lng": -81.489337
+        },
+        {
+          "lat": 28.257052,
+          "lng": -81.491466
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 28.25795,
+          "lng": -81.4865
+        },
+        {
+          "lat": 28.25795,
+          "lng": -81.48625
+        },
+        {
+          "lat": 28.25765,
+          "lng": -81.48625
+        },
+        {
+          "lat": 28.25765,
+          "lng": -81.4865
+        }
+      ]
+    },
     "dropYards": [],
     "dockAprons": [
-      { "ring": [
-        { "lat": 28.257550, "lng": -81.489800 },
-        { "lat": 28.257550, "lng": -81.487900 },
-        { "lat": 28.257200, "lng": -81.487900 },
-        { "lat": 28.257200, "lng": -81.489800 }
-      ] },
-      { "ring": [
-        { "lat": 28.258150, "lng": -81.491050 },
-        { "lat": 28.258150, "lng": -81.490650 },
-        { "lat": 28.257450, "lng": -81.490650 },
-        { "lat": 28.257450, "lng": -81.491050 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 28.25755,
+            "lng": -81.4898
+          },
+          {
+            "lat": 28.25755,
+            "lng": -81.4879
+          },
+          {
+            "lat": 28.2572,
+            "lng": -81.4879
+          },
+          {
+            "lat": 28.2572,
+            "lng": -81.4898
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 28.25815,
+            "lng": -81.49105
+          },
+          {
+            "lat": 28.25815,
+            "lng": -81.49065
+          },
+          {
+            "lat": 28.25745,
+            "lng": -81.49065
+          },
+          {
+            "lat": 28.25745,
+            "lng": -81.49105
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 28.258100, "lng": -81.490600 },
-      { "lat": 28.258100, "lng": -81.489900 },
-      { "lat": 28.257350, "lng": -81.489900 },
-      { "lat": 28.257350, "lng": -81.490600 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 28.2581,
+          "lng": -81.4906
+        },
+        {
+          "lat": 28.2581,
+          "lng": -81.4899
+        },
+        {
+          "lat": 28.25735,
+          "lng": -81.4899
+        },
+        {
+          "lat": 28.25735,
+          "lng": -81.4906
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 264, "pano": "HKdryX7g9WFFL_RxNfsK7Q", "hasCoverage": true },
-      "truckGate": { "heading": 266, "pano": "_k7nmykS_OVHqm4bJWs1Vw", "hasCoverage": true },
-      "dockAprons": { "heading": 162, "pano": "G5v2TfBynPFQucwiyILT2w", "hasCoverage": true }
+      "perimeter": {
+        "heading": 264,
+        "pano": "HKdryX7g9WFFL_RxNfsK7Q",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 266,
+        "pano": "_k7nmykS_OVHqm4bJWs1Vw",
+        "hasCoverage": true
+      },
+      "dockAprons": {
+        "heading": 162,
+        "pano": "G5v2TfBynPFQucwiyILT2w",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
-    "dockDoorCount": 28, "trailersVisible": 10, "trailerParkingCapacity": 40,
-    "truckGateCount": 2, "buildingCount": 1, "siteAreaAcres": 24.3,
+    "dockDoorCount": 28,
+    "trailersVisible": 10,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 24.3,
     "railServed": true
   },
   "mapsUrl": "https://www.google.com/maps/@28.2578,-81.4888,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "0-10",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "0-10",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoors", "entryExitTogether", "truckGateCount", "shipRcvSeparate"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoors",
+    "entryExitTogether",
+    "truckGateCount",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Main S Poinciana Blvd entrance is an ornamental-fenced, landscaped office/visitor drive with no barrier or booth at z20; a second service access comes off the north frontage road at the NW. Neither shows a control structure, but small swing gates would be below resolution — flagged.",
     "railServed": "Confirmed: an active-looking rail siding runs directly along the plant's north wall (visible in 2024-11 Street View from the frontage road), branching from the adjacent CSX corridor; grade-level freight doors face the siding.",
@@ -71,5 +187,24 @@
     "shipRcvSeparate": "South-face docks vs west-face docks vs rail/tanker receiving at the east end suggest separated flows; inferred from layout only.",
     "urbanRural": "Dense Kissimmee/Orlando commercial corridor (US 17-92 x Poinciana Blvd)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.areadevelopment.com/newsitems/10-8-2020/svc-manufacturing-osceola-county-florida.shtml",
+        "date": "2020-10",
+        "type": "press",
+        "claim": "PepsiCo subsidiary SVC Manufacturing (Gatorade) expanded its plant at 1650 S Poinciana Blvd, Kissimmee; 24/7"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Operator is PepsiCo subsidiary SVC Manufacturing (Gatorade), recent capacity expansion, no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

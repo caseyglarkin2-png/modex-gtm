@@ -1,78 +1,211 @@
 {
   "name": "PBNA - Sacramento CA",
   "type": "Bottling Plant",
-  "coords": { "lat": 38.48324, "lng": -121.39854 },
+  "coords": {
+    "lat": 38.48324,
+    "lng": -121.39854
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 38.483987, "lng": -121.401763 },
-      { "lat": 38.483987, "lng": -121.396579 },
-      { "lat": 38.482456, "lng": -121.396579 },
-      { "lat": 38.482456, "lng": -121.401763 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 38.484120, "lng": -121.396680 },
-      { "lat": 38.484120, "lng": -121.396320 },
-      { "lat": 38.483900, "lng": -121.396320 },
-      { "lat": 38.483900, "lng": -121.396680 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.483987,
+          "lng": -121.401763
+        },
+        {
+          "lat": 38.483987,
+          "lng": -121.396579
+        },
+        {
+          "lat": 38.482456,
+          "lng": -121.396579
+        },
+        {
+          "lat": 38.482456,
+          "lng": -121.401763
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 38.48412,
+          "lng": -121.39668
+        },
+        {
+          "lat": 38.48412,
+          "lng": -121.39632
+        },
+        {
+          "lat": 38.4839,
+          "lng": -121.39632
+        },
+        {
+          "lat": 38.4839,
+          "lng": -121.39668
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 38.483930, "lng": -121.401690 },
-        { "lat": 38.483930, "lng": -121.400110 },
-        { "lat": 38.482590, "lng": -121.400110 },
-        { "lat": 38.482590, "lng": -121.401690 }
-      ] },
-      { "ring": [
-        { "lat": 38.482660, "lng": -121.399550 },
-        { "lat": 38.482660, "lng": -121.397660 },
-        { "lat": 38.482520, "lng": -121.397660 },
-        { "lat": 38.482520, "lng": -121.399550 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 38.48393,
+            "lng": -121.40169
+          },
+          {
+            "lat": 38.48393,
+            "lng": -121.40011
+          },
+          {
+            "lat": 38.48259,
+            "lng": -121.40011
+          },
+          {
+            "lat": 38.48259,
+            "lng": -121.40169
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 38.48266,
+            "lng": -121.39955
+          },
+          {
+            "lat": 38.48266,
+            "lng": -121.39766
+          },
+          {
+            "lat": 38.48252,
+            "lng": -121.39766
+          },
+          {
+            "lat": 38.48252,
+            "lng": -121.39955
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 38.483060, "lng": -121.400120 },
-        { "lat": 38.483060, "lng": -121.399020 },
-        { "lat": 38.482750, "lng": -121.399020 },
-        { "lat": 38.482750, "lng": -121.400120 }
-      ] },
-      { "ring": [
-        { "lat": 38.483800, "lng": -121.399910 },
-        { "lat": 38.483800, "lng": -121.398880 },
-        { "lat": 38.483520, "lng": -121.398880 },
-        { "lat": 38.483520, "lng": -121.399910 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 38.48306,
+            "lng": -121.40012
+          },
+          {
+            "lat": 38.48306,
+            "lng": -121.39902
+          },
+          {
+            "lat": 38.48275,
+            "lng": -121.39902
+          },
+          {
+            "lat": 38.48275,
+            "lng": -121.40012
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 38.4838,
+            "lng": -121.39991
+          },
+          {
+            "lat": 38.4838,
+            "lng": -121.39888
+          },
+          {
+            "lat": 38.48352,
+            "lng": -121.39888
+          },
+          {
+            "lat": 38.48352,
+            "lng": -121.39991
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 38.483970, "lng": -121.398760 },
-      { "lat": 38.483970, "lng": -121.397830 },
-      { "lat": 38.483810, "lng": -121.397830 },
-      { "lat": 38.483810, "lng": -121.398760 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 38.48397,
+          "lng": -121.39876
+        },
+        {
+          "lat": 38.48397,
+          "lng": -121.39783
+        },
+        {
+          "lat": 38.48381,
+          "lng": -121.39783
+        },
+        {
+          "lat": 38.48381,
+          "lng": -121.39876
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 281, "pano": "emDFKT5tDcjgu5xpbsf76g", "hasCoverage": true },
-      "truckGate": { "heading": 280, "pano": "tDsNagiukGn2S0qz6dc0zA", "hasCoverage": true }
+      "perimeter": {
+        "heading": 281,
+        "pano": "emDFKT5tDcjgu5xpbsf76g",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 280,
+        "pano": "tDsNagiukGn2S0qz6dc0zA",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
-    "dockDoorCount": 24, "trailersVisible": 60, "trailerParkingCapacity": 80,
-    "truckGateCount": 2, "buildingCount": 1, "siteAreaAcres": 19.0,
+    "dockDoorCount": 24,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 19,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@38.48324,-121.39854,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoors", "shipRcvSeparate", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoors",
+    "shipRcvSeparate",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Both Reese Rd entrances are fenced with sliding vehicle gates (Street View 2025-03): the NE drive into the north truck court and the south front drive (chain-link gate rolled open, safety/check-in placards on the fence, yellow bollard).",
     "guardShack": "No staffed booth visible at either gate in 2025-03 Street View or z19/z20 overhead; a small red kiosk-sized post sits beside the NE drive throat - reads as card-reader/kiosk check-in, so remoteGs=true. Flagged: a guard could sit inside the adjacent office wing.",
@@ -82,5 +215,31 @@
     "railServed": "A rail line runs along the south boundary but no spur enters the property.",
     "multipleFacilities": "The large DC immediately north (own dock row facing south) is a separate property; the shared-looking court is split along the drive line used as the north perimeter edge."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/co/Pepsico/Jobs/-in-West-Sacramento,CA",
+        "date": "2025-09",
+        "type": "careers",
+        "claim": "Active PepsiCo production/warehouse/maintenance reqs at West Sacramento"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.bevnet.com/news/2025/report-manna-beverages-shutters-all-california-operations-terminates-employees/",
+        "date": "2025-10",
+        "type": "trade-press",
+        "claim": "The West Sacramento bottling closure was Manna Beverages (a non-PepsiCo copacker), NOT PepsiCo — ruled out as a distractor"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "PBNA Sacramento actively hiring; the nearby abrupt closure was Manna Beverages, a non-PepsiCo copacker.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

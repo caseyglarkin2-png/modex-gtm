@@ -1,74 +1,202 @@
 {
   "name": "PBNA - Mesquite TX",
   "type": "Bottling Plant",
-  "coords": { "lat": 32.802466, "lng": -96.665808 },
+  "coords": {
+    "lat": 32.802466,
+    "lng": -96.665808
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 32.804775, "lng": -96.666495 },
-      { "lat": 32.804601, "lng": -96.665465 },
-      { "lat": 32.803909, "lng": -96.664297 },
-      { "lat": 32.802755, "lng": -96.664091 },
-      { "lat": 32.801773, "lng": -96.664229 },
-      { "lat": 32.80085, "lng": -96.664297 },
-      { "lat": 32.80085, "lng": -96.667525 },
-      { "lat": 32.801312, "lng": -96.668143 },
-      { "lat": 32.802466, "lng": -96.668143 },
-      { "lat": 32.802928, "lng": -96.667731 },
-      { "lat": 32.80362, "lng": -96.667181 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 32.804775, "lng": -96.666563 },
-      { "lat": 32.804659, "lng": -96.66622 },
-      { "lat": 32.804371, "lng": -96.666357 },
-      { "lat": 32.804486, "lng": -96.666701 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.804775,
+          "lng": -96.666495
+        },
+        {
+          "lat": 32.804601,
+          "lng": -96.665465
+        },
+        {
+          "lat": 32.803909,
+          "lng": -96.664297
+        },
+        {
+          "lat": 32.802755,
+          "lng": -96.664091
+        },
+        {
+          "lat": 32.801773,
+          "lng": -96.664229
+        },
+        {
+          "lat": 32.80085,
+          "lng": -96.664297
+        },
+        {
+          "lat": 32.80085,
+          "lng": -96.667525
+        },
+        {
+          "lat": 32.801312,
+          "lng": -96.668143
+        },
+        {
+          "lat": 32.802466,
+          "lng": -96.668143
+        },
+        {
+          "lat": 32.802928,
+          "lng": -96.667731
+        },
+        {
+          "lat": 32.80362,
+          "lng": -96.667181
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.804775,
+          "lng": -96.666563
+        },
+        {
+          "lat": 32.804659,
+          "lng": -96.66622
+        },
+        {
+          "lat": 32.804371,
+          "lng": -96.666357
+        },
+        {
+          "lat": 32.804486,
+          "lng": -96.666701
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 32.801773, "lng": -96.666769 },
-        { "lat": 32.801773, "lng": -96.664572 },
-        { "lat": 32.801196, "lng": -96.664572 },
-        { "lat": 32.801196, "lng": -96.666769 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 32.801773,
+            "lng": -96.666769
+          },
+          {
+            "lat": 32.801773,
+            "lng": -96.664572
+          },
+          {
+            "lat": 32.801196,
+            "lng": -96.664572
+          },
+          {
+            "lat": 32.801196,
+            "lng": -96.666769
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 32.802004, "lng": -96.666357 },
-        { "lat": 32.802004, "lng": -96.664984 },
-        { "lat": 32.801716, "lng": -96.664984 },
-        { "lat": 32.801716, "lng": -96.666357 }
-      ] },
-      { "ring": [
-        { "lat": 32.802755, "lng": -96.664847 },
-        { "lat": 32.802755, "lng": -96.664435 },
-        { "lat": 32.801889, "lng": -96.664435 },
-        { "lat": 32.801889, "lng": -96.664847 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 32.802004,
+            "lng": -96.666357
+          },
+          {
+            "lat": 32.802004,
+            "lng": -96.664984
+          },
+          {
+            "lat": 32.801716,
+            "lng": -96.664984
+          },
+          {
+            "lat": 32.801716,
+            "lng": -96.666357
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 32.802755,
+            "lng": -96.664847
+          },
+          {
+            "lat": 32.802755,
+            "lng": -96.664435
+          },
+          {
+            "lat": 32.801889,
+            "lng": -96.664435
+          },
+          {
+            "lat": 32.801889,
+            "lng": -96.664847
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 61, "pano": "-c3AG2aOcvF6iz360HxGFQ", "hasCoverage": true },
-      "truckGate": { "heading": 285, "pano": "LMeu5QibSWMNJ4EFL1Z0QQ", "hasCoverage": true }
+      "perimeter": {
+        "heading": 61,
+        "pano": "-c3AG2aOcvF6iz360HxGFQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 285,
+        "pano": "LMeu5QibSWMNJ4EFL1Z0QQ",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
-    "dockDoorCount": 25, "trailersVisible": 30, "trailerParkingCapacity": 60,
-    "truckGateCount": 2, "buildingCount": 2, "siteAreaAcres": 32.1,
+    "dockDoorCount": 25,
+    "trailersVisible": 30,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 2,
+    "buildingCount": 2,
+    "siteAreaAcres": 32.1,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.802466,-96.665808,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "shipRcvSeparate", "dockDoorCount", "fastLaneOpportunity", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "shipRcvSeparate",
+    "dockDoorCount",
+    "fastLaneOpportunity",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Chain-link fence rings the whole site (2025-04/05 SV on three sides); slide-gate frames visible at the SW street entrance. The N truck entrance off the I-30 frontage road (marked by the Pepsi pylon sign) shows a wide open apron in daytime SV with no barrier arm resolvable - gated-fence site, likely open during operating hours; flagged.",
     "guardShack": "No booth visible at either entrance; remoteGs true (controlled fence-gates without a staffed shack), flagged.",
@@ -78,5 +206,31 @@
     "shipRcvSeparate": "Two distinct dock banks on different faces (south warehouse face vs east face); functional split inferred.",
     "buildings": "Main plant complex (production + attached warehouse) plus a smaller fleet/office building in the SW quadrant with a fuel/wash canopy."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.cityofmesquite.com/CivicAlerts.aspx?AID=1103",
+        "date": "2019-10",
+        "type": "press",
+        "claim": "Mesquite PepsiCo plant: largest NA bottling facility, >1B cases/yr, 650 employees, serves 16 states"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/co/Pepsico/Jobs/-in-Mesquite,TX",
+        "date": "2026-03",
+        "type": "careers",
+        "claim": "Active PepsiCo job postings in Mesquite TX (current)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Large active PepsiCo bottling/DC plant (4532 I-30) with current job postings; no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
