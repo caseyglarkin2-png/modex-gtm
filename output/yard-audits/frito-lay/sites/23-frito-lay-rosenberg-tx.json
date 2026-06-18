@@ -142,5 +142,31 @@
     "multipleFacilities": "Large multi-building manufacturing campus (process building, warehouses, ASF/associate service facility, fleet/maintenance buildings).",
     "siteAreaAcres": "Estimated from the perimeter box (~95 acres including the drop lot and farmland buffer)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.fritolay.com/frito-lay-to-create-160-jobs-with-rosenberg-texas-plant-expansion",
+        "date": "2021-06",
+        "type": "press",
+        "claim": "Frito-Lay PR: $200M expansion of Rosenberg plant (largest FL footprint in TX), 750+ associates."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.foodbusinessnews.net/articles/18827-pepsico-investing-200-million-in-frito-lay-plant",
+        "date": "2021-06",
+        "type": "news",
+        "claim": "PepsiCo investing $200M in Rosenberg Frito-Lay plant expansion completing 2023."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Recently/heavily invested active Frito-Lay snack plant with warehouse + fleet yard; no closure/sale found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

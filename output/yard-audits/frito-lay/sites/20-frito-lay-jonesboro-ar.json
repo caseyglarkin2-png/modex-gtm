@@ -168,5 +168,31 @@
     "urbanRural": "The plant is surrounded by open agricultural fields on the edge of Jonesboro - clearly Rural.",
     "connectivityIssue": "Rural but on the developed edge of Jonesboro (a mid-size city) with neighboring industrial parcels; cellular coverage likely adequate - set false."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.arkansasedc.com/news-events/arkansas-inc-blog/post/active-blogs/2018/11/27/frito-lay-sees-continued-success-in-arkansas",
+        "date": "2018-11",
+        "type": "press",
+        "claim": "Jonesboro is Frito-Lay only Arkansas mfg plant + DC, 400k sq ft, ~790 associates."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.ziprecruiter.com/co/Frito-Lay/Jobs/-in-Jonesboro,AR",
+        "date": "2025-12",
+        "type": "locator",
+        "claim": "Active Frito-Lay openings in Jonesboro as of Dec 2025."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Frito-Lay AR plant + DC; active 2025 hiring, not on any closure list.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

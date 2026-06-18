@@ -162,5 +162,25 @@
     "urbanRural": "Located within the Williamsport, PA industrial fabric — dense surrounding industrial development; classed Urban.",
     "buildingCount": "Main plant/DC building plus the silo/process structure cluster on the SE; counted as 2."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.sungazette.com/news/the-chamber-connection/2013/01/frito-lay-has-local-presence/",
+        "date": "2013-01",
+        "type": "news",
+        "claim": "Frito-Lay production plant + DC at 220 N Reach Rd, Williamsport; rail-fed, ~250 workers."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Frito-Lay plant/DC at 220 N Reach Rd (rail + truck yard); coords match, no closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "flag": "most recent dated source is 2013; no recent Tier-1 located"
+  }
 }

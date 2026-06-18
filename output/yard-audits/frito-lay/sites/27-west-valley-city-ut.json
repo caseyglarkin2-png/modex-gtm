@@ -157,5 +157,32 @@
     "railServed": "No rail spur observed entering the property; not rail-served.",
     "buildingCount": "Main plant/warehouse plus a smaller separate building to the south."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.indeed.com/cmp/Frito--lay/locations/UT/West%20Valley%20City",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Frito-Lay actively lists/hires for West Valley City UT in 2026."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.whywestvalley.com/workforce/major-employers/p/item/19842/frito-lay-inc",
+        "date": "2026-06",
+        "type": "news",
+        "claim": "Frito-Lay Inc listed as a current major employer; plant + DC."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Frito-Lay plant + DC with current hiring; not on any closure list.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "flag": "current-ops evidence is careers/EDC listing (Tier-3); no Tier-1 located"
+  }
 }

@@ -156,5 +156,24 @@
     "siteAreaAcres": "Perimeter box yields ~48 acres for the large DC/plant footprint.",
     "dockDoorCount": "Overhead estimate; trailers obscure portions of the dock face - moderate confidence."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.supplychaindive.com/news/pepsico-shutter-california-frito-lay-warehouse/813071/",
+        "date": "2026-02",
+        "type": "press",
+        "claim": "PepsiCo closing the Rancho Cucamonga Frito-Lay distribution warehouse; WARN filed, final ops June 6 2026, ops relocate to a new DC."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "REJECTED: Rancho Cucamonga DC named in PepsiCo consolidation; manufacturing ended 2025, Archibald Ave warehouse closes June 6 2026 (WARN), ops moved elsewhere.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -159,5 +159,24 @@
     "scale": "No truck scale clearly visible in imagery; left false (low confidence).",
     "postGateStaging": "Open paved apron inside the gate before the docks provides holding room; inferred from layout."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://ceqanet.lci.ca.gov/2025111005",
+        "date": "2025-11",
+        "type": "press",
+        "claim": "CEQA Notice of Exemption (2025-11-24) for a 101,005 sq ft expansion to the existing Frito-Lay processing plant, Kern County."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Existing Frito-Lay processing plant actively expanding (Nov 2025 CEQA); no closure/sale.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

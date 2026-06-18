@@ -158,5 +158,25 @@
     "urbanRural": "Dense Northeast San Antonio industrial park near I-35 — Urban.",
     "entryLanes": "Single combined in/out driveway estimated; lane count not clearly resolvable from imagery."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.potatopro.com/companies/frito-lay-san-antonio",
+        "date": "2026-04",
+        "type": "locator",
+        "claim": "Frito-Lay snack mfg facility at 4855 Greatland Dr, San Antonio (matches coords)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Frito-Lay snacks plant on Greatland Dr; coords match, no closure/WARN found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "flag": "only Tier-3 aggregator/listing corroboration; no Tier-1 source located"
+  }
 }

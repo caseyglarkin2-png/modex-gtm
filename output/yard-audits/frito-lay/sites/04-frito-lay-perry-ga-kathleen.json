@@ -170,5 +170,31 @@
     "dockDoorCount": "Overhead count estimate; dock faces partially obscured by trailers and washed-out imagery - moderate confidence.",
     "multiStep": "Possible second checkpoint given the internal road system and rail crossing, but not confirmed - left false."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.potatopro.com/news/2020/frito-lay-announces-200-million-expansion-its-largest-us-production-plant-perry-georgia",
+        "date": "2020-07",
+        "type": "press",
+        "claim": "Largest US Frito-Lay production plant; $200M expansion adding tortilla/Cheetos lines + warehouse."
+      },
+      {
+        "tier": 3,
+        "url": "https://chamber.robinsregion.com/list/member/frito-lay-inc-kathleen-296",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Frito-Lay Inc active member at 1200 Hwy 247 S, Kathleen GA (matches coords)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Largest US Frito-Lay snack plant at Hwy 247 S; active, no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

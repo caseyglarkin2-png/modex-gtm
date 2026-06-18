@@ -159,5 +159,24 @@
     "urbanRural": "Beloit is a small Wisconsin city; the plant sits in an edge-of-town industrial/agricultural setting with farm fields bordering the north and south. Classified Rural per the small-town tiebreaker.",
     "buildingCount": "Main manufacturing plant plus an attached/adjacent warehouse section and a small office structure; ~3 distinct buildings on one contiguous campus (not a multi-cluster campus, so multipleFacilities false)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.fritolay.com/news/pepsico-s-frito-lay-beloit-facility-celebrates-distinction-as-wisconsin-s-first-food-manufacturing-facility-to-achieve-leed-for-existing-buildings-gold-certification",
+        "date": "2025-01",
+        "type": "press",
+        "claim": "Frito-Lay own news names the Beloit food manufacturing facility (LEED Gold)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Frito-Lay manufacturing + DC in Beloit; corporate news source, no closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -153,5 +153,25 @@
     "siteAreaAcres": "Small parcel, ~5 acres of cleared/paved area within the wooded lot.",
     "railServed": "No rail spur — facility is a truck-only product-exchange DC."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.loopnet.com/Listing/277-Lawing-Rd-Forest-City-NC/37708516/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "277 Lawing Rd listed as the Frito-Lay/PepsiCo distribution center property (net-lease, tenant in place)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "PROBABLE: Frito-Lay-tenanted net-lease DC at 277 Lawing Rd; occupancy inferred from a real-estate offering, no direct company locator/careers and no closure/WARN.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "flag": "evidence is a brokerage net-lease listing only; confirm Frito-Lay is the active occupier vs a marketed/sold asset"
+  }
 }

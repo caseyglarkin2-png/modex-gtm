@@ -165,5 +165,31 @@
     "siteAreaAcres": "Perimeter box yields ~81 acres, matching the publicly stated 80-acre / 500k sq ft facility.",
     "dockDoorCount": "Overhead count estimate; some dock faces partially obscured by trailers - moderate confidence."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.prnewswire.com/news-releases/frito-lay-transforms-california-facility-into-showcase-for-sustainability-301725247.html",
+        "date": "2023-01",
+        "type": "press",
+        "claim": "Frito-Lay Modesto plant transformation, 500k sq ft on 80 acres, 1,100+ associates, electric semi fleet."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.fritolay.com/TransformingModesto",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Frito-Lay own site profiles Modesto as an active manufacturing/distribution facility."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active self-operated snack plant + DC; not on the 2025 closure list.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

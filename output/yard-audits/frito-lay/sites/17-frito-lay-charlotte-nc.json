@@ -143,5 +143,25 @@
     "urbanRural": "Inside the Charlotte metro industrial fabric (Steele Creek / I-485 corridor); Urban.",
     "yardMetrics": "Honest overhead estimates; ~35 dock doors, ~80 trailers visible across drop yards and docks, ~42 acres from perimeter box."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.areadevelopment.com/newsitems/3-4-2015/frito-lay-production-center-charlotte-north-carolina465754.shtml",
+        "date": "2015-03",
+        "type": "press",
+        "claim": "Frito-Lay SW Charlotte production mega-facility expansion, 2911 Nevada Blvd."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Frito-Lay combined mfg/distribution facility in SW Charlotte; coords match, no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "flag": "most recent positive is 2015 press; no <24mo Tier-1"
+  }
 }

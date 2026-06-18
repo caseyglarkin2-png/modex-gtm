@@ -157,5 +157,31 @@
     "trailersVisible": "~350 trailers counted across the north paved yard, south gravel yard, and dock faces - approximate.",
     "dockDoorCount": "Overhead estimate; dock faces partially obscured by backed-in trailers - moderate confidence."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.profoodworld.com/industry-news/news/21452267/fritolay-to-make-235-million-upgrade-of-connecticut-plant",
+        "date": "2021-05",
+        "type": "press",
+        "claim": "Frito-Lay invested $235M to expand the Killingly plant + warehouse with two new Cheetos lines."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.indeed.com/cmp/Frito--lay/locations/CT/Killingly",
+        "date": "2026-05",
+        "type": "locator",
+        "claim": "Active 2026 Frito-Lay hostler/packer postings at Killingly."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Self-operated snacks plant with active 2026 yard/dock hiring; not on closure list.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

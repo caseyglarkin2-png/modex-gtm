@@ -167,5 +167,24 @@
     "trailersVisible": "~240 trailers counted across the east-side drop yard and dock faces in z18 imagery - approximate.",
     "dockDoorCount": "Overhead count estimate; portions of dock faces obscured by backed-in trailers - moderate confidence."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.costar.com/article/169756989/frito-lay-completes-new-lease-deal-in-memphis",
+        "date": "2024-01",
+        "type": "press",
+        "claim": "Frito-Lay completed a new industrial lease in Memphis (Airways Blvd), current leased DC."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Self-operated leased DC on Airways Blvd corridor; recent CoStar lease, no closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

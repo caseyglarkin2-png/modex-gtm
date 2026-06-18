@@ -143,5 +143,32 @@
     "urbanRural": "Edge-of-town hilltop industrial park in Lynchburg surrounded by woods; Rural per rubric.",
     "yardMetrics": "Counts are honest overhead estimates; dock doors ~70 across long east bank and south bank, trailers ~110 in drop rows and at docks."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.potatopro.com/companies/frito-lay-lynchburg",
+        "date": "2026-01",
+        "type": "locator",
+        "claim": "410k sq ft Frito-Lay plant, 230 Jefferson Ridge Pkwy, Lynchburg (matches coords), ~300 employees."
+      },
+      {
+        "tier": 3,
+        "url": "https://yeslynchburgregion.org/why-lyh-region/major-employers/",
+        "date": "2025-01",
+        "type": "news",
+        "claim": "Frito-Lay listed as a current major employer in the Lynchburg region."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Frito-Lay mfg + distribution plant; coords match, no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "flag": "only Tier-3 corroboration; no Tier-1 source located"
+  }
 }

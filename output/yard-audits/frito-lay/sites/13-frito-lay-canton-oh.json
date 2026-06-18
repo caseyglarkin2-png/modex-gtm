@@ -148,5 +148,25 @@
     "drivewayLong": "Ample internal paved approach depth between the access road and the dock faces — can hold 3+ trucks.",
     "buildingCount": "Main manufacturing building plus an attached warehouse and a separate metal warehouse/garage in the west yard; ~3 buildings on one contiguous site."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.potatopro.com/companies/frito-lay-canton",
+        "date": "2026-01",
+        "type": "locator",
+        "claim": "Frito-Lay Canton OH potato-snack plant (since 1967, ~150 employees)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Long-running Frito-Lay potato-chip plant in Canton; no closure/WARN found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "flag": "only Tier-3 aggregator corroboration; no Tier-1 source located"
+  }
 }

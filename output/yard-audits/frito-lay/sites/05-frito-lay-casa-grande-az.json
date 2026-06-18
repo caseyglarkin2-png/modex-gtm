@@ -157,5 +157,24 @@
     "trailersVisible": "~110 trailers counted across the NE drop yard, W side, and dock faces - approximate.",
     "dockDoorCount": "Overhead estimate; imagery resolution and trailer obstruction limit confidence."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.pinal.gov/387/Frito-Lay-Inc",
+        "date": "2025-07",
+        "type": "locator",
+        "claim": "Active Title V air permit V20711.000 (eff 2025-07-19) for the snack-mfg plant at 1450 W Maricopa Casa Grande Hwy."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active 2025 Title V air permit at the exact coords; not on the Nov 2025 closure list.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

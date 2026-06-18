@@ -177,5 +177,32 @@
     "trailersVisible": "~300 trailers counted across the NE paved yard, SW gravel yard, and dock faces - approximate.",
     "dockDoorCount": "Overhead estimate; dock faces partially obscured by backed-in trailers - moderate confidence."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.indeed.com/cmp/Frito--lay/locations/KS/Topeka",
+        "date": "2026-03",
+        "type": "locator",
+        "claim": "Active 2026 Frito-Lay postings at 4236 SW Kirklawn Ave, Topeka."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.potatopro.com/companies/frito-lay-topeka",
+        "date": "2024-01",
+        "type": "news",
+        "claim": "750k sq ft plant since 1971, 10 lines + automated warehouse, ~1,050 employees."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Self-operated snacks plant + automated warehouse with active 2026 hiring; no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "flag": "current-ops evidence is careers/aggregator (Tier-3); no recent Tier-1 press"
+  }
 }

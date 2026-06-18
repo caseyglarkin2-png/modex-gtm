@@ -142,5 +142,25 @@
     "truckGateCount": "At least one numbered gate confirmed ('Gate 8'); numbering implies multiple gates around the fenced perimeter — estimated 2.",
     "siteAreaAcres": "Estimated ~38 acres from the perimeter box covering the plant, both trailer yards, and office parking."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.macraesbluebook.com/search/company.cfm?company=1479219",
+        "date": "2024-01",
+        "type": "locator",
+        "claim": "Frito-Lay Inc Denver Plant & WH, 3995 Nome St, Denver CO 80239 (production plant + warehouse)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Frito-Lay snack plant + warehouse at 3995 Nome St (matches coords); not in 2025/2026 consolidation news.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "flag": "only Tier-3 directory corroboration; no Tier-1 source located"
+  }
 }

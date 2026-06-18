@@ -147,5 +147,32 @@
     "urbanRural": "The plant sits in a small-town industrial area on the edge of Fayetteville, surrounded by woods and farm fields - Rural.",
     "buildingCount": "One large continuous manufacturing-distribution building; counted as 1 despite multiple roof sections."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.elkvalleytimes.com/news/local/frito-lay-celebrates-20th-anniversary-here/article_898969e4-8c63-54b2-9169-a3b8808649a3.html",
+        "date": "2017-09",
+        "type": "news",
+        "claim": "Frito-Lay Fayetteville plant 20th anniversary; ~800 associates, six production lines."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.potatopro.com/companies/frito-lay-fayetteville",
+        "date": "2024-01",
+        "type": "locator",
+        "claim": "590k sq ft snack plant, 101 Industrial Blvd, on-site warehouse."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Large active Frito-Lay snack plant + on-site warehouse; not on any 2025 closure list.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "flag": "most recent dated press is 2017; recent corroboration is aggregator"
+  }
 }

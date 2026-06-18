@@ -157,5 +157,31 @@
     "fastLaneOpportunity": "Wide gate apron and large open paved staging area inside the fence give ample room to add a bypass/express lane.",
     "buildingCount": "Main plant complex plus a separate warehouse-style building on the west and a small shop building on the south."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.fooddive.com/news/pepsico-closing/804929/",
+        "date": "2025-11",
+        "type": "news",
+        "claim": "PepsiCo shuttering 2 Frito-Lay FL facilities (Orlando Silver Star Rd plant + Parks Oaks warehouse), ~500 layoffs, ops ended Nov 4 2025."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.clickorlando.com/news/local/2026/01/28/crews-begin-demolition-of-shuttered-frito-lay-plant-in-orlando/",
+        "date": "2026-01",
+        "type": "news",
+        "claim": "Crews begin demolition of the shuttered Orlando Frito-Lay plant; closure permanent."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "REJECTED: Orlando Frito-Lay plant ceased ops Nov 4 2025 in PepsiCo consolidation; demolition underway Jan 2026, no operating yard remains.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

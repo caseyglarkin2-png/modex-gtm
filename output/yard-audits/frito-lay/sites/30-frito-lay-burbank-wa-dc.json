@@ -175,5 +175,25 @@
     "urbanRural": "Burbank, WA is a small unincorporated community; the industrial park sits at the edge of town near farmland and a highway interchange — Rural.",
     "recommendation": "Flag for human review and a fresh imagery pass once newer satellite covering the completed 458 Second Ave building is available."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://news.theregistryps.com/newly-constructed-107000-sqft-frito-lay-distribution-center-in-burbank-listed-for-sale/",
+        "date": "2026-06",
+        "type": "press",
+        "claim": "Newly constructed ~107k SF Frito-Lay DC in Burbank WA (Tri-Cities) offered as sale-leaseback with Frito-Lay in place."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "PROBABLE: new Frito-Lay DC in Burbank WA (Walla Walla county, not Burbank CA) held via sale-leaseback with Frito-Lay tenant; occupancy from real-estate offering, no closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "flag": "evidence is a sale-leaseback offering; verify Burbank WA coords (not Burbank CA) and active occupancy"
+  }
 }

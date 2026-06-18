@@ -137,5 +137,24 @@
     "urbanRural": "Edge-of-town light-industrial district of Prichard, AL — wooded surroundings; classed Rural.",
     "confidence": "Low overall — the facility is newly built/leased, the exact building could not be positively confirmed from imagery, and current Maxar satellite may predate the completed DC."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://businessfacilities.com/frito-lay-to-open-distribution-center-in-mobile-alabama-region/",
+        "date": "2024-08",
+        "type": "press",
+        "claim": "Frito-Lay building $8M DC at 3221 Anton St, Prichard AL as the DSD hub for greater Mobile."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "New-build DC, Frito-Lay 10-yr NNN lease commenced May 2025, operating as the Mobile-area DSD hub.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -147,5 +147,25 @@
     "urbanRural": "Edge of Frankfort, IN, surrounded on multiple sides by agricultural fields — Rural.",
     "siteAreaAcres": "~155 acres estimate for the built campus footprint (plants + yards + parking); the surrounding owned land including fields is larger."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.potatopro.com/news/2018/frito-lay-invests-usd-159-million-its-frankfort-indiana-snack-production-plants",
+        "date": "2018-01",
+        "type": "press",
+        "claim": "Frito-Lay operates two Frankfort IN plants (Core & East), 323 S Co Rd 300 W, ~1100 employees, $159M investment."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Two co-located Frito-Lay snack plants (Core & East); heavily invested, no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "flag": "most recent positive is 2018 press; no <24mo Tier-1"
+  }
 }

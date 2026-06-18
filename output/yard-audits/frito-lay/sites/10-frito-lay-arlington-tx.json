@@ -124,5 +124,25 @@
     "coords": "Placeholder coords (32.7370, -97.0915) point to the general Avenue H E industrial corridor and should NOT be treated as the plant center.",
     "recommendation": "Needs human review: obtain a verified street address / parcel for the Frito-Lay Arlington (Avenue H E) plant before auditing. Note this is a small legacy facility (~80 employees) and may have limited yard infrastructure."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.potatopro.com/companies/frito-lay-arlington",
+        "date": "2026-01",
+        "type": "locator",
+        "claim": "Frito-Lay North America production/warehouse at 948 Avenue H E, Arlington TX."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Frito-Lay mfg + warehouse in the Dallas Metro network; no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "flag": "only Tier-3 aggregator corroboration; no Tier-1 source located"
+  }
 }

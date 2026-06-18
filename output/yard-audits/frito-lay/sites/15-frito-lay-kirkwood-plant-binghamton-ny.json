@@ -157,5 +157,31 @@
     "railServed": "An active rail line runs along the NE edge of the property between the plant and the road; the plant historically receives bulk inbound (potatoes/corn/oil). Spur appears to serve the plant though it also parallels neighboring industrial parcels.",
     "urbanRural": "Kirkwood is a small town SE of Binghamton; the plant sits in a riverside small-town industrial corridor - classified Rural per rubric tie-break."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.vendingmarketwatch.com/management/news/21251472/frito-lay-acquires-land-in-east-fishkill-new-york-will-invest-100-million-in-a-new150000-square-foot-fulfillment-center",
+        "date": "2022-01",
+        "type": "press",
+        "claim": "New East Fishkill DC receives snacks from the Kirkwood NY manufacturing facility, i.e. Kirkwood is active."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.glassdoor.com/Jobs/Frito-Lay-Kirkwood-Jobs-EI_IE1657603.0,9_IL.10,18_IC1131821.htm",
+        "date": "2025-01",
+        "type": "news",
+        "claim": "Active 2025 Frito-Lay hostler/forklift postings at Kirkwood NY."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "WATCH RESOLVED: the closed PopCorners site is Liberty NY, not Kirkwood/Binghamton; Kirkwood is a distinct active snack plant feeding East Fishkill and hiring in 2025.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

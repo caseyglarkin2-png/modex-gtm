@@ -143,5 +143,25 @@
     "urbanRural": "Aberdeen is a small Harford County city; the plant sits in a wooded edge-of-town industrial park. Classified Rural per rubric tie-break.",
     "buildingCount": "One large connected manufacturing-distribution building; counted as 1 despite multiple roof sections."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.baltimoresun.com/2025/05/15/50-workers-to-be-laid-off-at-frito-lay-storage-warehouse-in-aberdeen/",
+        "date": "2025-05",
+        "type": "news",
+        "claim": "May 2025 layoff was a SEPARATE Frito-Lay storage warehouse; the Rt 40 manufacturing center is not affected."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Coords at 800 Hickory Dr mfg/DC, the site explicitly spared in the 2025 warehouse layoff.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "flag": "nearby separate Frito-Lay storage warehouse closed May 2025; confirm coords are the manufacturing center not the closed warehouse"
+  }
 }

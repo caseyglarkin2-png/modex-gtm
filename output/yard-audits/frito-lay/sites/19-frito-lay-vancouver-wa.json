@@ -147,5 +147,25 @@
     "buildingCount": "Main manufacturing-distribution building plus at least one separate structure (red-roofed building / outbuilding to the north); counted as 2.",
     "urbanRural": "Vancouver WA is part of the Portland-Vancouver metro; the site sits in a dense industrial corridor. Classified Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.columbian.com/news/2012/sep/13/forty-and-flavorful-frito-lay-celebrates-anniversa/",
+        "date": "2012-09",
+        "type": "news",
+        "claim": "300k sq ft Frito-Lay mfg/warehousing/distribution complex at 4808 NW Fruit Valley Rd, ~460 employees."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Snacks plant at 4808 NW Fruit Valley Rd; coords match, not on any 2025/2026 closure list.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "flag": "most recent positive is 2012; no recent Tier-1 located"
+  }
 }
