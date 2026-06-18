@@ -1,0 +1,140 @@
+{
+  "name": "US PL High Springs Factory",
+  "type": "Bottling plant (PL)",
+  "coords": { "lat": 29.81830, "lng": -82.68970 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 29.82015, "lng": -82.69115 },
+      { "lat": 29.82010, "lng": -82.68745 },
+      { "lat": 29.81905, "lng": -82.68715 },
+      { "lat": 29.81780, "lng": -82.68740 },
+      { "lat": 29.81735, "lng": -82.68790 },
+      { "lat": 29.81715, "lng": -82.68845 },
+      { "lat": 29.81718, "lng": -82.69010 },
+      { "lat": 29.81705, "lng": -82.69130 },
+      { "lat": 29.81830, "lng": -82.69140 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 29.81745, "lng": -82.68820 },
+      { "lat": 29.81745, "lng": -82.68788 },
+      { "lat": 29.81728, "lng": -82.68788 },
+      { "lat": 29.81728, "lng": -82.68820 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 29.81995, "lng": -82.69090 },
+        { "lat": 29.81992, "lng": -82.68985 },
+        { "lat": 29.81950, "lng": -82.68985 },
+        { "lat": 29.81952, "lng": -82.69090 }
+      ] },
+      { "ring": [
+        { "lat": 29.81755, "lng": -82.69085 },
+        { "lat": 29.81752, "lng": -82.68930 },
+        { "lat": 29.81718, "lng": -82.68930 },
+        { "lat": 29.81720, "lng": -82.69085 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 29.81948, "lng": -82.69075 },
+        { "lat": 29.81945, "lng": -82.68975 },
+        { "lat": 29.81928, "lng": -82.68977 },
+        { "lat": 29.81931, "lng": -82.69077 }
+      ] },
+      { "ring": [
+        { "lat": 29.81920, "lng": -82.68930 },
+        { "lat": 29.81918, "lng": -82.68830 },
+        { "lat": 29.81901, "lng": -82.68832 },
+        { "lat": 29.81903, "lng": -82.68930 }
+      ] },
+      { "ring": [
+        { "lat": 29.81790, "lng": -82.69080 },
+        { "lat": 29.81788, "lng": -82.68855 },
+        { "lat": 29.81772, "lng": -82.68857 },
+        { "lat": 29.81774, "lng": -82.69080 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 29.81915, "lng": -82.68805 },
+      { "lat": 29.81905, "lng": -82.68690 },
+      { "lat": 29.81855, "lng": -82.68685 },
+      { "lat": 29.81845, "lng": -82.68760 },
+      { "lat": 29.81880, "lng": -82.68815 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 317, "pano": "mMYa1zJeJf_erlM6PvF9_g", "hasCoverage": true },
+      "truckGate": { "heading": 344, "pano": "mMYa1zJeJf_erlM6PvF9_g", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 30.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.81830,-82.68970,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": true,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "remoteGs",
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "exitLanes",
+    "connectivityIssue",
+    "shipRcvSeparate",
+    "fastLaneOpportunity"
+  ],
+  "fieldNotes": {
+    "siteResolution": "Supplied coords (29.8283,-82.5967) landed in downtown High Springs (houses/small commercial, no plant). Google ROOFTOP geocode of '7100 NE County Rd 340, High Springs FL 32643' returned 29.81821,-82.68969, which satellite confirmed as the large industrial bottling/distribution plant SW of town near the Santa Fe River / Ginnie Springs. This is the BlueTriton Brands (Primo Brands) High Springs water plant, formerly Nestle Waters (TruckMap/YP list it as 'Nestle Waters High Springs, 7100 NE County Road 340'). Locked building centroid 29.81830,-82.68970.",
+    "truckGate": "TRUE, high confidence. Street View up the entry drive (pano mMYa1zJeJf_erlM6PvF9_g, 2026-04, heading ~344-350) clearly shows a white cantilever/sliding gate across the full width of the truck/entry drive at the property line, with chain-link perimeter fencing running both directions and directory/check-in sign posts flanking the drive (blue sign left, post right). Satellite (z20) shows the gated drive widening to ~2 lanes inbound.",
+    "guardShack": "FALSE, high confidence. No booth-sized structure (1-3 vehicle footprint, multi-side windows) at or beside the gate in Street View or satellite. The gate stands alone with signage only.",
+    "remoteGs": "TRUE (truck gate present, no guard shack -> implies kiosk/call-box/app check-in). Marked uncertain only because the exact check-in mechanism (the flanking sign posts may be a callbox/keypad) cannot be read from imagery; the gate-without-booth pattern is clear.",
+    "entryLanes": "Entry drive widens to ~2 lanes at the gate (z20 shows two painted lane arrows on the approach). Inbound = 2.",
+    "exitLanes": "Single shared return lane back to CR 340; exit shares the same gated drive (entry/exit together). Estimated 1, low confidence.",
+    "entryExitTogether": "TRUE - one gated drive from CR 340 serves both in and out; no separate out-gate elsewhere on the perimeter.",
+    "fastLaneOpportunity": "Wide gate apron and a large internal paved truck loop/turnaround on the NE/E side give ample room to add a bypass/express lane; ~2 inbound lanes already. Medium confidence.",
+    "postGateStaging": "Large paved truck loop ('racetrack' oval) on the NE/E side of the building plus broad internal aprons act as an inside-the-gate queue/staging area before docks.",
+    "drivewayLong": "Long approach: gated drive from CR 340 to the building plus the internal loop easily holds 3+ queued trucks.",
+    "dockDoors": "Banded 50+. Long, regular dock-door rhythm with trailers backed in on the NORTH face (~20+ doors, z19 northyard), the SOUTH face (~20+ doors, z19 SW), and additional doors on the building's E/NE inset face. Honest total estimate ~55-65 across faces -> 50+ band.",
+    "dockDoorCount": "~60, approximate; counted from trailer-backing rhythm across N/S/E faces in z19 crops. Could be +/-15.",
+    "dropArea": "Banded 50+. Dense rows of parked trailers (no tractors) along the north field edge, the south edge, and the SW corner; ~50-70 trailer slots visible across the drop rows.",
+    "dropYard": "TRUE - dedicated trailer-storage rows along the N and S perimeter, separate from active dock staging.",
+    "trailersVisible": "~70 across all rows/docks (N row, S row, SW corner, scattered on the loop); mixed but consistent imagery vintage. Approximate.",
+    "trailerParkingCapacity": "~90 including the paved loop shoulders and unused apron width. Approximate.",
+    "shipRcvSeparate": "Distinct dock banks on the north face and the south face on different building sides suggest split ship/receive, but function cannot be confirmed from imagery - medium confidence.",
+    "buildingCount": "ONE large L-shaped distribution/bottling building with an attached process/utility annex on the E side (counted as one complex). No second detached large building -> multipleFacilities FALSE.",
+    "urbanRural": "RURAL - isolated industrial site surrounded by open fields, forest, and a sand/mining pit to the south; nearest town fabric (downtown High Springs) is ~9 km NE. CR 340 is a rural 2-lane road.",
+    "connectivityIssue": "Inferred TRUE - remote rural site in forested/agricultural land west of High Springs near the Santa Fe River; cellular coverage likely weaker than metro. Medium confidence.",
+    "scale": "No truck scale / weigh pad with scale house identified in the truck path. FALSE.",
+    "railServed": "No rail spur enters the property; access is the CR 340 drive only. FALSE.",
+    "siteAreaAcres": "~30 acres of cleared/paved/graded footprint inside the fence (building + aprons + loop + drop rows + parking), derived from the perimeter polygon. Surrounding land is fields/forest, not yard.",
+    "imageryQuality": "Maxar/Airbus 2026 imagery, sharp; Street View 2026-04 at the entrance. High confidence on gate, building, docks, layout."
+  },
+  "method": "deep-audit"
+}

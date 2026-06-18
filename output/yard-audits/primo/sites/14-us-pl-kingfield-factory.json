@@ -1,0 +1,103 @@
+{
+  "name": "US PL Kingfield Factory",
+  "type": "Bottling plant (PL)",
+  "coords": { "lat": 44.94470, "lng": -70.15770 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 44.94525, "lng": -70.15920 },
+      { "lat": 44.94560, "lng": -70.15700 },
+      { "lat": 44.94560, "lng": -70.15560 },
+      { "lat": 44.94470, "lng": -70.15530 },
+      { "lat": 44.94370, "lng": -70.15560 },
+      { "lat": 44.94300, "lng": -70.15700 },
+      { "lat": 44.94320, "lng": -70.15880 },
+      { "lat": 44.94430, "lng": -70.15940 }
+    ] },
+    "truckGate": null,
+    "dropYards": [
+      { "ring": [
+        { "lat": 44.94390, "lng": -70.15870 },
+        { "lat": 44.94340, "lng": -70.15720 },
+        { "lat": 44.94300, "lng": -70.15745 },
+        { "lat": 44.94350, "lng": -70.15895 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 44.94430, "lng": -70.15880 },
+        { "lat": 44.94390, "lng": -70.15585 },
+        { "lat": 44.94375, "lng": -70.15595 },
+        { "lat": 44.94415, "lng": -70.15890 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
+      "truckGate": { "heading": 0, "pano": "", "hasCoverage": false }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 28,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 22.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@44.94470,-70.15770,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": true,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "connectivityIssue"
+  ],
+  "fieldNotes": {
+    "siteResolution": "Given coords (44.9580,-70.1530) were ~1.5km NNE. Google geocode of 120 Poland Spring Dr, Kingfield ME 04947 returned 44.9448,-70.1577, landing on a single large industrial building in a forest clearing - the Poland Spring (Nestle Waters / Primo / BlueTriton) Kingfield bottling plant (web: Daily Bulldog, USGBC, Yelp - one of Poland Spring's Maine plants, two production lines). Locked center ~44.9447,-70.1577.",
+    "truckGate": "No barrier arm, sliding gate, or guard booth visible at the building yard or along the forested access road (z18 entrance + z17 road-out crops). Access is a single long private road winding ~0.6km through forest from the NE to the building. FALSE, but low-medium confidence - a gate could sit further up the private drive outside captured frames. No Street View coverage anywhere near the site to confirm.",
+    "guardShack": "No booth-sized structure at the yard entrance. FALSE.",
+    "remoteGs": "FALSE - no confirmed truck gate.",
+    "dockDoors": "Long continuous dock bank along the building's SW/south face (z18/z19 SW-docks crops, trailers backed in with a regular door rhythm, ~25-30 positions). Banded 25-50. Flagged uncertain.",
+    "dropArea": "Large trailer drop yard immediately SW of the dock apron: multiple parallel diagonal rows of trailers parked without tractors (z19 SW-docks crop shows ~3-4 rows, 50+ trailers total). Banded 50+. dropYard TRUE.",
+    "dropYard": "TRUE - dedicated multi-row trailer-storage area separate from the active dock apron.",
+    "shipRcvSeparate": "Docks concentrated on the single SW face; no clearly distinct second ship/receive bank on another face. FALSE.",
+    "drivewayLong": "Long forested private approach road (~0.6km) plus a deep paved yard apron easily holds 3+ trucks queued -> drivewayLong TRUE, postGateStaging TRUE (large paved internal apron between dock bank and drop yard).",
+    "entryExitTogether": "Single access road / yard loop serves the building; same in/out point -> entryExitTogether TRUE.",
+    "railServed": "No rail spur; nearest infrastructure is the private road only. The site is in deep forest. FALSE.",
+    "connectivityIssue": "Plant sits in a forest clearing in rural western Maine (Kingfield) with no adjacent development for ~0.5km in any direction -> likely weak cellular coverage. Inferred, medium confidence.",
+    "trailersVisible": "~20-30 at SW docks + ~50+ in the drop-yard rows = ~70. Approximate from overhead imagery.",
+    "trailerParkingCapacity": "Drop-yard rows + dock positions could hold ~90 trailers.",
+    "siteAreaAcres": "~22 acres of cleared/paved footprint inside the treeline, derived from the perimeter polygon; the surrounding parcel is forest, not yard.",
+    "buildingCount": "One large contiguous bottling/warehouse building (with a round water-storage tank at the SE). Counted as 1.",
+    "urbanRural": "Isolated forest-clearing site in rural Kingfield, western Maine -> Rural.",
+    "scale": "No truck scale / weigh pad visible in the truck path. FALSE.",
+    "imageryQuality": "Clear summer Maxar/Airbus + USDA tiles; no Street View coverage (rural). Dock/trailer counts are honest overhead estimates, banded conservatively."
+  },
+  "method": "deep-audit"
+}

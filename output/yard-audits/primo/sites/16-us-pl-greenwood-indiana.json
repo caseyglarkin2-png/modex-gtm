@@ -1,0 +1,98 @@
+{
+  "name": "US PL Greenwood Indiana",
+  "type": "Bottling plant (PL)",
+  "coords": { "lat": 39.62550, "lng": -86.06120 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 39.62720, "lng": -86.06320 },
+      { "lat": 39.62720, "lng": -86.05930 },
+      { "lat": 39.62380, "lng": -86.05920 },
+      { "lat": 39.62370, "lng": -86.06330 },
+      { "lat": 39.62550, "lng": -86.06360 }
+    ] },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 39.62680, "lng": -86.06005 },
+        { "lat": 39.62420, "lng": -86.05995 },
+        { "lat": 39.62420, "lng": -86.05955 },
+        { "lat": 39.62680, "lng": -86.05965 }
+      ] },
+      { "ring": [
+        { "lat": 39.62680, "lng": -86.06250 },
+        { "lat": 39.62420, "lng": -86.06250 },
+        { "lat": 39.62420, "lng": -86.06210 },
+        { "lat": 39.62680, "lng": -86.06210 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 90, "pano": "VyzWaWix6wInOXx37B43wA", "hasCoverage": true },
+      "truckGate": { "heading": 0, "pano": "", "hasCoverage": false }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 65,
+    "trailersVisible": 35,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 30.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.62550,-86.06120,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "entryExitSeparate"
+  ],
+  "fieldNotes": {
+    "siteResolution": "Given coords (39.5945,-86.1167) were ~5.6km SW (likely pointing at the OTHER Greenwood BlueTriton/Primo facility on Long Ridge Rd / Commerce Pkwy). Google geocode of 1055 N Graham Rd, Greenwood IN 46143 returned 39.6295,-86.0630 (on N Graham Rd at the road); web (LoopNet, Primo/BlueTriton listings, Indy South Logistics Park) confirms Primo Brands operates the large red-banded distribution building immediately SE of that point. Locked center ~39.6255,-86.0612. NOTE: this 1055 Graham Rd site is a DISTRIBUTION CENTER (cross-dock spec building), not an active bottling line - the actual Greenwood bottling plant appears to be the separate 900 Long Ridge Rd facility. Audited the Graham Rd building per the supplied address; kept type 'Bottling plant (PL)' as instructed.",
+    "buildingIdentity": "The brick peaked-roof building with a flag directly on N Graham Rd (front) is a SEPARATE fire/EMS station, not part of the DC - confirmed in Street View (pano VyzWaWix6wInOXx37B43wA, 2025-05). The audited building is the large tan/red-banded cross-dock warehouse behind it to the SE.",
+    "truckGate": "No barrier arm, sliding gate, or guard booth at the building's truck-court entrances or driveways. Street View (2025-05) shows open driveways and an open office/parking front; the truck courts on both long faces are open spec-DC courts with no perimeter fence. FALSE (medium confidence - logistics-park spec buildings occasionally add a yard gate out of frame).",
+    "guardShack": "No staffed booth-sized structure at any entrance. FALSE.",
+    "remoteGs": "FALSE - no confirmed truck gate.",
+    "dockDoors": "Cross-dock building with dock banks on BOTH long faces (east face z18 east-dock crop + west face z18 west-dock crop, trailers backed in on both). Each face ~30-40 doors -> combined honest estimate ~60-70 -> banded 50+. Flagged uncertain.",
+    "shipRcvSeparate": "Docks on two opposite long faces (classic cross-dock) -> shipping and receiving run from physically separate dock banks. shipRcvSeparate TRUE. This dual-face layout also implies entry/exit can be separated (truck court on each side).",
+    "entryExitSeparate": "Truck courts on both the east and west faces with separate driveway access -> trucks can enter one court and exit the other. entryExitSeparate TRUE (medium confidence; could also be operated as one loop).",
+    "dropArea": "This is a live cross-dock, not a drop yard: trailers are backed at doors and a modest number staged in the courts (~10-25), with no dedicated multi-row trailer-storage lot. dropArea 10-25, dropYard FALSE.",
+    "drivewayLong": "Deep truck courts on both faces hold 3+ trucks staging before doors -> drivewayLong TRUE, postGateStaging TRUE.",
+    "railServed": "No rail spur enters the property (retention ponds and farmland on the E/N). FALSE.",
+    "trailersVisible": "~15-20 at east-face docks/court + ~15-20 at west-face docks/court = ~35. Approximate from overhead imagery.",
+    "trailerParkingCapacity": "Truck courts + dock positions could hold ~60 trailers; no large drop lot.",
+    "siteAreaAcres": "~30 acres for the DC building + both truck courts + parking, derived from the perimeter polygon (excludes the separate fire station and the separate building to the south).",
+    "buildingCount": "One large cross-dock distribution building. The fire station (NW) and the warehouse to the south are separate properties, excluded. -> 1.",
+    "urbanRural": "In the Indy South Logistics Park, an established Greenwood (metro Indianapolis) industrial corridor with multiple adjacent big-box DCs -> Urban.",
+    "scale": "No truck scale / weigh pad visible in the truck path. FALSE.",
+    "imageryQuality": "Clear recent Maxar/Airbus tiles + 2025-05 Street View on N Graham Rd. Dock counts banded conservatively; ship/receive-separate and entry/exit-separate inferred from the cross-dock dual-face layout."
+  },
+  "method": "deep-audit"
+}

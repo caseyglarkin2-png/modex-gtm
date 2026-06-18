@@ -1,0 +1,109 @@
+{
+  "name": "US PL Allentown NPL Factory",
+  "type": "Bottling plant (PL)",
+  "coords": { "lat": 40.57300, "lng": -75.63140 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 40.57490, "lng": -75.63200 },
+      { "lat": 40.57455, "lng": -75.62990 },
+      { "lat": 40.57210, "lng": -75.63060 },
+      { "lat": 40.57135, "lng": -75.63135 },
+      { "lat": 40.57140, "lng": -75.63260 },
+      { "lat": 40.57250, "lng": -75.63330 },
+      { "lat": 40.57400, "lng": -75.63300 },
+      { "lat": 40.57470, "lng": -75.63260 }
+    ] },
+    "truckGate": null,
+    "dropYards": [
+      { "ring": [
+        { "lat": 40.57470, "lng": -75.63265 },
+        { "lat": 40.57440, "lng": -75.63190 },
+        { "lat": 40.57250, "lng": -75.63255 },
+        { "lat": 40.57280, "lng": -75.63330 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 40.57450, "lng": -75.63240 },
+        { "lat": 40.57420, "lng": -75.63175 },
+        { "lat": 40.57180, "lng": -75.63250 },
+        { "lat": 40.57205, "lng": -75.63315 }
+      ] },
+      { "ring": [
+        { "lat": 40.57440, "lng": -75.62995 },
+        { "lat": 40.57215, "lng": -75.63060 },
+        { "lat": 40.57205, "lng": -75.63030 },
+        { "lat": 40.57430, "lng": -75.62965 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 30, "pano": "YhbPa3et_ioh2Dif2TFodw", "hasCoverage": true },
+      "truckGate": { "heading": 30, "pano": "YhbPa3et_ioh2Dif2TFodw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 95,
+    "trailerParkingCapacity": 130,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 32.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.57300,-75.63140,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "shipRcvSeparate",
+    "railServed"
+  ],
+  "fieldNotes": {
+    "siteResolution": "Given coords (40.5280,-75.6350) were ~5km too far south. Google geocode of 405 Nestle Way, Breinigsville PA 18031 returned 40.5732,-75.6315, which sits on a very large white-roof distribution/warehouse building on the Nestle/BlueTriton/Primo Lehigh Valley campus. Web (nestleusa, wfmz) confirms TWO Primo bottling plants in Breinigsville (~500 employees combined) producing Nestle Pure Life (NPL) and Deer Park brands.",
+    "nplSeparation": "The campus has (a) a dense NE production/process complex with dark roofs, tanks/utilities and a red-roof building (~40.5745,-75.6300) = the primary 'main Allentown plant' (idx 4) process halls, and (b) this DISTINCT large stand-alone white-roof building at 405 Nestle Way (~40.5730,-75.6313) with its own dual dock banks, trailer drop yards and rail siding. I audited the distinct 405-Nestle-Way building footprint as the NPL line, and treated the NE process complex as the separate main plant. The two are physically separated by an internal road and grass; I traced only the 405 building's footprint and yards, not the process complex.",
+    "truckGate": "No barrier arm, sliding gate, or guard booth visible at the building's car/dock approach. Street View (pano YhbPa3et_ioh2Dif2TFodw, 2025-05) shows an OPEN driveway with a blue monument sign and employee parking, no gate. The building sits inside an open corporate-park road network; truck control is at the dock, not a perimeter barrier. FALSE (medium confidence - a campus-level gate could exist at the main public-road entrance off Schantz/Nestle Way, outside captured frames).",
+    "guardShack": "No staffed booth-sized structure at the building approach in Street View. FALSE.",
+    "remoteGs": "FALSE - no confirmed truck gate.",
+    "dockDoors": "Dock banks on BOTH long faces of the building: a long continuous bank on the WEST face (z19 west-docks crop, ~20-25 angled bays with trailers backed in) and a second bank on the EAST face alongside the rail (z19 east-rail crop, trailers backed in). Honest combined estimate ~50-60 -> banded 50+. Flagged uncertain (banks extend beyond single frames).",
+    "shipRcvSeparate": "Two distinct dock banks on the two opposite long faces (west + east) strongly suggest split ship/receive flows. TRUE, medium confidence (function not confirmable).",
+    "dropArea": "Dedicated trailer drop rows at the NW of the building (z18 north-end + npl-full crops show parallel rows of parked trailers without tractors, ~25-40). Banded 25-50. dropYard TRUE.",
+    "railServed": "Multiple parallel rail tracks run N-S directly along the building's EAST face (z19 east-rail crop), with rail cars/trailers staged - a rail siding appears to serve the building. TRUE, medium confidence (could not confirm a spur physically entering a dock door vs a pass-by line, but tracks hug the building).",
+    "drivewayLong": "Long internal approach roads loop from Nestle Way around the building to both dock faces; deep paved aprons hold 3+ trucks before docks -> drivewayLong TRUE, postGateStaging TRUE (large internal paved holding areas).",
+    "entryExitTogether": "Single internal driveway pair serves the building's south/west approach; trucks enter and leave via the same loop. entryExitTogether TRUE.",
+    "trailersVisible": "~20-25 at west docks + ~15-20 at east docks/rail + ~25-40 in NW drop rows + scattered = ~95. Approximate from overhead imagery.",
+    "trailerParkingCapacity": "Drop rows + dock positions + apron could hold ~130 trailers.",
+    "siteAreaAcres": "~32 acres for the 405-Nestle-Way building footprint + its immediate west drop yard and east rail apron, derived from the perimeter polygon. The full campus is far larger; only the NPL building's footprint is traced here.",
+    "buildingCount": "One large stand-alone building (the 405 Nestle Way NPL distribution/production building). The NE process complex is a separate plant, excluded from this audit. -> 1.",
+    "urbanRural": "Located in Breinigsville (Upper Macungie Twp), a Lehigh Valley industrial park at the edge of open farmland to the NW; small-town/edge-of-town industrial setting -> Rural per rubric (when torn between small-town-industrial and Urban, choose Rural).",
+    "scale": "No truck scale / weigh pad visible in the truck path. FALSE.",
+    "imageryQuality": "Clear recent Maxar/Airbus tiles plus 2025-05 Street View on Nestle Way; the campus has many adjacent third-party warehouses that required care to separate the Nestle building. Counts banded conservatively."
+  },
+  "method": "deep-audit"
+}

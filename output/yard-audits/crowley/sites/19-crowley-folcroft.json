@@ -1,0 +1,113 @@
+{
+  "name": "Crowley Folcroft Warehouse - Folcroft PA",
+  "type": "Warehouse / distribution facility (PA receiving location)",
+  "coords": {
+    "lat": 39.898115,
+    "lng": -75.272971
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        { "lat": 39.898820, "lng": -75.274120 },
+        { "lat": 39.898430, "lng": -75.272500 },
+        { "lat": 39.897380, "lng": -75.272840 },
+        { "lat": 39.897720, "lng": -75.274300 }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        { "lat": 39.897860, "lng": -75.272760 },
+        { "lat": 39.897760, "lng": -75.272560 },
+        { "lat": 39.897600, "lng": -75.272720 },
+        { "lat": 39.897700, "lng": -75.272920 }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          { "lat": 39.898760, "lng": -75.273980 },
+          { "lat": 39.898470, "lng": -75.272820 },
+          { "lat": 39.898120, "lng": -75.272980 },
+          { "lat": 39.898400, "lng": -75.274160 }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          { "lat": 39.897760, "lng": -75.273100 },
+          { "lat": 39.897560, "lng": -75.272900 },
+          { "lat": 39.897380, "lng": -75.273160 },
+          { "lat": 39.897600, "lng": -75.273380 }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "truckGate": {
+        "heading": 336,
+        "pano": "7vXBi7JM6OVZ0XwwnQVFyA",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 6,
+    "trailersVisible": 8,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 4.1,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.898115,-75.272971,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoors",
+    "trailerParkingCapacity"
+  ],
+  "fieldNotes": {
+    "siteIdentification": "1420 Delmar Drive, Folcroft PA 19032 - listed on crowley.com/locations as Crowley's Pennsylvania warehouse / receiving location (operated with CMS Transportation Inc.). Geocoded ROOFTOP to a single large dark-roofed warehouse building confirmed in satellite z18-z20. The large rows of light-roofed buildings immediately east across Delmar Drive are a self-storage facility, NOT part of the Crowley site.",
+    "yardSpotsMeaning": "trailerParkingCapacity is TRAILER PARKING (not container slots): the unpaved gravel/dirt drop yard on the NW side plus the south apron. ~8 trailers/containers visible parked in the gravel row in z18; conservative capacity ~25 if striped/stacked. Low confidence - unpaved lot, no painted stalls.",
+    "truckGate": "No barrier arm or guard booth resolved in imagery; the property is a small infill industrial lot wedged into a residential block. Street View coverage exists only on the surrounding residential streets (Delmar Dr cul-de-sac), which show houses, not a controlled truck entrance. Truck access appears to be an open driveway at the south/SE corner off Delmar Drive. Set truckGate=false (open driveway, no visible control) but flagged uncertain - the yard side is not Street-View visible.",
+    "guardShack": "No guard booth visible. No gate, so remoteGs is also false.",
+    "backupSensitive": "The lot is hemmed in by single-family homes on the east and south and a residential cul-de-sac; truck maneuvering room is tight and a queue would back onto a residential street. Flagged backup-sensitive.",
+    "dockDoors": "South/SE apron shows a short bank of dock positions (estimated ~6, band 0-10). Partly shadowed by tree canopy in summer imagery - low confidence.",
+    "drivewayShort": "Short approach from Delmar Drive to the building apron; holds only 1-2 trucks.",
+    "urbanRural": "Folcroft is inside the dense Philadelphia metro fabric (Delaware County, ~8 mi SW of Center City) - Urban.",
+    "railServed": "No rail spur runs into this property. (Crowley's larger Penn Terminals marine facility in nearby Eddystone is rail-served, but that is a separate site, idx 7.)",
+    "streetView": "truckGate pano 7vXBi7JM6OVZ0XwwnQVFyA sits at the south end of Delmar Drive (the closest public-road pano to the site driveway); perimeter interior has no Street View coverage (private lot)."
+  },
+  "method": "deep-audit"
+}

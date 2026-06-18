@@ -1,0 +1,117 @@
+{
+  "name": "CA PL Guelph Factory",
+  "type": "Bottling plant (PL)",
+  "coords": { "lat": 43.46345, "lng": -80.14885 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 43.46435, "lng": -80.14790 },
+      { "lat": 43.46415, "lng": -80.14740 },
+      { "lat": 43.46340, "lng": -80.14735 },
+      { "lat": 43.46285, "lng": -80.14760 },
+      { "lat": 43.46250, "lng": -80.14880 },
+      { "lat": 43.46245, "lng": -80.15050 },
+      { "lat": 43.46295, "lng": -80.15130 },
+      { "lat": 43.46365, "lng": -80.15090 },
+      { "lat": 43.46400, "lng": -80.14960 },
+      { "lat": 43.46425, "lng": -80.14850 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 43.46418, "lng": -80.14782 },
+      { "lat": 43.46410, "lng": -80.14758 },
+      { "lat": 43.46398, "lng": -80.14765 },
+      { "lat": 43.46406, "lng": -80.14789 }
+    ] },
+    "dropYards": [],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 43.46352, "lng": -80.14760 },
+        { "lat": 43.46318, "lng": -80.14772 },
+        { "lat": 43.46312, "lng": -80.14792 },
+        { "lat": 43.46346, "lng": -80.14780 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 43.46340, "lng": -80.14880 },
+      { "lat": 43.46290, "lng": -80.14900 },
+      { "lat": 43.46282, "lng": -80.15030 },
+      { "lat": 43.46330, "lng": -80.15050 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
+      "truckGate": { "heading": 0, "pano": "", "hasCoverage": false }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 16,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 11.9,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@43.46345,-80.14885,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoors",
+    "entryLanes",
+    "exitLanes",
+    "dropArea",
+    "connectivityIssue"
+  ],
+  "fieldNotes": {
+    "siteResolution": "Supplied coords (43.5448,-80.2482) were city-level and ~10km NW, inside Guelph proper. Web search confirmed the facility is the former Nestle Waters Canada / BlueTriton Pure Life bottling plant + head office at 101 Brock Road South, Puslinch (Aberfoyle) ON N0B 2J0 (Yelp, Wellington County business directory, CBC plant tour). Google Geocoding API placed 101 Brock Rd S at 43.46248,-80.14992; satellite probe there revealed an isolated industrial plant in forest beside the Dufferin Aggregates Aberfoyle quarry, with rooftop bottling-line process units, water storage silos, an attached office, employee parking, and a large paved truck yard. Locked plant center at 43.46345,-80.14885. IMPORTANT: BlueTriton announced closure of this plant and wound down Ontario operations by end of Jan 2025 (CBC, Wellington Advertiser); the site was listed for sale and wells sold to White Wolf Property Management. The 2026 imagery shows the buildings intact but the yard EMPTY of trailers, which is why trailer/drop counts read 0. This is a strategically relevant Primo Brands footprint asset even though currently idle.",
+    "facilityIdentity": "NOTE the large white ~282,000 sqft warehouse ~1.5km ESE at 43.4625,-80.1305 (McLean/Brock near the GO station) is the Maple Leaf Foods distribution centre (DB Schenker 3PL), NOT this plant. Early in the audit it was a false candidate; the geocoder + isolated-in-forest layout + spring pond + quarry adjacency disambiguated the real BlueTriton plant to the WEST at -80.1499.",
+    "truckGate": "No barrier arm, sliding gate, or guard booth could be positively identified on overhead imagery at any entrance. Marked false but LOW confidence: the entire site is reached by a single ~500m private driveway running NE through forest from the plant's NE corner (~43.46415,-80.14760) to the Brock Road roundabout (~43.4655,-80.1432); a controlled gate almost certainly sits somewhere on that private drive (standard for a secured Nestle/BlueTriton water plant) but it is not resolvable in the captured frames. Street View has ZERO coverage on the property or the private drive (nearest pano is the roundabout ~300m away), so the gate could not be confirmed at ground level.",
+    "guardShack": "No booth-sized structure (1-3 vehicle footprint, multi-side windows) identifiable at the drive entrance or yard. The small white object at the SW back corner of the yard (43.4636,-80.1505) is stored pallets/material and a shed at the treeline, not a gatehouse. False, low confidence given no Street View.",
+    "remoteGs": "False - no truck gate positively confirmed.",
+    "postGateStaging": "True - a very large internal paved yard wraps the S and SW of the plant building, providing extensive holding/queue space inside the property before the dock face.",
+    "drivewayLong": "True - long private approach (~500m forest drive to the roundabout) plus a deep internal yard easily holds 3+ trucks queued before docks.",
+    "backupSensitive": "False - isolated rural site with a vast paved yard and a long private drive; a truck queue has abundant stacking room and cannot spill onto a public road.",
+    "entryExitTogether": "True - a single private access drive serves the property; in/out share the same point. entryExitSeparate false.",
+    "entryLanes": "null - no Street View and overhead resolution at the private gate point is insufficient to count lanes.",
+    "dockDoors": "Banded 10-25, MEDIUM-LOW confidence. The dock/loading face runs along the SE/E side of the building where the paved yard meets the wall (~43.4632,-80.1478); rooftop bottling-line process units and water silos confirm the building function. With the plant closed there are no backed-in trailers to count by; estimate ~16 doors from the building scale (56M cases/yr plant) and apron width. Flagged uncertain.",
+    "dropArea": "NONE currently - the yard is empty of trailers in the 2026 imagery (plant idled Jan 2025). The PHYSICAL capacity is large (banded would be 25-50 if active), but per-rubric dropArea counts trailers actually present without a tractor, which is zero now.",
+    "dropYard": "False - although the large empty paved yard could serve as a dedicated trailer-storage lot, no trailers are stored there in current imagery, so no active drop yard is observed.",
+    "shipRcvSeparate": "False - a single dock cluster on the SE/E building face; no second physically separate dock bank on a different face is evident.",
+    "scale": "False - no truck scale / weigh pad or scale house identified in the truck path.",
+    "multipleFacilities": "False - one plant complex (process/bottling hall + attached warehouse + attached office) counted as a single building/cluster; the adjacent quarry is a separate owner (Dufferin Aggregates).",
+    "urbanRural": "Rural - the plant sits in forest beside an aggregate quarry, ~1km from the small Aberfoyle hamlet; broader setting is small-town/edge-of-country despite the nearby business park and 401 corridor.",
+    "connectivityIssue": "False (medium confidence) - though wooded and rural, the site is immediately adjacent to the Aberfoyle business park, the Hwy 401 corridor, and Guelph's southern edge, so cellular coverage is likely adequate. Flagged uncertain.",
+    "trailerParkingCapacity": "~60 - the large paved S/SW yard plus apron could hold roughly 50-70 trailers if operating; estimate from yard area, no current trailers to calibrate against.",
+    "trailersVisible": "0 - none parked in 2026 imagery; consistent with the post-closure idle state.",
+    "siteAreaAcres": "~11.9 acres of developed/paved footprint (building + yard + parking) inside the forest treeline, derived from the perimeter polygon. The deeded property and surrounding Nestle/BlueTriton spring lands are far larger but are forest/well-field, not yard.",
+    "railServed": "False - no rail spur enters the property; access is the single private road only.",
+    "buildingCount": "1 - the bottling/process hall, attached warehouse, and head-office wing form one connected complex.",
+    "streetView": "No Street View coverage on the property or the private drive; all streetViewMeta zones hasCoverage:false. Nearest pano is the Brock Road roundabout (43.4665,-80.1422, captured 2025-08), too distant to render the gate or docks.",
+    "imageryQuality": "Maxar/Airbus 2026 satellite, good resolution; a spring-fed pond sits immediately N of the building. Dock counting is limited by the closed/empty state (no trailers as visual anchors) and by partial roof-overhang on the loading face."
+  },
+  "method": "deep-audit"
+}

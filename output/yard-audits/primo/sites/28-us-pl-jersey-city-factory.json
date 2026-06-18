@@ -1,0 +1,112 @@
+{
+  "name": "US PL Jersey City Factory",
+  "type": "Bottling plant (PL)",
+  "coords": { "lat": 40.70050, "lng": -74.05950 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 40.70098, "lng": -74.06010 },
+      { "lat": 40.70110, "lng": -74.05880 },
+      { "lat": 40.69995, "lng": -74.05900 },
+      { "lat": 40.69983, "lng": -74.06030 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 40.69998, "lng": -74.06028 },
+      { "lat": 40.69998, "lng": -74.06008 },
+      { "lat": 40.69986, "lng": -74.06010 },
+      { "lat": 40.69986, "lng": -74.06030 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 40.70010, "lng": -74.06028 },
+        { "lat": 40.70012, "lng": -74.05975 },
+        { "lat": 40.69988, "lng": -74.05978 },
+        { "lat": 40.69986, "lng": -74.06030 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 40.70022, "lng": -74.06012 },
+        { "lat": 40.70025, "lng": -74.05908 },
+        { "lat": 40.70012, "lng": -74.05910 },
+        { "lat": 40.70009, "lng": -74.06014 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 89, "pano": "e-BlCg-VmEhYHpMdentSyg", "hasCoverage": true },
+      "truckGate": { "heading": 89, "pano": "e-BlCg-VmEhYHpMdentSyg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 16,
+    "trailersVisible": 18,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 3.4,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.70050,-74.05950,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayShort": true,
+    "drivewayLong": false,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "operationalStatus",
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoors",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes",
+    "postGateStaging",
+    "dropArea",
+    "dropYard"
+  ],
+  "fieldNotes": {
+    "operationalStatus": "CLOSED / VACATED (high confidence on closure, low confidence on JSON layout fields). This is the Nestle Waters / BlueTriton ReadyRefresh distribution + light-manufacturing branch at 111 Thomas McGovern Dr, Jersey City NJ 07305 (APN 06-21507-0000-00001), a 3.4-acre / ~65,715 sqft warehouse Nestle had leased since 2008. Evidence of closure: (1) Yelp 'READYREFRESH - CLOSED' listing for 111 Thomas McGovern Dr (updated June 2026); (2) ~19,500 SF listed for sublease at the address (tenant offloading space); (3) Primo Brands has closed 49 facilities post-merger (Nov 2024) and is consolidating the ReadyRefresh delivery network. Satellite imagery (©2026 Airbus/Maxar/Vexcel) still shows the building intact, NOT demolished, with vehicles in the yard, but the imagery vintage likely predates the closure. Street View Oct-2025 and Apr-2026 shows the perimeter being used for third-party container storage (NYK shipping containers stacked along the W/NW fence) and overflow sleeper-tractor parking on the marshy E access road, consistent with the Nestle branch having wound down and the lot being partly repurposed/sublet. Building is standing and not demolished, so the property remains a usable yard asset, but YardFlow should treat this as a CLOSED Primo/BlueTriton site, not an active bottling plant.",
+    "siteResolution": "Given coords were UNKNOWN. Resolved via web search to 111 Thomas McGovern Dr, Jersey City NJ 07305 (the long-standing Nestle Waters North America / ReadyRefresh Jersey City address; phone 201-451-4000). LoopNet/CIMLS confirm a 3.4-acre, ~65,715 sqft, ~50-year-old industrial building fully leased to Nestle Waters since 2008. Center pinned to the rectangular white-roof warehouse at ~40.70050,-74.05950; my traced perimeter is 3.41 acres, matching the 3.4-acre parcel exactly. NOTE on the 'Bottling plant (PL)' label: in dense urban Jersey City this is a distribution / home-and-office-delivery (ReadyRefresh) branch with light bottling/manufacturing, not a spring bottling plant; a stainless water silo/tank is visible at the building, consistent with PL water handling. Type kept as supplied ('Bottling plant (PL)').",
+    "truckGate": "Marked true (low confidence). The fenced lot is entered through chain-link sliding/rolling gates off the surrounding private industrial street; Street View shows full perimeter chain-link fence with privacy slats and gate openings. No barrier-arm checkpoint resolvable, but a controlled fenced-yard entrance exists. Caveat: if the site is now closed/sublet the gate function is moot.",
+    "guardShack": "False. No staffed booth (1-3 vehicle footprint, multi-side windows) at any entrance in satellite or Street View. Urban fenced-lot self-managed access.",
+    "remoteGs": "True per rubric: a truck gate exists but no guard shack, implying keypad/buzzer/self check-in. Low confidence given closure.",
+    "dockDoors": "South face of the building shows a bank of dock positions with 53ft trailers and box trucks staged along the wall (z19/z21). Honest estimate ~12-18 doors -> banded 10-25. Resolution limited.",
+    "trailersVisible": "Mixed fleet in the historical imagery: ~10-18 over-the-road 53ft trailers (along the E fence and S dock wall) plus 30-40 small white ReadyRefresh route box-trucks/vans packed in diagonal rows in the SW fleet yard. Counted OTR trailers (~18) for trailersVisible; the box-truck fleet is the delivery branch's route vehicles, not drop trailers.",
+    "dropArea": "Trailer staging along the S dock wall and E fence (~10-15 parked trailers without tractors) -> banded 10-25. The big SW lot is mostly route box-trucks (a delivery fleet yard), not drop trailers.",
+    "dropYard": "True - the south/east trailer staging and the SW fleet lot function as on-site trailer/vehicle storage separate from active docking, though primarily a last-mile route-truck yard.",
+    "postGateStaging": "Paved internal yard between the gate and the south dock face can hold queuing vehicles inside the fence.",
+    "drivewayShort": "Tight urban lot - the gate-to-dock approach holds only 1-2 trucks before the dock face / fleet rows. drivewayLong false.",
+    "backupSensitive": "True - the gate opens directly onto narrow shared private industrial streets in a dense multi-tenant district (Sysco next door); a truck queue would quickly spill onto the shared road. Tight geometry.",
+    "shipRcvSeparate": "Single dock bank on the south face -> ship/receive combined. False.",
+    "urbanRural": "Urban - dense Jersey City (07305) multi-tenant industrial fabric, immediately beside Sysco's large DC and dozens of warehouses; NY/NJ metro core.",
+    "connectivityIssue": "False - dense urban metro, strong cellular coverage.",
+    "scale": "No truck scale visible. False.",
+    "multipleFacilities": "Single building on the 3.4-acre parcel. False.",
+    "railServed": "No rail spur into the property. False.",
+    "siteAreaAcres": "3.4 acres - traced perimeter computes to 3.41 acres (shoelace), matching the LoopNet 3.4-acre parcel.",
+    "streetView": "Best/only nearby ground coverage is pano e-BlCg-VmEhYHpMdentSyg at 40.70043,-74.06084 (captured 2025-10), on the west access street facing the property; heading ~89deg points E toward the gate/building. Metadata directly at the gate/building centroid returns ZERO_RESULTS (interior fenced lot)."
+  },
+  "method": "deep-audit"
+}

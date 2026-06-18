@@ -1,0 +1,106 @@
+{
+  "name": "Crowley North Charleston Terminal - North Charleston SC",
+  "type": "Marine terminal / RoRo-breakbulk cargo yard",
+  "coords": {
+    "lat": 32.847446,
+    "lng": -79.935503
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        { "lat": 32.848340, "lng": -79.936640 },
+        { "lat": 32.847900, "lng": -79.934750 },
+        { "lat": 32.846100, "lng": -79.935200 },
+        { "lat": 32.846500, "lng": -79.937050 }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        { "lat": 32.844620, "lng": -79.938220 },
+        { "lat": 32.844420, "lng": -79.937760 },
+        { "lat": 32.844180, "lng": -79.937980 },
+        { "lat": 32.844380, "lng": -79.938440 }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          { "lat": 32.846920, "lng": -79.936320 },
+          { "lat": 32.846560, "lng": -79.935320 },
+          { "lat": 32.846020, "lng": -79.935560 },
+          { "lat": 32.846380, "lng": -79.936560 }
+        ]
+      }
+    ],
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "truckGate": {
+        "heading": 33,
+        "pano": "ya_2rL1jthob0aiLt3saxA",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 2,
+    "trailersVisible": 15,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 9.2,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.847446,-79.935503,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "trailerParkingCapacity",
+    "scale"
+  ],
+  "fieldNotes": {
+    "siteIdentification": "2075 Thompson Ave, North Charleston SC 29405 - Crowley Liner & Logistics' North Charleston terminal (RoRo / LoLo, breakbulk, project cargo, warehousing/distribution), confirmed via crowley.com/locations + Yelp/business listings. Sits on the Cooper River inside the former Charleston Naval Base, immediately adjacent to the SC Ports / Veterans Terminal breakbulk complex. The finger piers visible NE in satellite host laid-up Ready Reserve Force vessels. The geofence covers the Crowley pier-head office/terminal building, its parking, and the adjacent paved cargo lay-down area - NOT the entire Navy base.",
+    "yardSpotsMeaning": "trailerParkingCapacity here = CONTAINER / RoRo cargo lay-down + chassis/trailer ground slots on the paved aprons, NOT warehouse trailer-dock stalls. ~15 trailers/units visible in z19-z20; the large paved lay-down pads could hold ~120+ units/containers. Marine-terminal estimate, low confidence - lay-down area is shared port apron without painted stalls.",
+    "dockDoorCount": "Marine terminal - essentially no warehouse-style dock bank. dockDoorCount reflects 1-2 loading positions on the small transit/terminal building. dockDoors band 0-10. Cargo moves via RoRo ramps and lift-on/lift-off at the pier, not truck docks.",
+    "truckGate": "Street View on Thompson Ave (pano ya_2rL1jthob0aiLt3saxA, 2024-11) shows a continuous chain-link perimeter fence with red-roofed warehouses behind it - a fenced, controlled port compound. The former Navy base / port operates a controlled access point on Thompson Ave. Set truckGate=true with guardShack=true (standard port gate) but flagged uncertain: the exact Crowley-specific gate vs the shared base gate is not individually resolved, and the booth itself is not directly imaged.",
+    "guardShack": "Controlled port-style entry implies a manned gate; flagged uncertain because the specific booth structure was not directly resolved in the imagery available.",
+    "entryLanes": "Port access gate; 1 in / 1 out assumed for a secondary terminal entrance - counts approximate, flagged uncertain.",
+    "railServed": "The former Charleston Navy Base and Veterans Terminal complex is rail-served (port rail spurs run through the base); rail lines are visible threading the terminal area. Set true at the complex level.",
+    "scale": "No truck scale clearly resolved; common at ports but not confirmed - flagged uncertain.",
+    "urbanRural": "Dense North Charleston / Charleston metro industrial waterfront - Urban.",
+    "streetView": "truckGate pano ya_2rL1jthob0aiLt3saxA on Thompson Ave shows the fenced perimeter and warehouses; perimeter interior (the terminal/pier) has no Street View coverage (secure port property)."
+  },
+  "method": "deep-audit"
+}

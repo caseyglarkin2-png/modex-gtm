@@ -1,0 +1,117 @@
+{
+  "name": "US PL Framingham Factory",
+  "type": "Bottling plant (PL)",
+  "coords": { "lat": 42.29965, "lng": -71.47905 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 42.30018, "lng": -71.48002 },
+      { "lat": 42.30022, "lng": -71.47855 },
+      { "lat": 42.30008, "lng": -71.47838 },
+      { "lat": 42.29918, "lng": -71.47842 },
+      { "lat": 42.29908, "lng": -71.47905 },
+      { "lat": 42.29912, "lng": -71.47998 },
+      { "lat": 42.29960, "lng": -71.48012 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 42.30016, "lng": -71.47948 },
+      { "lat": 42.30015, "lng": -71.47918 },
+      { "lat": 42.30006, "lng": -71.47919 },
+      { "lat": 42.30007, "lng": -71.47949 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 42.30010, "lng": -71.47998 },
+        { "lat": 42.30013, "lng": -71.47860 },
+        { "lat": 42.30002, "lng": -71.47858 },
+        { "lat": 42.29999, "lng": -71.47996 }
+      ] },
+      { "ring": [
+        { "lat": 42.29998, "lng": -71.48008 },
+        { "lat": 42.29998, "lng": -71.47978 },
+        { "lat": 42.29928, "lng": -71.47980 },
+        { "lat": 42.29928, "lng": -71.48010 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 42.29998, "lng": -71.47966 },
+        { "lat": 42.29932, "lng": -71.47968 },
+        { "lat": 42.29932, "lng": -71.47980 },
+        { "lat": 42.29998, "lng": -71.47978 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 200, "pano": "", "hasCoverage": true },
+      "truckGate": { "heading": 175, "pano": "", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14,
+    "trailersVisible": 30,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 9.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.29965,-71.47905,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes"
+  ],
+  "fieldNotes": {
+    "operationalStatus": "OPERATIONAL. This is the BlueTriton Brands (formerly Nestle Waters North America, brands Poland Spring / Nestle Pure Life / ReadyRefresh) Framingham facility at 105 Pennsylvania Ave, Framingham MA 01701. The blank-flag entry resolved to a live, active site - NOT closed or demolished. Satellite imagery (2026 Maxar/Airbus tiles) shows a fully operational plant/warehouse: white-roofed building intact, dozens of trailers and ReadyRefresh delivery box trucks parked, water-storage silos/tanks on the building's south/SE, active dock and yard operations. Street View (captured Aug 2023) shows BlueTriton-branded blue delivery vans staged at the docks, a chain-link perimeter fence with sliding gates, and the silo. Web: industrynet/buzzfile/D&B list BlueTriton Brands active at this address (~33 employees), AWS water-stewardship certification on file (2020), and the ReadyRefresh local-services page + Yelp reviews updated through May 2026 confirm continued operation. The widely reported BlueTriton closure was the Ontario (Puslinch/Guelph) plant in 2025, not Framingham. Note: the facility historically described as a 2-line bottling plant (3-5 gal) now functions primarily as a regional bottling + ReadyRefresh distribution/fleet hub; either way the truck-yard footprint is what we audit and it is fully active.",
+    "siteResolution": "No coords were supplied (blank-flag list entry). Resolved via web search to 105 Pennsylvania Ave, Framingham MA 01701; Nominatim geocode landed at ~42.300,-71.479. Satellite probing confirmed the BlueTriton building = the white-roofed plant/warehouse on the SOUTH side of Pennsylvania Ave with the on-site water silos, fleet of ReadyRefresh trucks, and fenced yard. The separate DARK-roofed building immediately east is a different occupant (not BlueTriton) and is excluded from the geofence. Center locked at 42.29965, -71.47905.",
+    "truckGate": "TRUE. A continuous chain-link perimeter fence encloses the truck yard, with sliding chain-link vehicle gates across the entrances (clearly visible in Street View along the Pennsylvania Ave frontage, headings 175 and 200). Entry is controlled at the fence line, not an open driveway to the docks.",
+    "guardShack": "FALSE. No staffed guard booth (1-3 vehicle footprint, multi-side windows) anywhere along the frontage or at either gate in Street View or satellite. The gates are unmanned chain-link sliding gates.",
+    "remoteGs": "TRUE. There is a controlled truck gate but no guard shack, implying badge / keypad / remote check-in. This is the gate-without-guard pattern.",
+    "truckGateCount": "Two fenced gate openings serve the yard along the Pennsylvania Ave frontage (a west/fleet-yard gate near the dock fleet and a second opening toward the east end of the property). Marked truckGateCount 2; classification entry/exit treated as together (one functional entry zone) since both feed the same yard.",
+    "dockDoors": "Dock bank runs along the WEST face of the building (trailers/box trucks backed in, regular bay rhythm) plus dock activity at the building's NW corner. Honest count ~12-16 truck-height doors -> banded 10-25. Some bays serve the smaller ReadyRefresh box trucks. Low-confidence exact count (roof glare; mixed-vintage tiles).",
+    "dropArea": "Large trailer/fleet drop and parking: angled trailer stalls run along the NORTH edge of the property (front, parallel to Pennsylvania Ave) and a long row of box trucks/trailers lines the WEST edge. Combined ~25-40 trailer/truck stalls -> banded 25-50. This is a real drop/fleet yard, dropYard = true.",
+    "postGateStaging": "Inside the fence, a large paved yard between the gates and the dock face provides internal queue/staging room before backing to docks.",
+    "drivewayShort": "Gate-to-dock approach is short (the docks sit just inside the frontage fence; ~1-2 truck depth before the dock apron), so drivewayShort = true rather than long.",
+    "backupSensitive": "False. Pennsylvania Ave is a quiet industrial-park street with ample paved frontage and internal yard; a short queue would not spill into a busy public artery.",
+    "urbanRural": "Urban. The site sits in a dense suburban-Boston office/industrial park (Framingham, ~20 mi west of Boston) immediately beside the I-90 / Mass Pike interchange, surrounded by other large buildings, parking, and a solar field. Metro fabric -> Urban.",
+    "connectivityIssue": "False. Dense metro-Boston location with full cellular coverage.",
+    "railServed": "False. A rail corridor runs along the SOUTH edge of the property (visible at the bottom of the z18 frame) but no spur enters the BlueTriton yard; trucking only.",
+    "multipleFacilities": "False for the BlueTriton parcel - one primary plant/warehouse building (plus silos/canopy as ancillary structures). The adjacent dark-roofed building to the east is a separate property and is excluded.",
+    "scale": "No truck scale / weigh pad visible in the truck path. False.",
+    "shipRcvSeparate": "Docks are concentrated on the west face / NW corner as a single cluster; no second distinct dock bank on a different face. shipRcvSeparate = false.",
+    "trailersVisible": "~30 across the imagery: angled trailers along the north frontage (~10-12), box-truck/trailer row on the west edge (~12-15), plus vans/trailers around the docks. Mixed delivery box trucks and over-the-road trailers; approximate.",
+    "trailerParkingCapacity": "North angled stalls + west fleet row + open yard could hold ~50-65 trailers/box trucks at practical density -> ~60.",
+    "siteAreaAcres": "~9.5 acres for the fenced BlueTriton parcel (building + west/north fleet yard + south canopy/silo area), derived from the perimeter polygon. The broader office park is larger but is other occupants.",
+    "buildingCount": "One primary plant/warehouse building; on-site water silos and a south canopy/rack structure counted as ancillary -> buildingCount 1.",
+    "streetViewMeta": "Good Street View coverage along Pennsylvania Ave (Aug 2023). perimeter/truckGate panos exist on the frontage road; pano ids not captured to file (heading set toward the yard/gate from the road). hasCoverage true for both.",
+    "imageryQuality": "2026 Maxar/Airbus satellite tiles are clear; the building roof has glare/age that softens exact dock-door counts. Street View 2023 confirms branding, fence, gates, and silo at ground level."
+  },
+  "method": "deep-audit"
+}

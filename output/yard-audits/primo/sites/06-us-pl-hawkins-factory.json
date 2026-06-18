@@ -1,0 +1,128 @@
+{
+  "name": "US PL Hawkins Factory",
+  "type": "Bottling plant (PL)",
+  "coords": { "lat": 32.66655, "lng": -95.19120 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 32.66890, "lng": -95.19170 },
+      { "lat": 32.66730, "lng": -95.18820 },
+      { "lat": 32.66560, "lng": -95.18800 },
+      { "lat": 32.66430, "lng": -95.18950 },
+      { "lat": 32.66390, "lng": -95.19130 },
+      { "lat": 32.66395, "lng": -95.19470 },
+      { "lat": 32.66560, "lng": -95.19510 },
+      { "lat": 32.66680, "lng": -95.19370 },
+      { "lat": 32.66720, "lng": -95.19250 },
+      { "lat": 32.66835, "lng": -95.19240 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 32.66825, "lng": -95.19185 },
+      { "lat": 32.66805, "lng": -95.19135 },
+      { "lat": 32.66770, "lng": -95.19160 },
+      { "lat": 32.66790, "lng": -95.19210 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 32.66585, "lng": -95.19345 },
+        { "lat": 32.66505, "lng": -95.19200 },
+        { "lat": 32.66405, "lng": -95.19270 },
+        { "lat": 32.66400, "lng": -95.19460 },
+        { "lat": 32.66540, "lng": -95.19490 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 32.66600, "lng": -95.19200 },
+        { "lat": 32.66490, "lng": -95.19015 },
+        { "lat": 32.66465, "lng": -95.19045 },
+        { "lat": 32.66575, "lng": -95.19230 }
+      ] },
+      { "ring": [
+        { "lat": 32.66640, "lng": -95.18935 },
+        { "lat": 32.66560, "lng": -95.18900 },
+        { "lat": 32.66540, "lng": -95.18960 },
+        { "lat": 32.66620, "lng": -95.18995 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 32.66660, "lng": -95.19115 },
+      { "lat": 32.66585, "lng": -95.18980 },
+      { "lat": 32.66520, "lng": -95.19035 },
+      { "lat": 32.66595, "lng": -95.19170 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
+      "truckGate": { "heading": 0, "pano": "", "hasCoverage": false }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 120,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 60.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.66655,-95.19120,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": true,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate",
+    "connectivityIssue"
+  ],
+  "fieldNotes": {
+    "siteResolution": "Supplied approx coords (32.5690,-95.2150) and the street-number geocode of '3265 (S) FM 2869' both landed in empty East Texas timberland ~10-20 km off (rural FM road number interpolation is unreliable here). Resolved the plant by geocoding the NAMED place 'Ozarka Plant, Hawkins TX' -> 32.6668,-95.1925, which lands directly on a single very large light-blue-roofed industrial building set in cleared timberland NE of Hawkins. Confirmed by web research: the Ozarka / Primo Brands (BlueTriton) Wood County bottling plant is a ~618,000 sq ft facility at 3265 S FM 2869, rebuilt and reopened after a 2023 tornado. Building footprint, water-treatment ponds at two corners, process tanks/silos, and the spring-water context all match. Locked center 32.66655,-95.19120.",
+    "truckGate": "No barrier arm, sliding/swing gate, or guard booth is visible at any pinch point. The single internal paved drive runs NW from the building/parking area to an unpaved perimeter ring road (z19/z20 north-junction crops show only a dirt road crossing and electrical/transmission pylons, no booth or arm). The property is gated only by remoteness (deep private timberland, ~1.5 km off the nearest public road). Marked false. Low confidence: a manned or arm gate could sit further out along the private approach beyond the captured frames, and there is zero Street View coverage anywhere within ~1.5 km to verify.",
+    "guardShack": "No booth-sized structure (1-3 vehicle footprint, multi-side windows) at the entrance drive or perimeter-road junction. False.",
+    "remoteGs": "False because no truck gate is confirmed; if controlled access exists it is unverified.",
+    "dockDoors": "Continuous dock bank along the building's long SW-facing wall plus a second bank on the SE/E face by the process tanks and a covered dock canopy (z18/z19 SW-wall + west-office crops). Trailers backed in along both faces in a regular rhythm. Honest estimate ~50-60 total doors across the ~300 m+ SW wall and the SE bank -> banded 50+. The exact count is hard to read where trailers occlude doors, so dockDoorCount=55 is approximate (flagged).",
+    "dropArea": "Massive dedicated trailer drop yard fills the SW quadrant: many long marked rows of trailers parked without tractors (z20 dropyard + dockbank2 crops show 8-10 rows of stalls). Easily 50+ -> banded 50+.",
+    "dropYard": "True - the SW lot is a distinct, dedicated trailer-storage area separate from the active dock aprons that wrap the building.",
+    "shipRcvSeparate": "Two physically distinct dock clusters on different building faces (long SW wall bank + SE/E-face bank near the process tanks) suggest split ship/receive, but function cannot be confirmed from imagery -> medium confidence.",
+    "postGateStaging": "Large paved internal apron wraps the S and E of the building between the dock banks and the drop yard, acting as an internal queue/staging area; traced as 'staging'.",
+    "drivewayLong": "Long private internal approach (NW drive ~0.4 km from the perimeter road to the building) plus a deep internal apron -> easily holds a 3+ truck queue before the docks.",
+    "fastLaneOpportunity": "Very wide, lightly-used paved aprons and a single open entrance with abundant unused width -> ample room to add a bypass/express lane. True.",
+    "entryLanes": "Single shared internal access drive; lane striping not resolvable. Estimated 1 in / 1 out, flagged.",
+    "exitLanes": "See entryLanes; estimated 1, flagged.",
+    "entryExitTogether": "One internal drive serves both directions to/from the perimeter road -> entry/exit together.",
+    "trailersVisible": "~80-100 in the SW drop-yard rows + ~20-30 backed at the SW/SE dock banks + a few staged on the apron = ~120, approximate across overlapping imagery vintages.",
+    "trailerParkingCapacity": "The drop yard's 8-10 marked rows hold ~120-140 trailers at capacity; adding apron and dock positions pushes practical capacity to ~160.",
+    "siteAreaAcres": "~60.5 acres of cleared/paved/built footprint inside the perimeter ring road derived from the perimeter polygon; the surrounding company-owned spring/timber land is far larger but is forest, not yard.",
+    "railServed": "No rail spur enters the property; access is by the private road only. False.",
+    "scale": "No truck scale / weigh pad visible in the truck path. False.",
+    "connectivityIssue": "Site is isolated in East Texas timberland with no adjacent development and the nearest town (Hawkins) several km away -> likely weaker cellular coverage. Inferred, medium confidence.",
+    "buildingCount": "One dominant manufacturing/DC building plus an attached/adjacent office annex at the W corner counted as the complex -> 2; process tanks/silos and water-treatment ponds are ancillary, not counted as buildings.",
+    "imageryQuality": "Maxar/Airbus tiles are sharp and recent enough to read dock rhythm, trailer rows, ponds, and tanks clearly. The only gap is ground-level verification of the gate (no Street View within ~1.5 km)."
+  },
+  "method": "deep-audit"
+}

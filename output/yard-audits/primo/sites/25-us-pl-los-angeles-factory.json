@@ -1,0 +1,103 @@
+{
+  "name": "US PL Los Angeles Factory",
+  "type": "Bottling plant (PL)",
+  "coords": { "lat": 34.02055, "lng": -118.24499 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 34.02110, "lng": -118.24420 },
+      { "lat": 34.02122, "lng": -118.24588 },
+      { "lat": 34.01938, "lng": -118.24582 },
+      { "lat": 34.01922, "lng": -118.24415 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 34.02092, "lng": -118.24462 },
+      { "lat": 34.02090, "lng": -118.24436 },
+      { "lat": 34.02072, "lng": -118.24438 },
+      { "lat": 34.02074, "lng": -118.24464 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 34.02010, "lng": -118.24540 },
+        { "lat": 34.02008, "lng": -118.24470 },
+        { "lat": 34.01950, "lng": -118.24472 },
+        { "lat": 34.01952, "lng": -118.24542 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 34.02028, "lng": -118.24545 },
+        { "lat": 34.02026, "lng": -118.24475 },
+        { "lat": 34.02016, "lng": -118.24476 },
+        { "lat": 34.02018, "lng": -118.24546 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 200, "pano": "EpKRc0zekfxg0iXXea__xw", "hasCoverage": true },
+      "truckGate": { "heading": 200, "pano": "EpKRc0zekfxg0iXXea__xw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14,
+    "trailersVisible": 18,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 8.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.02055,-118.24499,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "dockDoorCount",
+    "dockDoors",
+    "shipRcvSeparate",
+    "trailerParkingCapacity"
+  ],
+  "fieldNotes": {
+    "operationalStatus": "OPERATIONAL. This is a BLANK-FLAG entry on the BlueTriton facility list, but it is NOT a closed/demolished site. It is the historic Arrowhead / Nestle Waters / now Primo Brands Los Angeles bottling plant at 1566 E Washington Blvd, Los Angeles CA 90021 - one of the oldest continuously operating manufacturing facilities in LA (state-of-the-art plant opened 1917 at Washington Blvd & Compton Ave; bottled Arrowhead 100+ years). Oct-2025 Street View shows an active site: a 'PRIMO' building sign, the '1566' office building, white process water tanks/silos, an American flag, a live health-grade 'A' placard by the entrance, and an active ReadyRefresh delivery-fleet yard full of box trucks plus stacked palletized bottled-water product. The 2024 USFS shutdown order only affected the Strawberry Creek / San Bernardino spring pipeline source, NOT this LA bottling/distribution plant, which uses LADWP municipal water plus trucked spring water. Operational verdict: ACTIVE.",
+    "siteResolution": "No coords were supplied. Web research (PBS SoCal 'Lost LA', BBB/D&B business profiles) placed the plant at Washington Blvd & Compton Ave; the Primo/BlueTriton corporate address of record is 1566 E Washington Blvd, LA 90021. Google geocoding of that address returned 34.0205477,-118.2449874, which lands dead-center on the bottling complex. Confirmed by Street View showing the '1566' building number and 'PRIMO' signage at this exact spot.",
+    "truckGate": "TRUE. Oct-2025 Street View (pano EpKRc0zekfxg0iXXea__xw) at the Washington Blvd frontage shows a wide black sliding security gate across the truck/yard driveway, set in a fenced perimeter wall (barbed wire on top), beside the 1566 office. Clear controlled entrance.",
+    "guardShack": "FALSE. No staffed booth (1-3 vehicle footprint, multi-side windows) at the gate. The entrance is controlled by the sliding gate plus a blue directional/check-in sign panel mounted at the gate - no guard structure.",
+    "remoteGs": "TRUE. There is a controlled truck gate but no guard shack -> implies kiosk / call-box / app or buzzer check-in. The mounted signage panel at the gate is consistent with self/remote check-in.",
+    "urbanRural": "Urban. Dense downtown-LA industrial fabric (ZIP 90021), wedged between the rail corridor / I-10 approach to the N and residential blocks to the S/W; surrounded on all sides by warehouses and city streets.",
+    "backupSensitive": "TRUE. The gate opens directly onto E Washington Blvd, a busy arterial, with very little apron/stacking room before the public sidewalk; an inbound truck queue would spill straight onto the street. Tight urban geometry.",
+    "drivewayShort": "TRUE (drivewayLong FALSE). The gate-to-yard approach is short - the gate is right at the street and the internal yard begins immediately behind it; only 1-2 trucks can stage in the approach before reaching the dense interior yard.",
+    "postGateStaging": "TRUE. A large paved internal yard inside the gate (between the buildings) serves as the holding/queue/maneuvering area before docks; product pallets and delivery trucks stage there.",
+    "dockDoors": "Banded 10-25. The internal building faces fronting the central paved yard carry a bank of loading/dock doors (the south face of the main warehouse building shows a regular rhythm of bays). Exact count is hard from overhead because the dense urban roofs and the internal-courtyard orientation hide some faces; honest estimate ~14, flagged uncertain.",
+    "dropArea": "Banded 10-25. Multiple over-the-road trailers parked without tractors along the south/west perimeter and interior rows, plus a large block of stacked palletized product. ~18 trailers/vans visible.",
+    "dropYard": "TRUE. The southern/western portion of the complex is a dedicated trailer + delivery-fleet storage lot (rows of box trucks/vans and parked trailers), distinct from the active dock staging.",
+    "multipleFacilities": "TRUE. The property is a campus of several connected/adjacent large buildings (bottling plant building with process tanks, the 1566 office building, a warehouse/load building, and a separate west building over the fleet lot) on one fenced block.",
+    "shipRcvSeparate": "Cannot confirm separate ship vs receive dock clusters from overhead in this dense interior-courtyard layout; defaulted FALSE, flagged uncertain.",
+    "railServed": "FALSE. A rail corridor runs along the north side of Washington Blvd, but no spur enters the Primo property; trucking only.",
+    "buildingCount": "4 - bottling plant w/ tanks, 1566 office, central warehouse/load building, and a west building over the delivery-fleet lot, all on one contiguous fenced parcel.",
+    "siteAreaAcres": "~8 acres derived from the perimeter polygon (~212m N-S x ~157m E-W block, complex fills most of it).",
+    "trailerParkingCapacity": "Mixed delivery-fleet + trailer use; practical capacity ~40 across the yard rows and west fleet lot. Approximate.",
+    "imageryQuality": "Maxar/Airbus 2026 satellite is sharp; Oct-2025 Street View confirms operations and the gate. High confidence on operational status, gate, urban setting, dropYard, campus. Dock count is the main soft number due to the interior-courtyard orientation."
+  },
+  "method": "deep-audit"
+}

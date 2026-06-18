@@ -1,0 +1,116 @@
+{
+  "name": "US PL Livermore Factory",
+  "type": "Bottling plant (PL)",
+  "coords": { "lat": 37.71185, "lng": -121.70330 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 37.71278, "lng": -121.70402 },
+      { "lat": 37.71250, "lng": -121.70268 },
+      { "lat": 37.71198, "lng": -121.70262 },
+      { "lat": 37.71132, "lng": -121.70295 },
+      { "lat": 37.71148, "lng": -121.70432 },
+      { "lat": 37.71212, "lng": -121.70452 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 37.71262, "lng": -121.70428 },
+      { "lat": 37.71258, "lng": -121.70405 },
+      { "lat": 37.71244, "lng": -121.70410 },
+      { "lat": 37.71248, "lng": -121.70433 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 37.71278, "lng": -121.70402 },
+        { "lat": 37.71262, "lng": -121.70322 },
+        { "lat": 37.71228, "lng": -121.70335 },
+        { "lat": 37.71242, "lng": -121.70415 }
+      ] },
+      { "ring": [
+        { "lat": 37.71210, "lng": -121.70442 },
+        { "lat": 37.71198, "lng": -121.70400 },
+        { "lat": 37.71150, "lng": -121.70418 },
+        { "lat": 37.71160, "lng": -121.70455 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 37.71158, "lng": -121.70408 },
+        { "lat": 37.71142, "lng": -121.70338 },
+        { "lat": 37.71132, "lng": -121.70343 },
+        { "lat": 37.71148, "lng": -121.70413 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 160, "pano": "ic9zwDVsNfyga_MQ03dsXw", "hasCoverage": true },
+      "truckGate": { "heading": 200, "pano": "ic9zwDVsNfyga_MQ03dsXw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 8,
+    "trailersVisible": 28,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 5.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.71185,-121.70330,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "dockDoors",
+    "entryLanes",
+    "exitLanes",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "siteAreaAcres",
+    "postGateStaging"
+  ],
+  "fieldNotes": {
+    "operationalStatus": "OPERATIONAL. The only BlueTriton/Primo/Nestle Waters presence in Livermore is the water distribution/branch facility at 7480 Las Positas Rd, Livermore CA 94551 (37.7119,-121.7033), in the Las Positas business park east of the airport. This is the entry that appears as 'Livermore Factory' on the BlueTriton/Primo list. Status confirmed via three lines of evidence: (1) Dec-2024 Street View of the truck-yard side shows an actively used, chain-link-fenced paved yard holding box trucks, delivery vans and trailers; (2) the live Yelp page for ReadyRefresh at 7480 Las Positas was updated Mar-2026 with 71 reviews (active water-delivery operation); (3) satellite shows three large water process/storage tanks on the building's east side plus trailers backed to docks and a full trailer drop yard. NOTE: Google Places carries a stale duplicate ReadyRefresh listing flagged CLOSED_PERMANENTLY at this same address, while a parallel 'Arrowhead Bottled Water Delivery Livermore' listing at the identical address shows OPERATIONAL - this is a duplicate-listing artifact, not a real closure; no WARN notice or news of a Livermore shutdown was found. CAVEAT on TYPE: physically this reads as a distribution/depot + light water-processing branch (single ~120k sqft 1991-era big-box with three exterior tanks), not a large dedicated high-speed bottling plant like the Cabazon/Sacramento factories. The list labels it 'Bottling plant (PL)'; kept that label per instruction but the on-the-ground footprint is depot-scale.",
+    "siteResolution": "Given coords were UNKNOWN. Web search established BlueTriton/Primo's only Livermore site = 7480 Las Positas Rd 94551 (Buzzfile, LoopNet, Yelp, Google Places). Geocoded that address to 37.71179,-121.70326 and confirmed the building on satellite: a long NW-SE big-box with three white process tanks on its east face, dock band + trailers on the SW/south, a fenced trailer drop yard to the north, and trailers along the west apron. Locked center 37.71185,-121.70330.",
+    "truckGate": "TRUE. Dec-2024 Street View on the internal business-park road (pano ic9zwDVsNfyga_MQ03dsXw) shows a chain-link perimeter fence around the truck yard with a sliding/rolling vehicle gate; a white box truck/van sits just inside the gate. The yard side is controlled, distinct from the open landscaped office frontage on Las Positas Rd (no control there). Gate confirmed.",
+    "guardShack": "FALSE. No booth-sized structure (1-3 vehicle footprint, multi-side windows) at the fenced gate in the Dec-2024 Street View or in satellite. The gate is unstaffed.",
+    "remoteGs": "TRUE. A truck gate exists (sliding chain-link gate) but there is no guard shack, implying badge/kiosk/remote check-in.",
+    "dockDoors": "Building SW/south face shows a row of dock positions with ~6 trailers/box-trucks backed in plus dock-leveler shadows; honest estimate ~8 doors -> banded 0-10. Low confidence; could touch 10. Pallet stacks are staged on the SW apron.",
+    "dropYard": "TRUE. A dedicated fenced trailer/vehicle drop lot sits at the NW/north of the building (neat rows of ~16-20 box trailers in the z18 wide view), separate from the active dock apron.",
+    "dropArea": "Marked trailer-parking area to the north holds ~16-20 trailers without tractors -> banded 10-25.",
+    "trailersVisible": "~16-20 in the north drop yard + ~6-8 along the west apron / backed to docks = ~28. Mixed imagery vintage; approximate.",
+    "trailerParkingCapacity": "Drop-yard rows + west apron could practically hold ~40 trailers.",
+    "siteAreaAcres": "~5.5 acres for the BlueTriton-controlled footprint (building + west apron + north fenced drop yard) inside the shared business park, derived from the perimeter polygon. The broader park is larger but multi-tenant.",
+    "urbanRural": "Urban. Site sits inside a dense industrial/business-park fabric in east Livermore (Bay Area metro, Alameda County), surrounded by warehouses and offices.",
+    "connectivityIssue": "FALSE. Dense metro business park, strong cellular coverage expected.",
+    "postGateStaging": "TRUE (medium confidence). The paved yard between the gate, the drop rows and the dock face acts as an internal queue/staging area inside the fence before the docks.",
+    "drivewayShort": "The gate-to-dock approach is short (the dock face is ~1-2 truck-lengths inside the fenced yard); marked drivewayShort, not drivewayLong.",
+    "shipRcvSeparate": "FALSE. A single dock cluster on the SW/south face; no second distinct dock bank for split ship/receive.",
+    "railServed": "No rail spur enters the property; the site is road-served only. FALSE.",
+    "buildingCount": "One primary BlueTriton/Primo big-box building (with attached exterior tank farm); neighboring big-boxes are separate tenants -> 1.",
+    "scale": "No truck scale / weigh pad visible in the truck path. FALSE.",
+    "streetView": "Front (office/parking) frontage on Las Positas Rd captured 2019-06 (open, ungated). Internal truck-yard road captured 2024-12 (pano ic9zwDVsNfyga_MQ03dsXw) shows the fenced gate and active yard - used for both perimeter and truckGate streetViewMeta.",
+    "imageryQuality": "Maxar/Airbus 2026-vintage satellite tiles are sharp; building, tanks, docks and drop yard all clearly resolved at z19-z20. Street View confirms ground-level gate/fence."
+  },
+  "method": "deep-audit"
+}

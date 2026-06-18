@@ -1,0 +1,113 @@
+{
+  "name": "US PL Ontario Factory",
+  "type": "Bottling plant (PL)",
+  "coords": { "lat": 34.03635, "lng": -117.59140 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 34.03715, "lng": -117.59275 },
+      { "lat": 34.03715, "lng": -117.59005 },
+      { "lat": 34.03560, "lng": -117.59005 },
+      { "lat": 34.03560, "lng": -117.59275 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 34.03712, "lng": -117.59060 },
+      { "lat": 34.03712, "lng": -117.59030 },
+      { "lat": 34.03695, "lng": -117.59030 },
+      { "lat": 34.03695, "lng": -117.59060 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 34.03705, "lng": -117.59080 },
+        { "lat": 34.03705, "lng": -117.59010 },
+        { "lat": 34.03640, "lng": -117.59010 },
+        { "lat": 34.03640, "lng": -117.59080 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 34.03710, "lng": -117.59095 },
+        { "lat": 34.03710, "lng": -117.59082 },
+        { "lat": 34.03645, "lng": -117.59082 },
+        { "lat": 34.03645, "lng": -117.59095 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 90, "pano": "lIxKWKmy00QN_Y9B0mPqkQ", "hasCoverage": true },
+      "truckGate": { "heading": 187, "pano": "DsZtiqPF10384vYZKV6q8w", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 10,
+    "trailersVisible": 4,
+    "trailerParkingCapacity": 15,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 11.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.03635,-117.5914,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate",
+    "remoteGs",
+    "guardShack",
+    "dockDoors",
+    "dropArea",
+    "entryLanes",
+    "exitLanes",
+    "postGateStaging"
+  ],
+  "fieldNotes": {
+    "siteResolution": "Confirmed via web search (LoopNet APN 0238-133-12, Rexford Industrial property page, Waze 'Arrowhead Bottling Plant') as the Primo Brands / BlueTriton (formerly Nestle Waters / Arrowhead) bottling plant at 5772 E Jurupa St, Ontario CA 91761 - a 360,000 sqft single-tenant industrial building. Supplied coords (34.0365,-117.5931) landed in the public road / west parking frontage; the building center is ~34.03635,-117.59140, one block east. Jurupa St forms the north boundary; the lot is nearly north-aligned with only a slight rotation, so the geofences are kept as tight rectangles per the confirm-or-improve rule.",
+    "truckGate": "TRUE (medium confidence). The truck/dock yard occupies the EAST side of the building and is fully enclosed by a continuous ~8ft tilt-up concrete SCREEN WALL that runs the entire Jurupa St frontage and wraps the NE corner onto the east internal street (confirmed in Street View sv11/sv12/sv13 2025-02 and sv07/sv08, and in z21 satellite p21). A walled, screened yard with a single controlled vehicle break on the east internal street = a gated truck entrance. I could NOT capture the actual gate panel head-on: the east internal street (~ -117.5903) has no Street View pano (coverage snaps one block east to the next building's back wall) and the break is screened by pine trees. Marked true on the walled-yard configuration but flagged uncertain.",
+    "guardShack": "FALSE (medium-high confidence). No booth-sized structure (1-3 vehicle footprint, multi-side windows) appears at ANY entrance across all satellite (z20-21) and Street View frames. The west office/employee entry from the west cross street is fully OPEN and ungated (sv09 SW corner shows an open driveway with only a stop sign and hydrant). The east yard is walled with no visible guard booth at the wall break.",
+    "remoteGs": "TRUE - a truck gate is present (walled yard) but there is no guard shack, implying kiosk / call-box / app or office-buzzer check-in. Inherits the truckGate uncertainty.",
+    "dockDoors": "0-10 band. The bottling plant ships palletized water through a MODEST dock operation on the EAST face, north portion, under a dock canopy/awning (gray strip in p12/p14 z20) with 2 trailers backed in. No long continuous dock-door rhythm is visible on any face (N, S and W faces are blank tilt-up walls per p11, sv02). Estimated ~8-10 doors under the east canopy; banded 0-10. NOTE: the separate gray cross-dock building immediately SOUTH (across a shared drive aisle) has a large dock bank but is a DIFFERENT facility and is excluded.",
+    "dropArea": "0-10 band. The east yard is mostly employee parking (rows of cars, consistent with 500-1000 employees per Cortera/BlueTriton hiring posts) plus stacked lumber/pallets and a couple of trailers (one bobtail/white trailer + canopy trailers). Only a handful of drop trailers without tractors are visible; banded 0-10. Not a dedicated drop-trailer storage lot, so dropYard=false.",
+    "dropYard": "FALSE - no dedicated trailer-storage lot; the east area is dominated by employee parking with only incidental trailer/pallet staging.",
+    "postGateStaging": "TRUE (low-medium) - the open paved east yard inside the wall, between the dock canopy and the parking, can hold trucks queuing for the docks.",
+    "drivewayLong": "The east yard is deep (building-to-east-street ~80-100m of paved yard) and can hold 3+ trucks queued before the dock canopy; drivewayLong=true.",
+    "entryExitTogether": "Single walled yard with one controlled break on the east internal street = trucks enter and exit at the same point; entryExitTogether=true, lanes ~1 in / 1 out (not directly observable, low confidence).",
+    "shipRcvSeparate": "FALSE - a single dock cluster on the east face; no second physically separate dock bank on the Primo building.",
+    "urbanRural": "Urban - the site sits inside the dense Ontario / Inland Empire-West industrial fabric (Ontario Airport logistics corridor), surrounded on all sides by large distribution buildings.",
+    "connectivityIssue": "FALSE - dense metro/industrial area, strong cellular coverage expected.",
+    "backupSensitive": "FALSE - the truck yard is set well back from Jurupa St behind a deep buffer and the deep east yard provides ample internal stacking; a queue would not spill onto the public road.",
+    "fastLaneOpportunity": "FALSE - single modest gate break; no wide multi-lane apron or unused paved width that would obviously support an express bypass.",
+    "scale": "FALSE - no truck scale / weigh pad visible in the truck path.",
+    "multipleFacilities": "FALSE - one Primo building on the fenced parcel; the adjacent buildings (west, south gray cross-dock, east) are separate tenants/parcels.",
+    "railServed": "FALSE - no rail spur enters the property; access is road-only.",
+    "buildingCount": "1 - the single 360,000 sqft Primo/Arrowhead bottling building. Minor utility/electrical cabinets in the yard not counted.",
+    "siteAreaAcres": "~11 acres for the fenced Primo parcel (employee parking W + building + walled east yard), derived from the perimeter rectangle (~270m E-W x ~170m N-S). The 360k sqft building footprint dominates; exact building outline is approximate from overhead imagery.",
+    "trailersVisible": "~2 under the east dock canopy + ~2 bobtail/box trailers in the yard = ~4. Most vehicles on site are employee cars, not trailers.",
+    "trailerParkingCapacity": "The open east yard could practically hold ~15 trailers if cleared of pallet staging; honest overhead estimate.",
+    "imageryQuality": "Good high-resolution Maxar/Airbus satellite (z20-21 usable) and 2025-02 + 2023-12 Street View on Jurupa St and the west cross street. The single blind spot is the east internal street truck gate (no pano coverage + tree screening), which is the sole reason truckGate/remoteGs are medium not high.",
+    "streetView_perimeter": "pano lIxKWKmy00QN_Y9B0mPqkQ (2023-12) on the west cross street, heading 90 (due east) toward the office front - the driver's-eye arrival view for the open employee/office entrance.",
+    "streetView_truckGate": "pano DsZtiqPF10384vYZKV6q8w (2025-02) on Jurupa St at the NE corner, heading ~187 (south) toward the walled truck yard - the closest available ground view of the truck/yard side."
+  },
+  "method": "deep-audit"
+}

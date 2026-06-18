@@ -1,0 +1,118 @@
+{
+  "name": "US PL Madison Factory",
+  "type": "Bottling plant (PL)",
+  "coords": { "lat": 30.47115, "lng": -83.25060 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 30.47305, "lng": -83.25320 },
+      { "lat": 30.47300, "lng": -83.25160 },
+      { "lat": 30.47285, "lng": -83.24900 },
+      { "lat": 30.47255, "lng": -83.24760 },
+      { "lat": 30.47120, "lng": -83.24710 },
+      { "lat": 30.47000, "lng": -83.24735 },
+      { "lat": 30.46965, "lng": -83.25060 },
+      { "lat": 30.46975, "lng": -83.25260 },
+      { "lat": 30.47040, "lng": -83.25360 },
+      { "lat": 30.47180, "lng": -83.25360 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 30.47130, "lng": -83.25185 },
+      { "lat": 30.47128, "lng": -83.25150 },
+      { "lat": 30.47100, "lng": -83.25152 },
+      { "lat": 30.47102, "lng": -83.25187 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 30.47095, "lng": -83.25140 },
+        { "lat": 30.47090, "lng": -83.24730 },
+        { "lat": 30.47045, "lng": -83.24730 },
+        { "lat": 30.47050, "lng": -83.25150 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 30.47128, "lng": -83.25140 },
+        { "lat": 30.47120, "lng": -83.24740 },
+        { "lat": 30.47100, "lng": -83.24742 },
+        { "lat": 30.47108, "lng": -83.25142 }
+      ] },
+      { "ring": [
+        { "lat": 30.47238, "lng": -83.25255 },
+        { "lat": 30.47230, "lng": -83.25090 },
+        { "lat": 30.47212, "lng": -83.25092 },
+        { "lat": 30.47220, "lng": -83.25257 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 93, "pano": "qBUaKzwatxwDIfKCmixdXA", "hasCoverage": true },
+      "truckGate": { "heading": 112, "pano": "qBUaKzwatxwDIfKCmixdXA", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 120,
+    "trailerParkingCapacity": 150,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 60.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@30.47115,-83.25060,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": true,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "shipRcvSeparate",
+    "connectivityIssue",
+    "siteAreaAcres"
+  ],
+  "fieldNotes": {
+    "siteResolution": "Given coords (43.0558,-89.3268) and the reference-sites.ts label 'Madison WI' are WRONG. Web research established that BlueTriton / Primo Brands (formerly Nestle Waters North America) runs three Florida spring-water bottling plants: Zephyrhills, Madison, and High Springs. The 'US PL Madison Factory' is the Madison plant in Madison COUNTY, FLORIDA, sited near the town of Lee, FL (32059), at 690 NE Hawthorne Ave. The 202-acre LEED-certified plant has operated since Jan 2004, bottling Zephyrhills / Deer Park / Nestle Pure Life. Geocode 30.472102,-83.251558 landed on the building; the complex centroid is 30.47115,-83.25060. Confirmed by satellite (large bottling/warehouse complex with retention pond + 100+ trailer drop yard) matching a freight bottling plant, not the downtown-Madison-WI office the supplied coords pointed at.",
+    "truckGate": "Confirmed. Street View (pano qBUaKzwatxwDIfKCmixdXA, Jan 2008, looking SE/E) shows a controlled truck-gate pinch-point on the internal access drive ~30.4711,-83.2517 where the entry road narrows before opening into the dock apron / drop yard: yellow safety bollards flanking the lane plus a cantilever/barrier gate apparatus across the truck drive, with painted lane markings. Satellite z20-21 corroborates the pinch-point and paired gate posts straddling the lane. truckGate = true (high confidence).",
+    "guardShack": "No staffed guard booth (1-3-vehicle windowed shack beside the lane) is visible at the gate in any Street View heading or in z21 satellite. The only small structure nearby is a concrete equipment pad set in the middle of the SE yard apron, not a roadside booth. guardShack = false.",
+    "remoteGs": "True: there IS a controlled truck gate but NO staffed guard booth, implying kiosk / call-box / badge or app check-in at an automated barrier. Medium-high confidence (a small booth could sit just out of frame on the 2008 imagery).",
+    "dockDoors": "South face of the long warehouse carries a continuous bank of ~40+ dock positions with trailers backed in (z18 south-dock crop). The NW production building adds a smaller loading cluster on its south face (~10-15). Total honest estimate ~55, comfortably in the 50+ band.",
+    "dropArea": "Massive dedicated trailer drop yard south of the warehouse: multiple long parallel rows of parked trailers without tractors, extending ~400m E from the gate. Counted ~100-130 trailers across the rows (z18 south + east crops). 50+ band.",
+    "dropYard": "True - the southern lot is a distinct, very large trailer-storage area separate from the active dock apron.",
+    "shipRcvSeparate": "Two distinct dock banks on two different building masses (long warehouse south face + NW production-building south face) suggest split shipping/receiving, but function cannot be confirmed from imagery. Medium confidence.",
+    "postGateStaging": "Large paved apron between the gate and the dock face / between the building and the drop-yard rows acts as an internal queue/staging area inside the gate.",
+    "drivewayLong": "Long approach: public-road T-intersection (Hawthorne Ave) -> ~0.3km access drive -> traffic circle -> gate -> deep paved apron. Easily holds 3+ trucks queued before the docks.",
+    "fastLaneOpportunity": "Wide gate apron and broad paved entry with substantial unused width at the checkpoint -> physical room to add a bypass / express lane. Medium confidence.",
+    "entryExitTogether": "Single controlled truck gate handles both in and out (no separate out-gate found). entryLanes/exitLanes read as 1 each at the gate; banded conservatively.",
+    "trailersVisible": "~100-130 trailers across the drop-yard rows + a handful at the docks; banded estimate 120 from overhead imagery (multiple capture vintages overlap).",
+    "trailerParkingCapacity": "Striped rows plus apron space could hold ~140-160 trailers; estimate 150.",
+    "siteAreaAcres": "Plant property is ~202 acres total but mostly forest/replanted pine and stormwater. The cleared, paved operational compound inside the perimeter loop drive (buildings + apron + drop yard + retention pond) is ~60 acres, which is what the perimeter polygon traces. Medium confidence on the exact figure.",
+    "railServed": "No rail spur enters the property; nearest access is the public road only (Hawthorne Ave -> CR/I-10 near Lee, FL). False.",
+    "connectivityIssue": "Rural Madison County FL, isolated among farmland and pine plantation near the small town of Lee; cellular coverage likely weak across the large yard. Inferred, medium confidence.",
+    "buildingCount": "Two primary connected industrial masses - the NW bottling/production building and the long attached warehouse/load building - counted as 2.",
+    "urbanRural": "Rural - isolated industrial site surrounded by farmland and forest in Madison County, FL, near the small town of Lee.",
+    "imageryQuality": "Maxar/Airbus satellite (2026) clear at z16-21; Street View is older (Jan 2008) but unobstructed at the gate and adequate to confirm the barrier gate and absence of a guard booth."
+  },
+  "method": "deep-audit"
+}

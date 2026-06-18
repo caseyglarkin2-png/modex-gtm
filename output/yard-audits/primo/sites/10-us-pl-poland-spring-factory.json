@@ -1,0 +1,124 @@
+{
+  "name": "US PL Poland Spring Factory",
+  "type": "Bottling plant (PL)",
+  "coords": { "lat": 44.03205, "lng": -70.35350 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 44.03455, "lng": -70.35640 },
+      { "lat": 44.03430, "lng": -70.35490 },
+      { "lat": 44.03330, "lng": -70.35350 },
+      { "lat": 44.03200, "lng": -70.35210 },
+      { "lat": 44.03060, "lng": -70.35080 },
+      { "lat": 44.02985, "lng": -70.35095 },
+      { "lat": 44.02740, "lng": -70.35265 },
+      { "lat": 44.02745, "lng": -70.35355 },
+      { "lat": 44.03010, "lng": -70.35280 },
+      { "lat": 44.03120, "lng": -70.35420 },
+      { "lat": 44.03255, "lng": -70.35545 },
+      { "lat": 44.03360, "lng": -70.35690 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 44.02790, "lng": -70.35320 },
+      { "lat": 44.02775, "lng": -70.35285 },
+      { "lat": 44.02755, "lng": -70.35300 },
+      { "lat": 44.02770, "lng": -70.35335 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 44.03455, "lng": -70.35640 },
+        { "lat": 44.03430, "lng": -70.35545 },
+        { "lat": 44.03360, "lng": -70.35490 },
+        { "lat": 44.03360, "lng": -70.35615 },
+        { "lat": 44.03415, "lng": -70.35680 }
+      ] },
+      { "ring": [
+        { "lat": 44.03060, "lng": -70.35135 },
+        { "lat": 44.03035, "lng": -70.35055 },
+        { "lat": 44.02960, "lng": -70.35095 },
+        { "lat": 44.02985, "lng": -70.35175 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 44.03310, "lng": -70.35430 },
+        { "lat": 44.03130, "lng": -70.35235 },
+        { "lat": 44.03105, "lng": -70.35265 },
+        { "lat": 44.03285, "lng": -70.35460 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
+      "truckGate": { "heading": 0, "pano": "", "hasCoverage": false }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 80,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 42.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@44.03205,-70.35350,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": true,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "dockDoors",
+    "shipRcvSeparate",
+    "connectivityIssue",
+    "trailerParkingCapacity",
+    "siteAreaAcres"
+  ],
+  "fieldNotes": {
+    "siteResolution": "Given approximate coords (44.0558,-70.3475) landed in forest/golf-course terrain ~2.8km NNE of the plant; the spreadsheet address '375 Paramount Dr Raynham MA' is the Primo Brands HQ and is wrong. Web research (Wikipedia, Poland town office, CLUI land-use database, news) plus satellite resolved the active Poland Spring / Primo Brands (formerly BlueTriton / Nestle Poland Spring) bottling plant: a large single industrial building running NW-SE, accessed via a long private drive off Maine Street (ME Route 26 / 'Spring Water Road') in South Poland, ME, just east of the Poland Spring Resort golf course. Corporate address on record: 1231 Maine Street, Poland ME 04274. Locked center 44.03205,-70.35350. This is the Poland/Poland Spring plant, distinct from the separate Hollis ME plant.",
+    "truckGate": "TRUE, high confidence. At the south junction (~44.0277,-70.3530) where the private drive meets the yard, z20-z21 satellite shows a teardrop-shaped median island with a small structure and barrier/gate-arm markings extending laterally across both lanes; truck lanes split around the island. Classic controlled truck checkpoint (p10-pinch-z20.png, p10-booth-z21.png).",
+    "guardShack": "TRUE, high confidence. The median island at the gate contains a small booth-sized structure (~1-vehicle footprint, roof shadow, set between the in and out lanes) consistent with a staffed guard shack rather than the main building (p10-booth-z21.png).",
+    "remoteGs": "FALSE - a guard shack is present, so this is a manned booth, not a kiosk/call-box remote check-in.",
+    "dockDoors": "Continuous loading-dock bank runs nearly the full length of the SW/south face of the ~500m-long building, with trailers backed in along its entire length (p10-dock2-z19.png, p10-dockmid-z18.png, p10-plant-z17.png). Honest estimate well into the 50+ band; ~55 used as the point figure. Banded 50+. Flagged uncertain because exact bay rhythm is hard to count over the building's full length across imagery tiles.",
+    "dropArea": "Two large dedicated trailer-storage yards full of parked trailers without tractors: (1) NW corner with ~3-4 diagonal rows (p10-farnw-z18.png), (2) south end with multiple long diagonal rows (p10-south-z18.png, p10-entrance-z18.png, p10-junction-z18.png). Combined well over 50 trailer stalls. Banded 50+.",
+    "dropYard": "TRUE - dedicated trailer-storage lots at both the NW corner and the south end, physically separate from the active dock apron.",
+    "shipRcvSeparate": "FALSE / low confidence - a single very long continuous dock bank on the SW face; no clearly distinct second dock cluster on a different face was confirmed, so ship/receive split could not be established from imagery.",
+    "postGateStaging": "TRUE - large paved aprons and yard areas inside the gate and along the dock face provide interior queue/staging room before the dock doors.",
+    "preGateStaging": "FALSE - no dedicated paved truck-stall waiting area outside/before the gate; the long private approach drive absorbs arrivals instead.",
+    "drivewayLong": "TRUE - long (~0.5km+) private approach drive winds through forest from the public road to the gate, plus a deep internal yard; easily holds 3+ trucks queued.",
+    "backupSensitive": "FALSE - the gate sits deep on the private property far from any public road, with ample stacking room; a queue would not spill onto a public road.",
+    "entryExitTogether": "TRUE - inbound and outbound truck lanes split around the single central guard island at one entrance point (one gate complex). entryLanes/exitLanes = 1 each.",
+    "fastLaneOpportunity": "FALSE - the gate is a tight booth-island pinch-point with limited paved width for an added express bypass lane.",
+    "urbanRural": "RURAL - forested South Poland ME setting bordered by woods, ponds, and the resort golf course; small-town industrial.",
+    "connectivityIssue": "TRUE, inferred / medium confidence - the plant is set deep in forested hills well away from dense development, so cellular coverage is plausibly weak in parts of the yard.",
+    "scale": "FALSE - no distinct truck-scale pad / weigh platform identified in the truck path.",
+    "multipleFacilities": "FALSE - one large connected industrial complex (NW process/warehouse block continuous with the long SE warehouse), counted as a single building.",
+    "buildingCount": "One primary connected industrial building running NW-SE (a wider process/warehouse block at the NW joined to the long warehouse with the dock bank); minor rooftop/utility structures not counted separately.",
+    "trailersVisible": "~30-40 backed in along the dock face + ~25-35 in the south drop yard + ~15-20 in the NW drop yard = ~80, approximate; mixed imagery vintages.",
+    "trailerParkingCapacity": "Two multi-row drop yards plus the long dock apron give a practical capacity on the order of ~120 trailers; estimate, flagged uncertain.",
+    "siteAreaAcres": "~42 acres of cleared/paved footprint inside the treeline derived from the perimeter polygon; the surrounding spring/forest land is far larger but is woods, not yard. Estimate, flagged uncertain.",
+    "railServed": "FALSE - no rail spur enters the property; access is the private road only.",
+    "streetView": "No Street View coverage on the private property; metadata at both the truck-gate centroid and the perimeter centroid returns ZERO_RESULTS. The nearest public-road panos (44.0268,-70.3529 / 44.0285,-70.3487, captured 2024-09) face only forest and the road, not the gate, so both zones are marked hasCoverage:false."
+  },
+  "method": "deep-audit"
+}

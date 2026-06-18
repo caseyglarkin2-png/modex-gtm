@@ -1,0 +1,110 @@
+{
+  "name": "Crowley Tradeport Logistics Campus (Tradeport Distribution Center) - Jacksonville FL",
+  "type": "Distribution center / warehouse (LCL + dry cargo)",
+  "coords": {
+    "lat": 30.478125,
+    "lng": -81.65303
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        { "lat": 30.4793, "lng": -81.6543 },
+        { "lat": 30.479, "lng": -81.6518 },
+        { "lat": 30.4788, "lng": -81.6516 },
+        { "lat": 30.47715, "lng": -81.6515 },
+        { "lat": 30.47685, "lng": -81.6531 },
+        { "lat": 30.4786, "lng": -81.6544 }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        { "lat": 30.47895, "lng": -81.65345 },
+        { "lat": 30.47895, "lng": -81.65285 },
+        { "lat": 30.4787, "lng": -81.65285 },
+        { "lat": 30.4787, "lng": -81.65345 }
+      ]
+    },
+    "dropYards": [],
+    "dockAprons": [
+      {
+        "ring": [
+          { "lat": 30.4789, "lng": -81.6519 },
+          { "lat": 30.47885, "lng": -81.65165 },
+          { "lat": 30.47705, "lng": -81.65245 },
+          { "lat": 30.4771, "lng": -81.6527 }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 151,
+        "pano": "SgmZR7sGB-OQtUSlSkkZRw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 41,
+        "pano": "EEzgJGv6ZLYoozPHb3VM7w",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 26,
+    "trailersVisible": 2,
+    "trailerParkingCapacity": 12,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 13.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@30.478125,-81.65303,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "dockDoors",
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes",
+    "multipleFacilities"
+  ],
+  "fieldNotes": {
+    "facility": "1350 Tradeport Dr, Jacksonville FL 32218 (TDC IV, built 1989, ~102,409 sq ft single warehouse). Crowley's Jacksonville Tradeport Distribution Center, on the city's northside in the International Tradeport / Imeson industrial park, adjacent to Jacksonville International Airport with access to JAXPORT's Talleyrand/Blount Island/Dames Point terminals. Address + coords resolved via web research (CommercialCafe/LoopNet TDC IV record: 30.478125, -81.653030) and confirmed by satellite: the geocode lands on a single large NW-SE-oriented white-roof warehouse with auto parking on the NW/front side and a loading-dock apron on the SE face. METRIC UNIT: warehouse dock doors counted normally; trailerParkingCapacity = trailer drop/staging slots on the dock apron.",
+    "truckGate": "FALSE. This is an open multi-tenant industrial park, not a fenced/guarded campus. No barrier arm, sliding gate, or pinch-point checkpoint at the property line; the dock apron is reached from a shared park access drive on the NW/front. The SE dock apron is bounded by a drainage canal, with no perimeter truck gate visible in 2026 Maxar satellite or 2022-2023 Street View.",
+    "guardShack": "FALSE. No staffed booth at any property entrance; the only structure on the dock apron is a small dock canopy mid-wall (two blue trailers/containers backed under it), not a guard booth. With no gate, remoteGs is also false.",
+    "dockDoors": "Band 25-50 (estimate ~26), LOW confidence. The SE long wall faces a continuous wide concrete/asphalt apron running the building's full ~200 m length; a regular dock-door rhythm is partly visible (door bays + dock-leveler shadows), but tree/building shadow obscures much of the wall. NOTE a discrepancy: Crowley press material cites '12 dock-high doors' for the Tradeport DC, but the 1350 Tradeport building face is long enough for materially more positions; counted conservatively from imagery and flagged.",
+    "dropArea": "0-10. Only ~2 trailers/containers staged at the apron in the imagery; this is an active dock apron, not a dedicated drop-trailer lot. trailerParkingCapacity ~12 = trailers the apron could hold.",
+    "drivewayLong": "TRUE. The dock apron plus the shared park access drive easily hold a 3+ truck queue.",
+    "multipleFacilities": "FALSE as audited (single 102k sq ft building). It sits inside a larger multi-tenant industrial park (several neighboring warehouses), so 'campus' in the facility name refers to the park, not a multi-building Crowley campus; flagged as uncertain.",
+    "shipRcvSeparate": "FALSE. A single dock face on the SE wall handles both directions.",
+    "urbanRural": "Urban. Inside Jacksonville's Tradeport/Imeson industrial fabric near JAX airport and the I-95/I-295 interchange.",
+    "railServed": "FALSE. No rail spur runs into the parcel; the SE boundary is a drainage canal.",
+    "entryLanes/exitLanes": "Estimated 1/1 from a single shared access; not separately markable at the open park entrance.",
+    "confidence": "Medium. Location positively resolved to 1350 Tradeport Dr and the correct single warehouse confirmed by satellite + Street View (front office face, dock apron, canal boundary). Confidence held at medium (not high) because Street View does not reach the private dock face, the dock-door count is partly shadow-obscured and conflicts with Crowley's stated 12-door figure, and 'campus' framing vs. the single audited building is ambiguous."
+  },
+  "method": "deep-audit"
+}

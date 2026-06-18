@@ -1,0 +1,120 @@
+{
+  "name": "US PL Cabazon Factory",
+  "type": "Bottling plant (PL)",
+  "coords": { "lat": 33.91330, "lng": -116.75170 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 33.91500, "lng": -116.75345 },
+      { "lat": 33.91535, "lng": -116.75085 },
+      { "lat": 33.91330, "lng": -116.74975 },
+      { "lat": 33.91175, "lng": -116.75070 },
+      { "lat": 33.91135, "lng": -116.75295 },
+      { "lat": 33.91215, "lng": -116.75430 },
+      { "lat": 33.91400, "lng": -116.75430 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 33.91300, "lng": -116.75400 },
+      { "lat": 33.91290, "lng": -116.75360 },
+      { "lat": 33.91270, "lng": -116.75375 },
+      { "lat": 33.91280, "lng": -116.75415 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 33.91430, "lng": -116.75080 },
+        { "lat": 33.91505, "lng": -116.75035 },
+        { "lat": 33.91330, "lng": -116.74980 },
+        { "lat": 33.91200, "lng": -116.75070 },
+        { "lat": 33.91215, "lng": -116.75145 },
+        { "lat": 33.91380, "lng": -116.75145 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 33.91520, "lng": -116.75100 },
+        { "lat": 33.91500, "lng": -116.75065 },
+        { "lat": 33.91265, "lng": -116.75185 },
+        { "lat": 33.91280, "lng": -116.75225 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 33.91310, "lng": -116.75230 },
+      { "lat": 33.91290, "lng": -116.75180 },
+      { "lat": 33.91230, "lng": -116.75215 },
+      { "lat": 33.91250, "lng": -116.75265 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 50, "pano": "XV-fnhv-vjC6iaPUPaq7sw", "hasCoverage": true },
+      "truckGate": { "heading": 50, "pano": "XV-fnhv-vjC6iaPUPaq7sw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 58,
+    "trailersVisible": 95,
+    "trailerParkingCapacity": 130,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 38.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.91330,-116.75170,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": true,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "scale",
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate",
+    "connectivityIssue"
+  ],
+  "fieldNotes": {
+    "siteResolution": "The audit target was given as 'US PL Cabazon Factory' / Arrowhead Cabazon bottling plant at 14020 Elm St, Cabazon CA, coords 33.9164,-116.7873. Those coords + that street address are the corporate/mailing address of record (D&B, BuzzFile, Yelp, Manta all list 14020 Elm St) and land on a small fenced warehouse cluster on the south frontage road of I-10. Street View there revealed the east gated building is the COUNTY OF RIVERSIDE - CABAZON - FLEET SERVICES, not Arrowhead. Web research (Nestle/PRNewswire/Foundation Windpower) established the actual operating plant is the 390,000 sqft Nestle/BlueTriton/Primo Arrowhead bottling plant on the Morongo Band of Mission Indians reservation along I-10, identifiable by its three on-site GE wind turbines (first on-site wind turbines at any Nestle plant; ~1 billion bottles/yr). Satellite resolved that plant at 33.9133,-116.7517, ~1.6km ESE of the mailing address. Two wind turbines + their long shadows, a substation, and water-storage tanks at the SW corner positively confirm it. The audit is of this real operating plant, not the Elm St mailing-address warehouse.",
+    "buildingCount": "One very large bottling-plant/warehouse building (the ~390k sqft main structure, long axis running NW-SE) plus a separate long single-story admin/maintenance building at the SW corner; minor utility structures (substation, water tanks, turbine pads) counted with the complex. buildingCount=2.",
+    "truckGate": "No barrier arm, sliding gate, or staffed booth visible across the truck approach. The site sits in open desert on tribal land; a single paved access road climbs ~600m from the SW (off the Apache Trail / Seminole Dr area) and opens directly onto the paved yard. Street View from the access road (pano XV-fnhv-vjC6iaPUPaq7sw, Dec 2025, looking E/NE at the plant) shows a wide open paved entrance with no gate, arm, or guard structure. Marked false, MEDIUM confidence: the nearest Street View pano stops ~150-200m short of the building, so a gate at the very edge of the paved yard cannot be 100% excluded from imagery; overhead z19-z20 of the entrance pinch show no booth or arm.",
+    "guardShack": "No 1-3-vehicle-footprint booth with multi-side windows at the entrance or anywhere along the approach. The only small structures are the SW admin/maintenance building (too large, set back from any gate) and utility sheds by the substation. False.",
+    "remoteGs": "False because no truck gate is confirmed (remoteGs requires a gate present but unstaffed).",
+    "dockDoors": "Continuous dock-door bank runs the entire NE/E face of the main building (the building's long NE wall), with trailers backed in along its full length across z18 (NE) and z19 (mid-dock) crops. Honest count of bays across the whole face is ~55-60; banded 50+.",
+    "dropArea": "Enormous paved trailer drop yard fills the NE/E and SE of the property: multiple long rows of 53' trailers parked without tractors, plus tractor-trailer combos. ~40+ trailers visible in the single z19 mid-yard tile and many more across the NE z18 tile. Banded 50+.",
+    "dropYard": "True - a dedicated, marked multi-row trailer-storage lot occupies the eastern half of the paved yard, distinct from the active dock apron.",
+    "trailersVisible": "Counted across z17/z18 (NE corner) + z19 (mid-dock) + z20 tiles: roughly 30-40 backed at the dock face and 50-60 parked in the drop-yard rows; total estimate ~95. Mixed imagery exposure (overexposed white roof bleeds into the dock edge) makes this approximate.",
+    "trailerParkingCapacity": "The marked drop-yard rows plus the wide drive aisles and apron could hold ~120-130 trailers at practical capacity; estimate 130.",
+    "postGateStaging": "Large paved internal yard between the dock apron and the drop-yard rows acts as a queue/maneuvering/staging area inside the property. True.",
+    "drivewayLong": "The ~600m private access drive plus the deep internal paved yard easily hold 3+ trucks queued before the docks. True.",
+    "fastLaneOpportunity": "Abundant unused paved width at the open entrance and broad internal aisles - ample physical room to add a bypass/express check-in lane. True (the site is wide open, not lane-constrained).",
+    "entryExitTogether": "A single access road serves the property (one road in from the SW), so entry and exit share the same point. entryExitTogether=true; entryLanes/exitLanes ~1 each at the road, MEDIUM confidence (the open paved mouth could be driven as multiple lanes).",
+    "shipRcvSeparate": "The dock doors read as one long continuous bank on a single building face (NE), not two physically separate clusters - so shipRcvSeparate marked false. MEDIUM confidence: a 390k sqft bottling plant likely segregates inbound packaging/raw vs outbound finished internally, but that function is not distinguishable from imagery.",
+    "scale": "No clearly identifiable truck-scale pad + scale house resolved at the entrance or in the yard; a desert dirt patch near the entrance is ambiguous. Marked false, listed uncertain.",
+    "urbanRural": "Isolated 390k sqft plant in open Sonoran/Colorado desert on the Morongo reservation, set well back from the small town of Cabazon and the I-10 frontage. Rural.",
+    "connectivityIssue": "Remote desert location away from dense development; cellular coverage likely adequate near the I-10 corridor but the site is isolated. Inferred true, MEDIUM confidence - listed uncertain.",
+    "railServed": "No rail spur enters the property; nearest rail is the BNSF mainline well south, not connected. False.",
+    "siteAreaAcres": "~38 acres of building + paved yard inside the operational footprint, derived from the perimeter polygon; the leased reservation parcel is larger but is open desert, not yard.",
+    "windTurbines": "Two GE wind turbines are visible on-site (SW corner pads + long blade shadows); press records cite three turbines total supplying ~50% of plant electricity. Not a yard-classification field but a positive ID landmark.",
+    "imageryQuality": "Maxar/Airbus tiles; the white plant roof is overexposed and bleeds into the NE dock edge at z20, so the exact dock-door count is read better from z18/z19. Street View exists only on the public access road approaching from the SW (Dec 2025), stopping short of the property edge - no in-yard panos."
+  },
+  "method": "deep-audit"
+}

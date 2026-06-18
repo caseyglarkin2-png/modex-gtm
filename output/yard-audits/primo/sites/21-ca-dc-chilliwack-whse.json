@@ -1,0 +1,112 @@
+{
+  "name": "CA DC Chilliwack Whse",
+  "type": "DC/Warehouse",
+  "coords": { "lat": 49.11795, "lng": -121.99110 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 49.118480, "lng": -121.992060 },
+      { "lat": 49.118470, "lng": -121.989800 },
+      { "lat": 49.117560, "lng": -121.989780 },
+      { "lat": 49.117520, "lng": -121.992080 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 49.117900, "lng": -121.992230 },
+      { "lat": 49.117870, "lng": -121.991980 },
+      { "lat": 49.117700, "lng": -121.992010 },
+      { "lat": 49.117730, "lng": -121.992260 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 49.117560, "lng": -121.992060 },
+        { "lat": 49.117540, "lng": -121.991640 },
+        { "lat": 49.116900, "lng": -121.991700 },
+        { "lat": 49.116920, "lng": -121.992120 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 49.117800, "lng": -121.991900 },
+        { "lat": 49.117770, "lng": -121.990280 },
+        { "lat": 49.117710, "lng": -121.990285 },
+        { "lat": 49.117740, "lng": -121.991905 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 68, "pano": "_J9T-Be8_tQqdA4hW-uBXQ", "hasCoverage": true },
+      "truckGate": { "heading": 135, "pano": "W2B0feXmoivAMAdGDIzNXA", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 20,
+    "trailersVisible": 14,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 4.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@49.11795,-121.99110,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "dockDoors",
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate",
+    "siteAreaAcres",
+    "buildingCount",
+    "multipleFacilities",
+    "trailerParkingCapacity"
+  ],
+  "fieldNotes": {
+    "siteResolution": "Given city-level coords (49.1579,-121.9515) were ~4.6km NE of the true site. Web research + the supplied lead resolved the facility to 6388 Unsworth Rd, Chilliwack BC V2R 5M3 (Greendale, corner of Unsworth Rd & South Sumas Rd). This is a 225,270 sqft / 8.67-acre MULTI-TENANT industrial complex whose anchor is Nestle Canada; Triton Water Canada Holdings / Nestle Waters Canada occupies unit 527 here (per Canpages/Yellowpages/LoopNet/Western Investor). Co-tenants per the leasing record: Tycrop Mfg, Bullseye Packaging, Ice River Springs (unit 511), Old Yale Brewing (corner taproom, confirmed by Street View signage), plus shared truck parking. This is the DISTRIBUTION/WAREHOUSE address, not the BC bottling plant (which is in Hope at 66700 Othello Rd). Audited building = the addressed anchor warehouse fronting the Unsworth/South Sumas corner; center locked at 49.11795,-121.99110.",
+    "truckGate": "FALSE. No barrier arm, sliding/swing gate, or guard booth across any truck approach. 2023-06 Street View along South Sumas Rd and Unsworth Rd shows open landscaped driveways straight into the property, and a deeper pano (SW corner, pano W2B0feXmoivAMAdGDIzNXA) looks into a fully open paved yard between the buildings with trailers/containers and no checkpoint. A small chain-link enclosure mid-yard surrounds process silos/tanks (utility fencing), not a truck-control gate. Open multi-tenant industrial estate.",
+    "guardShack": "FALSE. No booth-sized staffed structure (1-3 vehicle footprint, multi-side windows) at any entrance in satellite or Street View.",
+    "remoteGs": "FALSE because there is no truck gate at all (no gate => no remote/kiosk check-in implied).",
+    "truckGateCount": "2 open vehicular access points serve the anchor lot: one off Unsworth Rd (west) and the internal-park road off South Sumas (north). Neither is controlled; counted as physical entrances.",
+    "entryExitSeparate": "Marked true (with low confidence) because two separate uncontrolled access points exist (Unsworth + internal road), so inbound and outbound traffic can use different points; not a formal in-gate/out-gate pairing.",
+    "dockDoors": "Anchor building SOUTH face carries one continuous dock bank; counted ~18-22 doors with marked apron stalls and a few trailers backed in (z19/z20 crops p21-anchor-z19, p21-dockcenter-z20, p21-dockbank). Banded 10-25 (sits near the top of the band). The much larger neighbouring south warehouse on the estate adds another ~20+ west-face docks but is treated as a separate building/tenant.",
+    "dropArea": "Trailer drop activity is in the shared internal yard south of the dock bank and along the south-building west face: ~12-16 parked trailers/containers visible (some without tractors). Banded 10-25.",
+    "dropYard": "TRUE. The shared paved internal yard between the anchor and the south warehouse functions as a trailer/container drop and staging lot, distinct from the active dock apron.",
+    "postGateStaging": "Large open paved yard immediately south of the dock bank acts as an internal queue/staging area (no gate to be 'post', but a clear pre-dock holding apron).",
+    "drivewayLong": "Deep open yard from the street to the dock apron easily holds 3+ trucks queued; no pinch point.",
+    "backupSensitive": "FALSE. Generous open yard and wide internal park roads; a truck queue would not spill onto a public road.",
+    "shipRcvSeparate": "Cannot confirm distinct ship vs receive banks for the anchor unit from imagery (single south-face dock bank). Marked false, low confidence.",
+    "scale": "No truck scale / weigh pad visible in the truck path. FALSE.",
+    "railServed": "No rail spur enters the property; nearest is the CN/road corridor north of South Sumas. FALSE.",
+    "urbanRural": "Greendale, an edge-of-town/agricultural-industrial pocket of Chilliwack in the Fraser Valley with farmland and the Cascade foothills adjacent (visible in Street View). Judged RURAL per the small-town tie-break rule.",
+    "connectivityIssue": "FALSE. Within a developed industrial estate on the edge of Chilliwack (pop ~90k); cellular coverage is adequate.",
+    "multipleFacilities": "TRUE. The 6388 Unsworth estate is a campus of multiple large building clusters (anchor warehouse + a very large adjacent south warehouse + a further east warehouse + lumber/3PL yards), shared among several tenants.",
+    "buildingCount": "Counted 1 for the audited anchor warehouse unit (the addressed Nestle Waters/Triton DC building). The wider estate has 3+ large buildings, captured via multipleFacilities=true.",
+    "siteAreaAcres": "Measured ~4.3 acres for the operational anchor-building lot (building + dock apron + immediate yard + east parking) from the perimeter polygon. The documented parcel is 8.67 acres (225,270 sqft building); the extra acreage covers shared yard/the larger south warehouse footprint that belongs to the estate rather than the single audited unit. Flagged uncertain.",
+    "trailersVisible": "~14 across the dock apron and shared yard in the captured imagery; mixed capture vintages, approximate.",
+    "trailerParkingCapacity": "Shared internal yard + drop lot could hold ~35-45 trailers; banded estimate ~40.",
+    "imageryQuality": "2026 Airbus/Maxar satellite is sharp at z18-z20 (z21 returned no tile). Street View is 2023-06 on the public roads; the internal yard has no Street View coverage (private). Indoor 'Views4Business' panos exist for the Old Yale Brewing taproom (ignored).",
+    "streetViewMeta": "Perimeter pano _J9T-Be8_tQqdA4hW-uBXQ (49.11766,-121.99238 on Unsworth) heading 68 deg toward the building; truckGate pano W2B0feXmoivAMAdGDIzNXA (49.11791,-121.99214, SW yard mouth) heading 135 deg into the open yard. Both status OK."
+  },
+  "method": "deep-audit"
+}

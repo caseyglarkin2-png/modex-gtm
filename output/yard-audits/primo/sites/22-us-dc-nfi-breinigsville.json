@@ -1,0 +1,121 @@
+{
+  "name": "US DC NFI - Breinigsville",
+  "type": "DC/Warehouse",
+  "coords": { "lat": 40.57480, "lng": -75.63780 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 40.57632, "lng": -75.64080 },
+      { "lat": 40.57602, "lng": -75.63600 },
+      { "lat": 40.57560, "lng": -75.63470 },
+      { "lat": 40.57452, "lng": -75.63415 },
+      { "lat": 40.57368, "lng": -75.63485 },
+      { "lat": 40.57332, "lng": -75.63870 },
+      { "lat": 40.57360, "lng": -75.64090 },
+      { "lat": 40.57500, "lng": -75.64120 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 40.57628, "lng": -75.63905 },
+      { "lat": 40.57625, "lng": -75.63855 },
+      { "lat": 40.57598, "lng": -75.63860 },
+      { "lat": 40.57601, "lng": -75.63910 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 40.57560, "lng": -75.63560 },
+        { "lat": 40.57530, "lng": -75.63420 },
+        { "lat": 40.57450, "lng": -75.63430 },
+        { "lat": 40.57400, "lng": -75.63500 },
+        { "lat": 40.57430, "lng": -75.63610 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 40.57612, "lng": -75.64020 },
+        { "lat": 40.57588, "lng": -75.63605 },
+        { "lat": 40.57572, "lng": -75.63610 },
+        { "lat": 40.57596, "lng": -75.64025 }
+      ] },
+      { "ring": [
+        { "lat": 40.57558, "lng": -75.63585 },
+        { "lat": 40.57505, "lng": -75.63540 },
+        { "lat": 40.57495, "lng": -75.63560 },
+        { "lat": 40.57548, "lng": -75.63605 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 28, "pano": "u5xt7RtM_dCCYm9-0W5pMw", "hasCoverage": true },
+      "truckGate": { "heading": 327, "pano": "VpxxFVHr7AVKu2n1eh5IEA", "hasCoverage": true },
+      "dropYard": { "heading": 90, "pano": "D6oKl5Qc_B4yqMp2ebyOwA", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 130,
+    "trailerParkingCapacity": 150,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 58.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.57480,-75.63780,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate",
+    "preGateStaging",
+    "scale"
+  ],
+  "fieldNotes": {
+    "siteResolution": "Given coords (40.5340,-75.6290) landed ~5 km SW in Breinigsville farmland/residential. Geocoded the Nestle Way industrial complex (ROOFTOP): 200 Nestle Way=40.5676,-75.6361 (NFI DC, has NFI facility profile); 405 Nestle Way=40.5732,-75.6315 (BlueTriton/Deer Park direct, 384,575 SF, 1995); 555 Nestle Way=40.5742,-75.6387 (the 1.045M SF Nestle Distribution Center, built 1994, 'Nestle Distribution Center Truck Entrance', supports Nestle Waters/BlueTriton/Purina); 910 Nestle Way=40.5673,-75.6493 (small NFI cross-dock, 34,701 SF, 47 doors); 860 Nestle Way=40.5710,-75.6474 (Anex W&D).",
+    "disambiguation": "Audited the 555 Nestle Way building (1.045M SF central white-roof DC by I-78, lat 40.5748 lng -75.6378). Per the research lead this is THE large Nestle DC near the I-78/I-476 junction and is the documented 'Nestle Distribution Center Truck Entrance'; NFI is the 3PL operating the BlueTriton (Deer Park, 405 Nestle Way, immediately adjacent) distribution out of this campus. NFI also has separate buildings on the campus (200 and 910 Nestle Way), but 555 is the primary full-scale DC with the real truck yard that best matches 'NFI DC serving BlueTriton near 405/555 Nestle Way'. 200 Nestle Way (NFI facility-profile building) is an alternative if 'NFI-leased' is read literally; flagged for human confirmation of the exact operator-to-building lease.",
+    "truckGate": "Controlled entry confirmed. At the NW corner (~40.5762,-75.6390) a chevron-striped pinch-point funnels the truck drive into a covered check-in canopy at the building's NW face, with a driver-parking/turnaround loop just outside (z19 gate crop). A SECOND controlled truck entrance with a discrete guard booth sits at the SE/east end serving the trailer drop yard (z19 east-control crop). Both are off the private Nestle Way boulevard, screened by a double tree line. True, high confidence.",
+    "guardShack": "True. A small rectangular booth (1-2 vehicle footprint) with its own checkpoint pad is visible beside the east truck lane into the drop yard (z19 east-control crop, ~40.5745,-75.6362). The NW entrance also shows a check-in canopy/booth structure at the building face. Staffed-booth entry consistent with a major Nestle/BlueTriton DC.",
+    "remoteGs": "False - a physical guard booth is present (not kiosk-only).",
+    "entryExitSeparate": "Two distinct controlled truck entrances at different points of the property line (NW check-in canopy near the north docks; SE/east guard booth into the drop yard), so inbound and outbound flows are split. entryExitTogether=false accordingly. Medium confidence on which is in vs out.",
+    "preGateStaging": "A paved driver-parking/turnaround loop sits outside the NW check-in pinch-point where trucks can wait before check-in (z19 gate crop). Medium confidence.",
+    "postGateStaging": "Very large paved aprons inside both entrances (north dock apron + the east yard maneuvering area) act as internal queue/staging before docks. True.",
+    "drivewayLong": "Deep approaches from the gate to the dock face plus expansive internal aprons easily hold 3+ trucks queued. True.",
+    "fastLaneOpportunity": "Wide gate aprons and abundant unused paved width at both entrances (especially the chevron pinch-point apron at NW and the broad east-yard entry) give clear room to add an express/bypass lane. True.",
+    "dockDoors": "Continuous dock bank runs nearly the full ~700 m north face with trailers backed in across the whole wall (z18 NW + z16 crops), plus additional dock doors on the east face feeding the drop yard. For a 1.045M SF DC the honest total is well into the 50+ band; counted bands of ~30 doors on partial north stretches alone. Banded 50+, point estimate ~90.",
+    "dropArea": "Dedicated trailer drop yard at the east end: multiple herringbone/angled rows of parked trailers (white, orange, green) without tractors (z18 east-yard + z19 east-control crops), ~100-130 trailers visible. Clearly 50+.",
+    "dropYard": "True - the east-end lot is a distinct trailer-storage area separate from the active north dock apron.",
+    "shipRcvSeparate": "Distinct dock clusters on two different building faces (long north dock bank + east-face docks serving the drop yard) suggest split ship/receive, but function cannot be confirmed from imagery. Medium confidence.",
+    "trailersVisible": "~100-130 across the east drop yard rows plus trailers backed into the north and east dock banks; mixed fleet colors. Approximate count from z18/z19 imagery.",
+    "trailerParkingCapacity": "The east drop yard's herringbone rows plus dock-line spots support ~150 trailers practically.",
+    "truckGateCount": "Two controlled truck entrances (NW check-in canopy + SE/east guard booth).",
+    "buildingCount": "One single very large DC building (the 1.045M SF 555 structure). The dark-roof building to the south across Nestle Way is a separate parcel (405/adjacent) and is excluded from this perimeter.",
+    "siteAreaAcres": "~58 acres derived from the perimeter polygon (the ~1.045M SF building footprint ~24 ac + north dock apron + east drop yard + setbacks). Approximate.",
+    "railServed": "No rail spur runs into the property; faint lines near the east yard are pavement/curbing, not active track. False.",
+    "urbanRural": "Edge-of-town industrial park between I-78 and farmland west of Allentown; broader setting is exurban/rural with farmland and woods adjacent. Marked Rural per the small-town-industrial tie-break rule.",
+    "connectivityIssue": "False - large active modern DC directly on I-78 with dense logistics development; cellular coverage is good.",
+    "scale": "No truck scale/weigh pad clearly identified in the captured imagery; left false but listed uncertain (a scale could sit at an entrance lane not fully resolved).",
+    "streetView": "Google Street View covers the private Nestle Way boulevard on the south and east sides (panos captured 2025-05); interior/north-dock zones have no drive-in coverage, so perimeter/truckGate panos are the nearest road frames looking toward each zone, and the dropYard pano sits directly on the east boulevard."
+  },
+  "method": "deep-audit"
+}

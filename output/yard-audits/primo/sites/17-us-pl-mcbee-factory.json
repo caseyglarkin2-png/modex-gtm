@@ -1,0 +1,108 @@
+{
+  "name": "US PL McBee Factory",
+  "type": "Bottling plant (PL)",
+  "coords": { "lat": 34.46378, "lng": -80.23403 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 34.46214, "lng": -80.23725 },
+      { "lat": 34.46586, "lng": -80.23715 },
+      { "lat": 34.46573, "lng": -80.23242 },
+      { "lat": 34.46325, "lng": -80.23205 },
+      { "lat": 34.46219, "lng": -80.23242 },
+      { "lat": 34.46193, "lng": -80.23500 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 34.46205, "lng": -80.23718 },
+      { "lat": 34.46228, "lng": -80.23710 },
+      { "lat": 34.46226, "lng": -80.23695 },
+      { "lat": 34.46203, "lng": -80.23703 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 34.46470, "lng": -80.23615 },
+        { "lat": 34.46505, "lng": -80.23560 },
+        { "lat": 34.46360, "lng": -80.23475 },
+        { "lat": 34.46328, "lng": -80.23528 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 34.46440, "lng": -80.23495 },
+        { "lat": 34.46455, "lng": -80.23470 },
+        { "lat": 34.46330, "lng": -80.23388 },
+        { "lat": 34.46315, "lng": -80.23413 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 56, "pano": "vXBOiv3pfZXVJd-IITpynw", "hasCoverage": true },
+      "truckGate": { "heading": 0, "pano": "vXBOiv3pfZXVJd-IITpynw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 28,
+    "trailersVisible": 75,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 78.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.46378,-80.23403,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": true,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "dockDoorCount",
+    "guardShack",
+    "remoteGs",
+    "truckGate",
+    "postGateStaging",
+    "connectivityIssue",
+    "entryLanes",
+    "exitLanes",
+    "buildingCount"
+  ],
+  "fieldNotes": {
+    "location": "Confirmed Primo Brands / former Nestle Waters (BlueTriton) Deer Park bottling plant, 100 Nestle Way, McBee SC. Supplied reference coords (34.4700,-80.2586) landed on the town of McBee ~1.6km NW; web-verified plant address geocode (N34 27 44, W80 14 16 = 34.46226,-80.23788) put me on the cleared industrial parcel SE of town off US-1/US-601. Locked building center at 34.46378,-80.23403 from zoom 17-20 satellite.",
+    "dockDoorCount": "West building face has a long bank of dock positions sheltered under projecting canopies/awnings with diagonal-striped approach lanes; canopies obscure exact door count. Estimated ~28 doors across the loading face. Treat as 25-50 band, low precision.",
+    "guardShack": "No staffed booth visible at the highway entrance (Street View 2023-07 shows only an open turn-lane entry and a monument sign, no booth) and none resolvable at the yard entry. Marked false.",
+    "remoteGs": "There is a controlled single-point truck entrance off a divided highway (dedicated turn lane, monument sign) but no guard shack, implying kiosk / call-box / app check-in at the yard. Set true.",
+    "truckGate": "Single controlled entrance drive off US-1/601 divided highway with a dedicated turn lane; long private drive into property. No barrier arm resolvable in imagery but it is a clear single pinch-point truck entrance. Set true (medium confidence).",
+    "postGateStaging": "Large paved yard between the entry drive and the dock face provides ample internal queuing room before the docks.",
+    "drivewayLong": "Entry drive from the highway runs several hundred meters into the property and the internal yard is deep; easily holds 3+ trucks. True.",
+    "fastLaneOpportunity": "Very wide paved central drive lane through the trailer yard and a single open entry give ample room to add an express/bypass lane.",
+    "dropArea": "Dedicated trailer drop yard on the west/northwest side holds many parked drop trailers in long rows (counted ~70-80 trailers in imagery); 50+ band.",
+    "dropYard": "Distinct paved trailer-storage lot west of the building, separate from the active dock apron, full of parked trailers. True.",
+    "trailerParkingCapacity": "Estimated ~110 trailer stalls across the drop-yard rows; ~75 trailers visibly parked in the captured imagery. Honest overhead estimate.",
+    "buildingCount": "Main ~200,000 sq ft bottling plant plus one separate long building to the NW (likely office/maintenance/secondary warehouse). Treated as 2 buildings; not a multi-large-cluster campus, so multipleFacilities=false.",
+    "railServed": "No rail spur runs into the property; nearest tracks not adjacent. False.",
+    "connectivityIssue": "Rural site in open farmland southeast of a very small town (McBee, pop ~700); cellular coverage likely marginal. Medium confidence, inferred.",
+    "scale": "No truck scale / weigh pad resolvable in the truck path.",
+    "siteAreaAcres": "~78 acres from the perimeter polygon of the cleared/graded parcel; the fenced operating footprint is smaller. Approximate.",
+    "method": "Satellite zoom 16-20 plus highway Street View (2023-07, pano vXBOiv3pfZXVJd-IITpynw). No interior Street View coverage (private rural site); all zone SV metadata except the highway entrance returned ZERO_RESULTS."
+  },
+  "method": "deep-audit"
+}

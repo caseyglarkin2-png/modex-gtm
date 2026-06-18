@@ -1,0 +1,119 @@
+{
+  "name": "Crowley St. Croix Container Terminal - Wilfred \"Bomba\" Allick Port & Transshipment Center, St. Croix, USVI",
+  "type": "Marine terminal / container port (multipurpose, Ro-Ro + Lo-Lo)",
+  "coords": {
+    "lat": 17.6943,
+    "lng": -64.7616
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        { "lat": 17.69486, "lng": -64.76215 },
+        { "lat": 17.69492, "lng": -64.76172 },
+        { "lat": 17.69460, "lng": -64.76161 },
+        { "lat": 17.69433, "lng": -64.76172 },
+        { "lat": 17.69412, "lng": -64.76193 },
+        { "lat": 17.69374, "lng": -64.76199 },
+        { "lat": 17.69386, "lng": -64.76219 },
+        { "lat": 17.69423, "lng": -64.76223 },
+        { "lat": 17.69460, "lng": -64.76223 }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        { "lat": 17.69540, "lng": -64.76250 },
+        { "lat": 17.69540, "lng": -64.76233 },
+        { "lat": 17.69525, "lng": -64.76233 },
+        { "lat": 17.69525, "lng": -64.76250 }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          { "lat": 17.69468, "lng": -64.76215 },
+          { "lat": 17.69470, "lng": -64.76168 },
+          { "lat": 17.69430, "lng": -64.76176 },
+          { "lat": 17.69428, "lng": -64.76219 }
+        ]
+      }
+    ],
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 142,
+        "pano": "",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 149,
+        "pano": "",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 400,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 12.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@17.694300,-64.761600,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": true,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "trailerParkingCapacity",
+    "trailersVisible",
+    "dropArea",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "siteAreaAcres",
+    "scale",
+    "buildingCount",
+    "connectivityIssue"
+  ],
+  "fieldNotes": {
+    "siteIdentification": "Crowley Caribbean Services operates its St. Croix container service out of the Wilfred 'Bomba' Allick Port & Transshipment Center ('The Containerport') on the SOUTH shore of St. Croix at the mouth of the Krause Lagoon dredged channel, immediately west of the former HOVENSA / Limetree Bay refinery tank farm and its product piers. It is NOT in downtown Christianston (the mailing city is Christiansted 00823 but the facility sits ~10km SW of the town on the industrial south coast). VIPA owns the port; Crowley and Tropical Shipping are the two long-time tenant carriers. Per VIPA, it is a ~45-acre VIPA parcel with a 1,000 ft dock, 2 berths (vessels to 525 ft, 30 ft draft), Ro-Ro + Lo-Lo, and a 30-ton gantry crane. The audited yard polygon is the ~12-acre active paved working-yard + marginal wharf footprint at lat 17.6943, lng -64.7616 (the wider VIPA parcel includes adjacent scrub/laydown not in active container use).",
+    "yardSpots": "The 'yard spots' figure (trailerParkingCapacity ~400) is CONTAINER/CHASSIS GROUND SLOTS, not warehouse dock-door positions. It is a CONSERVATIVE RANGE estimate (roughly 300-500 ground slots) from the paved working yard south and east of the transit shed. The yard appeared lightly used / sparsely stacked with creeping vegetation in the imagery, so live utilization is far below capacity; the number is theoretical ground-slot capacity of the paved area. Low confidence - island imagery is moderate-res and the working surface is irregular.",
+    "dockDoorCount": "Marine container terminal - NO warehouse dock-door bank. The single large flat-roofed building north of the yard is a transit shed / cargo shed, not a dock-door warehouse. dockDoorCount = 0; dockDoors band = NONE. Cargo moves over the marginal wharf (Ro-Ro ramp + Lo-Lo gantry), not through truck dock doors.",
+    "truckGate": "CONFIRMED controlled entry. Street View (pano @ 17.6955,-64.7626, captured 2016-08) at the access road shows a chain-link perimeter fence with a swing gate across the road and a security/RANGER pickup truck with a person standing at the checkpoint. The terminal perimeter is fenced (chain-link visible around the tanks and yard in both 2016 and 2024 SV captures). truckGate = true, single entrance, entryExitTogether.",
+    "guardShack": "No fixed glass-walled guard booth resolved in imagery; the checkpoint appears to be a manned gate (ranger/security vehicle present) rather than a permanent booth structure. Set guardShack=false and remoteGs=true (gate present, no clear booth - manned/kiosk-style control). Both flagged uncertain.",
+    "drivewayLong": "The unpaved/gravel access road from the gate runs a long approach (several hundred meters of road and open yard between the perimeter gate and the wharf/working face), so a truck queue stacks well off the public road. drivewayLong=true, postGateStaging=true (ample paved/unpaved holding inside the gate before the working face).",
+    "backupSensitive": "NOT backup-sensitive - the gate sits on a remote industrial access road on the undeveloped south coast with abundant stacking room inside and outside; a queue would not spill onto a busy public road. backupSensitive=false.",
+    "urbanRural": "RURAL. The setting is remote south-coast industrial land - coastal scrub, gravel roads, the abandoned refinery, no town fabric. Street View shows unpaved roads and dense bush. urbanRural=Rural.",
+    "connectivityIssue": "Inferred true - remote south-shore location far from the island's towns (Christiansted/Frederiksted) on undeveloped coast; cellular coverage at the wharf is plausibly weak. Medium-confidence inference, flagged uncertain.",
+    "railServed": "No rail anywhere on St. Croix. railServed=false.",
+    "scale": "No truck scale resolved in imagery; flagged uncertain (a port of this type often has a weighbridge at the gate, but none was visible).",
+    "buildingCount": "2 = the large transit shed + the cluster of bulk storage tanks/associated small structure treated as the second built feature; conservative, flagged uncertain.",
+    "imageryNote": "Island imagery is moderate resolution and the terminal was lightly used in the captures (sparse stacks, encroaching vegetation on the paved yard). All counts are conservative estimates; overall confidence LOW per the marine-terminal / poor-island-coverage convention."
+  },
+  "method": "deep-audit"
+}

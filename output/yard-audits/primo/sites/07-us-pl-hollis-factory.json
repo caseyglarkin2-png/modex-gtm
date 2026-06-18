@@ -1,0 +1,121 @@
+{
+  "name": "US PL Hollis Factory",
+  "type": "Bottling plant (PL)",
+  "coords": { "lat": 43.67630, "lng": -70.64190 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 43.67805, "lng": -70.64118 },
+      { "lat": 43.67635, "lng": -70.63930 },
+      { "lat": 43.67470, "lng": -70.64175 },
+      { "lat": 43.67388, "lng": -70.64352 },
+      { "lat": 43.67360, "lng": -70.64560 },
+      { "lat": 43.67460, "lng": -70.64600 },
+      { "lat": 43.67520, "lng": -70.64440 },
+      { "lat": 43.67700, "lng": -70.64330 },
+      { "lat": 43.67815, "lng": -70.64225 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 43.67440, "lng": -70.64210 },
+      { "lat": 43.67430, "lng": -70.64165 },
+      { "lat": 43.67405, "lng": -70.64175 },
+      { "lat": 43.67415, "lng": -70.64220 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 43.67805, "lng": -70.64118 },
+        { "lat": 43.67760, "lng": -70.64300 },
+        { "lat": 43.67645, "lng": -70.64385 },
+        { "lat": 43.67625, "lng": -70.64330 },
+        { "lat": 43.67730, "lng": -70.64255 },
+        { "lat": 43.67772, "lng": -70.64095 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 43.67772, "lng": -70.64095 },
+        { "lat": 43.67625, "lng": -70.64330 },
+        { "lat": 43.67600, "lng": -70.64305 },
+        { "lat": 43.67748, "lng": -70.64072 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 43.67600, "lng": -70.64400 },
+      { "lat": 43.67520, "lng": -70.64475 },
+      { "lat": 43.67400, "lng": -70.64560 },
+      { "lat": 43.67370, "lng": -70.64525 },
+      { "lat": 43.67490, "lng": -70.64440 },
+      { "lat": 43.67575, "lng": -70.64368 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 353, "pano": "d4G11FtE34bCPsE3YZTMCw", "hasCoverage": true },
+      "truckGate": { "heading": 324, "pano": "d4G11FtE34bCPsE3YZTMCw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 220,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 62.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@43.67630,-70.64190,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate"
+  ],
+  "fieldNotes": {
+    "siteResolution": "Supplied coords (43.5950,-70.6450) landed ~9.5km too far south, inside the Killick Pond Estates wooded residential subdivision (verified: forest + scattered houses at z14-z17, no industrial building). Geocoding 400 Killick Pond Rd, Hollis ME 04042 via the Maps API returned 43.67630,-70.64120, which resolves on satellite to a single ~700k-sqft white-roofed industrial bottling plant with a large multi-hundred-trailer drop yard, a solar farm to the SW, and a Killick Pond Rd frontage. Web-confirmed as the Nestle Waters / Poland Spring (now Primo Brands / BlueTriton) Hollis Factory, opened 2000, the largest water bottling facility in the US (12 bottling lines), with an adjacent 13MW / 50-acre / 23,000-module solar array. Locked building center 43.67630,-70.64190.",
+    "truckGate": "FALSE. Street View on Killick Pond Rd at the property entrance (pano d4G11FtE34bCPsE3YZTMCw, Nov 2024) looking up the access drive shows a wide, fully open, paved entry with painted lane channelization but NO barrier arm, NO sliding/swing gate, and NO perimeter fence at the frontage - open grass between road and building. The painted island/hatching seen in z20 satellite at the entry throat is lane-divider channelization, not a controlled checkpoint. Marked false with high confidence from ground-level imagery.",
+    "guardShack": "FALSE. No booth-sized structure (1-3 vehicle footprint, multi-side windows) at the entrance in either satellite (z19-z20) or Street View. The only small structures near the SE corner are an office vestibule attached to the main building and light/sign poles. False, high confidence.",
+    "remoteGs": "FALSE - requires a truck gate to be present; there is no gate, so remote check-in does not apply.",
+    "postGateStaging": "TRUE. A very large internal paved apron and a long dedicated approach/staging lane (the wide asphalt strip running SW from the NW dock face) sit inside the property before the dock doors - ample internal queue space.",
+    "drivewayLong": "TRUE. The access drive from Killick Pond Rd plus the deep internal yard and the long SW approach lane easily hold a queue of 3+ trucks before reaching docks.",
+    "entryExitTogether": "TRUE. A single truck access point off Killick Pond Rd at the SE serves both in and out; the entry drive splits into channelized in/out lanes but at one property-line point.",
+    "entryLanes": "Estimated 2 - the entry throat shows painted channelization splitting into roughly two inbound lanes around a center island. Low confidence; banded from z20 markings.",
+    "exitLanes": "Estimated 1 outbound lane at the same throat. Low confidence.",
+    "fastLaneOpportunity": "TRUE. The entrance throat is very wide with painted islands and unused paved width, and the long SW approach lane provides abundant room to add an express/bypass lane - strong physical room for a fast lane.",
+    "dockDoors": "50+. The NW (long) face of the building carries a continuous, full-length bank of dock doors with trailers backed in nose-to-tail (z18-z19 NE/SW face crops show 30-50+ trailers at dock along this face alone). Given the building length (~290m NW face) and ~12ft door spacing, total dock doors comfortably exceed 50; honest point estimate ~70. Banded 50+.",
+    "dropArea": "50+. The NW drop yard holds many long parallel rows of unhitched trailers - z19 crops show 8-10 rows of ~10-15 trailers each, well over 100 parked trailers. Clearly the top band, 50+.",
+    "dropYard": "TRUE. A dedicated multi-acre trailer-storage lot on the NW side, distinct from the active dock apron, packed with parked trailers.",
+    "shipRcvSeparate": "FALSE (medium confidence). Docks are concentrated as one continuous bank on the NW building face; no clearly separate second dock cluster on a different face was identifiable, so ship/receive read as a single combined dock line. Cannot confirm internal function split from imagery.",
+    "scale": "FALSE. No truck scale / weigh pad or scale house identified in the truck path on z19-z20 imagery.",
+    "trailersVisible": "~180 honest estimate: ~30-50 backed at the NW dock face + 100+ in the NW drop-yard rows + scattered units in the staging/approach lane. Approximate from overhead count across tiles.",
+    "trailerParkingCapacity": "~220 - the drop-yard rows plus the deep approach/staging lane and apron could hold materially more than currently parked.",
+    "siteAreaAcres": "~62 acres of cleared/paved operating footprint inside the treeline (building + drop yard + approach lane + parking + apron), derived from the perimeter polygon. Excludes the separate 50-acre solar array to the SW and the surrounding forest/spring land.",
+    "buildingCount": "1 - one massive contiguous industrial building (bottling + warehouse under one roofline) with a minor attached office vestibule at the SE; counted as one.",
+    "railServed": "FALSE. No rail spur enters the property; access is road-only via Killick Pond Rd.",
+    "connectivityIssue": "FALSE. Although rural, the site is a major 24/7 industrial plant on a paved arterial with on-site solar/utility infrastructure and Street View LTE-era coverage; modern cellular coverage is expected. Marked false."
+  },
+  "method": "deep-audit"
+}

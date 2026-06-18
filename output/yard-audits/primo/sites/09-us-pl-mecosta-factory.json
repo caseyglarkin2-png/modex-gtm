@@ -1,0 +1,119 @@
+{
+  "name": "US PL Mecosta Factory",
+  "type": "Bottling plant (PL)",
+  "coords": { "lat": 43.58110, "lng": -85.46640 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 43.58265, "lng": -85.46930 },
+      { "lat": 43.58300, "lng": -85.46720 },
+      { "lat": 43.58285, "lng": -85.46470 },
+      { "lat": 43.58265, "lng": -85.46330 },
+      { "lat": 43.58085, "lng": -85.46300 },
+      { "lat": 43.58000, "lng": -85.46420 },
+      { "lat": 43.57985, "lng": -85.46720 },
+      { "lat": 43.58010, "lng": -85.46920 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 43.58345, "lng": -85.46710 },
+      { "lat": 43.58345, "lng": -85.46665 },
+      { "lat": 43.58300, "lng": -85.46665 },
+      { "lat": 43.58300, "lng": -85.46710 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 43.58270, "lng": -85.46470 },
+        { "lat": 43.58255, "lng": -85.46330 },
+        { "lat": 43.58085, "lng": -85.46315 },
+        { "lat": 43.58070, "lng": -85.46455 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 43.58060, "lng": -85.46870 },
+        { "lat": 43.58030, "lng": -85.46480 },
+        { "lat": 43.58005, "lng": -85.46485 },
+        { "lat": 43.58035, "lng": -85.46875 }
+      ] },
+      { "ring": [
+        { "lat": 43.58235, "lng": -85.46490 },
+        { "lat": 43.58210, "lng": -85.46355 },
+        { "lat": 43.58190, "lng": -85.46365 },
+        { "lat": 43.58215, "lng": -85.46500 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 185, "pano": "dM-z9Dmn3ZPJxyeq-N9leg", "hasCoverage": true },
+      "truckGate": { "heading": 186, "pano": "dM-z9Dmn3ZPJxyeq-N9leg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 58,
+    "trailersVisible": 105,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 32.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@43.58110,-85.46640,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "shipRcvSeparate",
+    "multipleFacilities"
+  ],
+  "fieldNotes": {
+    "siteResolution": "Supplied coords (43.5803,-85.2097) had a wrong longitude and landed in farmland ~21 km east of the plant. Google geocode of the street address (19275 8 Mile Rd, Stanwood MI 49346) returned 43.58243,-85.46877; satellite there shows the large (~411k sq ft) Ice Mountain / Nestle Waters / BlueTriton-Primo bottling plant. Locked building-area center 43.58110,-85.46640. The 8 Mile Rd / diagonal county road forms the north property frontage; the private truck drive runs south off it into the yard.",
+    "truckGate": "Confirmed from Street View (pano dM-z9Dmn3ZPJxyeq-N9leg, captured 2025-07, at the drive mouth 43.58389,-85.46680 looking S): a chain-link slide/swing gate spans the private truck drive ~80 m in from the public road, with a perimeter fence line, a stop sign on a post mid-drive, a tall light pole, and a card-reader/call-box pole at the gate. Clear controlled checkpoint. True.",
+    "guardShack": "No large multi-window staffed booth visible. There is a small (~1-vehicle-footprint) white-roofed structure beside the drive at the gate (z21 43.5832,-85.4670), but it reads as a check-in kiosk / call-box shelter rather than a manned guard booth; SV shows signage and a card-reader pole, not a window-walled booth. Marked false (low confidence).",
+    "remoteGs": "True: there IS a controlled truck gate but no confirmed staffed guard shack, implying kiosk / call-box / card-reader check-in (the pole + stop sign seen in SV at the gate). Low confidence, paired with the guardShack call.",
+    "postGateStaging": "Wide internal paved apron between the gate and the dock faces plus the large internal yard easily holds queued trucks inside the fence before the docks.",
+    "drivewayLong": "Long private approach (~80-120 m gate-to-dock) plus a deep internal yard -> holds well over 3 trucks queued.",
+    "dockDoors": "South wall of the main building is a continuous long dock bank with many doors and trailers backed in across the full length (south-dock z19, z18); the building's east/NE face carries a second dock bank with trailers backed in (east z17). Honest overhead estimate ~58 total -> 50+ band. Exact count uncertain due to building length and apron trailers obscuring some bays.",
+    "dropArea": "Dedicated drop yard east of the building (dropyard2 z18, eastend z18): multiple long rows of parked trailers without tractors, ~60-80 in marked rows -> 50+ band.",
+    "dropYard": "True - a distinct, dedicated trailer-storage lot east of the plant, separate from the active dock-apron staging.",
+    "shipRcvSeparate": "Two physically distinct dock clusters on different building faces (long south-face bank + east/NE-face bank) suggest separate shipping/receiving operations, but function cannot be confirmed from imagery -> medium confidence.",
+    "entryExitTogether": "Single truck drive off the public road serving both in and out at one point on the north property line.",
+    "entryLanes": "Single inbound lane at the gate from imagery; exit shares the same drive. Banded entry=exit=1.",
+    "fastLaneOpportunity": "Single-lane gate with no obvious spare paved width for a bypass; the approach is rural with low backup risk, so no fast-lane need flagged. False.",
+    "backupSensitive": "Gate sits ~80 m back from a low-traffic rural county road behind a deep approach -> a truck queue would stack on the private drive, not the public road. False.",
+    "urbanRural": "Rural - open farmland and woods surround the plant near the small village of Stanwood, Mecosta County; only the plant and a small adjacent industrial cluster are developed.",
+    "connectivityIssue": "Although rural, the site is an active large-scale industrial plant on a county road with a neighboring industrial cluster and on-prem infrastructure; cellular coverage is reasonable. False (would be borderline; flagged-adjacent).",
+    "multipleFacilities": "A separate small building cluster (white pole-barn warehouses with their own trailers) sits immediately NE across the yard (dropyard z18, dropyard2 z18). It looks like an adjacent/secondary operation rather than a second large building of the same plant, so multipleFacilities=false for the Ice Mountain plant itself, but it is a campus-adjacent cluster - flagged uncertain. buildingCount=2 counts the main plant plus this attached NE warehouse mass.",
+    "scale": "No truck scale / weigh pad with scale house identified in the truck path. False.",
+    "railServed": "No rail spur enters the property; access is road-only. False.",
+    "trailersVisible": "~60-80 in the east drop yard rows + ~20 in the south apron + ~25-30 backed into docks = ~105. Approximate; dense rows and mixed imagery vintages make this a high-confidence-band, low-confidence-exact count.",
+    "trailerParkingCapacity": "Drop-yard rows hold ~80-100; apron and internal yard push practical capacity to ~120.",
+    "siteAreaAcres": "~32 acres of fenced active yard + building footprint derived from the perimeter polygon (front pond/grass buffer to the public road excluded); ~484 m E-W x ~312 m N-S bounding extent.",
+    "buildingCount": "Main plant is one very large connected structure; counted 2 to include the distinct attached NE warehouse mass / adjacent cluster.",
+    "imageryQuality": "Maxar/Airbus tiles are sharp at z17-z19; Street View (2025-07) covers the public road and the drive mouth and clearly shows the gate, but Google did not drive past the gate, so the booth-vs-kiosk distinction and exact dock count are the main residual uncertainties."
+  },
+  "method": "deep-audit"
+}

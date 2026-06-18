@@ -1,0 +1,165 @@
+{
+  "name": "Crowley Liner & Logistics - Guaynabo (Amelia / FTZ 61)",
+  "type": "Liner + logistics warehouse / cross-dock distribution center (NVO/LCL, Foreign-Trade Zone 61)",
+  "coords": {
+    "lat": 18.42462,
+    "lng": -66.1208
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 18.424905,
+          "lng": -66.121655
+        },
+        {
+          "lat": 18.424935,
+          "lng": -66.119805
+        },
+        {
+          "lat": 18.42417,
+          "lng": -66.119755
+        },
+        {
+          "lat": 18.424075,
+          "lng": -66.121555
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 18.424195,
+          "lng": -66.120015
+        },
+        {
+          "lat": 18.42423,
+          "lng": -66.119775
+        },
+        {
+          "lat": 18.42409,
+          "lng": -66.119745
+        },
+        {
+          "lat": 18.424055,
+          "lng": -66.119985
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 18.424445,
+            "lng": -66.121595
+          },
+          {
+            "lat": 18.4245,
+            "lng": -66.119805
+          },
+          {
+            "lat": 18.42421,
+            "lng": -66.11977
+          },
+          {
+            "lat": 18.424155,
+            "lng": -66.12156
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 18.424555,
+            "lng": -66.121615
+          },
+          {
+            "lat": 18.42461,
+            "lng": -66.11982
+          },
+          {
+            "lat": 18.424495,
+            "lng": -66.119805
+          },
+          {
+            "lat": 18.42444,
+            "lng": -66.121595
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 315,
+        "pano": "",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35,
+    "trailersVisible": 45,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 4.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@18.42462,-66.12080,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "siteAreaAcres"
+  ],
+  "fieldNotes": {
+    "location": "Crowley Liner & Logistics consolidated NVO/LCL + warehouse/distribution at Building #13, Free Trade Zone #61, Carretera 165 (Rd 165) KM 2.4, Guaynabo PR 00965 (Crowley warehouse-relocation announcement). The Edificio-13 address geocodes to the Amelia Industrial Park; CONFIRMED on Street View (pano 18.42414,-66.12042, captured 2023-09) which shows the blue 'CROWLEY' painted wall behind the south fence, and an east-end pano (18.42415,-66.11983) showing CROWLEY-branded red containers + TOTE/blue containers staged on the dock apron. Locked the long E-W gray-roof cross-dock building centered ~18.42462,-66.12080 as the Crowley facility.",
+    "facilityType": "This is the liner+logistics WAREHOUSE/cross-dock building, not the marine terminal. Crowley's separate waterfront container/chassis marshalling yard (acres of blue Crowley trailers, ~18.4259,-66.1119, ~1 km NE on the Puerto Nuevo bay) and the Isla Grande ConRo terminal (separate audit, site 06) handle vessel cargo; this Guaynabo building handles NVO/LCL warehouse + distribution.",
+    "dockDoors": "Single-sided dock bank on the SOUTH face of the building, continuous regular bay rhythm with blue/white/red/orange trailers backed in across the visible center span (z20). Building ~200 m long; estimated ~30-40 total doors -> band 25-50. Door count is an overhead estimate, flagged uncertain.",
+    "dropYard": "Container/trailer staging on the south apron and along the internal service road: CROWLEY, TOTE and blue containers parked nose-in and along the curb (east-end Street View). dropArea 10-25 reflects the on-parcel staging; the much larger Crowley trailer farm is the separate waterfront yard, not counted here.",
+    "truckGate": "Fenced chain-link compound with a sliding gate in the south fence off the internal Amelia-park road (off PR-165). Single combined in/out access; no staffed guard booth visible at the compound fence in available panos, so classified remoteGs (badge/kiosk-style access typical of an FTZ building) rather than guardShack -- flagged uncertain.",
+    "guardShack": "No staffed booth identified at the Crowley compound gate in 2023-09 Street View; gate is a sliding chain-link gate. Medium confidence.",
+    "postGateStaging": "Paved apron inside the fence between the dock face and the road holds trailers/containers -> internal holding present.",
+    "urbanRural": "Dense San Juan/Guaynabo metro industrial fabric (Amelia Industrial Park), bordered by the PR-22/PR-165 expressway; clearly Urban.",
+    "railServed": "A rail line runs in the expressway median south of the park (image), but NO rail spur enters the Crowley parcel.",
+    "multipleFacilities": "Single Crowley building/compound within a multi-tenant industrial park; not a campus, so false.",
+    "siteAreaAcres": "Fenced Crowley parcel only (~200 m x ~90 m) ~= 4.5 acres; excludes neighboring tenants' buildings. Approximate.",
+    "backupSensitive": "Access is from an internal park road with ample stacking room, not directly on a public arterial, so a gate queue would not spill onto a public road."
+  },
+  "method": "deep-audit"
+}

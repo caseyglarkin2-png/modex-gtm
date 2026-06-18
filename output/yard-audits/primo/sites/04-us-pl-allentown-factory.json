@@ -1,0 +1,131 @@
+{
+  "name": "US PL Allentown Factory",
+  "type": "Bottling plant (PL)",
+  "coords": { "lat": 40.57450, "lng": -75.62930 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 40.57697, "lng": -75.63114 },
+      { "lat": 40.57717, "lng": -75.62797 },
+      { "lat": 40.57672, "lng": -75.62677 },
+      { "lat": 40.57515, "lng": -75.62677 },
+      { "lat": 40.57430, "lng": -75.62797 },
+      { "lat": 40.57398, "lng": -75.62900 },
+      { "lat": 40.57437, "lng": -75.63054 },
+      { "lat": 40.57541, "lng": -75.63114 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 40.57735, "lng": -75.62760 },
+      { "lat": 40.57735, "lng": -75.62715 },
+      { "lat": 40.57708, "lng": -75.62712 },
+      { "lat": 40.57708, "lng": -75.62760 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 40.57610, "lng": -75.63090 },
+        { "lat": 40.57560, "lng": -75.63040 },
+        { "lat": 40.57455, "lng": -75.63040 },
+        { "lat": 40.57440, "lng": -75.63095 },
+        { "lat": 40.57520, "lng": -75.63125 }
+      ] },
+      { "ring": [
+        { "lat": 40.57470, "lng": -75.62780 },
+        { "lat": 40.57455, "lng": -75.62690 },
+        { "lat": 40.57400, "lng": -75.62700 },
+        { "lat": 40.57415, "lng": -75.62790 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 40.57500, "lng": -75.62760 },
+        { "lat": 40.57450, "lng": -75.62760 },
+        { "lat": 40.57448, "lng": -75.62730 },
+        { "lat": 40.57498, "lng": -75.62730 }
+      ] },
+      { "ring": [
+        { "lat": 40.57438, "lng": -75.62930 },
+        { "lat": 40.57438, "lng": -75.62845 },
+        { "lat": 40.57420, "lng": -75.62845 },
+        { "lat": 40.57420, "lng": -75.62930 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
+      "truckGate": { "heading": 0, "pano": "", "hasCoverage": false }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 220,
+    "trailerParkingCapacity": 300,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 32.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.57450,-75.62930,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "scale",
+    "multiStep",
+    "dockDoorCount"
+  ],
+  "fieldNotes": {
+    "siteResolution": "Given coords (40.5333,-75.6333) landed ~4.7km too far south in residential Breinigsville (verified by z16 probe = single-family homes + farmland, no industrial building). Web search confirmed the Nestle Waters North America / Deer Park / BlueTriton-Primo Brands bottling plant at 405 Nestle Way, Breinigsville PA 18031, coords ~40.573,-75.6313. Satellite at that point resolved the large bottling-plant campus in the Lehigh Valley industrial park off Rt 222/I-78. Main production building (process tanks/silos on the NW, dark+grey roof with a large red-roof warehouse section on the south) center-locked at ~40.5745,-75.6293.",
+    "multipleFacilities": "TRUE. This is a campus: the central production+warehouse bottling building (audited as the main plant), plus at least two very large adjacent distribution warehouses (one to the SW, one to the SE, each with their own deep trailer-row drop yards) and an office building on the NE, all part of the Nestle/Primo Breinigsville complex. buildingCount=4 counts the production complex + 2 DC warehouses + office.",
+    "truckGate": "Marked TRUE, medium confidence (flagged). The entire campus is enclosed by a continuous perimeter fence confirmed on every Street View frame along Nestle Way (south): ornamental black steel fence across the office/employee frontage and chain-link around the trailer yards, with no open public-road access to the docks. A controlled landscaped entrance plaza sits at the NE front (z18 p04-frontdrive). Trucks enter via private internal drives that Street View cars cannot access, so a specific barrier-arm/sliding-gate could not be imaged directly; however a fully fenced single-controlled-entry Fortune-brand beverage plant of this class is gated by definition. truckGate ring is placed at the estimated NE main-entry drive.",
+    "guardShack": "Marked TRUE, medium confidence (flagged). No booth-sized structure (1-3 vehicle footprint, multi-side windows) was positively imaged at a truck lane because the entrance drives are private and SV-inaccessible; a small canopy/structure is visible at the front entrance plaza. Given the perimeter fence + controlled single front entrance on a major beverage plant, staffed security is the overwhelming expectation. Visual confirmation of a discrete guard booth was NOT obtained from imagery - hence flagged.",
+    "remoteGs": "FALSE because guardShack is assessed TRUE (staffed). If guardShack were actually unstaffed kiosk-only this would flip; cannot confirm from imagery.",
+    "fencing": "Continuous perimeter fence confirmed on all imaged sides via Street View on Nestle Way (south): decorative black steel fence along the office/parking frontage (p04-sv-gate-ne, p04-sv-open1/2) and chain-link around the trailer yards (p04-sv-entrance1). High confidence the campus is fully secured.",
+    "dockDoors": "50+ band. The production+warehouse complex has dock banks on multiple faces: a long east-facing dock bank with trailers backed in (z18 p04-e-front), the south red-roof warehouse face, and west-facing docks. Exact count not separable from roof imagery; combined with the adjacent DC warehouses the campus far exceeds 50 doors. The main plant alone is comfortably in the 50+ band. dockDoorCount=60 is a conservative honest estimate for the main complex; flagged.",
+    "dropArea": "50+ band. Hundreds of trailers parked in dedicated drop rows ring the entire campus - west yard, south yard, east yard, plus the deep trailer-row lots at the two adjacent DC warehouses (z16/z17 p04-center, p04-ne, p04-se-entry). dropArea is clearly the top band.",
+    "dropYard": "TRUE. Multiple dedicated trailer-storage lots separate from active dock staging (diagonal/parallel trailer rows visible throughout, z20 p04-gatecheck shows packed drop rows along the west yard).",
+    "shipRcvSeparate": "TRUE (medium). Dock activity is split across physically distinct building faces (east dock bank vs south red-roof warehouse face vs the separate DC warehouses), implying separate shipping/receiving clusters; function not verifiable from imagery.",
+    "postGateStaging": "TRUE. Large internal paved yards and ring road between the production building and its drop rows provide ample inside-the-fence queue/staging space before docks.",
+    "drivewayLong": "TRUE. The internal approach from the front entrance through the ring road to the docks easily holds 3+ trucks; deep internal yards.",
+    "backupSensitive": "FALSE. The plant is set far back behind a wide grass buffer from Nestle Way with abundant internal stacking room; a gate queue would not spill onto a public road.",
+    "entryExitTogether": "TRUE (medium). A single controlled front-entry point is the apparent main truck access; separate dedicated exit gate not confirmed. entryLanes/exitLanes (2 in / 1 out) are estimates for a high-volume plant entrance and are flagged.",
+    "fastLaneOpportunity": "TRUE (low-medium, flagged). A high-throughput plant of this size with a wide entrance plaza and large internal yards has physical room for a bypass/express lane; inferred from scale, not a confirmed striped lane.",
+    "railServed": "TRUE. A rail spur runs into/alongside the property - clearly visible curving across the south/southwest of the production building (z18 p04-w-yard, z19/z20 p04-southdock show the rail bed and a retention pond). High confidence the campus is rail-served.",
+    "scale": "FALSE (flagged). No truck scale/weigh pad positively identified in available imagery; could exist on a private internal drive not imaged.",
+    "multiStep": "FALSE. No second post-gate checkpoint imaged; default false.",
+    "urbanRural": "Rural. The plant sits in an edge-of-town Lehigh Valley industrial park surrounded by farmland to the west/north and other large warehouses; broader setting is small-town/edge-of-metro industrial - per rubric tie-break, Rural.",
+    "connectivityIssue": "FALSE. Major industrial corridor adjacent to I-78/Rt 222 interchange with dense development - cellular coverage strong.",
+    "trailersVisible": "~220 across the imagery captured (drop rows around the production building + the two adjacent DC warehouse trailer yards). Mixed-vintage tiles; approximate.",
+    "trailerParkingCapacity": "~300+ across all drop rows and yard apron space campus-wide; conservative honest estimate.",
+    "siteAreaAcres": "~32 acres for the secured main-plant parcel (production building + its immediate fenced truck yard) derived from the perimeter polygon; the full campus including the two DC warehouses is substantially larger (well over 100 acres).",
+    "buildingCount": "4: the central production+warehouse bottling complex (counted as one connected structure), the SW DC warehouse, the SE DC warehouse, and the NE office building.",
+    "imageryQuality": "Recent Maxar/Airbus 2026 satellite, clear. Street View (2023-2025) covers Nestle Way and adjacent properties but NOT the private internal truck drives, which is the only reason gate/guard-shack/lane calls are medium-confidence rather than high."
+  },
+  "method": "deep-audit"
+}

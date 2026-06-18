@@ -1,0 +1,79 @@
+{
+  "name": "Crowley Cincinnati Office - Cincinnati OH",
+  "type": "Logistics office (downtown high-rise, no truck yard)",
+  "coords": {
+    "lat": 39.098385,
+    "lng": -84.516840
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        { "lat": 39.098620, "lng": -84.517160 },
+        { "lat": 39.098640, "lng": -84.516560 },
+        { "lat": 39.098120, "lng": -84.516520 },
+        { "lat": 39.098100, "lng": -84.517120 }
+      ]
+    },
+    "truckGate": null,
+    "dropYards": [],
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 0,
+        "pano": "15XaEu0NGs5tnNHK5h0gfw",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 0,
+    "trailerParkingCapacity": 0,
+    "truckGateCount": 0,
+    "buildingCount": 1,
+    "siteAreaAcres": 0.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.098385,-84.516840,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "dockDoors",
+    "dropArea",
+    "truckGate",
+    "siteAreaAcres"
+  ],
+  "fieldNotes": {
+    "siteIdentification": "The only Crowley presence in the Cincinnati area listed on crowley.com/locations is an OFFICE at 312 Plum Street, Suite 1430, Cincinnati OH 45202 (phone 513-407-5050). Geocoded ROOFTOP to a full-block downtown high-rise office building (Suite 1430 = 14th floor). Satellite z18-z20 and Street View confirm a multi-story downtown office tower with a central light well, flanked by other office towers and the I-71/Fort Washington Way freeway - NO truck yard, no docks, no drop area of any kind.",
+    "noYard": "This is a white-collar sales/logistics office, not an operational yard facility. There is nothing to audit for yard-management purposes: dockDoorCount=0, trailerParkingCapacity=0, no truck gate. A nearby 'Crowley's' at 8957 Cincinnati-Columbus Rd, West Chester OH is an UNRELATED commercial printer, not a Crowley Maritime/Logistics warehouse - so there is no Crowley truck yard in the Cincinnati metro to substitute.",
+    "yardSpotsMeaning": "N/A - no trailer parking or container slots exist at this office address.",
+    "siteAreaAcres": "~0.7 ac is the office building's downtown block footprint, not a yard - reported only for completeness.",
+    "recommendation": "Exclude from per-site yard pricing / yard-management TAM. Carry as an office node only. If Crowley runs an actual Cincinnati-area DC under a 3PL/partner address, it is not published on crowley.com and was not findable.",
+    "streetView": "perimeter pano 15XaEu0NGs5tnNHK5h0gfw on Plum Street (2025-05) shows the office tower facade."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,118 @@
+{
+  "name": "CA PL Hope Factory",
+  "type": "Bottling plant (PL)",
+  "coords": { "lat": 49.38515, "lng": -121.38215 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 49.38590, "lng": -121.38335 },
+      { "lat": 49.38595, "lng": -121.38240 },
+      { "lat": 49.38540, "lng": -121.38180 },
+      { "lat": 49.38462, "lng": -121.38170 },
+      { "lat": 49.38445, "lng": -121.38250 },
+      { "lat": 49.38452, "lng": -121.38375 },
+      { "lat": 49.38505, "lng": -121.38395 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 49.38470, "lng": -121.38360 },
+      { "lat": 49.38462, "lng": -121.38340 },
+      { "lat": 49.38450, "lng": -121.38350 },
+      { "lat": 49.38458, "lng": -121.38370 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 49.38588, "lng": -121.38330 },
+        { "lat": 49.38582, "lng": -121.38295 },
+        { "lat": 49.38565, "lng": -121.38302 },
+        { "lat": 49.38571, "lng": -121.38337 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 49.38578, "lng": -121.38278 },
+        { "lat": 49.38540, "lng": -121.38228 },
+        { "lat": 49.38531, "lng": -121.38240 },
+        { "lat": 49.38569, "lng": -121.38290 }
+      ] },
+      { "ring": [
+        { "lat": 49.38470, "lng": -121.38268 },
+        { "lat": 49.38458, "lng": -121.38248 },
+        { "lat": 49.38449, "lng": -121.38258 },
+        { "lat": 49.38461, "lng": -121.38278 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
+      "truckGate": { "heading": 0, "pano": "", "hasCoverage": false }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 16,
+    "trailersVisible": 18,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 5.24,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@49.38515,-121.38215,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": true,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "connectivityIssue",
+    "entryLanes",
+    "exitLanes"
+  ],
+  "fieldNotes": {
+    "siteResolution": "Given coords (49.3827,-121.4414) landed in downtown residential Hope, ~5km too far west. Address 66700 Othello Rd geocoded (Nominatim) to 49.38517,-121.38221, which satellite z17 confirmed as a large industrial building in a forest clearing east of Kawkawa Lake - consistent with web reporting that the Nestle Waters / BlueTriton (now Primo Brands) plant 'bottles water from the aquifer just east of Kawkawa Lake.' Locked center ~49.38515,-121.38215.",
+    "truckGate": "No barrier arm, sliding/swing gate, or pinch-point checkpoint visible where the single private access drive enters the paved yard (z20 p03-yard-entry). The drive opens directly into the parking/yard area. Marked false. MEDIUM-LOW confidence: a gate could sit lower on the ~300m winding private drive through forest, outside captured frames, and there is NO Street View coverage of the drive or yard to confirm (nearest pano is 49.38160,-121.38689 on the public road ~300m SW, dense forest only, captured 2023-06).",
+    "guardShack": "No booth-sized structure (1-3 vehicle footprint, multi-side windows) at the yard entry or along the drive in any satellite crop. False.",
+    "remoteGs": "False - no truck gate confirmed.",
+    "streetView": "No usable Street View anywhere near the plant or its access drive. Probed ~11 points; only OK pano was 49.3815957,-121.3868879 (Othello Rd, 2023-06) which shows only forest and a road marker - the plant and its gate are not visible. All zone streetViewMeta set hasCoverage:false.",
+    "dockDoors": "Loading docks run along the NW/north wall of the warehouse: ~8-12 trailers backed in perpendicular to the building wall (z19 p03-nw-trailers), implying a continuous dock-door bank. A smaller dock/load point sits at the S/SW corner near the round water tank (z20 p03-south). Total honest estimate ~16; banded 10-25.",
+    "dropArea": "A row of ~5-6 trailers/containers parked nose-out in a dedicated storage row at the NW corner of the yard, separate from the active dock line (z19 p03-nw-trailers, z18 p03-plant). Banded 10-25 (low side).",
+    "dropYard": "True - the NW trailer/container storage row is a distinct staging/storage area separate from the active dock apron.",
+    "shipRcvSeparate": "Cannot confirm split ship/receive from imagery; docks appear concentrated on the NW wall with a minor S-corner dock. Marked false; low confidence.",
+    "postGateStaging": "The large open paved apron on the NW/W side between the dock line, the trailer storage row, and the access drive acts as an internal queue/staging area inside the property.",
+    "drivewayLong": "Private access drive winds ~300m up through forest from the public road (Othello Rd) to the yard, plus a deep internal apron - easily holds 3+ trucks queued before docks.",
+    "entryExitTogether": "Single access drive serves both in and out; no separate exit lane observed.",
+    "trailersVisible": "~8-12 backed at the NW dock wall + ~5-6 in the NW storage row + 1 tractor-trailer parked along the SW access road = ~18. Approximate; mixed imagery vintages.",
+    "trailerParkingCapacity": "Tight forest-bounded yard; NW storage row + apron realistically hold ~25 trailers. Constrained site.",
+    "buildingCount": "One large connected industrial complex (two roof sections: lighter N warehouse + main S building under one footprint) plus a minor NE tank/utility structure up a separate dirt spur - counted as 1 main building.",
+    "siteAreaAcres": "~5.24 acres of cleared/paved operational footprint derived from the perimeter polygon; the broader spring/aquifer property is far larger but is forest, not yard.",
+    "railServed": "No rail spur enters the property; access is the single private road only. False.",
+    "connectivityIssue": "Plant sits in an isolated forested valley clearing east of Kawkawa Lake with no adjacent development -> likely weak cellular coverage. Inferred, medium confidence.",
+    "imageryQuality": "Maxar/Airbus 2026 base imagery, clear; building and yard read well at z18-z20. The forested approach drive obscures the lower entrance, and there is zero Street View, so gate determination rests on satellite alone.",
+    "fastLaneOpportunity": "Single-lane open drive into a tight yard; no wide gate apron or multi-lane room to add a bypass. False."
+  },
+  "method": "deep-audit"
+}

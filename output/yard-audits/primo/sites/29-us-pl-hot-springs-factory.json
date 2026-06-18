@@ -1,0 +1,121 @@
+{
+  "name": "US PL Hot Springs Factory",
+  "type": "Bottling plant (PL)",
+  "coords": { "lat": 34.63215, "lng": -93.0693 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 34.63340, "lng": -93.06870 },
+      { "lat": 34.63300, "lng": -93.06775 },
+      { "lat": 34.63250, "lng": -93.06755 },
+      { "lat": 34.63205, "lng": -93.06800 },
+      { "lat": 34.63150, "lng": -93.06960 },
+      { "lat": 34.63120, "lng": -93.07120 },
+      { "lat": 34.63098, "lng": -93.07215 },
+      { "lat": 34.63128, "lng": -93.07225 },
+      { "lat": 34.63170, "lng": -93.07090 },
+      { "lat": 34.63232, "lng": -93.07110 },
+      { "lat": 34.63268, "lng": -93.07000 },
+      { "lat": 34.63305, "lng": -93.06905 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 34.63312, "lng": -93.06762 },
+      { "lat": 34.63300, "lng": -93.06738 },
+      { "lat": 34.63282, "lng": -93.06748 },
+      { "lat": 34.63294, "lng": -93.06772 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 34.63170, "lng": -93.07088 },
+        { "lat": 34.63150, "lng": -93.07150 },
+        { "lat": 34.63108, "lng": -93.07215 },
+        { "lat": 34.63128, "lng": -93.07228 },
+        { "lat": 34.63172, "lng": -93.07165 },
+        { "lat": 34.63198, "lng": -93.07100 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 34.63232, "lng": -93.06985 },
+        { "lat": 34.63198, "lng": -93.06912 },
+        { "lat": 34.63186, "lng": -93.06920 },
+        { "lat": 34.63220, "lng": -93.06993 }
+      ] },
+      { "ring": [
+        { "lat": 34.63278, "lng": -93.06848 },
+        { "lat": 34.63262, "lng": -93.06808 },
+        { "lat": 34.63250, "lng": -93.06815 },
+        { "lat": 34.63266, "lng": -93.06855 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
+      "truckGate": { "heading": 0, "pano": "", "hasCoverage": false }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 38,
+    "trailerParkingCapacity": 50,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 17.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.63215,-93.0693,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": true,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoors",
+    "entryLanes",
+    "exitLanes",
+    "connectivityIssue",
+    "shipRcvSeparate"
+  ],
+  "fieldNotes": {
+    "siteResolution": "Given coords (34.6332,-93.0672) landed in woods east of the plant. Web search + satellite resolved the EXISTING Mountain Valley Spring Water / BlueTriton (Primo Brands) bottling plant at 283 Mountain Valley Water Pl, Hot Springs Village AR 71909. NOTE: this is the legacy plant, not the new ~200k sqft Primo factory that broke ground Oct 2025 on Glazypeau Rd (operational spring 2026); the new factory has no usable imagery yet, so the audit is of the active legacy plant.",
+    "truckGate": "No barrier arm, sliding gate, or guard booth visible at any property entrance. The single private access drive winds ~0.4km through forest from the NE/N to the yard with no checkpoint structure on the imagery. Marked false but low confidence: a gate could sit further up the private drive outside the captured frames. No Street View coverage anywhere within 400m to confirm.",
+    "guardShack": "No booth-sized structure (1-3 vehicle footprint, multi-side windows) at the yard entrance. False.",
+    "remoteGs": "False because no truck gate is confirmed.",
+    "dockDoors": "SW building SE/south face: a clear continuous bank of ~14-16 dock bays with flatbeds/box trailers backed in, numbered apron bays visible (z20 s02-z20-swsouth*.png). NE building has a smaller dock/load cluster (~6-8 doors) near the process-tank yard on its south face. Total honest estimate ~22; sits on the 10-25/25-50 band boundary -> banded 10-25 conservatively.",
+    "dropArea": "Dedicated trailer drop lot at the SW tip of the property: diagonal rows of parked trailers without tractors (~16-20 visible across two rows). Banded 10-25.",
+    "dropYard": "True - the SW lot is a distinct trailer-storage area separate from the active dock staging.",
+    "shipRcvSeparate": "Two distinct dock banks on two different buildings/faces (SW building south face + NE building south face) suggest split ship/receive, but cannot confirm function from imagery - medium confidence.",
+    "postGateStaging": "Large open paved apron between the two buildings and in front of the SW dock bank acts as an internal queue/staging area inside the property.",
+    "drivewayLong": "Long private approach drive (~0.4km) from the public road plus a deep internal yard -> easily holds 3+ trucks queued before docks.",
+    "trailersVisible": "~14 at SW docks + ~4 at NE docks/process area + ~18 in the SW drop yard + scattered ~2 = ~38. Mixed imagery vintages across tiles; count is approximate.",
+    "trailerParkingCapacity": "Drop-yard rows hold ~30-40; additional yard apron space pushes practical capacity to ~50.",
+    "siteAreaAcres": "~17.5 acres of cleared/paved footprint inside the treeline, derived from the perimeter polygon; the surrounding spring property is far larger but is forest, not yard.",
+    "railServed": "No rail spur visible entering the property; nearest infrastructure is the private road only. False.",
+    "connectivityIssue": "Site is deep in forested hills west of Hot Springs Village with no adjacent development -> likely weak cellular coverage. Inferred, medium confidence.",
+    "imageryQuality": "Two capture vintages overlap the site; the SW dock/yard tiles are a newer, lower-contrast set while the NE/entrance tiles are sharper Maxar. Dock counts read best from z18 west crop and z20 SW-south crops.",
+    "buildingCount": "Two primary connected industrial buildings (NE bottling/warehouse + SW warehouse/load building) plus minor process/utility structures counted as one complex -> 2."
+  },
+  "method": "deep-audit"
+}

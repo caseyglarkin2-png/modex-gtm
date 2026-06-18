@@ -1,0 +1,118 @@
+{
+  "name": "US PL Pasadena Factory",
+  "type": "Bottling plant (PL)",
+  "coords": { "lat": 29.71020, "lng": -95.17450 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 29.71265, "lng": -95.17575 },
+      { "lat": 29.71250, "lng": -95.17340 },
+      { "lat": 29.71160, "lng": -95.17330 },
+      { "lat": 29.71150, "lng": -95.17225 },
+      { "lat": 29.70870, "lng": -95.17235 },
+      { "lat": 29.70865, "lng": -95.17560 },
+      { "lat": 29.71010, "lng": -95.17600 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 29.71235, "lng": -95.17600 },
+      { "lat": 29.71235, "lng": -95.17540 },
+      { "lat": 29.71185, "lng": -95.17545 },
+      { "lat": 29.71185, "lng": -95.17600 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 29.70930, "lng": -95.17545 },
+        { "lat": 29.70925, "lng": -95.17350 },
+        { "lat": 29.70895, "lng": -95.17350 },
+        { "lat": 29.70900, "lng": -95.17545 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 29.71160, "lng": -95.17560 },
+        { "lat": 29.71155, "lng": -95.17540 },
+        { "lat": 29.70950, "lng": -95.17545 },
+        { "lat": 29.70955, "lng": -95.17565 }
+      ] },
+      { "ring": [
+        { "lat": 29.70905, "lng": -95.17540 },
+        { "lat": 29.70900, "lng": -95.17345 },
+        { "lat": 29.70885, "lng": -95.17345 },
+        { "lat": 29.70890, "lng": -95.17540 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
+      "truckGate": { "heading": 172, "pano": "qMZutJBia99-4g-P234Cqw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 12,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 33.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.71020,-95.17450,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "dockDoorCount",
+    "dropArea",
+    "trailerParkingCapacity",
+    "shipRcvSeparate",
+    "entryLanes",
+    "exitLanes"
+  ],
+  "fieldNotes": {
+    "siteResolution": "Given coords (29.5605,-95.1167) were ~17 km off, landing on apartment/retail blocks. ROOFTOP geocode of '2818 Pasadena Fwy, Pasadena TX 77506' returns 29.7106063,-95.1750066, which lands on a large modern white-roof distribution building fronting TX-225 (Pasadena Fwy). Address confirmed as the BlueTriton/Primo (Ozarka/Pure Life) Pasadena bottling-distribution site; the ~403,000 SF building is now operated/tenanted by Keller Logistics (3PL) per LoopNet/Keller location pages. Center locked at 29.71020,-95.17450 (center of the building footprint).",
+    "truckGate": "FALSE - high confidence. Two open sweeping driveways connect the property to the TX-225 frontage road (one at the NW serving the truck/dock side, one at the NE serving the office/car entrance). Street View (Feb 2025 + Apr 2026 panos) along the frontage road shows NO barrier arm, NO sliding/swing gate, and NO perimeter fence across either entrance - the frontage is open grass/landscaping straight to the building. Open spec-DC entry.",
+    "guardShack": "FALSE - high confidence. No booth-sized structure (1-3 vehicle footprint, multi-side windows) at either driveway in satellite or in the two frontage-road Street View frames. Only a monument sign near the NW entrance.",
+    "remoteGs": "FALSE - there is no truck gate, so remote-gatehouse/kiosk does not apply.",
+    "truckGateCount": "Counted as 2 open vehicular entrances off the frontage road (NW truck/dock entry + NE office/main entry), neither controlled.",
+    "dockDoors": "Banded 25-50. Main dock bank runs the full WEST wall (~270 m, regular leveler/bay rhythm with several trailers backed in, z19/z20 west-apron crops); a second dock bank runs the SOUTH face with trailer-parking striping on its apron. North face has a smaller dock cluster near the office. Honest total estimate ~45 across faces; sits near the 25-50 / 50+ boundary - banded 25-50 conservatively given roof glare softens the count.",
+    "dropArea": "Banded 10-25. Striped trailer-parking stalls visible on the south apron and the NE apron; only ~12 trailers actually parked in the captured imagery, but marked capacity reads ~15-25. Drop area present but lightly occupied at capture time.",
+    "dropYard": "TRUE - the south apron functions as a dedicated striped trailer-storage/drop lot distinct from the active west dock staging.",
+    "shipRcvSeparate": "TRUE (medium confidence) - docks sit on two physically separate building faces (long west bank + south bank), consistent with split ship/receive in a cross-dock layout; function cannot be confirmed from imagery.",
+    "postGateStaging": "TRUE - the wide west apron and the NE apron between the entrance and the dock faces act as internal queue/staging space inside the property.",
+    "drivewayLong": "TRUE - the perimeter truck drive wraps the west and south faces with a deep apron easily holding 3+ trucks queued before the docks.",
+    "entryExitSeparate": "TRUE (medium confidence) - two distinct driveways at different points of the north property line (NW truck entry, NE office entry) read as separate in/out points; could also be used as a loop.",
+    "fastLaneOpportunity": "TRUE - very wide unused paved apron width on the west and north sides plus two open ungated entrances leave ample room to stripe an express/bypass check-in lane.",
+    "entryLanes": "Estimated 1 controlled inbound lane equivalent per driveway (uncontrolled open drives); low confidence.",
+    "exitLanes": "Estimated 1; low confidence.",
+    "urbanRural": "Urban - dense Houston-metro fabric: residential street grid on the west/south, the TX-225 petrochemical tank-farm/refinery corridor immediately north. Strong cellular - connectivityIssue FALSE.",
+    "scale": "No truck scale / weigh pad visible in the truck path. FALSE.",
+    "multipleFacilities": "Single large building on the parcel - not a campus. FALSE.",
+    "railServed": "No rail spur enters the property; nearest rail is the industrial corridor across TX-225, not connected. FALSE.",
+    "siteAreaAcres": "~33 acres inside the property line derived from the perimeter polygon (building ~12-13 acres footprint + aprons + east vacant-grass buffer still inside the parcel line).",
+    "trailersVisible": "~12 trailers across the west dock face and south/NE aprons in the captured tiles; light occupancy.",
+    "streetView": "Street View coverage exists ONLY on the TX-225 frontage road (north). truckGate uses frontage pano qMZutJBia99-4g-P234Cqw (Apr 2026) facing ~172 deg into the NW entrance. Interior/west/south aprons and perimeter centroid return ZERO_RESULTS - perimeter streetViewMeta set hasCoverage:false.",
+    "imageryQuality": "Maxar/Airbus 2026 imagery is sharp on the aprons but the large white roof glares at z20, softening exact dock-door counts; banded conservatively."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,112 @@
+{
+  "name": "US PL Denver Factory",
+  "type": "Bottling plant (PL)",
+  "coords": { "lat": 39.7806, "lng": -104.8527 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 39.78196, "lng": -104.85406 },
+      { "lat": 39.78196, "lng": -104.85150 },
+      { "lat": 39.77924, "lng": -104.85150 },
+      { "lat": 39.77924, "lng": -104.85406 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 39.78018, "lng": -104.85168 },
+      { "lat": 39.78018, "lng": -104.85148 },
+      { "lat": 39.77988, "lng": -104.85148 },
+      { "lat": 39.77988, "lng": -104.85168 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 39.78140, "lng": -104.85178 },
+        { "lat": 39.78140, "lng": -104.85156 },
+        { "lat": 39.77948, "lng": -104.85156 },
+        { "lat": 39.77948, "lng": -104.85178 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 39.78185, "lng": -104.85214 },
+        { "lat": 39.78185, "lng": -104.85196 },
+        { "lat": 39.77935, "lng": -104.85196 },
+        { "lat": 39.77935, "lng": -104.85214 }
+      ] },
+      { "ring": [
+        { "lat": 39.78185, "lng": -104.85376 },
+        { "lat": 39.78185, "lng": -104.85358 },
+        { "lat": 39.77935, "lng": -104.85358 },
+        { "lat": 39.77935, "lng": -104.85376 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 39.78185, "lng": -104.85196 },
+      { "lat": 39.78185, "lng": -104.85156 },
+      { "lat": 39.78140, "lng": -104.85156 },
+      { "lat": 39.78140, "lng": -104.85196 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 88, "pano": "UKoHQtSlUWYaUdSnULQ51A", "hasCoverage": true },
+      "truckGate": { "heading": 234, "pano": "6cy9dYPQ7WEFpFhCid326g", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 34,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 15.9,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.7806,-104.8527,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "25-50",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "truckGate",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate"
+  ],
+  "fieldNotes": {
+    "siteIdentity": "Address 11700 E 47th Ave resolves (ROOFTOP geocode) to a large multi-tenant cross-dock distribution warehouse in Gateway Park, Denver, not a standalone bottling plant. Primo Brands / ReadyRefresh operates here as a distribution/delivery branch (Yelp + Nextdoor confirm ReadyRefresh at this address). Street View shows trailers from Target, UPS, Mesilla Valley, Roadrunner and Pinnacle Express in the shared yard, confirming multi-tenant use. White Primo/ReadyRefresh delivery vans seen on the east side. Audited the eastern building (the one the rooftop geocode lands on) and its east+west truck yards.",
+    "type": "Labeled PL (bottling plant) in the roster, but physically a DC/delivery branch. dockDoorCount, dropArea and yard metrics describe the audited building, which is shared with other tenants, so per-Primo figures are a subset.",
+    "truckGate": "Chain-link perimeter fence encloses the east truck yard with vehicle-gate openings (Street View, east face). No barrier arm clearly visible; Google StreetView car drove freely into the central shared drive, so gate control appears light/open. Called true on fenced-yard-with-gates basis.",
+    "guardShack": "No guard booth visible at any yard entrance in satellite or Street View.",
+    "remoteGs": "Gated/fenced yard with no guard booth implies remote/self check-in (kiosk/app), set true.",
+    "dockDoorCount": "60 is a conservative estimate for the full audited building: continuous dock banks run nearly the full ~300 m length on BOTH the east and west long faces (cross-dock). Many bays empty in the imagery. Could plausibly be 50-80. Per-Primo share is a fraction.",
+    "dropArea": "East drive carries marked stalls painted DROP TRAILERS / ONLY TRAILER with parked trailers; STAGING AREA cells also painted. Banded 25-50.",
+    "trailerParkingCapacity": "~40 across the east drop strip + west drive shoulder; estimate from overhead.",
+    "shipRcvSeparate": "Docks on two physically separate building faces (east and west), so shipping/receiving can run from distinct dock banks.",
+    "entryExitSeparate": "Separate east-side drive and west-side (shared) drive give independent in/out paths; lane counts ~1 each, low confidence.",
+    "fastLaneOpportunity": "Very wide central shared drive and east drop apron provide ample paved width to add an express/bypass lane.",
+    "rail": "No rail spur enters the property.",
+    "urbanRural": "Dense Gateway Park industrial fabric inside metro Denver = Urban; cellular coverage strong, connectivityIssue false.",
+    "geometry": "Building is near axis-aligned (very slight rotation off north); rings traced as tight quads to the fence/wall/apron lines. siteAreaAcres ~15.9 from the eastern-building parcel incl. its east and west truck drives."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,118 @@
+{
+  "name": "US PL Zephyrhills Factory",
+  "type": "Bottling plant (PL)",
+  "coords": { "lat": 28.22150, "lng": -82.16880 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 28.22405, "lng": -82.17120 },
+      { "lat": 28.22410, "lng": -82.16640 },
+      { "lat": 28.22230, "lng": -82.16615 },
+      { "lat": 28.22035, "lng": -82.16640 },
+      { "lat": 28.21870, "lng": -82.16720 },
+      { "lat": 28.21865, "lng": -82.16870 },
+      { "lat": 28.21945, "lng": -82.17040 },
+      { "lat": 28.22035, "lng": -82.17120 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 28.22055, "lng": -82.17135 },
+      { "lat": 28.22055, "lng": -82.17098 },
+      { "lat": 28.22030, "lng": -82.17098 },
+      { "lat": 28.22030, "lng": -82.17135 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 28.22300, "lng": -82.16790 },
+        { "lat": 28.22300, "lng": -82.16640 },
+        { "lat": 28.22075, "lng": -82.16650 },
+        { "lat": 28.22075, "lng": -82.16800 }
+      ] },
+      { "ring": [
+        { "lat": 28.21985, "lng": -82.16910 },
+        { "lat": 28.21985, "lng": -82.16760 },
+        { "lat": 28.21885, "lng": -82.16770 },
+        { "lat": 28.21885, "lng": -82.16915 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 28.22360, "lng": -82.16810 },
+        { "lat": 28.22360, "lng": -82.16795 },
+        { "lat": 28.22075, "lng": -82.16805 },
+        { "lat": 28.22075, "lng": -82.16820 }
+      ] },
+      { "ring": [
+        { "lat": 28.22065, "lng": -82.16940 },
+        { "lat": 28.22065, "lng": -82.16800 },
+        { "lat": 28.22050, "lng": -82.16800 },
+        { "lat": 28.22050, "lng": -82.16940 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 90, "pano": "-jy1-brldgtcEum_1BPBAQ", "hasCoverage": true },
+      "truckGate": { "heading": 82, "pano": "6r_ZKBZhREH3Pr_x9xbLOQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 58,
+    "trailersVisible": 130,
+    "trailerParkingCapacity": 180,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 68.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@28.22150,-82.16880,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "dockDoorCount",
+    "remoteGs",
+    "shipRcvSeparate"
+  ],
+  "fieldNotes": {
+    "siteResolution": "Given coords (28.2461,-82.1811) landed in a residential grid ~2.7km NNW of the plant. Web search (lakerlutznews, tampabay) placed the Nestle/BlueTriton/Primo plant 'off 20th Street and Alston Avenue'. Google geocode of 4330 20th St, Zephyrhills FL 33542 returned 28.2220,-82.1693 which sits on the large white-roof industrial building. Locked center at 28.2215,-82.1688. This is the active Zephyrhills Natural Spring Water bottling factory (~250 employees).",
+    "truckGate": "Street View on the west access drive (pano 6r_ZKBZhREH3Pr_x9xbLOQ, captured 2025-05, heading ~82E) clearly shows a black sliding/ornamental metal gate across the entrance driveway with a card-reader/kiosk pedestal post on the right side of the lane. The entire property is wrapped in continuous black metal perimeter fencing (confirmed in multiple SV frames along 20th St). TRUE - controlled gated entry.",
+    "guardShack": "No staffed booth-sized structure (1-3 vehicle footprint, multi-side windows) visible at the gate in Street View; access is by a sliding gate plus a card-reader/call-box pedestal beside the lane. FALSE.",
+    "remoteGs": "TRUE - there is a truck gate but no staffed guard shack; entry is by kiosk/card-reader/app at the pedestal. Medium confidence on the read of the pedestal as a remote check-in device.",
+    "entryExitTogether": "Single gated driveway on the west (20th St) serves both the employee/car lot (north) and the truck loop that wraps around the building's south side to reach the east dock bank and the drop yards. Same entrance point in and out -> entryExitTogether TRUE, single in/out lane pair.",
+    "drivewayLong": "From the gate the drive runs a long internal loop (~0.3km) around the south of the building to the east yard; easily holds 3+ trucks before docks. Large open paved apron east of the docks also acts as internal staging -> postGateStaging TRUE.",
+    "dockDoors": "Massive continuous dock bank on the building's EAST face running nearly the full building length (z19 east-docks crop shows ~30+ bays with trailers backed in across the visible portion, continuing north and south of frame). A second dock bank sits on a south/SW building face (z18 truck-route crop, trailers backed in). Honest total estimate ~55-60 doors across both faces -> banded 50+. Flagged uncertain: the east bank extends beyond single frames.",
+    "shipRcvSeparate": "Two physically distinct dock clusters on different building faces (long east face + a south/SW face bank) suggest split ship/receive flows. TRUE, medium confidence (function not confirmable from imagery).",
+    "dropArea": "Enormous trailer drop yard fills the entire east of the property: many parallel rows of trailers parked without tractors (z19 SE-docks crop shows 100+ trailers in rows), plus a second drop block on the south side. Banded 50+.",
+    "dropYard": "TRUE - dedicated multi-row trailer-storage lots east and south of the building, distinct from active dock staging.",
+    "trailersVisible": "Counted across z18/z19 crops: ~30+ at east docks, ~100+ in the east drop rows, ~15-20 in the south drop block. Conservative total ~130. Approximate from overhead imagery.",
+    "trailerParkingCapacity": "The striped drop-yard rows (east + south) plus dock positions could hold ~180 trailers at full pack.",
+    "siteAreaAcres": "~68 acres of fenced, paved/built footprint derived from the perimeter polygon (large building ~600m N-S building+yard span, ~500m E-W). Construction/expansion grading visible at the north end indicates active growth.",
+    "buildingCount": "One very large contiguous industrial building (bottling + warehouse) under a single white roof, with a smaller attached section on the SW. Counted as 1 complex.",
+    "railServed": "A rail corridor runs NW-SE west of 20th St through the residential area but does NOT enter the property; no spur into the yard. FALSE.",
+    "urbanRural": "Inside the City of Zephyrhills, immediately bordered by residential subdivisions (west) and a city park/ball fields (north) - dense town fabric -> Urban.",
+    "backupSensitive": "Gate sits well back from 20th St behind a deep curved driveway apron with ample stacking room; a queue would not spill onto the public road. FALSE.",
+    "scale": "No truck scale / weigh pad visible in the truck path. FALSE.",
+    "imageryQuality": "Mixed Maxar/Airbus vintages; the north end shows active construction (graded pads). Dock and trailer counts read from z18-z19 crops; large-facility counts are honest estimates, banded conservatively."
+  },
+  "method": "deep-audit"
+}

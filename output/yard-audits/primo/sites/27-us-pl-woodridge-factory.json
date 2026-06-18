@@ -1,0 +1,131 @@
+{
+  "name": "US PL Woodridge Factory",
+  "type": "Bottling plant (PL)",
+  "coords": { "lat": 41.69905, "lng": -88.00875 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 41.69985, "lng": -88.00960 },
+      { "lat": 41.69995, "lng": -88.00870 },
+      { "lat": 41.69985, "lng": -88.00775 },
+      { "lat": 41.69905, "lng": -88.00765 },
+      { "lat": 41.69815, "lng": -88.00785 },
+      { "lat": 41.69810, "lng": -88.00905 },
+      { "lat": 41.69845, "lng": -88.00985 },
+      { "lat": 41.69920, "lng": -88.00990 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 41.69985, "lng": -88.00925 },
+      { "lat": 41.69985, "lng": -88.00890 },
+      { "lat": 41.69968, "lng": -88.00890 },
+      { "lat": 41.69968, "lng": -88.00925 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 41.69978, "lng": -88.00880 },
+        { "lat": 41.69978, "lng": -88.00800 },
+        { "lat": 41.69958, "lng": -88.00800 },
+        { "lat": 41.69958, "lng": -88.00880 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 41.69968, "lng": -88.00845 },
+        { "lat": 41.69968, "lng": -88.00795 },
+        { "lat": 41.69958, "lng": -88.00795 },
+        { "lat": 41.69958, "lng": -88.00845 }
+      ] },
+      { "ring": [
+        { "lat": 41.69945, "lng": -88.00865 },
+        { "lat": 41.69870, "lng": -88.00870 },
+        { "lat": 41.69870, "lng": -88.00858 },
+        { "lat": 41.69945, "lng": -88.00853 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 41.69955, "lng": -88.00895 },
+      { "lat": 41.69955, "lng": -88.00850 },
+      { "lat": 41.69850, "lng": -88.00858 },
+      { "lat": 41.69850, "lng": -88.00903 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 156, "pano": "U7svCUDmLgNy3Uy25kiR3w", "hasCoverage": true },
+      "truckGate": { "heading": 149, "pano": "U7svCUDmLgNy3Uy25kiR3w", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18,
+    "trailersVisible": 12,
+    "trailerParkingCapacity": 25,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 8.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.69905,-88.00875,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoors",
+    "dropArea",
+    "trailersVisible",
+    "shipRcvSeparate",
+    "buildingCount",
+    "siteAreaAcres"
+  ],
+  "fieldNotes": {
+    "operationalStatus": "OPERATIONAL, but NOT a bottling plant. This blank-flag BlueTriton/Primo site is the company's WOODRIDGE READYREFRESH DELIVERY BRANCH at 10335 Argonne Woods Dr, Woodridge IL 60517 (Ice Mountain Direct / ReadyRefresh home-and-office water delivery). Confirmed active by 2025 BlueTriton job postings for this location: Route Delivery Drivers (CDL + non-CDL, commission), Heavy Equipment Mechanic, Order Manager, Back-of-House Shift Manager, and Branch Operations Manager, all geo-tagged Woodridge IL. Ice Mountain spring water is actually BOTTLED in Stanwood MI, not here; Woodridge is a regional distribution/route-delivery branch occupying a suite in a multi-tenant industrial park. The 'Bottling plant (PL)' type on the source list is a mislabel for this site. No closure/demolition found; satellite shows an active operation (box-truck/cube-van delivery fleet staged, trailers backed to docks, forklift activity in the court).",
+    "siteResolution": "Given coords were unknown. Geocoded 10335 Argonne Woods Dr -> 41.6988,-88.0086, inside the Internationale Centre business park. Satellite resolved two large aligned multi-tenant warehouse/flex buildings (west tan-roof, east dark-roof) sharing a central truck court. Address pages (BBB, ReadyRefresh, Bandana) place BlueTriton at 10335 Argonne Woods Dr Suite 200; the adjacent 10330 building (Street View 2018) is a separate tenant ('Mid...Office...Inter...' Suite 600), confirming the multi-tenant nature. Audited the operational complex (both buildings + shared court) since the exact suite footprint within the building cannot be isolated from overhead and the freight footprint is shared.",
+    "truckGate": "FALSE. No barrier arm, sliding/swing gate, or guard booth anywhere where the property meets Argonne Woods Dr. Open business-park driveways at the NW and SW; trucks enter the shared court directly off the public road. Low confidence only in that the relevant tenant could badge a man-door, but no vehicular gate exists on imagery.",
+    "guardShack": "FALSE. No booth-sized (1-3 vehicle footprint, multi-window) structure at any entrance. This is an open multi-tenant park.",
+    "remoteGs": "FALSE - no truck gate exists, so by rubric remoteGs is false.",
+    "dockDoors": "East (dark-roof) building: dock bank along the NORTH face (z20 north-docks tile shows ~4-6 cube vans/box trucks and 2-3 semi-trailers backed in) plus a dock line along the WEST face fronting the court. West (tan-roof) building: docks on its EAST face fronting the court. Honest total across the shared court ~16-20 -> banded 10-25. Multi-tenant so not all serve the BlueTriton branch.",
+    "dropArea": "Trailers and delivery box trucks parked in the shared court without tractors (~10-15 across the north court and west-building east apron). Banded 10-25. Mix of OTR trailers and ReadyRefresh delivery fleet.",
+    "dropYard": "TRUE - the central paved court between the two buildings functions as a trailer/fleet drop and staging lot distinct from the active dock faces.",
+    "shipRcvSeparate": "FALSE/uncertain - docks are distributed across multiple faces of both buildings but this is a function of multi-tenancy, not a deliberate split ship/receive layout for one operator; cannot confirm function from imagery.",
+    "postGateStaging": "TRUE - the large open paved court inside the complex (no gate, but a clear internal holding/queue apron) lets trucks stage before backing to docks.",
+    "preGateStaging": "FALSE - no gate, and no dedicated wait apron between the public road and the complex.",
+    "drivewayLong": "TRUE - the entry off Argonne Woods Dr plus the deep internal court easily holds a 3+ truck queue before docks.",
+    "backupSensitive": "FALSE - ample paved court and parking to absorb a queue; no spillover risk onto the public road.",
+    "entryExitTogether": "TRUE - trucks use the same NW driveway group to enter and leave the shared court; no separate dedicated out-gate.",
+    "entryLanes": "Single shared driveway lane in / out -> entryLanes 1, exitLanes 1 (estimate; uncontrolled open drive).",
+    "fastLaneOpportunity": "FALSE - no gate to bypass; open access already.",
+    "multipleFacilities": "TRUE - the property is a two-building multi-tenant complex (campus); BlueTriton is one tenant of several.",
+    "buildingCount": "2 primary large buildings (west tan-roof, east dark-roof) plus a small fenced equipment/utility area at the NW court; counted as 2.",
+    "trailersVisible": "~4-6 box trucks/cube vans + ~2-3 OTR semis at the north court + scattered trailers along the west-building east apron = ~12 honest estimate; mixed-vintage imagery, approximate.",
+    "trailerParkingCapacity": "Shared court + west apron could hold ~25 trailers/box trucks across tenants.",
+    "siteAreaAcres": "~8.5 acres for the enclosed operational core (two buildings + central court + immediate parking, inside the treeline buffer). The wider park is larger but the rest is other parcels/landscaping.",
+    "railServed": "FALSE - no rail spur enters the property; the BNSF/Metra line is well to the north, not connected.",
+    "urbanRural": "Urban - dense suburban DuPage County (Woodridge / Downers Grove, Chicago metro), surrounded by business parks, apartments, and residential subdivisions.",
+    "connectivityIssue": "FALSE - dense Chicago-metro suburb, strong cellular coverage.",
+    "streetView": "No Street View inside the private truck court (ZERO_RESULTS at the court centroid). Public coverage exists on Argonne Woods Dr at the NW entrance (pano U7svCUDmLgNy3Uy25kiR3w, captured 2025-05) and on the SW road (2018); both used for the perimeter/gate frames pointed toward the complex.",
+    "scale": "FALSE - no truck scale/weigh pad in the truck path.",
+    "imageryQuality": "Maxar/Airbus 2026-vintage satellite, clear; z18-z20 crops legible. The white round objects at the east building's SW/west face read as small tanks or spools and are not load-bearing for the classification."
+  },
+  "method": "deep-audit"
+}

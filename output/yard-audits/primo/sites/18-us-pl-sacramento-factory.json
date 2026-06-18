@@ -1,0 +1,110 @@
+{
+  "name": "US PL Sacramento Factory",
+  "type": "Bottling plant (PL)",
+  "coords": { "lat": 38.51615, "lng": -121.38055 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 38.51775, "lng": -121.38170 },
+      { "lat": 38.51710, "lng": -121.37905 },
+      { "lat": 38.51455, "lng": -121.37965 },
+      { "lat": 38.51490, "lng": -121.38110 },
+      { "lat": 38.51545, "lng": -121.38235 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 38.51672, "lng": -121.37962 },
+      { "lat": 38.51668, "lng": -121.37938 },
+      { "lat": 38.51655, "lng": -121.37944 },
+      { "lat": 38.51659, "lng": -121.37968 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 38.51735, "lng": -121.38095 },
+        { "lat": 38.51700, "lng": -121.37975 },
+        { "lat": 38.51672, "lng": -121.37990 },
+        { "lat": 38.51707, "lng": -121.38110 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 38.51592, "lng": -121.38205 },
+        { "lat": 38.51512, "lng": -121.38110 },
+        { "lat": 38.51495, "lng": -121.38132 },
+        { "lat": 38.51575, "lng": -121.38227 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 255, "pano": "qn9AUmi2157-fqRKne6Mlw", "hasCoverage": true },
+      "truckGate": { "heading": 270, "pano": "jvqRTVLuhkw3sOT7GfJGpw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30,
+    "trailersVisible": 22,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 17.1,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.51615,-121.38055,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "shipRcvSeparate",
+    "exitLanes"
+  ],
+  "fieldNotes": {
+    "siteResolution": "Resolved to the BlueTriton / Nestle Waters North America (now Primo Brands) Sacramento bottling plant at 8670 Younger Creek Dr, Sacramento CA 95828 (APN 062-0140-013, Lots 21-22 Florin Depot Industrial Park, ~29 acres parcel). Confirmed by Yelp/OpenGovUS/D&B business registrations for Nestle Waters USA at that address and a 2009 Sacramento Press report (Nestle retrofit, ~214,000 sqft building, $14M, two production lines, 40 jobs, Pure Life + Arrowhead bottling). The supplied city-level coords (38.5158,-121.3809) geocode to this exact address - they were correct, not off. IGNORED the San Bernardino spring-extraction site per brief; this is the production/bottling plant. Locked coords to the building center 38.51615,-121.38055.",
+    "buildingCount": "One large single-mass rectangular bottling/warehouse building (long axis ~N40W, rotated ~30deg from north) on a fenced lot, yard wrapping the NW/SW/SE sides. Counted as 1.",
+    "truckGate": "TRUE. z21 satellite (p18-gate-z21) shows a cantilever SLIDING GATE spanning the entrance drive on the NE/E side at ~38.51665,-121.37945, set behind a curved apron off the access road, with a gate-motor box on the north post. Street View 2025-03 (pano jvqRTVLuhkw3sOT7GfJGpw, heading 270) confirms continuous chain-link perimeter fencing and a sliding gate across the controlled truck/vehicle entrance, dock doors with blue dock equipment and trailers behind the fence.",
+    "guardShack": "FALSE. No staffed booth (1-3 vehicle footprint, multi-side windows) beside the gate in satellite or Street View. The entrance is an unmanned sliding gate.",
+    "remoteGs": "TRUE. There is a controlled truck gate but no guard shack -> implies kiosk / call-box / badge / app check-in (remote gate).",
+    "entryExitTogether": "TRUE. Single controlled gate point on the NE side handles both directions; pavement near the gate carries an 'OUT' marking but it is the same gate group (p18-docks-mid-z20).",
+    "entryLanes": "One inbound lane at the sliding gate. exitLanes assumed 1 (same gate, OUT marking) - low confidence on lane split.",
+    "drivewayLong": "TRUE. Wide wrapping internal yard drive from the gate to the SW dock bank easily stacks 3+ trucks; deep paved approach.",
+    "postGateStaging": "TRUE. Large open paved yard inside the fence between the gate and the dock face serves as an internal staging/queue area.",
+    "preGateStaging": "FALSE. No dedicated paved waiting apron outside the gate on the public road.",
+    "dockDoors": "Band 25-50. Continuous dock bank along the SW building face with trailers backed in (p18-docks-sw-z20 shows ~12-15 trailers in one segment; p18-sw-corner-z20 and z17 show the bank continuing). A smaller dock/load cluster sits on the NE face. Honest total ~30; banded 25-50. Flagged uncertain - exact count not resolvable from overhead.",
+    "shipRcvSeparate": "TRUE (medium confidence). A primary dock bank on the SW face plus a secondary dock/load cluster on the NE face = two distinct dock banks on different building faces, consistent with split ship/receive. Function not confirmable from imagery.",
+    "dropArea": "Band 10-25. Trailers parked without tractors staged in the NE/N yard drop area and along the dock apron (~12-18 visible). Banded 10-25.",
+    "dropYard": "TRUE. The wrapping NE/N yard holds dropped trailers separate from the active SW dock staging.",
+    "trailersVisible": "~12-15 backed at the SW docks + ~6-8 staged/dropped in the wrapping yard = ~22. Approximate from mixed-vintage tiles.",
+    "trailerParkingCapacity": "Wrapping perimeter yard + dock apron could practically hold ~40 trailers.",
+    "siteAreaAcres": "~17.1 acres of fenced/paved operational footprint derived from the perimeter polygon. The platted parcel (Lots 21-22) is ~29 acres but includes adjoining undeveloped/peripheral land; the active fenced yard is ~17 acres.",
+    "urbanRural": "Urban. Dense Florin/Power Inn / Florin-Fruitridge industrial fabric inside the Sacramento metro, surrounded on all sides by warehouses and arterials.",
+    "connectivityIssue": "FALSE. Dense metro industrial park - strong cellular coverage expected.",
+    "backupSensitive": "FALSE. The gate sits off an internal industrial street (Younger Creek Dr) with a deep internal yard; a queue would not spill onto a public arterial or block an intersection.",
+    "fastLaneOpportunity": "FALSE. Single gate lane on a normal-width drive; no obvious unused paved width or 3+ lane apron for an express bypass.",
+    "scale": "FALSE. No truck scale / weigh pad visible in the truck path.",
+    "multiStep": "FALSE. Single gate checkpoint; no second booth/scale stage before the docks.",
+    "railServed": "FALSE. Rail corridors run alongside the district to the NW and E but no spur enters this property.",
+    "streetViewMeta": "Gate pano jvqRTVLuhkw3sOT7GfJGpw (38.51666,-121.37936, 2025-03) faces the sliding-gate entrance at heading 270. Perimeter pano qn9AUmi2157-fqRKne6Mlw (38.51644,-121.37915, 2025-03) on the NE road faces the building/yard at heading 255."
+  },
+  "method": "deep-audit"
+}

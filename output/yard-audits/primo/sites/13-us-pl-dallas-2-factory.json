@@ -1,0 +1,101 @@
+{
+  "name": "US PL Dallas 2 Factory",
+  "type": "Bottling plant (PL)",
+  "coords": { "lat": 32.68550, "lng": -96.96150 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 32.68730, "lng": -96.96250 },
+      { "lat": 32.68720, "lng": -96.96080 },
+      { "lat": 32.68640, "lng": -96.95900 },
+      { "lat": 32.68420, "lng": -96.95900 },
+      { "lat": 32.68380, "lng": -96.96150 },
+      { "lat": 32.68390, "lng": -96.96270 },
+      { "lat": 32.68600, "lng": -96.96280 }
+    ] },
+    "truckGate": null,
+    "dropYards": [
+      { "ring": [
+        { "lat": 32.68630, "lng": -96.96060 },
+        { "lat": 32.68620, "lng": -96.95910 },
+        { "lat": 32.68410, "lng": -96.95930 },
+        { "lat": 32.68420, "lng": -96.96080 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 32.68660, "lng": -96.96095 },
+        { "lat": 32.68420, "lng": -96.96120 },
+        { "lat": 32.68420, "lng": -96.96080 },
+        { "lat": 32.68660, "lng": -96.96055 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 90, "pano": "3MsqlSE1qXQMBYP8brGOEA", "hasCoverage": true },
+      "truckGate": { "heading": 0, "pano": "", "hasCoverage": false }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 42,
+    "trailersVisible": 90,
+    "trailerParkingCapacity": 140,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 38.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.68550,-96.96150,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "shipRcvSeparate"
+  ],
+  "fieldNotes": {
+    "siteResolution": "Given coords (32.6949,-96.9470) were ~1.6km NE in open land. Google geocode of 4718 Mountain Creek Pkwy, Dallas TX 75236 returned 32.6852,-96.9618, landing on a large industrial building in the Mountain Creek Business Park. Confirmed as the Primo/BlueTriton (Ozarka) Dallas bottling plant by the presence of water silos/tanks, process equipment and a steam plume at the NE (z19 ne-struct crop) plus an active dock bank and large trailer drop yard - consistent with a bottling/distribution plant. Locked center ~32.6855,-96.9615.",
+    "truckGate": "No barrier arm, sliding gate, or guard booth visible at the building's road frontage or yard access. The west front faces Mountain Creek Pkwy set well back behind a landscaped berm and trees with open employee-parking driveways (Street View pano 3MsqlSE1qXQMBYP8brGOEA, 2025-01 - no gate). The truck docks and drop yard are on the open east/NE side with no perimeter fence visible in satellite. FALSE (medium confidence - a yard-side gate could exist out of frame).",
+    "guardShack": "No staffed booth-sized structure at any entrance. The small structures at the NE are process/utility/office buildings, not a gate booth beside a controlled lane. FALSE.",
+    "remoteGs": "FALSE - no confirmed truck gate.",
+    "dockDoors": "Long continuous dock bank on the building's EAST face running most of the building length (z19 east-docks crop, trailers backed in, ~30-40 dock positions visible). Honest estimate ~40 -> banded 25-50 (conservative; could reach 50+). Flagged uncertain.",
+    "shipRcvSeparate": "The main dock activity is concentrated on the east face; no clearly distinct second ship/receive bank on a different face confirmed (the NE has a process/canopy area, not an obvious second dock bank). FALSE, medium confidence.",
+    "dropArea": "Very large trailer drop yard fills the entire east of the property: many parallel rows of trailers parked without tractors (z18 east-yard + z19 crops show 50+). Banded 50+. dropYard TRUE.",
+    "dropYard": "TRUE - dedicated multi-row trailer-storage lot east of the building, distinct from the active dock apron.",
+    "drivewayLong": "Deep paved aprons and a long internal yard loop from the SW entrance around to the east docks/yard easily hold 3+ trucks -> drivewayLong TRUE, postGateStaging TRUE (large internal paved holding).",
+    "entryExitTogether": "Primary site access is the SW driveway off Mountain Creek Pkwy serving both parking and the truck loop to the east yard; same in/out point -> entryExitTogether TRUE.",
+    "railServed": "No rail spur enters the property; the east boundary is open grass and a drainage line, not rail. FALSE.",
+    "trailersVisible": "~30-40 at east docks + ~50+ in east drop rows = ~90. Approximate from overhead imagery.",
+    "trailerParkingCapacity": "Drop-yard rows + dock positions could hold ~140 trailers at full pack.",
+    "siteAreaAcres": "~38 acres for the building footprint + east drop yard + north process area, derived from the perimeter polygon.",
+    "buildingCount": "One large contiguous bottling/warehouse building (with attached process/tank area at the NE). Counted as 1.",
+    "urbanRural": "Inside the City of Dallas (SW Dallas / Mountain Creek), a developed metro industrial park with many adjacent big-box warehouses -> Urban.",
+    "scale": "No truck scale / weigh pad clearly visible in the truck path. FALSE.",
+    "imageryQuality": "Clear recent Maxar/Airbus/Vexcel tiles + 2025-01 Street View on Mountain Creek Pkwy. The business park has many similar buildings; the Primo building was confirmed by the tanks/silos/steam signature at the NE. Dock count banded conservatively."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,100 @@
+{
+  "name": "US DC Hot Springs (WHSE)",
+  "type": "DC/Warehouse",
+  "coords": { "lat": 34.51570, "lng": -93.12380 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 34.51640, "lng": -93.12480 },
+      { "lat": 34.51610, "lng": -93.12330 },
+      { "lat": 34.51555, "lng": -93.12245 },
+      { "lat": 34.51475, "lng": -93.12290 },
+      { "lat": 34.51460, "lng": -93.12430 },
+      { "lat": 34.51490, "lng": -93.12560 },
+      { "lat": 34.51560, "lng": -93.12600 },
+      { "lat": 34.51610, "lng": -93.12545 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 34.51648, "lng": -93.12305 },
+      { "lat": 34.51640, "lng": -93.12275 },
+      { "lat": 34.51620, "lng": -93.12288 },
+      { "lat": 34.51628, "lng": -93.12318 }
+    ] },
+    "dropYards": [],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 34.51625, "lng": -93.12455 },
+        { "lat": 34.51592, "lng": -93.12330 },
+        { "lat": 34.51578, "lng": -93.12340 },
+        { "lat": 34.51611, "lng": -93.12465 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 214, "pano": "bEbZKAxSNWYBe7cHw9S9cg", "hasCoverage": true },
+      "truckGate": { "heading": 232, "pano": "bEbZKAxSNWYBe7cHw9S9cg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18,
+    "trailersVisible": 9,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 11.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.51570,-93.12380,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "trailerParkingCapacity"
+  ],
+  "fieldNotes": {
+    "siteResolution": "Given coords (34.5037,-93.0552) landed in dense downtown Hot Springs / Central Ave retail fabric (z17 confirmed small commercial blocks, no DC). Web search resolved the Mountain Valley Spring Water DISTRIBUTION CENTER / WAREHOUSE to 121 Technology Pl, Hot Springs National Park AR 71913 (Wanderlog 'Mountain Valley Warehouse' + TruckMap + driver reviews about loading/wait times; LoopNet parcel APN 200-44950-012-000). Google geocoded 121 Technology Pl to ROOFTOP at 34.5157,-93.1243, landing on the central warehouse complex of the Hot Springs industrial park ~5km WNW of downtown and DISTINCT from both the idx-29 legacy bottling plant (283 Mountain Valley Water Pl, Hot Springs Village) and the idx-31 new factory. Locked DC center to 34.5157,-93.1238 (the central two-building warehouse complex with active truck docks).",
+    "truckGate": "FALSE. Street View (pano bEbZKAxSNWYBe7cHw9S9cg, 2023-11, on the access road N of the building) shows an OPEN industrial access road running straight to the dock apron and yard. No barrier arm, no sliding/swing gate, no pinch-point checkpoint across the truck lane. Only a one-way 'Do Not Enter' road sign on a median post. The 2025-08 pano further E shows chain-link fencing only around a SEPARATE adjacent vehicle/equipment lot, not the Mountain Valley dock approach. High confidence open site.",
+    "guardShack": "FALSE. No booth-sized structure (1-3 vehicle footprint, multi-side windows) at the entrance in Street View or satellite. The approach has a portable toilet and a dumpster but no guard booth.",
+    "remoteGs": "FALSE because there is no controlled truck gate at all.",
+    "dockDoors": "Eastern (main) warehouse NW face: a continuous dock bank with trailers backed in. z20/z21 imagery shows ~7-9 trailers (orange tractors + white box trailers) on the apron over a bank of roughly 12-16 doors. The western building and the smaller north wing add a few more. Honest total ~18; banded 10-25. Banding low-confidence (sits near the 10-25/25-50 boundary; some apron doors are obscured).",
+    "dropArea": "No dedicated marked trailer-storage stall lot with bobtailed trailers visible; the trailers present are tractor-attached at the docks. A few empties may sit on the apron. Banded 0-10. dropYard set FALSE.",
+    "shipRcvSeparate": "Dock activity concentrated on one NW-facing bank of the main building; no clearly separate second ship/receive dock cluster on a different face confirmed. FALSE, low confidence.",
+    "multipleFacilities": "TRUE - the Mountain Valley footprint is two large connected/adjacent warehouse buildings (a central eastern building with the dock bank + an L-shaped western building) forming one campus; treated as a 2-building cluster.",
+    "buildingCount": "Two primary large warehouse buildings counted as the Mountain Valley DC complex; the other industrial buildings in the park belong to separate tenants and are excluded.",
+    "drivewayLong": "Open access road plus a deep paved/gravel yard apron easily holds a 3+ truck queue before the docks; no backup-onto-public-road risk given the large internal yard. backupSensitive FALSE.",
+    "postGateStaging": "Large open paved/gravel yard apron between the access road and the dock bank serves as an internal staging/queue area.",
+    "entryLanes": "Single open access lane in/out (entryExitTogether). entry/exit lanes = 1 each, inferred from the single open driveway in Street View.",
+    "urbanRural": "Edge-of-town industrial park ~5km from downtown Hot Springs, surrounded by woods and scattered light industry. Small-town industrial setting -> Rural per rubric tiebreak.",
+    "connectivityIssue": "FALSE - sits in an established industrial park with adjacent active businesses and recent (2025) Street View capture; cellular coverage likely adequate.",
+    "railServed": "No rail spur enters the property; access is road-only. FALSE.",
+    "trailersVisible": "~7-9 trailers backed at the main dock bank in the tight imagery (mixed orange/white tractor-trailers).",
+    "trailerParkingCapacity": "Yard apron + dock frontage could practically hold ~30 trailers; estimate.",
+    "siteAreaAcres": "~11.3 acres of the two-building complex + aprons derived from the perimeter polygon.",
+    "imageryQuality": "Multiple capture vintages overlap the park; the NW corner shows a grading/laydown/construction area in one tile. Dock counts read best from the z20/z21 NW-face crops; Street View (2023 + 2025) confirmed the open, ungated approach."
+  },
+  "method": "deep-audit"
+}

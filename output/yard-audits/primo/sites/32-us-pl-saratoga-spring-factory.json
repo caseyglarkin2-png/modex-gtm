@@ -1,0 +1,105 @@
+{
+  "name": "US PL Saratoga Spring Factory",
+  "type": "Bottling plant (PL)",
+  "coords": { "lat": 43.05895, "lng": -73.81095 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 43.05847, "lng": -73.81168 },
+      { "lat": 43.05982, "lng": -73.81210 },
+      { "lat": 43.06010, "lng": -73.81095 },
+      { "lat": 43.05975, "lng": -73.81010 },
+      { "lat": 43.05905, "lng": -73.80960 },
+      { "lat": 43.05858, "lng": -73.80985 },
+      { "lat": 43.05840, "lng": -73.81060 },
+      { "lat": 43.05838, "lng": -73.81120 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 43.05848, "lng": -73.81140 },
+      { "lat": 43.05848, "lng": -73.81095 },
+      { "lat": 43.05838, "lng": -73.81095 },
+      { "lat": 43.05838, "lng": -73.81140 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 43.05935, "lng": -73.81205 },
+        { "lat": 43.05975, "lng": -73.81190 },
+        { "lat": 43.05960, "lng": -73.81135 },
+        { "lat": 43.05922, "lng": -73.81150 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 43.05890, "lng": -73.81118 },
+        { "lat": 43.05872, "lng": -73.81088 },
+        { "lat": 43.05862, "lng": -73.81098 },
+        { "lat": 43.05880, "lng": -73.81128 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 5, "pano": "DsolxoLUGNLjF2lNdtVaeA", "hasCoverage": true },
+      "truckGate": { "heading": 0, "pano": "DsolxoLUGNLjF2lNdtVaeA", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 6,
+    "trailersVisible": 9,
+    "trailerParkingCapacity": 14,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 6.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@43.05895,-73.81095,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "dockDoors",
+    "shipRcvSeparate"
+  ],
+  "fieldNotes": {
+    "siteResolution": "Original approximate coords (43.0710,-73.7846) landed ~3km NE on a cemetery. Web search confirmed the Saratoga Spring Water Company / BlueTriton (now Primo Brands) bottling plant at 11 Geyser Road (Route 29), Saratoga Springs NY 12866 - founded 1872, the oldest continuously bottling water company at the same site. Resolved address point 43.0587,-73.8105; satellite confirmed a compact industrial bottling complex (silver/blue metal warehouse NW + older gray/blue bottling-process buildings center/SE) on the north side of Geyser Road, with the Kayaderosseras Creek to the east. Locked plant/yard center 43.05895,-73.81095.",
+    "truckGate": "FALSE - definitive. The single main truck driveway opens directly off Geyser Road as a wide-open paved curb cut with NO barrier arm, NO sliding/swing gate, and NO checkpoint pinch-point. Street View (pano DsolxoLUGNLjF2lNdtVaeA, 2022-03) headings 0/25/340 all show an open apron into the yard; a green-painted directional/one-way marking is present but is not a physical control.",
+    "guardShack": "FALSE - definitive. No booth-sized structure (1-3 vehicle footprint, multi-side windows) anywhere at the entrance in Street View or satellite. The nearest structure to the entrance is the blue metal warehouse itself.",
+    "remoteGs": "FALSE - no truck gate exists, so no remote/kiosk check-in applies.",
+    "fencing": "The rear (NW/west) trailer-storage lot is enclosed by chain-link perimeter fencing (visible in the far-west Street View pano n5QU41fdyM2INP7UXhggTw), but the active truck entrance off Geyser Road is uncontrolled and open.",
+    "dockDoors": "Modest dock line under a canopy along the SE face of the NW warehouse building; z21 imagery shows a single trailer backed in plus a continuous low canopy suggesting ~4-8 doors. Banded 0-10. Some loading also occurs at the older bottling building via the central paved apron. Low-confidence count given the canopy obscures individual door rhythm.",
+    "dropArea": "West storage lot holds a diagonal cluster of ~8-9 trailers/storage containers without tractors (p32-trailers-w.png). Banded 0-10.",
+    "dropYard": "TRUE - the fenced west lot is a distinct trailer/container storage area separate from the active dock apron.",
+    "postGateStaging": "Large open paved apron between the warehouse, the bottling building, and the creek serves as an internal queue/turn-around and staging area inside the property.",
+    "drivewayLong": "The open yard between the road entrance and the dock/apron easily holds a queue of 3+ trucks before they reach the docks; the property is deep relative to its frontage.",
+    "entryExitTogether": "One driveway off Geyser Road serves both entry and exit; the green-painted one-way markings split lanes within that single curb cut.",
+    "scale": "No truck scale / weigh pad visible in the truck path. FALSE.",
+    "shipRcvSeparate": "Single dock cluster on the warehouse SE face; loading at the older bottling building appears informal via the shared apron. Could not confirm physically separate ship/receive banks - marked FALSE, low confidence.",
+    "multipleFacilities": "One contiguous bottling complex (warehouse + connected process buildings), not a multi-cluster campus. FALSE.",
+    "urbanRural": "Edge-of-town setting on State Route 29 west of Saratoga Springs, bordered by woods, a creek, and scattered houses. Rural per the rubric (small-town/edge-of-town industrial).",
+    "connectivityIssue": "Site sits on a state highway with adjacent residential development and a town nearby; cellular coverage is unlikely to be a problem. FALSE.",
+    "railServed": "No rail spur enters the property. FALSE.",
+    "siteAreaAcres": "~6.5 acres of cleared/paved/built footprint inside the property line, derived from the perimeter polygon; compact legacy plant, much smaller than a modern DC.",
+    "buildingCount": "Three distinct structures: the silver/blue metal warehouse (NW), the older gray-roofed bottling/process building (center), and the connected blue process/office section fronting the road (SE) - counted as 3."
+  },
+  "method": "deep-audit"
+}

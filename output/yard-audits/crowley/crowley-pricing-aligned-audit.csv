@@ -1,0 +1,27 @@
+Phase,#,Site,Location,Facility Type,Gated?,Dock Doors (#),Yard Spots (#),Site Acres,Rail Served?,Confidence,Notes
+Phase 1,1,Talleyrand Terminal,"Jacksonville, FL",Marine terminal + chassis pool (197 ac),Yes,12,1400,197,Yes,High,
+Phase 1,2,Isla Grande,"San Juan, PR","Marine terminal (largest, 7-lane gate, 160 ac)",Yes,12,600,160,No,High,
+Phase 1,3,Port Everglades,"Ft. Lauderdale, FL",Marine terminal (78 ac),Yes,0,1500,78,Yes,High,
+Phase 1,4,Penn Terminals,"Eddystone, PA",Marine terminal + dry/reefer warehouse (107 ac),Yes,35,500,107,Yes,Medium,
+Phase 1,5,Gloucester City,"Gloucester City, NJ",Marine / breakbulk terminal (137 ac),Yes,90,350,137,Yes,High,
+Phase 1,6,Wilmington,"Wilmington, NC",Marine terminal (182 ac),Yes,8,400,182,Yes,High,
+Phase 1,7,Gulfport,"Gulfport, MS",Marine terminal (163 ac),Yes,10,450,163,Yes,Medium,
+Phase 1,8,Conley Container Yard,"Conley (Atlanta), GA",Inland container / drop yard,Yes,0,130,13.5,No,Medium,
+Phase 1,9,JAX Cross-Dock,"Jacksonville, FL",Cross-dock / distribution,Yes,58,160,12.1,No,Medium,
+Phase 1,10,JAX DC (W 30th),"Jacksonville, FL",Distribution center / LCL,Yes,27,35,5.5,No,High,
+Phase 1,11,Miami DC,"Miami, FL",Distribution center,Yes,58,95,8.0,No,High,
+Phase 1,12,Guaynabo,"Guaynabo, PR",Liner + logistics ops,Yes,35,80,4.5,No,Medium,
+Phase 1,13,CrowleyFresh,"Medley, FL",Temp-controlled DC,No,52,45,6.5,No,High,
+Phase 1,14,Tradeport,"Jacksonville, FL",Logistics campus,No,26,12,13.5,No,Medium,
+Phase 1,15,Cincinnati,"Cincinnati, OH",Logistics facility,No,0,0,0.7,No,Low,Low-confidence imagery; figures approximate.
+Phase 1,16,Folcroft,"Folcroft, PA",Warehouse,No,6,25,4.1,No,Medium,
+Phase 1,17,Charleston,"Charleston, SC",Logistics facility,Yes,2,120,9.2,Yes,Medium,
+Phase 1,18,St. Croix,"Christiansted, USVI",Container terminal,Yes,0,400,12.0,No,Low,Yard spots = container/chassis ground slots.
+Phase 1,19,St. Thomas,"St. Thomas, USVI",Cargo terminal,Yes,4,600,19.4,No,Medium,Yard spots = container/chassis ground slots.
+Phase 2,20,Santo Tomas de Castilla,Guatemala,"Container terminal + 350k sqft warehouse, 24/7",Yes,10,2200,67,No,Medium,Yard spots = container/chassis ground slots.
+Phase 2,21,Puerto Cortes,Honduras,"Container terminal + 97k sqft warehouse, 24/7",Yes,6,1100,95,No,Low,Yard spots = container/chassis ground slots.
+Phase 2,22,Rio Haina,Dominican Republic,Container terminal + warehouse,Yes,4,3000,98,No,Medium,Yard spots = container/chassis ground slots.
+Phase 2,23,Puerto Plata,Dominican Republic,Container terminal + warehouse,Yes,0,250,11.0,No,Low,Yard spots = container/chassis ground slots.
+Phase 2,24,Puerto Limon,Costa Rica,"Container terminal, 24/7",Yes,6,5500,86,No,Medium,Yard spots = container/chassis ground slots.
+Phase 2,25,Manzanillo,Panama,"Container terminal + warehouse, 24/7",Yes,8,9000,140,Yes,High,Yard spots = container/chassis ground slots.
+TOTALS,,25 sites,,,,469,27952,1630.0,,,
