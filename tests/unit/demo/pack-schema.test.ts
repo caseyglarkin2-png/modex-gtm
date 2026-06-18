@@ -1,5 +1,5 @@
 import { it, expect } from 'vitest';
-import { DemoPackSchema } from '../pack-schema';
+import { DemoPackSchema } from '../../../src/lib/demo/pack-schema';
 import fs from 'node:fs';
 import path from 'node:path';
 
