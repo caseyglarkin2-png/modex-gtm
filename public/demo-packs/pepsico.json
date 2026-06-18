@@ -14,7 +14,12 @@
       "note": "PepsiCo's company-owned beverage and foods network (PBNA, Gatorade, Quaker) last disclosed ~65 plants and ~440 distribution facilities for the beverage division alone (FY2017 10-K; current counts undisclosed). We audited 30 flagship company-owned plants and DCs. Frito-Lay is audited separately."
     },
     "featuredSiteId": "27-pepsico-brookshire-tx-1na-mixing-center-dc",
-    "dossierIntro": "We mapped 30 PepsiCo flagship plants and distribution centers from public satellite imagery: 1,145 dock doors, almost 3,000 trailer positions, 990 acres of yard. 24 of these 30 sites run drop yards, and 26 sit behind long entry drives. PepsiCo is scaling driverless freight with Gatik, yet every one of these yards still checks trucks in on guard shacks, radios, and clipboards. That is where one network standard would land first."
+    "dossierIntro": "We mapped 30 PepsiCo flagship plants and distribution centers from public satellite imagery: 1,145 dock doors, almost 3,000 trailer positions, 990 acres of yard. 24 of these 30 sites run drop yards, and 26 sit behind long entry drives. PepsiCo is scaling driverless freight with Gatik, yet every one of these yards still checks trucks in on guard shacks, radios, and clipboards. That is where one network standard would land first.",
+    "surprisingFindings": [
+      "Brookshire TX runs 120 dock doors, the most in the network, on one mixing-center roofline. Two truck gates decide whether all of them stay fed.",
+      "Only 3 of 30 audited sites are rail-served. The other 27 move everything by truck, so the yard is the only place left to win the turn.",
+      "26 of 30 sites sit behind long entry drives where the queue backs toward the road. The driverless trucks PepsiCo is adding with Gatik still wait in that line."
+    ]
   },
   "research": null,
   "network": {
