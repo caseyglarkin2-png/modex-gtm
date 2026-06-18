@@ -159,5 +159,31 @@
     "urbanRural": "Toledo is a small Oregon town (~3,500 people) on the central Oregon coast; the mill is on a peninsula at the edge of town surrounded by the Yaquina River and forest. Rural.",
     "siteAreaAcres": "~230 acres for the full fenced industrial property including east-bank mill core, warehouses, woodyard, drop yards and west-bank facilities; honest estimate from the perimeter box."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://news.gp.com/2025/08/georgia-pacific-employees-contributions-create-value-earns-industry-recognition",
+        "date": "2025-08",
+        "type": "press",
+        "claim": "GP Toledo mill operating in 2025 (reliability program recognition)"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.oregon.gov/deq/aq/cao/wr/pages/georgia-pacific-toledo.aspx",
+        "date": "2025",
+        "type": "press",
+        "claim": "Georgia-Pacific Toledo listed as active permitted facility (Oregon DEQ)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GP-owned containerboard mill, operating; named Cedar Springs volume recipient. Demand-driven temporary layoffs reported, not permanent closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

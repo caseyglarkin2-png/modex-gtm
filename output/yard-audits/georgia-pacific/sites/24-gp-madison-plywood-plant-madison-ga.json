@@ -152,5 +152,31 @@
     "urbanRural": "Plant sits in open woods/farmland NE of small-town Madison, well away from dense development. Rural.",
     "connectivityIssue": "Rural but within ~5 km of Madison; coverage likely adequate. False."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://epd.georgia.gov/document/document/tv591474-narrative/download",
+        "date": "2024",
+        "type": "press",
+        "claim": "Georgia-Pacific Wood Products LLC (Madison Plywood) active permitted plywood facility, Morgan County"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.georgiatrend.com/2024/12/30/madison-morgan-county-charming-and-industrious/",
+        "date": "2024-12-30",
+        "type": "press",
+        "claim": "GP Madison plywood active employer (~450 people)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GP-owned and operating; gauntlet clean (GP 2025 GA closure was Cedar Springs containerboard, different product/town).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

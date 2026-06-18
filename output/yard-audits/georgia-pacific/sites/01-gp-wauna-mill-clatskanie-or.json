@@ -156,5 +156,31 @@
     "fastLaneOpportunity": "Wide gravel staging lots at the access-road junction and near the chip yard provide ample unused paved/graded width for bypass lanes.",
     "urbanRural": "Isolated mill surrounded by forest and the Columbia River; nearest community (Westport) is small. Rural."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://news.gp.com/2024/04/georgia-pacific-investing-more-than-150-million-to-grow-consumer-tissue-business",
+        "date": "2024-04-10",
+        "type": "press",
+        "claim": "GP investing >$150M to rebuild a paper machine at Wauna; 700+ employees; startup 2026"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.gp.com/about-us/locations/oregon",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "GP lists Wauna among current Oregon facilities"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GP 2024 newsroom + locator confirm active GP tissue mill with 2026 machine startup.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

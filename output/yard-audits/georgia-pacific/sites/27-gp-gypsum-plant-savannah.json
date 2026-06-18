@@ -155,5 +155,24 @@
     "railServed": "Rail spurs run into the property along the SW edge (confirmed in satellite); plant ships and receives by rail.",
     "urbanRural": "Within the Savannah, GA metro industrial corridor on the river — Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://epd.georgia.gov/document/document/tv590155-narrative/download",
+        "date": "2023",
+        "type": "press",
+        "claim": "Georgia-Pacific Gypsum LLC, Savannah Plant City - active Title V wallboard mfg permit"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active GP Gypsum operation (live air/water permits). ADDRESS NOTE: operating site on Savannah River (Wahlstrom Rd); 2861 Tremont Rd is registered plant-city address of same complex.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -165,5 +165,24 @@
     "railServed": "Extensive multi-track rail yard runs through the complex alongside the woodyard.",
     "urbanRural": "Rural — mill is in forested/agricultural country NE of small-town Palatka, buffered by woods."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.jaxdailyrecord.com/news/2025/apr/28/georgia-pacific-announces-83-million-expansion-of-palatka-facility/",
+        "date": "2025-04-28",
+        "type": "press",
+        "claim": "GP announces $83M Palatka expansion (400k sq ft warehouse + NEW TRAILER YARD, site work May 2025); 1,000+ employees"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GP-owned kraft/tissue mill, actively expanding including a new trailer yard.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -148,5 +148,31 @@
     "scale": "No truck scale clearly identifiable near the gate; flagged uncertain.",
     "perimeter": "Box covers the fenced developed industrial footprint; excludes the large SE settling-pond complex which is not truck yard."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://news.gp.com/2019/04/naheola-mills-120-million-investment-to-grow-bath-tissue-business",
+        "date": "2019-04",
+        "type": "press",
+        "claim": "GP $120M tissue machine investment at Naheola (Quilted Northern/Brawny)"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.gridinfo.com/plant/georgia-pacific-consr-prods-lp-naheola/10699",
+        "date": "2026-01",
+        "type": "press",
+        "claim": "GP-Naheola power plant generated 128 GWh Oct 2025-Jan 2026 (active operation)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active GP pulp/tissue/paperboard mill; live power generation through Jan 2026 + active 2026 reqs.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

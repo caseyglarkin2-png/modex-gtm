@@ -155,5 +155,24 @@
     "buildingCount": "Numerous structures across two clusters (mill buildings, kilns, storage sheds, office) — counted ~8.",
     "urbanRural": "Isolated mill complex surrounded by woods and farmland E of small-town Prosperity. Rural."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://news.gp.com/2025/02/prosperity-plywood-mill-announces-14-million-investment",
+        "date": "2025-02-12",
+        "type": "press",
+        "claim": "GP announced $14M investment in Prosperity SC plywood mill (operating since 1975)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Feb-2025 GP press release announcing fresh capital confirms current GP operation.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

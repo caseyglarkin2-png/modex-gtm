@@ -132,5 +132,31 @@
     "drivewayLong": "Ample paved approach from the access road to the container yard provides deep truck queuing.",
     "perimeter": "Box covers the developed footprint - process buildings, woodyard, and the NE container/trailer drop yard; excludes outlying settling ponds and sludge fields."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://goldenislesdev.com/georgia-pacific-brunswick-cellulose-2024-international-business-of-the-year-wtc-savannah/",
+        "date": "2024",
+        "type": "press",
+        "claim": "GP Brunswick Cellulose named 2024 International Business of the Year; $200M upgrade; ~600 employees"
+      },
+      {
+        "tier": 2,
+        "url": "https://epd.georgia.gov/document/document/tv482579-narrative/download",
+        "date": "2024",
+        "type": "press",
+        "claim": "Brunswick Cellulose LLC owns/operates an integrated bleached kraft pulp mill (GA EPD Title V)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Divestiture flag cleared: 2004 sale was to Koch Cellulose, Koch then bought all of GP in 2005 (intra-Koch). Mill operates today under GP/GP Cellulose with 2024 award + $200M upgrade.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

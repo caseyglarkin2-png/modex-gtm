@@ -158,5 +158,24 @@
     "urbanRural": "Monticello is a small Mississippi town; the mill sits on the edge of town surrounded by forest and the Pearl River. Rural.",
     "siteAreaAcres": "~320 acres for the full fenced industrial property including warehouse, mill core, woodyard and treatment ponds; honest estimate from the perimeter box."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://news.gp.com/2025/05/from-the-bottom-up-georgia-pacific-s-monticello-facilities-achieve-industry-leading-success",
+        "date": "2025-05",
+        "type": "press",
+        "claim": "GP Monticello linerboard mill surpassed 1M tons/yr; $91M upgrade underway"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GP-owned, record production, 2025 GP confirmation; named Cedar Springs volume recipient.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

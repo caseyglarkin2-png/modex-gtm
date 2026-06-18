@@ -155,5 +155,24 @@
     "connectivityIssue": "Rural and wooded but only ~5 km from Talladega with other industry nearby; cellular coverage likely adequate. Marked false, flagged uncertain.",
     "urbanRural": "Isolated mill surrounded by woods, a lake, and farmland — clearly Rural."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://news.gp.com/2019/01/georgia-pacific-lumber-production-talladega-alabama",
+        "date": "2019-01",
+        "type": "press",
+        "claim": "GP completed new $100M lumber facility in Talladega; ~130 jobs, 230M bd-ft/yr"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GP closed the old 1975 mill in 2016 then built a NEW $100M sawmill on-site (startup 2018) which GP operates today. Replaced asset, same site.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

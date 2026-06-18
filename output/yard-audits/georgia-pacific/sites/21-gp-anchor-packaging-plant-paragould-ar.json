@@ -159,5 +159,31 @@
     "railServed": "A rail line runs NE-SW ~120 m east of the building but is separated by a wooded buffer with no spur entering the property.",
     "urbanRural": "Edge of Paragould, surrounded by farmland and scattered light industry; clearly Rural."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://news.gp.com/2025/10/georgia-pacific-completes-anchor-packaging-acquisition",
+        "date": "2025-10-22",
+        "type": "press",
+        "claim": "GP acquired Anchor Packaging four plants (Paragould AR named in trade coverage)"
+      },
+      {
+        "tier": 2,
+        "url": "https://talkbusiness.net/2021/03/anchor-packaging-breaks-ground-on-21-5-million-expansion-in-paragould/",
+        "date": "2021-03",
+        "type": "press",
+        "claim": "Anchor Paragould plant (2211 N. 12th Ave), $21.5M thermoforming expansion"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GP-operated post 2025-10-22 acquisition. Real thermoforming/film plant. Note a separate Anchor DC also sits in Paragould (1600 Jones Rd); this is the plant.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

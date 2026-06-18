@@ -149,5 +149,31 @@
     "urbanRural": "Rural — the plant sits in the Jonesboro Industrial Park on the edge of town near the municipal airport, surrounded by farm fields and scattered industrial buildings.",
     "scale": "No truck scale imaged — not expected for a thermoformed-packaging converting plant."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://news.gp.com/2025/10/georgia-pacific-completes-anchor-packaging-acquisition",
+        "date": "2025-10-22",
+        "type": "press",
+        "claim": "GP completed acquisition of Anchor Packaging incl. its four manufacturing facilities"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.anchorpackaging.com/facilities/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Jonesboro thermoforming plant, 4708 Krueger Drive, 72401"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Anchor watch-flag resolved IN GP FAVOR: GP closed its Anchor Packaging acquisition 2025-10-22, so these are now genuinely GP-operated. Real thermoforming plant.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

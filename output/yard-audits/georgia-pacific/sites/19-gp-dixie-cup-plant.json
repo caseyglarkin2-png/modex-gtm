@@ -162,5 +162,31 @@
     "urbanRural": "Urban — the plant sits within Lexington's dense NW industrial fabric, surrounded by other industrial buildings and adjacent residential subdivisions.",
     "multipleFacilities": "Treated as a single facility — one main long manufacturing complex plus an office building and small ancillary structures on the same parcel."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.gp.com/about-us/locations/kentucky/",
+        "date": "2026",
+        "type": "locator",
+        "claim": "GP operates 2 facilities / 710 employees in KY"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.whas11.com/article/news/kentucky/dixie-cup-production-lexington-kentucky-jobs/417-a6925444-139d-4096-936a-d30c0ba45eb8",
+        "date": "2021-01",
+        "type": "press",
+        "claim": "GP consolidated all Dixie cup production into the Lexington KY plant (sole US Dixie cup site)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GP runs the sole US Dixie cup plant in Lexington, expanded 2021. ADDRESS FLAG: documented address 451 Harbison Rd, not 1900 Spurr Rd (same NW Lexington area, reconcile).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

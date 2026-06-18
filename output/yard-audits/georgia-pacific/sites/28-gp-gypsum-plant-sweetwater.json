@@ -157,5 +157,24 @@
     "railServed": "A new rail crossing and spur were installed on FM 1856 to serve the new plant; rail line confirmed in satellite imagery.",
     "urbanRural": "Rural Nolan County, TX — open ranchland along I-20 east of the small city of Sweetwater."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://news.gp.com/2023/10/georgia-pacific-cuts-the-ribbon-on-new-325-million-gypsum-wallboard-facility-in-sweetwater-texas",
+        "date": "2023-10-04",
+        "type": "press",
+        "claim": "GP opened new $325M gypsum wallboard plant adjacent to existing Sweetwater plant (owned since 1996)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GP EXPANDED here in 2023 with a new $325M plant beside the legacy plant. No closure/sale signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -162,5 +162,24 @@
     "urbanRural": "Site sits inside the City of Plattsburgh, surrounded by residential streets and commercial development - clearly Urban.",
     "multipleFacilities": "Multi-building campus: process mill, large converting/warehouse, office building, plus ancillary structures."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://tissueonlinenorthamerica.com/georgia-pacifics-plattsburgh-mill-invests-in-bath-tissue-production/",
+        "date": "2020-11",
+        "type": "press",
+        "claim": "Late-2019 capex added 30%+ bath-tissue capacity (Northern Ultra Plush); ~85 employees"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GP tissue/towel mill; active 2026 GP careers postings, no WARN/closure for NY in GP footprint.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

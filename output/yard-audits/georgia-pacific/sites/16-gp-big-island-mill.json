@@ -149,5 +149,24 @@
     "railServed": "Rail spur clearly curves into the property alongside the main mill building.",
     "urbanRural": "Unincorporated village of Big Island, rural setting 12 mi NW of Lynchburg, surrounded by forest and farmland."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://news.gp.com/2024/06/georgia-pacific-s-big-island-facility-earns-its-first-epa-energy-star-certification-for-energy-efficiency",
+        "date": "2024-06",
+        "type": "press",
+        "claim": "GP Big Island containerboard facility earned first EPA ENERGY STAR cert; operating"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GP-owned, operating; named as a Cedar Springs volume recipient (2025).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

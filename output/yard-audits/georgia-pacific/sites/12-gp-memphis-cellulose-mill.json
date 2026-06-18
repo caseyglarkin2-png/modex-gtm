@@ -155,5 +155,31 @@
     "urbanRural": "Dense urban Memphis - surrounded on the east and south by residential blocks; clearly Urban.",
     "dockDoors": "Multiple dock banks across aging buildings; ~8 trailers visible plus additional doors - banded 10-25, medium confidence."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://news.gp.com/2025/10/georgia-pacific-to-close-memphis-cellulose-mill-and-the-memphis-technology-and-innovation-center-in-tennessee",
+        "date": "2025-10-16",
+        "type": "press",
+        "claim": "GP will PERMANENTLY close the Memphis Cellulose mill + Tech & Innovation Center; ~152 jobs cut; most positions gone by early December 2025"
+      },
+      {
+        "tier": 2,
+        "url": "https://wreg.com/news/local/150-affected-by-georgia-pacific-mill-closure-in-memphis/",
+        "date": "2025-10",
+        "type": "press",
+        "claim": "Local news corroborates closure, ~150 jobs lost"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GP own Oct 16 2025 release announces PERMANENT closure of the Memphis Cellulose mill, positions eliminated by early Dec 2025. Not an operating facility in 2026.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

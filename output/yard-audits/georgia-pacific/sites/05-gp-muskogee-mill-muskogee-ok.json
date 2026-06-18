@@ -152,5 +152,24 @@
     "fastLaneOpportunity": "Wide entrance apron and ample paved/graded space at the gate and drop yard provide room for a bypass/express lane.",
     "urbanRural": "Mill sits on the edge of Muskogee along the Arkansas River with large open-field buffers and farmland/river beyond. Rural (small-city industrial edge)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://news.gp.com/2023/10/50-million-transformation-in-the-works-at-muskogee",
+        "date": "2023-10-30",
+        "type": "press",
+        "claim": "Muskogee operating since 1978, 700+ employees, largest private employer; $50M transformation"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GP press + active hiring confirm self-operation of the Muskogee tissue mill.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

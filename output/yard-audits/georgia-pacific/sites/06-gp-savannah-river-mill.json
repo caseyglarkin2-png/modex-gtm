@@ -146,5 +146,31 @@
     "fastLaneOpportunity": "Wide gate apron with multiple lanes and ample paved width inside the gate to add an express/bypass lane.",
     "scale": "No truck scale clearly identifiable in available imagery near the gate; flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.gp.com/about-us/mill-sites/savannah-river-mill-rincon-georgia/savannah-river-mill-about/",
+        "date": "2025-04",
+        "type": "locator",
+        "claim": "GP corporate mill-site page: opened 1986, GP-owned since 2002, ~900-1,000 employees"
+      },
+      {
+        "tier": 1,
+        "url": "https://news.gp.com/2025/04/georgia-pacific-opens-more-opportunities-for-paper-cup-recycling",
+        "date": "2025-04",
+        "type": "press",
+        "claim": "GP Savannah River mill in Rincon GA now accepts PE-coated cups to make tissue/towels/napkins"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GP corporate locator + 2025 press confirm active GP tissue mill.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

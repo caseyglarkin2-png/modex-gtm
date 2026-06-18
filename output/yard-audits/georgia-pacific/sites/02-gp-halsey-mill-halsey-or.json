@@ -144,5 +144,24 @@
     "fastLaneOpportunity": "Wide paved aprons at the drop yard and access road provide ample unused width for a bypass lane.",
     "urbanRural": "Mill sits in open Willamette Valley farmland NW of the small town of Halsey. Rural."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://news.gp.com/2023/12/georgia-pacific-announces-150-million-investment-in-halsey-facility",
+        "date": "2023-12",
+        "type": "press",
+        "claim": "$150M Halsey tissue investment (>$200M since 2022); production 2025"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GP-operated tissue mill with active capex; adjacent pulp mill sold to Cascade Pacific 2008 is a separate asset.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

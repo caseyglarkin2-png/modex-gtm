@@ -164,5 +164,24 @@
     "scale": "A truck scale is operationally expected for chip/log van weigh-in at an integrated paper mill; not pinpointed in imagery - flagged low-confidence.",
     "urbanRural": "Brewton is a small Alabama town; the mill sits on the edge of town with forest on the north/east. Rural."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://news.gp.com/2025/04/after-years-long-transformation-brewton-containerboard-mill-is-the-industry-standard",
+        "date": "2025-04",
+        "type": "press",
+        "claim": "GP completes ~$1B transformation of Brewton containerboard/bleached-board mill; 400+ employees"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GP-owned with heavy 2025 capex; named as a mill absorbing Cedar Springs volume.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

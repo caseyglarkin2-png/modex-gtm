@@ -164,5 +164,31 @@
     "urbanRural": "Deep pine forest, far from any town; New Augusta is a very small community well south. Rural.",
     "fastLaneOpportunity": "Wide paved entry apron at the gate with ample unused width to add a bypass lane."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://news.gp.com/2022/06/the-leaf-river-mill-is-leading-the-way",
+        "date": "2022-06",
+        "type": "press",
+        "claim": "GP operates the Leaf River cellulose mill, New Augusta MS"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.gridinfo.com/plant/leaf-river-cellulose-llc/10233",
+        "date": "2026-01",
+        "type": "press",
+        "claim": "Mill generated 108.4 GWh Oct 2025-Jan 2026 (actively running)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active GP-branded cellulose mill; late-2025/early-2026 power generation, no sale/closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

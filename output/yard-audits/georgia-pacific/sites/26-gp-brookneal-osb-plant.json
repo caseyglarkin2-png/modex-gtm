@@ -152,5 +152,31 @@
     "railServed": "Active rail spur with a road-crossing gate confirmed in Street View at the access road; spur runs into the property log-handling area.",
     "connectivityIssue": "Rural Campbell County VA, plant set in heavily wooded terrain well away from any town — cellular coverage likely marginal."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.gp.com/about-us/locations/virginia",
+        "date": "2026",
+        "type": "locator",
+        "claim": "GP lists 3 VA facilities incl. Brookneal OSB mill"
+      },
+      {
+        "tier": 1,
+        "url": "https://jobs.encadria.com/jb/Scaler-Jobs-in-Gladys-VA/12153702",
+        "date": "2025-04",
+        "type": "press",
+        "claim": "April-2025 GP hiring at Brookneal/Gladys OSB facility"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GP OSB mill, active 2025 hiring; OSB unaffected by GP 2025 plywood/containerboard retrenchment. ADDRESS FLAG: GP lists 11795 Brookneal Hwy, Gladys VA 24554; roster 1093 Cyclone Rd uncorroborated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -153,5 +153,31 @@
     "drivewayLong": "Long forest-buffered private access road provides ample queue depth before the gate.",
     "perimeter": "Box covers the developed footprint - process buildings, woodyard, and trailer drop yard; excludes outlying landfill and pond areas to the S/SW."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.prnewswire.com/news-releases/georgia-pacific-announces-800-million-capital-investment-in-alabama-river-cellulose-mill-302552558.html",
+        "date": "2025-09-10",
+        "type": "press",
+        "claim": "GP announces $800M capex to modernize the Alabama River Cellulose mill, Perdue Hill AL; runs 2025-2027"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.madeinalabama.com/2025/09/georgia-pacific-to-invest-800-million-in-alabama-river-cellulose-mill/",
+        "date": "2025-09",
+        "type": "press",
+        "claim": "State econ-dev corroborates GP $800M Perdue Hill investment"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GP actively investing $800M as of Sept 2025; unambiguously GP-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

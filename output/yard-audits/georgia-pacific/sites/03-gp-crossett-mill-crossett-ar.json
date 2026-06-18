@@ -156,5 +156,24 @@
     "fastLaneOpportunity": "Wide paved aprons at the drop yard and warehouse driveway offer ample unused width for a bypass lane.",
     "urbanRural": "Crossett is a small mill town built around this facility; open country and forest beyond. Rural."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.arkansasedc.com/news-events/newsroom/detail/2024/12/09/georgia-pacific-announces-90-million-investment-to-grow-consumer-tissue-business",
+        "date": "2024-12-09",
+        "type": "press",
+        "claim": "GP $90M + 50 jobs to grow consumer tissue at Crossett (Angel Soft); 400+ employees; production 2026"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GP idled the Crossett pulp/bleached-board lines in 2019 but the consumer tissue/towel operation remains GP-operated with fresh 2024 capex. Model as tissue-only, not full pulp/paper/tissue complex.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

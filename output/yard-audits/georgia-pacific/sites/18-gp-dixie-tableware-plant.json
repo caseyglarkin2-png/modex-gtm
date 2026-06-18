@@ -144,5 +144,24 @@
     "fastLaneOpportunity": "New site with ample paved width and a long driveway approach; inferred room to add a bypass lane — low confidence.",
     "urbanRural": "Rural — greenfield site on former farmland on the western edge of Jackson, surrounded by open fields."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://news.gp.com/2024/10/georgia-pacific-cuts-the-ribbon-on-new-425-million-dixie-tableware-facility-in-jackson-tennessee",
+        "date": "2024-10",
+        "type": "press",
+        "claim": "GP cut ribbon on new $425M Dixie tableware plant, Jackson TN (65 Cardinal Drive); production began June 2024"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active brand-new (2024) GP Dixie tableware plant. ADDRESS FLAG: actual is 65 Cardinal Drive, not Mercer Rd.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

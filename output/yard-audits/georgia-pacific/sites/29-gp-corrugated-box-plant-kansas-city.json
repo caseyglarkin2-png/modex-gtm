@@ -167,5 +167,24 @@
     "urbanRural": "Kansas City, MO metropolitan industrial district — Urban.",
     "buildingCount": "One large monolithic manufacturing building under one roof; counted as 1."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.gp.com/about-us/locations/missouri",
+        "date": "2026",
+        "type": "locator",
+        "claim": "GP lists 1 MO facility (the KC corrugated plant)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active GP corrugated plant; GP 2024-25 box closures (Mt. Olive IL, Dubuque IA, Salisbury NC) do not include Kansas City.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

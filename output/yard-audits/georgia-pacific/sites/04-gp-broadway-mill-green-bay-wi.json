@@ -155,5 +155,24 @@
     "fastLaneOpportunity": "Very wide paved aprons and multi-lane internal roads provide ample room for express/bypass lanes.",
     "urbanRural": "Mill is within the dense urban fabric of Green Bay, surrounded by residential neighborhoods and other industry. Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://fox11online.com/news/local/georgia-pacific-shows-off-completed-550m-expansion-project-at-its-green-bay-broadway-mill-paper-towel-brawny",
+        "date": "2024-09-17",
+        "type": "press",
+        "claim": "Completed $550M expansion; new TAD machine in full production since June 2024 (Brawny)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active GP tissue/towel mill; $550M expansion completed Sept 2024.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

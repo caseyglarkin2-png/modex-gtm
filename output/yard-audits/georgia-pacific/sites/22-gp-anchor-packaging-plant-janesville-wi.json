@@ -127,5 +127,31 @@
     "railServed": "No rail spur into the property.",
     "urbanRural": "On the north edge of Janesville (mid-size city) inside the Arrow Park industrial park, with open farmland directly NW. Judged Rural per the rubric's edge-of-town / abutting-farmland guidance; flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://news.gp.com/2025/10/georgia-pacific-completes-anchor-packaging-acquisition",
+        "date": "2025-10-22",
+        "type": "press",
+        "claim": "GP acquired Anchor Packaging four plants, one in Janesville WI"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.anchorpackaging.com/facilities/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Janesville plant (Panoramic Inc. division), 1500 N. Parker Drive, 53545"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GP-operated post 2025-10-22 acquisition (Anchor Panoramic division). ADDRESS FLAG: actual ZIP 53545, not 53546.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

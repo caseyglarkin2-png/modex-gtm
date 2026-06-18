@@ -157,5 +157,31 @@
     "urbanRural": "On the edge of Waxahachie along I-35E in an industrial corridor with adjacent distribution warehouses but surrounded by farmland; judged Rural per the small-town tie-breaker, flagged uncertain.",
     "buildingCount": "One large monolithic manufacturing building (with attached process/utility structures at the SW); counted as 1."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.waxahachiesun.com/business/georgia-pacific-helps-the-community-through-donations-and-volunteerism/article_727b5cee-9f5a-11ee-8f2e-4b831dfeefda.html",
+        "date": "2023-12",
+        "type": "press",
+        "claim": "GP Waxahachie corrugated plant active community giving"
+      },
+      {
+        "tier": 2,
+        "url": "https://business.waxahachiechamber.com/list/member/georgia-pacific-6492",
+        "date": "2026",
+        "type": "press",
+        "claim": "GP active Chamber member, Waxahachie; converting + corrugator assets"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active GP corrugated plant; recent hiring, community giving, Chamber membership. No closure/sale signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
