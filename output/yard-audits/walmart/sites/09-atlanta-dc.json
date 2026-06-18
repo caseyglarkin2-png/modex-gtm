@@ -180,15 +180,48 @@
     "dockDoorCount"
   ],
   "fieldNotes": {
-    "truckGate": "Single access road runs ~0.4km from Trade Water Pkwy through a wooded buffer into the truck yard. At the yard throat (33.7144,-84.5993) the entry is an open paved connection — no barrier arm, sliding gate, or pinch-point checkpoint resolved in z19/z20 satellite, and the 2019/2025 Street View approaches show open roadway. Chain-link perimeter fencing IS present along the south property line (visible in Street View), so the lot is fenced but the truck entrance itself reads as uncontrolled. Flagged uncertain — a manned gate could exist beyond Street View reach.",
+    "truckGate": "Single access road runs ~0.4km from Trade Water Pkwy through a wooded buffer into the truck yard. At the yard throat (33.7144,-84.5993) the entry is an open paved connection \u2014 no barrier arm, sliding gate, or pinch-point checkpoint resolved in z19/z20 satellite, and the 2019/2025 Street View approaches show open roadway. Chain-link perimeter fencing IS present along the south property line (visible in Street View), so the lot is fenced but the truck entrance itself reads as uncontrolled. Flagged uncertain \u2014 a manned gate could exist beyond Street View reach.",
     "guardShack": "No 1-3-space guard booth structure visible beside the yard entrance in satellite. The only small structures at the east end are the office/employee-parking block.",
-    "shipRcvSeparate": "Double-loaded cross-dock: dock doors with trailers backed in along BOTH the north building face (facing the drop yard) and the south building face — two physically separate dock banks.",
+    "shipRcvSeparate": "Double-loaded cross-dock: dock doors with trailers backed in along BOTH the north building face (facing the drop yard) and the south building face \u2014 two physically separate dock banks.",
     "dropYard": "Large paved drop yard north of the building holds 40+ trailers in angled rows without tractors, plus an additional trailer-storage strip further north; clearly a dedicated drop lot separate from active dock staging.",
     "drivewayLong": "Gate-to-dock approach is a long wooded access road plus a deep internal yard; easily holds a 3+ truck queue.",
-    "urbanRural": "Inside the dense Fulton County / Union City logistics corridor SW of Atlanta — surrounded by dozens of large warehouses. Urban industrial fabric.",
+    "urbanRural": "Inside the dense Fulton County / Union City logistics corridor SW of Atlanta \u2014 surrounded by dozens of large warehouses. Urban industrial fabric.",
     "dockDoorCount": "Estimated ~70 doors across both faces from z18-z19 imagery (north face the primary bank); overhead estimate, banded 50+.",
-    "entryLanes": "Approach road is ~2 lanes wide at the yard mouth; estimate 2 in / 2 out through the same throat. Not separately striped — estimate.",
+    "entryLanes": "Approach road is ~2 lanes wide at the yard mouth; estimate 2 in / 2 out through the same throat. Not separately striped \u2014 estimate.",
     "railServed": "No rail spur enters the property; building is bounded by a creek and wooded buffer on the west/south."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.spscommerce.com/community/articles/walmart-receiving-distribution-center-dc-list",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "DC 4047 = Regional Distribution Center, 6500 Trade Water Pkwy SW, Atlanta GA 30336."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.americold.com/atlanta-ga-americold-logistics-atlanta-tradewater/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "6500 Trade Water Pkwy SW, Atlanta GA 30336 is operated by Americold Logistics (temperature-controlled distribution)."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.indeed.com/cmp/Walmart-Dc-4047/salaries/Operations+Manager",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Walmart DC 4047 referenced as an active employer entity."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "DC 4047 maps to 6500 Trade Water Pkwy SW Atlanta (matches the west-metro pin), but the operator at that address is Americold (3PL cold storage), not a self-operated Walmart yard; no Tier-1 Walmart self-attestation found. Probable + flagged.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

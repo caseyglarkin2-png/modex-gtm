@@ -283,5 +283,31 @@
     "urbanRural": "Edge-of-town setting at the SW edge of Bentonville/Centerton with farmland and woods on the south and east; judged Rural per rubric.",
     "yardMetrics": "Dock/trailer counts are honest overhead estimates; trailersVisible and capacity are order-of-magnitude given the very large multi-row drop yard."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.walmart.com/locations/bentonville",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Walmart careers lists Supply Chain Regional #6094 at 5801 SW Regional Airport Blvd, Bentonville AR with active freight-handling roles."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/q-walmart-distribution-l-bentonville,-ar-jobs.html",
+        "date": "2026-05",
+        "type": "careers",
+        "claim": "Active May/June 2026 Walmart distribution job postings at the Bentonville DC corroborate ongoing operation."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Walmart self-attests current operation of DC 6094 at the pinned address; 2018 Bentonville closures were older DCs consolidated into this one, not 6094.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

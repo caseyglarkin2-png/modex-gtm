@@ -253,5 +253,38 @@
     "trailersVisible": "Approximate count of trailers visible across captured imagery; honest estimate, hundreds present.",
     "railServed": "No rail spur enters the property; nearest rail is unrelated."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.spscommerce.com/community/articles/walmart-receiving-distribution-center-dc-list",
+        "date": "2025",
+        "type": "locator",
+        "claim": "DC 7026 = Walmart DC 7026, 945 Hwy 138, Grantsville UT 84029, general merchandise."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.supplychaindive.com/news/walmart-buys-distribution-center-in-salt-lake-city-utah/748655/",
+        "date": "2024",
+        "type": "press",
+        "claim": "Trade-press context confirming Walmart established 1M+ sqft Grantsville/SLC-area DC footprint (operating since ~2005)."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.yelp.com/biz/walmart-distribution-center-grantsville",
+        "date": "2026-05",
+        "type": "locator",
+        "claim": "Walmart Distribution Center, 929 UT-138, Grantsville UT 84029, 24-hour operation."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "DC 7026 is the long-established (2005) Grantsville GM DC, not an announced/under-construction project; address/DC# match; no closure found. Do not conflate with the separate 2022 SLC fulfillment center.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

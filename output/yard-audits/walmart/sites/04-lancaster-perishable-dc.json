@@ -198,5 +198,31 @@
     "railServed": "No rail spur into the property visible.",
     "siteAreaAcres": "143 acres derived from the perimeter polygon (Perishable DC parcel incl. truck yard and landscaped buffers)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.businesswire.com/news/home/20240716711596/en/Walmart-Celebrates-Grand-Opening-of-High-Tech-Perishable-Distribution-Center",
+        "date": "2024-07-16",
+        "type": "press",
+        "claim": "Walmart grand-opened its 730,000 sf high-tech perishable DC (2nd of 5 PDCs) at 940 E. Pleasant Run Road, Lancaster TX; 500+ FT workers."
+      },
+      {
+        "tier": 1,
+        "url": "https://theshelbyreport.com/2024/07/17/walmart-opens-perishable-distribution-center-in-lancaster-tx/",
+        "date": "2024-07-17",
+        "type": "press",
+        "claim": "Confirms Walmart-operated perishable DC opened Lancaster TX July 2024, 730k sf refrigerated."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tier-1 self-attested grand opening July 2024, freight-yard perishable DC, no closure signal; address and specs match the pin.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

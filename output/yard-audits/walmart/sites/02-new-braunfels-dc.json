@@ -234,5 +234,31 @@
     "urbanRural": "Edge-of-town / open country alongside I-35 north of New Braunfels - surrounded by undeveloped land; classed Rural.",
     "siteAreaAcres": "92.1 acres from shoelace on the traced perimeter ring (main DC + drop yards + southern annex buildings)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.walmart.com/us/en/jobs/CP-6016-11013",
+        "date": "2026-03",
+        "type": "careers",
+        "claim": "Live Walmart careers Freight Handler posting, facility code CP-6016, 3900 N IH-35 New Braunfels TX, 85 open positions."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.tdlr.texas.gov/TABS/Search/Print/TABS2023024824",
+        "date": "2025-02",
+        "type": "econ-dev",
+        "claim": "Texas TDLR permit names Walmart Distribution Center #6016, 3900 N IH-35 New Braunfels; $15M renovation incl. truck maintenance garage + truck gate office through Feb 2025."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Walmart self-attests current hiring at DC 6016 and a Texas state permit documents active 2023-2025 capital investment in the truck yard/gates; no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

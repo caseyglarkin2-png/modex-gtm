@@ -220,5 +220,31 @@
     "siteAreaAcres": "~68 acres derived from the traced perimeter; approximate.",
     "trailersVisible": "~320 trailers visible across the NE drop yard, NW drop rows and dock faces; approximate count from overhead imagery."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.spscommerce.com/community/articles/walmart-receiving-distribution-center-dc-list",
+        "date": "2025",
+        "type": "locator",
+        "claim": "DC 4020 = Regional Distribution Center, 101 Broome Corporate Pkwy, Conklin NY 13748."
+      },
+      {
+        "tier": 1,
+        "url": "https://seasonalworks.labor.ny.gov/conklin/new-york/usa/jobs/walmart/careers/",
+        "date": "2025",
+        "type": "careers",
+        "claim": "NY State Dept of Labor careers portal lists Walmart jobs at Conklin NY."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "DC 4020 self-attested as a Walmart Regional DC on Broome Corporate Pkwy, Conklin; Walmart careers presence confirms operation; no closure found. Distinct from the Lineage 3PL cold-storage in the same office park.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

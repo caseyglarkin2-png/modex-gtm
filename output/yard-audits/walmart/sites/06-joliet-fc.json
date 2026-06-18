@@ -198,5 +198,31 @@
     "buildingCount": "Single 1.1M sf FC building (the tan cross-dock building). The white-roof building to the north is a separate CenterPoint tenant, excluded.",
     "siteAreaAcres": "~102 acres from the perimeter polygon (building ~25 acres plus drop yards, aprons, associate parking and perimeter road)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://corporate.walmart.com/news/2022/09/28/walmart-opens-first-of-four-next-generation-fulfillment-centers-in-joliet-il",
+        "date": "2022-09-28",
+        "type": "press",
+        "claim": "Walmart corporate: opened its 1st next-gen 1.1M sf FC at 3501 S. Brandon Road, Joliet IL (FC #3040)."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.supermarketnews.com/grocery-operations/walmart-shutters-two-ecommerce-fulfillment-centers",
+        "date": "2026-04-03",
+        "type": "press",
+        "claim": "April 2026 closures are Matteson IL + Worcester MA; Joliet explicitly cited as the operating next-gen model receiving relocated ops, NOT closing."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tier-1 corporate opening + Tier-2 closure gauntlet affirmatively clears Joliet (consolidation target, still operating in 2026); closed IL FC is Matteson, a different city.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

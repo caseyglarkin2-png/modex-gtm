@@ -235,7 +235,7 @@
     "fastLaneOpportunity": "Wide divided entrance apron with substantial unused paved width; room to add a bypass/express lane.",
     "dockDoors": "50+ band. Dock doors counted across three faces: west face of the main (south) building (~40-50 doors, trailers backed in), south/SE face of the main building (~30+ doors), and the south face of the north building (~40+ doors). Total estimated ~150.",
     "dropArea": "50+ band. Extensive trailer drop yard on the NW with many parallel rows of parked drop trailers (no tractors); estimated 200+ drop stalls.",
-    "shipRcvSeparate": "Likely separate ship/receive — distinct dock banks on different building faces (north building south face vs main building west and south faces). Medium confidence from overhead only.",
+    "shipRcvSeparate": "Likely separate ship/receive \u2014 distinct dock banks on different building faces (north building south face vs main building west and south faces). Medium confidence from overhead only.",
     "scale": "No truck scale/weigh pad clearly identified in the entrance path; left false.",
     "buildingCount": "Two connected structures: a long E-W north building and a large square main distribution building (grocery/perishable). Counted as 2.",
     "railServed": "No rail spur enters the property; nearest rail is not connected. False.",
@@ -243,5 +243,38 @@
     "trailersVisible": "~220 trailers visible across drop yard, dock faces, and overflow rows in captured z17-z18 imagery; honest overhead estimate.",
     "connectivityIssue": "On a developed industrial park with adjacent DCs and a major retailer; cellular coverage likely adequate. False."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.waltonchamber.org/members/wal-mart-supply-chain",
+        "date": "2026-06",
+        "type": "econ-dev",
+        "claim": "Walmart Distribution Center #6055 listed as active Walton Chamber member at 655 Unisia Dr, Monroe GA 30655."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.spscommerce.com/community/articles/walmart-receiving-distribution-center-dc-list",
+        "date": "2025",
+        "type": "locator",
+        "claim": "DC 6055 = Walmart Grocery/Fresh WHSE 6055, 655 Unisia Dr, Monroe GA 30655."
+      },
+      {
+        "tier": 3,
+        "url": "https://choosewalton.com/company/walmart/",
+        "date": "2026-06",
+        "type": "econ-dev",
+        "claim": "Walmart Distribution Center 6055, Monroe GA, 880,000 sqft 24-hour facility."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "DC 6055 self-attested current via county chamber + econ-dev; DC# and address match; grocery/fresh type confirmed; no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

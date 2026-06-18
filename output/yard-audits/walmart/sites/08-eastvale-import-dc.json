@@ -179,5 +179,38 @@
     "siteAreaAcres": "~26.5 ac for the addressed building's operational envelope (building + its two dock courts); the broader campus is far larger.",
     "railServed": "No rail spur enters the property - truck-only import DC fed from LA/Long Beach ports."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.eastvaleca.gov/Home/Components/News/News/8914/238",
+        "date": "2019",
+        "type": "econ-dev",
+        "claim": "City of Eastvale notice: Walmart Import Distribution Center 6060 is hiring full-time."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.spscommerce.com/community/articles/walmart-receiving-distribution-center-dc-list",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "DC 6060 = Import Storage DC, 4250 Hamner Ave, Eastvale CA 91752."
+      },
+      {
+        "tier": 3,
+        "url": "https://panjiva.com/Walmart-Dc-6060/100880856",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Customs/import buyer records for Walmart DC 6060 at 4250 Hamner Ave, Eastvale CA 91752."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Walmart Import DC 6060 at 4250 Hamner Ave, Eastvale/Mira Loma CA matches the pin (Inland Empire import region); no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

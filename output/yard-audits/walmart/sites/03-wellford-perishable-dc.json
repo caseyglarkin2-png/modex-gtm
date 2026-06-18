@@ -166,5 +166,38 @@
     "railServed": "No rail spur enters the property.",
     "streetView": "Only the public-road intersection pano (EYDU-J3azbveHLrMwbAs9A, captured 2024-06) resolves; it looks N up the driveway toward the DC. No pano exists at the private hilltop gate (ZERO_RESULTS), so truckGate streetViewMeta omitted/false."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.supplychaindive.com/news/walmart-perishable-distribution-center-south-carolina/759536/",
+        "date": "2025-09",
+        "type": "press",
+        "claim": "Walmart grand opening of operational 725,000 sf perishable DC in Wellford SC; 600+ employees, serves 180 stores."
+      },
+      {
+        "tier": 1,
+        "url": "https://secure.businesswire.com/news/home/20250904682927/en/Walmart-Celebrates-Grand-Opening-of-High-Tech-Perishable-Distribution-Center-in-Wellford",
+        "date": "2025-09-04",
+        "type": "press",
+        "claim": "Walmart official press wire: grand opening of high-tech perishable DC in Wellford, SC."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.greenvillechamber.org/membership/walmart-pdc-3010/46348/",
+        "date": "2025-09",
+        "type": "locator",
+        "claim": "Greenville Chamber lists the facility as Walmart PDC 3010, confirming the DC number."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Walmart announced and celebrated the grand opening of the operational Wellford perishable DC in Sept 2025; open and running, PDC 3010 corroborated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

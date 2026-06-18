@@ -166,5 +166,31 @@
     "railServed": "No rail spur enters the property; nearest is the building's road access only.",
     "urbanRural": "Edge-of-town McCordsville, surrounded by active farmland on N/E/S; Rural per rubric (small-town industrial -> Rural)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://corporate.walmart.com/news/2023/06/15/walmart-opens-high-tech-fulfillment-center-near-indianapolis",
+        "date": "2023-06-15",
+        "type": "press",
+        "claim": "Walmart corporate: opened 2.2M sf next-gen FC at 5259 W 500 N, McCordsville IN; 1,000+ associates, 144 docks, 900+ trailer spaces."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.wthr.com/article/money/business/walmart-fulfillment-center-mccordsville-ships-over-1-million-online-orders-a-week/531-d65b0bf8-6ea2-4914-9a8d-195bfdb27b0a",
+        "date": "2023",
+        "type": "press",
+        "claim": "FC ships 1M+ online orders/week; operating."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tier-1 corporate opening; NOT on Walmart 2024-26 FC closure list (Swedesboro NJ, Pedricktown NJ, Worcester MA, Matteson IL, Fort Worth TX).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

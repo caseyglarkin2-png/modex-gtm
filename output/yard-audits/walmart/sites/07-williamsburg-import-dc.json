@@ -255,5 +255,38 @@
     "railServed": "No rail spur enters the property; port volume is drayed by truck from Hampton Roads.",
     "entryLanes": "Estimated 2 inbound at the gate apron; overhead resolution limits exact lane count."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.walmart.com/us/jobs/WD1669236-power-equipment-operator",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active Walmart/Sams Club supply-chain import job at 9305 Pocahontas Trl, Williamsburg VA 23185, currently hiring."
+      },
+      {
+        "tier": 3,
+        "url": "https://connect.williamsburgchamber.com/directory/Details/walmart-stores-inc-distribution-center-6088-2459128",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Chamber directory lists Walmart Stores Inc - Distribution Center 6088 at 9305 Pocahontas Trail, Williamsburg VA."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.spscommerce.com/community/articles/walmart-receiving-distribution-center-dc-list",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "DC 6088 = Import Storage DC, 9305 Pocahontas Trl, Williamsburg VA 23185."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Walmart Import DC 6088 at the pinned address is actively hiring and consistently identified as a Walmart import DC; no closure found. Careers posting renders under the Sams Club banner (a Walmart Inc. division on this import campus); operator remains Walmart Inc.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
