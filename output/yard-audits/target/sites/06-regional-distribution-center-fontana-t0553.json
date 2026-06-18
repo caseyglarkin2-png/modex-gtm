@@ -88,5 +88,19 @@
     "railServed": "No rail spur enters the property; the NE diagonal corridor is a separate utility/road right-of-way.",
     "urbanRural": "Dense Inland Empire industrial/residential fabric of Fontana - Urban."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://corporate.target.com/jobs/w02/46/seasonal-full-time-hourly-warehouse-operations-openings-t0553", "date": "2026-06", "type": "careers", "claim": "Active Target seasonal warehouse operations req carrying the exact T0553 code in Fontana CA on the corporate.target.com domain." },
+      { "tier": 1, "url": "https://corporate.target.com/jobs/w76/73/operations-manager-regional-distribution-center-fontana,-california", "date": "2026-06", "type": "careers", "claim": "Active Target careers req for Operations Manager - Regional Distribution Center, Fontana CA (14750 Miller Ave) on the corporate.target.com domain." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Target careers reqs carrying the exact T0553 code at the Fontana CA RDC (14750 Miller Ave); no closure/WARN found. Target had no bankruptcy-era restructuring.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

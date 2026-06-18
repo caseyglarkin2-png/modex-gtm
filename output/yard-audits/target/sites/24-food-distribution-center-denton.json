@@ -73,5 +73,19 @@
     "postGateStaging": "Wide paved apron between the gate and the dock doors provides interior queuing room.",
     "perimeter": "Traced inside the fence line / property edge; ~30 acres. North bound is the Airport Rd setback, east bound the curving access drive, west bound the shared property line with the neighbor lot."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.cbsnews.com/texas/news/target-food-distribution-center-opens-in-denton/", "date": "2013", "type": "press", "claim": "Target opened a 360,000 sq ft grocery/food distribution center near Denton Airport (3255 Airport Rd), serving 235 stores across eight states with ribbon-cutting attended by Denton city leaders." },
+      { "tier": 3, "url": "https://www.farmersfridge.com/locations/tx-dal-denton-target-distribution-center/", "date": "2026-06", "type": "press", "claim": "Farmer's Fridge lists the Denton Target Distribution Center (3255 Airport Rd) as an active on-site fridge location, corroborating current staffed operation." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Target food DC at 3255 Airport Rd, Denton TX opened 2013 (Tier-1 press) and shows continued current operation (active on-site amenity); partial 'Airport Rd' address resolves to the operating facility. NOT under construction/announced. No closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

@@ -85,5 +85,19 @@
     "entryExitSeparate": "Multiple separated truck access points (west drive + west-yard drive + SE circulation road) rather than one consolidated in/out gate.",
     "siteAreaAcres": "~72 acres of fenced, paved truck-operations area from the perimeter ring (building ~1.4M sq ft plus surrounding yards); approximate."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://target.wd5.myworkdayjobs.com/targetcareers/job/7551-W-Morris-St-IndianapolisIN-46231-1358/Full-Time-Hourly-Warehouse-Operations-Openings--T0559-_R0000400249/apply", "date": "2026-06", "type": "careers", "claim": "Active Target Workday req coded T0559 posted at 7551 W Morris St, Indianapolis IN 46231 — the exact RDC address." },
+      { "tier": 1, "url": "https://www.supplychaindive.com/news/target-fulfillment-operations-closure-200-indianapolis-employees/757910/", "date": "2025-08", "type": "press", "claim": "Target press/trade coverage: only the co-located Fulfillment Operation T-9335 is closing; Regional Replenishment Operation T-559 remains fully operational at the same Morris St facility." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tier-1 active T0559 careers req at the exact address; the Aug-2025 WARN closure applies to the co-located fulfillment op T-9335, NOT the RDC T-559, which Target states stays fully operational.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

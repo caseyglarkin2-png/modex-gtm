@@ -80,5 +80,19 @@
     "railServed": "No rail spur enters the property.",
     "yardMetrics": "Door/trailer counts are honest overhead estimates from zoom-19/20 imagery, not exact. buildingCount=3 (main DC, SE yard-ops/transportation office, SW pump house)."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "imageryDate": "2026-04",
+    "citations": [
+      { "tier": 1, "url": "https://jobs.target.com/location/madison-alabama-united-states-jobs/6656/6252001-4829764-4074267/4", "date": "2026-06", "type": "careers", "claim": "Target Madison AL distribution-center jobs hub lists active supply-chain openings at the RDC (T-580)." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tier-1 active Target careers reqs at the exact Greenbrier Pkwy address (RDC T-580); no closure/WARN/sale signal found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

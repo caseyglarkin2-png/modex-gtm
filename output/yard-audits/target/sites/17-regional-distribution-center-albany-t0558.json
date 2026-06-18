@@ -82,5 +82,18 @@
     "buildingCount": "Main DC building plus a separate fleet maintenance/wash building on the SE.",
     "siteAreaAcres": "Derived from perimeter polygon (~61.5 acres inside the fence via shoelace)."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://corporate.target.com/jobs/w02/41/full-time-hourly-warehouse-operations-t0558", "date": "2026-06", "type": "careers", "claim": "Active Target careers req for Full Time Hourly Warehouse Operations tagged T0558 at 875 Beta Dr SW, Albany, OR." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Target-owned careers req naming T0558 at the exact Beta Dr SW address; no closure/WARN negative found. (Careers ZIP shows 97321 vs roster 97322; same Beta Dr SW facility.)",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

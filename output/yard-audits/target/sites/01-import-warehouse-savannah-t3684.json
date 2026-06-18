@@ -93,5 +93,20 @@
     "siteAreaAcres": "Perimeter polygon yields 154.3 acres, matching the Chatham County assessor land size of 6,534,000 sq ft (~150 acres) for 211 Little Hearst Pkwy (Target), confirming correct building identification.",
     "buildingId": "Confirmed as Target's 2,048,125 sq ft import distribution warehouse (built 2006, opened 2007) at 211 Little Hearst Pkwy, Savannah/Port Wentworth GA 31407 — distinct from the adjacent smaller IKEA DC at 202 Little Hearst Pkwy (750,480 sq ft). Provided address '110' and geocoded point were off; corrected via assessor land-area match."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "imageryDate": "2025-12",
+    "citations": [
+      { "tier": 1, "url": "https://corporate.target.com/jobs/w98/88/operations-manager-import-distribution-center-savannah,-ga", "date": "2026-06", "type": "careers", "claim": "Active Target careers req for Operations Manager - Import Distribution Center, Savannah GA on the corporate.target.com domain." },
+      { "tier": 1, "url": "https://wwd.com/sourcing-journal/logistics/target-ends-fulfillment-operations-distribution-centers-260-job-cuts-layoffs-indianapolis-savannah-levis-home-depot-1238855647/", "date": "2025-08-13", "type": "press", "claim": "Target spokesperson confirms the 2M sqft Savannah import warehouse remains open and continues import operations receiving Port of Savannah cargo; only one fulfillment service was shifted out (62-job WARN)." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Target import-DC careers reqs at this Savannah facility; Aug 2025 press confirms the import warehouse stays open after a partial 62-job fulfillment-service shift (not a closure). Target had no bankruptcy-era restructuring.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

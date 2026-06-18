@@ -84,5 +84,19 @@
     "urbanRural": "Edge-of-town / rural setting — surrounded by woods, retention pond, and scattered rural residential along US-441.",
     "counts": "dockDoorCount/trailers are honest overhead estimates from z16-z21 imagery, not exact."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://target.wd5.myworkdayjobs.com/targetcareers/job/3049-North-US-441-Lake-CityFL-32055-4939/Operations-Manager---Food-Distribution-Center--Lake-City--FL-_R0000384323-1", "date": "2026-06", "type": "careers", "claim": "Active Target Operations Manager req at the Food Distribution Center, 3049 North US-441, Lake City FL 32055 — exact audited address." },
+      { "tier": 1, "url": "https://corporate.target.com/jobs/w02/62/warehouse-worker-food-distribution-center-t3892", "date": "2026-06", "type": "careers", "claim": "Active Target Warehouse Worker req for the Food Distribution Center (facility code T3892), Lake City FL." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Target food-DC careers reqs pinned to the exact 3049 N US-441 address (internal code T3892) confirm a currently operating facility, NOT under construction/announced; imprecise geocode corrected in fieldNotes. No closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

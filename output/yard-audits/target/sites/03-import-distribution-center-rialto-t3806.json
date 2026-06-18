@@ -86,5 +86,19 @@
     "siteAreaAcres": "~160 ac for the fenced operational rectangle measured from the perimeter ring; full campus parcel is ~240 ac including southern graded land.",
     "streetView": "Only public pano is a 2007 capture on the south access road predating the built facility and not showing the gate; no interior coverage. hasCoverage set false rather than invent a pano."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://jobs.target.com/job/rialto/full-time-hourly-warehouse-operations-openings-t3806/1118/66814415856", "date": "2026-06", "type": "careers", "claim": "Active Target careers req for Full Time Hourly Warehouse Operations (T3806) in Rialto CA on the Target jobs ATS, matching the audited T-code." },
+      { "tier": 1, "url": "https://corporate.target.com/jobs/w33/55/operations-manager-upstream-distribution-center-rialto,-california", "date": "2026-06", "type": "careers", "claim": "Active Target careers req for Operations Manager - Upstream Distribution Center, Rialto CA on the corporate.target.com domain." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Target careers reqs carrying the exact T3806 code at the Rialto CA upstream/import DC (3105 N Mango Ave); no closure/WARN found. Target had no bankruptcy-era restructuring.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

@@ -84,5 +84,18 @@
     "postGateStaging": "Wide internal truck court between the gate and the dock doors provides inside-gate queuing room.",
     "siteAreaAcres": "68.5 ac is the traced operational footprint (building + paved trailer yard + auto parking). County/Target sources cite a 184-ac parcel; the balance is wooded buffer outside the active fence line."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://jobs.target.com/job/lugoff/full-time-hourly-warehouse-operations-permanent-openings-t0594/1118/66814416656", "date": "2026-06", "type": "careers", "claim": "Active Target careers req for Full Time Hourly Warehouse Operations Permanent Openings tagged T0594 at 22 Corporate Drive, Lugoff, SC 29078." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Target-owned careers req naming T0594 at the exact Lugoff address; no closure/WARN negative found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

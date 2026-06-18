@@ -90,5 +90,20 @@
     "siteAreaAcres": "~74.6 ac computed by shoelace from the perimeter ring (building footprint ~24 ac / ~1.0-1.05M sq ft).",
     "railServed": "No rail spur enters the property."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "imageryDate": "2025-12",
+    "citations": [
+      { "tier": 1, "url": "https://corporate.target.com/jobs/w02/82/seasonal-full-time-hourly-warehouse-operations-openings-t3841", "date": "2026-06", "type": "careers", "claim": "Active Target seasonal warehouse operations req carrying the exact T3841 code at the Suffolk VA facility on the corporate.target.com domain." },
+      { "tier": 1, "url": "https://corporate.target.com/jobs/w03/82/operations-manager-upstream-distribution-center-suffolk,-va", "date": "2026-06", "type": "careers", "claim": "Active Target careers req for Operations Manager - Upstream Distribution Center, Suffolk VA on the corporate.target.com domain." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Target careers reqs carrying the exact T3841 code at the Suffolk VA upstream/import warehouse (300 Manning Bridge Rd); no closure/WARN found. Target had no bankruptcy-era restructuring.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

@@ -95,5 +95,18 @@
     "connectivityIssue": "Directly on US-69 highway frontage near Tyler; cellular coverage expected adequate, so false.",
     "scale": "No truck scale/weigh pad identified in the truck path."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://corporate.target.com/jobs/w02/50/seasonal-full-time-hourly-warehouse-operations-openings-t0578", "date": "2026-06", "type": "careers", "claim": "Active Target warehouse-operations req coded T0578 for the Tyler TX RDC (13786 County Rd 433)." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tier-1 active Target careers req with matching T0578 code at the Tyler RDC; no closure/WARN/sale signal found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

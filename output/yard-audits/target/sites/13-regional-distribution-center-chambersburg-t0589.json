@@ -73,5 +73,19 @@
     "postGateStaging": "Large paved apron and internal yard immediately inside the gate before the docks.",
     "railServed": "A rail line runs along the west property edge (Archer Dr corridor) but no spur appears to enter the property; railServed=false."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://corporate.target.com/jobs/w26/33/full-time-hourly-warehouse-operations-hiring-both-overnight-and-weekend-shifts-t0589", "date": "2026-06", "type": "careers", "claim": "Active Target careers req for Full Time Hourly Warehouse Operations tagged with facility code T0589." },
+      { "tier": 1, "url": "https://corporate.target.com/jobs/w71/17/operations-manager-regional-distribution-center-chambersburg,-pa", "date": "2026-06", "type": "careers", "claim": "Active Target Operations Manager req for the Regional Distribution Center in Chambersburg, PA." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Multiple active Target-owned careers reqs naming T0589 and the Chambersburg RDC; no closure/WARN negative found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

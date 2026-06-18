@@ -97,5 +97,19 @@
     "postGateStaging": "Wide paved apron between the gate and the dock faces can hold queued trucks (inferred from overhead); flagged uncertain.",
     "railServed": "No rail spur enters the property."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://corporate.target.com/jobs/w03/12/warehouse-worker-food-distribution-center-t3895", "date": "2026-06", "type": "careers", "claim": "Active Target Warehouse Worker req for the Food Distribution Center (facility code T3895) at 2115 Technology Pkwy, Cedar Falls, IA." },
+      { "tier": 1, "url": "https://corporate.target.com/jobs/w16/17/operations-manager-intern-starting-summer-2026-food-distribution-center-cedar-falls,-ia", "date": "2026-06", "type": "careers", "claim": "Active Target Operations Manager Intern req (starting summer 2026) at the Cedar Falls, IA Food Distribution Center, indicating forward staffing of an operating facility." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Target food-DC careers reqs at the Cedar Falls site confirm current operation; note Target's internal food-DC code is T3895 (title carried T0590), facility/address confirmed.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

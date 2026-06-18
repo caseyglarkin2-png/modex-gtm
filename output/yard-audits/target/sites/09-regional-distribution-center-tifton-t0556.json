@@ -82,5 +82,18 @@
     "buildingCount": "Main RDC plus the east office annex.",
     "dockDoorCount": "Estimate from north + west dock faces; large RDC, low-confidence exact count."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://target.wd5.myworkdayjobs.com/en-US/targetcareers/job/4502-Union-Rd-TiftonGA-31794-8543/Full-Time-Hourly-Warehouse-Operations--T0556-_R0000400243", "date": "2026-06", "type": "careers", "claim": "Active Target Workday req coded T0556 posted at 4502 Union Rd, Tifton GA 31794 — the exact RDC address." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tier-1 active Target careers req with matching T0556 code at the exact Tifton address; no closure/WARN/sale signal found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

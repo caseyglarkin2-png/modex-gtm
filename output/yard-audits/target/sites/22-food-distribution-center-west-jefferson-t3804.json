@@ -72,5 +72,19 @@
     "urbanRural": "Rural - edge-of-town logistics park off I-70 / SR-29 near West Jefferson, surrounded by farmland.",
     "connectivityIssue": "FALSE - rural but within an active, dense industrial park; cellular coverage expected adequate."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://jobs.target.com/job/west-jefferson/full-time-hourly-warehouse-operations-t3880/1118/66814424032", "date": "2026-06", "type": "careers", "claim": "Active Target full-time hourly warehouse-operations req tagged food-DC facility code T3880 at West Jefferson, OH." },
+      { "tier": 1, "url": "https://corporate.target.com/press/release/2012/03/target-plans-new-food-distribution-center-in-ohio", "date": "2012-03", "type": "press", "claim": "Target announced the West Jefferson, OH food DC at 42 Commerce Parkway; facility opened 2014 and serves OH plus nine states." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Target food-DC careers reqs (facility code T3880) at 42 Commerce Pkwy, West Jefferson OH confirm current operation; opened 2014, not under construction. Title T3804 is the adjacent RDC; audited building is the T3880 food DC.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

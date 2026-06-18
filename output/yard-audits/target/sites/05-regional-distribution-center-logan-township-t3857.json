@@ -78,5 +78,18 @@
     "urbanRural": "Logan Township edge-of-town setting surrounded by farmland, wetlands and woods despite the industrial park; classified Rural per rubric tie-breaker.",
     "siteAreaAcres": "~78 acres derived from the traced perimeter polygon (1.1M sq ft building footprint plus yard, drop yard, and parking)."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://corporate.target.com/jobs/w03/31/full-time-hourly-warehouse-operations-seasonal-openings-for-evening-overnight-shifts-t3857", "date": "2026-06", "type": "careers", "claim": "Active Target seasonal warehouse operations req carrying the exact T3857 code in Logan Township NJ on the corporate.target.com domain." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Target careers reqs carrying the exact T3857 code at the Logan Township NJ DC (300 Creekview Ave); no facility closure found. The May 2026 NJ '107 jobs' cut is corporate/regional roles spread across four counties, not a closure of this operating DC. Target had no bankruptcy-era restructuring.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

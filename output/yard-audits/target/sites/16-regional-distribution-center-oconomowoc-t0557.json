@@ -90,5 +90,19 @@
     "urbanRural": "Edge-of-town Oconomowoc (Pabst Farms) industrial setting bordered by farmland and a lake to the SW; classified Rural per rubric's small-town guidance, though served by a developed commercial/industrial corridor so cellular connectivity is fine.",
     "siteAreaAcres": "Derived from perimeter polygon (~500m N-S x ~430m E-W), approx 53 acres."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://corporate.target.com/jobs/w03/11/seasonal-full-time-hourly-warehouse-associate-openings-only-t0557", "date": "2026-06", "type": "careers", "claim": "Active Target careers req for Seasonal Full Time Hourly Warehouse Associate tagged T0557." },
+      { "tier": 1, "url": "https://corporate.target.com/jobs/w78/29/facility-attendant-regional-distribution-center-oconomowoc,-wi", "date": "2026-06", "type": "careers", "claim": "Active Target Facility Attendant req for the Regional Distribution Center in Oconomowoc, WI (1100 E Valley Rd)." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Target-owned careers reqs naming T0557 and the Oconomowoc RDC at the exact address; no closure/WARN negative found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

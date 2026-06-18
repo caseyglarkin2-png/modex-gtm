@@ -82,5 +82,19 @@
     "fastLaneOpportunity": "Wide gate apron with 2+2 lanes and ample paved width to add an express bypass.",
     "shipRcvSeparate": "Docks appear concentrated on the north face; no clearly separate second dock bank confirmed."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://corporate.target.com/jobs/w02/64/full-time-hourly-warehouse-operations-hiring-evening-overnight-shifts-openings-only-t0588", "date": "2026-06", "type": "careers", "claim": "Active Target careers req for Full Time Hourly Warehouse Operations tagged T0588 at 25 N 75th Ave, Phoenix, AZ 85043." },
+      { "tier": 1, "url": "https://corporate.target.com/jobs/w97/08/operations-manager-regional-distribution-center-phoenix,-arizona", "date": "2026-06", "type": "careers", "claim": "Active Target Operations Manager req for the Regional Distribution Center in Phoenix, Arizona." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Target-owned careers reqs naming T0588 at the exact 75th Ave address plus the Phoenix RDC; no closure/WARN negative found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

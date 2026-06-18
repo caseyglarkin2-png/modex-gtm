@@ -89,5 +89,19 @@
     "buildingCount": "One contiguous import warehouse is the truck-operations facility; the adjacent warehouses N/S/E are separate properties in the same business park.",
     "streetView": "Nearest Street View panos sit on the perimeter public roads set back behind wooded buffers (e.g. 47.0833,-122.7794 captured 2026-04); none directly faces the internal truck gate and pano_ids could not be retrieved without the Maps key, so hasCoverage is left false rather than inventing an id."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://corporate.target.com/jobs/w57/70/operations-manager-import-distribution-center-lacey,-wa", "date": "2026-06", "type": "careers", "claim": "Active Target careers req for Operations Manager - Import Distribution Center, Lacey WA on the corporate.target.com domain." },
+      { "tier": 1, "url": "https://corporate.target.com/jobs/w02/97/seasonal-full-time-hourly-warehouse-worker-openings-only-t0600", "date": "2026-06", "type": "careers", "claim": "Active Target hourly warehouse worker req keyed to the Lacey facility (T0600) on the corporate.target.com domain." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Target import-DC careers reqs at the 1.7M sqft Lacey WA west-coast import warehouse (3500 Marvin Rd NE); no closure/WARN found. Target had no bankruptcy-era restructuring.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

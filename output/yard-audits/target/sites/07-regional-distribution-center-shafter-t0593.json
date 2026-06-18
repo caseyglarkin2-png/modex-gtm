@@ -76,5 +76,19 @@
     "urbanRural": "Edge-of-town Shafter, surrounded by orchards/farmland in an industrial park; Rural setting.",
     "siteAreaAcres": "Perimeter polygon ~99.7 acres, matching the documented 99-acre Target site (Walsh Group build record)."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "imageryDate": "2026-02",
+    "citations": [
+      { "tier": 1, "url": "https://corporate.target.com/jobs/w48/98/full-time-hourly-warehouse-operations-seasonal-openings-t0593", "date": "2026-02", "type": "careers", "claim": "Active Target warehouse-operations req coded T0593 for 3880 Zachary Ave, Shafter CA 93263 — the exact RDC site." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tier-1 active Target careers req with matching T0593 code at the exact Shafter address; no closure/WARN/sale signal found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

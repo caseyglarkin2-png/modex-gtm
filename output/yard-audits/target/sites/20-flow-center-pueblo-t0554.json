@@ -103,5 +103,19 @@
     "railServed": "No rail spur enters the property; nearest rail is the BNSF/UP main line along US-50 corridor but it does not serve the site.",
     "urbanRural": "Edge-of-Pueblo industrial site surrounded by open scrub/farmland; classified Rural."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://corporate.target.com/jobs/w02/74/full-time-hourly-warehouse-operations-openings-for-evening-overnight-shifts-t0554", "date": "2026-06", "type": "careers", "claim": "Active Target full-time hourly warehouse-operations req tagged facility T0554 at the Pueblo, CO distribution center." },
+      { "tier": 1, "url": "https://corporate.target.com/jobs/w06/88/operations-manager-regional-distribution-center-pueblo,-colorado", "date": "2026-06", "type": "careers", "claim": "Active Target Operations Manager req for the Regional Distribution Center in Pueblo, Colorado." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Target careers reqs tagged internal facility code T0554 at 34800 United Ave, Pueblo CO confirm current Target-operated DC; no closure/sale signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

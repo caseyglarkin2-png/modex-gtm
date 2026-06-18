@@ -90,5 +90,19 @@
     "buildingCount": "Main DC plus a separate office/support building ~600m SE on the same parcel frontage; campus character is minor so multipleFacilities left false.",
     "railServed": "No rail spur enters the property; nearest rail is the I-94 corridor, not a siding."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://corporate.target.com/jobs/w02/59/permanent-full-time-hourly-warehouse-openings-only-t0587", "date": "2026-06", "type": "careers", "claim": "Active Target full-time hourly warehouse req tagged facility T0587 at the Galesburg, MI distribution center." },
+      { "tier": 1, "url": "https://jobs.target.com/employment/united-states-michigan-galesburg-distribution-center-hourly-jobs/1118/11134/6252001-5001836-4997791-4993609/4", "date": "2026-06", "type": "careers", "claim": "Target distribution-center hourly jobs board lists current openings at the Galesburg, MI RDC." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Target careers reqs tagged internal facility code T0587 at Galesburg, MI confirm current Target-operated RDC; no closure/sale signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

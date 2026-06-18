@@ -96,5 +96,19 @@
     "siteAreaAcres": "~95 ac estimated from the perimeter polygon spanning the building, west dock yards, south + SE drop yards and employee parking.",
     "streetView": "No Street View coverage at the gate or perimeter (private property; nearest panos are 2007/2022 rural-road shots that do not reach the entrance), so streetViewMeta hasCoverage=false for both zones."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://jobs.target.com/job/wilton/full-time-hourly-warehouse-associate-openings-hiring-evening-overnight-shifts-1-000-sign-on-bonus-t/1118/70445101584", "date": "2026-06", "type": "careers", "claim": "Active Target careers req (with $1,000 sign-on bonus) for Full Time Hourly Warehouse Associate tagged T0579 at 129 North Rd, Wilton, NY 12831." },
+      { "tier": 1, "url": "https://corporate.target.com/jobs/w72/96/seasonal-full-time-hourly-warehouse-associate-openings-only-t0579", "date": "2026-06", "type": "careers", "claim": "Active Target Seasonal Warehouse Associate req tagged T0579." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Target-owned careers reqs (incl. live sign-on bonus) naming T0579 at the exact Wilton address; no closure/WARN negative found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }
