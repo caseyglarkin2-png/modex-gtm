@@ -237,5 +237,31 @@
     "railServed": "No rail spur enters the property.",
     "trailerParkingCapacity": "Overhead estimate from drop-yard area; approximate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.costco.com/jobs/3414?lang=en-us",
+        "date": "2026",
+        "type": "careers",
+        "claim": "Active Costco Wholesale Corporation requisition 'Any Position in Salt Lake City, Utah' (Costco self-operates facilities here)."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.costco.com/warehouse-locations/west-valley-salt-lake-city-ut-622.html",
+        "date": "2026",
+        "type": "locator",
+        "claim": "Costco's own locator places the SLC-area retail club (#622 'West Valley') at a DIFFERENT address, confirming 5995 W 300 S is the depot/DC, not a store-mislabel."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "5995 W 300 S is Costco's Intermountain West depot (#584/585) with by-appointment receiving; distinct from the West Valley retail club #622; no closure/relocation/WARN found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

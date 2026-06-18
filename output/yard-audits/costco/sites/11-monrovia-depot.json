@@ -297,5 +297,31 @@
     "trailersVisible": "~450 trailers visible across drop yards and dock faces in the captured imagery; honest overhead estimate, flagged uncertain.",
     "imageryNote": "Most recent satellite (Airbus/Maxar 2026) and Street View (2024-07) both show the facility built and operating, with some active expansion/construction near the NE entrance and visitor lot in the 2024 Street View."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.novakconstruction.com/projects/costco-depot/",
+        "date": "2018",
+        "type": "trade",
+        "claim": "GC Novak built Costco's Monrovia MD depot: ground-up precast DC on 84 acres, ~300 truck bays, dry + cooler/freezer, with a 27-acre e-comm/returns center completed fall 2018."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.fredericknewspost.com/news/politics_and_government/transportation/county-to-consider-costco-warehouse-expansion-in-monrovia/article_233d47a7-8f99-56b6-999d-fc6b548266b3.html",
+        "date": "2023",
+        "type": "econ-dev",
+        "claim": "Frederick County coverage: Costco's EXISTING Monrovia DC is being expanded with a new 593,400 sq ft e-comm/returns building (existing depot operates; new build is an addition)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Monrovia depot (Depot 171) at 5236 Intercoastal Dr is a built, operating Mid-Atlantic refrigerated cross-dock (DC operational since ~2010, e-comm done 2018, active in 2023); the 2023 'new warehouse' approval is an expansion building, not the original depot.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

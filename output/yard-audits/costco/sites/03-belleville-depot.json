@@ -244,5 +244,31 @@
     "trailersVisible": "Hundreds of trailers across north and south drop rows and dock faces; 240 is a conservative honest estimate from the captured crops.",
     "dockDoorCount": "~180 is an estimate summing both long building faces; overhead resolution limits an exact count."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.costco.com/jobs/18942?lang=en-us",
+        "date": "2026",
+        "type": "careers",
+        "claim": "Active Costco careers requisition: Fleet Truck Driver in Van Buren Twp, MI (depot role)."
+      },
+      {
+        "tier": 1,
+        "url": "https://bellevilleareaindependent.com/vbt-oks-tax-abatement-for-costco-depot/",
+        "date": "2014",
+        "type": "econ-dev",
+        "claim": "Van Buren Twp tax abatement for Costco's 347,720 sq ft depot on a 71.56-acre site on Belleville Rd; Costco's 10th depot, opened spring 2015."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Econ-dev documents the build (10th Costco depot, opened 2015); current Costco depot-role careers reqs confirm it operates today; construction hits are 2014 historical, not a future site.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

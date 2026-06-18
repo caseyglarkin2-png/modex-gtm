@@ -288,5 +288,31 @@
     "buildingCount": "Two primary structures: north building and the large connected main cold+dry depot (solar-roofed). The white-roofed DC to the east is a separate property and excluded.",
     "urbanRural": "Dense Inland Empire industrial fabric (Jurupa Valley/Mira Loma) directly on I-15; Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://cta.cadienttalent.com/index.jsp?LOCATION_ID=9129714762&locale=en_US&SEQ=locationDetails&applicationName=CostcoNonReqExt&APPLYALLJOBS=true",
+        "date": "2026",
+        "type": "careers",
+        "claim": "Official Costco careers locator lists 'MIRA LOMA (WET DEPOT), CA' at 11600 Riverside Drive as a current hiring location."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.fuscoe.com/portfolio/costco-distribution-center/",
+        "date": "2024",
+        "type": "trade",
+        "claim": "Project engineer portfolio documents the Mira Loma DC: 670k sq ft dry + 201k sq ft cold + 75k sq ft cold expansion."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Costco careers locator names the exact-address 'Mira Loma WET DEPOT'; large cross-dock DC, not a club; no closure/relocation found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

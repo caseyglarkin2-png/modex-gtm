@@ -215,5 +215,31 @@
     "siteAreaAcres": "~195 acres computed via shoelace on the traced fence-line perimeter (includes detention ponds and a southwest expansion/grading pad).",
     "trailersVisible": "Approximate count from the captured z16-z18 imagery across the drop yards and dock aprons."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.costco.com/jobs/27091?lang=en-us",
+        "date": "2026",
+        "type": "careers",
+        "claim": "Costco-owned careers requisition for positions in Morris, IL (depot/distribution staffing)."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.jbcontracting.com/portfolio/costco-distribution-center-in-morris-il/",
+        "date": "2025",
+        "type": "trade",
+        "claim": "General contractor portfolio entry: 'Costco Distribution Center in Morris, IL'."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Costco self-operated Midwest dry cross-dock at the exact address; Costco careers req + GC portfolio + cross-dock hours confirm current ops; no WARN/closure/relocation found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

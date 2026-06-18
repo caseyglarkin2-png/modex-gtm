@@ -265,5 +265,31 @@
     "fastLaneOpportunity": "Wide entrance apron and multi-lane internal gatehouse give room for an express/bypass lane.",
     "entryLanes": "Estimated 2 inbound at the internal gatehouse canopy; exact lane count not fully resolvable from overhead."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.costco.com/jobs/4542?lang=en-us",
+        "date": "2026",
+        "type": "careers",
+        "claim": "Costco-owned careers requisition for positions in Sumner, WA (depot/distribution staffing)."
+      },
+      {
+        "tier": 3,
+        "url": "https://truckmap.com/place/costco-distribution-center-4000-142nd-ave-e-ste-b-sumner-wa-98390-usa",
+        "date": "2026",
+        "type": "trade",
+        "claim": "Costco Distribution Center at 4000 142nd Ave E with 5AM-3PM cross-dock hours (depot, not retail club)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Costco self-operated Pacific NW dry cross-dock at the exact address; Costco careers req confirms current ops; the stale Yelp 'CLOSED' tag is a 2019 tire-center listing, not the depot.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

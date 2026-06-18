@@ -157,5 +157,31 @@
     "urbanRural": "Edge-of-town industrial park beside the NJ Turnpike with a golf course and woods immediately south; broader setting reads Rural per rubric.",
     "streetView": "Public Street View covers only the internal car road (Costco Dr, north entrance) and the east blank-wall road. The north entrance pano (OQa6dk03-14O3aB-N4SE2Q, 2025-06) shows the building + monument sign and is used for perimeter. No pano confirms the truck gate/booth, so truckGate streetView hasCoverage=false."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.redica.com/document-store/sites/siteprofile/100191611/costco-wholesale-corporation-dba-costco-depot-265-monroe-township-united-states-of-america",
+        "date": "2024",
+        "type": "permit",
+        "claim": "FDA/govt inspection site profile lists 'Costco Wholesale Corporation dba Costco Depot #265, Monroe Township' as an active operating site."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.chamberofcommerce.com/business-directory/new-jersey/monroe-township/warehouse/6664751-costco-wet-depot-265",
+        "date": "2026",
+        "type": "trade",
+        "claim": "Costco Wet Depot #265 at 12 Costco Dr listed as its own warehouse facility, distinct from Dry Depot #175 at 10 Costco Dr."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Costco self-operated NE refrigerated 'wet' depot #265 at 12 Costco Dr, distinct from the paired Dry Depot #175 at 10 Costco Dr; active FDA site profile; no closure/relocation found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

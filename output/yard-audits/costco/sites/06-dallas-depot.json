@@ -235,5 +235,31 @@
     "trailersVisible": "200+ trailers visible across both drop yards and dock faces in z18-z21 captures; approximate.",
     "coords": "Roster coords (32.692336,-96.960506) land on the south yard; recentered to the building/yard center 32.69300,-96.96080. Address 3730 Mountain Creek Pkwy confirmed via web search."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.tdlr.texas.gov/TABS/Search/Print/TABS2024024465",
+        "date": "2024",
+        "type": "permit",
+        "claim": "TDLR permit 'Costco Wholesale - Dallas Depot - CW19-0600', owner Costco Wholesale Corp, 3730 Mountain Creek Pkwy; renovation adding 79 truck stalls + retaining wall, Aug 2024-Mar 2026 (around an operating depot)."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.loc8nearme.com/texas/dallas/costco/211772/",
+        "date": "2025",
+        "type": "trade",
+        "claim": "Costco Distribution Depot at 3730 Mountain Creek Pkwy with cross-dock operating hours (depot, not club)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "TDLR permit names Costco Wholesale Corp as owner of the operating Dallas depot at the exact address (yard expansion underway); no closure. NOTE: the roster's '16 cold dock doors' claim is NOT corroborated by the permit found (it is a 79-stall truck-parking + retaining-wall job).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -262,5 +262,31 @@
     "railServed": "A rail line runs in the wooded buffer south of the property but does not spur into the yard.",
     "siteAreaAcres": "112.1 acres derived from the perimeter polygon (fenced building + trailer yards)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.costco.com/jobs/4564?lang=en-us",
+        "date": "2026",
+        "type": "careers",
+        "claim": "Active Costco Wholesale Corporation requisition for 'Any Position in Monroe Township, New Jersey' (depot staffing)."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.redica.com/document-store/sites/siteprofile/100191611/costco-wholesale-corporation-dba-costco-depot-265-monroe-township-united-states-of-america",
+        "date": "2024",
+        "type": "permit",
+        "claim": "FDA/govt site profile confirms the paired Monroe Township Costco depot complex operates as a self-run distribution facility."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "10 Costco Dr is the dry-depot half (#175) of Costco's paired Monroe Township NE cross-dock complex (dry #175 at 10, wet #265 at 12); live by-appointment receiving + active Costco hiring; the Yelp 'CLOSED' tag is a stale crowd retail miscategorization, not a real closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -250,5 +250,24 @@
     "siteAreaAcres": "~59.6 acres computed from the traced perimeter polygon; approximate.",
     "urbanRural": "Edge-of-metro industrial park off S Fulton Pkwy surrounded by woods and other warehouses; classified Rural per the small-town/edge-of-town tie-break rule despite Atlanta metro proximity."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://cta.cadienttalent.com/index.jsp?LOCATION_ID=9129711076&locale=en_US&SEQ=locationDetails&applicationName=CostcoNonReqExt&APPLYALLJOBS=true",
+        "date": "2026",
+        "type": "careers",
+        "claim": "Official Costco careers locator lists 'COLLEGE PARK (DEPOT), GA' at 4250 S Fulton Parkway as a current hiring location."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Costco careers locator names the exact-address 'College Park DEPOT' (Atlanta Depot); cross-dock, not a club; no closure/relocation found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

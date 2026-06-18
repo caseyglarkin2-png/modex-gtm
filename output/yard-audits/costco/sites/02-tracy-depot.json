@@ -264,5 +264,31 @@
     "railServed": "No rail spur enters the property; the nearest linear features are roads and the canal, not track.",
     "streetView": "Only public-road Street View coverage is the S Schulte Ct cul-de-sac frontage pano (wXQePY-JhcdhnUjTG8rQKw, 2019-03) showing the depot office face; the internal guarded checkpoint has no Street View coverage (ZERO_RESULTS), so truckGate hasCoverage is false."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.costco.com/jobs/22882?lang=en-us",
+        "date": "2026",
+        "type": "careers",
+        "claim": "Active Costco careers requisition for positions in Tracy, CA (depot staffing)."
+      },
+      {
+        "tier": 3,
+        "url": "https://panjiva.com/Costco-Tracy-Depot/33575472",
+        "date": "2024",
+        "type": "trade",
+        "claim": "Import records list 'Costco Tracy Depot' (Depot 179) at 25862 S Schulte Ct as an active consignee."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Costco careers req for Tracy plus import records naming 'Costco Depot 179 / Tracy Depot' at the exact address; cross-dock, not a club; no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
