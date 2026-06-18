@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-09T22:36:56.264Z",
+  "builtAt": "2026-06-18T22:23:45.124Z",
   "account": {
     "slug": "amazon",
     "displayName": "Amazon",
@@ -9,10 +9,10 @@
     "coverageNote": {
       "auditedCount": 16,
       "estimatedFootprint": 110,
+      "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Amazon runs 100+ large US fulfillment centers plus sortation centers, inbound cross-docks, and the Amazon Air hub network, feeding thousands of delivery stations. We audited 16 of the largest freight sites.",
-      "auditedScope": "US"
+      "note": "Amazon runs 100+ large US fulfillment centers plus sortation centers, inbound cross-docks, and the Amazon Air hub network, feeding thousands of delivery stations. We audited 16 of the largest freight sites."
     },
     "featuredSiteId": "15-amazon",
     "dossierIntro": "Amazon runs the most heavily gated freight network we have mapped. We audited 16 of its largest US sites, a mix of robotics fulfillment centers, an inbound cross-dock, a sortation center, and the Amazon Air hub at CVG, holding 1,890 dock doors and room for about 3,825 trailers. Fifteen of the sixteen gate the yard and twelve run a staffed guard booth, and none touch rail, so every trailer enters through a controlled checkpoint and leaves by truck. YardFlow turns those checkpoints into one orchestrated gate-to-dock flow across every node.",
@@ -265,6 +265,32 @@
           "siteAreaAcres": "~47.5 acres derived from the traced perimeter polygon.",
           "shipRcvSeparate": "Single continuous dock bank on the north face; shipping/receiving not on physically separate building faces.",
           "streetViewMeta": "Google Street View coverage exists along the north service road (panos captured 2025-05); pano ids not hard-coded - heading values point the camera from the road toward each zone."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://events.amazontours.com/na/onsite/BFI4",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Amazon's official tours site lists BFI4 Kent as an active facility currently accepting in-person tours"
+            },
+            {
+              "tier": 2,
+              "url": "https://www.tripadvisor.com/Attraction_Review-g58537-d33414448-Reviews-Amazon_Fulfillment_Center_bfi4_Tour-Kent_Washington.html",
+              "date": "2026",
+              "type": "press",
+              "claim": "BFI4 Kent fulfillment center tour listed as operating in 2026"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active ~850k sqft robotics FC in Kent WA per Amazon's own tours page + 2026 tour listing; no closure negative. Note: actual address 21005 64th Ave S, Kent (not 2700 Center Dr).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -534,6 +560,32 @@
           "dropArea": "Numbered trailer-storage stalls observed into the 300-365 range across north and south yards; 50+ band.",
           "railServed": "No rail spur enters the property; nearest rail is unrelated.",
           "siteAreaAcres": "Derived from perimeter polygon (~365m x ~402m secured property) ≈ 36 acres."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://www.morenovalleybusiness.com/moreno-valley-celebrates-the-e-commerce-center-opening-by-amazon-fulfillment/",
+              "date": "2014",
+              "type": "econ-dev",
+              "claim": "City of Moreno Valley econ-dev confirms Amazon opened its ONT8 e-commerce/fulfillment center at 24300 Nandina Ave (~1.25M sqft on 75 acres)"
+            },
+            {
+              "tier": 2,
+              "url": "https://www.aol.com/news/amazon-workers-fulfillment-center-moreno-013135268.html",
+              "date": "2024",
+              "type": "press",
+              "claim": "News coverage of an active union drive among workers at the ONT8 Moreno Valley fulfillment center, confirming ongoing operation"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "~1.25M sqft Amazon FC at 24300 Nandina Ave, Moreno Valley, opened 2014, with 2024 labor coverage confirming active operation; no closure/WARN.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -801,6 +853,32 @@
           "multiStep": "No clearly visible second checkpoint (scale house / second booth) after the gate; left false.",
           "railServed": "No rail spur enters the property; nearest rail is unrelated. False.",
           "urbanRural": "Within the Memphis metro dense industrial/residential fabric (subdivisions immediately NW, other DCs across E Holmes) -> Urban."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://hiring.amazon.com/jobDetail/en-US/Fulfillment-Center-Warehouse-Associate/Memphis/a0R4U00000EV4UkUAL",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Amazon careers requisition for FC Warehouse Associate at 3292 E Holmes Rd, Memphis TN — maps MEM1 address to current Amazon hiring"
+            },
+            {
+              "tier": 1,
+              "url": "https://hiring.amazon.com/locations/memphis-tn-jobs",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Amazon currently hiring at Memphis TN fulfillment/sortation operations"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Live Amazon careers req ties exact MEM1 address (3292 E Holmes Rd, Memphis) to current operations; closure gauntlet found no Memphis-specific Amazon closure/WARN.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1027,6 +1105,32 @@
           "scale": "No truck scale / weigh pad visible in the truck path.",
           "siteAreaAcres": "~42 acres derived (shoelace) from the traced 7-vertex perimeter ring (building + east drop yard + dock apron + west employee lot + entry drive); approximate.",
           "streetViewMeta": "Live 2024-09 panos exist on Worldwide Blvd overlooking the gate (perimeter/truckGate hasCoverage true); panos nearest the interior drop yard/dock apron resolve to 2016 pre-Amazon imagery, so those zones marked hasCoverage false. pano ids left empty per instruction (never invent)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://hiring.amazon.com/jobDetail/en-US/Fulfillment-Center-Warehouse-Associate/Hebron/a0R4U00000EV4XbUAL",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Amazon careers req for FC Warehouse Associate at 1155 Worldwide Blvd, Hebron KY — maps CVG1 address to current Amazon hiring"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.aboutamazon.com/news/transportation/amazons-expansion-in-kentucky",
+              "date": "2026-06",
+              "type": "press",
+              "claim": "Amazon press documenting operating footprint expansion in Kentucky (Hebron/NKY cluster)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Live Amazon careers req ties exact CVG1 address (1155 Worldwide Blvd, Hebron, Prologis Park West) to current FC operations; distinct from KCVG air hub; no closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1307,6 +1411,32 @@
           "urbanRural": "Edge-of-town airport setting surrounded by farmland to the south; classed Rural per rubric tie-break.",
           "siteAreaAcres": "~118 acres for the traced landside ground-ops perimeter (the overall Amazon campus is cited at ~600 acres including airside ramp, which is excluded here).",
           "railServed": "No rail spur into the landside truck yard."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.aboutamazon.com/news/operations/welcome-to-the-amazon-air-hub",
+              "date": "2021-08",
+              "type": "press",
+              "claim": "Amazon Air's primary US air cargo hub at CVG, 600-acre 7-building campus"
+            },
+            {
+              "tier": 2,
+              "url": "https://teamster.org/2024/08/teamsters-win-right-to-picket-amazon-at-critical-midwest-air-hub/",
+              "date": "2024-08",
+              "type": "press",
+              "claim": "Teamsters granted right to picket the active Amazon Air Hub at CVG, ~4,500 workers (confirms current operation)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Tier-1 Amazon press establishes the hub; 2024-2025 sources confirm it is Amazon's currently-operating primary air cargo hub; no closure or WARN.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1622,6 +1752,32 @@
           "dropYard": "Dedicated trailer-storage drop rows separate from active dock staging, full of parked trailers (06-northdocks-z19, 06-westdocks-z19).",
           "siteAreaAcres": "~36.8 acres derived from the traced Amazon parcel perimeter (building + fenced yard + drop rows + south employee parking).",
           "railServed": "No rail spur enters the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://hiring.amazon.com/locations/fort-worth-jobs",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Amazon actively hiring at Fort Worth/DFW-area fulfillment operations including FTW1"
+            },
+            {
+              "tier": 2,
+              "url": "https://www.ziprecruiter.com/Jobs/Ftw1/--in-Texas",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active FTW1-coded Amazon openings in Texas as of Jun 2026"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Long-running active Amazon FC at 33333 W LBJ Fwy with current 2025-2026 hiring by code and city; no closure/cancellation/WARN. Note: site sits in south Dallas (Hutchins/Wilmer corridor), label 'Dallas' imprecise.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1871,6 +2027,32 @@
           "dropYard": "Dedicated trailer staging along the west apron and south lot, separate from active dock backing.",
           "railServed": "No rail spur enters the property; site is truck/air-served (adjacent Perot Field Alliance Airport).",
           "siteAreaAcres": "78.8 ac from the traced perimeter incl. yard and parking; published figure ~68 ac for the building parcel."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://www.tdlr.texas.gov/TABS/Search/Print/TABS2025007088",
+              "date": "2025-02",
+              "type": "press",
+              "claim": "TDLR-registered active renovation project 'EOL Building Refresh 2024 - DFW7', 700 Westport Pkwy, interior refresh of existing operating FC, 2/1/2025-8/31/2025 — proves active operation in 2025, not a canceled shell"
+            },
+            {
+              "tier": 1,
+              "url": "https://hiring.amazon.com/locations/fort-worth-jobs",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Amazon actively hiring in Fort Worth (AllianceTexas FC cluster, Westport Pkwy)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "2025 TDLR refresh permit on exact 700 Westport Pkwy building confirms active FC operation; 2022 DFW cancellations never named this address. Note: building at Fort Worth/Haslet line (AllianceTexas), some directories say Haslet 76177.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2103,6 +2285,32 @@
           "urbanRural": "Dense southwest-Phoenix industrial fabric inside the metro, adjacent to I-10; Urban.",
           "siteAreaAcres": "~93.7 ac developed footprint (building + north employee parking + south truck court) from the traced perimeter; the ~1.2M sq ft building dominates.",
           "buildingCount": "Single very large (~1.2M sq ft) FC building; the warehouses north and south across the public roads are separate parcels/tenants, excluded."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 3,
+              "url": "https://www.indeed.com/q-amazon-phx6-l-phoenix,-az-jobs.html",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "44 active 'Amazon PHX6' job listings in Phoenix AZ — facility hiring under its code today"
+            },
+            {
+              "tier": 3,
+              "url": "https://moovitapp.com/index/en/public_transit-Amazon_Fulfillment_Center_Phx6-Phoenix_AZ-site_181846862-746",
+              "date": "2025-01",
+              "type": "locator",
+              "claim": "Amazon Fulfillment Center PHX6, W Mohave St, Phoenix — established FC with transit service"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FLAG: probable, not confirmed. Multiple current-dated (May/Jun 2026) sources show PHX6 actively hiring/operating at ~5050 W Mohave St; no Tier-1 aboutamazon/press source surfaced. Closure/WARN gauntlet clean.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2376,6 +2584,32 @@
           "connectivityIssue": "Large industrial park with carrier coverage; not isolated, so false.",
           "railServed": "No rail spur enters this parcel (intermodal rail is elsewhere in CenterPoint, not into MDW2).",
           "siteAreaAcres": "~31.6 acres for the fenced truck-side operation (building + drop yards + truck court + dock aprons); the full deeded parcel including the eastern grass buffer is larger."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://www.indeed.com/q-mdw2-amazon-l-joliet,-il-jobs.html",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "61 open MDW2 Amazon roles in Joliet IL as of June 2026, incl. Ops Managers — facility staffing actively"
+            },
+            {
+              "tier": 3,
+              "url": "https://www.warehouseworkernetwork.com/listing/mdw2-amazon-fulfillment-center-joliet-illinois/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "MDW2 Amazon FC Joliet listed as operating, ~700k sqft FC at Emerald/Laraway"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active 2026 MDW2-coded hiring on the Joliet building plus operating FC listings; no WARN/cancellation for this site.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2603,6 +2837,32 @@
           "multipleFacilities": "Single EWR4 building. Adjacent large warehouses (incl. a heavily solar-roofed building to the south) are separate Matrix Business Park parcels/companies, not part of this property.",
           "scale": "No truck scale/weigh pad observed in the truck path.",
           "railServed": "No rail spur enters the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://events.amazontours.com/na/onsite/EWR4",
+              "date": "2026-02",
+              "type": "locator",
+              "claim": "Amazon's official tour subdomain lists EWR4 Robbinsville as an active, bookable operating fulfillment center"
+            },
+            {
+              "tier": 1,
+              "url": "https://help.amazontours.com/hc/en-us/articles/15769554161300-EWR4-Tours-Robbinsville-NJ",
+              "date": "2026-02",
+              "type": "locator",
+              "claim": "Amazon Tours help page: EWR4 currently offers private tour sessions, robotics-sortable FC at 50 New Canton Way"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Amazon's own tours platform actively books EWR4 (50 New Canton Way, Robbinsville) as a robotics FC; only closure hit was a temporary 2020 COVID closure, no cancellation/WARN.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2842,6 +3102,32 @@
           "buildingCount": "Single very large multi-story fulfillment building; the SE area is a drop yard, not a separate structure.",
           "railServed": "No rail spur enters the property.",
           "trailerParkingCapacity": "Estimate combines SE drop-yard angled stalls and dock-side trailer rows; approximate from overhead imagery."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://events.amazontours.com/na/onsite/CMH1",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Amazon's own tour portal lists CMH1 Etna OH as a currently operating FC with bookable in-person tours"
+            },
+            {
+              "tier": 2,
+              "url": "https://business.pataskalachamber.com/list/member/amazon-fulfillment-cmh1-1249",
+              "date": "2026-06",
+              "type": "econ-dev",
+              "claim": "Pataskala Area Chamber lists Amazon Fulfillment CMH1 as an active member business at 11999 National Rd SW"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Amazon-owned tour portal lists CMH1 as operating FC + active careers + chamber listing; closure gauntlet returned only unrelated Ohio janitorial-contractor layoffs at other sites.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3078,6 +3364,32 @@
           "railServed": "No rail spur enters the property; I-15 freeway bounds the east edge.",
           "siteAreaAcres": "~47 acres from the traced perimeter polygon (building + west parking + east drop yard).",
           "yardMetrics": "Door/trailer counts are honest overhead estimates from z19-z20 crops; ranges are confident but exact integers approximate."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://events.amazontours.com/na/onsite/LGB3",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Amazon's own tour portal lists LGB3 Eastvale CA (4950 Goodman Way) as a currently operating robotics sortable FC with bookable tours"
+            },
+            {
+              "tier": 1,
+              "url": "https://help.amazontours.com/hc/en-us/articles/16577675531284-LGB3-Tours-Eastvale-CA",
+              "date": "2026",
+              "type": "locator",
+              "claim": "Amazon Tours help center describes LGB3 as an active FC with private Wednesday tour sessions"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Amazon-owned tour portal + help center list LGB3 (4950 Goodman Way, Eastvale) as operating FC; closure gauntlet found CA closures only at other sites (Irvine, West Sacramento).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3362,6 +3674,32 @@
           "railServed": "No rail spur enters the property; nearest rail is not connected.",
           "siteAreaAcres": "Derived from the traced perimeter polygon (~89 acres) covering the southern building and its dock/drop yards.",
           "connectivityIssue": "Dense Inland Empire industrial corridor adjacent to I-215/I-10; strong cellular coverage expected."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://images-na.ssl-images-amazon.com/images/G/01/magicarp/common/FC_Operating_Times_USAmazon.pdf",
+              "date": "2025-06-20",
+              "type": "locator",
+              "claim": "SBD2 listed as a scheduled active US fulfillment center as of 6/20/2025 (Amazon-domain PDF)"
+            },
+            {
+              "tier": 2,
+              "url": "https://hiring.amazon.com/locations/san-bernardino-ca-jobs",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Amazon warehouse hiring in San Bernardino CA"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "On Amazon's own scheduled-FC list (6/2025) at 1494 S Waterman Ave, San Bernardino; CA closures in search hit Irvine/West Sacramento, not SBD2.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3622,6 +3960,32 @@
           "railServed": "No rail spur enters the property; nearest tracks are unrelated.",
           "multiStep": "No clearly distinct second checkpoint (scale house / second booth) after the gate is visible; left false.",
           "yardMetrics": "Counts are overhead estimates: dock doors ~120 (50+), trailers visible ~140, capacity ~200, area ~65 ac from the perimeter polygon."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.fox13news.com/news/amazon-launches-prime-air-delivery-center-ruskin",
+              "date": "2026-03",
+              "type": "press",
+              "claim": "Amazon launched Prime Air drone delivery at its TPA1 fulfillment center in Ruskin FL, first FL site"
+            },
+            {
+              "tier": 2,
+              "url": "https://www.tampabaychamber.com/membership/corporate/amazon-tpa1/",
+              "date": "2026-01",
+              "type": "econ-dev",
+              "claim": "Amazon TPA1 listed as active member facility, Ruskin FL"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Prime Air launched at TPA1 in March 2026 (Amazon investing, not closing); FL Amazon closure in search was TMB8 Homestead, not Ruskin.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3907,6 +4271,32 @@
           "dropYard": "Dedicated large trailer-storage drop yard west of the building, separate from active dock staging.",
           "railServed": "No rail spur enters the property; nearest linear corridors are roads.",
           "yardMetrics": "dockDoorCount, trailersVisible and trailerParkingCapacity are overhead estimates - the trailer rows are dense and partly cut off at frame edges; treat as approximate."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.businesswire.com/news/home/20231012664307/en",
+              "date": "2023-10-12",
+              "type": "press",
+              "claim": "Amazon opened SCK4 Inbound Cross-Dock (IXD) on S Austin Rd, Stockton; ~638k sqft, 2,200 jobs"
+            },
+            {
+              "tier": 1,
+              "url": "https://hiring.amazon.com/locations/stockton-jobs",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Amazon currently hiring at Stockton (Austin Rd / SCK4)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Tier-1 Amazon press open (Oct 2023) + live 2026 careers on the exact S Austin Rd IXD; the June-2024 Stockton closure was a different building (4601 Newcastle Drive), not SCK4.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4197,6 +4587,32 @@
           "siteAreaAcres": "68.2 acres derived from the traced perimeter polygon; the truck-yard portion of a larger campus parcel.",
           "trailersVisible": "~230 trailers counted across east and south drop yards in the captured tight imagery; approximate.",
           "multiStep": "No clear second checkpoint (scale house / second booth) after the gate; left false."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://www.ttownmedia.com/tracy_press/amazon-opens-third-fulfillment-center-in-tracy/article_faf470c0-ce7b-11ed-a6f7-5f3f6ce4d7e1.html",
+              "date": "2023-03",
+              "type": "press",
+              "claim": "Amazon opened SCK6 (Project Big Bird), 1500 E Grant Line Rd Tracy, 3.5M sqft 5-story robotics FC, ribbon-cut Mar 24 2023; 230 trailers / 40 dock bays"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.linkedin.com/jobs/view/senior-automation-engineer-sck6-at-amazon-4227715462",
+              "date": "2026",
+              "type": "careers",
+              "claim": "Amazon hiring Senior Automation Engineer, SCK6, Tracy CA — code+site active"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Live Amazon SCK6 req in Tracy + open building at 1500 E Grant Line Rd; no closure signal. FLAGS: sources describe SCK6 as a robotic FULFILLMENT center, not a sortation center as labeled; SCK code = Stockton metro but building is in Tracy (expected metro-coding, not disqualifying).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       }
     ]

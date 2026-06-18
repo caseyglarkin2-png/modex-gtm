@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-03T20:16:40.540Z",
+  "builtAt": "2026-06-18T22:23:49.605Z",
   "account": {
     "slug": "costco",
     "displayName": "Costco Wholesale",
@@ -384,6 +384,32 @@
           "railServed": "No rail spur enters the property; nearest rail is unrelated.",
           "buildingCount": "Two primary structures: north building and the large connected main cold+dry depot (solar-roofed). The white-roofed DC to the east is a separate property and excluded.",
           "urbanRural": "Dense Inland Empire industrial fabric (Jurupa Valley/Mira Loma) directly on I-15; Urban."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://cta.cadienttalent.com/index.jsp?LOCATION_ID=9129714762&locale=en_US&SEQ=locationDetails&applicationName=CostcoNonReqExt&APPLYALLJOBS=true",
+              "date": "2026",
+              "type": "careers",
+              "claim": "Official Costco careers locator lists 'MIRA LOMA (WET DEPOT), CA' at 11600 Riverside Drive as a current hiring location."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.fuscoe.com/portfolio/costco-distribution-center/",
+              "date": "2024",
+              "type": "trade",
+              "claim": "Project engineer portfolio documents the Mira Loma DC: 670k sq ft dry + 201k sq ft cold + 75k sq ft cold expansion."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Costco careers locator names the exact-address 'Mira Loma WET DEPOT'; large cross-dock DC, not a club; no closure/relocation found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -701,6 +727,32 @@
           "scale": "No truck scale clearly identified in overhead imagery; left uncertain.",
           "railServed": "No rail spur enters the property; the nearest linear features are roads and the canal, not track.",
           "streetView": "Only public-road Street View coverage is the S Schulte Ct cul-de-sac frontage pano (wXQePY-JhcdhnUjTG8rQKw, 2019-03) showing the depot office face; the internal guarded checkpoint has no Street View coverage (ZERO_RESULTS), so truckGate hasCoverage is false."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.costco.com/jobs/22882?lang=en-us",
+              "date": "2026",
+              "type": "careers",
+              "claim": "Active Costco careers requisition for positions in Tracy, CA (depot staffing)."
+            },
+            {
+              "tier": 3,
+              "url": "https://panjiva.com/Costco-Tracy-Depot/33575472",
+              "date": "2024",
+              "type": "trade",
+              "claim": "Import records list 'Costco Tracy Depot' (Depot 179) at 25862 S Schulte Ct as an active consignee."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Costco careers req for Tracy plus import records naming 'Costco Depot 179 / Tracy Depot' at the exact address; cross-dock, not a club; no closure found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -998,6 +1050,32 @@
           "scale": "No distinct truck scale pad identified in the truck path; left false.",
           "trailersVisible": "Hundreds of trailers across north and south drop rows and dock faces; 240 is a conservative honest estimate from the captured crops.",
           "dockDoorCount": "~180 is an estimate summing both long building faces; overhead resolution limits an exact count."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.costco.com/jobs/18942?lang=en-us",
+              "date": "2026",
+              "type": "careers",
+              "claim": "Active Costco careers requisition: Fleet Truck Driver in Van Buren Twp, MI (depot role)."
+            },
+            {
+              "tier": 1,
+              "url": "https://bellevilleareaindependent.com/vbt-oks-tax-abatement-for-costco-depot/",
+              "date": "2014",
+              "type": "econ-dev",
+              "claim": "Van Buren Twp tax abatement for Costco's 347,720 sq ft depot on a 71.56-acre site on Belleville Rd; Costco's 10th depot, opened spring 2015."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Econ-dev documents the build (10th Costco depot, opened 2015); current Costco depot-role careers reqs confirm it operates today; construction hits are 2014 historical, not a future site.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1301,6 +1379,25 @@
           "entryLanes": "Entrance road is divided (in/out separated by a median island at the parkway), modeled as ~2 inbound / 2 outbound; exact lane count not confirmable from overhead.",
           "siteAreaAcres": "~59.6 acres computed from the traced perimeter polygon; approximate.",
           "urbanRural": "Edge-of-metro industrial park off S Fulton Pkwy surrounded by woods and other warehouses; classified Rural per the small-town/edge-of-town tie-break rule despite Atlanta metro proximity."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://cta.cadienttalent.com/index.jsp?LOCATION_ID=9129711076&locale=en_US&SEQ=locationDetails&applicationName=CostcoNonReqExt&APPLYALLJOBS=true",
+              "date": "2026",
+              "type": "careers",
+              "claim": "Official Costco careers locator lists 'COLLEGE PARK (DEPOT), GA' at 4250 S Fulton Parkway as a current hiring location."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Costco careers locator names the exact-address 'College Park DEPOT' (Atlanta Depot); cross-dock, not a club; no closure/relocation found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1619,6 +1716,32 @@
           "urbanRural": "Sumner WA edge-of-town industrial park (Sumner Tacoma 142nd Ave E corridor); broader setting is small-town industrial, classified Rural per rubric tie-break.",
           "fastLaneOpportunity": "Wide entrance apron and multi-lane internal gatehouse give room for an express/bypass lane.",
           "entryLanes": "Estimated 2 inbound at the internal gatehouse canopy; exact lane count not fully resolvable from overhead."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.costco.com/jobs/4542?lang=en-us",
+              "date": "2026",
+              "type": "careers",
+              "claim": "Costco-owned careers requisition for positions in Sumner, WA (depot/distribution staffing)."
+            },
+            {
+              "tier": 3,
+              "url": "https://truckmap.com/place/costco-distribution-center-4000-142nd-ave-e-ste-b-sumner-wa-98390-usa",
+              "date": "2026",
+              "type": "trade",
+              "claim": "Costco Distribution Center at 4000 142nd Ave E with 5AM-3PM cross-dock hours (depot, not retail club)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Costco self-operated Pacific NW dry cross-dock at the exact address; Costco careers req confirms current ops; the stale Yelp 'CLOSED' tag is a 2019 tire-center listing, not the depot.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1905,6 +2028,32 @@
           "urbanRural": "Southwest Dallas (Mountain Creek industrial district), inside the DFW metro fabric - Urban.",
           "trailersVisible": "200+ trailers visible across both drop yards and dock faces in z18-z21 captures; approximate.",
           "coords": "Roster coords (32.692336,-96.960506) land on the south yard; recentered to the building/yard center 32.69300,-96.96080. Address 3730 Mountain Creek Pkwy confirmed via web search."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.tdlr.texas.gov/TABS/Search/Print/TABS2024024465",
+              "date": "2024",
+              "type": "permit",
+              "claim": "TDLR permit 'Costco Wholesale - Dallas Depot - CW19-0600', owner Costco Wholesale Corp, 3730 Mountain Creek Pkwy; renovation adding 79 truck stalls + retaining wall, Aug 2024-Mar 2026 (around an operating depot)."
+            },
+            {
+              "tier": 3,
+              "url": "https://www.loc8nearme.com/texas/dallas/costco/211772/",
+              "date": "2025",
+              "type": "trade",
+              "claim": "Costco Distribution Depot at 3730 Mountain Creek Pkwy with cross-dock operating hours (depot, not club)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "TDLR permit names Costco Wholesale Corp as owner of the operating Dallas depot at the exact address (yard expansion underway); no closure. NOTE: the roster's '16 cold dock doors' claim is NOT corroborated by the permit found (it is a 79-stall truck-parking + retaining-wall job).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2171,6 +2320,32 @@
           "shipRcvSeparate": "Cross-dock with docks on multiple faces but no clearly separate ship vs. receive bank confirmed from overhead; left false/uncertain.",
           "siteAreaAcres": "~195 acres computed via shoelace on the traced fence-line perimeter (includes detention ponds and a southwest expansion/grading pad).",
           "trailersVisible": "Approximate count from the captured z16-z18 imagery across the drop yards and dock aprons."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.costco.com/jobs/27091?lang=en-us",
+              "date": "2026",
+              "type": "careers",
+              "claim": "Costco-owned careers requisition for positions in Morris, IL (depot/distribution staffing)."
+            },
+            {
+              "tier": 3,
+              "url": "https://www.jbcontracting.com/portfolio/costco-distribution-center-in-morris-il/",
+              "date": "2025",
+              "type": "trade",
+              "claim": "General contractor portfolio entry: 'Costco Distribution Center in Morris, IL'."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Costco self-operated Midwest dry cross-dock at the exact address; Costco careers req + GC portfolio + cross-dock hours confirm current ops; no WARN/closure/relocation found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2379,6 +2554,32 @@
           "fastLaneOpportunity": "Wide paved truck road and apron around the south/east with unused width to add a bypass/express lane.",
           "urbanRural": "Edge-of-town industrial park beside the NJ Turnpike with a golf course and woods immediately south; broader setting reads Rural per rubric.",
           "streetView": "Public Street View covers only the internal car road (Costco Dr, north entrance) and the east blank-wall road. The north entrance pano (OQa6dk03-14O3aB-N4SE2Q, 2025-06) shows the building + monument sign and is used for perimeter. No pano confirms the truck gate/booth, so truckGate streetView hasCoverage=false."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.redica.com/document-store/sites/siteprofile/100191611/costco-wholesale-corporation-dba-costco-depot-265-monroe-township-united-states-of-america",
+              "date": "2024",
+              "type": "permit",
+              "claim": "FDA/govt inspection site profile lists 'Costco Wholesale Corporation dba Costco Depot #265, Monroe Township' as an active operating site."
+            },
+            {
+              "tier": 3,
+              "url": "https://www.chamberofcommerce.com/business-directory/new-jersey/monroe-township/warehouse/6664751-costco-wet-depot-265",
+              "date": "2026",
+              "type": "trade",
+              "claim": "Costco Wet Depot #265 at 12 Costco Dr listed as its own warehouse facility, distinct from Dry Depot #175 at 10 Costco Dr."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Costco self-operated NE refrigerated 'wet' depot #265 at 12 Costco Dr, distinct from the paired Dry Depot #175 at 10 Costco Dr; active FDA site profile; no closure/relocation found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2692,6 +2893,32 @@
           "multipleFacilities": "Audited the DRY depot building only (10 Costco Dr). The WET depot #265 at 12 Costco Dr is a separate building ~600m west and is NOT included here, so multipleFacilities=false for this geofence.",
           "railServed": "A rail line runs in the wooded buffer south of the property but does not spur into the yard.",
           "siteAreaAcres": "112.1 acres derived from the perimeter polygon (fenced building + trailer yards)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.costco.com/jobs/4564?lang=en-us",
+              "date": "2026",
+              "type": "careers",
+              "claim": "Active Costco Wholesale Corporation requisition for 'Any Position in Monroe Township, New Jersey' (depot staffing)."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.redica.com/document-store/sites/siteprofile/100191611/costco-wholesale-corporation-dba-costco-depot-265-monroe-township-united-states-of-america",
+              "date": "2024",
+              "type": "permit",
+              "claim": "FDA/govt site profile confirms the paired Monroe Township Costco depot complex operates as a self-run distribution facility."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "10 Costco Dr is the dry-depot half (#175) of Costco's paired Monroe Township NE cross-dock complex (dry #175 at 10, wet #265 at 12); live by-appointment receiving + active Costco hiring; the Yelp 'CLOSED' tag is a stale crowd retail miscategorization, not a real closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2982,6 +3209,32 @@
           "scale": "No truck scale identified in the truck path; left false (low confidence).",
           "railServed": "No rail spur enters the property.",
           "trailerParkingCapacity": "Overhead estimate from drop-yard area; approximate."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.costco.com/jobs/3414?lang=en-us",
+              "date": "2026",
+              "type": "careers",
+              "claim": "Active Costco Wholesale Corporation requisition 'Any Position in Salt Lake City, Utah' (Costco self-operates facilities here)."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.costco.com/warehouse-locations/west-valley-salt-lake-city-ut-622.html",
+              "date": "2026",
+              "type": "locator",
+              "claim": "Costco's own locator places the SLC-area retail club (#622 'West Valley') at a DIFFERENT address, confirming 5995 W 300 S is the depot/DC, not a store-mislabel."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "5995 W 300 S is Costco's Intermountain West depot (#584/585) with by-appointment receiving; distinct from the West Valley retail club #622; no closure/relocation/WARN found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3332,6 +3585,32 @@
           "siteAreaAcres": "~84 acres per the GC project record (Novak Construction), consistent with the traced perimeter.",
           "trailersVisible": "~450 trailers visible across drop yards and dock faces in the captured imagery; honest overhead estimate, flagged uncertain.",
           "imageryNote": "Most recent satellite (Airbus/Maxar 2026) and Street View (2024-07) both show the facility built and operating, with some active expansion/construction near the NE entrance and visitor lot in the 2024 Street View."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.novakconstruction.com/projects/costco-depot/",
+              "date": "2018",
+              "type": "trade",
+              "claim": "GC Novak built Costco's Monrovia MD depot: ground-up precast DC on 84 acres, ~300 truck bays, dry + cooler/freezer, with a 27-acre e-comm/returns center completed fall 2018."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.fredericknewspost.com/news/politics_and_government/transportation/county-to-consider-costco-warehouse-expansion-in-monrovia/article_233d47a7-8f99-56b6-999d-fc6b548266b3.html",
+              "date": "2023",
+              "type": "econ-dev",
+              "claim": "Frederick County coverage: Costco's EXISTING Monrovia DC is being expanded with a new 593,400 sq ft e-comm/returns building (existing depot operates; new build is an addition)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Monrovia depot (Depot 171) at 5236 Intercoastal Dr is a built, operating Mid-Atlantic refrigerated cross-dock (DC operational since ~2010, e-comm done 2018, active in 2023); the 2023 'new warehouse' approval is an expansion building, not the original depot.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       }
     ]

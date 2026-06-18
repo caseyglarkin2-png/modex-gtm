@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-09T16:42:36.516Z",
+  "builtAt": "2026-06-18T22:23:46.577Z",
   "account": {
     "slug": "target",
     "displayName": "Target",
@@ -270,6 +270,33 @@
           "railServed": "No rail spur enters the property; access is road-only off Little Hearst Pkwy (port-drayage import DC).",
           "siteAreaAcres": "Perimeter polygon yields 154.3 acres, matching the Chatham County assessor land size of 6,534,000 sq ft (~150 acres) for 211 Little Hearst Pkwy (Target), confirming correct building identification.",
           "buildingId": "Confirmed as Target's 2,048,125 sq ft import distribution warehouse (built 2006, opened 2007) at 211 Little Hearst Pkwy, Savannah/Port Wentworth GA 31407 — distinct from the adjacent smaller IKEA DC at 202 Little Hearst Pkwy (750,480 sq ft). Provided address '110' and geocoded point were off; corrected via assessor land-area match."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.target.com/jobs/w98/88/operations-manager-import-distribution-center-savannah,-ga",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target careers req for Operations Manager - Import Distribution Center, Savannah GA on the corporate.target.com domain."
+            },
+            {
+              "tier": 1,
+              "url": "https://wwd.com/sourcing-journal/logistics/target-ends-fulfillment-operations-distribution-centers-260-job-cuts-layoffs-indianapolis-savannah-levis-home-depot-1238855647/",
+              "date": "2025-08-13",
+              "type": "press",
+              "claim": "Target spokesperson confirms the 2M sqft Savannah import warehouse remains open and continues import operations receiving Port of Savannah cargo; only one fulfillment service was shifted out (62-job WARN)."
+            }
+          ],
+          "imageryDate": "2025-12",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Target import-DC careers reqs at this Savannah facility; Aug 2025 press confirms the import warehouse stays open after a partial 62-job fulfillment-service shift (not a closure). Target had no bankruptcy-era restructuring.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -479,6 +506,32 @@
           "siteAreaAcres": "Perimeter ring (building footprint + south drop yard) traced from z16 imagery ~ 62 acres; the building alone is the ~1.7M sq ft Target import warehouse.",
           "buildingCount": "One contiguous import warehouse is the truck-operations facility; the adjacent warehouses N/S/E are separate properties in the same business park.",
           "streetView": "Nearest Street View panos sit on the perimeter public roads set back behind wooded buffers (e.g. 47.0833,-122.7794 captured 2026-04); none directly faces the internal truck gate and pano_ids could not be retrieved without the Maps key, so hasCoverage is left false rather than inventing an id."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.target.com/jobs/w57/70/operations-manager-import-distribution-center-lacey,-wa",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target careers req for Operations Manager - Import Distribution Center, Lacey WA on the corporate.target.com domain."
+            },
+            {
+              "tier": 1,
+              "url": "https://corporate.target.com/jobs/w02/97/seasonal-full-time-hourly-warehouse-worker-openings-only-t0600",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target hourly warehouse worker req keyed to the Lacey facility (T0600) on the corporate.target.com domain."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Target import-DC careers reqs at the 1.7M sqft Lacey WA west-coast import warehouse (3500 Marvin Rd NE); no closure/WARN found. Target had no bankruptcy-era restructuring.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -719,6 +772,32 @@
           "fastLaneOpportunity": "Wide multi-lane gate apron with ample paved width to add an express/bypass lane.",
           "siteAreaAcres": "~160 ac for the fenced operational rectangle measured from the perimeter ring; full campus parcel is ~240 ac including southern graded land.",
           "streetView": "Only public pano is a 2007 capture on the south access road predating the built facility and not showing the gate; no interior coverage. hasCoverage set false rather than invent a pano."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://jobs.target.com/job/rialto/full-time-hourly-warehouse-operations-openings-t3806/1118/66814415856",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target careers req for Full Time Hourly Warehouse Operations (T3806) in Rialto CA on the Target jobs ATS, matching the audited T-code."
+            },
+            {
+              "tier": 1,
+              "url": "https://corporate.target.com/jobs/w33/55/operations-manager-upstream-distribution-center-rialto,-california",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target careers req for Operations Manager - Upstream Distribution Center, Rialto CA on the corporate.target.com domain."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Target careers reqs carrying the exact T3806 code at the Rialto CA upstream/import DC (3105 N Mango Ave); no closure/WARN found. Target had no bankruptcy-era restructuring.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -946,6 +1025,33 @@
           "scale": "No truck scale pad identified in the truck path; low confidence given imagery limits.",
           "siteAreaAcres": "~74.6 ac computed by shoelace from the perimeter ring (building footprint ~24 ac / ~1.0-1.05M sq ft).",
           "railServed": "No rail spur enters the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.target.com/jobs/w02/82/seasonal-full-time-hourly-warehouse-operations-openings-t3841",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target seasonal warehouse operations req carrying the exact T3841 code at the Suffolk VA facility on the corporate.target.com domain."
+            },
+            {
+              "tier": 1,
+              "url": "https://corporate.target.com/jobs/w03/82/operations-manager-upstream-distribution-center-suffolk,-va",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target careers req for Operations Manager - Upstream Distribution Center, Suffolk VA on the corporate.target.com domain."
+            }
+          ],
+          "imageryDate": "2025-12",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Target careers reqs carrying the exact T3841 code at the Suffolk VA upstream/import warehouse (300 Manning Bridge Rd); no closure/WARN found. Target had no bankruptcy-era restructuring.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1158,6 +1264,25 @@
           "entryLanes": "Estimated 2 inbound from canopy lane striping; exact split with exit lanes not fully resolvable from overhead.",
           "urbanRural": "Logan Township edge-of-town setting surrounded by farmland, wetlands and woods despite the industrial park; classified Rural per rubric tie-breaker.",
           "siteAreaAcres": "~78 acres derived from the traced perimeter polygon (1.1M sq ft building footprint plus yard, drop yard, and parking)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.target.com/jobs/w03/31/full-time-hourly-warehouse-operations-seasonal-openings-for-evening-overnight-shifts-t3857",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target seasonal warehouse operations req carrying the exact T3857 code in Logan Township NJ on the corporate.target.com domain."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Target careers reqs carrying the exact T3857 code at the Logan Township NJ DC (300 Creekview Ave); no facility closure found. The May 2026 NJ '107 jobs' cut is corporate/regional roles spread across four counties, not a closure of this operating DC. Target had no bankruptcy-era restructuring.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1420,6 +1545,32 @@
           "entryLanes": "Gate apron appears to support ~2 inbound lanes; exit lanes not separately confirmed.",
           "railServed": "No rail spur enters the property; the NE diagonal corridor is a separate utility/road right-of-way.",
           "urbanRural": "Dense Inland Empire industrial/residential fabric of Fontana - Urban."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.target.com/jobs/w02/46/seasonal-full-time-hourly-warehouse-operations-openings-t0553",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target seasonal warehouse operations req carrying the exact T0553 code in Fontana CA on the corporate.target.com domain."
+            },
+            {
+              "tier": 1,
+              "url": "https://corporate.target.com/jobs/w76/73/operations-manager-regional-distribution-center-fontana,-california",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target careers req for Operations Manager - Regional Distribution Center, Fontana CA (14750 Miller Ave) on the corporate.target.com domain."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Target careers reqs carrying the exact T0553 code at the Fontana CA RDC (14750 Miller Ave); no closure/WARN found. Target had no bankruptcy-era restructuring.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1619,6 +1770,26 @@
           "railServed": "No rail spur enters the property; surrounded by farmland on the east.",
           "urbanRural": "Edge-of-town Shafter, surrounded by orchards/farmland in an industrial park; Rural setting.",
           "siteAreaAcres": "Perimeter polygon ~99.7 acres, matching the documented 99-acre Target site (Walsh Group build record)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.target.com/jobs/w48/98/full-time-hourly-warehouse-operations-seasonal-openings-t0593",
+              "date": "2026-02",
+              "type": "careers",
+              "claim": "Active Target warehouse-operations req coded T0593 for 3880 Zachary Ave, Shafter CA 93263 — the exact RDC site."
+            }
+          ],
+          "imageryDate": "2026-02",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Tier-1 active Target careers req with matching T0593 code at the exact Shafter address; no closure/WARN/sale signal found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1850,6 +2021,26 @@
           "urbanRural": "Edge-of-town industrial on the Madison/Huntsville fringe, bordered by active farm fields to the west and a tree line to the south — Rural per rubric.",
           "railServed": "No rail spur enters the property.",
           "yardMetrics": "Door/trailer counts are honest overhead estimates from zoom-19/20 imagery, not exact. buildingCount=3 (main DC, SE yard-ops/transportation office, SW pump house)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://jobs.target.com/location/madison-alabama-united-states-jobs/6656/6252001-4829764-4074267/4",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Target Madison AL distribution-center jobs hub lists active supply-chain openings at the RDC (T-580)."
+            }
+          ],
+          "imageryDate": "2026-04",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Tier-1 active Target careers reqs at the exact Greenbrier Pkwy address (RDC T-580); no closure/WARN/sale signal found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2075,6 +2266,25 @@
           "multipleFacilities": "Single Target campus; the silo/feed-mill complex to the NW is a separate unrelated operation, not counted.",
           "buildingCount": "Main RDC plus the east office annex.",
           "dockDoorCount": "Estimate from north + west dock faces; large RDC, low-confidence exact count."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://target.wd5.myworkdayjobs.com/en-US/targetcareers/job/4502-Union-Rd-TiftonGA-31794-8543/Full-Time-Hourly-Warehouse-Operations--T0556-_R0000400243",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target Workday req coded T0556 posted at 4502 Union Rd, Tifton GA 31794 — the exact RDC address."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Tier-1 active Target careers req with matching T0556 code at the exact Tifton address; no closure/WARN/sale signal found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2319,6 +2529,32 @@
           "scale": "No truck scale/weigh pad resolved at the entrances; set false.",
           "entryExitSeparate": "Multiple separated truck access points (west drive + west-yard drive + SE circulation road) rather than one consolidated in/out gate.",
           "siteAreaAcres": "~72 acres of fenced, paved truck-operations area from the perimeter ring (building ~1.4M sq ft plus surrounding yards); approximate."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://target.wd5.myworkdayjobs.com/targetcareers/job/7551-W-Morris-St-IndianapolisIN-46231-1358/Full-Time-Hourly-Warehouse-Operations-Openings--T0559-_R0000400249/apply",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target Workday req coded T0559 posted at 7551 W Morris St, Indianapolis IN 46231 — the exact RDC address."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.supplychaindive.com/news/target-fulfillment-operations-closure-200-indianapolis-employees/757910/",
+              "date": "2025-08",
+              "type": "press",
+              "claim": "Target press/trade coverage: only the co-located Fulfillment Operation T-9335 is closing; Regional Replenishment Operation T-559 remains fully operational at the same Morris St facility."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Tier-1 active T0559 careers req at the exact address; the Aug-2025 WARN closure applies to the co-located fulfillment op T-9335, NOT the RDC T-559, which Target states stays fully operational.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2526,6 +2762,32 @@
           "dockDoorCount": "Estimated from 1.65M sq ft footprint with dock doors on south and west faces; ~140 is an overhead estimate.",
           "siteAreaAcres": "Traced fenced/developed footprint (~53 ac). County/news sources describe a ~110-acre parcel including grassy buffer farmland and a ~38-39-acre building pad (1.65M sq ft, completed 1996).",
           "railServed": "No rail spur enters the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.target.com/jobs/w49/34/full-time-hourly-warehouse-operations-hiring-evening-overnight-shifts-t0560",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target warehouse-operations req coded T0560 for the Stuarts Draft VA RDC at 345 Mount Vernon Rd."
+            },
+            {
+              "tier": 1,
+              "url": "https://jobs.target.com/location/stuarts-draft-virginia-united-states-jobs/1118/6252001-6254928-4788070/4",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Target Stuarts Draft VA jobs hub lists active RDC openings including Operations Manager - Regional Distribution Center."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Tier-1 active Target careers reqs with matching T0560 code at the Stuarts Draft RDC; no closure/WARN/sale signal found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2811,6 +3073,25 @@
           "urbanRural": "Edge of Tyler metro on US-69 surrounded by farmland and forest — Rural.",
           "connectivityIssue": "Directly on US-69 highway frontage near Tyler; cellular coverage expected adequate, so false.",
           "scale": "No truck scale/weigh pad identified in the truck path."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.target.com/jobs/w02/50/seasonal-full-time-hourly-warehouse-operations-openings-t0578",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target warehouse-operations req coded T0578 for the Tyler TX RDC (13786 County Rd 433)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Tier-1 active Target careers req with matching T0578 code at the Tyler RDC; no closure/WARN/sale signal found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3021,6 +3302,32 @@
           "urbanRural": "Edge-of-town industrial park (Rita Tech Park) along I-81 outside Chambersburg, surrounded by farmland — Rural per rubric.",
           "postGateStaging": "Large paved apron and internal yard immediately inside the gate before the docks.",
           "railServed": "A rail line runs along the west property edge (Archer Dr corridor) but no spur appears to enter the property; railServed=false."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.target.com/jobs/w26/33/full-time-hourly-warehouse-operations-hiring-both-overnight-and-weekend-shifts-t0589",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target careers req for Full Time Hourly Warehouse Operations tagged with facility code T0589."
+            },
+            {
+              "tier": 1,
+              "url": "https://corporate.target.com/jobs/w71/17/operations-manager-regional-distribution-center-chambersburg,-pa",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target Operations Manager req for the Regional Distribution Center in Chambersburg, PA."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Multiple active Target-owned careers reqs naming T0589 and the Chambersburg RDC; no closure/WARN negative found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3224,6 +3531,32 @@
           "dropArea": "Large north drop yard with many rows of unmanned trailers parked in marked stalls; well over 50.",
           "fastLaneOpportunity": "Wide gate apron with 2+2 lanes and ample paved width to add an express bypass.",
           "shipRcvSeparate": "Docks appear concentrated on the north face; no clearly separate second dock bank confirmed."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.target.com/jobs/w02/64/full-time-hourly-warehouse-operations-hiring-evening-overnight-shifts-openings-only-t0588",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target careers req for Full Time Hourly Warehouse Operations tagged T0588 at 25 N 75th Ave, Phoenix, AZ 85043."
+            },
+            {
+              "tier": 1,
+              "url": "https://corporate.target.com/jobs/w97/08/operations-manager-regional-distribution-center-phoenix,-arizona",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target Operations Manager req for the Regional Distribution Center in Phoenix, Arizona."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Target-owned careers reqs naming T0588 at the exact 75th Ave address plus the Phoenix RDC; no closure/WARN negative found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3469,6 +3802,25 @@
           "connectivityIssue": "Set in an industrial park near US-1 with adjacent development; cellular coverage likely adequate, so false.",
           "postGateStaging": "Wide internal truck court between the gate and the dock doors provides inside-gate queuing room.",
           "siteAreaAcres": "68.5 ac is the traced operational footprint (building + paved trailer yard + auto parking). County/Target sources cite a 184-ac parcel; the balance is wooded buffer outside the active fence line."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://jobs.target.com/job/lugoff/full-time-hourly-warehouse-operations-permanent-openings-t0594/1118/66814416656",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target careers req for Full Time Hourly Warehouse Operations Permanent Openings tagged T0594 at 22 Corporate Drive, Lugoff, SC 29078."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Target-owned careers req naming T0594 at the exact Lugoff address; no closure/WARN negative found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3693,6 +4045,32 @@
           "fastLaneOpportunity": "Wide open paved yard aprons at the entrances leave ample room to add an express/bypass lane.",
           "urbanRural": "Edge-of-town Oconomowoc (Pabst Farms) industrial setting bordered by farmland and a lake to the SW; classified Rural per rubric's small-town guidance, though served by a developed commercial/industrial corridor so cellular connectivity is fine.",
           "siteAreaAcres": "Derived from perimeter polygon (~500m N-S x ~430m E-W), approx 53 acres."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.target.com/jobs/w03/11/seasonal-full-time-hourly-warehouse-associate-openings-only-t0557",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target careers req for Seasonal Full Time Hourly Warehouse Associate tagged T0557."
+            },
+            {
+              "tier": 1,
+              "url": "https://corporate.target.com/jobs/w78/29/facility-attendant-regional-distribution-center-oconomowoc,-wi",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target Facility Attendant req for the Regional Distribution Center in Oconomowoc, WI (1100 E Valley Rd)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Target-owned careers reqs naming T0557 and the Oconomowoc RDC at the exact address; no closure/WARN negative found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3924,6 +4302,25 @@
           "railServed": "Mainline rail runs along the east boundary outside the property but no spur enters the yard.",
           "buildingCount": "Main DC building plus a separate fleet maintenance/wash building on the SE.",
           "siteAreaAcres": "Derived from perimeter polygon (~61.5 acres inside the fence via shoelace)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.target.com/jobs/w02/41/full-time-hourly-warehouse-operations-t0558",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target careers req for Full Time Hourly Warehouse Operations tagged T0558 at 875 Beta Dr SW, Albany, OR."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Target-owned careers req naming T0558 at the exact Beta Dr SW address; no closure/WARN negative found. (Careers ZIP shows 97321 vs roster 97322; same Beta Dr SW facility.)",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4160,6 +4557,32 @@
           "urbanRural": "Edge-of-town Wilton/Saratoga, surrounded by woods, farmland and the I-87 Northway corridor; rural setting.",
           "siteAreaAcres": "~95 ac estimated from the perimeter polygon spanning the building, west dock yards, south + SE drop yards and employee parking.",
           "streetView": "No Street View coverage at the gate or perimeter (private property; nearest panos are 2007/2022 rural-road shots that do not reach the entrance), so streetViewMeta hasCoverage=false for both zones."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://jobs.target.com/job/wilton/full-time-hourly-warehouse-associate-openings-hiring-evening-overnight-shifts-1-000-sign-on-bonus-t/1118/70445101584",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target careers req (with $1,000 sign-on bonus) for Full Time Hourly Warehouse Associate tagged T0579 at 129 North Rd, Wilton, NY 12831."
+            },
+            {
+              "tier": 1,
+              "url": "https://corporate.target.com/jobs/w72/96/seasonal-full-time-hourly-warehouse-associate-openings-only-t0579",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target Seasonal Warehouse Associate req tagged T0579."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Target-owned careers reqs (incl. live sign-on bonus) naming T0579 at the exact Wilton address; no closure/WARN negative found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4418,6 +4841,32 @@
           "siteAreaAcres": "Estimated from perimeter polygon (~92 acres of fenced/maintained property).",
           "buildingCount": "Main DC plus a separate office/support building ~600m SE on the same parcel frontage; campus character is minor so multipleFacilities left false.",
           "railServed": "No rail spur enters the property; nearest rail is the I-94 corridor, not a siding."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.target.com/jobs/w02/59/permanent-full-time-hourly-warehouse-openings-only-t0587",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target full-time hourly warehouse req tagged facility T0587 at the Galesburg, MI distribution center."
+            },
+            {
+              "tier": 1,
+              "url": "https://jobs.target.com/employment/united-states-michigan-galesburg-distribution-center-hourly-jobs/1118/11134/6252001-5001836-4997791-4993609/4",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Target distribution-center hourly jobs board lists current openings at the Galesburg, MI RDC."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Target careers reqs tagged internal facility code T0587 at Galesburg, MI confirm current Target-operated RDC; no closure/sale signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4695,6 +5144,32 @@
           "fastLaneOpportunity": "Very wide entrance apron and large paved staging area inside the gate — ample room for an express/bypass lane.",
           "railServed": "No rail spur enters the property; nearest rail is the BNSF/UP main line along US-50 corridor but it does not serve the site.",
           "urbanRural": "Edge-of-Pueblo industrial site surrounded by open scrub/farmland; classified Rural."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.target.com/jobs/w02/74/full-time-hourly-warehouse-operations-openings-for-evening-overnight-shifts-t0554",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target full-time hourly warehouse-operations req tagged facility T0554 at the Pueblo, CO distribution center."
+            },
+            {
+              "tier": 1,
+              "url": "https://corporate.target.com/jobs/w06/88/operations-manager-regional-distribution-center-pueblo,-colorado",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target Operations Manager req for the Regional Distribution Center in Pueblo, Colorado."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Target careers reqs tagged internal facility code T0554 at 34800 United Ave, Pueblo CO confirm current Target-operated DC; no closure/sale signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4942,6 +5417,32 @@
           "connectivityIssue": "False - large Target campus on a developed industrial parkway with adjacent office buildings; cellular coverage expected to be fine.",
           "postGateStaging": "Wide paved apron between the gate and the dock faces can hold queued trucks (inferred from overhead); flagged uncertain.",
           "railServed": "No rail spur enters the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.target.com/jobs/w03/12/warehouse-worker-food-distribution-center-t3895",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target Warehouse Worker req for the Food Distribution Center (facility code T3895) at 2115 Technology Pkwy, Cedar Falls, IA."
+            },
+            {
+              "tier": 1,
+              "url": "https://corporate.target.com/jobs/w16/17/operations-manager-intern-starting-summer-2026-food-distribution-center-cedar-falls,-ia",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target Operations Manager Intern req (starting summer 2026) at the Cedar Falls, IA Food Distribution Center, indicating forward staffing of an operating facility."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Target food-DC careers reqs at the Cedar Falls site confirm current operation; note Target's internal food-DC code is T3895 (title carried T0590), facility/address confirmed.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -5166,6 +5667,32 @@
           "siteArea": "Traced fenced operational perimeter ~30.7 acres. Published parcel is 47 acres (includes undeveloped buffer land and the property's share of the shared trailer yard not enclosed in the operational ring).",
           "urbanRural": "Rural - edge-of-town logistics park off I-70 / SR-29 near West Jefferson, surrounded by farmland.",
           "connectivityIssue": "FALSE - rural but within an active, dense industrial park; cellular coverage expected adequate."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://jobs.target.com/job/west-jefferson/full-time-hourly-warehouse-operations-t3880/1118/66814424032",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target full-time hourly warehouse-operations req tagged food-DC facility code T3880 at West Jefferson, OH."
+            },
+            {
+              "tier": 1,
+              "url": "https://corporate.target.com/press/release/2012/03/target-plans-new-food-distribution-center-in-ohio",
+              "date": "2012-03",
+              "type": "press",
+              "claim": "Target announced the West Jefferson, OH food DC at 42 Commerce Parkway; facility opened 2014 and serves OH plus nine states."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Target food-DC careers reqs (facility code T3880) at 42 Commerce Pkwy, West Jefferson OH confirm current operation; opened 2014, not under construction. Title T3804 is the adjacent RDC; audited building is the T3880 food DC.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -5418,6 +5945,32 @@
           "scale": "No truck scale pad clearly identified; flagged uncertain.",
           "urbanRural": "Edge-of-town / rural setting — surrounded by woods, retention pond, and scattered rural residential along US-441.",
           "counts": "dockDoorCount/trailers are honest overhead estimates from z16-z21 imagery, not exact."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://target.wd5.myworkdayjobs.com/targetcareers/job/3049-North-US-441-Lake-CityFL-32055-4939/Operations-Manager---Food-Distribution-Center--Lake-City--FL-_R0000384323-1",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target Operations Manager req at the Food Distribution Center, 3049 North US-441, Lake City FL 32055 — exact audited address."
+            },
+            {
+              "tier": 1,
+              "url": "https://corporate.target.com/jobs/w02/62/warehouse-worker-food-distribution-center-t3892",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Target Warehouse Worker req for the Food Distribution Center (facility code T3892), Lake City FL."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Target food-DC careers reqs pinned to the exact 3049 N US-441 address (internal code T3892) confirm a currently operating facility, NOT under construction/announced; imprecise geocode corrected in fieldNotes. No closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -5629,6 +6182,32 @@
           "urbanRural": "Edge-of-town industrial park near Denton Enterprise Airport with open fields adjacent; judged Rural per rubric tie-break.",
           "postGateStaging": "Wide paved apron between the gate and the dock doors provides interior queuing room.",
           "perimeter": "Traced inside the fence line / property edge; ~30 acres. North bound is the Airport Rd setback, east bound the curving access drive, west bound the shared property line with the neighbor lot."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.cbsnews.com/texas/news/target-food-distribution-center-opens-in-denton/",
+              "date": "2013",
+              "type": "press",
+              "claim": "Target opened a 360,000 sq ft grocery/food distribution center near Denton Airport (3255 Airport Rd), serving 235 stores across eight states with ribbon-cutting attended by Denton city leaders."
+            },
+            {
+              "tier": 3,
+              "url": "https://www.farmersfridge.com/locations/tx-dal-denton-target-distribution-center/",
+              "date": "2026-06",
+              "type": "press",
+              "claim": "Farmer's Fridge lists the Denton Target Distribution Center (3255 Airport Rd) as an active on-site fridge location, corroborating current staffed operation."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Target food DC at 3255 Airport Rd, Denton TX opened 2013 (Tier-1 press) and shows continued current operation (active on-site amenity); partial 'Airport Rd' address resolves to the operating facility. NOT under construction/announced. No closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       }
     ]

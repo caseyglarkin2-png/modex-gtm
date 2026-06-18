@@ -1,20 +1,20 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-08T13:04:56.202Z",
+  "builtAt": "2026-06-18T22:23:43.778Z",
   "account": {
     "slug": "general-motors",
     "displayName": "General Motors",
     "archetype": "oem-automotive",
-    "siteCount": 41,
+    "siteCount": 36,
     "coverageNote": {
-      "auditedCount": 41,
+      "auditedCount": 36,
       "estimatedFootprint": 50,
+      "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "We audited 41 of GM's freight-relevant US facilities: every assembly, powertrain, stamping and casting, Ultium battery, parts-processing, and parts-distribution site with a real truck yard. Pure offices and the Milford R&D campus carry no freight gate and are excluded. The wider footprint follows the same archetype distribution.",
-      "auditedScope": "US"
+      "note": "We audited 41 of GM's freight-relevant US facilities: every assembly, powertrain, stamping and casting, Ultium battery, parts-processing, and parts-distribution site with a real truck yard. Pure offices and the Milford R&D campus carry no freight gate and are excluded. The wider footprint follows the same archetype distribution."
     },
-    "featuredSiteId": "01-general-motors",
+    "featuredSiteId": "30-general-motors",
     "dossierIntro": "Auto OEMs run two yards inside every plant: parts in, vehicles out. GM runs 41 freight-relevant US sites. Spring Hill is the largest plant in North America at 720 acres. Factory ZERO is GM's $2.2B EV flagship. A coast-to-coast parts network adds 14 processing and distribution hubs, and 24 of the 41 sites are rail-served. The Davison Road hub alone runs 84 docks behind a 132-foot automated tower. YardFlow runs supplier inbound and finished-vehicle outbound as two distinct queues on one protocol, across every site at once.",
     "surprisingFindings": [
       "24 of 41 GM sites are rail-served. The inbound moves on railcars, and every railcar still ends at a truck gate the network cannot see.",
@@ -30,22 +30,21 @@
     "bbox": [
       -119.8997,
       30.13585,
-      -71.1362,
+      -74.832676,
       44.948
     ],
     "archetypeMix": {
-      "#6": 12,
+      "#6": 10,
       "#10": 7,
       "#9": 14,
-      "#3": 6,
-      "#7": 2
+      "#3": 5
     },
     "totals": {
-      "dockDoors": 1872,
-      "trailerCapacity": 3685,
-      "gates": 60,
-      "railServed": 24,
-      "acres": 7496.349999999999
+      "dockDoors": 1687,
+      "trailerCapacity": 3370,
+      "gates": 54,
+      "railServed": 21,
+      "acres": 6607.249999999999
     },
     "sites": [
       {
@@ -317,6 +316,32 @@
           "urbanRural": "Inside the dense Detroit/Hamtramck urban fabric - surrounded by residential blocks, industrial streets, and freeway - Urban.",
           "scale": "No truck scale clearly isolated in the imagery; left uncertain.",
           "siteAreaAcres": "Perimeter polygon yields ~380 acres including the rail/freeway buffer; documented historical site is ~365 acres - honest overhead estimate."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://news.gm.com/company/usa-operations.html",
+              "date": "2026-01",
+              "type": "locator",
+              "claim": "GM lists Factory ZERO (Detroit-Hamtramck Assembly), Detroit MI as a GM-operated EV assembly plant building GMC Hummer EV / Sierra EV, Chevrolet Silverado EV, Cadillac Escalade IQ"
+            },
+            {
+              "tier": 1,
+              "url": "https://investor.gm.com/news-releases/news-release-details/gm-marks-progress-toward-all-electric-future-unveiling-factory",
+              "date": "2021-11",
+              "type": "press",
+              "claim": "GM PR confirms $2.2B conversion of Detroit-Hamtramck into Factory ZERO, GM's flagship EV assembly plant"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "GM-owned/operated EV assembly plant, currently producing; the Mar-Apr 2026 production pause is a planned recalibration, not closure. Detroit-Hamtramck was kept by New GM in 2009 (not divested to Motors Liquidation/RACER).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -575,225 +600,32 @@
           "entryLanes": "Estimated 2 inbound at the main logistics gate; not crisply countable from overhead - uncertain.",
           "exitLanes": "Estimated 2 outbound; uncertain.",
           "truckGateCount": "At least 3 controlled truck entrances inferred (south logistics, west/rail plant gate, Bristol/south access); exact count uncertain."
-        }
-      },
-      {
-        "id": "03-general-motors",
-        "name": "GM - Orion Assembly, Lake Orion MI",
-        "type": "Vehicle Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "uncertainFields": [
-          "scale",
-          "entryLanes",
-          "exitLanes",
-          "dockDoorCount",
-          "truckGateCount"
-        ],
-        "center": {
-          "lat": 42.7155,
-          "lng": -83.259
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 42.72345,
-                "lng": -83.26715
-              },
-              {
-                "lat": 42.72385,
-                "lng": -83.25255
-              },
-              {
-                "lat": 42.71865,
-                "lng": -83.24705
-              },
-              {
-                "lat": 42.71165,
-                "lng": -83.24705
-              },
-              {
-                "lat": 42.70885,
-                "lng": -83.25665
-              },
-              {
-                "lat": 42.70925,
-                "lng": -83.26555
-              },
-              {
-                "lat": 42.71565,
-                "lng": -83.27035
-              },
-              {
-                "lat": 42.72075,
-                "lng": -83.27015
-              }
-            ]
-          },
-          "truckGate": {
-            "ring": [
-              {
-                "lat": 42.71165,
-                "lng": -83.26485
-              },
-              {
-                "lat": 42.71165,
-                "lng": -83.26345
-              },
-              {
-                "lat": 42.71055,
-                "lng": -83.26345
-              },
-              {
-                "lat": 42.71055,
-                "lng": -83.26485
-              }
-            ]
-          },
-          "dropYards": [
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
             {
-              "ring": [
-                {
-                  "lat": 42.71315,
-                  "lng": -83.26405
-                },
-                {
-                  "lat": 42.71315,
-                  "lng": -83.25685
-                },
-                {
-                  "lat": 42.71035,
-                  "lng": -83.25685
-                },
-                {
-                  "lat": 42.71035,
-                  "lng": -83.26405
-                }
-              ]
+              "tier": 1,
+              "url": "https://media.gm.com/media/us/en/gm/company_info/facilities/assembly/flint.html",
+              "date": "2026-01",
+              "type": "locator",
+              "claim": "GM media facility page lists Flint Assembly, 3100 Van Slyke Rd, Flint MI as a GM-operated plant building Chevrolet Silverado HD / GMC Sierra HD"
+            },
+            {
+              "tier": 1,
+              "url": "https://news.gm.com/company/usa-operations.html",
+              "date": "2026-03",
+              "type": "press",
+              "claim": "GM increasing Silverado HD / Sierra HD output at Flint Assembly to six days/week in 2026 on strong HD-pickup demand"
             }
           ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 42.71385,
-                  "lng": -83.26305
-                },
-                {
-                  "lat": 42.71385,
-                  "lng": -83.26095
-                },
-                {
-                  "lat": 42.71245,
-                  "lng": -83.26095
-                },
-                {
-                  "lat": 42.71245,
-                  "lng": -83.26305
-                }
-              ]
-            }
-          ],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 60,
-          "trailersVisible": 25,
-          "trailerParkingCapacity": 90,
-          "truckGateCount": 3,
-          "buildingCount": 8,
-          "siteAreaAcres": 410,
-          "railServed": true
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": true,
-          "remoteGs": false,
-          "preGateStaging": true,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": false,
-          "entryExitSeparate": true,
-          "entryLanes": 2,
-          "exitLanes": 2,
-          "fastLaneOpportunity": true,
-          "dockDoors": "50+",
-          "dropArea": "25-50",
-          "shipRcvSeparate": true,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": true,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": true
-        },
-        "scenario": {
-          "archetypeId": "#6",
-          "steps": [
-            {
-              "step": "Arrive at outer campus gate",
-              "geofenceTarget": "truckGate",
-              "durationMs": 30000,
-              "narrationKey": "gate.arrive",
-              "baselineWaitMs": 600000,
-              "ynsWaitMs": 30000
-            },
-            {
-              "step": "Route to correct building / drop yard",
-              "geofenceTarget": "dropYard",
-              "targetIndex": 0,
-              "durationMs": 180000,
-              "narrationKey": "campus.route",
-              "baselineWaitMs": 900000,
-              "ynsWaitMs": 0
-            },
-            {
-              "step": "Spotter pulls to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 90000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 1200000,
-              "ynsWaitMs": 120000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit through gate",
-              "geofenceTarget": "exit",
-              "durationMs": 60000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 5460000,
-          "totalYnsMs": 2910000
-        },
-        "dossierExcerpt": "The supplied city-level coordinates (42.7847, -83.2483) land on the village of\nLake Orion and its namesake lake — residential/retail fabric, no plant. The\nOrion Assembly plant sits roughly 8 km south, at the Brown Rd / Giddings Rd /\nJoslyn Rd corner.\n\nA wide regional probe (z14 at 42.715, -83.245) revealed the unmistakable\nsignature on the west side of the frame: a single very large assembly building\n(~4 million sq ft) ringed by a closed-loop vehicle test / proving oval,\nwith vast finished-vehicle marshalling lots, on-site wastewater clarifiers, a\ntank farm, and a rail spur. That oval ring road around a single mega-building is\nthe GM Orion fingerprint. Web search (GM Authority, Wikipedia, Waze) confirms\n4555 Giddings Rd, numbered gates (Gate 3, Gate 4), and a current expansion with\na temporary truck entrance on Brown Rd. Center locked at 42.7155, -83.2590.",
-        "mapsUrl": "https://www.google.com/maps/@42.71550,-83.25900,400m/data=!3m1!1e3",
-        "fieldNotes": {
-          "facility": "GM Orion Assembly, 4555 Giddings Rd, Lake Orion MI. The given city coords (42.7847,-83.2483) land on Lake Orion village; the plant is ~8 km south near the Brown Rd / Giddings Rd / Joslyn Rd corner. Confirmed by the unmistakable signature: a ~4M sq ft assembly building ringed by a vehicle test/proving oval, finished-vehicle marshalling lots, on-site wastewater clarifiers and a rail spur. Center locked at 42.7155,-83.2590.",
-          "truckGate": "Fully fenced controlled-access GM campus. Chain-link perimeter fence with the plant behind a berm is directly visible in Street View on both Brown Rd (south) and the Giddings Rd frontage. Site has numbered controlled gates (Waze lists Gate 3 and Gate 4); a temporary truck entrance is currently on Brown Rd during the ongoing expansion construction.",
-          "guardShack": "GM assembly plants operate staffed security gatehouses at controlled entries; standard for the campus and consistent with the fenced perimeter and numbered gates. Booth-scale structures sit at the entry drives.",
-          "remoteGs": "False because guard shack present (staffed gates).",
-          "multiStep": "Campus security plus a separate finished-vehicle shipping yard imply staged checkpoints: outer plant gate, then internal marshalling/shipping control before docks.",
-          "entryExitSeparate": "Multiple numbered gates around the ring road give distinct entry/exit points rather than one shared lane.",
-          "dockDoors": "50+ band. Material-receiving docks are distributed across multiple building faces of the very large assembly building plus a south truck-terminal dock building and a covered rail receiving structure; total well exceeds 50.",
-          "dropYard": "Large paved finished-vehicle marshalling yard SE of the plant (hundreds of finished units in rows) plus trailer staging at the truck terminal; functions as on-site drop/storage.",
-          "railServed": "Active single-track rail spur curves into the property from the NE to a covered rail receiving / auto-rack structure; clearly visible in imagery.",
-          "multipleFacilities": "Campus: main assembly building, south truck terminal, paint/utility buildings, wastewater treatment plant, battery/expansion buildings under construction to the north, and rail dock.",
-          "urbanRural": "Edge-of-town industrial set among woods, wetlands and a lake with low-density residential nearby; classified Rural per rubric (small-town/edge-of-town setting).",
-          "scale": "No truck scale positively identified in overhead imagery; left uncertain.",
-          "streetView": "Best driver-arrival pano is on the Giddings Rd frontage at ~42.7187,-83.2689 (captured 2025-06), showing the perimeter fence and plant; pano_id not embedded here, headings computed toward zone centroids.",
-          "construction": "Site is mid-expansion (GM retooling Orion for EV/ICE truck and Cadillac Escalade production ~2027); northern parcels show active grading. Gate locations may shift as construction completes."
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "GM's oldest operating assembly plant, actively producing HD trucks and ramping in 2026; kept by New GM in 2009 (not divested to Motors Liquidation/RACER).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1036,6 +868,32 @@
           "fastLaneOpportunity": "Wide multi-lane drives and large gate aprons at the XPO entrance leave room for a dedicated express/bypass lane.",
           "scale": "No truck scale clearly identified in imagery; left uncertain.",
           "urbanRural": "Urban — inside the Kansas City metro's dense Fairfax Industrial District."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://news.gm.com/home.detail.html/Pages/news/us/en/2026/jan/0129-GM-investment-workforce.html",
+              "date": "2026-01",
+              "type": "press",
+              "claim": "GM newsroom: GM directs major investment in Fairfax (Kansas City KS) workforce to launch new vehicles (Chevrolet Bolt, Equinox)"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.kshb.com/news/local-news/gm-announces-expansion-plans-for-fairfax-assembly-plant-in-kansas-city-kansas",
+              "date": "2025-06",
+              "type": "press",
+              "claim": "GM $390M retooling of Fairfax Assembly, Kansas City KS; Bolt EV assembly begins Nov 2025, gas Equinox mid-2027; Barra quoted"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "GM-operated Fairfax Assembly & Stamping, actively retooling and launching new vehicles. NOTE: the old 'Fairfax 1' plant is a separate Motors-Liquidation brownfield/environmental site; the operating site here is Fairfax Assembly & Stamping (Fairfax 2), retained and run by GM today.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1300,6 +1158,32 @@
           "multiStep": "Campus-scale security implies an outer entry checkpoint then internal plant-specific checkpoints before docks; not individually resolved in imagery, flagged uncertain.",
           "scale": "No truck scale positively identified in imagery; left uncertain.",
           "streetView": "Street View coverage exists on the public Saturn Pkwy approach (pano ~35.7312,-86.9628, captured 2026-02) but not at the interior gate/dock zones inside the secured campus; zone panos set hasCoverage:false to avoid attributing an off-zone pano."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://media.gm.com/media/us/en/gm/company_info/facilities/assembly/springhill.html",
+              "date": "2026-01",
+              "type": "locator",
+              "claim": "GM media facility page lists Spring Hill Manufacturing, Spring Hill TN as a GM-operated assembly plant (Cadillac XT5, Lyriq, Vistiq)"
+            },
+            {
+              "tier": 1,
+              "url": "https://news.gm.com/home.detail.html/Pages/news/us/en/2025/jan/0123-lyriq-v.html",
+              "date": "2025-01",
+              "type": "press",
+              "claim": "GM newsroom: 2026 Cadillac Lyriq-V built at GM Spring Hill, TN; SORP and deliveries underway 2025-2026"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "GM's largest NA plant, actively building Cadillac Lyriq/Vistiq/XT5 in 2026 (Dec pause + shift cut are demand adjustments, not closure). The Saturn BRAND was wound down in the 2009 restructuring but the Spring Hill PLANT was retained and reopened by New GM (never divested to Motors Liquidation).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1534,6 +1418,32 @@
           "siteAreaAcres": "~235 acres derived from the traced perimeter polygon (building + employee parking + finished-vehicle lots + rail buffer inside the fence).",
           "scale": "No truck scale/weigh platform clearly identified in the truck path - scale false.",
           "multiStep": "No clearly imaged second checkpoint after the gate; left false."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://media.gm.com/media/us/en/gm/company_info/facilities/assembly/bowlinggreen.html",
+              "date": "2026-01",
+              "type": "locator",
+              "claim": "GM media facility page lists Bowling Green Assembly, Bowling Green KY as the GM-operated plant building the Chevrolet Corvette"
+            },
+            {
+              "tier": 1,
+              "url": "https://news.gm.com/home.detail.html/Pages/topic/us/en/2025/jun/0602-first-1064-hp-Corvette-ZR1s-built-Bowling-Green.html",
+              "date": "2025-06",
+              "type": "press",
+              "claim": "GM newsroom: Corvette ZR1s being built at Bowling Green Assembly; sole Corvette plant, actively producing"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "GM-operated sole U.S. Corvette plant, actively producing in 2026 (2026 MY concluded May 2026, 2027 MY starting; spring supplier pauses were temporary). Kept by New GM in 2009 (not divested to Motors Liquidation/RACER).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1769,6 +1679,32 @@
           "fastLaneOpportunity": "Wide entry aprons and generous paved width at the south entry leave room for an express/bypass lane.",
           "urbanRural": "Rural/edge-of-town setting: the plant is surrounded by farmland and an interstate (I-469/US-24) interchange in Roanoke, well outside Fort Wayne's dense urban fabric.",
           "geofence": "Perimeter traced to the fenced property edge (rail yard north, Lafayette Center Rd / berm south, storage lots east and west). Roughly grid-aligned with a slight bend on the south and east edges. Site area ~716 acres per GM published figure."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://news.gm.com/company/usa-operations.html",
+              "date": "2026-03",
+              "type": "locator",
+              "claim": "GM lists Fort Wayne Assembly (Roanoke IN) as a GM-operated plant building Chevrolet Silverado 1500 / GMC Sierra 1500; celebrated 11-millionth vehicle Mar 2026"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.insideindianabusiness.com/articles/gm-to-invest-632m-in-fort-wayne-assembly",
+              "date": "2023-06",
+              "type": "press",
+              "claim": "GM announced $632M investment in Fort Wayne Assembly, Roanoke IN, which produces Chevrolet Silverado and GMC Sierra full-size pickups"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "GM-operated light-duty truck plant, actively producing and ramping in 2026 (11M-vehicle milestone Mar 2026). Former Pontiac Truck & Bus plant: the Pontiac BRAND was wound down in 2009 but the PLANT was retained by New GM (never divested to Motors Liquidation/RACER).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1998,6 +1934,32 @@
           "entryLanes": "Wide divided access road suggests ~2 inbound lanes at the gate; overhead estimate, flagged uncertain.",
           "exitLanes": "~2 outbound lanes estimate; flagged uncertain.",
           "siteAreaAcres": "470 acres computed from the traced perimeter ring, consistent with the cited ~440-569 acre site."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.gm.com/stories/wentzville-colorado-canyon",
+              "date": "2025",
+              "type": "press",
+              "claim": "GM Wentzville Assembly currently builds the Chevrolet Colorado and GMC Canyon; GM-operated plant"
+            },
+            {
+              "tier": 2,
+              "url": "https://www.semissourian.com/news/wentzville-gm-plant-to-stay-open-1543840",
+              "date": "2009-06",
+              "type": "press",
+              "claim": "Wentzville was NOT on GM's 2009 bankruptcy plant-closure list; retained by New GM"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "GM-owned, self-operated assembly plant actively building Colorado/Canyon in 2025; explicitly retained through the 2009 bankruptcy (not divested to MLC/RACER).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2243,6 +2205,32 @@
           "scale": "No truck scale positively identified in overhead imagery; left uncertain.",
           "dockDoorCount": "Estimate from overhead imagery; loading doors distributed across multiple building faces of a very large assembly building plus rail/parts receiving banks.",
           "urbanRural": "Inside the dense DFW metro fabric, immediately adjacent to the Arlington entertainment district (AT&T Stadium / Globe Life Field) and surrounded by residential and commercial development."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://news.gm.com/home.detail.html/Pages/topic/us/en/2024/nov/1127-arlington.html",
+              "date": "2024-11",
+              "type": "press",
+              "claim": "GM Arlington Assembly is a GM-operated full-size SUV plant (Tahoe, Suburban, Yukon, Escalade); GM documentary celebrating the plant"
+            },
+            {
+              "tier": 1,
+              "url": "https://gmauthority.com/blog/2024/10/2025-chevy-tahoe-and-suburban-production-now-under-way/",
+              "date": "2024-10",
+              "type": "press",
+              "claim": "2025 Tahoe/Suburban production started at Arlington Assembly Oct 9, 2024; $500M+ GM investment"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "GM-owned, self-operated SUV assembly plant in active 2024-2026 production; not among the 14 plants closed/idled in the 2009 bankruptcy (retained by New GM).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2484,6 +2472,25 @@
           "multiStep": "Plausible outer-gate-then-internal-checkpoint flow on a guarded auto campus, but not clearly resolvable in imagery; left false and flagged.",
           "siteAreaAcres": "111 acres per GM/Wikipedia; perimeter ring traced to the fenced footprint between I-496, Verlinden/Townsend, and the Grand River/rail edge.",
           "streetViewMeta": "Best ground view is the Verlinden Ave road pano at 42.72552,-84.56047 (captured 2025-07) looking E (~95 deg) toward the plant wall, fence, and the controlled truck-entry intersection; pano id not captured in this pass."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.wkar.org/wkar-news/2025-10-16/lansing-general-motors-plant-to-build-new-2027-cadillac-ct5",
+              "date": "2025-10",
+              "type": "press",
+              "claim": "GM Lansing Grand River Assembly is GM-operated; building Cadillac CT4/CT5 and slated for next-gen CT5 with renovation investment"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "GM-owned, self-operated assembly+stamping plant building Cadillac sedans in 2025-2026; New GM immediately re-acquired Grand River through the 2009 bankruptcy (not divested to MLC/RACER).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2734,6 +2741,32 @@
           "scale": "No truck scale clearly identified in the gate or truck-court imagery; left uncertain.",
           "entryLanes": "Gate apron appears to carry ~2 inbound lanes; exact lane count not crisply resolvable - marked uncertain.",
           "coords": "Re-pinned from the roster's imprecise coordinate to the confirmed assembly-complex centroid."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.assemblymag.com/articles/98350-gm-assembly-plant-resumes-production-after-a-temporary-supply-chain-issue",
+              "date": "2024",
+              "type": "press",
+              "claim": "GM Lansing Delta Township Assembly is GM-operated; resumed building Traverse/Enclave/Acadia after a temporary supply issue"
+            },
+            {
+              "tier": 1,
+              "url": "https://walberg.house.gov/media/in-the-news/lsj-general-motors-invest-100-million-delta-township-plant",
+              "date": "2023",
+              "type": "press",
+              "claim": "GM invested $100M retooling Lansing Delta Township for the next-gen Traverse/Acadia"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "GM-owned, self-operated crossover assembly plant in active 2024-2025 production; New GM immediately re-acquired Delta Township through the 2009 bankruptcy (not divested to MLC/RACER).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2940,6 +2973,25 @@
           "multipleFacilities": "False for this audit scope - the engine plant is one building. It is physically integrated into the larger GM Flint complex (Flint Assembly to the north, metal/stamping to the SW), but those are separate roster sites (idx 2, 21); buildingCount 1 here.",
           "entryLanes": "Single combined entry/exit lane at the gated drive off Van Slyke estimated; flagged uncertain.",
           "fastLaneOpportunity": "False - the gate apron is modest; no obvious unused paved width for an express bypass lane at this entrance."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://gmauthority.com/blog/2023/01/gm-to-invest-579m-at-flint-engine-operations-to-build-next-generation-v8/",
+              "date": "2023-01",
+              "type": "press",
+              "claim": "GM Flint Engine Operations (2100 W Bristol Rd) is GM-operated, currently builds 3.0L Duramax diesels; $579M GM investment for next-gen V8"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "GM-owned, self-operated engine plant (opened 2002) building Duramax diesels with active GM investment; retained by New GM, never part of the 2009 MLC/RACER divestiture.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3182,6 +3234,32 @@
           "multipleFacilities": "Marked false - the plant is one continuous interconnected building. buildingCount 2 accounts for the main plant plus the detached north powerhouse/utility building. The adjacent west warehouses are off-property and excluded.",
           "urbanRural": "Romulus is within the dense Detroit metro / Detroit Metro Airport (DTW) industrial corridor, ringed by continuous industrial and residential development - Urban.",
           "siteAreaAcres": "~180 acres estimated from the traced perimeter (parcel from Vining Rd west to the rail line east, Ecorse Rd south to the north ponds/utility area), excluding the off-property west warehouses and trimming the SE undeveloped wooded triangle."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://gmauthority.com/blog/2026/04/gm-announces-new-romulus-and-toledo-propulsion-plant-investments/",
+              "date": "2026-04",
+              "type": "press",
+              "claim": "GM Romulus Propulsion Systems is a GM-operated, actively-producing transmission/engine plant receiving new GM investment"
+            },
+            {
+              "tier": 1,
+              "url": "https://michiganadvance.com/briefs/gm-investing-another-300m-in-romulus-plant-as-part-of-6b-nationwide-plan/",
+              "date": "2025-11",
+              "type": "press",
+              "claim": "GM investing another $300M in the Romulus plant to boost 10-speed transmission output; ~1,000 workers"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "Romulus Propulsion is NOT closing/idled - GM made fresh $300M (Nov 2025) and 2026 investments to expand 10-speed transmission and engine output; GM-owned and self-operated, retained through 2009 bankruptcy.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3398,6 +3476,25 @@
           "scale": "No truck scale positively identified from overhead imagery; flagged uncertain.",
           "buildingCount": "Multiple large connected/adjacent manufacturing buildings plus the brick admin block and the NE drop-yard structure; counted ~4 distinct masses.",
           "siteAreaAcres": "Traced perimeter (~102 acres) covers the main fenced Plant #1 operational footprint; the full GM-cited campus is ~190 acres including the northern rail yard and Plant #4/#5."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://news.gm.com/home.detail.html/Pages/news/us/en/2025/may/0528-GM-invest-888-million-Tonawanda-Propulsion-plant.html",
+              "date": "2025-05",
+              "type": "press",
+              "claim": "GM announces $888M (its largest engine-plant investment) in the GM-operated Tonawanda Propulsion plant for sixth-gen V-8 production; ~870 jobs"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "GM-owned, self-operated engine plant with a record $888M GM investment (May 2025) for next-gen V-8s; an old plant but retained by New GM, not part of the 2009 MLC/RACER divestiture.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3611,6 +3708,32 @@
           "scale": "No truck scale clearly identified in imagery; left uncertain.",
           "urbanRural": "Inside the dense Toledo metro fabric, surrounded by residential street grid and other industry on all sides; classified Urban.",
           "multipleFacilities": "Single integrated plant complex (one large connected building plus minor outbuildings); the eastern lot across the rail is a vehicle/trailer marshalling/storage area of the same site, not a second plant cluster."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://gmauthority.com/blog/2026/03/gm-invests-39m-in-toledo-powertrain-plant-to-build-new-transmission/",
+              "date": "2026-03",
+              "type": "press",
+              "claim": "GM Toledo Propulsion Systems is GM-operated; new GM investment to add an 8-speed FWD transmission variant and expand 10-speed capacity; ~1,650 employees"
+            },
+            {
+              "tier": 1,
+              "url": "https://spectrumnews1.com/oh/toledo/news/2026/03/20/gm-to-invest--40m-into-toledo-propulsion-systems",
+              "date": "2026-03",
+              "type": "press",
+              "claim": "GM investing ~$40M into Toledo Propulsion Systems transmission plant"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "GM-owned, self-operated transmission plant (1455 W Alexis Rd) with active 2026 GM investment and >$1B invested since 2011; retained by New GM, not part of the 2009 MLC/RACER divestiture.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3765,6 +3888,33 @@
           "entryLanes": "Estimated 1 in / 1 out at the Woodside gate from curb-cut width; not precisely countable.",
           "urbanRural": "Plant is embedded in the Bay City urban grid: residential blocks abut the east and south, downtown is a few blocks NE. Urban.",
           "siteAreaAcres": "~58 acres for the active fenced GM parcel only; the full historic site footprint was larger before ~10 acres transferred to RACER Trust."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://plants.gm.com/media/us/en/gm/company_info/facilities/powertrain/baycity.html",
+              "date": "2025-01",
+              "type": "locator",
+              "claim": "GM lists Bay City Powertrain as an active GM facility building connecting rods, solid and sliding camshafts for Chevrolet, Buick, GMC, Cadillac"
+            },
+            {
+              "tier": 1,
+              "url": "https://gmauthority.com/blog/2023/01/gm-to-invest-216m-at-bay-city-gps-facility-for-future-v8-engine-component-production/",
+              "date": "2023-01",
+              "type": "press",
+              "claim": "GM investing $216M at Bay City Powertrain for camshafts, connecting rods, block/head machining for future V8 production"
+            }
+          ],
+          "imageryDate": "2023-07",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "New GM-operated powertrain plant (~420 UAW Local 362), recent $216M investment; not a 2009-divested/RACER site (the adjacent ~10-acre RACER land is excluded from the active fenced parcel).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4018,6 +4168,33 @@
           "urbanRural": "Within the Dayton OH metro industrial fabric (Moraine), surrounded by other plants, rail, and dense residential; Urban.",
           "scale": "No truck scale/weigh pad clearly identified; left uncertain.",
           "siteAreaAcres": "~37.5 acres derived from the fenced-perimeter polygon; building footprint plus surrounding yards and parking."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://pressroom.gm.com/gmbx/us/en/pressroom/home/company/facilities/dmax-ltd.html",
+              "date": "2025",
+              "type": "locator",
+              "claim": "GM lists DMAX Ltd, 3100 Dryden Rd Moraine OH, as a GM facility producing Duramax diesel engines for HD Silverado/Sierra"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.registerherald.com/2026/04/04/dmax-builds-its-3-5-millionth-engine/",
+              "date": "2026-04",
+              "type": "press",
+              "claim": "April 2026: DMAX, with plants in Brookville and Moraine, produced its 3.5 millionth Duramax engine, installed in the 16M-th Flint-assembled vehicle"
+            }
+          ],
+          "imageryDate": "2025",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "JV concern resolved: Isuzu exited May 2022, DMAX is now a wholly GM-owned subsidiary (GM-operated, not a JV GM does not run). Moraine still active April 2026, though Duramax production is gradually transitioning to the expanded Brookville plant with Moraine pointed to eventual closure/new use (no announced date) - monitor for idling.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4271,6 +4448,32 @@
           "scale": "No truck scale/weigh pad clearly identified in imagery; left false/uncertain.",
           "multiStep": "Boulevard gate/security plaza is the clear first checkpoint; a distinct second post-gate checkpoint was not unambiguously confirmed, so multiStep left false.",
           "entryLanes": "Divided boulevard reads as ~2 inbound / ~2 outbound lanes; exact count estimated."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.gm.com/company/facilities/lansing-delta-township",
+              "date": "2025",
+              "type": "locator",
+              "claim": "GM lists Lansing Delta Township complex (with onsite Lansing Regional Stamping) as an active GM plant building Traverse/Acadia/Enclave"
+            },
+            {
+              "tier": 2,
+              "url": "https://www.wilx.com/2024/02/25/gm-recalls-lansing-delta-township-lansing-regional-stamping-employees/",
+              "date": "2024-02",
+              "type": "press",
+              "claim": "Feb 2024: GM recalled Lansing Delta Township and Lansing Regional Stamping employees as 2024 Traverse/Acadia production ramped - active operation"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "New GM-operated; the LDT/LRS complex opened 2006 (post-dates 2009 entirely) and is actively producing 2024 Traverse/Acadia. Not a divested or RACER site.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4495,6 +4698,32 @@
           "scale": "Possible truck scale near the SW/west freight drive but not positively resolved - flagged uncertain, left false.",
           "multipleFacilities": "False - one very large interconnected multi-roof stamping building; buildingCount 1.",
           "urbanRural": "Marion is a small Indiana city; the plant sits at the western edge of town with farm fields immediately west and south and only a residential strip to the east - judged Rural per rubric (small-town/edge-of-town industrial)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.gm.com/company/facilities/marion-metal-center",
+              "date": "2025",
+              "type": "locator",
+              "claim": "GM lists Marion Metal Center as an active GM facility providing blanks, stampings and sheet-metal assemblies for North American vehicles"
+            },
+            {
+              "tier": 1,
+              "url": "https://gmauthority.com/blog/2022/09/gm-investing-491-million-in-marion-indiana-metal-center/",
+              "date": "2022-09",
+              "type": "press",
+              "claim": "GM announced $491M investment at Marion for steel/aluminum stampings including new EVs (two new press lines)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "New GM-operated stamping plant (orig. 1956 Fisher Body); explicitly survived the 2009 bankruptcy restructuring and received a $491M reinvestment for EV stampings. Not a divested or RACER site.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4739,6 +4968,25 @@
           "perimeter": "Oriented ring traces the fenced GM property: NW corner at the rail yard, NE along Chevrolet Blvd past the office, south down the east employee-lot edge, SW across the south yard, and north up the west rail edge.",
           "truckGate box": "NW rail-side controlled entrance off the Chevrolet Blvd corridor where the material/rail drive crosses the fence line.",
           "dockAprons": "Two: a long thin strip along the south building face (primary outbound docks) and a strip on the west face beside the rail yard (inbound)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://news.gm.com/home.detail.html/Pages/topic/us/en/2025/nov/1120-GM-US-manufacturing-investments-250M-commitment-Parma-Metal-Center.html",
+              "date": "2025-11",
+              "type": "press",
+              "claim": "Nov 2025: GM commits ~$250M to Parma Metal Center to enable production of sheet-metal stampings and assemblies - active GM plant"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "New GM-operated stamping plant (operating since 1948); survived the 2009 bankruptcy and received a fresh ~$250M investment in Nov 2025. Not a divested or RACER site.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4993,6 +5241,26 @@
           "fastLaneOpportunity": "Wide paved aprons and multiple entrance drives provide room to add an express/bypass lane.",
           "scale": "No truck scale clearly identified in the imagery; left uncertain.",
           "entryLanes": "Estimated; the south entrance carries multiple paved lanes but exact in/out lane counts were not crisply resolvable."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://investor.gm.com/news-releases/news-release-details/gm-furthers-flint-commitment-1b-manufacturing-investment",
+              "date": "2023-06",
+              "type": "press",
+              "claim": "GM committed $1B+ to Flint Assembly and the adjacent Flint Metal Center for next-gen HD truck production; Flint Metal Center received $233M for new stamping dies and equipment"
+            }
+          ],
+          "imageryDate": "2024",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "New GM-operated stamping plant (opened 1954) retained through 2009 and given a $1B+ Flint reinvestment ($233M to the Metal Center); currently operational. Not a divested or RACER site.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -5226,6 +5494,26 @@
           "urbanRural": "Inside the City of Saginaw - residential neighborhoods abut the south and west frontage across N Washington Ave; classified Urban.",
           "entryLanes": "Lane counts (1/1) are overhead estimates of the entry boulevard, flagged uncertain.",
           "streetView": "Public Street View coverage exists on N Washington Ave at the SW frontage (pano uLQq0M9x0QJFyrcATSzZWQ @ 43.44622,-83.91826, captured 2023-05) and shows the perimeter fence; no pano inside the secured campus, so both zone panos point from this frontage pano toward the gate/perimeter."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://news.gm.com/home.detail.html/Pages/news/us/en/2026/apr/0401-GM-invest-150-million-Saginaw-Metal-Casting.html",
+              "date": "2026-04",
+              "type": "press",
+              "claim": "April 2026: GM invests $150M+ in Saginaw Metal Casting Operations for 6th-gen V8 blocks/heads; plant currently produces 5th-gen V8 blocks across three shifts"
+            }
+          ],
+          "imageryDate": "2023-05",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "New GM-operated aluminum/iron foundry (one of GM's oldest plants) still producing V8 blocks; $150M+ reinvestment in April 2026. Downsized over time (demolished footprints on the parcel) but the core foundry is active. Not a divested or RACER site.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -5379,6 +5667,26 @@
           "urbanRural": "Rural - the plant sits on the northwest edge of Bedford (pop. ~13k small town), bordered by a residential neighborhood to the west and open farmland/quarry land to the north and east. Per rubric, small-town edge industrial = Rural.",
           "scale": "Not positively resolved; left false. A canopy/checkpoint structure exists at the SE gate but no clear weigh platform was confirmed.",
           "fastLaneOpportunity": "False - the single controlled gate and compact fenced yard offer little unused paved width for a dedicated express/bypass lane."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://investor.gm.com/news-releases/news-release-details/gm-invests-45-million-bedford-casting-operations-expand-capacity/",
+              "date": "2022-11",
+              "type": "press",
+              "claim": "GM invests $45M at Bedford Casting Operations to expand EV drive-unit casting capacity; ~680 workers produce cylinder blocks, transmission cases, structural and drive-unit housings"
+            }
+          ],
+          "imageryDate": "2026-04",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "New GM-operated aluminum die-casting foundry; recent EV drive-unit investments ($45M 2022, $51M 2021, $456M+ since 2011) and GM signage/monument confirmed in 2026-04 Street View. Not a divested or RACER site.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -5593,6 +5901,33 @@
           "urbanRural": "Rural - the plant sits on the rural northeast edge of Defiance, surrounded by farmland and the Maumee River corridor, ~5 miles from the small downtown.",
           "multipleFacilities": "False - a single large interconnected multi-roof foundry complex; buildingCount 1.",
           "siteAreaAcres": "~235 acres for the traced active industrial footprint (building + truck yard + ponds + slag/sand storage). The full owned parcel including outlying land may be larger; perimeter excludes the farmland south of SR-281."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.gm.com/company/facilities/defiance",
+              "date": "2025",
+              "type": "locator",
+              "claim": "GM lists Defiance as an active GM aluminum foundry/machining center producing I4/V6/V8 cylinder blocks and head castings"
+            },
+            {
+              "tier": 1,
+              "url": "https://gmauthority.com/blog/2023/01/gm-to-invest-55m-at-defiance-facility-for-engine-and-ev-castings-production/",
+              "date": "2023-01",
+              "type": "press",
+              "claim": "GM investing $55M at Defiance for V8 block castings plus $8M for future EV castings; ~530 employees"
+            }
+          ],
+          "imageryDate": "2025-05",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "New GM-operated foundry (opened 1948), retained through 2009 and reinvested ($55M 2023); GM facility page lists it as active. Not a divested or RACER site (the RACER Ohio sale on record is a different facility).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -5834,627 +6169,33 @@
           "fastLaneOpportunity": "True. The south entry has wide paved apron width and a multi-lane internal artery with unused width to add an express/bypass lane.",
           "scale": "No truck scale positively identified in imagery; left false and flagged uncertain.",
           "geofence": "Perimeter traced to the private loop road enclosing the main building and its west drop yard / south parking (~175 acres), excluding the separate dark-roof building on the adjacent southern parcel. dropYards = west trailer storage rows; dockAprons = west dock bank and south sawtooth dock line, traced as thin quads parallel to each building face. truckGate quad covers the south controlled entry. Street View coverage exists only on the public Allen Rd corridor (pano 9pSofkhImAu_xiKxUdmGrQ, 2024-07) at the SE; no public pano inside the property."
-        }
-      },
-      {
-        "id": "26-general-motors",
-        "name": "Ultium Cells - Lordstown (Warren), OH",
-        "type": "Battery Cell Plant (GM / LG Energy Solution JV)",
-        "archetype": "#7",
-        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
-        "confidence": "medium",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "remoteGs",
-          "entryLanes",
-          "exitLanes",
-          "dockDoorCount",
-          "dockDoors",
-          "trailerParkingCapacity",
-          "railServed",
-          "scale",
-          "multiStep",
-          "shipRcvSeparate"
-        ],
-        "center": {
-          "lat": 41.1538,
-          "lng": -80.8635
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 41.1582,
-                "lng": -80.8676
-              },
-              {
-                "lat": 41.1587,
-                "lng": -80.8605
-              },
-              {
-                "lat": 41.1564,
-                "lng": -80.8587
-              },
-              {
-                "lat": 41.1518,
-                "lng": -80.8587
-              },
-              {
-                "lat": 41.1476,
-                "lng": -80.8623
-              },
-              {
-                "lat": 41.1482,
-                "lng": -80.867
-              },
-              {
-                "lat": 41.153,
-                "lng": -80.8688
-              }
-            ]
-          },
-          "truckGate": {
-            "ring": [
-              {
-                "lat": 41.1493,
-                "lng": -80.8632
-              },
-              {
-                "lat": 41.1493,
-                "lng": -80.8623
-              },
-              {
-                "lat": 41.1487,
-                "lng": -80.8623
-              },
-              {
-                "lat": 41.1487,
-                "lng": -80.8632
-              }
-            ]
-          },
-          "dropYards": [
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
             {
-              "ring": [
-                {
-                  "lat": 41.1501,
-                  "lng": -80.8628
-                },
-                {
-                  "lat": 41.1501,
-                  "lng": -80.8609
-                },
-                {
-                  "lat": 41.1491,
-                  "lng": -80.8609
-                },
-                {
-                  "lat": 41.1491,
-                  "lng": -80.8628
-                }
-              ]
+              "tier": 1,
+              "url": "https://news.gm.com/home.detail.html/Pages/topic/us/en/2025/mar/0320-farmer.html",
+              "date": "2025-03",
+              "type": "press",
+              "claim": "GM newsroom (Mar 2025) profiles the Brownstown Battery Assembly plant and its GM plant manager - active GM-operated facility"
+            },
+            {
+              "tier": 2,
+              "url": "https://gmauthority.com/blog/2024/06/cadillac-celestiq-to-start-production-as-2025-model/",
+              "date": "2024-06",
+              "type": "press",
+              "claim": "Cadillac CELESTIQ (built at GM Brownstown Battery Assembly) enters production as a 2025 model; Brownstown also makes Corvette E-Ray drive units and packs"
             }
           ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 41.1497,
-                  "lng": -80.8656
-                },
-                {
-                  "lat": 41.1497,
-                  "lng": -80.8615
-                },
-                {
-                  "lat": 41.149,
-                  "lng": -80.8615
-                },
-                {
-                  "lat": 41.149,
-                  "lng": -80.8656
-                }
-              ]
-            }
-          ],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 270,
-              "pano": "74GAaClbbaTB0N8e1IOlRA",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 35,
-          "trailersVisible": 30,
-          "trailerParkingCapacity": 60,
-          "truckGateCount": 1,
-          "buildingCount": 2,
-          "siteAreaAcres": 156,
-          "railServed": true
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": true,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 2,
-          "exitLanes": 1,
-          "fastLaneOpportunity": true,
-          "dockDoors": "25-50",
-          "dropArea": "10-25",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#7",
-          "steps": [
-            {
-              "step": "Arrive at gate (fast-lane bypass possible)",
-              "geofenceTarget": "truckGate",
-              "durationMs": 30000,
-              "narrationKey": "gate.arrive",
-              "baselineWaitMs": 600000,
-              "ynsWaitMs": 0
-            },
-            {
-              "step": "Pass through to drop yard",
-              "geofenceTarget": "dropYard",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Spotter dispatch (fast-lane priority for live loads)",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 90000,
-              "narrationKey": "spotter.dispatch.fastlane",
-              "baselineWaitMs": 1200000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit through gate",
-              "geofenceTarget": "exit",
-              "durationMs": 60000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 4440000,
-          "totalYnsMs": 2730000
-        },
-        "dossierExcerpt": "The roster address \"2440 Ohltown Rd\" geocodes to a residential subdivision off\nOhltown Rd, ~2.5 km NE of the plant (the first wide z16 sweep showed only houses\nand farm fields). Stepping the satellite sweep south and west uncovered the\nreal facility: a single enormous white-roof manufacturing building immediately\neast of the former GM Lordstown Assembly complex and its rail yard, off Tod\nAve SW / Henn Pkwy in Lordstown (mailing city Warren). Web research confirms the\nUltium Cells Lordstown battery cell plant — a GM / LG Energy Solution joint\nventure, ~2.8M sq ft on ~156 acres, ~30 GWh annual capacity, producing cells\nsince Aug 2022 and past its 100-millionth cell by late 2024 (Ultium Cells site;\nGM investor releases; GMAuthority facility page). Center re-pinned to the plant\nbuilding at 41.1538, -80.8635.",
-        "mapsUrl": "https://www.google.com/maps/@41.1538,-80.8635,400m/data=!3m1!1e3",
-        "fieldNotes": {
-          "facility": "Positively identified as the Ultium Cells Lordstown battery cell plant (GM / LG Energy Solution JV), the ~2.8M sq ft, ~156-acre cell-manufacturing facility off Tod Ave SW / Ohltown Rd in Lordstown (mailing city Warren), OH. The roster address 2440 Ohltown Rd geocodes to a residential subdivision ~2.5 km NE; re-pinned to the large white-roof plant building at ~41.1538,-80.8635, immediately east of the former GM Lordstown Assembly complex and its rail yard. Confirmed by Ultium / GM / GMAuthority sources (156 acres, 2.8M+ sq ft, ~30 GWh, production since Aug 2022, >100M cells produced by late 2024).",
-          "geofence": "Perimeter traces the developed/fenced plant parcel: the main plant building runs roughly N-S with a slight rotation; the ring also captures the west-side process/utility yards, the SE employee parking field, the south staging/laydown area, and retention ponds. ~156 acres consistent with published site size.",
-          "truckGate": "Marked true (medium confidence). The plant frontage on public Ohltown Rd (E side) is open grass/field with no public truck approach (2025-07 Street View shows the building set far back across an open field). Truck circulation enters from the SW/south via internal Lordstown-complex roads to a fenced, controlled gate near the SW corner of the building. A secured battery-cell campus (valuable IP, lithium hazmat) operates controlled gated access; exact gate hardware not crisply resolved from overhead, so flagged uncertain.",
-          "guardShack": "Marked true (medium confidence). A small gatehouse-footprint structure consistent with a staffed booth sits at the SW truck approach; standard for a GM/LG JV cell plant of this security profile. Not positively resolved as a booth, so flagged; remoteGs false as a consequence.",
-          "dockDoors": "Estimated 25-50 (count ~35). A single principal material-handling dock bank runs along the SOUTH face of the building with trailers and intermodal containers (orange/blue/white) backed in (sgate/sdock/swdock z18 imagery). No second large dock bank on a separate face was resolved, so shipRcvSeparate left false (flagged).",
-          "dropArea": "Banded 10-25. Trailers and containers are staged/dropped on the south apron and SW corner lots without tractors; a dedicated trailer-storage row is present (dropYard true). Much surrounding flat ground is contractor laydown/expansion area rather than marked trailer stalls.",
-          "dropYard": "True — dedicated trailer/container drop area on the south apron separate from active dock positions.",
-          "postGateStaging": "True — deep paved aprons and perimeter loop road inside the fence before the dock face provide internal staging/queue space.",
-          "drivewayLong": "True — the internal approach from the SW gate to the south dock face is long and can hold a multi-truck queue without spilling to a public road; backupSensitive false (gate is internal, far from public Ohltown Rd).",
-          "railServed": "Marked true (flagged). An extensive multi-track rail yard (former GM Lordstown Assembly yard) sits immediately NW of the plant, and a rail line runs the wooded corridor along the west property edge; the complex is rail-served. A spur running directly into the Ultium cell building was not positively confirmed from imagery, so flagged uncertain.",
-          "buildingCount": "Counted 2 — the single large plant building dominates; a smaller separate ancillary/process building sits to the south near the entrance. Functionally one integrated plant, so multipleFacilities false.",
-          "fastLaneOpportunity": "True — wide paved aprons and surplus graded width around the SW entrance and south loop road leave ample room to add an express/bypass lane.",
-          "entryLanes": "Approximate (~2 in / 1 out) from overhead; low confidence — flagged.",
-          "scale": "No truck scale/weigh pad positively identified; left false and flagged.",
-          "urbanRural": "Lordstown is a small rural township; the plant is surrounded by farmland, woods, and the low-density Lordstown industrial corridor. Rural.",
-          "connectivityIssue": "False — rural but immediately adjacent to a major active industrial complex with strong infrastructure and transmission corridors; cellular coverage expected adequate."
-        }
-      },
-      {
-        "id": "27-general-motors",
-        "name": "Ultium Cells - Spring Hill TN",
-        "type": "Battery Cell Plant (GM JV)",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "medium",
-        "uncertainFields": [
-          "guardShack",
-          "entryLanes",
-          "exitLanes",
-          "dockDoorCount",
-          "dockDoors",
-          "trailerParkingCapacity",
-          "fastLaneOpportunity",
-          "shipRcvSeparate",
-          "multiStep"
-        ],
-        "center": {
-          "lat": 35.749,
-          "lng": -86.9525
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 35.75175,
-                "lng": -86.9572
-              },
-              {
-                "lat": 35.75205,
-                "lng": -86.9498
-              },
-              {
-                "lat": 35.7478,
-                "lng": -86.9485
-              },
-              {
-                "lat": 35.7456,
-                "lng": -86.9501
-              },
-              {
-                "lat": 35.747,
-                "lng": -86.953
-              },
-              {
-                "lat": 35.74705,
-                "lng": -86.9574
-              }
-            ]
-          },
-          "truckGate": {
-            "ring": [
-              {
-                "lat": 35.746,
-                "lng": -86.9521
-              },
-              {
-                "lat": 35.7463,
-                "lng": -86.9512
-              },
-              {
-                "lat": 35.7456,
-                "lng": -86.9508
-              },
-              {
-                "lat": 35.74525,
-                "lng": -86.95175
-              }
-            ]
-          },
-          "dropYards": [
-            {
-              "ring": [
-                {
-                  "lat": 35.75135,
-                  "lng": -86.9556
-                },
-                {
-                  "lat": 35.7515,
-                  "lng": -86.953
-                },
-                {
-                  "lat": 35.75065,
-                  "lng": -86.95285
-                },
-                {
-                  "lat": 35.75055,
-                  "lng": -86.95545
-                }
-              ]
-            }
-          ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 35.7506,
-                  "lng": -86.9528
-                },
-                {
-                  "lat": 35.7505,
-                  "lng": -86.95155
-                },
-                {
-                  "lat": 35.74995,
-                  "lng": -86.9516
-                },
-                {
-                  "lat": 35.75005,
-                  "lng": -86.95285
-                }
-              ]
-            },
-            {
-              "ring": [
-                {
-                  "lat": 35.7505,
-                  "lng": -86.9562
-                },
-                {
-                  "lat": 35.75055,
-                  "lng": -86.95565
-                },
-                {
-                  "lat": 35.7472,
-                  "lng": -86.9556
-                },
-                {
-                  "lat": 35.74715,
-                  "lng": -86.95615
-                }
-              ]
-            }
-          ],
-          "staging": null,
-          "streetViewMeta": {
-            "truckGate": {
-              "heading": 32,
-              "pano": "lJqlAsn9x1G-4w_9ESbyVg",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 28,
-          "trailersVisible": 22,
-          "trailerParkingCapacity": 60,
-          "truckGateCount": 1,
-          "buildingCount": 2,
-          "siteAreaAcres": 110,
-          "railServed": true
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": true,
-          "remoteGs": false,
-          "preGateStaging": true,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 2,
-          "exitLanes": 2,
-          "fastLaneOpportunity": true,
-          "dockDoors": "25-50",
-          "dropArea": "10-25",
-          "shipRcvSeparate": true,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": true,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#6",
-          "steps": [
-            {
-              "step": "Arrive at outer campus gate",
-              "geofenceTarget": "truckGate",
-              "durationMs": 30000,
-              "narrationKey": "gate.arrive",
-              "baselineWaitMs": 600000,
-              "ynsWaitMs": 30000
-            },
-            {
-              "step": "Route to correct building / drop yard",
-              "geofenceTarget": "dropYard",
-              "targetIndex": 0,
-              "durationMs": 180000,
-              "narrationKey": "campus.route",
-              "baselineWaitMs": 900000,
-              "ynsWaitMs": 0
-            },
-            {
-              "step": "Spotter pulls to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 90000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 1200000,
-              "ynsWaitMs": 120000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit through gate",
-              "geofenceTarget": "exit",
-              "durationMs": 60000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 5460000,
-          "totalYnsMs": 2910000
-        },
-        "dossierExcerpt": "The 100 Saturn Pkwy address is shared with the GM Spring Hill Manufacturing\n(Cadillac assembly) campus (roster idx 5). The Ultium battery plant is a\ndistinct 2.8M sq ft facility built on land leased from GM at the NE corner of\nthat campus, ~1.2 km NE of the main assembly cluster.\n\nThe address geocode pin (the red marker rendered in probe imagery) lands at the\nSW corner of a bright white-roof industrial building. Stepping through satellite\nat z14→z19 I identified the Ultium complex as two connected buildings:\n\n- A bright white-roof main battery plant to the east (~35.749, -86.951) —\n  brand-new, clean construction, the signature 2.8M sq ft cell plant.\n- An adjoining gray-roof logistics / warehouse building to the west\n  (~35.749, -86.956).\n\nConfirmed operational by 2026-02 / 2026-03 Street View (the white plant building,",
-        "mapsUrl": "https://www.google.com/maps/@35.749,-86.9525,400m/data=!3m1!1e3",
-        "fieldNotes": {
-          "site": "Ultium Cells - Spring Hill TN, the GM / LG Energy Solution JV 2.8M sq ft battery-cell plant built on land leased from GM at the Spring Hill Manufacturing campus, 100 Saturn Pkwy, Spring Hill (Maury County) TN. The roster/address geocode pin (the red marker in probe imagery) lands at the SW corner of the bright white-roof plant building. The Ultium complex is the NE corner of the broader GM campus, ~1.2 km NE of the main Cadillac assembly plant cluster. Center locked at 35.7490,-86.9525.",
-          "confirm": "Confirmed by satellite + Street View + web research. The complex is two connected large industrial buildings: a bright white-roof main battery plant (E, ~35.749,-86.951, brand-new clean construction) and an adjoining gray-roof logistics/warehouse building (W, ~35.749,-86.956). 2026-02/03 Street View shows the operational white plant building, employee lots full of cars, chain-link perimeter fencing along the access road, and campus checkpoint signage. The DOE Environmental Assessment for the Spring Hill battery plant explicitly lists 'shipping and receiving areas... a guard house, hazardous materials storage' as attendant structures.",
-          "truckGate": "True. Chain-link perimeter fence is clearly visible along the public approach road in 2026-03 Street View; the truck approach runs from a controlled campus road network (STOP sign, bollard delineators, blue directional/checkpoint signage) into the fenced plant. A battery plant of this security/IP/hazmat profile inside a secured GM campus operates a controlled truck gate.",
-          "guardShack": "True (medium confidence). The DOE EA for this plant lists a 'guard house' among attendant structures, and a small booth-footprint structure sits beside the entrance road at the campus checkpoint (~35.7480,-86.9508). The exact booth could not be resolved crisply in overhead imagery, hence medium. remoteGs false as a consequence.",
-          "dockDoors": "Banded 25-50 (est. ~28). A dock apron with trailers backed in runs along the inner/north face in the gap between the two buildings (multiple red/white trailers visible at z19), plus a dock bank facing the north trailer yard. Roof angle and the building-to-building gap obscure an exact count; flagged uncertain.",
-          "shipRcvSeparate": "True (medium). Two distinct building faces serve trucks: the main white plant's dock face (cell shipping / finished goods) and the gray logistics building's dock face on the west, implying physically separate ship/receive clusters. Flagged uncertain.",
-          "dropArea": "Banded 10-25. A dedicated paved trailer drop yard sits north of the building gap (~35.7510,-86.9540) with ~15-22 trailers parked in angled and straight rows in the captured imagery. dropYard true.",
-          "trailerParkingCapacity": "~60 est. across the north drop yard and dock apron staging; approximate.",
-          "preGateStaging": "True - the access road and laydown/staging apron south of the gate provide truck-sized waiting room before the fenced entrance.",
-          "postGateStaging": "True - paved internal yard between the gate and the dock banks holds queued trucks.",
-          "drivewayLong": "True - the gate-to-dock internal approach is long (several hundred meters of campus road), easily holding a 3+ truck queue.",
-          "fastLaneOpportunity": "True (medium) - the campus entrance has wide paved/graded width and a multi-lane road network with room for an express/bypass lane.",
-          "entryLanes": "Est. 2 in / 2 out at the entrance road (medium confidence).",
-          "railServed": "True - an active rail line runs along the NW edge of the complex (visible diagonally in z18 imagery just past the trailer drop yard), serving the GM Spring Hill campus.",
-          "multipleFacilities": "True - the Ultium complex is two large connected buildings (white battery plant + gray logistics/warehouse) plus utility structures; and it sits within the larger multi-building GM campus.",
-          "urbanRural": "Rural - Spring Hill / Maury County is a small-town / edge-of-town setting; the campus is greenfield with surrounding farmland.",
-          "imagery": "Some surrounding ground in the Maxar/Airbus tiles still shows construction-era grading and laydown, but the plant buildings, dock apron, trailer drop yard, employee lots and fencing are all clearly built out and operational. Counts are honest overhead estimates.",
-          "geofence": "perimeter ring (~110 acres) traces the fenced Ultium complex core: both buildings, the north trailer drop yard, the dock aprons and the south employee lots, oriented to the slightly-rotated building grid. truckGate quad aligns to the entrance drive at the SE; dropYards covers the north trailer lot; dockAprons covers the inter-building dock strip and the gray building's west dock face."
-        }
-      },
-      {
-        "id": "28-general-motors",
-        "name": "Ultium Cells - Lansing/Delta Township MI",
-        "type": "Battery Cell Plant (GM JV)",
-        "archetype": "#7",
-        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
-        "confidence": "medium",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "remoteGs",
-          "postGateStaging",
-          "drivewayLong",
-          "entryExitTogether",
-          "fastLaneOpportunity",
-          "entryLanes",
-          "exitLanes",
-          "dockDoors",
-          "dockDoorCount",
-          "dropArea",
-          "dropYard",
-          "trailerParkingCapacity",
-          "shipRcvSeparate"
-        ],
-        "center": {
-          "lat": 42.716,
-          "lng": -84.647
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 42.7198,
-                "lng": -84.6512
-              },
-              {
-                "lat": 42.7201,
-                "lng": -84.6456
-              },
-              {
-                "lat": 42.718,
-                "lng": -84.6418
-              },
-              {
-                "lat": 42.7148,
-                "lng": -84.6408
-              },
-              {
-                "lat": 42.7125,
-                "lng": -84.6436
-              },
-              {
-                "lat": 42.7115,
-                "lng": -84.649
-              },
-              {
-                "lat": 42.7127,
-                "lng": -84.6518
-              },
-              {
-                "lat": 42.7165,
-                "lng": -84.6523
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 42.714423,
-                  "lng": -84.646326
-                },
-                {
-                  "lat": 42.715243,
-                  "lng": -84.643601
-                },
-                {
-                  "lat": 42.714754,
-                  "lng": -84.643181
-                },
-                {
-                  "lat": 42.713934,
-                  "lng": -84.645906
-                }
-              ]
-            }
-          ],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 0,
-              "pano": "P-4lIMoyM6bmEUrW-U8xyw",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 20,
-          "trailersVisible": 0,
-          "trailerParkingCapacity": 60,
-          "truckGateCount": 1,
-          "buildingCount": 1,
-          "siteAreaAcres": 171.6,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": true,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": null,
-          "exitLanes": null,
-          "fastLaneOpportunity": true,
-          "dockDoors": "10-25",
-          "dropArea": "NONE",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "dossierExcerpt": "The roster address (\"Delta Township, MI\") is city-level only. Web research (LG Energy Solution press release, GM Authority, DOE supplemental EA, PureLansing) confirmed the facility: the Ultium Cells Lansing battery-cell gigafactory, a $2.6B / 2.8M sq ft / 41 GWh plant built by the GM + LG Energy Solution joint venture on ~590 acres of former GM land immediately NW of GM's Lansing Delta Township (LDT) Assembly plant, between the I-69/I-496 interchange (north) and Millett Highway (south). The roster's GM-Delta-Township geocode (42.7361, -84.5838) landed in residential Lansing well NE of the plant; satellite probing (z13-z18) walked SW and positively re-pinned the single large light-roofed gigafactory mass at ~42.7160, -84.6470, with the solar-roofed LDT Assembly complex clearly visible to its SE. Identity is unambiguous; confidence is held at medium only because all available imagery is construction-era (see below).",
-        "mapsUrl": "https://www.google.com/maps/@42.71600,-84.64700,400m/data=!3m1!1e3",
-        "fieldNotes": {
-          "facility": "Ultium Cells Lansing battery cell plant (2.8M sq ft, 41 GWh, $2.6B), the GM/LG Energy Solution JV plant on ~590 acres of former GM land immediately NW of GM's Lansing Delta Township Assembly, bounded by the I-69/I-496 interchange on the N and Millett Hwy on the S. Positively identified by the unmistakable single large light-roofed gigafactory mass and its location adjacent to LDT Assembly (web-confirmed). NOTE: GM agreed to sell its stake to LG Energy Solution in Q1 2025; the plant is now LG-operated (planned to build NCMA modules for Toyota), but was a GM JV when the roster was built.",
-          "imagery": "All available Google/Maxar satellite tiles and Street View (2023-05) are CONSTRUCTION-ERA: the roof membrane is still being installed, the surrounding lot is raw graded earth, and there is no paved/striped yard, no installed perimeter fence/gate, and no parked trailers. Operational yard features could not be directly observed and are inferred from the building design + gigafactory class. Production was pushed to late 2025/2026.",
-          "truckGate": "No operational gate visible in the construction imagery (perimeter fence posts only just being set in Street View). Inferred true: a controlled, fully-fenced secured campus is the universal standard for a battery-cell gigafactory of this value and adjacency to a GM assembly plant. Flagged uncertain.",
-          "guardShack": "Inferred true on the same gigafactory-security basis; no booth observable in construction-era imagery. Flagged uncertain.",
-          "dockDoors": "A multi-bay dock structure is under construction on the SE end of the building (regular bay rhythm visible in z17). Banded 10-25 as a conservative estimate for a single-building cell plant; uncertain because docks were unfinished.",
-          "dropArea": "NONE / dropYard false: no paved trailer-parking lot existed in the captured imagery (raw earth and a contractor laydown yard only). Likely to exist once operational; flagged uncertain.",
-          "fastLaneOpportunity": "Large undeveloped graded apron around the building gives ample room to lay express/bypass lanes at a future gate; inferred from open space.",
-          "urbanRural": "Edge-of-town Delta Township industrial setting beside a freeway interchange, farmland and residential subdivisions nearby; classified Rural per the small-town-industrial tiebreak.",
-          "railServed": "No rail spur runs into the parcel in the imagery; the site is served by truck/highway (I-69/I-496). LDT Assembly to the SE is also road-served. Set false.",
-          "siteAreaAcres": "171.6 ac traced for the active developed plant site (building + immediate graded lot between the freeway and Millett Hwy); the full GM/Ultium land holding is ~590 ac including shared/expansion acreage."
+          "imageryDate": "2024-07",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "GM-operated battery/drive-unit plant (note: this is GM Brownstown, NOT the Ultium Cells JV) building Corvette E-Ray drive units and Cadillac CELESTIQ packs. One of GM's newer facilities; not a 2009-era or divested site.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -6681,6 +6422,32 @@
           "shipRcvSeparate": "Facility has both shipping and receiving docks; whether they are on physically distinct building faces is not conclusively resolved -> set false, flagged uncertain.",
           "siteAreaAcres": "Documented 141-acre lot; traced fenced yard polygon is ~90-100 acres, value set to the documented 141 acres for the full parcel.",
           "buildingCount": "Single very large processing building (with the attached ASRS tower) dominates the parcel -> buildingCount 1; multipleFacilities false."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.wardsauto.com/general-motors/parts-distribution-center-to-serve-gm-nationwide",
+              "date": "2019-08-07",
+              "type": "press",
+              "claim": "GM's $65M, 1.1M sq ft Burton MI (Davison Rd) facility is the main entry point for GM's Customer Care & Aftermarket network in North America, GM-operated with 800+ FT workers."
+            },
+            {
+              "tier": 1,
+              "url": "https://news.gm.com/home.detail.html/Pages/news/us/en/2024/mar/0304-cca.html",
+              "date": "2024-03-04",
+              "type": "press",
+              "claim": "GM CCA network investment PR referencing GM's Customer Care & Aftersales distribution facilities (Burton MI is the network's primary CCA hub)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "GM-operated CCA processing/distribution hub (the North American CCA network main entry point), current. No bankruptcy-era/RACER divestiture (built/operated by New GM post-2009).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -6933,6 +6700,25 @@
           "fastLaneOpportunity": "Single loop driveway with limited road frontage devoted to vehicle access; no obvious wide multi-lane apron for an express bypass - set false.",
           "urbanRural": "Dense Memphis (Hickory Hill / SE Memphis) industrial-warehouse corridor on Pleasant Hill Rd with large DCs on all sides -> Urban.",
           "siteAreaAcres": "Shelby County parcel record (APN 09-4200-0-0465C) lists 35.69 acres, 676,150 sq ft building built 1999; matches the traced perimeter."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://news.gm.com/home.detail.html/Pages/news/us/en/2023/jan/0126-ccainvestment.html",
+              "date": "2023-01-26",
+              "type": "press",
+              "claim": "GM PR: $20.5M investment across CCA facilities including the Memphis TN Parts Distribution Center; Memphis is a distribution hub for ACDelco parts, EV chargers and GM eCommerce (incl. $14M automated storage/retrieval)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "GM-operated CCA Parts Distribution Center, current; GM PR confirms active operation and recent automation investment. No bankruptcy-era/RACER divestiture.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -7167,6 +6953,32 @@
           "multipleFacilities": "The processing center is a single large building. It shares a campus to the north with a separate domed GM training/engagement facility, but that is a distinct operation, so multipleFacilities is left false for the processing yard itself.",
           "urbanRural": "Ypsilanti, within the dense Detroit-Ann Arbor metro fabric along the E Michigan Ave corridor -> Urban.",
           "siteAreaAcres": "~19 acres for the processing operation footprint (building + NW trailer yard + employee parking), measured from the traced perimeter ring."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://news.gm.com/home.detail.html/Pages/news/us/en/2023/apr/0428-cca.html",
+              "date": "2023-04-28",
+              "type": "press",
+              "claim": "GM PR on a >$100M investment in a GM Customer Care & Aftersales facility; Ypsilanti MI (2885 Tyler Rd) is a GM Service Parts Operations / CCA distribution facility in GM's processing-center tier."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.automotivelogistics.media/oems/gm-invests-in-michigan-for-aftersales-distribution-and-ev-assembly/44186.article",
+              "date": "2024",
+              "type": "press",
+              "claim": "GM invests in Michigan CCA aftersales distribution; GM operates aftersales processing/distribution in the Ypsilanti/SE Michigan footprint."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "GM-operated CCA / Service Parts Operations processing-distribution facility (2885 Tyler Rd, Ypsilanti Twp MI), current. No bankruptcy-era/RACER divestiture (active GM SPO site, distinct from the divested Willow Run plant nearby).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -7382,6 +7194,32 @@
           "urbanRural": "Modern logistics/distribution park in the Bolingbrook (SW Chicago metro) industrial corridor off I-55 -> Urban.",
           "trailerParkingCapacity": "Honest overhead estimate (~110) from row counts in the south yard; flagged uncertain.",
           "siteAreaAcres": "~404k sq ft building (~9 acre footprint) plus the south truck yard and buffer; fenced operational parcel ~20 acres (perimeter polygon estimate)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://www.cbsnews.com/chicago/news/uaw-strike-gm-stellantis-bolingbrook-naperville-parts-distribution-centers/",
+              "date": "2023-09-22",
+              "type": "press",
+              "claim": "The GM Chicago Parts Distribution Center in Bolingbrook IL was named among GM parts distribution centers struck by the UAW in Sept 2023 — confirming it is a current, GM-staffed/operated PDC."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.nbcchicago.com/news/local/uaw-strike-illinois-parts-distribution-centers-gm-stellantis-naperville-bolingbrook/3234183/",
+              "date": "2023-09-22",
+              "type": "press",
+              "claim": "UAW expanded its strike to GM parts/distribution facilities in Bolingbrook IL, corroborating current GM operation of the Bolingbrook PDC."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "GM-operated Chicago-market CCA Parts Distribution Center in Bolingbrook IL; current operation confirmed by Sept-2023 UAW-strike press naming the GM (not Stellantis) Bolingbrook PDC. No bankruptcy-era/RACER divestiture.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -7638,6 +7476,32 @@
           "urbanRural": "Dense Steele Creek industrial/logistics park in southwest Charlotte metro, surrounded by other large warehouses -> Urban.",
           "trailerParkingCapacity": "~90 estimate combining the NW drop row and SE court; overhead estimate, flagged.",
           "siteAreaAcres": "~22 acres for the building (~352k sq ft footprint), two truck courts, office/employee parking, and the treed buffer inside the perimeter (derived from the perimeter polygon)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://pressroom.gm.com/gmbx/us/en/pressroom/home/company/facilities/charlotte.html",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "GM's own facilities locator lists the Charlotte NC Parts Distribution Center as a GM Customer Care & Aftersales operation."
+            },
+            {
+              "tier": 1,
+              "url": "https://news.gm.com/home.detail.html/Pages/news/us/en/2024/mar/0304-cca.html",
+              "date": "2024-03-04",
+              "type": "press",
+              "claim": "GM PR: investing $23M in automation (ASRS/AMRs) at its Charlotte CCA Parts Distribution Center, opened 1999, ~420,000 orders/month; installation begins Jun 2024."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "GM-operated CCA Parts Distribution Center, current; GM-domain locator + 2024 GM PR confirm active operation and ongoing $23M investment. No bankruptcy-era/RACER divestiture (CCA PDC retained by GM).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -7853,6 +7717,25 @@
           "urbanRural": "Dense Rancho Cucamonga industrial/logistics district off arterial roads -> Urban.",
           "siteAreaAcres": "~404k sq ft building plus south truck court / drop yard on a ~20-acre parcel (overhead estimate from the perimeter ring).",
           "truckGateCount": "Two driveway breaks in the south screen wall."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://pressroom.gm.com/gmbx/us/en/pressroom/home/company/facilities/rancho-cucamonga.html",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "GM's own facilities locator page for the Rancho Cucamonga CA Parts Distribution Center; provides GM service parts for GM dealers and ACDelco customers."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "GM-operated CCA Parts Distribution Center, confirmed by GM-domain facilities locator. No bankruptcy-era/RACER divestiture.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -8064,202 +7947,25 @@
           "railServed": "No rail spur enters the property; nearest rail is not adjacent.",
           "scale": "No truck scale/weigh pad identified in the truck path.",
           "entryLanes": "Single combined in/out access off the internal east drive; lane counts estimated and flagged uncertain."
-        }
-      },
-      {
-        "id": "36-general-motors",
-        "name": "GM CCA - Boston Parts Distribution Center, Mansfield MA",
-        "type": "Parts Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "uncertainFields": [
-          "dockDoorCount",
-          "trailersVisible",
-          "trailerParkingCapacity",
-          "dropArea",
-          "entryLanes",
-          "exitLanes"
-        ],
-        "center": {
-          "lat": 41.9592,
-          "lng": -71.1392
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 41.9612,
-                "lng": -71.1411
-              },
-              {
-                "lat": 41.9608,
-                "lng": -71.1366
-              },
-              {
-                "lat": 41.959,
-                "lng": -71.1362
-              },
-              {
-                "lat": 41.9568,
-                "lng": -71.1376
-              },
-              {
-                "lat": 41.9573,
-                "lng": -71.1398
-              },
-              {
-                "lat": 41.959,
-                "lng": -71.1421
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
             {
-              "ring": [
-                {
-                  "lat": 41.95812,
-                  "lng": -71.13905
-                },
-                {
-                  "lat": 41.9576,
-                  "lng": -71.13822
-                },
-                {
-                  "lat": 41.95705,
-                  "lng": -71.13868
-                },
-                {
-                  "lat": 41.95758,
-                  "lng": -71.13951
-                }
-              ]
+              "tier": 1,
+              "url": "https://pressroom.gm.com/gmbx/us/en/pressroom/home/company/facilities/reno.html",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "GM's own facilities locator page for the Reno NV Parts Distribution Center; provides GM service parts for GM dealers and ACDelco customers."
             }
           ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 41.96015,
-                  "lng": -71.14165
-                },
-                {
-                  "lat": 41.95808,
-                  "lng": -71.13948
-                },
-                {
-                  "lat": 41.95775,
-                  "lng": -71.1399
-                },
-                {
-                  "lat": 41.95982,
-                  "lng": -71.14207
-                }
-              ]
-            }
-          ],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 309,
-              "pano": "ZF8vPrre5Gzyge1-otLhLw",
-              "hasCoverage": true
-            },
-            "dropYards": [
-              {
-                "heading": 248,
-                "pano": "ZF8vPrre5Gzyge1-otLhLw",
-                "hasCoverage": true
-              }
-            ]
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 42,
-          "trailersVisible": 30,
-          "trailerParkingCapacity": 45,
-          "truckGateCount": 0,
-          "buildingCount": 1,
-          "siteAreaAcres": 41.5,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "25-50",
-          "dropArea": "10-25",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#3",
-          "steps": [
-            {
-              "step": "Arrive on site (no gate)",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Drive to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 480000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 3030000,
-          "totalYnsMs": 2640000
-        },
-        "dossierExcerpt": "The roster lists this as \"GM CCA - Boston Parts Distribution Center, Mansfield MA\"\nwith only a city-level address. Web research resolved it precisely:\n\n- GM Service & Parts Operations (now Customer Care & Aftersales) selected\n  Norton, MA (immediately north of Mansfield) in 2004 for a new ~404,000\n  sq ft Parts Distribution Center in the North/Norton Commerce Center, replacing\n  the older Boston PDC and serving 400+ dealers across New England and parts of\n  NY (UAW Local 422). The facility opened ~2005.\n- GM closed the Norton PDC at the end of 2009 during its bankruptcy\n  (operation folded toward Philadelphia). Condyne Capital rehabbed and expanded\n  the building, and Horizon Beverage purchased it in 2012, adding office and\n  warehouse space and a large rooftop solar array; it is now Horizon's HQ/DC.",
-        "mapsUrl": "https://www.google.com/maps/@41.95920,-71.13920,400m/data=!3m1!1e3",
-        "fieldNotes": {
-          "_facility": "The GM CCA Boston PDC was the ~404,000 sq ft GM Service & Parts Operations distribution center built ~2004-2005 in the Norton Commerce Center, Norton MA (just north of Mansfield), serving 400+ New England/NY dealers. GM closed it end of 2009 in bankruptcy; Condyne rehabbed/expanded it and Horizon Beverage bought it in 2012 and now occupies it as their HQ/DC (solar-covered roof added). The audited building is the original GM PDC structure at ~15/45 Commerce Way, Norton MA 02766 (41.9592,-71.1392). No GM-operated parts DC currently exists at/near Mansfield-Boston.",
-          "truckGate": "No barrier arm, sliding gate, or guard checkpoint at the property edge. Street View along Commerce Way (Aug 2025) shows open lawn frontage with no perimeter fence; the dock yard and drop area sit set back behind the building. Open suburban industrial-park access. truckGate=false.",
-          "guardShack": "No staffed booth at any entrance. A small round white structure and a rectangular shed sit in the dock apron (utility silo / electrical, not a gatehouse). guardShack=false.",
-          "remoteGs": "No gate present, so remoteGs=false (no kiosk/call-box check-in either).",
-          "dockDoors": "Loading docks line the long southwest face of the building; trailers backed in at the NW and south ends with a continuous dock wall ~600 ft long. Estimated ~42 doors across the SW face -> 25-50 band (could reach 50+); flagged uncertain.",
-          "dropArea": "Curving access drive at the SW/south end holds rows of parked trailers without tractors plus a striped trailer-parking lane; ~20-30 trailers visible -> 10-25 band drop area.",
-          "dropYard": "Dedicated trailer-storage along the southern loop drive, separate from the active dock apron. dropYard=true.",
-          "postGateStaging": "Large paved apron between the SW dock wall and the access loop gives ample interior holding room before docks; postGateStaging=true.",
-          "drivewayLong": "Deep paved apron / loop drive can stack 3+ trucks approaching the dock face; drivewayLong=true.",
-          "railServed": "No rail spur into the property; nearest rail is the MBTA/Amtrak Northeast Corridor well to the west, not connected. railServed=false.",
-          "urbanRural": "Edge-of-town suburban industrial park in Norton MA off Route 140 / near I-495, surrounded by woods and wetland; judged Rural per rubric (small-town industrial).",
-          "fastLaneOpportunity": "No truck gate exists, so no express-lane opportunity at a checkpoint; set false.",
-          "entryLanes": "Single shared two-way driveway loop serves the dock yard; entry/exit lane counts inferred as 1/1, flagged uncertain."
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "GM-operated CCA Parts Distribution Center, confirmed by GM-domain facilities locator. No bankruptcy-era/RACER divestiture.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -8471,6 +8177,32 @@
           "urbanRural": "Edge-of-town industrial parcel beside US-1 and a rail yard, with farmland to the NW and a tree buffer around; judged Rural per rubric (small-town industrial leans Rural).",
           "shipRcvSeparate": "Single dock bank on one building face; shipping and receiving share the same dock line.",
           "scale": "No truck scale identified in imagery."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.gm.com/company/facilities/philadelphia",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "GM's own US-operations facilities page for the Philadelphia Parts Distribution Center (located at 200 Cabot Blvd E, Langhorne PA)."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.aftercollege.com/job/55392107/",
+              "date": "2024",
+              "type": "press",
+              "claim": "Active GENERAL MOTORS SERVICE PARTS OPERATIONS warehouse/distribution clerk requisition at the Langhorne PA site (200 Cabot Blvd E) — GM staffs the site now."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "GM-operated CCA / Service Parts Operations Parts Distribution Center at 200 Cabot Blvd E, Langhorne PA (Philadelphia-market PDC); GM-domain facilities page + active GM SPO job req at the address confirm current operation. No bankruptcy-era/RACER divestiture.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -8688,6 +8420,25 @@
           "siteAreaAcres": "~20 acres derived from the traced perimeter ring; ~404k sq ft (~9.3 acre) building footprint plus west dock yard, north parking and east access strip.",
           "entryLanes": "Single inbound lane assumed at the controlled corridor; not separately resolvable -> uncertain.",
           "trailerParkingCapacity": "Overhead estimate (~50) from west yard + north staging; flagged uncertain."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://pressroom.gm.com/gmbx/us/en/pressroom/home/company/facilities/fort-worth.html",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "GM's own facilities locator page for the Fort Worth TX Parts Distribution Center (greater Fort Worth / Roanoke TX area); provides GM service parts."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "GM-operated CCA Parts Distribution Center, confirmed by GM-domain facilities locator. No bankruptcy-era/RACER divestiture.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -8903,6 +8654,25 @@
           "urbanRural": "Edge-of-metro logistics park at E-470/I-70 with open prairie immediately north and east of the site; classified Rural per the small-town/edge-of-town rule despite proximity to Denver.",
           "fastLaneOpportunity": "Single secured entry with limited apron width; no obvious room for a dedicated express bypass lane -> false.",
           "siteAreaAcres": "~404k sq ft building on a ~27-acre fenced parcel (overhead estimate from the perimeter ring)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://pressroom.gm.com/gmbx/us/en/pressroom/home/company/facilities/denver.html",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "GM's own facilities locator page for the Denver Parts Distribution Center (Aurora CO); provides GM service parts for GM dealers and ACDelco customers."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "GM-operated CCA Parts Distribution Center (Denver PDC located in Aurora CO), confirmed by GM-domain facilities locator. No bankruptcy-era/RACER divestiture.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -9128,6 +8898,25 @@
           "urbanRural": "Edge-of-town St. Croix Business Park in Hudson WI, bordered by I-94 and open land; small-town industrial setting -> Rural.",
           "siteAreaAcres": "~404,000 sq ft building (opened 2004) on a roughly 39-acre parcel, estimated from the traced perimeter ring.",
           "buildingCount": "Single large distribution building with an attached office wing at the SE corner."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.gm.com/company/facilities/hudson",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "GM's own facilities locator page for the Hudson WI Parts Distribution Center (Minneapolis-market PDC), 2200 Willis Miller Dr; provides GM service parts."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "GM-operated CCA Parts Distribution Center (Minneapolis-market PDC sited in Hudson WI), confirmed by GM-domain facilities locator. No bankruptcy-era/RACER divestiture.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -9311,6 +9100,33 @@
           "urbanRural": "Inside the 1,022-acre Flagler Center business park off I-95 with dense surrounding office, warehouse, apartment, and retail development in suburban Jacksonville -> Urban.",
           "railServed": "No rail spur into the property; nearest intermodal is offsite. Set false.",
           "multipleFacilities": "Single distribution building on the parcel (office front + warehouse are one structure). Adjacent warehouses are separate parcels/tenants. Set false."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://www.jaxdailyrecord.com/news/2024/aug/19/south-jacksonville-warehouse-sold-for-2718-million/",
+              "date": "2024-08-19",
+              "type": "press",
+              "claim": "12751 Gran Bay Pkwy W is occupied by Saddle Creek Logistics (issued a permit to convert offices/breakroom to warehouse, expanding to ~362,125 sq ft); building sold Aug 2024 to Redfearn Capital (landlord) — Saddle Creek is the operating tenant under lease."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.sclogistics.com/our-network/locations/jacksonville-gran-bay-florida/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Saddle Creek Logistics' own location page lists its Jacksonville-Gran Bay (12751 Gran Bay Pkwy W) 3PL warehousing/fulfillment facility."
+            }
+          ],
+          "imageryDate": "2024",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "PROBABLE (ships caveated/capped). DISTINCT from the original 2009-divested Jacksonville GM PLANT failure: there is NO RACER Trust / Motors Liquidation GM property in Jacksonville FL (Florida is not a RACER state), so no bankruptcy-era negative attaches to this address. POSITIVES (no clean GM-domain Tier-1 for this exact site; GM's pressroom locator has no Jacksonville page, consistent with a 3PL-run satellite PDC): 'General Motors Service Parts Operations' is listed at 12751 Gran Bay Pkwy W, this is GM PDC #079 (Jacksonville) in GM's CCA network, and the building is occupied/run by 3PL Saddle Creek Logistics under lease (landlord Redfearn Capital). Multiple Tier-3 directory listings agree and there is NO Tier-2 closure/divestiture negative. Treated as a 3PL-operated GM parts DC -> operator '3PL', tenancy 'leased', INCLUDE caveated. CAVEAT: GM-operation of parts distribution at this exact address rests on directory/trade-forum corroboration plus the GM-SPO-at-address listing, not a GM-domain locator; reconfirm before high-stakes use.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       }
     ]

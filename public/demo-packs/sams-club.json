@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-09T21:43:38.377Z",
+  "builtAt": "2026-06-18T22:23:50.997Z",
   "account": {
     "slug": "sams-club",
     "displayName": "Sam's Club",
@@ -9,12 +9,12 @@
     "coverageNote": {
       "auditedCount": 10,
       "estimatedFootprint": 12,
+      "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Sam's Club runs a lean US network of ~12 distribution and fulfillment centers (several 3PL-operated by Saddle Creek / Prologis) feeding ~600 clubs. We audited 10 representative facilities.",
-      "auditedScope": "US"
+      "note": "Sam's Club runs a lean US network of ~12 distribution and fulfillment centers (several 3PL-operated by Saddle Creek / Prologis) feeding ~600 clubs. We audited 10 representative facilities."
     },
-    "featuredSiteId": "01-sams-club",
+    "featuredSiteId": "02-sams-club",
     "dossierIntro": "Sam's Club runs a lean distribution network separate from its Walmart parent, a mix of owned cross-docks and dedicated 3PL DCs (Saddle Creek, Prologis) feeding roughly 600 warehouse clubs. We mapped 10 of them across the South and Midwest, holding 1,083 dock doors and room for about 2,530 trailers. Eight of the ten sit behind a controlled truck gate and five run a staffed guard booth, but the control is uneven and two DCs sit open to the road. YardFlow gives Sam's Club one gate-to-dock view across owned and 3PL yards alike.",
     "surprisingFindings": [
       "Eight of the 10 Sam's Club DCs gate the yard and five staff a booth, but Hattiesburg and Edwardsville sit wide open to the road with no checkpoint.",
@@ -337,6 +337,25 @@
           "scale": "No clear truck scale/weigh pad identified in the truck path; left false, flagged uncertain.",
           "trailersVisible": "Estimate from z17-z19 imagery across SW and SE yards - approximate count of parked trailers in the captured frames.",
           "dockDoorCount": "Honest overhead estimate across both faces of the cross-dock plus the secondary building."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.spscommerce.com/community/articles/sams-club-dc-receiving-addresses",
+              "date": "2026-05",
+              "type": "locator",
+              "claim": "Official Sam's Club DC receiving-address list includes 'Sams Distribution Center 4889, 4002 N IH 35, New Braunfels, TX 78130'."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Confirmed Sam's Club DC 4889 at the audited I-35 site (self-operated); 'WAL-MART Distribution Services' street-view signage is the parent corporate entity on a combined Walmart/Sam's campus, not a Walmart-only DC.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -606,6 +625,32 @@
           "connectivityIssue": "Town-edge location with nearby development and a highway; cellular likely adequate, so false, but flagged as inferred.",
           "entryLanes": "Single crossing point; lane count not separately markable from overhead, estimated 1 in / 1 out at one combined gate.",
           "siteAreaAcres": "Derived from the perimeter polygon (~664m x ~395m envelope, minus ponds/irregular SW); ~58 acres, approximate."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.spscommerce.com/community/articles/sams-club-dc-receiving-addresses",
+              "date": "2026-05",
+              "type": "locator",
+              "claim": "Official Sam's Club DC receiving-address list includes Sam's DC 4026/8234 at 3301 E Park Ave, Searcy, AR 72143."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.kark.com/news/big-honor-for-searcy-sams-club-distribution-center/",
+              "date": "2017-03",
+              "type": "press",
+              "claim": "Searcy Sam's Club DC named Sam's network Distribution Center of the Year."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Confirmed self-operated Sam's Club DC 4026/8234 at 3301 E Park Ave, Searcy; no closure/WARN. Re-pin to ~35.245,-91.717.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -858,6 +903,32 @@
           "scale": "No truck scale identified in the gate path; flagged uncertain.",
           "entryLanes/exitLanes": "Booth flanked by one lane each side at the checkpoint; lane count is a best estimate.",
           "multiStep": "Single checkpoint observed; no clear second booth/scale stage before the docks."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.spscommerce.com/community/articles/sams-club-dc-receiving-addresses",
+              "date": "2026-05",
+              "type": "locator",
+              "claim": "Official Sam's Club DC receiving-address list includes 'Sams Distribution Center 8229, 3010 Saddlecreek Rd Bld 19, C/O Saddle Creek Corp, Lakeland, FL 33801'."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.sclogistics.com/resource-center/blog-posts/sams-club-names-saddle-creek-3pl-service-provider-year/",
+              "date": "2023-01",
+              "type": "press",
+              "claim": "Saddle Creek Logistics named Sam's Club 3PL Service Provider of the Year; operates the Lakeland DC."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Confirmed Sam's Club DC 8229 operated by 3PL Saddle Creek Logistics at 3010 Saddle Creek Rd, Lakeland; no closure. Operator=Saddle Creek (do not confuse with the Lakeland retail club).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1115,6 +1186,25 @@
           "scale": "No truck scale / weigh platform visible in the truck path.",
           "siteAreaAcres": "10.5 ac derived from the perimeter polygon (cleared/paved operating lot inside the tree line).",
           "facilityConfirmation": "Confirmed via address (185 J M Tatum Industrial Dr) and web (Saddle Creek-operated Sam's Club DC #4792). Long cross-dock building with trailers backed in on both faces and surrounding drop-yard rows is unmistakably the DC, not the office listing (45k sqft listing is the registration footprint)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.sclogistics.com/resource-center/blog-posts/sams-club-names-saddle-creek-3pl-service-provider-year/",
+              "date": "2026-05",
+              "type": "press",
+              "claim": "Saddle Creek Logistics operates Sam's Club DCs in Lakeland FL, Hattiesburg MS, and Villa Rica GA; named Sam's Club 3PL Service Provider of the Year, relationship continuing as of 2026."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Operating Sam's Club DC at ~185 J M Tatum Industrial Dr, Hattiesburg, run by 3PL Saddle Creek; no closure/WARN. Re-pin to the DC (~31.31,-89.31), distinct from the retail club on US Hwy 98.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1376,6 +1466,25 @@
           "buildingCount": "One large DC building plus a small ancillary maintenance/shop building inside the yard.",
           "urbanRural": "Edge-of-town small-industrial setting in Villa Rica surrounded by woods; classed Rural per the tie-break rule.",
           "siteAreaAcres": "~36.9 acres from the fenced perimeter polygon (shoelace)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.sclogistics.com/resource-center/blog-posts/sams-club-names-saddle-creek-3pl-service-provider-year/",
+              "date": "2026-05",
+              "type": "press",
+              "claim": "Saddle Creek named Sam's Club 3PL Service Provider of the Year, operating Sam's Club DCs incl. Villa Rica GA."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Operating ~430k sqft Sam's Club DC at ~140 Fleet Dr, Villa Rica, run by 3PL Saddle Creek; no closure/WARN.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1592,6 +1701,32 @@
           "buildingCount": "Two primary DC buildings (north and south) plus minor ancillary structures and a tank farm in the SE.",
           "trailersVisible": "Estimate from 2026 satellite: ~110 trailers across dock apron and drop-yard rows.",
           "railServed": "No rail spur enters the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://okbusinessvoice.com/2024/01/25/walmart-inc-cuts-ribbon-on-oklahomas-first-sams-club-distribution-center/",
+              "date": "2024-01-25",
+              "type": "press",
+              "claim": "Walmart cut ribbon on Oklahoma's first Sam's Club DC, 300k sqft at 2400 S Council Rd, OKC; operations began Feb 14 2024."
+            },
+            {
+              "tier": 1,
+              "url": "https://oklahoma.gov/governor/newsroom/newsroom/2023/july2023/sam-s-club-to-open-new-distribution-center-in-oklahoma-city.html",
+              "date": "2023-07",
+              "type": "econ-dev",
+              "claim": "State of Oklahoma announces Sam's Club new DC in OKC Logistics Park."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Self-operated Sam's Club multi-DC at 2400 S Council Rd, OKC; live since Feb 14 2024 (LIVE, not just announced). Re-pin to ~35.43,-97.66.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1870,6 +2005,32 @@
           "trailerParkingCapacity": "Rough estimate (~160) of drop/parking capacity across the central corridor and dock aprons; flagged uncertain.",
           "perimeter": "Property line traced inside the fence: west edge follows the centerline of the drop-yard corridor shared with the Amazon building; east edge runs just beyond the dock wall along the retention canal; the SE wastewater-treatment plant is excluded.",
           "imageryNote": "Most overhead imagery is recent (building complete). The clearest gate Street View is 2023-01 (gate already built, trucks queued); 2025-02 Street View confirms the completed checkpoint. The DC opened Apr 2025 / operational Feb 2025."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.supplychaindive.com/news/walmart-sams-club-opens-distribution-center-jacksonville-florida/746505/",
+              "date": "2025-04",
+              "type": "press",
+              "claim": "Walmart opened the 1M-sqft Sam's Club DC in Jacksonville; fully operational since February 2025."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.jaxdailyrecord.com/news/2025/apr/17/ceremony-celebrates-opening-of-1-million-square-foot-sams-club-distribution-center/",
+              "date": "2025-04-17",
+              "type": "press",
+              "claim": "Grand-opening of the Sam's Club DC at 1511 Zoo Parkway Bldg 300, Imeson Park South."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Self-operated Sam's Club DC at 1511 Zoo Parkway, operational Feb 2025; no negative. Re-pin to 1511 Zoo Parkway (Imeson Park South) - generic Jacksonville coords.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2102,6 +2263,32 @@
           "fastLaneOpportunity": "Very wide gate apron and oversized paved yards give abundant room to add express/bypass lanes.",
           "entryLanes": "Entry driveway is a wide two-lane causeway with a center median; in/out share the same point.",
           "streetView": "Only Aug 2023 Street View coverage exists (pano HynqAHaV96KQ1s-UvAkkJg), captured during construction before the building was completed/occupied; it shows the Exeter Inner Park monument and graded earth, not the finished gate. Gate/guard-shack calls therefore rest on current satellite, hence medium confidence."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.walmart.com/about/samsclub/news/2023/11/30/sams-club-to-open-two-new-distribution-centers-in-st-louis-and-minneapolis-areas",
+              "date": "2023-11-30",
+              "type": "press",
+              "claim": "Sam's Club corporate announces new St. Louis-area (Edwardsville IL) DC/fulfillment center."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.thefreightway.com/sams-club-to-open-new-distribution-center-in-edwardsville/",
+              "date": "2023-12",
+              "type": "econ-dev",
+              "claim": "Sam's Club DC at 5710 Inner Park Drive, Gateway Commerce Center, ~370k sqft, opened January 2024."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Sam's Club DC at 5710 Inner Park Dr, Gateway Commerce Center, opened Jan 2024; read as self-operated. NOTE: a separate Saddle Creek 3PL building exists in the same park - do not conflate. Tenancy unconfirmed.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2375,6 +2562,32 @@
           "exitLanes": "Entry and exit share the single NE gate lane group; exit lane count inferred as 1.",
           "siteAreaAcres": "Derived from the perimeter polygon (~33-34 acres of fenced paved property); overhead estimate.",
           "streetViewMeta": "Only road-level coverage is a 2022-04 pano on Hentges Way at the roundabout, captured before the building was built (opened March 2024), so it shows empty land; gate/guard determinations rely on current high-res satellite, not Street View."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.walmart.com/about/samsclub/news/2023/11/30/sams-club-to-open-two-new-distribution-centers-in-st-louis-and-minneapolis-areas",
+              "date": "2023-11-30",
+              "type": "press",
+              "claim": "Sam's Club corporate announces new Minneapolis-area (Shakopee MN) DC/fulfillment center."
+            },
+            {
+              "tier": 2,
+              "url": "https://tcbmag.com/sams-club-to-open-distribution-center-in-shakopee/",
+              "date": "2023-12",
+              "type": "press",
+              "claim": "365k sqft DC/FC at 7400 Hentges Way, Shakopee Logistics Center, opened March 2024."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Sam's Club-operated DC/FC at 7400 Hentges Way, Shakopee (leased shell in a spec park), live March 2024; no Shakopee-specific closure (a MN WARN surfaced but not pinned to this site - the era's confirmed Sam's closure was Swedesboro NJ).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2653,6 +2866,32 @@
           "urbanRural": "Inside the dense metro-Atlanta industrial fabric (RiverWest / Prologis park, Lithia Springs), surrounded by other large DCs.",
           "railServed": "No rail spur enters the property.",
           "trailerParkingCapacity": "Estimate from combined east+west truck-court paved area; approximate."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://georgia.org/press-release/sams-club-create-600-new-jobs-douglas-county-fulfillment-center",
+              "date": "2023-02-27",
+              "type": "econ-dev",
+              "claim": "State of Georgia: Sam's Club to create 600 jobs at a Douglas County (Lithia Springs) fulfillment center, $142M, at 1000 Douglas Hill Road."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.chamberofcommerce.com/business-directory/georgia/lithia-springs/warehouse/2026659539-sam-s-club-fulfillment-center",
+              "date": "2025",
+              "type": "locator",
+              "claim": "Active directory listing: Sam's Club Fulfillment Center, 1000 Douglas Hills Rd, Lithia Springs GA 30122."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Sam's Club is tenant/self-operator of the ~1.1M-sqft RiverWest building leased from PROLOGIS (landlord/REIT, NOT a 3PL operator; gate monument = REIT-tenant signage). PROBABLE: only the 2023 announcement + 2025 directory, no clean dated 'now-open' press. FLAG: confirm a 2024-25 opening hit to upgrade.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       }
     ]
