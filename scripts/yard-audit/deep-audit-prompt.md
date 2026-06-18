@@ -24,6 +24,14 @@ Run all commands from the repo root: `C:\Users\casey\modex-gtm`
   (e.g. `/c/Users/casey/modex-gtm/tmp/probe.png`). Do NOT pass a backslash
   `C:\...` path — the Bash tool strips the backslashes and mangles it.
 
+## Step -1 — Verify the account operates this facility today
+**Run `scripts/yard-audit/verify-facility-prompt.md` first.** If
+`verdict=rejected`, append the rejection to
+`output/yard-audits/<slug>/verification-rejections.md` and STOP — do not image,
+classify, or include this site. Only `confirmed` / `probable` sites proceed to
+Step 0, and they must carry the `verification` block (the exact shape is in the
+verifier prompt) in their audit JSON.
+
 ## Step 0 — Pin down the exact facility
 The given coordinates are approximate and may be several km off; the address
 may be imprecise. Before auditing, CONFIRM the correct building: probe
