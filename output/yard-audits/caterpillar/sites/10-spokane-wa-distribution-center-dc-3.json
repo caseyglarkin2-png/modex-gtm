@@ -161,5 +161,31 @@
     "scale": "No truck scale identified; left false.",
     "metrics": "Counts are honest estimates from overhead imagery; flagged."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.prnewswire.com/news-releases/caterpillar-announces-new-parts-distribution-center-in-spokane-washington-124429428.html",
+        "date": "2011-05",
+        "type": "press",
+        "claim": "Caterpillar Logistics Services announced its >500,000 sq ft Spokane WA parts distribution center; operational 2012."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.equipmentworld.com/technology/article/14949067/caterpillar-announces-new-parts-distribution-center-in-spokane-washington",
+        "date": "2011-05",
+        "type": "press",
+        "claim": "Caterpillar new Spokane parts DC, ~562k sq ft, 24/7 parts operation for the Pacific Northwest."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CAT-operated parts DC (DC-3, ~562k sq ft, 24/7) run by wholly owned Cat Logistics; confirmed via Caterpillar PR; no closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

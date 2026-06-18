@@ -158,5 +158,31 @@
     "urbanRural": "Dense urban riverfront industrial setting in East Peoria with residential streets abutting the plant.",
     "siteAreaAcres": "~230 acres for the fenced East Peoria works including laydown yards - approximate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.25newsnow.com/2024/07/25/caterpillar-confirms-employee-layoffs/",
+        "date": "2024-07",
+        "type": "press",
+        "claim": "Caterpillar confirms a temporary one-week layoff at the East Peoria facility citing customer demand (temporary, not a closure)."
+      },
+      {
+        "tier": 3,
+        "url": "https://en.wikipedia.org/wiki/Caterpillar_D11",
+        "date": "2024-10",
+        "type": "press",
+        "claim": "6,000th D11 (built exclusively at East Peoria) rolled off the line Oct 2024 (corroborating only)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CAT-operated track-type-tractor/component campus, builds D11 exclusively; only temporary layoffs, no sale/closure (the sold IL plant was Aurora).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

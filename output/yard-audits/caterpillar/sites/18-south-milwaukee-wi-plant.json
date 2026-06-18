@@ -162,5 +162,31 @@
     "backupSensitive": "The complex fronts directly onto public city streets with minimal setback; a truck queue at a gate would spill onto a public road - backupSensitive true.",
     "entryExitSeparate": "Multiple separate gated openings in the perimeter wall on different street frontages - treated as separate entry/exit."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.cat.com/en_IN/news/machine-press-releases/caterpillar-celebrates-130-years-of-earthmoving-innovation-in-south-milwaukee-wisconsin.html",
+        "date": "2023-09",
+        "type": "press",
+        "claim": "Caterpillar celebrates 130 years of manufacturing in South Milwaukee; site focuses on electric rope shovels and draglines."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.globalminingreview.com/mining/31082023/caterpillar-celebrates-130-years-of-earthmoving-in-south-milwaukee/",
+        "date": "2023-08",
+        "type": "press",
+        "claim": "CAT (since acquiring Bucyrus in 2011) continues rope shovels and draglines at South Milwaukee."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Former Bucyrus/P&H site, CAT-owned since 2011; 2016 cessation was the old main building only; CAT still operates the site making electric rope shovels and draglines.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

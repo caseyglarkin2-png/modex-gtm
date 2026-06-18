@@ -161,5 +161,24 @@
     "scale": "No truck scale identified; left false.",
     "metrics": "Counts are honest estimates from overhead imagery of a very large multi-building depot; flagged."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://s7d2.scene7.com/is/content/Caterpillar/CM20230126-fbd1a-4849e",
+        "date": "2023-01",
+        "type": "locator",
+        "claim": "Caterpillar Morton Distribution Center fact sheet (caterpillar.com asset): global parts depot at 500 N. Morton Ave, Morton IL; 375,000+ part numbers."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CAT-operated anchor global parts distribution center (3M+ sq ft); confirmed via Caterpillar own Morton DC fact sheet; no divestiture/closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

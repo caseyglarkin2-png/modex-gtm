@@ -160,5 +160,31 @@
     "urbanRural": "Rural - Central Carolina Enterprise Park sits among woods and farmland north of Sanford, well outside any dense metro fabric.",
     "siteAreaAcres": "~220 acres for the fenced campus including parking, dock yards and laydown - approximate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://news.ararental.org/caterpillars-sanford-facility-celebrates-25th-anniversary-with-expansion-plans-underway",
+        "date": "2023-11-12",
+        "type": "press",
+        "claim": "Caterpillar-owned Sanford NC facility (purchased 1996), 2,000+ employees, builds compact track loaders; expansion underway."
+      },
+      {
+        "tier": 1,
+        "url": "https://businessfacilities.com/caterpillar-investing-15m-sanford-north-carolina/",
+        "date": "2024-01",
+        "type": "econ-dev",
+        "claim": "Caterpillar opening a new pre-assembly plant for skid-steer loaders in Sanford NC, $15M, 40 new jobs."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CAT-owned BCP plant building skid-steer/compact-track loaders, 2,000+ employees, actively expanding; not a dealer, no closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

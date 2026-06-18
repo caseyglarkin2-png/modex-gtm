@@ -158,5 +158,31 @@
     "railServed": "No rail spur runs into the property.",
     "siteAreaAcres": "~68 acres for the fenced campus including parking, from the perimeter box."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://s7d2.scene7.com/is/content/Caterpillar/CM20230207-6924d-184b9",
+        "date": "2023-02",
+        "type": "locator",
+        "claim": "Caterpillar Pontiac IL facility (Large Power Systems) makes fuel engine systems - fuel pumps, fuel injectors, clean emissions modules; ~1M sq ft, ~1,100 employees."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.centralillinoisproud.com/news/local-news/caterpillar-looks-to-hire-50-people-at-pontiac-plant/",
+        "date": "2023-01",
+        "type": "careers",
+        "claim": "Caterpillar hiring at its Pontiac plant."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CAT-operated Large Power Systems plant producing fuel injectors/fuel systems since 1978; active hiring, no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

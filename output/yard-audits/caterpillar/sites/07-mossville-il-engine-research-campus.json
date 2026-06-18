@@ -154,5 +154,24 @@
     "urbanRural": "Rural - the campus sits among farmland near Mossville/the Illinois River, outside any dense metro fabric.",
     "siteAreaAcres": "~320 acres for the campus including the test track, cogen plant, buildings and laydown - approximate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.caterpillar.com/pt/empregos/r0000353527/development-research-engineering-specialist/",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active June 2026 Caterpillar R&D req sited onsite at the Mossville Tech Center - Building K (ferrous metallurgy/foundry research)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Mossville Technical Center is CAT-operated and active (current 2026 onsite R&D reqs); the 2016 Building BB demolition was one vacant engine-mfg building, not a campus sale.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

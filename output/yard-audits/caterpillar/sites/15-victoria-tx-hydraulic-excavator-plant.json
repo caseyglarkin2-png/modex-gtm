@@ -150,5 +150,31 @@
     "siteAreaAcres": "~161 acres for the developed/fenced campus; the property parcel including buffer land is larger.",
     "railServed": "No rail spur runs into the property; the rail line near the airport does not serve the plant."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://victoriaadvocate.com/2024/09/26/victoria-caterpillar-plant-produces-500th-super-large-excavator/",
+        "date": "2024-09-26",
+        "type": "press",
+        "claim": "Caterpillar Victoria TX facility produced its 500th super-large hydraulic excavator; plant actively manufacturing."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.equipmentworld.com/roadbuilding/article/14957207/cat-opens-1-1-million-sq-ft-hydraulic-excavator-facility-in-victoria-texas",
+        "date": "2012-01",
+        "type": "press",
+        "claim": "Caterpillar opened its 1.1M sq ft hydraulic excavator facility in Victoria, Texas."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CAT-operated hydraulic/super-large excavator plant; 500th-unit milestone Sep 2024 confirms current production; only 2019/2020 temp layoffs, no closure or line consolidation away.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

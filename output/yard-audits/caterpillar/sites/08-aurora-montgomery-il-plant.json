@@ -158,5 +158,31 @@
     "urbanRural": "Edge-of-town setting in unincorporated Montgomery surrounded by farmland and a rail corridor - Rural per rubric.",
     "scale": "No truck scale clearly identified; left false, flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://thevoice.us/former-caterpillar-plant-in-montgomery-takes-new-life/",
+        "date": "2020-03",
+        "type": "press",
+        "claim": "Caterpillar sold the ~4M sq ft Montgomery (Aurora-area) plant to Reich Brothers for $68.5M; rebranded The Grid at Route 31; CAT closure announced 2017."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.loopnet.com/Listing/325-State-Route-31-Montgomery-IL/32706736/",
+        "date": "2024-01",
+        "type": "press",
+        "claim": "325 State Route 31 marketed as The Grid at Route 31, multi-tenant industrial property (no longer a CAT plant)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "REJECTED: CAT closed the plant (2017) and SOLD it to Reich Brothers in 2020; now The Grid at Route 31 multi-tenant industrial - CAT only leases ~200k sq ft of office, no operating freight yard.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

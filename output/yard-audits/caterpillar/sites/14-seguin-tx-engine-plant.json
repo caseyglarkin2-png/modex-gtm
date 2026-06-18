@@ -152,5 +152,31 @@
     "scale": "No truck scale identified; left false.",
     "metrics": "Counts are honest estimates from overhead imagery of a 1.7M sq ft engine plant; flagged."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.caterpillar.com/en/news/corporate-press-releases/h/caterpillar-texas-investment-90mil.html",
+        "date": "2024-05",
+        "type": "press",
+        "claim": "Caterpillar press release: $90M investment in Texas including $20M at the Seguin plant to assemble new C13D engines."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.equipmentworld.com/construction-equipment/video/14969623/take-a-look-inside-caterpillars-seguin-engine-plant",
+        "date": "2023-01",
+        "type": "press",
+        "claim": "Tour of Caterpillar 1.7M sq ft Seguin TX engine plant assembling Cat and Perkins diesel/gas engines."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CAT-operated ~1.7M sq ft engine assembly plant at 1600 W Kingsbury; active 2024 CAT investment for C13D; no closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

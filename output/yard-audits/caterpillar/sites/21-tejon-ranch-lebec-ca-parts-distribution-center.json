@@ -162,5 +162,31 @@
     "urbanRural": "Rural - TRCC sits at the foot of the Grapevine surrounded by farmland and open hills, not within a metro's dense fabric.",
     "siteAreaAcres": "46 acres per the Tejon Ranch Co. land-acquisition press release."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://tejonranch.com/caterpillar-dedicates-50-million-distribution-center-near-grapevine/",
+        "date": "2012-01",
+        "type": "press",
+        "claim": "Caterpillar dedicated a $50M, 400,000 sq ft parts distribution center at Tejon Ranch Commerce Center (Lebec); CAT Logistics purchased 46 acres."
+      },
+      {
+        "tier": 1,
+        "url": "https://therealdeal.com/la/2026/05/04/dedeaux-properties-jumps-on-dearth-of-inland-empire-industrial/",
+        "date": "2026-05",
+        "type": "press",
+        "claim": "Tejon Ranch Commerce Center existing tenants include Caterpillar (fully occupied industrial space) as of May 2026."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CAT-owned ~400k sq ft parts DC (opened ~2012); still a current TRCC tenant per May 2026 reporting; no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

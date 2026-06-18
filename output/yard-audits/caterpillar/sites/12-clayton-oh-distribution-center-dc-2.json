@@ -148,5 +148,31 @@
     "scale": "No truck scale identified; left false.",
     "metrics": "Counts are honest estimates from snow-covered overhead imagery of a 1.6M sq ft DC; flagged."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.ttnews.com/articles/caterpillar-logistics-build-facility-ohio",
+        "date": "2010-01",
+        "type": "press",
+        "claim": "Caterpillar Logistics announced it would build a parts distribution facility in Clayton, Ohio (opened 2011)."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.daytondailynews.com/local/clayton-site-highlights-tech-upgrades-on-15th-anniversary/article_7d34a829-aadc-523a-a0d8-1f641068e217.html",
+        "date": "2026-01",
+        "type": "press",
+        "claim": "Dayton Daily News: the Clayton CAT distribution center is operating after 15 years, expanding workforce and adding automation."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CAT-operated DC-2 parts DC at 6611 Hoke Rd, ~1.6M sq ft, opened 2011, actively expanding; no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

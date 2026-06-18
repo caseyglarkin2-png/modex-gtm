@@ -150,5 +150,31 @@
     "scale": "No truck scale identified; left false.",
     "metrics": "Counts are honest estimates from overhead imagery of a large parts DC; flagged."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.reliableplant.com/Read/10234/caterpillar-launches-parts-expansion-with-waco-facility",
+        "date": "2009-01",
+        "type": "press",
+        "claim": "Caterpillar launched its Waco parts distribution facility (~750k sq ft) to expand its service-parts network."
+      },
+      {
+        "tier": 1,
+        "url": "https://business.wacochamber.com/directory/Details/caterpillar-inc-waco-distribution-center-881178",
+        "date": "2025-01",
+        "type": "econ-dev",
+        "claim": "Greater Waco Chamber lists the active Caterpillar Inc. Waco Distribution Center at 2901 Gateway Blvd."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CAT-operated parts DC at 2901 Gateway Blvd, opened 2009, currently active; no closure/divestiture found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

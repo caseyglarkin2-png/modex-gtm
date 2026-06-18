@@ -150,5 +150,31 @@
     "scale": "No truck scale identified; left false.",
     "metrics": "Counts are honest estimates from overhead imagery of an older 1.1M sq ft DC; flagged."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.fox43.com/article/news/local/contests/caterpillar-says-it-will-by-york-distribution-center/521-32a8963b-65e6-4260-a197-3b95c826c97f",
+        "date": "2013-01",
+        "type": "press",
+        "claim": "Caterpillar said it would buy and modernize its ~1.1M sq ft York Distribution Center on Memory Lane."
+      },
+      {
+        "tier": 1,
+        "url": "https://careers.caterpillar.com/en/jobs/job/r0000289766-distribution-manager-3rd-shift/",
+        "date": "2025-01",
+        "type": "careers",
+        "claim": "Caterpillar Careers posted a Distribution Manager req in York, PA (Jan 2025), confirming active operation."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CAT-operated parts depot at 600 Memory Lane; CAT bought facility in 2013 (owned), active 2025 careers reqs; no closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

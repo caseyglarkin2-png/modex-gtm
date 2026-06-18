@@ -143,5 +143,31 @@
     "siteAreaAcres": "~230 acres for the campus including parking, truck yard and laydown - approximate.",
     "expansion": "A $725M expansion was underway as of the reporting; imagery may predate completed expansion buildings."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.insideindianabusiness.com/articles/caterpillar-planning-725m-expansion-in-lafayette",
+        "date": "2024-02-23",
+        "type": "econ-dev",
+        "claim": "Caterpillar investing $725M to add 300,000 sq ft to its Lafayette Large Engine Center; ~1,900 employees; addition completing end of 2026."
+      },
+      {
+        "tier": 1,
+        "url": "https://investors.caterpillar.com/news/news-details/2025/Caterpillar-Invests-in-U-S--Manufacturing-and-Future-Workforce-Skills-Training/default.aspx",
+        "date": "2025-01",
+        "type": "press",
+        "claim": "Caterpillar IR release tying Lafayette to U.S. manufacturing investment."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CAT-owned Large Engine Center actively expanding ($725M, on-site rail); strong dated Tier-1 econ-dev + IR, no closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

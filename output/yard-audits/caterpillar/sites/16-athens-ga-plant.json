@@ -143,5 +143,31 @@
     "siteAreaAcres": "~180 acres for the developed/fenced campus from the perimeter box; the full parcel with wooded buffer is reported as ~250 acres.",
     "railServed": "No rail spur into the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.prnewswire.com/news-releases/caterpillar-expands-operations-in-united-states-new-factory-near-athens-georgia-expected-to-employ-1400-people-139512648.html",
+        "date": "2012-02",
+        "type": "press",
+        "claim": "Caterpillar building $200M, 1M sq ft factory near Athens GA for small track-type tractors and mini hydraulic excavators."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.georgiamanufacturingalliance.com/events/catepillar--factory-tour-athens-2025",
+        "date": "2025-01",
+        "type": "press",
+        "claim": "Caterpillar Athens factory operating, hosting plant tours in 2025."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CAT-built/operated plant making mini excavators and small dozers; opened 2014, still active 2025; no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

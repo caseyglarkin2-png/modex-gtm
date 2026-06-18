@@ -142,5 +142,31 @@
     "railServed": "No rail spur runs into the property.",
     "siteAreaAcres": "~96 acres from the perimeter box; the parcel is reported as 102 acres."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.gray.com/insights/caterpillar-inc-opens-history-making-facility-in-winston-salem-n-c/",
+        "date": "2011-11",
+        "type": "press",
+        "claim": "Caterpillar opened 850,000 sq ft axle plant on 102-acre site in Winston-Salem NC ($426M) Nov 2011."
+      },
+      {
+        "tier": 1,
+        "url": "https://journalnow.com/news/local/caterpillar-shifts-purpose-of-winston-salem-plant/article_de05c8c1-8f5a-548e-96b8-35500ed30f78.html",
+        "date": "2023-01",
+        "type": "press",
+        "claim": "Plant repurposed from axle/mining to rail equipment; transferred to Progress Rail (a wholly owned Caterpillar subsidiary) effective Jan 1 2024."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CAT built/opened the plant (not cancelled); axles phased out, now operated by Progress Rail, a CAT-owned subsidiary, so still Caterpillar-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

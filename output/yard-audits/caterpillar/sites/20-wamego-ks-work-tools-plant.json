@@ -159,5 +159,31 @@
     "urbanRural": "Rural - Wamego KS is a small town; the plant is on the edge of town beside a river/lake with adjacent farmland and small residential streets.",
     "siteAreaAcres": "~104 acres for the full developed campus including all laydown yards from the perimeter box; the EDC brochure cites a ~44-acre core production parcel plus ~37 additional acres available."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.wibw.com/2024/06/06/caterpillar-inc-close-workforce-mid-2025-wamego-facility/",
+        "date": "2024-06-06",
+        "type": "press",
+        "claim": "Caterpillar announced it will close its Wamego KS attachments facility and end the workforce there in mid-2025."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.ksnt.com/news/local-news/wamego-caterpillar-facility-changes-ownership-local-jobs-saved/",
+        "date": "2025-05",
+        "type": "press",
+        "claim": "Wamego Caterpillar facility changed ownership; plant stays open under new (non-CAT) owner, CAT exited."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "REJECTED: Caterpillar announced closure (Jun 2024), shut down Wamego attachments operation mid-2025, then sold the facility to a new owner. No longer Caterpillar-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

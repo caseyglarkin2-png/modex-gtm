@@ -150,5 +150,31 @@
     "urbanRural": "Rural - the foundry sits among farmland and woods along US-24 by the Illinois River, well outside any town.",
     "siteAreaAcres": "~200 acres for the fenced foundry complex including material yards - approximate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.caterpillar.com/en/jobs/r0000302926/experienced-foundry-operators-2nd-or-3rd-shift-mapleton-cast-metal-org-cmo/",
+        "date": "2025-04",
+        "type": "careers",
+        "claim": "Caterpillar careers req for Experienced Foundry Operators, Mapleton Cast Metal Org (CMO), Mapleton IL, posted Apr-Jul 2025."
+      },
+      {
+        "tier": 1,
+        "url": "https://careers.caterpillar.com/en/jobs/r0000304558/patternmaker-2nd-or-3rd-shift-mapleton-cast-metal-org-cmo/",
+        "date": "2025-05",
+        "type": "careers",
+        "claim": "Caterpillar careers req for Patternmaker, Mapleton Cast Metal Org, posted May 2025, confirming active foundry operations."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CAT-operated engine-casting foundry; multiple 2025 CAT careers reqs and consolidation of Toccoa GA work into Mapleton; only a 2020 temporary idle, no sale/closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

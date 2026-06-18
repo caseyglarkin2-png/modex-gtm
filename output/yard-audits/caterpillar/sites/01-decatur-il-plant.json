@@ -169,5 +169,31 @@
     "siteAreaAcres": "~360 acres for the fenced campus including staging and rail - approximate from the perimeter box.",
     "urbanRural": "Edge-of-Decatur industrial setting bordered by farmland east and a residential subdivision north - classified Rural per the small-town/edge-of-town rule."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.caterpillar.com/en/jobs/",
+        "date": "2026-05",
+        "type": "careers",
+        "claim": "Active Caterpillar job openings in Decatur, IL as of May 2026, confirming ongoing CAT-operated production."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.chicagobusiness.com/article/20170210/ISSUE01/170219981/why-peoria-based-caterpillar-stays-in-illinois",
+        "date": "2017-02",
+        "type": "press",
+        "claim": "Caterpillar makes its largest mining truck (797F) in Decatur and nowhere else."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CAT-operated mining-truck/wheel-loader/grader plant; current CAT careers reqs, no sale/closure (only temporary layoffs).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

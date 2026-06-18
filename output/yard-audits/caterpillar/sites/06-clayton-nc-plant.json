@@ -158,5 +158,31 @@
     "urbanRural": "Rural - the plant sits among woods and farmland on the edge of Clayton with a treed buffer; classified Rural per the edge-of-town rule.",
     "siteAreaAcres": "~130 acres for the plant campus including staging yards and parking - approximate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.equipmentworld.com/construction-equipment/article/14954188/optimized-z-bar-and-performance-series-buckets-highlight-caterpillars-new-910k-and-914k-compact-wheel-loaders",
+        "date": "2023-03",
+        "type": "press",
+        "claim": "Cat small wheel loaders (910K/914K) manufactured at Caterpillar Clayton, NC Building Construction Products plant."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.wral.com/story/10674671/",
+        "date": "2011-11",
+        "type": "press",
+        "claim": "Caterpillar expanded its Clayton NC plant consolidating small wheel loader production there."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CAT-operated BCP small-wheel-loader assembly plant; no closure/sale found, only a 2008 temporary layoff.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
