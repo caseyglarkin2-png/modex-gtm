@@ -162,5 +162,25 @@
     "buildingCount": "Estimated ~9 distinct buildings across the campus; flagged uncertain - some structures are small support buildings and mixed industrial occupancy is possible at the south end.",
     "siteAreaAcres": "~24 acres for the fenced K-C campus along Pinecrest St."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.powderbulksolids.com/business/kimberly-clark-kicks-off-20m-expansion-project",
+        "date": "2025-01",
+        "type": "trade-press",
+        "claim": "K-C moving forward on $20M expansion at its Corinth MS nonwovens plant (+45,000 sqft, +25 jobs); >300 workers; components for Huggies, Pull-Ups, Poise, Depend, WypAll."
+      }
+    ],
+    "imageryDate": "2025-11",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "K-C actively expanding ($20M, +25 jobs) and hiring at the Corinth nonwovens plant in 2025; >300 workers; no closure/sale/WARN; freight-bearing.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

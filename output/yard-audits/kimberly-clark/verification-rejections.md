@@ -1,0 +1,17 @@
+# Kimberly-Clark - FOV verification rejections
+
+Verified 2026-06-18 (agent). 18 sites checked: 13 confirmed, 2 probable (flagged), 3 rejected.
+
+## Rejected
+
+- **K-C Beech Island Regional Distribution Center** (Beech Island, SC; lat 33.42099, lng -81.89067) - REJECTED: under construction, not a current operating facility. The new automated 1.1M sq ft regional DC ($200M) is an announced expansion; construction began May 2025 and operations are expected online Q2 2027. Fails the current-ops rule. [Tier 1: https://governor.sc.gov/news/2025-05/kimberly-clark-corporation-expanding-aiken-county-operation , 2025-05 | Tier 2: https://scbiz.com/kimberly-clark-to-expand-beech-island-plant-with-200m-boost/ , 2025-05]
+
+- **K-C Neenah Experimental Mill** (Neenah, WI; lat 44.1883, lng -88.4626) - REJECTED: non-freight R&D site. K-C still operates this as its experimental "X-Mill"; per the WI DNR Green Tier description and a Sept-2024 trade-press tour, its function is to develop/test product and process innovations, its output is "data," and it ships no commercial product. No meaningful inbound/outbound truck freight, so no yard to audit. (Distinct from the K-C Neenah Nonwovens Facility, which K-C closed in 2019.) [Tier 1: https://dnr.wisconsin.gov/topic/GreenTier/Participants/KimberlyClark.html , 2022-09 | Tier 2: https://tissueonlinenorthamerica.com/kimberly-clark-celebrates-100-years-of-kleenex-with-a-tour-at-the-x-mill-plant-in-neenah/ , 2024-09]
+
+- **K-C Warren Advanced Manufacturing Facility** (Warren, OH; lat 41.2235, lng -80.8115) - REJECTED: under construction, not a current operating facility. The new $800M, ~1.2M sq ft plant broke ground May 2025; production begins H1 2027, full capacity by 2030. The companion distribution center was still only "proposed" as of late 2025. Fails the current-ops rule. (The source site JSON already flagged this as under construction.) [Tier 1: https://www.jobsohio.com/newsroom/news-press/governor-dewine-lt-governor-tressel-announce-kimberly-clark-to-bring-491-jobs-to-ohio , 2025-05 | Tier 1: https://www.manufacturingdive.com/news/kimberly-clark-huggies-kleenex-2-billion-us-ohio-south-carolina-facilities/746962/ , 2025-05]
+
+## Probable (low-confidence, shipped caveated)
+
+- **K-C Graniteville Distribution Center** (Graniteville, SC; lat 33.62405, lng -81.84755) - PROBABLE: active K-C DC at 1043 Global Ave operated by 3PL GENCO ATC (full-building 450k sq ft lease), but the only address-level Tier-1 lease confirmation is 2016 (>24 months old); the only recent (2025) Tier-1 is region-level. No Tier-2 negative. FLAG: K-C's new automated Beech Island DC (online Q2 2027) is explicitly positioned to consolidate the area distribution footprint - monitor Graniteville for future closure. Re-pin/re-verify the lease currency before relying on it.
+
+- **K-C DuPont Distribution Center (KCDC)** (DuPont, WA; lat 47.1128, lng -122.638) - PROBABLE: K-C maintains current distribution in DuPont WA, but there are TWO distinct K-C DuPont sites - the established KCDC at 1205 Wharf Rd (matches the audited coords; corroborated as an active live-load DC) and the separately leased "The Cubes at DuPont" at 2800 Center Drive (747,488 sq ft, 2022 long-term lease). The strongest recent Tier-1 is the Cubes lease, not the Wharf Rd pin. FLAG: confirm whether the audited coordinates should map to 1205 Wharf Rd or 2800 Center Drive and re-pin accordingly.

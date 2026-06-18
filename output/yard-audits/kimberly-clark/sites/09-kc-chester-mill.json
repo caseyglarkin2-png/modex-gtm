@@ -106,17 +106,43 @@
     "entryExitTogether"
   ],
   "fieldNotes": {
-    "location": "Confirmed K-C Chester non-integrated tissue mill (Scott 1000), ~74 acres on the Delaware River. Roster coord (39.8416,-75.3694) sat ~1 km W of the actual mill in downtown Chester. Resolved via the documented border 'East by Harrah's Casino and Race Track' — the mill is the large dense paper-mill complex immediately W of Harrah's Philadelphia racetrack oval, at ~39.844,-75.357. Address 800 W 2nd St, Chester PA 19013.",
+    "location": "Confirmed K-C Chester non-integrated tissue mill (Scott 1000), ~74 acres on the Delaware River. Roster coord (39.8416,-75.3694) sat ~1 km W of the actual mill in downtown Chester. Resolved via the documented border 'East by Harrah's Casino and Race Track' \u2014 the mill is the large dense paper-mill complex immediately W of Harrah's Philadelphia racetrack oval, at ~39.844,-75.357. Address 800 W 2nd St, Chester PA 19013.",
     "truckGate": "The mill is fully perimeter chain-link fenced (visible all along W 2nd St in Street View). Trucks enter through fence gates; the main entrance off W 2nd St (~39.846,-75.357) opens into the mill yard. Classed truckGate true; a hard barrier arm was not clearly resolved.",
-    "guardShack": "No staffed booth positively confirmed at the W 2nd St entrance — the entry reads as an open fence gate into a parking/yard area. A small white-roofed structure in the freight yard near the rail siding (~39.8446,-75.3576) may be a scale house or gatehouse. Classed guardShack false / remoteGs true; listed uncertain.",
-    "scale": "A small structure beside the rail siding in the freight yard is consistent with a truck scale / scale house, but cannot be confirmed — listed uncertain.",
-    "railServed": "Rail tracks run into and through the mill property (siding visible by the freight yard and along the complex) — classed rail-served.",
-    "dropArea": "No dedicated trailer drop yard — dense urban mill with no room for a trailer storage lot. Only a few trailers parked near the dock building.",
-    "dockDoors": "Compact shipping dock on the warehouse building; ~18 doors estimated — listed uncertain (mill is dense and partly obscured by overhead conveyors).",
-    "backupSensitive": "Tight urban site hemmed in by the river, Harrah's casino, and city streets — little truck stacking room; a queue would spill onto W 2nd St.",
-    "multipleFacilities": "Campus of multiple connected buildings — mill, converting/warehouse, cogeneration plant, wastewater treatment — linked by overhead pipe/conveyor bridges.",
-    "urbanRural": "Dense urban waterfront in Chester, in the Philadelphia metro — Urban.",
+    "guardShack": "No staffed booth positively confirmed at the W 2nd St entrance \u2014 the entry reads as an open fence gate into a parking/yard area. A small white-roofed structure in the freight yard near the rail siding (~39.8446,-75.3576) may be a scale house or gatehouse. Classed guardShack false / remoteGs true; listed uncertain.",
+    "scale": "A small structure beside the rail siding in the freight yard is consistent with a truck scale / scale house, but cannot be confirmed \u2014 listed uncertain.",
+    "railServed": "Rail tracks run into and through the mill property (siding visible by the freight yard and along the complex) \u2014 classed rail-served.",
+    "dropArea": "No dedicated trailer drop yard \u2014 dense urban mill with no room for a trailer storage lot. Only a few trailers parked near the dock building.",
+    "dockDoors": "Compact shipping dock on the warehouse building; ~18 doors estimated \u2014 listed uncertain (mill is dense and partly obscured by overhead conveyors).",
+    "backupSensitive": "Tight urban site hemmed in by the river, Harrah's casino, and city streets \u2014 little truck stacking room; a queue would spill onto W 2nd St.",
+    "multipleFacilities": "Campus of multiple connected buildings \u2014 mill, converting/warehouse, cogeneration plant, wastewater treatment \u2014 linked by overhead pipe/conveyor bridges.",
+    "urbanRural": "Dense urban waterfront in Chester, in the Philadelphia metro \u2014 Urban.",
     "truckGateCount": "At least two fence-gate entries observed (W 2nd St main entrance and a freight-yard access); listed uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://tissueonlinenorthamerica.com/kimberly-clarks-chester-mill-produces-60-of-scott-1000-in-the-usa/",
+        "date": "2022-01",
+        "type": "trade-press",
+        "claim": "Chester mill produces ~2M rolls/day of Scott 1000 = 60% of US Scott 1000; ~570 employees."
+      },
+      {
+        "tier": 1,
+        "url": "https://tissueonlinenorthamerica.com/demolition-begins-on-kimberly-clark-plant-in-chester/",
+        "date": "2020-11",
+        "type": "trade-press",
+        "claim": "Only the old coal-fired boiler building was demolished under a $150M coal-to-gas modernization; the Scott 1000 tissue mill (570 employees) remains operational."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Mill operating; a demolition headline is a false-alarm trap (it was the coal boiler under a $150M modernization, not the mill); no closure/sale evidence.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

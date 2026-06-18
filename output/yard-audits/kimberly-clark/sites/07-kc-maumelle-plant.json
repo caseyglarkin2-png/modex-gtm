@@ -172,15 +172,41 @@
     "railServed"
   ],
   "fieldNotes": {
-    "location": "Confirmed as 500 Murphy Dr, Maumelle, AR 72113 — K-C's Huggies baby-wipes manufacturing plant. Roster coords were ~700m NW of the building; web research yielded the street address and an address-level coordinate (34.864832,-92.393775) that lands squarely on the large white-roofed manufacturing building with extensive trailer parking. Locked center there.",
+    "location": "Confirmed as 500 Murphy Dr, Maumelle, AR 72113 \u2014 K-C's Huggies baby-wipes manufacturing plant. Roster coords were ~700m NW of the building; web research yielded the street address and an address-level coordinate (34.864832,-92.393775) that lands squarely on the large white-roofed manufacturing building with extensive trailer parking. Locked center there.",
     "truckGate": "Confirmed guarded truck gate at the NE corner where the access road from Murphy Dr enters. z21 imagery shows a small white guard booth astride the driveway with barrier arms across the inbound and outbound lanes.",
-    "guardShack": "Small white booth (~1-vehicle footprint) sitting in the pinch-point between the in/out lanes — staffed guard shack.",
-    "dockDoors": "Long dock bank on the NE building face with ~30-40 trailers backed in; 36 is an approximate count from z20 imagery — listed uncertain.",
-    "dropArea": "Trailers parked in rows along the north perimeter, separate from the active dock apron — a drop yard, ~30-40 trailers.",
-    "railServed": "A rail line curves along the SE edge of the property but no spur is visible entering the plant — classed not rail-served, listed uncertain.",
+    "guardShack": "Small white booth (~1-vehicle footprint) sitting in the pinch-point between the in/out lanes \u2014 staffed guard shack.",
+    "dockDoors": "Long dock bank on the NE building face with ~30-40 trailers backed in; 36 is an approximate count from z20 imagery \u2014 listed uncertain.",
+    "dropArea": "Trailers parked in rows along the north perimeter, separate from the active dock apron \u2014 a drop yard, ~30-40 trailers.",
+    "railServed": "A rail line curves along the SE edge of the property but no spur is visible entering the plant \u2014 classed not rail-served, listed uncertain.",
     "postGateStaging": "Paved area just inside the gate before the dock apron provides truck holding/queue space.",
-    "urbanRural": "Maumelle industrial park on the edge of the Little Rock metro; setting is small-town / edge-of-town industrial with woods around the lot — classed Rural per the tie-break rule.",
-    "multipleFacilities": "One main manufacturing building with an integral eastern addition — a single facility, not a campus. The very large warehouse south of the lot is a separate, unrelated company."
+    "urbanRural": "Maumelle industrial park on the edge of the Little Rock metro; setting is small-town / edge-of-town industrial with woods around the lot \u2014 classed Rural per the tie-break rule.",
+    "multipleFacilities": "One main manufacturing building with an integral eastern addition \u2014 a single facility, not a campus. The very large warehouse south of the lot is a separate, unrelated company."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.kimberly-clark.com/en/jobs/878544/engineering-mechanical-technician-maumelle-facility",
+        "date": "2026-01",
+        "type": "locator",
+        "claim": "Active K-C careers requisition (Engineering Mechanical Technician) at the Maumelle Facility."
+      },
+      {
+        "tier": 1,
+        "url": "https://metrolittlerockalliance.com/success-stories/kimberly-clark/",
+        "date": "2015-01",
+        "type": "press",
+        "claim": "~400,000 sq ft Huggies baby-wipes plant employing ~300; $68M expansion (+40,000 sq ft)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active K-C careers reqs name the Maumelle Facility; Huggies wipes plant; no closure/sale evidence (the 2018 AR closure was the separate Conway plant).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

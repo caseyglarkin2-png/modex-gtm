@@ -139,5 +139,31 @@
     "perimeter": "Best-effort box over the undeveloped K-C-owned land along the north edge of the existing Beech Island plant, the most plausible build footprint. Not a measured fence line - the facility does not yet exist.",
     "classification": "All physical-layout fields are unobservable because the building has not been constructed. urbanRural set Rural by the surrounding farmland/forest setting; everything else flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://governor.sc.gov/news/2025-05/kimberly-clark-corporation-expanding-aiken-county-operation",
+        "date": "2025-05",
+        "type": "press",
+        "claim": "New 1.1M sq ft regional DC is an announced $200M expansion; operations expected online Q2 2027."
+      },
+      {
+        "tier": 2,
+        "url": "https://scbiz.com/kimberly-clark-to-expand-beech-island-plant-with-200m-boost/",
+        "date": "2025-05",
+        "type": "trade-press",
+        "claim": "Construction begins May 2025, 2-3 years; online Q2 2027 - under construction, not operational."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Under construction (began May 2025; online Q2 2027) - not operational as of June 2026; rejected per current-ops rule.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

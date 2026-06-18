@@ -157,5 +157,31 @@
     "buildingCount": "One very large interconnected manufacturing complex plus minor support structures - counted as 3 distinct buildings.",
     "siteAreaAcres": "~78 acres for the fenced property including the building, drop yards, rail siding, parking and grass buffer."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.kimberly-clark.com/en/jobs/885296/process-engineer-berkeley-mills",
+        "date": "2025-01",
+        "type": "locator",
+        "claim": "Active K-C careers req: Process Engineer supporting nonwovens manufacturing at the Berkeley Plant, Hendersonville NC."
+      },
+      {
+        "tier": 1,
+        "url": "https://kimberlyclark.gcs-web.com/news-releases/news-release-details/kimberly-clark-expand-production-its-north-carolina-nonwovens",
+        "date": "2018-05",
+        "type": "press",
+        "claim": "K-C investor press: Hendersonville NC nonwovens plant produces materials for Depend, Poise, U by Kotex; $30M expansion."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active K-C Berkeley Mill (Hendersonville) careers reqs for nonwovens manufacturing (2025); no closure/sale/WARN; freight-bearing nonwovens plant.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -145,16 +145,35 @@
     "multiStep"
   ],
   "fieldNotes": {
-    "location": "Roster supplied only a city-level address and a coordinate that landed in downtown Paris (~5 km off). Web research (Paris TX Chamber, Texas TDLR project record, Yelp) confirmed the address as 2466 Farm Road 137 (FM 137), Paris, TX 75460 — K-C's 238-acre Huggies diaper/personal-care plant off SW Loop 286. Identified the building by scanning SW Paris industrial sites: the matching facility is a large enclosed manufacturing complex with employee parking, a circular entrance drive, and a large trailer drop yard at ~33.6389,-95.5912. Several other unrelated industrial sites (a lumber/scrap yard, slab/construction site) were ruled out.",
-    "truckGate": "The access road from SW Loop 286 splits into separate inbound/outbound lanes at a pinch-point near the building (~33.6396,-95.5904). The site is perimeter-fenced (chain-link visible in Street View). Small structures/posts cross the lanes at the pinch-point — classed truckGate true, but a hard barrier could not be fully resolved; listed uncertain.",
+    "location": "Roster supplied only a city-level address and a coordinate that landed in downtown Paris (~5 km off). Web research (Paris TX Chamber, Texas TDLR project record, Yelp) confirmed the address as 2466 Farm Road 137 (FM 137), Paris, TX 75460 \u2014 K-C's 238-acre Huggies diaper/personal-care plant off SW Loop 286. Identified the building by scanning SW Paris industrial sites: the matching facility is a large enclosed manufacturing complex with employee parking, a circular entrance drive, and a large trailer drop yard at ~33.6389,-95.5912. Several other unrelated industrial sites (a lumber/scrap yard, slab/construction site) were ruled out.",
+    "truckGate": "The access road from SW Loop 286 splits into separate inbound/outbound lanes at a pinch-point near the building (~33.6396,-95.5904). The site is perimeter-fenced (chain-link visible in Street View). Small structures/posts cross the lanes at the pinch-point \u2014 classed truckGate true, but a hard barrier could not be fully resolved; listed uncertain.",
     "guardShack": "A small structure with a canopy sits beside the entry road at the pinch-point but cannot be positively confirmed as a staffed guard booth at z20-21. Classed guardShack false / remoteGs true as best estimate.",
-    "entryExitSeparate": "The entry road clearly forks into two separate paved lanes approaching the plant — classed entry/exit separate; listed uncertain as it could be a single divided drive.",
-    "dropArea": "Large trailer drop yard SW of the building with multiple long rows of parked trailers — 50+.",
-    "dockDoors": "Dock bank on the building's south/SW face with trailers backed in; ~40 doors estimated from z18-20 imagery — listed uncertain.",
+    "entryExitSeparate": "The entry road clearly forks into two separate paved lanes approaching the plant \u2014 classed entry/exit separate; listed uncertain as it could be a single divided drive.",
+    "dropArea": "Large trailer drop yard SW of the building with multiple long rows of parked trailers \u2014 50+.",
+    "dockDoors": "Dock bank on the building's south/SW face with trailers backed in; ~40 doors estimated from z18-20 imagery \u2014 listed uncertain.",
     "railServed": "No rail spur visible entering the property.",
-    "urbanRural": "Plant sits on a large wooded/field parcel off SW Loop 286 on the edge of Paris — rural per the tie-break rule.",
+    "urbanRural": "Plant sits on a large wooded/field parcel off SW Loop 286 on the edge of Paris \u2014 rural per the tie-break rule.",
     "fastLaneOpportunity": "Wide entry apron and the forked entry lanes leave room for an express/bypass lane.",
-    "multipleFacilities": "One main manufacturing building with attached/adjacent structures (utility/support buildings) — treated as a single facility, not a multi-cluster campus."
+    "multipleFacilities": "One main manufacturing building with attached/adjacent structures (utility/support buildings) \u2014 treated as a single facility, not a multi-cluster campus."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.kimberly-clark.com/en/jobs/875879/site-leader-environmental-sustainability-paris-tx--paris-plant",
+        "date": "2026-01",
+        "type": "locator",
+        "claim": "Active K-C careers requisition (Site Leader, Environmental & Sustainability) at the Paris Plant, Paris TX."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Multiple active K-C careers reqs name the Paris Plant; survived the 2018 restructuring rumors; no closure/sale/WARN evidence for Paris TX.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

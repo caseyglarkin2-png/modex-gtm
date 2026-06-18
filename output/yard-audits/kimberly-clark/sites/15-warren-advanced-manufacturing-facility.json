@@ -100,5 +100,31 @@
     "yardMetrics": "All yard counts are 0 because no yard infrastructure exists in available imagery. buildingCount 0 reflects the imagery, not the planned facility (1 plant building plus a proposed 500k-sq-ft DC across Pine Ave). siteAreaAcres 560 is the documented purchased acreage, not derived from the perimeter box.",
     "perimeter": "Perimeter box drawn around the visibly cleared brownfield footprint; approximate, since the eventual fenced plant pad will occupy only part of the 560-acre parcel."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.jobsohio.com/newsroom/news-press/governor-dewine-lt-governor-tressel-announce-kimberly-clark-to-bring-491-jobs-to-ohio",
+        "date": "2025-05",
+        "type": "press",
+        "claim": "K-C $800M, ~1M sq ft Warren facility; production begins first half of 2027, full capacity by 2030 (not yet operational)."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.manufacturingdive.com/news/kimberly-clark-huggies-kleenex-2-billion-us-ohio-south-carolina-facilities/746962/",
+        "date": "2025-05",
+        "type": "trade-press",
+        "claim": "Warren OH plant ~1.2M sq ft, construction to commence May 2025, completion in two to three years (~2027-2028)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Under construction; production not until H1 2027 per K-C/state sources - not a current operating facility; rejected per current-ops rule.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

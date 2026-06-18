@@ -157,5 +157,32 @@
     "siteAreaAcres": "~101 acres derived from the perimeter box; the building footprint alone is roughly 600k-1M sq ft.",
     "buildingCount": "1 - the single DC structure. Other warehouses nearby are separate properties, not part of this campus."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.news.kimberly-clark.com/2025-05-01-Kimberly-Clark-announces-plans-to-invest-over-2-Billion-to-Expand-US-Manufacturing,-Accelerate-Innovation-and-Fuel-Growth",
+        "date": "2025-05",
+        "type": "press",
+        "claim": "K-C self-reports an active North America distribution network (18 NA plants + 39 NA DCs) as of May 2025."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.blrck.com/projects/kimberly-clark-leed/",
+        "date": "2024-01",
+        "type": "trade-press",
+        "claim": "~600,000 sq ft LEED build-to-suit DC delivered for Kimberly-Clark in Logan Township NJ."
+      }
+    ],
+    "imageryDate": "2026-04",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Build-to-suit ~600k sq ft LEED DC for K-C, corroborated by current K-C supply-chain hiring in Swedesboro/Logan Township; no closure evidence. Leased build-to-suit, likely 3PL-operated per K-C DC model.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

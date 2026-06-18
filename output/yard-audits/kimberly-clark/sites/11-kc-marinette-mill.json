@@ -156,5 +156,32 @@
     "railServed": "No rail spur visible entering the property.",
     "buildingCount": "Main manufacturing complex (river side), large central warehouse, SE manufacturing/dock building, and the front brick office building - counted as 4 distinct structures; some are interconnected."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://dnr.wisconsin.gov/topic/GreenTier/Participants/KimberlyClarkMarinette",
+        "date": "2026-03",
+        "type": "press",
+        "claim": "WI DNR Green Tier: K-C Marinette Mill became Tier 2 participant 2026-03-10; produces Scott Shop Towels, Wypall, Viva; ~230 workers; operating."
+      },
+      {
+        "tier": 1,
+        "url": "https://careers.kimberly-clark.com/en/jobs/885171/electrical-optimization-engineer-marinette-mill",
+        "date": "2026-04",
+        "type": "locator",
+        "claim": "Active K-C careers req tied to the Marinette Mill (Electrical Optimization Engineer)."
+      }
+    ],
+    "imageryDate": "2025-08",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tier-1 DNR status (2026-03) plus active Marinette Mill careers reqs; NOT in the 2018 restructuring closures; no closure/sale/WARN found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

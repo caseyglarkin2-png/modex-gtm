@@ -144,14 +144,40 @@
     "postGateStaging"
   ],
   "fieldNotes": {
-    "location": "Roster coords landed on the correct building; geocode movedMeters (21762) reflects a poor city-center geocoder start, not an error. Confirmed as 601 Innovative Way, Owensboro KY — large K-C diaper/personal-care manufacturing complex + on-site DC on a peninsula bounded by the Green River.",
-    "truckGate": "Open campus-style entrance off Innovative Way at the public road — Street View (2019) shows a K-C monument sign and manicured-lawn drive with NO barrier at the road. An internal truck-yard checkpoint/pinch-point with fencing and a small structure is visible at ~37.8211,-87.3053 controlling access to the drop yard. Classed truckGate=true on the internal control point; low confidence on a hard barrier.",
+    "location": "Roster coords landed on the correct building; geocode movedMeters (21762) reflects a poor city-center geocoder start, not an error. Confirmed as 601 Innovative Way, Owensboro KY \u2014 large K-C diaper/personal-care manufacturing complex + on-site DC on a peninsula bounded by the Green River.",
+    "truckGate": "Open campus-style entrance off Innovative Way at the public road \u2014 Street View (2019) shows a K-C monument sign and manicured-lawn drive with NO barrier at the road. An internal truck-yard checkpoint/pinch-point with fencing and a small structure is visible at ~37.8211,-87.3053 controlling access to the drop yard. Classed truckGate=true on the internal control point; low confidence on a hard barrier.",
     "guardShack": "No clearly resolvable guard booth at the public-road entrance or the internal checkpoint. A small structure plus parked vehicles sits beside the internal truck route but cannot be confirmed as a staffed booth at z20-21. Classed false / remoteGs true as best estimate.",
-    "dropArea": "Extensive trailer drop yard NW of the main building — 100+ trailers parked in long rows visible at z19-20. Honest estimate of 220 capacity is approximate.",
+    "dropArea": "Extensive trailer drop yard NW of the main building \u2014 100+ trailers parked in long rows visible at z19-20. Honest estimate of 220 capacity is approximate.",
     "dockDoors": "Long dock face on the NW edge of the main warehouse/DC building with ~50+ trailers backed in; 55 is an approximate count from z20 imagery.",
-    "multipleFacilities": "Campus: large manufacturing building cluster, separate warehouse/DC, on-site wastewater treatment plant, steam/utility plant, and office front — multiple distinct building clusters.",
+    "multipleFacilities": "Campus: large manufacturing building cluster, separate warehouse/DC, on-site wastewater treatment plant, steam/utility plant, and office front \u2014 multiple distinct building clusters.",
     "railServed": "No rail spur visible entering the property.",
     "fastLaneOpportunity": "Wide internal paved truck routes and large open apron offer room for an express/bypass lane."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.owensboroliving.com/features/made-here/",
+        "date": "2025-01",
+        "type": "press",
+        "claim": "K-C opened a new 120,000 sq ft on-site raw-materials warehouse at its Owensboro site in 2025; plant (~360 employees, operating since 1993) makes Kleenex facial tissue and Scott towels/bath tissue."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.news.kimberly-clark.com/2025-05-01-Kimberly-Clark-announces-plans-to-invest-over-2-Billion-to-Expand-US-Manufacturing,-Accelerate-Innovation-and-Fuel-Growth",
+        "date": "2025-05",
+        "type": "press",
+        "claim": "K-C own newsroom announces $2B US manufacturing expansion; active US footprint."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "K-C-owned plant operating since 1993, expanded with a new on-site warehouse opened 2025; no closure/sale evidence. (Label note: makes Kleenex/Scott tissue, not diaper/personal care.)",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

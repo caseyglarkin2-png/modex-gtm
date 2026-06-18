@@ -96,5 +96,31 @@
     "siteAreaAcres": "~14 acres for the K-C-controlled riverfront block; soft estimate given the campus is interleaved with downtown streets.",
     "confidence": "Medium overall - facility positively identified, but it is an unusual urban R&D mill with no conventional truck yard, and shadow obscures dock detail."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://dnr.wisconsin.gov/topic/GreenTier/Participants/KimberlyClark.html",
+        "date": "2022-09",
+        "type": "press",
+        "claim": "WI DNR: K-C Experimental Mill primary function is to develop and deliver a continuous stream of innovative product and process solutions - R&D, not commercial production."
+      },
+      {
+        "tier": 2,
+        "url": "https://tissueonlinenorthamerica.com/kimberly-clark-celebrates-100-years-of-kleenex-with-a-tour-at-the-x-mill-plant-in-neenah/",
+        "date": "2024-09",
+        "type": "trade-press",
+        "claim": "X-Mill is purely experimental/R&D: it tests and perfects products prior to full-scale production; output is data, ships no commercial product."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "K-C still operates the site, but it is the R&D X-Mill (experimental, output is data, ships no commercial product) - non-freight per rubric; rejected. Distinct from the K-C Neenah Nonwovens Facility closed 2019.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

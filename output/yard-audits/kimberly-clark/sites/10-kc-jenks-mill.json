@@ -145,19 +145,45 @@
     "multiStep"
   ],
   "fieldNotes": {
-    "location": "Roster supplied only a city-level address and a coordinate (35.9953,-95.9727) that landed in a Jenks residential subdivision ~10 km from the mill. Directory addresses (13252 S Yale Pl / 13219 S Kimberly-Clark Pl) geocode poorly. Resolved via a documented detail (Tulsa World): the mill 'sits on the Arkansas River between Jenks and Bixby' — a 1.8M sq ft factory on 342 acres. Found and confirmed the large riverside industrial complex at ~35.9715,-95.9272: a multi-building tissue mill + regional DC overlooking the Arkansas River, consistent with the facility (opened 1990).",
+    "location": "Roster supplied only a city-level address and a coordinate (35.9953,-95.9727) that landed in a Jenks residential subdivision ~10 km from the mill. Directory addresses (13252 S Yale Pl / 13219 S Kimberly-Clark Pl) geocode poorly. Resolved via a documented detail (Tulsa World): the mill 'sits on the Arkansas River between Jenks and Bixby' \u2014 a 1.8M sq ft factory on 342 acres. Found and confirmed the large riverside industrial complex at ~35.9715,-95.9272: a multi-building tissue mill + regional DC overlooking the Arkansas River, consistent with the facility (opened 1990).",
     "truckGate": "Controlled truck entrance at the SW corner where the long access road from the public road reaches the mill. z19 imagery shows a pinch-point with a gatehouse structure, marked lanes, and a parked truck in a staging position; Street View confirms a small gate building with a truck at the access road. Classed truckGate true.",
-    "guardShack": "A gatehouse / canopied structure sits beside the checkpoint pinch-point at the truck entrance — classed as a guard shack. Resolution is limited at z20-21 so listed uncertain; remoteGs false.",
-    "scale": "The structure cluster at the entrance checkpoint is consistent with a truck scale / scale house alongside the gatehouse — classed scale true but listed uncertain.",
+    "guardShack": "A gatehouse / canopied structure sits beside the checkpoint pinch-point at the truck entrance \u2014 classed as a guard shack. Resolution is limited at z20-21 so listed uncertain; remoteGs false.",
+    "scale": "The structure cluster at the entrance checkpoint is consistent with a truck scale / scale house alongside the gatehouse \u2014 classed scale true but listed uncertain.",
     "preGateStaging": "A truck is visible staged on the access road before the gate; the long approach provides pre-gate waiting room.",
-    "drivewayLong": "Long access road from the public road to the gate and on to the docks — easily holds a 3+ truck queue.",
-    "dropArea": "Large trailer drop yard E of the main building with many long rows of parked trailers — 50+.",
-    "dockDoors": "Long dock bank on the south face of the white warehouse/DC building with many trailers backed in; ~45 doors estimated — listed uncertain.",
+    "drivewayLong": "Long access road from the public road to the gate and on to the docks \u2014 easily holds a 3+ truck queue.",
+    "dropArea": "Large trailer drop yard E of the main building with many long rows of parked trailers \u2014 50+.",
+    "dockDoors": "Long dock bank on the south face of the white warehouse/DC building with many trailers backed in; ~45 doors estimated \u2014 listed uncertain.",
     "railServed": "No clear rail spur confirmed entering the property; some linear features near the SE could be rail or road. Listed uncertain; classed false.",
-    "multipleFacilities": "Campus: integrated tissue mill, a large separate warehouse / regional distribution center, wastewater treatment plant, tank farm, and process buildings — multiple distinct building clusters.",
-    "urbanRural": "Large 320+ acre campus on the rural Arkansas River bank between Jenks and Bixby, surrounded by farmland and woods — Rural.",
+    "multipleFacilities": "Campus: integrated tissue mill, a large separate warehouse / regional distribution center, wastewater treatment plant, tank farm, and process buildings \u2014 multiple distinct building clusters.",
+    "urbanRural": "Large 320+ acre campus on the rural Arkansas River bank between Jenks and Bixby, surrounded by farmland and woods \u2014 Rural.",
     "fastLaneOpportunity": "Wide entry apron and long approach road give ample room for an express/bypass lane.",
-    "entryLanes": "Entry/exit lane counts estimated from the gate pinch-point — listed uncertain."
+    "entryLanes": "Entry/exit lane counts estimated from the gate pinch-point \u2014 listed uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.kimberly-clark.com/en/jobs/877432/senior-electrical-engineer-jenks-mill",
+        "date": "2026-01",
+        "type": "locator",
+        "claim": "Active K-C careers requisition (Senior Electrical Engineer) at the Jenks Mill."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.news.kimberly-clark.com/press-releases?item=125420",
+        "date": "2019-01",
+        "type": "press",
+        "claim": "K-C $120M+ investment expanding the Jenks tissue facility by 270,000 sq ft; makes Cottonelle/Scott bath tissue + Scott/Viva towels; includes a regional distribution center."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active K-C careers reqs name the Jenks Mill; $120M K-C expansion; tissue mill + regional DC; no closure/sale evidence.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

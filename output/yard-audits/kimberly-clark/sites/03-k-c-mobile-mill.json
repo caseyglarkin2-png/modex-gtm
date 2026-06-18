@@ -89,5 +89,31 @@
     "scale": "No truck scale clearly visible from overhead; flagged uncertain.",
     "urbanRural": "Urban - the mill sits inside the City of Mobile within a dense riverside industrial corridor."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.prnewswire.com/news-releases/kimberly-clark-announces-strategic-investment-in-its-mobile-alabama-mill-300628970.html",
+        "date": "2018-04",
+        "type": "press",
+        "claim": "K-C operates the Mobile AL mill producing Scott, Cottonelle, K-C Professional bath tissue and towels (acquired 1995 from Scott Paper)."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.paperadvance.com/news/industry-news/kimberly-clark-to-invest-130m-in-mobile-facility-expansion.html",
+        "date": "2025-06",
+        "type": "trade-press",
+        "claim": "K-C announced $130M+ new production line at its Mobile mill (~680 workers), online Q3 2027 - confirms active operations."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "K-C actively investing $130M+ (2025) in the Mobile mill with ~680 workers; operating, no closure/sale evidence.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -158,5 +158,31 @@
     "scale": "No truck scale clearly visible from overhead; flagged uncertain.",
     "urbanRural": "Rural - the mill sits on Watts Bar Lake at the wooded edge of the small town of Loudon, TN."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.kimberly-clark.com/en/jobs/881149/2026-supply-chain-co-op-internships-neenah-west-office-facility-1",
+        "date": "2026-01",
+        "type": "locator",
+        "claim": "Active K-C careers req references the Loudon Mill in the 2026 Supply Chain Co-Op program; ongoing operations."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.reliableplant.com/Read/26815/Kimberly-Clark-investment-Tennessee",
+        "date": "2013-01",
+        "type": "press",
+        "claim": "K-C Professional made a major capital investment in its Loudon TN tissue plant."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "K-C own careers portal lists active Loudon Mill reqs (incl. 2026 co-op); not on the 2018 closure list; no divestiture/closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

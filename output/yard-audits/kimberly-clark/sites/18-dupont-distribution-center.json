@@ -160,5 +160,24 @@
     "urbanRural": "DuPont is a small city on the I-5 corridor in the southern fringe of the Seattle-Tacoma metro. The Cubes sits in a forested industrial park (Northwest Landing / DuPont Corporate Center) on the edge of town. Borderline - classified Rural per the rubric's 'when torn between small-town industrial and Urban, choose Rural' guidance; flagged in uncertainFields.",
     "siteAreaAcres": "~54 acres derived from the perimeter box around Building 1's fenced property (building + both truck courts + east trailer yard + south gate)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "3PL",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.connectcre.com/stories/kimberly-clark-takes-750k-sf-at-former-intel-campus-in-dupont-wa/",
+        "date": "2022-01",
+        "type": "trade-press",
+        "claim": "K-C signed a 747,488 sq ft long-term lease at The Cubes at DuPont (2800 Center Drive), confirming a current K-C distribution presence in DuPont WA."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Audited coords pin the established KCDC at 1205 Wharf Rd (corroborated as an active K-C live-load DC); recent Tier-1 confirms K-C distribution in DuPont WA but at the adjacent Cubes building, so probable. FLAG: confirm whether audited coords are the Wharf Rd DC vs the Cubes (2800 Center Dr) - two distinct K-C DuPont sites; re-pin if needed.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

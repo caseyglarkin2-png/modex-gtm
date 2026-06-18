@@ -133,5 +133,32 @@
     "urbanRural": "Sage Mill Industrial Park sits in woodland on the edge of small-town Graniteville SC, ~1.5 mi from I-20. Edge-of-town industrial - classified Rural per rubric.",
     "siteAreaAcres": "30.1 acres is the documented parcel size; the axis-aligned perimeter box is a loose bounding box around a building elongated NW-SE and so overcounts the corners."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.costar.com/article/146962/kimberly-clark-renews-450000-sf-lease-in-graniteville",
+        "date": "2016-01",
+        "type": "trade-press",
+        "claim": "K-C renews 450,000 sq ft full-building lease at 1043 Global Ave, Graniteville SC; DC managed by 3PL GENCO ATC."
+      },
+      {
+        "tier": 1,
+        "url": "https://governor.sc.gov/news/2025-05/kimberly-clark-corporation-expanding-aiken-county-operation",
+        "date": "2025-05",
+        "type": "press",
+        "claim": "K-C actively operating/expanding distribution in Aiken County SC (May 2025); area consolidation under one roof at Beech Island targeted Q2 2027."
+      }
+    ],
+    "imageryDate": "2024-03",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active K-C DC operated by 3PL GENCO; only recent Tier-1 is region-level (lease confirm is 2016), so probable. FLAG: 2027 Beech Island automated DC may consolidate this footprint - monitor for closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -165,5 +165,31 @@
     "scale": "No truck scale clearly visible from overhead; flagged uncertain.",
     "urbanRural": "Urban - the mill sits inside a dense industrial/commercial corridor of New Milford CT (Pickett District Rd)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.kimberly-clark.com/en/jobs/873260/site-environmental-lead-new-milford-connecticut--new-milford-mill",
+        "date": "2026-01",
+        "type": "locator",
+        "claim": "Active K-C careers req: Site Leader, Environmental & Sustainability (New Milford CT) - New Milford Mill; staffed, operating K-C site."
+      },
+      {
+        "tier": 1,
+        "url": "https://careers.kimberly-clark.com/en/jobs/883810/entry-level-operator-usa-ct-new-milford",
+        "date": "2026-01",
+        "type": "locator",
+        "claim": "Active K-C Entry Level Operator - New Milford production req; ongoing manufacturing hiring."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Suspected closure was wrong: New Milford was NOT in the 2018 closures (Fullerton/Conway were); K-C careers shows active 2026 operator + site-leader reqs - mill is operating.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

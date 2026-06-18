@@ -150,5 +150,32 @@
     "scale": "No truck scale clearly visible from overhead; flagged uncertain.",
     "urbanRural": "Rural - the complex sits in farmland/forest near the small community of Beech Island, edge of the Augusta GA metro fringe."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://governor.sc.gov/news/2025-05/kimberly-clark-corporation-expanding-aiken-county-operation",
+        "date": "2025-05",
+        "type": "press",
+        "claim": "K-C facility at 246 Old Jackson Highway, Beech Island (est. 1968) is the company largest manufacturing facility globally; $200M expansion adding 150+ jobs."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.manufacturingdive.com/news/kimberly-clark-huggies-kleenex-2-billion-us-ohio-south-carolina-facilities/746962/",
+        "date": "2025-05",
+        "type": "trade-press",
+        "claim": "Beech Island is centerpiece of K-C >$2B North America capital plan; active mill."
+      }
+    ],
+    "imageryDate": "2026-03",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "K-C own + state press (May 2025) name the active mill at this address as its largest global facility; no closure/sale evidence.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
