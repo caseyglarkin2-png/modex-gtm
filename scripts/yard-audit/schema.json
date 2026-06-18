@@ -48,6 +48,37 @@
     { "index": 40, "key": "dropYard", "header": "Drop Yard", "fill": "satellite", "type": "yesno" },
     { "index": 41, "key": "url", "header": "", "fill": "meta", "type": "url", "note": "Google Maps URL. Jake's group-header row has a stray 'Remote' label above column 40; the column itself has no header in row 2." }
   ],
+  "siteVerification": {
+    "$comment": "Facility Operation Verification (FOV) — mirrors the `verification` Zod block on the Site object in src/lib/demo/pack-schema.ts. Audit agents emit this on each `sites/NN-<slug>.json` object as an optional `verification` property. Proves a site is a real, currently-operating yard the named account actually controls before it can ship in a demo pack (guards against divested / closed / phantom / non-yard facilities). Optional until the 0.4 backfill; when present it must carry every required field. The build gate (later task) requires verdict in {confirmed, probable} with >= 1 citation.",
+    "key": "verification",
+    "required": false,
+    "type": "object",
+    "properties": {
+      "verdict": { "type": "enum", "values": ["confirmed", "probable", "rejected"], "required": true },
+      "operator": { "type": "enum", "values": ["self", "3PL", "JV", "unknown"], "required": false, "default": "self" },
+      "tenancy": { "type": "enum", "values": ["owned", "leased", "unknown"], "required": false, "default": "unknown" },
+      "citations": {
+        "type": "array",
+        "required": true,
+        "items": {
+          "type": "object",
+          "properties": {
+            "tier": { "type": "int", "values": [1, 2, 3], "required": true, "note": "1 = primary/regulatory (10-K, permit), 2 = strong secondary, 3 = corroborating" },
+            "url": { "type": "url", "required": true },
+            "date": { "type": "string", "required": true, "note": "Source date (ISO or as published)" },
+            "type": { "type": "string", "required": true, "note": "e.g. '10-K Item 2', 'press release', 'permit'" },
+            "claim": { "type": "string", "required": true, "note": "What the source establishes (e.g. 'lists site')" }
+          }
+        }
+      },
+      "imageryDate": { "type": "string", "required": false, "note": "Satellite imagery capture month, e.g. '2024-08'" },
+      "checkedDivestiture": { "type": "boolean", "required": true, "note": "Confirmed the site was not divested/sold away from the account" },
+      "checkedBankruptcyEra": { "type": "boolean", "required": false, "default": false },
+      "rationale": { "type": "string", "required": true },
+      "verifiedBy": { "type": "enum", "values": ["agent", "human"], "required": false, "default": "agent" },
+      "verifiedAt": { "type": "string", "required": true, "note": "ISO date of verification" }
+    }
+  },
   "summaryBlock": {
     "$comment": "Appended after the data rows + 3 blank rows. Each summary row places its label in column 1, count in column 2, percent in column 3 (matching Jake's layout). generate-csv.ts computes the figures via summaryBlock().",
     "sections": [

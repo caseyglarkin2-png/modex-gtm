@@ -206,6 +206,38 @@ const Tile = z.object({
 });
 export type Tile = z.infer<typeof Tile>;
 
+/**
+ * Facility Operation Verification (FOV) — the evidence gate proving a site is
+ * a real, currently-operating yard the named account actually controls, before
+ * it can ship in a demo pack. Guards against divested, closed, phantom, or
+ * non-yard facilities. Optional on the schema for backward compatibility (the
+ * backfill is task 0.4); when present it must validate the full shape, and the
+ * build gate (a later task) will require a `confirmed`/`probable` verdict with
+ * at least one citation.
+ */
+const VerificationCitation = z.object({
+  tier: z.union([z.literal(1), z.literal(2), z.literal(3)]),
+  url: z.string().url(),
+  date: z.string(),
+  type: z.string(),
+  claim: z.string(),
+});
+export type VerificationCitation = z.infer<typeof VerificationCitation>;
+
+const Verification = z.object({
+  verdict: z.enum(['confirmed', 'probable', 'rejected']),
+  operator: z.enum(['self', '3PL', 'JV', 'unknown']).default('self'),
+  tenancy: z.enum(['owned', 'leased', 'unknown']).default('unknown'),
+  citations: z.array(VerificationCitation),
+  imageryDate: z.string().optional(),
+  checkedDivestiture: z.boolean(),
+  checkedBankruptcyEra: z.boolean().default(false),
+  rationale: z.string(),
+  verifiedBy: z.enum(['agent', 'human']).default('agent'),
+  verifiedAt: z.string(),
+});
+export type Verification = z.infer<typeof Verification>;
+
 const Site = z.object({
   /** Stable per-site id matching the `sites/NN-<slug>.json` filename stem. */
   id: z.string().regex(/^\d{2}-[a-z0-9-]+$/, 'site id must match NN-<slug>'),
@@ -227,6 +259,11 @@ const Site = z.object({
   tiles: z.record(z.string(), Tile).optional(),
   /** Notes the audit agent flagged for field correction. */
   fieldNotes: z.record(z.string(), z.string()).optional(),
+  /**
+   * FOV gate evidence (see `Verification`). Optional until the 0.4 backfill;
+   * when present it validates the full shape so malformed blocks fail loudly.
+   */
+  verification: Verification.optional(),
 });
 export type Site = z.infer<typeof Site>;
 
