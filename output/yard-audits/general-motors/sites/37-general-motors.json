@@ -160,5 +160,19 @@
     "shipRcvSeparate": "Single dock bank on one building face; shipping and receiving share the same dock line.",
     "scale": "No truck scale identified in imagery."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.gm.com/company/facilities/philadelphia", "date": "2026-06", "type": "locator", "claim": "GM's own US-operations facilities page for the Philadelphia Parts Distribution Center (located at 200 Cabot Blvd E, Langhorne PA)." },
+      { "tier": 1, "url": "https://www.aftercollege.com/job/55392107/", "date": "2024", "type": "press", "claim": "Active GENERAL MOTORS SERVICE PARTS OPERATIONS warehouse/distribution clerk requisition at the Langhorne PA site (200 Cabot Blvd E) — GM staffs the site now." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "GM-operated CCA / Service Parts Operations Parts Distribution Center at 200 Cabot Blvd E, Langhorne PA (Philadelphia-market PDC); GM-domain facilities page + active GM SPO job req at the address confirm current operation. No bankruptcy-era/RACER divestiture.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -167,5 +167,18 @@
     "entryLanes": "Single combined entry/exit lane at the gated drive off Van Slyke estimated; flagged uncertain.",
     "fastLaneOpportunity": "False - the gate apron is modest; no obvious unused paved width for an express bypass lane at this entrance."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://gmauthority.com/blog/2023/01/gm-to-invest-579m-at-flint-engine-operations-to-build-next-generation-v8/", "date": "2023-01", "type": "press", "claim": "GM Flint Engine Operations (2100 W Bristol Rd) is GM-operated, currently builds 3.0L Duramax diesels; $579M GM investment for next-gen V8" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "GM-owned, self-operated engine plant (opened 2002) building Duramax diesels with active GM investment; retained by New GM, never part of the 2009 MLC/RACER divestiture.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

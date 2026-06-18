@@ -128,5 +128,19 @@
     "entryLanes": "Gate apron appears to carry ~2 inbound lanes; exact lane count not crisply resolvable - marked uncertain.",
     "coords": "Re-pinned from the roster's imprecise coordinate to the confirmed assembly-complex centroid."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.assemblymag.com/articles/98350-gm-assembly-plant-resumes-production-after-a-temporary-supply-chain-issue", "date": "2024", "type": "press", "claim": "GM Lansing Delta Township Assembly is GM-operated; resumed building Traverse/Enclave/Acadia after a temporary supply issue" },
+      { "tier": 1, "url": "https://walberg.house.gov/media/in-the-news/lsj-general-motors-invest-100-million-delta-township-plant", "date": "2023", "type": "press", "claim": "GM invested $100M retooling Lansing Delta Township for the next-gen Traverse/Acadia" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "GM-owned, self-operated crossover assembly plant in active 2024-2025 production; New GM immediately re-acquired Delta Township through the 2009 bankruptcy (not divested to MLC/RACER).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

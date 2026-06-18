@@ -171,5 +171,20 @@
     "multipleFacilities": "False - a single large interconnected multi-roof foundry complex; buildingCount 1.",
     "siteAreaAcres": "~235 acres for the traced active industrial footprint (building + truck yard + ponds + slag/sand storage). The full owned parcel including outlying land may be larger; perimeter excludes the farmland south of SR-281."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.gm.com/company/facilities/defiance", "date": "2025", "type": "locator", "claim": "GM lists Defiance as an active GM aluminum foundry/machining center producing I4/V6/V8 cylinder blocks and head castings" },
+      { "tier": 1, "url": "https://gmauthority.com/blog/2023/01/gm-to-invest-55m-at-defiance-facility-for-engine-and-ev-castings-production/", "date": "2023-01", "type": "press", "claim": "GM investing $55M at Defiance for V8 block castings plus $8M for future EV castings; ~530 employees" }
+    ],
+    "imageryDate": "2025-05",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "New GM-operated foundry (opened 1948), retained through 2009 and reinvested ($55M 2023); GM facility page lists it as active. Not a divested or RACER site (the RACER Ohio sale on record is a different facility).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

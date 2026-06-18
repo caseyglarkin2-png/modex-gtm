@@ -200,5 +200,19 @@
     "multiStep": "Boulevard gate/security plaza is the clear first checkpoint; a distinct second post-gate checkpoint was not unambiguously confirmed, so multiStep left false.",
     "entryLanes": "Divided boulevard reads as ~2 inbound / ~2 outbound lanes; exact count estimated."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.gm.com/company/facilities/lansing-delta-township", "date": "2025", "type": "locator", "claim": "GM lists Lansing Delta Township complex (with onsite Lansing Regional Stamping) as an active GM plant building Traverse/Acadia/Enclave" },
+      { "tier": 2, "url": "https://www.wilx.com/2024/02/25/gm-recalls-lansing-delta-township-lansing-regional-stamping-employees/", "date": "2024-02", "type": "press", "claim": "Feb 2024: GM recalled Lansing Delta Township and Lansing Regional Stamping employees as 2024 Traverse/Acadia production ramped - active operation" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "New GM-operated; the LDT/LRS complex opened 2006 (post-dates 2009 entirely) and is actively producing 2024 Traverse/Acadia. Not a divested or RACER site.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

@@ -126,5 +126,19 @@
     "urbanRural": "Lordstown is a small rural township; the plant is surrounded by farmland, woods, and the low-density Lordstown industrial corridor. Rural.",
     "connectivityIssue": "False — rural but immediately adjacent to a major active industrial complex with strong infrastructure and transmission corridors; cellular coverage expected adequate."
   },
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 2, "url": "https://www.automotivelogistics.media/ev-and-battery/gm-to-sell-stake-in-ultium-cells-plant-to-lg-energy-solution/46493.article", "date": "2025-01", "type": "press", "claim": "Lordstown is a GM / LG Energy Solution joint venture operated by Ultium Cells LLC; GM states the Lansing-stake sale 'does not change GM's ownership interest in Ultium Cells and does not affect joint venture plans at the battery plants in Spring Hill and Lordstown'" },
+      { "tier": 2, "url": "https://investor.gm.com/news-releases/news-release-details/gm-and-lg-energy-solution-investing-23-billion-2nd-ultium-cells", "date": "2021", "type": "press", "claim": "GM and LG Energy Solution jointly invested $2.3B to build the Lordstown OH cell plant under the Ultium Cells joint venture" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "REJECTED per the 'JV the account does not operate' rule: the Lordstown cell plant is operated by Ultium Cells LLC, a separate GM / LG Energy Solution joint-venture operating company, not GM directly. (Site remains an active Ultium JV plant as of late 2025 despite EV-related layoffs; GM retains its Lordstown JV stake.)",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

@@ -122,5 +122,19 @@
     "urbanRural": "Ypsilanti, within the dense Detroit-Ann Arbor metro fabric along the E Michigan Ave corridor -> Urban.",
     "siteAreaAcres": "~19 acres for the processing operation footprint (building + NW trailer yard + employee parking), measured from the traced perimeter ring."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://news.gm.com/home.detail.html/Pages/news/us/en/2023/apr/0428-cca.html", "date": "2023-04-28", "type": "press", "claim": "GM PR on a >$100M investment in a GM Customer Care & Aftersales facility; Ypsilanti MI (2885 Tyler Rd) is a GM Service Parts Operations / CCA distribution facility in GM's processing-center tier." },
+      { "tier": 1, "url": "https://www.automotivelogistics.media/oems/gm-invests-in-michigan-for-aftersales-distribution-and-ev-assembly/44186.article", "date": "2024", "type": "press", "claim": "GM invests in Michigan CCA aftersales distribution; GM operates aftersales processing/distribution in the Ypsilanti/SE Michigan footprint." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "GM-operated CCA / Service Parts Operations processing-distribution facility (2885 Tyler Rd, Ypsilanti Twp MI), current. No bankruptcy-era/RACER divestiture (active GM SPO site, distinct from the divested Willow Run plant nearby).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -136,5 +136,19 @@
     "scale": "No truck scale positively identified in imagery; left uncertain.",
     "streetView": "Street View coverage exists on the public Saturn Pkwy approach (pano ~35.7312,-86.9628, captured 2026-02) but not at the interior gate/dock zones inside the secured campus; zone panos set hasCoverage:false to avoid attributing an off-zone pano."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://media.gm.com/media/us/en/gm/company_info/facilities/assembly/springhill.html", "date": "2026-01", "type": "locator", "claim": "GM media facility page lists Spring Hill Manufacturing, Spring Hill TN as a GM-operated assembly plant (Cadillac XT5, Lyriq, Vistiq)" },
+      { "tier": 1, "url": "https://news.gm.com/home.detail.html/Pages/news/us/en/2025/jan/0123-lyriq-v.html", "date": "2025-01", "type": "press", "claim": "GM newsroom: 2026 Cadillac Lyriq-V built at GM Spring Hill, TN; SORP and deliveries underway 2025-2026" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "GM's largest NA plant, actively building Cadillac Lyriq/Vistiq/XT5 in 2026 (Dec pause + shift cut are demand adjustments, not closure). The Saturn BRAND was wound down in the 2009 restructuring but the Spring Hill PLANT was retained and reopened by New GM (never divested to Motors Liquidation).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -140,5 +140,20 @@
     "railServed": "No rail spur into the property; nearest intermodal is offsite. Set false.",
     "multipleFacilities": "Single distribution building on the parcel (office front + warehouse are one structure). Adjacent warehouses are separate parcels/tenants. Set false."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      { "tier": 2, "url": "https://www.jaxdailyrecord.com/news/2024/aug/19/south-jacksonville-warehouse-sold-for-2718-million/", "date": "2024-08-19", "type": "press", "claim": "12751 Gran Bay Pkwy W is occupied by Saddle Creek Logistics (issued a permit to convert offices/breakroom to warehouse, expanding to ~362,125 sq ft); building sold Aug 2024 to Redfearn Capital (landlord) — Saddle Creek is the operating tenant under lease." },
+      { "tier": 1, "url": "https://www.sclogistics.com/our-network/locations/jacksonville-gran-bay-florida/", "date": "2026-06", "type": "locator", "claim": "Saddle Creek Logistics' own location page lists its Jacksonville-Gran Bay (12751 Gran Bay Pkwy W) 3PL warehousing/fulfillment facility." }
+    ],
+    "imageryDate": "2024",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "PROBABLE (ships caveated/capped). DISTINCT from the original 2009-divested Jacksonville GM PLANT failure: there is NO RACER Trust / Motors Liquidation GM property in Jacksonville FL (Florida is not a RACER state), so no bankruptcy-era negative attaches to this address. POSITIVES (no clean GM-domain Tier-1 for this exact site; GM's pressroom locator has no Jacksonville page, consistent with a 3PL-run satellite PDC): 'General Motors Service Parts Operations' is listed at 12751 Gran Bay Pkwy W, this is GM PDC #079 (Jacksonville) in GM's CCA network, and the building is occupied/run by 3PL Saddle Creek Logistics under lease (landlord Redfearn Capital). Multiple Tier-3 directory listings agree and there is NO Tier-2 closure/divestiture negative. Treated as a 3PL-operated GM parts DC -> operator '3PL', tenancy 'leased', INCLUDE caveated. CAVEAT: GM-operation of parts distribution at this exact address rests on directory/trade-forum corroboration plus the GM-SPO-at-address listing, not a GM-domain locator; reconfirm before high-stakes use.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

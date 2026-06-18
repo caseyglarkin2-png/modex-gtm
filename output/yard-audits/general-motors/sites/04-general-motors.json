@@ -189,5 +189,19 @@
     "scale": "No truck scale clearly identified in imagery; left uncertain.",
     "urbanRural": "Urban — inside the Kansas City metro's dense Fairfax Industrial District."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://news.gm.com/home.detail.html/Pages/news/us/en/2026/jan/0129-GM-investment-workforce.html", "date": "2026-01", "type": "press", "claim": "GM newsroom: GM directs major investment in Fairfax (Kansas City KS) workforce to launch new vehicles (Chevrolet Bolt, Equinox)" },
+      { "tier": 1, "url": "https://www.kshb.com/news/local-news/gm-announces-expansion-plans-for-fairfax-assembly-plant-in-kansas-city-kansas", "date": "2025-06", "type": "press", "claim": "GM $390M retooling of Fairfax Assembly, Kansas City KS; Bolt EV assembly begins Nov 2025, gas Equinox mid-2027; Barra quoted" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "GM-operated Fairfax Assembly & Stamping, actively retooling and launching new vehicles. NOTE: the old 'Fairfax 1' plant is a separate Motors-Liquidation brownfield/environmental site; the operating site here is Fairfax Assembly & Stamping (Fairfax 2), retained and run by GM today.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

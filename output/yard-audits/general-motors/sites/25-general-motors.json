@@ -188,5 +188,20 @@
     "scale": "No truck scale positively identified in imagery; left false and flagged uncertain.",
     "geofence": "Perimeter traced to the private loop road enclosing the main building and its west drop yard / south parking (~175 acres), excluding the separate dark-roof building on the adjacent southern parcel. dropYards = west trailer storage rows; dockAprons = west dock bank and south sawtooth dock line, traced as thin quads parallel to each building face. truckGate quad covers the south controlled entry. Street View coverage exists only on the public Allen Rd corridor (pano 9pSofkhImAu_xiKxUdmGrQ, 2024-07) at the SE; no public pano inside the property."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://news.gm.com/home.detail.html/Pages/topic/us/en/2025/mar/0320-farmer.html", "date": "2025-03", "type": "press", "claim": "GM newsroom (Mar 2025) profiles the Brownstown Battery Assembly plant and its GM plant manager - active GM-operated facility" },
+      { "tier": 2, "url": "https://gmauthority.com/blog/2024/06/cadillac-celestiq-to-start-production-as-2025-model/", "date": "2024-06", "type": "press", "claim": "Cadillac CELESTIQ (built at GM Brownstown Battery Assembly) enters production as a 2025 model; Brownstown also makes Corvette E-Ray drive units and packs" }
+    ],
+    "imageryDate": "2024-07",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "GM-operated battery/drive-unit plant (note: this is GM Brownstown, NOT the Ultium Cells JV) building Corvette E-Ray drive units and Cadillac CELESTIQ packs. One of GM's newer facilities; not a 2009-era or divested site.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

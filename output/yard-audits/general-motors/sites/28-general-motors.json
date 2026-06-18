@@ -144,5 +144,19 @@
     "railServed": "No rail spur runs into the parcel in the imagery; the site is served by truck/highway (I-69/I-496). LDT Assembly to the SE is also road-served. Set false.",
     "siteAreaAcres": "171.6 ac traced for the active developed plant site (building + immediate graded lot between the freeway and Millett Hwy); the full GM/Ultium land holding is ~590 ac including shared/expansion acreage."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      { "tier": 2, "url": "https://investor.gm.com/news-releases/news-release-details/gm-sell-stake-lansing-battery-cell-plant-partner-lg-energy", "date": "2024-12-02", "type": "press", "claim": "GM announced it will sell its stake in the Lansing (Delta Township) Ultium Cells battery plant to JV partner LG Energy Solution; deal expected to close Q1 2025. The site is now LG-operated, not GM." },
+      { "tier": 2, "url": "https://www.detroitnews.com/story/business/autos/general-motors/2024/12/02/gm-sells-stake-in-ultium-lansing-battery-plant-to-partner-lg-energy-solution/76710691007/", "date": "2024-12-02", "type": "press", "claim": "Lansing/Delta Township battery plant nearing completion (opening delayed to 2025); GM divested its stake to LGES." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "Double reject: (1) JV the account does not operate — Ultium Cells JV plant and GM SOLD its stake to LG Energy Solution (closed Q1 2025), now LG-operated for Toyota module work; (2) current-ops audit excludes under-construction/ramping sites and all available imagery (incl. 2023-05 Street View) is construction-era with no operational yard. (No bankruptcy-era / RACER issue; new construction on former GM land.)",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

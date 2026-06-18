@@ -194,5 +194,19 @@
     "urbanRural": "Rural/edge-of-town setting: the plant is surrounded by farmland and an interstate (I-469/US-24) interchange in Roanoke, well outside Fort Wayne's dense urban fabric.",
     "geofence": "Perimeter traced to the fenced property edge (rail yard north, Lafayette Center Rd / berm south, storage lots east and west). Roughly grid-aligned with a slight bend on the south and east edges. Site area ~716 acres per GM published figure."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://news.gm.com/company/usa-operations.html", "date": "2026-03", "type": "locator", "claim": "GM lists Fort Wayne Assembly (Roanoke IN) as a GM-operated plant building Chevrolet Silverado 1500 / GMC Sierra 1500; celebrated 11-millionth vehicle Mar 2026" },
+      { "tier": 1, "url": "https://www.insideindianabusiness.com/articles/gm-to-invest-632m-in-fort-wayne-assembly", "date": "2023-06", "type": "press", "claim": "GM announced $632M investment in Fort Wayne Assembly, Roanoke IN, which produces Chevrolet Silverado and GMC Sierra full-size pickups" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "GM-operated light-duty truck plant, actively producing and ramping in 2026 (11M-vehicle milestone Mar 2026). Former Pontiac Truck & Bus plant: the Pontiac BRAND was wound down in 2009 but the PLANT was retained by New GM (never divested to Motors Liquidation/RACER).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

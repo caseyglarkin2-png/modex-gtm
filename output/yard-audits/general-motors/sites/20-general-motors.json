@@ -117,5 +117,18 @@
     "truckGate box": "NW rail-side controlled entrance off the Chevrolet Blvd corridor where the material/rail drive crosses the fence line.",
     "dockAprons": "Two: a long thin strip along the south building face (primary outbound docks) and a strip on the west face beside the rail yard (inbound)."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://news.gm.com/home.detail.html/Pages/topic/us/en/2025/nov/1120-GM-US-manufacturing-investments-250M-commitment-Parma-Metal-Center.html", "date": "2025-11", "type": "press", "claim": "Nov 2025: GM commits ~$250M to Parma Metal Center to enable production of sheet-metal stampings and assemblies - active GM plant" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "New GM-operated stamping plant (operating since 1948); survived the 2009 bankruptcy and received a fresh ~$250M investment in Nov 2025. Not a divested or RACER site.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

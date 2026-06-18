@@ -202,5 +202,20 @@
     "scale": "No truck scale/weigh pad clearly identified; left uncertain.",
     "siteAreaAcres": "~37.5 acres derived from the fenced-perimeter polygon; building footprint plus surrounding yards and parking."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://pressroom.gm.com/gmbx/us/en/pressroom/home/company/facilities/dmax-ltd.html", "date": "2025", "type": "locator", "claim": "GM lists DMAX Ltd, 3100 Dryden Rd Moraine OH, as a GM facility producing Duramax diesel engines for HD Silverado/Sierra" },
+      { "tier": 1, "url": "https://www.registerherald.com/2026/04/04/dmax-builds-its-3-5-millionth-engine/", "date": "2026-04", "type": "press", "claim": "April 2026: DMAX, with plants in Brookville and Moraine, produced its 3.5 millionth Duramax engine, installed in the 16M-th Flint-assembled vehicle" }
+    ],
+    "imageryDate": "2025",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "JV concern resolved: Isuzu exited May 2022, DMAX is now a wholly GM-owned subsidiary (GM-operated, not a JV GM does not run). Moraine still active April 2026, though Duramax production is gradually transitioning to the expanded Brookville plant with Moraine pointed to eventual closure/new use (no announced date) - monitor for idling.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

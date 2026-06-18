@@ -200,5 +200,18 @@
     "siteAreaAcres": "111 acres per GM/Wikipedia; perimeter ring traced to the fenced footprint between I-496, Verlinden/Townsend, and the Grand River/rail edge.",
     "streetViewMeta": "Best ground view is the Verlinden Ave road pano at 42.72552,-84.56047 (captured 2025-07) looking E (~95 deg) toward the plant wall, fence, and the controlled truck-entry intersection; pano id not captured in this pass."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.wkar.org/wkar-news/2025-10-16/lansing-general-motors-plant-to-build-new-2027-cadillac-ct5", "date": "2025-10", "type": "press", "claim": "GM Lansing Grand River Assembly is GM-operated; building Cadillac CT4/CT5 and slated for next-gen CT5 with renovation investment" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "GM-owned, self-operated assembly+stamping plant building Cadillac sedans in 2025-2026; New GM immediately re-acquired Grand River through the 2009 bankruptcy (not divested to MLC/RACER).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

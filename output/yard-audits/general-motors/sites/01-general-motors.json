@@ -137,5 +137,19 @@
     "scale": "No truck scale clearly isolated in the imagery; left uncertain.",
     "siteAreaAcres": "Perimeter polygon yields ~380 acres including the rail/freeway buffer; documented historical site is ~365 acres - honest overhead estimate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://news.gm.com/company/usa-operations.html", "date": "2026-01", "type": "locator", "claim": "GM lists Factory ZERO (Detroit-Hamtramck Assembly), Detroit MI as a GM-operated EV assembly plant building GMC Hummer EV / Sierra EV, Chevrolet Silverado EV, Cadillac Escalade IQ" },
+      { "tier": 1, "url": "https://investor.gm.com/news-releases/news-release-details/gm-marks-progress-toward-all-electric-future-unveiling-factory", "date": "2021-11", "type": "press", "claim": "GM PR confirms $2.2B conversion of Detroit-Hamtramck into Factory ZERO, GM's flagship EV assembly plant" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "GM-owned/operated EV assembly plant, currently producing; the Mar-Apr 2026 production pause is a planned recalibration, not closure. Detroit-Hamtramck was kept by New GM in 2009 (not divested to Motors Liquidation/RACER).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

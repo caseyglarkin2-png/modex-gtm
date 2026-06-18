@@ -131,5 +131,19 @@
     "scale": "No truck scale clearly identified in the imagery; left uncertain.",
     "entryLanes": "Estimated; the south entrance carries multiple paved lanes but exact in/out lane counts were not crisply resolvable."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://investor.gm.com/news-releases/news-release-details/gm-furthers-flint-commitment-1b-manufacturing-investment", "date": "2023-06", "type": "press", "claim": "GM committed $1B+ to Flint Assembly and the adjacent Flint Metal Center for next-gen HD truck production; Flint Metal Center received $233M for new stamping dies and equipment" }
+    ],
+    "imageryDate": "2024",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "New GM-operated stamping plant (opened 1954) retained through 2009 and given a $1B+ Flint reinvestment ($233M to the Metal Center); currently operational. Not a divested or RACER site.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

@@ -178,5 +178,19 @@
     "streetView": "Best driver-arrival pano is on the Giddings Rd frontage at ~42.7187,-83.2689 (captured 2025-06), showing the perimeter fence and plant; pano_id not embedded here, headings computed toward zone centroids.",
     "construction": "Site is mid-expansion (GM retooling Orion for EV/ICE truck and Cadillac Escalade production ~2027); northern parcels show active grading. Gate locations may shift as construction completes."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 2, "url": "https://gmauthority.com/blog/2026/02/heres-the-current-situation-with-gm-assembly-plants/amp/", "date": "2026-02", "type": "press", "claim": "Orion Assembly is currently idle; inactive since the Chevrolet Bolt ended in 2023; $4B retooling on track to complete ~mid-2026 with no vehicle production resumed yet" },
+      { "tier": 2, "url": "https://www.autonews.com/manufacturing/gm-delays-ev-pickup-orion-assembly-michigan-until-2026/", "date": "2024-07", "type": "press", "claim": "GM repeatedly delayed restart of Orion Assembly; plant not in production during retooling" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "REJECT per protocol: Orion Assembly is idled / ceased production (no output since the 2023 Bolt wind-down; still mid-retool as of Feb 2026). Current-ops audit excludes idled sites. GM still owns it (retained by New GM in 2009, not divested), but it is not currently operating.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -109,5 +109,19 @@
     "fastLaneOpportunity": "No truck gate exists, so no express-lane opportunity at a checkpoint; set false.",
     "entryLanes": "Single shared two-way driveway loop serves the dock yard; entry/exit lane counts inferred as 1/1, flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 2, "url": "https://pbn.com/bankrupt-gm-to-close-new-norton-plant42673/", "date": "2009-06", "type": "press", "claim": "Bankrupt GM announced it would close its new Norton MA parts distribution center (opened late 2005) by Dec 31, 2009; ~80 jobs lost. This is the audited building." },
+      { "tier": 2, "url": "https://www.condyne.com/2016/11/29/norton-commerce-center-tenant-series-presents-horizon-beverage/", "date": "2016-11-29", "type": "press", "claim": "Horizon Beverage purchased the former GM warehouse/distribution center at 45 Commerce Way, Norton MA (Norton Commerce Center) and occupies it as its HQ/DC since 2012 — a different operating company now at the address." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "BANKRUPTCY-ERA CLOSURE (same pattern as the original Jacksonville failure): the audited 'Boston PDC' is the former GM Norton MA parts DC that GM CLOSED end-of-2009 in the bankruptcy. Building is now occupied by Horizon Beverage (different operating company) since 2012. No GM-operated parts DC exists at/near Mansfield-Boston today (the current Mansfield 'Boston PDC' struck by UAW in 2023 is a Stellantis/Mopar facility, not GM).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

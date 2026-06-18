@@ -189,5 +189,19 @@
     "urbanRural": "Romulus is within the dense Detroit metro / Detroit Metro Airport (DTW) industrial corridor, ringed by continuous industrial and residential development - Urban.",
     "siteAreaAcres": "~180 acres estimated from the traced perimeter (parcel from Vining Rd west to the rail line east, Ecorse Rd south to the north ponds/utility area), excluding the off-property west warehouses and trimming the SE undeveloped wooded triangle."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://gmauthority.com/blog/2026/04/gm-announces-new-romulus-and-toledo-propulsion-plant-investments/", "date": "2026-04", "type": "press", "claim": "GM Romulus Propulsion Systems is a GM-operated, actively-producing transmission/engine plant receiving new GM investment" },
+      { "tier": 1, "url": "https://michiganadvance.com/briefs/gm-investing-another-300m-in-romulus-plant-as-part-of-6b-nationwide-plan/", "date": "2025-11", "type": "press", "claim": "GM investing another $300M in the Romulus plant to boost 10-speed transmission output; ~1,000 workers" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "Romulus Propulsion is NOT closing/idled - GM made fresh $300M (Nov 2025) and 2026 investments to expand 10-speed transmission and engine output; GM-owned and self-operated, retained through 2009 bankruptcy.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

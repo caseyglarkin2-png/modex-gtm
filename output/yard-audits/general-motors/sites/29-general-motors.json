@@ -127,5 +127,19 @@
     "siteAreaAcres": "Documented 141-acre lot; traced fenced yard polygon is ~90-100 acres, value set to the documented 141 acres for the full parcel.",
     "buildingCount": "Single very large processing building (with the attached ASRS tower) dominates the parcel -> buildingCount 1; multipleFacilities false."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.wardsauto.com/general-motors/parts-distribution-center-to-serve-gm-nationwide", "date": "2019-08-07", "type": "press", "claim": "GM's $65M, 1.1M sq ft Burton MI (Davison Rd) facility is the main entry point for GM's Customer Care & Aftermarket network in North America, GM-operated with 800+ FT workers." },
+      { "tier": 1, "url": "https://news.gm.com/home.detail.html/Pages/news/us/en/2024/mar/0304-cca.html", "date": "2024-03-04", "type": "press", "claim": "GM CCA network investment PR referencing GM's Customer Care & Aftersales distribution facilities (Burton MI is the network's primary CCA hub)." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "GM-operated CCA processing/distribution hub (the North American CCA network main entry point), current. No bankruptcy-era/RACER divestiture (built/operated by New GM post-2009).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

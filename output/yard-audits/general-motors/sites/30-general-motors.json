@@ -201,5 +201,18 @@
     "urbanRural": "Dense Memphis (Hickory Hill / SE Memphis) industrial-warehouse corridor on Pleasant Hill Rd with large DCs on all sides -> Urban.",
     "siteAreaAcres": "Shelby County parcel record (APN 09-4200-0-0465C) lists 35.69 acres, 676,150 sq ft building built 1999; matches the traced perimeter."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://news.gm.com/home.detail.html/Pages/news/us/en/2023/jan/0126-ccainvestment.html", "date": "2023-01-26", "type": "press", "claim": "GM PR: $20.5M investment across CCA facilities including the Memphis TN Parts Distribution Center; Memphis is a distribution hub for ACDelco parts, EV chargers and GM eCommerce (incl. $14M automated storage/retrieval)." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "GM-operated CCA Parts Distribution Center, current; GM PR confirms active operation and recent automation investment. No bankruptcy-era/RACER divestiture.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

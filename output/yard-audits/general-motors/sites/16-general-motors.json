@@ -147,5 +147,20 @@
     "urbanRural": "Plant is embedded in the Bay City urban grid: residential blocks abut the east and south, downtown is a few blocks NE. Urban.",
     "siteAreaAcres": "~58 acres for the active fenced GM parcel only; the full historic site footprint was larger before ~10 acres transferred to RACER Trust."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://plants.gm.com/media/us/en/gm/company_info/facilities/powertrain/baycity.html", "date": "2025-01", "type": "locator", "claim": "GM lists Bay City Powertrain as an active GM facility building connecting rods, solid and sliding camshafts for Chevrolet, Buick, GMC, Cadillac" },
+      { "tier": 1, "url": "https://gmauthority.com/blog/2023/01/gm-to-invest-216m-at-bay-city-gps-facility-for-future-v8-engine-component-production/", "date": "2023-01", "type": "press", "claim": "GM investing $216M at Bay City Powertrain for camshafts, connecting rods, block/head machining for future V8 production" }
+    ],
+    "imageryDate": "2023-07",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "New GM-operated powertrain plant (~420 UAW Local 362), recent $216M investment; not a 2009-divested/RACER site (the adjacent ~10-acre RACER land is excluded from the active fenced parcel).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

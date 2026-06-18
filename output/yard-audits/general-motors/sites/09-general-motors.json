@@ -192,5 +192,19 @@
     "dockDoorCount": "Estimate from overhead imagery; loading doors distributed across multiple building faces of a very large assembly building plus rail/parts receiving banks.",
     "urbanRural": "Inside the dense DFW metro fabric, immediately adjacent to the Arlington entertainment district (AT&T Stadium / Globe Life Field) and surrounded by residential and commercial development."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://news.gm.com/home.detail.html/Pages/topic/us/en/2024/nov/1127-arlington.html", "date": "2024-11", "type": "press", "claim": "GM Arlington Assembly is a GM-operated full-size SUV plant (Tahoe, Suburban, Yukon, Escalade); GM documentary celebrating the plant" },
+      { "tier": 1, "url": "https://gmauthority.com/blog/2024/10/2025-chevy-tahoe-and-suburban-production-now-under-way/", "date": "2024-10", "type": "press", "claim": "2025 Tahoe/Suburban production started at Arlington Assembly Oct 9, 2024; $500M+ GM investment" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "GM-owned, self-operated SUV assembly plant in active 2024-2026 production; not among the 14 plants closed/idled in the 2009 bankruptcy (retained by New GM).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

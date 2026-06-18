@@ -166,5 +166,18 @@
     "entryLanes": "Single inbound lane assumed at the controlled corridor; not separately resolvable -> uncertain.",
     "trailerParkingCapacity": "Overhead estimate (~50) from west yard + north staging; flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://pressroom.gm.com/gmbx/us/en/pressroom/home/company/facilities/fort-worth.html", "date": "2026-06", "type": "locator", "claim": "GM's own facilities locator page for the Fort Worth TX Parts Distribution Center (greater Fort Worth / Roanoke TX area); provides GM service parts." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "GM-operated CCA Parts Distribution Center, confirmed by GM-domain facilities locator. No bankruptcy-era/RACER divestiture.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

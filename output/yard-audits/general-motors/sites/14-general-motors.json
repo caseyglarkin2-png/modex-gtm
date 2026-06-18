@@ -165,5 +165,18 @@
     "buildingCount": "Multiple large connected/adjacent manufacturing buildings plus the brick admin block and the NE drop-yard structure; counted ~4 distinct masses.",
     "siteAreaAcres": "Traced perimeter (~102 acres) covers the main fenced Plant #1 operational footprint; the full GM-cited campus is ~190 acres including the northern rail yard and Plant #4/#5."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://news.gm.com/home.detail.html/Pages/news/us/en/2025/may/0528-GM-invest-888-million-Tonawanda-Propulsion-plant.html", "date": "2025-05", "type": "press", "claim": "GM announces $888M (its largest engine-plant investment) in the GM-operated Tonawanda Propulsion plant for sixth-gen V-8 production; ~870 jobs" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "GM-owned, self-operated engine plant with a record $888M GM investment (May 2025) for next-gen V-8s; an old plant but retained by New GM, not part of the 2009 MLC/RACER divestiture.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

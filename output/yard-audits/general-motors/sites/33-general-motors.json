@@ -205,5 +205,19 @@
     "trailerParkingCapacity": "~90 estimate combining the NW drop row and SE court; overhead estimate, flagged.",
     "siteAreaAcres": "~22 acres for the building (~352k sq ft footprint), two truck courts, office/employee parking, and the treed buffer inside the perimeter (derived from the perimeter polygon)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://pressroom.gm.com/gmbx/us/en/pressroom/home/company/facilities/charlotte.html", "date": "2026-06", "type": "locator", "claim": "GM's own facilities locator lists the Charlotte NC Parts Distribution Center as a GM Customer Care & Aftersales operation." },
+      { "tier": 1, "url": "https://news.gm.com/home.detail.html/Pages/news/us/en/2024/mar/0304-cca.html", "date": "2024-03-04", "type": "press", "claim": "GM PR: investing $23M in automation (ASRS/AMRs) at its Charlotte CCA Parts Distribution Center, opened 1999, ~420,000 orders/month; installation begins Jun 2024." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "GM-operated CCA Parts Distribution Center, current; GM-domain locator + 2024 GM PR confirm active operation and ongoing $23M investment. No bankruptcy-era/RACER divestiture (CCA PDC retained by GM).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

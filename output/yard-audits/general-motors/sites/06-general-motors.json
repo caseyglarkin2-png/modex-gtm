@@ -181,5 +181,19 @@
     "scale": "No truck scale/weigh platform clearly identified in the truck path - scale false.",
     "multiStep": "No clearly imaged second checkpoint after the gate; left false."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://media.gm.com/media/us/en/gm/company_info/facilities/assembly/bowlinggreen.html", "date": "2026-01", "type": "locator", "claim": "GM media facility page lists Bowling Green Assembly, Bowling Green KY as the GM-operated plant building the Chevrolet Corvette" },
+      { "tier": 1, "url": "https://news.gm.com/home.detail.html/Pages/topic/us/en/2025/jun/0602-first-1064-hp-Corvette-ZR1s-built-Bowling-Green.html", "date": "2025-06", "type": "press", "claim": "GM newsroom: Corvette ZR1s being built at Bowling Green Assembly; sole Corvette plant, actively producing" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "GM-operated sole U.S. Corvette plant, actively producing in 2026 (2026 MY concluded May 2026, 2027 MY starting; spring supplier pauses were temporary). Kept by New GM in 2009 (not divested to Motors Liquidation/RACER).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

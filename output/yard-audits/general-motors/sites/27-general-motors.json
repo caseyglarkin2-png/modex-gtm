@@ -124,5 +124,19 @@
     "imagery": "Some surrounding ground in the Maxar/Airbus tiles still shows construction-era grading and laydown, but the plant buildings, dock apron, trailer drop yard, employee lots and fencing are all clearly built out and operational. Counts are honest overhead estimates.",
     "geofence": "perimeter ring (~110 acres) traces the fenced Ultium complex core: both buildings, the north trailer drop yard, the dock aprons and the south employee lots, oriented to the slightly-rotated building grid. truckGate quad aligns to the entrance drive at the SE; dropYards covers the north trailer lot; dockAprons covers the inter-building dock strip and the gray building's west dock face."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      { "tier": 1, "url": "https://news.gm.com/home.detail.html/Pages/news/us/en/2025/jul/0714-Ultium-Cells-upgrade-Tennessee-plant-low-cost-EV-battery-cell-production.html", "date": "2025-07-14", "type": "press", "claim": "GM PR states the Spring Hill TN plant is operated by Ultium Cells LLC, the GM / LG Energy Solution joint venture, not by GM directly." },
+      { "tier": 2, "url": "https://pv-magazine-usa.com/2026/03/18/lg-and-gm-pivot-ultium-cells-jv-to-lfp-battery-production-for-u-s-storage-market-at-tennessee-plant/", "date": "2026-03-18", "type": "press", "claim": "Spring Hill is an Ultium Cells JV plant (GM/LGES); cells are pivoting to LFP energy-storage supplied to LG Energy Solution Vertech." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "JV the account does not operate: Spring Hill is run by Ultium Cells LLC (GM/LG Energy Solution joint operating company), not GM. Protocol excludes JVs the account does not operate. Built on GM-leased land but operated by the JV. (No bankruptcy-era / RACER divestiture issue here; plant is new construction.)",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

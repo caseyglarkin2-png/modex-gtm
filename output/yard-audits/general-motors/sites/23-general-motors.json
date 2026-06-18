@@ -102,5 +102,19 @@
     "scale": "Not positively resolved; left false. A canopy/checkpoint structure exists at the SE gate but no clear weigh platform was confirmed.",
     "fastLaneOpportunity": "False - the single controlled gate and compact fenced yard offer little unused paved width for a dedicated express/bypass lane."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://investor.gm.com/news-releases/news-release-details/gm-invests-45-million-bedford-casting-operations-expand-capacity/", "date": "2022-11", "type": "press", "claim": "GM invests $45M at Bedford Casting Operations to expand EV drive-unit casting capacity; ~680 workers produce cylinder blocks, transmission cases, structural and drive-unit housings" }
+    ],
+    "imageryDate": "2026-04",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "New GM-operated aluminum die-casting foundry; recent EV drive-unit investments ($45M 2022, $51M 2021, $456M+ since 2011) and GM signage/monument confirmed in 2026-04 Street View. Not a divested or RACER site.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

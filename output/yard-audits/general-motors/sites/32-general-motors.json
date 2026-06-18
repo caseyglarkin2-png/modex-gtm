@@ -164,5 +164,19 @@
     "trailerParkingCapacity": "Honest overhead estimate (~110) from row counts in the south yard; flagged uncertain.",
     "siteAreaAcres": "~404k sq ft building (~9 acre footprint) plus the south truck yard and buffer; fenced operational parcel ~20 acres (perimeter polygon estimate)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 2, "url": "https://www.cbsnews.com/chicago/news/uaw-strike-gm-stellantis-bolingbrook-naperville-parts-distribution-centers/", "date": "2023-09-22", "type": "press", "claim": "The GM Chicago Parts Distribution Center in Bolingbrook IL was named among GM parts distribution centers struck by the UAW in Sept 2023 — confirming it is a current, GM-staffed/operated PDC." },
+      { "tier": 2, "url": "https://www.nbcchicago.com/news/local/uaw-strike-illinois-parts-distribution-centers-gm-stellantis-naperville-bolingbrook/3234183/", "date": "2023-09-22", "type": "press", "claim": "UAW expanded its strike to GM parts/distribution facilities in Bolingbrook IL, corroborating current GM operation of the Bolingbrook PDC." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "GM-operated Chicago-market CCA Parts Distribution Center in Bolingbrook IL; current operation confirmed by Sept-2023 UAW-strike press naming the GM (not Stellantis) Bolingbrook PDC. No bankruptcy-era/RACER divestiture.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

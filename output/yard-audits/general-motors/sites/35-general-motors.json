@@ -168,5 +168,18 @@
     "scale": "No truck scale/weigh pad identified in the truck path.",
     "entryLanes": "Single combined in/out access off the internal east drive; lane counts estimated and flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://pressroom.gm.com/gmbx/us/en/pressroom/home/company/facilities/reno.html", "date": "2026-06", "type": "locator", "claim": "GM's own facilities locator page for the Reno NV Parts Distribution Center; provides GM service parts for GM dealers and ACDelco customers." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "GM-operated CCA Parts Distribution Center, confirmed by GM-domain facilities locator. No bankruptcy-era/RACER divestiture.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

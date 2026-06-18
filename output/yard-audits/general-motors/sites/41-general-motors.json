@@ -182,5 +182,18 @@
     "siteAreaAcres": "~404,000 sq ft building (opened 2004) on a roughly 39-acre parcel, estimated from the traced perimeter ring.",
     "buildingCount": "Single large distribution building with an attached office wing at the SE corner."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.gm.com/company/facilities/hudson", "date": "2026-06", "type": "locator", "claim": "GM's own facilities locator page for the Hudson WI Parts Distribution Center (Minneapolis-market PDC), 2200 Willis Miller Dr; provides GM service parts." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "GM-operated CCA Parts Distribution Center (Minneapolis-market PDC sited in Hudson WI), confirmed by GM-domain facilities locator. No bankruptcy-era/RACER divestiture.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -122,5 +122,19 @@
     "entryLanes": "Lane counts (1/1) are overhead estimates of the entry boulevard, flagged uncertain.",
     "streetView": "Public Street View coverage exists on N Washington Ave at the SW frontage (pano uLQq0M9x0QJFyrcATSzZWQ @ 43.44622,-83.91826, captured 2023-05) and shows the perimeter fence; no pano inside the secured campus, so both zone panos point from this frontage pano toward the gate/perimeter."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://news.gm.com/home.detail.html/Pages/news/us/en/2026/apr/0401-GM-invest-150-million-Saginaw-Metal-Casting.html", "date": "2026-04", "type": "press", "claim": "April 2026: GM invests $150M+ in Saginaw Metal Casting Operations for 6th-gen V8 blocks/heads; plant currently produces 5th-gen V8 blocks across three shifts" }
+    ],
+    "imageryDate": "2023-05",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "New GM-operated aluminum/iron foundry (one of GM's oldest plants) still producing V8 blocks; $150M+ reinvestment in April 2026. Downsized over time (demolished footprints on the parcel) but the core foundry is active. Not a divested or RACER site.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

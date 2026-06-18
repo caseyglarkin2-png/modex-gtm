@@ -171,5 +171,19 @@
     "multipleFacilities": "False - one very large interconnected multi-roof stamping building; buildingCount 1.",
     "urbanRural": "Marion is a small Indiana city; the plant sits at the western edge of town with farm fields immediately west and south and only a residential strip to the east - judged Rural per rubric (small-town/edge-of-town industrial)."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.gm.com/company/facilities/marion-metal-center", "date": "2025", "type": "locator", "claim": "GM lists Marion Metal Center as an active GM facility providing blanks, stampings and sheet-metal assemblies for North American vehicles" },
+      { "tier": 1, "url": "https://gmauthority.com/blog/2022/09/gm-investing-491-million-in-marion-indiana-metal-center/", "date": "2022-09", "type": "press", "claim": "GM announced $491M investment at Marion for steel/aluminum stampings including new EVs (two new press lines)" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "New GM-operated stamping plant (orig. 1956 Fisher Body); explicitly survived the 2009 bankruptcy restructuring and received a $491M reinvestment for EV stampings. Not a divested or RACER site.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

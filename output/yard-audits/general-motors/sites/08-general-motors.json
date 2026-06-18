@@ -122,5 +122,19 @@
     "exitLanes": "~2 outbound lanes estimate; flagged uncertain.",
     "siteAreaAcres": "470 acres computed from the traced perimeter ring, consistent with the cited ~440-569 acre site."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.gm.com/stories/wentzville-colorado-canyon", "date": "2025", "type": "press", "claim": "GM Wentzville Assembly currently builds the Chevrolet Colorado and GMC Canyon; GM-operated plant" },
+      { "tier": 2, "url": "https://www.semissourian.com/news/wentzville-gm-plant-to-stay-open-1543840", "date": "2009-06", "type": "press", "claim": "Wentzville was NOT on GM's 2009 bankruptcy plant-closure list; retained by New GM" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "GM-owned, self-operated assembly plant actively building Colorado/Canyon in 2025; explicitly retained through the 2009 bankruptcy (not divested to MLC/RACER).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

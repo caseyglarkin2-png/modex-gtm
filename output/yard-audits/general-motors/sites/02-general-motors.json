@@ -205,5 +205,19 @@
     "exitLanes": "Estimated 2 outbound; uncertain.",
     "truckGateCount": "At least 3 controlled truck entrances inferred (south logistics, west/rail plant gate, Bristol/south access); exact count uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://media.gm.com/media/us/en/gm/company_info/facilities/assembly/flint.html", "date": "2026-01", "type": "locator", "claim": "GM media facility page lists Flint Assembly, 3100 Van Slyke Rd, Flint MI as a GM-operated plant building Chevrolet Silverado HD / GMC Sierra HD" },
+      { "tier": 1, "url": "https://news.gm.com/company/usa-operations.html", "date": "2026-03", "type": "press", "claim": "GM increasing Silverado HD / Sierra HD output at Flint Assembly to six days/week in 2026 on strong HD-pickup demand" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "GM's oldest operating assembly plant, actively producing HD trucks and ramping in 2026; kept by New GM in 2009 (not divested to Motors Liquidation/RACER).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

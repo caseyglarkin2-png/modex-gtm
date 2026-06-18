@@ -164,5 +164,18 @@
     "siteAreaAcres": "~404k sq ft building plus south truck court / drop yard on a ~20-acre parcel (overhead estimate from the perimeter ring).",
     "truckGateCount": "Two driveway breaks in the south screen wall."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://pressroom.gm.com/gmbx/us/en/pressroom/home/company/facilities/rancho-cucamonga.html", "date": "2026-06", "type": "locator", "claim": "GM's own facilities locator page for the Rancho Cucamonga CA Parts Distribution Center; provides GM service parts for GM dealers and ACDelco customers." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "GM-operated CCA Parts Distribution Center, confirmed by GM-domain facilities locator. No bankruptcy-era/RACER divestiture.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

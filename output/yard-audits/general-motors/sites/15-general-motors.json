@@ -160,5 +160,19 @@
     "urbanRural": "Inside the dense Toledo metro fabric, surrounded by residential street grid and other industry on all sides; classified Urban.",
     "multipleFacilities": "Single integrated plant complex (one large connected building plus minor outbuildings); the eastern lot across the rail is a vehicle/trailer marshalling/storage area of the same site, not a second plant cluster."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://gmauthority.com/blog/2026/03/gm-invests-39m-in-toledo-powertrain-plant-to-build-new-transmission/", "date": "2026-03", "type": "press", "claim": "GM Toledo Propulsion Systems is GM-operated; new GM investment to add an 8-speed FWD transmission variant and expand 10-speed capacity; ~1,650 employees" },
+      { "tier": 1, "url": "https://spectrumnews1.com/oh/toledo/news/2026/03/20/gm-to-invest--40m-into-toledo-propulsion-systems", "date": "2026-03", "type": "press", "claim": "GM investing ~$40M into Toledo Propulsion Systems transmission plant" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "GM-owned, self-operated transmission plant (1455 W Alexis Rd) with active 2026 GM investment and >$1B invested since 2011; retained by New GM, not part of the 2009 MLC/RACER divestiture.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
