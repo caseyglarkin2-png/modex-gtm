@@ -139,5 +139,24 @@
     "railServed": "No rail spur into the property evident; flagged uncertain.",
     "urbanRural": "Niles is a dense inner-ring Chicago suburb - Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://reyescocacola.com/newsroom/niles-facility-spotlight-reyes-coca-cola-bottling",
+        "date": "2022",
+        "type": "press",
+        "claim": "Reyes Coca-Cola Bottling operates the Niles, IL production plant (365,000 sq ft, 7400 N Oak Park Ave), acquired 2016"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Reyes Coca-Cola Bottling-operated production plant in its core IL/Midwest territory; self-attested facility spotlight confirms operation.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

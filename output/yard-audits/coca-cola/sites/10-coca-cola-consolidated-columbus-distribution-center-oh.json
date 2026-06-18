@@ -150,5 +150,24 @@
     "urbanRural": "Within the Columbus OH metro, inside the Rickenbacker Industrial Center; classified Urban.",
     "scale": "No truck scale identified."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.cokeconsolidated.com/2025/05/15/coca-cola-consolidated-invests-90-million-in-columbus-facility/",
+        "date": "2025-05",
+        "type": "press",
+        "claim": "$90M Columbus facility, 400,000 sq ft DC + 350+ team, opened spring 2025"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Brand-new (2025) Coca-Cola Consolidated-owned distribution/warehouse/fleet campus at Rickenbacker; clearly a yard.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

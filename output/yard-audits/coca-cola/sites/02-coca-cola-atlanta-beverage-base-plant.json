@@ -154,5 +154,24 @@
     "drivewayLong": "Long internal approach drive from the gate around the west side to the dock area.",
     "urbanRural": "Inside Atlanta's dense Fulton Industrial Boulevard / I-285 industrial fabric."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://customer.a2la.org/index.cfm?event=directory.detail&labPID=6FB12C94-1EC7-4D89-8905-FE35A6ACEA81",
+        "date": "2024",
+        "type": "locator",
+        "claim": "A2LA lists 'The Coca-Cola Company - Atlanta Beverage Base Plant' as an active accredited facility"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KO-direct beverage-base (concentrate) plant operated by The Coca-Cola Company; recent FDA inspection (2024) corroborates operation.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

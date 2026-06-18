@@ -140,5 +140,31 @@
     "railServed": "A rail line / intermodal yard runs immediately north of the property, but no spur appears to run into the plant itself - left false.",
     "urbanRural": "Urban - dense Denver (Cole/Clayton neighborhood) industrial fabric surrounded by residential."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.swirecc.com/locations",
+        "date": "2026",
+        "type": "locator",
+        "claim": "Swire lists a plant in Denver, CO"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.cpr.org/2025/12/12/colorado-springs-coca-cola-manufacturing-plant/",
+        "date": "2025-12",
+        "type": "press",
+        "claim": "Denver plant to be replaced by a new Colorado Springs facility; Swire breaks ground 2026"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Swire Coca-Cola USA-operated Denver production plant (2145 E 40th Ave), still operating in 2026. WATCH: replacement plant in Colorado Springs breaks ground 2026, so finite runway; not a current rejection.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -154,5 +154,24 @@
     "buildingCount": "Main production building (with attached office) plus a separate NW warehouse = 2.",
     "urbanRural": "Within the Montgomery metro on the I-65 corridor with adjacent residential subdivisions - Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://cocacolaunited.com/blog/2016/11/25/closing-transactions-montgomery-coca-cola-production-equipment-refurbishment-center-metro-atlanta/",
+        "date": "2016-11",
+        "type": "press",
+        "claim": "Montgomery Coca-Cola production facility at 300 Coca-Cola Road, ~25M cases/yr, 120 associates"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Coca-Cola UNITED production plant (300 Coca-Cola Road, Montgomery); no closure/divestiture found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -145,5 +145,24 @@
     "urbanRural": "Urban - dense Maspeth, Queens industrial fabric in the NYC metro.",
     "recommendation": "Reclassify this roster entry: the Maspeth production plant is closed (now Home Depot). Re-audit the actual Liberty Coca-Cola Maspeth Sales/Distribution Center at 58-40 Borden Ave once its precise building footprint is confirmed."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.libertycoke.com/news/liberty-coca-cola-beverages-acquires-local-bottling-operations-tri-state-metropolitan-area/",
+        "date": "2017",
+        "type": "press",
+        "claim": "Liberty operates four production facilities: Philadelphia, Moorestown NJ, Maspeth NY, Elmsford NY"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Liberty Coca-Cola Beverages-operated Maspeth (Queens) production plant; the 2017 'sold' coverage was the refranchising INTO Liberty. WATCH: Glassdoor layoff chatter + an active NLRB case suggest workforce contraction, but the plant is operating.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -135,5 +135,24 @@
     "urbanRural": "Cincinnati/Northern Kentucky metro, directly off I-71/75 just south of I-275, dense industrial/commercial fabric - Urban.",
     "drivewayLong": "Long internal approach from the park access road to the docks holds 3+ trucks."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://erlangerky.gov/city-of-erlanger-names-coca-cola-consolidated-as-february-business-spotlight/",
+        "date": "2025",
+        "type": "press",
+        "claim": "Warehouse and distribution center for all Coca-Cola brands; 300,000 sq ft on 32 acres; 500+ teammates (680 Erlanger Rd)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Coca-Cola Consolidated warehouse/distribution/sales center in NKY; named active business by the city. Tenancy unconfirmed.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

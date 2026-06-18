@@ -146,5 +146,24 @@
     "urbanRural": "Urban - West Valley City industrial corridor within the Salt Lake City metro.",
     "recommendation": "Correct the roster address to 2269 S 3270 W, West Valley City, UT 84119 and re-audit once the exact Swire Coca-Cola building footprint is confirmed (e.g. via a precise geocode or a Coca-Cola sign in updated imagery)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.swirecc.com/locations",
+        "date": "2026",
+        "type": "locator",
+        "claim": "Swire lists a plant in Salt Lake City, UT"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Swire Coca-Cola USA-operated SLC-area manufacturing plant (2269 S 3270 W, West Valley City); Swire runs the US West (13 states incl UT).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

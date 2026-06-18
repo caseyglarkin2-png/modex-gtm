@@ -158,5 +158,31 @@
     "railServed": "No rail spur evident in the area probed.",
     "recommendation": "Flag for human review - needs a person to confirm the exact 5601 Citrus Blvd building footprint before classification can be trusted."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://cocacolaunited.com/locations/new-orleans/",
+        "date": "2026",
+        "type": "locator",
+        "claim": "New Orleans Coca-Cola: sales center, production facility, equipment refurbishment center, fleet"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.nola.com/news/business/louisianas-largest-coca-cola-plant-is-getting-an-18-million-upgrade-in-elmwood/article_498e2462-a42b-11ee-87f9-a724c337dfc7.html",
+        "date": "2024",
+        "type": "press",
+        "claim": "Elmwood plant (largest KO plant in LA) got $18M ASRS upgrade, 18,000 pallets / 1.3M cases"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Coca-Cola UNITED New Orleans production+distribution complex (major plant in suburban Elmwood/Harahan); recently invested in.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

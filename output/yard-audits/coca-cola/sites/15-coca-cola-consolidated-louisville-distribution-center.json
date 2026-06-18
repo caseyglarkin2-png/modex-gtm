@@ -133,5 +133,24 @@
     "urbanRural": "Southwest Louisville, dense Riverport/industrial-park fabric beside I-265 - Urban.",
     "drivewayLong": "Long internal approach down the west drive into the south yard easily holds 3+ trucks."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://investor.cokeconsolidated.com/news-releases/news-release-details/coca-cola-celebrates-grand-opening-new-louisville-sales-and",
+        "date": "2015-03",
+        "type": "press",
+        "claim": "Grand opening of new Louisville Sales and Distribution Center, 305,000 sq ft on Global Drive"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Coca-Cola Consolidated sales/distribution + equipment refurb center (Louisville bottler since 2015); no closure signal. Freshest direct evidence is the 2015 opening.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

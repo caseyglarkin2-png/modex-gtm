@@ -129,5 +129,24 @@
     "scale": "No clear truck scale identified in imagery; left false but flagged as uncertain.",
     "dockDoorCount": "Estimate ~35 across north and southwest dock faces from z18/z19 imagery; approximate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.ajc.com/business/coke-expanding-atlanta-plant-for-new-machine/6gBd4wKvX0pUfsAmW826HP/",
+        "date": "2014",
+        "type": "press",
+        "claim": "Coca-Cola Co. invested $100M to expand its Atlanta southside syrup/concentrate plant for Freestyle"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KO-direct fountain-syrup/concentrate plant operated by The Coca-Cola Company itself; no closure/divestiture found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

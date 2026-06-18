@@ -135,5 +135,24 @@
     "scale": "No truck scale clearly identified; flagged uncertain.",
     "urbanRural": "Inside the Chattanooga metro industrial fabric along Amnicola Hwy - Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://cocacolaunited.com/locations/chattanooga-2/",
+        "date": "2026",
+        "type": "locator",
+        "claim": "Chattanooga Coca-Cola Production Center, Amnicola Highway; cold-fill cans + Powerade/Vitaminwater, 72k+ cans/day"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Coca-Cola UNITED production plant (Amnicola Hwy, Chattanooga): cold-fill production + regional HQ + fleet shop.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

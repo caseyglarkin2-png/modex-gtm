@@ -142,5 +142,24 @@
     "railServed": "No rail spur into the property observed.",
     "scale": "No truck scale clearly identified."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.cokeconsolidated.com/2025/10/18/coca-cola-consolidated-invests-35-million-in-twinsburg-facility/",
+        "date": "2025-10",
+        "type": "press",
+        "claim": "$35M in Twinsburg manufacturing facility (1882 Highland Rd), +40 jobs, houses Red Classic Transit"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active, actively-expanding (Oct 2025) Coca-Cola Consolidated manufacturing + transport hub.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

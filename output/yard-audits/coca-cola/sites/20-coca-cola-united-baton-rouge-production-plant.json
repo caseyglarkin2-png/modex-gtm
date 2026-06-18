@@ -129,5 +129,24 @@
     "scale": "No truck scale clearly identified; flagged uncertain.",
     "buildingCount": "Bottling plant + office + fleet maintenance + pump/utility structure = 4 distinct buildings."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://cocacolaunited.com/locations/baton-rouge-2/",
+        "date": "2026",
+        "type": "locator",
+        "claim": "Baton Rouge production + distribution facility (9696 Plank Rd); produces Powerade/Vitaminwater for the system"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Coca-Cola UNITED production+distribution plant (9696 Plank Rd, Baton Rouge), LEED-certified, recently $42M-expanded.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

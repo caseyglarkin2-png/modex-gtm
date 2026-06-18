@@ -132,5 +132,31 @@
     "railServed": "No rail spur into the property.",
     "urbanRural": "Tillmans Corner commercial/industrial area within the Mobile metro."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.madeinalabama.com/2021/03/coca-cola-united-announces-48-million-expansion-at-mobile-facility/",
+        "date": "2021-03",
+        "type": "press",
+        "claim": "Coca-Cola UNITED announced $48M expansion at its Mobile campus"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.sec.gov/Archives/edgar/data/0000317540/000119312517303409/d462097dex991.htm",
+        "date": "2017",
+        "type": "press",
+        "claim": "Coca-Cola Consolidated transferred its Mobile, AL manufacturing facility in the 2017 territory swap (got Memphis/West Memphis)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "OPERATOR CORRECTION: Mobile is in Coca-Cola UNITED territory; Consolidated divested it in the 2017 swap. Still a legitimate Coca-Cola-system yard, now operated by Coca-Cola UNITED, not Consolidated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

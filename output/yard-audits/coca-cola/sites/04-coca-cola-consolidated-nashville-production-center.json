@@ -136,5 +136,31 @@
     "dockDoors": "Dock bank along the west building face with ~28 doors estimated; approximate.",
     "urbanRural": "Dense urban industrial setting in Nashville's Berry Hill area."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.cokeconsolidated.com/economic-impact/tennessee/",
+        "date": "2025",
+        "type": "locator",
+        "claim": "Coca-Cola Consolidated lists active Tennessee manufacturing operations"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.nashvillepost.com/business/development/coca-cola-affiliate-pays-56m-for-berry-hill-property/article_64476386-7ce8-11ef-9fb1-87d3735701f3.html",
+        "date": "2024-09",
+        "type": "press",
+        "claim": "Coke affiliate bought the 21.76-acre 407 Craighead St Berry Hill production property for $56M"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Coca-Cola Consolidated Nashville production center (407 Craighead St); 2024 $56M affiliate purchase signals continued operation, not divestiture.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

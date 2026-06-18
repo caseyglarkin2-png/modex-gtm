@@ -130,5 +130,24 @@
     "urbanRural": "Within Indianapolis metro; bordered by dense residential subdivisions and near the Indianapolis Motor Speedway. Classified Urban.",
     "scale": "No truck scale identified in imagery."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.cokeconsolidated.com/2026/05/04/coca-cola-consolidated-to-invest-35-million-in-indianapolis-manufacturing-facility/",
+        "date": "2026-05",
+        "type": "press",
+        "claim": "Coca-Cola Consolidated to invest $35M in Indianapolis facility (5000 W 25th St), operating since 1968, adding a glass line"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Coca-Cola Consolidated manufacturing plant (5000 W 25th St); May 2026 PR announces a $35M expansion. Strongly current.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

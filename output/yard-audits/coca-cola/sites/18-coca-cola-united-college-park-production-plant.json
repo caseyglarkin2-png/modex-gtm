@@ -135,5 +135,24 @@
     "urbanRural": "Inside the Atlanta metro near Hartsfield-Jackson airport and the I-85/I-285 interchange, dense industrial fabric - Urban.",
     "drivewayLong": "Long internal approach from the Sullivan Road gate to the docks holds 3+ trucks."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.prnewswire.com/news-releases/coca-cola-united-closes-transaction-with-the-coca-cola-company-for-atlanta-and-seven-other-georgia-territories-300448327.html",
+        "date": "2017-04",
+        "type": "press",
+        "claim": "UNITED closed acquisition of Atlanta + 7 GA territories incl. College Park production facility"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Coca-Cola UNITED production plant (2355 Sullivan Rd, College Park), acquired from KO in 2017; current job postings corroborate.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

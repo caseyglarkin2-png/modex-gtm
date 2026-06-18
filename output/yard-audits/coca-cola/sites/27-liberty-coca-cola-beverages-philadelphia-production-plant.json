@@ -137,5 +137,24 @@
     "siteAreaAcres": "Derived from perimeter box (~420m N-S x ~390m E-W complex) ~ 14 acres - approximate.",
     "railServed": "No rail spur runs into the property (rail line runs nearby but not into the yard)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://libertycoke.com/",
+        "date": "2024",
+        "type": "locator",
+        "claim": "Liberty operates production at 725 E Erie Ave, Philadelphia; HQ + a production facility serving the tri-state region"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Liberty Coca-Cola Beverages-operated Philadelphia production plant + HQ; Liberty runs the Philly/NY/NJ/DE Coca-Cola territory.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

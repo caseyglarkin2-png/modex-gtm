@@ -135,5 +135,24 @@
     "drivewayLong": "The internal approach from the Industrial Park Dr entrance to the dock doors is deep, easily holding 3+ trucks.",
     "buildingCount": "Main production/warehouse building plus the office wing and a separate maintenance/shop structure in the truck yard."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://cocacolaunited.com/locations/marietta-2/",
+        "date": "2026",
+        "type": "locator",
+        "claim": "Marietta production facility (1091 Industrial Park Dr); KO beverages + warehouse; only glass and bag-in-box facility in UNITED/GA"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Coca-Cola UNITED production plant (1091 Industrial Park Dr, Marietta), specialized glass + bag-in-box; live locator page.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -128,5 +128,24 @@
     "siteAreaAcres": "Derived from perimeter box (~330m N-S x ~110m E-W building+yard parcel) ~ 9 acres - approximate.",
     "shipRcvSeparate": "Single dock bank along the south face; no separate ship/receive clusters identified."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.beveragedaily.com/Article/2023/09/08/reyes-coca-cola-bottling-expands-california-facility/",
+        "date": "2023-09",
+        "type": "press",
+        "claim": "San Leandro named as one of three current CA locations where Reyes Coca-Cola Bottling manufactures"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Reyes Coca-Cola Bottling-operated NorCal production plant (San Leandro); named as a current CA manufacturing site in 2023.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

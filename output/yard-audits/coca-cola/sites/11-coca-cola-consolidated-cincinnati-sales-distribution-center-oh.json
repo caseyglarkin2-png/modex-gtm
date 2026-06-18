@@ -132,5 +132,24 @@
     "urbanRural": "Within the Cincinnati metro (Forest Park, 45240), in an established business park beside the Ronald Reagan Cross County Hwy; classified Urban.",
     "railServed": "No rail spur."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.cokeconsolidated.com/economic-impact/ohio/",
+        "date": "2025",
+        "type": "locator",
+        "claim": "Consolidated lists two manufacturing plants in Cincinnati and Twinsburg; 2,210+ OH teammates"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Coca-Cola Consolidated production+distribution plant in Cincinnati (5100 Duck Creek Rd); acquired 2017, no closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

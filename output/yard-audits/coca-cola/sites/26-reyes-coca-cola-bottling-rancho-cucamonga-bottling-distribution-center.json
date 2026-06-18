@@ -146,5 +146,24 @@
     "urbanRural": "Urban - dense Inland Empire industrial fabric of Rancho Cucamonga, adjacent to I-15 and Ontario Mills.",
     "recommendation": "Re-audit after facility completion (expected 2027) when the new 620,000 sq ft campus is operational."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.prnewswire.com/news-releases/reyes-coca-cola-bottling-in-rancho-cucamonga-announces-major-expansion-of-manufacturing-and-distribution-facility-301920930.html",
+        "date": "2023-09",
+        "type": "press",
+        "claim": "Reyes operates the Rancho Cucamonga distribution facility (10670 6th St), expanding to a 620,000 sq ft production+distribution campus"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Reyes Coca-Cola Bottling-operated site; currently a DC mid-rebuild into a production campus (ops temporarily relocated to Fontana during 2025-2027 construction). Still a Reyes yard.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

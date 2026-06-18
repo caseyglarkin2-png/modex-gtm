@@ -142,5 +142,24 @@
     "railServed": "A rail line runs along the west boundary but appears to serve the adjacent property; no clear spur into Coca-Cola docks — left false, flagged uncertain.",
     "scale": "No clear truck scale identified; left false, flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.bevindustry.com/articles/82526-plant-focus-coca-cola-bottling-co-consolidated",
+        "date": "2024",
+        "type": "press",
+        "claim": "Snyder Production Center, Charlotte - 650,000 sq ft, 46-acre campus, 6 lines, ~44M cases/yr, 365 teammates"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Flagship plant of Coca-Cola Consolidated (COKE, largest US Coke bottler, HQ Charlotte); actively operating.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -131,5 +131,31 @@
     "urbanRural": "Within Birmingham city limits beside I-59, surrounded by dense residential and industrial development - Urban.",
     "note": "Coca-Cola UNITED announced (May 2024) a $330M new Birmingham facility; this audit covers the existing 4600 E Lake Blvd campus, which remains the active production plant."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://cocacolaunited.com/locations/birmingham/",
+        "date": "2026",
+        "type": "locator",
+        "claim": "Birmingham is UNITED's corporate HQ and an active sales/distribution location"
+      },
+      {
+        "tier": 2,
+        "url": "https://alabamanewscenter.com/2020/09/18/coca-cola-united-to-invest-5m-to-expand-warehouse-affecting-65-jobs/",
+        "date": "2020-09",
+        "type": "press",
+        "claim": "$5M to repurpose the Birmingham production facility into warehouse/loading; production moved to other UNITED plants"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "LABEL CORRECTION: Coca-Cola UNITED Birmingham is no longer a production plant (bottling pulled in 2020, now warehouse/distribution + HQ). Still a heavily active UNITED yard.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -138,5 +138,24 @@
     "drivewayLong": "Long internal approach from the Eastpark Court gate around to the docks easily holds 3+ trucks.",
     "urbanRural": "Richmond metro, immediately adjacent to Richmond International Airport and I-64, surrounded by industrial parks and dense suburban development - Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.cokeconsolidated.com/2024/04/08/coca-cola-consolidated-celebrates-50-million-investment-in-companys-sandston-campus-joined-by-customers-community-partners-and-elected-officials/",
+        "date": "2024-04",
+        "type": "press",
+        "claim": "$50M, 210,000 sq ft warehouse on 63-acre Sandston campus (500 Eastpark Ct), ~450 teammates"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Coca-Cola Consolidated production+distribution campus, recently expanded (2024).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

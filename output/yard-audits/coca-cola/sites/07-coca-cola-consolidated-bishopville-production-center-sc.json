@@ -126,5 +126,31 @@
     "railServed": "A rail line runs along the north/northeast property edge but no spur appears to enter the property; classified railServed false.",
     "urbanRural": "Edge-of-town industrial setting in small-town Bishopville (Lee County), surrounded by woods and farmland; classified Rural."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.cokeconsolidated.com/2024/10/25/bishopville-south-carolina-facility-provides-economic-impact-on-sc-community/",
+        "date": "2024-10",
+        "type": "press",
+        "claim": "Coca-Cola Consolidated profiles the Bishopville SC facility (601 Cousar St) and SC economic impact"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.sccommerce.com/news/south-atlantic-canners-inc-expanding-lee-county-operations",
+        "date": "2023-05",
+        "type": "press",
+        "claim": "South Atlantic Canners investing $28.7M to expand Bishopville plant, 4 lines, by 2027"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Bishopville is operated by South Atlantic Canners, a Coca-Cola bottler cooperative of which Consolidated is a member-owner; active, expanding Coke-network bottling plant.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
