@@ -1,61 +1,182 @@
 {
   "name": "Amazon SCK6 Sortation Center Tracy CA",
   "type": "Sortation Center",
-  "coords": { "lat": 37.751800, "lng": -121.403500 },
+  "coords": {
+    "lat": 37.7518,
+    "lng": -121.4035
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 37.754180, "lng": -121.405250 },
-      { "lat": 37.754090, "lng": -121.399450 },
-      { "lat": 37.752600, "lng": -121.398950 },
-      { "lat": 37.749700, "lng": -121.399000 },
-      { "lat": 37.749450, "lng": -121.404950 },
-      { "lat": 37.751000, "lng": -121.405300 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 37.753250, "lng": -121.400720 },
-      { "lat": 37.753180, "lng": -121.400320 },
-      { "lat": 37.752900, "lng": -121.400360 },
-      { "lat": 37.752960, "lng": -121.400760 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.75418,
+          "lng": -121.40525
+        },
+        {
+          "lat": 37.75409,
+          "lng": -121.39945
+        },
+        {
+          "lat": 37.7526,
+          "lng": -121.39895
+        },
+        {
+          "lat": 37.7497,
+          "lng": -121.399
+        },
+        {
+          "lat": 37.74945,
+          "lng": -121.40495
+        },
+        {
+          "lat": 37.751,
+          "lng": -121.4053
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 37.75325,
+          "lng": -121.40072
+        },
+        {
+          "lat": 37.75318,
+          "lng": -121.40032
+        },
+        {
+          "lat": 37.7529,
+          "lng": -121.40036
+        },
+        {
+          "lat": 37.75296,
+          "lng": -121.40076
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 37.753080, "lng": -121.400230 },
-        { "lat": 37.752980, "lng": -121.398970 },
-        { "lat": 37.749760, "lng": -121.399080 },
-        { "lat": 37.749700, "lng": -121.400370 }
-      ] },
-      { "ring": [
-        { "lat": 37.750150, "lng": -121.404780 },
-        { "lat": 37.750090, "lng": -121.401050 },
-        { "lat": 37.749820, "lng": -121.401060 },
-        { "lat": 37.749880, "lng": -121.404790 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 37.75308,
+            "lng": -121.40023
+          },
+          {
+            "lat": 37.75298,
+            "lng": -121.39897
+          },
+          {
+            "lat": 37.74976,
+            "lng": -121.39908
+          },
+          {
+            "lat": 37.7497,
+            "lng": -121.40037
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 37.75015,
+            "lng": -121.40478
+          },
+          {
+            "lat": 37.75009,
+            "lng": -121.40105
+          },
+          {
+            "lat": 37.74982,
+            "lng": -121.40106
+          },
+          {
+            "lat": 37.74988,
+            "lng": -121.40479
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 37.750650, "lng": -121.404760 },
-        { "lat": 37.750590, "lng": -121.401080 },
-        { "lat": 37.750410, "lng": -121.401090 },
-        { "lat": 37.750470, "lng": -121.404770 }
-      ] },
-      { "ring": [
-        { "lat": 37.753000, "lng": -121.400600 },
-        { "lat": 37.752700, "lng": -121.400620 },
-        { "lat": 37.750800, "lng": -121.400700 },
-        { "lat": 37.750810, "lng": -121.400900 },
-        { "lat": 37.752700, "lng": -121.400820 },
-        { "lat": 37.753010, "lng": -121.400800 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 37.75065,
+            "lng": -121.40476
+          },
+          {
+            "lat": 37.75059,
+            "lng": -121.40108
+          },
+          {
+            "lat": 37.75041,
+            "lng": -121.40109
+          },
+          {
+            "lat": 37.75047,
+            "lng": -121.40477
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 37.753,
+            "lng": -121.4006
+          },
+          {
+            "lat": 37.7527,
+            "lng": -121.40062
+          },
+          {
+            "lat": 37.7508,
+            "lng": -121.4007
+          },
+          {
+            "lat": 37.75081,
+            "lng": -121.4009
+          },
+          {
+            "lat": 37.7527,
+            "lng": -121.40082
+          },
+          {
+            "lat": 37.75301,
+            "lng": -121.4008
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 37.752900, "lng": -121.401400 },
-      { "lat": 37.752850, "lng": -121.400780 },
-      { "lat": 37.751900, "lng": -121.400820 },
-      { "lat": 37.751950, "lng": -121.401440 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 37.7529,
+          "lng": -121.4014
+        },
+        {
+          "lat": 37.75285,
+          "lng": -121.40078
+        },
+        {
+          "lat": 37.7519,
+          "lng": -121.40082
+        },
+        {
+          "lat": 37.75195,
+          "lng": -121.40144
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 244, "pano": "Ibf-84PqjROvdsHVSOdG_g", "hasCoverage": true },
-      "truckGate": { "heading": 275, "pano": "dvkowtervoQ0-ev7HnD5Tg", "hasCoverage": true }
+      "perimeter": {
+        "heading": 244,
+        "pano": "Ibf-84PqjROvdsHVSOdG_g",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 275,
+        "pano": "dvkowtervoQ0-ev7HnD5Tg",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -93,7 +214,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "multiStep"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "multiStep"
+  ],
   "fieldNotes": {
     "truckGate": "Entire truck yard is enclosed by black steel palisade fencing plus precast concrete screen walls (confirmed in Street View along the east access road, panos dvkowtervoQ0-ev7HnD5Tg and Ibf-84PqjROvdsHVSOdG_g). Trucks enter through a single controlled driveway throat off the NE access road (~37.7531,-121.4006) that feeds the secured dock/drop area.",
     "guardShack": "Small booth-footprint structure with a painted STOP and yellow checkpoint striping at the gate throat (~37.75215,-121.40015), seen at z21 satellite beside the controlled lane between the parking apron and the secured building/dock area.",
@@ -112,5 +237,31 @@
     "trailersVisible": "~230 trailers counted across east and south drop yards in the captured tight imagery; approximate.",
     "multiStep": "No clear second checkpoint (scale house / second booth) after the gate; left false."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.ttownmedia.com/tracy_press/amazon-opens-third-fulfillment-center-in-tracy/article_faf470c0-ce7b-11ed-a6f7-5f3f6ce4d7e1.html",
+        "date": "2023-03",
+        "type": "press",
+        "claim": "Amazon opened SCK6 (Project Big Bird), 1500 E Grant Line Rd Tracy, 3.5M sqft 5-story robotics FC, ribbon-cut Mar 24 2023; 230 trailers / 40 dock bays"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.linkedin.com/jobs/view/senior-automation-engineer-sck6-at-amazon-4227715462",
+        "date": "2026",
+        "type": "careers",
+        "claim": "Amazon hiring Senior Automation Engineer, SCK6, Tracy CA — code+site active"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Live Amazon SCK6 req in Tracy + open building at 1500 E Grant Line Rd; no closure signal. FLAGS: sources describe SCK6 as a robotic FULFILLMENT center, not a sortation center as labeled; SCK code = Stockton metro but building is in Tracy (expected metro-coding, not disqualifying).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

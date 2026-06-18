@@ -1,59 +1,174 @@
 {
   "name": "Amazon KCVG Air Hub Hebron KY",
   "type": "Air Hub",
-  "coords": { "lat": 39.03135, "lng": -84.65965 },
+  "coords": {
+    "lat": 39.03135,
+    "lng": -84.65965
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 39.03520, "lng": -84.66095 },
-      { "lat": 39.03470, "lng": -84.65760 },
-      { "lat": 39.02900, "lng": -84.65755 },
-      { "lat": 39.02620, "lng": -84.65800 },
-      { "lat": 39.02660, "lng": -84.66060 },
-      { "lat": 39.03060, "lng": -84.66110 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 39.02880, "lng": -84.65820 },
-      { "lat": 39.02880, "lng": -84.65760 },
-      { "lat": 39.02740, "lng": -84.65762 },
-      { "lat": 39.02740, "lng": -84.65822 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.0352,
+          "lng": -84.66095
+        },
+        {
+          "lat": 39.0347,
+          "lng": -84.6576
+        },
+        {
+          "lat": 39.029,
+          "lng": -84.65755
+        },
+        {
+          "lat": 39.0262,
+          "lng": -84.658
+        },
+        {
+          "lat": 39.0266,
+          "lng": -84.6606
+        },
+        {
+          "lat": 39.0306,
+          "lng": -84.6611
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.0288,
+          "lng": -84.6582
+        },
+        {
+          "lat": 39.0288,
+          "lng": -84.6576
+        },
+        {
+          "lat": 39.0274,
+          "lng": -84.65762
+        },
+        {
+          "lat": 39.0274,
+          "lng": -84.65822
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 39.02905, "lng": -84.66075 },
-        { "lat": 39.02905, "lng": -84.65870 },
-        { "lat": 39.02720, "lng": -84.65878 },
-        { "lat": 39.02720, "lng": -84.66082 }
-      ] },
-      { "ring": [
-        { "lat": 39.02980, "lng": -84.65650 },
-        { "lat": 39.02980, "lng": -84.65480 },
-        { "lat": 39.02850, "lng": -84.65485 },
-        { "lat": 39.02850, "lng": -84.65655 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 39.02905,
+            "lng": -84.66075
+          },
+          {
+            "lat": 39.02905,
+            "lng": -84.6587
+          },
+          {
+            "lat": 39.0272,
+            "lng": -84.65878
+          },
+          {
+            "lat": 39.0272,
+            "lng": -84.66082
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 39.0298,
+            "lng": -84.6565
+          },
+          {
+            "lat": 39.0298,
+            "lng": -84.6548
+          },
+          {
+            "lat": 39.0285,
+            "lng": -84.65485
+          },
+          {
+            "lat": 39.0285,
+            "lng": -84.65655
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 39.03470, "lng": -84.65850 },
-        { "lat": 39.03470, "lng": -84.65815 },
-        { "lat": 39.02945, "lng": -84.65818 },
-        { "lat": 39.02945, "lng": -84.65853 }
-      ] },
-      { "ring": [
-        { "lat": 39.03010, "lng": -84.65640 },
-        { "lat": 39.03010, "lng": -84.65600 },
-        { "lat": 39.02860, "lng": -84.65603 },
-        { "lat": 39.02860, "lng": -84.65643 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 39.0347,
+            "lng": -84.6585
+          },
+          {
+            "lat": 39.0347,
+            "lng": -84.65815
+          },
+          {
+            "lat": 39.02945,
+            "lng": -84.65818
+          },
+          {
+            "lat": 39.02945,
+            "lng": -84.65853
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 39.0301,
+            "lng": -84.6564
+          },
+          {
+            "lat": 39.0301,
+            "lng": -84.656
+          },
+          {
+            "lat": 39.0286,
+            "lng": -84.65603
+          },
+          {
+            "lat": 39.0286,
+            "lng": -84.65643
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 39.02890, "lng": -84.66080 },
-      { "lat": 39.02890, "lng": -84.65760 },
-      { "lat": 39.02700, "lng": -84.65770 },
-      { "lat": 39.02700, "lng": -84.66085 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 39.0289,
+          "lng": -84.6608
+        },
+        {
+          "lat": 39.0289,
+          "lng": -84.6576
+        },
+        {
+          "lat": 39.027,
+          "lng": -84.6577
+        },
+        {
+          "lat": 39.027,
+          "lng": -84.66085
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 288, "pano": "CAoSFkNJSE0wb2dLRUlDQWdJRDIxcXZGR0E.", "hasCoverage": true },
-      "truckGate": { "heading": 4, "pano": "CAoSF0NJSE0wb2dLRUlDQWdJRDJodjd0blFF", "hasCoverage": true }
+      "perimeter": {
+        "heading": 288,
+        "pano": "CAoSFkNJSE0wb2dLRUlDQWdJRDIxcXZGR0E.",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 4,
+        "pano": "CAoSF0NJSE0wb2dLRUlDQWdJRDJodjd0blFF",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -62,7 +177,7 @@
     "trailerParkingCapacity": 180,
     "truckGateCount": 1,
     "buildingCount": 6,
-    "siteAreaAcres": 118.0,
+    "siteAreaAcres": 118,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.03135,-84.65965,400m/data=!3m1!1e3",
@@ -91,7 +206,14 @@
     "multiStep": true
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "multiStep", "dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "multiStep",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "site": "Amazon KCVG air cargo sort hub on the landside of Cincinnati/Northern Kentucky International Airport (CVG). Audited the Amazon sort building and its landside truck/ground-ops footprint, NOT the airside ramp or the adjacent DHL hub (DHL building confirmed by signage in Street View to the southeast).",
     "truckGate": "Whole campus sits inside CVG's secured airfield perimeter; ground-ops/cargo footprint is enclosed by chain-link fencing with barbed-wire top (clearly visible in 2022 Street View along the access road). Vehicle access is airport-controlled (SIDA/AOA). Treated as a controlled truck gate.",
@@ -105,5 +227,31 @@
     "siteAreaAcres": "~118 acres for the traced landside ground-ops perimeter (the overall Amazon campus is cited at ~600 acres including airside ramp, which is excluded here).",
     "railServed": "No rail spur into the landside truck yard."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.aboutamazon.com/news/operations/welcome-to-the-amazon-air-hub",
+        "date": "2021-08",
+        "type": "press",
+        "claim": "Amazon Air's primary US air cargo hub at CVG, 600-acre 7-building campus"
+      },
+      {
+        "tier": 2,
+        "url": "https://teamster.org/2024/08/teamsters-win-right-to-picket-amazon-at-critical-midwest-air-hub/",
+        "date": "2024-08",
+        "type": "press",
+        "claim": "Teamsters granted right to picket the active Amazon Air Hub at CVG, ~4,500 workers (confirms current operation)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tier-1 Amazon press establishes the hub; 2024-2025 sources confirm it is Amazon's currently-operating primary air cargo hub; no closure or WARN.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

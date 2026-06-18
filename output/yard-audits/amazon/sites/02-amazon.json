@@ -1,57 +1,166 @@
 {
   "name": "Amazon ONT8 Fulfillment Center Moreno Valley CA",
   "type": "Fulfillment Center",
-  "coords": { "lat": 33.86836, "lng": -117.23708 },
+  "coords": {
+    "lat": 33.86836,
+    "lng": -117.23708
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 33.87000, "lng": -117.23925 },
-      { "lat": 33.87000, "lng": -117.23490 },
-      { "lat": 33.86672, "lng": -117.23490 },
-      { "lat": 33.86672, "lng": -117.23925 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 33.87000, "lng": -117.23895 },
-      { "lat": 33.87000, "lng": -117.23850 },
-      { "lat": 33.86975, "lng": -117.23850 },
-      { "lat": 33.86975, "lng": -117.23895 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.87,
+          "lng": -117.23925
+        },
+        {
+          "lat": 33.87,
+          "lng": -117.2349
+        },
+        {
+          "lat": 33.86672,
+          "lng": -117.2349
+        },
+        {
+          "lat": 33.86672,
+          "lng": -117.23925
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.87,
+          "lng": -117.23895
+        },
+        {
+          "lat": 33.87,
+          "lng": -117.2385
+        },
+        {
+          "lat": 33.86975,
+          "lng": -117.2385
+        },
+        {
+          "lat": 33.86975,
+          "lng": -117.23895
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 33.86705, "lng": -117.23900 },
-        { "lat": 33.86705, "lng": -117.23560 },
-        { "lat": 33.86672, "lng": -117.23560 },
-        { "lat": 33.86672, "lng": -117.23900 }
-      ] },
-      { "ring": [
-        { "lat": 33.87000, "lng": -117.23900 },
-        { "lat": 33.87000, "lng": -117.23560 },
-        { "lat": 33.86978, "lng": -117.23560 },
-        { "lat": 33.86978, "lng": -117.23900 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.86705,
+            "lng": -117.239
+          },
+          {
+            "lat": 33.86705,
+            "lng": -117.2356
+          },
+          {
+            "lat": 33.86672,
+            "lng": -117.2356
+          },
+          {
+            "lat": 33.86672,
+            "lng": -117.239
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.87,
+            "lng": -117.239
+          },
+          {
+            "lat": 33.87,
+            "lng": -117.2356
+          },
+          {
+            "lat": 33.86978,
+            "lng": -117.2356
+          },
+          {
+            "lat": 33.86978,
+            "lng": -117.239
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 33.86978, "lng": -117.23900 },
-        { "lat": 33.86978, "lng": -117.23560 },
-        { "lat": 33.86948, "lng": -117.23560 },
-        { "lat": 33.86948, "lng": -117.23900 }
-      ] },
-      { "ring": [
-        { "lat": 33.86734, "lng": -117.23900 },
-        { "lat": 33.86734, "lng": -117.23560 },
-        { "lat": 33.86705, "lng": -117.23560 },
-        { "lat": 33.86705, "lng": -117.23900 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.86978,
+            "lng": -117.239
+          },
+          {
+            "lat": 33.86978,
+            "lng": -117.2356
+          },
+          {
+            "lat": 33.86948,
+            "lng": -117.2356
+          },
+          {
+            "lat": 33.86948,
+            "lng": -117.239
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.86734,
+            "lng": -117.239
+          },
+          {
+            "lat": 33.86734,
+            "lng": -117.2356
+          },
+          {
+            "lat": 33.86705,
+            "lng": -117.2356
+          },
+          {
+            "lat": 33.86705,
+            "lng": -117.239
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 33.86980, "lng": -117.23925 },
-      { "lat": 33.86980, "lng": -117.23905 },
-      { "lat": 33.86700, "lng": -117.23905 },
-      { "lat": 33.86700, "lng": -117.23925 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 33.8698,
+          "lng": -117.23925
+        },
+        {
+          "lat": 33.8698,
+          "lng": -117.23905
+        },
+        {
+          "lat": 33.867,
+          "lng": -117.23905
+        },
+        {
+          "lat": 33.867,
+          "lng": -117.23925
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 273, "pano": "_XyVu-d1jCMKtlARiIhQzA", "hasCoverage": true },
-      "truckGate": { "heading": 210, "pano": "7VvwH31NgV58HTc4Q3CSmw", "hasCoverage": true }
+      "perimeter": {
+        "heading": 273,
+        "pano": "_XyVu-d1jCMKtlARiIhQzA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 210,
+        "pano": "7VvwH31NgV58HTc4Q3CSmw",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -89,7 +198,12 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "dockDoorCount"],
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "guardShack": "Walled/fenced truck yard with a controlled pinch-point entrance off the north road (west perimeter drive throat ~33.8697,-117.2386); STOP striping and a small booth-footprint structure beside the inbound lane at the throat. Amazon FCs of this scale staff a guard booth at the inbound truck check-in. Backlit morning Street View partly obscures the booth, so flagged uncertain, but evidence supports guardShack:true over remote check-in.",
     "truckGate": "Yard is screened by tilt-up concrete walls along the south and west streets and palisade fence on the east; the only truck-side opening is the controlled NW throat off the north road. Open driveway ruled out.",
@@ -102,5 +216,31 @@
     "railServed": "No rail spur enters the property; nearest rail is unrelated.",
     "siteAreaAcres": "Derived from perimeter polygon (~365m x ~402m secured property) ≈ 36 acres."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.morenovalleybusiness.com/moreno-valley-celebrates-the-e-commerce-center-opening-by-amazon-fulfillment/",
+        "date": "2014",
+        "type": "econ-dev",
+        "claim": "City of Moreno Valley econ-dev confirms Amazon opened its ONT8 e-commerce/fulfillment center at 24300 Nandina Ave (~1.25M sqft on 75 acres)"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.aol.com/news/amazon-workers-fulfillment-center-moreno-013135268.html",
+        "date": "2024",
+        "type": "press",
+        "claim": "News coverage of an active union drive among workers at the ONT8 Moreno Valley fulfillment center, confirming ongoing operation"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "~1.25M sqft Amazon FC at 24300 Nandina Ave, Moreno Valley, opened 2014, with 2024 labor coverage confirming active operation; no closure/WARN.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

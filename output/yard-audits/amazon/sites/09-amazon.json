@@ -1,57 +1,166 @@
 {
   "name": "Amazon MDW2 Fulfillment Center Joliet IL",
   "type": "Fulfillment Center",
-  "coords": { "lat": 41.48334, "lng": -88.07153 },
+  "coords": {
+    "lat": 41.48334,
+    "lng": -88.07153
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 41.4848, "lng": -88.0735 },
-      { "lat": 41.4863, "lng": -88.0701 },
-      { "lat": 41.4815, "lng": -88.0701 },
-      { "lat": 41.4815, "lng": -88.0735 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 41.48605, "lng": -88.07205 },
-      { "lat": 41.48615, "lng": -88.07095 },
-      { "lat": 41.48575, "lng": -88.07090 },
-      { "lat": 41.48565, "lng": -88.07200 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.4848,
+          "lng": -88.0735
+        },
+        {
+          "lat": 41.4863,
+          "lng": -88.0701
+        },
+        {
+          "lat": 41.4815,
+          "lng": -88.0701
+        },
+        {
+          "lat": 41.4815,
+          "lng": -88.0735
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.48605,
+          "lng": -88.07205
+        },
+        {
+          "lat": 41.48615,
+          "lng": -88.07095
+        },
+        {
+          "lat": 41.48575,
+          "lng": -88.0709
+        },
+        {
+          "lat": 41.48565,
+          "lng": -88.072
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 41.48625, "lng": -88.07355 },
-        { "lat": 41.48630, "lng": -88.07255 },
-        { "lat": 41.48455, "lng": -88.07250 },
-        { "lat": 41.48450, "lng": -88.07350 }
-      ] },
-      { "ring": [
-        { "lat": 41.48620, "lng": -88.07235 },
-        { "lat": 41.48630, "lng": -88.07060 },
-        { "lat": 41.48490, "lng": -88.07055 },
-        { "lat": 41.48485, "lng": -88.07230 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 41.48625,
+            "lng": -88.07355
+          },
+          {
+            "lat": 41.4863,
+            "lng": -88.07255
+          },
+          {
+            "lat": 41.48455,
+            "lng": -88.0725
+          },
+          {
+            "lat": 41.4845,
+            "lng": -88.0735
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 41.4862,
+            "lng": -88.07235
+          },
+          {
+            "lat": 41.4863,
+            "lng": -88.0706
+          },
+          {
+            "lat": 41.4849,
+            "lng": -88.07055
+          },
+          {
+            "lat": 41.48485,
+            "lng": -88.0723
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 41.48470, "lng": -88.07310 },
-        { "lat": 41.48475, "lng": -88.07270 },
-        { "lat": 41.48195, "lng": -88.07260 },
-        { "lat": 41.48190, "lng": -88.07300 }
-      ] },
-      { "ring": [
-        { "lat": 41.48385, "lng": -88.07035 },
-        { "lat": 41.48390, "lng": -88.06995 },
-        { "lat": 41.48195, "lng": -88.06990 },
-        { "lat": 41.48190, "lng": -88.07030 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 41.4847,
+            "lng": -88.0731
+          },
+          {
+            "lat": 41.48475,
+            "lng": -88.0727
+          },
+          {
+            "lat": 41.48195,
+            "lng": -88.0726
+          },
+          {
+            "lat": 41.4819,
+            "lng": -88.073
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 41.48385,
+            "lng": -88.07035
+          },
+          {
+            "lat": 41.4839,
+            "lng": -88.06995
+          },
+          {
+            "lat": 41.48195,
+            "lng": -88.0699
+          },
+          {
+            "lat": 41.4819,
+            "lng": -88.0703
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 41.48560, "lng": -88.07230 },
-      { "lat": 41.48565, "lng": -88.07060 },
-      { "lat": 41.48490, "lng": -88.07055 },
-      { "lat": 41.48485, "lng": -88.07225 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 41.4856,
+          "lng": -88.0723
+        },
+        {
+          "lat": 41.48565,
+          "lng": -88.0706
+        },
+        {
+          "lat": 41.4849,
+          "lng": -88.07055
+        },
+        {
+          "lat": 41.48485,
+          "lng": -88.07225
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 269, "pano": "Cxh1mjZ1NjW5Nb4KuxYKpw", "hasCoverage": true },
-      "truckGate": { "heading": 5, "pano": "hf5GHdqeCiB5yrOdWqgVCQ", "hasCoverage": true }
+      "perimeter": {
+        "heading": 269,
+        "pano": "Cxh1mjZ1NjW5Nb4KuxYKpw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 5,
+        "pano": "hf5GHdqeCiB5yrOdWqgVCQ",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -89,7 +198,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "shipRcvSeparate"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Confirmed in z21 satellite (41.4858,-88.0716) and Street View (pano hf5GHdqeCiB5yrOdWqgVCQ, 2025-05): striped barrier line across multiple gate lanes with gate-arm posts, chain-link perimeter fence along Emerald Dr frontage, hatched approach pavement.",
     "guardShack": "Small white-roofed booth (~1-2 car footprint) sits on the gate island between the entry/exit lanes at ~41.4860,-88.0714, visible in mdw2_gate_final z21 with a dark canopy; classic staffed guard shack beside the barrier.",
@@ -107,5 +220,31 @@
     "railServed": "No rail spur enters this parcel (intermodal rail is elsewhere in CenterPoint, not into MDW2).",
     "siteAreaAcres": "~31.6 acres for the fenced truck-side operation (building + drop yards + truck court + dock aprons); the full deeded parcel including the eastern grass buffer is larger."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.indeed.com/q-mdw2-amazon-l-joliet,-il-jobs.html",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "61 open MDW2 Amazon roles in Joliet IL as of June 2026, incl. Ops Managers — facility staffing actively"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.warehouseworkernetwork.com/listing/mdw2-amazon-fulfillment-center-joliet-illinois/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "MDW2 Amazon FC Joliet listed as operating, ~700k sqft FC at Emerald/Laraway"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active 2026 MDW2-coded hiring on the Joliet building plus operating FC listings; no WARN/cancellation for this site.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

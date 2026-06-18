@@ -1,59 +1,174 @@
 {
   "name": "Amazon SCK4 Inbound Cross-Dock Stockton CA",
   "type": "Inbound Cross-Dock (IXD)",
-  "coords": { "lat": 37.91015, "lng": -121.18875 },
+  "coords": {
+    "lat": 37.91015,
+    "lng": -121.18875
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 37.91285, "lng": -121.19235 },
-      { "lat": 37.91300, "lng": -121.18760 },
-      { "lat": 37.91255, "lng": -121.18605 },
-      { "lat": 37.90850, "lng": -121.18610 },
-      { "lat": 37.90835, "lng": -121.19010 },
-      { "lat": 37.90870, "lng": -121.19235 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 37.90905, "lng": -121.18915 },
-      { "lat": 37.90905, "lng": -121.18840 },
-      { "lat": 37.90840, "lng": -121.18840 },
-      { "lat": 37.90840, "lng": -121.18915 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 37.91285,
+          "lng": -121.19235
+        },
+        {
+          "lat": 37.913,
+          "lng": -121.1876
+        },
+        {
+          "lat": 37.91255,
+          "lng": -121.18605
+        },
+        {
+          "lat": 37.9085,
+          "lng": -121.1861
+        },
+        {
+          "lat": 37.90835,
+          "lng": -121.1901
+        },
+        {
+          "lat": 37.9087,
+          "lng": -121.19235
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 37.90905,
+          "lng": -121.18915
+        },
+        {
+          "lat": 37.90905,
+          "lng": -121.1884
+        },
+        {
+          "lat": 37.9084,
+          "lng": -121.1884
+        },
+        {
+          "lat": 37.9084,
+          "lng": -121.18915
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 37.91245, "lng": -121.19175 },
-        { "lat": 37.91250, "lng": -121.19035 },
-        { "lat": 37.90895, "lng": -121.19050 },
-        { "lat": 37.90890, "lng": -121.19185 }
-      ] },
-      { "ring": [
-        { "lat": 37.91195, "lng": -121.18760 },
-        { "lat": 37.91200, "lng": -121.18620 },
-        { "lat": 37.90955, "lng": -121.18625 },
-        { "lat": 37.90950, "lng": -121.18760 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 37.91245,
+            "lng": -121.19175
+          },
+          {
+            "lat": 37.9125,
+            "lng": -121.19035
+          },
+          {
+            "lat": 37.90895,
+            "lng": -121.1905
+          },
+          {
+            "lat": 37.9089,
+            "lng": -121.19185
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 37.91195,
+            "lng": -121.1876
+          },
+          {
+            "lat": 37.912,
+            "lng": -121.1862
+          },
+          {
+            "lat": 37.90955,
+            "lng": -121.18625
+          },
+          {
+            "lat": 37.9095,
+            "lng": -121.1876
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 37.91120, "lng": -121.19055 },
-        { "lat": 37.91125, "lng": -121.18675 },
-        { "lat": 37.91100, "lng": -121.18675 },
-        { "lat": 37.91095, "lng": -121.19055 }
-      ] },
-      { "ring": [
-        { "lat": 37.90945, "lng": -121.19060 },
-        { "lat": 37.90950, "lng": -121.18680 },
-        { "lat": 37.90925, "lng": -121.18680 },
-        { "lat": 37.90920, "lng": -121.19060 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 37.9112,
+            "lng": -121.19055
+          },
+          {
+            "lat": 37.91125,
+            "lng": -121.18675
+          },
+          {
+            "lat": 37.911,
+            "lng": -121.18675
+          },
+          {
+            "lat": 37.91095,
+            "lng": -121.19055
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 37.90945,
+            "lng": -121.1906
+          },
+          {
+            "lat": 37.9095,
+            "lng": -121.1868
+          },
+          {
+            "lat": 37.90925,
+            "lng": -121.1868
+          },
+          {
+            "lat": 37.9092,
+            "lng": -121.1906
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 37.90905, "lng": -121.19035 },
-      { "lat": 37.90910, "lng": -121.18815 },
-      { "lat": 37.90855, "lng": -121.18815 },
-      { "lat": 37.90850, "lng": -121.19035 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 37.90905,
+          "lng": -121.19035
+        },
+        {
+          "lat": 37.9091,
+          "lng": -121.18815
+        },
+        {
+          "lat": 37.90855,
+          "lng": -121.18815
+        },
+        {
+          "lat": 37.9085,
+          "lng": -121.19035
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 180, "pano": "rZTcwm6IsN1SzzPIResi8g", "hasCoverage": true },
-      "truckGate": { "heading": 0, "pano": "zcj0gcMLPMyROF2LebnmWw", "hasCoverage": true }
+      "perimeter": {
+        "heading": 180,
+        "pano": "rZTcwm6IsN1SzzPIResi8g",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 0,
+        "pano": "zcj0gcMLPMyROF2LebnmWw",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -62,7 +177,7 @@
     "trailerParkingCapacity": 600,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 60.0,
+    "siteAreaAcres": 60,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@37.91015,-121.18875,400m/data=!3m1!1e3",
@@ -91,7 +206,12 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "trailerParkingCapacity", "dockDoorCount"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "trailerParkingCapacity",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "truckGate": "Multi-lane controlled gate ~150m up the entrance drive from the public frontage road: guard island with STOP pavement markings on both inbound and outbound lanes, yellow hatched safety striping (37.9086,-121.1888).",
     "guardShack": "Staffed booth structure(s) on a raised concrete center island splitting in/out lanes, ~1-2 car footprint with canopy - visible at z21.",
@@ -112,5 +232,31 @@
     "railServed": "No rail spur enters the property; nearest linear corridors are roads.",
     "yardMetrics": "dockDoorCount, trailersVisible and trailerParkingCapacity are overhead estimates - the trailer rows are dense and partly cut off at frame edges; treat as approximate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.businesswire.com/news/home/20231012664307/en",
+        "date": "2023-10-12",
+        "type": "press",
+        "claim": "Amazon opened SCK4 Inbound Cross-Dock (IXD) on S Austin Rd, Stockton; ~638k sqft, 2,200 jobs"
+      },
+      {
+        "tier": 1,
+        "url": "https://hiring.amazon.com/locations/stockton-jobs",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Amazon currently hiring at Stockton (Austin Rd / SCK4)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tier-1 Amazon press open (Oct 2023) + live 2026 careers on the exact S Austin Rd IXD; the June-2024 Stockton closure was a different building (4601 Newcastle Drive), not SCK4.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -1,53 +1,154 @@
 {
   "name": "Amazon TPA1 Fulfillment Center Ruskin FL",
   "type": "Fulfillment Center",
-  "coords": { "lat": 27.726800, "lng": -82.387200 },
+  "coords": {
+    "lat": 27.7268,
+    "lng": -82.3872
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 27.73000, "lng": -82.39050 },
-      { "lat": 27.72930, "lng": -82.38780 },
-      { "lat": 27.72460, "lng": -82.38440 },
-      { "lat": 27.72340, "lng": -82.38540 },
-      { "lat": 27.72360, "lng": -82.38780 },
-      { "lat": 27.72400, "lng": -82.38960 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 27.72560, "lng": -82.38640 },
-      { "lat": 27.72525, "lng": -82.38555 },
-      { "lat": 27.72475, "lng": -82.38595 },
-      { "lat": 27.72510, "lng": -82.38680 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 27.73,
+          "lng": -82.3905
+        },
+        {
+          "lat": 27.7293,
+          "lng": -82.3878
+        },
+        {
+          "lat": 27.7246,
+          "lng": -82.3844
+        },
+        {
+          "lat": 27.7234,
+          "lng": -82.3854
+        },
+        {
+          "lat": 27.7236,
+          "lng": -82.3878
+        },
+        {
+          "lat": 27.724,
+          "lng": -82.3896
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 27.7256,
+          "lng": -82.3864
+        },
+        {
+          "lat": 27.72525,
+          "lng": -82.38555
+        },
+        {
+          "lat": 27.72475,
+          "lng": -82.38595
+        },
+        {
+          "lat": 27.7251,
+          "lng": -82.3868
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 27.72860, "lng": -82.38640 },
-        { "lat": 27.72540, "lng": -82.38415 },
-        { "lat": 27.72470, "lng": -82.38500 },
-        { "lat": 27.72790, "lng": -82.38725 }
-      ] },
-      { "ring": [
-        { "lat": 27.72500, "lng": -82.38790 },
-        { "lat": 27.72475, "lng": -82.38640 },
-        { "lat": 27.72390, "lng": -82.38690 },
-        { "lat": 27.72415, "lng": -82.38835 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 27.7286,
+            "lng": -82.3864
+          },
+          {
+            "lat": 27.7254,
+            "lng": -82.38415
+          },
+          {
+            "lat": 27.7247,
+            "lng": -82.385
+          },
+          {
+            "lat": 27.7279,
+            "lng": -82.38725
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 27.725,
+            "lng": -82.3879
+          },
+          {
+            "lat": 27.72475,
+            "lng": -82.3864
+          },
+          {
+            "lat": 27.7239,
+            "lng": -82.3869
+          },
+          {
+            "lat": 27.72415,
+            "lng": -82.38835
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 27.72895, "lng": -82.38690 },
-        { "lat": 27.72545, "lng": -82.38450 },
-        { "lat": 27.72525, "lng": -82.38490 },
-        { "lat": 27.72875, "lng": -82.38730 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 27.72895,
+            "lng": -82.3869
+          },
+          {
+            "lat": 27.72545,
+            "lng": -82.3845
+          },
+          {
+            "lat": 27.72525,
+            "lng": -82.3849
+          },
+          {
+            "lat": 27.72875,
+            "lng": -82.3873
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 27.72420, "lng": -82.38895 },
-      { "lat": 27.72385, "lng": -82.38760 },
-      { "lat": 27.72330, "lng": -82.38790 },
-      { "lat": 27.72365, "lng": -82.38925 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 27.7242,
+          "lng": -82.38895
+        },
+        {
+          "lat": 27.72385,
+          "lng": -82.3876
+        },
+        {
+          "lat": 27.7233,
+          "lng": -82.3879
+        },
+        {
+          "lat": 27.72365,
+          "lng": -82.38925
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 117, "pano": "PsJUzMPaQhpFtpbdQe5R0g", "hasCoverage": true },
-      "truckGate": { "heading": 57, "pano": "N_lPZyK0j_8mB--1Gie8pQ", "hasCoverage": true }
+      "perimeter": {
+        "heading": 117,
+        "pano": "PsJUzMPaQhpFtpbdQe5R0g",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 57,
+        "pano": "N_lPZyK0j_8mB--1Gie8pQ",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -85,7 +186,12 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "multiStep"],
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "multiStep"
+  ],
   "fieldNotes": {
     "truckGate": "Controlled truck entrance on the south access road off Laurel Ridge Ave: the truck drive pinches at a checkpoint with lane striping/crosswalk markings before entering the secured east drop yard (visible at z19, ~27.7252,-82.3858).",
     "guardShack": "Small booth-sized structure(s) sit beside the truck lane at the checkpoint pinch-point; consistent with a staffed guard booth at an Amazon FC, but exact roofline is at the edge of satellite resolution (no Street View reaches the internal gate), so flagged uncertain.",
@@ -103,5 +209,31 @@
     "multiStep": "No clearly distinct second checkpoint (scale house / second booth) after the gate is visible; left false.",
     "yardMetrics": "Counts are overhead estimates: dock doors ~120 (50+), trailers visible ~140, capacity ~200, area ~65 ac from the perimeter polygon."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.fox13news.com/news/amazon-launches-prime-air-delivery-center-ruskin",
+        "date": "2026-03",
+        "type": "press",
+        "claim": "Amazon launched Prime Air drone delivery at its TPA1 fulfillment center in Ruskin FL, first FL site"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.tampabaychamber.com/membership/corporate/amazon-tpa1/",
+        "date": "2026-01",
+        "type": "econ-dev",
+        "claim": "Amazon TPA1 listed as active member facility, Ruskin FL"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Prime Air launched at TPA1 in March 2026 (Amazon investing, not closing); FL Amazon closure in search was TMB8 Homestead, not Ruskin.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -1,46 +1,127 @@
 {
   "name": "Amazon LGB3 Fulfillment Center Eastvale CA",
   "type": "Fulfillment Center",
-  "coords": { "lat": 33.9972, "lng": -117.5528 },
+  "coords": {
+    "lat": 33.9972,
+    "lng": -117.5528
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 33.99955, "lng": -117.55465 },
-      { "lat": 33.99935, "lng": -117.55060 },
-      { "lat": 33.99505, "lng": -117.55090 },
-      { "lat": 33.99520, "lng": -117.55485 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 33.99835, "lng": -117.55455 },
-      { "lat": 33.99835, "lng": -117.55395 },
-      { "lat": 33.99775, "lng": -117.55395 },
-      { "lat": 33.99775, "lng": -117.55455 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.99955,
+          "lng": -117.55465
+        },
+        {
+          "lat": 33.99935,
+          "lng": -117.5506
+        },
+        {
+          "lat": 33.99505,
+          "lng": -117.5509
+        },
+        {
+          "lat": 33.9952,
+          "lng": -117.55485
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.99835,
+          "lng": -117.55455
+        },
+        {
+          "lat": 33.99835,
+          "lng": -117.55395
+        },
+        {
+          "lat": 33.99775,
+          "lng": -117.55395
+        },
+        {
+          "lat": 33.99775,
+          "lng": -117.55455
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 33.99920, "lng": -117.55190 },
-        { "lat": 33.99905, "lng": -117.55065 },
-        { "lat": 33.99560, "lng": -117.55095 },
-        { "lat": 33.99570, "lng": -117.55215 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.9992,
+            "lng": -117.5519
+          },
+          {
+            "lat": 33.99905,
+            "lng": -117.55065
+          },
+          {
+            "lat": 33.9956,
+            "lng": -117.55095
+          },
+          {
+            "lat": 33.9957,
+            "lng": -117.55215
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 33.99925, "lng": -117.55205 },
-        { "lat": 33.99920, "lng": -117.55175 },
-        { "lat": 33.99560, "lng": -117.55205 },
-        { "lat": 33.99565, "lng": -117.55235 }
-      ] },
-      { "ring": [
-        { "lat": 33.99545, "lng": -117.55430 },
-        { "lat": 33.99540, "lng": -117.55230 },
-        { "lat": 33.99510, "lng": -117.55232 },
-        { "lat": 33.99515, "lng": -117.55432 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.99925,
+            "lng": -117.55205
+          },
+          {
+            "lat": 33.9992,
+            "lng": -117.55175
+          },
+          {
+            "lat": 33.9956,
+            "lng": -117.55205
+          },
+          {
+            "lat": 33.99565,
+            "lng": -117.55235
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.99545,
+            "lng": -117.5543
+          },
+          {
+            "lat": 33.9954,
+            "lng": -117.5523
+          },
+          {
+            "lat": 33.9951,
+            "lng": -117.55232
+          },
+          {
+            "lat": 33.99515,
+            "lng": -117.55432
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 359, "pano": "GrITUw3fPxk727PT30Hi3g", "hasCoverage": true },
-      "truckGate": { "heading": 89, "pano": "GF_R5YPSsNzYH9gDa4gNHw", "hasCoverage": true }
+      "perimeter": {
+        "heading": 359,
+        "pano": "GrITUw3fPxk727PT30Hi3g",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 89,
+        "pano": "GF_R5YPSsNzYH9gDa4gNHw",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -49,7 +130,7 @@
     "trailerParkingCapacity": 220,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 47.0,
+    "siteAreaAcres": 47,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.9972,-117.5528,400m/data=!3m1!1e3",
@@ -78,7 +159,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "guardShack"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "guardShack"
+  ],
   "fieldNotes": {
     "truckGate": "Controlled entry. Amazon Tours guidance states drivers/visitors enter at the main guard post at the intersection of Goodman Way and The Station; the signalized main driveway (NW corner, monument sign '4950 Goodman Way') is the single controlled checkpoint into a fully fenced campus.",
     "guardShack": "Amazon explicitly references a staffed 'main guard post' at the entrance. Booth structure not individually resolvable in overhead imagery (entrance canopy/landscaping obscures it) and the truck side faces I-15 with no Street View, so flagged uncertain, but staffed-guard operation is corroborated by the operator.",
@@ -98,5 +183,31 @@
     "siteAreaAcres": "~47 acres from the traced perimeter polygon (building + west parking + east drop yard).",
     "yardMetrics": "Door/trailer counts are honest overhead estimates from z19-z20 crops; ranges are confident but exact integers approximate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://events.amazontours.com/na/onsite/LGB3",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Amazon's own tour portal lists LGB3 Eastvale CA (4950 Goodman Way) as a currently operating robotics sortable FC with bookable tours"
+      },
+      {
+        "tier": 1,
+        "url": "https://help.amazontours.com/hc/en-us/articles/16577675531284-LGB3-Tours-Eastvale-CA",
+        "date": "2026",
+        "type": "locator",
+        "claim": "Amazon Tours help center describes LGB3 as an active FC with private Wednesday tour sessions"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Amazon-owned tour portal + help center list LGB3 (4950 Goodman Way, Eastvale) as operating FC; closure gauntlet found CA closures only at other sites (Irvine, West Sacramento).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -1,48 +1,141 @@
 {
   "name": "Amazon BFI4 Fulfillment Center Kent WA",
   "type": "Fulfillment Center",
-  "coords": { "lat": 47.41452, "lng": -122.25782 },
+  "coords": {
+    "lat": 47.41452,
+    "lng": -122.25782
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 47.41632, "lng": -122.26015 },
-      { "lat": 47.41618, "lng": -122.25470 },
-      { "lat": 47.41285, "lng": -122.25455 },
-      { "lat": 47.41280, "lng": -122.26010 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 47.41568, "lng": -122.25560 },
-      { "lat": 47.41566, "lng": -122.25505 },
-      { "lat": 47.41525, "lng": -122.25508 },
-      { "lat": 47.41527, "lng": -122.25562 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 47.41632,
+          "lng": -122.26015
+        },
+        {
+          "lat": 47.41618,
+          "lng": -122.2547
+        },
+        {
+          "lat": 47.41285,
+          "lng": -122.25455
+        },
+        {
+          "lat": 47.4128,
+          "lng": -122.2601
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 47.41568,
+          "lng": -122.2556
+        },
+        {
+          "lat": 47.41566,
+          "lng": -122.25505
+        },
+        {
+          "lat": 47.41525,
+          "lng": -122.25508
+        },
+        {
+          "lat": 47.41527,
+          "lng": -122.25562
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 47.41618, "lng": -122.26010 },
-        { "lat": 47.41606, "lng": -122.25510 },
-        { "lat": 47.41578, "lng": -122.25512 },
-        { "lat": 47.41590, "lng": -122.26012 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 47.41618,
+            "lng": -122.2601
+          },
+          {
+            "lat": 47.41606,
+            "lng": -122.2551
+          },
+          {
+            "lat": 47.41578,
+            "lng": -122.25512
+          },
+          {
+            "lat": 47.4159,
+            "lng": -122.26012
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 47.41585, "lng": -122.26010 },
-        { "lat": 47.41573, "lng": -122.25515 },
-        { "lat": 47.41552, "lng": -122.25517 },
-        { "lat": 47.41564, "lng": -122.26012 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 47.41585,
+            "lng": -122.2601
+          },
+          {
+            "lat": 47.41573,
+            "lng": -122.25515
+          },
+          {
+            "lat": 47.41552,
+            "lng": -122.25517
+          },
+          {
+            "lat": 47.41564,
+            "lng": -122.26012
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 47.41560, "lng": -122.25560 },
-      { "lat": 47.41558, "lng": -122.25445 },
-      { "lat": 47.41510, "lng": -122.25448 },
-      { "lat": 47.41512, "lng": -122.25562 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 47.4156,
+          "lng": -122.2556
+        },
+        {
+          "lat": 47.41558,
+          "lng": -122.25445
+        },
+        {
+          "lat": 47.4151,
+          "lng": -122.25448
+        },
+        {
+          "lat": 47.41512,
+          "lng": -122.25562
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 200, "pano": "", "hasCoverage": true },
-      "truckGate": { "heading": 240, "pano": "", "hasCoverage": true },
-      "dropYards": { "heading": 190, "pano": "", "hasCoverage": true },
-      "dockAprons": { "heading": 190, "pano": "", "hasCoverage": true },
-      "staging": { "heading": 250, "pano": "", "hasCoverage": true }
+      "perimeter": {
+        "heading": 200,
+        "pano": "",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 240,
+        "pano": "",
+        "hasCoverage": true
+      },
+      "dropYards": {
+        "heading": 190,
+        "pano": "",
+        "hasCoverage": true
+      },
+      "dockAprons": {
+        "heading": 190,
+        "pano": "",
+        "hasCoverage": true
+      },
+      "staging": {
+        "heading": 250,
+        "pano": "",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -80,7 +173,12 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "trailerParkingCapacity", "dockDoorCount"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "trailerParkingCapacity",
+    "dockDoorCount"
+  ],
   "fieldNotes": {
     "truckGate": "Controlled, guarded truck gate at NE corner off the north service road: channelized lanes with crosshatch markings, barrier arms/bollards (yellow+orange) across the lanes, chain-link perimeter fencing both sides. Confirmed in satellite (z20) and 2025-05 Street View at the gate.",
     "guardShack": "Small white guard booth structure beside the gate lanes, ~1-2 vehicle footprint, visible in z20 satellite and Street View.",
@@ -99,5 +197,31 @@
     "shipRcvSeparate": "Single continuous dock bank on the north face; shipping/receiving not on physically separate building faces.",
     "streetViewMeta": "Google Street View coverage exists along the north service road (panos captured 2025-05); pano ids not hard-coded - heading values point the camera from the road toward each zone."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://events.amazontours.com/na/onsite/BFI4",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Amazon's official tours site lists BFI4 Kent as an active facility currently accepting in-person tours"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.tripadvisor.com/Attraction_Review-g58537-d33414448-Reviews-Amazon_Fulfillment_Center_bfi4_Tour-Kent_Washington.html",
+        "date": "2026",
+        "type": "press",
+        "claim": "BFI4 Kent fulfillment center tour listed as operating in 2026"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active ~850k sqft robotics FC in Kent WA per Amazon's own tours page + 2026 tour listing; no closure negative. Note: actual address 21005 64th Ave S, Kent (not 2700 Center Dr).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

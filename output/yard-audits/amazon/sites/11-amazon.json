@@ -1,49 +1,140 @@
 {
   "name": "Amazon CMH1 Fulfillment Center Etna OH",
   "type": "Fulfillment Center",
-  "coords": { "lat": 39.9525, "lng": -82.7122 },
+  "coords": {
+    "lat": 39.9525,
+    "lng": -82.7122
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 39.95580, "lng": -82.71520 },
-      { "lat": 39.95640, "lng": -82.70880 },
-      { "lat": 39.95150, "lng": -82.70840 },
-      { "lat": 39.94995, "lng": -82.70960 },
-      { "lat": 39.94990, "lng": -82.71460 },
-      { "lat": 39.95300, "lng": -82.71530 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 39.95648, "lng": -82.71010 },
-      { "lat": 39.95648, "lng": -82.70955 },
-      { "lat": 39.95585, "lng": -82.70958 },
-      { "lat": 39.95585, "lng": -82.71012 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.9558,
+          "lng": -82.7152
+        },
+        {
+          "lat": 39.9564,
+          "lng": -82.7088
+        },
+        {
+          "lat": 39.9515,
+          "lng": -82.7084
+        },
+        {
+          "lat": 39.94995,
+          "lng": -82.7096
+        },
+        {
+          "lat": 39.9499,
+          "lng": -82.7146
+        },
+        {
+          "lat": 39.953,
+          "lng": -82.7153
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.95648,
+          "lng": -82.7101
+        },
+        {
+          "lat": 39.95648,
+          "lng": -82.70955
+        },
+        {
+          "lat": 39.95585,
+          "lng": -82.70958
+        },
+        {
+          "lat": 39.95585,
+          "lng": -82.71012
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 39.95205, "lng": -82.71095 },
-        { "lat": 39.95195, "lng": -82.70915 },
-        { "lat": 39.95005, "lng": -82.70960 },
-        { "lat": 39.95015, "lng": -82.71135 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 39.95205,
+            "lng": -82.71095
+          },
+          {
+            "lat": 39.95195,
+            "lng": -82.70915
+          },
+          {
+            "lat": 39.95005,
+            "lng": -82.7096
+          },
+          {
+            "lat": 39.95015,
+            "lng": -82.71135
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 39.95470, "lng": -82.71505 },
-        { "lat": 39.95205, "lng": -82.71430 },
-        { "lat": 39.95185, "lng": -82.71475 },
-        { "lat": 39.95450, "lng": -82.71550 }
-      ] },
-      { "ring": [
-        { "lat": 39.95205, "lng": -82.71430 },
-        { "lat": 39.95040, "lng": -82.71385 },
-        { "lat": 39.95025, "lng": -82.71430 },
-        { "lat": 39.95190, "lng": -82.71478 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 39.9547,
+            "lng": -82.71505
+          },
+          {
+            "lat": 39.95205,
+            "lng": -82.7143
+          },
+          {
+            "lat": 39.95185,
+            "lng": -82.71475
+          },
+          {
+            "lat": 39.9545,
+            "lng": -82.7155
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 39.95205,
+            "lng": -82.7143
+          },
+          {
+            "lat": 39.9504,
+            "lng": -82.71385
+          },
+          {
+            "lat": 39.95025,
+            "lng": -82.7143
+          },
+          {
+            "lat": 39.9519,
+            "lng": -82.71478
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 206, "pano": "ReUzacbaFDYuKmXYl7MuiA", "hasCoverage": true },
-      "truckGate": { "heading": 206, "pano": "ReUzacbaFDYuKmXYl7MuiA", "hasCoverage": true },
-      "dropYards": { "heading": 250, "pano": "FFKxUiKHw-QuJ6uHRtVanQ", "hasCoverage": true }
+      "perimeter": {
+        "heading": 206,
+        "pano": "ReUzacbaFDYuKmXYl7MuiA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 206,
+        "pano": "ReUzacbaFDYuKmXYl7MuiA",
+        "hasCoverage": true
+      },
+      "dropYards": {
+        "heading": 250,
+        "pano": "FFKxUiKHw-QuJ6uHRtVanQ",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -81,7 +172,12 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "shipRcvSeparate", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Both public-road entrances (signalized NE drive off National Rd SW and the NW dock drive) are open: 2024-2025 Street View and z19 satellite show no barrier arm, sliding gate, or checkpoint pinch-point at either road. Open Amazon FC campus.",
     "guardShack": "No staffed booth at either entrance. The NE entrance Street View shows an open multi-lane internal road straight into employee parking and the building, no booth beside the lane.",
@@ -98,5 +194,31 @@
     "railServed": "No rail spur enters the property.",
     "trailerParkingCapacity": "Estimate combines SE drop-yard angled stalls and dock-side trailer rows; approximate from overhead imagery."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://events.amazontours.com/na/onsite/CMH1",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Amazon's own tour portal lists CMH1 Etna OH as a currently operating FC with bookable in-person tours"
+      },
+      {
+        "tier": 2,
+        "url": "https://business.pataskalachamber.com/list/member/amazon-fulfillment-cmh1-1249",
+        "date": "2026-06",
+        "type": "econ-dev",
+        "claim": "Pataskala Area Chamber lists Amazon Fulfillment CMH1 as an active member business at 11999 National Rd SW"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Amazon-owned tour portal lists CMH1 as operating FC + active careers + chamber listing; closure gauntlet returned only unrelated Ohio janitorial-contractor layoffs at other sites.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

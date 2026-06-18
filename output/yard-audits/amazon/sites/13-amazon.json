@@ -1,59 +1,174 @@
 {
   "name": "Amazon SBD2 Fulfillment Center San Bernardino CA",
   "type": "Fulfillment Center",
-  "coords": { "lat": 34.07280, "lng": -117.28350 },
+  "coords": {
+    "lat": 34.0728,
+    "lng": -117.2835
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 34.0762, "lng": -117.2800 },
-      { "lat": 34.0708, "lng": -117.2795 },
-      { "lat": 34.0705, "lng": -117.2820 },
-      { "lat": 34.0703, "lng": -117.2858 },
-      { "lat": 34.0745, "lng": -117.2862 },
-      { "lat": 34.0762, "lng": -117.2850 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 34.07505, "lng": -117.27955 },
-      { "lat": 34.07505, "lng": -117.27890 },
-      { "lat": 34.07430, "lng": -117.27890 },
-      { "lat": 34.07430, "lng": -117.27955 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.0762,
+          "lng": -117.28
+        },
+        {
+          "lat": 34.0708,
+          "lng": -117.2795
+        },
+        {
+          "lat": 34.0705,
+          "lng": -117.282
+        },
+        {
+          "lat": 34.0703,
+          "lng": -117.2858
+        },
+        {
+          "lat": 34.0745,
+          "lng": -117.2862
+        },
+        {
+          "lat": 34.0762,
+          "lng": -117.285
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.07505,
+          "lng": -117.27955
+        },
+        {
+          "lat": 34.07505,
+          "lng": -117.2789
+        },
+        {
+          "lat": 34.0743,
+          "lng": -117.2789
+        },
+        {
+          "lat": 34.0743,
+          "lng": -117.27955
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 34.07620, "lng": -117.28150 },
-        { "lat": 34.07620, "lng": -117.28470 },
-        { "lat": 34.07530, "lng": -117.28470 },
-        { "lat": 34.07530, "lng": -117.28150 }
-      ] },
-      { "ring": [
-        { "lat": 34.07470, "lng": -117.28490 },
-        { "lat": 34.07470, "lng": -117.28590 },
-        { "lat": 34.07150, "lng": -117.28560 },
-        { "lat": 34.07150, "lng": -117.28470 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 34.0762,
+            "lng": -117.2815
+          },
+          {
+            "lat": 34.0762,
+            "lng": -117.2847
+          },
+          {
+            "lat": 34.0753,
+            "lng": -117.2847
+          },
+          {
+            "lat": 34.0753,
+            "lng": -117.2815
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 34.0747,
+            "lng": -117.2849
+          },
+          {
+            "lat": 34.0747,
+            "lng": -117.2859
+          },
+          {
+            "lat": 34.0715,
+            "lng": -117.2856
+          },
+          {
+            "lat": 34.0715,
+            "lng": -117.2847
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 34.07115, "lng": -117.28100 },
-        { "lat": 34.07115, "lng": -117.28430 },
-        { "lat": 34.07065, "lng": -117.28430 },
-        { "lat": 34.07065, "lng": -117.28100 }
-      ] },
-      { "ring": [
-        { "lat": 34.07520, "lng": -117.28150 },
-        { "lat": 34.07520, "lng": -117.28430 },
-        { "lat": 34.07475, "lng": -117.28430 },
-        { "lat": 34.07475, "lng": -117.28150 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 34.07115,
+            "lng": -117.281
+          },
+          {
+            "lat": 34.07115,
+            "lng": -117.2843
+          },
+          {
+            "lat": 34.07065,
+            "lng": -117.2843
+          },
+          {
+            "lat": 34.07065,
+            "lng": -117.281
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 34.0752,
+            "lng": -117.2815
+          },
+          {
+            "lat": 34.0752,
+            "lng": -117.2843
+          },
+          {
+            "lat": 34.07475,
+            "lng": -117.2843
+          },
+          {
+            "lat": 34.07475,
+            "lng": -117.2815
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 34.07460, "lng": -117.27960 },
-      { "lat": 34.07460, "lng": -117.28250 },
-      { "lat": 34.07370, "lng": -117.28250 },
-      { "lat": 34.07370, "lng": -117.27960 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 34.0746,
+          "lng": -117.2796
+        },
+        {
+          "lat": 34.0746,
+          "lng": -117.2825
+        },
+        {
+          "lat": 34.0737,
+          "lng": -117.2825
+        },
+        {
+          "lat": 34.0737,
+          "lng": -117.2796
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 247, "pano": "lCEQhIYK8lAI2ARkJB0yEQ", "hasCoverage": true },
-      "truckGate": { "heading": 246, "pano": "lCEQhIYK8lAI2ARkJB0yEQ", "hasCoverage": true }
+      "perimeter": {
+        "heading": 247,
+        "pano": "lCEQhIYK8lAI2ARkJB0yEQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 246,
+        "pano": "lCEQhIYK8lAI2ARkJB0yEQ",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -91,7 +206,14 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "shipRcvSeparate", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "shipRcvSeparate",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Black metal sliding/swing gate across the controlled entrance drive off S Waterman Ave (east side); continuous metal perimeter fence confirmed in Street View along the full Waterman frontage.",
     "guardShack": "Staffed security building (red/maroon hip roof, multi-window) sits just inside the gate beside the entrance auto-court; visible in satellite z20 and Street View behind the gate.",
@@ -109,5 +231,31 @@
     "siteAreaAcres": "Derived from the traced perimeter polygon (~89 acres) covering the southern building and its dock/drop yards.",
     "connectivityIssue": "Dense Inland Empire industrial corridor adjacent to I-215/I-10; strong cellular coverage expected."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://images-na.ssl-images-amazon.com/images/G/01/magicarp/common/FC_Operating_Times_USAmazon.pdf",
+        "date": "2025-06-20",
+        "type": "locator",
+        "claim": "SBD2 listed as a scheduled active US fulfillment center as of 6/20/2025 (Amazon-domain PDF)"
+      },
+      {
+        "tier": 2,
+        "url": "https://hiring.amazon.com/locations/san-bernardino-ca-jobs",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active Amazon warehouse hiring in San Bernardino CA"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "On Amazon's own scheduled-FC list (6/2025) at 1494 S Waterman Ave, San Bernardino; CA closures in search hit Irvine/West Sacramento, not SBD2.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

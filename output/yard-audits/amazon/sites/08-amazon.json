@@ -8,51 +8,119 @@
   "geofences": {
     "perimeter": {
       "ring": [
-        { "lat": 33.43513, "lng": -112.16885 },
-        { "lat": 33.43507, "lng": -112.16048 },
-        { "lat": 33.43072, "lng": -112.16048 },
-        { "lat": 33.43072, "lng": -112.16885 }
+        {
+          "lat": 33.43513,
+          "lng": -112.16885
+        },
+        {
+          "lat": 33.43507,
+          "lng": -112.16048
+        },
+        {
+          "lat": 33.43072,
+          "lng": -112.16048
+        },
+        {
+          "lat": 33.43072,
+          "lng": -112.16885
+        }
       ]
     },
     "truckGate": {
       "ring": [
-        { "lat": 33.43180, "lng": -112.16860 },
-        { "lat": 33.43180, "lng": -112.16770 },
-        { "lat": 33.43095, "lng": -112.16770 },
-        { "lat": 33.43095, "lng": -112.16860 }
+        {
+          "lat": 33.4318,
+          "lng": -112.1686
+        },
+        {
+          "lat": 33.4318,
+          "lng": -112.1677
+        },
+        {
+          "lat": 33.43095,
+          "lng": -112.1677
+        },
+        {
+          "lat": 33.43095,
+          "lng": -112.1686
+        }
       ]
     },
     "dropYards": [
       {
         "ring": [
-          { "lat": 33.43135, "lng": -112.16830 },
-          { "lat": 33.43135, "lng": -112.16080 },
-          { "lat": 33.43098, "lng": -112.16080 },
-          { "lat": 33.43098, "lng": -112.16830 }
+          {
+            "lat": 33.43135,
+            "lng": -112.1683
+          },
+          {
+            "lat": 33.43135,
+            "lng": -112.1608
+          },
+          {
+            "lat": 33.43098,
+            "lng": -112.1608
+          },
+          {
+            "lat": 33.43098,
+            "lng": -112.1683
+          }
         ]
       }
     ],
     "dockAprons": [
       {
         "ring": [
-          { "lat": 33.43168, "lng": -112.16835 },
-          { "lat": 33.43168, "lng": -112.16075 },
-          { "lat": 33.43138, "lng": -112.16075 },
-          { "lat": 33.43138, "lng": -112.16835 }
+          {
+            "lat": 33.43168,
+            "lng": -112.16835
+          },
+          {
+            "lat": 33.43168,
+            "lng": -112.16075
+          },
+          {
+            "lat": 33.43138,
+            "lng": -112.16075
+          },
+          {
+            "lat": 33.43138,
+            "lng": -112.16835
+          }
         ]
       }
     ],
     "staging": {
       "ring": [
-        { "lat": 33.43095, "lng": -112.16855 },
-        { "lat": 33.43095, "lng": -112.16770 },
-        { "lat": 33.43055, "lng": -112.16770 },
-        { "lat": 33.43055, "lng": -112.16855 }
+        {
+          "lat": 33.43095,
+          "lng": -112.16855
+        },
+        {
+          "lat": 33.43095,
+          "lng": -112.1677
+        },
+        {
+          "lat": 33.43055,
+          "lng": -112.1677
+        },
+        {
+          "lat": 33.43055,
+          "lng": -112.16855
+        }
       ]
     },
     "streetViewMeta": {
-      "perimeter": { "heading": 60, "pano": "QYC0WAXQoSn6fA1-CtfvnA", "hasCoverage": true },
-      "truckGate": { "heading": 41, "pano": "QYC0WAXQoSn6fA1-CtfvnA", "hasCoverage": true }
+      "perimeter": {
+        "heading": 60,
+        "pano": "QYC0WAXQoSn6fA1-CtfvnA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 41,
+        "pano": "QYC0WAXQoSn6fA1-CtfvnA",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -113,5 +181,31 @@
     "siteAreaAcres": "~93.7 ac developed footprint (building + north employee parking + south truck court) from the traced perimeter; the ~1.2M sq ft building dominates.",
     "buildingCount": "Single very large (~1.2M sq ft) FC building; the warehouses north and south across the public roads are separate parcels/tenants, excluded."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.indeed.com/q-amazon-phx6-l-phoenix,-az-jobs.html",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "44 active 'Amazon PHX6' job listings in Phoenix AZ — facility hiring under its code today"
+      },
+      {
+        "tier": 3,
+        "url": "https://moovitapp.com/index/en/public_transit-Amazon_Fulfillment_Center_Phx6-Phoenix_AZ-site_181846862-746",
+        "date": "2025-01",
+        "type": "locator",
+        "claim": "Amazon Fulfillment Center PHX6, W Mohave St, Phoenix — established FC with transit service"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FLAG: probable, not confirmed. Multiple current-dated (May/Jun 2026) sources show PHX6 actively hiring/operating at ~5050 W Mohave St; no Tier-1 aboutamazon/press source surfaced. Closure/WARN gauntlet clean.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -8,74 +8,182 @@
   "geofences": {
     "perimeter": {
       "ring": [
-        { "lat": 32.6629, "lng": -96.738 },
-        { "lat": 32.663, "lng": -96.7347 },
-        { "lat": 32.6625, "lng": -96.7338 },
-        { "lat": 32.6606, "lng": -96.733 },
-        { "lat": 32.6597, "lng": -96.7338 },
-        { "lat": 32.6598, "lng": -96.7362 },
-        { "lat": 32.6606, "lng": -96.7379 },
-        { "lat": 32.662, "lng": -96.7387 }
+        {
+          "lat": 32.6629,
+          "lng": -96.738
+        },
+        {
+          "lat": 32.663,
+          "lng": -96.7347
+        },
+        {
+          "lat": 32.6625,
+          "lng": -96.7338
+        },
+        {
+          "lat": 32.6606,
+          "lng": -96.733
+        },
+        {
+          "lat": 32.6597,
+          "lng": -96.7338
+        },
+        {
+          "lat": 32.6598,
+          "lng": -96.7362
+        },
+        {
+          "lat": 32.6606,
+          "lng": -96.7379
+        },
+        {
+          "lat": 32.662,
+          "lng": -96.7387
+        }
       ]
     },
     "truckGate": {
       "ring": [
-        { "lat": 32.66268, "lng": -96.73805 },
-        { "lat": 32.66262, "lng": -96.73725 },
-        { "lat": 32.66205, "lng": -96.73745 },
-        { "lat": 32.66212, "lng": -96.73815 }
+        {
+          "lat": 32.66268,
+          "lng": -96.73805
+        },
+        {
+          "lat": 32.66262,
+          "lng": -96.73725
+        },
+        {
+          "lat": 32.66205,
+          "lng": -96.73745
+        },
+        {
+          "lat": 32.66212,
+          "lng": -96.73815
+        }
       ]
     },
     "dropYards": [
       {
         "ring": [
-          { "lat": 32.66262, "lng": -96.73705 },
-          { "lat": 32.66285, "lng": -96.73468 },
-          { "lat": 32.66232, "lng": -96.73452 },
-          { "lat": 32.66212, "lng": -96.73682 }
+          {
+            "lat": 32.66262,
+            "lng": -96.73705
+          },
+          {
+            "lat": 32.66285,
+            "lng": -96.73468
+          },
+          {
+            "lat": 32.66232,
+            "lng": -96.73452
+          },
+          {
+            "lat": 32.66212,
+            "lng": -96.73682
+          }
         ]
       },
       {
         "ring": [
-          { "lat": 32.66188, "lng": -96.73838 },
-          { "lat": 32.66192, "lng": -96.73772 },
-          { "lat": 32.66112, "lng": -96.73762 },
-          { "lat": 32.66108, "lng": -96.73828 }
+          {
+            "lat": 32.66188,
+            "lng": -96.73838
+          },
+          {
+            "lat": 32.66192,
+            "lng": -96.73772
+          },
+          {
+            "lat": 32.66112,
+            "lng": -96.73762
+          },
+          {
+            "lat": 32.66108,
+            "lng": -96.73828
+          }
         ]
       }
     ],
     "dockAprons": [
       {
         "ring": [
-          { "lat": 32.66232, "lng": -96.73692 },
-          { "lat": 32.66252, "lng": -96.7348 },
-          { "lat": 32.66228, "lng": -96.73473 },
-          { "lat": 32.66208, "lng": -96.73685 }
+          {
+            "lat": 32.66232,
+            "lng": -96.73692
+          },
+          {
+            "lat": 32.66252,
+            "lng": -96.7348
+          },
+          {
+            "lat": 32.66228,
+            "lng": -96.73473
+          },
+          {
+            "lat": 32.66208,
+            "lng": -96.73685
+          }
         ]
       },
       {
         "ring": [
-          { "lat": 32.66192, "lng": -96.73762 },
-          { "lat": 32.66108, "lng": -96.73752 },
-          { "lat": 32.66102, "lng": -96.73722 },
-          { "lat": 32.66186, "lng": -96.73732 }
+          {
+            "lat": 32.66192,
+            "lng": -96.73762
+          },
+          {
+            "lat": 32.66108,
+            "lng": -96.73752
+          },
+          {
+            "lat": 32.66102,
+            "lng": -96.73722
+          },
+          {
+            "lat": 32.66186,
+            "lng": -96.73732
+          }
         ]
       },
       {
         "ring": [
-          { "lat": 32.66068, "lng": -96.73682 },
-          { "lat": 32.66052, "lng": -96.73482 },
-          { "lat": 32.66028, "lng": -96.73492 },
-          { "lat": 32.66044, "lng": -96.73692 }
+          {
+            "lat": 32.66068,
+            "lng": -96.73682
+          },
+          {
+            "lat": 32.66052,
+            "lng": -96.73482
+          },
+          {
+            "lat": 32.66028,
+            "lng": -96.73492
+          },
+          {
+            "lat": 32.66044,
+            "lng": -96.73692
+          }
         ]
       }
     ],
     "staging": {
       "ring": [
-        { "lat": 32.66272, "lng": -96.7378 },
-        { "lat": 32.66285, "lng": -96.73582 },
-        { "lat": 32.66262, "lng": -96.73578 },
-        { "lat": 32.6625, "lng": -96.73775 }
+        {
+          "lat": 32.66272,
+          "lng": -96.7378
+        },
+        {
+          "lat": 32.66285,
+          "lng": -96.73582
+        },
+        {
+          "lat": 32.66262,
+          "lng": -96.73578
+        },
+        {
+          "lat": 32.6625,
+          "lng": -96.73775
+        }
       ]
     },
     "streetViewMeta": {
@@ -154,5 +262,31 @@
     "siteAreaAcres": "~36.8 acres derived from the traced Amazon parcel perimeter (building + fenced yard + drop rows + south employee parking).",
     "railServed": "No rail spur enters the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://hiring.amazon.com/locations/fort-worth-jobs",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Amazon actively hiring at Fort Worth/DFW-area fulfillment operations including FTW1"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.ziprecruiter.com/Jobs/Ftw1/--in-Texas",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active FTW1-coded Amazon openings in Texas as of Jun 2026"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Long-running active Amazon FC at 33333 W LBJ Fwy with current 2025-2026 hiring by code and city; no closure/cancellation/WARN. Note: site sits in south Dallas (Hutchins/Wilmer corridor), label 'Dallas' imprecise.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -1,55 +1,159 @@
 {
   "name": "Amazon MEM1 Fulfillment Center Memphis TN",
   "type": "Fulfillment Center",
-  "coords": { "lat": 35.00820, "lng": -89.95000 },
+  "coords": {
+    "lat": 35.0082,
+    "lng": -89.95
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 35.00990, "lng": -89.95360 },
-      { "lat": 35.00940, "lng": -89.94560 },
-      { "lat": 35.00740, "lng": -89.94470 },
-      { "lat": 35.00630, "lng": -89.94560 },
-      { "lat": 35.00615, "lng": -89.95200 },
-      { "lat": 35.00640, "lng": -89.95430 },
-      { "lat": 35.00760, "lng": -89.95470 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 35.00640, "lng": -89.94625 },
-      { "lat": 35.00642, "lng": -89.94545 },
-      { "lat": 35.00690, "lng": -89.94550 },
-      { "lat": 35.00688, "lng": -89.94630 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 35.0099,
+          "lng": -89.9536
+        },
+        {
+          "lat": 35.0094,
+          "lng": -89.9456
+        },
+        {
+          "lat": 35.0074,
+          "lng": -89.9447
+        },
+        {
+          "lat": 35.0063,
+          "lng": -89.9456
+        },
+        {
+          "lat": 35.00615,
+          "lng": -89.952
+        },
+        {
+          "lat": 35.0064,
+          "lng": -89.9543
+        },
+        {
+          "lat": 35.0076,
+          "lng": -89.9547
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 35.0064,
+          "lng": -89.94625
+        },
+        {
+          "lat": 35.00642,
+          "lng": -89.94545
+        },
+        {
+          "lat": 35.0069,
+          "lng": -89.9455
+        },
+        {
+          "lat": 35.00688,
+          "lng": -89.9463
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 35.00960, "lng": -89.94720 },
-        { "lat": 35.00935, "lng": -89.94560 },
-        { "lat": 35.00800, "lng": -89.94600 },
-        { "lat": 35.00825, "lng": -89.94770 }
-      ] },
-      { "ring": [
-        { "lat": 35.00735, "lng": -89.94620 },
-        { "lat": 35.00730, "lng": -89.94490 },
-        { "lat": 35.00640, "lng": -89.94500 },
-        { "lat": 35.00645, "lng": -89.94625 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 35.0096,
+            "lng": -89.9472
+          },
+          {
+            "lat": 35.00935,
+            "lng": -89.9456
+          },
+          {
+            "lat": 35.008,
+            "lng": -89.946
+          },
+          {
+            "lat": 35.00825,
+            "lng": -89.9477
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 35.00735,
+            "lng": -89.9462
+          },
+          {
+            "lat": 35.0073,
+            "lng": -89.9449
+          },
+          {
+            "lat": 35.0064,
+            "lng": -89.945
+          },
+          {
+            "lat": 35.00645,
+            "lng": -89.94625
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 35.00935, "lng": -89.95255 },
-        { "lat": 35.00845, "lng": -89.94905 },
-        { "lat": 35.00815, "lng": -89.94925 },
-        { "lat": 35.00905, "lng": -89.95275 }
-      ] },
-      { "ring": [
-        { "lat": 35.00800, "lng": -89.95205 },
-        { "lat": 35.00715, "lng": -89.94870 },
-        { "lat": 35.00688, "lng": -89.94890 },
-        { "lat": 35.00773, "lng": -89.95225 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 35.00935,
+            "lng": -89.95255
+          },
+          {
+            "lat": 35.00845,
+            "lng": -89.94905
+          },
+          {
+            "lat": 35.00815,
+            "lng": -89.94925
+          },
+          {
+            "lat": 35.00905,
+            "lng": -89.95275
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 35.008,
+            "lng": -89.95205
+          },
+          {
+            "lat": 35.00715,
+            "lng": -89.9487
+          },
+          {
+            "lat": 35.00688,
+            "lng": -89.9489
+          },
+          {
+            "lat": 35.00773,
+            "lng": -89.95225
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 2, "pano": "hv6WqdT1mz9s1O6kVIRobQ", "hasCoverage": true },
-      "truckGate": { "heading": 14, "pano": "7J51MIzepx4-aitQa9OAuQ", "hasCoverage": true }
+      "perimeter": {
+        "heading": 2,
+        "pano": "hv6WqdT1mz9s1O6kVIRobQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 14,
+        "pano": "7J51MIzepx4-aitQa9OAuQ",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -58,23 +162,42 @@
     "trailerParkingCapacity": 450,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 78.0,
+    "siteAreaAcres": 78,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@35.00820,-89.95000,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "multiStep"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "multiStep"
+  ],
   "fieldNotes": {
     "truckGate": "Single dedicated truck entrance off E Holmes Rd at the SE corner (~35.0063,-89.9456), marked by an Amazon monument sign; Street View pano coverage stops at the public road because the gated private drive blocks the camera car. Whole property is fenced (black metal perimeter fence visible in multiple SV frames).",
     "guardShack": "No standalone guard booth is resolvable at the truck gate throat in z20 imagery; a small booth WAS seen at the separate associate-parking entrance (~35.0066,-89.9515) but that controls car parking, not the truck yard. Truck gate is treated as kiosk/remote check-in (remoteGs=true). Medium confidence on shack absence.",
@@ -93,5 +216,31 @@
     "railServed": "No rail spur enters the property; nearest rail is unrelated. False.",
     "urbanRural": "Within the Memphis metro dense industrial/residential fabric (subdivisions immediately NW, other DCs across E Holmes) -> Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://hiring.amazon.com/jobDetail/en-US/Fulfillment-Center-Warehouse-Associate/Memphis/a0R4U00000EV4UkUAL",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active Amazon careers requisition for FC Warehouse Associate at 3292 E Holmes Rd, Memphis TN — maps MEM1 address to current Amazon hiring"
+      },
+      {
+        "tier": 1,
+        "url": "https://hiring.amazon.com/locations/memphis-tn-jobs",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Amazon currently hiring at Memphis TN fulfillment/sortation operations"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Live Amazon careers req ties exact MEM1 address (3292 E Holmes Rd, Memphis) to current operations; closure gauntlet found no Memphis-specific Amazon closure/WARN.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
