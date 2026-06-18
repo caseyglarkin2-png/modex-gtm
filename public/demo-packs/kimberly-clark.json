@@ -1,30 +1,30 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-02T16:18:52.122Z",
+  "builtAt": "2026-06-18T21:38:14.447Z",
   "account": {
     "slug": "kimberly-clark",
     "displayName": "Kimberly-Clark",
     "archetype": "cpg",
-    "siteCount": 18,
+    "siteCount": 15,
     "coverageNote": {
-      "auditedCount": 18,
+      "auditedCount": 15,
       "estimatedFootprint": 30,
+      "totalGlobalFootprint": 150,
+      "auditedScope": "NA",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Kimberly-Clark operates ~150 manufacturing facilities across 35 countries; we audited 18 NA sites. International scope on request.",
-      "auditedScope": "NA",
-      "totalGlobalFootprint": 150
+      "note": "Kimberly-Clark operates ~150 manufacturing facilities across 35 countries; we audited 18 NA sites. International scope on request."
     },
     "featuredSiteId": "06-kc-owensboro-plant",
-    "roiDefaults": {
-      "averageMarginPerShipment": 1100
-    },
     "dossierIntro": "Kimberly-Clark runs the largest per-site footprints in CPG. 150 plants and DCs averaging 137 acres each. Owensboro KY covers 230 acres with 55 doors and 220 trailer spots. Warren OH advanced manufacturing is 560 acres. YardFlow runs the drop yard as positions, not parking, on networks where the trailer travels half a mile inside the perimeter.",
     "surprisingFindings": [
       "Warren OH is 560 acres of advanced manufacturing. The walk from gate to dock is longer than most networks' entire site.",
       "DuPont WA DC runs 130 dock doors. K-C ships consumer staples at scale.",
       "Inbound pulp and outbound finished paper both move on the same yard. Two flows, one queue."
-    ]
+    ],
+    "roiDefaults": {
+      "averageMarginPerShipment": 1100
+    }
   },
   "research": null,
   "network": {
@@ -36,18 +36,18 @@
     ],
     "archetypeMix": {
       "#6": 2,
-      "#3": 5,
-      "#9": 7,
+      "#9": 6,
+      "#3": 3,
       "#1": 1,
       "#7": 1,
       "#10": 2
     },
     "totals": {
-      "dockDoors": 807,
-      "trailerCapacity": 2264,
-      "gates": 20,
-      "railServed": 5,
-      "acres": 2469.1
+      "dockDoors": 799,
+      "trailerCapacity": 2260,
+      "gates": 18,
+      "railServed": 4,
+      "acres": 1895.1
     },
     "sites": [
       {
@@ -241,28 +241,6 @@
         },
         "dossierExcerpt": "- Name: K-C Beech Island Mill — Beech Island, SC\n- Type: Integrated tissue & personal care manufacturing complex (Kimberly-Clark's largest plant globally — Scott, Cottonelle, Kleenex, Kotex, Huggies; ~2,000 employees)\n- Roster address: 246 Old Jackson Hwy, Beech Island, SC 29842\n- Resolved center: 33.41700, -81.89550",
         "mapsUrl": "https://www.google.com/maps/@33.41700,-81.89550,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/kimberly-clark/01-k-c-beech-island-mill-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.417,
-              "lng": -81.8955
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/kimberly-clark/01-k-c-beech-island-mill-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.417,
-              "lng": -81.8955
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Main entrance off Old Jackson Hwy confirmed in Street View (2026-03): barrier arm across divided lanes, digital 'Beech Island' sign.",
           "guardShack": "Small guard booth with blue canopy in the median between inbound/outbound lanes, visible in both satellite z20 and Street View.",
@@ -273,210 +251,33 @@
           "dropArea": "Two large drop yards: a long double row of angled trailers along the south dock apron and extensive rows in the north of the campus; 300+ trailers visible.",
           "scale": "No truck scale clearly visible from overhead; flagged uncertain.",
           "urbanRural": "Rural - the complex sits in farmland/forest near the small community of Beech Island, edge of the Augusta GA metro fringe."
-        }
-      },
-      {
-        "id": "02-k-c-beech-island-regional-distribution-center",
-        "name": "K-C Beech Island Regional Distribution Center - Beech Island SC",
-        "type": "Automated regional distribution center (new ~1.1M sq ft, $200M, announced 2025)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "low",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "remoteGs",
-          "preGateStaging",
-          "postGateStaging",
-          "drivewayLong",
-          "drivewayShort",
-          "backupSensitive",
-          "entryExitTogether",
-          "entryExitSeparate",
-          "entryLanes",
-          "exitLanes",
-          "fastLaneOpportunity",
-          "dockDoors",
-          "dropArea",
-          "shipRcvSeparate",
-          "connectivityIssue",
-          "multipleFacilities",
-          "scale",
-          "dropYard",
-          "multiStep"
-        ],
-        "center": {
-          "lat": 33.42099,
-          "lng": -81.89067
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 33.420417,
-                "lng": -81.897536
-              },
-              {
-                "lat": 33.420417,
-                "lng": -81.894515
-              },
-              {
-                "lat": 33.417322,
-                "lng": -81.893417
-              },
-              {
-                "lat": 33.415259,
-                "lng": -81.893417
-              },
-              {
-                "lat": 33.415259,
-                "lng": -81.897536
-              }
-            ]
-          },
-          "truckGate": {
-            "ring": [
-              {
-                "lat": 33.419615,
-                "lng": -81.895339
-              },
-              {
-                "lat": 33.419615,
-                "lng": -81.894515
-              },
-              {
-                "lat": 33.418927,
-                "lng": -81.894515
-              },
-              {
-                "lat": 33.418927,
-                "lng": -81.895339
-              }
-            ]
-          },
-          "dropYards": [],
-          "dockAprons": [
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
             {
-              "ring": [
-                {
-                  "lat": 33.417781,
-                  "lng": -81.897262
-                },
-                {
-                  "lat": 33.417781,
-                  "lng": -81.89479
-                },
-                {
-                  "lat": 33.416978,
-                  "lng": -81.89479
-                },
-                {
-                  "lat": 33.416978,
-                  "lng": -81.897262
-                }
-              ]
+              "tier": 1,
+              "url": "https://governor.sc.gov/news/2025-05/kimberly-clark-corporation-expanding-aiken-county-operation",
+              "date": "2025-05",
+              "type": "press",
+              "claim": "K-C facility at 246 Old Jackson Highway, Beech Island (est. 1968) is the company largest manufacturing facility globally; $200M expansion adding 150+ jobs."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.manufacturingdive.com/news/kimberly-clark-huggies-kleenex-2-billion-us-ohio-south-carolina-facilities/746962/",
+              "date": "2025-05",
+              "type": "trade-press",
+              "claim": "Beech Island is centerpiece of K-C >$2B North America capital plan; active mill."
             }
           ],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 0,
-          "trailersVisible": 0,
-          "trailerParkingCapacity": 0,
-          "truckGateCount": 1,
-          "buildingCount": 0,
-          "siteAreaAcres": 0,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": false,
-          "drivewayLong": false,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": false,
-          "entryExitSeparate": false,
-          "entryLanes": null,
-          "exitLanes": null,
-          "fastLaneOpportunity": false,
-          "dockDoors": "NONE",
-          "dropArea": "NONE",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#3",
-          "steps": [
-            {
-              "step": "Arrive on site (no gate)",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Drive to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 480000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 3030000,
-          "totalYnsMs": 2640000
-        },
-        "dossierExcerpt": "- Name: K-C Beech Island Regional Distribution Center — Beech Island, SC\n- Type: Automated regional distribution center (new ~1.1M sq ft, $200M,\n  announced 2025)\n- Roster address: Old Jackson Hwy area, Beech Island, SC 29842\n- Roster coords: 33.420989, -81.890666 (geometric-center geocode)",
-        "mapsUrl": "https://www.google.com/maps/@33.42099,-81.89067,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/kimberly-clark/02-k-c-beech-island-regional-distribution-center-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.42099,
-              "lng": -81.89067
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/kimberly-clark/02-k-c-beech-island-regional-distribution-center-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.42099,
-              "lng": -81.89067
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "status": "NOT YET BUILT. This is a $200M, ~1.1M sq ft automated regional distribution center announced May 2025 as an expansion of the existing K-C Beech Island plant at 246 Old Jackson Hwy. Per SC Governor's office and Manufacturing Dive, it is projected to be completed and operational in Q2 2027 and will add ~150 jobs.",
-          "location": "Roster coordinates (33.420989, -81.890666) geocode to undeveloped land / residential subdivisions north-east of the K-C plant - not a built DC. The DC is an expansion ON the existing 246 Old Jackson Hwy plant property; current (2026) satellite imagery shows only forest and the plant's existing north building edge in this area - no DC structure, docks, or yard yet exist.",
-          "perimeter": "Best-effort box over the undeveloped K-C-owned land along the north edge of the existing Beech Island plant, the most plausible build footprint. Not a measured fence line - the facility does not yet exist.",
-          "classification": "All physical-layout fields are unobservable because the building has not been constructed. urbanRural set Rural by the surrounding farmland/forest setting; everything else flagged uncertain."
+          "imageryDate": "2026-03",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "K-C own + state press (May 2025) name the active mill at this address as its largest global facility; no closure/sale evidence.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -562,28 +363,6 @@
         },
         "dossierExcerpt": "- Name: K-C Mobile Mill — Mobile, AL\n- Type: Tissue / paper manufacturing mill (Scott, Cottonelle, K-C Professional\n  bath tissue & paper towels; ~680 employees; acquired from Scott Paper 1995)\n- Roster address: 2200 Paper Mill Rd, Mobile, AL 36610\n- Resolved center: 30.73530, -88.05080",
         "mapsUrl": "https://www.google.com/maps/@30.73530,-88.05080,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/kimberly-clark/03-k-c-mobile-mill-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 30.7353,
-              "lng": -88.0508
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/kimberly-clark/03-k-c-mobile-mill-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 30.7353,
-              "lng": -88.0508
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Chain-link perimeter fencing with sliding/rolling gates across the truck access road into the fenced mill yard - confirmed in Street View (2023). Controlled but no staffed booth seen.",
           "guardShack": "No distinct staffed guard booth visible in satellite or Street View; flagged uncertain. Set false.",
@@ -595,6 +374,32 @@
           "truckGateCount": "At least 2 controlled entry points (north mill yard and south trailer yard); flagged uncertain.",
           "scale": "No truck scale clearly visible from overhead; flagged uncertain.",
           "urbanRural": "Urban - the mill sits inside the City of Mobile within a dense riverside industrial corridor."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.prnewswire.com/news-releases/kimberly-clark-announces-strategic-investment-in-its-mobile-alabama-mill-300628970.html",
+              "date": "2018-04",
+              "type": "press",
+              "claim": "K-C operates the Mobile AL mill producing Scott, Cottonelle, K-C Professional bath tissue and towels (acquired 1995 from Scott Paper)."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.paperadvance.com/news/industry-news/kimberly-clark-to-invest-130m-in-mobile-facility-expansion.html",
+              "date": "2025-06",
+              "type": "trade-press",
+              "claim": "K-C announced $130M+ new production line at its Mobile mill (~680 workers), online Q3 2027 - confirms active operations."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "K-C actively investing $130M+ (2025) in the Mobile mill with ~680 workers; operating, no closure/sale evidence.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -785,28 +590,6 @@
         },
         "dossierExcerpt": "- Name: K-C Loudon Mill — Loudon, TN\n- Type: Tissue manufacturing mill (K-C Professional away-from-home tissue;\n  Kleenex and Scott towel products)\n- Roster address: 5600 Kimberly Way, Loudon, TN 37774\n- Resolved center: 35.76764, -84.32992",
         "mapsUrl": "https://www.google.com/maps/@35.76764,-84.32992,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/kimberly-clark/04-k-c-loudon-mill-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.76764,
-              "lng": -84.32992
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/kimberly-clark/04-k-c-loudon-mill-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.76764,
-              "lng": -84.32992
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "No barrier arm, sliding gate, or staffed checkpoint found at the property entrance in satellite or 2024 Street View. The entry road passes a landscaped monument-sign roundabout but is otherwise an open industrial driveway. Set false; flagged uncertain - a gate further inside the yard cannot be ruled out due to limited Street View coverage of the internal road.",
           "guardShack": "No guard booth visible at any entrance. Set false.",
@@ -818,6 +601,32 @@
           "railServed": "No rail spur runs into the property in current imagery.",
           "scale": "No truck scale clearly visible from overhead; flagged uncertain.",
           "urbanRural": "Rural - the mill sits on Watts Bar Lake at the wooded edge of the small town of Loudon, TN."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.kimberly-clark.com/en/jobs/881149/2026-supply-chain-co-op-internships-neenah-west-office-facility-1",
+              "date": "2026-01",
+              "type": "locator",
+              "claim": "Active K-C careers req references the Loudon Mill in the 2026 Supply Chain Co-Op program; ongoing operations."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.reliableplant.com/Read/26815/Kimberly-Clark-investment-Tennessee",
+              "date": "2013-01",
+              "type": "press",
+              "claim": "K-C Professional made a major capital investment in its Loudon TN tissue plant."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "K-C own careers portal lists active Loudon Mill reqs (incl. 2026 co-op); not on the 2018 closure list; no divestiture/closure found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1015,28 +824,6 @@
         },
         "dossierExcerpt": "- Name: K-C New Milford Mill — New Milford, CT\n- Type: Diaper & tissue manufacturing plant (Kleenex facial tissue; ~350\n  employees; operating since the late 1970s)\n- Roster address: Pickett District Rd, New Milford, CT 06776\n  (street number 58 Pickett District Rd per web research)\n- Resolved center: 41.55833, -73.41361",
         "mapsUrl": "https://www.google.com/maps/@41.55833,-73.41361,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/kimberly-clark/05-k-c-new-milford-mill-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.55833,
-              "lng": -73.41361
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/kimberly-clark/05-k-c-new-milford-mill-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.55833,
-              "lng": -73.41361
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "No barrier arm or staffed checkpoint clearly visible from satellite. The complex shares a dense industrial park and the only Street View coverage (2019-2022) is of the office/commercial frontage on Pickett District Rd, where there is no gate. A controlled truck gate on the internal yard road cannot be confirmed or ruled out - set false, flagged uncertain.",
           "guardShack": "No guard booth visible at any imaged entrance. Set false.",
@@ -1048,6 +835,32 @@
           "dockDoorCount": "~25 doors estimated; much of the building face is obscured by process equipment and roof structures - honest estimate, banded 25-50.",
           "scale": "No truck scale clearly visible from overhead; flagged uncertain.",
           "urbanRural": "Urban - the mill sits inside a dense industrial/commercial corridor of New Milford CT (Pickett District Rd)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.kimberly-clark.com/en/jobs/873260/site-environmental-lead-new-milford-connecticut--new-milford-mill",
+              "date": "2026-01",
+              "type": "locator",
+              "claim": "Active K-C careers req: Site Leader, Environmental & Sustainability (New Milford CT) - New Milford Mill; staffed, operating K-C site."
+            },
+            {
+              "tier": 1,
+              "url": "https://careers.kimberly-clark.com/en/jobs/883810/entry-level-operator-usa-ct-new-milford",
+              "date": "2026-01",
+              "type": "locator",
+              "claim": "Active K-C Entry Level Operator - New Milford production req; ongoing manufacturing hiring."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Suspected closure was wrong: New Milford was NOT in the 2018 closures (Fullerton/Conway were); K-C careers shows active 2026 operator + site-leader reqs - mill is operating.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1243,28 +1056,6 @@
         },
         "dossierExcerpt": "- Confirmed: 601 Innovative Way, Owensboro, KY 42301\n- Locked center: 37.819400, -87.303200\n- The roster geocode flagged `movedMeters: 21762`, which looked alarming, but\n  this only reflects the geocoder starting from the Owensboro city centroid.\n  The supplied roster coordinates (37.819139, -87.302856) land squarely on a\n  large industrial complex, and an independent public-records coordinate\n  (37.8188, -87.3031) is essentially identical — so the roster point is\n  correct.\n- Web search confirms K-C operates a diaper / personal-care manufacturing\n  plant at 601 Innovative Way (also building a steam-production facility there\n  per local press). Satellite shows a large multi-building manufacturing +\n  distribution complex on a peninsula bounded by the Green River, with\n  extensive trailer parking — consistent with the facility type.",
         "mapsUrl": "https://www.google.com/maps/@37.819400,-87.303200,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/kimberly-clark/06-kc-owensboro-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 37.8194,
-              "lng": -87.3032
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/kimberly-clark/06-kc-owensboro-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 37.8194,
-              "lng": -87.3032
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster coords landed on the correct building; geocode movedMeters (21762) reflects a poor city-center geocoder start, not an error. Confirmed as 601 Innovative Way, Owensboro KY — large K-C diaper/personal-care manufacturing complex + on-site DC on a peninsula bounded by the Green River.",
           "truckGate": "Open campus-style entrance off Innovative Way at the public road — Street View (2019) shows a K-C monument sign and manicured-lawn drive with NO barrier at the road. An internal truck-yard checkpoint/pinch-point with fencing and a small structure is visible at ~37.8211,-87.3053 controlling access to the drop yard. Classed truckGate=true on the internal control point; low confidence on a hard barrier.",
@@ -1274,6 +1065,32 @@
           "multipleFacilities": "Campus: large manufacturing building cluster, separate warehouse/DC, on-site wastewater treatment plant, steam/utility plant, and office front — multiple distinct building clusters.",
           "railServed": "No rail spur visible entering the property.",
           "fastLaneOpportunity": "Wide internal paved truck routes and large open apron offer room for an express/bypass lane."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.owensboroliving.com/features/made-here/",
+              "date": "2025-01",
+              "type": "press",
+              "claim": "K-C opened a new 120,000 sq ft on-site raw-materials warehouse at its Owensboro site in 2025; plant (~360 employees, operating since 1993) makes Kleenex facial tissue and Scott towels/bath tissue."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.news.kimberly-clark.com/2025-05-01-Kimberly-Clark-announces-plans-to-invest-over-2-Billion-to-Expand-US-Manufacturing,-Accelerate-Innovation-and-Fuel-Growth",
+              "date": "2025-05",
+              "type": "press",
+              "claim": "K-C own newsroom announces $2B US manufacturing expansion; active US footprint."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "K-C-owned plant operating since 1993, expanded with a new on-site warehouse opened 2025; no closure/sale evidence. (Label note: makes Kleenex/Scott tissue, not diaper/personal care.)",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1497,28 +1314,6 @@
         },
         "dossierExcerpt": "- Confirmed: 500 Murphy Dr, Maumelle, AR 72113\n- Locked center: 34.864832, -92.393775\n- Roster supplied only a city-level address (\"Maumelle, AR 72113\") and a\n  coordinate (34.870005, -92.397751) that sat ~700 m NW of the plant amid a\n  cluster of industrial buildings.\n- Web research (Maumelle Chamber, Metro Little Rock Alliance, Waze) confirmed\n  the address as 500 Murphy Dr and yielded an address-level coordinate\n  (34.864832, -92.393775) that lands squarely on a large white-roofed\n  manufacturing building with extensive trailer parking — consistent with the\n  ~400,000+ sq ft Huggies baby-wipes plant (~300 employees, $68M 2015\n  expansion).",
         "mapsUrl": "https://www.google.com/maps/@34.864832,-92.393775,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/kimberly-clark/07-kc-maumelle-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.864832,
-              "lng": -92.393775
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/kimberly-clark/07-kc-maumelle-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.864832,
-              "lng": -92.393775
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed as 500 Murphy Dr, Maumelle, AR 72113 — K-C's Huggies baby-wipes manufacturing plant. Roster coords were ~700m NW of the building; web research yielded the street address and an address-level coordinate (34.864832,-92.393775) that lands squarely on the large white-roofed manufacturing building with extensive trailer parking. Locked center there.",
           "truckGate": "Confirmed guarded truck gate at the NE corner where the access road from Murphy Dr enters. z21 imagery shows a small white guard booth astride the driveway with barrier arms across the inbound and outbound lanes.",
@@ -1529,6 +1324,32 @@
           "postGateStaging": "Paved area just inside the gate before the dock apron provides truck holding/queue space.",
           "urbanRural": "Maumelle industrial park on the edge of the Little Rock metro; setting is small-town / edge-of-town industrial with woods around the lot — classed Rural per the tie-break rule.",
           "multipleFacilities": "One main manufacturing building with an integral eastern addition — a single facility, not a campus. The very large warehouse south of the lot is a separate, unrelated company."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.kimberly-clark.com/en/jobs/878544/engineering-mechanical-technician-maumelle-facility",
+              "date": "2026-01",
+              "type": "locator",
+              "claim": "Active K-C careers requisition (Engineering Mechanical Technician) at the Maumelle Facility."
+            },
+            {
+              "tier": 1,
+              "url": "https://metrolittlerockalliance.com/success-stories/kimberly-clark/",
+              "date": "2015-01",
+              "type": "press",
+              "claim": "~400,000 sq ft Huggies baby-wipes plant employing ~300; $68M expansion (+40,000 sq ft)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active K-C careers reqs name the Maumelle Facility; Huggies wipes plant; no closure/sale evidence (the 2018 AR closure was the separate Conway plant).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1725,28 +1546,6 @@
         },
         "dossierExcerpt": "- Confirmed: 2466 Farm Road 137 (FM 137), Paris, TX 75460\n- Locked center: 33.638900, -95.591200\n- The roster supplied only a city-level address (\"Paris, TX 75460\") and a\n  coordinate (33.660939, -95.555513) that landed in downtown Paris — about\n  5 km from the plant.\n- Web research confirmed the plant: the Paris TX Chamber business directory,\n  a Texas TDLR construction-project record (\"KIMBERLY-CLARK CORP - PARIS,\n  2466 FARM ROAD 137\"), and Yelp all give the address as 2466 FM 137.\n  Trade press confirms a 238-acre Huggies diaper plant operating since 1983\n  off SW Loop 286 in SW Paris (also makes Pull-Ups, Little Swimmers,\n  Goodnites).\n- Identification required scanning SW-Paris industrial sites. Two decoys were\n  ruled out: a lumber/scrap-processing yard with open-sided sheds",
         "mapsUrl": "https://www.google.com/maps/@33.638900,-95.591200,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/kimberly-clark/08-kc-paris-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.6389,
-              "lng": -95.5912
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/kimberly-clark/08-kc-paris-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.6389,
-              "lng": -95.5912
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster supplied only a city-level address and a coordinate that landed in downtown Paris (~5 km off). Web research (Paris TX Chamber, Texas TDLR project record, Yelp) confirmed the address as 2466 Farm Road 137 (FM 137), Paris, TX 75460 — K-C's 238-acre Huggies diaper/personal-care plant off SW Loop 286. Identified the building by scanning SW Paris industrial sites: the matching facility is a large enclosed manufacturing complex with employee parking, a circular entrance drive, and a large trailer drop yard at ~33.6389,-95.5912. Several other unrelated industrial sites (a lumber/scrap yard, slab/construction site) were ruled out.",
           "truckGate": "The access road from SW Loop 286 splits into separate inbound/outbound lanes at a pinch-point near the building (~33.6396,-95.5904). The site is perimeter-fenced (chain-link visible in Street View). Small structures/posts cross the lanes at the pinch-point — classed truckGate true, but a hard barrier could not be fully resolved; listed uncertain.",
@@ -1758,6 +1557,25 @@
           "urbanRural": "Plant sits on a large wooded/field parcel off SW Loop 286 on the edge of Paris — rural per the tie-break rule.",
           "fastLaneOpportunity": "Wide entry apron and the forked entry lanes leave room for an express/bypass lane.",
           "multipleFacilities": "One main manufacturing building with attached/adjacent structures (utility/support buildings) — treated as a single facility, not a multi-cluster campus."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.kimberly-clark.com/en/jobs/875879/site-leader-environmental-sustainability-paris-tx--paris-plant",
+              "date": "2026-01",
+              "type": "locator",
+              "claim": "Active K-C careers requisition (Site Leader, Environmental & Sustainability) at the Paris Plant, Paris TX."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Multiple active K-C careers reqs name the Paris Plant; survived the 2018 restructuring rumors; no closure/sale/WARN evidence for Paris TX.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1871,28 +1689,6 @@
         },
         "dossierExcerpt": "- Confirmed: K-C Chester Mill, 800 W 2nd St, Chester, PA 19013\n- Locked center: 39.844200, -75.357500\n- The roster coordinate (39.841551, -75.369390) sat ~1 km W of the actual\n  mill, in downtown Chester.\n- Resolved via a documented site detail: EPA records state the mill is\n  \"bordered to the East by Harrah's Casino and Race Track.\" Harrah's\n  Philadelphia (777 Harrah's Blvd) has a distinctive harness-racing oval on\n  the Chester waterfront. The K-C mill is the large, dense paper-mill complex\n  immediately WEST of that oval, on the Delaware River — process buildings,\n  cogeneration plant, wastewater clarifiers, and paper rolls stored on the\n  riverfront pier. ~74-acre site.",
         "mapsUrl": "https://www.google.com/maps/@39.844200,-75.357500,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/kimberly-clark/09-kc-chester-mill-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.8442,
-              "lng": -75.3575
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/kimberly-clark/09-kc-chester-mill-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.8442,
-              "lng": -75.3575
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed K-C Chester non-integrated tissue mill (Scott 1000), ~74 acres on the Delaware River. Roster coord (39.8416,-75.3694) sat ~1 km W of the actual mill in downtown Chester. Resolved via the documented border 'East by Harrah's Casino and Race Track' — the mill is the large dense paper-mill complex immediately W of Harrah's Philadelphia racetrack oval, at ~39.844,-75.357. Address 800 W 2nd St, Chester PA 19013.",
           "truckGate": "The mill is fully perimeter chain-link fenced (visible all along W 2nd St in Street View). Trucks enter through fence gates; the main entrance off W 2nd St (~39.846,-75.357) opens into the mill yard. Classed truckGate true; a hard barrier arm was not clearly resolved.",
@@ -1905,6 +1701,32 @@
           "multipleFacilities": "Campus of multiple connected buildings — mill, converting/warehouse, cogeneration plant, wastewater treatment — linked by overhead pipe/conveyor bridges.",
           "urbanRural": "Dense urban waterfront in Chester, in the Philadelphia metro — Urban.",
           "truckGateCount": "At least two fence-gate entries observed (W 2nd St main entrance and a freight-yard access); listed uncertain."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://tissueonlinenorthamerica.com/kimberly-clarks-chester-mill-produces-60-of-scott-1000-in-the-usa/",
+              "date": "2022-01",
+              "type": "trade-press",
+              "claim": "Chester mill produces ~2M rolls/day of Scott 1000 = 60% of US Scott 1000; ~570 employees."
+            },
+            {
+              "tier": 1,
+              "url": "https://tissueonlinenorthamerica.com/demolition-begins-on-kimberly-clark-plant-in-chester/",
+              "date": "2020-11",
+              "type": "trade-press",
+              "claim": "Only the old coal-fired boiler building was demolished under a $150M coal-to-gas modernization; the Scott 1000 tissue mill (570 employees) remains operational."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Mill operating; a demolition headline is a false-alarm trap (it was the coal boiler under a $150M modernization, not the mill); no closure/sale evidence.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2103,28 +1925,6 @@
         },
         "dossierExcerpt": "- Confirmed: K-C Jenks Mill (tissue mill + regional distribution center)\n- Locked center: 35.971500, -95.927200\n- The roster coordinate (35.995258, -95.972683) landed in a Jenks residential\n  subdivision ~10 km from the actual mill. Directory addresses (13252 S Yale\n  Pl / 13219 S Kimberly-Clark Pl, Jenks OK 74037) geocode poorly to south\n  Tulsa.\n- Resolved via a documented detail (Tulsa World): the mill \"sits on the\n  Arkansas River between Jenks and Bixby\" — a 1.8-million-sq-ft factory on 342\n  acres overlooking the river, opened 1990. Probing the Arkansas River bank SE\n  of Jenks located the matching large riverside industrial complex at\n  ~35.9715,-95.9272: a multi-building tissue mill plus a regional distribution\n  center, employee parking, and a large trailer drop yard — consistent with",
         "mapsUrl": "https://www.google.com/maps/@35.971500,-95.927200,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/kimberly-clark/10-kc-jenks-mill-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.9715,
-              "lng": -95.9272
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/kimberly-clark/10-kc-jenks-mill-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.9715,
-              "lng": -95.9272
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster supplied only a city-level address and a coordinate (35.9953,-95.9727) that landed in a Jenks residential subdivision ~10 km from the mill. Directory addresses (13252 S Yale Pl / 13219 S Kimberly-Clark Pl) geocode poorly. Resolved via a documented detail (Tulsa World): the mill 'sits on the Arkansas River between Jenks and Bixby' — a 1.8M sq ft factory on 342 acres. Found and confirmed the large riverside industrial complex at ~35.9715,-95.9272: a multi-building tissue mill + regional DC overlooking the Arkansas River, consistent with the facility (opened 1990).",
           "truckGate": "Controlled truck entrance at the SW corner where the long access road from the public road reaches the mill. z19 imagery shows a pinch-point with a gatehouse structure, marked lanes, and a parked truck in a staging position; Street View confirms a small gate building with a truck at the access road. Classed truckGate true.",
@@ -2139,6 +1939,32 @@
           "urbanRural": "Large 320+ acre campus on the rural Arkansas River bank between Jenks and Bixby, surrounded by farmland and woods — Rural.",
           "fastLaneOpportunity": "Wide entry apron and long approach road give ample room for an express/bypass lane.",
           "entryLanes": "Entry/exit lane counts estimated from the gate pinch-point — listed uncertain."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.kimberly-clark.com/en/jobs/877432/senior-electrical-engineer-jenks-mill",
+              "date": "2026-01",
+              "type": "locator",
+              "claim": "Active K-C careers requisition (Senior Electrical Engineer) at the Jenks Mill."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.news.kimberly-clark.com/press-releases?item=125420",
+              "date": "2019-01",
+              "type": "press",
+              "claim": "K-C $120M+ investment expanding the Jenks tissue facility by 270,000 sq ft; makes Cottonelle/Scott bath tissue + Scott/Viva towels; includes a regional distribution center."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active K-C careers reqs name the Jenks Mill; $120M K-C expansion; tissue mill + regional DC; no closure/sale evidence.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2249,8 +2075,7 @@
               ]
             }
           ],
-          "staging": null,
-          "streetViewMeta": {}
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 28,
@@ -2331,28 +2156,6 @@
         },
         "dossierExcerpt": "- Roster coordinates were wrong. The supplied lat/lng (45.099985, -87.630662, geocode precision APPROXIMATE, moved 3554 m) landed in downtown Marinette near the Menominee River bridge — a town-center commercial block, not a paper mill.\n- Web research (Wisconsin DNR Green Tier participant page, Waze, Yelp) gave the real address: 3120 Riverside Ave, Marinette, WI 54143.\n- Satellite probe at the address coordinates confirmed a large industrial tissue / wipers manufacturing mill on the south bank of the Menominee River — multiple connected manufacturing buildings, a large warehouse, water-treatment ponds, and a trailer drop yard. Consistent with the K-C Marinette Mill (Scott Shop Towels, Wypall, Viva; ~230 employees).\n- Locked center: 45.10375, -87.65205.",
         "mapsUrl": "https://www.google.com/maps/@45.10375,-87.65205,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/kimberly-clark/11-kc-marinette-mill-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 45.10375,
-              "lng": -87.65205
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/kimberly-clark/11-kc-marinette-mill-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 45.10375,
-              "lng": -87.65205
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster lat/lng (45.099985,-87.630662, APPROXIMATE, moved 3554m) landed in downtown Marinette - wrong. Web research (Wisconsin DNR Green Tier, Waze, Yelp) gave 3120 Riverside Ave; satellite confirmed the K-C tissue/wipers mill complex on the south bank of the Menominee River. Locked center 45.10375,-87.65205.",
           "truckGate": "Guard booth + chain-link sliding gate sits inside the SE yard controlling access to the trailer drop yard / dock area; entrance off Riverside Ave is a wide open paved apron with truck-routing signage ('ALL TRUCKS') - control point is the interior booth.",
@@ -2368,131 +2171,33 @@
           "shipRcvSeparate": "Dock activity appears split between the SW warehouse face and the SE manufacturing building, but not clearly two distinct shipping vs receiving clusters - low confidence, called false.",
           "railServed": "No rail spur visible entering the property.",
           "buildingCount": "Main manufacturing complex (river side), large central warehouse, SE manufacturing/dock building, and the front brick office building - counted as 4 distinct structures; some are interconnected."
-        }
-      },
-      {
-        "id": "12-kc-neenah-experimental-mill",
-        "name": "K-C Neenah Experimental Mill - Neenah WI",
-        "type": "Manufacturing / experimental mill (product & process innovation, Family Care)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "uncertainFields": [
-          "truckGate",
-          "remoteGs",
-          "dockDoorCount",
-          "dockDoors",
-          "buildingCount",
-          "siteAreaAcres",
-          "entryLanes",
-          "exitLanes"
-        ],
-        "center": {
-          "lat": 44.1883,
-          "lng": -88.4626
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 44.188792,
-                "lng": -88.464797
-              },
-              {
-                "lat": 44.188989,
-                "lng": -88.461913
-              },
-              {
-                "lat": 44.188103,
-                "lng": -88.461501
-              },
-              {
-                "lat": 44.187709,
-                "lng": -88.463149
-              },
-              {
-                "lat": 44.187906,
-                "lng": -88.464935
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 8,
-          "trailersVisible": 0,
-          "trailerParkingCapacity": 4,
-          "truckGateCount": 1,
-          "buildingCount": 5,
-          "siteAreaAcres": 14,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": false,
-          "remoteGs": true,
-          "preGateStaging": false,
-          "postGateStaging": false,
-          "drivewayLong": false,
-          "drivewayShort": true,
-          "backupSensitive": true,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "0-10",
-          "dropArea": "NONE",
-          "shipRcvSeparate": false,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": true,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "dossierExcerpt": "- Roster coordinates (44.185819, -88.462609, geocode precision APPROXIMATE, moved 137 m) landed in downtown Neenah — close to the target.\n- Web research (Wisconsin DNR Green Tier participant page, Waze, Foursquare) identified the facility as the Kimberly-Clark Experimental Mill (\"X-Mill\") at 126 N Commercial St, Neenah, WI 54956 — the site of K-C's original Globe Mill, the company's first plant, in the downtown core.\n- Satellite and Street View confirmed a K-C industrial/office campus on a Fox River-front block in downtown Neenah.\n- Locked center: 44.18830, -88.46260.",
-        "mapsUrl": "https://www.google.com/maps/@44.18830,-88.46260,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/kimberly-clark/12-kc-neenah-experimental-mill-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 44.1883,
-              "lng": -88.4626
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://dnr.wisconsin.gov/topic/GreenTier/Participants/KimberlyClarkMarinette",
+              "date": "2026-03",
+              "type": "press",
+              "claim": "WI DNR Green Tier: K-C Marinette Mill became Tier 2 participant 2026-03-10; produces Scott Shop Towels, Wypall, Viva; ~230 workers; operating."
             },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/kimberly-clark/12-kc-neenah-experimental-mill-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 44.1883,
-              "lng": -88.4626
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "location": "Roster lat/lng (44.185819,-88.462609, APPROXIMATE) landed in downtown Neenah - close. Web research (Wisconsin DNR Green Tier, Waze, Foursquare) gave the X-Mill / Experimental Mill at 126 N Commercial St - K-C's original Globe Mill site in the downtown core. Locked center 44.18830,-88.46260.",
-          "site": "This is an atypical site: a downtown-embedded R&D / experimental mill, NOT a freight-oriented plant or DC. The K-C campus occupies a riverfront block with the X-Mill industrial building, connected office buildings, a multi-story parking deck, and surface lots, fronting city streets on all sides. Heavy shadow in available imagery limits dock/structure detail.",
-          "truckGate": "No conventional truck gate at a public road. K-C-owned surface parking lots are fenced with chain-link sliding gates and internal service drives gate access into the campus. Marked truckGate=true on the basis of those controlled internal gates, but it is a soft call - flagged uncertain.",
-          "guardShack": "No staffed guard booth visible anywhere on the urban campus.",
-          "remoteGs": "Set true (gate present, no guard shack) - access is via card/badge-controlled sliding gates typical of urban campuses.",
-          "dockDoors": "Loading is via recessed dock bays on the X-Mill industrial building's west/south faces; heavy shadow prevents a precise count. Estimated <10 doors - banded 0-10, flagged uncertain.",
-          "dropArea": "No drop yard or marked trailer-parking stalls - urban site with no yard space.",
-          "drivewayShort": "Any truck approach is a short urban service drive holding 1-2 trucks at most.",
-          "backupSensitive": "Tight downtown geometry - service drives connect directly to city streets; a truck queue would spill onto public streets.",
-          "multipleFacilities": "The K-C downtown campus is multiple connected buildings (X-Mill, office buildings, parking deck) - a campus.",
-          "urbanRural": "Squarely Urban - dense downtown Neenah core with modern apartment blocks, retail, and parking decks on adjacent blocks.",
-          "railServed": "No rail spur into the property.",
-          "siteAreaAcres": "~14 acres for the K-C-controlled riverfront block; soft estimate given the campus is interleaved with downtown streets.",
-          "confidence": "Medium overall - facility positively identified, but it is an unusual urban R&D mill with no conventional truck yard, and shadow obscures dock detail."
+            {
+              "tier": 1,
+              "url": "https://careers.kimberly-clark.com/en/jobs/885171/electrical-optimization-engineer-marinette-mill",
+              "date": "2026-04",
+              "type": "locator",
+              "claim": "Active K-C careers req tied to the Marinette Mill (Electrical Optimization Engineer)."
+            }
+          ],
+          "imageryDate": "2025-08",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Tier-1 DNR status (2026-03) plus active Marinette Mill careers reqs; NOT in the 2018 restructuring closures; no closure/sale/WARN found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2686,28 +2391,6 @@
         },
         "dossierExcerpt": "- Roster coordinates (35.318728, -82.460953, geocode precision APPROXIMATE, moved 361 m) landed in downtown Hendersonville — a commercial block, not a plant.\n- Web research (PR Newswire, Henderson County Partnership for Economic Development, Yelp) gave the address: 32 Smyth Ave, Hendersonville, NC 28792 — the historic Balfour Mills site (founded 1924 by Capt. Ellison Adger Smyth, hence \"Smyth Ave\"), purchased by a K-C subsidiary in 1946 and renamed Berkeley Mills.\n- Satellite probe found a large nonwovens manufacturing plant roughly 3 km NW of downtown Hendersonville in the Balfour area, with extensive trailer yards and a rail spur — consistent with the K-C Berkeley Mill.\n- Locked center: 35.34630, -82.46880.",
         "mapsUrl": "https://www.google.com/maps/@35.34630,-82.46880,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/kimberly-clark/13-kc-hendersonville-nonwovens-plant-berkeley-mill-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.3463,
-              "lng": -82.4688
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/kimberly-clark/13-kc-hendersonville-nonwovens-plant-berkeley-mill-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.3463,
-              "lng": -82.4688
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster lat/lng (35.318728,-82.460953, APPROXIMATE) landed in downtown Hendersonville - wrong. Web research (PR Newswire, Henderson County EDP, Yelp) gave 32 Smyth Ave (the historic Balfour Mills / Berkeley Mill site). Satellite confirmed a large nonwovens manufacturing plant ~3 km NW of downtown. Locked center 35.34630,-82.46880.",
           "truckGate": "A dedicated K-C wayfinding sign on the public access road reads 'Kimberly-Clark - TRUCK ENTRANCE - 1/4 MILE NORTH - DOCKS 1-6'. The whole property is enclosed by a continuous chain-link perimeter fence; the truck entrance is a controlled, signed gate on the internal access road set well back from public roads.",
@@ -2723,6 +2406,32 @@
           "urbanRural": "Edge-of-town industrial site ~3 km NW of small-town Hendersonville, surrounded by woods, grassland and scattered residential - Rural per rubric.",
           "buildingCount": "One very large interconnected manufacturing complex plus minor support structures - counted as 3 distinct buildings.",
           "siteAreaAcres": "~78 acres for the fenced property including the building, drop yards, rail siding, parking and grass buffer."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.kimberly-clark.com/en/jobs/885296/process-engineer-berkeley-mills",
+              "date": "2025-01",
+              "type": "locator",
+              "claim": "Active K-C careers req: Process Engineer supporting nonwovens manufacturing at the Berkeley Plant, Hendersonville NC."
+            },
+            {
+              "tier": 1,
+              "url": "https://kimberlyclark.gcs-web.com/news-releases/news-release-details/kimberly-clark-expand-production-its-north-carolina-nonwovens",
+              "date": "2018-05",
+              "type": "press",
+              "claim": "K-C investor press: Hendersonville NC nonwovens plant produces materials for Depend, Poise, U by Kotex; $30M expansion."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active K-C Berkeley Mill (Hendersonville) careers reqs for nonwovens manufacturing (2025); no closure/sale/WARN; freight-bearing nonwovens plant.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2920,28 +2629,6 @@
         },
         "dossierExcerpt": "- Roster coordinates (34.935342, -88.490748, geocode precision ROOFTOP, moved 54 m) landed directly on the K-C Corinth industrial campus — correct.\n- Web research (Area Development, Mississippi Development Authority) confirms the Kimberly-Clark nonwovens plant at 610 Pinecrest St, Corinth, MS 38834 — a nonwovens manufacturing facility producing components for Huggies, Pull-Ups, Poise, Depend and WypAll, with $140M+ in expansion investment announced 2020-2021.\n- Locked center: 34.93560, -88.49080.",
         "mapsUrl": "https://www.google.com/maps/@34.93560,-88.49080,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/kimberly-clark/14-kc-corinth-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.9356,
-              "lng": -88.4908
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/kimberly-clark/14-kc-corinth-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.9356,
-              "lng": -88.4908
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster lat/lng (34.935342,-88.490748, ROOFTOP, moved 54m) landed directly on the K-C Corinth industrial campus - correct. Web research (Area Development, Mississippi Development Authority) confirms the nonwovens plant at 610 Pinecrest St (K-C invested $140M+ in expansions). Locked center 34.93560,-88.49080.",
           "truckGate": "Campus is enclosed by a continuous chain-link perimeter fence; truck entrances off Pinecrest St have chain-link double swing gates across the drive (seen open in Street View 2025-11), with 'No Trespassing' signage and a K-C signboard. Controlled gated entry.",
@@ -2958,135 +2645,26 @@
           "railServed": "A rail corridor runs through the woods along the NE but no spur enters the K-C property.",
           "buildingCount": "Estimated ~9 distinct buildings across the campus; flagged uncertain - some structures are small support buildings and mixed industrial occupancy is possible at the south end.",
           "siteAreaAcres": "~24 acres for the fenced K-C campus along Pinecrest St."
-        }
-      },
-      {
-        "id": "15-warren-advanced-manufacturing-facility",
-        "name": "K-C Warren Advanced Manufacturing Facility - Warren OH",
-        "type": "New advanced manufacturing facility (Huggies, Pull-Ups, Kleenex, Scott, Viva, Kotex, Poise, Depend; ~1.2M sq ft, $800M, under construction)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "low",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "remoteGs",
-          "preGateStaging",
-          "postGateStaging",
-          "drivewayLong",
-          "drivewayShort",
-          "backupSensitive",
-          "entryExitTogether",
-          "entryExitSeparate",
-          "entryLanes",
-          "exitLanes",
-          "fastLaneOpportunity",
-          "dockDoors",
-          "dropArea",
-          "shipRcvSeparate",
-          "multipleFacilities",
-          "scale",
-          "dropYard",
-          "multiStep"
-        ],
-        "center": {
-          "lat": 41.2235,
-          "lng": -80.8115
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 41.21441,
-                "lng": -80.816993
-              },
-              {
-                "lat": 41.21441,
-                "lng": -80.808204
-              },
-              {
-                "lat": 41.210277,
-                "lng": -80.807105
-              },
-              {
-                "lat": 41.208624,
-                "lng": -80.8115
-              },
-              {
-                "lat": 41.209451,
-                "lng": -80.816993
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 0,
-          "trailersVisible": 0,
-          "trailerParkingCapacity": 0,
-          "truckGateCount": 0,
-          "buildingCount": 0,
-          "siteAreaAcres": 560,
-          "railServed": true
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": false,
-          "drivewayLong": false,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": false,
-          "entryExitSeparate": false,
-          "entryLanes": null,
-          "exitLanes": null,
-          "fastLaneOpportunity": false,
-          "dockDoors": "NONE",
-          "dropArea": "NONE",
-          "shipRcvSeparate": false,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "dossierExcerpt": "Roster coords: 41.226713, -80.811838 (GEOMETRIC_CENTER, moved 3 m)\nLocked center: ~41.2235, -80.8115 (approximate property center)\nType: New advanced manufacturing facility (Huggies, Pull-Ups, Kleenex, Scott, Viva, Kotex, Poise, Depend) — ~1.0–1.2M sq ft, $800M, under construction\nGate verdict: Indeterminate — no yard infrastructure exists in available imagery\nArchetype: Indeterminate (under construction)\nConfidence: LOW\n\n---",
-        "mapsUrl": "https://www.google.com/maps/@41.2235,-80.8115,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/kimberly-clark/15-warren-advanced-manufacturing-facility-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.2235,
-              "lng": -80.8115
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/kimberly-clark/15-warren-advanced-manufacturing-facility-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.2235,
-              "lng": -80.8115
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "site": "Facility under construction. Located on the 560-acre former Republic Steel / BDM Steel brownfield off Pine Avenue (Niles River Road), spanning Howland Twp, Warren Twp and the City of Warren. Mahoning River bounds the property on the west; a NE-SW rail line runs through the site.",
-          "imagery": "Current Maxar/Airbus satellite layer and the Nov-2024 Street View pano both PREDATE the K-C building. The cleared/graded brownfield is visible but no plant structure, gates, docks or yard pavement appear yet. Per K-C (Vindicator, Jan 2026) the manufacturing building is 'sealed up and weathertight'; production begins H1 2027. The white-roofed building and aggregate/sand-gravel operation visible in the SE of current imagery are pre-existing/separate, not the K-C plant.",
-          "railServed": "Active rail line crosses the property NE-SW; a steel-mill site this size will almost certainly retain rail service for the new plant. Marked true with medium confidence.",
-          "urbanRural": "Site is <1 mile from Warren's Courthouse Square, embedded in the Warren urban fabric (residential grids on both sides). Classified Urban.",
-          "yardMetrics": "All yard counts are 0 because no yard infrastructure exists in available imagery. buildingCount 0 reflects the imagery, not the planned facility (1 plant building plus a proposed 500k-sq-ft DC across Pine Ave). siteAreaAcres 560 is the documented purchased acreage, not derived from the perimeter box.",
-          "perimeter": "Perimeter box drawn around the visibly cleared brownfield footprint; approximate, since the eventual fenced plant pad will occupy only part of the 560-acre parcel."
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://www.powderbulksolids.com/business/kimberly-clark-kicks-off-20m-expansion-project",
+              "date": "2025-01",
+              "type": "trade-press",
+              "claim": "K-C moving forward on $20M expansion at its Corinth MS nonwovens plant (+45,000 sqft, +25 jobs); >300 workers; components for Huggies, Pull-Ups, Poise, Depend, WypAll."
+            }
+          ],
+          "imageryDate": "2025-11",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "K-C actively expanding ($20M, +25 jobs) and hiring at the Corinth nonwovens plant in 2025; >300 workers; no closure/sale/WARN; freight-bearing.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3275,28 +2853,6 @@
         },
         "dossierExcerpt": "Roster coords: 39.747335, -75.310914 (APPROXIMATE — WRONG, see below)\nLocked center: 39.7385, -75.4135\nType: Distribution center (~600,000 sq ft, LEED-certified)\nGate verdict: No truck gate / no guard shack visible — open driveways\nArchetype: No-Gate DC with large drop yard and split ship/receive\nConfidence: MEDIUM\n\n---",
         "mapsUrl": "https://www.google.com/maps/@39.7385,-75.4135,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/kimberly-clark/16-logan-township-distribution-center-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.7385,
-              "lng": -75.4135
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/kimberly-clark/16-logan-township-distribution-center-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.7385,
-              "lng": -75.4135
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster coordinates (39.747335, -75.310914) were wrong - they fell in the Bridgeport residential village ~9 km NE of the site. The K-C Logan Township DC is documented by its general contractor (Blue Rock Construction) as 'Building GHI at LogistiCenter at Logan', 2651 Oldmans Creek Rd, Logan Township NJ - a 599,500 sq ft, LEED-certified 2007 Dermody Properties build. Locked the large single-tenant white-roofed warehouse at ~39.7385,-75.4135 inside the LogistiCenter at Logan / Logan North logistics park, off I-295.",
           "tenancy": "Multiple sources indicate Amazon later leased ~1M sq ft at 2651 Oldmans Creek Rd (Amazon FC 'TEB3'). The building audited here is that DC structure regardless of current tenant - it is the facility the roster targets.",
@@ -3309,6 +2865,33 @@
           "urbanRural": "Class-A logistics park (LogistiCenter at Logan) surrounded by farmland and other big-box warehouses on the rural SW edge of Gloucester County - edge-of-town industrial. Per rubric, classified Rural.",
           "siteAreaAcres": "~101 acres derived from the perimeter box; the building footprint alone is roughly 600k-1M sq ft.",
           "buildingCount": "1 - the single DC structure. Other warehouses nearby are separate properties, not part of this campus."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.news.kimberly-clark.com/2025-05-01-Kimberly-Clark-announces-plans-to-invest-over-2-Billion-to-Expand-US-Manufacturing,-Accelerate-Innovation-and-Fuel-Growth",
+              "date": "2025-05",
+              "type": "press",
+              "claim": "K-C self-reports an active North America distribution network (18 NA plants + 39 NA DCs) as of May 2025."
+            },
+            {
+              "tier": 3,
+              "url": "https://www.blrck.com/projects/kimberly-clark-leed/",
+              "date": "2024-01",
+              "type": "trade-press",
+              "claim": "~600,000 sq ft LEED build-to-suit DC delivered for Kimberly-Clark in Logan Township NJ."
+            }
+          ],
+          "imageryDate": "2026-04",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Build-to-suit ~600k sq ft LEED DC for K-C, corroborated by current K-C supply-chain hiring in Swedesboro/Logan Township; no closure evidence. Leased build-to-suit, likely 3PL-operated per K-C DC model.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3436,28 +3019,6 @@
         },
         "dossierExcerpt": "Roster coords: 33.623638, -81.847485 (ROOFTOP, moved 157 m)\nLocked center: 33.62405, -81.84755\nType: Distribution center\nGate verdict: Truck gate YES — sliding gate + chain-link perimeter fence\nGuard-shack verdict: YES — peaked-roof guard booth beside the truck lane\nArchetype: Gate + Guard Shack DC (cross-dock, split ship/receive)\nConfidence: HIGH\n\n---",
         "mapsUrl": "https://www.google.com/maps/@33.62405,-81.84755,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/kimberly-clark/17-graniteville-distribution-center-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.62405,
-              "lng": -81.84755
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/kimberly-clark/17-graniteville-distribution-center-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.62405,
-              "lng": -81.84755
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed at 1043 Global Ave, Graniteville SC, in Sage Mill Industrial Park. The DC is the 'Global Avenue Logistics Center' - a 450,033 sq ft Class-A cross-dock building on 30.1 acres, leased in full by Kimberly-Clark (CoStar reports K-C renewed its 450,000 sq ft lease). Roster ROOFTOP coords landed within the building footprint; locked center ~33.62405,-81.84755.",
           "truckGate": "TRUE - Street View (2024-03) of the truck-court entrance off Global Ave clearly shows a chain-link sliding gate across the truck lane plus a chain-link perimeter fence around the property (corroborated by leasing materials describing a 'fully secured site').",
@@ -3471,6 +3032,33 @@
           "rail": "FALSE active rail - the site is adjacent to a Norfolk Southern line and leasing materials note it COULD tie in via a rail spur, but no spur currently runs into the property.",
           "urbanRural": "Sage Mill Industrial Park sits in woodland on the edge of small-town Graniteville SC, ~1.5 mi from I-20. Edge-of-town industrial - classified Rural per rubric.",
           "siteAreaAcres": "30.1 acres is the documented parcel size; the axis-aligned perimeter box is a loose bounding box around a building elongated NW-SE and so overcounts the corners."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.costar.com/article/146962/kimberly-clark-renews-450000-sf-lease-in-graniteville",
+              "date": "2016-01",
+              "type": "trade-press",
+              "claim": "K-C renews 450,000 sq ft full-building lease at 1043 Global Ave, Graniteville SC; DC managed by 3PL GENCO ATC."
+            },
+            {
+              "tier": 1,
+              "url": "https://governor.sc.gov/news/2025-05/kimberly-clark-corporation-expanding-aiken-county-operation",
+              "date": "2025-05",
+              "type": "press",
+              "claim": "K-C actively operating/expanding distribution in Aiken County SC (May 2025); area consolidation under one roof at Beech Island targeted Q2 2027."
+            }
+          ],
+          "imageryDate": "2024-03",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active K-C DC operated by 3PL GENCO; only recent Tier-1 is region-level (lease confirm is 2016), so probable. FLAG: 2027 Beech Island automated DC may consolidate this footprint - monitor for closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3625,28 +3213,6 @@
         },
         "dossierExcerpt": "Roster coords: 47.114289, -122.631979 (ROOFTOP, moved 1879 m)\nLocked center: 47.11280, -122.63800\nType: Distribution center\nGate verdict: Truck gate YES — guard booth mid-lane with split entry/exit\nGuard-shack verdict: YES — booth standing in the truck driveway\nArchetype: Gate + Guard Shack DC with fast-lane room (cross-dock)\nConfidence: HIGH\n\n---",
         "mapsUrl": "https://www.google.com/maps/@47.11280,-122.63800,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/kimberly-clark/18-dupont-distribution-center-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 47.1128,
-              "lng": -122.638
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/kimberly-clark/18-dupont-distribution-center-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 47.1128,
-              "lng": -122.638
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed: 1205 Wharf Rd, DuPont WA - 'Building 1' of The Cubes at DuPont, a 747,488 sq ft Class-A distribution facility 100% leased to Kimberly-Clark (CRG / The Registry). The Cubes is a 1.6M sq ft, 3-building park on the former Intel campus / DuPont Corporate Center in the Northwest Landing community. Building 1 is the largest of the three buildings - the big N-S cross-dock structure at ~47.1128,-122.6380. Roster ROOFTOP coords moved 1879 m and landed near the cluster center; corrected to Building 1.",
           "truckGate": "TRUE - current (2026 Maxar) z20 satellite of the south truck-court entrance clearly shows a guard booth standing in the middle of the truck driveway with traffic lanes splitting around it (inbound lanes marked with arrows) and yellow-hatched median islands. Facility directory listings independently state 'Check in is required at the security guard for appointments only.'",
@@ -3660,6 +3226,25 @@
           "rail": "FALSE - no rail spur into the property (former Intel campus redevelopment; the BNSF mainline runs well to the NE near the I-5 corridor but does not serve the site).",
           "urbanRural": "DuPont is a small city on the I-5 corridor in the southern fringe of the Seattle-Tacoma metro. The Cubes sits in a forested industrial park (Northwest Landing / DuPont Corporate Center) on the edge of town. Borderline - classified Rural per the rubric's 'when torn between small-town industrial and Urban, choose Rural' guidance; flagged in uncertainFields.",
           "siteAreaAcres": "~54 acres derived from the perimeter box around Building 1's fenced property (building + both truck courts + east trailer yard + south gate)."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "3PL",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.connectcre.com/stories/kimberly-clark-takes-750k-sf-at-former-intel-campus-in-dupont-wa/",
+              "date": "2022-01",
+              "type": "trade-press",
+              "claim": "K-C signed a 747,488 sq ft long-term lease at The Cubes at DuPont (2800 Center Drive), confirming a current K-C distribution presence in DuPont WA."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Audited coords pin the established KCDC at 1205 Wharf Rd (corroborated as an active K-C live-load DC); recent Tier-1 confirms K-C distribution in DuPont WA but at the adjacent Cubes building, so probable. FLAG: confirm whether audited coords are the Wharf Rd DC vs the Cubes (2800 Center Dr) - two distinct K-C DuPont sites; re-pin if needed.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       }
     ]

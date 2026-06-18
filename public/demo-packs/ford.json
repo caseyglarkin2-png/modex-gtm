@@ -1,13 +1,13 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-03T01:46:14.910Z",
+  "builtAt": "2026-06-18T21:38:09.959Z",
   "account": {
     "slug": "ford",
     "displayName": "Ford Motor Company",
     "archetype": "oem-automotive",
-    "siteCount": 24,
+    "siteCount": 21,
     "coverageNote": {
-      "auditedCount": 24,
+      "auditedCount": 21,
       "estimatedFootprint": 30,
       "totalGlobalFootprint": 65,
       "auditedScope": "NA",
@@ -35,18 +35,18 @@
       42.789322
     ],
     "archetypeMix": {
-      "#6": 13,
+      "#6": 10,
       "#7": 3,
       "#9": 6,
       "#1": 1,
       "#4": 1
     },
     "totals": {
-      "dockDoors": 907,
-      "trailerCapacity": 2692,
-      "gates": 37,
-      "railServed": 20,
-      "acres": 6336.8
+      "dockDoors": 797,
+      "trailerCapacity": 2292,
+      "gates": 32,
+      "railServed": 18,
+      "acres": 4369.8
     },
     "sites": [
       {
@@ -176,28 +176,6 @@
         },
         "dossierExcerpt": "- Name: Ford - Dearborn Truck Plant, Dearborn MI\n- Type: Vehicle Assembly Plant (F-150 / F-150 Lightning)\n- Address: 3001 Miller Rd, Dearborn, MI 48120\n- Resolved coords: 42.31280, -83.16400",
         "mapsUrl": "https://www.google.com/maps/@42.31280,-83.16400,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/ford/01-dearborn-truck-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.3128,
-              "lng": -83.164
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/ford/01-dearborn-truck-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.3128,
-              "lng": -83.164
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "facility": "Dearborn Truck Plant inside the Ford Rouge Complex; coords land exactly on the DTP's 10.4-acre living (green) roof, an unmistakable landmark confirming identity.",
           "truckGate": "Rouge Complex is a fully fenced, controlled-access campus. Truck and employee traffic enters via guarded Miller Rd gates; gate infrastructure, fencing and Ford gate signage visible in Street View.",
@@ -207,6 +185,32 @@
           "multipleFacilities": "DTP is one plant within the larger integrated Rouge manufacturing campus (stamping, frame, other buildings adjacent).",
           "dockDoorCount": "Estimate from overhead imagery; docks distributed across multiple building faces of a very large assembly building plus parts-receiving banks.",
           "scale": "No truck scale clearly identified in imagery; left uncertain."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.ford.com/operations/locations/global-plants/dearborn-truck-plant/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Ford lists Dearborn Truck Plant (Rouge complex) producing F-150"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.detroitnews.com/story/business/autos/ford/2026/05/21/dearborn-f-150-plant-production-employees-hood-die-novelis-fire/90202870007/",
+              "date": "2026-05",
+              "type": "press",
+              "claim": "May 2026 coverage of active F-150 production at Dearborn Truck Plant"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active F-150 assembly; Ford added a 2026 third crew, no divestiture signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -309,28 +313,6 @@
         },
         "dossierExcerpt": "- Name: Ford - Kentucky Truck Plant, Louisville KY\n- Type: Vehicle Assembly Plant (Super Duty, Expedition, Navigator)\n- Address: 3001 Chamberlain Ln, Louisville, KY 40241\n- Resolved coords: 38.29400, -85.53350",
         "mapsUrl": "https://www.google.com/maps/@38.29400,-85.53350,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/ford/02-kentucky-truck-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 38.294,
-              "lng": -85.5335
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/ford/02-kentucky-truck-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 38.294,
-              "lng": -85.5335
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "facility": "Kentucky Truck Plant (Super Duty, Expedition, Navigator); the geocode point lands on the south edge of the plant - the building cluster is unmistakable: one of Ford's largest assembly sites on Chamberlain Ln near I-71.",
           "truckGate": "Secured Ford assembly campus - perimeter fencing, controlled access roads from Chamberlain Ln, distinct truck route to the SW drop yard / dock banks. Truck gate confirmed.",
@@ -342,6 +324,32 @@
           "urbanRural": "Edge-of-metro / suburban Louisville - surrounded by residential subdivisions and woods, set off I-71; per rubric, when torn between small-town industrial and Urban, choose Rural.",
           "multipleFacilities": "Multiple large connected and separate buildings forming an integrated assembly campus.",
           "scale": "No truck scale clearly identified; left uncertain."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.ford.com/operations/locations/global-plants/kentucky-truck-plant/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Ford lists Kentucky Truck Plant producing Super Duty, Expedition, Lincoln Navigator"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.businesswire.com/news/home/20251023640434/en",
+              "date": "2025-10",
+              "type": "press",
+              "claim": "Ford 2026 capacity expansion for Super Duty at KTP"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Operating at full capacity, 2026 capacity expansion announced; no closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -541,28 +549,6 @@
         },
         "dossierExcerpt": "- Name: Ford - Kansas City Assembly Plant, Claycomo MO\n- Type: Vehicle Assembly Plant (F-150 + Transit)\n- Address: 8121 US Highway 69, Claycomo, MO 64119\n- Resolved coords: 39.20250, -94.47700",
         "mapsUrl": "https://www.google.com/maps/@39.20250,-94.47700,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/ford/03-kansas-city-assembly-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.2025,
-              "lng": -94.477
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/ford/03-kansas-city-assembly-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.2025,
-              "lng": -94.477
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "facility": "Kansas City Assembly Plant (F-150 + Transit, two high-volume lines) in Claycomo MO; geocode point lands directly on the plant - identity unambiguous.",
           "truckGate": "Street View of the SE plant access road shows a clear truck gate: a guard booth, kiosk/card-reader pedestal, stop sign, concrete median separating in/out lanes, and trailers backed into docks beyond. Confirmed controlled truck entrance.",
@@ -575,241 +561,25 @@
           "multipleFacilities": "Multiple large connected and a separate detached building to the south form an integrated assembly campus.",
           "dockDoorCount": "Overhead estimate; dock doors distributed across multiple building faces.",
           "scale": "No truck scale clearly identified; left uncertain."
-        }
-      },
-      {
-        "id": "04-louisville-assembly-plant",
-        "name": "Ford - Louisville Assembly Plant, Louisville KY",
-        "type": "Vehicle Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "uncertainFields": [
-          "guardShack",
-          "scale",
-          "entryLanes",
-          "exitLanes",
-          "dockDoorCount"
-        ],
-        "center": {
-          "lat": 38.1547,
-          "lng": -85.7285
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 38.157292,
-                "lng": -85.733444
-              },
-              {
-                "lat": 38.157292,
-                "lng": -85.72081
-              },
-              {
-                "lat": 38.152972,
-                "lng": -85.72081
-              },
-              {
-                "lat": 38.152972,
-                "lng": -85.733444
-              }
-            ]
-          },
-          "truckGate": {
-            "ring": [
-              {
-                "lat": 38.15312,
-                "lng": -85.73356
-              },
-              {
-                "lat": 38.15337,
-                "lng": -85.73338
-              },
-              {
-                "lat": 38.15321,
-                "lng": -85.73298
-              },
-              {
-                "lat": 38.15296,
-                "lng": -85.73316
-              }
-            ]
-          },
-          "dropYards": [
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
             {
-              "ring": [
-                {
-                  "lat": 38.1546,
-                  "lng": -85.73295
-                },
-                {
-                  "lat": 38.1546,
-                  "lng": -85.73185
-                },
-                {
-                  "lat": 38.15355,
-                  "lng": -85.73185
-                },
-                {
-                  "lat": 38.15355,
-                  "lng": -85.73295
-                }
-              ]
+              "tier": 1,
+              "url": "https://corporate.ford.com/operations/locations/global-plants/kansas-city-assembly-plant/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Ford lists Kansas City Assembly Plant (Claycomo) producing F-150 and Transit"
             }
           ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 38.154268,
-                  "lng": -85.732345
-                },
-                {
-                  "lat": 38.154268,
-                  "lng": -85.726303
-                },
-                {
-                  "lat": 38.153188,
-                  "lng": -85.726303
-                },
-                {
-                  "lat": 38.153188,
-                  "lng": -85.732345
-                }
-              ]
-            }
-          ],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 180,
-              "pano": "sbePv_CLAUWZBGqWYquSVA",
-              "hasCoverage": true
-            },
-            "truckGate": {
-              "heading": 60,
-              "pano": "CAoSFkNJSE0wb2dLRUlDQWdJQ0Jpc0RMVXc.",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 45,
-          "trailersVisible": 90,
-          "trailerParkingCapacity": 160,
-          "truckGateCount": 2,
-          "buildingCount": 6,
-          "siteAreaAcres": 277,
-          "railServed": true
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": true,
-          "remoteGs": false,
-          "preGateStaging": true,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": false,
-          "entryExitSeparate": true,
-          "entryLanes": 2,
-          "exitLanes": 2,
-          "fastLaneOpportunity": true,
-          "dockDoors": "25-50",
-          "dropArea": "50+",
-          "shipRcvSeparate": true,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": true,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": true
-        },
-        "scenario": {
-          "archetypeId": "#6",
-          "steps": [
-            {
-              "step": "Arrive at outer campus gate",
-              "geofenceTarget": "truckGate",
-              "durationMs": 30000,
-              "narrationKey": "gate.arrive",
-              "baselineWaitMs": 600000,
-              "ynsWaitMs": 30000
-            },
-            {
-              "step": "Route to correct building / drop yard",
-              "geofenceTarget": "dropYard",
-              "targetIndex": 0,
-              "durationMs": 180000,
-              "narrationKey": "campus.route",
-              "baselineWaitMs": 900000,
-              "ynsWaitMs": 0
-            },
-            {
-              "step": "Spotter pulls to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 90000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 1200000,
-              "ynsWaitMs": 120000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit through gate",
-              "geofenceTarget": "exit",
-              "durationMs": 60000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 5460000,
-          "totalYnsMs": 2910000
-        },
-        "dossierExcerpt": "- Name: Ford - Louisville Assembly Plant, Louisville KY\n- Type: Vehicle Assembly Plant (Ford Escape, Lincoln Corsair)\n- Address: 2000 Fern Valley Rd, Louisville, KY 40213\n- Resolved center: 38.15470, -85.72850",
-        "mapsUrl": "https://www.google.com/maps/@38.15470,-85.72850,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/ford/04-louisville-assembly-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 38.1547,
-              "lng": -85.7285
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/ford/04-louisville-assembly-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 38.1547,
-              "lng": -85.7285
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "facility": "Louisville Assembly Plant (Ford Escape, Lincoln Corsair), 2000 Fern Valley Rd. Geocode landed on the rooftop (moved 15m); confirmed as the large assembly complex immediately south of Louisville International Airport / UPS Worldport, bounded by Fern Valley Rd to the north, Grade Lane to the west, and a rail corridor to the south. ~3.15M sq ft of building.",
-          "truckGate": "Secured Ford assembly campus with continuous perimeter chain-link fencing visible in multiple Street View captures along Grade Lane and Fern Valley Rd. Controlled truck access driveway off Fern Valley Rd into the west dock/yard area. A clearly visible internal vehicle-control gate (blue-roofed booth with gate arms and crosswalk markings) controls movement between the plant and finished-vehicle lots on the east side.",
-          "guardShack": "Ford assembly plants run staffed security gatehouses at controlled entrances; a distinct booth structure with gate arms is visible at the internal east checkpoint. Marked uncertain - the perimeter truck-gate booth could not be crisply isolated because Street View panos sit on the secured campus loop road rather than at the public-road gate itself.",
-          "multiStep": "Outer perimeter truck gate plus a separate internal vehicle-control checkpoint (booth + gate arms) between the plant and the finished-vehicle storage lots.",
-          "railServed": "Active rail yard with auto-rack rail cars running the full length of the south side of the plant; covered rail loading and adjacent trailer drop rows visible.",
-          "dropYard": "Large dedicated trailer drop yard along the west side (Grade Lane frontage) plus trailer rows south of the building near the rail corridor - dozens of parked trailers without tractors.",
-          "dropArea": "50+ trailers visible across the west drop yard and south dock face.",
-          "dockDoors": "Counted ~45 loading doors across the south and west building faces; banked dock doors with trailers backed in. Estimate from overhead imagery - marked uncertain.",
-          "shipRcvSeparate": "Distinct dock banks on the south face and the west face, plus a separate finished-vehicle dispatch operation on the east - shipping and receiving run from physically separate clusters.",
-          "fastLaneOpportunity": "Wide paved aprons and multi-lane driveways at the Fern Valley Rd entry with unused width for an express bypass.",
-          "urbanRural": "Inside the dense Louisville metro fabric, hemmed by the international airport, interstate, and industrial corridor - Urban.",
-          "scale": "No truck scale clearly identified; left uncertain."
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Dedicated F-150 + Transit plant, UAW Local 249; no closure/divestiture.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -919,28 +689,6 @@
         },
         "dossierExcerpt": "- Name: Ford - Michigan Assembly Plant, Wayne MI\n- Type: Vehicle Assembly Plant (Ford Ranger, Bronco)\n- Address: 38303 Michigan Ave, Wayne, MI 48184\n- Resolved center: 42.27640, -83.41360",
         "mapsUrl": "https://www.google.com/maps/@42.27640,-83.41360,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/ford/05-michigan-assembly-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.2764,
-              "lng": -83.4136
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/ford/05-michigan-assembly-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.2764,
-              "lng": -83.4136
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "facility": "Michigan Assembly Plant (Ford Ranger, Bronco), 38303 Michigan Ave, Wayne MI. Geocode landed on the rooftop (moved 170m); confirmed as the large assembly complex on the south side of Michigan Ave - ~5M sq ft of building on a 369-acre site (web-confirmed). Two large connected building clusters split by an active rail corridor.",
           "truckGate": "Secured Ford assembly campus with perimeter fencing and wooded buffer along Michigan Ave. Controlled truck access driveways into the dock/yard areas; an internal vehicle-control gate (small canopy/booth structure with markings) controls movement between the plant and employee/finished-vehicle areas on the SW side.",
@@ -955,6 +703,25 @@
           "multipleFacilities": "Two large building complexes on one fenced property - the assembly plant and an integrated stamping building - a campus.",
           "urbanRural": "Inside the dense Detroit metro fabric in Wayne MI, surrounded by residential subdivisions and commercial corridors along Michigan Ave - Urban.",
           "scale": "No truck scale clearly identified; left uncertain."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.ford.com/operations/locations/global-plants/michigan-assembly-plant/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Ford lists Michigan Assembly Plant (Wayne) producing Bronco and Ranger"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Bronco + Ranger assembly (~5,886 employees Jan 2026); no closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1148,28 +915,6 @@
         },
         "dossierExcerpt": "Roster coordinates (geocode ROOFTOP, moved 26 m) landed directly on the main\nplant building. Wide satellite (z15-16) shows a large industrial complex with a\ndistinctive multi-bay sawtooth assembly building along the Calumet River, with\nTorrence Ave running NE-SW along the east side and dense residential\nneighbourhoods east of the road. Street View on the west side of Torrence Ave\n(2024) shows the building wall lettered \"CHICAGO ASSEMBLY PLANT\" with the Ford\noval — positively the right facility. The Hegewisch-neighbourhood / Calumet\nRiver / Torrence Ave context matches all web sources.",
         "mapsUrl": "https://www.google.com/maps/@41.66662,-87.559702,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/ford/06-chicago-assembly-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.66662,
-              "lng": -87.559702
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/ford/06-chicago-assembly-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.66662,
-              "lng": -87.559702
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Guarded truck gate confirmed mid-property on Torrence Ave (~41.6615, -87.5593). 2024 Street View shows a tan single-story guard house with multi-side windows at the perimeter fence line, bollards/lane-control structures, directional signage ('ALL INBOUND TRAFFIC', 'VISITOR PARKING'), and trucks staged in the apron.",
           "guardShack": "Confirmed - small staffed booth (1-2 vehicle footprint, Ford-branded) set beside the gate lane, distinct from the main building.",
@@ -1182,6 +927,25 @@
           "dockDoorCount": "Estimate ~45 across the supplier/JIT dock banks visible in z19-20 imagery; full plant has additional internal docks not all visible from overhead - low confidence.",
           "scale": "No clear truck scale identified in imagery; left false.",
           "exitLanes": "Single combined entry/exit gate group; outbound lane count inferred."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.ford.com/operations/locations/global-plants/chicago-assembly-plant/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Ford lists Chicago Assembly Plant producing Explorer, Police Interceptor Utility, Lincoln Aviator"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Explorer + Aviator assembly; no 2026 idle/retooling announcement found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1377,28 +1141,6 @@
         },
         "dossierExcerpt": "- Name: Ford - Ohio Assembly Plant, Avon Lake OH\n- Type: Vehicle Assembly Plant (Super Duty chassis cab, F-650/750, E-Series)\n- Address: 650 Miller Rd, Avon Lake, OH 44012\n- Resolved center: 41.48720, -82.06550",
         "mapsUrl": "https://www.google.com/maps/@41.48720,-82.06550,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/ford/07-ohio-assembly-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.4872,
-              "lng": -82.0655
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/ford/07-ohio-assembly-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.4872,
-              "lng": -82.0655
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "facility": "Ohio Assembly Plant (Super Duty chassis cab, F-650/750 medium-duty, E-Series), 650 Miller Rd, Avon Lake OH. Geocode landed on the rooftop (moved 348m); confirmed as the large multi-roof assembly complex - ~3.7M sq ft of building on a 419-acre site (web-confirmed).",
           "truckGate": "CONFIRMED. A definitive truck gate with a guard shack is visible at z19/z20 on the west side: a square guard building with a central courtyard, multiple truck lanes splitting around it, gate canopies/arms over the lanes, and a wide paved staging apron upstream. Clear controlled checkpoint where the truck route meets the access road.",
@@ -1415,6 +1157,32 @@
           "urbanRural": "Edge-of-town Avon Lake / Sheffield with farmland and woods on the west and a golf course to the north - per rubric, when torn between small-town industrial and Urban, choose Rural.",
           "connectivityIssue": "Site is on the edge of a small town with farmland adjacent but within the Cleveland metro reach - cellular coverage likely adequate; false but flagged as inferred.",
           "scale": "No truck scale clearly identified; left uncertain."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.ford.com/operations/locations/global-plants/ohio-assembly-plant/",
+              "date": "2026-01",
+              "type": "locator",
+              "claim": "Ford lists Ohio Assembly Plant (Avon Lake) as active Ford manufacturing facility"
+            },
+            {
+              "tier": 2,
+              "url": "https://fordauthority.com/2024/11/heres-every-plant-that-will-produce-the-ford-f-series-in-2026/",
+              "date": "2024-11",
+              "type": "press",
+              "claim": "Produces F-650/750, Super Duty chassis cab, E-Series through 2026; $1.5B commercial EV added 2026"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Ford commercial-truck assembly, expanding (not closing).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1610,28 +1378,6 @@
         },
         "dossierExcerpt": "- Name: Ford - Flat Rock Assembly Plant, Flat Rock MI\n- Type: Vehicle Assembly Plant (Ford Mustang — exclusive NA production)\n- Address: 1 International Dr, Flat Rock, MI 48134\n- Resolved center: 42.10560, -83.24820",
         "mapsUrl": "https://www.google.com/maps/@42.10560,-83.24820,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/ford/08-flat-rock-assembly-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.1056,
-              "lng": -83.2482
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/ford/08-flat-rock-assembly-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.1056,
-              "lng": -83.2482
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "facility": "Flat Rock Assembly Plant (Ford Mustang - exclusive NA production site), 1 International Dr, Flat Rock MI. Roster geocode (moved 3258m) nonetheless landed centrally on the plant; confirmed as the large assembly complex - ~2.9M sq ft of building on a 400-acre site (web-confirmed).",
           "truckGate": "Secured Ford assembly campus with continuous perimeter chain-link fencing visible in Street View. Controlled access driveway off the public road with a Ford-branded entrance; an internal gate/checkpoint structure with a guard booth and crosswalk markings controls movement between the perimeter storage lots and the inner yard.",
@@ -1648,258 +1394,25 @@
           "multipleFacilities": "Multiple large connected buildings forming an integrated assembly campus.",
           "urbanRural": "Edge-of-town Flat Rock with farmland and open land adjacent to the campus - per rubric, when torn between small-town industrial and Urban, choose Rural.",
           "scale": "No truck scale clearly identified; left uncertain."
-        }
-      },
-      {
-        "id": "09-blueoval-city-tennessee-electric-vehicle-center",
-        "name": "Ford - BlueOval City / Tennessee Electric Vehicle Center, Stanton TN",
-        "type": "Vehicle Assembly Plant (greenfield, ramp-up)",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "medium",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "remoteGs",
-          "scale",
-          "entryLanes",
-          "exitLanes",
-          "dockDoorCount",
-          "dropArea",
-          "trailerParkingCapacity",
-          "siteAreaAcres",
-          "railServed",
-          "multiStep"
-        ],
-        "center": {
-          "lat": 35.42,
-          "lng": -89.418
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 35.423581,
-                "lng": -89.433381
-              },
-              {
-                "lat": 35.423581,
-                "lng": -89.408112
-              },
-              {
-                "lat": 35.413733,
-                "lng": -89.408112
-              },
-              {
-                "lat": 35.413733,
-                "lng": -89.433381
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 35,
-          "trailersVisible": 60,
-          "trailerParkingCapacity": 200,
-          "truckGateCount": 2,
-          "buildingCount": 12,
-          "siteAreaAcres": 950,
-          "railServed": true
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": true,
-          "remoteGs": false,
-          "preGateStaging": true,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": false,
-          "entryExitSeparate": true,
-          "entryLanes": 2,
-          "exitLanes": 2,
-          "fastLaneOpportunity": true,
-          "dockDoors": "25-50",
-          "dropArea": "25-50",
-          "shipRcvSeparate": true,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": true,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": true
-        },
-        "dossierExcerpt": "- Name: Ford - BlueOval City / Tennessee Electric Vehicle Center, Stanton TN\n- Type: Vehicle Assembly Plant (greenfield, ramp-up)\n- Address: TN-222 at Stanton-Somerville Rd, Stanton, TN 38069\n  (street address now 2025 BlueOval City Drive, Stanton, TN)\n- Resolved center: 35.42000, -89.41800 (CORRECTED — see below)",
-        "mapsUrl": "https://www.google.com/maps/@35.42000,-89.41800,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/ford/09-blueoval-city-tennessee-electric-vehicle-center-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.42,
-              "lng": -89.418
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/ford/09-blueoval-city-tennessee-electric-vehicle-center-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.42,
-              "lng": -89.418
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "facility": "BlueOval City / Tennessee Electric Vehicle Center, Stanton TN - Ford's $5.6B greenfield EV truck + battery campus on the 4,100-acre Memphis Regional Megasite in SW Haywood County. IMPORTANT - the roster geocode (35.457145, -89.405212) landed on the town of Stanton itself, ~4 km NE of the actual campus. The real campus was located ~2.5 miles south of Stanton via web research (Haywood County / TN Megasite Authority sources) and confirmed by satellite at approximately 35.420, -89.418.",
-          "locationCorrection": "Roster lat/lng were wrong (pointed at Stanton town). Corrected center is 35.42000, -89.41800 - the center of the large industrial campus visible at z14-z17.",
-          "truckGate": "Campus shows continuous perimeter chain-link fencing (confirmed in Feb 2026 Street View) and a controlled internal road network with roundabouts. A gate/checkpoint structure with crosswalk markings is visible on the NE truck route. Marked uncertain - the site is mid-ramp-up and imagery is mixed-era; final gate configuration not fully verifiable.",
-          "guardShack": "A booth/checkpoint structure is visible at the NE truck route. Ford runs staffed gatehouses at all assembly campuses. Marked uncertain due to greenfield ramp-up status and construction-era imagery.",
-          "rampUp": "BlueOval City is a greenfield site in active ramp-up - the main assembly building and several supplier buildings are complete (white roofs, fenced) but large portions of the campus remain raw graded land with earthmoving equipment visible in Feb 2026 Street View. Metrics are best-effort and will change as the site builds out.",
-          "railServed": "A large auto/EV campus of this scale is planned with rail service; rail infrastructure is part of the megasite design. Marked uncertain - rail spur not crisply confirmed in current imagery.",
-          "dropYard": "Trailer parking and laydown areas visible at multiple points around the campus; construction laydown yards plus emerging operational trailer parking near the NE and W building faces.",
-          "dockDoors": "Estimated ~35 doors from the assembly building faces; the building is vast but dock banks are still being established - marked uncertain.",
-          "siteAreaAcres": "Perimeter box covers ~950 acres of the developed core; the full Memphis Regional Megasite is 4,100 acres and Ford's footprint within it is still expanding - figure is approximate.",
-          "buildingCount": "~12 distinct buildings - the main assembly/battery plant plus numerous supplier and support buildings; campus still adding structures.",
-          "multipleFacilities": "Large multi-building campus - assembly plant, battery plant, and a supplier park - clearly a campus.",
-          "urbanRural": "Deep rural SW Haywood County, surrounded by farmland and woods, 2.5 miles from the small town of Stanton (~600 residents) - Rural.",
-          "connectivityIssue": "Rural location but a major industrial campus with substantial built infrastructure and a new electrical substation - cellular coverage likely provisioned; set false but flagged as inferred.",
-          "scale": "No truck scale clearly identified; left uncertain."
-        }
-      },
-      {
-        "id": "10-blueoval-sk-battery-park",
-        "name": "Ford - BlueOval SK Battery Park, Glendale KY",
-        "type": "Battery Manufacturing Plant (JV with SK On)",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "low",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "remoteGs",
-          "preGateStaging",
-          "postGateStaging",
-          "entryLanes",
-          "exitLanes",
-          "dockDoors",
-          "dropArea",
-          "shipRcvSeparate",
-          "trailersVisible",
-          "trailerParkingCapacity",
-          "dockDoorCount",
-          "fastLaneOpportunity",
-          "multiStep",
-          "scale"
-        ],
-        "center": {
-          "lat": 37.586,
-          "lng": -85.88
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 37.593835,
-                "lng": -85.890986
-              },
-              {
-                "lat": 37.593835,
-                "lng": -85.873408
-              },
-              {
-                "lat": 37.575552,
-                "lng": -85.873408
-              },
-              {
-                "lat": 37.575552,
-                "lng": -85.890986
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 30,
-          "trailersVisible": 8,
-          "trailerParkingCapacity": 40,
-          "truckGateCount": 1,
-          "buildingCount": 6,
-          "siteAreaAcres": 740,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": true,
-          "remoteGs": false,
-          "preGateStaging": true,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 2,
-          "exitLanes": 2,
-          "fastLaneOpportunity": true,
-          "dockDoors": "25-50",
-          "dropArea": "10-25",
-          "shipRcvSeparate": true,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": true,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "dossierExcerpt": "The roster coordinates (37.601728, -85.905519) point at the town center of\nGlendale, KY — not the plant. The BlueOval SK Battery Park sits ~2.4 km\nsoutheast, immediately west of Interstate 65 on the Glendale Megasite. I\nlocated it by stepping back to z13 (which showed a large white-roof building\ncluster near the I-65 corridor) and then centering and zooming on the\ndual-plant complex. Web research confirmed the identity: BlueOval SK is the\nFord / SK On JV; the Glendale park has two ~4M sq ft battery plant buildings\n(~8M sq ft combined). Production officially began Aug 19, 2025; Ford has since\nannounced the workforce would be idled by Feb 2026 with rehire planned for\n2027 after retooling — the plant is built and was operational but is currently\nin a retooling pause.",
-        "mapsUrl": "https://www.google.com/maps/@37.586,-85.88,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/ford/10-blueoval-sk-battery-park-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 37.586,
-              "lng": -85.88
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/ford/10-blueoval-sk-battery-park-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 37.586,
-              "lng": -85.88
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "site": "BlueOval SK Battery Park, Glendale (Hardin County) KY - a Ford / SK On joint-venture EV battery campus on the Glendale Megasite, two ~4M sq ft battery plant buildings (~8M sq ft combined). Roster coordinates (37.6017,-85.9055) point at Glendale town center, ~2.4 km NW of the actual plant. Corrected center to ~37.5860,-85.8800 (the white-roof dual-plant complex) confirmed by satellite: two giant battery plant buildings sit immediately west of I-65, with employee parking lots full of cars on the west side and process/utility structures (tank farms, conveyor bridges) at the south. Production officially began Aug 2025; Ford announced the workforce would be idled by Feb 2026 with rehire planned for 2027 after retooling - so the plant is operational but currently in a retooling pause.",
-          "imagery": "Available Maxar/Airbus satellite tiles capture the site during the active construction / early-ramp phase: surrounding ground is largely bare graded dirt and construction laydown, so the final operational truck-yard, drop-yard and gate configuration is NOT fully built out in imagery. Most layout/count fields are therefore low-confidence estimates and flagged uncertain.",
-          "truckGate": "Marked true (low confidence). Chain-link perimeter fencing is clearly visible along the public perimeter road in 2025-08 Street View; a megasite battery plant of this security profile (JV with valuable IP, hazmat) operates controlled gated truck access. The exact gate structure could not be positively resolved in construction-era imagery.",
-          "guardShack": "Marked true (low confidence) - a secured automotive-JV battery campus of this scale conventionally operates a staffed gatehouse at the main entrance. A booth structure was not positively resolved; flagged uncertain. remoteGs false as a consequence.",
-          "shipRcvSeparate": "Marked true (low confidence) - two separate ~4M sq ft plant buildings each with their own dock banks on different faces; raw-material receiving and finished-cell shipping would run from physically distinct dock clusters.",
-          "dockDoors": "Estimated 25-50 across the two large plant buildings; regular bay rhythm visible along the SW building's south/west faces in z18-z19 imagery. Exact count obscured by roof angle and construction state - flagged uncertain.",
-          "dropArea": "Banded 10-25; a paved truck/trailer staging area is visible toward the south of the complex but much of the surrounding area is still construction laydown - flagged uncertain. dropYard true.",
-          "multipleFacilities": "True - two enormous separate plant buildings plus multiple process/utility support structures form a single campus.",
-          "railServed": "No rail spur into the property could be identified; the CSX line corridor is some distance away. railServed false.",
-          "urbanRural": "Glendale is a small rural Hardin County community surrounded by farmland; the megasite is greenfield development off I-65. Rural.",
-          "fastLaneOpportunity": "True (low confidence) - the megasite has vast unused paved/graded width around the entrance, ample physical room for express/bypass lanes.",
-          "geofence": "perimeter box covers the developed/fenced plant complex core (~740 acres); the broader Glendale Megasite parcel is larger (~1,500+ acres). Sub-zones are best-effort estimates from construction-era imagery."
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://fordauthority.com/fmc/ford/ford-mustang/2026-ford-mustang/",
+              "date": "2025-12",
+              "type": "press",
+              "claim": "2026 Ford Mustang (S650) assembled at Flat Rock Assembly"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Ford-operated Mustang assembly, actively producing 2026 Mustang through 2028 MY.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2002,28 +1515,6 @@
         },
         "dossierExcerpt": "Type: Stamping Plant\nResolved center: 42.30680, -83.16050\nConfidence: medium\n\n### Location resolution\nThe roster supplied 42.313554, -83.164654 — identical to idx 1 (Dearborn Truck\nPlant) and the generic Rouge Complex address (3001 Miller Rd). Web research\nestablished the Dearborn Stamping Plant (DSP) as a distinct 2.7M-sq-ft, ~35-acre\nfacility that stamps F-150 doors and hoods, in operation since 1939. A common\ngeocode for it (42.3083377, -83.1563218) was probed and found to land on the\nRouge Center central road/parking spine — not a building.\n\nSatellite probing of the Rouge interior (z16-z19) identified the actual stamping\nplant: the large single flat-roofed press building with characteristic rows of\nroof skylights/monitors and flanking rail spurs, centered near 42.3068,-83.1605.",
         "mapsUrl": "https://www.google.com/maps/@42.3068,-83.1605,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/ford/11-dearborn-stamping-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.3068,
-              "lng": -83.1605
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/ford/11-dearborn-stamping-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.3068,
-              "lng": -83.1605
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "site": "Dearborn Stamping Plant (DSP) is an interior building of Ford's 93-building Rouge Center campus. 2.7M sq ft on a ~35-acre footprint; stamps F-150 doors and hoods. Generic geocode (42.3083,-83.1563) lands on the Rouge central road/parking spine, not the building; building center relocated to ~42.3068,-83.1605 via satellite identification of the large single flat-roofed press structure with skylight rows and flanking rail spurs.",
           "truckGate": "The Rouge Center is a fully fenced and guarded campus; the stamping plant is served by the complex's controlled gate system rather than its own street-facing gate. Z19 satellite of the SW Rouge gate (~42.3017,-83.169) shows a canopied checkpoint with guard booth and lane markings; Street View on the Rouge access road shows perimeter fence and a controlled pinch-point.",
@@ -2034,6 +1525,25 @@
           "dropArea": "No external trailer drop yard for this interior building; outbound stampings move internally to assembly. dropYard false.",
           "perimeter": "Box approximates the DSP building footprint within the larger Rouge campus; the Rouge campus perimeter is far larger but the stamping plant occupies this ~35-acre sub-footprint.",
           "urbanRural": "Dense Detroit/Dearborn metro industrial fabric - clearly Urban."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://pickuptrucktalk.com/2025/10/ford-truck-production-boosted-in-response-to-supplier-fire-disruption-1000-jobs-added/",
+              "date": "2025-10",
+              "type": "press",
+              "claim": "Ford adding employees at Dearborn Stamping Plant (Rouge) for increased F-150 production"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Ford stamping plant in the Rouge complex, staffing up late 2025.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2119,28 +1629,6 @@
         },
         "dossierExcerpt": "Type: Engine Plant\nResolved center: 42.31280, -83.15880\nConfidence: medium\n\n### Location resolution\nThe roster supplied 42.314553, -83.162142 (GEOMETRIC_CENTER, Rouge Complex\naddress). Probing showed that point lands on the north edge of the green-roofed\nDearborn Truck Plant, not the engine plant. Web research confirmed the Dearborn\nEngine Plant (also the Dearborn Engine and Fuel Tank Plant) as a distinct Rouge\nCenter building. Satellite probing (z16-z19) of the Truck Plant's neighbors\nidentified the engine plant as the long large building running NW-SE\nimmediately east of the Truck Plant, flanked on its NE face by multiple rail\nspurs. Center locked at ~42.3128,-83.1588.\n\n### Key views\n- z16 cluster: Green-roofed Dearborn Truck Plant at left; the long\n  lighter-roofed building to its east, with rail spurs alongside, is the engine",
         "mapsUrl": "https://www.google.com/maps/@42.3128,-83.1588,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/ford/12-dearborn-engine-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.3128,
-              "lng": -83.1588
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/ford/12-dearborn-engine-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.3128,
-              "lng": -83.1588
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "site": "Dearborn Engine Plant (DEP / Dearborn Engine and Fuel Tank Plant) is an interior building of Ford's Rouge Center campus. Roster geocode (42.3145,-83.1621) landed on the north edge of the green-roofed Dearborn Truck Plant. Satellite identification (z16-z19) located the engine plant as the long large NW-SE building immediately east of the Truck Plant, flanked by rail spurs on its NE face; center relocated to ~42.3128,-83.1588.",
           "truckGate": "The Rouge Center is a fully fenced, guarded campus. Street View along the internal access road shows chain-link perimeter fence with privacy slats around the engine plant; the plant is served by the Rouge gate/guard system rather than its own street-facing gate.",
@@ -2151,6 +1639,32 @@
           "dropArea": "No dedicated trailer drop yard for this interior building. The finished-vehicle staging lots seen nearby belong to the adjacent Truck Plant. dropYard false.",
           "perimeter": "Box approximates the engine plant building footprint (~31 acres) within the larger Rouge campus.",
           "urbanRural": "Dense Detroit/Dearborn metro industrial fabric - Urban."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://www.marklines.com/en/news/322969",
+              "date": "2025-03",
+              "type": "press",
+              "claim": "Dearborn Engine Plant staffing up (~300 added) for added engine production"
+            },
+            {
+              "tier": 2,
+              "url": "https://fordauthority.com/fmc/ford-motor-company-plants-facilities/ford-motor-company-usa-plants-facilities/ford-motor-company-dearborn-engine-plant-dearborn-michigan-usa/",
+              "date": "2025-06",
+              "type": "press",
+              "claim": "Dearborn Engine Plant active Ford engine facility (2.0L engines)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Ford-operated engine plant running and adding staff in 2025; no closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2232,28 +1746,6 @@
         },
         "dossierExcerpt": "Type: Engine Plant\nResolved center: 41.41645, -81.82190\nConfidence: medium\n\n### Location resolution\nThe roster supplied 41.416738, -81.821992 (ROOFTOP, 17601 Brookpark Rd). The\nz16 probe placed that point directly on the large multi-roof Ford Cleveland\nEngine Plant building — confirmed correct, no relocation needed. Web research\nconfirmed the active Cleveland Engine Plant No. 1: 1.6M sq ft, ~2,055 employees,\nproducing 2.0/2.3L EcoBoost I4 and 3.5L EcoBoost V6 engines. The former\nCleveland Engine Plant No. 2 immediately SW has been demolished — cleared land\nis visible in imagery (that parcel sold for ~$31.5M).\n\n### Key views\n- z16 overview: Large multi-roof plant building, employee parking lots W and\n  SW, rail spurs along the NW edge, freeway interchanges (I-71/I-480) to the NE,",
         "mapsUrl": "https://www.google.com/maps/@41.41645,-81.8219,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/ford/13-cleveland-engine-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.41645,
-              "lng": -81.8219
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/ford/13-cleveland-engine-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.41645,
-              "lng": -81.8219
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "site": "Ford Cleveland Engine Plant (No. 1), Brook Park OH - active engine plant producing 2.0/2.3L EcoBoost I4 and 3.5L EcoBoost V6 engines, ~2,055 employees, 1.6M sq ft. Roster geocode (41.4167,-81.8220) lands directly on the large multi-roof plant building - confirmed correct. Former Cleveland Engine Plant No. 2 immediately to the SW has been demolished (cleared land visible; the former plant parcel sold for $31.5M).",
           "truckGate": "Chain-link perimeter fence encircles the property; Street View (2016 & 2025) shows the fenced property line with gated entry points. The plant's south-side truck/drop yard connects to the public road via a controlled driveway.",
@@ -2264,6 +1756,25 @@
           "fastLaneOpportunity": "The south truck yard apron is wide with substantial unused paved width; physical room exists for a bypass/express lane.",
           "multipleFacilities": "buildingCount 2 reflects the main plant plus a detached NW office building; the adjacent former Plant No. 2 is demolished. multipleFacilities marked false (single active plant cluster); flagged uncertain.",
           "urbanRural": "Brook Park is a dense industrial suburb within the Cleveland metro, hemmed by I-71/I-480 interchanges and continuous industrial development - Urban."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.ford.com/operations/locations/global-plants/cleveland-engine-plant-no-1/",
+              "date": "2026-01",
+              "type": "locator",
+              "claim": "Ford lists Cleveland Engine Plant No. 1 (Brook Park OH) as active, producing EcoBoost engines"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "CEP1 at the Brook Park coords actively produces EcoBoost engines in 2026; the $31.5M Brook Park sale was a separate former casting/transmission site, not this plant.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2345,28 +1856,6 @@
         },
         "dossierExcerpt": "The roster geocode (40.777522, -84.086641) lands directly on a large\nmulti-roof industrial plant building. Satellite confirmed this is the Ford\nLima Engine Plant at 1155 Bible Rd, Lima (Allen County) OH — an active Ford\npowertrain plant producing V6/V8 engines with ~1,500+ employees. The plant\nsits on the semi-rural northeast edge of Lima, surrounded by farmland and\nwoods, with rail lines along the west and east sides and Bible Rd along the\nsouth. No coordinate correction needed.",
         "mapsUrl": "https://www.google.com/maps/@40.7775,-84.086,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/ford/14-lima-engine-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.7775,
-              "lng": -84.086
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/ford/14-lima-engine-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.7775,
-              "lng": -84.086
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "site": "Ford Lima Engine Plant, 1155 Bible Rd, Lima (Allen County) OH - active Ford powertrain plant (produces V6/V8 engines, ~1,500+ employees). Roster geocode (40.7775,-84.0866) lands directly on the large multi-roof plant building - confirmed correct. The plant sits on the semi-rural edge of Lima, surrounded by farmland and woods, with rail lines on the west and east sides and Bible Rd along the south.",
           "truckGate": "Confirmed - Street View (2024-08) along Bible Rd shows a marked 'TRUCK ENTRANCE' sign on the chain-link perimeter fence at a wide paved entry apron (~40.7743,-84.0820 area). Chain-link fence encircles the property; the truck entrance opens off Bible Rd into a deep paved staging apron before the internal gate.",
@@ -2380,6 +1869,25 @@
           "fastLaneOpportunity": "True - the Bible Rd truck entrance apron is very wide with substantial unused paved width; physical room exists for an express/bypass lane.",
           "multipleFacilities": "False - a single large interconnected plant building (multi-roof but one structure); buildingCount 1.",
           "urbanRural": "The plant is on the semi-rural northeast edge of Lima, surrounded by farmland and woodland - Rural."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.ford.com/operations/locations/global-plants/lima-engine-plant/",
+              "date": "2026-01",
+              "type": "locator",
+              "claim": "Ford lists Lima Engine Plant as active Ford-operated, producing EcoBoost/V8 engines"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Ford Jan-2026 locator lists Lima as active and Ford-operated; no closure found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2465,28 +1973,6 @@
         },
         "dossierExcerpt": "The roster geocode (42.372187, -83.398969) is flagged GEOMETRIC_CENTER, moved\n1204 m — but it lands inside the correct plant complex. Satellite confirmed\nthis is the Ford Livonia Transmission Plant at 36200 Plymouth Rd, Livonia\n(Wayne County) MI. Web research (Wikipedia, Ford Authority) confirms it is the\nlargest transmission plant in North America: ~3.3M sq ft of enclosed floor\nspace on ~182 acres, established 1952, producing the 6R/10R transmission\nfamilies used in the F-150, Mustang, Expedition, Navigator and Transit. I\nrefined the center slightly to ~42.3715,-83.3980 on the main plant building\ncluster.",
         "mapsUrl": "https://www.google.com/maps/@42.3715,-83.398,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/ford/15-livonia-transmission-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.3715,
-              "lng": -83.398
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/ford/15-livonia-transmission-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.3715,
-              "lng": -83.398
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "site": "Ford Livonia Transmission Plant, 36200 Plymouth Rd, Livonia (Wayne County) MI - the largest transmission plant in North America (~3.3M sq ft, ~182 acres, est. 1952; produces the 6R/10R transmission families). Roster geocode (42.3722,-83.3990, GEOMETRIC_CENTER, moved 1204m) lands within the plant complex; refined center to ~42.3715,-83.3980 on the main plant building cluster. Web research (Wikipedia, Ford Authority) confirms identity and the 182-acre / 3.3M sq ft figures.",
           "layout": "A large sprawling integrated multi-building plant in dense industrial Livonia; employee parking lots ring the building on the south (Plymouth Rd) and west (Levan Rd); a vehicle test-track oval occupies the east of the property; rail lines run along the north edge with spurs into the plant.",
@@ -2500,6 +1986,32 @@
           "railServed": "Rail lines run along the north property edge with spurs serving the north material/dock yard - rail-served.",
           "multipleFacilities": "True - the plant property includes multiple large interconnected building masses plus detached office/support buildings and a test-track oval; buildingCount 3 (main plant + detached support/office buildings).",
           "urbanRural": "Livonia is a dense Detroit-metro industrial suburb; the plant is hemmed by continuous industrial development - Urban."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.ford.com/operations/locations/global-plants/",
+              "date": "2026-01",
+              "type": "locator",
+              "claim": "Ford lists Livonia Transmission Plant among active global manufacturing plants"
+            },
+            {
+              "tier": 2,
+              "url": "https://fordauthority.com/fmc/ford-motor-company-plants-facilities/ford-motor-company-usa-plants-facilities/ford-motor-company-livonia-transmission-plant-livonia-michigan-usa/",
+              "date": "2026-01",
+              "type": "press",
+              "claim": "Ford-operated Livonia builds 10R80/8F35 transmissions, ~3,057 employees Jan 2026"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Ford-owned, active transmission production (~3,057 employees Jan 2026); no closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2601,28 +2113,6 @@
         },
         "dossierExcerpt": "Type: Transmission Plant\nAddress: 3000 E Sharon Rd, Cincinnati (Sharonville), OH 45241\nLocked coordinates: 39.27229, -84.42525\nConfidence: high",
         "mapsUrl": "https://www.google.com/maps/@39.27229,-84.42525,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/ford/16-sharonville-transmission-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.27229,
-              "lng": -84.42525
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/ford/16-sharonville-transmission-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.27229,
-              "lng": -84.42525
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster point landed mid-building; locked center to 39.27229,-84.42525, the centroid of the single large transmission-plant complex on E Sharon Rd. Confirmed via Ford Authority / AmericanAutoWorker as Sharonville Transmission Plant (est. 1958, 10R140/10R80 transmissions).",
           "truckGate": "Fenced truck-yard entrance on the NW side off Mosteller Rd: continuous chain-link perimeter fence, Ford signboard, wide paved apron and gate opening into the trailer-canopy drop yard (Street View 2025-06).",
@@ -2635,6 +2125,32 @@
           "fastLaneOpportunity": "Wide paved gate apron at the NW entrance with ample unused width to add an express/bypass lane.",
           "entryLanes": "Estimated 2 in / 2 out from gate-apron width; not precisely countable from imagery.",
           "urbanRural": "Sharonville is inside the Cincinnati metro industrial fabric — Urban."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.wardsauto.com/ford/ford-to-invest-in-sharonville-transmission-plant",
+              "date": "2019-09",
+              "type": "press",
+              "claim": "Ford awarded Sharonville $900M to run current product and introduce 10R80/10R100 transmissions"
+            },
+            {
+              "tier": 2,
+              "url": "https://finance.yahoo.com/news/union-ford-widens-sharonville-factory-183303639.html",
+              "date": "2023-10",
+              "type": "press",
+              "claim": "Oct 2023 layoffs explicitly temporary (UAW strike), confirming Ford operation"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Ford-owned Super Duty transmission plant; 2023 layoffs temporary strike-related, no closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2726,28 +2242,6 @@
         },
         "dossierExcerpt": "The roster address (8000 Van Dyke Ave) and geocode (42.389201, -83.022218,\nRANGE_INTERPOLATED) are wrong — they land in a residential Detroit\nneighborhood roughly 23 km south of the actual plant. The wide z14 view at the\nroster point showed only houses, with a large industrial building visible far\nto the NW.\n\nWeb research (Detroit News, Ford Authority, AmericanAutoWorker, Yelp) confirmed\nthe correct address: 41111 Van Dyke Ave, Sterling Heights, MI 48314, just\nnorth of 18 Mile Road. I corrected the center to ~42.5978, -83.0355 and\nverified by satellite that it is the large multi-roof Ford plant building. The\nVan Dyke Electric Powertrain Center is a ~2M sq ft plant operating since 1968;\nit was renamed in 2021 from the Van Dyke Transmission Plant as it shifted to\nproducing electric motors and transaxles for hybrid/EV vehicles (including the",
         "mapsUrl": "https://www.google.com/maps/@42.5978,-83.0355,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/ford/17-van-dyke-electric-powertrain-center-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.5978,
-              "lng": -83.0355
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/ford/17-van-dyke-electric-powertrain-center-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.5978,
-              "lng": -83.0355
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "site": "Ford Van Dyke Electric Powertrain Center, 41111 Van Dyke Ave, Sterling Heights (Macomb County) MI - a ~2M sq ft Ford powertrain plant operating since 1968, renamed in 2021 from the Van Dyke Transmission Plant as it shifted to producing electric motors and transaxles for hybrid/EV vehicles (incl. the F-150 Lightning). LOCATION CORRECTION: the roster address (8000 Van Dyke Ave) and geocode (42.3892,-83.0222, RANGE_INTERPOLATED) are WRONG - they point at a residential Detroit neighborhood ~23 km south. Web research (Detroit News, Ford Authority, AmericanAutoWorker, Yelp) confirms the correct address 41111 Van Dyke Ave, Sterling Heights MI 48314, just north of 18 Mile Rd. Corrected center to ~42.5978,-83.0355 - confirmed by satellite as the large multi-roof Ford plant building.",
           "truckGate": "Confirmed - Street View (2025-03) on the north road shows a chain-link sliding truck/vehicle gate (closed, with a gate-number sign) across a wide driveway leading down an internal access drive to the west-side material/dock yard. The property is fully encircled by chain-link perimeter fencing. truckGateCount estimated 2 (a separate north employee/vehicle entrance plus the gated truck drive) - flagged uncertain.",
@@ -2761,6 +2255,32 @@
           "fastLaneOpportunity": "True - the NW truck gate apron and internal access drive are very wide with substantial unused paved width; physical room exists for an express/bypass lane.",
           "multipleFacilities": "False - a single large interconnected plant building (multi-roof but one structure) plus a detached SE office; buildingCount 2.",
           "urbanRural": "Sterling Heights is a dense Detroit-metro suburb; the plant is surrounded by continuous suburban/industrial development - Urban."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://media.ford.com/content/fordmedia/fna/us/en/multimedia/album/manufacturing/van-dyke-electric-powertrain-center/",
+              "date": "2021-05",
+              "type": "press",
+              "claim": "Ford media for Van Dyke Electric Powertrain Center, confirming Ford operation of the Sterling Heights plant"
+            },
+            {
+              "tier": 2,
+              "url": "https://fordauthority.com/2021/05/ford-renames-van-dyke-transmission-plant-to-van-dyke-electric-powertrain-center/",
+              "date": "2021-05",
+              "type": "press",
+              "claim": "Ford renamed Van Dyke Transmission to Electric Powertrain Center after $150M EV retooling"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Ford-owned Sterling Heights powertrain plant (Van Dyke), active after EV retooling; no sale/closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2852,28 +2372,6 @@
         },
         "dossierExcerpt": "The roster address (29900 Mound Rd) and geocode (42.514132, -83.046583,\nRANGE_INTERPOLATED) are wrong — they land on an office/tech campus roughly\n3.5 km south of the actual plant. Web research (Ford Authority, Waze,\nCommercialCafe) established the correct address as **39000 Mound Rd, Sterling\nHeights, MI 48310**. The exact coordinates 42.583580, -83.044966 were obtained\nfrom the US EPA Superfund site profile for the Ford Motor Company Sterling\nAxle Plant, and verified by satellite as the large multi-roof Ford plant\nbuilding bounded by Mound Rd on the west.\n\nThe Sterling Axle Plant has operated under Ford since 1956, employs ~2,295,\nand produces rear axles for the F-150, Super Duty, Expedition, Navigator,\nMustang and Transit.",
         "mapsUrl": "https://www.google.com/maps/@42.58358,-83.04497,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/ford/18-sterling-axle-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.58358,
-              "lng": -83.04497
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/ford/18-sterling-axle-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.58358,
-              "lng": -83.04497
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "site": "Ford Sterling Axle Plant, 39000 Mound Rd, Sterling Heights (Macomb County) MI - an active Ford components plant operating since 1956, ~2,295 employees, producing rear axles for the F-150, Super Duty, Expedition, Navigator, Mustang and Transit. LOCATION CORRECTION: the roster address (29900 Mound Rd) and geocode (42.5141,-83.0466, RANGE_INTERPOLATED) are WRONG - they point at an office/tech campus ~3.5 km south. Correct address is 39000 Mound Rd, Sterling Heights MI 48310 (confirmed via Ford Authority, Waze, CommercialCafe). Exact coordinates 42.583580,-83.044966 obtained from the US EPA Superfund site profile for the Ford Motor Company Sterling Axle Plant - confirmed by satellite as the large multi-roof Ford plant building bounded by Mound Rd on the west.",
           "truckGate": "Confirmed - Street View (2025) on Mound Rd at the NW corner shows a wide gated truck entrance: a tractor pulling an intermodal container is seen exiting through a chain-link sliding-gate opening, with trailers parked inside the yard and dock doors on the adjacent building face. Chain-link perimeter fencing runs the full Mound Rd frontage. truckGateCount 1 (primary truck gate at the NW).",
@@ -2887,6 +2385,32 @@
           "railServed": "A rail spur runs into the property from the rail yard on the east, serving the N/NE material laydown area - rail-served.",
           "multipleFacilities": "False - a single large interconnected plant building (multi-roof but one structure); buildingCount 1.",
           "urbanRural": "Sterling Heights is a dense Detroit-metro suburb; the plant is hemmed by continuous suburban/industrial development - Urban."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.ford.com/operations/locations/global-plants/sterling-axle-plant/",
+              "date": "2026-01",
+              "type": "locator",
+              "claim": "Ford lists Sterling Axle Plant (Sterling Heights MI) as a current Ford plant producing axles/rear drive units"
+            },
+            {
+              "tier": 2,
+              "url": "https://www.senatormichaelwebber.com/sen-webber-welcomes-50-new-jobs-at-fords-sterling-axle/",
+              "date": "2024-07",
+              "type": "press",
+              "claim": "Ford ~$3B Super Duty investment adds 50 jobs at Ford Sterling Axle; active under Ford (not AAM)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Ford itself operates the Sterling Heights axle plant (active 2026, ~2,360 employees); NOT American Axle.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2974,28 +2498,6 @@
         },
         "dossierExcerpt": "- Roster coords (42.20279, -83.581749) were wrong — they landed in a residential\n  neighborhood on Textile Rd ~2 km west of the plant. Roster address (9000 Textile Rd)\n  is also off; the correct address is 10300 Textile Rd, Ypsilanti Twp, MI 48197.\n- Probed east along Textile Rd and found the large industrial complex on the south\n  side of Textile Rd between the road and Ford Lake.\n- Locked center: 42.19920, -83.55700 — the ~1.7M sq ft Rawsonville plant building.\n- Confirmed via web research: Ford Rawsonville Components Plant, ~650 employees,\n  produces transmission oil pumps, hybrid/PHEV battery packs, air induction systems,\n  ignition coils, fuel pumps. Operating since 1956.",
         "mapsUrl": "https://www.google.com/maps/@42.19920,-83.55700,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/ford/19-rawsonville-components-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.1992,
-              "lng": -83.557
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/ford/19-rawsonville-components-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.1992,
-              "lng": -83.557
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Chain-link perimeter fence rings the property; closed double-swing vehicle gate on the SW (truck-yard) side and a rolling chain-link gate on the NE both confirmed in 2024-25 Street View.",
           "guardShack": "No staffed booth at any gate in Street View - gates are plain chain-link, no booth structure beside the lane.",
@@ -3006,6 +2508,32 @@
           "dockDoorCount": "~1.7M sq ft sprawling 1950s plant; door count is an overhead estimate across multiple building faces.",
           "entryLanes": "Single-lane chain-link gates; lane count low-confidence from overhead.",
           "railServed": "No rail spur visible entering the property; web research did not indicate rail service."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.ford.com/articles/electrification/ford-commits-to-manufacturing-batteries/",
+              "date": "2021-05",
+              "type": "press",
+              "claim": "Rawsonville Plant is a Ford battery-pack assembly facility for Ford EV manufacturing"
+            },
+            {
+              "tier": 2,
+              "url": "https://annarborusa.org/news/ford-announces-160m-ypsilanti-township-investment-supports-development-of-electric-vehicles-of-the-future/",
+              "date": "2022-06",
+              "type": "press",
+              "claim": "Ford $160M investment at its Ypsilanti Township Rawsonville Plant for battery-pack assembly"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Spun to Visteon (2000)/ACH then absorbed BACK into Ford; currently Ford-owned, active battery-pack production with recent reinvestment.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3095,28 +2623,6 @@
         },
         "dossierExcerpt": "- Roster coords (42.74703, -78.902483) were wrong — they landed in a residential\n  lakeshore neighborhood in Hamburg town, ~5 km SSW of the plant. Roster address\n  (5000 Lakeshore Rd) is also off.\n- Web research gave the correct address — **3663 Lake Shore Rd, Hamburg/Blasdell,\n  NY 14219** — and Wikipedia coordinates 42°47′13″N 78°50′35″W.\n- Probed there and found the Buffalo Stamping Plant: a ~2.45M sq ft building on an\n  88-acre site at the east end of Lake Erie, beside Route 5 (Lake Shore Rd / NY-5).\n- Locked center: 42.78650, -78.84280. Ford branding on the building wall and a\n  \"Buffalo Stamping Plant\" sign confirmed in Street View.",
         "mapsUrl": "https://www.google.com/maps/@42.78650,-78.84280,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/ford/20-buffalo-stamping-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.7865,
-              "lng": -78.8428
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/ford/20-buffalo-stamping-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.7865,
-              "lng": -78.8428
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Continuous chain-link perimeter fence rings the property (confirmed in Street View along the Route 5 service road). Main controlled entrance off the NW service road into the front parking/staging lot.",
           "guardShack": "A small structure sits at the building base beside the entrance gate; from highway-distance Street View it could be a guard booth or a utility/electrical structure - cannot confirm staffing, flagged uncertain.",
@@ -3127,6 +2633,32 @@
           "urbanRural": "Site is inside the Buffalo metro fabric (Blasdell/Lackawanna), bordered by Route 5 and dense industrial/residential development -> Urban.",
           "fastLaneOpportunity": "Large open paved frontage between Route 5 and the building leaves ample room for additional lanes.",
           "entryLanes": "Lane count not resolvable from highway-distance Street View."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://dec.ny.gov/news/environmental-notice-bulletin/2025-03-19/town-of-hamburg-ford-motor-buffalo-stamping-plant",
+              "date": "2025-03",
+              "type": "press",
+              "claim": "Active NYSDEC environmental permit action for the operating Ford Motor Buffalo Stamping Plant, Town of Hamburg (Mar 2025)"
+            },
+            {
+              "tier": 2,
+              "url": "https://buffalonews.com/news/local/business/ford-pledges-80m-investment-in-hamburg-plant/article_f2da9048-7738-11ee-9e52-43e81160f58e.html",
+              "date": "2023-10",
+              "type": "press",
+              "claim": "Ford pledged $80M investment in Hamburg stamping plant under UAW deal"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Ford-operated stamping plant; Mar-2025 NYSDEC notice + 2023 UAW reinvestment confirm current operation.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3229,28 +2761,6 @@
         },
         "dossierExcerpt": "Type: Stamping Plant\nResolved coordinates: 41.50315, -87.60230\nConfidence: High\n\n---",
         "mapsUrl": "https://www.google.com/maps/@41.50315,-87.60230,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/ford/21-chicago-stamping-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.50315,
-              "lng": -87.6023
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/ford/21-chicago-stamping-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.50315,
-              "lng": -87.6023
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster lat/lng (41.506099,-87.673466) was ~6 km off, landing on a retail strip on W Lincoln Hwy in Chicago Heights. Correct site is 1000 E Lincoln Hwy at the Chicago Heights/Ford Heights line, ~41.50315,-87.60230, confirmed via web research and satellite (a ~2M sq ft stamping plant, opened 1956, 136-acre Ford parcel).",
           "truckGate": "Single controlled entrance off the south side of Lincoln Hwy at a signalized 4-way intersection (~41.5060,-87.6014). Chain-link gate across the driveway with access-control signage ('STOP / NO TRUCK ... ENTRY ... ACCESS ... ONLY'). A former second truck entrance ~250 m west (~41.5061,-87.6045) is barricaded with concrete jersey barriers and out of service.",
@@ -3266,6 +2776,32 @@
           "postGateStaging": "Large paved yard areas inside the gate before the dock faces provide ample internal truck holding space.",
           "urbanRural": "Site sits within the dense south-suburban Chicago industrial fabric (Chicago Heights / Ford Heights), bordered by other plants, a salvage yard and residential blocks - Urban.",
           "multiStep": "No clearly visible second checkpoint after the gate; left false."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://www.chicago.gov/dam/city/depts/dcd/banners/newsiteimages/fordfactsht.pdf",
+              "date": "2019-01",
+              "type": "press",
+              "claim": "Ford Chicago Heights Stamping Plant stamps sheet metal for Chicago/KC/St. Paul; ~900 employees"
+            },
+            {
+              "tier": 2,
+              "url": "https://fordauthority.com/category/facilities/assembly-facilities/chicago-stamping-plant/",
+              "date": "2024-01",
+              "type": "press",
+              "claim": "Chicago Stamping Plant continues stamping Explorer, Transit, Super Duty, Aviator parts"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Ford-owned stamping plant in Chicago Heights (distinct from Chicago Assembly); current production, 2025 hiring activity.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3465,28 +3001,6 @@
         },
         "dossierExcerpt": "- Roster coords (42.3728, -83.33552) land on the east edge of a very large warehouse\n  on Middlebelt Rd — they are essentially correct (the geocode \"movedMeters 3497\" was\n  measured against an earlier wrong point, not a current error).\n- Probed the building and confirmed: a ~1M sq ft distribution warehouse running\n  north-south along Middlebelt Rd, dock doors on the east face, trailers backed in.\n- Web research confirms address 11871 Middlebelt Rd, Livonia, MI 48150 — Ford\n  Customer Service Division National Parts Distribution Center, opened 1951 (once the\n  world's largest parts warehouse under one roof, ~1M sq ft).\n- Locked center: 42.37280, -83.33600.",
         "mapsUrl": "https://www.google.com/maps/@42.37280,-83.33600,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/ford/22-national-parts-distribution-center-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.3728,
-              "lng": -83.336
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/ford/22-national-parts-distribution-center-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.3728,
-              "lng": -83.336
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Continuous chain-link perimeter fence rings the property along Middlebelt Rd (confirmed in 2025 Street View). Controlled driveway entrances through the fence into the dock yard.",
           "guardShack": "No clearly identifiable staffed booth at the entrances in Street View; small structures present but not confirmable as guard booths - flagged uncertain.",
@@ -3498,6 +3012,25 @@
           "multipleFacilities": "Main ~1M sq ft DC plus a separate office/support building and trailer yard on the same campus.",
           "urbanRural": "Dense Livonia industrial/commercial corridor on Middlebelt Rd between major roads -> Urban.",
           "fastLaneOpportunity": "Wide paved yard and multiple driveway aprons leave room for an express lane."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 3,
+              "url": "https://business.livoniawestland.org/list/member/ford-national-parts-distribution-center-1231",
+              "date": "2024-01",
+              "type": "locator",
+              "claim": "Ford National Parts Distribution Center listed as active member in Livonia (FCSD logistics)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "PROBABLE: Ford Customer Service Division National Parts Distribution Center, Livonia (11871 Middlebelt Rd); only Tier-3 listings available (Ford publishes no public PDC locator), no Tier-2 negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3697,28 +3230,6 @@
         },
         "dossierExcerpt": "- Roster coords (42.176414, -83.281372) land squarely on a massive distribution\n  warehouse — they are correct (the geocode \"movedMeters 5444\" was measured against an\n  earlier wrong point, not a current error).\n- Web research confirms the facility: **Ford Parts Redistribution Center, 25555\n  Pennsylvania Rd, Brownstown Charter Twp / Romulus, MI 48174** — a Ford Customer\n  Service Division redistribution center.\n- Locked center: 42.17640, -83.28120.",
         "mapsUrl": "https://www.google.com/maps/@42.17640,-83.28120,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/ford/23-parts-redistribution-center-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.1764,
-              "lng": -83.2812
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/ford/23-parts-redistribution-center-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.1764,
-              "lng": -83.2812
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Continuous chain-link perimeter fence rings the property (confirmed in 2024 Street View along Inkster Rd). Single controlled entry via a long ~600m private access road from Pennsylvania Rd to the north.",
           "guardShack": "Access road is private - Street View does not go down it. A small structure is visible near the building-end yard entrance but cannot be confirmed as a staffed guard booth. Flagged uncertain.",
@@ -3732,6 +3243,32 @@
           "urbanRural": "Edge-of-township site surrounded by woods, open fields and low-density residential; isolated industrial setting -> Rural.",
           "fastLaneOpportunity": "Wide private access road and large paved yard aprons leave clear room for an express lane.",
           "trailerParkingCapacity": "Capacity is a high-confidence-range overhead estimate from the dense trailer rows."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 3,
+              "url": "https://www.macraesbluebook.com/search/company.cfm?company=1422514",
+              "date": "2024-01",
+              "type": "locator",
+              "claim": "Ford Parts Redistribution Center, 25555 Pennsylvania Rd, Brownstown Charter Twp MI"
+            },
+            {
+              "tier": 3,
+              "url": "https://oliverhatcher.com/markets/ford-motor-company-detroit-hvc-bbc-building-no-9-build-out/",
+              "date": "2023-01",
+              "type": "press",
+              "claim": "Ford redistribution warehouse build-out: 300,000+ SF, 13 dock-door mods for dealer parts distribution"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "PROBABLE: Ford parts/redistribution logistics center on Pennsylvania Rd, Brownstown Twp; Tier-3 only, no negative. NOTE: a nearby battery plant is GM, not Ford; this address is the parts center as classified.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3930,28 +3467,6 @@
         },
         "dossierExcerpt": "- Roster coords (34.099865, -117.551907) are ROOFTOP-accurate and land on the correct\n  building — a large solar-roofed cross-dock warehouse on Milliken Ave.\n- Web research confirms 8449 Milliken Ave, Rancho Cucamonga, CA 91730 — a ~449,370\n  sq ft warehouse/distribution building (completed 2000, \"Prologis Rancho Cucamonga\n  Distribution Center\"), leased by Ford as its West Coast Parts Distribution Center.\n- Locked center: 34.09990, -117.55250.",
         "mapsUrl": "https://www.google.com/maps/@34.09990,-117.55250,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/ford/24-parts-distribution-center-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.0999,
-              "lng": -117.5525
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/ford/24-parts-distribution-center-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.0999,
-              "lng": -117.5525
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Modern (built 2000) ~449k sq ft cross-dock warehouse. Office driveway has a visible sliding gate (2025 Street View); the two truck yards (north and south faces) are fenced/walled with controlled driveway entrances.",
           "guardShack": "No staffed guard booth visible at the driveway entrances in Street View; entrances are gated but unmanned-appearing. Flagged uncertain.",
@@ -3965,6 +3480,25 @@
           "urbanRural": "Dense Rancho Cucamonga industrial/logistics district off a major arterial (Milliken Ave) -> Urban.",
           "fastLaneOpportunity": "Wide truck yards and multiple driveway aprons leave room for an express lane.",
           "siteAreaAcres": "~449k sq ft building on a ~28-acre parcel (overhead estimate from the perimeter box)."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 3,
+              "url": "https://www.yelp.com/biz/ford-parts-distribution-center-rancho-cucamonga",
+              "date": "2026-03",
+              "type": "locator",
+              "claim": "Ford Parts Distribution Center, 8449 Milliken Ave, Rancho Cucamonga CA (listing updated Mar 2026)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "PROBABLE: Ford FCSD Parts Distribution Center / Ontario HVC, Rancho Cucamonga (8449 Milliken Ave); Tier-3 only (no public Ford PDC locator), no Tier-2 negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       }
     ]

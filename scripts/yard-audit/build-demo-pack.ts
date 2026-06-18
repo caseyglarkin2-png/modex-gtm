@@ -347,6 +347,9 @@ async function buildSite(
     ...(excerpt ? { dossierExcerpt: excerpt } : {}),
     ...(tiles ? { tiles } : {}),
     ...(cleanedFieldNotes && Object.keys(cleanedFieldNotes).length > 0 ? { fieldNotes: cleanedFieldNotes } : {}),
+    ...((raw as { verification?: Site['verification'] }).verification
+      ? { verification: (raw as { verification?: Site['verification'] }).verification }
+      : {}),
   };
 
   // D3.1 — attach the driver-journey replay template, gracefully omitted
@@ -531,10 +534,10 @@ async function main() {
     },
     research: null, // D1.3 will populate
     network: {
-      bbox: networkBbox,
-      archetypeMix,
-      totals,
-      sites,
+      bbox: gatedBbox,
+      archetypeMix: gatedMix,
+      totals: gatedTotals,
+      sites: gatedSites,
     },
   };
 
@@ -582,7 +585,7 @@ async function main() {
   // Stats
   const bytes = (await stat(outPath)).size;
   console.log(`✓ wrote ${outPath}`);
-  console.log(`  ${sites.length} sites · ${totals.dockDoors} dock doors · ${totals.trailerCapacity} trailer spots · ${totals.railServed} rail-served`);
+  console.log(`  ${gatedSites.length} sites · ${gatedTotals.dockDoors} dock doors · ${gatedTotals.trailerCapacity} trailer spots · ${gatedTotals.railServed} rail-served`);
   if (droppedStubCount > 0) console.log(`  ${droppedStubCount} stub sites dropped (missing perimeter)`);
   console.log(`  bbox [${networkBbox.map((n) => n.toFixed(3)).join(', ')}]`);
   console.log(`  archetype mix:`, archetypeMix);

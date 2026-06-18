@@ -1,30 +1,30 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-02T16:12:15.201Z",
+  "builtAt": "2026-06-18T21:38:12.162Z",
   "account": {
     "slug": "fedex",
     "displayName": "FedEx",
     "archetype": "logistics-carrier",
-    "siteCount": 30,
+    "siteCount": 29,
     "coverageNote": {
-      "auditedCount": 30,
+      "auditedCount": 29,
       "estimatedFootprint": 1800,
+      "totalGlobalFootprint": 5000,
+      "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": true,
-      "note": "FedEx operates ~5,000 facilities globally (Express + Ground + Freight + Office); the US network is ~1,800 sites. We audited 30 representative US hubs/terminals.",
-      "auditedScope": "US",
-      "totalGlobalFootprint": 5000
+      "note": "FedEx operates ~5,000 facilities globally (Express + Ground + Freight + Office); the US network is ~1,800 sites. We audited 30 representative US hubs/terminals."
     },
     "featuredSiteId": "24-fedex-freight-hub-conley-ga",
-    "roiDefaults": {
-      "averageMarginPerShipment": 380
-    },
     "dossierIntro": "Parcel and LTL hubs run the largest yards in the dataset. FedEx operates 5,000+ facilities. We audited 30. Conley GA runs 304 dock doors and 750 trailer spots on 121 acres. Memphis Express World Hub is 940 acres. LTL hub throughput is trailer-position visibility: the right trailer at the right door when the right shipment needs to load, within 4 hours. YardFlow keeps positions current at every door, every minute.",
     "surprisingFindings": [
       "Memphis Express World Hub is 940 acres. More parcels sort here per night than land at most international airports.",
       "9,810 trailer spots across 30 sites. FedEx parks more trailers than any other audited network.",
       "0 of 30 audited sites are rail-served. LTL is highway-to-highway."
-    ]
+    ],
+    "roiDefaults": {
+      "averageMarginPerShipment": 380
+    }
   },
   "research": null,
   "network": {
@@ -32,21 +32,21 @@
       -122.222865,
       25.790077,
       -74.16688,
-      41.793229
+      41.277222
     ],
     "archetypeMix": {
       "#6": 7,
       "#9": 8,
       "#7": 10,
       "#1": 1,
-      "#3": 4
+      "#3": 3
     },
     "totals": {
       "dockDoors": 4115,
-      "trailerCapacity": 9810,
+      "trailerCapacity": 9750,
       "gates": 32,
       "railServed": 0,
-      "acres": 3238.9
+      "acres": 3208.9
     },
     "sites": [
       {
@@ -157,28 +157,6 @@
         },
         "dossierExcerpt": "- Coordinates: 35.061887, -89.960429 (roster point, on the main sort building)\n- Address: 2903 Sprankle Ave, Memphis, TN 38118\n- Confirmed: Roster point lands squarely on the FedEx Express World Hub (\"Superhub\"), the company's largest sort facility, on the west side of Memphis International Airport. Satellite imagery shows multiple massive sort buildings, 100+ freighter aircraft parking positions (numbered airside gates 209/210/259/260/679...), and acres of ULD/air-container staging. Web research corroborates: FedEx newsroom describes it as the largest sort facility in the global network — ~940 acres, 171 aircraft gates, 84 miles of conveyor, 13,000 team members, with a new 1.3M sq ft automated sort facility added in 2024.",
         "mapsUrl": "https://www.google.com/maps/@35.061887,-89.960429,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/01-fedex-express-world-hub-memphis-tn-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.061887,
-              "lng": -89.960429
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/01-fedex-express-world-hub-memphis-tn-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.061887,
-              "lng": -89.960429
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "siteConfirmation": "Roster point lands on the main sort building of the FedEx Express World Hub on the west side of Memphis International Airport. Confirmed via satellite (multiple sort buildings, 100+ parked freighter aircraft positions, ULD/container staging acres) and web research (FedEx newsroom: largest sort facility in the global network, ~940 acres, 171 aircraft gates, 13,000 team members, 84 miles of conveyor).",
           "truckGate": "Hardened secured campus. FedEx Main Screening Facility (Flintco-built, 44,000 SF) is the main controlled point of entry. Street View shows steel anti-ram palisade fencing with outriggers, chain-link with coiled razor wire, Jersey-barrier lane channelization on internal roads, and a canopied vehicle checkpoint with multiple lanes.",
@@ -189,6 +167,25 @@
           "multipleFacilities": "Campus of 8+ large buildings: original superhub sort building, new 1.3M sq ft automated sort facility (2024), maintenance hangars, screening facility, support/office buildings.",
           "siteAreaAcres": "940 acres per FedEx newsroom; perimeter box is an approximation of the core landside operations footprint and the published campus figure was used.",
           "railServed": "No rail spur into the property; airside facility."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://newsroom.fedex.com/newsroom/global-english/fedex-unveils-new-automated-sorting-facility-at-memphis-world-hub",
+              "date": "2024-10",
+              "type": "press",
+              "claim": "Memphis World Hub is the 940-acre heart of the global network; new Secondary 25 sort facility operational"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Global Express superhub; dated FedEx Tier-1 press Oct 2024, no closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -321,28 +318,6 @@
         },
         "dossierExcerpt": "- Coordinates: 39.715335, -86.277815 (roster point, on the main sort building)\n- Address: 6648 S Perimeter Rd, Indianapolis, IN 46241\n- Confirmed: Roster point lands on the main sort building of the FedEx Express National Hub at Indianapolis International Airport. Satellite shows a single very large dark-roofed sort building with airside aircraft parking positions and extensive ULD/air-container staging. Web research corroborates: built 1988, the second-largest cargo facility in the FedEx Express system, ~6,000 employees on 24/7 operations, ~650 flights/month.",
         "mapsUrl": "https://www.google.com/maps/@39.715335,-86.277815,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/02-fedex-express-national-hub-indianapolis-in-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.715335,
-              "lng": -86.277815
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/02-fedex-express-national-hub-indianapolis-in-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.715335,
-              "lng": -86.277815
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "siteConfirmation": "Roster point lands on the main sort building of the FedEx Express National Hub at Indianapolis International Airport. Confirmed via satellite (one very large dark-roofed sort building with airside aircraft positions and extensive ULD/air-container staging) and web research (Encyclopedia of Indianapolis / FedEx aviation page: built 1988, second-largest cargo facility in the FedEx Express system, ~6,000 employees, ~650 flights/month).",
           "truckGate": "Web research explicitly references a 'Truck Gate' and a 'South Perimeter Security Station' controlling access to the hub. The facility sits entirely inside the secured airport perimeter; the support/parking area connects to the airside hub only through the staffed security station. Internal roads have no public Street View coverage (secured property).",
@@ -354,6 +329,25 @@
           "siteAreaAcres": "Perimeter box approximates the core hub landside+building footprint; ~220 acres is an estimate, flagged uncertain.",
           "entryLanes": "Lane counts at the security station could not be directly observed (no Street View on internal roads); estimated.",
           "railServed": "No rail spur into the property; airside facility."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.ind.com/about/media/media-releases/mayor-airport-officials-announce-federal-express-hub-expansion",
+              "date": "2021-04",
+              "type": "press",
+              "claim": "FedEx Express National Hub, 2nd-largest cargo facility, 7-year $1.5B expansion at IND"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Second-largest Express hub in active multi-year expansion at IND; no closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -461,28 +455,6 @@
         },
         "dossierExcerpt": "- Name: FedEx Express Regional Hub - Fort Worth TX\n- Type: Express regional hub (Fort Worth Alliance Airport)\n- Roster address: 2851 Alliance Gateway Fwy, Fort Worth, TX 76177 (incorrect — see below)\n- Resolved location: 2001 World Wide Dr, Fort Worth, TX 76177 — east cargo apron of Perot Field / Fort Worth Alliance Airport\n- Locked center: 32.994650, -97.312900",
         "mapsUrl": "https://www.google.com/maps/@32.994650,-97.312900,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/03-fedex-express-regional-hub-fort-worth-tx-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 32.99465,
-              "lng": -97.3129
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/03-fedex-express-regional-hub-fort-worth-tx-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 32.99465,
-              "lng": -97.3129
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "siteConfirmation": "Roster address (2851 Alliance Gateway Fwy) was RANGE_INTERPOLATED onto a residential block ~3 km south of the actual hub - the supplied coords were wrong. Web research established the FedEx Express Fort Worth Hub is at 2001 World Wide Dr, on the east cargo apron of Perot Field / Fort Worth Alliance Airport. Satellite confirmed a large white-roofed sort building with aircraft at airside positions, a second large sort/cross-dock building, an office building, and an extensive ULD/trailer drop yard. Locked center 32.99465, -97.31290. FedEx Express opened the Fort Worth Hub in 1997; ~600,000 sq ft, 800+ employees, ~100,000 packages/day on two sorts, ~650 flights/month.",
           "truckGate": "Z20 satellite at 32.9921,-97.3092 shows a controlled checkpoint where the public access road enters the hub: a small guard booth flanked by sliding gates, perimeter fencing, and lane striping. Street View (2016/2021 panos) confirms a manned gate with a green-windowed guard booth, an overhead gate canopy/barrier frame, multiple in/out lanes, and a 'FedEx Security' sign on the booth. Definitive controlled truck gate.",
@@ -502,6 +474,25 @@
           "siteAreaAcres": "Perimeter box approximates the core landside hub footprint (buildings + drop yard + gate apron); ~95 acres is an estimate, flagged uncertain.",
           "entryLanes": "Street View shows multiple striped lanes through the checkpoint; ~2 inbound / 2 outbound estimated, flagged uncertain.",
           "urbanRural": "Inside the AllianceTexas industrial development at a major-metro airport (DFW); Urban."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.glassdoor.com/Job/fort-worth-tx-fedex-jobs-SRCH_IL.0,13_IC1139993_KO14,19.htm",
+              "date": "2025-12",
+              "type": "locator",
+              "claim": "Active FedEx sort/handler reqs at Fort Worth corroborate the Southwest Regional Hub at Perot Field/Alliance"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FedEx Express Southwest Regional Hub at Alliance, ~800 staff 24/7; no closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -615,28 +606,6 @@
         },
         "dossierExcerpt": "- Name: FedEx Express Regional Hub - Newark NJ\n- Type: Express regional hub (Newark Liberty International Airport)\n- Roster address: 350 Brewster Rd, Newark, NJ 07114 (the EWR airport address)\n- Resolved location: FedEx Cargo Complex, EWR North Cargo Area —\n  Buildings 347 / 156 / 155, 155 Earhart Dr, Newark, NJ 07114\n- Locked center: 40.706800, -74.171000",
         "mapsUrl": "https://www.google.com/maps/@40.706800,-74.171000,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/04-fedex-express-regional-hub-newark-nj-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.7068,
-              "lng": -74.171
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/04-fedex-express-regional-hub-newark-nj-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.7068,
-              "lng": -74.171
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "siteConfirmation": "Roster coordinate (40.707912, -74.171912) was RANGE_INTERPOLATED from 350 Brewster Rd (the EWR airport address) and lands directly on the FedEx Express Newark cargo complex in the EWR North Cargo Area. Web research confirms the FedEx Cargo Complex is a ~$60M sort facility occupying Buildings 347, 156 and most of 155 at 155 Earhart Dr, on the grounds of Newark Liberty International Airport; FedEx Express opened its second hub at EWR in 1986. Satellite confirms a cargo building cluster with FedEx-livery freighter aircraft (blue tails) parked at multiple airside positions, an airside ramp with ULD/dolly staging, landside cargo buildings with truck docks, and employee parking. Locked center 40.70680, -74.17100.",
           "truckGate": "The FedEx complex sits entirely inside the secured EWR airport perimeter; the entire cargo area is access-controlled by the Port Authority, and the airside fence line between the landside cargo buildings and the aircraft ramp is a hard security boundary with controlled vehicle gates. A controlled truck gate is inferred from this secured-airport context rather than directly imaged - flagged uncertain. Public Street View does not reach the FedEx-specific access point.",
@@ -655,6 +624,25 @@
           "siteAreaAcres": "Perimeter box approximates the FedEx cargo complex footprint within the North Cargo Area; ~45 acres estimate, flagged uncertain.",
           "urbanRural": "Major-metro airport (Newark) in dense NY/NJ fabric; Urban.",
           "confidenceNote": "Medium overall: facility positively identified, but truck-gate / guard-shack specifics could not be directly imaged because the FedEx access point is inside the secured airport and not covered by public Street View."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.panynj.gov/airports/en/air-cargo/newark.html",
+              "date": "2025-01",
+              "type": "press",
+              "claim": "FedEx cargo complex in the Newark Liberty air cargo area; EWR is a FedEx Express regional hub"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FedEx Express regional hub at EWR cargo area; named current regional hub, no closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -774,28 +762,6 @@
         },
         "dossierExcerpt": "- Name: FedEx Express Regional Hub - Oakland CA\n- Type: Express regional hub (Oakland International Airport)\n- Roster address: 8455 Pardee Dr, Oakland, CA 94621 (a FedEx Ship Center,\n  NOT the hub — see below)\n- Resolved location: FedEx Express Oakland Regional Hub, 1 Sally Ride Way,\n  Oakland, CA 94621 — airside at Oakland International Airport\n- Locked center: 37.720113, -122.219569",
         "mapsUrl": "https://www.google.com/maps/@37.720113,-122.219569,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/05-fedex-express-regional-hub-oakland-ca-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 37.720113,
-              "lng": -122.219569
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/05-fedex-express-regional-hub-oakland-ca-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 37.720113,
-              "lng": -122.219569
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "siteConfirmation": "Roster address (8455 Pardee Dr) is a FedEx Ship Center - a customer-facing retail/pickup site about 2 miles from the airport, NOT the regional hub. Web research established the FedEx Express Oakland Regional Hub (the West Coast hub) is at 1 Sally Ride Way, Oakland CA 94621, on the airside at Oakland International Airport - a ~233,000 sq ft air/ground/trucking sort center able to sort ~12,000 packages/day for the Bay Area. Satellite at 37.72011,-122.21957 confirmed multiple FedEx sort buildings, an aircraft maintenance hangar, FedEx-livery freighter aircraft (purple/red tails) at airside positions, ULD/dolly staging, and rooftop solar. Street View confirmed a barbed-wire secured airport perimeter with 'Restricted Area / Authorized Personnel Only' signage. Locked center 37.72011, -122.21957.",
           "truckGate": "The FedEx hub sits entirely inside the secured OAK airport perimeter - Street View at the perimeter road shows barbed-wire chain-link fence and a 'No Trespassing / Restricted Area / Authorized Personnel' sign. Truck access into the hub is through a controlled airport security gate off Air Cargo Way. A controlled truck gate is inferred from this secured-airport context; the FedEx-specific gate could not be directly imaged (no public Street View on the internal hub roads). Flagged uncertain.",
@@ -813,6 +779,25 @@
           "siteAreaAcres": "Perimeter box approximates the FedEx hub footprint (buildings + ramp + landside); ~70 acres estimate, flagged uncertain.",
           "urbanRural": "Major-metro airport (Oakland) in the dense Bay Area; Urban.",
           "confidenceNote": "Medium overall: facility positively identified (FedEx freighters on the ramp are conclusive), but the truck-gate and guard-shack specifics could not be directly imaged - the FedEx access point is inside the secured airport and not covered by public Street View. Gate/guard-shack calls are inferred and flagged."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://local.fedex.com/en-us/ca/oakland/oakrt",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "FedEx Air Freight Center, 9190 Edes Ave Oakland 94603, active air freight at OAK regional hub"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Flagged and cleared: June 2025 Network 2.0 closure was the Pardee Dr Ship Center, not the OAK airport air hub which remains locator-listed.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -922,28 +907,6 @@
         },
         "dossierExcerpt": "Type: Express regional hub (Piedmont Triad / Mid-Atlantic air-cargo sort)\nResolved coordinates: 36.10580, -79.93820\nConfidence: medium",
         "mapsUrl": "https://www.google.com/maps/@36.10580,-79.93820,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/06-fedex-express-regional-hub-greensboro-nc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 36.1058,
-              "lng": -79.9382
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/06-fedex-express-regional-hub-greensboro-nc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 36.1058,
-              "lng": -79.9382
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "FedEx Express Mid-Atlantic regional air hub on the secured airside of Piedmont Triad International Airport (GSO), Greensboro NC. Roster geocode (36.1043,-79.9838) landed ~4 km west on unrelated warehouses; corrected via web research (hub opened June 2009, ~1M sq ft, 24,000 pkg/hr) and satellite confirmation of the main sort building plus aircraft apron.",
           "truckGate": "No street-level imagery of a dedicated FedEx truck gate is available — the hub sits inside the airport AOA, so vehicle access is controlled at airport-wide SIDA security checkpoints rather than a single FedEx booth. Marked truckGate=true (controlled access exists) but this is an airport-security control, not a typical yard gate; flagged uncertain.",
@@ -955,6 +918,25 @@
           "scale": "No truck scale visible on airport property.",
           "railServed": "No rail spur enters the property.",
           "streetView": "Available Street View on adjacent airport service roads (2015/2023 panos) shows only open field/airport land; the hub interior is not street-accessible."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://flyfrompti.com/facts-about-the-fedex-expansion-at-piedmont-triad-international-airport/",
+              "date": "2024-01",
+              "type": "press",
+              "claim": "FedEx Express Mid-Atlantic Hub on a 165-acre eight-building complex at PTI, 1,000+ workers"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FedEx Express Mid-Atlantic air hub at PTI; the Network 2.0 closure was a station ~2mi away, not the airport hub.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1081,28 +1063,6 @@
         },
         "dossierExcerpt": "Type: Express regional hub (Ontario International Airport, So. California)\nResolved coordinates: 34.05000, -117.58400\nConfidence: medium",
         "mapsUrl": "https://www.google.com/maps/@34.05000,-117.58400,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/07-fedex-express-regional-hub-ontario-ca-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.05,
-              "lng": -117.584
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/07-fedex-express-regional-hub-ontario-ca-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.05,
-              "lng": -117.584
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "FedEx Express Southern California regional hub on the south-central cargo apron of Ontario International Airport (ONT). Roster geocode (34.0628,-117.5929) landed near the passenger terminals; corrected via web research (new 251,000 sq ft hub opened Nov 2020 with 9 wide-body and 14 feeder aircraft gates and 18 truck docks) and satellite confirmation of the cargo sort building plus FedEx jet apron at ~34.0500,-117.5840.",
           "truckGate": "Hub sits inside the airport AOA; vehicle access from Airport Drive is via a connector road controlled at airport SIDA security. No discrete FedEx guard booth resolved in imagery. truckGate=true reflects controlled access; flagged uncertain.",
@@ -1115,6 +1075,25 @@
           "scale": "No truck scale visible.",
           "railServed": "No rail spur enters the property.",
           "streetView": "Airport Drive panos (2018-2025) show a screen/retaining wall along the hub's south edge with FedEx aircraft visible behind it; the hub interior is not street-accessible."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.prnewswire.com/news-releases/new-fedex-facility-shines-at-ontario-international-airport-301176874.html",
+              "date": "2020-11",
+              "type": "press",
+              "claim": "FedEx Express opened a $100M, 251,000 sq ft sort complex (9 wide-body gates, 18 truck docks) at Ontario Intl"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Durable Express air hub at ONT; $100M facility opened 2020, no closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1222,28 +1201,6 @@
         },
         "dossierExcerpt": "- Audited center: 25.79255, -80.29525 — southwest cargo apron, Miami International Airport (MIA)\n- Roster address (7150 NW 25th St, Miami FL 33122): geocodes to a generic warehouse/lease\n  park ~1.5 km west of MIA. Street View at the NW 72nd Ave / NW 25th St intersection (2026-01)\n  shows lease \"AVAILABLE\" signage and unbranded warehouses — no FedEx presence. The roster\n  coordinate is a landside address, not the operational hub.\n- Operational hub: FedEx Express's Americas-gateway air-cargo hub at MIA — a single\n  ~282,000 sq ft cargo distribution facility (a $72.2M expansion added 138,000 sq ft and a\n  70,000 sq ft cold-chain area; PGAL/GRAEF project pages describe ~17 acres of development on a\n  ~30-acre site). The building is the long cargo structure on the southwest cargo apron.",
         "mapsUrl": "https://www.google.com/maps/@25.79255,-80.29525,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/08-fedex-express-regional-hub-miami-fl-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 25.79255,
-              "lng": -80.29525
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/08-fedex-express-regional-hub-miami-fl-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 25.79255,
-              "lng": -80.29525
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Airport air-cargo hub on the southwest cargo apron of Miami International Airport (MIA). The roster street address 7150 NW 25th St geocodes to a generic warehouse/lease park ~1.5 km west of the airport with no FedEx presence (Street View at NW 72nd Ave shows 'AVAILABLE' lease signs); the operational FedEx Express Americas-gateway hub is the airfield cargo distribution facility, a ~282,000 sq ft single building with airside aircraft apron and landside truck docks.",
           "buildingAttribution": "MIA's cargo complex is shared by many carriers (a DHL building is confirmed by signage at the east end of the cargo row in 2022 Street View). The exact FedEx building could not be 100% confirmed by visible branding from Street View; identification rests on facility type, scale (~282K sq ft / ~30-acre site per PGAL/GRAEF project pages), and configuration (airside freighter apron + landside truck dock row). Confidence reduced to medium for this reason.",
@@ -1254,6 +1211,25 @@
           "dropArea": "Trailers staged in the strip in front of the dock row and in a side parking area; estimated 10-25 drop trailers.",
           "siteAreaAcres": "~30 acres per PGAL/GRAEF FedEx Cargo Distribution Center Expansion project descriptions (17 acres of site development on a 30-acre site).",
           "railServed": "No rail spur; airport air-cargo facility."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://newsroom.fedex.com/newsroom/global/fedex-express-completes-major-expansion-at-miami-international-airport",
+              "date": "2021-12",
+              "type": "press",
+              "claim": "FedEx Express completed a $72.2M expansion of its MIA air cargo hub; Americas gateway to Latin America"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Durable Express Americas gateway at MIA; expanded 2021, new routes 2024, no closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1410,28 +1386,6 @@
         },
         "dossierExcerpt": "- Audited center: 36.10625, -80.03550 — FedEx Ground regional sortation hub, Triad\n  Business Park, Kernersville/Guilford County NC.\n- Roster coordinate (36.106996, -80.035813) landed directly on the hub building. The\n  geocode moved 9.1 km from the listed address (1544 Old Greensboro Rd) but the resulting\n  coordinate is correct — Step 0 satellite immediately showed an unmistakable FedEx Ground hub\n  (central sort building ringed by hundreds of trailer-parking rows).\n- Verified by web research: FedEx Ground opened this hub in October 2011 at 410,000 sq ft and\n  expanded it in 2015 to ~493,000 sq ft, on a ~125-acre site in Triad Business Park.",
         "mapsUrl": "https://www.google.com/maps/@36.10625,-80.03550,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/09-fedex-ground-hub-kernersville-nc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 36.10625,
-              "lng": -80.0355
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/09-fedex-ground-hub-kernersville-nc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 36.10625,
-              "lng": -80.0355
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed FedEx Ground regional sortation hub in Triad Business Park, ~493,000 sq ft on a ~125-acre site (opened 2011 at 410K sq ft, expanded 2015 to 493K sq ft). Roster coordinate landed directly on the hub building despite a 9.1 km geocode move from the listed Old Greensboro Rd address.",
           "truckGate": "Controlled truck gate confirmed on the north access road off the public road. z20 satellite shows a checkpoint with painted multi-lane markings and a small booth structure straddling the entrance lanes.",
@@ -1443,6 +1397,32 @@
           "urbanRural": "Edge-of-town industrial business park (Triad Business Park) outside Kernersville's dense fabric, surrounded by woods and other large warehouses. Classed Rural per the small-town-industrial guidance.",
           "entryLanes": "~2 inbound lanes at the gate from painted markings; exitLanes ~2. Medium confidence on exact lane count.",
           "siteAreaAcres": "~116 acres from the perimeter box; documented site is ~125 acres in Triad Business Park."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://businessfacilities.com/fedex-ground-cuts-ribbon-on-100-million-hub-in-kernersville-nc/",
+              "date": "2018-09",
+              "type": "press",
+              "claim": "FedEx Ground opened a $100M, 410,000 sq ft hub on 125 acres at 1544 Old Greensboro Rd, Kernersville NC"
+            },
+            {
+              "tier": 1,
+              "url": "https://journalnow.com/news/local/fedex-ground-buys-25-acres-near-massive-kernersville-facility/article_f9aa563c-6c06-11eb-8346-2fd54bc84814.html",
+              "date": "2021-02",
+              "type": "press",
+              "claim": "FedEx Ground bought ~25 adjacent acres for expansion of the Kernersville hub"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Large Ground hub in expansion mode; NC Network 2.0 closures hit Durham/Raleigh/Greensboro ship centers, not this hub.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1581,28 +1561,6 @@
         },
         "dossierExcerpt": "- Audited center: 39.63850, -77.79150 — FedEx Ground regional sortation hub, 11825 Newgate\n  Blvd, Newgate Industrial Park, Hagerstown MD.\n- Roster coordinate (39.639503, -77.792408) moved 8.4 km from the listed address\n  (GEOMETRIC_CENTER geocode) but landed correctly on the hub. Step 0 satellite immediately\n  showed a large sort building ringed by trailer fields.\n- Confirmed FedEx by direct Street View branding: \"FedEx Ground\" on the building face and\n  \"FedEx\" logos on dozens of trailers backed into the dock doors (2024 Street View on Newgate\n  Blvd). Web research confirms the facility: 325,000 sq ft, 114-acre site, ~22,500 packages/hr.",
         "mapsUrl": "https://www.google.com/maps/@39.63850,-77.79150,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/10-fedex-ground-hub-hagerstown-md-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.6385,
-              "lng": -77.7915
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/10-fedex-ground-hub-hagerstown-md-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.6385,
-              "lng": -77.7915
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed FedEx Ground regional sortation hub at 11825 Newgate Blvd, Newgate Industrial Park, Hagerstown MD. 325,000 sq ft on a 114-acre site, ~22,500 packages/hour, one of FedEx Ground's centralized distribution hubs. Roster coordinate moved 8.4 km (GEOMETRIC_CENTER geocode) but landed correctly on the hub. FedEx Ground branding directly confirmed on the building face and on dozens of trailers in Street View along Newgate Blvd.",
           "truckGate": "Site is fully enclosed by a chain-link perimeter fence (confirmed in multiple 2024 Street View frames along Newgate Blvd). Single controlled private access road off the Newgate Blvd intersection, with painted dashed lane markings on the approach and a sign monument. Counted as a controlled truck gate.",
@@ -1614,6 +1572,25 @@
           "urbanRural": "Edge-of-town industrial park surrounded by farmland and woods west of Hagerstown — classed Rural per small-town-industrial guidance.",
           "entryLanes": "~2 inbound / ~2 outbound estimated from the access-road width; medium confidence.",
           "siteAreaAcres": "~115 acres from the perimeter box; documented site is 114 acres."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.mhlnews.com/archive/article/22033086/fedex-ground-continues-national-expansion-with-new-hagerstown-maryland-hub",
+              "date": "2005-10",
+              "type": "press",
+              "claim": "FedEx Ground opened a 325,000 sq ft, $70M hub on 114 acres in Hagerstown MD, one of 29 centralized distribution hubs"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FLAG: durable Ground distribution hub, no closure signal, but cleanest Tier-1 positive is dated 2005; no recent dated press located.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1750,28 +1727,6 @@
         },
         "dossierExcerpt": "- Type: Ground regional sortation hub (Harrisburg market)\n- Roster address: 510 Industrial Dr, Lewisberry, PA 17339\n- Locked coordinates: 40.16450, -76.84050\n- Confidence: high",
         "mapsUrl": "https://www.google.com/maps/@40.16450,-76.84050,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/11-fedex-ground-hub-lewisberry-pa-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.1645,
-              "lng": -76.8405
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/11-fedex-ground-hub-lewisberry-pa-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.1645,
-              "lng": -76.8405
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Multi-lane controlled gate canopy with guard booth visible at z21 on the E-side access driveway (~40.1640,-76.8358); lane separators and barrier/gate equipment present.",
           "guardShack": "Small ~1-2 vehicle-footprint white booth set beside the gate lanes, distinct from the main sort building.",
@@ -1782,6 +1737,25 @@
           "urbanRural": "Lewisberry is a small town; site sits at edge-of-town in a semi-rural light-industrial pocket with woods and a retention pond to the W - classified Rural per rubric tie-break.",
           "postGateStaging": "Paved holding area inside the gate before the dock aprons.",
           "buildingCount": "Main sort building, a secondary NW dock building, plus 1-2 small ancillary structures (gatehouse, maintenance)."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 3,
+              "url": "https://truckmap.com/place/fedex-drop-box-510-industrial-dr-lewisberry-pa-17339-usa",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "FedEx Ground facility at 510 Industrial Dr, Lewisberry PA (Harrisburg Hub) corroborated as active"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FLAG: FedEx Ground Harrisburg Hub at 510 Industrial Dr; only Tier-3 corroborating sources (no dated Tier-1 press), but no closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1915,28 +1889,6 @@
         },
         "dossierExcerpt": "- Type: Ground regional sortation hub (Columbus market)\n- Roster address: 2969 Lewis Centre Way, Grove City, OH 43123\n- Locked coordinates: 39.90360, -83.09660\n- Confidence: high",
         "mapsUrl": "https://www.google.com/maps/@39.90360,-83.09660,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/12-fedex-ground-hub-grove-city-oh-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.9036,
-              "lng": -83.0966
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/12-fedex-ground-hub-grove-city-oh-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.9036,
-              "lng": -83.0966
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Chain-link perimeter fence around the truck yard with a gate across the W-side truck driveway, visible in 2025 Street View (sv6/sv8).",
           "guardShack": "No staffed booth observed at the yard entrance - gated but unmanned, so remoteGs = true (kiosk / app check-in implied).",
@@ -1946,6 +1898,25 @@
           "urbanRural": "Grove City is part of the Columbus OH metro; site sits in a built-up multi-tenant industrial park flanked by other big-box warehouses and suburban residential - Urban.",
           "multipleFacilities": "FedEx occupies one long building; adjacent big-box warehouses are separate tenants, not part of the FedEx campus.",
           "buildingCount": "Single FedEx cross-dock building; FedEx branding confirmed on the building face in 2025 Street View."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 3,
+              "url": "https://truckmap.com/place/fedex-ground-6120-s-meadows-dr-grove-city-oh-43123-usa",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "FedEx Ground 6120 S Meadows Dr, Grove City OH (Columbus area) corroborated as an active facility"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FLAG: FedEx Ground Columbus-area hub at the coords; current directory corroboration only, no dated Tier-1, no closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2102,28 +2073,6 @@
         },
         "dossierExcerpt": "- Audited center: 32.65760, -96.70650 — FedEx Ground Dallas Hub, 1101 E Cleveland St,\n  Hutchins TX (Dallas metro logistics corridor, east of I-45).\n- Roster coordinate (32.656667, -96.706918) moved 1.4 km from the listed address\n  (GEOMETRIC_CENTER geocode) but landed correctly on the hub.\n- Confirmed FedEx by direct Street View branding: \"FedEx\" on the building face (2026\n  Street View). Web research confirms one of the largest FedEx Ground hubs: 720,000+ sq ft on\n  a 102-acre site, ~230,000 packages/day, ~1,600 workers.",
         "mapsUrl": "https://www.google.com/maps/@32.65760,-96.70650,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/13-fedex-ground-dallas-hub-hutchins-tx-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 32.6576,
-              "lng": -96.7065
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/13-fedex-ground-dallas-hub-hutchins-tx-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 32.6576,
-              "lng": -96.7065
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed FedEx Ground Dallas Hub at 1101 E Cleveland St, Hutchins TX — one of the largest FedEx Ground facilities, 720,000+ sq ft on a 102-acre site, processing 230,000+ packages/day with ~1,600 workers. Roster coordinate (GEOMETRIC_CENTER, moved 1.4 km) landed correctly on the hub. FedEx branding directly confirmed on the building face in 2026 Street View.",
           "buildingId": "The FedEx hub is the distinctive solar-paneled-roof building at the center of the industrial campus; several neighboring large warehouses (different occupants) surround it, so care was taken to box only the FedEx property.",
@@ -2136,6 +2085,32 @@
           "dropArea": "Vast trailer-parking fields wrap the building on the north, west and south — hundreds of drop trailers, clearly 50+. Estimated ~700 visible / ~850 capacity.",
           "urbanRural": "Within the Dallas metro industrial corridor (Hutchins/Wilmer logistics cluster), dense industrial fabric beside I-45 — classed Urban.",
           "siteAreaAcres": "~103 acres from the perimeter box; documented site is 102 acres."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://flintcoindustrial.com/our-work/projects/fedex-ground-dallas-hub-expansion/",
+              "date": "2024-01",
+              "type": "press",
+              "claim": "FedEx Ground Dallas Hub (Hutchins, 1101 E Cleveland Rd) 720,000+ sf, expanded to 230,000+ pkgs/day"
+            },
+            {
+              "tier": 1,
+              "url": "https://careers.fedex.com/career-areas/package-handler/jobs",
+              "date": "2026-02",
+              "type": "careers",
+              "claim": "Active FedEx Ground package-handler reqs in Hutchins TX Feb 2026"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Large durable FedEx Ground Dallas hub at 1101 E Cleveland Rd; active 2026 hiring, no closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2288,28 +2263,6 @@
         },
         "dossierExcerpt": "- Audited center: 40.50650, -74.32600 — FedEx Ground regional sortation hub, 6000\n  Riverside Dr, Keasbey NJ (Woodbridge Township), on the Raritan River.\n- Roster coordinate (40.50662, -74.325741) moved 1.2 km from the listed address\n  (GEOMETRIC_CENTER geocode) but landed correctly on the FedEx complex.\n- Confirmed FedEx by direct Street View branding: \"FedEx Ground\" on the office building\n  and on numerous trailers in the yard (2019/2021 Street View). Web research confirms a 24/7\n  FedEx Ground Distribution Center / sortation hub at this address.",
         "mapsUrl": "https://www.google.com/maps/@40.50650,-74.32600,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/14-fedex-ground-hub-keasbey-nj-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.5065,
-              "lng": -74.326
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/14-fedex-ground-hub-keasbey-nj-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.5065,
-              "lng": -74.326
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed FedEx Ground regional sortation hub at 6000 Riverside Dr, Keasbey NJ (Woodbridge Township), a 24/7 NY/NJ-metro hub on the Raritan River. Roster coordinate (GEOMETRIC_CENTER, moved 1.2 km) landed correctly on the FedEx complex. FedEx Ground branding directly confirmed on the office building and on numerous trailers in Street View.",
           "campus": "The property is a large FedEx Ground campus with two distinct large sort-building clusters (a northwest building with a big solar roof and a southeast building cluster), each with continuous dock banks and surrounding trailer fields, plus a central office building with a curved entry canopy. multipleFacilities marked true.",
@@ -2322,6 +2275,32 @@
           "dropArea": "Extensive trailer-parking fields surround both buildings — hundreds of drop trailers, clearly 50+. Estimated ~750 visible / ~900 capacity.",
           "urbanRural": "Dense NY/NJ-metro industrial corridor (Woodbridge Township) — classed Urban.",
           "siteAreaAcres": "~125 acres from the perimeter box (developed FedEx campus footprint); no published figure found, estimated from imagery."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://local.fedex.com/en-us/nj",
+              "date": "2026-05",
+              "type": "locator",
+              "claim": "FedEx Ground distribution center, 6000 Riverside Dr, Keasbey NJ 08832, open 24h"
+            },
+            {
+              "tier": 1,
+              "url": "https://careers.fedex.com/package-handler-part-time-warehouse-like/job/P25-95094-121",
+              "date": "2025-11",
+              "type": "careers",
+              "claim": "FedEx Ground package-handler req at Keasbey/Woodbridge NJ hub (6000 Riverside Dr)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FedEx Ground Woodbridge hub at 6000 Riverside Dr; active 2025-2026 hiring, no closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2453,28 +2432,6 @@
         },
         "dossierExcerpt": "- Name: FedEx Ground Hub - Charlotte NC\n- Type: Ground regional sortation hub\n- Address: 6604 CSX Way, Charlotte, NC 28214\n- Resolved coords: 35.27270, -80.91810 (building/yard center)\n- Maps: https://www.google.com/maps/@35.27270,-80.91810,400m/data=!3m1!1e3",
         "mapsUrl": "https://www.google.com/maps/@35.27270,-80.91810,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/15-fedex-ground-hub-charlotte-nc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.2727,
-              "lng": -80.9181
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/15-fedex-ground-hub-charlotte-nc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.2727,
-              "lng": -80.9181
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Controlled truck entrance on the W side of the property where the access road off CSX Way meets the yard - z20 satellite (fedex-15-gate-z20b) clearly shows a barrier across the truck lane, a pinch-point with lane markings, and 'NO PARKING' painted on the apron.",
           "guardShack": "A small detached structure with a distinctive orange/brown roof sits immediately beside the gate lane at the entrance pinch-point - a staffed guard booth (~1-2 vehicle footprint). remoteGs therefore false.",
@@ -2487,6 +2444,25 @@
           "urbanRural": "Site is within the Charlotte NC metro in a dense multi-tenant industrial corridor (CSX intermodal area, NW Charlotte) flanked by other large warehouses - Urban.",
           "multipleFacilities": "FedEx occupies a single cross-dock building plus its drop yard; the separate white building to the NE is a different tenant.",
           "buildingCount": "One FedEx cross-dock building; confirmed by FedEx-branded trailers and a FedEx dropbox/mailbox in 2022 Street View along the access road."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.fedex.com/package-handler-warehouse-like/job/P25-95252-55",
+              "date": "2025-11",
+              "type": "careers",
+              "claim": "FedEx Ground package-handler req at Charlotte NC hub, 6604 CSX Way, CSX Industrial Park 28214"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FedEx Ground Charlotte hub at 6604 CSX Way (matches coords); active 2025-2026 reqs; NC Network 2.0 closure was Greensboro, not Charlotte.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2623,28 +2599,6 @@
         },
         "dossierExcerpt": "- Type: Ground regional sortation hub\n- Address: 11000 Toebben Dr, Independence, KY 41051\n- Resolved center: 38.94100, -84.61700\n- Confidence: high",
         "mapsUrl": "https://www.google.com/maps/@38.941,-84.617,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/16-fedex-ground-hub-independence-ky-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 38.941,
-              "lng": -84.617
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/16-fedex-ground-hub-independence-ky-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 38.941,
-              "lng": -84.617
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "z20/z21 satellite shows a cantilever sliding gate spanning the inbound truck lane where the access road meets the property, with chain-link + barbed-wire perimeter fencing on both sides; vehicles visible queued at the gate.",
           "guardShack": "Small white ~1-vehicle-footprint booth set beside the lane just inside the gate (z21). Footprint is small enough it could be an unstaffed check-in kiosk; classified as guard shack given major sortation hub, but flagged uncertain.",
@@ -2655,6 +2609,32 @@
           "postGateStaging": "Large paved aprons inside the gate before the dock faces allow trucks to hold/queue.",
           "buildingCount": "One large cross/H-shaped sortation building plus a small ancillary structure; counted as 2.",
           "siteAreaAcres": "Derived from perimeter box (~612 m N-S x ~1169 m E-W), discounted for the irregular L-shaped property footprint."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.stantec.com/en/projects/united-states-projects/f/fedex-northern-kentucky-hub",
+              "date": "2024-06",
+              "type": "press",
+              "claim": "FedEx Northern Kentucky (Independence, 11000 Toebben Dr) Ground hub + adjacent 355,000 sf expansion"
+            },
+            {
+              "tier": 1,
+              "url": "https://careers.fedex.com/package-handler-part-time-warehouse-like/job/P25-95254-32",
+              "date": "2025-11",
+              "type": "careers",
+              "claim": "FedEx Ground package-handler req at Independence KY (NOKY) hub, 11000 Toebben Dr"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FedEx Ground NOKY hub at 11000 Toebben Dr; active 2025 reqs plus ongoing expansion, no closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2786,28 +2766,6 @@
         },
         "dossierExcerpt": "- Type: Ground regional sortation hub\n- Address: 3301 Knight Dr, Nashville, TN 37207\n- Resolved center: 36.23900, -86.79350\n- Confidence: high",
         "mapsUrl": "https://www.google.com/maps/@36.239,-86.7935,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/17-fedex-ground-hub-nashville-tn-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 36.239,
-              "lng": -86.7935
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/17-fedex-ground-hub-nashville-tn-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 36.239,
-              "lng": -86.7935
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Street View (2019, Knight Dr) shows a controlled, fenced truck entrance: a check-in canopy spanning the drive lanes with a guard/admin building beside it; perimeter chain-link fencing and a US flag.",
           "guardShack": "Low building with a green awning beside the entrance lanes plus a canopy over the check-in lanes - a staffed gate/security building. remoteGs therefore false.",
@@ -2818,6 +2776,25 @@
           "buildingCount": "Long main sort building, a parallel secondary building to the N, and a small structure inside the yard; counted as 3 (the blue-roof building SW of the property line is a separate parcel and excluded).",
           "postGateStaging": "Large paved apron inside the gate before the dock faces for queuing.",
           "siteAreaAcres": "Derived from perimeter box (~612 m N-S x ~718 m E-W), discounted for the irregular footprint and wooded N buffer."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.fedex.com/package-handler-warehouse-like/job/P25-95229-49",
+              "date": "2025-11",
+              "type": "careers",
+              "claim": "FedEx Ground package-handler req at Nashville TN hub (Whites Creek area)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FedEx Ground Nashville hub (Whites Creek, matches coords); active 2025 reqs; only TN Network 2.0 closure was Blountville ship center, not Nashville.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2978,28 +2955,6 @@
         },
         "dossierExcerpt": "- Name: FedEx Ground Hub - Goodyear AZ (Phoenix)\n- Type: Ground regional distribution hub (~425K sq ft regional sortation\n  with large package center)\n- Address: 890 S 143rd Ave, Goodyear, AZ 85338\n- Resolved coords: 33.43900, -112.37120 (building center)\n- Maps: https://www.google.com/maps/@33.43900,-112.37120,400m/data=!3m1!1e3",
         "mapsUrl": "https://www.google.com/maps/@33.43900,-112.37120,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/18-fedex-ground-hub-goodyear-az-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.439,
-              "lng": -112.3712
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/18-fedex-ground-hub-goodyear-az-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.439,
-              "lng": -112.3712
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Single truck entrance is on the NE corner off 143rd Ave - a very wide open paved apron/driveway with NO barrier arm or sliding gate across the truck lane (2024/2025 Street View sv13/sv15). The yard interior carries an ornamental steel security fence (visible W side, sv7-sv10) but the truck driveway opening is left open and uncontrolled - truckGate false.",
           "guardShack": "No staffed guard booth at the NE entrance - only a small free-standing sign post. No checkpoint structure observed. guardShack false; remoteGs false because there is no controlled gate.",
@@ -3013,6 +2968,25 @@
           "urbanRural": "Building 2 of Prologis Commerce Park at Goodyear, a 1.7M sq ft 4-building industrial park ~20 mi W of downtown Phoenix - dense industrial fabric, Urban.",
           "multipleFacilities": "FedEx occupies a single building (Building 2); the other Prologis park buildings are separate tenants - not a FedEx campus.",
           "buildingCount": "One FedEx cross-dock building (~425K sq ft) confirmed by FedEx logo on the office front in 2024 Street View."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://inbusinessphx.com/growth-enterprise/fedex-opens-phoenix-area-facility",
+              "date": "2021-11",
+              "type": "press",
+              "claim": "FedEx Ground opened 425,000 sf regional sortation center at 890 S 143rd Ave, Goodyear (Prologis), 7,500 pkgs/hr"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FedEx Ground Goodyear regional sortation center at 890 S 143rd Ave (Prologis lease, matches coords); opened 2021, still hiring, no closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3178,28 +3152,6 @@
         },
         "dossierExcerpt": "- Name: FedEx Ground Package Distribution Hub - Olive Branch MS (Memphis metro)\n- Type: Ground regional package distribution hub\n- Address: 9181 Polk Ln, Olive Branch, MS 38654\n- Audited coords: 34.99080, -89.77850 (long cross-dock building fronting\n  Polk Lane at the roster point)\n- Maps: https://www.google.com/maps/@34.99080,-89.77850,400m/data=!3m1!1e3",
         "mapsUrl": "https://www.google.com/maps/@34.99080,-89.77850,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/19-fedex-ground-package-distribution-hub-olive-branch-ms-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.9908,
-              "lng": -89.7785
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/19-fedex-ground-package-distribution-hub-olive-branch-ms-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.9908,
-              "lng": -89.7785
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "_identity": "FedEx-specific branding could NOT be visually confirmed. 9181 Polk Ln sits in the Crossroads Distribution Center, a large multi-tenant industrial park in Olive Branch (Memphis metro). The roster geocode (RANGE_INTERPOLATED, moved 4m) is precise to the street address and lands on Polk Lane between two long cross-dock buildings; the building fronting Polk Lane at the roster point was audited. 2026 Street View shows mixed-carrier trailers (orange/blue/red dry vans, not the uniform white FedEx Ground fleet) backed in along the dock face - consistent with either a multi-tenant cross-dock or a FedEx Ground linehaul hub serving many contractors. Web research locates the documented FedEx Ground hub in Olive Branch at 8505 Nail Rd (330K sq ft, 94 acres); 9181 Polk Ln may be an address mismatch. Classification reflects the observed physical layout; identity flagged for human review.",
           "truckGate": "The audited building's dock apron runs directly along Polk Lane with no perimeter fence and no barrier/gate across the apron - an open cross-dock face. No controlled truck gate observed; a sliding gate with call box exists at a DIFFERENT building on the E side of Polk Lane. Flagged uncertain.",
@@ -3211,6 +3163,32 @@
           "railServed": "No rail spur enters the parcel.",
           "urbanRural": "Crossroads Distribution Center, Olive Branch MS - dense industrial park in the Memphis metro - Urban.",
           "buildingCount": "One long cross-dock building audited; the adjacent parallel building is a separate facility."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://chamber.olivebranchms.com/list/member/fedex-ground-454",
+              "date": "2024-01",
+              "type": "locator",
+              "claim": "FedEx Ground listed as operating logistics facility (8505 Nail Rd) in Olive Branch MS"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.ziprecruiter.com/co/Fedex/Jobs/-in-Olive-Branch,MS",
+              "date": "2026-04",
+              "type": "careers",
+              "claim": "Active FedEx Ground linehaul/CDL and ops hiring at Olive Branch MS hub Apr 2026"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Large FedEx Ground distribution hub (8505 Nail Rd); actively hiring 2026, no closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3395,33 +3373,37 @@
         },
         "dossierExcerpt": "- Name: FedEx Ground Hub - Richfield OH (Cleveland/Akron mini-hub)\n- Type: Ground automated regional facility (229K sq ft mini-hub)\n- Roster address: 4500 Renaissance Pkwy, Cleveland, OH 44128 — WRONG\n- Real address: 3245 Henry Rd / 3900 Brecksville Rd, Richfield, OH 44286",
         "mapsUrl": "https://www.google.com/maps/@41.27650,-81.61550,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/20-fedex-ground-hub-richfield-oh-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.2765,
-              "lng": -81.6155
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/20-fedex-ground-hub-richfield-oh-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.2765,
-              "lng": -81.6155
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "_locationError": "FACILITY COULD NOT BE POSITIVELY LOCATED. The roster address (4500 Renaissance Pkwy, Cleveland OH 44128) and the roster lat/lng (41.437354, -81.493674) are WRONG for this facility - 4500 Renaissance Pkwy is confirmed by web research (LoopNet/BBB) to be Great Lakes Petroleum Co. / Northeast Lubricants in Warrensville Heights, NOT a FedEx facility.",
           "_realFacility": "The actual facility is the FedEx Ground automated regional 'mini-hub' in RICHFIELD OH 44286 (between Cleveland and Akron), documented at 3245 Henry Rd / 3900 Brecksville Rd. Per Truckinginfo/FleetOwner: 229,000 sq ft, latest camera-based package-sorting technology, capacity for 144 pickup-and-delivery vans, consolidated four older sites (three Cleveland-metro, one Akron). It sits in Richfield's planned 'Crossroads District' (550 acres at Wheatley Rd x Brecksville Rd, bounded by I-271/I-77); the FedEx parcel forms the southern boundary of the 'South Wheatley' focus area.",
           "_searchEffort": "Probed Richfield village, the Wheatley/Brecksville intersection, the South Wheatley triangle, and the Brecksville/Richfield-Township border industrial area (z15-z18) and walked Street View. The South Wheatley zone is largely undeveloped/wooded. Candidate large cross-dock distribution buildings exist near the Brecksville/Richfield border (~41.276,-81.615) but NONE showed FedEx branding or the distinctive ~144-van FedEx Ground P&D fleet, so the exact building could not be confirmed. The placeholder coords point to that candidate vicinity.",
           "_recommendation": "Roster address/coords need correction to the Richfield 44286 location (3245 Henry Rd / 3900 Brecksville Rd). A re-audit with corrected coordinates is required. All classification fields left at safe defaults and flagged uncertain."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.truckinginfo.com/news/fedex-ground-opens-automated-facility-in-cleveland",
+              "date": "2024-01",
+              "type": "press",
+              "claim": "FedEx Ground largest most-automated Cleveland-area operation in Richfield OH, 229k sqft, 144 vans"
+            },
+            {
+              "tier": 3,
+              "url": "https://reichbros.com/portfolio/3201-columbia-rd-richfield-oh/",
+              "date": "2024-01",
+              "type": "locator",
+              "claim": "100% leased by FedEx Ground; lease guaranteed by FedEx Corp through Sept 2031"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Major automated FedEx Ground hub at I-77/I-80; lease to 2031, no closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3573,28 +3555,6 @@
         },
         "dossierExcerpt": "- Type: Ground regional sortation hub\n- Address: 111 Fulling Mill Rd, Middletown, PA 17057\n- Resolved center: 40.23310, -76.73080\n- Confidence: medium",
         "mapsUrl": "https://www.google.com/maps/@40.23310,-76.73080,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/21-fedex-ground-hub-middletown-pa-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.2331,
-              "lng": -76.7308
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/21-fedex-ground-hub-middletown-pa-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.2331,
-              "lng": -76.7308
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "facility": "Confirmed FedEx Ground hub at 111 Fulling Mill Rd via FedEx logo visible on building face in Street View (panos along internal driveway, captured 2019/2023). Geocoded point landed on the central sort building; correct facility.",
           "truckGate": "Truck yard is fully fenced - perimeter fence lines clearly visible on N, NW, W and NE boundaries on satellite. Truck route enters the secured yard through a controlled point; classified truckGate true.",
@@ -3607,6 +3567,25 @@
           "fastLaneOpportunity": "Wide paved aprons and ample yard width around the entry driveway leave room for an express/bypass lane.",
           "entryLanes": "Entry/exit lane counts estimated at 2 each from the wide entry driveway; not crisply resolved.",
           "trailersVisible": "Overhead count across all drop yards and dock aprons is approximate (~420)."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://local.fedex.com/en-us/pa/middletown",
+              "date": "2026-05",
+              "type": "locator",
+              "claim": "FedEx Ground facility at 111 Fulling Mill Rd, Middletown PA listed as operating"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FLAG: Ground hub at 111 Fulling Mill Rd is distinct from the closing Express Ship Center at 200 Fulling Mill Rd (closes Mar 2026); Ground site active but flagged for the adjacent Network 2.0 closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3731,28 +3710,6 @@
         },
         "dossierExcerpt": "- Type: Freight LTL hub service center (~278 doors)\n- Address: 10 Commerce Pkwy, West Jefferson, OH 43162\n- Resolved center: 39.95620, -83.34370\n- Confidence: high",
         "mapsUrl": "https://www.google.com/maps/@39.95620,-83.34370,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/22-fedex-freight-hub-west-jefferson-oh-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.9562,
-              "lng": -83.3437
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/22-fedex-freight-hub-west-jefferson-oh-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.9562,
-              "lng": -83.3437
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "facility": "Confirmed FedEx Freight CMH service center at 10 Commerce Pkwy via the long LTL cross-dock building footprint and the FedEx Freight monument sign visible at the entrance driveway in Street View (pano captured 2024-08). Geocoded point landed on the building.",
           "truckGate": "Single controlled truck entrance off Commerce Pkwy on the SE side. A fence line crosses the entrance driveway at a pinch point - clearly visible on z20/z21 satellite.",
@@ -3765,6 +3722,25 @@
           "urbanRural": "Edge-of-town site near West Jefferson OH in a small industrial area surrounded by farmland and retention ponds; Rural per rubric.",
           "buildingCount": "Main long LTL cross-dock building plus a separate shop/maintenance building on the SE; 2 buildings.",
           "entryLanes": "Single combined entry/exit driveway through the gate; lane split not crisply resolved."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.fedexfreight.fedex.com/maps/CMH.pdf",
+              "date": "2024-01",
+              "type": "locator",
+              "claim": "FedEx Freight service center CMH at 10 Commerce Pkwy, West Jefferson OH; Priority+Economy dual hub"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FedEx Freight (LTL) CMH dual-hub (1 of 12); FedEx Freight spun off June 2026 as FDXF but still operates this terminal; no closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3889,28 +3865,6 @@
         },
         "dossierExcerpt": "- Name: FedEx Freight Hub - Hagerstown MD (HGR)\n- Type: Freight LTL hub service center\n- Address: 16114 Transportation Cir, Hagerstown, MD 21740\n- Resolved coords: 39.62500, -77.80350 (cross-dock building center)\n- Maps: https://www.google.com/maps/@39.62500,-77.80350,400m/data=!3m1!1e3",
         "mapsUrl": "https://www.google.com/maps/@39.62500,-77.80350,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/23-fedex-freight-hub-hagerstown-md-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.625,
-              "lng": -77.8035
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/23-fedex-freight-hub-hagerstown-md-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.625,
-              "lng": -77.8035
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Controlled truck entrance at the SW corner off Transportation Circle - 2024 Street View (sv3) clearly shows chain-link security fencing with sliding gates across the truck lanes, bollards, and lane markings; the whole property is fully fenced.",
           "guardShack": "A gray windowed guard booth stands in the truck lane at the SW gate (windows on multiple sides, ~1-vehicle footprint), with inbound and outbound lanes splitting around it - clearly visible in z20 satellite and 2024 Street View sv3. Staffed booth - remoteGs false.",
@@ -3926,6 +3880,25 @@
           "urbanRural": "Hagerstown MD - the site is on the edge of town in a highway-adjacent industrial setting with woods and open ground around it; judged Rural.",
           "scale": "No truck scale clearly identified - flagged uncertain.",
           "buildingCount": "2 - main LTL cross-dock terminal plus truck-maintenance shop."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://local.fedex.com/en-us/md/hagerstown",
+              "date": "2024-01",
+              "type": "locator",
+              "claim": "FedEx Freight HGR terminal at 16114 Transportation Circle, Hagerstown MD"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FedEx Freight (LTL) HGR, largest FedEx Freight terminal in NA; spun off June 2026 as FDXF but still operates; no closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4056,28 +4029,6 @@
         },
         "dossierExcerpt": "Type: Freight LTL hub service center (~304 doors, one of the largest in the FedEx Freight network)\nResolved coordinates: 33.6510, -84.3388\nConfidence: high",
         "mapsUrl": "https://www.google.com/maps/@33.6510,-84.3388,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/24-fedex-freight-hub-conley-ga-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.651,
-              "lng": -84.3388
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/24-fedex-freight-hub-conley-ga-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.651,
-              "lng": -84.3388
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster address '4900 Welcome All Rd' and roster coordinates (33.620745, -84.525293) both pointed to a residential area in the College Park/Camp Creek area, NOT a freight facility. The correct FedEx Freight ATL break-bulk hub is in the Conley GA 30288 industrial district near Thurman Rd, centered approximately 33.6510, -84.3388. Confirmed by Street View (2025-02) showing fenced parking with a 3-story FedEx Freight office building and FedEx-branded tractors and trailers, and by satellite showing a long cross-dock building with hundreds of trailers.",
           "truckGate": "Entire ~121-acre property is perimeter-fenced (chain-link visible in Street View around the visitor parking and trailer yard). The truck yard is gated and separated from the front parking by an internal fence line; FedEx Freight break-bulk hubs are universally guard-controlled. Exact truck gate position inferred from the access corridor on the north side near the office; not directly Street-View confirmed because all panos are inside the visitor parking.",
@@ -4091,6 +4042,32 @@
           "buildingCount": "Main cross-dock building, a 3-story office building at the NE end, and a second long dock building to the east = 3.",
           "railServed": "No rail spur enters the property; classified false.",
           "siteAreaAcres": "Derived from the perimeter box (~813m x ~602m); large but consistent with one of the largest break-bulk hubs in the FedEx Freight network."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://local.fedex.com/ga/conley/freight-ATL/",
+              "date": "2025-01",
+              "type": "locator",
+              "claim": "FedEx Freight ATL service center/transit hub at 4290 Thurman Rd, Conley GA"
+            },
+            {
+              "tier": 1,
+              "url": "https://careers.fedex.com/supv-operations/job/P25-178824-1",
+              "date": "2025-01",
+              "type": "careers",
+              "claim": "FedEx Freight Supv-Operations req at 4290 Thurman Rd, Conley GA"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FedEx Freight (LTL) ATL Atlanta hub at 4290 Thurman Rd; active 2025 reqs; spun off June 2026 as FDXF but still operates; no closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4227,28 +4204,6 @@
         },
         "dossierExcerpt": "Type: Freight LTL hub / former American Freightways HQ campus\nResolved coordinates: 36.2575, -93.1320\nConfidence: medium",
         "mapsUrl": "https://www.google.com/maps/@36.2575,-93.1320,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/25-fedex-freight-hub-harrison-ar-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 36.2575,
-              "lng": -93.132
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/25-fedex-freight-hub-harrison-ar-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 36.2575,
-              "lng": -93.132
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster address '2200 Forward Dr, Harrison AR' and coordinates (36.256793, -93.132174, GEOMETRIC_CENTER) resolve to the correct campus. This is the FedEx Freight HRO service center co-located with FedEx Freight Corporate Offices on the heritage American Freightways HQ campus. Confirmed by satellite (corporate office complex + two LTL cross-dock buildings + large employee parking) and Street View (2024) showing FedEx-branded trailers in the operations yard and perimeter fencing.",
           "multipleFacilities": "Campus has distinct building clusters: a connected corporate-office complex on the east side plus two separate long LTL cross-dock terminal buildings on the west side, with internal roads and ponds between them.",
@@ -4263,6 +4218,25 @@
           "railServed": "No rail spur enters the campus; classified false.",
           "postGateStaging": "Large internal paved yard could serve as a post-gate holding area; inferred, medium confidence.",
           "siteAreaAcres": "Derived from the perimeter box; includes corporate offices, large employee parking, ponds, and lawns in addition to the truck-operations area."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.fedexfreight.fedex.com/locationsCC.do?ccid=HRO&city=HARRISON&state=AR&zipcd=72601-2004",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "FedEx Freight service center HRO at 2200 Forward Dr, Harrison AR 72601, manager and phone listed (operating)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FedEx Freight (LTL) HQ-city major hub at 2200 Forward Dr; live on locator; spun off June 2026 as FDXF but still operates; 2023/24 closures hit small AR feeders, not Harrison.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4396,28 +4370,6 @@
         },
         "dossierExcerpt": "- Roster address (incorrect): 2851 Bartlett Rd, Memphis, TN 38134 — RANGE_INTERPOLATED geocode at 35.203323, -89.868928. Satellite at that point showed a small commercial strip / vacant land near a rail line in central Memphis (38112 area), with no LTL freight terminal.\n- Correct facility: FedEx Freight LTL hub, 461 Winchester Rd, Memphis, TN 38109 (FedEx Freight terminal code MEM).\n- Locked center: 35.05305, -90.04885.\n- How confirmed: FedEx Freight's own service-center listing for TN lists \"MEMPHIS (MEM) — 461 Winchester Rd, Memphis, TN 38109-3951.\" Satellite at that address shows a large LTL break-bulk terminal — long cross-dock buildings with doors on both faces and a huge trailer yard. Street View (2025-12) along Winchester Rd shows FedEx Freight tractors and trailers (FedEx logos) and FedEx Freight building signage. This is the correct site.",
         "mapsUrl": "https://www.google.com/maps/@35.05305,-90.04885,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/26-fedex-freight-hub-memphis-tn-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.05305,
-              "lng": -90.04885
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/26-fedex-freight-hub-memphis-tn-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.05305,
-              "lng": -90.04885
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster address '2851 Bartlett Rd' geocoded to an unrelated commercial strip in central Memphis (38112). Correct facility is the FedEx Freight LTL hub at 461 Winchester Rd, Memphis, TN 38109 (FedEx Freight terminal code MEM), confirmed by Street View showing FedEx Freight tractors/trailers and FedEx Freight building signage.",
           "truckGate": "Entire property is fenced with black privacy screening (2025 imagery). Inner controlled gate line separates the front employee/visitor parking from the secured trailer yard; gate openings visible at z21.",
@@ -4428,230 +4380,25 @@
           "dropYard": "Extensive gravel/paved trailer yard south of the docks holds several hundred parked trailers and pup trailers without tractors.",
           "entryLanes": "Estimated 2 inbound lanes at the controlled gate; exact count not fully resolvable from overhead imagery due to privacy fencing.",
           "railServed": "A rail line runs along the east edge of the property but no spur enters the FedEx yard; classified false."
-        }
-      },
-      {
-        "id": "27-fedex-freight-hub-hodgkins-il",
-        "name": "FedEx Freight Hub - Hodgkins IL (Chicago)",
-        "type": "Freight LTL hub service center (Chicago metro)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "low",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "remoteGs",
-          "preGateStaging",
-          "postGateStaging",
-          "drivewayLong",
-          "drivewayShort",
-          "backupSensitive",
-          "entryExitTogether",
-          "entryExitSeparate",
-          "entryLanes",
-          "exitLanes",
-          "fastLaneOpportunity",
-          "dockDoors",
-          "dropArea",
-          "shipRcvSeparate",
-          "multipleFacilities",
-          "scale",
-          "dropYard",
-          "multiStep",
-          "dockDoorCount",
-          "trailersVisible",
-          "trailerParkingCapacity",
-          "buildingCount",
-          "siteAreaAcres"
-        ],
-        "center": {
-          "lat": 41.791181,
-          "lng": -87.856685
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 41.793229,
-                "lng": -87.858608
-              },
-              {
-                "lat": 41.793229,
-                "lng": -87.85284
-              },
-              {
-                "lat": 41.790976,
-                "lng": -87.852565
-              },
-              {
-                "lat": 41.790771,
-                "lng": -87.858058
-              },
-              {
-                "lat": 41.792,
-                "lng": -87.858882
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
             {
-              "ring": [
-                {
-                  "lat": 41.792922,
-                  "lng": -87.858333
-                },
-                {
-                  "lat": 41.792922,
-                  "lng": -87.853114
-                },
-                {
-                  "lat": 41.791386,
-                  "lng": -87.853114
-                },
-                {
-                  "lat": 41.791181,
-                  "lng": -87.858058
-                }
-              ]
+              "tier": 1,
+              "url": "https://www.fedexfreight.fedex.com/locationsCC.do?ccid=NEM&city=MEMPHIS&zipcd=38116",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "FedEx Freight service center NEM at 3050 Carrier St, Memphis TN 38116, manager and phone listed (operating)"
             }
           ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 41.792717,
-                  "lng": -87.858058
-                },
-                {
-                  "lat": 41.792717,
-                  "lng": -87.853389
-                },
-                {
-                  "lat": 41.792,
-                  "lng": -87.853389
-                },
-                {
-                  "lat": 41.791795,
-                  "lng": -87.858058
-                }
-              ]
-            }
-          ],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 330,
-              "pano": "TaGNno0k3PXSaE6A4_uWmw",
-              "hasCoverage": true
-            },
-            "truckGate": {
-              "heading": 330,
-              "pano": "TaGNno0k3PXSaE6A4_uWmw",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 0,
-          "trailersVisible": 25,
-          "trailerParkingCapacity": 60,
-          "truckGateCount": 0,
-          "buildingCount": 4,
-          "siteAreaAcres": 30,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": false,
-          "drivewayLong": false,
-          "drivewayShort": true,
-          "backupSensitive": false,
-          "entryExitTogether": false,
-          "entryExitSeparate": false,
-          "entryLanes": null,
-          "exitLanes": null,
-          "fastLaneOpportunity": false,
-          "dockDoors": "10-25",
-          "dropArea": "10-25",
-          "shipRcvSeparate": false,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#3",
-          "steps": [
-            {
-              "step": "Arrive on site (no gate)",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Drive to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 480000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 3030000,
-          "totalYnsMs": 2640000
-        },
-        "dossierExcerpt": "Type: Freight LTL hub service center (Chicago metro)\nRoster coordinates: 41.791181, -87.856685 (RANGE_INTERPOLATED)\nConfidence: low — FACILITY NOT POSITIVELY IDENTIFIED",
-        "mapsUrl": "https://www.google.com/maps/@41.791181,-87.856685,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/27-fedex-freight-hub-hodgkins-il-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.791181,
-              "lng": -87.856685
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/27-fedex-freight-hub-hodgkins-il-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.791181,
-              "lng": -87.856685
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "location": "FACILITY NOT POSITIVELY IDENTIFIED. The roster address '9501 W 55th St, Hodgkins IL' (RANGE_INTERPOLATED geocode) resolves to a generic multi-tenant big-box industrial/warehouse park in the Hodgkins/McCook IL corridor. Satellite probes (z15-z19) and Street View (2022-2025) across the area found wide-footprint distribution warehouses but NO dedicated FedEx Freight LTL cross-dock hub (no characteristic long-narrow break-bulk building with a large trailer drop yard) and NO FedEx Freight signage. Web research confirms the historical Chicago FedEx Freight terminal (CGO, Lyons/Summit area) was reported closed years ago and the active FedEx Freight Chicago-area service center is BOL at 310 E Crossroads Pkwy, Bolingbrook IL. The Hodgkins roster entry appears to be based on a stale or incorrect locator listing; FedEx Freight may lease cross-dock space within this industrial park, but it could not be visually confirmed.",
-          "classification": "All classification fields are best-effort estimates of what is physically visible at the roster address (an open, unfenced multi-tenant industrial park with big-box warehouse dock faces and some trailers backed in). They do NOT represent a confirmed FedEx Freight facility. All fields flagged uncertain.",
-          "truckGate": "No perimeter fencing or controlled gate observed; the industrial park has open road access. Set false (uncertain).",
-          "dockDoors": "Big-box warehouse buildings in the park have dock doors and some trailers backed in along the central drive aisle; banded 10-25 as a rough best-effort estimate for any single tenant, not a confirmed FedEx count.",
-          "urbanRural": "Hodgkins/McCook is within the dense Chicago metro industrial fabric; classified Urban.",
-          "recommendation": "Flag for human review. The correct active FedEx Freight Chicago-area facility is most likely the Bolingbrook (BOL) service center at 310 E Crossroads Pkwy, Bolingbrook IL 60440 — the roster entry/address should be verified and possibly re-pointed there."
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FedEx Freight (LTL) Memphis terminal (NEM) at 3050 Carrier St; live on locator; spun off June 2026 as FDXF but still operates; no closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4779,28 +4526,6 @@
         },
         "dossierExcerpt": "Type: Freight LTL hub service center (~240 doors)\nResolved coordinates: 38.8350, -90.5210\nConfidence: high",
         "mapsUrl": "https://www.google.com/maps/@38.8350,-90.5210,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/28-fedex-freight-hub-earth-city-mo-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 38.835,
-              "lng": -90.521
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/28-fedex-freight-hub-earth-city-mo-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 38.835,
-              "lng": -90.521
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster address '3300 Rider Trl S, Earth City MO' and coordinates (38.761891, -90.455962, ROOFTOP) resolve to a multi-story glass OFFICE building in the Earth City office park - NOT a freight hub. The correct FedEx Freight STL break-bulk hub is at 3951 New Town Blvd, St Charles, MO 63301, centered approximately 38.8350, -90.5210 (across the Missouri River, ~9 km NW of the roster point). Confirmed by satellite showing a classic LTL break-bulk cross-dock building with hundreds of trailers, and by the FedEx Freight STL service-center locator page (local.fedex.com/mo/saint-charles/freight-STL).",
           "truckGate": "Large dedicated LTL hub property; truck yard access controlled via the New Town Blvd access road on the south/SW side. Perimeter is defined; exact gate position inferred from the access corridor (Street View coverage near the gate is limited). FedEx Freight break-bulk hubs are universally gated.",
@@ -4814,6 +4539,25 @@
           "buildingCount": "Main cross-dock break-bulk building (with north wing), an office/dispatch building at the south face, and a separate maintenance/shop building on the east side = 3.",
           "railServed": "No rail spur enters the property; classified false.",
           "siteAreaAcres": "Derived from the perimeter box (~534m x ~650m), ~86 acres."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.fedexfreight.fedex.com/locationsAll.do?opco=&shipperCountryCode=US&shipperStateList=MO",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "FedEx Freight maintains a St. Louis-area LTL service center in the Earth City/Hazelwood (63045) corridor"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FLAG: FedEx Freight (LTL, FDXF since June 2026) runs the St. Louis-area LTL hub in the Earth City corridor; locator confirms metro STL presence but exact street address at the coord not pinned to a dated Tier-1 page; no closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4942,28 +4686,6 @@
         },
         "dossierExcerpt": "Type: Freight LTL hub service center (DFW metro)\nResolved coordinates: 32.8378, -97.3340\nConfidence: medium",
         "mapsUrl": "https://www.google.com/maps/@32.8378,-97.3340,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/29-fedex-freight-hub-dallas-fort-worth-tx-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 32.8378,
-              "lng": -97.334
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/29-fedex-freight-hub-dallas-fort-worth-tx-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 32.8378,
-              "lng": -97.334
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster address '3600 Reeves Pl, Fort Worth TX 76119' and coordinates (32.790629, -97.223508, RANGE_INTERPOLATED) resolve to a small multi-tenant flex/industrial building in the Carter Industrial Park (SE Fort Worth) - NOT a freight LTL hub. The official FedEx Freight FTW service center is at 1909 Great Southwest Pkwy, Fort Worth, TX 76106 (confirmed by the FedEx Freight FTW service-center map PDF and locator). That address sits in the Great Southwest Industrial District (GSID), inside Loop 820 north of Meacham Blvd. Satellite at the geocoded GSID location reveals an LTL cross-dock terminal complex (multiple long narrow cross-dock buildings with trailers backed in on both faces, dock aprons, trailer parking, rail along the south edge) at approximately 32.8378, -97.3340.",
           "facilityIdentity": "The cross-dock terminal complex at the resolved GSID location is unmistakably an LTL truck terminal, but it appears to be a multi-carrier terminal corridor (a 'C.M.I.' trailer was seen at one cross-dock in Street View). FedEx Freight FTW occupies a cross-dock within this complex; the exact building could not be 100% confirmed with FedEx signage in Street View. Facility-type and location are confident; the precise FedEx footprint within the complex is medium-confidence.",
@@ -4978,6 +4700,25 @@
           "urbanRural": "Within the dense Fort Worth metro industrial fabric (GSID, inside Loop 820); classified Urban.",
           "railServed": "A rail line runs along the south edge of the terminal corridor but no spur enters the FedEx truck yard; classified false.",
           "siteAreaAcres": "Derived from the perimeter box around the terminal complex; FedEx Freight's leased portion is a subset of this."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.fedexfreight.fedex.com/locationsCC.do?ccid=FTW&city=FORT+WORTH&state=TX&zipcd=76106-2223",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "FedEx Freight Priority service center FTW at 1909 Great Southwest Pkwy, Fort Worth TX 76106, manager and phone (operating)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FedEx Freight (LTL) DFW hub (FTW) at 1909 Great Southwest Pkwy (matches coords); live on locator; spun off June 2026 as FDXF but still operates; no closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -5117,28 +4858,6 @@
         },
         "dossierExcerpt": "Type: Freight LTL hub service center (Northern California)\nResolved coordinates: 37.9118, -121.2235\nConfidence: medium",
         "mapsUrl": "https://www.google.com/maps/@37.9118,-121.2235,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/fedex/30-fedex-freight-hub-stockton-ca-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 37.9118,
-              "lng": -121.2235
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/fedex/30-fedex-freight-hub-stockton-ca-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 37.9118,
-              "lng": -121.2235
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster address '4444 S B St, Stockton CA 95206' and coordinates (37.908392, -121.244053, RANGE_INTERPOLATED) resolve to a modern big-box distribution-warehouse park in south Stockton - NOT an LTL freight hub. The FedEx Freight STK service center is consistently listed (FedEx Freight STK page, Waze, Yellow Pages, Indeed) at 4520 S Highway 99 / 4520 CA-99, Stockton, CA 95215. Geocoding places that address at ~37.9118, -121.2235, where satellite reveals an LTL cross-dock terminal complex along the SR-99 corridor (long narrow cross-dock buildings with trailers backed in on both faces, dock aprons, dense rows of pup trailers).",
           "facilityIdentity": "The cross-dock terminal complex at the resolved location is unmistakably an LTL truck terminal. Street View (2026-03) shows SAIA branding at the main cross-dock's SW frontage, indicating the complex hosts SAIA LTL Freight; the FedEx Freight STK terminal (address 4520 S Hwy 99) is either co-located in this multi-carrier terminal complex or occupies an adjacent cross-dock within it. Facility type and corridor location are confident; the exact FedEx building footprint within the complex could not be confirmed with FedEx signage - medium confidence.",
@@ -5153,6 +4872,25 @@
           "urbanRural": "Within the Stockton metro industrial fabric along the SR-99 corridor; classified Urban.",
           "railServed": "No rail spur enters the terminal yard; classified false.",
           "siteAreaAcres": "Derived from the perimeter box around the terminal complex; FedEx Freight's portion is a subset."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.fedexfreight.fedex.com/locationsCC.do?ccid=STK",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "FedEx Freight service center STK at 4520 S Hwy 99 Frontage Rd, Stockton CA 95215, manager and phone (operating)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FedEx Freight (LTL) Central Valley terminal (STK) at 4520 S Hwy 99 Frontage Rd (matches coords); live on locator; spun off June 2026 as FDXF but still operates; no closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       }
     ]

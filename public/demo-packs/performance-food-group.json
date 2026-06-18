@@ -1,29 +1,29 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-02T16:22:04.734Z",
+  "builtAt": "2026-06-18T21:38:16.724Z",
   "account": {
     "slug": "performance-food-group",
     "displayName": "Performance Food Group",
     "archetype": "grocer-distributor",
-    "siteCount": 30,
+    "siteCount": 29,
     "coverageNote": {
-      "auditedCount": 30,
+      "auditedCount": 29,
       "estimatedFootprint": 150,
+      "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": true,
-      "note": "Performance Food Group operates ~150 US distribution centers (Vistar, PFG Foodservice, Reinhart). We audited 30 representative sites.",
-      "auditedScope": "US"
+      "note": "Performance Food Group operates ~150 US distribution centers (Vistar, PFG Foodservice, Reinhart). We audited 30 representative sites."
     },
     "featuredSiteId": "18-lebanon-tn",
-    "roiDefaults": {
-      "averageMarginPerShipment": 580
-    },
     "dossierIntro": "Foodservice distribution runs multi-temp networks where the trailer is the production unit. Performance Food Group runs 150 facilities. Nashville Lebanon TN covers 52 acres with 70 dock doors and 150 trailer spots. The yard isn't staging trailers, it's staging routes. YardFlow makes routes addressable: drivers find their assigned pre-loaded trailer without circling or radioing dispatch.",
     "surprisingFindings": [
       "1,324 dock doors across 30 sites. Foodservice runs on density.",
       "Multi-temp trailers turn the yard into a routing problem. Frozen, refrigerated, ambient all park separately.",
       "150 trailer spots at Lebanon means 50 routes can stage at once. Driver pickup is the cycle bottleneck."
-    ]
+    ],
+    "roiDefaults": {
+      "averageMarginPerShipment": 580
+    }
   },
   "research": null,
   "network": {
@@ -34,144 +34,19 @@
       45.537058
     ],
     "archetypeMix": {
-      "#3": 15,
       "#9": 12,
+      "#3": 14,
       "#7": 1,
       "#1": 2
     },
     "totals": {
       "dockDoors": 1324,
       "trailerCapacity": 2240,
-      "gates": 35,
+      "gates": 34,
       "railServed": 3,
-      "acres": 794.2
+      "acres": 744.2
     },
     "sites": [
-      {
-        "id": "01-cheney-brothers-florence-sc",
-        "name": "Cheney Brothers - Florence SC (new cold DC)",
-        "type": "Refrigerated/Freezer Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "low",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "remoteGs",
-          "preGateStaging",
-          "postGateStaging",
-          "drivewayLong",
-          "drivewayShort",
-          "backupSensitive",
-          "entryExitTogether",
-          "entryExitSeparate",
-          "entryLanes",
-          "exitLanes",
-          "fastLaneOpportunity",
-          "dockDoors",
-          "dropArea",
-          "shipRcvSeparate",
-          "multipleFacilities",
-          "scale",
-          "dropYard",
-          "multiStep"
-        ],
-        "center": {
-          "lat": 34.271014,
-          "lng": -79.694676
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 34.272603,
-                "lng": -79.697285
-              },
-              {
-                "lat": 34.273624,
-                "lng": -79.693577
-              },
-              {
-                "lat": 34.270447,
-                "lng": -79.692479
-              },
-              {
-                "lat": 34.269312,
-                "lng": -79.696049
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 0,
-          "trailersVisible": 0,
-          "trailerParkingCapacity": 0,
-          "truckGateCount": 1,
-          "buildingCount": 0,
-          "siteAreaAcres": 50,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": false,
-          "drivewayLong": false,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": false,
-          "entryExitSeparate": false,
-          "entryLanes": null,
-          "exitLanes": null,
-          "fastLaneOpportunity": false,
-          "dockDoors": "NONE",
-          "dropArea": "NONE",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "dossierExcerpt": "The roster coordinates (ROOFTOP geocode, 166 m moved) land inside the Pee Dee\nCommerce City East Industrial Park off Florence Harllee Blvd, just south of\nI-95 in Florence County, SC. Web research confirms this is the correct site:\nA M King and FCEDP both name 2491 Florence Harllee Blvd / Pee Dee Commerce City\nEast Industrial Park as the Cheney Brothers Florence DC. The S.C. Governor's\noffice, WMBF, and the Greater Florence Chamber confirm a $42.5M expansion\nannounced March 2026.",
-        "mapsUrl": "https://www.google.com/maps/@34.271014,-79.694676,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/01-cheney-brothers-florence-sc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.271014,
-              "lng": -79.694676
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/01-cheney-brothers-florence-sc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.271014,
-              "lng": -79.694676
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "siteStatus": "GREENFIELD UNDER CONSTRUCTION. Roster coordinates land on an active earthwork/grading pad in the Pee Dee Commerce City East Industrial Park. Latest available Maxar satellite and Feb-2024 Street View both show bare graded earth, silt fencing, and construction equipment - NO building, docks, gate, or trailers exist in imagery.",
-          "planned": "Per A M King and FCEDP, the completed building will be a 386,047 sq ft refrigerated/freezer DC on ~50 acres with 45 dock positions; a $42.5M expansion with 85 jobs was announced March 2026. These figures are planned, not yet visible.",
-          "dockDoors": "Planned 45 docks per A M King, but band reported as NONE because no building/docks are visible in imagery.",
-          "perimeter": "Drawn around the visible graded site footprint (~50 acres), bounded by Florence Harllee Blvd to the south; this is the planned property, not a measured operational yard.",
-          "urbanRural": "Rural - edge-of-town industrial park off I-95, surrounded by farmland and scattered DCs.",
-          "buildingCount": "0 - no structure stands yet."
-        }
-      },
       {
         "id": "02-florence-sc-legacy",
         "name": "Performance Foodservice - Florence SC (legacy DC)",
@@ -303,28 +178,6 @@
         },
         "dossierExcerpt": "The roster supplied 34.275934, -79.688271 (GEOMETRIC_CENTER, flagged movedMeters 13,139 —\nvery imprecise). Web research confirmed the legacy Performance Foodservice broadline DC at\n2801 Alex Lee Blvd in the Florence County industrial park. Satellite probing of the park\nidentified a single long white rectangular distribution building (~620 m x ~110 m) with a\ncontinuous loading-dock bank along its south face — consistent with a high-throughput\nbroadline DC. This is distinct from idx 1 (Cheney Brothers new cold DC, 2491 Florence\nHarllee Blvd, ~34.271,-79.6947), which satellite imagery shows as a still-graded pad / under\nconstruction immediately to the NE. The legacy operating building is the one audited here.",
         "mapsUrl": "https://www.google.com/maps/@34.26505,-79.69285,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/02-florence-sc-legacy-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.26505,
-              "lng": -79.69285
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/02-florence-sc-legacy-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.26505,
-              "lng": -79.69285
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster coord (34.275934,-79.688271, GEOMETRIC_CENTER, moved 13.1km flag) was imprecise. Resolved the legacy Performance Foodservice DC to ~34.26505,-79.69285 in the Florence industrial park off Alex Lee Blvd — a single long white rectangular DC, ~620m x ~110m, with a continuous dock bank along its south face. Distinct from idx 1 (Cheney Brothers new cold DC, ~34.271,-79.6947, still a graded pad/under construction immediately NE).",
           "truckGate": "No barrier arm or sliding gate observed across the truck lane in available imagery; the dock yard sits behind only a low wood-rail fence along the perimeter loop road. Marked true at medium confidence because the property is fenced and the truck approach pinches at a single SW driveway off the loop road — but the control structure is not visually confirmed.",
@@ -334,6 +187,32 @@
           "dropArea": "Trailer drop stalls along the south dock apron and a secondary lot; ~25-50 trailers parked without tractors.",
           "fastLaneOpportunity": "Wide unused paved apron along the dock yard and loop road provides room to add lanes.",
           "urbanRural": "Edge-of-town industrial park surrounded by woodland and retention ponds outside Florence SC; classified Rural per rubric tie-break."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/Our-Locations/Florence",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice Florence at 2801 Alex Lee Blvd, Florence, SC 29506 shown as active location."
+            },
+            {
+              "tier": 1,
+              "url": "https://governor.sc.gov/news/2021-06/performance-foodservice-expanding-operations-florence-county",
+              "date": "2021-06",
+              "type": "press",
+              "claim": "Performance Foodservice $11M expansion at the Alex Lee Blvd Florence DC adding 150 jobs."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Performance Foodservice (PFG broadline) legacy Florence DC, live on PFG locator; not part of Cheney/FTC divestiture, no closure/WARN.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -476,28 +355,6 @@
         },
         "dossierExcerpt": "Roster coord (36.980753, -121.556024, ROOFTOP, moved 107 m) was essentially correct.\nSatellite imagery shows an unmistakable building: a ~189,000 sq ft distribution center with\na near-fully solar-paneled roof — the only solar-roof warehouse on this stretch of Monterey\nRd between Hwy 101 and the rail line. This matches PFG / BusinessWire coverage of the Gilroy\n\"Sustainable Distribution Center of the Future\" (rooftop solar array, on-site battery\nstorage, FreeWire Boost Chargers, Volvo VNR electric trucks, solar reefer trailers).\nLocked center ~36.98045,-121.5543.",
         "mapsUrl": "https://www.google.com/maps/@36.98045,-121.5543,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/03-gilroy-ca-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 36.98045,
-              "lng": -121.5543
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/03-gilroy-ca-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 36.98045,
-              "lng": -121.5543
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed via roster address 5480 Monterey Rd and PFG/BusinessWire 'Sustainable DC of the Future' coverage. The building is unmistakable: a ~189,000 sq ft DC with a near-fully solar-paneled roof, ZEV charging, the only solar-roof warehouse on this stretch of Monterey Rd between Hwy 101 and the rail line. Center ~36.98045,-121.5543.",
           "truckGate": "Building fronts Monterey Rd (office/landscaped courtyard) with the truck driveway and yard wrapping the NE/E side. No barrier or sliding gate positively confirmed in available imagery (no internal Street View; Hwy-101-side panos only). Marked true at medium confidence — the yard is fenced/walled and the truck approach funnels to a single NE driveway, consistent with a controlled entrance.",
@@ -508,6 +365,25 @@
           "fastLaneOpportunity": "Generous yard width and a wide apron on the east side leave room for an express lane.",
           "urbanRural": "Edge-of-town Gilroy, farmland immediately south and east, adjacent to Hwy 101 — classified Rural.",
           "railServed": "A rail line runs along the north edge of the property but no spur appears to enter the site; railServed false."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/Our-Locations/Gilroy",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice Gilroy at 5480 Monterey Road, Gilroy CA 95020 shown as active location serving Northern California."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Performance Foodservice (PFG broadline) Gilroy DC, live on PFG locator; no negative found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -706,28 +582,6 @@
         },
         "dossierExcerpt": "Roster coord (40.670695, -74.170648, ROOFTOP, moved 343 m) was close. Street View positively\nconfirmed the building — the office front facing Ikea Drive carries the red 'PERFORMANCE\nfoodservice' logo. The DC sits at 1 Ikea Drive in the Elizabeth port-industrial district,\nimmediately adjacent to the Elizabeth IKEA, a Floor & Decor, and the Maher container\nterminals. Locked center ~40.67085,-74.17055.",
         "mapsUrl": "https://www.google.com/maps/@40.67085,-74.17055,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/04-elizabeth-nj-metro-ny-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.67085,
-              "lng": -74.17055
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/04-elizabeth-nj-metro-ny-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.67085,
-              "lng": -74.17055
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed via Street View — the building carries the red 'PERFORMANCE foodservice' logo on its office front facing Ikea Drive. Located at 1 Ikea Drive, Elizabeth NJ, in the Elizabeth port-industrial district adjacent to IKEA, Floor & Decor and the Maher container terminals. Center ~40.67085,-74.17055.",
           "truckGate": "Property is fully chain-link fenced along Ikea Drive (clearly visible in Street View). The truck yard and dock face are on the NE side; truck traffic enters through a fenced driveway. Gate hardware not individually resolved but the fenced single-driveway funnel supports a controlled entrance.",
@@ -738,6 +592,25 @@
           "backupSensitive": "Dense urban port-industrial block — Ikea Drive is a busy two-lane artery; a queue at the gate has limited stacking space and could spill toward the IKEA/Floor & Decor intersection.",
           "fastLaneOpportunity": "Tight urban site with limited unused paved width at the entrance; no clear room for an express lane.",
           "urbanRural": "Dense Elizabeth NJ port-industrial fabric — Urban."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/our-locations/metro-ny/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice Metro NY at 1 Ikea Drive, Elizabeth, NJ shown as active location delivering across NY/NJ/CT/PA."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Performance Foodservice - Metro NY (PFG broadline) at 1 Ikea Drive Elizabeth NJ, live on PFG locator; no negative. Tenancy leased inferred (Elizabeth NJ logistics park), specifics unverified.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -934,28 +807,6 @@
         },
         "dossierExcerpt": "Roster coord (34.005031, -117.941805, ROOFTOP) was flagged movedMeters 1352, but that is a\nstale-geocode artifact — the rooftop coordinate is accurate. Cross-checked against\nLoopNet / LA County assessor parcels 8242-011-065 and -067 for 16639 Gale Ave\n(~34.00485,-117.94161). Street View positively confirmed the building: the west face along\nGale Ave carries the red 'PERFORMANCE foodservice' logo band. Locked center\n~34.00485,-117.9416.",
         "mapsUrl": "https://www.google.com/maps/@34.00485,-117.9416,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/05-city-of-industry-ca-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.00485,
-              "lng": -117.9416
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/05-city-of-industry-ca-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.00485,
-              "lng": -117.9416
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed via Street View — building carries the red 'PERFORMANCE foodservice' logo on the west face along Gale Ave. Address 16639 Gale Ave, City of Industry CA; coord cross-checked against LoopNet/assessor parcel 8242-011-065/067 (~34.00485,-117.94161). Roster 'movedMeters 1352' is a stale-geocode artifact — rooftop coord is accurate.",
           "truckGate": "Street View clearly shows a blue sliding gate spanning the truck driveway off Gale Ave, with chain-link perimeter fencing and a 'VISITOR' parking sign by the office. Controlled truck entrance confirmed.",
@@ -965,6 +816,25 @@
           "dropArea": "Trailer drop stalls in the yard east of the building; ~25-50 trailers.",
           "fastLaneOpportunity": "Tight, fully built-out urban industrial parcel; the gate apron has little spare width for an express lane.",
           "urbanRural": "Dense City of Industry industrial corridor — Urban."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/Our-Locations/Southern-California",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice Southern California at 16639 Gale Ave, City of Industry CA 91745 shown as active location."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Performance Foodservice - Southern California (PFG broadline) at 16639 Gale Ave City of Industry, live on PFG locator; no negative found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1071,8 +941,7 @@
               ]
             }
           ],
-          "staging": null,
-          "streetViewMeta": {}
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 34,
@@ -1145,28 +1014,6 @@
         },
         "dossierExcerpt": "The roster supplied 41.721277, -88.358237 (ROOFTOP geocode, 1,068 m moved). Satellite\nprobing at z17-z20 around that point landed squarely on a long NE-SW industrial\nbuilding fronting Baseline Rd. Web research confirms 5030 Baseline Rd is the\nPerformance Foodservice - Chicago broadline DC, the former Fox River Foods\nheadquarters (Fox River Foods was acquired by PFG; the LinkedIn page now reads\n\"Performance Foodservice - Fox River\"). Reported as a ~325,000 sq ft warehouse with\n23 refrigerated + 11 dry dock doors, ~100 outbound trucks/day serving 7 states.\nStreet View signage (\"SHIPPING / RECEIVING\") on the building wall along Baseline Rd\ncorroborates the freight identity. Lock is high-confidence.",
         "mapsUrl": "https://www.google.com/maps/@41.7214,-88.3585,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/06-montgomery-il-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.7214,
-              "lng": -88.3585
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/06-montgomery-il-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.7214,
-              "lng": -88.3585
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "No controlled truck gate. The truck driveway leaves Baseline Rd on the NE corner of the property as a wide open paved drive and curves south into the truck court between the PFG building (west) and a neighboring industrial building (east). Street View (Apr 2024) of the entrance shows no barrier arm, no sliding/swing gate, and no checkpoint pinch-point — only a red 'SHIPPING / RECEIVING' sign at the driveway mouth. No perimeter security fence along Baseline Rd.",
           "guardShack": "No guard booth at the entrance or anywhere on the property. The entrance Street View shows an open landscaped driveway with no gatehouse structure.",
@@ -1180,6 +1027,25 @@
           "scale": "No truck scale or weigh platform visible in overhead imagery.",
           "buildingCount": "Single long PFG distribution building (~325,000 sq ft per web research). Adjacent large buildings to the east are separate ownership/operations.",
           "railServed": "No rail spur runs into the PFG parcel."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/Our-Locations/Chicago",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice Chicago (Fox River) at 5030 Baseline Rd, Montgomery, IL 60538 shown as active location."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Performance Foodservice - Chicago / Fox River (PFG broadline) at 5030 Baseline Rd Montgomery IL, live on PFG locator; no negative found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1346,28 +1212,6 @@
         },
         "dossierExcerpt": "The roster supplied 41.944117, -71.136682 (GEOMETRIC_CENTER geocode, 157 m moved).\nSatellite probing at z17-z21 around that point landed on a large dark+white-roofed\ndistribution complex inside a Taunton industrial park, with a long dock face and a\nbig trailer drop yard. Web research confirms 225 John Hancock Rd is the Performance\nFoodservice - Boston broadline DC, the former Reinhart Foodservice location (now\nPFG; NLRB case file lists \"Performance Foodservice Boston (formerly Reinhart\nFoodservice)\"). Street View along John Hancock Rd shows the office front and\nemployee parking of a large DC. Lock is high-confidence.",
         "mapsUrl": "https://www.google.com/maps/@41.9433,-71.137,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/07-taunton-ma-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.9433,
-              "lng": -71.137
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/07-taunton-ma-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.9433,
-              "lng": -71.137
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "No controlled truck gate. The property fronts John Hancock Rd with fully open access — Street View (Aug 2025) shows the employee parking lot running directly off the public road with no perimeter fence, no barrier arm, no sliding gate, and no checkpoint pinch-point. Trucks enter the same open driveway and proceed into the truck court / drop yard. Google's Street View car was able to drive onto the interior truck-yard pavement, confirming the entrance is uncontrolled.",
           "guardShack": "No guard booth at the entrance or on the property. A small dark flat-roofed structure sits deep inside the trailer drop yard (z21 imagery) but it is a fuel-island/maintenance shed in the yard interior, not an entrance guard booth.",
@@ -1381,6 +1225,25 @@
           "scale": "No truck scale visible in overhead imagery.",
           "multipleFacilities": "Single PFG building. Other large buildings nearby (NW and SE) are separate occupants of the same industrial park.",
           "railServed": "No rail spur runs into the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/Our-Locations/Boston",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice - Boston active DC at 225 John Hancock Road, Taunton, MA 02780, delivering across New England."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Performance Foodservice - Boston broadline DC; PFG locator lists exact Taunton address; not among Cheney FTC divestitures, no WARN/closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1492,28 +1355,6 @@
         },
         "dossierExcerpt": "The roster supplied 34.238210, -83.872814 (GEOMETRIC_CENTER geocode, 157 m moved).\nThis required real resolution effort. A warehouserating.com listing places 3501 Old\nOakwood Rd at 34.238252, -83.875948 — but Street View there shows a small retail\nstrip (\"Nutrition\" sign), not a distribution center, so that geocode is wrong. The\nroster's own GEOMETRIC_CENTER point, by contrast, lands on a genuine multi-building\nDC complex. Street View at 34.2383, -83.8739 (Apr 2022) — taken from the interior\ntruck-yard pavement — shows a long dock canopy with multiple tractors and trailers\nbacked in: an active multi-temperature broadline food DC. That positively identifies\nthe PFG Milton's campus. Lock confidence: medium (the campus is a sprawl of\nbuildings and the precise center is judgment).",
         "mapsUrl": "https://www.google.com/maps/@34.2384,-83.873,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/08-oakwood-ga-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.2384,
-              "lng": -83.873
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/08-oakwood-ga-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.2384,
-              "lng": -83.873
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "No controlled truck gate identified. PFG Milton's is a multi-building campus set back behind a treeline buffer from the public road (Mundy Mill Rd / Old Oakwood Rd). Internal access roads connect the buildings; Street View (Apr 2022) shows Google's car drove onto the interior truck-yard pavement and dock face, indicating an open/uncontrolled entrance. A chain-link fence separates an employee parking lot from the truck yard but there is no barrier arm or checkpoint at the property entrance.",
           "guardShack": "No guard booth visible at any entrance to the campus.",
@@ -1529,6 +1370,25 @@
           "scale": "No truck scale visible in overhead imagery.",
           "railServed": "No rail spur runs into the campus.",
           "_locationNote": "A warehouserating.com listing places 3501 Old Oakwood Rd at 34.238252,-83.875948, but Street View at that point shows a small retail strip, not a DC. The actual PFG Milton's campus is ~290 m ESE at the locked coordinate, confirmed by Street View dock-face imagery of trailers backed into a multi-temp food DC."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/our-locations/atlanta/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice locator lists Atlanta location at 3501 Old Oakwood Rd, Oakwood, GA 30566, serving GA/AL/SC."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Performance Foodservice - Atlanta broadline DC, live on PFG locator; Cheney FTC divestiture footprint excludes Oakwood GA, no closure/WARN/sale.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1649,28 +1509,6 @@
         },
         "dossierExcerpt": "The roster supplied 32.767167, -97.265073 (ROOFTOP geocode, 58 m moved). Google's\noverhead satellite imagery of that exact point still shows a graded but empty\ngreenfield site — the imagery predates the building. Resolution therefore relied on\nStreet View and project records:\n\n- Street View (Jan 2025) at the roster point, looking south across E 1st St,\n  shows a large white industrial building under final construction directly behind a\n  stone-faced retaining wall — an office/admin front elevation with a dock-area wing\n  visible to the west. This is the new PFG DC.\n- Project records: TDLR project \"Scannell - PFG Dallas\" (TABS2024004778) — a new\n  cold-storage food distribution facility with office space, 343,000 sq ft, owner\n  SP White Ft. Worth JV LLC, start Nov 2023, completion June 2025, status \"Inspection",
         "mapsUrl": "https://www.google.com/maps/@32.767167,-97.265073,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/09-fort-worth-tx-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 32.767167,
-              "lng": -97.265073
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/09-fort-worth-tx-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 32.767167,
-              "lng": -97.265073
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "_locationNote": "Roster coords (32.767167,-97.265073, ROOFTOP, 58 m moved) are correct, but Google's overhead satellite imagery of this exact spot still shows graded greenfield — it predates the building. Street View from John Hancock-equivalent road at this point, captured Jan 2025, shows a large white industrial building under final construction directly behind a stone-faced retaining wall, with an office/admin front elevation and a dock-area wing. This is the new PFG / Scannell cold-storage DC. Overhead yard-detail imagery is unavailable.",
           "truckGate": "Medium-confidence true. This is a brand-new, build-to-suit cold-storage food DC (developer Scannell Properties / GC ARCO National; TDLR project 'Scannell - PFG Dallas', completion June 2025). New build-to-suit food DCs of this class are essentially always built with a controlled, fenced truck entrance. The Jan-2025 Street View shows a partly-built perimeter wall and a defined site entry, but the gate hardware itself is not yet resolvable. Flagged uncertain.",
@@ -1684,6 +1522,25 @@
           "buildingCount": "Single large cold-storage distribution building (343,000-355,000 sq ft).",
           "railServed": "No rail spur — none visible in imagery and not mentioned in project documentation.",
           "scale": "No truck scale confirmed; not verifiable from available imagery."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/our-locations/dallas-fort-worth",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice 'Dallas Fort Worth' at 5401 East First St, Fort Worth, TX 76103 active broadline DC serving TX/OK."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Performance Foodservice - Dallas Fort Worth broadline DC; live locator confirms exact address; Cheney FTC divestiture excludes Fort Worth, no closure/WARN.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1806,28 +1663,6 @@
         },
         "dossierExcerpt": "The roster coordinate (29.978631, -95.386916) landed directly on a large\ndistribution building under construction on Farrell Rd. The roster geocode note\nflagged a 3776 m move, so the location was independently verified: web search\nconfirmed 1616 Farrell Rd sits at the Farrell Rd / Aldine Westfield Rd area in\n77073, immediately adjacent to Lochinvar Golf Club (2000 Farrell Rd) — and that\ngolf course is plainly visible on the east side of the wide satellite frame.\nThe building is therefore positively confirmed as the PFG Houston DC.\n\nImportant caveat: all available imagery shows the facility mid-construction.\nSatellite (2026 vintage tiles) shows the building shell substantially complete\nbut the surrounding site still bare graded dirt with no completed paving, dock\naprons, or striped trailer parking. Street View (Dec 2024) shows the building up",
         "mapsUrl": "https://www.google.com/maps/@29.97850,-95.38680,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/10-houston-tx-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 29.9785,
-              "lng": -95.3868
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/10-houston-tx-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 29.9785,
-              "lng": -95.3868
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "site": "Imagery captured mid-construction (Dec 2024 Street View; satellite shows building substantially complete with most of the site still bare graded dirt). Counts are honest projections for the completed facility, not finished-state observations.",
           "truckGate": "Dedicated truck entrance on the SW corner off Farrell Rd: chain-link sliding gate across the truck lane with facility signage ('NORTH HOUS...'). A separate car/visitor entrance ~120m north is signed 'NO TRUCKS' and has a yellow barrier arm. Trucks have their own controlled gate.",
@@ -1837,6 +1672,25 @@
           "fastLaneOpportunity": "Very wide entrance aprons and ample undeveloped paved width — clear room to add an express/bypass lane.",
           "urbanRural": "Edge-of-metro setting on a rural-feeling road (Farrell Rd) bordered by woods, a golf course (Lochinvar GC), and scattered rural homes. Classified Rural per rubric tie-break guidance.",
           "scale": "No truck scale visible in construction-era imagery; cannot rule out installation as the yard is completed."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/Our-Locations/Houston",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice - Houston at 1616 Farrell Rd, Houston, TX 77073 shown as active location."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Performance Foodservice - Houston broadline DC, confirmed on PFG locator; Cheney FTC divestiture excludes Houston; NJ WARN hits were an unrelated Customized Distribution site.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2024,28 +1878,6 @@
         },
         "dossierExcerpt": "The roster coordinate (ROOFTOP geocode, 165 m move) landed directly on a large\nL-shaped distribution building in the Rogers, MN industrial park off Commerce\nBlvd. Web search confirmed 13400 Commerce Boulevard, Rogers, MN 55374 as the\nPerformance Foodservice Twin Cities DC (PFG location page, I-94 West Chamber,\nManta, Hospitality Minnesota). Satellite imagery shows a building of the size\nand dock/trailer-yard pattern consistent with a broadline foodservice DC.\nLocation positively confirmed.",
         "mapsUrl": "https://www.google.com/maps/@45.197902,-93.54305,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/11-rogers-mn-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 45.197902,
-              "lng": -93.54305
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/11-rogers-mn-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 45.197902,
-              "lng": -93.54305
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "No controlled truck gate. The main access driveway runs straight from Commerce Blvd into the property with no barrier arm, sliding gate, or checkpoint pinch-point. The trailer yard along the west side is open to the property road; perimeter is a grassy berm and trees, no security fence.",
           "guardShack": "No guard booth anywhere on the property. Entrance from Street View shows an open driveway directly to the building forecourt with employee parking — no gatehouse structure.",
@@ -2055,6 +1887,25 @@
           "urbanRural": "Located in the Rogers MN industrial park on the NW edge of the Twin Cities metro, adjacent to undeveloped wooded/wetland land and a retention pond. Edge-of-metro small-industrial setting; classified Rural per rubric tie-break.",
           "scale": "No truck scale visible in overhead imagery.",
           "buildingCount": "Single large L-shaped distribution building."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/Our-Locations/Twin-Cities",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice Twin Cities at 13400 Commerce Boulevard, Rogers, MN 55374 active location, MN/Fargo ND footprint."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Performance Foodservice - Twin Cities broadline DC confirmed on PFG locator; Cheney FTC divestiture does not touch Rogers MN.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2255,28 +2106,6 @@
         },
         "dossierExcerpt": "The roster coordinate (ROOFTOP geocode, 108 m move) landed on a large, recently\nbuilt distribution building on Havana St in Commerce City, NE of Denver. Web\nsearch confirmed this as Performance Foodservice's new Denver DC: a 265,000 sq ft\nfacility, groundbreaking Sept 28, 2022, completed late 2023, more than double\nthe size of the prior Denver location, designed with state-of-the-art automation\nand serving 1,100+ customers (BusinessWire / PFG investor relations / C-Store\nDive / Vending Market Watch). Location positively confirmed.\n\nCaveat: all available imagery is construction-era. Street View is dated\nSept 2023 (during build-out) and shows the building shell complete with the\nperimeter fence installed but the rest of the site bare graded dirt and orange\ntraffic barrels along Havana St. Satellite tiles likewise show a finished",
         "mapsUrl": "https://www.google.com/maps/@39.877035,-104.864645,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/12-commerce-city-co-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.877035,
-              "lng": -104.864645
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/12-commerce-city-co-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.877035,
-              "lng": -104.864645
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "site": "New ~265,000 sq ft Performance Foodservice Denver DC (groundbreaking Sept 2022, completed late 2023). All imagery is construction-era: Street View Sept 2023 shows the building shell up and the perimeter fence installed but the site otherwise bare dirt; satellite tiles likewise show graded dirt around a completed building. Counts are projections for the finished facility.",
           "truckGate": "A full-length black metal security/perimeter fence is installed along the Havana St frontage (clearly visible in Sept 2023 Street View). The property is fenced with a controlled entry off Havana St — classified as a controlled truck gate.",
@@ -2287,6 +2116,32 @@
           "urbanRural": "Commerce City industrial fringe NE of Denver — flanked by a drainage canal, open agricultural land to the east, and scattered industrial yards. Edge-of-metro industrial setting; classified Rural per rubric tie-break.",
           "scale": "No truck scale visible in construction-era imagery; cannot rule out.",
           "railServed": "A rail line runs along the east side of the broader corridor but no spur visibly enters the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/Our-Locations/Denver",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice Denver at 9940 Havana St, Commerce City, CO 80640, delivering across CO/NM/WY."
+            },
+            {
+              "tier": 1,
+              "url": "https://investors.pfgc.com/press-releases/press-release-details/2022/Performance-Foodservice--Denver-to-Break-Ground-for-New-Facility/default.aspx",
+              "date": "2022-09-27",
+              "type": "press",
+              "claim": "PFG investor PR: Performance Foodservice Denver new 265,000 sq ft facility."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Performance Foodservice - Denver broadline DC; Tier-1 locator + 2022 PFG PR; Cheney FTC divestiture is Southeast-only.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2419,28 +2274,6 @@
         },
         "dossierExcerpt": "The roster coordinate (ROOFTOP geocode, 104 m move) landed on a large\ntwo-section distribution building fronting Ryan Road in Warren, MI (suburban\nDetroit). Web search confirmed 24838 Ryan Road, Warren, MI 48091 as Performance\nFoodservice - Detroit, operated by Reinhart Foodservice, L.L.C. (PFG location\npage, Waze, Manta, Blue Book, BuzzFile). The Reinhart lineage matches the\ndossier (PFG acquired Reinhart in 2019). Location positively confirmed.",
         "mapsUrl": "https://www.google.com/maps/@42.474855,-83.063823,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/13-warren-mi-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.474855,
-              "lng": -83.063823
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/13-warren-mi-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.474855,
-              "lng": -83.063823
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "The truck yard (dock aprons + drop/fleet parking on the north and east of the buildings) is enclosed by a chain-link perimeter fence, visible in 2022 Street View along the north property line and in tight satellite. The truck yard is entered through a controlled gate off the north-side service drive. The separate front office entrance on Ryan Rd is an open visitor driveway.",
           "guardShack": "No guard booth visible at the truck gate in any imagery (2018/2019/2022/2025 Street View, current satellite). Classified guardShack false / remoteGs true (fenced gated yard with no booth implies kiosk / intercom check-in). Both flagged uncertain — this is an older urban Reinhart-era DC and a small booth could be obscured by trees.",
@@ -2452,6 +2285,25 @@
           "multipleFacilities": "Two physically connected building sections counted as one facility (one campus); multipleFacilities false.",
           "scale": "No truck scale visible in overhead imagery.",
           "railServed": "No rail spur enters the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/Our-Locations/Detroit",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice - Detroit at 24838 Ryan Road, Warren, MI 48091, active contact form."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Performance Foodservice (broadline) Detroit division active at exact address; no divestiture/closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2582,28 +2434,6 @@
         },
         "dossierExcerpt": "Facility type: Broadline Foodservice Distribution Center\nAddress: 1624 Army Ct, Stockton, CA 95206\nResolved coordinates: 37.93255, -121.32450\nConfidence: High\n\n---\n\n### Location resolution\n\nThe roster supplied ROOFTOP-grade coordinates (37.932725, -121.323148) that\nmoved only 24 m at geocode — these land squarely on the east-side truck court\nof the facility. Web research confirms 1624 Army Court is the **Stockton\nCommerce Center**, a Dermody Properties spec building; LoopNet listings for the\naddress describe **64 dock doors with levelers, 5 rail-served receiving doors,\nup to 205 ft truck-court depth, 30 ft clear height**. Performance Foodservice's\nown location page and Waze list this as the \"Northern California\" broadline DC\nserving the Sacramento / Bay Area market. Street View from January 2022 shows",
         "mapsUrl": "https://www.google.com/maps/@37.93255,-121.3245,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/14-stockton-ca-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 37.93255,
-              "lng": -121.3245
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/14-stockton-ca-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 37.93255,
-              "lng": -121.3245
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Street View (2022-01) shows a chain-link sliding gate across the truck driveway off the cul-de-sac on the building's east side.",
           "guardShack": "A small single-room guard booth with windows sits on the right side of the gate lane, beside the sliding gate.",
@@ -2611,6 +2441,25 @@
           "railServed": "Stockton Commerce Center spec sheet lists 5 rail-served receiving doors; rail spur serves the building.",
           "dropYard": "Striped trailer-parking lanes in the truck court east of the building hold drop trailers.",
           "siteAreaAcres": "Estimated from perimeter box around the PFG-occupied building and its east truck court."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/Our-Locations/Northern-California",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice - Northern California at 1624 Army Court, Stockton, CA 95206, delivering across California."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Performance Foodservice (broadline) Northern California division active at exact address; not in Cheney divestiture set.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2747,34 +2596,31 @@
         },
         "dossierExcerpt": "Facility type: Broadline Foodservice Distribution Center\nAddress: 19606 NE San Rafael St, Portland, OR 97230\nResolved coordinates: 45.53600, -122.46080\nConfidence: Medium\n\n---\n\n### Location resolution\n\nThe roster geocode was GEOMETRIC_CENTER precision (moved 110 m), landing near\nthe public road north of the facility. Probing satellite z17-z20 around the\npoint and walking Street View along the adjacent industrial street resolved the\nPFG building: the brown/dark-roofed warehouse whose south yard is filled with\nPFG-branded white reefer box trucks (the outbound foodservice delivery\nfleet) parked in characteristic fanned rows. Street View (May 2025) on the\ninner street shows a PFG-style blue-and-white tractor parked alongside the\nbuilding, and the front office bears a \"Pacific…\" sign consistent with the",
         "mapsUrl": "https://www.google.com/maps/@45.536,-122.4608,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/15-portland-or-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 45.536,
-              "lng": -122.4608
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/15-portland-or-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 45.536,
-              "lng": -122.4608
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "No barrier arm or sliding gate observed at the truck-yard entrance; the building sits in an open multi-tenant Gresham/Portland industrial park and the access driveway from NE San Rafael St area is uncontrolled. Some perimeter fencing exists but no checkpoint structure.",
           "guardShack": "No guard booth observed at any entrance.",
           "dockDoors": "Docks on the south face of the building; door count estimated from overhead imagery and fleet position (~22), partly obscured by box trucks.",
           "dropYard": "Yard south of the building is full of PFG white reefer box trucks (the outbound foodservice fleet) parked in fanned rows.",
           "urbanRural": "Located within the Portland metro industrial fabric (Gresham/NE Portland), surrounded by dense warehousing."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/our-locations/pacific-northwest",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice - Pacific Northwest at 19606 NE San Rafael St, Portland, OR 97230; active local job openings."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Performance Foodservice (broadline) Pacific Northwest division active at exact address; no closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2970,28 +2816,6 @@
         },
         "dossierExcerpt": "Facility type: Broadline Foodservice Distribution Center\nAddress: 455 S 75th Avenue, Phoenix, AZ 85043\nResolved coordinates: 33.44260, -112.21950\nConfidence: High\n\n---\n\n### Location resolution\n\nThe roster geocode (33.442346, -112.219523, ROOFTOP, moved 678 m) lands on the\nPFG-occupied DC building. Street View along S 75th Ave (2023-02 and 2025-12)\nshows the building's west wall carrying a blue \"FOODSERVICE / SUPPLY\" sign,\nand a pole sign at the curb — positively identifying the Performance\nFoodservice — Arizona branch. Performance Foodservice's location page lists 455\nS 75th Avenue as the Arizona broadline DC; phone (480) 705-3000.\n\nThe facility sits in the Phoenix west-side industrial district along S 75th\nAvenue, surrounded by large distribution warehouses (Target import center and",
         "mapsUrl": "https://www.google.com/maps/@33.4426,-112.2195,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/16-phoenix-az-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.4426,
-              "lng": -112.2195
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/16-phoenix-az-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.4426,
-              "lng": -112.2195
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "The truck/dock yard is enclosed by a block wall plus chain-link fence; a curving paved entrance driveway leads through a gated opening at the SW. Controlled entry confirmed in satellite + Street View.",
           "guardShack": "No staffed guard booth observed beside the gate; entry appears gate-only (kiosk/call-box style) — set remoteGs true. Flagged as uncertain since the curving driveway corner is partly tree-shaded.",
@@ -2999,6 +2823,25 @@
           "dropArea": "Large unpaved/graded trailer drop lot directly south of the building holds many dozens of trailers in rows — clearly 50+.",
           "buildingCount": "Main DC plus a smaller secondary structure to the west/north on the same parcel.",
           "fastLaneOpportunity": "Wide curving gate apron and ample paved width at the entrance leave room for an express/bypass lane."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/our-locations/arizona/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice - Arizona at 455 S. 75th Avenue, Phoenix, AZ 85043, active contact form."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Performance Foodservice (broadline) Arizona division active at exact address; no divestiture/closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3186,28 +3029,6 @@
         },
         "dossierExcerpt": "Facility type: Broadline Foodservice Distribution Center\nAddress: 290 SE Thompson Dr, Lee's Summit, MO 64082\nResolved coordinates: 38.89000, -94.36640\nConfidence: High\n\n---\n\n### Location resolution\n\nThe roster geocode (38.8895, -94.366194, ROOFTOP, moved 1821 m) lands on the\nPFG-occupied DC. Probing satellite z17-z20 and walking Street View along SE\nThompson Dr (Sep 2024) confirmed the facility: a distribution warehouse with a\nlong red-canopied dock face on its south side, a truck court, and a large\ntrailer drop yard, all in a semi-rural pocket of Lee's Summit. A trailer at the\ndock carries Vistar branding and PFG-branded tractors are parked in the\nyard, positively identifying this as a Performance Food Group facility.\nPerformance Foodservice's location page lists 290 SE Thompson Dr as the Kansas",
         "mapsUrl": "https://www.google.com/maps/@38.89,-94.3664,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/17-lees-summit-mo-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 38.89,
-              "lng": -94.3664
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/17-lees-summit-mo-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 38.89,
-              "lng": -94.3664
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Open uncontrolled access from SE Thompson Dr; the truck yard has partial chain-link fencing but no barrier arm, sliding gate or checkpoint structure where the access driveway meets the public road. An internal chain-link gate exists between yard sub-zones but is not a property-line truck gate.",
           "guardShack": "No guard booth observed at any entrance.",
@@ -3215,6 +3036,25 @@
           "dropArea": "Large drop yard south of the dock court holds 50+ trailers and PFG box trucks in rows.",
           "urbanRural": "Semi-rural / edge-of-town setting — SE Thompson Dr is a narrow road with adjacent farmland, woods and scattered rural housing; classified Rural per the small-town-vs-urban tiebreak.",
           "vistar": "A trailer at the dock carries Vistar branding — PFG's Vistar segment operates from this Kansas City DC alongside broadline."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/Our-Locations/Kansas-City",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice - Kansas City at 290 SE Thompson Drive, Lee's Summit, MO 64082, active contact form."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Performance Foodservice (broadline) Kansas City division active at exact address; no closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3333,28 +3173,6 @@
         },
         "dossierExcerpt": "a.k.a. Performance Foodservice-Lester\nAddress: 401 Maddox-Simpson Pkwy, Lebanon, TN 37090\nType: Broadline Foodservice Distribution Center\nResolved coords: 36.17540, -86.28810\nConfidence: High\n\n---",
         "mapsUrl": "https://www.google.com/maps/@36.17540,-86.28810,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/18-lebanon-tn-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 36.1754,
-              "lng": -86.2881
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/18-lebanon-tn-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 36.1754,
-              "lng": -86.2881
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point at any driveway. Street View (Dec 2024) along the full Maddox-Simpson Pkwy frontage from multiple headings shows open driveways onto the industrial-park loop road with no control structure. Site is an open campus typical of a small-town industrial park.",
           "guardShack": "No staffed booth at any entrance. The brick building with garage bays seen in Street View on the south access road is a separate maintenance/shop building, not a guard booth.",
@@ -3363,6 +3181,25 @@
           "postGateStaging": "Large internal paved yard between the buildings provides ample queuing/holding space before the dock doors.",
           "entryLanes": "Single-lane open driveways; no formal multi-lane gate to count — estimate 1 in / 1 out.",
           "railServed": "No rail spur enters the property; nearest rail is not adjacent."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/Our-Locations/Nashville",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice - Nashville at 401 Maddox-Simpson Pkwy, Lebanon, TN 37090, active DC delivering across TN/AL/KY/MS."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Performance Foodservice (broadline) Nashville division active at exact address; PA 'Lebanon county' WARN is Lebanon PA, not this site.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3493,28 +3330,6 @@
         },
         "dossierExcerpt": "a.k.a. PFG Hale / Performance Foodservice Roma-Hale\nAddress: 5262 S Air Park Blvd, Morristown, TN 37813\nType: Broadline Foodservice Distribution Center\nResolved coords: 36.17760, -83.37150\nConfidence: High\n\n---",
         "mapsUrl": "https://www.google.com/maps/@36.17760,-83.37150,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/19-morristown-tn-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 36.1776,
-              "lng": -83.3715
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/19-morristown-tn-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 36.1776,
-              "lng": -83.3715
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Confirmed via Street View (April 2025): a barrier-arm gate spans the truck lane at the property entrance off the airport-business-park road, with painted lane markings and a paved gate island. Perimeter chain-link fencing visible on both sides.",
           "guardShack": "A small peaked-roof guard booth with windows on multiple sides sits on a paved island between the entry and exit lanes at the gate — classic staffed guard-shack footprint.",
@@ -3525,6 +3340,32 @@
           "dropArea": "Trailer parking rows on the east side of the building hold parked trailers — estimated 25-50 band.",
           "urbanRural": "Facility sits in the airport-adjacent East Tennessee Progress Center / Air Park business area on the edge of Morristown, surrounded by airport land, open fields, and woods — Rural per rubric.",
           "railServed": "A rail line runs along the northwest near the airport but does not appear to enter the PFG property with a spur."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/Our-Locations/East-Tennessee",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice East Tennessee at 5262 Air Park Blvd, Morristown, TN 37813."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.tn.gov/ecd/news/2024/12/18/governor-lee--commissioner-mcwhorter-announce-performance-food-group-s-expansion-in-hamblen-county.html",
+              "date": "2024-12-18",
+              "type": "press",
+              "claim": "TN ECD announces $33.2M PFG expansion at existing 5262 Air Park Blvd Morristown facility."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Performance Foodservice (broadline) East Tennessee DC; Dec 2024 state-announced expansion at exact address.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3681,28 +3522,6 @@
         },
         "dossierExcerpt": "Address: 2201 Ampere Dr, Louisville, KY 40299\nType: Broadline Foodservice Distribution Center\nResolved coords: 38.21080, -85.54900\nConfidence: Medium\n\n---",
         "mapsUrl": "https://www.google.com/maps/@38.21080,-85.54900,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/20-louisville-ky-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 38.2108,
-              "lng": -85.549
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/20-louisville-ky-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 38.2108,
-              "lng": -85.549
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "No barrier arm, sliding gate, or checkpoint. The dock-side truck apron is reached by open driveways within the Bluegrass Industrial Park; no perimeter fence around the building. Open multi-tenant industrial-park layout.",
           "guardShack": "No guard booth anywhere along the building approach. The street-facing side seen in Nov-2024 Street View is a flush office/flex frontage with employee parking — no booth.",
@@ -3712,6 +3531,25 @@
           "drivewayShort": "Compact apron between the dock face and the bordering tree line / road — holds only 1-2 trucks deep on approach.",
           "urbanRural": "Site is in the Bluegrass Industrial Park (Jeffersontown / Louisville metro), inside the Louisville urban fabric — Urban.",
           "railServed": "No rail spur enters the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/Our-Locations/Louisville",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice Louisville at 2201 Ampere Dr, Louisville, KY 40299."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Performance Foodservice (broadline) Louisville DC; current locator page, no closure/divestiture.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3878,28 +3716,6 @@
         },
         "dossierExcerpt": "Address: 535 Shepherd Avenue, Cincinnati, OH 45215 (Lockland)\nType: Broadline Foodservice Distribution Center\nResolved coords: 39.23030, -84.44910\nConfidence: High\n\n---",
         "mapsUrl": "https://www.google.com/maps/@39.23030,-84.44910,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/21-cincinnati-oh-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.2303,
-              "lng": -84.4491
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/21-cincinnati-oh-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.2303,
-              "lng": -84.4491
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "The truck yard is enclosed by an ornamental black metal perimeter fence along the Shepherd Ave frontage (clearly visible in June-2025 Street View, with PFG-branded tractors lined up behind it). However the fence has wide OPEN driveway gaps with no barrier arm, sliding gate, or staffed checkpoint — no controlled gate in any view. Fenced yard with open driveway entrances = truckGate false.",
           "guardShack": "No guard booth at any driveway opening — none seen along the full Shepherd Ave frontage in Street View or in z19-z20 satellite.",
@@ -3911,6 +3727,25 @@
           "urbanRural": "Dense Lockland / Reading industrial corridor north of Cincinnati, wedged between I-75 and an active rail line, with residential immediately east — clearly Urban.",
           "railServed": "An active rail line runs immediately east of the property but no spur enters the PFG site itself.",
           "buildingCount": "Main DC building plus a separate long narrow building at the south end of the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/Our-Locations/Cincinnati",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice Cincinnati at 535 Shepherd Avenue, Cincinnati, OH 45215."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Performance Foodservice (broadline) Cincinnati DC; current locator page, no closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4088,28 +3923,6 @@
         },
         "dossierExcerpt": "The roster supplied 40.788377, -76.490986 with a flagged geocode `movedMeters` of\n5761 m. Probing satellite at the supplied point landed on an empty grassy field\ninside the Coal Township industrial park — the actual DC building sits roughly\n300 m southwest. Web research confirmed 100 Industrial Park Road, Coal Township,\nPA 17866 (phone 570-644-1111) as the Performance Foodservice Eastern PA branch.\nThe building was positively identified at z16–z21: a large distribution warehouse\nwith a south-facing dock line, trailers backed in, and a large on-site trailer\nyard — consistent with a broadline foodservice DC. Locked center: 40.78785,\n-76.49245.",
         "mapsUrl": "https://www.google.com/maps/@40.78785,-76.49245,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/22-coal-township-pa-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.78785,
-              "lng": -76.49245
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/22-coal-township-pa-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.78785,
-              "lng": -76.49245
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Supplied coords were ~5.7 km off (geocode movedMeters 5761 was understated; actual building is SW of the pin). Resolved to the large DC building inside the Coal Township industrial park, 100 Industrial Park Road, on a raised pad above Industrial Park Road.",
           "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point visible at the single driveway connecting Industrial Park Road to the site. The driveway runs uphill, open, to a loop road serving both buildings. Two teardrop islands seen in the car-park area are landscaped parking medians, not a guarded checkpoint.",
@@ -4120,6 +3933,25 @@
           "multipleFacilities": "Two distinct large buildings on one pad: the main DC (right/east) and a secondary building (left/west), sharing the loop road and drop yard.",
           "multiStep": "No second checkpoint stage observed; default false.",
           "connectivityIssue": "Site is in an industrial park with a town (Coal Township / Shamokin) nearby; not truly isolated, so cellular coverage likely adequate — connectivityIssue false but listed as inferred."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/our-locations/eastern-pa",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice Eastern PA at 100 Industrial Park Road, Coal Township, PA 17866."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Performance Foodservice (broadline) Eastern PA DC at Coal Township; current locator confirms exact address.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4222,8 +4054,7 @@
               ]
             }
           ],
-          "staging": null,
-          "streetViewMeta": {}
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 58,
@@ -4296,28 +4127,6 @@
         },
         "dossierExcerpt": "Roster coordinates (40.181181, -79.591415) were flagged ROOFTOP precision with a\n`movedMeters` of only 125 m and landed directly on the correct building. Web\nresearch confirmed 226 East View Drive, Mt. Pleasant, PA 15666 as Performance\nFoodservice's Pittsburgh Division branch (724-696-2200). Street View provides a\npositive ID: the entrance driveway frames a building with a large \"PERFORMANCE\nFOODSERVICE\" wall sign, and a Performance Foodservice monument sign stands at the\nEast View Drive entrance. Locked center: 40.18120, -79.59140.",
         "mapsUrl": "https://www.google.com/maps/@40.18120,-79.59140,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/23-mt-pleasant-pa-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.1812,
-              "lng": -79.5914
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/23-mt-pleasant-pa-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.1812,
-              "lng": -79.5914
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Supplied coords were ROOFTOP-precision (movedMeters 125) and landed on the correct building. Confirmed via web research (226 East View Drive, Mt. Pleasant PA 15666, Performance Foodservice Pittsburgh Division, 724-696-2200) and Street View, which shows a 'PERFORMANCE FOODSERVICE' branded building and a Performance Foodservice monument sign at the East View Drive entrance.",
           "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point. The truck driveway runs open from East View Drive up to the building. Perimeter chain-link fencing surrounds the property, but the entrance driveway itself is uncontrolled in both 2023 and 2024 Street View captures.",
@@ -4328,6 +4137,25 @@
           "urbanRural": "Edge-of-town industrial park outside Mt. Pleasant PA, ringed by forest, reclaimed land and farm fields — small-town / rural setting.",
           "railServed": "A rail line runs through the wooded corridor north of the property, but no spur enters the PFG site — railServed false.",
           "entryExitTogether": "Single driveway off East View Drive serves as both entry and exit."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/Our-Locations/Pittsburgh",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice Pittsburgh at 226 East View Drive, Mt. Pleasant, PA 15666."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Performance Foodservice (broadline) Pittsburgh division DC at Mt. Pleasant; current locator confirms exact address.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4494,28 +4322,6 @@
         },
         "dossierExcerpt": "Roster coordinates (38.792075, -77.542339) were flagged ROOFTOP precision with a\n`movedMeters` of only 84 m and landed on the correct building. Web research\nconfirmed 11777 Balls Ford Road, Manassas, VA 20109 as Performance Foodservice's\nManassas branch (formerly Reinhart Foodservice; 703-368-8777) — a ~105,000 sq ft\nmulti-temp facility with freezer, refrigerated and dry storage. Street View\nalong Balls Ford Road shows the warehouse set back behind a stormwater pond, off\nthe Balls Ford Road / Doane Drive intersection, with a branded sign at the\nentrance. Locked center: 38.79250, -77.54270.",
         "mapsUrl": "https://www.google.com/maps/@38.79250,-77.54270,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/24-manassas-va-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 38.7925,
-              "lng": -77.5427
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/24-manassas-va-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 38.7925,
-              "lng": -77.5427
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Supplied coords were ROOFTOP precision (movedMeters 84) and landed on the correct building. Confirmed via web research (11777 Balls Ford Road, Manassas VA 20109, Performance Foodservice Manassas, former Reinhart, 703-368-8777, 105,000 sq ft multi-temp) and Street View, which shows the warehouse set behind a stormwater pond off the Balls Ford Road / Doane Drive intersection with a branded sign at the entrance.",
           "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point. The truck driveway runs open from Doane Drive into the south/west truck yard. Only low chain-link fencing along the road frontage; the entrance itself is uncontrolled.",
@@ -4526,6 +4332,25 @@
           "railServed": "A rail line runs along the east edge of the industrial park but it is a through line; no spur enters the PFG property — railServed false.",
           "multipleFacilities": "One PFG building. Adjacent warehouses west and southwest are separate properties, not part of this site.",
           "siteArea": "Relatively compact ~11.5-acre parcel; the building fills much of the lot with truck yard wrapping the south and west."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/Our-Locations/Manassas",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice Manassas at 11777 Balls Ford Road, Manassas, VA 20109."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Performance Foodservice (broadline) Manassas DC; current locator + active careers req at the ZIP.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4710,28 +4535,6 @@
         },
         "dossierExcerpt": "Roster coordinates (37.69583, -77.469168) were flagged with a `movedMeters` of\n2662 and landed in the Cardinal Commerce Center area but not exactly on the\nbuilding. Web research resolved the facility precisely: Performance Food Group\noccupies Phase I-Building B of Cardinal Commerce Center, a 420,000 SF\nbuilding (PFG leases 332,000 SF), at 10399 Washington Highway in Hanover County.\nThe DC was built by Scannell Properties / ARCO and opened in 2023 as PFG's\nnew Virginia regional sales and distribution center. The building was positively\nidentified in March 2026 Street View — a red \"Performance Foodservice\" wall logo\nfaces the fenced front employee parking lot. Cardinal Commerce Center has three\nbuildings: Building A (260,000 SF, 2022), Building B (420,000 SF — PFG), and\nBuilding C (186,900 SF speculative). Locked center: 37.69430, -77.46680.",
         "mapsUrl": "https://www.google.com/maps/@37.69430,-77.46680,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/25-glen-allen-va-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 37.6943,
-              "lng": -77.4668
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/25-glen-allen-va-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 37.6943,
-              "lng": -77.4668
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Supplied coords (movedMeters 2662) landed in the Cardinal Commerce Center area but not exactly on the building. Resolved via web research: PFG occupies Phase I-Building B of Cardinal Commerce Center, a 420,000 SF building (PFG leases 332,000 SF) at 10399 Washington Highway, Hanover County. The building was positively ID'd in March 2026 Street View — a red 'Performance Foodservice' wall logo faces the fenced front employee lot. Locked center: 37.69430, -77.46680.",
           "truckGate": "No barrier arm, sliding gate across a lane, or guard booth visible at the truck court entrance or at the two front employee-lot driveway openings. The front employee parking lot is enclosed by a black ornamental security fence, but the driveway openings are uncontrolled curb cuts. The truck court is open paved area on a loop road. Because no gate is confirmed across any lane, truckGate is false — flagged given the perimeter fencing could imply a gate not resolvable in imagery.",
@@ -4744,6 +4547,32 @@
           "railServed": "No rail spur enters the property — railServed false.",
           "multiStep": "No second checkpoint stage observed; false.",
           "general": "Imagery shows the site mid-finish-out (2024-2026 captures): construction barriers/materials still staged in the truck yard. Counts are honest estimates."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/Our-Locations/Virginia",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice Virginia operating at 10399 Washington Hwy, Glen Allen, VA 23059."
+            },
+            {
+              "tier": 2,
+              "url": "https://richmondbizsense.com/2023/10/05/performance-food-group-begins-operations-at-new-hanover-distribution-facility/",
+              "date": "2023-10-05",
+              "type": "press",
+              "claim": "PFG began operations at new ~332,000 sf Glen Allen (Cardinal Commerce) DC in Aug 2023."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Performance Foodservice (Virginia broadline); new-build 2023 Cardinal Commerce DC, on official locator.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4913,28 +4742,6 @@
         },
         "dossierExcerpt": "Type: Broadline Foodservice Distribution Center\nAddress: 1201 Progress Road, Suffolk, VA 23434\nResolved coordinates: 36.76720, -76.54480\nConfidence: Medium\n\n---\n\n### Location resolution\n\nThe roster coordinate (36.769855, -76.542823) carried `movedMeters: 5887` — a\nstale/imprecise geocode. It lands in a wooded strip NE of the real facility.\n\nThe facility was resolved to a single very large rectangular distribution\nbuilding at ~36.7672, -76.5448, in the Progress Road industrial area of\nSuffolk. It is bounded by a divided highway (Holland Road / Rt 58 corridor) on\nthe south, Progress Road and a rail spur on the north, and a creek/pond to the\nwest, with a residential subdivision across the highway.\n\nConfirmation it is PFG: multiple Street View passes — on the divided\nhighway directly in front of the building and along Progress Road — show",
         "mapsUrl": "https://www.google.com/maps/@36.7672,-76.5448,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/26-suffolk-va-tidewater-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 36.7672,
-              "lng": -76.5448
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/26-suffolk-va-tidewater-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 36.7672,
-              "lng": -76.5448
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster coord (36.769855,-76.542823, movedMeters 5887) is a stale geocode and lands in trees NE of the actual building. Resolved to the very large single rectangular DC at ~36.7672,-76.5448 — bounded by a divided highway (Holland Rd / Rt 58 corridor) on the south, Progress Road and a rail spur on the north, and a creek/pond on the west. Confirmed PFG: Street View on the south frontage and along Progress Road repeatedly shows Performance Foodservice-branded delivery trucks (red/white 'Performance' logo, 800-849-7110) parked at and driving past this building. Address 1201 Progress Rd, Suffolk VA (operating entity Reinhart Foodservice LLC).",
           "buildingSize": "Building is unusually large for a single broadline DC (~600k+ sq ft footprint). It may be a large multi-use warehouse with PFG as the dominant/primary tenant — flagged as a size uncertainty; trailer rows and PFG trucks confirm active foodservice DC operations.",
@@ -4945,6 +4752,25 @@
           "railServed": "A rail spur runs along the north property line into the site — railServed true.",
           "entryExitSeparate": "Two separate driveways off Progress Road (NE and N) plus circulation; classed entry/exit separate, low confidence.",
           "urbanRural": "Edge-of-town Suffolk industrial park beside a residential subdivision and marshland — judged Rural per the rubric tie-break."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/Our-Locations/Tidewater",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice Tidewater at 1201 Progress Road, Suffolk, VA 23434, serving NC/VA."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Performance Foodservice Tidewater (broadline, ex-Reinhart); on official locator at exact address.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -5144,28 +4970,6 @@
         },
         "dossierExcerpt": "Type: Broadline Foodservice Distribution Center\nAddress: 543 12th Street Drive NW, Hickory, NC 28601\nResolved coordinates: 35.73870, -81.36300\nConfidence: Medium\n\n---\n\n### Location resolution\n\nThe roster coordinate (35.73953, -81.363125, `movedMeters: 1440`) lands inside\nthe Hickory industrial cluster. The PFG Hickory DC was resolved to the large\ndistribution building immediately SW of that point at ~35.7387, -81.3630.\n\nThe site sits in a dense Hickory industrial district with several neighboring\nwarehouses (separate ownership) packed around it. Address confirmed via PFG's\nlocation page and Waze: 543 12th Street Drive NW, Hickory NC 28601, phone\n(828) 725-4500.\n\n### Key views\n\n- Satellite z16/z18/z19: the PFG DC is the large building with a dock bank\n  (dark asphalt aprons, trailers backed in) and trailer parking rows in the",
         "mapsUrl": "https://www.google.com/maps/@35.7387,-81.363,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/27-hickory-nc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.7387,
-              "lng": -81.363
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/27-hickory-nc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.7387,
-              "lng": -81.363
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster coord (35.73953,-81.363125, movedMeters 1440) lands inside the industrial cluster; resolved the PFG DC to the large building immediately SW at ~35.7387,-81.3630. Address 543 12th Street Drive NW, Hickory NC (PFG Hickory; phone 828-725-4500). The site sits in a dense Hickory industrial district with several neighboring warehouses under separate ownership.",
           "truckGate": "Street View along 12th St Dr NW and the yard side shows a green-fabric-screened chain-link perimeter fence around the PFG property with a gate across the truck drive. Classed truckGate true; partially obscured by the screening, so listed uncertain.",
@@ -5176,6 +4980,25 @@
           "buildingCount": "The PFG DC reads as one main building, possibly with an attached secondary section — counted 2; neighboring warehouses in the frame are separate tenants and excluded.",
           "railServed": "A rail line / spur runs in the wooded strip along the east edge of the property — likely rail-served; true (medium confidence).",
           "urbanRural": "Small-city Hickory industrial district — Rural per the rubric tie-break."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/Our-Locations/Hickory",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice Hickory at 543 12th Street Drive NW, Hickory, NC 28601."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Performance Foodservice Hickory (broadline); on official locator at exact address. Cheney FTC divestiture footprint did not include this PFG legacy DC.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -5311,28 +5134,6 @@
         },
         "dossierExcerpt": "Type: Broadline Foodservice Distribution Center\nAddress: 918 Edwards Avenue, Harahan, LA 70123\nResolved coordinates: 29.95390, -90.19510\nConfidence: Medium\n\n---\n\n### Location resolution\n\nThe roster coordinate (29.95459, -90.193853, `movedMeters: 1000`) lands on a\nsmall tan metal warehouse on a side street — not the PFG DC. Street View there\nshowed an unrelated mid-size building with construction work in front.\n\nPFG's own New Orleans location page geocodes the facility to roughly 29.95°N,\n-90.19°W in the Elmwood/Harahan industrial district. The DC was resolved to the\nsubstantial distribution building ~150 m SW of the roster point, at\n~29.9539, -90.1951 — the only nearby structure with the dock count, the\ndistinctive blue-painted dock wall, and an adjacent trailer drop yard",
         "mapsUrl": "https://www.google.com/maps/@29.9539,-90.1951,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/28-harahan-la-new-orleans-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 29.9539,
-              "lng": -90.1951
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/28-harahan-la-new-orleans-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 29.9539,
-              "lng": -90.1951
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster coord (29.95459,-90.193853, movedMeters 1000) lands on a small tan metal warehouse on a side street — not the PFG DC. PFG's own location page geocodes the New Orleans facility to ~29.95N,-90.19W in the Elmwood/Harahan industrial district. Resolved to the substantial distribution building ~150m SW at ~29.9539,-90.1951 — the only nearby structure with the dock count, blue-banded dock face and trailer drop yard consistent with a broadline foodservice DC. Address 918 Edwards Ave, Harahan LA 70123 (operating entity Reinhart Foodservice Louisiana LLC). Specific PFG signage could not be confirmed in Street View, so confidence is medium.",
           "truckGate": "Street View of the building's south/SW frontage shows chain-link fencing and a fenced truck-yard entrance with tractors and trailers inside. A gate spans the truck drive. Classed truckGate true; obscured angles leave it uncertain.",
@@ -5343,6 +5144,25 @@
           "backupSensitive": "Tightly built-out Elmwood industrial parcel — narrow internal streets and little stacking room; a truck queue at the gate would choke the internal street. true.",
           "urbanRural": "Dense Elmwood/Harahan metro New Orleans industrial fabric — Urban.",
           "buildingCount": "Reads as one large DC building; the dense multi-tenant context makes a precise count low-confidence."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/Our-Locations/New-Orleans",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice New Orleans at 918 Edwards Avenue, Harahan, LA 70123."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Performance Foodservice New Orleans (broadline, ex-Reinhart Foodservice Louisiana); on official locator. Not a Cheney facility; Cheney FTC divestiture footprint was FL/NC only.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -5540,28 +5360,6 @@
         },
         "dossierExcerpt": "Type: Broadline Foodservice Distribution Center\nAddress: 4901 Asher Avenue, Little Rock, AR 72204\nResolved coordinates: 34.71940, -92.32700\nConfidence: High\n\n---\n\n### Location resolution\n\nThe roster coordinate (34.719308, -92.326965) carried `precision: ROOFTOP` and\n`movedMeters: 137` — accurate. It lands directly on the PFG Little Rock DC at\n4901 Asher Avenue. The facility is a long distribution building running\nNW-SE, with its dock bank on the SW face and trailer parking lots to the west\nand north.\n\n### Key views\n\n- Satellite z16/z18/z19: one long DC building (plus a small attached\n  section); dock bank with ~40 trailers backed in along the SW face; trailer\n  drop rows in the lots to the west and north; the entrance reached via a\n  cul-de-sac / turnaround off the access road; single-family houses",
         "mapsUrl": "https://www.google.com/maps/@34.7194,-92.327,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/29-little-rock-ar-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.7194,
-              "lng": -92.327
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/29-little-rock-ar-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.7194,
-              "lng": -92.327
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster coord (34.719308,-92.326965, ROOFTOP, movedMeters 137) is accurate — lands on the PFG DC at 4901 Asher Avenue, Little Rock AR 72204. A long distribution building running NW-SE with docks on its SW face and trailer parking lots to the west and north.",
           "truckGate": "Street View of the entrance off the access cul-de-sac clearly shows a chain-link sliding/swing gate spanning the full truck driveway, with trailers backed into docks just inside. Controlled truck entrance confirmed — truckGate true.",
@@ -5572,6 +5370,25 @@
           "drivewayLong": "The gate opens onto a deep paved apron / drive in front of the dock face that can hold a 3+ truck queue. drivewayLong true.",
           "buildingCount": "One long main DC building plus a small attached/secondary section — counted 2.",
           "urbanRural": "Inside Little Rock's developed fabric on Asher Avenue with single-family houses immediately adjacent to the west — Urban."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/Our-Locations/Little-Rock",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice Little Rock at 4901 Asher Ave, Little Rock, AR 72204."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Performance Foodservice Little Rock (cold-storage broadline DC, leased to PFGC); on official locator.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -5771,28 +5588,6 @@
         },
         "dossierExcerpt": "Type: Broadline Foodservice Distribution Center\nAddress: 4141 Lucius McCelvey Dr, Temple, TX 76504\nResolved coordinates: 31.14380, -97.34700\nConfidence: High\n\n---\n\n### Location resolution\n\nThe roster coordinate (31.14397, -97.34693, `precision: GEOMETRIC_CENTER`,\n`movedMeters: 107`) is accurate. It resolves to the modern PFG Temple DC campus\nat 4141 Lucius McCelvey Dr, in a Temple business park.\n\nStreet View confirms the facility: the corporate office front carries a stucco\nfacade with a Texas-star emblem, US flagpoles, and a landscaped circular drive\n— a clean, modern PFG campus. The site recently received a ~$10M expansion.\n\n### Key views\n\n- Satellite z16/z18: main DC building on the NW; a very large trailer drop\n  yard filling the NE/E of the parcel with many parked-trailer rows; a dock",
         "mapsUrl": "https://www.google.com/maps/@31.1438,-97.347,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/performance-food-group/30-temple-tx-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 31.1438,
-              "lng": -97.347
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/performance-food-group/30-temple-tx-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 31.1438,
-              "lng": -97.347
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster coord (31.14397,-97.34693, GEOMETRIC_CENTER, movedMeters 107) is accurate. Resolved to the modern PFG Temple DC campus at 4141 Lucius McCelvey Dr, Temple TX 76504, in a Temple business park. Street View confirms the corporate office front (stucco facade, Texas-star emblem, US flagpoles, circular drive).",
           "truckGate": "Modern fenced campus with separate office-side and truck-yard driveways off Lucius McCelvey Dr. The truck yard is fenced; entrance drives are gated. No barrier arm clearly resolved in the 2022/2026 Street View passes (open at capture time), so truckGate is true but listed uncertain.",
@@ -5805,6 +5600,32 @@
           "buildingCount": "Main DC building plus a separate front office structure — counted 2; one campus, so multipleFacilities false.",
           "urbanRural": "Edge-of-town Temple business park surrounded by open land and scattered industrial — Rural per the rubric tie-break.",
           "railServed": "No rail spur into the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.performancefoodservice.com/Our-Locations/Temple",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Performance Foodservice Temple at 4141 Lucius McCelvey Dr, Temple, TX 76504."
+            },
+            {
+              "tier": 2,
+              "url": "https://templeedc.com/performance-food-group-invests-10-million-expand-temple-facility/",
+              "date": "2024",
+              "type": "press",
+              "claim": "PFG investing $10M / 76,000 sf expansion at 4141 Lucius McCelvey Dr, Temple."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Performance Foodservice Temple (broadline, ROMA division roots); on official locator + recent expansion PR.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       }
     ]

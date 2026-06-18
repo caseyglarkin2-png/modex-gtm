@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-02T16:23:28.332Z",
+  "builtAt": "2026-06-18T21:38:07.778Z",
   "account": {
     "slug": "the-home-depot",
     "displayName": "The Home Depot",
@@ -9,22 +9,22 @@
     "coverageNote": {
       "auditedCount": 30,
       "estimatedFootprint": 70,
+      "totalGlobalFootprint": 70,
+      "auditedScope": "NA",
       "droppedStubCount": 0,
       "capHit": true,
-      "note": "The Home Depot operates ~70 distribution centers across the US + Mexico + Canada (serving ~2,300 stores). We audited 30 representative DCs.",
-      "auditedScope": "NA",
-      "totalGlobalFootprint": 70
+      "note": "The Home Depot operates ~70 distribution centers across the US + Mexico + Canada (serving ~2,300 stores). We audited 30 representative DCs."
     },
     "featuredSiteId": "05-monroe-oh-rdc",
-    "roiDefaults": {
-      "averageMarginPerShipment": 640
-    },
     "dossierIntro": "Big-box retail runs the highest dock-density network we've audited. Home Depot's 70 RDCs route 4,456 dock doors and 8,030 trailer spots. Monroe OH runs 220 docks. Mira Loma CA runs 360. Dwell time is the KPI. With this many doors, even a 90-second per-trailer reduction compounds into millions annually. YardFlow turns the appointment schedule into a live queue that reshuffles when a trailer is late.",
     "surprisingFindings": [
       "Mira Loma CA runs 360 dock doors. That's more docks than three NFL stadiums have parking gates combined.",
       "2 of 30 audited sites are rail-served. Retail RDCs are truckload pipelines, not multimodal.",
       "4,456 total dock doors across 30 sites. Retail runs the most dock minutes per site in the dataset."
-    ]
+    ],
+    "roiDefaults": {
+      "averageMarginPerShipment": 640
+    }
   },
   "research": null,
   "network": {
@@ -256,32 +256,43 @@
         },
         "dossierExcerpt": "The roster's geocoded coordinates do not point at a distribution center.\nSatellite probes at 32.747894, -96.923588 (zoom 15 through 19) show a small\nempty dirt lot at a multi-leg road intersection, flanked by auto-salvage yards,\nsmall commercial buildings, and a residential subdivision. There is no\n800,000 sq ft building anywhere near that point — confirmed across z15 (≈2.5 km\nfield of view) and z19 imagery.\n\nThe address itself is real (W Jefferson Blvd, in the Mountain Creek industrial\ndistrict of southwest Dallas), but the geocode appears to be a street-range\ninterpolation that landed on an undeveloped parcel.\n\nPublic sources conflict on the FDC's true address:\n- SupplierWiki HD DC list ties DC #5824 to **9222 / 9302 W Jefferson Blvd,\n  Dallas 75211**.\n- Press coverage (multiple outlets, 2020 opening) places HD's first FDC at",
         "mapsUrl": "https://www.google.com/maps/@32.7415,-96.9755,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/01-dallas-fdc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 32.7415,
-              "lng": -96.9755
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/01-dallas-fdc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 32.7415,
-              "lng": -96.9755
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "FACILITY NOT POSITIVELY RESOLVED. Roster geocode (32.747894,-96.923588 / 9222 W Jefferson Blvd) lands on a small empty dirt lot at a road intersection with auto-salvage lots and small commercial buildings — NOT an 800,000 sq ft distribution center. Public sources conflict: SupplierWiki HD DC list ties DC #5824 to 9222/9302 W Jefferson Blvd, while press coverage places HD's first FDC at 3730/4721 Mountain Creek Parkway, Dallas 75236. The coords used here (32.7415,-96.9755) are a best-estimate placement on the largest dock-and-drop-yard warehouse in the Mountain Creek industrial corridor, but it was NOT confirmed as HD-operated. Multiple large warehouses exist in this corridor and the FDC's distinctive drive-through tunnel was not clearly identifiable from satellite. Flag for human review / Google Maps place-ID lookup.",
           "classification": "All classification values are inferred from the HD FDC archetype (press: 800,000 sq ft drive-through building handling 65-75 flatbeds/day, both-sides loading, 75-mile radius delivery) rather than confirmed imagery of the correct building. HD distribution facilities are universally gated; FDC throughput design implies long internal staging and bypass-lane room — hence fastLaneOpportunity true. dockDoors/dropArea bands reflect FDC scale assumptions.",
           "yardMetrics": "All counts are FDC-archetype estimates, not measured from confirmed imagery."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.homedepot.com/news/company/supply-chain-unveils-first-flatbed-distribution-center-fdc",
+              "date": "2020-01-28",
+              "type": "press",
+              "claim": "Home Depot opened its first-ever Flatbed Distribution Center (FDC) in Dallas."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+              "date": "2026-06",
+              "type": "DC list",
+              "claim": "Home Depot FDC 5824 at 9222 W Jefferson Blvd, Dallas TX 75211 (flatbed distribution center)."
+            },
+            {
+              "tier": 1,
+              "url": "https://careers.homedepot.com/job/22458871/warehouse-operations-dallas-tx/",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Home Depot warehouse-operations postings for a Dallas distribution center."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "HD definitively operates its flagship Dallas FDC (5824, 9222 W Jefferson Blvd 75211); roster coords sit in the right corridor but the exact building was not pin-resolved, so probable with a location flag.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -424,28 +435,6 @@
         },
         "dossierExcerpt": "The roster geocode landed inside the Tradepoint Atlantic industrial megasite\n(the redeveloped former Bethlehem Steel Sparrows Point mill) but ~1.4 km off the\nactual building — the campus is huge and densely built with very large\nwarehouses (HD, Amazon, Under Armour, FedEx and others all occupy it).\n\nHD press releases (Aug 2021) confirm HD completed a **3-building, ~1.5 million\nsq ft campus at 6311 Tradepoint Ave: an appliance facility, a flatbed\ndelivery center (the FDC)**, and an online-fulfillment building, creating ~500\njobs. Roster idx 2 is specifically the FDC.\n\nI identified the FDC as the long (~520 m), narrow, NE-SW-oriented warehouse\ncentered at ≈39.2225, -76.4842, distinguished by:\n- A large rooftop solar PV array covering roughly half the roof.\n- An open-air bulk-material yard along its NW side — rows of stacked",
         "mapsUrl": "https://www.google.com/maps/@39.22255,-76.4842,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/02-sparrows-point-fdc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.22255,
-              "lng": -76.4842
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/02-sparrows-point-fdc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.22255,
-              "lng": -76.4842
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Resolved with medium-high confidence. Roster geocode moved 1439 m within the Tradepoint Atlantic megasite; the FDC building is the long (~520 m) NE-SW oriented warehouse at ~39.2225,-76.4842 with a roof half-covered in a large solar PV array. Identified by: (a) HD press confirms a 3-building, 1.5M sq ft HD campus at 6311 Tradepoint Ave including a flatbed delivery center; (b) the building's distinctive bulk-material yard — rows of stacked lumber/blocks/pallets in open air along its NW side — matches an FDC handling oversized building materials. The two larger plain-roofed warehouses to the NE/SE are the HD appliance and online-fulfillment buildings or other Tradepoint tenants (Amazon, Under Armour also occupy this park).",
           "guardShack": "truckGate true with high confidence (enterprise HD FDC, fenced campus). guardShack inferred true from the HD-DC norm of staffed gate check-in; a discrete booth structure was not unambiguously isolated in imagery — listed uncertain.",
@@ -453,6 +442,32 @@
           "railServed": "true — active rail line runs immediately NW of the FDC along the access corridor; Street View on that road shows loaded rail cars adjacent to the site (Tradepoint Atlantic is rail-served via CSX/NS).",
           "dockDoorCount": "~70 estimate across both long faces; high-resolution count obscured by the solar array shading and trailer clutter — listed uncertain.",
           "fastLaneOpportunity": "Wide paved aprons and deep approach roads at this purpose-built 2021 facility leave room for a bypass/express lane."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.homedepot.com/news/company/supply-chain-expansion-brings-faster-delivery-baltimore-region",
+              "date": "2021-08",
+              "type": "press",
+              "claim": "HD completed three DCs at Tradepoint Atlantic, Sparrows Point, including a flatbed delivery center."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+              "date": "2026-06",
+              "type": "DC list",
+              "claim": "FDC 5830 at 6311 Trade Point Ave, Sparrows Point MD 21219."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "HD operates flatbed delivery center FDC 5830 at Tradepoint Atlantic / Sparrows Point; coords match the industrial park; build-to-suit lease.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -651,28 +666,6 @@
         },
         "dossierExcerpt": "Despite a large `movedMeters` (5664), the roster's final lat/lng land **directly\non the RDC rooftop** — the geocoder corrected a street-range guess to the\nrooftop. The building is a long warehouse at 2300 Beckleymeade Ave in the\nDallas Logistics Hub in south Dallas (zip 75232). SupplierWiki and an FCC\nindustrial-radio license record both tie this address to HD DC #5023, an\nRDC also carrying the XD06 (rapid-deployment) designation. Confirmed.",
         "mapsUrl": "https://www.google.com/maps/@32.63905,-96.851,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/03-dallas-rdc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 32.63905,
-              "lng": -96.851
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/03-dallas-rdc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 32.63905,
-              "lng": -96.851
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Resolved with high confidence. Roster geocode (movedMeters 5664) lands directly on the long cross-dock RDC building at 2300 Beckleymeade Ave in the Dallas Logistics Hub (south Dallas, zip 75232). Confirmed as HD RDC #5023 / XD06 via SupplierWiki and FCC license records (DC 5023).",
           "truckGate": "CONFIRMED via Street View on Beckleymeade Ave: a swing/sliding gate spans the truck entrance driveway, set well back from the public road with a deep paved apron; full perimeter security fencing (black ornamental + chain-link) wraps the property.",
@@ -681,6 +674,32 @@
           "dropArea": "Dense trailer parking in long rows on the building's west/south side, hundreds of trailers without tractors — dropArea 50+, dedicated drop yard.",
           "dockDoorCount": "~130 estimate across both long elevations of a ~550K sq ft RDC; exact count obscured by backed-in trailers — listed uncertain.",
           "fastLaneOpportunity": "Wide gate apron and deep approach leave room for an express bypass lane."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.homedepot.com/news/company/supply-chain-growth-texas-creates-over-1500-jobs-expands-delivery-options",
+              "date": "2021-02",
+              "type": "press",
+              "claim": "HD 1.5M sq ft Dallas DC at 2300 Beckleymeade Ave, 75232; DFW footprint grew to 4.5M sq ft."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+              "date": "2026-06",
+              "type": "DC list",
+              "claim": "RDC 5023 at 2300 Beckleymeade Ave, Dallas TX 75232."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Coords match the Beckleymeade Ave campus in SW Dallas 75232 where HD runs RDC 5023; no closure found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -900,28 +919,6 @@
         },
         "dossierExcerpt": "The roster's final lat/lng land directly on the RDC rooftop (the large\n`movedMeters` reflects a street-range guess corrected to the rooftop). The\nbuilding is a long warehouse at 5200 SW Wenger Drive, Topeka KS, on the\ncity's southern industrial edge. SupplierWiki ties this address to **HD DC\n#5024 (an RDC)**, and Waze lists the place explicitly as \"The Home Depot Rapid\nDeployment Center.\" Confirmed.",
         "mapsUrl": "https://www.google.com/maps/@38.97299,-95.69715,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/04-topeka-rdc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 38.97299,
-              "lng": -95.69715
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/04-topeka-rdc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 38.97299,
-              "lng": -95.69715
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Resolved with high confidence. Roster geocode (movedMeters 5133) lands directly on the long cross-dock RDC building at 5200 SW Wenger Drive, Topeka KS 66609. Confirmed as HD RDC #5024 via SupplierWiki and Waze (\"The Home Depot Rapid Deployment Center\").",
           "truckGate": "truckGate true with high confidence. A single curved truck access road runs up from SW Wenger Drive to the trailer yard; it is the only vehicle entry and pinches into a controlled gate where it meets the fenced yard. Trucks observed staged along the access road in Street View. Perimeter chain-link fencing encloses the trailer yard.",
@@ -932,6 +929,25 @@
           "railServed": "false — no rail spur enters the property; nearest rail is not connected.",
           "dockDoorCount": "~120 estimate across both long elevations of a ~550K sq ft RDC; backed-in trailers obscure exact count.",
           "extra": "A Plug Power hydrogen fuel station for fuel-cell forklifts sits at the building's office/SW side — a hallmark of HD RDC operations, corroborating HD tenancy."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+              "date": "2026-06",
+              "type": "DC list",
+              "claim": "RDC 5024 at 5200 SW Wenger Drive, Topeka KS 66609."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "HD RDC 5024 at 5200 SW Wenger St, Topeka 66609; coords match; no closure/relocation found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1072,28 +1088,6 @@
         },
         "dossierExcerpt": "The roster geocode (39.434303, -84.321602, ROOFTOP, moved 337 m) landed\ndirectly on the correct building. The site sits inside the \"Gateway\"\nbusiness park north of Monroe, OH (Warren County), between I-75 and an open\nagricultural belt to the east. Web confirmation: multiple business listings\n(Foursquare, Waze, SupplierWiki HD DC list) place HD RDC #5084 at 500 Gateway\nBlvd, Monroe. The target is the central of three large distribution buildings\nin the park — a single, very long (~580 m) cross-dock structure with trailers\nbacked in along both long faces. The west building and other park buildings\nare separate tenants and were excluded.",
         "mapsUrl": "https://www.google.com/maps/@39.43460,-84.32130,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/05-monroe-oh-rdc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.4346,
-              "lng": -84.3213
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/05-monroe-oh-rdc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.4346,
-              "lng": -84.3213
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Trucker reviews of RDC 5084 explicitly describe a gated check-in with 10-20 min in-gate processing and 10-12 trucks queued at the entrance; the private campus ring road is the controlled truck approach to the building.",
           "guardShack": "Trucker reviews explicitly reference a 'guard shack' staffed by check-in personnel at this RDC. Booth not directly visible in public Street View (gate is internal to the private Gateway-park campus), but operational evidence is strong.",
@@ -1104,6 +1098,32 @@
           "entryLanes": "Estimated from approach width; gate booth not directly imaged.",
           "scale": "No truck scale visible in satellite imagery.",
           "siteAreaAcres": "Derived from perimeter box (~820m x ~360m developed footprint within the Gateway business park)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+              "date": "2026-06",
+              "type": "DC list",
+              "claim": "RDC 5084 at 500 Gateway Blvd, Monroe OH 45050 (IFC XD05 same address)."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.daytondailynews.com/business/home-depot-distribution-center-opens/RRAF4D0FMScx4CNgoUbGyI/",
+              "date": "2011",
+              "type": "press",
+              "claim": "HD opened a 657,600 sq ft RDC at 500 Gateway Blvd, Monroe OH (Corridor 75 Premier Logistics Park)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "HD RDC 5084 at 500 Gateway Blvd, Monroe 45050; coords match; active DC, no closure found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1238,28 +1258,6 @@
         },
         "dossierExcerpt": "The roster geocode (33.216581, -83.930773) was wrong by ~25 km — it\nlanded in rural farmland/woodland SE of Locust Grove with no industrial\nbuilding anywhere near it (confirmed by z15/z17 satellite of that point).\n\nThe correct facility was re-resolved by web research:\n- HD DC #5250 / \"RDC 5250\" is a 657,518 sq ft distribution center on\n  ~130 acres at 3150 Hwy 42 South, Locust Grove, GA (Henry County),\n  immediately off I-75, ~36 miles south of downtown Atlanta.\n- The property was bought by Monmouth REIT for $96.7M in Dec 2020, net-\n  leased 20 years to Home Depot U.S.A.\n- HD careers and Work Safety Index list \"5250 Locust Grove RDC\" as an active\n  HD rapid-deployment facility.\n\nThe building was located on satellite at ~33.363, -84.119 — a large\ndistribution building set behind a rail line and tree buffer, with extensive",
         "mapsUrl": "https://www.google.com/maps/@33.36300,-84.11900,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/06-locust-grove-ga-rdc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.363,
-              "lng": -84.119
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/06-locust-grove-ga-rdc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.363,
-              "lng": -84.119
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "resolution": "Roster geocode (33.216581,-83.930773) was wrong by ~25 km — landed in rural farmland SE of Locust Grove. Correct facility resolved via web research to 3150 Hwy 42 S, Locust Grove (HD DC #5250 / RDC 5250), a 657,518 sq ft RDC on ~130 acres off I-75, bought by Monmouth REIT for $96.7M in 2020. Building positively located at ~33.363,-84.119.",
           "imagery": "Satellite imagery of this site is significantly cloud-affected at z16-z19 — the central building roof and the truck entrance are partially obscured. Building outline, the SE-face dock bank, and trailer rows are still readable; the gate structure itself could not be directly imaged.",
@@ -1272,6 +1270,32 @@
           "urbanRural": "Edge-of-town Locust Grove (Henry County), small town 36 mi south of Atlanta — industrial pocket surrounded by woodland and farmland. Classed Rural per rubric (small-town industrial -> Rural).",
           "railServed": "A rail line runs along the SW edge between Hwy 42 and the property, but no spur is visible entering the DC — set false.",
           "siteAreaAcres": "130 acres per the Monmouth REIT acquisition disclosure (authoritative)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.homedepot.com/news/company/new-distribution-center-creates-over-700-jobs-speeds-replenishment",
+              "date": "2020-12-16",
+              "type": "press",
+              "claim": "Home Depot opened a new distribution center in Locust Grove GA, ~700 jobs."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+              "date": "2026-06",
+              "type": "DC list",
+              "claim": "RDC 5250 at 3150 Hwy 42 South, Locust Grove GA 30248."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active HD RDC 5250 at 3150 GA-42; recent company announcement; 20-yr lease; no closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1472,28 +1496,6 @@
         },
         "dossierExcerpt": "The roster geocode (34.088222, -117.204711, ROOFTOP, moved 142 m) landed on\nthe correct building. Web confirmation: TruckMap, BusinessYab, SupplierWiki HD\nDC list, and HD careers all place HD DC #5087 / RDC 5087 at 27352 River Bluff\nAve, Redlands, CA. The facility is a large RDC in the dense San\nBernardino/Redlands logistics corridor, with the I-10 freeway forming its east\nboundary. The building was positively identified — a large rectangular\ndistribution building with trailers backed in on all four faces.",
         "mapsUrl": "https://www.google.com/maps/@34.08820,-117.20440,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/07-redlands-ca-rdc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.0882,
-              "lng": -117.2044
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/07-redlands-ca-rdc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.0882,
-              "lng": -117.2044
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Street View confirms a continuous black metal perimeter security fence enclosing the entire truck yard along River Bluff Avenue, with gate sections in the fence line. Driver reviews report a check-in process ('easy and quick check in and out'), confirming a controlled gated entrance.",
           "guardShack": "Inferred TRUE — fully fenced/gated truck yard with a driver check-in process; a guard booth is the HD-RDC norm and the dense SoCal logistics-park standard. Booth not isolated in a clean view (palms/landscaping screen the fence line) — flagged uncertain.",
@@ -1505,6 +1507,32 @@
           "railServed": "No rail spur enters the property; the east boundary is the I-10 freeway.",
           "siteAreaAcres": "Derived from the perimeter box (~700 m x ~330 m developed footprint).",
           "buildingCount": "Single very large RDC building; neighboring DC buildings are separate properties and excluded."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.homedepot.com/job/6961479/warehouse-associate-redlands-ca/",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Current Home Depot Warehouse Associate posting in Redlands CA - active DC staffing."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+              "date": "2026-06",
+              "type": "DC list",
+              "claim": "RDC 5087 at 27352 River Bluff Ave, Redlands CA 92374."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active RDC 5087 at 27352 River Bluff Ave with live HD hiring; coords sit near downtown Redlands so verify geofence to River Bluff address; no closure found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1693,28 +1721,6 @@
         },
         "dossierExcerpt": "The roster geocode (29.940329, -95.554781, ROOFTOP, moved 2095 m) landed on\nthe correct building despite the large geocode move — the RDC is the large\ndistribution building immediately at that point. Web confirmation: TruckMap,\nSupplierWiki HD DC list, Manta, and HD careers all place HD RDC #5521 at 11333\nN. Gessner Rd, Houston, TX 77064. It is described as Home Depot's Northwest\nHouston rapid deployment center (Willowbrook / Hwy 249 area), operating 24/7.",
         "mapsUrl": "https://www.google.com/maps/@29.94050,-95.55430,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/08-houston-tx-rdc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 29.9405,
-              "lng": -95.5543
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/08-houston-tx-rdc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 29.9405,
-              "lng": -95.5543
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Single controlled private access road enters the property at the SW corner, crossing a drainage easement that separates the site from public roads. The whole property is set back behind the easement with a perimeter edge — a true checkpoint pinch-point at the SW access. RDC #5521 runs 24/7.",
           "guardShack": "Inferred TRUE — a guard booth at the SW access is the HD-RDC norm; the gate sits deep on the private drive and is not reachable by public Street View, and no clean booth was isolated in satellite (a small structure is visible near the SW access lane). Flagged uncertain.",
@@ -1727,6 +1733,32 @@
           "railServed": "No rail spur enters the property.",
           "siteAreaAcres": "Derived from the perimeter box (~540 m N-S x ~770 m E-W developed footprint incl. north drop yard).",
           "buildingCount": "Single RDC building; the smaller building to the east is a separate property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.homedepot.com/job/13022386/warehouse-associate-houston-tx/",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Current Home Depot Warehouse Associate posting, Houston TX - active DC staffing."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+              "date": "2026-06",
+              "type": "DC list",
+              "claim": "RDC 5521 at 11333 N. Gessner Road, Houston TX 77064."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Coords fall in the NW-Houston 77064 cluster where HD runs RDC 5521 (Gessner) and RDC 5520 (Fallbrook); active hiring, no negative signal; verify which polygon the geofence covers.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1903,28 +1935,6 @@
         },
         "dossierExcerpt": "The roster coordinate (ROOFTOP geocode, 142 m offset) lands directly on a large\ndistribution building inside a Lehigh Valley logistics park west of Allentown,\nbetween Willard Drive and the surrounding industrial-park road network. Web\nsearch confirms \"The Home Depot Distribution Center, 8500 Willard Dr,\nBreinigsville, PA 18031\" as an active 24/5 distribution facility (610-573-5771,\n209 reviews). Satellite imagery shows a cross-dock building with loading doors\non both long faces and very large trailer yards — consistent with an HD RDC.\nAdjacent large warehouses in the park are separate tenants; the audited parcel\nis the building the pin lands on.",
         "mapsUrl": "https://www.google.com/maps/@40.551634,-75.627668,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/09-breinigsville-pa-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.551634,
-              "lng": -75.627668
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/09-breinigsville-pa-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.551634,
-              "lng": -75.627668
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "No barrier arm, sliding gate, or guard checkpoint found at any road-edge entrance. Building sits ~120m back from Willard Drive behind a wide landscaped tree buffer; Street View along the public road shows open lawn with no gate. Truck circulation enters via uncontrolled internal logistics-park drives.",
           "guardShack": "No staffed booth structure visible at any entrance in zoom-19/20 imagery.",
@@ -1935,6 +1945,32 @@
           "fastLaneOpportunity": "Very wide paved truck yard with ample unused width — abundant room to add express/bypass lanes.",
           "entryLanes": "Estimated 2 inbound from the SE driveway; no painted lane control so count is approximate.",
           "urbanRural": "Edge-of-town Lehigh Valley logistics park; farmland on the west and south sides — Rural per rubric."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.homedepot.com/job/6961535/warehouse-support-onsite",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Current Home Depot Warehouse Support posting, Breinigsville PA - active DC staffing."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+              "date": "2026-06",
+              "type": "DC list",
+              "claim": "RDC 5034 at 8500 Willard Drive, Breinigsville PA 18031."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active RDC 5034 at 8500 Willard Dr with live HD hiring; the PA-DC-closure headline in results was Saks, not Home Depot.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2091,28 +2127,6 @@
         },
         "dossierExcerpt": "The roster geocode (39.200647, -78.139858, ROOFTOP but an 8493 m offset flag)\nlands on a large white-roofed cross-dock distribution building in an industrial\npark on the west side of Winchester, VA, immediately adjacent to Interstate 81.\nWeb search confirms \"The Home Depot RDC 5030, 480 Park Center Dr, Winchester VA\"\nas a ~466,000 sq ft Rapid Deployment Center, 24/5 operations. Satellite imagery\nshows loading docks on both long faces with trailers backed in and large\ntrailer yards — unambiguous RDC. The pin building is positively identified\ndespite the geocode offset flag.",
         "mapsUrl": "https://www.google.com/maps/@39.201000,-78.140200,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/10-winchester-va-rdc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.201,
-              "lng": -78.1402
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/10-winchester-va-rdc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.201,
-              "lng": -78.1402
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "No barrier arm, sliding gate, or guard checkpoint found at the NW-end access drive or anywhere along the property line. Building sits well back from Park Center Drive behind a grass buffer; Street View (2024-06) shows the access road curving in openly with no gate.",
           "guardShack": "No staffed booth structure at any entrance in zoom-19/20 imagery; the only office structure is the building's own attached front office.",
@@ -2124,6 +2138,39 @@
           "entryLanes": "Estimated 2 inbound at the NW access drive; no painted lane control, count approximate.",
           "urbanRural": "Edge-of-Winchester industrial park beside I-81 with adjacent farmland and a mobile-home neighborhood; Rural per rubric.",
           "geocode": "Roster lat/lng geocode had an 8493 m offset; verified pin still lands on the correct HD RDC building. ZIP corrected to 22603 (roster says 22602)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.homedepot.com/job/22299733/logistics-engineer-rdc-engineering-winchester-va",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Current Home Depot \"Logistics Engineer, RDC Engineering - Winchester VA\" posting - explicit active RDC."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+              "date": "2026-06",
+              "type": "DC list",
+              "claim": "RDC 5030 at 480 Park Center Drive, Winchester VA 22603."
+            },
+            {
+              "tier": 2,
+              "url": "https://oceanwestcp.com/properties/home-depot-distribution-center/",
+              "date": "2022-09",
+              "type": "CRE owner listing",
+              "claim": "466,000 SF Rapid Deployment Center leased to Home Depot."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active RDC 5030 at 480 Park Center Dr; HD's own RDC-Engineering Winchester job plus landlord listing confirm current operation; leased.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2248,28 +2295,6 @@
         },
         "dossierExcerpt": "The roster geocode was flagged GEOMETRIC_CENTER with a 2790 m offset, so the\ncoordinate needed verification. Probing wide (zoom 15) showed two large\nwhite-roofed distribution buildings in the Jefferson Metropolitan Park\nindustrial area SW of Birmingham, with a rail line running NE–SW between them.\nThe pin lands on the larger upper building — a cross-dock with loading docks on\nboth long faces and extensive trailer yards. Web search confirms \"Home Depot\nDistribution Center / RDC 5086, 6400 Jefferson Metro Pkwy, McCalla AL 35111\",\n24/7 operations. The pin building is positively identified as the HD RDC.",
         "mapsUrl": "https://www.google.com/maps/@33.322267,-87.025569,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/11-mccalla-al-rdc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.322267,
-              "lng": -87.025569
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/11-mccalla-al-rdc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.322267,
-              "lng": -87.025569
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Controlled truck gate confirmed at the SW-end entrance: a guard-booth island where the access road narrows and splits, with an orange/yellow barrier-arm/gate object visible on the lane in zoom-21 satellite. Street View (2023-01) shows perimeter fencing, an 'ATTENTION' sign and a '10 mph' speed sign at the entrance. Web driver review explicitly cites 'security and receiving personnel'.",
           "guardShack": "Small square guard-booth building (~1-2 vehicle footprint) with a flagpole and an attached canopy/awning, sitting on a triangular island in the truck lane — classic gatehouse, separate from the main building.",
@@ -2281,6 +2306,32 @@
           "fastLaneOpportunity": "Very wide gate apron and truck yard with abundant unused paved width for an express/bypass lane.",
           "entryLanes": "Estimated 2 inbound; the road splits around the booth island. No painted lane control, count approximate.",
           "urbanRural": "Rural McCalla AL industrial park with surrounding woodland and a rail line alongside; Rural per rubric."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.homedepot.com/job/6961478/warehouse-associate-onsite/",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active warehouse associate posting at the McCalla AL DC."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+              "date": "2026-06",
+              "type": "DC list",
+              "claim": "RDC 5086 at 6400 Jefferson Metro Pkwy, McCalla AL 35111."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "RDC 5086 on the DC list with active HD careers posting; no closure/WARN found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2440,28 +2491,6 @@
         },
         "dossierExcerpt": "The roster geocode (ROOFTOP, flagged 3918 m offset) lands on a large\nwhite-roofed cross-dock distribution building in a multi-building logistics\npark in the Saxe Gotha / Southport area of West Columbia, SC. Web search\nconfirms \"The Home Depot (West Columbia RDC) / RDC #5088, 420 Foster Brothers\nDr, West Columbia SC 29172\", 24/5 operations. Satellite imagery shows loading\ndocks on both long faces with trailers backed in and large trailer yards — an\nunambiguous RDC. The pin building is positively identified.",
         "mapsUrl": "https://www.google.com/maps/@33.908633,-81.074818,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/12-west-columbia-sc-rdc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.908633,
-              "lng": -81.074818
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/12-west-columbia-sc-rdc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.908633,
-              "lng": -81.074818
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "No barrier arm, sliding gate, or guard-booth checkpoint structure found at any road-edge entrance across zoom 19-20 satellite and Street View (2023-08). Building sits well back inside a logistics park behind retention ponds and grass buffers; truck access is via uncontrolled internal park roads. A web listing cites 'entrance security and strict appointments' — interpreted as appointment-based dock scheduling and a security desk at the building dock office rather than a physical road gate. Marked medium-confidence; the office/check-in area was partly obscured by ponds in available imagery.",
           "guardShack": "No standalone staffed booth structure visible at any entrance.",
@@ -2473,6 +2502,32 @@
           "entryLanes": "Estimated 2 inbound; no painted lane control, count approximate.",
           "urbanRural": "Logistics park in the Saxe Gotha / Southport area of West Columbia with surrounding woodland and a residential edge; Rural per rubric.",
           "geocode": "Roster geocode had a 3918 m offset flag; verified pin lands on the correct HD RDC building."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+              "date": "2026-06",
+              "type": "DC list",
+              "claim": "RDC 5088 at 420 Foster Brothers Drive, West Columbia SC 29172."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.wltx.com/article/news/home-depot-distribution-center-opens/101-379829930",
+              "date": "2010",
+              "type": "press",
+              "claim": "HD RDC opened at 420 Foster Brothers Dr, 200 jobs, services ~90 stores VA/NC/GA/SC."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "RDC 5088 at 420 Foster Brothers Dr; on the DC list with an HD-held FCC radio license and opening press; no closure/WARN.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2593,28 +2648,6 @@
         },
         "dossierExcerpt": "Roster supplied 41.314542, -75.769187 (ROOFTOP, moved 1714 m), which landed just\nSW of the building in the access-drive/parking area. Probing satellite at zooms\n16-20 around that point positively identified the RDC: a single very large\ncross-dock distribution building with a dark roof, dock doors and trailers\nbacked in along both long faces, an attached trailer drop yard on the NE end,\nand employee parking on the SW end — all consistent with a Home Depot Rapid\nDeployment Center. The building sits inside CenterPoint Commerce & Trade Park in\nPittston Township, surrounded by other large warehouses. Web search confirmed\n300 Enterprise Way as the Home Depot Distribution Center / RDC 5089 (also\nreferenced as RLC 8618 / XD09). Locked center: 41.31555, -75.76660.",
         "mapsUrl": "https://www.google.com/maps/@41.31555,-75.76660,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/13-pittston-township-pa-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.31555,
-              "lng": -75.7666
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/13-pittston-township-pa-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.31555,
-              "lng": -75.7666
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Cross-dock RDC; truck entrance off the public road at the SW corner. A z20 view of the inner perimeter point shows a small guard-booth structure beside the drive where it crosses the property line into the yard.",
           "guardShack": "Small 1-2-vehicle-footprint booth visible at the inner gate point where the access drive enters the truck yard, set back from the public road behind the employee parking.",
@@ -2627,6 +2660,32 @@
           "urbanRural": "Edge-of-town industrial park (CenterPoint Commerce & Trade Park) outside Pittston Township, surrounded by warehouses and woodland — judged Rural per rubric.",
           "entryLanes": "Estimated from imagery; lane count at the gate not fully resolved.",
           "trailersVisible": "Approximate count from z17-z19 imagery across dock faces and drop yard."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+              "date": "2026-06",
+              "type": "DC list",
+              "claim": "RDC 5089 at 300 Enterprise Way; IFC XD09 on the same campus, Pittston Township PA 18640."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.pittstonchamber.info/list/member/home-depot-the-pittston-518",
+              "date": "2025",
+              "type": "chamber listing",
+              "claim": "The Home Depot warehouse & distribution member, Pittston PA."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "RDC 5089 + co-located IFC XD09 at 300 Enterprise Way; active chamber membership; no closure/WARN.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2747,28 +2806,6 @@
         },
         "dossierExcerpt": "Roster supplied 37.759049, -121.404099 (ROOFTOP, moved 278 m), which landed\nsquarely on a large E-W cross-dock distribution building. Probing satellite at\nzooms 16-20 confirmed a single very large RDC: dock doors with trailers backed\nin along both long faces, trailer drop-yard rows on the north side, and an\noffice/employee-parking frontage on N Tracy Blvd. Web search confirmed 1400 E\nPescadero Ave as Home Depot RDC #5641 — a 657,000 sq ft warehouse opened to\nserve ~100 California stores, operating 24 h Mon-Fri. Locked center:\n37.75920, -121.40300.",
         "mapsUrl": "https://www.google.com/maps/@37.75920,-121.40300,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/14-tracy-ca-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 37.7592,
-              "lng": -121.403
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/14-tracy-ca-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 37.7592,
-              "lng": -121.403
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Cross-dock RDC (DC #5641, 657K sq ft). Truck yard entrance off the access road at the SW corner; the office/parking front faces N Tracy Blvd, the truck side is fenced and gated.",
           "guardShack": "Standard guarded RDC entry — booth at the SW truck-yard entrance. HD RDCs of this generation consistently run a staffed gate; the SW gate apron shows the checkpoint geometry.",
@@ -2781,6 +2818,32 @@
           "urbanRural": "Edge-of-town industrial/logistics district on the north side of Tracy CA; large warehouses and open/fallow parcels around it — judged Rural per rubric.",
           "entryLanes": "Estimated; exact lane count at the gate not fully resolved from imagery.",
           "trailersVisible": "Approximate count from z16-z20 imagery."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+              "date": "2026-06",
+              "type": "DC list",
+              "claim": "RDC 5641 at 1400 Pescadero Avenue, Tracy CA 95304."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.mmh.com/article/the_home_depot_builds_an_omni_channel_supply_chain",
+              "date": "2018",
+              "type": "trade press",
+              "claim": "HD operates a network of RDCs for same-day flow-through crossdocking."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "RDC 5641 at 1400 Pescadero Ave; on the DC list; no closure/WARN (a separate HD DC 5857 also exists in Tracy on Hopkins Rd - distinct site).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2909,28 +2972,6 @@
         },
         "dossierExcerpt": "Roster supplied 33.445211, -112.25435 (ROOFTOP, moved 1320 m), which landed near\nthe NW corner of the RDC. Probing satellite at zooms 15-20 confirmed a single\nlarge E-W cross-dock distribution building with dock doors and dense trailer\nrows on its south face, a residential subdivision directly to the north, and an\noffice/employee-parking frontage. Web search confirmed 9081 W Washington St as\nHome Depot RDC #5643 (also referenced via a W Jefferson St entrance), open 24 h\nMon-Fri. Locked center: 33.44480, -112.25300.",
         "mapsUrl": "https://www.google.com/maps/@33.44480,-112.25300,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/15-tolleson-az-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.4448,
-              "lng": -112.253
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/15-tolleson-az-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.4448,
-              "lng": -112.253
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "RDC #5643. Truck yard entrance at the SW/W corner off the road; driver reviews explicitly mention a guard shack and a gate where trucks check in.",
           "guardShack": "Confirmed by web reviews: drivers describe 'friendly staff at the guard shack' and report waiting 'over an hour to enter' at the gate — a staffed guard booth with significant check-in queuing.",
@@ -2943,6 +2984,32 @@
           "urbanRural": "Tolleson is inside the Phoenix metro's continuous urban fabric — residential subdivisions directly north of the RDC, dense industrial all around — judged Urban.",
           "entryLanes": "Estimated; exact lane count at the gate not fully resolved.",
           "trailersVisible": "Approximate count from z16-z19 imagery across dock face and drop yard."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+              "date": "2026-06",
+              "type": "DC list",
+              "claim": "RDC 5643 at 9081 W Washington Street, Tolleson AZ 85353."
+            },
+            {
+              "tier": 2,
+              "url": "https://graycor.com/project/home-depot-distribution-center/",
+              "date": "2018",
+              "type": "GC project page",
+              "claim": "466,700 sq ft HD distribution facility on 46 acres receiving from suppliers and shipping to HD stores."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "RDC 5643 at 9081 W Washington St; on the DC list with GC project description; AZ WARN search returned no Tolleson HD notice.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3063,28 +3130,6 @@
         },
         "dossierExcerpt": "Roster supplied 41.440126, -88.144081 (ROOFTOP, moved 9468 m — the largest move\nin the account), which landed between two large warehouses inside the\nCenterPoint Intermodal Center. Probing satellite at zooms 14-19 and\ncross-checking against the leasing record resolved the ambiguity: CenterPoint's\nproperty page lists 2950 CenterPoint Way as a **657,600 sq ft building on ~55\nacres* — that footprint matches the western, slightly smaller, lighter-roofed*\nN-S building, not the much larger building immediately to its east (a separate\nfacility). The western building shows dock doors with trailers along both long\nfaces and a guarded gate complex on the south — a Home Depot RDC. Web search\nconfirmed 2950 CenterPoint Way as HD RDC #5851. Locked center:\n41.44010, -88.14320.",
         "mapsUrl": "https://www.google.com/maps/@41.44010,-88.14320,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/16-elwood-il-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.4401,
-              "lng": -88.1432
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/16-elwood-il-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.4401,
-              "lng": -88.1432
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Cross-dock RDC #5851 (657K sq ft) in the CenterPoint Intermodal Center, Joliet/Elwood. A clear guarded gate complex on the south side: guard booth with a canopy, multiple inbound/outbound lanes, and a chevron-striped apron with trucks queued through the checkpoint (z19 imagery).",
           "guardShack": "A canopy-roofed guard booth straddling the gate lanes is plainly visible at the south truck entrance. remoteGs = false accordingly.",
@@ -3098,6 +3143,32 @@
           "urbanRural": "CenterPoint Intermodal Center is a large logistics park on rural land between Joliet and Elwood IL, surrounded by farmland and warehouses — judged Rural per rubric.",
           "railServed": "The CenterPoint Intermodal Center has major intermodal rail yards, but no rail spur runs into this RDC's own property — railServed = false for this facility.",
           "entryLanes": "Three inbound lanes estimated from gate imagery; exact count not fully resolved."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+              "date": "2026-06",
+              "type": "DC list",
+              "claim": "RDC 5851 and SDC 5852 at 2950 Centerpoint Way, Elwood IL 60436 (CenterPoint Intermodal Center)."
+            },
+            {
+              "tier": 1,
+              "url": "https://careers.homedepot.com/job/6961521/warehouse-associate-joliet-il/",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active HD warehouse-associate roles at the Joliet/Elwood (Centerpoint) DC."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "RDC 5851/SDC 5852 at the CenterPoint Intermodal Center; on the DC list and actively hiring; no closure/relocation found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3222,28 +3293,6 @@
         },
         "dossierExcerpt": "The roster coordinate (44.904755, -122.962671) landed in the central truck yard\nof the facility — within ~150 m of the building, accurate enough for Step 0.\nWeb research confirms 4999 Depot Court SE is Home Depot's RDC: a ~467,000 sq ft\nbuilding opened in 2010 in the Mill Creek Corporate Center industrial district\njust east of Interstate 5, serving HD stores across OR, WA, ID, MT and WY,\nrunning 24 hours Monday-Friday. Satellite imagery shows one long white\ndistribution building running NE-SW, with dock doors on both long faces and a\nlarge trailer drop yard wrapping its SW and NE sides. The locked center sits on\nthat building. A second very large building lies to the SW; it is a separate\ntenant in the same corporate park and is excluded from the HD perimeter.",
         "mapsUrl": "https://www.google.com/maps/@44.90460,-122.96170,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/17-salem-or-rdc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 44.9046,
-              "lng": -122.9617
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/17-salem-or-rdc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 44.9046,
-              "lng": -122.9617
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Truck-only entrance off Depot Court SE; internal yard controlled by a checkpoint with gate islands and lane markings.",
           "guardShack": "Small dark-roofed booth (~1-vehicle footprint) sits in the middle of the central truck drive between the RDC building and the trailer drop yard, with gate islands and a queuing truck visible at z20.",
@@ -3252,6 +3301,32 @@
           "dropYard": "Hundreds of marked trailer stalls fill the yard SW of the building and along the NE side.",
           "entryLanes": "Lane count at the checkpoint estimated from overhead gate-island markings; not crisply resolved.",
           "buildingCount": "HD RDC is the single ~467k sq ft building; the larger building to the SW is a separate tenant in the Mill Creek Corporate Center industrial park, excluded from the HD perimeter."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+              "date": "2026-06",
+              "type": "DC list",
+              "claim": "RDC 5639 at 4999 Depot Court SE, Salem OR 97317."
+            },
+            {
+              "tier": 2,
+              "url": "https://katu.com/archive/home-depot-opens-its-new-distribution-center",
+              "date": "2010",
+              "type": "press",
+              "claim": "HD opened a 467,000 sq ft RDC at 4999 Depot Court SE serving WA/OR/MT/ID/WY, 200+ jobs."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "RDC 5639 at 4999 Depot Ct SE; on the DC list, no closure/relocation signal (coords map to the Turner/Salem corridor consistent with this address).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3373,28 +3448,6 @@
         },
         "dossierExcerpt": "The roster coordinate (42.169402, -72.734316) landed at the SE truck-entrance\nend of the property, within ~150 m of the building. Web research confirms 50\nCampanelli Drive is Home Depot RDC #5221 — a Rapid Deployment Center operating\n24/7, noted as the #1 RDC in HD's network in 2020. Satellite imagery shows one\nvery large white distribution building running NW-SE in an edge-of-town\nindustrial park surrounded by woodland on the outskirts of Westfield. The locked\ncenter is the building's centroid.",
         "mapsUrl": "https://www.google.com/maps/@42.17030,-72.73620,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/18-westfield-ma-rdc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.1703,
-              "lng": -72.7362
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/18-westfield-ma-rdc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.1703,
-              "lng": -72.7362
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Clear checkpoint with painted striped lane markings (pinch-point) on the SE access drive; a vehicle is stopped at it in z21 imagery.",
           "guardShack": "A small light-coloured booth sits right at the striped checkpoint with a car parked beside it — a staffed guard booth, not the main building.",
@@ -3405,6 +3458,32 @@
           "dropArea": "Trailer drop yard at the SW end holds ~95 trailers visible; band estimated from overhead imagery.",
           "dropYard": "Dedicated trailer-storage rows at the SW corner of the property, separate from the dock aprons.",
           "entryLanes": "Single inbound lane at the checkpoint; exit shares the same gate group."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.homedepot.com/job/6961490/warehouse-associate-onsite/",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Home Depot warehouse-associate role in Westfield MA - DC currently staffed."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+              "date": "2026-06",
+              "type": "DC list",
+              "claim": "RDC 5221 at 50 Campanelli Drive, Westfield MA 01085."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "RDC 5221 on the DC list, actively hiring, and holds a Home-Depot-named FCC radio license; no closure found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3547,28 +3626,6 @@
         },
         "dossierExcerpt": "The roster coordinate (34.028294, -117.536009; geocode moved 3,606 m) landed on\nthe correct building — a single enormous distribution building running E-W in\nthe Mira Loma / Jurupa Valley warehouse district. Web research confirms 11650\nVenture Drive is Home Depot's SDC, housing five HD DC numbers (#5556-5559 and\n#5645) under one roof. The locked center is the building centroid.",
         "mapsUrl": "https://www.google.com/maps/@34.02900,-117.53575,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/19-mira-loma-ca-sdc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.029,
-              "lng": -117.53575
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/19-mira-loma-ca-sdc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.029,
-              "lng": -117.53575
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Very large fenced SDC truck yards on both long faces; striped checkpoint pinch-point lane markings observed at the SE corner where the access road meets the truck yard — a controlled entrance.",
           "guardShack": "No standalone guard booth positively resolved on satellite imagery; the dock yards are open paved aprons inside the property fence. HD's practice at large DCs likely includes a staffed gate, but imagery could not confirm a booth — call flagged as uncertain.",
@@ -3580,6 +3637,32 @@
           "urbanRural": "Located in the Mira Loma / Jurupa Valley industrial cluster of the Inland Empire — the densest warehouse fabric in the US; Urban.",
           "truckGateCount": "Estimated 2 truck entrances (one per long-face yard); not all positively confirmed.",
           "dockDoorCount": "~360 doors estimated across both faces of this ~700m-long building; approximate."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.homedepot.com/job/6961510/warehouse-associate-mira-loma-ca/",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active HD warehouse-associate role at 11650 Venture Drive, Mira Loma CA."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+              "date": "2026-06",
+              "type": "DC list",
+              "claim": "SDC DCs 5556/5557/5558/5559/5645 at 11650 Venture Drive, Mira Loma CA 91752."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Multi-building SDC complex at 11650 Venture Dr (Jurupa Valley/Mira Loma, Inland Empire); DC list + live company hiring; no closure found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3709,28 +3792,6 @@
         },
         "dossierExcerpt": "The roster coordinate (32.158137, -81.203756) landed dead-center on a colossal\nsingle distribution building — the Crossroads SDC. Web research confirms 125\nCrossroads Pkwy is Home Depot's 1.4-million-sq-ft Crossroads Distribution\nCenter, opened 1995 and acquired by Home Depot on January 29, 2025 for\n$145.5M from the Savannah Economic Development Authority. It operates 24/5 and\ndraws thousands of import containers from the Port of Savannah. The locked\ncenter is the building centroid.",
         "mapsUrl": "https://www.google.com/maps/@32.15820,-81.20380,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/20-savannah-ga-sdc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 32.1582,
-              "lng": -81.2038
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/20-savannah-ga-sdc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 32.1582,
-              "lng": -81.2038
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Confirmed: Street View (2025-11) shows a metal swing-gate / barrier with a central island and bollards across the access road; the truck yards are fully fenced (perimeter fence visible in multiple satellite views).",
           "guardShack": "No standalone guard booth positively resolved. The roadway barrier in the woods has no booth; the NW truck-yard entrance has a maintenance canopy and a round storage tank, not a clear guard booth. Flagged uncertain.",
@@ -3744,6 +3805,32 @@
           "dropYard": "Dedicated trailer / container storage rows on both dock-yard faces, fed by Port of Savannah import flow.",
           "dockDoorCount": "~200 doors estimated across both long faces of the 1.4M sq ft building; approximate.",
           "entryLanes": "Single access drive serving as both entry and exit; lane counts estimated."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.homedepot.com/news/company/home-depot-strengthens-savannah-presence-distribution-center-purchase",
+              "date": "2025-01",
+              "type": "press",
+              "claim": "Home Depot acquired its 1.4M sq ft Savannah DC (leased since 1995) plus 100+ acres on 2025-01-29; ~250 associates, currently operating."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+              "date": "2026-06",
+              "type": "DC list",
+              "claim": "SDC DCs 5150/5155/5157 at 125 Crossroads Pkwy and DC 5160 at 309 Little Hearst Pkwy, Savannah GA 31407."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Import/stocking DC at 125 Crossroads Pkwy near the Port of Savannah; HD's own 2025 newsroom confirms current operation and now ownership.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3883,28 +3970,6 @@
         },
         "dossierExcerpt": "The roster geocode flagged a 9,866 m move, so the location needed careful\nverification. Web search (Manta, BusinessYab, opengovny) all confirm \"The Home\nDepot Distribution Center: SDC, 280 Maranto Manor Dr, Winchester, VA 22602\"\nwith navigation coordinates 39.0800035, -78.1529453 — a near-exact match to the\nroster lat/lng. Satellite probing at z15-z17 confirmed a single very large\ncross-dock distribution building on the forested southern edge of Winchester,\nconsistent with an SDC. A Walmart retail store and one other building sit to\nthe NE; the HD DC is a standalone parcel reached by a dedicated truck access\nroad. Location locked.",
         "mapsUrl": "https://www.google.com/maps/@39.080075,-78.153229,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/21-winchester-va-sdc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.080075,
-              "lng": -78.153229
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/21-winchester-va-sdc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.080075,
-              "lng": -78.153229
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Guarded checkpoint where the dedicated truck access road meets the truck yard at the SE corner; canopy structures span the inbound/outbound lanes with a striped channelizing median and painted directional arrows.",
           "guardShack": "Small booth-footprint structure with canopy spanning the lanes at the gate checkpoint (~39.0801,-78.1506), set beside the truck lanes — distinct from the main DC building.",
@@ -3919,6 +3984,32 @@
           "siteAreaAcres": "Estimated from the developed/paved-and-fenced footprint (building + both truck courts + trailer lots); the forested parcel envelope is larger.",
           "preGateStaging": "Paved apron / access-road width outside the gate where a truck can wait; a truck was observed staged on the access road in Street View.",
           "postGateStaging": "Paved yard area inside the gate before the dock aprons."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+              "date": "2026-06",
+              "type": "DC list",
+              "claim": "SDC DCs 5362/5364/5365/5366 at 280 Maranto Manor Drive, Winchester VA 22602."
+            },
+            {
+              "tier": 1,
+              "url": "https://careers.homedepot.com/job/6961473/warehouse-associate-onsite/",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Live Home Depot Winchester VA warehouse/distribution associate posting."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Winchester SDC complex (DC 5362/64/65/66) at Maranto Manor Dr - distinct from the RDC at 480 Park Center Dr; coords map to the SDC; live HD careers; no closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4039,28 +4130,6 @@
         },
         "dossierExcerpt": "Web search (chamberofcommerce, BusinessYab, Manta, Waze) confirms \"Home Depot\nDistribution Center, 61 Station Rd / 61 Cranbury Station Road, Cranbury, NJ\n08512,\" a General Warehousing & Storage operation running 24 hours on weekdays\n(Dun & Bradstreet lists ~400 employees). Satellite probing at the roster\ncoordinate showed a single very large cross-dock distribution building inside\nthe Cranbury / Exit 8A logistics corridor along the NJ Turnpike. Location\nlocked at the roster lat/lng (geocode move was only 1,434 m).",
         "mapsUrl": "https://www.google.com/maps/@40.307257,-74.498028,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/22-cranbury-nj-sdc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.307257,
-              "lng": -74.498028
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/22-cranbury-nj-sdc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.307257,
-              "lng": -74.498028
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Guarded checkpoint on the truck driveway ~150m in from Cranbury Station Road (~40.3063,-74.5001): a guard booth in a center median island with barrier arms extending across the inbound and outbound lanes — clear controlled entrance.",
           "guardShack": "Small booth with a distinctive pyramidal roof set in the median island between the two truck lanes, beside the barrier arms. Distinct from the DC building.",
@@ -4075,6 +4144,32 @@
           "siteAreaAcres": "Estimated from the fenced/developed footprint (building + both truck courts + drop lots); landscaped buffer parcel is somewhat larger.",
           "preGateStaging": "Paved driveway width outside the gate where a truck can hold; modest stacking room.",
           "postGateStaging": "Paved yard inside the gate before the dock aprons."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+              "date": "2026-06",
+              "type": "DC list",
+              "claim": "SDC 5965/5966 at 61 Cranbury Station Rd and SDC 5960 at 66 Cranbury Station Rd, Cranbury NJ 08512."
+            },
+            {
+              "tier": 1,
+              "url": "https://careers.homedepot.com/job/6961526/warehouse-associate-cranbury-nj/",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Live Home Depot Cranbury NJ warehouse associate posting."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Cranbury SDCs at 61/66 Cranbury Station Rd match the coords; live HD careers posting; no negative signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4195,28 +4290,6 @@
         },
         "dossierExcerpt": "Web search (Manta, LoopNet, Showcase, Prologis leasing flyer) confirms 7301\nSecurity Way as a distribution facility in the Prologis Jersey Village\nindustrial park — a state-of-the-art building with a spacious truck court,\n67 numbered dock-high doors with mechanical pit levelers, 4 semi-dock doors,\n1 drive-in ramp, and 28' clear height, on a 44.74-acre lot. The roster geocode\nwas ROOFTOP precision (only 57 m move). Satellite probing confirmed the roster\npin sits on the southern (brown-roof) portion of the large N-S building on the\nwest side of the Prologis park; a \"PROLOGIS Jersey Village\" monument sign is\nvisible in Street View. Location locked.",
         "mapsUrl": "https://www.google.com/maps/@29.87742,-95.557076,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/23-jersey-village-tx-sdc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 29.87742,
-              "lng": -95.557076
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/23-jersey-village-tx-sdc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 29.87742,
-              "lng": -95.557076
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "The truck dock court is fully enclosed by a black metal perimeter fence; a cantilever/rolling gate spans the truck driveway at the SE entrance (~29.8766,-95.5565). Confirmed in 2025 Street View — controlled truck entrance.",
           "guardShack": "No guard booth anywhere along the fenced perimeter — Street View shows only the automated rolling gate, no staffed structure.",
@@ -4231,6 +4304,32 @@
           "siteAreaAcres": "44.74-acre lot per the Prologis/leasing listing for 7301 Security Way; building footprint ~296,839 sq ft.",
           "postGateStaging": "Paved truck court inside the gate before the dock doors provides holding room.",
           "multipleFacilities": "The HD SDC occupies one building (7301 Security Way, 'Prologis Jersey Village 4'); neighboring large warehouses in the same Prologis park are separate facilities/tenants."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+              "date": "2026-06",
+              "type": "DC list",
+              "claim": "SDC 5501 (and MDO 5822) at 7301 Security Way, Jersey Village TX 77040."
+            },
+            {
+              "tier": 1,
+              "url": "https://careers.homedepot.com/job/8496696/warehouse-associate-jersey-village-tx/",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "June 2026 Warehouse Associate posting, Jersey Village TX, operated by Temco Logistics within HD's distribution network."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "HD SDC 5501 at 7301 Security Way; June-2026 HD careers posting confirms active operation run by Temco Logistics (3PL).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4354,28 +4453,6 @@
         },
         "dossierExcerpt": "Web search (Loc8NearMe, Manta, Superpages, Foursquare) confirms the Home Depot\nDistribution Center at 18300 S Harlan Rd, Lathrop, CA 95330 — Foursquare\nexplicitly tags it \"Home Depot SDC 5363,\" matching the roster DC number. The\nroster geocode was ROOFTOP precision (1,553 m move). Satellite probing showed\nthe roster pin sits squarely on a very large cross-dock distribution building\nin the Lathrop / I-5 logistics corridor. Location locked. (Note: one directory\nmislabels it an \"Import Distribution Center\"; DC #5363 is HD's SDC.)",
         "mapsUrl": "https://www.google.com/maps/@37.792762,-121.295676,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/24-lathrop-ca-sdc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 37.792762,
-              "lng": -121.295676
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/24-lathrop-ca-sdc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 37.792762,
-              "lng": -121.295676
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "The truck court is wrapped in a chainlink perimeter fence (confirmed in 2023 Street View); truck access is via gate openings in that fence on the NE-side access road. Controlled entry but spec-building style.",
           "guardShack": "No staffed guard booth seen along any perimeter access — only an open/sliding gate in the chainlink fence. Flagged as uncertain (booth could be small/obscured), but the building reads as a modern Prologis-style spec DC without a manned gatehouse.",
@@ -4392,6 +4469,32 @@
           "siteAreaAcres": "Estimated from the building footprint plus both wrapping truck courts and trailer lots; one of HD's larger CA distribution buildings.",
           "postGateStaging": "Wide paved truck courts inside the fence provide ample post-gate holding before the dock doors.",
           "scale": "No truck scale identified in the truck path."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.homedepot.com/job/21920226/dc-production-planning-manager-lathrop-sdc-lathrop-ca/",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Live \"DC Production Planning Manager - Lathrop SDC\" posting (HD names the SDC directly)."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.commercialsearch.com/news/centerpoint-sells-central-valley-asset-for-85m/",
+              "date": "2025-03",
+              "type": "CRE trade press",
+              "claim": "935,120 SF Lathrop facility, sole tenant Home Depot DC since 2007, sold to investor for $85M (HD remains tenant)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Lathrop SDC 5363 at 18300 Harlan Rd; HD careers names the SDC; HD sole tenant since 2007, building sold 2025 but HD stays - leased.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4512,28 +4615,6 @@
         },
         "dossierExcerpt": "Web search (CMac, Dun & Bradstreet, Manta, hoursofoperation) confirms the Home\nDepot Distribution Center at 1070 Windham Parkway, Romeoville, IL 60446 — DC\n#5061, a General Warehousing & Storage operation. The roster geocode was\nROOFTOP precision (only 43 m move). Satellite probing confirmed the roster pin\nsits on a large cross-dock distribution building in the Romeoville / I-55\nlogistics corridor. Location locked.",
         "mapsUrl": "https://www.google.com/maps/@41.663229,-88.112651,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/25-romeoville-il-sdc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.663229,
-              "lng": -88.112651
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/25-romeoville-il-sdc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.663229,
-              "lng": -88.112651
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "A guarded checkpoint at the SW corner (~41.6633,-88.1130): the truck driveway curves in from the access road and passes a guard booth with barrier-arm gates and a chainlink fence corner. Confirmed in 2022 Street View — controlled truck entrance.",
           "guardShack": "Small white guard booth with windows on multiple sides, ~1-vehicle footprint, set beside the truck gate lanes. Clearly visible in Street View — distinct from the DC building.",
@@ -4548,6 +4629,32 @@
           "siteAreaAcres": "Estimated from the building footprint plus the W truck court / drop yard and the S office parking; building is one of the larger DCs in the corridor.",
           "postGateStaging": "Paved truck court inside the gate before the dock doors provides holding room.",
           "railServed": "No rail spur enters the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://www.spscommerce.com/community/articles/home-depots-dc-list",
+              "date": "2026-06",
+              "type": "DC list",
+              "claim": "SDC 5061 at 1070 Windham Pkwy, Romeoville IL 60446."
+            },
+            {
+              "tier": 2,
+              "url": "https://fclbuilders.com/projects/home-depot-sdc/",
+              "date": "2024",
+              "type": "GC project page",
+              "claim": "Home Depot SDC build project in the Romeoville/Chicago area."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Romeoville SDC 5061 at 1070 Windham Pkwy; on the DC list with live HD DC roles; the only \"closing\" hit was Sam's Club, not HD.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4677,28 +4784,6 @@
         },
         "dossierExcerpt": "The supplied roster coordinates (ROOFTOP geocode, moved only 221 m) landed\ndirectly on a large white-roofed distribution building in a greenfield\nindustrial park east of Baytown, off FM 1405 near the SH-99 Grand Parkway.\nSatellite at zoom 17-20 confirms a single very large rectangular DC with\nloading docks on both long faces and dense trailer parking — consistent with\nan HD Stocking Distribution Center serving the Houston port-adjacent import\nflow. A 2023 Street View pass on the perimeter road shows the building still\nfinishing construction at that time; current Maxar imagery shows it fully\noperational with trailers in the yard. Location is positively identified.",
         "mapsUrl": "https://www.google.com/maps/@29.732166,-94.917884,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/26-baytown-sdc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 29.732166,
-              "lng": -94.917884
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/26-baytown-sdc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 29.732166,
-              "lng": -94.917884
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Single internal access road off FM 1405 funnels truck traffic to a controlled property entrance at the SE of the building; perimeter fencing rings the truck yard.",
           "guardShack": "No clearly resolvable staffed booth at the entrance in current imagery; treated as kiosk/app check-in (remoteGs true). Low-confidence call — modern HD DC, security typically gate-controlled.",
@@ -4707,6 +4792,32 @@
           "shipRcvSeparate": "Two distinct dock banks on opposite building faces (NW and SE).",
           "urbanRural": "Edge-of-town greenfield industrial park east of Baytown, surrounded by farmland — Rural per rubric.",
           "fastLaneOpportunity": "Wide gate apron and generous internal paved width; room to add an express lane."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.homedepot.com/job/6961502/warehouse-associate-baytown-tx/",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active 2026 HD warehouse-associate posting for the Baytown TX supply-chain facility."
+            },
+            {
+              "tier": 2,
+              "url": "https://cca.baytownchamber.com/the-home-depot-baytown-sdc-_5005962_3_1_5105977_memberprofile2.aspx",
+              "date": "2025",
+              "type": "chamber profile",
+              "claim": "The Home Depot - Baytown SDC, 6115 FM 1405, DC #5565."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "HD SDC 5565 at 6115 FM 1405 confirmed by active 2026 careers + chamber profile; no closure/WARN for Baytown.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4830,28 +4941,6 @@
         },
         "dossierExcerpt": "The supplied roster coordinate carried a large geocode error (ROOFTOP flag but\nmoved 8,852 m — the geocoder snapped to the wrong rooftop). Stepping out to\nzoom 14 over the Locust Grove / McDonough logistics corridor and walking in,\nthe HD Direct Fulfillment Center resolves to a very large distribution\nbuilding at roughly 33.3705, -84.1845, alongside a second large DC, fronting\nHwy 155 South in the Gardner Logistics Park area of Henry County. HD opened\nits first e-commerce DFC here in 2014-2016 (~1.6M+ sq ft across the campus per\nHD press / Henry Herald coverage). Zoom 16-18 imagery shows the building with\nextensive trailer fields and HD-spec trailers (white bodies, teal/green\nroofs). Location positively identified; coordinates re-derived from imagery.",
         "mapsUrl": "https://www.google.com/maps/@33.37055,-84.18450,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/27-locust-grove-dfc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.37055,
-              "lng": -84.1845
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/27-locust-grove-dfc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.37055,
-              "lng": -84.1845
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Controlled entrances off the perimeter road into a fenced truck court; the campus is fully enclosed with truck circulation wrapping the buildings.",
           "guardShack": "No staffed booth positively resolved at the entry in current imagery; classified as remote kiosk/app check-in. Lower-confidence call.",
@@ -4861,6 +4950,32 @@
           "shipRcvSeparate": "Distinct dock clusters on opposing faces of the main building.",
           "urbanRural": "Locust Grove / Henry County logistics corridor — edge-of-town industrial amid woods and farmland; Rural per rubric.",
           "fastLaneOpportunity": "Wide gate aprons and generous internal paved width support an express bypass."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://ir.homedepot.com/news-releases/2014/02-10-2014-014522120",
+              "date": "2014-02-10",
+              "type": "press",
+              "claim": "Home Depot opened its first Direct Fulfillment Center in Locust Grove GA, first of three DFCs."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.areadevelopment.com/newsitems/2-10-2014/the-home-depot-new-direct-fulfillment-center-locust-grove-georgia289232.shtml",
+              "date": "2014-02-10",
+              "type": "trade press",
+              "claim": "DFC in Locust Grove GA (Atlanta suburb) supporting HomeDepot.com."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "HD's own IR release documents this flagship DFC; no closure/relocation found (Mexico MO DC and TN HD Supply closures are unrelated).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4990,28 +5105,6 @@
         },
         "dossierExcerpt": "The supplied roster coordinate (ROOFTOP geocode, moved 1,199 m) landed on the\nNW corner of a large dark-roofed distribution building in the Perris Logistics\nCenter area off Redlands Ave, immediately west of the City of Perris\nwastewater-treatment ponds (the grid of green/teal squares). HD opened an\n859,000 sq ft Direct Fulfillment Center here to serve West Coast e-commerce\n(390 skylights, \"zero landfill\" green building per HD press / Construction\nDive). IDI Logistics developed the surrounding Perris Logistics Center North\nat Redlands & Ellis. Zoom 17-19 imagery confirms a single very large DC with\na long dock bank and trailer staging on its west side. Location positively\nidentified.",
         "mapsUrl": "https://www.google.com/maps/@33.85820,-117.21520,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/28-perris-dfc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.8582,
-              "lng": -117.2152
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/28-perris-dfc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.8582,
-              "lng": -117.2152
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Single controlled truck entrance off the perimeter road at the building's NW; fenced truck court wraps the dock side. Office and car parking sit at the NW corner.",
           "guardShack": "No staffed booth positively resolved; 2018 Street View predates construction and 2025 imagery shows the entrance landscaped but no clear booth. Classified as remote kiosk/app check-in. Lower-confidence call.",
@@ -5020,6 +5113,32 @@
           "shipRcvSeparate": "Docks concentrated on a single (west) building face — shipping and receiving not on physically separate banks.",
           "urbanRural": "Perris is within the Inland Empire metro fabric; dense residential subdivisions border the site to the east — Urban.",
           "fastLaneOpportunity": "Wide gate apron and generous paved width support adding an express lane."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.homedepot.com/news/company/california-direct-fulfilmment-center-opens-support-online-business",
+              "date": "2014-10-02",
+              "type": "press",
+              "claim": "859,000 sq ft Home Depot Direct Fulfillment Center opened in Perris CA, second of three DFCs."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.constructiondive.com/news/home-depot-opens-giant-fulfillment-center-in-california/317697/",
+              "date": "2014",
+              "type": "trade press",
+              "claim": "~850,000 sq ft HD fulfillment center at 350 W Markham St, Perris, serving West Coast online, with BNSF rail."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "HD corporate newsroom confirms the Perris DFC (350 W Markham St); large rail-served e-commerce building; no closure found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -5150,28 +5269,6 @@
         },
         "dossierExcerpt": "The supplied roster coordinate (ROOFTOP geocode, moved 3,079 m) landed\ndirectly on a single very large distribution building set in open farmland\nnear Luckey, in Wood County south of Toledo, alongside Pemberville Rd. Zoom\n15-18 imagery confirms one massive rectangular DC ringed by stormwater\nretention ponds, with dock banks and trailers on both long faces and a large\ntrailer-storage field at the NW end — consistent with an HD e-commerce Direct\nFulfillment Center. A small power-substation-like facility sits just south of\nthe site. Location positively identified.",
         "mapsUrl": "https://www.google.com/maps/@41.48068,-83.46420,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/29-luckey-dfc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.48068,
-              "lng": -83.4642
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/29-luckey-dfc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.48068,
-              "lng": -83.4642
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Single access drive from Pemberville Rd runs through farmland to a controlled entrance at the building's SW; the truck court is ringed by perimeter fencing.",
           "guardShack": "No staffed booth positively resolved at the entrance; classified as remote kiosk/app check-in. Lower-confidence call.",
@@ -5181,6 +5278,32 @@
           "urbanRural": "Single massive DC isolated in open farmland near Luckey, surrounded by retention ponds — Rural.",
           "connectivityIssue": "Isolated rural setting far from any town center; cellular coverage may be marginal. Medium-confidence inference.",
           "fastLaneOpportunity": "Generous internal paved width and a wide approach drive support an express lane."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://www.woodcountyedc.com/home-depot-warehouse/",
+              "date": "2015",
+              "type": "econ-dev",
+              "claim": "1.6M sq ft Home Depot DC, Troy Township off Pemberville Rd, 157 acres, 700+ jobs, developed by Seefried Properties + Home Depot."
+            },
+            {
+              "tier": 1,
+              "url": "https://corporate.homedepot.com/document/4273",
+              "date": "2024",
+              "type": "company DC reference",
+              "claim": "Home Depot supply-chain reference listing including the Wood County OH (Luckey/Pemberville Rd) fulfillment facility."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Wood County EDC confirms the 1.6M sq ft HD DFC at Pemberville Rd (coords match Luckey/Troy Township); Seefried build-to-suit (leased); no closure found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -5309,28 +5432,6 @@
         },
         "dossierExcerpt": "The supplied roster coordinate (39.301709, -76.509079) was a GEOMETRIC_CENTER\ngeocode moved 3,972 m — effectively a Baltimore city-area centroid that did\nNOT point at the building; it landed on industrial/steel-yard land north of\nthe actual site.\n\n7700 Rolling Mill Road is inside Tradepoint Atlantic — the 3,300-acre\nlogistics redevelopment of the former Bethlehem Steel mill on the Sparrows\nPoint peninsula in southeastern Baltimore County. Home Depot completed a\n3-building, ~1.5 million sq ft distribution campus there in 2020-2021\n(Baltimore Sun, HD IR release Aug 2021). One of the three is HD's FDC at 6311\nTradepoint Ave (the separate roster idx 2). The Bulk Distribution Center\n#5904 is another building of that HD cluster.\n\nCoordinates were re-located by imagery to a large HD-area distribution",
         "mapsUrl": "https://www.google.com/maps/@39.21970,-76.47730,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/the-home-depot/30-baltimore-bdc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.2197,
-              "lng": -76.4773
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/the-home-depot/30-baltimore-bdc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.2197,
-              "lng": -76.4773
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "locationResolution": "Address 7700 Rolling Mill Road is inside the Tradepoint Atlantic logistics campus (former Bethlehem Steel, Sparrows Point). The supplied roster coordinate was a city-centroid GEOMETRIC_CENTER geocode moved 3,972 m and did NOT point at the building. HD built a 3-building, ~1.5M sq ft campus at Tradepoint (one is the FDC at 6311 Tradepoint Ave = idx 2). Coordinates were re-located to a large HD-area DC at 39.2197,-76.4773 with HD-spec (green-topped) trailers in its dock apron. Because 30+ tenants occupy near-identical large DCs across the 3,300-acre Tradepoint site and interior Street View has no coverage/signage, the BDC-specific building could not be definitively isolated from the FDC and a third HD building — confidence is medium.",
           "truckGate": "Tradepoint DCs are fenced with controlled truck entrances off the internal road grid; specific gate for this building inferred, not directly resolved.",
@@ -5339,6 +5440,32 @@
           "dockDoors": "Large DC with a long dock apron full of trailers along the east face; estimated 50+ but the audited building may not be the exact BDC.",
           "urbanRural": "Tradepoint Atlantic sits within the Baltimore metro on the Sparrows Point peninsula — Urban.",
           "railServed": "Tradepoint Atlantic is heavily rail-served campus-wide; no spur confirmed running into this specific building's footprint, set false pending confirmation."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://ir.homedepot.com/news-releases/2021/08-10-2021-130106598",
+              "date": "2021-08-10",
+              "type": "press",
+              "claim": "Home Depot opened a 1.5M sq ft, 3-building DC campus at Sparrows Point/Tradepoint Atlantic Baltimore, including a flatbed/bulk delivery center; ~500 jobs."
+            },
+            {
+              "tier": 1,
+              "url": "https://corporate.homedepot.com/news/company/supply-chain-expansion-brings-faster-delivery-baltimore-region",
+              "date": "2021-08-10",
+              "type": "press",
+              "claim": "HD campus at 6311 Tradepoint Ave with flatbed (bulk/oversized) center, appliance center, and online fulfillment center."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "HD's own IR + newsroom confirm a bulk/flatbed delivery center within the 2021 Sparrows Point campus at 6311 Tradepoint Ave; Tradepoint Atlantic is a build-to-lease park (leased); no closure found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       }
     ]
