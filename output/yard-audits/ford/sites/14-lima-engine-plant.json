@@ -87,5 +87,24 @@
     "multipleFacilities": "False - a single large interconnected plant building (multi-roof but one structure); buildingCount 1.",
     "urbanRural": "The plant is on the semi-rural northeast edge of Lima, surrounded by farmland and woodland - Rural."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://corporate.ford.com/operations/locations/global-plants/lima-engine-plant/",
+        "date": "2026-01",
+        "type": "locator",
+        "claim": "Ford lists Lima Engine Plant as active Ford-operated, producing EcoBoost/V8 engines"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Ford Jan-2026 locator lists Lima as active and Ford-operated; no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

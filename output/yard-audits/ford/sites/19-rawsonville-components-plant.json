@@ -90,5 +90,31 @@
     "entryLanes": "Single-lane chain-link gates; lane count low-confidence from overhead.",
     "railServed": "No rail spur visible entering the property; web research did not indicate rail service."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://corporate.ford.com/articles/electrification/ford-commits-to-manufacturing-batteries/",
+        "date": "2021-05",
+        "type": "press",
+        "claim": "Rawsonville Plant is a Ford battery-pack assembly facility for Ford EV manufacturing"
+      },
+      {
+        "tier": 2,
+        "url": "https://annarborusa.org/news/ford-announces-160m-ypsilanti-township-investment-supports-development-of-electric-vehicles-of-the-future/",
+        "date": "2022-06",
+        "type": "press",
+        "claim": "Ford $160M investment at its Ypsilanti Township Rawsonville Plant for battery-pack assembly"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Spun to Visteon (2000)/ACH then absorbed BACK into Ford; currently Ford-owned, active battery-pack production with recent reinvestment.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

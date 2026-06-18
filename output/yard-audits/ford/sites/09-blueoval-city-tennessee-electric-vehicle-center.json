@@ -96,5 +96,31 @@
     "connectivityIssue": "Rural location but a major industrial campus with substantial built infrastructure and a new electrical substation - cellular coverage likely provisioned; set false but flagged as inferred.",
     "scale": "No truck scale clearly identified; left uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://tennesseelookout.com/2025/12/16/ford-scraps-plans-for-electric-pickup-at-blueoval-city-turns-to-gas-powered-truck-models/",
+        "date": "2025-12",
+        "type": "press",
+        "claim": "Ford scrapped planned EV pickup at BlueOval City; site to become Tennessee Truck Plant, production ~2028-2029"
+      },
+      {
+        "tier": 2,
+        "url": "https://tennesseelookout.com/2024/08/22/production-at-fords-west-tenn-plant-delayed-to-2027-in-attempt-to-improve-profitability/",
+        "date": "2024-08",
+        "type": "press",
+        "claim": "Production at the West TN plant delayed; not yet producing"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "REJECTED: greenfield site NOT in production as of 2026; EV-truck plan scrapped, first output now ~2028-2029. Current-ops audit excludes future/under-construction.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

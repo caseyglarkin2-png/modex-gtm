@@ -97,5 +97,31 @@
     "multipleFacilities": "False - a single large interconnected plant building (multi-roof but one structure) plus a detached SE office; buildingCount 2.",
     "urbanRural": "Sterling Heights is a dense Detroit-metro suburb; the plant is surrounded by continuous suburban/industrial development - Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://media.ford.com/content/fordmedia/fna/us/en/multimedia/album/manufacturing/van-dyke-electric-powertrain-center/",
+        "date": "2021-05",
+        "type": "press",
+        "claim": "Ford media for Van Dyke Electric Powertrain Center, confirming Ford operation of the Sterling Heights plant"
+      },
+      {
+        "tier": 2,
+        "url": "https://fordauthority.com/2021/05/ford-renames-van-dyke-transmission-plant-to-van-dyke-electric-powertrain-center/",
+        "date": "2021-05",
+        "type": "press",
+        "claim": "Ford renamed Van Dyke Transmission to Electric Powertrain Center after $150M EV retooling"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Ford-owned Sterling Heights powertrain plant (Van Dyke), active after EV retooling; no sale/closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -91,5 +91,31 @@
     "multipleFacilities": "True - the plant property includes multiple large interconnected building masses plus detached office/support buildings and a test-track oval; buildingCount 3 (main plant + detached support/office buildings).",
     "urbanRural": "Livonia is a dense Detroit-metro industrial suburb; the plant is hemmed by continuous industrial development - Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://corporate.ford.com/operations/locations/global-plants/",
+        "date": "2026-01",
+        "type": "locator",
+        "claim": "Ford lists Livonia Transmission Plant among active global manufacturing plants"
+      },
+      {
+        "tier": 2,
+        "url": "https://fordauthority.com/fmc/ford-motor-company-plants-facilities/ford-motor-company-usa-plants-facilities/ford-motor-company-livonia-transmission-plant-livonia-michigan-usa/",
+        "date": "2026-01",
+        "type": "press",
+        "claim": "Ford-operated Livonia builds 10R80/8F35 transmissions, ~3,057 employees Jan 2026"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Ford-owned, active transmission production (~3,057 employees Jan 2026); no closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

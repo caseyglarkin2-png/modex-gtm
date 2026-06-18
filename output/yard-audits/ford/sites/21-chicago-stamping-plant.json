@@ -110,5 +110,31 @@
     "urbanRural": "Site sits within the dense south-suburban Chicago industrial fabric (Chicago Heights / Ford Heights), bordered by other plants, a salvage yard and residential blocks - Urban.",
     "multiStep": "No clearly visible second checkpoint after the gate; left false."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.chicago.gov/dam/city/depts/dcd/banners/newsiteimages/fordfactsht.pdf",
+        "date": "2019-01",
+        "type": "press",
+        "claim": "Ford Chicago Heights Stamping Plant stamps sheet metal for Chicago/KC/St. Paul; ~900 employees"
+      },
+      {
+        "tier": 2,
+        "url": "https://fordauthority.com/category/facilities/assembly-facilities/chicago-stamping-plant/",
+        "date": "2024-01",
+        "type": "press",
+        "claim": "Chicago Stamping Plant continues stamping Explorer, Transit, Super Duty, Aviator parts"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Ford-owned stamping plant in Chicago Heights (distinct from Chicago Assembly); current production, 2025 hiring activity.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

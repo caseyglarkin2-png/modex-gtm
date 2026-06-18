@@ -153,5 +153,24 @@
     "scale": "No clear truck scale identified in imagery; left false.",
     "exitLanes": "Single combined entry/exit gate group; outbound lane count inferred."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://corporate.ford.com/operations/locations/global-plants/chicago-assembly-plant/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Ford lists Chicago Assembly Plant producing Explorer, Police Interceptor Utility, Lincoln Aviator"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Explorer + Aviator assembly; no 2026 idle/retooling announcement found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

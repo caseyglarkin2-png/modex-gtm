@@ -159,5 +159,24 @@
     "urbanRural": "Dense Livonia industrial/commercial corridor on Middlebelt Rd between major roads -> Urban.",
     "fastLaneOpportunity": "Wide paved yard and multiple driveway aprons leave room for an express lane."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://business.livoniawestland.org/list/member/ford-national-parts-distribution-center-1231",
+        "date": "2024-01",
+        "type": "locator",
+        "claim": "Ford National Parts Distribution Center listed as active member in Livonia (FCSD logistics)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "PROBABLE: Ford Customer Service Division National Parts Distribution Center, Livonia (11871 Middlebelt Rd); only Tier-3 listings available (Ford publishes no public PDC locator), no Tier-2 negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

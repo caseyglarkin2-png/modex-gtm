@@ -88,5 +88,31 @@
     "perimeter": "Box approximates the engine plant building footprint (~31 acres) within the larger Rouge campus.",
     "urbanRural": "Dense Detroit/Dearborn metro industrial fabric - Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.marklines.com/en/news/322969",
+        "date": "2025-03",
+        "type": "press",
+        "claim": "Dearborn Engine Plant staffing up (~300 added) for added engine production"
+      },
+      {
+        "tier": 2,
+        "url": "https://fordauthority.com/fmc/ford-motor-company-plants-facilities/ford-motor-company-usa-plants-facilities/ford-motor-company-dearborn-engine-plant-dearborn-michigan-usa/",
+        "date": "2025-06",
+        "type": "press",
+        "claim": "Dearborn Engine Plant active Ford engine facility (2.0L engines)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Ford-operated engine plant running and adding staff in 2025; no closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

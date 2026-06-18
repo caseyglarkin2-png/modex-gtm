@@ -97,5 +97,31 @@
     "multipleFacilities": "False - a single large interconnected plant building (multi-roof but one structure); buildingCount 1.",
     "urbanRural": "Sterling Heights is a dense Detroit-metro suburb; the plant is hemmed by continuous suburban/industrial development - Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://corporate.ford.com/operations/locations/global-plants/sterling-axle-plant/",
+        "date": "2026-01",
+        "type": "locator",
+        "claim": "Ford lists Sterling Axle Plant (Sterling Heights MI) as a current Ford plant producing axles/rear drive units"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.senatormichaelwebber.com/sen-webber-welcomes-50-new-jobs-at-fords-sterling-axle/",
+        "date": "2024-07",
+        "type": "press",
+        "claim": "Ford ~$3B Super Duty investment adds 50 jobs at Ford Sterling Axle; active under Ford (not AAM)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Ford itself operates the Sterling Heights axle plant (active 2026, ~2,360 employees); NOT American Axle.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

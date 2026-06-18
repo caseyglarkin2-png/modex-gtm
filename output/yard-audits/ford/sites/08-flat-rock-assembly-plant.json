@@ -158,5 +158,24 @@
     "urbanRural": "Edge-of-town Flat Rock with farmland and open land adjacent to the campus - per rubric, when torn between small-town industrial and Urban, choose Rural.",
     "scale": "No truck scale clearly identified; left uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://fordauthority.com/fmc/ford/ford-mustang/2026-ford-mustang/",
+        "date": "2025-12",
+        "type": "press",
+        "claim": "2026 Ford Mustang (S650) assembled at Flat Rock Assembly"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Ford-operated Mustang assembly, actively producing 2026 Mustang through 2028 MY.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

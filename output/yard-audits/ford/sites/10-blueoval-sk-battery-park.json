@@ -98,5 +98,31 @@
     "fastLaneOpportunity": "True (low confidence) - the megasite has vast unused paved/graded width around the entrance, ample physical room for express/bypass lanes.",
     "geofence": "perimeter box covers the developed/fenced plant complex core (~740 acres); the broader Glendale Megasite parcel is larger (~1,500+ acres). Sub-zones are best-effort estimates from construction-era imagery."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.electrive.com/2025/08/20/blueoval-sk-opens-battery-cell-plant-in-kentucky/",
+        "date": "2025-08",
+        "type": "press",
+        "claim": "BlueOval SK (Ford + SK On JV) began production at KY battery cell plant Aug 2025"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.wdrb.com/news/business/ford-ends-sk-on-partnership-takes-full-control-of-kentucky-battery-plant-amid-ev-downturn/article_31999428-a218-4ca9-a25c-5d366c3a6b21.html",
+        "date": "2025-12",
+        "type": "press",
+        "claim": "Dec 2025: Ford and SK On dissolve BlueOval SK JV; KY-2 never started; ~1,600 layoffs; repurposing to grid energy-storage; separation ~Q1 2026"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "REJECTED: built/operated as the BlueOval SK Ford+SK On JV (JV-operated sites excluded); compounded by Dec 2025 JV dissolution, KY-2 not started, and repurposing to non-automotive energy-storage.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

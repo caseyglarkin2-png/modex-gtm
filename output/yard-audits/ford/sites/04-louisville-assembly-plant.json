@@ -160,5 +160,31 @@
     "urbanRural": "Inside the dense Louisville metro fabric, hemmed by the international airport, interstate, and industrial corridor - Urban.",
     "scale": "No truck scale clearly identified; left uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.wdrb.com/news/business/fords-louisville-assembly-plant-to-close-for-up-to-10-months-for-remodeling-project/article_79bd712f-56bf-49ae-988b-1c2a768cf13e.html",
+        "date": "2025",
+        "type": "press",
+        "claim": "Plant to close 8-10 months for retooling; about 2,300 production workers laid off"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.detroitnews.com/story/business/autos/ford/2026/03/19/ford-universal-electric-vehicle-midsize-truck-escape-crossovers-maverick/89069159007/",
+        "date": "2026-03",
+        "type": "press",
+        "claim": "Ford drops Escape; Louisville idled and pivoting to Universal EV Platform midsize truck (~2027 production)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "REJECTED: last Escape/Corsair built end of 2025; plant currently idled for ~$2B EV retooling (production ~2027). Not in production 2026 (current-ops audit).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -161,5 +161,31 @@
     "fastLaneOpportunity": "Wide private access road and large paved yard aprons leave clear room for an express lane.",
     "trailerParkingCapacity": "Capacity is a high-confidence-range overhead estimate from the dense trailer rows."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.macraesbluebook.com/search/company.cfm?company=1422514",
+        "date": "2024-01",
+        "type": "locator",
+        "claim": "Ford Parts Redistribution Center, 25555 Pennsylvania Rd, Brownstown Charter Twp MI"
+      },
+      {
+        "tier": 3,
+        "url": "https://oliverhatcher.com/markets/ford-motor-company-detroit-hvc-bbc-building-no-9-build-out/",
+        "date": "2023-01",
+        "type": "press",
+        "claim": "Ford redistribution warehouse build-out: 300,000+ SF, 13 dock-door mods for dealer parts distribution"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "PROBABLE: Ford parts/redistribution logistics center on Pennsylvania Rd, Brownstown Twp; Tier-3 only, no negative. NOTE: a nearby battery plant is GM, not Ford; this address is the parts center as classified.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

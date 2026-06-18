@@ -106,5 +106,31 @@
     "multipleFacilities": "Multiple large connected and separate buildings forming an integrated assembly campus.",
     "scale": "No truck scale clearly identified; left uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://corporate.ford.com/operations/locations/global-plants/kentucky-truck-plant/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Ford lists Kentucky Truck Plant producing Super Duty, Expedition, Lincoln Navigator"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.businesswire.com/news/home/20251023640434/en",
+        "date": "2025-10",
+        "type": "press",
+        "claim": "Ford 2026 capacity expansion for Super Duty at KTP"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Operating at full capacity, 2026 capacity expansion announced; no closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -106,5 +106,31 @@
     "entryLanes": "Estimated 2 in / 2 out from gate-apron width; not precisely countable from imagery.",
     "urbanRural": "Sharonville is inside the Cincinnati metro industrial fabric — Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.wardsauto.com/ford/ford-to-invest-in-sharonville-transmission-plant",
+        "date": "2019-09",
+        "type": "press",
+        "claim": "Ford awarded Sharonville $900M to run current product and introduce 10R80/10R100 transmissions"
+      },
+      {
+        "tier": 2,
+        "url": "https://finance.yahoo.com/news/union-ford-widens-sharonville-factory-183303639.html",
+        "date": "2023-10",
+        "type": "press",
+        "claim": "Oct 2023 layoffs explicitly temporary (UAW strike), confirming Ford operation"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Ford-owned Super Duty transmission plant; 2023 layoffs temporary strike-related, no closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

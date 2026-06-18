@@ -160,5 +160,24 @@
     "fastLaneOpportunity": "Wide truck yards and multiple driveway aprons leave room for an express lane.",
     "siteAreaAcres": "~449k sq ft building on a ~28-acre parcel (overhead estimate from the perimeter box)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.yelp.com/biz/ford-parts-distribution-center-rancho-cucamonga",
+        "date": "2026-03",
+        "type": "locator",
+        "claim": "Ford Parts Distribution Center, 8449 Milliken Ave, Rancho Cucamonga CA (listing updated Mar 2026)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "PROBABLE: Ford FCSD Parts Distribution Center / Ontario HVC, Rancho Cucamonga (8449 Milliken Ave); Tier-3 only (no public Ford PDC locator), no Tier-2 negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

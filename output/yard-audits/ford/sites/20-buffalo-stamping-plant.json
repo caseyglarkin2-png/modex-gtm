@@ -92,5 +92,31 @@
     "fastLaneOpportunity": "Large open paved frontage between Route 5 and the building leaves ample room for additional lanes.",
     "entryLanes": "Lane count not resolvable from highway-distance Street View."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://dec.ny.gov/news/environmental-notice-bulletin/2025-03-19/town-of-hamburg-ford-motor-buffalo-stamping-plant",
+        "date": "2025-03",
+        "type": "press",
+        "claim": "Active NYSDEC environmental permit action for the operating Ford Motor Buffalo Stamping Plant, Town of Hamburg (Mar 2025)"
+      },
+      {
+        "tier": 2,
+        "url": "https://buffalonews.com/news/local/business/ford-pledges-80m-investment-in-hamburg-plant/article_f2da9048-7738-11ee-9e52-43e81160f58e.html",
+        "date": "2023-10",
+        "type": "press",
+        "claim": "Ford pledged $80M investment in Hamburg stamping plant under UAW deal"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Ford-operated stamping plant; Mar-2025 NYSDEC notice + 2023 UAW reinvestment confirm current operation.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

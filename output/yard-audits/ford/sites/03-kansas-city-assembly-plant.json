@@ -158,5 +158,24 @@
     "dockDoorCount": "Overhead estimate; dock doors distributed across multiple building faces.",
     "scale": "No truck scale clearly identified; left uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://corporate.ford.com/operations/locations/global-plants/kansas-city-assembly-plant/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Ford lists Kansas City Assembly Plant (Claycomo) producing F-150 and Transit"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Dedicated F-150 + Transit plant, UAW Local 249; no closure/divestiture.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

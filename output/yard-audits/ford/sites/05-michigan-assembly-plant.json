@@ -116,5 +116,24 @@
     "urbanRural": "Inside the dense Detroit metro fabric in Wayne MI, surrounded by residential subdivisions and commercial corridors along Michigan Ave - Urban.",
     "scale": "No truck scale clearly identified; left uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://corporate.ford.com/operations/locations/global-plants/michigan-assembly-plant/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Ford lists Michigan Assembly Plant (Wayne) producing Bronco and Ranger"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Bronco + Ranger assembly (~5,886 employees Jan 2026); no closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

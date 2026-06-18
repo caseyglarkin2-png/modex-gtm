@@ -158,5 +158,31 @@
     "connectivityIssue": "Site is on the edge of a small town with farmland adjacent but within the Cleveland metro reach - cellular coverage likely adequate; false but flagged as inferred.",
     "scale": "No truck scale clearly identified; left uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://corporate.ford.com/operations/locations/global-plants/ohio-assembly-plant/",
+        "date": "2026-01",
+        "type": "locator",
+        "claim": "Ford lists Ohio Assembly Plant (Avon Lake) as active Ford manufacturing facility"
+      },
+      {
+        "tier": 2,
+        "url": "https://fordauthority.com/2024/11/heres-every-plant-that-will-produce-the-ford-f-series-in-2026/",
+        "date": "2024-11",
+        "type": "press",
+        "claim": "Produces F-650/750, Super Duty chassis cab, E-Series through 2026; $1.5B commercial EV added 2026"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Ford commercial-truck assembly, expanding (not closing).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

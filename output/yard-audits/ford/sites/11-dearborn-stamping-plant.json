@@ -105,5 +105,24 @@
     "perimeter": "Box approximates the DSP building footprint within the larger Rouge campus; the Rouge campus perimeter is far larger but the stamping plant occupies this ~35-acre sub-footprint.",
     "urbanRural": "Dense Detroit/Dearborn metro industrial fabric - clearly Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://pickuptrucktalk.com/2025/10/ford-truck-production-boosted-in-response-to-supplier-fire-disruption-1000-jobs-added/",
+        "date": "2025-10",
+        "type": "press",
+        "claim": "Ford adding employees at Dearborn Stamping Plant (Rouge) for increased F-150 production"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Ford stamping plant in the Rouge complex, staffing up late 2025.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
