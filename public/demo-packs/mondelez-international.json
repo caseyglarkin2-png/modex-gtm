@@ -280,6 +280,32 @@
           "multipleFacilities": "Three distinct buildings on the property: the main ~1M sq ft bakery, a connected north wing, and a separate brown-roof building at the south.",
           "scale": "No truck scale clearly visible in overhead imagery; left low-confidence.",
           "exitLanes": "Single shared in/out gate; outbound lane count not separately determinable."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.globenewswire.com/news-release/2023/10/14/2760233/0/en/Mondel%C4%93z-International-Celebrates-50th-Anniversary-of-Iconic-Richmond-Biscuit-Manufacturing-Plant.html",
+              "date": "2023-10-14",
+              "type": "press",
+              "claim": "Mondelez PR celebrates 50th anniversary of operating the Richmond Biscuit Manufacturing Plant on Laburnum Ave (650 employees; Oreo/Ritz/Nilla/Chips Ahoy/Wheat Thins)"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.vedp.org/press-release/2021-11/mondelez-international-inc-henrico-county",
+              "date": "2021-11",
+              "type": "econ-dev",
+              "claim": "Virginia econ-dev release: $122.5M expansion of Richmond Biscuit Bakery, new high-speed OREO line, Henrico County"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Dated Mondelez self-PR (Oct 2023) plus state econ-dev expansion confirm Mondelez owns and operates the Laburnum Ave bakery; no closure/sale found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -518,6 +544,25 @@
           "scale": "No truck scale clearly identified; left low-confidence.",
           "multiStep": "Single gate stage observed; no clear second checkpoint - left false.",
           "buildingCount": "Plant is a connected multi-section complex; counted as effectively 2 main masses but it is one continuous facility."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://hourlyjobs-us.mondelezinternational.com/production-associate-weekday-weekend/job/R-148444",
+              "date": "2026-04-02",
+              "type": "careers",
+              "claim": "Active Mondelez production-associate req at 7300 South Kedzie Ave, Chicago IL 60629, posted 2026-04-02"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Reduced post-2016 (lines moved to Salinas) but STILL operating: active Mondelez careers req at 7300 S Kedzie dated 2026; Yelp 'CLOSED' entry is a separate retail/brands listing, not the bakery.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -748,6 +793,32 @@
           "railServed": "Rail siding runs to flour silos on the south building face off the adjacent main-line corridor (z19 imagery at 45.5798,-122.664 and 45.5805,-122.666) - the plant is rail-served for ingredients.",
           "multipleFacilities": "Multiple connected/adjacent building masses: the main bakery, the SE dock building, and ancillary structures.",
           "scale": "No truck scale clearly identified; left low-confidence."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://hourlyjobs-us.mondelezinternational.com/search-jobs/Portland%2C%20OR/",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Mondelez 'Portland Bakery' production/maintenance/QA reqs (100 NE Columbia Blvd), current hiring"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.opb.org/article/2022/02/07/mondelez-workers-at-portlands-nabisco-plant-say-theyre-forced-to-work-overtime-with-little-notice-or-face-penalties/",
+              "date": "2022-02-07",
+              "type": "press",
+              "claim": "Mondelez operating the Nabisco bakery on NE Columbia Blvd making Oreo/Ritz/Chips Ahoy"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "The 'closed 2023' premise is FALSE (conflated with Fair Lawn NJ and Atlanta GA closures); Portland is a retained core US biscuit bakery with active 2025-2026 careers reqs and no WARN/closure source.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -984,6 +1055,25 @@
           "multipleFacilities": "Multiple buildings on the campus: the main bakery, a separate trailer-dock building to the N, and ancillary/utility structures.",
           "scale": "No truck scale clearly identified; left low-confidence.",
           "exitLanes": "Single shared in/out gate; outbound lane count not separately determinable."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.mondelezinternational.com/united-states/",
+              "date": "2025",
+              "type": "locator",
+              "claim": "Mondelez US operations page lists the Naperville IL facility (Mondelez Global LLC, 1555 W Ogden Ave), Triscuit production"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Sole NA Triscuit plant; Mondelez Global LLC operates 1555 W Ogden Ave; no closure/sale/divestiture found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1212,6 +1302,32 @@
           "multipleFacilities": "One main bakery building (~209,000 sq ft after expansion). Neighboring buildings (a Concentra clinic, an adjacent warehouse) are separate parcels, not part of the Clif Bar campus.",
           "scale": "No truck scale identified; left low-confidence.",
           "exitLanes": "Open driveway; outbound lane count not separately determinable."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.glassdoor.com/job-listing/clif-bar-production-team-member-mondel%C4%93z-international-JV_KO0,31_KE32,54.htm?jl=1009819397275",
+              "date": "2025",
+              "type": "careers",
+              "claim": "Active Mondelez Clif Bar Production Team Member req at the Indianapolis bakery, 7575 Georgetown Rd"
+            },
+            {
+              "tier": 1,
+              "url": "https://indychamber.com/member-directory/clif-bar-baking-company-of-indianapolis/",
+              "date": "2025",
+              "type": "locator",
+              "claim": "Clif Bar Baking Co. of Indianapolis, LLC listed at 7575 Georgetown Rd, Indianapolis IN 46268 (Mondelez division)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Mondelez careers reqs at 7575 Georgetown Rd; the only Indiana Mondelez closure was the separate Enjoy Life Foods plant in Jeffersonville (different brand/city), not this Clif Bar plant.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1401,6 +1517,25 @@
           "dropArea": "A few trailers parked along the north apron without tractors; small count, band 0-10.",
           "drivewayShort": "Gate-to-dock approach holds only 1-2 trucks; loading apron is immediately inside the entrance.",
           "buildingCount": "Main bakery building plus a small attached/adjacent office annex on the NE corner."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://en.wikipedia.org/wiki/Tate's_Bake_Shop",
+              "date": "2023-12",
+              "type": "press",
+              "claim": "After the Dec 2023 Shirley move, the 40,000 sq ft East Moriches factory 'remained in use' producing the brand's cookies for national distribution (cites LIBN 2023-12-05)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "East Moriches was NOT consolidated into Shirley; the original 40k sq ft factory remained in use after the Dec 2023 Shirley distribution move and is described as actively producing as of Jan 2026; no closure/WARN negative. (Strongest live signal is Tier-3 Yelp; Tier-1 anchor is the LIBN-sourced 'remained in use' statement.)",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1603,6 +1738,32 @@
           "postGateStaging": "Large paved yard apron inside the property before the dock faces functions as a holding/queue area.",
           "urbanRural": "Edge-of-metro location: industrial park amid woods and farmland south of the airport, bordered by rural residential. Judged Rural per the small-town/edge-of-town rule.",
           "yardMetrics": "Imagery is recent and clear; trailer and dock counts are honest overhead estimates and may vary."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://kencogroup.com/news/mondelez-international-celebrates-grand-opening-of-new-regional-supply-chain-distribution-center-in-virginia/",
+              "date": "2022-12-06",
+              "type": "press",
+              "claim": "Kenco's own press: Sandston VA facility operated by Kenco Logistics for Mondelez"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.bakingbusiness.com/articles/57959-new-mondelez-distribution-hub-opens-in-virginia",
+              "date": "2022-12",
+              "type": "press",
+              "claim": "Mondelez regional DC in Sandston VA, Kenco-operated, $122.5M Henrico investment"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Kenco corporate press plus building owner both name Mondelez at the Sandston/S Airport Dr build-to-suit DC operated by Kenco 3PL; closure gauntlet clean. (Strongest Tier-1 is Dec 2022, just outside 24mo, but it is the operating arrangement.)",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1829,6 +1990,32 @@
           "postGateStaging": "Open paved yard inside the property before the docks functions as a holding/queue area.",
           "urbanRural": "Facility sits on a rural two-lane road (Neelytown Rd) surrounded by woods and grass on the edge of Montgomery; clearly Rural.",
           "truckGateCount": "Two distinct driveway entrances observed."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://arcodb.com/news/recently-completed-mondelez-distribution-facility-montgomery-ny/",
+              "date": "2019-12",
+              "type": "press",
+              "claim": "ARCO completed a 100,300 SF Mondelez distribution facility in Montgomery NY"
+            },
+            {
+              "tier": 3,
+              "url": "https://www.indeed.com/cmp/Mondel%C4%93z-International-49d8c823/locations/NY",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Mondelez self-lists an active Montgomery NY facility location (corroborating only)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FLAG: Mondelez built/opened this ~100k SF DC (2019) and still self-lists Montgomery with no closure/WARN/relocation found, but the only Tier-1 is >24mo and there is a 272-vs-525 Neelytown address ambiguity (Mondelez vs UNFI next door).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -2034,6 +2221,25 @@
           "shipRcvSeparate": "Dock doors observed only on the NE face; no second distinct dock bank, so shipRcvSeparate false - flagged uncertain.",
           "urbanRural": "Facility sits in the dense Norcross / Atlanta-metro industrial corridor along Brook Hollow Parkway, surrounded by large warehouses - Urban.",
           "postGateStaging": "Front lot and NE truck court provide some inside-property holding space before the docks."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.mondelezinternational.com/careers/jobs/job/index.html?jobid=r-133916&jobtitle=warehouse+associate",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Mondelez careers Warehouse Associate req at 6300 Brook Hollow Parkway, Norcross GA 30071"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Mondelez/Nabisco self-attests active warehouse ops at the exact address via 2026 careers reqs; the only closure found is the unrelated 1400 Murphy Ave Atlanta plant (2021).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -2261,6 +2467,32 @@
           "urbanRural": "Facility is in a dense Aurora/Denver-metro industrial park (Stapleton/Northfield area), surrounded by large warehouses - Urban.",
           "postGateStaging": "Open east truck court inside the property functions as a holding/queue area before the docks.",
           "truckGateCount": "Two driveway entrances to the east truck court observed."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://hourlyjobs-us.mondelezinternational.com/driver-cdl-warehouse-associate/job/R-102634",
+              "date": "2026-02",
+              "type": "careers",
+              "claim": "Active Mondelez req (R-102634, posted 2026-02-19) at exactly 17689 East 30th Ave, Aurora, CO 80011"
+            },
+            {
+              "tier": 1,
+              "url": "https://hourlyjobs-us.mondelezinternational.com/warehouse-associate/job/R-143906",
+              "date": "2026-05",
+              "type": "careers",
+              "claim": "Active Mondelez Warehouse Associate req (R-143906) at the Aurora, CO 80011 facility"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Two active Mondelez careers reqs (Feb/May 2026) name the exact address; closure gauntlet surfaced only a 2021 strike (confirms operation).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -2452,6 +2684,32 @@
           "drivewayLong": "Internal loop road from the park network to the dock can hold a 3+ truck queue.",
           "urbanRural": "Edge-of-town isolated industrial site surrounded by farmland and open scrub; Rural.",
           "imagery": "Street View at the property dates to 2012 (pre-construction empty land) so gate determination relies on current satellite (Maxar 2026), which is clear."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://hourlyjobs-us.mondelezinternational.com/clif-bar-packaging-operator/job/R-163232",
+              "date": "2026-04-02",
+              "type": "careers",
+              "claim": "Mondelez Clif Bar Packaging Operator req at the Twin Falls bakery posted 2026-04-02"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.mondelezinternational.com/careers/jobs/job/index.html?jobid=r-167913&jobtitle=hse+specialist",
+              "date": "2026",
+              "type": "careers",
+              "claim": "Active HSE Specialist req at Clif Bar Twin Falls, Idaho (one of ~12 live Mondelez Twin Falls reqs)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Numerous active Mondelez Clif Bar careers reqs at the Twin Falls bakery through 2026; no closure or divestiture negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -2666,6 +2924,25 @@
           "urbanRural": "Edge-of-town logistics park off the LIE, bordered by woods with single-family residential beyond; judged Rural per the small-town-industrial tie-break rule.",
           "drivewayLong": "Loop road plus deep truck court can hold a 3+ truck queue.",
           "buildingCount": "One large warehouse on this parcel; the cleared land to the NE is the (un-built) second building of the Precision Innovation Park master plan, not part of the Tate's parcel."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://en.wikipedia.org/wiki/Tate's_Bake_Shop",
+              "date": "2023-12",
+              "type": "press",
+              "claim": "In Dec 2023 Mondelez moved Tate's into a newly constructed warehouse and distribution development in Shirley (cites LIBN, Winzelberg 2023-12-05)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Mondelez/Tate's occupies the new Shirley warehouse/distribution facility (Precision Innovation Park, 111 Precision Dr) since Dec 2023; framed as a developer-built development Tate's expanded into (leased); no negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -2786,6 +3063,32 @@
           "railServed": "TRUE — extensive rail yard with many curving spurs woven through the entire property serving the grain elevators; a railroad-crossing marking is painted on Front St. River barge dock also present.",
           "multipleFacilities": "TRUE — the site is a campus of multiple distinct structures: the milling building, separate grain-elevator silo banks, warehouse/loadout buildings, and the office.",
           "urbanRural": "Urban — dense East Toledo industrial/residential fabric on the Maumee riverfront."
+        },
+        "verification": {
+          "verdict": "rejected",
+          "operator": "3PL",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://www.foodbusinessnews.net/articles/29295-mennel-milling-completes-acquisition-of-mondelez-flour-mill",
+              "date": "2025-11",
+              "type": "press",
+              "claim": "Mennel Milling completed acquisition of Mondelez's Toledo flour mill (closed Nov 3, 2025); Mennel now owns and operates it"
+            },
+            {
+              "tier": 2,
+              "url": "https://www.toledoblade.com/business/agriculture/2025/11/05/mennel-acquires-toledo-flour-mill-from-mondelez-international/stories/20251105107",
+              "date": "2025-11-05",
+              "type": "press",
+              "claim": "Mennel acquires Toledo flour mill from Mondelez International; rebranded Mennel Milling Toledo"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "REJECTED: mill sold to and now operated by Mennel Milling (closed Nov 2025); Mennel only toll-supplies flour to Mondelez, so the operator is no longer Mondelez. Different operator.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -3015,6 +3318,32 @@
           "drivewayLong": "Deep truck yard / loop road can hold a 3+ truck queue.",
           "urbanRural": "Edge-of-town build-to-suit industrial park bordered by other warehouses and single-family residential; judged Rural per the small-town-industrial tie-break.",
           "buildingCount": "One warehouse on the Mondelez parcel; neighboring buildings in the Becknell park are separate tenants."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://hourlyjobs-us.mondelezinternational.com/warehouse-associate/job/28975576",
+              "date": "2026-01",
+              "type": "careers",
+              "claim": "Mondelez official careers: Warehouse Associate req at 120 Commerce Lane, Tatamy PA 18085"
+            },
+            {
+              "tier": 1,
+              "url": "https://becknellindustrial.com/images/uploads/property_files/Becknell_-_Kraft+Mondelez_-_Long-Term_Relationship.pdf",
+              "date": "2016",
+              "type": "press",
+              "claim": "Becknell build-to-suit ~100,300 sq ft DC in Tatamy PA leased to Mondelez"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Mondelez-branded careers reqs at the exact 120 Commerce Lane address (Jan 2026) plus Becknell build-to-suit/lease corroboration; no Tatamy closure/WARN found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -3249,6 +3578,32 @@
           "buildingCount": "Two — the main ~533k sq ft warehouse plus a separate smaller building at the SW of the parcel.",
           "fastLaneOpportunity": "TRUE — a vast paved yard and wide gate apron leave abundant room for express/bypass lanes.",
           "urbanRural": "Edge-of-Aurora industrial area bordered by retention ponds, light industrial, and open land; judged Rural per the small-town-industrial tie-break."
+        },
+        "verification": {
+          "verdict": "rejected",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://www.showcase.com/2380-sullivan-rd-aurora-il-60506/30754125/",
+              "date": "2025",
+              "type": "real-estate",
+              "claim": "530,937 SF distribution center at 2380 Sullivan Rd marketed available, coming available July 2025; 88 dock doors (former Mondelez/DHL cold-chain DC)"
+            },
+            {
+              "tier": 2,
+              "url": "https://www.linklogistics.com/industrial-properties/il/aurora/2380-sullivan-rd-aurora-il-60506-00100/",
+              "date": "2025",
+              "type": "real-estate",
+              "claim": "Landlord Link Logistics lists the 533,232 SF building on its industrial-properties site with leasing reps assigned"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "REJECTED: the exact-address building is on the market for lease (available July 2025) by the landlord, indicating DHL/Mondelez vacated or wound down ops; surviving 'DHL Mondelez' aggregator pages are stale Tier-3.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -3489,6 +3844,32 @@
           "fastLaneOpportunity": "Wide internal aprons and abundant paved width seen in satellite.",
           "dockDoorCount": "90 is an overhead estimate across multiple building faces; bands clearly land in 50+.",
           "scale": "No truck scale positively identified in available imagery; left false."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.glassdoor.com/Job/east-hanover-mondelez-jobs-SRCH_IL.0,12_IC1126743_KO13,21.htm",
+              "date": "2026-03",
+              "type": "careers",
+              "claim": "47 active Mondelez reqs in East Hanover NJ (incl. supply chain manager, product development engineer) as of Mar 2026"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.mondelezinternational.com/united-states/",
+              "date": "2026",
+              "type": "locator",
+              "claim": "Mondelez lists East Hanover NJ as its North America headquarters / Nabisco home base"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active NA HQ plus Nabisco bakery/DC campus; current careers reqs and food-manufacturer classification confirm operations; no closure/sale (the 2021 NJ closure was Fair Lawn, a separate site). Freight-relevant.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -3608,6 +3989,32 @@
           "dockDoors": "No loading-dock bank. Classified NONE; dockDoorCount set to 1 as a conservative allowance for a single small service/materials door typical of an R&D building - flagged uncertain.",
           "drivewayShort": "Short office-park entrance drive only.",
           "urbanRural": "Suburban Morris County office/commercial corridor on Route 10 with dense surrounding residential and retail - classified Urban."
+        },
+        "verification": {
+          "verdict": "rejected",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://ir.mondelezinternational.com/news-releases/news-release-details/mondelez-international-opens-doors-new-global-rd-innovation",
+              "date": "2023-05",
+              "type": "press",
+              "claim": "Mondelez self-attests Whippany is a $50M Global R&D Innovation Center (former Cadbury lab) with pilot/scale-up lines only"
+            },
+            {
+              "tier": 1,
+              "url": "https://re-nj.com/mondelez-unveils-new-50-million-rd-center-at-150000-sq-ft-whippany-building/",
+              "date": "2023",
+              "type": "real-estate",
+              "claim": "150,000 SF repurposed R&D building; pilot lines, not a production/distribution plant"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "REJECTED: currently Mondelez-operated but an R&D/innovation center with pilot lines only, no production-scale dock/trailer yard. Non-freight R&D = no yard to audit per rubric.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -3724,6 +4131,32 @@
           "backupSensitive": "Set true: any delivery truck must stop curbside on a dense downtown street, which interrupts traffic - there is zero off-street stacking room.",
           "entryLanes": "null - no truck gate exists.",
           "urbanRural": "Dense urban core (Fulton Market, Chicago) - unambiguously Urban."
+        },
+        "verification": {
+          "verdict": "rejected",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://rejournals.com/mondelez-international-leaving-the-suburbs-headed-to-chicagos-fulton-market/",
+              "date": "2019",
+              "type": "real-estate",
+              "claim": "Mondelez signed a 15-year lease for ~77,100 SF of office across the 5-story 905 W Fulton Market building as its global HQ"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.mondelezinternational.com/contact-us/",
+              "date": "2026",
+              "type": "locator",
+              "claim": "Mondelez lists 905 W Fulton Market, Chicago as global headquarters (corporate office)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "REJECTED: currently Mondelez-operated global HQ, but a leased 5-story downtown office with no yard/dock/trailers. Non-freight corporate office per rubric.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -3862,6 +4295,25 @@
           "railServed": "A rail line runs E-W immediately along the SOUTH edge of the building, but it reads as a through-line with no spur or rail dock into the property - classified false, flagged uncertain.",
           "drivewayShort": "Short entrance drive from Distribution Dr into the yard - only 1-2 truck depth before the apron.",
           "urbanRural": "Dense SE Memphis industrial park, surrounded by warehouses and metro fabric - Urban."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://hourlyjobs-us.mondelezinternational.com/driver-cdl-warehouse-associate/job/R-161123",
+              "date": "2026-06-03",
+              "type": "careers",
+              "claim": "Active Mondelez Driver CDL/Warehouse Associate req at '5812 Distribution Dr., Memphis, TN 38141', posted 2026-06-03"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active dated Mondelez warehouse careers req at the exact address (Jun 2026) plus assessor-reported Mondelez Global LLC ownership; closure gauntlet returned only an unrelated GXO closure at 5295 Logistics Dr.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -4089,6 +4541,32 @@
           "drop": "Large drop yard along the north side with rows of parked trailers (no tractors); dropArea 50+.",
           "urbanRural": "AllianceTexas is an edge-of-metro master-planned logistics park surrounded by open land, the speedway, and FM-156 — graded Rural per the rubric tie-breaker (large speculative-industrial park, not dense metro fabric).",
           "geofences": "Perimeter captures the building plus the north truck/drop yard and south car-parking apron: ~367 m N-S x ~588 m E-W = ~53 acres. truckGate box is the SE fenced-court entrance."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.dnb.com/business-directory/company-profiles.mondelez_global_llc.3b537d750d217ce46bfbaa743c009071.html",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Mondelez Global LLC business profile at '16200 Three Wide Dr Ste 172, Fort Worth, TX 76177-2219'"
+            },
+            {
+              "tier": 1,
+              "url": "https://property.compstak.com/16200-Three-Wide-Drive-Fort-Worth/p/852504",
+              "date": "2026-06",
+              "type": "real-estate",
+              "claim": "Multi-tenant Speedway Distribution Center Bldg C names current tenants City Electric Supply, IPS, and Mondelez International; the for-lease listing covers the other ~166k SF, not Mondelez's leased space"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FLAG (borderline): Mondelez is a named current tenant (Ste 172) in a partially-vacant multi-tenant building; the for-lease/sale listing is the OTHER tenants' vacancy, so Mondelez has not left = INCLUDE (leased). Evidence is CRE-comp/aggregator (no self-attested careers req here) - recommend human spot-check.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -4316,6 +4794,32 @@
           "urbanRural": "Deep inside NW Houston's dense industrial fabric beside Beltway 8 / US-290 interchange — Urban.",
           "shipRcvSeparate": "Single dock cluster on the north face — ship/receive not physically separate.",
           "geofences": "Perimeter captures the geocoded building and its north truck-yard share: ~200 m N-S x ~160 m E-W ≈ 7.9 acres. The truck yard is shared with the neighboring building's tenants."
+        },
+        "verification": {
+          "verdict": "rejected",
+          "operator": "3PL",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://www.tdlr.texas.gov/TABS/Search/Print/TABS2024005770",
+              "date": "2024-05-24",
+              "type": "real-estate",
+              "claim": "TDLR permit at 6903 W Sam Houston Pkwy N: $2.2M interior office remodel for tenant 'TGC Sushi' (Tokyo Gardens Company), owner '6903 W GOLEE GROUP LLC' - a different occupant, no Mondelez"
+            },
+            {
+              "tier": 2,
+              "url": "https://www.lanefinder.com/c/tgc_logistics/3343220",
+              "date": "2024",
+              "type": "real-estate",
+              "claim": "TGC Logistics (Tokyo Gardens Co.) registered as the trucking carrier at 6903 W Sam Houston Pkwy N, 77041 - current freight operator at the address is not Mondelez"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "REJECTED: current occupant is Tokyo Gardens Company (TGC Sushi / TGC Logistics) per a 2024 TDLR buildout permit and FMCSA registration; building sold to GOLEE GROUP LLC; only Mondelez signals are undated aggregator stubs - Mondelez has left.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -4543,6 +5047,32 @@
           "rail": "A rail line runs E-W along the building's NORTH property line, but it serves the building to the north and does NOT spur into the 5815 Clark St property — railServed = false.",
           "urbanRural": "Ontario / Inland Empire is one of the densest warehouse-industrial submarkets in the US — clearly Urban.",
           "geofences": "Perimeter captures the building plus the screened south truck court and the west dock court: ~173 m N-S x ~217 m E-W ≈ 9.3 acres. truckGate box is the south-side screened-court entrance off the public street."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 3,
+              "url": "https://www.yelp.com/biz/nabisco-ontario",
+              "date": "2026-03",
+              "type": "locator",
+              "claim": "Nabisco listing at 5815 Clark St, Ontario CA 91761 shown as updated March 2026 (recency corroboration only)"
+            },
+            {
+              "tier": 3,
+              "url": "https://www.ziprecruiter.com/Jobs/Mondelez/--in-Ontario",
+              "date": "2026-05",
+              "type": "careers",
+              "claim": "Current (May 2026) Mondelez Ontario CA job openings; aggregator, address not pinned to 5815 Clark (corroborating only)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FLAG: multiple aggregators (DnB, chamber, Yelp 'updated Mar 2026') place an active ~51-70-employee Mondelez/Nabisco DC at the exact address with current Ontario job postings and no closure/WARN signal, but there is no clean Tier-1 self-attested locator or address-pinned careers req.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       }
     ]
