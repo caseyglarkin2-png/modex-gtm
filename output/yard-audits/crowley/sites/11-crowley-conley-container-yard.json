@@ -152,5 +152,18 @@
     "buildingCount": "Two small structures: a metal office building and an adjacent office trailer/equipment shed; no large warehouse.",
     "confidence": "Medium — facility is unambiguously Crowley's Conley container yard within Transport City, gate and yard layout clearly visible in 2025 Street View and Maxar satellite, but exact parcel boundary between Crowley's yard and neighboring IOS tenants is approximate, and lane counts are inferred from a single-drive gate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      { "tier": 1, "url": "https://www.crowley.com/locations/", "date": "2026-06", "type": "locator", "claim": "Crowley's official locations page lists a Georgia 'Conley (Atlanta area)' Container Yard at 4252 Transport City Drive, Conley GA 30288." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Crowley's own locator lists the Conley/Atlanta container yard on Transport City Drive today; no closure/sale found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -163,5 +163,19 @@
     "railServed": "No rail spur entering the terminal property.",
     "multipleFacilities": "Campus: ConRo pier, multiple warehouse and maintenance buildings, large open container/chassis yard."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      { "tier": 1, "url": "https://www.crowley.com/port-terminals/", "date": "2026-06", "type": "locator", "claim": "Crowley locator lists San Juan / Front Isla Grande Airport, San Juan PR 00907 as an active Caribbean port terminal." },
+      { "tier": 1, "url": "https://conro.crowley.com/news/crowley-adds-greater-velocity-to-puerto-rico-supply-chain-new-lng-powered-conro-ship", "date": "2025-04", "type": "press", "claim": "Crowley's LNG ConRo ship El Coqui delivered first cargo to the modernized Isla Grande Terminal in San Juan; Crowley has served PR from the 85-acre Isla Grande terminal since 1954." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Flagship Crowley PR gateway, actively operating with new gantry cranes/pier and LNG ConRo service; no exit signals.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

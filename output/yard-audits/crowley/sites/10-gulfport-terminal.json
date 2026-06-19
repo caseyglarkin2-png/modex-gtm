@@ -153,5 +153,19 @@
     "scale": "No truck scale clearly identified; flagged uncertain.",
     "entryLanes": "Approximately 2 in / 2 out — estimate, flagged uncertain (gate not directly imaged in Street View)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      { "tier": 1, "url": "https://www.crowley.com/port-terminals/", "date": "2026-06", "type": "locator", "claim": "Crowley locator lists the Gulfport terminal at 692 30th Avenue, Gulfport MS 39501 as an active U.S. Mainland terminal." },
+      { "tier": 1, "url": "https://www.crowley.com/lp/mexico-gulf-service/", "date": "2025-05", "type": "press", "claim": "Crowley's Mexico Gulf Express weekly container/reefer service runs through the Port of Gulfport (first new weekly container service there in 25 years)." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Crowley actively runs the Mexico Gulf Express container/reefer line through Gulfport (launched May 2025); MS Port Authority owns land, Crowley operates its service there.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

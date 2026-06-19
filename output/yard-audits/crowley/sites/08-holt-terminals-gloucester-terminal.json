@@ -136,5 +136,19 @@
     "entryLanes": "Approximately 2 in / 2 out at the gate, cone-managed — counts are estimates, flagged uncertain.",
     "scale": "No truck scale clearly identified; flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://www.holtlogistics.com/facilities/gloucester-marine-terminal/", "date": "2026-06", "type": "operator-site", "claim": "Gloucester Marine Terminal at 160 Essex St, Gloucester City NJ is operated by Holt Logistics / Gloucester Terminals LLC (a Holt entity)." },
+      { "tier": 1, "url": "https://www.crowley.com/port-terminals/", "date": "2026-06", "type": "operator-site", "claim": "Crowley lists the 160 Essex St address as 'Holt Terminals' - a port of call, not a Crowley-operated yard." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Different operator: Holt Logistics (Gloucester Terminals LLC) runs this terminal; Crowley is a carrier calling the port, not the yard operator.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
