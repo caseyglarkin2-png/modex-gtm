@@ -558,6 +558,11 @@ async function main() {
       if (Array.isArray(a.surprisingFindings)) pack.account.surprisingFindings = a.surprisingFindings;
       if (a.roiDefaults != null) pack.account.roiDefaults = a.roiDefaults;
       if (a.teardownVideoSrc != null) pack.account.teardownVideoSrc = a.teardownVideoSrc;
+      // Phase 2/3 core-sample fields (network denominator + sample rationale).
+      if (a.networkCount != null) pack.account.networkCount = a.networkCount;
+      if (a.networkCountSource != null) pack.account.networkCountSource = a.networkCountSource;
+      if (a.networkCountAsOf != null) pack.account.networkCountAsOf = a.networkCountAsOf;
+      if (a.sampleRationale != null) pack.account.sampleRationale = a.sampleRationale;
       // coverageNote: keep the patch-global-footprints overrides (scope /
       // footprint / legacy-YMS / curated note) while letting the builder's
       // freshly-computed audited counts stand.
