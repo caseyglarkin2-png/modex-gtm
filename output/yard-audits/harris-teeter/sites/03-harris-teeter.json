@@ -112,5 +112,20 @@
     "entryLanes": "Single combined in/out truck drive observed; lane count approximate.",
     "siteAreaAcres": "Derived from the fenced perimeter polygon; approximate."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://myhtcareers.referrals.selectminds.com/page/distribution-amp-transportation-careers-59", "date": "2026-06", "type": "locator", "claim": "Harris Teeter official careers portal lists Greensboro NC as an active distribution facility with Transportation, Freezer, and General Merchandise warehouse sections." },
+      { "tier": 1, "url": "https://www.ziprecruiter.com/c/Harris-Teeter/Job/CDL-Driver-Greensboro-Distribution-Center-Full-Time/-in-Greensboro,NC", "date": "2026-06", "type": "press", "claim": "Active HT-branded Greensboro Distribution Center reqs (CDL Driver, Freezer Selector, General Merchandise Selector) current as of 2026-06 confirm HT self-operation." }
+    ],
+    "imageryDate": "2026-02",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tier-1 HT careers portal + active 2026 HT-branded Greensboro DC reqs confirm HT self-operates the frozen/grocery/perishable DC campus (200 Distribution Dr); the only closures found are unrelated HT-Delivery e-commerce sites elsewhere, not Greensboro.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  },
   "method": "deep-audit"
 }

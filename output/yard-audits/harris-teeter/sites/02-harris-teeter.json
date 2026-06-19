@@ -98,5 +98,20 @@
     "multipleFacilities": "True — two large building masses (perishable + dry grocery) plus an office/maintenance cluster on one campus.",
     "siteAreaAcres": "~53 acres from the perimeter polygon (the full shared fenced campus, since the yard is not separately fenced per building)."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.commerce.nc.gov/node/2315", "date": "2014-08", "type": "econ-dev press", "claim": "NC Commerce names Harris Teeter, LLC (a wholly-owned subsidiary of The Kroger Co.) operating/expanding the Indian Trail DC campus, which includes both a perishable and a grocery facility." },
+      { "tier": 1, "url": "https://myhtcareers.referrals.selectminds.com/page/indian-trail-distribution-center-job-opportunities-73", "date": "2026-06", "type": "locator", "claim": "Harris Teeter official careers portal maintains a dedicated Indian Trail Distribution Center page; CDL Driver req posted 2026-04 at the Indian Trail DC confirms active HT operation." }
+    ],
+    "imageryDate": "2018-11",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Same shared 6001 W Hwy 74 Indian Trail campus as site 01 (dry-grocery half); Tier-1 NC Commerce + 2026 HT careers/CDL reqs confirm HT self-operation, no Tier-2 negative against Indian Trail.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  },
   "method": "deep-audit"
 }
