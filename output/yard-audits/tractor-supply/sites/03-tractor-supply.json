@@ -95,5 +95,19 @@
     "railServed": "No rail spur enters the property; nearest rail is unrelated.",
     "streetViewMeta": "Both nearest panos are 2012-05 pre-construction frames of the then-empty pad (Google has not re-driven the internal road), but metadata status is OK within 400m, so hasCoverage=true with the real pano ids recorded."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://web.maconchamber.com/Distributors/Tractor-Supply-Co-Distribution-Center-12417", "date": "2026-03", "type": "econ-dev", "claim": "Greater Macon Chamber of Commerce lists Tractor Supply Co. Distribution Center as a current distributor member in Macon." },
+      { "tier": 1, "url": "https://www.ziprecruiter.com/Jobs/Tractor-Supply-Distribution-Center/-in-Macon,GA", "date": "2026-06", "type": "careers", "claim": "Active 2026 TSC distribution-center hiring in Macon, GA (incl. Summer 2026 DC intern) - currently staffed and operating." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Macon Chamber lists the DC as current and TSC is actively hiring DC roles in Macon in 2026; the only GA TSC WARN was Braselton (not Macon); freight DC at 151 Tractor Dr, not the separate Macon retail store.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

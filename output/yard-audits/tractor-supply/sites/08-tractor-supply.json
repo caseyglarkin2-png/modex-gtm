@@ -95,5 +95,18 @@
     "buildingCount": "Main DC plus a smaller secondary building at the NW (offices/maintenance) inside the property.",
     "entryLanes": "Divided boulevard reads as roughly 1 in / 1 out at the checkpoint; lane count approximate from overhead."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.ziprecruiter.com/c/Tractor-Supply-Company/Job/DC-Team-Member-(Evergreen)/-in-Waverly,NE", "date": "2025-01", "type": "careers", "claim": "Active Tractor Supply DC Team Member distribution-center postings in Waverly, NE (freight ops, shift differential), current as of 2025." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Operating TSC distribution center at 12851 Dovers St (DC-specific freight roles, dock/trailer parking mapped), distinct from the Waverly retail store; no closure/WARN found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

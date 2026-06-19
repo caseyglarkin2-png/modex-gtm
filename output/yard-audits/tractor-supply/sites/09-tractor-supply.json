@@ -95,5 +95,19 @@
     "urbanRural": "Edge-of-town / farmland setting on the southeast side of Navarre OH; open fields east and south.",
     "railServed": "No rail spur enters the property; a rail line runs ~well west of the site but does not serve it."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://corporate.tractorsupply.com/newsroom/news-releases/news-releases-details/2023/Tractor-Supply-Opens-New-Distribution-Center-in-Navarre-Ohio/default.aspx", "date": "2023-01-18", "type": "press", "claim": "TSC corporate: 900,000 sq ft DC on 117 acres in Navarre OH, 500 FT jobs, began receiving Dec 2022, shipping Feb 2023, serves ~250 stores." },
+      { "tier": 1, "url": "https://www.tractorsupply.careers/job/Navarre-DC-Team-Member-(Evergreen)-OH-44662/1252999600/", "date": "2025-09", "type": "careers", "claim": "Active TSC DC Team Member postings at the Navarre, OH 44662 distribution center in 2025-2026, confirming it is operating (not still under construction)." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Corporate press opened it (~2023, shipping since Feb 2023); current DC careers at 44662 confirm it is open and operating, not under construction; no closure/WARN.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

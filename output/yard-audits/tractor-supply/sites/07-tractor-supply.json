@@ -108,5 +108,19 @@
     "scale": "No truck scale clearly identified; flagged uncertain.",
     "trailersVisible": "Honest overhead estimate (~95) across both drop yards and dock positions in the captured imagery."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://business.herkimercountychamber.com/events/details/business-before-hours-tractor-supply-company-distribution-center-1101370", "date": "2024-01", "type": "econ-dev", "claim": "Herkimer County Chamber of Commerce lists the Tractor Supply Company Distribution Center at 1938 Country Mile, Frankfort NY as an operating member facility (Business Before Hours event)." },
+      { "tier": 1, "url": "https://www.tractorsupply.careers/job/Frankfort-DC-Team-Member-OH/", "date": "2026-05", "type": "careers", "claim": "Active Tractor Supply DC Team Member postings at the Frankfort, NY distribution center as of 2026." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "TSC Northeast DC (opened ~2019); current DC careers at exact address plus county chamber econ-dev listing; no closure/WARN.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

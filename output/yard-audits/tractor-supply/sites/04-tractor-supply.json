@@ -106,5 +106,19 @@
     "buildingCount": "Main DC plus a separate smaller building at the south/SE; counted 2.",
     "railServed": "No rail spur enters the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://www.tractorsupply.careers/job/Casa-Grande-Distribution-Center-Operations-Manager-(Casa-Grande,-AZ)-AZ-85193/1384422100/", "date": "2026-04", "type": "careers", "claim": "Active TSC corporate careers posting for Casa Grande Distribution Center Operations Manager, ZIP 85193 (matches DC address; retail store is 85122)." },
+      { "tier": 1, "url": "https://cca.casagrandechamber.org/tractor-supply-company-dc-111-_5005157_3_1_5007784_memberprofile2.aspx", "date": "2026-06", "type": "econ-dev", "claim": "Casa Grande Chamber of Commerce member profile lists Tractor Supply Company DC #111 as an operating local facility." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Live TSC careers DC postings (ZIP 85193) plus chamber DC #111 listing; no closure/WARN/construction signals. Street is W Peters Rd, not N Peters Rd in mapping sources.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

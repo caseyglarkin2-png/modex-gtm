@@ -114,5 +114,19 @@
     "railServed": "No rail spur enters the property.",
     "trailerParkingCapacity": "Estimated from visible drop-yard rows and open paved yard; approximate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.tractorsupply.careers/job/Pendleton-DC-HR-Intern-Pendleton,-IN-Summer-2026-IN-46064/1319693800/", "date": "2026-01", "type": "careers", "claim": "TSC corporate careers posting for a DC HR Intern at the Pendleton, IN 46064 distribution center, Summer 2026 - proves an actively staffed, currently operating TSC-run DC at this site." },
+      { "tier": 3, "url": "https://us.nextdoor.com/pages/tractor-supply-distribution-center-114-pendleton-in/", "date": "2026-02", "type": "locator", "claim": "Listed as Tractor Supply Distribution Center 114, Pendleton IN - corroborates DC #114 identity." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "TSC corporate careers shows an active 2026 DC role at this exact address (DC #114); no closure/WARN; truck-yard DC, not a store.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

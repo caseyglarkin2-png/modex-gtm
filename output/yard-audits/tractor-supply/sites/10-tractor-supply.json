@@ -107,5 +107,19 @@
     "postGateStaging": "Wide paved apron inside the gate before the dock approach provides queue/holding room.",
     "drivewayLong": "Gate-to-dock approach is long and can stack 3+ trucks."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://ir.tractorsupply.com/newsroom/news-releases/news-releases-details/2024/Tractor-Supply-Celebrates-Grand-Opening-of-Tenth-and-Largest-Distribution-Center-in-Maumelle-Arkansas/default.aspx", "date": "2024-05-14", "type": "press", "claim": "TSC grand opening of its tenth and largest distribution center (1.1M sq ft, $175M) in Maumelle, AR; began receiving April 2024 and shipping June 2024." },
+      { "tier": 1, "url": "https://business.maumellechamber.com/member-directory/Details/tractor-supply-company-maumelle-distribution-center-850-3368025", "date": "2026-06", "type": "econ-dev", "claim": "Maumelle Chamber of Commerce member directory lists 'Tractor Supply Company Maumelle Distribution Center #850' as an active local business." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tier-1 IR press confirms grand opening with shipping from June 2024; 2+ years operational now, corroborated by active chamber listing; not under construction.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

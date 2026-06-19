@@ -106,5 +106,19 @@
     "connectivityIssue": "False; sits in an active business park with adjacent office/medical development, so cellular coverage is likely adequate.",
     "siteAreaAcres": "~31 acres from the traced perimeter polygon (building + drop yard + parking + apron)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://business.wacochamber.com/directory/Details/tractor-supply-co-distribution-center-881485", "date": "2026-03", "type": "econ-dev", "claim": "Greater Waco Chamber of Commerce directory lists Tractor Supply Co. Distribution Center at 2801 Corporation Pkwy as a current member/distributor." },
+      { "tier": 1, "url": "https://www.ziprecruiter.com/co/Tractor-Supply/Jobs/-in-Waco,TX", "date": "2026-01", "type": "careers", "claim": "Active Jan 2026 TSC distribution-center hiring in Waco (DC team member, DC supervisor, DC maintenance tech) - currently staffed and operating." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Waco Chamber lists the DC as a current member and TSC is actively hiring DC roles in Waco in 2026; no closure/WARN; freight DC, not a store.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

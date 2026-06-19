@@ -114,5 +114,18 @@
     "railServed": "No rail spur enters the property.",
     "streetViewMeta": "Best ground pano on arrival is on the access road at 36.71094,-86.51195 (captured 2026-03); headings aim it toward the gate (241) and toward the property/building (198)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://www.tractorsupply.careers/job/Franklin-Distribution-Center-Team-Member-(Franklin,-KY_)-KY-42134/1348896100/", "date": "2026-05", "type": "careers", "claim": "Active TSC corporate careers posting for Franklin Distribution Center Team Member, ZIP 42134 (matches DC address)." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Official TSC careers names the Franklin Distribution Center directly, corroborated by freight directory at 100 Raines Dr; no closure/WARN/construction signals.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

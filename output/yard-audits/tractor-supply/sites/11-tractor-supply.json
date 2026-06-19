@@ -94,5 +94,18 @@
     "perimeter": "Traced to the graded development parcel, square to the orthogonal Ustick(N)/collector-road(W) grid. Exact fenced boundary not yet established on the ground.",
     "streetViewMeta": "Both panos are real Aug-2025 captures on the public roads bordering the parcel (perimeter pano on east-edge road; gate pano on Ustick near the NW roundabout/collector entrance)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://corporate.tractorsupply.com/newsroom/news-releases/news-releases-details/2025/Tractor-Supply-Breaks-Ground-on-New-Distribution-Center-in-Nampa-Idaho/default.aspx", "date": "2025-04-23", "type": "press", "claim": "TSC broke ground April 2025 on its 11th DC (865,000 sq ft, ~$225M) at 9640 Ustick Road, Nampa, ID; anticipated completion late 2026/early 2027, hiring beginning Q2 2026 - not yet operating." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Under construction as of mid-2026: groundbreaking April 2025, completion projected late 2026/early 2027, hiring only starting Q2 2026 - not operating now, fails the current-ops audit.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

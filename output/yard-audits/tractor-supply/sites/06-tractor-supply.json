@@ -112,5 +112,18 @@
     "trailersVisible": "Approximate count across all captured drop yards and dock faces.",
     "railServed": "No rail spur enters the property; I-81 borders the SE side."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://www.tractorsupply.careers/job/Hagerstown-Distribution-Center-Team-Member-MD-21740/1355851300/", "date": "2026-05", "type": "careers", "claim": "Active TSC corporate careers posting for Hagerstown Distribution Center Team Member, ZIP 21740 (matches DC address)." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Official TSC careers names the Hagerstown Distribution Center directly, corroborated by freight directory at 11935 Hopewell Rd; no closure/WARN/construction signals.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }
