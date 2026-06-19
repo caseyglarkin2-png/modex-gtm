@@ -177,6 +177,22 @@
     "dropYard": true,
     "multiStep": false
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://worldmarket.wd5.myworkdayjobs.com/en-US/cost_plus_world_market_distribution/job/CA-Stockton-3610-S-Airport-Way/Distribution-Warehouse-Associate_R-0103208-1", "date": "2026-01", "type": "careers-req", "claim": "Active World Market Workday Distribution Warehouse Associate requisitions at the Stockton DC (3610 S Airport Way / 1735 Zephyr St, same parcel APN 177-140-33), hiring as of Jan 2026 at $18.50-22.50/hr" },
+      { "tier": 1, "url": "https://kaleris.com/success_stories/cost-plus-world-market-case-study/", "date": "2024", "type": "press", "claim": "CPWM distribution network described as ~2M sq ft including the Stockton, CA warehouse with 100+ dock doors, 550 trailer positions, and a guard shack" },
+      { "tier": 2, "url": "https://www.kingswood-capital.com/kingswood-capital-management-completes-acquisition-of-cost-plus-world-market/", "date": "2021-01", "type": "press", "claim": "Kingswood Capital completed acquisition of CPWM from Bed Bath & Beyond on 2021-01-19, deal explicitly included the two distribution facilities; CPWM was independent BEFORE the BBBY 2023 bankruptcy, so the DC was not closed in it" }
+    ],
+    "imageryDate": "2024",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "CPWM-operated Stockton DC, active company careers reqs Jan 2026; survived the 2021 Kingswood divestiture and pre-dated/escaped the BBBY 2023 bankruptcy; 'CLOSED' Yelp hits are retail stores, not this DC.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  },
   "confidence": "medium",
   "uncertainFields": [
     "guardShack",
