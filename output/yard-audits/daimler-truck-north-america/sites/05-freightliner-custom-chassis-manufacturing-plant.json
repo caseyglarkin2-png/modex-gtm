@@ -160,5 +160,31 @@
     "scale": "No truck scale identified - flagged uncertain.",
     "entryLanes": "Lane count at the internal gate not clearly resolvable - flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://locations.daimlertruck.com/en/career/locations/detail/gaffney-sc-freightliner-custom-chassis-corporation",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Daimler Truck careers locator lists active FCCC facility at 552 Hyatt Street, Gaffney SC 29341, manufacturer of chassis for walk-in vans, motor homes, school/commercial buses."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.freightlinerchassis.com/about/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Official FCCC site: 'subsidiary of Daimler Trucks North America LLC'; located in Gaffney, SC, 650+ employees across manufacturing/support/retail."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "DTNA careers locator + official FCCC about page confirm DTNA currently operates the 552 Hyatt St Gaffney plant; gauntlet found no closure/sale/idle.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

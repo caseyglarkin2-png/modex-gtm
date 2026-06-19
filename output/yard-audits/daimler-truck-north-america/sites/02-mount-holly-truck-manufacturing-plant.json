@@ -163,5 +163,31 @@
     "scale": "No truck scale identified - flagged uncertain.",
     "preGateStaging": "Quarry/construction activity SE of the NE building may serve staging but is not a clear pre-gate truck apron - left false."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://locations.daimlertruck.com/en/career/locations/detail/mount-holly-nc-freightliner-lkw-werk",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "DTNA careers/locations page lists Mount Holly NC Freightliner plant at 1800 North Main Street, NC 28120 as an active medium-duty M2/SD plant."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.ttnews.com/articles/daimler-truck-layoff-nc",
+        "date": "2025-07-14",
+        "type": "press",
+        "claim": "Mount Holly facility remains operational; July 2025 layoffs are temporary, not a closure."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "DTNA's own locator confirms Mount Holly at the exact address as an active medium-duty plant; 2025 layoffs explicitly temporary, no divestiture/closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

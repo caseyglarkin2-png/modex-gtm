@@ -150,5 +150,31 @@
     "shipRcvSeparate": "Inbound parts docks (interior court / N face) are physically separate from finished-vehicle outbound flow (S/E finished-truck lots).",
     "urbanRural": "Small town of Cleveland NC surrounded by farmland; rural setting despite the large industrial footprint."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://northamerica.daimlertruck.com/news-stories/2025/daimler-truck-north-america-celebrates-850000th-truck-built-at-cleveland-truck-manufacturing-plant-in-north-carolina-with-delivery-of-western-star-47x-to-alamo-group",
+        "date": "2025-07-10",
+        "type": "press",
+        "claim": "DTNA celebrates 850,000th truck at Cleveland NC plant; ~2,000 employees, assembles 5th-Gen Freightliner Cascadia and Western Star 47X/49X; largest US heavy-duty plant."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.ttnews.com/articles/daimler-truck-layoff-nc",
+        "date": "2025-07-14",
+        "type": "press",
+        "claim": "NC plant 2025 layoffs are temporary/order-driven, not closures; site remains operational."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tier-1 DTNA press (Jul 2025) confirms active Cascadia/Western Star assembly; no divestiture/closure, 2025 cuts are temporary shift reductions.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

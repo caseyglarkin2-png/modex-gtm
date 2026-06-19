@@ -131,5 +131,31 @@
     "shipRcvSeparate": "Dock activity appears concentrated on one (north) building face -> shipRcvSeparate=false; flagged uncertain due to active construction obscuring the east face.",
     "confidence": "Medium: building identity is a reasoned best-fit (Street View cannot resolve building signage and 2025 imagery shows active construction); gate/dock determinations are imagery-based."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://locations.daimlertruck.com/en/career/locations/detail/byesville-oh-detroit-reman-east-",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Daimler Truck career locations site lists 'Byesville, OH Detroit Reman East' at 60703 Country Club Road, Byesville, OH 43723 as a remanufacturing plant for power systems/electronics/fuel/aftertreatment; founded 1993."
+      },
+      {
+        "tier": 1,
+        "url": "https://wtov9.com/news/local/detroit-diesel-remanufacturing-reopens-byesville-plant-after-10m-expansion-detroit-diesel-remanufacturing-byesville-plant-jobsohio-apprenticeship-guernsey-county-daimler-truck-north-america-engine-rebuilding-economic-development",
+        "date": "2026-05-20",
+        "type": "press",
+        "claim": "Detroit Diesel Remanufacturing LLC (a DTNA subsidiary) reopened its Byesville plant after a $10M renovation/expansion; currently operational rebuilding engines/transmissions."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tier-1 DTNA career locator lists the exact address as an active Detroit Reman plant, corroborated by a May 2026 press story on a $10M reopening/expansion; no closure/sale/idle/WARN.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

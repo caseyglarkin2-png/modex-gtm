@@ -165,5 +165,31 @@
     "urbanRural": "Swan Island is a dense industrial peninsula inside the Portland metro - Urban.",
     "scale": "No truck scale identified - flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://northamerica.daimlertruck.com/news-stories/2025/daimler-truck-north-america-recognized-with-oregon-visionary-award",
+        "date": "2025-10-23",
+        "type": "press",
+        "claim": "DTNA Portland (Swan Island) plant manufactures electric Freightliner Cascadia and Western Star X-Series; 3,000+ OR employees."
+      },
+      {
+        "tier": 2,
+        "url": "https://nwlaborpress.org/2025/06/layoffs-coming-at-daimlers-portland-truck-plant/",
+        "date": "2025-06-20",
+        "type": "press",
+        "claim": "Portland Swan Island plant still operating in 2025; production reduced (21 to 12 trucks/day), a reduction not closure."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tier-1 DTNA press (Oct 2025) confirms active Western Star X-Series/eCascadia production at Swan Island; 2025 cuts are production reductions, not closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

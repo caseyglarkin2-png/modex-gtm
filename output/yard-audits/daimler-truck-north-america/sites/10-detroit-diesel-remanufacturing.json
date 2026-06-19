@@ -157,5 +157,24 @@
     "connectivityIssue": "Rural, isolated open-country location on the Iron Range; cellular coverage may be weaker. Hibbing town and the regional airport are nearby so it is not extreme -> recorded true at medium confidence, flagged uncertain.",
     "confidence": "High: the facility is positively identified and the small open layout reads clearly from satellite + recent (2025) Street View. Only the exact dock-door count and the inferred connectivity flag are uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://northamerica.daimlertruck.com/news-stories/2024/detroit-reman-facility-expansion-grand-opening-in-hibbing-minnesota",
+        "date": "2024-05-02",
+        "type": "press",
+        "claim": "DTNA press: Detroit Diesel Remanufacturing LLC held grand opening of its Hibbing, MN plant expansion (~doubling to 120,000 sq ft, +11 lines), at Range Regional Airport."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "DTNA-authored 2024 grand-opening release confirms current Detroit Reman operation at Hibbing; the only DTNA reman closure (Plainfield IN) consolidated work INTO Minnesota/Ohio.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

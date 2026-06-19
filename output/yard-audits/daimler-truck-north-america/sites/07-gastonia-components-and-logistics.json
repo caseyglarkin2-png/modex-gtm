@@ -154,5 +154,31 @@
     "scale": "No truck scale visible in the entry path.",
     "entryLanes": "Single entry lane through the SE gate canopy as best resolved; flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://northamerica.daimlertruck.com/company/locations",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "DTNA corporate locations page lists Gastonia Components and Logistics, 1400 Tulip Drive, Gastonia, NC 28052 (est. 1978); cab/chassis parts, line sequencing for DTNA plants and aftermarket packaging."
+      },
+      {
+        "tier": 1,
+        "url": "https://locations.daimlertruck.com/en/career/locations/detail/gastonia-nc-manufacturing-plant-",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Daimler Truck careers locator lists the Gastonia NC plant at 1400 Tulip Drive doing stamping/fabrication/sub-assembly of cab and chassis parts for DTNA products."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Two Tier-1 DTNA sources list the exact 1400 Tulip Drive site as a current operating Components & Logistics plant; gauntlet found only temporary 2025 demand layoffs.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

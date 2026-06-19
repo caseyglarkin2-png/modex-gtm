@@ -159,5 +159,31 @@
     "connectivityIssue": "FALSE. Within a developed metro-Des-Moines industrial/retail area, not isolated; cellular coverage expected to be normal.",
     "railServed": "No rail spur enters the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://northamerica.daimlertruck.com/company/locations",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "DTNA corporate locations page lists 'Des Moines Parts Distribution Center, 1000 SE 19th Street, Grimes, IA 50111' as an active DTNA location."
+      },
+      {
+        "tier": 1,
+        "url": "https://northamerica.daimlertruck.com/news-stories/2025/daimler-truck-north-america-announces-strategic-relocation-of-reno-and-phoenix-parts-distribution-centers",
+        "date": "2025-06-26",
+        "type": "press",
+        "claim": "DTNA's June 2025 PDC-network strategy release names only Phoenix and Reno PDCs for relocation; Grimes/Des Moines is not relocated, closed, or consolidated."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Exact-address match on DTNA's own live locations page; 2025 PDC restructure and layoffs do not touch Grimes; no WARN/closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

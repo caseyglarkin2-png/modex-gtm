@@ -154,5 +154,31 @@
     "urbanRural": "Mill Center / Hamilton Mill business park in Gwinnett County within metro Atlanta's industrial fabric; classified Urban.",
     "railServed": "No rail spur enters the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://northamerica.daimlertruck.com/company/locations",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "DTNA corporate locations page lists Buford, GA as a current PDC at 2510 Mill Center Parkway, Suite 100, Buford GA 30518."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.daimlertruck.com/career/locations/location-detail-page-366966.html",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "DTNA career system maintains a dedicated 'Buford, GA Atlanta Parts Distribution Center (PDC)' page supporting Freightliner/Western Star/Thomas Built aftermarket parts."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Current DTNA-owned sources (corporate locations + careers page) list Buford GA at the exact address (Suite 100) as an active leased PDC; no closure/sale/relocation found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

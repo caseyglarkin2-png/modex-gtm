@@ -143,5 +143,31 @@
     "urbanRural": "Dense industrial fabric within the City of Memphis (Hickory Hill); Urban.",
     "railServed": "No rail spur enters the audited building's property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://locations.daimlertruck.com/en/career/locations/detail/memphis-tn-memphis-parts-distribution-center-(pdc)",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Daimler Truck careers/locations page for the Memphis PDC at 5745 Challenge Drive, Memphis TN 38115; national distribution center for chassis parts."
+      },
+      {
+        "tier": 1,
+        "url": "https://northamerica.daimlertruck.com/company/locations",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "DTNA corporate locations page lists Memphis, TN at 5745 Challenge Drive, Memphis TN 38115 as a current company location."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Two current official Daimler Truck domain pages list the Memphis PDC at the exact address as active; only announced PDC relocations are Phoenix/Reno, not Memphis.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

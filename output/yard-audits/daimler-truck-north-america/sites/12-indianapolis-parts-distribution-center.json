@@ -144,5 +144,31 @@
     "urbanRural": "Within the dense AllPoints at Anson industrial park, near I-65 in metro Indianapolis; classified Urban.",
     "railServed": "No rail spur enters the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://locations.daimlertruck.com/en/career/locations/detail/whitestown-in-indianapolis-parts-distribution-center-pdc",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "DTNA locations system carries 'Whitestown, IN Indianapolis Parts Distribution Center (PDC)' at 4140 Anson Blvd, Whitestown IN 46075, founded 2017; supports Freightliner/Western Star/Thomas Built dealers."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.ibj.com/articles/trucking-giant-opens-second-facility-in-whitestown-business-park",
+        "date": "2023-08-14",
+        "type": "press",
+        "claim": "IBJ confirms the original 283,500 sq ft DTNA truck-parts PDC (opened 2017) and the 2023 RDC are TWO separate, both-operating facilities."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Distinct DTNA PDC at 4140 Anson Blvd (2017), confirmed by DTNA's own locator and IBJ which states it coexists with the separate RDC; no closure/relocation found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

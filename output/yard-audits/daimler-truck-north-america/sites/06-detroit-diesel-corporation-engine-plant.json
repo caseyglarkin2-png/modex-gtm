@@ -138,5 +138,31 @@
     "buildingCount": "Main plant complex + DAIMLER office building + east ancillary building + smaller support structures.",
     "scale": "No truck scale clearly visible in the gate path; flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://locations.daimlertruck.com/en/career/locations/detail/detroit-mi-detroit-diesel-corporation",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Daimler Truck locations site lists Detroit Diesel Corporation at 13400 Outer Drive West, Detroit MI 48239 as active (est. 1938), making heavy-duty engines, axles, transmissions for Freightliner."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.demanddetroit.com/why-detroit/detroit-plant",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "DTNA Demand Detroit page describes the Redford/Detroit plant as actively producing ~390 engines/day plus transmissions and axles; operating since 1938."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Multiple current Tier-1 DTNA sources (official locator, Demand Detroit plant page, Dec-2024 $285M reinvestment) confirm DTNA-subsidiary Detroit Diesel actively operates 13400 Outer Drive West; no credible negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

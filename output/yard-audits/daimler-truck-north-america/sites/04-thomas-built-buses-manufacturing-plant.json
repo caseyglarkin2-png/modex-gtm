@@ -146,5 +146,31 @@
     "urbanRural": "Dense urban industrial fabric of High Point - Urban.",
     "scale": "No truck scale identified - flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://northamerica.daimlertruck.com/news-stories/2025/thomas-built-buses-expands-type-a-minotour-production-capacity-at-plant-in-high-point",
+        "date": "2025-12-08",
+        "type": "press",
+        "claim": "DTNA newsroom confirms Thomas Built Buses High Point plant actively expanding school-bus (Minotour) manufacturing capacity."
+      },
+      {
+        "tier": 1,
+        "url": "https://thomasbuiltbuses.com/resources/news/thomas-built-buses-expands-type-a-minotour-2025-12-08/",
+        "date": "2025-12-08",
+        "type": "press",
+        "claim": "Thomas Built Buses (DTNA brand) expanding Type A Minotour production 50%+ at 1408 Courtesy Road, High Point; completes 2026."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tier-1 DTNA/Thomas Built press (Dec 2025) confirms an active, expanding school-bus assembly plant at the exact 1408 Courtesy Road address; no divestiture/closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

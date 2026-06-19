@@ -159,5 +159,31 @@
     "urbanRural": "Dense industrial district of Grand Prairie within the Dallas-Fort Worth metroplex; Urban.",
     "railServed": "No rail spur enters the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://locations.daimlertruck.com/en/career/locations/detail/grand-prairie-tx-dallas-parts-distribution-center-(pdc)",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Daimler Truck careers page for the Dallas PDC at 3010 Roy Orr Blvd Suite 140, Grand Prairie TX 75050; supports Freightliner/Western Star/Thomas Built dealers."
+      },
+      {
+        "tier": 1,
+        "url": "https://northamerica.daimlertruck.com/company/locations",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "DTNA corporate locations page lists the Dallas PDC at 3010 Roy Orr Boulevard, Grand Prairie TX 75050 among current operating sites."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Two current official daimlertruck.com pages name DTNA's own Dallas PDC at the exact address; gauntlet clean (2026-27 relocations hit Phoenix/Reno, not Dallas).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

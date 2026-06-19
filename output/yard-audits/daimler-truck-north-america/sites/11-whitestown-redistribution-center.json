@@ -122,5 +122,31 @@
     "urbanRural": "Edge-of-town setting but within the dense 616-acre AllPoints at Anson industrial park in metro Indianapolis; classified Urban for the industrial-park density and metro proximity.",
     "railServed": "No rail spur enters the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://northamerica.daimlertruck.com/news-stories/2023/daimler-truck-north-america-opens-redistribution-center-to-expand-parts-distribution-network",
+        "date": "2023-08",
+        "type": "press",
+        "claim": "DTNA opened a new 605,000+ sq ft Redistribution Center (RDC) in Whitestown, IN to replenish its ten PDCs across the U.S. and Canada; an addition to the network."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.ibj.com/articles/trucking-giant-opens-second-facility-in-whitestown-business-park",
+        "date": "2023-08-14",
+        "type": "press",
+        "claim": "DTNA's 605,000 sq ft RDC at 4337 AllPoints Drive is the company's SECOND facility in the park, complementing (not replacing) the 2017 PDC; leased (Prologis/Browning)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "DTNA-authored release + IBJ confirm a distinct, currently-operating leased RDC at 4337 AllPoints Drive; gauntlet found no Whitestown closure/consolidation.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
