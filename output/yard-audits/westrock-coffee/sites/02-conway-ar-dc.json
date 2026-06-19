@@ -124,6 +124,21 @@
     "dropYard": true,
     "multiStep": false
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      { "tier": 1, "url": "https://www.westrockcoffee.com/news/westrock-coffee-announces-development-of-new-distribution-center-in-conway-arkansas/", "date": "2023-01", "type": "press", "claim": "Westrock Coffee develops a $70M, 530,000 sq ft DC at 1430 William J. Clark Drive, Conway (with Tempus Realty Partners), to support its Conway manufacturing" },
+      { "tier": 1, "url": "https://talkbusiness.net/2024/01/70m-westrock-coffee-distribution-center-in-conway-up-and-running/", "date": "2024-01", "type": "press", "claim": "The $70M Westrock Coffee Conway distribution center is up and running as of January 2024" }
+    ],
+    "imageryDate": "2024-07",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Westrock COFFEE DC at 1430 William J. Clark Dr, operational since Jan 2024; Tempus-developed (leased), Westrock-operated; no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  },
   "confidence": "high",
   "uncertainFields": [
     "guardShack",

@@ -178,6 +178,21 @@
     "dropYard": true,
     "multiStep": false
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://www.westrockcoffee.com/news/westrock-coffee-opens-state-of-the-art-manufacturing-facility-in-arkansas-to-meet-growing-demand-for-single-serve-coffee/", "date": "2025-07", "type": "press", "claim": "Westrock Coffee opens its 525,000 sq ft 'Clark' single-serve facility on William J. Clark Drive, Conway (130,000 sq ft manufacturing + fulfillment/distribution)" },
+      { "tier": 1, "url": "https://www.prnewswire.com/news-releases/westrock-coffee-opens-state-of-the-art-manufacturing-facility-in-arkansas-to-meet-growing-demand-for-single-serve-coffee-302512792.html", "date": "2025-07", "type": "press", "claim": "PR confirming the new Conway single-serve (pod) manufacturing facility is open and operating" }
+    ],
+    "imageryDate": "2024-07",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Westrock COFFEE 'Clark' single-serve plant opened July 2025 and is currently operating; building shell present in 2024 imagery, no negative found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  },
   "confidence": "medium",
   "uncertainFields": [
     "guardShack",

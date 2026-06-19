@@ -135,6 +135,20 @@
     "dropYard": false,
     "multiStep": false
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://www.westrockcoffee.com/news/westrock-coffee-announces-major-plant-expansions-including-nations-largest-roasting-to-ready-to-drink-packaging-facility/", "date": "2021-12", "type": "press", "claim": "Westrock Coffee announces expansion of its Commercial Park extract manufacturing facility in Concord NC, adding two automated lines (+50% extract capacity) for extract, tea and herbal products" },
+      { "tier": 1, "url": "https://www.arkansasedc.com/news-events/newsroom/detail/2021/12/16/westrock-coffee-announces-major-plant-expansions---including-nation-s-largest-roasting-to-ready-to-drink-packaging-facility", "date": "2021-12", "type": "press", "claim": "Confirms the Concord Commercial Park extract facility expansion (modernized bottling, two new lines), Westrock-operated" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Westrock COFFEE (S&D legacy) self-operates the separate Concord Commercial Park Dr SW extract/tea facility, expanded 2021-2022; distinct from the main S&D campus; no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  },
   "confidence": "medium",
   "uncertainFields": [
     "dockDoorCount",

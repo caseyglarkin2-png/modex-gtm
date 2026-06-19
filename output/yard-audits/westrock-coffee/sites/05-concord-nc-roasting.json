@@ -157,6 +157,20 @@
     "dropYard": true,
     "multiStep": false
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://www.westrockcoffee.com/news/westrock-coffee-announces-major-plant-expansions-including-nations-largest-roasting-to-ready-to-drink-packaging-facility/", "date": "2021-12", "type": "press", "claim": "Westrock Coffee confirms its Concord NC (S&D Coffee & Tea) campus as a major center of operations with continued expansion of roasting/extract facilities" },
+      { "tier": 1, "url": "https://www.westrockcoffee.com/news/westrock-coffee-creates-financial-services-center-in-nc-focused-on-strategic-growth/", "date": "2024", "type": "press", "claim": "Westrock describes Concord NC as 'the heart of their coffee, tea, extracts, and ingredients manufacturing operations' and is expanding extract capacity there" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Westrock COFFEE (S&D legacy, acquired 2020) self-operates the Concord NC roasting/extract campus; named a current major operations center, capacity being expanded; no closure/divestiture found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  },
   "confidence": "medium",
   "uncertainFields": [
     "truckGate",

@@ -124,6 +124,20 @@
     "dropYard": false,
     "multiStep": false
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://www.westrockcoffee.com/news/westrock-coffee-opens-state-of-the-art-manufacturing-facility-in-arkansas-to-meet-growing-demand-for-single-serve-coffee/", "date": "2025-07", "type": "press", "claim": "Westrock Coffee names 'its original production facility in North Little Rock' as a current operating site alongside the new Conway plants" },
+      { "tier": 3, "url": "https://joe.coffee/locations/ar/north-little-rock/westrock-coffee-company-roasting-manufacturing-north-little-rock/", "date": "2025-12", "type": "locator", "claim": "Third-party locator lists Westrock Coffee Roasting & Manufacturing at 30 Collins Industrial Pl, North Little Rock AR (corroborating only)" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Westrock COFFEE's original roasting plant (Westrock Coffee Roasting LLC), 30 Collins Industrial Pl, North Little Rock; named as a current site in 2025 PR alongside the new Conway plants; no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  },
   "confidence": "medium",
   "uncertainFields": [
     "dockDoors",

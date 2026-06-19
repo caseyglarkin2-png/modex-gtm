@@ -157,6 +157,21 @@
     "dropYard": true,
     "multiStep": false
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.westrockcoffee.com/news/westrock-coffee-opens-industrys-largest-roast-to-ready-to-drink-manufacturing-facility-in-conway-arkansas-ahead-of-schedule/", "date": "2024-06", "type": "press", "claim": "Westrock Coffee opens its 570,000 sq ft, $315M roast-to-RTD facility on the 45-acre Conway AR campus (480 Exchange Ave), self-operated" },
+      { "tier": 1, "url": "https://investors.westrockcoffee.com/news-releases/news-release-details/westrock-coffee-opens-industrys-largest-roast-ready-drink", "date": "2024-06", "type": "press", "claim": "Investor release confirming the Conway roast-to-RTD plant is open and operating" }
+    ],
+    "imageryDate": "2024-08",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Westrock COFFEE (not Smurfit WestRock packaging) self-operates the Conway roast-to-RTD plant; opened June 2024, no closure/divestiture found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  },
   "confidence": "medium",
   "uncertainFields": [
     "guardShack",
