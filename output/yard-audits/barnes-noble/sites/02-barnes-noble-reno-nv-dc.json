@@ -169,5 +169,20 @@
     "entryLanes": "Single shared entrance driveway with the barrier arm; estimated 1 in / 1 out, flagged uncertain.",
     "trailersVisible": "Approx 22 trailers counted at the south docks and in the trailer-parking row; honest overhead estimate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://barnesandnoble.dejobs.org/locations/reno-nv/jobs/", "date": "2026-06", "type": "careers", "claim": "B&N official ATS hosts a Reno NV distribution-center jobs location page; Reno DC actively hiring (Maintenance Assistant, located right off exit 26 on I-580, matching 12660 Old Virginia Rd in Damonte Ranch)" },
+      { "tier": 2, "url": "https://www.actionnews5.com/story/6180700/barnes-noble-to-close-memphis-distribution-center/", "date": "2008-10", "type": "press", "claim": "B&N closed its Memphis internet DC and consolidated online-order fulfillment into its Monroe NJ and Reno NV facilities, confirming Reno NV is a surviving/consolidated DC, not the closed one" }
+    ],
+    "imageryDate": "2025",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Reno NV (12660 Old Virginia Rd) is B&N's West-Coast replenishment DC; official careers ATS lists active Reno NV distribution jobs and current hiring at this site; no closure/WARN (WARN closures were GA/IL/NY, not NV); Street View confirms 2025 imagery.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

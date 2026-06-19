@@ -140,5 +140,19 @@
     "entryLanes": "Not separately determinable; entrance shared with employee traffic. Estimated 1 in / 1 out, flagged uncertain.",
     "trailersVisible": "Approx 55 trailers counted at docks and in drop areas in the captured imagery; honest overhead estimate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://barnesandnoble.dejobs.org/locations/monroe-township-nj/jobs/", "date": "2026-06", "type": "careers", "claim": "B&N official ATS hosts a Monroe Township NJ distribution-center jobs location page; company hires for its DC here now" },
+      { "tier": 2, "url": "https://www.actionnews5.com/story/6180700/barnes-noble-to-close-memphis-distribution-center/", "date": "2008-10", "type": "press", "claim": "B&N closed its Memphis internet DC and consolidated online-order fulfillment into its Monroe NJ and Reno NV facilities, confirming Monroe NJ is a surviving/consolidated DC, not the closed one" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Monroe Township NJ (1 Barnes & Noble Way) is B&N's main consolidated DC; official careers ATS lists active Monroe Township NJ distribution jobs; no closure/WARN; Memphis was the closed DC, online fulfillment moved here.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }
