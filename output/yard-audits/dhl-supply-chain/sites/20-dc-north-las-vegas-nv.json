@@ -136,5 +136,31 @@
     "trailersVisible": "0 - imagery shows the buildings complete but the yard empty (pre-occupancy / commissioning phase).",
     "method": "deep-audit"
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.reviewjournal.com/business/2-empty-warehouses-in-apex-industrial-park-land-big-name-tenant-3610155/",
+        "date": "2026-01-21",
+        "type": "press",
+        "claim": "DHL leased ~1.2M SF (two buildings) at Vantage North, North Las Vegas; NO street address given; occupancy/move-in timeline undisclosed."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.reviewjournal.com/business/major-logistics-company-to-build-2-valley-distribution-centers-3023298/",
+        "date": "2024",
+        "type": "press",
+        "claim": "Earlier reported two ~800k SF DHL North Las Vegas centers with completion late 2025 (future at time of roster)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "No exact street address; just-leased (Jan 2026) with undisclosed occupancy timeline / not confirmed operating, and the earlier 800k SF build was future. No auditable operating building.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

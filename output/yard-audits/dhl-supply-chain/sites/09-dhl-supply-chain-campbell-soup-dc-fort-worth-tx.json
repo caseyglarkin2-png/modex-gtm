@@ -126,5 +126,38 @@
     "siteAreaAcres": "Derived from perimeter box ~520m N-S x ~210m E-W of the fenced parcel; bounded east by I-35W with a treed buffer.",
     "trailersVisible": "Approx 115 trailers counted across both dock faces and drop rows."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.dhl.com/us-en/home/press/press-archive/2017/dhl-supply-chain-campbell-soup-company-bring-120-jobs-to-fort-worth-with-opening-of-distribution-facility.html",
+        "date": "2017-09",
+        "type": "press",
+        "claim": "DHL Supply Chain operating new 578,000 sq ft DC for Campbell Soup in Fort Worth; partnership since 2013."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.freightwaves.com/news/dhl-campbell-soup-launch-texas-distribution-hub",
+        "date": "2017-09",
+        "type": "press",
+        "claim": "DHL Supply Chain operating ~578,000 sq ft Campbell Soup southern distribution hub in Fort Worth."
+      },
+      {
+        "tier": 1,
+        "url": "https://rebusinessonline.com/tdc-acquires-713000-sf-distribution-center-in-fort-worth/",
+        "date": "2017-06",
+        "type": "econ-dev",
+        "claim": "Campbell Soup leases 578,000 sq ft of the 713,000 sq ft DHL Real Estate building at 3000 Cantrell Sansom Road (leased)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "DHL press + FreightWaves confirm DHL operates the leased Campbell's Fort Worth DC; Campbell's 2024-25 restructuring hits the Paris TX plant, not this DC; no DC closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

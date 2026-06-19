@@ -95,13 +95,32 @@
     "truckGate"
   ],
   "fieldNotes": {
-    "location": "Resolved to 2160 McGaw Road, Obetz OH 43207 (at the McGaw Rd / Frusta Dr intersection), the historic 'Exel Logistics Columbus Public Warehouse' — Exel Inc. is DHL Supply Chain's legal/legacy brand. Roster gave no address; web research surfaced the Yelp/CMac listing 'Exel Logistics Columbus Public Warehouse, 2160 McGaw Rd, Obetz OH 43207' and a CBRE industrial lease listing for the same address. Google Geocoding API would not resolve the McGaw Rd house number (returned ZIP centroid); located the building via OpenStreetMap centerlines for McGaw Rd and Frusta Dr, then satellite/Street View confirmation.",
+    "location": "Resolved to 2160 McGaw Road, Obetz OH 43207 (at the McGaw Rd / Frusta Dr intersection), the historic 'Exel Logistics Columbus Public Warehouse' \u2014 Exel Inc. is DHL Supply Chain's legal/legacy brand. Roster gave no address; web research surfaced the Yelp/CMac listing 'Exel Logistics Columbus Public Warehouse, 2160 McGaw Rd, Obetz OH 43207' and a CBRE industrial lease listing for the same address. Google Geocoding API would not resolve the McGaw Rd house number (returned ZIP centroid); located the building via OpenStreetMap centerlines for McGaw Rd and Frusta Dr, then satellite/Street View confirmation.",
     "truckGate": "No gate, barrier arm, or guard booth visible at any approach. The NE dock court is open and accessed directly from the public service road; confirmed in 2019 and 2025 Street View. Flagged as uncertain because the imagery is partly dated.",
-    "dockDoors": "Dock doors run along the NE face of the parallelogram building; 2019 Street View shows a row of doors with trailers backed in. Banded 25-50; exact count not resolvable from overexposed z20 satellite — flagged uncertain.",
+    "dockDoors": "Dock doors run along the NE face of the parallelogram building; 2019 Street View shows a row of doors with trailers backed in. Banded 25-50; exact count not resolvable from overexposed z20 satellite \u2014 flagged uncertain.",
     "dropArea": "Only a handful of trailers in the open dock court; no dedicated drop-trailer lot. Site activity looks light in current imagery (a CBRE listing shows ~125,100 sq ft available for lease, suggesting partial vacancy).",
     "urbanRural": "Obetz sits within the continuous Columbus metro industrial fabric immediately off I-270 / Alum Creek Drive; classified Urban.",
     "entryLanes": "Open driveway with no gate or marked lane structure; lane counts not determinable.",
     "railServed": "No rail spur into the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.speedcommerce.com/locations/dhl-supply-chain-locations/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Aggregators reference an Obetz/Rickenbacker-area presence but provide no exact operating street address; no Tier-1 confirms a specific Obetz building."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Rickenbacker/Columbus-south market confirmed for DHL generally, but no positive Tier-1 source for an exact current DHL Supply Chain Obetz building after a genuine search. Directory-only.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

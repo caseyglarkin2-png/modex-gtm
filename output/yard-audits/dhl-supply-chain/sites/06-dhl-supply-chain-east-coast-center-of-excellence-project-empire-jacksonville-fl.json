@@ -127,5 +127,38 @@
     "siteAreaAcres": "Derived from perimeter box ~690m N-S x ~290m E-W; roster cites 47.13-49.8 acres for the parcel.",
     "trailersVisible": "Approx 115 trailers counted across west drop row, west dock, east dock and east drop rows in Feb-2025 imagery."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.jaxdailyrecord.com/news/2024/aug/13/72-million-dhl-supply-chain-center-issued-construction-permit/",
+        "date": "2024-08-13",
+        "type": "econ-dev",
+        "claim": "DHL Supply Chain (Excel Inc. dba DHL Supply Chain) is developer/operator of the 603,200 sq ft Project Empire warehouse at Eastport Road, Jacksonville."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.jaxdailyrecord.com/news/2025/dec/16/north-jacksonville-cold-storage-warehouse-sells-for-192-million/",
+        "date": "2025-12-16",
+        "type": "press",
+        "claim": "DHL's completed Project Empire refrigerated warehouse (10030 Eastport Road) sold to KKR for $192M Dec 11 2025 (sale-leaseback; building complete and operational)."
+      },
+      {
+        "tier": 1,
+        "url": "https://careers.dhl.com/amer/en/agp/jobs-in-jacksonville-united-states-of-america",
+        "date": "2026",
+        "type": "careers",
+        "claim": "Active DHL job reqs (Operations Supervisor, Group Manager) at 10030 Eastport Road, Jacksonville FL 32218 as of 2026."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "OPEN and operating: completed 2025, DHL is operating tenant (sale-leaseback to KKR Dec 2025), active 2026 hiring. Note: operating address is 10030 Eastport Road (roster shows 10300 - likely a transposition).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

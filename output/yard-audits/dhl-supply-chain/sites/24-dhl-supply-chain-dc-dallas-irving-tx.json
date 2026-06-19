@@ -102,16 +102,35 @@
     "exitLanes"
   ],
   "fieldNotes": {
-    "location": "Resolved to 5320 W Airport Freeway, Irving TX 75062 — the $57.5M, 220,000 sq ft DHL distribution center opened 2024 (relocated from Grand Prairie), the marquee DHL distribution facility in Irving. The roster gave no address ('contract-logistics DC building street addresses not publicly enumerated'); web research (DHL press release, Supply Chain Dive, WFAA, Commercial Real Estate Direct) identified this as the DHL DC in Irving and Google Geocoding API returned ROOFTOP precision (32.83530, -97.03138). Street View confirmed the DHL red/yellow brand livery on the building. NOTE: this is operated by the DHL eCommerce division (parcel sortation) rather than the DHL Supply Chain contract-logistics division — but it is the verifiable DHL DC matching the roster's 'Dallas/Irving' entry; the roster compiler could not pin a separate DHL Supply Chain street address. An alternative DHL Supply Chain / Discount Tire dedicated warehouse exists at 10101 Bonnie View Rd, but that is in Dallas proper, not Irving.",
-    "truckGate": "The SE truck court is enclosed by a continuous perimeter fence (regularly-spaced posts clearly visible in z21 satellite along the dock-apron edge). The gate hardware at the entrance driveway could not be seen directly because a mature tree buffer screens the property from the public loop road — flagged uncertain. A 2024 purpose-built dedicated DHL DC with a fenced court is consistent with a controlled truck gate.",
+    "location": "Resolved to 5320 W Airport Freeway, Irving TX 75062 \u2014 the $57.5M, 220,000 sq ft DHL distribution center opened 2024 (relocated from Grand Prairie), the marquee DHL distribution facility in Irving. The roster gave no address ('contract-logistics DC building street addresses not publicly enumerated'); web research (DHL press release, Supply Chain Dive, WFAA, Commercial Real Estate Direct) identified this as the DHL DC in Irving and Google Geocoding API returned ROOFTOP precision (32.83530, -97.03138). Street View confirmed the DHL red/yellow brand livery on the building. NOTE: this is operated by the DHL eCommerce division (parcel sortation) rather than the DHL Supply Chain contract-logistics division \u2014 but it is the verifiable DHL DC matching the roster's 'Dallas/Irving' entry; the roster compiler could not pin a separate DHL Supply Chain street address. An alternative DHL Supply Chain / Discount Tire dedicated warehouse exists at 10101 Bonnie View Rd, but that is in Dallas proper, not Irving.",
+    "truckGate": "The SE truck court is enclosed by a continuous perimeter fence (regularly-spaced posts clearly visible in z21 satellite along the dock-apron edge). The gate hardware at the entrance driveway could not be seen directly because a mature tree buffer screens the property from the public loop road \u2014 flagged uncertain. A 2024 purpose-built dedicated DHL DC with a fenced court is consistent with a controlled truck gate.",
     "guardShack": "No staffed booth visible; modern parcel-sortation DCs use kiosk / remote check-in.",
     "remoteGs": "Gated court with no guard shack implies kiosk / call-box / app check-in.",
-    "shipRcvSeparate": "Dock aprons run along TWO opposite faces (NW toward Airport Freeway, SE toward the truck court) — consistent with the facility's documented four-inbound / four-outbound induction-line design, supporting separate shipping and receiving dock banks.",
-    "dockDoors": "Docks on both long faces of the ~280 m building; combined banded estimate 50+. Exact count not resolvable from overexposed white-roof satellite — flagged uncertain.",
+    "shipRcvSeparate": "Dock aprons run along TWO opposite faces (NW toward Airport Freeway, SE toward the truck court) \u2014 consistent with the facility's documented four-inbound / four-outbound induction-line design, supporting separate shipping and receiving dock banks.",
+    "dockDoors": "Docks on both long faces of the ~280 m building; combined banded estimate 50+. Exact count not resolvable from overexposed white-roof satellite \u2014 flagged uncertain.",
     "dropArea": "Only a handful of trailers parked; the facility is a new active parcel DC with dock-position trailers rather than a dedicated drop lot.",
-    "entryLanes": "Single truck-court driveway; lane detail obscured by the tree buffer — counts set to 1/1 as best estimate, flagged uncertain.",
+    "entryLanes": "Single truck-court driveway; lane detail obscured by the tree buffer \u2014 counts set to 1/1 as best estimate, flagged uncertain.",
     "railServed": "No rail spur into the property; road-served, directly off SH-183 Airport Freeway.",
     "urbanRural": "Central Irving within the dense DFW metro along SH-183; Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.dhl.com/us-en/home/press/press-archive/2024/dhl-ecommerce-invests-57-5-million-dollars-in-new-dallas-fort-worth-distribution-center.html",
+        "date": "2024",
+        "type": "press",
+        "claim": "The only Tier-1 addressed DHL DFW facility (5320 W Airport Freeway, Irving TX, 220k SF) is operated by DHL eCommerce (parcel division), NOT DHL Supply Chain."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "The only exact Tier-1 DFW address belongs to DHL eCommerce, a different division; for DHL Supply Chain specifically only aggregator listings appear with no Tier-1 exact-address source. No positive found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

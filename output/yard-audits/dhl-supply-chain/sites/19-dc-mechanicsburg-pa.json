@@ -103,5 +103,24 @@
     "urbanRural": "Mechanicsburg/Harrisburg West Shore industrial corridor - a dense, built-out logistics submarket with the Naval Support Activity Mechanicsburg depot and many warehouses nearby. Urban.",
     "method": "deep-audit"
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.yellowpages.com/mechanicsburg-pa/mip/dhl-supply-chain-526313824",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Only directory aggregators list DHL Supply Chain addresses in Mechanicsburg; no Tier-1 press, econ-dev, or official DHL locator confirms a current operating building."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Harrisburg-submarket cluster; no positive Tier-1 source ties DHL Supply Chain to an exact current operating Mechanicsburg building after a genuine search. Directory-only, and 3PL contracts churn.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

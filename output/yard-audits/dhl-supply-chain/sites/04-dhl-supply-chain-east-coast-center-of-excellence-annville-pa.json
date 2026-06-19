@@ -102,7 +102,7 @@
     "dropYard"
   ],
   "fieldNotes": {
-    "_general": "Brand-new facility — DHL East Coast Center of Excellence, 700 Killinger Rd, Clear Springs Logistics Park, Annville PA. 1,000,000 sq ft, opened/opening 2026. Available satellite imagery was captured DURING construction: the building shell is complete but the surrounding truck yard and trailer-stall lot were still graded dirt (unpaved), and no Street View coverage exists. Gate/guard/yard finishing cannot be confirmed from imagery.",
+    "_general": "Brand-new facility \u2014 DHL East Coast Center of Excellence, 700 Killinger Rd, Clear Springs Logistics Park, Annville PA. 1,000,000 sq ft, opened/opening 2026. Available satellite imagery was captured DURING construction: the building shell is complete but the surrounding truck yard and trailer-stall lot were still graded dirt (unpaved), and no Street View coverage exists. Gate/guard/yard finishing cannot be confirmed from imagery.",
     "truckGate": "INFERRED. Not visible in construction-stage imagery. A new FDA/GMP-compliant pharma DC operating as a Foreign Trade Zone is, by industry norm, fully fenced and gated for customs/security control. Marked true on that basis but flagged uncertain.",
     "guardShack": "INFERRED false / remoteGs INFERRED true. No booth visible; modern DCs of this type typically use kiosk/app check-in. Low confidence.",
     "dockDoors": "Per DHL press release: 100 dock doors. Building is a cross-dock with door banks on both the north and south long faces (visible in z18 imagery). Band 50+.",
@@ -110,9 +110,35 @@
     "shipRcvSeparate": "Cross-dock building, dock banks on two opposite long faces.",
     "multipleFacilities": "Clear Springs Logistics Park is approved for three warehouses (~3M sq ft total); a second large building is under construction immediately NW.",
     "fastLaneOpportunity": "Large undeveloped/paved-to-be yard gives ample room for express lanes.",
-    "urbanRural": "South Annville, Lebanon County PA — small-town / farmland edge setting = Rural.",
+    "urbanRural": "South Annville, Lebanon County PA \u2014 small-town / farmland edge setting = Rural.",
     "trailerParkingCapacity": "230 stalls per DHL press release (planned).",
     "siteAreaAcres": "~70 acres estimated for the 1M sq ft building parcel within the park."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.dhl.com/us-en/home/press/press-archive/2026/dhl-supply-chain-expands-life-sciences-and-healthcare-capabilities-with-new-center-of-excellence.html",
+        "date": "2026-01-07",
+        "type": "press",
+        "claim": "DHL's 1M sq ft Annville (700 Killinger Road, Clear Springs Logistics Park) life-sciences Center of Excellence is scheduled to open in 2026 (Q4)."
+      },
+      {
+        "tier": 1,
+        "url": "https://lebtown.com/2026/01/07/dhl-to-open-1-million-square-foot-south-annville-warehouse-as-life-sciences-hub/",
+        "date": "2026-01-07",
+        "type": "press",
+        "claim": "Interior construction to start Jan/Feb 2026, completion projected Aug/Sep 2026; not yet operating."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Rejected as under-construction/future: as of June 2026 still being built (completion projected Aug/Sep 2026), not operating. Re-audit after Q4 2026 launch.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -112,7 +112,7 @@
     "dockDoorCount"
   ],
   "fieldNotes": {
-    "truckGate": "No controlled truck entrance. The building's west dock face fronts directly onto the public street (4650 West) — trucks back off the road into the docks. Street View (2021-05 and 2025-07) shows no barrier arm, no sliding gate, no perimeter fence. South-end driveway also open.",
+    "truckGate": "No controlled truck entrance. The building's west dock face fronts directly onto the public street (4650 West) \u2014 trucks back off the road into the docks. Street View (2021-05 and 2025-07) shows no barrier arm, no sliding gate, no perimeter fence. South-end driveway also open.",
     "guardShack": "No guard booth at any entrance.",
     "remoteGs": "No gate, so no remote check-in.",
     "dockDoors": "Dock doors run along the building's west face directly on the street; ~32 doors estimated from Street View, band 25-50.",
@@ -121,5 +121,31 @@
     "urbanRural": "Dense SLC-west industrial park = Urban.",
     "siteAreaAcres": "~220,000 sq ft temperature-controlled building (per IDS site); parcel ~13 acres."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://group.dhl.com/en/media-relations/press-releases/2025/dhl-supply-chain-acquires-ids-fulfillment.html",
+        "date": "2025-05-06",
+        "type": "press",
+        "claim": "DHL Supply Chain acquired IDS Fulfillment incl. its Salt Lake City, UT facility and will continue operating all IDS sites."
+      },
+      {
+        "tier": 2,
+        "url": "https://idsfulfillment.com/about/locations/salt-lake-city",
+        "date": "2025",
+        "type": "locator",
+        "claim": "IDS West Coast Fulfillment Center (SLC1), 1711 S 4650 West, Salt Lake City UT 84104, currently operating."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Part of the May 2025 DHL/IDS acquisition; SLC1 at 1711 S 4650 West listed as actively operating on the IDS-DHL locator; no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

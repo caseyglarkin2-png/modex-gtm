@@ -114,5 +114,38 @@
     "siteAreaAcres": "Building runs diagonally (SE-NW), ~530m long; ~90 acres is the estimated fenced parcel of the building + wraparound truck court (the perimeter bounding box overstates the diagonal parcel). Low-medium confidence.",
     "trailersVisible": "Approx 95 trailers counted across both dock faces and drop rows; moderate confidence."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.sccommerce.com/news/dhl-supply-chain-establishing-operations-cherokee-county",
+        "date": "2021-04",
+        "type": "econ-dev",
+        "claim": "SC Dept of Commerce: DHL Supply Chain establishing 1.3M sq ft operations at 600 Webber Road, Cowpens (Cherokee County), $92.7M, 249 jobs."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.mann-hummel.com/content/dam/website/mann-hummel/company/downloads/supplier/logistics-shipping-instructions/Logistics_Manual_plant_specific_en.pdf",
+        "date": "2024-08",
+        "type": "press",
+        "claim": "Mann+Hummel supplier logistics manual names 600 Webber Road, 29330 Cowpens as its DHL-operated inbound DC."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.areadevelopment.com/newsitems/4-8-2021/dhl-supply-chain-cowpens-south-carolina.shtml",
+        "date": "2021-04",
+        "type": "press",
+        "claim": "DHL Supply Chain establishing Cowpens operations complex, Sunny Slope Industrial Park."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tier-1 econ-dev + Mann+Hummel's own 2024 logistics manual confirm DHL operates the dedicated Cowpens DC; no closure/WARN.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

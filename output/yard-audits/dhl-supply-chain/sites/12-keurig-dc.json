@@ -105,5 +105,31 @@
     "urbanRural": "Union City is within the Atlanta metro (Fulton County), adjacent to I-85 and dense industrial development. Urban.",
     "railServed": "No rail spur into the property; I-85 runs to the SE."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://dhlhires.com/union-city/",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "DHL Supply Chain dedicated Union City, GA careers page active with current warehouse hiring."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.loopnet.com/property/6000-studio-way-union-city-ga-30291/13121-09F150800620344/",
+        "date": "2025",
+        "type": "econ-dev",
+        "claim": "6000 Studio Way is a distinct 1,020,000 sq ft / 59.94-acre Fulton County building (built 2015), separate from the Derrick Industrial Parkway site DHL is closing."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "PROBABLE: DHL/Keurig tie at 6000 Studio Way rests on crowdsource data (no Tier-1); the Feb-2025 DHL Union City closure is on Derrick Industrial Parkway (a DIFFERENT building), so it does not condemn Studio Way; active Union City DHL hiring supports continued operation.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

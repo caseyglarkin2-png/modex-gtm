@@ -96,11 +96,30 @@
     "truckGate": "The west truck court is enclosed by chain-link fence with a gate at the driveway from Citypark Loop, visible in 2021 Street View and 2026 satellite. Marked uncertain because the gate hardware is partly tree-obscured in Street View; the perimeter fence is clear.",
     "guardShack": "No staffed booth visible at the court entrance.",
     "remoteGs": "Gated truck court with no guard shack implies kiosk / call-box / app check-in.",
-    "shipRcvSeparate": "The building is a cross-dock with dock doors on BOTH long faces (east and west), each opening to its own truck court — supports separate shipping and receiving dock banks.",
-    "dockDoors": "Dock canopies line both ~400 m long faces; combined banded estimate 50+. Exact count not resolvable from overexposed white-roof satellite — flagged uncertain.",
+    "shipRcvSeparate": "The building is a cross-dock with dock doors on BOTH long faces (east and west), each opening to its own truck court \u2014 supports separate shipping and receiving dock banks.",
+    "dockDoors": "Dock canopies line both ~400 m long faces; combined banded estimate 50+. Exact count not resolvable from overexposed white-roof satellite \u2014 flagged uncertain.",
     "dropArea": "Trailers parked in both truck courts (shared with neighbouring buildings); estimated 25-50 stalls.",
     "railServed": "A large Union Pacific rail yard lies just north of the property, but no rail spur runs into the building; road-served.",
     "urbanRural": "Within Houston's dense northeast industrial fabric off US-90 / East Freeway; Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.dhl.com/us-en/home/supply-chain.html",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "No DHL Supply Chain Houston building address is published; Houston search surfaces only DHL Express parcel ServicePoints (a different division), not a DHL Supply Chain contract-logistics DC."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Houston is a DHL market only via DHL Express retail/parcel; no Tier-1 source identifies an exact DHL Supply Chain contract-logistics building. No positive found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

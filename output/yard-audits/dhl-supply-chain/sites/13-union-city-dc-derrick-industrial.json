@@ -105,5 +105,24 @@
     "urbanRural": "Union City / South Fulton, within the Atlanta metro, west of Hartsfield-Jackson airport. Urban.",
     "siteAreaAcres": "Perimeter box includes the cleared developed footprint; the parcel also has substantial wooded buffer. ~64 acres for the cleared area is an estimate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.ajc.com/news/business/dhl-supply-chain-is-closing-one-of-its-georgia-facilities/IAKANNHLPZGFVIEV7NQ6KKD74Y/",
+        "date": "2025-02",
+        "type": "press",
+        "claim": "DHL Supply Chain filed a Georgia WARN notice to close its Derrick Industrial Parkway, Union City facility; 600+ employees; cuts begin April 6 2025, phased shutdown through August 2025."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "This exact Derrick Industrial Parkway building is being phased closed under a Feb 2025 Georgia WARN notice (600+ jobs, shutdown through Aug 2025).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -118,5 +118,31 @@
     "siteAreaAcres": "Estimated ~15 acres for the diagonal building parcel + truck court; the perimeter bounding box overstates the diagonal lot. Low confidence.",
     "recommendation": "Re-verify the exact DHL building among the Anson cluster (DHL also has nearby Whitestown sites at 3930 S 500 E and a Fishback Creek facility). Flag for human review of the facility identification."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://betterinboone.org/businesses/industries/logistics-distribution-2/",
+        "date": "2025",
+        "type": "econ-dev",
+        "claim": "Boone County EDC logistics directory lists DHL Supply Chain among Whitestown-area operators (5000 Anson Blvd, Anson development off I-65)."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/q-dhl-supply-chain-l-whitestown,-in-jobs.html",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active 2025-2026 DHL Supply Chain Whitestown job postings (incl. General Manager II) confirm current operation."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "DHL tied to 5000 Anson Blvd since Q1 2020 with active 2025-26 job postings; Indiana DHL closure is Clayton (different building), no negative on 5000 Anson.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

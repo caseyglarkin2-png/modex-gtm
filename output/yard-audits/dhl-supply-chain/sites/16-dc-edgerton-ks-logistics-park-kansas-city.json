@@ -126,18 +126,44 @@
   ],
   "fieldNotes": {
     "location": "DHL Supply Chain operates this single-tenant DC at 32190 W 191st St, Edgerton KS 66021 within Logistics Park Kansas City (LPKC). Roster lng was ~1.1km too far west (landed on the BNSF intermodal yard); corrected via web search + Street View pano confirming the building.",
-    "customer": "Building bears prominent 'HERSHEY' signage on the office front (confirmed in two Street View captures, Aug 2024). This is a DHL-operated dedicated-customer DC for The Hershey Company — consistent with DHL Supply Chain's contract-logistics model and with directory listings ('DHL Supply Chain - Edgerton, KS', ph 913-856-2414).",
+    "customer": "Building bears prominent 'HERSHEY' signage on the office front (confirmed in two Street View captures, Aug 2024). This is a DHL-operated dedicated-customer DC for The Hershey Company \u2014 consistent with DHL Supply Chain's contract-logistics model and with directory listings ('DHL Supply Chain - Edgerton, KS', ph 913-856-2414).",
     "truckGate": "No barrier arm, sliding gate, or checkpoint at either driveway entrance on W 191st St. Both the east and west driveways are open paved drives with only a small address monument sign. Open spec-building access typical of LPKC.",
-    "guardShack": "No guard booth at either entrance — Street View confirms open driveways with no staffed structure.",
+    "guardShack": "No guard booth at either entrance \u2014 Street View confirms open driveways with no staffed structure.",
     "remoteGs": "false because there is no truck gate at all (open access).",
     "entryExitSeparate": "Two separate driveways off W 191st St (east end and west end of the building) both lead to the north truck court; trucks can enter one and exit the other. truckGateCount=2.",
     "dockDoors": "All loading docks on the north face. Counted ~38-45 dock positions with trailers backed in at z19; banded 25-50.",
-    "dropArea": "A marked trailer-parking lot sits at the NW corner / north court holding drop trailers; estimated 10-25 stalls. Low confidence on exact count — adjacent large trailer lot to the NW belongs to a separate parcel and was excluded.",
+    "dropArea": "A marked trailer-parking lot sits at the NW corner / north court holding drop trailers; estimated 10-25 stalls. Low confidence on exact count \u2014 adjacent large trailer lot to the NW belongs to a separate parcel and was excluded.",
     "fastLaneOpportunity": "Wide open driveway aprons and broad north truck court provide ample paved width to add an express/bypass lane.",
     "urbanRural": "LPKC sits in rural Johnson County farmland on the SW edge of the KC metro; the building is bordered by open cropland to the south. Rural.",
     "backupSensitive": "W 191st St is a low-traffic industrial-park road with deep open driveways; a truck queue would not spill onto a public artery.",
     "postGateStaging": "Broad paved north truck court provides interior holding/queue space ahead of the docks.",
     "method": "deep-audit"
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.dhl.com/us-en/home/press/press-archive/2021/dhl-expands-in-kansas-city-to-accommodate-growth-in-international-e-commerce-shipping.html",
+        "date": "2021",
+        "type": "press",
+        "claim": "DHL expanded its Kansas City-area operations within the LPKC/Edgerton corridor."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.chamberofcommerce.com/business-directory/kansas/edgerton/logistics-service/2030105465-dhl-supply-chain",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "DHL Supply Chain listed in the Edgerton KS directory at 32190 W 191st St, Edgerton, KS 66030."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "PROBABLE: DHL Supply Chain has a confirmed current presence in Edgerton/LPKC (active hiring) but no Tier-1 enumerates the exact street address; directory pins 32190 W 191st St - flag address.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

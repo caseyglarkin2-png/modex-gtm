@@ -101,5 +101,31 @@
     "drivewayLong": "The access drive from Commerce Ct wraps around the SW corner and runs the length of the NW apron - room for 3+ trucks to queue.",
     "trailerParkingCapacity": "Drop/staging space on the apron and yard could hold ~30 trailers; estimate from overhead imagery."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://opengovus.com/connecticut-license/1257814",
+        "date": "2024",
+        "type": "econ-dev",
+        "claim": "State business registry lists Exel Inc dba DHL Supply Chain (USA) at 6390 Commerce Court, Groveport, OH 43125."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/co/Dhl/Jobs/-in-Groveport,OH",
+        "date": "2026-05",
+        "type": "careers",
+        "claim": "Active 2025-2026 DHL Groveport job postings corroborate ongoing DHL operations in the submarket (not address-specific)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "PROBABLE: only directory/registry data place DHL at 6390 Commerce Ct, no dated Tier-1 press; Groveport submarket churning (DHL closed nearby 5235 Westpoint Dr late-2023), but no negative on 6390 Commerce specifically.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

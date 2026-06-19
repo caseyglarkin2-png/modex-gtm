@@ -122,5 +122,31 @@
     "urbanRural": "Etna Corporate Park, an edge-of-town industrial park in rural Etna Township surrounded by farmland and a small residential pocket; classified Rural per rubric tiebreak.",
     "railServed": "No rail spur runs into the property; road-served DC."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.realcrg.com/latest/crg-breaks-ground-on-250000-square-foot-distribution-center-in-etna-ohio",
+        "date": "2023-08-15",
+        "type": "press",
+        "claim": "A 250,000 SF DC at 10300 Schuster Way, Etna OH was built speculative with no committed tenant; DHL is NOT named."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.commercialsearch.com/news/dhl-expands-in-ohio-with-755-ksf-building/",
+        "date": "2023-08-16",
+        "type": "press",
+        "claim": "DHL Supply Chain's new 755k SF Ohio building is in Violet Township (near Westerville HQ), NOT Etna."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "No Tier-1 source ties DHL Supply Chain to a specific operating building in Etna; the only addressed Etna DC is speculative with no DHL tenant, and DHL's real Ohio build is in Violet Township (idx 8). No exact-address positive found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -122,5 +122,31 @@
     "drivewayLong": "Wide internal truck yards on both faces can stack 3+ trucks.",
     "urbanRural": "Plainfield IN is part of the Indianapolis metro logistics corridor (AllPoints Midwest park, dense industrial fabric) = Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://group.dhl.com/en/media-relations/press-releases/2025/dhl-supply-chain-acquires-ids-fulfillment.html",
+        "date": "2025-05-06",
+        "type": "press",
+        "claim": "DHL Supply Chain acquired IDS Fulfillment (HQ Plainfield, IN) and will continue operating all IDS facilities."
+      },
+      {
+        "tier": 1,
+        "url": "https://idsfulfillment.com/blog/company-industry-news/ids-fulfillment-joins-dhl-supply-chain-expand-fulfillment-capabilities-growing-brands/",
+        "date": "2025-05",
+        "type": "press",
+        "claim": "IDS HQ DC at 9431 Allpoints Parkway, Plainfield, IN 46168 (780,000 sq ft) now operates as IDS Fulfillment Powered by DHL Supply Chain."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "DHL acquired IDS May 2025 and operates the HQ DC at 9431 Allpoints Parkway; branded IDS Fulfillment Powered by DHL Supply Chain.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

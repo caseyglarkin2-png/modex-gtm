@@ -121,7 +121,7 @@
   ],
   "fieldNotes": {
     "truckGate": "Chain-link cantilever sliding gate across the truck driveway at the NW corner of the property (confirmed in Street View 2019-07). Property fully fenced with chain-link.",
-    "guardShack": "No guard booth visible at the gate. A driver-instruction sign reads 'Form single line on right side of driveway / Wait in truck until you reach front of line / Pull up to fence to check in' — indicating remote/kiosk check-in, not a manned booth.",
+    "guardShack": "No guard booth visible at the gate. A driver-instruction sign reads 'Form single line on right side of driveway / Wait in truck until you reach front of line / Pull up to fence to check in' \u2014 indicating remote/kiosk check-in, not a manned booth.",
     "remoteGs": "Truck gate present, no guard shack; driver sign directs trucks to 'pull up to fence to check in' = remote check-in.",
     "dockDoorCount": "Cross-dock building with dock doors on BOTH long faces; many trailers backed in on each side. Estimated ~90 doors total from z18-z20 imagery; band 50+ is confident, exact count approximate.",
     "dropArea": "Long rows of unhitched trailers parked on the west truck lane between this building and the adjacent property; clearly 50+.",
@@ -129,5 +129,31 @@
     "preGateStaging": "Driver sign instructs trucks to queue single-file in the driveway outside the gate.",
     "drivewayLong": "Wide internal truck lanes and a long approach can hold a 3+ truck queue."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.dhl.com/us-en/home/press/press-archive/2024/dhl-supply-chain-and-diageo-north-america-power-up-sustainability-partnership.html",
+        "date": "2024-10-23",
+        "type": "press",
+        "claim": "DHL Supply Chain operates Diageo North America's Plainfield, IL spirits campus (10+ EV yard trucks, Nikola hydrogen Class 8); 20+ year contract-logistics partner."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.businesswire.com/news/home/20241023191334/en/ADDING-MULTIMEDIA-DHL-Supply-Chain-and-Diageo-North-America-Power-Up-Sustainability-Partnership-with-Deployment-of-Hydrogen-Fuel-Cell-Trucks",
+        "date": "2024-10-23",
+        "type": "press",
+        "claim": "Hydrogen fuel cell trucks deployed at the DHL-operated Diageo campus in Plainfield, IL."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tier-1 DHL/Diageo press (Oct 2024) confirms current DHL operation of the 1701 Remington Blvd Diageo campus; no closure/WARN.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

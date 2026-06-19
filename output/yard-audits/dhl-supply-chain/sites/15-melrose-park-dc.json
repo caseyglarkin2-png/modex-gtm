@@ -125,5 +125,31 @@
     "shipRcvSeparate": "Docks on a single building face only - no separate ship/receive clusters.",
     "railServed": "No rail spur into the property; a rail line runs through the wider district but does not enter the DHL parcel."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.dhl.com/us-en/home/press/press-archive/2023/dhl-opens-a-silver-leed-certified-distribution-center-in-chicago.html",
+        "date": "2023-08",
+        "type": "press",
+        "claim": "DHL opened a 352,000 sq ft LEED Silver DC at 2065 George Street, Melrose Park IL, with a Honeywell IntelliSort sorter (40,000 parcels/hr)."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.supplychaindive.com/news/dhl-opens-e-commerce-facility-in-chicago-with-Honeywell-loop-sorter/690834/",
+        "date": "2023-08",
+        "type": "press",
+        "claim": "DHL opened the Melrose Park facility Aug 2023; one of three US international-export gateways, currently operating."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "DHL-operated at the exact address and currently operating; FLAG: division mismatch - operator is DHL eCommerce (parcel/e-commerce sortation), not DHL Supply Chain contract logistics.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

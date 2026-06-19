@@ -130,5 +130,31 @@
     "connectivityIssue": "Rural setting in pine forest, somewhat isolated from town - cellular coverage could be weaker. Medium-confidence inference, flagged.",
     "siteAreaAcres": "~75 acres for the Building A developed parcel (per LoopNet listing 74.91 acres); the full DHL Commerce Park is 125 acres including unbuilt Building B/C pads."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://governor.sc.gov/news/2019-04/dhl-supply-chain-constructing-new-100-million-distribution-center-dorchester-county",
+        "date": "2019-04",
+        "type": "econ-dev",
+        "claim": "DHL Supply Chain purchased 125 acres on Winding Woods Rd off US-78 (DHL Commerce Park), St. George; three buildings totaling 1.7M sq ft, $100M, 450 jobs; first phase open Q1 2020."
+      },
+      {
+        "tier": 1,
+        "url": "https://scbiz.com/dhl-supply-chain-to-expand-sc-operations/",
+        "date": "2021-04",
+        "type": "press",
+        "claim": "April 2021 SC Biz refers to DHL Supply Chain's St. George site as an existing/operating facility."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "PROBABLE: DHL owns DHL Commerce Park and it was built/operating by 2021; no closure/contract-loss found, but no clean post-2022 Tier-1 confirming current operation - flag for FOV imagery check.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
