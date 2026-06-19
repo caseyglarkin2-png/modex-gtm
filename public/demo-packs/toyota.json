@@ -16,6 +16,10 @@
       "note": "Toyota Motor Corporation operates ~50 production plants globally; ~22 in NA (TMMK Kentucky, TMMI Indiana, TMMTX Texas, TMMMS Mississippi, TMMAL Alabama, TMMWV West Virginia, TMMC Cambridge ON, TMMBC Tijuana, TMMGT Guanajuato, parts DCs, R&D, NAMC HQ). We audited 17. International scope on request."
     },
     "featuredSiteId": "08-huntsville-al-engine",
+    "networkCount": 22,
+    "networkCountSource": "https://pressroom.toyota.com/operations/",
+    "networkCountAsOf": "2025-10",
+    "sampleRationale": "We audited 17 of Toyota's 22 US freight facilities: roughly 10 vehicle, engine, and components plants plus 12 parts distribution centers.",
     "dossierIntro": "Toyota runs the second-largest greenfield auto manufacturing footprint we audited. 50 facilities; we audited 17. Toyota Manufacturing Alabama is 275 acres. Liberty NC Battery Manufacturing is 1,116 acres. 5,896 total audited acres. 4,577 trailer spots. YardFlow runs supplier inbound and finished-vehicle outbound on the same protocol regardless of EV or ICE production.",
     "surprisingFindings": [
       "Liberty NC Battery is 1,116 acres of EV battery manufacturing. Toyota's bet on solid-state.",

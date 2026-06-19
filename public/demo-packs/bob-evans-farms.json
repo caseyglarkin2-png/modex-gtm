@@ -15,6 +15,10 @@
       "note": "Bob Evans Farms operates ~6 US food-manufacturing plants supplying the retail brand + restaurant chain."
     },
     "featuredSiteId": "03-bob-evans-farms-hillsdale-mi-plant",
+    "networkCount": 7,
+    "networkCountSource": "https://www.sec.gov/Archives/edgar/data/0001530950/000153095025000260/post-20250930.htm",
+    "networkCountAsOf": "2025-09-30",
+    "sampleRationale": "We audited 6 of the 7 US freight facilities in the Bob Evans foods network, five refrigerated production plants plus two transportation hubs named in Post Holdings' FY2025 10-K.",
     "dossierIntro": "Bob Evans Farms runs a tight 6-facility CPG food network. We audited all of them. The Hillsdale MI plant is the production engine; Springfield OH runs the company's outbound transportation hub. 76 dock doors across the network. Compact footprint, deterministic yard problem. YardFlow runs a 6-site network the same way it runs a 600-site one.",
     "surprisingFindings": [
       "Springfield OH Transportation Hub is the network's outbound spine. All other sites pass through it.",

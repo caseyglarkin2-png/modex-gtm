@@ -6,13 +6,17 @@
     "displayName": "H-E-B",
     "archetype": "grocer-distributor",
     "siteCount": 13,
+    "networkCount": 15,
+    "networkCountSource": "H-E-B Newsroom + trade press (Supply Chain Dive, Food Business News, Supermarket News): 8 named Texas distribution centers + 7 named H-E-B Manufacturing own-production plants; https://newsroom.heb.com/",
+    "networkCountAsOf": "2026-06-19",
+    "sampleRationale": "Public sources name 8 H-E-B Texas distribution centers plus 7 own-production plants; we satellite-audited 13 of those supply-chain facilities.",
     "coverageNote": {
       "auditedCount": 13,
       "estimatedFootprint": 15,
       "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "H-E-B operates ~430 stores fed by ~15 DC + production facilities, primarily in Texas + Mexico. We audited the DC/manufacturing network."
+      "note": "H-E-B feeds ~430 stores from 15 named Texas DC + own-production facilities. We audited 13 of the DC/manufacturing network."
     },
     "featuredSiteId": "09-h-e-b-manufacturing-houston-milk-bread-plant",
     "dossierIntro": "H-E-B runs the Texas grocery network as a vertically integrated operation. 15 facilities; we audited every one. Hempstead TX (in development) is 423 acres of future grocery distribution. Houston Milk & Bread plant runs 35 docks on 22 acres. 832 dock doors across the network. YardFlow runs vertically integrated grocery with the same protocol used at parcel hubs.",

@@ -15,6 +15,10 @@
       "capHit": false,
       "note": "Boston Beer (Sam Adams, Truly, Twisted Tea) operates ~5 NA breweries + 1 UK; we audited the NA breweries."
     },
+    "networkCount": 5,
+    "networkCountSource": "Boston Beer Company FY2024 Form 10-K, Item 2 Properties (filed Feb 25, 2025): 4 primary company-owned breweries (Boston MA, Cincinnati OH, Milton DE, Breinigsville PA) plus the Walden NY cidery; remaining volume runs through third-party contract breweries. https://www.sec.gov/Archives/edgar/data/949870/000095017025026756/sam-20241228.htm",
+    "networkCountAsOf": "2024-12-28",
+    "sampleRationale": "The 5 audited sites are Boston Beer's entire company-owned NA production network: 4 breweries plus the Angry Orchard cidery; everything else is contract-brewed.",
     "featuredSiteId": "02-cincinnati-brewery",
     "dossierIntro": "Boston Beer Company runs Sam Adams plus the cidery and seltzer brands. 6 production sites; we audited 5. The Cincinnati Brewery runs the largest dock-door count in the network. Angry Orchard Walden NY is 75.6 acres of apple-cider innovation. Multi-brand brewing means the yard handles 4 distinct SKU velocities. YardFlow runs them as 4 parallel queues on one protocol.",
     "surprisingFindings": [

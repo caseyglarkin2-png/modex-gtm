@@ -6,13 +6,17 @@
     "displayName": "Amazon",
     "archetype": "retailer",
     "siteCount": 16,
+    "networkCount": 116,
+    "networkCountSource": "MWPVL International Amazon distribution network analysis (data as of 2025 Q1): 116 US large non-sortable fulfillment centers, excluding the ~728 last-mile delivery stations; https://www.mwpvl.com/html/amazon_com.html",
+    "networkCountAsOf": "2025-Q1",
+    "sampleRationale": "MWPVL counts 116 large US fulfillment centers, excluding the last-mile delivery-station layer; we satellite-audited 16 of the largest freight sites.",
     "coverageNote": {
       "auditedCount": 16,
-      "estimatedFootprint": 110,
+      "estimatedFootprint": 116,
       "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Amazon runs 100+ large US fulfillment centers plus sortation centers, inbound cross-docks, and the Amazon Air hub network, feeding thousands of delivery stations. We audited 16 of the largest freight sites."
+      "note": "Amazon runs 116 large US fulfillment centers (MWPVL, 2025 Q1) plus sortation centers, inbound cross-docks, and the Amazon Air hub network, feeding thousands of delivery stations. We audited 16 of the largest freight sites."
     },
     "featuredSiteId": "15-amazon",
     "dossierIntro": "Amazon runs the most heavily gated freight network we have mapped. We audited 16 of its largest US sites, a mix of robotics fulfillment centers, an inbound cross-dock, a sortation center, and the Amazon Air hub at CVG, holding 1,890 dock doors and room for about 3,825 trailers. Fifteen of the sixteen gate the yard and twelve run a staffed guard booth, and none touch rail, so every trailer enters through a controlled checkpoint and leaves by truck. YardFlow turns those checkpoints into one orchestrated gate-to-dock flow across every node.",

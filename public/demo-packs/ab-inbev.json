@@ -15,6 +15,10 @@
       "capHit": false,
       "note": "AB InBev operates ~200 breweries across 50+ countries; we audited 21 NA breweries + DCs (US/Mexico/Canada). International scope on request."
     },
+    "networkCount": 34,
+    "networkCountSource": "AB InBev North American production network (current ops): 9 US breweries post the 2025-26 Fairfield/Merrimack/Newark closures (anheuser-busch.com/facilities) + 7 Metal Container Corp can/lid plants + 11 Grupo Modelo breweries in Mexico (grupomodelo.com/quienes-somos) + 7 Labatt breweries in Canada (foodincanada.com, 2025-08-01).",
+    "networkCountAsOf": "2026-06-19",
+    "sampleRationale": "The 18 audited US, Mexico, and Canada breweries, can plants, and DCs represent AB InBev's 34 North American beverage production and packaging facilities.",
     "featuredSiteId": "13-metal-container-corporation-arnold-mo-can-plant",
     "dossierIntro": "Brewing runs on bottled-water-style throughput but with the regulatory weight of an alcohol shipment. AB InBev runs 200+ NA breweries, can plants, and DCs. We audited 21. Fort Collins Brewery covers 267 acres. 15 of 21 audited sites are rail-served. YardFlow runs alcohol-regulated trailers with the same protocol as beverage, with separate audit trails baked in.",
     "surprisingFindings": [
