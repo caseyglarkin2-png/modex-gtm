@@ -309,6 +309,12 @@ const CoverageNote = z.object({
   /** Geographic scope of the audit (e.g. "NA", "global"). Optional. */
   auditedScope: z.string().optional(),
   /**
+   * Total sites AUDITED, when it exceeds the yard-bearing `auditedCount` shipped
+   * in the pack (e.g. crowley: 26 audited, 25 carry a yard, 1 is an office).
+   * Lets the header read "26 audited · 25 yard-bearing" to match /for. Optional.
+   */
+  auditedTotal: z.number().int().positive().optional(),
+  /**
    * Number of facilities estimated to be running on a LEGACY YMS today
    * (CHEP, SAP, Manhattan, in-house, etc.). This is the bucket YardFlow
    * displaces — NOT a count of YardFlow deployments (which is always 0

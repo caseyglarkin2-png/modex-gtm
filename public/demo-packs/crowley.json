@@ -13,9 +13,10 @@
       "auditedScope": "US + Americas",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Crowley operates ~270 terminals and ports across the Americas. We audited the 25 priced sites in the network proposal: 19 in North America (Phase 1) and 6 across the Americas (Phase 2). The downtown Cincinnati office has no truck yard and is excluded."
+      "note": "Crowley operates ~270 terminals and ports across the Americas. We audited 26 terminals; 25 carry a truck yard and are priced (19 in North America in Phase 1, plus 6 across the Americas in Phase 2). The downtown Cincinnati terminal is an office with no truck yard, so it is audited but excluded from pricing.",
+      "auditedTotal": 26
     },
-    "featuredSiteId": "08-holt-terminals-gloucester-terminal",
+    "featuredSiteId": "01-crowley-jaxport-marine-terminal",
     "dossierIntro": "Crowley runs marine terminals, port logistics, and container distribution across ~270 facilities. We audited the 25 priced terminals and yards. Talleyrand covers 197 acres in Jacksonville. Gloucester City runs 90 dock doors. 9 of the 25 are rail-served, the most of any logistics network we audited. Across the 25 sites: 3,067 trailer and chassis spots, 27,650 container ground slots, 477 dock doors. YardFlow runs container, dray, and truckload as three parallel protocols on one yard graph.",
     "surprisingFindings": [
       "3,067 trailer and chassis spots are the RTLS pricing driver. They are a different unit from the 27,650 container ground slots stacked at the terminals.",

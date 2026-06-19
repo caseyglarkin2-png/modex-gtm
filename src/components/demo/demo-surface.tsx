@@ -165,11 +165,20 @@ export function DemoSurface({
   // reads to a Mondelez exec as "you mapped 14% of our network and are
   // pretending it's the whole thing." The audit IS NA-scoped and the
   // banner explains why; this header now matches the banner's framing.
-  const scopeBlurb =
+  const scopeFootprint =
     coverageNote?.totalGlobalFootprint && coverageNote.totalGlobalFootprint > siteCount
-      ? `${siteCount} of ~${coverageNote.totalGlobalFootprint} facilities${coverageNote.auditedScope ? ` (${coverageNote.auditedScope} scope)` : ''}`
+      ? coverageNote.totalGlobalFootprint
       : coverageNote?.estimatedFootprint && coverageNote.estimatedFootprint > siteCount
-        ? `${siteCount} of ~${coverageNote.estimatedFootprint} facilities${coverageNote.auditedScope ? ` (${coverageNote.auditedScope} scope)` : ''}`
+        ? coverageNote.estimatedFootprint
+        : null;
+  const scopeSuffix = coverageNote?.auditedScope ? ` (${coverageNote.auditedScope} scope)` : '';
+  const scopeBlurb =
+    // When more sites were audited than carry a yard (e.g. crowley: 26 audited,
+    // 25 yard-bearing, 1 office), say so explicitly to match /for + the agreement.
+    coverageNote?.auditedTotal && coverageNote.auditedTotal > siteCount
+      ? `${coverageNote.auditedTotal} audited · ${siteCount} yard-bearing${scopeFootprint ? ` of ~${scopeFootprint}` : ''}${scopeSuffix}`
+      : scopeFootprint
+        ? `${siteCount} of ~${scopeFootprint} facilities${scopeSuffix}`
         : `${siteCount} facilities audited`;
 
   // Layer 3 — core-sample framing. When the pack carries a sourced network
