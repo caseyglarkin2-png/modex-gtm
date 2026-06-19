@@ -163,5 +163,20 @@
     "buildingCount": "Main plant plus two ancillary structures (small NE yard shed and a utility/process building cluster on the W).",
     "multiStep": "No second checkpoint visible."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.fsis.usda.gov/inspection/fsis-inspected-establishments/nestle-prepared-foods-company-0", "date": "2026", "type": "USDA FSIS establishment listing", "claim": "Nestlé Prepared Foods Company Springville UT is an active USDA-inspected meat/poultry processing establishment" },
+      { "tier": 1, "url": "https://www.ziprecruiter.com/co/Nestle/Jobs/-in-Springville,UT", "date": "2026-05", "type": "careers", "claim": "Nestlé USA actively hiring Industrial Electrical Mechanics/Electricians at the Springville UT plant in 2026" }
+    ],
+    "imageryDate": "2023",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Nestlé-owned frozen entrée plant (~1,000+ employees, Stouffer's/Lean Cuisine retained); USDA-inspected and currently hiring.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

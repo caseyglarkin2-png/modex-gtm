@@ -165,5 +165,20 @@
     "buildingCount": "Single large multi-section plant building.",
     "multiStep": "No second checkpoint."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://ded.mo.gov/press-room/nestle-professional-usa-expands-trenton-investing-75-million-and-creating-more-30-jobs", "date": "2022-04-26", "type": "state econ-dev press", "claim": "Nestlé Professional USA, which purchased the Trenton plant in 2018, investing $7.5M to expand it for Chef-mate/TRIO/dry-mix production, +30 jobs" },
+      { "tier": 1, "url": "https://www.nestleprofessional.us/manufact-investment-trenton-missouri-factory", "date": "2022", "type": "company site", "claim": "Nestlé Professional describes ongoing manufacturing investment at its Trenton MO factory" }
+    ],
+    "imageryDate": "2023",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Nestlé Professional (retained foodservice) acquired this plant FROM Conagra in 2018 and expanded it in 2022; opposite of a divestiture.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

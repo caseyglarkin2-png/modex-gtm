@@ -171,5 +171,20 @@
     "exitLanes": "Single combined entry/exit at the one gate; exit lane count inferred as 1, not separately confirmed.",
     "railServed": "No rail spur visible entering the property."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.manufacturingdive.com/news/nestle-wisconsin-factory-expansion-43m-boost-carnation-breakfast/640867/", "date": "2024", "type": "capital-investment press", "claim": "Nestlé adding two production lines to its Eau Claire WI factory to meet demand for Boost and Carnation Breakfast Essentials" },
+      { "tier": 2, "url": "https://www.supplychaindive.com/news/-WARN-nestle-health-science-shutters-pennsylvania-plants/649568/", "date": "2023", "type": "closure scan (negative control)", "claim": "The Nestlé Health Science plant closures were in Pennsylvania, NOT Eau Claire WI; Eau Claire not implicated" }
+    ],
+    "imageryDate": "2024-08",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Nestlé Health Science nutritional-beverage plant (Boost/Carnation) with 2024 line additions; the recent NHS closures were PA plants, not Eau Claire.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

@@ -130,5 +130,20 @@
     "trailersVisible": "Zero trailers in the operational sense - imagery predates operations.",
     "multiStep": "Not determinable; default false."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.azcommerce.com/news-events/news/2025/1/nestle-celebrates-grand-opening-of-state-of-the-art-beverage-factory-and-distribution-center-in-glendale/", "date": "2025-01", "type": "econ-dev (AZ Commerce Authority)", "claim": "Grand opening of the Glendale/Waddell beverage factory + DC, 630,000 sq ft at 8531 N 150th Ave, producing Coffee Mate / natural bliss / Starbucks creamers" },
+      { "tier": 1, "url": "https://www.fooddive.com/news/nestle-opens-675m-beverage-factory-distribution-center-in-arizona/738814/", "date": "2025-01", "type": "press", "claim": "Nestlé opened its $675M beverage factory + DC in Arizona, its 20th US food/beverage factory" }
+    ],
+    "imageryDate": "2024",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Nestlé-built/operated $675M creamer factory + DC, confirmed OPERATING after Jan 28 2025 grand opening (retained-creamer category); operation confirmed though audit imagery predates operations (yard config low-confidence, recommend re-audit on post-2025 imagery).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

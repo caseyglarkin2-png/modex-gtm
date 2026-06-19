@@ -186,5 +186,20 @@
     "buildingCount": "Main factory/DC building plus an ancillary structure; effectively a combined factory + distribution center under one campus.",
     "multiStep": "No second checkpoint visible."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.nestleusa.com/media/pressreleases/nestl%C3%A9-expanding-anderson-plant", "date": "2013-09-25", "type": "press", "claim": "Anderson IN is the sole US production site for Nesquik RTD and makes Coffee Mate creamer, Boost, Carnation Breakfast Essentials; 700+ employees" },
+      { "tier": 1, "url": "https://www.insideindianabusiness.com/articles/nestle-seeks-abatement-for-400m-expansion-in-anderson", "date": "2022-12", "type": "press / econ-dev", "claim": "Nestlé seeking abatement for a $400M+ expansion of the Anderson plant, +68 jobs, confirming active ownership and growth" }
+    ],
+    "imageryDate": "2023",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Nestlé-owned beverage factory + DC making Coffee Mate creamer and Nesquik RTD (both RETAINED categories, not the divested bottled-water business); $400M 2022 expansion, no closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

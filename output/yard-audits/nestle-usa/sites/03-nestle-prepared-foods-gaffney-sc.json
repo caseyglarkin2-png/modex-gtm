@@ -165,5 +165,20 @@
     "urbanRural": "Gaffney SC is a small town; the plant sits on the edge of town along a highway with farmland and woods around it - rural.",
     "scale": "No truck scale clearly confirmed; an elongated marked strip in the truck yard is more likely a parking median - flagged uncertain."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://governor.sc.gov/news/2024-11/nestle-usa-expands-cherokee-county-operations", "date": "2024-11", "type": "state press release", "claim": "Nestlé USA investing $150M to expand its Cherokee County (Gaffney) facility at 2132 Old Georgia Highway, operational since 1980, producing Stouffer's and Toll House frozen meals; adding a single-serve frozen-meal line" },
+      { "tier": 1, "url": "https://www.fooddive.com/news/nestle-invests-150m-to-expand-south-carolina-frozen-food-plant/733118/", "date": "2024-11", "type": "press", "claim": "$150M expansion of the SC frozen-food plant including a new single-serve frozen-meal production line" }
+    ],
+    "imageryDate": "2024-05",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Self-operated frozen plant (Old Georgia Hwy address matches) with a major 2024 capacity investment; current and growing.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

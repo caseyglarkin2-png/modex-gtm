@@ -150,5 +150,20 @@
     "urbanRural": "Mount Sterling is a small Kentucky town; the plant sits in an edge-of-town industrial park surrounded by farmland - rural.",
     "scale": "No truck scale clearly visible; flagged uncertain."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.nestleusa.com/media/pressreleases/nestl%C3%A9-to-make-all-hot-pockets%C2%AE-brand-sandwiches-in-kentucky", "date": "2014", "type": "press", "claim": "Nestlé consolidated all Hot Pockets production at the Mount Sterling KY plant" },
+      { "tier": 1, "url": "https://www.womeninmanufacturing.org/events/wim-kentucky-plant-tour-and-lunch-at-nestle-usa", "date": "2025-09", "type": "plant-tour event", "claim": "Sept 2025 behind-the-scenes tour at Nestlé USA Mount Sterling, 150 Oak Grove Dr; active operating plant" }
+    ],
+    "imageryDate": "2025-06",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Nestlé-owned frozen plant making all US Hot Pockets (retained category); 2025 plant tours, no closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

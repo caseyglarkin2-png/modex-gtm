@@ -168,5 +168,19 @@
     "scale": "No truck scale clearly visible in the imagery; flagged uncertain.",
     "exitLanes": "Single combined entry/exit at the one gate; exit lane count inferred as 1."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.nestleusa.com/mcdonoughinfo", "date": "2024", "type": "company employee-info page", "claim": "Nestlé USA states the McDonough GA facility is fully operational" },
+      { "tier": 2, "url": "https://www.nlrb.gov/case/10-RD-332755", "date": "2024-01", "type": "NLRB case (govt)", "claim": "Active RD petition (Jan 2024) for the Nestlé USA McDonough GA distribution-center bargaining unit; confirms ongoing operation with employees on site" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Nestlé USA's own page states the McDonough DC is fully operational; RWDSU-represented workforce with active 2024 NLRB proceedings.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

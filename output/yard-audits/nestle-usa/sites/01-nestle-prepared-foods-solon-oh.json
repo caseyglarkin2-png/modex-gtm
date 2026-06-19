@@ -150,5 +150,19 @@
     "urbanRural": "Solon OH is a dense industrial/office suburb in the Cleveland metro, adjacent to the I-422/Harper Rd interchange.",
     "scale": "No truck scale clearly visible; flagged uncertain."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.foodprocessing.com/business-of-food-beverage/news/33035557/nestle-laying-off-216-at-solon-ohio-plant", "date": "2024-01", "type": "press", "claim": "Solon Stouffer's frozen plant retains out-of-home/foodservice lines; over half the plant held for future investment after 2024 partial line shift" },
+      { "tier": 2, "url": "https://www.manufacturingdive.com/news/nestle-layoffs-solon-ohio-factory-food/706183/", "date": "2024-02-02", "type": "press", "claim": "216 layoffs but Nestlé states the plant will continue to play an important role in its growing out-of-home business; not closed or divested" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Retained Stouffer's frozen/foodservice plant, downsized but still active; no divestiture (water/candy/icecream) signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

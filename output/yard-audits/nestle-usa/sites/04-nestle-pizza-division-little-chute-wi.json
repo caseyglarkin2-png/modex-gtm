@@ -165,5 +165,20 @@
     "urbanRural": "Little Chute is a village within the Appleton / Fox Cities metro; the plant is embedded in dense residential fabric. Judged Urban - flagged as borderline.",
     "scale": "No truck scale clearly visible; flagged uncertain."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.nestleusa.com/media/pressreleases/pizzaplantreduceswaterusage", "date": "2012-10", "type": "press", "claim": "Nestlé USA's Pizza Division factory in Little Chute, WI produces DiGiorno, Jack's, California Pizza Kitchen and Tombstone frozen pizza" },
+      { "tier": 1, "url": "https://www.fooddive.com/news/nestle-wisconsin-factory-expansion-43m/640607/", "date": "2020", "type": "press", "claim": "Nestlé invested $43M in its Wisconsin pizza factory expansion" }
+    ],
+    "imageryDate": "2024-10",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Retained frozen pizza; company press + 2020 capital investment + active Nestlé USA hiring confirm current self-operated production.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

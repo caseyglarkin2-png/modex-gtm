@@ -155,5 +155,19 @@
     "buildingCount": "Main multi-section plant building plus a large secondary building/warehouse on the W.",
     "multiStep": "No second checkpoint visible."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 2, "url": "https://kenoshanews.com/burlington-plant-remains-in-nestle-s-hands-following-chocolate-business/article_3000c1fa-73c8-5c48-88cc-08a1f6e61ae6.html", "date": "2018", "type": "divestiture-exclusion", "claim": "Burlington plant remained in Nestlé's hands and was NOT part of the 2018 US confectionery sale to Ferrero; continues Toll House morsel production" },
+      { "tier": 1, "url": "https://www.foodmanufacturing.com/capital-investment/news/21578455/nestle-to-overhaul-wi-candy-factory-for-cookie-dough-production", "date": "2021", "type": "capital-investment press", "claim": "Nestlé overhauling the Burlington WI factory for Toll House refrigerated cookie dough production (ongoing operation + reinvestment)" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Toll House baking plant EXPLICITLY excluded from the 2018 Ferrero confectionery sale; reinvested for cookie dough, still Nestlé-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

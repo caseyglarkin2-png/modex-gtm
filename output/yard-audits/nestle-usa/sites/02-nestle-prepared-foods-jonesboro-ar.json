@@ -159,5 +159,19 @@
     "connectivityIssue": "Rural but within an organized industrial park near Jonesboro; cellular coverage likely adequate - left false, flagged as inferred.",
     "scale": "No truck scale clearly visible; flagged uncertain."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.arkansasedc.com/news-events/newsroom/detail/2020/12/23/nestl%C3%A9-to-expand-production-facility-in-jonesboro", "date": "2020-12-23", "type": "econ-dev press", "claim": "Nestlé operates the Jonesboro frozen-food plant (open since 2002, ~750 employees) making Hot Pockets, Stouffer's, Lean Cuisine, DiGiorno; $100M+ expansion adding a new Hot Pockets line" },
+      { "tier": 1, "url": "https://www.foodprocessing.com/business-of-food-beverage/capital-spending/news/11300084/nestle-usa-begins-100-million-expansion-in-arkansas", "date": "2021", "type": "press", "claim": "Nestlé USA began $100M Jonesboro expansion to boost Hot Pockets production, +100 jobs" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active, growing self-operated frozen plant (retained portfolio); recent capital expansion, no closure/divestiture.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }
