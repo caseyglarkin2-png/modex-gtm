@@ -1,61 +1,179 @@
 {
   "name": "7-Eleven Grocery DC Fredericksburg VA (McLane Mid-Atlantic)",
   "type": "Grocery DC",
-  "coords": { "lat": 38.3493, "lng": -77.4963 },
+  "coords": {
+    "lat": 38.3493,
+    "lng": -77.4963
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 38.35140, "lng": -77.49680 },
-      { "lat": 38.35050, "lng": -77.49475 },
-      { "lat": 38.34800, "lng": -77.49450 },
-      { "lat": 38.34685, "lng": -77.49560 },
-      { "lat": 38.34730, "lng": -77.49700 },
-      { "lat": 38.34950, "lng": -77.49770 },
-      { "lat": 38.35080, "lng": -77.49730 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 38.35170, "lng": -77.49645 },
-      { "lat": 38.35150, "lng": -77.49600 },
-      { "lat": 38.35095, "lng": -77.49625 },
-      { "lat": 38.35115, "lng": -77.49670 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 38.3514,
+          "lng": -77.4968
+        },
+        {
+          "lat": 38.3505,
+          "lng": -77.49475
+        },
+        {
+          "lat": 38.348,
+          "lng": -77.4945
+        },
+        {
+          "lat": 38.34685,
+          "lng": -77.4956
+        },
+        {
+          "lat": 38.3473,
+          "lng": -77.497
+        },
+        {
+          "lat": 38.3495,
+          "lng": -77.4977
+        },
+        {
+          "lat": 38.3508,
+          "lng": -77.4973
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 38.3517,
+          "lng": -77.49645
+        },
+        {
+          "lat": 38.3515,
+          "lng": -77.496
+        },
+        {
+          "lat": 38.35095,
+          "lng": -77.49625
+        },
+        {
+          "lat": 38.35115,
+          "lng": -77.4967
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 38.34930, "lng": -77.49490 },
-        { "lat": 38.34855, "lng": -77.49475 },
-        { "lat": 38.34800, "lng": -77.49545 },
-        { "lat": 38.34875, "lng": -77.49560 }
-      ] },
-      { "ring": [
-        { "lat": 38.35040, "lng": -77.49380 },
-        { "lat": 38.34955, "lng": -77.49355 },
-        { "lat": 38.34915, "lng": -77.49460 },
-        { "lat": 38.35000, "lng": -77.49485 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 38.3493,
+            "lng": -77.4949
+          },
+          {
+            "lat": 38.34855,
+            "lng": -77.49475
+          },
+          {
+            "lat": 38.348,
+            "lng": -77.49545
+          },
+          {
+            "lat": 38.34875,
+            "lng": -77.4956
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 38.3504,
+            "lng": -77.4938
+          },
+          {
+            "lat": 38.34955,
+            "lng": -77.49355
+          },
+          {
+            "lat": 38.34915,
+            "lng": -77.4946
+          },
+          {
+            "lat": 38.35,
+            "lng": -77.49485
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 38.35060, "lng": -77.49490 },
-        { "lat": 38.34960, "lng": -77.49560 },
-        { "lat": 38.34945, "lng": -77.49530 },
-        { "lat": 38.35045, "lng": -77.49460 }
-      ] },
-      { "ring": [
-        { "lat": 38.34835, "lng": -77.49600 },
-        { "lat": 38.34740, "lng": -77.49640 },
-        { "lat": 38.34728, "lng": -77.49608 },
-        { "lat": 38.34823, "lng": -77.49568 }
-      ] },
-      { "ring": [
-        { "lat": 38.35075, "lng": -77.49730 },
-        { "lat": 38.34980, "lng": -77.49770 },
-        { "lat": 38.34968, "lng": -77.49738 },
-        { "lat": 38.35063, "lng": -77.49698 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 38.3506,
+            "lng": -77.4949
+          },
+          {
+            "lat": 38.3496,
+            "lng": -77.4956
+          },
+          {
+            "lat": 38.34945,
+            "lng": -77.4953
+          },
+          {
+            "lat": 38.35045,
+            "lng": -77.4946
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 38.34835,
+            "lng": -77.496
+          },
+          {
+            "lat": 38.3474,
+            "lng": -77.4964
+          },
+          {
+            "lat": 38.34728,
+            "lng": -77.49608
+          },
+          {
+            "lat": 38.34823,
+            "lng": -77.49568
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 38.35075,
+            "lng": -77.4973
+          },
+          {
+            "lat": 38.3498,
+            "lng": -77.4977
+          },
+          {
+            "lat": 38.34968,
+            "lng": -77.49738
+          },
+          {
+            "lat": 38.35063,
+            "lng": -77.49698
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 232, "pano": "5LnyuKg47Pi3P5MPwCaWfg", "hasCoverage": true },
-      "truckGate": { "heading": 118, "pano": "DzFX2ZTKyuCDOigR29qaBg", "hasCoverage": true }
+      "perimeter": {
+        "heading": 232,
+        "pano": "5LnyuKg47Pi3P5MPwCaWfg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 118,
+        "pano": "DzFX2ZTKyuCDOigR29qaBg",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -64,7 +182,7 @@
     "trailerParkingCapacity": 140,
     "truckGateCount": 1,
     "buildingCount": 4,
-    "siteAreaAcres": 25.0,
+    "siteAreaAcres": 25,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@38.3493,-77.4963,400m/data=!3m1!1e3",
@@ -93,7 +211,16 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoors", "shipRcvSeparate", "connectivityIssue"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoors",
+    "shipRcvSeparate",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "truckGate": "Property is fully perimeter-fenced (chain-link visible in multiple Street View frames around the dock yard), but no barrier arm, sliding gate, or staffed checkpoint was observed at any imaged drive mouth. The 1973-era campus uses open driveways from the public loop road into the fenced yard. Called false but flagged: some drive mouths are partially obscured by the fence-line buffer in Street View.",
     "guardShack": "No standalone guard booth (1-3 vehicle footprint, multi-side windows) observed at any entrance across full Street View perimeter coverage. The only standalone yard structures are a fenced equipment/container compound and dock canopies, not a gatehouse.",
@@ -112,5 +239,31 @@
     "postGateStaging": "Large paved interior aprons/yard between the building and the property edge provide deep internal queuing/staging room.",
     "buildingCount": "Main DC plus ~3 secondary structures (SE long buildings/cross-dock + maintenance/shop)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.mclaneco.com/mclane-mid-atlantic-celebrates-50-years/",
+        "date": "2023-09",
+        "type": "press",
+        "claim": "McLane Mid-Atlantic DC at 56 McLane Drive, Fredericksburg VA celebrated 50th anniversary; ~750 employees, serves 1,900+ customers"
+      },
+      {
+        "tier": 1,
+        "url": "https://joinmclane.com/midatlantic",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "McLane Mid-Atlantic Fredericksburg VA location actively operating and hiring"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "McLane Mid-Atlantic (7-Eleven primary grocery/foodservice supplier since 1975) operates the grocery DC at 56 McLane Drive, Fredericksburg VA; 50th-anniversary 2023, still hiring; part of 7-Eleven distribution network.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

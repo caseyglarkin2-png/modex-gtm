@@ -1,46 +1,130 @@
 {
   "name": "7-Eleven Combined Distribution Center Lewisville TX (E.A. Sween Dallas)",
   "type": "Combined Distribution Center",
-  "coords": { "lat": 33.025900, "lng": -96.981250 },
+  "coords": {
+    "lat": 33.0259,
+    "lng": -96.98125
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 33.027055, "lng": -96.981964 },
-      { "lat": 33.027055, "lng": -96.980288 },
-      { "lat": 33.025368, "lng": -96.980288 },
-      { "lat": 33.024967, "lng": -96.980336 },
-      { "lat": 33.025007, "lng": -96.981869 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 33.025505, "lng": -96.979340 },
-      { "lat": 33.025505, "lng": -96.979060 },
-      { "lat": 33.025380, "lng": -96.979060 },
-      { "lat": 33.025380, "lng": -96.979340 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.027055,
+          "lng": -96.981964
+        },
+        {
+          "lat": 33.027055,
+          "lng": -96.980288
+        },
+        {
+          "lat": 33.025368,
+          "lng": -96.980288
+        },
+        {
+          "lat": 33.024967,
+          "lng": -96.980336
+        },
+        {
+          "lat": 33.025007,
+          "lng": -96.981869
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.025505,
+          "lng": -96.97934
+        },
+        {
+          "lat": 33.025505,
+          "lng": -96.97906
+        },
+        {
+          "lat": 33.02538,
+          "lng": -96.97906
+        },
+        {
+          "lat": 33.02538,
+          "lng": -96.97934
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 33.025760, "lng": -96.981010 },
-        { "lat": 33.025690, "lng": -96.980360 },
-        { "lat": 33.025090, "lng": -96.980470 },
-        { "lat": 33.025150, "lng": -96.981080 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.02576,
+            "lng": -96.98101
+          },
+          {
+            "lat": 33.02569,
+            "lng": -96.98036
+          },
+          {
+            "lat": 33.02509,
+            "lng": -96.98047
+          },
+          {
+            "lat": 33.02515,
+            "lng": -96.98108
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 33.026790, "lng": -96.981020 },
-        { "lat": 33.026810, "lng": -96.980790 },
-        { "lat": 33.025120, "lng": -96.980960 },
-        { "lat": 33.025100, "lng": -96.981180 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.02679,
+            "lng": -96.98102
+          },
+          {
+            "lat": 33.02681,
+            "lng": -96.98079
+          },
+          {
+            "lat": 33.02512,
+            "lng": -96.98096
+          },
+          {
+            "lat": 33.0251,
+            "lng": -96.98118
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 33.026840, "lng": -96.980740 },
-      { "lat": 33.026850, "lng": -96.980330 },
-      { "lat": 33.025760, "lng": -96.980340 },
-      { "lat": 33.025760, "lng": -96.980720 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 33.02684,
+          "lng": -96.98074
+        },
+        {
+          "lat": 33.02685,
+          "lng": -96.98033
+        },
+        {
+          "lat": 33.02576,
+          "lng": -96.98034
+        },
+        {
+          "lat": 33.02576,
+          "lng": -96.98072
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 168, "pano": "hRvBXvOPn3GQl8_I4H-sdg", "hasCoverage": true },
-      "truckGate": { "heading": 280, "pano": "gJ4XoG4YpHw35OFyMNGvOg", "hasCoverage": true }
+      "perimeter": {
+        "heading": 168,
+        "pano": "hRvBXvOPn3GQl8_I4H-sdg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 280,
+        "pano": "gJ4XoG4YpHw35OFyMNGvOg",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -78,7 +162,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "shipRcvSeparate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "site": "1301 Ridgeview Dr, Lewisville TX 75057. Large multi-tenant flex/industrial building (north frontage carries Staples/Xerox/CPI/Bakery Express tenant signage). E.A. Sween operates the fresh-food Combined Distribution Center that serves 7-Eleven; its truck dock and refrigerated route-fleet drop yard occupy the east / southeast side of the building. Geofences cover that E.A. Sween operating footprint, not the whole park.",
     "truckGate": "Black sliding/swing metal gate across the truck driveway into the SE yard, set between precast screen walls; confirmed in Street View pano gJ4XoG4YpHw35OFyMNGvOg from the eastern public street (May 2025).",
@@ -92,5 +179,31 @@
     "railServed": "No rail spur enters the property.",
     "urbanRural": "Dense Lewisville / north-DFW industrial park; clearly Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.easween.com/location/lewisville-jobs/23252/6252001-4736286-4706057/4",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Dedicated E.A. Sween Lewisville jobs location page on company careers portal"
+      },
+      {
+        "tier": 1,
+        "url": "https://careers.easween.com/job/lewisville/warehouse-associates-19-50hr/23252/81579999024",
+        "date": "2026",
+        "type": "careers",
+        "claim": "E.A. Sween actively hiring Lewisville warehouse associates in 2026 (staffed, operating)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "E.A. Sween (7-Eleven CDC partner, Dallas market) operates the Lewisville CDC at 1301-A Ridgeview Dr Ste 100; multiple active 2026 job reqs confirm the suite is occupied and operating.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

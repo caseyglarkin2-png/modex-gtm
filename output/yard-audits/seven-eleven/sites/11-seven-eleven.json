@@ -1,61 +1,182 @@
 {
   "name": "7-Eleven Fresh Food Production & Distribution Eden Prairie MN (E.A. Sween)",
   "type": "Fresh Food Commissary",
-  "coords": { "lat": 44.86065, "lng": -93.4823 },
+  "coords": {
+    "lat": 44.86065,
+    "lng": -93.4823
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 44.8615, "lng": -93.4842 },
-      { "lat": 44.86155, "lng": -93.4815 },
-      { "lat": 44.8613, "lng": -93.48075 },
-      { "lat": 44.8604, "lng": -93.48055 },
-      { "lat": 44.85958, "lng": -93.4812 },
-      { "lat": 44.85972, "lng": -93.48285 },
-      { "lat": 44.8601, "lng": -93.4843 },
-      { "lat": 44.86095, "lng": -93.48445 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 44.86082, "lng": -93.48075 },
-      { "lat": 44.86078, "lng": -93.48052 },
-      { "lat": 44.86038, "lng": -93.48058 },
-      { "lat": 44.86042, "lng": -93.48081 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 44.8615,
+          "lng": -93.4842
+        },
+        {
+          "lat": 44.86155,
+          "lng": -93.4815
+        },
+        {
+          "lat": 44.8613,
+          "lng": -93.48075
+        },
+        {
+          "lat": 44.8604,
+          "lng": -93.48055
+        },
+        {
+          "lat": 44.85958,
+          "lng": -93.4812
+        },
+        {
+          "lat": 44.85972,
+          "lng": -93.48285
+        },
+        {
+          "lat": 44.8601,
+          "lng": -93.4843
+        },
+        {
+          "lat": 44.86095,
+          "lng": -93.48445
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 44.86082,
+          "lng": -93.48075
+        },
+        {
+          "lat": 44.86078,
+          "lng": -93.48052
+        },
+        {
+          "lat": 44.86038,
+          "lng": -93.48058
+        },
+        {
+          "lat": 44.86042,
+          "lng": -93.48081
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 44.86108, "lng": -93.48345 },
-        { "lat": 44.86095, "lng": -93.4818 },
-        { "lat": 44.86048, "lng": -93.48188 },
-        { "lat": 44.86062, "lng": -93.48352 }
-      ] },
-      { "ring": [
-        { "lat": 44.86138, "lng": -93.48405 },
-        { "lat": 44.86128, "lng": -93.48315 },
-        { "lat": 44.86095, "lng": -93.48322 },
-        { "lat": 44.86105, "lng": -93.48412 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 44.86108,
+            "lng": -93.48345
+          },
+          {
+            "lat": 44.86095,
+            "lng": -93.4818
+          },
+          {
+            "lat": 44.86048,
+            "lng": -93.48188
+          },
+          {
+            "lat": 44.86062,
+            "lng": -93.48352
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 44.86138,
+            "lng": -93.48405
+          },
+          {
+            "lat": 44.86128,
+            "lng": -93.48315
+          },
+          {
+            "lat": 44.86095,
+            "lng": -93.48322
+          },
+          {
+            "lat": 44.86105,
+            "lng": -93.48412
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 44.86072, "lng": -93.48118 },
-        { "lat": 44.8603, "lng": -93.48128 },
-        { "lat": 44.86026, "lng": -93.48098 },
-        { "lat": 44.86068, "lng": -93.48088 }
-      ] },
-      { "ring": [
-        { "lat": 44.86058, "lng": -93.48402 },
-        { "lat": 44.86038, "lng": -93.48405 },
-        { "lat": 44.86034, "lng": -93.4837 },
-        { "lat": 44.86054, "lng": -93.48367 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 44.86072,
+            "lng": -93.48118
+          },
+          {
+            "lat": 44.8603,
+            "lng": -93.48128
+          },
+          {
+            "lat": 44.86026,
+            "lng": -93.48098
+          },
+          {
+            "lat": 44.86068,
+            "lng": -93.48088
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 44.86058,
+            "lng": -93.48402
+          },
+          {
+            "lat": 44.86038,
+            "lng": -93.48405
+          },
+          {
+            "lat": 44.86034,
+            "lng": -93.4837
+          },
+          {
+            "lat": 44.86054,
+            "lng": -93.48367
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 44.86048, "lng": -93.4817 },
-      { "lat": 44.8604, "lng": -93.48092 },
-      { "lat": 44.86012, "lng": -93.48098 },
-      { "lat": 44.8602, "lng": -93.48176 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 44.86048,
+          "lng": -93.4817
+        },
+        {
+          "lat": 44.8604,
+          "lng": -93.48092
+        },
+        {
+          "lat": 44.86012,
+          "lng": -93.48098
+        },
+        {
+          "lat": 44.8602,
+          "lng": -93.48176
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 255, "pano": "", "hasCoverage": true },
-      "truckGate": { "heading": 259, "pano": "", "hasCoverage": true }
+      "perimeter": {
+        "heading": 255,
+        "pano": "",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 259,
+        "pano": "",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -93,7 +214,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "dropArea"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "dropArea"
+  ],
   "fieldNotes": {
     "truckGate": "No controlled truck entrance. Both dock entrances open directly off the W 78th St frontage road with no barrier arm, sliding/swing gate, or checkpoint pinch-point. Street View (2025-04) at the east dock face shows box trucks and trailers backing straight to the docks from an open street-side apron.",
     "guardShack": "No staffed booth at any entrance. The only road-side small structure is a passenger bus shelter at the office front, not a guard booth.",
@@ -111,5 +236,31 @@
     "siteAreaAcres": "~13.7 acres for the traced E.A. Sween operational footprint (production building + warehouse + trailer yard + truck-side parking); excludes neighboring tenants (K.R. Stokes etc.).",
     "railServed": "No rail spur enters the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://easween.com/about/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "E.A. Sween Company HQ at 16101 W 78th St, Eden Prairie MN 55344"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.fsis.usda.gov/inspection/fsis-inspected-establishments/e.a.-sween-company-0",
+        "date": "2026-06",
+        "type": "press",
+        "claim": "E.A. Sween Company is a current FSIS/USDA-inspected establishment (active food production)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "E.A. Sween Eden Prairie campus at 16101 W 78th St is HQ + USDA-inspected fresh-food production/distribution (~1.2M sandwiches/wk); E.A. Sween is the 3PL producing 7-Eleven fresh food; currently operating.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

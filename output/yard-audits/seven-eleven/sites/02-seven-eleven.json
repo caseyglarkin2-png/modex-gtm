@@ -1,48 +1,136 @@
 {
   "name": "7-Eleven Distribution Co Cold Storage DC Santa Fe Springs CA",
   "type": "Grocery DC",
-  "coords": { "lat": 33.93065, "lng": -118.0685 },
+  "coords": {
+    "lat": 33.93065,
+    "lng": -118.0685
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 33.93155, "lng": -118.06995 },
-      { "lat": 33.93168, "lng": -118.06745 },
-      { "lat": 33.92985, "lng": -118.06690 },
-      { "lat": 33.92950, "lng": -118.06880 },
-      { "lat": 33.92965, "lng": -118.06990 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 33.93150, "lng": -118.07000 },
-      { "lat": 33.93150, "lng": -118.06970 },
-      { "lat": 33.93095, "lng": -118.06968 },
-      { "lat": 33.93095, "lng": -118.06998 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.93155,
+          "lng": -118.06995
+        },
+        {
+          "lat": 33.93168,
+          "lng": -118.06745
+        },
+        {
+          "lat": 33.92985,
+          "lng": -118.0669
+        },
+        {
+          "lat": 33.9295,
+          "lng": -118.0688
+        },
+        {
+          "lat": 33.92965,
+          "lng": -118.0699
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.9315,
+          "lng": -118.07
+        },
+        {
+          "lat": 33.9315,
+          "lng": -118.0697
+        },
+        {
+          "lat": 33.93095,
+          "lng": -118.06968
+        },
+        {
+          "lat": 33.93095,
+          "lng": -118.06998
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 33.93000, "lng": -118.06940 },
-        { "lat": 33.93005, "lng": -118.06700 },
-        { "lat": 33.92958, "lng": -118.06695 },
-        { "lat": 33.92955, "lng": -118.06935 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.93,
+            "lng": -118.0694
+          },
+          {
+            "lat": 33.93005,
+            "lng": -118.067
+          },
+          {
+            "lat": 33.92958,
+            "lng": -118.06695
+          },
+          {
+            "lat": 33.92955,
+            "lng": -118.06935
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 33.93015, "lng": -118.06945 },
-        { "lat": 33.93020, "lng": -118.06700 },
-        { "lat": 33.93005, "lng": -118.06698 },
-        { "lat": 33.93000, "lng": -118.06943 }
-      ] },
-      { "ring": [
-        { "lat": 33.93120, "lng": -118.06968 },
-        { "lat": 33.93010, "lng": -118.06962 },
-        { "lat": 33.93010, "lng": -118.06950 },
-        { "lat": 33.93120, "lng": -118.06956 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.93015,
+            "lng": -118.06945
+          },
+          {
+            "lat": 33.9302,
+            "lng": -118.067
+          },
+          {
+            "lat": 33.93005,
+            "lng": -118.06698
+          },
+          {
+            "lat": 33.93,
+            "lng": -118.06943
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.9312,
+            "lng": -118.06968
+          },
+          {
+            "lat": 33.9301,
+            "lng": -118.06962
+          },
+          {
+            "lat": 33.9301,
+            "lng": -118.0695
+          },
+          {
+            "lat": 33.9312,
+            "lng": -118.06956
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 179, "pano": "Ic32PK_vo0QwbZNqyR5FbQ", "hasCoverage": true },
-      "truckGate": { "heading": 174, "pano": "TitYWlr0p01pOtxRd9dP1A", "hasCoverage": true },
-      "dropYards": { "heading": 80, "pano": "TnuhyeO0YDAJMdepupEjXg", "hasCoverage": true }
+      "perimeter": {
+        "heading": 179,
+        "pano": "Ic32PK_vo0QwbZNqyR5FbQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 174,
+        "pano": "TitYWlr0p01pOtxRd9dP1A",
+        "hasCoverage": true
+      },
+      "dropYards": {
+        "heading": 80,
+        "pano": "TnuhyeO0YDAJMdepupEjXg",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -51,7 +139,7 @@
     "trailerParkingCapacity": 90,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 14.0,
+    "siteAreaAcres": 14,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.93065,-118.0685,400m/data=!3m1!1e3",
@@ -80,7 +168,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dropArea", "shipRcvSeparate"],
+  "uncertainFields": [
+    "dropArea",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "West driveway off Lakeland Rd is open pavement with only a painted STOP bar at the property line; no barrier arm, sliding/swing gate, or checkpoint pinch-point. Confirmed in z21 satellite and Street View (Jan 2025) looking south down the drive.",
     "guardShack": "No booth structure anywhere at the entrance or along the drive in satellite or Street View. Building office front and employee lobby face Lakeland Rd, but there is no truck-gate guard shack.",
@@ -96,5 +187,31 @@
     "railServed": "No rail spur enters the property.",
     "siteAreaAcres": "~14 acres for the fenced property (building + court + parking) derived from the perimeter polygon."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://rebusinessonline.com/7-eleven-leases-warehouse-space-in-santa-fe-springs/",
+        "date": "2015-02",
+        "type": "press",
+        "claim": "7-Eleven leased 146,326 sq ft warehouse/distribution at 12330 Lakeland Road, Santa Fe Springs incl. 35,000 sq ft new cooler space"
+      },
+      {
+        "tier": 1,
+        "url": "https://nwsgc.com/project/7-eleven",
+        "date": "2015",
+        "type": "press",
+        "claim": "NWS contractor project at 12330 Lakeland Rd: tenant improvement + 10,000 sq ft freezer for 7-Eleven"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FLAG low-confidence: real 7-Eleven Distribution Co cold-storage DC, tenant of record is 7-Eleven (self). Only clean Tier-1 is the 2015 lease (7-yr term, lapsed ~2022); no post-2022 Tier-1 of continued occupancy, but no closure/WARN/for-lease negative either (the Yelp CLOSED tag is a misgeocoded retail-store listing). Probable, capped.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -1,58 +1,170 @@
 {
   "name": "7-Eleven Combined Distribution Center North Las Vegas NV (E.A. Sween)",
   "type": "Combined Distribution Center",
-  "coords": { "lat": 36.27817, "lng": -115.03283 },
+  "coords": {
+    "lat": 36.27817,
+    "lng": -115.03283
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 36.27950, "lng": -115.03285 },
-      { "lat": 36.27925, "lng": -115.03175 },
-      { "lat": 36.27675, "lng": -115.03185 },
-      { "lat": 36.27690, "lng": -115.03370 },
-      { "lat": 36.27845, "lng": -115.03400 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 36.27718, "lng": -115.03230 },
-      { "lat": 36.27718, "lng": -115.03192 },
-      { "lat": 36.27672, "lng": -115.03190 },
-      { "lat": 36.27672, "lng": -115.03228 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.2795,
+          "lng": -115.03285
+        },
+        {
+          "lat": 36.27925,
+          "lng": -115.03175
+        },
+        {
+          "lat": 36.27675,
+          "lng": -115.03185
+        },
+        {
+          "lat": 36.2769,
+          "lng": -115.0337
+        },
+        {
+          "lat": 36.27845,
+          "lng": -115.034
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 36.27718,
+          "lng": -115.0323
+        },
+        {
+          "lat": 36.27718,
+          "lng": -115.03192
+        },
+        {
+          "lat": 36.27672,
+          "lng": -115.0319
+        },
+        {
+          "lat": 36.27672,
+          "lng": -115.03228
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 36.27905, "lng": -115.03300 },
-        { "lat": 36.27918, "lng": -115.03205 },
-        { "lat": 36.27858, "lng": -115.03198 },
-        { "lat": 36.27848, "lng": -115.03295 }
-      ] },
-      { "ring": [
-        { "lat": 36.27855, "lng": -115.03195 },
-        { "lat": 36.27860, "lng": -115.03178 },
-        { "lat": 36.27700, "lng": -115.03182 },
-        { "lat": 36.27698, "lng": -115.03200 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 36.27905,
+            "lng": -115.033
+          },
+          {
+            "lat": 36.27918,
+            "lng": -115.03205
+          },
+          {
+            "lat": 36.27858,
+            "lng": -115.03198
+          },
+          {
+            "lat": 36.27848,
+            "lng": -115.03295
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 36.27855,
+            "lng": -115.03195
+          },
+          {
+            "lat": 36.2786,
+            "lng": -115.03178
+          },
+          {
+            "lat": 36.277,
+            "lng": -115.03182
+          },
+          {
+            "lat": 36.27698,
+            "lng": -115.032
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 36.27838, "lng": -115.03360 },
-        { "lat": 36.27842, "lng": -115.03318 },
-        { "lat": 36.27760, "lng": -115.03312 },
-        { "lat": 36.27758, "lng": -115.03355 }
-      ] },
-      { "ring": [
-        { "lat": 36.27838, "lng": -115.03250 },
-        { "lat": 36.27840, "lng": -115.03222 },
-        { "lat": 36.27758, "lng": -115.03218 },
-        { "lat": 36.27756, "lng": -115.03246 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 36.27838,
+            "lng": -115.0336
+          },
+          {
+            "lat": 36.27842,
+            "lng": -115.03318
+          },
+          {
+            "lat": 36.2776,
+            "lng": -115.03312
+          },
+          {
+            "lat": 36.27758,
+            "lng": -115.03355
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 36.27838,
+            "lng": -115.0325
+          },
+          {
+            "lat": 36.2784,
+            "lng": -115.03222
+          },
+          {
+            "lat": 36.27758,
+            "lng": -115.03218
+          },
+          {
+            "lat": 36.27756,
+            "lng": -115.03246
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 36.27758, "lng": -115.03300 },
-      { "lat": 36.27760, "lng": -115.03215 },
-      { "lat": 36.27700, "lng": -115.03212 },
-      { "lat": 36.27698, "lng": -115.03298 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 36.27758,
+          "lng": -115.033
+        },
+        {
+          "lat": 36.2776,
+          "lng": -115.03215
+        },
+        {
+          "lat": 36.277,
+          "lng": -115.03212
+        },
+        {
+          "lat": 36.27698,
+          "lng": -115.03298
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 339, "pano": "Ff0KxKbS6oiJbkA0sBUNNw", "hasCoverage": true },
-      "truckGate": { "heading": 353, "pano": "Ff0KxKbS6oiJbkA0sBUNNw", "hasCoverage": true }
+      "perimeter": {
+        "heading": 339,
+        "pano": "Ff0KxKbS6oiJbkA0sBUNNw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 353,
+        "pano": "Ff0KxKbS6oiJbkA0sBUNNw",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -90,7 +202,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "shipRcvSeparate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Single controlled truck entrance at the SE corner off E. Centennial Pkwy. Street View (2026-02) shows a cantilever sliding gate spanning the drive, fully fenced perimeter.",
     "guardShack": "Small red/white 7-Eleven-branded guard booth sits in the median of the entrance drive between the in and out lanes (1-vehicle footprint, windows on multiple sides) - clearly visible in Street View and z21 satellite.",
@@ -106,5 +222,31 @@
     "railServed": "No rail spur enters the property.",
     "trailerParkingCapacity": "Estimated from row lengths in z18/z19 imagery."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.easween.com/location/north-las-vegas-jobs/23252/6252001-5509151-5509403/4",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "E.A. Sween careers portal hosts a dedicated North Las Vegas jobs location page (active staffed facility)"
+      },
+      {
+        "tier": 1,
+        "url": "https://easween.com/careers-v1/locations/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "E.A. Sween lists Las Vegas CDC at 6350 E Centennial Pkwy, North Las Vegas NV 89115"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "E.A. Sween (7-Eleven CDC partner) operates the North Las Vegas CDC at 6350 E Centennial Pkwy; corroborated by 7-Eleven-branded guard booth in 2026-02 Street View; neighboring Meadow Gold Dairy is a co-located business, not a replacement.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

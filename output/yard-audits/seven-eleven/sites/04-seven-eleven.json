@@ -1,51 +1,146 @@
 {
   "name": "7-Eleven Combined Distribution Center Salt Lake City UT (E.A. Sween)",
   "type": "Combined Distribution Center",
-  "coords": { "lat": 40.74408, "lng": -111.95258 },
+  "coords": {
+    "lat": 40.74408,
+    "lng": -111.95258
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 40.74482, "lng": -111.95158 },
-      { "lat": 40.74482, "lng": -111.95362 },
-      { "lat": 40.74333, "lng": -111.95362 },
-      { "lat": 40.74333, "lng": -111.95158 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 40.74388, "lng": -111.95170 },
-      { "lat": 40.74388, "lng": -111.95150 },
-      { "lat": 40.74352, "lng": -111.95150 },
-      { "lat": 40.74352, "lng": -111.95170 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.74482,
+          "lng": -111.95158
+        },
+        {
+          "lat": 40.74482,
+          "lng": -111.95362
+        },
+        {
+          "lat": 40.74333,
+          "lng": -111.95362
+        },
+        {
+          "lat": 40.74333,
+          "lng": -111.95158
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.74388,
+          "lng": -111.9517
+        },
+        {
+          "lat": 40.74388,
+          "lng": -111.9515
+        },
+        {
+          "lat": 40.74352,
+          "lng": -111.9515
+        },
+        {
+          "lat": 40.74352,
+          "lng": -111.9517
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 40.74452, "lng": -111.95248 },
-        { "lat": 40.74452, "lng": -111.95352 },
-        { "lat": 40.74360, "lng": -111.95352 },
-        { "lat": 40.74360, "lng": -111.95248 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 40.74452,
+            "lng": -111.95248
+          },
+          {
+            "lat": 40.74452,
+            "lng": -111.95352
+          },
+          {
+            "lat": 40.7436,
+            "lng": -111.95352
+          },
+          {
+            "lat": 40.7436,
+            "lng": -111.95248
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 40.74438, "lng": -111.95238 },
-        { "lat": 40.74438, "lng": -111.95248 },
-        { "lat": 40.74388, "lng": -111.95248 },
-        { "lat": 40.74388, "lng": -111.95238 }
-      ] },
-      { "ring": [
-        { "lat": 40.74386, "lng": -111.95238 },
-        { "lat": 40.74386, "lng": -111.95205 },
-        { "lat": 40.74378, "lng": -111.95205 },
-        { "lat": 40.74378, "lng": -111.95238 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 40.74438,
+            "lng": -111.95238
+          },
+          {
+            "lat": 40.74438,
+            "lng": -111.95248
+          },
+          {
+            "lat": 40.74388,
+            "lng": -111.95248
+          },
+          {
+            "lat": 40.74388,
+            "lng": -111.95238
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.74386,
+            "lng": -111.95238
+          },
+          {
+            "lat": 40.74386,
+            "lng": -111.95205
+          },
+          {
+            "lat": 40.74378,
+            "lng": -111.95205
+          },
+          {
+            "lat": 40.74378,
+            "lng": -111.95238
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 40.74360, "lng": -111.95248 },
-      { "lat": 40.74360, "lng": -111.95352 },
-      { "lat": 40.74336, "lng": -111.95352 },
-      { "lat": 40.74336, "lng": -111.95248 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 40.7436,
+          "lng": -111.95248
+        },
+        {
+          "lat": 40.7436,
+          "lng": -111.95352
+        },
+        {
+          "lat": 40.74336,
+          "lng": -111.95352
+        },
+        {
+          "lat": 40.74336,
+          "lng": -111.95248
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 304, "pano": "u3lvMh_ZOrLa2xYuXjdoVA", "hasCoverage": true },
-      "truckGate": { "heading": 298, "pano": "_pS_4fGUb6U5gIbuGy9Ghg", "hasCoverage": true }
+      "perimeter": {
+        "heading": 304,
+        "pano": "u3lvMh_ZOrLa2xYuXjdoVA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 298,
+        "pano": "_pS_4fGUb6U5gIbuGy9Ghg",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -83,7 +178,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Open, uncontrolled access. The Google Street View car drove the entire interior truck yard freely (multiple interior panos), which only happens at open sites. No barrier arm, sliding/swing gate, or checkpoint pinch-point where the property meets Swaner Road. Only a low decorative chain-link fence with a hedge along the employee-parking edge; the truck driveways open directly off the road.",
     "guardShack": "No staffed booth at any entrance. No 1-3-space windowed structure beside the truck lane in satellite or any Street View frame. The only small structure near the entrance is a fleet fuel-island canopy and the Penske fleet-maintenance building, not a gatehouse.",
@@ -102,5 +201,31 @@
     "railServed": "A rail line runs along the far (east) side of Swaner Road serving a neighboring materials yard; no spur enters the E.A. Sween property.",
     "location": "Confirmed via address 1172 S Swaner Rd, UT 84104 and Nominatim geocode 40.7441475, -111.9520720. On-site Penske Truck Leasing (Yelp) and fleet-maintenance bays match the E.A. Sween CDC. Neighboring lumber/materials yards to west and south were excluded from the geofence."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://easween.com/careers-v1/locations/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "E.A. Sween lists Salt Lake City CDC at 1172 S Swaner Rd among active locations"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/cmp/E.a.-Sween-1/locations",
+        "date": "2026",
+        "type": "careers",
+        "claim": "E.A. Sween lists Salt Lake City as an active location with job postings"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "E.A. Sween (7-Eleven CDC partner) operates the Salt Lake City CDC at 1172 S Swaner Rd; no closure/relocation evidence; on-site Penske fleet maintenance consistent with active CDC.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

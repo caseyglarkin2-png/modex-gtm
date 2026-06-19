@@ -1,48 +1,135 @@
 {
   "name": "7-Eleven Grocery DC Fort Worth TX (McLane North Texas)",
   "type": "Grocery DC",
-  "coords": { "lat": 32.64015, "lng": -97.30985 },
+  "coords": {
+    "lat": 32.64015,
+    "lng": -97.30985
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 32.64340, "lng": -97.31118 },
-      { "lat": 32.64332, "lng": -97.30685 },
-      { "lat": 32.63785, "lng": -97.30682 },
-      { "lat": 32.63635, "lng": -97.30720 },
-      { "lat": 32.63620, "lng": -97.31098 },
-      { "lat": 32.63790, "lng": -97.31112 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 32.64092, "lng": -97.31168 },
-      { "lat": 32.64090, "lng": -97.31118 },
-      { "lat": 32.64045, "lng": -97.31120 },
-      { "lat": 32.64047, "lng": -97.31170 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.6434,
+          "lng": -97.31118
+        },
+        {
+          "lat": 32.64332,
+          "lng": -97.30685
+        },
+        {
+          "lat": 32.63785,
+          "lng": -97.30682
+        },
+        {
+          "lat": 32.63635,
+          "lng": -97.3072
+        },
+        {
+          "lat": 32.6362,
+          "lng": -97.31098
+        },
+        {
+          "lat": 32.6379,
+          "lng": -97.31112
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.64092,
+          "lng": -97.31168
+        },
+        {
+          "lat": 32.6409,
+          "lng": -97.31118
+        },
+        {
+          "lat": 32.64045,
+          "lng": -97.3112
+        },
+        {
+          "lat": 32.64047,
+          "lng": -97.3117
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 32.64320, "lng": -97.30905 },
-        { "lat": 32.64318, "lng": -97.30700 },
-        { "lat": 32.63960, "lng": -97.30702 },
-        { "lat": 32.63962, "lng": -97.30908 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 32.6432,
+            "lng": -97.30905
+          },
+          {
+            "lat": 32.64318,
+            "lng": -97.307
+          },
+          {
+            "lat": 32.6396,
+            "lng": -97.30702
+          },
+          {
+            "lat": 32.63962,
+            "lng": -97.30908
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 32.64330, "lng": -97.30955 },
-        { "lat": 32.64328, "lng": -97.30912 },
-        { "lat": 32.63985, "lng": -97.30916 },
-        { "lat": 32.63987, "lng": -97.30959 }
-      ] },
-      { "ring": [
-        { "lat": 32.63800, "lng": -97.31090 },
-        { "lat": 32.63760, "lng": -97.31088 },
-        { "lat": 32.63762, "lng": -97.30960 },
-        { "lat": 32.63802, "lng": -97.30962 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 32.6433,
+            "lng": -97.30955
+          },
+          {
+            "lat": 32.64328,
+            "lng": -97.30912
+          },
+          {
+            "lat": 32.63985,
+            "lng": -97.30916
+          },
+          {
+            "lat": 32.63987,
+            "lng": -97.30959
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 32.638,
+            "lng": -97.3109
+          },
+          {
+            "lat": 32.6376,
+            "lng": -97.31088
+          },
+          {
+            "lat": 32.63762,
+            "lng": -97.3096
+          },
+          {
+            "lat": 32.63802,
+            "lng": -97.30962
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
-      "truckGate": { "heading": 85, "pano": "3_3mZI03-fGvItei_Z28jA", "hasCoverage": true }
+      "perimeter": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "truckGate": {
+        "heading": 85,
+        "pano": "3_3mZI03-fGvItei_Z28jA",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -51,7 +138,7 @@
     "trailerParkingCapacity": 260,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 64.0,
+    "siteAreaAcres": 64,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@32.64015,-97.30985,400m/data=!3m1!1e3",
@@ -80,7 +167,14 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "shipRcvSeparate"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "facility": "McLane North Texas grocery DC, 7550 Oak Grove Rd, in Carter Industrial Park. McLane built out ~625k sq ft of a vacant ~1.2M sq ft ex-Associated Wholesale Grocers building on a 90.7-acre parcel (opened March 2019). Ambient + cooler + freezer; serves 7-Eleven and other c-stores across DFW, OK, KS, AR, LA.",
     "truckGate": "Controlled property: black metal perimeter fence confirmed along the SE/E (south-road Street View) and a masonry/precast perimeter wall on the W between McLane and the 7401 office property. Single shared vehicle/truck entrance off the N-S west road (Oak Grove Rd frontage) at ~32.6409,-97.3116 feeding the employee lot and the paved yard. No barrier arm visible at the throat in 2022-2025 imagery.",
@@ -100,5 +194,31 @@
     "urbanRural": "Inside Fort Worth / DFW metro dense industrial fabric (Carter Industrial Park) -> Urban; cellular coverage strong -> connectivityIssue=false.",
     "streetView": "Only the entrance/employee-lot area has Street View coverage (Google car drove in, 2022-11 pano 3_3mZI03-fGvItei_Z28jA). Interior drop-yard and dock-apron centroids return ZERO_RESULTS, so those zones have no pano."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://joinmclane.com/northtexas",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "McLane North Texas at 7550 Oak Grove Rd, Fort Worth TX 76140 currently operating and actively hiring"
+      },
+      {
+        "tier": 1,
+        "url": "https://csnews.com/mclane-sets-march-2019-opening-newest-distribution-center",
+        "date": "2019-03",
+        "type": "press",
+        "claim": "McLane opened 625,000 sq ft North Texas grocery DC at 7550 Oak Grove Rd in March 2019 (ambient/cooler/freezer)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "McLane North Texas (7-Eleven primary grocery/foodservice supplier) operates the 625k sq ft grocery DC at 7550 Oak Grove Rd, Fort Worth TX (opened 2019, live careers page + active hiring); part of 7-Eleven distribution network.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

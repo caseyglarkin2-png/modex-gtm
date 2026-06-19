@@ -1,54 +1,155 @@
 {
   "name": "7-Eleven Combined Distribution Center Bohemia NY",
   "type": "Fresh Food Commissary",
-  "coords": { "lat": 40.77695, "lng": -73.09140 },
+  "coords": {
+    "lat": 40.77695,
+    "lng": -73.0914
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 40.77815, "lng": -73.09345 },
-      { "lat": 40.77792, "lng": -73.08948 },
-      { "lat": 40.77665, "lng": -73.08922 },
-      { "lat": 40.77600, "lng": -73.08968 },
-      { "lat": 40.77578, "lng": -73.09190 },
-      { "lat": 40.77628, "lng": -73.09338 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 40.77648, "lng": -73.09340 },
-      { "lat": 40.77646, "lng": -73.09300 },
-      { "lat": 40.77620, "lng": -73.09302 },
-      { "lat": 40.77622, "lng": -73.09342 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.77815,
+          "lng": -73.09345
+        },
+        {
+          "lat": 40.77792,
+          "lng": -73.08948
+        },
+        {
+          "lat": 40.77665,
+          "lng": -73.08922
+        },
+        {
+          "lat": 40.776,
+          "lng": -73.08968
+        },
+        {
+          "lat": 40.77578,
+          "lng": -73.0919
+        },
+        {
+          "lat": 40.77628,
+          "lng": -73.09338
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.77648,
+          "lng": -73.0934
+        },
+        {
+          "lat": 40.77646,
+          "lng": -73.093
+        },
+        {
+          "lat": 40.7762,
+          "lng": -73.09302
+        },
+        {
+          "lat": 40.77622,
+          "lng": -73.09342
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 40.77648, "lng": -73.09232 },
-        { "lat": 40.77628, "lng": -73.08975 },
-        { "lat": 40.77598, "lng": -73.08982 },
-        { "lat": 40.77618, "lng": -73.09238 }
-      ] },
-      { "ring": [
-        { "lat": 40.77735, "lng": -73.08948 },
-        { "lat": 40.77738, "lng": -73.08918 },
-        { "lat": 40.77665, "lng": -73.08920 },
-        { "lat": 40.77662, "lng": -73.08950 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 40.77648,
+            "lng": -73.09232
+          },
+          {
+            "lat": 40.77628,
+            "lng": -73.08975
+          },
+          {
+            "lat": 40.77598,
+            "lng": -73.08982
+          },
+          {
+            "lat": 40.77618,
+            "lng": -73.09238
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.77735,
+            "lng": -73.08948
+          },
+          {
+            "lat": 40.77738,
+            "lng": -73.08918
+          },
+          {
+            "lat": 40.77665,
+            "lng": -73.0892
+          },
+          {
+            "lat": 40.77662,
+            "lng": -73.0895
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 40.77678, "lng": -73.09238 },
-        { "lat": 40.77662, "lng": -73.08972 },
-        { "lat": 40.77648, "lng": -73.08975 },
-        { "lat": 40.77664, "lng": -73.09240 }
-      ] },
-      { "ring": [
-        { "lat": 40.77735, "lng": -73.08962 },
-        { "lat": 40.77738, "lng": -73.08948 },
-        { "lat": 40.77665, "lng": -73.08950 },
-        { "lat": 40.77662, "lng": -73.08964 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 40.77678,
+            "lng": -73.09238
+          },
+          {
+            "lat": 40.77662,
+            "lng": -73.08972
+          },
+          {
+            "lat": 40.77648,
+            "lng": -73.08975
+          },
+          {
+            "lat": 40.77664,
+            "lng": -73.0924
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.77735,
+            "lng": -73.08962
+          },
+          {
+            "lat": 40.77738,
+            "lng": -73.08948
+          },
+          {
+            "lat": 40.77665,
+            "lng": -73.0895
+          },
+          {
+            "lat": 40.77662,
+            "lng": -73.08964
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 197, "pano": "UaTlER7gaFDlMeQwClMvhQ", "hasCoverage": true },
-      "truckGate": { "heading": 266, "pano": "UaTlER7gaFDlMeQwClMvhQ", "hasCoverage": true }
+      "perimeter": {
+        "heading": 197,
+        "pano": "UaTlER7gaFDlMeQwClMvhQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 266,
+        "pano": "UaTlER7gaFDlMeQwClMvhQ",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -86,7 +187,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "No barrier arm, sliding/swing gate, or checkpoint anywhere. Open suburban industrial-park access: trucks turn off McCormick Dr onto open private pavement and wrap to the south/east dock yards with no control point. Street View from McCormick frontage and the south service road shows no fence or pinch-point.",
     "guardShack": "No staffed booth at any entrance. North office frontage on McCormick Dr is open landscaped parking; no booth beside any truck lane.",
@@ -102,5 +207,31 @@
     "buildingCount": "One large multi-tenant industrial building on the audited parcel; small neighboring buildings (Packaging Dynamics) are separate parcels.",
     "railServed": "No rail spur into the property; nearest rail is the LIRR Main Line well to the north, not connected."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.fsis.usda.gov/inspection/fsis-inspected-establishments/constance-food-group-dba-norris-food-services-llc",
+        "date": "2025-04",
+        "type": "press",
+        "claim": "USDA FSIS inspected establishment M34754+P34754 'Constance Food Group DBA Norris Food Services' at 545 Johnson Ave Ste 10, Bohemia NY, grant date Apr 2025 (active federal inspection grant)"
+      },
+      {
+        "tier": 1,
+        "url": "https://csnews.com/csnews-looks-inside-new-7-eleven-commissary-cdc",
+        "date": "2025-01",
+        "type": "press",
+        "claim": "7-Eleven Fresh Foods Commissary & CDC in Bohemia NY operated by Norris Food Services, serves 674 7-Eleven stores in NY/NJ/PA"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Operated by Constance Food Group d/b/a Norris Food Services (7-Eleven CDC/commissary 3PL partner); live USDA FSIS meat/poultry grant Apr 2025 at exact address; CDC/commissary with truck yard, not a store.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

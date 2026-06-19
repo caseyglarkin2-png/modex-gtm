@@ -1,35 +1,88 @@
 {
   "name": "7-Eleven Combined Distribution Center Austin TX (E.A. Sween)",
   "type": "Combined Distribution Center",
-  "coords": { "lat": 30.340827, "lng": -97.672565 },
+  "coords": {
+    "lat": 30.340827,
+    "lng": -97.672565
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 30.341500, "lng": -97.673350 },
-      { "lat": 30.341780, "lng": -97.672520 },
-      { "lat": 30.340150, "lng": -97.671780 },
-      { "lat": 30.339880, "lng": -97.672610 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 30.3415,
+          "lng": -97.67335
+        },
+        {
+          "lat": 30.34178,
+          "lng": -97.67252
+        },
+        {
+          "lat": 30.34015,
+          "lng": -97.67178
+        },
+        {
+          "lat": 30.33988,
+          "lng": -97.67261
+        }
+      ]
+    },
     "truckGate": null,
     "dropYards": [
-      { "ring": [
-        { "lat": 30.341050, "lng": -97.672950 },
-        { "lat": 30.341180, "lng": -97.672560 },
-        { "lat": 30.340450, "lng": -97.672230 },
-        { "lat": 30.340330, "lng": -97.672620 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 30.34105,
+            "lng": -97.67295
+          },
+          {
+            "lat": 30.34118,
+            "lng": -97.67256
+          },
+          {
+            "lat": 30.34045,
+            "lng": -97.67223
+          },
+          {
+            "lat": 30.34033,
+            "lng": -97.67262
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 30.341050, "lng": -97.672950 },
-        { "lat": 30.341180, "lng": -97.672560 },
-        { "lat": 30.340450, "lng": -97.672230 },
-        { "lat": 30.340330, "lng": -97.672620 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 30.34105,
+            "lng": -97.67295
+          },
+          {
+            "lat": 30.34118,
+            "lng": -97.67256
+          },
+          {
+            "lat": 30.34045,
+            "lng": -97.67223
+          },
+          {
+            "lat": 30.34033,
+            "lng": -97.67262
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 340, "pano": "dqmsaKkN-jISlA27mXq8QA", "hasCoverage": true },
-      "truckGate": { "heading": 315, "pano": "dqmsaKkN-jISlA27mXq8QA", "hasCoverage": true }
+      "perimeter": {
+        "heading": 340,
+        "pano": "dqmsaKkN-jISlA27mXq8QA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 315,
+        "pano": "dqmsaKkN-jISlA27mXq8QA",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -43,18 +96,34 @@
   },
   "mapsUrl": "https://www.google.com/maps/@30.340827,-97.672565,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoors", "multipleFacilities"],
+  "uncertainFields": [
+    "dockDoors",
+    "multipleFacilities"
+  ],
   "fieldNotes": {
     "facility": "8606 Wall St is a multi-tenant tilt-wall warehouse in the Prologis Walnut Creek Business Park; E.A. Sween operates a 7-Eleven Combined Distribution Center (CDC, fresh-food cross-dock) from Suite 450. The audited footprint is the central two-building cluster sharing an open truck court; other suites (e.g. CEVA) share the same court.",
     "truckGate": "Street View (pano dqmsaKkN-jISlA27mXq8QA, 2022-04) and satellite show driveways opening directly onto Wall St with no barrier arm, sliding gate, or pinch-point. Open business-park access.",
@@ -69,5 +138,31 @@
     "urbanRural": "Dense Austin industrial fabric inside the 700-acre Walnut Creek Business District, near US-183/US-290/I-35. Urban.",
     "railServed": "No rail spur on or into the parcel."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.easween.com/job/austin/overnight-route-delivery-drivers-22-75hr/23252/81909701136",
+        "date": "2026-02",
+        "type": "careers",
+        "claim": "E.A. Sween actively recruiting Austin route delivery drivers (deliver fresh food to convenience stores) in 2026"
+      },
+      {
+        "tier": 1,
+        "url": "https://easween.com/careers-v1/locations/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "E.A. Sween lists Austin CDC at 8606 Wall St Ste 450 among active locations"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "E.A. Sween (7-Eleven CDC partner) operates the Austin CDC at 8606 Wall St Ste 450; LoopNet \"available\" listing was a separate Building 14, not Ste 450; E.A. Sween still hiring in Austin 2026.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
