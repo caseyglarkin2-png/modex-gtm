@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-02T16:09:24.074Z",
+  "builtAt": "2026-06-19T04:59:39.383Z",
   "account": {
     "slug": "cost-plus-world-market",
     "displayName": "Cost Plus World Market",
@@ -9,10 +9,10 @@
     "coverageNote": {
       "auditedCount": 2,
       "estimatedFootprint": 4,
+      "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "World Market (Cost Plus) operates ~250 US retail stores fed by a handful of DCs; we mapped the DC sites where yard ops matter.",
-      "auditedScope": "US"
+      "note": "World Market (Cost Plus) operates ~250 US retail stores fed by a handful of DCs; we mapped the DC sites where yard ops matter."
     },
     "featuredSiteId": "01-cost-plus-world-market-stockton-ca-distribution-center",
     "dossierIntro": "Cost Plus World Market runs imported home-goods retail. 4 distribution centers; we audited 2. Stockton CA covers 95 acres with 90 dock doors and 500 trailer spots. Container-heavy inbound from West Coast ports. YardFlow runs container drayage and outbound retail truckload as distinct flows without forcing the staging yard to choose.",
@@ -278,28 +278,6 @@
         },
         "dossierExcerpt": "The roster coordinate sits squarely on a very large rectangular distribution\nwarehouse with rooftop solar panels. Web research (Yelp, Manta, Foursquare,\nYellowpages, CMac) all list the **Cost Plus World Market Stockton Distribution\nCenter at 3610 S Airport Way, Stockton CA 95206**, and a Kaleris case study\nnames it as the company's West Coast DC. A 500,000 sq ft DC was built for Cost\nPlus World Market by Ellis-Gibson Development — consistent with the footprint\nseen here. The roster geocode (ROOTOP, moved 2,396 m) landed correctly on the\nbuilding. The truck gate is separately listed as \"Cost Plus World Market Truck\nGate\" at 1735 Zephyr St on Waze, with operating hours Mon-Sat 07:00-16:00.\nBuilding positively identified.",
         "mapsUrl": "https://www.google.com/maps/@37.916788,-121.25568,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cost-plus-world-market/01-cost-plus-world-market-stockton-ca-distribution-center-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 37.916788,
-              "lng": -121.25568
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cost-plus-world-market/01-cost-plus-world-market-stockton-ca-distribution-center-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 37.916788,
-              "lng": -121.25568
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "A named 'Cost Plus World Market Truck Gate' business exists at 1735 Zephyr St per Waze, with managed hours (Mon-Sat 07:00-16:00). The entire property is enclosed by a continuous block/concrete perimeter wall plus hedge along Zephyr St and chain-link fence around the north and south trailer yards. Truck gate confirmed by listing; treated as true.",
           "guardShack": "No guard booth was visible in any Street View pano along Zephyr St (continuous wall), nor at the open office driveway on the east side. No 1-3-vehicle-footprint booth structure identified at any entrance - low confidence.",
@@ -312,6 +290,40 @@
           "entryLanes": "Could not positively count gate lanes - estimate 1 in / 1 out at a shared truck gate.",
           "preGateStaging": "Trucks observed parked/staged along Zephyr St in multiple Street View captures (2022 and 2024) outside the gate.",
           "siteAreaAcres": "~95 acres derived from the perimeter box which includes the building, north drop yard, and the large south drop yard across the rail line."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://worldmarket.wd5.myworkdayjobs.com/en-US/cost_plus_world_market_distribution/job/CA-Stockton-3610-S-Airport-Way/Distribution-Warehouse-Associate_R-0103208-1",
+              "date": "2026-01",
+              "type": "careers-req",
+              "claim": "Active World Market Workday Distribution Warehouse Associate requisitions at the Stockton DC (3610 S Airport Way / 1735 Zephyr St, same parcel APN 177-140-33), hiring as of Jan 2026 at $18.50-22.50/hr"
+            },
+            {
+              "tier": 1,
+              "url": "https://kaleris.com/success_stories/cost-plus-world-market-case-study/",
+              "date": "2024",
+              "type": "press",
+              "claim": "CPWM distribution network described as ~2M sq ft including the Stockton, CA warehouse with 100+ dock doors, 550 trailer positions, and a guard shack"
+            },
+            {
+              "tier": 2,
+              "url": "https://www.kingswood-capital.com/kingswood-capital-management-completes-acquisition-of-cost-plus-world-market/",
+              "date": "2021-01",
+              "type": "press",
+              "claim": "Kingswood Capital completed acquisition of CPWM from Bed Bath & Beyond on 2021-01-19, deal explicitly included the two distribution facilities; CPWM was independent BEFORE the BBBY 2023 bankruptcy, so the DC was not closed in it"
+            }
+          ],
+          "imageryDate": "2024",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "CPWM-operated Stockton DC, active company careers reqs Jan 2026; survived the 2021 Kingswood divestiture and pre-dated/escaped the BBBY 2023 bankruptcy; 'CLOSED' Yelp hits are retail stores, not this DC.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -436,8 +448,7 @@
               ]
             }
           ],
-          "staging": null,
-          "streetViewMeta": {}
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 110,
@@ -520,28 +531,6 @@
         },
         "dossierExcerpt": "The roster coordinate (ROOFTOP geocode, moved only 8 m) landed directly on a\nvery large rectangular distribution warehouse set in open farmland off US Route\n460. Web research (Nextdoor, CMac, Foursquare, TruckMap, Isle of Wight Chamber\nof Commerce, and a Cost Plus press release) all confirm the **Cost Plus World\nMarket Virginia Distribution Center at 12300 Dominion Way, Windsor VA 23487**.\nA \"World Market\" monument sign is visible at the entrance driveway in Street\nView. Building positively identified — the roster point is correct.",
         "mapsUrl": "https://www.google.com/maps/@36.799902,-76.713042,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cost-plus-world-market/02-cost-plus-world-market-windsor-va-distribution-center-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 36.799902,
-              "lng": -76.713042
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cost-plus-world-market/02-cost-plus-world-market-windsor-va-distribution-center-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 36.799902,
-              "lng": -76.713042
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Trucks use a dedicated gate separate from the car/office entrance. The west driveway off Route 460 carries a 'NO TRUCKS' sign (Street View). The truck route wraps to the SE corner of the building where a controlled gate / guard-booth pinch-point sits beside the truck lane.",
           "guardShack": "A small rectangular guard-booth structure is clearly visible at z20 sitting on a triangular paved island at the SE corner of the building, with the truck lane splitting around it (in/out). Web research (TruckMap driver notes) explicitly states 'Check-in is at the security guard shack.' High confidence.",
@@ -557,6 +546,47 @@
           "preGateStaging": "No dedicated paved pre-gate truck staging area observed outside the gate; driver notes say no overnight parking.",
           "postGateStaging": "Paved internal yard space inside the gate before the dock doors provides queue/holding room.",
           "siteAreaAcres": "~75 acres derived from the perimeter box covering the building, north and south drop yards, retention ponds, employee parking and truck circulation."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.snagajob.com/jobs/1173430996",
+              "date": "2025",
+              "type": "careers-req",
+              "claim": "World Market Distribution Center Operations Manager requisition for the Windsor, VA DC ($100k-125k); company DC roles actively hiring in Windsor VA as of Jan 2026"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.insidetheisle.com/wp-content/uploads/2015/12/CPWM-PR-120815_final.pdf",
+              "date": "2015-12",
+              "type": "press",
+              "claim": "CPWM company PR announcing its investment in the Windsor VA distribution center (Shirley T. Holland Industrial Park); establishes CPWM as the operating entity of this site"
+            },
+            {
+              "tier": 1,
+              "url": "https://kaleris.com/success_stories/cost-plus-world-market-case-study/",
+              "date": "2024",
+              "type": "press",
+              "claim": "CPWM distribution network described as ~2M sq ft including the Windsor, VA warehouse with 100+ dock doors, 550 trailer positions, and a guard shack (matches the audited guard shack + dock counts)"
+            },
+            {
+              "tier": 2,
+              "url": "https://www.kingswood-capital.com/kingswood-capital-management-completes-acquisition-of-cost-plus-world-market/",
+              "date": "2021-01",
+              "type": "press",
+              "claim": "Kingswood Capital completed acquisition of CPWM from Bed Bath & Beyond on 2021-01-19, deal explicitly included the two distribution facilities; CPWM was independent BEFORE the BBBY 2023 bankruptcy, so the DC was not closed in it"
+            }
+          ],
+          "imageryDate": "2024",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "CPWM-operated Windsor VA DC (12300 Dominion Way / Windsor Blvd), active company careers reqs into 2026; survived the 2021 Kingswood divestiture and pre-dated the BBBY 2023 bankruptcy; 'CLOSED' hit was a Fairfax retail store, not this DC.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       }
     ]

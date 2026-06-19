@@ -1,19 +1,19 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-02T16:18:21.278Z",
+  "builtAt": "2026-06-19T04:59:43.042Z",
   "account": {
     "slug": "keurig-dr-pepper",
     "displayName": "Keurig Dr Pepper",
     "archetype": "beverage",
-    "siteCount": 22,
+    "siteCount": 17,
     "coverageNote": {
-      "auditedCount": 22,
+      "auditedCount": 17,
       "estimatedFootprint": 35,
+      "totalGlobalFootprint": 35,
+      "auditedScope": "NA",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Keurig Dr Pepper operates ~35 manufacturing + DC sites, almost entirely NA. We audited 20 representative sites.",
-      "auditedScope": "NA",
-      "totalGlobalFootprint": 35
+      "note": "Keurig Dr Pepper operates ~35 manufacturing + DC sites, almost entirely NA. We audited 20 representative sites."
     },
     "featuredSiteId": "04-kdp-beverage-manufacturing-distribution-allentown-pa",
     "dossierIntro": "Keurig Dr Pepper runs the K-Cup, soda, and tea distribution network. 35 facilities; we audited 20. Allentown PA covers 92 acres with 130 dock doors. Irving TX is 117.4 acres. 851 dock doors total. YardFlow runs the single-serve (K-Cup) and case-pack (soda) flows on different protocols inside one gate.",
@@ -28,248 +28,23 @@
     "bbox": [
       -122.245659,
       29.682368,
-      -72.749676,
+      -73.133448,
       47.228098
     ],
     "archetypeMix": {
-      "#3": 15,
+      "#3": 10,
       "#10": 1,
       "#9": 5,
       "#6": 1
     },
     "totals": {
-      "dockDoors": 851,
-      "trailerCapacity": 1838,
-      "gates": 29,
+      "dockDoors": 803,
+      "trailerCapacity": 1783,
+      "gates": 23,
       "railServed": 3,
-      "acres": 917.0000000000001
+      "acres": 864.5000000000001
     },
     "sites": [
-      {
-        "id": "01-kdp-coffee-roasting-k-cup-plant-spartanburg-moore-sc",
-        "name": "KDP Coffee Roasting & K-Cup Plant - Spartanburg (Moore) SC",
-        "type": "Manufacturing - Coffee/K-Cup",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "uncertainFields": [
-          "dockDoors",
-          "trailerParkingCapacity"
-        ],
-        "center": {
-          "lat": 34.8701,
-          "lng": -82.0321
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 34.871227,
-                "lng": -82.033473
-              },
-              {
-                "lat": 34.871734,
-                "lng": -82.031757
-              },
-              {
-                "lat": 34.870607,
-                "lng": -82.03004
-              },
-              {
-                "lat": 34.868748,
-                "lng": -82.030589
-              },
-              {
-                "lat": 34.868748,
-                "lng": -82.0321
-              },
-              {
-                "lat": 34.869987,
-                "lng": -82.033679
-              }
-            ]
-          },
-          "truckGate": {
-            "ring": [
-              {
-                "lat": 34.87117,
-                "lng": -82.033611
-              },
-              {
-                "lat": 34.871339,
-                "lng": -82.033267
-              },
-              {
-                "lat": 34.871058,
-                "lng": -82.033061
-              },
-              {
-                "lat": 34.870889,
-                "lng": -82.033405
-              }
-            ]
-          },
-          "dropYards": [],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 34.871114,
-                  "lng": -82.033336
-                },
-                {
-                  "lat": 34.871903,
-                  "lng": -82.031619
-                },
-                {
-                  "lat": 34.871508,
-                  "lng": -82.031276
-                },
-                {
-                  "lat": 34.87072,
-                  "lng": -82.032993
-                }
-              ]
-            },
-            {
-              "ring": [
-                {
-                  "lat": 34.869199,
-                  "lng": -82.0321
-                },
-                {
-                  "lat": 34.870325,
-                  "lng": -82.03004
-                },
-                {
-                  "lat": 34.869987,
-                  "lng": -82.029697
-                },
-                {
-                  "lat": 34.868861,
-                  "lng": -82.031757
-                }
-              ]
-            }
-          ],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 128,
-              "pano": "dhJdYn8KWHnpGllv1alN-Q",
-              "hasCoverage": true
-            },
-            "truckGate": {
-              "heading": 128,
-              "pano": "dhJdYn8KWHnpGllv1alN-Q",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 32,
-          "trailersVisible": 8,
-          "trailerParkingCapacity": 30,
-          "truckGateCount": 2,
-          "buildingCount": 1,
-          "siteAreaAcres": 27,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": false,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": true,
-          "dockDoors": "25-50",
-          "dropArea": "0-10",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#3",
-          "steps": [
-            {
-              "step": "Arrive on site (no gate)",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Drive to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 480000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 3030000,
-          "totalYnsMs": 2640000
-        },
-        "dossierExcerpt": "The roster pin (34.870596, -82.032427, ROOFTOP) landed on a large white-roof\ntilt-up warehouse along Moore Duncan Hwy (SC-290). Web research confirms this is\nBuilding 500 at Tyger River Industrial Park (TRIP), the spec building where\nKeurig Dr Pepper leased ~203,000 sq ft in September 2024 for next-generation\nK-Rounds (plastic-free coffee pod) production as part of a $141M Spartanburg\nCounty expansion (SC Dept of Commerce / SC Governor / Colliers releases). June\n2025 Street View shows the completed building still carrying a Colliers\n\"for lease\" leasing sign at the highway frontage, consistent with a recently\noccupied spec building. The building runs NW-SE, roughly 600 ft long.\n\nA separate large building with heavy dock/trailer activity sits to the SE on a\ndifferent parcel within the same park — it is NOT this facility and was excluded.",
-        "mapsUrl": "https://www.google.com/maps/@34.870100,-82.032100,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/01-kdp-coffee-roasting-k-cup-plant-spartanburg-moore-sc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.8701,
-              "lng": -82.0321
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/01-kdp-coffee-roasting-k-cup-plant-spartanburg-moore-sc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.8701,
-              "lng": -82.0321
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "location": "Building 500, Tyger River Industrial Park (TRIP), 3220 Moore Duncan Hwy, Moore SC. KDP leased ~203,000 sq ft here Sept 2024 for next-gen K-Rounds production ($141M expansion). Confirmed via SC Commerce / Colliers releases and June 2025 Street View showing the spec building with a Colliers leasing sign.",
-          "truckGate": "Open driveways at both NW and SE ends of the NE truck court connecting to the internal park road. No barrier arm, sliding/swing gate or checkpoint pinch-point visible in z20 satellite or June 2025 Street View. No perimeter fence around the property.",
-          "guardShack": "No booth structure at either truck-court access point in satellite or Street View.",
-          "dockDoors": "Long single bank of dock doors along the NE face; counted ~12-18 visible bays/trailers in z19 probes, full wall longer - banded 25-50 as a medium-confidence estimate.",
-          "dropArea": "NE truck court has marked trailer stalls but only a handful of trailers parked in available imagery (newly occupied building).",
-          "fastLaneOpportunity": "Wide open truck court and two access points give ample room for a bypass/express lane.",
-          "urbanRural": "Industrial park on the rural edge of Moore SC, surrounded by woods and farmland; broader setting is small-town/rural.",
-          "buildingCount": "Single KDP building. Two other large buildings sit in the same park (one to the SE with heavy trailer activity) but are separate facilities on separate parcels - not counted."
-        }
-      },
       {
         "id": "02-kdp-k-cup-plant-essex-junction-vt",
         "name": "KDP K-Cup Plant - Essex Junction VT",
@@ -412,28 +187,6 @@
         },
         "dossierExcerpt": "The roster pin (44.503824, -73.180386, RANGE_INTERPOLATED) was ~3.6 km off,\nlanding in Essex Junction's commercial sprawl among small office/apartment\nbuildings — no industrial plant present. Web research corrected this:\n- Vermont Business Magazine and Food Processing confirm KDP's Vermont K-Cup\n  manufacturing is at the Essex Junction plant (Williston operations\n  consolidated here in 2024).\n- The GMCR 2011 expansion press release describes a 350,000 sq ft addition at\n  5 New England Drive connecting to the existing operation at 30 Gauthier Drive.\n- warehouserating.com lists 30 Gauthier Dr at 44.513632, -73.136469.\n\nSatellite at that coordinate shows a large connected multi-building industrial\ncomplex with dock banks and trailer drop yards — consistent with a coffee\nroasting / K-Cup manufacturing plant. Location locked here.",
         "mapsUrl": "https://www.google.com/maps/@44.513632,-73.136469,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/02-kdp-k-cup-plant-essex-junction-vt-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 44.513632,
-              "lng": -73.136469
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/02-kdp-k-cup-plant-essex-junction-vt-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 44.513632,
-              "lng": -73.136469
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster address '63 South Park Dr' and pin (44.503824,-73.180386) were wrong - ~3.6 km off, landing in Essex Junction commercial sprawl. Correct facility is the Keurig Green Mountain / KDP coffee roasting and K-Cup complex at 30 Gauthier Dr / 5 New England Dr, Essex Junction VT 05452 (44.513632,-73.136469). Confirmed via Vermont Business Magazine, GMCR 2011 expansion press release (350,000 sq ft addition connecting 30 Gauthier Dr and 5 New England Dr), and warehouserating.com listing. Williston VT operations consolidated here in 2024.",
           "truckGate": "Open driveways from the internal industrial-park road into the W truck court and N dock area. No barrier arm, sliding gate, or checkpoint pinch-point visible in z19-z20 satellite or 2011 Street View. No perimeter fence on the publicly visible sides.",
@@ -445,125 +198,25 @@
           "urbanRural": "Suburban industrial park within the greater Burlington VT metro fabric (Essex Junction); dense surrounding industrial/commercial development - Urban.",
           "buildingCount": "4 is an estimate for the connected/adjacent building cluster; the complex is multi-building and hard to count distinct structures from overhead.",
           "imageryNote": "Street View is 2011-vintage; satellite is recent. Gate/guard-shack determination relies primarily on recent satellite plus older SV - both show open access."
-        }
-      },
-      {
-        "id": "03-kdp-coffee-plant-waterbury-vt",
-        "name": "KDP Coffee Plant - Waterbury VT",
-        "type": "Manufacturing - Coffee",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "uncertainFields": [
-          "dockDoors",
-          "trailersVisible",
-          "buildingCount"
-        ],
-        "center": {
-          "lat": 44.3358,
-          "lng": -72.7505
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 44.336733,
-                "lng": -72.751667
-              },
-              {
-                "lat": 44.336586,
-                "lng": -72.750363
-              },
-              {
-                "lat": 44.335554,
-                "lng": -72.749676
-              },
-              {
-                "lat": 44.33472,
-                "lng": -72.7505
-              },
-              {
-                "lat": 44.335211,
-                "lng": -72.751667
-              },
-              {
-                "lat": 44.336046,
-                "lng": -72.751873
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 2,
-          "trailersVisible": 3,
-          "trailerParkingCapacity": 5,
-          "truckGateCount": 1,
-          "buildingCount": 4,
-          "siteAreaAcres": 18,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": false,
-          "drivewayLong": false,
-          "drivewayShort": true,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "0-10",
-          "dropArea": "NONE",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": true,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "dossierExcerpt": "The roster pin (44.336491, -72.755118, APPROXIMATE) landed in downtown\nWaterbury. Web research (VT Farm to Plate, Yelp, Waze) all place Keurig Green\nMountain at 33 Coffee Lane, Waterbury VT — the Pilgrim Park office campus\n~430 m SE of the roster pin. 2023 Street View confirms a multi-building office\ncampus with a landscaped entrance sign. Location locked at the Pilgrim Park\ncomplex.",
-        "mapsUrl": "https://www.google.com/maps/@44.335800,-72.750500,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/03-kdp-coffee-plant-waterbury-vt-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 44.3358,
-              "lng": -72.7505
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/03-kdp-coffee-plant-waterbury-vt-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 44.3358,
-              "lng": -72.7505
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "location": "33 Coffee Lane, Waterbury VT 05676 - the Pilgrim Park office campus, Keurig Green Mountain's original/legacy Waterbury site. Roster pin (44.336491,-72.755118, APPROXIMATE) landed in downtown Waterbury; corrected ~430 m SE to the Pilgrim Park complex. Confirmed via web (VT Farm to Plate, Yelp, Waze all list 33 Coffee Lane) and 2023 Street View showing a multi-building office campus with an entrance sign.",
-          "facilityCharacter": "This is predominantly a CORPORATE OFFICE / R&D campus, not a freight/distribution truck yard. The original Green Mountain Coffee roasting operations were historically here, but KDP coffee production is now consolidated at Essex Junction. Street View and satellite show multi-story office buildings surrounded by large employee car parking lots - no loading-dock banks, no trailer drop yards, no truck gate or guard shack.",
-          "truckGate": "No controlled truck entrance - the campus has open driveways off Pilgrim Park Rd / Coffee Lane serving car parking lots. No barrier arm, gate or checkpoint.",
-          "guardShack": "No guard booth anywhere on the campus.",
-          "dockDoors": "Essentially none of consequence - at most a couple of small service/loading doors at a building rear; banded 0-10. A handful of box trucks/vans seen near one building (counted as ~3 trailersVisible) appear to be service/parcel vehicles, not freight trailers.",
-          "railServed": "An active rail line (Amtrak/NECR Waterbury station corridor) runs alongside the W edge of the campus, but there is NO rail spur into the property.",
-          "urbanRural": "Small-town Vermont setting on the edge of Waterbury village; per the rubric's small-town guidance, classified Rural.",
-          "multipleFacilities": "Multi-building office campus (~4 buildings).",
-          "yardRelevance": "Low YardFlow relevance - office site, minimal freight operations. confidence set to medium because the site is unambiguous but does not present a meaningful truck yard to audit."
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://vermontbiz.com/news/2024/february/29/keurig-dr-pepper-will-close-williston-plant-consolidate-essex-jct",
+              "date": "2024-02-29",
+              "type": "press",
+              "claim": "KDP consolidated Williston VT production into the Essex Junction plant (Q2 2024); Essex Jct is the last Vermont facility KDP operates."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "KDP actively consolidated production into Essex Junction in 2024 and it remains its operating Vermont plant; no Tier-2 negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -769,28 +422,6 @@
         },
         "dossierExcerpt": "The roster carried a geocode flag (movedMeters 3237), but the roster pin\n(40.572414, -75.605843) in fact sits correctly between the two large buildings\nof KDP's Allentown campus. Web research confirms this is \"Park 100\", a\ntwo-building logistics site in Upper Macungie Township: 7350 Industrial Blvd\n(warehouse/DC) and 7356 Industrial Blvd (manufacturing), combined ~1,541,280 sq\nft on 92 acres, built out on a former Kraft-Heinz site. KDP invested ~$220M;\nthe facility was Food Engineering's 2021 Plant of the Year (Lehigh Valley EDC,\nLVB, WFMZ, Food Business News). Location locked.",
         "mapsUrl": "https://www.google.com/maps/@40.572414,-75.605843,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/04-kdp-beverage-manufacturing-distribution-allentown-pa-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.572414,
-              "lng": -75.605843
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/04-kdp-beverage-manufacturing-distribution-allentown-pa-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.572414,
-              "lng": -75.605843
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "KDP 'Park 100' campus, 7350 Industrial Blvd (warehouse) + 7356 Industrial Blvd (manufacturing), Upper Macungie Township near Allentown PA. Combined ~1.54M sq ft beverage manufacturing + warehouse/DC on 92 acres; former Kraft-Heinz site; 2021 Food Engineering Plant of the Year. Confirmed via Lehigh Valley EDC, LVB, WFMZ and Food Business News. Despite the roster geocode flag (movedMeters 3237), the roster pin (40.572414,-75.605843) sits correctly on this two-building site.",
           "truckGate": "Truck access from Industrial Blvd is via open driveways with a monument sign at the W frontage (May 2025 Street View) and internal roads into the truck court. No barrier arm or sliding gate visible at the road or at the truck-court entry in z19-z20 satellite. Marked uncertain - a large beverage plant of this scale plausibly operates manned check-in, but no booth or barrier is visible in available imagery.",
@@ -802,6 +433,32 @@
           "railServed": "No rail spur enters the property despite the Lehigh Valley rail corridor in the region.",
           "urbanRural": "Major Lehigh Valley logistics park (Upper Macungie/Allentown metro), surrounded by other large warehouses - Urban.",
           "fastLaneOpportunity": "Very wide central truck court and multiple driveways provide ample room for express/bypass lanes."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.keurigdrpepper.com/kdp-allentown-earns-food-engineering-magazines-plant-of-the-year-distinction/",
+              "date": "2021-11-26",
+              "type": "press",
+              "claim": "KDP own page calls the Allentown (Upper Macungie) site KDP newest cold beverage production and distribution facility and 2021 Plant of the Year."
+            },
+            {
+              "tier": 1,
+              "url": "https://dennisgroup.com/project/keurig-dr-pepper/",
+              "date": "2021",
+              "type": "press",
+              "claim": "KDP bought the 92-acre former Kraft-Heinz campus in Allentown PA (730k SF DC) and built an 811k SF mfg/warehouse building connected by tram - this Kraft-Heinz/811k-SF build is Allentown, not Waco or Fontana."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "KDP-owned source confirms it operates the Allentown beverage production/DC complex (the 92-acre Kraft-Heinz/811k-SF build); no Tier-2 negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -924,28 +581,6 @@
         },
         "dossierExcerpt": "The roster pin (34.485332, -117.310196, RANGE_INTERPOLATED) landed in a\nVictorville residential neighborhood with a school — clearly not a beverage\nplant. Web research corrected this: the KDP (former Dr Pepper Snapple) West\nCoast production and distribution plant is at 18180 Gateway Drive, inside\nthe Southern California Logistics Airport (SCLA, the former George Air Force\nBase) NE of Victorville. Confirmed via Beverage Industry, ReliablePlant, ARCO\nNational Construction, and Yelp/CalStateDir/Waze listings. The plant is ~850,000\nsq ft (≈300k sq ft production + ≈550k sq ft warehouse) on 57 acres, opened\n~2010-2011 on a ~$150M investment; it produces Snapple, Mott's, Hawaiian Punch,\nClamato, ReaLemon and other KDP brands. Location locked at the SCLA building.",
         "mapsUrl": "https://www.google.com/maps/@34.584000,-117.395500,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/05-kdp-beverage-plant-victorville-ca-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.584,
-              "lng": -117.3955
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/05-kdp-beverage-plant-victorville-ca-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.584,
-              "lng": -117.3955
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster address '16200 Nisqualli Rd' and pin (34.485332,-117.310196) were wrong - landed in a Victorville residential neighborhood. Correct facility is the KDP (former Dr Pepper Snapple) West Coast beverage plant at 18180 Gateway Dr, Victorville CA 92394, inside the Southern California Logistics Airport (SCLA, former George AFB). Confirmed via Beverage Industry, ReliablePlant, ARCO National Construction and Yelp/CalStateDir/Waze listings. ~850,000 sq ft building (300k production + 550k warehouse) on 57 acres; opened ~2010-2011, ~$150M investment.",
           "truckGate": "The plant is fully enclosed by a chain-link perimeter fence with privacy screening (confirmed in multiple May 2025 Street View frames). A fenced production plant of this scale has controlled truck access. Truck gate classified TRUE on the strength of the continuous perimeter fence and entrance infrastructure visible in Street View, but flagged uncertain - no crisp close-up of the gate barrier was obtainable.",
@@ -957,6 +592,25 @@
           "railServed": "SCLA is a multimodal hub with rail in the broader area, but no rail spur was observed entering this property.",
           "urbanRural": "The plant sits inside the SCLA logistics park on the isolated NE desert edge of Victorville, away from the dense town fabric. Classified Rural per the rubric's edge-of-town guidance; flagged uncertain because Victorville is a sizable city and SCLA is a developed logistics park.",
           "connectivityIssue": "Set false - SCLA is a major built-up logistics/airport hub with infrastructure despite the desert edge location."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.vvng.com/teamsters-launch-unfair-labor-practice-strike-at-keurig-dr-pepper-facility-in-victorville/",
+              "date": "2025-05",
+              "type": "press",
+              "claim": "Teamsters launched a strike at KDP operating ~860,200 sq ft Victorville beverage production/distribution facility at 18180 Gateway Dr in May 2025 (facility actively operating)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Dated 2025 press confirms KDP actively operates the Victorville plant; no Tier-2 negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1029,8 +683,7 @@
               ]
             }
           ],
-          "staging": null,
-          "streetViewMeta": {}
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 36,
@@ -1103,28 +756,6 @@
         },
         "dossierExcerpt": "- Name: KDP Mott's Plant - Williamson NY\n- Type: Manufacturing - Juice/Applesauce\n- Address: 4363 State Route 104, Williamson, NY 14589\n- Resolved center: 43.236600, -77.175500",
         "mapsUrl": "https://www.google.com/maps/@43.236600,-77.175500,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/06-kdp-motts-plant-williamson-ny-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 43.2366,
-              "lng": -77.1755
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/06-kdp-motts-plant-williamson-ny-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 43.2366,
-              "lng": -77.1755
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Truck yard, docks and trailer drop lots are wide open directly off the public access road on the east side of the property. Multiple Street View headings (2024-08) along that road show no barrier arm, no sliding/swing gate, and no pinch-point checkpoint where the yard meets the road - the paved truck apron simply abuts the road.",
           "guardShack": "No staffed booth at any truck approach. A metal gantry frame stands in the yard but is a lighting/sign structure, not a guard booth.",
@@ -1137,6 +768,25 @@
           "railServed": "An active rail line runs along the south edge of the property (parallels Route 104); spur access into the plant is plausible but the line clearly serves/borders the site.",
           "siteAreaAcres": "Roster cites ~217 acres for the full parcel including orchard/woods; the developed industrial perimeter measured here is roughly 105 acres.",
           "fastLaneOpportunity": "The truck approach apron is extremely wide and open with abundant unused paved width - ample room for express/bypass lanes."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://extapps.dec.ny.gov/fs/projects/SWMF/Annual%20Reports_Solid%20Waste%20Management%20Facility/Annual%20Reports_by%20Activity%20Type/Land%20Application%20-%20UFPW/Land%20Application%20-%20UFPW%20-%202024/R8/59A30005_MottsLLP_ufpwla_R8_2024.2025-01-23.AR.pdf",
+              "date": "2025-01-23",
+              "type": "econ-dev",
+              "claim": "Motts LLP Williamson Plant 2024 NY DEC annual report (filed Jan 2025) confirms the facility operating under Motts LLP (KDP)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "KDP-owned Motts Williamson applesauce/juice plant confirmed operating via 2024/2025 NY DEC filing; no closure or sale found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1327,28 +977,6 @@
         },
         "dossierExcerpt": "- Name: KDP Mott's Plant - Aspers PA\n- Type: Manufacturing - Juice/Applesauce\n- Address: 45 Aspers North Rd, Aspers, PA 17304\n- Resolved center: 39.975785, -77.220423",
         "mapsUrl": "https://www.google.com/maps/@39.975785,-77.220423,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/07-kdp-motts-plant-aspers-pa-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.975785,
-              "lng": -77.220423
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/07-kdp-motts-plant-aspers-pa-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.975785,
-              "lng": -77.220423
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Main entrance off the public road on the SW side splits into two open driveways - a left lane to the plant offices and a wider right lane into the truck yard/docks. Street View (2024-08) shows directional/regulatory signage but NO barrier arm, NO sliding/swing gate, and NO checkpoint pinch-point at the property line. Truck driveway is fully open.",
           "guardShack": "No staffed guard booth at the truck entrance. A small free-standing building sits near the entrance but is set off to the side as an office/maintenance structure, not a booth straddling the truck lane.",
@@ -1362,6 +990,25 @@
           "entryLanes": "The entrance driveway is wide and effectively two-laned; same for exit (shared open entrance). Estimate.",
           "fastLaneOpportunity": "Entrance apron is very wide and uncontrolled with abundant unused paved width - clear room to add express/bypass lanes.",
           "siteAreaAcres": "Developed industrial perimeter measured at roughly 110 acres."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 3,
+              "url": "https://www.yellowpages.com/aspers-pa/mip/keurig-dr-pepper-559325254",
+              "date": "2026",
+              "type": "locator",
+              "claim": "Keurig Dr Pepper listed operating at 45 Aspers North Rd, Aspers PA 17304 (Motts plant)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Motts/KDP Aspers apple plant; no Tier-2 closure/divestiture found (only Windsor VA closed), but no fresh Tier-1 dated positive within 24 months located - flagged probable.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1587,28 +1234,6 @@
         },
         "dossierExcerpt": "- Name: KDP Beverage Plant - Houston TX\n- Type: Manufacturing - Beverage\n- Roster address (approximate / wrong): 5301 Polk St, Houston, TX 77023\n- Resolved address: 2400 Holly Hall St, Houston, TX 77054\n- Resolved center: 29.683800, -95.394000",
         "mapsUrl": "https://www.google.com/maps/@29.683800,-95.394000,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/08-kdp-beverage-plant-houston-tx-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 29.6838,
-              "lng": -95.394
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/08-kdp-beverage-plant-houston-tx-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 29.6838,
-              "lng": -95.394
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster address (5301 Polk St) was wrong/approximate. Web research (TruckMap, iBegin, Kompass, Waze) places KDP/Dr Pepper Bottling Co of Houston at 2400 Holly Hall St, Houston TX 77054 (Almeda Rd & Holly Hall). Satellite confirms a large beverage warehouse/plant with silos and an extensive trailer yard at 29.6838,-95.3940.",
           "truckGate": "The truck yard, docks and trailers are entirely inside a fully-enclosed chain-link perimeter topped with barbed wire (clearly visible on the west building wall and around the NW corner). The truck entrance is a gated driveway at the NW corner off Holly Hall St. An enclosed barbed-wire urban compound of this type operates a controlled gate.",
@@ -1623,6 +1248,32 @@
           "railServed": "A rail line runs in the SH-288 corridor immediately east of the property but no spur enters the site.",
           "urbanRural": "Dense urban Houston (Medical Center / Astrodome area) - surrounded by apartment complexes and other industrial buildings.",
           "siteAreaAcres": "Compact urban parcel - perimeter measured at roughly 23 acres."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 3,
+              "url": "https://www.zabalist.com/projects/TABS2025025377",
+              "date": "2025-08",
+              "type": "econ-dev",
+              "claim": "2025 City of Houston building permit Dr. Pepper Bottling Warehouse Repairs at 2400 Holly Hall Street, owner The American Bottling Company (KDP subsidiary), shows active operating use."
+            },
+            {
+              "tier": 3,
+              "url": "https://en.wikipedia.org/wiki/The_American_Bottling_Company",
+              "date": "2025-01",
+              "type": "press",
+              "claim": "The American Bottling Company is the wholly owned bottling subsidiary of Keurig Dr Pepper; resolves the operating entity at the Houston address to KDP, not an independent bottler."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Address operated by The American Bottling Company (KDP-owned subsidiary), active 2025 renovation permit, no closure/sale found; historical independent-bottler name does not reflect current ownership. Tier-3 corroboration only.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1747,6 +1398,39 @@
           "all": "All 22 classification fields are unverified because the building could not be positively identified. Values are left at conservative defaults and every field is listed in uncertainFields. urbanRural set 'Urban' as the only safely-inferable field - Northlake is dense Chicago-metro fabric. Recommend human review with a verified pin or company-provided address.",
           "geofences": "Perimeter and all sub-zones left null - no confirmed footprint to box.",
           "yardMetrics": "Counts left at zero/default - not measured."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 3,
+              "url": "https://mapmechanical.com/projects/new-wastewater-treatment-plant-keurig-dr-pepper-northlake-illinois/",
+              "date": "2024-01",
+              "type": "press",
+              "claim": "Recent capital project: new wastewater treatment plant for Keurig Dr Pepper, Northlake Illinois - indicates an active operating production facility."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.nlrb.gov/case/13-CA-266571",
+              "date": "2024-01",
+              "type": "econ-dev",
+              "claim": "NLRB case captioned The American Bottling Company d/b/a Keurig Dr Pepper at the Northlake operation confirms KDP as the current operating employer."
+            },
+            {
+              "tier": 3,
+              "url": "https://teamsterslocal727.org/dr-pepper-northlake-salesmen-become-latest-group-to-overwhelmingly-vote-for-local-727-representation/",
+              "date": "2019-07-15",
+              "type": "press",
+              "claim": "Local 727 represents 575+ Dr Pepper employees at the Companys Northlake and Harvey IL facilities."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active KDP/American Bottling operation in Northlake (capital project + current NLRB/union activity + jobs); no closure/WARN found. FLAG: exact street address not Tier-1 pinned - pin via parcel before geofencing.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1936,28 +1620,6 @@
         },
         "dossierExcerpt": "- Name: KDP Beverage Plant - Waco TX\n- Type: Manufacturing - Beverage\n- Roster address (wrong / approximate): 5301 Bagby Ave, Waco, TX 76711\n- Resolved address: 100 Aviation Pkwy, Waco, TX 76705\n  (Waco International Aviation Park, beside TSTC Waco Airport)\n- Resolved center: 31.626000, -97.063500",
         "mapsUrl": "https://www.google.com/maps/@31.626000,-97.063500,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/10-kdp-beverage-plant-waco-tx-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 31.626,
-              "lng": -97.0635
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/10-kdp-beverage-plant-waco-tx-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 31.626,
-              "lng": -97.0635
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster address (5301 Bagby Ave) was wrong/approximate - the pin landed on a golf course / apartments in south Waco. Web research (Greater Waco Chamber directory, Yelp, Dennis Group, Quandel) resolved the facility to 100 Aviation Pkwy, Waco TX 76705, in the Waco International Aviation Park beside TSTC Waco Airport. KDP bought a 92-acre former Kraft-Heinz campus (730,000 SF distribution center) and added a new ~811,000 SF manufacturing & warehouse building connected to the DC by tram. Satellite confirms a large fenced industrial campus at ~31.626,-97.0635.",
           "truckGate": "The campus is fully enclosed by a continuous chain-link perimeter fence (visible on all sides in Street View 2023-05 and 2025-11). The main entrance off the NW access road has fencing, signage and a portable/modular office building. A 92-acre flagship KDP manufacturing + DC campus of this scale operates a controlled, gated truck entrance.",
@@ -1974,6 +1636,32 @@
           "urbanRural": "Rural / edge-of-metro - the campus sits in the Waco International Aviation Park surrounded by farmland, the TSTC airport, and open land NE of Waco proper.",
           "siteAreaAcres": "~92 acres per the Kraft-Heinz campus acquisition figure cited in Dennis Group / Quandel project descriptions.",
           "imagery": "Satellite tiles for this area span multiple dates including active construction of the new manufacturing building; counts taken from the clearest available crops."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 3,
+              "url": "https://business.wacochamber.com/directory/Details/keurig-dr-pepper-880967",
+              "date": "2026-06",
+              "type": "econ-dev",
+              "claim": "Greater Waco Chamber directory lists Keurig Dr Pepper at 100 Aviation Pkwy, Waco TX 76705 (Distributors & Wholesalers), Gold-level member - current operation."
+            },
+            {
+              "tier": 1,
+              "url": "https://careers.keurigdrpepper.com/en/location/waco-jobs/42849/6252001-4736286-4739526/4",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Keurig Dr Pepper Waco TX Operations job posting confirms a live KDP operating site in Waco."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "KDP currently operates at 100 Aviation Pkwy Waco (chamber listing + active careers req). FLAG: audit mis-attributed Allentown PA 92-acre Kraft-Heinz/811k SF manufacturing build to Waco - that building is Allentown; verify Waco actual building scope/SF before modeling.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -2140,28 +1828,6 @@
         },
         "dossierExcerpt": "Type: Manufacturing - Concentrates/Syrups\nResolved location: 8900 Page Ave, Overland, MO 63114 — `38.685300, -90.355900`\nGate verdict: No controlled truck gate · Guard shack: None · Confidence: High",
         "mapsUrl": "https://www.google.com/maps/@38.685300,-90.355900,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/11-kdp-beverage-concentrates-plant-st-louis-mo-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 38.6853,
-              "lng": -90.3559
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/11-kdp-beverage-concentrates-plant-st-louis-mo-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 38.6853,
-              "lng": -90.3559
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster coords (8400 N Broadway, 38.7153/-90.2296) were wrong - that point is a residential/mixed area in north St. Louis city. Web research (Yelp, Manta, D&B, IndustryNet) confirms the real plant is Dr Pepper/Seven Up Manufacturing at 8900 Page Ave, Overland, MO 63114 - KDP's beverage concentrate/syrup plant, ~165 employees. Locked center at 38.6853/-90.3559.",
           "truckGate": "Truck access is a private industrial drive off Page Ave on the NW; satellite z21 at the Page Ave junction shows only painted lane arrows, no barrier arm and no guard booth - open access drive shared with the adjacent property. Classified as no controlled gate.",
@@ -2172,230 +1838,32 @@
           "urbanRural": "Site sits inside dense St. Louis County (Overland) industrial/retail fabric - bordered by Page Ave commercial corridor, I-170, and neighboring warehouses. Urban.",
           "drivewayLong": "The internal access drive down the west side of the plant is long and can stack multiple trucks before reaching the dock aprons.",
           "buildingCount": "Main plant building plus a secondary process/tank wing on the east; a separate small office building sits at the NW corner near Page Ave but is treated as ancillary, not a second facility cluster."
-        }
-      },
-      {
-        "id": "12-kdp-coffee-roasting-plant-castroville-ca",
-        "name": "KDP Coffee Roasting Plant - Castroville CA",
-        "type": "Manufacturing - Coffee",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "low",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "remoteGs",
-          "preGateStaging",
-          "postGateStaging",
-          "drivewayLong",
-          "drivewayShort",
-          "entryLanes",
-          "exitLanes",
-          "dockDoors",
-          "dropArea",
-          "shipRcvSeparate",
-          "dropYard",
-          "dockDoorCount",
-          "trailersVisible",
-          "trailerParkingCapacity",
-          "buildingCount",
-          "siteAreaAcres",
-          "multipleFacilities"
-        ],
-        "center": {
-          "lat": 36.7573,
-          "lng": -121.7401
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 36.758318,
-                "lng": -121.739825
-              },
-              {
-                "lat": 36.758318,
-                "lng": -121.738898
-              },
-              {
-                "lat": 36.757135,
-                "lng": -121.738864
-              },
-              {
-                "lat": 36.757107,
-                "lng": -121.739791
-              }
-            ]
-          },
-          "truckGate": {
-            "ring": [
-              {
-                "lat": 36.7573,
-                "lng": -121.739825
-              },
-              {
-                "lat": 36.7573,
-                "lng": -121.739654
-              },
-              {
-                "lat": 36.757135,
-                "lng": -121.739654
-              },
-              {
-                "lat": 36.757135,
-                "lng": -121.739825
-              }
-            ]
-          },
-          "dropYards": [
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
             {
-              "ring": [
-                {
-                  "lat": 36.757575,
-                  "lng": -121.739757
-                },
-                {
-                  "lat": 36.757575,
-                  "lng": -121.739413
-                },
-                {
-                  "lat": 36.757162,
-                  "lng": -121.739413
-                },
-                {
-                  "lat": 36.757162,
-                  "lng": -121.739757
-                }
-              ]
+              "tier": 3,
+              "url": "https://www.industrynet.com/listing/84764/keurig-dr-pepper-inc",
+              "date": "2026-01",
+              "type": "press",
+              "claim": "Keurig Dr Pepper beverage concentrates & syrups facility listed at the St. Louis (8900 Page Ave) location - current operation."
+            },
+            {
+              "tier": 3,
+              "url": "https://www.yelp.com/biz/dr-pepper-seven-up-manufacturing-saint-louis",
+              "date": "2026-04",
+              "type": "press",
+              "claim": "Dr Pepper/Seven Up Manufacturing at 8900 Page Ave, St. Louis MO listed/updated April 2026 as an active manufacturing site."
             }
           ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 36.758235,
-                  "lng": -121.739757
-                },
-                {
-                  "lat": 36.758235,
-                  "lng": -121.738933
-                },
-                {
-                  "lat": 36.758043,
-                  "lng": -121.738933
-                },
-                {
-                  "lat": 36.758043,
-                  "lng": -121.739757
-                }
-              ]
-            }
-          ],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 14,
-          "trailersVisible": 6,
-          "trailerParkingCapacity": 20,
-          "truckGateCount": 1,
-          "buildingCount": 2,
-          "siteAreaAcres": 4.5,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": false,
-          "drivewayLong": false,
-          "drivewayShort": true,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "10-25",
-          "dropArea": "0-10",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#3",
-          "steps": [
-            {
-              "step": "Arrive on site (no gate)",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Drive to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 480000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 3030000,
-          "totalYnsMs": 2640000
-        },
-        "dossierExcerpt": "Type: Manufacturing - Coffee\nResolved location (best effort): 11480 Commercial Pkwy, Castroville, CA 95012 — `36.757300, -121.740100`\nGate verdict: No controlled truck gate (low confidence) · Guard shack: None · Confidence: Low",
-        "mapsUrl": "https://www.google.com/maps/@36.757300,-121.740100,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/12-kdp-coffee-roasting-plant-castroville-ca-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 36.7573,
-              "lng": -121.7401
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/12-kdp-coffee-roasting-plant-castroville-ca-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 36.7573,
-              "lng": -121.7401
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "FACILITY_STATUS": "DEFUNCT - The Keurig Green Mountain Castroville, CA manufacturing/distribution center CLOSED on July 3, 2017 (183 employees laid off; plant contents auctioned September 2017, per CoffeeTalk, Vending Market Watch, Center for Jobs). This is NOT an active KDP facility. The roster source ('one of six KDP US coffee roasting facilities') is outdated. KDP has no current operations here.",
-          "location": "Roster coords (10711 Cara Mia Pkwy, 36.7593/-121.7436) point into the Castroville industrial park but not a confirmed building. Best-documented former Keurig address is 11480 Commercial Pkwy, Castroville CA 95012 (geocoded 36.7570/-121.7385). Audit centered on the 11480 Commercial Pkwy building cluster - a mid-size warehouse with rooftop markings and an adjacent leased warehouse east of it. The former Keurig DC has since been subdivided/re-tenanted; exact original footprint cannot be confirmed.",
-          "truckGate": "No controlled truck gate visible; open warehouse forecourt off Commercial Pkwy. Building shows lease/sale signage in 2024 Street View. All gate-related fields uncertain due to facility closure and re-tenanting.",
-          "guardShack": "No guard booth visible.",
-          "dockDoors": "Estimate ~14 dock doors on the warehouse east face / apron; counts approximate, low confidence given the site is no longer the original single-tenant Keurig facility.",
-          "urbanRural": "Castroville is a small unincorporated agricultural town in Monterey County, surrounded by farmland (the 'Artichoke Capital'). The industrial park sits at the edge of town next to fields - classified Rural.",
-          "railServed": "A rail line runs through the broader Castroville industrial park but does not spur into this specific building parcel.",
-          "buildingCount": "The 11480 cluster comprises the marked warehouse plus an adjacent leased warehouse; treated as 2 buildings.",
-          "OVERALL": "Confidence LOW: facility is closed/defunct, the precise original building footprint is unconfirmed, and the site has been re-tenanted. All classification fields are best-effort estimates from current overhead imagery of the most credible building - flagged for human review."
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "KDP concentrate/syrup plant at 8900 Page Ave (Overland/St. Louis) currently operating; no closure/sale/WARN found. Tier-3 corroboration only - no Tier-1 locator surfaced, but no negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -2565,28 +2033,6 @@
         },
         "dossierExcerpt": "Type: Manufacturing - Coffee/K-Cup\nResolved location: 3418 142nd Ave E, Sumner, WA 98390 — `47.225300, -122.242500`\nGate verdict: No controlled truck gate · Guard shack: None · Confidence: High",
         "mapsUrl": "https://www.google.com/maps/@47.225300,-122.242500,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/13-kdp-coffee-roasting-k-cup-plant-sumner-wa-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 47.2253,
-              "lng": -122.2425
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/13-kdp-coffee-roasting-k-cup-plant-sumner-wa-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 47.2253,
-              "lng": -122.2425
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Positively confirmed by Street View: the building front on 142nd Ave E carries the 'Keurig Dr Pepper' logo and name, with building number '3418' (roster gave 3424; some listings 3324 - the on-site marked number is 3418 142nd Ave E, Sumner WA 98390). Roster coords were ~140 m south of the building front; locked center at 47.2253/-122.2425.",
           "truckGate": "No controlled truck gate. The building's truck yard and the large trailer/container drop yards open directly onto 142nd Ave E via wide unbarred driveways. Street View north of the building shows the tractor yard fully open to the road - no barrier arm, no booth.",
@@ -2601,6 +2047,32 @@
           "drivewayLong": "Deep internal cross-drives and large yard aprons easily stack 3+ trucks before the docks.",
           "railServed": "No rail spur enters this building parcel (rail lines exist elsewhere in the valley but not into this site).",
           "trailersVisible": "~110 trailers/containers estimated across the captured imagery; the drop yards are partly shared multi-tenant so the figure is approximate - flagged."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.keurigdrpepper.com/en/location/sumner-jobs/42849/6252001-5815135-5812543/4",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Keurig Dr Pepper Sumner WA reqs (Forklift Operator, Maintenance Supervisor, Electro-Mechanical Technician) - live manufacturing operation."
+            },
+            {
+              "tier": 3,
+              "url": "https://www.courierherald.com/business/new-coffee-roasting-plant-opens-in-sumner/",
+              "date": "2018-01",
+              "type": "press",
+              "claim": "Coffee roasting plant in Sumner (Green Mountain/Keurig lineage)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "KDP coffee roasting/K-Cup plant on 142nd Ave E Sumner currently operating (active careers reqs + Street-View KDP logo); no closure/sale found. FLAG: confirm exact street number (3418 vs 3324/3424 same campus); KDP coffee-business spinoff is a forward risk, not current.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -2805,28 +2277,6 @@
         },
         "dossierExcerpt": "Type: Manufacturing & Distribution - Coffee\nResolved location: 3109 Water Plant Rd, Knoxville, TN 37914 — `35.943600, -83.824200`\nGate verdict: No controlled truck gate · Guard shack: None · Confidence: High",
         "mapsUrl": "https://www.google.com/maps/@35.943600,-83.824200,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/14-kdp-coffee-roasting-distribution-knoxville-tn-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.9436,
-              "lng": -83.8242
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/14-kdp-coffee-roasting-distribution-knoxville-tn-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.9436,
-              "lng": -83.8242
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster coords (5000 Western Ave, 35.9727/-84.0032) were wrong - that point is residential NW Knoxville (geocode itself flagged movedMeters 1701). Web research (Waze, Manta, D&B, Green Mountain press releases) confirms the actual facility is the former Green Mountain Coffee / Keurig Knox County plant at 3109 Water Plant Rd, Knoxville TN 37914, in the Forks of the River Industrial Park - a 334,000 sq ft building on ~31 acres, K-Cup manufacturing + coffee roasting/distribution. Positively confirmed by Street View: building front carries the 'Keurig Dr Pepper' logo and address '3109'. Locked center 35.9436/-83.8242.",
           "truckGate": "No controlled truck gate. The dock apron and truck yard are open directly to Water Plant Rd via wide unbarred driveways; Street View shows no barrier arm and no guard booth - employee parking and the dock bank front the road.",
@@ -2842,6 +2292,32 @@
           "drivewayLong": "Deep dock apron and yard easily stack 3+ trucks before the docks.",
           "trailersVisible": "~70 trailers estimated across dock apron + drop yard; counts approximate - flagged.",
           "HISTORY": "KDP completed a $65M sale-leaseback of this Tennessee distribution center in January 2023 (CoStar) - KDP continues to lease and operate the facility."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.ziprecruiter.com/co/Keurig-Dr-Pepper/Jobs/-in-Knoxville,TN",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Keurig Dr Pepper Knoxville TN production/warehouse/maintenance job postings - live manufacturing operation at the Knoxville coffee plant."
+            },
+            {
+              "tier": 3,
+              "url": "https://www.yelp.com/biz/keurig-green-mountain-knoxville",
+              "date": "2026-06",
+              "type": "press",
+              "claim": "Keurig Green Mountain coffee roastery at 3109 Water Plant Rd, Knoxville TN listed/updated June 2026 - current operation."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "KDP coffee roasting/distribution plant at 3109 Water Plant Rd currently operating (active careers reqs + June-2026 listing + Street-View KDP logo); no closure/sale found. KDP coffee-business spinoff is a forward risk, not current.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -3046,28 +2522,6 @@
         },
         "dossierExcerpt": "Type: Manufacturing & Distribution - Beverage/DSD\nResolved location: 931 S Highland Ave / 1201-1262 E 19th St, Tucson, AZ 85719 — `32.210800, -110.951400`\nGate verdict: Controlled fenced/gated perimeter (no booth) · Guard shack: None · Confidence: Medium",
         "mapsUrl": "https://www.google.com/maps/@32.210800,-110.951400,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/15-kdp-production-dsd-operations-tucson-az-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 32.2108,
-              "lng": -110.9514
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/15-kdp-production-dsd-operations-tucson-az-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 32.2108,
-              "lng": -110.9514
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster gave 3401 E Columbia St (32.1727/-110.9171) - that point is a different industrial area ~3 km SE and not the facility. Web research confirms the actual KDP/Kalil site: KDP acquired Kalil Bottling Co.'s Tucson real estate (May/2024 announcement, deal closed Q3 2024) for $8.55M - seven buildings totaling 161,835 sq ft on 7.71 acres at 931 S Highland Ave and 1201-1262 E 19th Street, Tucson AZ 85719 (Real Estate Daily News; Waze lists Kalil Bottling at 931 S Highland Ave). Locked center 32.2108/-110.9514.",
           "truckGate": "The whole complex is enclosed by chain-link perimeter fencing with gated openings off E 19th St / S Highland Ave. This is a controlled fenced perimeter (counts as a truck gate). However no barrier-arm across a single truck lane was clearly resolved in imagery - flagged uncertain.",
@@ -3083,6 +2537,32 @@
           "urbanRural": "Site is inside Tucson's dense south-side industrial district, immediately adjacent to Interstate 10. Urban.",
           "railServed": "No rail spur enters the parcel (a rail corridor runs nearby through the district but not into this site).",
           "OVERALL": "Confidence MEDIUM: facility positively re-located via the KDP-Kalil real-estate transaction record, but the roster address was wrong, the site is an older compact multi-building complex that is harder to read from overhead, and gate-detail (barrier arm vs open fenced gate, lane counts) could not be fully resolved."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://news.keurigdrpepper.com/2024-05-31-Keurig-Dr-Pepper-Strengthens-National-Direct-Store-Delivery-Operations-with-Acquisition-of-Strategic-Assets-from-Kalil-Bottling-Company",
+              "date": "2024-05-31",
+              "type": "press",
+              "claim": "KDP acquired Kalil Bottling production facility plus sales and distribution centers in Tucson; first Company-owned mfg/sales/distribution operations in Arizona; closed Q3 2024."
+            },
+            {
+              "tier": 1,
+              "url": "https://realestatedaily-news.com/keurig-dr-pepper-buys-kalils-real-estate-assets-in-tucson-for-8-55-million/",
+              "date": "2024",
+              "type": "econ-dev",
+              "claim": "KDP bought Kalil Tucson real estate for $8.55M: seven buildings, 161,835 sq ft on 7.71 acres at 931 S Highland Ave and 1201-1262 E 19th St."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "KDP press + real-estate trade confirm the Kalil Tucson real estate transferred to KDP (closed Q3 2024); now KDP self-operated DSD/production. No closure found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -3282,28 +2762,6 @@
         },
         "dossierExcerpt": "Roster address: 1850 W University Dr, Tempe, AZ 85281 (flagged \"Address approximate\")\nResolved facility: Former Kalil Bottling Co. plant, 2777 S Hardy Dr, Tempe, AZ 85282\nResolved center: 33.4062, -111.9540\nType: Distribution Center — DSD (beverage bottling + direct-store-delivery)\nConfidence: Medium\n\n---",
         "mapsUrl": "https://www.google.com/maps/@33.4062,-111.954,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/16-kdp-dsd-distribution-center-tempe-az-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.4062,
-              "lng": -111.954
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/16-kdp-dsd-distribution-center-tempe-az-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.4062,
-              "lng": -111.954
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster address (1850 W University Dr) is explicitly approximate and geocoded to an office building. Resolved actual KDP Tempe DSD facility to the former Kalil Bottling Co. plant at 2777 S Hardy Dr, Tempe AZ 85282 (Kalil acquired by KDP May 2024). Facility is the beverage bottling + DSD distribution complex on S Hardy Dr immediately south of the Broadway Rd / S Hardy Dr intersection.",
           "campus": "multipleFacilities true — connected building cluster with a central tank/silo farm (bottling), warehouse with dock doors, and an open DSD fleet yard. A portion fronting S Hardy Dr carries a small 'Schreiber' sign (Schreiber Foods, 2122 S Hardy Dr, occupies adjacent space in the same industrial complex); precise parcel boundary between the KDP/Kalil and Schreiber footprints is ambiguous from overhead imagery.",
@@ -3312,6 +2770,32 @@
           "dockDoorCount": "~18 dock doors estimated across the south warehouse face and plant building; partly obscured by trailers and roof structures — low confidence.",
           "railServed": "No rail spur enters the property.",
           "urbanRural": "Dense Tempe industrial corridor inside the Phoenix metro — Urban."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://news.keurigdrpepper.com/2024-05-31-Keurig-Dr-Pepper-Strengthens-National-Direct-Store-Delivery-Operations-with-Acquisition-of-Strategic-Assets-from-Kalil-Bottling-Company",
+              "date": "2024-05-31",
+              "type": "press",
+              "claim": "KDP acquired Kalil sales and distribution centers in Tucson AND Tempe as part of the asset deal (closed Q3 2024)."
+            },
+            {
+              "tier": 3,
+              "url": "https://www.kalilbottling.com/",
+              "date": "2024",
+              "type": "locator",
+              "claim": "Kalil Bottling Tempe site at 2777 S Hardy Dr, Tempe AZ 85282 is the Phoenix-area facility folded into the KDP acquisition."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "KDP press explicitly names a Tempe sales/distribution center in the Kalil acquisition; 2777 S Hardy Dr is Kalil Tempe address, now KDP self-operated. No closure found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -3462,28 +2946,6 @@
         },
         "dossierExcerpt": "Roster address: 3800 Fairchild St, Jacksonville, FL 32254 (\"Verified street address\" — INCORRECT)\nResolved facility: 2300 Pickettville Rd, Jacksonville, FL 32220\nResolved center: 30.3522, -81.76505\nType: Distribution Center — Beverage\nConfidence: High\n\n---",
         "mapsUrl": "https://www.google.com/maps/@30.3522,-81.76505,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/17-kdp-distribution-center-jacksonville-fl-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 30.3522,
-              "lng": -81.76505
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/17-kdp-distribution-center-jacksonville-fl-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 30.3522,
-              "lng": -81.76505
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster address (3800 Fairchild St) is incorrect — that parcel (0839720000R, owned by First Global Import & Export) is a 5.95-acre junk yard / open-storage lot, confirmed by Florida Parcels land-use record and Street View. The actual KDP Jacksonville Distribution Center is at 2300 Pickettville Rd, Jacksonville FL 32220, coords 30.3522,-81.76505. Confirmed by KDP brand mural (A&W, RC, Snapple) on the building wall and a 'Keurig Dr Pepper Visitor & Vendor Entrance' sign at the gate.",
           "facility": "598,587 sq ft cross-dock distribution warehouse built 2009 (former Hillwood spec building); KDP southeast distribution hub; 32' clear height. Per leasing records: 128 dock doors, 326 car spaces, 118 trailer parking spaces.",
@@ -3495,6 +2957,32 @@
           "fastLaneOpportunity": "Very wide entry apron and deep dock aprons (3+ truck stacking) — room to add an express/bypass lane.",
           "railServed": "A rail line runs west of the property but is separated by a drainage canal; no spur enters the site.",
           "urbanRural": "West Jacksonville industrial corridor inside the metro, near I-10 — Urban."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.indeed.com/q-keurig-dr-pepper-l-jacksonville,-fl-jobs.html",
+              "date": "2025",
+              "type": "careers",
+              "claim": "Active KDP Jacksonville reqs (warehouse picker, maintenance mechanic, fleet mechanic) tied to the Pickettville DC."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.jaxdailyrecord.com/news/2023/sep/06/hillwood-pays-almost-11565-million-for-two-industrial-buildings/",
+              "date": "2023-09-06",
+              "type": "press",
+              "claim": "598,587 sq ft KDP DC at 2300 Pickettville Rd sold to Hillwood in a sale-leaseback; KDP remains the operating tenant, 128 dock doors / 118 trailer spaces."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Building sold to investors but KDP is the leaseback tenant; on-site KDP brand mural + visitor/vendor signage and active KDP reqs confirm current operation. Tenancy = leased.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -3698,28 +3186,6 @@
         },
         "dossierExcerpt": "Roster address: 2304 Century Center Blvd, Irving, TX 75062 (\"Verified street address\")\nResolved facility: Dr Pepper / Dallas-Fort Worth Bottling Company campus, 2304 Century Center Blvd\nResolved center: 32.8428, -96.89475\nType: Distribution Center — Beverage/DSD\nConfidence: High\n\n---",
         "mapsUrl": "https://www.google.com/maps/@32.8428,-96.89475,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/18-kdp-distribution-center-irving-tx-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 32.8428,
-              "lng": -96.89475
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/18-kdp-distribution-center-irving-tx-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 32.8428,
-              "lng": -96.89475
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster geocode (GEOMETRIC_CENTER, moved 6209m) landed directly on the correct facility. Confirmed by a 'Keurig Dr Pepper' monument sign reading '2304' at the main entrance off Century Center Blvd. This is the Dr Pepper / Dallas-Fort Worth Bottling Company campus (The American Bottling Company, a KDP subsidiary).",
           "facility": "Very large beverage manufacturing + distribution campus. One massive main warehouse/bottling building (with rooftop processing tanks/silos visible) plus several separate office, dock and shop buildings — campus → multipleFacilities true.",
@@ -3731,6 +3197,32 @@
           "fastLaneOpportunity": "Wide entry drives and large paved circulation aprons — room for an express/bypass lane.",
           "railServed": "No rail spur enters the property; a CSX/freight line and the Trinity River floodway run nearby but do not serve the site.",
           "urbanRural": "Las Colinas / Valley Ranch industrial district of Irving inside the Dallas-Fort Worth metro — Urban."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.ziprecruiter.com/co/Keurig-Dr-Pepper/Jobs/-in-Irving,TX",
+              "date": "2026",
+              "type": "careers",
+              "claim": "Active KDP Irving reqs (forklift operator, warehouse picker, production technician, sanitation lead) at the 2304 Century Center Blvd campus."
+            },
+            {
+              "tier": 3,
+              "url": "https://en.wikipedia.org/wiki/The_American_Bottling_Company",
+              "date": "2024",
+              "type": "press",
+              "claim": "The American Bottling Company (Irving HQ) is a wholly-owned KDP subsidiary; the Dr Pepper / DFW Bottling campus is self-operated."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "American Bottling Company is a KDP subsidiary; monument sign + active KDP production/warehouse reqs at 2304 Century Center confirm current self-operation.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -3836,28 +3328,6 @@
         },
         "dossierExcerpt": "Roster address: \"Cowpens, SC 29330\" (no street address — flagged for deep-audit)\nResolved facility: UNRESOLVED — no KDP facility found in Cowpens\nSupplied geocode: 35.016998, -81.804141 (Cowpens town center)\nType: Manufacturing — Coffee/K-Cup Packaging\nConfidence: Low — facility could not be located\n\n---",
         "mapsUrl": "https://www.google.com/maps/@35.016998,-81.804141,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/19-kdp-cowpens-k-cup-packaging-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.016998,
-              "lng": -81.804141
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/19-kdp-cowpens-k-cup-packaging-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.016998,
-              "lng": -81.804141
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "UNRESOLVED": "Could not locate a KDP K-Cup packaging facility in Cowpens, SC. The roster entry is 'dossier-named' with no street address ('Specific street address not located - flag for deep-audit'). The supplied geocode (35.016998,-81.804141) is the Cowpens town center — a small commercial downtown with no industrial facility.",
           "research": "Extensive web research found NO documented KDP / Keurig K-Cup or coffee facility in Cowpens. Every KDP coffee-roasting / K-Cup-packaging operation in South Carolina is consistently attributed to the MOORE facility in Spartanburg County (6135 Anderson Mill Rd / Tyger River Industrial Park, Moore SC) — which is roster idx 1, itself described in its source note as the 'dossier-named major K-Cup hub.' SC Governor, SC Dept of Commerce, Food Manufacturing, and KDP careers all place K-Cup roasting/packaging in Moore, not Cowpens.",
@@ -3866,6 +3336,32 @@
           "recommendation": "Treat idx 19 as a roster error / unresolved. If KDP does lease undocumented packaging space inside a Cowpens warehouse, it could not be confirmed from imagery or public sources — human verification required.",
           "geofence": "perimeter is a nominal placeholder box around the Cowpens town-center geocode; it does NOT represent an identified facility. yardMetrics are zeroed and all classification fields are uncertain.",
           "urbanRural": "Cowpens is a small rural town in upstate SC — Rural — but this is moot given the facility is unresolved."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://governor.sc.gov/news/2024-09/keurig-dr-pepper-continues-growing-spartanburg-county-operations",
+              "date": "2024-09",
+              "type": "econ-dev",
+              "claim": "KDP operates an active K-Cup roasting/packaging complex in Spartanburg County SC (~285 employees), still hiring."
+            },
+            {
+              "tier": 1,
+              "url": "https://careers.keurigdrpepper.com/en/job/spartanburg/warehouse-worker/42849/94519524480",
+              "date": "2026",
+              "type": "careers",
+              "claim": "Active KDP Spartanburg warehouse/distribution reqs confirm the SC operation is live in 2026."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "KDP K-Cup packaging in Spartanburg County is confirmed live, but no Tier-1 source names a Cowpens facility specifically; the documented KDP coffee complex is in Moore (~20mi SW). The Cowpens pin is likely a mis-geocode of the Spartanburg complex - exact Cowpens address unverified.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -4054,28 +3550,6 @@
         },
         "dossierExcerpt": "- Facility: KDP Distribution Center — Indianapolis, IN (Beverage/DSD)\n- Address: 8150 Georgetown Rd, Indianapolis, IN 46268 (Park 100 industrial area, NW side of metro)\n- Locked center: 39.90270, -86.24190\n\nThe roster supplied only an \"APPROXIMATE\" geocode at the Indianapolis city\ncenter (39.76909, -86.158018) — the geocoder reported it moved 12.8 km, i.e.\nit never resolved a real building. Web research (Yahoo Local, Superpages,\nYellowpages, Foursquare \"Park 100\") identified the Dr Pepper Snapple Group /\nKDP beverage distribution site at **8150 Georgetown Rd, Indianapolis, IN\n46268**. Nominatim geocoded that address to a building footprint at\n39.9029, -86.2419. Satellite probing found a large single-story warehouse\nthere, and a Street View frame on Georgetown Rd shows the building front",
         "mapsUrl": "https://www.google.com/maps/@39.90270,-86.24190,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/20-kdp-distribution-center-indianapolis-in-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.9027,
-              "lng": -86.2419
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/20-kdp-distribution-center-indianapolis-in-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.9027,
-              "lng": -86.2419
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed via Street View — building bears 'DR PEPPER SNAPPLE' signage and '8150' address numerals on the east (office) face. Address 8150 Georgetown Rd, Indianapolis, IN 46268, in the Park 100 industrial area. Roster lat/lng were Indianapolis city-center (geocode moved 12.8 km); resolved correct site by web research.",
           "truckGate": "Open paved driveways connect the public road (Georgetown Rd) to the property's loop driveway and yard. Street View of the NE entrance shows no barrier arm, sliding gate, or pinch-point — free-flowing curb cut. A chain-link property-line fence runs along part of the east boundary but no controlled gate across the truck lane was observed. truckGate = false.",
@@ -4089,342 +3563,32 @@
           "urbanRural": "Park 100 industrial park within the Indianapolis metro (NW side) — Urban.",
           "buildingCount": "Single KDP building. Adjacent large buildings (gray-roof facility to the NW, buildings to the south) are separate properties, not part of this campus.",
           "railServed": "No rail spur enters the property."
-        }
-      },
-      {
-        "id": "21-kdp-distribution-center-evansville-in",
-        "name": "KDP Distribution Center - Evansville IN",
-        "type": "Distribution Center - DSD",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "low",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "remoteGs",
-          "preGateStaging",
-          "postGateStaging",
-          "drivewayLong",
-          "drivewayShort",
-          "backupSensitive",
-          "entryExitTogether",
-          "entryExitSeparate",
-          "entryLanes",
-          "exitLanes",
-          "fastLaneOpportunity",
-          "dockDoors",
-          "dropArea",
-          "shipRcvSeparate",
-          "connectivityIssue",
-          "multipleFacilities",
-          "scale",
-          "dropYard",
-          "multiStep",
-          "dockDoorCount",
-          "trailersVisible",
-          "trailerParkingCapacity",
-          "truckGateCount",
-          "buildingCount",
-          "siteAreaAcres",
-          "railServed"
-        ],
-        "center": {
-          "lat": 37.9442,
-          "lng": -87.547
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 37.944633,
-                "lng": -87.546931
-              },
-              {
-                "lat": 37.944741,
-                "lng": -87.545455
-              },
-              {
-                "lat": 37.943929,
-                "lng": -87.545386
-              },
-              {
-                "lat": 37.943821,
-                "lng": -87.546828
-              }
-            ]
-          },
-          "truckGate": {
-            "ring": [
-              {
-                "lat": 37.944471,
-                "lng": -87.546931
-              },
-              {
-                "lat": 37.944498,
-                "lng": -87.546725
-              },
-              {
-                "lat": 37.944308,
-                "lng": -87.546725
-              },
-              {
-                "lat": 37.944281,
-                "lng": -87.546897
-              }
-            ]
-          },
-          "dropYards": [],
-          "dockAprons": [
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
             {
-              "ring": [
-                {
-                  "lat": 37.944579,
-                  "lng": -87.546863
-                },
-                {
-                  "lat": 37.944606,
-                  "lng": -87.546588
-                },
-                {
-                  "lat": 37.943875,
-                  "lng": -87.546554
-                },
-                {
-                  "lat": 37.943848,
-                  "lng": -87.546828
-                }
-              ]
+              "tier": 1,
+              "url": "https://www.ziprecruiter.com/co/Keurig-Dr-Pepper/Jobs/--in-Indiana",
+              "date": "2026-05",
+              "type": "careers",
+              "claim": "Active KDP Indianapolis reqs (May 2026) confirm KDP still operates at the Georgetown Rd / Park 100 location."
+            },
+            {
+              "tier": 3,
+              "url": "https://www.yellowpages.com/indianapolis-in/mip/keurig-dr-pepper-562586686",
+              "date": "2025",
+              "type": "locator",
+              "claim": "Keurig Dr Pepper listed at 8150 Georgetown Rd, Indianapolis IN 46268 - same facility as the legacy Dr Pepper Snapple listing."
             }
           ],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 135,
-              "pano": "oKLa032NYBiq8Mq03KXaFw",
-              "hasCoverage": true
-            },
-            "truckGate": {
-              "heading": 135,
-              "pano": "oKLa032NYBiq8Mq03KXaFw",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 0,
-          "trailersVisible": 0,
-          "trailerParkingCapacity": 0,
-          "truckGateCount": 1,
-          "buildingCount": 1,
-          "siteAreaAcres": 3,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": false,
-          "drivewayLong": false,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": false,
-          "entryExitSeparate": false,
-          "entryLanes": null,
-          "exitLanes": null,
-          "fastLaneOpportunity": false,
-          "dockDoors": "NONE",
-          "dropArea": "NONE",
-          "shipRcvSeparate": false,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#3",
-          "steps": [
-            {
-              "step": "Arrive on site (no gate)",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Drive to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 480000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 3030000,
-          "totalYnsMs": 2640000
-        },
-        "mapsUrl": "https://www.google.com/maps/@37.94420,-87.54700,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/21-kdp-distribution-center-evansville-in-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 37.9442,
-              "lng": -87.547
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/keurig-dr-pepper/21-kdp-distribution-center-evansville-in-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 37.9442,
-              "lng": -87.547
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "location": "COULD NOT POSITIVELY LOCATE. Roster lat/lng (37.971559, -87.57109) point to downtown Evansville's civic/office core — not an industrial site; clearly wrong for a DSD depot. The only consistently-cited address across business directories (Cortera, Indeed) is '2600 S Kentucky Ave, Evansville, IN 47714-4513' for 'Keurig Dr Pepper Inc'. That address geocodes (Nominatim) to 37.9440, -87.5481; satellite imagery there shows a large empty parking lot and a generic white-roof industrial building with NO beverage-distribution signage, NO visible loading docks with trailers, and NO recognizable truck yard. Street View (2019/2023) of S Kentucky Ave shows generic light-industrial buildings and a green-fenced vehicle/equipment lot. The address is most likely an administrative/registered address rather than an active beverage-distribution warehouse, or the depot has minimal footprint / has relocated. Note: historically the Dr Pepper / RC distribution in Evansville was tied to Royal Crown Bottling Corp (1100 Independence Ave), which was renamed 'Vision Beverage' in 2020 and stopped distributing KDP brands.",
-          "coords": "Best-effort placeholder centered on the white-roof building near 2600 S Kentucky Ave; NOT a confirmed KDP facility.",
-          "classification": "All classification flags are unverified and default to false/null. The site could not be confirmed, so no truck-yard evidence could be assessed.",
-          "yardMetrics": "All metrics are unverified placeholders. The perimeter box and 3-acre area are a rough estimate around the candidate building only.",
-          "recommendation": "Flag for human review. Suggested next steps: contact KDP directly for the Evansville DSD depot address, check Vanderburgh County GIS / property records for KDP or American Bottling Company parcels, or pull a current KDP careers posting for Evansville which may list the worksite address."
-        }
-      },
-      {
-        "id": "22-kdp-distribution-center-fontana-ca",
-        "name": "KDP Distribution Center - Fontana CA",
-        "type": "Distribution Center - DSD",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "low",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "remoteGs",
-          "preGateStaging",
-          "postGateStaging",
-          "drivewayLong",
-          "drivewayShort",
-          "backupSensitive",
-          "entryExitTogether",
-          "entryExitSeparate",
-          "entryLanes",
-          "exitLanes",
-          "fastLaneOpportunity",
-          "dockDoors",
-          "dropArea",
-          "shipRcvSeparate",
-          "connectivityIssue",
-          "multipleFacilities",
-          "scale",
-          "dropYard",
-          "multiStep",
-          "dockDoorCount",
-          "trailersVisible",
-          "trailerParkingCapacity",
-          "truckGateCount",
-          "buildingCount",
-          "siteAreaAcres",
-          "railServed"
-        ],
-        "center": {
-          "lat": 34.092233,
-          "lng": -117.435048
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 34.091778,
-                "lng": -117.435735
-              },
-              {
-                "lat": 34.091778,
-                "lng": -117.434224
-              },
-              {
-                "lat": 34.090868,
-                "lng": -117.434224
-              },
-              {
-                "lat": 34.090868,
-                "lng": -117.435735
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 134,
-              "pano": "RnyeQFuaFp36fg2eJ2Imyg",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 0,
-          "trailersVisible": 0,
-          "trailerParkingCapacity": 0,
-          "truckGateCount": 1,
-          "buildingCount": 1,
-          "siteAreaAcres": 0,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": false,
-          "drivewayLong": false,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": false,
-          "entryExitSeparate": false,
-          "entryLanes": null,
-          "exitLanes": null,
-          "fastLaneOpportunity": false,
-          "dockDoors": "NONE",
-          "dropArea": "NONE",
-          "shipRcvSeparate": false,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "mapsUrl": "https://www.google.com/maps/@34.092233,-117.435048,400m/data=!3m1!1e3",
-        "fieldNotes": {
-          "location": "COULD NOT POSITIVELY LOCATE. Roster lat/lng (34.092233, -117.435048, 'APPROXIMATE' geocode) probes to a residential / small-commercial part of central Fontana — single-family homes and strip retail along a grid of city streets, NOT an industrial or logistics setting. Fontana's actual warehouse/logistics district lies further south near Slover Ave / Valley Blvd; nothing resembling a KDP beverage distribution facility appears at or near the supplied point. Extensive web research (Indeed, Cortera, Manta, DNB, Craft.co, GlobalData, KDP careers, ZipRecruiter, city-data) returned NO verifiable street address for a KDP / Dr Pepper Snapple distribution facility in Fontana. The roster source ('Indeed/KDP office locations list') merely lists 'Fontana, CA' as one city among ~27 California entries, which on Indeed are frequently derived from employee work-location / review data and need not correspond to an actual KDP-occupied building. KDP's documented Inland Empire DSD presence shows in Riverside (Manta: Keurig Dr Pepper Inc, Riverside 92507) and Redlands, not a confirmable Fontana depot.",
-          "coords": "Coordinates left at the unverified roster value. No facility was confirmed; treat as unresolved.",
-          "geofences": "perimeter is null — no building could be positively identified to geofence.",
-          "classification": "All flags are unverified and default to false/null. No truck-yard imagery could be assessed because the facility was not located.",
-          "yardMetrics": "All metrics are zero/unverified placeholders.",
-          "recommendation": "Flag for human review. Suggested next steps: contact KDP directly for the Fontana / Inland Empire DSD depot address; check San Bernardino County GIS / business-license records for KDP, Dr Pepper Snapple, or American Bottling Company parcels; or pull a live KDP careers posting for the Fontana merchandiser/warehouse role (job ref 91336228016) which may state the worksite address. Also verify whether the intended facility is actually the documented Riverside or Redlands IE depot rather than Fontana proper."
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Old DR PEPPER SNAPPLE building signage is unrefreshed legacy branding; current KDP listing + active 2026 Indianapolis reqs confirm KDP still operates at 8150 Georgetown Rd. No divestiture/closure found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       }
     ]

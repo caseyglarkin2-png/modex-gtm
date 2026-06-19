@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-02T16:06:00.356Z",
+  "builtAt": "2026-06-19T04:59:38.246Z",
   "account": {
     "slug": "barnes-noble",
     "displayName": "Barnes & Noble",
@@ -9,10 +9,10 @@
     "coverageNote": {
       "auditedCount": 2,
       "estimatedFootprint": 6,
+      "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Barnes & Noble has ~600 US stores fed by ~6 regional DCs; we mapped the DC network (the only sites where trailer ops matter).",
-      "auditedScope": "US"
+      "note": "Barnes & Noble has ~600 US stores fed by ~6 regional DCs; we mapped the DC network (the only sites where trailer ops matter)."
     },
     "featuredSiteId": "01-barnes-noble-monroe-township-nj-dc",
     "dossierIntro": "Book retail runs slow-moving SKUs through high-throughput RDCs. Barnes & Noble runs 6 distribution centers. We audited 2. Monroe NJ alone has 110 dock doors on 73.5 acres. YardFlow turns the trickle-flow seasonal staffing into a steady-state schedule even when volume swings 5x peak to trough.",
@@ -172,28 +172,6 @@
         },
         "dossierExcerpt": "The roster pin (40.358049, -74.464912, geocoded ROOFTOP) landed directly on the\nroof of a very large single-building distribution center in the Docks Corner /\nCranbury-Monroe industrial submarket, alongside the NJ Turnpike and Route 33.\nWeb search confirmed \"Barnes & Noble Distribution, 1 Barnes & Noble Way, Monroe\nTownship NJ 08831\" at this location (Yellowpages, Chamber of Commerce, Waze,\nLoc8NearMe). The building footprint derived from the perimeter geofence works\nout to ~73.5 acres, matching the dossier's stated 73-acre footprint and ~1.15M\nsq ft building — a strong independent corroboration. Location locked at the\nbuilding centroid 40.35820, -74.46510.",
         "mapsUrl": "https://www.google.com/maps/@40.35820,-74.46510,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/barnes-noble/01-barnes-noble-monroe-township-nj-dc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.3582,
-              "lng": -74.4651
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/barnes-noble/01-barnes-noble-monroe-township-nj-dc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.3582,
-              "lng": -74.4651
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed 1 Barnes & Noble Way, Monroe Township NJ. Single ~1.15M sq ft DC building; derived site area 73.5 acres matches dossier's stated 73 acres, strongly corroborating the building identification.",
           "truckGate": "Property is fully chain-link fenced (fence confirmed via Street View on the west side and visible in satellite along the south). The dock yard is a secured enclosure and the truck route necessarily passes a fence line, implying a controlled gate. No barrier-arm or sliding-gate STRUCTURE was directly captured in available imagery (Street View covers only public roads and the east perimeter loop, not the truck-yard entrance), so this is a medium-confidence inference from the fenced perimeter.",
@@ -208,6 +186,32 @@
           "railServed": "A rail line runs E-W south of the property but lies in a separate corridor outside the perimeter fence with no spur entering the site; not rail-served.",
           "entryLanes": "Not separately determinable; entrance shared with employee traffic. Estimated 1 in / 1 out, flagged uncertain.",
           "trailersVisible": "Approx 55 trailers counted at docks and in drop areas in the captured imagery; honest overhead estimate."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://barnesandnoble.dejobs.org/locations/monroe-township-nj/jobs/",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "B&N official ATS hosts a Monroe Township NJ distribution-center jobs location page; company hires for its DC here now"
+            },
+            {
+              "tier": 2,
+              "url": "https://www.actionnews5.com/story/6180700/barnes-noble-to-close-memphis-distribution-center/",
+              "date": "2008-10",
+              "type": "press",
+              "claim": "B&N closed its Memphis internet DC and consolidated online-order fulfillment into its Monroe NJ and Reno NV facilities, confirming Monroe NJ is a surviving/consolidated DC, not the closed one"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Monroe Township NJ (1 Barnes & Noble Way) is B&N's main consolidated DC; official careers ATS lists active Monroe Township NJ distribution jobs; no closure/WARN; Memphis was the closed DC, online fulfillment moved here.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -413,28 +417,6 @@
         },
         "dossierExcerpt": "The roster pin (39.418826, -119.750481, geocoded ROOFTOP) landed directly on a\nlarge white-roofed distribution warehouse in the Damonte Ranch industrial park\nin south Reno, alongside Interstate 580 / US-395. Web search confirmed \"Barnes\n& Noble Distribution Center, 12660 Old Virginia Rd, Reno NV 89521\" at this\nlocation — the West Coast replenishment / e-commerce hub (Panjiva buyer report,\nReno-Sparks Chamber of Commerce, Barnes & Noble Reno Distribution Center\nFacebook page; lease renewed Nov 2025 per the roster source). Single ~601K sq\nft building. Location locked at the building centroid 39.41870, -119.75050.",
         "mapsUrl": "https://www.google.com/maps/@39.41870,-119.75050,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/barnes-noble/02-barnes-noble-reno-nv-dc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.4187,
-              "lng": -119.7505
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/barnes-noble/02-barnes-noble-reno-nv-dc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.4187,
-              "lng": -119.7505
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed 12660 Old Virginia Rd, Reno NV 89521 in the Damonte Ranch industrial park, alongside I-580/US-395. Single ~601K sq ft DC building. Address verified via Panjiva, Chamber of Commerce, and Facebook (Barnes & Noble Reno Distribution Center).",
           "truckGate": "CONFIRMED via Street View (2022 and 2025 panos): a yellow-and-white striped barrier arm spans the entrance driveway lane, flanked by yellow protective bollards, with a STOP sign. The 2015 pano shows the same driveway WITHOUT the arm, so the barrier was installed after 2015. High confidence.",
@@ -450,6 +432,33 @@
           "railServed": "No rail spur enters the property; the nearest rail is not adjacent. Not rail-served.",
           "entryLanes": "Single shared entrance driveway with the barrier arm; estimated 1 in / 1 out, flagged uncertain.",
           "trailersVisible": "Approx 22 trailers counted at the south docks and in the trailer-parking row; honest overhead estimate."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://barnesandnoble.dejobs.org/locations/reno-nv/jobs/",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "B&N official ATS hosts a Reno NV distribution-center jobs location page; Reno DC actively hiring (Maintenance Assistant, located right off exit 26 on I-580, matching 12660 Old Virginia Rd in Damonte Ranch)"
+            },
+            {
+              "tier": 2,
+              "url": "https://www.actionnews5.com/story/6180700/barnes-noble-to-close-memphis-distribution-center/",
+              "date": "2008-10",
+              "type": "press",
+              "claim": "B&N closed its Memphis internet DC and consolidated online-order fulfillment into its Monroe NJ and Reno NV facilities, confirming Reno NV is a surviving/consolidated DC, not the closed one"
+            }
+          ],
+          "imageryDate": "2025",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Reno NV (12660 Old Virginia Rd) is B&N's West-Coast replenishment DC; official careers ATS lists active Reno NV distribution jobs and current hiring at this site; no closure/WARN (WARN closures were GA/IL/NY, not NV); Street View confirms 2025 imagery.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       }
     ]

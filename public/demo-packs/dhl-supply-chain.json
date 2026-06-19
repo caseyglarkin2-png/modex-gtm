@@ -1,21 +1,21 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-02T16:11:15.112Z",
+  "builtAt": "2026-06-19T04:59:32.312Z",
   "account": {
     "slug": "dhl-supply-chain",
     "displayName": "DHL Supply Chain",
     "archetype": "3pl",
-    "siteCount": 24,
+    "siteCount": 15,
     "coverageNote": {
-      "auditedCount": 24,
+      "auditedCount": 15,
       "estimatedFootprint": 100,
+      "totalGlobalFootprint": 1500,
+      "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "DHL Supply Chain operates ~1,500 sites in 50+ countries; we audited 24 US sites in the audit window. International scope on request.",
-      "auditedScope": "US",
-      "totalGlobalFootprint": 1500
+      "note": "DHL Supply Chain operates ~1,500 sites in 50+ countries; we audited 24 US sites in the audit window. International scope on request."
     },
-    "featuredSiteId": "20-dc-north-las-vegas-nv",
+    "featuredSiteId": "14-dhl-commerce-park-dc",
     "dossierIntro": "DHL Supply Chain runs 1,500+ facilities across North America. We audited 24. North Las Vegas has 127 dock doors on 58 acres. The Mann+Hummel auto-parts DC in Cowpens SC covers 90 acres. 1,626 dock doors total. DHL routes Fortune 100 shippers through site-specific contract logistics. YardFlow gives every shipper their own audit trail inside the same yard protocol.",
     "surprisingFindings": [
       "1,626 dock doors across 24 audited sites. DHL routes more contract-logistics dock minutes than any audited 3PL.",
@@ -26,22 +26,22 @@
   "research": null,
   "network": {
     "bbox": [
-      -114.937109,
-      29.802255,
-      -76.533603,
+      -112.002315,
+      30.435985,
+      -80.532803,
       41.913962
     ],
     "archetypeMix": {
-      "#9": 12,
-      "#3": 11,
+      "#9": 6,
+      "#3": 8,
       "#10": 1
     },
     "totals": {
-      "dockDoors": 1626,
-      "trailerCapacity": 1790,
-      "gates": 22,
+      "dockDoors": 942,
+      "trailerCapacity": 1114,
+      "gates": 13,
       "railServed": 0,
-      "acres": 865.1999999999999
+      "acres": 515.2
     },
     "sites": [
       {
@@ -169,28 +169,6 @@
         },
         "dossierExcerpt": "DHL Supply Chain - Diageo Campus - Plainfield/Bolingbrook IL\nDedicated Customer Distribution Center (spirits) — 1701 Remington Blvd, Bolingbrook, IL 60490",
         "mapsUrl": "https://www.google.com/maps/@41.649974,-88.143696,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/01-dhl-supply-chain-diageo-campus-plainfield-bolingbrook-il-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.649974,
-              "lng": -88.143696
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/01-dhl-supply-chain-diageo-campus-plainfield-bolingbrook-il-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.649974,
-              "lng": -88.143696
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Chain-link cantilever sliding gate across the truck driveway at the NW corner of the property (confirmed in Street View 2019-07). Property fully fenced with chain-link.",
           "guardShack": "No guard booth visible at the gate. A driver-instruction sign reads 'Form single line on right side of driveway / Wait in truck until you reach front of line / Pull up to fence to check in' — indicating remote/kiosk check-in, not a manned booth.",
@@ -200,6 +178,32 @@
           "shipRcvSeparate": "Dock doors on two opposite long faces of the building support separate ship/receive flows.",
           "preGateStaging": "Driver sign instructs trucks to queue single-file in the driveway outside the gate.",
           "drivewayLong": "Wide internal truck lanes and a long approach can hold a 3+ truck queue."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.dhl.com/us-en/home/press/press-archive/2024/dhl-supply-chain-and-diageo-north-america-power-up-sustainability-partnership.html",
+              "date": "2024-10-23",
+              "type": "press",
+              "claim": "DHL Supply Chain operates Diageo North America's Plainfield, IL spirits campus (10+ EV yard trucks, Nikola hydrogen Class 8); 20+ year contract-logistics partner."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.businesswire.com/news/home/20241023191334/en/ADDING-MULTIMEDIA-DHL-Supply-Chain-and-Diageo-North-America-Power-Up-Sustainability-Partnership-with-Deployment-of-Hydrogen-Fuel-Cell-Trucks",
+              "date": "2024-10-23",
+              "type": "press",
+              "claim": "Hydrogen fuel cell trucks deployed at the DHL-operated Diageo campus in Plainfield, IL."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Tier-1 DHL/Diageo press (Oct 2024) confirms current DHL operation of the 1701 Remington Blvd Diageo campus; no closure/WARN.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -356,28 +360,6 @@
         },
         "dossierExcerpt": "DHL Supply Chain - IDS Fulfillment HQ DC - Plainfield IN\nMulti-Customer E-Commerce Fulfillment Center — 9431 Allpoints Parkway,\nPlainfield, IN 46168",
         "mapsUrl": "https://www.google.com/maps/@39.739272,-86.353432,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/02-dhl-supply-chain-ids-fulfillment-hq-dc-plainfield-in-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.739272,
-              "lng": -86.353432
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/02-dhl-supply-chain-ids-fulfillment-hq-dc-plainfield-in-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.739272,
-              "lng": -86.353432
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "No controlled truck entrance. Open-campus DC in the AllPoints Midwest logistics park. Street View (2019-06) of the Allpoints Parkway entrance shows an unobstructed driveway, no barrier arm, no sliding gate, no perimeter fence. Truck yards on the east and west faces are unfenced.",
           "guardShack": "No guard booth at any entrance.",
@@ -387,6 +369,32 @@
           "shipRcvSeparate": "Dock banks on two opposite long faces support separate ship/receive flows.",
           "drivewayLong": "Wide internal truck yards on both faces can stack 3+ trucks.",
           "urbanRural": "Plainfield IN is part of the Indianapolis metro logistics corridor (AllPoints Midwest park, dense industrial fabric) = Urban."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://group.dhl.com/en/media-relations/press-releases/2025/dhl-supply-chain-acquires-ids-fulfillment.html",
+              "date": "2025-05-06",
+              "type": "press",
+              "claim": "DHL Supply Chain acquired IDS Fulfillment (HQ Plainfield, IN) and will continue operating all IDS facilities."
+            },
+            {
+              "tier": 1,
+              "url": "https://idsfulfillment.com/blog/company-industry-news/ids-fulfillment-joins-dhl-supply-chain-expand-fulfillment-capabilities-growing-brands/",
+              "date": "2025-05",
+              "type": "press",
+              "claim": "IDS HQ DC at 9431 Allpoints Parkway, Plainfield, IN 46168 (780,000 sq ft) now operates as IDS Fulfillment Powered by DHL Supply Chain."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "DHL acquired IDS May 2025 and operates the HQ DC at 9431 Allpoints Parkway; branded IDS Fulfillment Powered by DHL Supply Chain.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -542,28 +550,6 @@
         },
         "dossierExcerpt": "DHL Supply Chain - IDS Fulfillment DC - Salt Lake City UT\nMulti-Customer E-Commerce Fulfillment Center — 1711 S 4650 West,\nSalt Lake City, UT 84104",
         "mapsUrl": "https://www.google.com/maps/@40.734188,-112.001148,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/03-dhl-supply-chain-ids-fulfillment-dc-salt-lake-city-ut-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.734188,
-              "lng": -112.001148
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/03-dhl-supply-chain-ids-fulfillment-dc-salt-lake-city-ut-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.734188,
-              "lng": -112.001148
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "No controlled truck entrance. The building's west dock face fronts directly onto the public street (4650 West) — trucks back off the road into the docks. Street View (2021-05 and 2025-07) shows no barrier arm, no sliding gate, no perimeter fence. South-end driveway also open.",
           "guardShack": "No guard booth at any entrance.",
@@ -573,149 +559,32 @@
           "drivewayShort": "Trucks back off the street directly into docks; no internal queueing depth.",
           "urbanRural": "Dense SLC-west industrial park = Urban.",
           "siteAreaAcres": "~220,000 sq ft temperature-controlled building (per IDS site); parcel ~13 acres."
-        }
-      },
-      {
-        "id": "04-dhl-supply-chain-east-coast-center-of-excellence-annville-pa",
-        "name": "DHL Supply Chain - East Coast Center of Excellence - Annville PA",
-        "type": "Life Sciences & Healthcare Distribution Center (Foreign Trade Zone)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "remoteGs",
-          "preGateStaging",
-          "postGateStaging",
-          "entryExitTogether",
-          "entryLanes",
-          "exitLanes",
-          "fastLaneOpportunity",
-          "dropArea",
-          "trailersVisible",
-          "dropYard"
-        ],
-        "center": {
-          "lat": 40.3185,
-          "lng": -76.5358
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 40.320175,
-                "lng": -76.541293
-              },
-              {
-                "lat": 40.319756,
-                "lng": -76.533603
-              },
-              {
-                "lat": 40.316825,
-                "lng": -76.533877
-              },
-              {
-                "lat": 40.317243,
-                "lng": -76.541568
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
             {
-              "ring": [
-                {
-                  "lat": 40.319756,
-                  "lng": -76.541019
-                },
-                {
-                  "lat": 40.319338,
-                  "lng": -76.533877
-                },
-                {
-                  "lat": 40.3185,
-                  "lng": -76.534152
-                },
-                {
-                  "lat": 40.318919,
-                  "lng": -76.541293
-                }
-              ]
+              "tier": 1,
+              "url": "https://group.dhl.com/en/media-relations/press-releases/2025/dhl-supply-chain-acquires-ids-fulfillment.html",
+              "date": "2025-05-06",
+              "type": "press",
+              "claim": "DHL Supply Chain acquired IDS Fulfillment incl. its Salt Lake City, UT facility and will continue operating all IDS sites."
+            },
+            {
+              "tier": 2,
+              "url": "https://idsfulfillment.com/about/locations/salt-lake-city",
+              "date": "2025",
+              "type": "locator",
+              "claim": "IDS West Coast Fulfillment Center (SLC1), 1711 S 4650 West, Salt Lake City UT 84104, currently operating."
             }
           ],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 100,
-          "trailersVisible": 0,
-          "trailerParkingCapacity": 230,
-          "truckGateCount": 1,
-          "buildingCount": 1,
-          "siteAreaAcres": 70,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": false,
-          "remoteGs": true,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": null,
-          "exitLanes": null,
-          "fastLaneOpportunity": true,
-          "dockDoors": "50+",
-          "dropArea": "NONE",
-          "shipRcvSeparate": true,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": true,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "dossierExcerpt": "DHL Supply Chain - East Coast Center of Excellence - Annville PA\nLife Sciences & Healthcare Distribution Center (Foreign Trade Zone) —\n700 Killinger Road, Clear Springs Logistics Park, Annville, PA 17003",
-        "mapsUrl": "https://www.google.com/maps/@40.318500,-76.535800,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/04-dhl-supply-chain-east-coast-center-of-excellence-annville-pa-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.3185,
-              "lng": -76.5358
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/04-dhl-supply-chain-east-coast-center-of-excellence-annville-pa-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.3185,
-              "lng": -76.5358
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "_general": "Brand-new facility — DHL East Coast Center of Excellence, 700 Killinger Rd, Clear Springs Logistics Park, Annville PA. 1,000,000 sq ft, opened/opening 2026. Available satellite imagery was captured DURING construction: the building shell is complete but the surrounding truck yard and trailer-stall lot were still graded dirt (unpaved), and no Street View coverage exists. Gate/guard/yard finishing cannot be confirmed from imagery.",
-          "truckGate": "INFERRED. Not visible in construction-stage imagery. A new FDA/GMP-compliant pharma DC operating as a Foreign Trade Zone is, by industry norm, fully fenced and gated for customs/security control. Marked true on that basis but flagged uncertain.",
-          "guardShack": "INFERRED false / remoteGs INFERRED true. No booth visible; modern DCs of this type typically use kiosk/app check-in. Low confidence.",
-          "dockDoors": "Per DHL press release: 100 dock doors. Building is a cross-dock with door banks on both the north and south long faces (visible in z18 imagery). Band 50+.",
-          "dropArea": "Press release cites 230 trailer parking stalls; in the available imagery the trailer lot was unpaved and empty (0 trailers visible). dropYard true (planned dedicated trailer lot), dropArea band NONE reflects 0 trailers actually visible in imagery.",
-          "shipRcvSeparate": "Cross-dock building, dock banks on two opposite long faces.",
-          "multipleFacilities": "Clear Springs Logistics Park is approved for three warehouses (~3M sq ft total); a second large building is under construction immediately NW.",
-          "fastLaneOpportunity": "Large undeveloped/paved-to-be yard gives ample room for express lanes.",
-          "urbanRural": "South Annville, Lebanon County PA — small-town / farmland edge setting = Rural.",
-          "trailerParkingCapacity": "230 stalls per DHL press release (planned).",
-          "siteAreaAcres": "~70 acres estimated for the 1M sq ft building parcel within the park."
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Part of the May 2025 DHL/IDS acquisition; SLC1 at 1711 S 4650 West listed as actively operating on the IDS-DHL locator; no negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -815,28 +684,6 @@
         },
         "dossierExcerpt": "DHL Supply Chain - Siemens Healthineers Life Sciences DC - Memphis TN\nLife Sciences & Healthcare Distribution Center — 6200 Global Drive,\nMemphis, TN 38141",
         "mapsUrl": "https://www.google.com/maps/@34.997800,-89.859500,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/05-dhl-supply-chain-siemens-healthineers-life-sciences-dc-memphis-tn-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.9978,
-              "lng": -89.8595
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/05-dhl-supply-chain-siemens-healthineers-life-sciences-dc-memphis-tn-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.9978,
-              "lng": -89.8595
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Controlled truck entrance on the west side off Global Drive: a black metal cantilever sliding gate set in the property's ornamental perimeter fence (confirmed in Street View 2025-04). The entire ~24-acre parcel is fenced.",
           "guardShack": "No guard booth at the gate. Street View shows only the sliding gate plus a control pedestal / card-reader on a yellow bollard — no staffed booth structure.",
@@ -849,6 +696,32 @@
           "urbanRural": "Memphis southeast industrial submarket, dense logistics fabric = Urban.",
           "dockDoorCount": "~14 doors estimated from satellite z20 and Street View; band 10-25 confident, exact count approximate.",
           "siteAreaAcres": "422,000 sq ft building (Siemens Healthineers occupies ~260,000 sq ft) on a fenced parcel of ~24 acres."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.dhl.com/us-en/home/press/press-archive/2020/siemens-healthineers-and-dhl-supply-chain-team-up-to-target-innovation-and-efficiency-in-americas-supply-chain.html",
+              "date": "2020-07-17",
+              "type": "press",
+              "claim": "DHL Supply Chain operates the 422,000 sq ft Memphis DC at 6200 Global Drive, ~260,000 sq ft dedicated to Siemens Healthineers under a 10-year agreement (to ~2030); DHL purchased the building."
+            },
+            {
+              "tier": 1,
+              "url": "https://careers.dhl.com/global/en/jobs-in-memphis",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active DHL Supply Chain job requisitions in Memphis (incl. 6200 Global Drive 38141) as of June 2026."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "DHL-owned, DHL-operated Siemens Healthineers dedicated DC; 10-year contract to ~2030, active DHL hiring at the address June 2026; no closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -971,28 +844,6 @@
         },
         "dossierExcerpt": "Type: Distribution Center\nResolved coordinates: 30.43930, -81.57100\nConfidence: High",
         "mapsUrl": "https://www.google.com/maps/@30.43930,-81.57100,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/06-dhl-supply-chain-east-coast-center-of-excellence-project-empire-jacksonville-fl-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 30.4393,
-              "lng": -81.571
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/06-dhl-supply-chain-east-coast-center-of-excellence-project-empire-jacksonville-fl-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 30.4393,
-              "lng": -81.571
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster lat/lng (30.4189,-81.5988) pointed at the JEA Northside power-plant tank farm on the Broward River, ~1.4 km W of the true site. Corrected via web research: Project Empire is at 10030/10300 Eastport Road, SW corner of Kraft & Eastport Rds, south of San Mateo Little League. Confirmed the large central N-S cross-dock warehouse at 30.4393,-81.5710 by Feb-2025 Street View showing the DHL building, office and entrance.",
           "truckGate": "Single divided main entrance off Eastport Road at the SW corner (SV Feb-2025 shows a median-split in/out drive with site signage). Fenced perimeter (chain-link visible in Street View). No public-road conflict.",
@@ -1005,6 +856,39 @@
           "fastLaneOpportunity": "Wide entrance apron and large interior truck-court turning area with ample unused paved width.",
           "siteAreaAcres": "Derived from perimeter box ~690m N-S x ~290m E-W; roster cites 47.13-49.8 acres for the parcel.",
           "trailersVisible": "Approx 115 trailers counted across west drop row, west dock, east dock and east drop rows in Feb-2025 imagery."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.jaxdailyrecord.com/news/2024/aug/13/72-million-dhl-supply-chain-center-issued-construction-permit/",
+              "date": "2024-08-13",
+              "type": "econ-dev",
+              "claim": "DHL Supply Chain (Excel Inc. dba DHL Supply Chain) is developer/operator of the 603,200 sq ft Project Empire warehouse at Eastport Road, Jacksonville."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.jaxdailyrecord.com/news/2025/dec/16/north-jacksonville-cold-storage-warehouse-sells-for-192-million/",
+              "date": "2025-12-16",
+              "type": "press",
+              "claim": "DHL's completed Project Empire refrigerated warehouse (10030 Eastport Road) sold to KKR for $192M Dec 11 2025 (sale-leaseback; building complete and operational)."
+            },
+            {
+              "tier": 1,
+              "url": "https://careers.dhl.com/amer/en/agp/jobs-in-jacksonville-united-states-of-america",
+              "date": "2026",
+              "type": "careers",
+              "claim": "Active DHL job reqs (Operations Supervisor, Group Manager) at 10030 Eastport Road, Jacksonville FL 32218 as of 2026."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "OPEN and operating: completed 2025, DHL is operating tenant (sale-leaseback to KKR Dec 2025), active 2026 hiring. Note: operating address is 10030 Eastport Road (roster shows 10300 - likely a transposition).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1114,28 +998,6 @@
         },
         "dossierExcerpt": "Type: Dedicated Customer Distribution Center (filtration)\nResolved coordinates: 35.06105, -81.78200\nConfidence: High",
         "mapsUrl": "https://www.google.com/maps/@35.06105,-81.78200,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/07-dhl-supply-chain-mann-hummel-dc-cowpens-sc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.06105,
-              "lng": -81.782
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/07-dhl-supply-chain-mann-hummel-dc-cowpens-sc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.06105,
-              "lng": -81.782
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster lat/lng landed on the NE edge of the building (ROOFTOP, moved 44m). Re-centered on the single massive cross-dock at 35.0610,-81.7820. Confirmed via web research as the 1,401,200 sq ft DHL/Mann+Hummel spec DC at 600 Webber Drive, Cowpens SC, opened July 2021 - the largest single building in the roster.",
           "truckGate": "Single controlled entrance off Webber Drive on the NE side - a divided 2-lane drive into the site. Site fenced (chain-link visible in Apr-2024 Street View). Long internal approach.",
@@ -1148,6 +1010,39 @@
           "fastLaneOpportunity": "Very wide truck court and large undeveloped paved/graded area at the SW end - ample room for additional lanes.",
           "siteAreaAcres": "Building runs diagonally (SE-NW), ~530m long; ~90 acres is the estimated fenced parcel of the building + wraparound truck court (the perimeter bounding box overstates the diagonal parcel). Low-medium confidence.",
           "trailersVisible": "Approx 95 trailers counted across both dock faces and drop rows; moderate confidence."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.sccommerce.com/news/dhl-supply-chain-establishing-operations-cherokee-county",
+              "date": "2021-04",
+              "type": "econ-dev",
+              "claim": "SC Dept of Commerce: DHL Supply Chain establishing 1.3M sq ft operations at 600 Webber Road, Cowpens (Cherokee County), $92.7M, 249 jobs."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.mann-hummel.com/content/dam/website/mann-hummel/company/downloads/supplier/logistics-shipping-instructions/Logistics_Manual_plant_specific_en.pdf",
+              "date": "2024-08",
+              "type": "press",
+              "claim": "Mann+Hummel supplier logistics manual names 600 Webber Road, 29330 Cowpens as its DHL-operated inbound DC."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.areadevelopment.com/newsitems/4-8-2021/dhl-supply-chain-cowpens-south-carolina.shtml",
+              "date": "2021-04",
+              "type": "press",
+              "claim": "DHL Supply Chain establishing Cowpens operations complex, Sunny Slope Industrial Park."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Tier-1 econ-dev + Mann+Hummel's own 2024 logistics manual confirm DHL operates the dedicated Cowpens DC; no closure/WARN.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1251,34 +1146,45 @@
         },
         "dossierExcerpt": "Type: Distribution Center\nResolved address: 8695 Basil Western Road NW, Violet Township, NW Fairfield County, OH\nResolved coordinates: 39.846447, -82.704257 (address-level, ROOFTOP geocode)\nConfidence: LOW — facility not visible in any available imagery",
         "mapsUrl": "https://www.google.com/maps/@39.846447,-82.704257,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/08-dhl-supply-chain-violet-township-dc-pickerington-oh-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.846447,
-              "lng": -82.704257
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/08-dhl-supply-chain-violet-township-dc-pickerington-oh-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.846447,
-              "lng": -82.704257
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Address resolved (8695 Basil Western Road NW, Violet Township / NW Fairfield County, OH; geocode ROOFTOP, moved 20m) but the BUILDING IS NOT VISIBLE in any available imagery. Google satellite for the whole area is pre-development USDA/FPAC farmland tiles, and the latest Street View (Aug 2024) along Basil Western Road shows only cornfields - no construction.",
           "status": "DHL announced/broke ground 2023 with a Q2-2024 target for this 755,000 sq ft DC. As of the most recent imagery (Aug 2024 Street View) the site was still farmland - the project appears delayed and not yet built. The yard cannot be deep-audited.",
           "classification": "All classification fields are placeholder defaults and CANNOT be verified - the facility is not visible. urbanRural=Rural is the one defensible call (the parcel sits in open NW Fairfield County farmland north of Carroll, OH). connectivityIssue=true is inferred from the rural/isolated setting (low confidence).",
           "perimeter": "The perimeter box is a nominal ~700m x ~700m square around the resolved address; it does NOT represent an observed fence line - no building or fence is visible.",
           "recommendation": "Re-audit once post-2024 satellite/Street-View imagery becomes available and the building is visible. Flag for human review."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.dhl.com/us-en/home/press/press-archive/2023/dhl-supply-chain-continues-to-invest-in-its-home-state-of-ohio.html",
+              "date": "2023-05",
+              "type": "press",
+              "claim": "DHL Supply Chain building 755,000 sq ft DC in Violet Township, Fairfield County, ~200 jobs."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.nbc4i.com/news/columbus-business-first/dhl-supply-chain-to-build-755000-square-foot-distribution-center-in-fairfield-county/",
+              "date": "2023-05",
+              "type": "press",
+              "claim": "755,000 sq ft DHL DC at 8695 Basil Western Road NW, Violet Township, expected open Q2 2024."
+            },
+            {
+              "tier": 1,
+              "url": "https://careers.dhl.com/global/en/supplychain",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active DHL Supply Chain job postings in Pickerington, OH corroborate the facility is open and operating."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "DHL press + local news fix the exact address (Q2 2024 open); 2025-26 Pickerington job postings confirm it opened and runs; no closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1400,28 +1306,6 @@
         },
         "dossierExcerpt": "Type: Dedicated Customer Distribution Center (CPG/food)\nResolved coordinates: 32.84600, -97.31570\nConfidence: High",
         "mapsUrl": "https://www.google.com/maps/@32.84600,-97.31570,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/09-dhl-supply-chain-campbell-soup-dc-fort-worth-tx-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 32.846,
-              "lng": -97.3157
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/09-dhl-supply-chain-campbell-soup-dc-fort-worth-tx-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 32.846,
-              "lng": -97.3157
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster lat/lng (ROOFTOP, moved 89m) landed on the building. Confirmed as the DHL/Campbell Soup Supply Company DC at 3000 Cantrell Sansom Rd, Fort Worth (AllianceTexas area), ~578,000 sq ft - Aug-2025 Street View shows the building marked '3000' with US/Texas flags.",
           "truckGate": "Single controlled truck entrance on the NW side, reached by a long (~250m+) divided internal drive running south from Cantrell Sansom Road between the Campbell DC and the neighboring warehouse.",
@@ -1434,6 +1318,39 @@
           "scale": "No truck scale clearly visible; flagged uncertain.",
           "siteAreaAcres": "Derived from perimeter box ~520m N-S x ~210m E-W of the fenced parcel; bounded east by I-35W with a treed buffer.",
           "trailersVisible": "Approx 115 trailers counted across both dock faces and drop rows."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.dhl.com/us-en/home/press/press-archive/2017/dhl-supply-chain-campbell-soup-company-bring-120-jobs-to-fort-worth-with-opening-of-distribution-facility.html",
+              "date": "2017-09",
+              "type": "press",
+              "claim": "DHL Supply Chain operating new 578,000 sq ft DC for Campbell Soup in Fort Worth; partnership since 2013."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.freightwaves.com/news/dhl-campbell-soup-launch-texas-distribution-hub",
+              "date": "2017-09",
+              "type": "press",
+              "claim": "DHL Supply Chain operating ~578,000 sq ft Campbell Soup southern distribution hub in Fort Worth."
+            },
+            {
+              "tier": 1,
+              "url": "https://rebusinessonline.com/tdc-acquires-713000-sf-distribution-center-in-fort-worth/",
+              "date": "2017-06",
+              "type": "econ-dev",
+              "claim": "Campbell Soup leases 578,000 sq ft of the 713,000 sq ft DHL Real Estate building at 3000 Cantrell Sansom Road (leased)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "DHL press + FreightWaves confirm DHL operates the leased Campbell's Fort Worth DC; Campbell's 2024-25 restructuring hits the Paris TX plant, not this DC; no DC closure found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1586,28 +1503,6 @@
         },
         "dossierExcerpt": "Type: Distribution Center\nAudited coordinates: 39.96780, -86.37660 (geocoded \"5000 Anson Blvd\")\nConfidence: Medium — facility identification uncertain",
         "mapsUrl": "https://www.google.com/maps/@39.96780,-86.37660,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/10-dhl-supply-chain-whitestown-dc-whitestown-in-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.9678,
-              "lng": -86.3766
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/10-dhl-supply-chain-whitestown-dc-whitestown-in-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.9678,
-              "lng": -86.3766
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "IDENTIFICATION UNCERTAIN. Roster lat/lng was geocoded from '5000 Anson Blvd, Whitestown IN' but moved 2755m - a large displacement indicating low geocoding precision. The Anson logistics park (Whitestown, off I-65) contains dozens of near-identical speculative warehouses, several vacant in current imagery; no DHL signage could be confirmed in available Street View (most park-interior panos are June-2019 pre-construction). Audited the building AT the geocoded coordinate (39.9678,-86.3766) as the best-available candidate - it is a front-load warehouse with operational dock activity (trailers backed in), consistent with DHL having occupied 5000 Anson Blvd since Q1 2020.",
           "building": "Single front-load (single-sided) warehouse running SW-NE, ~250m long; dock doors on the NW long face only. SE face borders I-65 with an employee-parking buffer strip and no docks.",
@@ -1617,6 +1512,32 @@
           "urbanRural": "Whitestown / Anson is an edge-of-metro logistics park surrounded by farmland and I-65; classed Rural per the rubric (small-town industrial leans Rural).",
           "siteAreaAcres": "Estimated ~15 acres for the diagonal building parcel + truck court; the perimeter bounding box overstates the diagonal lot. Low confidence.",
           "recommendation": "Re-verify the exact DHL building among the Anson cluster (DHL also has nearby Whitestown sites at 3930 S 500 E and a Fishback Creek facility). Flag for human review of the facility identification."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://betterinboone.org/businesses/industries/logistics-distribution-2/",
+              "date": "2025",
+              "type": "econ-dev",
+              "claim": "Boone County EDC logistics directory lists DHL Supply Chain among Whitestown-area operators (5000 Anson Blvd, Anson development off I-65)."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.indeed.com/q-dhl-supply-chain-l-whitestown,-in-jobs.html",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active 2025-2026 DHL Supply Chain Whitestown job postings (incl. General Manager II) confirm current operation."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "DHL tied to 5000 Anson Blvd since Q1 2020 with active 2025-26 job postings; Indiana DHL closure is Clayton (different building), no negative on 5000 Anson.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1752,28 +1673,6 @@
         },
         "dossierExcerpt": "- Address: 6390 Commerce Ct, Groveport, OH 43125\n- Resolved center: 39.845500, -82.900800\n- Confirmation: Roster ROOFTOP coords (39.845371, -82.899859) landed on the building. Web search confirms DHL Supply Chain operates at 6390 Commerce Ct, Groveport (Yellow Pages, Waze, Chamber of Commerce, BusinessYab; phone 614-836-1263). Satellite at z17-z21 shows a single large rhomboid-oriented distribution building consistent with a DC — matches the facility type.",
         "mapsUrl": "https://www.google.com/maps/@39.845500,-82.900800,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/11-groveport-dc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.8455,
-              "lng": -82.9008
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/11-groveport-dc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.8455,
-              "lng": -82.9008
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "No barrier arm, sliding gate, or checkpoint anywhere on the property. Trucks enter from Commerce Ct (a private dead-end court shared with adjacent buildings), loop around the SW corner of the building, into the open NW dock yard. The dock apron is open to the access drive with no pinch-point.",
           "guardShack": "No guard booth structure visible at any approach. Street View of all faces confirms an open, unsecured site.",
@@ -1783,6 +1682,32 @@
           "urbanRural": "Groveport is part of the Columbus metro / Rickenbacker logistics submarket; the building directly abuts a dense residential subdivision on the E. Urban.",
           "drivewayLong": "The access drive from Commerce Ct wraps around the SW corner and runs the length of the NW apron - room for 3+ trucks to queue.",
           "trailerParkingCapacity": "Drop/staging space on the apron and yard could hold ~30 trailers; estimate from overhead imagery."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://opengovus.com/connecticut-license/1257814",
+              "date": "2024",
+              "type": "econ-dev",
+              "claim": "State business registry lists Exel Inc dba DHL Supply Chain (USA) at 6390 Commerce Court, Groveport, OH 43125."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.ziprecruiter.com/co/Dhl/Jobs/-in-Groveport,OH",
+              "date": "2026-05",
+              "type": "careers",
+              "claim": "Active 2025-2026 DHL Groveport job postings corroborate ongoing DHL operations in the submarket (not address-specific)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "PROBABLE: only directory/registry data place DHL at 6390 Commerce Ct, no dated Tier-1 press; Groveport submarket churning (DHL closed nearby 5235 Westpoint Dr late-2023), but no negative on 6390 Commerce specifically.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1883,28 +1808,6 @@
         },
         "dossierExcerpt": "- Address: 6000 Studio Way, Union City, GA 30291\n- Resolved center: 33.572741, -84.534200 (building is long E-W; roster coord 33.572741,-84.535507 landed near the W end, center adjusted east)\n- Confirmation: Web search confirms \"DHL Supply Chain (Keurig)\" at 6000 Studio Way, Union City GA 30291 (Waze, Nextdoor, Loc8NearMe, Foursquare; phone 678-561-9698). Satellite shows a single very large cross-dock distribution building consistent with a dedicated beverage DC.",
         "mapsUrl": "https://www.google.com/maps/@33.572741,-84.534200,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/12-keurig-dc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.572741,
-              "lng": -84.5342
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/12-keurig-dc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.572741,
-              "lng": -84.5342
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Street View (2025-10) clearly shows a chain-link perimeter fence separating the office/car-parking area from the truck yard, with a gate where the truck access drive crosses the fence line. A 'DEAD END / NO TRACTOR TRAILERS BEYOND THIS POINT' sign marks the car/office side, confirming a controlled separation of truck and visitor traffic.",
           "guardShack": "No large multi-window staffed guard booth visible at the gate in any Street View capture (2019, 2025). The gate structure is small. Classified guardShack false / remoteGs true (kiosk or automated check-in implied) - flagged as a medium-confidence call given the small/obscured structure.",
@@ -1917,176 +1820,32 @@
           "drivewayLong": "Access drive from Studio Way runs a long distance into the property before reaching the dock yards - room for 3+ trucks to queue.",
           "urbanRural": "Union City is within the Atlanta metro (Fulton County), adjacent to I-85 and dense industrial development. Urban.",
           "railServed": "No rail spur into the property; I-85 runs to the SE."
-        }
-      },
-      {
-        "id": "13-union-city-dc-derrick-industrial",
-        "name": "DHL Supply Chain - Union City DC (Derrick Industrial) - Union City GA",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "uncertainFields": [
-          "truckGate",
-          "remoteGs",
-          "dockDoorCount",
-          "trailersVisible"
-        ],
-        "center": {
-          "lat": 33.6317,
-          "lng": -84.5718
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 33.633301,
-                "lng": -84.574959
-              },
-              {
-                "lat": 33.632958,
-                "lng": -84.570152
-              },
-              {
-                "lat": 33.628956,
-                "lng": -84.570701
-              },
-              {
-                "lat": 33.629299,
-                "lng": -84.575508
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [
+        "verification": {
+          "verdict": "probable",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
             {
-              "ring": [
-                {
-                  "lat": 33.632843,
-                  "lng": -84.575096
-                },
-                {
-                  "lat": 33.6325,
-                  "lng": -84.570289
-                },
-                {
-                  "lat": 33.631814,
-                  "lng": -84.570427
-                },
-                {
-                  "lat": 33.632157,
-                  "lng": -84.575233
-                }
-              ]
+              "tier": 1,
+              "url": "https://dhlhires.com/union-city/",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "DHL Supply Chain dedicated Union City, GA careers page active with current warehouse hiring."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.loopnet.com/property/6000-studio-way-union-city-ga-30291/13121-09F150800620344/",
+              "date": "2025",
+              "type": "econ-dev",
+              "claim": "6000 Studio Way is a distinct 1,020,000 sq ft / 59.94-acre Fulton County building (built 2015), separate from the Derrick Industrial Parkway site DHL is closing."
             }
           ],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 90,
-          "trailersVisible": 40,
-          "trailerParkingCapacity": 50,
-          "truckGateCount": 1,
-          "buildingCount": 1,
-          "siteAreaAcres": 64,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": true,
-          "dockDoors": "50+",
-          "dropArea": "0-10",
-          "shipRcvSeparate": false,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#3",
-          "steps": [
-            {
-              "step": "Arrive on site (no gate)",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Drive to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 480000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 3030000,
-          "totalYnsMs": 2640000
-        },
-        "dossierExcerpt": "- Address: 4505 Derrick Industrial Parkway, Union City / Atlanta, GA 30349\n- Resolved center: 33.631700, -84.571800 (building runs NE-SW; roster coord 33.62994,-84.570712 was near the SE/center)\n- Confirmation: Web search confirms DHL Supply Chain at 4505 Derrick Industrial Parkway — this is the ASOS South Fulton fulfillment center (Panjiva buyer report names ASOS as the customer; Waze lists \"DHL Supply Chain (ASOS South Fulton)\"). Satellite shows a single very large E-commerce fulfillment building consistent with the facility type.",
-        "mapsUrl": "https://www.google.com/maps/@33.631700,-84.571800,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/13-union-city-dc-derrick-industrial-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.6317,
-              "lng": -84.5718
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/13-union-city-dc-derrick-industrial-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.6317,
-              "lng": -84.5718
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "operatingStatus": "This is the DHL Supply Chain ASOS fulfillment center on Derrick Industrial Parkway. DHL filed a WARN/state layoff notice in Feb 2025 to CLOSE this facility (600+ employees), with layoffs effective ~April 6, 2025 (AJC, Newnan CEO). The building is physically intact in current (2026) imagery, but operational status as an active DHL site is uncertain/likely wound down. Audited as the physical facility.",
-          "truckGate": "No barrier arm, sliding gate, or guard-booth checkpoint identified in satellite or Street View. The site is accessed by a single SW entry road off Derrick Industrial Parkway leading to the dock yard and employee parking. A perimeter access road with painted lane chevrons rings the building but shows no controlled pinch-point. Flagged uncertain - imagery resolution and tree cover limit confidence.",
-          "guardShack": "No guard booth structure visible at the entrance.",
-          "dockDoors": "Large E-commerce fulfillment center; continuous dock-door bank along the NW face with dock numbers visible to 389+ in Street View. Estimated ~90 doors, banded 50+.",
-          "dropArea": "Only ~6-8 trailers seen in a small drop area at the W end; 0-10 band for trailers parked without tractors in marked stalls.",
-          "dropYard": "Small dedicated trailer-storage cluster (red/orange/white trailers) at the W edge of the parking/yard area.",
-          "fastLaneOpportunity": "Very wide entry road and large open paved yard give ample room to add a bypass/express lane.",
-          "drivewayLong": "Long SW entry road and perimeter drive provide deep queuing space (3+ trucks).",
-          "urbanRural": "Union City / South Fulton, within the Atlanta metro, west of Hartsfield-Jackson airport. Urban.",
-          "siteAreaAcres": "Perimeter box includes the cleared developed footprint; the parcel also has substantial wooded buffer. ~64 acres for the cleared area is an estimate."
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "PROBABLE: DHL/Keurig tie at 6000 Studio Way rests on crowdsource data (no Tier-1); the Feb-2025 DHL Union City closure is on Derrick Industrial Parkway (a DIFFERENT building), so it does not condemn Studio Way; active Union City DHL hiring supports continued operation.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2246,28 +2005,6 @@
         },
         "dossierExcerpt": "- Park: DHL Commerce Park, Winding Woods Road off US-78, St. George, SC 29477\n- Audited building: DHL Commerce Park Building A, 4826 Hwy 78, Saint George, SC 29477\n- Resolved center: 33.177800, -80.535000\n- Confirmation: DHL Commerce Park is a planned 125-acre, three-building, 1.7M sq ft $100M campus near St. George serving the Port of Charleston (DHL Group press release 2019; Post and Courier; SC Governor's office). The roster's GEOMETRIC_CENTER coord (33.183087, -80.52853) landed ~700 m NE on an unrelated industrial / aggregate yard — not the DHL facility. Web search surfaced \"DHL Commerce Park Building A\" at 4826 Hwy 78 (CommercialCafe; LoopNet — ~978,805 sq ft, ~74.91-acre lot, Class A, 420 parking spaces). Satellite at that address shows a large finished cross-dock distribution building consistent with the listing. Center corrected to Building A.",
         "mapsUrl": "https://www.google.com/maps/@33.177800,-80.535000,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/14-dhl-commerce-park-dc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.1778,
-              "lng": -80.535
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/14-dhl-commerce-park-dc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.1778,
-              "lng": -80.535
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "siteIdentity": "DHL Commerce Park is a planned 125-acre, three-building, 1.7M sq ft campus near St. George SC serving the Port of Charleston. As of current (2026) imagery only ONE building is built - DHL Commerce Park Building A, 4826 Hwy 78 (~978,805 sq ft, ~74.91-acre parcel per LoopNet/CommercialCafe). The roster's GEOMETRIC_CENTER coord (33.183087,-80.52853) landed ~700 m NE on an unrelated industrial/aggregate yard; corrected to Building A at 33.177800,-80.535000.",
           "buildingStatus": "Building A appears built but largely vacant - the SW dock face shows a long row of EMPTY marked trailer-parking stalls and almost no trailers across the site. LoopNet lists 4826 Hwy 78 as available for lease, consistent with an empty/marketed building. multipleFacilities set false (only one building exists on the developed parcel).",
@@ -2282,6 +2019,32 @@
           "urbanRural": "St. George / Dorchester County SC is a small rural town; the campus sits in cleared land surrounded by pine forest off a two-lane state highway. Rural.",
           "connectivityIssue": "Rural setting in pine forest, somewhat isolated from town - cellular coverage could be weaker. Medium-confidence inference, flagged.",
           "siteAreaAcres": "~75 acres for the Building A developed parcel (per LoopNet listing 74.91 acres); the full DHL Commerce Park is 125 acres including unbuilt Building B/C pads."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "3PL",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://governor.sc.gov/news/2019-04/dhl-supply-chain-constructing-new-100-million-distribution-center-dorchester-county",
+              "date": "2019-04",
+              "type": "econ-dev",
+              "claim": "DHL Supply Chain purchased 125 acres on Winding Woods Rd off US-78 (DHL Commerce Park), St. George; three buildings totaling 1.7M sq ft, $100M, 450 jobs; first phase open Q1 2020."
+            },
+            {
+              "tier": 1,
+              "url": "https://scbiz.com/dhl-supply-chain-to-expand-sc-operations/",
+              "date": "2021-04",
+              "type": "press",
+              "claim": "April 2021 SC Biz refers to DHL Supply Chain's St. George site as an existing/operating facility."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "PROBABLE: DHL owns DHL Commerce Park and it was built/operating by 2021; no closure/contract-loss found, but no clean post-2022 Tier-1 confirming current operation - flag for FOV imagery check.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2438,28 +2201,6 @@
         },
         "dossierExcerpt": "- Address: 2065 George Street, Melrose Park, IL 60160\n- Resolved center: 41.913400, -87.847700\n- Confirmation: Web search confirms DHL eCommerce opened a 352,000 sq ft, LEED Silver distribution / sortation center at 2065 George Street, Melrose Park IL (DHL press release 2023; Connect CRE; Supply Chain Dive — houses a Honeywell IntelliSort cross-belt loop sorter rated 40,000 parcels/hr; opened June 2023). Street View (2024-09) shows the DHL logo on the building face, positively identifying the center building among the industrial-park cluster. Roster ROOFTOP coord landed on the correct building.",
         "mapsUrl": "https://www.google.com/maps/@41.913400,-87.847700,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/15-melrose-park-dc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.9134,
-              "lng": -87.8477
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/15-melrose-park-dc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.9134,
-              "lng": -87.8477
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "siteIdentity": "DHL eCommerce sortation center at 2065 George Street, Melrose Park IL - 352,000 sq ft, LEED Silver, opened June 2023, houses a Honeywell IntelliSort cross-belt loop sorter (40,000 parcels/hr). Confirmed via Street View showing the DHL logo on the building face (2024-09 capture). One building in a dense suburban-Chicago industrial park.",
           "truckGate": "No barrier arm, sliding gate, or guard-booth checkpoint at the truck-apron entrance. A black ornamental/perimeter fence runs along the George Street frontage (green setback strip), but the truck apron itself opens directly to the access road with no controlled pinch-point. Flagged uncertain - the frontage fence indicates some security intent and a low-profile gate cannot be fully ruled out from imagery.",
@@ -2472,6 +2213,32 @@
           "urbanRural": "Melrose Park is inside the dense Chicago metro industrial fabric - tightly packed large warehouses on all sides. Urban.",
           "shipRcvSeparate": "Docks on a single building face only - no separate ship/receive clusters.",
           "railServed": "No rail spur into the property; a rail line runs through the wider district but does not enter the DHL parcel."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.dhl.com/us-en/home/press/press-archive/2023/dhl-opens-a-silver-leed-certified-distribution-center-in-chicago.html",
+              "date": "2023-08",
+              "type": "press",
+              "claim": "DHL opened a 352,000 sq ft LEED Silver DC at 2065 George Street, Melrose Park IL, with a Honeywell IntelliSort sorter (40,000 parcels/hr)."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.supplychaindive.com/news/dhl-opens-e-commerce-facility-in-chicago-with-Honeywell-loop-sorter/690834/",
+              "date": "2023-08",
+              "type": "press",
+              "claim": "DHL opened the Melrose Park facility Aug 2023; one of three US international-export gateways, currently operating."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "DHL-operated at the exact address and currently operating; FLAG: division mismatch - operator is DHL eCommerce (parcel/e-commerce sortation), not DHL Supply Chain contract logistics.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2640,28 +2407,6 @@
         },
         "dossierExcerpt": "Type: Distribution Center (intermodal logistics park)\nResolved location: 32190 W 191st St, Edgerton, KS 66021 — building center ~38.78275, -94.95810\nConfidence: high",
         "mapsUrl": "https://www.google.com/maps/@38.78275,-94.9581,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/16-dc-edgerton-ks-logistics-park-kansas-city-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 38.78275,
-              "lng": -94.9581
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/16-dc-edgerton-ks-logistics-park-kansas-city-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 38.78275,
-              "lng": -94.9581
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "DHL Supply Chain operates this single-tenant DC at 32190 W 191st St, Edgerton KS 66021 within Logistics Park Kansas City (LPKC). Roster lng was ~1.1km too far west (landed on the BNSF intermodal yard); corrected via web search + Street View pano confirming the building.",
           "customer": "Building bears prominent 'HERSHEY' signage on the office front (confirmed in two Street View captures, Aug 2024). This is a DHL-operated dedicated-customer DC for The Hershey Company — consistent with DHL Supply Chain's contract-logistics model and with directory listings ('DHL Supply Chain - Edgerton, KS', ph 913-856-2414).",
@@ -2676,6 +2421,32 @@
           "backupSensitive": "W 191st St is a low-traffic industrial-park road with deep open driveways; a truck queue would not spill onto a public artery.",
           "postGateStaging": "Broad paved north truck court provides interior holding/queue space ahead of the docks.",
           "method": "deep-audit"
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.dhl.com/us-en/home/press/press-archive/2021/dhl-expands-in-kansas-city-to-accommodate-growth-in-international-e-commerce-shipping.html",
+              "date": "2021",
+              "type": "press",
+              "claim": "DHL expanded its Kansas City-area operations within the LPKC/Edgerton corridor."
+            },
+            {
+              "tier": 3,
+              "url": "https://www.chamberofcommerce.com/business-directory/kansas/edgerton/logistics-service/2030105465-dhl-supply-chain",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "DHL Supply Chain listed in the Edgerton KS directory at 32190 W 191st St, Edgerton, KS 66030."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "PROBABLE: DHL Supply Chain has a confirmed current presence in Edgerton/LPKC (active hiring) but no Tier-1 enumerates the exact street address; directory pins 32190 W 191st St - flag address.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2785,28 +2556,6 @@
         },
         "dossierExcerpt": "Type: Multi-Customer E-Commerce Fulfillment Center\nResolved location: 495 Coweta Industrial Parkway, Newnan, GA 30265\n(Coweta Industrial Park) — building center ~33.41010, -84.72560\nConfidence: medium",
         "mapsUrl": "https://www.google.com/maps/@33.4101,-84.7256,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/17-ids-fulfillment-dc-atlanta-ga-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.4101,
-              "lng": -84.7256
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/17-ids-fulfillment-dc-atlanta-ga-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.4101,
-              "lng": -84.7256
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster had no address/coords. Resolved via web research: IDS Fulfillment's Atlanta-metro DC is at 495 Coweta Industrial Parkway, Newnan GA 30265 ('Scout 85 Logistics' / 'Scout Cold Logistics Center Atlanta-II'), a 215,822 sq ft Class A rear-load building completed 2022, full-building lease to IDS Fulfillment (now DHL Supply Chain). Building is in Coweta Industrial Park, ~3 mi east of I-85 Exit 47.",
           "buildingIdNote": "Audited the large single-tenant white tilt-up rear-load building at ~33.4101,-84.7256 on the south side of Coweta Industrial Parkway. Street View read a building plate as '355' on the NW end, which conflicts with the marketed address '495'; the 355 plate may be a suite/door designation. This is the only building in the park matching the Scout description (single-tenant, ~215k sq ft, rear-load, fully secured/fenced, 2022 construction). Building identity is high-probability but the street-number discrepancy is unresolved — confidence set to medium.",
@@ -2819,1086 +2568,32 @@
           "urbanRural": "Coweta Industrial Park sits in a wooded edge-of-Newnan setting, a small exurban city SW of Atlanta; bordered by tree cover. Rural per rubric (small-town industrial defaults to Rural).",
           "trailerParkingCapacity": "Low — the fenced dock court is narrow with limited room for drop trailers beyond the dock face itself; estimate ~12.",
           "method": "deep-audit"
-        }
-      },
-      {
-        "id": "18-ids-fulfillment-dc-indianapolis-in",
-        "name": "DHL Supply Chain - IDS Fulfillment DC - Indianapolis IN",
-        "type": "Multi-Customer E-Commerce Fulfillment Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "uncertainFields": [
-          "dockDoorCount",
-          "trailersVisible"
-        ],
-        "center": {
-          "lat": 39.68545,
-          "lng": -86.31017
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 39.687247,
-                "lng": -86.311543
-              },
-              {
-                "lat": 39.687035,
-                "lng": -86.308522
-              },
-              {
-                "lat": 39.683442,
-                "lng": -86.308797
-              },
-              {
-                "lat": 39.683653,
-                "lng": -86.311818
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
             {
-              "ring": [
-                {
-                  "lat": 39.687035,
-                  "lng": -86.311406
-                },
-                {
-                  "lat": 39.686982,
-                  "lng": -86.310719
-                },
-                {
-                  "lat": 39.683601,
-                  "lng": -86.310857
-                },
-                {
-                  "lat": 39.683653,
-                  "lng": -86.311543
-                }
-              ]
+              "tier": 1,
+              "url": "https://rebusinessonline.com/colliers-arranges-215822-sf-industrial-lease-in-newnan-georgia/",
+              "date": "2024-08-30",
+              "type": "press",
+              "claim": "IDS (3PL) signed a 10-year full-building lease for 215,822 SF at 495 Coweta Industrial Parkway, Newnan, GA (Scout 85 Logistics), the Atlanta-metro facility."
+            },
+            {
+              "tier": 1,
+              "url": "https://idsfulfillment.com/blog/company-industry-news/ids-fulfillment-expands-atlanta-ga/",
+              "date": "2024-09",
+              "type": "press",
+              "claim": "IDS Fulfillment (now DHL Supply Chain) announces its Atlanta/Southeast facility at 495 Coweta Industrial Parkway, Newnan, GA."
             }
           ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 39.68693,
-                  "lng": -86.311406
-                },
-                {
-                  "lat": 39.686877,
-                  "lng": -86.310651
-                },
-                {
-                  "lat": 39.683865,
-                  "lng": -86.310719
-                },
-                {
-                  "lat": 39.683918,
-                  "lng": -86.311475
-                }
-              ]
-            }
-          ],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 110,
-          "trailersVisible": 14,
-          "trailerParkingCapacity": 90,
-          "truckGateCount": 1,
-          "buildingCount": 1,
-          "siteAreaAcres": 42.9,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": false,
-          "remoteGs": true,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": true,
-          "dockDoors": "50+",
-          "dropArea": "50+",
-          "shipRcvSeparate": false,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "dossierExcerpt": "Type: Multi-Customer E-Commerce Fulfillment Center\nResolved location: 5425 Exploration Drive, Indianapolis, IN 46241\n(\"World Connect @ Ameriplex - Building 3\") — building center\n~39.68545, -86.31017\nConfidence: high",
-        "mapsUrl": "https://www.google.com/maps/@39.68545,-86.31017,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/18-ids-fulfillment-dc-indianapolis-in-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.68545,
-              "lng": -86.31017
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/18-ids-fulfillment-dc-indianapolis-in-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.68545,
-              "lng": -86.31017
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "location": "Roster had no address/coords. Resolved via web research: IDS Fulfillment's Indianapolis DC (distinct from the Plainfield IN HQ at idx 2) is at 5425 Exploration Drive, Indianapolis IN 46241 - 'World Connect @ Ameriplex - Building 3', a ~620,935-661,324 sq ft LEED-certified distribution building on ~47 acres, built 2018, in the Ameriplex business park across I-70 from Indianapolis International Airport. IDS opened it in 2018 as its second fulfillment center; now part of DHL Supply Chain after the May 2025 acquisition.",
-          "truckGate": "The property is fully perimeter-fenced (chain-link). The truck court is accessed by a driveway from Exploration Drive that enters through a gate in the fence line - confirmed in Street View (2019 + 2024 panos showing fence with a gate opening at the truck driveway). Controlled truck entry.",
-          "guardShack": "No guard booth visible at the truck gate - Street View shows the gated fence opening with no staffed structure.",
-          "remoteGs": "true - there is a truck gate but no guard shack, implying kiosk/app/call-box check-in.",
-          "dockDoors": "Large ~620k sq ft building with loading docks along the full west face; estimated ~100-120 doors. Banded 50+. Exact count uncertain at available resolution.",
-          "dropArea": "Extensive marked, numbered trailer-parking stalls along the west truck court (stalls numbered 70x seen at z20) - a dedicated drop yard. 50+ band.",
-          "trailersVisible": "Imagery captured at a low-occupancy moment - only ~14 trailers visible; the yard capacity is much larger (~90 marked stalls).",
-          "postGateStaging": "Wide west truck court inside the fence provides interior holding/queue space ahead of the docks.",
-          "drivewayLong": "Long curving entry drive from Exploration Drive into the deep truck court - holds 3+ trucks.",
-          "fastLaneOpportunity": "Wide truck court and broad entry driveway provide ample paved width to add an express/bypass lane.",
-          "urbanRural": "Southwest Indianapolis, dense airport-adjacent logistics submarket (Ameriplex business park) within the Indy metro - Urban.",
-          "method": "deep-audit"
-        }
-      },
-      {
-        "id": "19-dc-mechanicsburg-pa",
-        "name": "DHL Supply Chain - DC - Mechanicsburg PA",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "uncertainFields": [
-          "dockDoorCount",
-          "dropArea"
-        ],
-        "center": {
-          "lat": 40.2372,
-          "lng": -76.9985
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 40.237777,
-                "lng": -76.999805
-              },
-              {
-                "lat": 40.237724,
-                "lng": -76.997676
-              },
-              {
-                "lat": 40.236361,
-                "lng": -76.997745
-              },
-              {
-                "lat": 40.236414,
-                "lng": -76.999873
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 40.237619,
-                  "lng": -76.999805
-                },
-                {
-                  "lat": 40.237567,
-                  "lng": -76.997745
-                },
-                {
-                  "lat": 40.237305,
-                  "lng": -76.997745
-                },
-                {
-                  "lat": 40.237357,
-                  "lng": -76.999805
-                }
-              ]
-            }
-          ],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 20,
-          "trailersVisible": 4,
-          "trailerParkingCapacity": 10,
-          "truckGateCount": 2,
-          "buildingCount": 1,
-          "siteAreaAcres": 12.3,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": false,
-          "drivewayLong": false,
-          "drivewayShort": true,
-          "backupSensitive": false,
-          "entryExitTogether": false,
-          "entryExitSeparate": true,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "10-25",
-          "dropArea": "0-10",
-          "shipRcvSeparate": false,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#3",
-          "steps": [
-            {
-              "step": "Arrive on site (no gate)",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Drive to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 480000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 3030000,
-          "totalYnsMs": 2640000
-        },
-        "dossierExcerpt": "Type: Distribution Center\nResolved location: 260 Salem Church Rd, Mechanicsburg, PA 17050 —\nbuilding center ~40.23720, -76.99850\nConfidence: high",
-        "mapsUrl": "https://www.google.com/maps/@40.2372,-76.9985,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/19-dc-mechanicsburg-pa-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.2372,
-              "lng": -76.9985
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/19-dc-mechanicsburg-pa-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.2372,
-              "lng": -76.9985
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "location": "Roster had no address/coords. Resolved via web research + Google Geocoding API: DHL Supply Chain (legal entity Exel Inc.) operates a distribution facility at 260 Salem Church Rd, Mechanicsburg PA 17050 - a 174,921 sq ft distribution building on 11.32 acres (built ~1985), owned by LBA Logistics (sold Sept 2024). DHL also holds nearby Salem Church Rd addresses (245/300/350) - the roster's 'leased multi-building presence'; 260 is the primary operating DC. Confirmed by a DHL Supply Chain monument sign at the south entrance (Street View 2023).",
-          "truckGate": "false - both the south and north driveway entrances off Salem Church Rd are open paved drives with no barrier arm, gate, or checkpoint. Street View (2023) confirms open access at both.",
-          "guardShack": "false - no guard booth at either entrance. A small covered structure near the building is a picnic/break shelter (employee amenity), not a guard booth.",
-          "remoteGs": "false - there is no truck gate at all (open access).",
-          "entryExitSeparate": "Two separate driveways off Salem Church Rd (north and south); trucks can enter one and exit the other. truckGateCount=2.",
-          "dockDoors": "Older (1985-era) building with two canopied dock banks on the east face; estimated ~16-25 doors total. Banded 10-25. Exact count uncertain - canopies partly obscure the doors.",
-          "dropArea": "No dedicated drop-trailer lot on the 260 parcel. The trailer/bus-filled lot to the NW is a separate property (a school-bus depot) and was excluded. 0-10.",
-          "drivewayShort": "Modest approach from the entrance drives to the east-face docks - holds only 1-2 trucks.",
-          "urbanRural": "Mechanicsburg/Harrisburg West Shore industrial corridor - a dense, built-out logistics submarket with the Naval Support Activity Mechanicsburg depot and many warehouses nearby. Urban.",
-          "method": "deep-audit"
-        }
-      },
-      {
-        "id": "20-dc-north-las-vegas-nv",
-        "name": "DHL Supply Chain - DC - North Las Vegas NV",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "remoteGs",
-          "preGateStaging",
-          "postGateStaging",
-          "entryExitSeparate",
-          "entryLanes",
-          "exitLanes",
-          "connectivityIssue",
-          "siteAreaAcres"
-        ],
-        "center": {
-          "lat": 36.3454,
-          "lng": -114.9345
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 36.349493,
-                "lng": -114.936423
-              },
-              {
-                "lat": 36.349603,
-                "lng": -114.930655
-              },
-              {
-                "lat": 36.341418,
-                "lng": -114.929556
-              },
-              {
-                "lat": 36.341197,
-                "lng": -114.937109
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [
-            {
-              "ring": [
-                {
-                  "lat": 36.349493,
-                  "lng": -114.933813
-                },
-                {
-                  "lat": 36.349493,
-                  "lng": -114.931204
-                },
-                {
-                  "lat": 36.34717,
-                  "lng": -114.931341
-                },
-                {
-                  "lat": 36.34717,
-                  "lng": -114.933951
-                }
-              ]
-            }
-          ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 36.34363,
-                  "lng": -114.936285
-                },
-                {
-                  "lat": 36.343409,
-                  "lng": -114.929693
-                },
-                {
-                  "lat": 36.342856,
-                  "lng": -114.929693
-                },
-                {
-                  "lat": 36.343077,
-                  "lng": -114.936285
-                }
-              ]
-            }
-          ],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 127,
-          "trailersVisible": 0,
-          "trailerParkingCapacity": 174,
-          "truckGateCount": 1,
-          "buildingCount": 2,
-          "siteAreaAcres": 58,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": false,
-          "remoteGs": true,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": false,
-          "entryExitSeparate": true,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": true,
-          "dockDoors": "50+",
-          "dropArea": "50+",
-          "shipRcvSeparate": true,
-          "urbanRural": "Rural",
-          "connectivityIssue": true,
-          "multipleFacilities": true,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "dossierExcerpt": "Type: Distribution Center\nResolved location: Wesley D. Adams Innovation Park, Apex Industrial Park,\nCity of North Las Vegas, NV — two-building campus, center ~36.34540,\n-114.93450\nConfidence: medium",
-        "mapsUrl": "https://www.google.com/maps/@36.3454,-114.9345,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/20-dc-north-las-vegas-nv-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 36.3454,
-              "lng": -114.9345
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/20-dc-north-las-vegas-nv-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 36.3454,
-              "lng": -114.9345
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "location": "Roster had no address/coords. Resolved via web research: DHL Supply Chain's North Las Vegas project is a two-building, ~800,000 sq ft logistics complex in the Wesley D. Adams Innovation Park, Apex Industrial Park, City of North Las Vegas, on a ~50-acre tract (~$180M investment, 494+ jobs). No street address has been published. Satellite imagery (Maxar/Vexcel) at ~36.3454,-114.9345 shows a matching two-building complex - structurally complete; June 2024 user-contributed interior photos confirm finished empty warehouse shells. Construction completion was projected late 2025/2026.",
-          "buildingSpecs": "Per the project structural engineer (Wright Engineers): Building 1 = 450,241 SF, 40-ft clear, 84 overhead (dock) doors, 4 drive-in doors, 112 trailer stalls. Building 2 = 343,373 SF, 36-ft clear, 43 overhead doors, 2 drive-in doors, 62 trailer stalls. Totals: 127 dock doors, 174 trailer stalls.",
-          "multipleFacilities": "true - two distinct large distribution buildings on one campus.",
-          "dockDoors": "84 + 43 = 127 doors per engineer's published spec - band 50+. Satellite confirms long canopied dock banks on multiple building faces.",
-          "dropArea": "112 + 62 = 174 marked trailer stalls per spec - band 50+. Dedicated drop yards alongside the buildings.",
-          "shipRcvSeparate": "Building 1 has dock canopies on both its north and south faces (cross-dock layout) - shipping and receiving run from physically separate dock banks.",
-          "truckGate": "MEDIUM CONFIDENCE / INFERRED. No road-level Street View exists for this remote desert site and no exterior gate structure is clearly resolvable in satellite imagery. A new contract-logistics DC campus of this scale is near-certain to have a controlled, fenced truck entrance; flagged uncertain.",
-          "guardShack": "false / uncertain - no guard booth resolvable in imagery; the site appears newly commissioned. Flagged uncertain.",
-          "remoteGs": "true / inferred - assuming a truck gate with no guard booth (modern kiosk/app check-in). Flagged uncertain.",
-          "connectivityIssue": "true / inferred - the site sits in remote desert terrain in far-north Apex, well away from dense development; cellular coverage may be weak. Medium confidence at best.",
-          "urbanRural": "Apex Industrial Park is an isolated desert development ~20 miles NE of the Las Vegas Strip, surrounded by open desert and graded pads - Rural.",
-          "siteAreaAcres": "GOED announcement cited a ~50-acre tract; the developed two-building footprint measured from the perimeter box is ~55-65 acres. Reported ~58 as an honest estimate; flagged uncertain.",
-          "trailersVisible": "0 - imagery shows the buildings complete but the yard empty (pre-occupancy / commissioning phase).",
-          "method": "deep-audit"
-        }
-      },
-      {
-        "id": "21-dhl-supply-chain-dc-etna-oh",
-        "name": "DHL Supply Chain - DC - Etna OH",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "uncertainFields": [
-          "dockDoorCount",
-          "dropArea"
-        ],
-        "center": {
-          "lat": 39.96055,
-          "lng": -82.71735
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 39.961603,
-                "lng": -82.721745
-              },
-              {
-                "lat": 39.961603,
-                "lng": -82.716251
-              },
-              {
-                "lat": 39.958024,
-                "lng": -82.716389
-              },
-              {
-                "lat": 39.958129,
-                "lng": -82.721745
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [
-            {
-              "ring": [
-                {
-                  "lat": 39.961497,
-                  "lng": -82.718723
-                },
-                {
-                  "lat": 39.961497,
-                  "lng": -82.716251
-                },
-                {
-                  "lat": 39.958129,
-                  "lng": -82.716389
-                },
-                {
-                  "lat": 39.958129,
-                  "lng": -82.718586
-                }
-              ]
-            }
-          ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 39.961497,
-                  "lng": -82.719273
-                },
-                {
-                  "lat": 39.961497,
-                  "lng": -82.718586
-                },
-                {
-                  "lat": 39.958129,
-                  "lng": -82.718586
-                },
-                {
-                  "lat": 39.958129,
-                  "lng": -82.719273
-                }
-              ]
-            }
-          ],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 70,
-          "trailersVisible": 28,
-          "trailerParkingCapacity": 45,
-          "truckGateCount": 1,
-          "buildingCount": 1,
-          "siteAreaAcres": 37.4,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": false,
-          "remoteGs": true,
-          "preGateStaging": true,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "50+",
-          "dropArea": "25-50",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "dossierExcerpt": "Type: Distribution Center\nResolved location: 127–143 Heritage Drive, Pataskala OH 43062 (Etna Township, Licking County)\nLocked center: 39.96055, -82.71735\nConfidence: high",
-        "mapsUrl": "https://www.google.com/maps/@39.96055,-82.71735,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/21-dhl-supply-chain-dc-etna-oh-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.96055,
-              "lng": -82.71735
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/21-dhl-supply-chain-dc-etna-oh-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.96055,
-              "lng": -82.71735
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "location": "Resolved to the DHL Supply Chain (Exel/Coty) building at 127-143 Heritage Drive, Pataskala OH 43062 (Etna Township, Licking County). Roster gave no address; web research surfaced 'COTY/EXEL (DHL), 131 Heritage Dr' and Panjiva shipping records 'Dc Etna, 127-143 Heritage Dr'. Google Geocoding API returned ROOFTOP precision for 131 Heritage Dr; Street View confirmed office unit '138' on the south face within the 127-143 range.",
-          "truckGate": "Black cantilever sliding gate across the truck driveway on the west side off Heritage Drive, confirmed in multiple Street View frames (2024-08).",
-          "guardShack": "No staffed booth visible beside the gate in any Street View angle.",
-          "remoteGs": "Gated entry with no guard shack implies kiosk / call-box / app check-in.",
-          "dockDoors": "West face of the ~350m building is a continuous dock wall with trailers backed in; counted ~70 doors as a banded estimate (band 50+). Low confidence on exact count.",
-          "dropArea": "Trailers parked in the fenced truck court west of the building; estimated 25-50 stalls. Court is shared/adjacent with the western building so capacity is approximate.",
-          "urbanRural": "Etna Corporate Park, an edge-of-town industrial park in rural Etna Township surrounded by farmland and a small residential pocket; classified Rural per rubric tiebreak.",
-          "railServed": "No rail spur runs into the property; road-served DC."
-        }
-      },
-      {
-        "id": "22-dhl-supply-chain-dc-obetz-oh",
-        "name": "DHL Supply Chain - DC - Obetz OH",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "uncertainFields": [
-          "dockDoorCount",
-          "dockDoors",
-          "entryLanes",
-          "exitLanes",
-          "truckGate"
-        ],
-        "center": {
-          "lat": 39.86725,
-          "lng": -82.94
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 39.868093,
-                "lng": -82.941167
-              },
-              {
-                "lat": 39.867777,
-                "lng": -82.939039
-              },
-              {
-                "lat": 39.866618,
-                "lng": -82.939451
-              },
-              {
-                "lat": 39.866934,
-                "lng": -82.941579
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 39.867988,
-                  "lng": -82.941236
-                },
-                {
-                  "lat": 39.867672,
-                  "lng": -82.939107
-                },
-                {
-                  "lat": 39.867408,
-                  "lng": -82.939176
-                },
-                {
-                  "lat": 39.867724,
-                  "lng": -82.941305
-                }
-              ]
-            }
-          ],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 32,
-          "trailersVisible": 9,
-          "trailerParkingCapacity": 12,
-          "truckGateCount": 0,
-          "buildingCount": 1,
-          "siteAreaAcres": 20.4,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": false,
-          "drivewayLong": false,
-          "drivewayShort": true,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": null,
-          "exitLanes": null,
-          "fastLaneOpportunity": false,
-          "dockDoors": "25-50",
-          "dropArea": "0-10",
-          "shipRcvSeparate": false,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#3",
-          "steps": [
-            {
-              "step": "Arrive on site (no gate)",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Drive to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 480000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 3030000,
-          "totalYnsMs": 2640000
-        },
-        "dossierExcerpt": "Type: Distribution Center\nResolved location: 2160 McGaw Road, Obetz OH 43207 (McGaw Rd / Frusta Dr intersection)\nLocked center: 39.86725, -82.94000\nConfidence: medium",
-        "mapsUrl": "https://www.google.com/maps/@39.86725,-82.94000,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/22-dhl-supply-chain-dc-obetz-oh-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.86725,
-              "lng": -82.94
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/22-dhl-supply-chain-dc-obetz-oh-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.86725,
-              "lng": -82.94
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "location": "Resolved to 2160 McGaw Road, Obetz OH 43207 (at the McGaw Rd / Frusta Dr intersection), the historic 'Exel Logistics Columbus Public Warehouse' — Exel Inc. is DHL Supply Chain's legal/legacy brand. Roster gave no address; web research surfaced the Yelp/CMac listing 'Exel Logistics Columbus Public Warehouse, 2160 McGaw Rd, Obetz OH 43207' and a CBRE industrial lease listing for the same address. Google Geocoding API would not resolve the McGaw Rd house number (returned ZIP centroid); located the building via OpenStreetMap centerlines for McGaw Rd and Frusta Dr, then satellite/Street View confirmation.",
-          "truckGate": "No gate, barrier arm, or guard booth visible at any approach. The NE dock court is open and accessed directly from the public service road; confirmed in 2019 and 2025 Street View. Flagged as uncertain because the imagery is partly dated.",
-          "dockDoors": "Dock doors run along the NE face of the parallelogram building; 2019 Street View shows a row of doors with trailers backed in. Banded 25-50; exact count not resolvable from overexposed z20 satellite — flagged uncertain.",
-          "dropArea": "Only a handful of trailers in the open dock court; no dedicated drop-trailer lot. Site activity looks light in current imagery (a CBRE listing shows ~125,100 sq ft available for lease, suggesting partial vacancy).",
-          "urbanRural": "Obetz sits within the continuous Columbus metro industrial fabric immediately off I-270 / Alum Creek Drive; classified Urban.",
-          "entryLanes": "Open driveway with no gate or marked lane structure; lane counts not determinable.",
-          "railServed": "No rail spur into the property."
-        }
-      },
-      {
-        "id": "23-dhl-supply-chain-dc-houston-tx",
-        "name": "DHL Supply Chain - DC - Houston TX",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "uncertainFields": [
-          "dockDoorCount",
-          "truckGate"
-        ],
-        "center": {
-          "lat": 29.8044,
-          "lng": -95.27275
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 29.805592,
-                "lng": -95.274123
-              },
-              {
-                "lat": 29.806068,
-                "lng": -95.271926
-              },
-              {
-                "lat": 29.802732,
-                "lng": -95.270827
-              },
-              {
-                "lat": 29.802255,
-                "lng": -95.273025
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 29.805234,
-                  "lng": -95.273917
-                },
-                {
-                  "lat": 29.805472,
-                  "lng": -95.27275
-                },
-                {
-                  "lat": 29.802613,
-                  "lng": -95.271926
-                },
-                {
-                  "lat": 29.802374,
-                  "lng": -95.273093
-                }
-              ]
-            }
-          ],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 80,
-          "trailersVisible": 34,
-          "trailerParkingCapacity": 45,
-          "truckGateCount": 1,
-          "buildingCount": 1,
-          "siteAreaAcres": 22.3,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": false,
-          "remoteGs": true,
-          "preGateStaging": true,
-          "postGateStaging": false,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "50+",
-          "dropArea": "25-50",
-          "shipRcvSeparate": true,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "dossierExcerpt": "Type: Distribution Center\nResolved location: 8609 Citypark Loop, Houston TX 77013 (CityPark / East Freeway logistics park)\nLocked center: 29.80440, -95.27275\nConfidence: high",
-        "mapsUrl": "https://www.google.com/maps/@29.80440,-95.27275,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/23-dhl-supply-chain-dc-houston-tx-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 29.8044,
-              "lng": -95.27275
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/23-dhl-supply-chain-dc-houston-tx-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 29.8044,
-              "lng": -95.27275
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "location": "Resolved to 8609 Citypark Loop, Houston TX 77013 (CityPark / East Freeway logistics park). Roster gave no address; a Panjiva import record explicitly names 'Dhl Supply Chain, 8609 City Park Loop, Houston Texas 77013'. Google Geocoding API returned ROOFTOP precision (29.80377, -95.27271). Street View confirmed the building marked '8609' on its SW office front.",
-          "truckGate": "The west truck court is enclosed by chain-link fence with a gate at the driveway from Citypark Loop, visible in 2021 Street View and 2026 satellite. Marked uncertain because the gate hardware is partly tree-obscured in Street View; the perimeter fence is clear.",
-          "guardShack": "No staffed booth visible at the court entrance.",
-          "remoteGs": "Gated truck court with no guard shack implies kiosk / call-box / app check-in.",
-          "shipRcvSeparate": "The building is a cross-dock with dock doors on BOTH long faces (east and west), each opening to its own truck court — supports separate shipping and receiving dock banks.",
-          "dockDoors": "Dock canopies line both ~400 m long faces; combined banded estimate 50+. Exact count not resolvable from overexposed white-roof satellite — flagged uncertain.",
-          "dropArea": "Trailers parked in both truck courts (shared with neighbouring buildings); estimated 25-50 stalls.",
-          "railServed": "A large Union Pacific rail yard lies just north of the property, but no rail spur runs into the building; road-served.",
-          "urbanRural": "Within Houston's dense northeast industrial fabric off US-90 / East Freeway; Urban."
-        }
-      },
-      {
-        "id": "24-dhl-supply-chain-dc-dallas-irving-tx",
-        "name": "DHL Supply Chain - DC - Dallas/Irving TX",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "uncertainFields": [
-          "truckGate",
-          "dockDoorCount",
-          "dockDoors",
-          "entryLanes",
-          "exitLanes"
-        ],
-        "center": {
-          "lat": 32.8348,
-          "lng": -97.0313
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 32.835723,
-                "lng": -97.033909
-              },
-              {
-                "lat": 32.835954,
-                "lng": -97.030957
-              },
-              {
-                "lat": 32.834512,
-                "lng": -97.030613
-              },
-              {
-                "lat": 32.834108,
-                "lng": -97.033497
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 32.835377,
-                  "lng": -97.033772
-                },
-                {
-                  "lat": 32.83555,
-                  "lng": -97.0313
-                },
-                {
-                  "lat": 32.835204,
-                  "lng": -97.031231
-                },
-                {
-                  "lat": 32.835031,
-                  "lng": -97.033703
-                }
-              ]
-            }
-          ],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 241,
-              "pano": "abSaAANwnY1_GxFQkfUidw",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 55,
-          "trailersVisible": 12,
-          "trailerParkingCapacity": 20,
-          "truckGateCount": 1,
-          "buildingCount": 1,
-          "siteAreaAcres": 22.7,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": false,
-          "remoteGs": true,
-          "preGateStaging": true,
-          "postGateStaging": false,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "50+",
-          "dropArea": "0-10",
-          "shipRcvSeparate": true,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "dossierExcerpt": "Type: Distribution Center\nResolved location: 5320 W Airport Freeway, Irving TX 75062\nLocked center: 32.83480, -97.03130\nConfidence: medium",
-        "mapsUrl": "https://www.google.com/maps/@32.83480,-97.03130,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/24-dhl-supply-chain-dc-dallas-irving-tx-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 32.8348,
-              "lng": -97.0313
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/dhl-supply-chain/24-dhl-supply-chain-dc-dallas-irving-tx-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 32.8348,
-              "lng": -97.0313
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "location": "Resolved to 5320 W Airport Freeway, Irving TX 75062 — the $57.5M, 220,000 sq ft DHL distribution center opened 2024 (relocated from Grand Prairie), the marquee DHL distribution facility in Irving. The roster gave no address ('contract-logistics DC building street addresses not publicly enumerated'); web research (DHL press release, Supply Chain Dive, WFAA, Commercial Real Estate Direct) identified this as the DHL DC in Irving and Google Geocoding API returned ROOFTOP precision (32.83530, -97.03138). Street View confirmed the DHL red/yellow brand livery on the building. NOTE: this is operated by the DHL eCommerce division (parcel sortation) rather than the DHL Supply Chain contract-logistics division — but it is the verifiable DHL DC matching the roster's 'Dallas/Irving' entry; the roster compiler could not pin a separate DHL Supply Chain street address. An alternative DHL Supply Chain / Discount Tire dedicated warehouse exists at 10101 Bonnie View Rd, but that is in Dallas proper, not Irving.",
-          "truckGate": "The SE truck court is enclosed by a continuous perimeter fence (regularly-spaced posts clearly visible in z21 satellite along the dock-apron edge). The gate hardware at the entrance driveway could not be seen directly because a mature tree buffer screens the property from the public loop road — flagged uncertain. A 2024 purpose-built dedicated DHL DC with a fenced court is consistent with a controlled truck gate.",
-          "guardShack": "No staffed booth visible; modern parcel-sortation DCs use kiosk / remote check-in.",
-          "remoteGs": "Gated court with no guard shack implies kiosk / call-box / app check-in.",
-          "shipRcvSeparate": "Dock aprons run along TWO opposite faces (NW toward Airport Freeway, SE toward the truck court) — consistent with the facility's documented four-inbound / four-outbound induction-line design, supporting separate shipping and receiving dock banks.",
-          "dockDoors": "Docks on both long faces of the ~280 m building; combined banded estimate 50+. Exact count not resolvable from overexposed white-roof satellite — flagged uncertain.",
-          "dropArea": "Only a handful of trailers parked; the facility is a new active parcel DC with dock-position trailers rather than a dedicated drop lot.",
-          "entryLanes": "Single truck-court driveway; lane detail obscured by the tree buffer — counts set to 1/1 as best estimate, flagged uncertain.",
-          "railServed": "No rail spur into the property; road-served, directly off SH-183 Airport Freeway.",
-          "urbanRural": "Central Irving within the dense DFW metro along SH-183; Urban."
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "IDS (acquired by DHL Supply Chain May 2025) holds a 10-yr full-building lease at an exact Tier-1-sourced address (495 Coweta Industrial Parkway, Newnan GA); real Atlanta DC. NOTE: actual building is in Newnan GA, not Atlanta proper - update roster address.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       }
     ]

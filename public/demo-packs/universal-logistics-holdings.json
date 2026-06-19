@@ -5,9 +5,9 @@
     "slug": "universal-logistics-holdings",
     "displayName": "Universal Logistics Holdings",
     "archetype": "3pl",
-    "siteCount": 26,
+    "siteCount": 18,
     "coverageNote": {
-      "auditedCount": 26,
+      "auditedCount": 18,
       "estimatedFootprint": 80,
       "droppedStubCount": 0,
       "capHit": false,
@@ -31,17 +31,17 @@
       42.70353
     ],
     "archetypeMix": {
-      "#9": 9,
-      "#3": 15,
+      "#9": 7,
+      "#3": 9,
       "#7": 1,
       "#6": 1
     },
     "totals": {
-      "dockDoors": 1186,
-      "trailerCapacity": 5260,
-      "gates": 30,
+      "dockDoors": 881,
+      "trailerCapacity": 4790,
+      "gates": 20,
       "railServed": 1,
-      "acres": 1140.6000000000001
+      "acres": 816.1
     },
     "sites": [
       {
@@ -51,9 +51,27 @@
           "operator": "3PL",
           "tenancy": "leased",
           "citations": [
-            { "tier": 3, "url": "https://gmauthority.com/blog/2023/07/gm-to-open-ev-parts-warehouse-near-factory-zero-plant-in-michigan/", "date": "2023-07", "type": "press", "claim": "GM owns the 793,520 sq ft warehouse at 14250 Plymouth Rd; operated by Logistics Insight Corp (LINC, a ULH affiliate); feeds Factory Zero EV programs" },
-            { "tier": 2, "url": "https://www.crainsdetroit.com/manufacturing/gm-plans-ev-parts-warehouse-detroit-350-new-jobs", "date": "2023-07", "type": "press", "claim": "GM EV parts warehouse at former AMC site, 14250 Plymouth Rd, ~350 jobs, staffed by a ULH affiliate" },
-            { "tier": 3, "url": "https://www.ziprecruiter.com/co/Logistics-Insight/Jobs/-in-Detroit,MI", "date": "2025-12", "type": "press", "claim": "LINC actively hiring forklift/warehouse roles in Detroit MI as of Dec 2025" }
+            {
+              "tier": 3,
+              "url": "https://gmauthority.com/blog/2023/07/gm-to-open-ev-parts-warehouse-near-factory-zero-plant-in-michigan/",
+              "date": "2023-07",
+              "type": "press",
+              "claim": "GM owns the 793,520 sq ft warehouse at 14250 Plymouth Rd; operated by Logistics Insight Corp (LINC, a ULH affiliate); feeds Factory Zero EV programs"
+            },
+            {
+              "tier": 2,
+              "url": "https://www.crainsdetroit.com/manufacturing/gm-plans-ev-parts-warehouse-detroit-350-new-jobs",
+              "date": "2023-07",
+              "type": "press",
+              "claim": "GM EV parts warehouse at former AMC site, 14250 Plymouth Rd, ~350 jobs, staffed by a ULH affiliate"
+            },
+            {
+              "tier": 3,
+              "url": "https://www.ziprecruiter.com/co/Logistics-Insight/Jobs/-in-Detroit,MI",
+              "date": "2025-12",
+              "type": "press",
+              "claim": "LINC actively hiring forklift/warehouse roles in Detroit MI as of Dec 2025"
+            }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": true,
@@ -288,194 +306,26 @@
         }
       },
       {
-        "id": "02-detroit-stellantis-sequencing",
-        "verification": {
-          "verdict": "rejected",
-          "operator": "3PL",
-          "tenancy": "leased",
-          "citations": [
-            { "tier": 2, "url": "https://www.crainsdetroit.com/manufacturing/moroun-owned-universal-logistics-lay-677-detroit", "date": "2024-04", "type": "press", "claim": "ULH closing Logistics Insights Corp + Universal Dedicated of Detroit, 677 layoffs at the ~1M sq ft auto-parts sequencing plant at 6836 Georgia St; permanent" },
-            { "tier": 2, "url": "https://moparinsiders.com/detroit-warehouse-serving-stellantis-to-close/", "date": "2025-01", "type": "press", "claim": "Georgia St facility operated by LINC to close; layoffs begin Feb 18, 2025; Stellantis moving Jeep Grand Cherokee sequencing to a nonunion operator" }
-          ],
-          "checkedDivestiture": true,
-          "checkedBankruptcyEra": true,
-          "rationale": "REJECTED — confirmed permanent closure; Stellantis pulled the Jeep sequencing contract and the 6836 Georgia St plant wound down with layoffs from Feb 18, 2025.",
-          "verifiedBy": "agent",
-          "verifiedAt": "2026-06-19"
-        },
-        "name": "Logistics Insight Corp - Stellantis Sequencing Plant - Detroit MI (Georgia St)",
-        "type": "Parts Sequencing / Sub-Assembly Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "uncertainFields": [
-          "guardShack",
-          "truckGate",
-          "entryLanes",
-          "exitLanes",
-          "truckGateCount"
-        ],
-        "center": {
-          "lat": 42.3911,
-          "lng": -83.0312
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 42.393128,
-                "lng": -83.034771
-              },
-              {
-                "lat": 42.393128,
-                "lng": -83.027355
-              },
-              {
-                "lat": 42.39039,
-                "lng": -83.02708
-              },
-              {
-                "lat": 42.39039,
-                "lng": -83.034496
-              }
-            ]
-          },
-          "truckGate": {
-            "ring": [
-              {
-                "lat": 42.3911,
-                "lng": -83.034908
-              },
-              {
-                "lat": 42.3911,
-                "lng": -83.034221
-              },
-              {
-                "lat": 42.390491,
-                "lng": -83.034221
-              },
-              {
-                "lat": 42.390491,
-                "lng": -83.034908
-              }
-            ]
-          },
-          "dropYards": [],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 42.390593,
-                  "lng": -83.034496
-                },
-                {
-                  "lat": 42.390542,
-                  "lng": -83.027355
-                },
-                {
-                  "lat": 42.390238,
-                  "lng": -83.027355
-                },
-                {
-                  "lat": 42.390289,
-                  "lng": -83.034496
-                }
-              ]
-            }
-          ],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 66,
-              "pano": "YQ8Fsd-SEqRuEOc8WRGTyw",
-              "hasCoverage": true
-            },
-            "truckGate": {
-              "heading": 66,
-              "pano": "YQ8Fsd-SEqRuEOc8WRGTyw",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 150,
-          "trailersVisible": 130,
-          "trailerParkingCapacity": 180,
-          "truckGateCount": 2,
-          "buildingCount": 3,
-          "siteAreaAcres": 58,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": false,
-          "remoteGs": true,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": true,
-          "entryExitTogether": false,
-          "entryExitSeparate": true,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "50+",
-          "dropArea": "50+",
-          "shipRcvSeparate": true,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": true,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "dossierExcerpt": "Address: 6836 Georgia St, Detroit, MI 48211\nResolved center: 42.391100, -83.031200\nType: Parts Sequencing / Sub-Assembly Plant\nConfidence: Medium\n\n---\n\n### Location confirmation\n\nThe roster coordinate (with a 226 m geocoder offset noted) sits on a very large\nwarehouse/industrial campus on Detroit's east side. Web research (Crain's\nDetroit Business, MoparInsiders, DBusiness) confirms the identity: a\n~1,000,000 sq ft Universal Logistics / Logistics Insight Corp parts-sequencing\nand sub-assembly plant at 6836 Georgia St that sequences/sub-assembles ~114\ncomponents for Jeep Grand Cherokees built at the Stellantis Mack Avenue\nassembly plant. The building was nearly doubled in size by Crown Enterprises\n(Moroun-family). 2023 Street View along Georgia St shows the fenced perimeter",
-        "mapsUrl": "https://www.google.com/maps/@42.391100,-83.031200,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/02-detroit-stellantis-sequencing-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.3911,
-              "lng": -83.0312
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/02-detroit-stellantis-sequencing-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.3911,
-              "lng": -83.0312
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "facility": "Large (~1,000,000 sq ft) Universal/LINC parts-sequencing & sub-assembly campus at 6836 Georgia St on Detroit's east side, sequencing/sub-assembling ~114 components for Jeep Grand Cherokees at the Stellantis Mack Avenue assembly plant. Crown Enterprises (Moroun-family) nearly doubled the building; Teamsters Local 299. NOTE: WARN-noticed for closure beginning Feb 2025 with ~677 layoffs (Stellantis reportedly moving the work to a lower-cost operator) — operational status uncertain as of 2026. Building positively identified via Crain's Detroit / MoparInsiders and 2023 Street View showing Universal/ULC-branded trailers behind a fenced yard.",
-          "truckGate": "Whole site is fully fenced — 2023 Street View along Georgia St and the SE/SW corners shows continuous chain-link perimeter fence with trailers parked behind it. Truck access through the fence is gated but no barrier arm resolves cleanly in imagery; classified as a controlled gate. Two probable gate openings (SW corner near the rail crossing and the north internal-road junction) -> truckGateCount estimated 2.",
-          "guardShack": "No staffed guard booth (1-3 vehicle footprint) resolvable at any gate. For a JIT auto-sequencing site access is most likely badge/kiosk controlled -> remoteGs true. Low confidence.",
-          "dockDoors": "Dense loading-dock banks on BOTH the north and south long faces of the main building (trailers backed in continuously) -> a true cross-dock sequencing layout, ~150+ doors total -> 50+ band.",
-          "shipRcvSeparate": "Inbound parts and outbound sequenced/sub-assembled modules run from physically separate north-face and south-face dock banks.",
-          "dropArea": "Multiple large trailer-parking yards across the campus (north/NW gravel lots full of parked trailers, plus an SE drop lot) -> 50+ band; dedicated drop yards.",
-          "multipleFacilities": "Campus is multi-parcel: the main ~1M sq ft sequencing building plus an older secondary building cluster to the west and several distinct satellite trailer-storage yards.",
-          "backupSensitive": "Tight urban site hemmed by public streets and an adjacent residential neighborhood on the south; a truck queue at a gate would quickly spill onto the public street with little stacking room.",
-          "railServed": "A rail line runs along the west edge of the campus with old/abandoned spurs but no live spur servicing the building -> railServed false.",
-          "siteAreaAcres": "~58 acres for the main fenced operation including the immediate trailer yards."
-        }
-      },
-      {
         "id": "03-romulus-value-added-center",
         "verification": {
           "verdict": "confirmed",
           "operator": "3PL",
           "tenancy": "owned",
           "citations": [
-            { "tier": 3, "url": "https://www.ziprecruiter.com/c/Universal-Logistics-Holdings,-Inc./Job/Non-CDL-Switcher/-in-Romulus,MI?jid=93b75aa49a2ec566", "date": "2025", "type": "press", "claim": "Universal Logistics Holdings hiring Non-CDL Switcher at 29129 Ecorse Rd, Romulus MI" },
-            { "tier": 3, "url": "https://www.indeed.com/viewjob?jk=0b400e7f4a06ebb7", "date": "2025", "type": "press", "claim": "Hi-Lo/forklift role, Romulus MI 48174 — active value-added/warehouse ops" }
+            {
+              "tier": 3,
+              "url": "https://www.ziprecruiter.com/c/Universal-Logistics-Holdings,-Inc./Job/Non-CDL-Switcher/-in-Romulus,MI?jid=93b75aa49a2ec566",
+              "date": "2025",
+              "type": "press",
+              "claim": "Universal Logistics Holdings hiring Non-CDL Switcher at 29129 Ecorse Rd, Romulus MI"
+            },
+            {
+              "tier": 3,
+              "url": "https://www.indeed.com/viewjob?jk=0b400e7f4a06ebb7",
+              "date": "2025",
+              "type": "press",
+              "claim": "Hi-Lo/forklift role, Romulus MI 48174 — active value-added/warehouse ops"
+            }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": true,
@@ -679,8 +529,20 @@
           "operator": "self",
           "tenancy": "owned",
           "citations": [
-            { "tier": 1, "url": "https://www.sec.gov/Archives/edgar/data/0001308208/000095017025040283/ulh-20241231.htm", "date": "2024-12", "type": "10-K", "claim": "ULH owns terminal yards including Dearborn, Michigan (Item 2 Properties, FY2024)" },
-            { "tier": 3, "url": "https://www.loadmatch.com/directory/company_detail.cfm?companyID=2600", "date": "2026", "type": "locator", "claim": "Universal Intermodal Services listed at 4440 Wyoming St, Dearborn MI" }
+            {
+              "tier": 1,
+              "url": "https://www.sec.gov/Archives/edgar/data/0001308208/000095017025040283/ulh-20241231.htm",
+              "date": "2024-12",
+              "type": "10-K",
+              "claim": "ULH owns terminal yards including Dearborn, Michigan (Item 2 Properties, FY2024)"
+            },
+            {
+              "tier": 3,
+              "url": "https://www.loadmatch.com/directory/company_detail.cfm?companyID=2600",
+              "date": "2026",
+              "type": "locator",
+              "claim": "Universal Intermodal Services listed at 4440 Wyoming St, Dearborn MI"
+            }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": true,
@@ -869,8 +731,20 @@
           "operator": "3PL",
           "tenancy": "leased",
           "citations": [
-            { "tier": 3, "url": "https://www.indeed.com/q-universal-logistics-l-grand-prairie,-tx-jobs.html", "date": "2025", "type": "press", "claim": "Universal Logistics actively hiring warehouse associates in Grand Prairie TX" },
-            { "tier": 3, "url": "https://truckmap.com/place/universal-gm-2305-w-marshall-dr-grand-prairie-tx-75051-usa", "date": "2025", "type": "locator", "claim": "'Universal & GM' operating site at 2305 W Marshall Dr; consignee for GM Arlington components per import records" }
+            {
+              "tier": 3,
+              "url": "https://www.indeed.com/q-universal-logistics-l-grand-prairie,-tx-jobs.html",
+              "date": "2025",
+              "type": "press",
+              "claim": "Universal Logistics actively hiring warehouse associates in Grand Prairie TX"
+            },
+            {
+              "tier": 3,
+              "url": "https://truckmap.com/place/universal-gm-2305-w-marshall-dr-grand-prairie-tx-75051-usa",
+              "date": "2025",
+              "type": "locator",
+              "claim": "'Universal & GM' operating site at 2305 W Marshall Dr; consignee for GM Arlington components per import records"
+            }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": true,
@@ -1071,8 +945,20 @@
           "operator": "self",
           "tenancy": "leased",
           "citations": [
-            { "tier": 1, "url": "https://hrone.wd1.myworkdayjobs.com/en-US/Universal_Logistics_Holdings/job/UD-SMYRNA-TN/SMYRNA-SWITCHER_JR107061", "date": "2026", "type": "press", "claim": "Active ULH Workday 'Smyrna Switcher' req at UD-SMYRNA-TN" },
-            { "tier": 1, "url": "https://www.ziprecruiter.com/c/Universal-Logistics-Holdings,-Inc./Job/CLASS-A-CDL-SMYRNA-SWITCHERS/-in-Smyrna,TN?jid=d38eca8ad2a2a31f", "date": "2026", "type": "press", "claim": "ULH CDL-A yard switchers explicitly at 200 Sam Griffin Rd, Smyrna TN 37167" }
+            {
+              "tier": 1,
+              "url": "https://hrone.wd1.myworkdayjobs.com/en-US/Universal_Logistics_Holdings/job/UD-SMYRNA-TN/SMYRNA-SWITCHER_JR107061",
+              "date": "2026",
+              "type": "press",
+              "claim": "Active ULH Workday 'Smyrna Switcher' req at UD-SMYRNA-TN"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.ziprecruiter.com/c/Universal-Logistics-Holdings,-Inc./Job/CLASS-A-CDL-SMYRNA-SWITCHERS/-in-Smyrna,TN?jid=d38eca8ad2a2a31f",
+              "date": "2026",
+              "type": "press",
+              "claim": "ULH CDL-A yard switchers explicitly at 200 Sam Griffin Rd, Smyrna TN 37167"
+            }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,
@@ -1236,8 +1122,20 @@
           "operator": "self",
           "tenancy": "owned",
           "citations": [
-            { "tier": 1, "url": "https://investors.universallogistics.com/news-releases/news-release-details/universal-invest-50-million-create-45-new-jobs-expansion-greater", "date": "2024-01", "type": "press", "claim": "ULH $50M heavy-truck-division expansion into Greater Roanoke (Botetourt), 45 jobs, operational 2025" },
-            { "tier": 1, "url": "https://www.ziprecruiter.com/c/Universal-Logistics-Holdings,-Inc./Job/Assembler-8/-in-Cloverdale,VA?jid=bbf6471169ba5ba0", "date": "2025", "type": "press", "claim": "ULH 'Assembler' / on-site assembly reqs in Cloverdale VA at 1796 Lee Hwy — facility live" }
+            {
+              "tier": 1,
+              "url": "https://investors.universallogistics.com/news-releases/news-release-details/universal-invest-50-million-create-45-new-jobs-expansion-greater",
+              "date": "2024-01",
+              "type": "press",
+              "claim": "ULH $50M heavy-truck-division expansion into Greater Roanoke (Botetourt), 45 jobs, operational 2025"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.ziprecruiter.com/c/Universal-Logistics-Holdings,-Inc./Job/Assembler-8/-in-Cloverdale,VA?jid=bbf6471169ba5ba0",
+              "date": "2025",
+              "type": "press",
+              "claim": "ULH 'Assembler' / on-site assembly reqs in Cloverdale VA at 1796 Lee Hwy — facility live"
+            }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,
@@ -1457,250 +1355,26 @@
         }
       },
       {
-        "id": "08-maryville-tn",
-        "verification": {
-          "verdict": "rejected",
-          "operator": "self",
-          "tenancy": "owned",
-          "citations": [
-            { "tier": 1, "url": "https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnapshot&query_param=USDOT&query_string=839281", "date": "2026", "type": "press", "claim": "USDOT 839281 / MC 371555 = 'Universal Logistics Services Inc', Maryville TN, ~77 trucks, a distinct entity" },
-            { "tier": 1, "url": "https://www.nlrb.gov/case/21-CA-286645", "date": "2022", "type": "press", "claim": "ULH single-employer family (Mason-Dixon Intermodal dba Universal Intermodal, Southern Counties Express, Universal Truckload, etc.) does NOT include Maryville's 'Universal Logistics Services Inc'" }
-          ],
-          "checkedDivestiture": false,
-          "checkedBankruptcyEra": false,
-          "rationale": "REJECTED — wrong company; Maryville's 'Universal Logistics Services Inc' (USDOT 839281, GM Jim Brinkley) is an unrelated independent ~77-truck carrier, not a ULH subsidiary (name collision).",
-          "verifiedBy": "agent",
-          "verifiedAt": "2026-06-19"
-        },
-        "name": "Universal Logistics Services - Maryville Terminal - Maryville TN",
-        "type": "Trucking / Logistics Terminal",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "uncertainFields": [
-          "dockDoorCount",
-          "trailerParkingCapacity",
-          "buildingCount",
-          "truckGate"
-        ],
-        "center": {
-          "lat": 35.75479,
-          "lng": -84.01224
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 35.756907,
-                "lng": -84.013064
-              },
-              {
-                "lat": 35.756796,
-                "lng": -84.010592
-              },
-              {
-                "lat": 35.754511,
-                "lng": -84.010729
-              },
-              {
-                "lat": 35.754511,
-                "lng": -84.013133
-              }
-            ]
-          },
-          "truckGate": {
-            "ring": [
-              {
-                "lat": 35.754901,
-                "lng": -84.013133
-              },
-              {
-                "lat": 35.754901,
-                "lng": -84.012789
-              },
-              {
-                "lat": 35.754567,
-                "lng": -84.012789
-              },
-              {
-                "lat": 35.754567,
-                "lng": -84.013133
-              }
-            ]
-          },
-          "dropYards": [
-            {
-              "ring": [
-                {
-                  "lat": 35.75674,
-                  "lng": -84.012515
-                },
-                {
-                  "lat": 35.756685,
-                  "lng": -84.011141
-                },
-                {
-                  "lat": 35.756072,
-                  "lng": -84.01121
-                },
-                {
-                  "lat": 35.756127,
-                  "lng": -84.012583
-                }
-              ]
-            }
-          ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 35.755236,
-                  "lng": -84.012927
-                },
-                {
-                  "lat": 35.75557,
-                  "lng": -84.011416
-                },
-                {
-                  "lat": 35.755292,
-                  "lng": -84.011279
-                },
-                {
-                  "lat": 35.754957,
-                  "lng": -84.012789
-                }
-              ]
-            }
-          ],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 36,
-              "pano": "oxK5fpOHQzWaACL0EJSnKg",
-              "hasCoverage": true
-            },
-            "truckGate": {
-              "heading": 36,
-              "pano": "oxK5fpOHQzWaACL0EJSnKg",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 40,
-          "trailersVisible": 55,
-          "trailerParkingCapacity": 90,
-          "truckGateCount": 1,
-          "buildingCount": 2,
-          "siteAreaAcres": 8.5,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": false,
-          "drivewayLong": false,
-          "drivewayShort": true,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "25-50",
-          "dropArea": "25-50",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": true,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#3",
-          "steps": [
-            {
-              "step": "Arrive on site (no gate)",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Drive to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 480000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 3030000,
-          "totalYnsMs": 2640000
-        },
-        "dossierExcerpt": "The roster's source is the FMCSA SAFER snapshot for Universal Logistics\nServices Inc (USDOT 839281, MC371555), physical address 1615 Robert C\nJackson Dr, Maryville TN 37801 — corroborated by TruckMap, Waze, Buzzfile\nand D&B. The ROOFTOP geocode (35.754792, -84.012239) lands on a tan/white\nmetal warehouse at the corner of W Lamar Alexander Pkwy (US-321) and the\nRobert C Jackson Dr industrial park, immediately SE of a long cross-dock\nLTL freight-terminal building. The two buildings share a single paved truck\nyard. Center locked at the warehouse, 35.75479, -84.01224.\n\nOperator caveat: Universal Logistics Services Inc of Maryville (founded\n2005, GM Jim Brinkley, ~77-unit fleet) is a small independent freight\ncarrier/brokerage. It is most likely not a subsidiary of Universal\nLogistics Holdings (ULH / NASDAQ:ULH) — the roster appears to have matched on",
-        "mapsUrl": "https://www.google.com/maps/@35.75479,-84.01224,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/08-maryville-tn-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.75479,
-              "lng": -84.01224
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/08-maryville-tn-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.75479,
-              "lng": -84.01224
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "siteResolution": "FMCSA SAFER (USDOT 839281, MC371555) lists Universal Logistics Services Inc at 1615 Robert C Jackson Dr, Maryville TN 37801 - confirmed via TruckMap, Waze, Buzzfile and D&B. The roster ROOFTOP geocode (35.754792,-84.012239) lands on a tan/white-roof metal warehouse at the corner of W Lamar Alexander Pkwy (US-321) and the Robert C Jackson Dr industrial park, immediately SE of a long cross-dock LTL freight terminal building. The two buildings share one paved truck yard. Center locked at the warehouse, 35.75479,-84.01224.",
-          "operatorNote": "Universal Logistics Services Inc, Maryville TN (est. 2005, GM Jim Brinkley, ~77-unit fleet) is a small independent freight carrier/brokerage. It is most likely NOT a subsidiary of Universal Logistics Holdings (ULH/NASDAQ:ULH) - the roster pulled it from an FMCSA name match. The site is audited as instructed, but the account linkage should be treated as uncertain.",
-          "truckGate": "The complex is in an open industrial park. The truck yard between the warehouse and the cross-dock terminal connects to Robert C Jackson Dr via open driveways; no barrier arm, sliding/swing gate, or checkpoint pinch-point was visible in satellite or Street View. Partial chain-link fence rings the yard but the entrances are open. truckGate = false (flagged uncertain - Street View coverage of the inner yard driveways is limited).",
-          "guardShack": "No guard booth observed at any entrance. guardShack = false; remoteGs = false (no controlled gate).",
-          "docks": "The cross-dock LTL terminal building (NW) has dock doors along both long faces with many trailers backed in - classic freight-terminal layout. The roster-coords warehouse (SE) has docks along its N face. Combined dock-door estimate ~40 across the complex; flagged uncertain.",
-          "dropArea": "The shared paved yard holds numerous parked trailers (LTL freight terminal cycling) - dropArea 25-50, dropYard = true.",
-          "drivewayShort": "Internal approach from the Robert C Jackson Dr driveway to the dock faces is short (1-2 truck depth) - typical of a compact terminal. drivewayShort = true.",
-          "multipleFacilities": "Two distinct buildings on the complex - the cross-dock LTL terminal and the SE warehouse - sharing one yard. multipleFacilities = true.",
-          "urbanRural": "Maryville/Blount County is a small-metro edge setting; the site sits in a planned industrial park alongside DENSO and ICC, off US-321, with woods and farmland nearby. Classified Rural per the rubric tie-break.",
-          "railServed": "No rail spur enters the complex. railServed = false."
-        }
-      },
-      {
         "id": "09-jacksonville-fl",
         "verification": {
           "verdict": "confirmed",
           "operator": "self",
           "tenancy": "leased",
           "citations": [
-            { "tier": 3, "url": "https://www.loadmatch.com/directory/company_detail.cfm?cID=37666", "date": "2026", "type": "locator", "claim": "Universal Intermodal Services, 2050 Kings Road Building #3, Jacksonville FL 32209 — exact address match" },
-            { "tier": 3, "url": "https://www.ziprecruiter.com/co/universal-intermodal-services/Jobs/-in-Jacksonville,FL", "date": "2025", "type": "press", "claim": "Active Universal Intermodal Services hiring in Jacksonville FL" }
+            {
+              "tier": 3,
+              "url": "https://www.loadmatch.com/directory/company_detail.cfm?cID=37666",
+              "date": "2026",
+              "type": "locator",
+              "claim": "Universal Intermodal Services, 2050 Kings Road Building #3, Jacksonville FL 32209 — exact address match"
+            },
+            {
+              "tier": 3,
+              "url": "https://www.ziprecruiter.com/co/universal-intermodal-services/Jobs/-in-Jacksonville,FL",
+              "date": "2025",
+              "type": "press",
+              "claim": "Active Universal Intermodal Services hiring in Jacksonville FL"
+            }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,
@@ -1880,8 +1554,20 @@
           "operator": "self",
           "tenancy": "leased",
           "citations": [
-            { "tier": 3, "url": "https://www.loadmatch.com/directory/company_detail.cfm?cID=7412", "date": "2026", "type": "locator", "claim": "Southern Counties Express dba Universal Intermodal Services, 18020 South Santa Fe Avenue, Rancho Dominguez CA — exact address match" },
-            { "tier": 1, "url": "https://www.prnewswire.com/news-releases/universal-logistics-holdings-inc-acquires-southern-counties-express-inc-300695550.html", "date": "2018", "type": "press", "claim": "ULH acquired Southern Counties Express ($65M); still in the ULH single-employer family" }
+            {
+              "tier": 3,
+              "url": "https://www.loadmatch.com/directory/company_detail.cfm?cID=7412",
+              "date": "2026",
+              "type": "locator",
+              "claim": "Southern Counties Express dba Universal Intermodal Services, 18020 South Santa Fe Avenue, Rancho Dominguez CA — exact address match"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.prnewswire.com/news-releases/universal-logistics-holdings-inc-acquires-southern-counties-express-inc-300695550.html",
+              "date": "2018",
+              "type": "press",
+              "claim": "ULH acquired Southern Counties Express ($65M); still in the ULH single-employer family"
+            }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,
@@ -2061,8 +1747,20 @@
           "operator": "self",
           "tenancy": "leased",
           "citations": [
-            { "tier": 3, "url": "https://www.loadmatch.com/directory/company_detail.cfm?companyID=13091", "date": "2026", "type": "locator", "claim": "Universal Intermodal Services, 7800 E. Little York, Ste. A, Houston TX 77016 — exact address match" },
-            { "tier": 3, "url": "https://cdllife.com/jobslist/6883dead9da35e0002827558/houston-texas", "date": "2025", "type": "press", "claim": "ULH/Universal hiring local CDL-A intermodal drivers out of Houston" }
+            {
+              "tier": 3,
+              "url": "https://www.loadmatch.com/directory/company_detail.cfm?companyID=13091",
+              "date": "2026",
+              "type": "locator",
+              "claim": "Universal Intermodal Services, 7800 E. Little York, Ste. A, Houston TX 77016 — exact address match"
+            },
+            {
+              "tier": 3,
+              "url": "https://cdllife.com/jobslist/6883dead9da35e0002827558/houston-texas",
+              "date": "2025",
+              "type": "press",
+              "claim": "ULH/Universal hiring local CDL-A intermodal drivers out of Houston"
+            }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,
@@ -2286,8 +1984,20 @@
           "operator": "3PL",
           "tenancy": "leased",
           "citations": [
-            { "tier": 3, "url": "https://www.facebook.com/DriveUniversal/posts/4243706279024009/", "date": "2024", "type": "press", "claim": "LINC hiring warehouse associates at 7100 Durand Ave, Sturtevant WI 53177" },
-            { "tier": 3, "url": "https://www.crexi.com/lease/properties/983727/wisconsin-7100-durand-ave", "date": "2025-07", "type": "press", "claim": "~300,410 of 601,160 sq ft VACANT — about half the building marketed for lease" }
+            {
+              "tier": 3,
+              "url": "https://www.facebook.com/DriveUniversal/posts/4243706279024009/",
+              "date": "2024",
+              "type": "press",
+              "claim": "LINC hiring warehouse associates at 7100 Durand Ave, Sturtevant WI 53177"
+            },
+            {
+              "tier": 3,
+              "url": "https://www.crexi.com/lease/properties/983727/wisconsin-7100-durand-ave",
+              "date": "2025-07",
+              "type": "press",
+              "claim": "~300,410 of 601,160 sq ft VACANT — about half the building marketed for lease"
+            }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": true,
@@ -2511,210 +2221,26 @@
         }
       },
       {
-        "id": "13-vance-al",
-        "verification": {
-          "verdict": "rejected",
-          "operator": "3PL",
-          "tenancy": "leased",
-          "citations": [
-            { "tier": 1, "url": "https://www.sec.gov/Archives/edgar/data/0001308208/000095017025040283/ulh-20241231.htm", "date": "2025-03", "type": "10-K", "claim": "FY2024 Item 2 Properties discloses no Alabama / Vance / Cottondale / Brookwood / Tuscaloosa facility" },
-            { "tier": 1, "url": "https://www.automotivelogistics.media/mercedes-benz-switches-from-one-to-three-lsps-in-alabama/17357.article", "date": "2017", "type": "press", "claim": "Named MBUSI Vance LSPs are BLG/Penske/Schnellecke/Celadon — not Universal/LINC" }
-          ],
-          "checkedDivestiture": true,
-          "checkedBankruptcyEra": true,
-          "rationale": "REJECTED — no discrete operating building verifiable; only a city-level Indeed/Glassdoor presence, named MBUSI LSPs are others, ULH 10-K discloses no AL property; anchor coords are a placeholder.",
-          "verifiedBy": "agent",
-          "verifiedAt": "2026-06-19"
-        },
-        "name": "Universal Logistics - Vance Value-Added Facility - Vance AL",
-        "type": "Value-Added Logistics / Sequencing Warehouse",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "low",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "remoteGs",
-          "preGateStaging",
-          "postGateStaging",
-          "drivewayLong",
-          "drivewayShort",
-          "backupSensitive",
-          "entryExitTogether",
-          "entryExitSeparate",
-          "entryLanes",
-          "exitLanes",
-          "fastLaneOpportunity",
-          "dockDoors",
-          "dropArea",
-          "shipRcvSeparate",
-          "urbanRural",
-          "connectivityIssue",
-          "multipleFacilities",
-          "scale",
-          "dropYard",
-          "multiStep"
-        ],
-        "center": {
-          "lat": 33.1845,
-          "lng": -87.272
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 33.185822,
-                "lng": -87.275433
-              },
-              {
-                "lat": 33.185879,
-                "lng": -87.272343
-              },
-              {
-                "lat": 33.185075,
-                "lng": -87.270489
-              },
-              {
-                "lat": 33.183925,
-                "lng": -87.270489
-              },
-              {
-                "lat": 33.184213,
-                "lng": -87.275433
-              }
-            ]
-          },
-          "truckGate": {
-            "ring": [
-              {
-                "lat": 33.185075,
-                "lng": -87.272687
-              },
-              {
-                "lat": 33.185075,
-                "lng": -87.272275
-              },
-              {
-                "lat": 33.18473,
-                "lng": -87.272275
-              },
-              {
-                "lat": 33.18473,
-                "lng": -87.272687
-              }
-            ]
-          },
-          "dropYards": [],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 33.185764,
-                  "lng": -87.275433
-                },
-                {
-                  "lat": 33.185764,
-                  "lng": -87.272549
-                },
-                {
-                  "lat": 33.185477,
-                  "lng": -87.272549
-                },
-                {
-                  "lat": 33.185477,
-                  "lng": -87.275433
-                }
-              ]
-            }
-          ],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 0,
-          "trailersVisible": 0,
-          "trailerParkingCapacity": 0,
-          "truckGateCount": 1,
-          "buildingCount": 1,
-          "siteAreaAcres": 0,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": false,
-          "drivewayLong": false,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": false,
-          "entryExitSeparate": false,
-          "entryLanes": null,
-          "exitLanes": null,
-          "fastLaneOpportunity": false,
-          "dockDoors": "NONE",
-          "dropArea": "NONE",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#3",
-          "steps": [
-            {
-              "step": "Arrive on site (no gate)",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Drive to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 480000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 3030000,
-          "totalYnsMs": 2640000
-        },
-        "dossierExcerpt": "The roster supplied no address and no coordinates for idx 13; the only source was an \"Indeed locations list\" entry showing Universal Logistics has a Vance, AL presence serving the Mercedes-Benz U.S. International (MBUSI) assembly plant.\n\nA genuine multi-angle effort was made:\n\n- Universal Logistics presence in Vance is real. Universal Logistics Holdings posts Vance/Brookwood AL job openings — a \"Warehouse Supervisor — Vance, AL\" listing (Salary.com archive, Nov 2021) and Glassdoor \"Universal Logistics Holdings Jobs in Vance.\" Universal's corporate materials describe automotive value-added services (sequencing, sub-assembly, kitting, returnable-container management) and the Vance corridor is squarely automotive-supplier territory.\n- But no discrete building can be tied to Universal. The publicly-named MBUSI on-site / supplier-park logistics partners are BLG Logistics (operates the \"Supplier Logistics Center Vance\"), ARD Logistics-Alabama, and Schnellecke Logistics. Universal/LINC does not appear in any public source as a named MBUSI sequencing LSP at a specific address. Mercedes' own Will Walker Road parts/sequence facility (~530,000 sq ft, built 2021) and the MLC at 11019 M-Class Blvd are Mercedes-controlled buildings; their operators in public reporting are Penske, Schnellecke, and Celadon historically, not Universal.",
-        "mapsUrl": "https://www.google.com/maps/@33.18450,-87.27200,400m/data=!3m1!1e3",
-        "fieldNotes": {
-          "_location": "Could NOT positively resolve to a discrete building. The roster supplied no address/coords and was sourced only from an Indeed locations list. Universal Logistics does post Vance/Brookwood AL warehouse-associate and warehouse-supervisor job openings (Salary.com archive 2021, Glassdoor), confirming an operating Universal value-added presence in the Vance automotive-supplier corridor serving Mercedes-Benz U.S. International (MBUSI). However, the publicly-named MBUSI sequencing logistics partners are BLG Logistics, ARD Logistics, and Schnellecke Logistics - Universal/LINC is NOT a publicly-identified MBUSI on-site LSP at a named building, so its specific operating address cannot be confirmed.",
-          "_candidate": "The likely operating environment is a value-added/sequencing line inside an MBUSI-owned or supplier-park building (e.g. the Will Walker Road logistics corridor NW of the plant at ~33.184,-87.272, where several large logistics warehouses sit) or a leased warehouse in the Brookwood/Cottondale corridor. coords here point at the Will Walker Rd logistics-warehouse cluster as the best-available area anchor only - NOT a confirmed Universal building.",
-          "_classification": "All 22 classification fields are best-guess defaults (no-gate / open-site is typical for OEM supplier-park value-added warehouses, and the corridor is Rural) and must be treated as unverified pending a confirmed address. Geofences and yardMetrics left null/zero because no specific building was locked."
-        }
-      },
-      {
         "id": "14-tanner-al",
         "verification": {
           "verdict": "confirmed",
           "operator": "3PL",
           "tenancy": "leased",
           "citations": [
-            { "tier": 1, "url": "https://hrone.wd1.myworkdayjobs.com/wday/cxs/hrone/Universal_Logistics_Holdings/job/LINC-TANNER-AL/CLASS-A-YARD-SWITCHER--Tanner--AL--CP-_JR123191", "date": "2026-03", "type": "press", "claim": "Universal/LINC hiring Class A Yard Switcher at Tanner AL (location code LINC-TANNER), posted 2026-03-10" },
-            { "tier": 2, "url": "https://workforce.alabama.gov/warn-list/", "date": "2026-06", "type": "press", "claim": "Alabama WARN list shows no Universal/LINC Tanner closure notice" }
+            {
+              "tier": 1,
+              "url": "https://hrone.wd1.myworkdayjobs.com/wday/cxs/hrone/Universal_Logistics_Holdings/job/LINC-TANNER-AL/CLASS-A-YARD-SWITCHER--Tanner--AL--CP-_JR123191",
+              "date": "2026-03",
+              "type": "press",
+              "claim": "Universal/LINC hiring Class A Yard Switcher at Tanner AL (location code LINC-TANNER), posted 2026-03-10"
+            },
+            {
+              "tier": 2,
+              "url": "https://workforce.alabama.gov/warn-list/",
+              "date": "2026-06",
+              "type": "press",
+              "claim": "Alabama WARN list shows no Universal/LINC Tanner closure notice"
+            }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": true,
@@ -2857,246 +2383,26 @@
         }
       },
       {
-        "id": "15-spring-hill-tn",
-        "verification": {
-          "verdict": "rejected",
-          "operator": "3PL",
-          "tenancy": "leased",
-          "citations": [
-            { "tier": 1, "url": "https://www.sec.gov/Archives/edgar/data/0001308208/000095017025040283/ulh-20241231.htm", "date": "2025-02", "type": "10-K", "claim": "Only itemized owned TN terminal is Memphis; no Spring Hill / Columbia / Maury County address in Item 2" },
-            { "tier": 2, "url": "https://idealcontracting.com/projects/gm-spring-hill-assembly-plant-logistics-operations-center/", "date": "2024", "type": "press", "claim": "Spring Hill Logistics Operations Center is a conversion inside GM's own plant; Universal not named, no separate address" }
-          ],
-          "checkedDivestiture": true,
-          "checkedBankruptcyEra": true,
-          "rationale": "REJECTED — no discrete operating building verifiable; real city-level presence only (Universal launch post + jobs); GM Spring Hill work is on GM premises; anchor coords are a placeholder.",
-          "verifiedBy": "agent",
-          "verifiedAt": "2026-06-19"
-        },
-        "name": "Universal Logistics - Spring Hill Contract Logistics Warehouse - Spring Hill TN",
-        "type": "Contract Logistics / Value-Added Warehouse",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "low",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "remoteGs",
-          "preGateStaging",
-          "postGateStaging",
-          "drivewayLong",
-          "drivewayShort",
-          "backupSensitive",
-          "entryExitTogether",
-          "entryExitSeparate",
-          "entryLanes",
-          "exitLanes",
-          "fastLaneOpportunity",
-          "dockDoors",
-          "dropArea",
-          "shipRcvSeparate",
-          "urbanRural",
-          "connectivityIssue",
-          "multipleFacilities",
-          "scale",
-          "dropYard",
-          "multiStep"
-        ],
-        "center": {
-          "lat": 35.712,
-          "lng": -86.925
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 35.714509,
-                "lng": -86.92809
-              },
-              {
-                "lat": 35.714509,
-                "lng": -86.925343
-              },
-              {
-                "lat": 35.711721,
-                "lng": -86.925343
-              },
-              {
-                "lat": 35.711721,
-                "lng": -86.92809
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 0,
-          "trailersVisible": 0,
-          "trailerParkingCapacity": 0,
-          "truckGateCount": 1,
-          "buildingCount": 1,
-          "siteAreaAcres": 0,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": false,
-          "drivewayLong": false,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": false,
-          "entryExitSeparate": false,
-          "entryLanes": null,
-          "exitLanes": null,
-          "fastLaneOpportunity": false,
-          "dockDoors": "NONE",
-          "dropArea": "NONE",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "dossierExcerpt": "The roster supplied no address and no coordinates; the source was a Universal Logistics Facebook reference plus an Indeed locations list noting a Spring Hill TN Contract Logistics team supporting the GM Spring Hill assembly plant.\n\nA genuine multi-angle effort was made:\n\n- Universal Logistics' Spring Hill operation is real and active. A Universal Logistics Facebook post shows the \"Spring Hill, TN Universal Contract Logistics team celebrating a successful launch.\" Universal/ZipRecruiter/Glassdoor list ~100+ active Spring Hill jobs — forklift operator at $22.25/hr, warehouse associate, operations manager/associate, line operator. This is a live GM-supporting contract-logistics operation (Universal was named GM's 2024 Supplier of the Year).\n- But no discrete building can be tied to Universal. Spring Hill's automotive 3PL warehouse stock is concentrated near Cleburne Rd / Saturn Pkwy southwest of the GM plant. The major named logistics buildings — e.g. 3521 Cleburne Rd (\"Spring Hill / Legacy Logistics Center\", two Class-A buildings, 115 dock doors) — are tenanted by Comprehensive Logistics, Magna Seating of America, and Tenneco Automotive, not Universal. Other Spring Hill 3PL names that surface are Buske Logistics and Porter Logistics. Universal does not appear as a named tenant of any specific Spring Hill warehouse in public sources.",
-        "mapsUrl": "https://www.google.com/maps/@35.71200,-86.92500,400m/data=!3m1!1e3",
-        "fieldNotes": {
-          "_location": "Could NOT positively resolve to a discrete building. Universal Logistics' Spring Hill TN Contract Logistics operation is REAL and active - a Universal Facebook post shows the 'Spring Hill, TN Universal Contract Logistics team celebrating a successful launch', and Universal/ZipRecruiter/Glassdoor list ~100+ active Spring Hill jobs (forklift operator $22.25/hr, warehouse associate, operations manager/associate, line operator) supporting GM Spring Hill (Universal = 2024 GM Supplier of the Year). However, no public source ties Universal to a specific Spring Hill building/street address.",
-          "_candidate": "Spring Hill's automotive 3PL warehouse stock is concentrated near Cleburne Rd / Saturn Pkwy SW of the GM plant. The major named logistics centers (e.g. 3521 Cleburne Rd 'Spring Hill/Legacy Logistics Center', 115 dock doors) are tenanted by Comprehensive Logistics, Magna Seating, and Tenneco - NOT Universal. Universal most plausibly runs a value-added/sequencing line INSIDE a GM-controlled building (GM converted Powertrain space into an on-site Logistics Operations Center) or a leased warehouse not publicly documented. coords here point at the GM Spring Hill plant complex as a best-available area anchor only - NOT a confirmed Universal building.",
-          "_classification": "All 22 classification fields are best-guess defaults pending a confirmed address and must be treated as unverified. Geofences and yardMetrics left null/zero because no specific building was locked."
-        }
-      },
-      {
-        "id": "16-san-antonio-tx",
-        "verification": {
-          "verdict": "rejected",
-          "operator": "3PL",
-          "tenancy": "leased",
-          "citations": [
-            { "tier": 1, "url": "https://www.sec.gov/Archives/edgar/data/1308208/000095017025040283/ulh-20241231.htm", "date": "2025-03", "type": "10-K", "claim": "FY2024 filing contains no 'San Antonio'; Item 2 lists no San Antonio facility (SEC EDGAR full-text: 0 hits for 'San Antonio' or 'Toyota' across all ULH filings)" },
-            { "tier": 2, "url": "https://pressroom.toyota.com/tmmtx-welcomes-new-on-site-suppliers/", "date": "2024", "type": "press", "claim": "TMMTX on-site sequencing supplier is Toyota Tsusho America, not Universal" }
-          ],
-          "checkedDivestiture": true,
-          "checkedBankruptcyEra": true,
-          "rationale": "REJECTED — no discrete operating building verifiable; only aggregator city presence; ULH never names San Antonio or Toyota in any filing; anchor coords are a placeholder.",
-          "verifiedBy": "agent",
-          "verifiedAt": "2026-06-19"
-        },
-        "name": "Universal Logistics - San Antonio Contract Logistics Warehouse - San Antonio TX",
-        "type": "Contract Logistics / Value-Added Warehouse",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "low",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "remoteGs",
-          "preGateStaging",
-          "postGateStaging",
-          "drivewayLong",
-          "drivewayShort",
-          "backupSensitive",
-          "entryExitTogether",
-          "entryExitSeparate",
-          "entryLanes",
-          "exitLanes",
-          "fastLaneOpportunity",
-          "dockDoors",
-          "dropArea",
-          "shipRcvSeparate",
-          "urbanRural",
-          "connectivityIssue",
-          "multipleFacilities",
-          "scale",
-          "dropYard",
-          "multiStep"
-        ],
-        "center": {
-          "lat": 29.298,
-          "lng": -98.55
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 29.299198,
-                "lng": -98.55206
-              },
-              {
-                "lat": 29.299198,
-                "lng": -98.549657
-              },
-              {
-                "lat": 29.297102,
-                "lng": -98.549657
-              },
-              {
-                "lat": 29.297102,
-                "lng": -98.55206
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 0,
-          "trailersVisible": 0,
-          "trailerParkingCapacity": 0,
-          "truckGateCount": 1,
-          "buildingCount": 1,
-          "siteAreaAcres": 0,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": false,
-          "drivewayLong": false,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": false,
-          "entryExitSeparate": false,
-          "entryLanes": null,
-          "exitLanes": null,
-          "fastLaneOpportunity": false,
-          "dockDoors": "NONE",
-          "dropArea": "NONE",
-          "shipRcvSeparate": false,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "dossierExcerpt": "The roster supplied no address and no coordinates; the source was an Indeed locations list noting a Universal Logistics San Antonio TX facility in the automotive-supplier corridor near Toyota Motor Manufacturing Texas (TMMTX).\n\nA genuine multi-angle effort was made:\n\n- Universal Logistics' San Antonio presence is real. Indeed and Glassdoor list Universal Logistics San Antonio job openings, and Universal's value-added sequencing service line (picking and presenting model-specific parts to the line-side in correct sequence) is explicitly aimed at automotive OEM plants — consistent with the roster's TMMTX note.\n- But no discrete building can be tied to Universal. No public source — company pages, news, CRE listings, FMCSA SAFER results — links Universal/LINC to a specific San Antonio street address or building. Searches for a Universal facility on Applewhite Rd (the road serving TMMTX) returned only the Toyota plant and the Universal Toyota car dealership (an unrelated business at 12102 I-35, ruled out).",
-        "mapsUrl": "https://www.google.com/maps/@29.29800,-98.55000,400m/data=!3m1!1e3",
-        "fieldNotes": {
-          "_location": "Could NOT positively resolve to a discrete building. The roster supplied no address/coords and was sourced only from an Indeed locations list. Universal Logistics does have a San Antonio TX presence (Indeed/Glassdoor list San Antonio jobs) and Universal's value-added 'sequencing' service line is squarely aimed at automotive OEM plants - consistent with the roster note that the facility serves Toyota Motor Manufacturing Texas (TMMTX) in the south San Antonio automotive-supplier corridor. However, no public source ties Universal/LINC to a specific San Antonio building or street address.",
-          "_candidate": "TMMTX (1 Lone Star Pass, off Applewhite Rd, south San Antonio ~29.298,-98.550) is notable for integrating 20+ on-site suppliers ON the same campus - some under the same roof - plus an adjacent supplier-logistics corridor. Universal's San Antonio operation most plausibly runs a sequencing / value-added line INSIDE the Toyota campus or in a leased corridor warehouse, neither of which carries an independent, publicly-mappable Universal street identity. coords here point at the TMMTX campus as a best-available area anchor only - NOT a confirmed Universal building.",
-          "_classification": "All 22 classification fields are best-guess defaults pending a confirmed address and must be treated as unverified. urbanRural set Urban (south San Antonio metro fabric). Geofences and yardMetrics left null/zero because no specific building was locked."
-        }
-      },
-      {
         "id": "17-madison-al",
         "verification": {
           "verdict": "probable",
           "operator": "3PL",
           "tenancy": "owned",
           "citations": [
-            { "tier": 1, "url": "https://www.sec.gov/Archives/edgar/data/0001308208/000095017025040283/ulh-20241231.htm", "date": "2025-03", "type": "10-K", "claim": "ULH delivers value-added contract logistics inside ~54 customer-provided facilities; automotive = 47% of revenue (confirms captive-in-customer-plant model)" },
-            { "tier": 1, "url": "https://www.polaris.com/en-us/locations/huntsville-al/", "date": "2026", "type": "locator", "claim": "Polaris Huntsville/Madison AL plant active in 2026 (Slingshot + RANGER); the 2025 Polaris closure was Osceola WI, not Madison AL" }
+            {
+              "tier": 1,
+              "url": "https://www.sec.gov/Archives/edgar/data/0001308208/000095017025040283/ulh-20241231.htm",
+              "date": "2025-03",
+              "type": "10-K",
+              "claim": "ULH delivers value-added contract logistics inside ~54 customer-provided facilities; automotive = 47% of revenue (confirms captive-in-customer-plant model)"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.polaris.com/en-us/locations/huntsville-al/",
+              "date": "2026",
+              "type": "locator",
+              "claim": "Polaris Huntsville/Madison AL plant active in 2026 (Slingshot + RANGER); the 2025 Polaris closure was Osceola WI, not Madison AL"
+            }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": true,
@@ -3261,404 +2567,26 @@
         }
       },
       {
-        "id": "18-chillicothe-il",
-        "verification": {
-          "verdict": "rejected",
-          "operator": "3PL",
-          "tenancy": "leased",
-          "citations": [
-            { "tier": 1, "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm", "date": "2026-03", "type": "10-K", "claim": "Contract-logistics value-added services run 'at or adjacent to facilities owned or controlled by customers... ~50 customer-provided locations'; Chillicothe (Caterpillar) is one such location, not a ULH-listed property" },
-            { "tier": 1, "url": "https://www.indeed.com/cmp/Universal-Logistics-Holdings,-Inc./locations/IL/Chillicothe", "date": "2026", "type": "press", "claim": "Active ULH reqs in Chillicothe IL confirm a workforce, but no street address is published and the building is Caterpillar's" }
-          ],
-          "checkedDivestiture": true,
-          "checkedBankruptcyEra": true,
-          "rationale": "REJECTED — no discrete ULH-operated building verifiable; ULH runs pick/pack/sequencing inside Caterpillar's Chillicothe warehouse (a customer-provided location per the 10-K), not a discrete ULH facility.",
-          "verifiedBy": "agent",
-          "verifiedAt": "2026-06-19"
-        },
-        "name": "Universal Logistics - Chillicothe Contract Logistics Warehouse - Chillicothe IL",
-        "type": "Contract Logistics / Value-Added Warehouse",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "dockDoorCount",
-          "shipRcvSeparate"
-        ],
-        "center": {
-          "lat": 40.8482,
-          "lng": -89.5535
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 40.849239,
-                "lng": -89.558169
-              },
-              {
-                "lat": 40.849239,
-                "lng": -89.550479
-              },
-              {
-                "lat": 40.845915,
-                "lng": -89.550479
-              },
-              {
-                "lat": 40.845915,
-                "lng": -89.558169
-              }
-            ]
-          },
-          "truckGate": {
-            "ring": [
-              {
-                "lat": 40.849031,
-                "lng": -89.558169
-              },
-              {
-                "lat": 40.849031,
-                "lng": -89.557345
-              },
-              {
-                "lat": 40.848408,
-                "lng": -89.557345
-              },
-              {
-                "lat": 40.848408,
-                "lng": -89.558169
-              }
-            ]
-          },
-          "dropYards": [],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 40.849031,
-                  "lng": -89.557895
-                },
-                {
-                  "lat": 40.849031,
-                  "lng": -89.550753
-                },
-                {
-                  "lat": 40.848616,
-                  "lng": -89.550753
-                },
-                {
-                  "lat": 40.848616,
-                  "lng": -89.557895
-                }
-              ]
-            }
-          ],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 140,
-              "pano": "N0sT40_ZtbhWRZNGWRHthA",
-              "hasCoverage": true
-            },
-            "truckGate": {
-              "heading": 140,
-              "pano": "N0sT40_ZtbhWRZNGWRHthA",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 55,
-          "trailersVisible": 40,
-          "trailerParkingCapacity": 90,
-          "truckGateCount": 1,
-          "buildingCount": 2,
-          "siteAreaAcres": 78,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 2,
-          "exitLanes": 2,
-          "fastLaneOpportunity": true,
-          "dockDoors": "50+",
-          "dropArea": "25-50",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": true,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#3",
-          "steps": [
-            {
-              "step": "Arrive on site (no gate)",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Drive to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 480000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 3030000,
-          "totalYnsMs": 2640000
-        },
-        "dossierExcerpt": "The roster supplied no address and no coordinates — only \"Universal Logistics\nChillicothe IL facility supporting Caterpillar manufacturing operations.\" Web\nresearch established that the Chillicothe/Mossville area is a continuous\nCaterpillar campus along the Old Galena Road / IL-29 corridor on the Illinois\nRiver. A Caterpillar \"General Warehousing and Storage\" facility was identified\nat 2800 E Cedar Hills Drive, Chillicothe handling parts-distribution\nlogistics. Satellite probing of the Cedar Hills Drive corridor located a very\nlarge modern distribution warehouse (~350m x 200m footprint) with the **Cedar\nHills residential subdivision directly to its north** — consistent with the\n2800 E Cedar Hills Drive address. This is exactly the kind of pick/pack,\nsequencing and inventory-management warehouse Universal Logistics operates for",
-        "mapsUrl": "https://www.google.com/maps/@40.8482,-89.5535,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/18-chillicothe-il-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.8482,
-              "lng": -89.5535
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/18-chillicothe-il-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.8482,
-              "lng": -89.5535
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "siteResolution": "No street address in roster. Resolved to the large Caterpillar parts/distribution warehouse on E Cedar Hills Drive, Chillicothe IL (~40.8482, -89.5535) — web search identified a Caterpillar 'General Warehousing and Storage' facility at 2800 E Cedar Hills Drive handling parts-distribution logistics; the Cedar Hills residential subdivision sits immediately north of the building, matching the address. This is the type of pick/pack/sequencing/inventory facility Universal Logistics operates for Caterpillar in Chillicothe. The exact Universal-operated sub-area within the Caterpillar Chillicothe campus is not crisply confirmed — medium confidence.",
-          "truckGate": "No barrier arm, sliding gate, or guard booth visible at the road edge in Street View along E Cedar Hills Drive — the rural campus warehouse has open driveway access from the public road into the parking/apron area. Classed truckGate false.",
-          "guardShack": "No staffed booth observed at any entrance. false.",
-          "dockDoors": "Very large warehouse (~350m x 200m footprint). Dock apron with trailers backed in observed on the east face; estimate 50+ dock doors total across the building given its size — flagged as an estimate.",
-          "dropYard": "Trailer rows parked along the east access road plus outdoor laydown/material storage on the east side — dedicated trailer/material drop area present.",
-          "multipleFacilities": "A second large warehouse building sits immediately south of the main DC — campus layout.",
-          "railServed": "No rail spur enters the property; the Caterpillar Chillicothe campus is road-served at this building. false.",
-          "urbanRural": "Edge-of-town rural setting — cornfields directly across E Cedar Hills Drive, farmland surrounding. Rural."
-        }
-      },
-      {
-        "id": "19-mossville-il",
-        "verification": {
-          "verdict": "rejected",
-          "operator": "3PL",
-          "tenancy": "leased",
-          "citations": [
-            { "tier": 1, "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm", "date": "2026-03", "type": "10-K", "claim": "Value-added services at '~50 customer-provided locations'; Mossville (Caterpillar) is a customer-provided in-plant location and does not appear in ULH's owned/leased-terminal listing" },
-            { "tier": 1, "url": "https://www.indeed.com/cmp/Universal-Logistics-Holdings-Inc./locations/IL/Mossville", "date": "2026", "type": "press", "claim": "Universal Logistics (apply as Logistics Insights) hiring in Mossville 'in direct partnership with Caterpillar' — in-plant workforce, not a discrete ULH building" }
-          ],
-          "checkedDivestiture": true,
-          "checkedBankruptcyEra": true,
-          "rationale": "REJECTED — no discrete ULH-operated building verifiable; ULH contract logistics is embedded inside the Caterpillar Mossville engine campus (mapped onto the customer plant).",
-          "verifiedBy": "agent",
-          "verifiedAt": "2026-06-19"
-        },
-        "name": "Universal Logistics - Mossville Contract Logistics Warehouse - Mossville IL",
-        "type": "Contract Logistics / Value-Added Warehouse",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "remoteGs",
-          "dockDoorCount",
-          "shipRcvSeparate",
-          "scale"
-        ],
-        "center": {
-          "lat": 40.841,
-          "lng": -89.556
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 40.839961,
-                "lng": -89.566986
-              },
-              {
-                "lat": 40.841,
-                "lng": -89.558197
-              },
-              {
-                "lat": 40.838922,
-                "lng": -89.551605
-              },
-              {
-                "lat": 40.836429,
-                "lng": -89.552704
-              },
-              {
-                "lat": 40.835182,
-                "lng": -89.561493
-              },
-              {
-                "lat": 40.836844,
-                "lng": -89.564789
-              }
-            ]
-          },
-          "truckGate": {
-            "ring": [
-              {
-                "lat": 40.837675,
-                "lng": -89.56424
-              },
-              {
-                "lat": 40.837675,
-                "lng": -89.562592
-              },
-              {
-                "lat": 40.836429,
-                "lng": -89.562592
-              },
-              {
-                "lat": 40.836429,
-                "lng": -89.56424
-              }
-            ]
-          },
-          "dropYards": [],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 40.840377,
-                  "lng": -89.558747
-                },
-                {
-                  "lat": 40.838507,
-                  "lng": -89.552155
-                },
-                {
-                  "lat": 40.837468,
-                  "lng": -89.552704
-                },
-                {
-                  "lat": 40.839338,
-                  "lng": -89.559296
-                }
-              ]
-            }
-          ],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 60,
-          "trailersVisible": 50,
-          "trailerParkingCapacity": 110,
-          "truckGateCount": 2,
-          "buildingCount": 4,
-          "siteAreaAcres": 180,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": false,
-          "remoteGs": true,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 2,
-          "exitLanes": 2,
-          "fastLaneOpportunity": true,
-          "dockDoors": "50+",
-          "dropArea": "25-50",
-          "shipRcvSeparate": true,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": true,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "dossierExcerpt": "The roster supplied no address and no coordinates — only \"Universal Logistics\nMossville IL facility supporting Caterpillar engine/manufacturing complex.\" Web\nresearch established the **Caterpillar Mossville plant at 1900 E Old Galena\nRoad** (corroborated by EPA Superfund records for the Caterpillar Mossville\nPlant). Satellite probing of the Old Galena Road / IL-29 corridor located the\nvast contiguous Caterpillar manufacturing complex on the bluff above the\nIllinois River. Universal Logistics' Mossville operation provides value-added,\nsequencing and contract-logistics support embedded in this Caterpillar\nengine/manufacturing complex.\n\nMedium confidence: the roster gave no address; the Universal-operated sub-area\nwithin the very large Caterpillar Mossville campus cannot be isolated from\noverhead imagery.",
-        "mapsUrl": "https://www.google.com/maps/@40.841,-89.556,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/19-mossville-il-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.841,
-              "lng": -89.556
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/universal-logistics-holdings/19-mossville-il-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.841,
-              "lng": -89.556
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "siteResolution": "No street address in roster. Resolved to the Caterpillar Mossville manufacturing plant complex along Old Galena Road / IL-29, Mossville IL (~40.8410, -89.5560) — the large contiguous Caterpillar plant identified via the Caterpillar Mossville plant address (1900 E Old Galena Road) and EPA Superfund records. Universal Logistics' Mossville operation provides value-added / sequencing / contract-logistics support embedded in the Caterpillar engine/manufacturing complex. The Universal-operated sub-area within this very large Caterpillar campus cannot be isolated from imagery — medium confidence.",
-          "truckGate": "A Caterpillar manufacturing plant of this scale operates controlled truck-side access; internal entrance roads off Old Galena Road run into the plant. No barrier arm / booth was directly resolved in available imagery — classed truckGate true with remoteGs true (gate/checkpoint access without a clearly visible staffed booth). Flagged uncertain.",
-          "guardShack": "No staffed guard booth positively resolved in the imagery captured. Caterpillar campuses typically gate-control the truck side; classed guardShack false / remoteGs true pending direct confirmation — flagged uncertain.",
-          "dockDoors": "Very large multi-building plant complex; dock banks are present along multiple building faces. Estimate 50+ dock doors total across the complex — flagged as an overhead estimate.",
-          "shipRcvSeparate": "A complex of this size runs inbound parts receiving and outbound shipping from physically distinct dock clusters on different building faces — classed shipRcvSeparate true (inferred from plant scale, flagged uncertain).",
-          "dropYard": "Trailer staging rows visible along the plant's internal roads/aprons; dedicated trailer staging present.",
-          "multipleFacilities": "Multi-building Caterpillar plant campus — true.",
-          "railServed": "No active rail spur clearly resolved entering the audited building footprint; classed false.",
-          "urbanRural": "Edge-of-river-bluff rural setting — farmland surrounds the complex on the west/north; Illinois River and a small residential strip on the SE across IL-29. Rural.",
-          "scale": "No truck scale positively identified — flagged uncertain given the campus scale."
-        }
-      },
-      {
         "id": "20-savannah-ga",
         "verification": {
           "verdict": "confirmed",
           "operator": "self",
           "tenancy": "owned",
           "citations": [
-            { "tier": 1, "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm", "date": "2026-03", "type": "10-K", "claim": "ULH owns terminal yards including Savannah, Georgia (Item 2 Properties, FY2025, as of 2025-12-31)" },
-            { "tier": 3, "url": "https://www.ziprecruiter.com/Jobs/Universal-Intermodal/--in-Georgia", "date": "2025-10", "type": "press", "claim": "Universal Intermodal actively hiring company drivers/owner-operators in Georgia (Savannah/Garden City)" }
+            {
+              "tier": 1,
+              "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm",
+              "date": "2026-03",
+              "type": "10-K",
+              "claim": "ULH owns terminal yards including Savannah, Georgia (Item 2 Properties, FY2025, as of 2025-12-31)"
+            },
+            {
+              "tier": 3,
+              "url": "https://www.ziprecruiter.com/Jobs/Universal-Intermodal/--in-Georgia",
+              "date": "2025-10",
+              "type": "press",
+              "claim": "Universal Intermodal actively hiring company drivers/owner-operators in Georgia (Savannah/Garden City)"
+            }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": true,
@@ -3848,8 +2776,20 @@
           "operator": "self",
           "tenancy": "owned",
           "citations": [
-            { "tier": 1, "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm", "date": "2026-03", "type": "10-K", "claim": "ULH owns terminal yards including Harvey, Illinois (Item 2 Properties, FY2025, as of 2025-12-31)" },
-            { "tier": 1, "url": "https://www.breakroom.cc/en-us/jobs/listing/758102-universal-logistics-holdings-inc-cdl-a-contractors-harvey", "date": "2025", "type": "press", "claim": "ULH 'CDL A Contractors (Harvey)' active hiring at the Harvey terminal" }
+            {
+              "tier": 1,
+              "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm",
+              "date": "2026-03",
+              "type": "10-K",
+              "claim": "ULH owns terminal yards including Harvey, Illinois (Item 2 Properties, FY2025, as of 2025-12-31)"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.breakroom.cc/en-us/jobs/listing/758102-universal-logistics-holdings-inc-cdl-a-contractors-harvey",
+              "date": "2025",
+              "type": "press",
+              "claim": "ULH 'CDL A Contractors (Harvey)' active hiring at the Harvey terminal"
+            }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": true,
@@ -4019,127 +2959,26 @@
         }
       },
       {
-        "id": "22-gary-in",
-        "verification": {
-          "verdict": "rejected",
-          "operator": "self",
-          "tenancy": "owned",
-          "citations": [
-            { "tier": 1, "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm", "date": "2026-03", "type": "10-K", "claim": "ULH names Gary, Indiana among owned terminal-yard cities (Item 2, FY2025) — but with no street address" }
-          ],
-          "checkedDivestiture": true,
-          "checkedBankruptcyEra": true,
-          "rationale": "REJECTED — unlocatable; the 10-K confirms a Gary IN owned-terminal city but no findable public street address or imagery exists for a Universal Intermodal Gary terminal (FMCSA shows only the Warren MI corporate address); anchor coords are a placeholder.",
-          "verifiedBy": "agent",
-          "verifiedAt": "2026-06-19"
-        },
-        "name": "Universal Intermodal Services - Gary Terminal - Gary IN",
-        "type": "Intermodal / Drayage Terminal / Container Yard (owned)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "low",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "remoteGs",
-          "preGateStaging",
-          "postGateStaging",
-          "drivewayLong",
-          "drivewayShort",
-          "backupSensitive",
-          "entryExitTogether",
-          "entryExitSeparate",
-          "entryLanes",
-          "exitLanes",
-          "fastLaneOpportunity",
-          "dockDoors",
-          "dropArea",
-          "shipRcvSeparate",
-          "multipleFacilities",
-          "scale",
-          "dropYard",
-          "multiStep"
-        ],
-        "center": {
-          "lat": 41.602,
-          "lng": -87.337
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 41.604054,
-                "lng": -87.339747
-              },
-              {
-                "lat": 41.604054,
-                "lng": -87.335627
-              },
-              {
-                "lat": 41.600973,
-                "lng": -87.335627
-              },
-              {
-                "lat": 41.600973,
-                "lng": -87.339747
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 0,
-          "trailersVisible": 0,
-          "trailerParkingCapacity": 0,
-          "truckGateCount": 1,
-          "buildingCount": 1,
-          "siteAreaAcres": 0,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": false,
-          "drivewayLong": false,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": false,
-          "entryExitSeparate": false,
-          "entryLanes": null,
-          "exitLanes": null,
-          "fastLaneOpportunity": false,
-          "dockDoors": "NONE",
-          "dropArea": "NONE",
-          "shipRcvSeparate": false,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "dossierExcerpt": "The roster supplied no address and no coordinates — only \"ULH 2025 10-K Item 2\nProperties — Gary IN named as owned terminal/yard property.\" After a genuine,\nextended research effort, the Universal Intermodal Gary IN terminal /\ncontainer-yard could not be located:\n\n- The Universal Intermodal service-locations page, the loadmatch intermodal\n  directory, IANA terminal lists, FMCSA SAFER, and multiple business\n  directories returned no street address for a Universal Intermodal /\n  Universal Logistics facility in Gary IN.\n- FMCSA SAFER lists only the Warren MI corporate address for Universal\n  Intermodal Services (USDOT 1162977).\n- The loadmatch Indiana intermodal-terminal directory shows **no Gary facility\n  and no Universal Intermodal terminal anywhere in Indiana**.\n- A satellite scan of the Gary IN industrial corridor found no positively",
-        "mapsUrl": "https://www.google.com/maps/@41.602,-87.337,400m/data=!3m1!1e3",
-        "fieldNotes": {
-          "siteResolution": "UNRESOLVED — facility could not be located. No street address and no coordinates in the roster; the ULH 2025 10-K names Gary IN only as an owned terminal/yard / container-yard property. Extensive web research (Universal Intermodal service-locations page, loadmatch intermodal directory, FMCSA SAFER, IANA terminal lists, company directories) returned NO street address for a Universal Intermodal / Universal Logistics terminal in Gary IN. FMCSA lists only the Warren MI corporate address. The loadmatch Indiana terminal directory shows no Gary facility and no Universal Intermodal terminal in Indiana. A satellite scan of the Gary IN industrial corridor found no positively identifiable Universal-operated drayage/container yard. The coordinate (41.602, -87.337) is a representative point in the Gary IN industrial area, NOT a confirmed facility location.",
-          "resolutionFlag": "FLAGGED FOR HUMAN REVIEW — the Universal Intermodal Gary IN terminal/container-yard has no findable public street address or imagery. All classification fields and yard metrics are unknown placeholders. This site needs a verified address (e.g. from internal ULH property records) before it can be audited.",
-          "urbanRural": "Gary IN sits inside the Chicago-metro / Northwest Indiana industrial belt — Urban (best-guess, unconfirmed)."
-        }
-      },
-      {
         "id": "23-louisville-ky",
         "verification": {
           "verdict": "confirmed",
           "operator": "self",
           "tenancy": "owned",
           "citations": [
-            { "tier": 1, "url": "https://www.gocrown.ws/property/2338-millers-lane/", "date": "2026-06", "type": "press", "claim": "Crown Enterprises (Moroun, holds ULH real estate) lists 2338 Millers Lane as a 23,591 SF terminal, 46 cross-dock doors, 4.72 acres — exact building match" },
-            { "tier": 1, "url": "https://www.nlrb.gov/case/21-CA-286645", "date": "2026-06", "type": "press", "claim": "Names 'Mason-Dixon Intermodal d/b/a Universal Intermodal Services' as a ULH single-employer entity" }
+            {
+              "tier": 1,
+              "url": "https://www.gocrown.ws/property/2338-millers-lane/",
+              "date": "2026-06",
+              "type": "press",
+              "claim": "Crown Enterprises (Moroun, holds ULH real estate) lists 2338 Millers Lane as a 23,591 SF terminal, 46 cross-dock doors, 4.72 acres — exact building match"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.nlrb.gov/case/21-CA-286645",
+              "date": "2026-06",
+              "type": "press",
+              "claim": "Names 'Mason-Dixon Intermodal d/b/a Universal Intermodal Services' as a ULH single-employer entity"
+            }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,
@@ -4375,8 +3214,20 @@
           "operator": "self",
           "tenancy": "owned",
           "citations": [
-            { "tier": 1, "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm", "date": "2026-03", "type": "10-K", "claim": "ULH owns terminal yards including Columbus, Ohio (Item 2 Properties, FY2025)" },
-            { "tier": 3, "url": "https://cdllife.com/jobslist/696aafe04a5a01000284248f/columbus-ohio", "date": "2026-01", "type": "press", "claim": "ULH hiring CDL-A intermodal drivers at 2950 International St, Columbus OH 43228" }
+            {
+              "tier": 1,
+              "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm",
+              "date": "2026-03",
+              "type": "10-K",
+              "claim": "ULH owns terminal yards including Columbus, Ohio (Item 2 Properties, FY2025)"
+            },
+            {
+              "tier": 3,
+              "url": "https://cdllife.com/jobslist/696aafe04a5a01000284248f/columbus-ohio",
+              "date": "2026-01",
+              "type": "press",
+              "claim": "ULH hiring CDL-A intermodal drivers at 2950 International St, Columbus OH 43228"
+            }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,
@@ -4617,8 +3468,20 @@
           "operator": "self",
           "tenancy": "owned",
           "citations": [
-            { "tier": 1, "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-ex21_1.htm", "date": "2026-03", "type": "10-K", "claim": "'Specialized Rail Service, Inc.' listed as a principal ULH subsidiary (Exhibit 21.1, FY2025)" },
-            { "tier": 1, "url": "https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnapshot&query_param=USDOT&query_string=506498", "date": "2026-06", "type": "press", "claim": "SPECIALIZED RAIL SERVICE INC, DBA UNIVERSAL, status ACTIVE, 120 E 700 S, Clearfield UT 84015" }
+            {
+              "tier": 1,
+              "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-ex21_1.htm",
+              "date": "2026-03",
+              "type": "10-K",
+              "claim": "'Specialized Rail Service, Inc.' listed as a principal ULH subsidiary (Exhibit 21.1, FY2025)"
+            },
+            {
+              "tier": 1,
+              "url": "https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnapshot&query_param=USDOT&query_string=506498",
+              "date": "2026-06",
+              "type": "press",
+              "claim": "SPECIALIZED RAIL SERVICE INC, DBA UNIVERSAL, status ACTIVE, 120 E 700 S, Clearfield UT 84015"
+            }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,
@@ -4844,8 +3707,20 @@
           "operator": "self",
           "tenancy": "owned",
           "citations": [
-            { "tier": 1, "url": "https://www.indeed.com/viewjob?jk=910e6baffbb828a4", "date": "2026-06", "type": "press", "claim": "ULH / Universal Intermodal hiring CDL-A intermodal driver onsite at '4014 Outland Road, Memphis, TN 38118' verbatim" },
-            { "tier": 1, "url": "https://www.sec.gov/Archives/edgar/data/0001308208/000095017025040283/ulh-20241231.htm", "date": "2025-03", "type": "10-K", "claim": "ULH owns terminal yards including Memphis, TN (Item 2 Properties, FY2024)" }
+            {
+              "tier": 1,
+              "url": "https://www.indeed.com/viewjob?jk=910e6baffbb828a4",
+              "date": "2026-06",
+              "type": "press",
+              "claim": "ULH / Universal Intermodal hiring CDL-A intermodal driver onsite at '4014 Outland Road, Memphis, TN 38118' verbatim"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.sec.gov/Archives/edgar/data/0001308208/000095017025040283/ulh-20241231.htm",
+              "date": "2025-03",
+              "type": "10-K",
+              "claim": "ULH owns terminal yards including Memphis, TN (Item 2 Properties, FY2024)"
+            }
           ],
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,

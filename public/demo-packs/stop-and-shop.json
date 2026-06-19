@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-09T22:05:06.028Z",
+  "builtAt": "2026-06-19T04:59:35.845Z",
   "account": {
     "slug": "stop-and-shop",
     "displayName": "Stop & Shop",
@@ -9,10 +9,10 @@
     "coverageNote": {
       "auditedCount": 7,
       "estimatedFootprint": 8,
+      "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Stop & Shop is supplied by ADUSA Supply Chain (Ahold Delhaize) out of ~8 Northeast DCs. We audited 7 ADUSA DCs serving Stop & Shop across MA, CT, NY, and PA.",
-      "auditedScope": "US"
+      "note": "Stop & Shop is supplied by ADUSA Supply Chain (Ahold Delhaize) out of ~8 Northeast DCs. We audited 7 ADUSA DCs serving Stop & Shop across MA, CT, NY, and PA."
     },
     "featuredSiteId": "01-stop-and-shop",
     "dossierIntro": "Stop & Shop's shelves are filled by ADUSA Supply Chain, Ahold Delhaize's in-house logistics arm, out of a cluster of Northeast distribution centers. We mapped seven of them across MA, CT, NY, and PA, holding 742 dock doors and room for about 1,760 trailers. The network splits cleanly by temperature into dry grocery, fresh, and frozen DCs, several of them former C&S buildings ADUSA pulled in-house. Five of the seven gate the yard, but two large grocery DCs sit open to the road. YardFlow gives ADUSA one gate-to-dock view across the whole Stop & Shop network.",
@@ -322,6 +322,33 @@
           "connectivityIssue": "Set false - rural but within a developed corridor near Rt 24/Fall River; cellular coverage likely adequate.",
           "trailerCounts": "trailersVisible/capacity are honest overhead estimates from the 2026 Airbus/Maxar imagery; dock-line and drop-yard rows counted by band, not exact.",
           "perimeter": "Oriented polygon traced to the tree/fence line around the grocery building and its NE/SE drop yards; the long axis runs NW-SE (building rotated ~30-40 deg off north). ~38.7 acres for the grocery portion of the shared campus."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://supermarketnews.com/retail-financial/ahold-delhaize-usa-completes-step-one-shift-self-distribution",
+              "date": "2021-03",
+              "type": "press",
+              "claim": "Freetown Grocery (1.1M sq ft, opened 2004) was the first Ahold Delhaize USA / ADUSA facility moved from 3PL C&S to ADUSA self-distribution; serves 200+ Stop & Shop stores in New England."
+            },
+            {
+              "tier": 2,
+              "url": "https://wbsm.com/freetown-stop-shop-teamsters-contract/",
+              "date": "2025-02-28",
+              "type": "press",
+              "claim": "Stop & Shop and Teamsters Local 25 reached a six-year contract preserving 900+ jobs; the Freetown DC continues operations and jobs remain local. Feb 2025 closure threat resolved."
+            }
+          ],
+          "imageryDate": "2023-07",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Confirmed current Stop & Shop/ADUSA self-distributed grocery DC; Feb 2025 closure/3PL-transition threat resolved by a 6-year Teamsters contract keeping it open and in-house.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -630,6 +657,33 @@
           "multipleFacilities": "True - two large DC buildings (Fresh + Grocery) on one campus.",
           "refrigeratedConfirmation": "Street View frames inside the yard show Carrier-reefer trailers (e.g. 'Atlantic Capes' seafood reefer), consistent with a refrigerated/perishable Fresh DC.",
           "siteAreaAcres": "~58 acres for the fresh-DC portion (south building + its drop yards + gate plaza) derived from the perimeter polygon; approximate, as the campus boundary between fresh and grocery is drawn at the connector spine."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://progressivegrocer.com/1st-ahold-delhaize-usa-facility-transitions-self-distribution",
+              "date": "2021",
+              "type": "press",
+              "claim": "Freetown was the first Ahold Delhaize USA facility transitioned from 3PL C&S to ADUSA self-distribution; the campus runs both a grocery and a fresh/perishable building serving 200+ Stop & Shop stores."
+            },
+            {
+              "tier": 2,
+              "url": "https://wbsm.com/freetown-stop-shop-teamsters-contract/",
+              "date": "2025-02-28",
+              "type": "press",
+              "claim": "Stop & Shop / Teamsters Local 25 six-year contract preserves 900+ jobs at the Freetown DC; the Feb 2025 closure threat was averted and the facility remains open."
+            }
+          ],
+          "imageryDate": "2023-07",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Confirmed current Stop & Shop/ADUSA self-distributed Fresh (perishable) building on the Freetown campus; 2021 ADUSA release documents the grocery+fresh two-building split, Feb 2025 closure threat resolved. Note: recent 2025 sources name 'the Freetown DC' generically, so the Fresh building is confirmed at campus level.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -902,6 +956,40 @@
           "dropYard": "Dedicated fenced trailer-storage lots distinct from active dock staging.",
           "railServed": "Rail line runs along the I-84 corridor on the south/east edge but does not spur into the property.",
           "siteAreaAcres": "Perimeter polygon computes to ~93 acres (the developed operating envelope: building plus all parking, drop yards and fenced buffer); the full parcel is ~162 acres including undeveloped woods per the Winstanley listing."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://newsroom.aholddelhaize.com/adusa-supply-chain-opens-new-1-million-square-foot-distribution-center-in-connecticut/",
+              "date": "2021-09-20",
+              "type": "press",
+              "claim": "ADUSA Supply Chain opened a 1M sq ft DC at 1339 Tolland Turnpike, Manchester CT, handling 88M cases of nonperishable grocery/yr for 450+ Stop & Shop stores; first facility under the ADUSA Supply Chain brand."
+            },
+            {
+              "tier": 3,
+              "url": "https://www.winent.com/portfolio/properties/1339-tolland-turnpike",
+              "date": "2026-06",
+              "type": "press",
+              "claim": "Landlord (Winstanley) portfolio page lists the 1.97M sq ft building as leased to J.C. Penney, Amazon, and ADUSA, confirming ADUSA is a current tenant."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.nbcconnecticut.com/news/local/freight-handlers-manchester-facility-to-close-in-march/3211811/",
+              "date": "2024-02",
+              "type": "press",
+              "claim": "ADUSA stated it will continue to operate the Manchester DC and self-manage the workforce; the Feb 2024 WARN was the 3PL contractor (Freight Handlers) ending, not the DC closing."
+            }
+          ],
+          "imageryDate": "2023-11",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Confirmed current ADUSA self-distributed Stop & Shop grocery DC leased in Winstanley's multi-tenant building; Feb 2024 WARN was a 3PL-to-self labor transition, DC stays open.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1136,6 +1224,33 @@
           "railServed": "No rail spur enters the property; nearest tracks not adjacent.",
           "connectivityIssue": "Rural wooded setting on the edge of a small hamlet (Schodack Landing) along Route 9; some adjacent industrial/commercial development on Route 9, so cellular is likely adequate. Marked false but low confidence.",
           "siteAreaAcres": "Derived from the traced perimeter ring (~46 acres of active fenced/paved campus); excludes the cleared scrub land east of the wood line."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://adusadistribution.careerswithus.com/job/distribution-services/warehouse-associate-i/schodack-landing/distributionadusarms/203075_external_USA-NY-Schodack-Landing",
+              "date": "2022-03",
+              "type": "press",
+              "claim": "ADUSA Distribution requisition at 970 Route 9, Schodack Landing NY carrying store code 'DC 02', a self-distribution fresh/frozen/grocery/HBC facility serving Stop & Shop and Hannaford."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.globenewswire.com/news-release/2023/08/01/2716090/0/en/ADUSA-Distribution-Adds-Chester-New-York-Distribution-Center-to-Supply-Chain-Network.html",
+              "date": "2023-08-01",
+              "type": "press",
+              "claim": "Documents ADUSA's completed insourcing of NY-region DCs from 3PL C&S into its self-managed network serving Stop & Shop and Hannaford."
+            }
+          ],
+          "imageryDate": "2025-08",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Confirmed current ADUSA self-distributed Fresh DC02 serving Stop & Shop and Hannaford; exact-address + DC02 store-code match on ADUSA careers req with active hiring. No closure/WARN signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1378,6 +1493,33 @@
           "railServed": "Rail line and a tank/silo complex sit north of the property, but the spur serves that separate northern facility, not the 4820 building; no rail enters this property.",
           "urbanRural": "Lower Nazareth Township, edge-of-town setting surrounded by farm fields despite being in a warehouse park; per rubric (small-town industrial vs Urban) classified Rural.",
           "siteAreaAcres": "Derived from the traced perimeter polygon (~104 acres); building footprint alone ~31 acres (~1.3M sq ft, consistent with published figure)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.globenewswire.com/news-release/2022/03/01/2394529/0/en/ADUSA-Supply-Chain-Converts-First-Distribution-Center-Serving-Multiple-Brands-into-Self-Managed-Network.html",
+              "date": "2022-03-01",
+              "type": "press",
+              "claim": "ADUSA Supply Chain converted the Bethlehem (Hanoverville Rd) DC into its self-managed network: 1.2M sq ft, ~200M cases/yr nonperishable, serving 210+ Stop & Shop + GIANT stores; first multi-brand DC brought in-house. C&S retained only as 3PL labor-management provider."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.adusasc.com/news-releases/news-release-details/adusa-supply-chain-converts-first-distribution-center-serving",
+              "date": "2022-03-01",
+              "type": "press",
+              "claim": "ADUSA own-site release of the same Bethlehem conversion to self-managed distribution."
+            }
+          ],
+          "imageryDate": "2024-07",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Confirmed current ADUSA self-distributed grocery DC (designated DC 04) serving Stop & Shop + GIANT; converted from C&S to ADUSA self-managed Mar 2022, C&S now only a labor vendor. No closure/WARN signal for this PA site.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1598,6 +1740,33 @@
           "urbanRural": "Edge-of-town industrial park in Plainville CT bordered by woods/wetland to the E and S; judged Rural per the small-town tie-breaker.",
           "scale": "No truck scale resolved in the imagery; flagged uncertain (could exist on the private drive not covered by Street View).",
           "multipleFacilities": "Single Americold building; the gray-roof building and office north of Northwest Drive are separate properties, not part of this campus."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://newsroom.aholddelhaize.com/ahold-delhaize-usa-expands-cold-storage-space-with-americold-partnership/",
+              "date": "2020-05-14",
+              "type": "press",
+              "claim": "Americold will design, build and operate two automated frozen retail DCs (Plainville CT + Mountville PA) over an initial 20-year term, serving Ahold Delhaize USA / ADUSA brands Stop & Shop and Hannaford."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.sheltonherald.com/business/article/plainville-ct-stop-shop-americold-warehouse-18684138.php",
+              "date": "2024-03",
+              "type": "press",
+              "claim": "Americold has begun operations at the Plainville DC at 24 Northwest Drive, used by ADUSA Supply Chain to serve Stop & Shop and Hannaford; full automated throughput expected back-half 2025."
+            }
+          ],
+          "imageryDate": "2023-07",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Confirmed current automated frozen DC serving Stop & Shop/Hannaford but OPERATED by 3PL Americold (designs/builds/operates under a 20-year term), not ADUSA self-distribution; ADUSA is the customer/tenant.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1859,6 +2028,33 @@
           "shipRcvSeparate": "As a cross-dock both inbound and outbound move through the same dock banks; no clearly separate ship vs receive cluster. Low confidence.",
           "urbanRural": "Edge-of-town industrial park outside the village of Chester, NY, surrounded by open land, wetlands, and a quarry; judged Rural per rubric.",
           "siteAreaAcres": "~43 acres from the traced perimeter polygon (building + east drop yard + south yard inside the fence)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.globenewswire.com/news-release/2023/08/01/2716090/0/en/ADUSA-Distribution-Adds-Chester-New-York-Distribution-Center-to-Supply-Chain-Network.html",
+              "date": "2023-08-01",
+              "type": "press",
+              "claim": "ADUSA Distribution converted its Chester NY DC on Elizabeth Drive from C&S on July 30, 2023: ~600K sq ft multi-temp + freezer, 350+ trailer spots, ~100 dock doors, ~65M cases/yr, serving Stop & Shop and Hannaford."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.supermarketnews.com/foodservice-retail/ahold-delhaize-usa-takes-another-step-toward-self-distribution",
+              "date": "2023-08",
+              "type": "press",
+              "claim": "Corroborates the Chester DC as part of Ahold Delhaize USA's self-distribution buildout, taken over from C&S, serving Stop & Shop and Hannaford."
+            }
+          ],
+          "imageryDate": "2023-07",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Confirmed current ADUSA self-distributed multi-temperature cross-dock serving Stop & Shop and Hannaford; insourced from C&S Aug 2023, active hiring at the site. Specs match Tier-1 release exactly. No closure/WARN signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       }
     ]

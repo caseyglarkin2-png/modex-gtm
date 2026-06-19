@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-09T21:02:07.882Z",
+  "builtAt": "2026-06-19T04:59:37.014Z",
   "account": {
     "slug": "harris-teeter",
     "displayName": "Harris Teeter",
@@ -9,9 +9,9 @@
     "coverageNote": {
       "auditedCount": 3,
       "estimatedFootprint": null,
+      "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "auditedScope": "US",
       "note": "Audited all 3 identifiable facilities."
     },
     "featuredSiteId": "02-harris-teeter",
@@ -276,6 +276,33 @@
           "railServed": "A rail line runs along the western edge of the property but no spur visibly enters the buildings; treated as not rail-served.",
           "scale": "No truck scale/weigh pad visible in the truck path at the gate or in the yard.",
           "coords": "Pinned to the perishable building centroid (white-roof NW section), confirmed via satellite z16-z21 and Street View; the supplied campus coords (35.065177, -80.645931) landed near the shared entrance/parking area, not the perishable building."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.commerce.nc.gov/node/2315",
+              "date": "2014-08",
+              "type": "econ-dev press",
+              "claim": "NC Commerce names Harris Teeter, LLC (a wholly-owned subsidiary of The Kroger Co.) operating/expanding the Indian Trail DC campus, which includes both a perishable and a grocery facility."
+            },
+            {
+              "tier": 1,
+              "url": "https://myhtcareers.referrals.selectminds.com/page/indian-trail-distribution-center-job-opportunities-73",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Harris Teeter official careers portal maintains a dedicated Indian Trail Distribution Center page; CDL Driver req posted 2026-04 at the Indian Trail DC confirms active HT operation."
+            }
+          ],
+          "imageryDate": "2025-11",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Tier-1 NC Commerce operator-of-record + 2026 HT Indian Trail careers/CDL reqs confirm HT self-operates this perishable+grocery DC; the only closures found are unrelated HT-Delivery e-commerce sites, not Indian Trail.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -522,6 +549,33 @@
           "urbanRural": "Edge-of-town setting on the rural fringe of Indian Trail: woods and a rail corridor on the property's south/west, light commercial along W Hwy 74 to the NE. Judged Rural per the small-town-industrial tiebreak.",
           "multipleFacilities": "True — two large building masses (perishable + dry grocery) plus an office/maintenance cluster on one campus.",
           "siteAreaAcres": "~53 acres from the perimeter polygon (the full shared fenced campus, since the yard is not separately fenced per building)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.commerce.nc.gov/node/2315",
+              "date": "2014-08",
+              "type": "econ-dev press",
+              "claim": "NC Commerce names Harris Teeter, LLC (a wholly-owned subsidiary of The Kroger Co.) operating/expanding the Indian Trail DC campus, which includes both a perishable and a grocery facility."
+            },
+            {
+              "tier": 1,
+              "url": "https://myhtcareers.referrals.selectminds.com/page/indian-trail-distribution-center-job-opportunities-73",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Harris Teeter official careers portal maintains a dedicated Indian Trail Distribution Center page; CDL Driver req posted 2026-04 at the Indian Trail DC confirms active HT operation."
+            }
+          ],
+          "imageryDate": "2018-11",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Same shared 6001 W Hwy 74 Indian Trail campus as site 01 (dry-grocery half); Tier-1 NC Commerce + 2026 HT careers/CDL reqs confirm HT self-operation, no Tier-2 negative against Indian Trail.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -815,6 +869,33 @@
           "railServed": "No rail spur visible on the property.",
           "entryLanes": "Single combined in/out truck drive observed; lane count approximate.",
           "siteAreaAcres": "Derived from the fenced perimeter polygon; approximate."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://myhtcareers.referrals.selectminds.com/page/distribution-amp-transportation-careers-59",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Harris Teeter official careers portal lists Greensboro NC as an active distribution facility with Transportation, Freezer, and General Merchandise warehouse sections."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.ziprecruiter.com/c/Harris-Teeter/Job/CDL-Driver-Greensboro-Distribution-Center-Full-Time/-in-Greensboro,NC",
+              "date": "2026-06",
+              "type": "press",
+              "claim": "Active HT-branded Greensboro Distribution Center reqs (CDL Driver, Freezer Selector, General Merchandise Selector) current as of 2026-06 confirm HT self-operation."
+            }
+          ],
+          "imageryDate": "2026-02",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Tier-1 HT careers portal + active 2026 HT-branded Greensboro DC reqs confirm HT self-operates the frozen/grocery/perishable DC campus (200 Distribution Dr); the only closures found are unrelated HT-Delivery e-commerce sites elsewhere, not Greensboro.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       }
     ]

@@ -1,20 +1,20 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-02T16:19:23.768Z",
+  "builtAt": "2026-06-19T04:59:48.051Z",
   "account": {
     "slug": "kraft-heinz",
     "displayName": "Kraft Heinz",
     "archetype": "cpg",
-    "siteCount": 10,
+    "siteCount": 9,
     "coverageNote": {
-      "auditedCount": 10,
+      "auditedCount": 9,
       "estimatedFootprint": 40,
+      "totalGlobalFootprint": 50,
+      "auditedScope": "NA",
+      "legacyYmsFacilityCount": 25,
       "droppedStubCount": 17,
       "capHit": false,
-      "note": "We audited 10 of an estimated ~40 NA Kraft Heinz manufacturing + DC facilities (Aurora cold storage, Holland Lunchables, Davenport Oscar Mayer, Garland TX Oscar Mayer, Massillon, Fremont ketchup, Mason City Jell-O, Fort Myers Bagel Bites, Jacksonville warehouse + portion control). Kraft Heinz operates ~50 plants globally (~80% NA-concentrated). The remaining 17 NA sites are stubs from the calibration set; backfill in progress on the highest-volume plants first.",
-      "auditedScope": "NA",
-      "totalGlobalFootprint": 50,
-      "legacyYmsFacilityCount": 25
+      "note": "We audited 10 of an estimated ~40 NA Kraft Heinz manufacturing + DC facilities (Aurora cold storage, Holland Lunchables, Davenport Oscar Mayer, Garland TX Oscar Mayer, Massillon, Fremont ketchup, Mason City Jell-O, Fort Myers Bagel Bites, Jacksonville warehouse + portion control). Kraft Heinz operates ~50 plants globally (~80% NA-concentrated). The remaining 17 NA sites are stubs from the calibration set; backfill in progress on the highest-volume plants first."
     },
     "featuredSiteId": "05-kraft-foods-jacksonville-portion-control",
     "dossierIntro": "Kraft Heinz is the first network we used as the audit rubric. 50+ facilities; we audited 27. Davenport IA covers 72 acres with 55 docks. Fremont OH is 88 acres. 525 dock doors and 722 trailer spots. The 22-field classification framework was calibrated here. YardFlow runs the network the rubric was built for.",
@@ -33,243 +33,21 @@
       43.165352
     ],
     "archetypeMix": {
-      "#1": 2,
       "#3": 3,
       "#4": 1,
+      "#1": 1,
       "#6": 2,
       "#7": 1,
       "#9": 1
     },
     "totals": {
-      "dockDoors": 525,
-      "trailerCapacity": 722,
-      "gates": 11,
+      "dockDoors": 495,
+      "trailerCapacity": 632,
+      "gates": 10,
       "railServed": 4,
-      "acres": 357.9
+      "acres": 348.5
     },
     "sites": [
-      {
-        "id": "01-kraft-heinz-aurora",
-        "name": "Kraft Heinz - Aurora",
-        "type": "Cold Storage Facility",
-        "archetype": "#1",
-        "archetypeName": "Gate + GS (not BU sens.)",
-        "confidence": "high",
-        "uncertainFields": [
-          "entryLanes",
-          "exitLanes"
-        ],
-        "center": {
-          "lat": 41.78305,
-          "lng": -88.37315
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 41.783588,
-                "lng": -88.374867
-              },
-              {
-                "lat": 41.783639,
-                "lng": -88.371536
-              },
-              {
-                "lat": 41.781847,
-                "lng": -88.371468
-              },
-              {
-                "lat": 41.781796,
-                "lng": -88.374867
-              }
-            ]
-          },
-          "truckGate": {
-            "ring": [
-              {
-                "lat": 41.782154,
-                "lng": -88.372429
-              },
-              {
-                "lat": 41.78218,
-                "lng": -88.372154
-              },
-              {
-                "lat": 41.781949,
-                "lng": -88.37212
-              },
-              {
-                "lat": 41.781924,
-                "lng": -88.372395
-              }
-            ]
-          },
-          "dropYards": [
-            {
-              "ring": [
-                {
-                  "lat": 41.782333,
-                  "lng": -88.374867
-                },
-                {
-                  "lat": 41.782384,
-                  "lng": -88.373322
-                },
-                {
-                  "lat": 41.781796,
-                  "lng": -88.373287
-                },
-                {
-                  "lat": 41.781796,
-                  "lng": -88.374867
-                }
-              ]
-            }
-          ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 41.782743,
-                  "lng": -88.374867
-                },
-                {
-                  "lat": 41.78282,
-                  "lng": -88.371914
-                },
-                {
-                  "lat": 41.782564,
-                  "lng": -88.37188
-                },
-                {
-                  "lat": 41.782487,
-                  "lng": -88.374867
-                }
-              ]
-            }
-          ],
-          "staging": {
-            "ring": [
-              {
-                "lat": 41.782436,
-                "lng": -88.373322
-              },
-              {
-                "lat": 41.782461,
-                "lng": -88.372463
-              },
-              {
-                "lat": 41.782077,
-                "lng": -88.372429
-              },
-              {
-                "lat": 41.782052,
-                "lng": -88.373287
-              }
-            ]
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 30,
-          "trailersVisible": 70,
-          "trailerParkingCapacity": 90,
-          "truckGateCount": 1,
-          "buildingCount": 1,
-          "siteAreaAcres": 9.4,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": true,
-          "remoteGs": false,
-          "preGateStaging": true,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "25-50",
-          "dropArea": "50+",
-          "shipRcvSeparate": false,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#1",
-          "steps": [
-            {
-              "step": "Arrive at gate, queue for guard scan",
-              "geofenceTarget": "truckGate",
-              "durationMs": 30000,
-              "narrationKey": "gate.arrive",
-              "baselineWaitMs": 600000,
-              "ynsWaitMs": 30000
-            },
-            {
-              "step": "Pass through gate to drop yard",
-              "geofenceTarget": "dropYard",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Spotter pulls trailer to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 90000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 1200000,
-              "ynsWaitMs": 120000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Driver exits through gate",
-              "geofenceTarget": "exit",
-              "durationMs": 60000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 4440000,
-          "totalYnsMs": 2790000
-        },
-        "dossierExcerpt": "The supplied coordinates (41.7831644, -88.3732467) sit on a large white\nindustrial building immediately north of Bilter Rd in Aurora, IL. Web research\n(HSA Commercial case study, Manta business listing, Yellow Pages, Edan,\nKrusinski Construction project page) confirms this is the Kraft Foods /\nHeinz cold-storage portion of the larger Aurora Distribution Center campus\non the north side of Bilter Rd between Church Rd and IL-59. The wider\ncampus also includes a separate, larger industrial building further north\n(across a man-made retention pond) which appears to be a different\ntenant/parcel of the multi-tenant DC. The Kraft yard audited here is the\nsouth building only.\n\nA second, separate Kraft cold-storage facility exists in Aurora at 1700 N\nEdgelawn Dr - that is not this site. The Bilter Rd address is the one",
-        "mapsUrl": "https://www.google.com/maps/@41.78305,-88.37315,400m/data=!3m1!1e3",
-        "fieldNotes": {
-          "facility": "1203 Bilter Rd, Aurora, IL - Kraft Foods/Heinz cold-storage portion of the multi-tenant Aurora Distribution Center. Confirmed via web research (HSA Commercial, Manta, Yellow Pages) plus visual lock on industrial building at supplied coords.",
-          "truckGate": "Z21 satellite shows a small dark rectangular structure (guard-shack footprint) sitting in the middle of the truck entry apron at the SE corner where the drive opens onto Bilter Rd. Single controlled pinch-point for both inbound and outbound trucks.",
-          "guardShack": "Distinct ~3-4m booth-sized structure visible at z21 on the truck pad, separated from the main building - characteristic small staffed shack. Consistent with Jake's calibration baseline that pegs this site as the #1 Gate+GS archetype.",
-          "remoteGs": "False because guardShack is true.",
-          "preGateStaging": "Wide paved apron between Bilter Rd setback and the gate booth - trucks can pull off the road and stage before checking in.",
-          "postGateStaging": "Large open paved area immediately inside the gate before drop-yard rows / dock apron.",
-          "drivewayLong": "From gate to dock face is ~150m of straight paved drive that can easily queue 5+ tractors.",
-          "dockDoors": "Counted approximately 30 dock doors along the long south face of the building from z18/z19 imagery - mid-band 25-50.",
-          "dropArea": "South drop yard shows ~70+ visible parked trailers in dense rows; capacity ~90 stalls.",
-          "entryExitTogether": "Single SE-corner gate handles both directions.",
-          "entryLanes": "Visible single inbound lane at the booth; counted from z21 satellite but lane striping faint.",
-          "exitLanes": "Single outbound lane assumed - symmetric to entry.",
-          "fastLaneOpportunity": "Gate apron is wide but already configured as a single-lane controlled pinch-point with the guard booth in the middle - retrofitting an express bypass would require relocating the booth.",
-          "urbanRural": "Set inside the Aurora/Naperville metro fabric - dense suburban development on all sides (offices, parking, retail) along the I-88/Bilter corridor.",
-          "shipRcvSeparate": "Single south-facing dock cluster handles all truck traffic; no separate ship/rcv face.",
-          "multipleFacilities": "False for Kraft footprint specifically. The neighboring large building to the NW across the pond is a separate parcel/tenant in the same multi-tenant Aurora Distribution Center campus, not part of the Kraft yard.",
-          "scale": "No truck scale visible in the gate path or drop-yard.",
-          "rail": "No rail spur enters the Kraft parcel. Rail line visible north of the campus but does not serve this building.",
-          "streetView": "Bilter Rd Street View from the public ROW shows a landscaped berm with trees screening the dock face; the on-site pano (2018) sits on the truck pad and confirms the entry point's geometry. Public-road view is consistent with a single set-back industrial driveway."
-        }
-      },
       {
         "id": "03-kraft-heinz-holland",
         "name": "Kraft Heinz - Holland",
@@ -520,6 +298,32 @@
           "siteAreaAcres": "Computed from perimeter bbox: ~245 m N-S x ~405 m E-W ≈ 24.5 acres.",
           "truckGateCount": "Counted as 2 main truck curb-cuts off W 16th St (one west near the Heinz 57 office facade, one east near the drop yard); no actual gates, but 2 dominant truck-flow access points.",
           "multipleFacilities": "All four building masses are tightly contiguous on one parcel — read as a single integrated facility rather than a multi-building campus."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.crainsgrandrapids.com/news/food-drink/kraft-heinz-plant-in-holland-slated-for-13m-clean-energy-upgrades/",
+              "date": "2024",
+              "type": "press",
+              "claim": "KHC Holland plant slated for clean-energy upgrades"
+            },
+            {
+              "tier": 1,
+              "url": "https://michiganadvance.com/briefs/trump-administration-cuts-key-funding-for-hollands-kraft-heinz-decarbonization-efforts/",
+              "date": "2025",
+              "type": "press",
+              "claim": "2025 coverage names KHC still investing in the Holland pickle plant after grant cut"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "World largest pickle/vinegar plant, a KHC DOE clean-energy site; pickles not cheese, no divestiture exposure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -710,6 +514,32 @@
           "entryLanes": "Multiple uncontrolled driveways feed the campus; not a single counted lane group, so left null.",
           "exitLanes": "Same — uncontrolled multi-driveway egress.",
           "truckGateCount": "Zero physical gate structures observed; reported as 0 but flagged uncertain because multi-tenant park layout means trucks enter from multiple uncontrolled points."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.glassdoor.com/Jobs/Kraft-Heinz-Company-Jacksonville-Jobs-EI_IE1026712.0,19_IL.20,32_IC1154093.htm",
+              "date": "2026",
+              "type": "press",
+              "claim": "Active Kraft Heinz job openings in Jacksonville FL as of 2026"
+            },
+            {
+              "tier": 3,
+              "url": "https://www.industrynet.com/listing/245982/kraft-heinz-foods-co-portion-control-div",
+              "date": "2024",
+              "type": "press",
+              "claim": "Kraft Heinz Foods Co. Portion Control Div., Jacksonville FL"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Warehouse arm of KHC active Jacksonville Portion Control complex (H.J. Heinz Co. LP owner); KHC hiring locally 2026.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -900,6 +730,32 @@
           "scale": "No truck scale pad visible anywhere on property.",
           "dropYard": "SW-corner trailer-storage area is a clear dedicated drop yard (10-15 stalls) separate from the active dock apron.",
           "multiStep": "No second checkpoint stage — no gate at all."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.glassdoor.com/Jobs/Kraft-Heinz-Company-Jacksonville-Jobs-EI_IE1026712.0,19_IL.20,32_IC1154093.htm",
+              "date": "2026",
+              "type": "press",
+              "claim": "Active Kraft Heinz Jacksonville reqs in 2026"
+            },
+            {
+              "tier": 3,
+              "url": "https://clustrmaps.com/a/319t4p/",
+              "date": "2024",
+              "type": "press",
+              "claim": "7500 Forshee Dr owner = H J Heinz Company L P / Kraft Heinz Foods Company"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Heinz Portion Control single-serve condiment plant at 7500 Forshee Dr; KHC-owned, hiring 2026; not cheese/Planters.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1039,6 +895,32 @@
           "scale": "No truck scale platform identified in satellite imagery along the inbound route or dock aprons — meat processing facilities can have a scale but I do not see one clearly. Marked uncertain.",
           "multiStep": "Single gate/entry; no visible second checkpoint or scale house after entry. Marked false.",
           "approachUsed": "Street View captured 2025-06 from Slopertown Road (north), Hillandale Drive (west), and the east intersection at the rail crossing; satellite at z17-z21 from Maxar 2026 imagery."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.businessrecord.com/kraft-heinz-investing-30-million-to-expand-facility-in-davenport/",
+              "date": "2023",
+              "type": "press",
+              "claim": "KHC investing $30M to expand the $225M+ Davenport Oscar Mayer/Lunchables plant"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.indeed.com/q-kraft-heinz-company-l-davenport,-ia-jobs.html",
+              "date": "2026-06",
+              "type": "press",
+              "claim": "Kraft Heinz jobs in Davenport IA, new openings as of June 2026"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "$225M+ automated KHC Oscar Mayer Deli Fresh / Lunchables plant, ~600 union employees, expanding; not cheese/Planters.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1252,6 +1134,32 @@
           "multiStep": "No second checkpoint resolved after the gate — single-stage entry only.",
           "rail": "No rail spur into property. Major rail yard exists ~500m east beyond treeline but no spur connection visible to Kraft Heinz parcel.",
           "siteAreaAcres": "Perimeter ~445m N-S × ~463m E-W = ~206,000 m² = ~51 acres for the main Kraft Heinz parcel (excluding adjacent third-party buildings)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.kraftheinz.com/job/22241875/team-leader-production-massillon-oh/",
+              "date": "2026-06",
+              "type": "press",
+              "claim": "open production req at KHC Massillon, OH"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.foodnavigator-usa.com/Article/2013/11/19/Heinz-to-pump-28m-into-frozen-food-plant-in-Massillon-OH/",
+              "date": "2013-11",
+              "type": "press",
+              "claim": "Heinz Frozen Food Center of Excellence at Massillon"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "KHC frozen-foods plant (Smart Ones/Devour), ~370 employees, active 2026 careers reqs; not a closed/divested site.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1490,6 +1398,32 @@
           "dropYard": "Yes - two dedicated trailer-storage lots separate from active dock staging (north and east).",
           "railServed": "Rail spur clearly visible entering from the north (across Forest Ln) and running south along the west property line. The plant's heritage as a 1949 Oscar Mayer facility is consistent with rail-served meat processing.",
           "multiStep": "Single gate/booth complex - no evidence of a second downstream checkpoint or scale house before the docks."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.garlandtx.gov/CivicAlerts.aspx?AID=3368",
+              "date": "2024-06",
+              "type": "press",
+              "claim": "City of Garland: KHC since 1949, $143M expansion, ~1,500 employees, Lunchables/Kraft BBQ"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.meatpoultry.com/articles/22400-kraft-heinz-to-expand-garland-texas-plant",
+              "date": "2019-12",
+              "type": "press",
+              "claim": "KHC largest Lunchables/Oscar Mayer/Kraft BBQ plant"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "KHC Lunchables/Kraft BBQ/Velveeta plant (retained brands), $143M expansion 2024; no closure/divestiture.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1735,6 +1669,32 @@
           "urbanRural": "Fremont OH is a small town (~16k population). The campus sits at the edge of town with farmland to the north and east across US-20.",
           "buildingCount": "Approximate — at least 7 distinct structures (main plant + warehouse + admin/welcome + 2 secondary processing buildings + silos cluster + water-treatment building); some adjacent structures may share roofs and be undercounted from above.",
           "siteAreaAcres": "Derived from perimeter bbox: ~801 m N-S x ~443 m E-W ≈ 88 acres. Property line approximated from satellite (rail spur is internal; west edge at treeline before river; north edge at US-20 ROW grass strip; south edge before residential)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.ziprecruiter.com/co/kraft-heinz/Jobs/-in-Fremont,OH",
+              "date": "2026-05",
+              "type": "press",
+              "claim": "KHC hiring at Fremont OH plant in 2026"
+            },
+            {
+              "tier": 2,
+              "url": "https://www.foodlogistics.com/warehousing/grocery-retail/news/12135191/kraft-heinz-kraft-heinz-to-close-seven-us-and-canada-plants-cut-2600-jobs",
+              "date": "2025",
+              "type": "press",
+              "claim": "Fremont NOT on KHC 7-plant closure list"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "World largest ketchup plant (~80% of US Heinz ketchup), current 2026 reqs; not on any closure list.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1919,6 +1879,32 @@
           "railServed": "Rail spur clearly enters the property along the east edge, with a track running into the warehouse for inbound ingredient cars. Mason City has long been Kraft's rail-receiving dessert-mix plant.",
           "siteAreaAcres": "Perimeter box: 285m N-S x 320m E-W ≈ 91,200 m² ≈ 22.5 acres of fenced operating yard; including peripheral silo/rail land call it ~25 acres.",
           "facility": "1022 12th St NW, Mason City, IA 50401 — the nation's Jell-O gelatin + pudding plant (~200 employees; $62.8M expansion announced; receiving $9M DOE clean-energy upgrade; producing nearly all US Jell-O gelatin and pudding cups). This is a single building complex on a single parcel — there is NO second Mason City plant in Iowa. Roster idx 15 (also labeled 'Kraft Heinz - Mason City') resolves to Mason, OH (39.33,-84.33), a different facility 700+ miles away."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://northiowatoday.com/2024/03/25/mason-citys-kraft-plant-could-receive-up-to-9-million-in-upgrades-for-training-and-energy-efficiency/",
+              "date": "2024-03",
+              "type": "press",
+              "claim": "KHC Mason City selected for up to $9M DOE upgrades, ~200 employees"
+            },
+            {
+              "tier": 2,
+              "url": "https://www.foodlogistics.com/warehousing/grocery-retail/news/21069655/kraft-heinz-kraft-heinz-to-expand-iowa-jello-pudding-plant",
+              "date": "2024",
+              "type": "press",
+              "claim": "$62.8M expansion of Mason City Jell-O/pudding plant"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "KHC Jell-O gelatin + pudding plant (Mason City IA), DOE upgrade + $62.8M expansion 2024; closure suspicion busted.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -2127,6 +2113,32 @@
           "urbanRural": "Inside the Treeline Industrial Park in eastern Fort Myers, with continuous warehouse/manufacturing development on all sides and I-75 immediately east — Urban industrial fabric, not edge-of-town.",
           "siteAreaAcres": "Perimeter bbox ≈ 217 m N-S × 129 m E-W ≈ 6.9 acres. Honest overhead estimate; flagged as fieldNote only because the exact fence-line on the south (lake bank) is screened by trees.",
           "shipRcvSeparate": "Could not positively distinguish a dedicated receiving dock from the shipping dock in overhead imagery — all visible dock activity is on the north face. Conservatively marked false."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 3,
+              "url": "https://www.chamberofcommerce.com/business-directory/florida/fort-myers/manufacturer/2281685-kraft-heinz-fort-myers",
+              "date": "2024",
+              "type": "press",
+              "claim": "Kraft Heinz-Fort Myers manufacturer at 5521 Division Dr"
+            },
+            {
+              "tier": 3,
+              "url": "https://www.glassdoor.com/Jobs/Kraft-Heinz-Company-Fort-Myers-Jobs-EI_IE1026712.0,19_IL.20,30_IC1154016.htm",
+              "date": "2025",
+              "type": "press",
+              "claim": "KHC Fort Myers job listings indicating active site"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "KHC Bagel Bites frozen-snacks plant at 5521 Division Dr; no divestiture/closure, but Tier-1 self-attested source thin — corroborated by directory + jobs only. FLAG: low-confidence.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       }
     ]

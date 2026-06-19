@@ -1,13 +1,13 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-10T16:23:17.642Z",
+  "builtAt": "2026-06-19T04:59:40.596Z",
   "account": {
     "slug": "tractor-supply",
     "displayName": "Tractor Supply Company",
     "archetype": "retailer",
-    "siteCount": 11,
+    "siteCount": 10,
     "coverageNote": {
-      "auditedCount": 11,
+      "auditedCount": 10,
       "estimatedFootprint": null,
       "auditedScope": "US",
       "droppedStubCount": 0,
@@ -25,22 +25,22 @@
   "research": null,
   "network": {
     "bbox": [
-      -116.591,
+      -111.791135,
       31.484603,
       -75.084487,
-      43.634
+      43.037963
     ],
     "archetypeMix": {
       "#9": 2,
       "#10": 7,
-      "#3": 2
+      "#3": 1
     },
     "totals": {
       "dockDoors": 1119,
       "trailerCapacity": 2390,
-      "gates": 11,
+      "gates": 10,
       "railServed": 1,
-      "acres": 655.3
+      "acres": 600.4
     },
     "sites": [
       {
@@ -325,6 +325,32 @@
           "urbanRural": "Edge-of-town Pendleton IN: bordered by I-69 and farm fields with some adjacent apartment/industrial development; broader setting is rural.",
           "railServed": "No rail spur enters the property.",
           "trailerParkingCapacity": "Estimated from visible drop-yard rows and open paved yard; approximate."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.tractorsupply.careers/job/Pendleton-DC-HR-Intern-Pendleton,-IN-Summer-2026-IN-46064/1319693800/",
+              "date": "2026-01",
+              "type": "careers",
+              "claim": "TSC corporate careers posting for a DC HR Intern at the Pendleton, IN 46064 distribution center, Summer 2026 - proves an actively staffed, currently operating TSC-run DC at this site."
+            },
+            {
+              "tier": 3,
+              "url": "https://us.nextdoor.com/pages/tractor-supply-distribution-center-114-pendleton-in/",
+              "date": "2026-02",
+              "type": "locator",
+              "claim": "Listed as Tractor Supply Distribution Center 114, Pendleton IN - corroborates DC #114 identity."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "TSC corporate careers shows an active 2026 DC role at this exact address (DC #114); no closure/WARN; truck-yard DC, not a store.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -597,6 +623,32 @@
           "urbanRural": "Edge-of-town industrial park SW of Waco against open land and a wooded creek to the south; judged Rural per rubric tie-break toward small-town industrial.",
           "connectivityIssue": "False; sits in an active business park with adjacent office/medical development, so cellular coverage is likely adequate.",
           "siteAreaAcres": "~31 acres from the traced perimeter polygon (building + drop yard + parking + apron)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://business.wacochamber.com/directory/Details/tractor-supply-co-distribution-center-881485",
+              "date": "2026-03",
+              "type": "econ-dev",
+              "claim": "Greater Waco Chamber of Commerce directory lists Tractor Supply Co. Distribution Center at 2801 Corporation Pkwy as a current member/distributor."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.ziprecruiter.com/co/Tractor-Supply/Jobs/-in-Waco,TX",
+              "date": "2026-01",
+              "type": "careers",
+              "claim": "Active Jan 2026 TSC distribution-center hiring in Waco (DC team member, DC supervisor, DC maintenance tech) - currently staffed and operating."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Waco Chamber lists the DC as a current member and TSC is actively hiring DC roles in Waco in 2026; no closure/WARN; freight DC, not a store.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -884,6 +936,32 @@
           "multiStep": "No clearly visible second checkpoint after the gate in overhead imagery; left false. The CAT scale is in the yard but a discrete second guard stage is not confirmed.",
           "railServed": "No rail spur enters the property; nearest rail is unrelated.",
           "streetViewMeta": "Both nearest panos are 2012-05 pre-construction frames of the then-empty pad (Google has not re-driven the internal road), but metadata status is OK within 400m, so hasCoverage=true with the real pano ids recorded."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://web.maconchamber.com/Distributors/Tractor-Supply-Co-Distribution-Center-12417",
+              "date": "2026-03",
+              "type": "econ-dev",
+              "claim": "Greater Macon Chamber of Commerce lists Tractor Supply Co. Distribution Center as a current distributor member in Macon."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.ziprecruiter.com/Jobs/Tractor-Supply-Distribution-Center/-in-Macon,GA",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active 2026 TSC distribution-center hiring in Macon, GA (incl. Summer 2026 DC intern) - currently staffed and operating."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Macon Chamber lists the DC as current and TSC is actively hiring DC roles in Macon in 2026; the only GA TSC WARN was Braselton (not Macon); freight DC at 151 Tractor Dr, not the separate Macon retail store.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1144,6 +1222,32 @@
           "connectivityIssue": "Within Casa Grande's industrial fringe near other large DCs; cellular coverage likely adequate, so false (low confidence).",
           "buildingCount": "Main DC plus a separate smaller building at the south/SE; counted 2.",
           "railServed": "No rail spur enters the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.tractorsupply.careers/job/Casa-Grande-Distribution-Center-Operations-Manager-(Casa-Grande,-AZ)-AZ-85193/1384422100/",
+              "date": "2026-04",
+              "type": "careers",
+              "claim": "Active TSC corporate careers posting for Casa Grande Distribution Center Operations Manager, ZIP 85193 (matches DC address; retail store is 85122)."
+            },
+            {
+              "tier": 1,
+              "url": "https://cca.casagrandechamber.org/tractor-supply-company-dc-111-_5005157_3_1_5007784_memberprofile2.aspx",
+              "date": "2026-06",
+              "type": "econ-dev",
+              "claim": "Casa Grande Chamber of Commerce member profile lists Tractor Supply Company DC #111 as an operating local facility."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Live TSC careers DC postings (ZIP 85193) plus chamber DC #111 listing; no closure/WARN/construction signals. Street is W Peters Rd, not N Peters Rd in mapping sources.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1447,6 +1551,25 @@
           "connectivityIssue": "Industrial park on the edge of Franklin with cell towers visible near the entrance; coverage likely adequate, so false.",
           "railServed": "No rail spur enters the property.",
           "streetViewMeta": "Best ground pano on arrival is on the access road at 36.71094,-86.51195 (captured 2026-03); headings aim it toward the gate (241) and toward the property/building (198)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.tractorsupply.careers/job/Franklin-Distribution-Center-Team-Member-(Franklin,-KY_)-KY-42134/1348896100/",
+              "date": "2026-05",
+              "type": "careers",
+              "claim": "Active TSC corporate careers posting for Franklin Distribution Center Team Member, ZIP 42134 (matches DC address)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Official TSC careers names the Franklin Distribution Center directly, corroborated by freight directory at 100 Raines Dr; no closure/WARN/construction signals.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1726,6 +1849,25 @@
           "dropYard": "Dedicated on-site trailer-storage lots separate from active dock staging.",
           "trailersVisible": "Approximate count across all captured drop yards and dock faces.",
           "railServed": "No rail spur enters the property; I-81 borders the SE side."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.tractorsupply.careers/job/Hagerstown-Distribution-Center-Team-Member-MD-21740/1355851300/",
+              "date": "2026-05",
+              "type": "careers",
+              "claim": "Active TSC corporate careers posting for Hagerstown Distribution Center Team Member, ZIP 21740 (matches DC address)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Official TSC careers names the Hagerstown Distribution Center directly, corroborated by freight directory at 11935 Hopewell Rd; no closure/WARN/construction signals.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1996,6 +2138,32 @@
           "railServed": "No rail spur enters the property.",
           "scale": "No truck scale clearly identified; flagged uncertain.",
           "trailersVisible": "Honest overhead estimate (~95) across both drop yards and dock positions in the captured imagery."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://business.herkimercountychamber.com/events/details/business-before-hours-tractor-supply-company-distribution-center-1101370",
+              "date": "2024-01",
+              "type": "econ-dev",
+              "claim": "Herkimer County Chamber of Commerce lists the Tractor Supply Company Distribution Center at 1938 Country Mile, Frankfort NY as an operating member facility (Business Before Hours event)."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.tractorsupply.careers/job/Frankfort-DC-Team-Member-OH/",
+              "date": "2026-05",
+              "type": "careers",
+              "claim": "Active Tractor Supply DC Team Member postings at the Frankfort, NY distribution center as of 2026."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "TSC Northeast DC (opened ~2019); current DC careers at exact address plus county chamber econ-dev listing; no closure/WARN.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -2283,6 +2451,25 @@
           "railServed": "A through rail line runs ~300m+ south of the property through farmland but no spur enters the site.",
           "buildingCount": "Main DC plus a smaller secondary building at the NW (offices/maintenance) inside the property.",
           "entryLanes": "Divided boulevard reads as roughly 1 in / 1 out at the checkpoint; lane count approximate from overhead."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.ziprecruiter.com/c/Tractor-Supply-Company/Job/DC-Team-Member-(Evergreen)/-in-Waverly,NE",
+              "date": "2025-01",
+              "type": "careers",
+              "claim": "Active Tractor Supply DC Team Member distribution-center postings in Waverly, NE (freight ops, shift differential), current as of 2025."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Operating TSC distribution center at 12851 Dovers St (DC-specific freight roles, dock/trailer parking mapped), distinct from the Waverly retail store; no closure/WARN found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -2570,6 +2757,32 @@
           "trailerParkingCapacity": "~220 trailer positions estimated across north + east drop yards and dock aprons; approximate.",
           "urbanRural": "Edge-of-town / farmland setting on the southeast side of Navarre OH; open fields east and south.",
           "railServed": "No rail spur enters the property; a rail line runs ~well west of the site but does not serve it."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://corporate.tractorsupply.com/newsroom/news-releases/news-releases-details/2023/Tractor-Supply-Opens-New-Distribution-Center-in-Navarre-Ohio/default.aspx",
+              "date": "2023-01-18",
+              "type": "press",
+              "claim": "TSC corporate: 900,000 sq ft DC on 117 acres in Navarre OH, 500 FT jobs, began receiving Dec 2022, shipping Feb 2023, serves ~250 stores."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.tractorsupply.careers/job/Navarre-DC-Team-Member-(Evergreen)-OH-44662/1252999600/",
+              "date": "2025-09",
+              "type": "careers",
+              "claim": "Active TSC DC Team Member postings at the Navarre, OH 44662 distribution center in 2025-2026, confirming it is operating (not still under construction)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Corporate press opened it (~2023, shipping since Feb 2023); current DC careers at 44662 confirm it is open and operating, not under construction; no closure/WARN.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -2853,146 +3066,32 @@
           "railServed": "No rail spur enters the property; nearest rail is offsite.",
           "postGateStaging": "Wide paved apron inside the gate before the dock approach provides queue/holding room.",
           "drivewayLong": "Gate-to-dock approach is long and can stack 3+ trucks."
-        }
-      },
-      {
-        "id": "11-tractor-supply",
-        "name": "Tractor Supply Distribution Center Nampa ID",
-        "type": "Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "low",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "remoteGs",
-          "preGateStaging",
-          "postGateStaging",
-          "drivewayLong",
-          "drivewayShort",
-          "backupSensitive",
-          "entryExitTogether",
-          "entryExitSeparate",
-          "entryLanes",
-          "exitLanes",
-          "fastLaneOpportunity",
-          "dockDoors",
-          "dropArea",
-          "shipRcvSeparate",
-          "connectivityIssue",
-          "multipleFacilities",
-          "scale",
-          "dropYard",
-          "multiStep"
-        ],
-        "center": {
-          "lat": 43.63125,
-          "lng": -116.58875
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 43.634,
-                "lng": -116.591
-              },
-              {
-                "lat": 43.634,
-                "lng": -116.5865
-              },
-              {
-                "lat": 43.6285,
-                "lng": -116.5865
-              },
-              {
-                "lat": 43.6285,
-                "lng": -116.591
-              }
-            ]
-          },
-          "truckGate": {
-            "ring": [
-              {
-                "lat": 43.6327,
-                "lng": -116.591
-              },
-              {
-                "lat": 43.6327,
-                "lng": -116.5904
-              },
-              {
-                "lat": 43.6321,
-                "lng": -116.5904
-              },
-              {
-                "lat": 43.6321,
-                "lng": -116.591
-              }
-            ]
-          },
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 263,
-              "pano": "_OAi25c09UnWzkgzx1OnmA",
-              "hasCoverage": true
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://ir.tractorsupply.com/newsroom/news-releases/news-releases-details/2024/Tractor-Supply-Celebrates-Grand-Opening-of-Tenth-and-Largest-Distribution-Center-in-Maumelle-Arkansas/default.aspx",
+              "date": "2024-05-14",
+              "type": "press",
+              "claim": "TSC grand opening of its tenth and largest distribution center (1.1M sq ft, $175M) in Maumelle, AR; began receiving April 2024 and shipping June 2024."
             },
-            "truckGate": {
-              "heading": 198,
-              "pano": "CZaUHNAjeiKc0KMZlLjSdg",
-              "hasCoverage": true
+            {
+              "tier": 1,
+              "url": "https://business.maumellechamber.com/member-directory/Details/tractor-supply-company-maumelle-distribution-center-850-3368025",
+              "date": "2026-06",
+              "type": "econ-dev",
+              "claim": "Maumelle Chamber of Commerce member directory lists 'Tractor Supply Company Maumelle Distribution Center #850' as an active local business."
             }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 0,
-          "trailersVisible": 0,
-          "trailerParkingCapacity": 0,
-          "truckGateCount": 1,
-          "buildingCount": 0,
-          "siteAreaAcres": 54.9,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": false,
-          "drivewayLong": false,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": false,
-          "entryExitSeparate": false,
-          "entryLanes": null,
-          "exitLanes": null,
-          "fastLaneOpportunity": false,
-          "dockDoors": "NONE",
-          "dropArea": "NONE",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "dossierExcerpt": "Supplied coords (43.634786, -116.586452) land on a road intersection at the NE\nedge of a greenfield parcel south of Ustick Rd. Web research confirmed this is\nTractor Supply's 11th distribution center (\"Project Spud\" on the architectural\ndrawings): groundbreaking 2025-04-22, 865,000 sq ft, ~$225M investment, 500+\njobs, LEED, serving 200+ PNW stores, target ops late 2026 / early 2027, at the\nNE corner of Ustick Rd and Midland Blvd — exactly this parcel.\n\nImportant disambiguation: a separate, fully-built long white-roofed warehouse\nsits ~700m to the SE (employee parking with solar carports on its west face,\nconsistent with an Amazon facility). That is NOT this site and was excluded.\nThe TSC parcel is the graded greenfield directly at the Ustick/collector corner.\n\nLocked center on the active graded development parcel: 43.63125, -116.58875.",
-        "mapsUrl": "https://www.google.com/maps/@43.63125,-116.58875,400m/data=!3m1!1e3",
-        "fieldNotes": {
-          "_status": "CONSTRUCTION-ERA. Tractor Supply broke ground 2025-04-22 on its 11th DC (865,000 sq ft, ~$225M, 500+ jobs, internal codename 'Project Spud') at the NE corner of Ustick Rd and Midland Blvd, 9640 Ustick Rd, Nampa ID. Target ops late 2026/early 2027. Maxar 2026 satellite shows only early earthwork: a graded oval pad, construction trailers, concrete tilt-up forms, pipe/material stockpiles, a temporary water-treatment pond, and a perimeter haul road. The Aug-2025 Street View caught the very start of tilt-up concrete wall panels being erected along the SW edge.",
-          "truckGate": "No gate exists yet. truckGate ring is the PLANNED/most-likely truck entrance off the new N-S collector road on the west edge; not yet built or controlled.",
-          "guardShack": "No guard booth present in any imagery; site has no built entrance structure yet.",
-          "dockDoors": "Building shell not yet erected; only partial tilt-up wall panels visible Aug-2025. No dock doors countable. Final DC will have a large dock bank (50+) once built.",
-          "dropArea": "No striped trailer parking yet; site is graded dirt.",
-          "dropYard": "Planned DC will almost certainly have a large drop yard given its 865k sq ft scale and PNW hub role serving 200+ stores, but none exists in current imagery.",
-          "buildingCount": "0 completed buildings; only construction trailers and partial wall panels. Note: a separate completed warehouse (likely an Amazon facility) sits ~700m SE and is NOT this site.",
-          "urbanRural": "Edge-of-town greenfield surrounded by farmland on Nampa's NW fringe; classified Rural.",
-          "siteAreaAcres": "54.9 ac measured over the visibly graded development parcel; the full assembled site is larger (~150+ ac with future 150k sq ft expansion pad).",
-          "perimeter": "Traced to the graded development parcel, square to the orthogonal Ustick(N)/collector-road(W) grid. Exact fenced boundary not yet established on the ground.",
-          "streetViewMeta": "Both panos are real Aug-2025 captures on the public roads bordering the parcel (perimeter pano on east-edge road; gate pano on Ustick near the NW roundabout/collector entrance)."
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Tier-1 IR press confirms grand opening with shipping from June 2024; 2+ years operational now, corroborated by active chamber listing; not under construction.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       }
     ]

@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-02T16:25:00.198Z",
+  "builtAt": "2026-06-19T04:59:45.505Z",
   "account": {
     "slug": "westrock-coffee",
     "displayName": "Westrock Coffee",
@@ -9,11 +9,11 @@
     "coverageNote": {
       "auditedCount": 6,
       "estimatedFootprint": 10,
+      "totalGlobalFootprint": 10,
+      "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Westrock Coffee operates ~10 facilities (US + Rwanda + Tanzania for green-coffee sourcing). We audited 6 US sites.",
-      "auditedScope": "US",
-      "totalGlobalFootprint": 10
+      "note": "Westrock Coffee operates ~10 facilities (US + Rwanda + Tanzania for green-coffee sourcing). We audited 6 US sites."
     },
     "featuredSiteId": "02-conway-ar-dc",
     "dossierIntro": "Westrock Coffee runs the largest US-based private-label coffee and extracts operation. 10 facilities; we audited 6. Conway AR DC has 72 dock doors. Conway AR Roast-to-RTD plant is 47 acres. 211 total dock doors. YardFlow runs the green-coffee inbound and finished-product outbound as two distinct queues on one yard graph.",
@@ -259,28 +259,6 @@
         },
         "dossierExcerpt": "The roster supplied 35.073662, -92.416857 (ROOFTOP geocode, but the pin landed\non the NE construction/laydown corner of the property). Web research confirmed\nthis is the **former Kimberly-Clark Conway paper-products plant at 480 Exchange\nAvenue**, which Westrock Coffee purchased and converted into North America's\nlargest roast-to-RTD beverage manufacturing facility — a $315M project, ~570,000\nsq ft on a ~45-acre campus, grand opening June 2024 (Arkansas Business, Dairy\nFoods, Westrock Coffee press release). Satellite probing confirmed a large\nsprawling multi-section industrial complex consistent with a converted paper\nmill. The center was locked to the main building mass at 35.0721, -92.4188.",
         "mapsUrl": "https://www.google.com/maps/@35.072100,-92.418800,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/westrock-coffee/01-conway-ar-rtd-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.0721,
-              "lng": -92.4188
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/westrock-coffee/01-conway-ar-rtd-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.0721,
-              "lng": -92.4188
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed as the former Kimberly-Clark Conway paper-products plant at 480 Exchange Avenue, now Westrock Coffee's roast-to-RTD facility ($315M, 570K sq ft, ~45 acres, opened June 2024). The roster pin sat at the NE construction/laydown corner; locked center moved SW to the main building mass at 35.0721,-92.4188.",
           "truckGate": "A sliding chain-link gate across a truck driveway is clearly visible in 2024-08 Street View on the NE side of the property (near 35.0760,-92.4188), with continuous chain-link perimeter fencing running along the warehouse face. The truck/yard side of the campus is access-controlled.",
@@ -296,6 +274,33 @@
           "postGateStaging": "Extensive paved internal yard provides holding/queue room inside the fence before the docks.",
           "drivewayLong": "The internal gate-to-dock approach is long and can stack 3+ trucks.",
           "scale": "No truck scale positively identified; marked uncertain given site scale."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.westrockcoffee.com/news/westrock-coffee-opens-industrys-largest-roast-to-ready-to-drink-manufacturing-facility-in-conway-arkansas-ahead-of-schedule/",
+              "date": "2024-06",
+              "type": "press",
+              "claim": "Westrock Coffee opens its 570,000 sq ft, $315M roast-to-RTD facility on the 45-acre Conway AR campus (480 Exchange Ave), self-operated"
+            },
+            {
+              "tier": 1,
+              "url": "https://investors.westrockcoffee.com/news-releases/news-release-details/westrock-coffee-opens-industrys-largest-roast-ready-drink",
+              "date": "2024-06",
+              "type": "press",
+              "claim": "Investor release confirming the Conway roast-to-RTD plant is open and operating"
+            }
+          ],
+          "imageryDate": "2024-08",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Westrock COFFEE (not Smurfit WestRock packaging) self-operates the Conway roast-to-RTD plant; opened June 2024, no closure/divestiture found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -434,28 +439,6 @@
         },
         "dossierExcerpt": "The roster supplied 35.058793, -92.405415. Field-checking the William J. Clark\nDrive corridor in Street View revealed the address number directly:\n**Street View (2024-07) looking NE from William J. Clark Drive shows \"1430\" on\nthe building's office-entry facade.** The \"1430\" building is the large\nwhite-roof warehouse north of the road. Center locked to its footprint at\n35.0607, -92.4067. This is the Westrock Coffee DC — $70M, 530,000 sq ft on a\n~30-acre site, 36-ft clear, ~72 dock doors, ESFR; developed by Tempus Realty\nPartners with Clark Contractors; completed late 2023 (Talk Business & Politics,\nArkansas Business, PR Newswire).\n\nNote on the roster: idx 2 and idx 3 pins are imprecise. The DC (\"1430\") is the\nNORTH white-roof building; the Clark single-serve plant (idx 3) is the gray-roof",
         "mapsUrl": "https://www.google.com/maps/@35.060700,-92.406700,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/westrock-coffee/02-conway-ar-dc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.0607,
-              "lng": -92.4067
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/westrock-coffee/02-conway-ar-dc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.0607,
-              "lng": -92.4067
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed as 1430 William J. Clark Drive. Street View (2024-07) from William J. Clark Dr looking NE shows '1430' clearly on the building's office-entry facade. This is the Westrock Coffee DC: $70M, 530,000 sq ft, ~30-acre site, 36-ft clear, ~72 dock doors, ESFR, developed by Tempus Realty Partners, completed late 2023.",
           "truckGate": "Chain-link perimeter fencing runs across the property frontage along William J. Clark Drive (visible in 2024-07 Street View and z19/z20 satellite). A truck driveway enters at the SW with a gate in the fence line; the truck yard is fully enclosed.",
@@ -470,6 +453,33 @@
           "urbanRural": "Located in the Conway industrial corridor near I-40 with surrounding commercial/industrial development — Urban.",
           "shipRcvSeparate": "Single large DC dock operation; no clearly separate ship vs. receive dock clusters — false.",
           "scale": "No truck scale identified."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.westrockcoffee.com/news/westrock-coffee-announces-development-of-new-distribution-center-in-conway-arkansas/",
+              "date": "2023-01",
+              "type": "press",
+              "claim": "Westrock Coffee develops a $70M, 530,000 sq ft DC at 1430 William J. Clark Drive, Conway (with Tempus Realty Partners), to support its Conway manufacturing"
+            },
+            {
+              "tier": 1,
+              "url": "https://talkbusiness.net/2024/01/70m-westrock-coffee-distribution-center-in-conway-up-and-running/",
+              "date": "2024-01",
+              "type": "press",
+              "claim": "The $70M Westrock Coffee Conway distribution center is up and running as of January 2024"
+            }
+          ],
+          "imageryDate": "2024-07",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Westrock COFFEE DC at 1430 William J. Clark Dr, operational since Jan 2024; Tempus-developed (leased), Westrock-operated; no closure found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -709,28 +719,6 @@
         },
         "dossierExcerpt": "The roster supplied 35.058779, -92.409215 — that pin landed ~350m too far west,\non an older orange-roofed trucking/logistics yard unrelated to Westrock. Web\nresearch established the \"Clark\" facility is a 525,000 sq ft single-serve\n(K-cup pod) plant on William J. Clark Drive — 130,000 sq ft of manufacturing\nplus fulfillment/distribution — that Westrock opened in July 2025 (Westrock\nCoffee press release, Talk Business & Politics, Food Processing).\n\nWorking the William J. Clark Drive corridor: the DC (\"1430\") is the\nnorth white-roof building (confirmed by the \"1430\" facade in Street View); the\nlarge gray-roof warehouse/manufacturing building immediately SOUTH of the DC\nis the Clark plant. Its footprint and trailer activity match a 525K sq ft\nplant. The shell is already present in 2024 imagery — consistent with a",
         "mapsUrl": "https://www.google.com/maps/@35.057900,-92.405000,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/westrock-coffee/03-conway-ar-clark-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.0579,
-              "lng": -92.405
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/westrock-coffee/03-conway-ar-clark-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.0579,
-              "lng": -92.405
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Identified as the large gray-roof warehouse/manufacturing building on William J. Clark Drive immediately SOUTH of the Westrock DC. This is the 525,000 sq ft 'Clark' single-serve (K-cup pod) facility — 130,000 sq ft manufacturing plus fulfillment/distribution — that Westrock opened July 2025. The shell appears in 2024 imagery (likely a Tempus-developed spec building that Westrock fitted out and occupied in 2025). The roster pin (-92.409215) sat ~350m too far west on an unrelated older trucking yard; center re-locked to the gray building at 35.0578,-92.4050.",
           "truckGate": "Continuous chain-link perimeter fencing surrounds the property (clearly visible in 2024-07 Street View along the south frontage and around the yard). A sliding chain-link gate across the truck driveway is visible at the NW/SW corner where the yard connects to William J. Clark Drive. The truck yard is fully enclosed.",
@@ -746,6 +734,33 @@
           "urbanRural": "Conway industrial corridor near I-40 with surrounding industrial development — Urban.",
           "scale": "No truck scale identified.",
           "imagery": "Building opened operationally July 2025; available satellite/Street View predates full Westrock occupancy. Structure is fully built in imagery, so layout audit is reliable; operational specifics carry medium confidence."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.westrockcoffee.com/news/westrock-coffee-opens-state-of-the-art-manufacturing-facility-in-arkansas-to-meet-growing-demand-for-single-serve-coffee/",
+              "date": "2025-07",
+              "type": "press",
+              "claim": "Westrock Coffee opens its 525,000 sq ft 'Clark' single-serve facility on William J. Clark Drive, Conway (130,000 sq ft manufacturing + fulfillment/distribution)"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.prnewswire.com/news-releases/westrock-coffee-opens-state-of-the-art-manufacturing-facility-in-arkansas-to-meet-growing-demand-for-single-serve-coffee-302512792.html",
+              "date": "2025-07",
+              "type": "press",
+              "claim": "PR confirming the new Conway single-serve (pod) manufacturing facility is open and operating"
+            }
+          ],
+          "imageryDate": "2024-07",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Westrock COFFEE 'Clark' single-serve plant opened July 2025 and is currently operating; building shell present in 2024 imagery, no negative found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -920,28 +935,6 @@
         },
         "dossierExcerpt": "The roster geocode (ROOFTOP, moved 95 m) lands on the correct building. Web\nsearch confirms \"Westrock Coffee Company — Roasting & Manufacturing\" at 30\nCollins Industrial Pl, North Little Rock (Little Rock Chamber listing, Yelp,\nWaze, joe.coffee, NAICS). This is Westrock's original/legacy private-label\nroasting plant predating the new Conway campus.\n\nThe building is the white-roofed, L-shaped industrial structure on the south\nside of Collins Industrial Place, inside the Collins Industrial Place\nlight-industrial subdivision. It is positively distinguished from neighbors by\nits L footprint, its own front (north) employee/visitor parking apron, and the\nroasting-plant dock arm on the southwest leg.",
         "mapsUrl": "https://www.google.com/maps/@34.829921,-92.388925,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/westrock-coffee/04-north-little-rock-ar-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.829921,
-              "lng": -92.388925
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/westrock-coffee/04-north-little-rock-ar-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.829921,
-              "lng": -92.388925
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "No controlled truck entrance. The facility sits inside the multi-tenant Collins Industrial Place industrial park; satellite and 2024 Street View show open, unmarked driveways and shared paved aprons connecting buildings — no barrier arm, sliding gate, or pinch-point checkpoint at the property line.",
           "guardShack": "No staffed booth anywhere on the site or at the park access.",
@@ -949,6 +942,32 @@
           "dropArea": "A few trailers stand near the SW dock arm; no large marked drop-stall lot belonging to Westrock. The big dirt lot full of trucks/RVs/salvage east of the building is a SEPARATE adjacent salvage/towing operation, not Westrock's yard.",
           "urbanRural": "Edge-of-town light-industrial subdivision in North Little Rock — judged Rural per the small-town-industrial rubric tiebreak.",
           "drivewayShort": "Approach from the park drive to the dock arm is short (1-2 trucks)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.westrockcoffee.com/news/westrock-coffee-opens-state-of-the-art-manufacturing-facility-in-arkansas-to-meet-growing-demand-for-single-serve-coffee/",
+              "date": "2025-07",
+              "type": "press",
+              "claim": "Westrock Coffee names 'its original production facility in North Little Rock' as a current operating site alongside the new Conway plants"
+            },
+            {
+              "tier": 3,
+              "url": "https://joe.coffee/locations/ar/north-little-rock/westrock-coffee-company-roasting-manufacturing-north-little-rock/",
+              "date": "2025-12",
+              "type": "locator",
+              "claim": "Third-party locator lists Westrock Coffee Roasting & Manufacturing at 30 Collins Industrial Pl, North Little Rock AR (corroborating only)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Westrock COFFEE's original roasting plant (Westrock Coffee Roasting LLC), 30 Collins Industrial Pl, North Little Rock; named as a current site in 2025 PR alongside the new Conway plants; no closure found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1156,28 +1175,6 @@
         },
         "dossierExcerpt": "The roster geocode (ROOFTOP, moved 90 m) lands on the correct building cluster.\nWeb search confirms S&D Coffee & Tea / Westrock Coffee at 300 Concord Parkway\nSouth, Concord NC — the legacy S&D headquarters and primary custom-roasting and\niced-tea/extract complex, in operation since 1927 and acquired by Westrock\nCoffee. CoPack Connect, Dun & Bradstreet, Encyclopedia.com and Panjiva buyer\nrecords all tie 300 Concord Parkway South to S&D Coffee roasting operations.\n\nThe site is the large multi-building industrial campus on the NW side of\nConcord Parkway South. It is distinguished from the unrelated big-box retail\nand car dealership on the opposite (SE) side of the parkway, and from idx 6\n(101 Commercial Park Dr SW, ~0.4 mi SW — a separate building).",
         "mapsUrl": "https://www.google.com/maps/@35.396271,-80.614895,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/westrock-coffee/05-concord-nc-roasting-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.396271,
-              "lng": -80.614895
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/westrock-coffee/05-concord-nc-roasting-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.396271,
-              "lng": -80.614895
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "No barrier arm or sliding gate found at the truck entrance off the campus drive. The truck yard is reached by a curved private campus drive from Concord Parkway South; satellite shows wide open paved aprons and no checkpoint pinch-point. Some campus drives off Concord Pkwy could not be Street-Viewed at the actual yard entrance (2017/2026 panos cover the highway frontage and the across-road dealership side), so this is marked uncertain — but no gate structure is visible in overhead imagery.",
           "guardShack": "No staffed booth visible at the yard entrance or along the campus drive.",
@@ -1187,6 +1184,32 @@
           "fastLaneOpportunity": "Wide paved yard aprons and ample maneuvering width — physical room to add a bypass/express lane.",
           "urbanRural": "Located on Concord Parkway South, a busy multi-lane signalized arterial within the Charlotte-metro fabric (apartments, big-box retail, dealerships adjacent) — Urban.",
           "postGateStaging": "Large paved yard between the campus entrance and the dock doors gives interior holding room."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.westrockcoffee.com/news/westrock-coffee-announces-major-plant-expansions-including-nations-largest-roasting-to-ready-to-drink-packaging-facility/",
+              "date": "2021-12",
+              "type": "press",
+              "claim": "Westrock Coffee confirms its Concord NC (S&D Coffee & Tea) campus as a major center of operations with continued expansion of roasting/extract facilities"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.westrockcoffee.com/news/westrock-coffee-creates-financial-services-center-in-nc-focused-on-strategic-growth/",
+              "date": "2024",
+              "type": "press",
+              "claim": "Westrock describes Concord NC as 'the heart of their coffee, tea, extracts, and ingredients manufacturing operations' and is expanding extract capacity there"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Westrock COFFEE (S&D legacy, acquired 2020) self-operates the Concord NC roasting/extract campus; named a current major operations center, capacity being expanded; no closure/divestiture found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1297,8 +1320,7 @@
               ]
             }
           ],
-          "staging": null,
-          "streetViewMeta": {}
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 9,
@@ -1371,28 +1393,6 @@
         },
         "dossierExcerpt": "The roster geocode for this address (ROOFTOP) moved 1693 m, so the building was\nverified independently rather than trusting the pin. Web search confirms S&D\nCoffee & Tea at 101 Commercial Park Dr SW, Concord NC (Waze, BusinessYab,\nManta). Panjiva buyer records list an \"S&D Tea Annex\" at 101 Commercial Park\nDrive SW — corroborating that this is a separate S&D/Westrock facility (an\nextract/tea node), not the main campus.\n\nThe building is the large warehouse on Commercial Park Drive SW, inside the\nCommercial Park Drive industrial subdivision, against a wooded edge to the south\nand east. It is ~0.4 mi southwest of idx 5 (300 Concord Parkway South). The two\nare confirmed distinct buildings: idx 5 is the multi-building roasting campus on\nthe parkway; idx 6 is a single warehouse on the Commercial Park loop. They were",
         "mapsUrl": "https://www.google.com/maps/@35.392817,-80.616512,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/westrock-coffee/06-concord-nc-commercial-park-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.392817,
-              "lng": -80.616512
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/westrock-coffee/06-concord-nc-commercial-park-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.392817,
-              "lng": -80.616512
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "No controlled truck entrance. Multiple Street View captures (2019, 2020, 2023, 2026) of Commercial Park Drive SW and the building's dock side show open driveways, no barrier arm, no sliding gate, and no checkpoint pinch-point. The only fencing seen is a small chain-link enclosure around process/utility equipment on the building flank — not a perimeter or gate.",
           "guardShack": "No staffed booth visible at the entrance or anywhere on the parcel.",
@@ -1401,6 +1401,32 @@
           "urbanRural": "Sits in the Commercial Park Drive SW industrial subdivision within the Charlotte-metro / Concord fabric, near big-box retail and a signalized arterial — Urban.",
           "drivewayShort": "Short approach from the Commercial Park loop road to the dock bank (1-2 trucks).",
           "locationDisambiguation": "Roster geocode for this address moved 1693 m. The building was independently verified at 101 Commercial Park Drive SW (Waze, BusinessYab, Panjiva 'S&D Tea Annex' buyer records) — a distinct facility ~0.4 mi SW of idx 5 (300 Concord Pkwy S). Confirmed as the correct, separate building; not confused with idx 5."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.westrockcoffee.com/news/westrock-coffee-announces-major-plant-expansions-including-nations-largest-roasting-to-ready-to-drink-packaging-facility/",
+              "date": "2021-12",
+              "type": "press",
+              "claim": "Westrock Coffee announces expansion of its Commercial Park extract manufacturing facility in Concord NC, adding two automated lines (+50% extract capacity) for extract, tea and herbal products"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.arkansasedc.com/news-events/newsroom/detail/2021/12/16/westrock-coffee-announces-major-plant-expansions---including-nation-s-largest-roasting-to-ready-to-drink-packaging-facility",
+              "date": "2021-12",
+              "type": "press",
+              "claim": "Confirms the Concord Commercial Park extract facility expansion (modernized bottling, two new lines), Westrock-operated"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Westrock COFFEE (S&D legacy) self-operates the separate Concord Commercial Park Dr SW extract/tea facility, expanded 2021-2022; distinct from the main S&D campus; no closure found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       }
     ]

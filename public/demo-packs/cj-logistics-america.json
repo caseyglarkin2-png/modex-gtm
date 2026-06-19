@@ -1,13 +1,13 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-10T14:31:47.604Z",
+  "builtAt": "2026-06-19T04:59:31.060Z",
   "account": {
     "slug": "cj-logistics-america",
     "displayName": "CJ Logistics America",
     "archetype": "3pl",
-    "siteCount": 27,
+    "siteCount": 26,
     "coverageNote": {
-      "auditedCount": 27,
+      "auditedCount": 26,
       "estimatedFootprint": 50,
       "totalGlobalFootprint": 250,
       "auditedScope": "US",
@@ -34,15 +34,15 @@
     "archetypeMix": {
       "#10": 8,
       "#7": 1,
-      "#9": 8,
+      "#9": 7,
       "#3": 10
     },
     "totals": {
-      "dockDoors": 2134,
-      "trailerCapacity": 3005,
-      "gates": 29,
+      "dockDoors": 2099,
+      "trailerCapacity": 2965,
+      "gates": 28,
       "railServed": 4,
-      "acres": 1137.6999999999998
+      "acres": 1113.8999999999999
     },
     "sites": [
       {
@@ -171,28 +171,6 @@
         },
         "dossierExcerpt": "The roster pin (41.406701, -88.139492, GEOMETRIC_CENTER, moved 5 m) landed on\nW Mississippi Street between two large warehouses inside the CenterPoint\nIntermodal Center, Elwood. Web research (Racklify, Illinois trucking/warehousing\ndirectory, SIDINGS/Standard Rail) confirms CJ Logistics America operates at\n21705 West Mississippi Street — a 1,024,125 sq ft FTZ warehouse with 116 dock\ndoors, 5 rail doors and 200 yard spots. Satellite probing identified the long\nN-S building immediately south of the pin, with the employee parking lot facing\nW Mississippi St and the blue-accent corporate frontage visible in Street View\n(2025-05). Building center locked at 41.4040, -88.1384.",
         "mapsUrl": "https://www.google.com/maps/@41.4040,-88.1384,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cj-logistics-america/01-cj-logistics-elwood-il-logistics-center-1-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.404,
-              "lng": -88.1384
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cj-logistics-america/01-cj-logistics-elwood-il-logistics-center-1-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.404,
-              "lng": -88.1384
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Truck yard is fully enclosed by chain-link perimeter fencing (visible in Street View 2025-05). The truck driveway off W Mississippi St funnels into a controlled, fenced yard.",
           "guardShack": "Small blue-roofed guard-booth structure sits mid-driveway inside the truck yard entrance (zoom-20 satellite at 41.4058,-88.1401), with a truck being processed beside it - footprint ~1-2 vehicle spaces.",
@@ -204,6 +182,32 @@
           "urbanRural": "Edge-of-town location within the CenterPoint Intermodal Center, surrounded by farmland to the north - rural setting despite the industrial cluster.",
           "entryLanes": "Single shared entry/exit driveway off W Mississippi St; lane split not clearly resolvable from imagery.",
           "scale": "No truck scale clearly visible; left in uncertainFields."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://info.america.cjlogistics.com/cjl-open-space-elwood1",
+              "date": "2024-07",
+              "type": "press",
+              "claim": "CJ Logistics own open-space marketing page for the Elwood 1 IL campus (~1M SF, 116 dock doors, 200 yard spots, 5 rail doors) at CenterPoint Intermodal Center"
+            },
+            {
+              "tier": 1,
+              "url": "https://jobs.jobvite.com/cjlogisticsamerica/jobs",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active CDL Class A driver reqs based in Elwood, IL on CJ own jobvite ATS"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "CJ flagship megasite at CenterPoint; own marketing pages + current Elwood jobvite reqs; no closure negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -342,28 +346,6 @@
         },
         "dossierExcerpt": "The roster supplied no street address and a GEOMETRIC_CENTER geocode of\n\"CenterPoint Intermodal Center, Elwood.\" That point (41.391443, -88.153535)\nlands squarely inside the BNSF Logistics Park Chicago intermodal rail yard\n(rows of containers and rail tracks) — not a building.\n\nWeb research established the facility's real address: CJ Logistics' own\nopen-space sales sheet lists **Elwood 2 at 21012 W. Mississippi Street, Elwood,\nIL**, Q4 2025, 1.1M SF, \"SPACE IS OPEN.\" This is the NEXUS Project second\nElwood distribution center — a build-to-suit by ARCO/Murray, groundbreaking\n10 October 2024, full operations expected H1 2026.\n\nDespite extensive satellite probing along the W Mississippi Street corridor\nand across the CenterPoint Intermodal Center (east, west, south of the existing\nCJ LC1 at 21705 W Mississippi St), **no distinct construction site or new",
         "mapsUrl": "https://www.google.com/maps/@41.391443,-88.153535,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cj-logistics-america/02-cj-logistics-elwood-il-logistics-center-2-nexus-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.391443,
-              "lng": -88.153535
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cj-logistics-america/02-cj-logistics-elwood-il-logistics-center-2-nexus-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.391443,
-              "lng": -88.153535
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "EXACT BUILDING NOT POSITIVELY IDENTIFIED. Address confirmed via CJ Logistics' own open-space page: 21012 W. Mississippi Street, Elwood, IL (Elwood 2 / NEXUS). The roster geocode (GEOMETRIC_CENTER of CenterPoint Intermodal Center) landed inside the BNSF intermodal rail yard. This is a brand-new build-to-suit (ARCO/Murray, groundbreaking 10 Oct 2024, full ops H1 2026); current Maxar imagery of the CenterPoint corridor shows only established buildings - no distinct bare-earth construction pad could be matched to 21012 W Mississippi St, and the new building cannot be told apart from the dozens of similar CenterPoint warehouses. Coordinates and perimeter retained from the roster geocode are APPROXIMATE / UNRELIABLE.",
           "dockDoorCount": "Published spec (CJ open-space sheet / Business Wire): 130 dock positions, 120 fully equipped. 1,105,500 SF, 40 ft clear height, 6,500 SF office with driver area.",
@@ -372,6 +354,25 @@
           "railServed": "Marketed as adjacent to BNSF and Union Pacific rail lines; CenterPoint Intermodal Center is rail-served. Whether a spur enters the building parcel is unverified.",
           "urbanRural": "CenterPoint Intermodal Center, Elwood - edge-of-town industrial park surrounded by farmland; rural setting.",
           "review": "Flagged for human review - re-audit once newer satellite imagery resolves the completed building, or once a precise parcel/coordinate is published."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://info.america.cjlogistics.com/cjl-open-space-elwood2",
+              "date": "2025-01",
+              "type": "press",
+              "claim": "CJ Logistics own page for 21012 W. Mississippi St, Elwood IL (1,106,256 SF, 120+87 docks, ~73 acres) - exact address match"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Exact-address match on CJ own facility page for the Elwood 2 building on W Mississippi St; no negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -521,28 +522,6 @@
         },
         "dossierExcerpt": "The roster pin (40.13221, -77.352058, ROOFTOP, moved 33 m) landed at the SW\ncorner of a single very large distribution warehouse off Centerville Road,\nNewville PA. The building is unambiguous - a ~500 m-long warehouse standing\nalone amid open farmland, with continuous dock-door banks and hundreds of\ntrailers. This matches the Racklify listing for CJ Logistics Newville\n(1,138,364 sq ft - the largest single CJ DC in the roster). Building center\nlocked at 40.13260, -77.35050.",
         "mapsUrl": "https://www.google.com/maps/@40.13260,-77.35050,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cj-logistics-america/03-cj-logistics-newville-pa-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.1326,
-              "lng": -77.3505
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cj-logistics-america/03-cj-logistics-newville-pa-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.1326,
-              "lng": -77.3505
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Site is enclosed by chain-link perimeter fencing (visible in Street View 2025-06 along Centerville Road). A single wide truck driveway curves off Centerville Road into the truck yard - a controlled entry point.",
           "guardShack": "No guard-booth structure visible at the entrance driveway in zoom-20/21 satellite. The standalone structure on the SW farmland is a barn/silo, not a guard shack.",
@@ -554,6 +533,32 @@
           "urbanRural": "Surrounded by open farmland in rural Cumberland County PA - clearly rural.",
           "railServed": "No rail spur visible entering the property; building is highway-served (adjacent to a multi-lane highway, US-11 corridor).",
           "entryLanes": "Single shared entry/exit driveway; lane split not resolvable from imagery."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://jobs.jobvite.com/cjlogisticsamerica/job/okNGifwP",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active CJ Logistics America Warehouse Supervisor req for the Newville, PA facility on CJ own jobvite ATS"
+            },
+            {
+              "tier": 1,
+              "url": "https://jobs.jobvite.com/cjlogisticsamerica/jobs",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "CJ jobvite forklift reqs naming DSC Logistics in Newville, PA at 801 Centerville Road - exact address match (DSC legacy)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Current CJ jobvite reqs name 801 Centerville Rd Newville exactly (legacy DSC site); no closure negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -675,28 +680,6 @@
         },
         "dossierExcerpt": "The roster pin (35.450931, -119.198152, ROOFTOP but moved 6,878 m from the\noriginal imprecise coords) landed at the SE corner of a large white-roofed\nwarehouse in the Wonderful Industrial Park area of Shafter, CA. Web research\n(Dun & Bradstreet, Racklify) confirms CJ Logistics America operates at\n3800 Fanucchi Way, Shafter — a ~1,063,337 sq ft distribution warehouse. The\nwhite-roofed building (rooftop solar) immediately N/NW of the pin is the CJ\nfacility. Building center locked at 35.45210, -119.19850.",
         "mapsUrl": "https://www.google.com/maps/@35.45210,-119.19850,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cj-logistics-america/04-cj-logistics-shafter-ca-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.4521,
-              "lng": -119.1985
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cj-logistics-america/04-cj-logistics-shafter-ca-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.4521,
-              "lng": -119.1985
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Controlled truck entrance at the SE corner of the property - the entry driveway funnels through a checkpoint with gate arms/fencing across the truck lane (visible in zoom-20 satellite).",
           "guardShack": "A distinct guard-booth structure sits in the middle of the entry driveway (zoom-19/20 satellite at ~35.4507,-119.1972), with a tractor-trailer stopped beside it being processed - clear staffed booth.",
@@ -708,6 +691,25 @@
           "railServed": "No rail spur visible entering the property.",
           "entryLanes": "Single shared entry/exit driveway through the guard booth; lane split not resolvable from imagery.",
           "scale": "No truck scale clearly visible; left in uncertainFields."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://jobs.jobvite.com/cjlogisticsamerica/jobs",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active 2nd Shift Forklift Operator req based in Shafter, CA on CJ own jobvite ATS"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Current Shafter forklift req on CJ own ATS (Wonderful Industrial Park area); no closure negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -808,28 +810,6 @@
         },
         "dossierExcerpt": "The roster pin (33.936599, -117.306961, ROOFTOP, moved 7,034 m from the\noriginal imprecise coords) landed on a large warehouse in a dense Riverside\nindustrial cluster. Web research (Racklify, Waze, Chamber of Commerce) confirms\nCJ Logistics America at 6275 Lance Drive, Riverside CA 92507 - a ~1,012,995\nsq ft distribution warehouse. The large N-S building under the pin is the CJ\nfacility. Building center locked at 33.93700, -117.30720.",
         "mapsUrl": "https://www.google.com/maps/@33.93700,-117.30720,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cj-logistics-america/05-cj-logistics-riverside-ca-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.937,
-              "lng": -117.3072
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cj-logistics-america/05-cj-logistics-riverside-ca-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.937,
-              "lng": -117.3072
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Truck entrance at the S/SE side of the building is a controlled checkpoint - the truck lane has anti-tailgating chevron markings and the yard is enclosed (zoom-19/21 satellite).",
           "guardShack": "A small orange-roofed guard-booth structure sits at the truck-yard entrance on the south side of the building (zoom-19 satellite at ~33.9358,-117.3063), beside the checkpoint lane.",
@@ -841,6 +821,32 @@
           "railServed": "No rail spur visible entering the property.",
           "entryLanes": "Single shared entry/exit driveway through the guard booth; lane split not resolvable.",
           "scale": "No truck scale clearly visible; left in uncertainFields."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.ziprecruiter.com/co/Cj-Logistics-America/Jobs/-in-Riverside,CA",
+              "date": "2026-03",
+              "type": "careers",
+              "claim": "7 current CJ Logistics openings in Riverside, CA as of Mar 2026 incl. a role with full shift detail - current operation post-WARN"
+            },
+            {
+              "tier": 2,
+              "url": "https://www.warntracker.com/company/cj-logistics-america",
+              "date": "2025-04",
+              "type": "press",
+              "claim": "NEGATIVE: 111-employee WARN notice filed for Riverside CA in Apr 2025 (no specific address)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FLAG: Apr-2025 Riverside WARN (111, no address) is a real negative, but CJ actively hiring 7 Riverside roles as of Mar 2026; probable pending exact-address confirmation.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -962,28 +968,6 @@
         },
         "dossierExcerpt": "The roster pin (32.622645, -96.684933, ROOFTOP, moved 3,374 m) landed directly\non a large white-roofed warehouse in Southport Logistics Park, Wilmer TX. Web\nresearch (CJ open-space page, Waze, businessyab) confirms CJ Logistics America\noperates at 1200 E. Fulghum Rd. - Southport Logistics Park Building 1, a\n1.1M sq ft DC with 141 dock doors and 310 yard spots. Building center locked at\n32.62280, -96.68500.",
         "mapsUrl": "https://www.google.com/maps/@32.62280,-96.68500,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cj-logistics-america/06-cj-logistics-wilmer-tx-southport-logistics-park-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 32.6228,
-              "lng": -96.685
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cj-logistics-america/06-cj-logistics-wilmer-tx-southport-logistics-park-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 32.6228,
-              "lng": -96.685
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "CJ's own facility sheet explicitly describes Wilmer as a 'gated lot with a Welcome Center.' Truck yard is enclosed by chain-link perimeter fencing (confirmed in Street View 2026-02 along E Fulghum Rd); the access driveway off Fulghum Rd is the controlled truck entry.",
           "guardShack": "The 'Welcome Center' is a staffed driver check-in facility at the gated truck entrance - functions as the guard shack. Check-in lane with chevron markings visible near the NW entry in zoom-20 satellite.",
@@ -995,6 +979,25 @@
           "railServed": "No rail spur visible entering the property; facility is 0.5 miles from the nearest intermodal yard but not directly rail-served.",
           "entryLanes": "Estimated 2 inbound lanes at the gated entry; not precisely resolvable.",
           "scale": "No truck scale clearly visible; left in uncertainFields."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://info.america.cjlogistics.com/cjl-open-space-wilmer",
+              "date": "2025-01",
+              "type": "press",
+              "claim": "CJ Logistics own open-space page for 1200 E. Fulghum Rd, Wilmer TX (1.1M SF building) - Southport Logistics Park"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "CJ own facility/open-space page for the Wilmer (Southport) building; no negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1124,28 +1127,6 @@
         },
         "dossierExcerpt": "The roster pin (33.860652, -117.264993, ROOFTOP, moved 3,955 m from the\noriginal imprecise coords) landed on a large warehouse in a dense Perris CA\nindustrial cluster. Web research (Dun & Bradstreet, Racklify, Chamber of\nCommerce) confirms CJ Logistics America at 17789 Harvill Ave, Perris CA 92570 -\na ~730,000 sq ft distribution warehouse (a legacy DSC Logistics site).\nBuilding center locked at 33.86070, -117.26520.",
         "mapsUrl": "https://www.google.com/maps/@33.86070,-117.26520,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cj-logistics-america/07-cj-logistics-perris-ca-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.8607,
-              "lng": -117.2652
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cj-logistics-america/07-cj-logistics-perris-ca-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.8607,
-              "lng": -117.2652
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Truck yard is enclosed by black metal perimeter fencing with a sliding gate at the truck-court entrance (clearly visible in Street View 2026-02 at the NW truck-court driveway).",
           "guardShack": "No staffed guard-booth structure visible at the gated truck entrance in satellite or Street View - the gate appears remotely controlled.",
@@ -1158,6 +1139,32 @@
           "railServed": "No rail spur visible entering the property.",
           "entryLanes": "Single gated truck-court entry; lane split not resolvable from imagery.",
           "scale": "No truck scale clearly visible; left in uncertainFields."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://jobs.jobvite.com/cjlogisticsamerica/job/oWicxfwH",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active CJ Logistics Forklift Operator req in Perris, CA on CJ own jobvite ATS"
+            },
+            {
+              "tier": 1,
+              "url": "https://jobs.jobvite.com/cjlogisticsamerica/job/oN8Cefwv",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active CJ Logistics Forklift Operators req for the Perris CA warehouse on CJ own jobvite ATS"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Multiple current Perris forklift reqs on CJ own ATS (~20 openings as of Jun 2026); no closure negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1294,28 +1301,6 @@
         },
         "dossierExcerpt": "- Name: CJ Logistics - Champaign IL\n- Type: Distribution Center\n- Address: 710 North Mattis Avenue, Champaign, IL 61821\n- Resolved coordinates: 40.123100, -88.274000 (building center)",
         "mapsUrl": "https://www.google.com/maps/@40.123100,-88.274000,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cj-logistics-america/08-cj-logistics-champaign-il-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.1231,
-              "lng": -88.274
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cj-logistics-america/08-cj-logistics-champaign-il-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.1231,
-              "lng": -88.274
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Single wide signalized entrance drive off N Mattis Ave at SW corner. No barrier arm, sliding/swing gate, or pinch-point checkpoint visible in z21 satellite or 2025-08 Street View. Drive is open through a gap in the chain-link perimeter fence; a Walmart monument sign sits at the entrance. Open driveway = no controlled truck gate.",
           "guardShack": "No guard booth structure beside the entrance lane in satellite or Street View.",
@@ -1328,6 +1313,32 @@
           "siteAreaAcres": "Estimated from perimeter box (~480m N-S x ~510m E-W of usable yard); east trailer yard partly shared with neighbor so figure is approximate.",
           "dockDoorCount": "South face long bank plus east face bank; ~110 doors estimated from regular bay rhythm across two faces - approximate.",
           "urbanRural": "Inside Champaign IL metro fabric - city streets, residential neighborhoods, and a large industrial cluster surround the site."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.facebook.com/cjlogisticsamerica/posts/cj-logistics-is-currently-hiring-forklift-operators-for-our-champaign-il-locatio/387067059580324/",
+              "date": "2024",
+              "type": "careers",
+              "claim": "CJ Logistics own page advertises hiring forklift operators for our Champaign, IL location"
+            },
+            {
+              "tier": 1,
+              "url": "https://jobs.jobvite.com/cjlogisticsamerica/jobs",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "CJ Logistics careers system carries active Illinois warehouse-ops requisitions; Champaign forklift roles posted"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active CJ-branded forklift hiring at the Champaign IL site and no WARN/closure; real warehouse with truck yard.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1478,28 +1489,6 @@
         },
         "dossierExcerpt": "- Name: CJ Logistics - Glendale AZ\n- Type: Distribution Center\n- Address: 5215 North Alsup Road, Glendale, AZ 85309 (LoopNet lists Litchfield\n  Park, AZ 85340 — the site straddles the Glendale/Litchfield Park boundary)\n- Resolved coordinates: 33.509600, -112.399200 (building center)",
         "mapsUrl": "https://www.google.com/maps/@33.509600,-112.399200,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cj-logistics-america/09-cj-logistics-glendale-az-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.5096,
-              "lng": -112.3992
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cj-logistics-america/09-cj-logistics-glendale-az-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.5096,
-              "lng": -112.3992
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Single truck entrance is an open driveway off the E-W public road (N Alsup Rd / industrial collector) at the SW corner of the property. No barrier arm, sliding/swing gate, guard booth, or checkpoint pinch-point visible in z20 satellite (2026) or 2024 Street View. The dock apron is not enclosed by perimeter fence - open desert site. Open driveway = no controlled truck gate.",
           "guardShack": "No guard booth structure at the entrance in any view.",
@@ -1514,6 +1503,32 @@
           "connectivityIssue": "Site is on the metro fringe but not deeply isolated - within an emerging industrial corridor near Glendale Municipal Airport; cellular coverage likely adequate, marked false (medium confidence).",
           "siteAreaAcres": "Estimated from the developed parcel (building + south apron + parking, ~320m x ~510m); the large vacant lot to the east is excluded.",
           "railServed": "No rail spur into the property; no rail line adjacent."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://america.cjlogistics.com/newsroom/2023/12/warehouse-space-available-in-phoenix-metro-area/",
+              "date": "2023-12",
+              "type": "press",
+              "claim": "CJ own newsroom: CJ Logistics currently operates in one half of the building in Glendale AZ, 331,686 SF available, 76-acre lot, 216 trailer stalls"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.ziprecruiter.com/co/Cj-Logistics/Jobs/-in-Glendale,AZ",
+              "date": "2026-05",
+              "type": "careers",
+              "claim": "Current CJ Logistics job postings in Glendale AZ (May 2026)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "CJ own press confirms it operates the Glendale AZ building (large freight DC with trailer yard); active jobs, no closure/WARN.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1615,28 +1630,6 @@
         },
         "dossierExcerpt": "- Name: CJ Logistics - Breinigsville PA\n- Type: Distribution Center\n- Address: 400 Nestle Way, Breinigsville, PA 18031\n- Resolved coordinates: 40.572700, -75.632400 (building center)",
         "mapsUrl": "https://www.google.com/maps/@40.572700,-75.632400,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cj-logistics-america/10-cj-logistics-breinigsville-pa-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.5727,
-              "lng": -75.6324
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cj-logistics-america/10-cj-logistics-breinigsville-pa-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.5727,
-              "lng": -75.6324
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Controlled truck entrance at the SW corner: a guard-booth structure sits on a raised island in the truck driveway, with the lane splitting in/out around it - a clear checkpoint pinch-point. Internal pavement markings read 'ALL TRUCKS' directing truck flow. Confirmed in z20-z21 satellite.",
           "guardShack": "Small dark-roofed booth structure on a raised island in the truck lane at the SW entrance, with a vehicle parked beside it - classic guard shack footprint. Visible in z19-z20 satellite.",
@@ -1649,6 +1642,25 @@
           "urbanRural": "Site is in the Breinigsville/Lehigh Valley industrial corridor - a large warehouse cluster on the edge of farmland and woods, not within dense metro fabric; judged Rural per the broader edge-of-town setting.",
           "siteAreaAcres": "Estimated from perimeter box (~455m x ~380m) covering the CJ building and its trailer yards.",
           "facilityNote": "400 Nestle Way is a legacy DSC Logistics distribution center; DSC was acquired by and is now operated as CJ Logistics America. The white-roof building is the CJ DC; the adjacent red/dark building to the NE is the Nestle plant (separate facility)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://web.lehighvalleychamber.org/Logistics/CJ-Logistics-America-1596",
+              "date": "2025",
+              "type": "econ-dev",
+              "claim": "Lehigh Valley Chamber of Commerce business directory lists CJ Logistics America operating at 400 Nestle Way, Breinigsville PA"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "CJ-run Nestle-client DC at 400 Nestle Way (ex-DSC); chamber directory + active adjacent Nestle complex, no WARN/closure; freight DC with truck yard.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1818,28 +1830,6 @@
         },
         "dossierExcerpt": "- Name: CJ Logistics - Tinley Park IL\n- Type: Distribution Center\n- Address: 16901 South Cicero Avenue, Tinley Park, IL 60478\n- Resolved coordinates: 41.585600, -87.733400 (building center)",
         "mapsUrl": "https://www.google.com/maps/@41.585600,-87.733400,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cj-logistics-america/11-cj-logistics-tinley-park-il-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.5856,
-              "lng": -87.7334
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cj-logistics-america/11-cj-logistics-tinley-park-il-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.5856,
-              "lng": -87.7334
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Single truck entrance is an open driveway off S Cicero Ave at the SW corner of the property. Pavement turn-arrow markings are present but there is no barrier arm, sliding/swing gate, guard booth, or checkpoint pinch-point in z19-z20 satellite (2026) or 2024 Street View. Open driveway = no controlled truck gate.",
           "guardShack": "No guard booth structure at the entrance in any view.",
@@ -1854,6 +1844,25 @@
           "siteAreaAcres": "Estimated from perimeter box (~435m x ~375m) covering the building, truck court, and surrounding parking.",
           "railServed": "No rail spur into the property; no rail line adjacent (I-80 borders the SE).",
           "facilityNote": "Racklify lists the Tinley Park CJ facility at 305,545 sq ft. The 2026 satellite shows a large, modern but lightly-used building with an empty truck court."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 3,
+              "url": "https://racklify.com/warehouses/cj-logistics-3-in-tinley-park-il/",
+              "date": "2025",
+              "type": "press",
+              "claim": "CJ Logistics listed as operating a 3PL/fulfillment warehouse at 16901 S Cicero Ave, Tinley Park IL 60478"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FLAG: no clean Tier-1 CJ press/locator for the exact Tinley Park building, but listed as a CJ warehouse and no WARN/contract-loss/closure negative found; probable pending CJ-direct positive.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1957,28 +1966,6 @@
         },
         "dossierExcerpt": "- Name: CJ Logistics - Fontana CA\n- Type: Distribution Center\n- Address: 13204 Jurupa Avenue, Fontana, CA 92337\n- Resolved coordinates: 34.049300, -117.517400 (building center)",
         "mapsUrl": "https://www.google.com/maps/@34.049300,-117.517400,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cj-logistics-america/12-cj-logistics-fontana-ca-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.0493,
-              "lng": -117.5174
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cj-logistics-america/12-cj-logistics-fontana-ca-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.0493,
-              "lng": -117.5174
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "The large east-side truck yard is enclosed by chain-link fence (confirmed in multiple 2023-2025 Street Views) with a single wide driveway opening off Jurupa Ave at the SE corner - a controlled fenced enclosure with one pinch-point entrance. A sliding gate at the opening is implied by the perimeter fence but could not be positively resolved in imagery; classed truckGate true with medium confidence.",
           "guardShack": "No guard booth structure visible at the truck-yard entrance in z21 satellite or Street View.",
@@ -1993,6 +1980,32 @@
           "railServed": "No rail spur; a flood-control channel (not rail) borders the east side of the truck yard.",
           "siteAreaAcres": "Estimated from perimeter box (~323m x ~369m) covering the building, east truck yard, and south parking.",
           "facilityNote": "Racklify lists the Fontana CJ facility at 250,430 sq ft. CJ Logistics America operates a 3PL/fulfillment DC here; a B&G Foods FSIS-inspected establishment is associated with CJ Logistics America in Fontana."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://jobs.jobvite.com/cjlogisticsamerica/jobs",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "CJ Logistics careers carries active Southern California warehouse-ops roles; Fontana CJ openings live for 13204 Jurupa Ave"
+            },
+            {
+              "tier": 2,
+              "url": "https://www.warntracker.com/company/cj-logistics-america",
+              "date": "2026-02",
+              "type": "press",
+              "claim": "The only Fontana WARN (71 layoffs, eff. Apr 30 2026) is at 10825 Production Ave, a DIFFERENT building than the audited Jurupa Ave site"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FLAG: Audited coord maps to CJ 13204 Jurupa Ave Fontana DC (west, active hiring); the recent Fontana WARN closure is the separate Production Ave building, so it does not reject this site. Worth a coord double-check.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2131,28 +2144,6 @@
         },
         "dossierExcerpt": "- Name: CJ Logistics - Gainesville GA (Cold Storage)\n- Type: Cold Storage Distribution Center\n- Address: 3875 Cornelia Highway, Gainesville, GA 30507\n- Resolved coordinates: 34.380000, -83.718800 (building center)",
         "mapsUrl": "https://www.google.com/maps/@34.380000,-83.718800,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cj-logistics-america/13-cj-logistics-gainesville-ga-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.38,
-              "lng": -83.7188
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cj-logistics-america/13-cj-logistics-gainesville-ga-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.38,
-              "lng": -83.7188
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Single shared access road winds up from Cornelia Highway (US-23) to the hilltop pad. No barrier arm, sliding/swing gate, guard booth, or checkpoint pinch-point visible along the access road or at the dock-yard entrance in z20-z21 satellite. Open driveway = no controlled truck gate.",
           "guardShack": "No guard booth structure along the access road or at the building in any view.",
@@ -2167,6 +2158,25 @@
           "siteAreaAcres": "Estimated from the graded pad perimeter (~312m x ~303m).",
           "railServed": "No rail spur into the property; facility is near the future Northeast Georgia Inland Port but not currently rail-served.",
           "facilityNote": "New CJ Logistics America cold storage warehouse, opened Nov 2024; 270,000 sq ft, 30,000 racked pallet positions, 3 storage rooms (finished goods, bakery, proteins), Alta EXPERT refrigeration + QFM blast freezing, USDA export office on-site."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://america.cjlogistics.com/newsroom/2024/11/cj-logistics-america-opens-new-cold-storage-warehouse-in-georgia/",
+              "date": "2024-11",
+              "type": "press",
+              "claim": "CJ own newsroom: opened 270,000 SF cold storage warehouse in Gainesville GA (Nov 2024), 30,000 racked pallet positions, blast freezing, on-site USDA office"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "CJ-operated cold storage DC opened Nov 2024 per CJ own press; current freight cold-storage facility with truck yard, no negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2325,28 +2335,6 @@
         },
         "dossierExcerpt": "- Name: CJ Logistics - New Century KS (Cold Storage)\n- Type: Cold Storage Distribution Center\n- Address: 27302 W 159th Street, New Century, KS 66031 (roster gave the\n  cross-streets 159th Street & Lenexa Parkway; exact street number 27302\n  resolved via the Johnson County Post tax-abatement article)\n- Resolved coordinates: 38.842000, -94.901500 (best-effort parcel estimate)",
         "mapsUrl": "https://www.google.com/maps/@38.842000,-94.901500,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cj-logistics-america/14-cj-logistics-new-century-ks-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 38.842,
-              "lng": -94.9015
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cj-logistics-america/14-cj-logistics-new-century-ks-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 38.842,
-              "lng": -94.9015
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "locationNote": "The CJ Logistics New Century cold storage is a brand-new facility (291,000 sq ft, opened Q3 2025) at 27302 W 159th St, New Century KS, immediately west of / adjacent to the Upfield (Flora) production plant at 27080 159th St. The available 2026 Maxar satellite imagery PREDATES construction - the parcel west of the Upfield plant still shows vacant farmland, so the building, docks, gate, and yard cannot be observed. Coordinates and perimeter are a best-effort estimate of the parcel location based on web research and the Upfield plant adjacency.",
           "railServed": "TRUE - web-confirmed. Multiple sources describe this as a rail-served cold storage facility with direct rail access; an active railway runs between the CJ building and the Upfield plant, and finished product moves from the Upfield/Flora plant into the cold storage via an above-ground conveyor bridge built over the rail.",
@@ -2356,6 +2344,32 @@
           "siteAreaAcres": "Best-effort estimate (~28 acres) for a ~291,000 sq ft cold storage building plus yard on the parcel west of the Upfield plant; not measured from imagery.",
           "multiStep": "False default - cannot verify. Note the conveyor bridge is a product-transfer link, not a truck checkpoint.",
           "auditLimitation": "Per deep-audit instructions: facility could not be physically audited because it postdates available satellite imagery. Location resolved via web research; physical-yard classification fields are placeholders flagged as uncertain. Recommend re-audit when newer imagery (post-Q3 2025) becomes available."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://america.cjlogistics.com/newsroom/2025/09/cj-logistics-new-kansas-city-cold-storage-facility-highlighted-by-kansas-city-business-journal/",
+              "date": "2025-09",
+              "type": "press",
+              "claim": "CJ own newsroom: New Century KS cold storage warehouse recently started taking inbound shipments (Sept 2025)"
+            },
+            {
+              "tier": 1,
+              "url": "https://america.cjlogistics.com/newsroom/2024/05/cj-logistics-america-cold-storage-warehouse-in-kansas-city/",
+              "date": "2024-05",
+              "type": "press",
+              "claim": "CJ announced 291,000 SF cold storage facility in New Century KS (between W 157th & 159th St)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Newest CJ cold-storage DC at New Century KS (291k SF, W 159th St), operational and taking inbound as of Sept 2025 per CJ own press; no negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2507,28 +2521,6 @@
         },
         "dossierExcerpt": "- Name: CJ Logistics - Mira Loma CA\n- Type: Distribution Center\n- Address: 12350 Philadelphia Avenue, Mira Loma (Eastvale), CA 91752\n- Resolved center: 34.0319, -117.5520",
         "mapsUrl": "https://www.google.com/maps/@34.0319,-117.5520,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cj-logistics-america/15-cj-logistics-mira-loma-ca-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.0319,
-              "lng": -117.552
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cj-logistics-america/15-cj-logistics-mira-loma-ca-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.0319,
-              "lng": -117.552
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed 12350 Philadelphia Ave, Mira Loma/Eastvale CA - historically DSC Logistics Bldg 3, now CJ Logistics America. Large N-S oriented warehouse running along the I-15 freeway.",
           "truckGate": "No barrier arm, sliding gate or guard booth visible at any access point in Street View probes from 2025. Truck court connects to the road network at the SW corner via an open paved driveway crossing a rail spur. Typical open multi-tenant industrial-park access. Perimeter is partially fenced (chain-link visible on the south side).",
@@ -2536,6 +2528,25 @@
           "railServed": "Rail spur curves into the property at the SW corner; mainline rail also runs along the south boundary.",
           "dockDoorCount": "Estimated ~70 dock doors across the east face and south face from overhead imagery; low-confidence count - imagery shows a regular bay rhythm but exact total is approximate.",
           "urbanRural": "Dense Inland Empire (Mira Loma/Eastvale) warehouse district - clearly Urban."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 3,
+              "url": "https://www.glassdoor.com/Jobs/DSC-Logistics-Mira-Loma-Jobs-EI_IE4532.0,13_IL.14,23_IC1147109.htm",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "CJ Logistics America (DSC) active job listings tied to Mira Loma CA as of 2026"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FLAG: Legacy DSC site at 12350 Philadelphia Ave (DSC = CJ since 2018); current CJ/DSC job activity in Mira Loma and no closure found, but no clean Tier-1 confirming this exact address today.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2646,28 +2657,6 @@
         },
         "dossierExcerpt": "- Name: CJ Logistics - Romeoville IL (Normantown)\n- Type: Distribution Center\n- Address: 1401 W Normantown Rd, Romeoville, IL 60446\n- Resolved center: 41.6510, -88.1310",
         "mapsUrl": "https://www.google.com/maps/@41.6510,-88.1310,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cj-logistics-america/16-cj-logistics-romeoville-il-normantown-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.651,
-              "lng": -88.131
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cj-logistics-america/16-cj-logistics-romeoville-il-normantown-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.651,
-              "lng": -88.131
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed 1401 W Normantown Rd, Romeoville IL - CJ Logistics America (former DSC Logistics) DC. Single large warehouse off I-55 / Weber Rd, between Normantown Rd (north) and a retention pond (south).",
           "truckGate": "Property truck court is enclosed by a continuous black ornamental (wrought-iron-style) perimeter fence visible in 2018-2025 Street View. The truck driveway breaks through the fence with a gate opening - classified as a controlled truck entrance.",
@@ -2677,6 +2666,25 @@
           "truckGateCount": "Likely two driveway openings off Normantown Rd (one near the NW office, one for the truck court / east) - count is approximate.",
           "urbanRural": "Romeoville is a dense Chicago-area logistics corridor (Will County warehouse cluster) - Urban.",
           "railServed": "No rail spur into the property visible."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://america.cjlogistics.com/newsroom/2020/01/dsc-logistics-seeks-stand-up-forklift-operators-at-facility-in-romeoville-il/",
+              "date": "2020-01-17",
+              "type": "press",
+              "claim": "CJ Logistics newsroom names 1401 W. Normantown Road, Romeoville IL as an operating warehouse"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "CJ own newsroom names this exact address as an active warehouse; ongoing CJ Romeoville job listings; no negative found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2786,28 +2794,6 @@
         },
         "dossierExcerpt": "- Name: CJ Logistics - Romeoville IL (Pinnacle Drive)\n- Type: Distribution Center\n- Address: 500 S Pinnacle Dr, Romeoville, IL 60446\n- Resolved center: 41.6042, -88.1158",
         "mapsUrl": "https://www.google.com/maps/@41.6042,-88.1158,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cj-logistics-america/17-cj-logistics-romeoville-il-pinnacle-drive-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.6042,
-              "lng": -88.1158
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cj-logistics-america/17-cj-logistics-romeoville-il-pinnacle-drive-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.6042,
-              "lng": -88.1158
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed 500 S Pinnacle Dr, Romeoville IL - CJ Logistics America DC, a modern speculative-build warehouse in a Will County industrial park, occupied/operated by CJ Logistics (TruckMap, FDA inspection records, Birdeye reviews all cite this address).",
           "truckGate": "Truck court on the south side is enclosed by a chain-link perimeter fence; the truck driveway enters from Pinnacle Dr through a fence gap with a sliding gate (visible in 2025 Street View). Controlled truck entrance.",
@@ -2817,6 +2803,25 @@
           "dropYard": "Row of trailers in marked drop stalls on the south side of the truck court, separate from the dock apron.",
           "urbanRural": "Romeoville is a dense Chicago-area logistics corridor - Urban.",
           "railServed": "No rail spur visible."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://zymergi.com/gmp/cj-logistics-america/romeoville",
+              "date": "2022-05-04",
+              "type": "econ-dev",
+              "claim": "FDA food-facility inspection record names CJ Logistics America operating at 500 S Pinnacle Dr, Romeoville IL (government record)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Distinct building from Normantown; FDA inspection record places CJ Logistics America at 500 S Pinnacle Dr, plus current Romeoville job listings; no negative found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2954,28 +2959,6 @@
         },
         "dossierExcerpt": "- Name: CJ Logistics - Dallas TX (Regal Row)\n- Type: Distribution Center\n- Address: 151 Regal Row, Dallas, TX 75247\n- Resolved center: 32.8130, -96.9013",
         "mapsUrl": "https://www.google.com/maps/@32.8130,-96.9013,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cj-logistics-america/18-cj-logistics-dallas-tx-regal-row-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 32.813,
-              "lng": -96.9013
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cj-logistics-america/18-cj-logistics-dallas-tx-regal-row-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 32.813,
-              "lng": -96.9013
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed 151 Regal Row, Dallas TX 75247 - Prologis Stemmons Industrial Center Building 11, a 217,290 sq ft 1974-era Class B multi-tenant warehouse. CJ Logistics USA Corp occupies a suite (151 Regal Row Suite 112) per Panjiva buyer report.",
           "truckGate": "Open multi-tenant industrial park - no perimeter fence, no barrier arm, no checkpoint at any driveway. Truck courts on the north and south faces are accessed via open driveways directly off Regal Row. 2025 Street View shows fully open access with trucks parked along the dock court.",
@@ -2986,6 +2969,25 @@
           "drivewayShort": "Short open driveways from Regal Row into the dock courts - minimal stacking depth before docks.",
           "urbanRural": "Dallas Medical District / Stemmons industrial corridor - dense urban, minutes from downtown and Love Field.",
           "railServed": "No rail spur into the property (an old rail line runs nearby but not into this parcel)."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 3,
+              "url": "https://www.glassdoor.com/Reviews/CJ-Logistics-America-Dallas-Reviews-EI_IE4532.0,20_IL.21,27_IM218.htm",
+              "date": "2025",
+              "type": "careers",
+              "claim": "CJ Logistics America Dallas operation present; web sources place a CJ warehouse on Regal Row, Dallas TX 75247"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FLAG: CJ runs Dallas-area DCs and sources place a CJ warehouse on Regal Row (75247), but no CJ-owned Tier-1 page confirms this exact address; no closure/negative found, so probable.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3155,28 +3157,6 @@
         },
         "dossierExcerpt": "- Name: CJ Logistics - Arlington TX\n- Type: Distribution Center\n- Address: 4001 New York Avenue, Arlington, TX 76015\n- Resolved center: 32.6806, -97.0794",
         "mapsUrl": "https://www.google.com/maps/@32.6806,-97.0794,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cj-logistics-america/19-cj-logistics-arlington-tx-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 32.6806,
-              "lng": -97.0794
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cj-logistics-america/19-cj-logistics-arlington-tx-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 32.6806,
-              "lng": -97.0794
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed 4001 New York Ave, Arlington TX - CJ Logistics America food-grade DC. Large multi-tenant cross-dock warehouse in a dense DFW industrial park; CJ Logistics occupies a ~50,000 SF portion (per CJ open-space page). Hobby Lobby trailers visible at the docks indicate a major co-tenant.",
           "truckGate": "Open multi-tenant industrial park. No perimeter fence enclosing the whole site and no barrier arm/checkpoint at any driveway. Truck-court driveways on the east and south connect to internal park roads via open curb cuts (2026-March Street View). Some partial chain-link fencing screens portions of the east dock court but does not gate the entrances.",
@@ -3187,6 +3167,25 @@
           "dropYard": "Trailers parked in the wide east truck court, separate from the dock apron - functions as a drop yard though stalls are loosely marked.",
           "urbanRural": "Arlington TX, dense DFW industrial corridor near the airport/intermodal - Urban.",
           "railServed": "No rail spur into the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://info.america.cjlogistics.com/cjl-open-space-arlington",
+              "date": "2025-02-06",
+              "type": "press",
+              "claim": "CJ Logistics own open-space sales sheet names 4001 New York Avenue, Arlington TX as a CJ Logistics America operating facility (food-grade)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "CJ own marketing page confirms 4001 New York Ave Arlington as an active CJ facility (Feb 2025); current Arlington job listings; no negative found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3289,28 +3288,6 @@
         },
         "dossierExcerpt": "- Name: CJ Logistics - Secaucus NJ\n- Type: Distribution Center\n- Address: 901 Castle Road, Secaucus, NJ 07094\n- Resolved center: 40.7717, -74.0806",
         "mapsUrl": "https://www.google.com/maps/@40.7717,-74.0806,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cj-logistics-america/20-cj-logistics-secaucus-nj-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.7717,
-              "lng": -74.0806
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cj-logistics-america/20-cj-logistics-secaucus-nj-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.7717,
-              "lng": -74.0806
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed 901 Castle Rd, Secaucus NJ - CJ Logistics America NJ Secaucus Center. CJ open-space spec sheet: 107,929 SF warehouse, 188,615 SF total property (~4.33 acres), 19 exterior docks, 19 trailer positions, 4 drive-in doors, 20 ft clear height.",
           "truckGate": "The property is enclosed by a continuous chain-link perimeter fence (visible in 2019 and 2024 Street View). The truck driveway off Castle Rd passes through a fence gate opening - a controlled truck entrance.",
@@ -3321,6 +3298,25 @@
           "drivewayShort": "Short approach from Castle Rd into a tight infill yard - minimal stacking depth.",
           "urbanRural": "Secaucus / NJ Meadowlands - extremely dense urban industrial area.",
           "railServed": "A rail line runs nearby (Meadowlands corridor) but no spur into this property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://info.america.cjlogistics.com/cjl-open-space-secaucus",
+              "date": "2025-02-06",
+              "type": "press",
+              "claim": "CJ Logistics own open-space sales sheet names 901 Castle Road, Secaucus NJ as a CJ Logistics America building (107,929 SF)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "CJ own marketing page lists 901 Castle Rd Secaucus as an active CJ-held building; no negative found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3462,28 +3458,6 @@
         },
         "dossierExcerpt": "The roster supplied no street address (source: Indeed CJ Logistics America\nlocations list) and city-level coords (40.1996, -76.7313) that land in\ndowntown Middletown borough — a residential area with no industrial\nbuildings.\n\nWeb research confirmed CJ Logistics operates a Middletown PA 17057\nfacility. The only large industrial cluster in that ZIP is the **Capital\nLogistics Center (CLC)** — a ~1.3M sq ft, 5-building multi-tenant logistics\npark off Eisenhower Boulevard / Capital Lane / Industrial Lane in Lower\nSwatara Township, immediately adjacent to the Penn State Harrisburg campus.\nBuilding 500 (500 Industrial Lane) and Building 200 (200 Capital Lane) are\ndocumented CLC addresses; CBRE/Cushman & Wakefield list space there.\n\nPublic records do not identify which CLC building CJ Logistics leases.",
         "mapsUrl": "https://www.google.com/maps/@40.2082,-76.7455,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cj-logistics-america/22-cj-logistics-middletown-pa-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.2082,
-              "lng": -76.7455
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cj-logistics-america/22-cj-logistics-middletown-pa-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.2082,
-              "lng": -76.7455
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "No published street address. CJ Logistics is confirmed (Indeed/web) to operate a Middletown PA facility. The only large industrial cluster in Middletown 17057 is the Capital Logistics Center (CLC) off Eisenhower Blvd / Capital Lane in Lower Swatara Township, a ~1.3M sqft, 5-building multi-tenant logistics park next to Penn State Harrisburg. Public records do not identify which CLC building CJ leases. Audited Building C, the largest single building in the park, as the best-fit representative; building-level identity is UNCERTAIN.",
           "truckGate": "CLC is an open business-park layout: buildings front directly on internal roads, no perimeter fence and no controlled gate observed at the complex or building level (satellite z17-z20 + 2021 Street View on Eisenhower Blvd). truckGate=false.",
@@ -3492,6 +3466,25 @@
           "dropArea": "An organized trailer drop area with ~12-14 trailers sits in the truck court north of Building C. dropYard=true.",
           "shipRcvSeparate": "Cross-dock-style building likely has docks on opposing faces but ship/rcv split not confirmable; left false.",
           "urbanRural": "CLC sits within Harrisburg metro on the edge of Penn State Harrisburg campus, surrounded by dense industrial park fabric, campus and suburban development; classified Urban."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 3,
+              "url": "https://www.glassdoor.com/Jobs/DSC-Logistics-Middletown-Jobs-EI_IE4532.0,13_IL.14,24_IC1152197.htm",
+              "date": "2025",
+              "type": "careers",
+              "claim": "CJ Logistics America (DSC) shows a Middletown PA operation in 2025 job listings"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FLAG: CJ/DSC has a Middletown PA presence, but the legacy DSC address is 200 Capital Lane - no Tier-1 source confirms a CJ facility specifically on Eisenhower Blvd; no closure found, so probable, exact address unverified.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3601,28 +3594,6 @@
         },
         "dossierExcerpt": "Roster supplied address 5000A Bohannon Road, Fairburn GA 30213, but the\ngeocode moved 3088 m, so verification was required. Web research confirms\nCJ Logistics America at 5000 Bohannon Rd via Yellowpages, Waze, TruckMap\nand Chamber of Commerce listings. Property records identify the building\nas Shugart Farms Lake Park Industrial - Building A, a Class-A cross-dock\ndistribution center of ~1,037,400 sq ft completed in 2016, fronting I-85 in\nthe Atlanta-South industrial corridor. Satellite confirmed a large\ncross-dock warehouse at this location; locked center at 33.5441, -84.5873.",
         "mapsUrl": "https://www.google.com/maps/@33.5441,-84.5873,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cj-logistics-america/23-cj-logistics-fairburn-ga-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.5441,
-              "lng": -84.5873
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cj-logistics-america/23-cj-logistics-fairburn-ga-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.5441,
-              "lng": -84.5873
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "5000A Bohannon Road, Fairburn GA 30213 = Shugart Farms Lake Park Industrial Building A, a Class-A cross-dock DC (~1,037,400 sq ft, built 2016) along I-85 in the Atlanta-South industrial corridor. Roster coords moved 3088m; relocated and confirmed via web (Yellowpages/Waze/TruckMap all place CJ Logistics America at 5000 Bohannon Rd) and satellite.",
           "truckGate": "Chain-link perimeter fencing runs along Bohannon Road frontage (2023 + 2025 Street View). The truck/auto entrance is a divided driveway with separate in/out lanes around a central island; gates set back within the fence line. truckGate=true.",
@@ -3635,6 +3606,32 @@
           "fastLaneOpportunity": "Wide truck courts and divided gate apron leave ample paved width to add an express bypass lane.",
           "siteAreaAcres": "~111 acres from the perimeter box; includes the building, truck courts on both faces, trailer storage, ponds and auto parking.",
           "urbanRural": "Fairburn GA along I-85 is part of the dense Atlanta-South metro industrial fabric (multiple million-sqft DCs adjacent) -> Urban."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.indeed.com/cmp/Cj-Logistics-America/locations/GA/Fairburn",
+              "date": "2025-01",
+              "type": "careers",
+              "claim": "Active CJ Logistics America job openings at the Fairburn, GA location (5000A Bohannon Rd)"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.ziprecruiter.com/co/Cj-Logistics/Jobs/-in-Fairburn,GA",
+              "date": "2025-04",
+              "type": "careers",
+              "claim": "CJ Logistics now-hiring warehouse roles in Fairburn GA (Apr 2025)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "On CJ own location index with active 2025 hiring at 5000 Bohannon Rd; no closure/WARN found for Fairburn.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3746,28 +3743,6 @@
         },
         "dossierExcerpt": "Roster supplied no street address (source: Indeed CJ Logistics America\nlocations list) and city-centroid coords (36.2, -86.5186) that land in\ncentral Mount Juliet, ~17 km from the actual building.\n\nWeb research found a documented DSC Logistics facility at **648\nCouchville Pike, Mount Juliet TN 37122**. DSC Logistics is the legacy\ncompany that CJ Logistics America was formed from (DSC rebranded as CJ\nLogistics), so this is the CJ Logistics Mount Juliet site. Geocoding API\nreturned ROOFTOP precision at 36.0714, -86.4330; satellite confirmed a\nlarge cross-dock distribution building.\n\nCaveat: current directory listings (TruckMap, Yellowpages) show the\nbuilding operating as a Denso/ABB Supply Chain facility (~380,000\nsq ft). Tenancy may have changed since the roster was compiled — the\nphysical yard audit below is of the correct building regardless.",
         "mapsUrl": "https://www.google.com/maps/@36.0717,-86.43315,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cj-logistics-america/24-cj-logistics-mount-juliet-tn-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 36.0717,
-              "lng": -86.43315
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cj-logistics-america/24-cj-logistics-mount-juliet-tn-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 36.0717,
-              "lng": -86.43315
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster supplied no street address (Indeed locations list) and city-centroid coords (36.2, -86.5186) ~17km off. Resolved to 648 Couchville Pike, Mount Juliet TN 37122 - the documented DSC Logistics Mt Juliet warehouse. DSC Logistics is the legacy company CJ Logistics America was formed from, so this is the CJ Logistics Mt Juliet facility. Geocoded ROOFTOP to 36.0714, -86.4330; satellite confirmed a large cross-dock DC. Note: directory listings show the building is currently operated as a Denso/ABB Supply Chain facility (~380,000 sq ft) - tenancy may have changed since the roster was built.",
           "truckGate": "An access road runs ~150m from Couchville Pike up to the building. A small white guard-booth structure with canopy sits at the truck court / building entrance beside the auto parking lot (z20-z21 satellite). truckGate=true.",
@@ -3778,6 +3753,25 @@
           "drivewayLong": "Long ~150m access road from Couchville Pike to the gate/building plus deep truck courts -> can hold a 3+ truck queue.",
           "urbanRural": "Couchville Pike SE of Mount Juliet is a Nashville-metro logistics corridor with several adjacent million-sqft DCs; classified Urban.",
           "siteAreaAcres": "~40 acres from the perimeter box (building plus truck courts on both faces)."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.indeed.com/cmp/Cj-Logistics-America/locations",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Mount Juliet TN appears on CJ Logistics America office/location index"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FLAG: Listed on CJ location index but no street address and a Dec-2021 employee review states operations were being moved to Union City GA; no Tier-1 current-op source and no WARN. Probable with relocation caveat; the documented CJ TN cluster is Lebanon.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3892,28 +3886,6 @@
         },
         "dossierExcerpt": "Roster supplied no street address (source: Indeed CJ Logistics America\nlocations list) and city-centroid coords (36.2081, -86.2911) that land in\ndowntown Lebanon, ~9 km from the actual building.\n\nWeb research found a documented DSC Logistics facility at **14840\nCentral Pike, Lebanon TN 37090** (also addressed 14840 Duke Dr), operating\na B&G Foods distribution center. DSC Logistics is the legacy company\nthat CJ Logistics America was formed from, so this is the CJ Logistics\nLebanon site. Geocoding API returned ROOFTOP precision at ~36.130,\n-86.406; satellite confirmed a large cross-dock distribution building in\nthe Lebanon / Mount Juliet I-840 logistics corridor.",
         "mapsUrl": "https://www.google.com/maps/@36.131,-86.4064,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cj-logistics-america/25-cj-logistics-lebanon-tn-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 36.131,
-              "lng": -86.4064
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cj-logistics-america/25-cj-logistics-lebanon-tn-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 36.131,
-              "lng": -86.4064
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster supplied no street address (Indeed locations list) and city-centroid coords (36.2081, -86.2911) in downtown Lebanon, ~9km off. Resolved to 14840 Central Pike / 14840 Duke Dr, Lebanon TN 37090 - the documented DSC Logistics Lebanon facility (B&G Foods distribution). DSC Logistics is the legacy company CJ Logistics America was formed from, so this is the CJ Logistics Lebanon site. Geocoded ROOFTOP to ~36.130, -86.406; satellite confirmed a large cross-dock DC in the Lebanon / I-840 logistics corridor.",
           "truckGate": "z20-z21 satellite clearly shows a gate (cantilever / swing gate) spanning the truck lane at the SW end of the truck court, with perimeter fencing along the court. truckGate=true.",
@@ -3925,6 +3897,25 @@
           "truckGateCount": "One confirmed gate at the SW truck court entry; a second NE access point may exist but no gate confirmed there. Counted as 1.",
           "urbanRural": "14840 Central Pike sits in the Lebanon / Mount Juliet I-840 logistics corridor (Park 840 Logistics Center cluster) within greater Nashville metro, surrounded by multiple large DCs -> Urban.",
           "siteAreaAcres": "~35 acres from the perimeter box (building plus wrapping truck courts)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.indeed.com/cmp/Cj-Logistics-America/locations/TN/Lebanon",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active CJ Logistics America job openings near Lebanon TN; Lebanon is the documented CJ Nashville-area cluster (BNA1 at 14840 Central Pike, BNA2 at Duke Dr)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "CJ documented Nashville cluster (Lebanon BNA1/BNA2) on its location index with active hiring; the only Lebanon closure found (Smoky Mountain Logistics) is a different company.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4065,28 +4056,6 @@
         },
         "dossierExcerpt": "Roster supplied no street address (source: Indeed CJ Logistics America\nlocations list) and city-centroid coords (37.3565, -77.4317) for Chester\nVA, ~7 km from the actual building.\n\nWeb research found a documented DSC Logistics / CJ Logistics America\nfacility at 16000 Walthall Industrial Pkwy, South Chesterfield VA 23834\n(the Richmond-area site; the Chester/Colonial Heights/Chesterfield names\nall refer to this cluster). Manta, Yellowpages, Loc8NearMe and D&B all list\nthis DSC Logistics location with cjlogistics.com as the company site. DSC\nLogistics is CJ Logistics America's legacy brand. Geocoding API returned\nROOFTOP precision at 37.2983, -77.3998; satellite confirmed a large\nmulti-section cross-dock distribution building.",
         "mapsUrl": "https://www.google.com/maps/@37.29775,-77.39925,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cj-logistics-america/26-cj-logistics-chester-va-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 37.29775,
-              "lng": -77.39925
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cj-logistics-america/26-cj-logistics-chester-va-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 37.29775,
-              "lng": -77.39925
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster supplied no street address (Indeed locations list) and city-centroid coords (37.3565, -77.4317) for Chester VA, ~7km off. Resolved to 16000 Walthall Industrial Pkwy, South Chesterfield VA 23834 - the documented DSC Logistics / CJ Logistics America Richmond-area facility (the Manta/Yellowpages/D&B listings give cjlogistics.com as the company site). DSC Logistics is CJ Logistics America's legacy brand. Geocoded ROOFTOP to 37.2983, -77.3998; satellite confirmed a large multi-section cross-dock DC.",
           "truckGate": "The facility is reached by a winding access road through woods from Walthall Industrial Pkwy. At the building, the truck driveway runs into the truck court as an open approach - no barrier arm, sliding gate, or guard booth observed on the truck route (z19-z21 satellite; only utility transformers near the entry). truckGate=false.",
@@ -4098,6 +4067,32 @@
           "railServed": "A rail line runs NW-SE just NE of the building beyond a drainage ditch, but it is a through line - no spur enters the property. railServed=false.",
           "urbanRural": "Site sits in a wooded edge-of-town industrial area off Walthall Industrial Pkwy in South Chesterfield, scattered rural residential and woodland around it -> Rural per the small-town-industrial tie-breaker.",
           "connectivityIssue": "Site is somewhat isolated in woods but an industrial park is adjacent - cellular coverage likely adequate; left false (low confidence)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.facebook.com/cjlogisticsamerica/posts/the-cj-logistics-colonial-heights-distribution-center-recently-conducted-a-thank/945747350938070/",
+              "date": "2024",
+              "type": "press",
+              "claim": "CJ own social post about its Colonial Heights distribution center (the 16000 Walthall Industrial Pkwy facility, also addressed as Chester/South Chesterfield VA)"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.ziprecruiter.com/co/Cj-Logistics-America/Jobs/--in-Virginia",
+              "date": "2025-02",
+              "type": "careers",
+              "claim": "Active CJ Logistics forklift roles in Colonial Heights/Chesterfield VA (Feb 2025)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "16000 Walthall Industrial Pkwy is CJ Colonial Heights/Chester DC (former DSC); CJ own post + 2025 hiring confirm current operation; no closure found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4220,28 +4215,6 @@
         },
         "dossierExcerpt": "Roster supplied no street address (source: Indeed CJ Logistics America\nlocations list) and city-centroid coords (35.1465, -90.1842), ~7 km from\nthe actual building.\n\nWeb research identified the CJ Logistics America (legacy DSC Logistics)\nWest Memphis DC at 3271 Infinity Parkway, West Memphis AR 72301\n(Yahoo Local and Indeed). Geocoding API returned ROOFTOP precision at\n35.1869, -90.2472; satellite confirmed a large cross-dock distribution\nbuilding standing in open farmland.",
         "mapsUrl": "https://www.google.com/maps/@35.18595,-90.2467,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cj-logistics-america/27-cj-logistics-west-memphis-ar-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.18595,
-              "lng": -90.2467
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cj-logistics-america/27-cj-logistics-west-memphis-ar-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.18595,
-              "lng": -90.2467
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster supplied no street address (Indeed locations list) and city-centroid coords (35.1465, -90.1842), ~7km off. Resolved to 3271 Infinity Parkway, West Memphis AR 72301 - the documented CJ Logistics America (legacy DSC Logistics) West Memphis DC (Yahoo Local, Indeed). Geocoded ROOFTOP to 35.1869, -90.2472; satellite confirmed a large cross-dock DC in open farmland.",
           "truckGate": "z20-z21 satellite shows a controlled truck gate on the south side: a guard booth, gate spanning the lane (sliding/swing), and chain-link perimeter fencing. A semi-truck is visible at the gate. 2013 Street View confirms continuous chain-link perimeter fencing around the property. truckGate=true.",
@@ -4253,152 +4226,32 @@
           "urbanRural": "Building sits in open farmland off Infinity Parkway, edge of West Memphis -> Rural.",
           "connectivityIssue": "Site is in open farmland but within the West Memphis logistics/intermodal area; cellular coverage likely adequate - left false (low confidence).",
           "railServed": "No rail spur enters the property."
-        }
-      },
-      {
-        "id": "28-cj-logistics-kernersville-nc",
-        "name": "CJ Logistics - Kernersville NC",
-        "type": "Distribution Center",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "uncertainFields": [
-          "guardShack",
-          "remoteGs",
-          "dockDoorCount",
-          "dropArea",
-          "trailerParkingCapacity",
-          "shipRcvSeparate",
-          "entryLanes",
-          "exitLanes"
-        ],
-        "center": {
-          "lat": 36.1263,
-          "lng": -80.06235
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 36.127631,
-                "lng": -80.064273
-              },
-              {
-                "lat": 36.127631,
-                "lng": -80.061389
-              },
-              {
-                "lat": 36.125856,
-                "lng": -80.06132
-              },
-              {
-                "lat": 36.125634,
-                "lng": -80.064204
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
             {
-              "ring": [
-                {
-                  "lat": 36.125856,
-                  "lng": -80.064204
-                },
-                {
-                  "lat": 36.125995,
-                  "lng": -80.061526
-                },
-                {
-                  "lat": 36.125662,
-                  "lng": -80.061492
-                },
-                {
-                  "lat": 36.125524,
-                  "lng": -80.06417
-                }
-              ]
+              "tier": 1,
+              "url": "https://www.indeed.com/cmp/Cj-Logistics-America/locations/AR",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "West Memphis AR on CJ Logistics America Arkansas location index"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.arkansasedc.com/docs/default-source/reports/arkansas-distribution-and-logistics-companies6dce45fe3192488c9cf07f28471e6709.pdf",
+              "date": "2022",
+              "type": "econ-dev",
+              "claim": "Arkansas EDC distribution/logistics directory listing CJ Logistics general warehousing at 3271 Infinity Parkway, West Memphis 72301"
             }
           ],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 125,
-              "pano": "d8bvM_YYBUW2KFpn0YaeUA",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 35,
-          "trailersVisible": 15,
-          "trailerParkingCapacity": 40,
-          "truckGateCount": 1,
-          "buildingCount": 1,
-          "siteAreaAcres": 23.8,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": false,
-          "remoteGs": true,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": false,
-          "drivewayShort": true,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "25-50",
-          "dropArea": "10-25",
-          "shipRcvSeparate": false,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "dossierExcerpt": "Roster supplied no street address (source: Indeed CJ Logistics America\nlocations list) and city-centroid coords (36.1199, -80.0736).\n\nWeb research identified the CJ Logistics America Kernersville facility at\n700 N Main St, Kernersville NC 27284 (Yahoo Local listing for \"CJ\nLogistics America - Kernersville\"; Indeed CJ Logistics America NC\nlocations). Geocoding API returned ROOFTOP precision at 36.1261, -80.0627;\nsatellite confirmed a large industrial / distribution building in the\nKernersville town fabric. (Note: 200 Forum Pkwy, Rural Hall NC is a\nseparate nearby CJ location, not this one.)",
-        "mapsUrl": "https://www.google.com/maps/@36.1263,-80.06235,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/cj-logistics-america/28-cj-logistics-kernersville-nc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 36.1263,
-              "lng": -80.06235
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/cj-logistics-america/28-cj-logistics-kernersville-nc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 36.1263,
-              "lng": -80.06235
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "location": "Roster supplied no street address (Indeed locations list) and city-centroid coords (36.1199, -80.0736). Resolved to 700 N Main St, Kernersville NC 27284 - the documented CJ Logistics America Kernersville facility (Yahoo Local listing for CJ Logistics America Kernersville; Indeed NC locations). Geocoded ROOFTOP to 36.1261, -80.0627; satellite confirmed a large industrial / distribution building. (200 Forum Pkwy, Rural Hall NC is a separate nearby CJ location, not this one.)",
-          "truckGate": "2026-03 Street View clearly shows a rolling/cantilever gate across the truck driveway at the SE corner, with a STOP sign and PRIVATE PROPERTY NO TRESPASSING signage, and continuous chain-link perimeter fencing around the property. truckGate=true.",
-          "guardShack": "No staffed guard booth observed directly at the gate lane. A small white peaked-roof building sits set back along the building line near the gate but does not read as a gate-side guard booth - treated as remote/badge-controlled entry. Flagged uncertain.",
-          "remoteGs": "Gate present, no staffed booth at the lane -> remote badge/kiosk check-in inferred. Medium confidence.",
-          "dockDoors": "Older industrial/manufacturing-style building with a row of dock doors along the south face and a truck court with marked stalls. ~35 doors estimated (25-50 band). Approximate.",
-          "dropArea": "Truck court on the south face has marked trailer/auto parking stalls; ~15 trailers visible, capacity ~40. dropArea 10-25, dropYard=true.",
-          "shipRcvSeparate": "Docks observed on a single (south) building face only; no separate second dock bank confirmed -> false.",
-          "drivewayShort": "Gate sits close to the public road with a modest truck court -> short approach, holds 1-2 trucks.",
-          "urbanRural": "700 N Main St sits in the Kernersville town fabric, surrounded by residential, commercial and other industrial buildings -> Urban.",
-          "siteAreaAcres": "~24 acres from the perimeter box (building plus south truck court and north auto parking).",
-          "railServed": "No rail spur into the property."
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "West Memphis (major DC hub) on CJ location index; econ-dev directory confirms the exact 3271 Infinity Pkwy warehouse; no closure/WARN found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       }
     ]

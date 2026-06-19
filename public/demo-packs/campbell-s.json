@@ -5,9 +5,9 @@
     "slug": "campbell-s",
     "displayName": "Campbell's",
     "archetype": "cpg",
-    "siteCount": 21,
+    "siteCount": 20,
     "coverageNote": {
-      "auditedCount": 21,
+      "auditedCount": 20,
       "estimatedFootprint": 25,
       "droppedStubCount": 0,
       "capHit": false,
@@ -34,16 +34,16 @@
     "archetypeMix": {
       "#6": 2,
       "#9": 8,
-      "#3": 9,
+      "#3": 8,
       "#1": 1,
       "#7": 1
     },
     "totals": {
-      "dockDoors": 712,
-      "trailerCapacity": 1814,
-      "gates": 26,
+      "dockDoors": 690,
+      "trailerCapacity": 1789,
+      "gates": 24,
       "railServed": 2,
-      "acres": 1213.5
+      "acres": 1181.5
     },
     "sites": [
       {
@@ -2190,250 +2190,6 @@
           "checkedDivestiture": true,
           "checkedBankruptcyEra": false,
           "rationale": "Active Campbell's Snacks cracker/chip plant (~1,500 staff) with current hiring; only the adjacent Emerald nuts unit closed (2023), not the plant.",
-          "verifiedBy": "agent",
-          "verifiedAt": "2026-06-19"
-        }
-      },
-      {
-        "id": "12-lance-burlington-ia",
-        "name": "Lance - Burlington IA",
-        "type": "Manufacturing - snacks/crackers",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "uncertainFields": [
-          "dockDoorCount",
-          "trailersVisible",
-          "trailerParkingCapacity",
-          "dockDoors",
-          "dropArea",
-          "buildingCount",
-          "entryLanes",
-          "exitLanes"
-        ],
-        "center": {
-          "lat": 40.8277,
-          "lng": -91.1395
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 40.828116,
-                "lng": -91.141011
-              },
-              {
-                "lat": 40.82822,
-                "lng": -91.138127
-              },
-              {
-                "lat": 40.826245,
-                "lng": -91.137852
-              },
-              {
-                "lat": 40.825933,
-                "lng": -91.139157
-              },
-              {
-                "lat": 40.826037,
-                "lng": -91.141148
-              },
-              {
-                "lat": 40.82744,
-                "lng": -91.141217
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [
-            {
-              "ring": [
-                {
-                  "lat": 40.82744,
-                  "lng": -91.1395
-                },
-                {
-                  "lat": 40.827492,
-                  "lng": -91.137852
-                },
-                {
-                  "lat": 40.826869,
-                  "lng": -91.137886
-                },
-                {
-                  "lat": 40.826817,
-                  "lng": -91.139534
-                }
-              ]
-            }
-          ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 40.827908,
-                  "lng": -91.140873
-                },
-                {
-                  "lat": 40.82796,
-                  "lng": -91.1395
-                },
-                {
-                  "lat": 40.827596,
-                  "lng": -91.139534
-                },
-                {
-                  "lat": 40.827544,
-                  "lng": -91.140908
-                }
-              ]
-            }
-          ],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 35,
-              "pano": "3IZZ2ixG1IkkkoXPZ9FHqw",
-              "hasCoverage": true
-            },
-            "truckGate": {
-              "heading": 35,
-              "pano": "3IZZ2ixG1IkkkoXPZ9FHqw",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 22,
-          "trailersVisible": 8,
-          "trailerParkingCapacity": 25,
-          "truckGateCount": 2,
-          "buildingCount": 2,
-          "siteAreaAcres": 32,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": false,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": false,
-          "entryExitSeparate": true,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "10-25",
-          "dropArea": "10-25",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#3",
-          "steps": [
-            {
-              "step": "Arrive on site (no gate)",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Drive to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 480000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 3030000,
-          "totalYnsMs": 2640000
-        },
-        "dossierExcerpt": "- Name: Lance - Burlington IA (roster) — actually Shearer's Foods\n  Burlington plant\n- Type: Manufacturing - snacks/crackers (private-label cookies and crackers)\n- Roster address: 3300 Roosevelt Avenue, Burlington, IA 52601\n- Actual address: 3000 Mt Pleasant St / Roosevelt Ave, Burlington, IA 52601\n- Resolved center: 40.82770, -91.13950",
-        "mapsUrl": "https://www.google.com/maps/@40.82770,-91.13950,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/campbell-s/12-lance-burlington-ia-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.8277,
-              "lng": -91.1395
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/campbell-s/12-lance-burlington-ia-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.8277,
-              "lng": -91.1395
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "ownership": "IMPORTANT: This site is the former Lance / Snyder's-Lance private-label cookie/cracker plant, but it was DIVESTED to Shearer's Foods in 2014 (sale of Snyder's-Lance's private-label business) - four years before Campbell's acquired Snyder's-Lance in 2018. The current operator is Shearer's Foods (~800 employees, address 3000 Mt Pleasant St / Roosevelt Ave, Burlington IA). The roster lists it under the Campbell's account; audited as the intended physical site but it is NOT currently a Campbell's facility.",
-          "location": "Roster coords (40.832609, -91.14054) were ~1.2 km off in a residential area. Correct plant located via web research at 3000 Mt Pleasant St, Burlington IA - the large industrial snack building.",
-          "truckGate": "Open-access site. Driveways from Mt Pleasant Street are uncontrolled - 2016/2019 Street View shows wide open aprons with no barrier arm, sliding gate, or checkpoint. No perimeter fence around the property.",
-          "guardShack": "No guard booth at any entrance. The structure near the office front is the plant office building, not a gate booth.",
-          "drivewayLong": "Long approach from Mt Pleasant Street across deep paved aprons to the building.",
-          "entryExitSeparate": "Multiple separate driveways onto Mt Pleasant Street serving the office, parking, and truck/dock areas.",
-          "dockDoors": "Dock activity on the building's N/NE face with a few trailers visible; the wide single-story plant likely has ~15-25 doors - band 10-25, flagged uncertain (docks partly obscured / hard to count from overhead).",
-          "dropArea": "Trailers parked on the NE side without tractors; ~10-25 band, flagged uncertain.",
-          "buildingCount": "Main plant building plus a long metal-roofed warehouse to the NE on the same property; buildingCount = 2. (A separate industrial complex to the WEST and a baseball complex to the EAST are distinct properties, not part of this site.)",
-          "urbanRural": "Burlington IA - a small Mississippi River city; the plant is in an edge-of-town industrial/commercial area with adjacent farmland and a sports complex. Per rubric tiebreak (small-town industrial), classified Rural.",
-          "siteAreaAcres": "~32 acres from perimeter box (~365m N-S x ~365m E-W).",
-          "railServed": "A rail mainline runs along the NW edge of the property but no spur enters; railServed false.",
-          "confidence": "Medium - the plant is positively identified and the open-access (no gate/no guard) determination is confident from Street View, but dock/trailer counts are difficult to read from overhead and the ownership is a notable data discrepancy."
-        },
-        "verification": {
-          "verdict": "rejected",
-          "operator": "self",
-          "tenancy": "unknown",
-          "citations": [
-            {
-              "tier": 2,
-              "url": "https://en.wikipedia.org/wiki/Snyder%27s-Lance",
-              "date": "2014",
-              "type": "press",
-              "claim": "Snyder's-Lance divested its private-label business, including the Burlington IA and Cambridge ON plants, to Shearer's Foods for ~$430M in 2014."
-            },
-            {
-              "tier": 2,
-              "url": "https://en.wikipedia.org/wiki/Shearer%27s_Foods",
-              "date": "2026-06",
-              "type": "press",
-              "claim": "Shearer's Foods current manufacturing-locations list includes Burlington, Iowa manufacturing plant."
-            }
-          ],
-          "checkedDivestiture": true,
-          "checkedBankruptcyEra": false,
-          "rationale": "Burlington IA plant sold to Shearer's Foods in 2014 (before Campbell's owned Snyder's-Lance); runs today as a Shearer's plant, never a Campbell's site.",
           "verifiedBy": "agent",
           "verifiedAt": "2026-06-19"
         }
