@@ -6,21 +6,25 @@
     "displayName": "Mondelez International",
     "archetype": "cpg",
     "siteCount": 17,
+    "networkCount": 81,
+    "networkCountSource": "https://www.sec.gov/Archives/edgar/data/1103982/000162828026005345/mdlz-20251231.htm",
+    "networkCountAsOf": "2026-02",
+    "sampleRationale": "Mondelez's FY2025 10-K reports 81 North America facilities (20 manufacturing plus 61 distribution and warehouse), of which we audited 17.",
     "coverageNote": {
       "auditedCount": 17,
-      "estimatedFootprint": 26,
+      "estimatedFootprint": 81,
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "We audited 22 of an estimated 26 Mondelez NA manufacturing and DC facilities. Mondelez operates ~160 plants globally; international scope (130+ sites across 80 countries) is available on request. The 4 NA sites not shown are co-manufacturer / contract sites that operate inside other companies’ footprints.",
+      "note": "Mondelez's FY2025 10-K reports 81 North America facilities (20 manufacturing, 61 distribution and warehouse). Globally it runs 145 manufacturing facilities across 49 countries; we audited 17 NA sites.",
       "auditedScope": "NA",
-      "totalGlobalFootprint": 160,
+      "totalGlobalFootprint": 81,
       "legacyYmsFacilityCount": 60
     },
     "featuredSiteId": "07-mondelez-richmond-distribution-center",
     "roiDefaults": {
       "averageMarginPerShipment": 720
     },
-    "dossierIntro": "CPG food networks live or die on the drop yard. Mondelez runs 160 plants and DCs feeding retail, grocery, and foodservice. We audited 22 NA sites. Richmond VA runs 90 dock doors on 45 acres with CSX rail spurring in. Fort Worth runs 115 docks. YardFlow makes the yard a deterministic queue for inbound rail and outbound truckload.",
+    "dossierIntro": "CPG food networks live or die on the drop yard. Mondelez runs 81 North America plants and DCs feeding retail, grocery, and foodservice. We audited 17 NA sites. Richmond VA runs 90 dock doors on 45 acres with CSX rail spurring in. Fort Worth runs 115 docks. YardFlow makes the yard a deterministic queue for inbound rail and outbound truckload.",
     "surprisingFindings": [
       "Fort Worth DC runs 115 dock doors. That's 14 trucks staged per minute at peak.",
       "6 of 22 audited sites are rail-served. Outbound truckload still dominates inbound rail.",

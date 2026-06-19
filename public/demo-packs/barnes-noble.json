@@ -6,16 +6,20 @@
     "displayName": "Barnes & Noble",
     "archetype": "retailer",
     "siteCount": 2,
+    "networkCount": 2,
+    "networkCountSource": "https://www.sec.gov/Archives/edgar/data/890491/000119312519176078/d703316d10k.htm",
+    "networkCountAsOf": "Barnes & Noble FY2019 10-K, fiscal year ended 2019-04-27 (last public Item 2 before going private)",
+    "sampleRationale": "Barnes & Noble runs two distribution centers, Monroe Township NJ and Reno NV, and we audited both, so the sample covers its entire DC network.",
     "coverageNote": {
       "auditedCount": 2,
-      "estimatedFootprint": 6,
+      "estimatedFootprint": 2,
       "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Barnes & Noble has ~600 US stores fed by ~6 regional DCs; we mapped the DC network (the only sites where trailer ops matter)."
+      "note": "Barnes & Noble's stores are fed by two distribution centers, Monroe Township NJ and Reno NV (FY2019 10-K); we mapped both, the only sites where trailer ops matter."
     },
     "featuredSiteId": "01-barnes-noble-monroe-township-nj-dc",
-    "dossierIntro": "Book retail runs slow-moving SKUs through high-throughput RDCs. Barnes & Noble runs 6 distribution centers. We audited 2. Monroe NJ alone has 110 dock doors on 73.5 acres. YardFlow turns the trickle-flow seasonal staffing into a steady-state schedule even when volume swings 5x peak to trough.",
+    "dossierIntro": "Book retail runs slow-moving SKUs through high-throughput RDCs. Barnes & Noble runs 2 distribution centers, Monroe Township NJ and Reno NV, and we audited both. Monroe NJ alone has 110 dock doors on 73.5 acres. YardFlow turns the trickle-flow seasonal staffing into a steady-state schedule even when volume swings 5x peak to trough.",
     "surprisingFindings": [
       "110 dock doors at Monroe NJ. Most Barnes & Noble inbound moves in a tight 4-month holiday window.",
       "148 total dock doors across 2 audited sites. Density per facility is higher than most retailers.",

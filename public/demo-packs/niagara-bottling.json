@@ -6,17 +6,21 @@
     "displayName": "Niagara Bottling",
     "archetype": "beverage",
     "siteCount": 30,
+    "networkCount": 50,
+    "networkCountSource": "NY Governor's Office release citing Niagara's About boilerplate (governor.ny.gov, 2026-04-24) - more than 50 bottling plants in the United States",
+    "networkCountAsOf": "2026-04",
+    "sampleRationale": "the highest-volume bottling plants across the US footprint, including the Jeffersonville IN and Hazle Township PA sites",
     "coverageNote": {
       "auditedCount": 30,
-      "estimatedFootprint": 35,
-      "totalGlobalFootprint": 35,
+      "estimatedFootprint": 50,
+      "totalGlobalFootprint": 50,
       "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": true,
-      "note": "Niagara Bottling operates ~35 US bottling plants (private-label water). We audited 30."
+      "note": "Niagara Bottling operates more than 50 US bottling plants (private-label water), with several more announced or under construction. We audited 30."
     },
     "featuredSiteId": "13-niagara-bottling-jeffersonville-in",
-    "dossierIntro": "Niagara Bottling runs the largest private-label water network. 35 facilities; we audited 30. Jeffersonville IN has 100 dock doors. Hazle Township PA is 110 acres. 1,703 total dock doors and 2,518 trailer spots. YardFlow runs bottled water at scale: a single SKU at high velocity through a high-density yard.",
+    "dossierIntro": "Niagara Bottling runs the largest private-label water network. More than 50 US plants; we audited 30. Jeffersonville IN has 100 dock doors. Hazle Township PA is 110 acres. 1,703 total dock doors and 2,518 trailer spots. YardFlow runs bottled water at scale: a single SKU at high velocity through a high-density yard.",
     "surprisingFindings": [
       "1,703 dock doors across 30 audited sites. Niagara routes more bottled-water dock minutes than any audited beverage company.",
       "Hazle Township PA is 110 acres of bottling. Single-SKU manufacturing at scale.",

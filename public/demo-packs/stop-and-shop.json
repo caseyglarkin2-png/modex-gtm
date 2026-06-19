@@ -6,6 +6,10 @@
     "displayName": "Stop & Shop",
     "archetype": "grocer-distributor",
     "siteCount": 7,
+    "networkCount": 8,
+    "networkCountSource": "https://newsroom.aholddelhaize.com/adusa-supply-chain-opens-new-1-million-square-foot-distribution-center-in-connecticut/",
+    "networkCountAsOf": "ADUSA Supply Chain, 2021 (Manchester CT DC serving 450+ Stop & Shop stores); ADUSA self-distribution network ~20 East Coast DCs across five banners",
+    "sampleRationale": "ADUSA supplies Stop & Shop from roughly eight Northeast DCs within its broader East Coast network, and we audited seven of the DCs serving the banner.",
     "coverageNote": {
       "auditedCount": 7,
       "estimatedFootprint": 8,

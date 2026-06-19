@@ -6,20 +6,24 @@
     "displayName": "Tractor Supply Company",
     "archetype": "retailer",
     "siteCount": 10,
+    "networkCount": 10,
+    "networkCountSource": "Tractor Supply FY2025 Form 10-K, Item 2 Properties (SEC, filed 2026-02-19)",
+    "networkCountAsOf": "2025-12-27",
+    "sampleRationale": "all 10 operating distribution centers, from the 900,000 square foot Navarre flagship to the newest Maumelle AR DC",
     "coverageNote": {
       "auditedCount": 10,
-      "estimatedFootprint": null,
+      "estimatedFootprint": 10,
       "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Audited all 11 identifiable distribution centers."
+      "note": "Audited all 10 operating distribution centers; an 11th DC in Nampa ID is under construction, with operations expected Q4 2026."
     },
     "featuredSiteId": "05-tractor-supply",
-    "dossierIntro": "Tractor Supply self-distributes to its stores from a national network of large regional distribution centers. We mapped 11 of them, from the 900,000 square foot Navarre flagship to DCs in Texas, Arizona and Idaho, holding 1,119 dock doors and room for about 2,390 trailers. The yards are tightly run. Nine of the 11 sit behind a truck gate and 7 keep a staffed booth, and every one sits on rural, open-field land where trailers stage outside the fence. YardFlow turns those manual gate stops into one orchestrated gate-to-dock flow across the whole network.",
+    "dossierIntro": "Tractor Supply self-distributes to its stores from a national network of large regional distribution centers. We mapped all 10 operating DCs, from the 900,000 square foot Navarre flagship to facilities in Texas, Arizona and Arkansas, holding 1,119 dock doors and room for about 2,390 trailers. The yards are tightly run. Nine of the 10 sit behind a truck gate and 7 keep a staffed booth, and every one sits on rural, open-field land where trailers stage outside the fence. YardFlow turns those manual gate stops into one orchestrated gate-to-dock flow across the whole network.",
     "surprisingFindings": [
-      "Nine of Tractor Supply's 11 DCs sit behind a truck gate and 7 run a staffed booth. That is tighter yard control than most grocers we have mapped.",
-      "All 11 DCs sit on rural, open-field sites, where trailers stage outside the fence line before a single gate. The check-in pinch is the choke point.",
-      "The network holds 1,119 dock doors and about 2,390 trailer spots across 11 sites, and only one touches rail. Nearly everything moves by truck."
+      "Nine of Tractor Supply's 10 DCs sit behind a truck gate and 7 run a staffed booth. That is tighter yard control than most grocers we have mapped.",
+      "All 10 DCs sit on rural, open-field sites, where trailers stage outside the fence line before a single gate. The check-in pinch is the choke point.",
+      "The network holds 1,119 dock doors and about 2,390 trailer spots across 10 sites, and only one touches rail. Nearly everything moves by truck."
     ]
   },
   "research": null,

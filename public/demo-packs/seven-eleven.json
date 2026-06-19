@@ -6,6 +6,10 @@
     "displayName": "7-Eleven",
     "archetype": "grocer-distributor",
     "siteCount": 11,
+    "networkCount": 40,
+    "networkCountSource": "https://logisticsviewpoints.com/2014/10/08/7-eleven-and-exel-deliver-fresh-food-daily/",
+    "networkCountAsOf": "~25 fresh-food CDCs (Logistics Viewpoints, 2014) plus ~15 third-party commissaries (7-Eleven, 2009)",
+    "sampleRationale": "7-Eleven runs roughly 40 partner-operated fresh-food CDCs and commissaries plus McLane grocery DCs, and we audited 11 representative facilities across the country.",
     "coverageNote": {
       "auditedCount": 11,
       "estimatedFootprint": 40,

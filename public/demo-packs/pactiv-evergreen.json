@@ -6,14 +6,18 @@
     "displayName": "Pactiv Evergreen",
     "archetype": "manufacturer",
     "siteCount": 30,
+    "networkCount": 50,
+    "networkCountSource": "https://www.sec.gov/Archives/edgar/data/1527508/000095017025026104/ptve-20241231.htm",
+    "networkCountAsOf": "2025-02",
+    "sampleRationale": "Pactiv Evergreen's FY2024 10-K reports 50 manufacturing plants almost entirely in North America, of which we audited 30 representative sites.",
     "coverageNote": {
       "auditedCount": 30,
-      "estimatedFootprint": 80,
-      "totalGlobalFootprint": 80,
+      "estimatedFootprint": 50,
+      "totalGlobalFootprint": 50,
       "auditedScope": "NA",
       "droppedStubCount": 0,
       "capHit": true,
-      "note": "Pactiv Evergreen operates ~80 NA manufacturing facilities (foodservice packaging, fresh-foods, dairy cartons). We audited 30 representative sites."
+      "note": "Pactiv Evergreen's FY2024 10-K reports 50 manufacturing plants (22 Foodservice, 28 Food and Beverage Merchandising), almost entirely North America. We audited 30 representative sites."
     },
     "featuredSiteId": "19-romeoville",
     "dossierIntro": "Pactiv Evergreen runs the foodservice packaging network: foam containers, paper cups, fiber food trays. 80 facilities; we audited 30. Romeoville IL has 91 dock doors. Canandaigua NY is 145 acres. 950 dock doors total. 12 of 30 audited sites are rail-served. YardFlow runs the high-volume, low-mass foodservice packaging trailer the same as a high-dwell CPG trailer.",

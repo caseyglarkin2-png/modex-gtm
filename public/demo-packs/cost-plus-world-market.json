@@ -6,13 +6,17 @@
     "displayName": "Cost Plus World Market",
     "archetype": "retailer",
     "siteCount": 2,
+    "networkCount": 2,
+    "networkCountSource": "Kaleris case study (kaleris.com/case-study/cost-plus-world-market-case-study) + Kingswood Capital acquisition release",
+    "networkCountAsOf": "2024",
+    "sampleRationale": "both of the two distribution centers in the network, the West Coast import hub and its East Coast counterpart",
     "coverageNote": {
       "auditedCount": 2,
-      "estimatedFootprint": 4,
+      "estimatedFootprint": 2,
       "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "World Market (Cost Plus) operates ~250 US retail stores fed by a handful of DCs; we mapped the DC sites where yard ops matter."
+      "note": "World Market (Cost Plus) operates ~250 US retail stores fed by exactly two distribution centers; we mapped both DC sites where yard ops matter."
     },
     "featuredSiteId": "01-cost-plus-world-market-stockton-ca-distribution-center",
     "dossierIntro": "Cost Plus World Market runs imported home-goods retail. 4 distribution centers; we audited 2. Stockton CA covers 95 acres with 90 dock doors and 500 trailer spots. Container-heavy inbound from West Coast ports. YardFlow runs container drayage and outbound retail truckload as distinct flows without forcing the staging yard to choose.",

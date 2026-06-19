@@ -6,6 +6,10 @@
     "displayName": "Publix Super Markets",
     "archetype": "grocer-distributor",
     "siteCount": 11,
+    "networkCount": 10,
+    "networkCountSource": "https://www.sec.gov/Archives/edgar/data/81061/000008106126000038/ck0000081061-20251227.htm",
+    "networkCountAsOf": "FY2025 10-K, fiscal year ended 2025-12-27",
+    "sampleRationale": "Publix self-distributes from 10 primary DCs per its FY2025 10-K, and we audited 11 owned facilities, so the sample covers the entire distribution network.",
     "coverageNote": {
       "auditedCount": 11,
       "estimatedFootprint": null,

@@ -6,21 +6,25 @@
     "displayName": "Diageo",
     "archetype": "beverage",
     "siteCount": 9,
+    "networkCount": 12,
+    "networkCountSource": "Diageo North America (secondary.diageo.com/en/our-business/where-we-operate/north-america) - 12 production and warehousing facilities across the US, Canada and the US Virgin Islands",
+    "networkCountAsOf": "2026",
+    "sampleRationale": "the largest North American production and distribution sites including the Plainfield IL flagship and the Lebanon KY distillery",
     "coverageNote": {
       "auditedCount": 9,
       "estimatedFootprint": 12,
-      "totalGlobalFootprint": 150,
+      "totalGlobalFootprint": 110,
       "auditedScope": "NA",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Diageo operates ~150 production sites across 30+ countries (Johnnie Walker, Smirnoff, Guinness, Tanqueray, Captain Morgan). We audited 10 NA sites; international scope on request."
+      "note": "Diageo operates 110+ manufacturing sites across 30+ countries (Johnnie Walker, Smirnoff, Guinness, Tanqueray, Captain Morgan), with 12 production and warehousing facilities across the US, Canada and the US Virgin Islands. We audited 9 NA sites; international scope on request."
     },
     "featuredSiteId": "02-diageo-plainfield-distribution-warehouse",
-    "dossierIntro": "Diageo runs the Johnnie Walker, Guinness, and Smirnoff distribution backbone. 150 facilities; we audited 10. Plainfield IL has 130 dock doors on 81.8 acres. Lebanon KY is 142 acres of distillery (bourbon ages here for 4 to 8 years). Mixed manufacturing and distribution. YardFlow runs the federal-bonded spirits trailer and the retail truckload trailer on the same protocol with different audit chains.",
+    "dossierIntro": "Diageo runs the Johnnie Walker, Guinness, and Smirnoff distribution backbone. 12 North American facilities; we audited 9. Plainfield IL has 130 dock doors on 81.8 acres. Lebanon KY is 142 acres of distillery (bourbon ages here for 4 to 8 years). Mixed manufacturing and distribution. YardFlow runs the federal-bonded spirits trailer and the retail truckload trailer on the same protocol with different audit chains.",
     "surprisingFindings": [
       "Plainfield IL runs 130 dock doors. Diageo's flagship US distribution warehouse.",
       "Lebanon KY is 142 acres of distillery. Bourbon ages here for 4 to 8 years before truckload outbound.",
-      "1 of 10 audited sites is rail-served. Spirits move on truckload almost exclusively."
+      "1 of 9 audited sites is rail-served. Spirits move on truckload almost exclusively."
     ]
   },
   "research": null,

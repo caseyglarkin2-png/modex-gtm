@@ -6,6 +6,10 @@
     "displayName": "Harris Teeter",
     "archetype": "grocer-distributor",
     "siteCount": 3,
+    "networkCount": 3,
+    "networkCountSource": "https://www.commerce.nc.gov/news/press-releases/harris-teeter-expand-existing-distribution-center-union-county",
+    "networkCountAsOf": "NC Dept of Commerce, 2014 (two NC DCs plus a VA relay); third full DC added in Caroline County VA after the 2017 groundbreaking",
+    "sampleRationale": "Harris Teeter self-distributes from three DCs, and we audited three, so the sample covers its entire distribution network.",
     "coverageNote": {
       "auditedCount": 3,
       "estimatedFootprint": null,

@@ -6,21 +6,25 @@
     "displayName": "Keurig Dr Pepper",
     "archetype": "beverage",
     "siteCount": 17,
+    "networkCount": 123,
+    "networkCountSource": "Keurig Dr Pepper FY2024 Form 10-K, Item 2 Properties (SEC, kdp-20241231.htm) - 123 US principal facilities (24 production plants + 99 warehouse and distribution centers)",
+    "networkCountAsOf": "2024-12-31",
+    "sampleRationale": "the largest manufacturing and distribution sites spanning the K-Cup, soda and tea flows, including the Allentown PA combo plant and the Irving TX market",
     "coverageNote": {
       "auditedCount": 17,
-      "estimatedFootprint": 35,
-      "totalGlobalFootprint": 35,
+      "estimatedFootprint": 123,
+      "totalGlobalFootprint": 123,
       "auditedScope": "NA",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Keurig Dr Pepper operates ~35 manufacturing + DC sites, almost entirely NA. We audited 20 representative sites."
+      "note": "Keurig Dr Pepper operates 123 US principal facilities per its FY2024 10-K (24 production plants plus 99 warehouse and distribution centers), excluding the far larger direct-store-delivery branch network. We audited 17 representative sites."
     },
     "featuredSiteId": "04-kdp-beverage-manufacturing-distribution-allentown-pa",
-    "dossierIntro": "Keurig Dr Pepper runs the K-Cup, soda, and tea distribution network. 35 facilities; we audited 20. Allentown PA covers 92 acres with 130 dock doors. Irving TX is 117.4 acres. 851 dock doors total. YardFlow runs the single-serve (K-Cup) and case-pack (soda) flows on different protocols inside one gate.",
+    "dossierIntro": "Keurig Dr Pepper runs the K-Cup, soda, and tea distribution network. 123 US facilities; we audited 17. Allentown PA covers 92 acres with 130 dock doors. Irving TX is 117.4 acres. 851 dock doors total. YardFlow runs the single-serve (K-Cup) and case-pack (soda) flows on different protocols inside one gate.",
     "surprisingFindings": [
       "Allentown PA runs 130 dock doors. KDP's largest manufacturing-and-distribution combo facility.",
       "Irving TX is 117.4 acres of beverage distribution. Dr Pepper's headquarters market.",
-      "3 of 20 audited sites are rail-served. Inbound coffee and sugar move on rail."
+      "3 of 17 audited sites are rail-served. Inbound coffee and sugar move on rail."
     ]
   },
   "research": null,

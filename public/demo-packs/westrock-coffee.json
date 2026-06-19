@@ -6,17 +6,21 @@
     "displayName": "Westrock Coffee",
     "archetype": "cpg",
     "siteCount": 6,
+    "networkCount": 5,
+    "networkCountSource": "https://www.sec.gov/Archives/edgar/data/1806347/000110465926025932/west-20251231x10k.htm",
+    "networkCountAsOf": "2026-03",
+    "sampleRationale": "Westrock Coffee's FY2025 10-K lists five US principal properties, so our six audited sites cover the entire current US network.",
     "coverageNote": {
       "auditedCount": 6,
-      "estimatedFootprint": 10,
-      "totalGlobalFootprint": 10,
+      "estimatedFootprint": 5,
+      "totalGlobalFootprint": 5,
       "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Westrock Coffee operates ~10 facilities (US + Rwanda + Tanzania for green-coffee sourcing). We audited 6 US sites."
+      "note": "Westrock Coffee's FY2025 10-K lists 5 US principal properties; we audited 6 sites covering the full US network (Conway is over-segmented into two)."
     },
     "featuredSiteId": "02-conway-ar-dc",
-    "dossierIntro": "Westrock Coffee runs the largest US-based private-label coffee and extracts operation. 10 facilities; we audited 6. Conway AR DC has 72 dock doors. Conway AR Roast-to-RTD plant is 47 acres. 211 total dock doors. YardFlow runs the green-coffee inbound and finished-product outbound as two distinct queues on one yard graph.",
+    "dossierIntro": "Westrock Coffee runs the largest US-based private-label coffee and extracts operation. Five US principal properties; we audited 6 sites covering the full network. Conway AR DC has 72 dock doors. Conway AR Roast-to-RTD plant is 47 acres. 211 total dock doors. YardFlow runs the green-coffee inbound and finished-product outbound as two distinct queues on one yard graph.",
     "surprisingFindings": [
       "Conway AR Roast-to-RTD plant is 47 acres of vertically integrated coffee operations.",
       "211 dock doors across 6 audited sites. Westrock runs efficient dock density per SKU.",
