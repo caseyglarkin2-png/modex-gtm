@@ -157,5 +157,31 @@
     "scale": "No truck scale resolved in imagery.",
     "siteAreaAcres": "Perimeter box ~724 x 1015 m covers brewery core plus trailer yard ~181 acres."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.anheuser-busch.com/facilities/houston-tx",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "AB maintains a dedicated Houston TX facility/careers page; active reqs at the Houston brewery."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.fooddive.com/news/anheuser-busch-closes-breweries-new-hampshire-california-sells-new-jersey/807759/",
+        "date": "2025-12",
+        "type": "press",
+        "claim": "2026 closures limited to Fairfield, Merrimack, Newark; Houston not affected."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Houston brewery actively operating with open careers reqs; not in the 2026 closure set.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

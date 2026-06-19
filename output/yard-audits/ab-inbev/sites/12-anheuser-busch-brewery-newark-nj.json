@@ -158,5 +158,31 @@
     "urbanRural": "Dense Newark / Newark Liberty Airport industrial fabric within the NYC metro - Urban.",
     "scale": "No truck scale positively identified - flagged uncertain."
   },
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.roi-nj.com/2026/05/07/real_estate_development/newmark-arranges-360m-sale-of-former-budweiser-brewery-property-in-newark-on-behalf-of-anheuser-busch/",
+        "date": "2026-05-07",
+        "type": "press",
+        "claim": "Newmark arranged the $360M sale of the former Budweiser brewery property in Newark on behalf of AB to Goodman; site to be redeveloped as a logistics hub."
+      },
+      {
+        "tier": 2,
+        "url": "https://nj1015.com/anheuser-busch-newark-sale/",
+        "date": "2026-05",
+        "type": "press",
+        "claim": "AB closed the $360M sale of its Newark brewery site (opened 1951) to Goodman North America; facility closing after 75 years."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Sold to Goodman Group for ~$360M (deeds filed March 2026) and closing as part of the AB realignment; credible dated Tier-2 sale/closure press.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

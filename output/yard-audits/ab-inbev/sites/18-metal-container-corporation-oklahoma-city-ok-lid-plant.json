@@ -168,5 +168,31 @@
     "urbanRural": "Site is within the dense SW Oklahoma City industrial fabric near I-240 - classified Urban with reasonable confidence even though the exact building is unconfirmed.",
     "railServed": "A rail line runs through the industrial district near the EPA-recorded point; whether a spur serves the actual MCC building is unknown."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.velocityokc.com/blog/member-news/anheuser-busch-s-mcc-okc-lid-plant-38-years-of-lid-production-and-innovation/",
+        "date": "2025-02",
+        "type": "press",
+        "claim": "AB's Metal Container Corporation Oklahoma City Lid Plant marks 38 years of production, 40M+ lids/day - active as of early 2025."
+      },
+      {
+        "tier": 1,
+        "url": "https://enviro.epa.gov/triexplorer/release_fac_profile?TRI=73179MTLCN3713H&TRILIB=TRIQ1&V_NA_INDICATOR=.&YEAR=2024",
+        "date": "2024",
+        "type": "permit",
+        "claim": "EPA TRI facility profile (73179MTLCN3713H) for Metal Container Corp lid plant at 3713 Harmon Ave, Oklahoma City OK 73179, reporting year 2024 - active facility."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Address confirmed 3713 Harmon Ave, OKC 73179 (EPA TRI); AB-subsidiary MCC lid plant since 1986, 38-year milestone Feb 2025 + Jan 2026 network buyback confirm current self-operation.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

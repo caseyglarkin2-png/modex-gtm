@@ -154,5 +154,31 @@
     "_locationUncertainty": "The exact MCC Riverside Lid Plant building could not be positively identified. The roster supplied only city-level coordinates (33.9533, -117.3962, generic Riverside center) and no address. Web research resolved the address to 7155 Central Ave, Riverside, CA 92504 (Yelp, Yahoo Local, Manta, D&B, CommercialCafe; phone 951-354-0444). CommercialCafe describes it as a Class B industrial building, 83,914 SF, completed 1987, in the 'Airport neighborhood' of Riverside (near Riverside Municipal Airport), with ~200 employees per the listing. However, no precise latitude/longitude could be obtained from any source (Waze, EPA FRS/TRI, real-estate listings all lacked coordinates), and extensive satellite + Street View probing of the industrial districts around Riverside Municipal Airport could not isolate a single building confirmable as the MCC lid plant - the airport-adjacent industrial fabric is dense with similar multi-tenant and mid-size industrial buildings, none with confirmable MCC signage. Coordinates recorded here (33.9480, -117.4500) are a best-estimate point in the airport-NE industrial cluster; the perimeter box is a nominal placeholder and yardMetrics are zeroed. Recommend human review with Riverside County parcel/GIS data for 7155 Central Ave, or a direct facility contact, to confirm the building footprint.",
     "urbanRural": "The facility is within the dense Riverside metro industrial fabric near Riverside Municipal Airport - classified Urban with reasonable confidence even though the exact building is unconfirmed."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.anheuser-busch.com/careers/metal-container-corporation",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "AB careers/MCC overview lists lid plants in Oklahoma City, OK and Riverside, CA among active Metal Container Corporation facilities."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.packagingdive.com/news/ab-inbev-metal-container-plant-business-3-billion/808907/",
+        "date": "2026-01-06",
+        "type": "press",
+        "claim": "AB InBev buying back its MCC network (seven facilities, six states) for ~$3B, Q1 2026 - confirms current AB operation including the Riverside CA lid plant."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Real address resolved to 7155 Central Ave, Riverside CA 92504; AB-subsidiary MCC lid plant, AB careers roster + Jan 2026 network buyback confirm current self-operation.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

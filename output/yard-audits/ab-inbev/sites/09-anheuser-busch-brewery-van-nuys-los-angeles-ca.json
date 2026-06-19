@@ -160,5 +160,31 @@
     "fastLaneOpportunity": "Wide multi-lane gate apron at the NE entrance offers room for an express bypass lane.",
     "operatingStatus": "Active brewery (95 acres, 1.7M sq ft, ~12M barrels/yr per industry sources); offers public tours."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://abc7.com/post/anheuser-busch-invests-millions-van-nuys-brewery-location-ahead-2026-world-cup-2028-summer-olympics/18268765/",
+        "date": "2025",
+        "type": "press",
+        "claim": "AB invested $180M+ in the Van Nuys/LA brewery over five years incl. $7.4M in 2025; production shifting to it from closed facilities."
+      },
+      {
+        "tier": 2,
+        "url": "https://valley.labusinessjournal.com/manufacturing/beverages/b-invest-van-nuys-brewery/",
+        "date": "2025",
+        "type": "press",
+        "claim": "LA Business Journal confirms AB's continued operation of and investment in the Van Nuys brewery."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Multiple dated 2025 investment press confirm current operation; recipient of shifted production. NOTE: this is the surviving LA-area Van Nuys plant, distinct from the closed Fairfield CA plant.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

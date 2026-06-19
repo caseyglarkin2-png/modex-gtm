@@ -146,5 +146,31 @@
     "scale": "No truck scale resolved.",
     "siteAreaAcres": "Boxed footprint ~167 acres for brewery core + trailer yards."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.prnewswire.com/news-releases/anheuser-busch-invests-9m-in-its-baldwinsville-ny-brewery-to-drive-local-economic-growth-302521814.html",
+        "date": "2025-08-05",
+        "type": "press",
+        "claim": "AB-distributed release confirms it operates and is investing $9M in the Baldwinsville NY brewery, home since 1983."
+      },
+      {
+        "tier": 2,
+        "url": "https://spectrumlocalnews.com/nys/central-ny/news/2025/12/17/anheuser-busch-closing-3-breweries--could-shift-some-production-to-cny-plant",
+        "date": "2025-12-17",
+        "type": "press",
+        "claim": "Baldwinsville named as a remaining plant receiving shifted production from the three closing breweries."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Recent AB-distributed investment press + named beneficiary of the realignment; no negative signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

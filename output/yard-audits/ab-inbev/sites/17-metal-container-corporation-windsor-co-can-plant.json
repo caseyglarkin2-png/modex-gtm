@@ -144,5 +144,31 @@
     "trailerParkingCapacity": "East paved apron could hold ~10-12 trailers if used for staging; low-confidence estimate.",
     "buildingCount": "Single connected structure - a windowless warehouse/storage section (north) joined to a process-equipment-laden manufacturing section (south)."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.epa.gov/system/files/documents/2022-07/copf00102-metal-container-fact-sheet.pdf",
+        "date": "2022-07",
+        "type": "permit",
+        "claim": "EPA fact sheet (CO-PF00102) for Metal Container Corporation - Windsor Can Plant, Windsor CO, describing active aluminum beverage container manufacturing."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.packagingdive.com/news/ab-inbev-metal-container-plant-business-3-billion/808907/",
+        "date": "2026-01-06",
+        "type": "press",
+        "claim": "AB InBev buying back its MCC network (seven facilities, six states) for ~$3B, Q1 2026 - confirms current AB operation including the Windsor CO can plant."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "AB-subsidiary MCC can plant at 1201 Metal Container Ct, Windsor CO; EPA records + Jan 2026 network buyback confirm current self-operation.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

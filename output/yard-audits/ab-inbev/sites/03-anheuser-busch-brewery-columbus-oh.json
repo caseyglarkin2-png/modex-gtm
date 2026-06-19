@@ -146,5 +146,31 @@
     "scale": "No truck scale resolved.",
     "siteAreaAcres": "Documented 138 acres; boxed footprint approximates this."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.anheuser-busch.com/about/breweries-and-tours/columbus-oh/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "AB Columbus OH brewery at 700 Schrock Rd, opened 1968, listed as operating."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.manufacturingdive.com/news/anheuser-busch-earnings-investing-american-manufacturing-300-million-workforce-development/747774/",
+        "date": "2025-05",
+        "type": "press",
+        "claim": "AB launching its Columbus Regional Excellence Center, confirming active Columbus operations."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Columbus brewery operating; named as host of a new 2025 Regional Excellence Center investment; not in closure set.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

@@ -147,5 +147,24 @@
     "fastLaneOpportunity": "Wide access roads and yard aprons leave ample room to add lanes.",
     "siteAreaAcres": "Boxed footprint ~267 acres for the operational campus."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.anheuser-busch.com/newsroom/anheuser-busch-announces-15-5-m-infrastructure-investment-in-fort-collins-brewery",
+        "date": "2024-05",
+        "type": "press",
+        "claim": "AB newsroom confirms operation of and $15.5M infrastructure investment in the Fort Collins CO brewery (bottling-line upgrade operational summer 2024)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "AB newsroom investment press confirms current operation; not among the realignment closures, no negative signal found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

@@ -146,5 +146,24 @@
     "scale": "No truck scale resolved separately.",
     "siteAreaAcres": "Boxed operational footprint ~185 acres (excludes wooded buffer)."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.anheuser-busch.com/facilities/williamsburg-va",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "AB maintains a dedicated Williamsburg VA facility page; brewery at 7801 Pocahontas Trail opened 1972."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Williamsburg brewery operating with a live AB facility page; not in the 2026 closure set, no negative signal found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

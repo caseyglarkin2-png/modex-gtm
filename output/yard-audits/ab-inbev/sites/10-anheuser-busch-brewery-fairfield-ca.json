@@ -149,5 +149,31 @@
     "multipleFacilities": "Campus: brewhouse with tank farm, packaging warehouses, ancillary buildings, separate office building, and a large ground-mounted solar farm in the SW.",
     "urbanRural": "Edge-of-town site between I-80 and farmland on the W; agricultural land borders the W and SW - Rural setting."
   },
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://fox40.com/news/anheuser-busch-brewery-in-fairfield-to-shut-down-in-february-2026-over-200-jobs-affected/",
+        "date": "2026",
+        "type": "press",
+        "claim": "AB will permanently close its Fairfield CA brewery; last day of operation Feb 22, 2026, ~238 jobs affected."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.cbsnews.com/sacramento/news/fairfield-budweiser-anheuser-busch-closing",
+        "date": "2025-12",
+        "type": "press",
+        "claim": "Fairfield Budweiser plant to close by February 2026 as part of AB's three-brewery US realignment."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Closed in the 2025-2026 AB realignment (final operating day Feb 22, 2026); credible dated Tier-2 closure press.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

@@ -161,5 +161,31 @@
     "urbanRural": "Dense West Jacksonville industrial district within the Jacksonville metro - Urban.",
     "scale": "No truck scale positively identified - flagged uncertain."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.anheuser-busch.com/newsroom/anheuser-busch-to-invest-170-million-in-jacksonville-metal-container-corporation-facility",
+        "date": "2015-09",
+        "type": "press",
+        "claim": "AB announced a $170M expansion of its Metal Container Corporation facility in Jacksonville, FL."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.packagingdive.com/news/ab-inbev-metal-container-plant-business-3-billion/808907/",
+        "date": "2026-01-06",
+        "type": "press",
+        "claim": "AB InBev buying back full stake in its MCC network (seven facilities, six states) for ~$3B, Q1 2026 - confirms ongoing AB operation including Jacksonville."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Real address resolved to 1100 Ellis Road, West Jacksonville FL (not Skinner Lake Dr); AB-owned MCC can plant, $170M expansion + Jan 2026 buyback confirm current self-operation.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

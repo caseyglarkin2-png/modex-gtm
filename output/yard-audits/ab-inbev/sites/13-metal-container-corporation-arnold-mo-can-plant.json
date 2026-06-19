@@ -149,5 +149,31 @@
     "urbanRural": "Small-town industrial park in Arnold MO between residential neighborhoods and the Meramec River; edge-of-town setting - Rural.",
     "scale": "No truck scale identified - flagged uncertain."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.anheuser-busch.com/newsroom/arnold-mcc",
+        "date": "2018",
+        "type": "press",
+        "claim": "AB announced a $150M investment in its Metal Container Corporation Arnold, MO facility, doubling aluminum bottle capacity."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.packagingdive.com/news/ab-inbev-metal-container-plant-business-3-billion/808907/",
+        "date": "2026-01-06",
+        "type": "press",
+        "claim": "AB InBev buying back the 49.9% stake in its US metal container operations (seven facilities, six states) for ~$3B, Q1 2026, confirming continued AB operation including Arnold."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "AB-owned MCC can plant, Arnold MO; $150M expansion + Jan 2026 $3B network buyback confirm current self-operation; 2009 Ball divestiture involved different plants.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

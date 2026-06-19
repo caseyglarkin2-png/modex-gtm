@@ -125,5 +125,31 @@
     "connectivityIssue": "Rural farmland setting but directly along a state highway with a neighboring industrial facility - cellular coverage likely adequate; set false.",
     "buildingCount": "Approximately 7 distinct structures: tall malting/process buildings, large grain storage building, silo/drum clusters, office, plus outbuildings."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://anheuser-busch.dejobs.org/malt-operator-idaho-falls/jobs-in/idaho-falls/idaho/usa/jobs/",
+        "date": "2025-08-11",
+        "type": "careers",
+        "claim": "Active AB 'Malt Operator - Idaho Falls' requisition (posted 2025-08-11, open through 2026-05-24) on the AB careers domain, confirming current operation of the Idaho Falls malt plant."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.prnewswire.com/news-releases/american-farmland-trust-and-anheuser-busch-support-idaho-farmers-through-new-us-farmed-certification-302104537.html",
+        "date": "2024-03",
+        "type": "press",
+        "claim": "AB names the Idaho Falls malt plant (300,000+ metric tons finished malt/year) among its Idaho agricultural facilities operated by Busch Agricultural Resources."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active AB-domain Malt Operator reqs (2025-26) plus 2024 AB press confirm current operation; recent AB closures do not include Idaho Falls and no divestiture to a third-party maltster found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

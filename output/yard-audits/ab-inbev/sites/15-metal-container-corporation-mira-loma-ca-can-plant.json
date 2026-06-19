@@ -145,13 +145,39 @@
   ],
   "fieldNotes": {
     "truckGate": "South-side main driveway is a wide open entrance with a landscaped median (rock + agave) and no barrier arm, sliding gate, or checkpoint pinch-point. Street View Feb 2025 from Inland-area road shows free-flowing access. North and west property lines are palisade-fenced perimeter with grassy buffers and no vehicle gate.",
-    "guardShack": "No staffed booth visible at the south entrance in satellite or Street View. A small structure exists on the NE annex but it is part of the can-end processing building, not an entrance booth. Low-confidence negative — booth could be obscured by entrance landscaping, but no evidence of one.",
+    "guardShack": "No staffed booth visible at the south entrance in satellite or Street View. A small structure exists on the NE annex but it is part of the can-end processing building, not an entrance booth. Low-confidence negative \u00e2\u20ac\u201d booth could be obscured by entrance landscaping, but no evidence of one.",
     "multipleFacilities": "Two buildings on one fenced parcel: the main can-manufacturing building (west, large white roof) and a separate NE annex building with rooftop tanks/silos (likely can-end or coatings processing).",
     "dockDoorCount": "Counted ~12-14 dock doors along the building's south face under a continuous blue canopy at zoom 20; estimate, some doors may be obscured by trailers/shadows.",
     "dropYard": "Large paved truck yard wraps the south and SW of the building with ample marked space for parked trailers; only ~4 trailers present in the captured imagery.",
     "railServed": "A rail corridor runs NE-SW immediately east and along the west of the property, but it is a through-line/spur shared with neighboring warehouses; no track enters the MCC building.",
     "fastLaneOpportunity": "The south entrance driveway is very wide with a divided median, providing ample paved width to add a dedicated express/bypass lane.",
     "urbanRural": "Located in the dense Mira Loma/Jurupa Valley industrial fabric of the Inland Empire metro - surrounded by large distribution warehouses on all sides."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://enviro.epa.gov/triexplorer/release_fac_profile?TRI=91752MTLCN10980&TRILIB=TRIQ1&V_NA_INDICATOR=.&YEAR=2024",
+        "date": "2024",
+        "type": "permit",
+        "claim": "EPA TRI facility profile (91752MTLCN10980) for Metal Container Corp at 10980 Inland Ave, Mira Loma/Jurupa Valley CA, reporting year 2024 - active can-manufacturing facility."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.packagingdive.com/news/ab-inbev-metal-container-plant-business-3-billion/808907/",
+        "date": "2026-01-06",
+        "type": "press",
+        "claim": "AB InBev buying back its MCC network (seven facilities, six states) for ~$3B, Q1 2026 - confirms current AB operation including Mira Loma."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "AB-subsidiary MCC can plant at 10980 Inland Ave, Mira Loma (Jurupa Valley) CA; current EPA TRI 2024 record + Jan 2026 network buyback confirm self-operation.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
   },
   "method": "deep-audit"
 }

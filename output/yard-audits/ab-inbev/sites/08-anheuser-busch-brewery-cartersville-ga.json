@@ -166,5 +166,24 @@
     "multipleFacilities": "Campus: main brewhouse/warehouse, packaging hall, ancillary buildings, and a separate small building NE of the trailer yard.",
     "urbanRural": "Edge-of-town wooded site off I-75 outside Cartersville, surrounded by farmland and forest - Rural setting."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.anheuser-busch.com/newsroom/anheuser-busch-cartersville-brewery-announces-expansion",
+        "date": "2025-04",
+        "type": "press",
+        "claim": "AB newsroom confirms current operation of the Cartersville GA brewery (since 1993), ~$9.2M equipment upgrade + new training center."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "AB newsroom 2025 expansion press confirms current operation; not among the closures, no negative signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

@@ -160,5 +160,31 @@
     "urbanRural": "Edge-of-town site between the Everett Turnpike and the Merrimack River, surrounded by woods and the river corridor - Rural setting.",
     "scale": "No truck scale positively identified - flagged uncertain."
   },
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.nhpr.org/nh-news/2025-12-11/anheuser-busch-budweiser-merrimack-nh-close-facility-plant-factory-brewery",
+        "date": "2025-12-11",
+        "type": "press",
+        "claim": "AB will shutter its Merrimack NH brewery in early 2026 and offer relocation stipends to workers."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.unionleader.com/news/business/anheuser-busch-to-shutter-its-merrimack-facility-in-early-2026/article_e82475b4-a10a-471e-b59f-380715418200.html",
+        "date": "2025-12",
+        "type": "press",
+        "claim": "AB to shutter its Merrimack facility in early 2026, ~125 jobs affected, after 55 years."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Closing in early 2026 as part of the AB three-brewery realignment; credible dated Tier-2 closure press.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

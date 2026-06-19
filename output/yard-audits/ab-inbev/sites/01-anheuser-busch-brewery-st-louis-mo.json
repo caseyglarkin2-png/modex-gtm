@@ -134,5 +134,31 @@
     "backupSensitive": "Urban campus surrounded by public streets, I-55, and residential blocks; truck queues could spill onto city streets.",
     "siteAreaAcres": "Perimeter box covers the AB operational footprint (brewery core + distribution warehouse + trailer yards). ~254 acres for the boxed area; brewery proper is ~142 acres."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://fox2now.com/news/missouri/anheuser-busch-to-close-or-sell-three-breweries-st-louis-unaffected/",
+        "date": "2025-12",
+        "type": "press",
+        "claim": "AB 2026 realignment closes/sells Fairfield, Merrimack, Newark; St. Louis explicitly unaffected and among facilities receiving investment."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.budweisertours.com/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Anheuser-Busch's St. Louis flagship brewery (1200 Lynch St) is the active home of Budweiser, running tours."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Flagship St. Louis brewery; explicitly named unaffected by the 2026 closures and a recipient of investment.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

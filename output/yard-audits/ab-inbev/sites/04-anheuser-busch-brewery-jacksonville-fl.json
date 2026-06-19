@@ -177,5 +177,31 @@
     "scale": "No truck scale resolved.",
     "siteAreaAcres": "Boxed footprint ~128 acres for brewery core + trailer yards."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.anheuser-busch.com/newsroom/anheuser-busch-investing-in-jacksonville-facilities-to-drive-local-economic-growth",
+        "date": "2026-01",
+        "type": "press",
+        "claim": "AB investing $30M in its Jacksonville brewery (111 Busch Dr) to expand Michelob ULTRA production; opened 1969."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.jaxdailyrecord.com/news/2026/jan/06/anheuser-busch-to-invest-30-million-in-jacksonville-facilities/",
+        "date": "2026-01-06",
+        "type": "press",
+        "claim": "AB to invest $30M upgrading the Jacksonville brewery and can plant at 111 Busch Drive; ~$100M invested since 2021."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Jacksonville brewery received a $30M production investment Jan 2026; actively brewing. (Yelp shows the visitor tour center closed, not the brewery.)",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }
