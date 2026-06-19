@@ -160,5 +160,19 @@
     "trailersVisible": "~22 trailers across the captured drop-yard and dock imagery; approximate.",
     "scale": "No truck scale visible in imagery."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.brewbound.com/news/teamsters-at-boston-beers-cincinnati-brewery-file-unfair-labor-practice-complaint/", "date": "2025-02", "type": "press", "claim": "Teamsters Local 1199 filed an ULP complaint on behalf of union members at Boston Beer's Cincinnati OH brewery; an active unionized production workforce in Feb 2025 confirms current operation." },
+      { "tier": 1, "url": "https://redicincinnati.com/samuel-adams-announces-plans-to-add-new-canning-lines-and-jobs/", "date": "2020-07", "type": "press", "claim": "$85M Over-the-Rhine brewery expansion: two remodeled canning lines + building extensions, quadrupling Cincinnati production; 100+ new jobs (completed per later trade coverage)." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Boston-Beer-owned via wholly owned subsidiary Samuel Adams Brewery Company Ltd; active union workforce, 2025 hiring, completed $85M canning expansion; no closure/sale/idling/WARN found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

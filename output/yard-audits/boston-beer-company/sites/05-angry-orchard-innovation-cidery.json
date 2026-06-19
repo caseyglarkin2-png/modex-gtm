@@ -87,5 +87,19 @@
     "trailersVisible": "No tractor-trailers on site. Most Angry Orchard production volume is at the Cincinnati brewery; Walden is a small-batch / R&D / specialty cider and visitor destination, so it does not run a freight trailer yard.",
     "siteAreaAcres": "Perimeter box approximates the deer-fenced orchard/cidery parcel (~60-acre planted orchard plus grounds); ~75.6 acres as boxed."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://agriculture.ny.gov/news/governor-cuomo-announces-opening-angry-orchards-new-innovation-cider-house-walden", "date": "2016-05", "type": "press", "claim": "Establishes the Walden NY facility as Angry Orchard's (Boston Beer Co.) company-owned 60-acre orchard + Innovation Cider House at 2241 Albany Post Rd; confirms ownership/identity." },
+      { "tier": 3, "url": "https://www.tripadvisor.com/Attraction_Review-g48788-d10266026-Reviews-Angry_Orchard-Walden_New_York.html", "date": "2026-06", "type": "press", "claim": "Cider house open and operating; most recent visitor reviews May 2026, no closure, current Thu-Sun hours. (corroborating only)" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Company-owned and operating per 2016 opening PR + current-dated tourism/review corroboration with no closure or divestiture; capped to probable because the only current-operation evidence is Tier-3 (angryorchard.com cider-house page is age-gated). FREIGHT FLAG: hospitality/R&D agritourism destination, no real trailer yard; commercial Angry Orchard production is at Cincinnati. Not a YardFlow freight target.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

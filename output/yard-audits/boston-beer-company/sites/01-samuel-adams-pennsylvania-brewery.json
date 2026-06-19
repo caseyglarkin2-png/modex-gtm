@@ -183,5 +183,19 @@
     "urbanRural": "Penn Drive industrial park at the edge of Breinigsville, surrounded by farmland and I-78; small-town/edge-of-town setting -> Rural.",
     "trailersVisible": "~170 trailers counted across the south and west drop yards in the captured imagery; approximate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://investors.bostonbeer.com/static-files/26cfa994-f3c4-4668-b920-9f2842d0d66f", "date": "2025-02", "type": "10-K Item 2", "claim": "FY2024 10-K Properties lists Breinigsville PA ('the Pennsylvania Brewery') as one of four company-owned breweries; ~76 acres / ~1M sq ft; planned 2025 capex on PA brewery infrastructure." },
+      { "tier": 1, "url": "https://www.sec.gov/Archives/edgar/data/0000949870/000119312526067467/sam-20251227.htm", "date": "2026-02", "type": "10-K", "claim": "Most recent FY2025 10-K on file (period ending 2025-12-27), consistent with prior Properties disclosure naming the PA brewery as company-owned." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Company-owned, named in 10-K Item 2; gauntlet found only a whole-company Suntory acquisition rumor and contract-brewer (not owned-plant) capacity cuts, no sale/closure/WARN for Breinigsville.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -91,5 +91,18 @@
     "scale": "No truck scale.",
     "trailersVisible": "No tractor-trailers on site; this heritage R&D brewery does not run a trailer yard. Deliveries are by box truck/van."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.samueladams.com/taprooms", "date": "2026-06", "type": "locator", "claim": "Official Samuel Adams taproom listing shows the Boston Brewery (30 Germania St, Jamaica Plain) currently open daily with 16 taps; home to the company's R&D / innovation brewhouse." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Operating, company-owned R&D brewery + taproom; confirmed by official taproom page and active 2026 careers reqs at the JP site; only 'closed' hit was the unrelated Doyle's Cafe. FREIGHT FLAG: ~2.4 acres, ~2 dock doors, no trailer yard, negligible freight-yard relevance.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

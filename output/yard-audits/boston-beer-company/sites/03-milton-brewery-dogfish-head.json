@@ -148,5 +148,19 @@
     "scale": "No truck scale visible.",
     "trailersVisible": "Only ~3 trailers/trucks visible in captured imagery; this brewery runs lighter on-site trailer staging than the larger network sites."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://investors.bostonbeer.com/static-files/26cfa994-f3c4-4668-b920-9f2842d0d66f", "date": "2025-02", "type": "10-K Item 2", "claim": "FY2024 10-K Properties lists the Milton DE Brewery as one of four primary company-owned breweries (production + R&D + on-site taproom); spirits/spirits-RTDs produced at Milton." },
+      { "tier": 1, "url": "https://www.dogfish.com/visit/milton-brewery/tours", "date": "2026-06", "type": "locator", "claim": "Dogfish.com Milton Brewery page offers daily year-round Grain-to-Glass tours and a 27-tap tasting room; indicates active operation." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "2019 Dogfish Head acquisition still stands; Milton named as company-owned brewery in 10-K, active 2026 PR/tours/events; only adverse item is a brand-level accounting impairment, not a divestiture or facility closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
