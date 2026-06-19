@@ -1,23 +1,70 @@
 {
   "name": "Kraft Heinz - Dover",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "dropArea"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "dropArea"
+  ],
   "fieldNotes": {
     "truckGate": "Street View faces a tree/hedge buffer across an open field with the plant visible behind - does not show the truck entrance. Large secured manufacturing campus; gate inferred but not resolved.",
     "guardShack": "Not visible in Street View; large guarded plant typical of this type, inferred.",
     "multipleFacilities": "Very large sprawling complex of many connected/adjacent buildings - a campus.",
     "shipRcvSeparate": "Multiple dock clusters on different building faces.",
     "dockDoors": "Dock doors visible along the south building face."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.ufcw.org/actions/victories/kraft-heinz-workers-in-delaware-secure-better-wages-benefits-with-new-contract/",
+        "date": "2025-08",
+        "type": "press",
+        "claim": "400+ UFCW members at KHC Dover ratified contract; JELL-O/Kool-Aid/Shake N Bake"
+      },
+      {
+        "tier": 2,
+        "url": "https://baytobaynews.com/stories/kraft-heinz-to-close-federalsburg-plant-dover-facility-survives,2055",
+        "date": "2016",
+        "type": "press",
+        "claim": "KHC closed Federalsburg MD; Dover survives"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KHC JELL-O/Kool-Aid/Stove Top plant, 400+ workers, June 2025 union contract; wrong-operator (Procino-Rossi) hypothesis busted.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
   }
 }

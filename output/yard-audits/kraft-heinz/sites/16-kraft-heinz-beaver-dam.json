@@ -1,23 +1,68 @@
 {
   "name": "Kraft Heinz - Beaver Dam",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "0-10", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoors",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Street View shows a brick plant wall with silos and a tight paved apron against the street - no barrier arm or checkpoint visible. Open/uncontrolled entrance read.",
     "backupSensitive": "Older plant hemmed in by residential streets on all sides; a truck queue would spill directly onto neighborhood roads with little stacking room.",
     "urbanRural": "Plant embedded in a dense downtown/residential city core - Urban.",
     "dropYard": "Small dedicated trailer parking lot to the southwest holding parked trailers.",
     "dockDoors": "Limited dock frontage; few doors resolvable on the cramped site."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.kraftheinz.com/job/22123534/financial-analyst-manufacturing-beaver-dam-plant-beaver-dam-wi/",
+        "date": "2025",
+        "type": "press",
+        "claim": "KHC hiring for Beaver Dam, WI plant"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.fooddive.com/news/kraft-heinz-sells-natural-cheese-business-to-lactalis/585247/",
+        "date": "2020-09",
+        "type": "press",
+        "claim": "Lactalis deal covered Tulare/Walton/Wausau/Weyauwega — NOT Beaver Dam; Philadelphia cream cheese retained by KHC"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KHC Philadelphia Cream Cheese plant — explicitly RETAINED, not in the Lactalis natural-cheese sale; 2025 careers req.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
   }
 }

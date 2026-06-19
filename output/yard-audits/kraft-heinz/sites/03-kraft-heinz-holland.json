@@ -209,5 +209,31 @@
     "truckGateCount": "Counted as 2 main truck curb-cuts off W 16th St (one west near the Heinz 57 office facade, one east near the drop yard); no actual gates, but 2 dominant truck-flow access points.",
     "multipleFacilities": "All four building masses are tightly contiguous on one parcel — read as a single integrated facility rather than a multi-building campus."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.crainsgrandrapids.com/news/food-drink/kraft-heinz-plant-in-holland-slated-for-13m-clean-energy-upgrades/",
+        "date": "2024",
+        "type": "press",
+        "claim": "KHC Holland plant slated for clean-energy upgrades"
+      },
+      {
+        "tier": 1,
+        "url": "https://michiganadvance.com/briefs/trump-administration-cuts-key-funding-for-hollands-kraft-heinz-decarbonization-efforts/",
+        "date": "2025",
+        "type": "press",
+        "claim": "2025 coverage names KHC still investing in the Holland pickle plant after grant cut"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "World largest pickle/vinegar plant, a KHC DOE clean-energy site; pickles not cheese, no divestiture exposure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

@@ -1,23 +1,70 @@
 {
   "name": "Kraft Foods - Springfield",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": true, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": true,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "connectivityIssue", "dropArea"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "connectivityIssue",
+    "dropArea"
+  ],
   "fieldNotes": {
     "truckGate": "Street View is a blank gray block wall - no gate read. Satellite shows a long curving entry drive with a small standalone building near the entry, consistent with a gated/guarded checkpoint.",
     "guardShack": "Small standalone structure beside the curving entry drive on satellite, likely a guard booth.",
     "urbanRural": "Site surrounded by open farmland and fields, isolated.",
     "connectivityIssue": "Rural and isolated among farm fields; cellular coverage uncertain.",
     "dropArea": "Truck/trailer parking lot to the south holds parked trailers."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://missouripartnership.com/kraft-heinz-announces-major-investment-in-springfield-missouri/",
+        "date": "2020-07",
+        "type": "press",
+        "claim": "$48M investment, ~1,000 employees, Singles + Mac & Cheese"
+      },
+      {
+        "tier": 1,
+        "url": "https://news.kraftheinzcompany.com/press-releases-details/2021/Kraft-Heinz-Completes-Sale-of-Natural-Cheese-Business-to-an-Affiliate-of-Groupe-Lactalis/default.aspx",
+        "date": "2021-11",
+        "type": "press",
+        "claim": "Lactalis deal was natural cheese only; Kraft Mac & Cheese + American Singles retained by KHC"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KHC principal Kraft Mac & Cheese + American Singles plant (RETAINED brands, not the Lactalis natural-cheese sale), ~1,000 employees.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
   }
 }

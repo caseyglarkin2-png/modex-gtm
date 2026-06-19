@@ -1,23 +1,66 @@
 {
   "name": "Kraft Heinz - Champaign",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "scale"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "Street View clearly shows a chain-link perimeter fence with a rolling/swing gate across the truck drive - a controlled truck entrance.",
     "guardShack": "No guard booth visible at the gate in Street View; the gated entry appears unmanned (kiosk/call-box style), so remoteGs is true.",
     "urbanRural": "Large plant within developed city fabric, residential neighborhood directly across the road - Urban.",
     "dockDoors": "Very long continuous dock face with many trailers backed in across multiple building faces.",
     "dropYard": "Extensive trailer-storage rows on satellite to the south, separate from active dock staging."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.wandtv.com/news/kraft-heinz-champaign-plant-anticipated-to-get-estimated-32m-as-part-of-larger-doe-clean/article_3b4a2fba-eac9-11ee-a790-235322f9eed8.html",
+        "date": "2024",
+        "type": "press",
+        "claim": "KHC Champaign plant set to receive ~$32M DOE clean-energy investment"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.news-gazette.com/news/updated-some-champaign-jobs-to-be-lost-in-kraft-move-of-cheese-production/article_c0c0f8a4-5dc7-51ea-8cb4-7e21046bb171.html",
+        "date": "2020",
+        "type": "press",
+        "claim": "Champaign loses cheese lines but STAYS OPEN as dry/sauce center-of-excellence"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KHC Champaign repositioned to dry/sauce CoE (cheese lines moved out, plant NOT closed); 2024 DOE clean-energy award confirms operation.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
   }
 }

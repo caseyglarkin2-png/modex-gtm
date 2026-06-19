@@ -160,5 +160,31 @@
     "rail": "No rail spur into property. Major rail yard exists ~500m east beyond treeline but no spur connection visible to Kraft Heinz parcel.",
     "siteAreaAcres": "Perimeter ~445m N-S × ~463m E-W = ~206,000 m² = ~51 acres for the main Kraft Heinz parcel (excluding adjacent third-party buildings)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.kraftheinz.com/job/22241875/team-leader-production-massillon-oh/",
+        "date": "2026-06",
+        "type": "press",
+        "claim": "open production req at KHC Massillon, OH"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.foodnavigator-usa.com/Article/2013/11/19/Heinz-to-pump-28m-into-frozen-food-plant-in-Massillon-OH/",
+        "date": "2013-11",
+        "type": "press",
+        "claim": "Heinz Frozen Food Center of Excellence at Massillon"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KHC frozen-foods plant (Smart Ones/Devour), ~370 employees, active 2026 careers reqs; not a closed/divested site.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

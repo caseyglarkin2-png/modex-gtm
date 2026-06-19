@@ -132,5 +132,31 @@
     "multiStep": "Single gate/entry; no visible second checkpoint or scale house after entry. Marked false.",
     "approachUsed": "Street View captured 2025-06 from Slopertown Road (north), Hillandale Drive (west), and the east intersection at the rail crossing; satellite at z17-z21 from Maxar 2026 imagery."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.businessrecord.com/kraft-heinz-investing-30-million-to-expand-facility-in-davenport/",
+        "date": "2023",
+        "type": "press",
+        "claim": "KHC investing $30M to expand the $225M+ Davenport Oscar Mayer/Lunchables plant"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/q-kraft-heinz-company-l-davenport,-ia-jobs.html",
+        "date": "2026-06",
+        "type": "press",
+        "claim": "Kraft Heinz jobs in Davenport IA, new openings as of June 2026"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "$225M+ automated KHC Oscar Mayer Deli Fresh / Lunchables plant, ~600 union employees, expanding; not cheese/Planters.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

@@ -1,22 +1,66 @@
 {
   "name": "Kraft Heinz - Columbia",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoors"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoors"
+  ],
   "fieldNotes": {
     "truckGate": "Street View down the entrance road shows a checkpoint canopy/structure spanning the drive at the property line, consistent with a controlled truck gate.",
     "guardShack": "The canopy structure at the entrance appears to include a small booth beside the lane.",
     "drivewayLong": "Long entry road from the public road into the plant gives deep queue room.",
     "urbanRural": "Large plant on the wooded edge of Columbia with adjacent undeveloped land."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://columbiaredi.com/kraft-heinz-announces-plant-closures-columbia-plant-not-on-list/",
+        "date": "2025",
+        "type": "press",
+        "claim": "KHC announced plant closures do NOT include the Columbia plant"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.swineweb.com/latest-swine-news/kraft-heinz-seeks-tax-breaks-for-92m-oscar-mayer-plant-upgrade-in-missouri/",
+        "date": "2024",
+        "type": "press",
+        "claim": "KHC seeking tax breaks for ~$93M Oscar Mayer Columbia plant upgrade, ~450 workforce, 60 new jobs"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KHC Oscar Mayer hot dog plant (~450 employees, ~$93M expansion); explicitly NOT on any closure list.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
   }
 }

@@ -39,5 +39,31 @@
     "dropYard": "Very large trailer parking fields along both sides of the building.",
     "fastLaneOpportunity": "Expansive paved truck courts with abundant unused lane width.",
     "urbanRural": "Lathrop CA logistics corridor; large-format DCs amid open land at the metro edge."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.supplychaindive.com/news/kraft-heinz-facility-designed-to-boost-efficiencies/630840/",
+        "date": "2022-09",
+        "type": "press",
+        "claim": "KHC opened 650k sq ft Lathrop CA DC with Prologis + Ryder; Ryder manages operations and ~100 employees"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.fooddive.com/news/kraft-heinz-facility-designed-to-boost-efficiencies/630926/",
+        "date": "2022",
+        "type": "press",
+        "claim": "KHC Lathrop DC consolidates NorCal distribution; 6 rail docks, EV yard-truck infrastructure"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Purpose-built KHC 650k sq ft DC (Prologis landlord, Ryder-operated on KHC behalf); KHC own DC, real freight yard. FLAG: operation last confirmed 2022.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
   }
 }

@@ -141,5 +141,31 @@
     "siteAreaAcres": "Perimeter box: 285m N-S x 320m E-W ≈ 91,200 m² ≈ 22.5 acres of fenced operating yard; including peripheral silo/rail land call it ~25 acres.",
     "facility": "1022 12th St NW, Mason City, IA 50401 — the nation's Jell-O gelatin + pudding plant (~200 employees; $62.8M expansion announced; receiving $9M DOE clean-energy upgrade; producing nearly all US Jell-O gelatin and pudding cups). This is a single building complex on a single parcel — there is NO second Mason City plant in Iowa. Roster idx 15 (also labeled 'Kraft Heinz - Mason City') resolves to Mason, OH (39.33,-84.33), a different facility 700+ miles away."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://northiowatoday.com/2024/03/25/mason-citys-kraft-plant-could-receive-up-to-9-million-in-upgrades-for-training-and-energy-efficiency/",
+        "date": "2024-03",
+        "type": "press",
+        "claim": "KHC Mason City selected for up to $9M DOE upgrades, ~200 employees"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.foodlogistics.com/warehousing/grocery-retail/news/21069655/kraft-heinz-kraft-heinz-to-expand-iowa-jello-pudding-plant",
+        "date": "2024",
+        "type": "press",
+        "claim": "$62.8M expansion of Mason City Jell-O/pudding plant"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KHC Jell-O gelatin + pudding plant (Mason City IA), DOE upgrade + $62.8M expansion 2024; closure suspicion busted.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

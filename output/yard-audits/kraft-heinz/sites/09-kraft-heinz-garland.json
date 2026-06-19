@@ -187,5 +187,31 @@
     "railServed": "Rail spur clearly visible entering from the north (across Forest Ln) and running south along the west property line. The plant's heritage as a 1949 Oscar Mayer facility is consistent with rail-served meat processing.",
     "multiStep": "Single gate/booth complex - no evidence of a second downstream checkpoint or scale house before the docks."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.garlandtx.gov/CivicAlerts.aspx?AID=3368",
+        "date": "2024-06",
+        "type": "press",
+        "claim": "City of Garland: KHC since 1949, $143M expansion, ~1,500 employees, Lunchables/Kraft BBQ"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.meatpoultry.com/articles/22400-kraft-heinz-to-expand-garland-texas-plant",
+        "date": "2019-12",
+        "type": "press",
+        "claim": "KHC largest Lunchables/Oscar Mayer/Kraft BBQ plant"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KHC Lunchables/Kraft BBQ/Velveeta plant (retained brands), $143M expansion 2024; no closure/divestiture.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

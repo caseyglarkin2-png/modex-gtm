@@ -1,23 +1,69 @@
 {
   "name": "Kraft Heinz - Muscatine",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "dropArea", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoors",
+    "dropArea",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "streetview": "Street View faces the office/employee frontage across a large lawn with low white fencing - decorative, not a truck gate. No truck entrance shown.",
     "multipleFacilities": "Large multi-building manufacturing campus with several connected and separate plant buildings.",
     "urbanRural": "Old industrial plant embedded in a small-town residential fabric (Muscatine); judged Rural per small-town guidance.",
     "backupSensitive": "Plant fronts directly on town streets with little stacking room; truck access threads through tight roads.",
     "truckGate": "No controlled truck checkpoint resolved; access roads run open from public streets."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.businessrecord.com/kraft-heinz-to-invest-60m-in-muscatine-factory/",
+        "date": "2024",
+        "type": "press",
+        "claim": "KHC investing $60M to modernize Muscatine plant, retaining 400+ jobs; IEDA incentives approved"
+      },
+      {
+        "tier": 1,
+        "url": "https://quadcitiesbusiness.com/kraft-heinz-to-invest-60-million-in-its-muscatine-plant/",
+        "date": "2024",
+        "type": "press",
+        "claim": "$48M facility overhaul + $12M equipment at the Muscatine plant"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KHC oldest continuously operating US plant (Heinz ketchup/gravy); $60M 2024 modernization, no divestiture/closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
   }
 }

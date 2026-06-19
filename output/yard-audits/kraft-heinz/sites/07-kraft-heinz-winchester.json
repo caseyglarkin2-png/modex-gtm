@@ -1,23 +1,68 @@
 {
   "name": "Kraft Heinz - Winchester",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "50+",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "dockDoors", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "dockDoors",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "streetview": "Street View shows trucks at dock doors with an open yard/driveway - no perimeter fence or gate in this frame.",
     "truckGate": "No checkpoint resolved on satellite; yard roads run open to the public road.",
     "multipleFacilities": "Plant with multiple adjacent buildings plus large separate trailer/warehouse lots.",
     "dropYard": "Extensive trailer-storage rows on multiple sides of the plant.",
     "urbanRural": "Edge-of-town plant (Winchester VA) with adjacent industrial and woods; judged Rural."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.kraftheinz.com/job/21437638/plant-controller-winchester-va-plant-winchester-va/",
+        "date": "2025-01",
+        "type": "press",
+        "claim": "KHC hiring Plant Controller, Winchester VA Plant"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.winchesterstar.com/winchester_star/local-kraft-heinz-plant-slated-to-get-26m-to-reduce-emissions/article_352b5f2f-f586-5f2d-846c-a1d586972b97.html",
+        "date": "2024",
+        "type": "press",
+        "claim": "Winchester KHC plant slated for $26M DOE-backed emissions-reduction investment"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KHC Capri-Sun/Kool-Aid plant, a DOE clean-energy site, 2025 KHC careers reqs; not cheese/Planters.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
   }
 }

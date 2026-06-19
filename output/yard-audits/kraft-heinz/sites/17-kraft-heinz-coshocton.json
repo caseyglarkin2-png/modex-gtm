@@ -1,23 +1,70 @@
 {
   "name": "Kraft Heinz - Coshocton",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "dropArea"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "dropArea"
+  ],
   "fieldNotes": {
     "truckGate": "Street View shows the long brick plant face behind a continuous chain-link fence with a grass setback - fenced perimeter confirmed but the view is a side wall, not the truck entrance. Gate inferred from full perimeter fencing.",
     "guardShack": "A small standalone structure near the south entry on satellite is consistent with a gate house; not confirmed by Street View.",
     "urbanRural": "Isolated plant along a river surrounded by farmland and woods - Rural.",
     "dockDoors": "Dock doors with trailers along the east side of the complex.",
     "dropArea": "Trailers staged on the east dock apron."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.sec.gov/Archives/edgar/data/0001637459/000163745921000004/pressreleaseprojectmarshall.htm",
+        "date": "2021",
+        "type": "10-K",
+        "claim": "KHC capital project filing referencing Coshocton operations"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.meatpoultry.com/articles/10320-coshocton-brings-home-the-bacon",
+        "date": "2014-11",
+        "type": "press",
+        "claim": "Coshocton consolidated KHC Oscar Mayer bacon production"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KHC Oscar Mayer bacon center-of-excellence (meat, not cheese); no closure/WARN.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
   }
 }

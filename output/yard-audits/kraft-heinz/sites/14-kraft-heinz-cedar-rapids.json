@@ -1,23 +1,70 @@
 {
   "name": "Kraft Heinz - Cedar Rapids",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "dropArea"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "dropArea"
+  ],
   "fieldNotes": {
     "truckGate": "Street View faces the long front office face behind a chain-link fence and grass setback - fencing confirmed but the truck entrance is not squarely shown. Gate inferred from continuous perimeter fence.",
     "guardShack": "No booth visible; entrance not clearly framed by Street View.",
     "urbanRural": "Industrial site in a low-density business-park setting surrounded by woods/greenfield - judged Rural.",
     "dropYard": "Rows of parked trailers in an adjacent lot to the southwest, separate from dock staging.",
     "dockDoors": "Dock doors with trailers along the south face."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.kraftheinz.com/job/22781908/weekend-sanitation-cedar-rapids-ia/",
+        "date": "2026-06",
+        "type": "press",
+        "claim": "active KHC sanitation job at Cedar Rapids IA"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.foodengineeringmag.com/articles/99830-kraft-heinz-sells-cheese-brands-to-groupe-lactalis-for-33-billion",
+        "date": "2021",
+        "type": "press",
+        "claim": "Lactalis cheese plants = Tulare/Walton/Wausau, not Cedar Rapids"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KHC foodservice plant at 4601 C St SW with active 2026 careers reqs; clear of Lactalis cheese + Planters divestitures.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
   }
 }

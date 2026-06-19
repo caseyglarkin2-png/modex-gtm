@@ -192,5 +192,31 @@
     "buildingCount": "Approximate — at least 7 distinct structures (main plant + warehouse + admin/welcome + 2 secondary processing buildings + silos cluster + water-treatment building); some adjacent structures may share roofs and be undercounted from above.",
     "siteAreaAcres": "Derived from perimeter bbox: ~801 m N-S x ~443 m E-W ≈ 88 acres. Property line approximated from satellite (rail spur is internal; west edge at treeline before river; north edge at US-20 ROW grass strip; south edge before residential)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/co/kraft-heinz/Jobs/-in-Fremont,OH",
+        "date": "2026-05",
+        "type": "press",
+        "claim": "KHC hiring at Fremont OH plant in 2026"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.foodlogistics.com/warehousing/grocery-retail/news/12135191/kraft-heinz-kraft-heinz-to-close-seven-us-and-canada-plants-cut-2600-jobs",
+        "date": "2025",
+        "type": "press",
+        "claim": "Fremont NOT on KHC 7-plant closure list"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "World largest ketchup plant (~80% of US Heinz ketchup), current 2026 reqs; not on any closure list.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

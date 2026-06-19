@@ -157,5 +157,31 @@
     "siteAreaAcres": "Perimeter bbox ≈ 217 m N-S × 129 m E-W ≈ 6.9 acres. Honest overhead estimate; flagged as fieldNote only because the exact fence-line on the south (lake bank) is screened by trees.",
     "shipRcvSeparate": "Could not positively distinguish a dedicated receiving dock from the shipping dock in overhead imagery — all visible dock activity is on the north face. Conservatively marked false."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.chamberofcommerce.com/business-directory/florida/fort-myers/manufacturer/2281685-kraft-heinz-fort-myers",
+        "date": "2024",
+        "type": "press",
+        "claim": "Kraft Heinz-Fort Myers manufacturer at 5521 Division Dr"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.glassdoor.com/Jobs/Kraft-Heinz-Company-Fort-Myers-Jobs-EI_IE1026712.0,19_IL.20,30_IC1154016.htm",
+        "date": "2025",
+        "type": "press",
+        "claim": "KHC Fort Myers job listings indicating active site"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KHC Bagel Bites frozen-snacks plant at 5521 Division Dr; no divestiture/closure, but Tier-1 self-attested source thin — corroborated by directory + jobs only. FLAG: low-confidence.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

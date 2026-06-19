@@ -147,5 +147,31 @@
     "dropYard": "SW-corner trailer-storage area is a clear dedicated drop yard (10-15 stalls) separate from the active dock apron.",
     "multiStep": "No second checkpoint stage — no gate at all."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.glassdoor.com/Jobs/Kraft-Heinz-Company-Jacksonville-Jobs-EI_IE1026712.0,19_IL.20,32_IC1154093.htm",
+        "date": "2026",
+        "type": "press",
+        "claim": "Active Kraft Heinz Jacksonville reqs in 2026"
+      },
+      {
+        "tier": 3,
+        "url": "https://clustrmaps.com/a/319t4p/",
+        "date": "2024",
+        "type": "press",
+        "claim": "7500 Forshee Dr owner = H J Heinz Company L P / Kraft Heinz Foods Company"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Heinz Portion Control single-serve condiment plant at 7500 Forshee Dr; KHC-owned, hiring 2026; not cheese/Planters.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

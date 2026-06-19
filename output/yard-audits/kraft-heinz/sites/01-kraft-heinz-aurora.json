@@ -171,5 +171,31 @@
     "rail": "No rail spur enters the Kraft parcel. Rail line visible north of the campus but does not serve this building.",
     "streetView": "Bilter Rd Street View from the public ROW shows a landscaped berm with trees screening the dock face; the on-site pano (2018) sits on the truck pad and confirms the entry point's geometry. Public-road view is consistent with a single set-back industrial driveway."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.hsacommercial.com/case_study/aurora-distribution-center-1203-1207-bilter-road/",
+        "date": "2020",
+        "type": "press",
+        "claim": "1203/1207 Bilter Rd is the multi-tenant Aurora Distribution Center; named prospective tenants were an electronics distributor and a logistics firm, no Kraft"
+      },
+      {
+        "tier": 1,
+        "url": "https://news.kraftheinzcompany.com/press-releases-details/2023/Kraft-Heinz-Invests-400M-to-Build-One-of-the-Largest-Automated-CPG-Distribution-Centers-in-North-America/default.aspx",
+        "date": "2023-07",
+        "type": "press",
+        "claim": "KHC new automated IL distribution center is in DeKalb IL, not Aurora"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "No Tier-1 KHC source ties Kraft Heinz to 1203 Bilter Rd today; building is a multi-tenant spec DC attributed to non-Kraft tenants; KHC real new IL DC is DeKalb.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

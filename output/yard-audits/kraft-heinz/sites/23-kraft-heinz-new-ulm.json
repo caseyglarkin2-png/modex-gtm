@@ -1,22 +1,66 @@
 {
   "name": "Kraft Heinz - New Ulm",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "25-50", "dropArea": "25-50",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoors"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoors"
+  ],
   "fieldNotes": {
     "truckGate": "Street View clearly shows a chain-link perimeter fence with a wheeled sliding gate across an entrance, confirming a controlled truck gate.",
     "guardShack": "No booth visible at the gate in the Street View frame; marked remoteGs.",
     "dropYard": "Extensive rows of parked trailers along the northwest side of the very large plant.",
     "urbanRural": "Plant on the edge of New Ulm, a small Minnesota town."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.nujournal.com/news/special-sections/2025/02/27/kraft-heinz-approaches-70-years-in-nu/",
+        "date": "2025-02",
+        "type": "press",
+        "claim": "KHC spokesperson: New Ulm sole US producer of Deli Deluxe and Velveeta, investing in plant as 70th anniversary approaches"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/cmp/Kraft-Heinz-3e502a27/locations/MN/New%20Ulm",
+        "date": "2025",
+        "type": "press",
+        "claim": "Kraft Heinz active job listings at New Ulm, MN"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KHC sole US producer of Velveeta + Deli Deluxe (processed cheese, RETAINED — never in the natural-cheese Lactalis sale), ~400 employees.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
   }
 }

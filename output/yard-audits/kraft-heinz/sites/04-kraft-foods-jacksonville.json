@@ -183,5 +183,31 @@
     "exitLanes": "Same — uncontrolled multi-driveway egress.",
     "truckGateCount": "Zero physical gate structures observed; reported as 0 but flagged uncertain because multi-tenant park layout means trucks enter from multiple uncontrolled points."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.glassdoor.com/Jobs/Kraft-Heinz-Company-Jacksonville-Jobs-EI_IE1026712.0,19_IL.20,32_IC1154093.htm",
+        "date": "2026",
+        "type": "press",
+        "claim": "Active Kraft Heinz job openings in Jacksonville FL as of 2026"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.industrynet.com/listing/245982/kraft-heinz-foods-co-portion-control-div",
+        "date": "2024",
+        "type": "press",
+        "claim": "Kraft Heinz Foods Co. Portion Control Div., Jacksonville FL"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Warehouse arm of KHC active Jacksonville Portion Control complex (H.J. Heinz Co. LP owner); KHC hiring locally 2026.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

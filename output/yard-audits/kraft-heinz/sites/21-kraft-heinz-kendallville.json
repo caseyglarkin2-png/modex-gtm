@@ -1,22 +1,65 @@
 {
   "name": "Kraft Heinz - Kendallville",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "10-25",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs"
+  ],
   "fieldNotes": {
     "truckGate": "Street View squarely shows the plant front: open driveway and parking apron with no barrier arm, gate, or guard booth at the road. Calling no gate.",
     "dropYard": "Long row of parked trailers in a dedicated lot along the southwest side of the property.",
     "urbanRural": "Small-town plant at the edge of Kendallville with farmland and residential nearby.",
     "drivewayLong": "Wide paved approach with room for a multi-truck queue."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/co/Kraft-Heinz/Jobs/-in-Kendallville,IN",
+        "date": "2025-04",
+        "type": "press",
+        "claim": "Active 2025 KHC hiring at Kendallville, IN plant"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.ibj.com/articles/made-in-indiana-jet-puffed-marshmallows-by-the-kraft-heinz-co",
+        "date": "2023",
+        "type": "press",
+        "claim": "KHC Kendallville is sole producer of Jet-Puffed marshmallows, 400+ employees"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KHC Jet-Puffed marshmallow plant (cheese ties ended 1995; now confection — NOT a divested cheese plant); 2025 reqs.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
   }
 }

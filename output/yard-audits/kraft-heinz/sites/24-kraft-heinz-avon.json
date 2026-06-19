@@ -1,22 +1,67 @@
 {
   "name": "Kraft Heinz - Avon",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoors", "dropArea"],
+  "uncertainFields": [
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "dockDoors",
+    "dropArea"
+  ],
   "fieldNotes": {
     "truckGate": "Street View faces a wide grass setback with only a low chain-link fence at the building base; the truck entrance is off-frame. Satellite is ambiguous on a checkpoint. Marked no gate, low confidence.",
     "drivewayLong": "Large paved truck court on the south/west sides with ample stacking room.",
     "urbanRural": "Large legacy plant at the edge of a small town with farmland and low-density development around.",
     "dockDoors": "Dock banks on the south face; exact count hard to resolve on the dark imagery."
+  },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/co/Kraft-Heinz/Jobs/-in-Avon,NY",
+        "date": "2025-10",
+        "type": "press",
+        "claim": "KHC hiring Cool Whip Process Operator and Oscar Mayer Lunchables Placer at Avon, NY"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.rochesterfirst.com/news/local-news/avon-kraft-heinz-plant-will-remain-open/",
+        "date": "2024",
+        "type": "press",
+        "claim": "Avon KHC plant making Cool Whip and Lunchables remaining open, 405 employees"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KHC Cool Whip + Oscar Mayer Lunchables plant (not natural cheese, NOT in Lactalis deal), 405 employees, active 2025 hiring.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
   }
 }
