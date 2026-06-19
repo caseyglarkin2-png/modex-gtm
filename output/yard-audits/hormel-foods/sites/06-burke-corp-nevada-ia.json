@@ -165,5 +165,31 @@
     "fastLaneOpportunity": "Very wide paved aprons and multiple open driveways give ample room to add bypass/express lanes.",
     "railServed": "A rail line runs through northern Nevada IA but no spur reaches this plant, which sits on the south edge of town beside US-30."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.hormelfoods.com/careers/career-center/our-locations/burke-corp-nevada-iowa/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Hormel locations page: Burke Corp., Nevada IA; pizza toppings and fully cooked meats."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.hormelfoods.com/newsroom/press-releases/hormel-foods-corporation-announces-major-expansion-of-its-burke-corporation-manufacturing-facility-in-nevada-iowa/",
+        "date": "2021-03",
+        "type": "press",
+        "claim": "Hormel PR: ~$150M expansion of the Burke facility in Nevada, Iowa."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Hormel-owned Burke Corp on its own locator at Nevada IA; major expansion; no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

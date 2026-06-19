@@ -165,5 +165,31 @@
     "urbanRural": "Small-town edge of Sparta WI, surrounded by woods, a golf course, and farmland - clearly Rural.",
     "shipRcvSeparate": "Dock activity concentrated on adjacent NW and NE faces around one yard - treated as a single combined ship/receive operation."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.hormelfoods.com/careers/career-center/our-locations/century-foods-international/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Hormel Our Locations lists Century Foods International, Sparta WI (nutritional products / dairy proteins)."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.sec.gov/Archives/edgar/data/0000048465/000004846525000059/q42025ex211subsidiaries.htm",
+        "date": "2025-10",
+        "type": "10-K",
+        "claim": "Century Foods International appears in Hormel FY2025 10-K subsidiaries (Exhibit 21.1)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Hormel acquired Century Foods (Sparta WI) Oct 2024; on Hormel locator + FY2025 10-K subsidiary list; no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

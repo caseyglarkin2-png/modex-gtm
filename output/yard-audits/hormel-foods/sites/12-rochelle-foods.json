@@ -163,5 +163,31 @@
     "urbanRural": "Rochelle is a small Ogle County town (~9,000 pop.); the plant sits just outside a two-block downtown surrounded by residential blocks — small-town industrial, classified Rural per rubric.",
     "buildingCount": "Multiple connected old structures with overhead conveyor/pipe bridges; counted ~4 distinct buildings, low confidence."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.hormelfoods.com/careers/career-center/our-locations/rochelle-foods/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Hormel Our Locations lists Rochelle Foods, Rochelle IL, 400,000 sq ft, 800+ employees; bacon, Compleats, deli hams; joined Hormel 1993."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/c/Hormel-Foods-Corporation/Job/Rochelle-Foods-Production-Laborer-October-2025/-in-Rochelle,IL?jid=96d7308876e3c84c",
+        "date": "2025-10",
+        "type": "careers",
+        "claim": "Hormel Oct 2025 Production Laborer req at Rochelle Foods LLC, Rochelle IL."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Live Hormel locator + continuous 2025 careers reqs at Rochelle Foods LLC; T&M closures named other plants; no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

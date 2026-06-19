@@ -166,5 +166,31 @@
     "urbanRural": "Barron WI is a small rural city (~3,400); the plant is at the edge of town surrounded by small-town residential and farmland -> Rural.",
     "scale": "A truck scale is plausible at a turkey slaughter plant but was not positively identified in imagery -> classified false, flagged."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.hormelfoods.com/careers/career-center/our-locations/jennie-o-turkey-store-inc/",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Jennie-O Turkey Store operating plant in Barron WI with active production, FSQ, maintenance, and distribution job postings (2025-2026)."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.foodprocessing.com/ingredients/animal-proteins/news/33015887/hormel-to-end-turkey-harvest-at-barron-wisconsin-plant-in-favor-of-value-added-processing",
+        "date": "2023-12",
+        "type": "press",
+        "claim": "Hormel ended turkey harvest at Barron in 2024 but CONVERTED the plant to value-added processing; no layoffs."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Harvest ended 2024 but plant converted (not closed) to Hormel value-added turkey processing; active Hormel/Jennie-O Barron job postings 2025-2026.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

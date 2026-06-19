@@ -163,5 +163,31 @@
     "drivewayShort": "Short open driveway access from the gravel street; only room for 1-2 trucks to approach the dock.",
     "buildingCount": "Main processing building plus 2-3 connected/adjacent secondary buildings (office annex, dark-roofed shop/warehouse buildings) - treated as one facility, not a campus."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.hormelfoods.com/careers/career-center/plant-production-jobs/alma-foods/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Hormel careers/locations page lists Alma Foods, Alma KS as a wholly owned subsidiary; refrigerated entrees and foodservice barbeque."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.kansasworks.com/jobs/11846752",
+        "date": "2026-01",
+        "type": "careers",
+        "claim": "Active 2026 KANSASWORKS Alma Foods 2nd-shift Production Professional req."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Hormel locator + live 2026 careers reqs confirm Alma Foods is a current Hormel-owned plant; no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

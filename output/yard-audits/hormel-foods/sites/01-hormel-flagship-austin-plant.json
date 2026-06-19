@@ -141,5 +141,31 @@
     "dropArea": "Extensive trailer-parking rows on the SW (50+ stalls of parked trailers without tractors).",
     "fastLaneOpportunity": "Wide paved aprons at the plant frontage and ample yard width provide room for a bypass/express lane."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.hormelfoods.com/careers/career-center/our-locations/austin-plant/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Hormel's own locations page lists the Flagship Austin Plant: 1,900 team members, 1.3M sq ft, SPAM/ham/bacon/dry sausage."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.sec.gov/Archives/edgar/data/0000048465/000004846525000042/hormelearningsreleaseq32025.htm",
+        "date": "2025-08",
+        "type": "10-K",
+        "claim": "FY2025 SEC filing; Austin MN is Hormel HQ and flagship plant, ongoing operations."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Flagship HQ plant on Hormel's own locator with 1,900 workers; not on any T&M closure list; no negative found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

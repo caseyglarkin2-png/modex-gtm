@@ -155,5 +155,31 @@
     "buildingCount": "One main processing building plus a detached SW building (~2); uncertain.",
     "shipRcvSeparate": "Could not confirm separate ship/receive dock banks from imagery -> classified false, flagged."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.hormelfoods.com/newsroom/press-releases/hormel-foods-announces-definitive-agreement-to-sell-its-whole-bird-turkey-business-to-life-science-innovations/",
+        "date": "2026-02",
+        "type": "press",
+        "claim": "Hormel definitive agreement (Feb 17, 2026) to SELL its Melrose MN whole-bird turkey facility + Swanville feed mill to Life-Science Innovations."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.provisioneronline.com/articles/120524-hormel-foods-completes-sale-of-whole-bird-turkey-business-to-life-science-innovations",
+        "date": "2026-04",
+        "type": "press",
+        "claim": "Sale COMPLETED April 24, 2026; Melrose plant now operates as Legacy Turkey under LSI; no longer a Hormel facility."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Melrose whole-bird plant divested to LSI (completed Apr 2026, now Legacy Turkey); plus audit's own misidentification flag (nearby plant is Land O'Lakes). No Hormel-operated plant in Melrose today.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

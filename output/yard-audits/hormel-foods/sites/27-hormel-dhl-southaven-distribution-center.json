@@ -154,5 +154,31 @@
     "buildingCount": "Single very large warehouse building (multi-section roof) -> buildingCount 1.",
     "shipRcvSeparate": "Dock banks on two faces but operated as one DC flow; no clear separate ship/receive split -> shipRcvSeparate false."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://desotocountynews.com/desoto-county-news/hormel-foods-dhl-celebrate-opening-of-new-southaven-distribution-center/",
+        "date": "2025-10",
+        "type": "press",
+        "claim": "Ribbon-cutting Oct 2025: new Hormel Foods DC at 8690 Tulane Rd, Southaven MS in former AWG building, operated in partnership with DHL Supply Chain; largest in Hormel's network."
+      },
+      {
+        "tier": 2,
+        "url": "https://dailymemphian.com/subscriber/article/50373/hormel-foods-distribution-center-southaven-jobs-mississippi",
+        "date": "2025-01",
+        "type": "press",
+        "claim": "Hormel Foods 280,000-sq-ft distribution center at 8690 Tulane Road, Southaven; +120 jobs; Hormel's largest DC."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Hormel's largest DC, opened Oct 2025 at 8690 Tulane Rd; operated by DHL Supply Chain (3PL) for Hormel.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

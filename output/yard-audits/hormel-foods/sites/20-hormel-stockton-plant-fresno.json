@@ -168,5 +168,31 @@
     "buildingCount": "Single Corn Nuts processing/packaging building.",
     "shipRcvSeparate": "Dock activity concentrated on the single west face - combined ship/receive."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.hormelfoods.com/careers/career-center/our-locations/fresno-plant/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Hormel Our Locations lists the Fresno CA plant; 40+ team produces Corn Nuts products (roasting/packaging)."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.hormelfoods.com/inspired/story/sun-powered-snacking/",
+        "date": "2023-05",
+        "type": "press",
+        "claim": "Hormel feature on its Fresno Corn Nuts roasting/packaging facility, solar-powered."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Hormel locator confirms Fresno Corn Nuts plant operating (4343 E Florence Ave); no closure/sale signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

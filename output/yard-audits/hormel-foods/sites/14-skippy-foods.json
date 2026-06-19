@@ -152,5 +152,31 @@
     "railServed": "No rail spur into the property visible despite the port setting.",
     "note": "The plant suffered a fire in September 2025 and returned to operation by December 2025; 2026 Street View shows it intact and operating."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.hormelfoods.com/careers/career-center/our-locations/skippy-foods/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Hormel Our Locations lists Skippy Foods, Little Rock AR; 166,500 sq ft, 3.5M lbs peanut butter weekly, 185+ team members; joined Hormel 2013."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.arkansasonline.com/news/2025/dec/04/skippy-plant-at-lr-port-operational-again-after/",
+        "date": "2025-12",
+        "type": "press",
+        "claim": "Arkansas Democrat-Gazette Dec 2025: Skippy plant at Port of Little Rock operational again at full capacity after a Sept 2025 fire."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Hormel's own locator lists Skippy Foods Little Rock; Dec 2025 press confirms operational and Hormel-run after a temporary fire; no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

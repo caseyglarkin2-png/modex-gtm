@@ -153,5 +153,31 @@
     "railServed": "A rail line passes near the SE property edge but no spur runs into the plant; classified false.",
     "buildingCount": "One main connected plant building plus a small outbuilding."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.hormelfoods.com/careers/career-center/our-locations/algona-plant/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Hormel locations page: Algona Plant (opened 1970), ~250 employees, dry sausage/pepperoni."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.glassdoor.com/job-listing/algona-production-professional-hormel-JV_IC1148604_KO0,30_KE31,37.htm?jl=1009808211866",
+        "date": "2025-01",
+        "type": "careers",
+        "claim": "2025 Hormel Algona Production Professional req confirms active production staffing."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "On Hormel locator + 2025 careers reqs; no closure/sale found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

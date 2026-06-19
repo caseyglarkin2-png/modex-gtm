@@ -186,5 +186,31 @@
     "urbanRural": "Aurora is part of the Chicago metropolitan area; the site has a major retail/mall complex immediately south and dense suburbs to the west, though farm fields border it north and west. Judged Urban (metro fabric) - flagged as borderline given the edge-of-development setting.",
     "buildingCount": "Main warehouse/packaging building plus an attached office annex - counted as 2 structures, one integrated facility."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.hormelfoods.com/careers/career-center/our-locations/creative-contract-packaging/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Hormel Our Locations: CCP started by Hormel Foods in 1998 in Aurora IL; 120+ people across two production facilities."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.sec.gov/Archives/edgar/data/0000048465/000091205701002984/a2033904z10-k.htm",
+        "date": "2001-01",
+        "type": "10-K",
+        "claim": "Hormel Form 10-K Exhibit 21 lists Creative Contract Packaging Corp. as a Hormel subsidiary in Aurora IL."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CCP is a Hormel-owned subsidiary started by Hormel in 1998, still Hormel-operated (120+ employees); not co-pack-only; no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -204,5 +204,31 @@
     "urbanRural": "Located within a dense industrial district of north Wichita, a major metro - Urban.",
     "multipleFacilities": "Plant complex includes the main processing building plus connected secondary buildings (a south warehouse and a north office block) - treated as a campus."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.hormelfoods.com/careers/career-center/our-locations/dold-foods/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Hormel locations page: Dold Foods, Wichita KS, joined Hormel 1984, ~760+ employees, bacon production."
+      },
+      {
+        "tier": 2,
+        "url": "https://jacobin.com/2025/06/union-elections-sva-hormel-nlrb",
+        "date": "2025-06",
+        "type": "press",
+        "claim": "UFCW Local 2 union election at Dold Foods Wichita certified May 2025 confirms active workforce."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Hormel-owned (since 1984) on its own locator at 2929 N Ohio St; 2025 NLRB election proves active operation; no closure/sale.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

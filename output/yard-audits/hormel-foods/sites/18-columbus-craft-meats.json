@@ -161,5 +161,31 @@
     "buildingCount": "One large single-tenant industrial building.",
     "shipRcvSeparate": "Dock activity concentrated on a single east-face bank - combined ship/receive."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://hanfordsentinel.com/business/agriculture/bay-area-salami-plant-closing-after-more-than-100-years-john-lindt/article_ef1d5ee4-d84f-11ef-8d3c-9ba24ac37ee5.html",
+        "date": "2025-01",
+        "type": "press",
+        "claim": "Hormel's Columbus Craft Meats plant in Hayward on San Antonio St (30977 San Antonio St) closing March 2026 per WARN (~125 affected); a second Hayward plant remains."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.yelp.com/biz/columbus-distributing-hayward",
+        "date": "2025-06",
+        "type": "press",
+        "claim": "Listing for 30977 San Antonio St, Hayward (the audited house number) shows COLUMBUS DISTRIBUTING - CLOSED."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Audited coord 37.6133,-122.0526 / house number 30977 resolves to 30977 San Antonio St (every authoritative source places Columbus Mfg there) = the plant announced for closure March 2026; the San Clemente St label was a bad geocode. The surviving second Hayward plant is a different, unidentified address. Closure -> reject.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

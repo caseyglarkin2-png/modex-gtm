@@ -153,5 +153,31 @@
     "urbanRural": "Plant sits in an industrial park on the edge of Dubuque with farmland immediately to the south; borderline call, scored Rural per the 'when torn, choose Rural' guidance. Flagged uncertain.",
     "railServed": "No rail spur into the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.hormelfoods.com/careers/career-center/our-locations/progressive-processing/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Hormel locations page: Progressive Processing, 1205 Chavenelle Court, Dubuque IA, ~450 employees; Compleats, bacon toppings, SPAM."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.hormelfoods.com/newsroom/press-releases/hormel-foods-celebrates-grand-opening-of-state-of-the-art-production-facility-in-dubuque-iowa/",
+        "date": "2010-01",
+        "type": "press",
+        "claim": "Hormel PR: grand opening Jan 2010 of company-built Dubuque facility (Progressive Processing LLC)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Hormel-owned LLC on its own locator at the exact Chavenelle Court address; no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

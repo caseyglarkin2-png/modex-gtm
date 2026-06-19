@@ -187,5 +187,31 @@
     "urbanRural": "Within the Omaha metro's Sarpy West industrial submarket, surrounded by other large warehouses and suburban development — Urban.",
     "railServed": "No rail spur into the property visible."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.hormelfoods.com/careers/career-center/our-locations/papillion-foods/",
+        "date": "2026-03",
+        "type": "locator",
+        "claim": "Hormel Our Locations lists Papillion Foods, Papillion NE; 535,000 sq ft opened 2020, Columbus and Hormel dry sausage, 170+ team members."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.prnewswire.com/news-releases/hormel-foods-opens-its-newest-production-facility-301197123.html",
+        "date": "2020-12",
+        "type": "press",
+        "claim": "Hormel PR: opens newest production facility in Papillion NE for dry sausage."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Current Hormel locator lists Papillion Foods as active (170+) + dated 2020 PR; divestiture/closure gauntlet clean.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -162,5 +162,24 @@
     "drivewayShort": "Short approach from the road driveway into the dock apron, holding only 1-2 trucks.",
     "buildingCount": "Single connected plant building (the SE office structure is a separate neighboring property, not Lloyd's)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.hormelfoods.com/careers/career-center/our-locations/lloyds-barbeque-company/",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Hormel location page for Lloyd's Barbeque Company, Mendota Heights MN; 170+ team members; active job listings."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Hormel-owned Lloyd's Barbeque plant in Mendota Heights MN, currently staffed and hiring; no divestiture/closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

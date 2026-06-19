@@ -167,5 +167,31 @@
     "buildingCount": "Single processing/office building.",
     "shipRcvSeparate": "Dock activity concentrated on one south-face bank - combined ship/receive."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.hormelfoods.com/careers/career-center/our-locations/swiss-american-sausage-company/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Hormel Our Locations lists Swiss American Sausage Company, Lathrop CA (dry sausage / pizza toppings)."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.hormelfoods.com/newsroom/press-releases/hormel-foods-announces-the-completion-of-solar-array-at-its-swiss-american-sausage-company-facility-in-california/",
+        "date": "2019-10",
+        "type": "press",
+        "claim": "Hormel PR on completed solar array at its Swiss American Sausage Company facility in Lathrop CA."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Hormel locator confirms Swiss American Sausage Co, Lathrop (251 D'Arcy Pkwy); Hormel solar investment; no closure/sale signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

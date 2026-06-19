@@ -167,5 +167,31 @@
     "buildingCount": "The plant is a single large connected processing complex (built 1969). Adjacent large buildings are separate companies' warehouses, not part of this facility.",
     "operations": "Plant runs Hormel chili and Dinty Moore stew; the precooked bacon line was closed in 2025 with 135 of ~350 employees laid off (Aug 2025) - operations reduced."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.hormelfoods.com/careers/career-center/our-locations/atlanta-plant/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Hormel Our Locations lists the Atlanta Plant in Tucker GA, 400 team members, chili and Dinty Moore stew."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.decaturish.com/business/hormel-foods-lays-off-135-workers-at-tucker-facility/article_a2cc79b6-eb14-4ea7-91cf-0701cbddb162.html",
+        "date": "2025-08",
+        "type": "press",
+        "claim": "Hormel discontinued only the bacon line at Tucker (135 layoffs Oct 2025); facility continues operating with 400 employees."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Hormel locator lists Tucker GA as a current operating location; Aug 2025 bacon-line layoff was single-line, facility explicitly continues operating.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

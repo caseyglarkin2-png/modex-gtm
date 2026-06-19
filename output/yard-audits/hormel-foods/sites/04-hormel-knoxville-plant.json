@@ -205,5 +205,31 @@
     "railServed": "A rail line runs parallel to the road along the south edge but no spur enters the plant property; classified false.",
     "urbanRural": "Plant sits on the east edge of Knoxville (pop ~7,300) surrounded by farmland and scattered industrial — Rural."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.hormelfoods.com/careers/career-center/our-locations/knoxville-plant/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Hormel locations page: Knoxville IA plant produces dry sausage (Rosa Grande pepperoni, hard salami) at 209 N Godfrey Ln."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.breakroom.cc/en-us/jobs/listing/33281635-hormel-foods-knoxville-plant-production-professional-209",
+        "date": "2025-01",
+        "type": "careers",
+        "claim": "Hormel Knoxville Plant Production Professional req referencing 209 N Godfrey Ln."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Exact Godfrey Ln address on Hormel locator + careers req; no closure/sale found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

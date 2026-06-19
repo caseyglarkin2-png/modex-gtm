@@ -185,5 +185,24 @@
     "buildingCount": "Main plant building plus a small detached storage shed/building north of the parking lot.",
     "railServed": "No rail spur runs into the property; I-90 borders the east side."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.hormelfoods.com/careers/career-center/our-locations/beloit-plant/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Hormel Our Locations lists the Beloit WI plant with ~435 team members and active production/maintenance reqs (CHI-CHI'S salsa, Hormel chili, Mary Kitchen hash)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "WATCH item cleared: Hormel locator confirms Beloit (3000 Kennedy Dr) operating with 435 team; no closure/sale news.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

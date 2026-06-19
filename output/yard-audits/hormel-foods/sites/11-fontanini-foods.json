@@ -160,5 +160,31 @@
     "dropYard": "Open west/north paved apron functions as on-site trailer storage and drop area separate from the active dock line.",
     "urbanRural": "Dense Chicago-metro industrial fabric (McCook), surrounded by large distribution buildings on all sides."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.hormelfoods.com/about/our-family/fontanini-foods-llc/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Hormel Family of Companies lists Fontanini Foods LLC, acquired by Hormel 2017, McCook IL (188,000 sq ft)."
+      },
+      {
+        "tier": 1,
+        "url": "https://hormel.dejobs.org/mccook-il/fontanini-industrial-manufacturing-mechanic/8B5CBB8DC5F0479E8A52E0A225E54622/job/",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active Hormel careers ATS reqs for Fontanini production/maintenance at McCook IL."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Hormel-owned since 2017, McCook plant still listed and actively hiring; no closure/sale found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

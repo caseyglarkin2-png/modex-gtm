@@ -171,5 +171,31 @@
     "railServed": "No rail spur into the property.",
     "urbanRural": "Plant sits in an industrial area on the edge of Osceola (pop ~5,000) surrounded by farmland — Rural."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.hormelfoods.com/newsroom/news/25-years-in-osceola-iowa/",
+        "date": "2021-01",
+        "type": "press",
+        "claim": "Hormel news: Osceola Food LLC at 1027 Warren Ave; Hormel bought 1996, 900+ team members, 24/7."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.swcciowa.edu/news/2025/four-osceola-food-employees-sign-for-swcc-applied-engineering-technology-program",
+        "date": "2025-08",
+        "type": "econ-dev",
+        "claim": "Aug 2025: Osceola Food employees in SWCC program; current operations corroborated."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Hormel-owned LLC (since 1996) at exact Warren Ave address; 2025 workforce activity; no sale/closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

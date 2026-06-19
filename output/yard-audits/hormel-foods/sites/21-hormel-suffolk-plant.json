@@ -150,5 +150,31 @@
     "drivewayLong": "Internal drive yard between buildings is long enough to stack 3+ trucks before docks.",
     "multipleFacilities": "Single connected industrial complex (4 attached/adjacent buildings); treated as one facility, not a multi-campus -> multipleFacilities false."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.hormelfoods.com/careers/career-center/our-locations/suffolk-plant/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Hormel Our Locations lists the Suffolk VA Planters plant; 350+ team produces Planters products."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.jobtarget.com/jobs/jt-nekuvxqdvp/production-professionals-and-forklift-drivers-suffolk-suffolk-virginia",
+        "date": "2025-10",
+        "type": "careers",
+        "claim": "Oct 2025 Hormel/Planters production reqs at 245 Culloden St, Suffolk VA."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "WATCH item cleared: Hormel locator + Oct 2025 careers at 245 Culloden St confirm the historic Planters/Mr Peanut plant operating; recovered from a 2024 temporary halt; no permanent closure/sale.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

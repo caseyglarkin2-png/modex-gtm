@@ -150,5 +150,31 @@
     "urbanRural": "Long Prairie MN is a small rural town (~3,400 pop); the plant sits at the edge of town beside the Long Prairie River and farmland -> Rural.",
     "truckGateCount": "No controlled gate; the count of 1 reflects the single open access point off the public road."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.hormelfoods.com/careers/career-center/plant-production-jobs/dans-prize-llc-long-prairie-minn/",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Hormel's Dan's Prize LLC operates its Long Prairie MN plant; 530+ employees; acquired by Hormel 1991; active openings."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.hormelfoods.com/about/our-family/dans-prize-inc/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Dan's Prize Inc. listed as a Hormel family-of-companies operating brand based in Long Prairie MN."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Hormel-owned Dan's Prize plant in Long Prairie MN, actively hiring 2025-2026; no divestiture/closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
