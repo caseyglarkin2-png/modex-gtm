@@ -124,5 +124,31 @@
     "multiStep": "False default - cannot verify. Note the conveyor bridge is a product-transfer link, not a truck checkpoint.",
     "auditLimitation": "Per deep-audit instructions: facility could not be physically audited because it postdates available satellite imagery. Location resolved via web research; physical-yard classification fields are placeholders flagged as uncertain. Recommend re-audit when newer imagery (post-Q3 2025) becomes available."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://america.cjlogistics.com/newsroom/2025/09/cj-logistics-new-kansas-city-cold-storage-facility-highlighted-by-kansas-city-business-journal/",
+        "date": "2025-09",
+        "type": "press",
+        "claim": "CJ own newsroom: New Century KS cold storage warehouse recently started taking inbound shipments (Sept 2025)"
+      },
+      {
+        "tier": 1,
+        "url": "https://america.cjlogistics.com/newsroom/2024/05/cj-logistics-america-cold-storage-warehouse-in-kansas-city/",
+        "date": "2024-05",
+        "type": "press",
+        "claim": "CJ announced 291,000 SF cold storage facility in New Century KS (between W 157th & 159th St)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Newest CJ cold-storage DC at New Century KS (291k SF, W 159th St), operational and taking inbound as of Sept 2025 per CJ own press; no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

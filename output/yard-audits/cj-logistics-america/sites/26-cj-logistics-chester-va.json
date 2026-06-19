@@ -108,5 +108,31 @@
     "urbanRural": "Site sits in a wooded edge-of-town industrial area off Walthall Industrial Pkwy in South Chesterfield, scattered rural residential and woodland around it -> Rural per the small-town-industrial tie-breaker.",
     "connectivityIssue": "Site is somewhat isolated in woods but an industrial park is adjacent - cellular coverage likely adequate; left false (low confidence)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.facebook.com/cjlogisticsamerica/posts/the-cj-logistics-colonial-heights-distribution-center-recently-conducted-a-thank/945747350938070/",
+        "date": "2024",
+        "type": "press",
+        "claim": "CJ own social post about its Colonial Heights distribution center (the 16000 Walthall Industrial Pkwy facility, also addressed as Chester/South Chesterfield VA)"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/co/Cj-Logistics-America/Jobs/--in-Virginia",
+        "date": "2025-02",
+        "type": "careers",
+        "claim": "Active CJ Logistics forklift roles in Colonial Heights/Chesterfield VA (Feb 2025)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "16000 Walthall Industrial Pkwy is CJ Colonial Heights/Chester DC (former DSC); CJ own post + 2025 hiring confirm current operation; no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

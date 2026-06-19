@@ -114,5 +114,24 @@
     "urbanRural": "Couchville Pike SE of Mount Juliet is a Nashville-metro logistics corridor with several adjacent million-sqft DCs; classified Urban.",
     "siteAreaAcres": "~40 acres from the perimeter box (building plus truck courts on both faces)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/cmp/Cj-Logistics-America/locations",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Mount Juliet TN appears on CJ Logistics America office/location index"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FLAG: Listed on CJ location index but no street address and a Dec-2021 employee review states operations were being moved to Union City GA; no Tier-1 current-op source and no WARN. Probable with relocation caveat; the documented CJ TN cluster is Lebanon.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

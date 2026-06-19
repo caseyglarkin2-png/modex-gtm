@@ -104,5 +104,24 @@
     "urbanRural": "Dallas Medical District / Stemmons industrial corridor - dense urban, minutes from downtown and Love Field.",
     "railServed": "No rail spur into the property (an old rail line runs nearby but not into this parcel)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.glassdoor.com/Reviews/CJ-Logistics-America-Dallas-Reviews-EI_IE4532.0,20_IL.21,27_IM218.htm",
+        "date": "2025",
+        "type": "careers",
+        "claim": "CJ Logistics America Dallas operation present; web sources place a CJ warehouse on Regal Row, Dallas TX 75247"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FLAG: CJ runs Dallas-area DCs and sources place a CJ warehouse on Regal Row (75247), but no CJ-owned Tier-1 page confirms this exact address; no closure/negative found, so probable.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

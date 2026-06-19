@@ -126,5 +126,31 @@
     "connectivityIssue": "Site is in open farmland but within the West Memphis logistics/intermodal area; cellular coverage likely adequate - left false (low confidence).",
     "railServed": "No rail spur enters the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/cmp/Cj-Logistics-America/locations/AR",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "West Memphis AR on CJ Logistics America Arkansas location index"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.arkansasedc.com/docs/default-source/reports/arkansas-distribution-and-logistics-companies6dce45fe3192488c9cf07f28471e6709.pdf",
+        "date": "2022",
+        "type": "econ-dev",
+        "claim": "Arkansas EDC distribution/logistics directory listing CJ Logistics general warehousing at 3271 Infinity Parkway, West Memphis 72301"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "West Memphis (major DC hub) on CJ location index; econ-dev directory confirms the exact 3271 Infinity Pkwy warehouse; no closure/WARN found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

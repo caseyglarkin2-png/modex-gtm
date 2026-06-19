@@ -106,5 +106,24 @@
     "siteAreaAcres": "Estimated from perimeter box (~455m x ~380m) covering the CJ building and its trailer yards.",
     "facilityNote": "400 Nestle Way is a legacy DSC Logistics distribution center; DSC was acquired by and is now operated as CJ Logistics America. The white-roof building is the CJ DC; the adjacent red/dark building to the NE is the Nestle plant (separate facility)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://web.lehighvalleychamber.org/Logistics/CJ-Logistics-America-1596",
+        "date": "2025",
+        "type": "econ-dev",
+        "claim": "Lehigh Valley Chamber of Commerce business directory lists CJ Logistics America operating at 400 Nestle Way, Breinigsville PA"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CJ-run Nestle-client DC at 400 Nestle Way (ex-DSC); chamber directory + active adjacent Nestle complex, no WARN/closure; freight DC with truck yard.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -107,5 +107,24 @@
     "shipRcvSeparate": "Cross-dock-style building likely has docks on opposing faces but ship/rcv split not confirmable; left false.",
     "urbanRural": "CLC sits within Harrisburg metro on the edge of Penn State Harrisburg campus, surrounded by dense industrial park fabric, campus and suburban development; classified Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.glassdoor.com/Jobs/DSC-Logistics-Middletown-Jobs-EI_IE4532.0,13_IL.14,24_IC1152197.htm",
+        "date": "2025",
+        "type": "careers",
+        "claim": "CJ Logistics America (DSC) shows a Middletown PA operation in 2025 job listings"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FLAG: CJ/DSC has a Middletown PA presence, but the legacy DSC address is 200 Capital Lane - no Tier-1 source confirms a CJ facility specifically on Eisenhower Blvd; no closure found, so probable, exact address unverified.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -115,5 +115,24 @@
     "dockDoorCount": "Estimated ~70 dock doors across the east face and south face from overhead imagery; low-confidence count - imagery shows a regular bay rhythm but exact total is approximate.",
     "urbanRural": "Dense Inland Empire (Mira Loma/Eastvale) warehouse district - clearly Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.glassdoor.com/Jobs/DSC-Logistics-Mira-Loma-Jobs-EI_IE4532.0,13_IL.14,23_IC1147109.htm",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "CJ Logistics America (DSC) active job listings tied to Mira Loma CA as of 2026"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FLAG: Legacy DSC site at 12350 Philadelphia Ave (DSC = CJ since 2018); current CJ/DSC job activity in Mira Loma and no closure found, but no clean Tier-1 confirming this exact address today.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

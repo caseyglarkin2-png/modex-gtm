@@ -139,5 +139,24 @@
     "urbanRural": "CenterPoint Intermodal Center, Elwood - edge-of-town industrial park surrounded by farmland; rural setting.",
     "review": "Flagged for human review - re-audit once newer satellite imagery resolves the completed building, or once a precise parcel/coordinate is published."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://info.america.cjlogistics.com/cjl-open-space-elwood2",
+        "date": "2025-01",
+        "type": "press",
+        "claim": "CJ Logistics own page for 21012 W. Mississippi St, Elwood IL (1,106,256 SF, 120+87 docks, ~73 acres) - exact address match"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Exact-address match on CJ own facility page for the Elwood 2 building on W Mississippi St; no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -136,5 +136,24 @@
     "urbanRural": "Arlington TX, dense DFW industrial corridor near the airport/intermodal - Urban.",
     "railServed": "No rail spur into the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://info.america.cjlogistics.com/cjl-open-space-arlington",
+        "date": "2025-02-06",
+        "type": "press",
+        "claim": "CJ Logistics own open-space sales sheet names 4001 New York Avenue, Arlington TX as a CJ Logistics America operating facility (food-grade)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CJ own marketing page confirms 4001 New York Ave Arlington as an active CJ facility (Feb 2025); current Arlington job listings; no negative found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

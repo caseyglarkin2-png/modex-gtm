@@ -106,5 +106,31 @@
     "dockDoorCount": "South face long bank plus east face bank; ~110 doors estimated from regular bay rhythm across two faces - approximate.",
     "urbanRural": "Inside Champaign IL metro fabric - city streets, residential neighborhoods, and a large industrial cluster surround the site."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.facebook.com/cjlogisticsamerica/posts/cj-logistics-is-currently-hiring-forklift-operators-for-our-champaign-il-locatio/387067059580324/",
+        "date": "2024",
+        "type": "careers",
+        "claim": "CJ Logistics own page advertises hiring forklift operators for our Champaign, IL location"
+      },
+      {
+        "tier": 1,
+        "url": "https://jobs.jobvite.com/cjlogisticsamerica/jobs",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "CJ Logistics careers system carries active Illinois warehouse-ops requisitions; Champaign forklift roles posted"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active CJ-branded forklift hiring at the Champaign IL site and no WARN/closure; real warehouse with truck yard.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

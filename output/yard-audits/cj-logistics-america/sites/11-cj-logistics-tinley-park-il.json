@@ -140,5 +140,24 @@
     "railServed": "No rail spur into the property; no rail line adjacent (I-80 borders the SE).",
     "facilityNote": "Racklify lists the Tinley Park CJ facility at 305,545 sq ft. The 2026 satellite shows a large, modern but lightly-used building with an empty truck court."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://racklify.com/warehouses/cj-logistics-3-in-tinley-park-il/",
+        "date": "2025",
+        "type": "press",
+        "claim": "CJ Logistics listed as operating a 3PL/fulfillment warehouse at 16901 S Cicero Ave, Tinley Park IL 60478"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FLAG: no clean Tier-1 CJ press/locator for the exact Tinley Park building, but listed as a CJ warehouse and no WARN/contract-loss/closure negative found; probable pending CJ-direct positive.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

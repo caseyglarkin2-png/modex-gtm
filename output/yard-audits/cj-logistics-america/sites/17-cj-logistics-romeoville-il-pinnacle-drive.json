@@ -111,5 +111,24 @@
     "urbanRural": "Romeoville is a dense Chicago-area logistics corridor - Urban.",
     "railServed": "No rail spur visible."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://zymergi.com/gmp/cj-logistics-america/romeoville",
+        "date": "2022-05-04",
+        "type": "econ-dev",
+        "claim": "FDA food-facility inspection record names CJ Logistics America operating at 500 S Pinnacle Dr, Romeoville IL (government record)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Distinct building from Normantown; FDA inspection record places CJ Logistics America at 500 S Pinnacle Dr, plus current Romeoville job listings; no negative found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -105,5 +105,24 @@
     "urbanRural": "Secaucus / NJ Meadowlands - extremely dense urban industrial area.",
     "railServed": "A rail line runs nearby (Meadowlands corridor) but no spur into this property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://info.america.cjlogistics.com/cjl-open-space-secaucus",
+        "date": "2025-02-06",
+        "type": "press",
+        "claim": "CJ Logistics own open-space sales sheet names 901 Castle Road, Secaucus NJ as a CJ Logistics America building (107,929 SF)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CJ own marketing page lists 901 Castle Rd Secaucus as an active CJ-held building; no negative found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -153,5 +153,31 @@
     "railServed": "No rail spur visible entering the property; building is highway-served (adjacent to a multi-lane highway, US-11 corridor).",
     "entryLanes": "Single shared entry/exit driveway; lane split not resolvable from imagery."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://jobs.jobvite.com/cjlogisticsamerica/job/okNGifwP",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active CJ Logistics America Warehouse Supervisor req for the Newville, PA facility on CJ own jobvite ATS"
+      },
+      {
+        "tier": 1,
+        "url": "https://jobs.jobvite.com/cjlogisticsamerica/jobs",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "CJ jobvite forklift reqs naming DSC Logistics in Newville, PA at 801 Centerville Road - exact address match (DSC legacy)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Current CJ jobvite reqs name 801 Centerville Rd Newville exactly (legacy DSC site); no closure negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

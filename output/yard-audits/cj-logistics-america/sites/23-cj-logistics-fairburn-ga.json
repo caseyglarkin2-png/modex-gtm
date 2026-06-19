@@ -114,5 +114,31 @@
     "siteAreaAcres": "~111 acres from the perimeter box; includes the building, truck courts on both faces, trailer storage, ponds and auto parking.",
     "urbanRural": "Fairburn GA along I-85 is part of the dense Atlanta-South metro industrial fabric (multiple million-sqft DCs adjacent) -> Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/cmp/Cj-Logistics-America/locations/GA/Fairburn",
+        "date": "2025-01",
+        "type": "careers",
+        "claim": "Active CJ Logistics America job openings at the Fairburn, GA location (5000A Bohannon Rd)"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/co/Cj-Logistics/Jobs/-in-Fairburn,GA",
+        "date": "2025-04",
+        "type": "careers",
+        "claim": "CJ Logistics now-hiring warehouse roles in Fairburn GA (Apr 2025)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "On CJ own location index with active 2025 hiring at 5000 Bohannon Rd; no closure/WARN found for Fairburn.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

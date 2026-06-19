@@ -112,5 +112,24 @@
     "urbanRural": "Romeoville is a dense Chicago-area logistics corridor (Will County warehouse cluster) - Urban.",
     "railServed": "No rail spur into the property visible."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://america.cjlogistics.com/newsroom/2020/01/dsc-logistics-seeks-stand-up-forklift-operators-at-facility-in-romeoville-il/",
+        "date": "2020-01-17",
+        "type": "press",
+        "claim": "CJ Logistics newsroom names 1401 W. Normantown Road, Romeoville IL as an operating warehouse"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CJ own newsroom names this exact address as an active warehouse; ongoing CJ Romeoville job listings; no negative found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

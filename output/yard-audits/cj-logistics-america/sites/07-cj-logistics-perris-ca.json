@@ -134,5 +134,31 @@
     "entryLanes": "Single gated truck-court entry; lane split not resolvable from imagery.",
     "scale": "No truck scale clearly visible; left in uncertainFields."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://jobs.jobvite.com/cjlogisticsamerica/job/oWicxfwH",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active CJ Logistics Forklift Operator req in Perris, CA on CJ own jobvite ATS"
+      },
+      {
+        "tier": 1,
+        "url": "https://jobs.jobvite.com/cjlogisticsamerica/job/oN8Cefwv",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active CJ Logistics Forklift Operators req for the Perris CA warehouse on CJ own jobvite ATS"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Multiple current Perris forklift reqs on CJ own ATS (~20 openings as of Jun 2026); no closure negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

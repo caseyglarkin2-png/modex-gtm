@@ -109,5 +109,24 @@
     "railServed": "No rail spur into the property; facility is near the future Northeast Georgia Inland Port but not currently rail-served.",
     "facilityNote": "New CJ Logistics America cold storage warehouse, opened Nov 2024; 270,000 sq ft, 30,000 racked pallet positions, 3 storage rooms (finished goods, bakery, proteins), Alta EXPERT refrigeration + QFM blast freezing, USDA export office on-site."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://america.cjlogistics.com/newsroom/2024/11/cj-logistics-america-opens-new-cold-storage-warehouse-in-georgia/",
+        "date": "2024-11",
+        "type": "press",
+        "claim": "CJ own newsroom: opened 270,000 SF cold storage warehouse in Gainesville GA (Nov 2024), 30,000 racked pallet positions, blast freezing, on-site USDA office"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CJ-operated cold storage DC opened Nov 2024 per CJ own press; current freight cold-storage facility with truck yard, no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -110,5 +110,31 @@
     "siteAreaAcres": "Estimated from perimeter box (~323m x ~369m) covering the building, east truck yard, and south parking.",
     "facilityNote": "Racklify lists the Fontana CJ facility at 250,430 sq ft. CJ Logistics America operates a 3PL/fulfillment DC here; a B&G Foods FSIS-inspected establishment is associated with CJ Logistics America in Fontana."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://jobs.jobvite.com/cjlogisticsamerica/jobs",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "CJ Logistics careers carries active Southern California warehouse-ops roles; Fontana CJ openings live for 13204 Jurupa Ave"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.warntracker.com/company/cj-logistics-america",
+        "date": "2026-02",
+        "type": "press",
+        "claim": "The only Fontana WARN (71 layoffs, eff. Apr 30 2026) is at 10825 Production Ave, a DIFFERENT building than the audited Jurupa Ave site"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FLAG: Audited coord maps to CJ 13204 Jurupa Ave Fontana DC (west, active hiring); the recent Fontana WARN closure is the separate Production Ave building, so it does not reject this site. Worth a coord double-check.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

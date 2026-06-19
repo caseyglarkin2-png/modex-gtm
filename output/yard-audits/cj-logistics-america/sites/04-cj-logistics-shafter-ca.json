@@ -125,5 +125,24 @@
     "entryLanes": "Single shared entry/exit driveway through the guard booth; lane split not resolvable from imagery.",
     "scale": "No truck scale clearly visible; left in uncertainFields."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://jobs.jobvite.com/cjlogisticsamerica/jobs",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active 2nd Shift Forklift Operator req based in Shafter, CA on CJ own jobvite ATS"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Current Shafter forklift req on CJ own ATS (Wonderful Industrial Park area); no closure negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

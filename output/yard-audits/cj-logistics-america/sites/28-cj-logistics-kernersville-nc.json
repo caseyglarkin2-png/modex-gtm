@@ -117,5 +117,31 @@
     "siteAreaAcres": "~24 acres from the perimeter box (building plus south truck court and north auto parking).",
     "railServed": "No rail spur into the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.warntracker.com/company/cj-logistics-america",
+        "date": "2026-01-27",
+        "type": "press",
+        "claim": "CJ Logistics America filed a WARN for permanent closure of 200 Forum Parkway, Rural Hall NC (99 employees), effective 2026-04-28"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.commerce.nc.gov/data-tools-reports/labor-market-data-tools/workforce-warn-reports/report-workforce-warn-listings-2026/open",
+        "date": "2026-01",
+        "type": "press",
+        "claim": "NC Commerce 2026 WARN listings include the CJ Logistics Rural Hall facility closure"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "200 Forum Pkwy = the Rural Hall/Kernersville facility (matches coords); CJ filed a Jan 2026 WARN for permanent closure of this exact site (99 jobs, eff. Apr 28 2026). Credible negative forces rejection.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -132,5 +132,31 @@
     "entryLanes": "Single shared entry/exit driveway off W Mississippi St; lane split not clearly resolvable from imagery.",
     "scale": "No truck scale clearly visible; left in uncertainFields."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://info.america.cjlogistics.com/cjl-open-space-elwood1",
+        "date": "2024-07",
+        "type": "press",
+        "claim": "CJ Logistics own open-space marketing page for the Elwood 1 IL campus (~1M SF, 116 dock doors, 200 yard spots, 5 rail doors) at CenterPoint Intermodal Center"
+      },
+      {
+        "tier": 1,
+        "url": "https://jobs.jobvite.com/cjlogisticsamerica/jobs",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active CDL Class A driver reqs based in Elwood, IL on CJ own jobvite ATS"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CJ flagship megasite at CenterPoint; own marketing pages + current Elwood jobvite reqs; no closure negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

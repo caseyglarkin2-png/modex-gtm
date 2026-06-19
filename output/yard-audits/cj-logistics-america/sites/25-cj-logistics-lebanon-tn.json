@@ -118,5 +118,24 @@
     "urbanRural": "14840 Central Pike sits in the Lebanon / Mount Juliet I-840 logistics corridor (Park 840 Logistics Center cluster) within greater Nashville metro, surrounded by multiple large DCs -> Urban.",
     "siteAreaAcres": "~35 acres from the perimeter box (building plus wrapping truck courts)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/cmp/Cj-Logistics-America/locations/TN/Lebanon",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active CJ Logistics America job openings near Lebanon TN; Lebanon is the documented CJ Nashville-area cluster (BNA1 at 14840 Central Pike, BNA2 at Duke Dr)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CJ documented Nashville cluster (Lebanon BNA1/BNA2) on its location index with active hiring; the only Lebanon closure found (Smoky Mountain Logistics) is a different company.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

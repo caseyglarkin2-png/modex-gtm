@@ -121,5 +121,31 @@
     "siteAreaAcres": "Estimated from the developed parcel (building + south apron + parking, ~320m x ~510m); the large vacant lot to the east is excluded.",
     "railServed": "No rail spur into the property; no rail line adjacent."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://america.cjlogistics.com/newsroom/2023/12/warehouse-space-available-in-phoenix-metro-area/",
+        "date": "2023-12",
+        "type": "press",
+        "claim": "CJ own newsroom: CJ Logistics currently operates in one half of the building in Glendale AZ, 331,686 SF available, 76-acre lot, 216 trailer stalls"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/co/Cj-Logistics/Jobs/-in-Glendale,AZ",
+        "date": "2026-05",
+        "type": "careers",
+        "claim": "Current CJ Logistics job postings in Glendale AZ (May 2026)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CJ own press confirms it operates the Glendale AZ building (large freight DC with trailer yard); active jobs, no closure/WARN.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

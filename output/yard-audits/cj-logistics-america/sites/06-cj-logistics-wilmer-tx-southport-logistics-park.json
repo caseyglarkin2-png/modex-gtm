@@ -125,5 +125,24 @@
     "entryLanes": "Estimated 2 inbound lanes at the gated entry; not precisely resolvable.",
     "scale": "No truck scale clearly visible; left in uncertainFields."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://info.america.cjlogistics.com/cjl-open-space-wilmer",
+        "date": "2025-01",
+        "type": "press",
+        "claim": "CJ Logistics own open-space page for 1200 E. Fulghum Rd, Wilmer TX (1.1M SF building) - Southport Logistics Park"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CJ own facility/open-space page for the Wilmer (Southport) building; no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

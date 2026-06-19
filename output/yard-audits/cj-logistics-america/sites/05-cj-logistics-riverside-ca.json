@@ -104,5 +104,31 @@
     "entryLanes": "Single shared entry/exit driveway through the guard booth; lane split not resolvable.",
     "scale": "No truck scale clearly visible; left in uncertainFields."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/co/Cj-Logistics-America/Jobs/-in-Riverside,CA",
+        "date": "2026-03",
+        "type": "careers",
+        "claim": "7 current CJ Logistics openings in Riverside, CA as of Mar 2026 incl. a role with full shift detail - current operation post-WARN"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.warntracker.com/company/cj-logistics-america",
+        "date": "2025-04",
+        "type": "press",
+        "claim": "NEGATIVE: 111-employee WARN notice filed for Riverside CA in Apr 2025 (no specific address)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FLAG: Apr-2025 Riverside WARN (111, no address) is a real negative, but CJ actively hiring 7 Riverside roles as of Mar 2026; probable pending exact-address confirmation.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
