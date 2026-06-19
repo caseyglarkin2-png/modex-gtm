@@ -207,5 +207,20 @@
     "siteAreaAcres": "Per published facility data the site is 22 acres, of which only ~3.5 acres are developed (building + pavement) and the rest is restored natural prairie. Perimeter box approximates the developed/usable portion.",
     "scale": "No truck scale observed."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.nbcchicago.com/news/local/important-change-sc-johnson-moving-170-employees-out-of-chicago-into-wisconsin/3792278/", "date": "2025-07-17", "type": "press", "claim": "SCJ confirms it retains a manufacturing center in Chicago's Pullman neighborhood; the 2025 move relocates ~170 office roles to Wisconsin, not the plant." },
+      { "tier": 1, "url": "https://jobs.scjohnson.com/lsb-chicago", "date": "2026-06", "type": "careers", "claim": "SCJ Lifestyle Brands careers page for the Chicago South Side Soapbox at 720 E. 111 St.: active manufacturing/bottling/distribution for method and ecover (rooftop greenhouse, wind turbine)." },
+      { "tier": 1, "url": "https://rcedc.org/sc-johnson-to-shift-170-chicago-roles-to-mount-pleasant-by-2026/", "date": "2025-07", "type": "press", "claim": "Racine County EDC confirms manufacturing operations in Pullman remain active; relocated roles are office positions only." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Multiple Tier-1 dated sources confirm SCJ-operated method/ecover Pullman plant active; the only 2025 event is an office relocation, plant stays open; no divestiture found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

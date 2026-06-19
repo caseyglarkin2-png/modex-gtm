@@ -126,5 +126,19 @@
     "siteAreaAcres": "Estimate from perimeter box; ~268,830 sq ft building on a compact ~13-acre parcel.",
     "entryLanes": "Single gated truck drive; lane count approximate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://www.smartwarehousing.com/warehouses-contacts", "date": "2026-06", "type": "locator", "claim": "Smart Warehousing's own directory lists 'Warehouse 26' at 1545 E Locust St, Ontario CA 91761 at exactly 268,830 sq ft with named SW management staff — no SCJ tenancy." },
+      { "tier": 3, "url": "https://lonestarcandlesupply.com/local-pick-up-instructions/", "date": "2026-06", "type": "press", "claim": "Lone Star Candle Supply runs its Ontario CA shipments through Smart Warehousing at 1545 E Locust St — building serves Smart Warehousing's own clients, not SCJ." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "No positive within ~24 months ties SCJ to 1545 E Locust; the address is now 3PL Smart Warehousing (Warehouse 26, exact 268,830 SF) serving its own clients, and the only SCJ link is a ~20-yr-stale EPA RMP (operator Excel Logistics).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -165,5 +165,19 @@
     "entryLanes": "Single open access drive; lane count approximate.",
     "siteAreaAcres": "Estimate from perimeter box covering the building, both drop yards and the southern loop apron."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      { "tier": 2, "url": "https://www.warntracker.com/company/dhl", "date": "2024-06-19", "type": "press", "claim": "DHL Supply Chain WARN for 1555 Oakley Industrial Blvd, Fairburn GA, 211 employees, layoff effective 2024-08-31." },
+      { "tier": 2, "url": "https://www.costar.com/article/992072433", "date": "2024", "type": "press", "claim": "CoStar: 'DHL to close two operations near Atlanta' (1555 Oakley Fairburn + McDonough), ~210 jobs, summer 2024." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "The Exel/DHL-operated SCJ RDC at 1555 Oakley closed via June-2024 WARN (effective Aug 31 2024) and the building has been re-leased; all positive SCJ signals predate the closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

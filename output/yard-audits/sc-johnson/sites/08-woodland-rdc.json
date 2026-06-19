@@ -176,5 +176,19 @@
     "siteAreaAcres": "Estimate from perimeter box; ~200,000 sq ft building plus truck yards on a compact ~14-acre parcel.",
     "entryLanes": "Single open access drive; lane count approximate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      { "tier": 2, "url": "https://www.loopnet.com/Listing/2030-Hanson-Way-Woodland-CA/30723567/", "date": "2026-06", "type": "press", "claim": "Entire ~399k SF building at 2030 Hanson Way marketed for lease (whole-building availability), indicating no anchor tenant." },
+      { "tier": 2, "url": "https://updikedl.com/locations/", "date": "2026-06", "type": "press", "claim": "3PL Updike Distribution Logistics lists 2030 Hanson Way as its own 'Woodland Warehouse' with no SCJ tie." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Only SCJ-specific positive is a ~2017 EPA RMP (stale); current evidence is negative — full building listed for lease and a different 3PL (Updike) markets the address as its own.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

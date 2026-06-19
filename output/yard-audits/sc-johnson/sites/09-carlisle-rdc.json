@@ -146,5 +146,19 @@
     "siteAreaAcres": "Estimate from perimeter box covering the 500k sq ft cross-dock and the wrap-around truck yards.",
     "entryLanes": "Open driveways; lane counts approximate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      { "tier": 1, "url": "https://www.margulieshoelzli.com/projects/sc-johnson/", "date": "2026-06", "type": "press", "claim": "SC Johnson 500,000 sq ft NE regional cross-dock in Carlisle PA (450ft x 1,100ft), developed by First Industrial Realty Trust." },
+      { "tier": 3, "url": "https://wireless2.fcc.gov/UlsApp/UlsSearch/license.jsp?licKey=2929379", "date": "2026-06", "type": "press", "claim": "FCC ULS license to 'EXEL SC JOHNSON' with a PA (717) contact, tying Exel/DHL 3PL operation to SCJ in Carlisle (legacy record)." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "5 True Temper Dr is an unambiguously active DHL/Exel cross-dock (DHL hiring Oct-2025 to Jun-2026, no WARN/closure), but the SCJ-as-current-client tie rests on an architecture project page + a legacy FCC license rather than a fresh dated source — PROBABLE, flagged, moderate confidence.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -152,5 +152,18 @@
     "entryLanes": "Open multi-tenant park roads; lane counts approximate from imagery.",
     "siteAreaAcres": "Estimate from perimeter box covering the building and both truck yards; vacant land to the north excluded."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "3PL",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://www.haslet.org/BusinessDirectoryii.aspx", "date": "2026-06", "type": "econ-dev", "claim": "City of Haslet business directory lists 'S C Johnson (Exel)' at 850 Transport Drive, Haslet TX 76052 — SCJ occupier, Exel/DHL 3PL operator." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Exel/DHL site for SCJ on the I-35W/Transport Dr corridor; no closure/WARN signal found, but the SCJ-client tie rests on an undated municipal directory (and a prior Shippers Warehouse tenant once shared the address) — PROBABLE, flagged, treat as moderate confidence.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

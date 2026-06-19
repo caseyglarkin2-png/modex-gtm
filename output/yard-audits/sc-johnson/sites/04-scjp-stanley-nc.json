@@ -128,5 +128,19 @@
     "urbanRural": "Small-town Stanley, NC (Gaston County), surrounded by fields and woods; Rural per rubric.",
     "siteAreaAcres": "Building ~73,956 sq ft; the fenced/paved operational parcel is small (~14 acres estimated from the perimeter box). Flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.glassdoor.com/Job/stanley-sc-johnson-professional-jobs-SRCH_IL.0,7_IC1138674_KO8,31.htm", "date": "2026-06", "type": "careers", "claim": "Active SC Johnson Professional job openings in Stanley, NC as of June 2026." },
+      { "tier": 1, "url": "https://www.loopnet.com/property/1100-s-highway-27-stanley-nc-28164/37071-176716/", "date": "2025-09", "type": "locator", "claim": "Property record for 1100 S Highway 27, Stanley NC 28164 (73,956 sq ft industrial) — the audited address, occupied by SC Johnson Professional." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "SC Johnson Professional USA (ex-Deb USA) actively manufactures hand/floor care at 1100 S Hwy 27 Stanley NC; June-2026 job listings + property record confirm; no negative found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

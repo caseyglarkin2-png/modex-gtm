@@ -151,5 +151,19 @@
     "siteAreaAcres": "SC Johnson states the Bay City site is more than 400 acres; much of it is undeveloped land. Perimeter box approximates the property; ~400 acres per company figure.",
     "urbanRural": "Edge-of-town Bay City setting with adjacent residential and farmland/open land; judged Rural per rubric (small-city industrial)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://jobs.scjohnson.com/Bay-city", "date": "2026-06", "type": "careers", "claim": "SCJ Bay City, MI site currently operates with ~400 team members across >400 acres / six plants producing billions of Ziploc bags annually; live open requisition." },
+      { "tier": 1, "url": "https://www.cafc.uscourts.gov/opinions-orders/24-1661.OPINION.12-30-2025_2625505.pdf", "date": "2025-12-30", "type": "press", "claim": "Federal Circuit opinion dated Dec 30 2025 (Zip Top, Inc. v. SC Johnson & Son) treats SC Johnson as the current maker of Ziploc products, contradicting any completed divestiture." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "No evidence of any Ziploc/Home Storage sale or closure; SCJ careers page + active SC Johnson Home Storage LLC entity + Dec-2025 Federal Circuit case confirm SCJ still operates Bay City.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

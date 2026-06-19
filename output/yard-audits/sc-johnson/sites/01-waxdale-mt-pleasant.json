@@ -158,5 +158,20 @@
     "urbanRural": "Edge-of-town industrial setting in Mt. Pleasant; large natural buffer (woods/wetland) on the west and open land around; broader setting judged Rural per rubric.",
     "siteAreaAcres": "Perimeter box ~1.22 km N-S x 0.78 km E-W of fenced developed property; ~218 acres is an estimate of the active fenced footprint (SC Johnson land holding here is larger)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://scjohnson.com/en/impact/sustainability-initiatives/carbon/waxdale-facility-fact-sheet", "date": "2026-06", "type": "locator", "claim": "SC Johnson's official Waxdale fact sheet: largest global manufacturing facility, 2.2M sq ft, 15 finished-goods lines + components plant, owned/operated by SCJ in Mt. Pleasant, WI." },
+      { "tier": 1, "url": "https://racinecountyeye.com/2025/07/16/sc-johnson-moving-jobs-to-racine/", "date": "2025-07-16", "type": "press", "claim": "Jul-2025 local press: SCJ moving 170 jobs to a building near its active Waxdale manufacturing plant in Mt. Pleasant." },
+      { "tier": 1, "url": "https://jobs.scjohnson.com/en/working-at-waxdale", "date": "2026-06", "type": "careers", "claim": "SCJ careers page actively recruiting Waxdale manufacturing roles; references its largest manufacturing facility." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Three Tier-1 sources confirm current SCJ-operated production; divestiture/closure/WARN/idle gauntlet returned no credible negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

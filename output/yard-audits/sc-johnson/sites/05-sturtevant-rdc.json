@@ -178,5 +178,20 @@
     "multiStep": "No second checkpoint observed; left false but flagged as not fully confirmable from overhead imagery.",
     "siteAreaAcres": "Estimate from perimeter box covering the building, both truck yards, and the office/parking; adjacent vacant land excluded."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      { "tier": 2, "url": "https://dwd.wisconsin.gov/dislocatedworker/warn/2024/2024083001.pdf", "date": "2024-08-30", "type": "press", "claim": "WI DWD WARN filed by DHL Supply Chain for the 2600 Enterprise Dr Sturtevant facility, 32 positions, first separation Feb 28 2025." },
+      { "tier": 2, "url": "https://www.prologis.com/industrial-properties/building/chi04801-prologis-sturtevant-1", "date": "2026-06", "type": "press", "claim": "2600 Enterprise Dr is Prologis-owned 'Prologis Sturtevant 1' (432k SF, 41 docks), not an SCJ-owned LEED-Gold asset." },
+      { "tier": 2, "url": "https://hoodline.com/2026/05/amazon-moves-in-on-empty-sturtevant-warehouse-with-pill-processing-push/", "date": "2026-05", "type": "press", "claim": "May-2026 report: the now-empty Sturtevant warehouse is being repurposed by Amazon, confirming the prior 3PL tenant is gone." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "2600 Enterprise Dr is a Prologis-owned building last run by 3PL DHL, closed Feb 2025 (WARN), now vacant/Amazon-repurposed; no current source places SCJ here, and the 552k SF SCJ-owned LEED-Gold spec does not match this 432k SF building.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
