@@ -6,13 +6,17 @@
     "displayName": "Performance Food Group",
     "archetype": "grocer-distributor",
     "siteCount": 29,
+    "networkCount": 150,
+    "networkCountSource": "Performance Food Group Form 10-K (FY ended June 28, 2025), Item 2 Properties: 155 distribution centers (89 Foodservice, 39 Convenience/Core-Mark, 27 Specialty/Vistar), of which 150 are in the US (4 Canada, 1 Puerto Rico). https://www.sec.gov/Archives/edgar/data/0001618673/000161867325000012/pfgc-20250628.htm",
+    "networkCountAsOf": "2025-06-28",
+    "sampleRationale": "The 29 audited sites span PFG's Foodservice, Convenience, and Specialty segments, representative of its 150-center US distribution network.",
     "coverageNote": {
       "auditedCount": 29,
       "estimatedFootprint": 150,
       "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": true,
-      "note": "Performance Food Group operates ~150 US distribution centers (Vistar, PFG Foodservice, Reinhart). We audited 30 representative sites."
+      "note": "Performance Food Group operates 150 US distribution centers across Foodservice, Convenience (Core-Mark), and Specialty (Vistar) per its FY2025 10-K Item 2. We audited 29 representative sites."
     },
     "featuredSiteId": "18-lebanon-tn",
     "dossierIntro": "Foodservice distribution runs multi-temp networks where the trailer is the production unit. Performance Food Group runs 150 facilities. Nashville Lebanon TN covers 52 acres with 70 dock doors and 150 trailer spots. The yard isn't staging trailers, it's staging routes. YardFlow makes routes addressable: drivers find their assigned pre-loaded trailer without circling or radioing dispatch.",

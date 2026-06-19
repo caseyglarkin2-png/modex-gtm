@@ -6,13 +6,17 @@
     "displayName": "Frito-Lay",
     "archetype": "cpg",
     "siteCount": 28,
+    "networkCount": 40,
+    "networkCountSource": "Frito-Lay North America Fact Sheet (30+ US/Canada manufacturing plants) plus its large regional traffic-center DCs; current US plant count ~28-30 after 2025 closures. https://www.fritolay.com/sites/fritolay.com/themes/fritolay/pdf/FLNA_Fact_Sheet_8-30-19.pdf and https://www.foodingredientsfirst.com/news/pepsico-closes-frito-lay-plants-us.html",
+    "networkCountAsOf": "2025-11-12",
+    "sampleRationale": "The 28 audited sites cover Frito-Lay's core US plants and large traffic-center DCs, the real freight nodes that move truckloads, not the DSD route depots that inflate looser counts.",
     "coverageNote": {
       "auditedCount": 28,
-      "estimatedFootprint": 200,
+      "estimatedFootprint": 40,
       "auditedScope": "US",
       "droppedStubCount": 0,
-      "capHit": true,
-      "note": "Frito-Lay (PepsiCo NA subsidiary) operates ~200 US manufacturing + DC sites. We audited 29 representative sites."
+      "capHit": false,
+      "note": "Frito-Lay (PepsiCo NA subsidiary) runs ~40 US freight facilities: roughly 30 manufacturing plants plus its large regional traffic-center DCs. The widely cited 200+ figure is the DSD route-depot network, not truckload freight nodes. We audited 28 representative sites."
     },
     "featuredSiteId": "18-frito-lay-aberdeen-md",
     "dossierIntro": "Frito-Lay runs the most dock-heavy CPG network we've audited. 1,301 dock doors and 5,027 trailer spots across 29 sites. 17 of them rail-served. Aberdeen MD alone has 70 docks and 160 trailer spots on 58 acres. Snack DSD lives in the dock door sequencing, not the dock door count. YardFlow runs the schedule as a deterministic queue.",

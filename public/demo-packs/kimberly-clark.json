@@ -6,14 +6,18 @@
     "displayName": "Kimberly-Clark",
     "archetype": "cpg",
     "siteCount": 15,
+    "networkCount": 57,
+    "networkCountSource": "Kimberly-Clark NA freight network: 18 manufacturing facilities + 39 distribution centers (Supply Chain Dive, 2025-05-05, citing K-C's Beech Island plant presentation); manufacturing anchored to KMB FY2025 10-K Item 2 (27 NA production facilities). https://www.supplychaindive.com/news/kimberly-clark-huggies-kleenex-2-billion-us-ohio-south-carolina-facilities/747019/",
+    "networkCountAsOf": "2025-05-05",
+    "sampleRationale": "The 15 audited NA sites are representative of Kimberly-Clark's 57-facility North American freight network of mills and distribution centers.",
     "coverageNote": {
       "auditedCount": 15,
-      "estimatedFootprint": 30,
-      "totalGlobalFootprint": 150,
+      "estimatedFootprint": 57,
+      "totalGlobalFootprint": 74,
       "auditedScope": "NA",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Kimberly-Clark operates ~150 manufacturing facilities across 35 countries; we audited 18 NA sites. International scope on request."
+      "note": "Kimberly-Clark runs a 57-facility North American freight network (18 manufacturing facilities + 39 distribution centers); its FY2025 10-K reports 74 production facilities in 30 countries globally. We audited 15 representative NA sites."
     },
     "featuredSiteId": "06-kc-owensboro-plant",
     "dossierIntro": "Kimberly-Clark runs the largest per-site footprints in CPG. 150 plants and DCs averaging 137 acres each. Owensboro KY covers 230 acres with 55 doors and 220 trailer spots. Warren OH advanced manufacturing is 560 acres. YardFlow runs the drop yard as positions, not parking, on networks where the trailer travels half a mile inside the perimeter.",

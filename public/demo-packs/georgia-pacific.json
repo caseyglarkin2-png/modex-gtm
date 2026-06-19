@@ -6,6 +6,10 @@
     "displayName": "Georgia-Pacific",
     "archetype": "manufacturer",
     "siteCount": 29,
+    "networkCount": 150,
+    "networkCountSource": "Georgia-Pacific corporate locations page states 150+ facilities across ~30 US states (paper, packaging, pulp/tissue, building products). https://www.gp.com/about-us/locations/ (accessed 2026-06-19)",
+    "networkCountAsOf": "2026-06-19",
+    "sampleRationale": "The 29 audited sites span paper, packaging, pulp, and building-products plants, representative of Georgia-Pacific's 150-facility US manufacturing network.",
     "coverageNote": {
       "auditedCount": 29,
       "estimatedFootprint": 150,
@@ -13,7 +17,7 @@
       "auditedScope": "NA",
       "droppedStubCount": 0,
       "capHit": true,
-      "note": "Georgia-Pacific operates ~150 NA manufacturing facilities (paper, packaging, pulp, building products). We audited 30 representative sites."
+      "note": "Georgia-Pacific operates 150+ US manufacturing facilities (paper, packaging, pulp, building products) per its corporate locations page. We audited 29 representative sites."
     },
     "featuredSiteId": "04-gp-broadway-mill-green-bay-wi",
     "dossierIntro": "Building materials and paper run the most rail-dependent yards we've audited. Georgia-Pacific runs 150 facilities. Broadway Mill in Green Bay covers 240 acres with 70 dock doors and 320 trailer spots. Brunswick Cellulose is 704 acres of pulp manufacturing. 25 of 30 audited sites are rail-served. YardFlow classifies the asset at the gate so pulp doesn't sit waiting for a dock that lumber needs.",

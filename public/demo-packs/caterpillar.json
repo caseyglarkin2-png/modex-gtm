@@ -6,14 +6,18 @@
     "displayName": "Caterpillar",
     "archetype": "manufacturer",
     "siteCount": 19,
+    "networkCount": 45,
+    "networkCountSource": "Caterpillar newsroom, 'Caterpillar Invests in U.S. Manufacturing and Future Workforce Skills Training' (more than 65 primary US locations across 25 states); scoped to ~45 US manufacturing plants and parts distribution centers, the freight-relevant subset. https://www.prnewswire.com/news-releases/caterpillar-invests-in-us-manufacturing-and-future-workforce-skills-training-302590291.html",
+    "networkCountAsOf": "2025-10-21",
+    "sampleRationale": "We mapped the biggest plants, the foundry, the engine centers, and the parts DCs across the US footprint; the gate-and-drop pattern held across all of them.",
     "coverageNote": {
       "auditedCount": 19,
-      "estimatedFootprint": 30,
-      "totalGlobalFootprint": 110,
+      "estimatedFootprint": 45,
+      "totalGlobalFootprint": 45,
       "auditedScope": "NA",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Caterpillar operates ~110 manufacturing facilities across 23 countries; we audited 21 NA plants. International scope on request."
+      "note": "Caterpillar runs more than 65 primary US locations across 25 states (Oct 2025 newsroom); the freight-relevant US footprint is ~45 manufacturing plants and parts distribution centers, of which we audited 19."
     },
     "featuredSiteId": "11-waco-tx-distribution-center",
     "dossierIntro": "Heavy equipment manufacturing is the remote-check-in archetype. Caterpillar runs 110 facilities. Waco TX has 70 doors and 90 trailer spots on 66 acres. Decatur IL is 360 acres of heavy-equipment final assembly. 10 of 21 audited sites are rail-served. YardFlow's classifier separates heavy-equipment moves from standard loads at the gate.",

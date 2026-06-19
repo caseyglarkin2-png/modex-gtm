@@ -24,7 +24,11 @@
     ],
     "roiDefaults": {
       "averageMarginPerShipment": 640
-    }
+    },
+    "networkCount": 500,
+    "networkCountSource": "The Home Depot FY2024 Form 10-K, Item 2 Properties: over 500 distribution and fulfillment centers and warehouses (https://www.sec.gov/Archives/edgar/data/354950/000035495025000085/hd-20250202.htm)",
+    "networkCountAsOf": "FY2024 10-K",
+    "sampleRationale": "We mapped 30 representative DCs across the rapid-deployment, bulk, flatbed, and direct-fulfillment platforms, biggest to smallest; the yard pattern held across all of them."
   },
   "research": null,
   "network": {

@@ -21,7 +21,11 @@
       "Walmart's Williamsburg import DC alone runs about 500 dock doors across a 191-acre cross-dock, one building sized like a small port.",
       "Across 12 DCs we counted room for more than 5,200 trailers and zero rail spurs in use. Every load lands and leaves through a truck gate.",
       "The McCordsville fulfillment center stacks 144 docks under a 2.2M square foot roof, the largest single yard Walmart runs."
-    ]
+    ],
+    "networkCount": 164,
+    "networkCountSource": "Walmart FY2025 Form 10-K, Item 2 Properties: 164 Walmart U.S. distribution facilities (https://www.sec.gov/Archives/edgar/data/104169/000010416925000021/wmt-20250131.htm)",
+    "networkCountAsOf": "FY2025 10-K",
+    "sampleRationale": "We mapped 12 US facilities spanning every type, regional, grocery and perishable, fashion, import, and e-commerce; the yard pattern held across all of them."
   },
   "research": null,
   "network": {

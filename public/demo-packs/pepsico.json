@@ -19,7 +19,11 @@
       "Brookshire TX runs 120 dock doors, the most in the network, on one mixing-center roofline. Two truck gates decide whether all of them stay fed.",
       "Only 3 of 30 audited sites are rail-served. The other 27 move everything by truck, so the yard is the only place left to win the turn.",
       "26 of 30 sites sit behind long entry drives where the queue backs toward the road. The driverless trucks PepsiCo is adding with Gatik still wait in that line."
-    ]
+    ],
+    "networkCount": 105,
+    "networkCountSource": "PepsiCo FY2017 Form 10-K, Item 2 Properties (last filing with division facility counts): ~105 North America plants (https://www.sec.gov/Archives/edgar/data/77476/000007747618000012/pepsico201710-k.htm)",
+    "networkCountAsOf": "FY2017 10-K",
+    "sampleRationale": "We mapped flagship company-owned plants and DCs spanning PBNA, Gatorade, and Quaker, biggest to smallest and most to least automated; the yard pattern held across all 30."
   },
   "research": null,
   "network": {

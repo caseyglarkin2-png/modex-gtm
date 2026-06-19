@@ -21,7 +21,11 @@
       "Monrovia MD packs about 260 dock doors onto a single 84-acre cross-dock, a building sized so a trailer never has to sit.",
       "Across 11 depots we counted room for more than 5,300 trailers and zero rail. Every load in or out moves by truck through the gate.",
       "Costco's Monroe NJ site splits wet and dry into two separate gated depots 600m apart, so one store order clears two gate queues."
-    ]
+    ],
+    "networkCount": 24,
+    "networkCountSource": "Costco FY2019 Form 10-K, Item 2 Properties (last published depot count): 24 depots worldwide (https://www.sec.gov/Archives/edgar/data/909832/000090983219000019/cost10k9119.htm)",
+    "networkCountAsOf": "FY2019 10-K (worldwide)",
+    "sampleRationale": "We mapped 11 US cross-dock depots spanning dry and refrigerated wet docks, biggest to smallest; the yard pattern held across all of them."
   },
   "research": null,
   "network": {

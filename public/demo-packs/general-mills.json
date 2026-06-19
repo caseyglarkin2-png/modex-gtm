@@ -6,14 +6,18 @@
     "displayName": "General Mills",
     "archetype": "cpg",
     "siteCount": 15,
+    "networkCount": 28,
+    "networkCountSource": "General Mills FY2025 Form 10-K, Item 2 Properties: 42 facilities for the production of food products, 28 in the United States, as of May 25, 2025. https://www.sec.gov/Archives/edgar/data/0000040704/000119312525147079/d938443d10k.htm",
+    "networkCountAsOf": "2025-05-25",
+    "sampleRationale": "We mapped the largest, rail-served, and highest-density US plants across the cereal, snacks, pet, and dough platforms; the gate pattern held across all of them.",
     "coverageNote": {
       "auditedCount": 15,
-      "estimatedFootprint": 30,
-      "totalGlobalFootprint": 35,
-      "auditedScope": "NA",
+      "estimatedFootprint": 28,
+      "totalGlobalFootprint": 28,
+      "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "General Mills operates ~35 plants globally (~30 in NA). We audited 26 NA sites."
+      "note": "General Mills runs 28 US production plants (FY2025 10-K, of 42 globally). We audited 15."
     },
     "featuredSiteId": "08-belvidere-il-distribution-center",
     "dossierIntro": "General Mills runs the cereal, snacks, pet food, and refrigerated dough network. 35 facilities; we audited 26. Murfreesboro TN covers 186 acres with 60 dock doors. Wellston OH is 328 acres of cereal manufacturing. 10 of 26 audited sites are rail-served. 883 dock doors total. YardFlow runs the four product platforms as four queues on a unified gate protocol.",

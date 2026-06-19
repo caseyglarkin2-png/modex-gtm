@@ -6,21 +6,25 @@
     "displayName": "Ford Motor Company",
     "archetype": "oem-automotive",
     "siteCount": 21,
+    "networkCount": 28,
+    "networkCountSource": "US-only operating footprint built from Ford's official plant locator (https://corporate.ford.com/operations/locations/global-plants/) and Ford's 2024 10-K Item 2 Properties (https://www.sec.gov/Archives/edgar/data/0000037996/000003799625000013/f-20241231.htm): 7 vehicle assembly + 4 stamping + 5 engine/powertrain + 2 transmission + 2 axle/components + 8 US parts distribution centers. Excludes the closed Romeo Engine Plant and all non-US sites.",
+    "networkCountAsOf": "2024-12-31",
+    "sampleRationale": "We mapped Ford's biggest assembly plants, its stamping and powertrain feeders, and its parts DCs; the two-queue gate pattern held across every one.",
     "coverageNote": {
       "auditedCount": 21,
-      "estimatedFootprint": 30,
-      "totalGlobalFootprint": 65,
-      "auditedScope": "NA",
+      "estimatedFootprint": 28,
+      "totalGlobalFootprint": 28,
+      "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Ford operates ~65 assembly and stamping plants globally; ~30 are in North America. We audited 24 NA plants. International scope on request."
+      "note": "Ford operates ~28 freight-bearing manufacturing and parts-distribution facilities in the US (assembly, stamping, engine/powertrain, transmission, axle/components, plus 8 parts distribution centers). We audited 21 of them. The closed Romeo Engine Plant is excluded."
     },
     "featuredSiteId": "02-kentucky-truck-plant",
-    "dossierIntro": "Auto OEMs run two yards inside every plant: parts in, vehicles out. Ford runs 65 facilities. Kentucky Truck Plant covers 343 acres with 55 docks and 150 trailer spots. BlueOval City in Tennessee is 950 acres of greenfield EV manufacturing. 20 of 24 audited sites are rail-served. YardFlow runs the supplier inbound and finished-vehicle outbound as two distinct queues on one protocol.",
+    "dossierIntro": "Auto OEMs run two yards inside every plant: parts in, vehicles out. Ford runs 28 freight-bearing facilities across the US. Kentucky Truck Plant covers 343 acres with 55 docks and 150 trailer spots. BlueOval City in Tennessee is 950 acres of greenfield EV manufacturing. 18 of 21 audited sites are rail-served. YardFlow runs the supplier inbound and finished-vehicle outbound as two distinct queues on one protocol.",
     "surprisingFindings": [
       "BlueOval City is 950 acres of greenfield. Ford's EV bet is the size of 720 NFL fields.",
-      "20 of 24 audited sites are rail-served. Auto inbound runs on railcars, not trucks.",
-      "907 dock doors across 24 plants. The auto OEM dock count is parts pacing, not throughput."
+      "18 of 21 audited sites are rail-served. Auto inbound runs on railcars, not trucks.",
+      "797 dock doors across 21 plants. The auto OEM dock count is parts pacing, not throughput."
     ],
     "roiDefaults": {
       "averageMarginPerShipment": 2200

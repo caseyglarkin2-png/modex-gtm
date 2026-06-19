@@ -6,15 +6,19 @@
     "displayName": "Kraft Heinz",
     "archetype": "cpg",
     "siteCount": 9,
+    "networkCount": 34,
+    "networkCountSource": "Kraft Heinz FY2023 Form 10-K, Item 2 Properties: North America manufacturing and processing facilities, 32 owned + 2 leased (https://www.sec.gov/Archives/edgar/data/0001637459/000163745924000018/khc-20231230.htm)",
+    "networkCountAsOf": "2023-12-30",
+    "sampleRationale": "We mapped the biggest, newest, and most and least automated Kraft Heinz sites across regions; the yard pattern held the same across every one of them.",
     "coverageNote": {
       "auditedCount": 9,
-      "estimatedFootprint": 40,
-      "totalGlobalFootprint": 50,
+      "estimatedFootprint": 34,
+      "totalGlobalFootprint": 34,
       "auditedScope": "NA",
       "legacyYmsFacilityCount": 25,
       "droppedStubCount": 17,
       "capHit": false,
-      "note": "We audited 10 of an estimated ~40 NA Kraft Heinz manufacturing + DC facilities (Aurora cold storage, Holland Lunchables, Davenport Oscar Mayer, Garland TX Oscar Mayer, Massillon, Fremont ketchup, Mason City Jell-O, Fort Myers Bagel Bites, Jacksonville warehouse + portion control). Kraft Heinz operates ~50 plants globally (~80% NA-concentrated). The remaining 17 NA sites are stubs from the calibration set; backfill in progress on the highest-volume plants first."
+      "note": "Kraft Heinz runs 34 North America manufacturing and processing facilities (32 owned, 2 leased) per its FY2023 10-K Item 2 Properties, and 75 such facilities globally. We mapped a representative NA sample (Aurora cold storage, Holland Lunchables, Davenport Oscar Mayer, Garland TX Oscar Mayer, Massillon, Fremont ketchup, Mason City Jell-O, Fort Myers Bagel Bites, Jacksonville warehouse + portion control); DCs add to the plant count but are not enumerated in the 10-K, so we size the network on the cited 34 NA plants."
     },
     "featuredSiteId": "05-kraft-foods-jacksonville-portion-control",
     "dossierIntro": "Kraft Heinz is the first network we used as the audit rubric. 50+ facilities; we audited 27. Davenport IA covers 72 acres with 55 docks. Fremont OH is 88 acres. 525 dock doors and 722 trailer spots. The 22-field classification framework was calibrated here. YardFlow runs the network the rubric was built for.",

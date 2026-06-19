@@ -6,13 +6,17 @@
     "displayName": "Sam's Club",
     "archetype": "retailer",
     "siteCount": 10,
+    "networkCount": 45,
+    "networkCountSource": "Walmart Inc. Form 10-K (FY ended Jan 31, 2025): Sam's Club U.S. operates 31 dedicated distribution facilities plus 14 dedicated eCommerce fulfillment centers. https://stock.walmart.com/sec-filings/all-sec-filings/content/0000104169-25-000021/wmt-20250131.htm",
+    "networkCountAsOf": "2025-01-31",
+    "sampleRationale": "The 10 audited DCs span owned cross-docks and dedicated 3PL sites across the South and Midwest, representative of the 45-facility US distribution and fulfillment network feeding ~600 clubs.",
     "coverageNote": {
       "auditedCount": 10,
-      "estimatedFootprint": 12,
+      "estimatedFootprint": 45,
       "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Sam's Club runs a lean US network of ~12 distribution and fulfillment centers (several 3PL-operated by Saddle Creek / Prologis) feeding ~600 clubs. We audited 10 representative facilities."
+      "note": "Sam's Club U.S. operates 45 dedicated freight facilities (31 distribution centers + 14 eCommerce fulfillment centers per Walmart's FY2025 10-K), several 3PL-operated by Saddle Creek / Prologis, feeding ~600 clubs. We audited 10 representative facilities."
     },
     "featuredSiteId": "02-sams-club",
     "dossierIntro": "Sam's Club runs a lean distribution network separate from its Walmart parent, a mix of owned cross-docks and dedicated 3PL DCs (Saddle Creek, Prologis) feeding roughly 600 warehouse clubs. We mapped 10 of them across the South and Midwest, holding 1,083 dock doors and room for about 2,530 trailers. Eight of the ten sit behind a controlled truck gate and five run a staffed guard booth, but the control is uneven and two DCs sit open to the road. YardFlow gives Sam's Club one gate-to-dock view across owned and 3PL yards alike.",

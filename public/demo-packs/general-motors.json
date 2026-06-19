@@ -6,13 +6,17 @@
     "displayName": "General Motors",
     "archetype": "oem-automotive",
     "siteCount": 36,
+    "networkCount": 61,
+    "networkCountSource": "GM US Operations: 12 vehicle assembly plants + 24 stamping, propulsion, component and battery plants + 25 parts distribution centers = 61 freight-relevant US facilities (the 2 engineering campuses are R&D, not freight; divested/idled plants excluded). https://www.gm.com/company/us-operations",
+    "networkCountAsOf": "2026-06-19",
+    "sampleRationale": "The audited sites cover GM's freight-relevant US assembly, powertrain, stamping, casting, battery, and parts-distribution facilities, representative of the 61-site current-operations network.",
     "coverageNote": {
       "auditedCount": 36,
-      "estimatedFootprint": 50,
+      "estimatedFootprint": 61,
       "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "We audited 41 of GM's freight-relevant US facilities: every assembly, powertrain, stamping and casting, Ultium battery, parts-processing, and parts-distribution site with a real truck yard. Pure offices and the Milford R&D campus carry no freight gate and are excluded. The wider footprint follows the same archetype distribution."
+      "note": "GM runs 61 freight-relevant US facilities (12 assembly + 24 stamping/propulsion/component/battery + 25 parts distribution centers per gm.com US Operations); the 2 engineering campuses and divested/idled plants are excluded. We audited 41 of these representative facilities."
     },
     "featuredSiteId": "30-general-motors",
     "dossierIntro": "Auto OEMs run two yards inside every plant: parts in, vehicles out. GM runs 41 freight-relevant US sites. Spring Hill is the largest plant in North America at 720 acres. Factory ZERO is GM's $2.2B EV flagship. A coast-to-coast parts network adds 14 processing and distribution hubs, and 24 of the 41 sites are rail-served. The Davison Road hub alone runs 84 docks behind a 132-foot automated tower. YardFlow runs supplier inbound and finished-vehicle outbound as two distinct queues on one protocol, across every site at once.",
