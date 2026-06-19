@@ -199,5 +199,31 @@
     "scale": "No truck scale clearly visible in imagery; left false but flagged uncertain.",
     "siteAreaAcres": "~95 acres for the full fenced DC campus including the trailer lot and secondary buildings, derived from the perimeter box."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/c/SALSON-LOGISTICS/Job/Switcher-Yard-Jockey/-in-Smithton,PA?jid=23c0505575c59f33",
+        "date": "2026",
+        "type": "careers",
+        "claim": "SalSon Logistics is hiring a Switcher/Yard Jockey in Smithton PA (on-site DC yard-spotting role), confirming SalSon runs the yard at the Smithton DC"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.dickssportinggoods.jobs/job/warehouse-associate/smithton-PA/202601866/",
+        "date": "2026",
+        "type": "careers",
+        "claim": "Dick's Sporting Goods actively hiring at its Smithton PA DC (Painter Rd, 15479), confirming the DC is open"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "SalSon dedicated-fleet + yard-jockey jobs at Smithton PA, Dick's Smithton DC open and hiring; SalSon is Dick's named dedicated carrier, no negative. (DC sits on the Painter Rd corridor, 159/200 Painter Rd, 15479.)",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

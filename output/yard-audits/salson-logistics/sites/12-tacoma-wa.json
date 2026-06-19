@@ -144,5 +144,31 @@
     "urbanRural": "Inside the dense Port of Tacoma industrial core — Urban.",
     "siteAreaAcres": "~6.5 acres for the warehouse footprint plus its yard, estimated from the perimeter box; the LoopNet listing cites ~3 acres of paved yard alone (the leasable parcel may be smaller than the audited operational footprint)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.freightwaves.com/news/ttsi-buys-transload-specialist-to-add-pacific-northwest-reach",
+        "date": "2019-08",
+        "type": "press",
+        "claim": "Tri Pak (now a SalSon division) operates 6 transload/drayage/rail facilities (5 Tacoma, 1 Seattle) serving Ports of Tacoma & Seattle; primary site 2330 Port of Tacoma Rd"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.ttnews.com/articles/salson-logistics-merger",
+        "date": "2024-08",
+        "type": "press",
+        "claim": "TriPak Logistics among 7 firms merged into SalSon Logistics in Aug 2024; Tacoma WA an active SalSon market"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tacoma is a real operating SalSon (Tri Pak division) transload/drayage facility (anchor 2330 Port of Tacoma Rd); merged into SalSon Aug-2024, no negative. (Probe coords sit in the Port of Tacoma district consistent with this address.)",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

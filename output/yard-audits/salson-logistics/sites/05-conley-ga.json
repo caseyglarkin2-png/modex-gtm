@@ -151,5 +151,31 @@
     "dropArea": "Large open paved yard north of the buildings holds rows of parked trailers; classified 25-50.",
     "dockDoorCount": "Estimated ~22 across the south/east faces of the east building plus dock activity on the west building — Maxar resolution limits an exact count."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.salson.com/atlanta-trucking-companies",
+        "date": "2025",
+        "type": "locator",
+        "claim": "SalSon's own Atlanta page references the Conley GA operation (named ops supervisor over dispatch/CS at Conley)"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.salson.com/national-logistics-services",
+        "date": "2025",
+        "type": "locator",
+        "claim": "SalSon lists Atlanta among its current operating locations"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "SalSon's own Atlanta location page names the Conley operation at 4382 Moreland Ave; warehouse/dedicated-fleet use, no closure or different-company signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

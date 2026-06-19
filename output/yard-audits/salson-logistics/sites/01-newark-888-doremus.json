@@ -163,5 +163,31 @@
     "fastLaneOpportunity": "Wide gate apron with a multi-lane painted approach under the gantry; physical room exists to designate an express/bypass lane.",
     "scale": "No truck scale positively identified from overhead imagery; left uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.salson.com/newark-warehouse",
+        "date": "2025-03",
+        "type": "locator",
+        "claim": "SalSon's own Newark page: 100+ acre Port Newark campus, ~1M sq ft warehouse, drayage + container yard; 888 Doremus Ave is the HQ/flagship campus"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.ttnews.com/articles/salson-logistics-expanding",
+        "date": "2025-03-13",
+        "type": "press",
+        "claim": "Transport Topics: SalSon operates 100+ acres at Port Newark with 1M sq ft warehouse, integrated drayage/warehousing/delivery"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "SalSon flagship/HQ campus; own locator + Mar-2025 trade press confirm the 888 Doremus Newark drayage/container-yard campus, no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

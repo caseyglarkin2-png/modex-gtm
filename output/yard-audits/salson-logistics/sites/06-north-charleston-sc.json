@@ -160,5 +160,31 @@
     "fastLaneOpportunity": "Wide unpaved rock yard with ample room to add lanes/bypass at the entry.",
     "siteAreaAcres": "~3.3-acre fenced yard per LoopNet plus building footprint and driveway ~4.3 acres total."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.salson.com/charleston-logistics-services",
+        "date": "2025",
+        "type": "locator",
+        "claim": "SalSon's own Charleston page: food-grade (FDA) warehouse + drayage/transload terminal serving the North Charleston Terminal"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.salson.com/blog/salson-adds-capacity-to-charleston-operation",
+        "date": "2017-12",
+        "type": "press",
+        "claim": "SalSon acquired Charleston drayage ops: 3.1-acre terminal, secure controlled-access container yard, 15-bay cross dock"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "SalSon's own Charleston page describes an operating food-grade warehouse + drayage terminal near the North Charleston Terminal at 7225 Cross County Rd, no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

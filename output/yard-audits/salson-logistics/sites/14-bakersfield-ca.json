@@ -149,5 +149,24 @@
     "connectivityIssue": "On a paved arterial (Old River Rd) within the Bakersfield metro fringe — cellular coverage likely adequate. false.",
     "geofence": "Perimeter drawn around the operational truck-yard compound (buildings + trailer row), excluding the adjacent orchard and residence at the southeast. ~14 acres."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.ttnews.com/articles/salson-logistics-expanding",
+        "date": "2025-03",
+        "type": "press",
+        "claim": "Transport Topics lists Bakersfield CA among SalSon West Coast intermodal/fleet markets"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "PROBABLE-FLAG: SalSon names Bakersfield as a current fleet/intermodal location, but NO specific operating building/street address could be confirmed; may have no auditable yard -- do not geofence without a confirmed address from SalSon.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

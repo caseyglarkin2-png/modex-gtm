@@ -1,7 +1,10 @@
 {
   "name": "SalSon Logistics - Oakland CA",
   "type": "Port Drayage Terminal",
-  "coords": { "lat": null, "lng": null },
+  "coords": {
+    "lat": null,
+    "lng": null
+  },
   "geofences": {
     "perimeter": null,
     "truckGate": null,
@@ -15,33 +18,82 @@
     "trailerParkingCapacity": 0,
     "truckGateCount": 0,
     "buildingCount": 0,
-    "siteAreaAcres": 0.0,
+    "siteAreaAcres": 0,
     "railServed": false
   },
   "mapsUrl": null,
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "NONE", "dropArea": "NONE",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "NONE",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "low",
   "uncertainFields": [
-    "truckGate", "guardShack", "remoteGs", "preGateStaging", "postGateStaging",
-    "drivewayLong", "drivewayShort", "backupSensitive", "entryExitTogether",
-    "entryExitSeparate", "entryLanes", "exitLanes", "fastLaneOpportunity",
-    "dockDoors", "dropArea", "shipRcvSeparate", "urbanRural", "connectivityIssue",
-    "multipleFacilities", "scale", "dropYard", "multiStep"
+    "truckGate",
+    "guardShack",
+    "remoteGs",
+    "preGateStaging",
+    "postGateStaging",
+    "drivewayLong",
+    "drivewayShort",
+    "backupSensitive",
+    "entryExitTogether",
+    "entryExitSeparate",
+    "entryLanes",
+    "exitLanes",
+    "fastLaneOpportunity",
+    "dockDoors",
+    "dropArea",
+    "shipRcvSeparate",
+    "urbanRural",
+    "connectivityIssue",
+    "multipleFacilities",
+    "scale",
+    "dropYard",
+    "multiStep"
   ],
   "fieldNotes": {
     "location": "UNRESOLVED. Oakland CA is named as a SalSon Logistics port-drayage market in the Aug-2024 seven-company merger coverage (Transport Topics) and in SalSon's own footprint statements, but no specific street address has ever been published for an Oakland facility. SalSon's own indeed.com locations page does NOT list Oakland; salson.com does not name an Oakland address; the SF/Oakland drayage directories (drayage.com, loadmatch.com) do not list SalSon, Sierra Trucking, Vision Logistics or West Group. The Oakland presence is most likely a small dispatch / chassis-staging drayage operation tied to the Port of Oakland (Outer/Middle Harbor or 7th Street terminal area) rather than a SalSon-owned warehouse — drayage carriers commonly run an Oakland market with leased yard space and no fixed branded address.",
     "urbanRural": "Set Urban as a market-level default (Port of Oakland is dense urban industrial); not verified against a specific building.",
     "all": "No coordinates, no perimeter, no imagery. Every classification value is a schema-required placeholder, NOT an observation. Site flagged for human review or for a direct address request to SalSon (973-986-0200 / sales@salson.com)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.ttnews.com/articles/salson-logistics-expanding",
+        "date": "2025-03",
+        "type": "press",
+        "claim": "Transport Topics lists Oakland CA among SalSon West Coast drayage markets"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "PROBABLE-FLAG: SalSon documents Oakland as a current West Coast drayage market, but NO specific operating building/street address could be confirmed; likely a port-drayage service area with no auditable yard -- do not geofence without a confirmed address from SalSon.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

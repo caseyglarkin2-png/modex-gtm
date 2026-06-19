@@ -133,5 +133,24 @@
     "scale": "No truck scale visible.",
     "buildingCount": "Single irregular L-shaped building (office/maintenance shop) plus the open trailer yard."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.ttnews.com/articles/salson-logistics-expanding",
+        "date": "2025-03-13",
+        "type": "press",
+        "claim": "Transport Topics: post-merger SalSon added a Florence NJ warehousing/transloading hub (25 tractors, 80 trailers, maintenance shop) between Port Newark and Philadelphia"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Mar-2025 trade press explicitly confirms SalSon opened the Florence NJ transload hub; active SalSon Florence careers postings corroborate, no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

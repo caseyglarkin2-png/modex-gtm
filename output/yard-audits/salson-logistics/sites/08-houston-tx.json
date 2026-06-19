@@ -120,5 +120,24 @@
     "siteAreaAcres": "~16 acres per the Outpost / LoopNet listing for 8357 Liberty Rd.",
     "facilityNature": "SalSon uses this third-party Outpost truck-parking yard as its Houston drayage trailer-pool / staging yard; it is not a SalSon-built warehouse."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://outpost.us/locations/houston-liberty/",
+        "date": "2026",
+        "type": "locator",
+        "claim": "8357 Liberty Rd, Houston TX 77028 is an Outpost-operated public truck/trailer-parking yard (16 acres, open 24h, 'managed by Outpost') -- a different company at the exact address"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "REJECTED: exact building is operated by Outpost (truck-parking yard), not SalSon; original source was aggregator-only (logicoreapp).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

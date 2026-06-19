@@ -178,5 +178,31 @@
     "scale": "No truck scale visible.",
     "confidence": "Medium overall — the building is positively located but the roster address resolves to the TTSI corporate campus rather than the dossier's '260K sq ft under construction' West Compton facility; the ungated open-court layout and dock counts are honest estimates from a shared logistics-park court."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnapshot&query_param=USDOT&query_string=3968944",
+        "date": "2022-10",
+        "type": "press",
+        "claim": "FMCSA SAFER: SalSon Logistics Services LLC (USDOT 3968944) ACTIVE, physical address 18735 S Ferris Pl, Compton CA 90220 (former TTSI HQ drayage/warehouse site; TTSI rebranded to SalSon)"
+      },
+      {
+        "tier": 2,
+        "url": "https://ttsi.com/salson-logistics-joins-the-ttsi-family-of-companies/",
+        "date": "2022-09",
+        "type": "press",
+        "claim": "TTSI (HQ 18735 S Ferris Pl, Compton) acquired SalSon and the group rebranded to SalSon Logistics, making this an active SalSon-operated West Coast drayage site"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "18735 S Ferris Pl is the established TTSI/SalSon Compton drayage HQ (FMCSA ACTIVE), an operating freight site. NOTE: the audit's '260k sqft/66-dock/20-acre under-construction' metrics describe a separate new West Compton build whose 2026 open status is unconfirmed; reconcile geofence/metrics before shipping.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

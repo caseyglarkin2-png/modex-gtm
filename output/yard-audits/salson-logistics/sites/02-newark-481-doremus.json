@@ -150,5 +150,24 @@
     "railServed": "No rail spur enters this parcel; the Newark rail corridor is nearby but does not serve this building directly.",
     "scale": "No truck scale positively identified from overhead imagery; left uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.salson.com/newark-warehouse",
+        "date": "2025-03",
+        "type": "locator",
+        "claim": "SalSon operates a Class-A food-grade / bonded-FTZ warehouse (~250k sq ft) at 481 Doremus Ave as part of the Newark campus"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "SalSon's own site names 481 Doremus as its Class-A food-grade/FTZ Newark warehouse; adjacent to 888 Doremus flagship, both SalSon-operated, no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -157,5 +157,31 @@
     "rail": "A rail line runs through the valley near the DC but does not spur into the property — railServed = false.",
     "geofences": "Perimeter captures the DC building plus the east drop yard and the SE car-parking apron: ~668 m N-S x ~414 m E-W ≈ 68 acres. The truckGate box is the SE truck-court entrance off the Conklin Road access road."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://intelliapp.driverapponline.com/c/salson?r=ConklinDSG",
+        "date": "2026",
+        "type": "careers",
+        "claim": "SalSon's own driver-application routing code 'ConklinDSG' (Conklin Dick's Sporting Goods) ties its Conklin NY CDL fleet to the Dick's account"
+      },
+      {
+        "tier": 1,
+        "url": "https://business.greaterbinghamtonchamber.com/list/member/dick-s-sporting-goods-conklin-distribution-center-74361",
+        "date": "2026",
+        "type": "locator",
+        "claim": "Dick's Sporting Goods Conklin Distribution Center, 1314 Conklin Rd, Conklin NY 13748, listed as an active e-commerce DC (open)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "SalSon's own driver-app routing 'ConklinDSG' ties its Conklin fleet to Dick's; Dick's Conklin e-comm DC (1314 Conklin Rd) confirmed open; coords match, no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
