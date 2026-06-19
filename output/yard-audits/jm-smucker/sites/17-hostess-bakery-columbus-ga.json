@@ -133,5 +133,31 @@
     "urbanRural": "Inside Columbus GA metro along the Victory Drive arterial corridor - Urban.",
     "method": "Active $120M Smucker expansion underway (completing early 2027); rooftop construction activity visible in satellite imagery."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.foodprocessing.com/business-of-food-beverage/plant-expansion/news/55321111/smucker-to-expand-columbus-georgia-hostess-bakery",
+        "date": "2025-09",
+        "type": "press",
+        "claim": "Smucker investing $120M to expand its operating Hostess bakery in Columbus GA (~350 employees); plant has produced Hostess sweets for 5+ decades; expansion underway, completion early 2027."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.wtvm.com/2025/09/29/hostess-brands-manufacturing-facility-expand-columbus/",
+        "date": "2025-09-29",
+        "type": "press",
+        "claim": "Hostess Brands Columbus GA manufacturing facility currently operating and expanding under Smucker."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Long-running Hostess bakery in Columbus GA, currently Smucker-operated (~350 staff); $120M expansion underway (base plant operating, expansion completes ~early 2027).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -113,5 +113,31 @@
     "dropYard": "TRUE — two dedicated trailer-storage lots distinct from the active dock aprons.",
     "siteAreaAcres": "70.7 acres for the plant property (building, dock aprons, two drop yards, employee parking and grounds)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.prnewswire.com/news-releases/the-jm-smucker-co-celebrates-opening-of-the-newest-uncrustables-manufacturing-facility-in-mccalla-alabama-302299372.html",
+        "date": "2024-11-07",
+        "type": "press",
+        "claim": "Smucker PR names Scottsville KY as a current Uncrustables facility alongside Longmont and McCalla."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.jmsmucker.com/news-stories/blog-archive/demand-for-uncrustables",
+        "date": "2023-02-27",
+        "type": "press",
+        "claim": "Smucker's own blog identifies Scottsville KY as the original company-operated Uncrustables plant."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Smucker's own Nov-2024 PR names Scottsville KY as a current Uncrustables facility; self-operated, no closure/sale.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

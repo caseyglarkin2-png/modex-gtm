@@ -110,5 +110,31 @@
     "buildingCount": "2 — the main processing/silo building and an adjacent office/ancillary building to the NE.",
     "confidence": "Medium overall — the facility was positively identified and the silo plant is unambiguous, but it is enclosed within a secured port terminal with no public Street View, so gate/guard-shack/lane details are inferred from port-operations context rather than directly observed."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.jmsmucker.com/new-orleans",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Smucker self-attests 'our three New Orleans facilities' include the largest bulk coffee facility in the world and references 'our Silo facility'."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.neworleanschamber.org/list/member/smucker-coffee-silo-operations-new-orleans-11837",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Listing for 'Smucker Coffee Silo Operations' at 5242 Coffee Dr handling raw green/decaf/soluble coffee through blending and shipment to roasting."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Despite legacy 'Silocaf/Pacorini' name, current evidence (Smucker Coffee Silo Operations LLC + Smucker green-coffee-ops staffing) shows Smucker-operated today.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

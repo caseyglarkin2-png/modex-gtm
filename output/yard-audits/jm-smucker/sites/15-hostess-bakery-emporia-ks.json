@@ -112,5 +112,31 @@
     "shipRcvSeparate": "Dock banks on at least two different building faces (central building east face and SW building north face).",
     "fastLaneOpportunity": "Wide open driveway aprons and large yard provide ample room to add a bypass lane."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://oakes.com/news/hostess-brands-revives-emporia-kansas-with-technology-transplant",
+        "date": "2025",
+        "type": "locator",
+        "claim": "Hostess flagship cake plant in Emporia KS (1525 Industrial Rd) produces 1,000+ Twinkies/cupcakes per minute; actively operating."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.foodprocessing.com/business-of-food-beverage/business-strategies/news/55131279/smucker-to-shutter-hostess-former-hq-in-lenexa-kansas",
+        "date": "2024-08",
+        "type": "press",
+        "claim": "Smucker's 2024 Kansas Hostess closure was the Lenexa HQ office (79 jobs), NOT the Emporia bakery."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "Emporia is the flagship Hostess Twinkies/cupcakes bakery, Smucker-operated and active; only KS closure was the Lenexa office, not Emporia.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

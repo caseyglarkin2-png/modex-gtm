@@ -133,5 +133,31 @@
     "dockDoorCount": "~30 estimate from overhead imagery; many bays partially obscured by building shadow and tree cover along faces. Flagged low confidence.",
     "siteAreaAcres": "73.8 acres for the full fenced manufacturing complex (building cluster plus rail-served processing yard and dock aprons). Historical 1960 footprint was ~20 acres; the operation has expanded substantially."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.jmsmucker.com/new-orleans",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Smucker self-attests three New Orleans coffee facilities incl. one of the world's largest roasting facilities (Folgers/Dunkin'/Cafe Bustelo), ~700 employees."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.folgerscoffee.com/where-we-roast",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Folgers (a Smucker brand) has roasted coffee in New Orleans since 1960; current roasting ops."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Smucker/Folgers Tier-1 pages confirm current self-operated New Orleans coffee roasting; no closure/sale found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

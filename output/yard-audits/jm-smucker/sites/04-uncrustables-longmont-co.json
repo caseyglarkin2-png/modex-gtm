@@ -108,5 +108,31 @@
     "dropYard": "TRUE — large dedicated trailer-storage lot on the NE, distinct from the active dock apron.",
     "siteAreaAcres": "91.3 acres for the plant parcel including the dock yard, drop lot, employee parking and undeveloped expansion land within the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://investors.jmsmucker.com/news/news-details/2024/The-J.M.-Smucker-Co.-Celebrates-Opening-of-the-Newest-Uncrustables-Manufacturing-Facility-in-McCalla-Alabama/default.aspx",
+        "date": "2024-11-07",
+        "type": "press",
+        "claim": "Smucker names Longmont CO as a current Uncrustables facility alongside Scottsville and McCalla."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.longmontleader.com/local-business/fueled-by-growth-in-uncrustables-sales-smucker-plans-expansion-of-longmont-plant-2521899",
+        "date": "2024-02",
+        "type": "press",
+        "claim": "Smucker completed a 240,000 sq ft expansion of its self-operated Longmont Uncrustables plant."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Smucker self-operates the Longmont Uncrustables plant; confirmed current and expanded 2024 by Smucker's own materials.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

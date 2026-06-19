@@ -128,5 +128,31 @@
     "connectivityIssue": "Rural site but only ~3 km from Arkadelphia; cellular coverage likely adequate - flagged as low confidence.",
     "urbanRural": "Edge-of-town / rural setting, building surrounded by fields and woods."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.bakingbusiness.com/articles/61677-smucker-execs-still-upbeat-on-hostess-outlook",
+        "date": "2024",
+        "type": "press",
+        "claim": "Smucker FY2024 cited the new Arkadelphia AR bakery (dedicated to Hostess Donettes) as a key accomplishment; fully operational under Smucker."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.areadevelopment.com/newsItems/3-8-2022/hostess-brands-arkadelphia-arkansas.shtml",
+        "date": "2022-03",
+        "type": "press",
+        "claim": "Hostess 330,000-sq-ft Arkadelphia AR Donettes bakery ($120-140M); operating since Nov 2023 with 150+ workers."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "New Hostess Donettes bakery in Arkadelphia, fully operational under Smucker since late 2023; no closure signals.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

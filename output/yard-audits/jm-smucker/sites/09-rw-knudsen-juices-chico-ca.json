@@ -120,5 +120,31 @@
     "scale": "No truck scale clearly identified; flagged uncertain.",
     "urbanRural": "Site is on the rural edge of Chico with orchards and farmland directly west and a low-density residential fringe south."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.prnewswire.com/news-releases/the-jm-smucker-co-completes-the-divestiture-of-its-natural-beverage-and-grains-businesses-to-nexus-capital-301471584.html",
+        "date": "2022-01-31",
+        "type": "press",
+        "claim": "Smucker completed the $110M divestiture of its natural beverage and grains businesses (R.W. Knudsen, TruRoots) to Nexus Capital, explicitly including its manufacturing and distribution facilities in Chico, California."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.fooddive.com/news/jm-smucker-sells-juice-and-grains-businesses-and-will-shut-down-plant/611616/",
+        "date": "2021-12-15",
+        "type": "press",
+        "claim": "Smucker announced sale of R.W. Knudsen/TruRoots incl. Chico CA facility to Nexus Capital for $110M."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Chico plant divested to Nexus Capital (closed Jan 31 2022); now operates under TruRoots Co / R.W. Knudsen Family, not Smucker.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

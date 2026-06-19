@@ -153,5 +153,31 @@
     "siteAreaAcres": "90.1 acres for the developed/fenced operational footprint (building + truck yards + drop lot + employee parking + retention). The full Smucker parcel is ~225 acres.",
     "confidence": "Medium — facility identified by location, scale and frozen-plant roof signature with high confidence, but the available satellite imagery appears to be from the construction/just-opened period and the gate/guard-booth details are partly inferred; no Street View reaches the gate itself."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://investors.jmsmucker.com/news/news-details/2024/The-J.M.-Smucker-Co.-Celebrates-Opening-of-the-Newest-Uncrustables-Manufacturing-Facility-in-McCalla-Alabama/default.aspx",
+        "date": "2024-11-07",
+        "type": "press",
+        "claim": "Smucker celebrated opening of its new ~900k sq ft Uncrustables plant in McCalla AL."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.prnewswire.com/news-releases/the-jm-smucker-co-celebrates-opening-of-the-newest-uncrustables-manufacturing-facility-in-mccalla-alabama-302299372.html",
+        "date": "2024-11-07",
+        "type": "press",
+        "claim": "Official Smucker PR confirming McCalla AL Uncrustables plant opening, 3rd dedicated location."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Smucker's own PR confirms Nov 2024 opening of its $1.1B self-built 3rd Uncrustables plant; operating, not under construction.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

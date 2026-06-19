@@ -158,5 +158,31 @@
     "scale": "No truck scale clearly identified; flagged uncertain.",
     "urbanRural": "Site sits within the dense Salinas industrial district, a real city — Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://true.gbci.org/taylor-farms-retail-salinas",
+        "date": "2011-04",
+        "type": "press",
+        "claim": "The Taylor Farms Retail Salinas plant was previously a Smucker's jam processing facility; renovated 2010 and occupied by Taylor Farms beginning April 2011."
+      },
+      {
+        "tier": 3,
+        "url": "https://kingcityrustler.com/taylor-farms-plans-to-rebuild-salinas-facility-after-4-alarm-fire/",
+        "date": "2022-04",
+        "type": "press",
+        "claim": "Former Smucker jam building in Salinas operates as Taylor Farms Retail facility."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Former Smucker preserves/jelly plant closed ~2005; building is now the Taylor Farms Retail facility (occupied April 2011). Different operating company.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

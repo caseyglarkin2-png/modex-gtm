@@ -136,5 +136,31 @@
     "urbanRural": "Riverside industrial corridor on the edge of Decatur (~55k pop small city); rail/river industrial setting. Rural per rubric (small-town industrial defaults to Rural).",
     "yardMetrics": "trailersVisible ~55, capacity ~75 are honest estimates from z18-z19; dock count low-confidence due to roof glare."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://investors.jmsmucker.com/news/news-details/2023/The-J.M.-Smucker-Co.-Completes-the-Divestiture-of-Several-Pet-Food-Brands-to-Post-Holdings-Inc.-04-28-2023/default.aspx",
+        "date": "2023-04-28",
+        "type": "press",
+        "claim": "Smucker sold value pet brands to Post but explicitly RETAINED Milk-Bone and Meow Mix."
+      },
+      {
+        "tier": 2,
+        "url": "https://finance.yahoo.com/news/multi-million-dollar-manufacturing-expansions-134000533.html",
+        "date": "2025-11-20",
+        "type": "press",
+        "claim": "Nov 2025: Smucker/Big Heart Decatur Meow Mix plant (Market St NE, ~230 employees, ~40% of Smucker cat food) approved a $21.4M expansion; plant active."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Meow Mix retained in the 2023 Post sale; Decatur confirmed active via Nov-2025 $21.4M Smucker/Big Heart expansion.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

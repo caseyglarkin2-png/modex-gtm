@@ -128,5 +128,31 @@
     "buildingCount": "One main plant building. Other large buildings nearby (incl. a separate distribution warehouse to the east and a building NW with CFI trailer) are separate properties in the same park, not the same parcel.",
     "yardMetrics": "Counts are honest estimates from z19-z20 imagery; trailer/dock counts low-confidence at the margin."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.prnewswire.com/news-releases/the-jm-smucker-co-completes-the-divestiture-of-its-natural-beverage-and-grains-businesses-to-nexus-capital-301471584.html",
+        "date": "2022-01-31",
+        "type": "press",
+        "claim": "Smucker's completed-divestiture release names the Havre de Grace MD facility (with Chico CA) as included in the natural beverage and grains business sold to Nexus Capital."
+      },
+      {
+        "tier": 2,
+        "url": "https://patch.com/maryland/havredegrace/smuckers-havre-de-grace-be-sold-110m-deal",
+        "date": "2021-12",
+        "type": "press",
+        "claim": "Local coverage confirms the Old Bay Lane Havre de Grace plant (Knudsen/TruRoots/Santa Cruz Organic) was part of the ~$110M sale to Nexus Capital."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "340 Old Bay Lane went with the Jan 31 2022 Nexus Capital natural-beverage/grains divestiture; no longer a Smucker facility.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

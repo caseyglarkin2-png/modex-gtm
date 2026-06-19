@@ -113,5 +113,31 @@
     "railServed": "Active rail spur runs into the plant; Jif-branded silo and rail tracks visible in Street View.",
     "urbanRural": "Site is within dense Lexington urban fabric — residential, commercial and arterial roads on all sides."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.fda.gov/safety/major-product-recalls/2022-recalls-food-products-associated-peanut-butter-jm-smucker-company-due-potential-risk-salmonella",
+        "date": "2022",
+        "type": "press",
+        "claim": "FDA confirms recalled Jif was produced at Smucker's Lexington KY facility; the 2022 salmonella event was a temporary closure, not permanent (resumed June 2022)."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.industryweek.com/expansion-management/article/21959621/jm-smuckers-expansion-in-kentucky-saves-280-jobs",
+        "date": "2013-02",
+        "type": "press",
+        "claim": "Smucker invested $43M+ and retained ~279 jobs at its Jif operation in Lexington KY."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Core Smucker brand plant (world's largest PB factory); 2022 salmonella closure resumed June 2022; no divestiture/closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

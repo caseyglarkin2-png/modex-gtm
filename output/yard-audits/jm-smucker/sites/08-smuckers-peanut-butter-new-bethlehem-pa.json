@@ -90,5 +90,31 @@
     "railServed": "No active rail spur into the plant visible (a former rail corridor runs nearby but no spur reaches the site).",
     "urbanRural": "New Bethlehem is a small Clarion County borough (~900 residents); the plant sits within a small-town residential block — Rural."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://redbankchamber.com/september-2023-the-j-m-smucker-company/",
+        "date": "2023-09",
+        "type": "press",
+        "claim": "Smucker has produced peanut butter in New Bethlehem for 58 years; ~60 employees, actively recruiting."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.powderbulksolids.com/food-beverage/fire-breaks-out-at-j-m-smucker-peanut-butter-plant",
+        "date": "2022-08",
+        "type": "press",
+        "claim": "Aug 2022 roaster fire at the operating New Bethlehem peanut butter plant confirms active production."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Closure-risk small plant came back clean: 2023 chamber feature + active hiring confirm ongoing Smucker PB operation.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

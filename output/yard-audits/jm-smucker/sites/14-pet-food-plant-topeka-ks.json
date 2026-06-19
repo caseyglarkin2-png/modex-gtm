@@ -153,5 +153,31 @@
     "urbanRural": "Edge-of-Topeka location at a highway interchange, with farmland and a rail corridor immediately around the property. Topeka is a mid-size city but this site sits on its rural NW fringe - Rural per rubric.",
     "yardMetrics": "trailersVisible ~130 and capacity ~180 are honest order-of-magnitude estimates across the multiple drop yards; dockDoorCount ~60 is a rough estimate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.prnewswire.com/news-releases/the-jm-smucker-co-completes-the-divestiture-of-several-pet-food-brands-to-post-holdings-inc-301810920.html",
+        "date": "2023-04-28",
+        "type": "press",
+        "claim": "The 2023 divestiture to Post transferred only the Bloomsburg PA, Meadville PA, and Lawrence KS facilities; Topeka is NOT in the transferred list."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.just-food.com/news/jm-smucker-invests-pet-food/",
+        "date": "2026-02-18",
+        "type": "press",
+        "claim": "Smucker still operates its Topeka KS pet-food plant (55+ yrs), producing retained brands Meow Mix and Milk-Bone."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Survived the Post gauntlet (Lawrence KS, not Topeka, transferred); Feb-2026 source confirms Topeka still Smucker, making retained Milk-Bone/Meow Mix. (Site label 'Kibbles n Bits/Del Monte' product attribution is stale.)",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -84,5 +84,31 @@
     "urbanRural": "Dense East Side Buffalo urban fabric - row houses on all surrounding streets. Urban.",
     "yardMetrics": "trailersVisible ~48 and trailerParkingCapacity ~70 are honest estimates from z19 imagery; dock count low-confidence."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://investors.jmsmucker.com/news/news-details/2023/The-J.M.-Smucker-Co.-Completes-the-Divestiture-of-Several-Pet-Food-Brands-to-Post-Holdings-Inc.-04-28-2023/default.aspx",
+        "date": "2023-04-28",
+        "type": "press",
+        "claim": "Smucker sold value pet brands to Post but RETAINED Milk-Bone and Meow Mix."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.wkbw.com/news/local-news/milk-bone-plans-to-add-jobs-in-buffalo-with-52-million-expansion-project",
+        "date": "2025-03",
+        "type": "press",
+        "claim": "Milk-Bone plant at 243 Urban St Buffalo operating under Smucker (~280 employees); $52M Smucker expansion."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Milk-Bone retained in the 2023 Post divestiture; Buffalo plant active with a 2025 $52M Smucker expansion.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
