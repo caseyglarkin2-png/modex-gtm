@@ -1,53 +1,154 @@
 {
   "name": "Publix Refrigerated DC Orlando FL",
   "type": "Refrigerated DC",
-  "coords": { "lat": 28.45565, "lng": -81.28175 },
+  "coords": {
+    "lat": 28.45565,
+    "lng": -81.28175
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 28.4587, "lng": -81.2796 },
-      { "lat": 28.4586, "lng": -81.2820 },
-      { "lat": 28.4575, "lng": -81.2848 },
-      { "lat": 28.4535, "lng": -81.2843 },
-      { "lat": 28.4530, "lng": -81.2805 },
-      { "lat": 28.4562, "lng": -81.2786 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 28.45610, "lng": -81.28030 },
-      { "lat": 28.45588, "lng": -81.27995 },
-      { "lat": 28.45558, "lng": -81.28020 },
-      { "lat": 28.45580, "lng": -81.28055 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 28.4587,
+          "lng": -81.2796
+        },
+        {
+          "lat": 28.4586,
+          "lng": -81.282
+        },
+        {
+          "lat": 28.4575,
+          "lng": -81.2848
+        },
+        {
+          "lat": 28.4535,
+          "lng": -81.2843
+        },
+        {
+          "lat": 28.453,
+          "lng": -81.2805
+        },
+        {
+          "lat": 28.4562,
+          "lng": -81.2786
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 28.4561,
+          "lng": -81.2803
+        },
+        {
+          "lat": 28.45588,
+          "lng": -81.27995
+        },
+        {
+          "lat": 28.45558,
+          "lng": -81.2802
+        },
+        {
+          "lat": 28.4558,
+          "lng": -81.28055
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 28.45720, "lng": -81.28370 },
-        { "lat": 28.45680, "lng": -81.28300 },
-        { "lat": 28.45520, "lng": -81.28430 },
-        { "lat": 28.45560, "lng": -81.28500 }
-      ] },
-      { "ring": [
-        { "lat": 28.45520, "lng": -81.28010 },
-        { "lat": 28.45470, "lng": -81.27940 },
-        { "lat": 28.45360, "lng": -81.28040 },
-        { "lat": 28.45410, "lng": -81.28110 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 28.4572,
+            "lng": -81.2837
+          },
+          {
+            "lat": 28.4568,
+            "lng": -81.283
+          },
+          {
+            "lat": 28.4552,
+            "lng": -81.2843
+          },
+          {
+            "lat": 28.4556,
+            "lng": -81.285
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 28.4552,
+            "lng": -81.2801
+          },
+          {
+            "lat": 28.4547,
+            "lng": -81.2794
+          },
+          {
+            "lat": 28.4536,
+            "lng": -81.2804
+          },
+          {
+            "lat": 28.4541,
+            "lng": -81.2811
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 28.45770, "lng": -81.28340 },
-        { "lat": 28.45735, "lng": -81.28290 },
-        { "lat": 28.45470, "lng": -81.28490 },
-        { "lat": 28.45505, "lng": -81.28540 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 28.4577,
+            "lng": -81.2834
+          },
+          {
+            "lat": 28.45735,
+            "lng": -81.2829
+          },
+          {
+            "lat": 28.4547,
+            "lng": -81.2849
+          },
+          {
+            "lat": 28.45505,
+            "lng": -81.2854
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 28.45590, "lng": -81.28100 },
-      { "lat": 28.45555, "lng": -81.28050 },
-      { "lat": 28.45470, "lng": -81.28120 },
-      { "lat": 28.45505, "lng": -81.28170 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 28.4559,
+          "lng": -81.281
+        },
+        {
+          "lat": 28.45555,
+          "lng": -81.2805
+        },
+        {
+          "lat": 28.4547,
+          "lng": -81.2812
+        },
+        {
+          "lat": 28.45505,
+          "lng": -81.2817
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 217, "pano": "2ARGANYJSJybj67KqsG7CQ", "hasCoverage": true },
-      "truckGate": { "heading": 237, "pano": "jFRJNyVIzq81PddqrXV-WQ", "hasCoverage": true }
+      "perimeter": {
+        "heading": 217,
+        "pano": "2ARGANYJSJybj67KqsG7CQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 237,
+        "pano": "jFRJNyVIzq81PddqrXV-WQ",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -85,7 +186,13 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "shipRcvSeparate", "scale", "multiStep"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate",
+    "scale",
+    "multiStep"
+  ],
   "fieldNotes": {
     "truckGate": "Single landscaped entrance boulevard off Hazeltine National Dr feeds a controlled, fully-fenced campus; Street View cannot enter the property and the truck approach is screened by hedge/berm with yellow bollards and a checkpoint. Controlled gated entry confirmed.",
     "guardShack": "Driver reviews of this DC explicitly reference a staffed 'guard station' ('nice guys at guard station'); consistent with a manned booth at the truck check-in on the entrance drive. Booth itself is screened by landscaping in satellite, so footprint not directly resolved.",
@@ -101,5 +208,31 @@
     "railServed": "No rail spur visible entering the property.",
     "urbanRural": "Lee Vista / Orlando International Airport industrial corridor, dense metro industrial fabric — Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://jobs.publix.com/2025/05/06/behind-the-scenes-publix-distribution-and-logistics/",
+        "date": "2025-05",
+        "type": "press",
+        "claim": "Orlando FL listed among Publix 10 distribution centers"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.whiting-turner.com/projects/warehouse-distribution/publix-refrigerated-distribution-center/",
+        "date": "2025",
+        "type": "press",
+        "claim": "120-acre, 1M SF Publix refrigerated DC campus at Hazeltine National Dr, Orlando, 24/7"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Orlando refrigerated DC at 7350 Hazeltine National Dr (near MCO) is a current Publix self-operated 1M SF refrigerated campus.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -1,46 +1,127 @@
 {
   "name": "Publix Frozen DC Lakeland FL",
   "type": "Frozen DC",
-  "coords": { "lat": 28.0070, "lng": -82.0420 },
+  "coords": {
+    "lat": 28.007,
+    "lng": -82.042
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 28.00885, "lng": -82.04465 },
-      { "lat": 28.00910, "lng": -82.04055 },
-      { "lat": 28.00445, "lng": -82.04025 },
-      { "lat": 28.00425, "lng": -82.04445 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 28.00050, "lng": -82.04640 },
-      { "lat": 28.00030, "lng": -82.04590 },
-      { "lat": 27.99940, "lng": -82.04660 },
-      { "lat": 27.99960, "lng": -82.04710 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 28.00885,
+          "lng": -82.04465
+        },
+        {
+          "lat": 28.0091,
+          "lng": -82.04055
+        },
+        {
+          "lat": 28.00445,
+          "lng": -82.04025
+        },
+        {
+          "lat": 28.00425,
+          "lng": -82.04445
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 28.0005,
+          "lng": -82.0464
+        },
+        {
+          "lat": 28.0003,
+          "lng": -82.0459
+        },
+        {
+          "lat": 27.9994,
+          "lng": -82.0466
+        },
+        {
+          "lat": 27.9996,
+          "lng": -82.0471
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 28.00880, "lng": -82.04130 },
-        { "lat": 28.00895, "lng": -82.04020 },
-        { "lat": 28.00760, "lng": -82.04010 },
-        { "lat": 28.00755, "lng": -82.04120 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 28.0088,
+            "lng": -82.0413
+          },
+          {
+            "lat": 28.00895,
+            "lng": -82.0402
+          },
+          {
+            "lat": 28.0076,
+            "lng": -82.0401
+          },
+          {
+            "lat": 28.00755,
+            "lng": -82.0412
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 28.00735, "lng": -82.04185 },
-        { "lat": 28.00640, "lng": -82.04085 },
-        { "lat": 28.00610, "lng": -82.04120 },
-        { "lat": 28.00705, "lng": -82.04220 }
-      ] },
-      { "ring": [
-        { "lat": 28.00805, "lng": -82.04355 },
-        { "lat": 28.00770, "lng": -82.04250 },
-        { "lat": 28.00735, "lng": -82.04275 },
-        { "lat": 28.00770, "lng": -82.04380 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 28.00735,
+            "lng": -82.04185
+          },
+          {
+            "lat": 28.0064,
+            "lng": -82.04085
+          },
+          {
+            "lat": 28.0061,
+            "lng": -82.0412
+          },
+          {
+            "lat": 28.00705,
+            "lng": -82.0422
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 28.00805,
+            "lng": -82.04355
+          },
+          {
+            "lat": 28.0077,
+            "lng": -82.0425
+          },
+          {
+            "lat": 28.00735,
+            "lng": -82.04275
+          },
+          {
+            "lat": 28.0077,
+            "lng": -82.0438
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 144, "pano": "YB-55VL3YqcUw6acqLF9zA", "hasCoverage": true },
-      "truckGate": { "heading": 32, "pano": "-LayFXJPmfxr4auF-oDVqw", "hasCoverage": true }
+      "perimeter": {
+        "heading": 144,
+        "pano": "YB-55VL3YqcUw6acqLF9zA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 32,
+        "pano": "-LayFXJPmfxr4auF-oDVqw",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -49,7 +130,7 @@
     "trailerParkingCapacity": 90,
     "truckGateCount": 1,
     "buildingCount": 3,
-    "siteAreaAcres": 52.0,
+    "siteAreaAcres": 52,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@28.0070,-82.0420,400m/data=!3m1!1e3",
@@ -106,5 +187,31 @@
     "yardMetrics.trailersVisible": "Approx count of parked trailers across the drop yard and dock faces in captured imagery; estimate.",
     "siteAreaAcres": "Derived from the perimeter polygon (~52 acres) covering the frozen DC sub-cluster (3 buildings + refrigeration plant + drop yard)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://jobs.publix.com/2025/05/06/behind-the-scenes-publix-distribution-and-logistics/",
+        "date": "2025-05",
+        "type": "press",
+        "claim": "Publix self-operates its Lakeland distribution complex (incl. frozen)"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.yellowpages.com/lakeland-fl/publix-supermarket-warehouse-distribution-center",
+        "date": "2026",
+        "type": "press",
+        "claim": "Publix Frozen Foods Warehouse listed in Lakeland FL"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Publix Frozen Foods Warehouse exists and operates in the SW Lakeland (Drane Field / County Line) DC corridor; Publix self-distributes frozen here.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

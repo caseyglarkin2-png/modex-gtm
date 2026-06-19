@@ -1,53 +1,154 @@
 {
   "name": "Publix Distribution Campus Lakeland FL (County Line)",
   "type": "Distribution Campus",
-  "coords": { "lat": 28.0145, "lng": -82.0510 },
+  "coords": {
+    "lat": 28.0145,
+    "lng": -82.051
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 28.0152, "lng": -82.0556 },
-      { "lat": 28.0160, "lng": -82.0475 },
-      { "lat": 28.0152, "lng": -82.0468 },
-      { "lat": 28.0124, "lng": -82.0485 },
-      { "lat": 28.0122, "lng": -82.0535 },
-      { "lat": 28.0132, "lng": -82.0553 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 28.01418, "lng": -82.05428 },
-      { "lat": 28.01418, "lng": -82.05405 },
-      { "lat": 28.01390, "lng": -82.05405 },
-      { "lat": 28.01390, "lng": -82.05428 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 28.0152,
+          "lng": -82.0556
+        },
+        {
+          "lat": 28.016,
+          "lng": -82.0475
+        },
+        {
+          "lat": 28.0152,
+          "lng": -82.0468
+        },
+        {
+          "lat": 28.0124,
+          "lng": -82.0485
+        },
+        {
+          "lat": 28.0122,
+          "lng": -82.0535
+        },
+        {
+          "lat": 28.0132,
+          "lng": -82.0553
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 28.01418,
+          "lng": -82.05428
+        },
+        {
+          "lat": 28.01418,
+          "lng": -82.05405
+        },
+        {
+          "lat": 28.0139,
+          "lng": -82.05405
+        },
+        {
+          "lat": 28.0139,
+          "lng": -82.05428
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 28.01585, "lng": -82.04835 },
-        { "lat": 28.01560, "lng": -82.04700 },
-        { "lat": 28.01470, "lng": -82.04740 },
-        { "lat": 28.01495, "lng": -82.04875 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 28.01585,
+            "lng": -82.04835
+          },
+          {
+            "lat": 28.0156,
+            "lng": -82.047
+          },
+          {
+            "lat": 28.0147,
+            "lng": -82.0474
+          },
+          {
+            "lat": 28.01495,
+            "lng": -82.04875
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 28.01560, "lng": -82.05230 },
-        { "lat": 28.01595, "lng": -82.04830 },
-        { "lat": 28.01560, "lng": -82.04820 },
-        { "lat": 28.01525, "lng": -82.05225 }
-      ] },
-      { "ring": [
-        { "lat": 28.01290, "lng": -82.05300 },
-        { "lat": 28.01270, "lng": -82.04880 },
-        { "lat": 28.01235, "lng": -82.04890 },
-        { "lat": 28.01255, "lng": -82.05305 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 28.0156,
+            "lng": -82.0523
+          },
+          {
+            "lat": 28.01595,
+            "lng": -82.0483
+          },
+          {
+            "lat": 28.0156,
+            "lng": -82.0482
+          },
+          {
+            "lat": 28.01525,
+            "lng": -82.05225
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 28.0129,
+            "lng": -82.053
+          },
+          {
+            "lat": 28.0127,
+            "lng": -82.0488
+          },
+          {
+            "lat": 28.01235,
+            "lng": -82.0489
+          },
+          {
+            "lat": 28.01255,
+            "lng": -82.05305
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 28.01435, "lng": -82.05395 },
-      { "lat": 28.01430, "lng": -82.05310 },
-      { "lat": 28.01360, "lng": -82.05315 },
-      { "lat": 28.01365, "lng": -82.05400 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 28.01435,
+          "lng": -82.05395
+        },
+        {
+          "lat": 28.0143,
+          "lng": -82.0531
+        },
+        {
+          "lat": 28.0136,
+          "lng": -82.05315
+        },
+        {
+          "lat": 28.01365,
+          "lng": -82.054
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 88, "pano": "qBprwoTqTFz7mau3j4dsqg", "hasCoverage": true },
-      "truckGate": { "heading": 85, "pano": "72xVFOCkwfKwy1yeLvc21w", "hasCoverage": true }
+      "perimeter": {
+        "heading": 88,
+        "pano": "qBprwoTqTFz7mau3j4dsqg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 85,
+        "pano": "72xVFOCkwfKwy1yeLvc21w",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -85,7 +186,12 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "trailerParkingCapacity", "connectivityIssue"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "trailerParkingCapacity",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "truckGate": "Confirmed in Street View (pano 72xVFOCkwfKwy1yeLvc21w, 2023-12): staffed island guard booth straddling the entry road with raised barrier-arm mechanisms and bollards on both lanes; PRIVATE PROPERTY / NO TRESPASSING signage. Visible as a small green-roofed structure straddling the drive in z21 satellite.",
     "guardShack": "Same pano shows a guard in uniform (blue shirt, clipboard) standing at the booth window; classic 1-vehicle-footprint booth with windows on multiple sides set in the center of the entry road island.",
@@ -106,5 +212,31 @@
     "trailerParkingCapacity": "Estimate of dedicated drop-yard stall capacity (~90) from east-yard rows; overhead estimate, low confidence.",
     "trailersVisible": "Count of trailers visible across captured imagery (docks + drop yard + north/south rows); ~140, approximate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://jobs.publix.com/2025/05/06/behind-the-scenes-publix-distribution-and-logistics/",
+        "date": "2025-05",
+        "type": "press",
+        "claim": "Publix lists Lakeland FL among its 10 self-operated distribution centers"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.yelp.com/biz/publix-hv-lv-warehouse-lakeland-2",
+        "date": "2026-02",
+        "type": "press",
+        "claim": "2600 County Line Rd HV/LV warehouse listed at this location, open 24h"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Lakeland County Line Rd HV/LV warehouse campus; Publix self-distributes from here and has an approved on-site expansion (active operation).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

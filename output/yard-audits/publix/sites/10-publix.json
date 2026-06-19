@@ -1,64 +1,190 @@
 {
   "name": "Publix Refrigerated DC McCalla AL",
   "type": "Refrigerated DC",
-  "coords": { "lat": 33.300700, "lng": -87.050100 },
+  "coords": {
+    "lat": 33.3007,
+    "lng": -87.0501
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 33.302909, "lng": -87.049276 },
-      { "lat": 33.301159, "lng": -87.046976 },
-      { "lat": 33.298634, "lng": -87.048589 },
-      { "lat": 33.298979, "lng": -87.051473 },
-      { "lat": 33.300557, "lng": -87.052194 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 33.302680, "lng": -87.049001 },
-      { "lat": 33.302393, "lng": -87.048624 },
-      { "lat": 33.302134, "lng": -87.049001 },
-      { "lat": 33.302393, "lng": -87.049379 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.302909,
+          "lng": -87.049276
+        },
+        {
+          "lat": 33.301159,
+          "lng": -87.046976
+        },
+        {
+          "lat": 33.298634,
+          "lng": -87.048589
+        },
+        {
+          "lat": 33.298979,
+          "lng": -87.051473
+        },
+        {
+          "lat": 33.300557,
+          "lng": -87.052194
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.30268,
+          "lng": -87.049001
+        },
+        {
+          "lat": 33.302393,
+          "lng": -87.048624
+        },
+        {
+          "lat": 33.302134,
+          "lng": -87.049001
+        },
+        {
+          "lat": 33.302393,
+          "lng": -87.049379
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 33.300011, "lng": -87.052125 },
-        { "lat": 33.298979, "lng": -87.050787 },
-        { "lat": 33.298634, "lng": -87.051405 },
-        { "lat": 33.299610, "lng": -87.052469 }
-      ] },
-      { "ring": [
-        { "lat": 33.300930, "lng": -87.047834 },
-        { "lat": 33.301102, "lng": -87.047045 },
-        { "lat": 33.299552, "lng": -87.047766 },
-        { "lat": 33.299782, "lng": -87.048452 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.300011,
+            "lng": -87.052125
+          },
+          {
+            "lat": 33.298979,
+            "lng": -87.050787
+          },
+          {
+            "lat": 33.298634,
+            "lng": -87.051405
+          },
+          {
+            "lat": 33.29961,
+            "lng": -87.052469
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.30093,
+            "lng": -87.047834
+          },
+          {
+            "lat": 33.301102,
+            "lng": -87.047045
+          },
+          {
+            "lat": 33.299552,
+            "lng": -87.047766
+          },
+          {
+            "lat": 33.299782,
+            "lng": -87.048452
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 33.300700, "lng": -87.051988 },
-        { "lat": 33.300930, "lng": -87.051370 },
-        { "lat": 33.299782, "lng": -87.050169 },
-        { "lat": 33.299438, "lng": -87.050787 }
-      ] },
-      { "ring": [
-        { "lat": 33.299438, "lng": -87.050787 },
-        { "lat": 33.299524, "lng": -87.049722 },
-        { "lat": 33.298979, "lng": -87.049001 },
-        { "lat": 33.298806, "lng": -87.050100 }
-      ] },
-      { "ring": [
-        { "lat": 33.302393, "lng": -87.049448 },
-        { "lat": 33.301389, "lng": -87.048178 },
-        { "lat": 33.301102, "lng": -87.048452 },
-        { "lat": 33.302106, "lng": -87.049722 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.3007,
+            "lng": -87.051988
+          },
+          {
+            "lat": 33.30093,
+            "lng": -87.05137
+          },
+          {
+            "lat": 33.299782,
+            "lng": -87.050169
+          },
+          {
+            "lat": 33.299438,
+            "lng": -87.050787
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.299438,
+            "lng": -87.050787
+          },
+          {
+            "lat": 33.299524,
+            "lng": -87.049722
+          },
+          {
+            "lat": 33.298979,
+            "lng": -87.049001
+          },
+          {
+            "lat": 33.298806,
+            "lng": -87.0501
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.302393,
+            "lng": -87.049448
+          },
+          {
+            "lat": 33.301389,
+            "lng": -87.048178
+          },
+          {
+            "lat": 33.301102,
+            "lng": -87.048452
+          },
+          {
+            "lat": 33.302106,
+            "lng": -87.049722
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 33.302680, "lng": -87.049001 },
-      { "lat": 33.302393, "lng": -87.048300 },
-      { "lat": 33.301900, "lng": -87.048500 },
-      { "lat": 33.302134, "lng": -87.049200 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 33.30268,
+          "lng": -87.049001
+        },
+        {
+          "lat": 33.302393,
+          "lng": -87.0483
+        },
+        {
+          "lat": 33.3019,
+          "lng": -87.0485
+        },
+        {
+          "lat": 33.302134,
+          "lng": -87.0492
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 227, "pano": "8WBC_aXzo6AEPR4bJWP_Qg", "hasCoverage": true },
-      "truckGate": { "heading": 266, "pano": "8WBC_aXzo6AEPR4bJWP_Qg", "hasCoverage": true }
+      "perimeter": {
+        "heading": 227,
+        "pano": "8WBC_aXzo6AEPR4bJWP_Qg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 266,
+        "pano": "8WBC_aXzo6AEPR4bJWP_Qg",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -72,18 +198,36 @@
   },
   "mapsUrl": "https://www.google.com/maps/@33.300700,-87.050100,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": false, "entryExitSeparate": true,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "remoteGs"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "remoteGs"
+  ],
   "fieldNotes": {
     "truckGate": "Street View (pano 8WBC_aXzo6AEPR4bJWP_Qg, heading ~280deg) shows a chain-link sliding gate across the truck drive at the NE/east entrance, perimeter fencing, a 'TRUCK ENTRANCE' sign and a stone Publix monument. Open campus-road approach, but a controlled gate at the fence line.",
     "guardShack": "No staffed booth (1-3 car footprint) visible at the gate in any Street View heading; only slim pole-mounted pedestals (kiosk / call-box) flank the lanes.",
@@ -97,5 +241,31 @@
     "railServed": "A rail line runs NW-SE through the trees off the west property edge but does not spur into the site; no rail dock on the property.",
     "yardMetrics": "dockDoorCount/trailersVisible/trailerParkingCapacity are overhead estimates from z17-z18 satellite, flagged as approximate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://jobs.publix.com/job-opening/warehouse-selector-mccalla-2/",
+        "date": "2026-04",
+        "type": "locator",
+        "claim": "Active Publix warehouse selector req at McCalla AL DC"
+      },
+      {
+        "tier": 1,
+        "url": "https://alabamanewscenter.com/2017/02/22/publix-opens-alabama-distribution-center-creates-300-jobs/",
+        "date": "2017-02",
+        "type": "press",
+        "claim": "Publix opened its 638k SF McCalla AL DC (Jefferson Met Park)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "McCalla AL refrigerated DC (Jefferson Metropolitan Park) is a current Publix self-operated 638k SF DC; active 2026 selector reqs.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

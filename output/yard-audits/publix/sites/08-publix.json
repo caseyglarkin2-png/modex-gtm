@@ -1,60 +1,178 @@
 {
   "name": "Publix Distribution Center Sarasota FL",
   "type": "Grocery Distribution Center",
-  "coords": { "lat": 27.26430, "lng": -82.48635 },
+  "coords": {
+    "lat": 27.2643,
+    "lng": -82.48635
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 27.26810, "lng": -82.48870 },
-      { "lat": 27.26800, "lng": -82.48560 },
-      { "lat": 27.26430, "lng": -82.48510 },
-      { "lat": 27.26230, "lng": -82.48580 },
-      { "lat": 27.26210, "lng": -82.48790 },
-      { "lat": 27.26330, "lng": -82.48895 },
-      { "lat": 27.26600, "lng": -82.48905 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 27.26405, "lng": -82.48790 },
-      { "lat": 27.26400, "lng": -82.48745 },
-      { "lat": 27.26375, "lng": -82.48748 },
-      { "lat": 27.26380, "lng": -82.48793 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 27.2681,
+          "lng": -82.4887
+        },
+        {
+          "lat": 27.268,
+          "lng": -82.4856
+        },
+        {
+          "lat": 27.2643,
+          "lng": -82.4851
+        },
+        {
+          "lat": 27.2623,
+          "lng": -82.4858
+        },
+        {
+          "lat": 27.2621,
+          "lng": -82.4879
+        },
+        {
+          "lat": 27.2633,
+          "lng": -82.48895
+        },
+        {
+          "lat": 27.266,
+          "lng": -82.48905
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 27.26405,
+          "lng": -82.4879
+        },
+        {
+          "lat": 27.264,
+          "lng": -82.48745
+        },
+        {
+          "lat": 27.26375,
+          "lng": -82.48748
+        },
+        {
+          "lat": 27.2638,
+          "lng": -82.48793
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 27.26790, "lng": -82.48790 },
-        { "lat": 27.26785, "lng": -82.48605 },
-        { "lat": 27.26625, "lng": -82.48600 },
-        { "lat": 27.26630, "lng": -82.48795 }
-      ] },
-      { "ring": [
-        { "lat": 27.26640, "lng": -82.48880 },
-        { "lat": 27.26635, "lng": -82.48815 },
-        { "lat": 27.26420, "lng": -82.48825 },
-        { "lat": 27.26425, "lng": -82.48888 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 27.2679,
+            "lng": -82.4879
+          },
+          {
+            "lat": 27.26785,
+            "lng": -82.48605
+          },
+          {
+            "lat": 27.26625,
+            "lng": -82.486
+          },
+          {
+            "lat": 27.2663,
+            "lng": -82.48795
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 27.2664,
+            "lng": -82.4888
+          },
+          {
+            "lat": 27.26635,
+            "lng": -82.48815
+          },
+          {
+            "lat": 27.2642,
+            "lng": -82.48825
+          },
+          {
+            "lat": 27.26425,
+            "lng": -82.48888
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 27.26315, "lng": -82.48700 },
-        { "lat": 27.26312, "lng": -82.48540 },
-        { "lat": 27.26280, "lng": -82.48542 },
-        { "lat": 27.26283, "lng": -82.48702 }
-      ] },
-      { "ring": [
-        { "lat": 27.26565, "lng": -82.48720 },
-        { "lat": 27.26425, "lng": -82.48715 },
-        { "lat": 27.26423, "lng": -82.48685 },
-        { "lat": 27.26563, "lng": -82.48690 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 27.26315,
+            "lng": -82.487
+          },
+          {
+            "lat": 27.26312,
+            "lng": -82.4854
+          },
+          {
+            "lat": 27.2628,
+            "lng": -82.48542
+          },
+          {
+            "lat": 27.26283,
+            "lng": -82.48702
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 27.26565,
+            "lng": -82.4872
+          },
+          {
+            "lat": 27.26425,
+            "lng": -82.48715
+          },
+          {
+            "lat": 27.26423,
+            "lng": -82.48685
+          },
+          {
+            "lat": 27.26563,
+            "lng": -82.4869
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 27.26430, "lng": -82.48748 },
-      { "lat": 27.26428, "lng": -82.48630 },
-      { "lat": 27.26330, "lng": -82.48625 },
-      { "lat": 27.26332, "lng": -82.48745 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 27.2643,
+          "lng": -82.48748
+        },
+        {
+          "lat": 27.26428,
+          "lng": -82.4863
+        },
+        {
+          "lat": 27.2633,
+          "lng": -82.48625
+        },
+        {
+          "lat": 27.26332,
+          "lng": -82.48745
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 81, "pano": "P9gizTYymsT6uz8hXIXvWg", "hasCoverage": true },
-      "truckGate": { "heading": 60, "pano": "PMNdhB0Ec12Nelv3jf_r7w", "hasCoverage": true }
+      "perimeter": {
+        "heading": 81,
+        "pano": "P9gizTYymsT6uz8hXIXvWg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 60,
+        "pano": "PMNdhB0Ec12Nelv3jf_r7w",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -63,7 +181,7 @@
     "trailerParkingCapacity": 110,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 55.0,
+    "siteAreaAcres": 55,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@27.26430,-82.48635,400m/data=!3m1!1e3",
@@ -92,7 +210,14 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "shipRcvSeparate"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "siteIdentity": "The supplied coords (27.264795, -82.486424) land on the Publix building, the grey+tan-roofed DC on the WEST side of the Palmer Ranch / Sawyer Rd industrial parcel. The much larger bright-white building immediately to the EAST (across a tree-lined drainage corridor) is a SEPARATE, larger distribution facility on its own parcel and is NOT part of this audit. Confirmed via Yelp/YellowPages/TruckMap listings for 'Publix Sarasota Warehouse, 6123 Sawyer Rd' and by satellite z16-z21.",
     "coords": "Pinned to the centroid of the Publix building (two-tone roof: tan/concrete north half, grey south half), ~27.2643,-82.48635.",
@@ -116,5 +241,31 @@
     "buildingCount": "2 = main Publix DC building + a small detached fleet/maintenance annex with canopies at the SW corner (green bobtail tractors/vans visible).",
     "siteAreaAcres": "~55 acres derived (shoelace) from the traced perimeter polygon (fenced parcel incl. drop yard, building, apron, parking, and retention/buffer inside the fence)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://jobs.publix.com/2025/05/06/behind-the-scenes-publix-distribution-and-logistics/",
+        "date": "2025-05",
+        "type": "press",
+        "claim": "Sarasota FL listed among Publix 10 distribution centers"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.yelp.com/biz/publix-sarasota-warehouse-sarasota",
+        "date": "2026-05",
+        "type": "press",
+        "claim": "Publix Sarasota Warehouse, 6123 Sawyer Rd, Sarasota FL"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Sarasota DC (Sawyer Rd) is a current Publix self-operated distribution center; in corporate DC count + active warehouse listing.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

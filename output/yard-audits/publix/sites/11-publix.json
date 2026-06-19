@@ -1,58 +1,170 @@
 {
   "name": "Publix Grocery Distribution Center McLeansville NC (Greensboro)",
   "type": "Grocery Distribution Center",
-  "coords": { "lat": 36.0814, "lng": -79.6612 },
+  "coords": {
+    "lat": 36.0814,
+    "lng": -79.6612
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 36.08370, "lng": -79.66585 },
-      { "lat": 36.08340, "lng": -79.65605 },
-      { "lat": 36.07995, "lng": -79.65590 },
-      { "lat": 36.07915, "lng": -79.66505 },
-      { "lat": 36.08210, "lng": -79.66640 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 36.08300, "lng": -79.66520 },
-      { "lat": 36.08255, "lng": -79.66425 },
-      { "lat": 36.08230, "lng": -79.66440 },
-      { "lat": 36.08272, "lng": -79.66535 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.0837,
+          "lng": -79.66585
+        },
+        {
+          "lat": 36.0834,
+          "lng": -79.65605
+        },
+        {
+          "lat": 36.07995,
+          "lng": -79.6559
+        },
+        {
+          "lat": 36.07915,
+          "lng": -79.66505
+        },
+        {
+          "lat": 36.0821,
+          "lng": -79.6664
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 36.083,
+          "lng": -79.6652
+        },
+        {
+          "lat": 36.08255,
+          "lng": -79.66425
+        },
+        {
+          "lat": 36.0823,
+          "lng": -79.6644
+        },
+        {
+          "lat": 36.08272,
+          "lng": -79.66535
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 36.08305, "lng": -79.65880 },
-        { "lat": 36.08300, "lng": -79.65610 },
-        { "lat": 36.08075, "lng": -79.65615 },
-        { "lat": 36.08080, "lng": -79.65885 }
-      ] },
-      { "ring": [
-        { "lat": 36.08345, "lng": -79.66450 },
-        { "lat": 36.08335, "lng": -79.65945 },
-        { "lat": 36.08300, "lng": -79.65948 },
-        { "lat": 36.08308, "lng": -79.66452 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 36.08305,
+            "lng": -79.6588
+          },
+          {
+            "lat": 36.083,
+            "lng": -79.6561
+          },
+          {
+            "lat": 36.08075,
+            "lng": -79.65615
+          },
+          {
+            "lat": 36.0808,
+            "lng": -79.65885
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 36.08345,
+            "lng": -79.6645
+          },
+          {
+            "lat": 36.08335,
+            "lng": -79.65945
+          },
+          {
+            "lat": 36.083,
+            "lng": -79.65948
+          },
+          {
+            "lat": 36.08308,
+            "lng": -79.66452
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 36.08210, "lng": -79.66520 },
-        { "lat": 36.08185, "lng": -79.65760 },
-        { "lat": 36.08150, "lng": -79.65762 },
-        { "lat": 36.08175, "lng": -79.66522 }
-      ] },
-      { "ring": [
-        { "lat": 36.07960, "lng": -79.66480 },
-        { "lat": 36.07935, "lng": -79.65730 },
-        { "lat": 36.07905, "lng": -79.65732 },
-        { "lat": 36.07930, "lng": -79.66482 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 36.0821,
+            "lng": -79.6652
+          },
+          {
+            "lat": 36.08185,
+            "lng": -79.6576
+          },
+          {
+            "lat": 36.0815,
+            "lng": -79.65762
+          },
+          {
+            "lat": 36.08175,
+            "lng": -79.66522
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 36.0796,
+            "lng": -79.6648
+          },
+          {
+            "lat": 36.07935,
+            "lng": -79.6573
+          },
+          {
+            "lat": 36.07905,
+            "lng": -79.65732
+          },
+          {
+            "lat": 36.0793,
+            "lng": -79.66482
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 36.08360, "lng": -79.66610 },
-      { "lat": 36.08330, "lng": -79.66555 },
-      { "lat": 36.08285, "lng": -79.66600 },
-      { "lat": 36.08315, "lng": -79.66655 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 36.0836,
+          "lng": -79.6661
+        },
+        {
+          "lat": 36.0833,
+          "lng": -79.66555
+        },
+        {
+          "lat": 36.08285,
+          "lng": -79.666
+        },
+        {
+          "lat": 36.08315,
+          "lng": -79.66655
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 125, "pano": "VQFdCteLBS0VAstfzxrZHw", "hasCoverage": true },
-      "truckGate": { "heading": 119, "pano": "OwYE7-23FR9mJ9aXo5Rn3Q", "hasCoverage": true }
+      "perimeter": {
+        "heading": 125,
+        "pano": "VQFdCteLBS0VAstfzxrZHw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 119,
+        "pano": "OwYE7-23FR9mJ9aXo5Rn3Q",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -66,18 +178,36 @@
   },
   "mapsUrl": "https://www.google.com/maps/@36.0814,-79.6612,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Rural",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "entryLanes", "exitLanes", "scale"],
+  "uncertainFields": [
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "Whole campus is ringed by chain-link perimeter fence on a graded berm (confirmed in Street View along Burlington Rd frontage). A single divided access boulevard off Burlington Rd is the only way in; it is fenced on both sides and ends at a controlled checkpoint before the secure truck yard.",
     "guardShack": "Publix newsroom/Gray/Procon project pages list a dedicated 'security post' on the campus. A small 1-2-vehicle-footprint structure with rooftop HVAC and a landscaped island sits at the throat between the employee lot, the entry boulevard and the secure truck yard (~36.0826,-79.6643). Satellite cannot resolve a booth window pattern at this resolution, so flagged uncertain, but the documented security post + the checkpoint structure strongly support a staffed guard shack.",
@@ -97,5 +227,31 @@
     "railServed": "No rail spur enters the property; no tracks visible anywhere on or adjacent to the campus.",
     "yardMetrics": "Counts are honest overhead estimates: dockDoorCount and trailer figures are approximate given the two very large multi-face cross-docks; siteAreaAcres derived from the traced perimeter ring (~99 ac)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://jobs.publix.com/2025/05/06/behind-the-scenes-publix-distribution-and-logistics/",
+        "date": "2025-05",
+        "type": "press",
+        "claim": "Greensboro NC listed among Publix 10 distribution centers"
+      },
+      {
+        "tier": 1,
+        "url": "https://jobs.publix.com/employment/united-states-distribution-jobs/944/21460/6252001/2",
+        "date": "2026",
+        "type": "locator",
+        "claim": "Active Publix distribution jobs at McLeansville NC"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "McLeansville/Greensboro NC DC was the under-construction $400M build (groundbreaking 2020, completed ~Q4 2022); now OPERATING with active distribution reqs. Not a phantom/under-construction site today.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

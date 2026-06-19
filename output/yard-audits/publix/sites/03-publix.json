@@ -8,56 +8,137 @@
   "geofences": {
     "perimeter": {
       "ring": [
-        { "lat": 28.039050, "lng": -82.011900 },
-        { "lat": 28.044600, "lng": -82.011400 },
-        { "lat": 28.044800, "lng": -82.006800 },
-        { "lat": 28.043300, "lng": -82.003400 },
-        { "lat": 28.041000, "lng": -82.003300 },
-        { "lat": 28.039600, "lng": -82.005500 },
-        { "lat": 28.038900, "lng": -82.007000 }
+        {
+          "lat": 28.03905,
+          "lng": -82.0119
+        },
+        {
+          "lat": 28.0446,
+          "lng": -82.0114
+        },
+        {
+          "lat": 28.0448,
+          "lng": -82.0068
+        },
+        {
+          "lat": 28.0433,
+          "lng": -82.0034
+        },
+        {
+          "lat": 28.041,
+          "lng": -82.0033
+        },
+        {
+          "lat": 28.0396,
+          "lng": -82.0055
+        },
+        {
+          "lat": 28.0389,
+          "lng": -82.007
+        }
       ]
     },
     "truckGate": {
       "ring": [
-        { "lat": 28.039300, "lng": -82.007250 },
-        { "lat": 28.039680, "lng": -82.007180 },
-        { "lat": 28.039700, "lng": -82.006850 },
-        { "lat": 28.039320, "lng": -82.006920 }
+        {
+          "lat": 28.0393,
+          "lng": -82.00725
+        },
+        {
+          "lat": 28.03968,
+          "lng": -82.00718
+        },
+        {
+          "lat": 28.0397,
+          "lng": -82.00685
+        },
+        {
+          "lat": 28.03932,
+          "lng": -82.00692
+        }
       ]
     },
     "dropYards": [
       {
         "ring": [
-          { "lat": 28.043050, "lng": -82.010350 },
-          { "lat": 28.044450, "lng": -82.010200 },
-          { "lat": 28.044550, "lng": -82.008100 },
-          { "lat": 28.043150, "lng": -82.008250 }
+          {
+            "lat": 28.04305,
+            "lng": -82.01035
+          },
+          {
+            "lat": 28.04445,
+            "lng": -82.0102
+          },
+          {
+            "lat": 28.04455,
+            "lng": -82.0081
+          },
+          {
+            "lat": 28.04315,
+            "lng": -82.00825
+          }
         ]
       },
       {
         "ring": [
-          { "lat": 28.040750, "lng": -82.008700 },
-          { "lat": 28.041750, "lng": -82.008600 },
-          { "lat": 28.041850, "lng": -82.006400 },
-          { "lat": 28.040850, "lng": -82.006500 }
+          {
+            "lat": 28.04075,
+            "lng": -82.0087
+          },
+          {
+            "lat": 28.04175,
+            "lng": -82.0086
+          },
+          {
+            "lat": 28.04185,
+            "lng": -82.0064
+          },
+          {
+            "lat": 28.04085,
+            "lng": -82.0065
+          }
         ]
       }
     ],
     "dockAprons": [
       {
         "ring": [
-          { "lat": 28.040450, "lng": -82.004900 },
-          { "lat": 28.041850, "lng": -82.004750 },
-          { "lat": 28.041880, "lng": -82.004250 },
-          { "lat": 28.040480, "lng": -82.004400 }
+          {
+            "lat": 28.04045,
+            "lng": -82.0049
+          },
+          {
+            "lat": 28.04185,
+            "lng": -82.00475
+          },
+          {
+            "lat": 28.04188,
+            "lng": -82.00425
+          },
+          {
+            "lat": 28.04048,
+            "lng": -82.0044
+          }
         ]
       },
       {
         "ring": [
-          { "lat": 28.040150, "lng": -82.008950 },
-          { "lat": 28.040250, "lng": -82.007050 },
-          { "lat": 28.040000, "lng": -82.007030 },
-          { "lat": 28.039900, "lng": -82.008930 }
+          {
+            "lat": 28.04015,
+            "lng": -82.00895
+          },
+          {
+            "lat": 28.04025,
+            "lng": -82.00705
+          },
+          {
+            "lat": 28.04,
+            "lng": -82.00703
+          },
+          {
+            "lat": 28.0399,
+            "lng": -82.00893
+          }
         ]
       }
     ],
@@ -140,5 +221,32 @@
     "siteAreaAcres": "~113 acres for the operational footprint inside the fence line (excludes adjacent golf course/ponds). Derived from the perimeter polygon.",
     "streetView": "Only one pano covers the property (LG3KSHrUjuj2o7LcGTFJiw, 2011-04) on the internal Gate-5 access road; both perimeter and truckGate streetViewMeta use it. heading 348 frames the fenced approach toward the gate - the arrival view a driver sees."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://jobs.publix.com/2025/05/06/behind-the-scenes-publix-distribution-and-logistics/",
+        "date": "2025-05",
+        "type": "press",
+        "claim": "Lakeland houses Publix Fresh Kitchen, Deli Kitchen and produce operations (self-operated)"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.waze.com/live-map/directions/publix-fresh-foods-warehouse-new-tampa-hwy-3045-lakeland?to=place.w.182190360.1821838068.5830918",
+        "date": "2026",
+        "type": "press",
+        "claim": "Publix Fresh Foods / Deli Warehouse at 3045 New Tampa Hwy, Lakeland"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Publix Produce/Fresh/Deli operation is real and self-operated in Lakeland, but mapped coords (NE Lakeland) do not match the known Fresh/Deli/Produce complex address (3045 New Tampa Hwy, W Lakeland); facility confirmed, geolocation uncertain.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "flag": "COORD-PRECISION: mapped point may not pinpoint the actual Fresh/Deli/Produce complex (3045 New Tampa Hwy). Verify exact pin before audit."
+  }
 }

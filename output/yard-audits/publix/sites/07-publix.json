@@ -1,67 +1,202 @@
 {
   "name": "Publix Grocery Distribution Center Jacksonville FL",
   "type": "Grocery Distribution Center",
-  "coords": { "lat": 30.31480, "lng": -81.81880 },
+  "coords": {
+    "lat": 30.3148,
+    "lng": -81.8188
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 30.31555, "lng": -81.82150 },
-      { "lat": 30.31600, "lng": -81.81950 },
-      { "lat": 30.31590, "lng": -81.81680 },
-      { "lat": 30.31470, "lng": -81.81600 },
-      { "lat": 30.31360, "lng": -81.81640 },
-      { "lat": 30.31350, "lng": -81.81950 },
-      { "lat": 30.31370, "lng": -81.82150 },
-      { "lat": 30.31470, "lng": -81.82175 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 30.31545, "lng": -81.81925 },
-      { "lat": 30.31545, "lng": -81.81885 },
-      { "lat": 30.31505, "lng": -81.81885 },
-      { "lat": 30.31505, "lng": -81.81925 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 30.31555,
+          "lng": -81.8215
+        },
+        {
+          "lat": 30.316,
+          "lng": -81.8195
+        },
+        {
+          "lat": 30.3159,
+          "lng": -81.8168
+        },
+        {
+          "lat": 30.3147,
+          "lng": -81.816
+        },
+        {
+          "lat": 30.3136,
+          "lng": -81.8164
+        },
+        {
+          "lat": 30.3135,
+          "lng": -81.8195
+        },
+        {
+          "lat": 30.3137,
+          "lng": -81.8215
+        },
+        {
+          "lat": 30.3147,
+          "lng": -81.82175
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 30.31545,
+          "lng": -81.81925
+        },
+        {
+          "lat": 30.31545,
+          "lng": -81.81885
+        },
+        {
+          "lat": 30.31505,
+          "lng": -81.81885
+        },
+        {
+          "lat": 30.31505,
+          "lng": -81.81925
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 30.31470, "lng": -81.81935 },
-        { "lat": 30.31460, "lng": -81.81830 },
-        { "lat": 30.31385, "lng": -81.81845 },
-        { "lat": 30.31395, "lng": -81.81950 }
-      ] },
-      { "ring": [
-        { "lat": 30.31430, "lng": -81.82055 },
-        { "lat": 30.31415, "lng": -81.81985 },
-        { "lat": 30.31330, "lng": -81.82010 },
-        { "lat": 30.31345, "lng": -81.82080 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 30.3147,
+            "lng": -81.81935
+          },
+          {
+            "lat": 30.3146,
+            "lng": -81.8183
+          },
+          {
+            "lat": 30.31385,
+            "lng": -81.81845
+          },
+          {
+            "lat": 30.31395,
+            "lng": -81.8195
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 30.3143,
+            "lng": -81.82055
+          },
+          {
+            "lat": 30.31415,
+            "lng": -81.81985
+          },
+          {
+            "lat": 30.3133,
+            "lng": -81.8201
+          },
+          {
+            "lat": 30.31345,
+            "lng": -81.8208
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 30.31455, "lng": -81.81995 },
-        { "lat": 30.31435, "lng": -81.81880 },
-        { "lat": 30.31420, "lng": -81.81885 },
-        { "lat": 30.31440, "lng": -81.82000 }
-      ] },
-      { "ring": [
-        { "lat": 30.31400, "lng": -81.82130 },
-        { "lat": 30.31385, "lng": -81.82035 },
-        { "lat": 30.31368, "lng": -81.82040 },
-        { "lat": 30.31383, "lng": -81.82135 }
-      ] },
-      { "ring": [
-        { "lat": 30.31525, "lng": -81.81790 },
-        { "lat": 30.31515, "lng": -81.81660 },
-        { "lat": 30.31498, "lng": -81.81662 },
-        { "lat": 30.31508, "lng": -81.81792 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 30.31455,
+            "lng": -81.81995
+          },
+          {
+            "lat": 30.31435,
+            "lng": -81.8188
+          },
+          {
+            "lat": 30.3142,
+            "lng": -81.81885
+          },
+          {
+            "lat": 30.3144,
+            "lng": -81.82
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 30.314,
+            "lng": -81.8213
+          },
+          {
+            "lat": 30.31385,
+            "lng": -81.82035
+          },
+          {
+            "lat": 30.31368,
+            "lng": -81.8204
+          },
+          {
+            "lat": 30.31383,
+            "lng": -81.82135
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 30.31525,
+            "lng": -81.8179
+          },
+          {
+            "lat": 30.31515,
+            "lng": -81.8166
+          },
+          {
+            "lat": 30.31498,
+            "lng": -81.81662
+          },
+          {
+            "lat": 30.31508,
+            "lng": -81.81792
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 30.31555, "lng": -81.81935 },
-      { "lat": 30.31555, "lng": -81.81880 },
-      { "lat": 30.31510, "lng": -81.81880 },
-      { "lat": 30.31510, "lng": -81.81935 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 30.31555,
+          "lng": -81.81935
+        },
+        {
+          "lat": 30.31555,
+          "lng": -81.8188
+        },
+        {
+          "lat": 30.3151,
+          "lng": -81.8188
+        },
+        {
+          "lat": 30.3151,
+          "lng": -81.81935
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 350, "pano": "_w3EL1iYqzN9eOSlWCGSEg", "hasCoverage": true },
-      "truckGate": { "heading": 174, "pano": "ba70TEhy8FfAY1dNFB0fLw", "hasCoverage": true }
+      "perimeter": {
+        "heading": 350,
+        "pano": "_w3EL1iYqzN9eOSlWCGSEg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 174,
+        "pano": "ba70TEhy8FfAY1dNFB0fLw",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -99,7 +234,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "exitLanes", "entryLanes"],
+  "uncertainFields": [
+    "scale",
+    "exitLanes",
+    "entryLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Controlled gated entry on the internal access road just south of the at-grade rail crossing; z20-z21 satellite shows a canopy/checkpoint spanning the lanes with a semi and cars stopped at the control point, plus directional lane arrows. Driveway approach from the road is long and deep.",
     "guardShack": "Distinctive zigzag-roofed security/admin building sits immediately beside the gate lanes on the inbound side; vehicles queue at the checkpoint canopy beside it. Staffed manned entry.",
@@ -117,5 +256,31 @@
     "siteAreaAcres": "32.3 ac from the traced fenced operational footprint; the broader parcel including grass/tree buffers to W Beaver St is larger.",
     "urbanRural": "West Jacksonville metro fabric: subdivisions immediately north and south across W Beaver St, a major divided arterial frontage. Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://jobs.publix.com/2025/05/06/behind-the-scenes-publix-distribution-and-logistics/",
+        "date": "2025-05",
+        "type": "press",
+        "claim": "Jacksonville FL listed among Publix 10 distribution centers"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.jaxdailyrecord.com/news/2025/oct/06/more-permits-boost-publix-warehouse-to-almost-145-million/",
+        "date": "2025-10",
+        "type": "press",
+        "claim": "Publix expanding its existing operating West Jacksonville DC at 9786/9800 W Beaver St (active investment, not a closure)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Existing West Jacksonville DC (9786 W Beaver St) operates today with an active ~$145M on-site expansion. NOTE: a SEPARATE freezer warehouse there opens late 2027 (under construction) and is NOT what is mapped here.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

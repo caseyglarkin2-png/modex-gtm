@@ -1,59 +1,175 @@
 {
   "name": "Publix Refrigerated DC Deerfield Beach FL",
   "type": "Refrigerated DC",
-  "coords": { "lat": 26.30818, "lng": -80.12254 },
+  "coords": {
+    "lat": 26.30818,
+    "lng": -80.12254
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 26.31280, "lng": -80.12450 },
-      { "lat": 26.31280, "lng": -80.12080 },
-      { "lat": 26.30560, "lng": -80.12110 },
-      { "lat": 26.30490, "lng": -80.12180 },
-      { "lat": 26.30480, "lng": -80.12450 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 26.30560, "lng": -80.12380 },
-      { "lat": 26.30560, "lng": -80.12270 },
-      { "lat": 26.30490, "lng": -80.12270 },
-      { "lat": 26.30490, "lng": -80.12380 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 26.3128,
+          "lng": -80.1245
+        },
+        {
+          "lat": 26.3128,
+          "lng": -80.1208
+        },
+        {
+          "lat": 26.3056,
+          "lng": -80.1211
+        },
+        {
+          "lat": 26.3049,
+          "lng": -80.1218
+        },
+        {
+          "lat": 26.3048,
+          "lng": -80.1245
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 26.3056,
+          "lng": -80.1238
+        },
+        {
+          "lat": 26.3056,
+          "lng": -80.1227
+        },
+        {
+          "lat": 26.3049,
+          "lng": -80.1227
+        },
+        {
+          "lat": 26.3049,
+          "lng": -80.1238
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 26.31050, "lng": -80.12350 },
-        { "lat": 26.31050, "lng": -80.12110 },
-        { "lat": 26.30830, "lng": -80.12120 },
-        { "lat": 26.30830, "lng": -80.12360 }
-      ] },
-      { "ring": [
-        { "lat": 26.30720, "lng": -80.12230 },
-        { "lat": 26.30720, "lng": -80.12120 },
-        { "lat": 26.30540, "lng": -80.12130 },
-        { "lat": 26.30540, "lng": -80.12240 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 26.3105,
+            "lng": -80.1235
+          },
+          {
+            "lat": 26.3105,
+            "lng": -80.1211
+          },
+          {
+            "lat": 26.3083,
+            "lng": -80.1212
+          },
+          {
+            "lat": 26.3083,
+            "lng": -80.1236
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 26.3072,
+            "lng": -80.1223
+          },
+          {
+            "lat": 26.3072,
+            "lng": -80.1212
+          },
+          {
+            "lat": 26.3054,
+            "lng": -80.1213
+          },
+          {
+            "lat": 26.3054,
+            "lng": -80.1224
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 26.30950, "lng": -80.12420 },
-        { "lat": 26.30950, "lng": -80.12380 },
-        { "lat": 26.30600, "lng": -80.12380 },
-        { "lat": 26.30600, "lng": -80.12420 }
-      ] },
-      { "ring": [
-        { "lat": 26.31050, "lng": -80.12180 },
-        { "lat": 26.31050, "lng": -80.12140 },
-        { "lat": 26.30640, "lng": -80.12150 },
-        { "lat": 26.30640, "lng": -80.12190 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 26.3095,
+            "lng": -80.1242
+          },
+          {
+            "lat": 26.3095,
+            "lng": -80.1238
+          },
+          {
+            "lat": 26.306,
+            "lng": -80.1238
+          },
+          {
+            "lat": 26.306,
+            "lng": -80.1242
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 26.3105,
+            "lng": -80.1218
+          },
+          {
+            "lat": 26.3105,
+            "lng": -80.1214
+          },
+          {
+            "lat": 26.3064,
+            "lng": -80.1215
+          },
+          {
+            "lat": 26.3064,
+            "lng": -80.1219
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 26.30485, "lng": -80.12390 },
-      { "lat": 26.30485, "lng": -80.12255 },
-      { "lat": 26.30440, "lng": -80.12255 },
-      { "lat": 26.30440, "lng": -80.12390 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 26.30485,
+          "lng": -80.1239
+        },
+        {
+          "lat": 26.30485,
+          "lng": -80.12255
+        },
+        {
+          "lat": 26.3044,
+          "lng": -80.12255
+        },
+        {
+          "lat": 26.3044,
+          "lng": -80.1239
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 13, "pano": "nu1a7-CdR8tF7t-i8oCgBQ", "hasCoverage": true },
-      "truckGate": { "heading": 355, "pano": "nu1a7-CdR8tF7t-i8oCgBQ", "hasCoverage": true },
-      "staging": { "heading": 175, "pano": "ilke5VipMTbJmL8ihheLng", "hasCoverage": true }
+      "perimeter": {
+        "heading": 13,
+        "pano": "nu1a7-CdR8tF7t-i8oCgBQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 355,
+        "pano": "nu1a7-CdR8tF7t-i8oCgBQ",
+        "hasCoverage": true
+      },
+      "staging": {
+        "heading": 175,
+        "pano": "ilke5VipMTbJmL8ihheLng",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -91,7 +207,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["exitLanes", "scale"],
+  "uncertainFields": [
+    "exitLanes",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "Divided entrance off SW 10th St with a gatehouse in the median; satellite shows painted STOP bars, directional arrows and IN/OUT/TRUCKS lane markings; Street View shows signage splitting traffic into 'Publix VEHICLES' (left) and 'TRUCK DELIVERIES' (right) lanes.",
     "guardShack": "Small staffed booth with a teal/green roof in the entrance median, set beside the lanes, separate from the main building (visible in z19/z21 satellite and behind the median tree in Street View).",
@@ -111,5 +230,31 @@
     "trailersVisible": "~165 trailers counted across drop yards and dock faces in the captured imagery; approximate.",
     "siteAreaAcres": "76.4 ac derived from the traced perimeter polygon."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://jobs.publix.com/job-location/deerfield-beach-fl",
+        "date": "2026",
+        "type": "locator",
+        "claim": "Active Publix distribution/dairy warehouse jobs at Deerfield Beach FL"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.yelp.com/biz/publix-distribution-center-deerfield-beach",
+        "date": "2026-06",
+        "type": "press",
+        "claim": "Publix Distribution Center, 777 SW 12th Ave, Deerfield Beach FL"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Deerfield Beach DC (777 SW 12th Ave) is a current Publix self-operated refrigerated/dairy distribution + manufacturing site; active 2026 dairy job reqs.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -1,59 +1,174 @@
 {
   "name": "Publix Distribution Campus Dacula GA (Atlanta)",
   "type": "Distribution Campus",
-  "coords": { "lat": 33.99080, "lng": -83.92950 },
+  "coords": {
+    "lat": 33.9908,
+    "lng": -83.9295
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 33.9938, "lng": -83.9352 },
-      { "lat": 33.9942, "lng": -83.9288 },
-      { "lat": 33.9905, "lng": -83.9268 },
-      { "lat": 33.9868, "lng": -83.9288 },
-      { "lat": 33.9866, "lng": -83.9320 },
-      { "lat": 33.9878, "lng": -83.9355 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 33.99010, "lng": -83.93470 },
-      { "lat": 33.99030, "lng": -83.93330 },
-      { "lat": 33.98975, "lng": -83.93315 },
-      { "lat": 33.98955, "lng": -83.93455 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.9938,
+          "lng": -83.9352
+        },
+        {
+          "lat": 33.9942,
+          "lng": -83.9288
+        },
+        {
+          "lat": 33.9905,
+          "lng": -83.9268
+        },
+        {
+          "lat": 33.9868,
+          "lng": -83.9288
+        },
+        {
+          "lat": 33.9866,
+          "lng": -83.932
+        },
+        {
+          "lat": 33.9878,
+          "lng": -83.9355
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.9901,
+          "lng": -83.9347
+        },
+        {
+          "lat": 33.9903,
+          "lng": -83.9333
+        },
+        {
+          "lat": 33.98975,
+          "lng": -83.93315
+        },
+        {
+          "lat": 33.98955,
+          "lng": -83.93455
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 33.98985, "lng": -83.93215 },
-        { "lat": 33.98920, "lng": -83.93145 },
-        { "lat": 33.98800, "lng": -83.93285 },
-        { "lat": 33.98865, "lng": -83.93355 }
-      ] },
-      { "ring": [
-        { "lat": 33.99270, "lng": -83.93470 },
-        { "lat": 33.99230, "lng": -83.93330 },
-        { "lat": 33.99080, "lng": -83.93410 },
-        { "lat": 33.99120, "lng": -83.93550 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.98985,
+            "lng": -83.93215
+          },
+          {
+            "lat": 33.9892,
+            "lng": -83.93145
+          },
+          {
+            "lat": 33.988,
+            "lng": -83.93285
+          },
+          {
+            "lat": 33.98865,
+            "lng": -83.93355
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.9927,
+            "lng": -83.9347
+          },
+          {
+            "lat": 33.9923,
+            "lng": -83.9333
+          },
+          {
+            "lat": 33.9908,
+            "lng": -83.9341
+          },
+          {
+            "lat": 33.9912,
+            "lng": -83.9355
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 33.99300, "lng": -83.93340 },
-        { "lat": 33.99340, "lng": -83.93310 },
-        { "lat": 33.98920, "lng": -83.92990 },
-        { "lat": 33.98880, "lng": -83.93020 }
-      ] },
-      { "ring": [
-        { "lat": 33.99280, "lng": -83.93180 },
-        { "lat": 33.99320, "lng": -83.93150 },
-        { "lat": 33.98900, "lng": -83.92840 },
-        { "lat": 33.98860, "lng": -83.92870 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.993,
+            "lng": -83.9334
+          },
+          {
+            "lat": 33.9934,
+            "lng": -83.9331
+          },
+          {
+            "lat": 33.9892,
+            "lng": -83.9299
+          },
+          {
+            "lat": 33.9888,
+            "lng": -83.9302
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.9928,
+            "lng": -83.9318
+          },
+          {
+            "lat": 33.9932,
+            "lng": -83.9315
+          },
+          {
+            "lat": 33.989,
+            "lng": -83.9284
+          },
+          {
+            "lat": 33.9886,
+            "lng": -83.9287
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 33.98935, "lng": -83.93120 },
-      { "lat": 33.98885, "lng": -83.93055 },
-      { "lat": 33.98800, "lng": -83.93150 },
-      { "lat": 33.98850, "lng": -83.93215 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 33.98935,
+          "lng": -83.9312
+        },
+        {
+          "lat": 33.98885,
+          "lng": -83.93055
+        },
+        {
+          "lat": 33.988,
+          "lng": -83.9315
+        },
+        {
+          "lat": 33.9885,
+          "lng": -83.93215
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 347, "pano": "j2motd7Pj5uOlEf6_Rthxg", "hasCoverage": true },
-      "truckGate": { "heading": 0, "pano": "", "hasCoverage": false }
+      "perimeter": {
+        "heading": 347,
+        "pano": "j2motd7Pj5uOlEf6_Rthxg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      }
     }
   },
   "yardMetrics": {
@@ -67,18 +182,37 @@
   },
   "mapsUrl": "https://www.google.com/maps/@33.99080,-83.92950,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": false, "remoteGs": true,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": true,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "scale", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "scale",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Single controlled truck entrance off the SW campus access road (Hurricane Trail spur off Sugarloaf Pkwy). Whole industrial property is chain-link fenced (confirmed in Street View along the south frontage). All truck traffic funnels through the SW access drive; rest of the perimeter is continuous fence + wooded buffer.",
     "guardShack": "No standalone guard booth positively identified in satellite at the entrance drive; the entrance is set well back behind a tree buffer with no Street View coverage on the internal access road (ZERO_RESULTS at the gate). Marked false / remoteGs true as best evidence, but low confidence on the booth call.",
@@ -99,5 +233,31 @@
     "trailersVisible": "Estimate ~360 across all drop yards and dock faces; honest overhead estimate, not exact.",
     "railServed": "No rail spur enters the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://jobs.publix.com/2025/05/06/behind-the-scenes-publix-distribution-and-logistics/",
+        "date": "2025-05",
+        "type": "press",
+        "claim": "Dacula GA (Atlanta) listed among Publix distribution centers + dairy manufacturing"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.yelp.com/biz/publix-super-market-atlanta-warehouse-dacula",
+        "date": "2026-03",
+        "type": "press",
+        "claim": "Publix Super Market Atlanta Warehouse, 445 Hurricane Trl, Dacula GA, 24h"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Dacula GA (Atlanta) distribution + manufacturing campus (445 Hurricane Trl) is a current Publix self-operated DC/dairy plant. Corporate count cites this as the GA (Lawrenceville-area) facility.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

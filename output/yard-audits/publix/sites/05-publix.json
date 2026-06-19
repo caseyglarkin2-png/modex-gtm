@@ -1,70 +1,210 @@
 {
   "name": "Publix Grocery Distribution Center Boynton Beach FL",
   "type": "Grocery Distribution Center",
-  "coords": { "lat": 26.54345, "lng": -80.07825 },
+  "coords": {
+    "lat": 26.54345,
+    "lng": -80.07825
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 26.54120, "lng": -80.08140 },
-      { "lat": 26.54500, "lng": -80.08120 },
-      { "lat": 26.54510, "lng": -80.07555 },
-      { "lat": 26.54400, "lng": -80.07440 },
-      { "lat": 26.54130, "lng": -80.07490 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 26.54135, "lng": -80.08075 },
-      { "lat": 26.54135, "lng": -80.08025 },
-      { "lat": 26.54195, "lng": -80.08025 },
-      { "lat": 26.54195, "lng": -80.08075 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 26.5412,
+          "lng": -80.0814
+        },
+        {
+          "lat": 26.545,
+          "lng": -80.0812
+        },
+        {
+          "lat": 26.5451,
+          "lng": -80.07555
+        },
+        {
+          "lat": 26.544,
+          "lng": -80.0744
+        },
+        {
+          "lat": 26.5413,
+          "lng": -80.0749
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 26.54135,
+          "lng": -80.08075
+        },
+        {
+          "lat": 26.54135,
+          "lng": -80.08025
+        },
+        {
+          "lat": 26.54195,
+          "lng": -80.08025
+        },
+        {
+          "lat": 26.54195,
+          "lng": -80.08075
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 26.54435, "lng": -80.08120 },
-        { "lat": 26.54500, "lng": -80.08115 },
-        { "lat": 26.54500, "lng": -80.07880 },
-        { "lat": 26.54435, "lng": -80.07880 }
-      ] },
-      { "ring": [
-        { "lat": 26.54235, "lng": -80.08135 },
-        { "lat": 26.54420, "lng": -80.08130 },
-        { "lat": 26.54420, "lng": -80.08035 },
-        { "lat": 26.54235, "lng": -80.08040 }
-      ] },
-      { "ring": [
-        { "lat": 26.54215, "lng": -80.08000 },
-        { "lat": 26.54260, "lng": -80.08000 },
-        { "lat": 26.54260, "lng": -80.07520 },
-        { "lat": 26.54215, "lng": -80.07520 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 26.54435,
+            "lng": -80.0812
+          },
+          {
+            "lat": 26.545,
+            "lng": -80.08115
+          },
+          {
+            "lat": 26.545,
+            "lng": -80.0788
+          },
+          {
+            "lat": 26.54435,
+            "lng": -80.0788
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 26.54235,
+            "lng": -80.08135
+          },
+          {
+            "lat": 26.5442,
+            "lng": -80.0813
+          },
+          {
+            "lat": 26.5442,
+            "lng": -80.08035
+          },
+          {
+            "lat": 26.54235,
+            "lng": -80.0804
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 26.54215,
+            "lng": -80.08
+          },
+          {
+            "lat": 26.5426,
+            "lng": -80.08
+          },
+          {
+            "lat": 26.5426,
+            "lng": -80.0752
+          },
+          {
+            "lat": 26.54215,
+            "lng": -80.0752
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 26.54250, "lng": -80.08030 },
-        { "lat": 26.54285, "lng": -80.08030 },
-        { "lat": 26.54285, "lng": -80.07530 },
-        { "lat": 26.54250, "lng": -80.07530 }
-      ] },
-      { "ring": [
-        { "lat": 26.54290, "lng": -80.08135 },
-        { "lat": 26.54430, "lng": -80.08130 },
-        { "lat": 26.54430, "lng": -80.08095 },
-        { "lat": 26.54290, "lng": -80.08100 }
-      ] },
-      { "ring": [
-        { "lat": 26.54430, "lng": -80.07880 },
-        { "lat": 26.54465, "lng": -80.07880 },
-        { "lat": 26.54465, "lng": -80.07560 },
-        { "lat": 26.54430, "lng": -80.07560 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 26.5425,
+            "lng": -80.0803
+          },
+          {
+            "lat": 26.54285,
+            "lng": -80.0803
+          },
+          {
+            "lat": 26.54285,
+            "lng": -80.0753
+          },
+          {
+            "lat": 26.5425,
+            "lng": -80.0753
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 26.5429,
+            "lng": -80.08135
+          },
+          {
+            "lat": 26.5443,
+            "lng": -80.0813
+          },
+          {
+            "lat": 26.5443,
+            "lng": -80.08095
+          },
+          {
+            "lat": 26.5429,
+            "lng": -80.081
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 26.5443,
+            "lng": -80.0788
+          },
+          {
+            "lat": 26.54465,
+            "lng": -80.0788
+          },
+          {
+            "lat": 26.54465,
+            "lng": -80.0756
+          },
+          {
+            "lat": 26.5443,
+            "lng": -80.0756
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 26.54130, "lng": -80.08075 },
-      { "lat": 26.54130, "lng": -80.07520 },
-      { "lat": 26.54200, "lng": -80.07520 },
-      { "lat": 26.54200, "lng": -80.08075 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 26.5413,
+          "lng": -80.08075
+        },
+        {
+          "lat": 26.5413,
+          "lng": -80.0752
+        },
+        {
+          "lat": 26.542,
+          "lng": -80.0752
+        },
+        {
+          "lat": 26.542,
+          "lng": -80.08075
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
-      "truckGate": { "heading": 4, "pano": "Ie_RTboQCNAI3UHAjRDdYQ", "hasCoverage": true }
+      "perimeter": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "truckGate": {
+        "heading": 4,
+        "pano": "Ie_RTboQCNAI3UHAjRDdYQ",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -102,7 +242,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "shipRcvSeparate"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "SW divided-boulevard entrance off Park Ridge Blvd with a sliding/swing gate and fencing across the inbound truck lanes; confirmed in Street View (a parked Publix trailer sits just inside).",
     "guardShack": "Small tan peaked-roof guard booth in the entrance median beside the lanes (~1-vehicle footprint), visible in both Street View and zoom-20 satellite at ~26.5417,-80.0806.",
@@ -122,5 +266,31 @@
     "railServed": "Rail line runs east of the site beyond I-95 but no spur enters the Publix property.",
     "siteAreaAcres": "~68 acres computed from the traced perimeter polygon (fenced property only, excludes adjacent school/industrial)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://jobs.publix.com/employment/boynton-beach-warehouse-jobs/944/21546/6252001-4155751-4167510-4148677/4",
+        "date": "2026",
+        "type": "locator",
+        "claim": "Active Publix warehouse selector reqs at Boynton Beach DC, 5500 Park Ridge Blvd"
+      },
+      {
+        "tier": 1,
+        "url": "https://jobs.publix.com/2025/05/06/behind-the-scenes-publix-distribution-and-logistics/",
+        "date": "2025-05",
+        "type": "press",
+        "claim": "Boynton Beach FL listed among Publix 10 distribution centers"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Boynton Beach grocery DC (5500 Park Ridge Blvd) is a current Publix self-operated DC; active 2026 warehouse-selector reqs.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
