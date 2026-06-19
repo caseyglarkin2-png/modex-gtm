@@ -66,8 +66,16 @@ async function main() {
 
   const results: AccountResult[] = [];
 
+  // FROZEN packs are live in a prospect's hands — never auto-rebuild them in a
+  // bulk run. (build-demo-pack also guards individually.) Override: FORCE_REBUILD=1.
+  const FROZEN_PACKS = new Set(['crowley', 'dannon']);
+
   for (const entry of all) {
     const slug = entry.auditSlug;
+    if (FROZEN_PACKS.has(slug) && !process.env.FORCE_REBUILD) {
+      console.log(`\n⛔ ${entry.displayName}  [${slug}] — FROZEN, skipped (FORCE_REBUILD=1 to override)`);
+      continue;
+    }
     console.log(`\n── ${entry.displayName}  [${slug}]`);
     const result: AccountResult = {
       auditSlug: slug,

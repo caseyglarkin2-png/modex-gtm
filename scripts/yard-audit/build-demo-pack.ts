@@ -430,11 +430,20 @@ function fovGate(slug: string, featuredSiteId: string | undefined, sites: Site[]
 
 // ── Main ────────────────────────────────────────────────────────────────────
 
+// FROZEN packs are live in a specific prospect's hands (sent links). A pipeline
+// rebuild must NEVER silently change their hero, counts, or totals. Both this
+// script and build-all-packs skip them unless explicitly forced.
+const FROZEN_PACKS = new Set(['crowley', 'dannon']);
+
 async function main() {
   const auditSlug = process.argv[2];
   if (!auditSlug) {
     console.error('usage: npx tsx scripts/yard-audit/build-demo-pack.ts <auditSlug>');
     process.exit(1);
+  }
+  if (FROZEN_PACKS.has(auditSlug) && !process.env.FORCE_REBUILD && !process.argv.includes('--force')) {
+    console.warn(`⛔ ${auditSlug} is FROZEN (live with a prospect) — skipping rebuild. Pass --force or FORCE_REBUILD=1 to override.`);
+    return;
   }
   const entry = resolveByAuditSlug(auditSlug);
   const { micrositeSlug, displayName, archetype, estimatedFootprint, coverageNote } = entry;
@@ -558,6 +567,12 @@ async function main() {
       if (Array.isArray(a.surprisingFindings)) pack.account.surprisingFindings = a.surprisingFindings;
       if (a.roiDefaults != null) pack.account.roiDefaults = a.roiDefaults;
       if (a.teardownVideoSrc != null) pack.account.teardownVideoSrc = a.teardownVideoSrc;
+      // Sticky hero: keep a hand-set featuredSiteId (e.g. crowley -> Talleyrand)
+      // across rebuilds, as long as that site still survives the gate. Without
+      // this, the builder would recompute the hero to the biggest-dock site.
+      if (a.featuredSiteId && pack.network.sites.some((s) => s.id === a.featuredSiteId)) {
+        pack.account.featuredSiteId = a.featuredSiteId;
+      }
       // Phase 2/3 core-sample fields (network denominator + sample rationale).
       if (a.networkCount != null) pack.account.networkCount = a.networkCount;
       if (a.networkCountSource != null) pack.account.networkCountSource = a.networkCountSource;
