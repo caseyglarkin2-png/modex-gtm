@@ -161,5 +161,31 @@
     "dockDoorCount": "~45 estimated (north face ~30+ doors visible in Street View, plus east rail dock); honest band estimate.",
     "truckGateCount": "At least two driveway entrances off W Turner Rd serve the yard."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.bakeryandsnacks.com/Article/2014/11/18/General-Mills-to-shut-sell-US-Lodi-cereal-plant/",
+        "date": "2014-11-18",
+        "type": "trade",
+        "claim": "GM announced it would shut and sell the Lodi cereal plant in a NA supply-chain consolidation"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.lodinews.com/news/article_9f735bb6-01d3-11e6-86f9-7bed71aa97f2.html",
+        "date": "2016-04-13",
+        "type": "trade",
+        "claim": "Cereal production ended Nov 2015; RRM Enterprises (Bond Manufacturing) bought the property, sale closed Feb 29 2016"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GM closed the Lodi Cheerios plant (Nov 2015) and sold it Feb 2016; now a multi-tenant industrial property (Bond Manufacturing et al). Not GM-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

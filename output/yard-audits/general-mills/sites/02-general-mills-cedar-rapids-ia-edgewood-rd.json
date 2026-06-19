@@ -137,5 +137,31 @@
     "siteAreaAcres": "Perimeter box ~224 acres including the rail yard and some undeveloped/retention land; the paved industrial core is roughly 90-110 acres.",
     "urbanRural": "Edge-of-town industrial setting on the SW fringe of Cedar Rapids surrounded by farmland and a quarry; classified Rural per the small-town-vs-Urban tiebreak rule."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.cedarrapids.org/general-mills-plans-business-expansion-in-cedar-rapids/",
+        "date": "2024",
+        "type": "press",
+        "claim": "GM operates 4800 Edgewood Rd SW Cedar Rapids cereal plant (~800 employees); $37M line modernization announced"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.powderbulksolids.com/food-beverage/general-mills-to-upgrade-food-processing-plant-in-iowa",
+        "date": "2024",
+        "type": "trade",
+        "claim": "GM $37M upgrade of the Cedar Rapids IA food production facility"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active GM-owned cereal plant (Cheerios/Lucky Charms/fruit snacks) with recent capital investment; cereal is core GM, no divestiture/closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

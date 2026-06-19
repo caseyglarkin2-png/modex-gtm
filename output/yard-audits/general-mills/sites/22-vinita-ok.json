@@ -135,5 +135,32 @@
     "urbanRural": "Edge-of-town industrial park near I-44/Hwy-2 outside Vinita, surrounded by open farmland - Rural.",
     "railServed": "No rail spur runs into the property; nearest rail line is well west of the industrial park."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.reliableplant.com/Read/16450/pennant-foods-to-buy-general-mills-dough-business",
+        "date": "2009-03",
+        "type": "trade",
+        "claim": "GM agreed to sell its Bakeries & Foodservice frozen-dough business, four plants explicitly including Vinita OK, to Pennant Foods"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.cspdailynews.com/foodservice/general-mills-sells-frozen-dough-business",
+        "date": "2009-03",
+        "type": "trade",
+        "claim": "GM sold the four-plant frozen-dough business (Bakersfield, Hazleton, Montreal, Vinita) to Pennant Foods"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "imageryDate": "2025-04",
+    "rationale": "GM divested Vinita (1157 Doughboy Dr) to Pennant Foods in the 2009 B&F frozen-dough sale; building now marketed for sale. Not GM-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

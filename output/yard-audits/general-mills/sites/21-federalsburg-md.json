@@ -111,5 +111,32 @@
     "buildingCount": "Western building, two central connected buildings, and an eastern dark-roof building - 4 distinct structures plus minor outbuildings.",
     "siteAreaAcres": "MDE Brownfield record lists the General Mills/Pillsbury property as 21.31 acres; perimeter box yields ~22 acres gross."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.foodonline.com/doc/general-mills-divests-0001",
+        "date": "2010-04-29",
+        "type": "press",
+        "claim": "GM divested the Federalsburg MD plant (land, assets, ~85 employees) to Kraft Foods; GM had run it since the 2001 Pillsbury acquisition"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.carolinebusiness.com/caroline-county-announces-the-expansion-of-eastern-shore-forest-products-to-federalsburg-45-new-jobs/",
+        "date": "2017-05-17",
+        "type": "press",
+        "claim": "Eastern Shore Forest Products purchased the former Kraft-Heinz Federalsburg site"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "imageryDate": "2023-07",
+    "rationale": "GM divested Federalsburg to Kraft in 2010; the site now operates as Eastern Shore Forest Products (ag/wood processing). Not GM-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

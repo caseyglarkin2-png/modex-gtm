@@ -113,5 +113,32 @@
     "railServed": "No rail spur enters the property.",
     "exitLanes": "Single combined entry/exit via the north service road; lane count inferred."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://web.mmac.org/Food-Products/General-Mills-1756",
+        "date": "2025",
+        "type": "locator",
+        "claim": "Metro Milwaukee Assoc of Commerce directory: GM Milwaukee plant at 4625 S 6th St makes Chex Mix, Muddy Buddies, Bugles, Gardetto's; 260 employees (GM-acquired 1999)"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.breakroom.cc/en-us/jobs/listing/14120838-general-mills-processing-operator-4625-s-6th-street",
+        "date": "2025-09",
+        "type": "press",
+        "claim": "Active 2025 GM Processing Operator req at 4625 S 6th Street, Milwaukee"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "imageryDate": "2025-08",
+    "rationale": "GM-operated savory-snacks plant (Chex Mix, Bugles, Gardetto's) at 4625 S 6th St; core GM snack brands, multiple 2025 production reqs, no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

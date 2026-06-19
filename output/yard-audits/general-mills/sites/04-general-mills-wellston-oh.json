@@ -140,5 +140,31 @@
     "siteAreaAcres": "Perimeter box ~328 acres including extensive wooded buffer; the developed industrial core is roughly 70-90 acres.",
     "urbanRural": "Rural - the plant sits at the edge of the small town of Wellston OH surrounded by woodland and farmland."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.fooddive.com/news/general-mills-100m-totinos-pizza-plant-expand/630950/",
+        "date": "2022",
+        "type": "trade",
+        "claim": "GM invested $100M to expand its Wellston OH Totino's pizza/pizza-rolls plant; 1,000+ FTEs"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.bakingbusiness.com/articles/57161-general-mills-to-invest-100-million-in-plant-expansion",
+        "date": "2022",
+        "type": "trade",
+        "claim": "GM $100M expansion of the Wellston Totino's plant"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GM-owned Totino's frozen-pizza plant (2403 S Pennsylvania Ave); Totino's is a core GM billion-dollar brand, no divestiture/closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

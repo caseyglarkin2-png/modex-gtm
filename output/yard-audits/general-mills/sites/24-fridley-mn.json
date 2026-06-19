@@ -105,5 +105,32 @@
     "buildingCount": "Multi-structure mill campus: main mill tower, concrete grain elevator silos, low metal silo row, and a separate admin/shop building to the south - counted as ~4 distinct buildings.",
     "scale": "Possible truck scale near the grain-receiving silo loadout but not clearly confirmed from imagery - listed uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.world-grain.com/directories/1801-grain-milling-annual/listing/1914-general-mills-inc",
+        "date": "2025-01",
+        "type": "trade",
+        "claim": "World Grain Milling Annual lists the GM Fridley/Minneapolis elevator-and-mill facility"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/cmp/General-Mills/locations/MN/Fridley",
+        "date": "2026-04",
+        "type": "press",
+        "claim": "30+ active GM production/maintenance roles at the Fridley MN plant (oat/flour milling for Cheerios), current 2026"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "imageryDate": "2022-06",
+    "rationale": "GM-operated oat/flour mill (\"Mill O\", 25 44th Ave NE) supplying Cheerios/Lucky Charms, distinct from the GM HQ campus; milling is retained, dozens of current reqs, no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

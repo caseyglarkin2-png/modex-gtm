@@ -130,5 +130,31 @@
     "railServed": "A rail line runs along the north edge of the industrial park but no spur was observed entering the General Mills property itself.",
     "siteAreaAcres": "Perimeter box ~106 acres covering the plant, multiple drop yards, and employee parking."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://ded.mo.gov/press-room/general-mills-expand-hannibal-creating-more-35-new-jobs",
+        "date": "2024-11-20",
+        "type": "press",
+        "claim": "MO econ-dev: GM expanding its Hannibal plant (since 1972, 1,000+ employees) making Nature Valley/Betty Crocker/Old El Paso/Progresso; new Old El Paso taco line + 35 jobs"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.manufacturingdive.com/news/general-mills-to-close-3-plants-as-part-of-supply-chain-resturcting/801919/",
+        "date": "2025",
+        "type": "trade",
+        "claim": "GM late-2025 MO closures are St. Charles (pizza crust) + two Joplin pet-food sites, NOT Hannibal"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Hannibal was expanded Nov 2024 (taco line); the watch-listed late-2025 MO closures were St. Charles + Joplin, explicitly not Hannibal. Clears.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

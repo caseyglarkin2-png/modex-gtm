@@ -122,5 +122,31 @@
     "buildingCount": "Two primary building clusters counted.",
     "scale": "No truck scale identified in imagery - flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.businesswire.com/news/home/20250630432301/en/General-Mills-Completes-Sale-of-U.S.-Yogurt-Business-to-Lactalis",
+        "date": "2025-06-30",
+        "type": "press",
+        "claim": "GM completed sale of US yogurt business to Lactalis; divestiture includes the Reed City, Mich. manufacturing facility"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.generalmills.com/news/press-releases/general-mills-announces-agreements-to-sell-its-north-american-yogurt-business",
+        "date": "2024-09-12",
+        "type": "press",
+        "claim": "GM agreement to sell NA yogurt business to Lactalis/Sodiaal; names Reed City, Mich. plant among facilities transferring"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Reed City is a Yoplait yogurt plant explicitly named in the Lactalis divestiture; sale completed June 30, 2025, so now Lactalis (Midwest Yogurt), not GM.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

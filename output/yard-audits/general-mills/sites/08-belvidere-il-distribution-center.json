@@ -165,5 +165,25 @@
     "buildingCount": "Single distribution building; smaller structures NW and SW are separate, unrelated properties.",
     "trailersVisible": "Mid-construction imagery; ~40-50 trailers visible at docks and in the drop row. Approximate - flagged."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.wifr.com/2024/04/16/general-mills-opens-state-of-the-art-distribution-center/",
+        "date": "2024-04-16",
+        "type": "press",
+        "claim": "GM opened its 1.3M-sq-ft automated DC at 1210 Irene Rd, Belvidere IL (Midwest hub)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "imageryDate": "2025-08",
+    "rationale": "GM's first fully automated DC, opened April 2024; brand-new build, no divestiture/closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

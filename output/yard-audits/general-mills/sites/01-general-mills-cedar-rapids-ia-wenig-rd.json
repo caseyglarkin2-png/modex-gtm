@@ -138,5 +138,31 @@
     "siteAreaAcres": "Perimeter ~224 acres including rail yard and retention/undeveloped land; paved core ~90-110 acres.",
     "urbanRural": "Edge-of-town industrial setting amid farmland and a quarry; classified Rural."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.cedarrapids.org/general-mills-plans-business-expansion-in-cedar-rapids/",
+        "date": "2024",
+        "type": "press",
+        "claim": "GM operates the Cedar Rapids cereal plant (4800 Edgewood Rd SW, ~800 employees) making Cheerios/Lucky Charms/Cocoa Puffs + fruit snacks; $37M line modernization"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.powderbulksolids.com/food-beverage/general-mills-to-upgrade-food-processing-plant-in-iowa",
+        "date": "2024",
+        "type": "trade",
+        "claim": "GM dedicating $37M to upgrade the Cedar Rapids IA food production facility"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Roster idx1 \"Wenig Rd\" was a geocode error onto a wastewater plant; the real and only GM Cedar Rapids site is the Edgewood Rd cereal plant (this file audits it). Active GM-owned cereal plant w/ recent capex; duplicate of idx2.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

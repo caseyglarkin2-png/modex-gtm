@@ -135,5 +135,31 @@
     "entryLanes": "Single combined entry/exit roadway split by the guard island; lane count not crisply countable - estimated 1/1.",
     "buildingCount": "One very large interconnected plant complex (counted as 2 to reflect the main building plus an attached secondary wing); single campus, multipleFacilities=false."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.generalmills.com/careers/jobs/35607?lang=en-us",
+        "date": "2026-04",
+        "type": "locator",
+        "claim": "Active GM careers req: Manufacturing Process & Packaging Engineer - Albuquerque Plant, Albuquerque NM"
+      },
+      {
+        "tier": 1,
+        "url": "https://careers.generalmills.com/careers/jobs/32652?lang=en-us",
+        "date": "2026",
+        "type": "locator",
+        "claim": "Active GM careers req: Plant Technical Manager - Albuquerque Plant"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Multiple current GM careers reqs tag the Albuquerque cereal plant (3501 Paseo del Norte NE); GM actively self-operating, no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

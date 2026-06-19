@@ -107,5 +107,31 @@
     "buildingCount": "Counted as 3: the grain-elevator/silo headhouse, the central mill/processing building, and the long E warehouse - one contiguous campus, multipleFacilities=false.",
     "entryLanes": "Single combined entry/exit via gravel service road; precise lane count not determinable - estimated 1/1."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.generalmills.com/careers/jobs/32549?lang=en-us",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Active GM careers req (General Plant Laborer) at the Great Falls, MT plant on careers.generalmills.com, current June 2026"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.world-grain.com/directories/1801-grain-milling-annual/listing/1654-general-mills-inc",
+        "date": "2025-01",
+        "type": "trade",
+        "claim": "World Grain Milling Annual lists GM Great Falls MT mill (white-flour/durum-semolina swing mill)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GM retains its milling business; active GM-domain careers req at Great Falls + trade milling listing, no closure/sale negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -139,5 +139,32 @@
     "buildingCount": "One large interconnected manufacturing building with attached production/office sections; counted as a single building.",
     "scale": "No truck scale identified in imagery - flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.refrigeratedfrozenfood.com/articles/93731-fs-produce-buys-vacant-former-progresso-soup-plant",
+        "date": "2017-10-23",
+        "type": "trade",
+        "claim": "F&S Produce bought the vacant former Progresso soup plant; GM closed it summer 2017 (~370 jobs)"
+      },
+      {
+        "tier": 2,
+        "url": "https://consumergoods.com/general-mills-close-progresso-soup-plant",
+        "date": "2016-07",
+        "type": "press",
+        "claim": "GM announced closure of its Vineland Progresso soup plant"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "imageryDate": "2026-04",
+    "rationale": "GM closed the Progresso plant summer 2017 and sold the building to F&S Produce Co. for $4.5M; current operator is F&S Fresh Foods, not GM.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -99,5 +99,25 @@
     "railServed": "A rail line runs along the southwest property edge but is separated by a tree buffer with no visible spur entering the GM property.",
     "exitLanes": "Single combined entry/exit driveway; lane count inferred, not crisply resolved in imagery."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://redicincinnati.com/general-mills-chooses-cincinnati-region-for-expansion/",
+        "date": "2021",
+        "type": "press",
+        "claim": "GM's Sharonville (Mosteller Rd) cereal plant expansion ($28M, 33 jobs); makes Cinnamon Toast Crunch, Chex, Fiber One, Cookie Crisp, Cheerios Oat Crunch"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "imageryDate": "2025-06",
+    "rationale": "Active GM cereal plant on Mosteller Rd in Sharonville (Cincinnati metro), 200+ employees, expanded 2021; no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

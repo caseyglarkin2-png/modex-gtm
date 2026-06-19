@@ -87,5 +87,31 @@
     "scale": "No truck scale identified; flagged uncertain.",
     "truckGateCount": "Set to 1 as a nominal value (main dock-side access off South Michigan Ave); there is no true controlled gate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.careerbuilder.com/job-details/seasonal-production-operator-buffalo-ny--794b0a04-2bf4-497a-b16b-64140c9d52ce",
+        "date": "2026",
+        "type": "press",
+        "claim": "Active GM seasonal production operator req at the Buffalo NY Cereal Plant & Flour Mill (seasonal run Jun-Oct 2026)"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.governor.ny.gov/news/governor-cuomo-announces-general-mills-will-invest-25-million-expand-cereal-production-and",
+        "date": "2017",
+        "type": "press",
+        "claim": "GM $25M expansion of the Buffalo plant retaining 417 jobs; makes Cheerios, Lucky Charms, Chex"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Nation's oldest cereal plant (54 S Michigan Ave), GM-operated since 1928 with active 2026 hiring; Cheerios is core GM, no closure/divestiture.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

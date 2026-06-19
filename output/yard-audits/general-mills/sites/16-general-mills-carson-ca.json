@@ -124,5 +124,32 @@
     "postGateStaging": "Wide paved yard inside the gate before the dock faces can hold trucks.",
     "urbanRural": "Dense Watson industrial park within the Los Angeles/Carson metro fabric."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.dairyreporter.com/Article/2019/02/20/General-Mills-to-shutter-yogurt-plant-in-California/",
+        "date": "2019-02-20",
+        "type": "trade",
+        "claim": "GM announced closure of its Carson CA yogurt plant (Yoplait/Mountain High), to complete by end of FY2021"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.prnewswire.com/news-releases/tauber-arons-to-auction-multi-million-dollar-late-model-yogurt-making-equipment-from-former-general-mills-yogurt-facility-in-carson-california-301094392.html",
+        "date": "2020-07",
+        "type": "press",
+        "claim": "Tauber-Arons auctioned equipment from the FORMER GM yogurt facility in Carson; Reich Brothers acquired the real estate"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "imageryDate": "2025-03",
+    "rationale": "Carson was GM's Yoplait yogurt plant, closed by FY2021, equipment auctioned, real estate sold to Reich Brothers; also falls under the 2025 NA yogurt divestiture. Not GM-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

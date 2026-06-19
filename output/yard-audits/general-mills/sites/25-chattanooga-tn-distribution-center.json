@@ -127,5 +127,25 @@
     "drivewayLong": "The Gate 3 driveway runs a long way from Wauhatchie Pike into the interior yard between the buildings before reaching the docks - deep approach, holds 3+ trucks.",
     "backupSensitive": "Wauhatchie Pike is a low-traffic two-lane road and the gate apron has ample paved width, so a truck queue at the gate would not block a public artery."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.yelp.com/biz/general-mills-chattanooga-2",
+        "date": "2026-02",
+        "type": "trade",
+        "claim": "Directory listing for GM at 650 Wauhatchie Pike, Chattanooga TN, updated Feb 2026 (corroboration only, not Tier-1)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "imageryDate": "2025-10",
+    "rationale": "LOW CONFIDENCE: no Tier-1 (no GM locator/careers req for this DC) and no Tier-2 negative; only Tier-3 directory presence. Ships caveated/capped.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

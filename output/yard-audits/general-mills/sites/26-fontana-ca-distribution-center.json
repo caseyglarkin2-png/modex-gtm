@@ -113,5 +113,25 @@
     "staging": "Wide paved yard along the building's west side provides additional interior maneuvering / staging space.",
     "backupSensitive": "Mulberry Ave is a wide multi-lane arterial and the gate apron has ample paved depth, so a truck queue at the gate would not block the public road."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.yelp.com/biz/general-mills-fontana",
+        "date": "2026-05",
+        "type": "trade",
+        "claim": "Directory listing for GM at 11618 Mulberry Ave, Fontana CA, updated May 2026 (corroboration only, not Tier-1)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "imageryDate": "2023-12",
+    "rationale": "LOW CONFIDENCE: no Tier-1, no Tier-2 negative; current directory presence and a known food-grade 3PL footprint in Fontana suggest a likely 3PL-operated GM DC. Operator/tenancy inferred, not proven.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

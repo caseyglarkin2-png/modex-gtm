@@ -127,5 +127,24 @@
     "urbanRural": "Humboldt Industrial Park, Hazle Township - an edge-of-town industrial park surrounded by woods/open land, ~1 mile from I-81. Classified Rural per the small-town-industrial tie-break rule.",
     "connectivityIssue": "Industrial park near I-81 with neighboring large facilities (Amazon, US Cold Storage, Niagara) - cellular coverage likely adequate; false at low confidence."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.bakingbusiness.com/articles/38748-pennant-foods-to-acquire-pillsbury-frozen-dough-line",
+        "date": "2010-01-08",
+        "type": "trade",
+        "claim": "GM sold its frozen bread-dough business including the Hazleton PA plant to Pennant Foods (announced 2009)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GM exited Hazleton in 2009 (frozen-dough business sold to Pennant Foods); FY2025 10-K lists no PA facility; Fresh Start Bakeries now occupies 2 Chestnut Hill Dr. Not GM-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

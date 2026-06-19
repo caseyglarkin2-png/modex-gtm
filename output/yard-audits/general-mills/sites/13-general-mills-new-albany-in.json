@@ -141,5 +141,32 @@
     "buildingCount": "One large interconnected manufacturing complex; counted as a single building.",
     "scale": "No truck scale identified in imagery - flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.foodbusinessnews.net/articles/12000-former-pillsbury-plant-to-become-distillery",
+        "date": "2018-06-15",
+        "type": "trade",
+        "claim": "Former GM Pillsbury plant (closed 2016) sold to The Sazerac Company to become a distillery"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.prnewswire.com/news-releases/new-mill-capital-holdings-and-tiger-group-sell-former-general-mills-pillsbury-plant-to-the-sazerac-company-300666966.html",
+        "date": "2018-06",
+        "type": "press",
+        "claim": "New Mill Capital/Tiger Group sold the former GM Pillsbury New Albany plant to Sazerac"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "imageryDate": "2026-03",
+    "rationale": "GM closed the Pillsbury plant in 2016; sold to Sazerac in June 2018 (now Northwest Ordinance Distilling), not GM-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -110,5 +110,32 @@
     "multipleFacilities": "Single large industrial complex; counted as one campus. buildingCount of 3 reflects the main plant building plus 2 smaller attached/adjacent structures.",
     "connectivityIssue": "Rural setting (small unincorporated community of Martel) but along a road with utility lines and a rail corridor; cellular coverage likely adequate - low-confidence false."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.bakingbusiness.com/articles/30624-mennel-in-pact-to-acquire-general-mills-bakery-mix-plant",
+        "date": "2016-07-22",
+        "type": "trade",
+        "claim": "Mennel Milling agreement to acquire GM's Martel OH bakery-mix plant (~$18M, ~180 employees), close by Nov 1 2016"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.foodengineeringmag.com/articles/95978-general-mills-to-close-new-jersey-ohio-plants",
+        "date": "2016-07-26",
+        "type": "trade",
+        "claim": "GM to exit its NJ (Vineland) and OH (Martel) plants in restructuring"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "imageryDate": "2023-09",
+    "rationale": "GM sold the Martel bakery-mix plant to The Mennel Milling Company in late 2016; gate signage reads \"Mennel\". Not GM-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

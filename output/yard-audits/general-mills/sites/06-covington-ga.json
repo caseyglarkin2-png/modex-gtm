@@ -107,5 +107,31 @@
     "siteAreaAcres": "Perimeter box ~146 acres but the property is heavily forested; usable paved industrial core is roughly 45-55 acres.",
     "railServed": "No rail spur visible entering the property; the diagonal cleared strips east of the plant are a power-line right-of-way, not rail."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://georgia.org/press-release/general-mills-expands-covington-operations-creates-40-new-jobs",
+        "date": "2020",
+        "type": "press",
+        "claim": "GA econ-dev: GM expands Covington cereal operations (Cinnamon Toast Crunch + dried fruit snacks), ~400 employees + 40 jobs"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.foodprocessing.com/product-development/breakfast-foods/news/11302058/general-mills-to-increase-capacity-in-covington-georgia",
+        "date": "2020",
+        "type": "trade",
+        "claim": "GM increasing cereal capacity at Covington GA (Cinnamon Toast Crunch)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GM-owned cereal plant making Cinnamon Toast Crunch; cereal is core GM, capacity recently expanded, no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

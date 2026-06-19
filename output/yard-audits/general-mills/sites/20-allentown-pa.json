@@ -116,5 +116,31 @@
     "buildingCount": "One large interconnected industrial building complex.",
     "trailersVisible": "Only ~5 trailers visible at/near the docks in the imagery captured - low truck activity consistent with the current furniture-manufacturing tenant."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.sec.gov/Archives/edgar/data/0000040704/000089710107001826/genmills073516_8k.htm",
+        "date": "2007-08",
+        "type": "press",
+        "claim": "GM 8-K: board approved Aug 2007 exit from frozen-waffle business + closure of the Allentown PA plant (111 employees), completed by FY2009"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.manufacturing.net/operations/news/13062557/general-mills-closing-plants-cutting-jobs",
+        "date": "2007-09",
+        "type": "trade",
+        "claim": "Trade press: GM closing the Allentown frozen-waffle plant in the FY2008 restructuring"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GM closed its Allentown frozen-waffle plant (2008-09); 2132 Downyflake Lane is now the American Atelier Inc (AAi) furniture factory. Not GM-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

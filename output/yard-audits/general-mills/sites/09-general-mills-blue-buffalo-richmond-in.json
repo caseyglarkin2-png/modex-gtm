@@ -112,5 +112,32 @@
     "scale": "No truck scale identified in imagery - flagged uncertain.",
     "buildingCount": "Three primary buildings counted; smaller ancillary structures not counted separately."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://agrinovusindiana.com/2023/03/23/general-mills-announces-second-200m-blue-buffalo-expansion-in-four-years/",
+        "date": "2023-03-23",
+        "type": "press",
+        "claim": "GM announces second $200M Blue Buffalo expansion at its Richmond/Wayne County production complex"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.areadevelopment.com/newsitems/3-24-2023/blue-buffalo-richmond-indiana.shtml",
+        "date": "2023-03-24",
+        "type": "press",
+        "claim": "Blue Buffalo (GM) expands Richmond IN dry pet-food production complex"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "imageryDate": "2024-08",
+    "rationale": "Blue Buffalo is a current GM brand; GM opened the plant 2019 and twice expanded it ($200M each, latest 2023), no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
