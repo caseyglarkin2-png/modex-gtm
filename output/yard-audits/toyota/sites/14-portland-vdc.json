@@ -114,5 +114,31 @@
     "siteAreaAcres": "Perimeter box ~48 acres covering the TLS-operated VDC building and vehicle lots within Terminal 4; the broader Terminal 4 also hosts container/other operations not part of the Toyota lease.",
     "urbanRural": "Within the Portland metro industrial waterfront (Rivergate / Terminal 4); classified Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.portofportland.com/Terminal4",
+        "date": "2024",
+        "type": "port",
+        "claim": "Since the 1970s Toyota has been a fixture at Terminal 4, employing hundreds at its auto import and processing facility"
+      },
+      {
+        "tier": 1,
+        "url": "https://pressroom.toyota.com/toyota-logistics-services-fact-sheet/",
+        "date": "2009-06",
+        "type": "press",
+        "claim": "Names the TLS Portland VDC (LEED Gold) and lists Oregon among TLS operating states"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Port of Portland (landlord) self-attests Toyota still operates its T4 auto import/processing facility; no lease-end/closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

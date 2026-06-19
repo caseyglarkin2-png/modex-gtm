@@ -151,5 +151,31 @@
     "siteAreaAcres": "~275 acres fenced plant footprint (excludes the adjacent solar farm).",
     "_note": "TMMAL is the Toyota engine plant (V6/V8 engines), distinct from the nearby Mazda-Toyota JV assembly plant (idx 6). The two are separate Huntsville-area Toyota facilities."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://pressroom.toyota.com/the-heartbeat-of-toyota-lies-in-alabama/",
+        "date": "2024-01",
+        "type": "press",
+        "claim": "TMMAL Huntsville engine plant; only plant building 4-cyl, V6, V8 under one roof; 1,500+ team, 3,000+ engines/day"
+      },
+      {
+        "tier": 3,
+        "url": "https://businessalabama.com/toyota-marks-record-for-engine-production/",
+        "date": "2025-01",
+        "type": "press",
+        "claim": "Toyota Alabama engine plant produced over 895,000 engines in 2024, a new record"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Operational engine plant (distinct from MTMUS assembly JV); record 2024 output + ongoing investment; no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

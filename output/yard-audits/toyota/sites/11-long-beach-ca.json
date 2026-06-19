@@ -138,5 +138,31 @@
     "multipleFacilities": "One large multi-section manufacturing complex (stamping/welding/cat-converter) plus support structures and a separate office building — single operational facility, not a multi-building campus.",
     "siteAreaAcres": "Web sources cite ~30 acres; parcel boundaries in the dense industrial district are hard to delineate from imagery — perimeter box estimates ~27 acres."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://pressroom.toyota.com/good-as-gold-tabc-the-can-do-plant-celebrates-50-years-of-success/",
+        "date": "2022-09",
+        "type": "press",
+        "claim": "TABC operating in Long Beach; ~350 team; stamps sheet metal, steering columns, catalytic converters; primary supplier of Tacoma parts"
+      },
+      {
+        "tier": 1,
+        "url": "https://pressroom.toyota.com/27-million-investment-to-expand-toyotas-long-beach-manufacturing-capabilities/",
+        "date": "2022-03",
+        "type": "press",
+        "claim": "$27M investment in TABC for first coil-fed laser blanking line"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Operating; 2015 layoff was assembly-to-parts business-model shift, not closure; fresh $27M investment 2022, ~350 staff.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

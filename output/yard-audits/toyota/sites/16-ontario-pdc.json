@@ -138,5 +138,24 @@
     "fastLaneOpportunity": "Wide paved truck apron and drop-yard lanes give ample room for an express/bypass lane at the gate.",
     "siteAreaAcres": "Perimeter box ~42 acres for the building + south truck yard / drop yard; flagged approximate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.automotivelogistics.media/supply-chain-planning/toyota-part-1-cornerstone-of-a-strong-supply-chain/181723",
+        "date": "2015-03",
+        "type": "press",
+        "claim": "North American Parts Center California (NAPCC) in Ontario CA ships 280,000+ pieces/day across 260,000+ unique part numbers"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Toyota largest US parts procurement/distribution center (NAPCC) at Ontario CA confirmed operating; 2026 locator corroborates; no closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

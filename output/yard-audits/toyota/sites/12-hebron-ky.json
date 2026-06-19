@@ -136,5 +136,24 @@
     "urbanRural": "Industrial-park setting near the CVG airport / Hebron, KY — edge-of-town industrial amid open land and other big-box DCs; classified Rural per rubric. CVG corridor has good connectivity, so connectivityIssue = false.",
     "siteAreaAcres": "Perimeter box ~93 acres capturing the warehouse plus its surrounding drop yards and parking."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://pressroom.toyota.com/parts-in-motion-inside-the-north-american-parts-center-kentucky-operations/",
+        "date": "2024-01",
+        "type": "locator",
+        "claim": "NAPCK is Toyota largest parts procurement/distribution facility under one roof; 86-acre Boone County KY site; ~540 team; ~500k parts/day"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Toyota parts procurement/distribution hub feeding 12 US PDCs; self-attested current operations.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

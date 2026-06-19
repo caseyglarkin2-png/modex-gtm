@@ -110,5 +110,24 @@
     "scale": "No truck scale identified. False.",
     "siteAreaAcres": "Perimeter box ~16 acres for the building + dock yard + drop yard + employee parking."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://tri-townchamber.org/list/member/toyota-motor-sales-boston-pdc-1379",
+        "date": "2025",
+        "type": "econ-dev",
+        "claim": "Tri-Town Chamber of Commerce (Mansfield MA) lists Toyota Motor Sales Boston PDC as a member business"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FLAG low-confidence: no Tier-1 self-attested locator found; local chamber + multiple current locators agree Toyota Boston/Mansfield PDC at 440 Forbes Blvd operates, no closure signal; rated probable pending Tier-1.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

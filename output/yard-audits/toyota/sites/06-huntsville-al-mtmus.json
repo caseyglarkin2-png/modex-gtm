@@ -136,5 +136,31 @@
     "truckGateCount": "Estimated 2 truck access points; the campus has several gated road junctions, exact count uncertain.",
     "siteAreaAcres": "~504 acres for the fenced campus footprint."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://pressroom.toyota.com/10-things-to-know-about-mazda-toyota-manufacturing/",
+        "date": "2023-05-05",
+        "type": "press",
+        "claim": "MTM is a 50/50 Mazda-Toyota JV producing Toyota Corolla Cross (and Mazda CX-50) on two lines in Huntsville AL"
+      },
+      {
+        "tier": 1,
+        "url": "https://whnt.com/news/huntsville/huntsvilles-mazda-toyota-plant-suspending-production-for-canadian-market-to-focus-on-u-s/",
+        "date": "2025-04",
+        "type": "press",
+        "claim": "Apr 2025: MTM still building for North American market; only Canada-market trim suspended, plant operations unaffected"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "50/50 Mazda-Toyota JV (operator marked self for schema); Toyota co-operates active Corolla Cross assembly; no closure negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

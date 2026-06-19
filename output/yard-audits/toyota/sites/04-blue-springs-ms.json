@@ -135,5 +135,31 @@
     "railServed": "Rail-served (standard for an assembly plant of this scale; planned with rail access).",
     "perimeter": "Box covers the core developed campus; TMMMS owns extensive additional forested buffer land beyond it."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://pressroom.toyota.com/facility/toyota-motor-manufacturing-mississippi/",
+        "date": "2025-11",
+        "type": "locator",
+        "claim": "TMMMS Blue Springs MS, 2,400 team assembles Corolla; 188,543 vehicles in 2025; 1,500+ acre site"
+      },
+      {
+        "tier": 1,
+        "url": "https://pressroom.toyota.com/toyota-boosts-hybrid-production-with-912-million-investment-creating-252-new-u-s-manufacturing-jobs/",
+        "date": "2025-11-18",
+        "type": "press",
+        "claim": "$125M into Blue Springs MS to add hybrid Corolla; plant employs 2,400"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Two Tier-1 Toyota sources confirm current Corolla assembly + Nov 2025 expansion; no closure/WARN negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

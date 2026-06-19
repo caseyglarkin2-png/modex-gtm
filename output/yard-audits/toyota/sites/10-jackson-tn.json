@@ -130,5 +130,31 @@
     "railServed": "No active rail spur runs into the plant property.",
     "urbanRural": "Large isolated industrial tract on the edge of Jackson, TN surrounded by farmland and woods — Rural per rubric, but a sizeable town is nearby so connectivity is fine."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://pressroom.toyota.com/facility/toyota-motor-manufacturing-tennessee/",
+        "date": "2025-01",
+        "type": "locator",
+        "claim": "Toyota Motor Manufacturing Tennessee (former Bodine Aluminum), Jackson TN; casts engine blocks + hybrid transaxle cases; ~450 team"
+      },
+      {
+        "tier": 1,
+        "url": "https://pressroom.toyota.com/a-renewed-purpose-toyota-tennessee-builds-engine-parts-from-recycled-aluminum/",
+        "date": "2025-01",
+        "type": "press",
+        "claim": "$71.4M investment + 33 new jobs to increase hybrid transaxle/engine-block production at Jackson TN"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Current Toyota operation (renamed from Bodine Aluminum 2020); 2025 expansion confirms active operations.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

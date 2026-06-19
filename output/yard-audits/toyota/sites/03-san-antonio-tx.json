@@ -156,5 +156,31 @@
     "railServed": "Rail-served (standard for an assembly plant of this scale; the plant was master-planned with rail access).",
     "perimeter": "Box covers the core developed campus including the supplier park; TMMTX owns substantial additional buffer/test-track land beyond it."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://pressroom.toyota.com/facility/toyota-motor-manufacturing-texas/",
+        "date": "2025-12",
+        "type": "locator",
+        "claim": "TMMTX San Antonio assembles Tundra, Tundra HEV, Sequoia HEV; 3,700+ employees; 197,506 vehicles in 2025"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.ksat.com/news/local/2026/05/15/toyota-plans-to-expand-manufacturing-plant-in-san-antonio/",
+        "date": "2026-05-15",
+        "type": "press",
+        "claim": "Toyota filed May 2026 plans for $2B new assembly line at active San Antonio plant"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tier-1 pressroom confirms active Tundra/Sequoia assembly + 2026 expansion; no negative for this plant.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

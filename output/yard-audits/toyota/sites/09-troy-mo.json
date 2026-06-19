@@ -104,5 +104,31 @@
     "multipleFacilities": "Single primary plant building plus ancillary structures (water treatment, electrical substation, smaller support buildings) — one operational facility, not a multi-building campus.",
     "railServed": "No rail spur visible entering the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://pressroom.toyota.com/facility/toyota-motor-manufacturing-missouri/",
+        "date": "2025-11",
+        "type": "locator",
+        "claim": "Toyota Motor Manufacturing Missouri (former Bodine Aluminum), Troy MO; cylinder-head casting; largest private employer in Lincoln County"
+      },
+      {
+        "tier": 1,
+        "url": "https://pressroom.toyota.com/toyota-missouri-assembles-essential-components-for-vehicles-in-the-u-s/",
+        "date": "2025-11",
+        "type": "press",
+        "claim": "$57.1M investment + 57 new jobs + new hybrid cylinder-head line at Troy MO plant"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Current Toyota operation (renamed from Bodine Aluminum 2020); active Nov 2025 expansion confirms ongoing operations.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

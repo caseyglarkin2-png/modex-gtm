@@ -155,5 +155,31 @@
     "railServed": "Rail spur serves the plant (standard for an assembly plant of this scale; rail-served areas visible on campus).",
     "perimeter": "Box covers the core developed plant campus; TMMI owns substantial additional open buffer land beyond it."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://pressroom.toyota.com/toyota-charges-up-investment-and-jobs-in-u-s-manufacturing/",
+        "date": "2024-04",
+        "type": "press",
+        "claim": "$1.4B in Princeton IN plant for BEV/battery; assembles Sienna, Highlander, Grand Highlander, Lexus TX"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.evansvilleregion.com/business-retention-expansion-bre/toyota-announces-200-million-investment-at-toyota-indiana-in-princeton/",
+        "date": "2026-03",
+        "type": "econ-dev",
+        "claim": "Toyota Indiana (Princeton) currently produces Grand Highlander, Highlander, Lexus TX, Sienna Hybrid; $200M expansion"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tier-1 sources (latest Mar 2026) confirm active multi-model production at TMMI Princeton; no closure/sale negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

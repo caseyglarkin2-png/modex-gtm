@@ -133,5 +133,31 @@
     "railServed": "No rail spur runs into the property; the plant ships engines/transmissions by truck.",
     "siteAreaAcres": "~311 acres for the fenced industrial footprint; excludes the adjacent solar farm on a separate parcel to the east."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://pressroom.toyota.com/facility/toyota-motor-manufacturing-west-virginia/",
+        "date": "2025-11-18",
+        "type": "locator",
+        "claim": "TMMWV Buffalo WV active: TNGA 4-cyl engines, transmissions, hybrid transaxles; ~2,077 team; $3.3B investment"
+      },
+      {
+        "tier": 1,
+        "url": "https://westvirginia.gov/west-virginia-secures-largest-share-of-toyotas-912-million-u-s-hybrid-manufacturing-investment/",
+        "date": "2025-11",
+        "type": "econ-dev",
+        "claim": "WV Div. of Economic Development: Buffalo plant largest recipient of Toyota $912M US hybrid investment, +80 jobs"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Toyota Nov 2025 pressroom/facility page + WV econ-dev confirm active powertrain ops + expansion; no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -114,5 +114,31 @@
     "siteAreaAcres": "Perimeter box ~58 acres covering the TLS processing buildings and contiguous vehicle lots fronting E Port St between the Port Newark Channel wharf and the rail corridor.",
     "urbanRural": "Within the Port Newark/Elizabeth marine-terminal complex in the New York metro; classified Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.toyota.com/us/en/c/logistics-distribution-supply-chain-mgt-jobs",
+        "date": "2025",
+        "type": "locator",
+        "claim": "Active TLS Newark VDC job postings (Production Track Team Member, PPO/POE) at the Newark vehicle distribution center in 2025"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.automotivelogistics.media/vehicle-logistics/first-order-of-business-at-toyota/179292",
+        "date": "2023",
+        "type": "press",
+        "claim": "TLS runs three port operations directly: Long Beach, Portland, and Newark"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active 2025 TLS Newark hiring + 2023 trade-press confirm Newark is one of TLS three directly-run ports; no closure/relocation signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

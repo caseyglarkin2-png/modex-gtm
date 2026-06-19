@@ -107,5 +107,31 @@
     "siteAreaAcres": "Perimeter box ~62 acres covering the contiguous TLS fenced lots and processing buildings between Pico Ave / the rail corridor and the Pier B wharf.",
     "truckGateCount": "At least one main rail-side gate plus a secondary lot access; estimated 2, flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://pressroom.toyota.com/powered-by-100-renewable-energy-toyota-logistics-services-long-beach-facility/",
+        "date": "2024-05",
+        "type": "press",
+        "claim": "TLS Long Beach facility, 40+ years processing Toyota/Lexus vehicles, first port processing facility powered by 100% onsite renewable; 200,000+ vehicles/yr"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.automotivelogistics.media/vehicle-logistics/first-order-of-business-at-toyota/179292",
+        "date": "2023",
+        "type": "press",
+        "claim": "TLS runs three port operations directly: Long Beach, Portland, and Newark"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Dated 2024 Toyota pressroom self-attests TLS operates Long Beach VDC at the port; no closure/relocation signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

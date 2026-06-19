@@ -149,5 +149,38 @@
     "railServed": "No rail spur observed entering the operational footprint in current imagery.",
     "siteAreaAcres": "~1,116 acres for the active/operational footprint estimated here; the full Greensboro-Randolph Megasite parcel is ~1,850 acres."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://pressroom.toyota.com/facility/toyota-battery-manufacturing-north-carolina/",
+        "date": "2025-06",
+        "type": "locator",
+        "claim": "TBMNC began shipping batteries June 2025; four HEV lines in operation; started HEV battery production in 2025"
+      },
+      {
+        "tier": 1,
+        "url": "https://global.toyota/en/newsroom/corporate/42193203.html",
+        "date": "2025-06",
+        "type": "press",
+        "claim": "Toyota powers on new North Carolina automotive battery plant; production operational"
+      },
+      {
+        "tier": 1,
+        "url": "https://pressroom.toyota.com/10-things-to-know-toyotas-new-battery-manufacturing-plant-in-north-carolina/",
+        "date": "2025-06",
+        "type": "press",
+        "claim": "First products (HEV batteries for Corolla Cross, Camry, RAV4) shipping to Toyota plants in AL and KY"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Watch item cleared: Toyota PR confirms HEV battery production STARTED and SHIPPED June 2025 (operational, not under-construction); BEV/PHEV phases still ramping.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
