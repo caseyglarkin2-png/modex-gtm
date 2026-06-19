@@ -75,6 +75,14 @@ export function SiteDetailPanel({ site, onClose, autoPlay = false }: Props) {
   const c = site.classification;
   const ym = site.yardMetrics;
 
+  // Layer 2 — observed vs. modeled provenance. yardMetrics + classification are
+  // OBSERVED facts read off imagery; the imagery date is the audit's evidence
+  // stamp. Tiles carry no capture date, so the verification block's imageryDate
+  // is the single source. When absent we still label values "observed" but omit
+  // the date rather than invent one.
+  const imageryDate = site.verification?.imageryDate ?? null;
+  const observedLabel = imageryDate ? `observed · imagery ${imageryDate}` : 'observed';
+
   // #3 — per-site read. The factor scoring is shared with the atlas glow (#2)
   // so the map and the panel always tell the same story about a site.
   const { raw: complexityRaw, factors: complexityFactors } = scoreSite(site);
@@ -152,8 +160,13 @@ export function SiteDetailPanel({ site, onClose, autoPlay = false }: Props) {
             on a site with no notable factors (compact offices, small docks). */}
         {insightLines.length > 0 && (
           <section data-ms-section-id="site-what-this-means" className="mb-5">
-            <div className="mb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-[#00B4FF]/85">
-              What this means
+            <div className="mb-2 flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+              <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-[#00B4FF]/85">
+                What this means
+              </span>
+              {/* Layer 2 — this is an inference from the observed counts, not an
+                  observed fact. Label it modeled so the line stays honest. */}
+              <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#00B4FF]/70">modeled</span>
             </div>
             <div className="rounded-lg border border-[#00B4FF]/[0.16] bg-[#00B4FF]/[0.04] px-4 py-3">
               {complexityLevel && (
@@ -185,9 +198,12 @@ export function SiteDetailPanel({ site, onClose, autoPlay = false }: Props) {
             Show full audit detail
           </summary>
           <div className="border-t border-[#00B4FF]/[0.12] px-4 py-4">
-            {/* Yard metrics */}
+            {/* Yard metrics — OBSERVED counts read off the imagery (Layer 2). */}
             <div className="mb-4">
-              <div className="mb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-white/55">Yard</div>
+              <div className="mb-2 flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-white/55">Yard</span>
+                <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#00C878]/80">{observedLabel}</span>
+              </div>
               <dl className="grid grid-cols-2 gap-3 sm:grid-cols-3">
                 {metric('Dock doors', ym.dockDoorCount?.toLocaleString())}
                 {metric('Trailers visible', ym.trailersVisible?.toLocaleString())}
@@ -200,9 +216,13 @@ export function SiteDetailPanel({ site, onClose, autoPlay = false }: Props) {
               </dl>
             </div>
 
-            {/* Classification — bands and key booleans, not all 22 fields */}
+            {/* Classification — bands and key booleans, not all 22 fields.
+                OBSERVED off the same imagery (Layer 2). */}
             <div className={site.dossierExcerpt ? 'mb-4' : ''}>
-              <div className="mb-2 font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-white/55">Classification</div>
+              <div className="mb-2 flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
+                <span className="font-mono text-[10px] font-semibold uppercase tracking-[0.18em] text-white/55">Classification</span>
+                <span className="font-mono text-[9px] uppercase tracking-[0.14em] text-[#00C878]/80">{observedLabel}</span>
+              </div>
               <dl className="grid grid-cols-2 gap-3 sm:grid-cols-3">
                 {metric('Dock band', c.dockDoors)}
                 {metric('Drop band', c.dropArea)}
@@ -234,19 +254,32 @@ export function SiteDetailPanel({ site, onClose, autoPlay = false }: Props) {
             already filled in. (Casey 2026-05-29: use sales@freightroll
             for now; swap to audits@yardflow.ai when the sending domain
             is rebuilt.) */}
-        {site.uncertainFields.length > 0 && (
-          <p className="border-t border-[#00B4FF]/[0.16] pt-3 text-[11px] text-white/55">
-            Low-confidence fields: {site.uncertainFields.join(', ')}. Imagery couldn&rsquo;t resolve these.{' '}
-            <a
-              href={`mailto:sales@freightroll.com?subject=Audit correction: ${encodeURIComponent(site.name)}&body=${encodeURIComponent(
-                `Site: ${site.name}\nField: \nCorrection: \n\n`,
-              )}`}
-              data-ms-cta-id="site-audit-correction-mailto"
-              className="text-white/75 underline underline-offset-2 transition-colors hover:text-[#00B4FF]"
-            >
-              Happy to be corrected.
-            </a>
-          </p>
+        {/* Layer 2 — confessed uncertainty. What orbit can't resolve, named
+            plainly, with the on-site audit as the confirming step. Confidence
+            is surfaced alongside so a low-confidence read is never silent. */}
+        {(site.uncertainFields.length > 0 || site.confidence !== 'high') && (
+          <div className="border-t border-[#00B4FF]/[0.16] pt-3">
+            <div className="mb-1 font-mono text-[9px] uppercase tracking-[0.16em] text-white/45">
+              What we can&rsquo;t see from orbit{' '}
+              <span className="text-white/30">·</span>{' '}
+              <span className="text-white/55">read confidence: {site.confidence}</span>
+            </div>
+            <p className="text-[11px] leading-relaxed text-white/55">
+              {site.uncertainFields.length > 0
+                ? `Imagery couldn't fully resolve ${site.uncertainFields.join(', ')}. `
+                : 'A few fields read at lower confidence from imagery alone. '}
+              The 30-minute on-site audit confirms it.{' '}
+              <a
+                href={`mailto:sales@freightroll.com?subject=Audit correction: ${encodeURIComponent(site.name)}&body=${encodeURIComponent(
+                  `Site: ${site.name}\nField: \nCorrection: \n\n`,
+                )}`}
+                data-ms-cta-id="site-audit-correction-mailto"
+                className="text-white/75 underline underline-offset-2 transition-colors hover:text-[#00B4FF]"
+              >
+                Happy to be corrected.
+              </a>
+            </p>
+          </div>
         )}
 
         <a

@@ -14,6 +14,8 @@ import { ShareMicrosite } from './share-microsite';
 import { DriverJourneySpotlight } from './driver-journey-spotlight';
 import { NetworkInsight } from './network-insight';
 import { DemoReframe } from './demo-reframe';
+import { SurprisingFindings } from './surprising-findings';
+import { RoiHandoffClose } from './roi-handoff-close';
 
 /**
  * Top-level client surface for /demo/[account]. Manages cross-component
@@ -165,6 +167,43 @@ export function DemoSurface({
         ? `${siteCount} of ~${coverageNote.estimatedFootprint} facilities${coverageNote.auditedScope ? ` (${coverageNote.auditedScope} scope)` : ''}`
         : `${siteCount} facilities audited`;
 
+  // Layer 3 — core-sample framing. When the pack carries a sourced network
+  // denominator, the audited sites are framed as a deliberate CORE SAMPLE of
+  // the real network ("we core-sampled N of ~M sites"), with the rationale and
+  // a cited footnote. When `networkCount` is absent (most packs, pre-Phase 3),
+  // this degrades to nothing and the neutral scope subhead carries the framing.
+  // Banned words ("only", "partial", "preliminary", "incomplete") never appear.
+  const { networkCount, networkCountSource, networkCountAsOf, sampleRationale } = pack.account;
+  // Derive a sensible facility noun from the account archetype; default "sites".
+  const facilityNoun = (() => {
+    switch (pack.account.archetype) {
+      case 'manufacturer':
+      case 'oem-automotive':
+        return 'plants';
+      case 'beverage':
+        return 'plants and DCs';
+      case 'cpg':
+        return 'plants and DCs';
+      case 'retailer':
+      case 'grocer-distributor':
+        return 'DCs';
+      case '3pl':
+      case 'logistics-carrier':
+        return 'facilities';
+      default:
+        return 'sites';
+    }
+  })();
+  const coreSample =
+    typeof networkCount === 'number' && networkCount > 0
+      ? {
+          line: `We core-sampled ${siteCount.toLocaleString()} of ~${networkCount.toLocaleString()} ${facilityNoun}${sampleRationale ? ` — ${sampleRationale}` : ''}`,
+          footnote: networkCountSource
+            ? `Network size: ${networkCountSource}${networkCountAsOf ? ` (${networkCountAsOf})` : ''}`
+            : null,
+        }
+      : null;
+
   return (
     <div
       className={mode === 'standalone' ? 'flex min-h-screen flex-col bg-[#050505] pb-24 text-white md:pb-0' : 'flex h-[600px] flex-col rounded-lg border border-[#00B4FF]/[0.16] shadow-[0_24px_64px_rgba(0,0,0,0.40)]'}
@@ -264,6 +303,22 @@ export function DemoSurface({
                 <span className="text-white/30" aria-hidden>·</span>
                 <span className="whitespace-nowrap"><span className="tabular-nums">{railServed}</span> rail-served</span>
               </p>
+              {/* Layer 3 — core-sample line. Only renders when the pack carries
+                  a sourced network denominator; frames the audit as a deliberate
+                  representative sample of the real network, with a cited
+                  footnote. Degrades to nothing without `networkCount`. */}
+              {coreSample && (
+                <div data-core-sample className="mt-2">
+                  <p className="text-[13px] font-medium leading-snug text-white/85">
+                    {coreSample.line}
+                  </p>
+                  {coreSample.footnote && (
+                    <p className="mt-0.5 text-[10.5px] leading-snug text-white/40">
+                      {coreSample.footnote}
+                    </p>
+                  )}
+                </div>
+              )}
               {/* A.T5 — brand attribution strip. Sits below the scope/metrics
                   subhead, above any gallery-framing line. Clarifies that we
                   are not the prospect's vendor + names where the data came
@@ -433,6 +488,11 @@ export function DemoSurface({
       {/* §4 Scale — the single "what's my opportunity + what's it worth" beat. */}
       {mode === 'standalone' && <NetworkInsight pack={pack} />}
 
+      {/* §4b The turn — "What surprised us." Placed AFTER the atlas + build
+          sections: the forward-worthy moment once the prospect has seen their
+          real network. Self-suppresses on packs without 3 findings. */}
+      {mode === 'standalone' && <SurprisingFindings pack={pack} />}
+
       {/* §5 Stress-test — the simulator, demoted from a top-level tab to an
           opt-in expander (power feature, not a parallel mode). */}
       {mode === 'standalone' && (
@@ -465,6 +525,11 @@ export function DemoSurface({
           </div>
         </section>
       )}
+
+      {/* The /roi handoff close — proof -> price. Turns the evidence into the
+          number, seeded with this pack. Renders NO network dollar figure (the
+          model is produced on /roi). Sits just above the booking close. */}
+      {mode === 'standalone' && <RoiHandoffClose pack={pack} bookHref={bookAuditHref} />}
 
       {/* The reply — low-friction conversion close. The whole page funnels to
           a response, not a hard booking. */}

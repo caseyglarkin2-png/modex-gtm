@@ -1,30 +1,19 @@
 import type { DemoPack } from '@/lib/demo/pack-schema';
-import { buildAccountRoiModel } from '@/lib/demo/roi-model';
-import { buildROIDashboard } from '@/lib/microsites/roi';
 import { RoiCtaButton } from './roi-cta-button';
 
 /**
- * Network band — the single "what's MY opportunity?" beat between the hero run
- * and the interactive atlas. Fuses two formerly-competing sections (the audit
- * friction profile + the inline ROI) into one block: the audit reveals THIS
- * network's friction, tied to the real YNS levers, and what removing it is
- * worth, on the same engine the full calculator opens on.
+ * Network band — the "what's MY opportunity?" beat between the hero run and the
+ * interactive atlas. Surfaces THIS network's audited friction profile tied to
+ * the real YNS levers.
  *
- * Everything is computed from the audited classification fields and the shared
- * ROI engine — no fabricated numbers. Scale totals are intentionally NOT
- * repeated here (the page header already carries facilities / dock doors /
- * trailer spots / rail). Self-suppresses on packs without classification.
+ * Layer 4 (complementarity contract): /demo is the EVIDENCE surface and states
+ * NO network dollar figure. The modeled value lives exclusively at /roi. This
+ * section therefore shows only audit-derived counts (real facts off the
+ * classification JSON) and hands the dollar question to the calculator via the
+ * CTA. Scale totals are intentionally NOT repeated here (the page header
+ * already carries facilities / dock doors / trailer spots / rail).
+ * Self-suppresses on packs without classification.
  */
-
-function compactUsd(value: number): string {
-  if (!Number.isFinite(value)) return '$0';
-  const abs = Math.abs(value);
-  const sign = value < 0 ? '-' : '';
-  if (abs >= 1_000_000_000) return `${sign}$${parseFloat((abs / 1_000_000_000).toFixed(1))}B`;
-  if (abs >= 1_000_000) return `${sign}$${parseFloat((abs / 1_000_000).toFixed(1))}M`;
-  if (abs >= 1_000) return `${sign}$${parseFloat((abs / 1_000).toFixed(1))}K`;
-  return `${sign}$${Math.round(abs).toLocaleString()}`;
-}
 
 export function NetworkInsight({ pack }: { pack: DemoPack }) {
   const sites = pack.network.sites ?? [];
@@ -79,19 +68,6 @@ export function NetworkInsight({ pack }: { pack: DemoPack }) {
     .sort((a, b) => b.n - a.n)
     .slice(0, 4);
 
-  // Modeled value — same engine the full calculator opens on (see roi-model.ts).
-  const dash = buildROIDashboard(buildAccountRoiModel(pack));
-  const annual = dash.comparison.yardFlow.total;
-  const payback = dash.highLevelStats.paybackAllSavingsMonths;
-  const roi =
-    annual > 0
-      ? [
-          { label: 'Modeled annual value', value: `${compactUsd(annual)}/yr` },
-          payback != null ? { label: 'Modeled payback', value: `${payback.toFixed(1)} mo` } : null,
-          { label: 'Facilities modeled', value: dash.totalFacilities.toLocaleString() },
-        ].filter((s): s is { label: string; value: string } => s !== null)
-      : [];
-
   return (
     <section
       data-ms-section-id="network-insight"
@@ -123,39 +99,28 @@ export function NetworkInsight({ pack }: { pack: DemoPack }) {
           ))}
         </div>
 
-        {/* Modeled value — the fused ROI beat. Sits under the friction profile
-            as the "what removing it is worth" answer, not a separate band. */}
-        {roi.length > 0 && (
-          <div className="mt-6 border-t border-white/10 pt-5">
-            <div className="flex flex-wrap items-end justify-between gap-3">
-              <div className="font-mono text-[10px] uppercase tracking-[0.20em] text-[#00B4FF]/85">
-                Modeled ROI
-              </div>
-              <RoiCtaButton
-                pack={pack}
-                ctaId="microsite-inline-roi"
-                utmMedium="demo-inline-roi"
-                source="microsite"
-                className="inline-flex min-h-[36px] items-center gap-1.5 rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.12] px-3 py-1.5 text-xs font-bold text-white transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22] hover:shadow-[0_0_22px_rgba(0,180,255,0.32)]"
-              >
-                Open the full calculator →
-              </RoiCtaButton>
-            </div>
-            <dl className="mt-3 grid grid-cols-1 gap-3 sm:grid-cols-3">
-              {roi.map((s) => (
-                <div key={s.label} className="rounded-lg border border-white/10 bg-white/[0.02] px-4 py-3">
-                  <dt className="font-mono text-[10px] uppercase tracking-[0.16em] text-white/55">{s.label}</dt>
-                  <dd className="mt-1 text-xl font-semibold tabular-nums text-white">{s.value}</dd>
-                </div>
-              ))}
-            </dl>
+        {/* Layer 4 — the dollar value is NOT stated on /demo. We hand the
+            "what is it worth" question to the editable model at /roi, seeded
+            with this pack, rather than asserting a network figure here. */}
+        <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-white/10 pt-5">
+          <div className="font-mono text-[10px] uppercase tracking-[0.20em] text-[#00B4FF]/85">
+            Size it in the model
           </div>
-        )}
+          <RoiCtaButton
+            pack={pack}
+            ctaId="microsite-inline-roi"
+            utmMedium="demo-inline-roi"
+            source="microsite"
+            className="inline-flex min-h-[36px] items-center gap-1.5 rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.12] px-3 py-1.5 text-xs font-bold text-white transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22] hover:shadow-[0_0_22px_rgba(0,180,255,0.32)]"
+          >
+            Open the full calculator →
+          </RoiCtaButton>
+        </div>
 
         <p className="mt-4 text-[12px] leading-relaxed text-white/45">
-          Read from satellite + Street View across all {n.toLocaleString()} facilities, modeled on the same
-          engine the full calculator opens on. At a comparable network, Primo Brands cut drop-and-hook turns
-          from ~48 to ~24 min. Set your real volumes and margins in the calculator to make it yours.
+          Read from satellite + Street View across all {n.toLocaleString()} facilities. At a comparable
+          network, Primo Brands cut drop-and-hook turns from ~48 to ~24 min. Set your real volumes and
+          margins in the calculator to put a number on it.
         </p>
       </div>
     </section>
