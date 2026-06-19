@@ -150,5 +150,19 @@
     "siteAreaAcres": "~41 acres operational footprint (building + truck court + trailer apron) estimated from the perimeter box; the broader parcel per RealtyTrac is ~33.7 acres for the building lot — perimeter box includes adjacent paved/graded yard.",
     "buildingCount": "One large cross-dock building. Some adjacent construction activity is visible nearby but not part of this Constellation/Biagi parcel."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      { "tier": 1, "url": "https://www.biagibros.com/locations/Texas_Warehouse.html", "date": "2026-06", "type": "locator", "claim": "Biagi Bros' own locations page lists the 450,000 sq ft Hutchins TX warehouse (60 truck doors, 50 railcar spots) at I-20/I-45 south of Dallas" },
+      { "tier": 2, "url": "https://www.northbaybusinessjournal.com/article/industry-news/napa-transportation-company-expands-in-texas/", "date": "2017", "type": "press", "claim": "Biagi Bros built the 450,000 sq ft Hutchins cross-dock to provide logistics for Constellation Brands imported beer" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "3PL Biagi Bros operates the Constellation beer cross-dock; operator's live locator + trade press confirm. Actual address is Hutchins TX 75141 (roster said 'Wilmer'). Clean closure check.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

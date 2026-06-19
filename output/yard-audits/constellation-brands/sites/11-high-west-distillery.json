@@ -87,5 +87,19 @@
     "multiStep": "Possible second checkpoint (ranch gatehouse, then distillery arrival) but no clear evidence of a separate dock-side checkpoint; left false, flagged uncertain.",
     "railServed": "No rail spur into the property."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.cbrands.com/blogs/press-releases/constellation-brands-repositions-wine-and-spirits-business-to-a-portfolio-of-exclusively-higher-growth-higher-margin-brands-aligned-to-consumer-led-premiumization-trends", "date": "2025-04-09", "type": "press", "claim": "High West whiskey explicitly named in Constellation's retained Fine Wine & Craft Spirits portfolio" },
+      { "tier": 1, "url": "https://highwest.com/pages/distillery-directions", "date": "2026-06", "type": "locator", "claim": "Official site gives current directions to the Wanship production distillery at Blue Sky Ranch, 27649 Old Lincoln Hwy (operating)" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Constellation owns High West (acquired 2016); retained June 2025; Wanship Blue Sky Ranch distillery currently operating with active tours/dining.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

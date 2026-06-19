@@ -162,5 +162,20 @@
     "siteAreaAcres": "~25 acres from the perimeter box, consistent with the roster's stated 24 acres.",
     "buildingCount": "One single warehouse on the parcel; neighboring warehouses are separate Imeson Industrial Park properties."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      { "tier": 1, "url": "https://www.jaxdailyrecord.com/news/2022/feb/28/beer-distributor-constellation-brands-agrees-to-lease-space-at-imeson-industrial-park/", "date": "2022-02-28", "type": "press", "claim": "Constellation Brands signed a long-term full-building lease on 469,830 sq ft at 600 Whittaker Rd, Imeson Park; 54 docks, rail-served, first NA Florida DC" },
+      { "tier": 2, "url": "https://rebusinessonline.com/jll-arranges-45m-sale-of-600-whittaker-distribution-center-in-jacksonville/", "date": "2022-07", "type": "press", "claim": "600 Whittaker sold to AEW (landlord) while fully leased to Constellation; tenant unchanged" }
+    ],
+    "imageryDate": "2025-02",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Long-term Constellation lease + matching specs; 2022 landlord asset-sale left Constellation as operating tenant. No closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

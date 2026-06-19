@@ -153,5 +153,19 @@
     "railServed": "No rail spur into the property.",
     "publicAccess": "Sea Smoke is not open for public tastings; wines are pre-allocated. Operation is winery production and allocated shipping only."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 2, "url": "https://www.beveragedaily.com/Article/2024/05/14/constellation-brands-acquires-california-winery-sea-smoke/", "date": "2024-05-14", "type": "press", "claim": "Constellation acquired Sea Smoke including the winery in Lompoc, ~256 farmed acres, all inventory and the brand" },
+      { "tier": 1, "url": "https://www.cbrands.com/blogs/press-releases/constellation-brands-repositions-wine-and-spirits-business-to-a-portfolio-of-exclusively-higher-growth-higher-margin-brands-aligned-to-consumer-led-premiumization-trends", "date": "2025-04-09", "type": "press", "claim": "Sea Smoke named in Constellation's retained higher-end portfolio (not among brands divested to Wine Group)" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Constellation acquired Sea Smoke + the Lompoc winery in 2024; retained through the June 2025 divestiture. Production team stayed; current operation.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

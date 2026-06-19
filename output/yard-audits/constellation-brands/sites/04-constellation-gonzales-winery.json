@@ -155,5 +155,20 @@
     "trailersVisible": "Approximately 8 trailers visible in captured imagery on the winery property (excluding the Braga Fresh yard); honest estimate.",
     "trailerParkingCapacity": "Ample paved space could hold ~20 trailers, but the site is not laid out as a dedicated drop yard; estimate."
   },
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 2, "url": "https://www.thewinegroup.com/wine-group-expands-amid-industry-slump-see-its-plans-in-modesto-area-and-beyond/", "date": "2025-07-09", "type": "press", "claim": "The Wine Group names Gonzales as one of its NEW winemaking sites ('its other new winemaking site is in Gonzales, about five miles north of its plant in Soledad, Monterey County') acquired from Constellation" },
+      { "tier": 2, "url": "https://www.thewinegroup.com/the-wine-group-completes-acquisition-of-several-wine-brands-and-production-facilities-from-constellation-brands/", "date": "2025-06-02", "type": "press", "claim": "TWG completed acquisition of Constellation production sites including a Monterey County, CA site (plus Lodi and SIMI Healdsburg), ~6,600 vineyard acres and ~500 employees" },
+      { "tier": 1, "url": "https://www.cbrands.com/blogs/press-releases/constellation-brands-closes-wine-transaction-with-the-wine-group-to-focus-on-a-portfolio-of-exclusively-higher-growth-higher-margin-brands", "date": "2025-06-02", "type": "press", "claim": "Constellation divested mainstream wine brands (Woodbridge, Meiomi, Robert Mondavi Private Selection, Cook's, SIMI, J. Roget) plus associated facilities and vineyards to The Wine Group" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "DIVESTED: this Monterey County bulk-wine production winery transferred to The Wine Group when the deal closed 2025-06-02; TWG's own July 2025 newsroom explicitly names Gonzales as a new acquired site. No longer Constellation-operated. Roster's 'retained after sale' assumption was wrong.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

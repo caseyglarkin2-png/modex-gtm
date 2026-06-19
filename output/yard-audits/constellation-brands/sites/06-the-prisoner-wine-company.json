@@ -87,5 +87,19 @@
     "connectivityIssue": "Rural setting, but St. Helena/Napa Valley is well-developed wine country with reasonable cellular coverage; marked uncertain.",
     "multipleFacilities": "Single integrated winery building cluster plus a separate small structure to the north (treatment/equipment); treated as one campus, multipleFacilities false."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.cbrands.com/blogs/press-releases/constellation-brands-closes-wine-transaction-with-the-wine-group-to-focus-on-a-portfolio-of-exclusively-higher-growth-higher-margin-brands", "date": "2025-06-02", "type": "press", "claim": "Constellation's retained portfolio explicitly names The Prisoner Wine Company" },
+      { "tier": 1, "url": "https://theprisonerwinecompany.com/pages/visit-us", "date": "2026-06", "type": "locator", "claim": "Official site publishes current tasting hours at 1178 Galleron Rd, St. Helena (active operation)" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "On the June 2025 retained list; Galleron Rd production/tasting estate actively operating in 2026.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

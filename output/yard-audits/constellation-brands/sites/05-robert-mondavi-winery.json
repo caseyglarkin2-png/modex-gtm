@@ -102,5 +102,20 @@
     "trailerParkingCapacity": "Limited service-yard space; could hold only ~4 trailers; estimate.",
     "siteAreaAcres": "Perimeter box covers the developed estate campus (buildings, tank farm, crush pad, parking, immediate landscaping) - ~14 acres. The broader To Kalon vineyard holding is far larger but is farmland, not yard."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.cbrands.com/blogs/press-releases/constellation-brands-closes-wine-transaction-with-the-wine-group-to-focus-on-a-portfolio-of-exclusively-higher-growth-higher-margin-brands", "date": "2025-06-02", "type": "press", "claim": "Constellation's retained portfolio explicitly names Robert Mondavi Winery and To Kalon (only Robert Mondavi PRIVATE SELECTION was sold to Wine Group)" },
+      { "tier": 1, "url": "https://www.cbrands.com/blogs/press-releases/robert-mondavi-winery-reopens-its-historic-oakville-estate-following-a-multi-year-transformation", "date": "2026-04-17", "type": "press", "claim": "Constellation reopens the Robert Mondavi Winery Oakville estate to visitors April 20, 2026 after a multi-year transformation" }
+    ],
+    "imageryDate": "2024-08",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Oakville estate WINERY (not the divested Private Selection brand) on the retained list; Constellation reopened it April 2026. Current Constellation operation.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

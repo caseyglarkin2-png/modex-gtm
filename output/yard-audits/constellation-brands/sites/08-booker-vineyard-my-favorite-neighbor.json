@@ -88,5 +88,19 @@
     "connectivityIssue": "Rural but within the well-developed Paso Robles wine region; cellular coverage likely adequate. Marked uncertain.",
     "railServed": "No rail anywhere near the property."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 2, "url": "https://www.winespectator.com/articles/constellation-acquires-eric-jensens-booker-vineyard-portfolio-in-full", "date": "2021-11-10", "type": "press", "claim": "Constellation acquired Eric Jensen's Booker Paso Robles estate vineyard, winery and tasting room IN FULL; Jensen retained only ~35 acres incl. his home" },
+      { "tier": 1, "url": "https://www.cbrands.com/blogs/press-releases/constellation-brands-closes-wine-transaction-with-the-wine-group-to-focus-on-a-portfolio-of-exclusively-higher-growth-higher-margin-brands", "date": "2025-06-02", "type": "press", "claim": "Constellation's retained portfolio names the My Favorite Neighbor family of wine brands from Paso Robles" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Constellation bought the Booker winery + 2644 Anderson Rd site in full (2021), not just the brand; retained June 2025. Constellation-operated, currently active.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

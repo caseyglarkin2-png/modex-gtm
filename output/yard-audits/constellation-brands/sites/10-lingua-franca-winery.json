@@ -88,5 +88,19 @@
     "connectivityIssue": "Rural farmland setting away from town; cellular coverage may be moderate. Medium confidence — flagged.",
     "railServed": "No rail spur into the property."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.cbrands.com/blogs/press-releases/constellation-brands-repositions-wine-and-spirits-business-to-a-portfolio-of-exclusively-higher-growth-higher-margin-brands-aligned-to-consumer-led-premiumization-trends", "date": "2025-04-09", "type": "press", "claim": "Lingua Franca (Oregon) explicitly named in Constellation's retained portfolio" },
+      { "tier": 1, "url": "https://www.linguafranca.wine/Visit/", "date": "2026-06", "type": "locator", "claim": "Winery's official Visit page live with tasting hours at 9675 Hopewell Rd NW, Salem (current operation)" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Constellation acquired Lingua Franca in 2022; retained June 2025; estate winery currently operating.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

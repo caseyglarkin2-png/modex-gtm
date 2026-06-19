@@ -84,5 +84,18 @@
     "siteAreaAcres": "Perimeter is an estimate of the vineyard estate parcel; the built footprint is far smaller.",
     "buildingCount": "One distinct estate building visible; small outbuildings may exist under tree canopy."
   },
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.cbrands.com/blogs/press-releases/constellation-brands-closes-wine-transaction-with-the-wine-group-to-focus-on-a-portfolio-of-exclusively-higher-growth-higher-margin-brands", "date": "2025-06-02", "type": "press", "claim": "Constellation's retained portfolio explicitly names Mount Veeder Winery (Franciscan Estate BRAND went to Gallo in 2021; Mount Veeder stayed)" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Brand/estate retained by Constellation, but the Mt Veeder Rd hillside site is a vineyard estate with minimal yard; wine is historically vinified off-site (Franciscan/Galleron). Ownership confirmed, on-site freight operation low — flagged probable.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }

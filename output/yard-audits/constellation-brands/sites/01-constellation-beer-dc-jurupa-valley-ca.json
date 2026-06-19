@@ -157,5 +157,19 @@
     "siteAreaAcres": "~71 acres estimated from the perimeter box (parcel ~870m E-W x ~330m N-S). Approximate.",
     "_recommendation": "Site flagged for human review / re-audit once current satellite imagery captures the completed, operational facility. The 2023 prelease source confirms this was an under-construction build-to-suit; imagery has not yet caught up to completion."
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      { "tier": 1, "url": "https://commercialobserver.com/2023/04/blackstone-link-logistics-california-beer-wine-constellation-brands-lease/", "date": "2023-04", "type": "press", "claim": "Constellation preleased 1.4M sq ft at Link Logistics' 'Space Center', Jurupa Valley, near I-15/SR-60 as a beer/wine distribution hub" },
+      { "tier": 3, "url": "https://realgraph.co/buildings/3413-manitou-ct-jurupa-valley-ca-91752", "date": "2024", "type": "press", "claim": "Property record lists Constellation Brands as tenant at 3413 Manitou Ct; Space Center campus built 2024 (building now complete)" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Prelease + 2024 completion resolves prior mid-construction flag; building now operational, Constellation named tenant. Clean closure check (CA WARN layoffs are wine/spirits sites, not this beer DC).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "method": "deep-audit"
 }
