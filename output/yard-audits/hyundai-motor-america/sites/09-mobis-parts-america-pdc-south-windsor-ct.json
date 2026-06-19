@@ -115,5 +115,24 @@
     "dropArea": "Drop trailers parked in the shared SE court; estimate 10-25 band.",
     "drivewayLong": "Long, wide dock-court approach holding 3+ trucks."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/c/Hyundai-MOBIS/Job/Material-Processor/-in-South-Windsor,CT?jid=0ffa652b7df353ca",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Mobis Parts America active Material Processor / Warehouse Safety Specialist PDC requisitions in South Windsor, CT (Mobis ATS-sourced)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Northeast/Hartford PDC (292,000 SF build-to-suit by Scannell, hence leased); active 2026 Mobis careers postings in South Windsor CT, no closure/relocation signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

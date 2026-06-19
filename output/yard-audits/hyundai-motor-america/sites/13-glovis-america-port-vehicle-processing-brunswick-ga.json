@@ -108,5 +108,24 @@
     "urbanRural": "Rural - the terminal sits on a marsh peninsula isolated from Brunswick's urban fabric, reached only by the causeway.",
     "siteAreaAcres": "~1627 acres from the perimeter box, consistent with the GPA-stated ~1,700-acre terminal."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.glovisusa.com/locations/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Glovis America lists Glovis America - Brunswick at 1 Joe Frank Harris Blvd, Brunswick, GA 31523 (Colonels Island Terminal, Port of Brunswick)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Glovis America operates port vehicle processing at Colonels Island Terminal, Brunswick; confirmed on the Glovis locator at the cited port address (port land = leased).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

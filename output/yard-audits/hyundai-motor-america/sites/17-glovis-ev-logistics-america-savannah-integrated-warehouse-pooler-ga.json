@@ -98,5 +98,31 @@
     "classification": "All 22 classification fields are defaults (no facility imagery available) and are listed in uncertainFields. As a Glovis HMGMA-linked integrated distribution warehouse, the facility would most plausibly be a dock-door cross-dock building with a truck gate, but this is unverified.",
     "urbanRural": "Tentatively Rural -- the Pooler / I-16 logistics corridor is edge-of-town / interchange industrial; unverified."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://en.sedaily.com/finance/2026/04/15/hyundai-glovis-opens-la-logistics-hub-savannah-warehouse-to",
+        "date": "2026-04-15",
+        "type": "press",
+        "claim": "Hyundai Glovis opened its Savannah integrated warehouse (~69,000 sqm) in Q1 2026 as a production-linked logistics hub for HMGMA; described as operational."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.glassdoor.com/Job/savannah-glovis-ev-logistics-america-jobs-SRCH_IL.0,8_IC1155906_KO9,36.htm",
+        "date": "2026-05",
+        "type": "careers",
+        "claim": "~30 Glovis EV Logistics America job listings in Savannah GA (May 2026) confirm an active, staffed operation."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Opened Q1 2026 (source April 2026 was the press date) and operational/staffed as of mid-2026 per opening press release + May 2026 job listings; NOT under construction. Address imprecise (city/ZIP only) - flag for geocode.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -146,5 +146,24 @@
     "scale": "false — no truck scale observed.",
     "geofence": "Center 34.0402,-117.5531 on the Mobis building; perimeter box encloses the building and its shared south truck court."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/c/Hyundai-MOBIS/Job/Material-Processor/-in-Ontario,CA?jid=79b64e9bc7ff5db2",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Mobis Parts America active Material Processor PDC requisition in Ontario, CA (Mobis csod.com ATS)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "West Coast source PDC (opened June 2013); active 2026 Mobis ATS careers posting in Ontario CA, no closure/relocation signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

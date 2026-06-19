@@ -107,5 +107,24 @@
     "scale": "false — no truck scale observed.",
     "geofence": "Center 41.7935,-88.3573 on the Mobis building; perimeter box encloses the building, its east dock yard and front parking."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/co/Hyundai-Mobis/Jobs/-in-Aurora,IL",
+        "date": "2026-03",
+        "type": "careers",
+        "claim": "Mobis Parts America active distribution-warehouse / Material Processor job postings in Aurora, IL (Mobis ATS-sourced)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Central/Chicago-metro PDC; active 2026 Mobis careers postings in Aurora IL, no closure/relocation signal at Sequoia Dr address.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -115,5 +115,24 @@
     "shipRcvSeparate": "False - this is a RoRo import/export terminal; vehicles flow through shared wharf and storage rather than separate shipping/receiving dock banks.",
     "siteAreaAcres": "~270 acres for the secured auto-terminal perimeter (irregular peninsula footprint within the ~390-acre bounding box)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.glovisusa.com/locations/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Glovis America lists Glovis America - Newark at E Bay Ave, Elizabeth, NJ 07201 (Port Newark-Elizabeth Marine Terminal)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Glovis America runs East Coast port vehicle processing at Port Newark-Elizabeth (E Bay Ave); confirmed on current Glovis locator (port land = leased). Address street-only without a number - flag for geocode precision.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

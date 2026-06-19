@@ -131,5 +131,24 @@
     "dropArea": "Heavy drop-trailer storage on both the west lot and the east dock court; 50+ band.",
     "trailersVisible": "~75 trailers counted across west and east courts in captured imagery; honest overhead estimate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/c/Hyundai-MOBIS/Job/Material-Processor/-in-Lancaster,TX?jid=a7dc247ea3556ee7",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Mobis Parts America active Material Processor PDC requisitions in Lancaster, TX 75134 (Mobis ATS-sourced; Dallas PDC)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Dallas/south-central PDC at 2301 S Pointe Dr; active 2026 Mobis careers postings in Lancaster TX, no closure/relocation signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

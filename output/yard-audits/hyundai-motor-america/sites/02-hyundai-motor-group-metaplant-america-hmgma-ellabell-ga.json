@@ -130,5 +130,31 @@
     "scale": "No truck scale positively identified; flagged uncertain.",
     "geofence": "Center 32.1620,-81.4480. Perimeter box covers the developed campus footprint."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.hmgma.com/our-facility/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Official HMGMA site: 1500 Genesis Dr, Ellabell GA 31308; first IONIQ 5 rolled off line Oct 2024, IONIQ 9 launched Mar 2025, Kia Sportage Hybrid launched June 2026 - assembly running."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.hyundaimotorgroup.com/en/news/CONT0000000000173041",
+        "date": "2025-03",
+        "type": "press",
+        "claim": "Hyundai Motor Group: HMGMA grand opening Mar 26 2025; assembly + battery plant for up to 500,000 EV/hybrid vehicles/yr for Hyundai, Kia, Genesis."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Assembly plant is Hyundai Motor Group-operated and confirmed producing vehicles since Oct 2024 (not under construction); on-site battery JV is a separate parcel, not this site.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

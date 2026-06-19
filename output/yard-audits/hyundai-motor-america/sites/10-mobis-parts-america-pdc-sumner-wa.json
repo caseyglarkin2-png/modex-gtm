@@ -113,5 +113,31 @@
     "dockDoors": "~70 doors combined across the north and south faces of the Cascade Building (band 50+); multi-tenant building (Mobis occupies ~181,000 of 385,468 SF) so Mobis-allocated share uncertain.",
     "dropArea": "Drop trailers along the west strip and courts; estimate 10-25 band."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/viewjob?jk=dff7a6fac58577be",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Mobis Parts America, LLC active Material Processor requisition at exact address 14000 24th Street East, Sumner, WA 98390."
+      },
+      {
+        "tier": 1,
+        "url": "https://news.theregistryps.com/mobis-parts-america-renews-and-expands-to-181000-sqft-at-sumner-corporate-park-cascade-building/",
+        "date": "2026-04-13",
+        "type": "press",
+        "claim": "Mobis Parts America renewed and expanded to 181,000 SF at Sumner Corporate Park (Cascade Building) - active leased operation."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Pacific NW PDC at 14000 24th St E confirmed by an exact-address Mobis careers posting plus an April 2026 lease renewal+expansion press release (leased).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

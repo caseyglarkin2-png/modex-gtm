@@ -110,5 +110,31 @@
     "railServed": "No rail spur into the developed campus footprint.",
     "note": "This audit treats the cylinder-head plant as a campus-resident component building; its truck-yard profile is effectively the HMMA campus profile (idx 1) scoped to the western engine-shop cluster."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.hmmausa.com/hyundai-motor-manufacturing-alabama-celebrates-grand-opening-of-new-cylinder-head-machining-plant/",
+        "date": "2019-05-15",
+        "type": "press",
+        "claim": "HMMA grand opening of its $388M cylinder head machining plant - the third facility on the HMMA campus - supporting production of 650,000+ engines/year."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.hmmausa.com/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Official HMMA site confirms HMMA assembles vehicles and engines; campus (700 Hyundai Blvd) engine plants ~700,000 engines/yr capacity, operational in 2026."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Engine-component (cylinder head machining) plant on the HMMA Montgomery campus, opened May 2019, part of HMMA ~700k-engines/yr operation confirmed running in 2026.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

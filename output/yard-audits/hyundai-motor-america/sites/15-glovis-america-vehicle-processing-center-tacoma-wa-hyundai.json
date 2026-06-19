@@ -116,5 +116,24 @@
     "fastLaneOpportunity": "Wide gravel apron at the gate and broad internal roadways leave ample room to add a bypass / express lane.",
     "urbanRural": "Urban -- inside the Port of Tacoma industrial tideflats, dense industrial fabric of the Tacoma metro."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.glovisusa.com/locations/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Glovis America lists Hyundai Port Processing at 3400 Taylor Way, Tacoma, WA 98421 - Glovis-operated West Coast import port processing at the Port of Tacoma."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Glovis operates Hyundai port processing at 3400 Taylor Way, Port of Tacoma; confirmed on the Glovis locator (port land = leased).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -107,5 +107,31 @@
     "urbanRural": "Rural - West Point GA, small town; campus surrounded by forest and farmland with an I-85 interchange nearby.",
     "siteAreaAcres": "~385 acres for the audited VPC vehicle-yard perimeter; the full KaGA campus including the assembly plant is far larger (~2000+ acres)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.glovisusa.com/locations/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Glovis America locations page lists Glovis America - West Point at 2000 Webb Rd, West Point, GA 31833 (distinct from the Kia assembly plant at 7777 Kia Pkwy)."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/c/Hyundai-Glovis/Job/Quality-Control-Supervisor-(VPC-West-Point)/-in-West-Point,GA?jid=1eb7c16f59eb60b0",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active Hyundai Glovis req Quality Control Supervisor (VPC West Point) describing VPC processing (under-body coat, PIO install, load line, rail loading) - an operating Glovis VPC, not the Kia plant."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Glovis runs a genuine VPC at 2000 Webb Rd West Point (separate address from sibling Kia assembly plant); confirmed by Glovis locator + a current VPC West Point careers req - not a Kia mislabel.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

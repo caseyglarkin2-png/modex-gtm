@@ -112,5 +112,24 @@
     "drivewayLong": "The dock court approach is long and wide enough to hold 3+ trucks.",
     "trailerParkingCapacity": "Honest overhead estimate of court trailer capacity."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/co/Hyundai-Mobis/Jobs/-in-Jamesburg,NJ",
+        "date": "2026-05",
+        "type": "careers",
+        "claim": "Mobis Parts America active New Jersey PDC requisitions (Material Processor Lead, Supervisor PDC) in Jamesburg, NJ (Mobis ATS-sourced)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Eastern Region PDC; active May 2026 Mobis careers postings naming the NJ PDC in Jamesburg, no closure/relocation signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

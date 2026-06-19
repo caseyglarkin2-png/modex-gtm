@@ -132,5 +132,24 @@
     "entryExitTogether": "Open park road network — no defined gate, so entry/exit lane flags left false; trucks circulate freely.",
     "dropArea": "Central park yard and dock-face trailer storage; estimate 10-25 drop trailers attributable to this building."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.glassdoor.com/job-listing/material-processor-lead-hyundai-mobis-JV_IC1155440_KO0,23_KE24,37.htm?jl=1010156948779",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Current Mobis Parts America GA PDC careers postings are at 545 Logistics Center Parkway, Jefferson, GA 30549 - not Lawrenceville; the 2155 Breckinridge Blvd building is now listed for lease (451,200 SF available), indicating Mobis vacated it."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "RELOCATED: GA PDC moved to 545 Logistics Center Pkwy, Jefferson GA (active 2026 PDC postings + import records there); old 2155 Breckinridge Blvd building listed for lease.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

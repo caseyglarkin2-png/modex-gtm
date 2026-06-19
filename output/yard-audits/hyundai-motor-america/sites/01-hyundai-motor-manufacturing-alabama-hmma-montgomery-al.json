@@ -128,5 +128,19 @@
     "trailersVisible": "Honest overhead estimate (~220) across drop yard and warehouse dock faces; counts approximate.",
     "geofence": "Center 32.2812,-86.3235. Perimeter box covers the developed operational footprint (buildings, lots, test track) — the YardFlow-relevant geofence — not the full 1,744-acre land parcel."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.hmmausa.com/", "date": "2026-06", "type": "locator", "claim": "Official HMMA site lists 700 Hyundai Blvd, Montgomery AL 36105, ~4,200 employees, currently producing Tucson, Santa Fe, Santa Fe Hybrid, Santa Cruz, Genesis GV70; most recent news release dated June 16 2026." },
+      { "tier": 1, "url": "https://www.hyundainews.com/releases/4446", "date": "2025-05", "type": "press", "claim": "Hyundai newsroom: HMMA celebrated 20 years of production (May 2025), 6.27M vehicles built; plant projecting 358,000 vehicles and preparing five new-vehicle launches for 2027." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Greenfield Hyundai-built/owned assembly plant (first vehicle 2006), fully operational in 2026 with forward product plan; divestiture-gauntlet 'closure' hits were misread aggregator noise.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

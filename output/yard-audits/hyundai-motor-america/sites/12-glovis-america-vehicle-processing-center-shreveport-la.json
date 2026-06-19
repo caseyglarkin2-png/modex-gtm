@@ -112,5 +112,38 @@
     "urbanRural": "Rural - edge of Shreffeport in a semi-rural/industrial area surrounded by forest and cleared land.",
     "siteAreaAcres": "~730 acres for the full former-GM complex perimeter; Glovis's contracted footprint is ~90 acres + 125k sqft building."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.glovisusa.com/locations/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Glovis America locations page lists Glovis America - Shreveport at 7600 Antoine Blvd, Shreveport, LA 71130."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.ktbs.com/news/glovis-america-announces-new-processing-and-distribution-hub-at-former-gm-plant-in-caddo-parish/article_554951fa-9d17-5217-95bb-7cd432462197.html",
+        "date": "2017-01",
+        "type": "press",
+        "claim": "Glovis America opened a processing & distribution hub in 125,000 sqft of the former GM Shreveport plant plus 90 leased acres, processing Hyundai/Kia vehicles."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/co/Hyundai-Glovis/Jobs/-in-Shreveport,LA",
+        "date": "2026-02",
+        "type": "careers",
+        "claim": "Active Feb 2026 Hyundai Glovis Shreveport job postings (vehicle movement / warranty technician) confirm ongoing operation."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": true,
+    "rationale": "Former GM plant closed ~2012, but Glovis acquired/leased part of it in 2017 and still operates the VPC today (current locator + active 2026 reqs); Glovis portion is live, not under another owner.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
