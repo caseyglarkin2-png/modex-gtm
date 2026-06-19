@@ -135,5 +135,31 @@
     "urbanRural": "Rural — isolated riverbottom plant SW of Dubuque surrounded by farmland, woods, and Mississippi backwater.",
     "fastLaneOpportunity": "Vast paved aprons and wide internal roads leave abundant room for added or express truck lanes."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://about.deere.com/en-us/locations/factories/dubuque-works",
+        "date": "2026-01",
+        "type": "locator",
+        "claim": "Dubuque Works has been a cornerstone of heavy-equipment manufacturing since 1946."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.kcrg.com/2026/02/19/john-deere-bringing-back-27-workers-dubuque-facility/",
+        "date": "2026-02",
+        "type": "press",
+        "claim": "Feb 2026: Deere returning 27 employees to Dubuque Works for construction/forestry operations."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Plant operational and recalling workers; mid-frame skid steer / CTL LINE shift to Ramos Arizpe Mexico in 2026 is a partial line move, not a closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

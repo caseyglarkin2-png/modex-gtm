@@ -115,5 +115,24 @@
     "siteAreaAcres": "Perimeter box bounds the built campus on the river peninsula at ~105 acres; total Horicon Works site is cited at 214 acres including outside storage spread across the peninsula.",
     "railServed": "No active rail spur into the property observed; the surrounding area has no rail line adjacent."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://about.deere.com/en-us/locations/factories/horicon-works",
+        "date": "2025-01",
+        "type": "locator",
+        "claim": "Deere factory locator: Horicon Works (Horicon WI) produces Gator Utility Vehicles, walk-behind greens mowers, and X-series lawn tractors; ~1,000 employees."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Deere-operated Gator / lawn & turf plant, listed on Deere's own factory locator; no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

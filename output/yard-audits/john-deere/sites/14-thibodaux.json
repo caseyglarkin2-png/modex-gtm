@@ -111,5 +111,24 @@
     "railServed": "No rail spur observed entering the property.",
     "connectivityIssue": "Site is rural but immediately adjacent to the town of Thibodaux; cellular coverage likely adequate - connectivityIssue set false."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.opportunitylouisiana.gov/news/john-deere-thibodaux-plant-expansion-to-create-70-bayou-region-jobs",
+        "date": "2022-10",
+        "type": "econ-dev",
+        "claim": "Louisiana ED: Deere investing $29.8M to expand Thibodaux plant, +70 jobs, retaining 284, shifting cotton-harvester production from China to Thibodaux."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Deere-operated cotton/sugarcane harvester plant; actively expanded 2022-2025.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

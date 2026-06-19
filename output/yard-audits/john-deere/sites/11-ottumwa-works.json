@@ -134,5 +134,31 @@
     "railServed": "No rail spur observed running into the property in current imagery.",
     "exitLanes": "Exit lane count not separately determinable; entry/exit share the single gate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.deere.com/en/stories/featured/ottumwa-investments/",
+        "date": "2026-01",
+        "type": "press",
+        "claim": "Ottumwa Works: ~$20M invested over five years and continuing into 2026; rebuilt round-baler final assembly line."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.kcrg.com/2025/10/16/john-deere-moving-some-production-jobs-out-ottumwa-des-moines/",
+        "date": "2025-10",
+        "type": "press",
+        "claim": "Oct 2025: Deere shifting some hay/forage mower production to Mexico — plant continues hay & forage / round baler production."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active hay & forage plant with rebuilt round-baler line and 2026 investment; mower line move to Mexico is partial, not a closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -140,5 +140,31 @@
     "scale": "No truck scale positively identified; left false, flagged uncertain.",
     "entryLanes": "Estimated; exact gate lane counts not visible (SV does not reach the gates)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://about.deere.com/en-us/locations/factories/harvester-works",
+        "date": "2025-06",
+        "type": "locator",
+        "claim": "Deere's official locator confirms Harvester Works, East Moline IL is the active combine assembly plant."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.deere.com/en/stories/featured/harvester-investment/",
+        "date": "2025-06",
+        "type": "press",
+        "claim": "$162M investment at Harvester Works and current X9 combine production."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "World's largest combine plant (~4M sqft); recent $162M reinvestment and X9 production confirm active operation.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -117,5 +117,24 @@
     "dropYard": "No dedicated trailer-storage lot; reman plant relies on a modest material/staging yard.",
     "railServed": "A rail mainline corridor runs along the south edge of the property but no spur enters the site - railServed = false."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.deere.com/en/news/all-news/john-deere-reman-announces-over-13-million-expansion/",
+        "date": "2024-10",
+        "type": "press",
+        "claim": "John Deere Reman announces $13.5M / 120,000 sqft Core Center expansion in greater Springfield MO (Strafford); 500+ employees, 2,000+ remanufactured products."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Deere-operated remanufacturing operation in greater Springfield MO; actively expanding, groundbreaking 2025.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

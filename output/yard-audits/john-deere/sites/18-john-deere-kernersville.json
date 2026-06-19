@@ -118,5 +118,31 @@
     "truckGateCount": "Main Campus gate confirmed via Street View; East Campus has its own access - estimated 2 truck gates total (East gate not directly Street-View confirmed).",
     "fieldNote_construction": "Active construction at audit time - the $70M / 380,000 sq ft small-excavator factory expansion. Some yard geometry will change once complete."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.deere.com/en/stories/featured/two-new-us-facilities/",
+        "date": "2024-01",
+        "type": "press",
+        "claim": "$70M Kernersville NC excavator factory assuming production of future-generation excavators previously made in Japan; solely John Deere."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.hitachicm.com/global/en/news/press-releases/2022/22-03-01/",
+        "date": "2022-03",
+        "type": "press",
+        "claim": "Hitachi Construction Machinery confirms the Deere JV dissolved Feb 28 2022; Deere acquired the Kernersville NC factory and continues making Deere-branded excavators there."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Deere-Hitachi JV dissolved Feb 2022; Deere ACQUIRED and now solely operates Kernersville, investing $70M to expand excavator production. Not closed/transferred.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

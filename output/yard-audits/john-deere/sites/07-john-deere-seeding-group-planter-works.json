@@ -115,5 +115,31 @@
     "fastLaneOpportunity": "Broad open paved/gravel aprons and wide internal driveways leave ample room for added or express lanes.",
     "urbanRural": "Quad Cities metro riverfront industrial fabric, Moline."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.deere.com/en/stories/featured/seeding-moline/",
+        "date": "2025-01",
+        "type": "press",
+        "claim": "John Deere Seeding factory in Moline is the company's oldest factory and business center for planters; $30M modernization of 55,000 sqft."
+      },
+      {
+        "tier": 1,
+        "url": "https://finance.yahoo.com/news/deere-pours-250m-quad-cities-162509759.html",
+        "date": "2025-08",
+        "type": "press",
+        "claim": "Aug 2025 Deere committed over $250M to upgrade three Quad Cities facilities including John Deere Seeding in Moline."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Deere's oldest factory and business center for planters/drills/air seeders; active with 2025 modernization investment.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

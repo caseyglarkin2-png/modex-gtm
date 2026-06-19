@@ -114,5 +114,31 @@
     "fastLaneOpportunity": "Vast paved aprons and wide internal ring roads leave abundant room for added or express truck lanes.",
     "truckGateCount": "Estimated 3 controlled gates on the perimeter ring road; not all individually confirmed."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.deere.com/en/stories/featured/ankeny-manufacturing/",
+        "date": "2025-01",
+        "type": "press",
+        "claim": "Des Moines Works (Ankeny, 450+ acres) produces sprayers, cotton harvesters, grain drills and tillage; $40M+ See & Spray expansion."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.manufacturingdive.com/news/deere-lays-off-119-workers-at-des-moines-works-iowa-plant/741072/",
+        "date": "2025-01",
+        "type": "press",
+        "claim": "2025 layoffs at Des Moines Works (~1,500 employees); tillage assembly moving to North Dakota — plant continues sprayer/cotton-picker production."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active sprayer/tillage plant with recent See & Spray expansion; 2025 layoffs and tillage line move to ND are partial, not a closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

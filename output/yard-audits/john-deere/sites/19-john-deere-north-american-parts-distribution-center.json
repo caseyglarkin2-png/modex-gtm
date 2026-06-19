@@ -142,5 +142,31 @@
     "entryLanes": "Estimated 2 lanes at the wide open entrance drive; no formal gate lanes - low confidence.",
     "siteAreaAcres": "~215 acres - the 2.8M sq ft building footprint (~64 acres) plus extensive trailer drop yards, parking, pond, and grounds. Perimeter bounding box ~265 acres includes some undeveloped margin."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://jobs.deere.com/successfactors/job/Milan-John-Deere-Parts-Distribution-Supplemental-Warehouse-Illi-61264/1316864100/",
+        "date": "2026-05",
+        "type": "careers",
+        "claim": "Active John Deere careers reqs for warehouse workers at the John Deere Parts Distribution Center, Milan IL 61264."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.deere.com/assets/pdfs/common/parts-and-service/parts/wwps_locations.pdf",
+        "date": "2018-01",
+        "type": "locator",
+        "claim": "Deere's Worldwide Parts location list identifies Milan IL as a key parts distribution center."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Deere's flagship North American/Worldwide Parts Distribution Center (~2.8M sqft, 1600 1st Ave E, Milan); active 2026 Deere-operated careers reqs confirm current operation.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

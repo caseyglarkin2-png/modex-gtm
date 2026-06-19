@@ -135,5 +135,31 @@
     "siteAreaAcres": "Developed/fenced plant area estimated ~95 acres; perimeter bounding box is larger because the property is an irregular footprint with open field margins.",
     "connectivityIssue": "Rural setting but the facility is large, active, and near Greeneville with utility infrastructure - cellular coverage likely adequate; left false, flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.tn.gov/ecd/news/2024/8/8/john-deere-power-products-to-expand-manufacturing-presence-in-greene-county.html",
+        "date": "2024-08",
+        "type": "econ-dev",
+        "claim": "TN ECD: John Deere Power Products to invest $15M and add 25 jobs expanding its Greene County / Greeneville plant."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.areadevelopment.com/newsitems/8-9-2024/john-deere-power-products-greeneville-tennessee.shtml",
+        "date": "2024-08",
+        "type": "press",
+        "claim": "John Deere Power Products plant in Greeneville builds Z300/Z500 zero-turn and electric ZTrak mowers; Deere has operated it for 35+ years. Not Yanmar-owned."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Deere-operated (John Deere Power Products), NOT sold/transferred to Yanmar; Deere expanded it $15M/+25 jobs Aug 2024. Yanmar is only a separate engine-supply partner.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

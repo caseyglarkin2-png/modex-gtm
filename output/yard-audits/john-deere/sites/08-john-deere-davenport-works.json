@@ -132,5 +132,31 @@
     "urbanRural": "Rural — large standalone plant in open farmland NE of Davenport near the Hwy 130 / I-80 area.",
     "fastLaneOpportunity": "Enormous paved aprons and wide internal roads leave abundant room for added or express truck lanes."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://about.deere.com/en-us/locations/factories/davenport-works",
+        "date": "2026-01",
+        "type": "locator",
+        "claim": "Davenport Works (2.2M sqft) has produced construction and forestry equipment since 1974; 6 active product lines."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.kwqc.com/2026/06/11/john-deere-bringing-back-20-workers-davenport-works/",
+        "date": "2026-06",
+        "type": "press",
+        "claim": "June 2026: John Deere bringing back 20 workers to Davenport Works to meet rising construction/forestry demand."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active C&F plant recalling workers as recently as June 2026.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

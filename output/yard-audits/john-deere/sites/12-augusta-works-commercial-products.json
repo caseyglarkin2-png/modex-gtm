@@ -115,5 +115,31 @@
     "railServed": "No rail spur observed entering the property.",
     "scale": "No truck scale positively identified - flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.deere.com/en/campaigns/ag-turf/augusta-stories/",
+        "date": "2026-01",
+        "type": "press",
+        "claim": "John Deere Augusta (Grovetown GA) currently designs, assembles and tests compact utility tractors (1/2/3/4 Series)."
+      },
+      {
+        "tier": 2,
+        "url": "https://developcolumbiacounty.com/2018/07/23/john-deeres-top-producing-facility-is-in-columbia-county/",
+        "date": "2018-07",
+        "type": "econ-dev",
+        "claim": "Columbia County ED confirms John Deere Augusta Works as the company's highest-volume producing facility (27 compact/utility tractor models)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Deere-operated compact utility tractor assembly plant (not a dealer); current deere.com campaign page confirms active production. Note: builds compact utility tractors, not commercial mowers as labeled.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

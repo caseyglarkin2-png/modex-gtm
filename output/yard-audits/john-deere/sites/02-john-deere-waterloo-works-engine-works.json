@@ -119,5 +119,31 @@
     "urbanRural": "Edge-of-town Waterloo IA with cropland to the north and west and large open grass on the property — Rural.",
     "postGateStaging": "Paved yard inside the fence before the docks; inferred true, low confidence."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://about.deere.com/en-us/locations/factories/waterloo",
+        "date": "2026-03",
+        "type": "locator",
+        "claim": "Engine Works listed as one of the five active Waterloo Works sites on Deere's official locator."
+      },
+      {
+        "tier": 2,
+        "url": "https://facilityexplorer.iowadnr.gov/FacilityExplorer/SiteDetail.aspx?facID=310631995",
+        "date": "2025-01",
+        "type": "econ-dev",
+        "claim": "Iowa DNR active permit record for John Deere Engine Works, 3801 W Ridgeway Ave, Waterloo, owned by Deere & Company."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "John Deere Power Systems diesel/natural-gas engine plant on Ridgeway Ave; active per Deere locator and Iowa DNR permit.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

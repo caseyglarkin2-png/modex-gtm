@@ -130,5 +130,31 @@
     "railServed": "No rail spur observed running into the property.",
     "connectivityIssue": "Site is semi-rural but adjacent to the town of Coffeyville and an established industrial area; cellular coverage likely adequate - connectivityIssue set false."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.kcrg.com/2026/04/13/john-deere-bringing-back-41-workers-iowa/",
+        "date": "2026-04",
+        "type": "press",
+        "claim": "Deere recalling workers to Coffeyville Works amid rising drivetrain/construction demand in 2026."
+      },
+      {
+        "tier": 2,
+        "url": "https://jagkansas.org/news-release-john-deere-coffeyville-works-commits-to-three-year-continuation-to-sponsorship-of-jag-k/",
+        "date": "2025-01",
+        "type": "press",
+        "claim": "John Deere Coffeyville Works active as operating Deere components/drivetrain plant; ongoing John Deere Foundation sponsorship."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Deere-operated components/drivetrain plant; recalling workers in 2026, no closure/sale found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

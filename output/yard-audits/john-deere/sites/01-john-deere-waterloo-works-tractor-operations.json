@@ -116,5 +116,31 @@
     "scale": "No truck scale positively identified in imagery; left false, flagged uncertain.",
     "urbanRural": "Complex is surrounded entirely by farmland on the rural east edge of Waterloo IA — Rural."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://about.deere.com/en-us/locations/factories/waterloo",
+        "date": "2026-03",
+        "type": "locator",
+        "claim": "Deere's official Waterloo factory page lists Tractor Operations among the five active Waterloo Works sites."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.deere.com/en/stories/featured/strengthening-waterloo-manufacturing/",
+        "date": "2025-06",
+        "type": "press",
+        "claim": "7/8/9 Series tractors including the new 9RX line are currently assembled in Waterloo."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "World's largest Deere tractor-assembly complex; new 9RX line confirms active production despite 2024-25 demand-driven layoffs.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

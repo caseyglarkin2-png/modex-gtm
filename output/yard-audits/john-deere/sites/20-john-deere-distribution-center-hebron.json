@@ -97,5 +97,24 @@
     "railServed": "No rail spur visible at the site; not expected for this DC (located for I-65 highway access). Low confidence.",
     "classificationFlags": "All physical-layout flags defaulted to false / NONE / null because the facility does not yet exist in imagery. Re-audit once post-construction satellite imagery becomes available (facility expected to open within ~12 months of the Jan 2026 groundbreaking)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.deere.com/en/stories/featured/two-new-us-facilities/",
+        "date": "2026-01",
+        "type": "press",
+        "claim": "John Deere recently broke ground on a new distribution center near Hebron IN; facility anticipated to open in the next year."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Real future Deere DC near Hebron IN ($125M, 1.2M sqft) but under construction; announced Jan 2026, ground just broken, not operating as of 2026-06.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

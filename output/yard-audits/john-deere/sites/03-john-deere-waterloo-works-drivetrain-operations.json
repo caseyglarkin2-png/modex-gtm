@@ -118,5 +118,31 @@
     "scale": "No truck scale identified; left false.",
     "postGateStaging": "Paved yard inside the fence ahead of the docks; inferred true, low confidence."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://about.deere.com/en-us/locations/factories/waterloo",
+        "date": "2026-03",
+        "type": "locator",
+        "claim": "Drivetrain Operations listed among the five active Waterloo Works sites on Deere's official factory page."
+      },
+      {
+        "tier": 2,
+        "url": "https://programs.iowadnr.gov/focomp/Detail/FacilityDetail?facilityID=310200485",
+        "date": "2025-01",
+        "type": "econ-dev",
+        "claim": "Iowa DNR active facility record for John Deere Waterloo Works - Drive Train Operations, 300 W Commercial St, Waterloo."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Drivetrain (transmissions/axles) plant at 300 W Commercial St; active per Deere locator and DNR record.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -128,5 +128,31 @@
     "siteAreaAcres": "~45 acres, derived from the perimeter box (~565 m N-S x ~320 m E-W of used property). Estimate.",
     "scale": "FALSE. No truck scale / weigh pad visible in the truck path."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.deere.com/assets/pdfs/common/parts-and-service/parts/wwps_locations.pdf",
+        "date": "2018-01",
+        "type": "locator",
+        "claim": "Deere Worldwide Parts location list includes a Waterloo IA parts distribution center."
+      },
+      {
+        "tier": 1,
+        "url": "https://about.deere.com/en-us/locations/factories/waterloo",
+        "date": "2025-01",
+        "type": "locator",
+        "claim": "John Deere's Waterloo IA operations are an active, currently operating Deere complex."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Deere-operated Parts Distribution Center at 2280 Northeast Dr, Waterloo IA (matches lat/lng); part of the active Waterloo footprint.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

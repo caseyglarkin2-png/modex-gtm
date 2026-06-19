@@ -114,5 +114,31 @@
     "entryLanes": "Estimated 2 inbound / 2 outbound from the gate layout; exact count partly obscured.",
     "scale": "No truck scale positively identified; left false, flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://about.deere.com/en-us/locations/factories/waterloo",
+        "date": "2026-03",
+        "type": "locator",
+        "claim": "Foundry Operations listed as one of the five active Waterloo Works sites."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.deere.com/en/stories/featured/strengthening-waterloo-manufacturing/",
+        "date": "2025-06",
+        "type": "press",
+        "claim": "Waterloo foundry currently casts gray/ductile iron components feeding tractor assembly."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Deere-owned foundry (gray/ductile iron castings) feeding the Waterloo complex.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -119,5 +119,31 @@
     "scale": "FALSE. No truck scale / weigh pad visible in the truck path.",
     "addressNote": "Roster address 1300 16th Ave is unverified and likely incorrect; the audited complex is the John Deere A&I Products facility on 10th St / 22nd Ave in the SW Rock Valley industrial park."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://aiproducts.com/about.html",
+        "date": "2025-01",
+        "type": "locator",
+        "claim": "Rock Valley IA is A&I Products' central distribution hub, HQ, and main manufacturing facility (all-makes aftermarket parts)."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.discoverwestman.com/articles/deere-acquires-rest-of-aai",
+        "date": "2011-01",
+        "type": "press",
+        "claim": "Deere completed full acquisition of A&I Products (Rock Valley IA); Deere spokesman confirms full ownership."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Rock Valley 'All-Makes' PDC is A&I Products, a wholly Deere-owned subsidiary (sole owner since Jan 2011); Deere-operated all-makes parts distribution, currently active.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

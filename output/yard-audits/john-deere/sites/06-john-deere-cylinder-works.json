@@ -102,5 +102,31 @@
     "fastLaneOpportunity": "Very wide open paved aprons on the riverside and broad internal driveways leave ample room for added truck lanes.",
     "urbanRural": "Located in the dense Quad Cities metro riverfront industrial fabric of Moline."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.wqad.com/article/news/local/john-deere-additional-layoffs-moline-cylinder-works/526-48fe43bf-8d71-4830-b5d8-96b92489e267",
+        "date": "2025-08",
+        "type": "press",
+        "claim": "As of Aug 2025 John Deere Moline Seeding & Cylinder Operations has ~625 employees; facility remains operational despite demand-driven layoffs."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.machinefinder.com/ww/en-US/articles/john-deere-announces-expanded-cylinder-manufacturing-capacity-2094",
+        "date": "2024-01",
+        "type": "press",
+        "claim": "John Deere Cylinder Works, 909 River Dr, Moline IL produces hydraulic cylinders; Deere invested $47M to expand machining capacity."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Deere-operated hydraulic-cylinder plant on River Dr; ~625 employees as of Aug 2025. No deere.com locator page for this specific site, so corroborated via QC press; held at confirmed.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
