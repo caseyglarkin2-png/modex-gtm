@@ -483,22 +483,10 @@ async function main() {
   const auditedCount = sites.length;
   const capHit = auditedCount === 30;
 
-  // Pick the featured site for the demo's first impression. Heuristic:
-  // the site whose archetype is the biggest cluster in the network (so
-  // the replay represents the most common reality), with the highest
-  // `dockDoorCount` tie-breaker (visual proof of scale).
-  const archetypeRanks = Object.entries(archetypeMix).sort(([, a], [, b]) => (b ?? 0) - (a ?? 0));
-  const topArchetype = archetypeRanks[0]?.[0] as ArchetypeId | undefined;
-  const featuredSiteId = topArchetype
-    ? sites
-        .filter((s) => s.archetype === topArchetype)
-        .sort((a, b) => (b.yardMetrics.dockDoorCount ?? 0) - (a.yardMetrics.dockDoorCount ?? 0))[0]?.id
-    : undefined;
-
-  // FOV verification gate: quarantine unverified/rejected sites before writing.
-  // In enforce mode this drops sites (and exits if the hero is among them), so
-  // recompute the network-derived fields from the gated set.
-  const gatedSites = fovGate(auditSlug, featuredSiteId, sites);
+  // FOV verification gate FIRST: quarantine unverified/rejected sites, then
+  // derive the hero + network fields ONLY from the verified set (so a divested/
+  // closed site can never become the featured hero or skew the totals).
+  const gatedSites = fovGate(auditSlug, undefined, sites);
   let gatedBbox = networkBbox;
   let gatedMix = archetypeMix;
   let gatedTotals = totals;
@@ -510,6 +498,17 @@ async function main() {
     gatedTotals = computeTotals(gatedSites);
   }
   const gatedCount = gatedSites.length;
+
+  // Pick the featured site for the demo's first impression, from the VERIFIED
+  // set: the site whose archetype is the biggest cluster (most common reality),
+  // with the highest `dockDoorCount` tie-breaker (visual proof of scale).
+  const archetypeRanks = Object.entries(gatedMix).sort(([, a], [, b]) => (b ?? 0) - (a ?? 0));
+  const topArchetype = archetypeRanks[0]?.[0] as ArchetypeId | undefined;
+  const featuredSiteId = topArchetype
+    ? gatedSites
+        .filter((s) => s.archetype === topArchetype)
+        .sort((a, b) => (b.yardMetrics.dockDoorCount ?? 0) - (a.yardMetrics.dockDoorCount ?? 0))[0]?.id
+    : undefined;
 
   const pack: DemoPack = {
     schemaVersion: '2',

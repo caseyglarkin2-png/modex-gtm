@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-09T21:20:57.191Z",
+  "builtAt": "2026-06-19T03:20:32.000Z",
   "account": {
     "slug": "publix",
     "displayName": "Publix Super Markets",
@@ -9,9 +9,9 @@
     "coverageNote": {
       "auditedCount": 11,
       "estimatedFootprint": null,
+      "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "auditedScope": "US",
       "note": "Audited all 11 identifiable facilities."
     },
     "featuredSiteId": "11-publix",
@@ -306,6 +306,32 @@
           "railServed": "No rail spur runs into the property; nearest rail is unrelated.",
           "trailerParkingCapacity": "Estimate of dedicated drop-yard stall capacity (~90) from east-yard rows; overhead estimate, low confidence.",
           "trailersVisible": "Count of trailers visible across captured imagery (docks + drop yard + north/south rows); ~140, approximate."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://jobs.publix.com/2025/05/06/behind-the-scenes-publix-distribution-and-logistics/",
+              "date": "2025-05",
+              "type": "press",
+              "claim": "Publix lists Lakeland FL among its 10 self-operated distribution centers"
+            },
+            {
+              "tier": 3,
+              "url": "https://www.yelp.com/biz/publix-hv-lv-warehouse-lakeland-2",
+              "date": "2026-02",
+              "type": "press",
+              "claim": "2600 County Line Rd HV/LV warehouse listed at this location, open 24h"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Lakeland County Line Rd HV/LV warehouse campus; Publix self-distributes from here and has an approved on-site expansion (active operation).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -544,6 +570,32 @@
           "yardMetrics.railServed": "No rail spur runs into the property in any imagery.",
           "yardMetrics.trailersVisible": "Approx count of parked trailers across the drop yard and dock faces in captured imagery; estimate.",
           "siteAreaAcres": "Derived from the perimeter polygon (~52 acres) covering the frozen DC sub-cluster (3 buildings + refrigeration plant + drop yard)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://jobs.publix.com/2025/05/06/behind-the-scenes-publix-distribution-and-logistics/",
+              "date": "2025-05",
+              "type": "press",
+              "claim": "Publix self-operates its Lakeland distribution complex (incl. frozen)"
+            },
+            {
+              "tier": 3,
+              "url": "https://www.yellowpages.com/lakeland-fl/publix-supermarket-warehouse-distribution-center",
+              "date": "2026",
+              "type": "press",
+              "claim": "Publix Frozen Foods Warehouse listed in Lakeland FL"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Publix Frozen Foods Warehouse exists and operates in the SW Lakeland (Drane Field / County Line) DC corridor; Publix self-distributes frozen here.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -818,6 +870,32 @@
           "urbanRural": "Urban - within the Lakeland metro, surrounded by mobile-home parks, commercial development and a golf community.",
           "siteAreaAcres": "~113 acres for the operational footprint inside the fence line (excludes adjacent golf course/ponds). Derived from the perimeter polygon.",
           "streetView": "Only one pano covers the property (LG3KSHrUjuj2o7LcGTFJiw, 2011-04) on the internal Gate-5 access road; both perimeter and truckGate streetViewMeta use it. heading 348 frames the fenced approach toward the gate - the arrival view a driver sees."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://jobs.publix.com/2025/05/06/behind-the-scenes-publix-distribution-and-logistics/",
+              "date": "2025-05",
+              "type": "press",
+              "claim": "Lakeland houses Publix Fresh Kitchen, Deli Kitchen and produce operations (self-operated)"
+            },
+            {
+              "tier": 3,
+              "url": "https://www.waze.com/live-map/directions/publix-fresh-foods-warehouse-new-tampa-hwy-3045-lakeland?to=place.w.182190360.1821838068.5830918",
+              "date": "2026",
+              "type": "press",
+              "claim": "Publix Fresh Foods / Deli Warehouse at 3045 New Tampa Hwy, Lakeland"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Publix Produce/Fresh/Deli operation is real and self-operated in Lakeland, but mapped coords (NE Lakeland) do not match the known Fresh/Deli/Produce complex address (3045 New Tampa Hwy, W Lakeland); facility confirmed, geolocation uncertain.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1101,6 +1179,32 @@
           "scale": "No truck scale/weigh pad identified in the truck path; cannot fully rule out - flagged uncertain.",
           "trailersVisible": "~165 trailers counted across drop yards and dock faces in the captured imagery; approximate.",
           "siteAreaAcres": "76.4 ac derived from the traced perimeter polygon."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://jobs.publix.com/job-location/deerfield-beach-fl",
+              "date": "2026",
+              "type": "locator",
+              "claim": "Active Publix distribution/dairy warehouse jobs at Deerfield Beach FL"
+            },
+            {
+              "tier": 3,
+              "url": "https://www.yelp.com/biz/publix-distribution-center-deerfield-beach",
+              "date": "2026-06",
+              "type": "press",
+              "claim": "Publix Distribution Center, 777 SW 12th Ave, Deerfield Beach FL"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Deerfield Beach DC (777 SW 12th Ave) is a current Publix self-operated refrigerated/dairy distribution + manufacturing site; active 2026 dairy job reqs.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1415,6 +1519,32 @@
           "buildingCount": "Two large connected building masses (tan-roof west, white-roof east) read as 2 structures.",
           "railServed": "Rail line runs east of the site beyond I-95 but no spur enters the Publix property.",
           "siteAreaAcres": "~68 acres computed from the traced perimeter polygon (fenced property only, excludes adjacent school/industrial)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://jobs.publix.com/employment/boynton-beach-warehouse-jobs/944/21546/6252001-4155751-4167510-4148677/4",
+              "date": "2026",
+              "type": "locator",
+              "claim": "Active Publix warehouse selector reqs at Boynton Beach DC, 5500 Park Ridge Blvd"
+            },
+            {
+              "tier": 1,
+              "url": "https://jobs.publix.com/2025/05/06/behind-the-scenes-publix-distribution-and-logistics/",
+              "date": "2025-05",
+              "type": "press",
+              "claim": "Boynton Beach FL listed among Publix 10 distribution centers"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Boynton Beach grocery DC (5500 Park Ridge Blvd) is a current Publix self-operated DC; active 2026 warehouse-selector reqs.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1676,6 +1806,32 @@
           "siteAreaAcres": "72.4 ac is the traced fenced/paved operational core. Public project pages cite a ~120-acre full campus including retention ponds, buffers, and undeveloped land.",
           "railServed": "No rail spur visible entering the property.",
           "urbanRural": "Lee Vista / Orlando International Airport industrial corridor, dense metro industrial fabric — Urban."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://jobs.publix.com/2025/05/06/behind-the-scenes-publix-distribution-and-logistics/",
+              "date": "2025-05",
+              "type": "press",
+              "claim": "Orlando FL listed among Publix 10 distribution centers"
+            },
+            {
+              "tier": 3,
+              "url": "https://www.whiting-turner.com/projects/warehouse-distribution/publix-refrigerated-distribution-center/",
+              "date": "2025",
+              "type": "press",
+              "claim": "120-acre, 1M SF Publix refrigerated DC campus at Hazeltine National Dr, Orlando, 24/7"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Orlando refrigerated DC at 7350 Hazeltine National Dr (near MCO) is a current Publix self-operated 1M SF refrigerated campus.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1985,6 +2141,32 @@
           "buildingCount": "Counted 3 principal structures: west DC, east DC, and the SW maintenance building (zigzag admin building not counted as a DC).",
           "siteAreaAcres": "32.3 ac from the traced fenced operational footprint; the broader parcel including grass/tree buffers to W Beaver St is larger.",
           "urbanRural": "West Jacksonville metro fabric: subdivisions immediately north and south across W Beaver St, a major divided arterial frontage. Urban."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://jobs.publix.com/2025/05/06/behind-the-scenes-publix-distribution-and-logistics/",
+              "date": "2025-05",
+              "type": "press",
+              "claim": "Jacksonville FL listed among Publix 10 distribution centers"
+            },
+            {
+              "tier": 2,
+              "url": "https://www.jaxdailyrecord.com/news/2025/oct/06/more-permits-boost-publix-warehouse-to-almost-145-million/",
+              "date": "2025-10",
+              "type": "press",
+              "claim": "Publix expanding its existing operating West Jacksonville DC at 9786/9800 W Beaver St (active investment, not a closure)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Existing West Jacksonville DC (9786 W Beaver St) operates today with an active ~$145M on-site expansion. NOTE: a SEPARATE freezer warehouse there opens late 2027 (under construction) and is NOT what is mapped here.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2277,6 +2459,32 @@
           "railServed": "No rail spur enters the property; nearest activity is roadway only. False.",
           "buildingCount": "2 = main Publix DC building + a small detached fleet/maintenance annex with canopies at the SW corner (green bobtail tractors/vans visible).",
           "siteAreaAcres": "~55 acres derived (shoelace) from the traced perimeter polygon (fenced parcel incl. drop yard, building, apron, parking, and retention/buffer inside the fence)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://jobs.publix.com/2025/05/06/behind-the-scenes-publix-distribution-and-logistics/",
+              "date": "2025-05",
+              "type": "press",
+              "claim": "Sarasota FL listed among Publix 10 distribution centers"
+            },
+            {
+              "tier": 3,
+              "url": "https://www.yelp.com/biz/publix-sarasota-warehouse-sarasota",
+              "date": "2026-05",
+              "type": "press",
+              "claim": "Publix Sarasota Warehouse, 6123 Sawyer Rd, Sarasota FL"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Sarasota DC (Sawyer Rd) is a current Publix self-operated distribution center; in corporate DC count + active warehouse listing.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2556,6 +2764,32 @@
           "siteAreaAcres": "~136 acres for the fenced industrial campus, derived from the traced perimeter polygon (excludes the rec fields/woods to the north).",
           "trailersVisible": "Estimate ~360 across all drop yards and dock faces; honest overhead estimate, not exact.",
           "railServed": "No rail spur enters the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://jobs.publix.com/2025/05/06/behind-the-scenes-publix-distribution-and-logistics/",
+              "date": "2025-05",
+              "type": "press",
+              "claim": "Dacula GA (Atlanta) listed among Publix distribution centers + dairy manufacturing"
+            },
+            {
+              "tier": 3,
+              "url": "https://www.yelp.com/biz/publix-super-market-atlanta-warehouse-dacula",
+              "date": "2026-03",
+              "type": "press",
+              "claim": "Publix Super Market Atlanta Warehouse, 445 Hurricane Trl, Dacula GA, 24h"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Dacula GA (Atlanta) distribution + manufacturing campus (445 Hurricane Trl) is a current Publix self-operated DC/dairy plant. Corporate count cites this as the GA (Lawrenceville-area) facility.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2848,6 +3082,32 @@
           "urbanRural": "Edge-of-town McCalla AL inside Jefferson Metropolitan Park, surrounded by woods/farmland and a few industrial neighbors; broader setting is rural.",
           "railServed": "A rail line runs NW-SE through the trees off the west property edge but does not spur into the site; no rail dock on the property.",
           "yardMetrics": "dockDoorCount/trailersVisible/trailerParkingCapacity are overhead estimates from z17-z18 satellite, flagged as approximate."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://jobs.publix.com/job-opening/warehouse-selector-mccalla-2/",
+              "date": "2026-04",
+              "type": "locator",
+              "claim": "Active Publix warehouse selector req at McCalla AL DC"
+            },
+            {
+              "tier": 1,
+              "url": "https://alabamanewscenter.com/2017/02/22/publix-opens-alabama-distribution-center-creates-300-jobs/",
+              "date": "2017-02",
+              "type": "press",
+              "claim": "Publix opened its 638k SF McCalla AL DC (Jefferson Met Park)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "McCalla AL refrigerated DC (Jefferson Metropolitan Park) is a current Publix self-operated 638k SF DC; active 2026 selector reqs.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3128,6 +3388,32 @@
           "dropYard": "Dedicated trailer-storage lots on the east end and north drive, separate from active dock staging.",
           "railServed": "No rail spur enters the property; no tracks visible anywhere on or adjacent to the campus.",
           "yardMetrics": "Counts are honest overhead estimates: dockDoorCount and trailer figures are approximate given the two very large multi-face cross-docks; siteAreaAcres derived from the traced perimeter ring (~99 ac)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://jobs.publix.com/2025/05/06/behind-the-scenes-publix-distribution-and-logistics/",
+              "date": "2025-05",
+              "type": "press",
+              "claim": "Greensboro NC listed among Publix 10 distribution centers"
+            },
+            {
+              "tier": 1,
+              "url": "https://jobs.publix.com/employment/united-states-distribution-jobs/944/21460/6252001/2",
+              "date": "2026",
+              "type": "locator",
+              "claim": "Active Publix distribution jobs at McLeansville NC"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "McLeansville/Greensboro NC DC was the under-construction $400M build (groundbreaking 2020, completed ~Q4 2022); now OPERATING with active distribution reqs. Not a phantom/under-construction site today.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       }
     ]

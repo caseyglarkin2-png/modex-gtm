@@ -1,19 +1,19 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-02T16:17:18.256Z",
+  "builtAt": "2026-06-19T03:20:25.624Z",
   "account": {
     "slug": "john-deere",
     "displayName": "John Deere",
     "archetype": "manufacturer",
-    "siteCount": 22,
+    "siteCount": 21,
     "coverageNote": {
-      "auditedCount": 22,
+      "auditedCount": 21,
       "estimatedFootprint": 30,
+      "totalGlobalFootprint": 60,
+      "auditedScope": "NA",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "John Deere operates ~60 manufacturing/parts facilities globally; ~30 are in NA. We audited 21 NA sites. International scope on request.",
-      "auditedScope": "NA",
-      "totalGlobalFootprint": 60
+      "note": "John Deere operates ~60 manufacturing/parts facilities globally; ~30 are in NA. We audited 21 NA sites. International scope on request."
     },
     "featuredSiteId": "19-john-deere-north-american-parts-distribution-center",
     "dossierIntro": "John Deere runs the largest heavy-equipment manufacturing network in the dataset. 60 facilities; we audited 21. Milan IL Parts Distribution covers 215 acres. Waterloo IA Tractor Operations is 620 acres. 3,914 total audited acres. YardFlow runs aftermarket parts logistics and whole-goods manufacturing as two distinct queues.",
@@ -34,7 +34,7 @@
     "archetypeMix": {
       "#6": 6,
       "#9": 5,
-      "#3": 10,
+      "#3": 9,
       "#10": 1
     },
     "totals": {
@@ -42,7 +42,7 @@
       "trailerCapacity": 1999,
       "gates": 24,
       "railServed": 3,
-      "acres": 4148
+      "acres": 3914
     },
     "sites": [
       {
@@ -152,28 +152,6 @@
         },
         "dossierExcerpt": "Roster supplied geometric-center coordinates (42.522441, -92.269194) flagged as moved\n2958 m. Satellite probe at z15-z16 landed directly on a massive industrial complex\nsurrounded entirely by farmland — unmistakably the John Deere Waterloo Works Tractor\nOperations site (the largest Deere assembly complex in the world, building 7/8/9 Series\ntractors). Web search confirmed 3500 E Donald St, Waterloo IA, with public 90-minute\nriding factory tours. Center refined slightly SW to 42.5210, -92.2695 to sit on the\nbuilding mass.",
         "mapsUrl": "https://www.google.com/maps/@42.5210,-92.2695,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/john-deere/01-john-deere-waterloo-works-tractor-operations-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.521,
-              "lng": -92.2695
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/john-deere/01-john-deere-waterloo-works-tractor-operations-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.521,
-              "lng": -92.2695
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed flagship John Deere Waterloo Works Tractor Operations complex at 3500 E Donald St, Waterloo IA. Largest Deere assembly complex globally (7/8/9 Series tractors). Roster geometric-center coords (moved 2958m) landed on the building mass; locked center refined to 42.5210,-92.2695.",
           "truckGate": "Inferred true with medium confidence. This is a Fortune-500 flagship assembly campus set far back from public roads behind long private internal drives; such plants are universally fenced and gate-controlled. Street View coverage stops at public rural roads (E Donald St / 41st St) and never reaches the actual truck gate, so the barrier arm could not be directly confirmed.",
@@ -188,6 +166,32 @@
           "entryLanes": "Estimate; internal drives are wide multi-lane but exact gate lane count not visible.",
           "scale": "No truck scale positively identified in imagery; left false, flagged uncertain.",
           "urbanRural": "Complex is surrounded entirely by farmland on the rural east edge of Waterloo IA — Rural."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://about.deere.com/en-us/locations/factories/waterloo",
+              "date": "2026-03",
+              "type": "locator",
+              "claim": "Deere's official Waterloo factory page lists Tractor Operations among the five active Waterloo Works sites."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.deere.com/en/stories/featured/strengthening-waterloo-manufacturing/",
+              "date": "2025-06",
+              "type": "press",
+              "claim": "7/8/9 Series tractors including the new 9RX line are currently assembled in Waterloo."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "World's largest Deere tractor-assembly complex; new 9RX line confirms active production despite 2024-25 demand-driven layoffs.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -299,28 +303,6 @@
         },
         "dossierExcerpt": "Roster supplied ROOFTOP coordinates (42.468191, -92.433528) moved 351 m — these landed\ndirectly on a long (~900 m) single-mass industrial building. Confirmed as the John Deere\nWaterloo Works Engine Works at 3801 W Ridgeway Ave. Locked center refined slightly to\n42.4678, -92.4330 on the building centroid.",
         "mapsUrl": "https://www.google.com/maps/@42.4678,-92.4330,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/john-deere/02-john-deere-waterloo-works-engine-works-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.4678,
-              "lng": -92.433
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/john-deere/02-john-deere-waterloo-works-engine-works-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.4678,
-              "lng": -92.433
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed John Deere Waterloo Works Engine Works at 3801 W Ridgeway Ave, Waterloo IA. Roster ROOFTOP coords (moved 351m) landed on the long industrial building; locked center refined to 42.4678,-92.4330.",
           "truckGate": "Inferred true, medium confidence. The whole property is clearly fenced (continuous fence line visible at z19-z20). The truck yard sits at the SE corner of the building accessed by a private driveway loop set well back from the road. Street View only reaches the surrounding public roads (W Ridgeway Ave north, side road east) and never reaches the truck-yard entrance, so a barrier arm could not be directly confirmed.",
@@ -336,6 +318,32 @@
           "siteAreaAcres": "~95 acres including the large open grass land south of the building.",
           "urbanRural": "Edge-of-town Waterloo IA with cropland to the north and west and large open grass on the property — Rural.",
           "postGateStaging": "Paved yard inside the fence before the docks; inferred true, low confidence."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://about.deere.com/en-us/locations/factories/waterloo",
+              "date": "2026-03",
+              "type": "locator",
+              "claim": "Engine Works listed as one of the five active Waterloo Works sites on Deere's official locator."
+            },
+            {
+              "tier": 2,
+              "url": "https://facilityexplorer.iowadnr.gov/FacilityExplorer/SiteDetail.aspx?facID=310631995",
+              "date": "2025-01",
+              "type": "econ-dev",
+              "claim": "Iowa DNR active permit record for John Deere Engine Works, 3801 W Ridgeway Ave, Waterloo, owned by Deere & Company."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "John Deere Power Systems diesel/natural-gas engine plant on Ridgeway Ave; active per Deere locator and Iowa DNR permit.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -446,28 +454,6 @@
         },
         "dossierExcerpt": "Roster supplied ROOFTOP coordinates (42.501899, -92.355419) moved only 53 m — accurate.\nSatellite confirmed a large multi-building industrial complex along the Cedar River.\nStreet View confirmed the campus directly: a \"JOHN DEERE TRACTOR & ENGINE MUSEUM\" sign on\nthe south building and \"TechWorks Campus\" signage inside. The active John Deere Drivetrain\nOperations (formerly Drive Train) production buildings are the large fenced cluster along\nthe river to the north. Locked center placed on that production cluster at 42.5025,-92.3535.",
         "mapsUrl": "https://www.google.com/maps/@42.5025,-92.3535,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/john-deere/03-john-deere-waterloo-works-drivetrain-operations-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.5025,
-              "lng": -92.3535
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/john-deere/03-john-deere-waterloo-works-drivetrain-operations-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.5025,
-              "lng": -92.3535
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed John Deere Drivetrain Operations (formerly Drive Train) at 400 Westfield Ave, Waterloo IA. Roster ROOFTOP coords (moved only 53m) landed correctly. Street View confirmed the John Deere Tractor & Engine Museum sign and TechWorks Campus signage on the southern part of the campus; the active production buildings are the large fenced cluster along the Cedar River to the north.",
           "truckGate": "Inferred true, medium confidence. The active production complex is enclosed by a continuous chain-link perimeter fence — clearly visible along the north road on multiple Street View headings (2026 imagery). Truck gate is a driveway break in this fence; a barrier arm could not be individually resolved.",
@@ -483,6 +469,32 @@
           "siteAreaAcres": "~110 acres bounded by the Cedar River (W), the north perimeter road, and Westfield Ave / the highway corridor (S).",
           "scale": "No truck scale identified; left false.",
           "postGateStaging": "Paved yard inside the fence ahead of the docks; inferred true, low confidence."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://about.deere.com/en-us/locations/factories/waterloo",
+              "date": "2026-03",
+              "type": "locator",
+              "claim": "Drivetrain Operations listed among the five active Waterloo Works sites on Deere's official factory page."
+            },
+            {
+              "tier": 2,
+              "url": "https://programs.iowadnr.gov/focomp/Detail/FacilityDetail?facilityID=310200485",
+              "date": "2025-01",
+              "type": "econ-dev",
+              "claim": "Iowa DNR active facility record for John Deere Waterloo Works - Drive Train Operations, 300 W Commercial St, Waterloo."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Drivetrain (transmissions/axles) plant at 300 W Commercial St; active per Deere locator and DNR record.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -589,28 +601,6 @@
         },
         "dossierExcerpt": "Roster supplied ROOFTOP coordinates (42.507619, -92.365938) moved 180 m — landed on a\nlarge multi-building industrial complex on the Cedar River. Confirmed as the John Deere\nWaterloo Foundry at 2000 Westfield Ave. Locked center refined to 42.5072, -92.3650 on the\nfoundry building mass.",
         "mapsUrl": "https://www.google.com/maps/@42.5072,-92.3650,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/john-deere/04-john-deere-waterloo-foundry-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.5072,
-              "lng": -92.365
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/john-deere/04-john-deere-waterloo-foundry-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.5072,
-              "lng": -92.365
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed John Deere Waterloo Foundry at 2000 Westfield Ave, Waterloo IA. Roster ROOFTOP coords (moved 180m) landed on the large foundry building mass along the Cedar River; locked center refined to 42.5072,-92.3650.",
           "truckGate": "CONFIRMED via Street View (2026 imagery, 42.5049,-92.3648). Multiple yellow barrier arms span the truck lanes, with a chain-link perimeter fence and gates. Definitive controlled truck entrance.",
@@ -626,6 +616,32 @@
           "multipleFacilities": "Multi-building foundry complex (4+ distinct large building masses) on one property.",
           "entryLanes": "Estimated 2 inbound / 2 outbound from the gate layout; exact count partly obscured.",
           "scale": "No truck scale positively identified; left false, flagged uncertain."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://about.deere.com/en-us/locations/factories/waterloo",
+              "date": "2026-03",
+              "type": "locator",
+              "claim": "Foundry Operations listed as one of the five active Waterloo Works sites."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.deere.com/en/stories/featured/strengthening-waterloo-manufacturing/",
+              "date": "2025-06",
+              "type": "press",
+              "claim": "Waterloo foundry currently casts gray/ductile iron components feeding tractor assembly."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Deere-owned foundry (gray/ductile iron castings) feeding the Waterloo complex.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -756,28 +772,6 @@
         },
         "dossierExcerpt": "Roster supplied GEOMETRIC_CENTER coordinates (41.526702, -90.434909) flagged as moved\n2007 m. Satellite probe landed directly on a massive industrial complex on the Mississippi\nRiver. Web search confirmed the John Deere Harvester Works at 1100 13th Ave, East Moline\nIL — the world's largest combine manufacturing facility (~4M sq ft, ~90 acres under roof),\nproducing combines since 1913. Google Maps place coordinates (41.5234, -90.4355)\ncorroborate. Locked center placed on the main building mass at 41.5240, -90.4360.",
         "mapsUrl": "https://www.google.com/maps/@41.5240,-90.4360,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/john-deere/05-john-deere-harvester-works-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.524,
-              "lng": -90.436
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/john-deere/05-john-deere-harvester-works-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.524,
-              "lng": -90.436
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed John Deere Harvester Works at 1100 13th Ave, East Moline IL — the world's largest combine manufacturing facility (~4M sq ft, ~90 acres under roof). Roster GEOMETRIC_CENTER coords (moved 2007m) landed on the complex; Google Maps place (41.5234,-90.4355) corroborates. Locked center placed on the main building mass at 41.5240,-90.4360.",
           "truckGate": "Inferred true, medium confidence. Street View shows a 'John Deere Harvester Works Gate 12' sign at a private access drive — the plant uses a formal numbered-gate security system, with a continuous chain-link perimeter fence visible along 13th Ave. The actual gate barrier sits at the end of the private drive beyond Street View coverage.",
@@ -795,6 +789,32 @@
           "siteAreaAcres": "~410 acres bounded by the Mississippi River (NW) and 13th Ave / urban East Moline (SE).",
           "scale": "No truck scale positively identified; left false, flagged uncertain.",
           "entryLanes": "Estimated; exact gate lane counts not visible (SV does not reach the gates)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://about.deere.com/en-us/locations/factories/harvester-works",
+              "date": "2025-06",
+              "type": "locator",
+              "claim": "Deere's official locator confirms Harvester Works, East Moline IL is the active combine assembly plant."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.deere.com/en/stories/featured/harvester-investment/",
+              "date": "2025-06",
+              "type": "press",
+              "claim": "$162M investment at Harvester Works and current X9 combine production."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "World's largest combine plant (~4M sqft); recent $162M reinvestment and X9 production confirm active operation.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -933,28 +953,6 @@
         },
         "dossierExcerpt": "- Address: 909 River Dr, Moline, IL 61265\n- Locked center: 41.508049, -90.52593 (on the main building roof)\n- Confirmation: Roster coords were ROOFTOP-precise (moved 146 m). Satellite at\n  z16-z19 placed the pin squarely on a long industrial building running ENE-WSW\n  along the Mississippi River. Web search (Waze, Panjiva, Aramark/Catertrax cafe\n  page) confirms John Deere Cylinder Works at 909 River Drive — Panjiva buyer\n  records show \"909 River Drive Gate 24 Dept 129\". Building form (large\n  multi-mass manufacturing plant on the riverfront) is consistent with a\n  hydraulic-cylinder component plant. Correct site confirmed.",
         "mapsUrl": "https://www.google.com/maps/@41.508049,-90.52593,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/john-deere/06-john-deere-cylinder-works-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.508049,
-              "lng": -90.52593
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/john-deere/06-john-deere-cylinder-works-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.508049,
-              "lng": -90.52593
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Building fronts River Drive directly with no controlled perimeter checkpoint visible in 2023-2025 Street View; drive-in dock doors face the road with no fence or barrier arm. 'Gate 24' in shipping records is an internal Deere dock/department number, not a guarded perimeter gate.",
           "multipleFacilities": "Four distinct building masses on the riverfront campus, shares the corridor with adjacent Deere Planter Works (idx 7).",
@@ -962,6 +960,32 @@
           "dockDoors": "Estimated 16 from drive-in doors visible on the south (River Drive) face plus loading positions along the north apron; imagery resolution limits an exact count.",
           "fastLaneOpportunity": "Very wide open paved aprons on the riverside and broad internal driveways leave ample room for added truck lanes.",
           "urbanRural": "Located in the dense Quad Cities metro riverfront industrial fabric of Moline."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://www.wqad.com/article/news/local/john-deere-additional-layoffs-moline-cylinder-works/526-48fe43bf-8d71-4830-b5d8-96b92489e267",
+              "date": "2025-08",
+              "type": "press",
+              "claim": "As of Aug 2025 John Deere Moline Seeding & Cylinder Operations has ~625 employees; facility remains operational despite demand-driven layoffs."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.machinefinder.com/ww/en-US/articles/john-deere-announces-expanded-cylinder-manufacturing-capacity-2094",
+              "date": "2024-01",
+              "type": "press",
+              "claim": "John Deere Cylinder Works, 909 River Dr, Moline IL produces hydraulic cylinders; Deere invested $47M to expand machining capacity."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Deere-operated hydraulic-cylinder plant on River Dr; ~625 employees as of Aug 2025. No deere.com locator page for this specific site, so corroborated via QC press; held at confirmed.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1112,28 +1136,6 @@
         },
         "dossierExcerpt": "- Address: 501 River Dr, Moline, IL 61265\n- Locked center: 41.50849, -90.531986 (on the main building roof)\n- Confirmation: Roster coords were ROOFTOP-precise (moved 129 m). Satellite\n  z16-19 placed the pin on a very large multi-mass riverfront manufacturing\n  plant. Web search (Waze, deere.com \"Seeding Moline\" story, Visit Quad Cities,\n  Panjiva) confirms John Deere Seeding Group at 501 River Drive — Deere's oldest\n  factory (roots to 1879), the business center for planters, box drills, and air\n  seeders. Street View shows the John Deere Seeding office entrance with display\n  equipment (tractors, planters). Correct site confirmed.",
         "mapsUrl": "https://www.google.com/maps/@41.50849,-90.531986,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/john-deere/07-john-deere-seeding-group-planter-works-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.50849,
-              "lng": -90.531986
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/john-deere/07-john-deere-seeding-group-planter-works-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.50849,
-              "lng": -90.531986
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Open campus. River Drive fronts the property directly with a John Deere logo monument and open driveways into the lots; no barrier arm, sliding gate, or guard booth visible in 2023-2025 Street View. Truck access to docks and drop yard is via uncontrolled internal driveways from River Drive.",
           "multipleFacilities": "Three large building masses on the riverfront campus (Deere's oldest factory, est. 1879); contiguous with the broader Moline Deere riverfront corridor.",
@@ -1142,6 +1144,32 @@
           "dockDoors": "~22 estimated along the north (riverside) building face where multiple trailers are backed in; exact count limited by imagery resolution.",
           "fastLaneOpportunity": "Broad open paved/gravel aprons and wide internal driveways leave ample room for added or express lanes.",
           "urbanRural": "Quad Cities metro riverfront industrial fabric, Moline."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.deere.com/en/stories/featured/seeding-moline/",
+              "date": "2025-01",
+              "type": "press",
+              "claim": "John Deere Seeding factory in Moline is the company's oldest factory and business center for planters; $30M modernization of 55,000 sqft."
+            },
+            {
+              "tier": 1,
+              "url": "https://finance.yahoo.com/news/deere-pours-250m-quad-cities-162509759.html",
+              "date": "2025-08",
+              "type": "press",
+              "claim": "Aug 2025 Deere committed over $250M to upgrade three Quad Cities facilities including John Deere Seeding in Moline."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Deere's oldest factory and business center for planters/drills/air seeders; active with 2025 modernization investment.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1271,28 +1299,6 @@
         },
         "dossierExcerpt": "- Address: 1175 E 90th St, Davenport, IA 52807\n- Locked center: 41.601800, -90.551500 (centroid of the giant main\n  assembly hall)\n- Confirmation: Roster geocode moved 2959 m (GEOMETRIC_CENTER quality), so\n  the location was verified independently. Satellite z15-17 around the supplied\n  point shows one enormous manufacturing complex standing alone in open\n  farmland NE of Davenport. Web search (about.deere.com Davenport Works, Iowa\n  DNR Facility Explorer, Quad Cities Chamber) confirms John Deere Davenport\n  Works — a Construction & Forestry division plant producing articulated dump\n  trucks, four-wheel-drive loaders, motor graders, and log skidders since 1974.\n  Finished construction equipment (graders, ADTs, wheel loaders) staged in rows\n  on the yards confirms the site. Correct location confirmed; locked center",
         "mapsUrl": "https://www.google.com/maps/@41.601800,-90.551500,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/john-deere/08-john-deere-davenport-works-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.6018,
-              "lng": -90.5515
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/john-deere/08-john-deere-davenport-works-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.6018,
-              "lng": -90.5515
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Site is set ~600 m back from the public road across landscaped grounds, reached by a wide private internal access road off a controlled intersection on E 90th St. Multi-lane markings at the road junction indicate a controlled private entry. No Street View coverage on the internal road and no booth resolved in satellite, so a perimeter control point is inferred from the campus layout.",
           "guardShack": "No guard booth resolved at the public-road entry or along the access road in available imagery; large Deere assembly campuses of this era typically use a check-in point near the building rather than a road booth.",
@@ -1303,6 +1309,32 @@
           "siteAreaAcres": "~290 acres for the fenced industrial parcel; surrounding farmland excluded.",
           "urbanRural": "Rural — large standalone plant in open farmland NE of Davenport near the Hwy 130 / I-80 area.",
           "fastLaneOpportunity": "Enormous paved aprons and wide internal roads leave abundant room for added or express truck lanes."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://about.deere.com/en-us/locations/factories/davenport-works",
+              "date": "2026-01",
+              "type": "locator",
+              "claim": "Davenport Works (2.2M sqft) has produced construction and forestry equipment since 1974; 6 active product lines."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.kwqc.com/2026/06/11/john-deere-bringing-back-20-workers-davenport-works/",
+              "date": "2026-06",
+              "type": "press",
+              "claim": "June 2026: John Deere bringing back 20 workers to Davenport Works to meet rising construction/forestry demand."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active C&F plant recalling workers as recently as June 2026.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1434,28 +1466,6 @@
         },
         "dossierExcerpt": "- Address: 18600 S John Deere Rd, Dubuque, IA 52001\n- Locked center: 42.566837, -90.690881 (centroid of the mile-long main\n  building)\n- Confirmation: Roster geocode flagged `movedMeters: 14294`, so the supplied\n  point was verified independently. Satellite z14-16 around the supplied\n  coordinate shows one enormous mile-long industrial complex on a riverbottom\n  tract SW of Dubuque — exactly the John Deere Dubuque Works. Web search\n  (about.deere.com Dubuque Works, Iowa DNR Facility Explorer, Panjiva) confirms\n  the plant: a Construction & Forestry facility making backhoes, crawler dozers,\n  and skid-steer loaders, in operation since 1946, \"in excess of one mile long\n  on 1,465 acres.\" The supplied coordinate is in fact correct and on the\n  building — locked as the center.",
         "mapsUrl": "https://www.google.com/maps/@42.566837,-90.690881,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/john-deere/09-john-deere-dubuque-works-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.566837,
-              "lng": -90.690881
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/john-deere/09-john-deere-dubuque-works-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.566837,
-              "lng": -90.690881
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Mile-long plant on a 1,465-acre tract; reached by a long internal access road with multiple roundabouts off S John Deere Rd. Multi-lane managed entries at the building edge are inferred from the campus scale and layout; exact gate hardware not resolved (no Street View past the property edge).",
           "guardShack": "No guard booth resolved at entries in available satellite imagery.",
@@ -1467,6 +1477,32 @@
           "siteAreaAcres": "~480 acres for the developed/fenced industrial footprint; the full Deere tract is 1,465 acres including buffer woodland and farmland.",
           "urbanRural": "Rural — isolated riverbottom plant SW of Dubuque surrounded by farmland, woods, and Mississippi backwater.",
           "fastLaneOpportunity": "Vast paved aprons and wide internal roads leave abundant room for added or express truck lanes."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://about.deere.com/en-us/locations/factories/dubuque-works",
+              "date": "2026-01",
+              "type": "locator",
+              "claim": "Dubuque Works has been a cornerstone of heavy-equipment manufacturing since 1946."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.kcrg.com/2026/02/19/john-deere-bringing-back-27-workers-dubuque-facility/",
+              "date": "2026-02",
+              "type": "press",
+              "claim": "Feb 2026: Deere returning 27 employees to Dubuque Works for construction/forestry operations."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Plant operational and recalling workers; mid-frame skid steer / CTL LINE shift to Ramos Arizpe Mexico in 2026 is a partial line move, not a closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1577,28 +1613,6 @@
         },
         "dossierExcerpt": "- Address: 825 SW Irvinedale Dr, Ankeny, IA 50023\n- Locked center: 41.720916, -93.62938 (centroid of the main building\n  cluster)\n- Confirmation: Roster geocode quality GEOMETRIC_CENTER (moved 617 m).\n  Satellite z15-17 around the supplied point shows one very large industrial\n  campus ringed by Ankeny suburban development — exactly the John Deere Des\n  Moines Works. Web search (Greater Des Moines Partnership, Ankeny Chamber,\n  Yelp, US EPA fact sheet) confirms the plant at 825 SW Irvinedale Dr, an\n  agricultural-equipment assembly plant building cotton harvesters, sprayers,\n  tillage tools, and See & Spray equipment. Rows of green John Deere finished\n  equipment staged in the yards corroborate the site. Correct location\n  confirmed.",
         "mapsUrl": "https://www.google.com/maps/@41.720916,-93.62938,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/john-deere/10-john-deere-des-moines-works-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.720916,
-              "lng": -93.62938
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/john-deere/10-john-deere-des-moines-works-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.720916,
-              "lng": -93.62938
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Very large campus fully enclosed by a chain-link perimeter fence (confirmed on the west side in 2024 Street View) with a landscaped berm. Access is through controlled gates on the internal perimeter ring road off SW State St and other public roads; gate hardware itself is not reachable by Street View. A controlled truck gate is inferred from the fenced campus layout.",
           "guardShack": "Set true: a fully fenced assembly campus of this scale (one of Deere's largest plants) is operated with staffed entry points; specific booth structures were not resolved in satellite imagery (medium confidence).",
@@ -1610,6 +1624,32 @@
           "urbanRural": "Urban — campus sits inside the Des Moines metro fabric, ringed by Ankeny residential subdivisions and commercial development.",
           "fastLaneOpportunity": "Vast paved aprons and wide internal ring roads leave abundant room for added or express truck lanes.",
           "truckGateCount": "Estimated 3 controlled gates on the perimeter ring road; not all individually confirmed."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.deere.com/en/stories/featured/ankeny-manufacturing/",
+              "date": "2025-01",
+              "type": "press",
+              "claim": "Des Moines Works (Ankeny, 450+ acres) produces sprayers, cotton harvesters, grain drills and tillage; $40M+ See & Spray expansion."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.manufacturingdive.com/news/deere-lays-off-119-workers-at-des-moines-works-iowa-plant/741072/",
+              "date": "2025-01",
+              "type": "press",
+              "claim": "2025 layoffs at Des Moines Works (~1,500 employees); tillage assembly moving to North Dakota — plant continues sprayer/cotton-picker production."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active sprayer/tillage plant with recent See & Spray expansion; 2025 layoffs and tillage line move to ND are partial, not a closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1735,28 +1775,6 @@
         },
         "dossierExcerpt": "The roster geocode (ROOFTOP, moved 2034 m) landed directly on a large multi-building\nindustrial complex on the east edge of Ottumwa, bounded by the Des Moines River and\nUS-63 to the east and a residential street grid to the west and south. The scale and\nlayout — many connected long-span manufacturing buildings, material storage yards,\nand a fenced perimeter — are fully consistent with a legacy John Deere assembly plant.\nWeb search confirmed the address (928 E Vine St) and the facility identity. Coordinates\nlocked at the supplied point.",
         "mapsUrl": "https://www.google.com/maps/@41.003824,-92.4103,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/john-deere/11-ottumwa-works-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.003824,
-              "lng": -92.4103
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/john-deere/11-ottumwa-works-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.003824,
-              "lng": -92.4103
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Controlled truck entrance off the south access road from E Vine St; satellite z21 shows a gatehouse structure sitting in the drive with an apron in front and a perimeter fence line running off both sides.",
           "guardShack": "Small standalone gatehouse booth at the entrance (~1-2 vehicle footprint). Corroborated by driver reviews referencing 'friendly staff from the gate house to the docks' and on-site security.",
@@ -1773,6 +1791,32 @@
           "dropYard": "Dedicated trailer-storage lots on-site, distinct from active dock staging.",
           "railServed": "No rail spur observed running into the property in current imagery.",
           "exitLanes": "Exit lane count not separately determinable; entry/exit share the single gate."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.deere.com/en/stories/featured/ottumwa-investments/",
+              "date": "2026-01",
+              "type": "press",
+              "claim": "Ottumwa Works: ~$20M invested over five years and continuing into 2026; rebuilt round-baler final assembly line."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.kcrg.com/2025/10/16/john-deere-moving-some-production-jobs-out-ottumwa-des-moines/",
+              "date": "2025-10",
+              "type": "press",
+              "claim": "Oct 2025: Deere shifting some hay/forage mower production to Mexico — plant continues hay & forage / round baler production."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active hay & forage plant with rebuilt round-baler line and 2026 investment; mower line move to Mexico is partial, not a closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1879,28 +1923,6 @@
         },
         "dossierExcerpt": "The roster geocode (ROOFTOP, moved 2334 m) landed directly on a large white-roofed\nmanufacturing building with extensive paved trailer yards in an industrial park on the\nwest edge of Grovetown, GA. Web research confirms this is John Deere Augusta Works /\nCommercial Products — a ~400,000+ sq ft plant on ~175 acres, ~470 employees, John\nDeere's highest-volume tractor facility, producing 27 models of compact/utility\ntractors. Coordinates locked at the supplied point.",
         "mapsUrl": "https://www.google.com/maps/@33.463818,-82.185545,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/john-deere/12-augusta-works-commercial-products-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.463818,
-              "lng": -82.185545
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/john-deere/12-augusta-works-commercial-products-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.463818,
-              "lng": -82.185545
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Truck operations are on a large fenced parcel; trucks enter off the John Deere Pkwy / Horizon South Pkwy access loop and pass into a perimeter-fenced operational yard with tree-buffer screening. Controlled truck entrance inferred from the continuous fence line and single internal truck route; barrier hardware not directly resolvable in imagery.",
           "guardShack": "No guard booth positively confirmed at a barrier-arm gate in available satellite/Street View imagery; the entrance is set deep behind tree buffers and Street View only covers the office/employee loop. A staffed entrance is plausible for a major Deere plant but unverified - flagged uncertain.",
@@ -1917,6 +1939,32 @@
           "dropYard": "Dedicated on-site trailer-storage lots, distinct from active dock staging - one of the larger drop yards in this batch.",
           "railServed": "No rail spur observed entering the property.",
           "scale": "No truck scale positively identified - flagged uncertain."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.deere.com/en/campaigns/ag-turf/augusta-stories/",
+              "date": "2026-01",
+              "type": "press",
+              "claim": "John Deere Augusta (Grovetown GA) currently designs, assembles and tests compact utility tractors (1/2/3/4 Series)."
+            },
+            {
+              "tier": 2,
+              "url": "https://developcolumbiacounty.com/2018/07/23/john-deeres-top-producing-facility-is-in-columbia-county/",
+              "date": "2018-07",
+              "type": "econ-dev",
+              "claim": "Columbia County ED confirms John Deere Augusta Works as the company's highest-volume producing facility (27 compact/utility tractor models)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Deere-operated compact utility tractor assembly plant (not a dealer); current deere.com campaign page confirms active production. Note: builds compact utility tractors, not commercial mowers as labeled.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2077,28 +2125,6 @@
         },
         "dossierExcerpt": "The roster geocode (GEOMETRIC_CENTER, moved 71 m) landed directly on a large white-\nroofed manufacturing complex on the north edge of Coffeyville, KS, off US-169. Web\nresearch confirms John Deere Coffeyville Works is a power transmission equipment\nmanufacturer at this address. The building scale, attached office, detached warehouse,\nand material yards are consistent with a Deere component plant. Coordinates locked at\nthe supplied point.",
         "mapsUrl": "https://www.google.com/maps/@37.09708,-95.584703,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/john-deere/13-coffeyville-works-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 37.09708,
-              "lng": -95.584703
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/john-deere/13-coffeyville-works-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 37.09708,
-              "lng": -95.584703
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Open campus - no controlled truck entrance. Buildings sit on a large open parcel; access roads from US-169 lead directly onto the property and to the office entrance and material yards with no barrier arm, gate, or checkpoint pinch-point. Street View (2025-10) confirms an open lawn frontage with no perimeter fence.",
           "guardShack": "No guard booth present anywhere on the site.",
@@ -2112,6 +2138,32 @@
           "dropYard": "No dedicated trailer drop yard observed; component plant relies on material laydown yards instead.",
           "railServed": "No rail spur observed running into the property.",
           "connectivityIssue": "Site is semi-rural but adjacent to the town of Coffeyville and an established industrial area; cellular coverage likely adequate - connectivityIssue set false."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.kcrg.com/2026/04/13/john-deere-bringing-back-41-workers-iowa/",
+              "date": "2026-04",
+              "type": "press",
+              "claim": "Deere recalling workers to Coffeyville Works amid rising drivetrain/construction demand in 2026."
+            },
+            {
+              "tier": 2,
+              "url": "https://jagkansas.org/news-release-john-deere-coffeyville-works-commits-to-three-year-continuation-to-sponsorship-of-jag-k/",
+              "date": "2025-01",
+              "type": "press",
+              "claim": "John Deere Coffeyville Works active as operating Deere components/drivetrain plant; ongoing John Deere Foundation sponsorship."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Deere-operated components/drivetrain plant; recalling workers in 2026, no closure/sale found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2252,28 +2304,6 @@
         },
         "dossierExcerpt": "The roster coordinates (29.803849, -90.82531; RANGE_INTERPOLATED for 1000 Coulon Rd)\nlanded in a residential neighborhood — not the plant. The roster explicitly flagged\n\"multiple addresses exist, verify in deep-audit.\" Web research (Yelp, Waze, Panjiva,\nDeere factory page) identified the real facility at 244 Highway 3266 (Plant 1) with a\nco-located Plant 2 at 234 Highway 3266, founded 1965 as CAMECO Industries, now a Deere\nsubsidiary and the world's largest sugarcane-equipment manufacturer. Resolved\ncoordinates 29.805705, -90.829764 were confirmed by satellite — a large multi-building\nmanufacturing campus bordered by sugarcane fields to the west and north and a\nresidential pocket to the SE. Coordinates re-locked to the resolved point.",
         "mapsUrl": "https://www.google.com/maps/@29.805705,-90.829764,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/john-deere/14-thibodaux-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 29.805705,
-              "lng": -90.829764
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/john-deere/14-thibodaux-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 29.805705,
-              "lng": -90.829764
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "resolvedLocation": "Roster coords (1000 Coulon Rd) landed in a residential neighborhood. Correct facility is at 244 Highway 3266 (Plant 1) / 234 Highway 3266 (Plant 2), resolved to 29.805705,-90.829764 via web research and confirmed by satellite - a large multi-building manufacturing campus (sugarcane harvesters, CAMECO heritage) bordered by sugarcane fields.",
           "truckGate": "Open campus - no controlled truck entrance at the road frontage. The access road off Highway 3266 runs directly between the office building and the manufacturing buildings; Street View (2025-10) shows an open frontage with parking and no barrier arm, gate, or guard booth. An interior fence/drainage line runs along the east edge but no gate confirmed.",
@@ -2288,6 +2318,25 @@
           "dropYard": "Trailer/equipment staging and laydown yards present on the SE/E side, distinct from active dock aprons.",
           "railServed": "No rail spur observed entering the property.",
           "connectivityIssue": "Site is rural but immediately adjacent to the town of Thibodaux; cellular coverage likely adequate - connectivityIssue set false."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.opportunitylouisiana.gov/news/john-deere-thibodaux-plant-expansion-to-create-70-bayou-region-jobs",
+              "date": "2022-10",
+              "type": "econ-dev",
+              "claim": "Louisiana ED: Deere investing $29.8M to expand Thibodaux plant, +70 jobs, retaining 284, shifting cotton-harvester production from China to Thibodaux."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Deere-operated cotton/sugarcane harvester plant; actively expanded 2022-2025.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2434,28 +2483,6 @@
         },
         "dossierExcerpt": "The roster geocode (ROOFTOP, moved 2955 m) landed on a large single industrial\nbuilding in the Partnership Industrial Center on the northeast side of Springfield.\nStreet View (2026-03) confirms this is the John Deere Reman building — the building\nfront has an entrance canopy on Mustard Way and the \"4500 E Mustard Way\" address sign\nis posted at the property. Web research confirms John Deere Reman-Springfield at 4500\nMustard Way, a Deere subsidiary remanufacturing engines and fuel/electronics\ncomponents, ~500 employees. Coordinates locked at the supplied point.",
         "mapsUrl": "https://www.google.com/maps/@37.243981,-93.200702,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/john-deere/15-reman-springfield-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 37.243981,
-              "lng": -93.200702
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/john-deere/15-reman-springfield-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 37.243981,
-              "lng": -93.200702
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "resolvedLocation": "Geocode (4500 E Mustard Way, Partnership Industrial Center) landed on the correct John Deere Reman building - confirmed by Street View (2026-03) showing the building front with entrance canopy on Mustard Way and the 4500 E Mustard Way address sign at the property.",
           "truckGate": "Open campus - no controlled truck entrance. Employee parking lots front Mustard Way with an open driveway; a single internal driveway loops around the building's SW corner to the south dock yard. No barrier arm, gate, guard booth, or perimeter fence observed in satellite or Street View.",
@@ -2470,6 +2497,25 @@
           "scale": "No truck scale observed.",
           "dropYard": "No dedicated trailer-storage lot; reman plant relies on a modest material/staging yard.",
           "railServed": "A rail mainline corridor runs along the south edge of the property but no spur enters the site - railServed = false."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.deere.com/en/news/all-news/john-deere-reman-announces-over-13-million-expansion/",
+              "date": "2024-10",
+              "type": "press",
+              "claim": "John Deere Reman announces $13.5M / 120,000 sqft Core Center expansion in greater Springfield MO (Strafford); 500+ employees, 2,000+ remanufactured products."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Deere-operated remanufacturing operation in greater Springfield MO; actively expanding, groundbreaking 2025.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2615,28 +2661,6 @@
         },
         "dossierExcerpt": "Type: Assembly Plant (lawn/garden equipment, Gator utility vehicles)\nRoster address: 300 N Vine St, Horicon, WI 53032\nResolved center: 43.4540, -88.6336\nConfidence: medium",
         "mapsUrl": "https://www.google.com/maps/@43.4540,-88.6336,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/john-deere/16-john-deere-horicon-works-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 43.454,
-              "lng": -88.6336
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/john-deere/16-john-deere-horicon-works-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 43.454,
-              "lng": -88.6336
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Old-style urban factory campus straddling the public street grid (W Lake St, N Vine St, E Walnut St run THROUGH the campus). No barrier arm or gate observed at any public-road / property-line interface in 2024-2025 Street View. Truck access into the north trailer yard is via an internal private campus drive; classified false because no controlled checkpoint exists where the property meets the public road.",
           "guardShack": "No guard booth observed at any street-level entrance. One small ~1-vehicle structure seen on an internal campus road near E Walnut St may be a watchman post, but it does not control a property-line truck gate, so guardShack=false.",
@@ -2650,6 +2674,25 @@
           "entryLanes": "Internal campus drive is 2 lanes; no formal gate lanes - low confidence.",
           "siteAreaAcres": "Perimeter box bounds the built campus on the river peninsula at ~105 acres; total Horicon Works site is cited at 214 acres including outside storage spread across the peninsula.",
           "railServed": "No active rail spur into the property observed; the surrounding area has no rail line adjacent."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://about.deere.com/en-us/locations/factories/horicon-works",
+              "date": "2025-01",
+              "type": "locator",
+              "claim": "Deere factory locator: Horicon Works (Horicon WI) produces Gator Utility Vehicles, walk-behind greens mowers, and X-series lawn tractors; ~1,000 employees."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Deere-operated Gator / lawn & turf plant, listed on Deere's own factory locator; no closure found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2777,28 +2820,6 @@
         },
         "dossierExcerpt": "Type: Assembly Plant (100 Series lawn tractors, EZTrak/ZTrak zero-turn mowers)\nRoster address: 1630 Hal Henard Rd, Greeneville, TN 37743\nResolved center: 36.15268, -82.88965\nConfidence: high",
         "mapsUrl": "https://www.google.com/maps/@36.15268,-82.88965,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/john-deere/17-john-deere-power-products-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 36.15268,
-              "lng": -82.88965
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/john-deere/17-john-deere-power-products-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 36.15268,
-              "lng": -82.88965
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Confirmed in 2023-11 Street View: a controlled, fully fenced truck entrance on the NE access drive (~36.1552, -82.8882). Chain-link perimeter fence with sliding gate sections; entrance lane pinch-point.",
           "guardShack": "Confirmed: a small white guard booth (~1-vehicle footprint) set beside the entrance lane, visible in Street View and z20 satellite. Staffed checkpoint controlling truck access into the plant.",
@@ -2814,6 +2835,32 @@
           "railServed": "A rail line runs along the SW property edge, but no spur was observed entering the plant - railServed false.",
           "siteAreaAcres": "Developed/fenced plant area estimated ~95 acres; perimeter bounding box is larger because the property is an irregular footprint with open field margins.",
           "connectivityIssue": "Rural setting but the facility is large, active, and near Greeneville with utility infrastructure - cellular coverage likely adequate; left false, flagged uncertain."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.tn.gov/ecd/news/2024/8/8/john-deere-power-products-to-expand-manufacturing-presence-in-greene-county.html",
+              "date": "2024-08",
+              "type": "econ-dev",
+              "claim": "TN ECD: John Deere Power Products to invest $15M and add 25 jobs expanding its Greene County / Greeneville plant."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.areadevelopment.com/newsitems/8-9-2024/john-deere-power-products-greeneville-tennessee.shtml",
+              "date": "2024-08",
+              "type": "press",
+              "claim": "John Deere Power Products plant in Greeneville builds Z300/Z500 zero-turn and electric ZTrak mowers; Deere has operated it for 35+ years. Not Yanmar-owned."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Deere-operated (John Deere Power Products), NOT sold/transferred to Yanmar; Deere expanded it $15M/+25 jobs Aug 2024. Yanmar is only a separate engine-supply partner.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2923,28 +2970,6 @@
         },
         "dossierExcerpt": "Type: Assembly Plant (John Deere-branded hydraulic excavators)\nRoster address: 1000 John Deere Rd, Kernersville, NC 27284\nResolved center: 36.13670, -80.09250\nConfidence: high",
         "mapsUrl": "https://www.google.com/maps/@36.13670,-80.09250,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/john-deere/18-john-deere-kernersville-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 36.1367,
-              "lng": -80.0925
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/john-deere/18-john-deere-kernersville-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 36.1367,
-              "lng": -80.0925
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Confirmed in 2026-03 Street View on John Deere Rd: a controlled truck entrance to the Main Campus - chain-link perimeter fence with sliding gate sections across the drive, entrance lane pinch-point. The East Campus has its own gated access on a separate internal/access road; truckGateCount set to 2.",
           "guardShack": "Confirmed: a white guard booth (~1-vehicle footprint) sits beside the Main Campus entrance lane, clearly visible in 2026-03 Street View and z19 satellite. Staffed checkpoint.",
@@ -2961,6 +2986,32 @@
           "siteAreaAcres": "Web sources cite 145 acres across the Main and East campuses; used directly. The perimeter bounding box is larger because the two campuses are separated.",
           "truckGateCount": "Main Campus gate confirmed via Street View; East Campus has its own access - estimated 2 truck gates total (East gate not directly Street-View confirmed).",
           "fieldNote_construction": "Active construction at audit time - the $70M / 380,000 sq ft small-excavator factory expansion. Some yard geometry will change once complete."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.deere.com/en/stories/featured/two-new-us-facilities/",
+              "date": "2024-01",
+              "type": "press",
+              "claim": "$70M Kernersville NC excavator factory assuming production of future-generation excavators previously made in Japan; solely John Deere."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.hitachicm.com/global/en/news/press-releases/2022/22-03-01/",
+              "date": "2022-03",
+              "type": "press",
+              "claim": "Hitachi Construction Machinery confirms the Deere JV dissolved Feb 28 2022; Deere acquired the Kernersville NC factory and continues making Deere-branded excavators there."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Deere-Hitachi JV dissolved Feb 2022; Deere ACQUIRED and now solely operates Kernersville, investing $70M to expand excavator production. Not closed/transferred.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3128,28 +3179,6 @@
         },
         "dossierExcerpt": "Type: Parts Distribution Center\nRoster address: 1600 1st Ave E, Milan, IL 61264\nResolved center: 41.44750, -90.54550\nConfidence: medium",
         "mapsUrl": "https://www.google.com/maps/@41.44750,-90.54550,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/john-deere/19-john-deere-north-american-parts-distribution-center-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.4475,
-              "lng": -90.5455
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/john-deere/19-john-deere-north-american-parts-distribution-center-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.4475,
-              "lng": -90.5455
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "No barrier arm, gate, or controlled checkpoint observed at the property-line entrance. The DC is accessed via a wide private entrance drive off the north arterial road; the drive is open at the street (z20 satellite and 2019/2025 Street View). The office entrance at the NE is a circular drive with no control. A facility this large likely has internal gates at the dock yard, but no street-level controlled gate was visible - classified false on visible evidence.",
           "guardShack": "No guard booth observed at the property-line entrance or office entrance. Web tips mention drivers referencing 'gate' numbers (e.g. Gate 4), suggesting internal gate stations exist, but none was confirmed as a staffed booth at a property-line truck entrance.",
@@ -3168,110 +3197,32 @@
           "trailerParkingCapacity": "~500 - the drop yards are extensive with room for very high trailer counts; honest estimate.",
           "entryLanes": "Estimated 2 lanes at the wide open entrance drive; no formal gate lanes - low confidence.",
           "siteAreaAcres": "~215 acres - the 2.8M sq ft building footprint (~64 acres) plus extensive trailer drop yards, parking, pond, and grounds. Perimeter bounding box ~265 acres includes some undeveloped margin."
-        }
-      },
-      {
-        "id": "20-john-deere-distribution-center-hebron",
-        "name": "John Deere Distribution Center - Hebron IN",
-        "type": "Parts Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "low",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "remoteGs",
-          "preGateStaging",
-          "postGateStaging",
-          "drivewayLong",
-          "drivewayShort",
-          "backupSensitive",
-          "entryExitTogether",
-          "entryExitSeparate",
-          "entryLanes",
-          "exitLanes",
-          "fastLaneOpportunity",
-          "dockDoors",
-          "dropArea",
-          "shipRcvSeparate",
-          "connectivityIssue",
-          "multipleFacilities",
-          "scale",
-          "dropYard",
-          "multiStep"
-        ],
-        "center": {
-          "lat": 41.282,
-          "lng": -87.302
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 41.283651,
-                "lng": -87.304747
-              },
-              {
-                "lat": 41.282826,
-                "lng": -87.302
-              },
-              {
-                "lat": 41.280762,
-                "lng": -87.303099
-              },
-              {
-                "lat": 41.281484,
-                "lng": -87.305571
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 0,
-          "trailersVisible": 0,
-          "trailerParkingCapacity": 0,
-          "truckGateCount": 0,
-          "buildingCount": 0,
-          "siteAreaAcres": 234,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": false,
-          "drivewayLong": false,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": false,
-          "entryExitSeparate": false,
-          "entryLanes": null,
-          "exitLanes": null,
-          "fastLaneOpportunity": false,
-          "dockDoors": "NONE",
-          "dropArea": "NONE",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "dossierExcerpt": "Type: Parts Distribution Center\nAddress: 2105 W 181st Ave, Hebron, IN 46341\nResolved coords: 41.2820, -87.3020 (parcel estimate — SW quadrant of the I-65 / SR-2 interchange)\nGate verdict: Cannot determine — facility not yet built\nConfidence: LOW (cannot locate a building — greenfield site under construction)\n\n---",
-        "mapsUrl": "https://www.google.com/maps/@41.2820,-87.3020,400m/data=!3m1!1e3",
-        "fieldNotes": {
-          "site": "Greenfield site. John Deere purchased the 234-acre parcel SW of the I-65 / SR-2 (181st Ave) interchange near Hebron/Lowell IN in July 2024 for $7M and broke ground on the $125M, 1.2M-sq-ft warehouse/distribution center in late January 2026. As of the available ©2026 Airbus satellite imagery, the SW quadrant of the interchange is entirely undeveloped farmland (with a small pond / borrow area) - no graded building pad, no foundation, no truck infrastructure is visible. Nothing to audit yet.",
-          "coords": "Center estimate (41.2820, -87.3020) is the SW quadrant of the I-65 / SR-2 interchange where the 234-acre parcel sits per the address 2105 W 181st Ave. Roster-supplied coords (41.288631, -87.358717) plot ~5 km west of the interchange in unrelated farmland and were not used. Coordinates are approximate to the parcel, not a confirmed building.",
-          "urbanRural": "Rural - open agricultural land at the edge of the small towns of Hebron and Lowell, away from any dense metro fabric.",
-          "siteAreaAcres": "234 acres is the publicly reported parcel size; the eventual fenced perimeter / building footprint cannot be measured until construction is imaged.",
-          "railServed": "No rail spur visible at the site; not expected for this DC (located for I-65 highway access). Low confidence.",
-          "classificationFlags": "All physical-layout flags defaulted to false / NONE / null because the facility does not yet exist in imagery. Re-audit once post-construction satellite imagery becomes available (facility expected to open within ~12 months of the Jan 2026 groundbreaking)."
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://jobs.deere.com/successfactors/job/Milan-John-Deere-Parts-Distribution-Supplemental-Warehouse-Illi-61264/1316864100/",
+              "date": "2026-05",
+              "type": "careers",
+              "claim": "Active John Deere careers reqs for warehouse workers at the John Deere Parts Distribution Center, Milan IL 61264."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.deere.com/assets/pdfs/common/parts-and-service/parts/wwps_locations.pdf",
+              "date": "2018-01",
+              "type": "locator",
+              "claim": "Deere's Worldwide Parts location list identifies Milan IL as a key parts distribution center."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Deere's flagship North American/Worldwide Parts Distribution Center (~2.8M sqft, 1600 1st Ave E, Milan); active 2026 Deere-operated careers reqs confirm current operation.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3423,28 +3374,6 @@
         },
         "dossierExcerpt": "Type: Parts Distribution Center\nAddress: 2280 Northeast Dr, Waterloo, IA 50703\nResolved coords: 42.50990, -92.28540 (center of the main gray DC building)\nGate verdict: No truck gate — open, uncontrolled entrance\nGuard-shack verdict: No guard shack\nConfidence: HIGH\n\n---",
         "mapsUrl": "https://www.google.com/maps/@42.50990,-92.28540,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/john-deere/21-john-deere-parts-distribution-center-waterloo-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.5099,
-              "lng": -92.2854
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/john-deere/21-john-deere-parts-distribution-center-waterloo-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.5099,
-              "lng": -92.2854
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "site": "Confirmed John Deere Parts Distribution Center at 2280 Northeast Dr, Waterloo IA, NE of the city in an edge-of-town industrial area. Panjiva buyer report and Waze list this address; Ryder Integrated Logistics operates 3PL logistics on site (typical for a Deere parts DC). A blue 'JOHN DEERE' monument sign at the entrance was visible in Street View, positively identifying the property.",
           "buildings": "Two buildings on one campus: a large gray-roofed distribution warehouse running N-S (the main DC) and a separate blue-roofed building to its north (offices / secondary warehouse). multipleFacilities = true.",
@@ -3465,6 +3394,32 @@
           "railServed": "FALSE. No rail spur runs into the property; access is highway/road only.",
           "siteAreaAcres": "~45 acres, derived from the perimeter box (~565 m N-S x ~320 m E-W of used property). Estimate.",
           "scale": "FALSE. No truck scale / weigh pad visible in the truck path."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.deere.com/assets/pdfs/common/parts-and-service/parts/wwps_locations.pdf",
+              "date": "2018-01",
+              "type": "locator",
+              "claim": "Deere Worldwide Parts location list includes a Waterloo IA parts distribution center."
+            },
+            {
+              "tier": 1,
+              "url": "https://about.deere.com/en-us/locations/factories/waterloo",
+              "date": "2025-01",
+              "type": "locator",
+              "claim": "John Deere's Waterloo IA operations are an active, currently operating Deere complex."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Deere-operated Parts Distribution Center at 2280 Northeast Dr, Waterloo IA (matches lat/lng); part of the active Waterloo footprint.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3604,28 +3559,6 @@
         },
         "dossierExcerpt": "Type: Parts Distribution Center\nAddress (roster): 1300 16th Ave, Rock Valley, IA 51247 — unverified / likely incorrect\nResolved facility: John Deere A&I Products complex, SW Rock Valley industrial park (10th St / 22nd Ave)\nResolved coords: 43.19680, -96.31370 (center of the A&I warehouse/manufacturing complex)\nGate verdict: No truck gate — open, ungated access road\nGuard-shack verdict: No guard shack\nConfidence: MEDIUM\n\n---",
         "mapsUrl": "https://www.google.com/maps/@43.19680,-96.31370,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/john-deere/22-john-deere-all-makes-parts-distribution-center-rock-valley-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 43.1968,
-              "lng": -96.3137
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/john-deere/22-john-deere-all-makes-parts-distribution-center-rock-valley-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 43.1968,
-              "lng": -96.3137
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "site": "Resolved to the John Deere A&I Products complex in Rock Valley IA. A&I Products is John Deere's all-makes aftermarket-parts subsidiary (Deere acquired A&I in Dec 2010); Rock Valley is its corporate HQ, main manufacturing facility and central distribution hub - 750,000+ sq ft of warehouse space across roughly three connected/adjacent buildings. The roster address (1300 16th Ave) could not be confirmed; Waze lists 'John Deere A&I Products, 2200-2298 10th St' and Yelp lists 1020 22nd Ave for A&I HQ - both point to the same industrial-park complex SW of downtown Rock Valley, which is what was audited.",
           "coords": "Locked center (43.19680, -96.31370) on the A&I warehouse/manufacturing complex. Roster coords (43.203456, -96.294498) plotted in downtown Rock Valley among small-town commercial/residential blocks and grain elevators - not the DC - and were not used.",
@@ -3649,6 +3582,32 @@
           "siteAreaAcres": "~22 acres, derived from the perimeter box (~365 m N-S x ~245 m E-W of the owner-occupied A&I parcel). Estimate - the exact parcel boundary is not fenced/marked, flagged uncertain.",
           "scale": "FALSE. No truck scale / weigh pad visible in the truck path.",
           "addressNote": "Roster address 1300 16th Ave is unverified and likely incorrect; the audited complex is the John Deere A&I Products facility on 10th St / 22nd Ave in the SW Rock Valley industrial park."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://aiproducts.com/about.html",
+              "date": "2025-01",
+              "type": "locator",
+              "claim": "Rock Valley IA is A&I Products' central distribution hub, HQ, and main manufacturing facility (all-makes aftermarket parts)."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.discoverwestman.com/articles/deere-acquires-rest-of-aai",
+              "date": "2011-01",
+              "type": "press",
+              "claim": "Deere completed full acquisition of A&I Products (Rock Valley IA); Deere spokesman confirms full ownership."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Rock Valley 'All-Makes' PDC is A&I Products, a wholly Deere-owned subsidiary (sole owner since Jan 2011); Deere-operated all-makes parts distribution, currently active.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       }
     ]

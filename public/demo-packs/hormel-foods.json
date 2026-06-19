@@ -1,19 +1,19 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-02T16:15:45.001Z",
+  "builtAt": "2026-06-19T03:20:07.170Z",
   "account": {
     "slug": "hormel-foods",
     "displayName": "Hormel Foods",
     "archetype": "cpg",
-    "siteCount": 27,
+    "siteCount": 25,
     "coverageNote": {
-      "auditedCount": 27,
+      "auditedCount": 25,
       "estimatedFootprint": 50,
+      "totalGlobalFootprint": 50,
+      "auditedScope": "NA",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Hormel Foods operates ~50 manufacturing facilities, almost entirely in NA. We audited 27 representative sites.",
-      "auditedScope": "NA",
-      "totalGlobalFootprint": 50
+      "note": "Hormel Foods operates ~50 manufacturing facilities, almost entirely in NA. We audited 27 representative sites."
     },
     "featuredSiteId": "15-hormel-fort-smith-plant",
     "dossierIntro": "Hormel Foods runs the Spam, Skippy, and Planters network. 50 facilities; we audited 27. Fort Smith AR has 45 dock doors on 58 acres. Austin MN is 120 acres (the flagship Spam plant has been there since 1937). 5 of 27 audited sites are rail-served. 766 dock doors. YardFlow runs the shelf-stable, refrigerated, and frozen-meat flows as distinct protocols on one yard graph.",
@@ -26,23 +26,23 @@
   "research": null,
   "network": {
     "bbox": [
-      -122.053767,
+      -121.29856,
       33.838045,
       -76.580777,
       45.979109
     ],
     "archetypeMix": {
       "#6": 3,
-      "#3": 16,
+      "#3": 14,
       "#9": 7,
       "#2": 1
     },
     "totals": {
-      "dockDoors": 766,
-      "trailerCapacity": 1609,
-      "gates": 28,
+      "dockDoors": 731,
+      "trailerCapacity": 1566,
+      "gates": 27,
       "railServed": 5,
-      "acres": 997.8
+      "acres": 956.8
     },
     "sites": [
       {
@@ -180,28 +180,6 @@
         },
         "dossierExcerpt": "The roster coordinates (43.68237, -92.968394, \"ROOFTOP\", address \"1 Hormel\nPlace\") point at the Hormel World Headquarters / R&D campus — a cluster of\nmulti-story office/lab buildings — not the production plant. Step-0 satellite\nprobing at z16-z17 around that point showed only office-scale buildings.\n\nThe actual flagship Austin processing plant (1.3M sq ft, ~1,900 employees,\nSPAM / Cure 81 / bacon / pepperoni) is a sprawling industrial complex ~1.1 km\nsouth, centered ~43.6765, -92.9665. Confirmed by: (a) z16-z17 satellite showing\na 10+ building manufacturing complex with dock banks and trailer yards;\n(b) web research — the Hormel Austin Plant main gate is on 14th Ave NE\n(CMac listing, phone 507-437-5293); (c) the Cedar River bounds the plant on the\nwest, 14th Ave NE / residential streets on the east, matching public records.",
         "mapsUrl": "https://www.google.com/maps/@43.6765,-92.9665,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/hormel-foods/01-hormel-flagship-austin-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 43.6765,
-              "lng": -92.9665
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/hormel-foods/01-hormel-flagship-austin-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 43.6765,
-              "lng": -92.9665
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster lat/lng (43.68237,-92.968394) pointed at Hormel World HQ / R&D campus, not the production plant. The flagship 1.3M sq ft processing plant is ~1.1 km south, centered ~43.6765,-92.9665, bounded by the Cedar River on the west and 14th Ave NE / residential streets on the east.",
           "truckGate": "Entire property is fenced with chain-link plus privacy slats (confirmed in multiple Street Views). A guard-booth checkpoint with an apparent barrier arm straddles the internal truck road at ~43.6740,-92.9665 (z20 satellite). Web research confirms a 'guarded gate for security clearance' (CMac listing for Hormel Austin Plant main gate on 14th Ave, 507-437-5293).",
@@ -213,6 +191,32 @@
           "dockDoors": "50+ band; large multi-building food plant with extensive dock activity, trailers backed in on the SW face. Count is an overhead estimate.",
           "dropArea": "Extensive trailer-parking rows on the SW (50+ stalls of parked trailers without tractors).",
           "fastLaneOpportunity": "Wide paved aprons at the plant frontage and ample yard width provide room for a bypass/express lane."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/careers/career-center/our-locations/austin-plant/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Hormel's own locations page lists the Flagship Austin Plant: 1,900 team members, 1.3M sq ft, SPAM/ham/bacon/dry sausage."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.sec.gov/Archives/edgar/data/0000048465/000004846525000042/hormelearningsreleaseq32025.htm",
+              "date": "2025-08",
+              "type": "10-K",
+              "claim": "FY2025 SEC filing; Austin MN is Hormel HQ and flagship plant, ongoing operations."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Flagship HQ plant on Hormel's own locator with 1,900 workers; not on any T&M closure list; no negative found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -399,28 +403,6 @@
         },
         "dossierExcerpt": "Roster coordinates (43.079868, -94.222893, \"ROOFTOP\") landed on the plant.\nStep-0 satellite probing at z16-z18 confirmed a single ~150,000 sq ft\nindustrial building on the SW edge of Algona, IA, with employee parking and a\nsmall trailer yard — consistent with the facility. Web research confirms the\nHormel Algona Plant: opened 1970, ~250 employees, 150,000 sq ft, produces\npepperoni and value-added sausage products (pork cured, sliced, packaged), with\na recent ~8,800 sq ft expansion separating raw-food and ready-to-eat areas.",
         "mapsUrl": "https://www.google.com/maps/@43.0793,-94.2233,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/hormel-foods/02-hormel-algona-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 43.0793,
-              "lng": -94.2233
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/hormel-foods/02-hormel-algona-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 43.0793,
-              "lng": -94.2233
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster lat/lng confirmed accurate (geocode moved 1042 m, ROOFTOP). Plant centered ~43.0793,-94.2233 — a single ~150,000 sq ft pepperoni/sausage plant on the SW edge of Algona, IA, accessed by a private road off the public road to the north.",
           "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point at the public-road junction — the entrance is an open driveway with Hormel signage (Street View 2025-08). No continuous perimeter fence around the property. A small structure sits beside the ~250 m private access road (~43.0807,-94.2241) which could be a small check-in/booth, but no controlled barrier is visible. Classified false; flagged uncertain.",
@@ -431,6 +413,32 @@
           "urbanRural": "Plant sits on the SW edge of Algona (pop ~5,500) surrounded by farmland — Rural.",
           "railServed": "A rail line passes near the SE property edge but no spur runs into the plant; classified false.",
           "buildingCount": "One main connected plant building plus a small outbuilding."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/careers/career-center/our-locations/algona-plant/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Hormel locations page: Algona Plant (opened 1970), ~250 employees, dry sausage/pepperoni."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.glassdoor.com/job-listing/algona-production-professional-hormel-JV_IC1148604_KO0,30_KE31,37.htm?jl=1009808211866",
+              "date": "2025-01",
+              "type": "careers",
+              "claim": "2025 Hormel Algona Production Professional req confirms active production staffing."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "On Hormel locator + 2025 careers reqs; no closure/sale found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -616,28 +624,6 @@
         },
         "dossierExcerpt": "The roster address (\"11400 Stratton Dr\") and coordinates (42.41162,\n-90.658333, \"APPROXIMATE\", 9396 m off) were wrong. Web research established\nthe correct address: 1205 Chavenelle Court, Dubuque, IA 52002, in the\nDubuque Industrial Center West. Coordinates 42.48810, -90.76661 were confirmed\nby satellite probing at z16-z17, which showed a large (~348,000 sq ft)\nsingle-building production plant with a trailer drop yard — matching the\nfacility. Web confirms: Progressive Processing LLC, a wholly owned Hormel\nsubsidiary, opened 2010, ~400 employees, makes Hormel Compleats microwave\nmeals, chunk-chicken items, bacon toppings and SPAM products.",
         "mapsUrl": "https://www.google.com/maps/@42.4879,-90.7661,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/hormel-foods/03-progressive-processing-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.4879,
-              "lng": -90.7661
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/hormel-foods/03-progressive-processing-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.4879,
-              "lng": -90.7661
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster address '11400 Stratton Dr' and coordinates were wrong (geocode APPROXIMATE, 9396 m off). Web research found the real address: 1205 Chavenelle Court, Dubuque IA 52002, in the Dubuque Industrial Center West. Locked center 42.4879,-90.7661 — a 348,000 sq ft Hormel-owned production plant (Compleats meals, chunk chicken, bacon toppings, SPAM), opened 2010.",
           "truckGate": "No barrier arm, gate, or checkpoint at the plant entrance; no perimeter fence around the property. The plant is set back behind a landscaped lawn off the public industrial-park road (Chavenelle Court). Open access driveway with a wide truck apron. Classified false.",
@@ -649,6 +635,32 @@
           "dropYard": "Dedicated SW trailer-storage lot, partly unpaved, separate from the active dock apron.",
           "urbanRural": "Plant sits in an industrial park on the edge of Dubuque with farmland immediately to the south; borderline call, scored Rural per the 'when torn, choose Rural' guidance. Flagged uncertain.",
           "railServed": "No rail spur into the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/careers/career-center/our-locations/progressive-processing/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Hormel locations page: Progressive Processing, 1205 Chavenelle Court, Dubuque IA, ~450 employees; Compleats, bacon toppings, SPAM."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/newsroom/press-releases/hormel-foods-celebrates-grand-opening-of-state-of-the-art-production-facility-in-dubuque-iowa/",
+              "date": "2010-01",
+              "type": "press",
+              "claim": "Hormel PR: grand opening Jan 2010 of company-built Dubuque facility (Progressive Processing LLC)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Hormel-owned LLC on its own locator at the exact Chavenelle Court address; no negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -894,28 +906,6 @@
         },
         "dossierExcerpt": "The roster address (\"703 E Robinson St\") and coordinates (41.318297,\n-93.091383, \"RANGE_INTERPOLATED\") landed in residential Knoxville — no\nindustrial building. Web research established the correct address:\n209 N Godfrey Ln, Knoxville, IA 50138, on the east edge of town.\nSatellite probing at z17-z18 around 41.3173, -93.0610 confirmed a single\nprocessing plant with employee parking, a south-face dock, and a trailer drop\nyard. Web confirms the Hormel Knoxville Plant: dry sausage (pepperoni/salami),\n~150 production employees, ~1M lbs of dry sausage per week.\n\nNote: a separate heavy-industrial complex (process tanks, cooling towers) sits\nimmediately west of Godfrey Lane — it is not the Hormel plant; the Hormel\nplant is the food-processing building east of Godfrey Lane.",
         "mapsUrl": "https://www.google.com/maps/@41.3173,-93.061,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/hormel-foods/04-hormel-knoxville-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.3173,
-              "lng": -93.061
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/hormel-foods/04-hormel-knoxville-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.3173,
-              "lng": -93.061
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster address '703 E Robinson St' and coordinates were wrong (RANGE_INTERPOLATED, landed in residential Knoxville). Web research found the real address: 209 N Godfrey Ln, Knoxville IA 50138, on the east edge of town. Locked center 41.3173,-93.0610 — a single dry-sausage plant (pepperoni/salami, ~150 employees, ~1M lbs/week). The adjacent heavy industrial complex with tanks/cooling towers immediately west of Godfrey Ln is a separate (non-Hormel) facility.",
           "truckGate": "The plant property has a continuous chain-link perimeter fence (confirmed in multiple Street Views, 2026-04). A single gate opening in the fence controls the entrance driveway off Godfrey Lane. No barrier arm clearly resolved, but the fenced perimeter with one defined gated driveway is a controlled entrance. Classified true; flagged uncertain.",
@@ -927,6 +917,32 @@
           "dropYard": "Separate trailer-storage lot south of the plant, distinct from the active dock apron.",
           "railServed": "A rail line runs parallel to the road along the south edge but no spur enters the plant property; classified false.",
           "urbanRural": "Plant sits on the east edge of Knoxville (pop ~7,300) surrounded by farmland and scattered industrial — Rural."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/careers/career-center/our-locations/knoxville-plant/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Hormel locations page: Knoxville IA plant produces dry sausage (Rosa Grande pepperoni, hard salami) at 209 N Godfrey Ln."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.breakroom.cc/en-us/jobs/listing/33281635-hormel-foods-knoxville-plant-production-professional-209",
+              "date": "2025-01",
+              "type": "careers",
+              "claim": "Hormel Knoxville Plant Production Professional req referencing 209 N Godfrey Ln."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Exact Godfrey Ln address on Hormel locator + careers req; no closure/sale found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1135,28 +1151,6 @@
         },
         "dossierExcerpt": "The roster address (\"2280 W McLane St\") and coordinates (41.030578,\n-93.773051, \"GEOMETRIC_CENTER\") landed in residential Osceola — no\nindustrial building. Web research established the correct address:\n1027 Warren Ave, Osceola, IA 50213. Satellite probing at z16-z17 around\n41.0238, -93.7860 confirmed a large multi-building meat-processing campus with\nextensive trailer yards. Web confirms Osceola Food, LLC — Hormel-owned (bought\n1995, production from 1996; originally built for Jimmy Dean in 1972) — 900+\nteam members, 24/7 continuous operations, foodservice and retail products.",
         "mapsUrl": "https://www.google.com/maps/@41.0238,-93.786,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/hormel-foods/05-osceola-food-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.0238,
-              "lng": -93.786
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/hormel-foods/05-osceola-food-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.0238,
-              "lng": -93.786
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster address '2280 W McLane St' and coordinates were wrong (GEOMETRIC_CENTER, landed in residential Osceola). Web research found the real address: 1027 Warren Ave, Osceola IA 50213. Locked center 41.0238,-93.7860 — a large multi-building meat-processing campus (Osceola Food LLC, Hormel-owned since 1995/1996, originally Jimmy Dean, 900+ employees, 24/7 operations).",
           "truckGate": "A guard booth with an apparent gate arm controls the truck entrance on the SW access road (~41.0221,-93.7872, clearly visible at z20). The campus is enclosed by chain-link perimeter fence (confirmed in Street View). Trucks were observed queued at the checkpoint.",
@@ -1173,6 +1167,32 @@
           "scale": "A truck scale is plausible at the SW checkpoint for a plant of this scale but not positively isolated in imagery; flagged uncertain.",
           "railServed": "No rail spur into the property.",
           "urbanRural": "Plant sits in an industrial area on the edge of Osceola (pop ~5,000) surrounded by farmland — Rural."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/newsroom/news/25-years-in-osceola-iowa/",
+              "date": "2021-01",
+              "type": "press",
+              "claim": "Hormel news: Osceola Food LLC at 1027 Warren Ave; Hormel bought 1996, 900+ team members, 24/7."
+            },
+            {
+              "tier": 3,
+              "url": "https://www.swcciowa.edu/news/2025/four-osceola-food-employees-sign-for-swcc-applied-engineering-technology-program",
+              "date": "2025-08",
+              "type": "econ-dev",
+              "claim": "Aug 2025: Osceola Food employees in SWCC program; current operations corroborated."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Hormel-owned LLC (since 1996) at exact Warren Ave address; 2025 workforce activity; no sale/closure found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1372,28 +1392,6 @@
         },
         "dossierExcerpt": "The roster coordinates (42.026791, -93.448181) placed the pin in a residential\nneighborhood in central Nevada, IA — confirmed by satellite probes showing\nsingle-family homes, a school, and small light-industrial sheds near the rail\nline. Burke is a large fully-cooked-meat plant, none of which matched.\n\nWeb research surfaced the real address: 1516 S D Avenue, Nevada, IA 50201\n(Burke Marketing Corporation), corroborated by the Ames Chamber of Commerce\nmember listing, Panjiva supplier report, and USDA FSIS inspected-establishment\nrecords. Satellite probe at 42.0078, -93.4389 immediately revealed a large\nindustrial plant with loading docks and parked trailers on the south edge of\ntown beside the US-30 divided highway. Roster pin was ~2.3 km off.",
         "mapsUrl": "https://www.google.com/maps/@42.0085,-93.4392,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/hormel-foods/06-burke-corp-nevada-ia-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.0085,
-              "lng": -93.4392
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/hormel-foods/06-burke-corp-nevada-ia-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.0085,
-              "lng": -93.4392
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster coords (42.0268,-93.4482) were ~2.3km off in a residential district. Correct facility is 1516 S D Avenue, Nevada IA 50201, confirmed via Ames Chamber/Panjiva/USDA FSIS listings (Burke Marketing Corporation). Locked center ~42.0085,-93.4392.",
           "truckGate": "No barrier arm, sliding gate, or pinch-point checkpoint visible at any perimeter road junction. Driveways from the bounding public roads run open into the campus paved yard. Marked false.",
@@ -1403,6 +1401,32 @@
           "dropYard": "Dedicated trailer storage: a ~20+ trailer row along the east edge plus drop rows along the north of the property, separate from active dock staging.",
           "fastLaneOpportunity": "Very wide paved aprons and multiple open driveways give ample room to add bypass/express lanes.",
           "railServed": "A rail line runs through northern Nevada IA but no spur reaches this plant, which sits on the south edge of town beside US-30."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/careers/career-center/our-locations/burke-corp-nevada-iowa/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Hormel locations page: Burke Corp., Nevada IA; pizza toppings and fully cooked meats."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/newsroom/press-releases/hormel-foods-corporation-announces-major-expansion-of-its-burke-corporation-manufacturing-facility-in-nevada-iowa/",
+              "date": "2021-03",
+              "type": "press",
+              "claim": "Hormel PR: ~$150M expansion of the Burke facility in Nevada, Iowa."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Hormel-owned Burke Corp on its own locator at Nevada IA; major expansion; no negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1649,28 +1673,6 @@
         },
         "dossierExcerpt": "Roster coordinates (37.736379, -97.325459) landed directly on a large\nindustrial complex in north Wichita. Despite the geocode note (movedMeters\n2004), the pin sat on the correct property. Street View along N Ohio St\nshows the building plainly lettered \"DOLD\" — positive ID. Web research\nconfirmed 2929 N Ohio St, Wichita KS 67219 as Dold Foods, a Hormel bacon\nplant (~760 employees, joined Hormel 1984, subject of a $50M / 156,000 sq ft\ncooked-bacon-line expansion).",
         "mapsUrl": "https://www.google.com/maps/@37.7352,-97.3256,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/hormel-foods/07-dold-foods-wichita-ks-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 37.7352,
-              "lng": -97.3256
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/hormel-foods/07-dold-foods-wichita-ks-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 37.7352,
-              "lng": -97.3256
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster coords (37.736379,-97.325459) were ~well-placed at the plant; geocode noted movedMeters 2004 but landed on the correct complex. Confirmed by Street View 'DOLD' building signage. Locked center ~37.7352,-97.3256, address 2929 N Ohio St, Wichita KS 67219.",
           "truckGate": "Confirmed via Street View (captured 2026-02): fenced perimeter with sliding gates across the truck driveway off N Ohio St on the south end of the plant. Truck Entrance/Exit signage present.",
@@ -1682,6 +1684,32 @@
           "railServed": "A rail line runs N-S in the floodway corridor immediately west of the plant but no spur crosses the grass buffer into the property. Not rail-served.",
           "urbanRural": "Located within a dense industrial district of north Wichita, a major metro - Urban.",
           "multipleFacilities": "Plant complex includes the main processing building plus connected secondary buildings (a south warehouse and a north office block) - treated as a campus."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/careers/career-center/our-locations/dold-foods/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Hormel locations page: Dold Foods, Wichita KS, joined Hormel 1984, ~760+ employees, bacon production."
+            },
+            {
+              "tier": 2,
+              "url": "https://jacobin.com/2025/06/union-elections-sva-hormel-nlrb",
+              "date": "2025-06",
+              "type": "press",
+              "claim": "UFCW Local 2 union election at Dold Foods Wichita certified May 2025 confirms active workforce."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Hormel-owned (since 1984) on its own locator at 2929 N Ohio St; 2025 NLRB election proves active operation; no closure/sale.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1878,28 +1906,6 @@
         },
         "dossierExcerpt": "Roster gave the address as \"215 Missouri St\" with coords (39.012236,\n-96.289857). The roster point landed on a block in Alma but not on the plant.\nWeb research (Wabaunsee County business directory, USDA FSIS, Waze, Bandana\njob listings) consistently identifies the Hormel/Alma Foods plant at\n110/114 E First Street, Alma KS 66401. Satellite probing southeast of the\nroster pin found a metal industrial plant with process equipment and parked\ntrailers; Street View (captured 2023-08) confirmed an industrial plant with an\noffice annex in a small-town industrial pocket. Locked center 39.0110,\n-96.2879.",
         "mapsUrl": "https://www.google.com/maps/@39.0110,-96.2879,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/hormel-foods/08-alma-foods-alma-ks-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.011,
-              "lng": -96.2879
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/hormel-foods/08-alma-foods-alma-ks-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.011,
-              "lng": -96.2879
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster coords (39.012236,-96.289857) landed near the correct block; the plant proper is at ~39.0110,-96.2879. Real address is 110/114 E First St, Alma KS 66401 (geocoded as 215 Missouri St in roster). Confirmed via Street View - a metal industrial plant with office annex, process equipment and trailers in a small-town industrial pocket.",
           "truckGate": "No barrier arm, gate, or controlled checkpoint. The site is open to the gravel town streets; vehicles park right up to the buildings and a residential house sits across the street. truckGateCount=1 reflects the single open driveway access, not a controlled gate.",
@@ -1910,6 +1916,32 @@
           "urbanRural": "Alma, KS is a small Flint Hills town (~800 population). Edge-of-town small-town industrial setting - Rural.",
           "drivewayShort": "Short open driveway access from the gravel street; only room for 1-2 trucks to approach the dock.",
           "buildingCount": "Main processing building plus 2-3 connected/adjacent secondary buildings (office annex, dark-roofed shop/warehouse buildings) - treated as one facility, not a campus."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/careers/career-center/plant-production-jobs/alma-foods/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Hormel careers/locations page lists Alma Foods, Alma KS as a wholly owned subsidiary; refrigerated entrees and foodservice barbeque."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.kansasworks.com/jobs/11846752",
+              "date": "2026-01",
+              "type": "careers",
+              "claim": "Active 2026 KANSASWORKS Alma Foods 2nd-shift Production Professional req."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Hormel locator + live 2026 careers reqs confirm Alma Foods is a current Hormel-owned plant; no negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2109,28 +2141,6 @@
         },
         "dossierExcerpt": "Both the roster coordinates (33.86701, -84.188105) and the roster address\n(\"3700 Mountain Industrial Blvd\") were incorrect — that point sits ~6 km\nnortheast in a commercial/residential area near a road intersection. Web\nresearch (Hormel \"Our Locations\", Waze, USDA FSIS, Yelp) consistently gives\nthe real address as 3367 Montreal Industrial Way, Tucker GA 30084, with\ncoordinates ~33.8392, -84.2510. Satellite probing there revealed a large\nprocessing plant with dock banks and trailers; Street View showed a sign\nreading \"ATLANTA PLANT ... SAFETY ... AWARD WINNER\" — positive ID.",
         "mapsUrl": "https://www.google.com/maps/@33.8393,-84.2506,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/hormel-foods/09-hormel-atlanta-plant-tucker-ga-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.8393,
-              "lng": -84.2506
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/hormel-foods/09-hormel-atlanta-plant-tucker-ga-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.8393,
-              "lng": -84.2506
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster coords (33.86701,-84.188105) and the roster address '3700 Mountain Industrial Blvd' were both wrong - that point is ~6km NE in a commercial/residential area. The real plant is 3367 Montreal Industrial Way, Tucker GA 30084, confirmed via Hormel/Waze/FSIS listings and a Street View sign reading 'ATLANTA PLANT'. Locked center ~33.8393,-84.2506.",
           "truckGate": "Property has a perimeter chain-link fence, but the truck driveways from Montreal Industrial Way and the east road appear to be open driveway gaps without barrier arms or a guard booth. No controlled checkpoint identified - marked false at medium confidence (Street View coverage does not reach the dock-yard entrance directly).",
@@ -2142,6 +2152,32 @@
           "urbanRural": "Tucker, GA is part of the Atlanta metro (DeKalb County) - dense industrial/commercial fabric. Urban.",
           "buildingCount": "The plant is a single large connected processing complex (built 1969). Adjacent large buildings are separate companies' warehouses, not part of this facility.",
           "operations": "Plant runs Hormel chili and Dinty Moore stew; the precooked bacon line was closed in 2025 with 135 of ~350 employees laid off (Aug 2025) - operations reduced."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/careers/career-center/our-locations/atlanta-plant/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Hormel Our Locations lists the Atlanta Plant in Tucker GA, 400 team members, chili and Dinty Moore stew."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.decaturish.com/business/hormel-foods-lays-off-135-workers-at-tucker-facility/article_a2cc79b6-eb14-4ea7-91cf-0701cbddb162.html",
+              "date": "2025-08",
+              "type": "press",
+              "claim": "Hormel discontinued only the bacon line at Tucker (135 layoffs Oct 2025); facility continues operating with 400 employees."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Hormel locator lists Tucker GA as a current operating location; Aug 2025 bacon-line layoff was single-line, facility explicitly continues operating.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2361,28 +2397,6 @@
         },
         "dossierExcerpt": "Roster gave the address \"2001 Bilter Rd, Aurora IL 60502\" with coordinates\n(41.806642, -88.267623). The roster point itself lands on a residential strip.\n~250 m south, on a N-S road in the same 60502 (NE Aurora) zip area, sits a\nlarge warehouse/packaging facility with an attached office annex and a sizable\ntrailer yard — the only facility matching a contract-packaging operation near\nthe roster pin. Hormel's own materials state CCP operates two Aurora\nfacilities; the web-listed address (3777 Exchange Ave, zip 60504, SW Aurora)\nis the other one. The roster's zip 60502 and Bilter Rd reference both point to\nNE Aurora, so this building (~41.8047, -88.2709) was audited as the\nroster-intended site.",
         "mapsUrl": "https://www.google.com/maps/@41.80475,-88.2709,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/hormel-foods/10-creative-contract-packaging-aurora-il-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.80475,
-              "lng": -88.2709
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/hormel-foods/10-creative-contract-packaging-aurora-il-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.80475,
-              "lng": -88.2709
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster gave '2001 Bilter Rd, Aurora IL 60502' with coords (41.806642,-88.267623). The roster point itself is a residential strip; ~250m south sits a large warehouse/packaging facility with an office annex and a big trailer yard, in the 60502 (NE Aurora) area - consistent with the roster. CCP operates TWO Aurora facilities (Hormel says so); the web-listed 3777 Exchange Ave (60504) is the other one. Audited the building at ~41.8047,-88.2709 as the roster-intended site.",
           "truckGate": "The truck yard is enclosed by chain-link fencing (visible in Street View), but the driveway entrances appear to be open gate gaps with no barrier arm and no staffed booth. No controlled checkpoint identified - marked false at medium confidence.",
@@ -2393,6 +2407,32 @@
           "railServed": "No rail spur into the property.",
           "urbanRural": "Aurora is part of the Chicago metropolitan area; the site has a major retail/mall complex immediately south and dense suburbs to the west, though farm fields border it north and west. Judged Urban (metro fabric) - flagged as borderline given the edge-of-development setting.",
           "buildingCount": "Main warehouse/packaging building plus an attached office annex - counted as 2 structures, one integrated facility."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/careers/career-center/our-locations/creative-contract-packaging/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Hormel Our Locations: CCP started by Hormel Foods in 1998 in Aurora IL; 120+ people across two production facilities."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.sec.gov/Archives/edgar/data/0000048465/000091205701002984/a2033904z10-k.htm",
+              "date": "2001-01",
+              "type": "10-K",
+              "claim": "Hormel Form 10-K Exhibit 21 lists Creative Contract Packaging Corp. as a Hormel subsidiary in Aurora IL."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "CCP is a Hormel-owned subsidiary started by Hormel in 1998, still Hormel-operated (120+ employees); not co-pack-only; no negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2588,28 +2628,6 @@
         },
         "dossierExcerpt": "The roster pin (41.80571, -87.833375) landed on the I-55 / 1st Ave interchange,\nnot a building. Web research established the plant's true address as 8751 W 50th\nSt, McCook IL 60525 (the roster's \"8499 W 47th St\" is incorrect) and listed\ncoordinates near 41.7993, -87.8376. A z18 satellite probe there showed a large\nwhite-roofed industrial building with a rooftop solar array, dock doors and\ntrailers — consistent with Fontanini's modern ~188,000+ sq ft plant (built 2008,\nexpanded several times; Hormel-owned since 2017; Food Processing's 2023 Green\nPlant of the Year). Locked center at 41.79935, -87.83780.",
         "mapsUrl": "https://www.google.com/maps/@41.79935,-87.83780,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/hormel-foods/11-fontanini-foods-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.79935,
-              "lng": -87.8378
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/hormel-foods/11-fontanini-foods-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.79935,
-              "lng": -87.8378
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "No barrier arm, sliding gate, or pinch-point checkpoint at any property access. Site sits within the McCook industrial park; truck yard opens directly onto private/industrial-park streets. Confirmed via 2019, 2025-09 and 2025-10 Street View of the north and west roads.",
           "guardShack": "No staffed booth structure visible at any access point.",
@@ -2618,6 +2636,32 @@
           "fastLaneOpportunity": "Very large open paved yard apron on the west and south sides — abundant unused width to add bypass lanes if a gate were installed.",
           "dropYard": "Open west/north paved apron functions as on-site trailer storage and drop area separate from the active dock line.",
           "urbanRural": "Dense Chicago-metro industrial fabric (McCook), surrounded by large distribution buildings on all sides."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/about/our-family/fontanini-foods-llc/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Hormel Family of Companies lists Fontanini Foods LLC, acquired by Hormel 2017, McCook IL (188,000 sq ft)."
+            },
+            {
+              "tier": 1,
+              "url": "https://hormel.dejobs.org/mccook-il/fontanini-industrial-manufacturing-mechanic/8B5CBB8DC5F0479E8A52E0A225E54622/job/",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Hormel careers ATS reqs for Fontanini production/maintenance at McCook IL."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Hormel-owned since 2017, McCook plant still listed and actively hiring; no closure/sale found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2815,28 +2859,6 @@
         },
         "dossierExcerpt": "The roster geocoded \"200 Caron Rd, Rochelle IL\" to 41.935628, -89.054638. A z17\nprobe there showed a large white building with a big car parking lot but **no\nloading docks, no trailer yard, and no refrigeration plant** — inconsistent with\nan 800-employee meat plant. Hormel's own \"Our Locations\" page lists the plant at\n1001 S Main St, Rochelle IL and describes a 400,000 sq ft facility \"just\noutside a two-block downtown.\"\n\nTracing S Main St through downtown Rochelle led to an old rail-served industrial\nparcel at the Main St rail crossing (~41.9205, -89.0698). Street View there\nconfirmed a tall industrial smokestack, an elevated water tower, ammonia /\nrefrigeration tank batteries, rail tank cars, and overhead conveyor/pipe bridges\nlinking buildings — the unmistakable signature of an older urban meat-packing",
         "mapsUrl": "https://www.google.com/maps/@41.92050,-89.06980,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/hormel-foods/12-rochelle-foods-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.9205,
-              "lng": -89.0698
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/hormel-foods/12-rochelle-foods-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.9205,
-              "lng": -89.0698
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster's geocode (200 Caron Rd / 41.9356,-89.0546) landed on a large white retail/warehouse-type building with no docks or trailer yard — NOT the meat plant. Hormel's own page lists the plant at 1001 S Main St. Resolved the plant to the old rail-served industrial parcel at the Main St rail crossing (~41.9205,-89.0698), confirmed by Street View showing a tall smokestack, water tower, ammonia/refrigeration tanks and rail tank cars — classic markers of an older urban meat-packing plant.",
           "truckGate": "No barrier arm, sliding gate, or checkpoint visible at any access point. The plant is an old, compact, open urban facility hemmed by residential streets and rail; truck access is via the rail-crossing road and an unpaved/gravel lot on the east side (Street View 2022).",
@@ -2846,6 +2868,32 @@
           "railServed": "Rail spur and tank cars confirmed in Street View; the plant sits between two rail lines.",
           "urbanRural": "Rochelle is a small Ogle County town (~9,000 pop.); the plant sits just outside a two-block downtown surrounded by residential blocks — small-town industrial, classified Rural per rubric.",
           "buildingCount": "Multiple connected old structures with overhead conveyor/pipe bridges; counted ~4 distinct buildings, low confidence."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/careers/career-center/our-locations/rochelle-foods/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Hormel Our Locations lists Rochelle Foods, Rochelle IL, 400,000 sq ft, 800+ employees; bacon, Compleats, deli hams; joined Hormel 1993."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.ziprecruiter.com/c/Hormel-Foods-Corporation/Job/Rochelle-Foods-Production-Laborer-October-2025/-in-Rochelle,IL?jid=96d7308876e3c84c",
+              "date": "2025-10",
+              "type": "careers",
+              "claim": "Hormel Oct 2025 Production Laborer req at Rochelle Foods LLC, Rochelle IL."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Live Hormel locator + continuous 2025 careers reqs at Rochelle Foods LLC; T&M closures named other plants; no negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3064,28 +3112,6 @@
         },
         "dossierExcerpt": "The roster geocoded \"11840 Standing Stone Dr, Papillion NE\" to 41.15444,\n-96.043031 — a major intersection in downtown Papillion with only small\ncommercial buildings. That is wrong.\n\nWeb research established that Papillion Foods is the **former Shopko\ndistribution center at 10808 S 132nd St, Papillion NE 68138**: a 535,000 sq ft\nbuilding on an ~80-acre site, originally built by Shopko in 2000 with a 2004\naddition, vacated 2019, acquired and significantly renovated by Hormel's\nPapillion Foods LLC, and opened in December 2020 to produce dry sausage and\nsalami. (Note: a separate large building further north on S 132nd St at 8401 is\nCLAAS Omaha, the German farm-machinery maker — not Hormel; that was excluded.)\n\nThe converted DC was resolved to a large warehouse at ~41.1518, -96.1245 in the\nSarpy West industrial submarket. The match: an ~86-acre parcel (consistent with",
         "mapsUrl": "https://www.google.com/maps/@41.15200,-96.12400,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/hormel-foods/13-papillion-foods-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.152,
-              "lng": -96.124
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/hormel-foods/13-papillion-foods-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.152,
-              "lng": -96.124
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster geocode (11840 Standing Stone Dr / 41.1544,-96.0430) landed in downtown Papillion — wrong. Hormel's own page and CRE reporting confirm Papillion Foods is the former Shopko distribution center at 10808 S 132nd St, Papillion NE 68138 (built 2000, +2004 addition, 535,000 sq ft, 80-acre site, converted by Hormel and opened 2020 for Columbus dry sausage/salami). Resolved to the large converted DC at ~41.1518,-96.1245 in the Sarpy West industrial submarket: footprint and ~86-acre parcel match the 535k sq ft / 80-acre figures, the roof shows a two-phase (2000/2004) addition seam, large ammonia-refrigeration condenser arrays and rooftop solar, a south-facing dock bank with trailers, employee parking, and a formal flagpole-circle entrance. Confidence medium because the corridor has several large warehouses and recent on-site Street View was unavailable to read current signage.",
           "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point seen in satellite imagery; truck access road runs openly from the public road into the dock yard. A small utility building sits in a landscaped grass island near the access road but is NOT a guard booth (not astride the lane). Flagged uncertain — only older (2007-2010) interior Street View was available.",
@@ -3098,6 +3124,32 @@
           "buildingCount": "Main plant building plus a smaller attached/adjacent office structure on the east side.",
           "urbanRural": "Within the Omaha metro's Sarpy West industrial submarket, surrounded by other large warehouses and suburban development — Urban.",
           "railServed": "No rail spur into the property visible."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/careers/career-center/our-locations/papillion-foods/",
+              "date": "2026-03",
+              "type": "locator",
+              "claim": "Hormel Our Locations lists Papillion Foods, Papillion NE; 535,000 sq ft opened 2020, Columbus and Hormel dry sausage, 170+ team members."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.prnewswire.com/news-releases/hormel-foods-opens-its-newest-production-facility-301197123.html",
+              "date": "2020-12",
+              "type": "press",
+              "claim": "Hormel PR: opens newest production facility in Papillion NE for dry sausage."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Current Hormel locator lists Papillion Foods as active (170+) + dated 2020 PR; divestiture/closure gauntlet clean.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3289,28 +3341,6 @@
         },
         "dossierExcerpt": "The roster address (5111 Fairway Ave, Little Rock) and its geocode landed in a\nresidential neighborhood — wrong. Web research (Hormel \"Our Locations\", Little\nRock Chamber, ADEQ permit records) established the Skippy plant's true address\nas 8201 Frazier Pike, Little Rock AR 72206, at the Port of Little Rock, with\ncoordinates near 34.7072, -92.1850.\n\nA satellite probe there showed a large industrial plant with docks and trailer\nyards. 2026 Street View confirmed the \"Skippy\" logo on the building tower —\npositive identification. Locked center at 34.70790, -92.18430. The plant has\nmade Skippy peanut butter since 1977 (166,500 sq ft, ~160 employees, 11\nvarieties, >3.5M lbs/week); it suffered a fire in September 2025 and returned to\noperation by December 2025.",
         "mapsUrl": "https://www.google.com/maps/@34.70790,-92.18430,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/hormel-foods/14-skippy-foods-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.7079,
-              "lng": -92.1843
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/hormel-foods/14-skippy-foods-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.7079,
-              "lng": -92.1843
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster address (5111 Fairway Ave) and geocode landed in a residential neighborhood — wrong. Skippy Foods is at 8201 Frazier Pike, at the Port of Little Rock (confirmed by Hormel/Little Rock Chamber/ADEQ). Resolved to 34.7079,-92.1843 — the 'Skippy' logo is visible on the building tower in 2026 Street View.",
           "truckGate": "Property is fully enclosed by chain-link perimeter fence. The truck entrance off Frazier Pike (a long paved/gravel driveway on the SE) passes through a chain-link sliding gate at the fence opening near the building yard (gate rail visible in z21 satellite; chain-link gate visible in 2026 Street View). truckGate = true.",
@@ -3323,6 +3353,32 @@
           "dropYard": "Dedicated trailer parking rows around the loop drive separate from the active dock face.",
           "railServed": "No rail spur into the property visible despite the port setting.",
           "note": "The plant suffered a fire in September 2025 and returned to operation by December 2025; 2026 Street View shows it intact and operating."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/careers/career-center/our-locations/skippy-foods/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Hormel Our Locations lists Skippy Foods, Little Rock AR; 166,500 sq ft, 3.5M lbs peanut butter weekly, 185+ team members; joined Hormel 2013."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.arkansasonline.com/news/2025/dec/04/skippy-plant-at-lr-port-operational-again-after/",
+              "date": "2025-12",
+              "type": "press",
+              "claim": "Arkansas Democrat-Gazette Dec 2025: Skippy plant at Port of Little Rock operational again at full capacity after a Sept 2025 fire."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Hormel's own locator lists Skippy Foods Little Rock; Dec 2025 press confirms operational and Hormel-run after a temporary fire; no negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3520,28 +3576,6 @@
         },
         "dossierExcerpt": "The roster gave \"4307 Planters Rd\" — that address is wrong. Web research\n(Hormel \"Our Locations\", Fort Smith Chamber, ADEQ permit records, Waze) confirms\nthe Hormel-Planters Fort Smith plant is at **4020 Planters Rd, Fort Smith AR\n72908**; a \"Mr Peanut Sign\" is a registered landmark at 4020. Neighboring\naddresses on the same street are separate companies — International Paper at\n4215 and Grainger at 3807.\n\nThe plant was resolved to the large multi-building, rail-served processing\ncomplex at ~35.3035, -94.3813. The roster's geocoded pin (35.3056, -94.3815)\nlands at the NW employee parking lot of this very complex, which confirms the\ncomplex itself. The street (\"Planters Rd\") is named for the plant, and the\ncampus footprint, dock banks, drop yards and rail spur all match a 230+\n-employee peanut/snack processing facility.",
         "mapsUrl": "https://www.google.com/maps/@35.30350,-94.38130,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/hormel-foods/15-hormel-fort-smith-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.3035,
-              "lng": -94.3813
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/hormel-foods/15-hormel-fort-smith-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.3035,
-              "lng": -94.3813
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster address (4307 Planters Rd) is wrong — Hormel-Planters' Fort Smith plant is at 4020 Planters Rd, Fort Smith AR 72908 (confirmed by Hormel, Fort Smith Chamber, ADEQ permit records; a 'Mr Peanut Sign' landmark sits at 4020). 4307, 4215 (International Paper) and 3807 (Grainger) are separate neighboring addresses on Planters Rd. Resolved to the large multi-building rail-served processing complex at ~35.3035,-94.3813; the roster's geocoded pin landed at the NW employee parking of this complex, so the complex itself is confirmed.",
           "truckGate": "No controlled perimeter gate, barrier arm, or checkpoint pinch-point identified. The Google Street View vehicle drove freely along internal plant roads and dock areas with no gate, and the public-road frontage / employee parking entrances are open. Flagged uncertain because the sprawling complex has several access points. truckGateCount kept at 1 as a nominal value for the primary truck entrance.",
@@ -3555,6 +3589,32 @@
           "fastLaneOpportunity": "Ample open paved internal yard width.",
           "urbanRural": "Fort Smith industrial district on the edge of town, surrounded by woods and other plants — classified Rural per the small-town-industrial rubric.",
           "buildingCount": "Estimated ~4 distinct connected buildings; low confidence given the merged complex."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/careers/career-center/our-locations/fort-smith-plant/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Hormel Our Locations lists the Fort Smith AR Planters plant; 230+ team produces Planters peanut/tree-nut products."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.ziprecruiter.com/c/Hormel-Foods/Job/2025-Planters-General-Labor/-in-Fort-Smith,AR",
+              "date": "2025-09",
+              "type": "careers",
+              "claim": "Active 2025 Hormel Planters production reqs at Fort Smith AR."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Hormel locator + active 2025 Planters careers at 4020 Planters Rd Fort Smith; no closure/sale signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3779,28 +3839,6 @@
         },
         "dossierExcerpt": "The roster coordinates (42.532852, -88.956507) and the \"2001 Gateway Blvd\"\naddress both landed in an empty farm field beside the I-43/I-90 interchange\n— not a building. Web search established the Hormel Beloit Plant is actually at\n3000 Kennedy Drive, Beloit, WI 53511 (produces CHI-CHI'S salsa, Hormel\nchili, Mary Kitchen hash; ~300 employees). OpenStreetMap returns a named\n\"Hormel Foods\" industrial building at 42.5210326, -88.9775939. Satellite\nconfirmed a large industrial plant there, and Street View shows the **Hormel\nlogo on the west wall. Locked center: 42.5210, -88.9778**.",
         "mapsUrl": "https://www.google.com/maps/@42.52100,-88.97780,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/hormel-foods/16-hormel-beloit-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.521,
-              "lng": -88.9778
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/hormel-foods/16-hormel-beloit-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.521,
-              "lng": -88.9778
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster coords (2001 Gateway Blvd, 42.5328,-88.9565) landed in an empty farm field near the I-43/I-90 interchange. Correct facility is at 3000 Kennedy Dr, Beloit, confirmed via web search and OSM (Hormel Foods industrial building, 42.5210,-88.9776). Hormel logo visible on the west wall in Street View.",
           "truckGate": "Sliding chain-link gate across the truck driveway at the SW corner of the yard (off the Kennedy Dr / Gateway business-park cul-de-sac). The whole truck yard is enclosed by chain-link fence with green privacy slats. Open driveway apron leads to the gate.",
@@ -3813,6 +3851,25 @@
           "urbanRural": "Edge-of-town Beloit business park, bordered by farm fields and I-90; small-metro industrial setting -> Rural per rubric.",
           "buildingCount": "Main plant building plus a small detached storage shed/building north of the parking lot.",
           "railServed": "No rail spur runs into the property; I-90 borders the east side."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/careers/career-center/our-locations/beloit-plant/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Hormel Our Locations lists the Beloit WI plant with ~435 team members and active production/maintenance reqs (CHI-CHI'S salsa, Hormel chili, Mary Kitchen hash)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "WATCH item cleared: Hormel locator confirms Beloit (3000 Kennedy Dr) operating with 435 team; no closure/sale news.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4009,28 +4066,6 @@
         },
         "dossierExcerpt": "The geocoded roster point moved 1613 m and landed on an industrial facility on\nCentury Court, Sparta, beside a multi-track rail mainline north of US-16.\nWeb search confirms Century Foods International (a Hormel Foods subsidiary,\ncontract manufacturer of nutritional / protein-powder products) at 400 Century\nCourt. The satellite layout — a single large plant/office building with a\ntrailer drop yard and rail at the rear — matches a contract food-manufacturing\nplant. Locked center: 43.94255, -90.79120.",
         "mapsUrl": "https://www.google.com/maps/@43.94255,-90.79120,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/hormel-foods/17-century-foods-international-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 43.94255,
-              "lng": -90.7912
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/hormel-foods/17-century-foods-international-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 43.94255,
-              "lng": -90.7912
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster coords moved 1613m and resolved to a Century Foods / Hormel nutritional-products plant on Century Court, Sparta WI, off Hwy 16 / next to a Canadian Pacific rail mainline. Confirmed via web search (Hormel 'Our Locations', 400 Century Court) and matching industrial layout. Locked center 43.94255,-90.79120.",
           "truckGate": "No gate or perimeter fence on the truck side. Century Court (private drive) runs straight onto the open paved truck yard; Street View (2025-08) shows no barrier arm, sliding gate, or pinch-point. Open uncontrolled access.",
@@ -4043,232 +4078,32 @@
           "buildingCount": "Main plant/office building plus a small detached storage building near the NW tracks.",
           "urbanRural": "Small-town edge of Sparta WI, surrounded by woods, a golf course, and farmland - clearly Rural.",
           "shipRcvSeparate": "Dock activity concentrated on adjacent NW and NE faces around one yard - treated as a single combined ship/receive operation."
-        }
-      },
-      {
-        "id": "18-columbus-craft-meats",
-        "name": "Columbus Craft Meats - Hayward CA",
-        "type": "Meat Processing Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "uncertainFields": [
-          "dockDoorCount",
-          "entryLanes",
-          "exitLanes"
-        ],
-        "center": {
-          "lat": 37.6133,
-          "lng": -122.0526
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 37.61417,
-                "lng": -122.053699
-              },
-              {
-                "lat": 37.614197,
-                "lng": -122.052875
-              },
-              {
-                "lat": 37.61243,
-                "lng": -122.05284
-              },
-              {
-                "lat": 37.612348,
-                "lng": -122.05363
-              },
-              {
-                "lat": 37.6133,
-                "lng": -122.053767
-              }
-            ]
-          },
-          "truckGate": {
-            "ring": [
-              {
-                "lat": 37.613164,
-                "lng": -122.053767
-              },
-              {
-                "lat": 37.613191,
-                "lng": -122.053561
-              },
-              {
-                "lat": 37.613001,
-                "lng": -122.053527
-              },
-              {
-                "lat": 37.612974,
-                "lng": -122.053733
-              }
-            ]
-          },
-          "dropYards": [
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
             {
-              "ring": [
-                {
-                  "lat": 37.613844,
-                  "lng": -122.054179
-                },
-                {
-                  "lat": 37.613871,
-                  "lng": -122.053767
-                },
-                {
-                  "lat": 37.613518,
-                  "lng": -122.053733
-                },
-                {
-                  "lat": 37.61349,
-                  "lng": -122.054145
-                }
-              ]
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/careers/career-center/our-locations/century-foods-international/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Hormel Our Locations lists Century Foods International, Sparta WI (nutritional products / dairy proteins)."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.sec.gov/Archives/edgar/data/0000048465/000004846525000059/q42025ex211subsidiaries.htm",
+              "date": "2025-10",
+              "type": "10-K",
+              "claim": "Century Foods International appears in Hormel FY2025 10-K subsidiaries (Exhibit 21.1)."
             }
           ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 37.614061,
-                  "lng": -122.05363
-                },
-                {
-                  "lat": 37.614089,
-                  "lng": -122.052943
-                },
-                {
-                  "lat": 37.61398,
-                  "lng": -122.052943
-                },
-                {
-                  "lat": 37.613953,
-                  "lng": -122.05363
-                }
-              ]
-            }
-          ],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 291,
-              "pano": "UV70xi81W5psQebsPK-sUw",
-              "hasCoverage": true
-            },
-            "truckGate": {
-              "heading": 291,
-              "pano": "UV70xi81W5psQebsPK-sUw",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 13,
-          "trailersVisible": 4,
-          "trailerParkingCapacity": 8,
-          "truckGateCount": 0,
-          "buildingCount": 1,
-          "siteAreaAcres": 7,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": false,
-          "drivewayLong": false,
-          "drivewayShort": true,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "10-25",
-          "dropArea": "NONE",
-          "shipRcvSeparate": false,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#3",
-          "steps": [
-            {
-              "step": "Arrive on site (no gate)",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Drive to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 480000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 3030000,
-          "totalYnsMs": 2640000
-        },
-        "dossierExcerpt": "The roster coordinates landed in a dense Hayward industrial park. The address\n30977 San Clemente St geocodes (OpenStreetMap) to 37.6132936, -122.0526313,\nwhich sits on the east face of a large single-tenant industrial building.\nWeb research found Columbus Craft Meats (Hormel-owned salami/charcuterie maker)\noperates two Hayward plants — the San Antonio Street plant was announced\nfor closure in March 2025, while a second Hayward location remains open.\nThe roster address is San Clemente Street, so this audit covers the **remaining\nSan Clemente St facility**, not the closing plant. Locked center:\n37.6133, -122.0526.",
-        "mapsUrl": "https://www.google.com/maps/@37.61330,-122.05260,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/hormel-foods/18-columbus-craft-meats-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 37.6133,
-              "lng": -122.0526
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/hormel-foods/18-columbus-craft-meats-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 37.6133,
-              "lng": -122.0526
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "location": "Roster coords landed in a dense Hayward industrial park; address 30977 San Clemente St geocoded (OSM) to 37.6133,-122.0526. Note: Hormel/Columbus has TWO Hayward plants - the San Antonio St plant was announced for closure (March 2025), the San Clemente St plant remains. This audit is the San Clemente St facility. Locked center 37.6133,-122.0526.",
-          "truckGate": "No perimeter fence, barrier arm, or gate. The building's dock face fronts directly on San Clemente St with open parking-lot access on all sides - fully uncontrolled.",
-          "guardShack": "No staffed booth observed anywhere on the property in Street View (2025-10) or satellite.",
-          "remoteGs": "False - no gate, so no remote check-in.",
-          "dockDoors": "Dock doors recessed along the east face fronting San Clemente St; ~10-15 doors visible with a few trailers/vans backed in. 10-25 band. A couple of additional dock positions at the SE corner.",
-          "dropArea": "No trailer drop yard - the lots around the building are marked car-parking stalls (employee parking), no parked trailers without tractors observed. dropArea NONE.",
-          "drivewayShort": "Docks open onto a narrow apron directly off San Clemente St; only 1-2 trucks fit in the approach.",
-          "railServed": "A single through-track runs along the west side between buildings but does not spur into the plant - no rail dock. railServed false.",
-          "urbanRural": "Dense Hayward (San Francisco Bay Area metro) industrial-park fabric - Urban.",
-          "buildingCount": "One large single-tenant industrial building.",
-          "shipRcvSeparate": "Dock activity concentrated on a single east-face bank - combined ship/receive."
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Hormel acquired Century Foods (Sparta WI) Oct 2024; on Hormel locator + FY2025 10-K subsidiary list; no negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4475,28 +4310,6 @@
         },
         "dossierExcerpt": "The roster address \"16500 Harlan Rd\" geocoded to a Shell gas station — an\nimprecise/incorrect address. Web research found the actual Swiss American\nSausage Co. address: 251 D'Arcy Parkway, Lathrop, CA 95330, in the\nCrossroads Commerce Center. Satellite probing along D'Arcy Parkway located the\nmatching facility — a single large meat/sausage processing building with\nrefrigerated docks, a fenced trailer yard, and a guard-booth entrance — at\n37.8018, -121.2965. Swiss American (a Hormel/Burke supplier of dry sausage,\npepperoni and pizza toppings, ~110 employees) is confirmed by Hormel \"Our\nLocations\" and press releases about a 2,000-panel solar array at the site.",
         "mapsUrl": "https://www.google.com/maps/@37.80180,-121.29650,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/hormel-foods/19-swiss-american-sausage-co-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 37.8018,
-              "lng": -121.2965
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/hormel-foods/19-swiss-american-sausage-co-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 37.8018,
-              "lng": -121.2965
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster address 16500 Harlan Rd geocoded to a Shell gas station - wrong. Web search found the actual address: 251 D'Arcy Parkway, Lathrop (Crossroads Commerce Center). Located the matching meat/sausage plant at 37.8018,-121.2965 - single processing building with refrigerated docks, trailer yard, and a guard-booth entrance off D'Arcy Parkway. Locked center 37.8018,-121.2965.",
           "truckGate": "TRUE. A red-paved entrance apron off D'Arcy Parkway leads to a controlled entry; the truck yard is fenced. Visible in Street View (2023-08) and satellite z20.",
@@ -4511,6 +4324,32 @@
           "urbanRural": "Lathrop is in the San Joaquin Valley / greater Stockton metro; the site is in a dense planned commerce-center industrial park - Urban.",
           "buildingCount": "Single processing/office building.",
           "shipRcvSeparate": "Dock activity concentrated on one south-face bank - combined ship/receive."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/careers/career-center/our-locations/swiss-american-sausage-company/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Hormel Our Locations lists Swiss American Sausage Company, Lathrop CA (dry sausage / pizza toppings)."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/newsroom/press-releases/hormel-foods-announces-the-completion-of-solar-array-at-its-swiss-american-sausage-company-facility-in-california/",
+              "date": "2019-10",
+              "type": "press",
+              "claim": "Hormel PR on completed solar array at its Swiss American Sausage Company facility in Lathrop CA."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Hormel locator confirms Swiss American Sausage Co, Lathrop (251 D'Arcy Pkwy); Hormel solar investment; no closure/sale signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4717,28 +4556,6 @@
         },
         "dossierExcerpt": "The roster address \"3438 W Pontiac Way\" geocoded into a **residential\nneighborhood** in NW Fresno (houses and baseball fields) — clearly wrong. Web\nresearch established the Hormel Fresno Plant is the Corn Nuts roasting\nand packaging facility at 4343 E Florence Ave, Fresno, CA 93725, in the\nsoutheast Fresno industrial district (Hormel \"Our Locations\" Fresno Plant +\nmultiple articles on the Corn Nuts solar array). Satellite probing found a\nmatching processing plant — solar field, refrigerated/dry trailer docks, a\nfenced yard — at 36.7184, -119.7527. Locked center there. The roster name\nalso references \"Stockton CA\"; the audited and confirmed site is the Fresno\nplant.",
         "mapsUrl": "https://www.google.com/maps/@36.71840,-119.75270,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/hormel-foods/20-hormel-stockton-plant-fresno-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 36.7184,
-              "lng": -119.7527
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/hormel-foods/20-hormel-stockton-plant-fresno-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 36.7184,
-              "lng": -119.7527
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster address '3438 W Pontiac Way' geocoded to a residential neighborhood in NW Fresno - wrong. The Hormel Fresno Plant is the Corn Nuts roasting/packaging facility at 4343 E Florence Ave, Fresno 93725 (SE Fresno industrial area), confirmed via web search (Hormel 'Our Locations' Fresno Plant + Corn Nuts solar-array articles). A matching processing plant with a solar field, trailer docks, and a fenced yard sits at 36.7184,-119.7527. Locked center there. Note: roster name also mentions 'Stockton' - the audited site is the Fresno plant.",
           "truckGate": "Property is fully enclosed by a tubular-metal perimeter fence with a landscaped buffer along E Florence Ave. Vehicle access is via gated driveway openings in the fence. A gate is present (medium confidence - Street View only reaches the public road and could not capture the gate panel directly).",
@@ -4752,6 +4569,32 @@
           "urbanRural": "Dense SE Fresno industrial district (Fresno metro) - Urban.",
           "buildingCount": "Single Corn Nuts processing/packaging building.",
           "shipRcvSeparate": "Dock activity concentrated on the single west face - combined ship/receive."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/careers/career-center/our-locations/fresno-plant/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Hormel Our Locations lists the Fresno CA plant; 40+ team produces Corn Nuts products (roasting/packaging)."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/inspired/story/sun-powered-snacking/",
+              "date": "2023-05",
+              "type": "press",
+              "claim": "Hormel feature on its Fresno Corn Nuts roasting/packaging facility, solar-powered."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Hormel locator confirms Fresno Corn Nuts plant operating (4343 E Florence Ave); no closure/sale signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4943,28 +4786,6 @@
         },
         "dossierExcerpt": "- Name: Hormel Suffolk Plant — Planters peanut processing\n- Type: Production Facility\n- Roster address: 1 Planters St, Suffolk, VA 23434\n- Resolved address: 245 Culloden St, Suffolk, VA 23434 (historic Planters / Mr. Peanut factory)",
         "mapsUrl": "https://www.google.com/maps/@36.72320,-76.58270,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/hormel-foods/21-hormel-suffolk-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 36.7232,
-              "lng": -76.5827
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/hormel-foods/21-hormel-suffolk-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 36.7232,
-              "lng": -76.5827
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster lat/lng (36.723019,-76.619984) landed in a residential subdivision ~3.5 km west of the real plant. Corrected via EPA FRS registry 110001135762 and the 245 Culloden St address to the historic Planters/Mr. Peanut factory complex in downtown Suffolk; locked center 36.72320,-76.58270.",
           "truckGate": "Truck yard is fully enclosed by chain-link fence with privacy slats (StreetView 2022-2023). A chain-link gate spans the truck drive at the north end of the internal yard. No barrier arm but a controlled fenced gate = truckGate true.",
@@ -4975,6 +4796,32 @@
           "urbanRural": "Old urban factory in downtown Suffolk VA, surrounded on all sides by dense residential streets; classified Urban.",
           "drivewayLong": "Internal drive yard between buildings is long enough to stack 3+ trucks before docks.",
           "multipleFacilities": "Single connected industrial complex (4 attached/adjacent buildings); treated as one facility, not a multi-campus -> multipleFacilities false."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/careers/career-center/our-locations/suffolk-plant/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Hormel Our Locations lists the Suffolk VA Planters plant; 350+ team produces Planters products."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.jobtarget.com/jobs/jt-nekuvxqdvp/production-professionals-and-forklift-drivers-suffolk-suffolk-virginia",
+              "date": "2025-10",
+              "type": "careers",
+              "claim": "Oct 2025 Hormel/Planters production reqs at 245 Culloden St, Suffolk VA."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "WATCH item cleared: Hormel locator + Oct 2025 careers at 245 Culloden St confirm the historic Planters/Mr Peanut plant operating; recovered from a 2024 temporary halt; no permanent closure/sale.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -5158,28 +5005,6 @@
         },
         "dossierExcerpt": "- Name: Dan's Prize, LLC — Long Prairie Plant (Hormel subsidiary)\n- Type: Meat Processing Plant\n- Address: 20 Riverside Dr, Long Prairie, MN 56347",
         "mapsUrl": "https://www.google.com/maps/@45.97720,-94.86780,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/hormel-foods/22-dans-prize-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 45.9772,
-              "lng": -94.8678
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/hormel-foods/22-dans-prize-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 45.9772,
-              "lng": -94.8678
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster coords (45.975374,-94.865992) landed at the SE corner of the property near the river; the plant complex sits NW of that point. Locked center 45.97720,-94.86780 on the main plant building. Confirmed via Hormel careers page and the 20 Riverside Dr address.",
           "truckGate": "Open site. StreetView (2014) shows the access road running straight into the complex with no barrier arm, no gate across the truck drive, and no perimeter fence. A tractor-trailer is parked in the open yard directly off the public road. truckGate false.",
@@ -5190,6 +5015,32 @@
           "dropArea": "25-50 untethered trailers parked in the open lots.",
           "urbanRural": "Long Prairie MN is a small rural town (~3,400 pop); the plant sits at the edge of town beside the Long Prairie River and farmland -> Rural.",
           "truckGateCount": "No controlled gate; the count of 1 reflects the single open access point off the public road."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/careers/career-center/plant-production-jobs/dans-prize-llc-long-prairie-minn/",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Hormel's Dan's Prize LLC operates its Long Prairie MN plant; 530+ employees; acquired by Hormel 1991; active openings."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/about/our-family/dans-prize-inc/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Dan's Prize Inc. listed as a Hormel family-of-companies operating brand based in Long Prairie MN."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Hormel-owned Dan's Prize plant in Long Prairie MN, actively hiring 2025-2026; no divestiture/closure found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -5385,28 +5236,6 @@
         },
         "dossierExcerpt": "- Name: Lloyd's Barbeque Company — Mendota Heights Plant (Hormel-owned)\n- Type: Production Facility (fully-cooked BBQ meats — shredded pork/chicken/\n  beef, ribs)\n- Address: 1455 Mendota Heights Rd, Mendota Heights, MN 55120",
         "mapsUrl": "https://www.google.com/maps/@44.86640,-93.17050,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/hormel-foods/23-lloyds-barbeque-company-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 44.8664,
-              "lng": -93.1705
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/hormel-foods/23-lloyds-barbeque-company-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 44.8664,
-              "lng": -93.1705
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster coords (44.86629,-93.170877, ROOFTOP) landed on/near the plant. Confirmed via Hormel ownership and the 1455 Mendota Heights Rd address: a single large white-roofed meat-processing building with heavy rooftop refrigeration/processing equipment in the Mendota Heights industrial park. Locked center 44.86640,-93.17050.",
           "truckGate": "Open site. Satellite shows no perimeter fence; the truck yard, dock apron and employee parking form one continuous paved lot off Mendota Heights Rd. StreetView confirms open landscaped frontage with no gate or barrier arm. truckGate false. (StreetView has no road access into the truck yard itself, so a low-likelihood internal gate cannot be 100% excluded -> flagged.)",
@@ -5417,6 +5246,25 @@
           "urbanRural": "Mendota Heights is an inner-ring suburb of the Minneapolis-St. Paul metro; the site sits in a dense suburban office/industrial park beside I-494 -> Urban.",
           "drivewayShort": "Short approach from the road driveway into the dock apron, holding only 1-2 trucks.",
           "buildingCount": "Single connected plant building (the SE office structure is a separate neighboring property, not Lloyd's)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/careers/career-center/our-locations/lloyds-barbeque-company/",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Hormel location page for Lloyd's Barbeque Company, Mendota Heights MN; 170+ team members; active job listings."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Hormel-owned Lloyd's Barbeque plant in Mendota Heights MN, currently staffed and hiring; no divestiture/closure found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -5611,28 +5459,6 @@
         },
         "dossierExcerpt": "- Name: Jennie-O Turkey Store — Willmar Plant (Hormel subsidiary; Jennie-O HQ)\n- Type: Meat Processing Plant (turkey slaughter + processing)\n- Roster address: 2505 Willmar Ave SE — actual: 2505 Willmar Ave SW,\n  Willmar, MN 56201",
         "mapsUrl": "https://www.google.com/maps/@45.10870,-95.07950,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/hormel-foods/24-jennie-o-turkey-store-willmar-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 45.1087,
-              "lng": -95.0795
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/hormel-foods/24-jennie-o-turkey-store-willmar-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 45.1087,
-              "lng": -95.0795
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster coords (45.110536,-95.008269) landed in farmland ~5.5 km east of the plant; address listed 'SE' but is actually Willmar Ave SW. Corrected via web search to 2505 Willmar Ave SW; locked center 45.10870,-95.07950 on the main processing campus on the SW edge of Willmar.",
           "truckGate": "Plant is fully enclosed by a continuous white privacy-slat chain-link fence (StreetView 2025). A posted sign at the north visitor gate reads 'ALL TRUCKS MUST USE SOUTH ENTRANCE' -> there is a controlled, function-separated truck gate. truckGate true.",
@@ -5647,226 +5473,32 @@
           "fastLaneOpportunity": "Wide paved entrances and large yard space leave room for an express/bypass lane.",
           "urbanRural": "Willmar is a small rural city (~21k); the plant sits at the SW edge surrounded by farmland -> Rural.",
           "scale": "A truck scale is likely at a USDA slaughter plant but was not positively identified in imagery -> flagged uncertain, classified false."
-        }
-      },
-      {
-        "id": "25-jennie-o-turkey-store-melrose",
-        "name": "Jennie-O Turkey Store - Melrose MN",
-        "type": "Meat Processing Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "low",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "dockDoorCount",
-          "trailerParkingCapacity",
-          "buildingCount",
-          "shipRcvSeparate"
-        ],
-        "center": {
-          "lat": 45.6763,
-          "lng": -94.7942
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 45.678603,
-                "lng": -94.796947
-              },
-              {
-                "lat": 45.678219,
-                "lng": -94.79214
-              },
-              {
-                "lat": 45.67582,
-                "lng": -94.792003
-              },
-              {
-                "lat": 45.67534,
-                "lng": -94.793513
-              },
-              {
-                "lat": 45.676108,
-                "lng": -94.797221
-              },
-              {
-                "lat": 45.677643,
-                "lng": -94.797496
-              }
-            ]
-          },
-          "truckGate": {
-            "ring": [
-              {
-                "lat": 45.67582,
-                "lng": -94.796947
-              },
-              {
-                "lat": 45.675724,
-                "lng": -94.795573
-              },
-              {
-                "lat": 45.675149,
-                "lng": -94.795711
-              },
-              {
-                "lat": 45.675245,
-                "lng": -94.797084
-              }
-            ]
-          },
-          "dropYards": [
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
             {
-              "ring": [
-                {
-                  "lat": 45.677068,
-                  "lng": -94.793513
-                },
-                {
-                  "lat": 45.676972,
-                  "lng": -94.792003
-                },
-                {
-                  "lat": 45.676108,
-                  "lng": -94.79214
-                },
-                {
-                  "lat": 45.676204,
-                  "lng": -94.793651
-                }
-              ]
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/careers/career-center/our-locations/jennie-o-turkey-store-inc/",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Hormel's Jennie-O Turkey Store based in Willmar MN with operating plant/blending locations; active 2025 production hiring."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.startribune.com/hormel-foods-sell-jennie-o-whole-bird-turkey-life-science-innovations-willmar-austin-mn-sale-deal/601585935",
+              "date": "2026-04",
+              "type": "press",
+              "claim": "LSI sale (completed Apr 2026) covered ONLY the Melrose whole-bird plant + Swanville feed mill; Hormel retained Jennie-O brand and all value-added facilities incl. Willmar."
             }
           ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 45.67726,
-                  "lng": -94.795573
-                },
-                {
-                  "lat": 45.677068,
-                  "lng": -94.792827
-                },
-                {
-                  "lat": 45.676684,
-                  "lng": -94.792964
-                },
-                {
-                  "lat": 45.676876,
-                  "lng": -94.795711
-                }
-              ]
-            }
-          ],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 22,
-          "trailersVisible": 18,
-          "trailerParkingCapacity": 35,
-          "truckGateCount": 1,
-          "buildingCount": 2,
-          "siteAreaAcres": 34,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": true,
-          "dockDoors": "10-25",
-          "dropArea": "10-25",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#3",
-          "steps": [
-            {
-              "step": "Arrive on site (no gate)",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Drive to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 480000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 3030000,
-          "totalYnsMs": 2640000
-        },
-        "dossierExcerpt": "- Name: Jennie-O Turkey Store — Melrose Plant\n- Type: Meat Processing Plant (turkey)\n- Roster address: 123 5th Ave E, Melrose, MN 56352",
-        "mapsUrl": "https://www.google.com/maps/@45.67630,-94.79420,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/hormel-foods/25-jennie-o-turkey-store-melrose-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 45.6763,
-              "lng": -94.7942
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/hormel-foods/25-jennie-o-turkey-store-melrose-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 45.6763,
-              "lng": -94.7942
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "location": "LOW-CONFIDENCE LOCATION. Roster coords (45.675694,-94.807948) for '123 5th Ave E' landed in downtown Melrose with no plant. The large food-processing complex at ~45.6705,-94.800 was positively identified by StreetView signage as a LAND O'LAKES Inc. plant, not Jennie-O. The audited building is the next-largest modern processing plant on the NE edge of Melrose by the Sauk River (~45.6763,-94.7942) -- a large single-building plant with numbered truck drive-in bays (1B-5B), dock doors with trailers, an E-side trailer drop yard, and a perimeter loop drive. This best matches the new $137M / ~300k-sq-ft Jennie-O Melrose plant profile but could NOT be confirmed by signage; treat the identity as unverified.",
-          "truckGate": "Open site -- StreetView shows no perimeter fence and no gate/barrier at the plant approach. Classified false but flagged given the location uncertainty.",
-          "guardShack": "No guard booth visible at any approach.",
-          "drivewayLong": "A perimeter loop drive and large paved yard give a long approach able to stack 3+ trucks.",
-          "dropYard": "Rows of untethered trailers on the E side of the building -> dropYard true; dropArea 10-25.",
-          "dockDoors": "~22 doors estimated: numbered drive-in bays plus dock doors with trailers backed in; banded 10-25, low-confidence.",
-          "fastLaneOpportunity": "Wide open paved yard and loop drive leave ample room for an express/bypass lane.",
-          "urbanRural": "Melrose is a small rural city (~3,700); the plant is on the NE edge by the Sauk River and farmland -> Rural.",
-          "buildingCount": "One main processing building plus a detached SW building (~2); uncertain.",
-          "shipRcvSeparate": "Could not confirm separate ship/receive dock banks from imagery -> classified false, flagged."
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Willmar is the Jennie-O HQ/hub with active 2025 production hiring; explicitly NOT part of the LSI whole-bird divestiture.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -6063,28 +5695,6 @@
         },
         "dossierExcerpt": "- Name: Jennie-O Turkey Store — Barron Plant\n- Type: Meat Processing Plant (turkey slaughter + processing)\n- Address: 34 N 7th St, Barron, WI 54812",
         "mapsUrl": "https://www.google.com/maps/@45.40240,-91.84680,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/hormel-foods/26-jennie-o-turkey-store-barron-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 45.4024,
-              "lng": -91.8468
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/hormel-foods/26-jennie-o-turkey-store-barron-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 45.4024,
-              "lng": -91.8468
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster coords (45.40239,-91.847592, ROOFTOP) landed directly on the plant. Confirmed Jennie-O via the green Jennie-O logo on the 3-story office building (StreetView 2024) and the 34 N 7th St address. Locked center 45.40240,-91.84680 on the main turkey-processing complex in Barron, WI.",
           "truckGate": "Open truck entrance. StreetView (2024) shows the main truck driveway off the public road running uncontrolled into the plant yard -- no barrier arm and no gate across the truck drive. A green privacy-slat chain-link fence encloses the office/employee area and part of the south yard, but the truck entry itself is open. truckGate false.",
@@ -6098,6 +5708,32 @@
           "fastLaneOpportunity": "Wide open truck entrance and large paved yard leave ample room for an express/bypass lane.",
           "urbanRural": "Barron WI is a small rural city (~3,400); the plant is at the edge of town surrounded by small-town residential and farmland -> Rural.",
           "scale": "A truck scale is plausible at a turkey slaughter plant but was not positively identified in imagery -> classified false, flagged."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.hormelfoods.com/careers/career-center/our-locations/jennie-o-turkey-store-inc/",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Jennie-O Turkey Store operating plant in Barron WI with active production, FSQ, maintenance, and distribution job postings (2025-2026)."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.foodprocessing.com/ingredients/animal-proteins/news/33015887/hormel-to-end-turkey-harvest-at-barron-wisconsin-plant-in-favor-of-value-added-processing",
+              "date": "2023-12",
+              "type": "press",
+              "claim": "Hormel ended turkey harvest at Barron in 2024 but CONVERTED the plant to value-added processing; no layoffs."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Harvest ended 2024 but plant converted (not closed) to Hormel value-added turkey processing; active Hormel/Jennie-O Barron job postings 2025-2026.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -6290,28 +5926,6 @@
         },
         "dossierExcerpt": "- Name: Hormel / DHL Southaven Distribution Center\n- Type: Distribution Center (refrigerated; DHL Supply Chain-operated)\n- Address: 8690 Tulane Rd W, Southaven, MS 38671",
         "mapsUrl": "https://www.google.com/maps/@34.98820,-90.04100,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/hormel-foods/27-hormel-dhl-southaven-distribution-center-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.9882,
-              "lng": -90.041
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/hormel-foods/27-hormel-dhl-southaven-distribution-center-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.9882,
-              "lng": -90.041
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster coords (34.988048,-90.040999) landed in the correct industrial park (geocode flagged 6135 m moved). Confirmed via the 8690 Tulane Rd address and web reporting: this is the former Associated Wholesale Grocers (AWG) distribution center in Southaven, MS, renovated (>$12M) and reopened in 2025 as Hormel's largest DC, operated by DHL Supply Chain. Locked center 34.98820,-90.04100 on the large white-roofed warehouse.",
           "truckGate": "The truck yard is fully enclosed by a barbed-wire-topped chain-link fence (StreetView 2025-04 and 2025-12). A chain-link gate (flanked by yellow bollards) controls the truck drive entrance on the SW side. truckGate true.",
@@ -6325,6 +5939,32 @@
           "urbanRural": "Southaven MS is part of the Memphis metro; the DC sits in a dense suburban industrial park -> Urban.",
           "buildingCount": "Single very large warehouse building (multi-section roof) -> buildingCount 1.",
           "shipRcvSeparate": "Dock banks on two faces but operated as one DC flow; no clear separate ship/receive split -> shipRcvSeparate false."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://desotocountynews.com/desoto-county-news/hormel-foods-dhl-celebrate-opening-of-new-southaven-distribution-center/",
+              "date": "2025-10",
+              "type": "press",
+              "claim": "Ribbon-cutting Oct 2025: new Hormel Foods DC at 8690 Tulane Rd, Southaven MS in former AWG building, operated in partnership with DHL Supply Chain; largest in Hormel's network."
+            },
+            {
+              "tier": 2,
+              "url": "https://dailymemphian.com/subscriber/article/50373/hormel-foods-distribution-center-southaven-jobs-mississippi",
+              "date": "2025-01",
+              "type": "press",
+              "claim": "Hormel Foods 280,000-sq-ft distribution center at 8690 Tulane Road, Southaven; +120 jobs; Hormel's largest DC."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Hormel's largest DC, opened Oct 2025 at 8690 Tulane Rd; operated by DHL Supply Chain (3PL) for Hormel.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       }
     ]

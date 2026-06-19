@@ -1,19 +1,19 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-02T16:15:14.885Z",
+  "builtAt": "2026-06-19T03:20:16.824Z",
   "account": {
     "slug": "honda",
     "displayName": "Honda",
     "archetype": "oem-automotive",
-    "siteCount": 18,
+    "siteCount": 14,
     "coverageNote": {
-      "auditedCount": 18,
+      "auditedCount": 14,
       "estimatedFootprint": 22,
+      "totalGlobalFootprint": 100,
+      "auditedScope": "NA",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Honda operates ~100 manufacturing plants in 30+ countries; ~22 are in North America (US + Canada + Mexico, incl. Alliston, Celaya, Marysville, East Liberty, Lincoln, Greensburg, parts/engine plants). We audited 18 NA sites. International scope on request.",
-      "auditedScope": "NA",
-      "totalGlobalFootprint": 100
+      "note": "Honda operates ~100 manufacturing plants in 30+ countries; ~22 are in North America (US + Canada + Mexico, incl. Alliston, Celaya, Marysville, East Liberty, Lincoln, Greensburg, parts/engine plants). We audited 18 NA sites. International scope on request."
     },
     "featuredSiteId": "05-honda-manufacturing-of-alabama",
     "dossierIntro": "Honda runs the largest greenfield auto manufacturing footprint we audited. 100 facilities; we audited 18. HMA Lincoln AL covers 900 acres. HMIN Greensburg IN is 1,480 acres. 5,675 total acres of audited footprint. YardFlow runs supplier inbound and finished-vehicle outbound on the same protocol regardless of plant size.",
@@ -32,19 +32,18 @@
       40.450426
     ],
     "archetypeMix": {
-      "#6": 9,
-      "#3": 3,
-      "#7": 1,
+      "#6": 7,
+      "#3": 2,
       "#1": 1,
       "#10": 2,
       "#9": 2
     },
     "totals": {
-      "dockDoors": 1019,
-      "trailerCapacity": 3895,
-      "gates": 28,
-      "railServed": 4,
-      "acres": 5675
+      "dockDoors": 884,
+      "trailerCapacity": 3313,
+      "gates": 22,
+      "railServed": 3,
+      "acres": 5108
     },
     "sites": [
       {
@@ -166,8 +165,7 @@
               ]
             }
           ],
-          "staging": null,
-          "streetViewMeta": {}
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 90,
@@ -250,28 +248,6 @@
         },
         "dossierExcerpt": "Roster coordinates (40.274666, -83.503609) landed on the southeast office /\nparking cluster of the campus. Satellite probes (z15-z18) and the roster\naddress confirm the facility: this is the sprawling multi-building Honda\nMarysville Auto Plant complex. Web search (Wikipedia, manufacturing.honda.com,\namericanautoworker.com) corroborates the plant at 24000 Honda Parkway, ~6 mi\nNW of Marysville near US-33 / SR-739. The assembly campus proper is the huge\ncontiguous dark-roof building complex centered ~40.2778,-83.5060; the roster\npoint sits at its SE edge.",
         "mapsUrl": "https://www.google.com/maps/@40.2778,-83.506,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/honda/01-marysville-auto-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.2778,
-              "lng": -83.506
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/honda/01-marysville-auto-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.2778,
-              "lng": -83.506
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Marysville Auto Plant confirmed via satellite + roster address 24000 Honda Parkway. Roster point landed on the SE office cluster; the assembly campus proper is the massive multi-building complex centered ~40.2778,-83.5060.",
           "truckGate": "Major OEM auto assembly plant on a fully secured private campus (Honda Parkway is an internal private road). Controlled truck gates are standard and consistent with the gated road network observed; treated as true with medium confidence on exact lane geometry.",
@@ -282,6 +258,32 @@
           "multipleFacilities": "Campus: assembly plant proper plus logistics/sequencing buildings, paint, stamping and associated structures.",
           "scale": "No truck scale clearly identified; left false.",
           "shipRcvSeparate": "Dock activity on physically separate building faces (logistics building docks vs main plant docks) supports separate ship/receive."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://manufacturing.honda.com/ohio/marysville-ohio/marysville-auto-plant/",
+              "date": "2024",
+              "type": "locator",
+              "claim": "Honda's own plant page: ~4,600 associates building Accord/Accord Hybrid/Acura Integra at Marysville."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.wardsauto.com/news/honda-shifts-focus-to-hybrid-ice-models-amid-significant-ev-losses/820289/",
+              "date": "2026-03",
+              "type": "trade",
+              "claim": "Post-EV-product cancellation Honda continues gas+hybrid production at Marysville; no plant closure."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Honda self-attested current operation; Mar-2026 EV-product cancellation reallocates the line to ICE/hybrid, plant stays open.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -470,28 +472,6 @@
         },
         "dossierExcerpt": "Roster coordinates (40.329087, -83.549523) landed near the plant center\n(geocode moved only ~1.4 km). Satellite probes (z15-z20) confirm a large auto\nassembly campus: main assembly building, separate logistics buildings,\nfinished-vehicle staging lots, retention ponds, and a vehicle test track on\nthe SW corner — all consistent with Honda ELP at 11000 SR-347.",
         "mapsUrl": "https://www.google.com/maps/@40.3285,-83.5475,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/honda/02-east-liberty-auto-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.3285,
-              "lng": -83.5475
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/honda/02-east-liberty-auto-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.3285,
-              "lng": -83.5475
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "East Liberty Auto Plant confirmed via satellite + roster address 11000 SR-347. Roster point landed near plant center; assembly campus centered ~40.3285,-83.5475 with test track to the SW.",
           "truckGate": "Major OEM auto assembly plant on a fully secured private campus - no public Street View reaches the gates (multiple ZERO_RESULTS probes). Controlled truck gates standard; treated true.",
@@ -503,6 +483,32 @@
           "shipRcvSeparate": "Dock activity on physically separate building faces supports separate ship/receive.",
           "scale": "No truck scale clearly identified; left false.",
           "urbanRural": "Open farmland setting near East Liberty - Rural."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://manufacturing.honda.com/ohio/east-liberty-ohio/",
+              "date": "2025",
+              "type": "locator",
+              "claim": "Honda's own plant page: ~2,800 associates building CR-V / Acura MDX / RDX at East Liberty."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.wardsauto.com/news/honda-shifts-focus-to-hybrid-ice-models-amid-significant-ev-losses/820289/",
+              "date": "2026-03",
+              "type": "trade",
+              "claim": "ELP continues gas+hybrid production post EV-cancellation; no closure."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Self-attested active production at the exact site; gauntlet clean.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -588,8 +594,7 @@
               ]
             }
           ],
-          "staging": null,
-          "streetViewMeta": {}
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 9,
@@ -662,28 +667,6 @@
         },
         "dossierExcerpt": "Roster geocode (40.27761, -83.525972) was effectively rooftop-accurate (moved\n26 m). Satellite probes confirm a single dark-roof main building with an\nattached white-roof east annex. A user-contributed Street View interior photo\nat the site shows the Acura NSX assembly floor — positively identifying this as\nthe Performance Manufacturing Center. Web research (hondanews, Gardner Web)\nconfirms PMC is a ~184,000 sq ft low-volume plant with ~100 associates, housed\nin Honda's former North American Logistics facility, which built the NSX\n2016-2022 and later the Acura Integra Type S.",
         "mapsUrl": "https://www.google.com/maps/@40.2793,-83.5253,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/honda/03-performance-manufacturing-center-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.2793,
-              "lng": -83.5253
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/honda/03-performance-manufacturing-center-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.2793,
-              "lng": -83.5253
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "PMC confirmed - roster geocode moved only 26 m. Satellite shows a single dark-roof main building with a white-roof east annex; a user-contributed Street View interior photo shows the NSX assembly floor, positively identifying the Performance Manufacturing Center.",
           "scale_of_facility": "PMC is a small low-volume specialty plant (~184,000 sq ft, ~100 associates) housed in Honda's former North American Logistics facility (per hondanews / Gardner Web). Modest yard footprint compared to the big assembly plants.",
@@ -695,6 +678,25 @@
           "buildingCount": "Main plant building plus an attached white-roof east annex.",
           "railServed": "No rail spur into the property.",
           "urbanRural": "Open farmland setting on the Marysville complex outskirts - Rural."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://manufacturing.honda.com/ohio/marysville-ohio/performance-manufacturing-center/",
+              "date": "2024-06",
+              "type": "locator",
+              "claim": "Honda's own PMC page: converted from Acura NSX to the exclusive U.S. CR-V e:FCEV line (production began June 2024)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "NSX ended 2022 but Honda repurposed PMC to the CR-V e:FCEV hydrogen line (June 2024); still Honda-operated and active.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -895,28 +897,6 @@
         },
         "dossierExcerpt": "Roster coordinates (40.37761, -84.191785) landed near the plant center\n(geocode moved 3.9 km from a city-level point but resolved to the plant).\nSatellite probes (z15-z19) confirm a massive multi-building industrial complex\namid farmland N of Anna OH — consistent with Honda AEP at 12500 Meranda Road.\nWeb research (manufacturing.honda.com, PR Newswire, AMS) confirms AEP is a\n~2.8 million sq ft facility, Honda's largest auto engine plant in the world,\nnow also building EV battery packs (IPU units).",
         "mapsUrl": "https://www.google.com/maps/@40.376,-84.1925,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/honda/04-anna-engine-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.376,
-              "lng": -84.1925
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/honda/04-anna-engine-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.376,
-              "lng": -84.1925
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Anna Engine Plant confirmed via satellite + roster address 12500 Meranda Road. Roster point landed near plant center; the engine-plant campus is the massive multi-building complex centered ~40.3760,-84.1925, amid farmland N of Anna OH.",
           "scale_of_facility": "AEP is ~2.8 million sq ft - Honda's largest auto engine plant in the world (web research). Now also building EV battery packs (IPU).",
@@ -929,6 +909,25 @@
           "shipRcvSeparate": "Dock activity on physically separate building faces (west vs south banks) supports separate ship/receive.",
           "scale": "No truck scale clearly identified; left false.",
           "urbanRural": "Open farmland setting N of Anna - Rural."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.prnewswire.com/news-releases/honda-celebrates-40-years-of-production-at-anna-engine-plant-in-ohio-302509150.html",
+              "date": "2025",
+              "type": "press",
+              "claim": "Honda celebrates 40 years of production at Anna Engine Plant (2025) — active operation."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Honda's largest engine plant; 40-year milestone 2025; wholly Honda-operated (distinct from the LG-Honda battery JV).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1136,28 +1135,6 @@
         },
         "dossierExcerpt": "Roster coordinates (33.616074, -86.145538) landed near the plant center\n(geocode moved 5.9 km from a city-level point but resolved to the plant).\nSatellite probes (z14-z20) confirm a massive multi-building auto+engine plant\ncampus with an on-site vehicle test track, SW of Lincoln AL in Talladega\nCounty. Web research (Encyclopedia of Alabama, Wikipedia, Automotive World)\nconfirms HMA is a ~4.9 million sq ft facility on a 1,350-acre property — the\nfirst Honda facility with engine and vehicle assembly in the same complex,\nbuilding the Odyssey, Pilot, Passport and Ridgeline plus V6 engines.",
         "mapsUrl": "https://www.google.com/maps/@33.6155,-86.144,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/honda/05-honda-manufacturing-of-alabama-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.6155,
-              "lng": -86.144
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/honda/05-honda-manufacturing-of-alabama-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.6155,
-              "lng": -86.144
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "HMA confirmed via satellite + roster address 1800 Honda Drive. Roster point landed near plant center; the auto+engine campus is the massive multi-building complex centered ~33.6155,-86.1440, with an on-site vehicle test track to the north, SW of Lincoln AL.",
           "scale_of_facility": "HMA is ~4.9 million sq ft on a 1,350-acre property in Talladega County (web research) - the first Honda facility with engine and vehicle assembly in the same complex. Builds Odyssey, Pilot, Passport, Ridgeline plus V6 engines.",
@@ -1171,6 +1148,32 @@
           "scale": "No truck scale clearly identified; left false.",
           "siteAreaAcres": "Perimeter box captures the developed plant core plus lots (~900 ac); the full Honda-owned property is ~1,350 ac including test track and wooded buffer.",
           "urbanRural": "Rural / edge-of-town setting SW of Lincoln AL amid woods and farmland."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://manufacturing.honda.com/alabama-autoplant/",
+              "date": "2025",
+              "type": "locator",
+              "claim": "Honda's own HMA page: 4,500+ associates building Pilot/Passport/Odyssey/Ridgeline + V6 engines."
+            },
+            {
+              "tier": 1,
+              "url": "https://hondanews.com/en-US/honda-corporate/releases/release-322c03bad558525bf849ddaf790ba247-honda-associates-in-alabama-launch-all-new-2026-passport-and-passport-trailsport",
+              "date": "2025-02",
+              "type": "press",
+              "claim": "HMA Line 2 launched mass production of the 2026 Passport/TrailSport Feb 28, 2025."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Self-attested active production with a fresh 2025 model launch; Ridgeline pause is one model, not a closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1361,28 +1364,6 @@
         },
         "dossierExcerpt": "The roster pin (39.370161, -85.543533) landed inside the plant's northern trailer\nlots. Satellite probes z14-z19 confirmed the building: a vast auto assembly\ncampus in rural Decatur County, bounded by Interstate 74 to the north and\nfarmland on all other sides. A vehicle proving/test-track oval occupies the\nsouthern half of the property — characteristic of an OEM auto assembly plant.\nWeb research (Greensburg Chamber, Wikipedia, Honda manufacturing.honda.com)\nconfirms HMIN / Indiana Auto Plant builds the Civic hatchback and CR-V at\n~250,000 vehicles/yr, operating 24/7. The building center was relocated south to\n39.3680, -85.5410.",
         "mapsUrl": "https://www.google.com/maps/@39.368,-85.541,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/honda/06-honda-manufacturing-of-indiana-hmin-greensburg-in-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.368,
-              "lng": -85.541
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/honda/06-honda-manufacturing-of-indiana-hmin-greensburg-in-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.368,
-              "lng": -85.541
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Waze records a distinct 'Truck entrance' at 2755 N Michigan Ave separate from the visitor 'Main entrance'. Entire campus is fenced and set ~400m back from public roads with a single managed industrial access corridor. truckGate=true is high confidence; the specific gate structure could not be directly imaged.",
           "guardShack": "Not directly visible in available satellite crops and Street View pano coverage stops at the employee lot. A 24/7 auto assembly plant of this scale (Civic + CR-V, 250k vehicles/yr) effectively always has a staffed guarded truck gate; classified true on facility-class basis, flagged uncertain.",
@@ -1395,258 +1376,32 @@
           "siteAreaAcres": "Perimeter box covers the full fenced property including the vehicle test track; ~1480 acres is derived from the box and is a rough figure.",
           "fastLaneOpportunity": "Wide internal access corridors and ample paved apron width provide room to add an express/bypass lane.",
           "scale": "No truck scale identified in imagery; flagged uncertain."
-        }
-      },
-      {
-        "id": "07-lg-energy-solution-honda-ev-battery-plant-l-h-battery-co-jeffersonville-oh",
-        "name": "LG Energy Solution-Honda EV Battery Plant (L-H Battery Co.) - Jeffersonville OH",
-        "type": "EV Battery Cell Plant (JV)",
-        "archetype": "#7",
-        "archetypeName": "Gate + GS (not BU sens.) + fast lane opp",
-        "confidence": "low",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "remoteGs",
-          "preGateStaging",
-          "postGateStaging",
-          "drivewayLong",
-          "entryLanes",
-          "exitLanes",
-          "fastLaneOpportunity",
-          "dockDoors",
-          "dropArea",
-          "shipRcvSeparate",
-          "dropYard",
-          "multiStep",
-          "scale",
-          "dockDoorCount",
-          "trailersVisible",
-          "trailerParkingCapacity"
-        ],
-        "center": {
-          "lat": 39.6248,
-          "lng": -83.57
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 39.627762,
-                "lng": -83.57824
-              },
-              {
-                "lat": 39.627762,
-                "lng": -83.563958
-              },
-              {
-                "lat": 39.61803,
-                "lng": -83.563958
-              },
-              {
-                "lat": 39.61803,
-                "lng": -83.57824
-              }
-            ]
-          },
-          "truckGate": {
-            "ring": [
-              {
-                "lat": 39.625646,
-                "lng": -83.57824
-              },
-              {
-                "lat": 39.625646,
-                "lng": -83.577141
-              },
-              {
-                "lat": 39.6248,
-                "lng": -83.577141
-              },
-              {
-                "lat": 39.6248,
-                "lng": -83.57824
-              }
-            ]
-          },
-          "dropYards": [
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
             {
-              "ring": [
-                {
-                  "lat": 39.623108,
-                  "lng": -83.57769
-                },
-                {
-                  "lat": 39.623108,
-                  "lng": -83.565605
-                },
-                {
-                  "lat": 39.620992,
-                  "lng": -83.565605
-                },
-                {
-                  "lat": 39.620992,
-                  "lng": -83.57769
-                }
-              ]
+              "tier": 1,
+              "url": "https://manufacturing.honda.com/indiana-auto-plant/",
+              "date": "2026",
+              "type": "locator",
+              "claim": "Honda's own HMIN page: 2,600+ associates building Civic + CR-V/Hybrid at Greensburg."
             },
             {
-              "ring": [
-                {
-                  "lat": 39.620146,
-                  "lng": -83.57769
-                },
-                {
-                  "lat": 39.620146,
-                  "lng": -83.567253
-                },
-                {
-                  "lat": 39.618453,
-                  "lng": -83.567253
-                },
-                {
-                  "lat": 39.618453,
-                  "lng": -83.57769
-                }
-              ]
+              "tier": 2,
+              "url": "https://www.wishtv.com/news/local-news/honda-moves-civic-hybrid-production-tariffs/",
+              "date": "2025",
+              "type": "trade",
+              "claim": "Honda consolidating Civic Hybrid production TO Greensburg (growth, not closure)."
             }
           ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 39.624377,
-                  "lng": -83.577141
-                },
-                {
-                  "lat": 39.624377,
-                  "lng": -83.565605
-                },
-                {
-                  "lat": 39.623319,
-                  "lng": -83.565605
-                },
-                {
-                  "lat": 39.623319,
-                  "lng": -83.577141
-                }
-              ]
-            }
-          ],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 35,
-          "trailersVisible": 25,
-          "trailerParkingCapacity": 120,
-          "truckGateCount": 1,
-          "buildingCount": 2,
-          "siteAreaAcres": 290,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": true,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 2,
-          "exitLanes": 2,
-          "fastLaneOpportunity": true,
-          "dockDoors": "25-50",
-          "dropArea": "10-25",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#7",
-          "steps": [
-            {
-              "step": "Arrive at gate (fast-lane bypass possible)",
-              "geofenceTarget": "truckGate",
-              "durationMs": 30000,
-              "narrationKey": "gate.arrive",
-              "baselineWaitMs": 600000,
-              "ynsWaitMs": 0
-            },
-            {
-              "step": "Pass through to drop yard",
-              "geofenceTarget": "dropYard",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Spotter dispatch (fast-lane priority for live loads)",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 90000,
-              "narrationKey": "spotter.dispatch.fastlane",
-              "baselineWaitMs": 1200000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit through gate",
-              "geofenceTarget": "exit",
-              "durationMs": 60000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 4440000,
-          "totalYnsMs": 2730000
-        },
-        "dossierExcerpt": "The roster pin (39.653047, -83.562103, GEOMETRIC_CENTER) landed on the village\nof Jeffersonville itself, not the plant. Web research (lgeshonda.com, Honda/LGES\ngroundbreaking releases, Dayton Daily News, Statehouse News Bureau) places the\nL-H Battery Company plant \"west of Ohio 729 and south of Interstate 71, easily\nvisible from the interstate\" in Jefferson Township, Fayette County —\napproximately 40 miles southwest of Columbus. Satellite probes confirmed a\nmassive single-building industrial plant under construction at ~39.6248,\n-83.5700, bracketed by I-71 to the NW and SR 729 to the E. The building center\nwas relocated ~3.5 km south-southwest of the roster pin.",
-        "mapsUrl": "https://www.google.com/maps/@39.6248,-83.57,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/honda/07-lg-energy-solution-honda-ev-battery-plant-l-h-battery-co-jeffersonville-oh-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.6248,
-              "lng": -83.57
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/honda/07-lg-energy-solution-honda-ev-battery-plant-l-h-battery-co-jeffersonville-oh-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.6248,
-              "lng": -83.57
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "_status": "Facility is a brand-new EV battery cell plant still under construction in available satellite imagery (winter/snowy Maxar capture). Per news the plant was 'nearly complete' as of Feb 2026; final truck-yard infrastructure - gates, guard booth, dock build-out, trailer lots - is not yet fully formed or is obscured by snow and construction laydown. Most operational fields are best-effort inference and flagged uncertain.",
-          "truckGate": "A $3.5B EV cell plant with controlled-access security; the property is set behind a roundabout main entrance off the access road and ringed by buffer land. A controlled truck gate is expected but the specific structure is not resolvable in construction-phase imagery.",
-          "guardShack": "Assumed present on facility-class grounds (high-security battery plant); not directly imaged - flagged uncertain.",
-          "dockDoors": "An east-facing building wing with a dock apron and a few trailers is visible; door count obscured by snow - ~35 is a rough mid-band estimate.",
-          "dropArea": "Limited trailer parking visible; much of the open ground is construction laydown, not a settled drop yard.",
-          "railServed": "No rail spur identified entering the property.",
-          "urbanRural": "Rural - Jefferson Township, Fayette County, OH; farmland and small residential clusters; ~40 mi SW of Columbus, just south of I-71.",
-          "siteAreaAcres": "Perimeter box covers the core fenced plant property; ~290 acres derived from the box. The full announced site is larger (~78 football fields of building plus grounds); figure is approximate.",
-          "multipleFacilities": "Single primary battery building with a connected utility/support wing - treated as one facility cluster.",
-          "_revisit": "Recommend re-audit once non-winter, post-construction imagery is available to confirm gate, guard booth, dock count and trailer yard."
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Self-attested current operation; gauntlet clean; lead site for current Civic Hybrid + CR-V.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1834,28 +1589,6 @@
         },
         "dossierExcerpt": "The roster pin (40.447438, -83.90246) landed just west of the plant, over a row\nof long ancillary warehouse/storage buildings on the far side of SR 235.\nSatellite probes z15-z20 confirmed the main transmission plant: a large\nwhite-roofed manufacturing building on the east side of SR 235, surrounded by\nfarmland in Logan County, with employee parking on the SW and trailer drop lots\non the east. Building center relocated ~250 m east-southeast to 40.4475,\n-83.8995. Honda Transmission Mfg. of America is a long-running Honda powertrain\nplant.",
         "mapsUrl": "https://www.google.com/maps/@40.4475,-83.8995,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/honda/08-honda-transmission-mfg-of-america-russells-point-oh-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.4475,
-              "lng": -83.8995
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/honda/08-honda-transmission-mfg-of-america-russells-point-oh-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.4475,
-              "lng": -83.8995
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Plant property is fully enclosed by chain-link fence with green privacy slats (confirmed in Street View from multiple headings along SR 235). A single managed driveway crosses the fence line from SR 235; entrance has lane markings and a covered island/canopy - controlled truck gate.",
           "guardShack": "A small white booth-sized structure with an adjacent canopy island sits in the entrance driveway just inside the property line (z20 satellite). Consistent with a staffed guard booth at a Honda powertrain plant; classified true, flagged uncertain because Street View pano coverage stays on the public road and does not directly image the booth.",
@@ -1868,6 +1601,25 @@
           "multipleFacilities": "Single main transmission plant building with attached wings plus a few small support/storage buildings - treated as one facility cluster (long warehouse buildings west of SR 235 appear separate-use).",
           "siteAreaAcres": "~80 acres derived from the perimeter box; approximate.",
           "scale": "No truck scale identified."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://manufacturing.honda.com/ohio/transmission-plant-ohio/",
+              "date": "2026",
+              "type": "locator",
+              "claim": "Honda's own page: Russells Point transmission plant, ~1,100 associates, CVTs + hybrid power systems."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Tier-1 self-attested current operation; still the transmission/hybrid-system supplier feeding the Ohio auto plants.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2057,28 +1809,6 @@
         },
         "dossierExcerpt": "The roster pin (33.691229, -85.283853) landed directly on the plant. Satellite\nprobes z16-z21 confirmed the building: a large light-roofed manufacturing plant\nset deep in forested terrain near Tallapoosa, Haralson County, GA. Extensive\ndock lines with trailers backed in along the south/southwest faces, employee\nparking on the east, and a controlled truck checkpoint on the east access road\npositively identify it as Honda Precision Parts of Georgia (HPP-GA), Honda's\nGeorgia transmission/CVT plant. Building center adjusted slightly to 33.6910,\n-85.2845.",
         "mapsUrl": "https://www.google.com/maps/@33.691,-85.2845,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/honda/09-honda-precision-parts-of-georgia-transmission-plant-tallapoosa-ga-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.691,
-              "lng": -85.2845
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/honda/09-honda-precision-parts-of-georgia-transmission-plant-tallapoosa-ga-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.691,
-              "lng": -85.2845
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "A controlled truck checkpoint sits on the east access road: a small guard-booth structure stands beside/in the truck lanes with a parked vehicle next to it and painted lane markings splitting the truck path into multiple lanes (z20 satellite). Clear controlled truck gate.",
           "guardShack": "The small booth-sized structure positioned in the truck lanes at the checkpoint is a staffed guard shack - high confidence from z20 imagery.",
@@ -2095,6 +1825,25 @@
           "multipleFacilities": "Single large transmission plant building with attached wings plus minor support buildings - one facility cluster.",
           "siteAreaAcres": "~130 acres derived from the perimeter box; approximate (much of the surrounding land is forest buffer).",
           "scale": "No truck scale identified."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://manufacturing.honda.com/transmission-plant-ga/",
+              "date": "2026",
+              "type": "locator",
+              "claim": "Honda's own page: Tallapoosa transmission plant (TMP-G, formerly HPPG), ~450 associates, automatic transmissions."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Tier-1 self-attested current operation; Honda-operated former HPPG. NOTE: a separate Astemo supplier on the same Honda Parkway address is closing (WARN 2026-03) — do not conflate with the Honda transmission plant, which remains open.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2295,28 +2044,6 @@
         },
         "dossierExcerpt": "The roster pin (34.110581, -79.917171, GEOMETRIC_CENTER) landed adjacent to the\nplant; satellite probes z15-z20 confirmed the building immediately to the\neast-southeast. Honda of South Carolina Manufacturing is a large multi-wing\nplant beside Interstate 95 near Timmonsville, Florence County, SC, with an ATV\nproving/test track to the northwest. Honda's South Carolina plant builds\nATVs/UTVs/side-by-sides. Building center adjusted to 34.1105, -79.9165.",
         "mapsUrl": "https://www.google.com/maps/@34.1105,-79.9165,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/honda/10-honda-of-south-carolina-mfg-atv-utv-plant-timmonsville-sc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.1105,
-              "lng": -79.9165
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/honda/10-honda-of-south-carolina-mfg-atv-utv-plant-timmonsville-sc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.1105,
-              "lng": -79.9165
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Confirmed in Street View and z20 satellite: a controlled entrance on the access road (Honda Way) with a guard booth straddling the entry, traffic cones marking multiple lanes, and an island. Clear controlled truck gate.",
           "guardShack": "Confirmed - Street View (2019 capture) shows a uniformed guard standing at the gate beside a small multi-window guard booth. High confidence.",
@@ -2331,6 +2058,25 @@
           "multipleFacilities": "Campus has multiple connected and adjacent large building wings plus an ATV proving/test track to the northwest - multiple building clusters.",
           "siteAreaAcres": "~230 acres derived from the perimeter box (excludes the separate test-track land); approximate.",
           "scale": "No truck scale identified in imagery; flagged uncertain."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://hondanews.com/en-US/releases/release-00b08be100b45a4ab9ae5793dd0ebd00-honda-celebrates-start-of-production-for-2026-pioneer-1000-deluxe",
+              "date": "2026-04",
+              "type": "press",
+              "claim": "Start of 2026 Pioneer 1000 Deluxe production at Timmonsville; described as the exclusive global production home of Honda side-by-side vehicles."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Honda powersports plant (Tier-1 Apr 2026). NOTE: ATV production moved to Honda NC in 2024 — Timmonsville is now UTV/side-by-side only; drop \"ATV\" from the label.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2414,8 +2160,7 @@
               ]
             }
           ],
-          "staging": null,
-          "streetViewMeta": {}
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 60,
@@ -2488,28 +2233,6 @@
         },
         "dossierExcerpt": "- Name: Honda Power Equipment Mfg., Inc.\n- Type: Power Equipment / General-Purpose Engine Plant (manufacturing + R&D)\n- Address: 3721 S NC Highway 119, Swepsonville/Haw River, NC 27359\n- Resolved coordinates: 36.033436, -79.344443 (center of the main plant campus)",
         "mapsUrl": "https://www.google.com/maps/@36.033436,-79.344443,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/honda/11-honda-power-equipment-mfg-swepsonville-nc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 36.033436,
-              "lng": -79.344443
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/honda/11-honda-power-equipment-mfg-swepsonville-nc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 36.033436,
-              "lng": -79.344443
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "No controlled truck gate at any public road. The campus is set well back from NC-119 (west) behind dense woods; the main access is an open driveway off the east-side road into the parking lot — no barrier arm, no guard booth, no checkpoint pinch-point. Truck docks and drop yards are reached via private internal roads inside the wooded campus. Classified false.",
           "guardShack": "No guard booth observed at the entrance driveway or anywhere along the property perimeter in Street View (2023) or satellite.",
@@ -2524,621 +2247,32 @@
           "entryLanes": "Driveway is a wide open 2-lane apron; exact lane count for trucks not separately marked. Low confidence.",
           "siteAreaAcres": "Web sources state an 87-acre site; perimeter box captures the developed core plus north test field — ~95 acres estimate.",
           "railServed": "No rail spur runs into the property."
-        }
-      },
-      {
-        "id": "12-honda-marysville-motorcycle-plant-mmp-marysville-oh",
-        "name": "Honda - Marysville Motorcycle Plant (MMP) - Marysville OH",
-        "type": "Motorcycle / Powersports Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "medium",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "entryLanes",
-          "exitLanes",
-          "buildingCount",
-          "dockDoorCount",
-          "multiStep"
-        ],
-        "center": {
-          "lat": 40.279,
-          "lng": -83.5025
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 40.283191,
-                "lng": -83.514585
-              },
-              {
-                "lat": 40.283191,
-                "lng": -83.499753
-              },
-              {
-                "lat": 40.273971,
-                "lng": -83.499753
-              },
-              {
-                "lat": 40.27439,
-                "lng": -83.514585
-              }
-            ]
-          },
-          "truckGate": {
-            "ring": [
-              {
-                "lat": 40.274809,
-                "lng": -83.5025
-              },
-              {
-                "lat": 40.274809,
-                "lng": -83.500852
-              },
-              {
-                "lat": 40.273971,
-                "lng": -83.500852
-              },
-              {
-                "lat": 40.273971,
-                "lng": -83.5025
-              }
-            ]
-          },
-          "dropYards": [
+        "verification": {
+          "verdict": "probable",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
             {
-              "ring": [
-                {
-                  "lat": 40.280676,
-                  "lng": -83.514036
-                },
-                {
-                  "lat": 40.280676,
-                  "lng": -83.511289
-                },
-                {
-                  "lat": 40.275647,
-                  "lng": -83.511289
-                },
-                {
-                  "lat": 40.276066,
-                  "lng": -83.514036
-                }
-              ]
+              "tier": 1,
+              "url": "https://www.manufacturingdive.com/news/honda-atv-manufacturing-north-carolina/724741/",
+              "date": "2024-08",
+              "type": "trade",
+              "claim": "Honda discontinued lawn/power-equipment production at the NC plant in Sept 2023 and transferred ATV production in; it is now Honda exclusive North America ATV facility."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.greenindustrypros.com/mowers-turf/article/22878566/honda-power-equipment-suspends-production-at-north-carolina-plant",
+              "date": "2023",
+              "type": "trade",
+              "claim": "Honda Power Equipment suspended power-equipment production at the North Carolina plant (the scoped product line ended)."
             }
           ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 40.277324,
-                  "lng": -83.51074
-                },
-                {
-                  "lat": 40.276905,
-                  "lng": -83.5025
-                },
-                {
-                  "lat": 40.276066,
-                  "lng": -83.502775
-                },
-                {
-                  "lat": 40.276485,
-                  "lng": -83.511014
-                }
-              ]
-            }
-          ],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 90,
-          "trailersVisible": 320,
-          "trailerParkingCapacity": 450,
-          "truckGateCount": 3,
-          "buildingCount": 1,
-          "siteAreaAcres": 130,
-          "railServed": true
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": true,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": false,
-          "entryExitSeparate": true,
-          "entryLanes": 2,
-          "exitLanes": 2,
-          "fastLaneOpportunity": true,
-          "dockDoors": "50+",
-          "dropArea": "50+",
-          "shipRcvSeparate": true,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": true,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#6",
-          "steps": [
-            {
-              "step": "Arrive at outer campus gate",
-              "geofenceTarget": "truckGate",
-              "durationMs": 30000,
-              "narrationKey": "gate.arrive",
-              "baselineWaitMs": 600000,
-              "ynsWaitMs": 30000
-            },
-            {
-              "step": "Route to correct building / drop yard",
-              "geofenceTarget": "dropYard",
-              "targetIndex": 0,
-              "durationMs": 180000,
-              "narrationKey": "campus.route",
-              "baselineWaitMs": 900000,
-              "ynsWaitMs": 0
-            },
-            {
-              "step": "Spotter pulls to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 90000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 1200000,
-              "ynsWaitMs": 120000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit through gate",
-              "geofenceTarget": "exit",
-              "durationMs": 60000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 5460000,
-          "totalYnsMs": 2910000
-        },
-        "dossierExcerpt": "- Name: Honda - Marysville Motorcycle Plant (MMP)\n- Type: Motorcycle / Powersports Assembly Plant (historical) — now vehicle\n  suspension sub-assembly\n- Address: 24000 Honda Parkway area, Marysville, OH 43040 (co-located on the\n  Marysville complex)\n- Resolved coordinates: 40.279000, -83.502500 (eastern wing of the Marysville\n  Auto Plant complex — the historical MMP building)",
-        "mapsUrl": "https://www.google.com/maps/@40.279000,-83.502500,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/honda/12-honda-marysville-motorcycle-plant-mmp-marysville-oh-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.279,
-              "lng": -83.5025
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/honda/12-honda-marysville-motorcycle-plant-mmp-marysville-oh-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.279,
-              "lng": -83.5025
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "siteIdentity": "The Marysville Motorcycle Plant (Honda's original 1979 US plant) ceased motorcycle production in June 2009 and was converted to vehicle suspension sub-assembly. It is NOT a separable standalone facility — it occupies the eastern wing of the contiguous Marysville Auto Plant (MAP) building footprint and shares the MAP truck/trailer/rail infrastructure. Coordinates and geofences were placed on that eastern wing and its associated east-side truck yard. The roster's idx-1 (MAP) and idx-12 (MMP) reference the same physical complex.",
-          "truckGate": "The MAP/MMP complex is a fully guarded, fenced auto-manufacturing campus. Honda Parkway entrances are signalized and controlled; satellite shows checkpoint/booth structures at the truck-yard access. Classified true with medium confidence — no Street View coverage exists inside the secured property to confirm a specific barrier arm.",
-          "guardShack": "Small booth-footprint structures visible at the truck-yard checkpoint on satellite, consistent with staffed guard booths standard at auto plants of this scale. Medium confidence (no on-the-ground SV inside the gate).",
-          "postGateStaging": "Extensive paved internal aprons and holding lanes between the gate and the dock banks / drop yard.",
-          "drivewayLong": "Long internal approach roads easily hold queues of 3+ trucks.",
-          "entryExitSeparate": "Multiple separate entrances around the complex perimeter (employee entrances on Honda Parkway, truck/rail access on the east) — distinct in and out points.",
-          "dockDoors": "Long dock-door banks with trailers backed in along multiple building faces of the eastern wing; 90+ doors estimated. Honest overhead estimate.",
-          "dropArea": "Massive marked trailer drop yard on the east side holding hundreds of trailers without tractors.",
-          "dropYard": "Dedicated multi-row trailer-storage yard east of the building, clearly separate from active dock staging.",
-          "railServed": "A rail spur runs along and into the east side of the complex serving the manufacturing operation.",
-          "multipleFacilities": "The MMP wing is one part of the larger contiguous Marysville complex (MAP + MMP + adjacent support buildings) — a multi-building campus.",
-          "fastLaneOpportunity": "Vast paved truck-yard width leaves ample room for express/bypass lanes.",
-          "buildingCount": "Counted as 1 for the MMP wing itself, though it is physically joined to the larger MAP complex.",
-          "multiStep": "An auto-plant truck yard of this size plausibly has a gate plus a separate yard-control checkpoint, but a clear second checkpoint stage was not confirmed in imagery — left flagged.",
-          "scale": "No truck scale identified.",
-          "urbanRural": "Rural — the complex sits in open farmland NW of Marysville, OH."
-        }
-      },
-      {
-        "id": "13-honda-aircraft-company-hondajet-greensboro-nc",
-        "name": "Honda Aircraft Company (HondaJet) - Greensboro NC",
-        "type": "Aircraft Assembly Plant",
-        "archetype": "#6",
-        "archetypeName": "Gate + GS (not BU sens.) + campus",
-        "confidence": "high",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "entryLanes",
-          "exitLanes",
-          "dockDoorCount"
-        ],
-        "center": {
-          "lat": 36.1025,
-          "lng": -79.9235
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 36.104053,
-                "lng": -79.924873
-              },
-              {
-                "lat": 36.104053,
-                "lng": -79.921852
-              },
-              {
-                "lat": 36.102278,
-                "lng": -79.921715
-              },
-              {
-                "lat": 36.101058,
-                "lng": -79.922539
-              },
-              {
-                "lat": 36.101058,
-                "lng": -79.925835
-              },
-              {
-                "lat": 36.1025,
-                "lng": -79.926109
-              },
-              {
-                "lat": 36.10361,
-                "lng": -79.92556
-              }
-            ]
-          },
-          "truckGate": {
-            "ring": [
-              {
-                "lat": 36.1025,
-                "lng": -79.926247
-              },
-              {
-                "lat": 36.102389,
-                "lng": -79.92556
-              },
-              {
-                "lat": 36.101834,
-                "lng": -79.925697
-              },
-              {
-                "lat": 36.101945,
-                "lng": -79.926384
-              }
-            ]
-          },
-          "dropYards": [],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 36.102944,
-                  "lng": -79.925972
-                },
-                {
-                  "lat": 36.102611,
-                  "lng": -79.9235
-                },
-                {
-                  "lat": 36.102167,
-                  "lng": -79.923637
-                },
-                {
-                  "lat": 36.1025,
-                  "lng": -79.926109
-                }
-              ]
-            }
-          ],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 327,
-              "pano": "AlEznRQqc-ZBGuZky8eH4Q",
-              "hasCoverage": true
-            },
-            "truckGate": {
-              "heading": 327,
-              "pano": "AlEznRQqc-ZBGuZky8eH4Q",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 6,
-          "trailersVisible": 2,
-          "trailerParkingCapacity": 8,
-          "truckGateCount": 1,
-          "buildingCount": 3,
-          "siteAreaAcres": 133,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": true,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": false,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "0-10",
-          "dropArea": "NONE",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": true,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "dossierExcerpt": "- Name: Honda Aircraft Company (HondaJet) — world headquarters & production\n- Type: Aircraft Assembly Plant\n- Address: 6430 Ballinger Road, Greensboro, NC 27410 (Piedmont Triad\n  International Airport)\n- Resolved coordinates: 36.102500, -79.923500 (center of the production\n  campus on the NE side of the airfield)",
-        "mapsUrl": "https://www.google.com/maps/@36.102500,-79.923500,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/honda/13-honda-aircraft-company-hondajet-greensboro-nc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 36.1025,
-              "lng": -79.9235
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/honda/13-honda-aircraft-company-hondajet-greensboro-nc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 36.1025,
-              "lng": -79.9235
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "siteIdentity": "The roster coordinates (geocoded to 6430 Ballinger Rd, movedMeters 462) landed on the PTI passenger terminal. The actual Honda Aircraft Company world-HQ campus is on the NE side of Piedmont Triad International Airport at ~36.1025, -79.9235 — a large multi-building aircraft assembly complex with an aircraft apron opening onto an airfield taxiway. Confirmed by satellite (a HondaJet business jet visible on the apron) and 2026 Street View showing HONDA signage on the production building. 133-acre campus.",
-          "facilityNature": "This is an aircraft ASSEMBLY plant, not a freight/distribution facility. Truck activity is light (inbound parts, supplies); there are no trailer drop yards and only a handful of service dock doors. The dominant 'yard' is the airside aircraft apron, which is not a truck yard.",
-          "truckGate": "The campus vehicle entrance road off the public road has a small guard-booth structure with gate hardware, visible in 2026 Street View — a controlled entry consistent with a secured aerospace facility. Classified true.",
-          "guardShack": "A small staffed booth (1-vehicle footprint) sits at the campus entrance road. Classified true.",
-          "remoteGs": "False — a physical guard booth is present.",
-          "drivewayLong": "The entrance road runs a long way through landscaped grounds to the buildings, with ample queuing length.",
-          "dockDoors": "0-10 — only a few service/parts dock doors at the production building's landside face; one semi-trailer observed parked there. Honest estimate.",
-          "dropArea": "NONE — no marked trailer drop stalls; this facility does not run a trailer drop operation.",
-          "dropYard": "False — no dedicated trailer-storage lot.",
-          "multipleFacilities": "Campus has the main production/assembly complex plus the SW wing-production building and adjacent office buildings — a multi-building campus.",
-          "railServed": "False — no rail spur; the facility is served by the airfield, not rail.",
-          "urbanRural": "Rural — the campus sits at the wooded NE edge of the airport surrounded by woods and open land; 2026 Street View shows a rural two-lane road.",
-          "scale": "No truck scale.",
-          "entryLanes": "Single controlled entry lane at the guard booth; low confidence on exact count."
-        }
-      },
-      {
-        "id": "14-honda-aero-inc-burlington-nc",
-        "name": "Honda Aero, Inc. (GE Honda HF120 engines) - Burlington NC",
-        "type": "Aircraft Engine Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "uncertainFields": [
-          "truckGate",
-          "dockDoorCount",
-          "siteAreaAcres"
-        ],
-        "center": {
-          "lat": 36.047,
-          "lng": -79.481
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 36.047999,
-                "lng": -79.481961
-              },
-              {
-                "lat": 36.047777,
-                "lng": -79.480313
-              },
-              {
-                "lat": 36.046334,
-                "lng": -79.480725
-              },
-              {
-                "lat": 36.046667,
-                "lng": -79.482373
-              }
-            ]
-          },
-          "truckGate": {
-            "ring": [
-              {
-                "lat": 36.047222,
-                "lng": -79.482236
-              },
-              {
-                "lat": 36.047167,
-                "lng": -79.481893
-              },
-              {
-                "lat": 36.046889,
-                "lng": -79.481961
-              },
-              {
-                "lat": 36.046944,
-                "lng": -79.482305
-              }
-            ]
-          },
-          "dropYards": [],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 36.047444,
-                  "lng": -79.482099
-                },
-                {
-                  "lat": 36.047278,
-                  "lng": -79.481
-                },
-                {
-                  "lat": 36.047056,
-                  "lng": -79.481069
-                },
-                {
-                  "lat": 36.047222,
-                  "lng": -79.482167
-                }
-              ]
-            }
-          ],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 84,
-              "pano": "9PnUmqRfyNQtba-XQ5yBwQ",
-              "hasCoverage": true
-            },
-            "truckGate": {
-              "heading": 84,
-              "pano": "9PnUmqRfyNQtba-XQ5yBwQ",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 4,
-          "trailersVisible": 0,
-          "trailerParkingCapacity": 4,
-          "truckGateCount": 1,
-          "buildingCount": 1,
-          "siteAreaAcres": 14,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": false,
-          "drivewayLong": false,
-          "drivewayShort": true,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "0-10",
-          "dropArea": "NONE",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#3",
-          "steps": [
-            {
-              "step": "Arrive on site (no gate)",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Drive to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 480000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 3030000,
-          "totalYnsMs": 2640000
-        },
-        "dossierExcerpt": "- Name: Honda Aero, Inc. (GE Honda HF120 turbofan engines)\n- Type: Aircraft Engine Plant\n- Address: 2989 Tucker St, Burlington, NC 27215 (Burlington-Alamance\n  Regional Airport)\n- Resolved coordinates: 36.047000, -79.481000 (center of the Honda Aero\n  manufacturing building)",
-        "mapsUrl": "https://www.google.com/maps/@36.047000,-79.481000,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/honda/14-honda-aero-inc-burlington-nc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 36.047,
-              "lng": -79.481
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/honda/14-honda-aero-inc-burlington-nc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 36.047,
-              "lng": -79.481
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "siteIdentity": "Honda Aero, Inc. at 2989 Tucker St, Burlington NC — the GE Honda HF120 turbofan engine assembly/test plant adjacent to Burlington-Alamance Regional Airport. Confirmed: a single large modern white-roof manufacturing building (~132,000 sq ft after the 2016/2017 50,000 sq ft expansion) with an aircraft apron facing the runway. Verified by 2026 Street View showing the modern facility on Tucker St and z19-z20 satellite. The roster coordinates (movedMeters 36) sat on the airport apron just east of the building; coords were tightened onto the building center.",
-          "facilityNature": "This is a jet-engine ASSEMBLY and test plant, not a freight/distribution facility. Truck activity is minimal (small inbound parts shipments). There are no trailer drop yards and only a few service dock doors. The dominant 'yard' is the airside aircraft apron, irrelevant to a truck-yard engagement.",
-          "truckGate": "No controlled truck gate. The vehicle entrance off Tucker St is an open landscaped driveway into the employee parking lot — no barrier arm, no booth, no checkpoint. The chain-link fencing seen in Street View is the airport perimeter fence, not a Honda Aero truck-gate control. Classified false.",
-          "guardShack": "No guard booth observed at the entrance driveway in 2026 Street View or satellite.",
-          "remoteGs": "False — there is no truck gate at all.",
-          "drivewayShort": "The short open driveway from Tucker St to the parking lot would hold at most 1-2 vehicles.",
-          "dockDoors": "0-10 — only a handful of service/parts dock doors at the building; no regular bank of loading bays. Honest overhead estimate.",
-          "dropArea": "NONE — no marked trailer drop stalls; no trailer drop operation.",
-          "dropYard": "False — no dedicated trailer-storage lot.",
-          "multipleFacilities": "Single building; the nearby buildings are separate airport tenants, not part of Honda Aero.",
-          "railServed": "False — no rail spur; served by road and the adjacent airfield.",
-          "urbanRural": "Rural — the site is at the edge of a small regional airport surrounded by farmland and light development; 2026 Street View shows a rural two-lane road.",
-          "scale": "No truck scale.",
-          "siteAreaAcres": "~14 acres for the Honda Aero parcel (building plus parking and apron frontage); the perimeter box is a best estimate as the parcel blends into the airport grounds."
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Honda still operates this exact plant with a real freight yard, but the scoped product (power equipment) ENDED Sept 2023 — it now builds ATVs. RELABEL to a Honda NC ATV/powersports plant; capped pending the label fix.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3245,8 +2379,7 @@
               ]
             }
           ],
-          "staging": null,
-          "streetViewMeta": {}
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 55,
@@ -3329,28 +2462,6 @@
         },
         "dossierExcerpt": "- Name: American Honda - Troy Parts Distribution Center (PDC)\n- Type: Parts Distribution Center\n- Address: Commerce Center Boulevard area off I-75, Troy, OH 45373\n- Resolved coordinates: 40.048500, -84.237200 (center of the PDC warehouse —\n  the northern of two adjacent Honda warehouses)",
         "mapsUrl": "https://www.google.com/maps/@40.048500,-84.237200,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/honda/15-american-honda-troy-parts-distribution-center-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.0485,
-              "lng": -84.2372
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/honda/15-american-honda-troy-parts-distribution-center-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.0485,
-              "lng": -84.2372
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "siteIdentity": "American Honda's Troy Parts Distribution Center (PDC) — a 534,000 sq ft parts DC operating in Troy since 1986. It is the northern of two adjacent large Honda warehouses off Commerce Center Blvd; the southern building is the 2007 Midwest Consolidation Center (MCC, roster idx 16, at 151 Commerce Center Blvd). The roster idx-15 geocode landed in a residential area; the facility was re-located via satellite and web research. Building center locked at ~40.0485, -84.2372. The PDC/MCC assignment (PDC = north building) follows from the MCC roster coordinates pointing to the southern building and the MCC being described as built adjacent to the older PDC.",
           "truckGate": "The PDC campus is fenced with a controlled entrance — a Honda monument sign and flag at the entry road off the public road, and a small guard-booth-footprint structure beside the internal access road. Classified true (medium confidence — no Street View inside the gate to confirm a barrier arm).",
@@ -3368,6 +2479,25 @@
           "railServed": "No rail spur into the property.",
           "urbanRural": "Rural — edge-of-town setting along the I-75 corridor with farmland to the west and a water tower nearby; small-town industrial, so classified Rural.",
           "buildingCount": "1 building for the PDC itself."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.honda.com/job/Troy-Stock-and-Material-Handler-Fulltime-Position-PC90-OH-45373-8010/1113690200/",
+              "date": "2025",
+              "type": "careers",
+              "claim": "Active American Honda Stock and Material Handler (PC90) warehouse req at Troy OH 45373 (the Troy PDC)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Tier-1 careers reqs tied to the Troy 45373 PDC; no closure/WARN/relocation; Honda expanding the Troy footprint. Distinct building from the MCC (site 16).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3491,8 +2621,7 @@
                 "lng": -84.236262
               }
             ]
-          },
-          "streetViewMeta": {}
+          }
         },
         "yardMetrics": {
           "dockDoorCount": 70,
@@ -3575,28 +2704,6 @@
         },
         "dossierExcerpt": "Type: Parts Consolidation Center\nResolved coordinates: 40.04630, -84.23600\nMaps: https://www.google.com/maps/@40.04630,-84.23600,400m/data=!3m1!1e3\nConfidence: high\n\n---",
         "mapsUrl": "https://www.google.com/maps/@40.04630,-84.23600,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/honda/16-midwest-consolidation-center-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.0463,
-              "lng": -84.236
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/honda/16-midwest-consolidation-center-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.0463,
-              "lng": -84.236
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Guarded checkpoint on the property access road off Commerce Center Blvd, ~340 m before the building; gate/barrier canopy spans the lanes (z20 satellite + Street View 2024-06).",
           "guardShack": "Small blue/white staffed booth (~1-2 vehicle footprint, windows on multiple sides, overhead canopy over the lanes) sits beside the gate lanes - confirmed in Street View.",
@@ -3614,6 +2721,32 @@
           "dropYard": "Dedicated on-site trailer-storage lot south of the building, separate from active dock staging.",
           "trailerParkingCapacity": "Estimate combining the southern drop yard and apron staging - approximate.",
           "railServed": "No rail spur enters the property; I-75 runs along the east edge but no rail."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://hondanews.com/en-US/releases/american-honda-opens-new-midwestern-consolidation-center-in-troy-ohio",
+              "date": "2007-06",
+              "type": "press",
+              "claim": "American Honda opened the 549k sq ft Midwest Consolidation Center on 58 acres adjacent to the Troy PDC; hub feeding 9 other US PDCs."
+            },
+            {
+              "tier": 1,
+              "url": "https://careers.honda.com/job/Troy-Parts-Procurement-Supply-Chain-Specialist-OH-45373/1257338100/",
+              "date": "2025",
+              "type": "careers",
+              "claim": "Active American Honda Parts Procurement & Supply Chain req in Troy 45373 (MCC houses procurement ops)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Honda-built consolidation hub still operating with current reqs; a separate adjacent building from the Troy PDC (site 15) — keep both.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3813,28 +2946,6 @@
         },
         "dossierExcerpt": "Type: Parts / Accessories Distribution Center\nResolved coordinates: 33.99624, -117.69960\nMaps: https://www.google.com/maps/@33.99624,-117.69960,400m/data=!3m1!1e3\nConfidence: high\n\n---",
         "mapsUrl": "https://www.google.com/maps/@33.99624,-117.69960,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/honda/17-chino-parts-distribution-center-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.99624,
-              "lng": -117.6996
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/honda/17-chino-parts-distribution-center-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.99624,
-              "lng": -117.6996
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Wide chain-link rolling/sliding gate across the truck-court driveway off the east frontage road - a controlled truck entrance. Confirmed in Street View 2025-10; trailer court visible behind the gate.",
           "guardShack": "No staffed guard booth visible at the truck gate in Street View - the gate appears to be a remote/badge-operated sliding gate. The east and south perimeter are hedge-screened so a small booth cannot be 100% excluded, hence flagged uncertain.",
@@ -3852,6 +2963,32 @@
           "trailerParkingCapacity": "Estimate from the east/south trailer court - approximate.",
           "railServed": "No rail spur enters the property.",
           "location": "Roster coords (34.012023,-117.678685, APPROXIMATE) landed in a Chino residential neighborhood. Resolved to 14141 Yorba Ave via web research; satellite/Street View confirmed the large solar-roofed PDC building with Honda-colored trailers."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://hondanews.com/en-US/releases/release-d79d15beab8f1c0d678ba2004c34c64d",
+              "date": "2017",
+              "type": "press",
+              "claim": "American Honda grand-opening of the Chino North American Hub West parts DC, 30-acre / 500,000 sq ft, $24.5M."
+            },
+            {
+              "tier": 3,
+              "url": "https://www.ziprecruiter.com/co/Honda-North-America/Jobs/-in-Chino,CA",
+              "date": "2025-05",
+              "type": "careers",
+              "claim": "Active Honda North America hiring in Chino, CA corroborating current operation."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Address matches the Honda-built DC; no Tier-2 negative; but the cleanest Tier-1 self-attestation (2017 opening) predates the 24-month window and current operation rests on Tier-3 hiring — capped to probable.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4050,28 +3187,6 @@
         },
         "dossierExcerpt": "Type: Parts Distribution Center\nResolved coordinates: 32.92215, -97.00910\nMaps: https://www.google.com/maps/@32.92215,-97.00910,400m/data=!3m1!1e3\nConfidence: high\n\n---",
         "mapsUrl": "https://www.google.com/maps/@32.92215,-97.00910,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/honda/18-irving-parts-distribution-center-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 32.92215,
-              "lng": -97.0091
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/honda/18-irving-parts-distribution-center-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 32.92215,
-              "lng": -97.0091
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Two controlled truck gates confirmed in Street View 2025-05: a south driveway signed 'HONDA - TRUCK ENTRANCE ONLY' and a NE driveway signed 'NO ENTRY / EXIT ONLY'. Both have sliding chain-link gates and perimeter fencing.",
           "guardShack": "No staffed guard booth visible at either truck gate in Street View - the gates read as remote/badge-operated sliding gates. A small set-back utility/pump structure near the entry is not a gate booth. Flagged uncertain.",
@@ -4092,6 +3207,25 @@
           "trailerParkingCapacity": "Estimate from the NE staging area plus apron - approximate.",
           "railServed": "No rail spur enters the property.",
           "location": "Roster coords (32.911717,-96.99072, APPROXIMATE) landed in the Las Colinas office/residential district. Resolved to 4525 W Royal Lane, Irving TX via web research; satellite and Street View confirmed the warehouse with 'HONDA' signage on the building and gates."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.honda.com/us/en/job/767/Stock-and-Material-Handler-Fulltime-Irving-Texas",
+              "date": "2025",
+              "type": "careers",
+              "claim": "Active American Honda Stock and Material Handler (Irving TX) warehouse req at 4525 Royal Lane, Irving 75063."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Tier-1 careers req tied to the exact American Honda PDC address; no closure/WARN/relocation. Not the independent David McDavid dealership warehouse.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       }
     ]

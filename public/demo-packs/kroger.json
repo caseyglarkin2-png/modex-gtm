@@ -1,18 +1,18 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-09T22:20:23.222Z",
+  "builtAt": "2026-06-19T03:20:30.029Z",
   "account": {
     "slug": "kroger",
     "displayName": "The Kroger Co.",
     "archetype": "grocer-distributor",
-    "siteCount": 18,
+    "siteCount": 15,
     "coverageNote": {
-      "auditedCount": 18,
+      "auditedCount": 15,
       "estimatedFootprint": 33,
+      "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Kroger runs ~33 distribution centers across its banners (Kroger, Ralphs, Fred Meyer, King Soopers, Fry's, Smith's) plus a growing network of Ocado-automated CFCs, feeding ~2,700 stores. We audited 18 representative facilities.",
-      "auditedScope": "US"
+      "note": "Kroger runs ~33 distribution centers across its banners (Kroger, Ralphs, Fred Meyer, King Soopers, Fry's, Smith's) plus a growing network of Ocado-automated CFCs, feeding ~2,700 stores. We audited 18 representative facilities."
     },
     "featuredSiteId": "09-kroger",
     "dossierIntro": "Kroger, the largest traditional grocer in the US, distributes through two layers we mapped across 18 sites: legacy banner DCs running under Kroger, Ralphs, Fred Meyer, King Soopers, Fry's, and Smith's, plus the new Ocado-automated customer fulfillment centers. Together they hold 1,742 dock doors and room for about 3,799 trailers, with no rail at any of them. The split shows up in the yards: the grocery DCs are gated and guarded, seven with a staffed booth, while the automated CFCs mostly run open or on remote check-in. YardFlow gives Kroger one gate-to-dock view across both layers and every banner.",
@@ -26,23 +26,23 @@
   "network": {
     "bbox": [
       -122.5506,
-      28.63755,
-      -81.81835,
+      32.63545,
+      -83.01935,
       47.21185
     ],
     "archetypeMix": {
       "#6": 6,
-      "#3": 6,
+      "#3": 5,
       "#10": 1,
-      "#9": 4,
+      "#9": 2,
       "#7": 1
     },
     "totals": {
-      "dockDoors": 1742,
-      "trailerCapacity": 3799,
-      "gates": 19,
+      "dockDoors": 1634,
+      "trailerCapacity": 3684,
+      "gates": 16,
       "railServed": 0,
-      "acres": 917.3000000000001
+      "acres": 802
     },
     "sites": [
       {
@@ -350,6 +350,25 @@
           "scale": "No clear truck scale/weigh pad identified in available imagery; left false but flagged uncertain.",
           "railServed": "A rail line runs along the SW property boundary/right-of-way but does not spur into the buildings or docks; no rail-served docks observed.",
           "siteAreaAcres": "Approximate from the operational/paved footprint perimeter; the owned parcel including buffer farmland and retention ponds is larger."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://krogerdc.com/",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Kroger Great Lakes Distribution Center recruiting site lists facility at 2000 Nutter Farms Lane, Delaware OH 43015, actively hiring Warehouse Order Selectors."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Kroger careers site confirms active Great Lakes DC at exact address; no closure/divestiture for this site.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -642,6 +661,32 @@
           "scale": "No clear truck scale/weigh pad identified in the gate path; flagged uncertain.",
           "dropYard": "Dedicated trailer-storage yard separate from active dock staging, full of parked trailers.",
           "operator": "Operated for Kroger by Zenith Logistics (24+ yrs); facility phone 317-352-5100."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.thekrogerco.com/vendor-suppliers/logistics/",
+              "date": "2026-06",
+              "type": "press",
+              "claim": "Kroger official logistics/vendor page lists Kroger DC at 7025 English Avenue, Indianapolis IN 46219."
+            },
+            {
+              "tier": 1,
+              "url": "https://zenithlogisticsinc.com/distribution-center/",
+              "date": "2025-08",
+              "type": "careers",
+              "claim": "Zenith Logistics (3PL operator of Kroger DCs) lists the 7025 English Ave Indianapolis Kroger DC as actively operating."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Kroger-authoritative sources confirm active Kroger DC at 7025 English Ave (operated by 3PL Zenith Logistics); no closure/sale found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -901,223 +946,32 @@
           "connectivityIssue": "Rural setting (farmland) but adjacent to Shelbyville and a municipal airport, so cellular coverage is likely adequate; left false, flagged uncertain.",
           "siteAreaAcres": "~60 acres is the polygon-traced developed/paved footprint; public sources cite a ~100-acre owned campus including surrounding buffer land.",
           "trailersVisible": "Approx count across drop yard + dock apron + annex from z18-20 imagery; honest estimate."
-        }
-      },
-      {
-        "id": "04-kroger",
-        "name": "Kroger Grocery Distribution Center Nashville TN",
-        "type": "Grocery Distribution Center",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "uncertainFields": [
-          "dockDoors",
-          "dropArea",
-          "trailerParkingCapacity"
-        ],
-        "center": {
-          "lat": 36.1369,
-          "lng": -86.7427
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 36.13751,
-                "lng": -86.744324
-              },
-              {
-                "lat": 36.138073,
-                "lng": -86.743787
-              },
-              {
-                "lat": 36.13764,
-                "lng": -86.741105
-              },
-              {
-                "lat": 36.13738,
-                "lng": -86.740998
-              },
-              {
-                "lat": 36.1366,
-                "lng": -86.741159
-              },
-              {
-                "lat": 36.135647,
-                "lng": -86.742232
-              },
-              {
-                "lat": 36.13621,
-                "lng": -86.744324
-              },
-              {
-                "lat": 36.13686,
-                "lng": -86.744646
-              }
-            ]
-          },
-          "truckGate": {
-            "ring": [
-              {
-                "lat": 36.136773,
-                "lng": -86.744431
-              },
-              {
-                "lat": 36.13686,
-                "lng": -86.743841
-              },
-              {
-                "lat": 36.136383,
-                "lng": -86.743787
-              },
-              {
-                "lat": 36.136253,
-                "lng": -86.744378
-              }
-            ]
-          },
-          "dropYards": [
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
             {
-              "ring": [
-                {
-                  "lat": 36.136817,
-                  "lng": -86.743787
-                },
-                {
-                  "lat": 36.13673,
-                  "lng": -86.741373
-                },
-                {
-                  "lat": 36.135734,
-                  "lng": -86.742071
-                },
-                {
-                  "lat": 36.13621,
-                  "lng": -86.744163
-                }
-              ]
+              "tier": 1,
+              "url": "https://www.wishtv.com/news/inside-indiana-business/penske-logistics-details-shelbyville-warehouse-transition/",
+              "date": "2022-07-20",
+              "type": "press",
+              "claim": "Kroger took over operation of the 600,000 sqft Shelbyville IN DC at 4301 N 125 W from Penske, effective Sept 11 2022."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.shelbynews.com/news/kroger-announces-management-change-at-shelbyville-supply-chain-facility/article_c657e056-28d3-5d13-8c25-366005219f80.html",
+              "date": "2022-07",
+              "type": "press",
+              "claim": "Kroger Supply Chain manages the Kroger DC complex in Shelby County, built by Kroger in 1998 on a 100-acre campus serving 10 states."
             }
           ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 36.137033,
-                  "lng": -86.743841
-                },
-                {
-                  "lat": 36.136929,
-                  "lng": -86.741481
-                },
-                {
-                  "lat": 36.136773,
-                  "lng": -86.741427
-                },
-                {
-                  "lat": 36.13686,
-                  "lng": -86.743787
-                }
-              ]
-            }
-          ],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 99,
-              "pano": "Yja1It9jk5M1KjnB3OVoXw",
-              "hasCoverage": true
-            },
-            "truckGate": {
-              "heading": 285,
-              "pano": "x1m2EKPQ-HezeIOfVwybXw",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 16,
-          "trailersVisible": 6,
-          "trailerParkingCapacity": 10,
-          "truckGateCount": 1,
-          "buildingCount": 1,
-          "siteAreaAcres": 15.3,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": false,
-          "drivewayLong": false,
-          "drivewayShort": true,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": null,
-          "exitLanes": null,
-          "fastLaneOpportunity": false,
-          "dockDoors": "10-25",
-          "dropArea": "0-10",
-          "shipRcvSeparate": false,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#3",
-          "steps": [
-            {
-              "step": "Arrive on site (no gate)",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Drive to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 480000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 3030000,
-          "totalYnsMs": 2640000
-        },
-        "dossierExcerpt": "The supplied coordinates (36.136908, -86.742513) landed directly on the target\nbuilding. Web search confirmed 1116 Polk Ave, Nashville TN 37210 is the Kroger\nFulfillment Network facility — a grocery e-commerce / last-mile delivery spoke\nthat works with the Atlanta Ocado fulfillment center (publicly described as a\n~40,000 SF leased footprint, designed for ~180 jobs). Note: Kroger filed a WARN\nnotice for a permanent closure of this site effective 2026-02-01 (132 employees);\nthis audit reflects 2025-09 imagery while the site was still operating.\n\nIdentity was confirmed in Street View (pano dated 2025-09): the west office\nfront carries Kroger blue signage, and rows of Kroger-blue delivery vans are\nparked along the east side and backed into the south dock face. The building is\na long multi-tenant warehouse; Kroger occupies the west/central portion.",
-        "mapsUrl": "https://www.google.com/maps/@36.13690,-86.74270,400m/data=!3m1!1e3",
-        "fieldNotes": {
-          "truckGate": "Open paved apron meets the public road (Polk/Foster Ave frontage) with no barrier arm, swing/sliding gate, or checkpoint. Only orange traffic cones channel vehicles across the apron (2025-09 Street View). Uncontrolled access.",
-          "guardShack": "No booth structure of any kind at the road frontage or anywhere on the apron; confirmed in Street View from multiple headings.",
-          "remoteGs": "False because there is no truck gate at all.",
-          "drivewayShort": "Building sits one short apron-depth (~1-2 trucks) back from the road; vehicles reach the dock face or van staging almost immediately after leaving the road.",
-          "dockDoors": "South building face shows ~14-18 dock bays in tight z19/z20 imagery, several with Kroger blue delivery vans / box trucks backed in; banded 10-25. Estimated from overhead, flagged.",
-          "dropArea": "This is a last-mile fulfillment spoke operating mostly small Kroger delivery vans, not 53' trailers. A few trailers/box trucks sit in the south yard; most trailers along the SE edge belong to the adjacent property along the rail line. Banded 0-10.",
-          "dropYard": "No dedicated trailer-storage lot for this tenant; the operation is van-based last-mile, so false.",
-          "railServed": "A mainline rail runs along the SE property edge but does NOT spur into the Kroger property; trailers/railcars seen there are adjacent, not served by a Kroger spur.",
-          "urbanRural": "Inside Nashville's dense industrial fabric near the airport/Foster Ave corridor; clearly Urban.",
-          "buildingCount": "One physical warehouse structure (multi-tenant; Kroger leases ~40,000 SF of it per public records). Footprint measured ~250m x ~34m.",
-          "siteAreaAcres": "15.3 acres derived from the traced perimeter polygon (building + south operational yard inside the property line bounded by the road SW and rail SE).",
-          "facilityContext": "Confirmed as Kroger Fulfillment Network LLC, 1116 Polk Ave, Nashville TN 37210 (Ocado-linked grocery e-commerce / last-mile spoke). Per WARN notice the site is slated to permanently close 2026-02-01 (132 employees); audited from 2025-09 imagery while still operating."
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Kroger self-operates the Shelbyville refrigerated DC (in-housed from Penske Sept 2022); no closure/sale found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1377,6 +1231,25 @@
           "urbanRural": "Embedded in dense Fort Worth/Keller suburban metro fabric, surrounded on north and west by large residential subdivisions.",
           "railServed": "No rail spur visible entering the property.",
           "siteAreaAcres": "Derived from the perimeter polygon (~98 acres), traced inside the fence/buffer lines."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.thekrogerco.com/vendor-suppliers/logistics/",
+              "date": "2026-06",
+              "type": "press",
+              "claim": "Kroger corporate logistics page lists Keller | Dallas 5801 Kroger Drive, Keller TX 76248 as an active Kroger distribution center (Dallas division)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Kroger corporate logistics page lists Keller TX DC as active; 2025-26 closures were FL/WI/MD fulfillment centers, not this DC.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1628,6 +1501,32 @@
           "multipleFacilities": "Campus of multiple large DC buildings plus office and ancillary structures (cooling tower house, fuel island) within one gated property.",
           "urbanRural": "Dense industrial fabric of Compton/Rancho Dominguez, immediately south of CA-91 freeway; clearly Urban.",
           "railServed": "No rail spur enters the property; urban infill site."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.prnewswire.com/news-releases/kroger-unveils-a-clean-energy-production-system-powered-by-food-waste-207588311.html",
+              "date": "2013-05",
+              "type": "press",
+              "claim": "Kroger operates a 59-acre Ralphs/Food4Less DC in Compton CA (650,000+ sqft) with an on-site anaerobic digester."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.morningstar.com/news/pr-newswire/20250919ph78361/teamsters-demand-fair-contract-at-ralphs",
+              "date": "2025-09-19",
+              "type": "press",
+              "claim": "Sept 2025 Teamsters negotiations with Ralphs (wholly owned Kroger subsidiary) over SoCal Ralphs/Food4Less supply chain, confirming active distribution operation."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Ralphs/Food4Less (Kroger banner) DC at S Wilmington Ave Compton confirmed active via Sept 2025 news; not Albertsons/Vons.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1900,6 +1799,25 @@
           "railServed": "No rail spur enters the property in the imagery.",
           "siteAreaAcres": "~56 acres computed from the traced perimeter polygon (roughly 640m x 355m core), honest estimate.",
           "entryExitTogether": "Inbound and outbound both pass through the single gantry checkpoint at one point on the property line."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.thekrogerco.com/vendor-suppliers/logistics/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Kroger corporate logistics page lists Fred Meyer DC at 11506 SE Hwy 212, Clackamas OR 97015 with active kroger.com appointment scheduling."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Kroger logistics page lists Clackamas Fred Meyer DC by exact address; 2025 closures were OR retail stores, not this DC.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2134,6 +2052,25 @@
           "urbanRural": "Inside the Tacoma-Puyallup metro industrial fabric, dense surrounding development (dealerships, warehouses, retail) = Urban.",
           "entryLanes": "Estimated 1 inbound from the entrance geometry; not separately countable from imagery.",
           "exitLanes": "Estimated 1 outbound; entry and exit share the same gate point."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.thekrogerco.com/vendor-suppliers/logistics/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Kroger corporate logistics page lists Fred Meyer DC at 349 Valley Avenue, Puyallup WA 98371 with active kroger.com appointment scheduling."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Kroger logistics page lists Puyallup Fred Meyer DC by exact address; 2025 closures hit Puget Sound retail stores, not this DC.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2439,6 +2376,25 @@
           "urbanRural": "Within the Denver-Aurora metro; residential and industrial development on all sides.",
           "siteAreaAcres": "~102 acres from the traced perimeter polygon enclosing all four DC buildings and their yards.",
           "streetViewMeta": "Only one Street View pano exists within range (Tower Rd at the gate, 39.74490,-104.77424, captured 2023-05); used for both perimeter and truckGate with computed headings."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.thekrogerco.com/vendor-suppliers/logistics/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Kroger corporate logistics page lists King Soopers DC at 1933 Tower Road, Aurora CO 80011 with active work-in line."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Kroger logistics page lists Aurora King Soopers DC by exact address; closures were CO retail stores, not this DC.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2745,6 +2701,32 @@
           "railServed": "A multi-track rail corridor runs along the NW property edge as a buffer, but no spur enters the fenced property; classified not rail-served.",
           "urbanRural": "Edge-of-town Tolleson industrial area on the Phoenix metro fringe; open farm fields border the entrance drive and the south/west sides. Per rubric tie-break, classified Rural.",
           "connectivityIssue": "Metro-fringe with dense industrial neighbors and a major arterial (99th Ave); cellular coverage likely fine, so false."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.thekrogerco.com/vendor-suppliers/logistics/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Kroger corporate logistics page lists Frys DC at 500 South 99th Avenue, Tolleson AZ 85353; appointment email routes to Windigo US (3PL), indicating Kroger-owned Frys DC run by a 3PL."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.12news.com/article/money/business/frys-truck-drivers-kroger-contract-tolleson-jobs/75-c7e70b12-47b0-45a8-9b04-f6018d7f4f19",
+              "date": "2025",
+              "type": "press",
+              "claim": "Kroger ended its Ruan transportation contract (ops stopping Aug 27 2025) and signed an LOI for CSI Retail Services to run the Tolleson DC; facility keeps stocking every Frys store in Arizona."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Kroger/Frys still operate the Tolleson DC (per Kroger logistics page) but via 3PL operators; operating, not closed.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2979,6 +2961,25 @@
           "scale": "No truck scale / weigh pad resolved in the imagery; flagged uncertain.",
           "truckGateCount": "Two open vehicle entrances off N Sugar St (main yard drive ~41.0651 and a southern office/shop drive ~41.0635); neither is a controlled gate.",
           "siteAreaAcres": "~58 acres for the fenced operational campus derived from the perimeter polygon (bounded W by Sugar St, E by the rail corridor, S by residential)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.thekrogerco.com/vendor-suppliers/logistics/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Kroger corporate logistics page lists Smiths DC at 500 Sugar Street, Layton UT 84041 with active work-in line."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Kroger logistics page lists Layton Smiths DC by exact address; Smiths wordmark on building corroborates; no closure/WARN found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3189,6 +3190,32 @@
           "scale": "No truck scale / weigh pad visible in the truck path.",
           "railServed": "No rail spur enters the property.",
           "siteAreaAcres": "Derived from the traced perimeter polygon (~41 acres of the ~68-acre parcel that is fenced/developed)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.grocerydive.com/news/kroger-canceling-charlotte-cfc-closing-nashville-spoke-ecommerce-ocado/807167/",
+              "date": "2025-12-05",
+              "type": "press",
+              "claim": "Kroger and Ocado to keep operating CFCs in Ohio; Monroe (flagship OH CFC) not among the closures."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.glassdoor.com/Job/monroe-kroger-fulfillment-center-jobs-SRCH_IL.0,6_IC1145733_KO7,32.htm",
+              "date": "2026-03",
+              "type": "careers",
+              "claim": "Active Kroger CFC jobs at 6266 Hamilton Lebanon Rd, Monroe OH; facility actively hiring."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Flagship OH CFC explicitly named among RETAINED sites in Dec 2025 pullback; actively hiring 2026.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3470,282 +3497,32 @@
           "buildingCount": "1 building on this property (the cross/T-shaped CFC/fulfillment building). The separate 1.3M sq ft Kroger DC to the north is a distinct adjacent facility, not counted here.",
           "railServed": "No rail spur runs into this property.",
           "siteAreaAcres": "~19 acres for the active fenced footprint (building + paved yards), from the perimeter polygon."
-        }
-      },
-      {
-        "id": "14-kroger",
-        "name": "Kroger Customer Fulfillment Center Pleasant Prairie WI",
-        "type": "Customer Fulfillment Center (Ocado-automated)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "uncertainFields": [
-          "guardShack",
-          "remoteGs",
-          "dockDoorCount",
-          "shipRcvSeparate"
-        ],
-        "center": {
-          "lat": 42.5432,
-          "lng": -87.9112
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 42.5444,
-                "lng": -87.9134
-              },
-              {
-                "lat": 42.54465,
-                "lng": -87.91005
-              },
-              {
-                "lat": 42.5435,
-                "lng": -87.9094
-              },
-              {
-                "lat": 42.5419,
-                "lng": -87.91
-              },
-              {
-                "lat": 42.5413,
-                "lng": -87.9112
-              },
-              {
-                "lat": 42.5418,
-                "lng": -87.91335
-              }
-            ]
-          },
-          "truckGate": {
-            "ring": [
-              {
-                "lat": 42.54312,
-                "lng": -87.9132
-              },
-              {
-                "lat": 42.54308,
-                "lng": -87.9129
-              },
-              {
-                "lat": 42.54288,
-                "lng": -87.91298
-              },
-              {
-                "lat": 42.54292,
-                "lng": -87.91328
-              }
-            ]
-          },
-          "dropYards": [
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
             {
-              "ring": [
-                {
-                  "lat": 42.5443,
-                  "lng": -87.913
-                },
-                {
-                  "lat": 42.54448,
-                  "lng": -87.91135
-                },
-                {
-                  "lat": 42.544,
-                  "lng": -87.9112
-                },
-                {
-                  "lat": 42.54382,
-                  "lng": -87.91285
-                }
-              ]
+              "tier": 1,
+              "url": "https://www.grocerydive.com/news/kroger-canceling-charlotte-cfc-closing-nashville-spoke-ecommerce-ocado/807167/",
+              "date": "2025-12-05",
+              "type": "press",
+              "claim": "Georgia (Forest Park) CFC is among the CFCs Kroger and Ocado plan to keep operating."
             },
             {
-              "ring": [
-                {
-                  "lat": 42.5437,
-                  "lng": -87.90985
-                },
-                {
-                  "lat": 42.5442,
-                  "lng": -87.9096
-                },
-                {
-                  "lat": 42.543,
-                  "lng": -87.90945
-                },
-                {
-                  "lat": 42.54255,
-                  "lng": -87.9097
-                }
-              ]
+              "tier": 3,
+              "url": "https://www.indeed.com/q-kroger-fulfillment-center-l-forest-park,-ga-jobs.html",
+              "date": "2025",
+              "type": "careers",
+              "claim": "Forest Park CFC employs 250+ associates and continues hiring."
             }
           ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 42.544,
-                  "lng": -87.91005
-                },
-                {
-                  "lat": 42.5443,
-                  "lng": -87.90985
-                },
-                {
-                  "lat": 42.543,
-                  "lng": -87.9088
-                },
-                {
-                  "lat": 42.54275,
-                  "lng": -87.90905
-                }
-              ]
-            },
-            {
-              "ring": [
-                {
-                  "lat": 42.5433,
-                  "lng": -87.9125
-                },
-                {
-                  "lat": 42.54355,
-                  "lng": -87.9123
-                },
-                {
-                  "lat": 42.5425,
-                  "lng": -87.9114
-                },
-                {
-                  "lat": 42.54228,
-                  "lng": -87.91165
-                }
-              ]
-            }
-          ],
-          "staging": {
-            "ring": [
-              {
-                "lat": 42.543,
-                "lng": -87.91255
-              },
-              {
-                "lat": 42.54292,
-                "lng": -87.912
-              },
-              {
-                "lat": 42.54262,
-                "lng": -87.91215
-              },
-              {
-                "lat": 42.5427,
-                "lng": -87.9127
-              }
-            ]
-          },
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 81,
-              "pano": "4lBrj3cqf4vydod_hPEw3Q",
-              "hasCoverage": true
-            },
-            "truckGate": {
-              "heading": 73,
-              "pano": "4lBrj3cqf4vydod_hPEw3Q",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 60,
-          "trailersVisible": 30,
-          "trailerParkingCapacity": 45,
-          "truckGateCount": 1,
-          "buildingCount": 1,
-          "siteAreaAcres": 42,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": false,
-          "remoteGs": true,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": true,
-          "dockDoors": "50+",
-          "dropArea": "25-50",
-          "shipRcvSeparate": true,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#9",
-          "steps": [
-            {
-              "step": "Arrive at gate (no guard, kiosk or call box)",
-              "geofenceTarget": "truckGate",
-              "durationMs": 60000,
-              "narrationKey": "gate.through.kiosk",
-              "baselineWaitMs": 720000,
-              "ynsWaitMs": 0
-            },
-            {
-              "step": "Pass through to drop yard",
-              "geofenceTarget": "dropYard",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Spotter pulls to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 90000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 1200000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit through gate",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 4560000,
-          "totalYnsMs": 2730000
-        },
-        "dossierExcerpt": "The supplied approximate coordinates (42.542574, -87.912278) landed at the south\nend of the correct building. Web research confirmed 9091 88th Ave as the Kroger\nCo. / Ocado Customer Fulfillment Center — a 336,840 sq ft high-tech automated\ngrocery fulfillment center that opened June 28, 2022 (Kroger IR / Supermarket\nNews / BizTimes). Kroger's own store locator lists the site at 9091 88th Ave,\nPleasant Prairie.\n\nCare was needed because a **much larger dark-roofed distribution building sits\nimmediately north** of the CFC on the same road; it is a separate, bigger\nfacility (700K+ sq ft footprint with its own large trailer drop yard). The CFC\nis the central white-roofed building — its footprint matches the published\n~337K sq ft and the approximate coordinates. Locked center at 42.5432, -87.9112.",
-        "mapsUrl": "https://www.google.com/maps/@42.54320,-87.91120,400m/data=!3m1!1e3",
-        "fieldNotes": {
-          "truckGate": "Single controlled truck/main entrance off 88th Ave at ~42.5430,-87.9128; site fully ringed by chain-link fence (confirmed in multiple Street View frames along the 88th Ave frontage). Driveway pinches to a marked entry island where it crosses the fence line.",
-          "guardShack": "No clear staffed guard booth visible at the entrance island in z21 satellite; a small control island/pad sits in the entry throat. Marked uncertain - likely automated/kiosk check-in rather than a manned shack.",
-          "remoteGs": "Set true: gate present, no manned guard shack evident, so check-in is most likely kiosk/app based (consistent with a highly automated Ocado CFC).",
-          "dockDoors": "50+ band. Doors split across two faces: inbound semi-trailer docks on the NE face (by the retention pond) and an extensive last-mile delivery-van loading bank on the SW face. Combined door count estimated ~60; flagged uncertain because van-bay doors are smaller and partly occluded by parked vans.",
-          "shipRcvSeparate": "Inbound grocery semis dock on the NE building face; outbound last-mile delivery vans load from the SW face and stage in the NW van lot - physically separate clusters on different faces.",
-          "dropArea": "Large fleet of Kroger Delivery vans (not standard trailers) parked in herringbone rows in the NW lot, plus a band of parked semi-trailers north of the building and along the NE dock apron. Counting both, 25-50 band.",
-          "dropYard": "Dedicated trailer/van storage: NW van-fleet lot (dozens of branded delivery vans) and a trailer drop band north of the building, separate from active dock staging.",
-          "fastLaneOpportunity": "Wide entry apron and deep internal drives with ample paved width to add an express/bypass lane.",
-          "urbanRural": "Edge-of-town / agricultural setting on the Pleasant Prairie outskirts - farmland immediately west and south, scattered industrial buildings. Rural per rubric.",
-          "railServed": "A rail/utility corridor runs diagonally NE of the property but no spur enters the CFC site.",
-          "streetViewMeta": "2023-08 Street View coverage exists along the 88th Ave frontage (pano at ~42.54294,-87.91334) showing the fenced perimeter and building front; exact pano_id not captured via probe, hasCoverage true with headings pointing from the road toward the gate/perimeter."
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Forest Park GA explicitly named as a RETAINED CFC in Dec 2025 pullback; still hiring.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3994,273 +3771,32 @@
           "dropYard": "Dedicated trailer/van storage lot on the west side, separate from active dock staging.",
           "streetViewMeta": "Nearest Street View panos on N Jackson Gap Way are dated 2016-11 (gate area, ~170m E) and 2020-11 (perimeter, ~140m E) — both PREDATE the 2023 CFC construction and show empty prairie, not the facility. hasCoverage set false because no pano depicts the built yard; never invented a pano. Gate/perimeter determinations rely on Maxar satellite (z18-z21).",
           "railServed": "No rail spur enters the property; nearest rail is unrelated."
-        }
-      },
-      {
-        "id": "16-kroger",
-        "name": "Kroger Customer Fulfillment Center Groveland FL",
-        "type": "Customer Fulfillment Center (Ocado-automated)",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "uncertainFields": [
-          "dockDoorCount",
-          "trailerParkingCapacity",
-          "multiStep",
-          "connectivityIssue"
-        ],
-        "center": {
-          "lat": 28.64018,
-          "lng": -81.82035
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 28.64205,
-                "lng": -81.82155
-              },
-              {
-                "lat": 28.64188,
-                "lng": -81.8188
-              },
-              {
-                "lat": 28.64055,
-                "lng": -81.81835
-              },
-              {
-                "lat": 28.6384,
-                "lng": -81.8187
-              },
-              {
-                "lat": 28.63755,
-                "lng": -81.8196
-              },
-              {
-                "lat": 28.6376,
-                "lng": -81.82085
-              },
-              {
-                "lat": 28.6395,
-                "lng": -81.82175
-              },
-              {
-                "lat": 28.6412,
-                "lng": -81.82175
-              }
-            ]
-          },
-          "truckGate": {
-            "ring": [
-              {
-                "lat": 28.6381,
-                "lng": -81.8195
-              },
-              {
-                "lat": 28.63808,
-                "lng": -81.81905
-              },
-              {
-                "lat": 28.63762,
-                "lng": -81.81905
-              },
-              {
-                "lat": 28.63762,
-                "lng": -81.81952
-              }
-            ]
-          },
-          "dropYards": [
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
             {
-              "ring": [
-                {
-                  "lat": 28.6408,
-                  "lng": -81.81905
-                },
-                {
-                  "lat": 28.63945,
-                  "lng": -81.81935
-                },
-                {
-                  "lat": 28.63935,
-                  "lng": -81.81912
-                },
-                {
-                  "lat": 28.64072,
-                  "lng": -81.81882
-                }
-              ]
+              "tier": 1,
+              "url": "https://www.grocerydive.com/news/kroger-canceling-charlotte-cfc-closing-nashville-spoke-ecommerce-ocado/807167/",
+              "date": "2025-12-05",
+              "type": "press",
+              "claim": "Colorado CFC is among the CFCs Kroger and Ocado plan to keep operating."
             },
             {
-              "ring": [
-                {
-                  "lat": 28.63915,
-                  "lng": -81.81905
-                },
-                {
-                  "lat": 28.6383,
-                  "lng": -81.81925
-                },
-                {
-                  "lat": 28.63822,
-                  "lng": -81.81878
-                },
-                {
-                  "lat": 28.63905,
-                  "lng": -81.8186
-                }
-              ]
+              "tier": 1,
+              "url": "https://ir.kroger.com/news/news-details/2023/Kroger-Delivery-Arrives-in-Denver-Metro-Area/default.aspx",
+              "date": "2023-03",
+              "type": "press",
+              "claim": "Kroger 300k sqft CFC at 6125 N. Jackson Gap Way, Aurora CO serving Denver metro."
             }
           ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 28.64165,
-                  "lng": -81.81955
-                },
-                {
-                  "lat": 28.63905,
-                  "lng": -81.8201
-                },
-                {
-                  "lat": 28.639,
-                  "lng": -81.81972
-                },
-                {
-                  "lat": 28.6416,
-                  "lng": -81.81918
-                }
-              ]
-            }
-          ],
-          "staging": {
-            "ring": [
-              {
-                "lat": 28.63858,
-                "lng": -81.81998
-              },
-              {
-                "lat": 28.63858,
-                "lng": -81.81952
-              },
-              {
-                "lat": 28.63818,
-                "lng": -81.81952
-              },
-              {
-                "lat": 28.63818,
-                "lng": -81.81998
-              }
-            ]
-          },
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 359,
-              "pano": "AMIqIc9BmCY5k7DHpbqTCw",
-              "hasCoverage": true
-            },
-            "truckGate": {
-              "heading": 350,
-              "pano": "NMgF_yqXrF21JG5vIG3SJA",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 32,
-          "trailersVisible": 38,
-          "trailerParkingCapacity": 60,
-          "truckGateCount": 1,
-          "buildingCount": 1,
-          "siteAreaAcres": 58,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": false,
-          "remoteGs": true,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 2,
-          "exitLanes": 2,
-          "fastLaneOpportunity": true,
-          "dockDoors": "25-50",
-          "dropArea": "25-50",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#9",
-          "steps": [
-            {
-              "step": "Arrive at gate (no guard, kiosk or call box)",
-              "geofenceTarget": "truckGate",
-              "durationMs": 60000,
-              "narrationKey": "gate.through.kiosk",
-              "baselineWaitMs": 720000,
-              "ynsWaitMs": 0
-            },
-            {
-              "step": "Pass through to drop yard",
-              "geofenceTarget": "dropYard",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Spotter pulls to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 90000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 1200000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit through gate",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 4560000,
-          "totalYnsMs": 2730000
-        },
-        "dossierExcerpt": "The supplied approximate point (28.639673, -81.820847) landed inside the\nChristopher C. Ford Commerce Park near US-27 and American Way. Satellite at\nz16-z18 showed a cluster of industrial buildings; web research\n(Kroger/Ocado press releases, CoStar, REBusinessOnline) confirmed the CFC is a\n~338-375k sq ft, four-story automated grid building on a ~102.3-acre parcel at\nUS-27 and American Way. The large monolithic windowless box in the center of\nthe park — with a 1,400-employee-scale parking lot, a fleet of blue Kroger\ndelivery vans, and a continuous dock bank with trailers — matches that profile\nexactly. Adjacent buildings (the dock-loaded warehouse to the NE, others to the\nW/S) are separate tenants and were ruled out. Center locked at\n28.64018, -81.82035.\n\n> Status note: Kroger publicly announced (2025) it was closing this Groveland",
-        "mapsUrl": "https://www.google.com/maps/@28.64018,-81.82035,400m/data=!3m1!1e3",
-        "fieldNotes": {
-          "truckGate": "Sliding/cantilever gate across the secured-yard driveway off American Way, confirmed in Street View (pano NMgF_yqXrF21JG5vIG3SJA, Apr 2025) with perimeter chain-link/slatted fence and posted sign at the gate.",
-          "guardShack": "No staffed booth at the road gate. The on-site control building with canopy bays sits deeper inside near the dock-yard throat, not at the public-road checkpoint, so the road entry reads as gate-without-booth.",
-          "remoteGs": "Gate present but no manned booth at the road entrance, implying call-box / kiosk / app check-in.",
-          "postGateStaging": "Wide paved apron / turnaround inside the gate before the dock yard provides queue room (the teardrop turnaround at ~28.6384,-81.8197).",
-          "drivewayLong": "Long divided entry drive from American Way up to the yard can hold 3+ trucks.",
-          "fastLaneOpportunity": "Divided entrance with multiple lanes and large unused paved apron width at the gate gives room for an express/bypass lane.",
-          "dockDoors": "Continuous dock bank with trailers backed in along the east building face; ~25-40 positions counted from z18/z20 imagery — band 25-50.",
-          "dropArea": "Dedicated trailer drop/parking rows along the east apron and SE yard; ~25-50 trailer stalls. Note: large rows of small blue Kroger/Ocado delivery VANS in the south lot are fleet parking, not 53' trailers, and were excluded from trailer counts.",
-          "dropYard": "On-site trailer-storage rows separate from active dock staging.",
-          "urbanRural": "Edge-of-town industrial park (Christopher C. Ford Commerce Park) on the rural fringe of Groveland by US-27, surrounded by open land, woods and a lake.",
-          "siteAreaAcres": "~58 ac fenced operational area traced; the full recorded parcel is reported at ~102.3 ac in CoStar/REBusinessOnline listings.",
-          "railServed": "No rail spur enters the property.",
-          "scale": "No truck scale visible in the truck path.",
-          "note": "Facility is the Kroger/Ocado automated CFC (FC-04, ~338-375k sq ft, four-story automated grid). Publicly reported as closed in 2025 as Kroger wound down its Ocado CFC network; imagery (2025-2026) still shows the building, fleet and trailers in place."
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Aurora/Denver CO CFC named among RETAINED sites in Dec 2025 pullback; active openings.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4499,6 +4035,32 @@
           "urbanRural": "Edge-of-town industrial park near Detroit Metro Airport, bordered by woods/open land; per rubric (when torn choose Rural) classified Rural.",
           "buildingCount": "Main CFC plus one small attached/adjacent annex building on the north side = 2; the large DC to the east is excluded as a separate property.",
           "railServed": "No rail spur runs into the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.grocerydive.com/news/kroger-canceling-charlotte-cfc-closing-nashville-spoke-ecommerce-ocado/807167/",
+              "date": "2025-12-05",
+              "type": "press",
+              "claim": "Kroger plans to EXPAND the capacity of its Detroit (Romulus) CFC; Michigan CFC among retained sites."
+            },
+            {
+              "tier": 1,
+              "url": "https://ir.kroger.com/news/news-details/2020/Kroger-and-Ocado-Announce-Location-of-High-Tech-Customer-Fulfillment-Center-in-Romulus-Michigan/default.aspx",
+              "date": "2020-09",
+              "type": "press",
+              "claim": "Kroger/Ocado high-tech CFC at 15675 Wahrman Rd, Romulus MI; serves greater Detroit."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Romulus/Detroit MI is a real Kroger/Ocado CFC at 15675 Wahrman Rd; Kroger is EXPANDING it, not closing.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4732,6 +4294,32 @@
           "scale": "No truck scale / weigh pad visible in the truck path.",
           "siteAreaAcres": "33.8 acres is the fenced/paved operational footprint traced from the perimeter polygon; press reporting cites a 55-acre tract (the balance is undeveloped wooded land to the west, outside the operating geofence).",
           "railServed": "No rail spur enters the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.grocerydive.com/news/kroger-canceling-charlotte-cfc-closing-nashville-spoke-ecommerce-ocado/807167/",
+              "date": "2025-12-05",
+              "type": "press",
+              "claim": "Texas CFC is among the CFCs Kroger and Ocado plan to keep operating."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.dallascitynews.net/city-of-dallas-partners-with-kroger-to-host-grocery-delivery-hiring-event",
+              "date": "2024",
+              "type": "press",
+              "claim": "City of Dallas + Kroger host hiring events for southern Dallas fulfillment center as Kroger Delivery expands to Dallas."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Dallas TX CFC named among RETAINED sites in Dec 2025 pullback; blue Kroger Delivery vans in Street View consistent.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       }
     ]

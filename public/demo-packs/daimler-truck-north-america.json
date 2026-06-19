@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-02T16:10:18.840Z",
+  "builtAt": "2026-06-19T03:20:23.332Z",
   "account": {
     "slug": "daimler-truck-north-america",
     "displayName": "Daimler Truck North America",
@@ -9,11 +9,11 @@
     "coverageNote": {
       "auditedCount": 16,
       "estimatedFootprint": 20,
+      "totalGlobalFootprint": 40,
+      "auditedScope": "NA",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Daimler Truck North America (Freightliner / Western Star / Detroit) operates ~20 NA plants + parts/DC sites. Global Daimler Truck operates ~40 production sites.",
-      "auditedScope": "NA",
-      "totalGlobalFootprint": 40
+      "note": "Daimler Truck North America (Freightliner / Western Star / Detroit) operates ~20 NA plants + parts/DC sites. Global Daimler Truck operates ~40 production sites."
     },
     "featuredSiteId": "13-memphis-parts-distribution-center",
     "dossierIntro": "Daimler Truck NA builds the heavy trucks that move the rest of CPG. 40 facilities; we audited 16. Memphis Parts Distribution runs 60 dock doors. Cleveland NC truck manufacturing is 200 acres. Truck plants run on supplier inbound (rail-heavy) and finished-vehicle outbound (drive-away). YardFlow runs both inside the same gate-controlled protocol.",
@@ -231,28 +231,6 @@
         },
         "dossierExcerpt": "- Roster coords (35.730924, -80.694178, ROOFTOP) landed on the SW corner of the\n  campus. Satellite at z16 immediately confirmed the facility: the main white\n  assembly roof carries a large painted \"DAIMLER\" wordmark.\n- Address 11550 Statesville Boulevard, Cleveland NC 27013 confirmed via DTNA\n  career locations page and Waze listing. This is DTNA's flagship NA assembly\n  plant (Freightliner Cascadia and Western Star; 850,000th truck built July 2025).\n- Locked working center: 35.732000, -80.691000 (center of the assembly\n  building complex).",
         "mapsUrl": "https://www.google.com/maps/@35.732000,-80.691000,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/01-cleveland-truck-manufacturing-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.732,
-              "lng": -80.691
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/01-cleveland-truck-manufacturing-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.732,
-              "lng": -80.691
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Main controlled entrance on Statesville Blvd (US-70) at a signalized intersection, with a 'DAIMLER TRUCK' canopy gateway structure over a divided entry drive. Campus fully fenced (continuous chain-link confirmed in multiple Street Views along the road frontage).",
           "guardShack": "No discrete 1-3-vehicle guard booth visible at the canopy entrance in satellite or Street View; entrance is a canopy/gateway-sign structure, so a staffed booth could not be confirmed - treated as remote/kiosk check-in.",
@@ -265,6 +243,32 @@
           "scale": "No truck scale identified in imagery; flagged uncertain.",
           "shipRcvSeparate": "Inbound parts docks (interior court / N face) are physically separate from finished-vehicle outbound flow (S/E finished-truck lots).",
           "urbanRural": "Small town of Cleveland NC surrounded by farmland; rural setting despite the large industrial footprint."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://northamerica.daimlertruck.com/news-stories/2025/daimler-truck-north-america-celebrates-850000th-truck-built-at-cleveland-truck-manufacturing-plant-in-north-carolina-with-delivery-of-western-star-47x-to-alamo-group",
+              "date": "2025-07-10",
+              "type": "press",
+              "claim": "DTNA celebrates 850,000th truck at Cleveland NC plant; ~2,000 employees, assembles 5th-Gen Freightliner Cascadia and Western Star 47X/49X; largest US heavy-duty plant."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.ttnews.com/articles/daimler-truck-layoff-nc",
+              "date": "2025-07-14",
+              "type": "press",
+              "claim": "NC plant 2025 layoffs are temporary/order-driven, not closures; site remains operational."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Tier-1 DTNA press (Jul 2025) confirms active Cascadia/Western Star assembly; no divestiture/closure, 2025 cuts are temporary shift reductions.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -465,28 +469,6 @@
         },
         "dossierExcerpt": "- Roster coords (35.322672, -81.00161) were geocoded GEOMETRIC_CENTER and moved\n  2149m, so treated as approximate. They landed inside a large industrial\n  campus near the Catawba River, ringed by residential subdivisions.\n- Web search (DTNA career-locations page, Waze, FreightWaves) confirms the\n  Freightliner Mount Holly truck plant at 1800/1803 N Main Street, Mount Holly\n  NC 28120 — established 1979, building medium-duty M2/SD trucks and e-coated\n  cabs for Western Star. The campus has two large buildings joined by an\n  internal road: a sprawling SW main assembly building and a large NE\n  rail-served building.\n- Working center: 35.323000, -81.001500 (between the two buildings).",
         "mapsUrl": "https://www.google.com/maps/@35.323000,-81.001500,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/02-mount-holly-truck-manufacturing-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.323,
-              "lng": -81.0015
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/02-mount-holly-truck-manufacturing-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.323,
-              "lng": -81.0015
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Geocode (GEOMETRIC_CENTER, moved 2149m) landed inside the campus. Confirmed Freightliner Mount Holly M2/SD medium-duty truck plant via DTNA career-locations page and Waze (1803 N Main St). Two-building campus: SW main assembly building plus a large NE rail-served building, joined by an internal road.",
           "truckGate": "Campus is a controlled industrial site; the access road enters from the residential road network to the NE. The actual gate sits back behind a wooded buffer and could not be reached in Street View (only residential roads have panos, all from 2023-04). Controlled-access industrial campus, so truckGate set true with the gate box placed at the access-road head.",
@@ -501,6 +483,32 @@
           "entryLanes": "Could not count lanes at the gate (not reachable in Street View) - flagged uncertain.",
           "scale": "No truck scale identified - flagged uncertain.",
           "preGateStaging": "Quarry/construction activity SE of the NE building may serve staging but is not a clear pre-gate truck apron - left false."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://locations.daimlertruck.com/en/career/locations/detail/mount-holly-nc-freightliner-lkw-werk",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "DTNA careers/locations page lists Mount Holly NC Freightliner plant at 1800 North Main Street, NC 28120 as an active medium-duty M2/SD plant."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.ttnews.com/articles/daimler-truck-layoff-nc",
+              "date": "2025-07-14",
+              "type": "press",
+              "claim": "Mount Holly facility remains operational; July 2025 layoffs are temporary, not a closure."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "DTNA's own locator confirms Mount Holly at the exact address as an active medium-duty plant; 2025 layoffs explicitly temporary, no divestiture/closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -695,28 +703,6 @@
         },
         "dossierExcerpt": "- Roster coords (45.573869, -122.714444, ROOFTOP, moved 188m) landed on the roof\n  of the large white main plant building in the Swan Island Industrial Park.\n- Web search (DTNA career-locations page, OPB, Oregon Business) confirms this as\n  DTNA's Portland Truck Manufacturing Plant at 6936 N Fathom Street, Portland OR\n  97217 — in continuous operation since 1969, today building the battery-electric\n  Freightliner eCascadia / eM2 and the Western Star X-Series. DTNA also runs a\n  $40M engineering facility and headquarters functions on Swan Island.\n- Working center: 45.573869, -122.714444 (main plant building).",
         "mapsUrl": "https://www.google.com/maps/@45.573869,-122.714444,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/03-portland-truck-manufacturing-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 45.573869,
-              "lng": -122.714444
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/03-portland-truck-manufacturing-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 45.573869,
-              "lng": -122.714444
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster coords (ROOFTOP, moved 188m) landed on the roof of the main Portland Truck Manufacturing Plant in the Swan Island Industrial Park. Confirmed via DTNA career-locations page and OPB/Oregon Business reporting - DTNA's Portland operation (Western Star X-Series, Freightliner eCascadia/eM2) at 6936 N Fathom Street.",
           "truckGate": "Open industrial-park layout: the plant and DTNA's adjacent buildings front directly onto N Fathom Street / N Channel Avenue with no single controlled perimeter gate. Dock yards are open to the park roads. Some rail-side yards have chain-link fencing but no manned gate/barrier arm was identified - truckGate set false, flagged uncertain.",
@@ -731,6 +717,32 @@
           "drivewayShort": "Approaches from the park street to the dock faces are short (1-2 trucks).",
           "urbanRural": "Swan Island is a dense industrial peninsula inside the Portland metro - Urban.",
           "scale": "No truck scale identified - flagged uncertain."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://northamerica.daimlertruck.com/news-stories/2025/daimler-truck-north-america-recognized-with-oregon-visionary-award",
+              "date": "2025-10-23",
+              "type": "press",
+              "claim": "DTNA Portland (Swan Island) plant manufactures electric Freightliner Cascadia and Western Star X-Series; 3,000+ OR employees."
+            },
+            {
+              "tier": 2,
+              "url": "https://nwlaborpress.org/2025/06/layoffs-coming-at-daimlers-portland-truck-plant/",
+              "date": "2025-06-20",
+              "type": "press",
+              "claim": "Portland Swan Island plant still operating in 2025; production reduced (21 to 12 trucks/day), a reduction not closure."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Tier-1 DTNA press (Oct 2025) confirms active Western Star X-Series/eCascadia production at Swan Island; 2025 cuts are production reductions, not closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -906,28 +918,6 @@
         },
         "dossierExcerpt": "- Roster coords (35.941867, -80.022076, ROOFTOP, moved 30m) landed directly on\n  the legacy Thomas Built Buses plant complex.\n- Web search (Thomas Built Buses and DTNA news releases) confirms the legacy\n  manufacturing plant at 1408 Courtesy Road, High Point NC — the company's\n  original site dating to 1916, currently building school buses with a Type A\n  Minotour capacity expansion announced December 2025. (A separate Saf-T-Liner\n  C2 plant on a 90-acre plot was added in 2004; the Courtesy Road address audited\n  here is the legacy plant.)\n- Working center: 35.941867, -80.022076.",
         "mapsUrl": "https://www.google.com/maps/@35.941867,-80.022076,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/04-thomas-built-buses-manufacturing-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.941867,
-              "lng": -80.022076
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/04-thomas-built-buses-manufacturing-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.941867,
-              "lng": -80.022076
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster coords (ROOFTOP, moved 30m) landed on the legacy Thomas Built Buses plant. Confirmed via Thomas Built Buses / DTNA news pages - 1408 Courtesy Road, High Point NC, the company's original site since 1916, building Type A Minotour / Type C / Type D school buses (Minotour capacity expansion announced Dec 2025).",
           "truckGate": "Sprawling legacy urban industrial complex straddling Courtesy Road; buildings line both sides of the public street. Individual yards are fenced (privacy-slat chain-link seen in Street View) but there is no single dominant manned perimeter gate or barrier arm controlling all truck traffic - access is from the public road into multiple fenced yards. truckGate set false, flagged uncertain.",
@@ -942,6 +932,32 @@
           "drivewayShort": "Yard approaches off Courtesy Road are short (1-2 trucks).",
           "urbanRural": "Dense urban industrial fabric of High Point - Urban.",
           "scale": "No truck scale identified - flagged uncertain."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://northamerica.daimlertruck.com/news-stories/2025/thomas-built-buses-expands-type-a-minotour-production-capacity-at-plant-in-high-point",
+              "date": "2025-12-08",
+              "type": "press",
+              "claim": "DTNA newsroom confirms Thomas Built Buses High Point plant actively expanding school-bus (Minotour) manufacturing capacity."
+            },
+            {
+              "tier": 1,
+              "url": "https://thomasbuiltbuses.com/resources/news/thomas-built-buses-expands-type-a-minotour-2025-12-08/",
+              "date": "2025-12-08",
+              "type": "press",
+              "claim": "Thomas Built Buses (DTNA brand) expanding Type A Minotour production 50%+ at 1408 Courtesy Road, High Point; completes 2026."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Tier-1 DTNA/Thomas Built press (Dec 2025) confirms an active, expanding school-bus assembly plant at the exact 1408 Courtesy Road address; no divestiture/closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1140,28 +1156,6 @@
         },
         "dossierExcerpt": "- Roster coords (35.074048, -81.68243, ROOFTOP but moved 2489m) landed near the\n  plant. Satellite at z16/z17 confirmed a large multi-building manufacturing\n  complex with hundreds of completed chassis staged in rows.\n- Web search (FCCC contact page, SC Department of Commerce and SC Governor\n  releases, FCCC RV pages) confirms the Freightliner Custom Chassis plant at\n  552 Hyatt Street, Gaffney SC 29341 — ~289,000 sq ft, three production lines,\n  600+ employees, building custom RV/motorhome and walk-in-van chassis.\n- Working center: 35.075000, -81.681000 (main plant building).",
         "mapsUrl": "https://www.google.com/maps/@35.075000,-81.681000,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/05-freightliner-custom-chassis-manufacturing-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.075,
-              "lng": -81.681
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/05-freightliner-custom-chassis-manufacturing-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.075,
-              "lng": -81.681
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster coords (ROOFTOP, moved 2489m) landed near the FCCC plant. Confirmed via FCCC contact page and SC Commerce / SC Governor releases - 552 Hyatt Street, Gaffney SC, ~289,000 sq ft, three production lines, building RV/motorhome and walk-in-van custom chassis. Working center set on the main plant building.",
           "truckGate": "Campus is fenced (chain-link along the road frontage and around the east storage yard). A small white ~1-vehicle-footprint structure sits at a gated internal road junction between the main plant and the east chassis-storage building, controlling truck movement - treated as a controlled truck gate.",
@@ -1177,6 +1171,32 @@
           "urbanRural": "Gaffney is a small South Carolina town; the plant sits in an edge-of-town industrial area among woods and scattered residential - Rural.",
           "scale": "No truck scale identified - flagged uncertain.",
           "entryLanes": "Lane count at the internal gate not clearly resolvable - flagged uncertain."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://locations.daimlertruck.com/en/career/locations/detail/gaffney-sc-freightliner-custom-chassis-corporation",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Daimler Truck careers locator lists active FCCC facility at 552 Hyatt Street, Gaffney SC 29341, manufacturer of chassis for walk-in vans, motor homes, school/commercial buses."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.freightlinerchassis.com/about/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Official FCCC site: 'subsidiary of Daimler Trucks North America LLC'; located in Gaffney, SC, 650+ employees across manufacturing/support/retail."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "DTNA careers locator + official FCCC about page confirm DTNA currently operates the 552 Hyatt St Gaffney plant; gauntlet found no closure/sale/idle.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1306,28 +1326,6 @@
         },
         "dossierExcerpt": "- Account: Daimler Truck North America\n- Type: Engine / powertrain plant\n- Roster address: 13400 West Outer Drive, Redford, MI 48239\n- Resolved center: 42.37745, -83.2675\n- Method: deep-audit | Confidence: high",
         "mapsUrl": "https://www.google.com/maps/@42.37745,-83.2675,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/06-detroit-diesel-corporation-engine-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.37745,
-              "lng": -83.2675
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/06-detroit-diesel-corporation-engine-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.37745,
-              "lng": -83.2675
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Geocoded point (GEOMETRIC_CENTER, moved 1434m) landed in an east-side staging lot. Confirmed the correct facility: the very large blue/gray-roofed Detroit Diesel engine plant complex bounded by Telegraph Rd / W Outer Drive on the west and a rail line on the north. A Street View 'TRUCK ENTRANCE -> 12200 TELEGRAPH' sign and DAIMLER TRUCK building branding positively identify the site.",
           "truckGate": "Clear controlled truck entrance on the SW corner off Telegraph Rd: dedicated 'TRUCK ENTRANCE' signage, a wide gated opening in tall chain-link perimeter fence with privacy screening, and a checkpoint apron set back from the road.",
@@ -1344,6 +1342,32 @@
           "urbanRural": "Inside the Detroit metro (Redford Township), surrounded by dense residential fabric -> Urban.",
           "buildingCount": "Main plant complex + DAIMLER office building + east ancillary building + smaller support structures.",
           "scale": "No truck scale clearly visible in the gate path; flagged uncertain."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://locations.daimlertruck.com/en/career/locations/detail/detroit-mi-detroit-diesel-corporation",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Daimler Truck locations site lists Detroit Diesel Corporation at 13400 Outer Drive West, Detroit MI 48239 as active (est. 1938), making heavy-duty engines, axles, transmissions for Freightliner."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.demanddetroit.com/why-detroit/detroit-plant",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "DTNA Demand Detroit page describes the Redford/Detroit plant as actively producing ~390 engines/day plus transmissions and axles; operating since 1938."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Multiple current Tier-1 DTNA sources (official locator, Demand Detroit plant page, Dec-2024 $285M reinvestment) confirm DTNA-subsidiary Detroit Diesel actively operates 13400 Outer Drive West; no credible negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1452,8 +1476,7 @@
               ]
             }
           ],
-          "staging": null,
-          "streetViewMeta": {}
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 35,
@@ -1536,28 +1559,6 @@
         },
         "dossierExcerpt": "- Account: Daimler Truck North America\n- Type: Component / parts subassembly and logistics plant\n- Roster address: 1400 Tulip Drive, Gastonia, NC 28052\n- Resolved center: 35.288, -81.2052\n- Method: deep-audit | Confidence: high",
         "mapsUrl": "https://www.google.com/maps/@35.288,-81.2052,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/07-gastonia-components-and-logistics-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.288,
-              "lng": -81.2052
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/07-gastonia-components-and-logistics-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.288,
-              "lng": -81.2052
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Geocoded point (GEOMETRIC_CENTER, moved only 44m) landed accurately on the campus. Confirmed: a large white-roofed components/logistics plant plus a separate gray-roofed building to the east, on a wooded campus off Tulip Drive south of I-85. DTNA / Waze listings confirm 'Daimler Truck North America Components & Logistics, 1400 Tulip Dr.'",
           "truckGate": "Controlled vehicle entrance on the SE: Street View (captured 2026-02) shows a checkpoint canopy/gatehouse with orange bollards lining the lane and chain-link fencing; satellite shows a small white-canopy structure spanning the entry drive with a trailer passing through.",
@@ -1573,6 +1574,32 @@
           "urbanRural": "Edge-of-town site heavily ringed by woods, fronting I-85 on the south edge of Gastonia (a small city in the Charlotte metro). Per rubric tie-breaker -> Rural.",
           "scale": "No truck scale visible in the entry path.",
           "entryLanes": "Single entry lane through the SE gate canopy as best resolved; flagged uncertain."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://northamerica.daimlertruck.com/company/locations",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "DTNA corporate locations page lists Gastonia Components and Logistics, 1400 Tulip Drive, Gastonia, NC 28052 (est. 1978); cab/chassis parts, line sequencing for DTNA plants and aftermarket packaging."
+            },
+            {
+              "tier": 1,
+              "url": "https://locations.daimlertruck.com/en/career/locations/detail/gastonia-nc-manufacturing-plant-",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Daimler Truck careers locator lists the Gastonia NC plant at 1400 Tulip Drive doing stamping/fabrication/sub-assembly of cab and chassis parts for DTNA products."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Two Tier-1 DTNA sources list the exact 1400 Tulip Drive site as a current operating Components & Logistics plant; gauntlet found only temporary 2025 demand layoffs.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1660,8 +1687,7 @@
               ]
             }
           ],
-          "staging": null,
-          "streetViewMeta": {}
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 14,
@@ -1734,28 +1760,6 @@
         },
         "dossierExcerpt": "- Account: Daimler Truck North America\n- Type: Remanufacturing plant (engines/components)\n- Roster address: 60703 Country Club Road, Byesville, OH 43723\n- Resolved center: 39.97815, -81.56675\n- Method: deep-audit | Confidence: medium",
         "mapsUrl": "https://www.google.com/maps/@39.97815,-81.56675,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/08-detroit-reman-east-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.97815,
-              "lng": -81.56675
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/08-detroit-reman-east-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.97815,
-              "lng": -81.56675
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Geocoded point (ROOFTOP, moved 2417m) landed on the large modern blue/dark-roofed industrial building in the Southgate industrial park area near Byesville OH, just west of the Cambridge Country Club golf course (consistent with 'Country Club Road'). Identified this building as Detroit Reman East -- the largest, most modern facility on the parcel. A separate lighter-roofed building sits to the west (a different occupant). DTNA / Yelp / D&B confirm Detroit Diesel Remanufacturing at 60703 Country Club Rd, Byesville.",
           "truckGate": "No controlled truck gate observed. The buildings sit in an open industrial-park road network; access roads and the shared parking lot connect directly to public roads with no barrier arm, sliding gate or guard booth at the entrance. Some perimeter chain-link fencing exists but the truck approach is uncontrolled. Flagged uncertain.",
@@ -1769,6 +1773,32 @@
           "urbanRural": "Byesville is a small Ohio town; the site is in an edge-of-town industrial park ringed by fields, woods and a golf course -> Rural.",
           "shipRcvSeparate": "Dock activity appears concentrated on one (north) building face -> shipRcvSeparate=false; flagged uncertain due to active construction obscuring the east face.",
           "confidence": "Medium: building identity is a reasoned best-fit (Street View cannot resolve building signage and 2025 imagery shows active construction); gate/dock determinations are imagery-based."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://locations.daimlertruck.com/en/career/locations/detail/byesville-oh-detroit-reman-east-",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Daimler Truck career locations site lists 'Byesville, OH Detroit Reman East' at 60703 Country Club Road, Byesville, OH 43723 as a remanufacturing plant for power systems/electronics/fuel/aftertreatment; founded 1993."
+            },
+            {
+              "tier": 1,
+              "url": "https://wtov9.com/news/local/detroit-diesel-remanufacturing-reopens-byesville-plant-after-10m-expansion-detroit-diesel-remanufacturing-byesville-plant-jobsohio-apprenticeship-guernsey-county-daimler-truck-north-america-engine-rebuilding-economic-development",
+              "date": "2026-05-20",
+              "type": "press",
+              "claim": "Detroit Diesel Remanufacturing LLC (a DTNA subsidiary) reopened its Byesville plant after a $10M renovation/expansion; currently operational rebuilding engines/transmissions."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Tier-1 DTNA career locator lists the exact address as an active Detroit Reman plant, corroborated by a May 2026 press story on a $10M reopening/expansion; no closure/sale/idle/WARN.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1930,28 +1960,6 @@
         },
         "dossierExcerpt": "- Account: Daimler Truck North America\n- Type: Remanufacturing plant (engines/components)\n- Roster address: 100 South Lodestone Way, Tooele, UT 84074\n- Resolved center: 40.52945, -112.34998\n- Method: deep-audit | Confidence: medium",
         "mapsUrl": "https://www.google.com/maps/@40.52945,-112.34998,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/09-detroit-reman-west-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.52945,
-              "lng": -112.34998
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/09-detroit-reman-west-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.52945,
-              "lng": -112.34998
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Geocoded point (ROOFTOP, moved 145m) lands squarely on the large white-roofed plant building in the Utah Industrial Depot (former Tooele Army Depot, built by the Army early 1990s, converted to commercial use by Penske 1996). Confirmed as Detroit Reman West -- the second-largest Detroit Reman plant (~330 workers), per DTNA, Tooele Chamber and Yelp at 100 South Lodestone Way.",
           "truckGate": "Perimeter chain-link fencing is visible on multiple building faces, implying controlled access, but Street View coverage at the entrances is sparse (mostly 2015-2018) and shows no barrier arm, sliding gate or guard booth. Recorded truckGate=false with the field flagged uncertain -- a gate is plausible for a 330-worker DTNA plant but is not visually confirmed.",
@@ -1966,6 +1974,25 @@
           "connectivityIssue": "Isolated high-desert location; cellular coverage may be moderate. Tooele city and an active industrial park are nearby, so not extreme -> recorded false but flagged uncertain.",
           "shipRcvSeparate": "Dock activity appears concentrated on the south/SW face -> shipRcvSeparate=false; flagged uncertain.",
           "confidence": "Medium: building positively identified, but gate/guard determinations limited by sparse Street View coverage and dock counts partly obscured by trailers."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://locations.daimlertruck.com/en/career/locations/detail/tooele-ut-detroit-reman-west-",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "DTNA official location page lists 'Detroit Reman West' at 100 South Lodestone Way, Tooele UT 84074 as an active remanufacturing plant; founded 1996."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "DTNA's own locations system carries Detroit Reman West at the exact Tooele address; gauntlet found no closure/sale/WARN for Tooele.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2153,28 +2180,6 @@
         },
         "dossierExcerpt": "- Account: Daimler Truck North America\n- Type: Remanufacturing plant (engines/components)\n- Roster address: 3895 South Hughes Road, Hibbing, MN 55746\n- Resolved center: 47.393282, -92.829402\n- Method: deep-audit | Confidence: high",
         "mapsUrl": "https://www.google.com/maps/@47.393282,-92.829402,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/10-detroit-diesel-remanufacturing-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 47.393282,
-              "lng": -92.829402
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/10-detroit-diesel-remanufacturing-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 47.393282,
-              "lng": -92.829402
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Geocoded point (ROOFTOP, moved 115m) lands accurately on a single tan industrial building in open country on the Range Regional Airport property south of US-169 near Hibbing MN. Confirmed via DTNA press releases as Detroit Diesel Remanufacturing -- the Hibbing reman plant whose 2024 expansion doubled the footprint to ~120,000 sq ft and added BEV battery/inverter remanufacturing. Address 3895 South Hughes Road.",
           "truckGate": "No controlled truck gate. A single open driveway runs from US-169 down to the building's parking lots; Street View (captured 2025-08) shows no barrier arm, gate or guard booth, and no perimeter fence at the road -- the site is fully open.",
@@ -2188,6 +2193,25 @@
           "urbanRural": "Isolated site in open fields/farmland on airport property near Hibbing, a small northern-Minnesota town -> Rural.",
           "connectivityIssue": "Rural, isolated open-country location on the Iron Range; cellular coverage may be weaker. Hibbing town and the regional airport are nearby so it is not extreme -> recorded true at medium confidence, flagged uncertain.",
           "confidence": "High: the facility is positively identified and the small open layout reads clearly from satellite + recent (2025) Street View. Only the exact dock-door count and the inferred connectivity flag are uncertain."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://northamerica.daimlertruck.com/news-stories/2024/detroit-reman-facility-expansion-grand-opening-in-hibbing-minnesota",
+              "date": "2024-05-02",
+              "type": "press",
+              "claim": "DTNA press: Detroit Diesel Remanufacturing LLC held grand opening of its Hibbing, MN plant expansion (~doubling to 120,000 sq ft, +11 lines), at Range Regional Airport."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "DTNA-authored 2024 grand-opening release confirms current Detroit Reman operation at Hibbing; the only DTNA reman closure (Plainfield IN) consolidated work INTO Minnesota/Ohio.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2342,28 +2366,6 @@
         },
         "dossierExcerpt": "- Address: 4337 AllPoints Drive, Whitestown, IN 46075\n- Locked center: 39.977550, -86.363000\n- Maps: https://www.google.com/maps/@39.977550,-86.363000,400m/data=!3m1!1e3\n\nThe roster geocode (39.978443, -86.364644) moved 1,950 m and landed inside the\nAllPoints at Anson industrial park. Web research confirmed the facility is\n\"AllPoints at Anson Building 10,\" a 605,000 sq ft (570' x 1,026') LEED Silver\nbuild-to-suit Redistribution Center opened in 2023 for DTNA — its largest\ncentralized parts-consolidation node, replenishing the 10 PDCs across the US\nand Canada. The building was located in satellite imagery by matching the\nsingle largest fresh-construction warehouse with a 140'-deep south truck court\nand adjacent stormwater pond, consistent with the developer spec sheet\n(Browning / Prologis). Center locked on that building.",
         "mapsUrl": "https://www.google.com/maps/@39.977550,-86.363000,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/11-whitestown-redistribution-center-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.97755,
-              "lng": -86.363
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/11-whitestown-redistribution-center-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.97755,
-              "lng": -86.363
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed via web research as AllPoints at Anson Building 10, 4337 AllPoints Drive — a 605,000 sq ft (570' x 1,026') build-to-suit RDC opened 2023 for DTNA. Roster geocode moved 1,950 m; the rooftop pin landed near the building. Building center locked at 39.977550, -86.363000.",
           "truckGate": "No fencing, no gate, no guard booth visible anywhere on the property. Spec-built Prologis park building with open perimeter drive and two open driveway connections (north and southwest) to AllPoints Drive. Open-site archetype.",
@@ -2375,6 +2377,32 @@
           "entryExitSeparate": "Two separate open driveway connections to AllPoints Drive (one at the north end by car parking, one at the southwest corner) function as distinct in/out routes.",
           "urbanRural": "Edge-of-town setting but within the dense 616-acre AllPoints at Anson industrial park in metro Indianapolis; classified Urban for the industrial-park density and metro proximity.",
           "railServed": "No rail spur enters the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://northamerica.daimlertruck.com/news-stories/2023/daimler-truck-north-america-opens-redistribution-center-to-expand-parts-distribution-network",
+              "date": "2023-08",
+              "type": "press",
+              "claim": "DTNA opened a new 605,000+ sq ft Redistribution Center (RDC) in Whitestown, IN to replenish its ten PDCs across the U.S. and Canada; an addition to the network."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.ibj.com/articles/trucking-giant-opens-second-facility-in-whitestown-business-park",
+              "date": "2023-08-14",
+              "type": "press",
+              "claim": "DTNA's 605,000 sq ft RDC at 4337 AllPoints Drive is the company's SECOND facility in the park, complementing (not replacing) the 2017 PDC; leased (Prologis/Browning)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "DTNA-authored release + IBJ confirm a distinct, currently-operating leased RDC at 4337 AllPoints Drive; gauntlet found no Whitestown closure/consolidation.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2550,28 +2578,6 @@
         },
         "dossierExcerpt": "- Address: 4140 Anson Boulevard, Whitestown, IN 46075\n- Locked center: 39.979000, -86.386300\n- Maps: https://www.google.com/maps/@39.979000,-86.386300,400m/data=!3m1!1e3\n\nThe roster rooftop geocode (39.979271, -86.386135) moved only 181 m and landed\non the correct building. Web research confirms this is DTNA's 283,500 sq ft\nIndianapolis Parts Distribution Center, opened 2017 in the AllPoints at Anson\npark near I-65 ($12.35M lease/build). It processes ~7,000 parts/day and serves\nregional Freightliner / Western Star / Thomas Built Buses dealers. This is the\nolder, smaller of DTNA's two Whitestown facilities (the 605,000 sq ft RDC,\nidx 11, is ~1.6 km west).",
         "mapsUrl": "https://www.google.com/maps/@39.979000,-86.386300,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/12-indianapolis-parts-distribution-center-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.979,
-              "lng": -86.3863
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/12-indianapolis-parts-distribution-center-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.979,
-              "lng": -86.3863
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed via web research as the 283,500 sq ft Indianapolis PDC at 4140 Anson Boulevard, AllPoints at Anson park, opened 2017 by DTNA ($12.35M lease/build). Roster rooftop geocode moved only 181 m and landed on the correct building. Center locked at 39.979000, -86.386300.",
           "truckGate": "No perimeter fence, no barrier arm, no gate, no checkpoint at any road connection. Street View (2023-05) along Anson Boulevard shows open grass frontage and open driveways. Standard open spec-park layout.",
@@ -2584,6 +2590,32 @@
           "entryExitSeparate": "Two open driveway connections to Anson Boulevard (one near the NE office/car-park area, one toward the south truck court) act as separate in/out routes.",
           "urbanRural": "Within the dense AllPoints at Anson industrial park, near I-65 in metro Indianapolis; classified Urban.",
           "railServed": "No rail spur enters the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://locations.daimlertruck.com/en/career/locations/detail/whitestown-in-indianapolis-parts-distribution-center-pdc",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "DTNA locations system carries 'Whitestown, IN Indianapolis Parts Distribution Center (PDC)' at 4140 Anson Blvd, Whitestown IN 46075, founded 2017; supports Freightliner/Western Star/Thomas Built dealers."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.ibj.com/articles/trucking-giant-opens-second-facility-in-whitestown-business-park",
+              "date": "2023-08-14",
+              "type": "press",
+              "claim": "IBJ confirms the original 283,500 sq ft DTNA truck-parts PDC (opened 2017) and the 2023 RDC are TWO separate, both-operating facilities."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Distinct DTNA PDC at 4140 Anson Blvd (2017), confirmed by DTNA's own locator and IBJ which states it coexists with the separate RDC; no closure/relocation found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2756,28 +2788,6 @@
         },
         "dossierExcerpt": "- Address: 5745 Challenge Drive, Memphis, TN 38115\n- Locked center: 35.037650, -89.874050\n- Maps: https://www.google.com/maps/@35.037650,-89.874050,400m/data=!3m1!1e3\n\nThe roster geocode (35.037713, -89.873982) moved 3,427 m before landing in the\nMDC (Memphis Distribution Center) industrial park in the Hickory Hill area of\nMemphis. Web research (Daimler careers location page, LoopNet parcel APN\n09-3400-0-0603, multiple business listings) confirms DTNA's Memphis PDC is at\n5745 Challenge Drive in this park. The Memphis PDC serves regional Freightliner\n/ Western Star / Thomas Built Buses dealers and is DTNA's national distribution\ncenter for chassis parts.\n\nCaveat: MDC is a large multi-tenant industrial park (5625 = Building K /\n592,766 sq ft; 5750 = Building J / 420,000 sq ft; Cummins at 5800). DTNA leases",
         "mapsUrl": "https://www.google.com/maps/@35.037650,-89.874050,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/13-memphis-parts-distribution-center-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.03765,
-              "lng": -89.87405
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/13-memphis-parts-distribution-center-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.03765,
-              "lng": -89.87405
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Address 5745 Challenge Drive in the MDC (Memphis Distribution Center) industrial park, Hickory Hill, Memphis TN 38115 — confirmed via web (Daimler careers page, LoopNet parcel APN 09-3400-0-0603). Roster geocode moved 3,427 m; the corrected pin landed on a large warehouse in the MDC park. Center locked at 35.037650, -89.874050 on that building. Note: MDC is a multi-tenant park (5625 = Bldg K, 5750 = Bldg J, Cummins at 5800); DTNA leases the 5745 suite. The exact tenant footprint and dock allocation cannot be isolated from imagery alone — medium confidence on the precise building/zone boundaries.",
           "truckGate": "No barrier arm, sliding/swing gate, or guarded checkpoint on the truck side. Dock corridors are internal MDC park roads, open. A chain-link fence around the south-end CAR parking lot has an open vehicle gate — that is car-park perimeter security, not a truck gate.",
@@ -2792,6 +2802,32 @@
           "siteAreaAcres": "~24 acres for the single audited building plus its truck courts; approximate, flagged uncertain due to multi-tenant boundaries.",
           "urbanRural": "Dense industrial fabric within the City of Memphis (Hickory Hill); Urban.",
           "railServed": "No rail spur enters the audited building's property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://locations.daimlertruck.com/en/career/locations/detail/memphis-tn-memphis-parts-distribution-center-(pdc)",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Daimler Truck careers/locations page for the Memphis PDC at 5745 Challenge Drive, Memphis TN 38115; national distribution center for chassis parts."
+            },
+            {
+              "tier": 1,
+              "url": "https://northamerica.daimlertruck.com/company/locations",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "DTNA corporate locations page lists Memphis, TN at 5745 Challenge Drive, Memphis TN 38115 as a current company location."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Two current official Daimler Truck domain pages list the Memphis PDC at the exact address as active; only announced PDC relocations are Phoenix/Reno, not Memphis.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2982,28 +3018,6 @@
         },
         "dossierExcerpt": "- Address: 2510 Mill Center Parkway, Suite 100, Buford, GA 30518\n- Locked center: 34.117850, -83.982650\n- Maps: https://www.google.com/maps/@34.117850,-83.982650,400m/data=!3m1!1e3\n\nThe roster geocode (34.11763, -83.983054) moved 4,842 m before landing on the\ncorrect building. Positive confirmation: Street View shows a large\n\"DAIMLER - Daimler Trucks North America\" sign mounted on the building wall at\nthe southwest corner. The building is \"Bldg I,\" an 870,480 sq ft cross-dock\ndistribution facility (built 2006) in the Mill Center / Hamilton Mill business\npark. DTNA's Atlanta PDC occupies Suite 100; Radial (ecommerce fulfillment) and\nRNC Industries occupy other suites of this multi-tenant building.",
         "mapsUrl": "https://www.google.com/maps/@34.117850,-83.982650,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/14-atlanta-parts-distribution-center-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.11785,
-              "lng": -83.98265
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/14-atlanta-parts-distribution-center-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.11785,
-              "lng": -83.98265
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Positively confirmed: Street View shows a large 'DAIMLER - Daimler Trucks North America' sign on the building wall at the SW corner. Address 2510 Mill Center Parkway, Suite 100, Buford GA — building 'Bldg I', an 870,480 sq ft cross-dock distribution facility (built 2006) in the Mill Center / Hamilton Mill business park. Roster geocode moved 4,842 m; the corrected pin landed on the correct building. DTNA occupies Suite 100 (a portion of the multi-tenant building; Radial and RNC Industries occupy other suites). Center locked at 34.117850, -83.982650.",
           "truckGate": "TRUE. Street View shows a black ornamental perimeter fence with a swing gate enclosing the DTNA dock yard, separating the secured truck court from the public car parking lot at the DTNA suite.",
@@ -3019,6 +3033,32 @@
           "entryLanes": "Single gate lane; exact lane count not resolvable from imagery — flagged uncertain.",
           "urbanRural": "Mill Center / Hamilton Mill business park in Gwinnett County within metro Atlanta's industrial fabric; classified Urban.",
           "railServed": "No rail spur enters the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://northamerica.daimlertruck.com/company/locations",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "DTNA corporate locations page lists Buford, GA as a current PDC at 2510 Mill Center Parkway, Suite 100, Buford GA 30518."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.daimlertruck.com/career/locations/location-detail-page-366966.html",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "DTNA career system maintains a dedicated 'Buford, GA Atlanta Parts Distribution Center (PDC)' page supporting Freightliner/Western Star/Thomas Built aftermarket parts."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Current DTNA-owned sources (corporate locations + careers page) list Buford GA at the exact address (Suite 100) as an active leased PDC; no closure/sale/relocation found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3215,28 +3255,6 @@
         },
         "dossierExcerpt": "- Address: 3010 Roy Orr Blvd, Suite 140, Grand Prairie, TX 75050\n- Locked center: 32.797300, -97.031700\n- Maps: https://www.google.com/maps/@32.797300,-97.031700,400m/data=!3m1!1e3\n\nThe roster rooftop geocode (32.797248, -97.031664) moved only 111 m and landed\ndirectly on the correct building. Web research (Daimler careers location page,\nDTNA Dallas PDC business listings) confirms the facility is the 275,000 sq ft\nDallas Parts Distribution Center, serving regional Freightliner / Western Star\n/ Thomas Built Buses dealers. DTNA occupies Suite 140.",
         "mapsUrl": "https://www.google.com/maps/@32.797300,-97.031700,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/15-dallas-parts-distribution-center-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 32.7973,
-              "lng": -97.0317
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/15-dallas-parts-distribution-center-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 32.7973,
-              "lng": -97.0317
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Address 3010 Roy Orr Blvd, Suite 140, Grand Prairie TX 75050 — DTNA Dallas PDC, a 275,000 sq ft facility, confirmed via Daimler careers location page and business listings. Roster rooftop geocode moved only 111 m and landed on the correct building. Center locked at 32.797300, -97.031700.",
           "truckGate": "TRUE. Street View (2024-12) shows a chain-link perimeter fence enclosing the south truck court / dock yard, with a controlled slide gate at the driveway entrance — a truck was captured driving in through the gate.",
@@ -3251,6 +3269,32 @@
           "fastLaneOpportunity": "Single gated entrance into the fenced yard; no obvious unused paved width for an express bypass at the gate.",
           "urbanRural": "Dense industrial district of Grand Prairie within the Dallas-Fort Worth metroplex; Urban.",
           "railServed": "No rail spur enters the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://locations.daimlertruck.com/en/career/locations/detail/grand-prairie-tx-dallas-parts-distribution-center-(pdc)",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Daimler Truck careers page for the Dallas PDC at 3010 Roy Orr Blvd Suite 140, Grand Prairie TX 75050; supports Freightliner/Western Star/Thomas Built dealers."
+            },
+            {
+              "tier": 1,
+              "url": "https://northamerica.daimlertruck.com/company/locations",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "DTNA corporate locations page lists the Dallas PDC at 3010 Roy Orr Boulevard, Grand Prairie TX 75050 among current operating sites."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Two current official daimlertruck.com pages name DTNA's own Dallas PDC at the exact address; gauntlet clean (2026-27 relocations hit Phoenix/Reno, not Dallas).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3439,28 +3483,6 @@
         },
         "dossierExcerpt": "- Address: 1000 SE 19th Street, Grimes, IA 50111\n- Locked center: 41.671050, -93.783700\n- Maps: https://www.google.com/maps/@41.671050,-93.783700,400m/data=!3m1!1e3\n\nThe roster geocode (41.671071, -93.783676) moved 1,901 m and landed on the\ncorrect building. Web research (DTNA press release, Grimes Iowa and Greater Des\nMoines Partnership business directories) confirms this is DTNA's Iowa / Des\nMoines Parts Distribution Center — the 9th PDC in DTNA's network, serving 200+\ndealers across the Midwest and Great Plains, ~50 employees on two shifts,\nreceiving up to 8 truckloads/day. The facility's footprint was doubled in a\n2024 expansion.",
         "mapsUrl": "https://www.google.com/maps/@41.671050,-93.783700,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/16-des-moines-parts-distribution-center-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.67105,
-              "lng": -93.7837
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/daimler-truck-north-america/16-des-moines-parts-distribution-center-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.67105,
-              "lng": -93.7837
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Address 1000 SE 19th Street, Grimes IA — DTNA's Iowa / Des Moines Parts Distribution Center, the 9th PDC in DTNA's network, serving 200+ Midwest/Great Plains dealers; 50 employees, two shifts, up to 8 truckloads/day; footprint doubled in a 2024 expansion. Confirmed via DTNA press release and Grimes/Greater Des Moines business directories. Roster geocode moved 1,901 m; the corrected pin landed on the correct building. Center locked at 41.671050, -93.783700.",
           "truckGate": "No perimeter fence, no barrier arm or gate, no guarded checkpoint at any road connection. Street View (2022-10) shows open grass frontage and uncontrolled driveways. Standard open spec-park layout.",
@@ -3475,6 +3497,32 @@
           "urbanRural": "Borderline. The PDC sits at the development edge of Grimes (a fast-growing Des Moines suburb) with farmland on the immediate west/south, but surrounded by an industrial park, big-box retail and dense residential subdivisions; classified Urban for the metro-Des-Moines suburban-industrial setting — flagged uncertain.",
           "connectivityIssue": "FALSE. Within a developed metro-Des-Moines industrial/retail area, not isolated; cellular coverage expected to be normal.",
           "railServed": "No rail spur enters the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://northamerica.daimlertruck.com/company/locations",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "DTNA corporate locations page lists 'Des Moines Parts Distribution Center, 1000 SE 19th Street, Grimes, IA 50111' as an active DTNA location."
+            },
+            {
+              "tier": 1,
+              "url": "https://northamerica.daimlertruck.com/news-stories/2025/daimler-truck-north-america-announces-strategic-relocation-of-reno-and-phoenix-parts-distribution-centers",
+              "date": "2025-06-26",
+              "type": "press",
+              "claim": "DTNA's June 2025 PDC-network strategy release names only Phoenix and Reno PDCs for relocation; Grimes/Des Moines is not relocated, closed, or consolidated."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Exact-address match on DTNA's own live locations page; 2025 PDC restructure and layoffs do not touch Grimes; no WARN/closure found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       }
     ]

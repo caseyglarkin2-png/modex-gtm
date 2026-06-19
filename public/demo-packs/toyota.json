@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-02T14:58:01.654Z",
+  "builtAt": "2026-06-19T03:20:18.975Z",
   "account": {
     "slug": "toyota",
     "displayName": "Toyota Motor North America",
@@ -9,11 +9,11 @@
     "coverageNote": {
       "auditedCount": 17,
       "estimatedFootprint": 22,
+      "totalGlobalFootprint": 50,
+      "auditedScope": "NA",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Toyota Motor Corporation operates ~50 production plants globally; ~22 in NA (TMMK Kentucky, TMMI Indiana, TMMTX Texas, TMMMS Mississippi, TMMAL Alabama, TMMWV West Virginia, TMMC Cambridge ON, TMMBC Tijuana, TMMGT Guanajuato, parts DCs, R&D, NAMC HQ). We audited 17. International scope on request.",
-      "auditedScope": "NA",
-      "totalGlobalFootprint": 50
+      "note": "Toyota Motor Corporation operates ~50 production plants globally; ~22 in NA (TMMK Kentucky, TMMI Indiana, TMMTX Texas, TMMMS Mississippi, TMMAL Alabama, TMMWV West Virginia, TMMC Cambridge ON, TMMBC Tijuana, TMMGT Guanajuato, parts DCs, R&D, NAMC HQ). We audited 17. International scope on request."
     },
     "featuredSiteId": "08-huntsville-al-engine",
     "dossierIntro": "Toyota runs the second-largest greenfield auto manufacturing footprint we audited. 50 facilities; we audited 17. Toyota Manufacturing Alabama is 275 acres. Liberty NC Battery Manufacturing is 1,116 acres. 5,896 total audited acres. 4,577 trailer spots. YardFlow runs supplier inbound and finished-vehicle outbound on the same protocol regardless of EV or ICE production.",
@@ -182,28 +182,6 @@
         },
         "dossierExcerpt": "The roster coordinate (38.257524, -84.547591) geocoded ~5.4 km off — it landed on\nI-75 / open land on the SW edge of the property, confirmed by a satellite probe\nshowing only highway and trees. Recentering east on the white-roofed industrial\nmass produced the real plant. Web research confirms TMMK at 1001 Cherry Blossom\nWay, Georgetown KY — Toyota's largest plant globally (~7.5M sq ft under roof on a\n~1,300-acre campus, producing Camry/Camry Hybrid/RAV4 Hybrid/Lexus ES). Locked\ncampus center at 38.262, -84.535.",
         "mapsUrl": "https://www.google.com/maps/@38.262,-84.535,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/toyota/01-georgetown-ky-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 38.262,
-              "lng": -84.535
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/toyota/01-georgetown-ky-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 38.262,
-              "lng": -84.535
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "site": "Toyota's largest plant globally (~7.5M sq ft under roof, ~1,300-acre campus). Fully fenced, multi-building manufacturing campus with central assembly plant, two large inbound-logistics/cross-dock buildings on the SE side, powertrain/engine buildings, and a paint/utility cluster.",
           "truckGate": "TMMK is a fully fenced, security-controlled campus. Toyota numbers its gates (visitor route uses 'Gate 2'). Street View on internal roads and at a perimeter fence line shows chain-link perimeter fencing with a cantilever/swing gate across an access drive. Truck gates are controlled checkpoints.",
@@ -215,6 +193,32 @@
           "shipRcvSeparate": "Inbound parts/cross-dock logistics complex (SE) is physically separate from finished-vehicle outbound staging and from the assembly building dock courtyards.",
           "fastLaneOpportunity": "Wide multi-lane internal approach roads and large gate aprons leave clear room for express/bypass lanes.",
           "perimeter": "Box covers the core fenced developed campus; outlying TMMK-owned land (test track, retention areas) extends beyond it."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://newkentuckyhome.ky.gov/Newsroom/NewsPage/20251120_TMMK_Hybrid",
+              "date": "2025-11-20",
+              "type": "econ-dev",
+              "claim": "KY Cabinet for Economic Development: TMMK Georgetown employs ~10,000, ~550k vehicles + 700k engines/yr, $204.4M expansion"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.areadevelopment.com/newsItems/11-24-2025/toyota-motor-manufacturing-georgetown-kentucky.shtml",
+              "date": "2025-11-24",
+              "type": "press",
+              "claim": "Toyota expands Georgetown KY assembly, Toyota largest global plant, operating since 1988"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "State econ-dev (Nov 2025) attests TMMK actively operating with ongoing $204.4M expansion; no Tier-2 negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -411,28 +415,6 @@
         },
         "dossierExcerpt": "The roster coordinate (38.291234, -87.565041) geocoded ~6.4 km off but still\nlanded within the property. A wide satellite probe immediately showed the large\nwhite-roofed assembly complex surrounded by farmland on Tulip Tree Drive west of\nPrinceton, IN — unambiguously TMMI. Locked campus center at 38.290, -87.563.",
         "mapsUrl": "https://www.google.com/maps/@38.29,-87.563,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/toyota/02-princeton-in-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 38.29,
-              "lng": -87.563
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/toyota/02-princeton-in-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 38.29,
-              "lng": -87.563
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "site": "TMMI — Toyota's Indiana assembly plant (Highlander, Grand Highlander, 3-row BEV SUV; $8B total IN investment incl. $1.4B BEV retool). Large central white-roof assembly building plus ~8 supporting structures (logistics/cross-dock, paint, supplier buildings, on-site test track on the east).",
           "truckGate": "Fully fenced, security-controlled automotive plant set in farmland. Wide multi-lane internal approach road (Tulip Tree Drive) leads from the public road into the plant; truck entrances are controlled checkpoints. truckGate true with high confidence.",
@@ -445,6 +427,32 @@
           "fastLaneOpportunity": "Wide multi-lane approach roads and large gate aprons leave clear room for express/bypass lanes.",
           "railServed": "Rail spur serves the plant (standard for an assembly plant of this scale; rail-served areas visible on campus).",
           "perimeter": "Box covers the core developed plant campus; TMMI owns substantial additional open buffer land beyond it."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://pressroom.toyota.com/toyota-charges-up-investment-and-jobs-in-u-s-manufacturing/",
+              "date": "2024-04",
+              "type": "press",
+              "claim": "$1.4B in Princeton IN plant for BEV/battery; assembles Sienna, Highlander, Grand Highlander, Lexus TX"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.evansvilleregion.com/business-retention-expansion-bre/toyota-announces-200-million-investment-at-toyota-indiana-in-princeton/",
+              "date": "2026-03",
+              "type": "econ-dev",
+              "claim": "Toyota Indiana (Princeton) currently produces Grand Highlander, Highlander, Lexus TX, Sienna Hybrid; $200M expansion"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Tier-1 sources (latest Mar 2026) confirm active multi-model production at TMMI Princeton; no closure/sale negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -642,28 +650,6 @@
         },
         "dossierExcerpt": "The roster coordinate (29.260605, -98.545494) was GEOMETRIC_CENTER precision and\nlanded on the SW edge of the campus (open land / undeveloped tracts confirmed by\nsatellite probes). A wide satellite probe immediately showed the large industrial\ncomplex in far-south San Antonio. Web research confirms TMMTX at 1 Lone Star Pass:\nthe $1.2B Tundra/Tacoma plant Chris Nielsen designed and built (2003-2006), with\nits distinctive integrated on-site supplier park. Locked the developed-campus\ncenter at 29.2625, -98.5425.",
         "mapsUrl": "https://www.google.com/maps/@29.2625,-98.5425,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/toyota/03-san-antonio-tx-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 29.2625,
-              "lng": -98.5425
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/toyota/03-san-antonio-tx-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 29.2625,
-              "lng": -98.5425
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "site": "TMMTX — the $1.2B San Antonio assembly plant that Chris Nielsen designed and built (2003-2006); produces Tundra and Tacoma trucks. Notable for an integrated on-site supplier park: ~20 co-located Tier-1 supplier buildings inside the campus feeding the assembly line directly.",
           "truckGate": "Fully fenced, security-controlled campus. Web sources confirm the main gate is reached where Lone Star Pass / Watson Rd dead-ends into the campus at Applewhite Rd, with visitors continuing through the intersection to the Main Gate. Truck entrances are controlled checkpoints. truckGate true, high confidence.",
@@ -676,6 +662,32 @@
           "fastLaneOpportunity": "Wide multi-lane internal roads and large gate aprons leave room for express/bypass lanes.",
           "railServed": "Rail-served (standard for an assembly plant of this scale; the plant was master-planned with rail access).",
           "perimeter": "Box covers the core developed campus including the supplier park; TMMTX owns substantial additional buffer/test-track land beyond it."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://pressroom.toyota.com/facility/toyota-motor-manufacturing-texas/",
+              "date": "2025-12",
+              "type": "locator",
+              "claim": "TMMTX San Antonio assembles Tundra, Tundra HEV, Sequoia HEV; 3,700+ employees; 197,506 vehicles in 2025"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.ksat.com/news/local/2026/05/15/toyota-plans-to-expand-manufacturing-plant-in-san-antonio/",
+              "date": "2026-05-15",
+              "type": "press",
+              "claim": "Toyota filed May 2026 plans for $2B new assembly line at active San Antonio plant"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Tier-1 pressroom confirms active Tundra/Sequoia assembly + 2026 expansion; no negative for this plant.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -805,28 +817,6 @@
         },
         "dossierExcerpt": "The roster coordinate (34.38039, -88.895064) was ROOFTOP precision and landed\ndirectly on the plant. A wide satellite probe confirmed the large white-roofed\nassembly building in heavily forested rural NE Mississippi between Tupelo and\nPontotoc — unambiguously TMMMS (Corolla / Corolla Cross plant). Locked center at\n34.3805, -88.8950.",
         "mapsUrl": "https://www.google.com/maps/@34.3805,-88.895,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/toyota/04-blue-springs-ms-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.3805,
-              "lng": -88.895
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/toyota/04-blue-springs-ms-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.3805,
-              "lng": -88.895
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "site": "TMMMS — Toyota's Mississippi assembly plant (Corolla, Corolla Cross). Single large central assembly building (one contiguous footprint) plus a few small ancillary structures, set in heavily forested rural NE Mississippi between Tupelo and Pontotoc.",
           "truckGate": "Fully fenced, security-controlled automotive assembly plant with a perimeter loop road. Wide multi-lane internal approach roads with roundabouts lead from the public highway into the campus; truck entrances are controlled checkpoints. truckGate true, high confidence.",
@@ -840,6 +830,32 @@
           "fastLaneOpportunity": "Wide multi-lane internal approach roads and large gate aprons leave clear room for express/bypass lanes.",
           "railServed": "Rail-served (standard for an assembly plant of this scale; planned with rail access).",
           "perimeter": "Box covers the core developed campus; TMMMS owns extensive additional forested buffer land beyond it."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://pressroom.toyota.com/facility/toyota-motor-manufacturing-mississippi/",
+              "date": "2025-11",
+              "type": "locator",
+              "claim": "TMMMS Blue Springs MS, 2,400 team assembles Corolla; 188,543 vehicles in 2025; 1,500+ acre site"
+            },
+            {
+              "tier": 1,
+              "url": "https://pressroom.toyota.com/toyota-boosts-hybrid-production-with-912-million-investment-creating-252-new-u-s-manufacturing-jobs/",
+              "date": "2025-11-18",
+              "type": "press",
+              "claim": "$125M into Blue Springs MS to add hybrid Corolla; plant employs 2,400"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Two Tier-1 Toyota sources confirm current Corolla assembly + Nov 2025 expansion; no closure/WARN negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -968,28 +984,6 @@
         },
         "dossierExcerpt": "Roster coordinates (38.597545, -81.993022, GEOMETRIC_CENTER, ~2 km move) landed\non employee parking between the plant buildings. Satellite probing at z16–z20\naround that point positively identified the facility: a very large multi-building\nmanufacturing complex sandwiched between the Kanawha River (west) and a public\nroad (south/east), near the small town of Buffalo, WV. Web search confirmed the\naddress (1 Sugar Maple Lane) and that TMMWV builds engines and transmissions only\n— no vehicle assembly. The locked center 38.598, -81.992 sits over the main\nnorthern powertrain building.",
         "mapsUrl": "https://www.google.com/maps/@38.598,-81.992,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/toyota/05-buffalo-wv-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 38.598,
-              "lng": -81.992
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/toyota/05-buffalo-wv-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 38.598,
-              "lng": -81.992
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Site is fully chain-link perimeter-fenced (visible in 2024-10 Street View along the public road). Truck/dock operations are inside a controlled fenced perimeter; truck access is gated. Plant-property gate not directly visible in Street View (coverage stops at the public road) so the gate structure type is inferred.",
           "guardShack": "No guard booth could be positively identified in imagery; main employee/visitor entrance from the public road is an open unguarded driveway opening into employee parking. Marked false / remoteGs true as a medium-confidence call - a TPS plant of this scale very likely has controlled truck check-in but the structure is not confirmable from overhead.",
@@ -1002,6 +996,32 @@
           "urbanRural": "Rural - the plant sits between the Kanawha River and farmland near the small town of Buffalo, WV; surrounded by open fields.",
           "railServed": "No rail spur runs into the property; the plant ships engines/transmissions by truck.",
           "siteAreaAcres": "~311 acres for the fenced industrial footprint; excludes the adjacent solar farm on a separate parcel to the east."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://pressroom.toyota.com/facility/toyota-motor-manufacturing-west-virginia/",
+              "date": "2025-11-18",
+              "type": "locator",
+              "claim": "TMMWV Buffalo WV active: TNGA 4-cyl engines, transmissions, hybrid transaxles; ~2,077 team; $3.3B investment"
+            },
+            {
+              "tier": 1,
+              "url": "https://westvirginia.gov/west-virginia-secures-largest-share-of-toyotas-912-million-u-s-hybrid-manufacturing-investment/",
+              "date": "2025-11",
+              "type": "econ-dev",
+              "claim": "WV Div. of Economic Development: Buffalo plant largest recipient of Toyota $912M US hybrid investment, +80 jobs"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Toyota Nov 2025 pressroom/facility page + WV econ-dev confirm active powertrain ops + expansion; no negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1131,28 +1151,6 @@
         },
         "dossierExcerpt": "Roster coordinates (34.677446, -86.8589, ROOFTOP, moved only 8 m) were highly\nprecise. Satellite probing at z14–z20 positively identified the facility: an\nenormous greenfield vehicle-assembly campus on the Greenbrier megasite southwest\nof Huntsville, AL. Street View (April 2026) of the entrance road confirmed the\n\"MAZDA TOYOTA\" building signage. The campus center is over the main assembly /\nbody / paint building cluster at 34.6835, -86.848 — the roster point sat at the\nSW corner of the very large property.",
         "mapsUrl": "https://www.google.com/maps/@34.6835,-86.848,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/toyota/06-huntsville-al-mtmus-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.6835,
-              "lng": -86.848
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/toyota/06-huntsville-al-mtmus-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.6835,
-              "lng": -86.848
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Massive JV assembly campus, fully perimeter-fenced (chain-link visible in 2026-04 Street View). Truck/dock operations are inside the secured perimeter; multiple controlled access points serve trucks. The truck gate structures are not directly viewable in Street View (coverage is limited to the public approach roads) so the gate-type call is inferred.",
           "guardShack": "Main employee/visitor entrance off Greenbrier Pkwy is an open parking lot fronting the 'MAZDA TOYOTA' main building - no guard booth on that side. A guard/dispatch building could not be positively confirmed at the truck gates from overhead imagery. guardShack false / remoteGs true at medium confidence; both flagged uncertain.",
@@ -1167,6 +1165,32 @@
           "railServed": "No rail spur observed running into the property.",
           "truckGateCount": "Estimated 2 truck access points; the campus has several gated road junctions, exact count uncertain.",
           "siteAreaAcres": "~504 acres for the fenced campus footprint."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://pressroom.toyota.com/10-things-to-know-about-mazda-toyota-manufacturing/",
+              "date": "2023-05-05",
+              "type": "press",
+              "claim": "MTM is a 50/50 Mazda-Toyota JV producing Toyota Corolla Cross (and Mazda CX-50) on two lines in Huntsville AL"
+            },
+            {
+              "tier": 1,
+              "url": "https://whnt.com/news/huntsville/huntsvilles-mazda-toyota-plant-suspending-production-for-canadian-market-to-focus-on-u-s/",
+              "date": "2025-04",
+              "type": "press",
+              "claim": "Apr 2025: MTM still building for North American market; only Canada-market trim suspended, plant operations unaffected"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "50/50 Mazda-Toyota JV (operator marked self for schema); Toyota co-operates active Corolla Cross assembly; no closure negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1312,28 +1336,6 @@
         },
         "dossierExcerpt": "The roster coordinates (35.896442, -79.642555) had a flagged 11.4 km geocode\nmove and pointed at the town of Liberty, not the plant. Web search confirmed\nTBMNC sits on the Greensboro-Randolph Megasite off US-421 southeast of\nLiberty. A wide satellite scan (z13) located the unmistakable mega-industrial\ncomplex and the operational plant building cluster was locked at ~35.8955,\n-79.6300.",
         "mapsUrl": "https://www.google.com/maps/@35.8955,-79.63,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/toyota/07-liberty-nc-battery-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.8955,
-              "lng": -79.63
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/toyota/07-liberty-nc-battery-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.8955,
-              "lng": -79.63
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "_general": "TBMNC is a $13.9B greenfield battery megasite on the Greensboro-Randolph Megasite. The latest available Maxar satellite imagery shows the site mid-construction - large operational buildings are complete (the plant has produced HEV batteries since 2025) but extensive areas remain graded construction land and additional production phases are still being built. Yard configuration is therefore still in flux and most classification values are best-effort estimates flagged uncertain.",
           "_location": "Roster coordinates (35.896442, -79.642555) moved 11.4 km and pointed near Liberty town center, NOT the plant. The actual megasite was relocated by web search + satellite scan to ~35.8955, -79.6300, southeast of Liberty along the megasite access roads off US-421.",
@@ -1345,6 +1347,39 @@
           "urbanRural": "Rural - the megasite is greenfield, surrounded by farmland and woods in northeast Randolph County near the small town of Liberty.",
           "railServed": "No rail spur observed entering the operational footprint in current imagery.",
           "siteAreaAcres": "~1,116 acres for the active/operational footprint estimated here; the full Greensboro-Randolph Megasite parcel is ~1,850 acres."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://pressroom.toyota.com/facility/toyota-battery-manufacturing-north-carolina/",
+              "date": "2025-06",
+              "type": "locator",
+              "claim": "TBMNC began shipping batteries June 2025; four HEV lines in operation; started HEV battery production in 2025"
+            },
+            {
+              "tier": 1,
+              "url": "https://global.toyota/en/newsroom/corporate/42193203.html",
+              "date": "2025-06",
+              "type": "press",
+              "claim": "Toyota powers on new North Carolina automotive battery plant; production operational"
+            },
+            {
+              "tier": 1,
+              "url": "https://pressroom.toyota.com/10-things-to-know-toyotas-new-battery-manufacturing-plant-in-north-carolina/",
+              "date": "2025-06",
+              "type": "press",
+              "claim": "First products (HEV batteries for Corolla Cross, Camry, RAV4) shipping to Toyota plants in AL and KY"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Watch item cleared: Toyota PR confirms HEV battery production STARTED and SHIPPED June 2025 (operational, not under-construction); BEV/PHEV phases still ramping.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1533,28 +1568,6 @@
         },
         "dossierExcerpt": "Roster coordinates (34.829479, -86.638376, ROOFTOP, ~3.4 km move) landed\ncorrectly on a large industrial plant building north of Huntsville. Satellite\nprobing at z15–z21 confirmed a single large engine-plant building with trailers\nbacked into the east face and large trailer drop yards to the north — fully\nconsistent with the TMMAL engine plant. This is **distinct from the Mazda-Toyota\nJV assembly plant (idx 6)** — they are two separate Toyota facilities in the\nHuntsville area.",
         "mapsUrl": "https://www.google.com/maps/@34.8295,-86.6375,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/toyota/08-huntsville-al-engine-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.8295,
-              "lng": -86.6375
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/toyota/08-huntsville-al-engine-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.8295,
-              "lng": -86.6375
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Positively confirmed - a controlled truck checkpoint on the truck lane at the SE side of the property (~34.8278, -86.6360): a marked pinch-point lane with crosswalk-style stripes across the truck lane and a checkpoint structure beside it.",
           "guardShack": "Positively confirmed - a small blue-roofed booth-sized structure (≈1-vehicle footprint) sits directly beside the marked truck-gate lane, with guards' vehicles parked alongside. Classic staffed guard booth.",
@@ -1569,6 +1582,32 @@
           "railServed": "No rail spur runs into the property.",
           "siteAreaAcres": "~275 acres fenced plant footprint (excludes the adjacent solar farm).",
           "_note": "TMMAL is the Toyota engine plant (V6/V8 engines), distinct from the nearby Mazda-Toyota JV assembly plant (idx 6). The two are separate Huntsville-area Toyota facilities."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://pressroom.toyota.com/the-heartbeat-of-toyota-lies-in-alabama/",
+              "date": "2024-01",
+              "type": "press",
+              "claim": "TMMAL Huntsville engine plant; only plant building 4-cyl, V6, V8 under one roof; 1,500+ team, 3,000+ engines/day"
+            },
+            {
+              "tier": 3,
+              "url": "https://businessalabama.com/toyota-marks-record-for-engine-production/",
+              "date": "2025-01",
+              "type": "press",
+              "claim": "Toyota Alabama engine plant produced over 895,000 engines in 2024, a new record"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Operational engine plant (distinct from MTMUS assembly JV); record 2024 output + ongoing investment; no negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1672,28 +1711,6 @@
         },
         "dossierExcerpt": "The roster coordinates (38.963601, -90.969039, ROOFTOP, ~1.9 km move) landed\ndirectly on a large white-roofed industrial building northeast of Troy, MO.\nSatellite at zoom 16-19 confirms a single dominant ~550,000 sq ft manufacturing\nbuilding with a casting-plant signature (roof exhaust stacks, multiple support\nbuildings, electrical substation, water-treatment structures). Street View at\nthe north entrance shows a **Toyota monument sign reading \"TOYOTA — MOTOR\nMANUFACTURING MISSOURI, PROCESSING\"**, positively identifying the site as\nTMMMO / the former Bodine Aluminum Troy plant. Web research corroborates:\nBodine Aluminum Troy is a 550,000 sq ft plant on ~75 acres, ~1,000+ employees,\nproducing 4/6/8-cylinder aluminum castings for Toyota's North American assembly\noperations (recently $57.1M expansion for hybrid cylinder-head line, 2025).",
         "mapsUrl": "https://www.google.com/maps/@38.96360,-90.96904,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/toyota/09-troy-mo-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 38.9636,
-              "lng": -90.96904
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/toyota/09-troy-mo-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 38.9636,
-              "lng": -90.96904
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Single controlled entrance off the public road on the north side; Toyota monument sign + paved entrance with lane split.",
           "guardShack": "Staffed gatehouse confirmed in Street View (2024-09): a small grey 1-2-vehicle-footprint booth set in the median of the entrance drive, lanes splitting around it.",
@@ -1702,6 +1719,32 @@
           "fastLaneOpportunity": "Wide entrance apron and generous paved width at the gate; physical room to add an express lane.",
           "multipleFacilities": "Single primary plant building plus ancillary structures (water treatment, electrical substation, smaller support buildings) — one operational facility, not a multi-building campus.",
           "railServed": "No rail spur visible entering the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://pressroom.toyota.com/facility/toyota-motor-manufacturing-missouri/",
+              "date": "2025-11",
+              "type": "locator",
+              "claim": "Toyota Motor Manufacturing Missouri (former Bodine Aluminum), Troy MO; cylinder-head casting; largest private employer in Lincoln County"
+            },
+            {
+              "tier": 1,
+              "url": "https://pressroom.toyota.com/toyota-missouri-assembles-essential-components-for-vehicles-in-the-u-s/",
+              "date": "2025-11",
+              "type": "press",
+              "claim": "$57.1M investment + 57 new jobs + new hybrid cylinder-head line at Troy MO plant"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Current Toyota operation (renamed from Bodine Aluminum 2020); active Nov 2025 expansion confirms ongoing operations.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1828,28 +1871,6 @@
         },
         "dossierExcerpt": "The roster geocode (35.597387, -88.940858) was flagged with a 14 km move,\nso the location was verified carefully. Satellite at zoom 16 over the roster\ncoordinates shows a large industrial plant complex set in farmland/woods\nnortheast of Jackson, TN, with a long access drive running south to a public\nroad, large employee parking, and a multi-section manufacturing building. Web\nresearch confirms the address (301 James Lawrence Road) and that the site is\nToyota Motor Manufacturing Tennessee — the former Bodine Aluminum Jackson\nplant (renamed from Bodine Aluminum to TMMTN in 2020). Street View at the\nentrance shows a Toyota monument sign, positively identifying the site.\nThe roster coordinates land correctly on the plant — the 14 km flag did not\nindicate an error.",
         "mapsUrl": "https://www.google.com/maps/@35.59800,-88.94100,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/toyota/10-jackson-tn-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.598,
-              "lng": -88.941
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/toyota/10-jackson-tn-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.598,
-              "lng": -88.941
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Single controlled entrance off the public road on the south side; long access drive leads to a gatehouse with a barrier arm visible across the road in zoom-20 imagery.",
           "guardShack": "Staffed gatehouse confirmed: a white security building set beside the entrance drive with a horizontal barrier-arm gate spanning the truck lane; trucks/trailers staged just inside.",
@@ -1861,6 +1882,32 @@
           "multipleFacilities": "One large interconnected casting-plant complex plus a few support structures (utility buildings, materials yard) — single operational facility.",
           "railServed": "No active rail spur runs into the plant property.",
           "urbanRural": "Large isolated industrial tract on the edge of Jackson, TN surrounded by farmland and woods — Rural per rubric, but a sizeable town is nearby so connectivity is fine."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://pressroom.toyota.com/facility/toyota-motor-manufacturing-tennessee/",
+              "date": "2025-01",
+              "type": "locator",
+              "claim": "Toyota Motor Manufacturing Tennessee (former Bodine Aluminum), Jackson TN; casts engine blocks + hybrid transaxle cases; ~450 team"
+            },
+            {
+              "tier": 1,
+              "url": "https://pressroom.toyota.com/a-renewed-purpose-toyota-tennessee-builds-engine-parts-from-recycled-aluminum/",
+              "date": "2025-01",
+              "type": "press",
+              "claim": "$71.4M investment + 33 new jobs to increase hybrid transaxle/engine-block production at Jackson TN"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Current Toyota operation (renamed from Bodine Aluminum 2020); 2025 expansion confirms active operations.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1995,28 +2042,6 @@
         },
         "dossierExcerpt": "The roster geocode (33.872001, -118.162735, GEOMETRIC_CENTER) lands in a dense\nindustrial cluster in north Long Beach. Web research confirms TABC at 6375 N\nParamount Blvd — a 430,700 sq ft manufacturing facility on ~30 acres, the\nfirst Toyota plant in North America (established 1972), supplying Tacoma parts\nand past-model service parts. Street View along Paramount Blvd positively\nidentifies the building: a long industrial building with red/cream banding and\na tall stack, fronting Paramount behind a hedge and steel security fence, with\nthe address numerals visible on the wall. The TABC plant is the large\nwhite-roofed multi-section building on the west side of Paramount Blvd.",
         "mapsUrl": "https://www.google.com/maps/@33.87150,-118.16200,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/toyota/11-long-beach-ca-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.8715,
-              "lng": -118.162
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/toyota/11-long-beach-ca-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.8715,
-              "lng": -118.162
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Fully fenced urban plant; controlled vehicle gates in the steel perimeter fence off N Paramount Blvd confirmed in Street View (2022/2025). Truck access is gated.",
           "guardShack": "No distinct freestanding guard-booth structure beside a truck lane was visible in imagery. A modern office building sits at the north entrance — check-in is likely handled at/near the office rather than a standalone booth. Flagged uncertain.",
@@ -2028,6 +2053,32 @@
           "railServed": "A rail line runs along the far west of the industrial district but does not clearly spur into the TABC property; treated as not rail-served.",
           "multipleFacilities": "One large multi-section manufacturing complex (stamping/welding/cat-converter) plus support structures and a separate office building — single operational facility, not a multi-building campus.",
           "siteAreaAcres": "Web sources cite ~30 acres; parcel boundaries in the dense industrial district are hard to delineate from imagery — perimeter box estimates ~27 acres."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://pressroom.toyota.com/good-as-gold-tabc-the-can-do-plant-celebrates-50-years-of-success/",
+              "date": "2022-09",
+              "type": "press",
+              "claim": "TABC operating in Long Beach; ~350 team; stamps sheet metal, steering columns, catalytic converters; primary supplier of Tacoma parts"
+            },
+            {
+              "tier": 1,
+              "url": "https://pressroom.toyota.com/27-million-investment-to-expand-toyotas-long-beach-manufacturing-capabilities/",
+              "date": "2022-03",
+              "type": "press",
+              "claim": "$27M investment in TABC for first coil-fed laser blanking line"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Operating; 2015 layoff was assembly-to-parts business-model shift, not closure; fresh $27M investment 2022, ~350 staff.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2160,28 +2211,6 @@
         },
         "dossierExcerpt": "The roster geocode (39.053725, -84.707684, ROOFTOP) lands directly on a very\nlarge distribution warehouse in the Hebron, KY industrial corridor near CVG\nairport. Web research confirms NAPCK at 2450 Wright Blvd, Hebron — Toyota's\nNorth American Parts Center Kentucky, a critical logistics hub that handles\nthe flow of 117,000+ service parts and accessories between assembly plants /\nsuppliers and 12 US Parts Distribution Centers. The building's scale (a huge\nsingle-footprint warehouse with extensive dock banks and trailer yards) is\nfully consistent with a national parts hub.",
         "mapsUrl": "https://www.google.com/maps/@39.05330,-84.70900,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/toyota/12-hebron-ky-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.0533,
-              "lng": -84.709
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/toyota/12-hebron-ky-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.0533,
-              "lng": -84.709
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Large fenced Toyota parts-distribution hub set back from the public road (Aero Pkwy); a controlled access road funnels traffic onto the property. Truck access is gated.",
           "guardShack": "Set true on the strong prior that NAPCK — a critical national Toyota parts hub feeding 12 US PDCs — runs a staffed truck-gate checkpoint. A standalone booth could not be positively isolated in imagery (truck-side access is tree-screened from the public road); flagged uncertain.",
@@ -2193,6 +2222,25 @@
           "railServed": "No rail spur visible running into the property.",
           "urbanRural": "Industrial-park setting near the CVG airport / Hebron, KY — edge-of-town industrial amid open land and other big-box DCs; classified Rural per rubric. CVG corridor has good connectivity, so connectivityIssue = false.",
           "siteAreaAcres": "Perimeter box ~93 acres capturing the warehouse plus its surrounding drop yards and parking."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://pressroom.toyota.com/parts-in-motion-inside-the-north-american-parts-center-kentucky-operations/",
+              "date": "2024-01",
+              "type": "locator",
+              "claim": "NAPCK is Toyota largest parts procurement/distribution facility under one roof; 86-acre Boone County KY site; ~540 team; ~500k parts/day"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Toyota parts procurement/distribution hub feeding 12 US PDCs; self-attested current operations.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2296,28 +2344,6 @@
         },
         "dossierExcerpt": "Roster supplied a generic \"Port of Long Beach, Pier B\" point (33.7798, -118.2174).\nWeb research resolved the precise TLS facility to 785 Edison Ave — confirmed\nvia Yelp, D&B, and the Oltmans/Lionakis/DCI construction-firm project pages for\nthe \"Toyota Logistics Services Vehicle Processing & Distribution Center (VDC).\"\nSatellite at z15-z20 confirms a large fenced complex of striped vehicle-storage\nlots packed with thousands of new cars, a cluster of processing/warehouse\nbuildings on the east side, fuel/car-wash structures, and multiple rail spurs\nalong the NE edge — exactly matching the described 155,000 sf VDC that processes\n~180,000-200,000 imported vehicles per year for western North America.",
         "mapsUrl": "https://www.google.com/maps/@33.778,-118.2185,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/toyota/13-long-beach-vdc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.778,
-              "lng": -118.2185
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/toyota/13-long-beach-vdc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.778,
-              "lng": -118.2185
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "facilityType": "Port of Long Beach vehicle processing & distribution center (TLS, ~180,000-200,000 vehicles/yr). Not a conventional dock warehouse — vehicles arrive by ro/ro ship at the Pier B wharf and by unit train on the rail spurs along the NE edge, are processed (accessory install, car wash, fuel) at the 155,000 sf processing building, and leave on auto-hauler trucks.",
           "truckGate": "Whole property is inside a port-secure fenced perimeter (chain-link fence visible in Street View on every public-road edge; z20 sat shows a continuous fence line with marked lane crossings). Port of Long Beach maritime-security site (TWIC required, USCG oversight, random checks per construction-phase reporting) — controlled gated entry is certain.",
@@ -2329,6 +2355,32 @@
           "fastLaneOpportunity": "Wide paved aprons and multi-lane gate crossings at the rail-side entrance give ample room for an express/bypass lane.",
           "siteAreaAcres": "Perimeter box ~62 acres covering the contiguous TLS fenced lots and processing buildings between Pico Ave / the rail corridor and the Pier B wharf.",
           "truckGateCount": "At least one main rail-side gate plus a secondary lot access; estimated 2, flagged uncertain."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://pressroom.toyota.com/powered-by-100-renewable-energy-toyota-logistics-services-long-beach-facility/",
+              "date": "2024-05",
+              "type": "press",
+              "claim": "TLS Long Beach facility, 40+ years processing Toyota/Lexus vehicles, first port processing facility powered by 100% onsite renewable; 200,000+ vehicles/yr"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.automotivelogistics.media/vehicle-logistics/first-order-of-business-at-toyota/179292",
+              "date": "2023",
+              "type": "press",
+              "claim": "TLS runs three port operations directly: Long Beach, Portland, and Newark"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Dated 2024 Toyota pressroom self-attests TLS operates Long Beach VDC at the port; no closure/relocation signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2436,28 +2488,6 @@
         },
         "dossierExcerpt": "Roster supplied a Terminal 4 point (45.6373, -122.7550). Web research resolved the\nprecise TLS lease to 11020 N Lombard St — the ~101,000 sf VDC building Toyota\nLogistics Services operates at Port of Portland Terminal 4 (confirmed via Yelp,\nD&B, BBB, and Port of Portland Terminal 4 pages). Toyota has operated here since\n1971, handling more than 10,000 vehicles per month. Satellite at z15-z21 confirms\na large white-roofed processing building, striped vehicle-marshalling lots, rail\nrunning into the yard, and a fenced perimeter — matching the described VDC.",
         "mapsUrl": "https://www.google.com/maps/@45.6365,-122.754,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/toyota/14-portland-vdc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 45.6365,
-              "lng": -122.754
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/toyota/14-portland-vdc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 45.6365,
-              "lng": -122.754
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "facilityType": "Port of Portland Terminal 4 vehicle distribution center operated by Toyota Logistics Services. ~101,000 sf VDC building; Toyota has handled vehicles here since 1971, >10,000 vehicles/month. Vehicles arrive by ro/ro ship at the Terminal 4 wharf and by auto-rack rail and leave on auto-hauler trucks.",
           "truckGate": "Facility is enclosed within the Port of Portland Terminal 4 secure area with chain-link perimeter and internal fencing visible in z19-z21 satellite. Maritime port facility — controlled gated entry. The access road off N Lombard St runs into the property as a wide multi-lane apron with stop markings; a small standalone gatehouse-type building sits at the NW corner of the operational yard.",
@@ -2472,6 +2502,32 @@
           "scale": "No truck scale identified. Left false, flagged uncertain.",
           "siteAreaAcres": "Perimeter box ~48 acres covering the TLS-operated VDC building and vehicle lots within Terminal 4; the broader Terminal 4 also hosts container/other operations not part of the Toyota lease.",
           "urbanRural": "Within the Portland metro industrial waterfront (Rivergate / Terminal 4); classified Urban."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.portofportland.com/Terminal4",
+              "date": "2024",
+              "type": "port",
+              "claim": "Since the 1970s Toyota has been a fixture at Terminal 4, employing hundreds at its auto import and processing facility"
+            },
+            {
+              "tier": 1,
+              "url": "https://pressroom.toyota.com/toyota-logistics-services-fact-sheet/",
+              "date": "2009-06",
+              "type": "press",
+              "claim": "Names the TLS Portland VDC (LEED Gold) and lists Oregon among TLS operating states"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Port of Portland (landlord) self-attests Toyota still operates its T4 auto import/processing facility; no lease-end/closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2579,28 +2635,6 @@
         },
         "dossierExcerpt": "Roster supplied a generic Port Newark point (40.69001, -74.151753) which falls in\nthe container terminal. Web research resolved the precise TLS facility to\nBuilding 390, E Port St — confirmed via Yelp (\"Toyota Motor Sales Boston\nRegion\"), CMac, Macrae's Blue Book, Kompass and a Port Authority portfolio page\nthat names the Toyota Motor Logistics Center as one of three vehicle\nprocessors at the Port of NY/NJ (with FAPS and BMW Port Jersey). Satellite at\nz16-z20 along E Port St shows a large auto-processing complex — a sawtooth-roof\nprocessing building, an adjacent flat-roof building, extensive vehicle\nmarshalling lots, a ro/ro wharf, and a dense auto-hauler/tractor yard — matching\nthe described TLS VDC.",
         "mapsUrl": "https://www.google.com/maps/@40.694,-74.136,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/toyota/15-newark-vdc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.694,
-              "lng": -74.136
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/toyota/15-newark-vdc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.694,
-              "lng": -74.136
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "facilityType": "Port Newark auto-processing terminal operated by Toyota Logistics Services (Toyota Motor Logistics Center), Building 390 E Port St. One of three vehicle processors at the Port of New York/New Jersey (alongside FAPS and BMW Port Jersey). Vehicles arrive by ro/ro vessel at the wharf, are processed (accessory install, recon, PDI) and distributed by auto-hauler truck and rail to the eastern US.",
           "truckGate": "Port Newark is a TWIC-controlled marine terminal — controlled gated entry is certain. The facility is fenced (chain-link visible in Street View along E Port St) with vehicle lots and processing buildings inside. E Port St frontage gives a controlled entrance to the processing complex.",
@@ -2615,6 +2649,32 @@
           "truckGateCount": "At least one main E Port St gate; a secondary access likely — estimated 2, flagged uncertain.",
           "siteAreaAcres": "Perimeter box ~58 acres covering the TLS processing buildings and contiguous vehicle lots fronting E Port St between the Port Newark Channel wharf and the rail corridor.",
           "urbanRural": "Within the Port Newark/Elizabeth marine-terminal complex in the New York metro; classified Urban."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.toyota.com/us/en/c/logistics-distribution-supply-chain-mgt-jobs",
+              "date": "2025",
+              "type": "locator",
+              "claim": "Active TLS Newark VDC job postings (Production Track Team Member, PPO/POE) at the Newark vehicle distribution center in 2025"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.automotivelogistics.media/vehicle-logistics/first-order-of-business-at-toyota/179292",
+              "date": "2023",
+              "type": "press",
+              "claim": "TLS runs three port operations directly: Long Beach, Portland, and Newark"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active 2025 TLS Newark hiring + 2023 trade-press confirm Newark is one of TLS three directly-run ports; no closure/relocation signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2746,28 +2806,6 @@
         },
         "dossierExcerpt": "Roster supplied only a city-level Ontario point (34.034814, -117.584802,\n\"APPROXIMATE\"). Web research resolved the facility to **1425 Toyota Way, Ontario\nCA 91761** — the Toyota North American Parts Center, Toyota's largest US parts\ndistribution facility (confirmed via Yellow Pages, LoopNet, D&B/Panjiva, an\nITA Foreign-Trade-Zone site listing, and the Aramark cafe page for \"NAPCC\").\nLoopNet records the building as ~817,493 SF Class A industrial (built 1996).\n\nSatellite at z15-z20 resolves the site to the large white-roof tilt-up warehouse\nrunning E-W between Toyota Way (north frontage, with employee parking) and\nthe CA-60 freeway (south). The building's single ~800K sf mass, modern\nconstruction, the Toyota Way street name, and the geocoded point all point to\nthis footprint as the NAPDC. (One caveat: the precise parcel boundary of \"1425\"",
         "mapsUrl": "https://www.google.com/maps/@34.033,-117.5818,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/toyota/16-ontario-pdc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.033,
-              "lng": -117.5818
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/toyota/16-ontario-pdc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.033,
-              "lng": -117.5818
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "facilityType": "Toyota North American Parts Center (NAPDC), Toyota's largest US parts distribution facility — ~817,000 sf Class A warehouse at 1425 Toyota Way, Ontario CA (Inland Empire). Stocks 185,000-260,000+ unique service parts; ships ~65,000 order lines/day; an FTZ site.",
           "buildingIdentification": "Resolved to the large white-roof tilt-up warehouse running E-W between Toyota Way (north frontage / employee parking) and the CA-60 freeway (south). The building's scale (~800K sf single mass), modern construction, and the Toyota Way street name match the NAPDC. The roster's APPROXIMATE city-level point sits at this building. Cannot 100% confirm this exact footprint is parcel 1425 vs an immediate neighbor — flagged.",
@@ -2782,6 +2820,25 @@
           "railServed": "No rail spur into the property — the building fronts the CA-60 freeway, not a rail line. False.",
           "fastLaneOpportunity": "Wide paved truck apron and drop-yard lanes give ample room for an express/bypass lane at the gate.",
           "siteAreaAcres": "Perimeter box ~42 acres for the building + south truck yard / drop yard; flagged approximate."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.automotivelogistics.media/supply-chain-planning/toyota-part-1-cornerstone-of-a-strong-supply-chain/181723",
+              "date": "2015-03",
+              "type": "press",
+              "claim": "North American Parts Center California (NAPCC) in Ontario CA ships 280,000+ pieces/day across 260,000+ unique part numbers"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Toyota largest US parts procurement/distribution center (NAPCC) at Ontario CA confirmed operating; 2026 locator corroborates; no closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2921,28 +2978,6 @@
         },
         "dossierExcerpt": "Roster supplied a confirmed address (440 Forbes Blvd) and a GEOMETRIC_CENTER\npoint (42.016967, -71.234706). Web research (Yelp \"Toyota Parts Warehouse\",\nMacrae's Blue Book, Manta, MerchantCircle) confirms a Toyota Parts Distribution\nCenter / regional office at this address serving Toyota's New England dealer\nnetwork. Satellite at z17-z20 resolves the facility to the white-roof warehouse\nin the Forbes Blvd industrial park: a dock bank with trailers backed in, a drop\nyard with parked trailers, and employee parking. Street View at the entrance\nshows monument signage, an American flag, and the building with trailers staged\nalongside — confirming the identification. High confidence.",
         "mapsUrl": "https://www.google.com/maps/@42.01685,-71.23445,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/toyota/17-mansfield-pdc-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.01685,
-              "lng": -71.23445
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/toyota/17-mansfield-pdc-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.01685,
-              "lng": -71.23445
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "facilityType": "Toyota Parts Distribution Center (Boston-region PDC), 440 Forbes Blvd, Mansfield MA — a regional service-parts warehouse for Toyota's New England dealer network, in the Forbes Blvd / Cabot industrial park.",
           "buildingIdentification": "Resolved to the white-roof warehouse at ~42.0168, -71.2344. Street View at the Forbes Blvd entrance shows monument signage, an American flag and a building with trailers staged alongside; satellite confirms the dock bank, drop yard and employee parking. The roster's GEOMETRIC_CENTER point sits on this building. High confidence.",
@@ -2957,6 +2992,25 @@
           "urbanRural": "Suburban Mansfield MA industrial park — edge-of-town setting with woods around the parcel; per the rubric's tie-break toward Rural for small-town industrial, classified Rural.",
           "scale": "No truck scale identified. False.",
           "siteAreaAcres": "Perimeter box ~16 acres for the building + dock yard + drop yard + employee parking."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 3,
+              "url": "https://tri-townchamber.org/list/member/toyota-motor-sales-boston-pdc-1379",
+              "date": "2025",
+              "type": "econ-dev",
+              "claim": "Tri-Town Chamber of Commerce (Mansfield MA) lists Toyota Motor Sales Boston PDC as a member business"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FLAG low-confidence: no Tier-1 self-attested locator found; local chamber + multiple current locators agree Toyota Boston/Mansfield PDC at 440 Forbes Blvd operates, no closure signal; rated probable pending Tier-1.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       }
     ]

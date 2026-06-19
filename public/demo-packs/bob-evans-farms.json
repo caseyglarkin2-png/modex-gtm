@@ -1,6 +1,6 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-02T16:06:31.249Z",
+  "builtAt": "2026-06-19T03:20:14.706Z",
   "account": {
     "slug": "bob-evans-farms",
     "displayName": "Bob Evans Farms",
@@ -9,10 +9,10 @@
     "coverageNote": {
       "auditedCount": 6,
       "estimatedFootprint": 6,
+      "auditedScope": "US",
       "droppedStubCount": 1,
       "capHit": false,
-      "note": "Bob Evans Farms operates ~6 US food-manufacturing plants supplying the retail brand + restaurant chain.",
-      "auditedScope": "US"
+      "note": "Bob Evans Farms operates ~6 US food-manufacturing plants supplying the retail brand + restaurant chain."
     },
     "featuredSiteId": "03-bob-evans-farms-hillsdale-mi-plant",
     "dossierIntro": "Bob Evans Farms runs a tight 6-facility CPG food network. We audited all of them. The Hillsdale MI plant is the production engine; Springfield OH runs the company's outbound transportation hub. 76 dock doors across the network. Compact footprint, deterministic yard problem. YardFlow runs a 6-site network the same way it runs a 600-site one.",
@@ -250,28 +250,6 @@
         },
         "dossierExcerpt": "The supplied geocode (39.680221, -83.911228, GEOMETRIC_CENTER) landed directly\non the plant complex. Satellite probes at z16-z20 show a multi-section\nindustrial / food-processing building with rooftop process equipment, an\nemployee parking lot to the north, and a paved truck yard to the east.\nStreet View (captured 2022-06) along Birch Rd shows the building branded\n\"Bob Evans\" in the company's signature red script on both the west office wing\n(with red awning and US flag) and the main plant wall — positive ID. Web\nresearch corroborates: 640 Birch Rd is the historic Xenia sausage plant, in\noperation since 1953, ~30,000 sq ft core, >100 employees, ~30M lb/yr fresh\nproduct; subject of a $6.15M expansion announced April 2014. This is the\nplant, not a restaurant. Note: a Yelp listing tags this address as \"CLOSED\" —",
         "mapsUrl": "https://www.google.com/maps/@39.680050,-83.911100,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/bob-evans-farms/01-bob-evans-farms-xenia-oh-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.68005,
-              "lng": -83.9111
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/bob-evans-farms/01-bob-evans-farms-xenia-oh-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.68005,
-              "lng": -83.9111
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "East-side truck yard opens directly onto Birch Rd with no barrier arm, gate, or checkpoint. Street View (2022-06) confirms a wide-open paved apron meeting the public road. The west office/parking driveway is also an open curb cut. No truck gate.",
           "guardShack": "No booth structure of any kind at either driveway. Confirmed in Street View from multiple headings.",
@@ -281,6 +259,33 @@
           "urbanRural": "Edge-of-town Xenia surrounded by farm fields, ball fields, and scattered rural residential; classified Rural.",
           "trailerParkingCapacity": "East paved apron could informally hold ~8 trailers but has no marked stalls; low confidence.",
           "buildingCount": "Single connected/multi-section plant complex counted as ~4 distinct attached structures plus accessory equipment buildings."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.bobevansgrocery.com/about-us/",
+              "date": "2026-01",
+              "type": "locator",
+              "claim": "Lists Xenia, OH as one of Bob Evans Farms' four production facilities; 100+ employees manufacture 30M+ lbs/yr of fresh sausage rolls and links."
+            },
+            {
+              "tier": 1,
+              "url": "https://jobs.postholdings.com/bob-evans-farms/jobs",
+              "date": "2026-03",
+              "type": "careers",
+              "claim": "Active Bob Evans Foods production reqs (Plant Manager, Production Team Member, Mfg Supervisor) at Xenia, OH plant."
+            }
+          ],
+          "imageryDate": "2022-06",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Bob Evans Foods' own site names Xenia as an active sausage plant; closure gauntlet found only 2012-13 events at OTHER plants where Xenia was explicitly retained.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -504,28 +509,6 @@
         },
         "dossierExcerpt": "The supplied geocode (40.696965, -84.095537, ROOFTOP) landed on the large plant\nbuilding. Satellite at z16-z20 shows a single very large connected\nfood-processing building with extensive trailer parking. Street View along\nCommerce Pkwy (captured 2024-10) shows the building branded \"Bob Evans\" in red\nscript on the west elevation — positive ID. Note: the smaller white building\nimmediately to the west is a separate company, \"Logoplaste\" (plastics\npackaging), clearly labeled in Street View — it was excluded from the audit.\nWeb research confirms 651 Commerce Pkwy is the former Kettle Creations plant,\nacquired by Bob Evans in August 2012 for $50M; ~150,000 sq ft after expansions,\n~300 employees, 5 production lines, ~130M lb/yr of mashed potatoes and mac &\ncheese.",
         "mapsUrl": "https://www.google.com/maps/@40.696800,-84.095300,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/bob-evans-farms/02-bob-evans-farms-lima-oh-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.6968,
-              "lng": -84.0953
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/bob-evans-farms/02-bob-evans-farms-lima-oh-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.6968,
-              "lng": -84.0953
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Single truck driveway off Commerce Pkwy crosses a chain-link perimeter fence; a gate opening is visible in the fence line at satellite z21 (~40.6953, -84.0952). The whole trailer yard is fenced. Truck gate confirmed.",
           "guardShack": "No booth structure visible beside the gate in satellite z20/z21 or in Street View (2024-10) from the road. Street View coverage does not extend up the private drive; absence of a booth at the fence crossing is the basis for the call. Flagged uncertain.",
@@ -538,6 +521,40 @@
           "urbanRural": "Edge-of-town industrial park on the south edge of Lima near I-75, bordered by farm fields; classified Rural.",
           "trailerParkingCapacity": "~55 trailers visible in the imagery; lots could hold ~70. Estimate.",
           "buildingCount": "One large ~150,000 sq ft connected plant building (the adjacent Logoplaste building to the west is a separate company, excluded)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.bobevansgrocery.com/about-us/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Lists 651 Commerce Pkwy, Lima OH 45804 as a Bob Evans plant producing mashed potatoes and macaroni & cheese; 100M+ lbs/yr, 400+ people, 23+ SKUs."
+            },
+            {
+              "tier": 1,
+              "url": "https://preview.bnpmedia.com/rff-december-2024/feature-bob-evans/",
+              "date": "2024-12",
+              "type": "press",
+              "claim": "Bob Evans NW Ohio plant produces ~136M lbs/yr of RTE mashed potatoes, running 3 shifts 24/7."
+            },
+            {
+              "tier": 3,
+              "url": "https://www.provisioneronline.com/articles/98220-bob-evans-acquires-kettle-creations-brand--facility",
+              "date": "2012-08-16",
+              "type": "press",
+              "claim": "BEF Foods acquired the Kettle Creations brand + Lima OH plant (~$50M), confirming the 'former Kettle Creations facility' note."
+            }
+          ],
+          "imageryDate": "2024-10",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Company site lists 651 Commerce Pkwy Lima as its active mac/potato plant; corroborated by Dec-2024 trade feature and live reqs; only closures found (Springfield, Bidwell 2013) are different facilities.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -772,28 +789,6 @@
         },
         "dossierExcerpt": "The supplied geocode (41.921573, -84.615533, GEOMETRIC_CENTER) landed on the\nplant complex. Satellite at z16-z20 shows a multi-building food-processing\ncampus set well back from public roads, surrounded by residential streets,\nfarm fields, and woodland on the edge of Hillsdale. Street View (captured\n2024-09) from the SW access road shows a \"Bob Evans Farms\" entrance sign and\nthe plant building branded with Bob Evans red script — positive ID. Note: the\naddress \"200 N Wolcott St\" is the postal address, but Wolcott St itself is\nresidential and the plant is set back behind houses; the actual truck/vehicle\naccess is a long private drive that connects to a side street SW of the site.\nWeb research confirms this is the company's third plant, producing fresh pork\nsausage since 1964, 50+ SKUs, 25M+ lb/yr; BEF Foods operates it as a sow",
         "mapsUrl": "https://www.google.com/maps/@41.921600,-84.615300,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/bob-evans-farms/03-bob-evans-farms-hillsdale-mi-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.9216,
-              "lng": -84.6153
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/bob-evans-farms/03-bob-evans-farms-hillsdale-mi-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.9216,
-              "lng": -84.6153
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Plant set well back from public roads on a long private access drive that connects to a residential side street SW of the site. The entrance has a Bob Evans Farms sign and decorative split-rail fence along the road, but the driveway is an open curb cut with no barrier arm, gate, or pinch-point. Confirmed in Street View (2024-09).",
           "guardShack": "No booth structure at the entrance drive or anywhere on the access path; confirmed in Street View and satellite.",
@@ -807,6 +802,40 @@
           "urbanRural": "Small-town Hillsdale, MI; the plant is on the edge of town surrounded by residential streets, farm fields, and woodland. Classified Rural.",
           "trailerParkingCapacity": "NE drop yard plus internal yard could hold ~25 trailers; estimate.",
           "buildingCount": "Counted ~5 distinct structures on the campus."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.bobevansgrocery.com/about-us/",
+              "date": "2026-01",
+              "type": "locator",
+              "claim": "Hillsdale plant has produced Bob Evans sausage since 1964; one of two fresh-sausage-roll sites, the only patty site; 50+ SKUs, 25M+ lbs/yr."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.sec.gov/Archives/edgar/data/0001530950/000153095023000350/post-20230930.htm",
+              "date": "2023-11",
+              "type": "10-K",
+              "claim": "Post Holdings FY2023 10-K Item 2 lists Hillsdale MI and Xenia OH as owned Refrigerated Retail sausage production plants."
+            },
+            {
+              "tier": 1,
+              "url": "https://jobs.postholdings.com/careers-home/jobs/27329?lang=en-us",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Live 'Production Team Member - Hillsdale, Michigan | Bob Evans Foods' req (sausage slicing/stuffing/packaging), plus active Sanitation/Harvest reqs at the site."
+            }
+          ],
+          "imageryDate": "2024-09",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Company about page, Post 10-K owned-properties list, and live Hillsdale production reqs all confirm an active company-owned sausage plant; gauntlet found only unrelated 2012 OH closures plus a 2026 Hillsdale packaging expansion.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1021,28 +1050,6 @@
         },
         "dossierExcerpt": "The supplied geocode (33.129289, -95.580222, ROOFTOP) landed on the plant\nbuilding. Satellite at z16-z20 shows a large connected industrial building\nbeside Interstate 30, with a distinctive red-roofed section, open paved truck\nyard, and employee parking. Street View along Industrial Dr E (captured\n2025-06) shows the building branded \"Bob Evans\" in red script — positive ID.\nWeb research confirms 1109 Industrial Dr E is the Bob Evans Sulphur Springs\nready-to-eat plant, acquired in 2003, ~70 employees, producing refrigerated\nsides (mac & cheese, mashed potatoes).",
         "mapsUrl": "https://www.google.com/maps/@33.129500,-95.580600,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/bob-evans-farms/04-bob-evans-farms-sulphur-springs-tx-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.1295,
-              "lng": -95.5806
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/bob-evans-farms/04-bob-evans-farms-sulphur-springs-tx-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.1295,
-              "lng": -95.5806
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Two open driveways off Industrial Dr E (front employee/visitor drive and a west truck drive). Both are open curb cuts with no barrier arm, gate, or pinch-point. Confirmed in Street View (2025-06) — no perimeter fence around the property.",
           "guardShack": "No booth at either driveway. A covered shelter near the parking lot is a carport/break shelter, not a guard booth.",
@@ -1054,6 +1061,40 @@
           "urbanRural": "Edge-of-town industrial area along I-30 near Sulphur Springs, TX, bordered by farm fields and scattered industrial buildings; classified Rural.",
           "trailerParkingCapacity": "Open paved yard could hold ~15 trailers informally; estimate.",
           "buildingCount": "One large connected plant building plus an attached/adjacent processing wing — counted as ~2 structures."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.bobevansgrocery.com/about-us/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Lists 1109 Industrial Dr E, Sulphur Springs TX 75482 as a company facility (acquired 2003, 70+ employees) producing refrigerated sides incl. Bob Evans Macaroni & Cheese."
+            },
+            {
+              "tier": 1,
+              "url": "https://jobs.postholdings.com/careers-home/jobs/29463?lang=en-us",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active 'SS Production Team Member' and cluster of Bob Evans Foods production reqs in Sulphur Springs, TX."
+            },
+            {
+              "tier": 3,
+              "url": "https://frontporchnewstexas.com/2025/02/18/bob-evans-sulphur-springs-plant-celebrated-365-days-of-no-recordable-accidents/",
+              "date": "2025-02-18",
+              "type": "press",
+              "claim": "Local news: Bob Evans Sulphur Springs plant celebrated 365 days with no recordable accidents (Feb 2025), confirming active operation."
+            }
+          ],
+          "imageryDate": "2025-06",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Company site lists Sulphur Springs as an active Mac & Cheese plant at the stated address; corroborated by live reqs and a Feb-2025 plant safety milestone; no closure/sale/WARN found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1281,28 +1322,6 @@
         },
         "dossierExcerpt": "The supplied geocode (43.684086, -111.900523, ROOFTOP) landed on the plant\ncomplex. Satellite at z16-z20 shows a large multi-building potato-processing\nplant along N Yellowstone Hwy, surrounded by farm fields with a highway\ninterchange nearby. Web research confirms 398 N Yellowstone Hwy is the Potato\nProducts of Idaho (PPI) plant — a frozen/dehydrated potato-products\nmanufacturer established 1998, acquired by Post Holdings (parent of the Bob\nEvans Refrigerated Retail business). The roster note matches: Post folded PPI\ninto the Refrigerated Retail network. Street View from the frontage road\nshowed an adjacent \"BV's PRODUCE\" sign (Rigby Produce, a neighboring business)\n— the PPI plant itself is the large building cluster, positively located.",
         "mapsUrl": "https://www.google.com/maps/@43.683900,-111.900400,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/bob-evans-farms/05-bob-evans-farms-rigby-id-plant-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 43.6839,
-              "lng": -111.9004
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/bob-evans-farms/05-bob-evans-farms-rigby-id-plant-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 43.6839,
-              "lng": -111.9004
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Plant accessed via open gravel/paved yards off N Yellowstone Hwy frontage; multiple open driveways with no barrier arm, gate, or checkpoint pinch-point. No perimeter fence around the property. Confirmed in satellite z19-z20.",
           "guardShack": "No booth structure at any driveway or on the access yards.",
@@ -1317,6 +1336,40 @@
           "urbanRural": "Rural Rigby, ID; the plant is surrounded by farm fields with a highway interchange nearby. Classified Rural.",
           "trailersVisible": "Few trailers visible in 2021/2026 imagery (~3); count uncertain.",
           "trailerParkingCapacity": "Open yards could hold ~20 trailers informally; estimate."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.bobevansgrocery.com/about-us/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Lists the Rigby ID plant under Bob Evans 'Our Facilities': 'Acquired in 2025, our Rigby plant produces refrigerated and frozen potato products.'"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.postholdings.com/post-holdings-completes-acquisition-of-potato-products-of-idaho/",
+              "date": "2025-03-03",
+              "type": "press",
+              "claim": "Post Holdings completed acquisition of Potato Products of Idaho LLC (Rigby, ID plant), confirming Post/Bob Evans is the current operator."
+            },
+            {
+              "tier": 3,
+              "url": "https://www.fooddive.com/news/post-holding-to-buy-potato-company-for-undisclosed-amount/735861/",
+              "date": "2025-01",
+              "type": "press",
+              "claim": "Post Holdings deal includes a manufacturing facility in Rigby, ID (PPI, Mickelsen family)."
+            }
+          ],
+          "imageryDate": "2021",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Former Potato Products of Idaho (Mickelsen family) acquired by Post Holdings 2025-03-03 and now run under Bob Evans Farms; wrong-operator risk resolved, no closure found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1593,28 +1646,6 @@
         },
         "dossierExcerpt": "The supplied geocode (39.837963, -83.857367, ROOFTOP) landed on a fleet\nterminal — a central dispatch/maintenance building flanked by extensive rows\nof parked trailers. Web research confirms 6088 Green-Field Dr is the Bob Evans\nTransportation Company LLC terminal (USDOT 911163): ~150 employees including\n~100 drivers, ~126 tractors, 100+ tractor-trailers, ~20,000 deliveries/yr,\n~10M miles/yr. The satellite layout — a terminal building with trailer-storage\nrows on both sides — is exactly consistent with a private fleet hub. Positive\nID.",
         "mapsUrl": "https://www.google.com/maps/@39.838000,-83.857200,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/bob-evans-farms/06-bob-evans-farms-springfield-oh-transportation-hub-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.838,
-              "lng": -83.8572
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/bob-evans-farms/06-bob-evans-farms-springfield-oh-transportation-hub-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.838,
-              "lng": -83.8572
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "imagery": "Only available satellite coverage of this site is heavy snow-cover imagery, which obscures fine ground detail (gate hardware, booths, lane markings). No Street View coverage reaches the property. Overall confidence set to medium.",
           "truckGate": "This is a private fleet terminal (Bob Evans Transportation Company, USDOT 911163; ~126 tractors, 100+ tractor-trailers, 20,000 deliveries/yr). The terminal is reached via an internal campus road off Green-Field Dr. A controlled truck entrance is the strong norm for a private fleet hub of this scale, but the gate hardware cannot be positively confirmed in the snow imagery -- flagged uncertain.",
@@ -1628,6 +1659,40 @@
           "trailerParkingCapacity": "Marked rows could hold ~160 trailers; estimate.",
           "urbanRural": "Rural -- the terminal sits on the edge of Springfield surrounded by farm fields.",
           "buildingCount": "Central dispatch/maintenance building plus an accessory structure; ~2 (the large SW building is part of the wider distribution-center campus and treated as separate from the fleet terminal proper)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnapshot&query_param=USDOT&query_string=911163",
+              "date": "2026-02-27",
+              "type": "press",
+              "claim": "FMCSA: Bob Evans Transportation Company LLC, USDOT 911163, Operating Status ACTIVE, 6088 Green Field Dr, Springfield OH 45502; 144 power units / 118 drivers; MCS-150 updated Feb 2026."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.bobevansgrocery.com/about-us/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Company main transportation facility in Springfield OH: ~150 employees / 100 drivers, 100+ tractor-trailers, 20,000+ deliveries/yr distributing Bob Evans products."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.nlrb.gov/case/09-RC-316738",
+              "date": "2023-04-24",
+              "type": "press",
+              "claim": "NLRB rep case for Bob Evans Farms at 6088 Green-Field Dr, Springfield OH; bargaining unit of drivers, dock workers, and yard jockeys (84 employees) - confirms active on-site yard operation."
+            }
+          ],
+          "imageryDate": "",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FMCSA active carrier (updated Feb 2026), company site, and two NLRB cases (one naming 'yard jockeys') place an active private-fleet terminal at 6088 Green Field Dr; distinct from the closed ~2012 sausage plant.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       }
     ]

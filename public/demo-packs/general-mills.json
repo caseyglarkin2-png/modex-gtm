@@ -1,21 +1,21 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-02T16:13:16.566Z",
+  "builtAt": "2026-06-19T03:20:04.850Z",
   "account": {
     "slug": "general-mills",
     "displayName": "General Mills",
     "archetype": "cpg",
-    "siteCount": 26,
+    "siteCount": 15,
     "coverageNote": {
-      "auditedCount": 26,
+      "auditedCount": 15,
       "estimatedFootprint": 30,
+      "totalGlobalFootprint": 35,
+      "auditedScope": "NA",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "General Mills operates ~35 plants globally (~30 in NA). We audited 26 NA sites.",
-      "auditedScope": "NA",
-      "totalGlobalFootprint": 35
+      "note": "General Mills operates ~35 plants globally (~30 in NA). We audited 26 NA sites."
     },
-    "featuredSiteId": "05-general-mills-murfreesboro-tn",
+    "featuredSiteId": "08-belvidere-il-distribution-center",
     "dossierIntro": "General Mills runs the cereal, snacks, pet food, and refrigerated dough network. 35 facilities; we audited 26. Murfreesboro TN covers 186 acres with 60 dock doors. Wellston OH is 328 acres of cereal manufacturing. 10 of 26 audited sites are rail-served. 883 dock doors total. YardFlow runs the four product platforms as four queues on a unified gate protocol.",
     "surprisingFindings": [
       "Wellston OH is 328 acres of cereal manufacturing. Cheerios get made here at scale.",
@@ -26,22 +26,22 @@
   "research": null,
   "network": {
     "bbox": [
-      -121.303047,
+      -117.511121,
       33.621428,
-      -75.034852,
+      -78.874597,
       47.515571
     ],
     "archetypeMix": {
-      "#9": 17,
-      "#3": 8,
+      "#9": 9,
+      "#3": 5,
       "#10": 1
     },
     "totals": {
-      "dockDoors": 883,
-      "trailerCapacity": 2234,
-      "gates": 27,
-      "railServed": 10,
-      "acres": 2029.4
+      "dockDoors": 592,
+      "trailerCapacity": 1473,
+      "gates": 15,
+      "railServed": 7,
+      "acres": 1520.5
     },
     "sites": [
       {
@@ -172,28 +172,6 @@
         },
         "dossierExcerpt": "The roster lists idx 1 at \"1000 Wenig Rd NE\" with a ROOFTOP geocode. Satellite\nimagery of that point (41.998837, -91.676411) at zoom 15-17 shows the **Cedar\nRapids Water Pollution Control Facility** — a wastewater treatment plant with\nunmistakable circular clarifier / aeration tanks. There is no General Mills\nplant at that address.\n\nWeb research (Cedar Rapids Metro Economic Alliance industrial directory)\nconfirms there is only one General Mills facility in Cedar Rapids: the\ncereal manufacturing plant at 4800 Edgewood Rd SW — which is roster idx 2.\n\nConclusion: roster idx 1 and idx 2 are the same physical facility. The\nWenig Rd address was a bad entry. This dossier audits the real General Mills\nCedar Rapids plant; the classification is identical to idx 2.",
         "mapsUrl": "https://www.google.com/maps/@41.93220,-91.72020,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/general-mills/01-general-mills-cedar-rapids-ia-wenig-rd-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.9322,
-              "lng": -91.7202
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/general-mills/01-general-mills-cedar-rapids-ia-wenig-rd-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.9322,
-              "lng": -91.7202
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "ROSTER_ERROR": "The roster address for idx 1 (1000 Wenig Rd NE, Cedar Rapids) is incorrect. Satellite imagery of that point shows the Cedar Rapids Water Pollution Control Facility (wastewater treatment - circular clarifier/aeration tanks), NOT a General Mills plant. Web research (Cedar Rapids Metro Economic Alliance directory) confirms there is only ONE General Mills facility in Cedar Rapids: the cereal plant at 4800 Edgewood Rd SW. idx 1 and idx 2 are therefore the SAME physical facility. This file audits that actual GM plant; it is a duplicate of idx 2.",
           "location": "Audited the real General Mills Cedar Rapids cereal plant at 4800 Edgewood Rd SW (41.9322,-91.7202). The Wenig Rd NE coordinate in the roster was discarded as erroneous.",
@@ -209,6 +187,32 @@
           "scale": "No truck scale positively identified; flagged uncertain.",
           "siteAreaAcres": "Perimeter ~224 acres including rail yard and retention/undeveloped land; paved core ~90-110 acres.",
           "urbanRural": "Edge-of-town industrial setting amid farmland and a quarry; classified Rural."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.cedarrapids.org/general-mills-plans-business-expansion-in-cedar-rapids/",
+              "date": "2024",
+              "type": "press",
+              "claim": "GM operates the Cedar Rapids cereal plant (4800 Edgewood Rd SW, ~800 employees) making Cheerios/Lucky Charms/Cocoa Puffs + fruit snacks; $37M line modernization"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.powderbulksolids.com/food-beverage/general-mills-to-upgrade-food-processing-plant-in-iowa",
+              "date": "2024",
+              "type": "trade",
+              "claim": "GM dedicating $37M to upgrade the Cedar Rapids IA food production facility"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Roster idx1 \"Wenig Rd\" was a geocode error onto a wastewater plant; the real and only GM Cedar Rapids site is the Edgewood Rd cereal plant (this file audits it). Active GM-owned cereal plant w/ recent capex; duplicate of idx2.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -339,28 +343,6 @@
         },
         "dossierExcerpt": "The roster geocode (41.933068, -91.719609, ROOFTOP) landed accurately on the\nGeneral Mills process building. Satellite at zoom 15-18 shows a large food\nmanufacturing complex with dense rooftop process equipment, a rail-served\nloading area, a large SW distribution warehouse, and a major trailer drop yard\nto the NW — fully consistent with a cereal plant. The Cedar Rapids Metro\nEconomic Alliance directory lists this as the single General Mills Operations\nlocation in Cedar Rapids (member since 1970). Street View along the access road\noff Edgewood Rd SW shows General Mills signage (\"Frontage Road\" / \"South\nEntrance\" directional sign) confirming identity.\n\nNote: roster idx 1 (\"Wenig Rd NE\") refers to the same company in the same city;\nthat address is erroneous (it geocodes to the Cedar Rapids Water Pollution",
         "mapsUrl": "https://www.google.com/maps/@41.93220,-91.72020,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/general-mills/02-general-mills-cedar-rapids-ia-edgewood-rd-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.9322,
-              "lng": -91.7202
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/general-mills/02-general-mills-cedar-rapids-ia-edgewood-rd-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.9322,
-              "lng": -91.7202
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed General Mills cereal manufacturing complex at 4800 Edgewood Rd SW, Cedar Rapids IA. Geocode pin landed accurately on the process building; locked center 41.9322,-91.7202. This is the ONLY General Mills facility in Cedar Rapids (confirmed via Cedar Rapids Metro Economic Alliance directory).",
           "truckGate": "Property is fully enclosed by black ornamental metal perimeter fence (clearly visible in 2019/2024 Street View along the access road off Edgewood Rd SW). A single private access road serves the campus; GM directional signage reads 'Frontage Road' and 'South Entrance'. Treated as a controlled truck entrance though Street View coverage stops at the property line.",
@@ -375,6 +357,32 @@
           "scale": "No truck scale positively identified in imagery; flagged uncertain.",
           "siteAreaAcres": "Perimeter box ~224 acres including the rail yard and some undeveloped/retention land; the paved industrial core is roughly 90-110 acres.",
           "urbanRural": "Edge-of-town industrial setting on the SW fringe of Cedar Rapids surrounded by farmland and a quarry; classified Rural per the small-town-vs-Urban tiebreak rule."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.cedarrapids.org/general-mills-plans-business-expansion-in-cedar-rapids/",
+              "date": "2024",
+              "type": "press",
+              "claim": "GM operates 4800 Edgewood Rd SW Cedar Rapids cereal plant (~800 employees); $37M line modernization announced"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.powderbulksolids.com/food-beverage/general-mills-to-upgrade-food-processing-plant-in-iowa",
+              "date": "2024",
+              "type": "trade",
+              "claim": "GM $37M upgrade of the Cedar Rapids IA food production facility"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active GM-owned cereal plant (Cheerios/Lucky Charms/fruit snacks) with recent capital investment; cereal is core GM, no divestiture/closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -457,28 +465,6 @@
         },
         "dossierExcerpt": "The roster geocode (ROOFTOP) landed accurately on the General Mills mill\nbuilding. Satellite at zoom 16-19 shows the historic General Mills Cheerios\nplant on the narrow spit of land between the Buffalo River and the City Ship\nCanal — grain elevators, a 10-floor high-rise manufacturing building, conveyor\nbridges, and processing structures. 2025 Street View on South Michigan Avenue\nshows GM-branded trailers backed into the street-level docks, confirming\nidentity. Web research (Buffalo News, Born Buffalo) confirms this plant has\nmade Cheerios since 1941 and produces ~28% of the world's Cheerios; it also\nmakes Wheaties, Lucky Charms, Chex and Gold Medal flour.",
         "mapsUrl": "https://www.google.com/maps/@42.87213,-78.87597,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/general-mills/03-general-mills-buffalo-ny-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.87213,
-              "lng": -78.87597
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/general-mills/03-general-mills-buffalo-ny-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.87213,
-              "lng": -78.87597
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed historic General Mills Cheerios plant at 54 South Michigan Ave, Buffalo NY - a 10-floor high-rise mill on the spit of land between the Buffalo River and the City Ship Canal. GM-branded trailers visible at the street-level docks in 2025 Street View. Geocode landed accurately on the building.",
           "truckGate": "FALSE. This is a dense pre-war urban mill: loading-dock doors open directly onto South Michigan Avenue (numbered dock doors and trailers backed in directly from the public street, seen in 2025 Street View). There is no setback, no checkpoint pinch-point, and no controlled gate at a property line. Chain-link fencing exists in spots but the public street runs through the complex. Flagged uncertain.",
@@ -491,6 +477,32 @@
           "urbanRural": "Dense urban industrial waterfront within the City of Buffalo.",
           "scale": "No truck scale identified; flagged uncertain.",
           "truckGateCount": "Set to 1 as a nominal value (main dock-side access off South Michigan Ave); there is no true controlled gate."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.careerbuilder.com/job-details/seasonal-production-operator-buffalo-ny--794b0a04-2bf4-497a-b16b-64140c9d52ce",
+              "date": "2026",
+              "type": "press",
+              "claim": "Active GM seasonal production operator req at the Buffalo NY Cereal Plant & Flour Mill (seasonal run Jun-Oct 2026)"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.governor.ny.gov/news/governor-cuomo-announces-general-mills-will-invest-25-million-expand-cereal-production-and",
+              "date": "2017",
+              "type": "press",
+              "claim": "GM $25M expansion of the Buffalo plant retaining 417 jobs; makes Cheerios, Lucky Charms, Chex"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Nation's oldest cereal plant (54 S Michigan Ave), GM-operated since 1928 with active 2026 hiring; Cheerios is core GM, no closure/divestiture.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -625,28 +637,6 @@
         },
         "dossierExcerpt": "The roster geocode (39.095735, -82.540904) was GEOMETRIC_CENTER precision and\nmoved 1935 m, but it landed within the large industrial complex. Satellite at\nzoom 16-18 shows a major manufacturing campus surrounded by woodland and rural\nland — a dense central process building, large warehouses, employee parking,\nand trailer staging. 2025 Street View on S Pennsylvania Avenue shows the\nwarehouse building bearing the General Mills \"G\" logo and \"GENERAL MILLS\" text,\nplus a General Mills entrance sign — identity confirmed. Web research (JobsOhio,\nFood Business News) confirms this is the Totino's frozen pizza / pizza-roll\nplant, one of the largest frozen-food manufacturing facilities in the US, with\n1,000+ employees and a recent $100M expansion.",
         "mapsUrl": "https://www.google.com/maps/@39.09580,-82.54100,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/general-mills/04-general-mills-wellston-oh-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.0958,
-              "lng": -82.541
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/general-mills/04-general-mills-wellston-oh-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.0958,
-              "lng": -82.541
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed General Mills frozen-food plant (Totino's pizza / pizza rolls) at 2403 S Pennsylvania Ave, Wellston OH. Geocode was GEOMETRIC_CENTER (moved 1935m) but landed on the large industrial complex; locked center 39.0958,-82.5410. Building bears the General Mills 'G' logo and 'GENERAL MILLS' text, confirmed in 2025 Street View. One of the largest frozen food manufacturing facilities in the US, 1,000+ employees.",
           "truckGate": "TRUE. The entire campus is enclosed by chain-link perimeter fencing with barbed wire (confirmed on multiple sides in 2024/2025 Street View). A wide industrial access drive leaves S Pennsylvania Ave at a 'GENERAL MILLS'-signed entrance near the warehouse; a secondary chain-link swing gate was also seen on a south perimeter lane. Controlled truck entrance.",
@@ -660,166 +650,32 @@
           "scale": "No truck scale positively identified; flagged uncertain.",
           "siteAreaAcres": "Perimeter box ~328 acres including extensive wooded buffer; the developed industrial core is roughly 70-90 acres.",
           "urbanRural": "Rural - the plant sits at the edge of the small town of Wellston OH surrounded by woodland and farmland."
-        }
-      },
-      {
-        "id": "05-general-mills-murfreesboro-tn",
-        "name": "General Mills - Murfreesboro TN",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "uncertainFields": [
-          "guardShack",
-          "remoteGs",
-          "entryLanes",
-          "exitLanes",
-          "scale",
-          "railServed"
-        ],
-        "center": {
-          "lat": 35.801,
-          "lng": -86.3915
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 35.804119,
-                "lng": -86.394247
-              },
-              {
-                "lat": 35.803228,
-                "lng": -86.389303
-              },
-              {
-                "lat": 35.795654,
-                "lng": -86.392599
-              },
-              {
-                "lat": 35.796545,
-                "lng": -86.397542
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
             {
-              "ring": [
-                {
-                  "lat": 35.802782,
-                  "lng": -86.393697
-                },
-                {
-                  "lat": 35.802114,
-                  "lng": -86.390127
-                },
-                {
-                  "lat": 35.799886,
-                  "lng": -86.390676
-                },
-                {
-                  "lat": 35.800554,
-                  "lng": -86.394247
-                }
-              ]
+              "tier": 1,
+              "url": "https://www.fooddive.com/news/general-mills-100m-totinos-pizza-plant-expand/630950/",
+              "date": "2022",
+              "type": "trade",
+              "claim": "GM invested $100M to expand its Wellston OH Totino's pizza/pizza-rolls plant; 1,000+ FTEs"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.bakingbusiness.com/articles/57161-general-mills-to-invest-100-million-in-plant-expansion",
+              "date": "2022",
+              "type": "trade",
+              "claim": "GM $100M expansion of the Wellston Totino's plant"
             }
           ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 35.798327,
-                  "lng": -86.394247
-                },
-                {
-                  "lat": 35.797881,
-                  "lng": -86.390951
-                },
-                {
-                  "lat": 35.796545,
-                  "lng": -86.3915
-                },
-                {
-                  "lat": 35.79699,
-                  "lng": -86.394796
-                }
-              ]
-            }
-          ],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 60,
-          "trailersVisible": 130,
-          "trailerParkingCapacity": 200,
-          "truckGateCount": 1,
-          "buildingCount": 6,
-          "siteAreaAcres": 186,
-          "railServed": true
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": false,
-          "remoteGs": true,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": true,
-          "dockDoors": "50+",
-          "dropArea": "50+",
-          "shipRcvSeparate": true,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": true,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "dossierExcerpt": "The roster geocode (35.79933, -86.39202) was RANGE_INTERPOLATED precision and\nmoved 3274 m. Satellite at zoom 16-18 around that point shows a large food\nmanufacturing campus — dense central process building, large warehouses,\ntrailer drop yards, on-site wastewater treatment, employee parking, and a rail\nline on the E edge — consistent with a GM plant. Web research (Rutherford\nChamber, TNECD, Food Manufacturing) confirms this is the General Mills\nMurfreesboro plant that makes Yoplait yogurt, all U.S. Toaster Strudel, and\npart of the Pillsbury line, with a recent $65M upgrade. 2026 Street View shows\nthe plant with active steam plumes and a GM-branded perimeter. Locked center\nadjusted to the actual plant core at 35.8010,-86.3915.",
-        "mapsUrl": "https://www.google.com/maps/@35.80100,-86.39150,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/general-mills/05-general-mills-murfreesboro-tn-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.801,
-              "lng": -86.3915
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/general-mills/05-general-mills-murfreesboro-tn-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.801,
-              "lng": -86.3915
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "location": "Confirmed General Mills food-manufacturing plant in Murfreesboro TN (makes Yoplait yogurt, Toaster Strudel, and Pillsbury products). The roster geocode was RANGE_INTERPOLATED and moved 3274m; satellite + web research locked the actual plant center at 35.8010,-86.3915. Plant address is 2695 Stevenson Dr / 2533 General Mills Way. Active manufacturing confirmed by steam plumes in 2026 Street View.",
-          "truckGate": "TRUE. The campus is fully enclosed by a black ornamental metal perimeter fence (clearly visible along the road on multiple sides in 2019/2026 Street View). Wide controlled internal road (Stevenson Dr / General Mills Way) serves the plant. Treated as a controlled truck entrance.",
-          "guardShack": "Not definitively confirmed. A small white booth-like structure was seen near the road at the entrance area in Street View/satellite, which may be a gate/guard house, but it could not be positively confirmed as a staffed truck-gate booth. Flagged uncertain.",
-          "remoteGs": "Set true on the assumption of a gate without a confirmed staffed booth; low confidence - flagged.",
-          "dockDoors": "50+ band. Multiple dock banks: a long dock face with trailers backed in (seen behind the fence in Street View) on the warehouse buildings, plus additional docks. Estimated ~55-65 total.",
-          "dropArea": "50+ band. Several large trailer drop yards: rows of parked trailers in the SW, S-central, and W lots - well over 100 trailer stalls combined.",
-          "multipleFacilities": "Campus comprises the dense central process building, large warehouse buildings, a separate dark-roof building, on-site wastewater treatment, and supporting structures - multiple distinct clusters.",
-          "shipRcvSeparate": "Dock activity is spread across separate building faces (warehouse dock banks on different sides), supporting separate ship/receive clusters.",
-          "fastLaneOpportunity": "Wide internal roads and large aprons leave room for a bypass/express lane.",
-          "railServed": "A rail line runs along the E edge of the property; rail spurs appear to serve the site. Set true but flagged - the spur penetration into the plant is not fully confirmed in imagery.",
-          "scale": "No truck scale positively identified; flagged uncertain.",
-          "siteAreaAcres": "Perimeter box ~186 acres; the developed paved/built core is roughly 90-110 acres.",
-          "urbanRural": "Located within the Murfreesboro / Nashville metro fabric beside I-24 with surrounding industrial and residential development; classified Urban."
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "GM-owned Totino's frozen-pizza plant (2403 S Pennsylvania Ave); Totino's is a core GM billion-dollar brand, no divestiture/closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -922,28 +778,6 @@
         },
         "dossierExcerpt": "- Facility: General Mills Covington Plant, 15200 Industrial Park Blvd NE, Covington, GA 30014\n- Type: Manufacturing plant (ready-to-eat cereal — Cinnamon Toast Crunch and other varieties; opened 1989; ~400 employees per Georgia.org / Covington News).\n- Locked center: 33.62280, -83.82400\n- How confirmed: Roster pin (33.6234, -83.8254) carried a ~2.5km city-level geocode offset. Satellite probes z16–z20 around the pin found a single large grey-roofed industrial campus immediately to the east; Street View along Industrial Park Blvd NE shows the perimeter fence with the plant building behind it; web search confirms the cereal plant at that address. No ambiguity.",
         "mapsUrl": "https://www.google.com/maps/@33.62280,-83.82400,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/general-mills/06-covington-ga-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.6228,
-              "lng": -83.824
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/general-mills/06-covington-ga-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.6228,
-              "lng": -83.824
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed large cereal manufacturing complex (Cinnamon Toast Crunch) at 15200 Industrial Park Blvd NE, Covington GA. Geocode pin was ~2.5km of city-level offset corrected by satellite + web search; locked center 33.6228,-83.8240.",
           "truckGate": "Property is fully perimeter-fenced (black ornamental metal fence visible in Street View along Industrial Park Blvd NE). Single private access road serves the campus from the SW corner near a road intersection. Treated as a controlled truck entrance.",
@@ -956,6 +790,32 @@
           "scale": "No truck scale identified in imagery; flagged as uncertain.",
           "siteAreaAcres": "Perimeter box ~146 acres but the property is heavily forested; usable paved industrial core is roughly 45-55 acres.",
           "railServed": "No rail spur visible entering the property; the diagonal cleared strips east of the plant are a power-line right-of-way, not rail."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://georgia.org/press-release/general-mills-expands-covington-operations-creates-40-new-jobs",
+              "date": "2020",
+              "type": "press",
+              "claim": "GA econ-dev: GM expands Covington cereal operations (Cinnamon Toast Crunch + dried fruit snacks), ~400 employees + 40 jobs"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.foodprocessing.com/product-development/breakfast-foods/news/11302058/general-mills-to-increase-capacity-in-covington-georgia",
+              "date": "2020",
+              "type": "trade",
+              "claim": "GM increasing cereal capacity at Covington GA (Cinnamon Toast Crunch)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "GM-owned cereal plant making Cinnamon Toast Crunch; cereal is core GM, capacity recently expanded, no negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1043,8 +903,7 @@
               ]
             }
           ],
-          "staging": null,
-          "streetViewMeta": {}
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 35,
@@ -1117,28 +976,6 @@
         },
         "dossierExcerpt": "- Facility: General Mills Hannibal Plant, 1 Red Devil Rd, Hannibal, MO 63401\n- Type: Manufacturing plant — produces Nature Valley, Betty Crocker, Old El Paso, Progresso (Muddy River News, 2024 expansion adding an Old El Paso taco-shell line).\n- Locked center: 39.68180, -91.41440\n- How confirmed: Roster geocode was GEOMETRIC_CENTER precision (5.6km nominal move) but landed inside the Hannibal industrial park. Satellite z16 immediately showed a large central industrial plant with extensive trailer yards consistent with the GM facility; web search confirms the GM food plant at 1 Red Devil Rd. Locked center on the main building.",
         "mapsUrl": "https://www.google.com/maps/@39.68180,-91.41440,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/general-mills/07-hannibal-mo-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.6818,
-              "lng": -91.4144
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/general-mills/07-hannibal-mo-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.6818,
-              "lng": -91.4144
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed large General Mills food plant at 1 Red Devil Rd, Hannibal MO (Nature Valley, Betty Crocker, Old El Paso, Progresso per Muddy River News). Roster geocode was GEOMETRIC_CENTER but landed within the industrial park; satellite confirmed the large plant; locked center 39.6818,-91.4144.",
           "truckGate": "No barrier arm or gate identified at the property line. The plant access road runs from the public road past an electrical substation, over a creek bridge, and opens directly into the truck yard with no checkpoint structure - treated as open access. Flagged uncertain (Street View coverage on the private access road is partial).",
@@ -1151,6 +988,32 @@
           "scale": "No truck scale identified; flagged uncertain.",
           "railServed": "A rail line runs along the north edge of the industrial park but no spur was observed entering the General Mills property itself.",
           "siteAreaAcres": "Perimeter box ~106 acres covering the plant, multiple drop yards, and employee parking."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://ded.mo.gov/press-room/general-mills-expand-hannibal-creating-more-35-new-jobs",
+              "date": "2024-11-20",
+              "type": "press",
+              "claim": "MO econ-dev: GM expanding its Hannibal plant (since 1972, 1,000+ employees) making Nature Valley/Betty Crocker/Old El Paso/Progresso; new Old El Paso taco line + 35 jobs"
+            },
+            {
+              "tier": 2,
+              "url": "https://www.manufacturingdive.com/news/general-mills-to-close-3-plants-as-part-of-supply-chain-resturcting/801919/",
+              "date": "2025",
+              "type": "trade",
+              "claim": "GM late-2025 MO closures are St. Charles (pizza crust) + two Joplin pet-food sites, NOT Hannibal"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Hannibal was expanded Nov 2024 (taco line); the watch-listed late-2025 MO closures were St. Charles + Joplin, explicitly not Hannibal. Clears.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1351,28 +1214,6 @@
         },
         "dossierExcerpt": "- Roster coords were wrong. The roster pin (42.26391, -88.844267, geocode precision APPROXIMATE) sits in a residential neighborhood in central Belvidere — no industrial building there.\n- Web research (WIFR, Belvidere Chamber of Commerce, Growth Dimensions, REJournals) places the DC at 1210 Irene Rd, on a 111-acre parcel at the realigned Irene Rd / U.S. Route 20 intersection on the SW industrial fringe of Belvidere.\n- Probed satellite SW of the city; found a large new white warehouse just north of US-20. Locked center 42.2440, -88.8975.\n- The facility is a 1.3M sq ft state-of-the-art, fully automated Midwest distribution hub that opened April 2024 (first fully automated DC in General Mills history; ~45 automated machines, 55-75 employees).",
         "mapsUrl": "https://www.google.com/maps/@42.24400,-88.89750,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/general-mills/08-belvidere-il-distribution-center-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.244,
-              "lng": -88.8975
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/general-mills/08-belvidere-il-distribution-center-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.244,
-              "lng": -88.8975
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster coordinates (42.26391,-88.844267, APPROXIMATE) pointed at a residential neighborhood in central Belvidere - wrong. Web research (WIFR, Belvidere Chamber, Growth Dimensions) identified the actual DC at 1210 Irene Rd, on 111 acres at the realigned Irene Rd / US-20 intersection. Locked center 42.2440,-88.8975 by satellite - a single ~1.3M sq ft warehouse confirmed by 2025-08 Street View.",
           "truckGate": "Single private access road leaves US-20 at a signalized intersection and curves NE into the property at its NW corner. Property is a controlled industrial site; satellite imagery is mid-construction (bare-dirt yard) so a gate structure is not yet visible, but a new state-of-the-art automated DC of this scale is treated as a controlled truck entrance.",
@@ -1389,6 +1230,26 @@
           "siteAreaAcres": "Perimeter box ~113 acres, consistent with the reported 111-acre parcel.",
           "buildingCount": "Single distribution building; smaller structures NW and SW are separate, unrelated properties.",
           "trailersVisible": "Mid-construction imagery; ~40-50 trailers visible at docks and in the drop row. Approximate - flagged."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.wifr.com/2024/04/16/general-mills-opens-state-of-the-art-distribution-center/",
+              "date": "2024-04-16",
+              "type": "press",
+              "claim": "GM opened its 1.3M-sq-ft automated DC at 1210 Irene Rd, Belvidere IL (Midwest hub)"
+            }
+          ],
+          "imageryDate": "2025-08",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "GM's first fully automated DC, opened April 2024; brand-new build, no divestiture/closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1491,28 +1352,6 @@
         },
         "dossierExcerpt": "- Roster coords were wrong. The roster pin (39.828255, -84.898477, geocode precision APPROXIMATE) sits in downtown Richmond — no industrial building.\n- Web research (PetfoodIndustry, EDC of Wayne County, Citymapper, Waze) places the $200M Blue Buffalo natural pet food plant at 4878 / 4748 W Industries Rd in the Wayne County Midwest Industrial Park on the west side of Richmond, just south of I-70.\n- Probed satellite west of Richmond; found a large industrial campus with a tall production tower. Locked center 39.8550, -84.9645.\n- The plant is a 400,000 sq ft facility on a 125-acre campus, opened 2018, with a 169,000 sq ft expansion started 2023; produces BLUE dry dog/cat food (>1M lb/day), ~200 employees.",
         "mapsUrl": "https://www.google.com/maps/@39.85500,-84.96450,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/general-mills/09-general-mills-blue-buffalo-richmond-in-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.855,
-              "lng": -84.9645
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/general-mills/09-general-mills-blue-buffalo-richmond-in-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.855,
-              "lng": -84.9645
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster coordinates (39.828255,-84.898477, APPROXIMATE) pointed at downtown Richmond - wrong. Web research (PetfoodIndustry, EDC Wayne County, Citymapper) identified the $200M Blue Buffalo natural pet food plant at 4878/4748 W Industries Rd in the Wayne County Midwest Industrial Park west of Richmond, off I-70. Locked center 39.8550,-84.9645 by satellite - a large 125-acre manufacturing campus.",
           "truckGate": "Single private access road leaves W Industries Rd on the SE side and feeds the loop road that encircles the plant. The whole 125-acre campus is enclosed by a chain-link perimeter fence (clearly visible in 2024-08 Street View along W Industries Rd). Treated as a controlled truck entrance.",
@@ -1530,174 +1369,33 @@
           "siteAreaAcres": "Perimeter box ~122 acres, consistent with the reported 125-acre campus.",
           "scale": "No truck scale identified in imagery - flagged uncertain.",
           "buildingCount": "Three primary buildings counted; smaller ancillary structures not counted separately."
-        }
-      },
-      {
-        "id": "10-general-mills-vineland-nj",
-        "name": "General Mills - Vineland NJ",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "uncertainFields": [
-          "guardShack",
-          "remoteGs",
-          "entryLanes",
-          "exitLanes",
-          "scale"
-        ],
-        "center": {
-          "lat": 39.461,
-          "lng": -75.0365
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 39.463545,
-                "lng": -75.037873
-              },
-              {
-                "lat": 39.462908,
-                "lng": -75.034852
-              },
-              {
-                "lat": 39.459304,
-                "lng": -75.036225
-              },
-              {
-                "lat": 39.45994,
-                "lng": -75.039247
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
             {
-              "ring": [
-                {
-                  "lat": 39.46312,
-                  "lng": -75.037599
-                },
-                {
-                  "lat": 39.462696,
-                  "lng": -75.035676
-                },
-                {
-                  "lat": 39.461848,
-                  "lng": -75.035951
-                },
-                {
-                  "lat": 39.462272,
-                  "lng": -75.037873
-                }
-              ]
+              "tier": 1,
+              "url": "https://agrinovusindiana.com/2023/03/23/general-mills-announces-second-200m-blue-buffalo-expansion-in-four-years/",
+              "date": "2023-03-23",
+              "type": "press",
+              "claim": "GM announces second $200M Blue Buffalo expansion at its Richmond/Wayne County production complex"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.areadevelopment.com/newsitems/3-24-2023/blue-buffalo-richmond-indiana.shtml",
+              "date": "2023-03-24",
+              "type": "press",
+              "claim": "Blue Buffalo (GM) expands Richmond IN dry pet-food production complex"
             }
           ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 39.461,
-                  "lng": -75.038423
-                },
-                {
-                  "lat": 39.460576,
-                  "lng": -75.0365
-                },
-                {
-                  "lat": 39.460046,
-                  "lng": -75.036637
-                },
-                {
-                  "lat": 39.46047,
-                  "lng": -75.03856
-                }
-              ]
-            }
-          ],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 12,
-              "pano": "6UgHJopwL0um7-TjlYyhUw",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 40,
-          "trailersVisible": 55,
-          "trailerParkingCapacity": 75,
-          "truckGateCount": 1,
-          "buildingCount": 1,
-          "siteAreaAcres": 67,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": false,
-          "remoteGs": true,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "25-50",
-          "dropArea": "10-25",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "dossierExcerpt": "- Roster coords (39.461246, -75.036652, geocode precision ROOFTOP) correctly landed on the large industrial plant at 500 W Elmer Rd, Vineland NJ. Locked center 39.4610, -75.0365.\n- Ownership note: This is the former General Mills Progresso soup plant (built 1970, ~580,000 sq ft, 65-acre parcel). General Mills closed the plant in 2017/2018 and sold it for ~$4.5M to F&S Produce Co. (now F&S Fresh Foods), which retrofitted it for fresh-cut produce, salsas, IQF fruit/veg and purees. The roster's General Mills attribution (from the Hyster GM plant list) is stale. The site remains an active food-manufacturing freight facility and is audited as it physically stands today.",
-        "mapsUrl": "https://www.google.com/maps/@39.46100,-75.03650,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/general-mills/10-general-mills-vineland-nj-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.461,
-              "lng": -75.0365
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/general-mills/10-general-mills-vineland-nj-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.461,
-              "lng": -75.0365
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "location": "Roster coordinates (39.461246,-75.036652, ROOFTOP) correctly landed on the large industrial plant at 500 W Elmer Rd, Vineland NJ. Locked center 39.4610,-75.0365.",
-          "ownership": "OWNERSHIP CHANGE - this is the former General Mills Progresso soup plant (built 1970, 580,000 sq ft, 65 acres). General Mills closed the plant in 2017/2018 and sold it for ~$4.5M to F&S Produce Co. (now F&S Fresh Foods), which retrofitted it for fresh-cut produce, salsas, IQF fruits/vegetables and purees. The roster's General Mills attribution (from the Hyster GM plant list) is stale - the physical freight facility is audited as it stands today.",
-          "truckGate": "The truck yard (W-side dock face and N drop yard) is enclosed by a continuous chain-link perimeter fence, clearly visible in 2026-04 Street View behind the front parking lot. A single main access driveway leaves W Elmer Rd on the SE side; trucks pass through a gate in the yard fence to reach the docks. Treated as a controlled truck entrance.",
-          "guardShack": "No staffed guard booth identified at the road or the yard-fence gate in 2026-04 Street View; the entrance driveway is open at the public road. Flagged uncertain.",
-          "remoteGs": "Set true - there is a fenced/gated truck yard but no confirmed staffed booth. Low confidence, flagged.",
-          "drivewayLong": "The access driveway runs from W Elmer Rd up the SE/E side of the plant before reaching the docks/yard - deep enough to stack 3+ trucks.",
-          "dockDoors": "Continuous dock bank along the W wall of the main building with ~25-40 trailers backed in. Banded 25-50.",
-          "dropArea": "A row of drop trailers parked along the N side of the building, separate from the active W dock face - roughly 15-25 stalls. Banded 10-25.",
-          "dropYard": "Dedicated N-side trailer-storage row present.",
-          "shipRcvSeparate": "Dock activity is concentrated on the W building face with the N apron used mainly for trailer storage - treated as a single ship/receive dock cluster.",
-          "urbanRural": "Plant sits on the wooded NW fringe of Vineland (a small South Jersey city) surrounded by woods and farmland - per the rubric's small-town-industrial guidance, classified Rural.",
-          "railServed": "A rail line curves through the woods EAST of the property but does NOT spur into this parcel - it serves other facilities. Not rail-served.",
-          "siteAreaAcres": "Perimeter box ~67 acres, consistent with the reported 65-acre parcel.",
-          "buildingCount": "One large interconnected manufacturing building with attached production/office sections; counted as a single building.",
-          "scale": "No truck scale identified in imagery - flagged uncertain."
+          "imageryDate": "2024-08",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Blue Buffalo is a current GM brand; GM opened the plant 2019 and twice expanded it ($200M each, latest 2023), no negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1833,28 +1531,6 @@
         },
         "dossierExcerpt": "- Name: General Mills - Cincinnati OH\n- Type: Manufacturing Plant (cereal)\n- Address: 11301 Mosteller Road, Cincinnati (Sharonville), OH 45241\n- Resolved center: 39.27900, -84.43170",
         "mapsUrl": "https://www.google.com/maps/@39.27900,-84.43170,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/general-mills/11-general-mills-cincinnati-oh-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.279,
-              "lng": -84.4317
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/general-mills/11-general-mills-cincinnati-oh-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.279,
-              "lng": -84.4317
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "No barrier arm, sliding gate, or guard booth visible at the Mosteller Rd frontage in any Street View pass (2025-06 imagery). The property is open to the road; employee parking fronts the street directly. Truck driveway enters at the SE and is uncontrolled.",
           "multipleFacilities": "Older multi-building manufacturing campus: main warehouse/production block plus a dense south process area with silos, tanks, and several smaller process buildings.",
@@ -1862,6 +1538,26 @@
           "dockDoors": "~28 dock doors estimated from the continuous trailer-backed row along the building's full west face; band 25-50.",
           "railServed": "A rail line runs along the southwest property edge but is separated by a tree buffer with no visible spur entering the GM property.",
           "exitLanes": "Single combined entry/exit driveway; lane count inferred, not crisply resolved in imagery."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://redicincinnati.com/general-mills-chooses-cincinnati-region-for-expansion/",
+              "date": "2021",
+              "type": "press",
+              "claim": "GM's Sharonville (Mosteller Rd) cereal plant expansion ($28M, 33 jobs); makes Cinnamon Toast Crunch, Chex, Fiber One, Cookie Crisp, Cheerios Oat Crunch"
+            }
+          ],
+          "imageryDate": "2025-06",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active GM cereal plant on Mosteller Rd in Sharonville (Cincinnati metro), 200+ employees, expanded 2021; no negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2010,28 +1706,6 @@
         },
         "dossierExcerpt": "- Name: General Mills - Milwaukee WI (Gardetto's / Chex Mix snack plant)\n- Type: Manufacturing Plant (snacks)\n- Address: 4625 S 6th St, Milwaukee, WI 53221\n- Resolved center: 42.96105, -87.92190",
         "mapsUrl": "https://www.google.com/maps/@42.96105,-87.92190,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/general-mills/12-general-mills-milwaukee-wi-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.96105,
-              "lng": -87.9219
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/general-mills/12-general-mills-milwaukee-wi-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.96105,
-              "lng": -87.9219
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "The truck side is an open quasi-public service road running along the building's north face. Trucks and trailers park freely along it. The fenced dock/trailer yard has chain-link gates in its fence, but there is no barrier arm or staffed checkpoint at the property entrance from S 6th St. Classed false; flagged uncertain because the operational yard is fenced.",
           "guardShack": "No staffed booth visible at any entrance in 2025-08 Street View.",
@@ -2040,853 +1714,33 @@
           "multipleFacilities": "Main production/warehouse block plus a separate large building to the west and long covered storage canopies. Some west canopies may be a separate (non-GM) self-storage business — buildingCount flagged uncertain.",
           "railServed": "No rail spur enters the property.",
           "exitLanes": "Single combined entry/exit via the north service road; lane count inferred."
-        }
-      },
-      {
-        "id": "13-general-mills-new-albany-in",
-        "name": "General Mills - New Albany IN",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "uncertainFields": [
-          "guardShack",
-          "remoteGs",
-          "entryLanes",
-          "exitLanes",
-          "scale",
-          "railServed"
-        ],
-        "center": {
-          "lat": 38.3284,
-          "lng": -85.824
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 38.329908,
-                "lng": -85.827021
-              },
-              {
-                "lat": 38.329693,
-                "lng": -85.822901
-              },
-              {
-                "lat": 38.327107,
-                "lng": -85.823176
-              },
-              {
-                "lat": 38.327323,
-                "lng": -85.827296
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
             {
-              "ring": [
-                {
-                  "lat": 38.327861,
-                  "lng": -85.825373
-                },
-                {
-                  "lat": 38.327646,
-                  "lng": -85.822901
-                },
-                {
-                  "lat": 38.327107,
-                  "lng": -85.823039
-                },
-                {
-                  "lat": 38.327323,
-                  "lng": -85.825511
-                }
-              ]
+              "tier": 1,
+              "url": "https://web.mmac.org/Food-Products/General-Mills-1756",
+              "date": "2025",
+              "type": "locator",
+              "claim": "Metro Milwaukee Assoc of Commerce directory: GM Milwaukee plant at 4625 S 6th St makes Chex Mix, Muddy Buddies, Bugles, Gardetto's; 260 employees (GM-acquired 1999)"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.breakroom.cc/en-us/jobs/listing/14120838-general-mills-processing-operator-4625-s-6th-street",
+              "date": "2025-09",
+              "type": "press",
+              "claim": "Active 2025 GM Processing Operator req at 4625 S 6th Street, Milwaukee"
             }
           ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 38.3284,
-                  "lng": -85.826747
-                },
-                {
-                  "lat": 38.328185,
-                  "lng": -85.824
-                },
-                {
-                  "lat": 38.327754,
-                  "lng": -85.824137
-                },
-                {
-                  "lat": 38.327969,
-                  "lng": -85.826884
-                }
-              ]
-            }
-          ],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 191,
-              "pano": "mDj5KhKcv64apMSVbzZA1A",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 30,
-          "trailersVisible": 40,
-          "trailerParkingCapacity": 55,
-          "truckGateCount": 1,
-          "buildingCount": 1,
-          "siteAreaAcres": 43,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": false,
-          "remoteGs": true,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": true,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "25-50",
-          "dropArea": "10-25",
-          "shipRcvSeparate": false,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "dossierExcerpt": "- Roster coords (38.328544, -85.82367, geocode precision GEOMETRIC_CENTER) landed on the correct site — the large industrial complex at 707 Pillsbury Lane, New Albany IN. Locked center 38.3284, -85.8240.\n- Ownership note: This is the former General Mills Pillsbury dough/biscuit plant (founded 1959, ~460,000 sq ft). General Mills closed it in 2016 and sold it (via New Mill Capital / Tiger Group) to The Sazerac Company in June 2018. It now operates as Northwest Ordinance Distilling (Sazerac) — a spirits processing, blending, bottling and distribution facility with 200+ employees. The roster's General Mills attribution (Hyster GM plant list) is stale. The site remains an active manufacturing/distribution freight facility and is audited as it physically stands today.",
-        "mapsUrl": "https://www.google.com/maps/@38.32840,-85.82400,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/general-mills/13-general-mills-new-albany-in-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 38.3284,
-              "lng": -85.824
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/general-mills/13-general-mills-new-albany-in-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 38.3284,
-              "lng": -85.824
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "location": "Roster coordinates (38.328544,-85.82367, GEOMETRIC_CENTER) landed on the large industrial complex at 707 Pillsbury Lane, New Albany IN - correct site. Locked center 38.3284,-85.8240.",
-          "ownership": "OWNERSHIP CHANGE - this is the former General Mills Pillsbury dough/biscuit plant (founded 1959, ~460,000 sq ft). General Mills closed it in 2016 and sold it (via New Mill Capital / Tiger Group) to The Sazerac Company in June 2018. It now operates as Northwest Ordinance Distilling (Sazerac), a spirits processing/blending/bottling/distribution facility, ~200+ employees. The roster's General Mills attribution (Hyster GM plant list) is stale; the physical freight facility is audited as it stands today.",
-          "truckGate": "Plant is enclosed by a continuous chain-link perimeter fence (visible in 2026-03 Street View along Pillsbury Lane). Trucks enter via Pillsbury Lane from the E; z19 satellite shows a checkpoint pinch-point with striped/yellow markings at the E entrance to the fenced yard. Treated as a controlled truck entrance.",
-          "guardShack": "No clearly resolvable standalone guard booth; an angular dark-roofed building near the SE entrance may be an office/visitor structure rather than a gate booth. Flagged uncertain.",
-          "remoteGs": "Set true - fenced/gated truck yard without a confirmed staffed booth. Low confidence, flagged.",
-          "drivewayLong": "Pillsbury Lane runs a long stretch from the E public-road network through the fenced approach before reaching docks - deep stacking room.",
-          "backupSensitive": "The S-side access road and dock approach runs immediately against a dense residential neighborhood; a truck queue at the gate or along the dock road would be tight against housing and could choke the road - backup-sensitive geometry.",
-          "dockDoors": "Dock bank along the S building wall with ~25-40 trailers/positions. Banded 25-50.",
-          "dropArea": "Drop-trailer rows along the S access road and in the W silo yard - roughly 15-25 stalls. Banded 10-25.",
-          "dropYard": "Dedicated trailer-storage rows present (S access road and W yard).",
-          "shipRcvSeparate": "Primary dock activity is on the S building face; W-side loading is minor and tied to the silo/storage operation - treated as a single ship/receive dock cluster.",
-          "urbanRural": "Plant sits inside New Albany (part of the Louisville metro), hemmed by dense residential neighborhoods on the S and other industrial/commercial properties - Urban.",
-          "railServed": "A rail line runs along the E edge of the property in a grass corridor and historically may have served the Pillsbury plant, but no active spur is clearly visible entering the fenced yard in current imagery. Set false; flagged uncertain.",
-          "siteAreaAcres": "Perimeter box ~43 acres covering the building and active yard; published parcel figures vary (34.5 to 58 acres).",
-          "buildingCount": "One large interconnected manufacturing complex; counted as a single building.",
-          "scale": "No truck scale identified in imagery - flagged uncertain."
-        }
-      },
-      {
-        "id": "14-general-mills-reed-city-mi",
-        "name": "General Mills - Reed City MI",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "remoteGs",
-          "entryLanes",
-          "exitLanes",
-          "scale",
-          "dockDoors"
-        ],
-        "center": {
-          "lat": 43.8756,
-          "lng": -85.5087
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 43.875996,
-                "lng": -85.510073
-              },
-              {
-                "lat": 43.875798,
-                "lng": -85.507327
-              },
-              {
-                "lat": 43.874016,
-                "lng": -85.507601
-              },
-              {
-                "lat": 43.874214,
-                "lng": -85.510348
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 43.875204,
-                  "lng": -85.509936
-                },
-                {
-                  "lat": 43.875006,
-                  "lng": -85.507739
-                },
-                {
-                  "lat": 43.874511,
-                  "lng": -85.507876
-                },
-                {
-                  "lat": 43.874709,
-                  "lng": -85.510073
-                }
-              ]
-            }
-          ],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 20,
-              "pano": "SEEu8b5nDbS_Xma5408RUg",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 14,
-          "trailersVisible": 50,
-          "trailerParkingCapacity": 55,
-          "truckGateCount": 1,
-          "buildingCount": 2,
-          "siteAreaAcres": 34,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": false,
-          "remoteGs": true,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": false,
-          "drivewayShort": true,
-          "backupSensitive": true,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "10-25",
-          "dropArea": "25-50",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": true,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "dossierExcerpt": "- Roster coords (43.87584, -85.509751, geocode precision ROOFTOP, moved only 16m) correctly landed on the General Mills Yoplait yogurt plant at 128 E Slosson Ave, Reed City MI. Locked center 43.8756, -85.5087.\n- This is an active General Mills facility — the Yoplait yogurt manufacturing plant in downtown Reed City. The plant is a dense process facility (silos, tanks, pipe racks visible) with a separate NE cooler/warehouse building and trailer drop yard.",
-        "mapsUrl": "https://www.google.com/maps/@43.87560,-85.50870,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/general-mills/14-general-mills-reed-city-mi-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 43.8756,
-              "lng": -85.5087
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/general-mills/14-general-mills-reed-city-mi-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 43.8756,
-              "lng": -85.5087
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "location": "Roster coordinates (43.87584,-85.509751, ROOFTOP, moved only 16m) correctly landed on the General Mills Yoplait yogurt plant at 128 E Slosson Ave, Reed City MI. Locked center 43.8756,-85.5087.",
-          "facility": "Active General Mills facility - the Yoplait yogurt manufacturing plant in downtown Reed City. A dense process plant (visible silos, tanks, pipe racks) plus a separate NE cooler/warehouse and drop yard.",
-          "truckGate": "The truck/dock yard on the N side of the plant appears to have perimeter fencing, and the NE drop yard is a defined trailer-storage lot. However the N approach from the public street is fairly open with no clearly visible barrier arm, swing/sliding gate, or guard booth at the property line in any Street View (2018, 2021, 2024). Set true as a defined fenced truck yard but LOW CONFIDENCE - flagged.",
-          "guardShack": "No guard booth identified at any entrance in available Street View. Flagged uncertain.",
-          "remoteGs": "Set true - fenced truck/dock yard without a confirmed staffed booth. Low confidence, flagged.",
-          "drivewayShort": "The plant fronts directly on downtown streets; the gate-to-dock approach is short (1-2 trucks) - this is a compact, tightly-packed urban-core plant footprint.",
-          "backupSensitive": "Plant sits in the middle of downtown Reed City, hemmed by storefronts, streets and residential blocks; a truck queue at the dock approach would quickly spill onto public streets - backup-sensitive.",
-          "dockDoors": "N-side dock bank shows roughly 6-10 trailers backed in plus dock structures; banded 10-25. Some dock doors may be obscured by process equipment - flagged.",
-          "dropArea": "Large NE drop yard holds roughly 30-40 parked trailers, plus more staged near the dock - banded 25-50.",
-          "dropYard": "Dedicated NE trailer-storage lot, clearly separate from the active dock apron.",
-          "multipleFacilities": "Two building clusters: the main yogurt plant and a separate NE cooler/warehouse building serving the drop yard.",
-          "shipRcvSeparate": "Dock activity concentrated on the N face of the main plant; the NE building is used mainly for trailer storage/cold storage - treated as a single ship/receive dock cluster.",
-          "urbanRural": "Reed City is a small rural Michigan town (~2,400 people); per the rubric's small-town guidance, classified Rural despite the downtown-adjacent setting.",
-          "railServed": "No active rail spur visible entering the plant; the corridor NE near the Hersey River is a rail-trail / recreation path (Reed City Crossroads), not active freight rail into the property.",
-          "siteAreaAcres": "Perimeter box ~34 acres covering the main plant plus the NE drop yard and warehouse.",
-          "buildingCount": "Two primary building clusters counted.",
-          "scale": "No truck scale identified in imagery - flagged uncertain."
-        }
-      },
-      {
-        "id": "15-martel-oh",
-        "name": "General Mills - Martel OH",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "uncertainFields": [
-          "dockDoorCount",
-          "connectivityIssue"
-        ],
-        "center": {
-          "lat": 40.6716,
-          "lng": -82.9086
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 40.673475,
-                "lng": -82.909561
-              },
-              {
-                "lat": 40.672642,
-                "lng": -82.906677
-              },
-              {
-                "lat": 40.669933,
-                "lng": -82.908325
-              },
-              {
-                "lat": 40.670767,
-                "lng": -82.911209
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 40.6716,
-                  "lng": -82.909973
-                },
-                {
-                  "lat": 40.670975,
-                  "lng": -82.907913
-                },
-                {
-                  "lat": 40.670454,
-                  "lng": -82.908188
-                },
-                {
-                  "lat": 40.671079,
-                  "lng": -82.910248
-                }
-              ]
-            }
-          ],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 13,
-              "pano": "mHbDifRQIXxLuKMB7kpVXg",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 16,
-          "trailersVisible": 18,
-          "trailerParkingCapacity": 30,
-          "truckGateCount": 1,
-          "buildingCount": 3,
-          "siteAreaAcres": 30,
-          "railServed": true
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": false,
-          "remoteGs": true,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "10-25",
-          "dropArea": "10-25",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "dossierExcerpt": "- Roster address: 4136 Main Street, Martel, OH 43335 (Manufacturing Plant).\n- Roster geocode moved 22,774 m. That large move was correct: the city-level\n  coordinate was far off and the geocoder snapped to the real industrial plant.\n  Confirmed center ~40.6716, -82.9086.\n- Web search corroborates: the Martel bakery-mix plant sits at 4136 Martel Rd,\n  Caledonia/Martel OH. Ownership note: General Mills owned this plant\n  2001-2016, then sold it to The Mennel Milling Company in 2016. Current gate\n  signage reads \"Mennel.\" The roster's \"Hyster GM plant list\" source is stale.\n  The physical building audited here is the correct site the roster intended.",
-        "mapsUrl": "https://www.google.com/maps/@40.671600,-82.908600,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/general-mills/15-martel-oh-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.6716,
-              "lng": -82.9086
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/general-mills/15-martel-oh-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.6716,
-              "lng": -82.9086
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "ownership": "Roster sourced this from a stale Hyster GM plant list. The Martel bakery-mix plant was a General Mills facility 2001-2016 but was sold to The Mennel Milling Company in 2016; current signage at the gate reads 'Mennel'. The physical building audited is the correct site for the roster's 'Martel OH plant' entry.",
-          "geocode": "Roster geocode moved 22.7km but landed correctly on the actual Martel industrial plant; the city-level coords were far off and the geocoder corrected them. Confirmed by web search (4136 Martel Rd) and Street View signage.",
-          "truckGate": "Chain-link swing/sliding gate where the gravel-paved truck driveway meets Main St (SV captured 2023-09); yellow bollard at the gate. Perimeter chain-link fencing runs along the property frontage and around the parking lots.",
-          "guardShack": "No staffed booth visible at or beside the gate in any Street View heading; the gate is an unstaffed fenced opening, hence remoteGs=true.",
-          "postGateStaging": "Large open paved yard inside the gate between the entrance and the dock aprons provides ample internal holding room.",
-          "dockDoors": "NW building face shows ~6-8 trailers backed into dock doors; additional doors on the SW/rail side. Total estimated 10-25 band; exact count uncertain from overhead imagery.",
-          "dropArea": "NE corner has a marked trailer drop area with ~8-10 parked trailers; additional trailers staged near the NW dock apron.",
-          "railServed": "Multiple rail tracks run along the SE side of the property with rail cars positioned against the building (grain/flour handling).",
-          "multipleFacilities": "Single large industrial complex; counted as one campus. buildingCount of 3 reflects the main plant building plus 2 smaller attached/adjacent structures.",
-          "connectivityIssue": "Rural setting (small unincorporated community of Martel) but along a road with utility lines and a rail corridor; cellular coverage likely adequate - low-confidence false."
-        }
-      },
-      {
-        "id": "16-general-mills-carson-ca",
-        "name": "General Mills - Carson CA",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "high",
-        "uncertainFields": [
-          "entryLanes",
-          "exitLanes",
-          "dockDoorCount"
-        ],
-        "center": {
-          "lat": 33.8634,
-          "lng": -118.2456
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 33.864483,
-                "lng": -118.246561
-              },
-              {
-                "lat": 33.864483,
-                "lng": -118.244776
-              },
-              {
-                "lat": 33.862488,
-                "lng": -118.244776
-              },
-              {
-                "lat": 33.862488,
-                "lng": -118.246561
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [
-            {
-              "ring": [
-                {
-                  "lat": 33.86397,
-                  "lng": -118.246424
-                },
-                {
-                  "lat": 33.86397,
-                  "lng": -118.244913
-                },
-                {
-                  "lat": 33.863628,
-                  "lng": -118.244913
-                },
-                {
-                  "lat": 33.863628,
-                  "lng": -118.246424
-                }
-              ]
-            }
-          ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 33.864312,
-                  "lng": -118.246424
-                },
-                {
-                  "lat": 33.864312,
-                  "lng": -118.244913
-                },
-                {
-                  "lat": 33.864027,
-                  "lng": -118.244913
-                },
-                {
-                  "lat": 33.864027,
-                  "lng": -118.246424
-                }
-              ]
-            }
-          ],
-          "staging": null
-        },
-        "yardMetrics": {
-          "dockDoorCount": 40,
-          "trailersVisible": 36,
-          "trailerParkingCapacity": 55,
-          "truckGateCount": 1,
-          "buildingCount": 1,
-          "siteAreaAcres": 14.8,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": false,
-          "remoteGs": true,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": true,
-          "dockDoors": "25-50",
-          "dropArea": "25-50",
-          "shipRcvSeparate": true,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "dossierExcerpt": "- Address: 1375 Beachey Place, Carson, CA 90746\n- Locked center: 33.86340, -118.24560\n- Confidence in location: High\n\nThe roster geocode (33.862789, -118.245132, ROOFTOP, moved 1291 m) landed on\nthe south-east corner of the correct building. OpenStreetMap places Beachey\nPlace at 33.86216, -118.24539, which matches the road that fronts the building\nin Street View — confirming Beachey Place is the street the facility's gated\nentrance opens onto. Multiple business directories (TruckMap, CMac, Yellow\nPages, Manta) confirm General Mills operates at 1375 Beachey Place. The\nbuilding is a large modern industrial warehouse / production facility\nconsistent with a General Mills manufacturing plant. Note: a stale\nwarehouse-lease listing claimed only 2 dock doors; satellite imagery clearly",
-        "mapsUrl": "https://www.google.com/maps/@33.86340,-118.24560,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/general-mills/16-general-mills-carson-ca-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.8634,
-              "lng": -118.2456
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/general-mills/16-general-mills-carson-ca-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.8634,
-              "lng": -118.2456
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "truckGate": "Two black sliding gates with continuous wrought-iron perimeter fencing across the wide truck driveway off Beachey Place, confirmed in 2025-03 Street View.",
-          "guardShack": "No standalone guard booth structure beside the gate in satellite z20 or Street View; entrance has only a monument sign and a blue check-in/kiosk post inside the gate.",
-          "remoteGs": "Controlled gate present but unstaffed - implies kiosk/call-box/app check-in.",
-          "shipRcvSeparate": "Dock banks on two distinct building faces (east face ~20-24 doors, west face ~15-18 doors) operating as separate clusters.",
-          "fastLaneOpportunity": "Very wide gate apron and deep internal yard drive provide unused paved width for a bypass lane.",
-          "dockDoorCount": "Estimated ~40 total (24 east + 16 west) from z19 imagery; counted as a band.",
-          "entryExitTogether": "Single gated entrance on the south face serves both entry and exit.",
-          "postGateStaging": "Wide paved yard inside the gate before the dock faces can hold trucks.",
-          "urbanRural": "Dense Watson industrial park within the Los Angeles/Carson metro fabric."
-        }
-      },
-      {
-        "id": "17-general-mills-lodi-ca",
-        "name": "General Mills - Lodi CA",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "uncertainFields": [
-          "truckGate",
-          "remoteGs",
-          "entryLanes",
-          "exitLanes",
-          "dockDoorCount",
-          "truckGateCount"
-        ],
-        "center": {
-          "lat": 38.1428,
-          "lng": -121.3003
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 38.145392,
-                "lng": -121.303047
-              },
-              {
-                "lat": 38.145392,
-                "lng": -121.298103
-              },
-              {
-                "lat": 38.140424,
-                "lng": -121.298103
-              },
-              {
-                "lat": 38.140424,
-                "lng": -121.303047
-              }
-            ]
-          },
-          "truckGate": {
-            "ring": [
-              {
-                "lat": 38.145284,
-                "lng": -121.303047
-              },
-              {
-                "lat": 38.145284,
-                "lng": -121.301673
-              },
-              {
-                "lat": 38.144744,
-                "lng": -121.301673
-              },
-              {
-                "lat": 38.144744,
-                "lng": -121.303047
-              }
-            ]
-          },
-          "dropYards": [
-            {
-              "ring": [
-                {
-                  "lat": 38.143664,
-                  "lng": -121.302772
-                },
-                {
-                  "lat": 38.143664,
-                  "lng": -121.300025
-                },
-                {
-                  "lat": 38.142152,
-                  "lng": -121.300025
-                },
-                {
-                  "lat": 38.142152,
-                  "lng": -121.302772
-                }
-              ]
-            }
-          ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 38.14496,
-                  "lng": -121.302223
-                },
-                {
-                  "lat": 38.14496,
-                  "lng": -121.299201
-                },
-                {
-                  "lat": 38.144312,
-                  "lng": -121.299201
-                },
-                {
-                  "lat": 38.144312,
-                  "lng": -121.302223
-                }
-              ]
-            }
-          ],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 153,
-              "pano": "nLlAWp4_WIc4ArogkFoAQg",
-              "hasCoverage": true
-            },
-            "truckGate": {
-              "heading": 153,
-              "pano": "nLlAWp4_WIc4ArogkFoAQg",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 45,
-          "trailersVisible": 60,
-          "trailerParkingCapacity": 196,
-          "truckGateCount": 2,
-          "buildingCount": 4,
-          "siteAreaAcres": 61.4,
-          "railServed": true
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": false,
-          "remoteGs": true,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": true,
-          "dockDoors": "25-50",
-          "dropArea": "50+",
-          "shipRcvSeparate": true,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": true,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#9",
-          "steps": [
-            {
-              "step": "Arrive at gate (no guard, kiosk or call box)",
-              "geofenceTarget": "truckGate",
-              "durationMs": 60000,
-              "narrationKey": "gate.through.kiosk",
-              "baselineWaitMs": 720000,
-              "ynsWaitMs": 0
-            },
-            {
-              "step": "Pass through to drop yard",
-              "geofenceTarget": "dropYard",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Spotter pulls to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 90000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 1200000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit through gate",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 4560000,
-          "totalYnsMs": 2730000
-        },
-        "dossierExcerpt": "- Roster facility: General Mills, Lodi CA. Resolved to the former **General\n  Mills Lodi Cheerios plant at 2000 W Turner Rd, Lodi, CA 95242**.\n- Locked center: 38.14280, -121.30030. Satellite confirms a sprawling\n  ~1.1M sq ft multi-building industrial complex on 66+ acres fronting the south\n  side of W Turner Rd — consistent with a former cereal manufacturing plant.\n- Facility status note: General Mills closed the Lodi Cheerios plant in\n  2015. The complex is now a repurposed multi-tenant industrial property\n  (Bond Manufacturing and other tenants). It was audited as the physical\n  freight site at the roster address; classification reflects the yard as\n  imaged.",
-        "mapsUrl": "https://www.google.com/maps/@38.14280,-121.30030,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/general-mills/17-general-mills-lodi-ca-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 38.1428,
-              "lng": -121.3003
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/general-mills/17-general-mills-lodi-ca-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 38.1428,
-              "lng": -121.3003
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "facilityStatus": "General Mills closed this Lodi Cheerios plant in 2015; the 1.1M sq ft complex on 66+ acres is now a multi-tenant industrial property (Bond Manufacturing and others). Audited as the physical freight site at the roster address.",
-          "truckGate": "Property is fully enclosed by continuous chain-link fence; the truck driveways off W Turner Rd are gated openings (rolling chain-link gates). Medium confidence - gates not clearly closed in 2025 Street View.",
-          "guardShack": "No standalone guard-booth structure visible at any entrance in satellite or Street View.",
-          "remoteGs": "Gated driveways but no staffed booth; multi-tenant repurposed site implies tenant/self check-in.",
-          "railServed": "UP Rail spur runs into the property; a railroad-crossing sign is on W Turner Rd at the dock face. Listings confirm UP Rail service.",
-          "dropArea": "Large numbered trailer drop yard on the west side; property listing cites 196 trailer drops.",
-          "shipRcvSeparate": "Dock banks on the long north face (along W Turner Rd) and a separate rail-served dock cluster on the east face.",
-          "multipleFacilities": "Sprawling campus of multiple connected/adjacent industrial buildings, now multi-tenant.",
-          "urbanRural": "Plant sits at the edge of Lodi (small city) ringed by single-family residential - small-town industrial, classed Rural per rubric.",
-          "fastLaneOpportunity": "Very wide entrance aprons and a vast paved yard provide ample room for express lanes.",
-          "dockDoorCount": "~45 estimated (north face ~30+ doors visible in Street View, plus east rail dock); honest band estimate.",
-          "truckGateCount": "At least two driveway entrances off W Turner Rd serve the yard."
+          "imageryDate": "2025-08",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "GM-operated savory-snacks plant (Chex Mix, Bugles, Gardetto's) at 4625 S 6th St; core GM snack brands, multiple 2025 production reqs, no negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3016,28 +1870,6 @@
         },
         "dossierExcerpt": "- Roster address: 3501 Paseo del Norte NE, Albuquerque, NM 87113.\n- Roster geocode moved 2,485 m (GEOMETRIC_CENTER) and resolved correctly onto\n  the plant. Locked center ~35.1772, -106.6080.\n- Web search confirms: a General Mills cereal manufacturing plant (grain &\n  oilseed milling / breakfast cereal) at this address; member of the Rio\n  Rancho / Bernalillo County Chamber, listed by Dun & Bradstreet and Baking\n  Business.",
         "mapsUrl": "https://www.google.com/maps/@35.177200,-106.608000,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/general-mills/18-albuquerque-nm-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 35.1772,
-              "lng": -106.608
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/general-mills/18-albuquerque-nm-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 35.1772,
-              "lng": -106.608
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed at 3501 Paseo del Norte NE, Albuquerque - a General Mills cereal manufacturing plant. Roster geocode moved 2,485m and resolved correctly onto the plant; verified by web search (Rio Rancho/Bernalillo Chamber, D&B - grain & oilseed milling / breakfast cereal).",
           "truckGate": "Controlled entrance off the SE access road from Paseo del Norte. A guard-booth island sits in the center of the entry roadway; the road splits around it. Gate / barrier crosshatch markings visible at the road entry into the trailer yard.",
@@ -3051,719 +1883,32 @@
           "urbanRural": "Within the Albuquerque metro fabric (industrial/business-park district off Paseo del Norte, a major arterial) - Urban.",
           "entryLanes": "Single combined entry/exit roadway split by the guard island; lane count not crisply countable - estimated 1/1.",
           "buildingCount": "One very large interconnected plant complex (counted as 2 to reflect the main building plus an attached secondary wing); single campus, multipleFacilities=false."
-        }
-      },
-      {
-        "id": "19-hazleton-pa",
-        "name": "General Mills - Hazleton PA",
-        "type": "Manufacturing Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "dockDoorCount",
-          "connectivityIssue"
-        ],
-        "center": {
-          "lat": 40.9274,
-          "lng": -76.0652
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 40.927919,
-                "lng": -76.066161
-              },
-              {
-                "lat": 40.927919,
-                "lng": -76.064101
-              },
-              {
-                "lat": 40.926155,
-                "lng": -76.064101
-              },
-              {
-                "lat": 40.926155,
-                "lng": -76.066161
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
             {
-              "ring": [
-                {
-                  "lat": 40.928126,
-                  "lng": -76.066436
-                },
-                {
-                  "lat": 40.928074,
-                  "lng": -76.064376
-                },
-                {
-                  "lat": 40.927815,
-                  "lng": -76.064376
-                },
-                {
-                  "lat": 40.927867,
-                  "lng": -76.066436
-                }
-              ]
+              "tier": 1,
+              "url": "https://careers.generalmills.com/careers/jobs/35607?lang=en-us",
+              "date": "2026-04",
+              "type": "locator",
+              "claim": "Active GM careers req: Manufacturing Process & Packaging Engineer - Albuquerque Plant, Albuquerque NM"
+            },
+            {
+              "tier": 1,
+              "url": "https://careers.generalmills.com/careers/jobs/32652?lang=en-us",
+              "date": "2026",
+              "type": "locator",
+              "claim": "Active GM careers req: Plant Technical Manager - Albuquerque Plant"
             }
           ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 40.927608,
-                  "lng": -76.065749
-                },
-                {
-                  "lat": 40.927608,
-                  "lng": -76.064376
-                },
-                {
-                  "lat": 40.927296,
-                  "lng": -76.064376
-                },
-                {
-                  "lat": 40.927296,
-                  "lng": -76.065749
-                }
-              ]
-            }
-          ],
-          "staging": null,
-          "streetViewMeta": {}
-        },
-        "yardMetrics": {
-          "dockDoorCount": 18,
-          "trailersVisible": 24,
-          "trailerParkingCapacity": 40,
-          "truckGateCount": 1,
-          "buildingCount": 1,
-          "siteAreaAcres": 22,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "10-25",
-          "dropArea": "10-25",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#3",
-          "steps": [
-            {
-              "step": "Arrive on site (no gate)",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Drive to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 480000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 3030000,
-          "totalYnsMs": 2640000
-        },
-        "dossierExcerpt": "- Roster address: 2 Chestnut Hill Drive, Hazleton, PA 18201. Roster geocode\n  (40.952909, -75.974562) reportedly moved only 7 m but landed in **downtown\n  Hazleton** — a dense residential/commercial grid with no industrial plant.\n  That geocode was wrong.\n- Web search resolved the true location: 2 Chestnut Hill Drive is in the\n  Humboldt Industrial Park, Hazle Township, PA 18202 (~3 km SW of the\n  roster point). A Google Maps directions URL embedded precise coordinates\n  ~40.9275, -76.0652. Confirmed center locked there.\n- Ownership note: the roster's Hyster GM plant list is stale. This bakery\n  plant was part of General Mills' frozen-dough / bakeries business, later\n  divested (Pennant Foods → Fresh Start Bakeries → Aspire Bakeries). Web\n  directories list both \"General Mills\" and \"Fresh Start Bakeries North",
-        "mapsUrl": "https://www.google.com/maps/@40.927400,-76.065200,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/general-mills/19-hazleton-pa-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.9274,
-              "lng": -76.0652
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/general-mills/19-hazleton-pa-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.9274,
-              "lng": -76.0652
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "location": "Roster geocode (40.952909, -75.974562) landed in downtown Hazleton, ~3km off the real plant. The actual facility is at 2 Chestnut Hill Drive in the Humboldt Industrial Park, Hazle Township (40.9275, -76.0652) - confirmed via web search; a Google Maps directions URL embedded the precise coords. The plant is a bread/bakery products facility.",
-          "ownership": "Roster sourced this from the Hyster GM plant list. The Hazleton plant was part of GM's frozen-dough/bakeries business that was divested (Pennant Foods, later Fresh Start Bakeries / Aspire Bakeries). Web directories list both 'General Mills' and 'Fresh Start Bakeries North America' at 2 Chestnut Hill Dr. The physical building audited is the correct site for the roster entry.",
-          "truckGate": "The truck access road runs off Chestnut Hill Drive into the trailer yard as an open paved driveway. No barrier arm, sliding gate, or checkpoint pinch-point visible in z19-z21 satellite imagery at the property line - classified false. No Street View coverage exists inside the industrial park to confirm, so flagged uncertain.",
-          "guardShack": "No guard booth or staffed structure visible at or near the property entrance in satellite imagery. false (uncertain - no Street View).",
-          "postGateStaging": "Large open paved yard between the entrance and the dock aprons gives ample internal holding room; the gate-to-dock approach is long (drivewayLong=true).",
-          "dockDoors": "Dock doors on the building's W and N faces with trailers backed in (z18 imagery shows ~6-10 doors per face); total estimated 10-25 band. Exact count uncertain.",
-          "dropArea": "Trailer drop yard on the NW with ~15-25 trailers parked in rows; dropYard=true.",
-          "railServed": "No rail spur runs into the property; the nearest rail is well off-site.",
-          "urbanRural": "Humboldt Industrial Park, Hazle Township - an edge-of-town industrial park surrounded by woods/open land, ~1 mile from I-81. Classified Rural per the small-town-industrial tie-break rule.",
-          "connectivityIssue": "Industrial park near I-81 with neighboring large facilities (Amazon, US Cold Storage, Niagara) - cellular coverage likely adequate; false at low confidence."
-        }
-      },
-      {
-        "id": "20-allentown-pa",
-        "name": "General Mills - Allentown PA",
-        "type": "Manufacturing Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "uncertainFields": [
-          "dockDoorCount",
-          "truckGate"
-        ],
-        "center": {
-          "lat": 40.5708,
-          "lng": -75.4779
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 40.57153,
-                "lng": -75.478861
-              },
-              {
-                "lat": 40.571217,
-                "lng": -75.476389
-              },
-              {
-                "lat": 40.569548,
-                "lng": -75.476801
-              },
-              {
-                "lat": 40.569757,
-                "lng": -75.478999
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 40.571322,
-                  "lng": -75.478724
-                },
-                {
-                  "lat": 40.571165,
-                  "lng": -75.477488
-                },
-                {
-                  "lat": 40.570904,
-                  "lng": -75.477557
-                },
-                {
-                  "lat": 40.571061,
-                  "lng": -75.478793
-                }
-              ]
-            }
-          ],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 275,
-              "pano": "hi_MBQepOdgQ4WAeXypDyA",
-              "hasCoverage": true
-            },
-            "truckGate": {
-              "heading": 275,
-              "pano": "hi_MBQepOdgQ4WAeXypDyA",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 12,
-          "trailersVisible": 5,
-          "trailerParkingCapacity": 15,
-          "truckGateCount": 1,
-          "buildingCount": 1,
-          "siteAreaAcres": 19,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": false,
-          "drivewayLong": false,
-          "drivewayShort": true,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "10-25",
-          "dropArea": "NONE",
-          "shipRcvSeparate": false,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#3",
-          "steps": [
-            {
-              "step": "Arrive on site (no gate)",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Drive to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 480000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 3030000,
-          "totalYnsMs": 2640000
-        },
-        "dossierExcerpt": "- Roster address: 2132 Downyflake Ln, Allentown, PA 18103.\n- Roster geocode moved 88 m (ROOFTOP) and resolved correctly onto the large\n  industrial building. Locked center ~40.5708, -75.4779.\n- Web search confirms a General Mills cereal-breakfast-foods manufacturing\n  listing at this address.\n- Ownership note: the roster's Hyster GM plant list is stale. The building\n  now carries \"AAi\" signage — American Atelier Inc., a hospitality/\n  institutional furniture manufacturer — and business directories list\n  American Atelier at 2132 Downyflake Ln alongside the historical GM listing.\n  The physical building audited is the correct site the roster intended.",
-        "mapsUrl": "https://www.google.com/maps/@40.570800,-75.477900,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/general-mills/20-allentown-pa-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.5708,
-              "lng": -75.4779
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/general-mills/20-allentown-pa-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.5708,
-              "lng": -75.4779
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "location": "Confirmed at 2132 Downyflake Lane, Allentown, PA 18103. Roster geocode moved 88m and resolved correctly onto the large industrial building. Verified via web search (D&B - cereal breakfast foods manufacturing).",
-          "ownership": "Roster source (Hyster GM plant list) is stale. The building now carries 'AAi' signage - American Atelier Inc., a hospitality/institutional furniture manufacturer - and web directories list American Atelier at 2132 Downyflake Ln alongside the historical General Mills cereal listing. The physical building audited is the correct site for the roster entry.",
-          "truckGate": "The building's parking lot and truck yard connect directly to the public road via open driveways - no barrier arm, sliding gate, fence line, or checkpoint pinch-point visible in satellite or Street View imagery. Open site. truckGate=false; flagged uncertain.",
-          "guardShack": "No guard booth or staffed structure anywhere near the entrances. false.",
-          "drivewayShort": "Open-site approach; the gate-to-dock distance is short with no controlled queue area.",
-          "dockDoors": "Dock activity is on the building's SW/W face under a dock canopy with trailers backed in; estimated 10-25 doors total. The site is now a furniture-manufacturing operation with modest truck traffic and yard clutter (pallets/material). Exact count uncertain.",
-          "dropArea": "No dedicated on-site trailer drop yard for this building. A large trailer drop yard lies ~150m south but belongs to a SEPARATE neighboring facility, not this property - dropArea=NONE, dropYard=false.",
-          "railServed": "A rail line runs along the W edge of the property corridor but no spur enters the building - railServed=false.",
-          "urbanRural": "Within the Allentown metro area in a dense industrial/commercial district (strip retail, multiple large industrial buildings nearby) - Urban.",
-          "buildingCount": "One large interconnected industrial building complex.",
-          "trailersVisible": "Only ~5 trailers visible at/near the docks in the imagery captured - low truck activity consistent with the current furniture-manufacturing tenant."
-        }
-      },
-      {
-        "id": "21-federalsburg-md",
-        "name": "General Mills - Federalsburg MD",
-        "type": "Manufacturing Plant",
-        "archetype": "#9",
-        "archetypeName": "Gate + No GS (remote check-in)",
-        "confidence": "medium",
-        "uncertainFields": [
-          "dockDoors",
-          "dropArea",
-          "remoteGs",
-          "dropYard"
-        ],
-        "center": {
-          "lat": 38.6912,
-          "lng": -75.7654
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 38.690564,
-                "lng": -75.763541
-              },
-              {
-                "lat": 38.692301,
-                "lng": -75.763931
-              },
-              {
-                "lat": 38.691782,
-                "lng": -75.767671
-              },
-              {
-                "lat": 38.690045,
-                "lng": -75.767281
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 38.691202,
-                  "lng": -75.765526
-                },
-                {
-                  "lat": 38.69138,
-                  "lng": -75.765566
-                },
-                {
-                  "lat": 38.691144,
-                  "lng": -75.767266
-                },
-                {
-                  "lat": 38.690966,
-                  "lng": -75.767226
-                }
-              ]
-            }
-          ],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 17,
-              "pano": "30fLwftzN5fXibXiPpBfjQ",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 8,
-          "trailersVisible": 4,
-          "trailerParkingCapacity": 15,
-          "truckGateCount": 1,
-          "buildingCount": 4,
-          "siteAreaAcres": 22,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": true,
-          "guardShack": false,
-          "remoteGs": true,
-          "preGateStaging": true,
-          "postGateStaging": false,
-          "drivewayLong": false,
-          "drivewayShort": true,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "0-10",
-          "dropArea": "0-10",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "dossierExcerpt": "- Name: General Mills - Federalsburg MD\n- Type: Manufacturing Plant\n- Address: 300 Reliance Ave, Federalsburg, MD 21632\n- Resolved center: 38.69120, -75.76540\n- Roster coords: 38.691248, -75.764969 (ROOFTOP, ~606 m move) — close; corrected slightly to the building-cluster centroid.",
-        "mapsUrl": "https://www.google.com/maps/@38.69120,-75.76540,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/general-mills/21-federalsburg-md-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 38.6912,
-              "lng": -75.7654
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/general-mills/21-federalsburg-md-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 38.6912,
-              "lng": -75.7654
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "siteIdentity": "Site at 300 Reliance Ave was divested by General Mills to Kraft (2010) and now operates as Eastern Shore Forest Products / an agricultural processing facility (banner sign on the gate). Audited as the physical plant at the roster address.",
-          "truckGate": "Chain-link sliding gate across the entrance drive on the property's south frontage, confirmed in Street View (2023-07) - fenced perimeter with a banner sign at the gate.",
-          "guardShack": "No staffed booth visible at the gate in any Street View heading; gate appears un-staffed (chain-link slide gate only).",
-          "remoteGs": "Gate present but no guard shack - treated as remote/self check-in.",
-          "dockDoors": "Modest dock count along the south face of the main building; estimated 6-10, low confidence from overhead foliage shadow.",
-          "dropArea": "A few trailers parked along the central building face and a small paved drop area; estimated under 10.",
-          "urbanRural": "Small-town edge setting - residential houses directly across Reliance Ave, woodland on three sides, river to the west. Rural.",
-          "buildingCount": "Western building, two central connected buildings, and an eastern dark-roof building - 4 distinct structures plus minor outbuildings.",
-          "siteAreaAcres": "MDE Brownfield record lists the General Mills/Pillsbury property as 21.31 acres; perimeter box yields ~22 acres gross."
-        }
-      },
-      {
-        "id": "22-vinita-ok",
-        "name": "General Mills - Vinita OK",
-        "type": "Manufacturing Plant",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "uncertainFields": [
-          "dropArea",
-          "trailerParkingCapacity"
-        ],
-        "center": {
-          "lat": 36.6583,
-          "lng": -95.1352
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 36.6583,
-                "lng": -95.137397
-              },
-              {
-                "lat": 36.65852,
-                "lng": -95.134788
-              },
-              {
-                "lat": 36.656758,
-                "lng": -95.134513
-              },
-              {
-                "lat": 36.656537,
-                "lng": -95.137123
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [
-            {
-              "ring": [
-                {
-                  "lat": 36.657198,
-                  "lng": -95.136573
-                },
-                {
-                  "lat": 36.657308,
-                  "lng": -95.134925
-                },
-                {
-                  "lat": 36.656758,
-                  "lng": -95.134857
-                },
-                {
-                  "lat": 36.656647,
-                  "lng": -95.136505
-                }
-              ]
-            }
-          ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 36.65808,
-                  "lng": -95.136299
-                },
-                {
-                  "lat": 36.65819,
-                  "lng": -95.134925
-                },
-                {
-                  "lat": 36.657859,
-                  "lng": -95.134857
-                },
-                {
-                  "lat": 36.657749,
-                  "lng": -95.13623
-                }
-              ]
-            }
-          ],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 60,
-              "pano": "6v-QuwbFVLem7TLtghhC7Q",
-              "hasCoverage": true
-            },
-            "truckGate": {
-              "heading": 60,
-              "pano": "6v-QuwbFVLem7TLtghhC7Q",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 8,
-          "trailersVisible": 1,
-          "trailerParkingCapacity": 25,
-          "truckGateCount": 1,
-          "buildingCount": 1,
-          "siteAreaAcres": 9.7,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": false,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "0-10",
-          "dropArea": "0-10",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#3",
-          "steps": [
-            {
-              "step": "Arrive on site (no gate)",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Drive to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 480000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 3030000,
-          "totalYnsMs": 2640000
-        },
-        "dossierExcerpt": "- Name: General Mills - Vinita OK\n- Type: Manufacturing Plant (frozen-dough / bakeries & foodservice)\n- Address: 1157 Doughboy Drive, Vinita, OK 74301\n- Resolved center: 36.65830, -95.13520\n- Roster coords: 36.657508, -95.138633 (ROOFTOP, ~2515 m geocode move) —\n  the roster point landed on Doughboy Drive frontage; corrected ~150 m NE onto\n  the actual plant building.",
-        "mapsUrl": "https://www.google.com/maps/@36.65830,-95.13520,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/general-mills/22-vinita-ok-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 36.6583,
-              "lng": -95.1352
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/general-mills/22-vinita-ok-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 36.6583,
-              "lng": -95.1352
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "siteIdentity": "Confirmed General Mills Bakeries & Foodservice frozen-dough plant, 1157 Doughboy Drive, ~110,000 sq ft on ~9.7 acres, built 1995, 8 dock doors, 5 spiral freezers, ammonia refrigeration. Listed for sale on Showcase.com/LoopNet (frozen dough operation, now a separate-tenant property).",
-          "truckGate": "Truck entrance is an open driveway at the north end through a gap in the perimeter chain-link fence - no barrier arm, slide gate or checkpoint visible in Street View (2025-04). truckGate = false.",
-          "guardShack": "No guard booth at the entrance in any Street View heading.",
-          "perimeterFence": "Property is enclosed by a chain-link perimeter fence, but the truck entrance itself is uncontrolled.",
-          "dockDoors": "Showcase/LoopNet listing states 8 dock doors; recessed loading area visible on the building's west face in Street View - dockDoors band 0-10.",
-          "dropArea": "Large open paved lot SW of the building with capacity for trailer parking, but few/no trailers seen in current imagery - drop area band 0-10.",
-          "drivewayLong": "North entrance driveway runs a long way from Doughboy Drive into the property before reaching the building/dock - deep approach, can hold 3+ trucks.",
-          "urbanRural": "Edge-of-town industrial park near I-44/Hwy-2 outside Vinita, surrounded by open farmland - Rural.",
-          "railServed": "No rail spur runs into the property; nearest rail line is well west of the industrial park."
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Multiple current GM careers reqs tag the Albuquerque cereal plant (3501 Paseo del Norte NE); GM actively self-operating, no negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -3866,28 +2011,6 @@
         },
         "dossierExcerpt": "- Roster address: 2500 9th Ave N, Great Falls, MT 59401 (Flour Mill).\n- Roster geocode moved 49 m (ROOFTOP) and resolved correctly onto the mill.\n  Locked center ~47.5152, -111.2616.\n- Web search confirms an active General Mills flour mill / grain elevator at\n  this address (Montana Chamber grain-elevator membership, CMac grain-elevator\n  directory). A \"General Mills\" sign is visible on the building in Street\n  View. This remains a current General Mills facility.",
         "mapsUrl": "https://www.google.com/maps/@47.515200,-111.261600,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/general-mills/23-great-falls-mt-flour-mill-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 47.5152,
-              "lng": -111.2616
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/general-mills/23-great-falls-mt-flour-mill-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 47.5152,
-              "lng": -111.2616
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Confirmed at 2500 9th Ave N, Great Falls, MT 59401 - an active General Mills flour mill / grain elevator. Roster geocode moved 49m and resolved correctly onto the mill. Verified by web search (Montana Chamber grain-elevator listing, CMac grain-elevator directory) and a 'General Mills' sign visible on the building in Street View.",
           "facilityCharacter": "This is a grain-milling / flour-mill operation, not a truck-yard distribution site. The complex runs E-W along a rail corridor: tall grain-elevator silos on the W, processing/mill buildings in the center, a long warehouse on the E. Freight is predominantly RAIL - covered hopper railcars sit on multiple sidings against the mill and warehouse in both satellite and Street View imagery.",
@@ -3900,6 +2023,32 @@
           "urbanRural": "Within the city of Great Falls, surrounded by residential blocks to the S and commercial/industrial development to the N - Urban.",
           "buildingCount": "Counted as 3: the grain-elevator/silo headhouse, the central mill/processing building, and the long E warehouse - one contiguous campus, multipleFacilities=false.",
           "entryLanes": "Single combined entry/exit via gravel service road; precise lane count not determinable - estimated 1/1."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.generalmills.com/careers/jobs/32549?lang=en-us",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Active GM careers req (General Plant Laborer) at the Great Falls, MT plant on careers.generalmills.com, current June 2026"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.world-grain.com/directories/1801-grain-milling-annual/listing/1654-general-mills-inc",
+              "date": "2025-01",
+              "type": "trade",
+              "claim": "World Grain Milling Annual lists GM Great Falls MT mill (white-flour/durum-semolina swing mill)"
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "GM retains its milling business; active GM-domain careers req at Great Falls + trade milling listing, no closure/sale negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4036,28 +2185,6 @@
         },
         "dossierExcerpt": "The roster coordinate (45.048708, -93.270153, GEOMETRIC_CENTER, moved 2232 m)\nlanded on the east edge of the industrial site. Satellite probing at z16-z18\nrevealed the actual mill complex slightly west-southwest: a multi-story\nconcrete mill tower, a cluster of large concrete grain-elevator silos, a long\nrow of low metal grain-storage silos along the rail yard, and conveyor\nbridges. Web research confirmed this is the General Mills Fridley plant\n(\"Mill O\"), an oat-milling facility that cleans and mills oats for Cheerios\nand Lucky Charms (address 25 44th Ave NE; World Grain / industry directories).\nCenter locked at 45.04830, -93.27080.",
         "mapsUrl": "https://www.google.com/maps/@45.04830,-93.27080,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/general-mills/24-fridley-mn-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 45.0483,
-              "lng": -93.2708
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/general-mills/24-fridley-mn-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 45.0483,
-              "lng": -93.2708
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "siteIdentity": "Confirmed General Mills Fridley plant ('Mill O'), 25 44th Avenue NE, Fridley MN - an oat-milling / flour-mill facility that cleans and mills oats for Cheerios and Lucky Charms. Multi-story concrete mill tower, large concrete grain elevator silos to the north, a long row of low metal grain-storage silos along the rail yard to the west, conveyor bridges, and bulk-handling structures. Located between the BNSF Northtown rail yard (west) and a residential neighborhood (east).",
           "truckGate": "Truck entrance is a single wide open paved driveway off the public access road at the SE corner of the property. Street View (2022-06 and 2021-08) shows no barrier arm, no slide/swing gate, and no checkpoint pinch-point at the property line - the driveway opens directly onto the road. truckGate = false.",
@@ -4070,6 +2197,33 @@
           "urbanRural": "Inside the Minneapolis-St. Paul metro, immediately adjacent to dense residential fabric in Fridley - Urban.",
           "buildingCount": "Multi-structure mill campus: main mill tower, concrete grain elevator silos, low metal silo row, and a separate admin/shop building to the south - counted as ~4 distinct buildings.",
           "scale": "Possible truck scale near the grain-receiving silo loadout but not clearly confirmed from imagery - listed uncertain."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.world-grain.com/directories/1801-grain-milling-annual/listing/1914-general-mills-inc",
+              "date": "2025-01",
+              "type": "trade",
+              "claim": "World Grain Milling Annual lists the GM Fridley/Minneapolis elevator-and-mill facility"
+            },
+            {
+              "tier": 1,
+              "url": "https://www.indeed.com/cmp/General-Mills/locations/MN/Fridley",
+              "date": "2026-04",
+              "type": "press",
+              "claim": "30+ active GM production/maintenance roles at the Fridley MN plant (oat/flour milling for Cheerios), current 2026"
+            }
+          ],
+          "imageryDate": "2022-06",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "GM-operated oat/flour mill (\"Mill O\", 25 44th Ave NE) supplying Cheerios/Lucky Charms, distinct from the GM HQ campus; milling is retained, dozens of current reqs, no negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4191,28 +2345,6 @@
         },
         "dossierExcerpt": "The roster coordinate (34.994832, -85.383492, ROOFTOP, moved 149 m) landed\ndirectly on a large warehouse building. Satellite probing at z16-z18 confirmed\na two-building distribution-center complex along Wauhatchie Pike on the west\nbank of a major rail corridor at the foot of Lookout Mountain. Web research\n(Yelp, Manta, Hyster GM plant locations list) confirmed General Mills at\n650 Wauhatchie Pike — the southern of the two long warehouse buildings — with\na second General Mills address at 960 Wauhatchie Pike (the northern building).\nBoth are part of the same fenced complex. Center locked on the southern\n(650) building at 34.99430, -85.38350.",
         "mapsUrl": "https://www.google.com/maps/@34.99430,-85.38350,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/general-mills/25-chattanooga-tn-distribution-center-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.9943,
-              "lng": -85.3835
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/general-mills/25-chattanooga-tn-distribution-center-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.9943,
-              "lng": -85.3835
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "siteIdentity": "Confirmed General Mills Chattanooga distribution center, 650 Wauhatchie Pike, Chattanooga TN 37419 (verified via Yelp, Manta, Hyster GM plant locations list). Large two-building DC complex on the west bank of the rail corridor; the roster address (650) is the southern of the two long warehouse buildings. A second General Mills address (960 Wauhatchie Pike) is the northern building - both are part of the same fenced industrial complex.",
           "truckGate": "Property is enclosed by a continuous chain-link perimeter fence. The main truck entrance is a wide paved driveway off Wauhatchie Pike in the gap between the two buildings; Street View (2025-10) shows a fence-line gate opening signed 'Gate 3' with a sliding gate panel and yellow concrete jersey barriers channelizing the lane. truckGate = true.",
@@ -4226,6 +2358,26 @@
           "urbanRural": "Edge-of-town industrial corridor along Wauhatchie Pike at the foot of Lookout Mountain, west of Chattanooga proper, with woods/ridge and scattered rural residential nearby - judged Rural per the rubric's small-town-vs-urban tie-breaker.",
           "drivewayLong": "The Gate 3 driveway runs a long way from Wauhatchie Pike into the interior yard between the buildings before reaching the docks - deep approach, holds 3+ trucks.",
           "backupSensitive": "Wauhatchie Pike is a low-traffic two-lane road and the gate apron has ample paved width, so a truck queue at the gate would not block a public artery."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 3,
+              "url": "https://www.yelp.com/biz/general-mills-chattanooga-2",
+              "date": "2026-02",
+              "type": "trade",
+              "claim": "Directory listing for GM at 650 Wauhatchie Pike, Chattanooga TN, updated Feb 2026 (corroboration only, not Tier-1)"
+            }
+          ],
+          "imageryDate": "2025-10",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "LOW CONFIDENCE: no Tier-1 (no GM locator/careers req for this DC) and no Tier-2 negative; only Tier-3 directory presence. Ships caveated/capped.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -4333,28 +2485,6 @@
         },
         "dossierExcerpt": "The roster coordinate (34.041998, -117.507563, ROOFTOP, moved 52 m) landed on\nthe south end of a large warehouse. Satellite probing at z16-z18 showed a\nsingle very large rectangular distribution-center building in the Fontana\nSouthwest Industrial Park, running roughly N-S between Mulberry Ave (east)\nand a row of neighboring warehouses (west). Web research (Yelp, YellowPages,\nSuperpages, Hyster GM plant-locations list) confirmed General Mills at\n11618 Mulberry Ave; a red \"General Mills\" sign is visible at the entrance in\nStreet View. Center locked at 34.04330, -117.50810.",
         "mapsUrl": "https://www.google.com/maps/@34.04330,-117.50810,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/general-mills/26-fontana-ca-distribution-center-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.0433,
-              "lng": -117.5081
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/general-mills/26-fontana-ca-distribution-center-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.0433,
-              "lng": -117.5081
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "siteIdentity": "Confirmed General Mills Fontana distribution center, 11618 Mulberry Ave, Fontana CA 92337 (verified via Yelp, YellowPages, Superpages, Hyster GM plant locations list; red 'General Mills' sign visible at the entrance in Street View). A single very large rectangular DC warehouse (well over 1M sq ft) in the Southwest Industrial Park, running roughly N-S between Mulberry Ave (east) and a row of neighboring warehouses (west).",
           "truckGate": "Truck entrance is a controlled driveway off Mulberry Ave on the building's east side, leading into the dock yard. Satellite (z20/z21) shows a chain-link gate panel across the truck lane plus painted STOP and directional lane arrows on the driveway pavement; Street View (2023-12) confirms a sliding chain-link gate at the property line. The entire Mulberry Ave frontage is otherwise enclosed by a perimeter wall/fence. truckGate = true.",
@@ -4368,6 +2498,26 @@
           "drivewayLong": "The east-side truck driveway runs from Mulberry Ave deep into the dock yard before reaching the dock doors - deep approach, holds 3+ trucks.",
           "staging": "Wide paved yard along the building's west side provides additional interior maneuvering / staging space.",
           "backupSensitive": "Mulberry Ave is a wide multi-lane arterial and the gate apron has ample paved depth, so a truck queue at the gate would not block the public road."
+        },
+        "verification": {
+          "verdict": "probable",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            {
+              "tier": 3,
+              "url": "https://www.yelp.com/biz/general-mills-fontana",
+              "date": "2026-05",
+              "type": "trade",
+              "claim": "Directory listing for GM at 11618 Mulberry Ave, Fontana CA, updated May 2026 (corroboration only, not Tier-1)"
+            }
+          ],
+          "imageryDate": "2023-12",
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "LOW CONFIDENCE: no Tier-1, no Tier-2 negative; current directory presence and a known food-grade 3PL footprint in Fontana suggest a likely 3PL-operated GM DC. Operator/tenancy inferred, not proven.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       }
     ]

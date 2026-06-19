@@ -1,21 +1,21 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-02T16:16:46.936Z",
+  "builtAt": "2026-06-19T03:20:09.249Z",
   "account": {
     "slug": "jm-smucker",
     "displayName": "The J.M. Smucker Company",
     "archetype": "cpg",
-    "siteCount": 17,
+    "siteCount": 14,
     "coverageNote": {
-      "auditedCount": 17,
+      "auditedCount": 14,
       "estimatedFootprint": 30,
+      "totalGlobalFootprint": 30,
+      "auditedScope": "NA",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "J.M. Smucker operates ~30 NA plants (Jif, Folgers, Smucker, Milk-Bone, etc.). We audited 17 representative sites.",
-      "auditedScope": "NA",
-      "totalGlobalFootprint": 30
+      "note": "J.M. Smucker operates ~30 NA plants (Jif, Folgers, Smucker, Milk-Bone, etc.). We audited 17 representative sites."
     },
-    "featuredSiteId": "04-uncrustables-longmont-co",
+    "featuredSiteId": "14-pet-food-plant-topeka-ks",
     "dossierIntro": "J.M. Smucker runs jam, Folgers, Jif peanut butter, and Milk-Bone. 30 facilities; we audited 17. The Uncrustables plant in Longmont CO is 91.3 acres of frozen sandwich manufacturing. Topeka KS pet food is 140 acres. 6 of 17 sites are rail-served. YardFlow runs the frozen, shelf-stable, and pet food flows on three protocols inside one gate.",
     "surprisingFindings": [
       "Uncrustables Longmont CO is 91.3 acres. The plant exists for a single product: frozen PB&J sandwiches.",
@@ -26,22 +26,22 @@
   "research": null,
   "network": {
     "bbox": [
-      -121.804697,
+      -105.055109,
       29.913662,
-      -76.107681,
+      -78.829268,
       42.90929
     ],
     "archetypeMix": {
       "#9": 6,
       "#7": 2,
-      "#3": 9
+      "#3": 6
     },
     "totals": {
-      "dockDoors": 504,
-      "trailerCapacity": 1252,
-      "gates": 22,
+      "dockDoors": 447,
+      "trailerCapacity": 1119,
+      "gates": 19,
       "railServed": 6,
-      "acres": 824.5
+      "acres": 750.4999999999999
     },
     "sites": [
       {
@@ -171,28 +171,6 @@
         },
         "dossierExcerpt": "The roster pin (30.034172, -89.911159, ROOFTOP) landed on the north edge of a\nlarge industrial complex. Satellite probes (z16–z19) revealed a massive\nsingle-roof industrial building with attached processing equipment, silos and a\nrail spur along the north edge — consistent with a bulk coffee roasting plant,\nnot an office. Street View (captured Nov 2025) from the south frontage road\nconfirmed the Folgers/Smucker coffee roasting building, with its tall processing\ntower and a continuous chain-link perimeter fence backed by a hedge.\n\nWeb research confirms this is the Old Gentilly Rd plant — opened 1960, acquired\nby J.M. Smucker with Folgers in 2008, described as the largest bulk coffee\nfacility of its kind in the world; it shares the New Orleans operation (>700\nemployees, 300+ products) with the separate Coffee Silo Operations site.",
         "mapsUrl": "https://www.google.com/maps/@30.0335,-89.9112,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/jm-smucker/01-coffee-roasting-new-orleans-la-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 30.0335,
-              "lng": -89.9112
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/jm-smucker/01-coffee-roasting-new-orleans-la-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 30.0335,
-              "lng": -89.9112
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Folgers/J.M. Smucker Old Gentilly Rd coffee roasting plant, New Orleans East. Confirmed via Street View (Nov 2025) showing the large industrial roasting building with processing tower and continuous perimeter fence/hedge, plus web research (largest bulk coffee facility of its kind in the world; opened 1960).",
           "truckGate": "Wide gated truck entrance on the SW frontage road (~30.0316,-89.9135): a fence opening with sliding/swing gate panels set back from the road and an overhead gantry sign structure spanning the driveway. Clear controlled checkpoint.",
@@ -204,6 +182,32 @@
           "fastLaneOpportunity": "Gate driveway is wide with substantial unused paved apron width; room exists to add a bypass/express lane.",
           "dockDoorCount": "~30 estimate from overhead imagery; many bays partially obscured by building shadow and tree cover along faces. Flagged low confidence.",
           "siteAreaAcres": "73.8 acres for the full fenced manufacturing complex (building cluster plus rail-served processing yard and dock aprons). Historical 1960 footprint was ~20 acres; the operation has expanded substantially."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.jmsmucker.com/new-orleans",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Smucker self-attests three New Orleans coffee facilities incl. one of the world's largest roasting facilities (Folgers/Dunkin'/Cafe Bustelo), ~700 employees."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.folgerscoffee.com/where-we-roast",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Folgers (a Smucker brand) has roasted coffee in New Orleans since 1960; current roasting ops."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Smucker/Folgers Tier-1 pages confirm current self-operated New Orleans coffee roasting; no closure/sale found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -309,28 +313,6 @@
         },
         "dossierExcerpt": "The roster pin (29.914282, -90.114356, ROOFTOP) landed inside container stacks\nof the Port of New Orleans Napoleon Avenue Container Terminal — not on the\nSilocaf building itself. Web research established that Silocaf (\"the world's\nlargest automated silo plant for green-coffee processing\") was built in the\nearly 1990s on the cleared site of the former Public Grain Elevator, at 5240\nCoffee Dr inside the port terminal.\n\nSearching the satellite imagery for the distinctive silo cluster located the\nfacility ~190 m SE of the pin: a compact vertical industrial building with a\nvisible row of cylindrical bulk-storage silos along its south edge,\nprocessing conveyors, and a blue-roofed annex. This matches a green-coffee silo\nplant and is the correct building. Locked center: 29.9139, -90.1122.",
         "mapsUrl": "https://www.google.com/maps/@29.9139,-90.1122,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/jm-smucker/02-coffee-silo-operations-new-orleans-la-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 29.9139,
-              "lng": -90.1122
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/jm-smucker/02-coffee-silo-operations-new-orleans-la-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 29.9139,
-              "lng": -90.1122
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Silocaf / Smucker Coffee Silo Operations, the world's largest automated green-coffee silo plant, 5240-5242 Coffee Dr. Built ~1992 on the cleared site of the former Public Grain Elevator. Confirmed via satellite: a compact vertical processing building with a row of cylindrical bulk-storage silos along its south edge, conveyors and a blue-roofed annex, sitting inside the Port of New Orleans Napoleon Avenue Container Terminal.",
           "truckGate": "TRUE but indirect — the Silocaf building has no separate fenced perimeter or its own gate. It sits deep inside the secured Port of New Orleans Napoleon Avenue Container Terminal; all truck access is controlled at the port terminal's manned gate. Classified as a controlled (gated) truck entrance at the terminal level. Flagged uncertain because the gate is the port's, not the facility's own.",
@@ -343,6 +325,32 @@
           "siteAreaAcres": "6.1 acres for the Silocaf building footprint plus its immediate truck apron and silo row. The broader Napoleon Avenue Container Terminal it sits within is far larger but is a separate port property.",
           "buildingCount": "2 — the main processing/silo building and an adjacent office/ancillary building to the NE.",
           "confidence": "Medium overall — the facility was positively identified and the silo plant is unambiguous, but it is enclosed within a secured port terminal with no public Street View, so gate/guard-shack/lane details are inferred from port-operations context rather than directly observed."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.jmsmucker.com/new-orleans",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Smucker self-attests 'our three New Orleans facilities' include the largest bulk coffee facility in the world and references 'our Silo facility'."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.neworleanschamber.org/list/member/smucker-coffee-silo-operations-new-orleans-11837",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Listing for 'Smucker Coffee Silo Operations' at 5242 Coffee Dr handling raw green/decaf/soluble coffee through blending and shipment to roasting."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Despite legacy 'Silocaf/Pacorini' name, current evidence (Smucker Coffee Silo Operations LLC + Smucker green-coffee-ops staffing) shows Smucker-operated today.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -489,28 +497,6 @@
         },
         "dossierExcerpt": "The roster pin (33.29206, -87.082404) was geocoded APPROXIMATE and 5963 m off —\nit landed in rural woods near I-20, not on the plant. Web research established\nthe plant address as 7351 Old Tuscaloosa Highway inside the JeffMet McCalla\n(Jefferson Metropolitan Park) industrial park — a 739-acre park on the south\nside of US-11, bordered by Old Tuscaloosa Hwy/US-11 to the NW and Norfolk\nSouthern Railroad to the SE, connected to I-20/59 via McAshan Drive. Smucker\nbought ~225 acres there; the $1.1B, ~900,000 sq ft plant opened Nov 2024 as the\nlargest single-line bakery in the US.\n\nSatellite probing of the JeffMet park located a single very large modern\nfood-plant building (~33.2992, -87.0595): a complex roofline, banks of rooftop\nrefrigeration units (consistent with a frozen-product plant), extensive dock",
         "mapsUrl": "https://www.google.com/maps/@33.2992,-87.0595,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/jm-smucker/03-uncrustables-mccalla-al-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 33.2992,
-              "lng": -87.0595
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/jm-smucker/03-uncrustables-mccalla-al-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 33.2992,
-              "lng": -87.0595
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "J.M. Smucker Uncrustables plant, 7351 Old Tuscaloosa Highway, JeffMet McCalla industrial park, Jefferson County AL. $1.1B, ~900,000 sq ft, opened Nov 2024 — the largest single-line bakery in the US, third Uncrustables plant. The roster pin was 5963m off (geocode flagged APPROXIMATE); resolved by web research (JeffMet McCalla park bordered by Old Tuscaloosa Hwy/US-11 NW, Norfolk Southern rail SE) and satellite — a single very large modern food-plant building with a complex roof, rooftop refrigeration banks (frozen-product plant), dock banks and a controlled gated entrance.",
           "truckGate": "TRUE — satellite (z20-z22) shows a divided entrance road at the building's SE corner with separate marked IN and OUT lanes (directional arrows), lane striping, and a barrier-arm gate structure spanning the lanes. Clear controlled truck checkpoint.",
@@ -525,6 +511,32 @@
           "buildingCount": "1 — a single very large integrated manufacturing/distribution building.",
           "siteAreaAcres": "90.1 acres for the developed/fenced operational footprint (building + truck yards + drop lot + employee parking + retention). The full Smucker parcel is ~225 acres.",
           "confidence": "Medium — facility identified by location, scale and frozen-plant roof signature with high confidence, but the available satellite imagery appears to be from the construction/just-opened period and the gate/guard-booth details are partly inferred; no Street View reaches the gate itself."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://investors.jmsmucker.com/news/news-details/2024/The-J.M.-Smucker-Co.-Celebrates-Opening-of-the-Newest-Uncrustables-Manufacturing-Facility-in-McCalla-Alabama/default.aspx",
+              "date": "2024-11-07",
+              "type": "press",
+              "claim": "Smucker celebrated opening of its new ~900k sq ft Uncrustables plant in McCalla AL."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.prnewswire.com/news-releases/the-jm-smucker-co-celebrates-opening-of-the-newest-uncrustables-manufacturing-facility-in-mccalla-alabama-302299372.html",
+              "date": "2024-11-07",
+              "type": "press",
+              "claim": "Official Smucker PR confirming McCalla AL Uncrustables plant opening, 3rd dedicated location."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Smucker's own PR confirms Nov 2024 opening of its $1.1B self-built 3rd Uncrustables plant; operating, not under construction.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -587,8 +599,7 @@
               ]
             }
           ],
-          "staging": null,
-          "streetViewMeta": {}
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 45,
@@ -661,28 +672,6 @@
         },
         "dossierExcerpt": "The roster pin (40.184331, -105.178241) was geocoded RANGE_INTERPOLATED off the\naddress 11555 N 75th St — but that address resolves to rural lake/farmland in NW\nLongmont, with no industrial plant present. Web research established the actual\nSmucker Uncrustables plant location: Smucker bought land in the **Concepts\nIndustrial Park near the NW corner of Colorado Highway 119 and Fairview\nStreet**, on the east end of Longmont in Weld County (~$4.65M land purchase).\nThe plant opened July 2019 ($340-350M, originally ~430,000 sq ft; a ~240,000 sq\nft expansion has since brought it to ~674,000 sq ft).\n\nSatellite probing of the Hwy 119 / Fairview St area located a large white\nfood-plant building (~40.164, -105.0525) with rooftop solar, extensive dock\nbanks, and a large trailer drop yard. Street View (2024) confirmed the building",
         "mapsUrl": "https://www.google.com/maps/@40.164,-105.0525,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/jm-smucker/04-uncrustables-longmont-co-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.164,
-              "lng": -105.0525
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/jm-smucker/04-uncrustables-longmont-co-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.164,
-              "lng": -105.0525
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "J.M. Smucker Uncrustables plant, Concepts Industrial Park, NW corner of Colorado Highway 119 (the Diagonal) and Fairview Street, east Longmont CO (Weld County). Opened July 2019 ($340-350M, originally 430,000 sq ft; ~240,000 sq ft expansion since brings total to ~674,000 sq ft). The roster address (11555 N 75th St) geocoded to rural land NW of the actual plant; resolved via web research (Concepts Industrial Park, Hwy 119 & Fairview) and satellite — a large white food-plant building with rooftop solar, extensive dock banks and a large trailer drop yard. Confirmed by Street View 2024 showing the building and the Smucker entrance sign on Fairview St.",
           "truckGate": "FALSE — the main entrance off Fairview St is a wide OPEN paved driveway with no barrier arm, sliding gate or checkpoint pinch-point at the road (confirmed in Street View 2024). The truck route runs in from this open driveway and loops around the south side of the building to the dock yard. No controlled gate observed at the property line.",
@@ -698,6 +687,32 @@
           "buildingCount": "2 — the main manufacturing building plus an attached/adjacent warehouse-distribution section on the east side.",
           "dropYard": "TRUE — large dedicated trailer-storage lot on the NE, distinct from the active dock apron.",
           "siteAreaAcres": "91.3 acres for the plant parcel including the dock yard, drop lot, employee parking and undeveloped expansion land within the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://investors.jmsmucker.com/news/news-details/2024/The-J.M.-Smucker-Co.-Celebrates-Opening-of-the-Newest-Uncrustables-Manufacturing-Facility-in-McCalla-Alabama/default.aspx",
+              "date": "2024-11-07",
+              "type": "press",
+              "claim": "Smucker names Longmont CO as a current Uncrustables facility alongside Scottsville and McCalla."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.longmontleader.com/local-business/fueled-by-growth-in-uncrustables-sales-smucker-plans-expansion-of-longmont-plant-2521899",
+              "date": "2024-02",
+              "type": "press",
+              "claim": "Smucker completed a 240,000 sq ft expansion of its self-operated Longmont Uncrustables plant."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Smucker self-operates the Longmont Uncrustables plant; confirmed current and expanded 2024 by Smucker's own materials.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -764,8 +779,7 @@
               ]
             }
           ],
-          "staging": null,
-          "streetViewMeta": {}
+          "staging": null
         },
         "yardMetrics": {
           "dockDoorCount": 38,
@@ -838,28 +852,6 @@
         },
         "dossierExcerpt": "The roster pin (36.764341, -86.183123, ROOFTOP) landed ~1400 m off the building\ncentroid, on the NW edge of the plant property. Satellite probing immediately\nrevealed the plant: a large irregular white food-manufacturing building with\nprocessing silos, two large trailer drop yards (NE and SW) and extensive dock\nbanks — consistent with the J.M. Smucker Uncrustables Scottsville plant. Web\nresearch confirms this as the original Uncrustables plant (opened 2004, ~180,000\nsq ft, since expanded by 80,000+ sq ft; also makes the Snack-N-Waffle line).\n\nStreet View (March 2026) confirmed the plant building and a \"Receiving /\nEmployee Entrance\" sign at the access driveway off Smucker Way. Locked center:\n36.76280, -86.18150.",
         "mapsUrl": "https://www.google.com/maps/@36.7628,-86.1815,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/jm-smucker/05-uncrustables-scottsville-ky-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 36.7628,
-              "lng": -86.1815
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/jm-smucker/05-uncrustables-scottsville-ky-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 36.7628,
-              "lng": -86.1815
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "J.M. Smucker Uncrustables plant, 299 Smucker Way, Scottsville KY (Allen County). The original (first) Uncrustables plant — opened 2004, ~180,000 sq ft, since expanded by 80,000+ sq ft; also makes Snack-N-Waffle; ~288-500 employees. Roster pin (ROOFTOP) was ~1400m off the building centroid; resolved by satellite — a large irregular white food-plant building with processing silos, two large trailer drop yards (NE and SW) and extensive dock banks. Confirmed by Street View (Mar 2026) showing the plant and a 'Receiving / Employee Entrance' sign at the access driveway.",
           "truckGate": "FALSE — the plant access driveway off Smucker Way is signed 'Receiving / Employee Entrance' and is a wide OPEN driveway with no barrier arm, sliding gate or checkpoint pinch-point at the public road (confirmed in Street View Mar 2026). The truck route runs in openly and loops around the building to the dock yards. No controlled gate at the property line.",
@@ -876,6 +868,32 @@
           "buildingCount": "1 — a single large integrated manufacturing building (irregular footprint from successive expansions).",
           "dropYard": "TRUE — two dedicated trailer-storage lots distinct from the active dock aprons.",
           "siteAreaAcres": "70.7 acres for the plant property (building, dock aprons, two drop yards, employee parking and grounds)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.prnewswire.com/news-releases/the-jm-smucker-co-celebrates-opening-of-the-newest-uncrustables-manufacturing-facility-in-mccalla-alabama-302299372.html",
+              "date": "2024-11-07",
+              "type": "press",
+              "claim": "Smucker PR names Scottsville KY as a current Uncrustables facility alongside Longmont and McCalla."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.jmsmucker.com/news-stories/blog-archive/demand-for-uncrustables",
+              "date": "2023-02-27",
+              "type": "press",
+              "claim": "Smucker's own blog identifies Scottsville KY as the original company-operated Uncrustables plant."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Smucker's own Nov-2024 PR names Scottsville KY as a current Uncrustables facility; self-operated, no closure/sale.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1027,28 +1045,6 @@
         },
         "dossierExcerpt": "- Account: JM Smucker\n- Type: Manufacturing — fruit spreads, syrups, ice cream toppings (plus corporate HQ)\n- Address: 1 Strawberry Lane, Orrville, OH 44667\n- Resolved center: 40.84780, -81.76050 (manufacturing/distribution complex)",
         "mapsUrl": "https://www.google.com/maps/@40.84780,-81.76050,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/jm-smucker/06-smuckers-spreads-toppings-orrville-oh-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 40.8478,
-              "lng": -81.7605
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/jm-smucker/06-smuckers-spreads-toppings-orrville-oh-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 40.8478,
-              "lng": -81.7605
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "South truck driveway opens directly onto the public road with no barrier arm, sliding gate, or checkpoint pinch-point (Street View Apr-2023, Jan-2025). Open uncontrolled entrance into the drop yard / dock area.",
           "guardShack": "No staffed booth at the south entrance; only a small free-standing yard sign. No booth structure visible at any campus truck access.",
@@ -1061,6 +1057,32 @@
           "railServed": "An active rail line runs north-south through the campus with at least one spur toward the buildings.",
           "scale": "No truck scale clearly visible in overhead imagery; flagged as uncertain.",
           "urbanRural": "Orrville is a small Ohio town (~8,300 pop); the campus sits at the edge of town with farmland directly east and south."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.jobsohio.com/newsroom/news-press/ohio-governor-mike-dewine-and-jobsohio-announce-support-of-new-the-j-m-smucker-company-rd-center-in-orrville",
+              "date": "2022-11",
+              "type": "press",
+              "claim": "Smucker's Orrville campus includes HQ AND a manufacturing facility; company consolidating manufacturing into Orrville plus new R&D center."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.reliableplant.com/Read/23620/JM-Smucker-to-close-four-plants",
+              "date": "2008-06",
+              "type": "press",
+              "claim": "State-of-the-art Orrville facility (startup 2012) produces fruit spreads, ice cream toppings and syrups, replacing the old Orrville plant."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Orrville is both Smucker HQ AND an active self-owned spreads/syrups/toppings plant (purpose-built ~$220M, op. since 2012); a real operating plant, not just office.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1169,28 +1191,6 @@
         },
         "dossierExcerpt": "- Account: JM Smucker\n- Type: Manufacturing — peanut butter (Jif); the world's largest peanut butter factory\n- Address: 767 Winchester Rd / 767 E Third St, Lexington, KY 40505\n- Resolved center: 38.04280, -84.47780 (manufacturing complex)",
         "mapsUrl": "https://www.google.com/maps/@38.04280,-84.47780,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/jm-smucker/07-jif-peanut-butter-lexington-ky-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 38.0428,
-              "lng": -84.4778
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/jm-smucker/07-jif-peanut-butter-lexington-ky-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 38.0428,
-              "lng": -84.4778
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "The Jif plant is a fully fenced urban complex. Street View along the internal access road off Winchester Rd shows chain-link / ornamental perimeter fencing and rolling gates at the access points (rail-crossing gate visible open). Trucks enter through a controlled gated point.",
           "guardShack": "No guard booth positively identified at the truck driveway off Winchester Rd despite checking multiple Street View headings (2024-2025). Signage at the office entrance reads NO TRACTOR TRAILERS, directing trucks to a separate gate; that gate appears to be a rolling fence gate without a staffed booth.",
@@ -1203,6 +1203,32 @@
           "multipleFacilities": "Confirmed campus of 9+ interconnected buildings (process plant, warehouses, office) across ~28 acres per web sources.",
           "railServed": "Active rail spur runs into the plant; Jif-branded silo and rail tracks visible in Street View.",
           "urbanRural": "Site is within dense Lexington urban fabric — residential, commercial and arterial roads on all sides."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.fda.gov/safety/major-product-recalls/2022-recalls-food-products-associated-peanut-butter-jm-smucker-company-due-potential-risk-salmonella",
+              "date": "2022",
+              "type": "press",
+              "claim": "FDA confirms recalled Jif was produced at Smucker's Lexington KY facility; the 2022 salmonella event was a temporary closure, not permanent (resumed June 2022)."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.industryweek.com/expansion-management/article/21959621/jm-smuckers-expansion-in-kentucky-saves-280-jobs",
+              "date": "2013-02",
+              "type": "press",
+              "claim": "Smucker invested $43M+ and retained ~279 jobs at its Jif operation in Lexington KY."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Core Smucker brand plant (world's largest PB factory); 2022 salmonella closure resumed June 2022; no divestiture/closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1288,28 +1314,6 @@
         },
         "dossierExcerpt": "- Account: JM Smucker\n- Type: Manufacturing — peanut butter / spreads\n- Address: 300 Keck Ave, New Bethlehem, PA 16242\n- Resolved center: 41.00290, -79.32600",
         "mapsUrl": "https://www.google.com/maps/@41.00290,-79.32600,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/jm-smucker/08-smuckers-peanut-butter-new-bethlehem-pa-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 41.0029,
-              "lng": -79.326
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/jm-smucker/08-smuckers-peanut-butter-new-bethlehem-pa-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 41.0029,
-              "lng": -79.326
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Small old plant integrated into a residential neighborhood. Truck/dock yard reached by an open driveway off the residential street with no barrier arm, gate, or checkpoint. Orange fencing seen in Street View is temporary construction fencing, not a controlled perimeter.",
           "guardShack": "No guard booth at any plant access point; only a small free-standing Smucker monument sign at the driveway.",
@@ -1322,571 +1326,32 @@
           "multipleFacilities": "Plant is a single connected cluster of 3 adjacent older industrial buildings, not a multi-cluster campus; flagged uncertain due to the merged building footprints.",
           "railServed": "No active rail spur into the plant visible (a former rail corridor runs nearby but no spur reaches the site).",
           "urbanRural": "New Bethlehem is a small Clarion County borough (~900 residents); the plant sits within a small-town residential block — Rural."
-        }
-      },
-      {
-        "id": "09-rw-knudsen-juices-chico-ca",
-        "name": "R.W. Knudsen Juices - Chico CA",
-        "type": "Manufacturing - Juices/beverages (Knudsen)",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "remoteGs",
-          "dockDoorCount",
-          "scale"
-        ],
-        "center": {
-          "lat": 39.7067,
-          "lng": -121.8025
         },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 39.707334,
-                "lng": -121.804148
-              },
-              {
-                "lat": 39.707123,
-                "lng": -121.800303
-              },
-              {
-                "lat": 39.70501,
-                "lng": -121.800577
-              },
-              {
-                "lat": 39.70501,
-                "lng": -121.803873
-              },
-              {
-                "lat": 39.706277,
-                "lng": -121.804697
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
             {
-              "ring": [
-                {
-                  "lat": 39.706911,
-                  "lng": -121.803873
-                },
-                {
-                  "lat": 39.706806,
-                  "lng": -121.8025
-                },
-                {
-                  "lat": 39.705432,
-                  "lng": -121.802637
-                },
-                {
-                  "lat": 39.705538,
-                  "lng": -121.804011
-                }
-              ]
+              "tier": 1,
+              "url": "https://redbankchamber.com/september-2023-the-j-m-smucker-company/",
+              "date": "2023-09",
+              "type": "press",
+              "claim": "Smucker has produced peanut butter in New Bethlehem for 58 years; ~60 employees, actively recruiting."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.powderbulksolids.com/food-beverage/fire-breaks-out-at-j-m-smucker-peanut-butter-plant",
+              "date": "2022-08",
+              "type": "press",
+              "claim": "Aug 2022 roaster fire at the operating New Bethlehem peanut butter plant confirms active production."
             }
           ],
-          "dockAprons": [],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 73,
-              "pano": "68AkpctmBbADCqyljmxJSg",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 18,
-          "trailersVisible": 55,
-          "trailerParkingCapacity": 90,
-          "truckGateCount": 1,
-          "buildingCount": 6,
-          "siteAreaAcres": 38,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": true,
-          "drivewayShort": false,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": true,
-          "dockDoors": "10-25",
-          "dropArea": "25-50",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": true,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "dossierExcerpt": "- Account: JM Smucker (roster) — NOTE: divested, see below\n- Type: Manufacturing — juices / beverages (Knudsen)\n- Address: 29-37 Speedway Ave, Chico, CA 95928\n- Resolved center: 39.70670, -121.80250",
-        "mapsUrl": "https://www.google.com/maps/@39.70670,-121.80250,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/jm-smucker/09-rw-knudsen-juices-chico-ca-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.7067,
-              "lng": -121.8025
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/jm-smucker/09-rw-knudsen-juices-chico-ca-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.7067,
-              "lng": -121.8025
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "DIVESTITURE": "IMPORTANT — this facility is NO LONGER a J.M. Smucker site. Smucker sold its natural/organic beverage and grains businesses (incl. R.W. Knudsen and the Chico plant) to Nexus Capital Management for $110M; the deal closed Jan 31, 2022. The plant now operates under the TruRoots Company / R.W. Knudsen Family. The entrance sign in Street View reads TruRoots Shipping/Receiving, 29 Speedway.",
-          "truckGate": "Truck entrance is a long open driveway off Speedway Ave with a TruRoots Shipping/Receiving sign. No barrier arm or sliding gate is clearly visible at the entrance; trees partly obscure the driveway end. Some internal fenced enclosures exist on the property. Classified false (open) but flagged uncertain.",
-          "guardShack": "No guard booth identified at the Speedway Ave entrance or along the access road in satellite or 2024 Street View. Flagged uncertain due to tree cover at the driveway.",
-          "remoteGs": "False — no controlled truck gate was confirmed.",
-          "drivewayLong": "The access road from Speedway Ave to the docks is long with ample paved width — can hold a deep 3+ truck queue.",
-          "fastLaneOpportunity": "Very wide paved truck approach and yard with unused width — physical room for an express/bypass lane.",
-          "dockDoors": "Docks spread across multiple building faces; ~4-8 trailers seen backed in at a time. Estimated 10-25 total doors (overhead estimate).",
-          "dropArea": "Large dedicated trailer-storage yard on the northwest with multiple long rows of parked trailers; 50+ trailers visible across the site, drop-stall band 25-50.",
-          "dropYard": "Clear dedicated trailer-storage lot northwest of the plant separate from active dock staging.",
-          "multipleFacilities": "Campus of 6+ large buildings — multiple manufacturing/warehouse structures plus process/tank areas.",
-          "railServed": "No rail spur into the property visible.",
-          "scale": "No truck scale clearly identified; flagged uncertain.",
-          "urbanRural": "Site is on the rural edge of Chico with orchards and farmland directly west and a low-density residential fringe south."
-        }
-      },
-      {
-        "id": "10-smucker-plant-salinas-ca",
-        "name": "Smucker Plant - Salinas CA",
-        "type": "Manufacturing - Fruit/produce processing",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "medium",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack",
-          "dockDoorCount",
-          "dropArea",
-          "scale"
-        ],
-        "center": {
-          "lat": 36.6576,
-          "lng": -121.6248
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 36.659693,
-                "lng": -121.6248
-              },
-              {
-                "lat": 36.659803,
-                "lng": -121.623152
-              },
-              {
-                "lat": 36.658867,
-                "lng": -121.622259
-              },
-              {
-                "lat": 36.657325,
-                "lng": -121.622259
-              },
-              {
-                "lat": 36.656884,
-                "lng": -121.623289
-              },
-              {
-                "lat": 36.656608,
-                "lng": -121.624457
-              },
-              {
-                "lat": 36.657214,
-                "lng": -121.624869
-              },
-              {
-                "lat": 36.658812,
-                "lng": -121.624869
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [
-            {
-              "ring": [
-                {
-                  "lat": 36.658812,
-                  "lng": -121.623152
-                },
-                {
-                  "lat": 36.658812,
-                  "lng": -121.622328
-                },
-                {
-                  "lat": 36.657325,
-                  "lng": -121.622328
-                },
-                {
-                  "lat": 36.657325,
-                  "lng": -121.623152
-                }
-              ]
-            }
-          ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 36.658426,
-                  "lng": -121.624251
-                },
-                {
-                  "lat": 36.658426,
-                  "lng": -121.623289
-                },
-                {
-                  "lat": 36.658041,
-                  "lng": -121.623289
-                },
-                {
-                  "lat": 36.658041,
-                  "lng": -121.624251
-                }
-              ]
-            }
-          ],
-          "staging": null,
-          "streetViewMeta": {
-            "perimeter": {
-              "heading": 346,
-              "pano": "a7JSjCJsb1111_L84THc7A",
-              "hasCoverage": true
-            },
-            "truckGate": {
-              "heading": 346,
-              "pano": "a7JSjCJsb1111_L84THc7A",
-              "hasCoverage": true
-            }
-          }
-        },
-        "yardMetrics": {
-          "dockDoorCount": 30,
-          "trailersVisible": 18,
-          "trailerParkingCapacity": 35,
-          "truckGateCount": 1,
-          "buildingCount": 5,
-          "siteAreaAcres": 22,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": true,
-          "drivewayLong": false,
-          "drivewayShort": true,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "25-50",
-          "dropArea": "10-25",
-          "shipRcvSeparate": false,
-          "urbanRural": "Urban",
-          "connectivityIssue": false,
-          "multipleFacilities": true,
-          "scale": false,
-          "dropYard": true,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#3",
-          "steps": [
-            {
-              "step": "Arrive on site (no gate)",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Drive to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 480000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 3030000,
-          "totalYnsMs": 2640000
-        },
-        "dossierExcerpt": "- Account: JM Smucker (roster) — NOTE: closed / former site, see below\n- Type: Manufacturing — fruit / produce processing\n- Address (roster): \"Salinas, CA 93901\" (city-level only)\n- Resolved address: 1275 Hansen St, Salinas, CA 93901\n- Resolved center: 36.65760, -121.62480",
-        "mapsUrl": "https://www.google.com/maps/@36.65760,-121.62480,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/jm-smucker/10-smucker-plant-salinas-ca-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 36.6576,
-              "lng": -121.6248
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/jm-smucker/10-smucker-plant-salinas-ca-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 36.6576,
-              "lng": -121.6248
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "CLOSURE": "IMPORTANT — this is a FORMER J.M. Smucker facility, no longer Smucker-operated. Smucker's Salinas preserves/jelly/ice-cream-topping plant operated 1960/61 and was closed by end of 2005, with production moved to Orrville OH and Memphis TN. The building at 1275 Hansen St is now occupied by Taylor Farms Retail (a fresh-produce company), per the EPA FRS facility registry. The yard audit below describes the current physical site.",
-          "location": "Roster gave only city-level 'Salinas, CA 93901' (APPROXIMATE geocode landed in a residential neighborhood ~4 km from the plant). The historic Smucker plant address was resolved to 1275 Hansen St, Salinas via Macrae's Blue Book and confirmed by the EPA FRS registry (now Taylor Farms Retail). Center relocated to that industrial complex.",
-          "truckGate": "Truck/dock yard is reached by an open driveway off Hansen St between two large buildings. No barrier arm, sliding gate, or checkpoint visible in 2024 Street View; the property line has only low fencing in places. Classified false (open) but flagged uncertain.",
-          "guardShack": "No guard booth identified at the Hansen St entrance or office frontage in satellite or Street View.",
-          "remoteGs": "False — no controlled truck gate confirmed.",
-          "drivewayShort": "The driveway from Hansen St to the dock/yard is short, holding only 1-2 trucks before the docks.",
-          "dockDoors": "Multi-building food-processing complex; ~8-10 trailers staged at building faces. Total estimated 25-50 doors (overhead estimate, several faces partly obscured by canopies/solar).",
-          "dropArea": "Moderate trailer staging along the west building face and interior yard; estimated 10-25 drop stalls.",
-          "dropYard": "Trailers staged in an interior yard separate from the immediate dock apron — qualifies as a small on-site drop yard.",
-          "multipleFacilities": "Complex is a cluster of 5+ adjacent/connected large industrial buildings with process equipment.",
-          "railServed": "No active rail spur into the property visible; a rail line runs through the wider Salinas industrial district but no spur reaches this site.",
-          "scale": "No truck scale clearly identified; flagged uncertain.",
-          "urbanRural": "Site sits within the dense Salinas industrial district, a real city — Urban."
-        }
-      },
-      {
-        "id": "11-smucker-plant-havre-de-grace-md",
-        "name": "Smucker Plant - Havre de Grace MD",
-        "type": "Manufacturing - Spreads / portion control products",
-        "archetype": "#3",
-        "archetypeName": "No Gate / No GS",
-        "confidence": "high",
-        "uncertainFields": [
-          "truckGate",
-          "guardShack"
-        ],
-        "center": {
-          "lat": 39.530705,
-          "lng": -76.108505
-        },
-        "geofences": {
-          "perimeter": {
-            "ring": [
-              {
-                "lat": 39.531446,
-                "lng": -76.109604
-              },
-              {
-                "lat": 39.531235,
-                "lng": -76.107818
-              },
-              {
-                "lat": 39.530281,
-                "lng": -76.107681
-              },
-              {
-                "lat": 39.529858,
-                "lng": -76.109054
-              },
-              {
-                "lat": 39.530599,
-                "lng": -76.109878
-              }
-            ]
-          },
-          "truckGate": null,
-          "dropYards": [
-            {
-              "ring": [
-                {
-                  "lat": 39.53044,
-                  "lng": -76.109878
-                },
-                {
-                  "lat": 39.530281,
-                  "lng": -76.109192
-                },
-                {
-                  "lat": 39.529858,
-                  "lng": -76.109329
-                },
-                {
-                  "lat": 39.530069,
-                  "lng": -76.110016
-                }
-              ]
-            }
-          ],
-          "dockAprons": [
-            {
-              "ring": [
-                {
-                  "lat": 39.530705,
-                  "lng": -76.109741
-                },
-                {
-                  "lat": 39.530599,
-                  "lng": -76.108917
-                },
-                {
-                  "lat": 39.530281,
-                  "lng": -76.108986
-                },
-                {
-                  "lat": 39.530387,
-                  "lng": -76.10981
-                }
-              ]
-            }
-          ],
-          "staging": null,
-          "streetViewMeta": {}
-        },
-        "yardMetrics": {
-          "dockDoorCount": 9,
-          "trailersVisible": 7,
-          "trailerParkingCapacity": 8,
-          "truckGateCount": 1,
-          "buildingCount": 1,
-          "siteAreaAcres": 14,
-          "railServed": false
-        },
-        "classification": {
-          "truckGate": false,
-          "guardShack": false,
-          "remoteGs": false,
-          "preGateStaging": false,
-          "postGateStaging": false,
-          "drivewayLong": false,
-          "drivewayShort": true,
-          "backupSensitive": false,
-          "entryExitTogether": true,
-          "entryExitSeparate": false,
-          "entryLanes": 1,
-          "exitLanes": 1,
-          "fastLaneOpportunity": false,
-          "dockDoors": "0-10",
-          "dropArea": "0-10",
-          "shipRcvSeparate": false,
-          "urbanRural": "Rural",
-          "connectivityIssue": false,
-          "multipleFacilities": false,
-          "scale": false,
-          "dropYard": false,
-          "multiStep": false
-        },
-        "scenario": {
-          "archetypeId": "#3",
-          "steps": [
-            {
-              "step": "Arrive on site (no gate)",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "gate.through"
-            },
-            {
-              "step": "Drive to dock apron",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 60000,
-              "narrationKey": "spotter.dispatch",
-              "baselineWaitMs": 480000,
-              "ynsWaitMs": 90000
-            },
-            {
-              "step": "Dock load",
-              "geofenceTarget": "dockApron",
-              "targetIndex": 0,
-              "durationMs": 2400000,
-              "narrationKey": "dock.load"
-            },
-            {
-              "step": "Exit",
-              "geofenceTarget": "exit",
-              "durationMs": 30000,
-              "narrationKey": "gate.exit"
-            }
-          ],
-          "totalBaselineMs": 3030000,
-          "totalYnsMs": 2640000
-        },
-        "dossierExcerpt": "- Roster input: \"1601 Pulaski Hwy, Havre de Grace, MD 21078\" — geocoded to 39.535468, -76.116224.\n- Problem found: That point lands on a long narrow strip building on Pulaski Hwy (US-40) that reads as retail/strip commercial, not a manufacturing plant.\n- Resolution: Web search for the Smucker Havre de Grace plant returned the real address 340 Old Bay Lane, Havre de Grace MD 21078 (operating names: Smucker Quality Beverages / Smucker Natural Foods Inc — fruit/juice canning & bottling, portion-control type products). Listed coordinates ~39.5307, -76.1085.\n- Confirmed building: Satellite probes at 39.530705, -76.108505 show a mid-sized industrial/manufacturing building (~50k sq ft footprint) with a full rooftop solar array on its southern half, process tanks/silos at the NE corner, dock doors with trailers on the SE face, and a perimeter loop driveway. Consistent with a food/beverage plant. Locked center: 39.5305, -76.1085, ~640 m SE of the geocoded point.",
-        "mapsUrl": "https://www.google.com/maps/@39.530705,-76.108505,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/jm-smucker/11-smucker-plant-havre-de-grace-md-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.530705,
-              "lng": -76.108505
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/jm-smucker/11-smucker-plant-havre-de-grace-md-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.530705,
-              "lng": -76.108505
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
-        "fieldNotes": {
-          "location": "Roster address 1601 Pulaski Hwy was imprecise. Web search resolved the actual plant to 340 Old Bay Lane, Havre de Grace MD (Smucker Quality Beverages / Smucker Natural Foods), ~640m SE of the geocoded point. Locked center 39.5305, -76.1085 on the industrial building with rooftop solar.",
-          "truckGate": "No barrier arm, sliding gate, or checkpoint pinch-point visible at the property entrance in satellite z20. The perimeter loop driveway connects to an open industrial-park intersection. Chain-link fencing runs along property lines but the truck driveway is uncontrolled. Classified false; flagged uncertain because Street View coverage did not reach the plant itself (panos clustered on Old Bay Ln near the neighboring building).",
-          "guardShack": "No small staffed booth structure beside any entrance. A small outbuilding sits at the NE corner near the tank farm but it is not positioned as an entry guard booth.",
-          "dockDoors": "~9 dock doors counted on the SE/S building face, several with trailers backed in. Band 0-10.",
-          "dropArea": "A handful of trailers parked along the SE apron and near the NE corner without tractors; no dedicated marked drop lot. Band 0-10.",
-          "urbanRural": "Edge-of-town industrial park on the outskirts of Havre de Grace; farmland immediately south. Rural per rubric (small-town industrial defaults to Rural).",
-          "drivewayShort": "Single perimeter loop drive; gate-to-dock approach holds only 1-2 trucks.",
-          "buildingCount": "One main plant building. Other large buildings nearby (incl. a separate distribution warehouse to the east and a building NW with CFI trailer) are separate properties in the same park, not the same parcel.",
-          "yardMetrics": "Counts are honest estimates from z19-z20 imagery; trailer/dock counts low-confidence at the margin."
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Closure-risk small plant came back clean: 2023 chamber feature + active hiring confirm ongoing Smucker PB operation.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -1965,28 +1430,6 @@
         },
         "dossierExcerpt": "- Roster input: \"243 Urban St, Buffalo, NY 14211\" — geocoded 42.909089, -78.829817 (ROOFTOP, moved only 99 m).\n- Confirmed building: Satellite probes land directly on a large multi-section, multi-story historic brick manufacturing complex on Buffalo's East Side. A pink-painted grain-silo tower stands at the SW corner — a well-known landmark of this plant. A rail line runs N-S immediately along the east property edge.\n- Web confirmation: This is the J.M. Smucker Co. Milk-Bone plant at 243 Urban St — 550,000 sq ft, dog-treat operations on this site since 1925, a $53M renovation underway (new production line, oven, freezer expansion; completion ~April 2027), ~280 jobs. Locked center: 42.909089, -78.829817.",
         "mapsUrl": "https://www.google.com/maps/@42.909089,-78.829817,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/jm-smucker/12-milk-bone-pet-treats-buffalo-ny-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 42.909089,
-              "lng": -78.829817
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/jm-smucker/12-milk-bone-pet-treats-buffalo-ny-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 42.909089,
-              "lng": -78.829817
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "243 Urban St, Buffalo NY. ROOFTOP geocode confirmed (moved 99m). Building positively identified: large multi-section/multi-story historic brick manufacturing complex on Buffalo's East Side, pink grain-silo tower landmark, rail line on the east side. Web-confirmed as the J.M. Smucker Milk-Bone plant (550,000 sq ft, dog-treat ops since 1925, $53M renovation underway, completion April 2027).",
           "truckGate": "TWO controlled truck entrances. (1) The dedicated drop yard NW of the plant has a wide chain-link SLIDING GATE across its truck driveway (Street View 2025-07 from Urban St shows the slider clearly). (2) The fenced truck/dock yard at the building has sliding chain-link gates. truckGateCount set to 2.",
@@ -2000,6 +1443,32 @@
           "drivewayLong": "The drop yard interior holds a deep queue (3+ trucks) between the sliding gate and the trailer rows.",
           "urbanRural": "Dense East Side Buffalo urban fabric - row houses on all surrounding streets. Urban.",
           "yardMetrics": "trailersVisible ~48 and trailerParkingCapacity ~70 are honest estimates from z19 imagery; dock count low-confidence."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://investors.jmsmucker.com/news/news-details/2023/The-J.M.-Smucker-Co.-Completes-the-Divestiture-of-Several-Pet-Food-Brands-to-Post-Holdings-Inc.-04-28-2023/default.aspx",
+              "date": "2023-04-28",
+              "type": "press",
+              "claim": "Smucker sold value pet brands to Post but RETAINED Milk-Bone and Meow Mix."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.wkbw.com/news/local-news/milk-bone-plans-to-add-jobs-in-buffalo-with-52-million-expansion-project",
+              "date": "2025-03",
+              "type": "press",
+              "claim": "Milk-Bone plant at 243 Urban St Buffalo operating under Smucker (~280 employees); $52M Smucker expansion."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Milk-Bone retained in the 2023 Post divestiture; Buffalo plant active with a 2025 $52M Smucker expansion.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2129,28 +1598,6 @@
         },
         "dossierExcerpt": "- Roster input: \"1200 Market St NE, Decatur, AL 35601\" — geocoded 34.607163, -86.968268 (ROOFTOP, moved 190 m).\n- Confirmed building: Satellite probes land on a large white ~200,000 sq ft manufacturing building on the Tennessee River riverfront in Decatur, with an adjacent dock building, a chain-link-fenced trailer yard, a processing/tank cluster, and rail tracks along the south/east edge.\n- Web confirmation: This is the J.M. Smucker Meow Mix plant (operating entity Meow Mix Decatur Production LLC) at 1200 Market St NE — produces ~40% of Smucker's cat food, ~600 tons/day, ~200,000 sq ft, with a recent $21.4M expansion (admin building + new manufacturing equipment). Locked center: 34.6068, -86.9685.",
         "mapsUrl": "https://www.google.com/maps/@34.606800,-86.968500,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/jm-smucker/13-meow-mix-pet-food-decatur-al-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.6068,
-              "lng": -86.9685
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/jm-smucker/13-meow-mix-pet-food-decatur-al-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.6068,
-              "lng": -86.9685
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "1200 Market St NE, Decatur AL. ROOFTOP geocode confirmed (moved 190m). Building positively identified: large white ~200,000 sq ft manufacturing building on the Tennessee River riverfront, with an adjacent dock building, a chain-link-fenced trailer yard, and ingredient/process tanks. Web-confirmed as the J.M. Smucker Meow Mix plant (Meow Mix Decatur Production LLC) - ~40% of Smucker's cat food, ~600 tons/day, recent $21.4M expansion.",
           "truckGate": "Property is fully chain-link fenced. Truck entrances are gated with sliding chain-link gates (visible in Street View 2022 from Market St and from the rail-side road). At least 2 truck access points: one off Market St NE at the SW, one off the rail-side gravel road on the east. truckGateCount = 2.",
@@ -2165,6 +1612,32 @@
           "buildingCount": "3 - the main white plant building, the adjacent dock/warehouse building, and the processing/tank building cluster. The large round grain-storage tanks further SE are treated as a separate grain-elevator operation and excluded from the perimeter.",
           "urbanRural": "Riverside industrial corridor on the edge of Decatur (~55k pop small city); rail/river industrial setting. Rural per rubric (small-town industrial defaults to Rural).",
           "yardMetrics": "trailersVisible ~55, capacity ~75 are honest estimates from z18-z19; dock count low-confidence due to roof glare."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://investors.jmsmucker.com/news/news-details/2023/The-J.M.-Smucker-Co.-Completes-the-Divestiture-of-Several-Pet-Food-Brands-to-Post-Holdings-Inc.-04-28-2023/default.aspx",
+              "date": "2023-04-28",
+              "type": "press",
+              "claim": "Smucker sold value pet brands to Post but explicitly RETAINED Milk-Bone and Meow Mix."
+            },
+            {
+              "tier": 2,
+              "url": "https://finance.yahoo.com/news/multi-million-dollar-manufacturing-expansions-134000533.html",
+              "date": "2025-11-20",
+              "type": "press",
+              "claim": "Nov 2025: Smucker/Big Heart Decatur Meow Mix plant (Market St NE, ~230 employees, ~40% of Smucker cat food) approved a $21.4M expansion; plant active."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Meow Mix retained in the 2023 Post sale; Decatur confirmed active via Nov-2025 $21.4M Smucker/Big Heart expansion.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2310,28 +1783,6 @@
         },
         "dossierExcerpt": "- Roster input: address only \"Topeka, KS 66619\", APPROXIMATE geocode 38.948122, -95.693136 (moved 2,646 m) — landed in south-central Topeka, the WRONG area.\n- Resolution: Web search resolved the real plant to 2200 NW Brickyard Rd, Topeka KS 66618 — the Big Heart Pet Brands / J.M. Smucker pet food plant and distribution center (formerly Del Monte Foods, in Topeka 55+ years; produces Meow Mix, Milk-Bone and other dry pet food/snacks; ~1.2M sq ft; ~350 employees; a $20.5M expansion announced). Confirmed coordinates 39.087119, -95.722563 (a directory listing for 2200 NW Brickyard Rd).\n- Disambiguation: Topeka also has a very large Goodyear tire plant at 2000 NW US-24, ~2 km ENE — an even bigger multi-section plant. Care was taken NOT to audit the Goodyear building. The audited site is the Big Heart/Smucker pet-food campus on NW Brickyard Rd.",
         "mapsUrl": "https://www.google.com/maps/@39.087119,-95.722563,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/jm-smucker/14-pet-food-plant-topeka-ks-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 39.087119,
-              "lng": -95.722563
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/jm-smucker/14-pet-food-plant-topeka-ks-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 39.087119,
-              "lng": -95.722563
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "location": "Roster address was only 'Topeka, KS 66619' with an APPROXIMATE geocode (moved 2646m) landing on south-central Topeka - WRONG location. Web search resolved the real plant to 2200 NW Brickyard Rd, Topeka KS 66618 (Big Heart Pet Brands / J.M. Smucker pet food plant + distribution center, formerly Del Monte). Confirmed coords 39.087119, -95.722563. NOTE: distinct from the nearby Goodyear tire plant at 2000 NW US-24 (the very large multi-section plant ~2km ENE). Building positively identified: large multi-section manufacturing plant joined to a large distribution center, extensive trailer drop yards, ingredient silos along the rail.",
           "truckGate": "Large fenced industrial campus. Internal truck roads and yards are enclosed; truck access comes from the SW via internal roads off NW Brickyard Rd. Street View coverage does not reach the actual truck gate (panos only reach the corporate office building and surrounding rural roads), so the gate type (arm vs sliding gate) is inferred from a fenced campus of this scale - classified true but flagged uncertain. truckGateCount estimated 2.",
@@ -2347,6 +1798,32 @@
           "entryExitSeparate": "Large campus with multiple access points on different faces; per-gate in/out lane counts not determinable - entryLanes/exitLanes flagged uncertain.",
           "urbanRural": "Edge-of-Topeka location at a highway interchange, with farmland and a rail corridor immediately around the property. Topeka is a mid-size city but this site sits on its rural NW fringe - Rural per rubric.",
           "yardMetrics": "trailersVisible ~130 and capacity ~180 are honest order-of-magnitude estimates across the multiple drop yards; dockDoorCount ~60 is a rough estimate."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.prnewswire.com/news-releases/the-jm-smucker-co-completes-the-divestiture-of-several-pet-food-brands-to-post-holdings-inc-301810920.html",
+              "date": "2023-04-28",
+              "type": "press",
+              "claim": "The 2023 divestiture to Post transferred only the Bloomsburg PA, Meadville PA, and Lawrence KS facilities; Topeka is NOT in the transferred list."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.just-food.com/news/jm-smucker-invests-pet-food/",
+              "date": "2026-02-18",
+              "type": "press",
+              "claim": "Smucker still operates its Topeka KS pet-food plant (55+ yrs), producing retained brands Meow Mix and Milk-Bone."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Survived the Post gauntlet (Lawrence KS, not Topeka, transferred); Feb-2026 source confirms Topeka still Smucker, making retained Milk-Bone/Meow Mix. (Site label 'Kibbles n Bits/Del Monte' product attribution is stale.)",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2494,28 +1971,6 @@
         },
         "dossierExcerpt": "- Account: JM Smucker\n- Name: Hostess Bakery - Emporia KS\n- Type: Manufacturing - Sweet baked snacks (Hostess)\n- Address: 1525 Industrial Rd, Emporia, KS 66801\n- Resolved coords: 38.4173, -96.2192 (center of main production block)",
         "mapsUrl": "https://www.google.com/maps/@38.4173,-96.2192,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/jm-smucker/15-hostess-bakery-emporia-ks-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 38.4173,
-              "lng": -96.2192
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/jm-smucker/15-hostess-bakery-emporia-ks-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 38.4173,
-              "lng": -96.2192
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Open driveway openings from Industrial Rd; no barrier arm or sliding gate seen in any Street View pass (2025 imagery). South property edge has chain-link fence but the road frontage is open lawn/parking.",
           "guardShack": "No staffed booth observed at any entrance. Office front is open with employee parking; truck dock driveways are open. Low residual uncertainty since some panos are inside the property.",
@@ -2524,6 +1979,32 @@
           "multipleFacilities": "At least 3 distinct buildings: central production block, SW building, plus ancillary structures - a campus.",
           "shipRcvSeparate": "Dock banks on at least two different building faces (central building east face and SW building north face).",
           "fastLaneOpportunity": "Wide open driveway aprons and large yard provide ample room to add a bypass lane."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://oakes.com/news/hostess-brands-revives-emporia-kansas-with-technology-transplant",
+              "date": "2025",
+              "type": "locator",
+              "claim": "Hostess flagship cake plant in Emporia KS (1525 Industrial Rd) produces 1,000+ Twinkies/cupcakes per minute; actively operating."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.foodprocessing.com/business-of-food-beverage/business-strategies/news/55131279/smucker-to-shutter-hostess-former-hq-in-lenexa-kansas",
+              "date": "2024-08",
+              "type": "press",
+              "claim": "Smucker's 2024 Kansas Hostess closure was the Lenexa HQ office (79 jobs), NOT the Emporia bakery."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "Emporia is the flagship Hostess Twinkies/cupcakes bakery, Smucker-operated and active; only KS closure was the Lenexa office, not Emporia.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2684,28 +2165,6 @@
         },
         "dossierExcerpt": "- Account: JM Smucker\n- Name: Hostess Bakery - Arkadelphia AR\n- Type: Manufacturing - Sweet baked snacks (Hostess Donettes)\n- Address: 1 Hostess Way, Arkadelphia, AR 71923\n- Resolved coords: 34.0535, -93.0935 (center of main production building)",
         "mapsUrl": "https://www.google.com/maps/@34.0535,-93.0935,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/jm-smucker/16-hostess-bakery-arkadelphia-ar-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 34.0535,
-              "lng": -93.0935
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/jm-smucker/16-hostess-bakery-arkadelphia-ar-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 34.0535,
-              "lng": -93.0935
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Long private access drive (1 Hostess Way) runs ~250 m from the rural public road to the plant. Street View at the road entrance (2024-02) shows only a Hostess monument sign - no barrier arm, gate, or checkpoint. No checkpoint structure on the drive in z20 satellite.",
           "guardShack": "No staffed booth at the road entrance or anywhere on the access drive.",
@@ -2717,6 +2176,32 @@
           "buildingCount": "Main 330,000 sq ft production building plus one ancillary utility structure in the NE yard.",
           "connectivityIssue": "Rural site but only ~3 km from Arkadelphia; cellular coverage likely adequate - flagged as low confidence.",
           "urbanRural": "Edge-of-town / rural setting, building surrounded by fields and woods."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.bakingbusiness.com/articles/61677-smucker-execs-still-upbeat-on-hostess-outlook",
+              "date": "2024",
+              "type": "press",
+              "claim": "Smucker FY2024 cited the new Arkadelphia AR bakery (dedicated to Hostess Donettes) as a key accomplishment; fully operational under Smucker."
+            },
+            {
+              "tier": 3,
+              "url": "https://www.areadevelopment.com/newsItems/3-8-2022/hostess-brands-arkadelphia-arkansas.shtml",
+              "date": "2022-03",
+              "type": "press",
+              "claim": "Hostess 330,000-sq-ft Arkadelphia AR Donettes bakery ($120-140M); operating since Nov 2023 with 150+ workers."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "New Hostess Donettes bakery in Arkadelphia, fully operational under Smucker since late 2023; no closure signals.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       },
       {
@@ -2847,28 +2332,6 @@
         },
         "dossierExcerpt": "- Account: JM Smucker\n- Name: Hostess Bakery - Columbus GA\n- Type: Manufacturing - Sweet baked snacks (Hostess), $120M expansion underway\n- Address: 1969 Victory Dr, Columbus, GA 31901\n- Resolved coords: 32.4442, -84.9676 (center of main production building)",
         "mapsUrl": "https://www.google.com/maps/@32.4442,-84.9676,400m/data=!3m1!1e3",
-        "tiles": {
-          "17": {
-            "url": "/demo-packs/tiles/jm-smucker/17-hostess-bakery-columbus-ga-z17.jpg",
-            "zoom": 17,
-            "center": {
-              "lat": 32.4442,
-              "lng": -84.9676
-            },
-            "width": 1280,
-            "height": 1280
-          },
-          "18": {
-            "url": "/demo-packs/tiles/jm-smucker/17-hostess-bakery-columbus-ga-z18.jpg",
-            "zoom": 18,
-            "center": {
-              "lat": 32.4442,
-              "lng": -84.9676
-            },
-            "width": 1280,
-            "height": 1280
-          }
-        },
         "fieldNotes": {
           "truckGate": "Property has a confirmed chain-link perimeter fence (visible in 2024-12 Street View along the E side). The truck driveway necessarily passes through a fence opening = a controlled pinch-point, so truckGate set true. No barrier arm directly resolved in imagery - medium confidence.",
           "guardShack": "No staffed guard booth observed at the truck driveway or any entrance. The small blue-roof structure in the NE yard is an ancillary building, not a gate booth.",
@@ -2879,6 +2342,32 @@
           "dockDoorCount": "Estimate ~35 doors along the SE building face with trailers backed in - overhead estimate.",
           "urbanRural": "Inside Columbus GA metro along the Victory Drive arterial corridor - Urban.",
           "method": "Active $120M Smucker expansion underway (completing early 2027); rooftop construction activity visible in satellite imagery."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.foodprocessing.com/business-of-food-beverage/plant-expansion/news/55321111/smucker-to-expand-columbus-georgia-hostess-bakery",
+              "date": "2025-09",
+              "type": "press",
+              "claim": "Smucker investing $120M to expand its operating Hostess bakery in Columbus GA (~350 employees); plant has produced Hostess sweets for 5+ decades; expansion underway, completion early 2027."
+            },
+            {
+              "tier": 3,
+              "url": "https://www.wtvm.com/2025/09/29/hostess-brands-manufacturing-facility-expand-columbus/",
+              "date": "2025-09-29",
+              "type": "press",
+              "claim": "Hostess Brands Columbus GA manufacturing facility currently operating and expanding under Smucker."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Long-running Hostess bakery in Columbus GA, currently Smucker-operated (~350 staff); $120M expansion underway (base plant operating, expansion completes ~early 2027).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-18"
         }
       }
     ]
