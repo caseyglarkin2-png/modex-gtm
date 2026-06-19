@@ -20,11 +20,11 @@
       "note": "Georgia-Pacific operates 150+ US manufacturing facilities (paper, packaging, pulp, building products) per its corporate locations page. We audited 29 representative sites."
     },
     "featuredSiteId": "04-gp-broadway-mill-green-bay-wi",
-    "dossierIntro": "Building materials and paper run the most rail-dependent yards we've audited. Georgia-Pacific runs 150 facilities. Broadway Mill in Green Bay covers 240 acres with 70 dock doors and 320 trailer spots. Brunswick Cellulose is 704 acres of pulp manufacturing. 25 of 30 audited sites are rail-served. YardFlow classifies the asset at the gate so pulp doesn't sit waiting for a dock that lumber needs.",
+    "dossierIntro": "Building materials and paper run the most rail-dependent yards we've audited. Georgia-Pacific runs 150+ US manufacturing facilities; we audited 29 of them. Broadway Mill in Green Bay covers 240 acres with 70 dock doors and 320 trailer spots. Brunswick Cellulose is 704 acres of pulp manufacturing. 24 of 29 audited sites are rail-served. YardFlow classifies the asset at the gate so pulp doesn't sit waiting for a dock that lumber needs.",
     "surprisingFindings": [
       "Brunswick Cellulose Mill is 704 acres of pulp and paper. Bigger than most cities' downtown.",
-      "25 of 30 audited sites are rail-served. Pulp and paper move on rail by default.",
-      "6,744 acres of total audited footprint. Building materials runs the largest land footprint in the dataset."
+      "24 of 29 audited sites are rail-served. Pulp and paper move on rail by default.",
+      "6,666 acres of total audited footprint across 29 sites. Building materials runs the largest land footprint in the dataset."
     ],
     "roiDefaults": {
       "averageMarginPerShipment": 920

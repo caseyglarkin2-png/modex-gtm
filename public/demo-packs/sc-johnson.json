@@ -13,18 +13,18 @@
       "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "SC Johnson operates ~70 manufacturing facilities across 40+ countries; ~10 in the US. We audited 10. International scope on request."
+      "note": "SC Johnson operates ~70 manufacturing facilities across 40+ countries; ~10 in the US. We core-sampled 6. International scope on request."
     },
     "featuredSiteId": "06-fort-worth-regional-distribution-center",
     "networkCount": 10,
     "networkCountSource": "https://jobs.scjohnson.com/locations",
     "networkCountAsOf": "2025",
     "sampleRationale": "We audited 6 of an estimated 10 US manufacturing and distribution sites that ship truck freight for SC Johnson's home cleaning, air care, and Ziploc brands.",
-    "dossierIntro": "SC Johnson runs the home cleaning, air care, and Ziploc network. 70 facilities; we audited 10. Fort Worth Regional DC runs 120 dock doors. Bay City MI is 400 acres of Ziploc manufacturing. 808 acres total. 3 of 10 sites are rail-served. YardFlow runs flammable-classified household trailers and standard CPG trailers on the same protocol with separate audit chains.",
+    "dossierIntro": "SC Johnson runs the home cleaning, air care, and Ziploc network across about 10 US sites; we core-sampled 6. Fort Worth Regional DC runs 120 dock doors. Bay City MI is 400 acres of Ziploc manufacturing. 722 acres across the audited sites. 3 of 6 are rail-served. YardFlow runs flammable-classified household trailers and standard CPG trailers on the same protocol with separate audit chains.",
     "surprisingFindings": [
       "Bay City MI is 400 acres of Ziploc manufacturing. SC Johnson built the bag at scale.",
       "Fort Worth runs 120 dock doors. SC Johnson's largest single-site distribution operation.",
-      "3 of 10 audited sites are rail-served. Home cleaning supplies ship primarily on truckload."
+      "3 of 6 audited sites are rail-served. Home cleaning supplies ship primarily on truckload."
     ]
   },
   "research": null,

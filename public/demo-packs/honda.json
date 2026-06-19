@@ -13,18 +13,18 @@
       "auditedScope": "NA",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Honda operates ~100 manufacturing plants in 30+ countries; ~22 are in North America (US + Canada + Mexico, incl. Alliston, Celaya, Marysville, East Liberty, Lincoln, Greensburg, parts/engine plants). We audited 18 NA sites. International scope on request."
+      "note": "Honda operates ~100 manufacturing plants in 30+ countries; ~22 are in North America (US + Canada + Mexico, incl. Alliston, Celaya, Marysville, East Liberty, Lincoln, Greensburg, parts/engine plants). We audited 14 US sites of the roughly 21 US freight facilities as the core sample. International scope on request."
     },
     "featuredSiteId": "05-honda-manufacturing-of-alabama",
     "networkCount": 21,
     "networkCountSource": "https://hondainamerica.com/manufacturing/",
     "networkCountAsOf": "2025",
     "sampleRationale": "We audited 14 of Honda's 21 US freight facilities: 11 auto, engine, transmission, powersports, and power-equipment plants plus 10 parts distribution centers.",
-    "dossierIntro": "Honda runs the largest greenfield auto manufacturing footprint we audited. 100 facilities; we audited 18. HMA Lincoln AL covers 900 acres. HMIN Greensburg IN is 1,480 acres. 5,675 total acres of audited footprint. YardFlow runs supplier inbound and finished-vehicle outbound on the same protocol regardless of plant size.",
+    "dossierIntro": "Honda runs the largest greenfield auto manufacturing footprint we audited. We audited 14 of its roughly 21 US freight facilities as the core sample. HMA Lincoln AL covers 900 acres. HMIN Greensburg IN is 1,480 acres. 5,108 acres across the audited slice. YardFlow runs supplier inbound and finished-vehicle outbound on the same protocol regardless of plant size.",
     "surprisingFindings": [
       "HMIN Greensburg IN is 1,480 acres. Honda built a city to make Civics here.",
-      "HMA Lincoln AL is 900 acres with 120 dock doors. Largest single Honda plant in the US by dock count.",
-      "4 of 18 audited sites are rail-served. Auto parts move on rail; finished vehicles drive away."
+      "HMA Lincoln AL is 900 acres with 120 dock doors. Largest single Honda plant in the audited sample by dock count.",
+      "3 of the 14 audited sites are rail-served. Auto parts move on rail; finished vehicles drive away."
     ]
   },
   "research": null,

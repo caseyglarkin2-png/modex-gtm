@@ -20,11 +20,11 @@
     "networkCountSource": "Crowley US terminals, marine terminals, warehouses and logistics facilities (11 terminals/ports + 10 warehouses/DCs/logistics sites). https://www.crowley.com/locations/",
     "networkCountAsOf": "2026-06-19",
     "sampleRationale": "We core-sampled the biggest, busiest, and most varied US terminals and yards; the same yard patterns repeated across the network.",
-    "dossierIntro": "Crowley runs marine terminals, port logistics, and container distribution across 270+ facilities. We audited 14. JAXPORT Marine Terminal covers 197 acres. Gloucester NJ runs 90 dock doors on 137 acres. 9 of 14 audited sites are rail-served (most of any 3PL we audited). 6,920 trailer spots. YardFlow runs container, dray, and truckload as three parallel protocols on the same yard graph.",
+    "dossierIntro": "Crowley runs marine terminals, port logistics, and container distribution across ~21 US facilities. We audited 8 of them. JAXPORT Marine Terminal covers 197 acres. Port Everglades parks 1,500 trailer spots on 78 acres. 4 of 8 audited sites are rail-served (most of any 3PL we audited). 4,435 trailer spots. YardFlow runs container, dray, and truckload as three parallel protocols on the same yard graph.",
     "surprisingFindings": [
       "JAXPORT Marine Terminal is 197 acres of port operations. Crowley dominates Jacksonville's logistics footprint.",
-      "6,920 trailer spots across 14 audited sites. Crowley parks 13x more trailers per site than the average 3PL.",
-      "9 of 14 audited sites are rail-served. Port logistics runs on intermodal."
+      "4,435 trailer spots across 8 audited sites. Crowley parks far more trailers per site than the average 3PL.",
+      "4 of 8 audited sites are rail-served. Port logistics runs on intermodal."
     ]
   },
   "research": null,

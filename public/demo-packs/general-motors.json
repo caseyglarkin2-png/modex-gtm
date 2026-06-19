@@ -16,14 +16,14 @@
       "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "GM runs 61 freight-relevant US facilities (12 assembly + 24 stamping/propulsion/component/battery + 25 parts distribution centers per gm.com US Operations); the 2 engineering campuses and divested/idled plants are excluded. We audited 41 of these representative facilities."
+      "note": "GM runs 61 freight-relevant US facilities (12 assembly + 24 stamping/propulsion/component/battery + 25 parts distribution centers per gm.com US Operations); the 2 engineering campuses and divested/idled plants are excluded. We audited 36 of these representative facilities."
     },
     "featuredSiteId": "30-general-motors",
-    "dossierIntro": "Auto OEMs run two yards inside every plant: parts in, vehicles out. GM runs 41 freight-relevant US sites. Spring Hill is the largest plant in North America at 720 acres. Factory ZERO is GM's $2.2B EV flagship. A coast-to-coast parts network adds 14 processing and distribution hubs, and 24 of the 41 sites are rail-served. The Davison Road hub alone runs 84 docks behind a 132-foot automated tower. YardFlow runs supplier inbound and finished-vehicle outbound as two distinct queues on one protocol, across every site at once.",
+    "dossierIntro": "Auto OEMs run two yards inside every plant: parts in, vehicles out. GM runs 61 freight-relevant US sites; we audited 36 of them. Spring Hill is the largest plant in North America at 720 acres. Factory ZERO is GM's $2.2B EV flagship. A coast-to-coast parts network shows up as 12 processing and distribution hubs in the audited set, and 21 of the 36 sites are rail-served. The Davison Road hub alone runs 84 docks behind a 132-foot automated tower. YardFlow runs supplier inbound and finished-vehicle outbound as two distinct queues on one protocol, across every site at once.",
     "surprisingFindings": [
-      "24 of 41 GM sites are rail-served. The inbound moves on railcars, and every railcar still ends at a truck gate the network cannot see.",
-      "3,685 trailer spots sit across 41 yards. That is the parking lot GM's network runs blind on today.",
-      "GM's parts network is 14 sites coast to coast. Davison Road alone runs 84 docks behind a 132-foot automated tower."
+      "21 of 36 audited GM sites are rail-served. The inbound moves on railcars, and every railcar still ends at a truck gate the network cannot see.",
+      "3,370 trailer spots sit across the 36 yards we audited. That is the parking lot GM's network runs blind on today.",
+      "GM's parts network shows up as 12 processing and distribution hubs in the audited set. Davison Road alone runs 84 docks behind a 132-foot automated tower."
     ],
     "roiDefaults": {
       "averageMarginPerShipment": 2200

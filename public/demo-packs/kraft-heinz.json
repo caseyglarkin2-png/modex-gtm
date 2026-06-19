@@ -1,15 +1,11 @@
 {
   "schemaVersion": "2",
-  "builtAt": "2026-06-19T04:59:48.051Z",
+  "builtAt": "2026-06-19T06:32:52.208Z",
   "account": {
     "slug": "kraft-heinz",
     "displayName": "Kraft Heinz",
     "archetype": "cpg",
     "siteCount": 9,
-    "networkCount": 34,
-    "networkCountSource": "Kraft Heinz FY2023 Form 10-K, Item 2 Properties: North America manufacturing and processing facilities, 32 owned + 2 leased (https://www.sec.gov/Archives/edgar/data/0001637459/000163745924000018/khc-20231230.htm)",
-    "networkCountAsOf": "2023-12-30",
-    "sampleRationale": "We mapped the biggest, newest, and most and least automated Kraft Heinz sites across regions; the yard pattern held the same across every one of them.",
     "coverageNote": {
       "auditedCount": 9,
       "estimatedFootprint": 34,
@@ -18,14 +14,18 @@
       "legacyYmsFacilityCount": 25,
       "droppedStubCount": 17,
       "capHit": false,
-      "note": "Kraft Heinz runs 34 North America manufacturing and processing facilities (32 owned, 2 leased) per its FY2023 10-K Item 2 Properties, and 75 such facilities globally. We mapped a representative NA sample (Aurora cold storage, Holland Lunchables, Davenport Oscar Mayer, Garland TX Oscar Mayer, Massillon, Fremont ketchup, Mason City Jell-O, Fort Myers Bagel Bites, Jacksonville warehouse + portion control); DCs add to the plant count but are not enumerated in the 10-K, so we size the network on the cited 34 NA plants."
+      "note": "Kraft Heinz runs 34 North America manufacturing and processing facilities (32 owned, 2 leased) per its FY2023 10-K Item 2 Properties, and 75 such facilities globally. We deep-audited 9 representative plants of that ~34-plant NA network (Holland Lunchables, Davenport Oscar Mayer, Garland TX Oscar Mayer, Massillon, Fremont ketchup, Mason City Jell-O, Fort Myers Bagel Bites, Jacksonville warehouse + portion control); DCs add to the plant count but are not enumerated in the 10-K, so we size the network on the cited 34 NA plants."
     },
+    "networkCount": 34,
+    "networkCountSource": "Kraft Heinz FY2023 Form 10-K, Item 2 Properties: North America manufacturing and processing facilities, 32 owned + 2 leased (https://www.sec.gov/Archives/edgar/data/0001637459/000163745924000018/khc-20231230.htm)",
+    "networkCountAsOf": "2023-12-30",
+    "sampleRationale": "We mapped the biggest, newest, and most and least automated Kraft Heinz sites across regions; the yard pattern held the same across every one of them.",
     "featuredSiteId": "05-kraft-foods-jacksonville-portion-control",
-    "dossierIntro": "Kraft Heinz is the first network we used as the audit rubric. 50+ facilities; we audited 27. Davenport IA covers 72 acres with 55 docks. Fremont OH is 88 acres. 525 dock doors and 722 trailer spots. The 22-field classification framework was calibrated here. YardFlow runs the network the rubric was built for.",
+    "dossierIntro": "Kraft Heinz is the first network we used as the audit rubric. We deep-audited 9 representative plants of the ~34-plant NA network. Davenport IA covers 72 acres with 55 docks. Fremont OH is 88 acres. 495 dock doors and 632 trailer spots across the audited plants. The 22-field classification framework was calibrated here. YardFlow runs the network the rubric was built for.",
     "surprisingFindings": [
-      "27 audited sites span 10 distinct yard archetypes. Kraft is the calibration rubric for the entire dataset.",
-      "Mason City IA has 2 distinct Kraft Heinz facilities, one with a guard shack and one without. Same brand, different yard.",
-      "4 of 27 audited sites are rail-served. CPG inbound increasingly moves on truckload, not rail."
+      "The 9 deep-audited plants span 6 distinct yard archetypes. Kraft is the calibration rubric for the entire dataset.",
+      "Across the audited plants, only the Garland TX Oscar Mayer site runs a staffed guard shack. Same brand, different yard.",
+      "4 of the 9 audited plants are rail-served. CPG inbound increasingly moves on truckload, not rail."
     ]
   },
   "research": null,

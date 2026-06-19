@@ -18,11 +18,11 @@
     "networkCount": 18,
     "networkCountSource": "Constellation Brands FY2025 Form 10-K, Item 1 Business (fiscal year ended Feb 28, 2025): 12 US wineries + 4 US distilleries + 2 Mexican breweries (Nava, Obregon). https://www.sec.gov/Archives/edgar/data/0000016918/000001691825000022/stz-20250228.htm",
     "networkCountAsOf": "2025-02-28",
-    "sampleRationale": "The 10 audited NA distribution and production sites represent Constellation's 18 current NA production facilities feeding the Corona and Modelo import network.",
+    "sampleRationale": "The 10 audited NA distribution and production sites are the core sample of Constellation's ~18 current NA production and import-distribution facilities feeding the Corona and Modelo network.",
     "featuredSiteId": "02-constellation-beer-dc-wilmer-tx-dallas-i-45",
-    "dossierIntro": "Constellation Brands runs the Corona and Modelo import network. 12 distribution centers; we audited 11. Wilmer TX (Dallas I-45) has 64 dock doors. Jurupa Valley CA is 71 acres. 2 of 11 audited sites are rail-served. Mexican imports cross at Texas and California, then fan out to retail. YardFlow runs the cross-dock as a deterministic protocol regardless of which port the trailer crossed at.",
+    "dossierIntro": "Constellation Brands runs the Corona and Modelo import network alongside its wine and spirits production. We audited 10 of ~18 NA facilities. Wilmer TX (Dallas I-45) has 64 dock doors. Jurupa Valley CA is 71 acres. 2 of 10 audited sites are rail-served. Mexican imports cross at Texas and California, then fan out to retail. YardFlow runs the cross-dock as a deterministic protocol regardless of which port the trailer crossed at.",
     "surprisingFindings": [
-      "11 of 12 facilities are import-distribution. Mexican beer flows into Texas and California, then fans out.",
+      "The beer DCs are pure import-distribution. Mexican beer flows into Texas and California, then fans out.",
       "Jurupa Valley CA is 71 acres of beverage cross-dock. Largest single-site beer DC on the West Coast.",
       "Wilmer TX runs 64 docks. Dallas I-45 is the Mexican beer pipeline."
     ]

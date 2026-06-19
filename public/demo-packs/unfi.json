@@ -8,18 +8,22 @@
     "siteCount": 30,
     "coverageNote": {
       "auditedCount": 30,
-      "estimatedFootprint": 56,
+      "estimatedFootprint": 52,
       "droppedStubCount": 0,
       "capHit": true,
-      "note": "United Natural Foods Inc. operates ~56 US distribution centers (UNFI, SUPERVALU acquired 2018). We audited 27.",
+      "note": "United Natural Foods Inc. maintained 52 distribution centers and warehouses at August 2, 2025 per its FY2025 10-K Item 2. We core-sampled 30.",
       "auditedScope": "US"
     },
+    "networkCount": 52,
+    "networkCountSource": "https://www.sec.gov/Archives/edgar/data/1020859/000102085925000054/unfi-20250802.htm",
+    "networkCountAsOf": "2025-08-02",
+    "sampleRationale": "We core-sampled 30 of UNFI's 52 distribution centers and warehouses, its largest and most yard-intensive natural and conventional grocery sites coast to coast.",
     "featuredSiteId": "10-york-pa",
-    "dossierIntro": "UNFI runs the largest natural and organic grocery distribution network. 56 facilities; we audited 27. York PA has 110 dock doors on 41 acres. Hopkins MN is 150 acres. 2,362 total dock doors and 3,874 trailer spots. YardFlow runs perishable, frozen, and shelf-stable as three parallel queues inside one yard.",
+    "dossierIntro": "UNFI runs the largest natural and organic grocery distribution network across 52 distribution centers and warehouses; we core-sampled 30. York PA has 110 dock doors on 41 acres. Hopkins MN is 150 acres. 2,362 total dock doors and 3,874 trailer spots. YardFlow runs perishable, frozen, and shelf-stable as three parallel queues inside one yard.",
     "surprisingFindings": [
-      "2,362 dock doors across 27 audited sites. UNFI routes the most natural-grocery dock minutes in NA.",
+      "2,362 dock doors across 30 audited sites. UNFI routes the most natural-grocery dock minutes in NA.",
       "Hopkins MN is 150 acres of grocery distribution. UNFI's largest single DC.",
-      "2 of 27 audited sites are rail-served. Natural grocery runs almost entirely on truckload."
+      "2 of 30 audited sites are rail-served. Natural grocery runs almost entirely on truckload."
     ]
   },
   "research": null,

@@ -13,18 +13,18 @@
       "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": true,
-      "note": "FedEx operates ~5,000 facilities globally (Express + Ground + Freight + Office); the US network is ~1,800 sites. We audited 30 representative US hubs/terminals."
+      "note": "FedEx runs a ~1,250-facility US and Canada freight network (~720 legacy FedEx Ground + ~530 legacy FedEx Express surface) per its FY2025 Form 10-K, Item 2. We core-sampled 29 representative US hubs and terminals."
     },
     "featuredSiteId": "24-fedex-freight-hub-conley-ga",
     "networkCount": 1250,
     "networkCountSource": "FedEx FY2025 Form 10-K, Item 2 (Properties): ~720 legacy FedEx Ground + ~530 legacy FedEx Express US/Canada surface freight facilities. https://www.sec.gov/Archives/edgar/data/1048911/000104891125000011/fdx-20250531.htm",
     "networkCountAsOf": "2025-05-31",
     "sampleRationale": "We core-sampled the biggest, busiest, and most varied US hubs and terminals; the same yard patterns repeated across the freight network.",
-    "dossierIntro": "Parcel and LTL hubs run the largest yards in the dataset. FedEx operates 5,000+ facilities. We audited 30. Conley GA runs 304 dock doors and 750 trailer spots on 121 acres. Memphis Express World Hub is 940 acres. LTL hub throughput is trailer-position visibility: the right trailer at the right door when the right shipment needs to load, within 4 hours. YardFlow keeps positions current at every door, every minute.",
+    "dossierIntro": "Parcel and LTL hubs run the largest yards in the dataset. FedEx runs a ~1,250-facility US and Canada freight network. We core-sampled 29 of them. Conley GA runs 304 dock doors and 750 trailer spots on 121 acres. Memphis Express World Hub is 940 acres. LTL hub throughput is trailer-position visibility: the right trailer at the right door when the right shipment needs to load, within 4 hours. YardFlow keeps positions current at every door, every minute.",
     "surprisingFindings": [
       "Memphis Express World Hub is 940 acres. More parcels sort here per night than land at most international airports.",
-      "9,810 trailer spots across 30 sites. FedEx parks more trailers than any other audited network.",
-      "0 of 30 audited sites are rail-served. LTL is highway-to-highway."
+      "9,750 trailer spots across the 29 sites we sampled. FedEx parks more trailers than any other audited network.",
+      "0 of 29 audited sites are rail-served. LTL is highway-to-highway."
     ],
     "roiDefaults": {
       "averageMarginPerShipment": 380

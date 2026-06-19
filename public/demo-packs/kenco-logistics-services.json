@@ -11,7 +11,7 @@
       "estimatedFootprint": 141,
       "droppedStubCount": 0,
       "capHit": true,
-      "note": "Kenco Logistics manages 141 North American distribution facilities across 33 US states. We audited 24 representative locations.",
+      "note": "Kenco Logistics manages 141 North American distribution facilities across 33 US states. We audited 24 of them as the core sample.",
       "auditedScope": "US"
     },
     "networkCount": 141,
@@ -19,11 +19,11 @@
     "networkCountAsOf": "2025",
     "sampleRationale": "We mapped 24 of Kenco's 141 North American distribution facilities, a representative slice of its contract-3PL cross-docks and DCs across 33 US states.",
     "featuredSiteId": "28-kenco-the-shippers-group-grand-prairie-tx",
-    "dossierIntro": "Kenco Logistics runs contract 3PL for Fortune 500 manufacturers. 141 facilities; we audited 24. MCS Olive Branch MS has 130 dock doors on 59.8 acres. MCS Jeffersonville III in Sellersburg IN is 96 acres. 1,996 dock doors across the audited slice. YardFlow runs Kenco's contract-specific SLAs as audit chains, one per shipper.",
+    "dossierIntro": "Kenco Logistics runs contract 3PL for Fortune 500 manufacturers. We audited 24 of its 141 North American facilities as the core sample. The Hutchins TX cross-dock runs 130 dock doors on 54 acres. MCS Jeffersonville III in Sellersburg IN is 96 acres. 1,676 dock doors across the audited slice. YardFlow runs Kenco's contract-specific SLAs as audit chains, one per shipper.",
     "surprisingFindings": [
-      "MCS Olive Branch MS runs 130 dock doors. Kenco's flagship Mid-South cross-dock.",
-      "1,996 dock doors across 28 audited sites. Kenco routes more contract-logistics dock minutes than most 3PLs.",
-      "5 of 28 audited sites are rail-served. Contract logistics runs majority-truckload."
+      "Hutchins TX runs 130 dock doors. One of Kenco's flagship Texas cross-docks.",
+      "1,676 dock doors across the 24 audited sites. Kenco routes more contract-logistics dock minutes than most 3PLs.",
+      "4 of the 24 audited sites are rail-served. Contract logistics runs majority-truckload."
     ]
   },
   "research": null,

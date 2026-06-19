@@ -13,18 +13,18 @@
       "auditedScope": "NA",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Hormel Foods operates ~50 manufacturing facilities, almost entirely in NA. We audited 27 representative sites."
+      "note": "Hormel Foods operates roughly 30 US production facilities. We audited 25 of them as the core sample."
     },
     "networkCount": 30,
     "networkCountSource": "Hormel Foods corporate Our Locations page: 30+ production facilities in the United States. https://www.hormelfoods.com/careers/career-center/our-locations/ (accessed 2026-06-19; FY2025 10-K, fiscal year ended Oct 26, 2025, reports the owned/leased footprint by state).",
     "networkCountAsOf": "2026-06-19",
     "sampleRationale": "The 25 audited US plants represent Hormel's 30-plus US production facilities running the Spam, Skippy, and Planters network.",
     "featuredSiteId": "15-hormel-fort-smith-plant",
-    "dossierIntro": "Hormel Foods runs the Spam, Skippy, and Planters network. 50 facilities; we audited 27. Fort Smith AR has 45 dock doors on 58 acres. Austin MN is 120 acres (the flagship Spam plant has been there since 1937). 5 of 27 audited sites are rail-served. 766 dock doors. YardFlow runs the shelf-stable, refrigerated, and frozen-meat flows as distinct protocols on one yard graph.",
+    "dossierIntro": "Hormel Foods runs the Spam, Skippy, and Planters network. We audited 25 of its roughly 30 US production facilities as the core sample. Fort Smith AR has 45 dock doors on 58 acres. Austin MN is 120 acres (the flagship Spam plant has been there since 1937). 5 of the 25 audited sites are rail-served. 731 dock doors across the audited slice. YardFlow runs the shelf-stable, refrigerated, and frozen-meat flows as distinct protocols on one yard graph.",
     "surprisingFindings": [
       "Austin MN is 120 acres of Spam. Hormel has been making the same SKU on the same site since 1937.",
-      "5 of 27 audited sites are rail-served. Inbound pork moves on rail; outbound canned meat ships on trucks.",
-      "1,609 trailer spots across 27 audited sites. Hormel runs heavy trailer density for shelf-stable CPG."
+      "5 of the 25 audited sites are rail-served. Inbound pork moves on rail; outbound canned meat ships on trucks.",
+      "1,566 trailer spots across the 25 audited sites. Hormel runs heavy trailer density for shelf-stable CPG."
     ]
   },
   "research": null,

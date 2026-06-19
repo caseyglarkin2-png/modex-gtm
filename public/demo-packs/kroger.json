@@ -12,18 +12,18 @@
       "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "Kroger runs ~33 distribution centers across its banners (Kroger, Ralphs, Fred Meyer, King Soopers, Fry's, Smith's) plus a growing network of Ocado-automated CFCs, feeding ~2,700 stores. We audited 18 representative facilities."
+      "note": "Kroger runs distribution centers across its banners (Kroger, Ralphs, Fred Meyer, King Soopers, Fry's, Smith's) plus a growing network of Ocado-automated CFCs, feeding ~2,700 stores, roughly 66 facilities in the freight footprint. We audited 15 of them as the core sample."
     },
     "networkCount": 66,
     "networkCountSource": "Kroger FY2024 10-K, Item 2 Properties + Merchandising (as of Feb 3, 2024): 33 food production plants (14 dairies, 9 deli/bakery, 5 grocery, 2 beverage, 1 meat, 2 cheese) plus a supply-chain network Kroger states as more than 30 distribution centers (https://www.sec.gov/Archives/edgar/data/0000056873/000155837024004603/kr-20240203x10k.htm)",
     "networkCountAsOf": "2024-02",
     "sampleRationale": "We mapped the largest, newest, and most and least automated banner DCs and Ocado CFCs; the gate-to-dock pattern held across every one.",
     "featuredSiteId": "09-kroger",
-    "dossierIntro": "Kroger, the largest traditional grocer in the US, distributes through two layers we mapped across 18 sites: legacy banner DCs running under Kroger, Ralphs, Fred Meyer, King Soopers, Fry's, and Smith's, plus the new Ocado-automated customer fulfillment centers. Together they hold 1,742 dock doors and room for about 3,799 trailers, with no rail at any of them. The split shows up in the yards: the grocery DCs are gated and guarded, seven with a staffed booth, while the automated CFCs mostly run open or on remote check-in. YardFlow gives Kroger one gate-to-dock view across both layers and every banner.",
+    "dossierIntro": "Kroger, the largest traditional grocer in the US, distributes through two layers. We audited 15 of its roughly 66 facilities as the core sample: legacy banner DCs running under Kroger, Ralphs, Fred Meyer, King Soopers, Fry's, and Smith's, plus the new Ocado-automated customer fulfillment centers. Together those 15 hold 1,634 dock doors and room for about 3,684 trailers, with no rail at any of them. The split shows up in the yards: the grocery DCs are gated and guarded, seven with a staffed booth, while the automated CFCs mostly run open or on remote check-in. YardFlow gives Kroger one gate-to-dock view across both layers and every banner.",
     "surprisingFindings": [
       "Kroger runs two yard models: legacy banner DCs that gate and guard the yard, and Ocado CFCs that mostly run open or on remote check-in.",
-      "The 11 grocery DCs span six banners (Kroger, Ralphs, Fred Meyer, King Soopers, Fry's, Smith's), and each yard was set up its own way.",
-      "Across 18 sites we counted 1,742 dock doors and 3,799 trailer spots, and not one touches rail. Every case moves by truck."
+      "The 10 grocery DCs span six banners (Kroger, Ralphs, Fred Meyer, King Soopers, Fry's, Smith's), and each yard was set up its own way.",
+      "Across the 15 audited sites we counted 1,634 dock doors and 3,684 trailer spots, and not one touches rail. Every case moves by truck."
     ]
   },
   "research": null,
