@@ -185,6 +185,22 @@
     "dropYard": true,
     "multiStep": false
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.bobevansgrocery.com/about-us/", "date": "2026-01", "type": "locator", "claim": "Hillsdale plant has produced Bob Evans sausage since 1964; one of two fresh-sausage-roll sites, the only patty site; 50+ SKUs, 25M+ lbs/yr." },
+      { "tier": 1, "url": "https://www.sec.gov/Archives/edgar/data/0001530950/000153095023000350/post-20230930.htm", "date": "2023-11", "type": "10-K", "claim": "Post Holdings FY2023 10-K Item 2 lists Hillsdale MI and Xenia OH as owned Refrigerated Retail sausage production plants." },
+      { "tier": 1, "url": "https://jobs.postholdings.com/careers-home/jobs/27329?lang=en-us", "date": "2026-06", "type": "careers", "claim": "Live 'Production Team Member - Hillsdale, Michigan | Bob Evans Foods' req (sausage slicing/stuffing/packaging), plus active Sanitation/Harvest reqs at the site." }
+    ],
+    "imageryDate": "2024-09",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Company about page, Post 10-K owned-properties list, and live Hillsdale production reqs all confirm an active company-owned sausage plant; gauntlet found only unrelated 2012 OH closures plus a 2026 Hillsdale packaging expansion.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "confidence": "high",
   "uncertainFields": [
     "dockDoorCount",

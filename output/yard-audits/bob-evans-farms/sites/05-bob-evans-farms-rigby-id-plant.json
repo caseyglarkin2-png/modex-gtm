@@ -177,6 +177,22 @@
     "dropYard": true,
     "multiStep": false
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.bobevansgrocery.com/about-us/", "date": "2026-06", "type": "locator", "claim": "Lists the Rigby ID plant under Bob Evans 'Our Facilities': 'Acquired in 2025, our Rigby plant produces refrigerated and frozen potato products.'" },
+      { "tier": 1, "url": "https://www.postholdings.com/post-holdings-completes-acquisition-of-potato-products-of-idaho/", "date": "2025-03-03", "type": "press", "claim": "Post Holdings completed acquisition of Potato Products of Idaho LLC (Rigby, ID plant), confirming Post/Bob Evans is the current operator." },
+      { "tier": 3, "url": "https://www.fooddive.com/news/post-holding-to-buy-potato-company-for-undisclosed-amount/735861/", "date": "2025-01", "type": "press", "claim": "Post Holdings deal includes a manufacturing facility in Rigby, ID (PPI, Mickelsen family)." }
+    ],
+    "imageryDate": "2021",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Former Potato Products of Idaho (Mickelsen family) acquired by Post Holdings 2025-03-03 and now run under Bob Evans Farms; wrong-operator risk resolved, no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "confidence": "high",
   "uncertainFields": [
     "dockDoorCount",

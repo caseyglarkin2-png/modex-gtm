@@ -213,6 +213,22 @@
     "dropYard": true,
     "multiStep": false
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnapshot&query_param=USDOT&query_string=911163", "date": "2026-02-27", "type": "press", "claim": "FMCSA: Bob Evans Transportation Company LLC, USDOT 911163, Operating Status ACTIVE, 6088 Green Field Dr, Springfield OH 45502; 144 power units / 118 drivers; MCS-150 updated Feb 2026." },
+      { "tier": 1, "url": "https://www.bobevansgrocery.com/about-us/", "date": "2026-06", "type": "locator", "claim": "Company main transportation facility in Springfield OH: ~150 employees / 100 drivers, 100+ tractor-trailers, 20,000+ deliveries/yr distributing Bob Evans products." },
+      { "tier": 1, "url": "https://www.nlrb.gov/case/09-RC-316738", "date": "2023-04-24", "type": "press", "claim": "NLRB rep case for Bob Evans Farms at 6088 Green-Field Dr, Springfield OH; bargaining unit of drivers, dock workers, and yard jockeys (84 employees) - confirms active on-site yard operation." }
+    ],
+    "imageryDate": "",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FMCSA active carrier (updated Feb 2026), company site, and two NLRB cases (one naming 'yard jockeys') place an active private-fleet terminal at 6088 Green Field Dr; distinct from the closed ~2012 sausage plant.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "confidence": "medium",
   "uncertainFields": [
     "truckGate",

@@ -161,6 +161,21 @@
     "dropYard": false,
     "multiStep": false
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.bobevansgrocery.com/about-us/", "date": "2026-01", "type": "locator", "claim": "Lists Xenia, OH as one of Bob Evans Farms' four production facilities; 100+ employees manufacture 30M+ lbs/yr of fresh sausage rolls and links." },
+      { "tier": 1, "url": "https://jobs.postholdings.com/bob-evans-farms/jobs", "date": "2026-03", "type": "careers", "claim": "Active Bob Evans Foods production reqs (Plant Manager, Production Team Member, Mfg Supervisor) at Xenia, OH plant." }
+    ],
+    "imageryDate": "2022-06",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Bob Evans Foods' own site names Xenia as an active sausage plant; closure gauntlet found only 2012-13 events at OTHER plants where Xenia was explicitly retained.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "confidence": "high",
   "uncertainFields": [
     "dockDoorCount",

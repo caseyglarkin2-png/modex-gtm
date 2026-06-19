@@ -165,6 +165,22 @@
     "dropYard": true,
     "multiStep": false
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.bobevansgrocery.com/about-us/", "date": "2026-06", "type": "locator", "claim": "Lists 651 Commerce Pkwy, Lima OH 45804 as a Bob Evans plant producing mashed potatoes and macaroni & cheese; 100M+ lbs/yr, 400+ people, 23+ SKUs." },
+      { "tier": 1, "url": "https://preview.bnpmedia.com/rff-december-2024/feature-bob-evans/", "date": "2024-12", "type": "press", "claim": "Bob Evans NW Ohio plant produces ~136M lbs/yr of RTE mashed potatoes, running 3 shifts 24/7." },
+      { "tier": 3, "url": "https://www.provisioneronline.com/articles/98220-bob-evans-acquires-kettle-creations-brand--facility", "date": "2012-08-16", "type": "press", "claim": "BEF Foods acquired the Kettle Creations brand + Lima OH plant (~$50M), confirming the 'former Kettle Creations facility' note." }
+    ],
+    "imageryDate": "2024-10",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Company site lists 651 Commerce Pkwy Lima as its active mac/potato plant; corroborated by Dec-2024 trade feature and live reqs; only closures found (Springfield, Bidwell 2013) are different facilities.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "confidence": "high",
   "uncertainFields": [
     "dockDoorCount",

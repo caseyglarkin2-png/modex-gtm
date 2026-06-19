@@ -165,6 +165,22 @@
     "dropYard": false,
     "multiStep": false
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.bobevansgrocery.com/about-us/", "date": "2026-06", "type": "locator", "claim": "Lists 1109 Industrial Dr E, Sulphur Springs TX 75482 as a company facility (acquired 2003, 70+ employees) producing refrigerated sides incl. Bob Evans Macaroni & Cheese." },
+      { "tier": 1, "url": "https://jobs.postholdings.com/careers-home/jobs/29463?lang=en-us", "date": "2026-06", "type": "careers", "claim": "Active 'SS Production Team Member' and cluster of Bob Evans Foods production reqs in Sulphur Springs, TX." },
+      { "tier": 3, "url": "https://frontporchnewstexas.com/2025/02/18/bob-evans-sulphur-springs-plant-celebrated-365-days-of-no-recordable-accidents/", "date": "2025-02-18", "type": "press", "claim": "Local news: Bob Evans Sulphur Springs plant celebrated 365 days with no recordable accidents (Feb 2025), confirming active operation." }
+    ],
+    "imageryDate": "2025-06",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Company site lists Sulphur Springs as an active Mac & Cheese plant at the stated address; corroborated by live reqs and a Feb-2025 plant safety milestone; no closure/sale/WARN found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  },
   "confidence": "high",
   "uncertainFields": [
     "dockDoorCount",
