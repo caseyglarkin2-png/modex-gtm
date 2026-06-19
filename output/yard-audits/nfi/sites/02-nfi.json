@@ -1,67 +1,202 @@
 {
   "name": "NFI Distribution Center Breinigsville PA (910 Nestle)",
   "type": "Distribution Center",
-  "coords": { "lat": 40.56815, "lng": -75.65055 },
+  "coords": {
+    "lat": 40.56815,
+    "lng": -75.65055
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 40.56882, "lng": -75.65245 },
-      { "lat": 40.56845, "lng": -75.64910 },
-      { "lat": 40.56838, "lng": -75.64720 },
-      { "lat": 40.56735, "lng": -75.64525 },
-      { "lat": 40.56612, "lng": -75.64615 },
-      { "lat": 40.56640, "lng": -75.64880 },
-      { "lat": 40.56678, "lng": -75.65150 },
-      { "lat": 40.56795, "lng": -75.65275 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 40.56672, "lng": -75.64905 },
-      { "lat": 40.56672, "lng": -75.64862 },
-      { "lat": 40.56628, "lng": -75.64868 },
-      { "lat": 40.56628, "lng": -75.64910 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.56882,
+          "lng": -75.65245
+        },
+        {
+          "lat": 40.56845,
+          "lng": -75.6491
+        },
+        {
+          "lat": 40.56838,
+          "lng": -75.6472
+        },
+        {
+          "lat": 40.56735,
+          "lng": -75.64525
+        },
+        {
+          "lat": 40.56612,
+          "lng": -75.64615
+        },
+        {
+          "lat": 40.5664,
+          "lng": -75.6488
+        },
+        {
+          "lat": 40.56678,
+          "lng": -75.6515
+        },
+        {
+          "lat": 40.56795,
+          "lng": -75.65275
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.56672,
+          "lng": -75.64905
+        },
+        {
+          "lat": 40.56672,
+          "lng": -75.64862
+        },
+        {
+          "lat": 40.56628,
+          "lng": -75.64868
+        },
+        {
+          "lat": 40.56628,
+          "lng": -75.6491
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 40.56835, "lng": -75.64760 },
-        { "lat": 40.56795, "lng": -75.64560 },
-        { "lat": 40.56700, "lng": -75.64615 },
-        { "lat": 40.56745, "lng": -75.64810 }
-      ] },
-      { "ring": [
-        { "lat": 40.56760, "lng": -75.64560 },
-        { "lat": 40.56690, "lng": -75.64470 },
-        { "lat": 40.56600, "lng": -75.64560 },
-        { "lat": 40.56670, "lng": -75.64640 }
-      ] },
-      { "ring": [
-        { "lat": 40.56680, "lng": -75.64955 },
-        { "lat": 40.56668, "lng": -75.64835 },
-        { "lat": 40.56625, "lng": -75.64842 },
-        { "lat": 40.56638, "lng": -75.64962 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 40.56835,
+            "lng": -75.6476
+          },
+          {
+            "lat": 40.56795,
+            "lng": -75.6456
+          },
+          {
+            "lat": 40.567,
+            "lng": -75.64615
+          },
+          {
+            "lat": 40.56745,
+            "lng": -75.6481
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.5676,
+            "lng": -75.6456
+          },
+          {
+            "lat": 40.5669,
+            "lng": -75.6447
+          },
+          {
+            "lat": 40.566,
+            "lng": -75.6456
+          },
+          {
+            "lat": 40.5667,
+            "lng": -75.6464
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.5668,
+            "lng": -75.64955
+          },
+          {
+            "lat": 40.56668,
+            "lng": -75.64835
+          },
+          {
+            "lat": 40.56625,
+            "lng": -75.64842
+          },
+          {
+            "lat": 40.56638,
+            "lng": -75.64962
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 40.56792, "lng": -75.65235 },
-        { "lat": 40.56758, "lng": -75.64940 },
-        { "lat": 40.56748, "lng": -75.64945 },
-        { "lat": 40.56782, "lng": -75.65240 }
-      ] },
-      { "ring": [
-        { "lat": 40.56838, "lng": -75.65195 },
-        { "lat": 40.56808, "lng": -75.64930 },
-        { "lat": 40.56798, "lng": -75.64935 },
-        { "lat": 40.56828, "lng": -75.65200 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 40.56792,
+            "lng": -75.65235
+          },
+          {
+            "lat": 40.56758,
+            "lng": -75.6494
+          },
+          {
+            "lat": 40.56748,
+            "lng": -75.64945
+          },
+          {
+            "lat": 40.56782,
+            "lng": -75.6524
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.56838,
+            "lng": -75.65195
+          },
+          {
+            "lat": 40.56808,
+            "lng": -75.6493
+          },
+          {
+            "lat": 40.56798,
+            "lng": -75.64935
+          },
+          {
+            "lat": 40.56828,
+            "lng": -75.652
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 40.56805, "lng": -75.64935 },
-      { "lat": 40.56792, "lng": -75.64790 },
-      { "lat": 40.56720, "lng": -75.64820 },
-      { "lat": 40.56735, "lng": -75.64960 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 40.56805,
+          "lng": -75.64935
+        },
+        {
+          "lat": 40.56792,
+          "lng": -75.6479
+        },
+        {
+          "lat": 40.5672,
+          "lng": -75.6482
+        },
+        {
+          "lat": 40.56735,
+          "lng": -75.6496
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
-      "truckGate": { "heading": 0, "pano": "", "hasCoverage": false }
+      "perimeter": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "truckGate": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      }
     }
   },
   "yardMetrics": {
@@ -99,7 +234,12 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "trailerParkingCapacity", "connectivityIssue"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "trailerParkingCapacity",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "truckGate": "South driveway connects the open trailer yard directly to the public road (Nestle Way) with no barrier arm, sliding/swing gate, or checkpoint pinch-point. Eastern access road junctions are likewise open. Yard is an open-access cross-dock trailer lot inside the Liberty Park / Nestle Way industrial complex.",
     "guardShack": "No booth structure of any kind found at any entrance across z19/z20 imagery of the south driveway, east access road, or NE drop-yard road.",
@@ -119,5 +259,31 @@
     "railServed": "No rail spur enters the property in any captured imagery.",
     "location": "Confirmed 910 Nestle Way via Google rooftop geocode (40.5673153, -75.6493462) and the NFI/LoopNet profile (cross-dock terminal, 47 dock doors w/ levelers, 51 off-wall trailer parking) — matches the long narrow cross-dock building, NOT the larger single-footprint DC to the NE (the sister site, idx 01). coords field re-centered on the building itself."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.nfiindustries.com/wp-content/uploads/2024/10/910-Nestle-Way-Breinigsville-PA.pdf",
+        "date": "2024-10",
+        "type": "locator",
+        "claim": "NFI facility sheet for 910 Nestle Way (254,000 sf leased)"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/cmp/Nfi-Industries/locations/PA/Breinigsville",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active NFI Breinigsville warehouse requisitions"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "NFI 2024 facility sheet names 910 Nestle Way as a leased NFI warehouse (254,000 sf); corroborated by current hiring.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

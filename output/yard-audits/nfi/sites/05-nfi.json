@@ -1,48 +1,135 @@
 {
   "name": "NFI Port Logistics Eastvale CA",
   "type": "Port Logistics",
-  "coords": { "lat": 34.029780, "lng": -117.556720 },
+  "coords": {
+    "lat": 34.02978,
+    "lng": -117.55672
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 34.031734, "lng": -117.558590 },
-      { "lat": 34.031254, "lng": -117.555307 },
-      { "lat": 34.027413, "lng": -117.554921 },
-      { "lat": 34.026773, "lng": -117.555951 },
-      { "lat": 34.027093, "lng": -117.558525 },
-      { "lat": 34.028267, "lng": -117.558719 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 34.028427, "lng": -117.558912 },
-      { "lat": 34.028373, "lng": -117.558525 },
-      { "lat": 34.028053, "lng": -117.558551 },
-      { "lat": 34.028107, "lng": -117.558937 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.031734,
+          "lng": -117.55859
+        },
+        {
+          "lat": 34.031254,
+          "lng": -117.555307
+        },
+        {
+          "lat": 34.027413,
+          "lng": -117.554921
+        },
+        {
+          "lat": 34.026773,
+          "lng": -117.555951
+        },
+        {
+          "lat": 34.027093,
+          "lng": -117.558525
+        },
+        {
+          "lat": 34.028267,
+          "lng": -117.558719
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.028427,
+          "lng": -117.558912
+        },
+        {
+          "lat": 34.028373,
+          "lng": -117.558525
+        },
+        {
+          "lat": 34.028053,
+          "lng": -117.558551
+        },
+        {
+          "lat": 34.028107,
+          "lng": -117.558937
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 34.027520, "lng": -117.558397 },
-        { "lat": 34.027253, "lng": -117.555629 },
-        { "lat": 34.026773, "lng": -117.555951 },
-        { "lat": 34.027040, "lng": -117.558525 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 34.02752,
+            "lng": -117.558397
+          },
+          {
+            "lat": 34.027253,
+            "lng": -117.555629
+          },
+          {
+            "lat": 34.026773,
+            "lng": -117.555951
+          },
+          {
+            "lat": 34.02704,
+            "lng": -117.558525
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 34.028267, "lng": -117.558719 },
-        { "lat": 34.028213, "lng": -117.558525 },
-        { "lat": 34.031681, "lng": -117.558719 },
-        { "lat": 34.031628, "lng": -117.558912 }
-      ] },
-      { "ring": [
-        { "lat": 34.028053, "lng": -117.558268 },
-        { "lat": 34.027786, "lng": -117.555178 },
-        { "lat": 34.027253, "lng": -117.555307 },
-        { "lat": 34.027520, "lng": -117.558397 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 34.028267,
+            "lng": -117.558719
+          },
+          {
+            "lat": 34.028213,
+            "lng": -117.558525
+          },
+          {
+            "lat": 34.031681,
+            "lng": -117.558719
+          },
+          {
+            "lat": 34.031628,
+            "lng": -117.558912
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 34.028053,
+            "lng": -117.558268
+          },
+          {
+            "lat": 34.027786,
+            "lng": -117.555178
+          },
+          {
+            "lat": 34.027253,
+            "lng": -117.555307
+          },
+          {
+            "lat": 34.02752,
+            "lng": -117.558397
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 72, "pano": "t1kHi4rjQI93iA709y89qg", "hasCoverage": true },
-      "truckGate": { "heading": 53, "pano": "EL2DL0jl7LnkDFHAjQ0J4Q", "hasCoverage": true }
+      "perimeter": {
+        "heading": 72,
+        "pano": "t1kHi4rjQI93iA709y89qg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 53,
+        "pano": "EL2DL0jl7LnkDFHAjQ0J4Q",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -80,7 +167,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Sliding steel gate across the truck drive at the SW corner on Mission Blvd; full black ornamental-steel perimeter fence confirmed on all street frontages in 2025-11 Street View.",
     "guardShack": "No staffed booth visible at the gate in overhead (z20-21) or Street View; gate is an unmanned sliding gate with stop/check-in signage.",
@@ -95,5 +186,32 @@
     "siteAreaAcres": "Derived from perimeter polygon (40.6 ac); matches the documented ~42.8-acre / 761,000 SF parcel.",
     "railServed": "No rail spur enters the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.nfiindustries.com/about-nfi/news/nfi-expands-capabilities-with-new-west-coast-fulfillment-node/",
+        "date": "2026-05",
+        "type": "press",
+        "claim": "NFI PR: new e-commerce fulfillment operation in Eastvale CA (current)"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.costar.com/article/1859015625/nfi-industries-buys-warehouse-in-southern-californias-hot-logistics-market",
+        "date": "2022-12",
+        "type": "press",
+        "claim": "NFI bought the 761,000 sf warehouse at 13000 Mission Blvd, Eastvale"
+      }
+    ],
+    "imageryDate": "2025-11",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "NFI OWNS 13000 Mission Blvd (Dec 2022 purchase) and self-attested a live Eastvale fulfillment op May 2026; owner-occupied, no churn risk.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

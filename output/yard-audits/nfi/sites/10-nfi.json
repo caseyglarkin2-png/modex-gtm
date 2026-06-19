@@ -1,61 +1,182 @@
 {
   "name": "NFI Port Logistics Port Wentworth GA",
   "type": "Port Logistics",
-  "coords": { "lat": 32.150300, "lng": -81.150400 },
+  "coords": {
+    "lat": 32.1503,
+    "lng": -81.1504
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 32.152844, "lng": -81.153711 },
-      { "lat": 32.153498, "lng": -81.151586 },
-      { "lat": 32.153171, "lng": -81.149398 },
-      { "lat": 32.151100, "lng": -81.147144 },
-      { "lat": 32.148974, "lng": -81.147853 },
-      { "lat": 32.147829, "lng": -81.150428 },
-      { "lat": 32.147720, "lng": -81.153067 },
-      { "lat": 32.149846, "lng": -81.153775 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 32.148320, "lng": -81.153775 },
-      { "lat": 32.148211, "lng": -81.152230 },
-      { "lat": 32.147557, "lng": -81.152166 },
-      { "lat": 32.147666, "lng": -81.153775 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.152844,
+          "lng": -81.153711
+        },
+        {
+          "lat": 32.153498,
+          "lng": -81.151586
+        },
+        {
+          "lat": 32.153171,
+          "lng": -81.149398
+        },
+        {
+          "lat": 32.1511,
+          "lng": -81.147144
+        },
+        {
+          "lat": 32.148974,
+          "lng": -81.147853
+        },
+        {
+          "lat": 32.147829,
+          "lng": -81.150428
+        },
+        {
+          "lat": 32.14772,
+          "lng": -81.153067
+        },
+        {
+          "lat": 32.149846,
+          "lng": -81.153775
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.14832,
+          "lng": -81.153775
+        },
+        {
+          "lat": 32.148211,
+          "lng": -81.15223
+        },
+        {
+          "lat": 32.147557,
+          "lng": -81.152166
+        },
+        {
+          "lat": 32.147666,
+          "lng": -81.153775
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 32.153225, "lng": -81.151586 },
-        { "lat": 32.152680, "lng": -81.148625 },
-        { "lat": 32.150718, "lng": -81.147724 },
-        { "lat": 32.151045, "lng": -81.151586 }
-      ] },
-      { "ring": [
-        { "lat": 32.150500, "lng": -81.149655 },
-        { "lat": 32.149846, "lng": -81.147466 },
-        { "lat": 32.148429, "lng": -81.148046 },
-        { "lat": 32.149192, "lng": -81.149848 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 32.153225,
+            "lng": -81.151586
+          },
+          {
+            "lat": 32.15268,
+            "lng": -81.148625
+          },
+          {
+            "lat": 32.150718,
+            "lng": -81.147724
+          },
+          {
+            "lat": 32.151045,
+            "lng": -81.151586
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 32.1505,
+            "lng": -81.149655
+          },
+          {
+            "lat": 32.149846,
+            "lng": -81.147466
+          },
+          {
+            "lat": 32.148429,
+            "lng": -81.148046
+          },
+          {
+            "lat": 32.149192,
+            "lng": -81.149848
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 32.150827, "lng": -81.153389 },
-        { "lat": 32.150718, "lng": -81.151200 },
-        { "lat": 32.149846, "lng": -81.151200 },
-        { "lat": 32.149846, "lng": -81.153389 }
-      ] },
-      { "ring": [
-        { "lat": 32.150718, "lng": -81.151071 },
-        { "lat": 32.150718, "lng": -81.150170 },
-        { "lat": 32.147993, "lng": -81.150106 },
-        { "lat": 32.147993, "lng": -81.151007 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 32.150827,
+            "lng": -81.153389
+          },
+          {
+            "lat": 32.150718,
+            "lng": -81.1512
+          },
+          {
+            "lat": 32.149846,
+            "lng": -81.1512
+          },
+          {
+            "lat": 32.149846,
+            "lng": -81.153389
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 32.150718,
+            "lng": -81.151071
+          },
+          {
+            "lat": 32.150718,
+            "lng": -81.15017
+          },
+          {
+            "lat": 32.147993,
+            "lng": -81.150106
+          },
+          {
+            "lat": 32.147993,
+            "lng": -81.151007
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 32.147666, "lng": -81.154419 },
-      { "lat": 32.147666, "lng": -81.153389 },
-      { "lat": 32.147012, "lng": -81.153260 },
-      { "lat": 32.147012, "lng": -81.154354 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 32.147666,
+          "lng": -81.154419
+        },
+        {
+          "lat": 32.147666,
+          "lng": -81.153389
+        },
+        {
+          "lat": 32.147012,
+          "lng": -81.15326
+        },
+        {
+          "lat": 32.147012,
+          "lng": -81.154354
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
-      "truckGate": { "heading": 0, "pano": "", "hasCoverage": false }
+      "perimeter": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "truckGate": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      }
     }
   },
   "yardMetrics": {
@@ -119,5 +240,32 @@
     "urbanRural": "Edge-of-town industrial peninsula adjacent to a small residential neighborhood and the port; not dense metro fabric -> Rural per rubric tie-break.",
     "trailersVisible": "0 trailers visible because imagery predates operations (site under construction)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.nfiindustries.com/wp-content/uploads/2023/07/SavannahPort-Wentworth-Transload-Facility-1.pdf",
+        "date": "2023-07",
+        "type": "locator",
+        "claim": "NFI Location Spotlight for the Port Wentworth transload facility (283,240 sf)"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.indeed.com/q-nfi-industries-l-port-wentworth,-ga-jobs.html",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Current NFI material-handler postings in Port Wentworth GA"
+      }
+    ],
+    "imageryDate": "2019-05",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "NFI self-attests 120 Crossgate Rd as its Savannah/Port Wentworth transload facility; 2026 hiring shows ongoing op despite stale 2019 satellite imagery (re-image if updating).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

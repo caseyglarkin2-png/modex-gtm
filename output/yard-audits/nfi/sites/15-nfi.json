@@ -1,46 +1,127 @@
 {
   "name": "NFI Distribution Center McDonough GA",
   "type": "Distribution Center",
-  "coords": { "lat": 33.39195, "lng": -84.1644 },
+  "coords": {
+    "lat": 33.39195,
+    "lng": -84.1644
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 33.39318, "lng": -84.16562 },
-      { "lat": 33.393125, "lng": -84.16278 },
-      { "lat": 33.389985, "lng": -84.163155 },
-      { "lat": 33.390055, "lng": -84.16590 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 33.390640, "lng": -84.164520 },
-      { "lat": 33.390625, "lng": -84.163960 },
-      { "lat": 33.390195, "lng": -84.163975 },
-      { "lat": 33.390210, "lng": -84.164535 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.39318,
+          "lng": -84.16562
+        },
+        {
+          "lat": 33.393125,
+          "lng": -84.16278
+        },
+        {
+          "lat": 33.389985,
+          "lng": -84.163155
+        },
+        {
+          "lat": 33.390055,
+          "lng": -84.1659
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.39064,
+          "lng": -84.16452
+        },
+        {
+          "lat": 33.390625,
+          "lng": -84.16396
+        },
+        {
+          "lat": 33.390195,
+          "lng": -84.163975
+        },
+        {
+          "lat": 33.39021,
+          "lng": -84.164535
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 33.393020, "lng": -84.165290 },
-        { "lat": 33.392985, "lng": -84.164940 },
-        { "lat": 33.390640, "lng": -84.165200 },
-        { "lat": 33.390670, "lng": -84.165560 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.39302,
+            "lng": -84.16529
+          },
+          {
+            "lat": 33.392985,
+            "lng": -84.16494
+          },
+          {
+            "lat": 33.39064,
+            "lng": -84.1652
+          },
+          {
+            "lat": 33.39067,
+            "lng": -84.16556
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 33.392990, "lng": -84.164900 },
-        { "lat": 33.392965, "lng": -84.164640 },
-        { "lat": 33.390700, "lng": -84.164880 },
-        { "lat": 33.390730, "lng": -84.165150 }
-      ] },
-      { "ring": [
-        { "lat": 33.393055, "lng": -84.163880 },
-        { "lat": 33.393030, "lng": -84.163590 },
-        { "lat": 33.390780, "lng": -84.163840 },
-        { "lat": 33.390810, "lng": -84.164130 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.39299,
+            "lng": -84.1649
+          },
+          {
+            "lat": 33.392965,
+            "lng": -84.16464
+          },
+          {
+            "lat": 33.3907,
+            "lng": -84.16488
+          },
+          {
+            "lat": 33.39073,
+            "lng": -84.16515
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.393055,
+            "lng": -84.16388
+          },
+          {
+            "lat": 33.39303,
+            "lng": -84.16359
+          },
+          {
+            "lat": 33.39078,
+            "lng": -84.16384
+          },
+          {
+            "lat": 33.39081,
+            "lng": -84.16413
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 2, "pano": "PGqZa3fJ6vf1CBTcs4Q9NA", "hasCoverage": true },
-      "truckGate": { "heading": 358, "pano": "enukeumPm4kp9kmXgmgdsw", "hasCoverage": true }
+      "perimeter": {
+        "heading": 2,
+        "pano": "PGqZa3fJ6vf1CBTcs4Q9NA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 358,
+        "pano": "enukeumPm4kp9kmXgmgdsw",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -78,7 +159,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["trailersVisible", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "trailersVisible",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Open distribution center. No barrier arm or sliding/swing gate across any truck drive. The south-central driveway has only a Greenwood monument sign (no booth, no arm); the SW and SE perimeter-loop connections to Greenwood Industrial Pkwy are open curving drives. Trucks observed staging on the public road shoulder (Jack Rabbit Transport tractor-trailer parked at curb in Feb-2025 Street View), implying no on-property gate control.",
     "guardShack": "No staffed booth at any entrance in satellite or Street View. The visible structure to the NW/SW belongs to the neighboring facility, not NFI.",
@@ -93,5 +177,31 @@
     "trailerParkingCapacity": "Taken from the published 86 trailer-park figure for the building.",
     "railServed": "No rail spur enters the property; nearest rail is unrelated."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://lensa.com/job-v1/nfi-industries/mcdonough-ga/order-selector/59becad8c1fb8585620cb7e9e3fb32b3",
+        "date": "2026-05",
+        "type": "careers",
+        "claim": "NFI Order Selector req for McDonough GA posted 2026-05-05"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.chamberofcommerce.com/business-directory/georgia/mcdonough/logistics-service/2024445836-nfi-mcdonough",
+        "date": "2026",
+        "type": "listing",
+        "claim": "NFI - McDonough operating at 165 Greenwood Industrial Pkwy"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Multiple recent (May 2026) NFI warehouse reqs at McDonough (165 Greenwood Industrial Pkwy) plus directory presence; actively operating, no for-lease/closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

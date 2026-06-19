@@ -1,55 +1,163 @@
 {
   "name": "NFI Cross-Dock Bethlehem PA",
   "type": "Cross-Dock",
-  "coords": { "lat": 40.6074017, "lng": -75.3243256 },
+  "coords": {
+    "lat": 40.6074017,
+    "lng": -75.3243256
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 40.61090, "lng": -75.32430 },
-      { "lat": 40.61050, "lng": -75.32230 },
-      { "lat": 40.60720, "lng": -75.32270 },
-      { "lat": 40.60590, "lng": -75.32300 },
-      { "lat": 40.60580, "lng": -75.32400 },
-      { "lat": 40.60660, "lng": -75.32480 },
-      { "lat": 40.60810, "lng": -75.32470 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 40.60880, "lng": -75.32495 },
-      { "lat": 40.60878, "lng": -75.32455 },
-      { "lat": 40.60835, "lng": -75.32458 },
-      { "lat": 40.60837, "lng": -75.32498 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.6109,
+          "lng": -75.3243
+        },
+        {
+          "lat": 40.6105,
+          "lng": -75.3223
+        },
+        {
+          "lat": 40.6072,
+          "lng": -75.3227
+        },
+        {
+          "lat": 40.6059,
+          "lng": -75.323
+        },
+        {
+          "lat": 40.6058,
+          "lng": -75.324
+        },
+        {
+          "lat": 40.6066,
+          "lng": -75.3248
+        },
+        {
+          "lat": 40.6081,
+          "lng": -75.3247
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.6088,
+          "lng": -75.32495
+        },
+        {
+          "lat": 40.60878,
+          "lng": -75.32455
+        },
+        {
+          "lat": 40.60835,
+          "lng": -75.32458
+        },
+        {
+          "lat": 40.60837,
+          "lng": -75.32498
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 40.60700, "lng": -75.32430 },
-        { "lat": 40.60680, "lng": -75.32230 },
-        { "lat": 40.60600, "lng": -75.32250 },
-        { "lat": 40.60610, "lng": -75.32445 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 40.607,
+            "lng": -75.3243
+          },
+          {
+            "lat": 40.6068,
+            "lng": -75.3223
+          },
+          {
+            "lat": 40.606,
+            "lng": -75.3225
+          },
+          {
+            "lat": 40.6061,
+            "lng": -75.32445
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 40.61080, "lng": -75.32460 },
-        { "lat": 40.61075, "lng": -75.32435 },
-        { "lat": 40.60840, "lng": -75.32468 },
-        { "lat": 40.60845, "lng": -75.32493 }
-      ] },
-      { "ring": [
-        { "lat": 40.61055, "lng": -75.32235 },
-        { "lat": 40.61050, "lng": -75.32210 },
-        { "lat": 40.60735, "lng": -75.32250 },
-        { "lat": 40.60740, "lng": -75.32275 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 40.6108,
+            "lng": -75.3246
+          },
+          {
+            "lat": 40.61075,
+            "lng": -75.32435
+          },
+          {
+            "lat": 40.6084,
+            "lng": -75.32468
+          },
+          {
+            "lat": 40.60845,
+            "lng": -75.32493
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.61055,
+            "lng": -75.32235
+          },
+          {
+            "lat": 40.6105,
+            "lng": -75.3221
+          },
+          {
+            "lat": 40.60735,
+            "lng": -75.3225
+          },
+          {
+            "lat": 40.6074,
+            "lng": -75.32275
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 40.60810, "lng": -75.32470 },
-      { "lat": 40.60805, "lng": -75.32350 },
-      { "lat": 40.60720, "lng": -75.32360 },
-      { "lat": 40.60725, "lng": -75.32475 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 40.6081,
+          "lng": -75.3247
+        },
+        {
+          "lat": 40.60805,
+          "lng": -75.3235
+        },
+        {
+          "lat": 40.6072,
+          "lng": -75.3236
+        },
+        {
+          "lat": 40.60725,
+          "lng": -75.32475
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 87, "pano": "K9ZwPR-rxYjIYW3GM6rIqg", "hasCoverage": true },
-      "truckGate": { "heading": 267, "pano": "sJU29OkVMO1mfD_IUCv4CA", "hasCoverage": true },
-      "dropYards": { "heading": 172, "pano": "Lwj0h0bHB_OnJcRZxHb_qg", "hasCoverage": true }
+      "perimeter": {
+        "heading": 87,
+        "pano": "K9ZwPR-rxYjIYW3GM6rIqg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 267,
+        "pano": "sJU29OkVMO1mfD_IUCv4CA",
+        "hasCoverage": true
+      },
+      "dropYards": {
+        "heading": 172,
+        "pano": "Lwj0h0bHB_OnJcRZxHb_qg",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -58,7 +166,7 @@
     "trailerParkingCapacity": 130,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 24.0,
+    "siteAreaAcres": 24,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.6074017,-75.3243256,400m/data=!3m1!1e3",
@@ -87,7 +195,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["shipRcvSeparate", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "shipRcvSeparate",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Gatehouse on a median island splits the central truck court into an in-lane and out-lane at a pinch-point between landscaped islands and perimeter chain-link fence (z20 sat 40.60855,-75.32475). Court is fully fenced; entry from Commerce Center Blvd at the south.",
     "guardShack": "Small 1-2-vehicle-footprint booth sitting on the median island mid-court, windows on multiple sides, vehicle parked at it. Listing brochure also cites a guard house with restroom on the parcel.",
@@ -104,5 +215,32 @@
     "buildingCount": "Audited the NFI 3051 / Majestic Bldg 1B leased parcel as one building; the park has several adjacent big-box DCs but they are separate addresses.",
     "siteAreaAcres": "Listing cites ~24-acre lot for Bldg 1B; perimeter ring drawn to that leased parcel including the south gravel drop yard."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.waze.com/live-map/directions/nfi-cal-cartage-commerce-center-blvd-3051-bethlehem",
+        "date": "2025",
+        "type": "listing",
+        "claim": "NFI - Cal Cartage mapped at 3051 Commerce Center Blvd"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.propertyshark.com/cre/commercial-property/us/pa/bethlehem/3051-commerce-center-blvd/",
+        "date": "2025",
+        "type": "listing",
+        "claim": "Majestic Bethlehem Center Bldg 1B, ~536k sf Class A cross-dock"
+      }
+    ],
+    "imageryDate": "2021-09",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "3051 Commerce Center Blvd resolves to NFI - Cal Cartage (NFI intermodal/drayage arm) at Majestic Bethlehem Center Bldg 1B; no vacate signal. Tier-3 weighted.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

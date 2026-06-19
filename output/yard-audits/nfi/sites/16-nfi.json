@@ -1,60 +1,179 @@
 {
   "name": "NFI Distribution Center Elwood IL",
   "type": "Distribution Center",
-  "coords": { "lat": 41.39140, "lng": -88.14310 },
+  "coords": {
+    "lat": 41.3914,
+    "lng": -88.1431
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 41.39280, "lng": -88.14490 },
-      { "lat": 41.39235, "lng": -88.14160 },
-      { "lat": 41.39200, "lng": -88.13970 },
-      { "lat": 41.38995, "lng": -88.14120 },
-      { "lat": 41.38940, "lng": -88.14310 },
-      { "lat": 41.39055, "lng": -88.14500 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 41.39190, "lng": -88.14500 },
-      { "lat": 41.39188, "lng": -88.14455 },
-      { "lat": 41.39158, "lng": -88.14457 },
-      { "lat": 41.39160, "lng": -88.14502 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 41.3928,
+          "lng": -88.1449
+        },
+        {
+          "lat": 41.39235,
+          "lng": -88.1416
+        },
+        {
+          "lat": 41.392,
+          "lng": -88.1397
+        },
+        {
+          "lat": 41.38995,
+          "lng": -88.1412
+        },
+        {
+          "lat": 41.3894,
+          "lng": -88.1431
+        },
+        {
+          "lat": 41.39055,
+          "lng": -88.145
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 41.3919,
+          "lng": -88.145
+        },
+        {
+          "lat": 41.39188,
+          "lng": -88.14455
+        },
+        {
+          "lat": 41.39158,
+          "lng": -88.14457
+        },
+        {
+          "lat": 41.3916,
+          "lng": -88.14502
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 41.39268, "lng": -88.14470 },
-        { "lat": 41.39230, "lng": -88.14000 },
-        { "lat": 41.39200, "lng": -88.14010 },
-        { "lat": 41.39238, "lng": -88.14470 }
-      ] },
-      { "ring": [
-        { "lat": 41.39060, "lng": -88.14480 },
-        { "lat": 41.38995, "lng": -88.14160 },
-        { "lat": 41.38945, "lng": -88.14310 },
-        { "lat": 41.39000, "lng": -88.14470 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 41.39268,
+            "lng": -88.1447
+          },
+          {
+            "lat": 41.3923,
+            "lng": -88.14
+          },
+          {
+            "lat": 41.392,
+            "lng": -88.1401
+          },
+          {
+            "lat": 41.39238,
+            "lng": -88.1447
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 41.3906,
+            "lng": -88.1448
+          },
+          {
+            "lat": 41.38995,
+            "lng": -88.1416
+          },
+          {
+            "lat": 41.38945,
+            "lng": -88.1431
+          },
+          {
+            "lat": 41.39,
+            "lng": -88.1447
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 41.39233, "lng": -88.14455 },
-        { "lat": 41.39198, "lng": -88.14060 },
-        { "lat": 41.39183, "lng": -88.14063 },
-        { "lat": 41.39218, "lng": -88.14458 }
-      ] },
-      { "ring": [
-        { "lat": 41.39165, "lng": -88.14470 },
-        { "lat": 41.39130, "lng": -88.14085 },
-        { "lat": 41.39115, "lng": -88.14088 },
-        { "lat": 41.39150, "lng": -88.14473 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 41.39233,
+            "lng": -88.14455
+          },
+          {
+            "lat": 41.39198,
+            "lng": -88.1406
+          },
+          {
+            "lat": 41.39183,
+            "lng": -88.14063
+          },
+          {
+            "lat": 41.39218,
+            "lng": -88.14458
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 41.39165,
+            "lng": -88.1447
+          },
+          {
+            "lat": 41.3913,
+            "lng": -88.14085
+          },
+          {
+            "lat": 41.39115,
+            "lng": -88.14088
+          },
+          {
+            "lat": 41.3915,
+            "lng": -88.14473
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 41.39200, "lng": -88.14525 },
-      { "lat": 41.39198, "lng": -88.14505 },
-      { "lat": 41.39150, "lng": -88.14508 },
-      { "lat": 41.39152, "lng": -88.14528 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 41.392,
+          "lng": -88.14525
+        },
+        {
+          "lat": 41.39198,
+          "lng": -88.14505
+        },
+        {
+          "lat": 41.3915,
+          "lng": -88.14508
+        },
+        {
+          "lat": 41.39152,
+          "lng": -88.14528
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 103, "pano": "UXPONWUmZVukdZA3Zcq5BQ", "hasCoverage": true },
-      "truckGate": { "heading": 95, "pano": "UXPONWUmZVukdZA3Zcq5BQ", "hasCoverage": true },
-      "staging": { "heading": 90, "pano": "UXPONWUmZVukdZA3Zcq5BQ", "hasCoverage": true }
+      "perimeter": {
+        "heading": 103,
+        "pano": "UXPONWUmZVukdZA3Zcq5BQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 95,
+        "pano": "UXPONWUmZVukdZA3Zcq5BQ",
+        "hasCoverage": true
+      },
+      "staging": {
+        "heading": 90,
+        "pano": "UXPONWUmZVukdZA3Zcq5BQ",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -92,7 +211,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["multiStep", "connectivityIssue"],
+  "uncertainFields": [
+    "multiStep",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "truckGate": "Single controlled truck entrance off S Elwood International Port Rd at the NW corner. Satellite z21 shows a barrier/gate arm across the inbound lane plus a check-in pad; Street View (May 2025) shows the wide entrance throat with a yard hostler staged at the booth island.",
     "guardShack": "Small dark-roofed guard booth in the center of the entrance drive, ~1-2 stall footprint, set on a concrete check-in island with the gate arm beside it (satellite z21 @ 41.39173,-88.14476).",
@@ -112,5 +234,31 @@
     "siteAreaAcres": "~27.6 acres derived from the traced perimeter polygon (NW-SE oriented, ~443m diagonal).",
     "streetViewMeta": "Only public-road panos exist (S Elwood International Port Rd, May 2025); the same entrance pano (41.39176,-88.14527) is the best ground view for the gate, perimeter entrance and pre-gate staging."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/co/Nfi/Jobs/-in-Elwood,IL",
+        "date": "2026-05",
+        "type": "careers",
+        "claim": "Active NFI Elwood IL warehouse/jockey requisitions"
+      },
+      {
+        "tier": 3,
+        "url": "https://cicjolietelwood.com/current-tenants",
+        "date": "2026",
+        "type": "listing",
+        "claim": "CenterPoint Intermodal Center lists NFI as a current tenant"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CenterPoint Intermodal (Joliet/Elwood) current-tenant page lists NFI; 27143 S Elwood Intl Port Rd resolves to NFI/NDC (phone 815-423-5399) with active May-2026 Elwood reqs.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

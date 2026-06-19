@@ -1,49 +1,139 @@
 {
   "name": "NFI Distribution Center Lancaster TX",
   "type": "Distribution Center",
-  "coords": { "lat": 32.6366, "lng": -96.7955 },
+  "coords": {
+    "lat": 32.6366,
+    "lng": -96.7955
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 32.638566, "lng": -96.797423 },
-      { "lat": 32.639260, "lng": -96.795843 },
-      { "lat": 32.638566, "lng": -96.794676 },
-      { "lat": 32.636600, "lng": -96.793440 },
-      { "lat": 32.635675, "lng": -96.794813 },
-      { "lat": 32.636253, "lng": -96.796736 },
-      { "lat": 32.637641, "lng": -96.797697 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 32.637178, "lng": -96.797560 },
-      { "lat": 32.636600, "lng": -96.796599 },
-      { "lat": 32.636253, "lng": -96.796873 },
-      { "lat": 32.636831, "lng": -96.797835 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.638566,
+          "lng": -96.797423
+        },
+        {
+          "lat": 32.63926,
+          "lng": -96.795843
+        },
+        {
+          "lat": 32.638566,
+          "lng": -96.794676
+        },
+        {
+          "lat": 32.6366,
+          "lng": -96.79344
+        },
+        {
+          "lat": 32.635675,
+          "lng": -96.794813
+        },
+        {
+          "lat": 32.636253,
+          "lng": -96.796736
+        },
+        {
+          "lat": 32.637641,
+          "lng": -96.797697
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.637178,
+          "lng": -96.79756
+        },
+        {
+          "lat": 32.6366,
+          "lng": -96.796599
+        },
+        {
+          "lat": 32.636253,
+          "lng": -96.796873
+        },
+        {
+          "lat": 32.636831,
+          "lng": -96.797835
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 32.636484, "lng": -96.796873 },
-        { "lat": 32.635906, "lng": -96.795775 },
-        { "lat": 32.635675, "lng": -96.794951 },
-        { "lat": 32.635444, "lng": -96.796187 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 32.636484,
+            "lng": -96.796873
+          },
+          {
+            "lat": 32.635906,
+            "lng": -96.795775
+          },
+          {
+            "lat": 32.635675,
+            "lng": -96.794951
+          },
+          {
+            "lat": 32.635444,
+            "lng": -96.796187
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 32.638277, "lng": -96.797148 },
-        { "lat": 32.638797, "lng": -96.796187 },
-        { "lat": 32.638335, "lng": -96.795775 },
-        { "lat": 32.637756, "lng": -96.796736 }
-      ] },
-      { "ring": [
-        { "lat": 32.638219, "lng": -96.795157 },
-        { "lat": 32.638508, "lng": -96.794401 },
-        { "lat": 32.636600, "lng": -96.793440 },
-        { "lat": 32.636311, "lng": -96.794127 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 32.638277,
+            "lng": -96.797148
+          },
+          {
+            "lat": 32.638797,
+            "lng": -96.796187
+          },
+          {
+            "lat": 32.638335,
+            "lng": -96.795775
+          },
+          {
+            "lat": 32.637756,
+            "lng": -96.796736
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 32.638219,
+            "lng": -96.795157
+          },
+          {
+            "lat": 32.638508,
+            "lng": -96.794401
+          },
+          {
+            "lat": 32.6366,
+            "lng": -96.79344
+          },
+          {
+            "lat": 32.636311,
+            "lng": -96.794127
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
-      "truckGate": { "heading": 338, "pano": "FEPx5udOzj6zfDwjKnXT8Q", "hasCoverage": true }
+      "perimeter": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "truckGate": {
+        "heading": 338,
+        "pano": "FEPx5udOzj6zfDwjKnXT8Q",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -81,7 +171,13 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "_location": "Audited the operational NFI/Rent-A-Center cross-dock DC at 1901 Danieldale Rd in ProLogis Park 20/35 (~32.6366,-96.7955), NOT the supplied 510 E Pleasant Run Rd coords (32.6037,-96.7508), which resolve to a small unrelated industrial/contractor yard. The researchHint (NFI/Rent-A-Center DFW DC news release, ~650k SF) matches only the Danieldale building.",
     "truckGate": "Continuous chain-link perimeter fence around the parcel; sliding gate at the auto/office entrance (SV pano j0sagb07-UCR3pXu55zgPw) and a fence-line gate where the SW internal drive enters the trailer/dock yard. Access is controlled.",
@@ -97,5 +193,33 @@
     "yardMetrics": "Dock-door/trailer counts are honest estimates from overhead imagery (Maxar/Vexcel via Google Static API). siteAreaAcres (24.5) derived from the perimeter polygon shoelace area; building alone ~650k SF per public reporting.",
     "railServed": "No rail spur runs into the parcel; the BNSF/DART line ~1km east does not enter the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.nfiindustries.com/careers-home/jobs/26375?lang=en-us",
+        "date": "2026-05",
+        "type": "careers",
+        "claim": "NFI careers: current warehouse opening at Lancaster TX 75134 (Danieldale DC)"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.nfiindustries.com/about-nfi/news/nfi-and-rent-center-open-distribution-center-texas/",
+        "date": "2021",
+        "type": "press",
+        "claim": "NFI operates the 650k sf Lancaster DC at 1901 Danieldale Rd for Rent-A-Center"
+      }
+    ],
+    "imageryDate": "2021-02",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "flag": "Rent-A-Center (client) has had financial trouble; tenancy is client-dependent. Re-verify before any hard claim.",
+    "rationale": "NFI careers site has live Lancaster TX (1901 Danieldale, the NFI/Rent-A-Center DC) warehouse reqs; building not actively for-lease. Rent-A-Center client churn flagged but no negative found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

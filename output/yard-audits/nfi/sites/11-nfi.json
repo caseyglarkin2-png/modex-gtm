@@ -1,42 +1,115 @@
 {
   "name": "NFI Import Warehouse Pooler GA",
   "type": "Import Warehouse",
-  "coords": { "lat": 32.10858, "lng": -81.27360 },
+  "coords": {
+    "lat": 32.10858,
+    "lng": -81.2736
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 32.109780, "lng": -81.274780 },
-      { "lat": 32.109700, "lng": -81.272880 },
-      { "lat": 32.107520, "lng": -81.272820 },
-      { "lat": 32.107320, "lng": -81.273900 },
-      { "lat": 32.107260, "lng": -81.275060 },
-      { "lat": 32.108000, "lng": -81.275180 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 32.107780, "lng": -81.275320 },
-      { "lat": 32.107560, "lng": -81.275000 },
-      { "lat": 32.107360, "lng": -81.275180 },
-      { "lat": 32.107560, "lng": -81.275500 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.10978,
+          "lng": -81.27478
+        },
+        {
+          "lat": 32.1097,
+          "lng": -81.27288
+        },
+        {
+          "lat": 32.10752,
+          "lng": -81.27282
+        },
+        {
+          "lat": 32.10732,
+          "lng": -81.2739
+        },
+        {
+          "lat": 32.10726,
+          "lng": -81.27506
+        },
+        {
+          "lat": 32.108,
+          "lng": -81.27518
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.10778,
+          "lng": -81.27532
+        },
+        {
+          "lat": 32.10756,
+          "lng": -81.275
+        },
+        {
+          "lat": 32.10736,
+          "lng": -81.27518
+        },
+        {
+          "lat": 32.10756,
+          "lng": -81.2755
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 32.109560, "lng": -81.274900 },
-        { "lat": 32.109460, "lng": -81.274180 },
-        { "lat": 32.107760, "lng": -81.274560 },
-        { "lat": 32.107900, "lng": -81.275260 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 32.10956,
+            "lng": -81.2749
+          },
+          {
+            "lat": 32.10946,
+            "lng": -81.27418
+          },
+          {
+            "lat": 32.10776,
+            "lng": -81.27456
+          },
+          {
+            "lat": 32.1079,
+            "lng": -81.27526
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 32.109600, "lng": -81.274760 },
-        { "lat": 32.109540, "lng": -81.274460 },
-        { "lat": 32.107540, "lng": -81.273860 },
-        { "lat": 32.107600, "lng": -81.274160 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 32.1096,
+            "lng": -81.27476
+          },
+          {
+            "lat": 32.10954,
+            "lng": -81.27446
+          },
+          {
+            "lat": 32.10754,
+            "lng": -81.27386
+          },
+          {
+            "lat": 32.1076,
+            "lng": -81.27416
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 60, "pano": "N_DgCNrIRk6T3U-h6l4IYw", "hasCoverage": true },
-      "truckGate": { "heading": 43, "pano": "N_DgCNrIRk6T3U-h6l4IYw", "hasCoverage": true }
+      "perimeter": {
+        "heading": 60,
+        "pano": "N_DgCNrIRk6T3U-h6l4IYw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 43,
+        "pano": "N_DgCNrIRk6T3U-h6l4IYw",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -74,7 +147,12 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Open shared truck court between Building I (1030, NFI) and the adjacent Building II (1240). 2025-12 Street View at the SW court intersection shows no barrier arm, sliding gate, or checkpoint pinch-point across the truck drive — the park road opens directly into the dock court. A chain-link perimeter fence is visible around the building landscaping but the truck court entry itself is uncontrolled.",
     "guardShack": "No guard booth at the court entrance in 2025-12 Street View; the only structures are a monument sign and light poles. Class A spec building with no staffed gate.",
@@ -91,5 +169,32 @@
     "dropYard": "Dedicated shared trailer-storage court with 95 marked stalls separate from active dock staging.",
     "railServed": "No rail spur enters the property; this is a truck/transload import warehouse."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://rebusinessonline.com/pccp-nfi-acquire-two-industrial-facilities-totaling-565000-sf-in-metro-savannah/",
+        "date": "2023-04",
+        "type": "press",
+        "claim": "PCCP/NFI JV; Building I (1030 S H Morgan Pkwy) fully leased to NFI"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.savannahbusinessjournal.com/news/economic_development/april-3---joint-venture-of-pccp-llc-and-nfi-acquires-two-industrial-facilities/article_ee5e8118-d239-11ed-b54c-d3733429b00f.html",
+        "date": "2023-04",
+        "type": "econ-dev",
+        "claim": "Building I = 1030 S H Morgan Pkwy NFI-leased; Building II other tenants"
+      }
+    ],
+    "imageryDate": "2025-12",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Building I of 95 Logistics @ Pooler Pkwy (1030 S H Morgan Pkwy) is fully leased to NFI (PCCP/NFI JV owns it); Building II is a different tenant. Low churn risk via JV equity.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

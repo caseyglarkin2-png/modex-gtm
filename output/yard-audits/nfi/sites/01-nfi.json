@@ -1,53 +1,151 @@
 {
   "name": "NFI Distribution Center Breinigsville PA",
   "type": "Distribution Center",
-  "coords": { "lat": 40.56790, "lng": -75.63500 },
+  "coords": {
+    "lat": 40.5679,
+    "lng": -75.635
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 40.56945, "lng": -75.63690 },
-      { "lat": 40.56930, "lng": -75.63250 },
-      { "lat": 40.56875, "lng": -75.63185 },
-      { "lat": 40.56730, "lng": -75.63235 },
-      { "lat": 40.56745, "lng": -75.63700 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 40.56872, "lng": -75.63268 },
-      { "lat": 40.56865, "lng": -75.63232 },
-      { "lat": 40.56842, "lng": -75.63238 },
-      { "lat": 40.56849, "lng": -75.63273 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.56945,
+          "lng": -75.6369
+        },
+        {
+          "lat": 40.5693,
+          "lng": -75.6325
+        },
+        {
+          "lat": 40.56875,
+          "lng": -75.63185
+        },
+        {
+          "lat": 40.5673,
+          "lng": -75.63235
+        },
+        {
+          "lat": 40.56745,
+          "lng": -75.637
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.56872,
+          "lng": -75.63268
+        },
+        {
+          "lat": 40.56865,
+          "lng": -75.63232
+        },
+        {
+          "lat": 40.56842,
+          "lng": -75.63238
+        },
+        {
+          "lat": 40.56849,
+          "lng": -75.63273
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 40.56930, "lng": -75.63620 },
-        { "lat": 40.56918, "lng": -75.63520 },
-        { "lat": 40.56892, "lng": -75.63528 },
-        { "lat": 40.56904, "lng": -75.63628 }
-      ] },
-      { "ring": [
-        { "lat": 40.56918, "lng": -75.63380 },
-        { "lat": 40.56908, "lng": -75.63300 },
-        { "lat": 40.56882, "lng": -75.63308 },
-        { "lat": 40.56892, "lng": -75.63388 }
-      ] },
-      { "ring": [
-        { "lat": 40.56848, "lng": -75.63240 },
-        { "lat": 40.56838, "lng": -75.63190 },
-        { "lat": 40.56808, "lng": -75.63200 },
-        { "lat": 40.56818, "lng": -75.63250 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 40.5693,
+            "lng": -75.6362
+          },
+          {
+            "lat": 40.56918,
+            "lng": -75.6352
+          },
+          {
+            "lat": 40.56892,
+            "lng": -75.63528
+          },
+          {
+            "lat": 40.56904,
+            "lng": -75.63628
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.56918,
+            "lng": -75.6338
+          },
+          {
+            "lat": 40.56908,
+            "lng": -75.633
+          },
+          {
+            "lat": 40.56882,
+            "lng": -75.63308
+          },
+          {
+            "lat": 40.56892,
+            "lng": -75.63388
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.56848,
+            "lng": -75.6324
+          },
+          {
+            "lat": 40.56838,
+            "lng": -75.6319
+          },
+          {
+            "lat": 40.56808,
+            "lng": -75.632
+          },
+          {
+            "lat": 40.56818,
+            "lng": -75.6325
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 40.56812, "lng": -75.63685 },
-        { "lat": 40.56802, "lng": -75.63312 },
-        { "lat": 40.56792, "lng": -75.63313 },
-        { "lat": 40.56802, "lng": -75.63686 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 40.56812,
+            "lng": -75.63685
+          },
+          {
+            "lat": 40.56802,
+            "lng": -75.63312
+          },
+          {
+            "lat": 40.56792,
+            "lng": -75.63313
+          },
+          {
+            "lat": 40.56802,
+            "lng": -75.63686
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 10, "pano": "8e6EvxSowR8LTYuOqkemJw", "hasCoverage": true },
-      "truckGate": { "heading": 270, "pano": "eK1Ypep7U5qFhimzTfVzJw", "hasCoverage": true }
+      "perimeter": {
+        "heading": 10,
+        "pano": "8e6EvxSowR8LTYuOqkemJw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 270,
+        "pano": "eK1Ypep7U5qFhimzTfVzJw",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -85,7 +183,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "shipRcvSeparate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Single divided truck entrance off Nestle Way at the SE corner. z21 satellite shows two yellow/black striped barrier arms, one across the inbound lane and one across the outbound lane, separated by a landscaped median. Confirmed in Street View (pano eK1Ypep7U5qFhimzTfVzJw, 2025-05).",
     "guardShack": "No staffed booth visible at the gate from satellite or Street View. The barrier arms appear automated with a kiosk/call-box; no 1-3-space guard structure beside the lane. Hence remoteGs = true.",
@@ -102,5 +204,32 @@
     "trailerParkingCapacity": "Estimate of diagonal-stall capacity across the three drop rows plus dock apron; overhead approximation.",
     "siteAreaAcres": "Derived from the perimeter polygon (~22.5 acres inside the fence line)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.nfiindustries.com/wp-content/uploads/2021/04/Breinigsville-PA-200-Nestle-Way-Facility-Profile-1.pdf",
+        "date": "2021-04",
+        "type": "locator",
+        "claim": "NFI facility profile for 200 Nestle Way (384,500 sf, built 2021)"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/cmp/Nfi-Industries/locations/PA/Breinigsville",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active NFI Breinigsville (Nestle Way) warehouse requisitions"
+      }
+    ],
+    "imageryDate": "2025-05",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "NFI self-published facility profile for 200 Nestle Way plus active 2026 NFI Breinigsville hiring; no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

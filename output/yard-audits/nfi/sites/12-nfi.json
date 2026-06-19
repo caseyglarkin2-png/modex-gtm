@@ -1,47 +1,131 @@
 {
   "name": "NFI Distribution Center Savannah GA",
   "type": "Distribution Center",
-  "coords": { "lat": 32.257032, "lng": -81.202145 },
+  "coords": {
+    "lat": 32.257032,
+    "lng": -81.202145
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 32.25975, "lng": -81.20055 },
-      { "lat": 32.25960, "lng": -81.19915 },
-      { "lat": 32.25490, "lng": -81.20405 },
-      { "lat": 32.25445, "lng": -81.20530 },
-      { "lat": 32.25840, "lng": -81.20660 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 32.25895, "lng": -81.19940 },
-      { "lat": 32.25885, "lng": -81.19905 },
-      { "lat": 32.25825, "lng": -81.19960 },
-      { "lat": 32.25835, "lng": -81.19995 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.25975,
+          "lng": -81.20055
+        },
+        {
+          "lat": 32.2596,
+          "lng": -81.19915
+        },
+        {
+          "lat": 32.2549,
+          "lng": -81.20405
+        },
+        {
+          "lat": 32.25445,
+          "lng": -81.2053
+        },
+        {
+          "lat": 32.2584,
+          "lng": -81.2066
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.25895,
+          "lng": -81.1994
+        },
+        {
+          "lat": 32.25885,
+          "lng": -81.19905
+        },
+        {
+          "lat": 32.25825,
+          "lng": -81.1996
+        },
+        {
+          "lat": 32.25835,
+          "lng": -81.19995
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 32.25955, "lng": -81.20120 },
-        { "lat": 32.25940, "lng": -81.19985 },
-        { "lat": 32.25690, "lng": -81.20255 },
-        { "lat": 32.25705, "lng": -81.20390 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 32.25955,
+            "lng": -81.2012
+          },
+          {
+            "lat": 32.2594,
+            "lng": -81.19985
+          },
+          {
+            "lat": 32.2569,
+            "lng": -81.20255
+          },
+          {
+            "lat": 32.25705,
+            "lng": -81.2039
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 32.25895, "lng": -81.19995 },
-        { "lat": 32.25520, "lng": -81.20455 },
-        { "lat": 32.25500, "lng": -81.20490 },
-        { "lat": 32.25875, "lng": -81.20030 }
-      ] },
-      { "ring": [
-        { "lat": 32.25845, "lng": -81.20105 },
-        { "lat": 32.25470, "lng": -81.20565 },
-        { "lat": 32.25450, "lng": -81.20600 },
-        { "lat": 32.25825, "lng": -81.20140 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 32.25895,
+            "lng": -81.19995
+          },
+          {
+            "lat": 32.2552,
+            "lng": -81.20455
+          },
+          {
+            "lat": 32.255,
+            "lng": -81.2049
+          },
+          {
+            "lat": 32.25875,
+            "lng": -81.2003
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 32.25845,
+            "lng": -81.20105
+          },
+          {
+            "lat": 32.2547,
+            "lng": -81.20565
+          },
+          {
+            "lat": 32.2545,
+            "lng": -81.206
+          },
+          {
+            "lat": 32.25825,
+            "lng": -81.2014
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
-      "truckGate": { "heading": 0, "pano": "", "hasCoverage": false }
+      "perimeter": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "truckGate": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      }
     }
   },
   "yardMetrics": {
@@ -79,7 +163,13 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "truckGate", "connectivityIssue", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "guardShack",
+    "truckGate",
+    "connectivityIssue",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "No barrier arm, slide gate, or checkpoint structure visible across the truck path in z19-z20 satellite. The site access drive connects openly to the internal commerce-park parkway (Logistics Pkwy). Modern 2022 Class-A spec cross-dock with open access; if a slide gate exists it is not resolvable in imagery. Called false.",
     "guardShack": "No 1-3-stall guard booth visible at the entrance throat or anywhere on the truck path (z19/z20). The only structures are the main building and a small electrical/utility enclosure. Called false.",
@@ -100,5 +190,31 @@
     "siteAreaAcres": "Derived from perimeter polygon (~48.5 ac); the leased parcel within the larger 4.7M SF / 6-building park.",
     "railServed": "No rail spur enters the property; nearest rail is the GPA/CSX network off-site."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://rebusinessonline.com/jll-negotiates-sale-of-1-msf-distribution-center-in-rincon-georgia-leased-to-nfi/",
+        "date": "2025-07",
+        "type": "press",
+        "claim": "1.03M sf Rincon DC fully leased to National Distribution Centers LLC (NFI subsidiary)"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.costar.com/article/656561586/nfi-industries-assumes-tenancy-of-massive-distribution-center-in-rincon-georgia",
+        "date": "2025",
+        "type": "press",
+        "claim": "CoStar: NFI Industries assumes tenancy of the Rincon GA DC"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Vague Old Augusta Commerce Center / Logistics Pkwy resolves to 1200 Logistics Pkwy, Rincon; July-2025 sale names NFI subsidiary (National Distribution Centers LLC) as in-place tenant on active lease.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

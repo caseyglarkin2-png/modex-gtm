@@ -1,51 +1,146 @@
 {
   "name": "NFI Distribution Center Perris CA (Indian Ave)",
   "type": "Distribution Center",
-  "coords": { "lat": 33.838887, "lng": -117.2294 },
+  "coords": {
+    "lat": 33.838887,
+    "lng": -117.2294
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 33.84045, "lng": -117.23360 },
-      { "lat": 33.84045, "lng": -117.22660 },
-      { "lat": 33.83710, "lng": -117.22660 },
-      { "lat": 33.83710, "lng": -117.23360 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 33.83760, "lng": -117.23135 },
-      { "lat": 33.83760, "lng": -117.23065 },
-      { "lat": 33.83722, "lng": -117.23065 },
-      { "lat": 33.83722, "lng": -117.23135 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.84045,
+          "lng": -117.2336
+        },
+        {
+          "lat": 33.84045,
+          "lng": -117.2266
+        },
+        {
+          "lat": 33.8371,
+          "lng": -117.2266
+        },
+        {
+          "lat": 33.8371,
+          "lng": -117.2336
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.8376,
+          "lng": -117.23135
+        },
+        {
+          "lat": 33.8376,
+          "lng": -117.23065
+        },
+        {
+          "lat": 33.83722,
+          "lng": -117.23065
+        },
+        {
+          "lat": 33.83722,
+          "lng": -117.23135
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 33.84040, "lng": -117.23310 },
-        { "lat": 33.84040, "lng": -117.22700 },
-        { "lat": 33.83975, "lng": -117.22700 },
-        { "lat": 33.83975, "lng": -117.23310 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.8404,
+            "lng": -117.2331
+          },
+          {
+            "lat": 33.8404,
+            "lng": -117.227
+          },
+          {
+            "lat": 33.83975,
+            "lng": -117.227
+          },
+          {
+            "lat": 33.83975,
+            "lng": -117.2331
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 33.83975, "lng": -117.23310 },
-        { "lat": 33.83975, "lng": -117.22700 },
-        { "lat": 33.83955, "lng": -117.22700 },
-        { "lat": 33.83955, "lng": -117.23310 }
-      ] },
-      { "ring": [
-        { "lat": 33.83745, "lng": -117.23310 },
-        { "lat": 33.83745, "lng": -117.22720 },
-        { "lat": 33.83725, "lng": -117.22720 },
-        { "lat": 33.83725, "lng": -117.23310 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.83975,
+            "lng": -117.2331
+          },
+          {
+            "lat": 33.83975,
+            "lng": -117.227
+          },
+          {
+            "lat": 33.83955,
+            "lng": -117.227
+          },
+          {
+            "lat": 33.83955,
+            "lng": -117.2331
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.83745,
+            "lng": -117.2331
+          },
+          {
+            "lat": 33.83745,
+            "lng": -117.2272
+          },
+          {
+            "lat": 33.83725,
+            "lng": -117.2272
+          },
+          {
+            "lat": 33.83725,
+            "lng": -117.2331
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 33.83955, "lng": -117.23310 },
-      { "lat": 33.83955, "lng": -117.22720 },
-      { "lat": 33.83745, "lng": -117.22720 },
-      { "lat": 33.83745, "lng": -117.23310 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 33.83955,
+          "lng": -117.2331
+        },
+        {
+          "lat": 33.83955,
+          "lng": -117.2272
+        },
+        {
+          "lat": 33.83745,
+          "lng": -117.2272
+        },
+        {
+          "lat": 33.83745,
+          "lng": -117.2331
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 359, "pano": "iXuuomuvtIyvU46FHs2BoQ", "hasCoverage": true },
-      "truckGate": { "heading": 350, "pano": "Rnef4CsRjQalQndj73Zxfg", "hasCoverage": true }
+      "perimeter": {
+        "heading": 359,
+        "pano": "iXuuomuvtIyvU46FHs2BoQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 350,
+        "pano": "Rnef4CsRjQalQndj73Zxfg",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -83,7 +178,13 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Dec-2025 Street View at the south driveway off Morgan St shows a black sliding/swing metal gate spanning the full truck-lane throat; perimeter fencing wraps the property.",
     "guardShack": "No staffed booth anywhere beside the lane in any Street View heading; the building wall and fence are the only structures at the entrance.",
@@ -97,5 +198,32 @@
     "entryLanes": "Single combined in/out driveway; lane split not clearly markable from imagery.",
     "urbanRural": "Edge-of-town Perris industrial park; open scrubland immediately south and east of the property along Morgan St."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/co/Nfi/Jobs/-in-Perris,CA",
+        "date": "2026-05",
+        "type": "careers",
+        "claim": "NFI hiring warehouse roles in Perris (3700 Indian Ave) as of May 2026"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.loopnet.com/Listing/3700-Indian-Ave-Perris-CA/33272468/",
+        "date": "2026",
+        "type": "listing",
+        "claim": "303,435 sf of the 1,309,754 sf Hanesbrands DC actively for lease (Colliers), multi-tenant"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "flag": "Building carved to multi-tenant; NFI footprint shrank. Dock/yard counts in source record likely overstated. Hanesbrands exiting West Coast distribution = further contraction risk.",
+    "rationale": "PROBABLE/DOWNGRADE: NFI still hires at 3700 Indian Ave (May 2026) but the building is now multi-tenant - 303,435 sf of 1.3M sf actively for-lease (Colliers) after Hanesbrands 2024 restructuring gave back space. Re-scope to a partial NFI footprint, not a dedicated 1.3M sf DC.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

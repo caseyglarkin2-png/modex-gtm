@@ -1,40 +1,107 @@
 {
   "name": "NFI Distribution Center Ontario CA",
   "type": "Distribution Center",
-  "coords": { "lat": 34.039350, "lng": -117.633900 },
+  "coords": {
+    "lat": 34.03935,
+    "lng": -117.6339
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 34.040861, "lng": -117.633010 },
-      { "lat": 34.037880, "lng": -117.632980 },
-      { "lat": 34.037760, "lng": -117.634640 },
-      { "lat": 34.040680, "lng": -117.634980 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 34.040806, "lng": -117.634720 },
-      { "lat": 34.040806, "lng": -117.634900 },
-      { "lat": 34.040420, "lng": -117.634860 },
-      { "lat": 34.040420, "lng": -117.634690 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 34.040861,
+          "lng": -117.63301
+        },
+        {
+          "lat": 34.03788,
+          "lng": -117.63298
+        },
+        {
+          "lat": 34.03776,
+          "lng": -117.63464
+        },
+        {
+          "lat": 34.04068,
+          "lng": -117.63498
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 34.040806,
+          "lng": -117.63472
+        },
+        {
+          "lat": 34.040806,
+          "lng": -117.6349
+        },
+        {
+          "lat": 34.04042,
+          "lng": -117.63486
+        },
+        {
+          "lat": 34.04042,
+          "lng": -117.63469
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 34.040580, "lng": -117.634740 },
-        { "lat": 34.037900, "lng": -117.634830 },
-        { "lat": 34.037900, "lng": -117.635080 },
-        { "lat": 34.040600, "lng": -117.634990 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 34.04058,
+            "lng": -117.63474
+          },
+          {
+            "lat": 34.0379,
+            "lng": -117.63483
+          },
+          {
+            "lat": 34.0379,
+            "lng": -117.63508
+          },
+          {
+            "lat": 34.0406,
+            "lng": -117.63499
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 34.040580, "lng": -117.634470 },
-        { "lat": 34.037900, "lng": -117.634560 },
-        { "lat": 34.037900, "lng": -117.634830 },
-        { "lat": 34.040580, "lng": -117.634740 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 34.04058,
+            "lng": -117.63447
+          },
+          {
+            "lat": 34.0379,
+            "lng": -117.63456
+          },
+          {
+            "lat": 34.0379,
+            "lng": -117.63483
+          },
+          {
+            "lat": 34.04058,
+            "lng": -117.63474
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 264, "pano": "ossBCthVBjdMyX3SQEzHog", "hasCoverage": true },
-      "truckGate": { "heading": 181, "pano": "9sdJy8zNwdwS5Nj3-wyyuQ", "hasCoverage": true }
+      "perimeter": {
+        "heading": 264,
+        "pano": "ossBCthVBjdMyX3SQEzHog",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 181,
+        "pano": "9sdJy8zNwdwS5Nj3-wyyuQ",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -72,7 +139,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "location": "Supplied coords (34.055371,-117.727269) are a misgeocode: Google resolves '1450 E Mission Blvd' to Pomona CA 91766 (a retail strip, confirmed via Street View) because Mission Blvd straddles Pomona/Ontario. The actual operational NFI Inland Empire DC reverse-geocodes to 1990 S Cucamonga Ave, Ontario CA 91761 (cross street E Francis St). Confirmed NFI via NFI-branded tractors at the gate in Street View.",
     "truckGate": "Controlled entrance off E Francis St at the building's NW: z21 satellite shows a barrier line across the drive throat with a small gatehouse island; Street View shows the entry median with signage and NFI tractors queued.",
@@ -84,5 +155,32 @@
     "railServed": "No rail spur enters the property; the line near the south road is curb/drainage, not track.",
     "siteAreaAcres": "13.7 ac from traced perimeter (building + east landscape buffer to Cucamonga + west truck court/drop yard). Note the D&B record's 10.76 ac / 168,361 sqft belongs to the separate '1450 E Mission' corporate listing; the operational DC building footprint here is ~560k sqft."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/cmp/Nfi-Industries/locations/CA/Ontario",
+        "date": "2026-05",
+        "type": "careers",
+        "claim": "Active NFI Ontario CA warehouse requisitions (Cucamonga Ave site)"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.yelp.com/biz/nfi-ontario-ontario",
+        "date": "2025-06",
+        "type": "listing",
+        "claim": "NFI Ontario shipping center at 1991 S Cucamonga Ave (same parcel as 1990), operating"
+      }
+    ],
+    "imageryDate": "2025-08",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "NFI operates a Target DC at 1990/1991 S Cucamonga Ave, Ontario (the 1450 E Mission/Pomona source address was a misgeocode); current Ontario-market hiring corroborates.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

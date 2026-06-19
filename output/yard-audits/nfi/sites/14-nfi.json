@@ -1,76 +1,204 @@
 {
   "name": "NFI Fulfillment Center Fairburn GA",
   "type": "Fulfillment Center",
-  "coords": { "lat": 33.539865, "lng": -84.594177 },
+  "coords": {
+    "lat": 33.539865,
+    "lng": -84.594177
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 33.541835, "lng": -84.594265 },
-      { "lat": 33.540776, "lng": -84.592617 },
-      { "lat": 33.539918, "lng": -84.592205 },
-      { "lat": 33.538945, "lng": -84.593167 },
-      { "lat": 33.537973, "lng": -84.594540 },
-      { "lat": 33.539346, "lng": -84.596290 },
-      { "lat": 33.540261, "lng": -84.596153 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 33.541749, "lng": -84.593853 },
-      { "lat": 33.541549, "lng": -84.593167 },
-      { "lat": 33.541091, "lng": -84.593441 },
-      { "lat": 33.541320, "lng": -84.594128 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.541835,
+          "lng": -84.594265
+        },
+        {
+          "lat": 33.540776,
+          "lng": -84.592617
+        },
+        {
+          "lat": 33.539918,
+          "lng": -84.592205
+        },
+        {
+          "lat": 33.538945,
+          "lng": -84.593167
+        },
+        {
+          "lat": 33.537973,
+          "lng": -84.59454
+        },
+        {
+          "lat": 33.539346,
+          "lng": -84.59629
+        },
+        {
+          "lat": 33.540261,
+          "lng": -84.596153
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.541749,
+          "lng": -84.593853
+        },
+        {
+          "lat": 33.541549,
+          "lng": -84.593167
+        },
+        {
+          "lat": 33.541091,
+          "lng": -84.593441
+        },
+        {
+          "lat": 33.54132,
+          "lng": -84.594128
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 33.539775, "lng": -84.592617 },
-        { "lat": 33.539918, "lng": -84.592205 },
-        { "lat": 33.538945, "lng": -84.593167 },
-        { "lat": 33.538716, "lng": -84.594265 },
-        { "lat": 33.538459, "lng": -84.594814 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.539775,
+            "lng": -84.592617
+          },
+          {
+            "lat": 33.539918,
+            "lng": -84.592205
+          },
+          {
+            "lat": 33.538945,
+            "lng": -84.593167
+          },
+          {
+            "lat": 33.538716,
+            "lng": -84.594265
+          },
+          {
+            "lat": 33.538459,
+            "lng": -84.594814
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 33.541263, "lng": -84.593784 },
-        { "lat": 33.539804, "lng": -84.592617 },
-        { "lat": 33.540004, "lng": -84.592308 },
-        { "lat": 33.541492, "lng": -84.593441 }
-      ] },
-      { "ring": [
-        { "lat": 33.539918, "lng": -84.595741 },
-        { "lat": 33.538459, "lng": -84.594814 },
-        { "lat": 33.538230, "lng": -84.595226 },
-        { "lat": 33.539689, "lng": -84.596153 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.541263,
+            "lng": -84.593784
+          },
+          {
+            "lat": 33.539804,
+            "lng": -84.592617
+          },
+          {
+            "lat": 33.540004,
+            "lng": -84.592308
+          },
+          {
+            "lat": 33.541492,
+            "lng": -84.593441
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.539918,
+            "lng": -84.595741
+          },
+          {
+            "lat": 33.538459,
+            "lng": -84.594814
+          },
+          {
+            "lat": 33.53823,
+            "lng": -84.595226
+          },
+          {
+            "lat": 33.539689,
+            "lng": -84.596153
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 33.541320, "lng": -84.594265 },
-      { "lat": 33.541091, "lng": -84.593441 },
-      { "lat": 33.540691, "lng": -84.593784 },
-      { "lat": 33.540891, "lng": -84.594677 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 33.54132,
+          "lng": -84.594265
+        },
+        {
+          "lat": 33.541091,
+          "lng": -84.593441
+        },
+        {
+          "lat": 33.540691,
+          "lng": -84.593784
+        },
+        {
+          "lat": 33.540891,
+          "lng": -84.594677
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 324, "pano": "B9R37PNancr7aRHY2PkTKw", "hasCoverage": true },
-      "truckGate": { "heading": 178, "pano": "9-bPJUW1MLDTBecblaaReg", "hasCoverage": true }
+      "perimeter": {
+        "heading": 324,
+        "pano": "B9R37PNancr7aRHY2PkTKw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 178,
+        "pano": "9-bPJUW1MLDTBecblaaReg",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
-    "dockDoorCount": 80, "trailersVisible": 6, "trailerParkingCapacity": 40,
-    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 23.6,
+    "dockDoorCount": 80,
+    "trailersVisible": 6,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 23.6,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@33.539865,-84.594177,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "10-25",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "10-25",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "remoteGs"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "remoteGs"
+  ],
   "fieldNotes": {
     "truckGate": "Entry off Logistics Center Dr is an open driveway with painted lane arrows but no barrier arm or sliding/swing gate across the lane (Street View 2025-10 + z20 satellite). Truck yard is screened by a tree-line buffer/fence but the entrance itself is uncontrolled.",
     "guardShack": "No staffed booth at the entrance. The only small structures near the throat are utility cabinets/transformers (green box visible in Street View), not a multi-window guard booth.",
@@ -81,5 +209,32 @@
     "fastLaneOpportunity": "Wide open entry apron and deep internal yard give ample paved width to add an express/bypass lane.",
     "trailerParkingCapacity": "Estimate from striped SE/NE stall areas plus deep apron; approximate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://straussborrelli.com/2025/03/24/national-distribution-centers-warn-act-investigation/",
+        "date": "2025-03",
+        "type": "econ-dev",
+        "claim": "NDC (NFI) WARN mass layoff at Fairburn GA facility, filed 2025-03-11"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.cushmanwakefield.com/en/united-states/properties/for-lease/warehousedistribution/ga/fairburn/2000-logistics-center-drive/s118006125s121760390-l",
+        "date": "2026-06",
+        "type": "listing",
+        "claim": "Entire 495,625 sf at 2000 Logistics Center Dr available for lease, no tenant named"
+      }
+    ],
+    "imageryDate": "2025-10",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "REJECTED: NFI/National Distribution Centers filed a WARN mass layoff at 2000 Logistics Center Dr, Fairburn (Mar 2025) and the entire 495,625 sf building is now actively for-lease (Cushman & Wakefield / LoopNet). NFI no longer operates this building - 3PL contract churn.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

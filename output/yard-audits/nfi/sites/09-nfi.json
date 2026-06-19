@@ -1,56 +1,163 @@
 {
   "name": "NFI Distribution Center Moreno Valley CA",
   "type": "Distribution Center",
-  "coords": { "lat": 33.86465, "lng": -117.23858 },
+  "coords": {
+    "lat": 33.86465,
+    "lng": -117.23858
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 33.86618, "lng": -117.24180 },
-      { "lat": 33.86620, "lng": -117.23700 },
-      { "lat": 33.86618, "lng": -117.23560 },
-      { "lat": 33.86540, "lng": -117.23545 },
-      { "lat": 33.86330, "lng": -117.23555 },
-      { "lat": 33.86255, "lng": -117.23690 },
-      { "lat": 33.86250, "lng": -117.24050 },
-      { "lat": 33.86250, "lng": -117.24180 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 33.86628, "lng": -117.23880 },
-      { "lat": 33.86628, "lng": -117.23830 },
-      { "lat": 33.86585, "lng": -117.23832 },
-      { "lat": 33.86585, "lng": -117.23882 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.86618,
+          "lng": -117.2418
+        },
+        {
+          "lat": 33.8662,
+          "lng": -117.237
+        },
+        {
+          "lat": 33.86618,
+          "lng": -117.2356
+        },
+        {
+          "lat": 33.8654,
+          "lng": -117.23545
+        },
+        {
+          "lat": 33.8633,
+          "lng": -117.23555
+        },
+        {
+          "lat": 33.86255,
+          "lng": -117.2369
+        },
+        {
+          "lat": 33.8625,
+          "lng": -117.2405
+        },
+        {
+          "lat": 33.8625,
+          "lng": -117.2418
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.86628,
+          "lng": -117.2388
+        },
+        {
+          "lat": 33.86628,
+          "lng": -117.2383
+        },
+        {
+          "lat": 33.86585,
+          "lng": -117.23832
+        },
+        {
+          "lat": 33.86585,
+          "lng": -117.23882
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 33.86345, "lng": -117.24160 },
-        { "lat": 33.86348, "lng": -117.23720 },
-        { "lat": 33.86268, "lng": -117.23720 },
-        { "lat": 33.86262, "lng": -117.24160 }
-      ] },
-      { "ring": [
-        { "lat": 33.86598, "lng": -117.24160 },
-        { "lat": 33.86600, "lng": -117.23620 },
-        { "lat": 33.86560, "lng": -117.23620 },
-        { "lat": 33.86558, "lng": -117.24160 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.86345,
+            "lng": -117.2416
+          },
+          {
+            "lat": 33.86348,
+            "lng": -117.2372
+          },
+          {
+            "lat": 33.86268,
+            "lng": -117.2372
+          },
+          {
+            "lat": 33.86262,
+            "lng": -117.2416
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.86598,
+            "lng": -117.2416
+          },
+          {
+            "lat": 33.866,
+            "lng": -117.2362
+          },
+          {
+            "lat": 33.8656,
+            "lng": -117.2362
+          },
+          {
+            "lat": 33.86558,
+            "lng": -117.2416
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 33.86560, "lng": -117.24140 },
-        { "lat": 33.86561, "lng": -117.23600 },
-        { "lat": 33.86552, "lng": -117.23600 },
-        { "lat": 33.86551, "lng": -117.24140 }
-      ] },
-      { "ring": [
-        { "lat": 33.86385, "lng": -117.24140 },
-        { "lat": 33.86386, "lng": -117.23620 },
-        { "lat": 33.86377, "lng": -117.23620 },
-        { "lat": 33.86376, "lng": -117.24140 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.8656,
+            "lng": -117.2414
+          },
+          {
+            "lat": 33.86561,
+            "lng": -117.236
+          },
+          {
+            "lat": 33.86552,
+            "lng": -117.236
+          },
+          {
+            "lat": 33.86551,
+            "lng": -117.2414
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.86385,
+            "lng": -117.2414
+          },
+          {
+            "lat": 33.86386,
+            "lng": -117.2362
+          },
+          {
+            "lat": 33.86377,
+            "lng": -117.2362
+          },
+          {
+            "lat": 33.86376,
+            "lng": -117.2414
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 178, "pano": "5r3YRjxfMxN_v6R4Xgh50A", "hasCoverage": true },
-      "truckGate": { "heading": 198, "pano": "EWLTXQ393YrwRnPLrc9l4A", "hasCoverage": true }
+      "perimeter": {
+        "heading": 178,
+        "pano": "5r3YRjxfMxN_v6R4Xgh50A",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 198,
+        "pano": "EWLTXQ393YrwRnPLrc9l4A",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -88,7 +195,14 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "postGateStaging", "trailersVisible"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "postGateStaging",
+    "trailersVisible"
+  ],
   "fieldNotes": {
     "truckGate": "Property is fully fenced/screen-walled; truck dock courts are interior and entered through a defined opening in the north screen wall off Nandina Ave (~33.8660,-117.2385). Controlled pinch-point. No barrier arm visible at the public road line in Feb-2026 Street View.",
     "guardShack": "No standalone staffed guard booth visible at the truck entrance in any satellite (z20) or Street View frame. The two public frontages (north Nandina, east street) are landscaped office faces with screen walls, not gated truck lanes.",
@@ -105,5 +219,32 @@
     "railServed": "No rail spur into the property; nearest rail unrelated.",
     "urbanRural": "Dense Inland Empire industrial fabric adjacent to March ARB / Meridian business park, Moreno Valley metro."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://business.movalchamber.org/list/member/nfi-industries-3284",
+        "date": "2026-06",
+        "type": "econ-dev",
+        "claim": "NFI Industries listed as current Moreno Valley Chamber member at 24385 Nandina Ave"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.indeed.com/q-nfi-industries-l-moreno-valley,-ca-jobs.html",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active NFI warehouse postings in Moreno Valley CA"
+      }
+    ],
+    "imageryDate": "2026-02",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Exact-address Moreno Valley Chamber membership plus active local NFI hiring confirm NFI occupies the 24385 Nandina cross-dock; no closure/for-lease signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
