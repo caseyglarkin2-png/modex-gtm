@@ -154,5 +154,24 @@
     "urbanRural": "Rural — edge-of-town setting along the I-75 corridor with farmland to the west and a water tower nearby; small-town industrial, so classified Rural.",
     "buildingCount": "1 building for the PDC itself."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.honda.com/job/Troy-Stock-and-Material-Handler-Fulltime-Position-PC90-OH-45373-8010/1113690200/",
+        "date": "2025",
+        "type": "careers",
+        "claim": "Active American Honda Stock and Material Handler (PC90) warehouse req at Troy OH 45373 (the Troy PDC)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Tier-1 careers reqs tied to the Troy 45373 PDC; no closure/WARN/relocation; Honda expanding the Troy footprint. Distinct building from the MCC (site 16).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

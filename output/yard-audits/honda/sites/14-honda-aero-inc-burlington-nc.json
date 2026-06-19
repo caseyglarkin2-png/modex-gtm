@@ -139,5 +139,24 @@
     "scale": "No truck scale.",
     "siteAreaAcres": "~14 acres for the Honda Aero parcel (building plus parking and apron frontage); the perimeter box is a best estimate as the parcel blends into the airport grounds."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.gehonda.com/news-media/archive/celebrating-20-years-light-jet-innovation.html",
+        "date": "2025-10",
+        "type": "press",
+        "claim": "GE Honda 20th anniversary; HF120 jet engines produced at Honda Aero, Burlington NC — Honda active here."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Honda-operated and active, but a small precision aero-engine plant + HQ on airport-adjacent land with negligible freight volume and no meaningful trailer yard — fails freight-yard sanity.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

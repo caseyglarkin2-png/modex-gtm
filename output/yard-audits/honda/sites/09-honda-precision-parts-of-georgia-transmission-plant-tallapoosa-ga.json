@@ -152,5 +152,24 @@
     "siteAreaAcres": "~130 acres derived from the perimeter box; approximate (much of the surrounding land is forest buffer).",
     "scale": "No truck scale identified."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://manufacturing.honda.com/transmission-plant-ga/",
+        "date": "2026",
+        "type": "locator",
+        "claim": "Honda's own page: Tallapoosa transmission plant (TMP-G, formerly HPPG), ~450 associates, automatic transmissions."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tier-1 self-attested current operation; Honda-operated former HPPG. NOTE: a separate Astemo supplier on the same Honda Parkway address is closing (WARN 2026-03) — do not conflate with the Honda transmission plant, which remains open.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

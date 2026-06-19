@@ -149,5 +149,31 @@
     "fastLaneOpportunity": "Wide internal access corridors and ample paved apron width provide room to add an express/bypass lane.",
     "scale": "No truck scale identified in imagery; flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://manufacturing.honda.com/indiana-auto-plant/",
+        "date": "2026",
+        "type": "locator",
+        "claim": "Honda's own HMIN page: 2,600+ associates building Civic + CR-V/Hybrid at Greensburg."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.wishtv.com/news/local-news/honda-moves-civic-hybrid-production-tariffs/",
+        "date": "2025",
+        "type": "trade",
+        "claim": "Honda consolidating Civic Hybrid production TO Greensburg (growth, not closure)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Self-attested current operation; gauntlet clean; lead site for current Civic Hybrid + CR-V.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

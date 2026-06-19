@@ -161,5 +161,24 @@
     "siteAreaAcres": "~230 acres derived from the perimeter box (excludes the separate test-track land); approximate.",
     "scale": "No truck scale identified in imagery; flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://hondanews.com/en-US/releases/release-00b08be100b45a4ab9ae5793dd0ebd00-honda-celebrates-start-of-production-for-2026-pioneer-1000-deluxe",
+        "date": "2026-04",
+        "type": "press",
+        "claim": "Start of 2026 Pioneer 1000 Deluxe production at Timmonsville; described as the exclusive global production home of Honda side-by-side vehicles."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Honda powersports plant (Tier-1 Apr 2026). NOTE: ATV production moved to Honda NC in 2024 — Timmonsville is now UTV/side-by-side only; drop \"ATV\" from the label.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

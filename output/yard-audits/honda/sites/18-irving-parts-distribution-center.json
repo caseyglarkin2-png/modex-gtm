@@ -167,5 +167,24 @@
     "railServed": "No rail spur enters the property.",
     "location": "Roster coords (32.911717,-96.99072, APPROXIMATE) landed in the Las Colinas office/residential district. Resolved to 4525 W Royal Lane, Irving TX via web research; satellite and Street View confirmed the warehouse with 'HONDA' signage on the building and gates."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.honda.com/us/en/job/767/Stock-and-Material-Handler-Fulltime-Irving-Texas",
+        "date": "2025",
+        "type": "careers",
+        "claim": "Active American Honda Stock and Material Handler (Irving TX) warehouse req at 4525 Royal Lane, Irving 75063."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Tier-1 careers req tied to the exact American Honda PDC address; no closure/WARN/relocation. Not the independent David McDavid dealership warehouse.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -148,5 +148,24 @@
     "siteAreaAcres": "~80 acres derived from the perimeter box; approximate.",
     "scale": "No truck scale identified."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://manufacturing.honda.com/ohio/transmission-plant-ohio/",
+        "date": "2026",
+        "type": "locator",
+        "claim": "Honda's own page: Russells Point transmission plant, ~1,100 associates, CVTs + hybrid power systems."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tier-1 self-attested current operation; still the transmission/hybrid-system supplier feeding the Ohio auto plants.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

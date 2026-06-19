@@ -171,5 +171,31 @@
     "trailerParkingCapacity": "Estimate combining the southern drop yard and apron staging - approximate.",
     "railServed": "No rail spur enters the property; I-75 runs along the east edge but no rail."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://hondanews.com/en-US/releases/american-honda-opens-new-midwestern-consolidation-center-in-troy-ohio",
+        "date": "2007-06",
+        "type": "press",
+        "claim": "American Honda opened the 549k sq ft Midwest Consolidation Center on 58 acres adjacent to the Troy PDC; hub feeding 9 other US PDCs."
+      },
+      {
+        "tier": 1,
+        "url": "https://careers.honda.com/job/Troy-Parts-Procurement-Supply-Chain-Specialist-OH-45373/1257338100/",
+        "date": "2025",
+        "type": "careers",
+        "claim": "Active American Honda Parts Procurement & Supply Chain req in Troy 45373 (MCC houses procurement ops)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Honda-built consolidation hub still operating with current reqs; a separate adjacent building from the Troy PDC (site 15) — keep both.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

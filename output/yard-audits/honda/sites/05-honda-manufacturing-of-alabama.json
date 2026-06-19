@@ -167,5 +167,31 @@
     "siteAreaAcres": "Perimeter box captures the developed plant core plus lots (~900 ac); the full Honda-owned property is ~1,350 ac including test track and wooded buffer.",
     "urbanRural": "Rural / edge-of-town setting SW of Lincoln AL amid woods and farmland."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://manufacturing.honda.com/alabama-autoplant/",
+        "date": "2025",
+        "type": "locator",
+        "claim": "Honda's own HMA page: 4,500+ associates building Pilot/Passport/Odyssey/Ridgeline + V6 engines."
+      },
+      {
+        "tier": 1,
+        "url": "https://hondanews.com/en-US/honda-corporate/releases/release-322c03bad558525bf849ddaf790ba247-honda-associates-in-alabama-launch-all-new-2026-passport-and-passport-trailsport",
+        "date": "2025-02",
+        "type": "press",
+        "claim": "HMA Line 2 launched mass production of the 2026 Passport/TrailSport Feb 28, 2025."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Self-attested active production with a fresh 2025 model launch; Ridgeline pause is one model, not a closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

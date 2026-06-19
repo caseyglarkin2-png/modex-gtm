@@ -146,5 +146,31 @@
     "scale": "No truck scale clearly identified; left false.",
     "urbanRural": "Open farmland setting near East Liberty - Rural."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://manufacturing.honda.com/ohio/east-liberty-ohio/",
+        "date": "2025",
+        "type": "locator",
+        "claim": "Honda's own plant page: ~2,800 associates building CR-V / Acura MDX / RDX at East Liberty."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.wardsauto.com/news/honda-shifts-focus-to-hybrid-ice-models-amid-significant-ev-losses/820289/",
+        "date": "2026-03",
+        "type": "trade",
+        "claim": "ELP continues gas+hybrid production post EV-cancellation; no closure."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Self-attested active production at the exact site; gauntlet clean.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

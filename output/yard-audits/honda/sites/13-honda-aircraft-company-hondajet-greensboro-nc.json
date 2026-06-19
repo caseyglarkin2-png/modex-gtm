@@ -153,5 +153,24 @@
     "scale": "No truck scale.",
     "entryLanes": "Single controlled entry lane at the guard booth; low confidence on exact count."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.hondajet.com/en/News/Honda-Aircraft-Company-to-Expand-its-Production-Facility-in-Greensboro-NC",
+        "date": "2024",
+        "type": "press",
+        "claim": "Honda Aircraft Company expanding HondaJet production + world HQ at Greensboro (Piedmont Triad airport) — Honda active here."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Honda-operated and active, but it is an aviation campus / world HQ on airport land (hangars, flight line, R&D, office) with no truck-freight yard to audit — fails freight-yard sanity.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

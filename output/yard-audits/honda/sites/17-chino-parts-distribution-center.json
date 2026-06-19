@@ -165,5 +165,31 @@
     "railServed": "No rail spur enters the property.",
     "location": "Roster coords (34.012023,-117.678685, APPROXIMATE) landed in a Chino residential neighborhood. Resolved to 14141 Yorba Ave via web research; satellite/Street View confirmed the large solar-roofed PDC building with Honda-colored trailers."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://hondanews.com/en-US/releases/release-d79d15beab8f1c0d678ba2004c34c64d",
+        "date": "2017",
+        "type": "press",
+        "claim": "American Honda grand-opening of the Chino North American Hub West parts DC, 30-acre / 500,000 sq ft, $24.5M."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.ziprecruiter.com/co/Honda-North-America/Jobs/-in-Chino,CA",
+        "date": "2025-05",
+        "type": "careers",
+        "claim": "Active Honda North America hiring in Chino, CA corroborating current operation."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Address matches the Honda-built DC; no Tier-2 negative; but the cleanest Tier-1 self-attestation (2017 opening) predates the 24-month window and current operation rests on Tier-3 hiring — capped to probable.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -128,5 +128,31 @@
     "siteAreaAcres": "Web sources state an 87-acre site; perimeter box captures the developed core plus north test field — ~95 acres estimate.",
     "railServed": "No rail spur runs into the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.manufacturingdive.com/news/honda-atv-manufacturing-north-carolina/724741/",
+        "date": "2024-08",
+        "type": "trade",
+        "claim": "Honda discontinued lawn/power-equipment production at the NC plant in Sept 2023 and transferred ATV production in; it is now Honda exclusive North America ATV facility."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.greenindustrypros.com/mowers-turf/article/22878566/honda-power-equipment-suspends-production-at-north-carolina-plant",
+        "date": "2023",
+        "type": "trade",
+        "claim": "Honda Power Equipment suspended power-equipment production at the North Carolina plant (the scoped product line ended)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Honda still operates this exact plant with a real freight yard, but the scoped product (power equipment) ENDED Sept 2023 — it now builds ATVs. RELABEL to a Honda NC ATV/powersports plant; capped pending the label fix.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

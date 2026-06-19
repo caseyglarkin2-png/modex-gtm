@@ -159,5 +159,24 @@
     "scale": "No truck scale clearly identified; left false.",
     "urbanRural": "Open farmland setting N of Anna - Rural."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.prnewswire.com/news-releases/honda-celebrates-40-years-of-production-at-anna-engine-plant-in-ohio-302509150.html",
+        "date": "2025",
+        "type": "press",
+        "claim": "Honda celebrates 40 years of production at Anna Engine Plant (2025) — active operation."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Honda's largest engine plant; 40-year milestone 2025; wholly Honda-operated (distinct from the LG-Honda battery JV).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

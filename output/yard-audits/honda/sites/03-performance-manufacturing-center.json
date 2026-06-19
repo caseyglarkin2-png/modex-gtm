@@ -127,5 +127,24 @@
     "railServed": "No rail spur into the property.",
     "urbanRural": "Open farmland setting on the Marysville complex outskirts - Rural."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://manufacturing.honda.com/ohio/marysville-ohio/performance-manufacturing-center/",
+        "date": "2024-06",
+        "type": "locator",
+        "claim": "Honda's own PMC page: converted from Acura NSX to the exclusive U.S. CR-V e:FCEV line (production began June 2024)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "NSX ended 2022 but Honda repurposed PMC to the CR-V e:FCEV hydrogen line (June 2024); still Honda-operated and active.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

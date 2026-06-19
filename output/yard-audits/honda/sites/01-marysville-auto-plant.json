@@ -162,5 +162,31 @@
     "scale": "No truck scale clearly identified; left false.",
     "shipRcvSeparate": "Dock activity on physically separate building faces (logistics building docks vs main plant docks) supports separate ship/receive."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://manufacturing.honda.com/ohio/marysville-ohio/marysville-auto-plant/",
+        "date": "2024",
+        "type": "locator",
+        "claim": "Honda's own plant page: ~4,600 associates building Accord/Accord Hybrid/Acura Integra at Marysville."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.wardsauto.com/news/honda-shifts-focus-to-hybrid-ice-models-amid-significant-ev-losses/820289/",
+        "date": "2026-03",
+        "type": "trade",
+        "claim": "Post-EV-product cancellation Honda continues gas+hybrid production at Marysville; no plant closure."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Honda self-attested current operation; Mar-2026 EV-product cancellation reallocates the line to ICE/hybrid, plant stays open.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

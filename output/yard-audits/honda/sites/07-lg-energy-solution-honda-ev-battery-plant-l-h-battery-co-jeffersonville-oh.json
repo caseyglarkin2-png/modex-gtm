@@ -179,5 +179,31 @@
     "multipleFacilities": "Single primary battery building with a connected utility/support wing - treated as one facility cluster.",
     "_revisit": "Recommend re-audit once non-winter, post-construction imagery is available to confirm gate, guard booth, dock count and trailer yard."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://lhbattery.com/",
+        "date": "2026-02",
+        "type": "press",
+        "claim": "Site operated by L-H Battery Company, the JV of LG Energy Solution and Honda; as of Feb 2026 construction \"nearly complete\" (no start of production)."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.utilitydive.com/news/honda-buying-lg-energy-solutions-stake-in-ohio-ev-battery-plant-building-f/808863/",
+        "date": "2025-12",
+        "type": "press",
+        "claim": "Honda buys the building assets; the JV continues to operate the facility under a lease — operator remains the LGES-majority JV."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "JV Honda does not operate (51% LG Energy Solution majority) AND not producing (no SOP) by mid-2026 — both trigger exclusion.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
