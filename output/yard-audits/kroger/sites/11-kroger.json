@@ -8,47 +8,113 @@
   "geofences": {
     "perimeter": {
       "ring": [
-        { "lat": 41.067104, "lng": -111.986444 },
-        { "lat": 41.067156, "lng": -111.980916 },
-        { "lat": 41.065835, "lng": -111.980607 },
-        { "lat": 41.062574, "lng": -111.981397 },
-        { "lat": 41.062522, "lng": -111.985173 },
-        { "lat": 41.062522, "lng": -111.986444 }
+        {
+          "lat": 41.067104,
+          "lng": -111.986444
+        },
+        {
+          "lat": 41.067156,
+          "lng": -111.980916
+        },
+        {
+          "lat": 41.065835,
+          "lng": -111.980607
+        },
+        {
+          "lat": 41.062574,
+          "lng": -111.981397
+        },
+        {
+          "lat": 41.062522,
+          "lng": -111.985173
+        },
+        {
+          "lat": 41.062522,
+          "lng": -111.986444
+        }
       ]
     },
     "truckGate": {
       "ring": [
-        { "lat": 41.065007, "lng": -111.986444 },
-        { "lat": 41.065059, "lng": -111.98586 },
-        { "lat": 41.064696, "lng": -111.985826 },
-        { "lat": 41.064645, "lng": -111.986444 }
+        {
+          "lat": 41.065007,
+          "lng": -111.986444
+        },
+        {
+          "lat": 41.065059,
+          "lng": -111.98586
+        },
+        {
+          "lat": 41.064696,
+          "lng": -111.985826
+        },
+        {
+          "lat": 41.064645,
+          "lng": -111.986444
+        }
       ]
     },
     "dropYards": [
       {
         "ring": [
-          { "lat": 41.066068, "lng": -111.985379 },
-          { "lat": 41.066068, "lng": -111.982701 },
-          { "lat": 41.065162, "lng": -111.982701 },
-          { "lat": 41.065162, "lng": -111.985379 }
+          {
+            "lat": 41.066068,
+            "lng": -111.985379
+          },
+          {
+            "lat": 41.066068,
+            "lng": -111.982701
+          },
+          {
+            "lat": 41.065162,
+            "lng": -111.982701
+          },
+          {
+            "lat": 41.065162,
+            "lng": -111.985379
+          }
         ]
       },
       {
         "ring": [
-          { "lat": 41.063765, "lng": -111.983457 },
-          { "lat": 41.063816, "lng": -111.981465 },
-          { "lat": 41.062677, "lng": -111.981397 },
-          { "lat": 41.062626, "lng": -111.983388 }
+          {
+            "lat": 41.063765,
+            "lng": -111.983457
+          },
+          {
+            "lat": 41.063816,
+            "lng": -111.981465
+          },
+          {
+            "lat": 41.062677,
+            "lng": -111.981397
+          },
+          {
+            "lat": 41.062626,
+            "lng": -111.983388
+          }
         ]
       }
     ],
     "dockAprons": [
       {
         "ring": [
-          { "lat": 41.066586, "lng": -111.986409 },
-          { "lat": 41.06669, "lng": -111.983113 },
-          { "lat": 41.066327, "lng": -111.983079 },
-          { "lat": 41.066224, "lng": -111.986375 }
+          {
+            "lat": 41.066586,
+            "lng": -111.986409
+          },
+          {
+            "lat": 41.06669,
+            "lng": -111.983113
+          },
+          {
+            "lat": 41.066327,
+            "lng": -111.983079
+          },
+          {
+            "lat": 41.066224,
+            "lng": -111.986375
+          }
         ]
       }
     ],
@@ -125,5 +191,24 @@
     "truckGateCount": "Two open vehicle entrances off N Sugar St (main yard drive ~41.0651 and a southern office/shop drive ~41.0635); neither is a controlled gate.",
     "siteAreaAcres": "~58 acres for the fenced operational campus derived from the perimeter polygon (bounded W by Sugar St, E by the rail corridor, S by residential)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.thekrogerco.com/vendor-suppliers/logistics/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Kroger corporate logistics page lists Smiths DC at 500 Sugar Street, Layton UT 84041 with active work-in line."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Kroger logistics page lists Layton Smiths DC by exact address; Smiths wordmark on building corroborates; no closure/WARN found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

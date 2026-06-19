@@ -1,55 +1,162 @@
 {
   "name": "Kroger Grocery Distribution Center Shelbyville IN",
   "type": "Grocery Distribution Center",
-  "coords": { "lat": 39.5888, "lng": -85.8092 },
+  "coords": {
+    "lat": 39.5888,
+    "lng": -85.8092
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 39.5851, "lng": -85.8128 },
-      { "lat": 39.5878, "lng": -85.8120 },
-      { "lat": 39.5910, "lng": -85.8098 },
-      { "lat": 39.5912, "lng": -85.8082 },
-      { "lat": 39.5905, "lng": -85.8067 },
-      { "lat": 39.5876, "lng": -85.8067 },
-      { "lat": 39.5860, "lng": -85.8078 },
-      { "lat": 39.5852, "lng": -85.8100 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 39.58432, "lng": -85.81262 },
-      { "lat": 39.58452, "lng": -85.81232 },
-      { "lat": 39.58502, "lng": -85.81195 },
-      { "lat": 39.58482, "lng": -85.81225 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.5851,
+          "lng": -85.8128
+        },
+        {
+          "lat": 39.5878,
+          "lng": -85.812
+        },
+        {
+          "lat": 39.591,
+          "lng": -85.8098
+        },
+        {
+          "lat": 39.5912,
+          "lng": -85.8082
+        },
+        {
+          "lat": 39.5905,
+          "lng": -85.8067
+        },
+        {
+          "lat": 39.5876,
+          "lng": -85.8067
+        },
+        {
+          "lat": 39.586,
+          "lng": -85.8078
+        },
+        {
+          "lat": 39.5852,
+          "lng": -85.81
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.58432,
+          "lng": -85.81262
+        },
+        {
+          "lat": 39.58452,
+          "lng": -85.81232
+        },
+        {
+          "lat": 39.58502,
+          "lng": -85.81195
+        },
+        {
+          "lat": 39.58482,
+          "lng": -85.81225
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 39.5856, "lng": -85.8125 },
-        { "lat": 39.5873, "lng": -85.8120 },
-        { "lat": 39.5882, "lng": -85.8108 },
-        { "lat": 39.5864, "lng": -85.8112 }
-      ] },
-      { "ring": [
-        { "lat": 39.5887, "lng": -85.8104 },
-        { "lat": 39.5901, "lng": -85.8092 },
-        { "lat": 39.5904, "lng": -85.8082 },
-        { "lat": 39.5890, "lng": -85.8093 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 39.5856,
+            "lng": -85.8125
+          },
+          {
+            "lat": 39.5873,
+            "lng": -85.812
+          },
+          {
+            "lat": 39.5882,
+            "lng": -85.8108
+          },
+          {
+            "lat": 39.5864,
+            "lng": -85.8112
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 39.5887,
+            "lng": -85.8104
+          },
+          {
+            "lat": 39.5901,
+            "lng": -85.8092
+          },
+          {
+            "lat": 39.5904,
+            "lng": -85.8082
+          },
+          {
+            "lat": 39.589,
+            "lng": -85.8093
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 39.58940, "lng": -85.81110 },
-        { "lat": 39.58970, "lng": -85.80720 },
-        { "lat": 39.58952, "lng": -85.80718 },
-        { "lat": 39.58922, "lng": -85.81108 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 39.5894,
+            "lng": -85.8111
+          },
+          {
+            "lat": 39.5897,
+            "lng": -85.8072
+          },
+          {
+            "lat": 39.58952,
+            "lng": -85.80718
+          },
+          {
+            "lat": 39.58922,
+            "lng": -85.81108
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 39.58540, "lng": -85.81100 },
-      { "lat": 39.58575, "lng": -85.81015 },
-      { "lat": 39.58560, "lng": -85.81000 },
-      { "lat": 39.58525, "lng": -85.81085 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 39.5854,
+          "lng": -85.811
+        },
+        {
+          "lat": 39.58575,
+          "lng": -85.81015
+        },
+        {
+          "lat": 39.5856,
+          "lng": -85.81
+        },
+        {
+          "lat": 39.58525,
+          "lng": -85.81085
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 274, "pano": "G3Gw9fpzJTeTVLO8QcASzA", "hasCoverage": true },
-      "truckGate": { "heading": 0, "pano": "K5evSTQ4ZAhonQqEbiNukg", "hasCoverage": true }
+      "perimeter": {
+        "heading": 274,
+        "pano": "G3Gw9fpzJTeTVLO8QcASzA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 0,
+        "pano": "K5evSTQ4ZAhonQqEbiNukg",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -87,7 +194,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["connectivityIssue", "scale", "shipRcvSeparate"],
+  "uncertainFields": [
+    "connectivityIssue",
+    "scale",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Open access. Street View (Aug 2024, pano K5evSTQ4ZAhonQqEbiNukg on County Rd 125 W) shows the public road running straight into the property past a Kroger monument sign with no barrier arm, sliding gate, or checkpoint pinch-point. The drive opens directly onto the yard.",
     "guardShack": "No staffed booth visible at the entrance in Street View or satellite. The only small structures near the truck path are the office/break facilities attached to the main building, not a gate booth.",
@@ -105,5 +216,31 @@
     "siteAreaAcres": "~60 acres is the polygon-traced developed/paved footprint; public sources cite a ~100-acre owned campus including surrounding buffer land.",
     "trailersVisible": "Approx count across drop yard + dock apron + annex from z18-20 imagery; honest estimate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.wishtv.com/news/inside-indiana-business/penske-logistics-details-shelbyville-warehouse-transition/",
+        "date": "2022-07-20",
+        "type": "press",
+        "claim": "Kroger took over operation of the 600,000 sqft Shelbyville IN DC at 4301 N 125 W from Penske, effective Sept 11 2022."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.shelbynews.com/news/kroger-announces-management-change-at-shelbyville-supply-chain-facility/article_c657e056-28d3-5d13-8c25-366005219f80.html",
+        "date": "2022-07",
+        "type": "press",
+        "claim": "Kroger Supply Chain manages the Kroger DC complex in Shelby County, built by Kroger in 1998 on a 100-acre campus serving 10 states."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Kroger self-operates the Shelbyville refrigerated DC (in-housed from Penske Sept 2022); no closure/sale found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

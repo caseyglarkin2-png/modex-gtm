@@ -1,61 +1,182 @@
 {
   "name": "Kroger Grocery Distribution Center Indianapolis IN",
   "type": "Grocery Distribution Center",
-  "coords": { "lat": 39.75935, "lng": -86.04555 },
+  "coords": {
+    "lat": 39.75935,
+    "lng": -86.04555
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 39.76105, "lng": -86.04970 },
-      { "lat": 39.76095, "lng": -86.04340 },
-      { "lat": 39.75995, "lng": -86.04305 },
-      { "lat": 39.75865, "lng": -86.04395 },
-      { "lat": 39.75815, "lng": -86.04575 },
-      { "lat": 39.75825, "lng": -86.04680 },
-      { "lat": 39.75860, "lng": -86.04920 },
-      { "lat": 39.76055, "lng": -86.04985 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 39.76140, "lng": -86.04540 },
-      { "lat": 39.76140, "lng": -86.04475 },
-      { "lat": 39.76070, "lng": -86.04478 },
-      { "lat": 39.76070, "lng": -86.04543 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.76105,
+          "lng": -86.0497
+        },
+        {
+          "lat": 39.76095,
+          "lng": -86.0434
+        },
+        {
+          "lat": 39.75995,
+          "lng": -86.04305
+        },
+        {
+          "lat": 39.75865,
+          "lng": -86.04395
+        },
+        {
+          "lat": 39.75815,
+          "lng": -86.04575
+        },
+        {
+          "lat": 39.75825,
+          "lng": -86.0468
+        },
+        {
+          "lat": 39.7586,
+          "lng": -86.0492
+        },
+        {
+          "lat": 39.76055,
+          "lng": -86.04985
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.7614,
+          "lng": -86.0454
+        },
+        {
+          "lat": 39.7614,
+          "lng": -86.04475
+        },
+        {
+          "lat": 39.7607,
+          "lng": -86.04478
+        },
+        {
+          "lat": 39.7607,
+          "lng": -86.04543
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 39.76090, "lng": -86.04760 },
-        { "lat": 39.76075, "lng": -86.04360 },
-        { "lat": 39.75985, "lng": -86.04380 },
-        { "lat": 39.76000, "lng": -86.04790 }
-      ] },
-      { "ring": [
-        { "lat": 39.76055, "lng": -86.04980 },
-        { "lat": 39.76045, "lng": -86.04790 },
-        { "lat": 39.75880, "lng": -86.04830 },
-        { "lat": 39.75885, "lng": -86.04985 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 39.7609,
+            "lng": -86.0476
+          },
+          {
+            "lat": 39.76075,
+            "lng": -86.0436
+          },
+          {
+            "lat": 39.75985,
+            "lng": -86.0438
+          },
+          {
+            "lat": 39.76,
+            "lng": -86.0479
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 39.76055,
+            "lng": -86.0498
+          },
+          {
+            "lat": 39.76045,
+            "lng": -86.0479
+          },
+          {
+            "lat": 39.7588,
+            "lng": -86.0483
+          },
+          {
+            "lat": 39.75885,
+            "lng": -86.04985
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 39.75980, "lng": -86.04360 },
-        { "lat": 39.75870, "lng": -86.04435 },
-        { "lat": 39.75858, "lng": -86.04415 },
-        { "lat": 39.75968, "lng": -86.04340 }
-      ] },
-      { "ring": [
-        { "lat": 39.76055, "lng": -86.04395 },
-        { "lat": 39.76012, "lng": -86.04330 },
-        { "lat": 39.75995, "lng": -86.04345 },
-        { "lat": 39.76038, "lng": -86.04410 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 39.7598,
+            "lng": -86.0436
+          },
+          {
+            "lat": 39.7587,
+            "lng": -86.04435
+          },
+          {
+            "lat": 39.75858,
+            "lng": -86.04415
+          },
+          {
+            "lat": 39.75968,
+            "lng": -86.0434
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 39.76055,
+            "lng": -86.04395
+          },
+          {
+            "lat": 39.76012,
+            "lng": -86.0433
+          },
+          {
+            "lat": 39.75995,
+            "lng": -86.04345
+          },
+          {
+            "lat": 39.76038,
+            "lng": -86.0441
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 39.76070, "lng": -86.04600 },
-      { "lat": 39.76060, "lng": -86.04440 },
-      { "lat": 39.76000, "lng": -86.04450 },
-      { "lat": 39.76010, "lng": -86.04610 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 39.7607,
+          "lng": -86.046
+        },
+        {
+          "lat": 39.7606,
+          "lng": -86.0444
+        },
+        {
+          "lat": 39.76,
+          "lng": -86.0445
+        },
+        {
+          "lat": 39.7601,
+          "lng": -86.0461
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 193, "pano": "XMqiwNJBNi3awE0lGHBnsQ", "hasCoverage": true },
-      "truckGate": { "heading": 174, "pano": "q18iR0sy6SB-iOJrgisdtA", "hasCoverage": true }
+      "perimeter": {
+        "heading": 193,
+        "pano": "XMqiwNJBNi3awE0lGHBnsQ",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 174,
+        "pano": "q18iR0sy6SB-iOJrgisdtA",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -93,7 +214,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["entryLanes", "exitLanes", "scale"],
+  "uncertainFields": [
+    "entryLanes",
+    "exitLanes",
+    "scale"
+  ],
   "fieldNotes": {
     "truckGate": "Signalized entrance off English Ave leads to an interior guarded checkpoint ~70m inside the property: gate island with booth and a clearly visible lift/boom arm across the lane (z21 imagery).",
     "guardShack": "Single small ~1-vehicle-footprint booth on the median island between the inbound and outbound lanes at the interior checkpoint.",
@@ -114,5 +239,31 @@
     "dropYard": "Dedicated trailer-storage yard separate from active dock staging, full of parked trailers.",
     "operator": "Operated for Kroger by Zenith Logistics (24+ yrs); facility phone 317-352-5100."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.thekrogerco.com/vendor-suppliers/logistics/",
+        "date": "2026-06",
+        "type": "press",
+        "claim": "Kroger official logistics/vendor page lists Kroger DC at 7025 English Avenue, Indianapolis IN 46219."
+      },
+      {
+        "tier": 1,
+        "url": "https://zenithlogisticsinc.com/distribution-center/",
+        "date": "2025-08",
+        "type": "careers",
+        "claim": "Zenith Logistics (3PL operator of Kroger DCs) lists the 7025 English Ave Indianapolis Kroger DC as actively operating."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Kroger-authoritative sources confirm active Kroger DC at 7025 English Ave (operated by 3PL Zenith Logistics); no closure/sale found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

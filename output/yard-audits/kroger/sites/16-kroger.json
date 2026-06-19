@@ -1,55 +1,162 @@
 {
   "name": "Kroger Customer Fulfillment Center Groveland FL",
   "type": "Customer Fulfillment Center (Ocado-automated)",
-  "coords": { "lat": 28.64018, "lng": -81.82035 },
+  "coords": {
+    "lat": 28.64018,
+    "lng": -81.82035
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 28.64205, "lng": -81.82155 },
-      { "lat": 28.64188, "lng": -81.81880 },
-      { "lat": 28.64055, "lng": -81.81835 },
-      { "lat": 28.63840, "lng": -81.81870 },
-      { "lat": 28.63755, "lng": -81.81960 },
-      { "lat": 28.63760, "lng": -81.82085 },
-      { "lat": 28.63950, "lng": -81.82175 },
-      { "lat": 28.64120, "lng": -81.82175 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 28.63810, "lng": -81.81950 },
-      { "lat": 28.63808, "lng": -81.81905 },
-      { "lat": 28.63762, "lng": -81.81905 },
-      { "lat": 28.63762, "lng": -81.81952 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 28.64205,
+          "lng": -81.82155
+        },
+        {
+          "lat": 28.64188,
+          "lng": -81.8188
+        },
+        {
+          "lat": 28.64055,
+          "lng": -81.81835
+        },
+        {
+          "lat": 28.6384,
+          "lng": -81.8187
+        },
+        {
+          "lat": 28.63755,
+          "lng": -81.8196
+        },
+        {
+          "lat": 28.6376,
+          "lng": -81.82085
+        },
+        {
+          "lat": 28.6395,
+          "lng": -81.82175
+        },
+        {
+          "lat": 28.6412,
+          "lng": -81.82175
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 28.6381,
+          "lng": -81.8195
+        },
+        {
+          "lat": 28.63808,
+          "lng": -81.81905
+        },
+        {
+          "lat": 28.63762,
+          "lng": -81.81905
+        },
+        {
+          "lat": 28.63762,
+          "lng": -81.81952
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 28.64080, "lng": -81.81905 },
-        { "lat": 28.63945, "lng": -81.81935 },
-        { "lat": 28.63935, "lng": -81.81912 },
-        { "lat": 28.64072, "lng": -81.81882 }
-      ] },
-      { "ring": [
-        { "lat": 28.63915, "lng": -81.81905 },
-        { "lat": 28.63830, "lng": -81.81925 },
-        { "lat": 28.63822, "lng": -81.81878 },
-        { "lat": 28.63905, "lng": -81.81860 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 28.6408,
+            "lng": -81.81905
+          },
+          {
+            "lat": 28.63945,
+            "lng": -81.81935
+          },
+          {
+            "lat": 28.63935,
+            "lng": -81.81912
+          },
+          {
+            "lat": 28.64072,
+            "lng": -81.81882
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 28.63915,
+            "lng": -81.81905
+          },
+          {
+            "lat": 28.6383,
+            "lng": -81.81925
+          },
+          {
+            "lat": 28.63822,
+            "lng": -81.81878
+          },
+          {
+            "lat": 28.63905,
+            "lng": -81.8186
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 28.64165, "lng": -81.81955 },
-        { "lat": 28.63905, "lng": -81.82010 },
-        { "lat": 28.63900, "lng": -81.81972 },
-        { "lat": 28.64160, "lng": -81.81918 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 28.64165,
+            "lng": -81.81955
+          },
+          {
+            "lat": 28.63905,
+            "lng": -81.8201
+          },
+          {
+            "lat": 28.639,
+            "lng": -81.81972
+          },
+          {
+            "lat": 28.6416,
+            "lng": -81.81918
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 28.63858, "lng": -81.81998 },
-      { "lat": 28.63858, "lng": -81.81952 },
-      { "lat": 28.63818, "lng": -81.81952 },
-      { "lat": 28.63818, "lng": -81.81998 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 28.63858,
+          "lng": -81.81998
+        },
+        {
+          "lat": 28.63858,
+          "lng": -81.81952
+        },
+        {
+          "lat": 28.63818,
+          "lng": -81.81952
+        },
+        {
+          "lat": 28.63818,
+          "lng": -81.81998
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 359, "pano": "AMIqIc9BmCY5k7DHpbqTCw", "hasCoverage": true },
-      "truckGate": { "heading": 350, "pano": "NMgF_yqXrF21JG5vIG3SJA", "hasCoverage": true }
+      "perimeter": {
+        "heading": 359,
+        "pano": "AMIqIc9BmCY5k7DHpbqTCw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 350,
+        "pano": "NMgF_yqXrF21JG5vIG3SJA",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -58,7 +165,7 @@
     "trailerParkingCapacity": 60,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 58.0,
+    "siteAreaAcres": 58,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@28.64018,-81.82035,400m/data=!3m1!1e3",
@@ -87,7 +194,12 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "multiStep", "connectivityIssue"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "multiStep",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "truckGate": "Sliding/cantilever gate across the secured-yard driveway off American Way, confirmed in Street View (pano NMgF_yqXrF21JG5vIG3SJA, Apr 2025) with perimeter chain-link/slatted fence and posted sign at the gate.",
     "guardShack": "No staffed booth at the road gate. The on-site control building with canopy bays sits deeper inside near the dock-yard throat, not at the public-road checkpoint, so the road entry reads as gate-without-booth.",
@@ -104,5 +216,31 @@
     "scale": "No truck scale visible in the truck path.",
     "note": "Facility is the Kroger/Ocado automated CFC (FC-04, ~338-375k sq ft, four-story automated grid). Publicly reported as closed in 2025 as Kroger wound down its Ocado CFC network; imagery (2025-2026) still shows the building, fleet and trailers in place."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.grocerydive.com/news/kroger-canceling-charlotte-cfc-closing-nashville-spoke-ecommerce-ocado/807167/",
+        "date": "2025-12-05",
+        "type": "press",
+        "claim": "Kroger is closing its Florida (Groveland) CFC in January 2026; not meeting financial expectations."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.leesburg-news.com/2025/11/23/over-900-employees-losing-jobs-at-kroger-facility-in-lake-county/",
+        "date": "2025-11-23",
+        "type": "press",
+        "claim": "WARN filed Nov 18 2025: 943 employees terminated at 7925 American Way, Groveland; all out by Feb 1 2026."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "REJECTED: Groveland FL CFC is one of three Kroger is shutting down; WARN for 943 workers, closes Jan 2026.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -1,52 +1,147 @@
 {
   "name": "Ralphs/Food4Less Grocery Distribution Center Compton CA",
   "type": "Grocery Distribution Center",
-  "coords": { "lat": 33.871300, "lng": -118.239800 },
+  "coords": {
+    "lat": 33.8713,
+    "lng": -118.2398
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 33.872550, "lng": -118.241300 },
-      { "lat": 33.872350, "lng": -118.235900 },
-      { "lat": 33.869850, "lng": -118.236100 },
-      { "lat": 33.870000, "lng": -118.241500 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 33.871400, "lng": -118.237000 },
-      { "lat": 33.871380, "lng": -118.236000 },
-      { "lat": 33.870750, "lng": -118.236050 },
-      { "lat": 33.870770, "lng": -118.237050 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.87255,
+          "lng": -118.2413
+        },
+        {
+          "lat": 33.87235,
+          "lng": -118.2359
+        },
+        {
+          "lat": 33.86985,
+          "lng": -118.2361
+        },
+        {
+          "lat": 33.87,
+          "lng": -118.2415
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.8714,
+          "lng": -118.237
+        },
+        {
+          "lat": 33.87138,
+          "lng": -118.236
+        },
+        {
+          "lat": 33.87075,
+          "lng": -118.23605
+        },
+        {
+          "lat": 33.87077,
+          "lng": -118.23705
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 33.871650, "lng": -118.237200 },
-        { "lat": 33.871600, "lng": -118.236000 },
-        { "lat": 33.870100, "lng": -118.236150 },
-        { "lat": 33.870150, "lng": -118.237350 }
-      ] },
-      { "ring": [
-        { "lat": 33.870850, "lng": -118.240800 },
-        { "lat": 33.870830, "lng": -118.240100 },
-        { "lat": 33.869950, "lng": -118.240180 },
-        { "lat": 33.869970, "lng": -118.240880 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.87165,
+            "lng": -118.2372
+          },
+          {
+            "lat": 33.8716,
+            "lng": -118.236
+          },
+          {
+            "lat": 33.8701,
+            "lng": -118.23615
+          },
+          {
+            "lat": 33.87015,
+            "lng": -118.23735
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.87085,
+            "lng": -118.2408
+          },
+          {
+            "lat": 33.87083,
+            "lng": -118.2401
+          },
+          {
+            "lat": 33.86995,
+            "lng": -118.24018
+          },
+          {
+            "lat": 33.86997,
+            "lng": -118.24088
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 33.871800, "lng": -118.240850 },
-        { "lat": 33.871790, "lng": -118.240350 },
-        { "lat": 33.871620, "lng": -118.240360 },
-        { "lat": 33.871630, "lng": -118.240860 }
-      ] },
-      { "ring": [
-        { "lat": 33.870250, "lng": -118.240950 },
-        { "lat": 33.870240, "lng": -118.240050 },
-        { "lat": 33.870080, "lng": -118.240060 },
-        { "lat": 33.870090, "lng": -118.240960 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.8718,
+            "lng": -118.24085
+          },
+          {
+            "lat": 33.87179,
+            "lng": -118.24035
+          },
+          {
+            "lat": 33.87162,
+            "lng": -118.24036
+          },
+          {
+            "lat": 33.87163,
+            "lng": -118.24086
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.87025,
+            "lng": -118.24095
+          },
+          {
+            "lat": 33.87024,
+            "lng": -118.24005
+          },
+          {
+            "lat": 33.87008,
+            "lng": -118.24006
+          },
+          {
+            "lat": 33.87009,
+            "lng": -118.24096
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 277, "pano": "u9ks4NWck1522ecgs_UfFg", "hasCoverage": true },
-      "truckGate": { "heading": 261, "pano": "IWSCxU0z7InXt1--9qD82g", "hasCoverage": true }
+      "perimeter": {
+        "heading": 277,
+        "pano": "u9ks4NWck1522ecgs_UfFg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 261,
+        "pano": "IWSCxU0z7InXt1--9qD82g",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -84,7 +179,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "exitLanes", "shipRcvSeparate"],
+  "uncertainFields": [
+    "scale",
+    "exitLanes",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Signalized truck entrance off S Wilmington Ave; multi-lane gated apron with marked inbound/outbound lanes, perimeter fencing on both sides, confirmed in Street View (panos u9ks4NWck1522ecgs_UfFg and IWSCxU0z7InXt1--9qD82g).",
     "guardShack": "Small white square guard booth (~1-2 stall footprint) set in the middle of the entry lanes under a lane canopy, visible in z20 satellite and Street View. Classic staffed check-in booth.",
@@ -99,5 +198,31 @@
     "urbanRural": "Dense industrial fabric of Compton/Rancho Dominguez, immediately south of CA-91 freeway; clearly Urban.",
     "railServed": "No rail spur enters the property; urban infill site."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.prnewswire.com/news-releases/kroger-unveils-a-clean-energy-production-system-powered-by-food-waste-207588311.html",
+        "date": "2013-05",
+        "type": "press",
+        "claim": "Kroger operates a 59-acre Ralphs/Food4Less DC in Compton CA (650,000+ sqft) with an on-site anaerobic digester."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.morningstar.com/news/pr-newswire/20250919ph78361/teamsters-demand-fair-contract-at-ralphs",
+        "date": "2025-09-19",
+        "type": "press",
+        "claim": "Sept 2025 Teamsters negotiations with Ralphs (wholly owned Kroger subsidiary) over SoCal Ralphs/Food4Less supply chain, confirming active distribution operation."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Ralphs/Food4Less (Kroger banner) DC at S Wilmington Ave Compton confirmed active via Sept 2025 news; not Albertsons/Vons.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

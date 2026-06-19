@@ -1,57 +1,166 @@
 {
   "name": "Fred Meyer Grocery Distribution Center Clackamas OR",
   "type": "Grocery Distribution Center",
-  "coords": { "lat": 45.40632, "lng": -122.5466 },
+  "coords": {
+    "lat": 45.40632,
+    "lng": -122.5466
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 45.40775, "lng": -122.55060 },
-      { "lat": 45.40790, "lng": -122.54235 },
-      { "lat": 45.40470, "lng": -122.54235 },
-      { "lat": 45.40460, "lng": -122.55060 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 45.40762, "lng": -122.54568 },
-      { "lat": 45.40762, "lng": -122.54492 },
-      { "lat": 45.40672, "lng": -122.54492 },
-      { "lat": 45.40672, "lng": -122.54568 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 45.40775,
+          "lng": -122.5506
+        },
+        {
+          "lat": 45.4079,
+          "lng": -122.54235
+        },
+        {
+          "lat": 45.4047,
+          "lng": -122.54235
+        },
+        {
+          "lat": 45.4046,
+          "lng": -122.5506
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 45.40762,
+          "lng": -122.54568
+        },
+        {
+          "lat": 45.40762,
+          "lng": -122.54492
+        },
+        {
+          "lat": 45.40672,
+          "lng": -122.54492
+        },
+        {
+          "lat": 45.40672,
+          "lng": -122.54568
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 45.40718, "lng": -122.55015 },
-        { "lat": 45.40720, "lng": -122.54300 },
-        { "lat": 45.40648, "lng": -122.54300 },
-        { "lat": 45.40646, "lng": -122.55015 }
-      ] },
-      { "ring": [
-        { "lat": 45.40632, "lng": -122.54310 },
-        { "lat": 45.40632, "lng": -122.54238 },
-        { "lat": 45.40478, "lng": -122.54238 },
-        { "lat": 45.40478, "lng": -122.54310 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 45.40718,
+            "lng": -122.55015
+          },
+          {
+            "lat": 45.4072,
+            "lng": -122.543
+          },
+          {
+            "lat": 45.40648,
+            "lng": -122.543
+          },
+          {
+            "lat": 45.40646,
+            "lng": -122.55015
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 45.40632,
+            "lng": -122.5431
+          },
+          {
+            "lat": 45.40632,
+            "lng": -122.54238
+          },
+          {
+            "lat": 45.40478,
+            "lng": -122.54238
+          },
+          {
+            "lat": 45.40478,
+            "lng": -122.5431
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 45.40648, "lng": -122.55010 },
-        { "lat": 45.40648, "lng": -122.54710 },
-        { "lat": 45.40632, "lng": -122.54710 },
-        { "lat": 45.40632, "lng": -122.55010 }
-      ] },
-      { "ring": [
-        { "lat": 45.40648, "lng": -122.54680 },
-        { "lat": 45.40648, "lng": -122.54320 },
-        { "lat": 45.40632, "lng": -122.54320 },
-        { "lat": 45.40632, "lng": -122.54680 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 45.40648,
+            "lng": -122.5501
+          },
+          {
+            "lat": 45.40648,
+            "lng": -122.5471
+          },
+          {
+            "lat": 45.40632,
+            "lng": -122.5471
+          },
+          {
+            "lat": 45.40632,
+            "lng": -122.5501
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 45.40648,
+            "lng": -122.5468
+          },
+          {
+            "lat": 45.40648,
+            "lng": -122.5432
+          },
+          {
+            "lat": 45.40632,
+            "lng": -122.5432
+          },
+          {
+            "lat": 45.40632,
+            "lng": -122.5468
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 45.40775, "lng": -122.54600 },
-      { "lat": 45.40775, "lng": -122.54480 },
-      { "lat": 45.40735, "lng": -122.54480 },
-      { "lat": 45.40735, "lng": -122.54600 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 45.40775,
+          "lng": -122.546
+        },
+        {
+          "lat": 45.40775,
+          "lng": -122.5448
+        },
+        {
+          "lat": 45.40735,
+          "lng": -122.5448
+        },
+        {
+          "lat": 45.40735,
+          "lng": -122.546
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 180, "pano": "l3D5_wuFUzeq8ASQKvOTGA", "hasCoverage": true },
-      "truckGate": { "heading": 178, "pano": "aQW2NR0V4EEYMAkS0iz3Lg", "hasCoverage": true }
+      "perimeter": {
+        "heading": 180,
+        "pano": "l3D5_wuFUzeq8ASQKvOTGA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 178,
+        "pano": "aQW2NR0V4EEYMAkS0iz3Lg",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -89,7 +198,10 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["exitLanes", "shipRcvSeparate"],
+  "uncertainFields": [
+    "exitLanes",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Controlled multi-lane truck entrance off SE Hwy 212. Street View (2019-10) shows an overhead gantry signed LANE 1 / LANE 2 / LANE 3 with STOP signs and a sign reading USE ALL THREE LANES / LEAVE 30 FOOT SAFETY GAP BEHIND TRUCKS.",
     "guardShack": "Small blue-roofed booth (~1-2 vehicle footprint) seated in the middle of the gate lanes, visible in both satellite z20 and Street View, controlling the three lanes.",
@@ -107,5 +219,24 @@
     "siteAreaAcres": "~56 acres computed from the traced perimeter polygon (roughly 640m x 355m core), honest estimate.",
     "entryExitTogether": "Inbound and outbound both pass through the single gantry checkpoint at one point on the property line."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.thekrogerco.com/vendor-suppliers/logistics/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Kroger corporate logistics page lists Fred Meyer DC at 11506 SE Hwy 212, Clackamas OR 97015 with active kroger.com appointment scheduling."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Kroger logistics page lists Clackamas Fred Meyer DC by exact address; 2025 closures were OR retail stores, not this DC.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

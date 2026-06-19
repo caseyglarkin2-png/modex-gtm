@@ -1,44 +1,123 @@
 {
   "name": "Kroger Grocery Distribution Center Nashville TN",
   "type": "Grocery Distribution Center",
-  "coords": { "lat": 36.13690, "lng": -86.74270 },
+  "coords": {
+    "lat": 36.1369,
+    "lng": -86.7427
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 36.137510, "lng": -86.744324 },
-      { "lat": 36.138073, "lng": -86.743787 },
-      { "lat": 36.137640, "lng": -86.741105 },
-      { "lat": 36.137380, "lng": -86.740998 },
-      { "lat": 36.136600, "lng": -86.741159 },
-      { "lat": 36.135647, "lng": -86.742232 },
-      { "lat": 36.136210, "lng": -86.744324 },
-      { "lat": 36.136860, "lng": -86.744646 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 36.136773, "lng": -86.744431 },
-      { "lat": 36.136860, "lng": -86.743841 },
-      { "lat": 36.136383, "lng": -86.743787 },
-      { "lat": 36.136253, "lng": -86.744378 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 36.13751,
+          "lng": -86.744324
+        },
+        {
+          "lat": 36.138073,
+          "lng": -86.743787
+        },
+        {
+          "lat": 36.13764,
+          "lng": -86.741105
+        },
+        {
+          "lat": 36.13738,
+          "lng": -86.740998
+        },
+        {
+          "lat": 36.1366,
+          "lng": -86.741159
+        },
+        {
+          "lat": 36.135647,
+          "lng": -86.742232
+        },
+        {
+          "lat": 36.13621,
+          "lng": -86.744324
+        },
+        {
+          "lat": 36.13686,
+          "lng": -86.744646
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 36.136773,
+          "lng": -86.744431
+        },
+        {
+          "lat": 36.13686,
+          "lng": -86.743841
+        },
+        {
+          "lat": 36.136383,
+          "lng": -86.743787
+        },
+        {
+          "lat": 36.136253,
+          "lng": -86.744378
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 36.136817, "lng": -86.743787 },
-        { "lat": 36.136730, "lng": -86.741373 },
-        { "lat": 36.135734, "lng": -86.742071 },
-        { "lat": 36.136210, "lng": -86.744163 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 36.136817,
+            "lng": -86.743787
+          },
+          {
+            "lat": 36.13673,
+            "lng": -86.741373
+          },
+          {
+            "lat": 36.135734,
+            "lng": -86.742071
+          },
+          {
+            "lat": 36.13621,
+            "lng": -86.744163
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 36.137033, "lng": -86.743841 },
-        { "lat": 36.136929, "lng": -86.741481 },
-        { "lat": 36.136773, "lng": -86.741427 },
-        { "lat": 36.136860, "lng": -86.743787 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 36.137033,
+            "lng": -86.743841
+          },
+          {
+            "lat": 36.136929,
+            "lng": -86.741481
+          },
+          {
+            "lat": 36.136773,
+            "lng": -86.741427
+          },
+          {
+            "lat": 36.13686,
+            "lng": -86.743787
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 99, "pano": "Yja1It9jk5M1KjnB3OVoXw", "hasCoverage": true },
-      "truckGate": { "heading": 285, "pano": "x1m2EKPQ-HezeIOfVwybXw", "hasCoverage": true }
+      "perimeter": {
+        "heading": 99,
+        "pano": "Yja1It9jk5M1KjnB3OVoXw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 285,
+        "pano": "x1m2EKPQ-HezeIOfVwybXw",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -52,18 +131,35 @@
   },
   "mapsUrl": "https://www.google.com/maps/@36.13690,-86.74270,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": false, "guardShack": false, "remoteGs": false,
-    "preGateStaging": false, "postGateStaging": false,
-    "drivewayLong": false, "drivewayShort": true, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": null, "exitLanes": null, "fastLaneOpportunity": false,
-    "dockDoors": "10-25", "dropArea": "0-10",
-    "shipRcvSeparate": false, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": false, "multiStep": false
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": null,
+    "exitLanes": null,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "0-10",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": false,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoors", "dropArea", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "dockDoors",
+    "dropArea",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Open paved apron meets the public road (Polk/Foster Ave frontage) with no barrier arm, swing/sliding gate, or checkpoint. Only orange traffic cones channel vehicles across the apron (2025-09 Street View). Uncontrolled access.",
     "guardShack": "No booth structure of any kind at the road frontage or anywhere on the apron; confirmed in Street View from multiple headings.",
@@ -78,5 +174,31 @@
     "siteAreaAcres": "15.3 acres derived from the traced perimeter polygon (building + south operational yard inside the property line bounded by the road SW and rail SE).",
     "facilityContext": "Confirmed as Kroger Fulfillment Network LLC, 1116 Polk Ave, Nashville TN 37210 (Ocado-linked grocery e-commerce / last-mile spoke). Per WARN notice the site is slated to permanently close 2026-02-01 (132 employees); audited from 2025-09 imagery while still operating."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.supplychaindive.com/news/kroger-canceling-charlotte-cfc-closing-nashville-spoke-ecommerce-ocado/807199/",
+        "date": "2025-12-10",
+        "type": "press",
+        "claim": "Kroger Fulfillment Network closed its Nashville spoke facility effective Feb 1 2026, laying off 132 workers (WARN notice)."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.nashvillepost.com/business/development/kroger-distribution-center-sells-for-23m/article_0814a875-e5cf-48fc-8bf8-74b8bae2ca2b.html",
+        "date": "2026-05-14",
+        "type": "press",
+        "claim": "The 1116/1124 Polk Ave South Nashville Kroger DC sold for $23M to Alterna IOS after closure; Kroger no longer occupies it."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "REJECTED: Kroger closed this Nashville facility Feb 1 2026 (132-worker WARN) and sold the building May 2026; Kroger no longer operates here.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

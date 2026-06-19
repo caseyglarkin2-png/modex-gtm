@@ -1,66 +1,198 @@
 {
   "name": "Kroger Great Lakes Grocery Distribution Center Delaware OH",
   "type": "Grocery Distribution Center",
-  "coords": { "lat": 40.28280, "lng": -83.02200 },
+  "coords": {
+    "lat": 40.2828,
+    "lng": -83.022
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 40.28710, "lng": -83.02470 },
-      { "lat": 40.28720, "lng": -83.02110 },
-      { "lat": 40.28630, "lng": -83.01985 },
-      { "lat": 40.28180, "lng": -83.01935 },
-      { "lat": 40.28000, "lng": -83.02050 },
-      { "lat": 40.28010, "lng": -83.02360 },
-      { "lat": 40.28300, "lng": -83.02490 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 40.28760, "lng": -83.02090 },
-      { "lat": 40.28760, "lng": -83.02045 },
-      { "lat": 40.28640, "lng": -83.02050 },
-      { "lat": 40.28640, "lng": -83.02095 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 40.2871,
+          "lng": -83.0247
+        },
+        {
+          "lat": 40.2872,
+          "lng": -83.0211
+        },
+        {
+          "lat": 40.2863,
+          "lng": -83.01985
+        },
+        {
+          "lat": 40.2818,
+          "lng": -83.01935
+        },
+        {
+          "lat": 40.28,
+          "lng": -83.0205
+        },
+        {
+          "lat": 40.2801,
+          "lng": -83.0236
+        },
+        {
+          "lat": 40.283,
+          "lng": -83.0249
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 40.2876,
+          "lng": -83.0209
+        },
+        {
+          "lat": 40.2876,
+          "lng": -83.02045
+        },
+        {
+          "lat": 40.2864,
+          "lng": -83.0205
+        },
+        {
+          "lat": 40.2864,
+          "lng": -83.02095
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 40.28680, "lng": -83.02180 },
-        { "lat": 40.28640, "lng": -83.02035 },
-        { "lat": 40.28560, "lng": -83.02055 },
-        { "lat": 40.28600, "lng": -83.02200 }
-      ] },
-      { "ring": [
-        { "lat": 40.28230, "lng": -83.01985 },
-        { "lat": 40.28235, "lng": -83.01945 },
-        { "lat": 40.28110, "lng": -83.01950 },
-        { "lat": 40.28110, "lng": -83.01990 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 40.2868,
+            "lng": -83.0218
+          },
+          {
+            "lat": 40.2864,
+            "lng": -83.02035
+          },
+          {
+            "lat": 40.2856,
+            "lng": -83.02055
+          },
+          {
+            "lat": 40.286,
+            "lng": -83.022
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.2823,
+            "lng": -83.01985
+          },
+          {
+            "lat": 40.28235,
+            "lng": -83.01945
+          },
+          {
+            "lat": 40.2811,
+            "lng": -83.0195
+          },
+          {
+            "lat": 40.2811,
+            "lng": -83.0199
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 40.28560, "lng": -83.02355 },
-        { "lat": 40.28560, "lng": -83.02300 },
-        { "lat": 40.28330, "lng": -83.02300 },
-        { "lat": 40.28330, "lng": -83.02355 }
-      ] },
-      { "ring": [
-        { "lat": 40.28080, "lng": -83.02360 },
-        { "lat": 40.28080, "lng": -83.02300 },
-        { "lat": 40.28020, "lng": -83.02300 },
-        { "lat": 40.28020, "lng": -83.02360 }
-      ] },
-      { "ring": [
-        { "lat": 40.28250, "lng": -83.02010 },
-        { "lat": 40.28250, "lng": -83.01975 },
-        { "lat": 40.28030, "lng": -83.01975 },
-        { "lat": 40.28030, "lng": -83.02010 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 40.2856,
+            "lng": -83.02355
+          },
+          {
+            "lat": 40.2856,
+            "lng": -83.023
+          },
+          {
+            "lat": 40.2833,
+            "lng": -83.023
+          },
+          {
+            "lat": 40.2833,
+            "lng": -83.02355
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.2808,
+            "lng": -83.0236
+          },
+          {
+            "lat": 40.2808,
+            "lng": -83.023
+          },
+          {
+            "lat": 40.2802,
+            "lng": -83.023
+          },
+          {
+            "lat": 40.2802,
+            "lng": -83.0236
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 40.2825,
+            "lng": -83.0201
+          },
+          {
+            "lat": 40.2825,
+            "lng": -83.01975
+          },
+          {
+            "lat": 40.2803,
+            "lng": -83.01975
+          },
+          {
+            "lat": 40.2803,
+            "lng": -83.0201
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 40.28680, "lng": -83.02360 },
-      { "lat": 40.28680, "lng": -83.02240 },
-      { "lat": 40.28620, "lng": -83.02240 },
-      { "lat": 40.28620, "lng": -83.02360 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 40.2868,
+          "lng": -83.0236
+        },
+        {
+          "lat": 40.2868,
+          "lng": -83.0224
+        },
+        {
+          "lat": 40.2862,
+          "lng": -83.0224
+        },
+        {
+          "lat": 40.2862,
+          "lng": -83.0236
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 56, "pano": "MfQPGujuc4uWOvUY5IGbBA", "hasCoverage": true },
-      "truckGate": { "heading": 185, "pano": "QTw3nP6ij-E3GnXCUCEf_w", "hasCoverage": true }
+      "perimeter": {
+        "heading": 56,
+        "pano": "MfQPGujuc4uWOvUY5IGbBA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 185,
+        "pano": "QTw3nP6ij-E3GnXCUCEf_w",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -69,7 +201,7 @@
     "trailerParkingCapacity": 320,
     "truckGateCount": 1,
     "buildingCount": 2,
-    "siteAreaAcres": 95.0,
+    "siteAreaAcres": 95,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@40.28280,-83.02200,400m/data=!3m1!1e3",
@@ -98,7 +230,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["scale", "connectivityIssue", "exitLanes"],
+  "uncertainFields": [
+    "scale",
+    "connectivityIssue",
+    "exitLanes"
+  ],
   "fieldNotes": {
     "truckGate": "Single controlled main entrance on the north side off Nutter Farm Ln. Street View (2026-04) down the drive shows channelized lanes with a row of traffic bollards across the approach, a divided in/out median, and trucks queued single-file in the inbound lane on z20 satellite.",
     "guardShack": "Small tan booth structure beside the entry lanes visible in Street View (pano QTw3nP6ij-E3GnXCUCEf_w) just past the GREAT LAKES DISTRIBUTION monument sign, with light poles and a checkpoint canopy. Footprint ~1-2 vehicles.",
@@ -118,5 +254,24 @@
     "railServed": "A rail line runs along the SW property boundary/right-of-way but does not spur into the buildings or docks; no rail-served docks observed.",
     "siteAreaAcres": "Approximate from the operational/paved footprint perimeter; the owned parcel including buffer farmland and retention ponds is larger."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://krogerdc.com/",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Kroger Great Lakes Distribution Center recruiting site lists facility at 2000 Nutter Farms Lane, Delaware OH 43015, actively hiring Warehouse Order Selectors."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Kroger careers site confirms active Great Lakes DC at exact address; no closure/divestiture for this site.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

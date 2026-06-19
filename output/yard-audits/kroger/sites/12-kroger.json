@@ -1,42 +1,115 @@
 {
   "name": "Kroger Customer Fulfillment Center Monroe OH",
   "type": "Customer Fulfillment Center (Ocado-automated)",
-  "coords": { "lat": 39.44755, "lng": -84.40615 },
+  "coords": {
+    "lat": 39.44755,
+    "lng": -84.40615
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 39.44946, "lng": -84.40776 },
-      { "lat": 39.44951, "lng": -84.40508 },
-      { "lat": 39.44855, "lng": -84.40433 },
-      { "lat": 39.44615, "lng": -84.40379 },
-      { "lat": 39.44581, "lng": -84.40433 },
-      { "lat": 39.44588, "lng": -84.40776 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 39.44572, "lng": -84.40460 },
-      { "lat": 39.44572, "lng": -84.40415 },
-      { "lat": 39.44598, "lng": -84.40418 },
-      { "lat": 39.44598, "lng": -84.40463 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.44946,
+          "lng": -84.40776
+        },
+        {
+          "lat": 39.44951,
+          "lng": -84.40508
+        },
+        {
+          "lat": 39.44855,
+          "lng": -84.40433
+        },
+        {
+          "lat": 39.44615,
+          "lng": -84.40379
+        },
+        {
+          "lat": 39.44581,
+          "lng": -84.40433
+        },
+        {
+          "lat": 39.44588,
+          "lng": -84.40776
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.44572,
+          "lng": -84.4046
+        },
+        {
+          "lat": 39.44572,
+          "lng": -84.40415
+        },
+        {
+          "lat": 39.44598,
+          "lng": -84.40418
+        },
+        {
+          "lat": 39.44598,
+          "lng": -84.40463
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 39.44892, "lng": -84.40478 },
-        { "lat": 39.44905, "lng": -84.40455 },
-        { "lat": 39.44758, "lng": -84.40408 },
-        { "lat": 39.44745, "lng": -84.40431 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 39.44892,
+            "lng": -84.40478
+          },
+          {
+            "lat": 39.44905,
+            "lng": -84.40455
+          },
+          {
+            "lat": 39.44758,
+            "lng": -84.40408
+          },
+          {
+            "lat": 39.44745,
+            "lng": -84.40431
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 39.44910, "lng": -84.40512 },
-        { "lat": 39.44918, "lng": -84.40498 },
-        { "lat": 39.44742, "lng": -84.40448 },
-        { "lat": 39.44734, "lng": -84.40462 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 39.4491,
+            "lng": -84.40512
+          },
+          {
+            "lat": 39.44918,
+            "lng": -84.40498
+          },
+          {
+            "lat": 39.44742,
+            "lng": -84.40448
+          },
+          {
+            "lat": 39.44734,
+            "lng": -84.40462
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 323, "pano": "jt3VnFFgOWXHsxAO-zZg2w", "hasCoverage": true },
-      "truckGate": { "heading": 0, "pano": "BrJGvc6qhrNY6H6je0-_nw", "hasCoverage": true }
+      "perimeter": {
+        "heading": 323,
+        "pano": "jt3VnFFgOWXHsxAO-zZg2w",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 0,
+        "pano": "BrJGvc6qhrNY6H6je0-_nw",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -45,7 +118,7 @@
     "trailerParkingCapacity": 30,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 41.0,
+    "siteAreaAcres": 41,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@39.44755,-84.40615,400m/data=!3m1!1e3",
@@ -74,7 +147,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "remoteGs"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "remoteGs"
+  ],
   "fieldNotes": {
     "truckGate": "Open divided-boulevard entrance off Hamilton Lebanon Rd with a landscaped median and monument sign; no barrier arm, sliding/swing gate, or pinch-point checkpoint at the property line in 2025-07 Street View or 2026 Maxar satellite. Property is ringed by a continuous white perimeter wall/fence and internal one-way painted lane circulation, but the entry itself is uncontrolled.",
     "guardShack": "No staffed guard booth at the truck entrance. The small white ancillary building inside the SE yard is a maintenance/utility structure beside a fenced screened equipment enclosure (refrigeration/generator/solar grid), not a multi-window guard booth set beside a gate.",
@@ -90,5 +167,31 @@
     "railServed": "No rail spur enters the property.",
     "siteAreaAcres": "Derived from the traced perimeter polygon (~41 acres of the ~68-acre parcel that is fenced/developed)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.grocerydive.com/news/kroger-canceling-charlotte-cfc-closing-nashville-spoke-ecommerce-ocado/807167/",
+        "date": "2025-12-05",
+        "type": "press",
+        "claim": "Kroger and Ocado to keep operating CFCs in Ohio; Monroe (flagship OH CFC) not among the closures."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.glassdoor.com/Job/monroe-kroger-fulfillment-center-jobs-SRCH_IL.0,6_IC1145733_KO7,32.htm",
+        "date": "2026-03",
+        "type": "careers",
+        "claim": "Active Kroger CFC jobs at 6266 Hamilton Lebanon Rd, Monroe OH; facility actively hiring."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Flagship OH CFC explicitly named among RETAINED sites in Dec 2025 pullback; actively hiring 2026.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

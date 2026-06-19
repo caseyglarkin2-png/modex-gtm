@@ -1,67 +1,202 @@
 {
   "name": "Fry's Southwest Grocery Distribution Center Tolleson AZ",
   "type": "Grocery Distribution Center",
-  "coords": { "lat": 33.4404, "lng": -112.2775 },
+  "coords": {
+    "lat": 33.4404,
+    "lng": -112.2775
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 33.442844, "lng": -112.280762 },
-      { "lat": 33.44288, "lng": -112.277929 },
-      { "lat": 33.442522, "lng": -112.274453 },
-      { "lat": 33.440158, "lng": -112.273316 },
-      { "lat": 33.438761, "lng": -112.273316 },
-      { "lat": 33.438332, "lng": -112.27514 },
-      { "lat": 33.438332, "lng": -112.281963 },
-      { "lat": 33.440158, "lng": -112.282049 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 33.439836, "lng": -112.275354 },
-      { "lat": 33.439836, "lng": -112.273208 },
-      { "lat": 33.439352, "lng": -112.273208 },
-      { "lat": 33.439352, "lng": -112.275354 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 33.442844,
+          "lng": -112.280762
+        },
+        {
+          "lat": 33.44288,
+          "lng": -112.277929
+        },
+        {
+          "lat": 33.442522,
+          "lng": -112.274453
+        },
+        {
+          "lat": 33.440158,
+          "lng": -112.273316
+        },
+        {
+          "lat": 33.438761,
+          "lng": -112.273316
+        },
+        {
+          "lat": 33.438332,
+          "lng": -112.27514
+        },
+        {
+          "lat": 33.438332,
+          "lng": -112.281963
+        },
+        {
+          "lat": 33.440158,
+          "lng": -112.282049
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 33.439836,
+          "lng": -112.275354
+        },
+        {
+          "lat": 33.439836,
+          "lng": -112.273208
+        },
+        {
+          "lat": 33.439352,
+          "lng": -112.273208
+        },
+        {
+          "lat": 33.439352,
+          "lng": -112.275354
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 33.442522, "lng": -112.280762 },
-        { "lat": 33.441859, "lng": -112.279324 },
-        { "lat": 33.440158, "lng": -112.280547 },
-        { "lat": 33.440785, "lng": -112.281963 }
-      ] },
-      { "ring": [
-        { "lat": 33.44048, "lng": -112.279968 },
-        { "lat": 33.44048, "lng": -112.274668 },
-        { "lat": 33.439621, "lng": -112.274668 },
-        { "lat": 33.439621, "lng": -112.279968 }
-      ] },
-      { "ring": [
-        { "lat": 33.439173, "lng": -112.281899 },
-        { "lat": 33.439173, "lng": -112.277285 },
-        { "lat": 33.438368, "lng": -112.277285 },
-        { "lat": 33.438368, "lng": -112.281899 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.442522,
+            "lng": -112.280762
+          },
+          {
+            "lat": 33.441859,
+            "lng": -112.279324
+          },
+          {
+            "lat": 33.440158,
+            "lng": -112.280547
+          },
+          {
+            "lat": 33.440785,
+            "lng": -112.281963
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.44048,
+            "lng": -112.279968
+          },
+          {
+            "lat": 33.44048,
+            "lng": -112.274668
+          },
+          {
+            "lat": 33.439621,
+            "lng": -112.274668
+          },
+          {
+            "lat": 33.439621,
+            "lng": -112.279968
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.439173,
+            "lng": -112.281899
+          },
+          {
+            "lat": 33.439173,
+            "lng": -112.277285
+          },
+          {
+            "lat": 33.438368,
+            "lng": -112.277285
+          },
+          {
+            "lat": 33.438368,
+            "lng": -112.281899
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 33.441053, "lng": -112.279968 },
-        { "lat": 33.441053, "lng": -112.274496 },
-        { "lat": 33.440659, "lng": -112.274496 },
-        { "lat": 33.440659, "lng": -112.279968 }
-      ] },
-      { "ring": [
-        { "lat": 33.439621, "lng": -112.277285 },
-        { "lat": 33.439621, "lng": -112.274281 },
-        { "lat": 33.439173, "lng": -112.274281 },
-        { "lat": 33.439173, "lng": -112.277285 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 33.441053,
+            "lng": -112.279968
+          },
+          {
+            "lat": 33.441053,
+            "lng": -112.274496
+          },
+          {
+            "lat": 33.440659,
+            "lng": -112.274496
+          },
+          {
+            "lat": 33.440659,
+            "lng": -112.279968
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 33.439621,
+            "lng": -112.277285
+          },
+          {
+            "lat": 33.439621,
+            "lng": -112.274281
+          },
+          {
+            "lat": 33.439173,
+            "lng": -112.274281
+          },
+          {
+            "lat": 33.439173,
+            "lng": -112.277285
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 33.439979, "lng": -112.277071 },
-      { "lat": 33.440015, "lng": -112.273208 },
-      { "lat": 33.4398, "lng": -112.273208 },
-      { "lat": 33.439764, "lng": -112.277071 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 33.439979,
+          "lng": -112.277071
+        },
+        {
+          "lat": 33.440015,
+          "lng": -112.273208
+        },
+        {
+          "lat": 33.4398,
+          "lng": -112.273208
+        },
+        {
+          "lat": 33.439764,
+          "lng": -112.277071
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 233, "pano": "2cO7FVRHY92ATrhH2ebJ5g", "hasCoverage": true },
-      "truckGate": { "heading": 271, "pano": "mYDLsIpXZXt9UVLVM2C_eQ", "hasCoverage": true }
+      "perimeter": {
+        "heading": 233,
+        "pano": "2cO7FVRHY92ATrhH2ebJ5g",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 271,
+        "pano": "mYDLsIpXZXt9UVLVM2C_eQ",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -99,7 +234,12 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "shipRcvSeparate"],
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "trailerParkingCapacity",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Single controlled truck entrance off S 99th Ave at the SE corner; long private two-lane drive (median planter strip) leads to a checkpoint.",
     "guardShack": "Small white guard booth with a dark canopy roof on a yellow-curbed island that splits the inbound/outbound lanes mid-drive (33.43795,-112.2739, z21 satellite); ~1-vehicle footprint, staffed-booth form factor.",
@@ -113,5 +253,31 @@
     "urbanRural": "Edge-of-town Tolleson industrial area on the Phoenix metro fringe; open farm fields border the entrance drive and the south/west sides. Per rubric tie-break, classified Rural.",
     "connectivityIssue": "Metro-fringe with dense industrial neighbors and a major arterial (99th Ave); cellular coverage likely fine, so false."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.thekrogerco.com/vendor-suppliers/logistics/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Kroger corporate logistics page lists Frys DC at 500 South 99th Avenue, Tolleson AZ 85353; appointment email routes to Windigo US (3PL), indicating Kroger-owned Frys DC run by a 3PL."
+      },
+      {
+        "tier": 1,
+        "url": "https://www.12news.com/article/money/business/frys-truck-drivers-kroger-contract-tolleson-jobs/75-c7e70b12-47b0-45a8-9b04-f6018d7f4f19",
+        "date": "2025",
+        "type": "press",
+        "claim": "Kroger ended its Ruan transportation contract (ops stopping Aug 27 2025) and signed an LOI for CSI Retail Services to run the Tolleson DC; facility keeps stocking every Frys store in Arizona."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Kroger/Frys still operate the Tolleson DC (per Kroger logistics page) but via 3PL operators; operating, not closed.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

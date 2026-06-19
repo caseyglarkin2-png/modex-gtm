@@ -1,53 +1,154 @@
 {
   "name": "Kroger Grocery Distribution Center Keller TX",
   "type": "Grocery Distribution Center",
-  "coords": { "lat": 32.91320, "lng": -97.26340 },
+  "coords": {
+    "lat": 32.9132,
+    "lng": -97.2634
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 32.91585, "lng": -97.26830 },
-      { "lat": 32.91560, "lng": -97.25880 },
-      { "lat": 32.91240, "lng": -97.25880 },
-      { "lat": 32.91200, "lng": -97.26230 },
-      { "lat": 32.91120, "lng": -97.26560 },
-      { "lat": 32.91120, "lng": -97.26830 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 32.91230, "lng": -97.26645 },
-      { "lat": 32.91230, "lng": -97.26565 },
-      { "lat": 32.91150, "lng": -97.26565 },
-      { "lat": 32.91150, "lng": -97.26645 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 32.91585,
+          "lng": -97.2683
+        },
+        {
+          "lat": 32.9156,
+          "lng": -97.2588
+        },
+        {
+          "lat": 32.9124,
+          "lng": -97.2588
+        },
+        {
+          "lat": 32.912,
+          "lng": -97.2623
+        },
+        {
+          "lat": 32.9112,
+          "lng": -97.2656
+        },
+        {
+          "lat": 32.9112,
+          "lng": -97.2683
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 32.9123,
+          "lng": -97.26645
+        },
+        {
+          "lat": 32.9123,
+          "lng": -97.26565
+        },
+        {
+          "lat": 32.9115,
+          "lng": -97.26565
+        },
+        {
+          "lat": 32.9115,
+          "lng": -97.26645
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 32.91580, "lng": -97.26825 },
-        { "lat": 32.91560, "lng": -97.26430 },
-        { "lat": 32.91240, "lng": -97.26430 },
-        { "lat": 32.91240, "lng": -97.26825 }
-      ] },
-      { "ring": [
-        { "lat": 32.91230, "lng": -97.26825 },
-        { "lat": 32.91230, "lng": -97.26680 },
-        { "lat": 32.91130, "lng": -97.26680 },
-        { "lat": 32.91130, "lng": -97.26825 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 32.9158,
+            "lng": -97.26825
+          },
+          {
+            "lat": 32.9156,
+            "lng": -97.2643
+          },
+          {
+            "lat": 32.9124,
+            "lng": -97.2643
+          },
+          {
+            "lat": 32.9124,
+            "lng": -97.26825
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 32.9123,
+            "lng": -97.26825
+          },
+          {
+            "lat": 32.9123,
+            "lng": -97.2668
+          },
+          {
+            "lat": 32.9113,
+            "lng": -97.2668
+          },
+          {
+            "lat": 32.9113,
+            "lng": -97.26825
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 32.91262, "lng": -97.26560 },
-        { "lat": 32.91258, "lng": -97.26010 },
-        { "lat": 32.91230, "lng": -97.26010 },
-        { "lat": 32.91234, "lng": -97.26560 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 32.91262,
+            "lng": -97.2656
+          },
+          {
+            "lat": 32.91258,
+            "lng": -97.2601
+          },
+          {
+            "lat": 32.9123,
+            "lng": -97.2601
+          },
+          {
+            "lat": 32.91234,
+            "lng": -97.2656
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 32.91240, "lng": -97.26690 },
-      { "lat": 32.91240, "lng": -97.26560 },
-      { "lat": 32.91140, "lng": -97.26560 },
-      { "lat": 32.91140, "lng": -97.26690 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 32.9124,
+          "lng": -97.2669
+        },
+        {
+          "lat": 32.9124,
+          "lng": -97.2656
+        },
+        {
+          "lat": 32.9114,
+          "lng": -97.2656
+        },
+        {
+          "lat": 32.9114,
+          "lng": -97.2669
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 0, "pano": "Kcq5JcP7UF86HrSZkcOoSA", "hasCoverage": true },
-      "truckGate": { "heading": 26, "pano": "rDgwO4hHMhRZ7I5EtCZXDg", "hasCoverage": true }
+      "perimeter": {
+        "heading": 0,
+        "pano": "Kcq5JcP7UF86HrSZkcOoSA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 26,
+        "pano": "rDgwO4hHMhRZ7I5EtCZXDg",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -61,18 +162,37 @@
   },
   "mapsUrl": "https://www.google.com/maps/@32.91320,-97.26340,400m/data=!3m1!1e3",
   "classification": {
-    "truckGate": true, "guardShack": true, "remoteGs": false,
-    "preGateStaging": true, "postGateStaging": true,
-    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
-    "entryExitTogether": true, "entryExitSeparate": false,
-    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
-    "dockDoors": "50+", "dropArea": "50+",
-    "shipRcvSeparate": true, "urbanRural": "Urban",
-    "connectivityIssue": false, "multipleFacilities": false,
-    "scale": false, "dropYard": true, "multiStep": false
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["shipRcvSeparate", "entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity"],
+  "uncertainFields": [
+    "shipRcvSeparate",
+    "entryLanes",
+    "exitLanes",
+    "dockDoorCount",
+    "trailerParkingCapacity"
+  ],
   "fieldNotes": {
     "truckGate": "Staffed check-in guardhouse with drive-through canopy sits ~150m inside the entrance off Kroger Dr, controlling the truck lanes (confirmed in Street View 2024-12 and z20 satellite). Entrance from the public arterial is open but all trucks funnel through the guardhouse checkpoint.",
     "guardShack": "Tan canopy-roofed booth in the median between inbound/outbound truck lanes at ~32.9119,-97.2661; multi-side windows, ~1-2 vehicle footprint, drive-through canopy. Clearly a staffed guard/check-in shack, not the main office.",
@@ -86,5 +206,24 @@
     "railServed": "No rail spur visible entering the property.",
     "siteAreaAcres": "Derived from the perimeter polygon (~98 acres), traced inside the fence/buffer lines."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.thekrogerco.com/vendor-suppliers/logistics/",
+        "date": "2026-06",
+        "type": "press",
+        "claim": "Kroger corporate logistics page lists Keller | Dallas 5801 Kroger Drive, Keller TX 76248 as an active Kroger distribution center (Dallas division)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Kroger corporate logistics page lists Keller TX DC as active; 2025-26 closures were FL/WI/MD fulfillment centers, not this DC.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

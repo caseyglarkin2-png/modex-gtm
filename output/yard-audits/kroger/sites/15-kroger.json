@@ -1,56 +1,166 @@
 {
   "name": "Kroger Customer Fulfillment Center Aurora CO",
   "type": "Customer Fulfillment Center (Ocado-automated)",
-  "coords": { "lat": 39.80755, "lng": -104.69228 },
+  "coords": {
+    "lat": 39.80755,
+    "lng": -104.69228
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 39.809363, "lng": -104.693475 },
-      { "lat": 39.809231, "lng": -104.691415 },
-      { "lat": 39.808396, "lng": -104.690385 },
-      { "lat": 39.806550, "lng": -104.690385 },
-      { "lat": 39.805846, "lng": -104.691243 },
-      { "lat": 39.805846, "lng": -104.693932 },
-      { "lat": 39.806550, "lng": -104.694161 },
-      { "lat": 39.808132, "lng": -104.694161 },
-      { "lat": 39.808923, "lng": -104.693475 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 39.805651, "lng": -104.691929 },
-      { "lat": 39.805651, "lng": -104.691500 },
-      { "lat": 39.806486, "lng": -104.691500 },
-      { "lat": 39.806486, "lng": -104.691929 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 39.809363,
+          "lng": -104.693475
+        },
+        {
+          "lat": 39.809231,
+          "lng": -104.691415
+        },
+        {
+          "lat": 39.808396,
+          "lng": -104.690385
+        },
+        {
+          "lat": 39.80655,
+          "lng": -104.690385
+        },
+        {
+          "lat": 39.805846,
+          "lng": -104.691243
+        },
+        {
+          "lat": 39.805846,
+          "lng": -104.693932
+        },
+        {
+          "lat": 39.80655,
+          "lng": -104.694161
+        },
+        {
+          "lat": 39.808132,
+          "lng": -104.694161
+        },
+        {
+          "lat": 39.808923,
+          "lng": -104.693475
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 39.805651,
+          "lng": -104.691929
+        },
+        {
+          "lat": 39.805651,
+          "lng": -104.6915
+        },
+        {
+          "lat": 39.806486,
+          "lng": -104.6915
+        },
+        {
+          "lat": 39.806486,
+          "lng": -104.691929
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 39.807918, "lng": -104.694143 },
-        { "lat": 39.807918, "lng": -104.693514 },
-        { "lat": 39.807280, "lng": -104.693457 },
-        { "lat": 39.807280, "lng": -104.694086 }
-      ] },
-      { "ring": [
-        { "lat": 39.809363, "lng": -104.693475 },
-        { "lat": 39.809231, "lng": -104.691415 },
-        { "lat": 39.809055, "lng": -104.691415 },
-        { "lat": 39.809187, "lng": -104.693475 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 39.807918,
+            "lng": -104.694143
+          },
+          {
+            "lat": 39.807918,
+            "lng": -104.693514
+          },
+          {
+            "lat": 39.80728,
+            "lng": -104.693457
+          },
+          {
+            "lat": 39.80728,
+            "lng": -104.694086
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 39.809363,
+            "lng": -104.693475
+          },
+          {
+            "lat": 39.809231,
+            "lng": -104.691415
+          },
+          {
+            "lat": 39.809055,
+            "lng": -104.691415
+          },
+          {
+            "lat": 39.809187,
+            "lng": -104.693475
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 39.808093, "lng": -104.693314 },
-        { "lat": 39.808093, "lng": -104.693171 },
-        { "lat": 39.806929, "lng": -104.693171 },
-        { "lat": 39.806929, "lng": -104.693314 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 39.808093,
+            "lng": -104.693314
+          },
+          {
+            "lat": 39.808093,
+            "lng": -104.693171
+          },
+          {
+            "lat": 39.806929,
+            "lng": -104.693171
+          },
+          {
+            "lat": 39.806929,
+            "lng": -104.693314
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 39.806486, "lng": -104.691872 },
-      { "lat": 39.806486, "lng": -104.691529 },
-      { "lat": 39.806859, "lng": -104.691529 },
-      { "lat": 39.806859, "lng": -104.691872 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 39.806486,
+          "lng": -104.691872
+        },
+        {
+          "lat": 39.806486,
+          "lng": -104.691529
+        },
+        {
+          "lat": 39.806859,
+          "lng": -104.691529
+        },
+        {
+          "lat": 39.806859,
+          "lng": -104.691872
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
-      "truckGate": { "heading": 0, "pano": "", "hasCoverage": false }
+      "perimeter": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "truckGate": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      }
     }
   },
   "yardMetrics": {
@@ -88,7 +198,11 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["dockDoors", "guardShack", "connectivityIssue"],
+  "uncertainFields": [
+    "dockDoors",
+    "guardShack",
+    "connectivityIssue"
+  ],
   "fieldNotes": {
     "truckGate": "Single access driveway off N Jackson Gap Way. z20 curb-cut imagery shows an open, wide entry with landscaped islands and turn-lane markings, but NO barrier arm, sliding gate, or checkpoint pinch-point at the public road. Classified as open entry (false).",
     "guardShack": "No small staffed booth straddling the truck lane at the entrance. Structures near the operations yard (39.8066/-104.6936 area and the bottom-center white building) are ancillary/maintenance/utility buildings, not an entrance guard booth. Marked uncertain because a modern Ocado CFC likely has access-controlled internal gates not resolvable from overhead.",
@@ -103,5 +217,31 @@
     "streetViewMeta": "Nearest Street View panos on N Jackson Gap Way are dated 2016-11 (gate area, ~170m E) and 2020-11 (perimeter, ~140m E) — both PREDATE the 2023 CFC construction and show empty prairie, not the facility. hasCoverage set false because no pano depicts the built yard; never invented a pano. Gate/perimeter determinations rely on Maxar satellite (z18-z21).",
     "railServed": "No rail spur enters the property; nearest rail is unrelated."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.grocerydive.com/news/kroger-canceling-charlotte-cfc-closing-nashville-spoke-ecommerce-ocado/807167/",
+        "date": "2025-12-05",
+        "type": "press",
+        "claim": "Colorado CFC is among the CFCs Kroger and Ocado plan to keep operating."
+      },
+      {
+        "tier": 1,
+        "url": "https://ir.kroger.com/news/news-details/2023/Kroger-Delivery-Arrives-in-Denver-Metro-Area/default.aspx",
+        "date": "2023-03",
+        "type": "press",
+        "claim": "Kroger 300k sqft CFC at 6125 N. Jackson Gap Way, Aurora CO serving Denver metro."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Aurora/Denver CO CFC named among RETAINED sites in Dec 2025 pullback; active openings.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

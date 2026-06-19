@@ -1,49 +1,139 @@
 {
   "name": "Fred Meyer Grocery Distribution Center Puyallup WA",
   "type": "Grocery Distribution Center",
-  "coords": { "lat": 47.20985, "lng": -122.29855 },
+  "coords": {
+    "lat": 47.20985,
+    "lng": -122.29855
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 47.21175, "lng": -122.30130 },
-      { "lat": 47.21185, "lng": -122.29700 },
-      { "lat": 47.21010, "lng": -122.29560 },
-      { "lat": 47.20840, "lng": -122.29615 },
-      { "lat": 47.20810, "lng": -122.29870 },
-      { "lat": 47.20905, "lng": -122.30015 },
-      { "lat": 47.21010, "lng": -122.30120 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 47.20905, "lng": -122.29940 },
-      { "lat": 47.20905, "lng": -122.29855 },
-      { "lat": 47.20855, "lng": -122.29855 },
-      { "lat": 47.20855, "lng": -122.29940 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 47.21175,
+          "lng": -122.3013
+        },
+        {
+          "lat": 47.21185,
+          "lng": -122.297
+        },
+        {
+          "lat": 47.2101,
+          "lng": -122.2956
+        },
+        {
+          "lat": 47.2084,
+          "lng": -122.29615
+        },
+        {
+          "lat": 47.2081,
+          "lng": -122.2987
+        },
+        {
+          "lat": 47.20905,
+          "lng": -122.30015
+        },
+        {
+          "lat": 47.2101,
+          "lng": -122.3012
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 47.20905,
+          "lng": -122.2994
+        },
+        {
+          "lat": 47.20905,
+          "lng": -122.29855
+        },
+        {
+          "lat": 47.20855,
+          "lng": -122.29855
+        },
+        {
+          "lat": 47.20855,
+          "lng": -122.2994
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 47.21010, "lng": -122.30010 },
-        { "lat": 47.21015, "lng": -122.29680 },
-        { "lat": 47.20890, "lng": -122.29655 },
-        { "lat": 47.20890, "lng": -122.30000 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 47.2101,
+            "lng": -122.3001
+          },
+          {
+            "lat": 47.21015,
+            "lng": -122.2968
+          },
+          {
+            "lat": 47.2089,
+            "lng": -122.29655
+          },
+          {
+            "lat": 47.2089,
+            "lng": -122.3
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 47.21035, "lng": -122.30095 },
-        { "lat": 47.21048, "lng": -122.29615 },
-        { "lat": 47.21018, "lng": -122.29610 },
-        { "lat": 47.21005, "lng": -122.30090 }
-      ] },
-      { "ring": [
-        { "lat": 47.20985, "lng": -122.29630 },
-        { "lat": 47.20865, "lng": -122.29615 },
-        { "lat": 47.20860, "lng": -122.29655 },
-        { "lat": 47.20980, "lng": -122.29670 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 47.21035,
+            "lng": -122.30095
+          },
+          {
+            "lat": 47.21048,
+            "lng": -122.29615
+          },
+          {
+            "lat": 47.21018,
+            "lng": -122.2961
+          },
+          {
+            "lat": 47.21005,
+            "lng": -122.3009
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 47.20985,
+            "lng": -122.2963
+          },
+          {
+            "lat": 47.20865,
+            "lng": -122.29615
+          },
+          {
+            "lat": 47.2086,
+            "lng": -122.29655
+          },
+          {
+            "lat": 47.2098,
+            "lng": -122.2967
+          }
+        ]
+      }
     ],
     "staging": null,
     "streetViewMeta": {
-      "perimeter": { "heading": 26, "pano": "", "hasCoverage": true },
-      "truckGate": { "heading": 36, "pano": "", "hasCoverage": true }
+      "perimeter": {
+        "heading": 26,
+        "pano": "",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 36,
+        "pano": "",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -81,7 +171,14 @@
     "multiStep": false
   },
   "confidence": "medium",
-  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "shipRcvSeparate", "multiStep"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "entryLanes",
+    "exitLanes",
+    "shipRcvSeparate",
+    "multiStep"
+  ],
   "fieldNotes": {
     "truckGate": "Single controlled truck entrance off the SW signalized intersection on Valley Ave NW; the drop yard is fully fenced off from the public road and adjacent car lots by a landscaped buffer, and a yard-jockey/spotter truck is visible working the drop yard (controlled operation).",
     "guardShack": "No guard booth positively visible from satellite or Street View; the check-in point is set back from the public road behind a tree/landscape buffer so it cannot be confirmed from available imagery. Marked false on visible evidence and flagged for review.",
@@ -98,5 +195,24 @@
     "entryLanes": "Estimated 1 inbound from the entrance geometry; not separately countable from imagery.",
     "exitLanes": "Estimated 1 outbound; entry and exit share the same gate point."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.thekrogerco.com/vendor-suppliers/logistics/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Kroger corporate logistics page lists Fred Meyer DC at 349 Valley Avenue, Puyallup WA 98371 with active kroger.com appointment scheduling."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Kroger logistics page lists Puyallup Fred Meyer DC by exact address; 2025 closures hit Puget Sound retail stores, not this DC.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

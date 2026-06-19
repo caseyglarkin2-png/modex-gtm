@@ -1,59 +1,174 @@
 {
   "name": "Kroger Customer Fulfillment Center Pleasant Prairie WI",
   "type": "Customer Fulfillment Center (Ocado-automated)",
-  "coords": { "lat": 42.54320, "lng": -87.91120 },
+  "coords": {
+    "lat": 42.5432,
+    "lng": -87.9112
+  },
   "geofences": {
-    "perimeter": { "ring": [
-      { "lat": 42.54440, "lng": -87.91340 },
-      { "lat": 42.54465, "lng": -87.91005 },
-      { "lat": 42.54350, "lng": -87.90940 },
-      { "lat": 42.54190, "lng": -87.91000 },
-      { "lat": 42.54130, "lng": -87.91120 },
-      { "lat": 42.54180, "lng": -87.91335 }
-    ] },
-    "truckGate": { "ring": [
-      { "lat": 42.54312, "lng": -87.91320 },
-      { "lat": 42.54308, "lng": -87.91290 },
-      { "lat": 42.54288, "lng": -87.91298 },
-      { "lat": 42.54292, "lng": -87.91328 }
-    ] },
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 42.5444,
+          "lng": -87.9134
+        },
+        {
+          "lat": 42.54465,
+          "lng": -87.91005
+        },
+        {
+          "lat": 42.5435,
+          "lng": -87.9094
+        },
+        {
+          "lat": 42.5419,
+          "lng": -87.91
+        },
+        {
+          "lat": 42.5413,
+          "lng": -87.9112
+        },
+        {
+          "lat": 42.5418,
+          "lng": -87.91335
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 42.54312,
+          "lng": -87.9132
+        },
+        {
+          "lat": 42.54308,
+          "lng": -87.9129
+        },
+        {
+          "lat": 42.54288,
+          "lng": -87.91298
+        },
+        {
+          "lat": 42.54292,
+          "lng": -87.91328
+        }
+      ]
+    },
     "dropYards": [
-      { "ring": [
-        { "lat": 42.54430, "lng": -87.91300 },
-        { "lat": 42.54448, "lng": -87.91135 },
-        { "lat": 42.54400, "lng": -87.91120 },
-        { "lat": 42.54382, "lng": -87.91285 }
-      ] },
-      { "ring": [
-        { "lat": 42.54370, "lng": -87.90985 },
-        { "lat": 42.54420, "lng": -87.90960 },
-        { "lat": 42.54300, "lng": -87.90945 },
-        { "lat": 42.54255, "lng": -87.90970 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 42.5443,
+            "lng": -87.913
+          },
+          {
+            "lat": 42.54448,
+            "lng": -87.91135
+          },
+          {
+            "lat": 42.544,
+            "lng": -87.9112
+          },
+          {
+            "lat": 42.54382,
+            "lng": -87.91285
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 42.5437,
+            "lng": -87.90985
+          },
+          {
+            "lat": 42.5442,
+            "lng": -87.9096
+          },
+          {
+            "lat": 42.543,
+            "lng": -87.90945
+          },
+          {
+            "lat": 42.54255,
+            "lng": -87.9097
+          }
+        ]
+      }
     ],
     "dockAprons": [
-      { "ring": [
-        { "lat": 42.54400, "lng": -87.91005 },
-        { "lat": 42.54430, "lng": -87.90985 },
-        { "lat": 42.54300, "lng": -87.90880 },
-        { "lat": 42.54275, "lng": -87.90905 }
-      ] },
-      { "ring": [
-        { "lat": 42.54330, "lng": -87.91250 },
-        { "lat": 42.54355, "lng": -87.91230 },
-        { "lat": 42.54250, "lng": -87.91140 },
-        { "lat": 42.54228, "lng": -87.91165 }
-      ] }
+      {
+        "ring": [
+          {
+            "lat": 42.544,
+            "lng": -87.91005
+          },
+          {
+            "lat": 42.5443,
+            "lng": -87.90985
+          },
+          {
+            "lat": 42.543,
+            "lng": -87.9088
+          },
+          {
+            "lat": 42.54275,
+            "lng": -87.90905
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 42.5433,
+            "lng": -87.9125
+          },
+          {
+            "lat": 42.54355,
+            "lng": -87.9123
+          },
+          {
+            "lat": 42.5425,
+            "lng": -87.9114
+          },
+          {
+            "lat": 42.54228,
+            "lng": -87.91165
+          }
+        ]
+      }
     ],
-    "staging": { "ring": [
-      { "lat": 42.54300, "lng": -87.91255 },
-      { "lat": 42.54292, "lng": -87.91200 },
-      { "lat": 42.54262, "lng": -87.91215 },
-      { "lat": 42.54270, "lng": -87.91270 }
-    ] },
+    "staging": {
+      "ring": [
+        {
+          "lat": 42.543,
+          "lng": -87.91255
+        },
+        {
+          "lat": 42.54292,
+          "lng": -87.912
+        },
+        {
+          "lat": 42.54262,
+          "lng": -87.91215
+        },
+        {
+          "lat": 42.5427,
+          "lng": -87.9127
+        }
+      ]
+    },
     "streetViewMeta": {
-      "perimeter": { "heading": 81, "pano": "4lBrj3cqf4vydod_hPEw3Q", "hasCoverage": true },
-      "truckGate": { "heading": 73, "pano": "4lBrj3cqf4vydod_hPEw3Q", "hasCoverage": true }
+      "perimeter": {
+        "heading": 81,
+        "pano": "4lBrj3cqf4vydod_hPEw3Q",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 73,
+        "pano": "4lBrj3cqf4vydod_hPEw3Q",
+        "hasCoverage": true
+      }
     }
   },
   "yardMetrics": {
@@ -62,7 +177,7 @@
     "trailerParkingCapacity": 45,
     "truckGateCount": 1,
     "buildingCount": 1,
-    "siteAreaAcres": 42.0,
+    "siteAreaAcres": 42,
     "railServed": false
   },
   "mapsUrl": "https://www.google.com/maps/@42.54320,-87.91120,400m/data=!3m1!1e3",
@@ -91,7 +206,12 @@
     "multiStep": false
   },
   "confidence": "high",
-  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "shipRcvSeparate"],
+  "uncertainFields": [
+    "guardShack",
+    "remoteGs",
+    "dockDoorCount",
+    "shipRcvSeparate"
+  ],
   "fieldNotes": {
     "truckGate": "Single controlled truck/main entrance off 88th Ave at ~42.5430,-87.9128; site fully ringed by chain-link fence (confirmed in multiple Street View frames along the 88th Ave frontage). Driveway pinches to a marked entry island where it crosses the fence line.",
     "guardShack": "No clear staffed guard booth visible at the entrance island in z21 satellite; a small control island/pad sits in the entry throat. Marked uncertain - likely automated/kiosk check-in rather than a manned shack.",
@@ -105,5 +225,31 @@
     "railServed": "A rail/utility corridor runs diagonally NE of the property but no spur enters the CFC site.",
     "streetViewMeta": "2023-08 Street View coverage exists along the 88th Ave frontage (pano at ~42.54294,-87.91334) showing the fenced perimeter and building front; exact pano_id not captured via probe, hasCoverage true with headings pointing from the road toward the gate/perimeter."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.grocerydive.com/news/kroger-canceling-charlotte-cfc-closing-nashville-spoke-ecommerce-ocado/807167/",
+        "date": "2025-12-05",
+        "type": "press",
+        "claim": "Kroger is closing its Wisconsin CFC in January 2026; not meeting financial expectations."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.wpr.org/news/kroger-pleasant-prairie-fulfillment-center-layoffs",
+        "date": "2025-11",
+        "type": "press",
+        "claim": "WARN notice for Pleasant Prairie facility at 9091 88th Ave: 211 employees laid off, permanently closes Feb 1 2026."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "REJECTED: Pleasant Prairie WI CFC is one of three Kroger is shutting down; WARN filed, closes Feb 1 2026.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
