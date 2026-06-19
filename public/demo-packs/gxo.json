@@ -16,6 +16,10 @@
       "note": "GXO Logistics operates ~970 warehouses across 27 countries (US: ~300). We audited 30 representative US sites."
     },
     "featuredSiteId": "12-palmyra-pa",
+    "networkCount": 325,
+    "networkCountSource": "GXO Logistics FY2025 Form 10-K, Item 2 (Properties): 325 US logistics facilities (82M sq ft). https://www.sec.gov/Archives/edgar/data/0001852244/000185224426000007/gxo-20251231.htm",
+    "networkCountAsOf": "2025-12-31",
+    "sampleRationale": "We core-sampled the biggest, busiest, and most varied US warehouses; the same yard patterns repeated across the contract-logistics network.",
     "dossierIntro": "3PL warehousing is the canonical yard problem. GXO runs 970 facilities for hundreds of shippers. We audited 30. Palmyra PA runs 220 dock doors and 350 trailer spots on 117 acres. Conair Hagerstown runs 378 docks. When one yard serves five shippers' trailer pools, the operator becomes the system of record. YardFlow makes the yard the system.",
     "surprisingFindings": [
       "Conair Hagerstown runs 378 dock doors. A single building moves more freight than most carriers' annual flow.",

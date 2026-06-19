@@ -12,8 +12,12 @@
       "auditedScope": "US",
       "droppedStubCount": 0,
       "capHit": false,
-      "note": "NFI operates 300+ North American facilities; we audited 16 of the largest and most yard-intensive (dedicated DCs, port logistics, Port of Savannah import warehouses, a fulfillment center). The rest follow the same gate/dock archetypes."
+      "note": "NFI operates 300+ North American facilities; we audited 14 of the largest and most yard-intensive (dedicated DCs, port logistics, Port of Savannah import warehouses, a fulfillment center). The rest follow the same gate/dock archetypes."
     },
+    "networkCount": 300,
+    "networkCountSource": "https://www.nfiindustries.com/about-nfi/news/nfi-named-a-2020-top-100-3pl-provider-by-inbound-logistics/",
+    "networkCountAsOf": "2020",
+    "sampleRationale": "We mapped 14 of NFI's 300+ North American facilities, its largest and most yard-intensive dedicated DCs, port-logistics terminals, and import warehouses.",
     "featuredSiteId": "09-nfi",
     "dossierIntro": "NFI runs freight yards on behalf of the retailers and manufacturers it serves, across more than 300 North American facilities. We mapped 16 of its largest and most yard-intensive sites, from Lehigh Valley cross-docks to Inland Empire import DCs and Port of Savannah logistics terminals, holding 1,836 dock doors and room for about 4,009 trailers. Control across the network is uneven. Ten of the 16 sit behind a truck gate, but only 4 run a staffed booth, and several sit open to the road. YardFlow puts one gate-to-dock standard across every yard NFI operates, no matter whose freight is moving through it.",
     "surprisingFindings": [
