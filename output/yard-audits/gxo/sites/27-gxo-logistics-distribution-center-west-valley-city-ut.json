@@ -111,5 +111,31 @@
     "drivewayShort": "Dock aprons open straight off the public road - minimal stacking depth, no controlled approach.",
     "siteAreaAcres": "Perimeter derived from building footprint plus the east trailer yard."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://racklify.com/warehouses/gxo-logistics-25-in-tolleson-az/",
+        "date": "2025",
+        "type": "facility-directory",
+        "claim": "Facility network listing references GXO at 2179 Commerce Center Dr West Valley City UT 84120"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.loopnet.com/Listing/2179-S-Commerce-Center-Dr-West-Valley-City-UT/4378808/",
+        "date": "2026",
+        "type": "cre-listing",
+        "claim": "2179 S Commerce Center Dr actively marketed for lease (multi-tenant; re-tenancy flag)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FLAG low-confidence: GXO link to this exact building is aggregator-only; no GXO careers posting at the address and the building is actively listed for lease + multi-tenant, but no GXO closure/loss either.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

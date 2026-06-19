@@ -94,5 +94,31 @@
     "urbanRural": "Edge-of-town setting: site fronts I-70 with farmland to the south and west, residential subdivisions north across the highway. Hagerstown is a small metro; classified Rural per rubric tie-break.",
     "siteAreaAcres": "Estimated from perimeter box: ~668m N-S x ~875m E-W graded property — roughly 144 acres."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://gxo.com/news_article/gxos-distribution-center-for-conair-in-hagerstown-maryland/",
+        "date": "2024-05-10",
+        "type": "press",
+        "claim": "GXO operates the 2.1M sqft Conair DC in Hagerstown MD; ops began Mar 2024"
+      },
+      {
+        "tier": 2,
+        "url": "https://business.maryland.gov/news/conair-to-bring-new-distribution-center-and-700-jobs-to-washington-county/",
+        "date": "2023-10",
+        "type": "econ-dev",
+        "claim": "Conair DC at 10440 Downsville Pike, Hagerstown; operated by GXO"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GXO press confirms it runs the 2.1M sqft Conair DC at 10440 Downsville Pike; ops began Mar 2024, no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

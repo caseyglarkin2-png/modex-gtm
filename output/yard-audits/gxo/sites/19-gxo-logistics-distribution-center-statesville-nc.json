@@ -110,5 +110,31 @@
     "connectivityIssue": "Wooded edge-of-town but still within the Statesville industrial area near other warehouses - cellular coverage likely adequate; recorded false.",
     "siteAreaAcres": "Perimeter box yields ~28 acres for the fenced parcel including the building, truck courts, and employee parking."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://jobs.gxo.com/go/Statesville,-NC/8941400/",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "GXO careers page for its climate-controlled DC at 2203 Sherrill Drive, Statesville NC 28625"
+      },
+      {
+        "tier": 2,
+        "url": "https://panjiva.com/Gxo-USA-Dc/141233432",
+        "date": "2025",
+        "type": "import-record",
+        "claim": "Import records consigned to Gxo USA Dc, 2203 Sherrill Drive, Statesville"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GXO careers names the exact address as a live DC and import bills land at 2203 Sherrill Dr; no closure/WARN.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

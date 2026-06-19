@@ -106,5 +106,24 @@
     "multipleFacilities": "Multiple large fab buildings form a campus.",
     "recommendation": "This roster entry should be flagged for human review - it is an Intel fab campus serviced by GXO, not a GXO distribution center with an auditable truck yard."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://jobs.gxo.com/go/Hillsboro/8909600/",
+        "date": "2026-06-18",
+        "type": "careers",
+        "claim": "GXO careers names 3585 SW 198th Avenue Aloha OR 97007 as a current DC; live 2026 reqs in the Hillsboro/Aloha cluster"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GXO careers explicitly lists 3585 SW 198th Ave Aloha as a current DC alongside Hillsboro; active reqs incl. Yard Jockey.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

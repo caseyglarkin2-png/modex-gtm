@@ -103,5 +103,24 @@
     "urbanRural": "Edge-of-town site with farmland on the south and east, but within the Portland-metro / North Hillsboro Industrial Renewal Area surrounded by major distribution and tech facilities - classified Urban as part of the metro industrial fabric (low confidence).",
     "postGateStaging": "Wide shared truck court provides ample interior staging before docks."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://jobs.gxo.com/go/Hillsboro/8909600/",
+        "date": "2026-06-18",
+        "type": "careers",
+        "claim": "GXO careers states its DC is at 2501 NE Century Blvd, Hillsboro OR 97124; 19 open reqs May-Jun 2026 incl. Yard Jockey"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GXO careers explicitly names 2501 NE Century Blvd Hillsboro as a current DC with active 2026 reqs (incl. Yard Jockey).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -106,5 +106,31 @@
     "urbanRural": "Liberty County GA, an exurban/rural industrial park surrounded by pine forest and ponds; nearest town Midway is small. Rural.",
     "siteAreaAcres": "Estimated from perimeter box ~401m N-S x ~303m E-W ≈ 38 acres."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://investors.gxo.com/news-releases/news-release-details/gxo-and-hasbro-open-flagship-us-distribution-center",
+        "date": "2026-03-19",
+        "type": "press",
+        "claim": "GXO operates Hasbro's new 600k sqft flagship DC in Midway, Liberty County GA"
+      },
+      {
+        "tier": 2,
+        "url": "https://newsroom.hasbro.com/news-releases/news-release-details/hasbro-celebrates-grand-opening-midway-georgia-distribution",
+        "date": "2026-03-19",
+        "type": "press",
+        "claim": "Hasbro grand opening of Midway GA DC, ~25% of US footprint"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GXO's own Mar 2026 release confirms it operates Hasbro's flagship Midway GA DC; opened ~3 months ago, no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

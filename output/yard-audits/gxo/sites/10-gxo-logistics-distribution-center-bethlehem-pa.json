@@ -107,5 +107,24 @@
     "railServed": "No rail spur runs into the property; truck-served only.",
     "urbanRural": "Bethlehem PA / Lehigh Valley distribution corridor adjacent to I-78 - dense major-metro industrial fabric (Majestic Bethlehem Center, 441-acre business park)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://jobs.gxo.com/go/Bethlehem/8909500/",
+        "date": "2026-06-03",
+        "type": "careers",
+        "claim": "GXO careers lists 3633 Commerce Center Blvd, Bethlehem PA 18015 (automated DC) with active June 2026 postings"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GXO careers names the exact address with current reqs at an automated DC; no WARN/closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

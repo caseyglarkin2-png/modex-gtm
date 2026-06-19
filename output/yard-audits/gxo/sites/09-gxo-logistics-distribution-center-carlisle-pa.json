@@ -146,5 +146,24 @@
     "urbanRural": "Carlisle is a small Cumberland County borough; the facility sits in an I-81 industrial park on the rural edge surrounded by farmland. Per rubric, classified Rural.",
     "railServed": "No rail spur enters the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://jobs.gxo.com/go/Carlisle,-PA/8933200/",
+        "date": "2026-06-15",
+        "type": "careers",
+        "claim": "GXO careers lists 1200 and 1301 Distribution Drive, Carlisle PA 17013 with active June 2026 postings"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GXO careers names both 1200 and 1301 Distribution Dr with current reqs; the Carlisle GXO WARN closure is at a different address (100 Carolina Way).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

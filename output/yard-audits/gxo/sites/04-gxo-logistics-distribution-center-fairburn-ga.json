@@ -101,5 +101,25 @@
     "urbanRural": "Shugart Farms Lake Industrial Park, surrounded by other large DCs and a residential subdivision to the SE, 12 miles south of Hartsfield-Jackson Atlanta International Airport - dense metro-Atlanta industrial fabric. Urban.",
     "siteAreaAcres": "Estimated from perimeter box ~456m N-S x ~464m E-W ≈ 52 acres."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.supplychaindive.com/news/gxo-logistics-supply-chain-ceases-operations-georgia-facility/704975/",
+        "date": "2024-01-23",
+        "type": "trade-press",
+        "claim": "GXO permanently ceased operations at its Fairburn GA facility, laid off all 69 employees (WARN Jan 8); separations Mar 10 2024"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "WARN-backed trade press confirms GXO permanently ceased operations at Fairburn and laid off all staff Mar 2024.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "reason": "GXO permanently ceased operations and laid off all 69 employees (WARN Jan 2024, closed ~Mar 2024)."
+  }
 }

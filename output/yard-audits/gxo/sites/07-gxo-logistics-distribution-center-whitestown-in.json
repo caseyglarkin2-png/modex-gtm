@@ -126,5 +126,24 @@
     "urbanRural": "Whitestown sits in the Indianapolis metro's dense industrial logistics fabric (AllPoints at Anson park, surrounded by mega-DCs and I-65 interchange retail) — classified Urban.",
     "railServed": "No rail spur enters the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://jobs.gxo.com/go/Lebanon/9112700/",
+        "date": "2026-06-18",
+        "type": "careers",
+        "claim": "GXO careers explicitly lists 5490 Industrial Court, Suite 300, Whitestown IN 46075 with current 2026 postings"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GXO's own careers page names the exact 5490 Industrial Ct Ste 300 address with current reqs; the 'XPO' aggregator listings are stale pre-spinoff. No WARN.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

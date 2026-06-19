@@ -111,5 +111,32 @@
     "trailerParkingCapacity": "Open paved apron at the recessed dock court could hold roughly a dozen trailers if used for staging; low confidence.",
     "entryExitTogether": "Single open driveway serves both entry and exit to the shared truck court."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.loopnet.com/Listing/4320-N-Sylvania-Ave-Fort-Worth-TX/29392230/",
+        "date": "2026-06",
+        "type": "cre-listing",
+        "claim": "4320 N Sylvania = Mercantile Distribution Center 1, 180k SF, space actively marketed for lease (vacancy signal)"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.manta.com/c/mksrz3m/xpo-logistics",
+        "date": "2026-06",
+        "type": "aggregator",
+        "claim": "XPO Logistics also listed at 4320 N Sylvania (operator ambiguity; XPO is a separate company)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Only aggregator/Ste-100 listings tie GXO here; XPO co-listed (likely legacy LTL terminal); building actively marketed for lease; no current Tier-1 positive.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "reason": "No Tier-1 confirmation of current GXO operation; active lease availability + XPO operator ambiguity."
+  }
 }

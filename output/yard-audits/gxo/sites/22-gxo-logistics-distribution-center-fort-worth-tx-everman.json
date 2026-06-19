@@ -138,5 +138,32 @@
     "truckGateCount": "Multiple open driveway access points off Everman Pkwy serve the truck courts; counted ~2 primary truck-usable accesses.",
     "trailerParkingCapacity": "Honest estimate from overhead imagery of the truck-court stall striping; low confidence."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://fortworthreport.org/2023/05/22/gxo-logistics-plans-to-lay-off-105-in-fort-worth/",
+        "date": "2023-05",
+        "type": "press",
+        "claim": "GXO ceased operations with a Fort Worth (Comcast) customer at 1401 Everman, 105 layoffs effective ~June 30 2023"
+      },
+      {
+        "tier": 1,
+        "url": "https://rebusinessonline.com/gxo-logistics-signs-644318-sf-industrial-lease-in-fort-worth/",
+        "date": "2022-09",
+        "type": "trade-press",
+        "claim": "GXO signed 644,318 SF lease at Building Two, Everman Crossroads (1401 Everman Pkwy) Sept 2022 (now ended)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GXO leased 1401 Everman in 2022 for the Comcast contract, then lost it and ceased operations there (Jun 30 2023, 105 WARN layoffs).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "reason": "Confirmed contract loss + cease-of-operations 2023 (Comcast)."
+  }
 }

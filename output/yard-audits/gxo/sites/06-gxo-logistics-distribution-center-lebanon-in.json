@@ -104,5 +104,31 @@
     "railServed": "No rail spur enters the property; the nearest rail is unrelated.",
     "expansion": "GXO announced an $11M expansion (spring 2025 start, Q4 2027 completion); a graded/cleared pad is visible at the SW corner consistent with planned expansion."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://lebanon.in.gov/2025/03/12/gxo-announces-lebanon-expansion/",
+        "date": "2025-03-12",
+        "type": "econ-dev",
+        "claim": "GXO announced $11M expansion at 135 S Mt Zion Rd, Lebanon IN"
+      },
+      {
+        "tier": 1,
+        "url": "https://jobs.gxo.com/go/Lebanon/9112700/",
+        "date": "2026-06-18",
+        "type": "careers",
+        "claim": "GXO lists 135 South Mount Zion Road, Lebanon IN 46052 with active 2026 postings"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GXO careers names the exact address with June 2026 reqs and a 2025 city release confirms active expansion; no closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

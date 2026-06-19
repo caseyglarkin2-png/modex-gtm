@@ -108,5 +108,24 @@
     "urbanRural": "Located in the Atlanta southside industrial corridor (Forest Park / Fort Gillem redevelopment), dense metro fabric.",
     "siteAreaAcres": "Estimated ~48 acres for the Building 900 parcel (building footprint ~24 acres plus truck court and parking); the full Gillem master park is 1,168 acres."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://jobs.gxo.com/go/HR-GA/9020700/",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "GXO careers names its Forest Park facility as 2145 Anvil Block Rd, Bldg 900, Forest Park GA 30297 and is actively hiring"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GXO careers names Bldg 900 by exact address with active reqs; cross-dock with truck court. No closure/WARN.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -116,5 +116,32 @@
     "railServed": "No rail spur enters the property; the building is truck-served only.",
     "fastLaneOpportunity": "Wide perimeter road and large paved dock courts give ample room to add an express/bypass lane."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://gxo.com/news_article/gxo-distribution-center-named-no-1-in-ikeas-global-network/",
+        "date": "2023-08",
+        "type": "press",
+        "claim": "GXO's IKEA customer DC is in Quakertown PA, not Westampton NJ"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.nlrb.gov/case/04-RC-088236",
+        "date": "2012",
+        "type": "nlrb-filing",
+        "claim": "Employer of record at the IKEA Westampton DC is IKEA Distribution Services, Inc."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "100 Ikea Dr Westampton is IKEA-self-operated (IKEA Distribution Services Inc.); GXO's IKEA site is Quakertown PA. No source shows GXO running it.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "reason": "Wrong operator: Westampton IKEA DC is IKEA-self-operated, not GXO."
+  }
 }

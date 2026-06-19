@@ -106,5 +106,32 @@
     "postGateStaging": "Wide paved dock apron inside the fence provides ample truck staging before docks.",
     "buildingCount": "Single multi-tenant industrial building; GXO occupies the dock-served portion."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://truckmap.com/place/xpo-logistics-inc-3996-scientific-drive-arlington-tx-76014-usa",
+        "date": "2025",
+        "type": "facility-directory",
+        "claim": "3996 Scientific Dr Arlington TX is an XPO/RXO last-mile facility"
+      },
+      {
+        "tier": 2,
+        "url": "https://find-open.com/arlington/rxo-4882832",
+        "date": "2025",
+        "type": "business-listing",
+        "claim": "RXO operates at 3996 Scientific Dr, Arlington TX 76014 (last-mile)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "3996 Scientific Dr is an RXO/XPO last-mile terminal (separate companies from GXO); GXO's own DFW DC list excludes Arlington; only an aggregator ties GXO here.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "reason": "Site operated by RXO (XPO last-mile spinoff), not GXO."
+  }
 }

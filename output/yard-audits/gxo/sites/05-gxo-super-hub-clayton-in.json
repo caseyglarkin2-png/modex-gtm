@@ -149,5 +149,31 @@
     "trailersVisible": "Very few trailers present - the super-hub is newly completed and ramping up; flagged low-confidence.",
     "siteAreaAcres": "Estimated from perimeter box ~434m N-S x ~557m E-W ≈ 60 acres."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://jobs.gxo.com/go/Clayton/8882800/",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "GXO careers lists 2121 Gateway Pt, Clayton IN 46118 DC with current open reqs"
+      },
+      {
+        "tier": 3,
+        "url": "https://gdiconstruction.com/project/gxo-super-hub/",
+        "date": "2022",
+        "type": "trade-press",
+        "claim": "GXO super hub built at Clayton IN: ~1.08M sqft with robot field"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GXO careers shows the Clayton IN super hub at 2121 Gateway Pt with current reqs; no closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -105,5 +105,24 @@
     "fastLaneOpportunity": "Wide multi-lane truck-court entrances and large paved aprons give ample room to add an express/bypass lane.",
     "buildingCount": "Treated as a single large multi-tenant distribution building; GXO occupies a 204,000 SF portion. Separate neighboring warehouses in the park are off-property and not counted."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.reliant-re.com/announcement_slider/reliant-represents-gxo-logistics-in-204000-sf-lease-at-159-westridge-parkway-in-mcdonough-ga/",
+        "date": "2024-04",
+        "type": "press",
+        "claim": "GXO signed a 204,000 SF lease at 159 Westridge Pkwy McDonough GA (Apr 2024)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GXO signed a 204k SF lease at 159 Westridge Pkwy in Apr 2024 and is still the listed tenant; Class A DC near I-75. No closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

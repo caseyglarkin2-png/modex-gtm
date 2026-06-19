@@ -127,5 +127,31 @@
     "railServed": "The corridor is named 'Railwood' and rail lines exist in the broader area, but no rail spur visibly enters the GXO building's property. Set false.",
     "confidence": "Medium overall — the building had to be disambiguated from neighbors via a GEOMETRIC_CENTER geocode and the south trailer yard adjoins a separate LTL-style terminal, so the exact property boundary and counts carry moderate uncertainty. The gate/guard-shack call is confident."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.evopra.com/warehouses/usa/houston/gxo-logistics",
+        "date": "2026-06",
+        "type": "aggregator",
+        "claim": "Lists a GXO Logistics Houston warehouse"
+      },
+      {
+        "tier": 3,
+        "url": "https://ploteasy.com/property-details/376053/9255-railwood-dr-houston-tx-77078",
+        "date": "2026-06",
+        "type": "property-record",
+        "claim": "9255 Railwood Dr 77078 = 300k SF warehouse built 2003 (occupant not named)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FLAG low-confidence: only Tier-3 aggregators tie GXO to 9255 Railwood; GXO's own Houston careers point elsewhere; no closure found and it is a real DC.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

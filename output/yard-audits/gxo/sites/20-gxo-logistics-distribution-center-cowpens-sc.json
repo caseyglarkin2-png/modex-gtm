@@ -112,5 +112,24 @@
     "connectivityIssue": "Rural but adjacent to the I-85 corridor and other corporate-park buildings - cellular coverage likely adequate; recorded false.",
     "siteAreaAcres": "Estimated ~75 acres for the building plus its two deep truck courts and auto parking; the broader corporate-park parcel with ponds and undeveloped land is larger."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://jobs.gxo.com/go/Cowpens/9671700/",
+        "date": "2026-06-15",
+        "type": "careers",
+        "claim": "GXO Cowpens careers page names 1120 East Mountain Olive Rd, Cowpens SC 29330 with 7 active reqs (latest Jun 15 2026)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GXO careers names 1120 E Mountain Olive Rd with multiple reqs in the last month; ~1.19M SF DC. No closure/WARN.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

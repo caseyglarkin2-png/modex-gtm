@@ -121,5 +121,24 @@
     "urbanRural": "Located within the Northeast Industrial Specific Plan Area of Tracy, a dense Central Valley industrial / logistics district immediately south of I-205.",
     "siteAreaAcres": "19.46-acre site per developer documentation; perimeter box yields ~16.5 acres (box excludes some peripheral landscaping)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/q-gxo-logistics-l-tracy,-ca-jobs.html",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Current GXO Logistics job reqs (Lead, Supervisor, Quality) in Tracy CA 95304, the zip of 1700 E Pescadero"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GXO actively hiring in Tracy 95304 (the 1700 E Pescadero zip); the Pescadero WARN was Yellow Corp at a different address. No GXO closure.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

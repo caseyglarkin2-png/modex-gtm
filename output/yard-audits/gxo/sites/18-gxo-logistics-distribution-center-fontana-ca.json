@@ -120,5 +120,31 @@
     "urbanRural": "Dense Inland Empire industrial fabric in Fontana, surrounded on all sides by warehouses.",
     "siteAreaAcres": "Estimated ~16 acres for the Sierra Gateway Center parcel (253k SF building footprint plus dock apron and auto parking)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.waze.com/live-map/directions/us/ca/fontana/gxo?to=place.ChIJuQntx9xKw4ARQ-TXgl4FbBM",
+        "date": "2026-06",
+        "type": "map-poi",
+        "claim": "Mapped GXO point of interest at 10746 Commerce Way, Fontana CA"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.indeed.com/cmp/Gxo-Logistics/locations/CA",
+        "date": "2026-06",
+        "type": "employer-directory",
+        "claim": "GXO lists Fontana CA as an active employee/review location"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FLAG low-confidence: GXO is tied to 10746 Commerce Way via map POI + employer directory, no closure found, but no Tier-1 job req pinned to this exact multi-tenant building.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

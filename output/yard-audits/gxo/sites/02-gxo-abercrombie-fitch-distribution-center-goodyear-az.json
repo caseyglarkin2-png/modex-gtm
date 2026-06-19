@@ -154,5 +154,32 @@
     "buildingCount": "Single A&F building; the two-tone roof reflects a phased roof installation, not separate structures. Other PV303 buildings are separate properties, excluded.",
     "siteAreaAcres": "From perimeter box ~378m N-S x ~762m E-W ≈ 71 acres."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.yourvalley.net/stories/abercrombie-fitch-to-open-715000-square-foot-distribution-center-in-goodyear,263654",
+        "date": "2021-08",
+        "type": "trade-press",
+        "claim": "GXO/A&F 715k sqft DC is at 17780 W Thomas Road in PV303, NOT 16920 W Commerce Dr"
+      },
+      {
+        "tier": 3,
+        "url": "https://truckmap.com/place/amazon-phx5-16920-w-commerce-dr-goodyear-az-85338-usa",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "16920 W Commerce Dr (Goodyear Crossing II) is Amazon PHX5, a different operator"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Address mismatch: 16920 W Commerce Dr is Amazon PHX5; the real GXO A&F DC is at 17780 W Thomas Rd in PV303.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "reason": "Target building at this address is operated by Amazon (PHX5), not GXO."
+  }
 }

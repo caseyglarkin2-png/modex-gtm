@@ -165,5 +165,31 @@
     "urbanRural": "Facility sits in open farmland on the rural edge of Palmyra PA; surrounded by crop fields - Rural.",
     "fastLaneOpportunity": "Wide multi-lane access road and very large paved aprons give ample room to add an express/bypass lane."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://jobs.gxo.com/go/Pennsylvania/9046400/",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "GXO currently hiring multiple roles in Palmyra PA (Quality, Maintenance, Supervisor)"
+      },
+      {
+        "tier": 2,
+        "url": "https://lebtown.com/2021/12/16/hershey-shifts-fulfillment-jobs-to-massive-new-annville-warehouse/",
+        "date": "2021-12",
+        "type": "press",
+        "claim": "GXO operates the Hershey East Coast DC III in Palmyra under contract"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GXO has live 2026 reqs at Palmyra and operates the Hershey DC there; no closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

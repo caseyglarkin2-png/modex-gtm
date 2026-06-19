@@ -103,5 +103,25 @@
     "railServed": "No rail spur enters the property; truck-served only.",
     "fastLaneOpportunity": "Wide multi-lane access road and large paved dock courts give ample room to add an express/bypass lane."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://hoodline.com/2026/03/west-jefferson-warehouse-gut-punch-as-gxo-logistics-axes-100-plus-jobs/",
+        "date": "2026-03",
+        "type": "press",
+        "claim": "GXO West Jefferson OH site (202 Park West Dr) will cease operations, 100+ workers affected; WARN filed Mar 3 2026, effective May 2 2026"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GXO is closing the West Jefferson (202 Park West Dr) site; WARN filed Mar 2026, closure effective May 2026.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "reason": "GXO announced closure (WARN Mar 3 2026, effective May 2 2026)."
+  }
 }

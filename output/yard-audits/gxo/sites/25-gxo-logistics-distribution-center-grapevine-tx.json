@@ -105,5 +105,25 @@
     "fastLaneOpportunity": "Wide open truck-court aprons leave physical room for a bypass lane if a gate were added.",
     "confidence": "Medium — the GXO building had to be relocated from a wrong/approximate roster address to the web-confirmed 2425 Esters Blvd; the exact building unit within the DFW Trade Center park was inferred from the cross-dock building profile rather than read from a sign. The ungated gate/guard-shack determination is well-supported by the uniform character of the spec-industrial park."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://racklify.com/warehouses/gxo-logistics-in-grapevine-tx/",
+        "date": "2026-06",
+        "type": "aggregator",
+        "claim": "GXO's actual Grapevine site is 2425 Esters Blvd 76051, NOT 4220 Diplomacy Rd"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Address mismatch: GXO's documented Grapevine facility is 2425 Esters Blvd; no source ties GXO to 4220 Diplomacy Rd.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18",
+    "reason": "Address mismatch; GXO's Grapevine presence is at 2425 Esters Blvd, not this building. No positive evidence."
+  }
 }

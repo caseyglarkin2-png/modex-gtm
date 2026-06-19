@@ -101,5 +101,24 @@
     "dropYard": "No dedicated trailer-storage lot; only dock-apron parking.",
     "buildingCount": "Single mid-size distribution building in a dense Carrollton industrial park."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://jobs.gxo.com/go/CarrolltonMcKinneyDallas,-TX/8941900/",
+        "date": "2026-06-11",
+        "type": "careers",
+        "claim": "GXO DFW careers page lists 2816 Commodore Drive, Carrollton TX 75007 as a DC; active supervisor req posted Jun 11 2026"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "GXO's DFW careers page names 2816 Commodore Dr Carrollton 75007 as a current DC with a June 2026 req; address matches exactly.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
