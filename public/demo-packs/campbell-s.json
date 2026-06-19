@@ -203,6 +203,25 @@
           "multipleFacilities": "Campus of 8+ connected/separate buildings: process halls, silos, warehouses",
           "fastLaneOpportunity": "Wide entrance apron off the highway with room for additional lanes",
           "siteAreaAcres": "Derived from perimeter box ~1060m N-S x ~700m E-W of fenced/cleared area"
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.thecampbellscompany.com/newsroom/news/campbells-expands-maxton-site-to-fuel-growth-in-soup-and-broth/",
+              "date": "2026-06-11",
+              "type": "press",
+              "claim": "Completed 88,000-sq-ft Maxton expansion with two new aseptic lines (+20% capacity, ~100 jobs); plant operating since 1979 for soup/broth."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Campbell's own newsroom (days old) confirms active operation plus a just-completed aseptic expansion; zero negative signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -374,6 +393,25 @@
           "multipleFacilities": "Large campus: production halls, big NE distribution warehouse, wastewater treatment plant with multiple digester domes.",
           "fastLaneOpportunity": "Wide internal yard aprons with ample paved width.",
           "siteAreaAcres": "Derived from perimeter box ~890m N-S x ~830m E-W."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.foodprocessing.com/on-the-plant-floor/plant-operations-and-engineering/news/55128940/campbells-paris-texas-plant-to-lose-soup-operations-shift-to-sauce-salsa",
+              "date": "2024-07-26",
+              "type": "press",
+              "claim": "Campbell's shifting RTS soup production from Paris TX to its Napoleon OH and Maxton NC plants (Napoleon a continuing/growing soup plant)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Campbell's largest soup/V8 plant, actively hiring in 2026 and a named destination for consolidated Paris soup volume; no negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -545,6 +583,32 @@
           "multipleFacilities": "Large multi-building manufacturing complex plus separate NW warehouse blocks.",
           "fastLaneOpportunity": "Wide entrance road and ample paved internal yard.",
           "siteAreaAcres": "Derived from perimeter box ~1170m N-S x ~510m E-W."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.foodprocessing.com/on-the-plant-floor/plant-operations-and-engineering/news/55128940/campbells-paris-texas-plant-to-lose-soup-operations-shift-to-sauce-salsa",
+              "date": "2024-07-26",
+              "type": "press",
+              "claim": "Campbell's keeps the Paris TX plant open, transforming it into a Prego/Pace sauce/salsa facility; soup transfers to Napoleon/Maxton. Not a full closure."
+            },
+            {
+              "tier": 2,
+              "url": "https://straussborrelli.com/2026/03/05/campbell-soup-texas-warn-act-investigation/",
+              "date": "2026-03-05",
+              "type": "press",
+              "claim": "WARN for ~205 of 568 Paris employees tied to soup-line exit (~May 2026); ~363 remain, plant continues as flagship sauce facility - partial layoff, not shutdown."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Trap case resolved: WARN is a soup-line-only partial layoff; plant stays open as Campbell's flagship Prego/Pace sauce facility.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -747,6 +811,32 @@
           "drivewayShort": "Short internal approach from the access road to the dock aprons.",
           "siteAreaAcres": "Derived from perimeter box ~610m N-S x ~610m E-W; excludes the separate solar farm to the south.",
           "railServed": "No rail spur into the property; adjacent solar farm occupies the land to the south."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.thecampbellscompany.com/newsroom/news/snyders-of-hanover-and-snack-factory-pretzel-crisps-named-official-pretzels-of-the-cincinnati-reds/",
+              "date": "2023-04-24",
+              "type": "press",
+              "claim": "Campbell Snacks (division of Campbell) includes Snyder's of Hanover pretzels as a current brand."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.snydersofhanover.com/",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Snyder's of Hanover operates a 400,000+ sq ft Hanover facility with processing, packaging, warehousing, R&D lab."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Snyder's of Hanover is a current Campbell's brand HQ'd and made in Hanover PA; only nearby closure was the unrelated Snyder of Berlin (Utz) plant.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -913,6 +1003,32 @@
           "fastLaneOpportunity": "Long access drive and wide internal yard aprons.",
           "siteAreaAcres": "Derived from perimeter box ~580m N-S x ~770m E-W.",
           "locationResolution": "Roster coordinates (APPROXIMATE) landed in residential Willard; web search located plant at 3320 State Route 103 E. Confirmed by satellite."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.ziprecruiter.com/c/Campbells/Job/AVP,-Site-Operations-Multi-Site/-in-Willard,OH",
+              "date": "2025",
+              "type": "careers",
+              "claim": "Campbell's recruiting AVP Site Operations at its Willard OH site (current Campbell-operated facility)."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.thecampbellscompany.com/newsroom/press-releases/campbell-to-expand-goldfish-production-capacity-with-160-million-investment-in-richmond-utah-bakery/",
+              "date": "2023-07-25",
+              "type": "press",
+              "claim": "Campbell names Willard OH among its Goldfish capacity-expansion bakeries."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Willard OH is Campbell/Pepperidge Farm's primary Goldfish bakery (~800 employees), active site-leadership hiring; no negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1082,6 +1198,25 @@
           "multipleFacilities": "Single large bakery building (N-S) with attached process structures; not a multi-cluster campus.",
           "siteAreaAcres": "Derived from perimeter box ~755m N-S x ~370m E-W.",
           "locationResolution": "Roster coordinates (RANGE_INTERPOLATED) landed in central/south Richmond; web search located plant at 901 N 200 W. Confirmed by satellite ~41.9388,-111.8165."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.thecampbellscompany.com/newsroom/press-releases/campbell-to-expand-goldfish-production-capacity-with-160-million-investment-in-richmond-utah-bakery/",
+              "date": "2023-07-25",
+              "type": "press",
+              "claim": "Campbell investing $160M in its Richmond UT bakery (+50% Goldfish); facility has made Pepperidge Farm products 50 years, new line operational by end of 2024."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Campbell's press release confirms active 50-year Richmond UT bakery + fresh $160M Goldfish expansion; no negative.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1234,6 +1369,32 @@
           "drivewayLong": "Long private entrance drive from the public road to the plant yard.",
           "siteAreaAcres": "Derived from perimeter box ~870m N-S x ~720m E-W.",
           "locationResolution": "Roster coordinates landed inside the plant footprint; confirmed by satellite and Street View (Pepperidge Farm monument sign at the entrance)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://lancasteronline.com/news/local/lancaster-county-s-pepperidge-farm-plant-has-a-new-snack-the-sold-out-chilean-sea/article_98b4034c-9799-11ef-af78-c780e957ddb1.html",
+              "date": "2024-11",
+              "type": "press",
+              "claim": "Lancaster County's Pepperidge Farm (Denver PA) plant actively producing Goldfish incl. a limited-run flavor; current operating bakery."
+            },
+            {
+              "tier": 1,
+              "url": "https://lancasteronline.com/business/local_business/more-milano-cookies-coming-pepperidge-farms-denver-plant-expands-eyes-new-distribution-center/article_6b3c2da2-a85c-11eb-85d8-a37090547fcb.html",
+              "date": "2021-04",
+              "type": "press",
+              "claim": "Denver plant completed expansion doubling Milano capacity; workforce ~810; produces Goldfish, bread, cookies."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Major Goldfish/cookie bakery, recent expansion + Nov-2024 production news; closure gauntlet clean.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1435,6 +1596,32 @@
           "urbanRural": "Bloomfield CT industrial park on the northern edge of the Hartford metro; large warehouses adjacent but woodland and open land around - edge-of-town industrial, classified Rural per rubric tiebreak.",
           "siteAreaAcres": "~33 acres derived from perimeter box (~415m N-S x ~360m E-W of fenced property).",
           "railServed": "No rail spur into the property; solar array occupies land to the east where a spur might otherwise run."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.hartfordbusiness.com/article/campbell-soup-to-close-norwalk-office-expand-bloomfield-site-as-part-of-consolidation-plan",
+              "date": "2018-08",
+              "type": "press",
+              "claim": "Campbell's will CONTINUE making Pepperidge Farm products at the Bloomfield bakery (opened 2002, 400+ employees) and GROW it; only the Norwalk corporate office closes."
+            },
+            {
+              "tier": 2,
+              "url": "https://patch.com/connecticut/norwalk/norwalk-pepperidge-farm-office-close-move-jobs-new-jersey",
+              "date": "2018-08",
+              "type": "press",
+              "claim": "Corroborates the closure was the Norwalk HQ office moving to NJ, NOT the Bloomfield plant."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Live bread/rolls/stuffing plant; only nearby closure was the Norwalk corporate office, paired with a commitment to grow Bloomfield.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1611,6 +1798,32 @@
           "siteAreaAcres": "~14 acres from perimeter box (~220m N-S x ~470m E-W) - a compact older urban plant.",
           "railServed": "Multi-track rail mainline runs along the north property edge but no spur enters the property; not rail-served.",
           "confidence": "Building positively confirmed - a Campbell's-marked box truck and building 425 signage visible in Street View; Pepperidge Farm Downingtown plant at 421 Boot Road."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.inquirer.com/philly/business/20110116_Campbell_Soup_marks_50_years_as_Pepperidge_Farm_s_parent.html",
+              "date": "2011-01",
+              "type": "press",
+              "claim": "Pepperidge Farm operates its own plants 'including those in Downingtown and Denver, Pa.', where Goldfish are baked."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.ziprecruiter.com/Jobs/Pepperidge-Farm/-in-Downingtown,PA",
+              "date": "2026-05",
+              "type": "careers",
+              "claim": "Active Pepperidge Farm production job postings at the Downingtown PA bakery (24/7 ops) as of May 2026."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Closure gauntlet clean; current (May 2026) active 24/7 production hiring confirms the small Downingtown bakery is still live.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1752,6 +1965,32 @@
           "siteAreaAcres": "~38 acres from perimeter box (~365m N-S x ~540m E-W).",
           "railServed": "No rail spur enters the property.",
           "status": "Yelp marks the retail/outlet listing as CLOSED, but 2026 Maxar satellite imagery shows an active operation - trailers backed into docks, process equipment running. Audited as an operating facility."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://careers.thecampbellscompany.com/us/en/job/Req-57152/",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active 'Production Helper BU Bakery' job opening at Campbell's bakery in Lakeland FL 33805."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.foodbusinessnews.net/articles/22706-pepperidge-plant-to-restart-goldfish-production",
+              "date": "2022",
+              "type": "press",
+              "claim": "Campbell Snacks brought Goldfish baked-cracker production back to its Lakeland bakery on strong demand."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Campbell's careers site lists active Lakeland bakery production jobs; no WARN/closure; Yelp 'CLOSED' is an uncitable aggregator artifact.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -1927,6 +2166,32 @@
           "siteAreaAcres": "108 acres per published facility history (Lance moved to the South Boulevard site on 108 acres in 1962).",
           "railServed": "A light-rail (LYNX) passenger line runs through/alongside the campus, but no freight rail spur serves the docks; railServed false.",
           "confidence": "Medium overall - the facility is positively identified (LANCE water tower and buildings visible in Street View) and the fenced campus perimeter is confirmed, but the exact gate/guard-booth structure and several counts are estimates from a very large multi-building campus."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.aol.com/news/inside-campbell-snacks-10m-charlotte-095300968.html",
+              "date": "2024",
+              "type": "press",
+              "claim": "Campbell's Charlotte facility is a 1.2M-sq-ft plant making Lance crackers, potato chips and snacks with ~1,500 employees; new Philip Lance Center."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.costar.com/article/1381495765/campbell-soup-to-close-part-of-north-carolina-snack-plant",
+              "date": "2023-05",
+              "type": "press",
+              "claim": "Only the Emerald nuts BUILDING at the Charlotte site closed; the cracker/chip plant continued."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active Campbell's Snacks cracker/chip plant (~1,500 staff) with current hiring; only the adjacent Emerald nuts unit closed (2023), not the plant.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -2145,6 +2410,32 @@
           "siteAreaAcres": "~32 acres from perimeter box (~365m N-S x ~365m E-W).",
           "railServed": "A rail mainline runs along the NW edge of the property but no spur enters; railServed false.",
           "confidence": "Medium - the plant is positively identified and the open-access (no gate/no guard) determination is confident from Street View, but dock/trailer counts are difficult to read from overhead and the ownership is a notable data discrepancy."
+        },
+        "verification": {
+          "verdict": "rejected",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 2,
+              "url": "https://en.wikipedia.org/wiki/Snyder%27s-Lance",
+              "date": "2014",
+              "type": "press",
+              "claim": "Snyder's-Lance divested its private-label business, including the Burlington IA and Cambridge ON plants, to Shearer's Foods for ~$430M in 2014."
+            },
+            {
+              "tier": 2,
+              "url": "https://en.wikipedia.org/wiki/Shearer%27s_Foods",
+              "date": "2026-06",
+              "type": "press",
+              "claim": "Shearer's Foods current manufacturing-locations list includes Burlington, Iowa manufacturing plant."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Burlington IA plant sold to Shearer's Foods in 2014 (before Campbell's owned Snyder's-Lance); runs today as a Shearer's plant, never a Campbell's site.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -2337,6 +2628,32 @@
           "railServed": "No rail spur serves the property.",
           "solar": "Large rooftop solar array (one of the larger PNW installations, installed 2001) - confirms identity but not operationally relevant to the yard classification.",
           "confidence": "High - facility positively confirmed by Campbell's signage in Street View; open no-gate/no-guard determination is clear. Dock and trailer counts are honest overhead estimates (flagged)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://business.salemchamber.org/list/member/snyder-s-lance-inc-dba-campbell-s-snacks-kettle-brand-salem-22623",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Snyder's-Lance Inc dba Campbell's Snacks (Kettle Brand - Salem) listed as an active manufacturing member of the Salem Area Chamber."
+            },
+            {
+              "tier": 2,
+              "url": "https://www.thecampbellscompany.com/newsroom/press-releases/campbells-to-consolidate-potato-chip-production-as-part-of-ongoing-snacks-network-optimization-strategy/",
+              "date": "2026-01-29",
+              "type": "press",
+              "claim": "Jan 2026 potato-chip consolidation closes ONLY Hyannis MA; Salem not named as closing."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Primary Kettle Brand plant, active 2026 hiring; the closed Oregon plant is Tualatin/Pacific Foods (soup/broth), a different facility.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -2542,6 +2859,32 @@
           "railServed": "A rail line runs along the SE of the business park but no spur enters the candidate parcel.",
           "windTurbines": "The Kettle Beloit plant is documented as having 18 rooftop wind turbines and LEED-Gold certification - a distinctive marker that could not be clearly confirmed on the candidate building at available imagery resolution.",
           "recommendation": "Flagged for human review - the exact Campbell's/Kettle building in Beloit (3150 Kettle Way) should be confirmed against the roster's '1101 Willowbrook Road' address before relying on this audit."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.thecampbellscompany.com/newsroom/press-releases/campbells-to-consolidate-potato-chip-production-as-part-of-ongoing-snacks-network-optimization-strategy/",
+              "date": "2026-01-29",
+              "type": "press",
+              "claim": "Production from the closing Hyannis MA plant transfers to more modern plants in Beloit WI, Charlotte NC, Hanover PA (Beloit a receiving plant)."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.indeed.com/cmp/Campbells-7/jobs/l-Beloit,-WI",
+              "date": "2026-01",
+              "type": "careers",
+              "claim": "Active Campbell's production job postings in Beloit WI in 2026."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Named as a receiving plant in the Jan 2026 consolidation; ~300 employees, active hiring, no closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -2733,6 +3076,25 @@
           "entryExitSeparate": "Two distinct driveways to the road (NW and NE) allow separate in/out routing.",
           "urbanRural": "Franklin WI is a suburb within the Milwaukee metro; the site sits in a dense business park - Urban.",
           "trailerParkingCapacity": "Estimated from SW apron + adjacent paved space; honest overhead estimate."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://biztimes.com/campbell-soup-co-to-invest-8-million-in-franklin-plant/",
+              "date": "2024-05-28",
+              "type": "press",
+              "claim": "Campbell invested $8M to expand tortilla-chip production at its Franklin WI plant; plant opened 1998, 600+ employees, +40 jobs, Late July tortilla chips from late July 2024."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active 600+ employee plant with a 2024 capacity expansion adding Late July tortilla chips; no closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -2918,6 +3280,32 @@
           "entryExitTogether": "Single driveway serves entry and exit.",
           "urbanRural": "Dense Milwaukee industrial district immediately west of General Mitchell International Airport - Urban.",
           "railServed": "No rail spur runs into the property; a rail corridor exists in the broader district but not onto this parcel."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.fsis.usda.gov/inspection/fsis-inspected-establishments/campbell-soup-supply-co.-llc",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Campbell Soup Supply Co. LLC listed as a current FSIS-inspected establishment (Milwaukee)."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.fooddive.com/news/campbell-soup-to-refurbish-spice-plant-remain-in-milwaukee/216501/",
+              "date": "2013-03",
+              "type": "press",
+              "claim": "Campbell consolidated spice production at Milwaukee, its only U.S. spice operation; invested to refurbish and remain."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Sole Campbell U.S. spice plant, operated by Campbell Soup Supply Co.; current FSIS listing, no closure/divestiture signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -3084,6 +3472,32 @@
           "connectivityIssue": "Rural but adjacent to a developed industrial strip and not deeply isolated; cellular coverage likely adequate. Marked false, low confidence.",
           "railServed": "A rail corridor runs in the broader area but no spur enters the property; tomato intake is by truck. railServed=false.",
           "scale": "Truck scales are likely present at an agricultural intake plant of this scale but not clearly resolved in imagery - left false, flagged uncertain."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.thecampbellscompany.com/newsroom/press-releases/campbells-and-partners-receive-3-4-million-usda-grant-to-support-sustainable-tomato-growing-practices-in-california/",
+              "date": "2024-10",
+              "type": "press",
+              "claim": "Campbell's CA tomato operations (Dixon/Stockton) active; $3.4M USDA RCPP grant for CA processing tomatoes."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.dailyrepublic.com/townnews/food_industry/business-journal-campbell-soup-processes-660-000-tons-of-tomatoes-at-dixon-plant/article_f71f528c-6479-11ee-83e7-9f9a9210132d.html",
+              "date": "2023-10",
+              "type": "press",
+              "claim": "Dixon plant processes 660,000 tons of tomatoes/yr into Prego/Pace sauce material."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Campbell's largest CA tomato plant, self-operated by Campbell Soup Supply Co.; recent (2024) corporate activity, no closure signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -3258,6 +3672,32 @@
           "buildingCount": "Main processing building plus a secondary structure; the large white warehouse to the SW is a separate property, not counted.",
           "urbanRural": "Dense south-Stockton industrial district - Urban.",
           "railServed": "No rail spur enters the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.thecampbellscompany.com/newsroom/press-releases/campbells-and-partners-receive-3-4-million-usda-grant-to-support-sustainable-tomato-growing-practices-in-california/",
+              "date": "2024-10",
+              "type": "press",
+              "claim": "Campbell's CA tomato operations (Dixon and Stockton) named as active in Oct 2024 USDA RCPP partnership."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.thecampbellscompany.com/newsroom/press-releases/campbell-takes-steps-to-improve-supply-chain-productivity-and-increase-utilization-of-u-s-manufacturing-network-company-to-close-sacramento-plant/",
+              "date": "2012-09",
+              "type": "press",
+              "claim": "Closure was the SACRAMENTO soup plant; Stockton/Dixon tomato plants NOT closed."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Stockton tomato-paste plant (Campbell Soup Supply Co.) is current; the divested/closed CA assets were Bakersfield/Bolthouse and Sacramento, not Stockton.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -3453,6 +3893,32 @@
           "buildingCount": "Main manufacturing/warehouse building plus a small utility/outbuilding on the south side.",
           "scale": "No truck scale visible.",
           "railServed": "No rail spur enters the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.thecampbellscompany.com/newsroom/life-at-campbells/our-pretzel-pride/",
+              "date": "2026-06",
+              "type": "press",
+              "claim": "Campbell makes Snyder's of Hanover pretzels and Snack Factory Pretzel Crisps at its Campbell Snacks plant in Goodyear AZ (7.4M lbs Pretzel Rods/yr)."
+            },
+            {
+              "tier": 3,
+              "url": "https://www.industrynet.com/listing/1731154/snyders-lance-inc",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "Snyder's-Lance, Inc. listed operating in Goodyear AZ."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Campbell's own newsroom names Goodyear AZ as an operating Campbell Snacks pretzel plant; not a phantom.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -3623,6 +4089,32 @@
           "buildingCount": "Single L-shaped manufacturing/warehouse building.",
           "scale": "No truck scale visible.",
           "railServed": "No rail spur enters the property."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "unknown",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.thecampbellscompany.com/newsroom/press-releases/campbell-completes-acquisition-of-sovos-brands-inc/",
+              "date": "2024-03-12",
+              "type": "press",
+              "claim": "Campbell completed acquisition of Sovos Brands (Rao's, Michael Angelo's, noosa) for ~$2.7B; placed in Distinctive Brands unit."
+            },
+            {
+              "tier": 1,
+              "url": "https://www.ziprecruiter.com/Jobs/Michael-Angelo-S/-in-Austin,TX",
+              "date": "2026-06",
+              "type": "careers",
+              "claim": "Active Michael Angelo's production/packaging jobs in the Austin TX area 2025-2026, indicating an operating plant."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Campbell's owns Michael Angelo's via Sovos (closed Mar 2024); Austin plant actively hiring; Texas closure noise is the Paris TX soup plant, not Austin.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       },
       {
@@ -3764,6 +4256,32 @@
           "staging": "Paved post-gate holding area between the SE guard booth and the dock apron.",
           "scale": "No truck scale visible.",
           "railServed": "No rail spur enters the property (despite the park's proximity to the CSX North Baltimore railyard)."
+        },
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "owned",
+          "citations": [
+            {
+              "tier": 1,
+              "url": "https://www.ttnews.com/articles/dhl-run-new-44-million-campbell-soup-logistics-hub",
+              "date": "2017-08",
+              "type": "press",
+              "claim": "DHL Supply Chain to operate Campbell Soup's new $44M, 740,000 sqft Findlay OH distribution center."
+            },
+            {
+              "tier": 1,
+              "url": "https://truckmap.com/place/dhl-supply-chain-1000-campbell-dr-findlay-oh-45840-usa",
+              "date": "2026-06",
+              "type": "locator",
+              "claim": "DHL Supply Chain located at 1000 Campbell Dr, Findlay OH 45840 (the Campbell's DC address)."
+            }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Campbell's-owned DC operated by DHL Supply Chain as 3PL; address occupancy confirms active operation; no closure found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
         }
       }
     ]
