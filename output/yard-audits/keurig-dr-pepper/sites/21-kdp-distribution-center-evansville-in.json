@@ -155,5 +155,31 @@
     "yardMetrics": "All metrics are unverified placeholders. The perimeter box and 3-acre area are a rough estimate around the candidate building only.",
     "recommendation": "Flag for human review. Suggested next steps: contact KDP directly for the Evansville DSD depot address, check Vanderburgh County GIS / property records for KDP or American Bottling Company parcels, or pull a current KDP careers posting for Evansville which may list the worksite address."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.warntracker.com/company/keurig-dr-pepper",
+        "date": "2024-12",
+        "type": "press",
+        "claim": "KDP WARN history covers IL/NJ/VA/VT only; no Indiana notice - no documented closure, but also no positive operating evidence for Evansville."
+      },
+      {
+        "tier": 3,
+        "url": "https://start.cortera.com/company/research/m2n5sso6k/keurig-dr-pepper-inc/",
+        "date": "2025",
+        "type": "locator",
+        "claim": "Only aggregator/registry listings (Cortera, Indeed) reference 2600 S Kentucky Ave; no KDP locator, press, 10-K, or facility-level careers req confirms a freight warehouse there."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "No Tier-1 positive after genuine search; only aggregator/registry hits. Audit satellite showed no beverage signage, docks-with-trailers, or truck yard at 2600 S Kentucky - consistent with a registered/route address. Historic Evansville Dr Pepper/RC distribution went via Royal Crown Bottling (renamed Vision Beverage 2020, stopped carrying KDP). No verifiable KDP freight facility.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

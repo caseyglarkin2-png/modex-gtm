@@ -161,5 +161,31 @@
     "railServed": "No rail spur enters the property; a CSX/freight line and the Trinity River floodway run nearby but do not serve the site.",
     "urbanRural": "Las Colinas / Valley Ranch industrial district of Irving inside the Dallas-Fort Worth metro — Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/co/Keurig-Dr-Pepper/Jobs/-in-Irving,TX",
+        "date": "2026",
+        "type": "careers",
+        "claim": "Active KDP Irving reqs (forklift operator, warehouse picker, production technician, sanitation lead) at the 2304 Century Center Blvd campus."
+      },
+      {
+        "tier": 3,
+        "url": "https://en.wikipedia.org/wiki/The_American_Bottling_Company",
+        "date": "2024",
+        "type": "press",
+        "claim": "The American Bottling Company (Irving HQ) is a wholly-owned KDP subsidiary; the Dr Pepper / DFW Bottling campus is self-operated."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "American Bottling Company is a KDP subsidiary; monument sign + active KDP production/warehouse reqs at 2304 Century Center confirm current self-operation.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

@@ -158,5 +158,31 @@
     "buildingCount": "Single KDP building. Adjacent large buildings (gray-roof facility to the NW, buildings to the south) are separate properties, not part of this campus.",
     "railServed": "No rail spur enters the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/co/Keurig-Dr-Pepper/Jobs/--in-Indiana",
+        "date": "2026-05",
+        "type": "careers",
+        "claim": "Active KDP Indianapolis reqs (May 2026) confirm KDP still operates at the Georgetown Rd / Park 100 location."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.yellowpages.com/indianapolis-in/mip/keurig-dr-pepper-562586686",
+        "date": "2025",
+        "type": "locator",
+        "claim": "Keurig Dr Pepper listed at 8150 Georgetown Rd, Indianapolis IN 46268 - same facility as the legacy Dr Pepper Snapple listing."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Old DR PEPPER SNAPPLE building signage is unrefreshed legacy branding; current KDP listing + active 2026 Indianapolis reqs confirm KDP still operates at 8150 Georgetown Rd. No divestiture/closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

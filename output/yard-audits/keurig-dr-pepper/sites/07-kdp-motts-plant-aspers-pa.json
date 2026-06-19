@@ -160,5 +160,24 @@
     "fastLaneOpportunity": "Entrance apron is very wide and uncontrolled with abundant unused paved width - clear room to add express/bypass lanes.",
     "siteAreaAcres": "Developed industrial perimeter measured at roughly 110 acres."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.yellowpages.com/aspers-pa/mip/keurig-dr-pepper-559325254",
+        "date": "2026",
+        "type": "locator",
+        "claim": "Keurig Dr Pepper listed operating at 45 Aspers North Rd, Aspers PA 17304 (Motts plant)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Motts/KDP Aspers apple plant; no Tier-2 closure/divestiture found (only Windsor VA closed), but no fresh Tier-1 dated positive within 24 months located - flagged probable.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

@@ -90,5 +90,31 @@
     "multipleFacilities": "Multi-building office campus (~4 buildings).",
     "yardRelevance": "Low YardFlow relevance - office site, minimal freight operations. confidence set to medium because the site is unambiguous but does not present a meaningful truck yard to audit."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.waterburyroundabout.org/business-archive/kqlobr1818ucn4y92ynu9ah13n905a",
+        "date": "2021-09",
+        "type": "press",
+        "claim": "KDP will not reopen its leased Waterbury offices; ~200 workers permanently remote; Pilgrim Park space now occupied by other businesses."
+      },
+      {
+        "tier": 2,
+        "url": "https://vtdigger.org/2019/02/01/as-layoffs-go-into-effect-keurig-closes-waterbury-early-production-facility/",
+        "date": "2019-02-01",
+        "type": "press",
+        "claim": "Keurig closed its Waterbury early-production facility."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KDP closed Waterbury production (2019) and vacated offices (remote since 2021); site now occupied by other tenants - no KDP operating freight yard.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

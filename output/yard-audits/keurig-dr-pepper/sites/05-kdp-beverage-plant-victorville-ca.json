@@ -126,5 +126,24 @@
     "urbanRural": "The plant sits inside the SCLA logistics park on the isolated NE desert edge of Victorville, away from the dense town fabric. Classified Rural per the rubric's edge-of-town guidance; flagged uncertain because Victorville is a sizable city and SCLA is a developed logistics park.",
     "connectivityIssue": "Set false - SCLA is a major built-up logistics/airport hub with infrastructure despite the desert edge location."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.vvng.com/teamsters-launch-unfair-labor-practice-strike-at-keurig-dr-pepper-facility-in-victorville/",
+        "date": "2025-05",
+        "type": "press",
+        "claim": "Teamsters launched a strike at KDP operating ~860,200 sq ft Victorville beverage production/distribution facility at 18180 Gateway Dr in May 2025 (facility actively operating)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Dated 2025 press confirms KDP actively operates the Victorville plant; no Tier-2 negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

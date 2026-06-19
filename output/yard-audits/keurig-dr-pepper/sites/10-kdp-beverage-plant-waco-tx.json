@@ -154,5 +154,31 @@
     "siteAreaAcres": "~92 acres per the Kraft-Heinz campus acquisition figure cited in Dennis Group / Quandel project descriptions.",
     "imagery": "Satellite tiles for this area span multiple dates including active construction of the new manufacturing building; counts taken from the clearest available crops."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://business.wacochamber.com/directory/Details/keurig-dr-pepper-880967",
+        "date": "2026-06",
+        "type": "econ-dev",
+        "claim": "Greater Waco Chamber directory lists Keurig Dr Pepper at 100 Aviation Pkwy, Waco TX 76705 (Distributors & Wholesalers), Gold-level member - current operation."
+      },
+      {
+        "tier": 1,
+        "url": "https://careers.keurigdrpepper.com/en/location/waco-jobs/42849/6252001-4736286-4739526/4",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active Keurig Dr Pepper Waco TX Operations job posting confirms a live KDP operating site in Waco."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KDP currently operates at 100 Aviation Pkwy Waco (chamber listing + active careers req). FLAG: audit mis-attributed Allentown PA 92-acre Kraft-Heinz/811k SF manufacturing build to Waco - that building is Allentown; verify Waco actual building scope/SF before modeling.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

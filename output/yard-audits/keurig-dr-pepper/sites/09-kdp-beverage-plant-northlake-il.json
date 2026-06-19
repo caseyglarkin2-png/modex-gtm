@@ -117,5 +117,38 @@
     "geofences": "Perimeter and all sub-zones left null - no confirmed footprint to box.",
     "yardMetrics": "Counts left at zero/default - not measured."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://mapmechanical.com/projects/new-wastewater-treatment-plant-keurig-dr-pepper-northlake-illinois/",
+        "date": "2024-01",
+        "type": "press",
+        "claim": "Recent capital project: new wastewater treatment plant for Keurig Dr Pepper, Northlake Illinois - indicates an active operating production facility."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.nlrb.gov/case/13-CA-266571",
+        "date": "2024-01",
+        "type": "econ-dev",
+        "claim": "NLRB case captioned The American Bottling Company d/b/a Keurig Dr Pepper at the Northlake operation confirms KDP as the current operating employer."
+      },
+      {
+        "tier": 3,
+        "url": "https://teamsterslocal727.org/dr-pepper-northlake-salesmen-become-latest-group-to-overwhelmingly-vote-for-local-727-representation/",
+        "date": "2019-07-15",
+        "type": "press",
+        "claim": "Local 727 represents 575+ Dr Pepper employees at the Companys Northlake and Harvey IL facilities."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active KDP/American Bottling operation in Northlake (capital project + current NLRB/union activity + jobs); no closure/WARN found. FLAG: exact street address not Tier-1 pinned - pin via parcel before geofencing.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

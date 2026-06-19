@@ -140,5 +140,31 @@
     "railServed": "No rail spur enters this building parcel (rail lines exist elsewhere in the valley but not into this site).",
     "trailersVisible": "~110 trailers/containers estimated across the captured imagery; the drop yards are partly shared multi-tenant so the figure is approximate - flagged."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.keurigdrpepper.com/en/location/sumner-jobs/42849/6252001-5815135-5812543/4",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active Keurig Dr Pepper Sumner WA reqs (Forklift Operator, Maintenance Supervisor, Electro-Mechanical Technician) - live manufacturing operation."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.courierherald.com/business/new-coffee-roasting-plant-opens-in-sumner/",
+        "date": "2018-01",
+        "type": "press",
+        "claim": "Coffee roasting plant in Sumner (Green Mountain/Keurig lineage)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KDP coffee roasting/K-Cup plant on 142nd Ave E Sumner currently operating (active careers reqs + Street-View KDP logo); no closure/sale found. FLAG: confirm exact street number (3418 vs 3324/3424 same campus); KDP coffee-business spinoff is a forward risk, not current.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

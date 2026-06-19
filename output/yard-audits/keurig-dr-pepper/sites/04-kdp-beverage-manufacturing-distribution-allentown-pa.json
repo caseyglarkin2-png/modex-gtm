@@ -173,5 +173,31 @@
     "urbanRural": "Major Lehigh Valley logistics park (Upper Macungie/Allentown metro), surrounded by other large warehouses - Urban.",
     "fastLaneOpportunity": "Very wide central truck court and multiple driveways provide ample room for express/bypass lanes."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.keurigdrpepper.com/kdp-allentown-earns-food-engineering-magazines-plant-of-the-year-distinction/",
+        "date": "2021-11-26",
+        "type": "press",
+        "claim": "KDP own page calls the Allentown (Upper Macungie) site KDP newest cold beverage production and distribution facility and 2021 Plant of the Year."
+      },
+      {
+        "tier": 1,
+        "url": "https://dennisgroup.com/project/keurig-dr-pepper/",
+        "date": "2021",
+        "type": "press",
+        "claim": "KDP bought the 92-acre former Kraft-Heinz campus in Allentown PA (730k SF DC) and built an 811k SF mfg/warehouse building connected by tram - this Kraft-Heinz/811k-SF build is Allentown, not Waco or Fontana."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KDP-owned source confirms it operates the Allentown beverage production/DC complex (the 92-acre Kraft-Heinz/811k-SF build); no Tier-2 negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

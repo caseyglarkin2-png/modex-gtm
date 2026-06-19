@@ -159,5 +159,31 @@
     "buildingCount": "The 11480 cluster comprises the marked warehouse plus an adjacent leased warehouse; treated as 2 buildings.",
     "OVERALL": "Confidence LOW: facility is closed/defunct, the precise original building footprint is unconfirmed, and the site has been re-tenanted. All classification fields are best-effort estimates from current overhead imagery of the most credible building - flagged for human review."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.bidspotter.com/en-us/auction-catalogues/capital-recovery-group-rabin/catalogue-id-bsccapi10077?archiveSearch=True&page=3",
+        "date": "2017-09-28",
+        "type": "press",
+        "claim": "Rabin/Capital Recovery Group liquidation auction of coffee roasting/blending/packaging equipment Surplus to needs of Keurig Green Mountain Inc at 11480 Commercial Pkwy, Castroville - plant equipment cleared out."
+      },
+      {
+        "tier": 3,
+        "url": "https://clustrmaps.com/a/3jap7d/",
+        "date": "2025-01",
+        "type": "press",
+        "claim": "11480 Commercial Pkwy now associated with other coffee tenants (Hillside Coffee of California, The Coffee Plantation) - re-tenanted, not KDP-operated."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Keurig Green Mountain liquidated the Castroville coffee plant equipment in 2017 and the building has been re-tenanted with other coffee companies; KDP does not operate here today.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

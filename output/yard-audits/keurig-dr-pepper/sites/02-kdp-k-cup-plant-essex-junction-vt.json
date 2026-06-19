@@ -112,5 +112,24 @@
     "buildingCount": "4 is an estimate for the connected/adjacent building cluster; the complex is multi-building and hard to count distinct structures from overhead.",
     "imageryNote": "Street View is 2011-vintage; satellite is recent. Gate/guard-shack determination relies primarily on recent satellite plus older SV - both show open access."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://vermontbiz.com/news/2024/february/29/keurig-dr-pepper-will-close-williston-plant-consolidate-essex-jct",
+        "date": "2024-02-29",
+        "type": "press",
+        "claim": "KDP consolidated Williston VT production into the Essex Junction plant (Q2 2024); Essex Jct is the last Vermont facility KDP operates."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KDP actively consolidated production into Essex Junction in 2024 and it remains its operating Vermont plant; no Tier-2 negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

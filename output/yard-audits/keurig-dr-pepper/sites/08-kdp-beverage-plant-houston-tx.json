@@ -188,5 +188,31 @@
     "urbanRural": "Dense urban Houston (Medical Center / Astrodome area) - surrounded by apartment complexes and other industrial buildings.",
     "siteAreaAcres": "Compact urban parcel - perimeter measured at roughly 23 acres."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.zabalist.com/projects/TABS2025025377",
+        "date": "2025-08",
+        "type": "econ-dev",
+        "claim": "2025 City of Houston building permit Dr. Pepper Bottling Warehouse Repairs at 2400 Holly Hall Street, owner The American Bottling Company (KDP subsidiary), shows active operating use."
+      },
+      {
+        "tier": 3,
+        "url": "https://en.wikipedia.org/wiki/The_American_Bottling_Company",
+        "date": "2025-01",
+        "type": "press",
+        "claim": "The American Bottling Company is the wholly owned bottling subsidiary of Keurig Dr Pepper; resolves the operating entity at the Houston address to KDP, not an independent bottler."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Address operated by The American Bottling Company (KDP-owned subsidiary), active 2025 renovation permit, no closure/sale found; historical independent-bottler name does not reflect current ownership. Tier-3 corroboration only.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

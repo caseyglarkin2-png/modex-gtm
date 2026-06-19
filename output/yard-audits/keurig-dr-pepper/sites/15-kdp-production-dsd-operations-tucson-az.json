@@ -168,5 +168,31 @@
     "railServed": "No rail spur enters the parcel (a rail corridor runs nearby through the district but not into this site).",
     "OVERALL": "Confidence MEDIUM: facility positively re-located via the KDP-Kalil real-estate transaction record, but the roster address was wrong, the site is an older compact multi-building complex that is harder to read from overhead, and gate-detail (barrier arm vs open fenced gate, lane counts) could not be fully resolved."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://news.keurigdrpepper.com/2024-05-31-Keurig-Dr-Pepper-Strengthens-National-Direct-Store-Delivery-Operations-with-Acquisition-of-Strategic-Assets-from-Kalil-Bottling-Company",
+        "date": "2024-05-31",
+        "type": "press",
+        "claim": "KDP acquired Kalil Bottling production facility plus sales and distribution centers in Tucson; first Company-owned mfg/sales/distribution operations in Arizona; closed Q3 2024."
+      },
+      {
+        "tier": 1,
+        "url": "https://realestatedaily-news.com/keurig-dr-pepper-buys-kalils-real-estate-assets-in-tucson-for-8-55-million/",
+        "date": "2024",
+        "type": "econ-dev",
+        "claim": "KDP bought Kalil Tucson real estate for $8.55M: seven buildings, 161,835 sq ft on 7.71 acres at 931 S Highland Ave and 1201-1262 E 19th St."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KDP press + real-estate trade confirm the Kalil Tucson real estate transferred to KDP (closed Q3 2024); now KDP self-operated DSD/production. No closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

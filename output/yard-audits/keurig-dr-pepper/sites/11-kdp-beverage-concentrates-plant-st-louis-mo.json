@@ -133,5 +133,31 @@
     "drivewayLong": "The internal access drive down the west side of the plant is long and can stack multiple trucks before reaching the dock aprons.",
     "buildingCount": "Main plant building plus a secondary process/tank wing on the east; a separate small office building sits at the NW corner near Page Ave but is treated as ancillary, not a second facility cluster."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 3,
+        "url": "https://www.industrynet.com/listing/84764/keurig-dr-pepper-inc",
+        "date": "2026-01",
+        "type": "press",
+        "claim": "Keurig Dr Pepper beverage concentrates & syrups facility listed at the St. Louis (8900 Page Ave) location - current operation."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.yelp.com/biz/dr-pepper-seven-up-manufacturing-saint-louis",
+        "date": "2026-04",
+        "type": "press",
+        "claim": "Dr Pepper/Seven Up Manufacturing at 8900 Page Ave, St. Louis MO listed/updated April 2026 as an active manufacturing site."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KDP concentrate/syrup plant at 8900 Page Ave (Overland/St. Louis) currently operating; no closure/sale/WARN found. Tier-3 corroboration only - no Tier-1 locator surfaced, but no negative.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

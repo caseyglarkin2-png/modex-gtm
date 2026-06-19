@@ -156,5 +156,31 @@
     "railServed": "No rail spur enters the property.",
     "urbanRural": "Dense Tempe industrial corridor inside the Phoenix metro — Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://news.keurigdrpepper.com/2024-05-31-Keurig-Dr-Pepper-Strengthens-National-Direct-Store-Delivery-Operations-with-Acquisition-of-Strategic-Assets-from-Kalil-Bottling-Company",
+        "date": "2024-05-31",
+        "type": "press",
+        "claim": "KDP acquired Kalil sales and distribution centers in Tucson AND Tempe as part of the asset deal (closed Q3 2024)."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.kalilbottling.com/",
+        "date": "2024",
+        "type": "locator",
+        "claim": "Kalil Bottling Tempe site at 2777 S Hardy Dr, Tempe AZ 85282 is the Phoenix-area facility folded into the KDP acquisition."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KDP press explicitly names a Tempe sales/distribution center in the Kalil acquisition; 2777 S Hardy Dr is Kalil Tempe address, now KDP self-operated. No closure found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

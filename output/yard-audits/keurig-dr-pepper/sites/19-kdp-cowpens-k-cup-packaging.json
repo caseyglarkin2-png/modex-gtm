@@ -106,5 +106,31 @@
     "geofence": "perimeter is a nominal placeholder box around the Cowpens town-center geocode; it does NOT represent an identified facility. yardMetrics are zeroed and all classification fields are uncertain.",
     "urbanRural": "Cowpens is a small rural town in upstate SC — Rural — but this is moot given the facility is unresolved."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://governor.sc.gov/news/2024-09/keurig-dr-pepper-continues-growing-spartanburg-county-operations",
+        "date": "2024-09",
+        "type": "econ-dev",
+        "claim": "KDP operates an active K-Cup roasting/packaging complex in Spartanburg County SC (~285 employees), still hiring."
+      },
+      {
+        "tier": 1,
+        "url": "https://careers.keurigdrpepper.com/en/job/spartanburg/warehouse-worker/42849/94519524480",
+        "date": "2026",
+        "type": "careers",
+        "claim": "Active KDP Spartanburg warehouse/distribution reqs confirm the SC operation is live in 2026."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KDP K-Cup packaging in Spartanburg County is confirmed live, but no Tier-1 source names a Cowpens facility specifically; the documented KDP coffee complex is in Moore (~20mi SW). The Cowpens pin is likely a mis-geocode of the Spartanburg complex - exact Cowpens address unverified.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

@@ -176,5 +176,31 @@
     "trailersVisible": "~70 trailers estimated across dock apron + drop yard; counts approximate - flagged.",
     "HISTORY": "KDP completed a $65M sale-leaseback of this Tennessee distribution center in January 2023 (CoStar) - KDP continues to lease and operate the facility."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/co/Keurig-Dr-Pepper/Jobs/-in-Knoxville,TN",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active Keurig Dr Pepper Knoxville TN production/warehouse/maintenance job postings - live manufacturing operation at the Knoxville coffee plant."
+      },
+      {
+        "tier": 3,
+        "url": "https://www.yelp.com/biz/keurig-green-mountain-knoxville",
+        "date": "2026-06",
+        "type": "press",
+        "claim": "Keurig Green Mountain coffee roastery at 3109 Water Plant Rd, Knoxville TN listed/updated June 2026 - current operation."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KDP coffee roasting/distribution plant at 3109 Water Plant Rd currently operating (active careers reqs + June-2026 listing + Street-View KDP logo); no closure/sale found. KDP coffee-business spinoff is a forward risk, not current.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

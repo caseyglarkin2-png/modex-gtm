@@ -160,5 +160,32 @@
     "urbanRural": "Industrial park on the rural edge of Moore SC, surrounded by woods and farmland; broader setting is small-town/rural.",
     "buildingCount": "Single KDP building. Two other large buildings sit in the same park (one to the SE with heavy trailer activity) but are separate facilities on separate parcels - not counted."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://whosonthemove.com/crown-forklift-joins-keurig-dr-pepper-at-tyger-river-industrial-park-in-moore-sc/",
+        "date": "2025",
+        "type": "press",
+        "claim": "Building 500 is a spec building; co-tenant Crown plans to begin operations at the start of 2026 and overall development expected complete in 2027 - not yet operating."
+      },
+      {
+        "tier": 1,
+        "url": "https://governor.sc.gov/news/2024-09/keurig-dr-pepper-continues-growing-spartanburg-county-operations",
+        "date": "2024-09",
+        "type": "econ-dev",
+        "claim": "3220 Moore Duncan Hwy K-Rounds site is a new $141M project, distinct from the existing operating K-Cup plant; no production-start date given (future build-out)."
+      }
+    ],
+    "imageryDate": "2025-06",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "New/leased spec Building 500 still in build-out (Crown ops start 2026, dev complete 2027); no confirmed K-Rounds production today = future/under-construction.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

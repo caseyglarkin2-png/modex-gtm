@@ -115,5 +115,24 @@
     "siteAreaAcres": "Roster cites ~217 acres for the full parcel including orchard/woods; the developed industrial perimeter measured here is roughly 105 acres.",
     "fastLaneOpportunity": "The truck approach apron is extremely wide and open with abundant unused paved width - ample room for express/bypass lanes."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://extapps.dec.ny.gov/fs/projects/SWMF/Annual%20Reports_Solid%20Waste%20Management%20Facility/Annual%20Reports_by%20Activity%20Type/Land%20Application%20-%20UFPW/Land%20Application%20-%20UFPW%20-%202024/R8/59A30005_MottsLLP_ufpwla_R8_2024.2025-01-23.AR.pdf",
+        "date": "2025-01-23",
+        "type": "econ-dev",
+        "claim": "Motts LLP Williamson Plant 2024 NY DEC annual report (filed Jan 2025) confirms the facility operating under Motts LLP (KDP)."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "KDP-owned Motts Williamson applesauce/juice plant confirmed operating via 2024/2025 NY DEC filing; no closure or sale found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

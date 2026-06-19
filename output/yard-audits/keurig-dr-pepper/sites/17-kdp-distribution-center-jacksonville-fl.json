@@ -154,5 +154,31 @@
     "railServed": "A rail line runs west of the property but is separated by a drainage canal; no spur enters the site.",
     "urbanRural": "West Jacksonville industrial corridor inside the metro, near I-10 — Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/q-keurig-dr-pepper-l-jacksonville,-fl-jobs.html",
+        "date": "2025",
+        "type": "careers",
+        "claim": "Active KDP Jacksonville reqs (warehouse picker, maintenance mechanic, fleet mechanic) tied to the Pickettville DC."
+      },
+      {
+        "tier": 2,
+        "url": "https://www.jaxdailyrecord.com/news/2023/sep/06/hillwood-pays-almost-11565-million-for-two-industrial-buildings/",
+        "date": "2023-09-06",
+        "type": "press",
+        "claim": "598,587 sq ft KDP DC at 2300 Pickettville Rd sold to Hillwood in a sale-leaseback; KDP remains the operating tenant, 128 dock doors / 118 trailer spaces."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Building sold to investors but KDP is the leaseback tenant; on-site KDP brand mural + visitor/vendor signage and active KDP reqs confirm current operation. Tenancy = leased.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

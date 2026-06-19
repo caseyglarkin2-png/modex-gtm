@@ -111,5 +111,31 @@
     "yardMetrics": "All metrics are zero/unverified placeholders.",
     "recommendation": "Flag for human review. Suggested next steps: contact KDP directly for the Fontana / Inland Empire DSD depot address; check San Bernardino County GIS / business-license records for KDP, Dr Pepper Snapple, or American Bottling Company parcels; or pull a live KDP careers posting for the Fontana merchandiser/warehouse role (job ref 91336228016) which may state the worksite address. Also verify whether the intended facility is actually the documented Riverside or Redlands IE depot rather than Fontana proper."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.keurigdrpepper.com/en/job/fontana/merchandiser-stocker/42849/91336228016",
+        "date": "2025",
+        "type": "careers",
+        "claim": "KDP only Fontana CA careers presence is a Merchandiser Stocker (route/territory role using a personal vehicle to service retail stores) - not a KDP-occupied warehouse/freight building."
+      },
+      {
+        "tier": 1,
+        "url": "https://dennisgroup.com/project/keurig-dr-pepper/",
+        "date": "2021",
+        "type": "press",
+        "claim": "The 92-acre former Kraft-Heinz campus + 811k SF manufacturing build is in ALLENTOWN PA, not Fontana CA - the Fontana campus attribution was a conflation."
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "No verifiable KDP freight facility in Fontana: the only KDP Fontana presence is a merchandiser/route territory, and the supposed 92-acre Kraft-Heinz/811k-SF campus is actually Allentown PA. Roster entry derived from an Indeed city-list artifact. No real building to audit.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }
