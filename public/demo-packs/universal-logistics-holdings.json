@@ -46,6 +46,21 @@
     "sites": [
       {
         "id": "01-detroit-gm-ev-warehouse",
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            { "tier": 3, "url": "https://gmauthority.com/blog/2023/07/gm-to-open-ev-parts-warehouse-near-factory-zero-plant-in-michigan/", "date": "2023-07", "type": "press", "claim": "GM owns the 793,520 sq ft warehouse at 14250 Plymouth Rd; operated by Logistics Insight Corp (LINC, a ULH affiliate); feeds Factory Zero EV programs" },
+            { "tier": 2, "url": "https://www.crainsdetroit.com/manufacturing/gm-plans-ev-parts-warehouse-detroit-350-new-jobs", "date": "2023-07", "type": "press", "claim": "GM EV parts warehouse at former AMC site, 14250 Plymouth Rd, ~350 jobs, staffed by a ULH affiliate" },
+            { "tier": 3, "url": "https://www.ziprecruiter.com/co/Logistics-Insight/Jobs/-in-Detroit,MI", "date": "2025-12", "type": "press", "claim": "LINC actively hiring forklift/warehouse roles in Detroit MI as of Dec 2025" }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "GM-owned building, LINC-operated since ~2024 opening, still hiring late 2025; no closure, but Factory Zero EV-volume cuts are a live program-durability risk.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
+        },
         "name": "Logistics Insight Corp - GM EV Parts Warehouse - Detroit MI",
         "type": "Value-Added Logistics Center / Sequencing Warehouse",
         "archetype": "#9",
@@ -274,6 +289,20 @@
       },
       {
         "id": "02-detroit-stellantis-sequencing",
+        "verification": {
+          "verdict": "rejected",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            { "tier": 2, "url": "https://www.crainsdetroit.com/manufacturing/moroun-owned-universal-logistics-lay-677-detroit", "date": "2024-04", "type": "press", "claim": "ULH closing Logistics Insights Corp + Universal Dedicated of Detroit, 677 layoffs at the ~1M sq ft auto-parts sequencing plant at 6836 Georgia St; permanent" },
+            { "tier": 2, "url": "https://moparinsiders.com/detroit-warehouse-serving-stellantis-to-close/", "date": "2025-01", "type": "press", "claim": "Georgia St facility operated by LINC to close; layoffs begin Feb 18, 2025; Stellantis moving Jeep Grand Cherokee sequencing to a nonunion operator" }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "REJECTED — confirmed permanent closure; Stellantis pulled the Jeep sequencing contract and the 6836 Georgia St plant wound down with layoffs from Feb 18, 2025.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
+        },
         "name": "Logistics Insight Corp - Stellantis Sequencing Plant - Detroit MI (Georgia St)",
         "type": "Parts Sequencing / Sub-Assembly Plant",
         "archetype": "#9",
@@ -440,6 +469,20 @@
       },
       {
         "id": "03-romulus-value-added-center",
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "owned",
+          "citations": [
+            { "tier": 3, "url": "https://www.ziprecruiter.com/c/Universal-Logistics-Holdings,-Inc./Job/Non-CDL-Switcher/-in-Romulus,MI?jid=93b75aa49a2ec566", "date": "2025", "type": "press", "claim": "Universal Logistics Holdings hiring Non-CDL Switcher at 29129 Ecorse Rd, Romulus MI" },
+            { "tier": 3, "url": "https://www.indeed.com/viewjob?jk=0b400e7f4a06ebb7", "date": "2025", "type": "press", "claim": "Hi-Lo/forklift role, Romulus MI 48174 — active value-added/warehouse ops" }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "Multiple current ULH job reqs tied to the exact address (yard switcher, hi-lo, dock); no closure or re-tenant negative found.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
+        },
         "name": "Universal Logistics / LINC - Romulus Value-Added Center - Romulus MI",
         "type": "Value-Added Logistics Center / Cross-Dock Terminal",
         "archetype": "#9",
@@ -631,6 +674,20 @@
       },
       {
         "id": "04-dearborn-intermodal-terminal",
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            { "tier": 1, "url": "https://www.sec.gov/Archives/edgar/data/0001308208/000095017025040283/ulh-20241231.htm", "date": "2024-12", "type": "10-K", "claim": "ULH owns terminal yards including Dearborn, Michigan (Item 2 Properties, FY2024)" },
+            { "tier": 3, "url": "https://www.loadmatch.com/directory/company_detail.cfm?companyID=2600", "date": "2026", "type": "locator", "claim": "Universal Intermodal Services listed at 4440 Wyoming St, Dearborn MI" }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "ULH 10-K names Dearborn as an owned terminal; Universal Intermodal recruiting at the terminal; intermodal terminals are core owned infrastructure, lowest churn.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
+        },
         "name": "Universal Intermodal Services - Dearborn Terminal - Dearborn MI",
         "type": "Intermodal / Drayage Terminal (owned)",
         "archetype": "#9",
@@ -807,6 +864,20 @@
       },
       {
         "id": "05-grand-prairie-gm-arlington-logistics",
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            { "tier": 3, "url": "https://www.indeed.com/q-universal-logistics-l-grand-prairie,-tx-jobs.html", "date": "2025", "type": "press", "claim": "Universal Logistics actively hiring warehouse associates in Grand Prairie TX" },
+            { "tier": 3, "url": "https://truckmap.com/place/universal-gm-2305-w-marshall-dr-grand-prairie-tx-75051-usa", "date": "2025", "type": "locator", "claim": "'Universal & GM' operating site at 2305 W Marshall Dr; consignee for GM Arlington components per import records" }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "Current ULH Grand Prairie hiring + documented 'Universal & GM' Arlington-logistics site; GM Arlington Assembly active; no WARN/closure. No address-specific Tier-1, so corroboration-based.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
+        },
         "name": "Universal Logistics - GM Arlington Logistics Center - Grand Prairie TX",
         "type": "Value-Added Logistics / Sub-Assembly Center",
         "archetype": "#3",
@@ -995,6 +1066,20 @@
       },
       {
         "id": "06-smyrna-tn",
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            { "tier": 1, "url": "https://hrone.wd1.myworkdayjobs.com/en-US/Universal_Logistics_Holdings/job/UD-SMYRNA-TN/SMYRNA-SWITCHER_JR107061", "date": "2026", "type": "press", "claim": "Active ULH Workday 'Smyrna Switcher' req at UD-SMYRNA-TN" },
+            { "tier": 1, "url": "https://www.ziprecruiter.com/c/Universal-Logistics-Holdings,-Inc./Job/CLASS-A-CDL-SMYRNA-SWITCHERS/-in-Smyrna,TN?jid=d38eca8ad2a2a31f", "date": "2026", "type": "press", "claim": "ULH CDL-A yard switchers explicitly at 200 Sam Griffin Rd, Smyrna TN 37167" }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Multiple current ULH careers reqs name 200 Sam Griffin Rd (Nissan ILC); no closure/contract-loss signal.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
+        },
         "name": "Universal Logistics - Nissan Integrated Logistics Center - Smyrna TN",
         "type": "Integrated Logistics Center / Sequencing Warehouse",
         "archetype": "#7",
@@ -1146,6 +1231,20 @@
       },
       {
         "id": "07-cloverdale-va",
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            { "tier": 1, "url": "https://investors.universallogistics.com/news-releases/news-release-details/universal-invest-50-million-create-45-new-jobs-expansion-greater", "date": "2024-01", "type": "press", "claim": "ULH $50M heavy-truck-division expansion into Greater Roanoke (Botetourt), 45 jobs, operational 2025" },
+            { "tier": 1, "url": "https://www.ziprecruiter.com/c/Universal-Logistics-Holdings,-Inc./Job/Assembler-8/-in-Cloverdale,VA?jid=bbf6471169ba5ba0", "date": "2025", "type": "press", "claim": "ULH 'Assembler' / on-site assembly reqs in Cloverdale VA at 1796 Lee Hwy — facility live" }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Dated ULH PR + current on-site assembly/engineering reqs at 1796 Lee Hwy confirm the heavy-truck facility came online and operates.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
+        },
         "name": "Universal Logistics - Roanoke/Botetourt Value-Added Facility - Cloverdale VA",
         "type": "Value-Added Warehouse / Heavy-Truck Assembly Facility (owned)",
         "archetype": "#3",
@@ -1359,6 +1458,20 @@
       },
       {
         "id": "08-maryville-tn",
+        "verification": {
+          "verdict": "rejected",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            { "tier": 1, "url": "https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnapshot&query_param=USDOT&query_string=839281", "date": "2026", "type": "press", "claim": "USDOT 839281 / MC 371555 = 'Universal Logistics Services Inc', Maryville TN, ~77 trucks, a distinct entity" },
+            { "tier": 1, "url": "https://www.nlrb.gov/case/21-CA-286645", "date": "2022", "type": "press", "claim": "ULH single-employer family (Mason-Dixon Intermodal dba Universal Intermodal, Southern Counties Express, Universal Truckload, etc.) does NOT include Maryville's 'Universal Logistics Services Inc'" }
+          ],
+          "checkedDivestiture": false,
+          "checkedBankruptcyEra": false,
+          "rationale": "REJECTED — wrong company; Maryville's 'Universal Logistics Services Inc' (USDOT 839281, GM Jim Brinkley) is an unrelated independent ~77-truck carrier, not a ULH subsidiary (name collision).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
+        },
         "name": "Universal Logistics Services - Maryville Terminal - Maryville TN",
         "type": "Trucking / Logistics Terminal",
         "archetype": "#3",
@@ -1581,6 +1694,20 @@
       },
       {
         "id": "09-jacksonville-fl",
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            { "tier": 3, "url": "https://www.loadmatch.com/directory/company_detail.cfm?cID=37666", "date": "2026", "type": "locator", "claim": "Universal Intermodal Services, 2050 Kings Road Building #3, Jacksonville FL 32209 — exact address match" },
+            { "tier": 3, "url": "https://www.ziprecruiter.com/co/universal-intermodal-services/Jobs/-in-Jacksonville,FL", "date": "2025", "type": "press", "claim": "Active Universal Intermodal Services hiring in Jacksonville FL" }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Exact-address directory listing for the ULH intermodal brand + active local hiring; no closure. Macro caveat: ULH intermodal segment contracting (Q3-2025 impairment).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
+        },
         "name": "Universal Intermodal Services - Jacksonville Terminal - Jacksonville FL",
         "type": "Intermodal / Drayage Terminal (owned)",
         "archetype": "#9",
@@ -1748,6 +1875,20 @@
       },
       {
         "id": "10-rancho-dominguez-ca",
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            { "tier": 3, "url": "https://www.loadmatch.com/directory/company_detail.cfm?cID=7412", "date": "2026", "type": "locator", "claim": "Southern Counties Express dba Universal Intermodal Services, 18020 South Santa Fe Avenue, Rancho Dominguez CA — exact address match" },
+            { "tier": 1, "url": "https://www.prnewswire.com/news-releases/universal-logistics-holdings-inc-acquires-southern-counties-express-inc-300695550.html", "date": "2018", "type": "press", "claim": "ULH acquired Southern Counties Express ($65M); still in the ULH single-employer family" }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Exact-address directory listing tying SCE/Universal Intermodal to 18020 S Santa Fe Ave; subsidiary still ULH-owned. Macro caveat: intermodal segment under stress.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
+        },
         "name": "Universal Intermodal Services - Compton/Rancho Dominguez Terminal - Rancho Dominguez CA",
         "type": "Intermodal / Drayage Terminal / Container Yard (owned)",
         "archetype": "#9",
@@ -1915,6 +2056,20 @@
       },
       {
         "id": "11-houston-tx",
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "leased",
+          "citations": [
+            { "tier": 3, "url": "https://www.loadmatch.com/directory/company_detail.cfm?companyID=13091", "date": "2026", "type": "locator", "claim": "Universal Intermodal Services, 7800 E. Little York, Ste. A, Houston TX 77016 — exact address match" },
+            { "tier": 3, "url": "https://cdllife.com/jobslist/6883dead9da35e0002827558/houston-texas", "date": "2025", "type": "press", "claim": "ULH/Universal hiring local CDL-A intermodal drivers out of Houston" }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Exact-address directory listing + current Houston intermodal driver req; terminal operating. Flag: ULH intermodal is the most financially stressed segment ($81.2M Q3-2025 impairment).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
+        },
         "name": "Universal Intermodal Services - Houston Terminal - Houston TX",
         "type": "Intermodal / Drayage Terminal (owned)",
         "archetype": "#3",
@@ -2126,6 +2281,20 @@
       },
       {
         "id": "12-sturtevant-wi",
+        "verification": {
+          "verdict": "probable",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            { "tier": 3, "url": "https://www.facebook.com/DriveUniversal/posts/4243706279024009/", "date": "2024", "type": "press", "claim": "LINC hiring warehouse associates at 7100 Durand Ave, Sturtevant WI 53177" },
+            { "tier": 3, "url": "https://www.crexi.com/lease/properties/983727/wisconsin-7100-durand-ave", "date": "2025-07", "type": "press", "claim": "~300,410 of 601,160 sq ft VACANT — about half the building marketed for lease" }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "LINC-branded hiring + CNH trade records place LINC at 7100 Durand, but the CNH ag program is winding down and ~half the building is now for lease — active but contracting; scale unproven.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
+        },
         "name": "Universal Logistics / LINC - Sturtevant Contract Logistics Warehouse - Sturtevant WI",
         "type": "Contract Logistics / Value-Added Warehouse",
         "archetype": "#3",
@@ -2343,6 +2512,20 @@
       },
       {
         "id": "13-vance-al",
+        "verification": {
+          "verdict": "rejected",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            { "tier": 1, "url": "https://www.sec.gov/Archives/edgar/data/0001308208/000095017025040283/ulh-20241231.htm", "date": "2025-03", "type": "10-K", "claim": "FY2024 Item 2 Properties discloses no Alabama / Vance / Cottondale / Brookwood / Tuscaloosa facility" },
+            { "tier": 1, "url": "https://www.automotivelogistics.media/mercedes-benz-switches-from-one-to-three-lsps-in-alabama/17357.article", "date": "2017", "type": "press", "claim": "Named MBUSI Vance LSPs are BLG/Penske/Schnellecke/Celadon — not Universal/LINC" }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "REJECTED — no discrete operating building verifiable; only a city-level Indeed/Glassdoor presence, named MBUSI LSPs are others, ULH 10-K discloses no AL property; anchor coords are a placeholder.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
+        },
         "name": "Universal Logistics - Vance Value-Added Facility - Vance AL",
         "type": "Value-Added Logistics / Sequencing Warehouse",
         "archetype": "#3",
@@ -2525,6 +2708,20 @@
       },
       {
         "id": "14-tanner-al",
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            { "tier": 1, "url": "https://hrone.wd1.myworkdayjobs.com/wday/cxs/hrone/Universal_Logistics_Holdings/job/LINC-TANNER-AL/CLASS-A-YARD-SWITCHER--Tanner--AL--CP-_JR123191", "date": "2026-03", "type": "press", "claim": "Universal/LINC hiring Class A Yard Switcher at Tanner AL (location code LINC-TANNER), posted 2026-03-10" },
+            { "tier": 2, "url": "https://workforce.alabama.gov/warn-list/", "date": "2026-06", "type": "press", "claim": "Alabama WARN list shows no Universal/LINC Tanner closure notice" }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "LINC has 16+ open Tanner reqs on its official Workday ATS (one posted 2026-03-10), location-coded LINC-TANNER; clean closure gauntlet; Mazda Toyota still in production.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
+        },
         "name": "Universal Logistics - Tanner Value-Added Facility - Tanner AL",
         "type": "Value-Added Logistics / Sequencing Warehouse",
         "archetype": "#3",
@@ -2661,6 +2858,20 @@
       },
       {
         "id": "15-spring-hill-tn",
+        "verification": {
+          "verdict": "rejected",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            { "tier": 1, "url": "https://www.sec.gov/Archives/edgar/data/0001308208/000095017025040283/ulh-20241231.htm", "date": "2025-02", "type": "10-K", "claim": "Only itemized owned TN terminal is Memphis; no Spring Hill / Columbia / Maury County address in Item 2" },
+            { "tier": 2, "url": "https://idealcontracting.com/projects/gm-spring-hill-assembly-plant-logistics-operations-center/", "date": "2024", "type": "press", "claim": "Spring Hill Logistics Operations Center is a conversion inside GM's own plant; Universal not named, no separate address" }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "REJECTED — no discrete operating building verifiable; real city-level presence only (Universal launch post + jobs); GM Spring Hill work is on GM premises; anchor coords are a placeholder.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
+        },
         "name": "Universal Logistics - Spring Hill Contract Logistics Warehouse - Spring Hill TN",
         "type": "Contract Logistics / Value-Added Warehouse",
         "archetype": "#3",
@@ -2763,6 +2974,20 @@
       },
       {
         "id": "16-san-antonio-tx",
+        "verification": {
+          "verdict": "rejected",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            { "tier": 1, "url": "https://www.sec.gov/Archives/edgar/data/1308208/000095017025040283/ulh-20241231.htm", "date": "2025-03", "type": "10-K", "claim": "FY2024 filing contains no 'San Antonio'; Item 2 lists no San Antonio facility (SEC EDGAR full-text: 0 hits for 'San Antonio' or 'Toyota' across all ULH filings)" },
+            { "tier": 2, "url": "https://pressroom.toyota.com/tmmtx-welcomes-new-on-site-suppliers/", "date": "2024", "type": "press", "claim": "TMMTX on-site sequencing supplier is Toyota Tsusho America, not Universal" }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "REJECTED — no discrete operating building verifiable; only aggregator city presence; ULH never names San Antonio or Toyota in any filing; anchor coords are a placeholder.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
+        },
         "name": "Universal Logistics - San Antonio Contract Logistics Warehouse - San Antonio TX",
         "type": "Contract Logistics / Value-Added Warehouse",
         "archetype": "#3",
@@ -2865,6 +3090,20 @@
       },
       {
         "id": "17-madison-al",
+        "verification": {
+          "verdict": "probable",
+          "operator": "3PL",
+          "tenancy": "owned",
+          "citations": [
+            { "tier": 1, "url": "https://www.sec.gov/Archives/edgar/data/0001308208/000095017025040283/ulh-20241231.htm", "date": "2025-03", "type": "10-K", "claim": "ULH delivers value-added contract logistics inside ~54 customer-provided facilities; automotive = 47% of revenue (confirms captive-in-customer-plant model)" },
+            { "tier": 1, "url": "https://www.polaris.com/en-us/locations/huntsville-al/", "date": "2026", "type": "locator", "claim": "Polaris Huntsville/Madison AL plant active in 2026 (Slingshot + RANGER); the 2025 Polaris closure was Osceola WI, not Madison AL" }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "Polaris Madison plant confirmed operating in 2026 (closure risk cleared); Universal's captive inbound-logistics role fits ULH's 10-K customer-facility model and was historically address-attested, but lacks a fresh current re-confirmation — flagged medium.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
+        },
         "name": "Universal Logistics - Polaris Madison Plant Contract Logistics - Madison AL",
         "type": "Contract Logistics / inbound logistics inside manufacturing plant",
         "archetype": "#6",
@@ -3023,6 +3262,20 @@
       },
       {
         "id": "18-chillicothe-il",
+        "verification": {
+          "verdict": "rejected",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            { "tier": 1, "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm", "date": "2026-03", "type": "10-K", "claim": "Contract-logistics value-added services run 'at or adjacent to facilities owned or controlled by customers... ~50 customer-provided locations'; Chillicothe (Caterpillar) is one such location, not a ULH-listed property" },
+            { "tier": 1, "url": "https://www.indeed.com/cmp/Universal-Logistics-Holdings,-Inc./locations/IL/Chillicothe", "date": "2026", "type": "press", "claim": "Active ULH reqs in Chillicothe IL confirm a workforce, but no street address is published and the building is Caterpillar's" }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "REJECTED — no discrete ULH-operated building verifiable; ULH runs pick/pack/sequencing inside Caterpillar's Chillicothe warehouse (a customer-provided location per the 10-K), not a discrete ULH facility.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
+        },
         "name": "Universal Logistics - Chillicothe Contract Logistics Warehouse - Chillicothe IL",
         "type": "Contract Logistics / Value-Added Warehouse",
         "archetype": "#3",
@@ -3222,6 +3475,20 @@
       },
       {
         "id": "19-mossville-il",
+        "verification": {
+          "verdict": "rejected",
+          "operator": "3PL",
+          "tenancy": "leased",
+          "citations": [
+            { "tier": 1, "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm", "date": "2026-03", "type": "10-K", "claim": "Value-added services at '~50 customer-provided locations'; Mossville (Caterpillar) is a customer-provided in-plant location and does not appear in ULH's owned/leased-terminal listing" },
+            { "tier": 1, "url": "https://www.indeed.com/cmp/Universal-Logistics-Holdings-Inc./locations/IL/Mossville", "date": "2026", "type": "press", "claim": "Universal Logistics (apply as Logistics Insights) hiring in Mossville 'in direct partnership with Caterpillar' — in-plant workforce, not a discrete ULH building" }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "REJECTED — no discrete ULH-operated building verifiable; ULH contract logistics is embedded inside the Caterpillar Mossville engine campus (mapped onto the customer plant).",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
+        },
         "name": "Universal Logistics - Mossville Contract Logistics Warehouse - Mossville IL",
         "type": "Contract Logistics / Value-Added Warehouse",
         "archetype": "#9",
@@ -3385,6 +3652,20 @@
       },
       {
         "id": "20-savannah-ga",
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            { "tier": 1, "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm", "date": "2026-03", "type": "10-K", "claim": "ULH owns terminal yards including Savannah, Georgia (Item 2 Properties, FY2025, as of 2025-12-31)" },
+            { "tier": 3, "url": "https://www.ziprecruiter.com/Jobs/Universal-Intermodal/--in-Georgia", "date": "2025-10", "type": "press", "claim": "Universal Intermodal actively hiring company drivers/owner-operators in Georgia (Savannah/Garden City)" }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "ULH owns the Savannah/Garden City terminal (6052 Commerce Court), operated as Universal Intermodal / Mason Dixon, named in the FY2025 10-K with active 2025 hiring. Flag: $81.2M Q3-2025 intermodal impairment + potential divestiture talk; retained in post-impairment 10-K.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
+        },
         "name": "Universal Intermodal Services - Savannah Terminal - Savannah GA",
         "type": "Intermodal / Drayage Terminal (owned)",
         "archetype": "#9",
@@ -3562,6 +3843,20 @@
       },
       {
         "id": "21-harvey-il",
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            { "tier": 1, "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm", "date": "2026-03", "type": "10-K", "claim": "ULH owns terminal yards including Harvey, Illinois (Item 2 Properties, FY2025, as of 2025-12-31)" },
+            { "tier": 1, "url": "https://www.breakroom.cc/en-us/jobs/listing/758102-universal-logistics-holdings-inc-cdl-a-contractors-harvey", "date": "2025", "type": "press", "claim": "ULH 'CDL A Contractors (Harvey)' active hiring at the Harvey terminal" }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "ULH owns the Harvey IL drayage terminal (250 E 167th St, the Universal Intermodal Chicago ops center on the CN corridor), named in the FY2025 10-K with active 2025 hiring. Flag: intermodal-segment impairment/divestiture risk; retained in post-impairment 10-K.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
+        },
         "name": "Universal Intermodal Services - Harvey Chicago Operations Center - Harvey IL",
         "type": "Intermodal / Drayage container & chassis yard",
         "archetype": "#9",
@@ -3725,6 +4020,19 @@
       },
       {
         "id": "22-gary-in",
+        "verification": {
+          "verdict": "rejected",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            { "tier": 1, "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm", "date": "2026-03", "type": "10-K", "claim": "ULH names Gary, Indiana among owned terminal-yard cities (Item 2, FY2025) — but with no street address" }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": true,
+          "rationale": "REJECTED — unlocatable; the 10-K confirms a Gary IN owned-terminal city but no findable public street address or imagery exists for a Universal Intermodal Gary terminal (FMCSA shows only the Warren MI corporate address); anchor coords are a placeholder.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
+        },
         "name": "Universal Intermodal Services - Gary Terminal - Gary IN",
         "type": "Intermodal / Drayage Terminal / Container Yard (owned)",
         "archetype": "#3",
@@ -3825,6 +4133,20 @@
       },
       {
         "id": "23-louisville-ky",
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            { "tier": 1, "url": "https://www.gocrown.ws/property/2338-millers-lane/", "date": "2026-06", "type": "press", "claim": "Crown Enterprises (Moroun, holds ULH real estate) lists 2338 Millers Lane as a 23,591 SF terminal, 46 cross-dock doors, 4.72 acres — exact building match" },
+            { "tier": 1, "url": "https://www.nlrb.gov/case/21-CA-286645", "date": "2026-06", "type": "press", "claim": "Names 'Mason-Dixon Intermodal d/b/a Universal Intermodal Services' as a ULH single-employer entity" }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Independent sources place the ULH intermodal operator at the exact 46-door Crown-owned building; only 2025 negative is a non-cash impairment, no WARN/closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
+        },
         "name": "Universal Logistics - Louisville Terminal - Louisville KY",
         "type": "Terminal Yard / Intermodal Cross-Dock Terminal (owned)",
         "archetype": "#3",
@@ -4048,6 +4370,20 @@
       },
       {
         "id": "24-columbus-oh",
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            { "tier": 1, "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-20251231.htm", "date": "2026-03", "type": "10-K", "claim": "ULH owns terminal yards including Columbus, Ohio (Item 2 Properties, FY2025)" },
+            { "tier": 3, "url": "https://cdllife.com/jobslist/696aafe04a5a01000284248f/columbus-ohio", "date": "2026-01", "type": "press", "claim": "ULH hiring CDL-A intermodal drivers at 2950 International St, Columbus OH 43228" }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Columbus appears as a ULH-owned terminal yard in both FY2024 and FY2025 10-Ks, corroborated by 2026 hiring at the exact address; 2025 impairment is accounting, not a closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
+        },
         "name": "Universal Logistics - Columbus Terminal - Columbus OH",
         "type": "Intermodal / Drayage Terminal Yard (owned)",
         "archetype": "#3",
@@ -4276,6 +4612,20 @@
       },
       {
         "id": "25-clearfield-ut",
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            { "tier": 1, "url": "https://www.sec.gov/Archives/edgar/data/1308208/000119312526108365/ulh-ex21_1.htm", "date": "2026-03", "type": "10-K", "claim": "'Specialized Rail Service, Inc.' listed as a principal ULH subsidiary (Exhibit 21.1, FY2025)" },
+            { "tier": 1, "url": "https://safer.fmcsa.dot.gov/query.asp?searchtype=ANY&query_type=queryCarrierSnapshot&query_param=USDOT&query_string=506498", "date": "2026-06", "type": "press", "claim": "SPECIALIZED RAIL SERVICE INC, DBA UNIVERSAL, status ACTIVE, 120 E 700 S, Clearfield UT 84015" }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "FY2025 10-K lists SRS as a subsidiary and Clearfield UT as ULH-owned; live FMCSA SAFER (2026-06) shows USDOT 506498 ACTIVE at the exact address under DBA 'UNIVERSAL'.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
+        },
         "name": "Universal Logistics - Clearfield Terminal - Clearfield UT",
         "type": "Intermodal / Rail-Served Transload & Distribution Terminal (owned)",
         "archetype": "#3",
@@ -4489,6 +4839,20 @@
       },
       {
         "id": "26-memphis-tn",
+        "verification": {
+          "verdict": "confirmed",
+          "operator": "self",
+          "tenancy": "owned",
+          "citations": [
+            { "tier": 1, "url": "https://www.indeed.com/viewjob?jk=910e6baffbb828a4", "date": "2026-06", "type": "press", "claim": "ULH / Universal Intermodal hiring CDL-A intermodal driver onsite at '4014 Outland Road, Memphis, TN 38118' verbatim" },
+            { "tier": 1, "url": "https://www.sec.gov/Archives/edgar/data/0001308208/000095017025040283/ulh-20241231.htm", "date": "2025-03", "type": "10-K", "claim": "ULH owns terminal yards including Memphis, TN (Item 2 Properties, FY2024)" }
+          ],
+          "checkedDivestiture": true,
+          "checkedBankruptcyEra": false,
+          "rationale": "Active 2025-2026 careers postings name 4014 Outland Rd verbatim as the Universal Intermodal onsite location; FY2024 10-K lists Memphis as an owned terminal yard; Q3-2025 charge is a valuation writedown, no closure.",
+          "verifiedBy": "agent",
+          "verifiedAt": "2026-06-19"
+        },
         "name": "Universal Logistics - Memphis Terminal - Memphis TN",
         "type": "Intermodal / Drayage Terminal & Container Yard (owned)",
         "archetype": "#3",
