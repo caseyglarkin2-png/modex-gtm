@@ -374,6 +374,25 @@ export const DemoPackSchema = z.object({
     siteCount: z.number().int().positive(),
     coverageNote: CoverageNote.nullable(),
     /**
+     * Layer 3 — sourced network denominator. The real, cited size of the
+     * account's in-scope facility footprint (tilde'd in the UI, e.g. "~500
+     * US plants"). When present, the demo header frames the audited sites as
+     * a deliberate CORE SAMPLE of this denominator ("we core-sampled N of
+     * ~M sites"); when absent, the header degrades to the neutral framing.
+     * Populated per-account in Phase 3; most packs do not carry it yet.
+     */
+    networkCount: z.number().optional(),
+    /** Cited source for `networkCount` (e.g. "FY24 10-K, Item 2 Properties"). */
+    networkCountSource: z.string().optional(),
+    /** As-of date for `networkCount` (rendered as a small footnote). */
+    networkCountAsOf: z.string().optional(),
+    /**
+     * Why these specific sites were chosen — the stratification rationale
+     * for the core sample ("your biggest, newest, most and least automated
+     * across all four regions"). Rendered inline in the core-sample header.
+     */
+    sampleRationale: z.string().optional(),
+    /**
      * The site we want a prospect to land on first when they hit
      * /demo/<slug> with no `?site=` param, or when a microsite CTA
      * deep-links into the simulator. Picked at build time as the
