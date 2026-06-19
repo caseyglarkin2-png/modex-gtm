@@ -165,5 +165,19 @@
     "urbanRural": "Hope Hull AL - rural/edge-of-metro south of Montgomery, surrounded by farmland and woods. Rural.",
     "highlyAutomated": "Press notes the facility uses robotics, automated blending, and five on-site AGVs - relevant operational context though not a classification field."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.diageo.com/en/news-and-media/press-releases/2026/diageo-opens-new-state-of-the-art-manufacturing-facility-in-alabama-strengthening-supply-network-in-southern-us", "date": "2026-04", "type": "press", "claim": "Diageo North America officially opened its new 360,000 sq ft manufacturing and warehousing facility in Montgomery AL (~$415M)." },
+      { "tier": 2, "url": "https://www.wsfa.com/2026/04/21/international-alcohol-company-expanding-us-with-new-hope-hull-facility/", "date": "2026-04-21", "type": "press", "claim": "Local news covers Diageo's new Hope Hull facility opening April 21, 2026." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Plant is OPERATIONAL as of April 21, 2026 (grand opening), not construction/future; self-operated Diageo manufacturing + warehousing.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

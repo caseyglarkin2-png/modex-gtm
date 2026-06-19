@@ -138,5 +138,19 @@
     "railServed": "No rail spur into the property.",
     "general": "Per The Spirits Business, production was paused September 2025; the site continues operating for warehousing/maturation, so freight activity is reduced."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 2, "url": "https://whiskycast.com/diageo-pauses-distilling-at-balcones-dickel-and-teaninich/", "date": "2025-09", "type": "press", "claim": "Diageo temporarily pauses distilling and barrel-filling at Cascade Hollow (George Dickel) through June 2026; no jobs lost; visitor center remains open." },
+      { "tier": 3, "url": "https://www.georgedickel.com/visitus", "date": "2026-05", "type": "locator", "claim": "Cascade Hollow Distilling Co. at 1950 Cascade Hollow Rd, Tullahoma listed open with current 2026 tour hours." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Distilling/barrel-filling PAUSED (temporary, through ~Jun 2026, no layoffs) but site retains ~150K barrels maturing on-site and an open visitor center; warehousing/shipping freight activity continues. Caveated/capped; re-check if pause extended.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

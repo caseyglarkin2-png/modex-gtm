@@ -155,5 +155,19 @@
     "railServed": "No rail spur into the property.",
     "general": "Per The Spirits Business, production was paused September 2025; the site continues with tasting room / visitor operations, so truck activity is minimal."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 2, "url": "https://www.thespiritsbusiness.com/2025/09/diageo-halts-production-at-balcones-and-george-dickel/", "date": "2025-09", "type": "press", "claim": "Diageo halted distilling and barrel-filling at Balcones (Waco TX) in Aug 2025 (17 roles impacted); only the visitor centre stays open." },
+      { "tier": 3, "url": "https://balconesdistilling.com/our-distillery", "date": "2026-06", "type": "locator", "claim": "Downtown Waco distillery at 225 S 11th St operates only a Visitor's Center, Tasting Room and Gift Shop (tours Thu-Sat)." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "REJECTED: Diageo paused distilling and barrel-filling Aug 2025 through ~Jun 2026; only a visitor center/tasting room remains at this downtown urban site, which has no meaningful freight yard to audit.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

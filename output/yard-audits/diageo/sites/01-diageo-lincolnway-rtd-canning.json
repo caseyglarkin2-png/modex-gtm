@@ -162,5 +162,19 @@
     "drivewayLong": "Long internal approach from 143rd St entrances to docks/drop yard easily holds 3+ trucks.",
     "urbanRural": "Edge-of-town Plainfield IL industrial park; farmland abuts the west side. Rural per rubric tie-break."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.diageo.com/en/news-and-media/press-releases/2022/diageo-north-america-opens-new-canning-facility-to-accelerate-growth-in-the-ready-to-drink-category", "date": "2022-03", "type": "press", "claim": "Diageo opened Diageo Lincolnway, a 225,000 sq ft RTD canning facility in Plainfield IL (two high-speed can lines, $110M, Crown Royal/Ketel One/Smirnoff RTDs)." },
+      { "tier": 2, "url": "https://www.chicagobusiness.com/consumer-products/diageo-opens-canned-cocktail-plant-plainfield", "date": "2022-03", "type": "press", "claim": "Diageo's third Plainfield facility, 25M+ cases/yr of canned cocktails." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Diageo-built/self-operated RTD canning plant making retained brands; divestiture gauntlet clean, active import activity through mid-2026.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

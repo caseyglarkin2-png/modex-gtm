@@ -157,5 +157,19 @@
     "railServed": "A rail line runs east of the campus but no spur enters the bottling-plant property.",
     "fastLaneOpportunity": "Gate apron is modest; no obvious unused width for an express bypass lane."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.diageo.com/en/news-and-media/press-releases/2021/diageo-north-america-expands-operations-to-support-growth-in-the-ready-to-drink-category", "date": "2021-XX", "type": "press", "claim": "Diageo expands its Plainfield operations; the Plainfield bottling site (open since 1966) plus warehouse employ 600+ people (largest NA manufacturing campus)." },
+      { "tier": 1, "url": "https://www.ziprecruiter.com/co/Diageo/Jobs/-in-Plainfield,IL", "date": "2026-04", "type": "careers", "claim": "Diageo actively hiring manufacturing/ops roles in Plainfield IL (current openings)." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Diageo's largest NA bottling facility (Smirnoff), actively staffed through 2026; no closure or divestiture found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

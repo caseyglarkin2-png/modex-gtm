@@ -163,5 +163,19 @@
     "urbanRural": "Rural - Lebanon KY, rolling farmland in Marion County.",
     "drivewayLong": "Long internal campus roads from the public road to the distillery and rickhouses easily hold a queue of 3+ trucks."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.diageo.com/en/news-and-media/press-releases/2021/diageo-opens-its-first-carbon-neutral-whiskey-distillery-in-north-america", "date": "2021-09", "type": "press", "claim": "Diageo opened its 72,000 sq ft Lebanon KY distillery (Bulleit Bourbon, up to 10M proof gal/yr), first carbon-neutral whiskey distillery in NA." },
+      { "tier": 2, "url": "https://drinksdigest.com/2025/03/08/diageo-pauses-production-at-kentucky-distillery/", "date": "2025-03-08", "type": "press", "claim": "Diageo temporarily paused Lebanon distilling/barrel-filling through June 2025 (ahead of volume schedule); site remains Diageo-operated, staff redirected to Shelbyville." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Diageo-built self-operated Bulleit distillery; Mar-Jun 2025 pause was a temporary efficiency move (not closure/divestiture), site remains in Diageo's active network.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

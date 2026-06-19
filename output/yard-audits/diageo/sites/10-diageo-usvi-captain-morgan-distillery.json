@@ -153,5 +153,19 @@
     "general": "Per Virgin Islands Daily News, Diageo announced moving Captain Morgan aging/warehousing to Maryland while rum production stays on St. Croix - barrel-warehouse activity at this site may be winding down.",
     "confidence": "Medium overall: the facility was positively located and its layout is clear, but truck-gate/guard-shack specifics rely on dated (2016) and partial Street View plus inference; flagged accordingly."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 2, "url": "https://www.virginislandsdailynews.com/news/diageo-to-move-captain-morgan-aging-and-warehousing-to-maryland-rum-production-to-stay-on/article_a12f6257-4558-5c28-9338-608a50a49cee.html", "date": "2016-11", "type": "press", "claim": "Diageo moved Captain Morgan aging/warehousing to Relay MD by end-2017, but rum production stays (distilled) on St. Croix." },
+      { "tier": 3, "url": "https://clui.org/ludb/site/captain-morgan-rum-distillery-us-virgin-islands", "date": "2024", "type": "press", "claim": "Distillery opened 2010; since 2012 supplies all bulk rum for US-market Captain Morgan, capacity ~20M proof gal/yr." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Diageo still distills ALL US-market Captain Morgan rum on St. Croix and ships it out (no closure/divestiture); STALE roster note: the two on-island barrel warehouses were relocated to Relay MD by end-2017, so this site is distillery + shipping. No Tier-1 within 24mo, so probable; flagged.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

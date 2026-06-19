@@ -202,5 +202,19 @@
     "urbanRural": "Edge of Plainfield IL surrounded by active farmland; Rural per rubric.",
     "railServed": "No rail spur enters the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      { "tier": 2, "url": "https://www.midwestwarehouse.com/", "date": "2026-05", "type": "press", "claim": "Midwest Warehouse & Distribution expanded its footprint as a result of expanded business with current customer Diageo (Diageo is an active 3PL client)." },
+      { "tier": 3, "url": "https://www.loc8nearme.com/illinois/plainfield/midwest-warehouse/7641308/", "date": "2026-05", "type": "locator", "claim": "Midwest Warehouse operates at 25820 W 143rd St, Plainfield IL with by-appointment truck check-in (active distribution dock)." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Diageo Plainfield distribution warehouse run by 3PL Midwest Warehouse; current truck distribution hub tied to the Diageo campus, divestiture gauntlet clean.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

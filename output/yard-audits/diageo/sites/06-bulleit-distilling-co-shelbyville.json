@@ -143,5 +143,19 @@
     "siteAreaAcres": "Property is ~300 acres total but mostly wooded; perimeter box covers the ~38-acre developed operational footprint.",
     "connectivityIssue": "Rural Shelby County KY but on a sizeable industrial campus near Shelbyville; coverage likely adequate - flagged as inferred."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.diageo.com/en/our-brands/whiskey/bulleit", "date": "2025", "type": "locator", "claim": "Diageo presents Bulleit Distilling Co. Shelbyville as its operating Bulleit distillery." },
+      { "tier": 2, "url": "https://drinksdigest.com/2025/03/08/diageo-pauses-production-at-kentucky-distillery/", "date": "2025-03-08", "type": "press", "claim": "During the 2025 Lebanon pause Diageo redirected employees to support work at the Shelbyville facility (Shelbyville remained in active operation)." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "$115M Diageo Bulleit distillery (opened 2017), self-operated and actively running; absorbed Lebanon workload in 2025, own-production releases through Mar 2026. No pause for Shelbyville.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

@@ -144,5 +144,19 @@
     "urbanRural": "Inside the Louisville metro (Shively), surrounded by dense industrial fabric - Urban.",
     "drivewayLong": "Internal yard depth from the gate to the production docks easily holds 3+ trucks."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 2, "url": "https://www.wdrb.com/news/business/louisville-distillerys-bottling-operation-shutting-down-by-april-2025-affecting-33-employees/article_75b4b32a-e021-11ef-8dcf-e366bb3fc10b.html", "date": "2025-01-31", "type": "press", "claim": "Diageo ends bottling at Stitzel-Weller by April 2025 but continues distilling and maturing bourbon on-site; majority of maturation/warehousing shifting to Shelbyville/Lebanon over 2-3 years." },
+      { "tier": 2, "url": "https://whiskycast.com/diageo-to-cut-operations-at-stitzel-weller/", "date": "2025-01", "type": "press", "claim": "Bottling closes Apr 2025; limited distilling (Blade & Bow) continues, ~18 warehouses/~300K barrels maturing, Bulleit Frontier Whiskey Experience visitor center stays open." }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Bottling closed Apr 2025 but Diageo still distills (Blade & Bow), matures ~300K barrels, and runs the visitor center; freight-yard activity continues but warehousing is on a multi-year wind-down. Caveated/capped.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }
