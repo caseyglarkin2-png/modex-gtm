@@ -120,5 +120,20 @@
     "fastLaneOpportunity": "Wide unfenced gravel/paved aprons at both dock banks and a broad loop road give ample room to add lanes; no current control to bypass.",
     "urbanRural": "Five Points industrial park on the NW edge of Abilene; open prairie immediately west and south, sparse industrial development. Edge-of-town/rural setting."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://pactivcareers.dejobs.org/abilene-tx/thermoforming-operator-associate-3rd-shift/44A4780E57A04D0E9DFBA24381B4521A/job/", "date": "2025", "type": "careers", "claim": "Active Pactiv (official ATS) Thermoforming Operator Associate requisition at the Abilene, TX plant" },
+      { "tier": 1, "url": "https://www.ziprecruiter.com/co/Pactiv-Evergreen/Jobs/--in-Texas", "date": "2026-03", "type": "careers", "claim": "Multiple current Pactiv Evergreen Abilene TX production reqs (packer, thermoforming, extrusion); ~150-employee PET plant built 2006, actively staffed" }
+    ],
+    "imageryDate": "2025-01",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Pactiv Evergreen Abilene Food Merchandising plant (PET, ~150 employees); current hiring via official ATS; no closure/WARN/divestiture found in the 2024-25 gauntlet. Novolex acquisition keeps it self-operated. Recent (2025-01) Street View consistent with active site.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

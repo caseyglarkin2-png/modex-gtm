@@ -107,5 +107,19 @@
     "urbanRural": "Romeoville logistics corridor — large speculative-warehouse cluster on the edge of town adjoining farm fields; classified Rural per the rubric tie-break toward small-town/edge-of-town industrial.",
     "siteAreaAcres": "Perimeter box covers the ~898k sq ft building plus its full dock yards and parking — roughly 50 acres."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.pizzuti.com/projects/pactiv-corporation", "date": "2013-01", "type": "fact-sheet", "claim": "Pactiv build-to-suit 898,000 sq ft distribution facility at 1100 W Taylor Rd, Romeoville IL with 91 dock openings; matches this exact address" },
+      { "tier": 3, "url": "https://main.romeovillechamber.org/list/member/pactiv-evergreen-544", "date": "2026-06", "type": "econ-dev", "claim": "Pactiv Evergreen listed as an active logistics member of the Romeoville Chamber of Commerce" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Pactiv LLC operates the 1100 Taylor Rd Romeoville DC (now a Novolex unit post-Apr-2025 $6.7B acquisition; operator self); no closure/WARN/divestiture found in the gauntlet.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

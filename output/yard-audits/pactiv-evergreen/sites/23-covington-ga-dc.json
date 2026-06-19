@@ -133,5 +133,19 @@
     "railServed": "No rail spur enters the property; truck-served distribution / mixing center.",
     "drivewayLong": "Deep entry drive from the barrier arm to the dock aprons holds a 3+ truck queue."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 3, "url": "https://www.chamberofcommerce.com/business-directory/georgia/covington/distribution-service/2001699362-pactiv-evergreen-regional-mixing-center", "date": "2026-06", "type": "econ-dev", "claim": "Pactiv Evergreen Regional Mixing Center at 15101 Lake Forest Ct NE, Covington GA listed active, operating 24/7" },
+      { "tier": 3, "url": "https://www.yelp.com/biz/pactiv-covington", "date": "2026-06", "type": "econ-dev", "claim": "PACTIV at 15101 Lake Forest Ct, Covington GA, listing updated June 2026 (current operation)" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Pactiv operates the 15101 Lake Forest Ct Covington GA Regional Mixing Center / DC (Novolex unit, operator self); listed active 24/7 as of June 2026, no closure/WARN found. No clean Tier-1 locator hit (Pactiv site now redirects to JS-driven Novolex locator); corroborated by multiple current Tier-3 sources.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

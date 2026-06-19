@@ -110,5 +110,20 @@
     "railServed": "No rail spur visible entering the property.",
     "scale": "No truck scale visible."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://www.linkedin.com/jobs/view/plant-ci-manager-lean-manufacturing-at-pactiv-evergreen-inc-3273521352", "date": "2025-06", "type": "careers", "claim": "Active Pactiv Evergreen reqs at the Turlock CA plant (Plant CI Manager - Lean Manufacturing, Sealing Manager, Planner Scheduler) confirm a staffed, operating carton-converting plant" },
+      { "tier": 1, "url": "https://www.nlrb.gov/case/32-CA-342301", "date": "2024", "type": "press", "claim": "NLRB case naming Pactiv Evergreen at the Turlock CA facility indicates an active, staffed bargaining-unit plant" }
+    ],
+    "imageryDate": "2026-03",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Operating Pactiv Evergreen (Novolex, operator self) carton-converting plant; active careers reqs + NLRB case; no WARN/closure found (the only closed CA plant is Bakersfield, not Turlock).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

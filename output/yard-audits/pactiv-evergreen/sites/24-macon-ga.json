@@ -126,5 +126,20 @@
     "urbanRural": "Airport-fringe light-industrial corridor on Airport Drive south of Macon, bordered by pine woods and the regional airport - Rural per rubric.",
     "siteAreaAcres": "Perimeter box (~390 m N-S x ~290 m E-W of fenced/used land including the north drop yard) yields roughly 27 acres - estimate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://www.ziprecruiter.com/co/pactiv-evergreen/Jobs/-in-Macon,GA", "date": "2026-04", "type": "careers", "claim": "Active Pactiv Evergreen Macon GA molded fiber production job postings (operator associate, rotating 12-hr shifts)" },
+      { "tier": 3, "url": "https://www.paper-world.com/en/company/pactiv-evergreen-usa-molded-fibre-products-group-macon-plant-macon-ga-1652010", "date": "2025-01", "type": "econ-dev", "claim": "Pactiv Evergreen USA Molded Fibre Products Group, Macon Plant listed as an operating molded fibre / egg-tray plant in Macon GA" }
+    ],
+    "imageryDate": "2023-07",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Pactiv operates the Airport Dr Macon GA molded-fibre / egg-tray plant (Novolex unit, operator self); 2023-07 Street View shows Pactiv Evergreen signage, active 2026 hiring, no closure/WARN found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

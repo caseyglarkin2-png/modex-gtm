@@ -114,5 +114,19 @@
     "railServed": "No rail spur enters the property (a former rail alignment runs near the west side but does not serve the building).",
     "siteAreaAcres": "Estimated ~17 acres for the parcel; the Pactiv operation may occupy only part of a shared multi-tenant block, so usable yard area is smaller. Flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://pactivevergreen.com/products-and-capabilities/brands/plant-carton/plantcarton-support-services", "date": "2025-01", "type": "fact-sheet", "claim": "Pactiv Evergreen Equipment headquarters is in Cedar Rapids, Iowa (filling-equipment training/service)" },
+      { "tier": 3, "url": "https://www.cedarrapids.org/directory/detail/manufacturers/pactiv-evergreen-inc/", "date": "2025-01", "type": "econ-dev", "claim": "Pactiv Evergreen Inc. listed as active manufacturer member by Cedar Rapids Metro Economic Alliance" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Confirmed Pactiv Evergreen Equipment HQ (gable-top carton filling machinery) in Cedar Rapids; named on Pactiv's own site, no closure signal. The Cedar Rapids plant closure in the news is Smurfit Westrock (different company), NOT Pactiv.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

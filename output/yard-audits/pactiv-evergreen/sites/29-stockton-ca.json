@@ -113,5 +113,20 @@
     "entryLanes": "Single-lane fenced corridor mouth; entry/exit share it - flagged uncertain.",
     "siteAreaAcres": "Perimeter box ~16.5 acres covering the single large building, NE office parking and the SW dock corridor; the building is one tenant unit within a larger multi-building park."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.indeed.com/cmp/Pactiv-Evergreen/locations/CA/Stockton", "date": "2025-09", "type": "careers", "claim": "Active 2025 Pactiv Evergreen careers/reviews tied to the Stockton CA foodservice plant confirm it staffs and operates now." },
+      { "tier": 2, "url": "https://www.packagingdive.com/news/novolex-closing-pactiv-evergreen-plant-bakersfield-california/758113/", "date": "2025-08", "type": "press", "claim": "The only 2025 CA Pactiv closure is BAKERSFIELD (Norris Rd/Pegasus Dr, 127 jobs, Oct 14 2025) - NOT Stockton's 1110 Performance Drive. Stockton is unaffected." }
+    ],
+    "imageryDate": "2026-03",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Verified distinct from the Bakersfield closure; active 2025 reqs at Stockton CA, no Stockton WARN; Novolex kept the rail-served plant running (operator self).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

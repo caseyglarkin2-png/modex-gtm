@@ -116,5 +116,19 @@
     "dockDoorCount": "Estimate ~24 doors across the complex; counting is imprecise because docks face internal drives and several are recessed.",
     "postGateStaging": "Interior paved drives and yard provide holding room inside the property before docks."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://www.glassdoor.com/Job/franklin-park-pactiv-evergreen-jobs-SRCH_IL.0,13_IC1128844_KO14,30.htm", "date": "2025-06", "type": "careers", "claim": "27+ active Pactiv Evergreen (Novolex) reqs at Franklin Park IL confirm a staffed, operating food-merchandising plant" }
+    ],
+    "imageryDate": "2025-03",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Operating Pactiv Evergreen (Novolex, operator self) Chicago-area food-merchandising plant; many active careers reqs; no WARN/closure/divestiture found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

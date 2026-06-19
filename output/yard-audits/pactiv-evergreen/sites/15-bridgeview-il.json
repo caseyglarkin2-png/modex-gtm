@@ -112,5 +112,19 @@
     "scale": "No truck scale visible.",
     "trailerParkingCapacity": "West dock apron plus the SE open yard could hold ~30 trailers; estimate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://www.ziprecruiter.com/co/Pactiv-Evergreen/Jobs/-in-Bridgeview,IL", "date": "2025-01", "type": "careers", "claim": "45+ active Pactiv Evergreen (Novolex) reqs at Bridgeview IL (EHS Administrator, Infeed Material Operator, Extruder Operator) confirm a staffed, operating foodservice plant" }
+    ],
+    "imageryDate": "2025",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Operating Pactiv Evergreen (Novolex, operator self) Chicago-area foodservice plant; many active careers reqs; no WARN/closure/divestiture found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

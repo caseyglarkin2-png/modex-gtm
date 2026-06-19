@@ -114,5 +114,19 @@
     "urbanRural": "Inside the Athens GA metro fabric — the campus sits in an established industrial district off Newton Bridge Rd / Dairy Pak Rd with dense surrounding development, neighborhoods, and other plants. Urban.",
     "fastLaneOpportunity": "Entrance and internal roads are moderately constrained by the multi-building campus layout; limited obvious room to add a dedicated express lane."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.ziprecruiter.com/co/pactiv-evergreen/Jobs/-in-Athens,GA", "date": "2025-03", "type": "careers", "claim": "5 active Pactiv Evergreen reqs (Multi-Craft Technician, Tool and Die Maker, Quality Engineer) at Athens GA; weekly open interviews" },
+      { "tier": 3, "url": "https://business.athensga.com/list/member/pactiv-evergreen-1355", "date": "2025-01", "type": "econ-dev", "claim": "Pactiv Evergreen / Novolex listed as active Manufacturing member at 600 Dairy Pak Road, Athens GA by the Athens Area Chamber of Commerce" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Carton-converting plant flagged for BevMerch-wind-down risk; gauntlet clears it. The 2023-24 restructuring closed the paperboard MILLS (Canton NC, Olmsted Falls OH, Pine Bluff AR, Waynesville NC), not this converting plant. Active 2025 hiring, Chamber-listed; the Novolex Georgia closure is Bremen GA, not Athens.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

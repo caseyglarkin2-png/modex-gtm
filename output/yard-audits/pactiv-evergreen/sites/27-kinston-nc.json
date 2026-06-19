@@ -138,5 +138,20 @@
     "siteAreaAcres": "Property listings cite a 23.02-acre site; perimeter box set to match (~430 m N-S x ~350 m E-W). siteAreaAcres 23.",
     "entryLanes": "Open driveways; entry and exit share the access points. Lane counts are estimates."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.breakroom.cc/en-us/jobs/listing/21714055-pactiv-evergreen-baler-material-handler-1447-enterprise-rd", "date": "2025-11", "type": "careers", "claim": "Pactiv Evergreen Baler Material Handler req dated Nov 2025 at 1447 Enterprise Rd, Kinston NC ($20.68-$22.12/hr) confirms BOTH the exact address and active current operation." },
+      { "tier": 1, "url": "https://www.ziprecruiter.com/co/Pactiv-Evergreen/Jobs/-in-Kinston,NC", "date": "2026-04", "type": "careers", "claim": "Active 2026 Pactiv Evergreen reqs in Kinston NC (incl. Facility Operations Director, Operator Associate) confirm the legacy Dopaco paper-packaging plant staffs and operates now." }
+    ],
+    "imageryDate": "2026-03",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Address resolved and confirmed: dated Nov 2025 careers req cites the exact 1447 Enterprise Rd; no closure/WARN found; Novolex kept the ex-Dopaco plant running (operator self).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

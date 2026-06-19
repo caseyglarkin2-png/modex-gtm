@@ -112,5 +112,20 @@
     "urbanRural": "Edge-of-town industrial park on the SE side of Plant City FL, bordered by wetland/lakes and farmland - judged Rural per the small-town rule.",
     "dropArea": "No marked trailer-only drop stalls; trailers seen are backed into dock doors."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.indeed.com/cmp/Pactiv-Evergreen/locations/FL/Plant%20City", "date": "2025-01", "type": "careers", "claim": "Pactiv Evergreen Plant City FL location (2104 Henderson Way) with active careers/roles, ~257 employees" },
+      { "tier": 3, "url": "https://www.yelp.com/biz/evergreen-packaging-plant-city-2", "date": "2026-03", "type": "locator", "claim": "Evergreen Packaging / Pactiv at 2104 Henderson Way, Plant City FL 33563, listing updated March 2026" }
+    ],
+    "imageryDate": "2025-01",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Carton-converting plant flagged for BevMerch-wind-down risk; gauntlet clears it. ~257 employees, active careers, listing fresh to March 2026; restructuring closed the mills, not this converting plant. No closure/WARN found for Plant City.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

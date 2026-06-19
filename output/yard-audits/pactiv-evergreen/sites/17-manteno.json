@@ -105,5 +105,19 @@
     "connectivityIssue": "Edge-of-town but Manteno township is built up nearby and the I-57 corridor is close; cellular coverage likely adequate — false, but flagged low-confidence.",
     "postGateStaging": "Large interior paved yard / loop road provides holding room inside the property before docks."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://www.ziprecruiter.com/co/Pactiv-Evergreen/Jobs/-in-Manteno,IL", "date": "2025-05", "type": "careers", "claim": "13+ active Pactiv Evergreen (Novolex) reqs at Manteno IL (Logistics Manager for warehouse/raw-material ops, production machine operators) confirm a staffed, operating food-merchandising plant" }
+    ],
+    "imageryDate": "2024-07",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Operating Pactiv Evergreen (Novolex, operator self) food-merchandising plant; active careers reqs incl. logistics/warehouse roles; no WARN/closure/divestiture found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

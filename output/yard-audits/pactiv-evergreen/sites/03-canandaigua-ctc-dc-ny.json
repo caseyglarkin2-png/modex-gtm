@@ -151,5 +151,20 @@
     "trailersVisible": "~180 trailers counted in the DC drop-yard rows; honest overhead estimate.",
     "siteAreaAcres": "Shared campus perimeter ~145 acres; the DC occupies the western portion."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://business.onchamber.com/member-directory/Details/pactiv-evergreen-4783840", "date": "2026", "type": "econ-dev", "claim": "Pactiv Evergreen Canandaigua campus in continuous operation since 1966, 700+ employees, county's largest private employer; the CTC DC at 2480 Sommers Drive sits on this same gated campus as the 5250 North Street plant" },
+      { "tier": 3, "url": "https://panjiva.com/Pactiv-Canandaigua-Corp/37505344", "date": "2025", "type": "press", "claim": "Pactiv Canandaigua Corp import/buyer shipment records at 2480 Sommers Drive Canandaigua NY 14424 corroborate an active receiving distribution center" }
+    ],
+    "imageryDate": "2016-09",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "CTC Distribution Center shares the active self-operated Canandaigua Pactiv campus (same gate as the plant); active inbound shipment records at 2480 Sommers Drive; no closure/WARN/divestiture found. Tier-1 confirms the campus is current and self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

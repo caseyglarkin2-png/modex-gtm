@@ -117,5 +117,20 @@
     "drivewayLong": "The internal campus roads and the deep NW drop yard easily hold a 3+ truck queue inside the fence.",
     "siteAreaAcres": "Perimeter box ~39 acres covering the full legacy mill + warehouse campus; approximate given the irregular campus boundary."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.breakroom.cc/en-us/jobs/listing/12734701-pactiv-evergreen-plant-manager-74-weed-street-plattsburgh", "date": "2025-08", "type": "careers", "claim": "Pactiv Evergreen Plant Manager req dated Aug 2025 at 74 Weed Street, Plattsburgh NY confirms BOTH the corrected address and active current operation of the molded-fiber plant (~150 employees)." },
+      { "tier": 1, "url": "https://www.breakroom.cc/en-us/jobs/listing/6250993-pactiv-evergreen-packer-manufacturing-74-weed-street", "date": "2025-10", "type": "careers", "claim": "Pactiv Evergreen Manufacturing Packer req dated Oct 2025 at 74 Weed Street ($22.33/hr, night shift) confirms ongoing production hiring at the exact address." }
+    ],
+    "imageryDate": "2025",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Flagged food-merchandising plant cleared: dated Aug/Oct 2025 reqs at the corrected 74 Weed Street; no closure/WARN found; Novolex kept the 1902-era molded-fiber mill running (operator self).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

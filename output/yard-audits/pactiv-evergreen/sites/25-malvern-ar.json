@@ -135,5 +135,20 @@
     "siteAreaAcres": "Perimeter box (~470 m N-S x ~350 m E-W of the fenced multi-building property and yards) yields roughly 33 acres - estimate.",
     "entryLanes": "Single gated driveway; entry and exit share the one opening. Lane counts are estimates."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.glassdoor.com/Jobs/Pactiv-Evergreen-Mooresville-Jobs-EI_IE9962.0,16_IL.17,28_IC1139057.htm", "date": "2025-09", "type": "careers", "claim": "Active 2025 Pactiv Evergreen Packaging Associate req in Malvern AR ($16.90-$20.18/hr) confirms the Malvern plant staffs and operates now." },
+      { "tier": 1, "url": "https://www.packagingdive.com/news/novolex-closes-acquisition-pactiv-evergreen/744049/", "date": "2025-04", "type": "press", "claim": "Novolex completed acquisition Apr 1 2025; the 53 Pactiv Evergreen plants (incl. Malvern) continue operating under self-operation." }
+    ],
+    "imageryDate": "2023-01",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active 2025 careers reqs at Malvern AR; no closure/WARN found in the 2024-25 restructuring; Novolex kept the plant running (operator self).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

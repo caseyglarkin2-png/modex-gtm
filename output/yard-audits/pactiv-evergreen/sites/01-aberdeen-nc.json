@@ -113,5 +113,20 @@
     "railServed": "A rail line runs along the property's south edge parallel to NC Hwy 5, but no spur enters the property and docks are not rail-facing - rail not served.",
     "urbanRural": "Edge-of-town light-industrial corridor on NC Hwy 5 in Aberdeen, surrounded by pine woods - Rural."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://www.linkedin.com/jobs/view/operator-associate-mon-thursday-nights-or-days-at-pactiv-evergreen-inc-3779499451", "date": "2025-06", "type": "careers", "claim": "Pactiv Evergreen Inc. active Operator Associate requisition at Aberdeen, NC plant" },
+      { "tier": 1, "url": "https://pactivevergreen.com/products-and-capabilities/markets/food-processors", "date": "2026-06", "type": "locator", "claim": "Pactiv Evergreen Food & Beverage Merchandising foam supermarket/processor trays; Aberdeen NC plant listed at 3299 NC Hwy 5 in company directory" }
+    ],
+    "imageryDate": "2024-05",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Pactiv Evergreen foam-tray plant; current hiring at Aberdeen; no closure/WARN/divestiture found in the 2024-25 footprint-optimization gauntlet (closures were Canton/Olmsted/Pine Bluff/Kalamazoo/Bakersfield, not Aberdeen). Novolex acquisition keeps plant self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

@@ -126,5 +126,20 @@
     "urbanRural": "Southwest edge of Corsicana along Business 45; surrounded by woods, scattered industrial parcels and farmland. Edge-of-town / rural.",
     "shipRcvSeparate": "Docks are concentrated on the SW face with some wrap onto the SE; reads as one continuous dock operation, not physically separated ship/receive banks."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 3, "url": "https://www.chamberofcommerce.com/business-directory/texas/corsicana/warehouse/38446986-pactiv-evergreen-warehouse", "date": "2026-02", "type": "locator", "claim": "Pactiv Evergreen Warehouse listed at 2200 S Business 45, Corsicana TX 75110, operating 24/7" },
+      { "tier": 1, "url": "https://www.ziprecruiter.com/co/Pactiv-Evergreen/Jobs/-in-Corsicana,TX", "date": "2025-06", "type": "careers", "claim": "Active 2025 Pactiv Evergreen warehouse/distribution requisitions in Corsicana TX" }
+    ],
+    "imageryDate": "2026-02",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Pactiv Evergreen distribution warehouse (self, Novolex parent) at 2200 S Business 45; confirmed operating 24/7 as recently as Feb 2026, no closure signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

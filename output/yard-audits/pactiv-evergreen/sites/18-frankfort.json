@@ -140,5 +140,19 @@
     "urbanRural": "Industrial campus on the SE edge of Frankfort with farm fields immediately south and east; classified Rural.",
     "truckGateCount": "At least 2 open entrances serve the campus (plant side and warehouse side)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://www.ziprecruiter.com/co/pactiv-evergreen/Jobs/-in-Frankfort,IL", "date": "2026-03", "type": "careers", "claim": "Active Pactiv Evergreen (Novolex) reqs at Frankfort IL (Machine Operator Extrusion w/ sign-on bonus, Extrusion Process Technician) as of Mar 2026 confirm a staffed, operating foodservice/warehouse campus" }
+    ],
+    "imageryDate": "2025",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Operating Pactiv Evergreen (Novolex, operator self) foodservice plant + co-located warehouse campus; active careers reqs dated Mar 2026; no WARN/closure/divestiture found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

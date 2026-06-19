@@ -134,5 +134,20 @@
     "urbanRural": "Edge-of-town industrial park on the south side of Moorhead MN, bordered by open farmland to the east and south - judged Rural per the small-town rule.",
     "siteAreaAcres": "Perimeter box ~8.7 acres covers the single building, west dock apron, drop strip and employee parking."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.ziprecruiter.com/co/Pactiv-Evergreen/Jobs/-in-Moorhead,MN", "date": "2026-04", "type": "careers", "claim": "Active 2026 Pactiv Evergreen reqs (now-hiring) in Moorhead MN confirm the 24/7 molded-fiber plant staffs and operates now." },
+      { "tier": 1, "url": "https://www.packagingdive.com/news/novolex-closes-acquisition-pactiv-evergreen/744049/", "date": "2025-04", "type": "press", "claim": "Novolex completed acquisition Apr 1 2025; the 53 Pactiv Evergreen plants (incl. Moorhead) continue operating under self-operation." }
+    ],
+    "imageryDate": "2025-08",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Flagged food-merchandising plant cleared: active 2025-26 reqs at Moorhead MN, no closure/WARN found in the 2024-25 restructuring; Novolex kept it running (operator self).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

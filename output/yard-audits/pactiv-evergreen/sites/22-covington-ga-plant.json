@@ -117,5 +117,19 @@
     "fastLaneOpportunity": "Generous paved width at the entry and large internal aprons leave physical room for a bypass/express lane.",
     "siteAreaAcres": "~52 acres, derived from the perimeter box; large flagship foam plant."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://www.indeed.com/cmp/Pactiv-Evergreen/reviews?fcountry=US&floc=Covington,+GA", "date": "2026-06", "type": "careers", "claim": "Pactiv Evergreen active employer presence at Covington GA (98 employee reviews)" },
+      { "tier": 3, "url": "https://www.chamberofcommerce.com/business-directory/georgia/covington/packaging-materials/2000474529-pactiv", "date": "2026-01", "type": "econ-dev", "claim": "Pactiv Evergreen Foam Plant/Warehouse at 8170 Alcovy Rd NE, Covington GA listed as active, operating 24/7" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Pactiv operates the 8170 Alcovy Rd Covington GA foam/foodservice plant (Novolex unit, operator self); listed active 24/7 as of Jan 2026, no closure/WARN found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

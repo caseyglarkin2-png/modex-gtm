@@ -132,5 +132,19 @@
     "railServed": "No rail spur enters the property; building is a thermoforming/foodservice converting plant with resin silos, truck-served only.",
     "drivewayLong": "Deep paved approach from the gate to the south dock apron easily holds a 3+ truck queue."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://www.ziprecruiter.com/co/pactiv-evergreen/Jobs/-in-Conyers,GA", "date": "2026-02", "type": "careers", "claim": "Active Pactiv Evergreen Conyers GA job postings (Process Technician, Production Associate, Shift Manager); plant makes PET/PP lids and ESL trays, ~180 employees" },
+      { "tier": 3, "url": "https://business.conyers-rockdale.com/list/member/pactiv-llc-3511", "date": "2026-06", "type": "econ-dev", "claim": "Pactiv LLC listed as an active member of the Conyers-Rockdale Chamber of Commerce at 1501 Rockdale Industrial Blvd" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Pactiv operates the 1501 Rockdale Industrial Blvd Conyers GA foodservice plant (Novolex unit, operator self); active 2026 hiring, no closure/WARN/divestiture found.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

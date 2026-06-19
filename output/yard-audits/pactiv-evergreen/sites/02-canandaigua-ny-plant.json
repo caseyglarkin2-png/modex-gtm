@@ -139,5 +139,20 @@
     "trailersVisible": "~220 trailers counted across the visible drop-yard rows; honest estimate from overhead imagery.",
     "siteAreaAcres": "Derived from the campus perimeter box (~145 acres); the gated property is large with substantial wooded buffer."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://business.onchamber.com/member-directory/Details/pactiv-evergreen-4783840", "date": "2026", "type": "econ-dev", "claim": "Pactiv Evergreen Canandaigua at 5250 North Street in continuous operation since 1966, 700+ employees, Ontario County's largest private employer (current as of 2026)" },
+      { "tier": 1, "url": "https://www.indeed.com/cmp/Pactiv-Evergreen/reviews?fcountry=US&floc=Canandaigua,+NY", "date": "2026", "type": "careers", "claim": "Active Pactiv Evergreen Canandaigua NY workforce / hiring presence" }
+    ],
+    "imageryDate": "2016-09",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Flagship Canandaigua Food Merchandising plant, continuously operating since 1966, county's largest private employer; no closure/WARN/divestiture found. Novolex acquisition (closed 2025-04-01) keeps the plant self-operated; not on any closure list. Street View imagery is dated (2016-09) but operations are current.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

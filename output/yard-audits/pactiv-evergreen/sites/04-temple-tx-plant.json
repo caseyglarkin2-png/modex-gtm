@@ -142,5 +142,20 @@
     "urbanRural": "The plant sits within Temple TX's developed industrial fabric, immediately beside an I-35-area highway interchange with continuous surrounding industrial development. Urban setting.",
     "siteAreaAcres": "Derived from the perimeter box (~95 acres) — a large multi-building plant property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://kdhnews.com/news/region/pactiv-evergreen-plans-1-3-million-temple-tx-plant-remodel/article_16e732e4-3bba-5ce9-8513-07b202d09888.html", "date": "2025-04", "type": "press", "claim": "Pactiv Evergreen investing $1.3M remodel in its Temple TX manufacturing operations (Pegasus Drive); plant actively operating and being upgraded" },
+      { "tier": 1, "url": "https://liveworktemple.com/pactiv-plant-to-add-jobs/", "date": "2025", "type": "econ-dev", "claim": "Pactiv plant in Temple TX adding jobs; active local operation" }
+    ],
+    "imageryDate": "2026-04",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active Pactiv Evergreen Temple foodservice plant; 2025 $1.3M remodel + job additions confirm current operation; no closure/WARN/divestiture found. Recent (2026-04) Street View consistent with active site. Novolex acquisition keeps it self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

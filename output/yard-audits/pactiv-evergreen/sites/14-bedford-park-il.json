@@ -136,5 +136,19 @@
     "buildingCount": "4+ large buildings on the campus; exact count uncertain — some may be separately occupied within the same industrial park.",
     "scale": "No truck scale visible on the campus."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://www.indeed.com/q-pactiv-evergreen-l-bedford-park,-il-jobs.html", "date": "2025-08", "type": "careers", "claim": "30+ active Pactiv Evergreen (Novolex) reqs at Bedford Park IL (machine operator, maintenance, forklift) confirm a staffed, operating foodservice plant" }
+    ],
+    "imageryDate": "2025-04",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Operating Pactiv Evergreen (Novolex, operator self) Chicago-area foodservice plant; many active careers reqs; no WARN/closure/divestiture found; 2025-04 Street View shows Pactiv Evergreen branding at the entrance.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

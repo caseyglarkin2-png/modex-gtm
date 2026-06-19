@@ -128,5 +128,19 @@
     "railServed": "Active rail spur runs along the south edge of the property and into the site adjacent to the silos (confirmed in z19 satellite).",
     "scale": "No truck scale visible in the yard."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 3, "url": "https://www.macraesbluebook.com/search/company.cfm?company=423885", "date": "2025-01", "type": "locator", "claim": "Pactiv Evergreen listed at 2215 S Wilmington St, Raleigh NC 27603" },
+      { "tier": 2, "url": "https://cityofraleigh0drupal.blob.core.usgovcloudapi.net/drupal-prod/COR15/ASR-0062-2023.pdf", "date": "2023-09", "type": "econ-dev", "claim": "City of Raleigh site-plan record references the active 'Pactiv Evergreen Warehouse' at 2215 Wilmington Street (no closure)" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Carton/beverage-merchandising site flagged for wind-down risk; gauntlet clears it. The NC closures in the news are the Canton mill (2023) and Waynesville (Suzano 2024), NOT Raleigh. Pactiv Evergreen still listed at 2215 S Wilmington St with an active 2023 city site-plan; no closure/WARN for Raleigh.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

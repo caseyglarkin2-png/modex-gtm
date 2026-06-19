@@ -109,5 +109,19 @@
     "railServed": "A rail line runs along the east property edge but no spur enters the Pactiv building; the large intermodal terminal is the Norfolk Southern yard west of Westbelt Dr, unrelated.",
     "drivewayLong": "Deep paved apron between the gate and the south dock doors easily holds a 3+ truck queue."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://columbusregion.com/press-release/pactiv-llc-to-invest-4-5-million-to-grow-columbus-facility-offering-new-jobs/", "date": "2015-12", "type": "econ-dev", "claim": "Pactiv LLC investing $4.5M to grow its Columbus OH facility (2120 Westbelt Dr), adding production lines and 65 jobs" },
+      { "tier": 1, "url": "https://www.ziprecruiter.com/co/Pactiv-Evergreen/Jobs/-in-Columbus,OH", "date": "2025-07", "type": "careers", "claim": "Active Pactiv Evergreen production/operations job postings at the Columbus OH plant" }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Pactiv operates the 2120 Westbelt Dr Columbus OH plant (now Novolex unit, operator self); active hiring confirms current ops. The Olmsted Falls OH closure is a different site, not Columbus.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

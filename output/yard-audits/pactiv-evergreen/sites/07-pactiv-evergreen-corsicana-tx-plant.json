@@ -135,5 +135,20 @@
     "buildingCount": "Main manufacturing building plus a separate brick office building and at least one ancillary structure; ~3. The dense piping/tank complex immediately to the southwest is a SEPARATE property (a legacy Corsicana oil/asphalt terminal), not part of the Pactiv site.",
     "urbanRural": "East edge of Corsicana along the SH-31 corridor; open farmland and scattered industrial parcels around. Edge-of-town / rural."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.ziprecruiter.com/co/Pactiv-Evergreen/Jobs/-in-Corsicana,TX", "date": "2025-06", "type": "careers", "claim": "Active 2025 Pactiv Evergreen requisitions (Maintenance Specialist, EHS Manager, Maintenance Tech) at the Corsicana TX plant" },
+      { "tier": 3, "url": "https://www.yelp.com/biz/pactiv-corsicana", "date": "2026-06", "type": "locator", "claim": "Pactiv listing at 4501 E State Highway 31, Corsicana TX 75109, updated June 2026" }
+    ],
+    "imageryDate": "2024-02",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "EPS foam cup/container plant operating under Pactiv Evergreen/Novolex (self); active 2025 hiring at this address, no closure signal (restructuring hit BevMerch mills, not this foodservice plant).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

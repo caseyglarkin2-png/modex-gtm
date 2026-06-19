@@ -139,5 +139,20 @@
     "siteAreaAcres": "Perimeter box (~430 m N-S x ~360 m E-W of the plant property including the SW drop yard) yields roughly 34 acres - estimate.",
     "entryLanes": "Two open driveways from Mooresville Blvd; lane counts are estimates from imagery."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://www.ziprecruiter.com/co/Pactiv-Evergreen/Jobs/-in-Mooresville,NC", "date": "2026-05", "type": "careers", "claim": "Active 2026 Pactiv Evergreen manufacturing reqs (machine operator, print operator, packaging associate) in Mooresville NC confirm the plant staffs and operates now." },
+      { "tier": 1, "url": "https://www.packagingdive.com/news/novolex-closes-acquisition-pactiv-evergreen/744049/", "date": "2025-04", "type": "press", "claim": "Novolex completed acquisition Apr 1 2025; the 53 Pactiv Evergreen plants (incl. Mooresville) continue operating under self-operation." }
+    ],
+    "imageryDate": "2026-01",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active 2025-26 hiring-immediately reqs at Mooresville NC; no closure/WARN found; Novolex kept the plant running (operator self).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }
