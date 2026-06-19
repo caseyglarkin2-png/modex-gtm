@@ -99,6 +99,21 @@
     "dropYard": true,
     "multiStep": false
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://www.globenewswire.com/news-release/2023/08/01/2716090/0/en/ADUSA-Distribution-Adds-Chester-New-York-Distribution-Center-to-Supply-Chain-Network.html", "date": "2023-08-01", "type": "press", "claim": "ADUSA Distribution converted its Chester NY DC on Elizabeth Drive from C&S on July 30, 2023: ~600K sq ft multi-temp + freezer, 350+ trailer spots, ~100 dock doors, ~65M cases/yr, serving Stop & Shop and Hannaford." },
+      { "tier": 2, "url": "https://www.supermarketnews.com/foodservice-retail/ahold-delhaize-usa-takes-another-step-toward-self-distribution", "date": "2023-08", "type": "press", "claim": "Corroborates the Chester DC as part of Ahold Delhaize USA's self-distribution buildout, taken over from C&S, serving Stop & Shop and Hannaford." }
+    ],
+    "imageryDate": "2023-07",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Confirmed current ADUSA self-distributed multi-temperature cross-dock serving Stop & Shop and Hannaford; insourced from C&S Aug 2023, active hiring at the site. Specs match Tier-1 release exactly. No closure/WARN signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  },
   "confidence": "medium",
   "uncertainFields": [
     "guardShack",

@@ -80,6 +80,21 @@
     "dropYard": true,
     "multiStep": false
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://adusadistribution.careerswithus.com/job/distribution-services/warehouse-associate-i/schodack-landing/distributionadusarms/203075_external_USA-NY-Schodack-Landing", "date": "2022-03", "type": "press", "claim": "ADUSA Distribution requisition at 970 Route 9, Schodack Landing NY carrying store code 'DC 02', a self-distribution fresh/frozen/grocery/HBC facility serving Stop & Shop and Hannaford." },
+      { "tier": 1, "url": "https://www.globenewswire.com/news-release/2023/08/01/2716090/0/en/ADUSA-Distribution-Adds-Chester-New-York-Distribution-Center-to-Supply-Chain-Network.html", "date": "2023-08-01", "type": "press", "claim": "Documents ADUSA's completed insourcing of NY-region DCs from 3PL C&S into its self-managed network serving Stop & Shop and Hannaford." }
+    ],
+    "imageryDate": "2025-08",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Confirmed current ADUSA self-distributed Fresh DC02 serving Stop & Shop and Hannaford; exact-address + DC02 store-code match on ADUSA careers req with active hiring. No closure/WARN signal.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  },
   "confidence": "high",
   "uncertainFields": ["truckGate", "guardShack", "connectivityIssue"],
   "fieldNotes": {

@@ -182,6 +182,21 @@
     "dropYard": true,
     "multiStep": false
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      { "tier": 1, "url": "https://www.globenewswire.com/news-release/2022/03/01/2394529/0/en/ADUSA-Supply-Chain-Converts-First-Distribution-Center-Serving-Multiple-Brands-into-Self-Managed-Network.html", "date": "2022-03-01", "type": "press", "claim": "ADUSA Supply Chain converted the Bethlehem (Hanoverville Rd) DC into its self-managed network: 1.2M sq ft, ~200M cases/yr nonperishable, serving 210+ Stop & Shop + GIANT stores; first multi-brand DC brought in-house. C&S retained only as 3PL labor-management provider." },
+      { "tier": 1, "url": "https://www.adusasc.com/news-releases/news-release-details/adusa-supply-chain-converts-first-distribution-center-serving", "date": "2022-03-01", "type": "press", "claim": "ADUSA own-site release of the same Bethlehem conversion to self-managed distribution." }
+    ],
+    "imageryDate": "2024-07",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Confirmed current ADUSA self-distributed grocery DC (designated DC 04) serving Stop & Shop + GIANT; converted from C&S to ADUSA self-managed Mar 2022, C&S now only a labor vendor. No closure/WARN signal for this PA site.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  },
   "confidence": "high",
   "uncertainFields": [
     "postGateStaging",

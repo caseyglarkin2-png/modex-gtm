@@ -91,6 +91,21 @@
     "dropYard": true,
     "multiStep": false
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 2, "url": "https://supermarketnews.com/retail-financial/ahold-delhaize-usa-completes-step-one-shift-self-distribution", "date": "2021-03", "type": "press", "claim": "Freetown Grocery (1.1M sq ft, opened 2004) was the first Ahold Delhaize USA / ADUSA facility moved from 3PL C&S to ADUSA self-distribution; serves 200+ Stop & Shop stores in New England." },
+      { "tier": 2, "url": "https://wbsm.com/freetown-stop-shop-teamsters-contract/", "date": "2025-02-28", "type": "press", "claim": "Stop & Shop and Teamsters Local 25 reached a six-year contract preserving 900+ jobs; the Freetown DC continues operations and jobs remain local. Feb 2025 closure threat resolved." }
+    ],
+    "imageryDate": "2023-07",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Confirmed current Stop & Shop/ADUSA self-distributed grocery DC; Feb 2025 closure/3PL-transition threat resolved by a 6-year Teamsters contract keeping it open and in-house.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  },
   "confidence": "high",
   "uncertainFields": ["exitLanes", "scale", "shipRcvSeparate"],
   "fieldNotes": {

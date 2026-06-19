@@ -91,6 +91,21 @@
     "dropYard": true,
     "multiStep": false
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "3PL",
+    "tenancy": "leased",
+    "citations": [
+      { "tier": 1, "url": "https://newsroom.aholddelhaize.com/ahold-delhaize-usa-expands-cold-storage-space-with-americold-partnership/", "date": "2020-05-14", "type": "press", "claim": "Americold will design, build and operate two automated frozen retail DCs (Plainville CT + Mountville PA) over an initial 20-year term, serving Ahold Delhaize USA / ADUSA brands Stop & Shop and Hannaford." },
+      { "tier": 2, "url": "https://www.sheltonherald.com/business/article/plainville-ct-stop-shop-americold-warehouse-18684138.php", "date": "2024-03", "type": "press", "claim": "Americold has begun operations at the Plainville DC at 24 Northwest Drive, used by ADUSA Supply Chain to serve Stop & Shop and Hannaford; full automated throughput expected back-half 2025." }
+    ],
+    "imageryDate": "2023-07",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Confirmed current automated frozen DC serving Stop & Shop/Hannaford but OPERATED by 3PL Americold (designs/builds/operates under a 20-year term), not ADUSA self-distribution; ADUSA is the customer/tenant.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  },
   "confidence": "high",
   "uncertainFields": [
     "guardShack",

@@ -74,6 +74,22 @@
     "connectivityIssue": false, "multipleFacilities": false,
     "scale": false, "dropYard": true, "multiStep": false
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "leased",
+    "citations": [
+      { "tier": 1, "url": "https://newsroom.aholddelhaize.com/adusa-supply-chain-opens-new-1-million-square-foot-distribution-center-in-connecticut/", "date": "2021-09-20", "type": "press", "claim": "ADUSA Supply Chain opened a 1M sq ft DC at 1339 Tolland Turnpike, Manchester CT, handling 88M cases of nonperishable grocery/yr for 450+ Stop & Shop stores; first facility under the ADUSA Supply Chain brand." },
+      { "tier": 3, "url": "https://www.winent.com/portfolio/properties/1339-tolland-turnpike", "date": "2026-06", "type": "press", "claim": "Landlord (Winstanley) portfolio page lists the 1.97M sq ft building as leased to J.C. Penney, Amazon, and ADUSA, confirming ADUSA is a current tenant." },
+      { "tier": 2, "url": "https://www.nbcconnecticut.com/news/local/freight-handlers-manchester-facility-to-close-in-march/3211811/", "date": "2024-02", "type": "press", "claim": "ADUSA stated it will continue to operate the Manchester DC and self-manage the workforce; the Feb 2024 WARN was the 3PL contractor (Freight Handlers) ending, not the DC closing." }
+    ],
+    "imageryDate": "2023-11",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Confirmed current ADUSA self-distributed Stop & Shop grocery DC leased in Winstanley's multi-tenant building; Feb 2024 WARN was a 3PL-to-self labor transition, DC stays open.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  },
   "confidence": "high",
   "uncertainFields": ["remoteGs", "entryLanes", "exitLanes", "siteAreaAcres", "dockDoorCount", "shipRcvSeparate"],
   "fieldNotes": {

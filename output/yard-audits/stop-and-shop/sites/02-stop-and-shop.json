@@ -81,6 +81,21 @@
     "connectivityIssue": false, "multipleFacilities": true,
     "scale": false, "dropYard": true, "multiStep": false
   },
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      { "tier": 1, "url": "https://progressivegrocer.com/1st-ahold-delhaize-usa-facility-transitions-self-distribution", "date": "2021", "type": "press", "claim": "Freetown was the first Ahold Delhaize USA facility transitioned from 3PL C&S to ADUSA self-distribution; the campus runs both a grocery and a fresh/perishable building serving 200+ Stop & Shop stores." },
+      { "tier": 2, "url": "https://wbsm.com/freetown-stop-shop-teamsters-contract/", "date": "2025-02-28", "type": "press", "claim": "Stop & Shop / Teamsters Local 25 six-year contract preserves 900+ jobs at the Freetown DC; the Feb 2025 closure threat was averted and the facility remains open." }
+    ],
+    "imageryDate": "2023-07",
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Confirmed current Stop & Shop/ADUSA self-distributed Fresh (perishable) building on the Freetown campus; 2021 ADUSA release documents the grocery+fresh two-building split, Feb 2025 closure threat resolved. Note: recent 2025 sources name 'the Freetown DC' generically, so the Fresh building is confirmed at campus level.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  },
   "confidence": "high",
   "uncertainFields": ["dockDoorCount", "trailersVisible", "trailerParkingCapacity", "entryLanes", "exitLanes", "shipRcvSeparate"],
   "fieldNotes": {
