@@ -1,0 +1,57 @@
+,,,,,,,,,Connectivity,Shipment,Shifts per,Guards per,DCs per,,,,Staging Area,,Driveway,,Backup,Entry/Exit,,,,Fast Lane,Dock Doors,,,,Drop Area,,,,Ship/Rcv,Urban /,Potential,Multiple,,Remote,,Yard Metrics,,,
+Name,Type,Archetype,Archetype Name,,WMS,TMS,YMS,EBOL,Available,Volume,Day,Shift,Shift,Truck Gate?,Guard Shack?,Remote GS?,Pre-Gate,Post-Gate,Long (3+),Short (1-2 trucks),Sensitive?,Together,Separate,Entry Lanes,Exit Lanes,Opportunity?,0-10,10-25,25-50,50+,0-10,10-25,25-50,50+,Separate?,Rural,Connectivity Issue?,Facilities?,Scale,Drop Yard,,Dock Doors (#),Yard Spot Type,Trailer/Chassis Spots (#),Container Ground Slots (#)
+Crowley JAXPORT Marine Terminal - Jacksonville FL,Marine terminal / container port,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,3,2,YES,,YES,,,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@30.354400,-81.623900,400m/data=!3m1!1e3",12,Container terminal,600,1400
+Crowley JAXPORT Terminal Office #2 - Jacksonville FL,Marine terminal / container yard,#4,Gate + GS (BU sens.),,,,,,,,,,,YES,YES,,,YES,YES,,YES,YES,,1,1,,YES,,,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@30.337571,-81.628575,400m/data=!3m1!1e3",8,Container terminal,70,150
+Crowley Port Everglades Terminal - Fort Lauderdale FL,Marine terminal / container port,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,4,4,YES,,,,,,,,YES,,Urban,,YES,YES,YES,"https://www.google.com/maps/@26.065508,-80.124022,400m/data=!3m1!1e3",0,Container terminal,700,1500
+Crowley Isla Grande Terminal - San Juan PR,"Marine terminal / container port (LNG-fueled microgrid, ConRo)",#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,YES,,YES,3,2,YES,,YES,,,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@18.45400,-66.10050,400m/data=!3m1!1e3",12,Container terminal,220,600
+Crowley Penn Terminals - Eddystone PA,Marine terminal with dry + refrigerated warehouse,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,,,,YES,,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@39.85300,-75.33800,400m/data=!3m1!1e3",35,Container terminal,260,500
+Crowley Holt Terminals (Gloucester Terminal) - Gloucester City NJ,Marine terminal / breakbulk yard,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,YES,YES,,2,2,YES,,,,YES,,,YES,,,Urban,,YES,,YES,"https://www.google.com/maps/@39.90350,-75.12550,400m/data=!3m1!1e3",90,Container terminal,110,350
+Crowley Wilmington Port Terminal - Wilmington NC,Marine terminal / cargo yard,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,,YES,2,2,YES,YES,,,,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@34.19300,-77.95200,400m/data=!3m1!1e3",8,Container terminal,60,400
+Crowley Gulfport Terminal - Gulfport MS,Marine terminal / port facility,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,2,YES,YES,,,,,,,YES,,Urban,,YES,,YES,"https://www.google.com/maps/@30.36000,-89.09500,400m/data=!3m1!1e3",10,Container terminal,90,450
+Crowley Conley Container Yard - Conley GA (Atlanta),Inland container yard / intermodal logistics hub,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@33.65645,-84.34470,400m/data=!3m1!1e3",0,Container terminal,55,130
+Crowley Jacksonville Distribution Center (Dry/LCL) - Jacksonville FL,Distribution center / dry + LCL warehouse,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,YES,,,YES,Urban,,,,YES,"https://www.google.com/maps/@30.36340,-81.69445,400m/data=!3m1!1e3",27,Trailer yard,35,
+Crowley Jacksonville Cross Dock Facility - Jacksonville FL,Cross-dock / distribution warehouse,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@30.34640,-81.69680,400m/data=!3m1!1e3",58,Trailer yard,160,
+Crowley CrowleyFresh Distribution Center (Temperature Controlled) - Medley FL,Temperature-controlled distribution center / warehouse,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,,,,,,,YES,,YES,,,YES,Urban,,,,,"https://www.google.com/maps/@25.87360,-80.35850,400m/data=!3m1!1e3",52,Trailer yard,45,
+Crowley Miami Distribution Center - Medley FL,Distribution center / LCL liner & logistics warehouse,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@25.86610,-80.37220,400m/data=!3m1!1e3",58,Trailer yard,95,
+Crowley Liner & Logistics - Guaynabo (Amelia / FTZ 61),"Liner + logistics warehouse / cross-dock distribution center (NVO/LCL, Foreign-Trade Zone 61)",#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,,YES,,1,1,,,,YES,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@18.42462,-66.12080,400m/data=!3m1!1e3",35,Trailer yard,80,
+Crowley Tradeport Logistics Campus (Tradeport Distribution Center) - Jacksonville FL,Distribution center / warehouse (LCL + dry cargo),#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,,,YES,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@30.478125,-81.65303,400m/data=!3m1!1e3",26,Trailer yard,12,
+Crowley Cincinnati Office - Cincinnati OH,"Logistics office (downtown high-rise, no truck yard)",#3,No Gate / No GS,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,Urban,,,,,"https://www.google.com/maps/@39.098385,-84.516840,400m/data=!3m1!1e3",0,Office (no yard),0,
+Crowley Folcroft Warehouse - Folcroft PA,Warehouse / distribution facility (PA receiving location),#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,YES,YES,,1,1,,YES,,,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@39.898115,-75.272971,400m/data=!3m1!1e3",6,Trailer yard,25,
+Crowley North Charleston Terminal - North Charleston SC,Marine terminal / RoRo-breakbulk cargo yard,#1,Gate + GS (not BU sens.),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,YES,,,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@32.847446,-79.935503,400m/data=!3m1!1e3",2,Container terminal,15,120
+"Crowley St. Croix Container Terminal - Wilfred ""Bomba"" Allick Port & Transshipment Center, St. Croix, USVI","Marine terminal / container port (multipurpose, Ro-Ro + Lo-Lo)",#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,,,,YES,,,Rural,YES,,,YES,"https://www.google.com/maps/@17.694300,-64.761600,400m/data=!3m1!1e3",0,Container terminal,0,400
+"Crowley St. Thomas Cargo Terminal - Crown Bay Cargo Port, USVI","Marine terminal / container port (smaller, ungated tier)",#4,Gate + GS (BU sens.),,,,,,,,,,,YES,YES,,,YES,,YES,YES,YES,,1,1,,YES,,,,,,,YES,,Urban,,,YES,YES,"https://www.google.com/maps/@18.335840,-64.949640,400m/data=!3m1!1e3",4,Container terminal,25,600
+Crowley Santo Tomas de Castilla Container Terminal - Guatemala,Marine terminal / container port,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,1,YES,YES,,,,,,,YES,,Rural,,YES,YES,YES,"https://www.google.com/maps/@15.696800,-88.615000,400m/data=!3m1!1e3",10,Container terminal,60,2200
+Crowley Puerto Cortes Container Terminal - Honduras,Marine terminal / container port,#8,Gate + GS (not BU sens.) + scale,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,1,,YES,,,,,,,YES,,Rural,,,YES,YES,"https://www.google.com/maps/@15.839500,-87.940500,400m/data=!3m1!1e3",6,Container terminal,40,1100
+Crowley Rio Haina Container Terminal (HIT Margen Oriental) - Dominican Republic,Marine terminal / container port,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,3,2,YES,YES,,,,,,,YES,,Urban,,YES,YES,YES,"https://www.google.com/maps/@18.422800,-70.015500,400m/data=!3m1!1e3",4,Container terminal,120,3000
+"Crowley Puerto Plata Container Terminal - Puerto Plata, Dominican Republic",Marine terminal / container port (multipurpose),#4,Gate + GS (BU sens.),,,,,,,,,,,YES,YES,,,YES,,YES,YES,YES,,1,1,,,,,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@19.799300,-70.702100,400m/data=!3m1!1e3",0,Container terminal,40,250
+Crowley Puerto Limon Container Terminal (Moin Container Terminal / APM Terminals) - Costa Rica,Marine terminal / container port,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,YES,YES,YES,,,YES,,3,3,YES,YES,,,,,,,YES,,Rural,,YES,YES,YES,"https://www.google.com/maps/@10.013017,-83.097563,400m/data=!3m1!1e3",6,Container terminal,70,5500
+Crowley Manzanillo Container Terminal (MIT) - Panama,Marine container terminal + attached warehouse,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,,YES,3,3,YES,YES,,,,,,,YES,,Urban,,YES,YES,YES,"https://www.google.com/maps/@9.363500,-79.883500,400m/data=!3m1!1e3",8,Container terminal,80,9000
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,1,4%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,4,15%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,3,12%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,11,42%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#8,1,4%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,6,23%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,26,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,11,42%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,4,15%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,16,62%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,10,38%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,26,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,26,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

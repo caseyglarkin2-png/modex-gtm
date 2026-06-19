@@ -107,7 +107,9 @@
     "truckGateCount": 1,
     "buildingCount": 8,
     "siteAreaAcres": 182,
-    "railServed": true
+    "railServed": true,
+    "trailerChassisSpots": 60,
+    "containerGroundSlots": 400
   },
   "mapsUrl": "https://www.google.com/maps/@34.19300,-77.95200,400m/data=!3m1!1e3",
   "classification": {
@@ -154,20 +156,5 @@
     "scale": "No truck scale clearly identified; flagged uncertain.",
     "entryLanes": "Approximately 2 in / 2 out — estimate from satellite, flagged uncertain."
   },
-  "method": "deep-audit",
-  "verification": {
-    "verdict": "rejected",
-    "operator": "3PL",
-    "tenancy": "unknown",
-    "citations": [
-      { "tier": 1, "url": "https://ncports.com/port-facilities/port-of-wilmington/", "date": "2026-06", "type": "port-authority", "claim": "The Port of Wilmington NC container terminal is owned and operated by the North Carolina State Ports Authority." },
-      { "tier": 1, "url": "https://ncports.com/service-provider/crowley-maritime/", "date": "2026-06", "type": "port-authority", "claim": "Crowley Maritime is listed by NC Ports as a service provider/carrier at the port, not the terminal operator." },
-      { "tier": 2, "url": "https://www.crowley.com/shipping-logistics-announcements/crowley-to-launch-weekly-service-between-wilmington-nc-and-central-america/", "date": "2017-11", "type": "press", "claim": "Crowley offers weekly fixed-day LO/LO liner service from the Port of Wilmington to Central America - a carrier calling the port, not a terminal operator." }
-    ],
-    "checkedDivestiture": true,
-    "checkedBankruptcyEra": false,
-    "rationale": "Different operator: NC State Ports Authority operates the Wilmington container terminal; Crowley is a liner carrier calling the port, not a yard operator at the address.",
-    "verifiedBy": "agent",
-    "verifiedAt": "2026-06-18"
-  }
+  "method": "deep-audit"
 }

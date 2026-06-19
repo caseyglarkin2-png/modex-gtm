@@ -1,0 +1,205 @@
+{
+  "name": "Crowley Manzanillo Container Terminal (MIT) - Panama",
+  "type": "Marine container terminal + attached warehouse",
+  "coords": {
+    "lat": 9.3635,
+    "lng": -79.8835
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 9.3693,
+          "lng": -79.8856
+        },
+        {
+          "lat": 9.3709,
+          "lng": -79.8756
+        },
+        {
+          "lat": 9.3672,
+          "lng": -79.8751
+        },
+        {
+          "lat": 9.363,
+          "lng": -79.8762
+        },
+        {
+          "lat": 9.3587,
+          "lng": -79.8793
+        },
+        {
+          "lat": 9.3584,
+          "lng": -79.8842
+        },
+        {
+          "lat": 9.3612,
+          "lng": -79.8872
+        },
+        {
+          "lat": 9.3656,
+          "lng": -79.8888
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 9.3647,
+          "lng": -79.8783
+        },
+        {
+          "lat": 9.3645,
+          "lng": -79.8774
+        },
+        {
+          "lat": 9.3636,
+          "lng": -79.8777
+        },
+        {
+          "lat": 9.3638,
+          "lng": -79.8786
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 9.3656,
+            "lng": -79.8856
+          },
+          {
+            "lat": 9.3643,
+            "lng": -79.882
+          },
+          {
+            "lat": 9.3612,
+            "lng": -79.8838
+          },
+          {
+            "lat": 9.3625,
+            "lng": -79.8874
+          }
+        ]
+      },
+      {
+        "ring": [
+          {
+            "lat": 9.3688,
+            "lng": -79.8818
+          },
+          {
+            "lat": 9.3678,
+            "lng": -79.8788
+          },
+          {
+            "lat": 9.3656,
+            "lng": -79.8797
+          },
+          {
+            "lat": 9.3666,
+            "lng": -79.8827
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 9.3695,
+            "lng": -79.8768
+          },
+          {
+            "lat": 9.3692,
+            "lng": -79.8756
+          },
+          {
+            "lat": 9.3683,
+            "lng": -79.8759
+          },
+          {
+            "lat": 9.3686,
+            "lng": -79.8771
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 266,
+        "pano": "h6g9FF-lyCr9k9Tz1qRWyg",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 266,
+        "pano": "h6g9FF-lyCr9k9Tz1qRWyg",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 8,
+    "trailersVisible": 80,
+    "trailerParkingCapacity": 9000,
+    "truckGateCount": 1,
+    "buildingCount": 9,
+    "siteAreaAcres": 140,
+    "railServed": true,
+    "trailerChassisSpots": 80,
+    "containerGroundSlots": 9000
+  },
+  "mapsUrl": "https://www.google.com/maps/@9.363500,-79.883500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": false,
+    "entryExitSeparate": true,
+    "entryLanes": 3,
+    "exitLanes": 3,
+    "fastLaneOpportunity": true,
+    "dockDoors": "0-10",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": true
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "trailersVisible",
+    "siteAreaAcres",
+    "scale"
+  ],
+  "fieldNotes": {
+    "siteIdentification": "The Crowley-served container terminal in the Manzanillo / Coco Solo Sur area of Colon, Panama is Manzanillo International Terminal (MIT), operated by SSA Marine. Crowley maintains its Panama liner-terminal office at Puerto de Manzanillo, Edificio C (Edificio de Navieras), Colon, and runs twice-weekly liner service to/from Colon out of MIT, using the terminal plus shared bonded/non-bonded warehouse space as its Atlantic hub. Confirmed against Crowley Panama pages, MIT/SSA Marine pages, latitude.to (9.357N -79.899W cited; corrected by imagery to the terminal centroid), and the GA Tech / Log Cluster (LCA) Panama port assessment. Center locked by satellite to ~9.3635N, -79.8835W (Manzanillo Bay peninsula, Coco Solo Sur).",
+    "yardSpots": "trailerParkingCapacity (~9,000) is a CONTAINER / CHASSIS GROUND-SLOT estimate, not OTR trailer stalls. MIT publishes 37 hectares (~91 acres) of paved container yard with automatic stacking cranes (ASCs), RTGs, top-/side-picks and 3.5M TEU annual capacity. z16-z20 satellite shows very dense multi-row container ground slots under RTG/ASC straddle rows across the peninsula, plus a large RoRo vehicle staging area on the east. The ~9,000 figure is a coarse ground-slot order-of-magnitude for a 37 ha high-density stacking yard, flagged uncertain. dropArea band 50+.",
+    "dockDoors": "Marine container terminal, so classic OTR dock doors are near-zero. The attached/adjacent warehouse buildings on the east side carry the loading doors: z17 satellite plus a 2022-10 Street View (pano IL3eQ...) show large roll-up loading shutters on a warehouse face. dockDoorCount ~8 (0-10 band) reflects only the warehouse loading doors visible/inferred, low confidence at this resolution.",
+    "attachedWarehouse": "A row of large warehouse buildings (purple/gray/blue roofs) sits on the landward east side at ~9.369N, -79.876W (z17). Crowley provides consolidation/deconsolidation, cross-dock, re-label/re-pack, pick-and-pack and bonded/non-bonded storage at its Colon hub; these warehouses are the attached cross-dock/transit-shed space. Counted in buildingCount and dockDoorCount.",
+    "truckGate": "truckGate=true (high confidence). Web sources (GA Tech Panama logistics portal / LCA assessment) state MIT has 3 entrance lanes and 3 exit lanes at the main truck gate, plus a separate intermodal rail ramp with 2 in / 2 out lanes. MIT is ISPS compliant with perimeter fencing, gates and CCTV. Street View (pano h6g9FF..., 2023-03) on the landside approach road looks west into the secured terminal past channelizing jersey barriers toward the gantry cranes. entryLanes=3, exitLanes=3.",
+    "guardShack": "guardShack=true (inferred high confidence). An ISPS-compliant major transshipment terminal with a 3+3-lane gate operates staffed security/guard booths at the gate complex; not individually resolved in the available imagery (Google car coverage stops at the public road outside the secured estate) but standard and corroborated by the ISPS / CCTV / controlled-access references.",
+    "entryExit": "entryExitSeparate=true: the gate has distinct entrance-lane and exit-lane groups (3 in, 3 out) per published terminal specs.",
+    "multiStep": "multiStep=true: a major automated container gate is a multi-stage process (gate-in / OCR / TOS check, then yard), and a separate rail intermodal ramp with its own 2+2 lanes adds a second controlled checkpoint stage.",
+    "scale": "scale=true inferred: weighbridges are standard at a 3.5M TEU ISPS container terminal enforcing VGM/weight rules; not individually pinpointed in imagery, flagged uncertain.",
+    "fastLaneOpportunity": "fastLaneOpportunity=true: a 3+3-lane gate with wide aprons and channelized lanes has physical room for an express/bypass lane.",
+    "railServed": "railServed=true: z17 satellite at the NE boundary (9.3705N, -79.8745W) shows live rail tracks with container flat cars (Panama Canal Railway intermodal yard); MIT publishes a rail intermodal ramp with 2 entrance / 2 exit lanes.",
+    "urbanRural": "Urban: the terminal sits inside the Colon metro / Colon Free Trade Zone industrial fabric, dense surrounding warehouses and the city of Colon immediately west.",
+    "multipleFacilities": "Campus-scale: container quay + ASC/RTG stacking yard, RoRo vehicle yard, the east-side warehouse row, rail intermodal yard, and ancillary terminal/workshop buildings.",
+    "siteAreaAcres": "~140 acres is the secured-estate estimate from the traced perimeter (container yard 37 ha / ~91 ac paved plus warehouses, RoRo yard and rail ramp); approximate, flagged uncertain.",
+    "streetView": "Google car Street View covers the public landside approach roads (2022-2023 panos) but not inside the secured terminal. Approach pano h6g9FF-lyCr9k9Tz1qRWyg @ 9.36393,-79.87804 looks west (heading 266) toward the gate/cranes; used for both perimeter and truckGate. A 2022-10 pano (IL3eQ4Ts6ggsF53oWhsH3w) shows warehouse roll-up loading doors on the east side."
+  },
+  "method": "deep-audit"
+}

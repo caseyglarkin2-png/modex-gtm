@@ -1,0 +1,172 @@
+{
+  "name": "Crowley Miami Distribution Center - Medley FL",
+  "type": "Distribution center / LCL liner & logistics warehouse",
+  "coords": {
+    "lat": 25.8661,
+    "lng": -80.3722
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 25.86715,
+          "lng": -80.3728
+        },
+        {
+          "lat": 25.86705,
+          "lng": -80.3713
+        },
+        {
+          "lat": 25.86505,
+          "lng": -80.3715
+        },
+        {
+          "lat": 25.8651,
+          "lng": -80.3729
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 25.86702,
+          "lng": -80.37187
+        },
+        {
+          "lat": 25.86701,
+          "lng": -80.37164
+        },
+        {
+          "lat": 25.86678,
+          "lng": -80.37166
+        },
+        {
+          "lat": 25.86679,
+          "lng": -80.37189
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 25.867,
+            "lng": -80.3717
+          },
+          {
+            "lat": 25.86698,
+            "lng": -80.3714
+          },
+          {
+            "lat": 25.86515,
+            "lng": -80.37155
+          },
+          {
+            "lat": 25.86517,
+            "lng": -80.37185
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 25.86705,
+            "lng": -80.37203
+          },
+          {
+            "lat": 25.86703,
+            "lng": -80.37178
+          },
+          {
+            "lat": 25.86518,
+            "lng": -80.37193
+          },
+          {
+            "lat": 25.8652,
+            "lng": -80.37218
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 150,
+        "pano": "N_z1QljU7v1bOfkgOmECMw",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 150,
+        "pano": "N_z1QljU7v1bOfkgOmECMw",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 58,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 95,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 8,
+    "railServed": false,
+    "trailerChassisSpots": 95,
+    "containerGroundSlots": null
+  },
+  "mapsUrl": "https://www.google.com/maps/@25.86610,-80.37220,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailersVisible",
+    "entryLanes",
+    "exitLanes"
+  ],
+  "fieldNotes": {
+    "facility": "Crowley Miami Distribution Center, 10205 NW 108th Ave, Medley FL 33178 (Miami-Dade). ROOFTOP geocode landed at 25.8656,-80.3725; the building is the long warehouse running NNW-SSE with its dock face and container yard on the EAST side, in the Beacon Lakes / Doral-Medley industrial park. POSITIVELY IDENTIFIED as Crowley: a navy CROWLEY intermodal container and a red CROWLEY trailer are parked at the gate, with CROWLEY signage on the building (Street View 2025-10). Per Crowley press release the Medley DC is ~180,000 sq ft (consolidated Medley + Doral ops) with double the prior receiving doors, 5,000+ pallet positions, and 95 container parking spots.",
+    "truckGate": "TRUE. The single truck entrance is at the NORTH end where the access road meets the property. Street View (2025-10) shows a GREEN chain-link sliding/rolling security gate spanning the full truck drive, with continuous chain-link perimeter fencing on both sides and concrete jersey barriers flanking the entrance. A STOP sign sits at the road. Clearly a controlled, gated entry.",
+    "guardShack": "FALSE. No staffed guard booth is visible at the gate in Street View or in zoom-20 satellite -- just the sliding gate panels, fence, and barriers. No 1-3-vehicle-footprint booth beside the lane.",
+    "remoteGs": "TRUE. There IS a truck gate but NO guard shack, implying access by card/kiosk/app at the sliding gate.",
+    "entryExitTogether": "TRUE. One gated entrance serves both in and out (single sliding gate at the north drive).",
+    "entryLanes": "Estimated 1 inbound / 1 outbound through the single sliding gate; not separately marked (flagged uncertain).",
+    "postGateStaging": "TRUE. A deep paved container court sits inside the gate before the docks; trucks can stage and queue there.",
+    "drivewayLong": "TRUE. The gate-to-dock approach runs the length of the container court and can hold 3+ trucks; ample internal stacking.",
+    "dockDoors": "50+ band. The east face is a near-continuous dock line along a ~230 m (~768 ft) building with containers/trailers backed in; estimated ~58 doors (dockDoorCount is an overhead estimate, flagged uncertain).",
+    "dropArea": "50+. The east container yard holds dense rows of parked intermodal containers and trailers (red/blue/white steamship boxes, incl. MAERSK and CROWLEY units) -- a large dedicated drop/storage lot; Crowley spec = 95 container parking spots.",
+    "dropYard": "TRUE. A dedicated, fenced container/trailer storage yard runs the full east side of the property, separate from the active dock apron.",
+    "trailerParkingCapacity": "~95 container slots per Crowley's published spec for this DC; consistent with the dense yard rows in imagery.",
+    "trailersVisible": "~70 containers/trailers counted across the dock face + yard in zoom-19/20 imagery (estimate, flagged uncertain).",
+    "shipRcvSeparate": "FALSE. All docks are on a single (east) building face; shipping and receiving share one dock cluster.",
+    "scale": "FALSE. No truck scale / weigh pad visible in the truck path.",
+    "railServed": "FALSE. No rail spur enters the property. The large rail-served intermodal complex visible ~1 km NW is a separate facility, not this DC.",
+    "multipleFacilities": "FALSE. Single warehouse building on the parcel.",
+    "urbanRural": "Urban. Medley/Doral is a dense industrial municipality inside the Miami metro.",
+    "confidence": "High for facility identification (Crowley branding confirmed on container + trailer + building) and for the gate / no-guard-shack / remote-gate determination (clear 2025-10 Street View of the sliding gate). Dock-door and trailer counts are honest overhead estimates and are flagged uncertain; lane counts inferred."
+  },
+  "method": "deep-audit"
+}

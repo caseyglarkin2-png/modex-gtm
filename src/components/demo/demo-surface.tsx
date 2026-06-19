@@ -94,6 +94,11 @@ export function DemoSurface({
 
   const { displayName, siteCount, coverageNote } = pack.account;
   const { dockDoors, trailerCapacity, railServed } = pack.network.totals;
+  // Marine/port packs (crowley v2) carry container ground slots separate from
+  // wheeled trailer/chassis spots; surface both, and label the wheeled count
+  // "trailer/chassis spots" when the split is present.
+  const containerGroundSlots = pack.network.totals.containerGroundSlots;
+  const trailerSpotsLabel = containerGroundSlots != null ? 'trailer/chassis spots' : 'trailer spots';
 
   // Sprint 2.5 — resolve the industry label for the template strip
   // when the prospect arrived from the gallery. Fall back to the
@@ -299,9 +304,15 @@ export function DemoSurface({
                 <span className="text-white/30" aria-hidden>·</span>
                 <span className="whitespace-nowrap"><span className="tabular-nums">{dockDoors.toLocaleString()}</span> dock doors</span>
                 <span className="text-white/30" aria-hidden>·</span>
-                <span className="whitespace-nowrap"><span className="tabular-nums">{trailerCapacity.toLocaleString()}</span> trailer spots</span>
+                <span className="whitespace-nowrap"><span className="tabular-nums">{trailerCapacity.toLocaleString()}</span> {trailerSpotsLabel}</span>
                 <span className="text-white/30" aria-hidden>·</span>
                 <span className="whitespace-nowrap"><span className="tabular-nums">{railServed}</span> rail-served</span>
+                {containerGroundSlots != null ? (
+                  <>
+                    <span className="text-white/30" aria-hidden>·</span>
+                    <span className="whitespace-nowrap"><span className="tabular-nums">{containerGroundSlots.toLocaleString()}</span> container slots</span>
+                  </>
+                ) : null}
               </p>
               {/* Layer 3 — core-sample line. Only renders when the pack carries
                   a sourced network denominator; frames the audit as a deliberate

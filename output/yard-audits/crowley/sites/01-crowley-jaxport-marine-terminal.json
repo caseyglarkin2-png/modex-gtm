@@ -119,7 +119,9 @@
     "truckGateCount": 1,
     "buildingCount": 9,
     "siteAreaAcres": 197,
-    "railServed": true
+    "railServed": true,
+    "trailerChassisSpots": 600,
+    "containerGroundSlots": 1400
   },
   "mapsUrl": "https://www.google.com/maps/@30.354400,-81.623900,400m/data=!3m1!1e3",
   "classification": {
@@ -163,19 +165,5 @@
     "railServed": "Rail spurs run into the terminal area (visible NW of the gate and along the west edge); Talleyrand has an adjacent intermodal yard (ICTF).",
     "multipleFacilities": "Campus-scale: gate complex, multiple transit sheds/warehouses, tank farm, container yards and crane-served berths."
   },
-  "method": "deep-audit",
-  "verification": {
-    "verdict": "confirmed",
-    "operator": "self",
-    "tenancy": "leased",
-    "citations": [
-      { "tier": 1, "url": "https://www.crowley.com/port-terminals/", "date": "2026-06", "type": "locator", "claim": "Crowley lists 2831 Talleyrand Avenue, Jacksonville FL 32206 as its main JAXPORT port office (Port Office #1), Crowley-operated." },
-      { "tier": 1, "url": "https://www.jaxport.com/cargo/facilities/talleyrand-marine-terminal/", "date": "2026-06", "type": "port-authority", "claim": "JAXPORT owns Talleyrand Marine Terminal; Crowley is the leasing operator." }
-    ],
-    "checkedDivestiture": true,
-    "checkedBankruptcyEra": false,
-    "rationale": "Crowley's own locator lists 2831 Talleyrand as its active main JAXPORT terminal running weekly LNG ConRo Puerto Rico service; JAXPORT owns land, Crowley leases/operates; no divestiture found.",
-    "verifiedBy": "agent",
-    "verifiedAt": "2026-06-18"
-  }
+  "method": "deep-audit"
 }

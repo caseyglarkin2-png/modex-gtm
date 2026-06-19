@@ -1,0 +1,171 @@
+{
+  "name": "Crowley St. Thomas Cargo Terminal - Crown Bay Cargo Port, USVI",
+  "type": "Marine terminal / container port (smaller, ungated tier)",
+  "coords": {
+    "lat": 18.33584,
+    "lng": -64.94964
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 18.3371,
+          "lng": -64.9511
+        },
+        {
+          "lat": 18.337,
+          "lng": -64.9484
+        },
+        {
+          "lat": 18.3345,
+          "lng": -64.9481
+        },
+        {
+          "lat": 18.33475,
+          "lng": -64.95095
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 18.33688,
+          "lng": -64.95005
+        },
+        {
+          "lat": 18.33688,
+          "lng": -64.94965
+        },
+        {
+          "lat": 18.3366,
+          "lng": -64.94965
+        },
+        {
+          "lat": 18.3366,
+          "lng": -64.95005
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 18.3364,
+            "lng": -64.9506
+          },
+          {
+            "lat": 18.3363,
+            "lng": -64.9486
+          },
+          {
+            "lat": 18.3349,
+            "lng": -64.9485
+          },
+          {
+            "lat": 18.33505,
+            "lng": -64.95055
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 18.3349,
+            "lng": -64.9508
+          },
+          {
+            "lat": 18.3347,
+            "lng": -64.9483
+          },
+          {
+            "lat": 18.33455,
+            "lng": -64.94835
+          },
+          {
+            "lat": 18.33475,
+            "lng": -64.95085
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 161,
+        "pano": "9NhmCaSc6-JnDE4tOyonfA",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 161,
+        "pano": "9NhmCaSc6-JnDE4tOyonfA",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 4,
+    "trailersVisible": 25,
+    "trailerParkingCapacity": 600,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 19.4,
+    "railServed": false,
+    "trailerChassisSpots": 25,
+    "containerGroundSlots": 600
+  },
+  "mapsUrl": "https://www.google.com/maps/@18.335840,-64.949640,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "trailersVisible",
+    "truckGate",
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "postGateStaging"
+  ],
+  "fieldNotes": {
+    "siteIdentification": "Confirmed against Crowley + Virgin Islands Port Authority (VIPA) sources: this is the Crown Bay Sandfill Marine Cargo Facility on St. Thomas, where Crowley runs its containerized/commercial cargo operation (Crowley Caribbean Services, 8131 Crown Bay, St. Thomas VI 00802). VIPA publishes the facility as ~20 acres with a 2,720 ft bulkhead and 30 ft max draft. Satellite z16-z19 over the Crown Bay waterfront (just west of the Crown Bay cruise pier and the Crown Bay Marina) shows the unmistakable container terminal: dense multi-color container ground slots and stacks, a container vessel worked at the quay, a mobile harbor crane / reach stackers, terminal tractors, and transit-shed warehouses with solar roofs along the landward edge.",
+    "yardSpots": "trailerParkingCapacity (~600) is a CONTAINER / CHASSIS GROUND-SLOT estimate, not OTR trailer stalls. Counted from z18-z19 satellite across the Crown Bay cargo yard: several blocks of container ground slots (containers stacked roughly 1-3 high) plus chassis/reefer lanes. This is a small island terminal (~20 acres total, less than a third the size of the Santo Tomas or Puerto Cortes terminals), so slot count is modest by container-port standards. trailersVisible (~25) counts chassis/trailers and discrete container rows discernible in the captured frames. Both flagged uncertain at this resolution.",
+    "dockDoors": "0-10 band, ~4 doors low confidence. This is a marine terminal, so OTR dock doors are near-zero by design; the count reflects the landward face of the attached transit-shed / warehouse buildings where break-bulk and LCL cargo is handled. Imagery shows warehouse roll-up faces but exact door count is not resolvable.",
+    "truckGate": "Inferred true: the cargo facility is a fenced, VIPA-controlled port estate (a national port security perimeter) with a single landward access off Crown Bay Road / the Sub Base industrial district. Standard secured-gate configuration for a US territory marine cargo terminal. Specific gate hardware (barrier arm) not resolved in available overhead imagery and no in-terminal Street View exists - flagged uncertain. The named 'smaller, ungated tier' in the pricing refers to the terminal's commercial size class, not a literally open/un-fenced yard; the secured port perimeter is still present.",
+    "guardShack": "Inferred true (VIPA-secured federal-territory marine cargo port; ISPS/port-security gate is standard). Specific guard booth not positively resolved in imagery - flagged uncertain. remoteGs left false because a staffed booth is the expected configuration at a manned island cargo gate.",
+    "scale": "Inferred true: a weighbridge is standard at a containerized marine cargo terminal for export/import weight verification. Not positively resolved in the captured frames - flagged uncertain.",
+    "postGateStaging": "Inferred true: the paved yard between the landward gate and the quay/transit sheds provides interior holding space. Flagged uncertain.",
+    "drivewayShort": "The landward approach from the public road to the yard is short (1-2 trucks) on this constrained island sandfill site; drivewayLong=false.",
+    "backupSensitive": "true: the terminal sits on a tight sandfill peninsula wedged between Crown Bay Road, the marina, and the cruise pier in the dense Sub Base district. A truck queue at the gate has little stacking room and would spill onto the shared public industrial road - tight entry geometry.",
+    "urbanRural": "Urban: Crown Bay / Sub Base is inside the dense Charlotte Amalie urban fabric of St. Thomas (the island's main commercial port district, surrounded by warehouses, the cruise terminal, retail, and marina). Classified Urban.",
+    "multipleFacilities": "false: a single contiguous cargo estate (quay + container yard + adjoining transit sheds), not a multi-building campus of separate large facilities.",
+    "railServed": "false: no rail anywhere on St. Thomas.",
+    "streetView": "No Google car coverage inside the secured terminal (metadata ZERO_RESULTS at all in-yard points). Nearest road-level pano is 9NhmCaSc6-JnDE4tOyonfA (captured 2016-10) at 18.33734,-64.95018 on Crown Bay Road ~165m N of the yard, in front of a lumber/hardware store. heading 161 deg points from that pano south toward the terminal centroid. This is an approach view, not the gate itself - perimeter/truckGate streetView coverage is effectively partial."
+  },
+  "method": "deep-audit"
+}

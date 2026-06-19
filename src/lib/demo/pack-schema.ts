@@ -341,6 +341,11 @@ const NetworkTotals = z.object({
   gates: z.number().int().nonnegative(),
   railServed: z.number().int().nonnegative(),
   acres: z.number().nonnegative(),
+  // Marine/port accounts (e.g. crowley v2) split the yard into wheeled
+  // trailer/chassis spots vs. stacked container ground slots; both optional so
+  // every other pack is unaffected.
+  trailerChassisSpots: z.number().int().nonnegative().optional(),
+  containerGroundSlots: z.number().int().nonnegative().optional(),
 });
 
 // zod 4: `z.record(enum, V)` requires ALL enum keys. We want "some-or-none",

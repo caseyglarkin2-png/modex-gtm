@@ -1,0 +1,152 @@
+{
+  "name": "Crowley Puerto Plata Container Terminal - Puerto Plata, Dominican Republic",
+  "type": "Marine terminal / container port (multipurpose)",
+  "coords": {
+    "lat": 19.7993,
+    "lng": -70.7021
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 19.80045,
+          "lng": -70.70335
+        },
+        {
+          "lat": 19.8001,
+          "lng": -70.70075
+        },
+        {
+          "lat": 19.79835,
+          "lng": -70.7011
+        },
+        {
+          "lat": 19.79805,
+          "lng": -70.7015
+        },
+        {
+          "lat": 19.7983,
+          "lng": -70.7034
+        },
+        {
+          "lat": 19.79945,
+          "lng": -70.7037
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 19.79835,
+          "lng": -70.702
+        },
+        {
+          "lat": 19.79835,
+          "lng": -70.70155
+        },
+        {
+          "lat": 19.79805,
+          "lng": -70.7016
+        },
+        {
+          "lat": 19.79805,
+          "lng": -70.70205
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 19.79985,
+            "lng": -70.7028
+          },
+          {
+            "lat": 19.79965,
+            "lng": -70.70125
+          },
+          {
+            "lat": 19.7987,
+            "lng": -70.70145
+          },
+          {
+            "lat": 19.7989,
+            "lng": -70.703
+          }
+        ]
+      }
+    ],
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 30,
+        "pano": "",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 30,
+        "pano": "",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 0,
+    "trailersVisible": 40,
+    "trailerParkingCapacity": 250,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 11,
+    "railServed": false,
+    "trailerChassisSpots": 40,
+    "containerGroundSlots": 250
+  },
+  "mapsUrl": "https://www.google.com/maps/@19.799300,-70.702100,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "NONE",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "trailerParkingCapacity",
+    "trailersVisible",
+    "truckGate",
+    "guardShack",
+    "entryLanes",
+    "exitLanes",
+    "siteAreaAcres",
+    "scale"
+  ],
+  "fieldNotes": {
+    "siteIdentification": "Crowley operates a weekly container service (Puerto Plata to Port Everglades) out of the Puerto Plata multipurpose port, addressed 'Antigua Via Ferrea, Muelle Nuevo'. The port is shared cargo + cruise: the long central pier is the Taino Bay cruise berth (3 cruise ships visible in imagery), and a private cruise village (circular structures, lagoon) sits on the east/landside. The CARGO/CONTAINER operation is the modest paved working yard on the WEST side of the pier base, near round bulk-storage tanks. There is no large dedicated container stacking yard like a major terminal; this is a small multipurpose wharf. Imagery was hard to disambiguate (cruise vs cargo); confidence is LOW.",
+    "yardSpots": "The 'yard spots' figure (trailerParkingCapacity ~250) is CONTAINER/CHASSIS GROUND SLOTS, not dock-door positions. It is a conservative estimate from the small west-side paved cargo yard; the dedicated container footprint is modest (~10-12 acres of working wharf/yard). Low confidence - the cargo area shares space with bulk/general cargo and bunker operations.",
+    "dockDoorCount": "Marine container terminal - no warehouse dock-door bank visible in the cargo yard. dockDoorCount = 0; dockDoors band = NONE.",
+    "truckGate": "A controlled port-perimeter entry is expected at a working port (ISPS/security), and a guarded gate is implied, but the exact gate structure and lane count were NOT cleanly resolved in satellite (the port frontage abuts the cruise-village access). Flagged uncertain. Street View exists at the port frontage (pano @ 19.79832,-70.70121, captured 2022-03), so hasCoverage:true, but no specific gate pano id was locked - heading 30 points from the road toward the cargo yard.",
+    "backupSensitive": "The cargo yard frontage is tight against the urban street grid of San Felipe de Puerto Plata; a truck queue would have little stacking room and could spill onto city streets.",
+    "railServed": "No active rail spur into the cargo yard (the address references 'Antigua Via Ferrea' = former railway, now abandoned). railServed:false.",
+    "scale": "No truck scale resolved; flagged uncertain.",
+    "urbanRural": "Downtown Puerto Plata - dense urban fabric immediately surrounds the port."
+  },
+  "method": "deep-audit"
+}

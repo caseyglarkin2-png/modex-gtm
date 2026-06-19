@@ -1,0 +1,156 @@
+{
+  "name": "Crowley Puerto Cortes Container Terminal - Honduras",
+  "type": "Marine terminal / container port",
+  "coords": {
+    "lat": 15.8395,
+    "lng": -87.9405
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 15.8423,
+          "lng": -87.9432
+        },
+        {
+          "lat": 15.8426,
+          "lng": -87.9376
+        },
+        {
+          "lat": 15.8402,
+          "lng": -87.9364
+        },
+        {
+          "lat": 15.837,
+          "lng": -87.9382
+        },
+        {
+          "lat": 15.8374,
+          "lng": -87.9418
+        },
+        {
+          "lat": 15.8398,
+          "lng": -87.9442
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 15.8421,
+          "lng": -87.9401
+        },
+        {
+          "lat": 15.84245,
+          "lng": -87.9392
+        },
+        {
+          "lat": 15.84185,
+          "lng": -87.93875
+        },
+        {
+          "lat": 15.8415,
+          "lng": -87.93965
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 15.8419,
+            "lng": -87.9406
+          },
+          {
+            "lat": 15.8412,
+            "lng": -87.9372
+          },
+          {
+            "lat": 15.8388,
+            "lng": -87.9384
+          },
+          {
+            "lat": 15.8395,
+            "lng": -87.9418
+          }
+        ]
+      }
+    ],
+    "dockAprons": [],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "truckGate": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 6,
+    "trailersVisible": 40,
+    "trailerParkingCapacity": 1100,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 95,
+    "railServed": false,
+    "trailerChassisSpots": 40,
+    "containerGroundSlots": 1100
+  },
+  "mapsUrl": "https://www.google.com/maps/@15.839500,-87.940500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "0-10",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "low",
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "siteAreaAcres",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "guardShack",
+    "truckGate",
+    "buildingCount"
+  ],
+  "fieldNotes": {
+    "yardSpots": "trailerParkingCapacity (~1,100) is a CONTAINER / CHASSIS GROUND-SLOT estimate, not OTR trailer stalls. Counted from z18 satellite over the container storage yard NE of the berths: hundreds of containers in organized rows across a large unpaved/gravel depot. Marine terminal: OTR dock doors near-zero; dockDoorCount reflects the attached warehouse component only. LOW confidence - the precise Crowley-controlled footprint inside the shared Puerto Cortes terminal could not be isolated from imagery alone.",
+    "attachedWarehouse": "Crowley publishes a +97,000 sqft warehouse footprint for Puerto Cortes (three Choloma-area warehouses ~113k sqft combined serving the port). The warehouse buildings are not co-located on the audited container yard; dockDoorCount (~6, 0-10 band, low confidence) is a conservative placeholder for the warehouse loading doors, which sit off-terminal in the Choloma free zone, not on the quay.",
+    "siteIdentification": "Puerto Cortes is Honduras' principal Caribbean port. Crowley operates as a liner/terminal partner at the public container terminal (TEC, gantry-crane berths) with a landward container storage depot. z16-z18 satellite confirms: orange/yellow ship-to-shore gantry cranes at the berth with a container vessel alongside (15.838,-87.943), and a large multi-row container storage yard to the NE (15.840,-87.939). The Crowley terminal address (Barrio La Roca, frente a gasolinera DIPSA, antes del peaje) is the landward access corridor. The audited polygon covers the container yard + berth Crowley uses; exact lease boundaries within the shared port are uncertain.",
+    "truckGate": "Inferred secured port gate (toll/peaje + DIPSA gas station landmark on the access road per Crowley address). Specific gate hardware not resolved - flagged uncertain.",
+    "guardShack": "Inferred (national secured port). Not positively resolved - flagged uncertain.",
+    "scale": "Weighbridge standard at a container terminal - inferred true, not visually confirmed.",
+    "dropArea": "50+ band: the container storage depot holds many hundreds of ground slots.",
+    "railServed": "No rail spur into the terminal resolved. railServed=false.",
+    "urbanRural": "Puerto Cortes is a coastal port town; broader setting is small-city/edge-of-town industrial -> Rural per rubric.",
+    "streetView": "No Street View coverage within 400m of the terminal (ZERO_RESULTS) - hasCoverage=false for all zones. International port with no Google car or photosphere coverage at the gate.",
+    "imageryQuality": "Several wide probes around the published city coordinates fell over open water (the city centroid sits inland of the berths); the terminal was located by walking the probe NE to the gantry-crane berth. Resolution adequate at z18 but the shared-terminal layout limits confidence to LOW."
+  },
+  "method": "deep-audit"
+}

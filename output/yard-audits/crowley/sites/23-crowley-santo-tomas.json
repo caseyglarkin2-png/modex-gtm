@@ -1,0 +1,175 @@
+{
+  "name": "Crowley Santo Tomas de Castilla Container Terminal - Guatemala",
+  "type": "Marine terminal / container port",
+  "coords": {
+    "lat": 15.6968,
+    "lng": -88.615
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 15.69912,
+          "lng": -88.61863
+        },
+        {
+          "lat": 15.69688,
+          "lng": -88.61168
+        },
+        {
+          "lat": 15.69468,
+          "lng": -88.61243
+        },
+        {
+          "lat": 15.69386,
+          "lng": -88.61498
+        },
+        {
+          "lat": 15.69502,
+          "lng": -88.61702
+        },
+        {
+          "lat": 15.69676,
+          "lng": -88.61905
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 15.6943,
+          "lng": -88.6156
+        },
+        {
+          "lat": 15.69468,
+          "lng": -88.61498
+        },
+        {
+          "lat": 15.69408,
+          "lng": -88.61452
+        },
+        {
+          "lat": 15.6937,
+          "lng": -88.61514
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 15.6978,
+            "lng": -88.6156
+          },
+          {
+            "lat": 15.6969,
+            "lng": -88.61345
+          },
+          {
+            "lat": 15.6956,
+            "lng": -88.6142
+          },
+          {
+            "lat": 15.6965,
+            "lng": -88.61635
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 15.6969,
+            "lng": -88.61435
+          },
+          {
+            "lat": 15.6964,
+            "lng": -88.613
+          },
+          {
+            "lat": 15.69585,
+            "lng": -88.6133
+          },
+          {
+            "lat": 15.69635,
+            "lng": -88.61465
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 66,
+        "pano": "CAoSFkNJSE0wb2dLRUlDQWdJQ0UxcmpfRnc.",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 66,
+        "pano": "CAoSFkNJSE0wb2dLRUlDQWdJQ0UxcmpfRnc.",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 10,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 2200,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 67,
+    "railServed": false,
+    "trailerChassisSpots": 60,
+    "containerGroundSlots": 2200
+  },
+  "mapsUrl": "https://www.google.com/maps/@15.696800,-88.615000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "0-10",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "guardShack",
+    "truckGate"
+  ],
+  "fieldNotes": {
+    "yardSpots": "The trailerParkingCapacity figure (~2,200) is a CONTAINER / CHASSIS GROUND-SLOT estimate, not OTR trailer stalls. Counted from z18-z20 satellite over the Crowley/EmpresaPortuaria stacking yard: dense multi-row ground slots of stacked containers plus chassis/trailer lanes along the apron. Marine terminal, so OTR dock doors are near-zero; the dock-door count reflects the attached warehouse.",
+    "attachedWarehouse": "Crowley operates a +350,000 sqft warehouse / transit shed here (24/7 per Crowley). The large pale roof shed on the east side of the terminal (z19) is the warehouse; its landward face carries the truck loading doors counted in dockDoorCount (0-10 band, ~10, low confidence at this resolution).",
+    "siteIdentification": "Confirmed against Crowley + Empresa Portuaria Nacional Santo Tomas de Castilla pages and port references (lat ~15.69-15.71, lng ~-88.616). z16-z20 satellite shows the multipurpose/container terminal on Amatique Bay: ship-to-shore + ship gear at the quay, dense container ground slots, a large transit-shed warehouse, terminal tractors and chassis. CA-9 highway and the town of Santo Tomas sit immediately landward.",
+    "truckGate": "Inferred from layout: the terminal is a fully fenced port estate with a single landward access road off CA-9, the standard secured-gate configuration for a Central American container port. Specific gate hardware not resolved in available imagery - flagged uncertain.",
+    "guardShack": "Inferred (secured national port). Specific guard booth not positively resolved - flagged uncertain.",
+    "scale": "Weighbridge is standard at this terminal (Crowley publishes Guatemala export weight restrictions enforced at gate), so scale=true is inferred, not visually confirmed - flagged uncertain.",
+    "dropArea": "50+ band: the container/chassis stacking yard holds many hundreds to ~2,000+ ground slots.",
+    "railServed": "No rail spur into the terminal resolved; Guatemala's Atlantic rail is largely inactive. railServed=false.",
+    "urbanRural": "Small port town (Santo Tomas de Castilla / Puerto Barrios) on a narrow Caribbean coast - classified Rural per rubric (small-town industrial -> Rural).",
+    "multipleFacilities": "Campus-scale: quay/transit sheds, the +350k sqft warehouse, container stacking yards, and ancillary port buildings.",
+    "streetView": "Nearest Street View is a 2018-04 user photosphere (pano CAoS...E1rj_Fw) on the public access road ~280m SW of the terminal centroid; no Google car road coverage inside the secured port. heading 66 deg points from the pano toward the terminal."
+  },
+  "method": "deep-audit"
+}

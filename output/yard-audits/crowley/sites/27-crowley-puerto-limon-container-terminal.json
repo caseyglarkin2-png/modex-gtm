@@ -1,0 +1,193 @@
+{
+  "name": "Crowley Puerto Limon Container Terminal (Moin Container Terminal / APM Terminals) - Costa Rica",
+  "type": "Marine terminal / container port",
+  "coords": {
+    "lat": 10.013017,
+    "lng": -83.097563
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 10.0154,
+          "lng": -83.101
+        },
+        {
+          "lat": 10.0144,
+          "lng": -83.0955
+        },
+        {
+          "lat": 10.0102,
+          "lng": -83.0948
+        },
+        {
+          "lat": 10.0112,
+          "lng": -83.1027
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 10.01318,
+          "lng": -83.1025
+        },
+        {
+          "lat": 10.013,
+          "lng": -83.10205
+        },
+        {
+          "lat": 10.01268,
+          "lng": -83.10228
+        },
+        {
+          "lat": 10.01286,
+          "lng": -83.10272
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 10.0147,
+            "lng": -83.1001
+          },
+          {
+            "lat": 10.014,
+            "lng": -83.0964
+          },
+          {
+            "lat": 10.0114,
+            "lng": -83.0969
+          },
+          {
+            "lat": 10.0121,
+            "lng": -83.1006
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 10.0153,
+            "lng": -83.0987
+          },
+          {
+            "lat": 10.01505,
+            "lng": -83.09745
+          },
+          {
+            "lat": 10.01475,
+            "lng": -83.09755
+          },
+          {
+            "lat": 10.015,
+            "lng": -83.0988
+          }
+        ]
+      }
+    ],
+    "staging": {
+      "ring": [
+        {
+          "lat": 10.01345,
+          "lng": -83.10165
+        },
+        {
+          "lat": 10.0132,
+          "lng": -83.1006
+        },
+        {
+          "lat": 10.01255,
+          "lng": -83.1009
+        },
+        {
+          "lat": 10.0128,
+          "lng": -83.10195
+        }
+      ]
+    },
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      },
+      "truckGate": {
+        "heading": 0,
+        "pano": "",
+        "hasCoverage": false
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 6,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 5500,
+    "truckGateCount": 1,
+    "buildingCount": 5,
+    "siteAreaAcres": 86,
+    "railServed": false,
+    "trailerChassisSpots": 70,
+    "containerGroundSlots": 5500
+  },
+  "mapsUrl": "https://www.google.com/maps/@10.013017,-83.097563,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": true,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 3,
+    "exitLanes": 3,
+    "fastLaneOpportunity": true,
+    "dockDoors": "0-10",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": true
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "buildingCount",
+    "entryLanes",
+    "exitLanes",
+    "guardShack",
+    "remoteGs",
+    "scale",
+    "multiStep"
+  ],
+  "fieldNotes": {
+    "siteIdentification": "Confirmed as the Moin Container Terminal (Terminal de Contenedores de Moin / TCM), operated by APM Terminals, on an artificial island ~500m off Moin Bay, Limon province, Caribbean Costa Rica. This is the container terminal Crowley calls at on its Florida-Costa Rica and Florida-Costa Rica-Jamaica weekly loops (Crowley vessels arrive Tue/Wed; Crowley Puerto Limon office listed at Carretera Saopin, frente al Servicentro Moin). The older Limon city multipurpose berths are NOT the container terminal Crowley uses for its containerized service; Moin/TCM is. Center locked at ~10.0130, -83.0976 from z15-z20 Maxar/Airbus imagery showing the trapezoidal reclaimed island, ship-to-shore gantry cranes along the south quay, dense RTG container blocks, and the access causeway from the mainland at the SW.",
+    "yardSpots": "trailerParkingCapacity (~5,500) is a CONTAINER / CHASSIS GROUND-SLOT estimate (twenty-foot ground slots in the paved RTG stacking yard), NOT OTR trailer stalls. Estimated from z17-z20 imagery showing the full ~35ha operational area packed with parallel RTG/RMG container blocks (multi-row ground slots, multicolor + orange reefer boxes, plus chassis lanes) cross-checked against the terminal's published 1.2M-TEU annual throughput on ~40ha. Order-of-magnitude estimate, flagged uncertain.",
+    "perimeterArea": "Perimeter ring traces the operational reclaimed island inside the breakwater (NW 10.0154,-83.1010; NE 10.0144,-83.0955; SE quay corner 10.0102,-83.0948; SW gate/causeway corner 10.0112,-83.1027). Shoelace area = ~35 ha / ~86 acres, consistent with the published ~40 ha Phase-1 footprint.",
+    "dockDoors": "0-10 band, ~6. Marine container terminal, so OTR dock doors are near-zero. The only door-bearing structure is the long pale transit shed / warehouse near the north breakwater (z19) with a handful of openings on its landward face. The terminal moves boxes by gantry/RTG to chassis, not through a dock-door wall.",
+    "truckGate": "TRUE. z19-z20 imagery at the SW corner of the island (~10.0130,-83.1023) clearly shows a multi-lane truck gate: a large angled gate canopy spanning several parallel marked truck lanes, with tractor-trailers queued in the lanes approaching it (one yellow container box visible). This is the single landward in/out gate where the mainland causeway meets the terminal. truckGateCount=1.",
+    "guardShack": "FALSE / remoteGs TRUE. The gate is a modern container-terminal automated portal (OCR canopy + lane kiosks) rather than a classic small staffed guard booth beside the lane. No distinct 1-3-space guard-shack footprint resolved at the gate; the configuration reads as kiosk/OCR check-in, so remoteGs=true. Flagged uncertain - administrative office building sits just inside the gate and may staff check-in.",
+    "lanes": "entryLanes/exitLanes ~3 each (estimate). The gate canopy spans multiple parallel lanes (~6 lanes total under/beside the canopy) split into inbound and outbound; entry and exit share the one gate complex (entryExitTogether=true). fastLaneOpportunity=true given the multi-lane gate apron and unused paved width. Lane split is an estimate, flagged uncertain.",
+    "staging": "preGateStaging=true (paved approach/queue area outside the gate on the causeway side where trucks line up - trucks visibly queued) and postGateStaging=true (large paved holding area inside the gate before the RTG blocks). drivewayLong=true: the gate-to-yard approach easily holds 3+ trucks.",
+    "scale": "TRUE (inferred). A weighbridge is standard at a container terminal of this scale and Costa Rican export weight rules are enforced at the gate; a scale pad is expected in the gate lanes. Not positively isolated in imagery - flagged uncertain.",
+    "multiStep": "TRUE (inferred). Container-terminal in-gates of this type run a two-stage flow (OCR portal pre-check, then a manned/kiosk lane transaction) before release to the yard. Inferred from the gate canopy + booth layout, not a second separate checkpoint structure - flagged uncertain.",
+    "railServed": "FALSE. No rail spur runs onto the island; access is road-only via the causeway. Costa Rica's Atlantic freight rail does not serve the terminal.",
+    "urbanRural": "Rural. Offshore island terminal off the small port town of Moin/Limon on a narrow Caribbean coast; broader setting is small-town industrial -> Rural per rubric. connectivityIssue=false (active modern terminal with its own comms; coastal town nearby).",
+    "multipleFacilities": "TRUE. Campus-scale estate: ship-to-shore quay, the transit shed/warehouse, multiple RTG container stacking blocks, reefer racks (~3,800 reefer plugs published), admin/office building, workshop, and empty-container handling area.",
+    "buildingCount": "~5 distinct structures (admin office, workshop/maintenance, transit shed/warehouse, gate canopy, ancillary). Estimate, flagged uncertain.",
+    "streetView": "No Google Street View coverage at the gate or on the island (ZERO_RESULTS at both gate and perimeter centroid). The nearest pano is a 2016-01 user photosphere ~2.5km south on the mainland, captured DURING construction (pipes/excavators/sand, pre-2019 opening) - not usable. streetViewMeta hasCoverage=false for both zones; no pano invented.",
+    "crowleyContext": "Crowley is a liner customer / vessel operator calling at TCM (not the concessionaire); APM Terminals operates the terminal under a 33-year concession. The yard-management relevance is the container/chassis ground-slot yard and the single multi-lane road gate that all of Crowley's import/export boxes move through."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,177 @@
+{
+  "name": "Crowley Rio Haina Container Terminal (HIT Margen Oriental) - Dominican Republic",
+  "type": "Marine terminal / container port",
+  "coords": {
+    "lat": 18.4228,
+    "lng": -70.0155
+  },
+  "geofences": {
+    "perimeter": {
+      "ring": [
+        {
+          "lat": 18.4262,
+          "lng": -70.0176
+        },
+        {
+          "lat": 18.4256,
+          "lng": -70.0123
+        },
+        {
+          "lat": 18.4218,
+          "lng": -70.0118
+        },
+        {
+          "lat": 18.4198,
+          "lng": -70.0143
+        },
+        {
+          "lat": 18.4206,
+          "lng": -70.0176
+        },
+        {
+          "lat": 18.424,
+          "lng": -70.0188
+        }
+      ]
+    },
+    "truckGate": {
+      "ring": [
+        {
+          "lat": 18.4224,
+          "lng": -70.0178
+        },
+        {
+          "lat": 18.4228,
+          "lng": -70.017
+        },
+        {
+          "lat": 18.42215,
+          "lng": -70.0165
+        },
+        {
+          "lat": 18.42175,
+          "lng": -70.0173
+        }
+      ]
+    },
+    "dropYards": [
+      {
+        "ring": [
+          {
+            "lat": 18.4252,
+            "lng": -70.0152
+          },
+          {
+            "lat": 18.4247,
+            "lng": -70.012
+          },
+          {
+            "lat": 18.4218,
+            "lng": -70.0125
+          },
+          {
+            "lat": 18.4223,
+            "lng": -70.0157
+          }
+        ]
+      }
+    ],
+    "dockAprons": [
+      {
+        "ring": [
+          {
+            "lat": 18.4256,
+            "lng": -70.0166
+          },
+          {
+            "lat": 18.4233,
+            "lng": -70.0162
+          },
+          {
+            "lat": 18.4232,
+            "lng": -70.0154
+          },
+          {
+            "lat": 18.4255,
+            "lng": -70.0158
+          }
+        ]
+      }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": {
+        "heading": 94,
+        "pano": "CAoSFkNJSE0wb2dLRUlDQWdJQ0ZzZnVyRFE.",
+        "hasCoverage": true
+      },
+      "truckGate": {
+        "heading": 94,
+        "pano": "CAoSFkNJSE0wb2dLRUlDQWdJQ0ZzZnVyRFE.",
+        "hasCoverage": true
+      }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 4,
+    "trailersVisible": 120,
+    "trailerParkingCapacity": 3000,
+    "truckGateCount": 1,
+    "buildingCount": 7,
+    "siteAreaAcres": 98,
+    "railServed": false,
+    "trailerChassisSpots": 120,
+    "containerGroundSlots": 3000
+  },
+  "mapsUrl": "https://www.google.com/maps/@18.422800,-70.015500,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 3,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "0-10",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": true,
+    "dropYard": true,
+    "multiStep": true
+  },
+  "confidence": "medium",
+  "uncertainFields": [
+    "dockDoorCount",
+    "trailerParkingCapacity",
+    "entryLanes",
+    "exitLanes",
+    "scale",
+    "guardShack",
+    "multiStep"
+  ],
+  "fieldNotes": {
+    "yardSpots": "trailerParkingCapacity (~3,000) is a CONTAINER / CHASSIS GROUND-SLOT estimate, not OTR trailer stalls. Counted from z17-z19 satellite over the very dense HIT Margen Oriental stacking yard: continuous multi-row container ground slots filling the east bank, served by ship-to-shore gantries and RTGs/reach-stackers. This is the largest container yard of the three sites. Marine terminal: OTR dock doors near-zero.",
+    "attachedWarehouse": "Crowley operates a bonded warehouse (Haina Bonded Warehouse / Deposito Aduanero Rio Haina) at the terminal; dockDoorCount (~4, 0-10 band, low confidence) reflects warehouse loading doors on the landward sheds, not OTR docks on the quay.",
+    "siteIdentification": "Confirmed as Haina International Terminals (HIT) Margen Oriental (east bank) - Crowley's published Rio Haina address: Carretera Sanchez Km 13.5, Edificio Naviero, 3er Puerto Rio Haina Margen Oriental. Official port position 18 deg 25.018' N / 70 deg 01.190' W (~18.417,-70.020). z16-z19 satellite shows container vessels at berth, multiple ship-to-shore gantry cranes, and a high-density container stacking yard on the east bank, with a seaward tank farm. Crowley publishes the terminal has 5 lanes - consistent with the multi-lane gate inferred here.",
+    "truckGate": "Inferred secured terminal gate off Carretera Sanchez on the landward (west) edge; Crowley publishes the Rio Haina terminal operates with 5 lanes, supporting truckGate=true plus multi-lane entry/exit and fastLaneOpportunity. Specific gate hardware not resolved at this resolution.",
+    "guardShack": "Inferred (secured international container terminal). Not positively resolved - flagged uncertain.",
+    "entryLanes": "Crowley states the terminal has 5 lanes; split modeled as ~3 in / 2 out. Counts approximate.",
+    "multiStep": "Set true (medium): bonded-warehouse + Customs terminal typically runs gate then a separate Customs/scale checkpoint before the docks; Crowley publishes Customs clearance on-site. Inferred, flagged uncertain.",
+    "scale": "Weighbridge standard at this scale of container terminal - inferred true.",
+    "dropArea": "50+ band: thousands of container ground slots.",
+    "railServed": "No rail into the terminal. railServed=false.",
+    "urbanRural": "Rio Haina sits in the Santo Domingo metropolitan fabric (~13km west of the capital) - Urban.",
+    "multipleFacilities": "Campus-scale: gantry berths, multiple landward sheds/warehouses, the bonded warehouse, and the large container yard.",
+    "streetView": "Nearest Street View is a 2023-10 user photosphere (pano CAoS...sfurDQ) on Carretera Sanchez ~270m W of the yard centroid; no Google car coverage inside the secured terminal. heading 94 deg points from the pano east toward the yard."
+  },
+  "method": "deep-audit"
+}
