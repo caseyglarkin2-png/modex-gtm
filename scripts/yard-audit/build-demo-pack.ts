@@ -117,14 +117,32 @@ function computeTotals(sites: Site[]) {
   let gates = 0;
   let railServed = 0;
   let acres = 0;
+  // v2 economics split (Crowley audit). Tracked only when sites carry it.
+  let trailerChassisSpots = 0;
+  let containerGroundSlots = 0;
+  let hasSplit = false;
   for (const s of sites) {
     dockDoors += s.yardMetrics.dockDoorCount ?? 0;
-    trailerCapacity += s.yardMetrics.trailerParkingCapacity ?? 0;
     gates += s.yardMetrics.truckGateCount ?? 0;
     if (s.yardMetrics.railServed === true) railServed += 1;
     acres += s.yardMetrics.siteAreaAcres ?? 0;
+    const tcs = s.yardMetrics.trailerChassisSpots;
+    const cgs = s.yardMetrics.containerGroundSlots;
+    if (tcs != null || cgs != null) hasSplit = true;
+    trailerChassisSpots += tcs ?? 0;
+    containerGroundSlots += cgs ?? 0;
+    // Headline trailer capacity = the honest trailers/chassis number when the
+    // split is present, else the legacy trailerParkingCapacity sum.
+    trailerCapacity += (tcs ?? s.yardMetrics.trailerParkingCapacity) ?? 0;
   }
-  return { dockDoors, trailerCapacity, gates, railServed, acres };
+  return {
+    dockDoors,
+    trailerCapacity,
+    gates,
+    railServed,
+    acres,
+    ...(hasSplit ? { trailerChassisSpots, containerGroundSlots } : {}),
+  };
 }
 
 // ── Per-site loader ─────────────────────────────────────────────────────────
@@ -384,9 +402,18 @@ async function main() {
     throw new Error(`No archetypes loaded from CSV in ${auditDir} — run generate-csv.ts first`);
   }
 
+  // Account-scoped exclusions: audited sites that are intentionally NOT part
+  // of the demo network (and not stubs). The Crowley Cincinnati site is a
+  // downtown logistics office with no truck yard, not one of the 25 priced
+  // sites the economics + network ripple cover. Dropping it here keeps it out
+  // of both the network and the droppedStubCount (it is excluded by design,
+  // not unresolvable).
+  const EXCLUDED_SITE_IDS = new Set<string>(['18-crowley-cincinnati']);
+
   const sites: Site[] = [];
   let droppedStubCount = 0;
   for (const f of siteFiles) {
+    if (EXCLUDED_SITE_IDS.has(f.replace(/\.json$/, ''))) continue;
     const site = await buildSite(auditDir, micrositeSlug, f, archetypeByName);
     if (site === null) droppedStubCount++;
     else sites.push(site);

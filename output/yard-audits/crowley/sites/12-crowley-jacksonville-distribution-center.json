@@ -118,7 +118,9 @@
     "truckGateCount": 1,
     "buildingCount": 1,
     "siteAreaAcres": 5.5,
-    "railServed": false
+    "railServed": false,
+    "trailerChassisSpots": 35,
+    "containerGroundSlots": null
   },
   "mapsUrl": "https://www.google.com/maps/@30.36340,-81.69445,400m/data=!3m1!1e3",
   "classification": {

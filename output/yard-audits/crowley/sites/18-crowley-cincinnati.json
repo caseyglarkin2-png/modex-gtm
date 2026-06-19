@@ -3,15 +3,27 @@
   "type": "Logistics office (downtown high-rise, no truck yard)",
   "coords": {
     "lat": 39.098385,
-    "lng": -84.516840
+    "lng": -84.51684
   },
   "geofences": {
     "perimeter": {
       "ring": [
-        { "lat": 39.098620, "lng": -84.517160 },
-        { "lat": 39.098640, "lng": -84.516560 },
-        { "lat": 39.098120, "lng": -84.516520 },
-        { "lat": 39.098100, "lng": -84.517120 }
+        {
+          "lat": 39.09862,
+          "lng": -84.51716
+        },
+        {
+          "lat": 39.09864,
+          "lng": -84.51656
+        },
+        {
+          "lat": 39.09812,
+          "lng": -84.51652
+        },
+        {
+          "lat": 39.0981,
+          "lng": -84.51712
+        }
       ]
     },
     "truckGate": null,
@@ -33,7 +45,9 @@
     "truckGateCount": 0,
     "buildingCount": 1,
     "siteAreaAcres": 0.7,
-    "railServed": false
+    "railServed": false,
+    "trailerChassisSpots": 0,
+    "containerGroundSlots": null
   },
   "mapsUrl": "https://www.google.com/maps/@39.098385,-84.516840,400m/data=!3m1!1e3",
   "classification": {

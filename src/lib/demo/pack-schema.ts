@@ -133,6 +133,21 @@ const YardMetrics = z.object({
   buildingCount: z.number().int().nonnegative().nullable(),
   siteAreaAcres: z.number().nonnegative().nullable(),
   railServed: z.boolean().nullable(),
+  /**
+   * v2 economics split (Crowley audit). The RTLS pricing driver — at a
+   * terminal these are the trailers/chassis present in the yard; at a DC
+   * they are the trailer stalls. This is the number the network ripple and
+   * per-site pricing read. Optional + nullable for backward compat: pre-v2
+   * packs and non-terminal accounts that never carried the split stay valid.
+   */
+  trailerChassisSpots: z.number().int().nonnegative().nullable().optional(),
+  /**
+   * v2 economics split (Crowley audit). Container ground slots — terminal
+   * stacking depth ONLY. This is NOT a pricing driver and must never be
+   * summed as one unit with trailerChassisSpots. Null/absent at DCs and on
+   * pre-v2 packs.
+   */
+  containerGroundSlots: z.number().int().nonnegative().nullable().optional(),
 });
 export type YardMetrics = z.infer<typeof YardMetrics>;
 
@@ -300,10 +315,28 @@ export type AccountResearch = z.infer<typeof AccountResearch>;
 
 const NetworkTotals = z.object({
   dockDoors: z.number().int().nonnegative(),
+  /**
+   * Headline trailer-yard capacity. For v2 packs that carry the economics
+   * split this is the sum of `trailerChassisSpots` (the honest trailers/
+   * chassis number, e.g. Crowley 3,067), NOT the container ground slots.
+   * Pre-v2 packs keep summing `trailerParkingCapacity` unchanged.
+   */
   trailerCapacity: z.number().int().nonnegative(),
   gates: z.number().int().nonnegative(),
   railServed: z.number().int().nonnegative(),
   acres: z.number().nonnegative(),
+  /**
+   * v2 economics split — network sum of per-site `trailerChassisSpots`. The
+   * RTLS pricing driver. Optional for backward compat. When present it equals
+   * `trailerCapacity`; carried separately so consumers can name it precisely.
+   */
+  trailerChassisSpots: z.number().int().nonnegative().optional(),
+  /**
+   * v2 economics split — network sum of per-site `containerGroundSlots`
+   * (terminal stacking depth). NOT a pricing driver and never the same unit as
+   * trailer/chassis spots. Optional for backward compat.
+   */
+  containerGroundSlots: z.number().int().nonnegative().optional(),
 });
 
 // zod 4: `z.record(enum, V)` requires ALL enum keys. We want "some-or-none",
