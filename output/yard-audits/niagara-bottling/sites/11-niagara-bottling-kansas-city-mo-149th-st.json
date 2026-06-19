@@ -123,5 +123,31 @@
     "fastLaneOpportunity": "Wide unguarded driveway aprons leave ample paved width to add an express lane if a gate were installed.",
     "urbanRural": "Within the Kansas City MO metro fabric (south KC), surrounded by an active multi-building logistics park - Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.niagarawater.com/about-us/kansas-city/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Niagara KC page: first local plant on 149th St built 2019, 3rd line added late 2022, currently operating"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.foodbusinessnews.net/articles/18986-niagara-bottling-investing-156-million-in-kc-plant",
+        "date": "2021-06",
+        "type": "press",
+        "claim": "$156M KC plant investment"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Distinct operating Niagara plant (149th St, south KC metro), built 2019; clean gauntlet. Self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

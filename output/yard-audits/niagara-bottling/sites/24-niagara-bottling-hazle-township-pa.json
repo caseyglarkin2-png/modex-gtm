@@ -116,5 +116,31 @@
     "siteAreaAcres": "Derived from perimeter box (~665m N-S x ~760m E-W); ~110 acres - large campus parcel including yards and buffer.",
     "scale": "No truck scale clearly identified; flagged uncertain."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.niagarawater.com/about-us/hazle-township/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Niagara plant page: Hazle Township PA operations established March 2022, ~290 FT, 1.19M sqft"
+      },
+      {
+        "tier": 1,
+        "url": "https://niagarawater.wd5.myworkdayjobs.com/Niagara/job/Hazleton---Hazle-Township-PA/Production-Operator-II_R48554",
+        "date": "2025",
+        "type": "careers",
+        "claim": "Active Production Operator II req at the Hazle Township plant"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Company page states established operations March 2022 with ~290 employees and active Workday reqs; fully operating. Self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

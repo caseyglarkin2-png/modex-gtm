@@ -154,5 +154,31 @@
     "railServed": "A rail line runs parallel to Eastgate Pkwy along the south of the property but no spur enters the site.",
     "urbanRural": "Located in a built-up industrial park in Gahanna within the Columbus OH metro; dense surrounding warehouse/commercial fabric and residential subdivisions nearby."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://columbusregion.com/press-release/niagara-bottling-to-invest-50-million-in-columbus-region-add-more-than-70-jobs/",
+        "date": "2012-08-29",
+        "type": "econ-dev",
+        "claim": "$50M Niagara manufacturing investment in Gahanna OH"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.plasticsnews.com/article/20130726/NEWS/130729954/niagara-bottling-opens-pet-bottle-plant-in-ohio/",
+        "date": "2013-07-26",
+        "type": "press",
+        "claim": "308,000 sqft Niagara Gahanna PET bottle plant opened"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Operating PET/bottling plant since 2013 (1700 Eastgate Pkwy, Gahanna), active careers reqs; real plant not office/DC. Self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

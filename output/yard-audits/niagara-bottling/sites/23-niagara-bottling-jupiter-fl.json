@@ -133,5 +133,24 @@
     "scale": "No truck scale clearly identified; flagged uncertain.",
     "siteAreaAcres": "Derived from perimeter box (~355m N-S x ~310m E-W); ~60 acres."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.areadevelopment.com/newsitems/4-8-2020/niagara-bottling-manufacturing-distribution-palm-beach-county-florida.shtml",
+        "date": "2020-04",
+        "type": "press",
+        "claim": "Niagara 409k sqft manufacturing/distribution plant in Palm Beach Park of Commerce, Jupiter; $38M expansion, two new lines"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Operating Niagara bottling/manufacturing plant (15832 Beeline Hwy) with production lines + freight yard, expanded 2020, still hiring 2025; not an office/spring source. Self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

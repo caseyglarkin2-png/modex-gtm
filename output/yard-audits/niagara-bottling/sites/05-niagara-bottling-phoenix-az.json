@@ -163,5 +163,24 @@
     "railServed": "No rail spur into the property.",
     "siteAreaAcres": "~28 acres from the perimeter box covering both buildings + the shared dock yard + parking; flagged as estimate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.niagarawater.com/us/en/phoenix",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Company careers: \"Join our Phoenix, AZ Plant!\" active recruiting; distinct plant from Mesa"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Niagara runs a Phoenix plant (275 S 67th Ave) separate from Mesa, own careers page; coord matches west Phoenix. Self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

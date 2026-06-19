@@ -148,5 +148,31 @@
     "urbanRural": "Byhalia MS logistics park, edge-of-town, bordered by woodland and open ground southeast of Memphis - classed Rural.",
     "railServed": "No rail spur runs into the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.niagarawater.com/byhalia",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Company Byhalia careers page, active operation (\"500 days safe\" milestone), hiring across functions"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.pressreader.com/usa/the-commercial-appeal/20170404/282480003643133",
+        "date": "2017-04-04",
+        "type": "press",
+        "claim": "$78M Niagara Byhalia plant began production spring 2017"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "~9-year operating Niagara plant (168 East Wingo Rd, Chickasaw Trail Industrial Park); Niagara’s own plant. Self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

@@ -160,5 +160,31 @@
     "siteAreaAcres": "~42 acres derived from the perimeter box covering the full building footprint, dock apron and trailer-stall rows.",
     "railServed": "No rail spur enters the property in any imagery."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.niagarawater.com/about-us/carolina/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Niagara plant page: Florence SC operating since Dec 2020, ~150 FT, ~743,000 sqft after expansion"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.sccommerce.com/news/niagara-bottling-establishing-operations-florence-county",
+        "date": "2020-02",
+        "type": "econ-dev",
+        "claim": "$70M+ Niagara investment establishing Florence County operations"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Company plant page confirms operating since Dec 2020 with post-2021 expansion (2222 Florence Harllee Blvd); no SC closure. Self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

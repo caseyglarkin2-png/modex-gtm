@@ -143,5 +143,31 @@
     "urbanRural": "River Ridge Commerce Center is an edge-of-town industrial park bordered by open farmland on the N and W - classed Rural.",
     "buildingCount": "One large plant building; the office is integrated into the SE end, not a separate structure."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.niagarawater.com/us/en/louisville",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Company careers: \"Join our team in Jeffersonville, IN\" active production/warehouse/maintenance/quality hiring"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.wdrb.com/news/business/niagara-bottling-investing-56m-in-jeffersonville-facility/article_d7c608ff-60f8-5977-9e1b-51b19fc850b7.html",
+        "date": "2018-07",
+        "type": "press",
+        "claim": "$56M, 469,000 sqft plant at River Ridge, operational spring 2019"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Plant opened spring 2019 (River Ridge), active 2026 production hiring; 2018 \"under construction\" coverage predates the opening. Self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

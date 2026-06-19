@@ -127,5 +127,31 @@
     "fastLaneOpportunity": "Wide entrance apron leaves room to add an express bypass lane alongside the kiosk.",
     "urbanRural": "Plainfield logistics park on the edge of the Indianapolis metro, bordered by open ground - classed Rural (edge-of-town industrial)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.niagarawater.com/us/en/plainfield",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Company careers: \"Join our Plainfield, IN team!\" multi-department hiring"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.areadevelopment.com/newsItems/7-24-2018/niagara-bottling-jeffersonville-plainfield-indiana.shtml",
+        "date": "2018-07",
+        "type": "econ-dev",
+        "claim": "Plainfield was a pre-existing Niagara plant getting a $6.1M capacity expansion"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Pre-existing operating plant (1250 Whitaker Rd); 2018 new-build was Jeffersonville, not Plainfield. Self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

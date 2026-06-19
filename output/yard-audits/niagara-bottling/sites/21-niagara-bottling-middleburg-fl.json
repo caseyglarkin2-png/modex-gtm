@@ -132,5 +132,31 @@
     "scale": "No truck scale identified in overhead imagery; listed uncertain as a scale could be obscured near the gate canopy.",
     "siteAreaAcres": "Derived from perimeter box (~690m N-S x ~420m E-W including retention ponds); ~56 acres."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.jaxdailyrecord.com/news/2021/jun/21/niagara-bottling-developing-dollar70-million-plant-in-middleburg/",
+        "date": "2021-06",
+        "type": "press",
+        "claim": "$70M, 550k sqft Niagara plant in Middleburg, Clay County FL"
+      },
+      {
+        "tier": 2,
+        "url": "https://careersourcenortheastflorida.com/niagara-bottling-developing-70-million-plant-in-middleburg/",
+        "date": "2022",
+        "type": "econ-dev",
+        "claim": "Niagara established Clay County operations March 2022, expansion completed Oct 2022, ~150 FT"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Established operations March 2022 with a completed 2022 expansion and ~150 staff; operating, not announced-only. (Own /jacksonville page now 404.) Self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

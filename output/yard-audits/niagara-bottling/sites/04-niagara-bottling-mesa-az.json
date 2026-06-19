@@ -159,5 +159,31 @@
     "railServed": "No rail spur into the property.",
     "siteAreaAcres": "~28 acres from the perimeter box (building + north dock yard + NW employee parking)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.niagarawater.com/about-us/mesa/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Niagara locator: Mesa AZ operations established 2018, 450,183 sqft manufacturing, expansion completed 2021"
+      },
+      {
+        "tier": 2,
+        "url": "https://azbigmedia.com/business/economy/niagara-bottling-add-450000squarefoot-facility-mesa/",
+        "date": "2017",
+        "type": "econ-dev",
+        "claim": "Niagara facility in Mesa Elliot Road Technology Corridor"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Company locator confirms operating since 2018 with 2021 expansion (long past construction). Self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

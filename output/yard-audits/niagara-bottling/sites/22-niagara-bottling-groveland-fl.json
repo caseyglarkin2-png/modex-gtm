@@ -154,5 +154,24 @@
     "siteAreaAcres": "Derived from perimeter box (~350m N-S x ~340m E-W); ~42 acres.",
     "drivewayLong": "The gated driveway runs a long distance from the public road up the west side; ample queue depth inside the gate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.niagarawater.com/about-us/groveland/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Niagara plant page: Groveland FL operations established 2007, ~134 FT positions"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Oldest FL plant (2007), own niagarawater.com plant page + active 2026 reqs; distinct from Middleburg (Lake vs Clay County). Self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

@@ -111,5 +111,31 @@
     "siteAreaAcres": "~32 acres derived from the perimeter box, consistent with the ~30-acre figure in the Seguin EDC listing.",
     "buildingCount": "Single Niagara building; other large buildings nearby (NE/E) belong to separate companies and are excluded."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://sanantonioreport.org/niagra-water-bottle-plant-finds-a-home-in-seguin/",
+        "date": "2016",
+        "type": "press",
+        "claim": "Niagara Seguin began operations Spring 2016, 557,000 sqft, 3 lines, 115+ workers"
+      },
+      {
+        "tier": 2,
+        "url": "https://seguintoday.com/2019/04/10/niagara-bottling-announces-expansion-of-seguin-facility/",
+        "date": "2019-04-10",
+        "type": "press",
+        "claim": "Niagara added a 4th line, $21M equipment, to the existing Seguin plant"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Operating since 2016 (Rio Nogales Dr), expanded 2019, hiring through 2025-26; no TX closure/WARN. Self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

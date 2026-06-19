@@ -115,5 +115,31 @@
     "truckGateCount": "2 gated driveways (SE and NE).",
     "siteAreaAcres": "~41 acres from the perimeter box (large 600k-sq-ft plant + north dock yard + east employee parking)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.niagarawater.com/about-us/stockton/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Niagara plant locator: Arch Road plant opened 2023, currently operating among 4 Stockton plants"
+      },
+      {
+        "tier": 2,
+        "url": "https://siegfriedeng.com/portfolio/niagara-bottling-plant-and-manufacturing-facility/",
+        "date": "2023",
+        "type": "press",
+        "claim": "600,000 sqft water + plastics manufacturing facility at 5959 Arch Rd, Stockton CA"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Niagara’s own plant locator confirms Arch Rd opened 2023 and operating; coord matches 5959 Arch Rd. Self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

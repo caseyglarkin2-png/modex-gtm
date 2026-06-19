@@ -143,5 +143,31 @@
     "scale": "No truck scale clearly identified; flagged as uncertain.",
     "siteAreaAcres": "~78 acres derived from the perimeter box covering both buildings, their dock aprons and trailer yards."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.niagarawater.com/about-us/temple/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Niagara plant page: Temple TX operating since Dec 2019, ~345 FT, ~728,000 sqft, $419M+ invested"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.prnewswire.com/news-releases/niagara-bottling-to-expand-warehouse-facility-in-temple-texas-301884647.html",
+        "date": "2023-07",
+        "type": "press",
+        "claim": "Company PR: $48M warehouse expansion of the existing Temple facility"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Continuous operation since Dec 2019 with 2023-24 expansions (5419 Wendland Rd); 2019 groundbreaking long superseded. Self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

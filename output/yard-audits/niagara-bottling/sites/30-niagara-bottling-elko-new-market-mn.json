@@ -144,5 +144,31 @@
     "siteAreaAcres": "~36 acres estimated from the graded property boundary in satellite imagery; approximate, the final fenced perimeter may differ.",
     "_recommendation": "Flag for re-audit once post-completion satellite/Street View imagery (expected 2026+) becomes available; the yard layout, gate, and dock counts cannot be determined from current construction-stage imagery."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://streets.mn/2026/01/06/protecting-our-wells-and-groundwater-in-elko-new-market/",
+        "date": "2026-01-06",
+        "type": "press",
+        "claim": "Local report: Niagara \"has been in operation of Phase 1 since summer 2025\" at the Elko New Market plant"
+      },
+      {
+        "tier": 2,
+        "url": "https://freshwater.org/wp-content/uploads/2025/06/Southwest-Metro_Niagara-Bottling_Case-Study.pdf",
+        "date": "2025-06",
+        "type": "press",
+        "claim": "425,000 sqft Niagara facility in Park I-35 Industrial Park with operational water allocation"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "FLIPPED from internal under-construction note: Jan-2026 local report states Phase 1 operating since summer 2025; but standing Niagara careers req URL now 410 and own site still uses \"proposed\" language, so probable + flagged. Yard imagery is construction-stage (pre-2025); re-audit when post-completion imagery exists. Self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

@@ -136,5 +136,31 @@
     "urbanRural": "Frederickson industrial corridor SE of Tacoma - dense metro-edge industrial fabric with adjacent large warehouses - Urban.",
     "buildingCount": "Single large Niagara building; the dark-roofed buildings to the east and the RV/equipment storage yard to the north are separate properties."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.niagarawater.com/about-us/tacoma/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Niagara plant page: Puyallup/Frederickson WA established Feb 2014, 311,123 sqft"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.choosetacomapierce.org/news-events/niagara-bottling-keeps-growing-in-frederickson/",
+        "date": "2022",
+        "type": "econ-dev",
+        "claim": "$35M Niagara expansion adding a line at the Frederickson plant"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Operating since Feb 2014 (Randles Business Park, Frederickson), since expanded; Niagara’s own plant. Self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

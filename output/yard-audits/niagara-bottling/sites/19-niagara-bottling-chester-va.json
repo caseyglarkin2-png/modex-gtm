@@ -122,5 +122,31 @@
     "railServed": "No rail spur enters the property.",
     "urbanRural": "Located in Meadowville Technology Park, Chesterfield County, within the Richmond VA metro - surrounded by large distribution buildings. Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.niagarawater.com/us/en/richmond",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active Niagara reqs (Production Operator, Mechanic, Utilities Tech) at the Chester/Richmond VA plant"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.gatewayregion.com/niagara-bottling-investing-95m-in-chesterfield-operation-that-will-bring-76/",
+        "date": "2016-08",
+        "type": "econ-dev",
+        "claim": "$95M, 557k sqft Niagara plant in Meadowville/Chesterfield (Chester), opened Nov 2017"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Niagara’s own careers site lists active 2025/26 reqs at the Chester plant; established 2017. Self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

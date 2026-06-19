@@ -137,5 +137,31 @@
     "siteAreaAcres": "~30 acres from the perimeter box (building + north dock yard + west/north parking).",
     "railServed": "No rail spur into the property."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.niagarawater.com/rialto",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Company careers page: Rialto CA, one of Niagara’s most advanced aseptic production facilities, 414 team members, actively hiring"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.fontanaheraldnews.com/business/niagara-water-is-building-new-plant-in-rialto-career-fair-will-be-held-aug-22/article_30b5aece-3c88-11e5-a0d9-67a919dc6b83.html",
+        "date": "2015-08",
+        "type": "press",
+        "claim": "600,000 sqft Niagara production/distribution plant on Alder Ave opened fall 2015"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Company careers page describes a currently operating aseptic plant (414 employees); operating since 2015. Self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

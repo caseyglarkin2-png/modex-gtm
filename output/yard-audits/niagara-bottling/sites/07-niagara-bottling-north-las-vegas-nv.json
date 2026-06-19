@@ -113,5 +113,24 @@
     "urbanRural": "Dense North Las Vegas industrial/warehouse park - Urban.",
     "buildingCount": "Single large Niagara building; the building immediately east is a separate tenant sharing the dock-yard drive aisle."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.niagarawater.com/us/en/lasvegas",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Dedicated Las Vegas plant careers page hiring Production/Warehouse/Maintenance/Quality"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Own careers page + active 2026 production reqs at 6445 E El Campo Grande Ave (NE/North LV); clean gauntlet. Self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

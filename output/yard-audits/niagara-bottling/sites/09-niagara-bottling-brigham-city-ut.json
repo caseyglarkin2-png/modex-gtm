@@ -157,5 +157,31 @@
     "urbanRural": "Edge-of-town industrial area in small Brigham City, surrounded by fields - Rural per rubric (small-town industrial -> Rural).",
     "buildingCount": "Single large Niagara building; the perimeter drive loops the whole building."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.niagarawater.com/about-us/saltlakecity2/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Niagara plant page (Salt Lake City 2 / Brigham City): 257,441 sqft, established Oct 2017, purified water"
+      },
+      {
+        "tier": 1,
+        "url": "https://careers.niagarawater.com/saltlakecity2",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active production/warehouse/maintenance/quality reqs at the Brigham City plant"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tier-1 plant page + active careers; established 2017 at 77 N Industrial Way. Self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

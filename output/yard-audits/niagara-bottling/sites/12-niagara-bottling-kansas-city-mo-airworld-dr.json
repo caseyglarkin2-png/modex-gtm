@@ -136,5 +136,31 @@
     "fastLaneOpportunity": "Wide unguarded entrance apron leaves ample paved width to add an express lane.",
     "urbanRural": "Edge-of-metro location: KCI airport corporate park bordered by farmland and woodland on the W; classed Rural (edge-of-town industrial), though it sits within the greater KC metro - borderline."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.niagarawater.com/about-us/kansas-city/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Niagara KC page: second KC plant on Airworld Dr established 2021"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.plattecountyedc.com/2021/06/28/niagara-bottling-manufacturing/",
+        "date": "2021-06-28",
+        "type": "econ-dev",
+        "claim": "634,000 sqft Niagara plant at 11400 N Airworld Dr, Platte County MO"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Self-operated 634k-sqft plant opened 2021 (north KC near KCI), distinct from the 149th St plant. Self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

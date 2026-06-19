@@ -122,5 +122,31 @@
     "urbanRural": "Findlay Industrial Park near Pittsburgh airport sits in a hilly, partly wooded area away from dense metro fabric; judged Rural per the small-town-industrial tiebreak.",
     "siteAreaAcres": "Derived from perimeter box (~445m N-S x ~340m E-W); ~50 acres."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.indeed.com/cmp/Niagara-Bottling/locations/PA/Imperial",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Niagara actively hiring Production/Maintenance/Quality at Imperial PA (201 Solar Drive)"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.paacc.com/list/member/niagara-bottling-43931",
+        "date": "2026",
+        "type": "econ-dev",
+        "claim": "Active Niagara manufacturer member at 201 Solar Drive, Imperial PA"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Announced 2018, now operating with live 2026 hiring at the Findlay Township site; no PA WARN/closure. Self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

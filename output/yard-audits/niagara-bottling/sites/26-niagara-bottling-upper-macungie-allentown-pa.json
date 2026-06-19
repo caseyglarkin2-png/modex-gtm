@@ -138,5 +138,31 @@
     "urbanRural": "Located in the dense Lehigh Valley logistics corridor surrounded by large distribution buildings — Urban setting.",
     "siteAreaAcres": "~38 acres derived from the perimeter box spanning the plant building, both dock aprons, the NW drop yard, and the NE process/silo area."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.niagarawater.com/us/en/allentown",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Company plant careers page: \"Join our plant in Allentown, PA\" active recruiting"
+      },
+      {
+        "tier": 2,
+        "url": "https://patch.com/pennsylvania/uppermacungie/niagara-bottling-to-expand-and-hire",
+        "date": "2023",
+        "type": "press",
+        "claim": "Upper Macungie approved an addition to the already-open Niagara plant (expansion, not new build)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Tier-1 plant-specific careers page + 2026 reqs + govt-approved expansion of an operating building (7561 Industrial Blvd). Self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

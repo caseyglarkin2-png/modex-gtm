@@ -127,5 +127,24 @@
     "urbanRural": "Bloomfield is within the Hartford CT metro; the plant sits in an industrial-park setting with several large commercial buildings nearby (though wooded/wetland buffers surround the parcel). Called Urban.",
     "rooftopSolar": "The plant has a full rooftop solar array (registered as the 'Niagara Bottling - Bloomfield' solar installation)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.niagarawater.com/about-us/town-of-bloomfield/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Niagara plant page: Bloomfield CT operations established 2016, ~120 FT employees, 3rd line added 2019"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Dedicated company plant page confirms current operation (380 Woodland Ave); ~120 employees. Self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

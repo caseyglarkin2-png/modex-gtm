@@ -155,5 +155,31 @@
     "urbanRural": "Edge-of-town desert business park, isolated; adjacent Meta data center and Walmart DC but broadly open desert. Rural.",
     "buildingCount": "Single large white-roofed manufacturing building. The dark structure to the SE is a solar-panel carport over employee parking, not a separate building."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.niagarawater.com/about-us/los-lunas/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Niagara locator: Los Lunas NM operations established 2016, 160,000 sqft on Desert Willow Road, currently operating"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.krqe.com/news/new-mexico/niagara-bottling-asking-los-lunas-council-for-permission-to-expand-water-bottling-operation/",
+        "date": "2026",
+        "type": "press",
+        "claim": "Niagara seeking council approval to EXPAND its existing operating Los Lunas plant"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Operating since 2016 per own locator; current news is expansion of the existing plant, not a new build. Self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

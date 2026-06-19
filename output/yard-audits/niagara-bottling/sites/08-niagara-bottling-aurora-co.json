@@ -137,5 +137,31 @@
     "urbanRural": "Dense Aurora industrial/warehouse park near I-70 - Urban.",
     "buildingCount": "Single large Niagara building; neighboring warehouses are separate properties."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.niagarawater.com/us/en/denver",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Company careers: \"Join our plant in Aurora, CO!\" active facility"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.9news.com/article/money/business/california-company-to-bottle-aurora-water/73-333828799",
+        "date": "2012",
+        "type": "press",
+        "claim": "Aurora council approved Niagara bottling facility on city water (1933 N Gun Club Rd, ~210k sqft)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Long-established (2012) self-operated plant with current 2026 hiring; not a recent build.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

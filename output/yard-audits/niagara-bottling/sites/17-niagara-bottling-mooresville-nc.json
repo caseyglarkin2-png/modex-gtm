@@ -139,5 +139,31 @@
     "urbanRural": "Borderline. Mooresville is in the Charlotte-Concord-Gastonia metro; the immediate stretch of Mooresville Blvd is a cluster of large warehouses/distribution buildings. Called Urban on the metro + warehouse-cluster basis, though woodland surrounds the parcel.",
     "expansion": "Niagara is actively expanding the Mooresville plant - 2026-01 imagery shows extensive land clearing and a construction laydown yard on the SE side."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://careers.niagarawater.com/us/en/mooresville",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Company Mooresville careers page: \"10 years without a lost-time accident,\" expanding (+190,000 sqft), hiring"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.commerce.nc.gov/node/2136",
+        "date": "2011-07",
+        "type": "econ-dev",
+        "claim": "Niagara Mooresville plant fully operational by March 2012"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "~14-year operating vertically-integrated plant; current construction is expansion of the live plant, not a new build. Self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

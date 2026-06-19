@@ -109,5 +109,24 @@
     "trailerParkingCapacity": "Narrow west apron; could stage roughly 8 trailers at/near docks - rough estimate.",
     "siteAreaAcres": "~9.5 acres derived from perimeter box (building + west apron + south/west employee parking)."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "probable",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://www.indeed.com/q-niagara-bottling-l-ontario,-ca-jobs.html",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "42 open Niagara Ontario CA reqs incl Production Operator, Forklift, Plant Maintenance, Injection Operators (plant-floor roles, not office-only)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Niagara operates manufacturing in Ontario CA (live plant-floor reqs); no dedicated Tier-1 locator + supplied coord drifts ~5-6km from known 2560 E Philadelphia St / 5675 E Concours Ave plant addresses, so confirm pin is the plant not the corp office. Flagged.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }

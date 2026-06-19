@@ -125,5 +125,31 @@
     "railServed": "No rail spur enters the property.",
     "urbanRural": "Located in the developed Shenandoah Industrial Park, Coweta County, on the south side of the Atlanta metro - surrounded by multiple large distribution warehouses. Called Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://georgia.org/newsroom/press-releases/leading-bottled-water-supplier-creates-40-jobs-coweta-county",
+        "date": "2014",
+        "type": "econ-dev",
+        "claim": "Niagara’s first GA facility established in Coweta County (Newnan)"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.industrialinfo.com/news/article/niagara-bottling-llc-starts-up-72-million-facility-in-georgia--245998",
+        "date": "2014-12-18",
+        "type": "press",
+        "claim": "Niagara $72M Newnan facility started production Dec 2014, 2nd line Feb 2015"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Long-established plant producing since Dec 2014 (Shenandoah Industrial Park); active production reqs. Not a new announcement. Self-operated.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-19"
+  }
 }
