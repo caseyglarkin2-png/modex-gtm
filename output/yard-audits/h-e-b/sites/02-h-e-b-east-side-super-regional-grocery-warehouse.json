@@ -155,5 +155,31 @@
     "railServed": "No rail spur into the property visible in current imagery.",
     "siteAreaAcres": "Operational fenced footprint (warehouse + yards + gate); the full H-E-B campus parcel is 871 acres but most is undeveloped. Estimate from perimeter box."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://newsroom.heb.com/h-e-b-to-build-grocery-warehouse-on-san-antonios-east-side/",
+        "date": "2018",
+        "type": "press",
+        "claim": "H-E-B self-attested Super Regional Grocery Warehouse on 871-acre East Side campus (S Foster Rd)"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.supermarketnews.com/finance/h-e-b-starts-construction-of-super-regional-grocery-warehouse",
+        "date": "2018",
+        "type": "press",
+        "claim": "1.6M sq ft cross-dock, opened 2020, supplies San Antonio-area stores"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "1.6M sq ft cross-dock operating since 2020 on H-E-B East Side campus; no negatives.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

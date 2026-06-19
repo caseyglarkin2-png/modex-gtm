@@ -141,5 +141,31 @@
     "urbanRural": "Dense NE San Antonio industrial corridor - Urban.",
     "siteAreaAcres": "~4.5 acres for the plant building footprint and immediate yard; the full campus is much larger but the audited unit is the snack plant."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.tdlr.texas.gov/TABS/Search/Project/TABS2025011629",
+        "date": "2025-02",
+        "type": "TDLR",
+        "claim": "H.E.B. SAS Bakery Chips, 5311 Rittiman Rd - $13.0M renovation inside existing operating food plant"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.yahoo.com/news/articles/h-e-b-continues-manufacturing-110512598.html",
+        "date": "2025-02",
+        "type": "press",
+        "claim": "H-E-B renovating its operating Rittiman Rd snack plant for a new production line (expansion, not closure)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Flagship snack/chips plant operating and being expanded in 2025; no closure/divestiture.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -161,5 +161,31 @@
     "urbanRural": "Dense NW Houston industrial/suburban fabric - Urban.",
     "siteAreaAcres": "~22 acres for the milk & bread plant complex and immediate yards within the larger campus."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://progressivegrocer.com/h-e-b-open-snack-processing-plant-houston",
+        "date": "2018",
+        "type": "press",
+        "claim": "Snack plant sits in same complex as H-E-B milk plant, bread facility and DC (Windfern)"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.foodbusinessnews.net/articles/11970-h-e-b-building-snack-plant-in-houston",
+        "date": "2018-06",
+        "type": "press",
+        "claim": "H-E-B NW Houston complex includes operating milk plant and bakery (acquired from Safeway)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Milk & bread plants are live operations on the Windfern campus; no negatives.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

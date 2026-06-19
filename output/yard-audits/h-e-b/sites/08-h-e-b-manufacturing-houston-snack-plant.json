@@ -160,5 +160,31 @@
     "siteAreaAcres": "~14 acres for the snack-plant building and its immediate drop yards; the full H-E-B campus is far larger.",
     "buildingDescription": "Roster cites 46,000 sq ft (some sources 64,000 sq ft); opened mid-2019; produces plain and flavored tortilla chips."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 2,
+        "url": "https://progressivegrocer.com/h-e-b-open-snack-processing-plant-houston",
+        "date": "2018",
+        "type": "press",
+        "claim": "H-E-B tortilla-chip / snack plant in NW Houston near Windfern DC (opened 2019)"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.tdlr.texas.gov/TABS/Search/Print/TABS2025010596",
+        "date": "2025",
+        "type": "TDLR",
+        "claim": "Recent TDLR permit activity tied to the Genard Rd plant (still active)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Purpose-built tortilla-chip plant at 10000 Genard Rd operating since 2019; no negatives.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

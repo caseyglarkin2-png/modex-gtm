@@ -98,5 +98,31 @@
     "drivewayShort": "Back-of-house service drive holds only 1-2 trucks at the dock.",
     "trailersVisible": "1 box trailer glimpsed near the building in 2026-02 Street View; full count not observable."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://newsroom.heb.com/h-e-b-opens-ecommerce-fulfillment-center-in-cibolo/",
+        "date": "2024-05",
+        "type": "press",
+        "claim": "55,000 sq ft eFC connected to H-E-B Cibolo store at 850 FM 1103 (8th eFC)"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.supplychaindive.com/news/hebb-opens-ecommerce-fulfillment-facility-cibolo-texas/716338/",
+        "date": "2024-05",
+        "type": "press",
+        "claim": "H-E-B opens 8th e-commerce fulfillment facility, Cibolo"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Operating store-INTEGRATED eFC (connected to the Cibolo retail store); H-E-B-run but only a grocery-store dock, not a freight yard - low freight-yard suitability flag.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

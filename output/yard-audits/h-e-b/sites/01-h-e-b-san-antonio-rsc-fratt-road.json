@@ -179,5 +179,31 @@
     "railServed": "No rail spur runs into the property; campus bounded by residential to the north and roads on other sides.",
     "siteAreaAcres": "Derived from perimeter box (~620 m E-W x ~630 m N-S); estimate."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.locally.com/store/71357/h-e-b-distribution-center",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "H-E-B Distribution Center listed active in 78218 (NE San Antonio Fratt/O’Connor RSC campus)"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.ryancompanies.com/projects/h-e-b-retail-support-distribution-center/",
+        "date": "2024",
+        "type": "press",
+        "claim": "Contractor portfolio entry for H-E-B Retail Support Distribution Center work"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active NE-side RSC distribution campus; no closure/divestiture; H-E-B privately held, never bankrupt.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

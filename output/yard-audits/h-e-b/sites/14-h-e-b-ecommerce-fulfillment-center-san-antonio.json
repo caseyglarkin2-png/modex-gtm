@@ -96,5 +96,31 @@
     "coordinates": "The roster coordinates (29.42519, -98.494592, geocode precision APPROXIMATE, moved 6794 m) are a city-center placeholder - they point to downtown San Antonio civic buildings/parking garages, not an industrial facility. They are identical to the placeholder used for roster idx 7, confirming they are a city centroid, not a real geocode.",
     "conclusion": "This roster entry appears to be a speculative / placeholder line item derived from H-E-B's general 'nine eFCs since 2018' statement and is not a verifiable distinct facility. Recommend human review: either merge into idx 13 (Cibolo) or remove. All classification fields are unverifiable and listed in uncertainFields."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://newsroom.heb.com/h-e-b-opens-ecommerce-fulfillment-center-in-cibolo/",
+        "date": "2024-05",
+        "type": "press",
+        "claim": "H-E-B documents Cibolo eFC as serving the San Antonio area; no distinct stand-alone San Antonio-proper eFC exists in the network"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.grocerydive.com/news/hebb-opens-ecommerce-fulfillment-facility-cibolo-texas/716304/",
+        "date": "2024-05",
+        "type": "press",
+        "claim": "Enumerates H-E-B eFC network (Katy, Houston, Plano, Leander, Cibolo) - no San Antonio-proper stand-alone eFC"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Phantom/placeholder line item - no distinct stand-alone San Antonio-proper eFC exists; San Antonio demand is served by Cibolo (idx 13). Coords are a downtown city centroid.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

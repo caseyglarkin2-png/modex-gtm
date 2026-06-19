@@ -155,5 +155,31 @@
     "urbanRural": "Within the dense Katy suburban fabric of metro Houston, surrounded by residential subdivisions.",
     "trailersVisible": "Approx 7 trailers/trucks counted in captured imagery at docks and on apron; imagery dates vary."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://newsroom.heb.com/h-e-b-opens-companys-largest-ecommerce-fulfillment-center-in-katy/",
+        "date": "2023-09",
+        "type": "press",
+        "claim": "H-E-B first stand-alone eFC, 100,000+ sq ft, 2102 Elrod Rd, Katy (opened Sep 2023)"
+      },
+      {
+        "tier": 2,
+        "url": "https://communityimpact.com/houston/katy-fulshear/development/2023/09/07/h-e-b-opens-first-standalone-e-commerce-fulfillment-center-in-katy/",
+        "date": "2023-09",
+        "type": "press",
+        "claim": "H-E-B opens first standalone eFC in Katy"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "First stand-alone eFC, operating since Sep 2023; official address 2102 Elrod Rd, Katy (dataset coord-derived address differs slightly). No negatives.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

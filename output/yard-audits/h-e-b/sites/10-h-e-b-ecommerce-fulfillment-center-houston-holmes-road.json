@@ -160,5 +160,31 @@
     "urbanRural": "Dense SE Houston near a major freeway interchange - Urban.",
     "buildingDescription": "100,000 sq ft stand-alone e-commerce fulfillment center, opened Feb 2025, H-E-B's 3rd Houston eFC; Swisslog AutoStore + SynQ automation."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://newsroom.heb.com/h-e-b-opens-ecommerce-fulfillment-center-in-houston/",
+        "date": "2025-02",
+        "type": "press",
+        "claim": "H-E-B opens 100,000 sq ft stand-alone eFC at 4520 Holmes Rd, Houston (3rd Houston eFC)"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.grocerydive.com/news/heb-new-ecommerce-fulfillment-center-houston/740693/",
+        "date": "2025-02",
+        "type": "press",
+        "claim": "H-E-B opens another stand-alone e-commerce fulfillment center in Houston"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Stand-alone 100K sq ft eFC opened Feb 2025 with dedicated dock/yard; no negatives.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

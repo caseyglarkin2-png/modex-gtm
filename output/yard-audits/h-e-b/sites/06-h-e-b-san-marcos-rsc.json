@@ -148,5 +148,31 @@
     "railServed": "A Union Pacific mainline runs parallel to the SE property line but no spur enters the site.",
     "urbanRural": "Edge-of-town industrial corridor in San Marcos with adjacent apartments, retail strip and other warehouses; judged Urban given dense surrounding development."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://business.sanmarcostexas.com/list/member/h-e-b-san-marcos-retail-support-center-5007808",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Chamber member listing H-E-B San Marcos Retail Support Center (2301 Hunter Rd)"
+      },
+      {
+        "tier": 1,
+        "url": "https://www.ziprecruiter.com/c/H-E-B/Job/Order-Selector/-in-San-Marcos,TX?jid=afb21d718c26f8c0",
+        "date": "2026-06",
+        "type": "careers",
+        "claim": "Active warehouse Order Selector hiring at H-E-B San Marcos RSC"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active automated RSC (2301 Hunter Rd) with live careers + chamber listing; no negatives.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

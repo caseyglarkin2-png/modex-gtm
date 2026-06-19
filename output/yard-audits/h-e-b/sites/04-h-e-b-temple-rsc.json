@@ -140,5 +140,31 @@
     "railServed": "No rail spur into the property.",
     "connectivityIssue": "Edge-of-town location; cellular coverage likely adequate given the surrounding industrial park, but flagged as inferred."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.prnewswire.com/news-releases/h-e-b-expanding-in-temple-tx-with-planned-frozen-distribution-center-301577579.html",
+        "date": "2022-06",
+        "type": "press",
+        "claim": "H-E-B release: existing Temple DC operating since 2010, supports 100+ stores; adding frozen line"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.tdlr.texas.gov/TABS/Search/Print/TABS2022014018",
+        "date": "2024-09",
+        "type": "TDLR",
+        "claim": "Frozen-expansion project at 4750 Wendland Rd completed/closed 9/2024 (not shuttered)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Core RSC operating since 2010; on-site frozen expansion now COMPLETE (TDLR closed 9/2024), campus fully operational.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

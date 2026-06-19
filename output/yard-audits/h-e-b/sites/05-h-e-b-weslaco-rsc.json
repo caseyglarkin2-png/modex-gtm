@@ -166,5 +166,31 @@
     "railServed": "A rail line runs E-W along the south of the campus but no spur enters the property — separated by a land strip and the trailer yard.",
     "siteAreaAcres": "Estimate from perimeter box covering the fenced campus."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.loc8nearme.com/texas/weslaco/heb-weslaco-warehouse/2521369/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "H-E-B Weslaco Retail Distribution Support Center, 1100 Panther Dr"
+      },
+      {
+        "tier": 3,
+        "url": "https://www.yelp.com/biz/heb-weslaco-dispatch-weslaco",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "Active H-E-B Weslaco dispatch/transportation ops at 1100 Panther Dr, updated June 2026"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active RGV distribution + transportation/dispatch hub; no negatives.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

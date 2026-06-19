@@ -121,5 +121,31 @@
     "urbanRural": "Dense north-Dallas suburban retail corridor on Preston Rd (Plano).",
     "entryLanes": "Service drive is a single shared two-way lane; entry/exit lane counts are nominal."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://newsroom.heb.com/h-e-b-opens-ecommerce-fulfillment-center-in-plano/",
+        "date": "2023-06",
+        "type": "press",
+        "claim": "55,000 sq ft eFC attached to the new Plano H-E-B store at 6001 Preston Rd"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.supermarketnews.com/foodservice-retail/h-e-b-bolsters-online-capacity-with-new-e-commerce-fulfillment-center",
+        "date": "2023",
+        "type": "press",
+        "claim": "eFC located next to the Plano H-E-B at 6001 Preston Rd"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Operating store-INTEGRATED eFC (back-of-house of the Plano retail store); H-E-B-run but only a grocery-store dock, not a freight yard - low freight-yard suitability flag.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -106,5 +106,31 @@
     "siteAreaAcres": "~423 acres measured from the currently-graded construction footprint; the full land purchase is ~500 acres.",
     "buildingCount": "0 - no building is structurally complete yet in the imagery."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.tdlr.texas.gov/TABS/Search/Print/TABS2025014258",
+        "date": "2026",
+        "type": "TDLR",
+        "claim": "Hempstead campus support structures (central utility plant, gate/guardhouse) still in construction in 2026 - main DC not yet operating"
+      },
+      {
+        "tier": 2,
+        "url": "https://www.grocerydive.com/news/heb-building-texas-distribution-campus/714409/",
+        "date": "2024",
+        "type": "press",
+        "claim": "~500-acre multi-phase ~$200M Waller County campus being built out (Phase 1 targeted late 2025, Phase 2 2027) - forthcoming"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Under construction - only ancillary support structures nearing completion in 2026; full DC not yet operating. Current-ops audit only.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

@@ -104,5 +104,31 @@
     "siteAreaAcres": "Derived from the placeholder store-parcel perimeter, not the EFC itself.",
     "urbanRural": "Frisco / FM 423 & US 380 is a dense, fast-growing north Dallas-Fort Worth suburban retail corridor - Urban."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "rejected",
+    "operator": "self",
+    "tenancy": "unknown",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "https://www.tdlr.texas.gov/TABS/Search/Print/TABS2026005469",
+        "date": "2025-11",
+        "type": "TDLR",
+        "claim": "HEB Frisco eFC, 51,599 sq ft new construction, start 7/6/2026, completion 6/5/2027 - not yet built"
+      },
+      {
+        "tier": 2,
+        "url": "https://communityimpact.com/dallas-fort-worth/frisco/development/2025/12/11/h-e-b-set-to-build-51599-square-foot-electronic-fulfillment-center-in-frisco/",
+        "date": "2025-12",
+        "type": "press",
+        "claim": "H-E-B set to BUILD a 51,599 sq ft eFC in Frisco (planned/forthcoming)"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Future site - not yet built (TDLR construction start 7/6/2026, completion 2027). Current-ops audit only.",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }

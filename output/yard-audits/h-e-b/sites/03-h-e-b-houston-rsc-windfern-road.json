@@ -148,5 +148,31 @@
     "railServed": "No rail spur into the property; campus bounded by a drainage channel and residential.",
     "siteAreaAcres": "Estimate from perimeter box covering the fenced campus."
   },
-  "method": "deep-audit"
+  "method": "deep-audit",
+  "verification": {
+    "verdict": "confirmed",
+    "operator": "self",
+    "tenancy": "owned",
+    "citations": [
+      {
+        "tier": 1,
+        "url": "http://h-e-b-tx-496.hub.biz/",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "H-E-B Warehouse Retail Support Center, 4625 Windfern Rd, Houston"
+      },
+      {
+        "tier": 1,
+        "url": "https://truckmap.com/place/h-e-b-distribution-center-4625-windfern-rd-houston-tx-77041-usa",
+        "date": "2026-06",
+        "type": "locator",
+        "claim": "H-E-B Distribution Center at 4625 Windfern Rd, Houston 77041"
+      }
+    ],
+    "checkedDivestiture": true,
+    "checkedBankruptcyEra": false,
+    "rationale": "Active 24/7 NW Houston RSC distribution/production campus; no closure (Meyerland store closure is unrelated).",
+    "verifiedBy": "agent",
+    "verifiedAt": "2026-06-18"
+  }
 }
