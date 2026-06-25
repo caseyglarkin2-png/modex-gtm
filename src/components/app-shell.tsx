@@ -10,9 +10,10 @@ import { Sidebar } from '@/components/sidebar';
 import { SidebarProvider } from '@/components/sidebar-context';
 
 const PUBLIC_PATHS = new Set(['/login', '/unsubscribe']);
-// '/demo' is the YNS Live Demo (D2-D4). Prospect-facing surface — must not
+// '/demo' is the YNS Live Demo (D2-D4). '/docs' serves the tracked sales PDFs
+// to the same prospect audience. Both are prospect-facing surfaces — must not
 // render the authenticated RevOps OS shell.
-const PUBLIC_PATH_PREFIXES = ['/for', '/proposal', '/demo'];
+const PUBLIC_PATH_PREFIXES = ['/for', '/proposal', '/demo', '/docs'];
 
 export function isPublicAppPath(pathname: string | null): boolean {
   if (!pathname) return false;
