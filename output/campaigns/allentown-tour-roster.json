@@ -1,0 +1,15 @@
+{
+  "campaign": "allentown-tour",
+  "generatedAt": "2026-06-12",
+  "site": { "name": "Primo Brands - Breinigsville PA", "lat": 40.5333, "lng": -75.6333 },
+  "note": "Wave-1 verified senior-ops contacts, Apollo people_match (8 credits). All PA-based. 4 fill zero-contact batch accounts (Home Depot DC, Walgreens DC, KDP, Redner's); UNFI added as high-value regional committee.",
+  "contacts": [
+    { "first": "Shawn", "last": "Mitchell", "title": "Vice-President of Operations - East Region", "company": "UNFI", "domain": "unfi.com", "email": "shawn.mitchell@unfi.com", "emailStatus": "verified", "city": "New Oxford", "state": "PA", "linkedin": "http://www.linkedin.com/in/shawn-mitchell-713638", "prospectName": "UNFI", "existingHubspotVid": "219936799108" },
+    { "first": "Brian", "last": "Solomon", "title": "Regional Director of Operations", "company": "UNFI", "domain": "unfi.com", "email": "brian.solomon@unfi.com", "emailStatus": "verified", "city": "", "state": "PA", "linkedin": "http://www.linkedin.com/in/brian-s-solomon", "prospectName": "UNFI" },
+    { "first": "Jonathan", "last": "Wik", "title": "Sr. Manager Logistics Operations", "company": "UNFI", "domain": "unfi.com", "email": "jonathan.p.wik@unfi.com", "emailStatus": "verified", "city": "Irwin", "state": "PA", "linkedin": "http://www.linkedin.com/in/jonathan-wik-7ababb78", "prospectName": "UNFI" },
+    { "first": "Jen", "last": "Harper", "title": "Operational Director", "company": "Redner's Markets", "domain": "rednersmarkets.com", "email": "jharper@rednersmarkets.com", "emailStatus": "verified", "city": "Reading", "state": "PA", "linkedin": "http://www.linkedin.com/in/jen-harper-a2b48b50", "prospectName": "Redner's Warehouse Markets" },
+    { "first": "Alan", "last": "Kwong", "title": "Logistics Manager - Supply Chain Network Optimization and Implementation", "company": "The Home Depot", "domain": "homedepot.com", "email": "alan.kwong@homedepot.com", "emailStatus": "verified", "city": "Mount Pleasant", "state": "PA", "linkedin": "http://www.linkedin.com/in/alan-kwong-84090424a", "prospectName": "Home Depot Distribution Center" },
+    { "first": "Jamie", "last": "Taylor", "title": "Regional Manager - Distribution and Logistics", "company": "Keurig Dr Pepper", "domain": "keurigdrpepper.com", "email": "jamie.taylor@kdrp.com", "emailStatus": "verified", "city": "York", "state": "PA", "linkedin": "http://www.linkedin.com/in/jamie-t-9aa9157", "prospectName": "KDP" },
+    { "first": "Luke", "last": "Holbrook", "title": "Manager, Logistics & Engineering", "company": "Walgreens", "domain": "walgreens.com", "email": "luke.holbrook@walgreens.com", "emailStatus": "verified", "city": "Pittsburgh", "state": "PA", "linkedin": "http://www.linkedin.com/in/lukeholbrook", "prospectName": "Walgreens Warehouse Distribution Center" }
+  ]
+}

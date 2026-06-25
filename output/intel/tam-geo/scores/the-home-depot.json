@@ -1,0 +1,10 @@
+{
+  "slug": "the-home-depot",
+  "domain": "homedepot.com",
+  "nearest_distance_mi": 1.2,
+  "proximity_score": 96,
+  "corridor_density": 9,
+  "composite_score": 95.8,
+  "nearest_primo_site": "US DC NFI - Breinigsville",
+  "facilities": 30
+}

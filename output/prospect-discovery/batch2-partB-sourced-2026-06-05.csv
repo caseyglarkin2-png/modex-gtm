@@ -1,0 +1,47 @@
+status,account,facility,nearest_site,distance_mi,tier,contact_name,title,email,confidence,notes
+READY,Niagara Bottling,Ontario CA,Ontario CA,0.3,A,Niraj Jha,Sr Director of Logistics (Southwest),njha@niagarawater.com,high,flast 75.7% RocketReach
+READY,Caterpillar Inc,Ontario CA,Ontario CA,1.6,A,Brad Stout,Director of Logistics,brad.stout@cat.com,high,published on RocketReach
+READY,Staples Fulfillment Center,Ontario CA,Ontario CA,1.8,A,Bernard Henderson,Director Retail Distribution (Rialto),bernard.henderson@staples.com,high,first.last 67.5%
+READY,Panera Bread Warehouse,Ontario CA,Ontario CA,2.0,A,Andrew Correll,Sr Manager National Distribution,andrew.correll@panerabread.com,med,alt andy.correll@; first.last 94%
+READY,AutoZone Distribution Center,Ontario CA,Ontario CA,2.8,A,Jeff Harrison,DC Manager (Ontario),jeff.harrison@autozone.com,med,alt jeffrey.harrison@; first.last 59%
+READY,Kimberly-Clark,Ontario CA,Ontario CA,3.4,A,Jeff Perrot,Director NA Transportation,jeff.perrot@kcc.com,med,domain kcc.com; first.last inferred
+READY,WestRock Corrugated Container,Ontario CA,Ontario CA,3.6,A,Harris Hornbuckle,Supply Chain Leader West Corrugated,harris.hornbuckle@westrock.com,med,alt @smurfitwestrock.com post-merger
+READY,Shorr Packaging Corp,Ontario CA,Ontario CA,4.0,A,Nick Matuck,Sr Director Global Logistics,nick.matuck@shorr.com,high,alt nmatuck@
+READY,KGP Logistics,Ontario CA,Ontario CA,0.1,B,Greg Claburn,Manager Operations,greg.claburn@kgplogistics.com,med,alt @kgpco.com
+READY,El Super Distribution Center,Ontario CA,Ontario CA,0.6,B,Emerson Cavalhiero,Director of Logistics (Bodega Latina),emerson.cavalhiero@elsupermarkets.com,high,first.last verified
+READY,Flex Logistics,Ontario CA,Ontario CA,0.7,B,Tom Lentz,President,tom.lentz@flexlogistics.com,med,alt tom@flexlogistics.com
+READY,JCT Logistics Inc,Ontario CA,Ontario CA,0.9,B,(ops dept),Founder/CEO Jay Chen,operation@jctlogisticsinc.com,low,published functional inbox; no personal email
+READY,Frontier Logistics,Ontario CA,Ontario CA,0.9,C,John Vossler,President,jvossler@frontierlogistics.com,med,plastics/resin 3PL
+READY,WCS Distribution,Ontario CA,Ontario CA,1.0,C,Dan Beardman,President,dan@wcsdistribution.com,med,micro-distributor; alt dbeardman@
+READY,BASF Corporation,Houston TX,Houston TX,1.6,A,Andy Switzer,Manager Production & Logistics,andy.switzer@basf.com,med,alt andrew.switzer@; first.last ~96%
+READY,Consolidated Bonded Warehouses,Houston TX,Houston TX,0.9,B,Bobby (owner),Owner/Manager,bobby@consolidatedbondedwarehouses.com,med,published on contact page
+READY,DSI Logistics Inc,Houston TX,Houston TX,1.1,B,Lee Whitley,VP & Partner,lee.whitley@dsicompanies.com,med,food-3PL dsicompanies.com (not oil/gas)
+READY,DSV (Pasadena warehouse),Pasadena TX,Pasadena TX,6.8,A,Federico Benavides,Warehouse Manager,federico.benavides@dsv.com,med,on-site Pasadena WM
+READY,Superior Carriers Inc,Pasadena TX,Pasadena TX,6.8,A,Barry Cromer,Terminal Manager,bcromer@superior-carriers.com,med,flast 92-100%
+READY,OEC Group Liquid Logistics,Houston TX,Pasadena TX,0.4,C,Nichole Brown,Manager Operations,nichole.brown@oecgroup.com,high,domain+format+name verified
+READY,Chewy Fulfillment DFW1,Dallas TX,Dallas TX,0.5,A,Damien DeVol,Site Leader (GM) DFW1,ddevol@chewy.com,high,flast 92.3%
+READY,Danone North America,Dallas TX,Dallas TX,1.7,A,Travis Stanton,Director QFS Operations,travis.stanton@danone.com,med,first.last 81.8%
+READY,Cummins Regional DC,Dallas TX,Dallas TX,2.1,A,Anthony Brown,Site Leader (Dallas RDC),anthony.brown@cummins.com,med,common name; first.last 82.8%
+READY,Exchange Logistics,Dallas TX,Dallas TX,4.6,A,Tom Pauszek,Owner & President,tpauszek@exchange-logistics.com,med,owner of Dallas 3PL
+READY,Williams-Sonoma DC,Arlington TX,Dallas TX,7.6,A,Jake Burger,Regional VP Operations (WSI SC),jakeburger@wsgc.com,med,alt jake.burger@williams-sonoma.com
+READY,Rios Packaging Corp,Dallas TX,Dallas TX,8.6,A,Roland Rios,Owner,roland@riospackagingcorp.com,low,small firm; pattern unconfirmed
+READY,MSI Express Inc,Grand Prairie TX,Dallas TX,8.9,A,David Hughes,Plant Manager (Grand Prairie),dhughes@msiexpress.com,med,flast 74.4%; alt david.hughes@
+READY,Neway Packaging Corp,Commerce City CO,Denver CO,9.1,A,Susan McCarthy,Corporate Operations Manager,smccarthy@newaypkg.com,med,CO branch newaypkg.com (not WI)
+READY,Medline Industries DC,Aurora CO,Denver CO,13.2,A,Angelica Chavez,Site Director (Aurora DC),achavez@medline.com,med,flast ~98%
+READY,Stearns Packaging Corp,Madison WI,Madison WI,4.1,A,John Everitt,President,john.everitt@stearnspkg.com,high,owner-operator single site
+READY,Kwik Trip DC (DeForest),Windsor WI,Madison WI,9.2,A,Joe Vike,Sr Director of Distribution Centers,jvike@kwiktrip.com,med,flast 93.2%
+READY,Blue Eagle Logistics,Breinigsville PA,Breinigsville PA,2.4,A,Andrew Plank,Owner & President,andrew.plank@blueeaglelogistics.com,med,155 Nestle Way; alt aplank@
+READY,Bison Transport USA,Kutztown PA,Breinigsville PA,7.5,A,Dave Martin,VP US/Eastern Operations,dmartin@bisontransport.com,med,alt dave.martin@bisontransportusa.com
+READY,Next Carriers,Greenwood IN,Greenwood IN,2.6,A,Kat Pohl,Founder & CEO,kat.pohl@nextcarriers.com,med,alt info@nextcarriers.com
+READY,GlobalFoundries,Malta NY,Saratoga Springs NY,7.2,B,Hui Peng Koh,SVP & GM NY Fab (Malta),huipeng.koh@gf.com,med,site GM; first.last
+HOLD,Bridgestone Firestone DC,Ontario CA,Ontario CA,1.7,A,Alberto Velasco,DC Manager,avelasco@bfusa.com,med,DUP: Bridgestone already emailed in Allentown batch (2 contacts)
+HOLD,Flexport Denver,Denver CO,Denver CO,0.8,A,Cody Moreland,Sr Director of Fulfillment,cody.moreland@flexport.com,low,weak premise: Denver is a forwarding office not a real Flexport yard
+GAP,DSC Logistics,Breinigsville PA,Breinigsville PA,2.6,A,,need name (now CJ Logistics),,low,format first.last@cjlogistics.com; needs LinkedIn name
+GAP,Owens & Minor Allentown DC,Allentown PA,Breinigsville PA,2.8,A,,need name,,low,format first.last@owens-minor.com 90%; needs name
+GAP,Target DC T553,Fontana CA,Ontario CA,8.3,A,,need name,,low,format first.last@target.com; DC leaders not public
+DROP,DuPont Industrial Center,Ontario CA,Ontario CA,2.1,A,,n/a,,low,not DuPont - it's an LBA Logistics multi-tenant park named after Dupont Ave
+DROP,Costco Distribution Depot,Dallas TX,Dallas TX,0.9,A,,n/a,,low,depot leaders have no emailable corporate pattern; phone-only
+DROP,Landmark Express,Grand Prairie TX,Dallas TX,8.3,A,,n/a,,low,truck stop/convenience store + restaurant - retail non-target
+DROP,Culinaire Foods,Denver CO,Denver CO,2.5,A,,n/a,,low,Chapter 7 bankruptcy June 2024 - liquidated
+DROP,ContiTech USA Warehouse,Sun Prairie WI,Madison WI,9.3,A,,n/a,,low,sold to Regent PE Aug 2025 - now OESL Automotive; no verified contact
+DROP,Mountain Valley Spring Co,Hot Springs Village AR,Hot Springs AR,0.1,C,,n/a,,low,it IS Primo Brands (our pilot partner) - the live site is their own plant

@@ -1,0 +1,10 @@
+{
+  "slug": "honda",
+  "domain": "hna.honda.com",
+  "nearest_distance_mi": 5.2,
+  "proximity_score": 84,
+  "corridor_density": 4,
+  "composite_score": 58.27,
+  "nearest_primo_site": "US PL Ontario Factory",
+  "facilities": 18
+}

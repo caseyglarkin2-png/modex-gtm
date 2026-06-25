@@ -1,0 +1,36 @@
+{"id":"54784797559","verdict":"out","segment":"","tier":"","reason":"Hornblower Cruises & Events: passenger cruise/excursion operator (cruise lines out)"}
+{"id":"54784365324","verdict":"review","segment":"","tier":"","reason":"Dead domain (invalid TLS cert), no company name; cannot identify ramacometc.com"}
+{"id":"54784307745","verdict":"out","segment":"","tier":"","reason":"IMP Aerospace & Defence (Halifax): military aircraft MRO/in-service support (aerospace & defense out)"}
+{"id":"54784242300","verdict":"review","segment":"","tier":"","reason":"mckee.com dead (connection refused); name 'McKee' too generic to pin (foods vs realty vs construction)"}
+{"id":"54758439232","verdict":"out","segment":"","tier":"","reason":"Stronghold/Cat-Spec (Quanta): turnkey catalyst-handling and turnaround field services performed at customer refineries, no own facility network"}
+{"id":"54784168960","verdict":"review","segment":"","tier":"","reason":"mmsa.com dead; MMSA acronym matches multiple unrelated firms (structural eng, methanol consultancy); cannot identify"}
+{"id":"54784282443","verdict":"out","segment":"","tier":"","reason":"Crestwood Behavioral Health: California mental-health services provider (healthcare out)"}
+{"id":"54784399180","verdict":"review","segment":"","tier":"","reason":"ssss.com dead and name is just the domain; unidentifiable"}
+{"id":"54784446621","verdict":"out","segment":"","tier":"","reason":"Perkins Restaurant & Bakery (restaurants/QSR out)"}
+{"id":"54784397169","verdict":"out","segment":"","tier":"","reason":"Columbia Care / The Cannabist Co: cannabis dispensary operator, retail dispensaries not a freight-heavy facility network"}
+{"id":"54758439737","verdict":"out","segment":"","tier":"","reason":"Stack testing (air-emissions compliance testing) services firm; field/professional services, no facilities"}
+{"id":"54784391306","verdict":"out","segment":"","tier":"","reason":"The Townsend Corporation (Muncie IN): utility vegetation management/line-clearance contractor, jobsite-based field services"}
+{"id":"54784353297","verdict":"out","segment":"","tier":"","reason":"scekc.com 301s to Short Circuit Inc (now Pavion): KC fire/security systems integrator, services not facilities"}
+{"id":"54784361308","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"key-stone.com associated with Keystone Automotive Industries (LKQ): aftermarket collision parts distribution with national DC/branch network"}
+{"id":"54784341853","verdict":"out","segment":"","tier":"","reason":"Grayco Mgt (mcgrayco.com): 45-unit McDonald's franchisee in TN (QSR out)"}
+{"id":"54784470273","verdict":"in","segment":"3pl_carrier","tier":"B","reason":"Hollingsworth Logistics Group: 3PL fulfillment, packaging, assembly and warehousing, multiple US sites, $100-200M revenue"}
+{"id":"54785085993","verdict":"out","segment":"","tier":"","reason":"Balfour Beatty Communities (bbcgrp.com): multifamily/student/military housing real estate (out)"}
+{"id":"54784489834","verdict":"review","segment":"","tier":"","reason":"jneinc.com blank/dead; JNE matches several unrelated firms (engineering group vs trucking vs retail equipment); cannot identify"}
+{"id":"54784396203","verdict":"out","segment":"","tier":"","reason":"Kyong LLC (Missoula MT): micro single-location business, nonclassifiable, no facility network"}
+{"id":"54784529423","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Continental Battery Systems (gocbs.com): national battery distributor, 200+ branches serving 30k dealer locations"}
+{"id":"54785161761","verdict":"out","segment":"","tier":"","reason":"Hastings Entertainment: defunct books/music/media retailer (retail media, liquidated 2016)"}
+{"id":"54784466612","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Johnstone Supply Pacific NW group: HVACR wholesale distribution, multi-branch network backed by regional DCs"}
+{"id":"54757166172","verdict":"out","segment":"","tier":"","reason":"Refresh Inc. (refresh-foods.com): Bay Area restaurant/franchise investor, ~4 employees (restaurants out)"}
+{"id":"54785086636","verdict":"out","segment":"","tier":"","reason":"New Brunswick Energy Marketing (NB Power subsidiary): utility energy trading/marketing (utilities out)"}
+{"id":"54757166254","verdict":"out","segment":"","tier":"","reason":"Chouinard Bros: Toronto-area roofing contractor, jobsite-based (contractors out)"}
+{"id":"54758440853","verdict":"out","segment":"","tier":"","reason":"The Mendoza Company (Columbus OH): McDonald's franchisee (QSR out)"}
+{"id":"54784496225","verdict":"out","segment":"","tier":"","reason":"psdayton.com 301s to penn-station.com: Penn Station East Coast Subs franchisee (restaurants out)"}
+{"id":"54785141084","verdict":"out","segment":"","tier":"","reason":"Ozark Endeavors LLC (Springfield MO): commercial real estate + First Watch restaurant developer"}
+{"id":"54784471200","verdict":"review","segment":"","tier":"","reason":"No domain; 'Spectra' too generic to identify (venue mgmt, energy, optics all plausible)"}
+{"id":"54785162250","verdict":"review","segment":"","tier":"","reason":"otrba.com serves a blank page, no company name; OTRBA unidentifiable via search"}
+{"id":"54786120507","verdict":"in","segment":"paper_packaging","tier":"B","reason":"hovo.com 301s to Hollingsworth & Vose: specialty filtration/paper materials manufacturer with multiple US plants"}
+{"id":"54788406147","verdict":"review","segment":"","tier":"","reason":"secmsev.com dead (connection refused), no name; unidentifiable"}
+{"id":"54796946486","verdict":"out","segment":"","tier":"","reason":"ecargorates.com: online cargo-rate platform (origin down, Cloudflare 522); digital freight tool/software, no physical facilities"}
+{"id":"54799610493","verdict":"out","segment":"","tier":"","reason":"iam-mcds.com: McDonald's franchisee org mail domain (IAM MCDs, cf. Iron Arch Mgmt iammcd.com); QSR out"}
+{"id":"55459163539","verdict":"review","segment":"","tier":"","reason":"No domain; multiple 'Quest' warehousing/logistics companies match, cannot identify which"}
+{"id":"55459296817","verdict":"review","segment":"","tier":"","reason":"No domain; 'Infinix 12' (phone-model-like name) not identifiable as a company"}

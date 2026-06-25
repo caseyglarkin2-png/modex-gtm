@@ -1,0 +1,10 @@
+{
+  "slug": "caterpillar",
+  "domain": "cat.com",
+  "nearest_distance_mi": 67.1,
+  "proximity_score": 11,
+  "corridor_density": 2,
+  "composite_score": 11.88,
+  "nearest_primo_site": "US PL Allentown NPL Factory",
+  "facilities": 21
+}

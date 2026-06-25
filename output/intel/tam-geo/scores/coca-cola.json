@@ -1,0 +1,10 @@
+{
+  "slug": "coca-cola",
+  "domain": "cocacola.co.il",
+  "nearest_distance_mi": 3.8,
+  "proximity_score": 88,
+  "corridor_density": 11,
+  "composite_score": 93.43,
+  "nearest_primo_site": "US PL Ontario Factory",
+  "facilities": 30
+}

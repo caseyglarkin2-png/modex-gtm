@@ -1,0 +1,10 @@
+{
+  "slug": "fedex",
+  "domain": "fedex.com",
+  "nearest_distance_mi": 1.8,
+  "proximity_score": 94,
+  "corridor_density": 11,
+  "composite_score": 96.77,
+  "nearest_primo_site": "US PL Ontario Factory",
+  "facilities": 30
+}

@@ -1,0 +1,10 @@
+{
+  "slug": "general-motors",
+  "domain": "gm.com",
+  "nearest_distance_mi": 3.5,
+  "proximity_score": 89,
+  "corridor_density": 8,
+  "composite_score": 63.86,
+  "nearest_primo_site": "US PL Ontario Factory",
+  "facilities": 41
+}

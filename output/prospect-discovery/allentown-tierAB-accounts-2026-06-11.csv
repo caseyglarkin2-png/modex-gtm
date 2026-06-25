@@ -1,0 +1,66 @@
+company,tier,icp,mi,site,city,has_contacts
+DHL,A,100,0.8,US PL Allentown NPL Factory,"Mertztown, PA 19539",
+Congdon Hill Warehouse,B,50,0.9,US PL Allentown NPL Factory,"Alburtis, PA 18011",
+East Penn Manufacturing,B,50,1.1,US PL Allentown NPL Factory,"Mertztown, PA 19539",
+J.B. Hunt,A,100,1.2,US DC NFI - Breinigsville,"Breinigsville, PA 18031",yes
+The Home Depot,A,95,1.2,US DC NFI - Breinigsville,"Breinigsville, PA 18031",
+Ryder System,A,100,1.3,US PL Allentown NPL Factory,"Alburtis, PA 18011",yes
+Kuehne + Nagel,A,100,1.3,US PL Allentown NPL Factory,"Alburtis, PA 18011",yes
+Penske Logistics,A,100,1.3,US PL Allentown NPL Factory,"Alburtis, PA 18011",yes
+SunOpta,B,50,1.3,US PL Allentown NPL Factory,"Alburtis, PA 18011",
+FedEx,A,100,1.4,US DC NFI - Breinigsville,"Breinigsville, PA 18031",
+Amazon,A,95,1.4,US DC NFI - Breinigsville,"Breinigsville, PA 18031",
+Uline,A,77,1.6,US PL Allentown NPL Factory,"Alburtis, PA 18011",yes
+Wakefern Food,A,85,1.7,US DC NFI - Breinigsville,"Breinigsville, PA 18031",yes
+Geodis,A,100,1.9,US DC NFI - Breinigsville,"Breinigsville, PA 18031",yes
+Coca-Cola,A,90,2,US DC NFI - Breinigsville,"Breinigsville, PA 18031",
+Bridgestone,A,92,2,US DC NFI - Breinigsville,"Allentown, PA 18106",yes
+Packaging Corp of America,A,77,2.1,US DC NFI - Breinigsville,"Allentown, PA 18106",yes
+BMS Logistics,B,50,2.2,US DC NFI - Breinigsville,"Alburtis, PA 18011",
+Silgan,B,50,2.3,US DC NFI - Breinigsville,"Macungie, PA 18062",
+Jacobson Warehouse,B,50,2.3,US DC NFI - Breinigsville,"Macungie, PA 18062",
+Blue Eagle Logistics,A,100,2.4,US DC NFI - Breinigsville,"Breinigsville, PA 18031",
+Crete Carrier,A,95,2.4,US DC NFI - Breinigsville,"Macungie, PA 18062",yes
+NFI Industries,A,93,2.4,US DC NFI - Breinigsville,"Breinigsville, PA 18031",yes
+ABC Fulfillment,B,50,2.4,US DC NFI - Breinigsville,"Macungie, PA 18062",
+Ocean Spray,A,73,2.5,US DC NFI - Breinigsville,"Breinigsville, PA 18031",yes
+DSC Logistics,A,100,2.6,US PL Allentown Factory,"Breinigsville, PA 18031",
+Target,A,100,2.6,US PL Allentown Factory,"Breinigsville, PA 18031",
+Nestle,A,100,2.7,US DC NFI - Breinigsville,"Breinigsville, PA 18031",yes
+KeHE Distributors,A,100,2.7,US DC NFI - Breinigsville,"Breinigsville, PA 18031",yes
+Lineage,A,97,2.7,US DC NFI - Breinigsville,"Allentown, PA 18106",yes
+BlueTriton Brands,A,95,2.7,US DC NFI - Breinigsville,"Breinigsville, PA 18031",
+Keurig Dr Pepper,A,95,2.7,US DC NFI - Breinigsville,"Allentown, PA 18106",
+Niagara Bottling,A,83,2.7,US DC NFI - Breinigsville,"Allentown, PA 18106",
+Amcor,A,80,2.7,US DC NFI - Breinigsville,"Allentown, PA 18106",yes
+Owens & Minor,A,95,2.8,US DC NFI - Breinigsville,"Allentown, PA 18106",
+XPO,A,87,3,US DC NFI - Breinigsville,"Allentown, PA 18106",
+Utz Brands,A,78,3.1,US DC NFI - Breinigsville,"Allentown, PA 18106",yes
+Kane Logistics,B,50,3.1,US DC NFI - Breinigsville,"Allentown, PA 18106",
+Red Bull,A,90,3.3,US DC NFI - Breinigsville,"Allentown, PA 18106",yes
+Fastenal,A,92,3.6,US DC NFI - Breinigsville,"Allentown, PA 18106",yes
+LVK Fulfillment,B,50,3.9,US DC NFI - Breinigsville,"Allentown, PA 18106",
+Americold,A,93,4,US DC NFI - Breinigsville,"Allentown, PA 18106",yes
+McCain Foods,B,50,4,US DC NFI - Breinigsville,"Allentown, PA 18106",
+Bazzini,B,50,4.2,US DC NFI - Breinigsville,"Allentown, PA 18106",
+WSI,B,50,4.2,US DC NFI - Breinigsville,"Allentown, PA 18106",
+GHG Logistics,B,50,4.4,US DC NFI - Breinigsville,"Allentown, PA 18106",
+Kenco Logistics,A,88,4.5,US DC NFI - Breinigsville,"Allentown, PA 18106",
+Behr Process,B,50,5,US PL Allentown Factory,"Fogelsville, PA 18051",
+Onvo,A,76,5.1,US PL Allentown Factory,"Kutztown, PA 19530",
+Cornerstone Organic Feed,A,71,5.7,US PL Allentown Factory,"Kutztown, PA 19530",
+Walgreens,A,73,5.9,US DC NFI - Breinigsville,"Allentown, PA 18104",
+Multicell,A,74,7,US PL Allentown NPL Factory,"Kutztown, PA 19530",
+Bison Transport,A,81,7.5,US PL Allentown Factory,"Kutztown, PA 19530",
+Estes Express,A,93,9.1,US PL Allentown NPL Factory,"Kutztown, PA 19530",yes
+ALDI,A,85,12.1,US DC NFI - Breinigsville,"Bethlehem, PA 18015",yes
+US Foods,A,90,12.4,US DC NFI - Breinigsville,"Allentown, PA 18109",yes
+IKEA,A,90,12.4,US DC NFI - Breinigsville,"Quakertown, PA 18951",
+Saia,A,88,15.3,US DC NFI - Breinigsville,"Bethlehem, PA 18017",
+Walmart,A,90,16.5,US DC NFI - Breinigsville,"Bethlehem, PA 18015",
+ABF Freight,A,88,17.2,US DC NFI - Breinigsville,"Bethlehem, PA 18020",
+Old Dominion,A,92,17.3,US DC NFI - Breinigsville,"Bethlehem, PA 18020",yes
+Kimberly-Clark,A,73,17.4,US PL Allentown NPL Factory,"Shoemakersville, PA 19555",
+Hershey,A,80,17.6,US DC NFI - Breinigsville,"Bethlehem, PA 18020",
+PPG Paints,A,90,19.1,US PL Allentown NPL Factory,"Reading, PA 19605",
+R+L Carriers,A,90,23.6,US PL Allentown NPL Factory,"Hatfield, PA 19440",

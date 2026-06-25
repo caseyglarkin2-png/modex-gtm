@@ -1,0 +1,6129 @@
+{
+ "tier_a_gaps": 524,
+ "fillable_from_clawd": 471,
+ "matches": [
+  {
+   "name": "3M Co",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Janna Burgstahler",
+    "full_name": "Janna Burgstahler",
+    "email": "jmburgstahler@3m.com",
+    "title": "Director, Global Business Supply Chain Leader",
+    "company": "3M Company"
+   }
+  },
+  {
+   "name": "ABF Freight System Inc.",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Steve Vallee",
+    "full_name": "Steve Vallee",
+    "email": "svallee@systemfreight.net",
+    "title": "Logistics Manager",
+    "company": null
+   }
+  },
+  {
+   "name": "Advance Auto Parts Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Kenneth Kao",
+    "full_name": "Kenneth Kao",
+    "email": "kenneth.kao@advance-auto.com",
+    "title": "Sr. Freight Manager",
+    "company": "Advance Auto Parts / Advance Stores Company Incorporated"
+   }
+  },
+  {
+   "name": "Advance Auto Parts Distribution Center Kutztown",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 1,
+   "sample": {
+    "name": "Mary Mcdonald",
+    "full_name": "Mary Mcdonald",
+    "email": "mmcdonald@advancedistribution.com",
+    "title": "Sales and Marketing Manager",
+    "company": "2471813.857"
+   }
+  },
+  {
+   "name": "Albertsons Manufacturing Plant",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 6,
+   "sample": {
+    "name": "John Porter",
+    "full_name": "John Porter",
+    "email": "john.porter@albertsons.com",
+    "title": "Corporate Vice President - Finance, Supply Chain Transformation",
+    "company": "Albertsons Companies"
+   }
+  },
+  {
+   "name": "ALDI Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Zach Cannon",
+    "full_name": "Zach Cannon",
+    "email": "zcannon@allendistribution.com",
+    "title": "Distribution Manager",
+    "company": null
+   }
+  },
+  {
+   "name": "ALDI Distribution Center truck entrance",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 1,
+   "sample": {
+    "name": "Mary Mcdonald",
+    "full_name": "Mary Mcdonald",
+    "email": "mmcdonald@advancedistribution.com",
+    "title": "Sales and Marketing Manager",
+    "company": "2471813.857"
+   }
+  },
+  {
+   "name": "Amcor Flexibles Madison",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 2,
+   "sample": {
+    "name": "Ambra Madison",
+    "full_name": "Ambra Madison",
+    "email": "ambra.madison@craneww.com",
+    "title": "Administrative Manager",
+    "company": null
+   }
+  },
+  {
+   "name": "Amcor plastic",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 6,
+   "sample": {
+    "name": "Christopher Butts",
+    "full_name": "Christopher Butts",
+    "email": "christopher.butts@amcor.com",
+    "title": "Corporate Transportation Manager",
+    "company": "Amcor"
+   }
+  },
+  {
+   "name": "Amcor Rigid Plastics",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 1,
+   "sample": {
+    "name": "Jim Tucker",
+    "full_name": "Jim Tucker",
+    "email": "jim.tucker@polar-plastics.com",
+    "title": "Chief Financial Officer",
+    "company": null
+   }
+  },
+  {
+   "name": "Americold Cold Storage",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Colin Colbourn",
+    "full_name": "Colin Colbourn",
+    "email": null,
+    "title": "Head of Product & Delivery",
+    "company": "Americold Logistics"
+   }
+  },
+  {
+   "name": "Americold Logistics",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Javier Botello",
+    "full_name": "Javier Botello",
+    "email": "javier.botello@americold.com",
+    "title": "Sr Dir-Biz Dev at Americold Logistics",
+    "company": "Americold"
+   }
+  },
+  {
+   "name": "Americold Logistics - Grand Rapids",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Gr Logistics gr",
+    "full_name": "Gr Logistics gr",
+    "email": "gr.logistics.gr@gmail.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Americold Logistics Anaheim",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Javier Botello",
+    "full_name": "Javier Botello",
+    "email": "javier.botello@americold.com",
+    "title": "Sr Dir-Biz Dev at Americold Logistics",
+    "company": "Americold"
+   }
+  },
+  {
+   "name": "Americold Logistics Baytown",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Javier Botello",
+    "full_name": "Javier Botello",
+    "email": "javier.botello@americold.com",
+    "title": "Sr Dir-Biz Dev at Americold Logistics",
+    "company": "Americold"
+   }
+  },
+  {
+   "name": "Americold Logistics Brighton",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Javier Botello",
+    "full_name": "Javier Botello",
+    "email": "javier.botello@americold.com",
+    "title": "Sr Dir-Biz Dev at Americold Logistics",
+    "company": "Americold"
+   }
+  },
+  {
+   "name": "Americold Logistics C of I 14890",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Lize Simon",
+    "full_name": "Lize Simon",
+    "email": "lize.simon@atc-logistics.com",
+    "title": "Head of Commercial",
+    "company": "ATC Computer Transport & Logistics Part of Arvato"
+   }
+  },
+  {
+   "name": "Americold Logistics Dallas",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Javier Botello",
+    "full_name": "Javier Botello",
+    "email": "javier.botello@americold.com",
+    "title": "Sr Dir-Biz Dev at Americold Logistics",
+    "company": "Americold"
+   }
+  },
+  {
+   "name": "Americold Logistics Hatfield",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Javier Botello",
+    "full_name": "Javier Botello",
+    "email": "javier.botello@americold.com",
+    "title": "Sr Dir-Biz Dev at Americold Logistics",
+    "company": "Americold"
+   }
+  },
+  {
+   "name": "Americold Logistics Houston",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Javier Botello",
+    "full_name": "Javier Botello",
+    "email": "javier.botello@americold.com",
+    "title": "Sr Dir-Biz Dev at Americold Logistics",
+    "company": "Americold"
+   }
+  },
+  {
+   "name": "Americold Logistics Indianapolis",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Laura Lee Haggerty",
+    "full_name": "Laura Lee Haggerty",
+    "email": "lhaggerty@americanlogistics.com",
+    "title": "CSR",
+    "company": "American Logistics"
+   }
+  },
+  {
+   "name": "Americold Logistics Jefferson",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Jon Jefferson",
+    "full_name": "Jon Jefferson",
+    "email": "jjefferson@ballylogistics.com",
+    "title": "Broker Agent",
+    "company": "Bally Logistics"
+   }
+  },
+  {
+   "name": "Americold Logistics Leesport",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Javier Botello",
+    "full_name": "Javier Botello",
+    "email": "javier.botello@americold.com",
+    "title": "Sr Dir-Biz Dev at Americold Logistics",
+    "company": "Americold"
+   }
+  },
+  {
+   "name": "Americold Logistics Meacham Ft Worth",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 6,
+   "sample": {
+    "name": "Laura Lee Haggerty",
+    "full_name": "Laura Lee Haggerty",
+    "email": "lhaggerty@americanlogistics.com",
+    "title": "CSR",
+    "company": "American Logistics"
+   }
+  },
+  {
+   "name": "Americold Logistics N Little Rock",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Amy Little",
+    "full_name": "Amy Little",
+    "email": "alittle@atlaslogistics.com",
+    "title": "Dir, Carrier and Project Development",
+    "company": "Atlas Logistics"
+   }
+  },
+  {
+   "name": "Americold Logistics Plant City",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Javier Botello",
+    "full_name": "Javier Botello",
+    "email": "javier.botello@americold.com",
+    "title": "Sr Dir-Biz Dev at Americold Logistics",
+    "company": "Americold"
+   }
+  },
+  {
+   "name": "Americold Logistics Russellville 324",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Chad Patterson",
+    "full_name": "Chad Patterson",
+    "email": "chad@russelllogistics.com",
+    "title": "Logistics Coordinator",
+    "company": "Russell Logistics"
+   }
+  },
+  {
+   "name": "Americold Logistics Russellville Elmira",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 8,
+   "sample": {
+    "name": "Chad Patterson",
+    "full_name": "Chad Patterson",
+    "email": "chad@russelllogistics.com",
+    "title": "Logistics Coordinator",
+    "company": "Russell Logistics"
+   }
+  },
+  {
+   "name": "Americold Logistics Tampa Maple",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Logistics",
+    "full_name": "Logistics",
+    "email": "logistics@tamerholding.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Ashley HomeStore Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 1,
+   "sample": {
+    "name": "Bob Scott",
+    "full_name": "Bob Scott",
+    "email": "bob@aspendistribution.com",
+    "title": "President",
+    "company": null
+   }
+  },
+  {
+   "name": "AutoZone Distribution",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Almarzooqi",
+    "full_name": "Almarzooqi",
+    "email": "almarzooqi@adnocdistribution.ae",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "AutoZone Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Rachel Freeman",
+    "full_name": "Rachel Freeman",
+    "email": "rachel.freeman@distributionmgmt.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Ball Metal Beverage Container",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 7,
+   "sample": {
+    "name": "Brad Heier",
+    "full_name": "Brad Heier",
+    "email": "brad@maccontainer.com",
+    "title": "President",
+    "company": "MAC Container Line"
+   }
+  },
+  {
+   "name": "BASF Corporation",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Scott Carpenter",
+    "full_name": "Scott Carpenter",
+    "email": "scott.carpenter@idxcorporation.com",
+    "title": "Regional Director of Operations",
+    "company": "idX"
+   }
+  },
+  {
+   "name": "BASF Palmer Logistics",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Jake Palmer",
+    "full_name": "Jake Palmer",
+    "email": "jpalmer@plslogistics.com",
+    "title": "Senior Logistics Coordinator",
+    "company": null
+   }
+  },
+  {
+   "name": "BASF Warehouse",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Warehouse",
+    "full_name": "Warehouse",
+    "email": "warehouse@allglobus.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Bell Container International Paper",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Jimmy Sebastian",
+    "full_name": "Jimmy Sebastian",
+    "email": null,
+    "title": "VP, AI Products",
+    "company": "International Paper"
+   }
+  },
+  {
+   "name": "Ben E. Keith Foods Gulf Coast Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 1,
+   "sample": {
+    "name": "Keith Davidson",
+    "full_name": "Keith Davidson",
+    "email": "keith.davidson@menziesdistribution.com",
+    "title": "Project Manager",
+    "company": null
+   }
+  },
+  {
+   "name": "Ben E. Keith Foods Mid-South Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 1,
+   "sample": {
+    "name": "Keith Davidson",
+    "full_name": "Keith Davidson",
+    "email": "keith.davidson@menziesdistribution.com",
+    "title": "Project Manager",
+    "company": null
+   }
+  },
+  {
+   "name": "Best Buy Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Bryan Corbett",
+    "full_name": "Bryan Corbett",
+    "email": "bcorbett@barrettdistribution.com",
+    "title": "Vice President, Sales & Marketing",
+    "company": "Barrett Distribution Center - Franklin, MA"
+   }
+  },
+  {
+   "name": "Best Buy Warehouse",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 8,
+   "sample": {
+    "name": "Warehouse",
+    "full_name": "Warehouse",
+    "email": "warehouse@allglobus.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Best Buy Warehouse Ontario",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 2,
+   "sample": {
+    "name": "Warehouse",
+    "full_name": "Warehouse",
+    "email": "warehouse@allglobus.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Best Buy Warehouse, Polk City",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 1,
+   "sample": {
+    "name": "Warehouse",
+    "full_name": "Warehouse",
+    "email": "warehouse@allglobus.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Bimbo Bakeries Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Bryan Corbett",
+    "full_name": "Bryan Corbett",
+    "email": "bcorbett@barrettdistribution.com",
+    "title": "Vice President, Sales & Marketing",
+    "company": "Barrett Distribution Center - Franklin, MA"
+   }
+  },
+  {
+   "name": "Bimbo Bakeries-Sara Lee Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 2,
+   "sample": {
+    "name": "Sarah Custer",
+    "full_name": "Sarah Custer",
+    "email": "sarah.custer@distributionmgmt.com",
+    "title": "Vice President of Sales Operations",
+    "company": null
+   }
+  },
+  {
+   "name": "Bridgestone Americas Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 1,
+   "sample": {
+    "name": "Ross Bridges",
+    "full_name": "Ross Bridges",
+    "email": "ross.bridges@hmdistribution.co.uk",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Bridgestone Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Ross Bridges",
+    "full_name": "Ross Bridges",
+    "email": "ross.bridges@hmdistribution.co.uk",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Bridgestone Firestone Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 8,
+   "sample": {
+    "name": "Ross Bridges",
+    "full_name": "Ross Bridges",
+    "email": "ross.bridges@hmdistribution.co.uk",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Carhartt",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Chris Cothran",
+    "full_name": "Chris Cothran",
+    "email": "ccothran@carhartt.com",
+    "title": "Senior Director of Global Logistics",
+    "company": null
+   }
+  },
+  {
+   "name": "Ceva Freight",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Freight",
+    "full_name": "Freight",
+    "email": "freight@fimali.com.pg",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "CEVA Logistics - Pelican Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 5,
+   "sample": {
+    "name": "Peter",
+    "full_name": "Peter",
+    "email": "peter@cevalogistics.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Chewy Fulfillment Center CFC1",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Kayla Hunter",
+    "full_name": "Kayla Hunter",
+    "email": "khunter@fulfillment.com",
+    "title": "Logistics Coordinator",
+    "company": null
+   }
+  },
+  {
+   "name": "Chewy Fulfillment Center CLT1",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Kayla Hunter",
+    "full_name": "Kayla Hunter",
+    "email": "khunter@fulfillment.com",
+    "title": "Logistics Coordinator",
+    "company": null
+   }
+  },
+  {
+   "name": "Chewy Fulfillment Center DAY1",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Kayla Hunter",
+    "full_name": "Kayla Hunter",
+    "email": "khunter@fulfillment.com",
+    "title": "Logistics Coordinator",
+    "company": null
+   }
+  },
+  {
+   "name": "Chewy Fulfillment Center DFW1",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Kayla Hunter",
+    "full_name": "Kayla Hunter",
+    "email": "khunter@fulfillment.com",
+    "title": "Logistics Coordinator",
+    "company": null
+   }
+  },
+  {
+   "name": "Chewy Fulfillment Center HOU1",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Kayla Hunter",
+    "full_name": "Kayla Hunter",
+    "email": "khunter@fulfillment.com",
+    "title": "Logistics Coordinator",
+    "company": null
+   }
+  },
+  {
+   "name": "Chewy Fulfillment Center MCO1",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Kayla Hunter",
+    "full_name": "Kayla Hunter",
+    "email": "khunter@fulfillment.com",
+    "title": "Logistics Coordinator",
+    "company": null
+   }
+  },
+  {
+   "name": "Chewy Fulfillment Center MDT1",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Kayla Hunter",
+    "full_name": "Kayla Hunter",
+    "email": "khunter@fulfillment.com",
+    "title": "Logistics Coordinator",
+    "company": null
+   }
+  },
+  {
+   "name": "Chewy Fulfillment Center, RNO1",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Kayla Hunter",
+    "full_name": "Kayla Hunter",
+    "email": "khunter@fulfillment.com",
+    "title": "Logistics Coordinator",
+    "company": null
+   }
+  },
+  {
+   "name": "Clorox Products Houston",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 7,
+   "sample": {
+    "name": "Houston Houston",
+    "full_name": "Houston Houston",
+    "email": "houston@whitmor.com",
+    "title": "Director of Operations",
+    "company": null
+   }
+  },
+  {
+   "name": "Conagra Brands - Russellville",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 2,
+   "sample": {
+    "name": "Russell Uyeda",
+    "full_name": "Russell Uyeda",
+    "email": "russell@capitalbrands.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Crete Carrier Corporation",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Anne Duchek",
+    "full_name": "Anne Duchek",
+    "email": "aduchek@cretecarrier.com",
+    "title": "Strategic Account Specialist",
+    "company": "CRETE CARRIER CORPORATION"
+   }
+  },
+  {
+   "name": "Damascus Warehouse (SONOCO)",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 2,
+   "sample": {
+    "name": "Warehouse",
+    "full_name": "Warehouse",
+    "email": "warehouse@allglobus.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "DHL Warehouse Verizon",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 6,
+   "sample": {
+    "name": "Warehouse",
+    "full_name": "Warehouse",
+    "email": "warehouse@allglobus.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Dick's Sporting Goods Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 5,
+   "sample": {
+    "name": "Christopher Nagy",
+    "full_name": "Christopher Nagy",
+    "email": "christopher.nagy@dickssportinggoods.com",
+    "title": "Freight Flow Manager",
+    "company": "DICK'S Sporting Goods"
+   }
+  },
+  {
+   "name": "Dollar General Receiving",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Blake Reasons",
+    "full_name": "Blake Reasons",
+    "email": "breasons@dollargeneral.com",
+    "title": "Senior Director, Inbound Domestic Transportation",
+    "company": "Dollar General"
+   }
+  },
+  {
+   "name": "Dollar Tree Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Troy Balakhan",
+    "full_name": "Troy Balakhan",
+    "email": "tbalakhan@dotcomdistribution.com",
+    "title": "Director of Marketing",
+    "company": null
+   }
+  },
+  {
+   "name": "Dow Chemical Co",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Anita Corgill",
+    "full_name": "Anita Corgill",
+    "email": "anitac@amvac-chemical.com",
+    "title": "International Logistics Coordinator",
+    "company": null
+   }
+  },
+  {
+   "name": "DSC",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Ds",
+    "full_name": "Ds",
+    "email": "ds@linkedin.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Dupont Industrial Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Industrial 2000",
+    "full_name": "Industrial 2000",
+    "email": "industrial_2000@yahoo.com.mx",
+    "title": "Planning Sr Manager",
+    "company": "BIC"
+   }
+  },
+  {
+   "name": "Family Dollar Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Danny Reynolds",
+    "full_name": "Danny Reynolds",
+    "email": "dreynolds@familydollar.com",
+    "title": "Director Distribution Operations",
+    "company": "Family Dollar"
+   }
+  },
+  {
+   "name": "Fastenal Canada Fulfillment Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Kayla Hunter",
+    "full_name": "Kayla Hunter",
+    "email": "khunter@fulfillment.com",
+    "title": "Logistics Coordinator",
+    "company": null
+   }
+  },
+  {
+   "name": "Fastenal Canada Fulfillment Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Kayla Hunter",
+    "full_name": "Kayla Hunter",
+    "email": "khunter@fulfillment.com",
+    "title": "Logistics Coordinator",
+    "company": null
+   }
+  },
+  {
+   "name": "Fastenal Fulfillment Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Kayla Hunter",
+    "full_name": "Kayla Hunter",
+    "email": "khunter@fulfillment.com",
+    "title": "Logistics Coordinator",
+    "company": null
+   }
+  },
+  {
+   "name": "Fastenal Fulfillment Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Kayla Hunter",
+    "full_name": "Kayla Hunter",
+    "email": "khunter@fulfillment.com",
+    "title": "Logistics Coordinator",
+    "company": null
+   }
+  },
+  {
+   "name": "Fastenal Fulfillment Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Kayla Hunter",
+    "full_name": "Kayla Hunter",
+    "email": "khunter@fulfillment.com",
+    "title": "Logistics Coordinator",
+    "company": null
+   }
+  },
+  {
+   "name": "Fastenal Fulfillment Center - Appointment Only",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 9,
+   "sample": {
+    "name": "Kayla Hunter",
+    "full_name": "Kayla Hunter",
+    "email": "khunter@fulfillment.com",
+    "title": "Logistics Coordinator",
+    "company": null
+   }
+  },
+  {
+   "name": "Flexport Denver",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Bernie Hart",
+    "full_name": "Bernie Hart",
+    "email": "bernie@flexport.com",
+    "title": "VP-Customs & Trade Sales",
+    "company": "Flexport"
+   }
+  },
+  {
+   "name": "Flexport DFW1 Fulfillment Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Kayla Hunter",
+    "full_name": "Kayla Hunter",
+    "email": "khunter@fulfillment.com",
+    "title": "Logistics Coordinator",
+    "company": null
+   }
+  },
+  {
+   "name": "Flexport EWR1 Fulfillment Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Kayla Hunter",
+    "full_name": "Kayla Hunter",
+    "email": "khunter@fulfillment.com",
+    "title": "Logistics Coordinator",
+    "company": null
+   }
+  },
+  {
+   "name": "Flexport LAX1 Fulfillment Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Kayla Hunter",
+    "full_name": "Kayla Hunter",
+    "email": "khunter@fulfillment.com",
+    "title": "Logistics Coordinator",
+    "company": null
+   }
+  },
+  {
+   "name": "FTAI Infrastructure",
+   "domain": "fipinc.com",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Rafael Granato",
+    "full_name": "Rafael Granato",
+    "email": "rgranato@pinc.com",
+    "title": "Vice President of Marketing",
+    "company": "2505568.852"
+   }
+  },
+  {
+   "name": "GCT Terminals",
+   "domain": "gctglobalcontainerterminals.com",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Laura Markham",
+    "full_name": "Laura Markham",
+    "email": "lmarkham@maherterminals.com",
+    "title": "Chief Information Officer",
+    "company": null
+   }
+  },
+  {
+   "name": "GEODIS | Contract Logistics",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Baerbel Hanfland",
+    "full_name": "Baerbel Hanfland",
+    "email": "baerbel.hanfland@geodis.com",
+    "title": "Head of Marketing & Communication | Contract Logistics & Freight Forwarding Germany",
+    "company": "GEODIS"
+   }
+  },
+  {
+   "name": "GEODIS logistic.",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Natia Chkhobadze",
+    "full_name": "Natia Chkhobadze",
+    "email": "natia.chkhobadze@linklogistic.ge",
+    "title": "Chief Executive Officer",
+    "company": null
+   }
+  },
+  {
+   "name": "Geodis Logistics",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Logistics",
+    "full_name": "Logistics",
+    "email": "logistics@ntlqp.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Geodis Logistics (H&M)",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Logistics",
+    "full_name": "Logistics",
+    "email": "logistics@excelsource.co.in",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Goodyear Logistics Center- Operated by DHL",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 1,
+   "sample": {
+    "name": "Dani Wotring",
+    "full_name": "Dani Wotring",
+    "email": "dwotring@integrated-logistics.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Grainger Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Robert Reynolds",
+    "full_name": "Robert Reynolds",
+    "email": "robert.reynolds@grainger.com",
+    "title": "Senior Vice President, Branch and Distribution Center Operations",
+    "company": "Grainger"
+   }
+  },
+  {
+   "name": "Grainger Industrial Supply",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 2,
+   "sample": {
+    "name": "Industrial 2000",
+    "full_name": "Industrial 2000",
+    "email": "industrial_2000@yahoo.com.mx",
+    "title": "Planning Sr Manager",
+    "company": "BIC"
+   }
+  },
+  {
+   "name": "Graphic Packaging",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Joe Yost",
+    "full_name": "Joe Yost",
+    "email": "yostj@graphicpkg.com",
+    "title": "Senior Vice President and President, Americas",
+    "company": "Graphic Packaging International, LLC"
+   }
+  },
+  {
+   "name": "Grupo Elektra",
+   "domain": "marcaone.com",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Kathleen Kennedy",
+    "full_name": "Kathleen Kennedy",
+    "email": "kkennedy@marcos.com",
+    "title": "Director of Culinary Innovation",
+    "company": "Marco's Pizza"
+   }
+  },
+  {
+   "name": "Hershey Foods West Distribution",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 1,
+   "sample": {
+    "name": "Richard Whitner",
+    "full_name": "Richard Whitner",
+    "email": "richard.whitner@heritagedistribution.com",
+    "title": "VP Operations",
+    "company": "Heritage Distribution Holdings"
+   }
+  },
+  {
+   "name": "Hershey's Annville Fulfillment Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 9,
+   "sample": {
+    "name": "Kayla Hunter",
+    "full_name": "Kayla Hunter",
+    "email": "khunter@fulfillment.com",
+    "title": "Logistics Coordinator",
+    "company": null
+   }
+  },
+  {
+   "name": "Home Depot Distribution",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Viness Gardner",
+    "full_name": "Viness Gardner",
+    "email": "viness_u_gardner@homedepot.com",
+    "title": "Director Distribution Analytics",
+    "company": "The Home Depot"
+   }
+  },
+  {
+   "name": "Home Depot warehouse",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 9,
+   "sample": {
+    "name": "Warehouse",
+    "full_name": "Warehouse",
+    "email": "warehouse@allglobus.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Hood Packaging Corporation",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Benjamin Frank",
+    "full_name": "Benjamin Frank",
+    "email": "bfrank@packagingcorp.com",
+    "title": "Director, Materials Research and Innovation",
+    "company": "Packaging Corporation of America"
+   }
+  },
+  {
+   "name": "IKEA Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Bryan Corbett",
+    "full_name": "Bryan Corbett",
+    "email": "bcorbett@barrettdistribution.com",
+    "title": "Vice President, Sales & Marketing",
+    "company": "Barrett Distribution Center - Franklin, MA"
+   }
+  },
+  {
+   "name": "International Paper - Beltline Container Plant",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Jimmy Sebastian",
+    "full_name": "Jimmy Sebastian",
+    "email": null,
+    "title": "VP, AI Products",
+    "company": "International Paper"
+   }
+  },
+  {
+   "name": "International Paper - Dallas Container Plant",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Jimmy Sebastian",
+    "full_name": "Jimmy Sebastian",
+    "email": null,
+    "title": "VP, AI Products",
+    "company": "International Paper"
+   }
+  },
+  {
+   "name": "International Paper Co",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Sumec International Technology Co., Ltd.",
+    "full_name": "Sumec International Technology Co., Ltd.",
+    "email": "t-world@sumec.com.cn",
+    "title": null,
+    "company": "SUMEC International Technology Co."
+   }
+  },
+  {
+   "name": "J.B. Hunt Transport Services, Inc.",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 5,
+   "sample": {
+    "name": "Kirk Bockelman",
+    "full_name": "Kirk Bockelman",
+    "email": "kirk.bockelman@jbhunt.com",
+    "title": "Vice President Intermodal Customer Experience at J.B. Hunt Transport Services, Inc.",
+    "company": "J.B. Hunt Transport, Inc."
+   }
+  },
+  {
+   "name": "KeHE Distributors-LHV",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 3,
+   "sample": {
+    "name": "Mcphilldistributors",
+    "full_name": "Mcphilldistributors",
+    "email": "mcphilldistributors@gmail.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Kellogg Co",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Angela Klacking",
+    "full_name": "Angela Klacking",
+    "email": "angela@kellogg.com",
+    "title": "Sr Director HR KNA Supply Chain",
+    "company": "Kellogg Company"
+   }
+  },
+  {
+   "name": "Kellogg's APL Logistics",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Allyson Leal",
+    "full_name": "Allyson Leal",
+    "email": "allyson_leal1@apllogistics.com",
+    "title": "Head of Marketing, Americas",
+    "company": "APL Logistics"
+   }
+  },
+  {
+   "name": "Kerry Group PLC",
+   "domain": "kerrygroup.com",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Troy Stevenson",
+    "full_name": "Troy Stevenson",
+    "email": "troystevenson1@gmail.com",
+    "title": "Director Procurement - Logistics & Transportation",
+    "company": "Kerry Inc"
+   }
+  },
+  {
+   "name": "Knight-Swift",
+   "domain": "knightswift.com",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Andrew Hess",
+    "full_name": "Andrew Hess",
+    "email": "andrew.hess@knight-swift.com",
+    "title": "Chief Financial Officer",
+    "company": null
+   }
+  },
+  {
+   "name": "Kohl's Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Bryan Corbett",
+    "full_name": "Bryan Corbett",
+    "email": "bcorbett@barrettdistribution.com",
+    "title": "Vice President, Sales & Marketing",
+    "company": "Barrett Distribution Center - Franklin, MA"
+   }
+  },
+  {
+   "name": "Kohler Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Bryan Corbett",
+    "full_name": "Bryan Corbett",
+    "email": "bcorbett@barrettdistribution.com",
+    "title": "Vice President, Sales & Marketing",
+    "company": "Barrett Distribution Center - Franklin, MA"
+   }
+  },
+  {
+   "name": "Kuehne + Nagel",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Sara Vollmer",
+    "full_name": "Sara Vollmer",
+    "email": "sara.vollmer@kuehne-nagel.com",
+    "title": "Vice President, Sea Logistics Global Customer Engagement & Events at Kuehne + Nagel",
+    "company": "Kuehne+Nagel"
+   }
+  },
+  {
+   "name": "LINEAGE LOGISTICS - LANCASTER, TX",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Mike Lancaster",
+    "full_name": "Mike Lancaster",
+    "email": "mike.lancaster@bnsflogistics.com",
+    "title": "VP & GM",
+    "company": "BNSF Logistics (JB Hunt)"
+   }
+  },
+  {
+   "name": "Lineage Logistics Jacksonville West",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Greg Bryan",
+    "full_name": "Greg Bryan",
+    "email": "gbryan@lineagelogistics.com",
+    "title": "President, Global Logistics",
+    "company": "Lineage Logistics"
+   }
+  },
+  {
+   "name": "LKQ Refinish Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Ross Haley",
+    "full_name": "Ross Haley",
+    "email": "rossh@lbsdistribution.com",
+    "title": "Chief Executive Officer",
+    "company": null
+   }
+  },
+  {
+   "name": "Lowe's Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Bryan Corbett",
+    "full_name": "Bryan Corbett",
+    "email": "bcorbett@barrettdistribution.com",
+    "title": "Vice President, Sales & Marketing",
+    "company": "Barrett Distribution Center - Franklin, MA"
+   }
+  },
+  {
+   "name": "Lowe's Regional Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Ross Haley",
+    "full_name": "Ross Haley",
+    "email": "rossh@lbsdistribution.com",
+    "title": "Chief Executive Officer",
+    "company": null
+   }
+  },
+  {
+   "name": "Maersk",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Tiago Craveiro",
+    "full_name": "Tiago Craveiro",
+    "email": "tiago.craveiro@maersk.com",
+    "title": "EXIT HUUB to Maersk | Head Product/Platform (Demand Space) @ Global E-commerce at Maersk",
+    "company": "Maersk"
+   }
+  },
+  {
+   "name": "MARS PETCARE WAREHOUSE",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 3,
+   "sample": {
+    "name": "Warehouse",
+    "full_name": "Warehouse",
+    "email": "warehouse@allglobus.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Medline Industries Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Grant Jordan",
+    "full_name": "Grant Jordan",
+    "email": "grant.jordan@menziesdistribution.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Meijer Distribution Center - DC 86",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Alex Mccoy",
+    "full_name": "Alex Mccoy",
+    "email": "alex.mccoy@distributionmgmt.com",
+    "title": "VP of DC Operations",
+    "company": "Distribution Management"
+   }
+  },
+  {
+   "name": "Meijer Distribution Center - DC 92",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Alex Mccoy",
+    "full_name": "Alex Mccoy",
+    "email": "alex.mccoy@distributionmgmt.com",
+    "title": "VP of DC Operations",
+    "company": "Distribution Management"
+   }
+  },
+  {
+   "name": "Meijer Distribution Center - DC 93",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Alex Mccoy",
+    "full_name": "Alex Mccoy",
+    "email": "alex.mccoy@distributionmgmt.com",
+    "title": "VP of DC Operations",
+    "company": "Distribution Management"
+   }
+  },
+  {
+   "name": "Nestle Distribution Center (Truck Entrance)",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 1,
+   "sample": {
+    "name": "Lisa Entwistle",
+    "full_name": "Lisa Entwistle",
+    "email": "l.entwistle@hmdistribution.co.uk",
+    "title": "Commercial Director",
+    "company": null
+   }
+  },
+  {
+   "name": "Nestle Waters",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Nick Waters",
+    "full_name": "Nick Waters",
+    "email": "nick.waters@bmmlogistics.com",
+    "title": "Carrier Sales Manager",
+    "company": null
+   }
+  },
+  {
+   "name": "Newell Logistics",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Logistics",
+    "full_name": "Logistics",
+    "email": "logistics@excellaglobal.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Ocean Spray",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Earl Larson",
+    "full_name": "Earl Larson",
+    "email": "elarson@oceanspray.com",
+    "title": "svp chief supply chain officer",
+    "company": "Ocean Spray Cranberries"
+   }
+  },
+  {
+   "name": "Old Dominion Freight Line",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 8,
+   "sample": {
+    "name": "Hannah Pearson",
+    "full_name": "Hannah Pearson",
+    "email": "hannah.pearson@odfl.com",
+    "title": "Manager of Field Marketing",
+    "company": "Old Dominion Freight Line"
+   }
+  },
+  {
+   "name": "Owens & Minor - Houston Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 3,
+   "sample": {
+    "name": "Connor Holder",
+    "full_name": "Connor Holder",
+    "email": "connor.holder@hmdistribution.co.uk",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Owens Corning Warehouse",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Greg Edwards",
+    "full_name": "Greg Edwards",
+    "email": "greg.edwards@owenscorning.com",
+    "title": "HR Director, Insulation Operations",
+    "company": "Owens Corning"
+   }
+  },
+  {
+   "name": "OWENS-ILLINOIS",
+   "domain": "owensillinois.com",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Stephanie Malecotte",
+    "full_name": "Stephanie Malecotte",
+    "email": "stephanie.malecotte@owens-minor.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Ozburn-Hessey Logistics",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Logistics",
+    "full_name": "Logistics",
+    "email": "logistics@ecoasiapte.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Packaging Corporation of America (PCA)",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 5,
+   "sample": {
+    "name": "Benjamin Frank",
+    "full_name": "Benjamin Frank",
+    "email": "bfrank@packagingcorp.com",
+    "title": "Director, Materials Research and Innovation",
+    "company": "Packaging Corporation of America"
+   }
+  },
+  {
+   "name": "Penske Logistics",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Andrew Levens",
+    "full_name": "Andrew Levens",
+    "email": "andrew.levens@gopenske.com",
+    "title": "Supply Chain & Logistics Management",
+    "company": "Penske Logistics"
+   }
+  },
+  {
+   "name": "PENSKE WAREHOUSE",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Warehouse",
+    "full_name": "Warehouse",
+    "email": "warehouse@allglobus.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Pepsi Beverages Co",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Trevor Watkins",
+    "full_name": "Trevor Watkins",
+    "email": "trevor.watkins@pepsico.com",
+    "title": "Vice President Supply Chain Transformation, Pepsi Beverages North America",
+    "company": "Pepsi"
+   }
+  },
+  {
+   "name": "Pepsi Beverages Company",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Donovan R",
+    "full_name": "Donovan R",
+    "email": "donovan.r@pfsi.company",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Pepsi Beverages Company - PBC",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Donovan R",
+    "full_name": "Donovan R",
+    "email": "donovan.r@pfsi.company",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Pepsi Bottling Group",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 2,
+   "sample": {
+    "name": "Lawrence Hirsch",
+    "full_name": "Lawrence Hirsch",
+    "email": "lawrence.hirsch@pepsibottlingventures.com",
+    "title": "Director of Technology",
+    "company": "Pepsi Bottling Ventures"
+   }
+  },
+  {
+   "name": "Pepsi Co. Inc",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Matt Bacon",
+    "full_name": "Matt Bacon",
+    "email": null,
+    "title": "Global Operations Supply Chain Director",
+    "company": "Pepsi"
+   }
+  },
+  {
+   "name": "Pepsi-Cola",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Brian Mudd",
+    "full_name": "Brian Mudd",
+    "email": null,
+    "title": "Supply Chain Senior Director",
+    "company": "Pepsi"
+   }
+  },
+  {
+   "name": "Pepsi-Cola Co",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "David Chambers",
+    "full_name": "David Chambers",
+    "email": null,
+    "title": "Senior Director Of Transportation Procurement - PepsiCo & N.A. Value Chain Transformation Plano, Texas, United",
+    "company": "Pepsi"
+   }
+  },
+  {
+   "name": "Pepsi-Cola Co",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Jenice Pua",
+    "full_name": "Jenice Pua",
+    "email": null,
+    "title": "Supply Chain Senior Director of Service Operations",
+    "company": "Pepsi"
+   }
+  },
+  {
+   "name": "Pepsico - truck entrance",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 3,
+   "sample": {
+    "name": "Ken Struck",
+    "full_name": "Ken Struck",
+    "email": "ken.struck@pepsico.com",
+    "title": "Director Digital Transformation",
+    "company": "Pepsi"
+   }
+  },
+  {
+   "name": "PepsiCo Mt. Creek",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Cr",
+    "full_name": "Cr",
+    "email": "cr@pepsico.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Performance Team (Maersk)",
+   "domain": "performanceteam-us.com",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Charles Wert",
+    "full_name": "Charles Wert",
+    "email": "charles.wert@performanceteam.net",
+    "title": "Operations Manager",
+    "company": null
+   }
+  },
+  {
+   "name": "Pilgrim\u2019s Pride Corp.",
+   "domain": "pilgrimscorp.com",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Jason Dumo",
+    "full_name": "Jason Dumo",
+    "email": "jason.dumo@pilgrims.com",
+    "title": "Senior Director Marketing Innovation",
+    "company": "Pilgrim's"
+   }
+  },
+  {
+   "name": "PPG Industries Inc",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Exel Industries",
+    "full_name": "Exel Industries",
+    "email": "direction.communication@exel-industries.com",
+    "title": null,
+    "company": "EXEL Industries Group"
+   }
+  },
+  {
+   "name": "PPG Paints Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Paul",
+    "full_name": "Paul",
+    "email": "paul@directdistribution.co.uk",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "PRIME/CHROBINSON Warehouse",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 5,
+   "sample": {
+    "name": "Warehouse",
+    "full_name": "Warehouse",
+    "email": "warehouse@allglobus.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Procter & Gamble Co",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 3,
+   "sample": {
+    "name": "Cole Proctor",
+    "full_name": "Cole Proctor",
+    "email": "cproctor@its4logistics.com",
+    "title": "Network Ops Mgr",
+    "company": "ITS Logistics"
+   }
+  },
+  {
+   "name": "R & L Carriers Inc",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Stefan Ivezic",
+    "full_name": "Stefan Ivezic",
+    "email": "stefani@cwcarriersinc.com",
+    "title": "Client Sales Manager",
+    "company": "CW CARRIERS DEDICATED INC."
+   }
+  },
+  {
+   "name": "R+L Carriers",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Jeff Pickett",
+    "full_name": "Jeff Pickett",
+    "email": "jeff.pickett@rlcarriers.com",
+    "title": "Vice President of Operations",
+    "company": "2689111.639"
+   }
+  },
+  {
+   "name": "R+L Carriers Norristown",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Jeff Pickett",
+    "full_name": "Jeff Pickett",
+    "email": "jeff.pickett@rlcarriers.com",
+    "title": "Vice President of Operations",
+    "company": "2689111.639"
+   }
+  },
+  {
+   "name": "Red Bull Distribution center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Bryan Corbett",
+    "full_name": "Bryan Corbett",
+    "email": "bcorbett@barrettdistribution.com",
+    "title": "Vice President, Sales & Marketing",
+    "company": "Barrett Distribution Center - Franklin, MA"
+   }
+  },
+  {
+   "name": "Regal Beloit Logistics",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Anita Boruff / Baker",
+    "full_name": "Anita Boruff / Baker",
+    "email": "anita.baker@regalbeloit.com",
+    "title": "Logistics Import Controller",
+    "company": "Regal Beloit"
+   }
+  },
+  {
+   "name": "Ross Stores Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Ross Haley",
+    "full_name": "Ross Haley",
+    "email": "rossh@lbsdistribution.com",
+    "title": "Chief Executive Officer",
+    "company": null
+   }
+  },
+  {
+   "name": "Ryder Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Bryan Corbett",
+    "full_name": "Bryan Corbett",
+    "email": "bcorbett@barrettdistribution.com",
+    "title": "Vice President, Sales & Marketing",
+    "company": "Barrett Distribution Center - Franklin, MA"
+   }
+  },
+  {
+   "name": "Ryder Integrated Logistics",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Dani Wotring",
+    "full_name": "Dani Wotring",
+    "email": "dwotring@integrated-logistics.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Ryder Logistics",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Logistics",
+    "full_name": "Logistics",
+    "email": "logistics@tamerholding.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Ryder Truck Terminal",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 1,
+   "sample": {
+    "name": "Terminalexim",
+    "full_name": "Terminalexim",
+    "email": "terminalexim@gmail.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Ryder Warehouse",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Warehouse",
+    "full_name": "Warehouse",
+    "email": "warehouse@allglobus.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Ryder/Whiplash E-commerce fulfillment node",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Angel Monegro",
+    "full_name": "Angel Monegro",
+    "email": "amonegro@fulfillment.com",
+    "title": "Operations Manager",
+    "company": null
+   }
+  },
+  {
+   "name": "Saddle Creek Distribution Warehouse",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 6,
+   "sample": {
+    "name": "David Loureiro",
+    "full_name": "David Loureiro",
+    "email": "david.loureiro@srsdistribution.com",
+    "title": "Sr Director, Technology",
+    "company": "SRS Distribution"
+   }
+  },
+  {
+   "name": "Saddle Creek Logistics",
+   "domain": "saddlecreeklogistics.com",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Anthony Merkel",
+    "full_name": "Anthony Merkel",
+    "email": "amerkel@prairiecreeklogistics.com",
+    "title": "Logistics Mgr",
+    "company": "Prairie Creek Logistics"
+   }
+  },
+  {
+   "name": "Saddle Creek Logistics Services",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Harshil Aghera",
+    "full_name": "Harshil Aghera",
+    "email": "harshil.aghera@sclogistics.com",
+    "title": "Senior Director, Technology and Innovation",
+    "company": "Saddle Creek Logistics Services"
+   }
+  },
+  {
+   "name": "Saia LTL Freight",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Jingzhi",
+    "full_name": "Jingzhi",
+    "email": "jingzhi@freight.sg",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Saia LTL Freight",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Tan Teck",
+    "full_name": "Tan Teck",
+    "email": "kianteck@freight.sg",
+    "title": "Director",
+    "company": null
+   }
+  },
+  {
+   "name": "Schneider",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Todd M Olsen",
+    "full_name": "Todd M Olsen",
+    "email": "olsent@schneider.com",
+    "title": "VP Carrier Sales & Ops",
+    "company": "Schneider"
+   }
+  },
+  {
+   "name": "Schneider cross dock",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Craig Schneider",
+    "full_name": "Craig Schneider",
+    "email": null,
+    "title": "CEO & Co-Founder",
+    "company": "Tow4Tech"
+   }
+  },
+  {
+   "name": "Schneider National Operating Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 4,
+   "sample": {
+    "name": "Jesse Oettinger",
+    "full_name": "Jesse Oettinger",
+    "email": "oettingerj@schneider.com",
+    "title": "Market Operations Manager",
+    "company": null
+   }
+  },
+  {
+   "name": "Schreiber",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Steve Schreiber",
+    "full_name": "Steve Schreiber",
+    "email": "steve.bmg@dealzflowpros.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Sherwin-Williams Florida Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 1,
+   "sample": {
+    "name": "Elaine Williamson",
+    "full_name": "Elaine Williamson",
+    "email": "elaine.williamson@menziesdistribution.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Smithfield Foods Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 7,
+   "sample": {
+    "name": "Eric Kaufold",
+    "full_name": "Eric Kaufold",
+    "email": "ekaufold@smithfield.com",
+    "title": "Director of Strategic Sourcing, Transportation & Distribution",
+    "company": "Smithfield"
+   }
+  },
+  {
+   "name": "Smurfit Westrock Conway Folding Carton Plant",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 2,
+   "sample": {
+    "name": "Jeremy Keenan",
+    "full_name": "Jeremy Keenan",
+    "email": "jeremy.keenan@smurfitwestrock.com",
+    "title": "Vice President Marketing",
+    "company": "Smurfit Westrock"
+   }
+  },
+  {
+   "name": "Smurfit Westrock Denver Container Plant",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 2,
+   "sample": {
+    "name": "Jeremy Keenan",
+    "full_name": "Jeremy Keenan",
+    "email": "jeremy.keenan@smurfitwestrock.com",
+    "title": "Vice President Marketing",
+    "company": "Smurfit Westrock"
+   }
+  },
+  {
+   "name": "Smurfit Westrock Hazleton Fold-Pak Plant",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 2,
+   "sample": {
+    "name": "Jeremy Keenan",
+    "full_name": "Jeremy Keenan",
+    "email": "jeremy.keenan@smurfitwestrock.com",
+    "title": "Vice President Marketing",
+    "company": "Smurfit Westrock"
+   }
+  },
+  {
+   "name": "Smurfit Westrock Houston Sheet Plant",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 2,
+   "sample": {
+    "name": "Nickie Parker",
+    "full_name": "Nickie Parker",
+    "email": "nickie.parker@smurfitwestrock.com",
+    "title": "SVP Commercial - Sales, Marketing & Commercial Excellence",
+    "company": "Smurfit Westrock"
+   }
+  },
+  {
+   "name": "Smurfit Westrock Longview",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 3,
+   "sample": {
+    "name": "Jeremy Keenan",
+    "full_name": "Jeremy Keenan",
+    "email": "jeremy.keenan@smurfitwestrock.com",
+    "title": "Vice President Marketing",
+    "company": "Smurfit Westrock"
+   }
+  },
+  {
+   "name": "Sonoco Products Co",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Steve Glenn",
+    "full_name": "Steve Glenn",
+    "email": "steve.glenn@sonoco.com",
+    "title": "Vice President, Operations - Paper Products, Fiber Supply, Adhesives - North America",
+    "company": "Sonoco"
+   }
+  },
+  {
+   "name": "Sonoco Products Co Gate 9",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Steve Glenn",
+    "full_name": "Steve Glenn",
+    "email": "steve.glenn@sonoco.com",
+    "title": "Vice President, Operations - Paper Products, Fiber Supply, Adhesives - North America",
+    "company": "Sonoco"
+   }
+  },
+  {
+   "name": "Sonoco Recycling",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "James Maciag",
+    "full_name": "James Maciag",
+    "email": "james.maciag@sonoco.com",
+    "title": "Vice President of Operations - Ippna - Sonoco - Recycling, Paper, & Converting",
+    "company": "Sonoco"
+   }
+  },
+  {
+   "name": "Sonoco Trailer Lot",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 9,
+   "sample": {
+    "name": "Mark Adams",
+    "full_name": "Mark Adams",
+    "email": "mark.adams@sonoco.com",
+    "title": "Supply Chain and S&OP Director - GPP NA",
+    "company": "Sonoco"
+   }
+  },
+  {
+   "name": "Sonoco Tubes & Cores",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Paul Waldmiller",
+    "full_name": "Paul Waldmiller",
+    "email": "paul.waldmiller@sonoco.com",
+    "title": "Sr. Director, Technical Services",
+    "company": "Sonoco"
+   }
+  },
+  {
+   "name": "Staples Fulfillment Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Kayla Hunter",
+    "full_name": "Kayla Hunter",
+    "email": "khunter@fulfillment.com",
+    "title": "Logistics Coordinator",
+    "company": null
+   }
+  },
+  {
+   "name": "Swift Transportation",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Swift Transportation",
+    "full_name": "Swift Transportation",
+    "email": "swift@swifttrans.com",
+    "title": "Logistics Manager",
+    "company": null
+   }
+  },
+  {
+   "name": "Swift Transportation - Ocala Terminal",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Swift Transportation",
+    "full_name": "Swift Transportation",
+    "email": "swift@swifttrans.com",
+    "title": "Logistics Manager",
+    "company": null
+   }
+  },
+  {
+   "name": "Swift Transportation drop yard",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Swift Transportation",
+    "full_name": "Swift Transportation",
+    "email": "swift@swifttrans.com",
+    "title": "Logistics Manager",
+    "company": null
+   }
+  },
+  {
+   "name": "Swift Transportation Terminal II",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Swift Transportation",
+    "full_name": "Swift Transportation",
+    "email": "swift@swifttrans.com",
+    "title": "Logistics Manager",
+    "company": null
+   }
+  },
+  {
+   "name": "Sysco Cold Storage",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Smith",
+    "full_name": "Smith",
+    "email": "smith@sysco.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Sysco warehouse",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Warehouse",
+    "full_name": "Warehouse",
+    "email": "warehouse@allglobus.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "SYSCO-ALACHUA FL",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Alls",
+    "full_name": "Alls",
+    "email": "alls@sysco.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "TJ Maxx Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Bryan Corbett",
+    "full_name": "Bryan Corbett",
+    "email": "bcorbett@barrettdistribution.com",
+    "title": "Vice President, Sales & Marketing",
+    "company": "Barrett Distribution Center - Franklin, MA"
+   }
+  },
+  {
+   "name": "Tractor Supply Co Distribution",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Colin Yankee",
+    "full_name": "Colin Yankee",
+    "email": "cyankee@tractorsupply.com",
+    "title": "Executive Vice President, Chief Supply Chain Officer",
+    "company": "Tractor Supply Co."
+   }
+  },
+  {
+   "name": "Tractor Supply Company Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Brannon Mcgrotha",
+    "full_name": "Brannon Mcgrotha",
+    "email": "bmcgrotha@tractorsupply.com",
+    "title": "Director, Final Mile & Delivery Experience",
+    "company": "Tractor Supply Company"
+   }
+  },
+  {
+   "name": "Trane Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Bryan Corbett",
+    "full_name": "Bryan Corbett",
+    "email": "bcorbett@barrettdistribution.com",
+    "title": "Vice President, Sales & Marketing",
+    "company": "Barrett Distribution Center - Franklin, MA"
+   }
+  },
+  {
+   "name": "Tyson Foods - Barber Foods",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 6,
+   "sample": {
+    "name": "Tim Barber",
+    "full_name": "Tim Barber",
+    "email": "tim.barber@expeditors.com",
+    "title": "Vice President of Strategic Business Development",
+    "company": null
+   }
+  },
+  {
+   "name": "Tyson Foods Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Richard Tyson",
+    "full_name": "Richard Tyson",
+    "email": "rtyson@allendistribution.com",
+    "title": "Director of Operations",
+    "company": null
+   }
+  },
+  {
+   "name": "Tyson Foods, Russellville Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 1,
+   "sample": {
+    "name": "Richard Tyson",
+    "full_name": "Richard Tyson",
+    "email": "rtyson@allendistribution.com",
+    "title": "Director of Operations",
+    "company": null
+   }
+  },
+  {
+   "name": "Uline Shipping Supplies - X1",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Shippingsupplies3",
+    "full_name": "Shippingsupplies3",
+    "email": "shippingsupplies3@gmail.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "United States Postal Service",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 4,
+   "sample": {
+    "name": "Jay Smith",
+    "full_name": "Jay Smith",
+    "email": null,
+    "title": "Director New Business Acquisition",
+    "company": "United States Postal Service"
+   }
+  },
+  {
+   "name": "US Foods - Allentown Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Chinda Park",
+    "full_name": "Chinda Park",
+    "email": "cpark@allendistribution.com",
+    "title": "Human Resources Manager",
+    "company": null
+   }
+  },
+  {
+   "name": "Wakefern Food Truck Gate",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Stefanie Wynne",
+    "full_name": "Stefanie Wynne",
+    "email": "stefanie.wynne@wakefern.com",
+    "title": "Director, Technology - Logistics, Data Governance & Supply Chain Innovation",
+    "company": "Wakefern Food"
+   }
+  },
+  {
+   "name": "Wakefern Foods",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Louis Centrella",
+    "full_name": "Louis Centrella",
+    "email": "louis.centrella@wakefern.com",
+    "title": "Operations Supervisor",
+    "company": null
+   }
+  },
+  {
+   "name": "Walgreens Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Sarah Custer",
+    "full_name": "Sarah Custer",
+    "email": "sarah.custer@distributionmgmt.com",
+    "title": "Vice President of Sales Operations",
+    "company": null
+   }
+  },
+  {
+   "name": "Walgreens Micro Fulfillment Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Kayla Hunter",
+    "full_name": "Kayla Hunter",
+    "email": "khunter@fulfillment.com",
+    "title": "Logistics Coordinator",
+    "company": null
+   }
+  },
+  {
+   "name": "Werner Enterprises",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Mike Werner",
+    "full_name": "Mike Werner",
+    "email": "werner@werner.com",
+    "title": "President",
+    "company": "Werner Enterprises"
+   }
+  },
+  {
+   "name": "WestRock - Corrugated Container",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 2,
+   "sample": {
+    "name": "Billy Symon",
+    "full_name": "Billy Symon",
+    "email": "billy.symon@westrock.com",
+    "title": "Director Technical and Environmental Services",
+    "company": "WestRock Company"
+   }
+  },
+  {
+   "name": "Whirlpool Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Monte White",
+    "full_name": "Monte White",
+    "email": "monte.white@distributionmgmt.com",
+    "title": "President of Wholesale Division",
+    "company": null
+   }
+  },
+  {
+   "name": "Williams-Sonoma Distribution Center",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 9,
+   "sample": {
+    "name": "Elaine Williamson",
+    "full_name": "Elaine Williamson",
+    "email": "elaine.williamson@menziesdistribution.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "XPO Global Logistics (XGL)",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Tracy L Reddick",
+    "full_name": "Tracy L Reddick",
+    "email": "tracy@a1global-logistics.com",
+    "title": "Mgr",
+    "company": "A-1 Global Logistics"
+   }
+  },
+  {
+   "name": "Xpo Logistics",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Logistics",
+    "full_name": "Logistics",
+    "email": "logistics@ntlqp.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "XPO Logistics Columbia",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Leonore Avila",
+    "full_name": "Leonore Avila",
+    "email": "leonore@columbialogistics.com",
+    "title": "Branch Manager",
+    "company": null
+   }
+  },
+  {
+   "name": "Yusen Logistics IND4 Warehouse",
+   "domain": "",
+   "hubspot_contacts": "0",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Gene Stec",
+    "full_name": "Gene Stec",
+    "email": "gene.stec@ca.yusen-logistics.com",
+    "title": "Director, IT, Contract Logistics & Facilities",
+    "company": "Yusen Logistics"
+   }
+  },
+  {
+   "name": "",
+   "domain": "external.danone.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Olivier Rabartin",
+    "full_name": "Olivier Rabartin",
+    "email": "olivier.rabartin@danone.com",
+    "title": "Global Sourcing Manager",
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "intl.pepsico.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Mohamed Garana",
+    "full_name": "Mohamed Garana",
+    "email": "mohamed.garana@intl.pepsico.com",
+    "title": "vice president supply chain",
+    "company": "Pepsi"
+   }
+  },
+  {
+   "name": "",
+   "domain": "fmcmail.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Jerrie Olinger",
+    "full_name": "Jerrie Olinger",
+    "email": "olingerj@vmcmail.com",
+    "title": "POA/CSCO",
+    "company": "Vulcan Materials Company"
+   }
+  },
+  {
+   "name": "",
+   "domain": "fluids.ittind.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Tesr",
+    "full_name": "Tesr",
+    "email": "tesr@fluidtherm.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "demoulasmarketbasket.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 6,
+   "sample": {
+    "name": "Caitlin Osman",
+    "full_name": "Caitlin Osman",
+    "email": "caitlin.osman@misfitsmarket.com",
+    "title": "Logistics Coordinator",
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "emea.donaldson.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Izzet Moreno",
+    "full_name": "Izzet Moreno",
+    "email": "izzet.moreno@donaldson.com",
+    "title": "Director of Global Procurement",
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "kellogg.com.cn",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Stephanie Thys",
+    "full_name": "Stephanie Thys",
+    "email": "stephanie.thys@kellogg.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "sttxna.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Hans Raport",
+    "full_name": "Hans Raport",
+    "email": "hans.raport@stef.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "adusaprocurement.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Andrea Vidodezaccaria",
+    "full_name": "Andrea Vidodezaccaria",
+    "email": "andrea_vidodezaccaria@kelmerprocurement.com",
+    "title": "Vice President",
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "gc.logistec.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Colin Lowe",
+    "full_name": "Colin Lowe",
+    "email": "colin.lowe@logistex.com",
+    "title": "General Manager",
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "theandersons.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Jeremie Kneip",
+    "full_name": "Jeremie Kneip",
+    "email": "jeremie_kneip@andersonsinc.com",
+    "title": "Director of Operations",
+    "company": "The Andersons"
+   }
+  },
+  {
+   "name": "",
+   "domain": "motion-ind.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Michele Morris",
+    "full_name": "Michele Morris",
+    "email": "michele.morris@motion.com",
+    "title": "Director of Operations Support & Help Desk",
+    "company": "Motion"
+   }
+  },
+  {
+   "name": "",
+   "domain": "tiem.toyota-industries.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Exel Industries",
+    "full_name": "Exel Industries",
+    "email": "direction.communication@exel-industries.com",
+    "title": null,
+    "company": "EXEL Industries Group"
+   }
+  },
+  {
+   "name": "",
+   "domain": "gbpcoated.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Michael Schofer",
+    "full_name": "Michael Schofer",
+    "email": "michael.schofer@coats.com",
+    "title": "VP Supply Chain & CIO",
+    "company": "Coats North America"
+   }
+  },
+  {
+   "name": "",
+   "domain": "johnstonenw.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Dan Mcinerney",
+    "full_name": "Dan Mcinerney",
+    "email": "dan.mcinerney@johnstonesupply.com",
+    "title": "Chief Supply Chain Officer",
+    "company": "Johnstone Supply"
+   }
+  },
+  {
+   "name": "",
+   "domain": "wescoinc.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Todd M",
+    "full_name": "Todd M",
+    "email": "todd.m@wesco.com",
+    "title": "Director Technical Sales, Grid Services",
+    "company": "Wesco"
+   }
+  },
+  {
+   "name": "",
+   "domain": "ups.co.il",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Carol Brolley",
+    "full_name": "Carol Brolley",
+    "email": "carol@ups.com",
+    "title": "Analyst",
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "van.sysco.ca",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Justin Vautour",
+    "full_name": "Justin Vautour",
+    "email": "justin.vautour@sysco.ca",
+    "title": "Director of Operations",
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "ewingos.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Arunesh Ghosh",
+    "full_name": "Arunesh Ghosh",
+    "email": "aghosh@ewie.com",
+    "title": "Commodity Manager",
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "jpgould.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Paul Gould",
+    "full_name": "Paul Gould",
+    "email": "gould.p@pg.com",
+    "title": "Strategic Innovation & Technology + Newcastle Innovation Center Deputy Site Leader, Senior Director",
+    "company": "Procter & Gamble"
+   }
+  },
+  {
+   "name": "",
+   "domain": "penskecorp.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Ken Hipkins",
+    "full_name": "Ken Hipkins",
+    "email": "ken.hipkins@penske.com",
+    "title": "Director of Global Sourcing",
+    "company": "2732887.648"
+   }
+  },
+  {
+   "name": "",
+   "domain": "almo-corp.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Paul Smith",
+    "full_name": "Paul Smith",
+    "email": "psmith@alogcorp.com",
+    "title": "President",
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "tti-fc.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Brett Meeske",
+    "full_name": "Brett Meeske",
+    "email": "brett.meeske@tti.com",
+    "title": "Supply Chain Manager",
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "eur.crowncork.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Chris Blore",
+    "full_name": "Chris Blore",
+    "email": "cblore@crown.com",
+    "title": "Director of Operations",
+    "company": "2585736.966"
+   }
+  },
+  {
+   "name": "",
+   "domain": "bmwna.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Denise Melville",
+    "full_name": "Denise Melville",
+    "email": "denise.melville@bmwna.com",
+    "title": "Head of Sustainability BMW of North America",
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "ssg.petsmart.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Jbedaw",
+    "full_name": "Jbedaw",
+    "email": "jbedaw@ssg.petsmart.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "us.imptob.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Tknowles",
+    "full_name": "Tknowles",
+    "email": "tknowles@us.ibm.com",
+    "title": null,
+    "company": "3325182.329"
+   }
+  },
+  {
+   "name": "",
+   "domain": "fr.estee.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Laurel Schwartz",
+    "full_name": "Laurel Schwartz",
+    "email": "laurel.schwartz@estee.com",
+    "title": "Director, Global Brand Supply Chain - Smashbox and GlamGlow",
+    "company": "The Est\u00e9e Lauder Companies"
+   }
+  },
+  {
+   "name": "",
+   "domain": "il.estee.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Elizabeth Green",
+    "full_name": "Elizabeth Green",
+    "email": "egreen@estee.com",
+    "title": "Director, Global Brand Supply Chain/Value Chain Optimization",
+    "company": "The Est\u00e9e Lauder Companies"
+   }
+  },
+  {
+   "name": "",
+   "domain": "chart-ind.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Mohammad Tariq",
+    "full_name": "Mohammad Tariq",
+    "email": "mtariq@am-ind.com",
+    "title": "Industrial Sales Manager",
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "chn.dupont.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Alice Hilson",
+    "full_name": "Alice Hilson",
+    "email": "alice.hilson@dupont.com",
+    "title": "Senior Director, Digital Innovation and Enterprise Technology",
+    "company": "DuPont"
+   }
+  },
+  {
+   "name": "",
+   "domain": "compassminerals.co.uk",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Javier Rio",
+    "full_name": "Javier Rio",
+    "email": "javier.delrio@hudbayminerals.com",
+    "title": "Senior Vice President",
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "conti-na.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Matt Gordon",
+    "full_name": "Matt Gordon",
+    "email": "matt.gordon@na.crh.com",
+    "title": "VP, Logistics",
+    "company": "CRH"
+   }
+  },
+  {
+   "name": "",
+   "domain": "semgroup.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Erik Olson",
+    "full_name": "Erik Olson",
+    "email": "eolson@cimgroup.com",
+    "title": "Vice President of Digital Marketing",
+    "company": "3120278.96"
+   }
+  },
+  {
+   "name": "",
+   "domain": "arcelik.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Agallagher",
+    "full_name": "Agallagher",
+    "email": "agallagher@arcese.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "bunzlretailusa.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Printice Kincade",
+    "full_name": "Printice Kincade",
+    "email": "printice.kincade@bunzlusa.com",
+    "title": "Director of Information Technology",
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "dollartreestores.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "T. Rowe",
+    "full_name": "T. Rowe",
+    "email": "roweng@dollartree.com",
+    "title": "EVP, Chief Supply Chain Officer",
+    "company": "Dollar Tree Stores"
+   }
+  },
+  {
+   "name": "",
+   "domain": "be.estee.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Sanja Stojakovic",
+    "full_name": "Sanja Stojakovic",
+    "email": "sstojako@estee.com",
+    "title": "Director, Product Management - R&D & Innovation Technology",
+    "company": "The Est\u00e9e Lauder Companies"
+   }
+  },
+  {
+   "name": "",
+   "domain": "eu.spectrumbrands.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Jorge",
+    "full_name": "Jorge",
+    "email": "jorge@spectrumcargo.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "plastipak.com.br",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Brian Swain",
+    "full_name": "Brian Swain",
+    "email": "machine@plastiwin.com",
+    "title": null,
+    "company": "Plastiwin"
+   }
+  },
+  {
+   "name": "",
+   "domain": "nidec-mk.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Juli\u00e1n Santacroce",
+    "full_name": "Juli\u00e1n Santacroce",
+    "email": "julian.santacroce@nidec.com",
+    "title": "Customer Care Manager",
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "qfci.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Stoffrld",
+    "full_name": "Stoffrld",
+    "email": "stoffrld@q.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "bmwnaext.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Denise Melville",
+    "full_name": "Denise Melville",
+    "email": "denise.melville@bmwna.com",
+    "title": "Head of Sustainability BMW of North America",
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "genieind.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Kelly Ector",
+    "full_name": "Kelly Ector",
+    "email": "kelly@genieintl.com",
+    "title": "Ops Mgr",
+    "company": "Genie Int Logistics"
+   }
+  },
+  {
+   "name": "",
+   "domain": "ftpc.fpcusa.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Valentina Romei",
+    "full_name": "Valentina Romei",
+    "email": "valentina.romei@ft.com",
+    "title": "Economics Reporter",
+    "company": "Financial Times"
+   }
+  },
+  {
+   "name": "",
+   "domain": "canforpulp.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Mats Standberg",
+    "full_name": "Mats Standberg",
+    "email": "mats.standberg@canforpulp.com",
+    "title": "President",
+    "company": "Canfor"
+   }
+  },
+  {
+   "name": "",
+   "domain": "ae.estee.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Henry Sianada",
+    "full_name": "Henry Sianada",
+    "email": "hsianada@estee.com",
+    "title": "Regional Director, Technology (Australia & New Zealand)",
+    "company": "The Est\u00e9e Lauder Companies"
+   }
+  },
+  {
+   "name": "",
+   "domain": "premiumbrandsgroup.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Kwong Yee",
+    "full_name": "Kwong Yee",
+    "email": "kwong.yee@premiumbrandsgroup.com",
+    "title": "Senior Director, Operations and Administration",
+    "company": "Premium Brands Holdings"
+   }
+  },
+  {
+   "name": "",
+   "domain": "goodyearcorp.onmicrosoft.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": null,
+    "full_name": null,
+    "email": "postmaster@goodyearcorp.onmicrosoft.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "campofriofg.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Marta Rufino",
+    "full_name": "Marta Rufino",
+    "email": "marta.rufino@campofriofg.com",
+    "title": "Global Innovation Director",
+    "company": "Sigma"
+   }
+  },
+  {
+   "name": "",
+   "domain": "ap.hasbro.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Nikki Duplessis",
+    "full_name": "Nikki Duplessis",
+    "email": "nikki.duplessis@ap.hasbro.com",
+    "title": "Sr. Director Global Supply Chain Sustainability",
+    "company": "Hasbro"
+   }
+  },
+  {
+   "name": "",
+   "domain": "resmed.com.sg",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Abhinaya Agrawal",
+    "full_name": "Abhinaya Agrawal",
+    "email": "abhinaya.agrawal@resmed.com.sg",
+    "title": "Director Integrated Supply Chain Planning APAC",
+    "company": "Resmed"
+   }
+  },
+  {
+   "name": "",
+   "domain": "jp.estee.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Lars Schandorff",
+    "full_name": "Lars Schandorff",
+    "email": "lschando@jp.estee.com",
+    "title": "Senior Director, HRBP, APAC Supply Chain",
+    "company": "The Est\u00e9e Lauder Companies"
+   }
+  },
+  {
+   "name": "",
+   "domain": "navistarinc.onmicrosoft.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Leanteammanagers",
+    "full_name": "Leanteammanagers",
+    "email": "leanteammanagers@navistarinc.onmicrosoft.com",
+    "title": null,
+    "company": "Navistar"
+   }
+  },
+  {
+   "name": "",
+   "domain": "awards.cma-cgm.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Ho Icarbunaru",
+    "full_name": "Ho Icarbunaru",
+    "email": "ho.icarbunaru@cma-cgm.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "ABB",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Layton Holder",
+    "full_name": "Layton Holder",
+    "email": "laytonadamholder@gmail.com",
+    "title": "General Manager Operations",
+    "company": "ABB E-mobility"
+   }
+  },
+  {
+   "name": "Adidas",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 3,
+   "sample": {
+    "name": "Adi",
+    "full_name": "Adi",
+    "email": "adi@wix.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Agrium",
+   "domain": "agrium.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Oliver Clark",
+    "full_name": "Oliver Clark",
+    "email": "oliver.clark@cirium.com",
+    "title": "Premium Content Editor",
+    "company": "Cirium"
+   }
+  },
+  {
+   "name": "AGRO Merchants",
+   "domain": "argomerchants.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Mike Fillingim",
+    "full_name": "Mike Fillingim",
+    "email": "mike@merchantsppr.com",
+    "title": "Operations Planner",
+    "company": null
+   }
+  },
+  {
+   "name": "Ahold Nederland",
+   "domain": "ahold.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Matthijs Glissenaar",
+    "full_name": "Matthijs Glissenaar",
+    "email": "matthijs.glissenaar@aholddelhaize.com",
+    "title": "Supply Chain Specialist",
+    "company": null
+   }
+  },
+  {
+   "name": "Aisin",
+   "domain": "aisindrive.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Mike Cervin",
+    "full_name": "Mike Cervin",
+    "email": "mike.cervin@cfidrive.com",
+    "title": "Vice President of Sales and Operations",
+    "company": "2781410.453"
+   }
+  },
+  {
+   "name": "Allen Distribution",
+   "domain": "allendistribution.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Jamie Pittman",
+    "full_name": "Jamie Pittman",
+    "email": "jpittman@allendistribution.com",
+    "title": "Vice President of Information Technology",
+    "company": null
+   }
+  },
+  {
+   "name": "Altria",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Greg Moody",
+    "full_name": "Greg Moody",
+    "email": "greg.moody@altria.com",
+    "title": "Sr. Director Operations Strategy",
+    "company": "Altria"
+   }
+  },
+  {
+   "name": "American Axle",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "American Ocean",
+    "full_name": "American Ocean",
+    "email": "asocean@nl.freightwaves.com",
+    "title": null,
+    "company": "FreightWaves"
+   }
+  },
+  {
+   "name": "AmerisourceBergen",
+   "domain": "amerisourcebergen.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Daniel F.",
+    "full_name": "Daniel F.",
+    "email": null,
+    "title": "Operations Lead ORD",
+    "company": "AmerisourceBergen"
+   }
+  },
+  {
+   "name": "Amphenol",
+   "domain": "fci.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Ninan Mathew",
+    "full_name": "Ninan Mathew",
+    "email": "ninan@fcipl.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Amphenol FCI",
+   "domain": "amphenol-fci.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Ninan Mathew",
+    "full_name": "Ninan Mathew",
+    "email": "ninan@fcipl.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Arc",
+   "domain": "arc-intl.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Morgan Hardel",
+    "full_name": "Morgan Hardel",
+    "email": "mhardel@sbs-intl.com",
+    "title": "Director of Client Services",
+    "company": "SBS"
+   }
+  },
+  {
+   "name": "Arvato Supply Chain Solutions",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Max Doyle",
+    "full_name": "Max Doyle",
+    "email": null,
+    "title": "General Partner",
+    "company": "Coupa"
+   }
+  },
+  {
+   "name": "Avantor",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Antor",
+    "full_name": "Antor",
+    "email": "antor@dfds.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Avient",
+   "domain": "polyone.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Nyariana Maiko",
+    "full_name": "Nyariana Maiko",
+    "email": "nyariana.maiko@polb.com",
+    "title": "Chief Information Officer",
+    "company": null
+   }
+  },
+  {
+   "name": "BakeMark",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Mark Baker",
+    "full_name": "Mark Baker",
+    "email": "mark.baker@geodis.com",
+    "title": "Director of Operations",
+    "company": "2759522.449"
+   }
+  },
+  {
+   "name": "Barilla",
+   "domain": "barilla.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Helio Canever Junior",
+    "full_name": "Helio Canever Junior",
+    "email": "helio.canever@barilla.com",
+    "title": "Logistics Coordinator",
+    "company": null
+   }
+  },
+  {
+   "name": "BASF Catalysts",
+   "domain": "basf-catalystsmetals.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Maksim Bessonov",
+    "full_name": "Maksim Bessonov",
+    "email": "maksim.bessonov@bmcatalysts.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "BHP",
+   "domain": "bhp.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Katherine Flanagan",
+    "full_name": "Katherine Flanagan",
+    "email": "kate.flanagan@bhp.com",
+    "title": "Director, Efficient Digital Supply Chain (EDSC)",
+    "company": "McDonald's"
+   }
+  },
+  {
+   "name": "BIEWER LUMBER",
+   "domain": "biewerlogisticsllc.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Sueli Rizzardi Baker",
+    "full_name": "Sueli Rizzardi Baker",
+    "email": "sbaker@aerlogisticsllc.com",
+    "title": "VP International Division",
+    "company": "AER LOGISTICS"
+   }
+  },
+  {
+   "name": "Blue Bunny",
+   "domain": "bluebunny.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Rajalakshmi",
+    "full_name": "Rajalakshmi",
+    "email": "rajalakshmi@blueberkhs.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Canada Post",
+   "domain": "postescanada.ca",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Ewa Dzienniak",
+    "full_name": "Ewa Dzienniak",
+    "email": "ewa.dzienniak@canadapost.postescanada.ca",
+    "title": "Director of Operations",
+    "company": "Canada Post / Postes Canada"
+   }
+  },
+  {
+   "name": "Cardinal Logistics",
+   "domain": "cardlog.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Roy Szymkowicz",
+    "full_name": "Roy Szymkowicz",
+    "email": "roys@cardlog.com",
+    "title": "CFO",
+    "company": "Cardinal Logistics (Ryder)"
+   }
+  },
+  {
+   "name": "Carlton Scale",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Wes Carlton",
+    "full_name": "Wes Carlton",
+    "email": "wcarlton@carlile.biz",
+    "title": "Operations Support Specialist",
+    "company": null
+   }
+  },
+  {
+   "name": "Catalent Pharma Solutions",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Amber Hilt-Brown",
+    "full_name": "Amber Hilt-Brown",
+    "email": "amber.hiltbrown@catalent.com",
+    "title": "Director, Transportation and Depot Services",
+    "company": "Catalent Pharma Solutions"
+   }
+  },
+  {
+   "name": "Cementos Moctezuma",
+   "domain": "cmoctezuma.com.mx",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Carlos Jimenez Lopez",
+    "full_name": "Carlos Jimenez Lopez",
+    "email": "c.lopez@afn.com.mx",
+    "title": "Director of Operations",
+    "company": "GRUPO SID"
+   }
+  },
+  {
+   "name": "Cencora",
+   "domain": "cencora.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Guillaume Carmes",
+    "full_name": "Guillaume Carmes",
+    "email": "guillaume.carmes@cencora.com",
+    "title": "Replenishment Operations, VP- Generic RX & Consumer Products",
+    "company": "Cencora"
+   }
+  },
+  {
+   "name": "Coca-Cola European Partners",
+   "domain": "ccep.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Jeremy Lovell",
+    "full_name": "Jeremy Lovell",
+    "email": "jlovell@ccep.com",
+    "title": "Associate Director - Order to Cash Business Process Management",
+    "company": "Coca-Cola European Partners"
+   }
+  },
+  {
+   "name": "Coca-Cola Southwest Beverages",
+   "domain": "cocacolaswb.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Arnie Padilla",
+    "full_name": "Arnie Padilla",
+    "email": "arnie.padilla@cocacolaswb.com",
+    "title": "Sales Manager",
+    "company": null
+   }
+  },
+  {
+   "name": "Colgate",
+   "domain": "colgate.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Gianluca Romano",
+    "full_name": "Gianluca Romano",
+    "email": "gianluca.romano@seagate.com",
+    "title": "CFO and Executive VP, Finance, Corporate Development, Supply Chain and Information Technology",
+    "company": "Seagate Technology"
+   }
+  },
+  {
+   "name": "Constellation Brands",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 9,
+   "sample": {
+    "name": "Ricky Roberts",
+    "full_name": "Ricky Roberts",
+    "email": "ricky.roberts@constellation.com",
+    "title": "Director of Operations",
+    "company": "Constellation"
+   }
+  },
+  {
+   "name": "Cox Automotive",
+   "domain": "coxautoinc.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Rafael Granato",
+    "full_name": "Rafael Granato",
+    "email": "rgranato@pinc.com",
+    "title": "Vice President of Marketing",
+    "company": "2505568.852"
+   }
+  },
+  {
+   "name": "Dayco",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 3,
+   "sample": {
+    "name": "Paula Alder",
+    "full_name": "Paula Alder",
+    "email": "paulaa@daycos.com",
+    "title": "Director of Sales",
+    "company": null
+   }
+  },
+  {
+   "name": "Diageo",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Serge Chahrouri",
+    "full_name": "Serge Chahrouri",
+    "email": "sergechahrouri@gmail.com",
+    "title": "Supply & Demand Planning Manager",
+    "company": "Diageo"
+   }
+  },
+  {
+   "name": "Dover",
+   "domain": "dover.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Gordon Thomson",
+    "full_name": "Gordon Thomson",
+    "email": "gthomson@dovercorp.com",
+    "title": "Global Director Operational Excellence",
+    "company": "Dover Corporation"
+   }
+  },
+  {
+   "name": "Dreyer's",
+   "domain": "dreyers.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "John Rodgers",
+    "full_name": "John Rodgers",
+    "email": "john.rodgers@drs.com",
+    "title": "Senior Director of Operations/ Site Lead",
+    "company": "Leonardo DRS"
+   }
+  },
+  {
+   "name": "DRiV",
+   "domain": "driv.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Jenny Silva",
+    "full_name": "Jenny Silva",
+    "email": "jenny.silva@driv.com",
+    "title": "Supply Chain Analyst",
+    "company": null
+   }
+  },
+  {
+   "name": "Eaton",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Rogerio Branco",
+    "full_name": "Rogerio Branco",
+    "email": "rogeriobranco@eaton.com",
+    "title": "Executive Vice President: Chief Supply Chain & Operations Officer",
+    "company": "Eaton Corporation"
+   }
+  },
+  {
+   "name": "Ebsco Industries",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Exel Industries",
+    "full_name": "Exel Industries",
+    "email": "direction.communication@exel-industries.com",
+    "title": null,
+    "company": "EXEL Industries Group"
+   }
+  },
+  {
+   "name": "Eli Lilly",
+   "domain": "lilly.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Marsily Marsily",
+    "full_name": "Marsily Marsily",
+    "email": "marsily_hugues@lilly.com",
+    "title": "Buyer Planner",
+    "company": null
+   }
+  },
+  {
+   "name": "Emerson Process Management",
+   "domain": "emersonprocess.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Charles Yett",
+    "full_name": "Charles Yett",
+    "email": "charles.yett@emersonprocess.com",
+    "title": "Director of Operations",
+    "company": null
+   }
+  },
+  {
+   "name": "ESAB",
+   "domain": "esab.ru",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Olga Paramonova",
+    "full_name": "Olga Paramonova",
+    "email": "oparamonova@esab.com",
+    "title": "Logistics and Purchasing Specialist",
+    "company": null
+   }
+  },
+  {
+   "name": "FANUC America Corporation",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Ben Delisle",
+    "full_name": "Ben Delisle",
+    "email": "benjamin.delisle@fanucamerica.com",
+    "title": "Director of Operations",
+    "company": "FANUC America"
+   }
+  },
+  {
+   "name": "Federal Express Corporation",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Tim Gallagher",
+    "full_name": "Tim Gallagher",
+    "email": "tgallagher@arescorporation.com",
+    "title": "Project Coordinator",
+    "company": null
+   }
+  },
+  {
+   "name": "FinishMaster",
+   "domain": "finishmaster.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Scott Davis",
+    "full_name": "Scott Davis",
+    "email": "sdavis@finishline.com",
+    "title": "Vice President Supply Chain",
+    "company": "JD Finish Line"
+   }
+  },
+  {
+   "name": "Forvia",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 4,
+   "sample": {
+    "name": "Brian Mapes",
+    "full_name": "Brian Mapes",
+    "email": "bmapes88@hotmail.com",
+    "title": "Americas Purchasing Logistics - Transport Senior Commodity Manager",
+    "company": "FORVIA"
+   }
+  },
+  {
+   "name": "Franz Bakery Outlet Store",
+   "domain": "usbakery.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Jordan Sypek",
+    "full_name": "Jordan Sypek",
+    "email": "jordan.sypek@usbank.com",
+    "title": "Assistant Vice President, Wealth Management Marketing",
+    "company": "U.S. Bank"
+   }
+  },
+  {
+   "name": "GE",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Amol Nagar",
+    "full_name": "Amol Nagar",
+    "email": "amol_nagar@ge.com",
+    "title": "Executive Director Global Manufacturing Operations & Supply Chain - GE Aerospace",
+    "company": "GE Aerospace"
+   }
+  },
+  {
+   "name": "General Cable",
+   "domain": "generalcable.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Colton Vollmer",
+    "full_name": "Colton Vollmer",
+    "email": "colton.vollmer@generac.com",
+    "title": "Sr. Director of Global Supply Chain",
+    "company": "Generac Power Systems"
+   }
+  },
+  {
+   "name": "Gkn Automative",
+   "domain": "gknautomative.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Oana Chira",
+    "full_name": "Oana Chira",
+    "email": null,
+    "title": "Regional Logistics Manager",
+    "company": "Gkn Automotive"
+   }
+  },
+  {
+   "name": "Goodyear",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Kathryn Rillero",
+    "full_name": "Kathryn Rillero",
+    "email": "kathryn_rillero@goodyear.com",
+    "title": "Customer Supply Chain Manager II at The Goodyear Tire & Rubber Company",
+    "company": "Goodyear"
+   }
+  },
+  {
+   "name": "Great Dane",
+   "domain": "greatdane.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "axel gros",
+    "full_name": "axel gros",
+    "email": "agros@greatdane.com",
+    "title": "vice president supply chain operations",
+    "company": "Great Dane"
+   }
+  },
+  {
+   "name": "Grupo Phoenix",
+   "domain": "grupophoenix.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Mauro Fernandez",
+    "full_name": "Mauro Fernandez",
+    "email": "mauro.fernandez@grupotsk.com",
+    "title": "Cloud Engineer",
+    "company": null
+   }
+  },
+  {
+   "name": "Guardian Industries",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Exel Industries",
+    "full_name": "Exel Industries",
+    "email": "direction.communication@exel-industries.com",
+    "title": null,
+    "company": "EXEL Industries Group"
+   }
+  },
+  {
+   "name": "Hanes",
+   "domain": "hanes.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Hector Boesch",
+    "full_name": "Hector Boesch",
+    "email": "hector.venegas@hanes.com",
+    "title": "Director Engineering & Innovation",
+    "company": "Gildan"
+   }
+  },
+  {
+   "name": "Hanon Systems",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Brian Crowle",
+    "full_name": "Brian Crowle",
+    "email": "brian.crowle@sdi.systems",
+    "title": "Account Executive",
+    "company": "2963107.263"
+   }
+  },
+  {
+   "name": "Harvest Sherwood Food Distributors",
+   "domain": "harvestsherwood.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Kim Harwood",
+    "full_name": "Kim Harwood",
+    "email": "kim.harwood@kbr.com",
+    "title": "Senior Marketing Manager",
+    "company": "2428037.848"
+   }
+  },
+  {
+   "name": "Henkel",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Brian Grentz",
+    "full_name": "Brian Grentz",
+    "email": "brian.grentz@henkel.com",
+    "title": "Associate Supply Chain Manager",
+    "company": "Henkel"
+   }
+  },
+  {
+   "name": "Hitachi",
+   "domain": "hitachi.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Misaki Mito",
+    "full_name": "Misaki Mito",
+    "email": "misaki.mito@hal.hitachi.com",
+    "title": "Researcher",
+    "company": "Hitachi America, Ltd."
+   }
+  },
+  {
+   "name": "HollyFrontier",
+   "domain": "hollyfrontier.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Kevin Hudson",
+    "full_name": "Kevin Hudson",
+    "email": "khudson@flyfrontier.com",
+    "title": "Director, Operations Research & Performance",
+    "company": "Frontier Airlines"
+   }
+  },
+  {
+   "name": "Hunt Energy",
+   "domain": "huntenergy.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Gary Karnofel",
+    "full_name": "Gary Karnofel",
+    "email": "gkarnofel@hunter.com",
+    "title": "Global Logistics and Trade Compliance Specialist",
+    "company": null
+   }
+  },
+  {
+   "name": "Hyvee",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 4,
+   "sample": {
+    "name": "Jason Farver",
+    "full_name": "Jason Farver",
+    "email": "jfarver@hy-vee.com",
+    "title": "Executive Vice President, Chief Supply Chain Officer",
+    "company": "Hy-Vee"
+   }
+  },
+  {
+   "name": "Ienova",
+   "domain": "ienova.com.mx",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Antonio Hines",
+    "full_name": "Antonio Hines",
+    "email": "hinesa@ilsmd.com",
+    "title": "Owner",
+    "company": "Integrated Logistics"
+   }
+  },
+  {
+   "name": "Indel",
+   "domain": "indelinc.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Jessica Dias",
+    "full_name": "Jessica Dias",
+    "email": "diasj@indeed.com",
+    "title": "Senior Manager, Recruiting Operations",
+    "company": null
+   }
+  },
+  {
+   "name": "Indorama Ventures",
+   "domain": "indoramaventures.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Brad Stone",
+    "full_name": "Brad Stone",
+    "email": null,
+    "title": "Production Planning, Pipeline & Logistics Lead",
+    "company": "Indorama Ventures"
+   }
+  },
+  {
+   "name": "Infineon Technologies",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Dell Technologies",
+    "full_name": "Dell Technologies",
+    "email": "dell_technologies@comms.dell.com",
+    "title": null,
+    "company": "Dell"
+   }
+  },
+  {
+   "name": "Ingram Micro Services",
+   "domain": "ingrammicroservices.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Lydia Bouaricha",
+    "full_name": "Lydia Bouaricha",
+    "email": "lydia.bouaricha@ingrammicroservices.com",
+    "title": "Vice President, Customer Experience",
+    "company": "Stord"
+   }
+  },
+  {
+   "name": "Intersnack",
+   "domain": "intersnackgroup.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "F Duvilla",
+    "full_name": "F Duvilla",
+    "email": "f.duvilla@intersnackgroup.com",
+    "title": "Chief Commercial Officer (CCO)",
+    "company": "Intersnack Group"
+   }
+  },
+  {
+   "name": "ITW Global Brands",
+   "domain": "itwgb.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Jennifer Cook",
+    "full_name": "Jennifer Cook",
+    "email": "jennifer.cook@itwgb.com",
+    "title": "Segment Innovation Director",
+    "company": "ITW"
+   }
+  },
+  {
+   "name": "JAS Forwarding Worldwide",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 2,
+   "sample": {
+    "name": "Ed Arnott",
+    "full_name": "Ed Arnott",
+    "email": "ed@ace-forwarding.com",
+    "title": "Business and Commercial Director",
+    "company": "3224181.054"
+   }
+  },
+  {
+   "name": "Johns Manville",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Joshua Clark",
+    "full_name": "Joshua Clark",
+    "email": "jclark@johnsonville.com",
+    "title": "Director of Operational Process Standardization",
+    "company": "Johnsonville"
+   }
+  },
+  {
+   "name": "Johns Manville",
+   "domain": "jm.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Jason Brown",
+    "full_name": "Jason Brown",
+    "email": "jason.brown@jm.com",
+    "title": "Supply and Demand Planning Manager",
+    "company": "Johns Manville"
+   }
+  },
+  {
+   "name": "KAG Logistics",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Mike Forbes",
+    "full_name": "Mike Forbes",
+    "email": "mike.forbes@kaglogistics.com",
+    "title": "EVP Logistics",
+    "company": "KAG Logistics"
+   }
+  },
+  {
+   "name": "Kerry",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Kerry",
+    "full_name": "Kerry",
+    "email": "kerry@oakh.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "KION Group",
+   "domain": "kiongroup.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Nick Harris",
+    "full_name": "Nick Harris",
+    "email": "nicholas.harris@kiongroup.com",
+    "title": "Head of Marketing",
+    "company": "Linde Material Handling"
+   }
+  },
+  {
+   "name": "Koch",
+   "domain": "kochcompanies.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Rick Lueck",
+    "full_name": "Rick Lueck",
+    "email": "rick.lueck@kochcompanies.com",
+    "title": "Dir-Flatbed & Oversize",
+    "company": "Koch Logistics"
+   }
+  },
+  {
+   "name": "Komatsu Mining",
+   "domain": "mining.komatsu",
+   "hubspot_contacts": "1",
+   "clawd_hits": 3,
+   "sample": {
+    "name": "Poonam K",
+    "full_name": "Poonam K",
+    "email": "poonam.k@global.komatsu",
+    "title": "Asst. Manager",
+    "company": "Komatsu India Private Limited"
+   }
+  },
+  {
+   "name": "L Brands",
+   "domain": "lb.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Hussein Elsayyed Kassem",
+    "full_name": "Hussein Elsayyed Kassem",
+    "email": "hussein.kassem@lat.com.lb",
+    "title": "Cargo and Mail Manager",
+    "company": null
+   }
+  },
+  {
+   "name": "Lazerspot",
+   "domain": "lazerspot.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Christopher Purschke",
+    "full_name": "Christopher Purschke",
+    "email": "cpurschke@lazerspot.com",
+    "title": "Vice President of Operations",
+    "company": "2608416.103"
+   }
+  },
+  {
+   "name": "Lear",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Simha Sandeep Rao",
+    "full_name": "Simha Sandeep Rao",
+    "email": "srao@lear.com",
+    "title": "Division Supply Chain Leader (US/CA)",
+    "company": "Lear Corporation"
+   }
+  },
+  {
+   "name": "Lindt Chocolate",
+   "domain": "lindt.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Frank Glienke",
+    "full_name": "Frank Glienke",
+    "email": "fglienke@lindt.com",
+    "title": "Senior Logistics Manager",
+    "company": null
+   }
+  },
+  {
+   "name": "Looking for a New Challenge",
+   "domain": "weirminerals.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Javier Rio",
+    "full_name": "Javier Rio",
+    "email": "javier.delrio@hudbayminerals.com",
+    "title": "Senior Vice President",
+    "company": null
+   }
+  },
+  {
+   "name": "Luxottica Group S.p.A.",
+   "domain": "luxotticaretail.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Ashley Warthen",
+    "full_name": "Ashley Warthen",
+    "email": "awarthen@seretail.com",
+    "title": "Chief Supply Chain Officer",
+    "company": "SE Retail"
+   }
+  },
+  {
+   "name": "Mars",
+   "domain": "wrigley.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Patrick Kuang",
+    "full_name": "Patrick Kuang",
+    "email": "patrick.kuang@wrigley.com",
+    "title": "Innovation Director - R&D",
+    "company": "Mars"
+   }
+  },
+  {
+   "name": "McKesson",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Todd Kleinow",
+    "full_name": "Todd Kleinow",
+    "email": "todd.kleinow@mckesson.com",
+    "title": "VP, Strategic Distribution",
+    "company": "McKesson"
+   }
+  },
+  {
+   "name": "Mead Johnson Nutrition",
+   "domain": "mjn.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "David Hoefling",
+    "full_name": "David Hoefling",
+    "email": "david.hoefling@mjn.com",
+    "title": "Director Global Supply Chain Processes",
+    "company": "Mead Johnson Nutrition"
+   }
+  },
+  {
+   "name": "Meijer",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "C Meijer",
+    "full_name": "C Meijer",
+    "email": "c.meijer@bpiservices.eu",
+    "title": null,
+    "company": "BPI Services"
+   }
+  },
+  {
+   "name": "Mercedes-Benz",
+   "domain": "mbusa.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Christopher Carter",
+    "full_name": "Christopher Carter",
+    "email": "christopher.carter@mbusa.com",
+    "title": "Sales Operations Manager",
+    "company": null
+   }
+  },
+  {
+   "name": "Meritor",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Manuel Valdes",
+    "full_name": "Manuel Valdes",
+    "email": "manuel.valdes@meritor.com",
+    "title": "WW Sr. Dir Supply Chain Management",
+    "company": "Meritor"
+   }
+  },
+  {
+   "name": "Mets\u00e4 Group",
+   "domain": "metsagroup.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Steve Spensley",
+    "full_name": "Steve Spensley",
+    "email": "steve@ursagroup.com",
+    "title": "Owner",
+    "company": null
+   }
+  },
+  {
+   "name": "Mohawk Industries",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Exel Industries",
+    "full_name": "Exel Industries",
+    "email": "direction.communication@exel-industries.com",
+    "title": null,
+    "company": "EXEL Industries Group"
+   }
+  },
+  {
+   "name": "Molex",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Thom Meehan",
+    "full_name": "Thom Meehan",
+    "email": "thom.meehan@molex.com",
+    "title": "Director of Global Supply Chain - Aerospace and Defense",
+    "company": "Molex"
+   }
+  },
+  {
+   "name": "Pactiv Evergreen",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Christine DeHaven",
+    "full_name": "Christine DeHaven",
+    "email": "christine.dehaven@pactivevergreen.com",
+    "title": "Senior Director of Operations",
+    "company": "2596812.824"
+   }
+  },
+  {
+   "name": "Pilot Flying J",
+   "domain": "pilotflyingj.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Justine Cherwink",
+    "full_name": "Justine Cherwink",
+    "email": "justine.cherwink@pilotthomas.com",
+    "title": "Director Technical Service, Lubricants & Chemicals",
+    "company": "Pilot Thomas Logistics"
+   }
+  },
+  {
+   "name": "Quality Distribution",
+   "domain": "qualitydistribution.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Chris Silfies",
+    "full_name": "Chris Silfies",
+    "email": "csilfies@qualitydistribution.com",
+    "title": "Vice President of Operations",
+    "company": "2610789.501"
+   }
+  },
+  {
+   "name": "Repsol",
+   "domain": "repsol.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Marta Conde",
+    "full_name": "Marta Conde",
+    "email": "marta.conde@repsol.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Republic Services",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Kahana Sizemore, Cscp",
+    "full_name": "Kahana Sizemore, Cscp",
+    "email": "kahana.sizemore@shiprfx.com",
+    "title": "Dir-Enterprise Accounts",
+    "company": "RFX"
+   }
+  },
+  {
+   "name": "Rio Tinto",
+   "domain": "riotinto.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Adrian Sedgman",
+    "full_name": "Adrian Sedgman",
+    "email": "adrian.sedgman@riotinto.com",
+    "title": "Warehouse Supervisor",
+    "company": null
+   }
+  },
+  {
+   "name": "Road Runner",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 3,
+   "sample": {
+    "name": "Mark Johnson",
+    "full_name": "Mark Johnson",
+    "email": "mark@roadrunner1st.com",
+    "title": "Electronics Engineer",
+    "company": null
+   }
+  },
+  {
+   "name": "RockTenn",
+   "domain": "rocktenn.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Alisha Howell",
+    "full_name": "Alisha Howell",
+    "email": "alisha@rocknf.com",
+    "title": "CSR",
+    "company": "RocK'n F Freight"
+   }
+  },
+  {
+   "name": "Rolls-Royce",
+   "domain": "rolls-royce.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Steven Blake",
+    "full_name": "Steven Blake",
+    "email": "steven.blake2@rolls-royce.com",
+    "title": "Chief of Group Test Strategy & Supply Chain",
+    "company": "Rolls-Royce"
+   }
+  },
+  {
+   "name": "Royal Canin USA",
+   "domain": "royalcanin.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Jameel Hye",
+    "full_name": "Jameel Hye",
+    "email": "jameel.hye@royalcanin.com",
+    "title": "Director, Supply Chain Transformation Royal Canin (North America)",
+    "company": "Mars"
+   }
+  },
+  {
+   "name": "Samsung Electronics",
+   "domain": "samsung.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Manesh Ramshat",
+    "full_name": "Manesh Ramshat",
+    "email": "manesh.r@samsung.com",
+    "title": "Head of Logistics",
+    "company": null
+   }
+  },
+  {
+   "name": "SC Johnson",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Neil Williams",
+    "full_name": "Neil Williams",
+    "email": "neil.williams@scjohnson.com",
+    "title": "Director, Global Supply Chain at SC Johnson",
+    "company": "SC Johnson"
+   }
+  },
+  {
+   "name": "Shaw Industries",
+   "domain": "shawindustry.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Amy Tucker",
+    "full_name": "Amy Tucker",
+    "email": "amy.tucker@shawinc.com",
+    "title": "HR Compliance Coordinator",
+    "company": null
+   }
+  },
+  {
+   "name": "Silgan",
+   "domain": "silgan.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Mktg1 Khan",
+    "full_name": "Mktg1 Khan",
+    "email": "mktg1@silpl.com",
+    "title": "HEAD PROJECTS & FRANCHISE INDIA",
+    "company": "The Boeing Company"
+   }
+  },
+  {
+   "name": "Silgan PFC",
+   "domain": "silganpfc.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Mktg1 Khan",
+    "full_name": "Mktg1 Khan",
+    "email": "mktg1@silpl.com",
+    "title": "HEAD PROJECTS & FRANCHISE INDIA",
+    "company": "The Boeing Company"
+   }
+  },
+  {
+   "name": "Snapple",
+   "domain": "snapple.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "S S",
+    "full_name": "S S",
+    "email": "s.s@apple.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Sony",
+   "domain": "am.sony.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Orlando Papaleo",
+    "full_name": "Orlando Papaleo",
+    "email": "orlando.papaleo@sony.com",
+    "title": "Head of Fulfillment Operations",
+    "company": "Sony Group"
+   }
+  },
+  {
+   "name": "Sun Chemical",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Frank Larose",
+    "full_name": "Frank Larose",
+    "email": "frank.larose@sunchemical.com",
+    "title": "Site Director Sun Chemical Ludwigshafen (Operations & Supply Chain)",
+    "company": "Sun Chemical"
+   }
+  },
+  {
+   "name": "Superior Play",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 7,
+   "sample": {
+    "name": "Reid Rose",
+    "full_name": "Reid Rose",
+    "email": "reid.rose@superior-ind.com",
+    "title": "Vice President Supply Chain",
+    "company": "Superior Industries"
+   }
+  },
+  {
+   "name": "SWM",
+   "domain": "swmintl.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Teresa Skinner",
+    "full_name": "Teresa Skinner",
+    "email": "tskinner@sbs-intl.com",
+    "title": "Senior Import Coordinator",
+    "company": null
+   }
+  },
+  {
+   "name": "Syncreon.US",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Mateusz Nogaj",
+    "full_name": "Mateusz Nogaj",
+    "email": "mateusz.nogaj@syncreon.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Tessenderlo",
+   "domain": "tessenderlo.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Didier Coppieters",
+    "full_name": "Didier Coppieters",
+    "email": "didier.coppieters@tessenderlo.com",
+    "title": "Vice President",
+    "company": null
+   }
+  },
+  {
+   "name": "The Home Depot M\u00e9xico",
+   "domain": "homedepot.com.mx",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Madison Harper",
+    "full_name": "Madison Harper",
+    "email": "madison_harper@homedepot.com",
+    "title": "Transportation Manager",
+    "company": "The Home Depot"
+   }
+  },
+  {
+   "name": "thyssenkrupp Supply Chain Services",
+   "domain": "thyssenkrupp-supply-chain.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Christian Underberg",
+    "full_name": "Christian Underberg",
+    "email": "christian.underberg@thyssenkrupp-materials.com",
+    "title": "Head of Product Management",
+    "company": null
+   }
+  },
+  {
+   "name": "TOTO GLOBAL SITE",
+   "domain": "toto.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Nathan Chelette",
+    "full_name": "Nathan Chelette",
+    "email": "nchelette@toto.com",
+    "title": "Assistant Director Tech Services",
+    "company": "TOTO USA"
+   }
+  },
+  {
+   "name": "Toyota Motor Europe",
+   "domain": "toyota-europe.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Sorina Sakurada",
+    "full_name": "Sorina Sakurada",
+    "email": "sorina.sakurada@toyota-europe.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Tupperware Brands",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 2,
+   "sample": {
+    "name": "Todd Greener",
+    "full_name": "Todd Greener",
+    "email": "toddgreener@tupperware.com",
+    "title": "EVP & Chief Supply Chain Officer",
+    "company": "Foot Locker"
+   }
+  },
+  {
+   "name": "Unimin",
+   "domain": "unimin.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Tony Yu",
+    "full_name": "Tony Yu",
+    "email": "tony.yu@unilumin.com",
+    "title": "Chief Financial Officer",
+    "company": null
+   }
+  },
+  {
+   "name": "UNIS",
+   "domain": "unisco.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Caroline Woodland",
+    "full_name": "Caroline Woodland",
+    "email": "caroline.belfoi-woodland@unisys.com",
+    "title": "Senior Director Emerging Solutions",
+    "company": "2966799.216"
+   }
+  },
+  {
+   "name": "Universal Logistics Holdings",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Joe Pena",
+    "full_name": "Joe Pena",
+    "email": "jpena@universallogistics.com",
+    "title": "VP, Logistics Solutions Int",
+    "company": "Universal Logistics Holdings"
+   }
+  },
+  {
+   "name": "UPS Healthcare",
+   "domain": "bomigroup.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Renata Mihich",
+    "full_name": "Renata Mihich",
+    "email": "renata.mihich@bomigroup.com",
+    "title": "Vice President Operations Latin America",
+    "company": "UPS"
+   }
+  },
+  {
+   "name": "Utility Trailer Manufacturing Co.",
+   "domain": "utm.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Ryan Herndon",
+    "full_name": "Ryan Herndon",
+    "email": "rherndon@utxl.com",
+    "title": "Vice President of Operations",
+    "company": null
+   }
+  },
+  {
+   "name": "Valvoline",
+   "domain": "valvoline.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Bassem George",
+    "full_name": "Bassem George",
+    "email": "bassem.george@valvoline.com",
+    "title": "Supply Chain Director Middle East & Africa",
+    "company": "Valvoline Global Operations"
+   }
+  },
+  {
+   "name": "Vector Pipeline",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 1,
+   "sample": {
+    "name": "Kirstie",
+    "full_name": "Kirstie",
+    "email": "kirstie@pipeline-plus.co.uk",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Venture Logistics",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "David Brimer",
+    "full_name": "David Brimer",
+    "email": "dbrimer@venturelogistics.com",
+    "title": "Account Executive",
+    "company": "2627666.999"
+   }
+  },
+  {
+   "name": "Vertiv Co.",
+   "domain": "vertivco.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Alan Goerke",
+    "full_name": "Alan Goerke",
+    "email": "alan.goerke@vertivco.com",
+    "title": "Director, Technical Sales- Thermal",
+    "company": "Vertiv"
+   }
+  },
+  {
+   "name": "voestalpine",
+   "domain": "voestalpine.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Willy Heymans",
+    "full_name": "Willy Heymans",
+    "email": "willy.heymans@voestalpine.com",
+    "title": "Managing Director",
+    "company": null
+   }
+  },
+  {
+   "name": "Wabtec",
+   "domain": "",
+   "hubspot_contacts": "1",
+   "clawd_hits": 1,
+   "sample": {
+    "name": "Philip Reichert",
+    "full_name": "Philip Reichert",
+    "email": "philip.reichert@wabtec.com",
+    "title": "Senior Director, Digital Port Solutions",
+    "company": "Wabtec Corporation"
+   }
+  },
+  {
+   "name": "Walwil",
+   "domain": "walwil.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Alex Conjour",
+    "full_name": "Alex Conjour",
+    "email": "alex.conjour@walwil.com",
+    "title": null,
+    "company": "KLA"
+   }
+  },
+  {
+   "name": "Wincanton",
+   "domain": "wincanton.co.uk",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Corey Higham",
+    "full_name": "Corey Higham",
+    "email": "corey.higham@wincanton.co.uk",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "W\u00fcrth Industry North America",
+   "domain": "wurthindustry.com",
+   "hubspot_contacts": "1",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Steve Hasson",
+    "full_name": "Steve Hasson",
+    "email": "steven.hasson@wurthindustry.com",
+    "title": "Engineering Manager",
+    "company": "Wurth Industry USA"
+   }
+  },
+  {
+   "name": "",
+   "domain": "reg.sysco.ca",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Scott Bonin",
+    "full_name": "Scott Bonin",
+    "email": "scott-bonin@sysco.ca",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "ap.pall.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Masatake Fushijima",
+    "full_name": "Masatake Fushijima",
+    "email": "masatake_fushijima@ap.pall.com",
+    "title": "Technical Director, Crossflow Technology",
+    "company": "Pall"
+   }
+  },
+  {
+   "name": "",
+   "domain": "hmausa.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Mikael Langryd",
+    "full_name": "Mikael Langryd",
+    "email": "mikael.langryd@hm.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "lennoxind.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Bob Landi",
+    "full_name": "Bob Landi",
+    "email": "bob.landi@lennoxintl.com",
+    "title": "Director of Operation Excellence",
+    "company": "Lennox"
+   }
+  },
+  {
+   "name": "",
+   "domain": "mtl.sysco.ca",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Christian Hansen",
+    "full_name": "Christian Hansen",
+    "email": "christian-hansen@sysco.ca",
+    "title": "Supply Chain Analyst",
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "contractor.conocophillips.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Senthil Gnanasambandam",
+    "full_name": "Senthil Gnanasambandam",
+    "email": "senthil.gnanasambandam@conocophillips.com",
+    "title": "Director - Tech. Safety and Process Engg.",
+    "company": "ConocoPhillips"
+   }
+  },
+  {
+   "name": "",
+   "domain": "mfrm.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Andrea Stuhley",
+    "full_name": "Andrea Stuhley",
+    "email": "astuhley@mfals.com",
+    "title": "Executive Vice President",
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "tmhu.toyota-industries.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Exel Industries",
+    "full_name": "Exel Industries",
+    "email": "direction.communication@exel-industries.com",
+    "title": null,
+    "company": "EXEL Industries Group"
+   }
+  },
+  {
+   "name": "",
+   "domain": "femsa.com.mx",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Angel Vidal",
+    "full_name": "Angel Vidal",
+    "email": "angel.vidal@tamsa.com.mx",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "",
+   "domain": "it.toyota-industries.eu",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Exel Industries",
+    "full_name": "Exel Industries",
+    "email": "direction.communication@exel-industries.com",
+    "title": null,
+    "company": "EXEL Industries Group"
+   }
+  },
+  {
+   "name": "",
+   "domain": "steelwarehouse.net",
+   "hubspot_contacts": "2",
+   "clawd_hits": 7,
+   "sample": {
+    "name": "Rick Shank",
+    "full_name": "Rick Shank",
+    "email": "ricks@steelwarehouse.net",
+    "title": "Director of Operational Excellence",
+    "company": "Steel Warehouse"
+   }
+  },
+  {
+   "name": "",
+   "domain": "us.sumiriko.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Danielle Hanno",
+    "full_name": "Danielle Hanno",
+    "email": "danielle.hanno@sci-us.com",
+    "title": "Director - Supply Chain Management Center of Excellen",
+    "company": "Service Corporation International"
+   }
+  },
+  {
+   "name": "",
+   "domain": "pbhcorp.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "James Lee",
+    "full_name": "James Lee",
+    "email": "james.lee@pqcorp.com",
+    "title": "Global Silicas Supply Chain Director",
+    "company": "PQ"
+   }
+  },
+  {
+   "name": "",
+   "domain": "krugerproducts.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Vincent Roy",
+    "full_name": "Vincent Roy",
+    "email": "vincent.roy@krugerproducts.ca",
+    "title": "Corporate Director, Operational Technologies",
+    "company": "Kruger Products | Produits Kruger"
+   }
+  },
+  {
+   "name": "",
+   "domain": "fr.mccormick.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Frederic Bardonnet",
+    "full_name": "Frederic Bardonnet",
+    "email": "fbardonnet@fr.mccormick.com",
+    "title": "EMEA Supply Chain Consumer Program Director",
+    "company": "McCormick & Company"
+   }
+  },
+  {
+   "name": "",
+   "domain": "pa.estee.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Esteban Araya",
+    "full_name": "Esteban Araya",
+    "email": "esaraya@pa.estee.com",
+    "title": "Director Technical Infrastructure Services",
+    "company": "The Est\u00e9e Lauder Companies"
+   }
+  },
+  {
+   "name": "Agc",
+   "domain": "us.agc.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Brian Gosche",
+    "full_name": "Brian Gosche",
+    "email": "brian.gosche@us.agc.com",
+    "title": "Supply Chain Manager",
+    "company": "AGC Automotive Americas"
+   }
+  },
+  {
+   "name": "Anthropologie",
+   "domain": "anthropologie.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Leann Gorman",
+    "full_name": "Leann Gorman",
+    "email": "lgorman@anthropologie.com",
+    "title": "Studio Operations Director",
+    "company": "Anthropologie"
+   }
+  },
+  {
+   "name": "Aptiv",
+   "domain": "",
+   "hubspot_contacts": "2",
+   "clawd_hits": 5,
+   "sample": {
+    "name": "Petro Karpenko",
+    "full_name": "Petro Karpenko",
+    "email": "petro.karpenko@aptiv.com",
+    "title": "Import/Export Specialist",
+    "company": null
+   }
+  },
+  {
+   "name": "Ashland",
+   "domain": "",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Nikhil Gada",
+    "full_name": "Nikhil Gada",
+    "email": "nikhil.gada@ashland.com",
+    "title": "Replenishment Planning Specialist",
+    "company": "Ashland"
+   }
+  },
+  {
+   "name": "Barry-Wehmiller",
+   "domain": "psangelus.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Cynthia Blachly",
+    "full_name": "Cynthia Blachly",
+    "email": "cynthia.blachly@psangelus.com",
+    "title": "Director of North American Supply Chain",
+    "company": "Pneumatic Scale Angelus"
+   }
+  },
+  {
+   "name": "Bayer Crop Science",
+   "domain": "",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Marcia Travis",
+    "full_name": "Marcia Travis",
+    "email": "marcia.travis@bayer.com",
+    "title": "Global Supplier Quality Manager",
+    "company": "Bayer"
+   }
+  },
+  {
+   "name": "BMW Deutschland",
+   "domain": "bmw.de",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Diana Schaidnagel",
+    "full_name": "Diana Schaidnagel",
+    "email": "diana.schaidnagel@bmw.de",
+    "title": "Spokesperson Sustainability BMW Group",
+    "company": null
+   }
+  },
+  {
+   "name": "Boots",
+   "domain": "boots.co.uk",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Jon Bithrey",
+    "full_name": "Jon Bithrey",
+    "email": "jon.bithrey@bbc.co.uk",
+    "title": "Senior Journalist \u2013 Team Manager",
+    "company": null
+   }
+  },
+  {
+   "name": "Braskem Sa",
+   "domain": "braskem.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Rosiane Petrucci",
+    "full_name": "Rosiane Petrucci",
+    "email": "rosiane.petrucci@braskem.com",
+    "title": "Export Analyst",
+    "company": null
+   }
+  },
+  {
+   "name": "Bridgestone",
+   "domain": "",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Jacques Rikhotso",
+    "full_name": "Jacques Rikhotso",
+    "email": "jacques.rikhotso@bridgestone.co.za",
+    "title": "Managing Director",
+    "company": null
+   }
+  },
+  {
+   "name": "Burlington Stores,",
+   "domain": "burlingtonstores.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Sara Viscardi",
+    "full_name": "Sara Viscardi",
+    "email": "sara.viscardi@burlington.com",
+    "title": "Director of Procurement- Supply Chain- Corporate Services & Travel",
+    "company": "Burlington"
+   }
+  },
+  {
+   "name": "Calvin Klein",
+   "domain": "ck.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Peter Pace",
+    "full_name": "Peter Pace",
+    "email": "ppace@av-ck.com",
+    "title": "Vice President of Sales",
+    "company": null
+   }
+  },
+  {
+   "name": "Catalent Pharma Solutions",
+   "domain": "",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Amber Hilt-Brown",
+    "full_name": "Amber Hilt-Brown",
+    "email": "amber.hiltbrown@catalent.com",
+    "title": "Director, Transportation and Depot Services",
+    "company": "Catalent Pharma Solutions"
+   }
+  },
+  {
+   "name": "Clipper Group",
+   "domain": "clippergroup.co.uk",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Mre",
+    "full_name": "Mre",
+    "email": "mre@ugroup.co.uk",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Coca Cola",
+   "domain": "cocacola.co.il",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "K Rao",
+    "full_name": "K Rao",
+    "email": "nagrao@coca-cola.in",
+    "title": "Director Operations Finance - FBO Operations",
+    "company": "The Coca-Cola Company"
+   }
+  },
+  {
+   "name": "Covestro",
+   "domain": "",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Helen Shu",
+    "full_name": "Helen Shu",
+    "email": "helen.shu@covestro.com",
+    "title": "Logistics Manager",
+    "company": null
+   }
+  },
+  {
+   "name": "Covestro",
+   "domain": "covestro.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Helen Shu",
+    "full_name": "Helen Shu",
+    "email": "helen.shu@covestro.com",
+    "title": "Logistics Manager",
+    "company": null
+   }
+  },
+  {
+   "name": "Danone",
+   "domain": "",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Francis Westelinck",
+    "full_name": "Francis Westelinck",
+    "email": "francis.westelinck@danone.com",
+    "title": "General Counsel - Chief Compliance Officer Danone Benelux",
+    "company": "Danone"
+   }
+  },
+  {
+   "name": "Day & Ross",
+   "domain": "",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Ross Ross",
+    "full_name": "Ross Ross",
+    "email": "ross@sysco.com",
+    "title": "Chief Compliance Officer",
+    "company": null
+   }
+  },
+  {
+   "name": "Doosan",
+   "domain": "doosan.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Laura Owens",
+    "full_name": "Laura Owens",
+    "email": "laura.nessowens@doosan.com",
+    "title": "Vice President, Global Brand & Communication, North America Marketing",
+    "company": "Doosan Bobcat North America"
+   }
+  },
+  {
+   "name": "DSV Global Transport & Logistics",
+   "domain": "",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Cesar Oyarce",
+    "full_name": "Cesar Oyarce",
+    "email": "cesar.oyarce@dsv.com",
+    "title": "Vice President, Finance Europe West",
+    "company": "DSV - Global Transport and Logistics"
+   }
+  },
+  {
+   "name": "EJ Gallo",
+   "domain": "ejgallo.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Nitin Murali",
+    "full_name": "Nitin Murali",
+    "email": "nitin.murali@ejgallo.com",
+    "title": "VP, Supply Chain Excellence",
+    "company": "Gallo"
+   }
+  },
+  {
+   "name": "Flex-N-Gate",
+   "domain": "",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Bill Beistline",
+    "full_name": "Bill Beistline",
+    "email": null,
+    "title": "VP Procurement",
+    "company": "Flex-N-Gate"
+   }
+  },
+  {
+   "name": "gsicommerce",
+   "domain": "gsicommerce.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Ehenson",
+    "full_name": "Ehenson",
+    "email": "ehenson@pfscommerce.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Henkel",
+   "domain": "",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Keith Baker",
+    "full_name": "Keith Baker",
+    "email": "keith.baker@henkel.com",
+    "title": "Senior Supply Chain Manager",
+    "company": "Henkel"
+   }
+  },
+  {
+   "name": "Hershey",
+   "domain": "hershey.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "John Hnatishion",
+    "full_name": "John Hnatishion",
+    "email": "jhnatishion@hersheys.com",
+    "title": "Director Global Supply Chain Accounting",
+    "company": "The Hershey Company"
+   }
+  },
+  {
+   "name": "INDORAMA POLYPET INDONESIA",
+   "domain": "indorama.net",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Igor Ramoneda",
+    "full_name": "Igor Ramoneda",
+    "email": "igor.r@indorama.net",
+    "title": "Digital Product Lead - Supply Chain",
+    "company": "Indorama Ventures"
+   }
+  },
+  {
+   "name": "Kenco Logistic Services",
+   "domain": "",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Janice Jeffery",
+    "full_name": "Janice Jeffery",
+    "email": "jjeffery@logistikservicesllc.com",
+    "title": "Transportation Mgr",
+    "company": "Logistik Services"
+   }
+  },
+  {
+   "name": "Lactalis",
+   "domain": "parmalat.ca",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Marc Dubois",
+    "full_name": "Marc Dubois",
+    "email": "marc_dubois@parmalat.ca",
+    "title": "Plant Director & Technical Ingredients Specialist",
+    "company": "Lactalis Canada"
+   }
+  },
+  {
+   "name": "Maersk",
+   "domain": "",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Tiago Craveiro",
+    "full_name": "Tiago Craveiro",
+    "email": "tiago.craveiro@maersk.com",
+    "title": "EXIT HUUB to Maersk | Head Product/Platform (Demand Space) @ Global E-commerce at Maersk",
+    "company": "Maersk"
+   }
+  },
+  {
+   "name": "Matson Logistics",
+   "domain": "",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Dan Lackey",
+    "full_name": "Dan Lackey",
+    "email": "dlackey@matson.com",
+    "title": "Mgr, Warehouse & Int Logistics",
+    "company": "Matson Integrated Logistics"
+   }
+  },
+  {
+   "name": "McCormick & Company",
+   "domain": "mccormick.co.uk",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Monica Bastos",
+    "full_name": "Monica Bastos",
+    "email": "monica_bastos@mccormick.com",
+    "title": "Supply Chain Finance Director EMEA Flavour",
+    "company": "McCormick & Company"
+   }
+  },
+  {
+   "name": "Mexichem",
+   "domain": "mexichem.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Stephen Marquez",
+    "full_name": "Stephen Marquez",
+    "email": "stephen.marquez@cpchem.com",
+    "title": "Power & Coo/od Coordinator",
+    "company": "Chevron Phillips Chemical Company"
+   }
+  },
+  {
+   "name": "Mosaic",
+   "domain": "mosaic.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Rami Tamimi",
+    "full_name": "Rami Tamimi",
+    "email": "rami.tamimi@mosaicco.com",
+    "title": "Supply Chain Director - Global Process Owner",
+    "company": "The Mosaic Company"
+   }
+  },
+  {
+   "name": "National Motor Freight Traffic Association",
+   "domain": "nmfta.org",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Marli Hall",
+    "full_name": "Marli Hall",
+    "email": "marli.hall@nmfta.org",
+    "title": "Director of Public Relations",
+    "company": "National Motor Freight Traffic Association"
+   }
+  },
+  {
+   "name": "Navistar Inc",
+   "domain": "",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Bradley Wagner",
+    "full_name": "Bradley Wagner",
+    "email": "bradley.wagner@navistar.com",
+    "title": "Supply Chain Management",
+    "company": "Navistar, Inc"
+   }
+  },
+  {
+   "name": "NSK China",
+   "domain": "nsk.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Sangjune Han",
+    "full_name": "Sangjune Han",
+    "email": "sangjune.han@sk.com",
+    "title": "Director of Recycling Operations",
+    "company": "3319380.689"
+   }
+  },
+  {
+   "name": "O'Reilly Auto Parts",
+   "domain": "corporate.oreillyauto.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Dan Stewart",
+    "full_name": "Dan Stewart",
+    "email": "dstewart@oreillyauto.com",
+    "title": "Vice President Operations Division",
+    "company": "O\u2019Reilly Auto Parts"
+   }
+  },
+  {
+   "name": "Oxy Corporation",
+   "domain": "",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Scott Krebs",
+    "full_name": "Scott Krebs",
+    "email": "scott.krebs@orbiscorporation.com",
+    "title": "Senior Director of Marketing",
+    "company": "2522973.772"
+   }
+  },
+  {
+   "name": "PAM",
+   "domain": "pamt.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Daryl Chappell",
+    "full_name": "Daryl Chappell",
+    "email": "chapd@pamt.com",
+    "title": "Corporate Communications Mgr",
+    "company": "PAM Transport"
+   }
+  },
+  {
+   "name": "Penske",
+   "domain": "gopenske.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Raymond Richmond",
+    "full_name": "Raymond Richmond",
+    "email": "raymond.richmond@penske.com",
+    "title": "Maintenance Supervisor",
+    "company": "2815165.449"
+   }
+  },
+  {
+   "name": "Praxair,",
+   "domain": "praxair.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Mahmoud Asadi",
+    "full_name": "Mahmoud Asadi",
+    "email": "mahmoud.asadi@praxair.com",
+    "title": "Director of Technology",
+    "company": "Praxair, Inc - a Linde Company"
+   }
+  },
+  {
+   "name": "Ryder Supply Chain Solutions",
+   "domain": "",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Steve Thoke",
+    "full_name": "Steve Thoke",
+    "email": "steve_thoke@ryder.com",
+    "title": "VP Supply Chain Solutions",
+    "company": "Ryder Supply Chain Solutions"
+   }
+  },
+  {
+   "name": "Schaeffler",
+   "domain": "schaeffler.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Chad Breucker",
+    "full_name": "Chad Breucker",
+    "email": "cbreucker@schaeffler.com",
+    "title": "Supply Chain Management",
+    "company": "Schaeffler"
+   }
+  },
+  {
+   "name": "Solvay",
+   "domain": "solvay.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Boris Cambon-Lalanne",
+    "full_name": "Boris Cambon-Lalanne",
+    "email": "boris.cambon-lalanne@solvay.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Superior Essex",
+   "domain": "spsx.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Edwin Stewart",
+    "full_name": "Edwin Stewart",
+    "email": "estewart@spa.com",
+    "title": "Vice President, Technology & Engineering",
+    "company": "Systems Planning & Analysis"
+   }
+  },
+  {
+   "name": "Syensqo",
+   "domain": "syensqo.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Scott Holley",
+    "full_name": "Scott Holley",
+    "email": "scott.holley@syensqo.com",
+    "title": "Global Logistics Transformation Manager",
+    "company": "Syensqo"
+   }
+  },
+  {
+   "name": "Teledyne Technologies",
+   "domain": "teledyne.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Valeria Velazquez",
+    "full_name": "Valeria Velazquez",
+    "email": null,
+    "title": "+ Warehouse Manager",
+    "company": "Teledyne Technologies"
+   }
+  },
+  {
+   "name": "Tesla",
+   "domain": "",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Ximena Castanon",
+    "full_name": "Ximena Castanon",
+    "email": "xcastanon@tesla.com",
+    "title": "Lead, Staff TPM Service Distribution Optimization",
+    "company": "Tesla"
+   }
+  },
+  {
+   "name": "Volvo",
+   "domain": "volvo.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Ray Gallant",
+    "full_name": "Ray Gallant",
+    "email": "ray.gallant@volvo.com",
+    "title": "Vice President Sustainability and Productivity Services",
+    "company": "3262682.846"
+   }
+  },
+  {
+   "name": "WK Kellogg Co",
+   "domain": "wkkellogg.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Wendy Huller",
+    "full_name": "Wendy Huller",
+    "email": "wendy.huller@wkkellogg.com",
+    "title": "VP, Customer Service and Logistics",
+    "company": "WK Kellogg"
+   }
+  },
+  {
+   "name": "Yageo",
+   "domain": "yageo.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Anita",
+    "full_name": "Anita",
+    "email": "anita.maniurka@diageo.com",
+    "title": null,
+    "company": "Diageo"
+   }
+  },
+  {
+   "name": "YANFENG",
+   "domain": "yanfeng.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Gabor Nagy",
+    "full_name": "Gabor Nagy",
+    "email": "gabor.nagy@yanfeng.com",
+    "title": null,
+    "company": null
+   }
+  },
+  {
+   "name": "Yellow",
+   "domain": "yrcw.com",
+   "hubspot_contacts": "2",
+   "clawd_hits": 10,
+   "sample": {
+    "name": "Joe Lewis",
+    "full_name": "Joe Lewis",
+    "email": "joe.lewis@yrcw.com",
+    "title": "Litigation Counsel",
+    "company": "2705725.425"
+   }
+  }
+ ]
+}

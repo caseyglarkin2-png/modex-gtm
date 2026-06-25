@@ -1,0 +1,10 @@
+{
+  "slug": "walmart",
+  "domain": "walmart.com",
+  "nearest_distance_mi": 2.7,
+  "proximity_score": 91,
+  "corridor_density": 8,
+  "composite_score": 93.23,
+  "nearest_primo_site": "US PL Ontario Factory",
+  "facilities": 12
+}

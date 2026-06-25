@@ -1,0 +1,3897 @@
+[
+  {
+    "name": "Iowa 80 - The World's Largest Truckstop",
+    "address": "755 W Iowa 80 Rd, Walcott, IA 52773, USA",
+    "reason": "truckstop"
+  },
+  {
+    "name": "Desert Hills Premium Outlets",
+    "address": "48400 Seminole Dr, Cabazon, CA 92230, USA",
+    "reason": "premium outlet"
+  },
+  {
+    "name": "Ontario International Airport",
+    "address": "International Arrivals Terminal, International Wy, Ontario, CA 91761, USA",
+    "reason": "airport"
+  },
+  {
+    "name": "Olbrich Botanical Gardens",
+    "address": "3330 Atwood Ave, Madison, WI 53704, USA",
+    "reason": "botanical"
+  },
+  {
+    "name": "Workman’s Travel Center",
+    "address": "3202 Pence Ln, Ozark, AR 72949, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Allentown Service Plaza",
+    "address": "5052 Cetronia Rd, Allentown, PA 18106, USA",
+    "reason": "service plaza"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "8701 US-395, Hesperia, CA 92344, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Edgerton Travel Plaza",
+    "address": "568 Haugen Rd, Edgerton, WI 53534, USA",
+    "reason": "travel plaza"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "2015 W Lucas St, Florence, SC 29501, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Flying J Travel Center",
+    "address": "29933 State Rd 52, San Antonio, FL 33576, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "West Gardiner Service Plaza",
+    "address": "West Gardiner, ME 04345, USA",
+    "reason": "retail/storefront: diner"
+  },
+  {
+    "name": "TA Travel Center",
+    "address": "4265 E Guasti Rd, Ontario, CA 91761, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Kennebunk Service Plaza (Northbound)",
+    "address": "Northbound Mile 25, Maine Turnpike 25 North, Kennebunk, ME 04043, USA",
+    "reason": "service plaza"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "170 Valley St, Arkadelphia, AR 71923, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "2400 Alliance Gateway Fwy, Fort Worth, TX 76177, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Columbia County Rest Area, I-75 Southbound",
+    "address": "Lake City, FL 32024, USA",
+    "reason": "rest area"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "7425 Bonnie View Rd, Dallas, TX 75241, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Kennebunk Service Plaza (Southbound)",
+    "address": "Mile 25 Southbound, Maine Turnpike, Kennebunk, ME 04043, USA",
+    "reason": "service plaza"
+  },
+  {
+    "name": "Flying J Travel Center",
+    "address": "16751 E 32nd Ave, Aurora, CO 80011, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "3300 AR-391, North Little Rock, AR 72117, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "TA Travel Center",
+    "address": "5101 Quebec St, Commerce City, CO 80022, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Peter J. Camiel / Brandywine Travel Plaza",
+    "address": "PA Turnpike Milepost 304.8 West-bound, 5 Marsh Rd, Elverson, PA 19520, USA",
+    "reason": "travel plaza"
+  },
+  {
+    "name": "Petro Travel Center",
+    "address": "4325 E Guasti Rd, Ontario, CA 91761, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Fuel City Truck Stop",
+    "address": "1080 S Blue Mound Rd, Blue Mound, TX 76131, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Flying J Travel Center",
+    "address": "15919 North Fwy, Houston, TX 77090, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Sapp Bros. Travel Center",
+    "address": "7120 E 49th Ave, Commerce City, CO 80022, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Sacramento 49er Travel Plaza",
+    "address": "2828 El Centro Rd, Sacramento, CA 95833, USA",
+    "reason": "travel plaza"
+  },
+  {
+    "name": "Flying J Travel Center",
+    "address": "15100 Thornton Rd, Lodi, CA 95242, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "4255 W Hwy 326, Ocala, FL 34482, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "TA Travel Center",
+    "address": "1806 US-371, Prescott, AR 71857, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "4032 W Hwy 326, Ocala, FL 34482, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Flying J Travel Center",
+    "address": "11555 E Sligh Ave, Seffner, FL 33584, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "TA Travel Center",
+    "address": "7751 Bonnie View Rd, Dallas, TX 75241, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "3006 N Williston Rd, Florence, SC 29506, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Flying J Travel Center",
+    "address": "5901 Fairfield Rd, Columbia, SC 29203, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "TA Travel Center",
+    "address": "46155 Dillon Rd, Coachella, CA 92236, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "2226 FM1903, Caddo Mills, TX 75135, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Pattersonville Travel Plaza",
+    "address": "Mile Post, 168W NY State Thruway, Pattersonville, NY 12137, USA",
+    "reason": "travel plaza"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "8067 FL-6, Jasper, FL 32052, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "1200 Hillcrest Dr S, Sulphur Springs, TX 75482, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Flying J Travel Center",
+    "address": "1720 W Thompson Rd, Indianapolis, IN 46217, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Arlene's Truck Stop",
+    "address": "4647 W Columbia Ave, Battle Creek, MI 49015, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "6605 N Indian Canyon Dr, North Palm Springs, CA 92258, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Trexler Travel Center",
+    "address": "5829 Tilghman St, Allentown, PA 18104, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "1860 E Napier Ave, Benton Harbor, MI 49022, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "12881 FM 14, Tyler, TX 75706, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Extra Space Storage",
+    "address": "707 Providence Rd, Brandon, FL 33511, USA",
+    "reason": "retail/storefront: extra space"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "1851 W 400 N, Shelbyville, IN 46176, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "TA Travel Center",
+    "address": "1700 Wilson Rd, Terrell, TX 75161, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "10959 SC-200, Winnsboro, SC 29180, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Truck Stop 44",
+    "address": "2120 Pond Branch Rd, Gilbert, SC 29054, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "4075 Jones Branch Rd, Jacksonville, FL 32219, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "8787 S Lancaster Rd, Dallas, TX 75241, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "66 NJ-173, Hampton, NJ 08827, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Breeze Rite In Travel Center - Pilot Dealer",
+    "address": "17276 NE US Hwy 301, Waldo, FL 32694, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "3008 US-321, West Columbia, SC 29033, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "7801 Alcoa Rd, Benton, AR 72019, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Flying J Travel Center",
+    "address": "42 Bradley Cove Rd, Russellville, AR 72801, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "TA Travel Center",
+    "address": "10346 IN-39, Clayton, IN 46118, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Morongo Travel Center",
+    "address": "48540 Morongo Trail, Cabazon, CA 92230, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Flying J Travel Center",
+    "address": "82 White St, Whiteland, IN 46184, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "4440 N McCarty St, Houston, TX 77013, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "522 Hwy 601 S, Lugoff, SC 29078, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "3404 US-63, Hazen, AR 72064, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "1050 US-301, Jacksonville, FL 32234, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "215 AR-331, Russellville, AR 72802, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Flying J Travel Center",
+    "address": "2435 Mt Holly Rd, Rock Hill, SC 29730, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "TA Travel Center",
+    "address": "5930 East State Road 334, Whitestown, IN 46075, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Flying J Travel Center",
+    "address": "1876 East Fwy, Baytown, TX 77521, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "1128 Duanesburg Rd, Schenectady, NY 12306, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "3807 Statesville Ave, Charlotte, NC 28206, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "15901 11 Mile Rd, Battle Creek, MI 49014, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "11459 SW 61st Ave, Jasper, FL 32052, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Little Sister's Truck Wash Fontana",
+    "address": "14264 Valley Blvd, Fontana, CA 92335, USA",
+    "reason": "truck wash"
+  },
+  {
+    "name": "Flying J Travel Center",
+    "address": "7800 W Grand River Ave, Grand Ledge, MI 48837, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "TA Express Travel Center",
+    "address": "11706 Tampa Gateway Blvd, Seffner, FL 33584, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "1504 SC-38, Latta, SC 29565, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "ACME TRUCK STOP",
+    "address": "9565 S Orange Blossom Trl, Orlando, FL 32837, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Extra Space Storage",
+    "address": "851 W Esplanade Ave, San Jacinto, CA 92582, USA",
+    "reason": "retail/storefront: extra space"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "2603 Sam Wilson Rd, Charlotte, NC 28214, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "1340 Sumter Hwy, Bishopville, SC 29010, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Petro Travel Center",
+    "address": "3001 TV Rd, Florence, SC 29501, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Extra Space Storage",
+    "address": "2420 E Stop 11 Rd, Indianapolis, IN 46227, USA",
+    "reason": "retail/storefront: extra space"
+  },
+  {
+    "name": "Tampa Truck Stop",
+    "address": "6503 US-301, Tampa, FL 33610, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Southfork Truck Stop & Travel Center",
+    "address": "2066 AR-53, Gurdon, AR 71743, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Flying J Truck stop",
+    "address": "7001 Bellville Rd, Lake Park, GA 31636, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Flying J Travel Center",
+    "address": "72235 Varner Rd, Thousand Palms, CA 92276, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Guilderland Travel Plaza",
+    "address": "103 Brookview Dr, Schenectady, NY 12303, USA",
+    "reason": "travel plaza"
+  },
+  {
+    "name": "Flying J Travel Center",
+    "address": "3475 E Washington Rd, Saginaw, MI 48601, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Extra Space Storage",
+    "address": "3505 W Bellfort Ave, Houston, TX 77025, USA",
+    "reason": "retail/storefront: extra space"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "2299 Koger St, Mooresville, IN 46158, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "116 Ron Harrod Rd, Prescott, AR 71857, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Mr. Fuel Travel Center",
+    "address": "3206 W Trinity Blvd, Grand Prairie, TX 75050, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Blue Beacon Truck Wash of Indianapolis, IN",
+    "address": "465 Exit 4, 4550 S Harding St, Indianapolis, IN 46217, USA",
+    "reason": "truck wash"
+  },
+  {
+    "name": "ONE9 Travel Center",
+    "address": "111 Mill Branch Rd, Latta, SC 29565, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "400 Pecan Park Rd, Jacksonville, FL 32218, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "1800 FL-559, Polk City, FL 33868, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "11801 I-40, North Little Rock, AR 72117, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "853 Interchange Dr, Holland, MI 49423, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "TA Travel Center",
+    "address": "3014 Paxville Hwy, Manning, SC 29102, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Big Daddy's Truck Stop",
+    "address": "6055 US-223, Ottawa Lake, MI 49267, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Extra Space Storage",
+    "address": "739 US 31 S, Greenwood, IN 46143, USA",
+    "reason": "retail/storefront: extra space"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "3700 Mountain Rd, Hamburg, PA 19526, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Extra Space Storage",
+    "address": "660 W Acacia Ave, Hemet, CA 92543, USA",
+    "reason": "retail/storefront: extra space"
+  },
+  {
+    "name": "365 Travel Center",
+    "address": "3101 North Fwy #300, Fort Worth, TX 76106, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "45-761 Dillon Rd, Coachella, CA 92236, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Blue Beacon Truck Wash of Dade City, FL",
+    "address": "29939 County Rd 52 I-75 Exit 285, San Antonio, FL 33576, USA",
+    "reason": "truck wash"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "1911 SC-34, Dillon, SC 29536, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "7791 NW 47th Ave, Ocala, FL 34482, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "801 NC-211, Candor, NC 27229, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "1105 Peeler Rd Ste 100, Salisbury, NC 28146, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "TA Express--Duke's Travel Plaza",
+    "address": "6552, 220 I-30, Mt Vernon, TX 75457, USA",
+    "reason": "travel plaza"
+  },
+  {
+    "name": "TA Travel Center",
+    "address": "2301 W Lucas St, Florence, SC 29501, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Wilton Travel Plaza",
+    "address": "215 Ballard Rd #1356, Gansevoort, NY 12831, USA",
+    "reason": "travel plaza"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "3204 Co Rd 255, Lee, FL 32059, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Petro Travel Center",
+    "address": "3205 Valentine Rd Exit 161, North Little Rock, AR 72117, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Spirit Truck Stop",
+    "address": "293 E C 470, Lake Panasoffkee, FL 33538, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Workmans Hilltop Travel Center",
+    "address": "8265 AR-282, Alma, AR 72921, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "1221 S Oak St, Van, TX 75790, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Dysart's Restaurant & Truck Stop",
+    "address": "530 Coldbrook Rd, Hermon, ME 04401, USA",
+    "reason": "retail/storefront: restaurant"
+  },
+  {
+    "name": "Petro Travel Center",
+    "address": "2154 S Beltline Blvd, Columbia, SC 29201, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "116 Priester Rd, Blacksburg, SC 29702, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "SmartStop Self Storage",
+    "address": "8110 S Cockrell Hill Rd, Dallas, TX 75236, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "195 Baker Rd, Dexter, MI 48130, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "2615 W C 48, Bushnell, FL 33513, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Mobil",
+    "address": "460 76th St SW, Byron Center, MI 49315, USA",
+    "reason": "retail/storefront: mobil"
+  },
+  {
+    "name": "Flying J Travel Center",
+    "address": "1305 Pasadena Fwy, Pasadena, TX 77506, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Rialto Travel Center",
+    "address": "3610 S Riverside Ave, Bloomington, CA 92316, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Tullo Truck Stop",
+    "address": "61 Lincoln Hwy, Kearny, NJ 07032, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "9800 I-20, Canton, TX 75103, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "17309 US-27, Lake Wales, FL 33853, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "2424 Wadhams Rd, Smiths Creek, MI 48074, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "440 W 3rd St, Mifflinville, PA 18631, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "22 Old Forge Rd, Jonestown, PA 17038, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Gateway Travel Plaza",
+    "address": "2350 US-79, Palestine, TX 75801, USA",
+    "reason": "travel plaza"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "2500 I-45, Hutchins, TX 75141, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "TA Travel Center",
+    "address": "200 Baker Rd, Dexter, MI 48130, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "ONE9 Travel Center",
+    "address": "1155 Anderson Rd S, Rock Hill, SC 29730, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "TA Travel Center",
+    "address": "108 Ocean Rd, Greenland, NH 03840, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "13700 US-441, Lake City, FL 32025, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "340 Longs Pond Rd, Lexington, SC 29073, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "9000 W Interpark Dr, Pendleton, IN 46064, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "5115 N 300 E, Whiteland, IN 46184, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "TA Travel Center",
+    "address": "40 Riverside Dr, Fultonville, NY 12072, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "701 White Pond Rd, Elgin, SC 29045, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Queensbury Truck & Pizza Stop Restaurant",
+    "address": "985 NY-149, Queensbury, NY 12804, USA",
+    "reason": "retail/storefront: restaurant"
+  },
+  {
+    "name": "Kennebunk North Travel Plaza",
+    "address": "Maine Turnpike 25 North, Kennebunk, ME 04043, USA",
+    "reason": "travel plaza"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "15250 Thornton Rd, Lodi, CA 95242, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "7880 Old US Hwy 421, St Paul, IN 47272, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Truckers Inn Travel Plaza",
+    "address": "6162 US-51, DeForest, WI 53532, USA",
+    "reason": "travel plaza"
+  },
+  {
+    "name": "TA Travel Center",
+    "address": "15587 M-60, Tekonsha, MI 49092, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Madco Truck Plaza",
+    "address": "27416 Ecorse Rd, Romulus, MI 48174, USA",
+    "reason": "truck plaza"
+  },
+  {
+    "name": "CEFCO Travel Center",
+    "address": "16242 US-271, Tyler, TX 75708, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "1600 AR-95, Morrilton, AR 72110, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "6550 S N Interstate 45 Service Rd, Ennis, TX 75119, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "4155 S Indianapolis Rd, Whitestown, IN 46075, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "210 Patton St, Houston, TX 77009, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "Service Road, 215 East St I-30 N, Mt Vernon, TX 75457, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "2505 Queensway St, Searcy, AR 72143, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Texaco Truck Stop - Benbrook",
+    "address": "14134 US-377, Benbrook, TX 76126, USA",
+    "reason": "retail/storefront: texaco"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "6716 AR-171, Malvern, AR 72104, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "995 US-9, Castleton-On-Hudson, NY 12033, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Petro Travel Center",
+    "address": "7401 W Hwy 318, Reddick, FL 32686, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "6560 Dixie Hwy, Bridgeport, MI 48722, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Blue Beacon Truck Wash of Florence, SC",
+    "address": "3003 TV Rd I-95 Exit 169, Florence, SC 29501, USA",
+    "reason": "truck wash"
+  },
+  {
+    "name": "Lucky Seven Truck Stop",
+    "address": "6568 Wade-Stedman Rd, Wade, NC 28395, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "12845 NY-22, Canaan, NY 12029, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "11700 I-30, Little Rock, AR 72210, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "JJ's Truck Stop",
+    "address": "6106 Military Road, Malvern, AR 72104, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Mr. Fuel Travel Center",
+    "address": "4610 S Harding St, Indianapolis, IN 46217, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Eagles' Truck Stop: Fuel/Restaurant/Casino",
+    "address": "I-49 Exit 177 Clear Lake Rd #1239, Mansfield, LA 71052, USA",
+    "reason": "retail/storefront: restaurant"
+  },
+  {
+    "name": "HillView Truck Stop",
+    "address": "2656 Ben Franklin Rd, Leesville, SC 29070, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Devon Self Storage Palm Springs, California",
+    "address": "500 W Radio Rd, Palm Springs, CA 92262, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "2015 Bluff Rd, Columbia, SC 29201, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "36 Dusty Rd, Newberry, SC 29108, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Flying J Travel Center",
+    "address": "11053 Riverside Dr, Mira Loma, CA 91752, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Porky's Truck Stop",
+    "address": "3346 US-301 N, Hamer, SC 29547, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "401 Buff Blvd, Summerton, SC 29148, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "76th St Auto/Truck Plaza",
+    "address": "460 76th St SW, Byron Center, MI 49315, USA",
+    "reason": "truck plaza"
+  },
+  {
+    "name": "Extra Space Storage",
+    "address": "8600 S Main St, Houston, TX 77025, USA",
+    "reason": "retail/storefront: extra space"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "5615 US-301, Hawthorne, FL 32640, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "1954 Hwy 31, Lonoke, AR 72086, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Public Storage",
+    "address": "650 Bay Area Blvd, Houston, TX 77058, USA",
+    "reason": "retail/storefront: public storage"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "1703 I-10, Baytown, TX 77521, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "TA Travel Center",
+    "address": "5901 US-51, DeForest, WI 53532, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "18720 Partello Rd, Marshall, MI 49068, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "TA Travel Center",
+    "address": "15874 11 Mile Rd, Battle Creek, MI 49014, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Truck Parking Area",
+    "address": "I-40, Conway, AR 72032, USA",
+    "reason": "truck parking"
+  },
+  {
+    "name": "StorQuest Self Storage",
+    "address": "549 Kalamath St, Denver, CO 80204, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "1501 US-287, Midlothian, TX 76065, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Shuttle Truck Stop 75 TA",
+    "address": "14197 US-441, Lake City, FL 32024, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "2229 N 3rd St, Ozark, AR 72949, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "22406 US-59, Queen City, TX 75572, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Pat's Travel Center",
+    "address": "904 W Barbours Cut Blvd, La Porte, TX 77571, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Tulip City Truck Stop",
+    "address": "4360 Lincoln Rd, Holland, MI 49423, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Bunnys Truck Stop",
+    "address": "638 E NE Loop 323, Tyler, TX 75706, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Sinclair - AMBEST Truck Stop",
+    "address": "1534 IN-1, Cambridge City, IN 47327, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "3191 Capac Rd, Capac, MI 48014, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "8060 AR-282, Alma, AR 72921, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Extra Space Storage",
+    "address": "2712 Ski Ln, Madison, WI 53713, USA",
+    "reason": "retail/storefront: extra space"
+  },
+  {
+    "name": "High Desert Truck Stop",
+    "address": "15655 US-395, Victorville, CA 92394, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Public Storage",
+    "address": "24905 Whitewood Rd, Murrieta, CA 92563, USA",
+    "reason": "retail/storefront: public storage"
+  },
+  {
+    "name": "Gallops Gas Station & Truck Stop - Kendalville",
+    "address": "1201 W North St, Kendallville, IN 46755, USA",
+    "reason": "retail/storefront: gas station"
+  },
+  {
+    "name": "Extra Space Storage",
+    "address": "2811 Bay Area Blvd, Houston, TX 77058, USA",
+    "reason": "retail/storefront: extra space"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "780 Jeff Gordon Blvd, Pittsboro, IN 46167, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Fontana Truck Stop Center Inc",
+    "address": "14264 Valley Blvd, Fontana, CA 92335, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "135 Sutton Ridge Ln, Fort Mill, SC 29708, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Commerce Truck Stop",
+    "address": "4560 E Washington Blvd, Commerce, CA 90040, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Devon Self Storage Houston, Texas",
+    "address": "6610 Hwy 6, Houston, TX 77084, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "17110 Brandy Branch Rd, Jacksonville, FL 32234, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Gray Service Plaza",
+    "address": "Gray, ME 04039, USA",
+    "reason": "service plaza"
+  },
+  {
+    "name": "Extra Space Storage",
+    "address": "235 Kirby Rd, Seabrook, TX 77586, USA",
+    "reason": "retail/storefront: extra space"
+  },
+  {
+    "name": "TA Travel Center",
+    "address": "14197 US-441, Lake City, FL 32024, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Splendora Truck Stop",
+    "address": "13360 US-59 BUS, Splendora, TX 77372, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "SmartStop Self Storage",
+    "address": "5885 W Colfax Ave, Lakewood, CO 80214, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Allentown Travel Plaza",
+    "address": "Exit 56 Northbound, Mile Marker, 5052 Cetronia Rd 55, 9, Allentown, PA 18106, USA",
+    "reason": "travel plaza"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "1201 Hillcrest Dr S, Sulphur Springs, TX 75482, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "W9493 County Road Cs Dekorra, Poynette, WI 53955, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Tyler Travel Center",
+    "address": "407 E NE Loop 323, Tyler, TX 75706, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "45000 US-27, Davenport, FL 33897, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "8800 S Polk St, Dallas, TX 75232, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Extra Space Storage",
+    "address": "12812 Cullen Blvd, Houston, TX 77047, USA",
+    "reason": "retail/storefront: extra space"
+  },
+  {
+    "name": "The Truck Stop",
+    "address": "902 W 13th St, Cadillac, MI 49601, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "3940 N McCarty St, Houston, TX 77013, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Christiana Truck Stop And Grill",
+    "address": "I-495, 520 Terminal Ave Exit 2, New Castle, DE 19720, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "U-Stor-It Self Storage - Redlands",
+    "address": "832 W Colton Ave, Redlands, CA 92374, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "7005 TX-225, Deer Park, TX 77536, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Extra Space Storage",
+    "address": "150 Riverside St, Portland, ME 04103, USA",
+    "reason": "retail/storefront: extra space"
+  },
+  {
+    "name": "West Gardner Travel Plaza",
+    "address": "Exit 102 Northbound Exit 103 Southbound, 288 Lewiston Rd I-95, West Gardiner, ME 04345, USA",
+    "reason": "travel plaza"
+  },
+  {
+    "name": "Nestle Bottled Water Delivery Dallas",
+    "address": "4718 Mountain Creek Pkwy, Dallas, TX 75236, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Windmill Travel Center & Truck Stop",
+    "address": "7262 Lansing Rd, Dimondale, MI 48821, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "200 Garden Acres Dr, Fort Worth, TX 76140, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "9790 Adams St, Holland, MI 49424, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Compass Self Storage",
+    "address": "60 W Ridge Pike, Limerick, PA 19468, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "14137 Plank Rd, Milan, MI 48160, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Flying J Travel Center",
+    "address": "14320 Slover Ave, Fontana, CA 92337, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "4800 US-65, Pine Bluff, AR 71601, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "145 Auto/Truck Plaza",
+    "address": "6100 Ann Arbor Rd, Jackson, MI 49201, USA",
+    "reason": "truck plaza"
+  },
+  {
+    "name": "I-10 Truck Stop",
+    "address": "195 E Valley Blvd, Rialto, CA 92376, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "7300 W Grand River Ave, Grand Ledge, MI 48837, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "1001 Lane Ave N, Jacksonville, FL 32254, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "CubeSmart Self Storage",
+    "address": "7017 Almeda Rd, Houston, TX 77054, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Kudos Travel Center and Truck Stop",
+    "address": "601 TX-75 # B, Huntsville, TX 77320, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Mobil",
+    "address": "19674 Edgar Rd, Howard City, MI 49329, USA",
+    "reason": "retail/storefront: mobil"
+  },
+  {
+    "name": "Penn Jersey Truck Stop",
+    "address": "1400 US-22, Phillipsburg, NJ 08865, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Lion King Truck Stop",
+    "address": "201 W Barbours Cut Blvd, La Porte, TX 77571, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Extra Space Storage",
+    "address": "1215 E Airport Dr, Ontario, CA 91761, USA",
+    "reason": "retail/storefront: extra space"
+  },
+  {
+    "name": "Jimmy's Truck Stop- Marathon",
+    "address": "14907 FL-60 E, Lake Wales, FL 33898, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Ken's Meats & Deli",
+    "address": "5725 Monona Dr, Monona, WI 53716, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Harbor Truck Stop",
+    "address": "2130 W Pacific Coast Hwy, Long Beach, CA 90810, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "1990 I-30, Rockwall, TX 75087, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Extra Space Storage",
+    "address": "2701 Drane Field Rd, Lakeland, FL 33811, USA",
+    "reason": "retail/storefront: extra space"
+  },
+  {
+    "name": "Extra Space Storage",
+    "address": "900 W NASA Pkwy, Webster, TX 77598, USA",
+    "reason": "retail/storefront: extra space"
+  },
+  {
+    "name": "Public Storage",
+    "address": "7510 Folsom Blvd, Sacramento, CA 95826, USA",
+    "reason": "retail/storefront: public storage"
+  },
+  {
+    "name": "Public Storage",
+    "address": "502 FM 646 Rd, Dickinson, TX 77539, USA",
+    "reason": "retail/storefront: public storage"
+  },
+  {
+    "name": "Extra Space Storage",
+    "address": "24781 Clinton Keith Rd, Wildomar, CA 92595, USA",
+    "reason": "retail/storefront: extra space"
+  },
+  {
+    "name": "Mobil",
+    "address": "2977 W Remus Rd, Mt Pleasant, MI 48858, USA",
+    "reason": "retail/storefront: mobil"
+  },
+  {
+    "name": "Tyler Truck Wash",
+    "address": "407 E NE Loop 323 a, Tyler, TX 75706, USA",
+    "reason": "truck wash"
+  },
+  {
+    "name": "Twenty Seven Truck Stop",
+    "address": "2758 US-27, Lake Placid, FL 33852, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "7900 Adobe Rd, Kalamazoo, MI 49009, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Florence Travel Plaza",
+    "address": "2215 Cale Yarborough Hwy, Timmonsville, SC 29161, USA",
+    "reason": "travel plaza"
+  },
+  {
+    "name": "Cumberland Service Plaza",
+    "address": "Mile 56 Southbound, Cumberland Center, ME 04021, USA",
+    "reason": "service plaza"
+  },
+  {
+    "name": "Extra Space Storage",
+    "address": "1675 W 11th St, Upland, CA 91786, USA",
+    "reason": "retail/storefront: extra space"
+  },
+  {
+    "name": "Mountain Valley Spring Co - Visitor Center and Museum",
+    "address": "150 Central Ave, Hot Springs National Park, AR 71901, USA",
+    "reason": "museum"
+  },
+  {
+    "name": "Mound Truck Stop",
+    "address": "27700 Mound Rd, Warren, MI 48092, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Ito's Truck Wash",
+    "address": "4012 Causeway Blvd, Tampa, FL 33619, USA",
+    "reason": "truck wash"
+  },
+  {
+    "name": "Extra Space Storage",
+    "address": "6589 SW Archer Rd, Gainesville, FL 32608, USA",
+    "reason": "retail/storefront: extra space"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "35647 US-27, Haines City, FL 33844, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Flynn's Truck Stop",
+    "address": "307 Hartford Tpke, Shrewsbury, MA 01545, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "McDonald Fuel Stop",
+    "address": "I-20, Terrell, TX 75161, USA",
+    "reason": "retail/storefront: fuel stop"
+  },
+  {
+    "name": "Bandini Truck Stop Center",
+    "address": "3152 Bandini Blvd, Vernon, CA 90058, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "STOR-N-LOCK Self Storage",
+    "address": "1006 Wabash Ave, Redlands, CA 92374, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Sunshine Truck Stop",
+    "address": "1800 E Pacific Coast Hwy, Wilmington, CA 90744, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Little Fisher Truck Stop",
+    "address": "2105 E Myrtle Beach Hwy, Scranton, SC 29591, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Gateway Exxon and Pilot Travel Center",
+    "address": "133 FM314 Ste 100, Van, TX 75790, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Polk City Travel Center",
+    "address": "1821 FL-559, Polk City, FL 33868, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "309 Truck Stop",
+    "address": "1720 PA-309, Coopersburg, PA 18036, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Smart Space Self Storage",
+    "address": "9300 W Colfax Ave, Lakewood, CO 80215, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Three Sisters Truck Stop",
+    "address": "14416 Slover Ave, Fontana, CA 92337, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "CITGO Truck Stop",
+    "address": "10761 49th Street N, Clearwater, FL 33762, USA",
+    "reason": "retail/storefront: citgo"
+  },
+  {
+    "name": "FedEx Ship Center",
+    "address": "3700 Kinsman Blvd, Madison, WI 53704, USA",
+    "reason": "retail/storefront: fedex ship center"
+  },
+  {
+    "name": "Eddie's truck stop",
+    "address": "224 Goodwill Rd, Minden, LA 71055, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Zellwood Truck Stop",
+    "address": "2607 N Orange Blossom Trail, Zellwood, FL 32798, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "1025 S Crawford St, Clarksville, AR 72830, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Public Storage",
+    "address": "5080 Leetsdale Dr, Denver, CO 80246, USA",
+    "reason": "retail/storefront: public storage"
+  },
+  {
+    "name": "Hobby Express truck stop",
+    "address": "8702 Telephone Rd, Houston, TX 77061, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Haymount Truck Stop",
+    "address": "100 Broadfoot Ave, Fayetteville, NC 28305, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Security Public Storage",
+    "address": "6310 Stockton Blvd, Sacramento, CA 95824, USA",
+    "reason": "retail/storefront: public storage"
+  },
+  {
+    "name": "The Wind-Chill Factory & Mini-Golf at Ballston Spa",
+    "address": "3 Trieble Ave, Ballston Spa, NY 12020, USA",
+    "reason": "retail/storefront: golf"
+  },
+  {
+    "name": "Petro-Pass Truck Stop",
+    "address": "224 Rte 122, Meductic, NB E6H 1B4, Canada",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Jimmie's Auto/Truck Plaza",
+    "address": "3167 Co Rd 255, Lee, FL 32059, USA",
+    "reason": "truck plaza"
+  },
+  {
+    "name": "Extra Space Storage",
+    "address": "9356 Bellegrave Ave, Riverside, CA 92509, USA",
+    "reason": "retail/storefront: extra space"
+  },
+  {
+    "name": "SecurCare Self Storage",
+    "address": "1661 S Campus Ave, Ontario, CA 91761, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Prime Storage - Palm Springs, CA",
+    "address": "3950 Airport Center Dr, Palm Springs, CA 92264, USA",
+    "reason": "airport"
+  },
+  {
+    "name": "Beaumont Self Storage",
+    "address": "190 E 1st St, Beaumont, CA 92223, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Pine Cone Travel Plaza",
+    "address": "685 Linmar Ln C, Johnson Creek, WI 53038, USA",
+    "reason": "travel plaza"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "164 Riverside Dr, Fultonville, NY 12072, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "StorQuest Self Storage",
+    "address": "2160 NW 67th Pl, Gainesville, FL 32653, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "247 Truck Stop",
+    "address": "452 AR-38, Widener, AR 72394, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Texas Truck Stop",
+    "address": "8772 Market St, Houston, TX 77029, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Garden Truck Stop w/ Wash & Washouts",
+    "address": "2114 W Garden Rd, Vineland, NJ 08360, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Devon Self Storage Grand Rapids, Michigan",
+    "address": "5099 Division Ave S, Grand Rapids, MI 49548, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Flying J",
+    "address": "11053 Riverside Dr, Riverside, CA 92509, USA",
+    "reason": "flying j"
+  },
+  {
+    "name": "Extra Space Storage",
+    "address": "905 Washington St N, Auburn, ME 04210, USA",
+    "reason": "retail/storefront: extra space"
+  },
+  {
+    "name": "North Texas Truck Stop",
+    "address": "8321 Rendon Bloodworth Rd, Mansfield, TX 76063, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Valero",
+    "address": "1024 Airport Rd, Hot Springs, AR 71913, USA",
+    "reason": "retail/storefront: valero"
+  },
+  {
+    "name": "Cowboys Truck Stop",
+    "address": "1680-1770 S Etiwanda Ave, Ontario, CA 91761, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "TNC Self Storage - Souderton",
+    "address": "65 Wambold Rd, Souderton, PA 18964, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "TA Express Travel Center",
+    "address": "12602 South Freeway, State Hwy 288, Houston, TX 77047, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "TA Travel Center",
+    "address": "6364 Dixie Hwy, Bridgeport, MI 48722, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "2325 Sierra Lakes Pkwy, Rialto, CA 92377, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Eco Truck Wash",
+    "address": "5150 Brighton Blvd, Denver, CO 80216, USA",
+    "reason": "truck wash"
+  },
+  {
+    "name": "EXIT 18 TRUCK STOP",
+    "address": "151 Heater Rd, Lebanon, NH 03766, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "A one truck stop",
+    "address": "15 Victory Plaza, South Amboy, NJ 08879, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Devon Self Storage Falmouth, Maine",
+    "address": "50 Gray Rd, Falmouth, ME 04105, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Swift Truck Stop",
+    "address": "1111 North Sam Houston Pkwy W, Houston, TX 77038, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Moodys Travel Plaza",
+    "address": "9119 Hwy 225, La Porte, TX 77571, USA",
+    "reason": "travel plaza"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "1813 Washington St S, Auburn, ME 04210, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Ultimate Wishy Wash Car and Truck Wash Centre",
+    "address": "9938 Western Turnpike, Delanson, NY 12053, USA",
+    "reason": "truck wash"
+  },
+  {
+    "name": "RMZ TRAVEL CENTER",
+    "address": "137 Rockingham Rd, Londonderry, NH 03053, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "XPRESS TRUCK STOP",
+    "address": "1409 E Loop 304, Crockett, TX 75835, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "ACME TRUCK STOP",
+    "address": "304 4th St, Orlando, FL 32824, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Swift Truck Stop",
+    "address": "12250 FM 529, Houston, TX 77041, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "12921 Duval Rd, Jacksonville, FL 32218, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Gold Star Foods (Corporate)",
+    "address": "3781 E Airport Dr, Ontario, CA 91761, USA",
+    "reason": "airport"
+  },
+  {
+    "name": "Extra Space Storage",
+    "address": "6923 Gall Blvd, Zephyrhills, FL 33542, USA",
+    "reason": "retail/storefront: extra space"
+  },
+  {
+    "name": "FedEx Ship Center",
+    "address": "3320 Robertson Rd, Tyler, TX 75701, USA",
+    "reason": "retail/storefront: fedex ship center"
+  },
+  {
+    "name": "New Jersey Truck Stop",
+    "address": "1 Hackensack Ave #2, Kearny, NJ 07032, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Jahant Food & Fuel Stop",
+    "address": "24323 CA-99, Acampo, CA 95220, USA",
+    "reason": "retail/storefront: fuel stop"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "12577 County Rd 3101, Winona, TX 75792, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "TA Express Travel Center",
+    "address": "4403 TX-42, Kilgore, TX 75662, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "U-Stor Self Storage Dallas, TX",
+    "address": "4116 S Walton Walker Blvd, Dallas, TX 75236, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Punj Truck Stop & Indian restaurant",
+    "address": "22263 US-59, Queen City, TX 75572, USA",
+    "reason": "retail/storefront: restaurant"
+  },
+  {
+    "name": "Vegas Truck Stop",
+    "address": "35680 Daggett-Yermo Rd, Yermo, CA 92398, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "FedEx Home Delivery",
+    "address": "12556 Galveston Rd, Webster, TX 77598, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Betty Beavers Fuel Stop",
+    "address": "39 Riverside Dr, Fultonville, NY 12072, USA",
+    "reason": "retail/storefront: fuel stop"
+  },
+  {
+    "name": "Extra Space Storage",
+    "address": "627 Sand Rd, Pembroke, NH 03275, USA",
+    "reason": "retail/storefront: extra space"
+  },
+  {
+    "name": "Valero Truck Stop",
+    "address": "10101 Jacksboro Hwy, Fort Worth, TX 76135, USA",
+    "reason": "retail/storefront: valero"
+  },
+  {
+    "name": "Crenco Auto/Truck Stop",
+    "address": "3028 Lancaster Hwy, Richburg, SC 29729, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "2300 E Steel Rd, Colton, CA 92324, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Conlee Travel Center",
+    "address": "9180 Birch Run Rd, Birch Run, MI 48415, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "TA Express Travel Center",
+    "address": "300 SE Access Rd; I, 30 Exit 147, Mt Vernon, TX 75457, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Flying J",
+    "address": "14294 Slover Ave, Fontana, CA 92337, USA",
+    "reason": "flying j"
+  },
+  {
+    "name": "Wraich Travel Plaza",
+    "address": "14320 Slover Ave, Fontana, CA 92337, USA",
+    "reason": "travel plaza"
+  },
+  {
+    "name": "Power Truck Stop & Gas Station",
+    "address": "15 Stockton St, Newark, NJ 07105, USA",
+    "reason": "retail/storefront: gas station"
+  },
+  {
+    "name": "LRFoodTruck Stop",
+    "address": "LR Food Truck Stop, 801 S Chester St, Little Rock, AR 72201, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "SecurCare Self Storage",
+    "address": "13870 Indian St, Moreno Valley, CA 92553, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "SmartStop Self Storage",
+    "address": "2412 W Holcombe Blvd, Houston, TX 77030, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "FedEx Ship Center",
+    "address": "4640 NE 49th Ave, Gainesville, FL 32609, USA",
+    "reason": "retail/storefront: fedex ship center"
+  },
+  {
+    "name": "DTP7 - Amazon Delivery Station (Seffner)",
+    "address": "1003 N Taylor Rd, Seffner, FL 33584, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Gardena Truck Stop",
+    "address": "333 Rosecrans Ave, Gardena, CA 90248, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Clinton Truck Stop",
+    "address": "8 NJ-173 #2, Hampton, NJ 08827, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Go Store It Self Storage",
+    "address": "1167 Wabash Ave, Redlands, CA 92374, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Amazon Delivery Station DMO4",
+    "address": "2400 Mason Ave, Daytona Beach, FL 32114, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "TravelCenters of America Fuel Island",
+    "address": "40 Riverside Dr, Fultonville, NY 12072, USA",
+    "reason": "travelcenters"
+  },
+  {
+    "name": "SecurCare Self Storage",
+    "address": "42335 E Florida Ave, Hemet, CA 92544, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "The UPS Store",
+    "address": "1635 Higdon Ferry Rd C, Hot Springs, AR 71913, USA",
+    "reason": "retail/storefront: the ups store"
+  },
+  {
+    "name": "Rocky Mountain Truck Stop",
+    "address": "10849 Composite Dr, Dallas, TX 75220, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Valley Colton Truck Stop Inc",
+    "address": "791 E Valley Blvd, Colton, CA 92324, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Perris Travel Plaza",
+    "address": "1500 Patricia Ln, Perris, CA 92570, USA",
+    "reason": "travel plaza"
+  },
+  {
+    "name": "USA Truck Stop",
+    "address": "4817 US-421, Westville, IN 46391, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "2962 E 500 N, Whiteland, IN 46184, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "SecurCare Self Storage",
+    "address": "31741 Yucaipa Blvd, Yucaipa, CA 92399, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Alma Truck Stop",
+    "address": "2400 W Monroe Rd, Alma, MI 48801, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Amazon Delivery Station DHT1",
+    "address": "4975 Gulf Fwy, La Marque, TX 77568, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Mobil",
+    "address": "6291 W 58th Ave, Arvada, CO 80002, USA",
+    "reason": "retail/storefront: mobil"
+  },
+  {
+    "name": "Amazon DDV5 Delivery Station",
+    "address": "2889 Himalaya Rd, Aurora, CO 80011, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "United States Postal Service-Southern Maine P&DC",
+    "address": "79 Postal Service Way Rm 1058, Scarborough, ME 04074, USA",
+    "reason": "retail/storefront: postal service"
+  },
+  {
+    "name": "Same Day Delivery",
+    "address": "3378 3 Mile Rd NW, Walker, MI 49534, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Amazon Delivery Station, DSC4",
+    "address": "7409 Magi Rd, Hanahan, SC 29410, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "SecurCare Self Storage",
+    "address": "25825 Redlands Blvd, Redlands, CA 92373, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Charlie's Country Corner",
+    "address": "5800 Nelson A Miles Pkwy, Grayling, MI 49738, USA",
+    "reason": "country corner"
+  },
+  {
+    "name": "U.S.A. Truck Stop/Wash",
+    "address": "17129 Market St, Channelview, TX 77530, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Amazon Delivery Station DSR6",
+    "address": "2400 McClellan Park Dr, McClellan Park, CA 95652, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "DOT CDL Physical Exam Ontario at TA Truck Stop",
+    "address": "4265 E Guasti Rd, Ontario, CA 91761, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Amazon Delivery Station DGR6",
+    "address": "3951 Trade Dr, Grand Rapids, MI 49508, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Gulf Truck Stop",
+    "address": "11 Universal Dr N, North Haven, CT 06473, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Route 11 Truck Stop",
+    "address": "1049 US-11, Champlain, NY 12919, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "2210 Hwy 601 N, Pageland, SC 29728, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Mobile Gas Truck Stop",
+    "address": "20735 48th Ave, Coopersville, MI 49404, USA",
+    "reason": "retail/storefront: mobil"
+  },
+  {
+    "name": "Acertus Delivers | Auto Transport Company",
+    "address": "9300 Tech Center Dr #190, Sacramento, CA 95826, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Plaza 23 Truck Stop",
+    "address": "240 Church St, Albany, NY 12202, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "TJ'S Truck Stop",
+    "address": "100 Bridge St, Lancaster, NH 03584, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "500 NH-3A, Bow, NH 03304, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Mobil",
+    "address": "33 Marion Ave, Saratoga Springs, NY 12866, USA",
+    "reason": "retail/storefront: mobil"
+  },
+  {
+    "name": "Circle K",
+    "address": "204 Center Rd, Fairfield, ME 04937, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Truck Stop Rest Area Eastbound",
+    "address": "Hackettstown, NJ 07840, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Columbus West Travel Center",
+    "address": "2200 W James St, Columbus, WI 53925, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Sac Pack & Ship",
+    "address": "8399 Folsom Blvd Ste 1, Sacramento, CA 95826, USA",
+    "reason": "retail/storefront: pack & ship"
+  },
+  {
+    "name": "New Frontier Self Storage - Hot Springs Village",
+    "address": "3867 AR 7, Hot Springs Village, AR 71909, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Bridgers Truck Stop Chevron",
+    "address": "549 E Bridgers Ave, Auburndale, FL 33823, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Extra Space Storage",
+    "address": "2830 PA-100, Macungie, PA 18062, USA",
+    "reason": "retail/storefront: extra space"
+  },
+  {
+    "name": "Crystal Basin Cellars",
+    "address": "2850 Cold Springs Rd Suite A, Placerville, CA 95667, USA",
+    "reason": "cellars"
+  },
+  {
+    "name": "Pride Truck Stop - Hartford",
+    "address": "10 Jennings Rd, Hartford, CT 06120, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "DFL7 - Amazon Delivery Station (Lakeland)",
+    "address": "8100 FL-33, Lakeland, FL 33809, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Dassault Falcon Jet LLC",
+    "address": "Bill and Hillary Clinton National Airport, 3801 E 10th St, Little Rock, AR 72202, USA",
+    "reason": "airport"
+  },
+  {
+    "name": "SecurCare Self Storage",
+    "address": "25980 Barton Rd, Loma Linda, CA 92354, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Pack Rat Self Storage",
+    "address": "908 W Main St, Whitehouse, TX 75791, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Eury's Truck Stop",
+    "address": "203 Nc 24 27 Byp W, Albemarle, NC 28001, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Valley Truck Stop",
+    "address": "990 Huntingdon Ave, Waterbury, CT 06704, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "A to Z Fuel Stop",
+    "address": "14529 San Bernardino Ave, Fontana, CA 92335, USA",
+    "reason": "retail/storefront: fuel stop"
+  },
+  {
+    "name": "DFL3 - Amazon Delivery Station (Gainesville)",
+    "address": "2121 NW 67th Pl, Gainesville, FL 32653, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "The UPS Store",
+    "address": "26F Congress St, Saratoga Springs, NY 12866, USA",
+    "reason": "retail/storefront: the ups store"
+  },
+  {
+    "name": "ONE9 Travel Center",
+    "address": "7205 S State Rd, Ionia, MI 48846, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Sac Valley Truck Stop",
+    "address": "7891 Stockton Blvd, Sacramento, CA 95823, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Fill Good Travel Plaza",
+    "address": "4102 W Hwy 74, Monroe, NC 28110, USA",
+    "reason": "travel plaza"
+  },
+  {
+    "name": "Amazon - DDV2 Delivery Station",
+    "address": "900 E 128th Ave, Thornton, CO 80241, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Madix LTL Shipping",
+    "address": "1210 Airport Rd, Terrell, TX 75160, USA",
+    "reason": "airport"
+  },
+  {
+    "name": "Gateway Travel Plaza",
+    "address": "100 US-79, Henderson, TX 75652, USA",
+    "reason": "travel plaza"
+  },
+  {
+    "name": "Mobil",
+    "address": "3371 N Hwy 7, Hot Springs Village, AR 71909, USA",
+    "reason": "retail/storefront: mobil"
+  },
+  {
+    "name": "Texas Best Truck Stop",
+    "address": "1955 N Kings Hwy, Nash, TX 75569, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Chital Travel Center",
+    "address": "24782 Interstate 20 W #100, Lindale, TX 75771, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Minden Truck Stop",
+    "address": "1629 State Rte 531, Minden, LA 71055, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Amazon Delivery Station DFM3",
+    "address": "770 Commerce Dr, Venice, FL 34292, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Pilot Travel Center",
+    "address": "7044 Co Rd 49, Hudson, CO 80642, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "DWI4 Amazon Delivery Station",
+    "address": "3650 Milwaukee St, Madison, WI 53714, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Pleasant Springs Travel Center",
+    "address": "2763 County Hwy N, Cottage Grove, WI 53527, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Morven Truck Stop",
+    "address": "6438 US-52, Morven, NC 28119, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Marshall Truck Stop",
+    "address": "304 I-20, Marshall, TX 75672, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Extra Space Storage",
+    "address": "2503 Seiferth Rd, Madison, WI 53716, USA",
+    "reason": "retail/storefront: extra space"
+  },
+  {
+    "name": "US TRUCK STOP",
+    "address": "3800 Horseshoe Pike, Honey Brook, PA 19344, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Texas Travel Plaza",
+    "address": "15615 US-59, Humble, TX 77396, USA",
+    "reason": "travel plaza"
+  },
+  {
+    "name": "Armor Self Storage",
+    "address": "5714 Auburn Blvd, Sacramento, CA 95841, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Circle K/Payless Travel Center",
+    "address": "I-20 Frontage Rd, Dallas, TX 75241, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "DK Sangha Truck Wash",
+    "address": "7080 Florin Perkins Rd, Sacramento, CA 95828, USA",
+    "reason": "truck wash"
+  },
+  {
+    "name": "Clear Creek Winery & Distillery",
+    "address": "709 Harris Ave, Kemah, TX 77565, USA",
+    "reason": "winery"
+  },
+  {
+    "name": "GT2 Chevron Truck Stop",
+    "address": "7107 Fairbanks N, Houston, TX 77040, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "301 Truck Stop",
+    "address": "210 N Eastern Blvd, Fayetteville, NC 28301, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Willco Travel Plaza",
+    "address": "12898 State Hwy 155, Tyler, TX 75708, USA",
+    "reason": "travel plaza"
+  },
+  {
+    "name": "Truck Stop Health Clinic USA, Inc.",
+    "address": "15253 Gale Ave, City of Industry, CA 91745, USA",
+    "reason": "retail/storefront: clinic"
+  },
+  {
+    "name": "Normandy Truck Stop",
+    "address": "12811 East Fwy, Houston, TX 77015, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "The Truck Stop DFW Inc.",
+    "address": "7163 Latham Dr suite g/h, Richland Hills, TX 76118, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Love's Travel Stop",
+    "address": "1188 S Oak St, Van, TX 75790, USA",
+    "reason": "love's travel"
+  },
+  {
+    "name": "Canton Travel Center & Restaurant",
+    "address": "9800 I-20, Canton, TX 75103, USA",
+    "reason": "retail/storefront: restaurant"
+  },
+  {
+    "name": "Hempstead Truck Stop",
+    "address": "14304 Hempstead Rd, Houston, TX 77040, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Fill & Fly 76 Truck Stop of Wind Gap",
+    "address": "169 Epps St, Wind Gap, PA 18091, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "CITGO",
+    "address": "I-95 MAINE TURNPIKE MILE 56 SOUTHBOUND, Cumberland Center, ME 04021, USA",
+    "reason": "retail/storefront: citgo"
+  },
+  {
+    "name": "Ozarka Bottled Water Delivery Houston",
+    "address": "9351 E Point Dr, Houston, TX 77054, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Checkpoint#15 TruckStop",
+    "address": "5411 East Sam Houston Pkwy S, Houston, TX 77034, USA",
+    "reason": "truckstop"
+  },
+  {
+    "name": "Superstop Travel Plaza",
+    "address": "33 McMillan Rd, Gurdon, AR 71743, USA",
+    "reason": "travel plaza"
+  },
+  {
+    "name": "Read Street Self Storage",
+    "address": "217 Read St, Portland, ME 04103, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Allentown Transportation Center",
+    "address": "152-132 N Church St, Allentown, PA 18102, USA",
+    "reason": "church"
+  },
+  {
+    "name": "Lake Oasis Travel Plaza",
+    "address": "N6919 WI-89, Lake Mills, WI 53551, USA",
+    "reason": "travel plaza"
+  },
+  {
+    "name": "FedEx Ship Center",
+    "address": "6450 Air Cargo Dr SE, Grand Rapids, MI 49512, USA",
+    "reason": "retail/storefront: fedex ship center"
+  },
+  {
+    "name": "Texas Forever Truck Stop",
+    "address": "17124 - A E Freeway Service Rd, Channelview, TX 77530, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "DAB4 Amazon Delivery",
+    "address": "1785 NY-5S, Amsterdam, NY 12010, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "GT3 Chevron Truck Stop",
+    "address": "2409 W Mt Houston Rd, Houston, TX 77038, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "RB Truck Stop",
+    "address": "7501 Lyons Ave, Houston, TX 77020, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "J . J Truck Stop",
+    "address": "17997 US-380, Ponder, TX 76259, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "All American Self Storage",
+    "address": "45 County Rd, Westbrook, ME 04092, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Perris 76 Truck Stop",
+    "address": "4485 N Perris Blvd, Perris, CA 92571, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Marathon Gas Station",
+    "address": "2611 N 40th St, Tampa, FL 33605, USA",
+    "reason": "retail/storefront: gas station"
+  },
+  {
+    "name": "R&J Fuel Stop",
+    "address": "660 S Main St, Bell, FL 32619, USA",
+    "reason": "retail/storefront: fuel stop"
+  },
+  {
+    "name": "FedEx Office Print & Ship Center",
+    "address": "21 Congress St, Saratoga Springs, NY 12866, USA",
+    "reason": "retail/storefront: fedex office"
+  },
+  {
+    "name": "Wildomar Self Storage & RV",
+    "address": "33868 Mission Trail, Wildomar, CA 92595, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "6429 Gall Blvd, Zephyrhills, FL 33542, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "67 Super Stop Deli and Truck Stop",
+    "address": "348 NY-67, Amsterdam, NY 12010, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Lock Box East Self Storage & Moving Center-Longview",
+    "address": "1700 E Marshall Ave, Longview, TX 75601, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Stewart's Ice Cream Plant",
+    "address": "461 Church St, Saratoga Springs, NY 12866, USA",
+    "reason": "church"
+  },
+  {
+    "name": "FedEx Office Print & Ship Center",
+    "address": "3948 Central Ave E, Hot Springs National Park, AR 71913, USA",
+    "reason": "retail/storefront: fedex office"
+  },
+  {
+    "name": "Hempstead Express Truck Stop",
+    "address": "12914 Hempstead Rd, Houston, TX 77040, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Biagi Brothers Transportation",
+    "address": "3655 E Airport Dr, Ontario, CA 91761, USA",
+    "reason": "airport"
+  },
+  {
+    "name": "Diamond Food Mart - Truck Stop",
+    "address": "16121 I-10, Channelview, TX 77530, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "99 Travel Center-Chevron Truck Stop-Food Court",
+    "address": "4142 CA-99, Yuba City, CA 95991, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Circle K/Roadside Oasis Travel Center",
+    "address": "742 W County Line Rd, Calimesa, CA 92320, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Amazon Delivery Station VCA5",
+    "address": "7601 Metro Air Pkwy, Sacramento, CA 95837, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Midway Truck Plaza",
+    "address": "39 Diner Dr, Bethel, PA 19507, USA",
+    "reason": "truck plaza"
+  },
+  {
+    "name": "Truck Parking Lot -TA",
+    "address": "Reddick, FL 32686, USA",
+    "reason": "truck parking"
+  },
+  {
+    "name": "Coushatta Truck Stop",
+    "address": "5076 Cut-Off Rd, Coushatta, LA 71019, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Southbound Service Plaza",
+    "address": "Service Plaza Rd, Allentown, PA 18106, USA",
+    "reason": "service plaza"
+  },
+  {
+    "name": "SafeStop | 24/7 Secure Truck Parking",
+    "address": "725 E Wintergreen Rd, Hutchins, TX 75141, USA",
+    "reason": "truck parking"
+  },
+  {
+    "name": "Exit 11 Citgo Truck Stop",
+    "address": "10 Round Lake Rd, Ballston Lake, NY 12019, USA",
+    "reason": "retail/storefront: citgo"
+  },
+  {
+    "name": "Kings Rt 1 Truck Stop",
+    "address": "868 US-9, Elizabeth, NJ 07202, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "VP Racing Truck Stop",
+    "address": "976 AR-9, Morrilton, AR 72110, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Swift Truck Stop",
+    "address": "1900 N Gordon St, Alvin, TX 77511, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Phillips66 Auto Center & Truck Stop",
+    "address": "1197 N Main Rd, Vineland, NJ 08360, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Flagstaff General Store",
+    "address": "108 Main St, Stratton, ME 04982, USA",
+    "reason": "general store"
+  },
+  {
+    "name": "DFO2 Amazon Delivery",
+    "address": "4000 Wilbur Ave, Oakley, CA 94561, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Citgo",
+    "address": "10 Round Lake Rd, Ballston Lake, NY 12019, USA",
+    "reason": "retail/storefront: citgo"
+  },
+  {
+    "name": "Lifetime Storage - West Gardiner",
+    "address": "473 Lewiston Rd, West Gardiner, ME 04345, USA",
+    "reason": "retail/storefront: diner"
+  },
+  {
+    "name": "Exit 3 Travel Stop",
+    "address": "1166 Greenland Rd, Portsmouth, NH 03801, USA",
+    "reason": "travel stop"
+  },
+  {
+    "name": "Fifty One Self Storage",
+    "address": "6446 N Towne Rd, Windsor, WI 53598, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Cedar Rock Self Storage",
+    "address": "5800 14 Mile Rd NE, Rockford, MI 49341, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Outbox Self Storage",
+    "address": "4815 Silabert Ave, Charlotte, NC 28205, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Truck Parking Yard Tampa",
+    "address": "5127 N 47th St, Tampa, FL 33610, USA",
+    "reason": "truck parking"
+  },
+  {
+    "name": "All Star Self Storage",
+    "address": "8599 Folsom Blvd, Sacramento, CA 95826, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "United States Postal Service",
+    "address": "245 Washington St, Saratoga Springs, NY 12866, USA",
+    "reason": "retail/storefront: postal service"
+  },
+  {
+    "name": "On Point Self Storage",
+    "address": "551 Main St, Gorham, ME 04038, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Hillview Market & Deli",
+    "address": "21 Buxton Rd, Saco, ME 04072, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Phillips 66 Fuel Rack",
+    "address": "3960 E 56th Ave, Commerce City, CO 80022, USA",
+    "reason": "retail/storefront: fuel rack"
+  },
+  {
+    "name": "151 Travel Center",
+    "address": "2278 Harry Byrd Hwy, Darlington, SC 29532, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Network Delivery Systems, Inc.",
+    "address": "4109 S Market Ct #30, Sacramento, CA 95834, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Hollywood Delivery Service",
+    "address": "2828 S Willow Ave, Bloomington, CA 92316, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Flying J Truck Parking",
+    "address": "2435 Mt Holly Rd, Rock Hill, SC 29730, USA",
+    "reason": "truck parking"
+  },
+  {
+    "name": "Woodbine Travel Center",
+    "address": "1981 Ga Spur #25, Woodbine, GA 31569, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Extra Space Storage",
+    "address": "415 W Ridge Pike, Limerick, PA 19468, USA",
+    "reason": "retail/storefront: extra space"
+  },
+  {
+    "name": "Brookshire Truck Stop",
+    "address": "213 Waller Ave, Brookshire, TX 77423, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Flying J Fuel Island",
+    "address": "3906 Etiwanda Ave, Mira Loma, CA 91752, USA",
+    "reason": "flying j"
+  },
+  {
+    "name": "ACI Truck Stop",
+    "address": "55 US-46, Delaware, NJ 07833, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Clark's Travel Center",
+    "address": "82253 Indio Blvd, Indio, CA 92201, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Vans Delivery Service, Inc.",
+    "address": "2280 Turner Ave NW, Grand Rapids, MI 49544, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Quick Fill - Truck Stop",
+    "address": "3146 US-206, Columbus, NJ 08022, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Texas Truck Plaza",
+    "address": "5303 N McCarty St, Houston, TX 77013, USA",
+    "reason": "truck plaza"
+  },
+  {
+    "name": "Midway Armadillo Truck Stop",
+    "address": "8966 US Hwy 271 N, Gilmer, TX 75644, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Mini Mall Storage - Hot Springs",
+    "address": "929 Airport Rd, Hot Springs, AR 71913, USA",
+    "reason": "airport"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "6851 Broadmoor Ave SE, Caledonia, MI 49316, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "P & J Truck Parking Inc.",
+    "address": "2120 W Epler Ave, Indianapolis, IN 46217, USA",
+    "reason": "truck parking"
+  },
+  {
+    "name": "RCR Commercial Truck Parking",
+    "address": "8455 Schaefer Ave, Ontario, CA 91761, USA",
+    "reason": "truck parking"
+  },
+  {
+    "name": "Truck Stop Quebec",
+    "address": "980 Av. Saint-Louis Suite 8, Plessisville, QC G6L 2M1, Canada",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Partner's Delivery, Inc.",
+    "address": "10837 Commerce Way Unit-D, Fontana, CA 92337, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "36515 State Rd 54, Zephyrhills, FL 33541, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "COWARD TRUCK STOP",
+    "address": "US-52, Coward, SC 29530, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "The Lakes Self Storage",
+    "address": "8940 Midstate Dr, Mecosta, MI 49332, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Burns Truck Stop Mini-Mart",
+    "address": "1852 US-3, Stratford, NH 03590, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "LockerBlox Self Storage-Hot Springs Village",
+    "address": "129 Hill Country Ln, Hot Springs Village, AR 71909, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Red Fox Rv Park , Cabins And Storage Units",
+    "address": "427 FM 49, Mineola, TX 75773, USA",
+    "reason": "retail/storefront: storage units"
+  },
+  {
+    "name": "Sheetz Guaranteed Scale",
+    "address": "9795 Commerce Cir, Kutztown, PA 19530, USA",
+    "reason": "retail/storefront: guaranteed scale"
+  },
+  {
+    "name": "Greenville West Self Storage",
+    "address": "301 Maplewood St #1I, Greenville, MI 48838, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Northwoods Truck Stop",
+    "address": "161 Main St, Colebrook, NH 03576, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "StorSafe Self Storage",
+    "address": "752 US-378, Lexington, SC 29072, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "TRUCK PARKING YARD",
+    "address": "14013 Huffmeister Rd, Cypress, TX 77429, USA",
+    "reason": "truck parking"
+  },
+  {
+    "name": "Ultimate Boat & RV Storage",
+    "address": "22211 W Newberry Rd suite c, Newberry, FL 32669, USA",
+    "reason": "rv storage"
+  },
+  {
+    "name": "Red Oak Travel Center",
+    "address": "200 Interstate Highway 35E Service Road, Red Oak, TX 75154, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Siemens Mobility, Inc.",
+    "address": "7464 French Rd, Sacramento, CA 95828, USA",
+    "reason": "retail/storefront: mobil"
+  },
+  {
+    "name": "United States Postal Service",
+    "address": "23687 NW 188th Ave, High Springs, FL 32643, USA",
+    "reason": "retail/storefront: postal service"
+  },
+  {
+    "name": "Store Away Self Storage - East Greenbush",
+    "address": "520 Columbia Turnpike, East Greenbush, NY 12061, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Star Maxx 2 - Mykawa Rd Truck Stop",
+    "address": "9250 Mykawa Rd, Houston, TX 77048, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Pilot Flying J Diesel Island",
+    "address": "1726 W Thompson Rd, Indianapolis, IN 46217, USA",
+    "reason": "flying j"
+  },
+  {
+    "name": "Busy Bee LLC Truck Stop",
+    "address": "493 E Liberty St, Sumter, SC 29153, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "United States Postal Service",
+    "address": "4656 N Hwy 7 P, Hot Springs Village, AR 71909, USA",
+    "reason": "retail/storefront: postal service"
+  },
+  {
+    "name": "One9 Dealer--Texas Best Smokehouse Travel Center",
+    "address": "16243 US-271, Tyler, TX 75708, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Texas Best Smokehouse Travel Center",
+    "address": "3302 S Eastman Rd, Longview, TX 75602, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "A-18 Truck Parking",
+    "address": "5720 Rendon Bloodworth Rd, Fort Worth, TX 76140, USA",
+    "reason": "truck parking"
+  },
+  {
+    "name": "United States Postal Service",
+    "address": "620 Central Ave Ste 1A, Hot Springs National Park, AR 71901, USA",
+    "reason": "retail/storefront: postal service"
+  },
+  {
+    "name": "Delaware Truck Stop",
+    "address": "370 Lisa Dr, New Castle, DE 19720, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Load N Lock Self Storage - Fort Atkinson",
+    "address": "1216 Whitewater Ave, Fort Atkinson, WI 53538, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Diligent Delivery Systems - Denver",
+    "address": "2395 W 2nd Ave Unit 1, Denver, CO 80223, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "1 Dominic Dr, Ballston Spa, NY 12020, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "Deer Park Bottled Water Delivery Breinigsville",
+    "address": "405 Nestle Way, Breinigsville, PA 18031, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Primos truck stop diner",
+    "address": "1730 PA-309, Coopersburg, PA 18036, USA",
+    "reason": "retail/storefront: diner"
+  },
+  {
+    "name": "WHIP-IN Beer Wine and Truck Stop",
+    "address": "101 Holfords Prairie Rd, Lewisville, TX 75056, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "TRUX Parking",
+    "address": "5100 W Airport Fwy, Irving, TX 75062, USA",
+    "reason": "airport"
+  },
+  {
+    "name": "Suncoast Self Storage",
+    "address": "15422 County Line Rd, Spring Hill, FL 34610, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Clean Energy - Fontana Truck Stop Center (CNG & LNG)",
+    "address": "14230 Valley Blvd, Fontana, CA 92335, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "McCarthy Truck Parking Hub",
+    "address": "8350 Tilgham St, Houston, TX 77029, USA",
+    "reason": "truck parking"
+  },
+  {
+    "name": "Hudson River Self Storage",
+    "address": "423 Hudson River Rd, Waterford, NY 12188, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Jackpot Truck Stop",
+    "address": "14024 Almeda Rd, Houston, TX 77053, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Marshall Truck Stop",
+    "address": "915 US-65, Marshall, AR 72650, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Hobby Gas Station",
+    "address": "8250 Telephone Rd, Houston, TX 77061, USA",
+    "reason": "retail/storefront: gas station"
+  },
+  {
+    "name": "E. & J. Gallo Winery",
+    "address": "2386 Catawba River Rd, Fort Lawn, SC 29714, USA",
+    "reason": "winery"
+  },
+  {
+    "name": "Express Fuel and Truck Parking",
+    "address": "4782 Tolbut St, Philadelphia, PA 19136, USA",
+    "reason": "truck parking"
+  },
+  {
+    "name": "Diligent Delivery Systems - Tyler",
+    "address": "12011 Laney Rd, Tyler, TX 75708, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Chevron Truck Stop",
+    "address": "16311 US-27, Lake Wales, FL 33859, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Alpine Storage/Public Yucaipa Self Storage/Cold/Climate Storage/Mini Storage",
+    "address": "31838 Dunlap Blvd, Yucaipa, CA 92399, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Roady's America's Hometown Truck Stops",
+    "address": "Columbus, WI 53925, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "United States Postal Service",
+    "address": "24 Weston Ave, Madison, ME 04950, USA",
+    "reason": "retail/storefront: postal service"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "267 North St, Houlton, ME 04730, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Guardian Self Storage",
+    "address": "2961 Fruitridge Rd, Sacramento, CA 95820, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Orange County Truck Stop & Warehousing",
+    "address": "3100 S Standard Ave, Santa Ana, CA 92705, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Fred's Truck Stop",
+    "address": "16600 US-71 S, Boles, AR 72926, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Marathon Truck Stop",
+    "address": "3558 M-140, Watervliet, MI 49098, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "AJM Delivery Service",
+    "address": "3778 S Milliken Ave unit D, Eastvale, CA 91752, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Bloomington Chevron Truck Stop",
+    "address": "18653 Slover Ave, Bloomington, CA 92316, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Mobile Truck Stop",
+    "address": "119 100th St SW, Byron Center, MI 49315, USA",
+    "reason": "retail/storefront: mobil"
+  },
+  {
+    "name": "Betsy Ross Truck Stop",
+    "address": "S, Pennsauken, NJ 08110, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Adesa International, LLC",
+    "address": "1440 S Vineyard Ave, Ontario, CA 91761, USA",
+    "reason": "vineyard"
+  },
+  {
+    "name": "Koch Truck Stop, Truck Parking",
+    "address": "Daimler St, Irvine, CA 92614, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "8921 Fourche Dam Pike, Little Rock, AR 72206, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Express Truck Stop",
+    "address": "13438 Beaumont Hwy, Houston, TX 77049, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "National Truck Stop Brunswick",
+    "address": "110 Dungeness Dr, Brunswick, GA 31523, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "DUR8 Amazon Delivery Station",
+    "address": "18025 Slover Ave, Bloomington, CA 92316, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Stor-Mor4Less Self Storage",
+    "address": "3200 N Jackson St, Palestine, TX 75803, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Buffalo Truck Stop",
+    "address": "2430 W Commerce St, Buffalo, TX 75831, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "5300 Monona Dr, Monona, WI 53716, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "3739 NW Blitchton Rd, Ocala, FL 34475, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Gold Medal Products Co. - Colorado",
+    "address": "2450 Airport Blvd unit f, Aurora, CO 80011, USA",
+    "reason": "airport"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "20115 US-441, High Springs, FL 32643, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "3128 Blanding Blvd, Middleburg, FL 32068, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "4115 Sportsman Club Rd, Jacksonville, FL 32219, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "United States Postal Service",
+    "address": "654 Saratoga Rd #2, Gansevoort, NY 12831, USA",
+    "reason": "retail/storefront: postal service"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "2256 N Trade Days Blvd 19 & 20, Canton, TX 75103, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Cold Brook Self Storage",
+    "address": "594 Coldbrook Rd, Hermon, ME 04401, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "American Plant & Equipment",
+    "address": "4200 S Church St Ext, Roebuck, SC 29376, USA",
+    "reason": "church"
+  },
+  {
+    "name": "Truck Parking Sacramento",
+    "address": "4660 Mayhew Rd, Sacramento, CA 95826, USA",
+    "reason": "truck parking"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "14 Missing Link Rd, Springfield, VT 05156, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Bradley Cove Storage Units",
+    "address": "395 Bradley Cove Rd, Russellville, AR 72802, USA",
+    "reason": "retail/storefront: storage units"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "3631 Central Ave, Hot Springs, AR 71913, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "Exit 120 Self Storage",
+    "address": "3089 Middle Rd, Sidney, ME 04330, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "6410 64th St Ct E, Bradenton, FL 34208, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "1717 US-17, Pierson, FL 32180, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "1495 N Manila Rd, Bennett, CO 80102, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Mac's Truck Stop",
+    "address": "22 Washington St Ext A, Fair Haven, VT 05743, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Arrowhead Bottled Water Delivery Colton",
+    "address": "130 Fogg St, Colton, CA 92324, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Great Truck Stop",
+    "address": "Hensley, AR 72065, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "1404 Albert Pike Rd, Hot Springs, AR 71913, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "Cathay Pacific Cargo",
+    "address": "1640 W 23rd St Suite 200, DFW Airport, TX 75261, USA",
+    "reason": "airport"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "803 N Main St, Chiefland, FL 32626, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "U-Stor-It Self Storage",
+    "address": "249 Washington St, Saratoga Springs, NY 12866, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "3508 Oliver Lancaster Blvd, Rockport, AR 72104, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Broadway South Self Storage",
+    "address": "6311 S Broadway Ave, Tyler, TX 75703, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Barnes Family Storage",
+    "address": "14 Self Storage Lane, Augusta, ME 04330, USA",
+    "reason": "self storage"
+  },
+  {
+    "name": "Drop In - Mykawa Truck Stop",
+    "address": "7102 Mykawa Rd, Houston, TX 77033, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Lockwood Travel Center",
+    "address": "990 Lockwood Dr, Houston, TX 77020, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "15155 NW US Hwy 441, Alachua, FL 32615, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "Route 82 Truck Stop",
+    "address": "306 E 5th St, Tifton, GA 31794, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "3020 NY-50, Saratoga Springs, NY 12866, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "Roadster Travel Center and Truck Stop - Greenville",
+    "address": "3004 I-30, Greenville, TX 75401, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Manton Self Storage | Northern Michigan",
+    "address": "5902 N U.S. Hwy 131, Manton, MI 49663, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "M-140 Truck Stop",
+    "address": "13781 M-140, South Haven, MI 49090, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "430 Sabattus St, Lewiston, ME 04240, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "204 Center Rd, Fairfield, ME 04937, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Oasis Kilgore Truck Stop",
+    "address": "3333 Kilgore Pkwy, Baytown, TX 77523, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "3511 W Davis St, Dallas, TX 75211, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "16590 El Camino Real, Houston, TX 77062, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "NATIONAL TRUCK STOP",
+    "address": "15481 FARM TO MKT 968 W, Longview, TX 75602, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Trinidad Truck Parking area",
+    "address": "17200 State Hwy 31 W, Trinidad, TX 75163, USA",
+    "reason": "truck parking"
+  },
+  {
+    "name": "Saginaw Travel Plaza",
+    "address": "3670 E Washington Rd, Saginaw, MI 48601, USA",
+    "reason": "travel plaza"
+  },
+  {
+    "name": "Fayetteville Truck Stop",
+    "address": "454 Cedar Creek Rd, Fayetteville, NC 28312, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "2756 Malvern Ave, Hot Springs, AR 71901, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "Lone Star Truck Stop",
+    "address": "530 N Main St, Lone Star, TX 75668, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Arundel Self Storage, LLC",
+    "address": "2501 Portland Rd, Arundel, ME 04046, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "A-A Linnerud Self Storage",
+    "address": "710 Craftsman Way, Sun Prairie, WI 53590, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Mykawa Truck Stop",
+    "address": "7102 Mykawa Rd, Houston, TX 77033, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "DTP8 Amazon Delivery Station",
+    "address": "3201 Gateway Centre Pkwy, Pinellas Park, FL 33781, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Great Point Self Storage Newport Pittsfield",
+    "address": "146 N Rd, Detroit, ME 04929, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Motu 12210 Valero Truck Stop Hwy3",
+    "address": "12210 Galveston Rd, Houston, TX 77034, USA",
+    "reason": "retail/storefront: valero"
+  },
+  {
+    "name": "Native Vanilla",
+    "address": "1255 W Airport Blvd, Sanford, FL 32773, USA",
+    "reason": "airport"
+  },
+  {
+    "name": "Truck Parking Lot -Shell",
+    "address": "Lake City, FL 32024, USA",
+    "reason": "truck parking"
+  },
+  {
+    "name": "Walmart Deli",
+    "address": "16 Old Gick Rd, Saratoga Springs, NY 12866, USA",
+    "reason": "retail/storefront: walmart deli"
+  },
+  {
+    "name": "American Airlines Cargo",
+    "address": "International Airport, 2300 E Airport Dr, Ontario, CA 91761, USA",
+    "reason": "airport"
+  },
+  {
+    "name": "Beacon Truck Stop",
+    "address": "2300 E Steel Rd Unit E, Colton, CA 92324, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "14870 US-441, Summerfield, FL 34491, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "10100 Granite Pl, Jacksonville, FL 32226, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "270 Riverside St, Portland, ME 04103, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "East Branch Delivery Services",
+    "address": "245 Rodman Rd, Auburn, ME 04210, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Garland-Swamp Self Storage",
+    "address": "318 Bakerstown Rd, Poland, ME 04274, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Alpha Delicaces",
+    "address": "6161 Savoy Dr suite 1025a, Houston, TX 77036, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "15041 US-27, Lake Wales, FL 33859, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Kingfield Self Storage",
+    "address": "75 W Kingfield Rd, Kingfield, ME 04947, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "United States Postal Service",
+    "address": "8 Depot St, Kingfield, ME 04947, USA",
+    "reason": "retail/storefront: postal service"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "5810 N. Broadway, Denver, CO 80216, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Greenwood Storage Place - Self Storage Units Greenwood IN",
+    "address": "475 Stop 18 Rd E, Greenwood, IN 46143, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "United States Postal Service",
+    "address": "56 W Pine Ave, McBee, SC 29101, USA",
+    "reason": "retail/storefront: postal service"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "4310 Park Ave, Fountain Lake, AR 71901, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "Mc Cain East Self Storage",
+    "address": "312 Smokey Ln, North Little Rock, AR 72117, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "830 Mountain Pine Rd, Hot Springs, AR 71913, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "North Hampton Self Storage",
+    "address": "3 Chestnut Rd, North Hampton, NH 03862, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "3730 Airport Rd, Lakeland, FL 33811, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "2109 W Memorial Blvd, Lakeland, FL 33815, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "United States Postal Service",
+    "address": "95 Main St, Stratton, ME 04982, USA",
+    "reason": "retail/storefront: postal service"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "2905 IN-44, Shelbyville, IN 46176, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "2807 Atlas Rd, Columbia, SC 29209, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Mobile Cold Portable Refrigeration",
+    "address": "1042 US-1, Ormond Beach, FL 32174, USA",
+    "reason": "retail/storefront: mobil"
+  },
+  {
+    "name": "ATM (Whately Truck Stop)",
+    "address": "372 State Rd, Whately, MA 01093, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Hendricks Truck Parking",
+    "address": "350 S Harkrider St, Conway, AR 72032, USA",
+    "reason": "truck parking"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "159 E Grand Ave, Hot Springs, AR 71901, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "Lakes Region Self Storage",
+    "address": "64 Enterprise Dr, Windham, ME 04062, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "East Gordonville Self Storage",
+    "address": "2072 E Gordonville Rd, Midland, MI 48640, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "All Seasons Boat & RV Storage",
+    "address": "11595 four seasons lane, Fife Lake, MI 49633, USA",
+    "reason": "rv storage"
+  },
+  {
+    "name": "Nichols Self-Storage",
+    "address": "20 Vassalboro Rd, China, ME 04358, USA",
+    "reason": "retail/storefront: self-storage"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "507 Wilton Rd, Farmington, ME 04938, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "8324 US Hwy 98 N, Lakeland, FL 33809, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "123 Truck Parking & Repair",
+    "address": "8411 Arcola Ave, Hudson, FL 34667, USA",
+    "reason": "truck parking"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "1205 N Main St, Lancaster, SC 29720, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Birchpoint Self Storage",
+    "address": "20 Birch Point Rd, Wiscasset, ME 04578, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "1303 W Mt Houston Rd, Houston, TX 77038, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Truck stop",
+    "address": "4837 US-19, Palmetto, FL 34221, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "900 S 14th St, Leesburg, FL 34748, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "317 Main St, Farmington, ME 04938, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "United States Postal Service",
+    "address": "6 Frye Crossover Rd, Roxbury, ME 04275, USA",
+    "reason": "retail/storefront: postal service"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "95 New Hampshire Rte 175, Holderness, NH 03245, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "1515 N Main St, Gainesville, FL 32601, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "11325 W Beaver St, Jacksonville, FL 32220, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "5201 S Pine Ave, Ocala, FL 34480, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Saratoga Transport And Delivery Llc",
+    "address": "99 1/2 Walworth St, Saratoga Springs, NY 12866, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "HLR1 Amazon AMXL Delivery Station",
+    "address": "12401 I-30 Frontage Rd, Alexander, AR 72002, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "AIT Home Delivery",
+    "address": "7355 William Ave Suite 500/600, Allentown, PA 18106, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Deep Cryo",
+    "address": "6191 Kellers Church Rd, Pipersville, PA 18947, USA",
+    "reason": "church"
+  },
+  {
+    "name": "Mack Truck Stop",
+    "address": "789 E 1st St, Bethlehem, PA 18015, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "940 Beaulah St, Hawkins, TX 75765, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "All Secure Self Storage",
+    "address": "150 State Rd, West Bath, ME 04530, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Bath Self Storage",
+    "address": "18 State Rd, West Bath, ME 04530, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "4605 Larson Beach Rd, McFarland, WI 53558, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "4518 Cottage Grove Rd, Madison, WI 53716, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "God's Helping Hands Of Mecosta County Food Pantry",
+    "address": "8760 50th Ave, Remus, MI 49340, USA",
+    "reason": "food pantry"
+  },
+  {
+    "name": "Gateway Self Storage",
+    "address": "9 Mile Rd, Mecosta, MI 49332, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Handcrafted Delivery Service",
+    "address": "550 Lisbon St, Lewiston, ME 04240, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "698 Minot Ave, Auburn, ME 04210, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "4614 E Dr Martin Luther King Jr Blvd, Plant City, FL 33563, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "7222 State Rte 471, Bushnell, FL 33513, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "9700 US-41, Palmetto, FL 34221, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "United States Postal Service",
+    "address": "117 Bray Ave, Shawmut, ME 04975, USA",
+    "reason": "retail/storefront: postal service"
+  },
+  {
+    "name": "Fine Line Self Storage",
+    "address": "73 Weston Ave, Madison, ME 04950, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "United States Postal Service",
+    "address": "860 Village Rd, Smithfield, ME 04978, USA",
+    "reason": "retail/storefront: postal service"
+  },
+  {
+    "name": "United States Postal Service",
+    "address": "963 US-2 East, East Dixfield, ME 04227, USA",
+    "reason": "retail/storefront: postal service"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "247 Main St Route 2, Canaan, ME 04924, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "18 Moosehead Trail, Newport, ME 04953, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "5601 Quebec St, Commerce City, CO 80022, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "ABC Self Storage",
+    "address": "1119 US-301, Dillon, SC 29536, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "5105 Co Rd 218, Middleburg, FL 32068, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "AKA Self Storage LLC",
+    "address": "162 VT-346, Pownal, VT 05261, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "8709 State Rte 26, Rome, NY 13440, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "National Park, 2794 Mountain Pine Rd, Hot Springs, AR 71913, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "Lock & Stor",
+    "address": "929 Airport Rd, Hot Springs, AR 71913, USA",
+    "reason": "airport"
+  },
+  {
+    "name": "All Seasons Self Storage",
+    "address": "4418 WI-92 Trunk, Brooklyn, WI 53521, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Madison Self Storage",
+    "address": "1306 Packers Ave, Madison, WI 53704, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Midnight Mobile Munchies",
+    "address": "8861 Bass St, Mecosta, MI 49332, USA",
+    "reason": "retail/storefront: mobil"
+  },
+  {
+    "name": "Pohl Oil Travel Center",
+    "address": "10945 W Grand River Hwy, Grand Ledge, MI 48837, USA",
+    "reason": "travel center"
+  },
+  {
+    "name": "Amoco Truck Stop",
+    "address": "1001 E Warren Ave, Detroit, MI 48207, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "284 Civic Center Dr, Augusta, ME 04330, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "350 Main St, Gorham, NH 03581, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "I-275 TRUCK STOP",
+    "address": "41st St Blvd E, Rubonia, FL 34221, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "7695 FL-60, Bartow, FL 33830, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "451 E Myers Blvd, Mascotte, FL 34753, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "406 Main St, Bingham, ME 04920, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "United States Postal Service",
+    "address": "136 N Main St, Strong, ME 04983, USA",
+    "reason": "retail/storefront: postal service"
+  },
+  {
+    "name": "United States Postal Service",
+    "address": "753 Skowhegan Rd, Hinckley, ME 04944, USA",
+    "reason": "retail/storefront: postal service"
+  },
+  {
+    "name": "United States Postal Service",
+    "address": "8 Ferry St, Solon, ME 04979, USA",
+    "reason": "retail/storefront: postal service"
+  },
+  {
+    "name": "United States Postal Service",
+    "address": "6 Munson Rd, Dryden, ME 04225, USA",
+    "reason": "retail/storefront: postal service"
+  },
+  {
+    "name": "North Country Self Storage",
+    "address": "62 Trooper Leslie G Lord Mem Hwy, Colebrook, NH 03576, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "290 NH-104, New Hampton, NH 03256, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Ronnie station - Truck Stop",
+    "address": "137 Judge St, Harleyville, SC 29448, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Botanical Food Company Inc",
+    "address": "1843 Iron Point Rd #140, Folsom, CA 95630, USA",
+    "reason": "botanical"
+  },
+  {
+    "name": "Flame Truck Parking – North Yard | Secure Truck & Trailer Parking in Antelope, CA",
+    "address": "7920 Antelope North Rd, Antelope, CA 95843, USA",
+    "reason": "truck parking"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "90 West Ave, Saratoga Springs, NY 12866, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "Beth's Farm Kitchen",
+    "address": "155 Shaker Museum Rd, Old Chatham, NY 12136, USA",
+    "reason": "museum"
+  },
+  {
+    "name": "DFX",
+    "address": "1521 S Vineyard Ave, Ontario, CA 91761, USA",
+    "reason": "vineyard"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "9723 Maumelle Blvd, North Little Rock, AR 72113, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "5707 Four States Fair Pkwy, Texarkana, AR 71854, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "50580 Main St, Cabazon, CA 92230, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "947 Sokokis Trail, North Waterboro, ME 04061, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "Tory Hill Self Storage",
+    "address": "14 Tory Hill Dr, Buxton, ME 04093, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "JMX Same Day Delivery, LLC",
+    "address": "1250 Femrite Dr Suite 205E, Monona, WI 53716, USA",
+    "reason": "retail/storefront: deli"
+  },
+  {
+    "name": "Collegeboxes at U-Haul Moving & Storage of East Madison",
+    "address": "22 Atlas Ct, Madison, WI 53714, USA",
+    "reason": "retail/storefront: u-haul"
+  },
+  {
+    "name": "Airport Vehicle Storage",
+    "address": "Auburn, ME 04210, USA",
+    "reason": "airport"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "498 Belfast Augusta Rd, Liberty, ME 04949, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "SwingBy Truck Stop",
+    "address": "5122 N McCarty St, Houston, TX 77013, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "35075 Cortez Blvd, Ridge Manor, FL 33523, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "United States Postal Service",
+    "address": "18 Lake St, New Vineyard, ME 04956, USA",
+    "reason": "retail/storefront: postal service"
+  },
+  {
+    "name": "United States Postal Service",
+    "address": "2933 Us Rte 201, West Forks, ME 04985, USA",
+    "reason": "retail/storefront: postal service"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "92 Main St, Madison, ME 04950, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "87 Main Rd, Holden, ME 04429, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "ME-157, Medway, ME 04460, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "1005 N Riley Hwy, Shelbyville, IN 46176, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "260 S 200 E, Danville, IN 46122, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Shepherd's Funeral Home Care Facility",
+    "address": "384 S Church St, Lake City, SC 29560, USA",
+    "reason": "church"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "3006 Old Charlotte Hwy, Monroe, NC 28110, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "1281 Broad St, Sumter, SC 29150, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Flame Truck Parking Sacramento – Power Inn Rd | Gated & Lighted Yard",
+    "address": "7037 Power Inn Rd, Sacramento, CA 95828, USA",
+    "reason": "truck parking"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "16222 Wallisville Rd, Houston, TX 77049, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "24458 NW 174th Ave, High Springs, FL 32643, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "J Truck Stop",
+    "address": "5045 Soutel Dr, Jacksonville, FL 32208, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Reiter Technical Services Inc.",
+    "address": "2426 Airport Rd, Hot Springs, AR 71913, USA",
+    "reason": "airport"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "4634 N Hwy 7, Hot Springs Village, AR 71909, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "1024 Airport Rd, Hot Springs, AR 71913, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "3265 US-167, Sheridan, AR 72150, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "QuikTrip",
+    "address": "12115 Otter Creek Rd, Little Rock, AR 72210, USA",
+    "reason": "retail/storefront: quiktrip"
+  },
+  {
+    "name": "Transplace",
+    "address": "1018 Airport Rd, Hot Springs, AR 71913, USA",
+    "reason": "airport"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "717 Carpenter Dam Rd, Hot Springs, AR 71901, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "611 W Broadway St, Big Sandy, TX 75755, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "432 Narragansett Trail, Buxton, ME 04093, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "226 Parker Farm Rd, Buxton, ME 04093, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "401 US-1, Scarborough, ME 04074, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "108 Cottage Grove Rd, Madison, WI 53716, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "Sdg Self Storage",
+    "address": "410 China Rd, Winslow, ME 04901, USA",
+    "reason": "retail/storefront: self storage"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "639-647 Bath Rd, Wiscasset, ME 04578, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "209 Townsend Ave, Boothbay Harbor, ME 04538, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Barri Money Services. Jackpot Truck Stop",
+    "address": "14024 Almeda Rd, Houston, TX 77053, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "FedEx OnSite",
+    "address": "417 Main St, Kingfield, ME 04947, USA",
+    "reason": "retail/storefront: fedex onsite"
+  },
+  {
+    "name": "Brolark Storage Units",
+    "address": "Bingham, ME 04920, USA",
+    "reason": "retail/storefront: storage units"
+  },
+  {
+    "name": "United States Postal Service",
+    "address": "186 Meadow Brook Rd, New Portland, ME 04961, USA",
+    "reason": "retail/storefront: postal service"
+  },
+  {
+    "name": "Dysart truck stop",
+    "address": "Bangor, ME 04401, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "513 Alfred St, Biddeford, ME 04005, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "18 Main St, Sherman, ME 04776, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "Mobile home",
+    "address": "540 Mangum School Rd, Pageland, SC 29728, USA",
+    "reason": "retail/storefront: mobil"
+  },
+  {
+    "name": "Barri Money Services. Shell Station Truck Stop",
+    "address": "15415 US-59, Humble, TX 77396, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Barri Money Services. Hempstead Truck Stop",
+    "address": "14304 Hempstead Rd, Houston, TX 77040, USA",
+    "reason": "truck stop"
+  },
+  {
+    "name": "Circle K | Truck Stop",
+    "address": "6 W Main St, Lakeland, GA 31635, USA",
+    "reason": "retail/storefront: circle k"
+  },
+  {
+    "name": "On Time Delivery",
+    "address": "7 Worden Dr, Saratoga Springs, NY 12866, USA",
+    "reason": "retail/storefront: deli"
+  }
+]

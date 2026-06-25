@@ -1,0 +1,37 @@
+{"id":"8974714772","verdict":"out","segment":"","tier":"","reason":"FUJIFILM Irvine Scientific (irvinesci.com) - cell-culture media manufacturer, essentially single NA plant (Santa Ana), no yard network."}
+{"id":"8981888131","verdict":"in","segment":"cold_chain","tier":"B","reason":"Qualianz (qualianz.com) - Mexican cold/dry-chain 3PL with 33 storage/cross-dock facilities (Monterrey, CDMX, Tijuana), acquired by Emergent Cold LatAm; NA=Mexico counts."}
+{"id":"9347375539","verdict":"review","segment":"","tier":"","reason":"'Logistics Supply' - no domain, name too generic to identify even after search."}
+{"id":"9361574006","verdict":"out","segment":"","tier":"","reason":"Revolution Group Inc - Ohio IT/ERP consulting firm (Plex/CloudSuite services); professional services, out."}
+{"id":"9400258130","verdict":"out","segment":"","tier":"","reason":"Intuitive (Intuitive Surgical) - robotic surgical systems, medical devices, no large yard network (matches prior verdict for intusurg.com)."}
+{"id":"9438114621","verdict":"review","segment":"","tier":"","reason":"Seteed Inc - only match is a tiny Michigan LLC with no web presence; cannot identify what it does."}
+{"id":"9438851096","verdict":"out","segment":"","tier":"","reason":"UPPRO (uppro.biz) - Israel-based inventory-management/supply-chain services firm, 62 employees, no NA facility network."}
+{"id":"9445222448","verdict":"in","segment":"3pl_carrier","tier":"C","reason":"Harvey Holdings Inc (Statesville NC) - family of four supply-chain companies doing truckload, LTL and warehousing; small asset-based carrier with yards."}
+{"id":"9453543603","verdict":"in","segment":"automotive_heavy_mfg","tier":"C","reason":"Minghua USA (now Plasman) - Tier-1 auto plastics/bumper plant in Greer SC with JIT sequencing (1M bumpers/yr) plus Troy MI HQ; single high-throughput yard."}
+{"id":"9461731251","verdict":"out","segment":"","tier":"","reason":"Aniva Enterprises LLC - supply-chain consulting practice (Novi MI), no physical facilities."}
+{"id":"9462285831","verdict":"out","segment":"","tier":"","reason":"Venture Solutions - Taylor Corp transactional print/mail outsourcing; print services, no yard network."}
+{"id":"9497511992","verdict":"out","segment":"","tier":"","reason":"TOP Worldwide LLC (topworldwide.com) - asset-light freight brokerage 3PL (20k carrier network, Madison Heights MI); no owned yard network."}
+{"id":"9636345960","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"TreeHouse Foods - largest private-label food/beverage manufacturer, 20+ NA plants and DCs with heavy truck volume."}
+{"id":"54062347643","verdict":"review","segment":"","tier":"","reason":"threefletch.com - dead/unidentifiable domain, no company name; search found nothing."}
+{"id":"54413740812","verdict":"out","segment":"","tier":"","reason":"Seed Health (seed.com) - 92-employee DTC probiotics brand, outsourced manufacturing, no facility network."}
+{"id":"54424614577","verdict":"out","segment":"","tier":"","reason":"Tabacalera USA - premium cigar import/retail arm (210 employees), minimal distribution footprint."}
+{"id":"54406232601","verdict":"out","segment":"","tier":"","reason":"Biomed (biomed.bio) - 30-employee biotech startup, no facilities."}
+{"id":"54417957936","verdict":"in","segment":"3pl_carrier","tier":"A","reason":"National Retail Systems (nrsonline.com) - asset-based 3PL with Keystone Freight + National Retail Transportation fleets and cross-dock/warehouse network, ~$525M revenue."}
+{"id":"54409234784","verdict":"out","segment":"","tier":"","reason":"Verizon - telecom carrier; not a freight-heavy vertical despite device DCs."}
+{"id":"54427621449","verdict":"out","segment":"","tier":"","reason":"NJOY - vape brand (Altria), 157 employees, outsourced manufacturing, no yard network."}
+{"id":"54404163393","verdict":"out","segment":"","tier":"","reason":"State of Utah (utah.gov) - government, out."}
+{"id":"54417648543","verdict":"out","segment":"","tier":"","reason":"Bicara Therapeutics - 45-employee clinical-stage biotech, no facilities."}
+{"id":"54411777149","verdict":"out","segment":"","tier":"","reason":"CBRE - commercial real estate services, out."}
+{"id":"54410383668","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"bioMerieux - in-vitro diagnostics manufacturer with multiple NA plants/DCs (Durham NC, Hazelwood MO, BioFire Salt Lake City) plus cold-chain distribution; mirrors QuidelOrtho precedent."}
+{"id":"54415598484","verdict":"out","segment":"","tier":"","reason":"VisionSpring - nonprofit eyeglasses organization, out."}
+{"id":"54431956538","verdict":"out","segment":"","tier":"","reason":"Savills Portugal (savills.pt) - commercial real estate services, foreign, out."}
+{"id":"54431027547","verdict":"in","segment":"wholesale_distribution","tier":"C","reason":"Thomas Scientific (thomassci.com) - lab equipment/supplies distributor with a handful of US distribution centers."}
+{"id":"54414979220","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Columbus McKinnon (cmworks.com) - hoist/rigging/material-handling manufacturer with multiple NA plants (~3.4k employees)."}
+{"id":"54404007991","verdict":"out","segment":"","tier":"","reason":"Iron Mountain - records storage/data centers; van fleet to storage facilities, real-estate/storage services, no trailer-yard network."}
+{"id":"54421519641","verdict":"out","segment":"","tier":"","reason":"AGLC (aglc.ca) - Alberta government gaming/liquor/cannabis agency; government, out."}
+{"id":"54411777151","verdict":"out","segment":"","tier":"","reason":"T-Mobile - telecom carrier, out."}
+{"id":"54411467427","verdict":"in","segment":"chemicals_plastics","tier":"B","reason":"Novozymes/Novonesis - industrial enzymes manufacturer with NA plants (Franklinton NC, Blair NE, Salem VA) shipping bulk freight."}
+{"id":"54428550293","verdict":"out","segment":"","tier":"","reason":"Century Supply Chain Solutions / Century Distribution Systems (cds-net.com) - non-asset ocean freight management/NVOCC, no NA yards."}
+{"id":"54625582503","verdict":"review","segment":"","tier":"","reason":"goasd.com - dead/unidentifiable domain, no company name; search found nothing."}
+{"id":"54771960219","verdict":"out","segment":"","tier":"","reason":"Lifetouch (Shutterfly) - school photography services, out."}
+{"id":"54771853426","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"Vulcan Materials (vmcmail.com email domain) - largest US construction-aggregates producer, 400+ quarries/asphalt/concrete yards with constant truck traffic."}
+{"id":"54772463018","verdict":"out","segment":"","tier":"","reason":"Dahmer Brothers Construction - general contractor, jobsite-based, out."}

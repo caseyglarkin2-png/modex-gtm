@@ -1,0 +1,10 @@
+{
+  "slug": "agro-merchants",
+  "domain": "argomerchants.com",
+  "nearest_distance_mi": 55.6,
+  "proximity_score": 16,
+  "corridor_density": 6,
+  "composite_score": 23.61,
+  "nearest_primo_site": "US PL Allentown NPL Factory",
+  "facilities": 16
+}

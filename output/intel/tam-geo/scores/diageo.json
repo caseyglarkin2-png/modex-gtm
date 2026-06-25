@@ -1,0 +1,10 @@
+{
+  "slug": "diageo",
+  "domain": null,
+  "nearest_distance_mi": 79.9,
+  "proximity_score": 7,
+  "corridor_density": 3,
+  "composite_score": 12.84,
+  "nearest_primo_site": "US PL Dallas 2 Factory",
+  "facilities": 10
+}

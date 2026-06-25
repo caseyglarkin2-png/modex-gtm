@@ -1,0 +1,10 @@
+{
+  "slug": "mars",
+  "domain": "mars.com",
+  "nearest_distance_mi": 47.9,
+  "proximity_score": 20,
+  "corridor_density": 2,
+  "composite_score": 45.12,
+  "nearest_primo_site": "US DC NFI - Breinigsville",
+  "facilities": 13
+}

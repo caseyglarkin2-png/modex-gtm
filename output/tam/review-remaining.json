@@ -1,0 +1,1162 @@
+[
+ {
+  "id": "8974714772",
+  "name": "Irvine Scientific",
+  "domain": "irvinesci.com",
+  "industry": "BIOTECHNOLOGY",
+  "employees": "1000",
+  "reason": "ambiguous vertical (biotechnology)"
+ },
+ {
+  "id": "8981888131",
+  "name": "Qualianz",
+  "domain": "qualianz.com",
+  "industry": null,
+  "employees": "500",
+  "reason": "no industry"
+ },
+ {
+  "id": "9347375539",
+  "name": "Logistics Supply",
+  "domain": null,
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "9361574006",
+  "name": "Revolution Group, Inc.",
+  "domain": null,
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "9400258130",
+  "name": "Intuitive",
+  "domain": null,
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "9438114621",
+  "name": "Seteed Inc.",
+  "domain": null,
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "9438851096",
+  "name": "UPPRO",
+  "domain": null,
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "9445222448",
+  "name": "Harvey Holdings, Inc.",
+  "domain": null,
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "9453543603",
+  "name": "Minghua",
+  "domain": null,
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "9461731251",
+  "name": "Aniva Enterprises",
+  "domain": null,
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "9462285831",
+  "name": "Venture Solutions",
+  "domain": null,
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "9497511992",
+  "name": "TOP Worldwide LLC",
+  "domain": null,
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "9636345960",
+  "name": "TreeHouse Foods",
+  "domain": null,
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54062347643",
+  "name": null,
+  "domain": "threefletch.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54413740812",
+  "name": "Seed",
+  "domain": "seed.com",
+  "industry": "BIOTECHNOLOGY",
+  "employees": "92",
+  "reason": "ambiguous vertical (biotechnology)"
+ },
+ {
+  "id": "54424614577",
+  "name": "Tabacalera USA",
+  "domain": "tabacalerausa.com",
+  "industry": "TOBACCO",
+  "employees": "210",
+  "reason": "ambiguous vertical (tobacco)"
+ },
+ {
+  "id": "54406232601",
+  "name": "Biomed",
+  "domain": "biomed.bio",
+  "industry": "BIOTECHNOLOGY",
+  "employees": "30",
+  "reason": "ambiguous vertical (biotechnology)"
+ },
+ {
+  "id": "54417957936",
+  "name": "Nrsonline",
+  "domain": "nrsonline.com",
+  "industry": null,
+  "employees": "3000",
+  "reason": "no industry"
+ },
+ {
+  "id": "54409234784",
+  "name": "Verizon",
+  "domain": "verizon.com",
+  "industry": "WIRELESS",
+  "employees": "89900",
+  "reason": "ambiguous vertical (wireless)"
+ },
+ {
+  "id": "54427621449",
+  "name": "Njoy",
+  "domain": "njoy.com",
+  "industry": "TOBACCO",
+  "employees": "157",
+  "reason": "ambiguous vertical (tobacco)"
+ },
+ {
+  "id": "54404163393",
+  "name": "Utah",
+  "domain": "utah.gov",
+  "industry": "GOVERNMENT_ADMINISTRATION",
+  "employees": "6000",
+  "reason": "ambiguous vertical (government_administration)"
+ },
+ {
+  "id": "54417648543",
+  "name": "Bicara",
+  "domain": "bicara.com",
+  "industry": "BIOTECHNOLOGY",
+  "employees": "45",
+  "reason": "ambiguous vertical (biotechnology)"
+ },
+ {
+  "id": "54411777149",
+  "name": "CBRE",
+  "domain": "cbre.com",
+  "industry": "COMMERCIAL_REAL_ESTATE",
+  "employees": "105000",
+  "reason": "ambiguous vertical (commercial_real_estate)"
+ },
+ {
+  "id": "54410383668",
+  "name": "bioM\u00e9rieux",
+  "domain": "biomerieux.com",
+  "industry": "BIOTECHNOLOGY",
+  "employees": "12800",
+  "reason": "ambiguous vertical (biotechnology)"
+ },
+ {
+  "id": "54415598484",
+  "name": "Visionspring",
+  "domain": "visionspring.org",
+  "industry": "NON_PROFIT_ORGANIZATION_MANAGEMENT",
+  "employees": "330",
+  "reason": "ambiguous vertical (non_profit_organization_management)"
+ },
+ {
+  "id": "54431956538",
+  "name": "Savills",
+  "domain": "savills.pt",
+  "industry": "COMMERCIAL_REAL_ESTATE",
+  "employees": "60",
+  "reason": "ambiguous vertical (commercial_real_estate)"
+ },
+ {
+  "id": "54431027547",
+  "name": "Thomassci",
+  "domain": "thomassci.com",
+  "industry": "BIOTECHNOLOGY",
+  "employees": "314",
+  "reason": "ambiguous vertical (biotechnology)"
+ },
+ {
+  "id": "54414979220",
+  "name": "Cmworks",
+  "domain": "cmworks.com",
+  "industry": null,
+  "employees": "3392",
+  "reason": "no industry"
+ },
+ {
+  "id": "54404007991",
+  "name": "Iron Mountain",
+  "domain": "ironmountain.com",
+  "industry": "COMMERCIAL_REAL_ESTATE",
+  "employees": "24000",
+  "reason": "ambiguous vertical (commercial_real_estate)"
+ },
+ {
+  "id": "54421519641",
+  "name": "AGLC",
+  "domain": "aglc.ca",
+  "industry": "GOVERNMENT_ADMINISTRATION",
+  "employees": "1250",
+  "reason": "ambiguous vertical (government_administration)"
+ },
+ {
+  "id": "54411777151",
+  "name": "T Mobile",
+  "domain": "t-mobile.com",
+  "industry": "WIRELESS",
+  "employees": "75000",
+  "reason": "ambiguous vertical (wireless)"
+ },
+ {
+  "id": "54411467427",
+  "name": "Novozymes",
+  "domain": "novozymes.com",
+  "industry": "BIOTECHNOLOGY",
+  "employees": "6781",
+  "reason": "ambiguous vertical (biotechnology)"
+ },
+ {
+  "id": "54428550293",
+  "name": "Cds Net",
+  "domain": "cds-net.com",
+  "industry": null,
+  "employees": "870",
+  "reason": "no industry"
+ },
+ {
+  "id": "54625582503",
+  "name": null,
+  "domain": "goasd.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54771960219",
+  "name": "Lifetouch",
+  "domain": "lifetouch.com",
+  "industry": "PHOTOGRAPHY",
+  "employees": "5100",
+  "reason": "ambiguous vertical (photography)"
+ },
+ {
+  "id": "54771853426",
+  "name": null,
+  "domain": "vmcmail.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54772463018",
+  "name": "Dahmer Brothers Construction",
+  "domain": "pcg.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54772675115",
+  "name": null,
+  "domain": "prkmc.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54772651296",
+  "name": "The Charmer Sunbelt Group",
+  "domain": "charmer-sunbelt.com",
+  "industry": "WINE_AND_SPIRITS",
+  "employees": "8000",
+  "reason": "ambiguous vertical (wine_and_spirits)"
+ },
+ {
+  "id": "54736049742",
+  "name": null,
+  "domain": "sequel-us.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54771885983",
+  "name": "General Beverage and Beer Sales Companies",
+  "domain": "genbev.com",
+  "industry": "WINE_AND_SPIRITS",
+  "employees": "900",
+  "reason": "ambiguous vertical (wine_and_spirits)"
+ },
+ {
+  "id": "54771856981",
+  "name": null,
+  "domain": "wvcc.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54772680624",
+  "name": null,
+  "domain": "pcoastp.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54771844025",
+  "name": "ABC Fine Wine & Spirits",
+  "domain": "abcfws.com",
+  "industry": "WINE_AND_SPIRITS",
+  "employees": "1500",
+  "reason": "ambiguous vertical (wine_and_spirits)"
+ },
+ {
+  "id": "54771943943",
+  "name": "Woodmark",
+  "domain": "woodmark.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54771907117",
+  "name": null,
+  "domain": "rksks.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54772669603",
+  "name": "Baker & Taylor",
+  "domain": "baker-taylor.com",
+  "industry": "LIBRARIES",
+  "employees": "900",
+  "reason": "ambiguous vertical (libraries)"
+ },
+ {
+  "id": "54772651847",
+  "name": "Nintendo",
+  "domain": "nintendo.com",
+  "industry": "COMPUTER_GAMES",
+  "employees": "7700",
+  "reason": "ambiguous vertical (computer_games)"
+ },
+ {
+  "id": "54772556869",
+  "name": "TTC",
+  "domain": "ttcglobal.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54755795017",
+  "name": "Sony Pictures Imageworks",
+  "domain": "imageworks.com",
+  "industry": "ANIMATION",
+  "employees": "1300",
+  "reason": "ambiguous vertical (animation)"
+ },
+ {
+  "id": "54772001599",
+  "name": "Universal Leaf Tobacco Company",
+  "domain": "universalcorp.com",
+  "industry": "TOBACCO",
+  "employees": "11000",
+  "reason": "ambiguous vertical (tobacco)"
+ },
+ {
+  "id": "54771844366",
+  "name": null,
+  "domain": "vacv.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54772765440",
+  "name": null,
+  "domain": "pigsrus.net",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54772621575",
+  "name": null,
+  "domain": "precastcorp.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54772672090",
+  "name": "Sunrise Coal",
+  "domain": "sunrisecoal.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54773031097",
+  "name": null,
+  "domain": "redcedarventures.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54773346415",
+  "name": "Pixar Animation Studios",
+  "domain": "pixar.com",
+  "industry": "ANIMATION",
+  "employees": "1200",
+  "reason": "ambiguous vertical (animation)"
+ },
+ {
+  "id": "54754528335",
+  "name": "Trident Seafoods",
+  "domain": "tridentseafoods.com",
+  "industry": "FISHERY",
+  "employees": "7300",
+  "reason": "ambiguous vertical (fishery)"
+ },
+ {
+  "id": "54773507212",
+  "name": "Gold",
+  "domain": "goldprice.org",
+  "industry": "GRAPHIC_DESIGN",
+  "employees": "870",
+  "reason": "ambiguous vertical (graphic_design)"
+ },
+ {
+  "id": "54774161590",
+  "name": "Hollingsworth & Vose",
+  "domain": "hollingsworth-vose.com",
+  "industry": "NANOTECHNOLOGY",
+  "employees": "2000",
+  "reason": "ambiguous vertical (nanotechnology)"
+ },
+ {
+  "id": "54773475610",
+  "name": "Art Institute of Chicago",
+  "domain": "artic.edu",
+  "industry": "MUSEUMS_AND_INSTITUTIONS",
+  "employees": "4200",
+  "reason": "ambiguous vertical (museums_and_institutions)"
+ },
+ {
+  "id": "54773486616",
+  "name": "Wireless Advocates",
+  "domain": "wirelessadvocates.com",
+  "industry": "WIRELESS",
+  "employees": "1400",
+  "reason": "ambiguous vertical (wireless)"
+ },
+ {
+  "id": "54773374251",
+  "name": "ICON Creative Studio",
+  "domain": "iconcreativestudio.com",
+  "industry": "ANIMATION",
+  "employees": "850",
+  "reason": "ambiguous vertical (animation)"
+ },
+ {
+  "id": "54754706298",
+  "name": "NVT Phybridge",
+  "domain": "nvtphybridge.com",
+  "industry": "COMPUTER_NETWORKING",
+  "employees": "2800",
+  "reason": "ambiguous vertical (computer_networking)"
+ },
+ {
+  "id": "54753018288",
+  "name": "DreamWorks Animation",
+  "domain": "dreamworks.com",
+  "industry": "ANIMATION",
+  "employees": "1500",
+  "reason": "ambiguous vertical (animation)"
+ },
+ {
+  "id": "54753770041",
+  "name": "Independent Stave Company",
+  "domain": "independentstavecompany.com",
+  "industry": "WINE_AND_SPIRITS",
+  "employees": "1500",
+  "reason": "ambiguous vertical (wine_and_spirits)"
+ },
+ {
+  "id": "54774365607",
+  "name": "Clover Wireless",
+  "domain": "cloverwireless.com",
+  "industry": "WIRELESS",
+  "employees": "7500",
+  "reason": "ambiguous vertical (wireless)"
+ },
+ {
+  "id": "54773346424",
+  "name": "Walt Disney Animation Studios",
+  "domain": "disneyanimation.com",
+  "industry": "ANIMATION",
+  "employees": "2200",
+  "reason": "ambiguous vertical (animation)"
+ },
+ {
+  "id": "54773455649",
+  "name": "TNT Crane & Rigging",
+  "domain": "tntcrane.com",
+  "industry": "COMMERCIAL_REAL_ESTATE",
+  "employees": "1800",
+  "reason": "ambiguous vertical (commercial_real_estate)"
+ },
+ {
+  "id": "54773518237",
+  "name": "The Museum of Modern Art",
+  "domain": "moma.org",
+  "industry": "ARTS_AND_CRAFTS",
+  "employees": "1800",
+  "reason": "ambiguous vertical (arts_and_crafts)"
+ },
+ {
+  "id": "54758074014",
+  "name": "Getty Images",
+  "domain": "gettyimages.com",
+  "industry": "PHOTOGRAPHY",
+  "employees": "1700",
+  "reason": "ambiguous vertical (photography)"
+ },
+ {
+  "id": "54755807928",
+  "name": "3Com",
+  "domain": "3com.com",
+  "industry": "COMPUTER_NETWORKING",
+  "employees": "6000",
+  "reason": "ambiguous vertical (computer_networking)"
+ },
+ {
+  "id": "54762609779",
+  "name": "Bruker Nano Surfaces & Metrology",
+  "domain": null,
+  "industry": "NANOTECHNOLOGY",
+  "employees": "540",
+  "reason": "ambiguous vertical (nanotechnology)"
+ },
+ {
+  "id": "54773366963",
+  "name": "Marlboro",
+  "domain": "marlboro.com",
+  "industry": "TOBACCO",
+  "employees": "84000",
+  "reason": "ambiguous vertical (tobacco)"
+ },
+ {
+  "id": "54773361205",
+  "name": "Telit Cinterion",
+  "domain": "telit.com",
+  "industry": "WIRELESS",
+  "employees": "1100",
+  "reason": "ambiguous vertical (wireless)"
+ },
+ {
+  "id": "54773486627",
+  "name": "Cisco Networking Academy",
+  "domain": "netacad.com",
+  "industry": "COMPUTER_NETWORKING",
+  "employees": "4000",
+  "reason": "ambiguous vertical (computer_networking)"
+ },
+ {
+  "id": "54774304101",
+  "name": "Naughty Dog",
+  "domain": "naughtydog.com",
+  "industry": "COMPUTER_GAMES",
+  "employees": "1200",
+  "reason": "ambiguous vertical (computer_games)"
+ },
+ {
+  "id": "54773592678",
+  "name": "Array Digital Infrastructure",
+  "domain": "arrayinc.com",
+  "industry": "WIRELESS",
+  "employees": "4100",
+  "reason": "ambiguous vertical (wireless)"
+ },
+ {
+  "id": "54773398034",
+  "name": "Silver Bay Seafoods",
+  "domain": "silverbayseafoods.com",
+  "industry": "FISHERY",
+  "employees": "6000",
+  "reason": "ambiguous vertical (fishery)"
+ },
+ {
+  "id": "54773475621",
+  "name": "BearCom",
+  "domain": "bearcom.com",
+  "industry": "WIRELESS",
+  "employees": "1300",
+  "reason": "ambiguous vertical (wireless)"
+ },
+ {
+  "id": "54773472886",
+  "name": "Behaviour Interactive",
+  "domain": "bhvr.com",
+  "industry": "COMPUTER_GAMES",
+  "employees": "1200",
+  "reason": "ambiguous vertical (computer_games)"
+ },
+ {
+  "id": "54726267209",
+  "name": "The Metropolitan Museum of Art",
+  "domain": "metmuseum.org",
+  "industry": "ARTS_AND_CRAFTS",
+  "employees": "2600",
+  "reason": "ambiguous vertical (arts_and_crafts)"
+ },
+ {
+  "id": "54773535620",
+  "name": "Library of Congress",
+  "domain": "loc.gov",
+  "industry": "LIBRARIES",
+  "employees": "3100",
+  "reason": "ambiguous vertical (libraries)"
+ },
+ {
+  "id": "54773469843",
+  "name": "Epic Games",
+  "domain": "epicgames.com",
+  "industry": "COMPUTER_GAMES",
+  "employees": "3500",
+  "reason": "ambiguous vertical (computer_games)"
+ },
+ {
+  "id": "54774239065",
+  "name": "Good Gamer Group",
+  "domain": "goodgamergroup.com",
+  "industry": "COMPUTER_GAMES",
+  "employees": "1200",
+  "reason": "ambiguous vertical (computer_games)"
+ },
+ {
+  "id": "54774321770",
+  "name": "Vector Group",
+  "domain": "vectorgroupltd.com",
+  "industry": "TOBACCO",
+  "employees": "560",
+  "reason": "ambiguous vertical (tobacco)"
+ },
+ {
+  "id": "54773411920",
+  "name": "The New York Public Library",
+  "domain": "nypl.org",
+  "industry": "LIBRARIES",
+  "employees": "2800",
+  "reason": "ambiguous vertical (libraries)"
+ },
+ {
+  "id": "54773571356",
+  "name": "GP Mobile",
+  "domain": "lunawireless.com",
+  "industry": "WIRELESS",
+  "employees": "2500",
+  "reason": "ambiguous vertical (wireless)"
+ },
+ {
+  "id": "54725620594",
+  "name": "Spec's Liquor",
+  "domain": "specsonline.com",
+  "industry": "GRAPHIC_DESIGN",
+  "employees": "750",
+  "reason": "ambiguous vertical (graphic_design)"
+ },
+ {
+  "id": "54773439150",
+  "name": "D-Link USA",
+  "domain": "dlink.com",
+  "industry": "COMPUTER_NETWORKING",
+  "employees": "1900",
+  "reason": "ambiguous vertical (computer_networking)"
+ },
+ {
+  "id": "54774132346",
+  "name": "e4e",
+  "domain": "e4e.com",
+  "industry": "COMPUTER_GAMES",
+  "employees": "2500",
+  "reason": "ambiguous vertical (computer_games)"
+ },
+ {
+  "id": "54774192927",
+  "name": "Proquest from Clarivate",
+  "domain": "proquest.com",
+  "industry": "LIBRARIES",
+  "employees": "2100",
+  "reason": "ambiguous vertical (libraries)"
+ },
+ {
+  "id": "54773498022",
+  "name": "Lifetouch National School Studios",
+  "domain": null,
+  "industry": "PHOTOGRAPHY",
+  "employees": "1300",
+  "reason": "ambiguous vertical (photography)"
+ },
+ {
+  "id": "54773467972",
+  "name": "National Academy of Sciences",
+  "domain": "nasonline.org",
+  "industry": "PUBLIC_POLICY",
+  "employees": "810",
+  "reason": "ambiguous vertical (public_policy)"
+ },
+ {
+  "id": "54773542936",
+  "name": "Smithsonian Institution",
+  "domain": "si.edu",
+  "industry": "MUSEUMS_AND_INSTITUTIONS",
+  "employees": "6400",
+  "reason": "ambiguous vertical (museums_and_institutions)"
+ },
+ {
+  "id": "54774290432",
+  "name": "FEI Company",
+  "domain": "ter.li",
+  "industry": "NANOTECHNOLOGY",
+  "employees": "1300",
+  "reason": "ambiguous vertical (nanotechnology)"
+ },
+ {
+  "id": "54773460521",
+  "name": "Los Angeles County Museum of Art",
+  "domain": "lacma.org",
+  "industry": "MUSEUMS_AND_INSTITUTIONS",
+  "employees": "580",
+  "reason": "ambiguous vertical (museums_and_institutions)"
+ },
+ {
+  "id": "54773512549",
+  "name": "freelance writer editor",
+  "domain": "kimbracutlip.com",
+  "industry": "WRITING_AND_EDITING",
+  "employees": "3100",
+  "reason": "ambiguous vertical (writing_and_editing)"
+ },
+ {
+  "id": "54773527992",
+  "name": "Adorama",
+  "domain": "adorama.com",
+  "industry": "PHOTOGRAPHY",
+  "employees": "600",
+  "reason": "ambiguous vertical (photography)"
+ },
+ {
+  "id": "54773509643",
+  "name": "Child Care Resource Center",
+  "domain": "ccrcca.org",
+  "industry": "PUBLIC_POLICY",
+  "employees": "950",
+  "reason": "ambiguous vertical (public_policy)"
+ },
+ {
+  "id": "54757126059",
+  "name": "First Quantum Minerals",
+  "domain": "fqml.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54774212001",
+  "name": "Tawa",
+  "domain": "tawa.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54774494048",
+  "name": null,
+  "domain": "bdk.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54773765800",
+  "name": "Canadian Tire",
+  "domain": "fglsports.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54784238503",
+  "name": null,
+  "domain": "clarkinc.biz",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54784208482",
+  "name": "PGN",
+  "domain": "pgn.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54783727734",
+  "name": "PFSweb",
+  "domain": "pfsweb.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54756992410",
+  "name": null,
+  "domain": "holidaycompanies.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54784270206",
+  "name": null,
+  "domain": "360bhmail.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54784797559",
+  "name": "Hornblower Cruises & Events San Francisco",
+  "domain": "hornblower.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54784365324",
+  "name": null,
+  "domain": "ramacometc.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54784307745",
+  "name": null,
+  "domain": "impaad.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54784242300",
+  "name": "McKee",
+  "domain": "mckee.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54758439232",
+  "name": "Stronghold",
+  "domain": "catspec.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54784168960",
+  "name": null,
+  "domain": "mmsa.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54784282443",
+  "name": null,
+  "domain": "cbhi.net",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54784399180",
+  "name": "ssss.com",
+  "domain": "ssss.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54784446621",
+  "name": null,
+  "domain": "perkinsrb.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54784397169",
+  "name": "col-care.com",
+  "domain": "col-care.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54758439737",
+  "name": "Save the Stacks",
+  "domain": "stacktest.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54784391306",
+  "name": null,
+  "domain": "thetownsendcorp.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54784353297",
+  "name": null,
+  "domain": "scekc.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54784361308",
+  "name": "KeyStone",
+  "domain": "key-stone.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54784341853",
+  "name": "Grayco",
+  "domain": "mcgrayco.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54784470273",
+  "name": null,
+  "domain": "hlgllc.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54785085993",
+  "name": null,
+  "domain": "bbcgrp.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54784489834",
+  "name": null,
+  "domain": "jneinc.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54784396203",
+  "name": "Kyong",
+  "domain": "kyongllc.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54784529423",
+  "name": null,
+  "domain": "gocbs.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54785161761",
+  "name": null,
+  "domain": "hastings-ent.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54784466612",
+  "name": null,
+  "domain": "johnstoneps.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54757166172",
+  "name": "Refresh",
+  "domain": "refresh-foods.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54785086636",
+  "name": null,
+  "domain": "nbem.ca",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54757166254",
+  "name": "Chouinard Bros",
+  "domain": "chouinardbros.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54758440853",
+  "name": "Mendoza Company",
+  "domain": "mendozacompany.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54784496225",
+  "name": "PS Dayton",
+  "domain": "psdayton.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54785141084",
+  "name": null,
+  "domain": "ozarkendeavors.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54784471200",
+  "name": "Spectra",
+  "domain": null,
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54785162250",
+  "name": null,
+  "domain": "otrba.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54786120507",
+  "name": "Hovo",
+  "domain": "hovo.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54788406147",
+  "name": null,
+  "domain": "secmsev.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54796946486",
+  "name": null,
+  "domain": "ecargorates.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "54799610493",
+  "name": "iam-mcds.com",
+  "domain": "iam-mcds.com",
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "55459163539",
+  "name": "Quest Warehouse",
+  "domain": null,
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ },
+ {
+  "id": "55459296817",
+  "name": "Infinix 12",
+  "domain": null,
+  "industry": null,
+  "employees": null,
+  "reason": "no industry"
+ }
+]

@@ -1,0 +1,36 @@
+{"id":"54773366963","verdict":"in","segment":"cpg_food_beverage","tier":"A","reason":"Marlboro = Philip Morris USA/Altria brand; tobacco manufacturing plants + national CPG-style distribution network"}
+{"id":"54773361205","verdict":"out","segment":"","tier":"","reason":"Telit Cinterion is an IoT module/connectivity designer (fab-less, foreign HQ), no NA freight facility network"}
+{"id":"54773486627","verdict":"out","segment":"","tier":"","reason":"Cisco Networking Academy is an education/training program"}
+{"id":"54774304101","verdict":"out","segment":"","tier":"","reason":"Naughty Dog is a video game studio"}
+{"id":"54773592678","verdict":"out","segment":"","tier":"","reason":"Array Digital Infrastructure (ex-UScellular) is a cell tower infrastructure owner, no yard/DC network"}
+{"id":"54773398034","verdict":"in","segment":"agriculture_food_processing","tier":"B","reason":"Silver Bay Seafoods operates multiple Alaska/West Coast seafood processing plants with cold-chain truck freight"}
+{"id":"54773475621","verdict":"out","segment":"","tier":"","reason":"BearCom is a two-way radio dealer/service branch network, parcel-scale product, no yard freight"}
+{"id":"54773472886","verdict":"out","segment":"","tier":"","reason":"Behaviour Interactive is a video game studio"}
+{"id":"54726267209","verdict":"out","segment":"","tier":"","reason":"The Met is a museum"}
+{"id":"54773535620","verdict":"out","segment":"","tier":"","reason":"Library of Congress is a government library"}
+{"id":"54773469843","verdict":"out","segment":"","tier":"","reason":"Epic Games is a video game/software company"}
+{"id":"54774239065","verdict":"out","segment":"","tier":"","reason":"Good Gamer Group is a gaming/esports media company"}
+{"id":"54774321770","verdict":"in","segment":"cpg_food_beverage","tier":"C","reason":"Vector Group owns Liggett cigarette manufacturing (Mebane NC plant) with real inbound/outbound truck volume"}
+{"id":"54773411920","verdict":"out","segment":"","tier":"","reason":"New York Public Library is a library system"}
+{"id":"54773571356","verdict":"out","segment":"","tier":"","reason":"GP Mobile/Luna Wireless is a T-Mobile authorized retail store operator, no DC/yard network"}
+{"id":"54725620594","verdict":"in","segment":"retail_grocery","tier":"C","reason":"Spec's is a ~200-store Texas liquor chain self-distributing from a large central Houston warehouse"}
+{"id":"54773439150","verdict":"out","segment":"","tier":"","reason":"D-Link USA is the sales/marketing arm of a Taiwanese networking-hardware maker; manufacturing in Asia, minimal NA footprint"}
+{"id":"54774132346","verdict":"out","segment":"","tier":"","reason":"e4e is a BPO/IT outsourcing services firm"}
+{"id":"54774192927","verdict":"out","segment":"","tier":"","reason":"ProQuest (Clarivate) is library content/software"}
+{"id":"54773498022","verdict":"out","segment":"","tier":"","reason":"Lifetouch is a school photography services company (Shutterfly), parcel output not yard freight"}
+{"id":"54773467972","verdict":"out","segment":"","tier":"","reason":"National Academy of Sciences is a nonprofit policy institution"}
+{"id":"54773542936","verdict":"out","segment":"","tier":"","reason":"Smithsonian is a government museum institution"}
+{"id":"54774290432","verdict":"out","segment":"","tier":"","reason":"FEI (Thermo Fisher) makes electron microscopes; high-value low-volume instruments, no yard-scale freight"}
+{"id":"54773460521","verdict":"out","segment":"","tier":"","reason":"LACMA is a museum"}
+{"id":"54773512549","verdict":"out","segment":"","tier":"","reason":"Individual freelance writer/editor, not a company"}
+{"id":"54773527992","verdict":"in","segment":"ecommerce_parcel","tier":"C","reason":"Adorama is a photo/electronics e-commerce retailer with a large NJ fulfillment center driving real truck volume"}
+{"id":"54773509643","verdict":"out","segment":"","tier":"","reason":"Child Care Resource Center is a nonprofit childcare services agency"}
+{"id":"54757126059","verdict":"out","segment":"","tier":"","reason":"First Quantum Minerals is a copper miner with mines in Zambia/Panama/Turkey; no NA operating freight facilities, mining not an IN vertical"}
+{"id":"54774212001","verdict":"in","segment":"retail_grocery","tier":"B","reason":"Tawa Supermarket = 99 Ranch Market parent; ~58 stores across 10 states plus own distribution operations"}
+{"id":"54774494048","verdict":"review","segment":"","tier":"","reason":"bdk.com: no name on record and domain maps to multiple unrelated BDK entities; cannot identify"}
+{"id":"54773765800","verdict":"in","segment":"retail_grocery","tier":"A","reason":"FGL Sports (Sport Chek) is Canadian Tire's sporting-goods arm; Canadian Tire runs a national Canadian DC network"}
+{"id":"54784238503","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"clarkinc.biz = Clark Associates (WebstaurantStore parent), ~10M sq ft of foodservice distribution warehouses"}
+{"id":"54784208482","verdict":"review","segment":"","tier":"","reason":"pgn.com: cannot determine which PGN entity owns the domain (multiple unrelated candidates), no name signal"}
+{"id":"54783727734","verdict":"in","segment":"ecommerce_parcel","tier":"B","reason":"PFSweb (PFS Commerce) is an e-commerce fulfillment 3PL operating multiple fulfillment centers (Memphis, Dallas, Toronto)"}
+{"id":"54756992410","verdict":"in","segment":"retail_grocery","tier":"B","reason":"Holiday Companies = Holiday Stationstores (Couche-Tard/Circle K), 400+ c-stores historically supplied by its own distribution arm"}
+{"id":"54784270206","verdict":"out","segment":"","tier":"","reason":"360bhmail.com = 360 Behavioral Health, a healthcare/ABA services provider"}

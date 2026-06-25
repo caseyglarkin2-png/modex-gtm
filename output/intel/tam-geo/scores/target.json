@@ -1,0 +1,10 @@
+{
+  "slug": "target",
+  "domain": "target.com",
+  "nearest_distance_mi": 8.1,
+  "proximity_score": 76,
+  "corridor_density": 5,
+  "composite_score": 84.93,
+  "nearest_primo_site": "US PL Saratoga Spring Factory",
+  "facilities": 24
+}

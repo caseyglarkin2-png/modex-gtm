@@ -1,0 +1,10 @@
+{
+  "slug": "georgia-pacific",
+  "domain": "gp.com",
+  "nearest_distance_mi": 24.2,
+  "proximity_score": 45,
+  "corridor_density": 2,
+  "composite_score": 58.57,
+  "nearest_primo_site": "US PL Dallas 2 Factory",
+  "facilities": 30
+}

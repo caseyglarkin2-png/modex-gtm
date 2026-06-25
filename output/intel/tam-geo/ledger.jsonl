@@ -1,0 +1,858 @@
+{"slug":"general-motors","name":"General Motors","domain":"gm.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.355Z"}
+{"slug":"walmart","name":"Walmart","domain":"walmart.com","tier":"A","fit":93.3,"status":"pending","at":"2026-06-15T05:14:53.356Z"}
+{"slug":"kroger","name":"Kroger","domain":"kroger.com","tier":"A","fit":86.7,"status":"pending","at":"2026-06-15T05:14:53.356Z"}
+{"slug":"mars","name":"Mars","domain":"mars.com","tier":"A","fit":93.3,"status":"pending","at":"2026-06-15T05:14:53.357Z"}
+{"slug":"sysco","name":"Sysco","domain":"sysco.com","tier":"A","fit":100,"status":"pending","at":"2026-06-15T05:14:53.357Z"}
+{"slug":"biewer-lumber","name":"BIEWER LUMBER","domain":"biewerlogisticsllc.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.360Z"}
+{"slug":"the-coca-cola-company","name":"The Coca-Cola Company","domain":"coca-cola.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.361Z"}
+{"slug":"yanfeng","name":"YANFENG","domain":"yanfeng.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.361Z"}
+{"slug":"xpo","name":"XPO","domain":"xpo.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.361Z"}
+{"slug":"ryder-supply-chain-solutions","name":"Ryder Supply Chain Solutions","domain":"ryder.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.362Z"}
+{"slug":"fedex","name":"FedEx","domain":"fedex.com","tier":"A","fit":100,"status":"pending","at":"2026-06-15T05:14:53.362Z"}
+{"slug":"agro-merchants","name":"AGRO Merchants","domain":"argomerchants.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.362Z"}
+{"slug":"saddle-creek-logistics","name":"Saddle Creek Logistics","domain":"sclogistics.com","tier":"A","fit":90.7,"status":"pending","at":"2026-06-15T05:14:53.363Z"}
+{"slug":"cj-logistics-north-america","name":"CJ Logistics North America","domain":"america.cjlogistics.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.363Z"}
+{"slug":"nfi-industries","name":"NFI Industries","domain":"nfiindustries.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.363Z"}
+{"slug":"ups","name":"UPS","domain":"ups.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.364Z"}
+{"slug":"altria","name":"Altria","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.364Z"}
+{"slug":"hyvee","name":"Hyvee","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.364Z"}
+{"slug":"meijer","name":"Meijer","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.365Z"}
+{"slug":"carlton-scale","name":"Carlton Scale","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.365Z"}
+{"slug":"kag-logistics","name":"KAG Logistics","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.365Z"}
+{"slug":"kyndryl-warm-introductions","name":"Kyndryl Warm Introductions","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.366Z"}
+{"slug":"georgia-pacific","name":"Georgia-Pacific","domain":"gp.com","tier":"A","fit":93.3,"status":"pending","at":"2026-06-15T05:14:53.366Z"}
+{"slug":"tyson-foods","name":"Tyson Foods","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.366Z"}
+{"slug":"superior-play","name":"Superior Play","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.367Z"}
+{"slug":"diageo","name":"Diageo","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.367Z"}
+{"slug":"bakemark","name":"BakeMark","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.367Z"}
+{"slug":"echo-global-logistics","name":"Echo Global Logistics","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.367Z"}
+{"slug":"unis","name":"UNIS","domain":"unisco.com","tier":"A","fit":33.3,"status":"pending","at":"2026-06-15T05:14:53.368Z"}
+{"slug":"venture-logistics","name":"Venture Logistics","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.368Z"}
+{"slug":"apple","name":"Apple","domain":"apple.com","tier":"A","fit":20,"status":"pending","at":"2026-06-15T05:14:53.368Z"}
+{"slug":"gkn-automative","name":"Gkn Automative","domain":"gknautomative.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.368Z"}
+{"slug":"3m-company","name":"3M Company","domain":"3m.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.369Z"}
+{"slug":"henkel","name":"Henkel","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.369Z"}
+{"slug":"avantor","name":"Avantor","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.369Z"}
+{"slug":"conagra-brands","name":"Conagra Brands","domain":"conagra.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.369Z"}
+{"slug":"ashland","name":"Ashland","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.370Z"}
+{"slug":"matson-logistics","name":"Matson Logistics","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.370Z"}
+{"slug":"bosch-usa","name":"Bosch USA","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.370Z"}
+{"slug":"catalent-pharma-solutions","name":"Catalent Pharma Solutions","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.371Z"}
+{"slug":"goodyear","name":"Goodyear","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.371Z"}
+{"slug":"dart-container","name":"Dart Container","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.371Z"}
+{"slug":"hanon-systems","name":"Hanon Systems","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.371Z"}
+{"slug":"flex-n-gate","name":"Flex-N-Gate","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.372Z"}
+{"slug":"universal-logistics-holdings","name":"Universal Logistics Holdings","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.372Z"}
+{"slug":"kerry","name":"Kerry","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.372Z"}
+{"slug":"maersk","name":"Maersk","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.372Z"}
+{"slug":"fanuc-america-corporation","name":"FANUC America Corporation","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.373Z"}
+{"slug":"navistar-inc","name":"Navistar Inc","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.373Z"}
+{"slug":"sun-chemical","name":"Sun Chemical","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.373Z"}
+{"slug":"republic-services","name":"Republic Services","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.373Z"}
+{"slug":"benteler","name":"Benteler","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.374Z"}
+{"slug":"forvia","name":"Forvia","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.374Z"}
+{"slug":"crane-worldwide-logistics","name":"Crane Worldwide Logistics","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.374Z"}
+{"slug":"bridgestone","name":"Bridgestone","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.375Z"}
+{"slug":"bayer-crop-science","name":"Bayer Crop Science","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.375Z"}
+{"slug":"kenco-logistic-services","name":"Kenco Logistic Services","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.375Z"}
+{"slug":"oxy-corporation","name":"Oxy Corporation","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.375Z"}
+{"slug":"dow-chemical","name":"Dow Chemical","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.376Z"}
+{"slug":"jas-forwarding-worldwide","name":"JAS Forwarding Worldwide","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.376Z"}
+{"slug":"johns-manville","name":"Johns Manville","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.376Z"}
+{"slug":"lear","name":"Lear","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.377Z"}
+{"slug":"covestro","name":"Covestro","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.377Z"}
+{"slug":"day-ross","name":"Day & Ross","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.377Z"}
+{"slug":"dsv-global-transport-logistics","name":"DSV Global Transport & Logistics","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.377Z"}
+{"slug":"abb","name":"ABB","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.378Z"}
+{"slug":"molex","name":"Molex","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.378Z"}
+{"slug":"tesla","name":"Tesla","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.378Z"}
+{"slug":"adidas","name":"Adidas","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.378Z"}
+{"slug":"eaton","name":"Eaton","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.379Z"}
+{"slug":"guardian-industries","name":"Guardian Industries","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.379Z"}
+{"slug":"infineon-technologies","name":"Infineon Technologies","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.379Z"}
+{"slug":"danone","name":"Danone","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.379Z"}
+{"slug":"aptiv","name":"Aptiv","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.380Z"}
+{"slug":"gxo-logistics","name":"GXO Logistics","domain":"gxo.com","tier":"A","fit":90.7,"status":"pending","at":"2026-06-15T05:14:53.380Z"}
+{"slug":"ebsco-industries","name":"Ebsco Industries","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.380Z"}
+{"slug":"sc-johnson","name":"SC Johnson","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.380Z"}
+{"slug":"american-axle","name":"American Axle","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.381Z"}
+{"slug":"constellation-brands","name":"Constellation Brands","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.381Z"}
+{"slug":"henkel-2","name":"Henkel","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.381Z"}
+{"slug":"ryder-supply-chain-solutions-2","name":"Ryder Supply Chain Solutions","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.381Z"}
+{"slug":"treehouse-foods","name":"TreeHouse Foods","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.382Z"}
+{"slug":"vector-pipeline","name":"Vector Pipeline","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.382Z"}
+{"slug":"pepsico","name":"PepsiCo","domain":"pepsico.com","tier":"A","fit":100,"status":"pending","at":"2026-06-15T05:14:53.382Z"}
+{"slug":"meritor","name":"Meritor","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.382Z"}
+{"slug":"arvato-supply-chain-solutions","name":"Arvato Supply Chain Solutions","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.383Z"}
+{"slug":"dayco","name":"Dayco","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.383Z"}
+{"slug":"fxi","name":"FXI","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.383Z"}
+{"slug":"tupperware-brands","name":"Tupperware Brands","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.383Z"}
+{"slug":"pactiv-evergreen","name":"Pactiv Evergreen","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.384Z"}
+{"slug":"mohawk-industries","name":"Mohawk Industries","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.384Z"}
+{"slug":"syncreon-us","name":"Syncreon.US","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.384Z"}
+{"slug":"kellogg-company","name":"Kellogg Company","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.384Z"}
+{"slug":"ge","name":"GE","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.385Z"}
+{"slug":"cleveland-cliffs","name":"Cleveland-Cliffs","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.385Z"}
+{"slug":"wabtec","name":"Wabtec","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.385Z"}
+{"slug":"dawn-foods","name":"Dawn Foods","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.385Z"}
+{"slug":"bunge","name":"Bunge","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.386Z"}
+{"slug":"carhartt","name":"Carhartt","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.386Z"}
+{"slug":"maersk-2","name":"Maersk","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.386Z"}
+{"slug":"road-runner","name":"Road Runner","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.386Z"}
+{"slug":"martin-marietta-aggregates-via-csca-e","name":"Martin Marietta Aggregates - Via CSca;e","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.387Z"}
+{"slug":"catalent-pharma-solutions-2","name":"Catalent Pharma Solutions","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.387Z"}
+{"slug":"mckesson","name":"McKesson","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.387Z"}
+{"slug":"j-b-hunt","name":"J.B. Hunt","domain":"jbhunt.com","tier":"A","fit":100,"status":"pending","at":"2026-06-15T05:14:53.387Z"}
+{"slug":"lowe-s","name":"Lowe's","domain":"lowes.com","tier":"A","fit":93.3,"status":"pending","at":"2026-06-15T05:14:53.388Z"}
+{"slug":"target","name":"Target","domain":"target.com","tier":"A","fit":93.3,"status":"pending","at":"2026-06-15T05:14:53.388Z"}
+{"slug":"metro","name":"Metro","domain":"metro.ca","tier":"A","fit":37.3,"status":"pending","at":"2026-06-15T05:14:53.388Z"}
+{"slug":"saddle-creek-logistics-saddlecreeklogistics","name":"Saddle Creek Logistics","domain":"saddlecreeklogistics.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.388Z"}
+{"slug":"cargill","name":"Cargill","domain":"cargill.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.389Z"}
+{"slug":"gct-terminals","name":"GCT Terminals","domain":"gctglobalcontainerterminals.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.389Z"}
+{"slug":"performance-team-maersk","name":"Performance Team (Maersk)","domain":"performanceteam-us.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.389Z"}
+{"slug":"knight-swift","name":"Knight-Swift","domain":"knightswift.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.389Z"}
+{"slug":"p-g","name":"P&G","domain":"pg.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.390Z"}
+{"slug":"the-home-depot","name":"The Home Depot","domain":"homedepot.com","tier":"A","fit":93.3,"status":"pending","at":"2026-06-15T05:14:53.390Z"}
+{"slug":"pilgrim-s-pride-corp","name":"Pilgrim’s Pride Corp.","domain":"pilgrimscorp.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.390Z"}
+{"slug":"knight-transportation","name":"Knight Transportation","domain":"knighttrans.com","tier":"A","fit":90.7,"status":"pending","at":"2026-06-15T05:14:53.390Z"}
+{"slug":"bluetriton-brands","name":"BlueTriton Brands","domain":"bluetriton.com","tier":"A","fit":100,"status":"pending","at":"2026-06-15T05:14:53.391Z"}
+{"slug":"lazerspot","name":"Lazerspot","domain":"lazerspot.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.391Z"}
+{"slug":"perdue-chicken","name":"Perdue Chicken","domain":"perdue.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.391Z"}
+{"slug":"aspire-bakeries","name":"Aspire Bakeries","domain":"aspirebakeries.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.391Z"}
+{"slug":"us-foods","name":"US Foods","domain":"usfoods.com","tier":"A","fit":100,"status":"pending","at":"2026-06-15T05:14:53.392Z"}
+{"slug":"georgia-pacific-consumer-products","name":"Georgia-Pacific Consumer Products","domain":"gapac.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.392Z"}
+{"slug":"caterpillar","name":"Caterpillar","domain":"cat.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.392Z"}
+{"slug":"covestro-covestro","name":"Covestro","domain":"covestro.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.392Z"}
+{"slug":"danone-danone","name":"Danone","domain":"danone.com","tier":"A","fit":82.7,"status":"pending","at":"2026-06-15T05:14:53.393Z"}
+{"slug":"hormel","name":"Hormel","domain":"hormel.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.393Z"}
+{"slug":"performance-food-group","name":"Performance Food Group","domain":"pfgc.com","tier":"A","fit":100,"status":"pending","at":"2026-06-15T05:14:53.393Z"}
+{"slug":"john-deere","name":"John Deere","domain":"johndeere.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.393Z"}
+{"slug":"wk-kellogg-co","name":"WK Kellogg Co","domain":"wkkellogg.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.394Z"}
+{"slug":"walwil","name":"Walwil","domain":"walwil.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.394Z"}
+{"slug":"sony","name":"Sony","domain":"am.sony.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.394Z"}
+{"slug":"nestle","name":"Nestlé","domain":"us.nestle.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.394Z"}
+{"slug":"wallenius-wilhelmsen","name":"Wallenius Wilhelmsen","domain":"2wglobal.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.395Z"}
+{"slug":"jabil","name":"Jabil","domain":"jabil.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.395Z"}
+{"slug":"rhenus","name":"Rhenus","domain":"pl.rhenus.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.395Z"}
+{"slug":"honda","name":"Honda","domain":"hna.honda.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.396Z"}
+{"slug":"nrsonline","name":"Nrsonline","domain":"nrsonline.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.396Z"}
+{"slug":"effem","name":"Effem","domain":"effem.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.396Z"}
+{"slug":"enersys","name":"Enersys","domain":"pl.enersys.com","tier":"A","fit":0,"status":"pending","at":"2026-06-15T05:14:53.397Z"}
+{"slug":"sbdinc","name":"Sbdinc","domain":"sbdinc.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.397Z"}
+{"slug":"bnsf-railway","name":"BNSF Railway","domain":"bnsf.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.398Z"}
+{"slug":"agc","name":"Agc","domain":"us.agc.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.398Z"}
+{"slug":"conti","name":"Conti","domain":"conti.de","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.398Z"}
+{"slug":"mondele-z-international","name":"Mondelēz International","domain":"mondelezinternational.com","tier":"A","fit":26.7,"status":"pending","at":"2026-06-15T05:14:53.399Z"}
+{"slug":"yrc-freight","name":"YRC Freight","domain":"yrcfreight.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.399Z"}
+{"slug":"cj-logistics-america","name":"CJ Logistics America","domain":"cjlogisticsamerica.com","tier":"A","fit":100,"status":"pending","at":"2026-06-15T05:14:53.399Z"}
+{"slug":"continental-corporation","name":"Continental Corporation","domain":"continental-corporation.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.399Z"}
+{"slug":"tjx","name":"Tjx","domain":"tjx.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.400Z"}
+{"slug":"yusen-logistics","name":"Yusen Logistics","domain":"us.yusen-logistics.com","tier":"A","fit":90.7,"status":"pending","at":"2026-06-15T05:14:53.400Z"}
+{"slug":"54696455960","name":"","domain":"external.danone.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.400Z"}
+{"slug":"great-dane","name":"Great Dane","domain":"greatdane.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.401Z"}
+{"slug":"shipbob","name":"ShipBob","domain":"shipbob.com","tier":"A","fit":16,"status":"pending","at":"2026-06-15T05:14:53.401Z"}
+{"slug":"southern-glazer-s-wine-spirits","name":"Southern Glazer's Wine & Spirits","domain":"southernglazers.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.401Z"}
+{"slug":"southeastern-grocers","name":"Southeastern Grocers","domain":"segrocers.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.401Z"}
+{"slug":"54713981241","name":"","domain":"sgws.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.402Z"}
+{"slug":"54714445749","name":"","domain":"intl.pepsico.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.402Z"}
+{"slug":"coca-cola-southwest-beverages","name":"Coca-Cola Southwest Beverages","domain":"cocacolaswb.com","tier":"A","fit":100,"status":"pending","at":"2026-06-15T05:14:53.402Z"}
+{"slug":"federal-express-corporation","name":"Federal Express Corporation","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.403Z"}
+{"slug":"thyssenkrupp-supply-chain-services","name":"thyssenkrupp Supply Chain Services","domain":"thyssenkrupp-supply-chain.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.403Z"}
+{"slug":"koch","name":"Koch","domain":"kochcompanies.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.403Z"}
+{"slug":"ashley-furniture","name":"Ashley Furniture","domain":"ashleyfurniture.com","tier":"A","fit":33.3,"status":"pending","at":"2026-06-15T05:14:53.403Z"}
+{"slug":"54717725779","name":"","domain":"thyssenkrupp-materials.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.404Z"}
+{"slug":"54701437990","name":"","domain":"pbvllc.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.404Z"}
+{"slug":"whole-foods-market","name":"Whole Foods Market","domain":"wholefoods.com","tier":"A","fit":33.3,"status":"pending","at":"2026-06-15T05:14:53.404Z"}
+{"slug":"medline","name":"Medline","domain":"medline.com","tier":"A","fit":100,"status":"pending","at":"2026-06-15T05:14:53.404Z"}
+{"slug":"sigma-alimentos","name":"Sigma Alimentos","domain":"sigma-alimentos.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.405Z"}
+{"slug":"dean-foods","name":"Dean Foods","domain":"deanfoods.com","tier":"A","fit":100,"status":"pending","at":"2026-06-15T05:14:53.405Z"}
+{"slug":"transcontinental","name":"Transcontinental","domain":"tc.tc","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.405Z"}
+{"slug":"yellow","name":"Yellow","domain":"yrcw.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.405Z"}
+{"slug":"hp-hood","name":"HP Hood","domain":"hphood.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.406Z"}
+{"slug":"54771872631","name":"","domain":"ap.averydennison.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.406Z"}
+{"slug":"54771853426","name":"","domain":"vmcmail.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.406Z"}
+{"slug":"54771911743","name":"","domain":"tor.sysco.ca","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.406Z"}
+{"slug":"crh","name":"CRH","domain":"oldcastle.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.407Z"}
+{"slug":"54772556305","name":"","domain":"haci.honda.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.407Z"}
+{"slug":"diversified-gas-oil","name":"Diversified Gas & Oil","domain":"dgoc.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.407Z"}
+{"slug":"54771943728","name":"","domain":"awtx-itw.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.408Z"}
+{"slug":"knauf","name":"Knauf","domain":"knauf.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.408Z"}
+{"slug":"54772644210","name":"","domain":"cornerstone-bb.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.408Z"}
+{"slug":"coca-cola-amatil","name":"Coca-Cola Amatil","domain":"ccamatil.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.408Z"}
+{"slug":"54769729403","name":"","domain":"springswf.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.409Z"}
+{"slug":"utility-trailer-manufacturing-co","name":"Utility Trailer Manufacturing Co.","domain":"utm.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.409Z"}
+{"slug":"54726904085","name":"","domain":"us.bosch.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.409Z"}
+{"slug":"hni-corporation","name":"HNI Corporation","domain":"hnicorp.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.409Z"}
+{"slug":"do-it-best","name":"Do It Best","domain":"doitbest.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.410Z"}
+{"slug":"east-penn-manufacturing","name":"East Penn Manufacturing","domain":"dekabatteries.com","tier":"A","fit":33.3,"status":"pending","at":"2026-06-15T05:14:53.410Z"}
+{"slug":"kubota","name":"Kubota","domain":"kubota.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.410Z"}
+{"slug":"the-charmer-sunbelt-group","name":"The Charmer Sunbelt Group","domain":"charmer-sunbelt.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.410Z"}
+{"slug":"3m","name":"3M","domain":"mmm.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.411Z"}
+{"slug":"54762596491","name":"","domain":"sttxna.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.411Z"}
+{"slug":"saint-gobain","name":"Saint-Gobain","domain":"saint-gobain.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.411Z"}
+{"slug":"54771815168","name":"","domain":"de.ebmpapst.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.412Z"}
+{"slug":"eprod","name":"Eprod","domain":"eprod.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.412Z"}
+{"slug":"nidec","name":"Nidec","domain":"nidec-motor.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.412Z"}
+{"slug":"54771928756","name":"","domain":"gstoyota.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.412Z"}
+{"slug":"54771810425","name":"","domain":"simfoods.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.413Z"}
+{"slug":"blue-bunny","name":"Blue Bunny","domain":"bluebunny.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.413Z"}
+{"slug":"54772621240","name":"","domain":"tiem.toyota-industries.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.413Z"}
+{"slug":"coke-florida","name":"Coke Florida","domain":"cocacolaflorida.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.414Z"}
+{"slug":"unimin","name":"Unimin","domain":"unimin.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.414Z"}
+{"slug":"praxair-inc-a-linde-company","name":"Praxair, Inc - a Linde Company","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.414Z"}
+{"slug":"sara-lee-food-beverage","name":"Sara Lee Food & Beverage","domain":"saraleefb.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.415Z"}
+{"slug":"linde","name":"Linde","domain":"linde.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.415Z"}
+{"slug":"united-airlines","name":"United Airlines","domain":"united.com","tier":"A","fit":0,"status":"pending","at":"2026-06-15T05:14:53.415Z"}
+{"slug":"universal","name":"Universal","domain":"goutsi.com","tier":"A","fit":33.3,"status":"pending","at":"2026-06-15T05:14:53.416Z"}
+{"slug":"repsol","name":"Repsol","domain":"repsol.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.416Z"}
+{"slug":"54756924330","name":"","domain":"fmcmail.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.416Z"}
+{"slug":"dow","name":"Dow","domain":"dow.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.416Z"}
+{"slug":"54771938895","name":"","domain":"theandersons.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.417Z"}
+{"slug":"54772621340","name":"","domain":"natdcp.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.417Z"}
+{"slug":"r-j-reynolds-tobacco","name":"R. J. Reynolds Tobacco","domain":"rjrt.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.417Z"}
+{"slug":"54772669501","name":"","domain":"dovercorp.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.417Z"}
+{"slug":"abf-freight","name":"ABF Freight","domain":"abf.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.418Z"}
+{"slug":"54756924560","name":"","domain":"bbumail.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.418Z"}
+{"slug":"54772710947","name":"","domain":"gbpcoated.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.418Z"}
+{"slug":"quality-distribution","name":"Quality Distribution","domain":"qualitydistribution.com","tier":"A","fit":26.7,"status":"pending","at":"2026-06-15T05:14:53.418Z"}
+{"slug":"54757111883","name":"","domain":"carlisleccm.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.419Z"}
+{"slug":"bimbo-bakeries","name":"Bimbo Bakeries","domain":"grupobimbo.com","tier":"A","fit":100,"status":"pending","at":"2026-06-15T05:14:53.419Z"}
+{"slug":"grupo-bimbo","name":"Grupo Bimbo","domain":"grupobimbo.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.419Z"}
+{"slug":"54771886194","name":"","domain":"reyesccb.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.419Z"}
+{"slug":"international-paper","name":"International Paper","domain":"ipaper.com","tier":"A","fit":86.7,"status":"pending","at":"2026-06-15T05:14:53.420Z"}
+{"slug":"54772710987","name":"","domain":"cantire.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.420Z"}
+{"slug":"stanley-black-decker","name":"Stanley Black & Decker","domain":"stanleyblackanddecker.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.420Z"}
+{"slug":"54771833887","name":"","domain":"purina.nestle.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.420Z"}
+{"slug":"54771933344","name":"","domain":"its.jnj.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.421Z"}
+{"slug":"pactiv","name":"Pactiv","domain":"pactiv.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.421Z"}
+{"slug":"54772736910","name":"","domain":"johnstonenw.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.421Z"}
+{"slug":"hershey-co-the","name":"Hershey Co/The","domain":"hersheys.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.422Z"}
+{"slug":"american-tire-distributors","name":"American Tire Distributors","domain":"atd-us.com","tier":"A","fit":26.7,"status":"pending","at":"2026-06-15T05:14:53.422Z"}
+{"slug":"54772680719","name":"","domain":"tti-emea.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.422Z"}
+{"slug":"54771917571","name":"","domain":"glccd.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.422Z"}
+{"slug":"driv","name":"DRiV","domain":"driv.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.423Z"}
+{"slug":"advanced-drainage-systems","name":"Advanced Drainage Systems,","domain":"ads-pipe.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.423Z"}
+{"slug":"54771831666","name":"","domain":"us.indorama.net","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.423Z"}
+{"slug":"woodmark","name":"Woodmark","domain":"woodmark.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.424Z"}
+{"slug":"54755299678","name":"","domain":"reg.sysco.ca","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.424Z"}
+{"slug":"sony-group","name":"Sony Group","domain":"sony.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.424Z"}
+{"slug":"54771844241","name":"","domain":"gc.logistec.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.424Z"}
+{"slug":"ge-vernova","name":"GE Vernova","domain":"gevernova.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.425Z"}
+{"slug":"wk-kellogg","name":"WK Kellogg","domain":"kellogg.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.425Z"}
+{"slug":"54772737144","name":"","domain":"lakesidebook.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.425Z"}
+{"slug":"harvest-sherwood-food-distributors","name":"Harvest Sherwood Food Distributors","domain":"harvestsherwood.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.425Z"}
+{"slug":"pilot-travel-centers","name":"Pilot Travel Centers","domain":"pilottravelcenters.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.426Z"}
+{"slug":"coca-cola-enterprises","name":"Coca Cola Enterprises","domain":"cokecce.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.426Z"}
+{"slug":"liverpool","name":"Liverpool","domain":"liverpool.com.mx","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.426Z"}
+{"slug":"54771804473","name":"","domain":"adusaprocurement.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.426Z"}
+{"slug":"snapple","name":"Snapple","domain":"snapple.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.427Z"}
+{"slug":"bath-and-body-works","name":"Bath and Body Works,","domain":"bbw.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.427Z"}
+{"slug":"glanbia-plc","name":"Glanbia plc","domain":"glanbia.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.429Z"}
+{"slug":"ternium-me-xico","name":"Ternium México","domain":"ternium.com.mx","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.429Z"}
+{"slug":"reliance-steel-aluminum-co","name":"Reliance Steel & Aluminum Co.","domain":"rsac.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.430Z"}
+{"slug":"purina","name":"Purina","domain":"purina.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.430Z"}
+{"slug":"franz-bakery-outlet-store","name":"Franz Bakery Outlet Store","domain":"usbakery.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.430Z"}
+{"slug":"54772405271","name":"","domain":"bdgrowers.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.431Z"}
+{"slug":"54772749572","name":"","domain":"ccbcc.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.432Z"}
+{"slug":"54772621575","name":"","domain":"precastcorp.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.433Z"}
+{"slug":"southern-glazer-s-wine-and-spirits","name":"Southern Glazer's Wine and Spirits,","domain":"southernwine.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.433Z"}
+{"slug":"54771998571","name":"","domain":"motion-ind.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.434Z"}
+{"slug":"averitt-express","name":"Averitt Express","domain":"averittexpress.com","tier":"A","fit":0,"status":"pending","at":"2026-06-15T05:14:53.434Z"}
+{"slug":"54762315944","name":"","domain":"wwwinc.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.434Z"}
+{"slug":"sysco-international-food-group","name":"Sysco International Food Group","domain":"ifoodgroup.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.435Z"}
+{"slug":"amphenol-fci","name":"Amphenol FCI","domain":"amphenol-fci.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.435Z"}
+{"slug":"canada-post","name":"Canada Post","domain":"canadapost-postescanada.ca","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.435Z"}
+{"slug":"canada-post-postescanada","name":"Canada Post","domain":"postescanada.ca","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.436Z"}
+{"slug":"54755795202","name":"","domain":"us.yazaki.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.436Z"}
+{"slug":"swm","name":"SWM","domain":"swmintl.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.436Z"}
+{"slug":"resolute-forest-products","name":"Resolute Forest Products","domain":"resolutefp.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.436Z"}
+{"slug":"54772737844","name":"","domain":"wescoinc.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.437Z"}
+{"slug":"trident-seafoods","name":"Trident Seafoods","domain":"tridentseafoods.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.437Z"}
+{"slug":"marlboro","name":"Marlboro","domain":"marlboro.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.437Z"}
+{"slug":"ftai-infrastructure","name":"FTAI Infrastructure","domain":"fipinc.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.438Z"}
+{"slug":"owens-illinois","name":"OWENS-ILLINOIS","domain":"owensillinois.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.438Z"}
+{"slug":"kerry-group-plc","name":"Kerry Group PLC","domain":"kerrygroup.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.438Z"}
+{"slug":"grupo-elektra","name":"Grupo Elektra","domain":"marcaone.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.438Z"}
+{"slug":"assa-abloy","name":"Assa Abloy","domain":"assaabloy.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.439Z"}
+{"slug":"54774465194","name":"","domain":"jfwmail.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.439Z"}
+{"slug":"axalta-coating-systems","name":"Axalta Coating Systems","domain":"axaltacs.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.439Z"}
+{"slug":"54773775947","name":"","domain":"van.sysco.ca","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.439Z"}
+{"slug":"54773832963","name":"","domain":"rfpco.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.439Z"}
+{"slug":"dover","name":"Dover","domain":"dover.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.440Z"}
+{"slug":"united-states-steel","name":"United States Steel","domain":"uss.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.440Z"}
+{"slug":"agrium","name":"Agrium","domain":"agrium.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.440Z"}
+{"slug":"54773677871","name":"","domain":"eu.averydennison.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.440Z"}
+{"slug":"54773826902","name":"","domain":"installed.net","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.441Z"}
+{"slug":"sc-johnson-sons","name":"SC Johnson & Sons","domain":"scj.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.441Z"}
+{"slug":"arc","name":"Arc","domain":"arc-intl.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.441Z"}
+{"slug":"54774126695","name":"","domain":"ewingos.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.441Z"}
+{"slug":"coca-cola","name":"Coca Cola","domain":"cocacola.co.il","tier":"A","fit":100,"status":"pending","at":"2026-06-15T05:14:53.442Z"}
+{"slug":"bmw-deutschland","name":"BMW Deutschland","domain":"bmw.de","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.442Z"}
+{"slug":"54758389521","name":"","domain":"nglep.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.442Z"}
+{"slug":"mccormick-company","name":"McCormick & Company","domain":"mccormick.co.uk","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.442Z"}
+{"slug":"silgan-pfc","name":"Silgan PFC","domain":"silganpfc.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.443Z"}
+{"slug":"mosaic","name":"Mosaic","domain":"mosaic.com","tier":"A","fit":26.7,"status":"pending","at":"2026-06-15T05:14:53.443Z"}
+{"slug":"magellan-midstream-partners-lp","name":"Magellan Midstream Partners, LP","domain":"magellanlp.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.443Z"}
+{"slug":"54773768107","name":"","domain":"hmausa.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.444Z"}
+{"slug":"54773716992","name":"","domain":"mail.nidec.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.444Z"}
+{"slug":"samsung-electronics","name":"Samsung Electronics","domain":"samsung.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.444Z"}
+{"slug":"phillips-66","name":"Phillips 66","domain":"p66.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.444Z"}
+{"slug":"looking-for-a-new-challenge","name":"Looking for a New Challenge","domain":"weirminerals.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.445Z"}
+{"slug":"54773694761","name":"","domain":"alcan.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.445Z"}
+{"slug":"volkswagen","name":"Volkswagen","domain":"volkswagen.de","tier":"A","fit":33.3,"status":"pending","at":"2026-06-15T05:14:53.445Z"}
+{"slug":"54758389886","name":"","domain":"bunzlusa.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.445Z"}
+{"slug":"nustar-energy","name":"NuStar Energy","domain":"nustarenergy.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.446Z"}
+{"slug":"bridgestone-bfusa","name":"Bridgestone","domain":"bfusa.com","tier":"A","fit":89.3,"status":"pending","at":"2026-06-15T05:14:53.446Z"}
+{"slug":"barry-wehmiller","name":"Barry-Wehmiller","domain":"psangelus.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.446Z"}
+{"slug":"54774564221","name":"","domain":"jpgould.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.447Z"}
+{"slug":"54773874491","name":"","domain":"ca.lactalis.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.447Z"}
+{"slug":"54774487863","name":"","domain":"lennoxind.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.447Z"}
+{"slug":"superior-essex","name":"Superior Essex","domain":"spsx.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.447Z"}
+{"slug":"canadian-pacific-railway","name":"Canadian Pacific Railway","domain":"cpr.ca","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.448Z"}
+{"slug":"54774546268","name":"","domain":"mtl.sysco.ca","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.448Z"}
+{"slug":"54773692330","name":"","domain":"ups.co.il","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.448Z"}
+{"slug":"sylvamo","name":"Sylvamo","domain":"sylvamo.com","tier":"A","fit":26.7,"status":"pending","at":"2026-06-15T05:14:53.448Z"}
+{"slug":"canadian-tire","name":"Canadian Tire","domain":"fglsports.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.449Z"}
+{"slug":"54756942101","name":"","domain":"fluids.ittind.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.449Z"}
+{"slug":"54774550160","name":"","domain":"apigroupinc.us","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.449Z"}
+{"slug":"grupo-lala","name":"Grupo LALA","domain":"grupolala.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.449Z"}
+{"slug":"qvc-group","name":"QVC Group","domain":"qvcgrp.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.450Z"}
+{"slug":"54784113486","name":"","domain":"contractor.conocophillips.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.450Z"}
+{"slug":"54784238503","name":"","domain":"clarkinc.biz","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.450Z"}
+{"slug":"54784279183","name":"","domain":"tti-fc.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.450Z"}
+{"slug":"luxottica-group-s-p-a","name":"Luxottica Group S.p.A.","domain":"luxotticaretail.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.451Z"}
+{"slug":"red-bull","name":"Red Bull","domain":"redbull.com","tier":"A","fit":86.7,"status":"pending","at":"2026-06-15T05:14:53.451Z"}
+{"slug":"terniumargentina","name":"TerniumArgentina","domain":"ternium.com.ar","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.451Z"}
+{"slug":"kion-group","name":"KION Group","domain":"kiongroup.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.451Z"}
+{"slug":"54784767085","name":"","domain":"pl.mccormick.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.452Z"}
+{"slug":"nsk-china","name":"NSK China","domain":"nsk.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.452Z"}
+{"slug":"54756991669","name":"","domain":"demoulasmarketbasket.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.452Z"}
+{"slug":"55554518072","name":"","domain":"canadapost.postescanada.ca","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.453Z"}
+{"slug":"54784219514","name":"","domain":"rdus.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.453Z"}
+{"slug":"ratubola88","name":"RATUBOLA88","domain":"kof.com.mx","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.453Z"}
+{"slug":"avient","name":"Avient","domain":"polyone.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.453Z"}
+{"slug":"boots","name":"Boots","domain":"boots.co.uk","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.454Z"}
+{"slug":"doosan","name":"Doosan","domain":"doosan.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.454Z"}
+{"slug":"tjx-companies","name":"TJX Companies","domain":"tjxeurope.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.454Z"}
+{"slug":"lindt-chocolate","name":"Lindt Chocolate","domain":"lindt.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.455Z"}
+{"slug":"daltile","name":"Daltile","domain":"daltile.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.455Z"}
+{"slug":"54784814138","name":"","domain":"dollartreestores.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.455Z"}
+{"slug":"hollyfrontier","name":"HollyFrontier","domain":"hollyfrontier.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.456Z"}
+{"slug":"54784284215","name":"","domain":"eur.crowncork.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.456Z"}
+{"slug":"54784270126","name":"","domain":"almo-corp.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.456Z"}
+{"slug":"burlington-stores","name":"Burlington Stores,","domain":"burlingtonstores.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.456Z"}
+{"slug":"54756992543","name":"","domain":"ap.pall.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.457Z"}
+{"slug":"54784188779","name":"","domain":"tmhu.toyota-industries.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.457Z"}
+{"slug":"54784321397","name":"","domain":"morneauglobal.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.457Z"}
+{"slug":"54784340248","name":"","domain":"ssg.petsmart.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.457Z"}
+{"slug":"volvo","name":"Volvo","domain":"volvo.com","tier":"A","fit":33.3,"status":"pending","at":"2026-06-15T05:14:53.458Z"}
+{"slug":"mexichem","name":"Mexichem","domain":"mexichem.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.458Z"}
+{"slug":"emerson-process-management","name":"Emerson Process Management","domain":"emersonprocess.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.458Z"}
+{"slug":"gsicommerce","name":"gsicommerce","domain":"gsicommerce.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.458Z"}
+{"slug":"calvin-klein","name":"Calvin Klein","domain":"ck.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.459Z"}
+{"slug":"grupo-phoenix","name":"Grupo Phoenix","domain":"grupophoenix.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.459Z"}
+{"slug":"yageo","name":"Yageo","domain":"yageo.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.459Z"}
+{"slug":"54784812406","name":"","domain":"bunzlretailusa.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.460Z"}
+{"slug":"aisin","name":"Aisin","domain":"aisindrive.com","tier":"A","fit":26.7,"status":"pending","at":"2026-06-15T05:14:53.460Z"}
+{"slug":"54784163411","name":"","domain":"mfrm.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.460Z"}
+{"slug":"rolls-royce","name":"Rolls-Royce","domain":"rolls-royce.com","tier":"A","fit":80,"status":"pending","at":"2026-06-15T05:14:53.461Z"}
+{"slug":"54785040690","name":"","domain":"be.estee.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.461Z"}
+{"slug":"54784379716","name":"","domain":"femsa.com.mx","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.461Z"}
+{"slug":"54784237697","name":"","domain":"penskecorp.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.462Z"}
+{"slug":"teledyne-technologies","name":"Teledyne Technologies","domain":"teledyne.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.462Z"}
+{"slug":"54785016969","name":"","domain":"it.toyota-industries.eu","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.462Z"}
+{"slug":"bonduelle","name":"Bonduelle","domain":"bonduelle.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.462Z"}
+{"slug":"silgan","name":"Silgan","domain":"silgan.com","tier":"A","fit":33.3,"status":"pending","at":"2026-06-15T05:14:53.463Z"}
+{"slug":"komatsu-mining","name":"Komatsu Mining","domain":"mining.komatsu","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.463Z"}
+{"slug":"54784482365","name":"","domain":"conti-na.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.463Z"}
+{"slug":"basf-catalysts","name":"BASF Catalysts","domain":"basf-catalystsmetals.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.463Z"}
+{"slug":"pam","name":"PAM","domain":"pamt.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.464Z"}
+{"slug":"general-cable","name":"General Cable","domain":"generalcable.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.464Z"}
+{"slug":"54784317464","name":"","domain":"bmwna.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.464Z"}
+{"slug":"54785041286","name":"","domain":"eu.spectrumbrands.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.464Z"}
+{"slug":"finishmaster","name":"FinishMaster","domain":"finishmaster.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.465Z"}
+{"slug":"lactalis","name":"Lactalis","domain":"parmalat.ca","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.465Z"}
+{"slug":"anthropologie","name":"Anthropologie","domain":"anthropologie.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.465Z"}
+{"slug":"clipper-group","name":"Clipper Group","domain":"clippergroup.co.uk","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.465Z"}
+{"slug":"54784346939","name":"","domain":"us.imptob.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.466Z"}
+{"slug":"54758440253","name":"","domain":"plastipak.eu","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.466Z"}
+{"slug":"54784806204","name":"","domain":"hebmex.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.466Z"}
+{"slug":"indorama-polypet-indonesia","name":"INDORAMA POLYPET INDONESIA","domain":"indorama.net","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.466Z"}
+{"slug":"54784434203","name":"","domain":"compassminerals.co.uk","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.467Z"}
+{"slug":"54785058991","name":"","domain":"plastipak.com.br","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.467Z"}
+{"slug":"rio-tinto","name":"Rio Tinto","domain":"riotinto.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.467Z"}
+{"slug":"keystone","name":"KeyStone","domain":"key-stone.com","tier":"A","fit":26.7,"status":"pending","at":"2026-06-15T05:14:53.467Z"}
+{"slug":"54784512697","name":"","domain":"europe.ups.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.468Z"}
+{"slug":"hunt-energy","name":"Hunt Energy","domain":"huntenergy.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.468Z"}
+{"slug":"cox-automotive","name":"Cox Automotive","domain":"coxautoinc.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.468Z"}
+{"slug":"54784395789","name":"","domain":"fr.estee.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.468Z"}
+{"slug":"psa-bdp","name":"PSA BDP","domain":"bdpint.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.469Z"}
+{"slug":"wu-rth-industry-north-america","name":"Würth Industry North America","domain":"wurthindustry.com","tier":"A","fit":0,"status":"pending","at":"2026-06-15T05:14:53.469Z"}
+{"slug":"54784463405","name":"","domain":"mail.foxconn.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.469Z"}
+{"slug":"ej-gallo","name":"EJ Gallo","domain":"ejgallo.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.469Z"}
+{"slug":"amerisourcebergen","name":"AmerisourceBergen","domain":"amerisourcebergen.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.470Z"}
+{"slug":"54784395848","name":"","domain":"il.estee.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.470Z"}
+{"slug":"eby-brown","name":"Eby-Brown","domain":"eby-brown.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.470Z"}
+{"slug":"braskem-sa","name":"Braskem Sa","domain":"braskem.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.470Z"}
+{"slug":"cementos-moctezuma","name":"Cementos Moctezuma","domain":"cmoctezuma.com.mx","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.471Z"}
+{"slug":"alpek-polyester-canada","name":"Alpek Polyester - Canada","domain":"alpekpolyester.com","tier":"A","fit":0,"status":"pending","at":"2026-06-15T05:14:53.471Z"}
+{"slug":"voestalpine","name":"voestalpine","domain":"voestalpine.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.471Z"}
+{"slug":"amphenol","name":"Amphenol","domain":"fci.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.472Z"}
+{"slug":"toyota-motor-europe","name":"Toyota Motor Europe","domain":"toyota-europe.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.472Z"}
+{"slug":"ienova","name":"Ienova","domain":"ienova.com.mx","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.472Z"}
+{"slug":"the-home-depot-me-xico","name":"The Home Depot México","domain":"homedepot.com.mx","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.472Z"}
+{"slug":"54784529423","name":"","domain":"gocbs.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.473Z"}
+{"slug":"dreyer-s","name":"Dreyer's","domain":"dreyers.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.473Z"}
+{"slug":"54784424078","name":"","domain":"chn.dupont.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.473Z"}
+{"slug":"54784527174","name":"","domain":"semgroup.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.473Z"}
+{"slug":"pilot-flying-j","name":"Pilot Flying J","domain":"pilotflyingj.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.474Z"}
+{"slug":"shaw-industries","name":"Shaw Industries","domain":"shawindustry.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.474Z"}
+{"slug":"54784402956","name":"","domain":"chart-ind.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.474Z"}
+{"slug":"progress-rail","name":"Progress Rail","domain":"emdiesels.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.474Z"}
+{"slug":"54785080737","name":"","domain":"nidec-mk.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.475Z"}
+{"slug":"54785122312","name":"","domain":"steelwarehouse.net","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.476Z"}
+{"slug":"covenant-transport","name":"Covenant Transport","domain":"covenanttransport.com","tier":"A","fit":0,"status":"pending","at":"2026-06-15T05:14:53.476Z"}
+{"slug":"wincanton","name":"Wincanton","domain":"wincanton.co.uk","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.477Z"}
+{"slug":"rocktenn","name":"RockTenn","domain":"rocktenn.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.477Z"}
+{"slug":"54785126405","name":"","domain":"qfci.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.477Z"}
+{"slug":"54785128566","name":"","domain":"bmwnaext.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.477Z"}
+{"slug":"ahold-nederland","name":"Ahold Nederland","domain":"ahold.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.478Z"}
+{"slug":"toto-global-site","name":"TOTO GLOBAL SITE","domain":"toto.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.478Z"}
+{"slug":"54784714402","name":"","domain":"arcelik.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.478Z"}
+{"slug":"indel","name":"Indel","domain":"indelinc.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.479Z"}
+{"slug":"ingram-micro-services","name":"Ingram Micro Services","domain":"ingrammicroservices.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.479Z"}
+{"slug":"54786145162","name":"","domain":"pbhcorp.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.479Z"}
+{"slug":"54785198172","name":"","domain":"genieind.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.479Z"}
+{"slug":"54785357843","name":"","domain":"us.sumiriko.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.480Z"}
+{"slug":"hitachi","name":"Hitachi","domain":"hitachi.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.480Z"}
+{"slug":"54762232160","name":"","domain":"emea.donaldson.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.480Z"}
+{"slug":"54762232165","name":"","domain":"kellogg.com.cn","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.481Z"}
+{"slug":"54800219041","name":"","domain":"ae.estee.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.481Z"}
+{"slug":"54799526325","name":"","domain":"krugerproducts.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.481Z"}
+{"slug":"metsa-group","name":"Metsä Group","domain":"metsagroup.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.481Z"}
+{"slug":"indorama-ventures","name":"Indorama Ventures","domain":"indoramaventures.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.481Z"}
+{"slug":"praxair","name":"Praxair,","domain":"praxair.com","tier":"A","fit":0,"status":"pending","at":"2026-06-15T05:14:53.482Z"}
+{"slug":"54800194205","name":"","domain":"canforpulp.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.482Z"}
+{"slug":"54799663128","name":"","domain":"ftpc.fpcusa.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.482Z"}
+{"slug":"l-brands","name":"L Brands","domain":"lb.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.483Z"}
+{"slug":"esab","name":"ESAB","domain":"esab.ru","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.483Z"}
+{"slug":"colgate","name":"Colgate","domain":"colgate.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.483Z"}
+{"slug":"valvoline","name":"Valvoline","domain":"valvoline.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.483Z"}
+{"slug":"54866831659","name":"","domain":"fr.mccormick.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.484Z"}
+{"slug":"54869693362","name":"","domain":"pa.estee.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.484Z"}
+{"slug":"54872795443","name":"","domain":"premiumbrandsgroup.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.484Z"}
+{"slug":"vertiv-co","name":"Vertiv Co.","domain":"vertivco.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.484Z"}
+{"slug":"national-motor-freight-traffic-association","name":"National Motor Freight Traffic Association","domain":"nmfta.org","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.485Z"}
+{"slug":"cencora","name":"Cencora","domain":"cencora.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.485Z"}
+{"slug":"schaeffler","name":"Schaeffler","domain":"schaeffler.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.485Z"}
+{"slug":"55289996352","name":"","domain":"goodyearcorp.onmicrosoft.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.485Z"}
+{"slug":"royal-canin-usa","name":"Royal Canin USA","domain":"royalcanin.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.485Z"}
+{"slug":"cardinal-logistics","name":"Cardinal Logistics","domain":"cardlog.com","tier":"A","fit":33.3,"status":"pending","at":"2026-06-15T05:14:53.486Z"}
+{"slug":"ups-healthcare","name":"UPS Healthcare","domain":"bomigroup.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.486Z"}
+{"slug":"55341323630","name":"","domain":"jp.estee.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.486Z"}
+{"slug":"mead-johnson-nutrition","name":"Mead Johnson Nutrition","domain":"mjn.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.486Z"}
+{"slug":"55341295640","name":"","domain":"ap.hasbro.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.487Z"}
+{"slug":"bhp","name":"BHP","domain":"bhp.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.487Z"}
+{"slug":"55341295718","name":"","domain":"resmed.com.sg","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.487Z"}
+{"slug":"hanes","name":"Hanes","domain":"hanes.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.487Z"}
+{"slug":"itw-global-brands","name":"ITW Global Brands","domain":"itwgb.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.488Z"}
+{"slug":"mars-wrigley","name":"Mars","domain":"wrigley.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.488Z"}
+{"slug":"55332399757","name":"","domain":"campofriofg.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.488Z"}
+{"slug":"eli-lilly","name":"Eli Lilly","domain":"lilly.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.488Z"}
+{"slug":"55349787433","name":"","domain":"navistarinc.onmicrosoft.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.489Z"}
+{"slug":"frieslandcampina","name":"FrieslandCampina","domain":"frieslandcampina.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.489Z"}
+{"slug":"johns-manville-jm","name":"Johns Manville","domain":"jm.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.489Z"}
+{"slug":"coca-cola-european-partners","name":"Coca-Cola European Partners","domain":"ccep.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.489Z"}
+{"slug":"solvay","name":"Solvay","domain":"solvay.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.490Z"}
+{"slug":"univar-solutions","name":"Univar Solutions","domain":"univarsolutions.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.490Z"}
+{"slug":"syensqo","name":"Syensqo","domain":"syensqo.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.490Z"}
+{"slug":"55411966977","name":"","domain":"awards.cma-cgm.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.490Z"}
+{"slug":"mercedes-benz","name":"Mercedes-Benz","domain":"mbusa.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.491Z"}
+{"slug":"barilla","name":"Barilla","domain":"barilla.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.491Z"}
+{"slug":"geodis-logistics","name":"Geodis Logistics","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.491Z"}
+{"slug":"nestle-distribution-center-truck-entrance","name":"Nestle Distribution Center (Truck Entrance)","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.492Z"}
+{"slug":"kehe-distributors-lhv","name":"KeHE Distributors-LHV","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.492Z"}
+{"slug":"ryder-logistics","name":"Ryder Logistics","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.492Z"}
+{"slug":"nestle-water-north-america","name":"Nestle Water North America","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.492Z"}
+{"slug":"pepsico-mt-creek","name":"PepsiCo Mt. Creek","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.493Z"}
+{"slug":"kuehne-nagel","name":"Kuehne + Nagel","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.493Z"}
+{"slug":"dhl-warehouse-verizon","name":"DHL Warehouse Verizon","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.493Z"}
+{"slug":"cardinal-health-at-home-distribution-center","name":"Cardinal Health at Home Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.493Z"}
+{"slug":"dsc","name":"DSC","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.494Z"}
+{"slug":"penske-warehouse","name":"PENSKE WAREHOUSE","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.494Z"}
+{"slug":"penske-logistics","name":"Penske Logistics","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.494Z"}
+{"slug":"dsv-silutions-shell-warehouse-panalpina","name":"DSV Silutions Shell warehouse Panalpina","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.494Z"}
+{"slug":"old-dominion-freight-line","name":"Old Dominion Freight Line","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.495Z"}
+{"slug":"schneider-cross-dock","name":"Schneider cross dock","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.495Z"}
+{"slug":"nestle-waters-north-america","name":"Nestle Waters North America","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.495Z"}
+{"slug":"nestle-bottled-water-delivery-dallas","name":"Nestle Bottled Water Delivery Dallas","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.495Z"}
+{"slug":"r-l-carriers","name":"R+L Carriers","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.496Z"}
+{"slug":"tyson-foods-south","name":"Tyson Foods South","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.496Z"}
+{"slug":"geodis-logistic","name":"GEODIS logistic.","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.496Z"}
+{"slug":"j-b-hunt-transport-services-inc","name":"J.B. Hunt Transport Services, Inc.","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.497Z"}
+{"slug":"pepsico-gatorade-satellite-warehouse","name":"Pepsico Gatorade satellite warehouse","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.497Z"}
+{"slug":"sysco-cold-storage","name":"Sysco Cold Storage","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.497Z"}
+{"slug":"sysco-to-go-houston-medical-centre","name":"Sysco To Go- Houston Medical Centre","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.497Z"}
+{"slug":"pepsico-truck-entrance","name":"Pepsico - truck entrance","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.498Z"}
+{"slug":"crete-carrier-corporation","name":"Crete Carrier Corporation","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.498Z"}
+{"slug":"grainger-industrial-supply","name":"Grainger Industrial Supply","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.498Z"}
+{"slug":"ryder-integrated-logistics","name":"Ryder Integrated Logistics","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.498Z"}
+{"slug":"xpo-logistics","name":"Xpo Logistics","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.499Z"}
+{"slug":"bimbo-bakeries-distribution-center","name":"Bimbo Bakeries Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.499Z"}
+{"slug":"pepsi-bottling-group-truck-entrance","name":"Pepsi Bottling Group - Truck Entrance","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.499Z"}
+{"slug":"ryder-whiplash-e-commerce-fulfillment-node","name":"Ryder/Whiplash E-commerce fulfillment node","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.500Z"}
+{"slug":"americold-logistics-allentown-snowdrift","name":"Americold Logistics, Allentown - Snowdrift","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.500Z"}
+{"slug":"nestle-waters","name":"Nestle Waters","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.500Z"}
+{"slug":"saddle-creek-logistics-services","name":"Saddle Creek Logistics Services","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.501Z"}
+{"slug":"ceva-logistics-pelican-distribution-center","name":"CEVA Logistics - Pelican Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.501Z"}
+{"slug":"bimbo-bakeries-sara-lee-distribution-center","name":"Bimbo Bakeries-Sara Lee Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.501Z"}
+{"slug":"schneider","name":"Schneider","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.501Z"}
+{"slug":"schneider-national-operating-center","name":"Schneider National Operating Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.502Z"}
+{"slug":"lineage-logistics-lancaster-tx","name":"LINEAGE LOGISTICS - LANCASTER, TX","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.502Z"}
+{"slug":"bridgestone-americas-distribution-center","name":"Bridgestone Americas Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.502Z"}
+{"slug":"flexport-dfw1-fulfillment-center","name":"Flexport DFW1 Fulfillment Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.503Z"}
+{"slug":"bridgestone-firestone-distribution-center","name":"Bridgestone Firestone Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.503Z"}
+{"slug":"fastenal-fulfillment-center","name":"Fastenal Fulfillment Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.503Z"}
+{"slug":"fastenal-fulfillment-center-2","name":"Fastenal Fulfillment Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.504Z"}
+{"slug":"fastenal-fulfillment-center-3","name":"Fastenal Fulfillment Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.504Z"}
+{"slug":"americold-logistics-indianapolis","name":"Americold Logistics Indianapolis","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.504Z"}
+{"slug":"americold-logistics","name":"Americold Logistics","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.504Z"}
+{"slug":"saia-ltl-freight","name":"Saia LTL Freight","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.505Z"}
+{"slug":"americold-logistics-grand-rapids","name":"Americold Logistics - Grand Rapids","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.505Z"}
+{"slug":"saia-ltl-freight-2","name":"Saia LTL Freight","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.505Z"}
+{"slug":"ups-united-parcel-service-offices-warehouse","name":"UPS United Parcel Service Offices & Warehouse","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.506Z"}
+{"slug":"sysco-houston-food-distributor-restaurant-supplies","name":"Sysco Houston - Food Distributor & Restaurant Supplies","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.506Z"}
+{"slug":"sysco-riverside-food-distributor-restaurant-supplies","name":"Sysco Riverside - Food Distributor & Restaurant Supplies","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.506Z"}
+{"slug":"aldi-distribution-center","name":"ALDI Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.506Z"}
+{"slug":"sysco-albany-food-distributor-restaurant-supplies","name":"Sysco Albany - Food Distributor & Restaurant Supplies","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.507Z"}
+{"slug":"best-buy-distribution-center","name":"Best Buy Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.507Z"}
+{"slug":"us-foods-allentown-distribution-center","name":"US Foods - Allentown Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.507Z"}
+{"slug":"kellogg-s-apl-logistics","name":"Kellogg's APL Logistics","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.508Z"}
+{"slug":"r-l-carriers-norristown","name":"R+L Carriers Norristown","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.508Z"}
+{"slug":"ceva-freight","name":"Ceva Freight","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.508Z"}
+{"slug":"ikea-distribution-center","name":"IKEA Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.508Z"}
+{"slug":"geodis-contract-logistics","name":"GEODIS | Contract Logistics","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.509Z"}
+{"slug":"sysco-northern-new-england-food-distributor-restaurant-supplies","name":"Sysco Northern New England - Food Distributor & Restaurant Supplies","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.509Z"}
+{"slug":"staples-fulfillment-center","name":"Staples Fulfillment Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.509Z"}
+{"slug":"pepsi-beverages-co","name":"Pepsi Beverages Co","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.509Z"}
+{"slug":"pepsi-bottling-group","name":"Pepsi Bottling Group","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.510Z"}
+{"slug":"medline-industries-distribution-center","name":"Medline Industries Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.510Z"}
+{"slug":"best-buy-warehouse","name":"Best Buy Warehouse","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.510Z"}
+{"slug":"best-buy-warehouse-ontario","name":"Best Buy Warehouse Ontario","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.510Z"}
+{"slug":"red-bull-indianapolis","name":"Red Bull Indianapolis","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.511Z"}
+{"slug":"owens-minor-houston-distribution-center","name":"Owens & Minor - Houston Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.511Z"}
+{"slug":"ryder-distribution-center","name":"Ryder Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.511Z"}
+{"slug":"j-b-hunt-transport-dallas-east-terminal","name":"J.B. Hunt Transport - Dallas East Terminal","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.511Z"}
+{"slug":"land-o-lakes-purina-distribution-center","name":"Land O' Lakes- Purina Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.512Z"}
+{"slug":"home-depot-warehouse","name":"Home Depot warehouse","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.512Z"}
+{"slug":"ppg-paints-distribution-center","name":"PPG Paints Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.512Z"}
+{"slug":"fastenal-fulfillment-center-appointment-only","name":"Fastenal Fulfillment Center - Appointment Only","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.513Z"}
+{"slug":"goodyear-logistics-center-operated-by-dhl","name":"Goodyear Logistics Center- Operated by DHL","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.513Z"}
+{"slug":"americold-logistics-hatfield","name":"Americold Logistics Hatfield","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.513Z"}
+{"slug":"americold-logistics-dallas","name":"Americold Logistics Dallas","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.513Z"}
+{"slug":"americold-logistics-leesport","name":"Americold Logistics Leesport","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.514Z"}
+{"slug":"sysco-arkansas-food-distributor-restaurant-supplies","name":"Sysco Arkansas - Food Distributor & Restaurant Supplies","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.514Z"}
+{"slug":"americold-logistics-houston","name":"Americold Logistics Houston","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.514Z"}
+{"slug":"basf-palmer-logistics","name":"BASF Palmer Logistics","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.515Z"}
+{"slug":"prime-chrobinson-warehouse","name":"PRIME/CHROBINSON Warehouse","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.515Z"}
+{"slug":"americold-logistics-baytown","name":"Americold Logistics Baytown","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.515Z"}
+{"slug":"geodis-logistics-h-m","name":"Geodis Logistics (H&M)","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.515Z"}
+{"slug":"americold-logistics-plant-city","name":"Americold Logistics Plant City","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.516Z"}
+{"slug":"sysco-alachua-fl","name":"SYSCO-ALACHUA FL","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.516Z"}
+{"slug":"americold-logistics-anaheim","name":"Americold Logistics Anaheim","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.516Z"}
+{"slug":"americold-logistics-tampa-maple","name":"Americold Logistics Tampa Maple","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.516Z"}
+{"slug":"kohl-s-distribution-center","name":"Kohl's Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.517Z"}
+{"slug":"americold-logistics-c-of-i-14890","name":"Americold Logistics C of I 14890","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.517Z"}
+{"slug":"tyson-foods-distribution-center","name":"Tyson Foods Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.517Z"}
+{"slug":"tyson-foods-russellville-distribution-center","name":"Tyson Foods, Russellville Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.517Z"}
+{"slug":"amcor-plastic","name":"Amcor plastic","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.518Z"}
+{"slug":"yusen-logistics-ind4-warehouse","name":"Yusen Logistics IND4 Warehouse","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.518Z"}
+{"slug":"lowe-s-flatbed-distribution-center-myjob","name":"Lowe's Flatbed Distribution Center MyJob","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.518Z"}
+{"slug":"pepsi-truck-entrance-exit","name":"Pepsi Truck Entrance / Exit","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.519Z"}
+{"slug":"ashley-homestore-distribution-center","name":"Ashley HomeStore Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.519Z"}
+{"slug":"swift-transportation-drop-yard","name":"Swift Transportation drop yard","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.519Z"}
+{"slug":"pepsi-cola","name":"Pepsi-Cola","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.519Z"}
+{"slug":"regal-beloit-logistics","name":"Regal Beloit Logistics","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.520Z"}
+{"slug":"saddle-creek-distribution-warehouse","name":"Saddle Creek Distribution Warehouse","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.520Z"}
+{"slug":"flexport-ewr1-fulfillment-center","name":"Flexport EWR1 Fulfillment Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.520Z"}
+{"slug":"basf-warehouse","name":"BASF Warehouse","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.520Z"}
+{"slug":"ppg-industries-inc","name":"PPG Industries Inc","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.520Z"}
+{"slug":"abf-freight-system-inc","name":"ABF Freight System Inc.","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.521Z"}
+{"slug":"lineage-logistics-jacksonville-west","name":"Lineage Logistics Jacksonville West","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.521Z"}
+{"slug":"flexport-denver","name":"Flexport Denver","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.521Z"}
+{"slug":"americold-logistics-meacham-ft-worth","name":"Americold Logistics Meacham Ft Worth","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.522Z"}
+{"slug":"americold-logistics-russellville-elmira","name":"Americold Logistics Russellville Elmira","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.522Z"}
+{"slug":"americold-logistics-russellville-324","name":"Americold Logistics Russellville 324","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.522Z"}
+{"slug":"sysco-baraboo-food-distributor-restaurant-supplies","name":"Sysco Baraboo - Food Distributor & Restaurant Supplies","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.522Z"}
+{"slug":"americold-logistics-n-little-rock","name":"Americold Logistics N Little Rock","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.523Z"}
+{"slug":"r-l-carriers-inc","name":"R & L Carriers Inc","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.523Z"}
+{"slug":"wakefern-foods","name":"Wakefern Foods","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.523Z"}
+{"slug":"sysco-east-texas-food-distributor-restaurant-supplies","name":"Sysco East Texas - Food Distributor & Restaurant Supplies","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.524Z"}
+{"slug":"sysco-jacksonville-food-distributor-restaurant-supplies","name":"Sysco Jacksonville - Food Distributor & Restaurant Supplies","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.524Z"}
+{"slug":"advance-auto-parts-distribution-center","name":"Advance Auto Parts Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.524Z"}
+{"slug":"autozone-distribution-center","name":"AutoZone Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.524Z"}
+{"slug":"icdc-check-in-at-pepsi-warehouse-guard","name":"ICDC(check in at Pepsi Warehouse Guard)","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.525Z"}
+{"slug":"tyson-food-haltom-city-distribution-center-truck-entrance","name":"Tyson Food Haltom City Distribution Center truck entrance","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.525Z"}
+{"slug":"dollar-tree-distribution-center","name":"Dollar Tree Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.525Z"}
+{"slug":"best-buy-warehouse-polk-city","name":"Best Buy Warehouse, Polk City","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.525Z"}
+{"slug":"wakefern-food-truck-gate","name":"Wakefern Food Truck Gate","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.526Z"}
+{"slug":"gordon-food-service-freezer-warehouse","name":"Gordon Food Service Freezer Warehouse","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.526Z"}
+{"slug":"ryder-warehouse","name":"Ryder Warehouse","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.526Z"}
+{"slug":"cummins-regional-distribution-center-dallas","name":"Cummins Regional Distribution Center - Dallas","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.526Z"}
+{"slug":"pepsi-beverages-company","name":"Pepsi Beverages Company","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.527Z"}
+{"slug":"tyson-foods-barber-foods","name":"Tyson Foods - Barber Foods","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.527Z"}
+{"slug":"pepsi-beverages-company-pbc","name":"Pepsi Beverages Company - PBC","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.527Z"}
+{"slug":"international-paper-co","name":"International Paper Co","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.527Z"}
+{"slug":"sysco-warehouse","name":"Sysco warehouse","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.528Z"}
+{"slug":"lkq-refinish-distribution-center","name":"LKQ Refinish Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.528Z"}
+{"slug":"home-depot-distribution","name":"Home Depot Distribution","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.528Z"}
+{"slug":"chewy-fulfillment-center-dfw1","name":"Chewy Fulfillment Center DFW1","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.528Z"}
+{"slug":"ryder-truck-terminal","name":"Ryder Truck Terminal","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.529Z"}
+{"slug":"americold-logistics-brighton","name":"Americold Logistics Brighton","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.529Z"}
+{"slug":"home-depot-flatbed-distribution-center-5856","name":"Home Depot Flatbed Distribution Center #5856","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.529Z"}
+{"slug":"sysco-central-florida-food-distributor-restaurant-supplies","name":"Sysco Central Florida - Food Distributor & Restaurant Supplies","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.529Z"}
+{"slug":"smithfield-foods-distribution-center","name":"Smithfield Foods Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.529Z"}
+{"slug":"sysco-west-coast-florida-food-distributor-restaurant-supplies","name":"Sysco West Coast Florida - Food Distributor & Restaurant Supplies","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.530Z"}
+{"slug":"conagra-brands-russellville","name":"Conagra Brands - Russellville","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.530Z"}
+{"slug":"dick-s-sporting-goods-distribution-center","name":"Dick's Sporting Goods Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.530Z"}
+{"slug":"united-supermarkets-albertsons-distribution-center","name":"United Supermarkets/Albertsons Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.530Z"}
+{"slug":"mars-petcare-warehouse","name":"MARS PETCARE WAREHOUSE","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.531Z"}
+{"slug":"smurfit-westrock-longview","name":"Smurfit Westrock Longview","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.531Z"}
+{"slug":"kellogg-co","name":"Kellogg Co","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.531Z"}
+{"slug":"shamrock-foods-delivery-receiving-distribution-center","name":"Shamrock Foods Delivery, Receiving & Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.531Z"}
+{"slug":"americold-logistics-jefferson","name":"Americold Logistics Jefferson","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.532Z"}
+{"slug":"swift-transportation","name":"Swift Transportation","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.532Z"}
+{"slug":"sonoco-trailer-lot","name":"Sonoco Trailer Lot","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.532Z"}
+{"slug":"damascus-warehouse-sonoco","name":"Damascus Warehouse (SONOCO)","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.532Z"}
+{"slug":"swift-transportation-terminal-ii","name":"Swift Transportation Terminal II","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.533Z"}
+{"slug":"flexport-lax1-fulfillment-center","name":"Flexport LAX1 Fulfillment Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.533Z"}
+{"slug":"old-dominion-freight-line-fuel-station","name":"Old Dominion Freight Line Fuel Station","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.533Z"}
+{"slug":"newell-logistics","name":"Newell Logistics","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.533Z"}
+{"slug":"lowe-s-distribution-center","name":"Lowe's Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.534Z"}
+{"slug":"dollar-general-receiving","name":"Dollar General Receiving","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.534Z"}
+{"slug":"lowe-s-regional-distribution-center","name":"Lowe's Regional Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.534Z"}
+{"slug":"advance-auto-parts-distribution-center-kutztown","name":"Advance Auto Parts Distribution Center Kutztown","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.534Z"}
+{"slug":"aldi-distribution-center-truck-entrance","name":"ALDI Distribution Center truck entrance","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.535Z"}
+{"slug":"tyson-processing-plant-monroe-n-c","name":"Tyson Processing Plant Monroe, N.C.","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.535Z"}
+{"slug":"dollar-general-distribution-center-otr-truck-gate","name":"Dollar General Distribution Center OTR Truck Gate","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.535Z"}
+{"slug":"werner-enterprises","name":"Werner Enterprises","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.535Z"}
+{"slug":"ben-e-keith-foods-gulf-coast-distribution-center","name":"Ben E. Keith Foods Gulf Coast Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.536Z"}
+{"slug":"walgreens-distribution-center","name":"Walgreens Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.536Z"}
+{"slug":"ross-stores-distribution-center","name":"Ross Stores Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.536Z"}
+{"slug":"clay-distribution-center-gordon-food-service","name":"Clay Distribution Center: Gordon Food Service","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.536Z"}
+{"slug":"ball-metal-beverage-container","name":"Ball Metal Beverage Container","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.537Z"}
+{"slug":"amcor-rigid-plastics","name":"Amcor Rigid Plastics","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.537Z"}
+{"slug":"sherwin-williams-aurora-distribution-service-center","name":"Sherwin Williams Aurora Distribution Service Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.537Z"}
+{"slug":"international-paper-dallas-container-plant","name":"International Paper - Dallas Container Plant","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.537Z"}
+{"slug":"basf-corporation","name":"BASF Corporation","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.538Z"}
+{"slug":"grainger-distribution-center","name":"Grainger Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.538Z"}
+{"slug":"chewy-fulfillment-center-hou1","name":"Chewy Fulfillment Center HOU1","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.538Z"}
+{"slug":"international-paper-beltline-container-plant","name":"International Paper - Beltline Container Plant","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.538Z"}
+{"slug":"amcor-flexibles-madison","name":"Amcor Flexibles Madison","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.539Z"}
+{"slug":"hershey-s-weaver-popcorn-manufacturing","name":"Hershey's Weaver Popcorn Manufacturing","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.539Z"}
+{"slug":"pepsi-cola-co","name":"Pepsi-Cola Co","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.539Z"}
+{"slug":"pepsi-cola-co-2","name":"Pepsi-Cola Co","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.539Z"}
+{"slug":"dupont-industrial-center","name":"Dupont Industrial Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.540Z"}
+{"slug":"procter-gamble-co","name":"Procter & Gamble Co","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.540Z"}
+{"slug":"westrock-corrugated-container","name":"WestRock - Corrugated Container","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.541Z"}
+{"slug":"smurfit-westrock-denver-container-plant","name":"Smurfit Westrock Denver Container Plant","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.541Z"}
+{"slug":"chewy-fulfillment-center-cfc1","name":"Chewy Fulfillment Center CFC1","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.541Z"}
+{"slug":"pepsi-co-inc","name":"Pepsi Co. Inc","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.541Z"}
+{"slug":"chewy-fulfillment-center-mco1","name":"Chewy Fulfillment Center MCO1","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.542Z"}
+{"slug":"ball-metal-beverage-packaging","name":"Ball Metal Beverage Packaging","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.542Z"}
+{"slug":"autozone-distribution","name":"AutoZone Distribution","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.542Z"}
+{"slug":"3m-co","name":"3M Co","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.542Z"}
+{"slug":"whirlpool-distribution-center","name":"Whirlpool Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.543Z"}
+{"slug":"tractor-supply-company-distribution-center","name":"Tractor Supply Company Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.543Z"}
+{"slug":"fort-worth-distribution-center-for-tractor-supply","name":"Fort Worth Distribution Center for tractor supply","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.543Z"}
+{"slug":"ozburn-hessey-logistics","name":"Ozburn-Hessey Logistics","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.543Z"}
+{"slug":"cvs-distribution-center-of-greenfield-in","name":"CVS Distribution Center of Greenfield IN","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.544Z"}
+{"slug":"xpo-logistics-columbia","name":"XPO Logistics Columbia","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.544Z"}
+{"slug":"americold-cold-storage","name":"Americold Cold Storage","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.544Z"}
+{"slug":"walgreens-micro-fulfillment-center","name":"Walgreens Micro Fulfillment Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.544Z"}
+{"slug":"united-states-postal-service","name":"United States Postal Service","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.545Z"}
+{"slug":"smurfit-westrock-houston-sheet-plant","name":"Smurfit Westrock Houston Sheet Plant","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.545Z"}
+{"slug":"swift-transportation-ocala-terminal","name":"Swift Transportation - Ocala Terminal","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.545Z"}
+{"slug":"florida-food-service-ben-e-keith-foods-florida","name":"Florida food service Ben E Keith Foods Florida","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.545Z"}
+{"slug":"uline-shipping-supplies-x1","name":"Uline Shipping Supplies - X1","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.546Z"}
+{"slug":"xpo-global-logistics-xgl","name":"XPO Global Logistics (XGL)","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.546Z"}
+{"slug":"packaging-corporation-of-america-pca","name":"Packaging Corporation of America (PCA)","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.546Z"}
+{"slug":"sherwin-williams-florida-distribution-center","name":"Sherwin-Williams Florida Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.546Z"}
+{"slug":"dhl-bow-distribution-center-formerly-exel","name":"DHL Bow Distribution Center (Formerly EXEL)","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.547Z"}
+{"slug":"hershey-s-annville-fulfillment-center","name":"Hershey's Annville Fulfillment Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.547Z"}
+{"slug":"knob-creek-bottling-plant","name":"Knob Creek Bottling Plant","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.547Z"}
+{"slug":"meijer-distribution-center-dc-93","name":"Meijer Distribution Center - DC 93","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.547Z"}
+{"slug":"tj-maxx-distribution-center","name":"TJ Maxx Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.548Z"}
+{"slug":"meijer-distribution-center-dc-92","name":"Meijer Distribution Center - DC 92","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.548Z"}
+{"slug":"hershey-foods-west-distribution","name":"Hershey Foods West Distribution","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.548Z"}
+{"slug":"meijer-distribution-center-dc-86","name":"Meijer Distribution Center - DC 86","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.549Z"}
+{"slug":"red-bull-distribution-center","name":"Red Bull Distribution center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.549Z"}
+{"slug":"albertsons-manufacturing-plant","name":"Albertsons Manufacturing Plant","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.550Z"}
+{"slug":"trane-distribution-center","name":"Trane Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.550Z"}
+{"slug":"crown-packaging-corp-little-rock-arkansas-office","name":"Crown Packaging Corp. - Little Rock, Arkansas Office","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.550Z"}
+{"slug":"family-dollar-distribution-center","name":"Family Dollar Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.550Z"}
+{"slug":"tom-thumb-randalls-albertsons-distribution-center","name":"Tom Thumb/Randalls/Albertsons Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.551Z"}
+{"slug":"chewy-fulfillment-center-day1","name":"Chewy Fulfillment Center DAY1","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.551Z"}
+{"slug":"ocean-spray","name":"Ocean Spray","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.551Z"}
+{"slug":"tractor-supply-company-longview-distribution-center","name":"Tractor Supply Company - Longview Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.551Z"}
+{"slug":"bell-container-international-paper","name":"Bell Container International Paper","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.552Z"}
+{"slug":"smurfit-westrock-conway-folding-carton-plant","name":"Smurfit Westrock Conway Folding Carton Plant","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.552Z"}
+{"slug":"ben-e-keith-foods-mid-south-distribution-center","name":"Ben E. Keith Foods Mid-South Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.552Z"}
+{"slug":"sonoco-products-co-gate-9","name":"Sonoco Products Co Gate 9","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.552Z"}
+{"slug":"schreiber","name":"Schreiber","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.553Z"}
+{"slug":"sonoco-products-co","name":"Sonoco Products Co","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.553Z"}
+{"slug":"sonoco-tubes-cores","name":"Sonoco Tubes & Cores","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.553Z"}
+{"slug":"hood-packaging-corporation","name":"Hood Packaging Corporation","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.553Z"}
+{"slug":"graphic-packaging","name":"Graphic Packaging","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.554Z"}
+{"slug":"sonoco-recycling","name":"Sonoco Recycling","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.554Z"}
+{"slug":"fastenal-canada-fulfillment-center","name":"Fastenal Canada Fulfillment Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.554Z"}
+{"slug":"fastenal-canada-fulfillment-center-2","name":"Fastenal Canada Fulfillment Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.554Z"}
+{"slug":"chewy-fulfillment-center-mdt1","name":"Chewy Fulfillment Center MDT1","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.555Z"}
+{"slug":"kohler-distribution-center","name":"Kohler Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.555Z"}
+{"slug":"smurfit-westrock-hazleton-fold-pak-plant","name":"Smurfit Westrock Hazleton Fold-Pak Plant","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.555Z"}
+{"slug":"chewy-fulfillment-center-clt1","name":"Chewy Fulfillment Center CLT1","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.556Z"}
+{"slug":"chewy-fulfillment-center-rno1","name":"Chewy Fulfillment Center, RNO1","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.556Z"}
+{"slug":"williams-sonoma-distribution-center","name":"Williams-Sonoma Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.556Z"}
+{"slug":"owens-corning-warehouse","name":"Owens Corning Warehouse","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.556Z"}
+{"slug":"tractor-supply-co-distribution","name":"Tractor Supply Co Distribution","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.557Z"}
+{"slug":"clorox-products-houston","name":"Clorox Products Houston","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.557Z"}
+{"slug":"sherwin-williams-wheeling-manufacturing-plant","name":"Sherwin-Williams Wheeling Manufacturing Plant","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.557Z"}
+{"slug":"bridgestone-distribution-center","name":"Bridgestone Distribution Center","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.558Z"}
+{"slug":"dow-chemical-co","name":"Dow Chemical Co","domain":null,"tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.558Z"}
+{"slug":"hershey","name":"Hershey","domain":"hershey.com","tier":"A","fit":86.7,"status":"pending","at":"2026-06-15T05:14:53.558Z"}
+{"slug":"o-reilly-auto-parts","name":"O'Reilly Auto Parts","domain":"corporate.oreillyauto.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.558Z"}
+{"slug":"allen-distribution","name":"Allen Distribution","domain":"allendistribution.com","tier":"A","fit":33.3,"status":"pending","at":"2026-06-15T05:14:53.559Z"}
+{"slug":"penske","name":"Penske","domain":"gopenske.com","tier":"A","fit":100,"status":"pending","at":"2026-06-15T05:14:53.559Z"}
+{"slug":"intersnack","name":"Intersnack","domain":"intersnackgroup.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.559Z"}
+{"slug":"tessenderlo","name":"Tessenderlo","domain":"tessenderlo.com","tier":"A","fit":null,"status":"pending","at":"2026-06-15T05:14:53.560Z"}
+{"slug":"general-motors","name":"General Motors","domain":"gm.com","tier":"A","fit":null,"status":"roster","at":"2026-06-15T05:14:54.533Z","facilities":41}
+{"slug":"walmart","name":"Walmart","domain":"walmart.com","tier":"A","fit":93.3,"status":"roster","at":"2026-06-15T05:14:54.534Z","facilities":12}
+{"slug":"kroger","name":"Kroger","domain":"kroger.com","tier":"A","fit":86.7,"status":"roster","at":"2026-06-15T05:14:54.535Z","facilities":18}
+{"slug":"fedex","name":"FedEx","domain":"fedex.com","tier":"A","fit":100,"status":"roster","at":"2026-06-15T05:14:54.535Z","facilities":30}
+{"slug":"georgia-pacific","name":"Georgia-Pacific","domain":"gp.com","tier":"A","fit":93.3,"status":"roster","at":"2026-06-15T05:14:54.536Z","facilities":30}
+{"slug":"diageo","name":"Diageo","domain":null,"tier":"A","fit":null,"status":"roster","at":"2026-06-15T05:14:54.537Z","facilities":10}
+{"slug":"sc-johnson","name":"SC Johnson","domain":null,"tier":"A","fit":null,"status":"roster","at":"2026-06-15T05:14:54.538Z","facilities":10}
+{"slug":"constellation-brands","name":"Constellation Brands","domain":null,"tier":"A","fit":null,"status":"roster","at":"2026-06-15T05:14:54.539Z","facilities":11}
+{"slug":"pactiv-evergreen","name":"Pactiv Evergreen","domain":null,"tier":"A","fit":null,"status":"roster","at":"2026-06-15T05:14:54.539Z","facilities":30}
+{"slug":"target","name":"Target","domain":"target.com","tier":"A","fit":93.3,"status":"roster","at":"2026-06-15T05:14:54.540Z","facilities":24}
+{"slug":"the-home-depot","name":"The Home Depot","domain":"homedepot.com","tier":"A","fit":93.3,"status":"roster","at":"2026-06-15T05:14:54.541Z","facilities":30}
+{"slug":"caterpillar","name":"Caterpillar","domain":"cat.com","tier":"A","fit":null,"status":"roster","at":"2026-06-15T05:14:54.541Z","facilities":21}
+{"slug":"performance-food-group","name":"Performance Food Group","domain":"pfgc.com","tier":"A","fit":100,"status":"roster","at":"2026-06-15T05:14:54.542Z","facilities":30}
+{"slug":"john-deere","name":"John Deere","domain":"johndeere.com","tier":"A","fit":null,"status":"roster","at":"2026-06-15T05:14:54.542Z","facilities":22}
+{"slug":"honda","name":"Honda","domain":"hna.honda.com","tier":"A","fit":null,"status":"roster","at":"2026-06-15T05:14:54.543Z","facilities":18}
+{"slug":"cj-logistics-america","name":"CJ Logistics America","domain":"cjlogisticsamerica.com","tier":"A","fit":100,"status":"roster","at":"2026-06-15T05:14:54.544Z","facilities":27}
+{"slug":"coca-cola","name":"Coca Cola","domain":"cocacola.co.il","tier":"A","fit":100,"status":"roster","at":"2026-06-15T05:14:54.547Z","facilities":30}
+{"slug":"mars","name":"Mars","domain":"mars.com","tier":"A","fit":93.3,"status":"roster","at":"2026-06-15T14:26:33.064Z","facilities":26}
+{"slug":"sysco","name":"Sysco","domain":"sysco.com","tier":"A","fit":100,"status":"roster","at":"2026-06-15T14:26:33.065Z","facilities":30}
+{"slug":"the-coca-cola-company","name":"The Coca-Cola Company","domain":"coca-cola.com","tier":"A","fit":null,"status":"roster","at":"2026-06-15T14:26:33.066Z","facilities":30}
+{"slug":"yanfeng","name":"YANFENG","domain":"yanfeng.com","tier":"A","fit":null,"status":"roster","at":"2026-06-15T14:26:33.066Z","facilities":18}
+{"slug":"xpo","name":"XPO","domain":"xpo.com","tier":"A","fit":null,"status":"roster","at":"2026-06-15T14:26:33.067Z","facilities":30}
+{"slug":"ryder-supply-chain-solutions","name":"Ryder Supply Chain Solutions","domain":"ryder.com","tier":"A","fit":null,"status":"roster","at":"2026-06-15T14:26:33.067Z","facilities":30}
+{"slug":"agro-merchants","name":"AGRO Merchants","domain":"argomerchants.com","tier":"A","fit":null,"status":"roster","at":"2026-06-15T14:26:33.068Z","facilities":16}
+{"slug":"cj-logistics-north-america","name":"CJ Logistics North America","domain":"america.cjlogistics.com","tier":"A","fit":null,"status":"roster","at":"2026-06-15T14:26:33.068Z","facilities":30}
+{"slug":"nfi-industries","name":"NFI Industries","domain":"nfiindustries.com","tier":"A","fit":null,"status":"roster","at":"2026-06-15T14:26:33.068Z","facilities":30}
+{"slug":"ups","name":"UPS","domain":"ups.com","tier":"A","fit":null,"status":"roster","at":"2026-06-15T14:26:33.069Z","facilities":30}
+{"slug":"general-motors","name":"General Motors","domain":"gm.com","tier":"A","fit":null,"status":"error","at":"2026-06-15T14:26:57.259Z","facilities":41,"error":"spawnSync npx ENOENT"}
+{"slug":"walmart","name":"Walmart","domain":"walmart.com","tier":"A","fit":93.3,"status":"error","at":"2026-06-15T14:26:57.261Z","facilities":12,"error":"spawnSync npx ENOENT"}
+{"slug":"kroger","name":"Kroger","domain":"kroger.com","tier":"A","fit":86.7,"status":"error","at":"2026-06-15T14:26:57.263Z","facilities":18,"error":"spawnSync npx ENOENT"}
+{"slug":"mars","name":"Mars","domain":"mars.com","tier":"A","fit":93.3,"status":"error","at":"2026-06-15T14:26:57.264Z","facilities":26,"error":"spawnSync npx ENOENT"}
+{"slug":"sysco","name":"Sysco","domain":"sysco.com","tier":"A","fit":100,"status":"error","at":"2026-06-15T14:26:57.266Z","facilities":30,"error":"spawnSync npx ENOENT"}
+{"slug":"the-coca-cola-company","name":"The Coca-Cola Company","domain":"coca-cola.com","tier":"A","fit":null,"status":"error","at":"2026-06-15T14:26:57.268Z","facilities":30,"error":"spawnSync npx ENOENT"}
+{"slug":"yanfeng","name":"YANFENG","domain":"yanfeng.com","tier":"A","fit":null,"status":"error","at":"2026-06-15T14:26:57.269Z","facilities":18,"error":"spawnSync npx ENOENT"}
+{"slug":"xpo","name":"XPO","domain":"xpo.com","tier":"A","fit":null,"status":"error","at":"2026-06-15T14:26:57.271Z","facilities":30,"error":"spawnSync npx ENOENT"}
+{"slug":"ryder-supply-chain-solutions","name":"Ryder Supply Chain Solutions","domain":"ryder.com","tier":"A","fit":null,"status":"error","at":"2026-06-15T14:26:57.273Z","facilities":30,"error":"spawnSync npx ENOENT"}
+{"slug":"fedex","name":"FedEx","domain":"fedex.com","tier":"A","fit":100,"status":"error","at":"2026-06-15T14:26:57.275Z","facilities":30,"error":"spawnSync npx ENOENT"}
+{"slug":"agro-merchants","name":"AGRO Merchants","domain":"argomerchants.com","tier":"A","fit":null,"status":"error","at":"2026-06-15T14:26:57.276Z","facilities":16,"error":"spawnSync npx ENOENT"}
+{"slug":"cj-logistics-north-america","name":"CJ Logistics North America","domain":"america.cjlogistics.com","tier":"A","fit":null,"status":"error","at":"2026-06-15T14:26:57.278Z","facilities":30,"error":"spawnSync npx ENOENT"}
+{"slug":"nfi-industries","name":"NFI Industries","domain":"nfiindustries.com","tier":"A","fit":null,"status":"error","at":"2026-06-15T14:26:57.279Z","facilities":30,"error":"spawnSync npx ENOENT"}
+{"slug":"ups","name":"UPS","domain":"ups.com","tier":"A","fit":null,"status":"error","at":"2026-06-15T14:26:57.281Z","facilities":30,"error":"spawnSync npx ENOENT"}
+{"slug":"georgia-pacific","name":"Georgia-Pacific","domain":"gp.com","tier":"A","fit":93.3,"status":"error","at":"2026-06-15T14:26:57.282Z","facilities":30,"error":"spawnSync npx ENOENT"}
+{"slug":"diageo","name":"Diageo","domain":null,"tier":"A","fit":null,"status":"error","at":"2026-06-15T14:26:57.284Z","facilities":10,"error":"spawnSync npx ENOENT"}
+{"slug":"sc-johnson","name":"SC Johnson","domain":null,"tier":"A","fit":null,"status":"error","at":"2026-06-15T14:26:57.285Z","facilities":10,"error":"spawnSync npx ENOENT"}
+{"slug":"constellation-brands","name":"Constellation Brands","domain":null,"tier":"A","fit":null,"status":"error","at":"2026-06-15T14:26:57.287Z","facilities":11,"error":"spawnSync npx ENOENT"}
+{"slug":"pactiv-evergreen","name":"Pactiv Evergreen","domain":null,"tier":"A","fit":null,"status":"error","at":"2026-06-15T14:26:57.288Z","facilities":30,"error":"spawnSync npx ENOENT"}
+{"slug":"target","name":"Target","domain":"target.com","tier":"A","fit":93.3,"status":"error","at":"2026-06-15T14:26:57.290Z","facilities":24,"error":"spawnSync npx ENOENT"}
+{"slug":"the-home-depot","name":"The Home Depot","domain":"homedepot.com","tier":"A","fit":93.3,"status":"error","at":"2026-06-15T14:26:57.291Z","facilities":30,"error":"spawnSync npx ENOENT"}
+{"slug":"caterpillar","name":"Caterpillar","domain":"cat.com","tier":"A","fit":null,"status":"error","at":"2026-06-15T14:26:57.293Z","facilities":21,"error":"spawnSync npx ENOENT"}
+{"slug":"performance-food-group","name":"Performance Food Group","domain":"pfgc.com","tier":"A","fit":100,"status":"error","at":"2026-06-15T14:26:57.294Z","facilities":30,"error":"spawnSync npx ENOENT"}
+{"slug":"john-deere","name":"John Deere","domain":"johndeere.com","tier":"A","fit":null,"status":"error","at":"2026-06-15T14:26:57.296Z","facilities":22,"error":"spawnSync npx ENOENT"}
+{"slug":"honda","name":"Honda","domain":"hna.honda.com","tier":"A","fit":null,"status":"error","at":"2026-06-15T14:26:57.297Z","facilities":18,"error":"spawnSync npx ENOENT"}
+{"slug":"cj-logistics-america","name":"CJ Logistics America","domain":"cjlogisticsamerica.com","tier":"A","fit":100,"status":"error","at":"2026-06-15T14:26:57.299Z","facilities":27,"error":"spawnSync npx ENOENT"}
+{"slug":"coca-cola","name":"Coca Cola","domain":"cocacola.co.il","tier":"A","fit":100,"status":"error","at":"2026-06-15T14:26:57.300Z","facilities":30,"error":"spawnSync npx ENOENT"}
+{"slug":"general-motors","name":"General Motors","domain":"gm.com","tier":"A","fit":null,"status":"geocoded","at":"2026-06-15T14:28:01.323Z","facilities":41}
+{"slug":"walmart","name":"Walmart","domain":"walmart.com","tier":"A","fit":93.3,"status":"geocoded","at":"2026-06-15T14:28:05.302Z","facilities":12}
+{"slug":"kroger","name":"Kroger","domain":"kroger.com","tier":"A","fit":86.7,"status":"geocoded","at":"2026-06-15T14:28:10.669Z","facilities":18}
+{"slug":"mars","name":"Mars","domain":"mars.com","tier":"A","fit":93.3,"status":"geocoded","at":"2026-06-15T14:28:13.920Z","facilities":26}
+{"slug":"sysco","name":"Sysco","domain":"sysco.com","tier":"A","fit":100,"status":"geocoded","at":"2026-06-15T14:28:22.279Z","facilities":30}
+{"slug":"the-coca-cola-company","name":"The Coca-Cola Company","domain":"coca-cola.com","tier":"A","fit":null,"status":"geocoded","at":"2026-06-15T14:28:29.688Z","facilities":30}
+{"slug":"yanfeng","name":"YANFENG","domain":"yanfeng.com","tier":"A","fit":null,"status":"geocoded","at":"2026-06-15T14:28:31.796Z","facilities":18}
+{"slug":"xpo","name":"XPO","domain":"xpo.com","tier":"A","fit":null,"status":"geocoded","at":"2026-06-15T14:28:34.657Z","facilities":30}
+{"slug":"ryder-supply-chain-solutions","name":"Ryder Supply Chain Solutions","domain":"ryder.com","tier":"A","fit":null,"status":"geocoded","at":"2026-06-15T14:28:38.620Z","facilities":30}
+{"slug":"fedex","name":"FedEx","domain":"fedex.com","tier":"A","fit":100,"status":"geocoded","at":"2026-06-15T14:28:47.508Z","facilities":30}
+{"slug":"agro-merchants","name":"AGRO Merchants","domain":"argomerchants.com","tier":"A","fit":null,"status":"geocoded","at":"2026-06-15T14:28:52.358Z","facilities":16}
+{"slug":"cj-logistics-north-america","name":"CJ Logistics North America","domain":"america.cjlogistics.com","tier":"A","fit":null,"status":"geocoded","at":"2026-06-15T14:28:55.443Z","facilities":30}
+{"slug":"nfi-industries","name":"NFI Industries","domain":"nfiindustries.com","tier":"A","fit":null,"status":"geocoded","at":"2026-06-15T14:28:59.213Z","facilities":30}
+{"slug":"ups","name":"UPS","domain":"ups.com","tier":"A","fit":null,"status":"geocoded","at":"2026-06-15T14:29:06.451Z","facilities":30}
+{"slug":"georgia-pacific","name":"Georgia-Pacific","domain":"gp.com","tier":"A","fit":93.3,"status":"geocoded","at":"2026-06-15T14:29:15.160Z","facilities":30}
+{"slug":"diageo","name":"Diageo","domain":null,"tier":"A","fit":null,"status":"geocoded","at":"2026-06-15T14:29:18.574Z","facilities":10}
+{"slug":"sc-johnson","name":"SC Johnson","domain":null,"tier":"A","fit":null,"status":"geocoded","at":"2026-06-15T14:29:21.913Z","facilities":10}
+{"slug":"constellation-brands","name":"Constellation Brands","domain":null,"tier":"A","fit":null,"status":"geocoded","at":"2026-06-15T14:29:25.683Z","facilities":11}
+{"slug":"pactiv-evergreen","name":"Pactiv Evergreen","domain":null,"tier":"A","fit":null,"status":"geocoded","at":"2026-06-15T14:29:34.060Z","facilities":30}
+{"slug":"target","name":"Target","domain":"target.com","tier":"A","fit":93.3,"status":"geocoded","at":"2026-06-15T14:29:40.995Z","facilities":24}
+{"slug":"the-home-depot","name":"The Home Depot","domain":"homedepot.com","tier":"A","fit":93.3,"status":"geocoded","at":"2026-06-15T14:29:49.448Z","facilities":30}
+{"slug":"caterpillar","name":"Caterpillar","domain":"cat.com","tier":"A","fit":null,"status":"geocoded","at":"2026-06-15T14:29:56.153Z","facilities":21}
+{"slug":"performance-food-group","name":"Performance Food Group","domain":"pfgc.com","tier":"A","fit":100,"status":"geocoded","at":"2026-06-15T14:30:04.367Z","facilities":30}
+{"slug":"john-deere","name":"John Deere","domain":"johndeere.com","tier":"A","fit":null,"status":"geocoded","at":"2026-06-15T14:30:10.786Z","facilities":22}
+{"slug":"honda","name":"Honda","domain":"hna.honda.com","tier":"A","fit":null,"status":"geocoded","at":"2026-06-15T14:30:16.392Z","facilities":18}
+{"slug":"cj-logistics-america","name":"CJ Logistics America","domain":"cjlogisticsamerica.com","tier":"A","fit":100,"status":"geocoded","at":"2026-06-15T14:30:22.475Z","facilities":27}
+{"slug":"coca-cola","name":"Coca Cola","domain":"cocacola.co.il","tier":"A","fit":100,"status":"geocoded","at":"2026-06-15T14:30:31.070Z","facilities":30}
+{"slug":"general-motors","name":"General Motors","domain":"gm.com","tier":"A","fit":null,"status":"scored","at":"2026-06-15T14:30:39.223Z","facilities":41}
+{"slug":"walmart","name":"Walmart","domain":"walmart.com","tier":"A","fit":93.3,"status":"scored","at":"2026-06-15T14:30:39.225Z","facilities":12}
+{"slug":"kroger","name":"Kroger","domain":"kroger.com","tier":"A","fit":86.7,"status":"scored","at":"2026-06-15T14:30:39.226Z","facilities":18}
+{"slug":"mars","name":"Mars","domain":"mars.com","tier":"A","fit":93.3,"status":"scored","at":"2026-06-15T14:30:39.227Z","facilities":13}
+{"slug":"sysco","name":"Sysco","domain":"sysco.com","tier":"A","fit":100,"status":"scored","at":"2026-06-15T14:30:39.229Z","facilities":30}
+{"slug":"the-coca-cola-company","name":"The Coca-Cola Company","domain":"coca-cola.com","tier":"A","fit":null,"status":"scored","at":"2026-06-15T14:30:39.230Z","facilities":30}
+{"slug":"yanfeng","name":"YANFENG","domain":"yanfeng.com","tier":"A","fit":null,"status":"scored","at":"2026-06-15T14:30:39.231Z","facilities":5}
+{"slug":"xpo","name":"XPO","domain":"xpo.com","tier":"A","fit":null,"status":"scored","at":"2026-06-15T14:30:39.231Z","facilities":8}
+{"slug":"ryder-supply-chain-solutions","name":"Ryder Supply Chain Solutions","domain":"ryder.com","tier":"A","fit":null,"status":"scored","at":"2026-06-15T14:30:39.232Z","facilities":12}
+{"slug":"fedex","name":"FedEx","domain":"fedex.com","tier":"A","fit":100,"status":"scored","at":"2026-06-15T14:30:39.233Z","facilities":30}
+{"slug":"agro-merchants","name":"AGRO Merchants","domain":"argomerchants.com","tier":"A","fit":null,"status":"scored","at":"2026-06-15T14:30:39.234Z","facilities":16}
+{"slug":"cj-logistics-north-america","name":"CJ Logistics North America","domain":"america.cjlogistics.com","tier":"A","fit":null,"status":"scored","at":"2026-06-15T14:30:39.235Z","facilities":9}
+{"slug":"nfi-industries","name":"NFI Industries","domain":"nfiindustries.com","tier":"A","fit":null,"status":"scored","at":"2026-06-15T14:30:39.236Z","facilities":12}
+{"slug":"ups","name":"UPS","domain":"ups.com","tier":"A","fit":null,"status":"scored","at":"2026-06-15T14:30:39.237Z","facilities":25}
+{"slug":"georgia-pacific","name":"Georgia-Pacific","domain":"gp.com","tier":"A","fit":93.3,"status":"scored","at":"2026-06-15T14:30:39.238Z","facilities":30}
+{"slug":"diageo","name":"Diageo","domain":null,"tier":"A","fit":null,"status":"scored","at":"2026-06-15T14:30:39.239Z","facilities":10}
+{"slug":"sc-johnson","name":"SC Johnson","domain":null,"tier":"A","fit":null,"status":"scored","at":"2026-06-15T14:30:39.240Z","facilities":10}
+{"slug":"constellation-brands","name":"Constellation Brands","domain":null,"tier":"A","fit":null,"status":"scored","at":"2026-06-15T14:30:39.241Z","facilities":11}
+{"slug":"pactiv-evergreen","name":"Pactiv Evergreen","domain":null,"tier":"A","fit":null,"status":"scored","at":"2026-06-15T14:30:39.243Z","facilities":30}
+{"slug":"target","name":"Target","domain":"target.com","tier":"A","fit":93.3,"status":"scored","at":"2026-06-15T14:30:39.245Z","facilities":24}
+{"slug":"the-home-depot","name":"The Home Depot","domain":"homedepot.com","tier":"A","fit":93.3,"status":"scored","at":"2026-06-15T14:30:39.246Z","facilities":30}
+{"slug":"caterpillar","name":"Caterpillar","domain":"cat.com","tier":"A","fit":null,"status":"scored","at":"2026-06-15T14:30:39.247Z","facilities":21}
+{"slug":"performance-food-group","name":"Performance Food Group","domain":"pfgc.com","tier":"A","fit":100,"status":"scored","at":"2026-06-15T14:30:39.249Z","facilities":30}
+{"slug":"john-deere","name":"John Deere","domain":"johndeere.com","tier":"A","fit":null,"status":"scored","at":"2026-06-15T14:30:39.250Z","facilities":22}
+{"slug":"honda","name":"Honda","domain":"hna.honda.com","tier":"A","fit":null,"status":"scored","at":"2026-06-15T14:30:39.251Z","facilities":18}
+{"slug":"cj-logistics-america","name":"CJ Logistics America","domain":"cjlogisticsamerica.com","tier":"A","fit":100,"status":"scored","at":"2026-06-15T14:30:39.252Z","facilities":27}
+{"slug":"coca-cola","name":"Coca Cola","domain":"cocacola.co.il","tier":"A","fit":100,"status":"scored","at":"2026-06-15T14:30:39.254Z","facilities":30}
+{"slug":"general-motors","name":"General Motors","domain":"gm.com","tier":"A","fit":null,"status":"stamped","at":"2026-06-15T14:31:35.390Z","facilities":41}
+{"slug":"walmart","name":"Walmart","domain":"walmart.com","tier":"A","fit":93.3,"status":"stamped","at":"2026-06-15T14:31:35.391Z","facilities":12}
+{"slug":"kroger","name":"Kroger","domain":"kroger.com","tier":"A","fit":86.7,"status":"stamped","at":"2026-06-15T14:31:35.391Z","facilities":18}
+{"slug":"mars","name":"Mars","domain":"mars.com","tier":"A","fit":93.3,"status":"stamped","at":"2026-06-15T14:31:35.391Z","facilities":13}
+{"slug":"sysco","name":"Sysco","domain":"sysco.com","tier":"A","fit":100,"status":"stamped","at":"2026-06-15T14:31:35.391Z","facilities":30}
+{"slug":"the-coca-cola-company","name":"The Coca-Cola Company","domain":"coca-cola.com","tier":"A","fit":null,"status":"stamped","at":"2026-06-15T14:31:35.392Z","facilities":30}
+{"slug":"yanfeng","name":"YANFENG","domain":"yanfeng.com","tier":"A","fit":null,"status":"stamped","at":"2026-06-15T14:31:35.392Z","facilities":5}
+{"slug":"xpo","name":"XPO","domain":"xpo.com","tier":"A","fit":null,"status":"stamped","at":"2026-06-15T14:31:35.392Z","facilities":8}
+{"slug":"ryder-supply-chain-solutions","name":"Ryder Supply Chain Solutions","domain":"ryder.com","tier":"A","fit":null,"status":"stamped","at":"2026-06-15T14:31:35.393Z","facilities":12}
+{"slug":"fedex","name":"FedEx","domain":"fedex.com","tier":"A","fit":100,"status":"stamped","at":"2026-06-15T14:31:35.393Z","facilities":30}
+{"slug":"agro-merchants","name":"AGRO Merchants","domain":"argomerchants.com","tier":"A","fit":null,"status":"stamped","at":"2026-06-15T14:31:35.393Z","facilities":16}
+{"slug":"cj-logistics-north-america","name":"CJ Logistics North America","domain":"america.cjlogistics.com","tier":"A","fit":null,"status":"stamped","at":"2026-06-15T14:31:35.393Z","facilities":9}
+{"slug":"nfi-industries","name":"NFI Industries","domain":"nfiindustries.com","tier":"A","fit":null,"status":"stamped","at":"2026-06-15T14:31:35.393Z","facilities":12}
+{"slug":"ups","name":"UPS","domain":"ups.com","tier":"A","fit":null,"status":"stamped","at":"2026-06-15T14:31:35.394Z","facilities":25}
+{"slug":"georgia-pacific","name":"Georgia-Pacific","domain":"gp.com","tier":"A","fit":93.3,"status":"stamped","at":"2026-06-15T14:31:35.394Z","facilities":30}
+{"slug":"target","name":"Target","domain":"target.com","tier":"A","fit":93.3,"status":"stamped","at":"2026-06-15T14:31:35.394Z","facilities":24}
+{"slug":"the-home-depot","name":"The Home Depot","domain":"homedepot.com","tier":"A","fit":93.3,"status":"stamped","at":"2026-06-15T14:31:35.395Z","facilities":30}
+{"slug":"caterpillar","name":"Caterpillar","domain":"cat.com","tier":"A","fit":null,"status":"stamped","at":"2026-06-15T14:31:35.395Z","facilities":21}
+{"slug":"performance-food-group","name":"Performance Food Group","domain":"pfgc.com","tier":"A","fit":100,"status":"stamped","at":"2026-06-15T14:31:35.395Z","facilities":30}
+{"slug":"john-deere","name":"John Deere","domain":"johndeere.com","tier":"A","fit":null,"status":"stamped","at":"2026-06-15T14:31:35.395Z","facilities":22}
+{"slug":"honda","name":"Honda","domain":"hna.honda.com","tier":"A","fit":null,"status":"stamped","at":"2026-06-15T14:31:35.396Z","facilities":18}
+{"slug":"cj-logistics-america","name":"CJ Logistics America","domain":"cjlogisticsamerica.com","tier":"A","fit":100,"status":"stamped","at":"2026-06-15T14:31:35.396Z","facilities":27}
+{"slug":"coca-cola","name":"Coca Cola","domain":"cocacola.co.il","tier":"A","fit":100,"status":"stamped","at":"2026-06-15T14:31:35.396Z","facilities":30}

@@ -1,0 +1,10 @@
+{
+  "slug": "ups",
+  "domain": "ups.com",
+  "nearest_distance_mi": 1.1,
+  "proximity_score": 96,
+  "corridor_density": 11,
+  "composite_score": 67.99,
+  "nearest_primo_site": "US PL Ontario Factory",
+  "facilities": 25
+}

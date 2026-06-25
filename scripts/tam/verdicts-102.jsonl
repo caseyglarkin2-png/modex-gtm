@@ -1,0 +1,36 @@
+{"id":"54772675115","verdict":"out","segment":"","tier":"","reason":"prkmc.com = Perkins & Marie Callender's restaurant chain (hospitality/QSR)"}
+{"id":"54772651296","verdict":"in","segment":"wholesale_distribution","tier":"A","reason":"Charmer Sunbelt (now Breakthru Beverage) major wine/spirits distributor, multi-state DC network with heavy truck fleets"}
+{"id":"54736049742","verdict":"out","segment":"","tier":"","reason":"sequel-us.com = Sequel, pharma-focused IT services/consulting firm"}
+{"id":"54771885983","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Wisconsin beer/wine/spirits distributor with multiple DCs and delivery fleet"}
+{"id":"54771856981","verdict":"out","segment":"","tier":"","reason":"wvcc.com redirects to West Valley Construction, utility contractor (jobsite-based, no DC/yard network)"}
+{"id":"54772680624","verdict":"in","segment":"agriculture_food_processing","tier":"B","reason":"pcoastp.com = Pacific Coast Producers, grower co-op canning fruit/tomatoes with multiple plants in CA/OR/WA"}
+{"id":"54771844025","verdict":"in","segment":"retail_grocery","tier":"C","reason":"FL liquor retail chain (120+ stores) supplied from one central Orlando DC; single big yard"}
+{"id":"54771943943","verdict":"in","segment":"building_materials_industrial","tier":"A","reason":"woodmark.com = American Woodmark, cabinet manufacturer with 18 plants US/Mexico + 9 service centers"}
+{"id":"54771907117","verdict":"review","segment":"","tier":"","reason":"rksks.com dead (connection refused), no name; unidentifiable"}
+{"id":"54772669603","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Baker & Taylor, national book distributor to libraries with large multi-state DCs"}
+{"id":"54772651847","verdict":"in","segment":"wholesale_distribution","tier":"B","reason":"Nintendo of America runs high-volume NA distribution centers (North Bend WA etc.) for consumer hardware"}
+{"id":"54772556869","verdict":"out","segment":"","tier":"","reason":"TTC Global = software testing/QA consultancy (IT services)"}
+{"id":"54755795017","verdict":"out","segment":"","tier":"","reason":"VFX/animation studio (media)"}
+{"id":"54772001599","verdict":"in","segment":"agriculture_food_processing","tier":"B","reason":"Universal Corp, leaf tobacco processor with NA processing plants and heavy agricultural freight"}
+{"id":"54771844366","verdict":"review","segment":"","tier":"","reason":"vacv.com dead (connection refused), no name; unidentifiable"}
+{"id":"54772765440","verdict":"in","segment":"agriculture_food_processing","tier":"B","reason":"pigsrus.net = The Maschhoffs, one of NA's largest hog production networks; feed mills + farm network, heavy truck volume"}
+{"id":"54772621575","verdict":"in","segment":"automotive_heavy_mfg","tier":"A","reason":"precastcorp.com redirects to Precision Castparts, industrial castings/forgings manufacturer with 100+ plants (supplier, not a defense prime)"}
+{"id":"54772672090","verdict":"out","segment":"","tier":"","reason":"Indiana coal mining (Hallador); bulk mine loadouts, not a trailer/dock yard network or TAM vertical"}
+{"id":"54773031097","verdict":"out","segment":"","tier":"","reason":"Red Cedar Ventures = venture capital arm of MSU Foundation (finance)"}
+{"id":"54773346415","verdict":"out","segment":"","tier":"","reason":"animation studio (media)"}
+{"id":"54754528335","verdict":"in","segment":"agriculture_food_processing","tier":"A","reason":"largest US seafood processor; AK/WA plants plus cold-storage and distribution network"}
+{"id":"54773507212","verdict":"out","segment":"","tier":"","reason":"goldprice.org = gold price tracking website, no physical operations"}
+{"id":"54774161590","verdict":"in","segment":"paper_packaging","tier":"B","reason":"Hollingsworth & Vose, specialty paper/filtration media manufacturer with multiple US mills"}
+{"id":"54773475610","verdict":"out","segment":"","tier":"","reason":"art museum (institution)"}
+{"id":"54773486616","verdict":"out","segment":"","tier":"","reason":"Wireless Advocates = Costco wireless kiosk retailer (defunct 2022), no facility network"}
+{"id":"54773374251","verdict":"out","segment":"","tier":"","reason":"animation studio (media)"}
+{"id":"54754706298","verdict":"out","segment":"","tier":"","reason":"NVT Phybridge = networking hardware vendor (IT)"}
+{"id":"54753018288","verdict":"out","segment":"","tier":"","reason":"animation studio (media)"}
+{"id":"54753770041","verdict":"in","segment":"building_materials_industrial","tier":"B","reason":"Independent Stave, barrel cooperage with multiple stave mills + cooperages, heavy lumber/barrel truck freight"}
+{"id":"54774365607","verdict":"out","segment":"","tier":"","reason":"Clover Wireless = device buyback/refurb reverse logistics (parcel-based), no yard network"}
+{"id":"54773346424","verdict":"out","segment":"","tier":"","reason":"animation studio (media)"}
+{"id":"54773455649","verdict":"out","segment":"","tier":"","reason":"crane rental & rigging services; jobsite-based equipment yards, no freight DC network"}
+{"id":"54773518237","verdict":"out","segment":"","tier":"","reason":"art museum (institution)"}
+{"id":"54758074014","verdict":"out","segment":"","tier":"","reason":"stock photo/media licensing company, digital product"}
+{"id":"54755807928","verdict":"out","segment":"","tier":"","reason":"3Com = defunct networking hardware vendor (IT, acquired by HP 2010)"}
+{"id":"54762609779","verdict":"out","segment":"","tier":"","reason":"Bruker scientific instruments division; lab equipment, not freight-heavy"}

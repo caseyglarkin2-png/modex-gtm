@@ -1,0 +1,10 @@
+{
+  "slug": "xpo",
+  "domain": "xpo.com",
+  "nearest_distance_mi": 9.1,
+  "proximity_score": 74,
+  "corridor_density": 5,
+  "composite_score": 55.6,
+  "nearest_primo_site": "US PL Dallas 2 Factory",
+  "facilities": 8
+}

@@ -1,0 +1,10 @@
+{
+  "slug": "kroger",
+  "domain": "kroger.com",
+  "nearest_distance_mi": 11.3,
+  "proximity_score": 69,
+  "corridor_density": 5,
+  "composite_score": 78.7,
+  "nearest_primo_site": "US PL Denver Factory",
+  "facilities": 18
+}

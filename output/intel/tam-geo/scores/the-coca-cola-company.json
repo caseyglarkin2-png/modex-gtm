@@ -1,0 +1,10 @@
+{
+  "slug": "the-coca-cola-company",
+  "domain": "coca-cola.com",
+  "nearest_distance_mi": 4.8,
+  "proximity_score": 85,
+  "corridor_density": 5,
+  "composite_score": 61.82,
+  "nearest_primo_site": "US PL Ontario Factory",
+  "facilities": 30
+}

@@ -1,0 +1,10 @@
+{
+  "slug": "john-deere",
+  "domain": "johndeere.com",
+  "nearest_distance_mi": 44.4,
+  "proximity_score": 23,
+  "corridor_density": 5,
+  "composite_score": 27.51,
+  "nearest_primo_site": "US PL Madison Factory",
+  "facilities": 22
+}

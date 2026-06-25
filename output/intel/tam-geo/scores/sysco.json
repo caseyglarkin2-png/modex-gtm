@@ -1,0 +1,10 @@
+{
+  "slug": "sysco",
+  "domain": "sysco.com",
+  "nearest_distance_mi": 6.8,
+  "proximity_score": 80,
+  "corridor_density": 5,
+  "composite_score": 88.86,
+  "nearest_primo_site": "US PL Denver Factory",
+  "facilities": 30
+}
