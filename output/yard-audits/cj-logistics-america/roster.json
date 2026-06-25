@@ -16,7 +16,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "GEOMETRIC_CENTER",
-        "movedMeters": 5
+        "movedMeters": 0
       }
     },
     {
@@ -32,7 +32,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "GEOMETRIC_CENTER",
-        "movedMeters": null
+        "movedMeters": 0
       }
     },
     {
@@ -48,7 +48,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 33
+        "movedMeters": 0
       }
     },
     {
@@ -64,7 +64,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 6878
+        "movedMeters": 0
       }
     },
     {
@@ -80,7 +80,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 7034
+        "movedMeters": 0
       }
     },
     {
@@ -96,7 +96,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 3374
+        "movedMeters": 0
       }
     },
     {
@@ -112,7 +112,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 3955
+        "movedMeters": 0
       }
     },
     {
@@ -128,7 +128,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 255
+        "movedMeters": 0
       }
     },
     {
@@ -144,7 +144,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 79
+        "movedMeters": 0
       }
     },
     {
@@ -160,7 +160,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 3209
+        "movedMeters": 0
       }
     },
     {
@@ -176,7 +176,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 38
+        "movedMeters": 0
       }
     },
     {
@@ -192,7 +192,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 121
+        "movedMeters": 0
       }
     },
     {
@@ -208,7 +208,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 6476
+        "movedMeters": 0
       }
     },
     {
@@ -224,7 +224,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "GEOMETRIC_CENTER",
-        "movedMeters": 1
+        "movedMeters": 0
       }
     },
     {
@@ -240,7 +240,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 5262
+        "movedMeters": 0
       }
     },
     {
@@ -250,13 +250,13 @@
       "state": "IL",
       "type": "Distribution Center",
       "address": "1401 W Normantown Rd, Romeoville, IL 60446",
-      "lat": 41.649955,
-      "lng": -88.132968,
+      "lat": 41.651223,
+      "lng": -88.128749,
       "source": "Dun & Bradstreet + Kompass CJ Logistics America profile; dossier cites Romeoville facility (OneTrack inventory-resolution case study site)",
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 40
+        "movedMeters": 378
       }
     },
     {
@@ -272,7 +272,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 212
+        "movedMeters": 0
       }
     },
     {
@@ -288,7 +288,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 55
+        "movedMeters": 0
       }
     },
     {
@@ -304,7 +304,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 231
+        "movedMeters": 0
       }
     },
     {
@@ -320,7 +320,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 101
+        "movedMeters": 0
       }
     },
     {
@@ -351,7 +351,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 3088
+        "movedMeters": 0
       }
     },
     {
@@ -430,5 +430,5 @@
       }
     }
   ],
-  "geocodedAt": "2026-05-18"
+  "geocodedAt": "2026-06-15"
 }

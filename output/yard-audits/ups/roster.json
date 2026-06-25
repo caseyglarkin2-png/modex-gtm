@@ -1,0 +1,483 @@
+{
+  "account": "UPS",
+  "generatedAt": "2026-06-15",
+  "facilityCount": 30,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "UPS Worldport - Louisville KY",
+      "city": "Louisville",
+      "state": "KY",
+      "type": "package hub",
+      "address": "911 Grade Lane, Louisville, KY 40213",
+      "lat": 38.162872,
+      "lng": -85.72623,
+      "source": "Largest UPS hub / world's largest air package facility, 5.2M sqft, 900 acres, ~2M pkgs/day (UPS Air Operations facts; Loc8NearMe/Yelp confirm 911 Grade Ln)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 2,
+      "name": "UPS CACH - Hodgkins IL",
+      "city": "Hodgkins",
+      "state": "IL",
+      "type": "sorting facility",
+      "address": "1 UPS Way, Hodgkins, IL 60525",
+      "lat": 41.747132,
+      "lng": -87.884383,
+      "source": "Chicago Area Consolidation Hub, largest ground hub in UPS network, ~1.6M pkgs/day (Wikipedia / yellowpages confirm 1 UPS Way)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 3,
+      "name": "UPS SMART Hub - Atlanta GA",
+      "city": "Atlanta",
+      "state": "GA",
+      "type": "sorting facility",
+      "address": "1100 Fulton Industrial Blvd NW, Atlanta, GA 30336",
+      "lat": 33.784637,
+      "lng": -84.50916,
+      "source": "1.2M sqft SE regional 'super hub' near Fulton County Airport (Charlie Brown Field), UPS 3rd-largest US facility (AJC / CBS Atlanta)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 4,
+      "name": "UPS Allentown Hub - Allentown PA",
+      "city": "Allentown",
+      "state": "PA",
+      "type": "sorting facility",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Primary ground sorting facility for the northeastern US (advanton hub list, UPS)",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 5,
+      "name": "UPS Regional Air Hub - Ontario CA",
+      "city": "Ontario",
+      "state": "CA",
+      "type": "package hub",
+      "address": "3110 E Jurupa Ave, Ontario, CA 91761",
+      "lat": 34.04728,
+      "lng": -117.578518,
+      "source": "West Coast air + truck hub at Ontario Int'l Airport, ~778,837 sqft (UPS Air Operations facts; cargo handling facilities PDF)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 6,
+      "name": "UPS Philadelphia Air Hub - Philadelphia PA",
+      "city": "Philadelphia",
+      "state": "PA",
+      "type": "package hub",
+      "address": "1 Hog Island Rd, Philadelphia, PA 19153",
+      "lat": 39.858605,
+      "lng": -75.257629,
+      "source": "Regional air hub at PHL, ~654,000 sqft (UPS Air Operations facts; Waze/Foursquare confirm Hog Island Rd)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 7,
+      "name": "UPS Rockford Air Hub - Rockford IL",
+      "city": "Rockford",
+      "state": "IL",
+      "type": "package hub",
+      "address": "3300 Airport Dr, Rockford, IL 61109",
+      "lat": 42.201856,
+      "lng": -89.106261,
+      "source": "Regional air hub at Chicago Rockford Int'l Airport (UPS Air Operations facts; Waze confirms 3300 Airport Dr)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 8,
+      "name": "UPS Mesquite Hub - Mesquite TX",
+      "city": "Mesquite",
+      "state": "TX",
+      "type": "sorting facility",
+      "address": "4200 Samuell Blvd, Mesquite, TX 75149",
+      "lat": 32.792198,
+      "lng": -96.664473,
+      "source": "Major Dallas-area ground hub / distribution center (TruckMap, Wikimapia, Yelp confirm 4200 Samuell Blvd)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 9,
+      "name": "UPS Indianapolis Super Hub - Plainfield IN",
+      "city": "Plainfield",
+      "state": "IN",
+      "type": "sorting facility",
+      "address": "Bradford Rd, Plainfield, IN 46168",
+      "lat": 39.733923,
+      "lng": -86.362164,
+      "source": "893,000 sqft regional 'super hub' on 91 acres, $260M, opened ~2019 (Supply Chain Dive, IBJ)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 10,
+      "name": "UPS Salt Lake City Regional Hub - Salt Lake City UT",
+      "city": "Salt Lake City",
+      "state": "UT",
+      "type": "sorting facility",
+      "address": "380 S 6400 W, Salt Lake City, UT 84104",
+      "lat": 40.758757,
+      "lng": -112.045241,
+      "source": "Western regional super hub (UPS; Waze/Moovit confirm 380 S 6400 W)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 11,
+      "name": "UPS Tacoma Regional Hub - Tacoma WA",
+      "city": "Tacoma",
+      "state": "WA",
+      "type": "sorting facility",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "New 777,000 sqft automated ground sortation hub adjacent to Port of Tacoma (Modern Materials Handling, About UPS)",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 12,
+      "name": "UPS Earth City Hub - Earth City MO",
+      "city": "Earth City",
+      "state": "MO",
+      "type": "sorting facility",
+      "address": "13818 Rider Trail N, Earth City, MO 63045",
+      "lat": 38.776908,
+      "lng": -90.465471,
+      "source": "St. Louis-area hub / distribution operations (Yelp, Waze confirm 13818 Rider Trail N)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 13,
+      "name": "UPS Houston Hub - Houston TX",
+      "city": "Houston",
+      "state": "TX",
+      "type": "sorting facility",
+      "address": "11802 N Gessner Rd, Houston, TX 77064",
+      "lat": 29.943276,
+      "lng": -95.545803,
+      "source": "Major Gulf-region sorting/distribution center (advanton hub list; Yelp/Waze confirm 11802 N Gessner Rd)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 14,
+      "name": "UPS Orlando Hub - Orlando FL",
+      "city": "Orlando",
+      "state": "FL",
+      "type": "sorting facility",
+      "address": "8901 Atlantic Ave, Orlando, FL 32824",
+      "lat": 28.438452,
+      "lng": -81.358148,
+      "source": "Key SE sorting/distribution center (advanton hub list; TruckMap/Waze confirm 8901 Atlantic Ave)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 15,
+      "name": "UPS Phoenix Hub - Phoenix AZ",
+      "city": "Phoenix",
+      "state": "AZ",
+      "type": "sorting facility",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "SW super hub / key sorting + distribution center (advanton hub list, UPS super hub references)",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 16,
+      "name": "UPS Columbus Hub - Columbus OH",
+      "city": "Columbus",
+      "state": "OH",
+      "type": "sorting facility",
+      "address": "5101 Trabue Rd, Columbus, OH 43228",
+      "lat": 39.982087,
+      "lng": -83.135407,
+      "source": "West-side Columbus hub, expansion announced (Rep. Beatty press; address from facility search)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 17,
+      "name": "UPS Greensboro Hub - Greensboro NC",
+      "city": "Greensboro",
+      "state": "NC",
+      "type": "sorting facility",
+      "address": "3100 Flagstone St, Greensboro, NC 27406",
+      "lat": 36.024759,
+      "lng": -79.78274,
+      "source": "Mid-Atlantic/Carolinas ground hub (Foursquare, Moovit confirm 3100 Flagstone St)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 18,
+      "name": "UPS Nashville Whites Creek Hub - Nashville TN",
+      "city": "Nashville",
+      "state": "TN",
+      "type": "sorting facility",
+      "address": "3205 Whites Creek Pike, Nashville, TN 37207",
+      "lat": 36.231342,
+      "lng": -86.811931,
+      "source": "Nashville-area ground hub (Waze/TruckMap confirm 3205 Whites Creek Pike)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 19,
+      "name": "UPS Denver DIA Gateway - Denver CO",
+      "city": "Denver",
+      "state": "CO",
+      "type": "package hub",
+      "address": "26400 E 75th Ave, Denver, CO 80249",
+      "lat": 39.831764,
+      "lng": -104.679362,
+      "source": "Air/ground gateway near Denver Int'l Airport; UPS also building $90M parcel hub in metro Denver (FreightWaves; Waze confirms 26400 E 75th Ave)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 20,
+      "name": "UPS Commerce City Hub - Commerce City CO",
+      "city": "Commerce City",
+      "state": "CO",
+      "type": "sorting facility",
+      "address": "5190 Ivy St, Commerce City, CO 80022",
+      "lat": 39.790793,
+      "lng": -104.91948,
+      "source": "Denver-metro ground hub (Waze/Loc8NearMe confirm Ivy St)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 21,
+      "name": "UPS Maspeth Hub - Queens NY",
+      "city": "Queens",
+      "state": "NY",
+      "type": "sorting facility",
+      "address": "5613 48th St, Maspeth, Queens, NY 11378",
+      "lat": 40.727472,
+      "lng": -73.920703,
+      "source": "Major NYC metro ground hub (Moovit confirms 5613 48th St, Maspeth)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 22,
+      "name": "UPS Edison Hub - Edison NJ",
+      "city": "Edison",
+      "state": "NJ",
+      "type": "sorting facility",
+      "address": "4001 Riverside Dr, Edison, NJ 08817",
+      "lat": 40.510103,
+      "lng": -74.333086,
+      "source": "Central NJ ground hub serving NYC metro (Yelp confirms 4001 Riverside Dr)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 23,
+      "name": "UPS Saddle Brook Hub - Saddle Brook NJ",
+      "city": "Saddle Brook",
+      "state": "NJ",
+      "type": "sorting facility",
+      "address": "280 N Midland Ave, Saddle Brook, NJ 07663",
+      "lat": 40.906548,
+      "lng": -74.105276,
+      "source": "Night hub / N. NJ ground sort (Loc8NearMe, Instagram 'Saddle Brook UPS Night Hub' confirm 280 N Midland Ave)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 24,
+      "name": "UPS Addison Hub - Addison IL",
+      "city": "Addison",
+      "state": "IL",
+      "type": "sorting facility",
+      "address": "150 S Lombard Rd, Addison, IL 60101",
+      "lat": 41.924155,
+      "lng": -88.027443,
+      "source": "Chicago-area ground hub (Waze/Yelp/Chamber confirm 150 S Lombard Rd)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 25,
+      "name": "UPS Lenexa Hub - Lenexa KS",
+      "city": "Lenexa",
+      "state": "KS",
+      "type": "sorting facility",
+      "address": "14650 Santa Fe Trail Dr, Lenexa, KS 66215",
+      "lat": 38.932382,
+      "lng": -94.757417,
+      "source": "Kansas City-area ground hub (Yelp/Loc8NearMe confirm 14650 Santa Fe Trail Dr)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 26,
+      "name": "UPS Shrewsbury Hub - Shrewsbury MA",
+      "city": "Shrewsbury",
+      "state": "MA",
+      "type": "sorting facility",
+      "address": "196 Route 140, Shrewsbury, MA 01545",
+      "lat": 42.142864,
+      "lng": -71.546322,
+      "source": "Worcester-area MA ground hub (UPS code WORMA 0169); UPS also approved 845K sqft Grafton/Shrewsbury warehouse (Worcester Business Journal, Wikimapia)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 27,
+      "name": "UPS Jacksonville Hub - Jacksonville FL",
+      "city": "Jacksonville",
+      "state": "FL",
+      "type": "sorting facility",
+      "address": "4255 James E Casey Dr, Jacksonville, FL 32218",
+      "lat": 30.377622,
+      "lng": -81.778019,
+      "source": "N. Florida ground hub (Waze confirms 4255 James E Casey Dr)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 28,
+      "name": "UPS Lockbourne / Rickenbacker Hub - Columbus OH",
+      "city": "Lockbourne",
+      "state": "OH",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "UPS operations in Rickenbacker Global Logistics Park / Lockbourne distribution corridor south of Columbus (yellowpages, Rickenbacker airport references)",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 29,
+      "name": "UPS Burtonsville Hub - Burtonsville MD",
+      "city": "Burtonsville",
+      "state": "MD",
+      "type": "sorting facility",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "DC/Baltimore-metro ground hub (yellowpages UPS parcel hub listings; retail-only addresses found, hub address not pinned)",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 30,
+      "name": "UPS Cerritos Hub - Cerritos CA",
+      "city": "Cerritos",
+      "state": "CA",
+      "type": "sorting facility",
+      "address": "13233 Moore St, Cerritos, CA 90703",
+      "lat": 33.883909,
+      "lng": -118.050261,
+      "source": "LA-area ground operations / former customer center site (Loc8NearMe, Waze confirm 13233 Moore St; status may have shifted)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    }
+  ],
+  "geocodedAt": "2026-06-15"
+}

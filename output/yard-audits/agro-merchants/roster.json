@@ -1,0 +1,264 @@
+{
+  "account": "AGRO Merchants",
+  "generatedAt": "2026-06-15",
+  "facilityCount": 16,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "AGRO - Atlanta NE GA",
+      "city": "Atlanta",
+      "state": "GA",
+      "type": "cold storage",
+      "address": "4300 Pleasantdale Rd NE, Atlanta, GA 30340",
+      "lat": 33.910852,
+      "lng": -84.248501,
+      "source": "AGRO network/atlanta-ne page + Refrigerated & Frozen Foods warehouse guide",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 2,
+      "name": "AGRO - Atlanta SE GA (Empire)",
+      "city": "Atlanta",
+      "state": "GA",
+      "type": "cold storage",
+      "address": "3485 Empire Blvd SW, Atlanta, GA 30354",
+      "lat": 33.659754,
+      "lng": -84.393046,
+      "source": "Nordic Cold Storage listing (AGRO/Nordic); superpages",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 3,
+      "name": "AGRO - Pooler GA (Savannah)",
+      "city": "Pooler",
+      "state": "GA",
+      "type": "cold storage",
+      "address": "220 Nordic Way, Pooler, GA 31322",
+      "lat": 32.165027,
+      "lng": -81.247055,
+      "source": "Nordic Logistics/AGRO Savannah port site; GA Pages + RFF",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 4,
+      "name": "AGRO - Lebanon TN (Nashville)",
+      "city": "Lebanon",
+      "state": "TN",
+      "type": "cold storage",
+      "address": "918 Artic Dr, Lebanon, TN 37090",
+      "lat": 36.18454,
+      "lng": -86.271866,
+      "source": "AGRO nashville location page + RFF warehouse guide",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 5,
+      "name": "AGRO - Charlotte NC",
+      "city": "Charlotte",
+      "state": "NC",
+      "type": "cold storage",
+      "address": "5610 David Cox Rd, Charlotte, NC 28269",
+      "lat": 35.339679,
+      "lng": -80.823419,
+      "source": "RFF warehouse guide; frozen-goods directory",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 6,
+      "name": "AGRO - Benson NC",
+      "city": "Benson",
+      "state": "NC",
+      "type": "cold storage",
+      "address": "2400 Hodges Chapel Rd, Benson, NC 27504",
+      "lat": 35.357016,
+      "lng": -78.567304,
+      "source": "AGRO/RFF directory (12,450 pallet positions)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 7,
+      "name": "AGRO - Goldsboro NC",
+      "city": "Goldsboro",
+      "state": "NC",
+      "type": "cold storage",
+      "address": "403 Commerce Court, Goldsboro, NC 27530",
+      "lat": 35.375254,
+      "lng": -77.925149,
+      "source": "RFF warehouse guide; frozen-goods directory",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 8,
+      "name": "AGRO - Lumberton NC",
+      "city": "Lumberton",
+      "state": "NC",
+      "type": "cold storage",
+      "address": "275 Cold Storage Rd, Lumberton, NC 28358",
+      "lat": 34.658644,
+      "lng": -79.108322,
+      "source": "AGRO lumberton location page",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 9,
+      "name": "AGRO - Forest MS",
+      "city": "Forest",
+      "state": "MS",
+      "type": "cold storage",
+      "address": "201 1st Ave South, Forest, MS 39074",
+      "lat": 32.361157,
+      "lng": -89.468049,
+      "source": "AGRO/RFF directory (7,000 pallet positions)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 10,
+      "name": "AGRO - Hattiesburg MS",
+      "city": "Hattiesburg",
+      "state": "MS",
+      "type": "cold storage",
+      "address": "25 Bonhomie Rd, Hattiesburg, MS 39401",
+      "lat": 31.297311,
+      "lng": -89.317333,
+      "source": "frozen-goods directory; RFF",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 11,
+      "name": "AGRO - Oxford AL",
+      "city": "Oxford",
+      "state": "AL",
+      "type": "cold storage",
+      "address": "370 Airport Rd, Oxford, AL 36203",
+      "lat": 33.593808,
+      "lng": -85.85519,
+      "source": "frozen-goods directory; RFF",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 12,
+      "name": "AGRO - Summerville SC (Charleston)",
+      "city": "Summerville",
+      "state": "SC",
+      "type": "cold storage",
+      "address": "1125 Newton Way, Summerville, SC 29483",
+      "lat": 33.066648,
+      "lng": -80.19103,
+      "source": "RFF warehouse guide; AGRO Charleston (11,500 pallet positions)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 13,
+      "name": "AGRO - Mullica Hill NJ",
+      "city": "Mullica Hill",
+      "state": "NJ",
+      "type": "temperature-controlled warehouse",
+      "address": "540 Franklinville Rd, Mullica Hill, NJ 08062",
+      "lat": 39.720952,
+      "lng": -75.255683,
+      "source": "AGRO mullica-hill location page; RFF",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 14,
+      "name": "AGRO - Pedricktown NJ",
+      "city": "Pedricktown",
+      "state": "NJ",
+      "type": "cold storage",
+      "address": "3 Gateway Blvd, Pedricktown, NJ 08067",
+      "lat": 39.741086,
+      "lng": -75.411189,
+      "source": "yellowpages/businessyab listing (27,000 pallet positions)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 15,
+      "name": "AGRO - Vineland NJ",
+      "city": "Vineland",
+      "state": "NJ",
+      "type": "cold storage",
+      "address": "2321 Industrial Way, Vineland, NJ 08360",
+      "lat": 39.513121,
+      "lng": -75.065311,
+      "source": "RFF warehouse guide; businessyab (Lucca - AGRO)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 16,
+      "name": "AGRO - Oakland CA",
+      "city": "Oakland",
+      "state": "CA",
+      "type": "cold storage",
+      "address": "940 81st Ave, Oakland, CA 94621",
+      "lat": 37.75201,
+      "lng": -122.186701,
+      "source": "Port of Oakland (Dean's Services, acq. 2014); RFF; the Packer",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    }
+  ],
+  "geocodedAt": "2026-06-15"
+}

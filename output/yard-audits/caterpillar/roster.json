@@ -16,7 +16,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "RANGE_INTERPOLATED",
-        "movedMeters": 34
+        "movedMeters": 0
       }
     },
     {
@@ -32,7 +32,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "GEOMETRIC_CENTER",
-        "movedMeters": 2392
+        "movedMeters": 0
       }
     },
     {
@@ -48,7 +48,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 2294
+        "movedMeters": 0
       }
     },
     {
@@ -64,7 +64,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 1878
+        "movedMeters": 0
       }
     },
     {
@@ -80,7 +80,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 6036
+        "movedMeters": 0
       }
     },
     {
@@ -96,7 +96,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 1263
+        "movedMeters": 0
       }
     },
     {
@@ -112,7 +112,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "GEOMETRIC_CENTER",
-        "movedMeters": 5
+        "movedMeters": 0
       }
     },
     {
@@ -128,7 +128,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 2745
+        "movedMeters": 0
       }
     },
     {
@@ -144,7 +144,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 708
+        "movedMeters": 0
       }
     },
     {
@@ -160,7 +160,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 7941
+        "movedMeters": 0
       }
     },
     {
@@ -176,7 +176,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 14552
+        "movedMeters": 0
       }
     },
     {
@@ -192,7 +192,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 4040
+        "movedMeters": 0
       }
     },
     {
@@ -208,7 +208,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 808
+        "movedMeters": 0
       }
     },
     {
@@ -218,13 +218,13 @@
       "state": "TX",
       "type": "Manufacturing plant (diesel & gas engine assembly, ~1.7M sq ft)",
       "address": "1600 W Kingsbury St, Seguin, TX 78155",
-      "lat": 29.573587,
-      "lng": -97.994251,
+      "lat": 29.57553,
+      "lng": -97.996074,
       "source": "Web research - Equipment World plant tour; Dun & Bradstreet / Seguin Chamber listing",
       "geocode": {
         "source": "geocoding-api",
-        "precision": "ROOFTOP",
-        "movedMeters": 18
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 279
       }
     },
     {
@@ -240,7 +240,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "GEOMETRIC_CENTER",
-        "movedMeters": 121
+        "movedMeters": 0
       }
     },
     {
@@ -256,7 +256,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 7
+        "movedMeters": 0
       }
     },
     {
@@ -272,7 +272,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 63
+        "movedMeters": 0
       }
     },
     {
@@ -288,7 +288,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "GEOMETRIC_CENTER",
-        "movedMeters": 234
+        "movedMeters": 0
       }
     },
     {
@@ -304,7 +304,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 71
+        "movedMeters": 0
       }
     },
     {
@@ -320,7 +320,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "GEOMETRIC_CENTER",
-        "movedMeters": 49
+        "movedMeters": 0
       }
     },
     {
@@ -330,15 +330,15 @@
       "state": "CA",
       "type": "Parts distribution center (~400k sq ft, opened ~2012)",
       "address": "Tejon Ranch Commerce Center, Lebec, CA 93243",
-      "lat": 34.841644,
-      "lng": -118.864819,
+      "lat": 34.876009,
+      "lng": -118.890945,
       "source": "Web research - Tejon Ranch Co. press releases / Rental Equipment Register (I-5 & Hwy 99 junction). Exact street address not pinned down - approximate",
       "geocode": {
         "source": "geocoding-api",
-        "precision": "APPROXIMATE",
-        "movedMeters": 119
+        "precision": "ROOFTOP",
+        "movedMeters": 4504
       }
     }
   ],
-  "geocodedAt": "2026-05-18"
+  "geocodedAt": "2026-06-15"
 }

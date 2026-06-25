@@ -16,7 +16,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 2234
+        "movedMeters": 0
       }
     },
     {
@@ -32,7 +32,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 1805
+        "movedMeters": 0
       }
     },
     {
@@ -48,7 +48,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "RANGE_INTERPOLATED",
-        "movedMeters": 5
+        "movedMeters": 0
       }
     },
     {
@@ -64,7 +64,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "RANGE_INTERPOLATED",
-        "movedMeters": 2
+        "movedMeters": 0
       }
     },
     {
@@ -80,7 +80,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 64
+        "movedMeters": 0
       }
     },
     {
@@ -96,7 +96,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "RANGE_INTERPOLATED",
-        "movedMeters": 1
+        "movedMeters": 0
       }
     },
     {
@@ -112,7 +112,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "RANGE_INTERPOLATED",
-        "movedMeters": 19
+        "movedMeters": 0
       }
     },
     {
@@ -122,8 +122,8 @@
       "state": "FL",
       "type": "Express regional hub (Latin America gateway)",
       "address": "7150 NW 25th St, Miami, FL 33122",
-      "lat": 25.797016,
-      "lng": -80.312857,
+      "lat": 25.797017,
+      "lng": -80.312851,
       "source": "Wikipedia FedEx Express - regional hub at Miami International Airport",
       "geocode": {
         "source": "geocoding-api",
@@ -144,7 +144,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 9103
+        "movedMeters": 0
       }
     },
     {
@@ -160,7 +160,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "GEOMETRIC_CENTER",
-        "movedMeters": 8365
+        "movedMeters": 0
       }
     },
     {
@@ -176,7 +176,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 1111
+        "movedMeters": 0
       }
     },
     {
@@ -192,7 +192,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 239
+        "movedMeters": 0
       }
     },
     {
@@ -208,7 +208,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "GEOMETRIC_CENTER",
-        "movedMeters": 1435
+        "movedMeters": 0
       }
     },
     {
@@ -224,7 +224,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "GEOMETRIC_CENTER",
-        "movedMeters": 1178
+        "movedMeters": 0
       }
     },
     {
@@ -234,13 +234,13 @@
       "state": "NC",
       "type": "Ground regional sortation hub",
       "address": "6604 CSX Way, Charlotte, NC 28269",
-      "lat": 35.27311,
-      "lng": -80.918347,
+      "lat": 35.273867,
+      "lng": -80.921391,
       "source": "Loc8NearMe / Waze - FedEx Ground, 6604 Csx Way",
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 12482
+        "movedMeters": 289
       }
     },
     {
@@ -250,13 +250,13 @@
       "state": "KY",
       "type": "Ground regional sortation hub",
       "address": "11000 Toebben Dr, Independence, KY 41051",
-      "lat": 38.940144,
-      "lng": -84.61537,
+      "lat": 38.942239,
+      "lng": -84.616409,
       "source": "Waze - FedEx Ground, Northern Kentucky 0406/NOKY, 11000 Toebben Dr",
       "geocode": {
         "source": "geocoding-api",
-        "precision": "GEOMETRIC_CENTER",
-        "movedMeters": 13167
+        "precision": "ROOFTOP",
+        "movedMeters": 250
       }
     },
     {
@@ -272,7 +272,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "GEOMETRIC_CENTER",
-        "movedMeters": 5219
+        "movedMeters": 0
       }
     },
     {
@@ -288,7 +288,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 1434
+        "movedMeters": 0
       }
     },
     {
@@ -304,7 +304,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "RANGE_INTERPOLATED",
-        "movedMeters": 4
+        "movedMeters": 0
       }
     },
     {
@@ -320,7 +320,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 105
+        "movedMeters": 0
       }
     },
     {
@@ -336,7 +336,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 4478
+        "movedMeters": 0
       }
     },
     {
@@ -352,7 +352,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 5969
+        "movedMeters": 0
       }
     },
     {
@@ -368,7 +368,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 12595
+        "movedMeters": 0
       }
     },
     {
@@ -378,13 +378,13 @@
       "state": "GA",
       "type": "Freight LTL hub service center (~304 doors, one of the largest)",
       "address": "4900 Welcome All Rd, Conley, GA 30288",
-      "lat": 33.620745,
-      "lng": -84.525293,
+      "lat": 33.620746,
+      "lng": -84.525299,
       "source": "FedEx Freight service center page (ccid=ATL, Conley GA 30288); Truckingboards forum cites ATL as ~304-door hub",
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 35
+        "movedMeters": 1
       }
     },
     {
@@ -400,7 +400,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "GEOMETRIC_CENTER",
-        "movedMeters": 5662
+        "movedMeters": 0
       }
     },
     {
@@ -410,13 +410,13 @@
       "state": "TN",
       "type": "Freight LTL hub service center (FedEx Freight national HQ market)",
       "address": "2851 Bartlett Rd, Memphis, TN 38134",
-      "lat": 35.203323,
+      "lat": 35.203344,
       "lng": -89.868928,
       "source": "FedEx Freight locator - Memphis service center; FedEx Freight HQ market (LTL hub for mid-South)",
       "geocode": {
         "source": "geocoding-api",
         "precision": "RANGE_INTERPOLATED",
-        "movedMeters": 35
+        "movedMeters": 2
       }
     },
     {
@@ -432,7 +432,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "RANGE_INTERPOLATED",
-        "movedMeters": 43
+        "movedMeters": 0
       }
     },
     {
@@ -448,7 +448,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 30
+        "movedMeters": 0
       }
     },
     {
@@ -464,7 +464,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "RANGE_INTERPOLATED",
-        "movedMeters": 65
+        "movedMeters": 0
       }
     },
     {
@@ -480,9 +480,9 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "RANGE_INTERPOLATED",
-        "movedMeters": 77
+        "movedMeters": 0
       }
     }
   ],
-  "geocodedAt": "2026-05-18"
+  "geocodedAt": "2026-06-15"
 }

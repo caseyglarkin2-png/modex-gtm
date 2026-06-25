@@ -1,0 +1,488 @@
+{
+  "account": "Sysco",
+  "generatedAt": "2026-06-15",
+  "facilityCount": 30,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Sysco - Houston TX",
+      "city": "Houston",
+      "state": "TX",
+      "type": "distribution center",
+      "address": "10710 Greens Crossing Blvd, Houston, TX 77038",
+      "lat": 29.936532,
+      "lng": -95.421447,
+      "source": "Sysco locations page + Waze + Manta; ~739k sq ft, one of Sysco's largest DCs",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Sysco - Los Angeles CA",
+      "city": "Walnut",
+      "state": "CA",
+      "type": "distribution center",
+      "address": "20701 Currier Rd, Walnut, CA 91789",
+      "lat": 34.008192,
+      "lng": -117.854048,
+      "source": "D&B + SAM.gov + YP; City of Industry area broadline DC",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Sysco - South Florida",
+      "city": "Medley",
+      "state": "FL",
+      "type": "distribution center",
+      "address": "12500 Sysco Way (12500 NW 112th Ave), Medley, FL 33178",
+      "lat": 25.887166,
+      "lng": -80.379738,
+      "source": "Panjiva + YP + Waze; serves Miami metro",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Sysco - Atlanta GA",
+      "city": "College Park",
+      "state": "GA",
+      "type": "distribution center",
+      "address": "2225 Riverdale Rd, College Park, GA 30337",
+      "lat": 33.631172,
+      "lng": -84.461735,
+      "source": "Waze + foodsupplier; confirmed across sources",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Sysco - Metro New York",
+      "city": "Jersey City",
+      "state": "NJ",
+      "type": "distribution center",
+      "address": "20 Theodore Conrad Dr, Jersey City, NJ 07305",
+      "lat": 40.698875,
+      "lng": -74.058298,
+      "source": "Central Index + Superpages + D&B; serves NYC metro",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Sysco - Chicago IL",
+      "city": "Des Plaines",
+      "state": "IL",
+      "type": "distribution center",
+      "address": "250 Wieboldt Dr, Des Plaines, IL 60016",
+      "lat": 42.04749,
+      "lng": -87.905915,
+      "source": "Waze + D&B",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 7,
+      "name": "Sysco - Dallas / North Texas",
+      "city": "Lewisville",
+      "state": "TX",
+      "type": "distribution center",
+      "address": "800 Trinity Dr, Lewisville, TX 75056",
+      "lat": 33.063249,
+      "lng": -96.8733,
+      "source": "Sysco north-texas locations page + Waze",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 8,
+      "name": "Sysco - Philadelphia PA",
+      "city": "Philadelphia",
+      "state": "PA",
+      "type": "distribution center",
+      "address": "600 Packer Ave, Philadelphia, PA 19148",
+      "lat": 39.90783,
+      "lng": -75.159646,
+      "source": "YP + Loc8NearMe",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 9,
+      "name": "Sysco - Boston / Northeast",
+      "city": "Plympton",
+      "state": "MA",
+      "type": "distribution center",
+      "address": "99 Spring St, Plympton, MA 02367",
+      "lat": 41.953665,
+      "lng": -70.762833,
+      "source": "YP + Manta + Blue Book; serves Boston metro",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 10,
+      "name": "Sysco - Detroit MI",
+      "city": "Canton",
+      "state": "MI",
+      "type": "distribution center",
+      "address": "41600 Van Born Rd, Canton, MI 48188",
+      "lat": 42.265522,
+      "lng": -83.45192,
+      "source": "TruckMap + USDOT 169155",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 11,
+      "name": "Sysco - West Coast Florida / Tampa Bay",
+      "city": "Plant City",
+      "state": "FL",
+      "type": "distribution center",
+      "address": "475 Charlie Taylor Rd, Plant City, FL 33566",
+      "lat": 28.031118,
+      "lng": -82.070555,
+      "source": "Sysco press release; new facility opened Jul 2025",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 12,
+      "name": "Sysco - Seattle / Western Washington",
+      "city": "Kent",
+      "state": "WA",
+      "type": "distribution center",
+      "address": "22820 54th Ave S, Kent, WA 98032",
+      "lat": 47.396055,
+      "lng": -122.265412,
+      "source": "TruckMap + Waze + D&B",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 13,
+      "name": "Sysco - Denver / Intermountain CO",
+      "city": "Denver",
+      "state": "CO",
+      "type": "distribution center",
+      "address": "5000 Beeler St, Denver, CO 80238",
+      "lat": 39.787886,
+      "lng": -104.879199,
+      "source": "Waze + Sysco location page",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 14,
+      "name": "Sysco - Arizona",
+      "city": "Tolleson",
+      "state": "AZ",
+      "type": "distribution center",
+      "address": "611 S 80th Ave, Tolleson, AZ 85353",
+      "lat": 33.44159,
+      "lng": -112.23108,
+      "source": "Waze + YP + Tolleson city directory; Phoenix metro",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 15,
+      "name": "Sysco - San Diego CA",
+      "city": "Poway",
+      "state": "CA",
+      "type": "distribution center",
+      "address": "12180 Kirkham Rd, Poway, CA 92064",
+      "lat": 32.936901,
+      "lng": -117.05164,
+      "source": "Sysco location page + TruckMap + Waze",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 16,
+      "name": "Sysco - Portland OR",
+      "city": "Wilsonville",
+      "state": "OR",
+      "type": "distribution center",
+      "address": "26250 SW Parkway Center Dr, Wilsonville, OR 97070",
+      "lat": 45.330229,
+      "lng": -122.761708,
+      "source": "D&B + Waze + Wilsonville Chamber",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 17,
+      "name": "Sysco - Central Florida",
+      "city": "Ocoee",
+      "state": "FL",
+      "type": "distribution center",
+      "address": "200 W Story Rd, Ocoee, FL 34761",
+      "lat": 28.558151,
+      "lng": -81.589988,
+      "source": "Waze + D&B + YP; Orlando metro",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 18,
+      "name": "Sysco - Charlotte NC",
+      "city": "Concord",
+      "state": "NC",
+      "type": "distribution center",
+      "address": "4500 Corporate Dr NW, Concord, NC 28027",
+      "lat": 35.423884,
+      "lng": -80.652807,
+      "source": "Waze + Apple Maps",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 19,
+      "name": "Sysco - Cleveland OH",
+      "city": "Cleveland",
+      "state": "OH",
+      "type": "distribution center",
+      "address": "4747 Grayton Rd, Cleveland, OH 44135",
+      "lat": 41.42601,
+      "lng": -81.840746,
+      "source": "Sysco page + Waze + Crain's",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 20,
+      "name": "Sysco - Cincinnati OH",
+      "city": "Cincinnati",
+      "state": "OH",
+      "type": "distribution center",
+      "address": "10510 Evendale Dr, Cincinnati, OH 45241",
+      "lat": 39.256252,
+      "lng": -84.439981,
+      "source": "cincinnati.sysco.com + FMCSA",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 21,
+      "name": "Sysco - Central Texas (Austin/San Antonio)",
+      "city": "New Braunfels",
+      "state": "TX",
+      "type": "distribution center",
+      "address": "1260 Schwab Rd, New Braunfels, TX 78132",
+      "lat": 29.642087,
+      "lng": -98.216057,
+      "source": "Sysco Central Texas page + Waze + D&B; consolidated Austin+San Antonio markets (Schertz limits)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 22,
+      "name": "Sysco - Kansas City",
+      "city": "Olathe",
+      "state": "KS",
+      "type": "distribution center",
+      "address": "1915 E Kansas City Rd, Olathe, KS 66061",
+      "lat": 38.902133,
+      "lng": -94.784192,
+      "source": "Waze + Olathe Chamber + YellowPages",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 23,
+      "name": "Sysco - St. Louis MO",
+      "city": "St. Charles",
+      "state": "MO",
+      "type": "distribution center",
+      "address": "3850 Mueller Rd, St. Charles, MO 63301",
+      "lat": 38.832169,
+      "lng": -90.51407,
+      "source": "Waze + BBB",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 24,
+      "name": "Sysco - Minnesota",
+      "city": "Mounds View",
+      "state": "MN",
+      "type": "distribution center",
+      "address": "2400 County Road J, Mounds View, MN 55112",
+      "lat": 45.122673,
+      "lng": -93.207304,
+      "source": "SAM.gov + CareerForce MN.gov; Minneapolis metro",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 25,
+      "name": "Sysco - Sacramento CA",
+      "city": "Pleasant Grove",
+      "state": "CA",
+      "type": "distribution center",
+      "address": "7062 Pacific Ave, Pleasant Grove, CA 95668",
+      "lat": 38.777853,
+      "lng": -121.52344,
+      "source": "TruckMap + D&B + YP",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 26,
+      "name": "Sysco - San Francisco / Bay Area",
+      "city": "Fremont",
+      "state": "CA",
+      "type": "distribution center",
+      "address": "5900 Stewart Ave, Fremont, CA 94538",
+      "lat": 37.512333,
+      "lng": -121.982477,
+      "source": "D&B + Waze",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 27,
+      "name": "Sysco - Nashville TN",
+      "city": "Nashville",
+      "state": "TN",
+      "type": "distribution center",
+      "address": "1 Hermitage Plaza, Nashville, TN 37209",
+      "lat": 36.179764,
+      "lng": -86.88256,
+      "source": "Waze + foodsupplier.net",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 28,
+      "name": "Sysco - Memphis TN",
+      "city": "Memphis",
+      "state": "TN",
+      "type": "distribution center",
+      "address": "4359 B.F. Goodrich Blvd, Memphis, TN 38118",
+      "lat": 35.028437,
+      "lng": -89.925901,
+      "source": "Waze + D&B/Produce Market Guide",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 29,
+      "name": "Sysco - Indianapolis IN",
+      "city": "Indianapolis",
+      "state": "IN",
+      "type": "distribution center",
+      "address": "4000 W 62nd St, Indianapolis, IN 46268",
+      "lat": 39.868715,
+      "lng": -86.228725,
+      "source": "Yelp + D&B/Chamber",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 30,
+      "name": "Sysco - Hampton Roads VA",
+      "city": "Suffolk",
+      "state": "VA",
+      "type": "distribution center",
+      "address": "7000 Harbour View Blvd, Suffolk, VA 23435",
+      "lat": 36.889183,
+      "lng": -76.433689,
+      "source": "Waze + D&B + BBB; broadline DC serving coastal Virginia",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    }
+  ],
+  "geocodedAt": "2026-06-15"
+}

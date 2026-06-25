@@ -1,0 +1,411 @@
+{
+  "account": "Mars",
+  "generatedAt": "2026-06-15",
+  "facilityCount": 26,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Mars Wrigley - Hackettstown NJ",
+      "city": "Hackettstown",
+      "state": "NJ",
+      "type": "plant",
+      "address": "800 High St, Hackettstown, NJ 07840",
+      "lat": 40.863995,
+      "lng": -74.824208,
+      "source": "D&B / SAM entity / Panjiva supplier record; flagship M&M's plant + US confectionery HQ campus",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Mars Wrigley - Cleveland TN",
+      "city": "Cleveland",
+      "state": "TN",
+      "type": "plant",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Cleveland TN Chamber + Times Free Press; M&M's (exclusive peanut butter M&M's) + Twix, Burlington Heights area; street address not pinned",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Mars Wrigley - Chattanooga TN",
+      "city": "Chattanooga",
+      "state": "TN",
+      "type": "plant",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "PR Newswire 'Mars celebrates 50 years in Chattanooga'; confectionery plant",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Mars Wrigley - Topeka KS",
+      "city": "Topeka",
+      "state": "KS",
+      "type": "plant",
+      "address": "SE Airport Dr, Topeka, KS 66619",
+      "lat": 38.946151,
+      "lng": -95.683206,
+      "source": "Site Selection Magazine + Go Topeka; opened 2014, $270M, Snickers/M&M's/Twix/Milky Way; on SE Airport Dr near Forbes Field",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Mars Wrigley - Waco TX",
+      "city": "Waco",
+      "state": "TX",
+      "type": "plant",
+      "address": "1001 Texas Central Pkwy, Waco, TX 76712",
+      "lat": 31.490859,
+      "lng": -97.19856,
+      "source": "Waco Chamber + Waze listing; confectionery plant (45+ years)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Mars Wrigley - Burr Ridge IL",
+      "city": "Burr Ridge",
+      "state": "IL",
+      "type": "plant",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Wikipedia Mars Inc US manufacturing list; confectionery facility",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 7,
+      "name": "Mars Wrigley - Yorkville IL",
+      "city": "Yorkville",
+      "state": "IL",
+      "type": "plant",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Wrigley $50M Skittles expansion (Gray Construction insights); gum/Skittles plant",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 8,
+      "name": "Mars Wrigley - Elizabethtown PA",
+      "city": "Elizabethtown",
+      "state": "PA",
+      "type": "plant",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Wikipedia Mars Inc US manufacturing list; confectionery (Dove/seasonal) plant",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 9,
+      "name": "Mars Wrigley - Albany GA",
+      "city": "Albany",
+      "state": "GA",
+      "type": "plant",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Wikipedia Mars Inc US manufacturing list; confectionery plant",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 10,
+      "name": "Mars Wrigley - Columbus OH (confectionery)",
+      "city": "Columbus",
+      "state": "OH",
+      "type": "plant",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Wikipedia Mars Inc US manufacturing list; confectionery plant (distinct from Petcare Columbus site)",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 11,
+      "name": "Mars Petcare - Mattoon IL",
+      "city": "Mattoon",
+      "state": "IL",
+      "type": "plant",
+      "address": "6565 E County Road 1000N, Mattoon, IL 61938",
+      "lat": 39.522221,
+      "lng": -88.353442,
+      "source": "PR Newswire 40-yr anniversary + D&B; largest dry pet food/treats plant in NA network (Pedigree, Dentastix, Iams, Cesar)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 12,
+      "name": "Mars Petcare - Columbus OH",
+      "city": "Columbus",
+      "state": "OH",
+      "type": "distribution center",
+      "address": "5115 Fisher Rd, Columbus, OH 43228",
+      "lat": 39.971691,
+      "lng": -83.135595,
+      "source": "Panjiva buyer report + Waze 'Mars PetCare Distribution Center'; Pedigree/Cesar",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 13,
+      "name": "Mars Petcare - Aurora NE",
+      "city": "Aurora",
+      "state": "NE",
+      "type": "plant",
+      "address": "1055 W Highway 34, Aurora, NE 68818",
+      "lat": 40.874091,
+      "lng": -98.101615,
+      "source": "Nebraska MEP + D&B; Iams Company / dry pet food plant",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 14,
+      "name": "Mars Petcare - Lebanon TN",
+      "city": "Lebanon",
+      "state": "TN",
+      "type": "plant",
+      "address": "14840 Central Pike, Lebanon, TN 37090",
+      "lat": 36.130875,
+      "lng": -86.406419,
+      "source": "D&B + hub.biz; Nutro of Tennessee dry pet food, $200M expansion 2022",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 15,
+      "name": "Mars Petcare - Kansas City MO",
+      "city": "Kansas City",
+      "state": "MO",
+      "type": "plant",
+      "address": "1315 N Chouteau Trafficway, Kansas City, MO 64120",
+      "lat": 39.131439,
+      "lng": -94.523014,
+      "source": "Buzzfile + MO DED press release; Greenies / dental treats plant, $82M expansion 2022",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 16,
+      "name": "Mars Petcare - Fort Smith AR",
+      "city": "Fort Smith",
+      "state": "AR",
+      "type": "plant",
+      "address": "10000 Roberts Blvd, Fort Smith, AR 72916",
+      "lat": 35.308602,
+      "lng": -94.32505,
+      "source": "Yelp + Fort Smith Chamber + Arkansas EDC; wet dog/cat food, $145M+ investment",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 17,
+      "name": "Mars Petcare - Temple TX",
+      "city": "Temple",
+      "state": "TX",
+      "type": "plant",
+      "address": "3401 Eberhard Rd, Temple, TX 76504",
+      "lat": 31.199079,
+      "lng": -97.44084,
+      "source": "Temple EDC; 109,000 sq ft pet food plant, $20M upgrade",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 18,
+      "name": "Royal Canin - Lewisburg OH",
+      "city": "Lewisburg",
+      "state": "OH",
+      "type": "plant",
+      "address": "6574 State Route 503 N, Lewisburg, OH 45338",
+      "lat": 39.83299,
+      "lng": -84.546255,
+      "source": "Panjiva + D&B + Mars press release; $450M, 450,000 sq ft, Royal Canin's largest plant worldwide",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 19,
+      "name": "Royal Canin - North Sioux City SD",
+      "city": "North Sioux City",
+      "state": "SD",
+      "type": "plant",
+      "address": "630 N Derby Ln, North Sioux City, SD 57049",
+      "lat": 42.534015,
+      "lng": -96.496428,
+      "source": "Sioux City Journal + Waze; $100M Royal Canin dry pet food plant",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 20,
+      "name": "Mars Petcare - Clinton OK",
+      "city": "Clinton",
+      "state": "OK",
+      "type": "plant",
+      "address": "1 Mars Rd, Clinton, OK 73601",
+      "lat": 35.512296,
+      "lng": -98.962396,
+      "source": "Yellowpages + Macrae's Blue Book + OSHA; Mars Petcare pet food plant",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 21,
+      "name": "Mars Petcare - Henderson NV",
+      "city": "Henderson",
+      "state": "NV",
+      "type": "plant",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Wikipedia Mars Inc US manufacturing list; pet food / Petcare plant",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 22,
+      "name": "Mars Petcare - Reno NV",
+      "city": "Reno",
+      "state": "NV",
+      "type": "plant",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Wikipedia Mars Inc US manufacturing list; pet food / Petcare plant",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 23,
+      "name": "Mars - Greenville MS",
+      "city": "Greenville",
+      "state": "MS",
+      "type": "plant",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Wikipedia Mars Inc US manufacturing list + Area Development; production center",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 24,
+      "name": "Mars - Columbia SC",
+      "city": "Columbia",
+      "state": "SC",
+      "type": "plant",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Wikipedia Mars Inc US manufacturing list; production plant",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 25,
+      "name": "Mars - Joplin MO",
+      "city": "Joplin",
+      "state": "MO",
+      "type": "plant",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Wikipedia Mars Inc US manufacturing list; production plant",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 26,
+      "name": "Mars - Minneapolis MN",
+      "city": "Minneapolis",
+      "state": "MN",
+      "type": "plant",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Wikipedia Mars Inc US manufacturing list; production plant",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    }
+  ],
+  "geocodedAt": "2026-06-15"
+}

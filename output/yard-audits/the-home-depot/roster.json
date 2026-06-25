@@ -16,7 +16,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "RANGE_INTERPOLATED",
-        "movedMeters": 2
+        "movedMeters": 0
       }
     },
     {
@@ -32,7 +32,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 1439
+        "movedMeters": 0
       }
     },
     {
@@ -42,13 +42,13 @@
       "state": "TX",
       "type": "Rapid Deployment Center",
       "address": "2300 Beckleymeade Ave, Dallas, TX 75237",
-      "lat": 32.639055,
-      "lng": -96.852104,
+      "lat": 32.638839,
+      "lng": -96.856551,
       "source": "SPS Commerce / SupplierWiki HD DC list (DC #5023); dossier-named RDC architecture",
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 5664
+        "movedMeters": 417
       }
     },
     {
@@ -64,7 +64,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 5133
+        "movedMeters": 0
       }
     },
     {
@@ -80,7 +80,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 337
+        "movedMeters": 0
       }
     },
     {
@@ -96,7 +96,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "RANGE_INTERPOLATED",
-        "movedMeters": 3
+        "movedMeters": 0
       }
     },
     {
@@ -112,7 +112,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 142
+        "movedMeters": 0
       }
     },
     {
@@ -128,7 +128,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 2095
+        "movedMeters": 0
       }
     },
     {
@@ -144,7 +144,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 142
+        "movedMeters": 0
       }
     },
     {
@@ -160,7 +160,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 8493
+        "movedMeters": 0
       }
     },
     {
@@ -176,7 +176,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "GEOMETRIC_CENTER",
-        "movedMeters": 2790
+        "movedMeters": 0
       }
     },
     {
@@ -192,7 +192,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 3918
+        "movedMeters": 0
       }
     },
     {
@@ -202,13 +202,13 @@
       "state": "PA",
       "type": "Rapid Deployment Center",
       "address": "300 Enterprise Way, Pittston Township, PA 18640",
-      "lat": 41.314542,
-      "lng": -75.769187,
+      "lat": 41.315508,
+      "lng": -75.767739,
       "source": "SPS Commerce / SupplierWiki HD DC list (DC #5089); co-located with IFC XD09",
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 1714
+        "movedMeters": 162
       }
     },
     {
@@ -224,7 +224,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 278
+        "movedMeters": 0
       }
     },
     {
@@ -240,7 +240,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 1320
+        "movedMeters": 0
       }
     },
     {
@@ -256,7 +256,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 9468
+        "movedMeters": 0
       }
     },
     {
@@ -272,7 +272,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 17
+        "movedMeters": 0
       }
     },
     {
@@ -288,7 +288,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 11
+        "movedMeters": 0
       }
     },
     {
@@ -304,7 +304,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 3606
+        "movedMeters": 0
       }
     },
     {
@@ -320,7 +320,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 4627
+        "movedMeters": 0
       }
     },
     {
@@ -336,7 +336,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 9866
+        "movedMeters": 0
       }
     },
     {
@@ -352,7 +352,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 1434
+        "movedMeters": 0
       }
     },
     {
@@ -368,7 +368,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 57
+        "movedMeters": 0
       }
     },
     {
@@ -384,7 +384,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 1553
+        "movedMeters": 0
       }
     },
     {
@@ -400,7 +400,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 43
+        "movedMeters": 0
       }
     },
     {
@@ -416,7 +416,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 221
+        "movedMeters": 0
       }
     },
     {
@@ -432,7 +432,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 8852
+        "movedMeters": 0
       }
     },
     {
@@ -448,7 +448,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 1199
+        "movedMeters": 0
       }
     },
     {
@@ -464,7 +464,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 3079
+        "movedMeters": 0
       }
     },
     {
@@ -480,9 +480,9 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "GEOMETRIC_CENTER",
-        "movedMeters": 3972
+        "movedMeters": 0
       }
     }
   ],
-  "geocodedAt": "2026-05-18"
+  "geocodedAt": "2026-06-15"
 }

@@ -1,0 +1,470 @@
+{
+  "account": "Ryder Supply Chain Solutions",
+  "generatedAt": "2026-06-15",
+  "facilityCount": 30,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Ryder - Edison NJ",
+      "city": "Edison",
+      "state": "NJ",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Ryder.com e-commerce fulfillment page; 700k+ sq ft / 100 dock doors Northeast hub near Port NY/NJ",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Ryder - Secaucus NJ",
+      "city": "Secaucus",
+      "state": "NJ",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Ryder.com locations; one of four NJ Northeast omnichannel/GOH centers",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Ryder - Newark NJ",
+      "city": "Newark",
+      "state": "NJ",
+      "type": "distribution center",
+      "address": "442 Avenue P, Newark, NJ",
+      "lat": 40.715355,
+      "lng": -74.134312,
+      "source": "Speed Commerce Ryder locations list; NJ Northeast fulfillment center",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Ryder - Clifton NJ",
+      "city": "Clifton",
+      "state": "NJ",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Ryder.com e-commerce; one of four NJ Northeast GOH/omnichannel centers",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Ryder - North Aurora IL",
+      "city": "North Aurora",
+      "state": "IL",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Businesswire/Supply Chain Dive 2023; ~550k sq ft, 10th Chicagoland multiclient DC, food-grade, 54 cross-dock",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Ryder - Aurora IL",
+      "city": "Aurora",
+      "state": "IL",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Logistics Mgmt 2023; ~400k sq ft Aurora multiclient DC (Chicago expansion)",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 7,
+      "name": "Ryder - Romeoville IL",
+      "city": "Romeoville",
+      "state": "IL",
+      "type": "warehouse",
+      "address": "1290 Enterprise Dr, Romeoville, IL 60446",
+      "lat": 41.671885,
+      "lng": -88.075947,
+      "source": "Ryder Integrated Logistics listing; Chicago-area warehouse",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 8,
+      "name": "Ryder - Bolingbrook IL",
+      "city": "Bolingbrook",
+      "state": "IL",
+      "type": "warehouse",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Ryder.com IL locations; Chicago-area multiclient warehouse",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 9,
+      "name": "Ryder - Plainfield IL",
+      "city": "Plainfield",
+      "state": "IL",
+      "type": "warehouse",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Job postings (CareerBuilder warehouse clerk); Chicago-area warehouse",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 10,
+      "name": "Ryder - Woodridge IL",
+      "city": "Woodridge",
+      "state": "IL",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Businesswire 2021; ex-Midwest Warehouse & Distribution HQ/DC, Chicago-area multiclient",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 11,
+      "name": "Ryder - Joliet IL",
+      "city": "Joliet",
+      "state": "IL",
+      "type": "warehouse",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed Ryder Joliet jobs; Chicago-area warehouse",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 12,
+      "name": "Ryder - Milwaukee WI",
+      "city": "Milwaukee",
+      "state": "WI",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Refrigerated & Frozen Foods warehouse directory; Milwaukee Logistic Center",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 13,
+      "name": "Ryder - Chino CA",
+      "city": "Chino",
+      "state": "CA",
+      "type": "distribution center",
+      "address": "5026 Chino Hills Parkway, Bldg 17, Chino, CA",
+      "lat": 33.984709,
+      "lng": -117.694461,
+      "source": "Speed Commerce list + Ryder.com; one of two Chino LA-area fulfillment centers",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 14,
+      "name": "Ryder - City of Industry CA",
+      "city": "City of Industry",
+      "state": "CA",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Ryder.com e-commerce; two LA-area fulfillment centers serving ports",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 15,
+      "name": "Ryder - Rancho Dominguez CA",
+      "city": "Rancho Dominguez",
+      "state": "CA",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Ryder.com e-commerce; LA-area port fulfillment center",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 16,
+      "name": "Ryder - Riverside CA",
+      "city": "Riverside",
+      "state": "CA",
+      "type": "distribution center",
+      "address": "15801 Meridian Parkway, Riverside, CA",
+      "lat": 33.891547,
+      "lng": -117.28194,
+      "source": "Speed Commerce list + Ryder.com; Inland Empire fulfillment center",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 17,
+      "name": "Ryder - Lathrop CA",
+      "city": "Lathrop",
+      "state": "CA",
+      "type": "warehouse",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "ZipRecruiter Ryder warehouse jobs; Northern CA warehouse",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 18,
+      "name": "Ryder - Fort Worth TX",
+      "city": "Fort Worth",
+      "state": "TX",
+      "type": "distribution center",
+      "address": "4972 N. Sylvania Ave, Fort Worth, TX",
+      "lat": 32.831967,
+      "lng": -97.307332,
+      "source": "Speed Commerce list + Ryder.com; food-grade temp-controlled DC, 764k sq ft / 124 dock doors",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 19,
+      "name": "Ryder - El Paso TX",
+      "city": "El Paso",
+      "state": "TX",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Ryder newsroom/Businesswire 2024; 50k sq ft multiclient cross-border facility near Ysleta Port of Entry",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 20,
+      "name": "Ryder - Dallas TX",
+      "city": "Dallas",
+      "state": "TX",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Logistics Mgmt; multi-client food-grade temp-controlled facility ~15 mi from airport",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 21,
+      "name": "Ryder - Locust Grove GA",
+      "city": "Locust Grove",
+      "state": "GA",
+      "type": "distribution center",
+      "address": "355 Davis Lake Road, Locust Grove, GA",
+      "lat": 33.365108,
+      "lng": -84.119382,
+      "source": "Georgia.org / Gov Kemp release 2022; 680k sq ft, 60 dock doors, Garner Logistics Park",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 22,
+      "name": "Ryder - Savannah GA",
+      "city": "Savannah",
+      "state": "GA",
+      "type": "distribution center",
+      "address": "1319 Dean Forest Road, Savannah, GA",
+      "lat": 32.054928,
+      "lng": -81.212758,
+      "source": "Speed Commerce Ryder locations list; port-proximate fulfillment center",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 23,
+      "name": "Ryder - Pataskala (Columbus) OH",
+      "city": "Pataskala",
+      "state": "OH",
+      "type": "distribution center",
+      "address": "9157 Mink Street SW, Bldg 2, Pataskala, OH 43062",
+      "lat": 39.96098,
+      "lng": -82.727932,
+      "source": "Speed Commerce list + Racklify; Columbus-area DC (Etna/Pataskala), part of 1.46M sq ft Columbus network",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 24,
+      "name": "Ryder - Groveport OH",
+      "city": "Groveport",
+      "state": "OH",
+      "type": "distribution center",
+      "address": "1675 Beggrow Street, Groveport, OH 43137",
+      "lat": 39.835079,
+      "lng": -82.951779,
+      "source": "Search of Columbus-area Ryder facilities; second Columbus DC",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 25,
+      "name": "Ryder - Sumner WA",
+      "city": "Sumner",
+      "state": "WA",
+      "type": "distribution center",
+      "address": "3401 West Valley Highway East, Sumner, WA 98390",
+      "lat": 47.226619,
+      "lng": -122.25334,
+      "source": "Racklify + Ryder.com; 263k sq ft FTZ hub near Seattle/Tacoma ports",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 26,
+      "name": "Ryder - West Valley City UT",
+      "city": "West Valley City",
+      "state": "UT",
+      "type": "distribution center",
+      "address": "6935 W 2100 S, West Valley City, UT",
+      "lat": 40.72544,
+      "lng": -112.056825,
+      "source": "Speed Commerce list + Ryder.com; Salt Lake City-area DC, 400k sq ft / 38 dock doors",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 27,
+      "name": "Ryder - Carlisle PA",
+      "city": "Carlisle",
+      "state": "PA",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Ryder e-commerce expansion; ~340k sq ft food-grade DC near Philadelphia (Central PA hub)",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 28,
+      "name": "Ryder - Orange Park FL",
+      "city": "Orange Park",
+      "state": "FL",
+      "type": "distribution center",
+      "address": "600 Wells Road, Orange Park, FL",
+      "lat": 30.188326,
+      "lng": -81.709488,
+      "source": "Speed Commerce Ryder locations list; Jacksonville-area fulfillment center",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 29,
+      "name": "Ryder - Grand Rapids MI",
+      "city": "Grand Rapids",
+      "state": "MI",
+      "type": "warehouse",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "ZipRecruiter Ryder warehouse jobs (MI); West Michigan warehouse",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 30,
+      "name": "Ryder - Moonachie NJ",
+      "city": "Moonachie",
+      "state": "NJ",
+      "type": "warehouse",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "ZipRecruiter Ryder warehouse jobs; NJ meadowlands warehouse near Port NY/NJ",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    }
+  ],
+  "geocodedAt": "2026-06-15"
+}

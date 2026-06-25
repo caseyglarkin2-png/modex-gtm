@@ -1,0 +1,467 @@
+{
+  "account": "CJ Logistics North America",
+  "generatedAt": "2026-06-15",
+  "facilityCount": 30,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "CJ Logistics - Elwood IL",
+      "city": "Elwood",
+      "state": "IL",
+      "type": "logistics center",
+      "address": "21705 W Mississippi St, Elwood, IL 60421",
+      "lat": 41.406701,
+      "lng": -88.139492,
+      "source": "Racklify/CJ open-space listing; FTZ warehouse in CenterPoint Intermodal Center, 116 dock doors, 200 yard spots, rail access",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 2,
+      "name": "CJ Logistics - Elwood IL (New DC)",
+      "city": "Elwood",
+      "state": "IL",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "BusinessWire/DC Velocity 2024-2026: new 1.1M sq ft automated DC in CenterPoint Intermodal Center, opening 2026 (groundbreaking with KOBC)",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 3,
+      "name": "CJ Logistics - Joliet IL",
+      "city": "Joliet",
+      "state": "IL",
+      "type": "distribution center",
+      "address": "4100 Rock Creek Blvd, Joliet, IL 60431",
+      "lat": 41.488681,
+      "lng": -88.183229,
+      "source": "Web search facility address; Chicagoland cluster (formerly DSC)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 4,
+      "name": "CJ Logistics - Romeoville IL",
+      "city": "Romeoville",
+      "state": "IL",
+      "type": "distribution center",
+      "address": "500 S Pinnacle Dr, Romeoville, IL 60446",
+      "lat": 41.604056,
+      "lng": -88.115815,
+      "source": "Web search facility address; Chicagoland cluster",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 5,
+      "name": "CJ Logistics - Minooka IL",
+      "city": "Minooka",
+      "state": "IL",
+      "type": "distribution center",
+      "address": "14970 Jughandle Rd, Minooka, IL 60447",
+      "lat": 41.505735,
+      "lng": -88.300752,
+      "source": "Carrier Network / web search; Chicagoland cluster",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 6,
+      "name": "CJ Logistics - University Park IL",
+      "city": "University Park",
+      "state": "IL",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed locations + CJ newsroom (Joliet/Romeoville/Elwood/Minooka/University Park cluster)",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 7,
+      "name": "CJ Logistics - New Century KS",
+      "city": "New Century",
+      "state": "KS",
+      "type": "distribution center",
+      "address": "New Century AirCenter, near W 157th-159th St, New Century, KS 66031",
+      "lat": 38.838966,
+      "lng": -94.89502,
+      "source": "BGO/CJ newsroom 2024: 291,000 sq ft cold storage near Kansas City, ~30 mi from KC; strategic Midwest hub",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 8,
+      "name": "CJ Logistics - Gainesville GA",
+      "city": "Gainesville",
+      "state": "GA",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "CJ newsroom/BusinessWire 2024: 270,000 sq ft cold storage, blast freezing, near I-985/I-85, Norfolk Southern rail; opened 2024",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 9,
+      "name": "CJ Logistics - Fairburn GA",
+      "city": "Fairburn",
+      "state": "GA",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed locations; Atlanta-area DC cluster",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 10,
+      "name": "CJ Logistics - McDonough GA",
+      "city": "McDonough",
+      "state": "GA",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed locations; Atlanta-area DC cluster",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 11,
+      "name": "CJ Logistics - Union City GA",
+      "city": "Union City",
+      "state": "GA",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed locations; Atlanta-area DC cluster",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 12,
+      "name": "CJ Logistics - Breinigsville PA",
+      "city": "Breinigsville",
+      "state": "PA",
+      "type": "distribution center",
+      "address": "400 Nestle Way, Breinigsville, PA 18031",
+      "lat": 40.571718,
+      "lng": -75.634232,
+      "source": "Web search + D&B; Lehigh Valley East Coast hub address",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 13,
+      "name": "CJ Logistics - Wind Gap PA",
+      "city": "Wind Gap",
+      "state": "PA",
+      "type": "warehouse",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "CJ newsroom 2023 + D&B: food-grade warehouse, Lehigh Valley",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 14,
+      "name": "CJ Logistics - Bethlehem PA",
+      "city": "Bethlehem",
+      "state": "PA",
+      "type": "warehouse",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "CJ newsroom 2023 + D&B: food-grade warehouse, Lehigh Valley",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 15,
+      "name": "CJ Logistics - Carlisle PA",
+      "city": "Carlisle",
+      "state": "PA",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed locations + search; Central PA distribution hub",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 16,
+      "name": "CJ Logistics - Newville PA",
+      "city": "Newville",
+      "state": "PA",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed locations; Central PA (Carlisle corridor)",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 17,
+      "name": "CJ Logistics - Wilmer TX",
+      "city": "Wilmer",
+      "state": "TX",
+      "type": "distribution center",
+      "address": "1200 Fulghum Rd, Wilmer, TX 75172",
+      "lat": 32.622645,
+      "lng": -96.684933,
+      "source": "Waze/Chamber of Commerce + CJ open-space listing; Dallas-area hub (also 1501 Southport Pkwy referenced)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 18,
+      "name": "CJ Logistics - Coppell TX",
+      "city": "Coppell",
+      "state": "TX",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed locations; DFW metroplex",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 19,
+      "name": "CJ Logistics - Houston TX",
+      "city": "Houston",
+      "state": "TX",
+      "type": "distribution center",
+      "address": "14700 North Fwy, Houston, TX 77090",
+      "lat": 29.980078,
+      "lng": -95.420077,
+      "source": "LogiCore/web search facility address (formerly DSC)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 20,
+      "name": "CJ Logistics - Laredo TX",
+      "city": "Laredo",
+      "state": "TX",
+      "type": "logistics center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed locations; cross-border (Mexico gateway) facility",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 21,
+      "name": "CJ Logistics - Arlington TX",
+      "city": "Arlington",
+      "state": "TX",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "CJ open-space listing (Arlington TX) + Indeed; DFW",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 22,
+      "name": "CJ Logistics - Beaumont CA",
+      "city": "Beaumont",
+      "state": "CA",
+      "type": "distribution center",
+      "address": "415 N Nicholas Rd #200, Beaumont, CA 92223",
+      "lat": 33.927761,
+      "lng": -116.995781,
+      "source": "Web search facility address; Inland Empire SoCal hub",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 23,
+      "name": "CJ Logistics - Fontana CA",
+      "city": "Fontana",
+      "state": "CA",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed locations; Inland Empire / SoCal port-adjacent cluster",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 24,
+      "name": "CJ Logistics - Mira Loma CA",
+      "city": "Mira Loma",
+      "state": "CA",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed locations; Inland Empire SoCal",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 25,
+      "name": "CJ Logistics - Shafter CA",
+      "city": "Shafter",
+      "state": "CA",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed locations; Central Valley (Bakersfield-area) DC",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 26,
+      "name": "CJ Logistics - Tracy CA",
+      "city": "Tracy",
+      "state": "CA",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed locations; NorCal Central Valley DC",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 27,
+      "name": "CJ Logistics - Glendale AZ",
+      "city": "Glendale",
+      "state": "AZ",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "CJ open-space listing 2023: 331,686 sq ft available, Phoenix metro",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 28,
+      "name": "CJ Logistics - Greensboro NC",
+      "city": "Greensboro",
+      "state": "NC",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed locations; NC Piedmont Triad cluster",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 29,
+      "name": "CJ Logistics - Kernersville NC",
+      "city": "Kernersville",
+      "state": "NC",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed + Yahoo Local; NC Piedmont Triad cluster",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 30,
+      "name": "CJ Logistics - West Jefferson OH",
+      "city": "West Jefferson",
+      "state": "OH",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed locations; Columbus-area DC (near Columbus distribution corridor)",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    }
+  ],
+  "geocodedAt": "2026-06-15"
+}

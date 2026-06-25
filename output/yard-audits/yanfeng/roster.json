@@ -1,0 +1,283 @@
+{
+  "account": "Yanfeng",
+  "generatedAt": "2026-06-15",
+  "facilityCount": 18,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "Yanfeng - Harrison Township MI",
+      "city": "Harrison Township",
+      "state": "MI",
+      "type": "plant",
+      "address": "42150 Executive Drive, Harrison Township, MI 48045",
+      "lat": 42.60387,
+      "lng": -82.85571,
+      "source": "Yanfeng press release / corporate site (confirmed street address)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 2,
+      "name": "Yanfeng - Highland Park MI",
+      "city": "Highland Park",
+      "state": "MI",
+      "type": "sequencing center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Detroit Regional Partnership / DBusiness: 220,000 sqft plant, cockpits/consoles/door panels, JIT/JIS for Stellantis (Jeep/Ram); 675+ employees",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 3,
+      "name": "Yanfeng - Romulus MI",
+      "city": "Romulus",
+      "state": "MI",
+      "type": "plant",
+      "address": "9800 Inkster Road, Romulus, MI",
+      "lat": 42.233119,
+      "lng": -83.310341,
+      "source": "CBS Detroit (note: facility winding down / closure announced ~Jan 2026; layoffs)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 4,
+      "name": "Yanfeng - Holland MI",
+      "city": "Holland",
+      "state": "MI",
+      "type": "plant",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "YellowPages / Indeed locations list",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 5,
+      "name": "Yanfeng - Monroe MI",
+      "city": "Monroe",
+      "state": "MI",
+      "type": "plant",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed locations list (Frenchtown/Monroe MI)",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 6,
+      "name": "Yanfeng - Belvidere IL",
+      "city": "Belvidere",
+      "state": "IL",
+      "type": "plant",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Yanfeng/PRNewswire: $28.1M plant opened 2017 to support FCA US (Belvidere Assembly), 400 jobs",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 7,
+      "name": "Yanfeng - Northwood OH",
+      "city": "Northwood",
+      "state": "OH",
+      "type": "plant",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed locations list (Toledo-area; supports Stellantis Toledo Jeep)",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 8,
+      "name": "Yanfeng - Bryan OH",
+      "city": "Bryan",
+      "state": "OH",
+      "type": "plant",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed locations list",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 9,
+      "name": "Yanfeng - Riverside MO",
+      "city": "Riverside",
+      "state": "MO",
+      "type": "plant",
+      "address": "Riverside, MO 64150 (Horizons Industrial Park area)",
+      "lat": 39.166655,
+      "lng": -94.640484,
+      "source": "Springfield Business Journal / GM Authority: interior trim for GM Kansas City (KS) & Wentzville (MO); closure announced after Chevy Malibu end, 444 jobs",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 10,
+      "name": "Yanfeng - North Kansas City MO",
+      "city": "North Kansas City",
+      "state": "MO",
+      "type": "plant",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Automotive World / Area Development: ~$45M Kansas City-area trim plant; Indeed locations list",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 11,
+      "name": "Yanfeng - Chattanooga TN",
+      "city": "Chattanooga",
+      "state": "TN",
+      "type": "plant",
+      "address": "7463 Bonnyshire Dr, Chattanooga, TN 37416",
+      "lat": 35.070277,
+      "lng": -85.164463,
+      "source": "Yanfeng / TN ECD / VW Media: $55M plant near Enterprise South, instrument panels/consoles/trunk trim for VW Chattanooga (confirmed street address)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 12,
+      "name": "Yanfeng - Fountain Inn SC",
+      "city": "Fountain Inn",
+      "state": "SC",
+      "type": "plant",
+      "address": "101 International Boulevard, Fountain Inn, SC 29644",
+      "lat": 34.670788,
+      "lng": -82.19425,
+      "source": "SC Dept of Commerce / Upstate Business Journal: acquired ex-Faurecia plant, door/instrument panels & consoles for BMW; expansions through 2026 (confirmed street address)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 13,
+      "name": "Yanfeng - Greenville SC",
+      "city": "Greenville",
+      "state": "SC",
+      "type": "warehouse",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed locations list (Greenville/Laurens County, SC; BMW supply support)",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 14,
+      "name": "Yanfeng - Cottondale AL",
+      "city": "Cottondale",
+      "state": "AL",
+      "type": "plant",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed / IndustryNet / WVUA: plastic injection-molded interior parts for Mercedes-Benz US International (Tuscaloosa/Vance); some ramp-down June 2026",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 15,
+      "name": "Yanfeng - McCalla AL",
+      "city": "McCalla",
+      "state": "AL",
+      "type": "plant",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "IndustryNet listing: Yanfeng US Automotive Interior Systems LLC, McCalla AL (Mercedes-Benz JIT supply)",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 16,
+      "name": "Yanfeng - Tuscaloosa AL",
+      "city": "Tuscaloosa",
+      "state": "AL",
+      "type": "sequencing center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed locations list (Tuscaloosa/Vance corridor, Mercedes-Benz JIS support)",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 17,
+      "name": "Yanfeng - Louisville KY",
+      "city": "Louisville",
+      "state": "KY",
+      "type": "plant",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed locations list (Louisville; Ford Kentucky Truck / LAP supply region)",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 18,
+      "name": "Yanfeng - Grand Rapids MI",
+      "city": "Grand Rapids",
+      "state": "MI",
+      "type": "plant",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed locations list (Grand Rapids / Kentwood MI)",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    }
+  ],
+  "geocodedAt": "2026-06-15"
+}

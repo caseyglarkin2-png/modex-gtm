@@ -1,0 +1,470 @@
+{
+  "account": "NFI Industries",
+  "generatedAt": "2026-06-15",
+  "facilityCount": 30,
+  "facilities": [
+    {
+      "idx": 1,
+      "name": "NFI - Perris CA",
+      "city": "Perris",
+      "state": "CA",
+      "type": "distribution center",
+      "address": "657 Nance St, Perris, CA 92571",
+      "lat": 33.854552,
+      "lng": -117.240935,
+      "source": "Newmark/ConnectCRE 2023: NFI renewed 864,000 SF two-story cross-dock lease at 657 Nance St, Perris (Inland Empire), 112 dock doors",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 2,
+      "name": "NFI - Eastvale CA (Mission Blvd)",
+      "city": "Eastvale",
+      "state": "CA",
+      "type": "distribution center",
+      "address": "13000 Mission Blvd, Eastvale, CA 92880",
+      "lat": 34.029547,
+      "lng": -117.556723,
+      "source": "CoStar/Commercial Observer 2022: NFI bought 761,000 SF DC at 13000 Mission Blvd from Sares-Regis for $220M, near Ontario Intl Airport",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 3,
+      "name": "NFI - Chino CA (Eucalyptus Ave)",
+      "city": "Chino",
+      "state": "CA",
+      "type": "warehouse",
+      "address": "5151 Eucalyptus Ave, Chino, CA 91710",
+      "lat": 33.988274,
+      "lng": -117.69204,
+      "source": "D&B / Yellow Pages: NFI Distribution at 5151 Eucalyptus Ave, Chino",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 4,
+      "name": "NFI - Chino CA (Mountain Ave)",
+      "city": "Chino",
+      "state": "CA",
+      "type": "warehouse",
+      "address": "15970 Mountain Ave, Chino, CA 91708",
+      "lat": 33.962224,
+      "lng": -117.668602,
+      "source": "Waze/search listing: NFI Industries warehouse on Mountain Ave, Chino (Inland Empire)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 5,
+      "name": "NFI - Florence NJ (Subaru parts DC)",
+      "city": "Florence",
+      "state": "NJ",
+      "type": "distribution center",
+      "address": "2020 Route 130 North, Florence, NJ 08518",
+      "lat": 40.095187,
+      "lng": -74.804286,
+      "source": "NFI news / NREI: NFI Park at Florence Crossings, 526,050 SF class-A DC built for Subaru of America parts distribution + training, 83 doors",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 6,
+      "name": "NFI - Burlington/Florence NJ (Five Below DC)",
+      "city": "Burlington",
+      "state": "NJ",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "NFI news: 1,015,000 SF build-to-suit DC in Southern NJ; Five Below occupies ~715,000 SF, replacing New Castle DE facility",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 7,
+      "name": "NFI - Breinigsville PA (Lehigh Valley)",
+      "city": "Breinigsville",
+      "state": "PA",
+      "type": "distribution center",
+      "address": "910 Nestle Way, Breinigsville, PA 18031",
+      "lat": 40.567315,
+      "lng": -75.649346,
+      "source": "Search/lease record: NFI leased 254,000 SF at 910 Nestle Way, Breinigsville (Lehigh Valley, near Allentown)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 8,
+      "name": "NFI - Kutztown PA",
+      "city": "Kutztown",
+      "state": "PA",
+      "type": "warehouse",
+      "address": "9658 West Hills Court, Kutztown, PA 19530",
+      "lat": 40.581043,
+      "lng": -75.699908,
+      "source": "D&B / NFI location listing: warehouse at 9658 West Hills Court, Kutztown (Lehigh Valley region)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 9,
+      "name": "NFI - Weisenberg Township PA (Ocean Spray DC)",
+      "city": "Weisenberg Township",
+      "state": "PA",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "NFI/Hillwood groundbreaking: 980,000 SF DC in Weisenberg Township (Lehigh Valley) as future Ocean Spray Cranberries DC, NFI tenant",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 10,
+      "name": "NFI - Pooler GA (95 Logistics Bldg I)",
+      "city": "Pooler",
+      "state": "GA",
+      "type": "distribution center",
+      "address": "1030 S H Morgan Pkwy, Pooler, GA 31322",
+      "lat": 32.10851,
+      "lng": -81.27399,
+      "source": "REBusinessOnline 2023: PCCP/NFI JV acquired 95 Logistics at Pooler Pkwy; Bldg I = 347,525 SF, 54 docks, 95 trailer spaces, leased to NFI",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 11,
+      "name": "NFI - Pooler GA (95 Logistics Bldg II)",
+      "city": "Pooler",
+      "state": "GA",
+      "type": "distribution center",
+      "address": "1240 S H Morgan Pkwy, Pooler, GA 31322",
+      "lat": 32.10899,
+      "lng": -81.275381,
+      "source": "REBusinessOnline 2023: 95 Logistics Bldg II = 216,964 SF, 50 docks, 52 trailer spaces (metro Savannah)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 12,
+      "name": "NFI - Port Wentworth GA (Savannah transload)",
+      "city": "Port Wentworth",
+      "state": "GA",
+      "type": "warehouse",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "NFI Location Spotlight PDF / GA Ports Authority: 300,000 SF transload warehouse ~1 mile from Garden City Terminal, opened July 2023",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 13,
+      "name": "NFI - Pooler GA (Pine Meadow Dr)",
+      "city": "Pooler",
+      "state": "GA",
+      "type": "warehouse",
+      "address": "130 Pine Meadow Dr, Pooler, GA 31322",
+      "lat": 32.076457,
+      "lng": -81.200795,
+      "source": "Kompass listing: NFI Industries at 130 Pine Meadow Dr, Pooler (container/trailer parking)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 14,
+      "name": "NFI - Effingham County GA (Bradshaw Home DC)",
+      "city": "Rincon",
+      "state": "GA",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "EIN Presswire: Bradshaw Home 1.2M SF east-coast DC in Effingham County GA (Savannah area), operated by NFI",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 15,
+      "name": "NFI - Olive Branch MS (Spin Master DC)",
+      "city": "Olive Branch",
+      "state": "MS",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "NFI news / AJOT 2024: new Olive Branch MS facility for Spin Master products, opened May 2024 (Memphis metro / Central US)",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 16,
+      "name": "NFI - Joliet IL",
+      "city": "Joliet",
+      "state": "IL",
+      "type": "distribution center",
+      "address": "251 E Laraway Rd, Joliet, IL 60433",
+      "lat": 41.482448,
+      "lng": -88.074126,
+      "source": "Chamber of Commerce listing: NFI at 251 E Laraway Rd, Joliet (Chicago/Joliet intermodal hub)",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 17,
+      "name": "NFI - Bolingbrook IL",
+      "city": "Bolingbrook",
+      "state": "IL",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Search/lease record: NFI leased 317,000 SF distribution center in Bolingbrook IL (Chicago metro)",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 18,
+      "name": "NFI - Greensboro NC (Lamps Plus fulfillment)",
+      "city": "Greensboro",
+      "state": "NC",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "NFI news 2025: 350,000 SF DC dedicated to Lamps Plus eCommerce fulfillment, Greensboro NC",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 19,
+      "name": "NFI - Greensboro NC (Penry Rd)",
+      "city": "Greensboro",
+      "state": "NC",
+      "type": "warehouse",
+      "address": "300 Penry Rd, Greensboro, NC 27405",
+      "lat": 36.091899,
+      "lng": -79.719747,
+      "source": "BBB / location listing: NFI Industries warehouse at 300 Penry Rd, Greensboro NC",
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 20,
+      "name": "NFI - South Dallas TX",
+      "city": "Dallas",
+      "state": "TX",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "NFI Campus Locations page: South Dallas logistics campus, central gateway to North America with Mexico connectivity",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 21,
+      "name": "NFI - DeSoto TX",
+      "city": "DeSoto",
+      "state": "TX",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed NFI TX locations: DeSoto (Dallas-Fort Worth metroplex)",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 22,
+      "name": "NFI - Fort Worth TX",
+      "city": "Fort Worth",
+      "state": "TX",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed NFI TX locations: Fort Worth (DFW distribution hub)",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 23,
+      "name": "NFI - Garland TX",
+      "city": "Garland",
+      "state": "TX",
+      "type": "warehouse",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed NFI TX locations: Garland (Dallas metro)",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 24,
+      "name": "NFI - Galena Park TX",
+      "city": "Galena Park",
+      "state": "TX",
+      "type": "warehouse",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Indeed NFI TX locations: Galena Park (Houston / Port of Houston drayage + warehousing)",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 25,
+      "name": "NFI - Allentown PA (West Hills Business Center)",
+      "city": "Allentown",
+      "state": "PA",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "Lehigh Valley/Hillwood: first Hillwood building at West Hills Business Center, ~2/3M SF class-A warehouse on 230 acres at I-78 Exit 45",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 26,
+      "name": "NFI - Savannah GA (PCCP/NFI metro acquisition)",
+      "city": "Savannah",
+      "state": "GA",
+      "type": "warehouse",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "REBusinessOnline / Savannah Business Journal 2023: PCCP/NFI JV acquired 565,000 SF across two metro-Savannah industrial facilities",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 27,
+      "name": "NFI - Chicago/Joliet IL (intermodal campus)",
+      "city": "Joliet",
+      "state": "IL",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "NFI Campus Locations page: Chicago/Joliet area positioned as North America's central distribution hub, world's 3rd-largest intermodal port",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 28,
+      "name": "NFI - Inland Empire CA (campus)",
+      "city": "Ontario",
+      "state": "CA",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "NFI Campus Locations page: Inland Empire logistics campus with port connectivity to Ports of LA/Long Beach",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 29,
+      "name": "NFI - New Castle DE (Five Below legacy DC)",
+      "city": "New Castle",
+      "state": "DE",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "NFI news: existing 421,000 SF Five Below DC in New Castle DE (being replaced by new Southern NJ build-to-suit)",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    },
+    {
+      "idx": 30,
+      "name": "NFI - Camden NJ (Lamps Plus / regional DC)",
+      "city": "Pedricktown",
+      "state": "NJ",
+      "type": "distribution center",
+      "address": null,
+      "lat": null,
+      "lng": null,
+      "source": "NFI South Jersey footprint: regional DC presence in the Camden/Pedricktown corridor near HQ market (per NFI distribution insights)",
+      "geocode": {
+        "source": "none",
+        "precision": "no-address"
+      }
+    }
+  ],
+  "geocodedAt": "2026-06-15"
+}

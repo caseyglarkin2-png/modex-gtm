@@ -16,7 +16,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "APPROXIMATE",
-        "movedMeters": 238
+        "movedMeters": 0
       }
     },
     {
@@ -32,7 +32,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "RANGE_INTERPOLATED",
-        "movedMeters": 57
+        "movedMeters": 0
       }
     },
     {
@@ -48,7 +48,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "RANGE_INTERPOLATED",
-        "movedMeters": 3
+        "movedMeters": 0
       }
     },
     {
@@ -64,7 +64,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 222
+        "movedMeters": 0
       }
     },
     {
@@ -80,7 +80,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "RANGE_INTERPOLATED",
-        "movedMeters": 59
+        "movedMeters": 0
       }
     },
     {
@@ -96,7 +96,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "RANGE_INTERPOLATED",
-        "movedMeters": 83
+        "movedMeters": 0
       }
     },
     {
@@ -112,7 +112,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 42
+        "movedMeters": 0
       }
     },
     {
@@ -128,7 +128,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": 21
+        "movedMeters": 0
       }
     },
     {
@@ -160,7 +160,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "GEOMETRIC_CENTER",
-        "movedMeters": 45
+        "movedMeters": 0
       }
     },
     {
@@ -176,7 +176,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "GEOMETRIC_CENTER",
-        "movedMeters": 3
+        "movedMeters": 0
       }
     },
     {
@@ -192,7 +192,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "APPROXIMATE",
-        "movedMeters": 1952
+        "movedMeters": 0
       }
     },
     {
@@ -208,7 +208,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "APPROXIMATE",
-        "movedMeters": 19
+        "movedMeters": 0
       }
     },
     {
@@ -224,7 +224,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "RANGE_INTERPOLATED",
-        "movedMeters": 5
+        "movedMeters": 0
       }
     },
     {
@@ -240,7 +240,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "RANGE_INTERPOLATED",
-        "movedMeters": 4
+        "movedMeters": 0
       }
     },
     {
@@ -256,7 +256,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "RANGE_INTERPOLATED",
-        "movedMeters": 84
+        "movedMeters": 0
       }
     },
     {
@@ -272,7 +272,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "GEOMETRIC_CENTER",
-        "movedMeters": 3
+        "movedMeters": 0
       }
     },
     {
@@ -288,7 +288,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "GEOMETRIC_CENTER",
-        "movedMeters": 5
+        "movedMeters": 0
       }
     },
     {
@@ -304,7 +304,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "RANGE_INTERPOLATED",
-        "movedMeters": 4
+        "movedMeters": 0
       }
     },
     {
@@ -320,7 +320,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "APPROXIMATE",
-        "movedMeters": 96
+        "movedMeters": 0
       }
     },
     {
@@ -336,7 +336,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "APPROXIMATE",
-        "movedMeters": 6
+        "movedMeters": 0
       }
     },
     {
@@ -352,7 +352,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "APPROXIMATE",
-        "movedMeters": 565
+        "movedMeters": 0
       }
     },
     {
@@ -368,7 +368,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "APPROXIMATE",
-        "movedMeters": 11764
+        "movedMeters": 0
       }
     },
     {
@@ -384,7 +384,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "RANGE_INTERPOLATED",
-        "movedMeters": 49
+        "movedMeters": 0
       }
     },
     {
@@ -400,7 +400,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "APPROXIMATE",
-        "movedMeters": 11
+        "movedMeters": 0
       }
     },
     {
@@ -416,7 +416,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "APPROXIMATE",
-        "movedMeters": 67
+        "movedMeters": 0
       }
     },
     {
@@ -432,7 +432,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "RANGE_INTERPOLATED",
-        "movedMeters": 41
+        "movedMeters": 0
       }
     },
     {
@@ -448,7 +448,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "APPROXIMATE",
-        "movedMeters": 4088
+        "movedMeters": 0
       }
     },
     {
@@ -464,7 +464,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "APPROXIMATE",
-        "movedMeters": 2159
+        "movedMeters": 0
       }
     },
     {
@@ -480,9 +480,9 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "APPROXIMATE",
-        "movedMeters": 7299
+        "movedMeters": 0
       }
     }
   ],
-  "geocodedAt": "2026-05-18"
+  "geocodedAt": "2026-06-15"
 }
