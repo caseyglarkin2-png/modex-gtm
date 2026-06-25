@@ -1,5 +1,6 @@
 import { buildAccountRoiModel } from '@/lib/demo/roi-model';
 import { buildROIDashboard, buildROIEngineInputs, computeROIModel } from '@/lib/microsites/roi';
+import type { AccountROIModel } from '@/lib/microsites/schema';
 
 export interface ForSnapshot {
   slug: string;
@@ -54,10 +55,14 @@ function computeMonthlyIrr(annualSavings: number, annualSub: number, impl: numbe
 const fmtPayback = (m: number | null) => (m == null ? 'N/A' : `${m.toFixed(1)} mo`);
 const fmtAnnualIrr = (d: number) => { const p = d * 100; if (p >= 1e6) return `${Math.round(p / 1000).toLocaleString('en-US')}K%`; if (p >= 1e3) return `${Math.round(p).toLocaleString('en-US')}%`; return `${p.toFixed(1)}%`; };
 
-/** Same engine + math as /demo/<slug> and gen-for-prize.ts, returned as data. */
-export function buildSnapshot(pack: any): ForSnapshot {
-  const slug = pack.account.slug;
-  const model = buildAccountRoiModel(pack);
+/** Build a ForSnapshot from an already-constructed AccountROIModel + a precomputed siloTax.
+ *  This is the shared label/engine path used by both the audited pack path (buildSnapshot)
+ *  and the research-tier path (which builds the model directly, without a pack). */
+export function snapshotFromModel(
+  slug: string,
+  model: AccountROIModel,
+  siloTax: ForSnapshot['siloTax'],
+): ForSnapshot {
   const inputs = buildROIEngineInputs(model);
   const computation = computeROIModel(inputs);
   const dash = buildROIDashboard(model);
@@ -82,9 +87,6 @@ export function buildSnapshot(pack: any): ForSnapshot {
     irrRow('Full modeled value', allAnnual, payback),
   ].filter(Boolean) as ForSnapshot['irrScenarios'];
 
-  const cls = (pack.network.sites ?? []).map((s: any) => s.classification).filter(Boolean);
-  const cnt = (p: (c: any) => boolean) => cls.filter(p).length;
-
   return {
     slug,
     annualValue,
@@ -98,13 +100,24 @@ export function buildSnapshot(pack: any): ForSnapshot {
     totalFacilities,
     averageMarginPerShipment: model.averageMarginPerShipment,
     facilityMix: model.facilityMix,
-    siloTax: {
-      auditedCount: cls.length,
-      dropReady: cnt((c) => c.dropYard === true),
-      gated: cnt((c) => c.truckGate === true),
-      longDrive: cnt((c) => c.drivewayLong === true),
-      fastLane: cnt((c) => c.fastLaneOpportunity === true),
-      multiCampus: cnt((c) => c.multipleFacilities === true),
-    },
+    siloTax,
   };
+}
+
+/** Same engine + math as /demo/<slug> and gen-for-prize.ts, returned as data. */
+export function buildSnapshot(pack: any): ForSnapshot {
+  const model = buildAccountRoiModel(pack);
+
+  const cls = (pack.network.sites ?? []).map((s: any) => s.classification).filter(Boolean);
+  const cnt = (p: (c: any) => boolean) => cls.filter(p).length;
+  const siloTax: ForSnapshot['siloTax'] = {
+    auditedCount: cls.length,
+    dropReady: cnt((c) => c.dropYard === true),
+    gated: cnt((c) => c.truckGate === true),
+    longDrive: cnt((c) => c.drivewayLong === true),
+    fastLane: cnt((c) => c.fastLaneOpportunity === true),
+    multiCampus: cnt((c) => c.multipleFacilities === true),
+  };
+
+  return snapshotFromModel(pack.account.slug, model, siloTax);
 }
