@@ -6,8 +6,9 @@ export async function revalidateForPage(slug: string): Promise<void> {
   const token = process.env.POUNCE_INGEST_TOKEN;
   if (!token) return;
   try {
-    await fetch(`${FLOW_STATE.replace(/\/$/, '')}/api/revalidate?path=/for/${encodeURIComponent(slug)}`, {
+    const res = await fetch(`${FLOW_STATE.replace(/\/$/, '')}/api/revalidate?path=/for/${encodeURIComponent(slug)}`, {
       method: 'POST', headers: { 'x-pounce-token': token }, signal: AbortSignal.timeout(10_000),
     });
+    if (!res.ok) console.warn(`revalidateForPage: ${slug} -> HTTP ${res.status}`);
   } catch { /* fail-soft */ }
 }

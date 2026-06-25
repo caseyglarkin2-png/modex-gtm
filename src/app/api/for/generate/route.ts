@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { generatePageRow, type SpearOverride } from '@/lib/for/generate';
+import type { ForSnapshot } from '@/lib/for/snapshot';
 import { upsertForPage } from '@/lib/for/store';
 import { revalidateForPage } from '@/lib/for/revalidate';
 
@@ -23,7 +24,7 @@ export async function POST(req: Request) {
     const row = await generatePageRow(body.slug, { override: body.override, status: body.status ?? 'live' });
     await upsertForPage(row);
     await revalidateForPage(body.slug);
-    const snap = row.snap as { annualValueLabel?: string; totalFacilities?: number };
+    const snap = row.snap as ForSnapshot;
     return NextResponse.json({
       ok: true, slug: body.slug, status: row.status,
       url: `${SITE.replace(/\/$/, '')}/for/${body.slug}`,
