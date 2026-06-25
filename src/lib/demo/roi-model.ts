@@ -15,7 +15,7 @@ import type { AccountROIModel } from '@/lib/microsites/schema';
  * in-house). NOT a YardFlow deployment count (always 0 on a demo). Used only
  * when the pack has no curated `coverageNote.legacyYmsFacilityCount`.
  */
-const LEGACY_YMS_ADOPTION_BY_VERTICAL: Record<string, number> = {
+export const LEGACY_YMS_ADOPTION_BY_VERTICAL: Record<string, number> = {
   cpg: 0.35,
   'grocer-distributor': 0.45,
   '3pl': 0.55,
@@ -25,6 +25,29 @@ const LEGACY_YMS_ADOPTION_BY_VERTICAL: Record<string, number> = {
   beverage: 0.4,
   'logistics-carrier': 0.5,
 };
+
+/**
+ * Canonical per-vertical margin-per-truckload ($). Returns the vertical default
+ * when no slug-level override exists. Used by the research-tier path (no demo-pack)
+ * to stay in lockstep with the audited-account margin logic.
+ *
+ * The per-archetype defaults are conservative estimates derived from the same
+ * product-class analysis that produced MARGIN_OVERRIDE. Slug overrides in
+ * MARGIN_OVERRIDE always take precedence when building an audited AccountROIModel.
+ */
+export function marginForArchetype(archetype: string): number {
+  const ARCHETYPE_MARGIN: Record<string, number> = {
+    cpg: 2500,
+    'grocer-distributor': 2400,
+    '3pl': 450,
+    'logistics-carrier': 450,
+    retailer: 2700,
+    manufacturer: 2500,
+    'oem-automotive': 3600,
+    beverage: 2400,
+  };
+  return ARCHETYPE_MARGIN[archetype] ?? 1000;
+}
 
 export interface NetworkRoiCounts {
   /** Full in-scope footprint (global where known), not just audited sites. */
