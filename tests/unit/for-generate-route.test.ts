@@ -41,4 +41,21 @@ describe('POST /api/for/generate', () => {
     expect(res.status).toBe(500);
     expect((await res.json()).error).toContain('no demo pack');
   });
+  it('builds a research-tier row when no demo-pack but account+facilityCount given', async () => {
+    (generatePageRow as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('no demo pack for "newco"'));
+    const res = await POST(req({ slug: 'newco', account: { displayName: 'New Co', archetype: 'beverage' }, facilityCount: 30 }, TOKEN));
+    expect(res.status).toBe(200);
+    expect((await res.json()).tier).toBe('research');
+    expect(upsertForPage).toHaveBeenCalledOnce();
+    const stored = (upsertForPage as ReturnType<typeof vi.fn>).mock.calls[0][0];
+    expect(stored.demoPack).toBeNull();
+    expect(stored.snap.totalFacilities).toBe(30);
+    expect(stored.status).toBe('live');
+    expect(revalidateForPage).toHaveBeenCalledWith('newco');
+  });
+  it('still 500s when no demo-pack and no research inputs', async () => {
+    (generatePageRow as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('no demo pack for "x"'));
+    const res = await POST(req({ slug: 'x' }, TOKEN));
+    expect(res.status).toBe(500);
+  });
 });
