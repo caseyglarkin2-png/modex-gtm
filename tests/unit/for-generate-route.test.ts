@@ -58,4 +58,28 @@ describe('POST /api/for/generate', () => {
     const res = await POST(req({ slug: 'x' }, TOKEN));
     expect(res.status).toBe(500);
   });
+  it('attaches a network demoPack when facilities are provided', async () => {
+    (generatePageRow as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('no demo pack for "tyson-foods"'));
+    const res = await POST(req({
+      slug: 'tyson-foods',
+      account: { displayName: 'Tyson Foods', archetype: 'manufacturer' },
+      facilityCount: 2,
+      facilities: [
+        { name: 'Tyson - Springdale AR', city: 'Springdale', state: 'AR', type: 'Plant', lat: 36.186, lng: -94.128 },
+        { name: 'Tyson - Amarillo TX', city: 'Amarillo', state: 'TX', type: 'Plant', lat: 35.20, lng: -101.83 },
+      ],
+    }, TOKEN));
+    expect(res.status).toBe(200);
+    const stored = (upsertForPage as ReturnType<typeof vi.fn>).mock.calls[0][0];
+    expect(stored.demoPack).not.toBeNull();
+    expect(stored.demoPack.network.sites.length).toBe(2);
+    expect(stored.snap.totalFacilities).toBe(2);
+  });
+  it('keeps demoPack null when no facilities given (pure spear)', async () => {
+    (generatePageRow as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('no demo pack for "x"'));
+    const res = await POST(req({ slug: 'x', account: { displayName: 'X', archetype: 'manufacturer' }, facilityCount: 5 }, TOKEN));
+    expect(res.status).toBe(200);
+    const stored = (upsertForPage as ReturnType<typeof vi.fn>).mock.calls.at(-1)![0];
+    expect(stored.demoPack).toBeNull();
+  });
 });

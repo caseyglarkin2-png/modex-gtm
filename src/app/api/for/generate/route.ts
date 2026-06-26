@@ -4,6 +4,7 @@ import type { ForSnapshot } from '@/lib/for/snapshot';
 import { upsertForPage } from '@/lib/for/store';
 import { revalidateForPage } from '@/lib/for/revalidate';
 import { buildResearchSnapshot, researchTierSpear } from '@/lib/for/research-tier';
+import { buildNetworkPack } from '@/lib/for/network-pack';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 120;
@@ -15,7 +16,7 @@ function authed(req: Request): boolean {
   return !!token && req.headers.get('x-pounce-token') === token;
 }
 
-interface Body { slug?: string; override?: SpearOverride; status?: 'draft' | 'live'; account?: { displayName?: string; archetype?: string }; facilityCount?: number; }
+interface Body { slug?: string; override?: SpearOverride; status?: 'draft' | 'live'; account?: { displayName?: string; archetype?: string }; facilityCount?: number; facilities?: Array<{ name: string; city?: string; state?: string; type?: string; lat?: number; lng?: number }>; }
 
 export async function POST(req: Request) {
   if (!authed(req)) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -38,6 +39,12 @@ export async function POST(req: Request) {
     if (/no demo pack/i.test(msg) && body.facilityCount && acct?.displayName && acct?.archetype) {
       const snap = buildResearchSnapshot(body.slug, { displayName: acct.displayName, archetype: acct.archetype }, body.facilityCount);
       const override = body.override ?? researchTierSpear(acct.displayName, snap, acct.archetype);
+      let demoPack = null;
+      if (Array.isArray(body.facilities) && body.facilities.some((f) => Number.isFinite(f.lat) && Number.isFinite(f.lng))) {
+        try {
+          demoPack = buildNetworkPack({ account: acct.displayName, slug: body.slug, archetype: acct.archetype, facilities: body.facilities }, new Date().toISOString());
+        } catch { demoPack = null; }
+      }
       const row = {
         slug: body.slug,
         status: (body.status ?? 'live') as 'draft' | 'live',
@@ -45,11 +52,11 @@ export async function POST(req: Request) {
         snap,
         override,
         geo: null,
-        demoPack: null,
+        demoPack,
       };
       await upsertForPage(row);
       await revalidateForPage(body.slug);
-      return NextResponse.json({ ok: true, slug: body.slug, status: row.status, tier: 'research', url: `${SITE.replace(/\/$/, '')}/for/${body.slug}`, annualValueLabel: snap.annualValueLabel, totalFacilities: snap.totalFacilities });
+      return NextResponse.json({ ok: true, slug: body.slug, status: row.status, tier: demoPack ? 'research+network' : 'research', url: `${SITE.replace(/\/$/, '')}/for/${body.slug}`, annualValueLabel: snap.annualValueLabel, totalFacilities: snap.totalFacilities });
     }
     return NextResponse.json({ error: msg }, { status: 500 });
   }
