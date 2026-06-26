@@ -1,0 +1,76 @@
+{
+  "name": "Michigan Dairy",
+  "type": "Dairy Plant",
+  "coords": { "lat": 42.379921, "lng": -83.338345 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 42.380900, "lng": -83.340750 },
+      { "lat": 42.380930, "lng": -83.337150 },
+      { "lat": 42.379180, "lng": -83.337250 },
+      { "lat": 42.379150, "lng": -83.340700 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 42.379280, "lng": -83.337520 },
+      { "lat": 42.379300, "lng": -83.337180 },
+      { "lat": 42.379080, "lng": -83.337170 },
+      { "lat": 42.379070, "lng": -83.337510 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 42.380760, "lng": -83.340700 },
+        { "lat": 42.380790, "lng": -83.339150 },
+        { "lat": 42.379240, "lng": -83.339220 },
+        { "lat": 42.379210, "lng": -83.340680 }
+      ] },
+      { "ring": [
+        { "lat": 42.379220, "lng": -83.338650 },
+        { "lat": 42.379230, "lng": -83.337650 },
+        { "lat": 42.379080, "lng": -83.337650 },
+        { "lat": 42.379070, "lng": -83.338650 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 42.379320, "lng": -83.339600 },
+        { "lat": 42.379340, "lng": -83.338600 },
+        { "lat": 42.379240, "lng": -83.338600 },
+        { "lat": 42.379220, "lng": -83.339600 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 335, "pano": "mY1GRH9YUVImuc9WJnSVOg", "hasCoverage": true },
+      "truckGate": { "heading": 351, "pano": "pdd2KQVbF6MVjn7KfqyOoQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55, "trailersVisible": 90, "trailerParkingCapacity": 140,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 14.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.379921,-83.338345,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "postGateStaging"],
+  "fieldNotes": {
+    "truckGate": "Entire property is chain-link fenced on all four sides (confirmed in 6 Street View frames). Trucks enter via a gated opening on the SE/east access drive; no open uncontrolled curb cut.",
+    "guardShack": "No staffed guard booth visible at any entrance in 2019/2022/2024 Street View. Kroger-owned plant served by dedicated carrier Quickway; likely kiosk/call-box or known-carrier check-in -> marked remoteGs. Medium confidence.",
+    "dockDoors": "Long south-facing dock bank, 50+ doors with trailers and stainless milk tankers backed in (SV + z19 sat).",
+    "dropArea": "Extensive Quickway trailer drop-yard rows west of the building plus tanker/trailer staging on the south/SE; well over 50 stalls.",
+    "fastLaneOpportunity": "Wide paved gate apron and ample yard width at the SE drive; room to add a bypass/express lane.",
+    "urbanRural": "Dense Livonia/Detroit-metro industrial fabric; surrounded by other large DCs (QuikTrip building directly south).",
+    "railServed": "No rail spur runs into the property; the E-W corridor to the north is a service road, not a live spur into the dairy.",
+    "siteAreaAcres": "~14.6 ac from the traced fenced perimeter (~296 m x ~195 m)."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,75 @@
+{
+  "name": "Tolleson Dairy",
+  "type": "Dairy Plant",
+  "coords": { "lat": 33.438630, "lng": -112.276560 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 33.439417, "lng": -112.277487 },
+      { "lat": 33.439417, "lng": -112.275495 },
+      { "lat": 33.437812, "lng": -112.275427 },
+      { "lat": 33.437812, "lng": -112.277555 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 33.442214, "lng": -112.279612 },
+      { "lat": 33.442214, "lng": -112.279269 },
+      { "lat": 33.441784, "lng": -112.279269 },
+      { "lat": 33.441784, "lng": -112.279612 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 33.438100, "lng": -112.276812 },
+        { "lat": 33.438100, "lng": -112.276572 },
+        { "lat": 33.437842, "lng": -112.276572 },
+        { "lat": 33.437842, "lng": -112.276812 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 33.438336, "lng": -112.276675 },
+        { "lat": 33.438336, "lng": -112.276349 },
+        { "lat": 33.438215, "lng": -112.276349 },
+        { "lat": 33.438215, "lng": -112.276675 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
+      "truckGate": { "heading": 0, "pano": "", "hasCoverage": false }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 16,
+    "trailersVisible": 60,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 8.2,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.438630,-112.276560,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "scale", "shipRcvSeparate", "dockDoorCount"],
+  "fieldNotes": {
+    "location": "Bldg 3 dairy/bottling plant identified by milk silos + rooftop ammonia refrigeration/process equipment; distinct from the giant Fry's/Kroger DC to the north on the same 500 S 99th Ave campus.",
+    "truckGate": "Shared private fenced campus with a single controlled access off the north (Lower Buckeye) road; entrance throat pinches between trailer rows and the DC. No discrete gate arm resolvable from satellite; classified true on the fenced/controlled pinch-point. Street View has no interior coverage.",
+    "guardShack": "No distinct perimeter guard booth visible; the only sizable interior structure is a yard/transportation office set deep among the drop yards, not a gate booth.",
+    "remoteGs": "Inferred from gate-present + no-guard-shack; likely kiosk/app check-in.",
+    "shipRcvSeparate": "Inferred: refrigerated bottling plant typically separates raw-milk tanker intake from finished-goods truck loading on different faces; not fully resolvable.",
+    "dockDoorCount": "~16 across the dairy building faces (south-face bank with trailers backed in + west-side bays); honest overhead estimate.",
+    "dropArea": "Dairy's own finished-goods trailer area plus access to the campus-wide drop yards (hundreds of trailers campus-wide); banded to the dairy footprint.",
+    "railServed": "Multiple rail tracks run along the campus north edge (campus-level rail service).",
+    "siteAreaAcres": "8.2 ac = the tight dairy-plant operational footprint, not the full shared campus."
+  },
+  "method": "deep-audit"
+}

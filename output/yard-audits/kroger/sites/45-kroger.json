@@ -1,0 +1,77 @@
+{
+  "name": "KB Specialty Foods",
+  "type": "Deli/Meat Plant",
+  "coords": { "lat": 39.34955, "lng": -85.48590 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 39.35095, "lng": -85.48470 },
+      { "lat": 39.34930, "lng": -85.48360 },
+      { "lat": 39.34860, "lng": -85.48530 },
+      { "lat": 39.34865, "lng": -85.48660 },
+      { "lat": 39.34930, "lng": -85.48810 },
+      { "lat": 39.35070, "lng": -85.48780 },
+      { "lat": 39.35100, "lng": -85.48490 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 39.35040, "lng": -85.48445 },
+      { "lat": 39.35035, "lng": -85.48415 },
+      { "lat": 39.35010, "lng": -85.48430 },
+      { "lat": 39.35015, "lng": -85.48460 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 39.34935, "lng": -85.48560 },
+        { "lat": 39.34920, "lng": -85.48405 },
+        { "lat": 39.34870, "lng": -85.48420 },
+        { "lat": 39.34885, "lng": -85.48575 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 39.34955, "lng": -85.48640 },
+        { "lat": 39.34950, "lng": -85.48460 },
+        { "lat": 39.34925, "lng": -85.48462 },
+        { "lat": 39.34930, "lng": -85.48642 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 238, "pano": "39.35031753686683,-85.4843307984569", "hasCoverage": true },
+      "truckGate": { "heading": 248, "pano": "39.35031753686683,-85.4843307984569", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 32,
+    "trailersVisible": 22,
+    "trailerParkingCapacity": 35,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 18.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.34955,-85.48590,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Single fenced truck entrance off N Broadway at NE corner; chain-link gate panel in barbed-wire perimeter fence, posted rules/sign-in board, no barrier arm but a sliding gate in the line.",
+    "guardShack": "No staffed booth structure beside the entrance lane in any Street View frame (Apr 2026 panos); only signage. Hence remoteGs true.",
+    "remoteGs": "Gated and fully fenced but unstaffed at the gate = remote/self check-in via posted instructions / call.",
+    "dockDoorCount": "Long south-facing dock bank with trailers backed in on both sides of a center extension; ~32 doors estimated from z20 imagery, banded 25-50.",
+    "dropYard": "Dedicated trailer drop lot on the south apron, ~9-row of drop trailers plus XTRA lease trailers along the fence.",
+    "urbanRural": "Edge-of-town Greensburg, residential/farm fabric to the south and east, open fields north/west - Rural per rubric.",
+    "postGateStaging": "Large paved yard inside the fence between gate and docks easily holds a queue.",
+    "shipRcvSeparate": "Docks appear to run from one continuous south-face cluster; no clearly separate second dock bank confirmed."
+  },
+  "method": "deep-audit"
+}

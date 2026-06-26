@@ -1,0 +1,94 @@
+{
+  "name": "Tamarack Farms Dairy",
+  "type": "Dairy Plant",
+  "coords": { "lat": 40.03905, "lng": -82.46075 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 40.04095, "lng": -82.46245 },
+      { "lat": 40.04100, "lng": -82.46010 },
+      { "lat": 40.03995, "lng": -82.45970 },
+      { "lat": 40.03840, "lng": -82.45995 },
+      { "lat": 40.03825, "lng": -82.46175 },
+      { "lat": 40.03960, "lng": -82.46255 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 40.04030, "lng": -82.46035 },
+      { "lat": 40.04030, "lng": -82.45995 },
+      { "lat": 40.04005, "lng": -82.45995 },
+      { "lat": 40.04005, "lng": -82.46035 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 40.04035, "lng": -82.46155 },
+        { "lat": 40.04035, "lng": -82.46035 },
+        { "lat": 40.03970, "lng": -82.46035 },
+        { "lat": 40.03970, "lng": -82.46155 }
+      ] },
+      { "ring": [
+        { "lat": 40.03960, "lng": -82.46010 },
+        { "lat": 40.03960, "lng": -82.45985 },
+        { "lat": 40.03850, "lng": -82.45995 },
+        { "lat": 40.03850, "lng": -82.46020 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 40.03960, "lng": -82.46035 },
+        { "lat": 40.03960, "lng": -82.46010 },
+        { "lat": 40.03850, "lng": -82.46020 },
+        { "lat": 40.03850, "lng": -82.46045 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 220, "pano": "SCGhH3LRjHv-g83pVQNQAQ", "hasCoverage": true },
+      "truckGate": { "heading": 139, "pano": "SCGhH3LRjHv-g83pVQNQAQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 28,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 31.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.03905,-82.46075,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "siteAreaAcres", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Continuous chain-link perimeter fence confirmed on N and E sides in Street View (2019); single entrance drive off the internal industrial-park street with a checkpoint pinch-point.",
+    "guardShack": "Small ~1-vehicle-footprint rectangular booth sitting in the entrance-drive median (z21 sat @ ~40.0402,-82.4601), driveway splits around it = classic guarded gate.",
+    "dropArea": "Long rows of parked drop trailers on the N and E sides of the plant; 70+ trailers visible, capacity 100+.",
+    "dockDoors": "Dock doors along the east face of the plant with trailers backed in; band 25-50, count ~28 is an overhead estimate.",
+    "railServed": "Rail line runs E-W just south of the property along the boundary but no spur curves into the building; plant is truck-served.",
+    "urbanRural": "Edge-of-town industrial park in west Newark OH (small city, farmland/ball-fields adjacent to S and E); judged Rural.",
+    "siteAreaAcres": "Web reports a 20-acre dairy footprint; the fenced parcel incl. yards/parking measures ~31 acres from the traced perimeter."
+  },
+  "method": "deep-audit"
+}

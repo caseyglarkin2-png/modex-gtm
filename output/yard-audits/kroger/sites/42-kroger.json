@@ -1,0 +1,87 @@
+{
+  "name": "La Habra Bakery",
+  "type": "Bakery Plant",
+  "coords": { "lat": 33.92210, "lng": -117.93905 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 33.92340, "lng": -117.94055 },
+      { "lat": 33.92340, "lng": -117.93745 },
+      { "lat": 33.92080, "lng": -117.93760 },
+      { "lat": 33.92080, "lng": -117.94050 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 33.92118, "lng": -117.94055 },
+      { "lat": 33.92118, "lng": -117.93980 },
+      { "lat": 33.92095, "lng": -117.93980 },
+      { "lat": 33.92095, "lng": -117.94055 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 33.92330, "lng": -117.94050 },
+        { "lat": 33.92330, "lng": -117.94015 },
+        { "lat": 33.92110, "lng": -117.94015 },
+        { "lat": 33.92110, "lng": -117.94050 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 33.92128, "lng": -117.94010 },
+        { "lat": 33.92128, "lng": -117.93770 },
+        { "lat": 33.92103, "lng": -117.93772 },
+        { "lat": 33.92103, "lng": -117.94010 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 180, "pano": "D7pCecOJteOxzhLRIkeloQ", "hasCoverage": true },
+      "truckGate": { "heading": 200, "pano": "D7pCecOJteOxzhLRIkeloQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30,
+    "trailersVisible": 28,
+    "trailerParkingCapacity": 50,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 19.8,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.92210,-117.93905,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Fenced secured plant superblock; chain-link perimeter confirmed in Street View on the north drive. Continuous internal perimeter drive with no public-road open driveway visible; access is via a private gated connection. A controlled gate is inferred from the fenced, solar-roofed Kroger production plant context, but no gate arm was directly resolved in imagery (Street View cannot reach the truck entrance).",
+    "guardShack": "No guard booth resolvable in satellite or in the reachable Street View panos. Set false; flagged uncertain.",
+    "remoteGs": "Set true (gate inferred, no booth confirmed) implying kiosk/app check-in; low-confidence pairing with truckGate.",
+    "dockDoorCount": "Estimated from south-face apron and east-end trailer banks; ~30 doors across the south and east faces, band 25-50.",
+    "dropYard": "Row of drop trailers along the west internal road plus trailers in the south yard; dedicated trailer storage present.",
+    "fastLaneOpportunity": "Wide south truck apron and a large undeveloped west lot give ample paved/expandable width for a bypass lane.",
+    "railServed": "A single N-S rail track runs along the east property edge but no spur diverges into the plant; set false.",
+    "urbanRural": "Dense La Habra industrial fabric surrounded by warehouses and residential; Urban."
+  },
+  "method": "deep-audit"
+}

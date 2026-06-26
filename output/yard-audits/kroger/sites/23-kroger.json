@@ -1,0 +1,93 @@
+{
+  "name": "Crossroad Farms Dairy",
+  "type": "Dairy Plant",
+  "coords": { "lat": 39.76560, "lng": -86.04180 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 39.76773, "lng": -86.04075 },
+      { "lat": 39.76360, "lng": -86.04085 },
+      { "lat": 39.76348, "lng": -86.04195 },
+      { "lat": 39.76430, "lng": -86.04330 },
+      { "lat": 39.76600, "lng": -86.04395 },
+      { "lat": 39.76720, "lng": -86.04340 },
+      { "lat": 39.76770, "lng": -86.04230 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 39.76470, "lng": -86.04155 },
+      { "lat": 39.76470, "lng": -86.04110 },
+      { "lat": 39.76425, "lng": -86.04110 },
+      { "lat": 39.76425, "lng": -86.04155 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 39.76773, "lng": -86.04225 },
+        { "lat": 39.76760, "lng": -86.04330 },
+        { "lat": 39.76700, "lng": -86.04345 },
+        { "lat": 39.76690, "lng": -86.04235 }
+      ] },
+      { "ring": [
+        { "lat": 39.76660, "lng": -86.04395 },
+        { "lat": 39.76470, "lng": -86.04420 },
+        { "lat": 39.76430, "lng": -86.04345 },
+        { "lat": 39.76630, "lng": -86.04330 }
+      ] },
+      { "ring": [
+        { "lat": 39.76430, "lng": -86.04300 },
+        { "lat": 39.76375, "lng": -86.04255 },
+        { "lat": 39.76360, "lng": -86.04205 },
+        { "lat": 39.76420, "lng": -86.04240 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 39.76665, "lng": -86.04265 },
+        { "lat": 39.76590, "lng": -86.04275 },
+        { "lat": 39.76585, "lng": -86.04225 },
+        { "lat": 39.76660, "lng": -86.04215 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 39.76470, "lng": -86.04205 },
+      { "lat": 39.76405, "lng": -86.04210 },
+      { "lat": 39.76395, "lng": -86.04140 },
+      { "lat": 39.76460, "lng": -86.04135 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 270, "pano": "pC6JvY9kKCKrq9yGmjKPvA", "hasCoverage": true },
+      "truckGate": { "heading": 268, "pano": "pC6JvY9kKCKrq9yGmjKPvA", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 28,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 110,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 33.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.76560,-86.04180,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["truckGate", "guardShack", "dockDoorCount"],
+  "fieldNotes": {
+    "truckGate": "Site is chain-link fenced along S Shortridge Rd, but the single vehicle entrance (cow statue + Crossroad Farms monument sign) is an open driveway gap with no barrier arm, sliding gate, or checkpoint pinch-point visible in 2022/2024 Street View. Trucks and cars share this open entrance, then route to the W/SW/S docks. Classified no-gate.",
+    "guardShack": "No staffed booth at the entrance. The brick structure beside the drive is the monument sign, not a guard booth.",
+    "fastLaneOpportunity": "Very wide entrance apron and deep internal yard; ample paved width to add a dedicated truck bypass/express lane.",
+    "dropArea": "Long rows of unhitched reefer trailers wrap the N, NW and SW edges along the I-465 ramp; large dedicated drop-yard, easily 50+ stalls.",
+    "dockDoorCount": "Estimated ~28 across the west building face, an interior dock court, and a detached cooler/dock building; partial occlusion by backed-in trailers and roof structures.",
+    "railServed": "A rail line runs N-S just inside the E boundary along Shortridge Rd, but no active spur/dock serving the building is visible (cars and a road occupy the area between rail and building); treated as not rail-served.",
+    "urbanRural": "Inside the Indianapolis metro: dense residential subdivision immediately E across Shortridge, other industrial/DC buildings adjacent N and S, bounded by I-465 to the W."
+  },
+  "method": "deep-audit"
+}

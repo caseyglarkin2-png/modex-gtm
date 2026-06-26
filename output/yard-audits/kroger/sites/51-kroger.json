@@ -1,0 +1,92 @@
+{
+  "name": "State Avenue Plant",
+  "type": "Grocery Plant",
+  "coords": { "lat": 39.10900, "lng": -84.55050 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 39.11010, "lng": -84.55205 },
+      { "lat": 39.11035, "lng": -84.55010 },
+      { "lat": 39.11000, "lng": -84.54900 },
+      { "lat": 39.10800, "lng": -84.54870 },
+      { "lat": 39.10755, "lng": -84.54945 },
+      { "lat": 39.10780, "lng": -84.55090 },
+      { "lat": 39.10830, "lng": -84.55185 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 39.10872, "lng": -84.55160 },
+      { "lat": 39.10878, "lng": -84.55118 },
+      { "lat": 39.10852, "lng": -84.55112 },
+      { "lat": 39.10846, "lng": -84.55154 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 39.10985, "lng": -84.55020 },
+        { "lat": 39.10995, "lng": -84.54985 },
+        { "lat": 39.10815, "lng": -84.54935 },
+        { "lat": 39.10805, "lng": -84.54970 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 39.10980, "lng": -84.55060 },
+        { "lat": 39.10988, "lng": -84.55030 },
+        { "lat": 39.10812, "lng": -84.54982 },
+        { "lat": 39.10804, "lng": -84.55012 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 273, "pano": "qr0vOPo9uxus1aZBjnf2Zg", "hasCoverage": true },
+      "truckGate": { "heading": 30, "pano": "rDyZ6MJsoWbAtfyRjfSPCA", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35,
+    "trailersVisible": 22,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 1,
+    "buildingCount": 6,
+    "siteAreaAcres": 17.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.10900,-84.55050,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": false,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["shipRcvSeparate", "dockDoorCount", "multiStep"],
+  "fieldNotes": {
+    "truckGate": "Open urban plant integrated into the city street grid. Street View at the main entrance drive (pano rDyZ6MJsoWbAtfyRjfSPCA, 2022-07) and along Depot St shows open driveways into the complex with no barrier arm, sliding gate, or checkpoint pinch-point. No fence line controlling the truck approach.",
+    "guardShack": "No staffed booth at any entrance. Entry drives open straight into employee parking / internal yard.",
+    "drivewayLong": "Central internal drive runs the length of the complex NW-SE and can stack several trucks before the docks.",
+    "backupSensitive": "Entrances open directly off narrow public urban streets (Depot St) with on-street parking and tight geometry; a truck queue would spill onto the street.",
+    "dockDoors": "Counted across multiple building faces and trailers backed in; ~30-40 doors total, banded 25-50 (estimate).",
+    "dropArea": "Central drive holds a row of ~10-12 angled drop trailers without tractors; banded 10-25.",
+    "multipleFacilities": "Campus of ~6 distinct connected/adjacent large buildings (manufacturing, warehouse, office) plus a separate white warehouse to the south.",
+    "dropYard": "Dedicated row of parked drop trailers along the central internal drive.",
+    "railServed": "No active rail spur entering the property in current imagery (old rail lines run nearby in the corridor but do not serve docks).",
+    "shipRcvSeparate": "Multiple dock banks on different faces, but cannot confirm a deliberate ship/receive split from overhead; left false, flagged uncertain."
+  },
+  "method": "deep-audit"
+}

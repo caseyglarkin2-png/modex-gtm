@@ -1,0 +1,71 @@
+{
+  "name": "Home Chef Manufacturing & Distribution Center Baltimore MD",
+  "type": "Home Chef Facility",
+  "coords": { "lat": 39.230300, "lng": -76.577600 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 39.23140, "lng": -76.57705 },
+      { "lat": 39.23118, "lng": -76.57648 },
+      { "lat": 39.22938, "lng": -76.57660 },
+      { "lat": 39.22915, "lng": -76.57850 },
+      { "lat": 39.23035, "lng": -76.57862 },
+      { "lat": 39.23115, "lng": -76.57858 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 39.23128, "lng": -76.57710 },
+      { "lat": 39.23120, "lng": -76.57690 },
+      { "lat": 39.23092, "lng": -76.57700 },
+      { "lat": 39.23100, "lng": -76.57720 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 39.23078, "lng": -76.57838 },
+        { "lat": 39.23070, "lng": -76.57820 },
+        { "lat": 39.22952, "lng": -76.57772 },
+        { "lat": 39.22960, "lng": -76.57790 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 39.23082, "lng": -76.57808 },
+        { "lat": 39.23074, "lng": -76.57790 },
+        { "lat": 39.22958, "lng": -76.57742 },
+        { "lat": 39.22966, "lng": -76.57760 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 203, "pano": "", "hasCoverage": true },
+      "truckGate": { "heading": 201, "pano": "", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35, "trailersVisible": 14, "trailerParkingCapacity": 45,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 9.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.2303,-76.5776,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Open campus-style entrance off E Patapsco Ave; Street View (2024-06) shows no barrier arm, swing/sliding gate, or pinch-point across the truck drive. Shared Harbor Logistics Center park, no perimeter fence.",
+    "guardShack": "No staffed booth at any entrance in Street View or satellite.",
+    "fastLaneOpportunity": "Wide open paved aprons and an uncontrolled multi-lane park drive leave ample room to add a controlled bypass lane.",
+    "dropArea": "Long marked trailer-drop row (~30 stalls) along the SW (river) perimeter drive, plus apron parking; counted from z19 imagery.",
+    "dockDoorCount": "~35 doors along the building's SW face with trailers backed in; overhead estimate.",
+    "buildingCount": "Home Chef leases one of three matching warehouses in the Harbor Logistics Center; only the Home Chef building (center/west) is geofenced here.",
+    "railServed": "CSX/rail lines run west across the Patapsco River; no spur enters this property."
+  },
+  "method": "deep-audit"
+}

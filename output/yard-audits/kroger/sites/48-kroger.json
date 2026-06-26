@@ -1,0 +1,72 @@
+{
+  "name": "Delight Products",
+  "type": "Grocery Plant",
+  "coords": { "lat": 36.49850, "lng": -86.86720 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 36.50090, "lng": -86.86930 },
+      { "lat": 36.50140, "lng": -86.86700 },
+      { "lat": 36.50080, "lng": -86.86530 },
+      { "lat": 36.49830, "lng": -86.86420 },
+      { "lat": 36.49625, "lng": -86.86470 },
+      { "lat": 36.49590, "lng": -86.86790 },
+      { "lat": 36.49680, "lng": -86.86950 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 36.49745, "lng": -86.86560 },
+      { "lat": 36.49740, "lng": -86.86505 },
+      { "lat": 36.49700, "lng": -86.86510 },
+      { "lat": 36.49705, "lng": -86.86565 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 36.49705, "lng": -86.86695 },
+        { "lat": 36.49665, "lng": -86.86560 },
+        { "lat": 36.49620, "lng": -86.86585 },
+        { "lat": 36.49660, "lng": -86.86720 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 36.49775, "lng": -86.86855 },
+        { "lat": 36.49735, "lng": -86.86660 },
+        { "lat": 36.49715, "lng": -86.86668 },
+        { "lat": 36.49755, "lng": -86.86863 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 255, "pano": "SIqenIah5DPCQBoR37GNCg", "hasCoverage": true },
+      "truckGate": { "heading": 270, "pano": "Wq3GLGCgyWsGcfLJxb0Jmg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55, "trailersVisible": 60, "trailerParkingCapacity": 90,
+    "truckGateCount": 1, "buildingCount": 1, "siteAreaAcres": 58.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.49850,-86.86720,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "shipRcvSeparate"],
+  "fieldNotes": {
+    "site": "Kroger Springfield manufacturing campus; Delight Products is the grocery/snack-food production division at 1200 Industrial Dr. Audited the dominant secured plant/DC building (the fully perimeter-fenced south-east structure with the south dock band and SE drop yard).",
+    "truckGate": "Tall black ornamental perimeter fence wraps the whole property (confirmed in multiple Street View frames along the south/east roads). A sliding gate in the fence controls the access driveway at the SE.",
+    "guardShack": "No manned guard booth visible at the entrance; the structure that looked like a gatehouse in satellite resolved to a tall light pole + shadow. Controlled gate but no booth, so remoteGs=true. Low-confidence call.",
+    "dockDoors": "Long continuous dock band on the south building face with trailers backed in; ~1M sq ft Kroger DC/plant, banded 50+ from building scale. Exact count not legible from overhead, hence band.",
+    "dropArea": "Rows of drop trailers in the SE yard inside the fence; 25-50 visible band.",
+    "urbanRural": "Edge-of-town Springfield TN with adjacent residential but open farmland to the east; judged Rural.",
+    "railServed": "A rail line runs along the SW property edge but no spur was seen entering the secured plant property; railServed=false."
+  },
+  "method": "deep-audit"
+}

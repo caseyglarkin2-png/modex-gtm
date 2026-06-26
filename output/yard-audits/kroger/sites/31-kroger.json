@@ -1,0 +1,88 @@
+{
+  "name": "Kroger Layton Dairy",
+  "type": "Dairy Plant",
+  "coords": { "lat": 41.06410, "lng": -111.98350 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 41.06495, "lng": -111.98640 },
+      { "lat": 41.06480, "lng": -111.98150 },
+      { "lat": 41.06370, "lng": -111.98115 },
+      { "lat": 41.06300, "lng": -111.98225 },
+      { "lat": 41.06305, "lng": -111.98640 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 41.06545, "lng": -111.98555 },
+      { "lat": 41.06545, "lng": -111.98495 },
+      { "lat": 41.06475, "lng": -111.98498 },
+      { "lat": 41.06475, "lng": -111.98558 }
+    ] },
+    "dropYards": [],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 41.06372, "lng": -111.98215 },
+        { "lat": 41.06370, "lng": -111.98120 },
+        { "lat": 41.06335, "lng": -111.98122 },
+        { "lat": 41.06337, "lng": -111.98217 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 104, "pano": "M7U59CyNhNNICpz2su66pA", "hasCoverage": true },
+      "truckGate": { "heading": 90, "pano": "M7U59CyNhNNICpz2su66pA", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 30,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 21.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.06410,-111.98350,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "scale", "exitLanes", "multiStep"],
+  "fieldNotes": {
+    "siteIdentification": "Confirmed the Layton Dairy as the central/west processing block on the shared 500 N Sugar St Kroger campus, distinct from the Smith's solar-roofed Distribution Center to the north (~41.066) and the grey-roofed bakery/cold-storage warehouse to the SW (~41.0628). The dairy is identified by its bulk milk/cream silo cluster and process-tank farm (round vertical tanks visible at z20 near 41.0642,-111.9831), heavy roof process piping, and the 'Smith's' red-logo office front on Sugar Street (Street View pano M7U59CyNhNNICpz2su66pA). Dairy Foods directory lists 'Kroger Layton Dairy' at this address.",
+    "truckGate": "Controlled access from N Sugar Street (west) into a fenced campus. An internal staffed checkpoint booth sits mid-yard (~41.0651,-111.9853, z20) with yellow channelized lane striping funneling tractors single-file past it between the office/parking apron and the inner dock/tanker yard. Perimeter chain-link fencing runs the full Sugar Street frontage (Street View 2022-11).",
+    "guardShack": "Small free-standing booth (~1-vehicle footprint) in the truck lane mid-yard with channelizing lane markings and a tractor stopped at it in z20 imagery; functions as the manned checkpoint for the inner yard.",
+    "postGateStaging": "Deep paved yard inside the checkpoint holds queued tractors and tankers before the dock/process bays.",
+    "drivewayLong": "Long approach from Sugar Street across the parking apron plus deep internal yard easily holds 3+ trucks before the checkpoint and docks.",
+    "entryExitTogether": "Trucks enter and exit through the same west Sugar Street access and the single internal checkpoint.",
+    "fastLaneOpportunity": "Wide paved apron and yard width at the checkpoint with unused room to add a bypass/express lane.",
+    "dockDoors": "Dock/tanker bays on the south and east faces of the dairy process block plus a dedicated tanker/loadout courtyard; estimated ~22 doors total (band 10-25). Low-confidence exact count - much of the process loadout is canopy-covered tanker bays rather than standard dock doors.",
+    "dropArea": "Trailers parked in the dairy's south/east yard rows and reefers staged along Sugar Street (Shaffer reefer observed curbside); 10-25 band for the dairy's own allocation within the much larger shared campus drop yards.",
+    "dropYard": "Extensive trailer storage exists on the shared campus (hundreds of trailers in center/east lots); the dairy uses a portion for reefer/empty staging.",
+    "multipleFacilities": "Part of a multi-building Kroger campus (Smith's DC + Layton Dairy + Layton Bakery / cold storage) sharing one fenced property and yard.",
+    "urbanRural": "Inside Layton, UT urban/suburban industrial fabric with residential subdivisions directly abutting the south property line; classified Urban.",
+    "scale": "No clear truck scale/weigh pad isolated for the dairy in available imagery; left false, flagged uncertain.",
+    "railServed": "No rail spur enters the dairy or campus buildings.",
+    "siteAreaAcres": "~21 acres for the dairy plant building plus its dedicated west office frontage and south/east operating yard; the full shared campus parcel is far larger."
+  },
+  "method": "deep-audit"
+}

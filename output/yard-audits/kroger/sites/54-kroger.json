@@ -1,0 +1,92 @@
+{
+  "name": "Harris Teeter Distribution Center Indian Trail NC",
+  "type": "Distribution Center",
+  "coords": { "lat": 35.0640, "lng": -80.6470 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 35.0662, "lng": -80.6527 },
+      { "lat": 35.0668, "lng": -80.6440 },
+      { "lat": 35.0660, "lng": -80.6432 },
+      { "lat": 35.0622, "lng": -80.6432 },
+      { "lat": 35.0608, "lng": -80.6500 },
+      { "lat": 35.0625, "lng": -80.6527 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 35.06520, "lng": -80.64470 },
+      { "lat": 35.06510, "lng": -80.64420 },
+      { "lat": 35.06455, "lng": -80.64435 },
+      { "lat": 35.06465, "lng": -80.64485 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 35.06560, "lng": -80.64530 },
+        { "lat": 35.06545, "lng": -80.64360 },
+        { "lat": 35.06405, "lng": -80.64385 },
+        { "lat": 35.06420, "lng": -80.64555 }
+      ] },
+      { "ring": [
+        { "lat": 35.06430, "lng": -80.64470 },
+        { "lat": 35.06405, "lng": -80.64360 },
+        { "lat": 35.06320, "lng": -80.64375 },
+        { "lat": 35.06345, "lng": -80.64485 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 35.06490, "lng": -80.64760 },
+        { "lat": 35.06430, "lng": -80.64580 },
+        { "lat": 35.06400, "lng": -80.64605 },
+        { "lat": 35.06460, "lng": -80.64785 }
+      ] },
+      { "ring": [
+        { "lat": 35.06255, "lng": -80.65085 },
+        { "lat": 35.06170, "lng": -80.64830 },
+        { "lat": 35.06140, "lng": -80.64855 },
+        { "lat": 35.06225, "lng": -80.65110 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 35.06490, "lng": -80.64450 },
+      { "lat": 35.06480, "lng": -80.64385 },
+      { "lat": 35.06430, "lng": -80.64400 },
+      { "lat": 35.06440, "lng": -80.64465 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 228, "pano": "", "hasCoverage": false },
+      "truckGate": { "heading": 199, "pano": "", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90,
+    "trailersVisible": 220,
+    "trailerParkingCapacity": 300,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 117.8,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.0640,-80.6470,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "railServed"],
+  "fieldNotes": {
+    "truckGate": "Street View (2018-11) at access road shows barrier arms across the lanes with a Harris Teeter truck checking in.",
+    "guardShack": "Multi-window staffed guard booth with signage sits beside the gate lanes, fenced on both sides.",
+    "fastLaneOpportunity": "Wide paved apron at the checkpoint with multiple lanes leaves room for an express bypass.",
+    "railServed": "A rail line runs along the SW property edge but no spur clearly enters the property; marked false.",
+    "multipleFacilities": "Campus of one very large DC building plus two additional dock buildings and a separate trailer lot.",
+    "dropArea": "Extensive rows of parked trailers without tractors in dedicated lots NE/E of the main building.",
+    "urbanRural": "Edge-of-town industrial off US-74 with woods/pond/farmland around the site; judged Rural per rubric tie-break."
+  },
+  "method": "deep-audit"
+}

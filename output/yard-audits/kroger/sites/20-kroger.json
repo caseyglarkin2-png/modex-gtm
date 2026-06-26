@@ -1,0 +1,94 @@
+{
+  "name": "Heritage Farms Dairy",
+  "type": "Dairy Plant",
+  "coords": { "lat": 35.83340, "lng": -86.41310 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 35.83472, "lng": -86.41100 },
+      { "lat": 35.83270, "lng": -86.41168 },
+      { "lat": 35.83205, "lng": -86.41360 },
+      { "lat": 35.83210, "lng": -86.41452 },
+      { "lat": 35.83420, "lng": -86.41468 },
+      { "lat": 35.83428, "lng": -86.41250 },
+      { "lat": 35.83470, "lng": -86.41170 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 35.83373, "lng": -86.41138 },
+      { "lat": 35.83358, "lng": -86.41112 },
+      { "lat": 35.83340, "lng": -86.41138 },
+      { "lat": 35.83356, "lng": -86.41166 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 35.83432, "lng": -86.41360 },
+        { "lat": 35.83405, "lng": -86.41262 },
+        { "lat": 35.83352, "lng": -86.41300 },
+        { "lat": 35.83378, "lng": -86.41398 }
+      ] },
+      { "ring": [
+        { "lat": 35.83355, "lng": -86.41440 },
+        { "lat": 35.83330, "lng": -86.41355 },
+        { "lat": 35.83278, "lng": -86.41388 },
+        { "lat": 35.83302, "lng": -86.41470 }
+      ] },
+      { "ring": [
+        { "lat": 35.83278, "lng": -86.41330 },
+        { "lat": 35.83265, "lng": -86.41250 },
+        { "lat": 35.83232, "lng": -86.41268 },
+        { "lat": 35.83245, "lng": -86.41348 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 35.83300, "lng": -86.41335 },
+        { "lat": 35.83292, "lng": -86.41250 },
+        { "lat": 35.83278, "lng": -86.41254 },
+        { "lat": 35.83286, "lng": -86.41339 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 270, "pano": "qoLxZOYA2rYLsJYzemb2Tw", "hasCoverage": true },
+      "truckGate": { "heading": 300, "pano": "qoLxZOYA2rYLsJYzemb2Tw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 22,
+    "trailersVisible": 95,
+    "trailerParkingCapacity": 130,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 16.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.83340,-86.41310,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "entryLanes", "exitLanes", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Head-on Street View (pano qoLxZOYA2rYLsJYzemb2Tw, 2026-03) shows a chain-link sliding gate across a wide truck driveway off New Salem Hwy, with cones marking lanes and HFD trailers staged just inside.",
+    "guardShack": "Small white windowed booth set beside the gate driveway (visible in SV heading 300/320 and z20 satellite) = staffed guard shack.",
+    "remoteGs": "False because a physical guard booth is present.",
+    "postGateStaging": "Wide paved apron inside the gate holds staged trailers before they move to the docks.",
+    "drivewayLong": "Deep paved gate apron plus internal road can hold a 3+ truck queue.",
+    "backupSensitive": "Gate sits directly on New Salem Hwy, a busy 4-lane divided highway near a signalized intersection; a queue would back toward the road.",
+    "fastLaneOpportunity": "Wide gate apron with unused paved width beside the booth offers room for an express/bypass lane.",
+    "dockDoors": "Doors counted along the south building face under backed-in trailers; ~22 estimated, banded 10-25 (overhead count approximate).",
+    "dropArea": "Large dedicated trailer drop yard in angled rows on the N, W and S sides; 50+ stalls.",
+    "urbanRural": "Edge of Murfreesboro, TN inside the metro's developed commercial fabric (storage facilities, retail, residential adjacent) = Urban.",
+    "railServed": "No rail spur enters the property.",
+    "buildingCount": "Main plant + wastewater/treatment building + pump/utility structures at the SW ponds.",
+    "shipRcvSeparate": "Docks appear concentrated on the south face; no clearly separate second ship/rcv bank confirmed."
+  },
+  "method": "deep-audit"
+}

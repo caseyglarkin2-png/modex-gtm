@@ -1,0 +1,74 @@
+{
+  "name": "Indianapolis Bakery",
+  "type": "Bakery Plant",
+  "coords": { "lat": 39.759711, "lng": -86.048578 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 39.761057, "lng": -86.049882 },
+      { "lat": 39.761110, "lng": -86.047273 },
+      { "lat": 39.759869, "lng": -86.047136 },
+      { "lat": 39.758603, "lng": -86.047719 },
+      { "lat": 39.758497, "lng": -86.049436 },
+      { "lat": 39.759500, "lng": -86.049917 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 39.761057, "lng": -86.049814 },
+      { "lat": 39.761084, "lng": -86.049539 },
+      { "lat": 39.760740, "lng": -86.049470 },
+      { "lat": 39.760714, "lng": -86.049745 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 39.761004, "lng": -86.048063 },
+        { "lat": 39.761057, "lng": -86.047307 },
+        { "lat": 39.759817, "lng": -86.047273 },
+        { "lat": 39.759764, "lng": -86.047891 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 39.760740, "lng": -86.049161 },
+        { "lat": 39.760846, "lng": -86.048063 },
+        { "lat": 39.760556, "lng": -86.047960 },
+        { "lat": 39.760450, "lng": -86.049058 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 187, "pano": "VAyw0Ewu6u8_VSYejnJ6vg", "hasCoverage": true },
+      "truckGate": { "heading": 108, "pano": "cOQki6uOrb7TrWEw-mYalA", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 35,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 15.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.759711,-86.048578,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "dockDoorCount"],
+  "fieldNotes": {
+    "guardShack": "Small peaked-roof booth (single-occupant footprint, windowed) sits beside the gated entrance drive ~300m back from English Ave; consistent with a manned check-in/guard booth at a 24/7 food plant. Borderline kiosk size, but treated as guardShack.",
+    "truckGate": "Sliding chain-link gate across the single entrance drive; fenced both sides; 'Private Property No Trespassing' signage. Confirmed in Street View (2024-05).",
+    "dropArea": "Large drop yard NE/E of the plant packed with 60-80+ trailers in long angled rows; yard tractors actively spotting.",
+    "fastLaneOpportunity": "Entrance drive forks internally with a wide apron, leaving paved room for an express/bypass lane.",
+    "dockDoorCount": "Counted from overhead + Street View dock face along the NE wall; honest estimate ~35, banded 25-50.",
+    "siteAreaAcres": "Derived from the bakery parcel perimeter (building + own drop yard); shares yard pavement with an adjacent separate Kroger DC to the SE, which is excluded."
+  },
+  "method": "deep-audit"
+}

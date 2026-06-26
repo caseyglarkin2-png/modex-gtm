@@ -1,0 +1,91 @@
+{
+  "name": "Kroger Cincinnati Fresh Distribution Center Blue Ash OH",
+  "type": "Distribution Center",
+  "coords": { "lat": 39.26280, "lng": -84.36280 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 39.26155, "lng": -84.36118 },
+      { "lat": 39.26392, "lng": -84.36095 },
+      { "lat": 39.26418, "lng": -84.36430 },
+      { "lat": 39.26400, "lng": -84.36560 },
+      { "lat": 39.26300, "lng": -84.36600 },
+      { "lat": 39.26210, "lng": -84.36540 },
+      { "lat": 39.26165, "lng": -84.36400 },
+      { "lat": 39.26150, "lng": -84.36240 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 39.26198, "lng": -84.36205 },
+      { "lat": 39.26198, "lng": -84.36158 },
+      { "lat": 39.26223, "lng": -84.36158 },
+      { "lat": 39.26223, "lng": -84.36205 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 39.26395, "lng": -84.36470 },
+        { "lat": 39.26375, "lng": -84.36600 },
+        { "lat": 39.26255, "lng": -84.36560 },
+        { "lat": 39.26270, "lng": -84.36430 }
+      ] },
+      { "ring": [
+        { "lat": 39.26260, "lng": -84.36420 },
+        { "lat": 39.26255, "lng": -84.36300 },
+        { "lat": 39.26190, "lng": -84.36300 },
+        { "lat": 39.26195, "lng": -84.36420 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 39.26305, "lng": -84.36110 },
+        { "lat": 39.26308, "lng": -84.36300 },
+        { "lat": 39.26280, "lng": -84.36300 },
+        { "lat": 39.26278, "lng": -84.36110 }
+      ] },
+      { "ring": [
+        { "lat": 39.26345, "lng": -84.36400 },
+        { "lat": 39.26330, "lng": -84.36470 },
+        { "lat": 39.26305, "lng": -84.36460 },
+        { "lat": 39.26320, "lng": -84.36390 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 268, "pano": "--i8aMwVDVr7ZEa_s5NmSw", "hasCoverage": true },
+      "truckGate": { "heading": 240, "pano": "6iWfV320u_4n1ubQZs_WWg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 60,
+    "trailersVisible": 95,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 27.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.26280,-84.36280,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale"],
+  "fieldNotes": {
+    "truckGate": "Chain-link perimeter fence rings the property; gated sliding-gate entrance off Carver Rd with posted sign 'VEHICLE ENTRANCE ONLY / TRUCKS ENTER OFF CREEK RD'. Trucks routed to a separate Creek Rd gate.",
+    "guardShack": "No clearly identifiable staffed guard booth at either gate in available imagery; a small structure near the SW yard edge could be a gatehouse but is not confirmed - hence remoteGs (kiosk/call-box) assumed.",
+    "entryExitSeparate": "Posted signage explicitly separates passenger-vehicle entrance (Carver Rd) from the truck entrance (Creek Rd).",
+    "dockDoors": "Long continuous south-face dock band (~40 doors with trailers backed in) plus an angled NW dock bank and an east dock cluster - well over 50 total.",
+    "dropArea": "Large dedicated west drop yard with ~50-60 trailers in herringbone rows beside the retention pond, plus marked trailer stalls in the central yard - 50+ band.",
+    "shipRcvSeparate": "Multiple distinct dock banks on different building faces (south, NW-angled, east).",
+    "fastLaneOpportunity": "Very wide central paved yard apron with room to add an express/bypass lane.",
+    "railServed": "No rail spur visible entering the property.",
+    "siteAreaAcres": "Estimated from perimeter ring; ~27-28 acres."
+  },
+  "method": "deep-audit"
+}

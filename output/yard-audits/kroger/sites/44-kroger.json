@@ -1,0 +1,87 @@
+{
+  "name": "Country Oven Bakery",
+  "type": "Bakery Plant",
+  "coords": { "lat": 36.9485, "lng": -86.4905 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 36.94995, "lng": -86.49185 },
+      { "lat": 36.94990, "lng": -86.48975 },
+      { "lat": 36.94830, "lng": -86.48895 },
+      { "lat": 36.94695, "lng": -86.48930 },
+      { "lat": 36.94675, "lng": -86.49055 },
+      { "lat": 36.94790, "lng": -86.49185 },
+      { "lat": 36.94895, "lng": -86.49225 }
+    ] },
+    "truckGate": null,
+    "dropYards": [
+      { "ring": [
+        { "lat": 36.94735, "lng": -86.48995 },
+        { "lat": 36.94700, "lng": -86.48905 },
+        { "lat": 36.94665, "lng": -86.48935 },
+        { "lat": 36.94700, "lng": -86.49025 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 36.94995, "lng": -86.49180 },
+        { "lat": 36.94960, "lng": -86.49095 },
+        { "lat": 36.94920, "lng": -86.49125 },
+        { "lat": 36.94955, "lng": -86.49210 }
+      ] },
+      { "ring": [
+        { "lat": 36.94815, "lng": -86.49010 },
+        { "lat": 36.94770, "lng": -86.48920 },
+        { "lat": 36.94730, "lng": -86.48955 },
+        { "lat": 36.94775, "lng": -86.49045 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 36.94820, "lng": -86.49035 },
+      { "lat": 36.94785, "lng": -86.48945 },
+      { "lat": 36.94735, "lng": -86.48985 },
+      { "lat": 36.94770, "lng": -86.49075 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 133, "pano": "cKQtFg_0PL5uO-G5NL8fng", "hasCoverage": true },
+      "truckGate": { "heading": 133, "pano": "cKQtFg_0PL5uO-G5NL8fng", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 48,
+    "trailersVisible": 40,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 38.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.9485,-86.4905,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount", "shipRcvSeparate", "postGateStaging"],
+  "fieldNotes": {
+    "truckGate": "Plant sits ~150m back from Pioneer Dr behind an open grass field, reached by an open private loop drive. No barrier arm, sliding gate, or checkpoint pinch-point is visible at the road fork or at the operational-yard edge in satellite, and Street View (set on the public road) cannot reach the inner yard. Scored false; the set-back open campus typically runs an uncontrolled or staffed-door entry rather than a road-line gate.",
+    "guardShack": "No 1-3-vehicle booth structure visible at any entry to the yard in z20 imagery.",
+    "remoteGs": "False because there is no controlled truck gate (remoteGs requires a gate).",
+    "dockDoorCount": "Estimated ~48 across three banks: a long NW dock apron (~20 trailers backed in under canopies), an N/NE canopied dock line near the silos, and an SE dock bank facing the large maneuvering apron. Bands overlap building faces; honest estimate.",
+    "shipRcvSeparate": "Distinct dock clusters on physically separate building faces (NW bank vs SE bank) suggest separated ship/receive flows; medium confidence.",
+    "postGateStaging": "Large paved SE maneuvering/holding apron inside the property ahead of the SE dock bank acts as an internal staging area.",
+    "fastLaneOpportunity": "Wide internal drives and the deep open SE apron give ample paved width to add a bypass/express lane.",
+    "railServed": "A rail spur enters the property from the E past the silos (parallel tracks confirmed in z19/z20 NE imagery) — classic bakery flour-rail service.",
+    "dropYard": "Dedicated trailer-storage rows on the S/SE hold ~25-40 trailers, separate from active dock staging.",
+    "urbanRural": "Edge-of-town industrial park (Kentucky Transpark corridor) on the outskirts of Bowling Green, fronted by farmland and a divided highway — scored Rural per the small-town tiebreak.",
+    "siteAreaAcres": "~38 acres for the fenced operational footprint derived from the perimeter ring; the adjacent wooded NE buffer and the active $224M expansion parcel are excluded.",
+    "location": "Confirmed via web search (Kroger-owned Country Oven Bakery, 2840 Pioneer Dr, ~450 employees, $224M expansion) and satellite: the supplied coords (36.9722,-86.3870) landed in rural residential ~12km NE and were wrong; the real plant is at 36.9485,-86.4905 — a large multi-section manufacturing building with flour silos, a rail spur, employee parking, and a trailer drop yard."
+  },
+  "method": "deep-audit"
+}

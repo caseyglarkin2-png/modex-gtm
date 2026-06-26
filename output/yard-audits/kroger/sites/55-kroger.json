@@ -1,0 +1,100 @@
+{
+  "name": "Kroger Mid-Atlantic Distribution Center Salem VA",
+  "type": "Distribution Center",
+  "coords": { "lat": 37.27620, "lng": -80.12000 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 37.27835, "lng": -80.12425 },
+      { "lat": 37.27800, "lng": -80.12280 },
+      { "lat": 37.27775, "lng": -80.12235 },
+      { "lat": 37.27545, "lng": -80.11790 },
+      { "lat": 37.27640, "lng": -80.11560 },
+      { "lat": 37.27480, "lng": -80.11585 },
+      { "lat": 37.27430, "lng": -80.11900 },
+      { "lat": 37.27500, "lng": -80.12150 },
+      { "lat": 37.27600, "lng": -80.12330 },
+      { "lat": 37.27680, "lng": -80.12420 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 37.27815, "lng": -80.12390 },
+      { "lat": 37.27795, "lng": -80.12320 },
+      { "lat": 37.27735, "lng": -80.12360 },
+      { "lat": 37.27755, "lng": -80.12430 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 37.27620, "lng": -80.11625 },
+        { "lat": 37.27560, "lng": -80.11560 },
+        { "lat": 37.27475, "lng": -80.11650 },
+        { "lat": 37.27535, "lng": -80.11715 }
+      ] },
+      { "ring": [
+        { "lat": 37.27800, "lng": -80.12380 },
+        { "lat": 37.27770, "lng": -80.12260 },
+        { "lat": 37.27690, "lng": -80.12320 },
+        { "lat": 37.27720, "lng": -80.12440 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 37.27575, "lng": -80.12020 },
+        { "lat": 37.27490, "lng": -80.11860 },
+        { "lat": 37.27455, "lng": -80.11890 },
+        { "lat": 37.27540, "lng": -80.12050 }
+      ] },
+      { "ring": [
+        { "lat": 37.27510, "lng": -80.11850 },
+        { "lat": 37.27435, "lng": -80.11700 },
+        { "lat": 37.27400, "lng": -80.11730 },
+        { "lat": 37.27475, "lng": -80.11880 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 37.27800, "lng": -80.12410 },
+      { "lat": 37.27775, "lng": -80.12300 },
+      { "lat": 37.27680, "lng": -80.12345 },
+      { "lat": 37.27705, "lng": -80.12455 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 122, "pano": "elgP-CVBZiz-L8rpZBU9_Q", "hasCoverage": true },
+      "truckGate": { "heading": 146, "pano": "elgP-CVBZiz-L8rpZBU9_Q", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 260,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 78.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.27620,-80.12000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": true
+  },
+  "confidence": "high",
+  "uncertainFields": ["scale", "entryLanes", "exitLanes", "dockDoorCount"],
+  "fieldNotes": {
+    "truckGate": "Driver reviews describe checking in at a main gate then waiting for a text; satellite shows a controlled private drive off the Rt 460/W Main St signalized intersection into the campus, not an open road frontage.",
+    "guardShack": "Driver reviews explicitly describe a 'main gate' plus a 'second guard shack' for check-in/check-out; manned booth.",
+    "multiStep": "Two-stage check-in confirmed by reviews: main gate, wait-for-text, then second guard shack before docks.",
+    "preGateStaging": "Large open paved truck-staging/overnight-parking lot near the highway (Street View shows tractors+trailers queued), ahead of the inner gate; reviews note ~20-25 overnight spots, angled stalls.",
+    "fastLaneOpportunity": "Wide paved entrance apron and ample staging width to add a bypass/express lane.",
+    "railServed": "Multiple parallel rail tracks (Norfolk Southern, I-81 corridor) run hard against the building's north edge in z19-20 imagery; rail-served loading area visible.",
+    "multipleFacilities": "Campus: the main DC plus a separate fleet/trailer maintenance building to the SW and a refrigeration/canopy structure in the south yard.",
+    "shipRcvSeparate": "Dock banks on multiple building faces (long south wall + SE end) read as separate ship/rcv clusters; grocery DC handles reefer (meat/produce) and dry on distinct doors per reviews.",
+    "scale": "No truck scale clearly identifiable in imagery and no review mentions one; flagged uncertain.",
+    "dockDoorCount": "Estimated from overhead bays + trailers backed in across the long south wall and SE end; reviews reference door 100+, consistent with a 50+ band.",
+    "urbanRural": "Edge-of-town Salem VA at the foot of the Blue Ridge; open fields/creek/ball-fields adjoin the site (Street View shows mountains); broader setting is Rural."
+  },
+  "method": "deep-audit"
+}

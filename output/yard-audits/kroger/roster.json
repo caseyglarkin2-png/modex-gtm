@@ -1,7 +1,7 @@
 {
   "account": "The Kroger Co.",
-  "generatedAt": "2026-06-09",
-  "facilityCount": 18,
+  "generatedAt": "2026-06-26",
+  "facilityCount": 65,
   "facilities": [
     {
       "idx": 1,
@@ -16,7 +16,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": null
+        "movedMeters": 0
       }
     },
     {
@@ -32,7 +32,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": null
+        "movedMeters": 0
       }
     },
     {
@@ -48,7 +48,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "GEOMETRIC_CENTER",
-        "movedMeters": null
+        "movedMeters": 0
       }
     },
     {
@@ -64,7 +64,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": null
+        "movedMeters": 0
       }
     },
     {
@@ -80,7 +80,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "GEOMETRIC_CENTER",
-        "movedMeters": null
+        "movedMeters": 0
       }
     },
     {
@@ -96,7 +96,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": null
+        "movedMeters": 0
       }
     },
     {
@@ -112,7 +112,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": null
+        "movedMeters": 0
       }
     },
     {
@@ -128,7 +128,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": null
+        "movedMeters": 0
       }
     },
     {
@@ -144,7 +144,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": null
+        "movedMeters": 0
       }
     },
     {
@@ -160,7 +160,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "GEOMETRIC_CENTER",
-        "movedMeters": null
+        "movedMeters": 0
       }
     },
     {
@@ -176,7 +176,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "GEOMETRIC_CENTER",
-        "movedMeters": null
+        "movedMeters": 0
       }
     },
     {
@@ -192,7 +192,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": null
+        "movedMeters": 0
       }
     },
     {
@@ -208,7 +208,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": null
+        "movedMeters": 0
       }
     },
     {
@@ -224,7 +224,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": null
+        "movedMeters": 0
       }
     },
     {
@@ -240,7 +240,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": null
+        "movedMeters": 0
       }
     },
     {
@@ -256,7 +256,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": null
+        "movedMeters": 0
       }
     },
     {
@@ -272,7 +272,7 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
-        "movedMeters": null
+        "movedMeters": 0
       }
     },
     {
@@ -288,9 +288,761 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
+        "movedMeters": 0
+      }
+    },
+    {
+      "idx": 19,
+      "name": "Centennial Farms Dairy",
+      "city": "Atlanta",
+      "state": "GA",
+      "type": "Dairy Plant",
+      "address": "2121 Faulkner Road NE, Atlanta, GA 30324",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 33.813853,
+      "lng": -84.358477,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 2466
+      }
+    },
+    {
+      "idx": 20,
+      "name": "Heritage Farms Dairy",
+      "city": "Murfreesboro",
+      "state": "TN",
+      "type": "Dairy Plant",
+      "address": "1100 New Salem Highway, Murfreesboro, TN 37129",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 35.833358,
+      "lng": -86.413086,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1659
+      }
+    },
+    {
+      "idx": 21,
+      "name": "Winchester Farms Dairy",
+      "city": "Winchester",
+      "state": "KY",
+      "type": "Dairy Plant",
+      "address": "675 Rolling Hills Lane, Winchester, KY 40391",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 38.012217,
+      "lng": -84.180142,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 4156
+      }
+    },
+    {
+      "idx": 22,
+      "name": "Tamarack Farms Dairy",
+      "city": "Newark",
+      "state": "OH",
+      "type": "Dairy Plant",
+      "address": "1701 Tamarack Road, Newark, OH 43055",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 40.040189,
+      "lng": -82.460103,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 2805
+      }
+    },
+    {
+      "idx": 23,
+      "name": "Crossroad Farms Dairy",
+      "city": "Indianapolis",
+      "state": "IN",
+      "type": "Dairy Plant",
+      "address": "400 S Shortridge Rd, Indianapolis, IN 46219",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 39.765108,
+      "lng": -86.041373,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 878
+      }
+    },
+    {
+      "idx": 24,
+      "name": "Michigan Dairy",
+      "city": "Livonia",
+      "state": "MI",
+      "type": "Dairy Plant",
+      "address": "29601 Industrial Road, Livonia, MI 48150",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 42.379921,
+      "lng": -83.338345,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 4064
+      }
+    },
+    {
+      "idx": 25,
+      "name": "Jackson Hutchinson Dairy",
+      "city": "Hutchinson",
+      "state": "KS",
+      "type": "Dairy Plant",
+      "address": "2600 East 4th, Hutchinson, KS 67501",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 38.058791,
+      "lng": -97.883467,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 382
+      }
+    },
+    {
+      "idx": 26,
+      "name": "Westover Dairy",
+      "city": "Lynchburg",
+      "state": "VA",
+      "type": "Dairy Plant",
+      "address": "2801 Fort Avenue, Lynchburg, VA 24501",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 37.398017,
+      "lng": -79.165391,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1718
+      }
+    },
+    {
+      "idx": 27,
+      "name": "Springdale Ice Cream & Beverage Plant",
+      "city": "Cincinnati",
+      "state": "OH",
+      "type": "Beverage Plant",
+      "address": "11801 Chesterdale Road, Cincinnati, OH 45246",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 39.291439,
+      "lng": -84.450499,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1223
+      }
+    },
+    {
+      "idx": 28,
+      "name": "Vandervoort Dairy",
+      "city": "Fort Worth",
+      "state": "TX",
+      "type": "Dairy Plant",
+      "address": "900 S Main Street, Fort Worth, TX 76104",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 32.734858,
+      "lng": -97.326529,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 962
+      }
+    },
+    {
+      "idx": 29,
+      "name": "Swan Island Dairy",
+      "city": "Portland",
+      "state": "OR",
+      "type": "Dairy Plant",
+      "address": "4950 N Basin Avenue, Portland, OR 97217",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 45.558785,
+      "lng": -122.699028,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1719
+      }
+    },
+    {
+      "idx": 30,
+      "name": "Mountain View Foods",
+      "city": "Denver",
+      "state": "CO",
+      "type": "Dairy Plant",
+      "address": "10241 E 51st Ave, Denver, CO 80239",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 39.790277,
+      "lng": -104.873818,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": 986
+      }
+    },
+    {
+      "idx": 31,
+      "name": "Layton Dairy",
+      "city": "Layton",
+      "state": "UT",
+      "type": "Dairy Plant",
+      "address": "500 N Sugar Street, Layton, UT 84041",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 41.065045,
+      "lng": -111.984294,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 2301
+      }
+    },
+    {
+      "idx": 32,
+      "name": "Riverside Creamery",
+      "city": "Riverside",
+      "state": "CA",
+      "type": "Dairy Plant",
+      "address": "1500 Eastridge Ave, Riverside, CA 92507",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 33.929003,
+      "lng": -117.305168,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 8078
+      }
+    },
+    {
+      "idx": 33,
+      "name": "Compton Creamery",
+      "city": "Compton",
+      "state": "CA",
+      "type": "Dairy Plant",
+      "address": "2201 S Wilmington Ave, Compton, CA 90220",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 33.871152,
+      "lng": -118.239871,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1734
+      }
+    },
+    {
+      "idx": 34,
+      "name": "Tolleson Dairy",
+      "city": "Tolleson",
+      "state": "AZ",
+      "type": "Dairy Plant",
+      "address": "500 S 99th Avenue Bldg 3, Tolleson, AZ 85353",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 33.439553,
+      "lng": -112.277894,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1348
+      }
+    },
+    {
+      "idx": 35,
+      "name": "America's Beverage Plant",
+      "city": "Irving",
+      "state": "TX",
+      "type": "Beverage Plant",
+      "address": "1331 E Airport Freeway, Irving, TX 75062",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 32.840131,
+      "lng": -96.927737,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 2364
+      }
+    },
+    {
+      "idx": 36,
+      "name": "Pace Dairy of Indiana (Crawfordsville Cheese)",
+      "city": "Crawfordsville",
+      "state": "IN",
+      "type": "Dairy Plant",
+      "address": "800 Englewood Dr, Crawfordsville, IN 47933",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 40.051006,
+      "lng": -86.873926,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 4061
+      }
+    },
+    {
+      "idx": 37,
+      "name": "Pace Dairy of Minnesota (Rochester Cheese)",
+      "city": "Rochester",
+      "state": "MN",
+      "type": "Dairy Plant",
+      "address": "2700 Valleyhigh Drive NW, Rochester, MN 55901",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 44.052935,
+      "lng": -92.510192,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 642
+      }
+    },
+    {
+      "idx": 38,
+      "name": "Anderson Bakery",
+      "city": "Anderson",
+      "state": "SC",
+      "type": "Bakery Plant",
+      "address": "433 Sayre St, Anderson, SC 29624",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 34.489154,
+      "lng": -82.654637,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 797
+      }
+    },
+    {
+      "idx": 40,
+      "name": "Indianapolis Bakery",
+      "city": "Indianapolis",
+      "state": "IN",
+      "type": "Bakery Plant",
+      "address": "6801 English Ave, Indianapolis, IN 46219",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 39.759778,
+      "lng": -86.048928,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1100
+      }
+    },
+    {
+      "idx": 41,
+      "name": "King Soopers Bakery",
+      "city": "Denver",
+      "state": "CO",
+      "type": "Bakery Plant",
+      "address": "60 Yuma Street, Denver, CO 80223",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 39.717537,
+      "lng": -105.015006,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1650
+      }
+    },
+    {
+      "idx": 42,
+      "name": "La Habra Bakery",
+      "city": "La Habra",
+      "state": "CA",
+      "type": "Bakery Plant",
+      "address": "850 S Cypress, La Habra, CA 90631",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 33.922073,
+      "lng": -117.939159,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1355
+      }
+    },
+    {
+      "idx": 43,
+      "name": "Clackamas Bakery",
+      "city": "Clackamas",
+      "state": "OR",
+      "type": "Bakery Plant",
+      "address": "16253 SE 122nd Ave, Clackamas, OR 97015",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 45.405493,
+      "lng": -122.539643,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 279
+      }
+    },
+    {
+      "idx": 44,
+      "name": "Country Oven Bakery",
+      "city": "Bowling Green",
+      "state": "KY",
+      "type": "Bakery Plant",
+      "address": "2840 Pioneer Drive, Bowling Green, KY 42101",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 36.948509,
+      "lng": -86.490277,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 9547
+      }
+    },
+    {
+      "idx": 45,
+      "name": "KB Specialty Foods",
+      "city": "Greensburg",
+      "state": "IN",
+      "type": "Deli/Meat Plant",
+      "address": "1225 North Broadway, Greensburg, IN 47240",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 39.349828,
+      "lng": -85.485327,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 406
+      }
+    },
+    {
+      "idx": 46,
+      "name": "Layton Bakery",
+      "city": "Layton",
+      "state": "UT",
+      "type": "Bakery Plant",
+      "address": "500 N Sugar Street Bldg 5, Layton, UT 84041",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 41.065045,
+      "lng": -111.984294,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1960
+      }
+    },
+    {
+      "idx": 47,
+      "name": "Roundy's Commissary",
+      "city": "Kenosha",
+      "state": "WI",
+      "type": "Deli/Meat Plant",
+      "address": "5500 52nd St, Kenosha, WI 53144",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 42.590687,
+      "lng": -87.874072,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1441
+      }
+    },
+    {
+      "idx": 48,
+      "name": "Delight Products",
+      "city": "Springfield",
+      "state": "TN",
+      "type": "Grocery Plant",
+      "address": "1200 Industrial Drive, Springfield, TN 37172",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 36.498607,
+      "lng": -86.87002,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 1637
+      }
+    },
+    {
+      "idx": 49,
+      "name": "Kenlake Foods",
+      "city": "Murray",
+      "state": "KY",
+      "type": "Beverage Plant",
+      "address": "300 N.L.P. Miller Street, Murray, KY 42071",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 36.611222,
+      "lng": -88.328239,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": 1537
+      }
+    },
+    {
+      "idx": 50,
+      "name": "Pontiac Foods",
+      "city": "Elgin",
+      "state": "SC",
+      "type": "Grocery Plant",
+      "address": "813 Bookman Road, Elgin, SC 29045",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 34.132161,
+      "lng": -80.860521,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 5663
+      }
+    },
+    {
+      "idx": 51,
+      "name": "State Avenue Plant",
+      "city": "Cincinnati",
+      "state": "OH",
+      "type": "Grocery Plant",
+      "address": "1034 Depot St, Cincinnati, OH 45204",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 39.109302,
+      "lng": -84.550867,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 1670
+      }
+    },
+    {
+      "idx": 52,
+      "name": "Tara Foods",
+      "city": "Albany",
+      "state": "GA",
+      "type": "Grocery Plant",
+      "address": "1900 Cowles Lane, Albany, GA 31705",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 31.599739,
+      "lng": -84.103252,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": 6262
+      }
+    },
+    {
+      "idx": 53,
+      "name": "Harris Teeter Distribution Center Greensboro NC",
+      "city": "Greensboro",
+      "state": "NC",
+      "type": "Distribution Center",
+      "address": "200 Distribution Dr, Greensboro, NC 27410",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 36.093784,
+      "lng": -79.929764,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 54,
+      "name": "Harris Teeter Distribution Center Indian Trail NC",
+      "city": "Indian Trail",
+      "state": "NC",
+      "type": "Distribution Center",
+      "address": "6001 W Hwy 74, Indian Trail, NC 28079",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 35.065177,
+      "lng": -80.645931,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "GEOMETRIC_CENTER",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 55,
+      "name": "Kroger Mid-Atlantic Distribution Center Salem VA",
+      "city": "Salem",
+      "state": "VA",
+      "type": "Distribution Center",
+      "address": "3800 Garman Rd, Salem, VA 24153",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 37.275555,
+      "lng": -80.120874,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 56,
+      "name": "Kroger Distribution Center Houston TX",
+      "city": "Houston",
+      "state": "TX",
+      "type": "Distribution Center",
+      "address": "701 Gellhorn Dr, Houston, TX 77029",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 29.783452,
+      "lng": -95.269533,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 57,
+      "name": "Kroger Michigan Fresh Distribution Center Romulus MI",
+      "city": "Romulus",
+      "state": "MI",
+      "type": "Distribution Center",
+      "address": "15520 Wayne Rd, Romulus, MI 48174",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 42.188526,
+      "lng": -83.377667,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 58,
+      "name": "Kroger Delta Distribution Center Memphis TN",
+      "city": "Memphis",
+      "state": "TN",
+      "type": "Distribution Center",
+      "address": "5079 Bledsoe Rd, Memphis, TN 38141",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 35.012787,
+      "lng": -89.86689,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 59,
+      "name": "Kroger Cincinnati Fresh Distribution Center Blue Ash OH",
+      "city": "Blue Ash",
+      "state": "OH",
+      "type": "Distribution Center",
+      "address": "6300 Creek Rd, Blue Ash, OH 45242",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 39.2625,
+      "lng": -84.362738,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 60,
+      "name": "Roundy's Distribution Center Oconomowoc WI",
+      "city": "Oconomowoc",
+      "state": "WI",
+      "type": "Distribution Center",
+      "address": "1120 Distribution Ct, Oconomowoc, WI 53066",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 43.060074,
+      "lng": -88.477019,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 61,
+      "name": "Fred Meyer Distribution Center Chehalis WA",
+      "city": "Chehalis",
+      "state": "WA",
+      "type": "Distribution Center",
+      "address": "222 Maurin Rd, Chehalis, WA 98532",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 46.624995,
+      "lng": -122.916588,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 62,
+      "name": "Ralphs Distribution Center Paramount CA",
+      "city": "Paramount",
+      "state": "CA",
+      "type": "Distribution Center",
+      "address": "14900 Garfield Ave, Paramount, CA 90723",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 33.899493,
+      "lng": -118.166962,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 63,
+      "name": "Home Chef Production Center Bedford Park IL",
+      "city": "Bedford Park",
+      "state": "IL",
+      "type": "Home Chef Facility",
+      "address": "Bedford Park, IL",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 41.770994,
+      "lng": -87.817353,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "APPROXIMATE",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 64,
+      "name": "Home Chef Production Center San Bernardino CA",
+      "city": "San Bernardino",
+      "state": "CA",
+      "type": "Home Chef Facility",
+      "address": "1445 S Tippecanoe Ave, San Bernardino, CA 92408",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 34.075266,
+      "lng": -117.257699,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 65,
+      "name": "Home Chef Production Center Douglasville GA",
+      "city": "Douglasville",
+      "state": "GA",
+      "type": "Home Chef Facility",
+      "address": "2120 Skyview Dr, Douglasville, GA 30134",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 33.785256,
+      "lng": -84.644728,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "RANGE_INTERPOLATED",
+        "movedMeters": null
+      }
+    },
+    {
+      "idx": 66,
+      "name": "Home Chef Manufacturing & Distribution Center Baltimore MD",
+      "city": "Baltimore",
+      "state": "MD",
+      "type": "Home Chef Facility",
+      "address": "1701 E Patapsco Ave, Baltimore, MD 21226",
+      "source": "Kroger Manufacturing Division Address List (thekrogerco.com) + verified public directories (2026-06-26 sourcing)",
+      "lat": 39.230308,
+      "lng": -76.577486,
+      "geocode": {
+        "source": "geocoding-api",
+        "precision": "ROOFTOP",
         "movedMeters": null
       }
     }
   ],
-  "geocodedAt": "2026-06-09"
+  "geocodedAt": "2026-06-26"
 }

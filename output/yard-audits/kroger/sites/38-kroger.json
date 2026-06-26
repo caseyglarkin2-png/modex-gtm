@@ -1,0 +1,90 @@
+{
+  "name": "Anderson Bakery",
+  "type": "Bakery Plant",
+  "coords": { "lat": 34.489292, "lng": -82.654568 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 34.49006, "lng": -82.655083 },
+      { "lat": 34.490286, "lng": -82.654465 },
+      { "lat": 34.489946, "lng": -82.653676 },
+      { "lat": 34.489154, "lng": -82.653882 },
+      { "lat": 34.488362, "lng": -82.654088 },
+      { "lat": 34.488135, "lng": -82.654809 },
+      { "lat": 34.488814, "lng": -82.655324 },
+      { "lat": 34.489578, "lng": -82.655221 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 34.490003, "lng": -82.654774 },
+      { "lat": 34.490003, "lng": -82.654568 },
+      { "lat": 34.489805, "lng": -82.654568 },
+      { "lat": 34.489805, "lng": -82.654774 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 34.49006, "lng": -82.654465 },
+        { "lat": 34.489861, "lng": -82.653882 },
+        { "lat": 34.48938, "lng": -82.654019 },
+        { "lat": 34.489578, "lng": -82.654603 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 34.489805, "lng": -82.654637 },
+        { "lat": 34.489295, "lng": -82.654225 },
+        { "lat": 34.489154, "lng": -82.654362 },
+        { "lat": 34.489663, "lng": -82.654774 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 129, "pano": "", "hasCoverage": true },
+      "truckGate": { "heading": 85, "pano": "", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18,
+    "trailersVisible": 28,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 7.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.489292,-82.654568,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": false,
+    "drivewayShort": true,
+    "backupSensitive": true,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoors", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Street View (2026-03) shows a chain-link sliding gate and fence line across the truck lane just inside the north driveway off Sayre St, with trailers/a truck parked immediately beyond it.",
+    "guardShack": "No distinct standalone guard booth with multi-side windows beside the lane; the office wing flanks the gate, so check-in is likely office/badge (remoteGs). Medium confidence.",
+    "drivewayShort": "Approach from Sayre St to the gate is short (~1-2 truck lengths); gate sits close to the public road.",
+    "backupSensitive": "Short approach plus gate near Sayre St means an inbound queue could spill onto the public road.",
+    "dropArea": "Open NE yard holds ~25-35 angled drop trailers in addition to dock-backed units.",
+    "dockDoors": "Estimated 15-20 doors along the NE building face from trailers backed in at zoom 19-20; banded 10-25.",
+    "urbanRural": "Inside the Anderson, SC city fabric with residential streets immediately east and commercial frontage on Sayre St."
+  },
+  "method": "deep-audit"
+}

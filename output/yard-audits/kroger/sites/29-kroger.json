@@ -1,0 +1,74 @@
+{
+  "name": "Swan Island Dairy",
+  "type": "Dairy Plant",
+  "coords": { "lat": 45.55855, "lng": -122.69815 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 45.55905, "lng": -122.69914 },
+      { "lat": 45.55901, "lng": -122.69737 },
+      { "lat": 45.55851, "lng": -122.69688 },
+      { "lat": 45.55803, "lng": -122.69683 },
+      { "lat": 45.55815, "lng": -122.69746 },
+      { "lat": 45.55823, "lng": -122.69923 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 45.55859, "lng": -122.69929 },
+      { "lat": 45.55865, "lng": -122.69900 },
+      { "lat": 45.55843, "lng": -122.69894 },
+      { "lat": 45.55837, "lng": -122.69923 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 45.55825, "lng": -122.69720 },
+        { "lat": 45.55821, "lng": -122.69671 },
+        { "lat": 45.55787, "lng": -122.69680 },
+        { "lat": 45.55791, "lng": -122.69729 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 45.55897, "lng": -122.69734 },
+        { "lat": 45.55895, "lng": -122.69711 },
+        { "lat": 45.55831, "lng": -122.69706 },
+        { "lat": 45.55833, "lng": -122.69729 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 1, "pano": "AZn6JpGjSU1pSqG36Q-03Q", "hasCoverage": true },
+      "truckGate": { "heading": 154, "pano": "RZFOtbpoBdVSr5TT7I_oWg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14,
+    "trailersVisible": 22,
+    "trailerParkingCapacity": 28,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 6.8,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@45.55855,-122.69815,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": false, "drivewayShort": true, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "No barrier arm, sliding gate, or checkpoint. Truck yard is an open, shared drive aisle off N Basin Ave that the Street View car drove straight through; office/employee lot is also fully open.",
+    "guardShack": "No booth of any kind at any entrance.",
+    "dropYard": "Dedicated trailer-storage lot on the SE/east side near the rail, ~10-25 trailers parked without tractors.",
+    "railServed": "A Union Pacific mainline runs immediately east of the property but there is no spur entering the dairy parcel; trailers stage beside the tracks, not on rail.",
+    "backupSensitive": "Tight urban parcel with little stacking room; a truck queue would back into the narrow shared drive aisle / N Basin Ave.",
+    "dockDoorCount": "~14 doors estimated on the east face from overhead; partly obscured by backed-in trailers and silos."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,66 @@
+{
+  "name": "Home Chef Production Center San Bernardino CA",
+  "type": "Home Chef Facility",
+  "coords": { "lat": 34.075266, "lng": -117.257699 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 34.07672, "lng": -117.25903 },
+      { "lat": 34.07671, "lng": -117.25668 },
+      { "lat": 34.07428, "lng": -117.25664 },
+      { "lat": 34.07426, "lng": -117.25901 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 34.07650, "lng": -117.25905 },
+      { "lat": 34.07650, "lng": -117.25845 },
+      { "lat": 34.07612, "lng": -117.25845 },
+      { "lat": 34.07612, "lng": -117.25905 }
+    ] },
+    "dropYards": [],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 34.07628, "lng": -117.25895 },
+        { "lat": 34.07628, "lng": -117.25690 },
+        { "lat": 34.07612, "lng": -117.25690 },
+        { "lat": 34.07612, "lng": -117.25895 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 117, "pano": "OKzMeUjpeuXgydL0y8hlXw", "hasCoverage": true },
+      "truckGate": { "heading": 88, "pano": "8-8YGWFdCuEBbKeXcKf1Pw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30,
+    "trailersVisible": 9,
+    "trailerParkingCapacity": 15,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 14.8,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.075266,-117.257699,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "0-10",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Open truck driveway off S Tippecanoe Ave at NW corner; no barrier arm across the lane at the property line, but a small check-in kiosk/call-box structure with traffic delineators sits just inside the entrance (Street View Apr 2025).",
+    "guardShack": "No full staffed guard booth visible. The structure at the entrance reads as a small remote check-in kiosk/call-box, not a multi-window manned shack.",
+    "remoteGs": "Controlled entry with a kiosk/call-box and no manned shack = remote check-in.",
+    "dockDoors": "Company release states 30 truck docks + 1 drive-in door; dock bank runs along the NORTH building face into the shared truck court, trailers backed in confirm.",
+    "fastLaneOpportunity": "Wide open paved gate apron at the Tippecanoe entrance with room to add a bypass/express lane.",
+    "entryExitTogether": "Primary truck entry/exit at the single NW driveway off Tippecanoe; a secondary SW driveway exists off the south service road (truckGateCount=2).",
+    "railServed": "A rail spur runs N-S in the corridor EAST of the building but does not spur INTO Home Chef's lot; it serves the property line, not the docks."
+  },
+  "method": "deep-audit"
+}

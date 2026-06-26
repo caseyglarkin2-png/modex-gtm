@@ -1,0 +1,92 @@
+{
+  "name": "Kroger Delta Distribution Center Memphis TN",
+  "type": "Distribution Center",
+  "coords": { "lat": 35.0112, "lng": -89.8688 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 35.01345, "lng": -89.87075 },
+      { "lat": 35.01310, "lng": -89.86700 },
+      { "lat": 35.01195, "lng": -89.86635 },
+      { "lat": 35.00915, "lng": -89.86630 },
+      { "lat": 35.00925, "lng": -89.87080 },
+      { "lat": 35.01015, "lng": -89.87120 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 35.01055, "lng": -89.86735 },
+      { "lat": 35.01060, "lng": -89.86660 },
+      { "lat": 35.00985, "lng": -89.86655 },
+      { "lat": 35.00980, "lng": -89.86730 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 35.01300, "lng": -89.87055 },
+        { "lat": 35.01290, "lng": -89.86735 },
+        { "lat": 35.01095, "lng": -89.86790 },
+        { "lat": 35.01105, "lng": -89.87090 }
+      ] },
+      { "ring": [
+        { "lat": 35.01180, "lng": -89.86660 },
+        { "lat": 35.01180, "lng": -89.86620 },
+        { "lat": 35.00990, "lng": -89.86615 },
+        { "lat": 35.00990, "lng": -89.86655 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 35.01010, "lng": -89.87045 },
+        { "lat": 35.01000, "lng": -89.86760 },
+        { "lat": 35.00980, "lng": -89.86762 },
+        { "lat": 35.00990, "lng": -89.87047 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 35.00975, "lng": -89.86655 },
+      { "lat": 35.00978, "lng": -89.86625 },
+      { "lat": 35.00880, "lng": -89.86620 },
+      { "lat": 35.00877, "lng": -89.86650 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 270, "pano": "hUi_Pr-O_TrJSZGJ-DKO2Q", "hasCoverage": true },
+      "truckGate": { "heading": 320, "pano": "JzhcSaHwyodbx2d9ci87MQ", "hasCoverage": true },
+      "staging": { "heading": 320, "pano": "JzhcSaHwyodbx2d9ci87MQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 280,
+    "trailerParkingCapacity": 350,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 46.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@35.0112,-89.8688,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "scale", "multiStep", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Driver reviews confirm gated, appointment-only entry; chain-link perimeter fence visible in Street View around the parking/yard; controlled truck entry off Bledsoe Rd.",
+    "guardShack": "Web reviews explicitly describe checking in at a guard shack after staging; booth not isolated in overhead imagery (likely at the yard pinch-point near building junction). Confidence high on existence, medium on exact location.",
+    "preGateStaging": "Street View (Mar 2025) shows tractor-trailers (J.B. Hunt 360box and others) queued/parked along Bledsoe Rd before the entrance; reviews say park first, then check in.",
+    "postGateStaging": "Large central paved yard between the drop rows and the dock face provides interior holding before docks.",
+    "fastLaneOpportunity": "Very wide gate apron and abundant paved width at the yard entry; room for a bypass/express lane.",
+    "dockDoors": "Long continuous dock bank on the south building's north face (30+ visible in one z19 segment) plus additional dock faces on the L-wing; total well into 50+ band, estimated ~110.",
+    "dropArea": "Massive NW drop yard with hundreds of trailers in parallel angled rows, plus a second drop row along the Bledsoe (east) frontage; clearly 50+.",
+    "shipRcvSeparate": "Dock banks appear on more than one building face (south E-W wing and the NW-SE wing), suggesting separate ship/receive clusters; medium confidence.",
+    "urbanRural": "Within the Memphis metro industrial fabric (Holmes/Bledsoe Rd corridor), surrounded by other large warehouses; Urban.",
+    "buildingCount": "Kroger DC is the central L-shaped complex; a second large building sits just south but appears to be a separate (non-Kroger) tenant. Counted 2 conservatively.",
+    "scale": "No clear truck scale pad resolved in imagery; left false (listed uncertain).",
+    "trailerCounts": "Honest overhead estimates; drop yard is very dense."
+  },
+  "method": "deep-audit"
+}

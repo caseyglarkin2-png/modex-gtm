@@ -1,0 +1,104 @@
+{
+  "name": "Kroger Michigan Fresh Distribution Center Romulus MI",
+  "type": "Distribution Center",
+  "coords": { "lat": 42.18845, "lng": -83.37720 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 42.18958, "lng": -83.37998 },
+      { "lat": 42.18995, "lng": -83.37500 },
+      { "lat": 42.18820, "lng": -83.37460 },
+      { "lat": 42.18720, "lng": -83.37545 },
+      { "lat": 42.18705, "lng": -83.37985 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 42.19010, "lng": -83.37560 },
+      { "lat": 42.19000, "lng": -83.37500 },
+      { "lat": 42.18960, "lng": -83.37520 },
+      { "lat": 42.18970, "lng": -83.37580 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 42.18968, "lng": -83.37930 },
+        { "lat": 42.18980, "lng": -83.37640 },
+        { "lat": 42.18958, "lng": -83.37635 },
+        { "lat": 42.18948, "lng": -83.37925 }
+      ] },
+      { "ring": [
+        { "lat": 42.18735, "lng": -83.37930 },
+        { "lat": 42.18745, "lng": -83.37610 },
+        { "lat": 42.18722, "lng": -83.37608 },
+        { "lat": 42.18713, "lng": -83.37928 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 42.18952, "lng": -83.37928 },
+        { "lat": 42.18962, "lng": -83.37640 },
+        { "lat": 42.18944, "lng": -83.37638 },
+        { "lat": 42.18935, "lng": -83.37926 }
+      ] },
+      { "ring": [
+        { "lat": 42.18760, "lng": -83.37925 },
+        { "lat": 42.18770, "lng": -83.37600 },
+        { "lat": 42.18750, "lng": -83.37598 },
+        { "lat": 42.18741, "lng": -83.37923 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 247, "pano": "nIa9jcGvynuBhi__b4vPOw", "hasCoverage": true },
+      "truckGate": { "heading": 245, "pano": "z0Uzd9yeEOXhLY9bpbISFQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 105,
+    "trailersVisible": 120,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 30.1,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.18845,-83.37720,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Public-road entrance off Wayne Rd is an open, wide commercial driveway. Max-zoom (z21) over the driveway throat shows open pavement with a single sign/light pole, no barrier arm, no fence-line gate. Street View from Wayne Rd shows a monument sign and open drive, no guard booth.",
+    "guardShack": "No staffed booth at the entrance or the inner turnaround. The small structures near the NE turnaround are a fuel/maintenance canopy and trailer staging, not a guard shack.",
+    "drivewayLong": "Long approach: the entrance drive runs a substantial distance from Wayne Rd, past a monument sign and employee lot, into the truck turnaround before reaching dock circulation; easily holds 3+ trucks.",
+    "postGateStaging": "Paved turnaround / staging area inside the NE entrance holds staged trailers (visible at z19/z21) before they reach the dock banks.",
+    "shipRcvSeparate": "Full continuous dock banks on both the north and south long faces of the building (trailers backed in on both), indicating separate ship/receive clusters.",
+    "fastLaneOpportunity": "Wide open entrance apron and turnaround with ample unused paved width to add a bypass/express lane.",
+    "dockDoors": "Press release (Penske/Kroger, 2019) states 105 loading docks on the 606,000 sqft build-to-suit freezer/cooler DC; corroborated by long dock banks visible on both faces -> 50+ band.",
+    "dropArea": "Long head-to-tail trailer rows along both the north and south sides plus staged trailers at the NE turnaround -> 50+.",
+    "railServed": "No rail spur enters the property; nearest rail is unrelated.",
+    "urbanRural": "Edge-of-town industrial parcel off Wayne Rd in Romulus, surrounded by woods/wetland buffer and adjacent to DTW airport land; broader setting reads Rural per rubric.",
+    "entryLanes": "In/out share the one NE driveway with a small central island; lane count estimated as 1 in / 1 out (low confidence).",
+    "siteAreaAcres": "30.1 acres for the traced paved truck-yard perimeter; the full deeded parcel incl wooded buffer is ~47 acres per the 2019 press release."
+  },
+  "method": "deep-audit"
+}

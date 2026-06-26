@@ -1,0 +1,86 @@
+{
+  "name": "America's Beverage Plant",
+  "type": "Beverage Plant",
+  "coords": { "lat": 32.83960, "lng": -96.92740 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 32.84135, "lng": -96.92905 },
+      { "lat": 32.84118, "lng": -96.92560 },
+      { "lat": 32.83980, "lng": -96.92555 },
+      { "lat": 32.83830, "lng": -96.92560 },
+      { "lat": 32.83828, "lng": -96.92690 },
+      { "lat": 32.83772, "lng": -96.92692 },
+      { "lat": 32.83770, "lng": -96.92925 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 32.83760, "lng": -96.92845 },
+      { "lat": 32.83760, "lng": -96.92775 },
+      { "lat": 32.83815, "lng": -96.92778 },
+      { "lat": 32.83815, "lng": -96.92848 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 32.84128, "lng": -96.92800 },
+        { "lat": 32.84120, "lng": -96.92605 },
+        { "lat": 32.84030, "lng": -96.92608 },
+        { "lat": 32.84035, "lng": -96.92802 }
+      ] },
+      { "ring": [
+        { "lat": 32.84015, "lng": -96.92648 },
+        { "lat": 32.84012, "lng": -96.92568 },
+        { "lat": 32.83840, "lng": -96.92572 },
+        { "lat": 32.83842, "lng": -96.92652 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 32.84060, "lng": -96.92690 },
+        { "lat": 32.84058, "lng": -96.92668 },
+        { "lat": 32.83870, "lng": -96.92672 },
+        { "lat": 32.83872, "lng": -96.92694 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 64, "pano": "0g8Vlyx6gZI1dCMpDPLzIA", "hasCoverage": true },
+      "truckGate": { "heading": 18, "pano": "-tp296eUdBxs4nCn9yEvdA", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 70,
+    "trailersVisible": 220,
+    "trailerParkingCapacity": 300,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 30.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.83960,-96.92740,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "scale"],
+  "fieldNotes": {
+    "truckGate": "Single shared entrance driveway off the E Airport Fwy south frontage road (~32.8375,-96.9281). Street View (Oct 2025) and z21 satellite show an open paved drive with guardrails and no barrier arm, sliding gate, or booth at the public-road boundary. No controlled checkpoint visible, so truckGate=false.",
+    "guardShack": "No guard booth visible at the street entrance; the gabled structures at the top of the drive are employee-parking car canopies, not a guard shack. Possible unverified security at the building face deep inside; left as false, flagged uncertain.",
+    "postGateStaging": "Large internal paved aprons between the office area and the warehouse docks provide ample inside-the-property holding before docks.",
+    "dropArea": "Very large drop yard: dense trailer rows north of the main warehouse and a second block east of it, plus trailers between the warehouse and the NE building. 200+ trailers visible; capacity ~300.",
+    "dockDoors": "Dock doors on the south and east faces of the main warehouse plus the NE building; 50+ across the complex (estimated ~70).",
+    "shipRcvSeparate": "Distinct dock banks on different building faces (south wall office/dock plus east-wall dock apron and the separate NE building).",
+    "fastLaneOpportunity": "Wide entrance apron and large internal paved areas leave room to add a bypass/express lane.",
+    "multipleFacilities": "Campus: main production/warehouse building, south office building, and a separate NE warehouse, all on one property.",
+    "scale": "No truck scale clearly identified in imagery; left false and flagged uncertain.",
+    "railServed": "No rail spur runs into the property; a rail line/ROW lies west of the treeline but does not enter the site.",
+    "urbanRural": "Dense Irving/DFW-metro industrial fabric fronting E Airport Freeway (TX-183)."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,109 @@
+{
+  "name": "Kroger Distribution Center Houston TX",
+  "type": "Distribution Center",
+  "coords": { "lat": 29.78420, "lng": -95.27050 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 29.78630, "lng": -95.27240 },
+      { "lat": 29.78620, "lng": -95.26880 },
+      { "lat": 29.78380, "lng": -95.26830 },
+      { "lat": 29.78230, "lng": -95.26920 },
+      { "lat": 29.78140, "lng": -95.27130 },
+      { "lat": 29.78180, "lng": -95.27260 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 29.78375, "lng": -95.27030 },
+      { "lat": 29.78360, "lng": -95.26975 },
+      { "lat": 29.78300, "lng": -95.26990 },
+      { "lat": 29.78315, "lng": -95.27045 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 29.78330, "lng": -95.27250 },
+        { "lat": 29.78320, "lng": -95.27090 },
+        { "lat": 29.78165, "lng": -95.27130 },
+        { "lat": 29.78175, "lng": -95.27285 }
+      ] },
+      { "ring": [
+        { "lat": 29.78470, "lng": -95.26960 },
+        { "lat": 29.78460, "lng": -95.26840 },
+        { "lat": 29.78360, "lng": -95.26845 },
+        { "lat": 29.78370, "lng": -95.26965 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 29.78360, "lng": -95.27240 },
+        { "lat": 29.78350, "lng": -95.27090 },
+        { "lat": 29.78330, "lng": -95.27092 },
+        { "lat": 29.78340, "lng": -95.27242 }
+      ] },
+      { "ring": [
+        { "lat": 29.78610, "lng": -95.27010 },
+        { "lat": 29.78420, "lng": -95.27030 },
+        { "lat": 29.78418, "lng": -95.27005 },
+        { "lat": 29.78608, "lng": -95.26985 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 29.78320, "lng": -95.27000 },
+      { "lat": 29.78300, "lng": -95.26935 },
+      { "lat": 29.78250, "lng": -95.26960 },
+      { "lat": 29.78270, "lng": -95.27025 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 316, "pano": "9M91_PAnJT0WM4NppIYcuQ", "hasCoverage": true },
+      "truckGate": { "heading": 319, "pano": "9M91_PAnJT0WM4NppIYcuQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 130,
+    "trailersVisible": 220,
+    "trailerParkingCapacity": 350,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 45.4,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@29.78420,-95.27050,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "50+",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "scale", "buildingCount"],
+  "fieldNotes": {
+    "truckGate": "Wide multi-lane controlled truck entrance off the east access drive; perimeter chain-link fence with Kroger sign visible in Street View; hatched lane markings and a checkpoint pinch-point at the booth.",
+    "guardShack": "Small white guard-booth structure (~1-vehicle footprint) sitting in the truck lane with yellow hatched markings around it at ~29.7834,-95.2700, beside the perimeter fence; visible at z21 and corroborated in Street View.",
+    "fastLaneOpportunity": "Very wide paved entrance apron with room for multiple lanes / express bypass (seen in SV and z20 imagery).",
+    "shipRcvSeparate": "Distinct dock banks on different building faces: long south-facing dock apron of the main building plus a separate east-facing dock face with trailer canopies.",
+    "dropYard": "Large dedicated trailer drop yard (hundreds of trailers in rows) on the SW of the property, plus a secondary east truck/trailer yard with private-fleet tractors.",
+    "railServed": "A rail spur enters the NW corner of the property and runs SE through the site alongside the docks (visible in N/NW/E corner crops and in Street View foreground).",
+    "buildingCount": "Main DC building (very large, multi-wing white roof) is the primary structure; a smaller secondary building sits to the east of the rail/yard. Counted as 2; could be read as 1 large complex.",
+    "scale": "No truck scale/weigh platform clearly visible in the truck path; left false (flagged uncertain).",
+    "postGateStaging": "Paved holding apron inside the entrance before the dock doors.",
+    "dockDoorCount": "Estimated from dock-canopy rhythm across the south and east faces; honest overhead estimate.",
+    "urbanRural": "Dense northeast Houston industrial fabric inside the metro; classified Urban."
+  },
+  "method": "deep-audit"
+}

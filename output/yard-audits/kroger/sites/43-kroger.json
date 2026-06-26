@@ -1,0 +1,80 @@
+{
+  "name": "Clackamas Bakery",
+  "type": "Bakery Plant",
+  "coords": { "lat": 45.405470, "lng": -122.539650 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 45.405971, "lng": -122.541448 },
+      { "lat": 45.406285, "lng": -122.540212 },
+      { "lat": 45.406236, "lng": -122.539113 },
+      { "lat": 45.405441, "lng": -122.538564 },
+      { "lat": 45.404814, "lng": -122.538564 },
+      { "lat": 45.404911, "lng": -122.539045 },
+      { "lat": 45.404718, "lng": -122.539525 },
+      { "lat": 45.404670, "lng": -122.540143 },
+      { "lat": 45.404621, "lng": -122.540487 },
+      { "lat": 45.404670, "lng": -122.541311 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 45.404760, "lng": -122.540200 },
+      { "lat": 45.404760, "lng": -122.539900 },
+      { "lat": 45.404600, "lng": -122.539900 },
+      { "lat": 45.404600, "lng": -122.540200 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 45.405971, "lng": -122.541448 },
+        { "lat": 45.405971, "lng": -122.540349 },
+        { "lat": 45.404718, "lng": -122.540349 },
+        { "lat": 45.404670, "lng": -122.541311 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 45.405923, "lng": -122.540349 },
+        { "lat": 45.405923, "lng": -122.540281 },
+        { "lat": 45.404814, "lng": -122.540281 },
+        { "lat": 45.404814, "lng": -122.540349 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 354, "pano": "0s-StLMrMX0ReqeP2ADWxQ", "hasCoverage": true },
+      "truckGate": { "heading": 358, "pano": "C8abwANd58LFId5ej9kkFw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 24,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 8.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@45.405470,-122.539650,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "guardShack"],
+  "fieldNotes": {
+    "site": "Bakery building confirmed distinct from the adjacent Fred Meyer DC to the west; identified by dense rooftop process equipment (vents/exhaust/HVAC) vs the DC's flat roof. Perimeter traces the bakery's own operational footprint (building + west drop yard + east office/parking strip), which is part of one fenced Fred Meyer superblock shared with the DC.",
+    "truckGate": "Continuous chain-link perimeter fence along the south and west frontage with unmanned sliding-gate driveway openings; signage on fence ('AUTHORIZED...'). No guard booth structure visible anywhere along the frontage.",
+    "guardShack": "No staffed booth found at any gate in Street View (2025-06) or satellite; flagged uncertain since a guarded main DC entrance may sit off the bakery's own frontage.",
+    "remoteGs": "Fenced site with gates but no guard shack implies kiosk/call-box/badge check-in.",
+    "dockDoors": "West face of the bakery is the dock wall with trailers backed in; ~24 doors estimated from overhead, partly tree-occluded.",
+    "dropArea": "Large drop yard of diagonally-parked trailers west of the building (shared overflow with the DC) holds well over 50 trailers.",
+    "fastLaneOpportunity": "Wide paved drop-yard apron and ample frontage width leave room for an express/bypass lane.",
+    "railServed": "A rail line runs just south of the property but no spur enters the bakery yard."
+  },
+  "method": "deep-audit"
+}

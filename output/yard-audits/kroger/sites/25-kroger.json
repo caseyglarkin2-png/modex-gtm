@@ -1,0 +1,88 @@
+{
+  "name": "Jackson Hutchinson Dairy",
+  "type": "Dairy Plant",
+  "coords": { "lat": 38.0593, "lng": -97.8818 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 38.062149, "lng": -97.884615 },
+      { "lat": 38.062041, "lng": -97.878435 },
+      { "lat": 38.057446, "lng": -97.878435 },
+      { "lat": 38.057446, "lng": -97.884890 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 38.057866, "lng": -97.884386 },
+      { "lat": 38.057866, "lng": -97.884197 },
+      { "lat": 38.057657, "lng": -97.884197 },
+      { "lat": 38.057657, "lng": -97.884386 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 38.058202, "lng": -97.884547 },
+        { "lat": 38.058148, "lng": -97.879603 },
+        { "lat": 38.057500, "lng": -97.879603 },
+        { "lat": 38.057500, "lng": -97.884547 }
+      ] },
+      { "ring": [
+        { "lat": 38.061554, "lng": -97.883311 },
+        { "lat": 38.061500, "lng": -97.879053 },
+        { "lat": 38.059500, "lng": -97.879053 },
+        { "lat": 38.059500, "lng": -97.883311 }
+      ] },
+      { "ring": [
+        { "lat": 38.059500, "lng": -97.884615 },
+        { "lat": 38.059500, "lng": -97.883311 },
+        { "lat": 38.057500, "lng": -97.883311 },
+        { "lat": 38.057500, "lng": -97.884615 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 38.058202, "lng": -97.884547 },
+        { "lat": 38.058148, "lng": -97.879603 },
+        { "lat": 38.057800, "lng": -97.879603 },
+        { "lat": 38.057800, "lng": -97.884547 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 29, "pano": "DtvU4J41OcQnmNZJRAmAZQ", "hasCoverage": true },
+      "truckGate": { "heading": 0, "pano": "N_VFFb8i3qC5aDU6BpdHew", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 80,
+    "trailersVisible": 100,
+    "trailerParkingCapacity": 150,
+    "truckGateCount": 2,
+    "buildingCount": 3,
+    "siteAreaAcres": 70.0,
+    "railServed": true
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.0593,-97.8818,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "scale", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Property is fully chain-link fenced along E 4th Ave (confirmed in multiple 2025 Street View panos); truck access is via gated driveway openings through the fence into the trailer yard. Controlled entry = true.",
+    "guardShack": "No staffed guard booth structure found at any truck entrance in satellite or Street View. A small square structure sits mid-parking-lot near the office but it is an employee shelter, not a gate booth. Hence guardShack=false, remoteGs=true (fence/gate without guard implies kiosk/app/call-box check-in).",
+    "multipleFacilities": "Campus: a dairy processing plant (roof process tanks + row of milk silos confirmed in Street View) plus a large attached/adjacent distribution warehouse and a north rail-served covered loading dock structure.",
+    "railServed": "Long covered rail-dock structure with rail spur runs E-W along the north side of the property.",
+    "dropArea": "Dense trailer drop yards on the south frontage, west of the plant, and around the north DC; many AMERICOLD/Kroger-brand reefer trailers parked nose-out. Easily 50+.",
+    "dockDoors": "South face of main plant shows dock-door numbering into the 20s (e.g. '25' markers in tight imagery); plus north DC and west-face docks. Estimated ~80 total across the campus.",
+    "shipRcvSeparate": "Distinct dock banks on separate building faces / separate buildings (plant docks vs north DC docks).",
+    "fastLaneOpportunity": "Wide paved gate aprons and ample yard width at the south entrance leave room to add a bypass/express lane.",
+    "scale": "No truck scale clearly identified; left false, flagged uncertain.",
+    "entryLanes": "Single-lane gated driveways observed; lane counts approximate."
+  },
+  "method": "deep-audit"
+}

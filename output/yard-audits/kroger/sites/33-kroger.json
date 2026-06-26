@@ -1,0 +1,88 @@
+{
+  "name": "Compton Creamery",
+  "type": "Dairy Plant",
+  "coords": { "lat": 33.87098, "lng": -118.23868 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 33.87232, "lng": -118.24095 },
+      { "lat": 33.87235, "lng": -118.23720 },
+      { "lat": 33.87150, "lng": -118.23628 },
+      { "lat": 33.87040, "lng": -118.23628 },
+      { "lat": 33.86965, "lng": -118.23700 },
+      { "lat": 33.86962, "lng": -118.24102 },
+      { "lat": 33.87100, "lng": -118.24108 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 33.87118, "lng": -118.23712 },
+      { "lat": 33.87120, "lng": -118.23648 },
+      { "lat": 33.87078, "lng": -118.23648 },
+      { "lat": 33.87076, "lng": -118.23712 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 33.87155, "lng": -118.23845 },
+        { "lat": 33.87155, "lng": -118.23690 },
+        { "lat": 33.87045, "lng": -118.23690 },
+        { "lat": 33.87045, "lng": -118.23845 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 33.86995, "lng": -118.24050 },
+        { "lat": 33.86995, "lng": -118.23700 },
+        { "lat": 33.86975, "lng": -118.23700 },
+        { "lat": 33.86975, "lng": -118.24050 }
+      ] },
+      { "ring": [
+        { "lat": 33.87210, "lng": -118.24010 },
+        { "lat": 33.87210, "lng": -118.23730 },
+        { "lat": 33.87188, "lng": -118.23730 },
+        { "lat": 33.87188, "lng": -118.24010 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 33.87132, "lng": -118.23640 },
+      { "lat": 33.87132, "lng": -118.23600 },
+      { "lat": 33.87060, "lng": -118.23600 },
+      { "lat": 33.87060, "lng": -118.23640 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 272, "pano": "8vfi1tHcUw6Ak3JX03h1GA", "hasCoverage": true },
+      "truckGate": { "heading": 276, "pano": "8vfi1tHcUw6Ak3JX03h1GA", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 120,
+    "trailerParkingCapacity": 140,
+    "truckGateCount": 1,
+    "buildingCount": 4,
+    "siteAreaAcres": 31.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.87098,-118.23868,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": true, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity", "scale"],
+  "fieldNotes": {
+    "guardShack": "Small white booth (~1-2 vehicle footprint) on a paved island mid-yard with a shade canopy over the inbound lane; flanked by multiple painted STOP bars on both inbound and outbound sides (z21).",
+    "truckGate": "Controlled checkpoint set back from Wilmington Ave: chain-link perimeter, sliding gates at the driveway mouth, and lane islands/bollards at the booth. Entrance off Wilmington (E side).",
+    "fastLaneOpportunity": "Wide multi-lane gate apron with island-separated STOP lanes — room exists for an express bypass.",
+    "shipRcvSeparate": "Dock banks on multiple distinct building faces (south wall dock-doors plus separate trailer-backed banks on the north/interior buildings).",
+    "multipleFacilities": "Campus of 4+ distinct buildings (main plant, secondary processing/warehouse blocks, office near freeway frontage, plus the dairy silo tank farm).",
+    "dropYard": "Large dedicated trailer-storage lot east of the plant, dense rows of parked trailers without tractors.",
+    "scale": "No truck scale clearly visible in overhead imagery; flagged uncertain.",
+    "railServed": "No rail spur enters the property."
+  },
+  "method": "deep-audit"
+}

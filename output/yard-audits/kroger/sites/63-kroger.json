@@ -1,0 +1,67 @@
+{
+  "name": "Home Chef Production Center Bedford Park IL",
+  "type": "Home Chef Facility",
+  "coords": { "lat": 41.77270, "lng": -87.79190 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 41.77392, "lng": -87.79292 },
+      { "lat": 41.77388, "lng": -87.79082 },
+      { "lat": 41.77160, "lng": -87.79078 },
+      { "lat": 41.77152, "lng": -87.79288 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 41.77352, "lng": -87.79296 },
+      { "lat": 41.77352, "lng": -87.79255 },
+      { "lat": 41.77268, "lng": -87.79262 },
+      { "lat": 41.77268, "lng": -87.79298 }
+    ] },
+    "dropYards": [],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 41.77356, "lng": -87.79262 },
+        { "lat": 41.77352, "lng": -87.79242 },
+        { "lat": 41.77170, "lng": -87.79252 },
+        { "lat": 41.77172, "lng": -87.79272 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 268, "pano": "Q21CAZPfKPPAVcf-HT1SuQ", "hasCoverage": true },
+      "truckGate": { "heading": 181, "pano": "jedZ3iuqhaTS5D_zsovA_A", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 28,
+    "trailersVisible": 18,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 11.8,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.77270,-87.79190,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "remoteGs", "dropArea", "trailerParkingCapacity", "postGateStaging"],
+  "fieldNotes": {
+    "location": "Confirmed 6901 W 65th St, Bedford Park IL 60638 (Relish Labs LLC dba Home Chef) via web search + village business registry; given coords were ~2km W on a refinery. Audited building is the tan/white spec warehouse on the E side of the N-S service road, S of W 65th St.",
+    "truckGate": "West face fronts a fenced truck court; chain-link sliding gate across the truck drive visible in Street View (pano jedZ3iuqhaTS5D_zsovA_A).",
+    "guardShack": "No staffed booth visible at the gate in Street View or satellite; gate reads as unmanned, hence remoteGs true. Low confidence — pano coverage is from the public road, not inside the court.",
+    "dockDoors": "Full dock bank along the W building wall with trailers backed in; ~28 doors estimated from z18/z19 satellite — band 25-50.",
+    "dropArea": "10-25 trailers parked along the W truck court; some appear dropped (no tractor) but resolution makes the dropped/live split uncertain.",
+    "postGateStaging": "Paved truck court between the gate and the dock wall provides interior holding room.",
+    "urbanRural": "Dense Chicago metro fabric — residential blocks directly N/W, contiguous industrial corridor; clearly Urban.",
+    "buildExterior": "Modern 2018-era white panel building with blue accent stripes; a leasing/'For Lease' sign on the perimeter fence suggests part of the building may be marketed, but the address and facade match the Home Chef production center."
+  },
+  "method": "deep-audit"
+}
