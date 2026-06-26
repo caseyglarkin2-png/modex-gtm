@@ -1,7 +1,7 @@
 {
   "account": "The Kroger Co.",
   "generatedAt": "2026-06-26",
-  "facilityCount": 65,
+  "facilityCount": 62,
   "facilities": [
     {
       "idx": 1,
@@ -48,22 +48,6 @@
       "geocode": {
         "source": "geocoding-api",
         "precision": "GEOMETRIC_CENTER",
-        "movedMeters": 0
-      }
-    },
-    {
-      "idx": 4,
-      "name": "Kroger Grocery Distribution Center Nashville TN",
-      "city": "Nashville",
-      "state": "TN",
-      "type": "Grocery Distribution Center",
-      "address": "1116 Polk Ave, Nashville, TN 37210",
-      "source": "Chamber of Commerce business directory 'Kroger Distribution Center' at 1116 Polk Ave",
-      "lat": 36.136908,
-      "lng": -86.742513,
-      "geocode": {
-        "source": "geocoding-api",
-        "precision": "ROOFTOP",
         "movedMeters": 0
       }
     },
@@ -212,22 +196,6 @@
       }
     },
     {
-      "idx": 14,
-      "name": "Kroger Customer Fulfillment Center Pleasant Prairie WI",
-      "city": "Pleasant Prairie",
-      "state": "WI",
-      "type": "Customer Fulfillment Center",
-      "address": "9091 88th Ave, Pleasant Prairie, WI 53158",
-      "source": "Kroger IR / Kenosha News reporting on 6th Kroger-Ocado CFC at 9091 88th Ave",
-      "lat": 42.542574,
-      "lng": -87.912278,
-      "geocode": {
-        "source": "geocoding-api",
-        "precision": "ROOFTOP",
-        "movedMeters": 0
-      }
-    },
-    {
       "idx": 15,
       "name": "Kroger Customer Fulfillment Center Aurora CO",
       "city": "Aurora",
@@ -237,22 +205,6 @@
       "source": "Kroger IR / Supermarket News reporting on Denver-metro Kroger-Ocado CFC at 6125 N Jackson Gap Way",
       "lat": 39.807077,
       "lng": -104.691758,
-      "geocode": {
-        "source": "geocoding-api",
-        "precision": "ROOFTOP",
-        "movedMeters": 0
-      }
-    },
-    {
-      "idx": 16,
-      "name": "Kroger Customer Fulfillment Center Groveland FL",
-      "city": "Groveland",
-      "state": "FL",
-      "type": "Customer Fulfillment Center",
-      "address": "7925 American Way, Groveland, FL 34736",
-      "source": "Kroger/Ocado central Florida CFC press release (US-27 & American Way) + FOX 35 Orlando reporting",
-      "lat": 28.639673,
-      "lng": -81.820847,
       "geocode": {
         "source": "geocoding-api",
         "precision": "ROOFTOP",
