@@ -82,4 +82,13 @@ describe('POST /api/for/generate', () => {
     const stored = (upsertForPage as ReturnType<typeof vi.fn>).mock.calls.at(-1)![0];
     expect(stored.demoPack).toBeNull();
   });
+  it('research response includes perSiteLabel and paybackMonths', async () => {
+    (generatePageRow as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('no demo pack for "x"'));
+    const res = await POST(req({ slug: 'x', account: { displayName: 'X', archetype: 'manufacturer' }, facilityCount: 20 }, TOKEN));
+    expect(res.status).toBe(200);
+    const j = await res.json();
+    expect(typeof j.perSiteLabel).toBe('string');
+    expect(j.perSiteLabel.length).toBeGreaterThan(0);
+    expect(typeof j.paybackMonths).toBe('number');
+  });
 });

@@ -56,7 +56,7 @@ export async function POST(req: Request) {
       };
       await upsertForPage(row);
       await revalidateForPage(body.slug);
-      return NextResponse.json({ ok: true, slug: body.slug, status: row.status, tier: demoPack ? 'research+network' : 'research', url: `${SITE.replace(/\/$/, '')}/for/${body.slug}`, annualValueLabel: snap.annualValueLabel, totalFacilities: snap.totalFacilities });
+      return NextResponse.json({ ok: true, slug: body.slug, status: row.status, tier: demoPack ? 'research+network' : 'research', url: `${SITE.replace(/\/$/, '')}/for/${body.slug}`, annualValueLabel: snap.annualValueLabel, totalFacilities: snap.totalFacilities, perSiteLabel: snap.perSiteImpliedLabel, paybackMonths: snap.paybackAllSavingsMonths });
     }
     return NextResponse.json({ error: msg }, { status: 500 });
   }
