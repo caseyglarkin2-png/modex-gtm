@@ -1,10 +1,10 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 vi.mock('@/lib/for/generate', () => ({ generatePageRow: vi.fn() }));
-vi.mock('@/lib/for/store', () => ({ upsertForPage: vi.fn() }));
+vi.mock('@/lib/for/store', () => ({ upsertForPage: vi.fn(), getForPage: vi.fn() }));
 vi.mock('@/lib/for/revalidate', () => ({ revalidateForPage: vi.fn() }));
 import { generatePageRow } from '@/lib/for/generate';
-import { upsertForPage } from '@/lib/for/store';
+import { upsertForPage, getForPage } from '@/lib/for/store';
 import { revalidateForPage } from '@/lib/for/revalidate';
 import { POST } from '@/app/api/for/generate/route';
 
@@ -19,6 +19,7 @@ describe('POST /api/for/generate', () => {
     process.env.POUNCE_INGEST_TOKEN = TOKEN;
     vi.clearAllMocks();
     (generatePageRow as ReturnType<typeof vi.fn>).mockResolvedValue({ slug: 'frito-lay', status: 'live', snap: { annualValueLabel: '$10.0M/yr', totalFacilities: 5 } });
+    (getForPage as ReturnType<typeof vi.fn>).mockResolvedValue(null);
   });
   it('401s without the token', async () => { expect((await POST(req({ slug: 'frito-lay' }))).status).toBe(401); });
   it('400s without a slug', async () => { expect((await POST(req({}, TOKEN))).status).toBe(400); });
@@ -90,5 +91,27 @@ describe('POST /api/for/generate', () => {
     expect(typeof j.perSiteLabel).toBe('string');
     expect(j.perSiteLabel.length).toBeGreaterThan(0);
     expect(typeof j.paybackMonths).toBe('number');
+  });
+  it('pins facility count: reuses existing row count on rebuild', async () => {
+    (generatePageRow as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('no demo pack for "acme"'));
+    (getForPage as ReturnType<typeof vi.fn>).mockResolvedValue({ slug: 'acme', snap: { totalFacilities: 30 } });
+    const res = await POST(req({ slug: 'acme', account: { displayName: 'Acme', archetype: 'manufacturer' }, facilityCount: 50 }, TOKEN));
+    expect(res.status).toBe(200);
+    const stored = (upsertForPage as ReturnType<typeof vi.fn>).mock.calls.at(-1)![0];
+    expect(stored.snap.totalFacilities).toBe(30); // pinned to existing, NOT 50
+  });
+  it('forceCount overrides the pin', async () => {
+    (generatePageRow as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('no demo pack for "acme"'));
+    (getForPage as ReturnType<typeof vi.fn>).mockResolvedValue({ slug: 'acme', snap: { totalFacilities: 30 } });
+    const res = await POST(req({ slug: 'acme', account: { displayName: 'Acme', archetype: 'manufacturer' }, facilityCount: 50, forceCount: true }, TOKEN));
+    const stored = (upsertForPage as ReturnType<typeof vi.fn>).mock.calls.at(-1)![0];
+    expect(stored.snap.totalFacilities).toBe(50); // forced
+  });
+  it('first publish (no existing row) uses the provided count', async () => {
+    (generatePageRow as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('no demo pack for "newco"'));
+    (getForPage as ReturnType<typeof vi.fn>).mockResolvedValue(null);
+    const res = await POST(req({ slug: 'newco', account: { displayName: 'New', archetype: 'manufacturer' }, facilityCount: 22 }, TOKEN));
+    const stored = (upsertForPage as ReturnType<typeof vi.fn>).mock.calls.at(-1)![0];
+    expect(stored.snap.totalFacilities).toBe(22);
   });
 });

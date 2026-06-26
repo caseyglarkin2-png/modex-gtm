@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { generatePageRow, type SpearOverride } from '@/lib/for/generate';
 import type { ForSnapshot } from '@/lib/for/snapshot';
-import { upsertForPage } from '@/lib/for/store';
+import { getForPage, upsertForPage } from '@/lib/for/store';
 import { revalidateForPage } from '@/lib/for/revalidate';
 import { buildResearchSnapshot, researchTierSpear } from '@/lib/for/research-tier';
 import { buildNetworkPack } from '@/lib/for/network-pack';
@@ -17,7 +17,7 @@ function authed(req: Request): boolean {
   return !!token && req.headers.get('x-pounce-token') === token;
 }
 
-interface Body { slug?: string; override?: SpearOverride; status?: 'draft' | 'live'; account?: { displayName?: string; archetype?: string }; facilityCount?: number; facilities?: Array<{ name: string; city?: string; state?: string; type?: string; lat?: number; lng?: number }>; }
+interface Body { slug?: string; override?: SpearOverride; status?: 'draft' | 'live'; account?: { displayName?: string; archetype?: string }; facilityCount?: number; forceCount?: boolean; facilities?: Array<{ name: string; city?: string; state?: string; type?: string; lat?: number; lng?: number }>; }
 
 export async function POST(req: Request) {
   if (!authed(req)) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
@@ -38,7 +38,10 @@ export async function POST(req: Request) {
     const msg = (e as Error).message;
     const acct = body.account;
     if (/no demo pack/i.test(msg) && body.facilityCount && acct?.displayName && acct?.archetype) {
-      const snap = buildResearchSnapshot(body.slug, { displayName: acct.displayName, archetype: acct.archetype }, body.facilityCount);
+      const existing = await getForPage(body.slug);
+      const pinned = (existing?.snap as ForSnapshot | undefined)?.totalFacilities;
+      const count = (typeof pinned === 'number' && pinned > 0 && !body.forceCount) ? pinned : body.facilityCount;
+      const snap = buildResearchSnapshot(body.slug, { displayName: acct.displayName, archetype: acct.archetype }, count);
       const override = body.override ?? researchTierSpear(acct.displayName, snap, acct.archetype);
       let demoPack = null;
       if (Array.isArray(body.facilities) && body.facilities.length) {
