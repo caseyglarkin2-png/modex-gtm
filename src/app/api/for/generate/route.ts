@@ -24,6 +24,13 @@ export async function POST(req: Request) {
   const body = (await req.json().catch(() => null)) as Body | null;
   if (!body?.slug) return NextResponse.json({ error: 'slug required' }, { status: 400 });
   try {
+    // forceCount is an explicit operator override of the modeled facility count;
+    // it only takes effect in the research-tier branch, so skip the audited
+    // generatePageRow path when it is set (otherwise an account that already has
+    // a stored pack would take the audited path and silently ignore forceCount).
+    if (body.forceCount && body.facilityCount && body.account?.displayName && body.account?.archetype) {
+      throw new Error('no demo pack: forceCount routes to research-tier');
+    }
     const row = await generatePageRow(body.slug, { override: body.override, status: body.status ?? 'live' });
     await upsertForPage(row);
     await revalidateForPage(body.slug);

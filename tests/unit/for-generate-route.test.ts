@@ -76,6 +76,19 @@ describe('POST /api/for/generate', () => {
     expect(stored.demoPack.network.sites.length).toBe(2);
     expect(stored.snap.totalFacilities).toBe(2);
   });
+  it('forceCount routes to research-tier even when generatePageRow would succeed', async () => {
+    // audited path would succeed (account already has a pack) ...
+    (generatePageRow as ReturnType<typeof vi.fn>).mockResolvedValue({ slug: 'hormel-foods', status: 'live', snap: { annualValueLabel: '$222.4M/yr', totalFacilities: 50 } });
+    (getForPage as ReturnType<typeof vi.fn>).mockResolvedValue({ slug: 'hormel-foods', snap: { totalFacilities: 50 } });
+    // ... but forceCount with an explicit count must override to the research model
+    const res = await POST(req({ slug: 'hormel-foods', account: { displayName: 'Hormel Foods', archetype: 'manufacturer' }, facilityCount: 29, forceCount: true }, TOKEN));
+    expect(res.status).toBe(200);
+    const body = await res.json();
+    expect(body.tier).toMatch(/research/);          // research path, not audited
+    expect(body.totalFacilities).toBe(29);          // forced count, not the pinned 50
+    const stored = (upsertForPage as ReturnType<typeof vi.fn>).mock.calls.at(-1)![0];
+    expect(stored.snap.totalFacilities).toBe(29);
+  });
   it('keeps demoPack null when no facilities given (pure spear)', async () => {
     (generatePageRow as ReturnType<typeof vi.fn>).mockRejectedValue(new Error('no demo pack for "x"'));
     const res = await POST(req({ slug: 'x', account: { displayName: 'X', archetype: 'manufacturer' }, facilityCount: 5 }, TOKEN));
