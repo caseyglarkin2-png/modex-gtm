@@ -1,0 +1,97 @@
+{
+  "name": "Mountain View Foods",
+  "type": "Dairy Plant",
+  "coords": { "lat": 39.79360, "lng": -104.87290 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 39.79075, "lng": -104.87410 },
+      { "lat": 39.79330, "lng": -104.87600 },
+      { "lat": 39.79480, "lng": -104.87425 },
+      { "lat": 39.79515, "lng": -104.87220 },
+      { "lat": 39.79490, "lng": -104.87150 },
+      { "lat": 39.79345, "lng": -104.87150 },
+      { "lat": 39.79065, "lng": -104.87255 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 39.79085, "lng": -104.87345 },
+      { "lat": 39.79085, "lng": -104.87290 },
+      { "lat": 39.79115, "lng": -104.87290 },
+      { "lat": 39.79115, "lng": -104.87345 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 39.79295, "lng": -104.87555 },
+        { "lat": 39.79460, "lng": -104.87440 },
+        { "lat": 39.79480, "lng": -104.87475 },
+        { "lat": 39.79315, "lng": -104.87590 }
+      ] },
+      { "ring": [
+        { "lat": 39.79115, "lng": -104.87470 },
+        { "lat": 39.79235, "lng": -104.87420 },
+        { "lat": 39.79250, "lng": -104.87455 },
+        { "lat": 39.79130, "lng": -104.87505 }
+      ] },
+      { "ring": [
+        { "lat": 39.79270, "lng": -104.87230 },
+        { "lat": 39.79330, "lng": -104.87170 },
+        { "lat": 39.79355, "lng": -104.87195 },
+        { "lat": 39.79295, "lng": -104.87255 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 39.79360, "lng": -104.87415 },
+        { "lat": 39.79560, "lng": -104.87370 },
+        { "lat": 39.79565, "lng": -104.87405 },
+        { "lat": 39.79365, "lng": -104.87450 }
+      ] },
+      { "ring": [
+        { "lat": 39.79295, "lng": -104.87340 },
+        { "lat": 39.79355, "lng": -104.87290 },
+        { "lat": 39.79375, "lng": -104.87320 },
+        { "lat": 39.79315, "lng": -104.87370 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 0, "pano": "l4o8zBK14S9-X3Cj4xC22g", "hasCoverage": true },
+      "truckGate": { "heading": 0, "pano": "l4o8zBK14S9-X3Cj4xC22g", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 28,
+    "trailersVisible": 130,
+    "trailerParkingCapacity": 160,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 27.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.79360,-104.87290,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "scale"],
+  "fieldNotes": {
+    "truckGate": "Single truck driveway off E 51st Ave is an open, uncontrolled apron - no barrier arm, sliding gate, or pinch-point control across the lane (Street View 2023-10, pano l4o8zBK14S9-X3Cj4xC22g). Property is chain-link fenced but the entrance opening is open.",
+    "guardShack": "No staffed guard booth at the entrance. A freestanding info/check-in sign panel sits beside the drive, but no booth structure - consistent with a no-gate open site.",
+    "remoteGs": "False because there is no controlled gate; the sign by the drive is informational, not a gate-control kiosk.",
+    "dockDoors": "Counted ~15 trailers backed into the west building face plus ~8-10 on the south face; estimate 25-30 total doors across faces. Band 25-50, count approximate.",
+    "dropArea": "Extensive trailer drop yards line the internal road on the west and the south aprons; well over 50 marked stalls / parked drop trailers visible.",
+    "shipRcvSeparate": "Dock banks on two distinct building faces (west and south) suggest separate ship/receive clusters; medium confidence.",
+    "scale": "No truck scale clearly identified in the truck path; flagged uncertain.",
+    "urbanRural": "Inside Denver metro (Montbello/Gateway industrial district, NE Denver) - dense industrial/residential fabric nearby; Urban.",
+    "buildingCount": "Only the white dairy plant is on this property; the large tan distribution center to the east is a SEPARATE facility (different property line) and is excluded.",
+    "fastLaneOpportunity": "Wide entrance apron and ample internal paved width inside the open gate provide room for a bypass/express lane."
+  },
+  "method": "deep-audit"
+}

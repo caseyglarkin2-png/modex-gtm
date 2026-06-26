@@ -1,0 +1,81 @@
+{
+  "name": "Vandervoort Dairy",
+  "type": "Dairy Plant",
+  "coords": { "lat": 32.734748, "lng": -97.32669 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 32.735477, "lng": -97.328017 },
+      { "lat": 32.735477, "lng": -97.326005 },
+      { "lat": 32.735409, "lng": -97.325909 },
+      { "lat": 32.734552, "lng": -97.325909 },
+      { "lat": 32.734529, "lng": -97.326488 },
+      { "lat": 32.733897, "lng": -97.326488 },
+      { "lat": 32.733897, "lng": -97.328017 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 32.7348, "lng": -97.3274 },
+      { "lat": 32.7348, "lng": -97.327078 },
+      { "lat": 32.734597, "lng": -97.327078 },
+      { "lat": 32.734597, "lng": -97.3274 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 32.735432, "lng": -97.32799 },
+        { "lat": 32.735432, "lng": -97.3274 },
+        { "lat": 32.734597, "lng": -97.3274 },
+        { "lat": 32.734597, "lng": -97.32799 }
+      ] },
+      { "ring": [
+        { "lat": 32.734462, "lng": -97.327963 },
+        { "lat": 32.734462, "lng": -97.326542 },
+        { "lat": 32.73392, "lng": -97.326542 },
+        { "lat": 32.73392, "lng": -97.327963 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 32.735003, "lng": -97.327266 },
+        { "lat": 32.7348, "lng": -97.326461 },
+        { "lat": 32.734552, "lng": -97.326515 },
+        { "lat": 32.734755, "lng": -97.32732 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 330, "pano": "k_PdLHdO7DS-Cb_gL-0QEg", "hasCoverage": true },
+      "truckGate": { "heading": 15, "pano": "7gMutd0wPh_flI4Ghd3Lmw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 20,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 90,
+    "truckGateCount": 2,
+    "buildingCount": 3,
+    "siteAreaAcres": 7.6,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@32.734748,-97.32669,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": true,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "location": "Confirmed 900 S Main St, Fort Worth TX 76104 is the operating Kroger/Vandervoort's dairy plant per Kroger's own manufacturing-division plant address list; satellite shows a dense dairy processing complex (rooftop refrigeration, milk silos) matching the type. Given coords were ~1.1km north of the real building; recentered to the plant core.",
+    "guardShack": "Fenced plant core (chain-link + green privacy screen) with pole-mounted security cameras at the fence openings, but no staffed guard booth visible at any entrance street-viewed (2025-01 imagery). Treated as remote check-in (remoteGs).",
+    "multipleFacilities": "Urban multi-parcel campus: fenced production block east of the trailer/silo yard, a separate west building, and satellite trailer-storage lots across adjacent streets.",
+    "shipRcvSeparate": "Trailers back into docks on multiple building faces (north and south/west banks).",
+    "backupSensitive": "Urban Near-Southside block; yard fence and trailers sit directly at the public-street curb with little stacking room outside the gates.",
+    "dropArea": "Multiple open trailer-storage lots packed with parked trailers across the campus (50+)."
+  },
+  "method": "deep-audit"
+}

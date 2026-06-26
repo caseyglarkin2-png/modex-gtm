@@ -1,0 +1,111 @@
+{
+  "name": "Winchester Farms Dairy",
+  "type": "Dairy Plant",
+  "coords": { "lat": 38.01185, "lng": -84.18000 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 38.01270, "lng": -84.18155 },
+      { "lat": 38.01288, "lng": -84.18000 },
+      { "lat": 38.01281, "lng": -84.17900 },
+      { "lat": 38.01200, "lng": -84.17845 },
+      { "lat": 38.01118, "lng": -84.17875 },
+      { "lat": 38.01096, "lng": -84.18005 },
+      { "lat": 38.01120, "lng": -84.18140 },
+      { "lat": 38.01210, "lng": -84.18170 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 38.01352, "lng": -84.17935 },
+      { "lat": 38.01345, "lng": -84.17888 },
+      { "lat": 38.01318, "lng": -84.17898 },
+      { "lat": 38.01325, "lng": -84.17945 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 38.01215, "lng": -84.18150 },
+        { "lat": 38.01230, "lng": -84.18095 },
+        { "lat": 38.01170, "lng": -84.18060 },
+        { "lat": 38.01150, "lng": -84.18120 }
+      ] },
+      { "ring": [
+        { "lat": 38.01150, "lng": -84.18025 },
+        { "lat": 38.01165, "lng": -84.17960 },
+        { "lat": 38.01128, "lng": -84.17945 },
+        { "lat": 38.01115, "lng": -84.18010 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 38.01278, "lng": -84.18060 },
+        { "lat": 38.01275, "lng": -84.17935 },
+        { "lat": 38.01258, "lng": -84.17935 },
+        { "lat": 38.01261, "lng": -84.18060 }
+      ] },
+      { "ring": [
+        { "lat": 38.01258, "lng": -84.18120 },
+        { "lat": 38.01230, "lng": -84.18075 },
+        { "lat": 38.01215, "lng": -84.18095 },
+        { "lat": 38.01243, "lng": -84.18140 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 38.01325, "lng": -84.17920 },
+      { "lat": 38.01318, "lng": -84.17870 },
+      { "lat": 38.01290, "lng": -84.17882 },
+      { "lat": 38.01297, "lng": -84.17932 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 201, "pano": "G-CIJ8yXm7kyhDnAHrJXeA", "hasCoverage": true },
+      "truckGate": { "heading": 192, "pano": "G-CIJ8yXm7kyhDnAHrJXeA", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 34,
+    "trailersVisible": 48,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 12.1,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@38.01185,-84.18000,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "25-50",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "guardShack", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Sliding chain-link gate across the truck lane where the entrance boulevard meets the secured yard near the cryogenic silos (Street View 2019-06 and 2026-04 both show the perimeter fence with a rolling gate panel).",
+    "guardShack": "No staffed multi-window guard booth observed at the gate lane; small process/utility structures only. Treated as remote/kiosk check-in.",
+    "remoteGs": "Gate present but no guard shack, implying kiosk/call-box/app check-in.",
+    "postGateStaging": "Long paved entrance boulevard with a landscaped median gives ample inside-gate queueing before the docks.",
+    "drivewayLong": "Boulevard from Rolling Hills Lane to the yard easily holds 3+ trucks.",
+    "fastLaneOpportunity": "Wide paved gate apron and unused width at the boulevard could host a bypass/express lane.",
+    "dockDoors": "Counted ~34 doors from trailers backed in along the north and west building faces; band 25-50 (count is an overhead estimate).",
+    "dropArea": "Multiple angled trailer rows in the west and southwest drop yard; ~48 trailers visible.",
+    "multipleFacilities": "Main fluid/cultured dairy plant plus separate northeast building cluster (white-roofed DC + ancillary structures) on the same campus.",
+    "urbanRural": "Edge-of-town industrial park off I-64 on the outskirts of Winchester KY, surrounded by mowed fields.",
+    "railServed": "No rail spur into the property."
+  },
+  "method": "deep-audit"
+}

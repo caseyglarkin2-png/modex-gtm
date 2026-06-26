@@ -1,0 +1,88 @@
+{
+  "name": "Pace Dairy of Indiana (Crawfordsville Cheese)",
+  "type": "Dairy Plant",
+  "coords": { "lat": 40.05080, "lng": -86.87380 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 40.05207, "lng": -86.87594 },
+      { "lat": 40.05203, "lng": -86.87219 },
+      { "lat": 40.05010, "lng": -86.87235 },
+      { "lat": 40.05002, "lng": -86.87594 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 40.05028, "lng": -86.87560 },
+      { "lat": 40.05028, "lng": -86.87505 },
+      { "lat": 40.05002, "lng": -86.87505 },
+      { "lat": 40.05002, "lng": -86.87560 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 40.05130, "lng": -86.87280 },
+        { "lat": 40.05130, "lng": -86.87238 },
+        { "lat": 40.05010, "lng": -86.87242 },
+        { "lat": 40.05010, "lng": -86.87284 }
+      ] },
+      { "ring": [
+        { "lat": 40.04978, "lng": -86.87470 },
+        { "lat": 40.04978, "lng": -86.87320 },
+        { "lat": 40.04968, "lng": -86.87320 },
+        { "lat": 40.04968, "lng": -86.87470 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 40.05165, "lng": -86.87300 },
+        { "lat": 40.05165, "lng": -86.87286 },
+        { "lat": 40.05050, "lng": -86.87290 },
+        { "lat": 40.05050, "lng": -86.87304 }
+      ] },
+      { "ring": [
+        { "lat": 40.05020, "lng": -86.87360 },
+        { "lat": 40.05020, "lng": -86.87300 },
+        { "lat": 40.05006, "lng": -86.87300 },
+        { "lat": 40.05006, "lng": -86.87360 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 40.05060, "lng": -86.87360 },
+      { "lat": 40.05060, "lng": -86.87250 },
+      { "lat": 40.05000, "lng": -86.87250 },
+      { "lat": 40.05000, "lng": -86.87360 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 88, "pano": "Rv6jlO0YSodPkn1tql9aUQ", "hasCoverage": true },
+      "truckGate": { "heading": 90, "pano": "Rv6jlO0YSodPkn1tql9aUQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 32,
+    "trailersVisible": 38,
+    "trailerParkingCapacity": 50,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 17.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@40.05080,-86.87380,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoors", "shipRcvSeparate", "scale"],
+  "fieldNotes": {
+    "truckGate": "Fenced single entrance off Englewood Dr; Apr-2026 Street View shows chain-link both sides, a gate, and a truck passing the checkpoint.",
+    "guardShack": "Small booth on a center island at the gate apron, visible in Street View and confirmed as a distinct ~1-vehicle structure in z20 satellite.",
+    "dockDoors": "Doors concentrated on the east wall (~12-15 with trailers backed in) plus a south/SE dock cluster; total estimated 25-50 from overhead, not exhaustively counted.",
+    "dropYard": "Dedicated trailer-storage rows along the east side beside the aerated wastewater lagoon, plus a staged row on the south access road.",
+    "scale": "No truck scale clearly visible in imagery; left false."
+  },
+  "method": "deep-audit"
+}

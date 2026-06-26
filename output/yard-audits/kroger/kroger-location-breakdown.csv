@@ -18,32 +18,79 @@ Kroger Customer Fulfillment Center Aurora CO,Customer Fulfillment Center (Ocado-
 Kroger Customer Fulfillment Center Groveland FL,Customer Fulfillment Center (Ocado-automated),#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,2,YES,,,YES,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@28.64018,-81.82035,400m/data=!3m1!1e3"
 Kroger Customer Fulfillment Center Romulus MI,Customer Fulfillment Center (Ocado-automated),#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,YES,,,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@42.18820,-83.38120,400m/data=!3m1!1e3"
 Kroger Customer Fulfillment Center Dallas TX,Customer Fulfillment Center (Ocado-automated),#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,,YES,,2,1,,,YES,,,,YES,,,,Urban,,,,,"https://www.google.com/maps/@32.63794,-96.75375,400m/data=!3m1!1e3"
+Centennial Farms Dairy,Dairy Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@33.813853,-84.358477,400m/data=!3m1!1e3"
+Heritage Farms Dairy,Dairy Plant,#4,Gate + GS (BU sens.),,,,,,,,,,,YES,YES,,,YES,YES,,YES,YES,,1,1,YES,,YES,,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@35.83340,-86.41310,400m/data=!3m1!1e3"
+Winchester Farms Dairy,Dairy Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,YES,,,,YES,,,Rural,,YES,,YES,"https://www.google.com/maps/@38.01185,-84.18000,400m/data=!3m1!1e3"
+Tamarack Farms Dairy,Dairy Plant,#1,Gate + GS (not BU sens.),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,YES,,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@40.03905,-82.46075,400m/data=!3m1!1e3"
+Crossroad Farms Dairy,Dairy Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@39.76560,-86.04180,400m/data=!3m1!1e3"
+Michigan Dairy,Dairy Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@42.379921,-83.338345,400m/data=!3m1!1e3"
+Jackson Hutchinson Dairy,Dairy Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,1,1,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@38.0593,-97.8818,400m/data=!3m1!1e3"
+Westover Dairy,Dairy Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,YES,,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@37.39740,-79.16560,400m/data=!3m1!1e3"
+Springdale Ice Cream & Beverage Plant,Beverage Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@39.29125,-84.45040,400m/data=!3m1!1e3"
+Vandervoort Dairy,Dairy Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,YES,YES,,1,1,,,YES,,,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@32.734748,-97.32669,400m/data=!3m1!1e3"
+Swan Island Dairy,Dairy Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,,YES,YES,YES,,1,1,,,YES,,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@45.55855,-122.69815,400m/data=!3m1!1e3"
+Mountain View Foods,Dairy Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,YES,,,YES,,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@39.79360,-104.87290,400m/data=!3m1!1e3"
+Kroger Layton Dairy,Dairy Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,YES,,,,YES,,,,Urban,,YES,,YES,"https://www.google.com/maps/@41.06410,-111.98350,400m/data=!3m1!1e3"
+Riverside Creamery,Dairy Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@33.929553,-117.30595,400m/data=!3m1!1e3"
+Compton Creamery,Dairy Plant,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@33.87098,-118.23868,400m/data=!3m1!1e3"
+Tolleson Dairy,Dairy Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,2,2,YES,,YES,,,,,YES,,YES,Urban,,YES,,YES,"https://www.google.com/maps/@33.438630,-112.276560,400m/data=!3m1!1e3"
+America's Beverage Plant,Beverage Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@32.83960,-96.92740,400m/data=!3m1!1e3"
+Pace Dairy of Indiana (Crawfordsville Cheese),Dairy Plant,#1,Gate + GS (not BU sens.),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@40.05080,-86.87380,400m/data=!3m1!1e3"
+Pace Dairy of Minnesota (Rochester Cheese),Dairy Plant,#1,Gate + GS (not BU sens.),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,,,YES,,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@44.05295,-92.51019,400m/data=!3m1!1e3"
+Anderson Bakery,Bakery Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,,YES,YES,YES,,1,1,,,YES,,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@34.489292,-82.654568,400m/data=!3m1!1e3"
+Indianapolis Bakery,Bakery Plant,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@39.759711,-86.048578,400m/data=!3m1!1e3"
+King Soopers Bakery,Bakery Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,2,2,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@39.71625,-105.01255,400m/data=!3m1!1e3"
+La Habra Bakery,Bakery Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,YES,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@33.92210,-117.93905,400m/data=!3m1!1e3"
+Clackamas Bakery,Bakery Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,YES,,,,,,YES,,Urban,,,,YES,"https://www.google.com/maps/@45.405470,-122.539650,400m/data=!3m1!1e3"
+Country Oven Bakery,Bakery Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,YES,,,,YES,,YES,Rural,,,,YES,"https://www.google.com/maps/@36.9485,-86.4905,400m/data=!3m1!1e3"
+KB Specialty Foods,Deli/Meat Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@39.34955,-85.48590,400m/data=!3m1!1e3"
+Layton Bakery,Bakery Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,YES,,,YES,,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@41.06435,-111.98370,400m/data=!3m1!1e3"
+Roundy's Commissary (RCK Foods / Kroger),Deli/Meat & Prepared-Foods Commissary Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,YES,,YES,,,,YES,,,,Urban,,,,YES,"https://www.google.com/maps/@42.590687,-87.874072,400m/data=!3m1!1e3"
+Delight Products,Grocery Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,,YES,,,YES,,,Rural,,,,YES,"https://www.google.com/maps/@36.49850,-86.86720,400m/data=!3m1!1e3"
+Kenlake Foods,Beverage Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,,,YES,,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@36.6122,-88.2988,400m/data=!3m1!1e3"
+Pontiac Foods,Grocery Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,2,2,,,,YES,,,YES,,,,Rural,,,,YES,"https://www.google.com/maps/@34.13200,-80.86060,400m/data=!3m1!1e3"
+State Avenue Plant,Grocery Plant,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,YES,YES,,1,1,,,,YES,,,YES,,,,Urban,,YES,,YES,"https://www.google.com/maps/@39.10900,-84.55050,400m/data=!3m1!1e3"
+Tara Foods (Kroger),Grocery Plant,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,YES,,,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@31.59955,-84.10295,400m/data=!3m1!1e3"
+Harris Teeter Distribution Center Greensboro NC,Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@36.09310,-79.92990,400m/data=!3m1!1e3"
+Harris Teeter Distribution Center Indian Trail NC,Distribution Center,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@35.0640,-80.6470,400m/data=!3m1!1e3"
+Kroger Mid-Atlantic Distribution Center Salem VA,Distribution Center,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,YES,,YES,"https://www.google.com/maps/@37.27620,-80.12000,400m/data=!3m1!1e3"
+Kroger Distribution Center Houston TX,Distribution Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,2,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@29.78420,-95.27050,400m/data=!3m1!1e3"
+Kroger Michigan Fresh Distribution Center Romulus MI,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@42.18845,-83.37720,400m/data=!3m1!1e3"
+Kroger Delta Distribution Center Memphis TN,Distribution Center,#10,Ship/Rcv Separate (Gate+GS),,,,,,,,,,,YES,YES,,YES,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@35.0112,-89.8688,400m/data=!3m1!1e3"
+Kroger Cincinnati Fresh Distribution Center Blue Ash OH,Distribution Center,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,,YES,1,1,YES,,,,YES,,,,YES,YES,Urban,,,,YES,"https://www.google.com/maps/@39.26280,-84.36280,400m/data=!3m1!1e3"
+Roundy's Distribution Center Oconomowoc WI,Distribution Center,#7,Gate + GS (not BU sens.) + fast lane opp,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,1,1,YES,,,,YES,,,,YES,,Rural,,,,YES,"https://www.google.com/maps/@43.0598,-88.4762,400m/data=!3m1!1e3"
+Fred Meyer Distribution Center Chehalis WA,Distribution Center,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,,,,YES,,,,YES,YES,Rural,,,,YES,"https://www.google.com/maps/@46.62475,-122.9138,400m/data=!3m1!1e3"
+Ralphs Distribution Center Paramount CA,Distribution Center,#6,Gate + GS (not BU sens.) + campus,,,,,,,,,,,YES,YES,,,YES,YES,,,YES,,2,1,YES,,,,YES,,,,YES,YES,Urban,,YES,,YES,"https://www.google.com/maps/@33.899300,-118.166450,400m/data=!3m1!1e3"
+Home Chef Production Center Bedford Park IL,Home Chef Facility,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,,,,YES,,,YES,,,,Urban,,,,,"https://www.google.com/maps/@41.77270,-87.79190,400m/data=!3m1!1e3"
+Home Chef Production Center San Bernardino CA,Home Chef Facility,#9,Gate + No GS (remote check-in),,,,,,,,,,,YES,,YES,,YES,YES,,,YES,,1,1,YES,,,YES,,YES,,,,,Urban,,,,,"https://www.google.com/maps/@34.075266,-117.257699,400m/data=!3m1!1e3"
+Home Chef Production Center Douglasville GA,Home Chef Facility,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,,,,YES,,,,,,,Rural,,,,,"https://www.google.com/maps/@33.7828,-84.61625,400m/data=!3m1!1e3"
+Home Chef Manufacturing & Distribution Center Baltimore MD,Home Chef Facility,#3,No Gate / No GS,,,,,,,,,,,,,,,,YES,,,YES,,1,1,YES,,,YES,,,,YES,,,Urban,,,,YES,"https://www.google.com/maps/@39.2303,-76.5776,400m/data=!3m1!1e3"
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,#1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#1,3,5%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,#2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,#3,6,33%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,#4,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#3,20,31%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#4,1,2%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,#5,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,#6,6,33%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,#7,1,6%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#6,11,17%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#7,3,5%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,#8,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,#9,4,22%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,#10,1,6%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,Total,18,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#9,24,37%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,#10,3,5%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,65,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,Fast Lane Opportunity,14,78%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Fast Lane Opportunity,43,66%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,Rural / connectivity,8,44%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Rural / connectivity,26,40%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,Guarded,8,44%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,Not-Guarded,10,56%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Guarded,21,32%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Not-Guarded,44,68%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,# Shifts,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,1,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,2,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
 ,3,0,0%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,NA,18,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,Total,18,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,NA,65,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,Total,65,100%,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,

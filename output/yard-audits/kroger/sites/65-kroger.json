@@ -1,0 +1,68 @@
+{
+  "name": "Home Chef Production Center Douglasville GA",
+  "type": "Home Chef Facility",
+  "coords": { "lat": 33.7828, "lng": -84.61625 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 33.78375, "lng": -84.61705 },
+      { "lat": 33.78380, "lng": -84.61560 },
+      { "lat": 33.78350, "lng": -84.61545 },
+      { "lat": 33.78165, "lng": -84.61600 },
+      { "lat": 33.78150, "lng": -84.61700 },
+      { "lat": 33.78260, "lng": -84.61725 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 33.78372, "lng": -84.61640 },
+      { "lat": 33.78368, "lng": -84.61600 },
+      { "lat": 33.78345, "lng": -84.61605 },
+      { "lat": 33.78349, "lng": -84.61645 }
+    ] },
+    "dropYards": [],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 33.78348, "lng": -84.61570 },
+        { "lat": 33.78340, "lng": -84.61555 },
+        { "lat": 33.78180, "lng": -84.61610 },
+        { "lat": 33.78185, "lng": -84.61628 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 163, "pano": "Y5EzxcETwG6SkJXgZLDVRQ", "hasCoverage": true },
+      "truckGate": { "heading": 211, "pano": "nnQ9ae137HHmFv0HOuTJIg", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 40,
+    "trailersVisible": 27,
+    "trailerParkingCapacity": 35,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 8.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.7828,-84.61625,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "NONE",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": false, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Open driveway off Skyview Dr into front lot, then an open paved curve around the NE corner into the east dock apron. No barrier arm, sliding gate, or checkpoint pinch-point at the road or at the yard transition (verified in 2025-03 Street View and z20 satellite).",
+    "guardShack": "No staffed booth at the entrance. The dark pad near the NE corner is a utility/transformer pad set in landscaping, not a windowed guard booth.",
+    "dockDoors": "Continuous dock bank along the full ~600 ft east wall with ~25-30 reefer trailers backed in; total door count estimated ~40 (band 25-50) from z19 imagery.",
+    "dropArea": "All trailers are backed into dock doors (active); no separately marked bobtail/drop-trailer stalls visible, so dropArea NONE.",
+    "drivewayLong": "Single east dock apron runs the building length and can hold a 3+ truck queue along the dock face.",
+    "urbanRural": "Edge-of-town industrial corridor off I-20 in Lithia Springs/Douglasville, woods and a retention pond bordering the site; judged Rural per rubric tie-break.",
+    "location": "Confirmed 2120 Skyview Dr (geocoded to Lithia Springs/Douglasville GA 30122; supplied coords were ~2.5 km west in a residential area and were wrong). Building front carries the painted '2120' address number, verified in Street View."
+  },
+  "method": "deep-audit"
+}

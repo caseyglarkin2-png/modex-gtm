@@ -1,0 +1,90 @@
+{
+  "name": "Pontiac Foods",
+  "type": "Grocery Plant",
+  "coords": { "lat": 34.13200, "lng": -80.86060 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 34.13428, "lng": -80.86158 },
+      { "lat": 34.13432, "lng": -80.85898 },
+      { "lat": 34.13360, "lng": -80.85878 },
+      { "lat": 34.13105, "lng": -80.85888 },
+      { "lat": 34.13030, "lng": -80.85935 },
+      { "lat": 34.13038, "lng": -80.86120 },
+      { "lat": 34.13250, "lng": -80.86168 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 34.13405, "lng": -80.85998 },
+      { "lat": 34.13405, "lng": -80.85955 },
+      { "lat": 34.13360, "lng": -80.85955 },
+      { "lat": 34.13360, "lng": -80.85998 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 34.13095, "lng": -80.86060 },
+        { "lat": 34.13090, "lng": -80.85935 },
+        { "lat": 34.13030, "lng": -80.85940 },
+        { "lat": 34.13035, "lng": -80.86065 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 34.13260, "lng": -80.85988 },
+        { "lat": 34.13262, "lng": -80.85958 },
+        { "lat": 34.13080, "lng": -80.85968 },
+        { "lat": 34.13078, "lng": -80.85998 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
+      "truckGate": { "heading": 0, "pano": "", "hasCoverage": false }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 32,
+    "trailersVisible": 28,
+    "trailerParkingCapacity": 40,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 24.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@34.13200,-80.86060,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Rural",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["truckGate", "guardShack", "remoteGs", "dockDoorCount", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "No barrier arm, sliding gate, or guard booth visible at the access-drive/perimeter-road junction in z19 satellite; entrance reads as an open shared driveway. No Street View coverage of the access road or Bookman Rd frontage (only panos are residential streets ~700m north), so gate cannot be ground-confirmed.",
+    "guardShack": "No small booth structure beside the entrance lane in overhead imagery.",
+    "postGateStaging": "Wide paved apron between the east dock face and employee parking provides interior holding room before the docks.",
+    "dockDoors": "Counted ~10-14 trailer positions on the east face plus additional doors at the south end; building is ~600 ft long. 25-50 band is the best estimate from overhead.",
+    "dropArea": "Gravel/unpaved drop yard at the SE corner holding ~15-18 parked trailers without tractors.",
+    "urbanRural": "Edge-of-town industrial site in Elgin SC outside Columbia metro; abuts a residential subdivision but broader setting is small-town/rural with adjacent farmland and a lake.",
+    "shipRcvSeparate": "All loading docks read as a single bank on the east/south face; no clearly separate second dock cluster.",
+    "siteAreaAcres": "Derived from the traced perimeter polygon; approximate."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,76 @@
+{
+  "name": "Roundy's Distribution Center Oconomowoc WI",
+  "type": "Distribution Center",
+  "coords": { "lat": 43.0598, "lng": -88.4762 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 43.06155, "lng": -88.48075 },
+      { "lat": 43.06145, "lng": -88.47155 },
+      { "lat": 43.05935, "lng": -88.47175 },
+      { "lat": 43.05790, "lng": -88.47235 },
+      { "lat": 43.05800, "lng": -88.48070 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 43.05845, "lng": -88.47445 },
+      { "lat": 43.05845, "lng": -88.47340 },
+      { "lat": 43.05805, "lng": -88.47345 },
+      { "lat": 43.05805, "lng": -88.47450 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 43.05865, "lng": -88.48060 },
+        { "lat": 43.05870, "lng": -88.47260 },
+        { "lat": 43.05800, "lng": -88.47300 },
+        { "lat": 43.05800, "lng": -88.48065 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 43.05935, "lng": -88.48055 },
+        { "lat": 43.05945, "lng": -88.47200 },
+        { "lat": 43.05880, "lng": -88.47230 },
+        { "lat": 43.05875, "lng": -88.48060 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 314, "pano": "y7LtGCEG7VU7ey0dZXvTgQ", "hasCoverage": true },
+      "truckGate": { "heading": 242, "pano": "6puqMVIc_m09o6Pejq_A9Q", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 110,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 220,
+    "truckGateCount": 1,
+    "buildingCount": 2,
+    "siteAreaAcres": 71.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@43.0598,-88.4762,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "scale", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Single controlled truck entry off Distribution Ct at the SE corner; full chain-link perimeter fence confirmed on all sides via Street View (2007 + 2024 panos) and satellite.",
+    "guardShack": "Small booth-footprint structure beside the SE entry lane visible at z20-21 satellite; consistent with a staffed gatehouse but not crisply resolved, so flagged.",
+    "dockDoors": "Single very long south-facing dock bank running the length of a 1.1M sq ft building plus the east-end face; well over 50 doors (est ~110).",
+    "dropArea": "Large fenced drop yard south of the dock apron with many rows of parked trailers; 50+ band, est capacity ~220.",
+    "scale": "No clearly identifiable truck scale pad resolved; left false.",
+    "buildingCount": "Main 1.1M sq ft DC plus a separate small satellite/fleet building in the SW yard.",
+    "railServed": "No rail spur visible entering the property.",
+    "fastLaneOpportunity": "Wide gate apron and ample paved width at the SE entry leave room for a bypass/express lane.",
+    "urbanRural": "Edge-of-town Oconomowoc, surrounded by farmland and a light industrial park; Rural per rubric."
+  },
+  "method": "deep-audit"
+}

@@ -1,0 +1,93 @@
+{
+  "name": "King Soopers Bakery",
+  "type": "Bakery Plant",
+  "coords": { "lat": 39.71625, "lng": -105.01255 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 39.71905, "lng": -105.01230 },
+      { "lat": 39.71895, "lng": -105.01085 },
+      { "lat": 39.71455, "lng": -105.01080 },
+      { "lat": 39.71435, "lng": -105.01300 },
+      { "lat": 39.71480, "lng": -105.01430 },
+      { "lat": 39.71700, "lng": -105.01505 },
+      { "lat": 39.71840, "lng": -105.01505 },
+      { "lat": 39.71885, "lng": -105.01390 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 39.71870, "lng": -105.01140 },
+      { "lat": 39.71870, "lng": -105.01095 },
+      { "lat": 39.71820, "lng": -105.01095 },
+      { "lat": 39.71820, "lng": -105.01140 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 39.71720, "lng": -105.01505 },
+        { "lat": 39.71720, "lng": -105.01430 },
+        { "lat": 39.71570, "lng": -105.01430 },
+        { "lat": 39.71570, "lng": -105.01505 }
+      ] },
+      { "ring": [
+        { "lat": 39.71895, "lng": -105.01230 },
+        { "lat": 39.71890, "lng": -105.01110 },
+        { "lat": 39.71790, "lng": -105.01110 },
+        { "lat": 39.71795, "lng": -105.01230 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 39.71820, "lng": -105.01180 },
+        { "lat": 39.71820, "lng": -105.01140 },
+        { "lat": 39.71490, "lng": -105.01140 },
+        { "lat": 39.71490, "lng": -105.01180 }
+      ] },
+      { "ring": [
+        { "lat": 39.71700, "lng": -105.01470 },
+        { "lat": 39.71700, "lng": -105.01435 },
+        { "lat": 39.71530, "lng": -105.01435 },
+        { "lat": 39.71530, "lng": -105.01470 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 39.71895, "lng": -105.01230 },
+      { "lat": 39.71890, "lng": -105.01085 },
+      { "lat": 39.71790, "lng": -105.01085 },
+      { "lat": 39.71795, "lng": -105.01230 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 250, "pano": "", "hasCoverage": true },
+      "truckGate": { "heading": 280, "pano": "", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 120,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 27.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.71625,-105.01255,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": false, "entryExitSeparate": true,
+    "entryLanes": 2, "exitLanes": 2, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "railServed"],
+  "fieldNotes": {
+    "guardShack": "No staffed booth or barrier arm seen at any of 6+ entrances street-viewed (N, NE, E, SE, SW, W). Perimeter is chain-link with privacy screen + barbed wire; vehicle gates appear open/unmanned in all 2024-2025 captures.",
+    "remoteGs": "Gate present (fenced perimeter, gated openings) but no guard shack => remote/uncontrolled check-in.",
+    "railServed": "Active rail line + yard runs NE of the property (top-right of imagery) but no spur enters the bakery property; trucks only.",
+    "dockDoorCount": "Long east dock wall ~25-30 doors confirmed in street view; additional diagonal trailer docks on east, plus west and south dock banks. 50+ band, count approximate.",
+    "shipRcvSeparate": "Distinct dock banks on east face (street-view wall) and west/south faces.",
+    "truckGate": "Two open gated entrances: NE off the main road into the north staging yard, and a west entrance into the trailer yard."
+  },
+  "method": "deep-audit"
+}

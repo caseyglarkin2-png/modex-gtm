@@ -1,0 +1,68 @@
+{
+  "name": "Ralphs Distribution Center Paramount CA",
+  "type": "Distribution Center",
+  "coords": { "lat": 33.899300, "lng": -118.166450 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 33.900900, "lng": -118.168300 },
+      { "lat": 33.900950, "lng": -118.164850 },
+      { "lat": 33.897650, "lng": -118.164600 },
+      { "lat": 33.897600, "lng": -118.168300 }
+    ] },
+    "truckGate": null,
+    "dropYards": [
+      { "ring": [
+        { "lat": 33.900500, "lng": -118.166050 },
+        { "lat": 33.900550, "lng": -118.165050 },
+        { "lat": 33.898700, "lng": -118.164950 },
+        { "lat": 33.898700, "lng": -118.165900 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 33.901150, "lng": -118.168050 },
+        { "lat": 33.901150, "lng": -118.165200 },
+        { "lat": 33.900950, "lng": -118.165200 },
+        { "lat": 33.900950, "lng": -118.168050 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 97, "pano": "b6V54sa-LfWWxXZiS3Ozuw", "hasCoverage": true },
+      "truckGate": { "heading": 69, "pano": "b6V54sa-LfWWxXZiS3Ozuw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 220,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 250,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 30.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.899300,-118.166450,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": true, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 2, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "medium",
+  "uncertainFields": ["guardShack", "truckGate", "entryLanes", "exitLanes", "postGateStaging", "multiStep"],
+  "fieldNotes": {
+    "truckGate": "Driver reviews (TruckMap/Yelp) confirm a staffed security gate with check-in and hi-vis vest enforcement. Campus is fully secured: Street View has zero internal coverage, only the public Garfield Ave frontage. Exact gate location not directly imaged, so truckGate geofence left null rather than fabricated.",
+    "guardShack": "Inferred from driver accounts of waiting at the security gate; a physical booth could not be confirmed in overhead imagery. Medium confidence.",
+    "dropArea": "Large angled-parking trailer drop yard along the rail on the east side of the campus (NE-corner imagery shows dozens of dropped trailers); clearly 50+.",
+    "dockDoorCount": "Estimate across multiple large warehouse dock banks (north dock warehouse south/north faces, solar building north & south faces, southern warehouses). Honest overhead estimate.",
+    "multipleFacilities": "Contiguous multi-building grocery DC campus: long north dock warehouse, central solar-paneled building, and southern warehouse(s).",
+    "railServed": "Rail line runs N-S immediately east of the property as the boundary; no spur observed entering the yard.",
+    "siteAreaAcres": "Area of the traced contiguous warehouse+drop-yard core (~30 ac). The broader Kroger/Ralphs holding may be larger; perimeter traced to the dense DC mass between Garfield Ave and the rail."
+  },
+  "method": "deep-audit"
+}

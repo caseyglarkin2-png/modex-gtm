@@ -1,0 +1,87 @@
+{
+  "name": "Fred Meyer Distribution Center Chehalis WA",
+  "type": "Distribution Center",
+  "coords": { "lat": 46.62475, "lng": -122.91380 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 46.62620, "lng": -122.91775 },
+      { "lat": 46.62655, "lng": -122.91410 },
+      { "lat": 46.62600, "lng": -122.91010 },
+      { "lat": 46.62330, "lng": -122.91005 },
+      { "lat": 46.62320, "lng": -122.91790 },
+      { "lat": 46.62520, "lng": -122.91795 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 46.62672, "lng": -122.91368 },
+      { "lat": 46.62672, "lng": -122.91336 },
+      { "lat": 46.62648, "lng": -122.91336 },
+      { "lat": 46.62648, "lng": -122.91368 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 46.62800, "lng": -122.91790 },
+        { "lat": 46.62810, "lng": -122.91440 },
+        { "lat": 46.62700, "lng": -122.91450 },
+        { "lat": 46.62695, "lng": -122.91795 }
+      ] },
+      { "ring": [
+        { "lat": 46.62400, "lng": -122.91780 },
+        { "lat": 46.62405, "lng": -122.91120 },
+        { "lat": 46.62345, "lng": -122.91120 },
+        { "lat": 46.62340, "lng": -122.91785 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 46.62610, "lng": -122.91720 },
+        { "lat": 46.62575, "lng": -122.91080 },
+        { "lat": 46.62550, "lng": -122.91082 },
+        { "lat": 46.62585, "lng": -122.91722 }
+      ] },
+      { "ring": [
+        { "lat": 46.62470, "lng": -122.91725 },
+        { "lat": 46.62455, "lng": -122.91085 },
+        { "lat": 46.62430, "lng": -122.91087 },
+        { "lat": 46.62445, "lng": -122.91727 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 180, "pano": "M1iZCLpTGdNzNXtoFyrPDw", "hasCoverage": true },
+      "truckGate": { "heading": 178, "pano": "d6-a1n2AFCr4QiZsKLya8g", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 140,
+    "trailersVisible": 180,
+    "trailerParkingCapacity": 260,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 50.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@46.62475,-122.9138,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": false,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Main truck entrance is a wide open curb-cut driveway off Maurin Rd at 46.6266,-122.9135, split by a small landscaped median island. Street View (2026-03) shows NO barrier arm, NO gate panel across the truck lane, and NO checkpoint structure. Perimeter is chain-link fenced but the truck lane itself is open.",
+    "guardShack": "No guard booth at the entrance. Only a light pole and a landscaped median island on the drive; no booth-sized structure beside the lane in either satellite z20 or Street View.",
+    "shipRcvSeparate": "Dock banks on two distinct building faces - long door bank on the north face (FedEx/retail trailers backed in) and a second long bank on the south face - consistent with separate ship/receive clusters.",
+    "dockDoors": "Both north and south faces carry continuous door banks across a ~700m building; 140 is an honest overhead estimate, easily 50+ band.",
+    "dropYard": "Dedicated trailer storage: a large reefer/dry trailer yard NORTH across Maurin Rd plus long drop lanes wrapping the south and west of the building.",
+    "drivewayLong": "Entrance drive opens into a very deep paved yard; 3+ trucks can queue before reaching dock doors.",
+    "urbanRural": "Edge of Chehalis, surrounded by farmland and open fields; rural setting."
+  },
+  "method": "deep-audit"
+}

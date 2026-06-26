@@ -1,0 +1,107 @@
+{
+  "name": "Springdale Ice Cream & Beverage Plant",
+  "type": "Beverage Plant",
+  "coords": { "lat": 39.29125, "lng": -84.45040 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 39.29205, "lng": -84.45130 },
+      { "lat": 39.29235, "lng": -84.44895 },
+      { "lat": 39.29090, "lng": -84.44850 },
+      { "lat": 39.28985, "lng": -84.44995 },
+      { "lat": 39.29005, "lng": -84.45175 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 39.29120, "lng": -84.44895 },
+      { "lat": 39.29105, "lng": -84.44850 },
+      { "lat": 39.29070, "lng": -84.44865 },
+      { "lat": 39.29085, "lng": -84.44910 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 39.29210, "lng": -84.44965 },
+        { "lat": 39.29210, "lng": -84.44885 },
+        { "lat": 39.29150, "lng": -84.44890 },
+        { "lat": 39.29150, "lng": -84.44970 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 39.29150, "lng": -84.45120 },
+        { "lat": 39.29115, "lng": -84.45045 },
+        { "lat": 39.29075, "lng": -84.45085 },
+        { "lat": 39.29110, "lng": -84.45160 }
+      ] },
+      { "ring": [
+        { "lat": 39.29075, "lng": -84.45095 },
+        { "lat": 39.29055, "lng": -84.45055 },
+        { "lat": 39.29010, "lng": -84.45095 },
+        { "lat": 39.29030, "lng": -84.45135 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 39.29215, "lng": -84.44970 },
+      { "lat": 39.29220, "lng": -84.44875 },
+      { "lat": 39.29150, "lng": -84.44855 },
+      { "lat": 39.29145, "lng": -84.44950 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 198, "pano": "CAoSF0NJSE0wb2dLRUlDQWdJQ1pub2Zmb2dF", "hasCoverage": true },
+      "truckGate": { "heading": 270, "pano": "OVgRg_Rlf124PhQmu4MqFQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 30,
+    "trailersVisible": 35,
+    "trailerParkingCapacity": 45,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 22.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@39.29125,-84.45040,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": false,
+    "remoteGs": true,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "25-50",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "scale"],
+  "fieldNotes": {
+    "location": "Confirmed Kroger Springdale Ice Cream & Beverage Plant, 11801 Chesterdale Rd, Cincinnati (Springdale) OH 45246. Large single ice-cream/beverage manufacturing building fronted by I-275 to the north and Chesterdale Rd (NE-SW) to the east. Web sources (LinkedIn, IndustryNet, company pages) confirm a Kroger-owned fluid-milk/ice-cream/soda plant opened 1965, 'minutes from I-275 East' — matches the imagery exactly. Supplied coords were essentially correct.",
+    "truckGate": "Whole property is wrapped in continuous chain-link perimeter fence behind the Chesterdale Rd guardrail (verified in Street View 2023-09 panos at 39.2905,-84.4479 and 39.2906,-84.4479). Truck access is a single controlled drive off Chesterdale Rd at the SE; the road frontage shows no open curb cut, so vehicles enter through one fenced gate/checkpoint at the parking/yard boundary.",
+    "guardShack": "No clearly resolvable staffed guard booth at the entrance in available imagery; a long low gatehouse/canopy structure sits at the parking-to-yard boundary (NE) but could not be positively confirmed as a manned shack. Left guardShack false / remoteGs true (gate present, no confirmed booth) and flagged uncertain.",
+    "postGateStaging": "Large paved maneuvering/staging yard between the building's north face and I-275 (the NE apron) holds trailers and trucks inside the fence before the docks.",
+    "drivewayLong": "Deep internal yard on the W, SW and N of the building easily stacks 3+ trucks between the gate and the dock canopies.",
+    "dockDoors": "Cold-chain dock layout: rows of individual white canopies along the W and SW building faces, each covering a single reefer trailer backed to a dock door (z20 imagery). Counted roughly 25-35 canopied/uncovered dock positions across both faces; banded 25-50.",
+    "dropArea": "Trailers parked without tractors in the NE staging yard and along the canopy rows; ~10-25 drop positions.",
+    "dropYard": "Dedicated trailer storage/staging in the NE paved yard separate from the active dock canopies.",
+    "entryExitTogether": "Single access drive off Chesterdale Rd serves both in and out (one gated point).",
+    "entryLanes": "Single inbound lane estimated at the gate drive; could not isolate exact lane count — flagged uncertain.",
+    "exitLanes": "Single outbound lane estimated; flagged uncertain.",
+    "urbanRural": "Inside the dense Cincinnati metro/Springdale industrial fabric, immediately on I-275 with surrounding office/industrial parks and apartments — Urban.",
+    "railServed": "No rail spur enters the property; nearest infrastructure is the highway, not rail.",
+    "buildingCount": "One large contiguous manufacturing building (dark-roof main plant + attached white-roof cold-storage/freezer addition on the south/SE) — treated as a single building, not a campus.",
+    "siteAreaAcres": "~22 acres from the fenced operational perimeter polygon; honest overhead estimate.",
+    "scale": "No truck scale/weigh pad identified; left false and flagged uncertain."
+  },
+  "method": "deep-audit"
+}

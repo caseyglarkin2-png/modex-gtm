@@ -1,0 +1,88 @@
+{
+  "name": "Centennial Farms Dairy",
+  "type": "Dairy Plant",
+  "coords": { "lat": 33.813853, "lng": -84.358477 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 33.815015, "lng": -84.358478 },
+      { "lat": 33.814968, "lng": -84.357277 },
+      { "lat": 33.813865, "lng": -84.357162 },
+      { "lat": 33.813175, "lng": -84.357906 },
+      { "lat": 33.813199, "lng": -84.359194 },
+      { "lat": 33.813532, "lng": -84.359680 },
+      { "lat": 33.814150, "lng": -84.359337 },
+      { "lat": 33.814625, "lng": -84.358936 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 33.813273, "lng": -84.359393 },
+      { "lat": 33.813261, "lng": -84.359293 },
+      { "lat": 33.813184, "lng": -84.359307 },
+      { "lat": 33.813195, "lng": -84.359407 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 33.814863, "lng": -84.358650 },
+        { "lat": 33.814792, "lng": -84.357248 },
+        { "lat": 33.814150, "lng": -84.357477 },
+        { "lat": 33.814293, "lng": -84.358879 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 33.813865, "lng": -84.359680 },
+        { "lat": 33.814150, "lng": -84.359079 },
+        { "lat": 33.813675, "lng": -84.358822 },
+        { "lat": 33.813342, "lng": -84.359451 }
+      ] },
+      { "ring": [
+        { "lat": 33.814150, "lng": -84.358478 },
+        { "lat": 33.814102, "lng": -84.357677 },
+        { "lat": 33.813793, "lng": -84.357763 },
+        { "lat": 33.813841, "lng": -84.358536 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 313, "pano": "64b3R8K-XEcN9WWvmtSnAA", "hasCoverage": true },
+      "truckGate": { "heading": 46, "pano": "92NjOjdybFQsSc50yMJRpw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 38,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 70,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 8.7,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.813853,-84.358477,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "25-50", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["shipRcvSeparate", "dockDoors", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Barrier arm plus a sliding chain-link gate across the single truck drive where it crosses the fenced property line (Street View 2023-01/2024-07, pano 92NjOjdybFQsSc50yMJRpw).",
+    "guardShack": "No staffed booth of any size beside the gate in any Street View heading; the only structure near the gate is a small landscaped sign island. Workers were standing on foot in the drive, not in a booth.",
+    "remoteGs": "Controlled gate (arm + slide gate) with no guard shack implies kiosk/call-box/remote check-in.",
+    "entryExitTogether": "Two adjacent lanes at one gate point (sliding-gate lane + barrier-arm lane); both at the same property-line crossing.",
+    "exitLanes": "Two lanes total at the single gate; assigned 1 inbound / 1 outbound, but lane assignment is inferred, not signed.",
+    "dockDoors": "Trailers backed to the building W face (~12-15) and NE/E face (~15-20); 25-50 band by trailer count and bay rhythm. Exact count obscured by parked trailers.",
+    "dropArea": "Large paved trailer-storage yard on the N/NW half of the parcel holds 40-50+ drop trailers without tractors.",
+    "shipRcvSeparate": "Docks wrap two building faces (W and NE/E) but read as one continuous combined dock operation rather than physically separate ship vs receive clusters; low confidence.",
+    "railServed": "CSX line runs ~150m S of the parcel along Faulkner area but no spur enters the property.",
+    "urbanRural": "Dense Atlanta metro (Lindridge/Martin Manor industrial pocket between Buckhead and Midtown), apartments and warehouses adjacent.",
+    "multipleFacilities": "The large warehouse immediately SE across the internal drive is a separate parcel/tenant, excluded from the dairy perimeter.",
+    "coords": "Supplied coords (33.8186,-84.3324) landed ~2.7km NE in a residential area; corrected via Google geocode of 2121 Faulkner Rd NE to 33.813853,-84.358477 and confirmed by milk silos in satellite + Street View."
+  },
+  "method": "deep-audit"
+}

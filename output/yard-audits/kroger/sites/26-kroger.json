@@ -1,0 +1,79 @@
+{
+  "name": "Westover Dairy",
+  "type": "Dairy Plant",
+  "coords": { "lat": 37.39740, "lng": -79.16560 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 37.39833, "lng": -79.16480 },
+      { "lat": 37.39690, "lng": -79.16488 },
+      { "lat": 37.39646, "lng": -79.16560 },
+      { "lat": 37.39682, "lng": -79.16665 },
+      { "lat": 37.39778, "lng": -79.16648 },
+      { "lat": 37.39828, "lng": -79.16558 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 37.39782, "lng": -79.16505 },
+      { "lat": 37.39772, "lng": -79.16485 },
+      { "lat": 37.39742, "lng": -79.16505 },
+      { "lat": 37.39752, "lng": -79.16525 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 37.39700, "lng": -79.16600 },
+        { "lat": 37.39672, "lng": -79.16648 },
+        { "lat": 37.39700, "lng": -79.16690 },
+        { "lat": 37.39728, "lng": -79.16642 }
+      ] },
+      { "ring": [
+        { "lat": 37.39668, "lng": -79.16540 },
+        { "lat": 37.39650, "lng": -79.16565 },
+        { "lat": 37.39682, "lng": -79.16605 },
+        { "lat": 37.39700, "lng": -79.16580 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 37.39712, "lng": -79.16548 },
+        { "lat": 37.39702, "lng": -79.16575 },
+        { "lat": 37.39688, "lng": -79.16562 },
+        { "lat": 37.39698, "lng": -79.16535 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
+      "truckGate": { "heading": 334, "pano": "CAoSF0NJSE0wb2dLRUlDQWdJRGE4NmEtblFF", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14,
+    "trailersVisible": 38,
+    "trailerParkingCapacity": 60,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 9.5,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@37.39740,-79.16560,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "25-50",
+    "shipRcvSeparate": false, "urbanRural": "Urban",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes", "dockDoorCount"],
+  "fieldNotes": {
+    "guardShack": "Fully chain-link-fenced perimeter confirmed in Street View on all sides, but no staffed guard booth structure is visible at any truck entrance. Treated as gated/unstaffed (remoteGs).",
+    "remoteGs": "Gated fence line with no visible booth implies kiosk/call-box/unstaffed check-in.",
+    "dropArea": "Yard wraps the W/SW/S of the building packed with parked trailers in rows; clear dedicated drop-yard.",
+    "urbanRular": "Dense urban Lynchburg fabric: residential blocks N/W, cemetery and businesses across Fort Ave; small older urban plant footprint.",
+    "dockDoorCount": "Estimated from trailers backed against the south building face; partial tree/shadow occlusion."
+  },
+  "method": "deep-audit"
+}

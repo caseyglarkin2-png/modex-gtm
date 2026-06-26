@@ -1,0 +1,90 @@
+{
+  "name": "Pace Dairy of Minnesota (Rochester Cheese)",
+  "type": "Dairy Plant",
+  "coords": { "lat": 44.05295, "lng": -92.51019 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 44.05382, "lng": -92.51100 },
+      { "lat": 44.05378, "lng": -92.50905 },
+      { "lat": 44.05225, "lng": -92.50905 },
+      { "lat": 44.05148, "lng": -92.50990 },
+      { "lat": 44.05150, "lng": -92.51095 },
+      { "lat": 44.05210, "lng": -92.51160 },
+      { "lat": 44.05300, "lng": -92.51155 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 44.05222, "lng": -92.51150 },
+      { "lat": 44.05222, "lng": -92.51095 },
+      { "lat": 44.05198, "lng": -92.51095 },
+      { "lat": 44.05198, "lng": -92.51150 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 44.05372, "lng": -92.51112 },
+        { "lat": 44.05372, "lng": -92.51075 },
+        { "lat": 44.05235, "lng": -92.51075 },
+        { "lat": 44.05235, "lng": -92.51112 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 44.05372, "lng": -92.51072 },
+        { "lat": 44.05372, "lng": -92.51045 },
+        { "lat": 44.05235, "lng": -92.51045 },
+        { "lat": 44.05235, "lng": -92.51072 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 30, "pano": "wQlU-7y2O2FxR9iJNluPDA", "hasCoverage": true },
+      "truckGate": { "heading": 350, "pano": "wQlU-7y2O2FxR9iJNluPDA", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 14,
+    "trailersVisible": 11,
+    "trailerParkingCapacity": 18,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 9.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@44.05295,-92.51019,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true,
+    "guardShack": true,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 1,
+    "exitLanes": 1,
+    "fastLaneOpportunity": false,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "Staffed entrance confirmed in Street View (pano wQlU-7y2O2FxR9iJNluPDA, 2012-10): controlled checkpoint at the SW property entrance with lane-control signage and chain-link perimeter fence across the property line.",
+    "guardShack": "Small reddish gatehouse booth with windows on multiple sides, awning, and a roof-mounted security camera dome, set in the median splitting the entry/exit lanes. Footprint ~1-2 vehicles.",
+    "entryExitTogether": "Single entrance point; the guard booth median splits one inbound lane (right) from one 'EXIT ONLY' lane (left) at the same gate.",
+    "postGateStaging": "Long internal loop driveway from the guard gate up to the west dock apron provides interior queue/holding room before docks.",
+    "dropArea": "West truck yard holds a row of ~11 visible drop trailers backed to the dock wall plus marked yard space; capacity ~18.",
+    "dockDoorCount": "~14 doors estimated along the west building face from z20 imagery (trailers obscure exact count).",
+    "urbanRural": "Within Rochester MN city limits in a developed NW industrial park (warehouses, apartments, retail nearby) fronting US-52 — Urban.",
+    "railServed": "No rail spur enters the property."
+  },
+  "method": "deep-audit"
+}

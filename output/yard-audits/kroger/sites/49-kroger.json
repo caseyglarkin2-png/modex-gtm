@@ -1,0 +1,71 @@
+{
+  "name": "Kenlake Foods",
+  "type": "Beverage Plant",
+  "coords": { "lat": 36.6122, "lng": -88.2988 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 36.61320, "lng": -88.30060 },
+      { "lat": 36.61330, "lng": -88.29790 },
+      { "lat": 36.61130, "lng": -88.29770 },
+      { "lat": 36.61080, "lng": -88.29850 },
+      { "lat": 36.61090, "lng": -88.30040 },
+      { "lat": 36.61200, "lng": -88.30075 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 36.61300, "lng": -88.30020 },
+      { "lat": 36.61300, "lng": -88.29960 },
+      { "lat": 36.61255, "lng": -88.29960 },
+      { "lat": 36.61255, "lng": -88.30020 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 36.61300, "lng": -88.30055 },
+        { "lat": 36.61300, "lng": -88.30000 },
+        { "lat": 36.61130, "lng": -88.29990 },
+        { "lat": 36.61130, "lng": -88.30050 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 36.61300, "lng": -88.29850 },
+        { "lat": 36.61300, "lng": -88.29790 },
+        { "lat": 36.61275, "lng": -88.29790 },
+        { "lat": 36.61275, "lng": -88.29850 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 94, "pano": "D_QZRSY35k_G3Z7ik9SEMQ", "hasCoverage": true },
+      "truckGate": { "heading": 330, "pano": "sc-zMRgOGaVBaMVjlk6j8A", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 18, "trailersVisible": 6, "trailerParkingCapacity": 30,
+    "truckGateCount": 2, "buildingCount": 2, "siteAreaAcres": 16.4,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.6122,-88.2988,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false, "guardShack": false, "remoteGs": false,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "10-25", "dropArea": "10-25",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Open paved truck access directly off public streets (Olive St / N L.P. Miller area) at multiple points; no barrier arm, sliding gate, or checkpoint pinch-point seen at any approach in 2026-03 Street View.",
+    "guardShack": "No booth structure anywhere at the truck approaches; chain-link fence rings only the employee lot.",
+    "postGateStaging": "Deep internal paved yard runs between the sawtooth manufacturing building and the north flat-roof warehouse; trucks queue there before docks.",
+    "dropYard": "Large paved trailer lot with angled drop stalls on the west side of the plant.",
+    "dockDoorCount": "Docks face the internal north yard; partially roof-shadowed in overhead imagery, count is an estimate.",
+    "urbanRural": "Edge-of-downtown industrial in Murray KY (small town, pop ~17k); classified Rural per the small-town rule.",
+    "railServed": "No active rail spur into the property visible."
+  },
+  "method": "deep-audit"
+}

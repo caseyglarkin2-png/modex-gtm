@@ -1,0 +1,79 @@
+{
+  "name": "Harris Teeter Distribution Center Greensboro NC",
+  "type": "Distribution Center",
+  "coords": { "lat": 36.09310, "lng": -79.92990 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 36.09525, "lng": -79.93120 },
+      { "lat": 36.09490, "lng": -79.92960 },
+      { "lat": 36.09360, "lng": -79.92880 },
+      { "lat": 36.09180, "lng": -79.92960 },
+      { "lat": 36.09120, "lng": -79.93080 },
+      { "lat": 36.09170, "lng": -79.93180 },
+      { "lat": 36.09420, "lng": -79.93180 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 36.09525, "lng": -79.93098 },
+      { "lat": 36.09518, "lng": -79.93072 },
+      { "lat": 36.09500, "lng": -79.93082 },
+      { "lat": 36.09507, "lng": -79.93108 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 36.09470, "lng": -79.93140 },
+        { "lat": 36.09400, "lng": -79.93020 },
+        { "lat": 36.09335, "lng": -79.93060 },
+        { "lat": 36.09405, "lng": -79.93180 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 36.09370, "lng": -79.93105 },
+        { "lat": 36.09250, "lng": -79.93180 },
+        { "lat": 36.09230, "lng": -79.93150 },
+        { "lat": 36.09350, "lng": -79.93075 }
+      ] },
+      { "ring": [
+        { "lat": 36.09310, "lng": -79.92935 },
+        { "lat": 36.09195, "lng": -79.93010 },
+        { "lat": 36.09180, "lng": -79.92980 },
+        { "lat": 36.09295, "lng": -79.92905 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 132, "pano": "EF7zHoByIDJ7UDMvrWxMKg", "hasCoverage": true },
+      "truckGate": { "heading": 119, "pano": "780YOIbqWLxtMi0aP3JzDQ", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 90, "trailersVisible": 130, "trailerParkingCapacity": 120,
+    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 22.1,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@36.09310,-79.92990,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["guardShack", "remoteGs", "entryLanes", "exitLanes"],
+  "fieldNotes": {
+    "truckGate": "Controlled NW driveway off Distribution Dr crosses a barbed-wire chain-link perimeter fence; sliding gate panel + HT sign visible at the fence opening in 2026-02 Street View (pano 780YOIbqWLxtMi0aP3JzDQ). Whole property is fenced.",
+    "guardShack": "No distinct windowed guard booth seen in satellite or Street View at the gate; could be obscured, low confidence.",
+    "remoteGs": "Gate present with no visible booth implies kiosk/call-box check-in.",
+    "multipleFacilities": "Main DC plus an adjacent older tan-roofed HT building (own docks/trailers) to the north = campus.",
+    "shipRcvSeparate": "Dock banks on the SW face and on the SE/E face are physically separate clusters.",
+    "dropArea": "Large NW/W drop yard, rows of parked trailers without tractors, 50+.",
+    "dockDoors": "Doors on SW, W and SE faces of a ~500k sqft building; estimate 90 total, 50+ band.",
+    "urbanRural": "Edge-of-town industrial park beside Piedmont Triad airport; broader setting is non-dense, judged Rural per rubric."
+  },
+  "method": "deep-audit"
+}

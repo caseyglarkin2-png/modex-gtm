@@ -1,0 +1,88 @@
+{
+  "name": "Roundy's Commissary (RCK Foods / Kroger)",
+  "type": "Deli/Meat & Prepared-Foods Commissary Plant",
+  "coords": { "lat": 42.590687, "lng": -87.874072 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 42.59198, "lng": -87.87478 },
+      { "lat": 42.59205, "lng": -87.87335 },
+      { "lat": 42.59150, "lng": -87.87308 },
+      { "lat": 42.59000, "lng": -87.87330 },
+      { "lat": 42.58978, "lng": -87.87420 },
+      { "lat": 42.59020, "lng": -87.87520 },
+      { "lat": 42.59120, "lng": -87.87520 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 42.59172, "lng": -87.87478 },
+      { "lat": 42.59172, "lng": -87.87455 },
+      { "lat": 42.59140, "lng": -87.87458 },
+      { "lat": 42.59140, "lng": -87.87480 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 42.59190, "lng": -87.87455 },
+        { "lat": 42.59185, "lng": -87.87330 },
+        { "lat": 42.59150, "lng": -87.87315 },
+        { "lat": 42.59148, "lng": -87.87445 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 42.59148, "lng": -87.87470 },
+        { "lat": 42.59145, "lng": -87.87345 },
+        { "lat": 42.59132, "lng": -87.87347 },
+        { "lat": 42.59135, "lng": -87.87472 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 180, "pano": "Ehz2BvvE_nD_mbxPRHCKow", "hasCoverage": true },
+      "truckGate": { "heading": 194, "pano": "s2BrsZ8UvCVIjRIAcfVrVA", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 16,
+    "trailersVisible": 11,
+    "trailerParkingCapacity": 30,
+    "truckGateCount": 2,
+    "buildingCount": 1,
+    "siteAreaAcres": 17.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@42.590687,-87.874072,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "10-25",
+    "dropArea": "10-25",
+    "shipRcvSeparate": false,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": false,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "guardShack"],
+  "fieldNotes": {
+    "truckGate": "Decorative black ornamental steel perimeter fence runs the full north/NE public-facing edge (verified in 2023-06 Street View), but the working truck entrances off the internal industrial-park drives (west drive and SW front loop) are open paved aprons with no barrier arm or sliding gate. Controlled-perimeter feel without an actual checkpoint at the truck lanes; classed truckGate=false.",
+    "guardShack": "No guard booth at any truck entrance in 2012/2023/2024 Street View or satellite. Listed uncertain only because fence implies some access control.",
+    "dockDoorCount": "Estimate from z20 overhead — north face shows a continuous dock bank with ~11 trailers backed in plus open positions; banded 10-25.",
+    "dropYard": "Large open paved maneuvering/drop yard north of the dock face, fenced, holds parked trailers separate from active dock apron.",
+    "fastLaneOpportunity": "Very wide open paved entrances and yard apron; ample room to add a marked express lane.",
+    "urbanRural": "Inside Kenosha city industrial park, dense residential immediately south across 52nd St; classed Urban."
+  },
+  "method": "deep-audit"
+}

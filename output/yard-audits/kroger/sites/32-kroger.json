@@ -1,0 +1,81 @@
+{
+  "name": "Riverside Creamery",
+  "type": "Dairy Plant",
+  "coords": { "lat": 33.929553, "lng": -117.30595 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 33.931516, "lng": -117.307564 },
+      { "lat": 33.931402, "lng": -117.30595 },
+      { "lat": 33.930689, "lng": -117.305538 },
+      { "lat": 33.929949, "lng": -117.304989 },
+      { "lat": 33.929066, "lng": -117.304577 },
+      { "lat": 33.928069, "lng": -117.304645 },
+      { "lat": 33.927527, "lng": -117.306156 },
+      { "lat": 33.927641, "lng": -117.307323 },
+      { "lat": 33.929208, "lng": -117.308868 },
+      { "lat": 33.930832, "lng": -117.307976 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 33.929066, "lng": -117.304577 },
+      { "lat": 33.928952, "lng": -117.304336 },
+      { "lat": 33.928638, "lng": -117.304439 },
+      { "lat": 33.928752, "lng": -117.30468 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 33.929721, "lng": -117.306431 },
+        { "lat": 33.929436, "lng": -117.305126 },
+        { "lat": 33.928411, "lng": -117.304989 },
+        { "lat": 33.928069, "lng": -117.306156 },
+        { "lat": 33.928752, "lng": -117.306774 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 33.931174, "lng": -117.307323 },
+        { "lat": 33.930946, "lng": -117.305847 },
+        { "lat": 33.930689, "lng": -117.30595 },
+        { "lat": 33.930917, "lng": -117.307426 }
+      ] },
+      { "ring": [
+        { "lat": 33.929949, "lng": -117.308765 },
+        { "lat": 33.930689, "lng": -117.308079 },
+        { "lat": 33.930519, "lng": -117.307838 },
+        { "lat": 33.929778, "lng": -117.308525 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 182, "pano": "CAoSF0NJSE0wb2dLRUlDQWdJQzQ5ZnJHNGdF", "hasCoverage": true },
+      "truckGate": { "heading": 214, "pano": "7HVO79JCRKo8PIw7jt8Wxw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 55, "trailersVisible": 70, "trailerParkingCapacity": 90,
+    "truckGateCount": 1, "buildingCount": 2, "siteAreaAcres": 30.3,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@33.929553,-117.30595,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": false,
+    "dockDoors": "50+", "dropArea": "50+",
+    "shipRcvSeparate": true, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": true,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "trailerParkingCapacity"],
+  "fieldNotes": {
+    "truckGate": "SV (2025-12, pano 7HVO79JCRKo8PIw7jt8Wxw) shows a sliding gate across the entrance drive on the E perimeter road.",
+    "remoteGs": "Gate present but no manned booth; a sign at the entrance reads 'Check in ... before ... dock' = self/kiosk check-in.",
+    "shipRcvSeparate": "Two distinct dock banks: long NE face (reefer doors numbered into 40s seen in SV) and a SW dock row along the hillside.",
+    "multipleFacilities": "Main DC/creamery building plus a separate refrigeration/process building (tank farm visible) on the same parcel.",
+    "dockDoorCount": "Estimate from overhead + dock SV; two banks total roughly 55 doors.",
+    "urbanRural": "Industrial park on the SW edge of Riverside, bordered by open scrub hillside W and S."
+  },
+  "method": "deep-audit"
+}

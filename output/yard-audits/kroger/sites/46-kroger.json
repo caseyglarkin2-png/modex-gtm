@@ -1,0 +1,113 @@
+{
+  "name": "Layton Bakery",
+  "type": "Bakery Plant",
+  "coords": { "lat": 41.06435, "lng": -111.98370 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 41.06497, "lng": -111.98470 },
+      { "lat": 41.06497, "lng": -111.98268 },
+      { "lat": 41.06430, "lng": -111.98262 },
+      { "lat": 41.06382, "lng": -111.98270 },
+      { "lat": 41.06375, "lng": -111.98360 },
+      { "lat": 41.06378, "lng": -111.98472 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 41.06540, "lng": -111.98635 },
+      { "lat": 41.06540, "lng": -111.98575 },
+      { "lat": 41.06500, "lng": -111.98575 },
+      { "lat": 41.06500, "lng": -111.98635 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 41.06330, "lng": -111.98300 },
+        { "lat": 41.06330, "lng": -111.98090 },
+        { "lat": 41.06230, "lng": -111.98090 },
+        { "lat": 41.06230, "lng": -111.98300 }
+      ] },
+      { "ring": [
+        { "lat": 41.06620, "lng": -111.98430 },
+        { "lat": 41.06620, "lng": -111.98230 },
+        { "lat": 41.06560, "lng": -111.98230 },
+        { "lat": 41.06560, "lng": -111.98430 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 41.06520, "lng": -111.98455 },
+        { "lat": 41.06520, "lng": -111.98300 },
+        { "lat": 41.06500, "lng": -111.98300 },
+        { "lat": 41.06500, "lng": -111.98455 }
+      ] },
+      { "ring": [
+        { "lat": 41.06378, "lng": -111.98455 },
+        { "lat": 41.06378, "lng": -111.98310 },
+        { "lat": 41.06358, "lng": -111.98310 },
+        { "lat": 41.06358, "lng": -111.98455 }
+      ] }
+    ],
+    "staging": null,
+    "streetViewMeta": {
+      "perimeter": { "heading": 0, "pano": "", "hasCoverage": false },
+      "truckGate": { "heading": 90, "pano": "CgSbthrtbapZsvp6GChSMA", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 45,
+    "trailersVisible": 70,
+    "trailerParkingCapacity": 140,
+    "truckGateCount": 1,
+    "buildingCount": 1,
+    "siteAreaAcres": 24.0,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@41.06435,-111.98370,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": false,
+    "guardShack": false,
+    "remoteGs": false,
+    "preGateStaging": false,
+    "postGateStaging": true,
+    "drivewayLong": true,
+    "drivewayShort": false,
+    "backupSensitive": false,
+    "entryExitTogether": true,
+    "entryExitSeparate": false,
+    "entryLanes": 2,
+    "exitLanes": 2,
+    "fastLaneOpportunity": true,
+    "dockDoors": "25-50",
+    "dropArea": "50+",
+    "shipRcvSeparate": true,
+    "urbanRural": "Urban",
+    "connectivityIssue": false,
+    "multipleFacilities": true,
+    "scale": false,
+    "dropYard": true,
+    "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["entryLanes", "exitLanes", "scale", "siteAreaAcres", "dockDoorCount"],
+  "fieldNotes": {
+    "step0": "Confirmed Layton Bakery (Bldg 5) — the southern production building of the Kroger/Smith's Layton campus at 500 N Sugar St. Identified by the flour silos on its roof (z20 imagery) and its dedicated north + south angled dock bands, distinct from the solar-roofed Smith's DC to the north and the heavy-process dairy plant to the east. Supplied coords (41.065045,-111.984294) landed in the truck-circulation yard just off the bakery's north dock face; locked building center at 41.06435,-111.98370.",
+    "truckGate": "No barrier arm, swing/sliding gate, or guard booth across the campus access road where it meets Sugar Street. Street View (2022-11, pano CgSbthrtbapZsvp6GChSMA) down the west entrance drive shows an open, uncontrolled paved entrance into the parking/yard with only chain-link perimeter fencing flanking it. Open-access campus.",
+    "guardShack": "No staffed booth at the property line. The only small freestanding structure inside the yard (~41.0653,-111.9846) is a yard-truck dispatch/maintenance office surrounded by yard tractors and employee cars, not an entrance checkpoint.",
+    "remoteGs": "No truck gate exists, so no remote check-in either; false by rule.",
+    "postGateStaging": "Large shared internal paved yard between the DC and the bakery's north dock face provides deep internal queueing/staging before the docks.",
+    "drivewayLong": "Deep internal yard and long approach from the Sugar St entrance easily holds 3+ trucks before reaching the bakery docks.",
+    "entryExitTogether": "Single shared campus entrance off Sugar St serves both in and out; no separate dedicated truck out-gate observed.",
+    "entryLanes": "Open entrance apron ~2 lanes wide; estimated from imagery, flagged uncertain.",
+    "exitLanes": "Estimated equal to entry on the shared open drive; flagged uncertain.",
+    "fastLaneOpportunity": "Wide open entrance apron and expansive internal paved yard leave ample unused width to channelize an express/bypass lane.",
+    "dockDoors": "Bakery has two angled dock bands (north + south faces) with many trailers backed in; counted ~45 doors total across both faces (25-50 band). Door count partly obscured by backed-in trailers — flagged uncertain.",
+    "dropArea": "Extensive trailer drop activity: a large angled trailer drop lot south/southeast of the bakery and a fan-shaped trailer yard north of it (shared campus), holding well over 50 parked trailers without tractors.",
+    "shipRcvSeparate": "Bakery runs ship/receive from two physically separate dock banks on opposite (north and south) building faces.",
+    "urbanRural": "Inside the developed Layton/Salt Lake metro fabric — industrial corridor bordered immediately by residential subdivisions to the south and east; Urban.",
+    "connectivityIssue": "Dense suburban metro setting; cellular coverage is good. False.",
+    "multipleFacilities": "Bakery sits on a multi-building campus (Smith's DC, bakery Bldg 5, and dairy/process plant), so the broader property is a campus — flagged true.",
+    "scale": "No clear truck scale/weigh pad identified at the bakery's docks or the campus entrance; left false but flagged uncertain.",
+    "railServed": "No rail spur runs into the bakery or the campus; false.",
+    "siteAreaAcres": "~24 acres for the bakery building footprint plus its immediate dock aprons and adjacent drop lots; the full Kroger/Smith's campus is much larger. Approximate.",
+    "perimeter": "Traced to the Layton Bakery (Bldg 5) building footprint including its north and south dock faces; the building is grid-aligned (square to N-S/E-W) like the rest of the campus, only the drop-yard trailers are angled."
+  },
+  "method": "deep-audit"
+}

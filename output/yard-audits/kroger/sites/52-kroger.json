@@ -1,0 +1,94 @@
+{
+  "name": "Tara Foods (Kroger)",
+  "type": "Grocery Plant",
+  "coords": { "lat": 31.59955, "lng": -84.10295 },
+  "geofences": {
+    "perimeter": { "ring": [
+      { "lat": 31.60080, "lng": -84.10440 },
+      { "lat": 31.60075, "lng": -84.10330 },
+      { "lat": 31.60050, "lng": -84.10130 },
+      { "lat": 31.59890, "lng": -84.10110 },
+      { "lat": 31.59820, "lng": -84.10150 },
+      { "lat": 31.59800, "lng": -84.10330 },
+      { "lat": 31.59810, "lng": -84.10440 }
+    ] },
+    "truckGate": { "ring": [
+      { "lat": 31.60052, "lng": -84.10445 },
+      { "lat": 31.60052, "lng": -84.10410 },
+      { "lat": 31.60032, "lng": -84.10410 },
+      { "lat": 31.60032, "lng": -84.10445 }
+    ] },
+    "dropYards": [
+      { "ring": [
+        { "lat": 31.60055, "lng": -84.10240 },
+        { "lat": 31.60050, "lng": -84.10140 },
+        { "lat": 31.59880, "lng": -84.10135 },
+        { "lat": 31.59885, "lng": -84.10240 }
+      ] },
+      { "ring": [
+        { "lat": 31.59870, "lng": -84.10120 },
+        { "lat": 31.59865, "lng": -84.10050 },
+        { "lat": 31.59790, "lng": -84.10055 },
+        { "lat": 31.59795, "lng": -84.10120 }
+      ] }
+    ],
+    "dockAprons": [
+      { "ring": [
+        { "lat": 31.59995, "lng": -84.10285 },
+        { "lat": 31.59990, "lng": -84.10250 },
+        { "lat": 31.59915, "lng": -84.10255 },
+        { "lat": 31.59920, "lng": -84.10290 }
+      ] },
+      { "ring": [
+        { "lat": 31.59905, "lng": -84.10345 },
+        { "lat": 31.59905, "lng": -84.10295 },
+        { "lat": 31.59885, "lng": -84.10295 },
+        { "lat": 31.59885, "lng": -84.10345 }
+      ] }
+    ],
+    "staging": { "ring": [
+      { "lat": 31.59920, "lng": -84.10300 },
+      { "lat": 31.59915, "lng": -84.10215 },
+      { "lat": 31.59850, "lng": -84.10220 },
+      { "lat": 31.59855, "lng": -84.10305 }
+    ] },
+    "streetViewMeta": {
+      "perimeter": { "heading": 107, "pano": "O6oEgEnBB6Bx7UNIGH3Szg", "hasCoverage": true },
+      "truckGate": { "heading": 205, "pano": "QWYYVCSlPkR7nSD6tyRZXw", "hasCoverage": true }
+    }
+  },
+  "yardMetrics": {
+    "dockDoorCount": 16,
+    "trailersVisible": 55,
+    "trailerParkingCapacity": 80,
+    "truckGateCount": 1,
+    "buildingCount": 3,
+    "siteAreaAcres": 21.4,
+    "railServed": false
+  },
+  "mapsUrl": "https://www.google.com/maps/@31.59955,-84.10295,400m/data=!3m1!1e3",
+  "classification": {
+    "truckGate": true, "guardShack": false, "remoteGs": true,
+    "preGateStaging": false, "postGateStaging": true,
+    "drivewayLong": true, "drivewayShort": false, "backupSensitive": false,
+    "entryExitTogether": true, "entryExitSeparate": false,
+    "entryLanes": 1, "exitLanes": 1, "fastLaneOpportunity": true,
+    "dockDoors": "10-25", "dropArea": "50+",
+    "shipRcvSeparate": false, "urbanRural": "Rural",
+    "connectivityIssue": false, "multipleFacilities": false,
+    "scale": false, "dropYard": true, "multiStep": false
+  },
+  "confidence": "high",
+  "uncertainFields": ["dockDoorCount", "shipRcvSeparate"],
+  "fieldNotes": {
+    "truckGate": "Chain-link sliding/swing gate across the main vehicle drive off Cowles Lane, seen open in Street View looking south from pano QWYYVCSlPkR7nSD6tyRZXw. Perimeter is chain-link fenced along the road frontage.",
+    "guardShack": "No staffed booth visible at the gate or front lot in satellite or Street View; gate is a manual chain-link slide gate. Hence remoteGs=true.",
+    "dockDoors": "Counted from z19-z20: east building face ~5-6 dock positions (trailers backed in) plus south/SW canopy docks ~4-6; banded 10-25, ~16 estimate. Some doors obscured.",
+    "dropArea": "Two large unpaved drop-yard clusters east of the building hold ~50-60 trailers in angled rows; capacity 80+. dropYard=true.",
+    "fastLaneOpportunity": "Wide unpaved/gravel gate apron and large internal yard with ample paved width to add a bypass lane.",
+    "urbanRural": "Edge-of-town Albany GA; surrounded by light residential to the west and open fields/woods, small-town industrial. Rural per rubric.",
+    "buildingCount": "Main plant building plus a north annex/covered structure and adjacent older warehouses on the same fenced parcel.",
+    "shipRcvSeparate": "Docks on east face and south/SW face; could be ship/rcv split but not clearly distinct clusters from imagery — left false, flagged uncertain."
+  },
+  "method": "deep-audit"
+}
