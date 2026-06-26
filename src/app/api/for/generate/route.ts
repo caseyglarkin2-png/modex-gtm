@@ -5,6 +5,7 @@ import { upsertForPage } from '@/lib/for/store';
 import { revalidateForPage } from '@/lib/for/revalidate';
 import { buildResearchSnapshot, researchTierSpear } from '@/lib/for/research-tier';
 import { buildNetworkPack } from '@/lib/for/network-pack';
+import { geocodeFacilities } from '@/lib/for/geocode';
 
 export const dynamic = 'force-dynamic';
 export const maxDuration = 120;
@@ -40,9 +41,12 @@ export async function POST(req: Request) {
       const snap = buildResearchSnapshot(body.slug, { displayName: acct.displayName, archetype: acct.archetype }, body.facilityCount);
       const override = body.override ?? researchTierSpear(acct.displayName, snap, acct.archetype);
       let demoPack = null;
-      if (Array.isArray(body.facilities) && body.facilities.some((f) => Number.isFinite(f.lat) && Number.isFinite(f.lng))) {
+      if (Array.isArray(body.facilities) && body.facilities.length) {
         try {
-          demoPack = buildNetworkPack({ account: acct.displayName, slug: body.slug, archetype: acct.archetype, facilities: body.facilities }, new Date().toISOString());
+          const geocoded = await geocodeFacilities(body.facilities);
+          if (geocoded.some((f) => Number.isFinite(f.lat) && Number.isFinite(f.lng))) {
+            demoPack = buildNetworkPack({ account: acct.displayName, slug: body.slug, archetype: acct.archetype, facilities: geocoded }, new Date().toISOString());
+          }
         } catch { demoPack = null; }
       }
       const row = {
