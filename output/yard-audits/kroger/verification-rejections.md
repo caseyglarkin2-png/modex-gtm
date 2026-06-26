@@ -1,8 +1,5 @@
 # FOV warn report — kroger
 
-- 04-kroger: REJECTED: Kroger closed this Nashville facility Feb 1 2026 (132-worker WARN) and sold the building May 2026; Kroger no longer operates here.
-- 14-kroger: REJECTED: Pleasant Prairie WI CFC is one of three Kroger is shutting down; WARN filed, closes Feb 1 2026.
-- 16-kroger: REJECTED: Groveland FL CFC is one of three Kroger is shutting down; WARN for 943 workers, closes Jan 2026.
 - 19-kroger: failed FOV gate (missing/invalid verification)
 - 20-kroger: failed FOV gate (missing/invalid verification)
 - 21-kroger: failed FOV gate (missing/invalid verification)
