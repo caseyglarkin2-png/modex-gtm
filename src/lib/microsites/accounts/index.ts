@@ -8,6 +8,7 @@
 import type { AccountMicrositeData } from '../schema';
 
 import { abInbev } from './ab-inbev';
+import { amazon } from './amazon';
 import { barnesNoble } from './barnes-noble';
 import { bobEvansFarms } from './bob-evans-farms';
 import { bostonBeerCompany } from './boston-beer-company';
@@ -17,6 +18,7 @@ import { cjLogisticsAmerica } from './cj-logistics-america';
 import { cocaCola } from './coca-cola';
 import { constellationBrands } from './constellation-brands';
 import { costPlusWorldMarket } from './cost-plus-world-market';
+import { costco } from './costco';
 import { crowley } from './crowley';
 import { daimlerTruckNorthAmerica } from './daimler-truck-north-america';
 import { dannon } from './dannon';
@@ -26,9 +28,11 @@ import { fedex } from './fedex';
 import { ford } from './ford';
 import { fritoLay } from './frito-lay';
 import { generalMills } from './general-mills';
+import { generalMotors } from './general-motors';
 import { georgiaPacific } from './georgia-pacific';
 import { gxo } from './gxo';
 import { hEB } from './h-e-b';
+import { harrisTeeter } from './harris-teeter';
 import { honda } from './honda';
 import { hormelFoods } from './hormel-foods';
 import { hyundaiMotorAmerica } from './hyundai-motor-america';
@@ -41,18 +45,29 @@ import { kraftHeinz } from './kraft-heinz';
 import { kroger } from './kroger';
 import { mondelezInternational } from './mondelez-international';
 import { nestleUsa } from './nestle-usa';
+import { nfi } from './nfi';
+import { niagaraBottling } from './niagara-bottling';
 import { pactivEvergreen } from './pactiv-evergreen';
+import { pepsico } from './pepsico';
 import { performanceFoodGroup } from './performance-food-group';
+import { publix } from './publix';
 import { salsonLogistics } from './salson-logistics';
+import { samsClub } from './sams-club';
 import { scJohnson } from './sc-johnson';
+import { sevenEleven } from './seven-eleven';
+import { stopAndShop } from './stop-and-shop';
+import { target } from './target';
 import { theHomeDepot } from './the-home-depot';
 import { toyota } from './toyota';
+import { tractorSupply } from './tractor-supply';
 import { unfi } from './unfi';
 import { universalLogisticsHoldings } from './universal-logistics-holdings';
+import { walmart } from './walmart';
 import { westrockCoffee } from './westrock-coffee';
 
 const ACCOUNTS: Record<string, AccountMicrositeData> = {
   'ab-inbev': abInbev,
+  'amazon': amazon,
   'barnes-noble': barnesNoble,
   'bob-evans-farms': bobEvansFarms,
   'boston-beer-company': bostonBeerCompany,
@@ -62,6 +77,7 @@ const ACCOUNTS: Record<string, AccountMicrositeData> = {
   'coca-cola': cocaCola,
   'constellation-brands': constellationBrands,
   'cost-plus-world-market': costPlusWorldMarket,
+  'costco': costco,
   'crowley': crowley,
   'daimler-truck-north-america': daimlerTruckNorthAmerica,
   'dannon': dannon,
@@ -71,9 +87,11 @@ const ACCOUNTS: Record<string, AccountMicrositeData> = {
   'ford': ford,
   'frito-lay': fritoLay,
   'general-mills': generalMills,
+  'general-motors': generalMotors,
   'georgia-pacific': georgiaPacific,
   'gxo': gxo,
   'h-e-b': hEB,
+  'harris-teeter': harrisTeeter,
   'honda': honda,
   'hormel-foods': hormelFoods,
   'hyundai-motor-america': hyundaiMotorAmerica,
@@ -86,14 +104,24 @@ const ACCOUNTS: Record<string, AccountMicrositeData> = {
   'kroger': kroger,
   'mondelez-international': mondelezInternational,
   'nestle-usa': nestleUsa,
+  'nfi': nfi,
+  'niagara-bottling': niagaraBottling,
   'pactiv-evergreen': pactivEvergreen,
+  'pepsico': pepsico,
   'performance-food-group': performanceFoodGroup,
+  'publix': publix,
   'salson-logistics': salsonLogistics,
+  'sams-club': samsClub,
   'sc-johnson': scJohnson,
+  'seven-eleven': sevenEleven,
+  'stop-and-shop': stopAndShop,
+  'target': target,
   'the-home-depot': theHomeDepot,
   'toyota': toyota,
+  'tractor-supply': tractorSupply,
   'unfi': unfi,
   'universal-logistics-holdings': universalLogisticsHoldings,
+  'walmart': walmart,
   'westrock-coffee': westrockCoffee,
 };
 

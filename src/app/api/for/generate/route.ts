@@ -17,6 +17,35 @@ function authed(req: Request): boolean {
   return !!token && req.headers.get('x-pounce-token') === token;
 }
 
+/**
+ * Post-generate validation: confirm the row actually landed in the store as
+ * 'live' AND that the public /for URL renders (Flow-State- dynamic render →
+ * modex pack read). Fail-open by design — a validation failure returns
+ * `validated: false` on a 200 response, it never fails the generation. A
+ * draft-status generation is reported unvalidated (drafts are deliberately
+ * not publicly rendered, so there is nothing to assert against).
+ */
+async function validateGenerated(slug: string, status: 'draft' | 'live', url: string): Promise<boolean> {
+  if (status !== 'live') return false;
+  try {
+    const stored = await getForPage(slug);
+    if (!stored || stored.status !== 'live') return false;
+  } catch {
+    return false;
+  }
+  try {
+    const res = await fetch(url, {
+      cache: 'no-store',
+      redirect: 'follow',
+      headers: { accept: 'text/html' },
+      signal: AbortSignal.timeout(15_000),
+    });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
 interface Body { slug?: string; override?: SpearOverride; status?: 'draft' | 'live'; account?: { displayName?: string; archetype?: string }; facilityCount?: number; forceCount?: boolean; facilities?: Array<{ name: string; city?: string; state?: string; type?: string; lat?: number; lng?: number }>; }
 
 export async function POST(req: Request) {
@@ -35,9 +64,11 @@ export async function POST(req: Request) {
     await upsertForPage(row);
     await revalidateForPage(body.slug);
     const snap = row.snap as ForSnapshot;
+    const url = `${SITE.replace(/\/$/, '')}/for/${body.slug}`;
+    const validated = await validateGenerated(body.slug, row.status, url);
     return NextResponse.json({
-      ok: true, slug: body.slug, status: row.status,
-      url: `${SITE.replace(/\/$/, '')}/for/${body.slug}`,
+      ok: true, slug: body.slug, status: row.status, validated,
+      url,
       demoUrl: `${SITE.replace(/\/$/, '')}/demo/${body.slug}`,
       annualValueLabel: snap.annualValueLabel, totalFacilities: snap.totalFacilities,
     });
@@ -70,7 +101,9 @@ export async function POST(req: Request) {
       };
       await upsertForPage(row);
       await revalidateForPage(body.slug);
-      return NextResponse.json({ ok: true, slug: body.slug, status: row.status, tier: demoPack ? 'research+network' : 'research', url: `${SITE.replace(/\/$/, '')}/for/${body.slug}`, annualValueLabel: snap.annualValueLabel, totalFacilities: snap.totalFacilities, perSiteLabel: snap.perSiteImpliedLabel, paybackMonths: snap.paybackAllSavingsMonths });
+      const url = `${SITE.replace(/\/$/, '')}/for/${body.slug}`;
+      const validated = await validateGenerated(body.slug, row.status, url);
+      return NextResponse.json({ ok: true, slug: body.slug, status: row.status, validated, tier: demoPack ? 'research+network' : 'research', url, annualValueLabel: snap.annualValueLabel, totalFacilities: snap.totalFacilities, perSiteLabel: snap.perSiteImpliedLabel, paybackMonths: snap.paybackAllSavingsMonths });
     }
     return NextResponse.json({ error: msg }, { status: 500 });
   }
