@@ -155,14 +155,14 @@ CRITICAL RULES:
 - No "synergies", "unlock", "transform", or similar startup language.
 - No theatrical metaphors like "black hole", "visibility goes to die", or "commercially dangerous" in first-touch email.
 - Lead with signal, not a generic opener.
-- Focus on outcomes like better yard visibility, faster gate throughput, lower dwell and detention, smoother dock flow, standardized workflows, less manual coordination, and better driver experience.
+- Focus on outcomes like better yard visibility, faster gate flow, lower dwell and detention, smoother dock flow, standardized workflows, less manual coordination, and better driver experience.
 - Do not use "quick ask" or "quick question."
 - Do not sound like you have diagnosed their operation from a distance.
 - One proof point max. Never stack stats.
 - NEVER say "ship 50% more" or any volume multiplier. The 48→24 stat is truck turn time.
 - If you include the microsite, do it once and keep the surrounding language understated.
 - Favor language like "I may be off," "from the outside," and "curious if this is relevant" over certainty.
-- If you mention Primo, keep it to one clause and tie it to headcount-neutral throughput, not hype.
+- If you mention Primo, keep it to one clause and tie it to headcount-neutral production capacity, not hype.
 - Avoid sounding urgent for urgency's sake. The note should feel useful and observational.
 - Include a final citations line with explicit evidence IDs from the evidence map when present, for example:
 CITATIONS: [[SRC:signal_1]] [[SRC:proof_1]]
@@ -253,7 +253,7 @@ ${buildColdOutboundPolicyNotes('cold_email', 'call_script')}
 
 Structure:
 1. Opener (10 sec): Name, company, one sentence about the yard constraint
-2. Hook (15 sec): Their specific throughput problem, what 24 facilities proved
+2. Hook (15 sec): Their specific production-capacity problem, what 24 facilities proved
 3. Qualifying question: How their yards run today
 4. Ask: Offer the short scorecard, 1-page overview, or ask who owns this lane. Do not ask for calendar time.
 5. Objection handling (2-3 common objections with counters)
@@ -280,7 +280,7 @@ ${buildAgentContextBlock(ctx)}
 ${buildGenerationInputBlock(ctx.generationInput)}
 
 Create a structured brief:
-1. Company snapshot (2-3 sentences about their yard/logistics/throughput reality)
+1. Company snapshot (2-3 sentences about their yard/logistics/production-capacity reality)
 2. The yard constraint for this account (the specific version of the black hole they are living with)
 3. YardFlow value props (3 bullets connecting their operations to YNS modules)
 4. Opening questions (3 questions that surface the variance tax in their words)
@@ -315,7 +315,7 @@ ${ctx.agentNextActions?.length ? `- Recommended next actions: ${ctx.agentNextAct
 INSTRUCTIONS:
 The output is a JSON that populates a branded infographic one-pager. The visual layout has:
 1. A header: "FOR [ACCOUNT NAME]" above "YardFlow by FreightRoll"
-2. A bold headline about the throughput constraint this account faces
+2. A bold headline about the production-capacity constraint this account faces
 3. A subheadline connecting their business to YardFlow (2-3 sentences)
 4. A 3-column comparison: Typical Reality (red) → Standardized Operating Protocol (blue, 4-step flow) → YardFlow Effect (green)
 5. A "Proof from Live Deployment" stats bar
@@ -330,7 +330,7 @@ The one-pager must sell to both operations and executive stakeholders:
 
 CRITICAL: Pain points and outcomes MUST be customized to this specific account's vertical and operations.
 - Pain points should reference their industry (e.g., "yogurt production surges" for Dannon, "seasonal volume spikes" for retail)
-- Outcomes should connect YardFlow to their specific throughput needs
+- Outcomes should connect YardFlow to their specific production-capacity needs
 - Solution steps should be tailored descriptions of how each step helps THIS account
 - Headline must feel board-room strong, not generic (constraint + consequence + urgency).
 - Subheadline must include one explicit business consequence (margin, service reliability, or growth capacity).
@@ -341,7 +341,7 @@ ${buildColdOutboundPolicyNotes('one_pager', 'one_pager')}
 Generate ONLY valid JSON matching this schema — no markdown, no commentary:
 
 {
-  "headline": "string — 6-10 word board-level headline about the throughput constraint and business consequence (e.g., 'WHEN DEMAND SPIKES, MARGIN LEAKS IN THE YARD')",
+  "headline": "string — 6-10 word board-level headline about the production-capacity constraint and business consequence (e.g., 'WHEN DEMAND SPIKES, MARGIN LEAKS IN THE YARD')",
   "subheadline": "string — 2-3 sentences connecting their specific business reality to YardFlow's standardized protocol and one explicit business consequence",
   "painPoints": [
     "string — pain customized to this account's operations (include industry-specific language)",
@@ -435,7 +435,7 @@ Subject: under 6 words, lowercase, no company name, no "re:" tricks. Make it sou
 
 MANDATORY OPENING STRATEGY for this email: Use the "${secondaryStrategy}" approach. Completely different angle from Step 1.
 
-Do NOT reference the first email. Come in from a new direction. Add one proof point they have not seen: drop & hook time cut from 48 to 24 minutes (truck turn speed, NOT volume), a module name (flowSPOTTER, flowTWIN), or the customer quote about capturing additional volume headcount neutral. Pick whichever feels most relevant to ${ctx.accountName}'s vertical.
+Do NOT reference the first email. Come in from a new direction. Add one proof point they have not seen: drop & hook time cut from 48 to 24 minutes (truck turn speed, NOT volume), a module name (flowTWIN, flowYMS), or the customer quote about capturing additional volume headcount neutral. Pick whichever feels most relevant to ${ctx.accountName}'s vertical.
 
 Make the yard problem feel more expensive than before. Tighter. Harder.
 Default to "we," not "I."

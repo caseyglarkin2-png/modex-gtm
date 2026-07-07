@@ -71,7 +71,7 @@ function buildDefaultDraft(accountName: string, recommendedAngle?: string, whyNo
   return {
     subject: `built this with ${accountName} in mind`,
     openingLine: `Wanted to share a quick note because ${accountName} looks like a strong fit for a tighter gate-to-dock operating motion.`,
-    body: recommendedAngle || whyNow || `The working hypothesis is that throughput pressure is showing up as manual coordination, avoidable yard variance, and inconsistent dock flow.`,
+    body: recommendedAngle || whyNow || `The working hypothesis is that production-capacity pressure is showing up as manual coordination, avoidable yard variance, and inconsistent dock flow.`,
     ctaLine: `If useful, I can send the short operator version.`,
   };
 }

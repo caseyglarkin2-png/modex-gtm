@@ -27,7 +27,7 @@ export function buildShortOverviewCta(accountName?: string): CTABlock {
     type: 'warm-intro',
     headline: `Want the short overview for ${safeAccountName}?`,
     subtext:
-      'Reply and we will send the one-page version focused on yard flow, throughput, variance reduction, and operator proof.',
+      'Reply and we will send the one-page version focused on yard flow, production capacity, variance reduction, and operator proof.',
     buttonLabel: 'Should we send the short overview?',
     calendarLink: buildMailtoHref(safeAccountName),
   };

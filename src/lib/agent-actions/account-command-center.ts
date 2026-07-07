@@ -373,7 +373,7 @@ export function buildTopSignals(result: AgentActionResult | null) {
 
 export function buildRecommendedAngle(result: AgentActionResult | null, fallback: string) {
   const analysis = result?.cards.find((card) => card.title === 'Research Summary')?.body;
-  return analysis || fallback || 'Lead with yard variance, throughput pressure, and standardized gate-to-dock execution.';
+  return analysis || fallback || 'Lead with yard variance, production-capacity pressure, and standardized gate-to-dock execution.';
 }
 
 /**

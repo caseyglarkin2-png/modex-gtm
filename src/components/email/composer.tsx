@@ -52,7 +52,7 @@ function buildEmailPreviewHtml(bodyText: string, imageUrl?: string): string {
             <td style="padding-top:12px;">
               <p style="margin:0 0 2px;font-size:12px;font-weight:600;color:#1a1a1a;">Casey Larkin</p>
               <p style="margin:0 0 8px;font-size:11px;color:#6b7280;">GTM Lead · <span style="color:#0e7490;font-weight:600;">Yard</span><span style="font-weight:600;color:#1a1a1a;">Flow</span> by FreightRoll</p>
-              <p style="margin:0 0 8px;font-size:10px;color:#9ca3af;font-style:italic;">The First Yard Network System — deterministic throughput across every facility.</p>
+              <p style="margin:0 0 8px;font-size:10px;color:#9ca3af;font-style:italic;">The First Yard Network System. Production capacity across every facility.</p>
               <p style="margin:0;font-size:10px;">
                 <span style="color:#0e7490;font-weight:500;">yardflow.ai</span>
                 <span style="color:#d1d5db;margin:0 4px;">|</span>

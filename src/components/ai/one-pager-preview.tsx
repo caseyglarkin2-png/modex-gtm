@@ -71,7 +71,7 @@ export function OnePagerPreview({ data, accountName }: { data: OnePagerData; acc
       <div className="mx-4 mb-4 grid gap-2 md:grid-cols-3">
         <div className="rounded-lg border border-cyan-600/40 bg-cyan-950/30 p-2">
           <p className="text-[10px] uppercase tracking-[0.2em] text-cyan-300">Commercial Impact</p>
-          <p className="mt-1 text-xs text-slate-200">Grow throughput without adding dock-office headcount.</p>
+          <p className="mt-1 text-xs text-slate-200">Grow production capacity without adding dock-office headcount.</p>
         </div>
         <div className="rounded-lg border border-blue-600/40 bg-blue-950/30 p-2">
           <p className="text-[10px] uppercase tracking-[0.2em] text-blue-300">Operational Control</p>
@@ -228,7 +228,7 @@ export function onePagerToHtml(data: OnePagerData, accountName: string): string 
     <table width="100%" cellpadding="0" cellspacing="6"><tr>
       <td style="background:rgba(8,145,178,0.2);border:1px solid rgba(34,211,238,0.35);border-radius:8px;padding:10px;vertical-align:top;">
         <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#67e8f9;font-weight:700;">Commercial Impact</div>
-        <div style="font-size:11px;color:#e2e8f0;margin-top:6px;line-height:1.4;">Grow throughput without adding dock-office headcount.</div>
+        <div style="font-size:11px;color:#e2e8f0;margin-top:6px;line-height:1.4;">Grow production capacity without adding dock-office headcount.</div>
       </td>
       <td style="background:rgba(30,58,138,0.2);border:1px solid rgba(96,165,250,0.35);border-radius:8px;padding:10px;vertical-align:top;">
         <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#93c5fd;font-weight:700;">Operational Control</div>

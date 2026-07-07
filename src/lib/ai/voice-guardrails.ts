@@ -59,6 +59,11 @@ export const BANNED_PHRASES = [
   'excited to share',
   'thrilled to announce',
   'game changing',
+  // Post-pivot canon: retired pre-pivot doctrine, never generate these
+  'throughput',
+  'not a YMS',
+  'deterministic throughput',
+  'flowSPOTTER',
 ] as const;
 
 export const PREFERRED_PHRASES = [
@@ -77,15 +82,16 @@ export const PREFERRED_PHRASES = [
   'every facility running its own playbook',
   'local improvisation disguised as operations',
   'the yard is the mess that can glue the rest together',
-  'deterministic throughput',
+  'production capacity',
   'the last analog mile in a digital supply chain',
   'the constraint nobody named',
   'margin that never comes back',
   'the operating layer where reality breaks',
   'digital supply chain lives and dies by the yard',
   'Yard Network System',
-  'not a YMS',
-  'the protocol is the product',
+  'flowYMS',
+  'a great YMS is the execution brain',
+  'driver journey first, automate last',
   'same driver journey at every facility',
 ] as const;
 
@@ -156,16 +162,23 @@ BANNED phrases (never use these):
 ${BANNED_PHRASES.slice(0, 20).map(p => `- "${p}"`).join('\n')}
 ... and any variation of polite filler, SDR template language, or startup enthusiasm.
 
+POST-PIVOT CANON (hard rules, never violate):
+- NEVER use the word "throughput". The metric word is "production capacity" or "volume".
+- NEVER say "not a YMS" or position YardFlow against a YMS. YardFlow is PRO-YMS: a great YMS is the execution brain, and flowYMS is YardFlow's.
+- NEVER write "flowSPOTTER" as a standalone module. Spotter move execution is folded into flowTWIN.
+- Approved: "flowYMS", "production capacity", "driver journey first, automate last".
+
 Strategic language to use when relevant:
 - "the yard is the constraint that gets missed"
 - "the network only moves as cleanly as the yard hands it off"
 - "you do not have a digital supply chain if the yard still runs analog"
 - "the variance tax"
 - "the constraint nobody named"
-- "the protocol layer"
+- "the operating layer for the yard"
 - "the missing piece"
-- "not a YMS"
-- "deterministic throughput"
+- "a great YMS is the execution brain"
+- "production capacity"
+- "driver journey first, automate last"
 - "tribal knowledge at the gate"
 - "margin that is hard to see from the outside"
 - "local improvisation in the handoff"
@@ -187,7 +200,7 @@ ANTI-SAMENESS RULES (mandatory):
 - Do NOT use "This is" as an opening construction.
 - Weave proof points ($1M+ per site, 48→24 min drop & hook, headcount neutral) into the argument naturally. Do not list them.
 - The 48→24 min stat is TRUCK TURN TIME, not freight volume. Never say "50% more volume" or "ship twice as much." The benefit is: faster turns free dock capacity so facilities can capture more demand without adding headcount.
-- Do NOT invent volume percentages or throughput multipliers. Approved: "capture more freight without adding headcount", "absorb demand spikes", "recover dock capacity."
+- Do NOT invent volume percentages or capacity multipliers. Approved: "capture more freight without adding headcount", "absorb demand spikes", "recover dock capacity", "grow production capacity."
 - The product name and what it does should appear ONCE, briefly, in the second half of the email. Not as a pitch paragraph.
 - Initial email CTA examples that are acceptable: "Worth sending the 90-second version?" "Curious if this is even directionally relevant." "If this sits with someone else, who would you point me to?"
 - Meeting asks are acceptable only after engagement or when the prompt explicitly asks for a meeting-oriented asset.

@@ -39,7 +39,7 @@ Account: ${accountName}${personaName ? `\nContact: ${personaName}` : ''}
 The script should:
 - Sound natural when read aloud (no bullet points, no markdown)
 - Open with context-setting without being scripted-sounding
-- Reference a real pain point (e.g. freight cost visibility, DC throughput, supplier reliability)
+- Reference a real pain point (e.g. freight cost visibility, DC production capacity, supplier reliability)
 - Include a low-friction ask, not a meeting request. Good examples: "Should we send the short overview?" or "Is this something your team is working on?"
 - End with a professional close
 

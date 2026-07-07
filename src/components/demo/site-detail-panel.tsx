@@ -18,7 +18,7 @@ const FACTOR_INSIGHTS: Record<string, string> = {
   docks: 'A high dock-door count means many concurrent loads to sequence and assign.',
   trailers: 'A large trailer yard means more standing inventory to locate and move.',
   drop: 'An active drop yard makes spotter moves the dominant task, and sequencing them is where hours are won or lost.',
-  guard: 'A staffed gate ties check-in throughput to a person at the lane.',
+  guard: 'A staffed gate ties check-in volume to a person at the lane.',
   sepgate: 'Separate in and out gates split the flow, so both have to stay coordinated.',
   multistep: 'Multi-step check-in adds handoffs before a truck reaches a door.',
   staging: 'Gate staging means trucks hold before and after the gate, a visible queue and a hidden wait.',
