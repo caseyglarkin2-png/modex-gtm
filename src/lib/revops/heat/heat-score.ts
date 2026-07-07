@@ -26,17 +26,31 @@
  *   intent   55 pts  account-level intent_score (native /for + /demo behavioral
  *                    heat rolled up to the COMPANY). Highest: first-party, on our
  *                    property, high-intent. DECAYED by last_intent_at.
- *   qual     45 pts  rolled-up MQL/SQL density from contacts (yardflow_qual_verdict).
- *                    A human who passed TAM+role+intent gating is the strongest
- *                    human signal short of a booked meeting. NOT decayed (a verdict
- *                    is a durable qualification, not a fleeting pageview).
+ *   qual     45 pts  rolled-up MQL/SQL density from contacts (yardflow_qual_verdict),
+ *                    SPLIT so a stale marketing list cannot dominate the ranking:
+ *                      · SQL portion (75% of the ceiling): saturates fast (k=2) and is
+ *                        NOT decayed — a sales-qualified human is a durable, high-value
+ *                        signal short of a booked meeting.
+ *                      · MQL portion (25% of the ceiling): saturates SLOWLY (k=25) so a
+ *                        raw MQL count of 20-140 no longer pegs the ceiling, and is
+ *                        DECAYED by the list's last sales-activity date (qualLastActivityAt)
+ *                        so a big cold historical list ages out instead of ranking hot.
+ *                    (Before 2026-07-07 the whole qual component was undecayed and
+ *                    MQL-saturating at k=2, so ~20 stale MQLs pegged the full 45 pts and
+ *                    cold list-heavy accounts outranked live multi-SQL accounts.)
  *   pounce   30 pts  trigger intelligence (news / X / clawd) — the account is in
  *                    the news for something yard-relevant. DECAYED by last_trigger_at.
  *   deck     25 pts  sales-deck engagement (HubSpot Documents) summed to the
  *                    account. DECAYED by last_viewed — a May open is ~gone by July.
  *   web      25 pts  /for spear-page views over 180d. Lowest-trust (top-of-funnel,
  *                    semi-anonymous); no per-view timestamp, so NOT decayed
- *                    (treated as a slow 180d-window average).
+ *                    (treated as a slow 180d-window average). SUPPRESSED to 0 when the
+ *                    account already carries an account-level intent_score: the native
+ *                    /for tracker stamps company intent_score via /api/microsites/track,
+ *                    so counting the same /for views again here would double-score one
+ *                    behavior through two ceilings. intent_score OWNS /for when present;
+ *                    the web component is the fallback for accounts whose /for (or /demo)
+ *                    behavior never rolled up to an account intent_score.
  *
  * SATURATION_K = 70: a lone maxed intent signal (55 pts) reads ~54/100; a fully
  * stacked account (180 pts) tops out ~92, leaving headroom so nothing pins at 100.
@@ -68,6 +82,18 @@ export const HEAT_WEIGHTS = {
   web: 25,
 } as const;
 
+/**
+ * How the 45-pt qual ceiling splits between the durable SQL signal and the
+ * decayable MQL signal. SQL carries most of the weight (a sales-qualified human
+ * is the strongest short-of-meeting signal); MQL is a light top-up that a big
+ * stale list cannot use to dominate the board. Fractions sum to 1.
+ */
+export const QUAL_SPLIT = { sql: 0.75, mql: 0.25 } as const;
+/** SQL saturation: 1 SQL ~39, 2 ~63, 4 ~86 of the SQL sub-ceiling. Fast. */
+export const K_SQL = 2;
+/** MQL saturation: SLOW, so a raw MQL count of 20-140 does not peg its sub-ceiling. */
+export const K_MQL = 25;
+
 /** Saturation constant for base = 100·(1 - e^(-points/K)). See header. */
 export const SATURATION_K = 70;
 
@@ -89,6 +115,14 @@ export interface HeatSignals {
   tam: string; // must be 'in' to score
   tamTier?: string; // 'A' | 'B' | 'C' | ''
   dockDoors?: number; // audited yard footprint; drives fit
+  /**
+   * True when the audited pack is a KNOWN-PARTIAL sample of a much larger real
+   * footprint (e.g. PepsiCo's pack is a 30-site satellite sample, not the whole
+   * network). Such an account's true dock-door count is far above what the pack
+   * shows, so fit must not be dragged below full for a footprint we know we
+   * under-audited. When set, fit is not penalized for a sub-FULL_FIT_DOCKS pack.
+   */
+  partialPack?: boolean;
 
   // component: intent (account-level, behavioral, decayed)
   intentScore?: number; // 0-100 raw HubSpot company intent_score
@@ -97,6 +131,13 @@ export interface HeatSignals {
   // component: qualification density (rolled up from contacts)
   sqlCount?: number;
   mqlCount?: number;
+  /**
+   * Most-recent sales-activity date across this account's MQL contacts
+   * (max hs_last_sales_activity_timestamp). Decays the MQL portion of qual so a
+   * big COLD historical list ages out. Missing => no decay (structural cap still
+   * keeps MQL from dominating). Does NOT decay the SQL portion.
+   */
+  qualLastActivityAt?: string | number | Date | null;
 
   // component: pounce trigger heat (decayed)
   pounceScore?: number; // 0-100 normalized trigger heat
@@ -169,10 +210,16 @@ function saturate(x: number, k: number): number {
 /**
  * Fit multiplier from audited dock doors, falling back to TAM tier when the
  * account has no audited pack. Range [FIT_FLOOR .. 1.0]. Pure — numbers in.
+ *
+ * `partialPack` = the audited dock count is a known-partial sample of a bigger
+ * real footprint; in that case we do not penalize fit for the sub-FULL count
+ * (norm = 1 → fit = 1.0), because the true footprint is above the audit.
  */
-export function fitMultiplier(dockDoors?: number, tamTier?: string): number {
+export function fitMultiplier(dockDoors?: number, tamTier?: string, partialPack?: boolean): number {
   let norm: number;
-  if (dockDoors && dockDoors > 0) {
+  if (partialPack) {
+    norm = 1; // known-undercounted footprint — do not penalize fit for the partial audit
+  } else if (dockDoors && dockDoors > 0) {
     norm = Math.min(1, dockDoors / FULL_FIT_DOCKS);
   } else {
     // no audited footprint — infer from tier so we neither reward nor annihilate
@@ -189,10 +236,18 @@ function intentRaw(s: HeatSignals): number {
   return clamp(s.intentScore ?? 0);
 }
 
-/** SQL is worth 1.0, MQL 0.35; saturating so the 4th SQL adds less than the 1st. k=2. */
-function qualRaw(s: HeatSignals): number {
-  const weighted = (s.sqlCount ?? 0) * 1.0 + (s.mqlCount ?? 0) * 0.35;
-  return saturate(weighted, 2);
+/**
+ * Qual value 0-100, SQL and MQL scored separately so a stale marketing list
+ * cannot dominate. SQL saturates fast (k=2) and is durable (never decayed); MQL
+ * saturates slowly (k=25, so 20-140 does not peg it) and is decayed by the
+ * list's last sales-activity date. Blended by QUAL_SPLIT. Already carries its
+ * own decay, so heatScore feeds it into mk() WITHOUT a further decay factor.
+ */
+function qualValue(s: HeatSignals, nowMs: number): number {
+  const sqlPart = saturate(s.sqlCount ?? 0, K_SQL); // undecayed, durable
+  const mqlDecay = decayFactor(s.qualLastActivityAt, nowMs); // 1 when no timestamp
+  const mqlPart = saturate(s.mqlCount ?? 0, K_MQL) * mqlDecay; // aged
+  return clamp(QUAL_SPLIT.sql * sqlPart + QUAL_SPLIT.mql * mqlPart);
 }
 
 function pounceRaw(s: HeatSignals): number {
@@ -279,11 +334,20 @@ export function heatScore(signals: HeatSignals, nowMs = Date.now()): HeatResult 
 
   const breakdown = {
     intent: mk(intentRaw(signals), 'intent', signals.lastIntentAt),
-    qual: mk(qualRaw(signals), 'qual'), // not decayed
+    qual: mk(qualValue(signals, nowMs), 'qual'), // decay is baked into qualValue (SQL durable, MQL aged)
     pounce: mk(pounceRaw(signals), 'pounce', signals.lastTriggerAt),
     deck: mk(deckRaw(signals), 'deck', signals.deckLastViewedAt),
     web: mk(webRaw(signals), 'web'), // not decayed (no per-view timestamp)
   } as Record<keyof typeof HEAT_WEIGHTS, HeatComponent>;
+
+  // De-dupe /for behavior: when an account already carries an account-level
+  // intent_score, the native /for tracker stamped it via /api/microsites/track,
+  // so the same /for views are already scored through the 55-pt intent ceiling.
+  // Suppress the 25-pt web component here so one behavior is not double-counted.
+  // intent_score OWNS /for when present; web is the fallback otherwise.
+  if ((signals.intentScore ?? 0) > 0) {
+    breakdown.web = { ...breakdown.web, value: 0, contribution: 0 };
+  }
 
   const points =
     breakdown.intent.contribution +
@@ -293,7 +357,7 @@ export function heatScore(signals: HeatSignals, nowMs = Date.now()): HeatResult 
     breakdown.web.contribution;
 
   const base = 100 * (1 - Math.exp(-points / SATURATION_K));
-  const fit = fitMultiplier(signals.dockDoors, signals.tamTier);
+  const fit = fitMultiplier(signals.dockDoors, signals.tamTier, signals.partialPack);
   const heat = clamp(Math.round(base * fit));
 
   const { tier, reason } = classifyTier(signals, breakdown);

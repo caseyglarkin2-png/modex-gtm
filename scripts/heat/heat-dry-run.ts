@@ -83,6 +83,11 @@ const FOR_VIEWS: Record<string, { views: number; visitors: number }> = {
 const normName = (s: string): string =>
   (s || '')
     .toLowerCase()
+    // Fold diacritics BEFORE stripping non-[a-z0-9], else an accented letter splits
+    // the token: "Mondelēz" -> "mondel z", "Nestlé" -> "nestl" (never joins its pack
+    // / for-slug). NFD decomposes ē -> e + combining macron; drop the marks -> "mondelez".
+    .normalize('NFD')
+    .replace(/[̀-ͯ]/g, '')
     .replace(/[.,]/g, '')
     .replace(/\b(inc|llc|corp|corporation|co|company|the|usa|us|group|holdings|international|ltd|na)\b/g, '')
     .replace(/[^a-z0-9]+/g, ' ')
@@ -202,17 +207,29 @@ async function fetchTamCompanies(): Promise<Company[]> {
   return out;
 }
 
-/** Roll up SQL/MQL contact counts per company via the qualification verdict. */
-async function fetchQualRollup(): Promise<{ map: Map<string, { sql: number; mql: number }>; mqlCapped: boolean }> {
-  const byCompany = new Map<string, { sql: number; mql: number }>();
+interface QualRoll {
+  sql: number;
+  mql: number;
+  /** max hs_last_sales_activity_timestamp (epoch ms) across the account's MQL contacts; 0 if none */
+  mqlLastActMs: number;
+}
+/**
+ * Roll up SQL/MQL contact counts per company via the qualification verdict, and
+ * the most-recent sales-activity date across each account's MQL contacts so the
+ * compute can AGE a cold historical MQL list out of the ranking.
+ */
+async function fetchQualRollup(): Promise<{ map: Map<string, QualRoll>; mqlCapped: boolean }> {
+  const byCompany = new Map<string, QualRoll>();
   let mqlCapped = false;
   for (const verdict of ['sql', 'mql'] as const) {
     let after: string | undefined;
     let seen = 0;
     for (;;) {
       const body = {
+        // hs_last_sales_activity_timestamp = the real recency of human attention on
+        // the contact; used only for the MQL portion's decay (SQL stays durable).
         filterGroups: [{ filters: [{ propertyName: 'yardflow_qual_verdict', operator: 'EQ', value: verdict }] }],
-        properties: ['associatedcompanyid'],
+        properties: ['associatedcompanyid', 'hs_last_sales_activity_timestamp'],
         limit: 100,
         ...(after ? { after } : {}),
       };
@@ -223,8 +240,13 @@ async function fetchQualRollup(): Promise<{ map: Map<string, { sql: number; mql:
         seen++;
         const cid = r.properties?.associatedcompanyid;
         if (!cid) continue;
-        const cur = byCompany.get(cid) ?? { sql: 0, mql: 0 };
+        const cur = byCompany.get(cid) ?? { sql: 0, mql: 0, mqlLastActMs: 0 };
         cur[verdict] += 1;
+        if (verdict === 'mql') {
+          const ts = r.properties?.hs_last_sales_activity_timestamp;
+          const ms = ts ? Date.parse(ts) : NaN;
+          if (!Number.isNaN(ms) && ms > cur.mqlLastActMs) cur.mqlLastActMs = ms;
+        }
         byCompany.set(cid, cur);
       }
       after = j.paging?.next?.after;
@@ -249,6 +271,10 @@ async function main() {
   const companies = await fetchTamCompanies();
   console.error(`  ${companies.length} TAM-in companies`);
 
+  // Packs that audit only a partial sample of a far larger real footprint — their
+  // dock-door count under-states the account, so fit must not be dragged down for it.
+  const PARTIAL_PACKS = new Set<string>(['pepsico']); // 30-site satellite sample, not the whole network
+
   console.error('rolling up SQL/MQL contacts (read-only)…');
   const { map: qual, mqlCapped } = await fetchQualRollup();
   const totalSql = [...qual.values()].reduce((a, q) => a + q.sql, 0);
@@ -267,7 +293,7 @@ async function main() {
   for (const c of companies) {
     const pack = packByName.get(normName(c.name));
     const slug = pack?.slug ?? '';
-    const q = qual.get(c.id) ?? { sql: 0, mql: 0 };
+    const q = qual.get(c.id) ?? { sql: 0, mql: 0, mqlLastActMs: 0 };
     const d = c.domain ? deck.get(c.domain) : undefined;
     if (d) deckMatched++;
 
@@ -288,10 +314,12 @@ async function main() {
       tam: c.tam,
       tamTier: c.tamTier,
       dockDoors: pack?.dockDoors,
+      partialPack: slug ? PARTIAL_PACKS.has(slug) : false,
       intentScore: c.intentScore,
       lastIntentAt: c.lastIntentAt,
       sqlCount: q.sql,
       mqlCount: q.mql,
+      qualLastActivityAt: q.mqlLastActMs || null,
       pounceScore: c.triggerScore,
       lastTriggerAt: c.lastTriggerAt,
       deckViews: d?.views,
@@ -337,11 +365,16 @@ async function main() {
         intentScore: x.s.intentScore,
         sqlCount: x.s.sqlCount,
         mqlCount: x.s.mqlCount,
+        qualLastActivityAt: x.s.qualLastActivityAt
+          ? new Date(x.s.qualLastActivityAt as number).toISOString()
+          : null,
         pounceScore: x.s.pounceScore,
         deckViews: x.s.deckViews ?? 0,
         deckVisitors: x.s.deckVisitors ?? 0,
         forViews: x.s.forViews ?? 0,
+        webCounted: (x.s.intentScore ?? 0) > 0 ? false : (x.s.forViews ?? 0) > 0,
         dockDoors: x.s.dockDoors ?? null,
+        partialPack: x.s.partialPack ?? false,
         tamTier: x.s.tamTier,
       },
       breakdown: x.r.breakdown,
@@ -358,8 +391,9 @@ async function main() {
   md.push(`TAM-in accounts scored: **${companies.length}**. Tiers: ` +
     `Tier1 ${tierCounts.tier1} · Tier2 ${tierCounts.tier2} · Tier3 ${tierCounts.tier3} · Tier4 ${tierCounts.tier4}.`);
   md.push('');
-  md.push('Weights (max points): intent 55 · qual 45 · pounce 30 · deck 25 · web 25. ' +
-    'base = 100·(1−e^(−points/70)), then ×fit (0.30–1.00). Time-stamped signals decay e^(−ageDays/14).');
+  md.push('Weights (max points): intent 55 · qual 45 (SQL 75% durable + MQL 25% aged) · pounce 30 · deck 25 · web 25. ' +
+    'base = 100·(1−e^(−points/70)), then ×fit (0.30–1.00). Time-stamped signals decay e^(−ageDays/14). ' +
+    '/for is scored through intent_score when present, else through the web component (never both).');
   md.push('');
   md.push('| # | Account | Heat | Tier | Cadence | intent | SQL/MQL | pounce | deck (v/ppl) | /for | docks | fit | why |');
   md.push('|--:|---|--:|:--:|---|--:|:--:|--:|:--:|--:|--:|--:|---|');
@@ -375,6 +409,9 @@ async function main() {
   md.push('## Notes');
   md.push('- **Read-only.** No `yardflow_heat` / `yardflow_heat_tier` were written. The writer (`heat-writer.ts`) is gated behind `--apply` + `HEAT_WRITE_ENABLED=1`, neither set here.');
   md.push('- `/for` views are live from PostHog (project 466410, 180d, internal excluded); deck engagement from the May-12 carousel blast CSV (decays out by July); SQL/MQL rolled up from `yardflow_qual_verdict`.');
+  md.push('- **Qual is split:** SQL (75% of the 45-pt ceiling, k=2, durable/undecayed) + MQL (25%, k=25, decayed by the list\'s max `hs_last_sales_activity_timestamp`). A big COLD historical MQL list no longer pegs the ceiling or outranks a live multi-SQL account.');
+  md.push('- **/for is counted once:** when an account carries an account-level `intent_score` (stamped by the native /for tracker via `/api/microsites/track`), the 25-pt web component is suppressed so the same /for behavior is not double-scored. `intent_score` OWNS /for; web is the fallback for accounts with no account intent.');
+  md.push('- **Partial packs:** accounts whose audited pack is a known-partial sample (e.g. PepsiCo, 30-site satellite sample) are not fit-penalized for the under-count — fit is held at 1.0.');
   md.push('- Account-level `intent_score`/`trigger_score` are sparse (7 + 1 companies), so most heat comes from rolled-up contact + deck + web signals — exactly what this engine is for.');
   if (mqlCapped) md.push('- **MQL rollup hit the HubSpot Search API 10,000-result cap** — Tier-3 MQL counts are a FLOOR, not exact. SQL (146) and intent are complete. Shard by createdate to get exact MQL if needed.');
   writeFileSync(join(OUT_DIR, 'heat-score-ranked.md'), md.join('\n'));

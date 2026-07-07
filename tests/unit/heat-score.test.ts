@@ -132,6 +132,69 @@ describe('fit suppresses a loud small-yard vendor', () => {
   });
 });
 
+describe('qual: a stale MQL list does not dominate the ranking (2026-07-07 fix)', () => {
+  it('MQL saturates its own low sub-ceiling — 120 MQL cannot peg the 45-pt qual component', () => {
+    const r = heatScore({ tam: 'in', tamTier: 'A', dockDoors: 1000, mqlCount: 120 }, NOW);
+    // MQL is 25% of the 45-pt ceiling => max ~11.25 pts, never the full 45.
+    expect(r.breakdown.qual.contribution).toBeLessThan(12);
+  });
+
+  it('a cold 120-MQL/0-SQL account does NOT outrank a live 4-SQL account (US Foods vs PepsiCo)', () => {
+    const usFoods = heatScore({ name: 'US Foods', tam: 'in', tamTier: 'A', dockDoors: 1100, mqlCount: 121 }, NOW);
+    const pepsi = heatScore(
+      {
+        name: 'PepsiCo',
+        tam: 'in',
+        tamTier: 'A',
+        dockDoors: 1145,
+        partialPack: true,
+        sqlCount: 4,
+        mqlCount: 77,
+        pounceScore: 60,
+        lastTriggerAt: daysAgo(4),
+        forViews: 4,
+      },
+      NOW,
+    );
+    expect(pepsi.heat).toBeGreaterThan(usFoods.heat);
+  });
+
+  it('a big MQL list with NO recent sales activity is aged out below a small fresh-activity list', () => {
+    const coldList = heatScore({ tam: 'in', tamTier: 'A', dockDoors: 1000, mqlCount: 120, qualLastActivityAt: daysAgo(120) }, NOW);
+    const freshList = heatScore({ tam: 'in', tamTier: 'A', dockDoors: 1000, mqlCount: 8, qualLastActivityAt: daysAgo(1) }, NOW);
+    expect(freshList.breakdown.qual.contribution).toBeGreaterThan(coldList.breakdown.qual.contribution);
+  });
+
+  it('SQL is durable — an old sales-activity date does NOT decay the SQL portion', () => {
+    const oldStamp = heatScore({ tam: 'in', tamTier: 'A', dockDoors: 1000, sqlCount: 4, qualLastActivityAt: daysAgo(200) }, NOW);
+    const noStamp = heatScore({ tam: 'in', tamTier: 'A', dockDoors: 1000, sqlCount: 4 }, NOW);
+    expect(oldStamp.breakdown.qual.contribution).toBeCloseTo(noStamp.breakdown.qual.contribution, 5);
+  });
+});
+
+describe('web double-count suppression (2026-07-07 fix)', () => {
+  it('suppresses the web component when the account already carries an account-level intent_score', () => {
+    const withIntent = heatScore({ tam: 'in', tamTier: 'A', dockDoors: 2000, intentScore: 100, lastIntentAt: daysAgo(2), forViews: 60 }, NOW);
+    expect(withIntent.breakdown.web.contribution).toBe(0);
+    expect(withIntent.breakdown.web.value).toBe(0);
+  });
+
+  it('still scores the web component when there is no account intent_score', () => {
+    const noIntent = heatScore({ tam: 'in', tamTier: 'A', dockDoors: 2000, forViews: 60 }, NOW);
+    expect(noIntent.breakdown.web.contribution).toBeGreaterThan(0);
+  });
+});
+
+describe('partialPack fit relief (2026-07-07 fix)', () => {
+  it('a known-partial pack is not fit-penalized for its under-counted footprint', () => {
+    expect(fitMultiplier(1145, 'A', true)).toBe(1);
+    expect(fitMultiplier(1145, 'A', true)).toBeGreaterThan(fitMultiplier(1145, 'A', false));
+  });
+  it('does not change fit for a full-footprint pack', () => {
+    expect(fitMultiplier(2200, 'A', false)).toBe(1);
+  });
+});
+
 describe('decay: an old deck view fades below a fresh SQL', () => {
   it('fresh 1-SQL account outranks a stale 12-view deck account', () => {
     const staleDeck = heatScore(
