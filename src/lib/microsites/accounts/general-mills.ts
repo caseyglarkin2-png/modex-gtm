@@ -538,7 +538,7 @@ export const generalMills: AccountMicrositeData = {
 
       framingNarrative: 'Ryan, you sit at the intersection of manufacturing and logistics. The plant floor has automation, MES, and digital twins. The yard outside the dock door runs on clipboards and radio calls. That gap is where your production schedule breaks.',
       openingHook: 'Your plant floor is a precision machine. Your yard is a parking lot with radios.',
-      stakeStatement: 'Every temperature-zone dock assignment error costs time the production schedule cannot recover. Every shift handoff that resets yard state is 30 minutes of throughput you will never get back.',
+      stakeStatement: 'Every temperature-zone dock assignment error costs time the production schedule cannot recover. Every shift handoff that resets yard state is 30 minutes of production capacity you will never get back.',
 
       heroOverride: {
         headline: 'Your plant floor is a precision machine. Your yard runs on radios and tribal knowledge.',
@@ -559,23 +559,24 @@ export const generalMills: AccountMicrositeData = {
         },
         {
           type: 'modules',
-          sectionLabel: 'The Protocol',
-          headline: 'Six modules. One driver journey. Network-wide control.',
-          narrative: 'YardFlow is not a dashboard. It is a protocol your drivers, spotters, and dock workers follow. Every move is structured, every handoff documented, every temperature-zone assignment enforced.',
+          sectionLabel: 'The Suite',
+          headline: 'One driver journey, standardized first. Then flowYMS orchestrates it network-wide.',
+          narrative: 'YardFlow standardizes the driver journey your drivers, spotters, and dock workers follow. Every move is structured, every handoff documented, every temperature-zone assignment enforced. Then flowYMS turns that standard into scheduled, sequenced execution across every site. Driver journey first, automate last.',
           modules: [
             { id: 'flowDRIVER', name: 'flowDRIVER', verb: 'Verify', shortDescription: 'Digital driver check-in to check-out. QR + wallet ID.' },
+            { id: 'flowGATE', name: 'flowGATE', verb: 'Admit', shortDescription: 'Self-service, appointment-matched admit. Gate volume decoupled from staffing.' },
             { id: 'flowBOL', name: 'flowBOL', verb: 'Document', shortDescription: 'Touchless BOL creation with timestamped chain of custody.' },
-            { id: 'flowSPOTTER', name: 'flowSPOTTER', verb: 'Execute', shortDescription: 'Spotter task queues. Temperature-zone aware. No radio.' },
-            { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Real-time digital twin. Every trailer, every lane, every dock.' },
-            { id: 'flowAI', name: 'flowAI', verb: 'Orchestrate', shortDescription: 'AI agent routing moves, flagging exceptions, enforcing temp-zone rules.' },
+            { id: 'flowTWIN', name: 'flowTWIN', verb: 'Map', shortDescription: 'Real-time digital twin with spotter move queues built in. Temperature-zone aware. No radio.' },
+            { id: 'flowYMS', name: 'flowYMS', verb: 'Orchestrate', shortDescription: 'The execution brain. Appointment, dock, and move sequencing that enforces temp-zone rules.' },
+            { id: 'flowAI', name: 'flowAI', verb: 'Recommend', shortDescription: 'AI copilot flagging exceptions and tuning the standard. Rides on flowYMS, does not replace it.' },
             { id: 'flowNETWORK', name: 'flowNETWORK', verb: 'Scale', shortDescription: `Network command. All ${GENERAL_MILLS_FACILITY_COUNT_LABEL} sites on one screen.` },
           ],
         },
       ],
 
-      toneShift: 'Operator-to-operator. Plant floor language. Throughput, dock utilization, shift handoffs, production schedule adherence. No abstractions.',
-      kpiLanguage: ['dock utilization', 'throughput per shift', 'temperature-zone compliance', 'shift handoff time', 'production schedule adherence'],
-      proofEmphasis: 'The protocol as product story. He cares about process standardization, not dashboards.',
+      toneShift: 'Operator-to-operator. Plant floor language. Production capacity, dock utilization, shift handoffs, production schedule adherence. No abstractions.',
+      kpiLanguage: ['dock utilization', 'production capacity per shift', 'temperature-zone compliance', 'shift handoff time', 'production schedule adherence'],
+      proofEmphasis: 'The driver-journey-first story. He cares about process standardization and a real execution brain, not dashboards.',
     },
     {
       person: {

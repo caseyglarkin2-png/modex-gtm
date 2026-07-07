@@ -59,7 +59,14 @@ export const BANNED_PHRASES = [
   'excited to share',
   'thrilled to announce',
   'game changing',
-  // Post-pivot canon: retired pre-pivot doctrine, never generate these
+] as const;
+
+/**
+ * Post-pivot canon bans: retired pre-pivot doctrine that must never be generated.
+ * Kept separate from BANNED_PHRASES (polite-filler head) so it is always rendered
+ * into the prompt in full rather than truncated by the filler-list slice.
+ */
+export const POST_PIVOT_BANNED = [
   'throughput',
   'not a YMS',
   'deterministic throughput',
@@ -161,6 +168,7 @@ Structural rules:
 BANNED phrases (never use these):
 ${BANNED_PHRASES.slice(0, 20).map(p => `- "${p}"`).join('\n')}
 ... and any variation of polite filler, SDR template language, or startup enthusiasm.
+${POST_PIVOT_BANNED.map(p => `- "${p}" (retired pre-pivot doctrine)`).join('\n')}
 
 POST-PIVOT CANON (hard rules, never violate):
 - NEVER use the word "throughput". The metric word is "production capacity" or "volume".
