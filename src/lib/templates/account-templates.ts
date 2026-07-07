@@ -49,7 +49,7 @@ const RETAIL_CONTEXT: OnePagerContext = {
   parentBrand: 'Retail Distribution',
   vertical: 'Retail',
   whyNow: 'Seasonal peaks (holiday, back-to-school) drive 50%+ volume swings. Yard gridlock during these windows costs millions in missed deliveries.',
-  primoAngle: 'DC throughput depends on dock choreography. One protocol scales with volume without adding headcount.',
+  primoAngle: 'DC production capacity depends on dock choreography. One standard scales with volume without adding headcount.',
   bestIntroPath: 'Distribution Center Manager or VP Supply Chain.',
   likelyPainPoints: 'Unloading bottlenecks during peak seasons, inconsistent trailer sequencing, detention charges, overtime costs.',
   primoRelevance: 'YardFlow prioritizes trailers by SKU velocity and DC sequencing rules, not random arrival order. Reduces peak-season detention by 30%.',
@@ -123,11 +123,11 @@ export const VERTICAL_TEMPLATES: Record<string, VerticalTemplate> = {
   },
   retail: {
     vertical: 'Retail',
-    description: 'Distribution centers managing seasonal peaks and high-velocity SKU throughput.',
+    description: 'Distribution centers managing seasonal peaks and high-velocity SKU volume.',
     defaultScoringRules: { icp_fit: 4, event_signal: 3, primo_story_fit: 4, strategic_value: 3 },
     sampleOnePagerContext: RETAIL_CONTEXT,
     sampleWhyNow: 'Seasonal peaks (holiday, back-to-school) drive 50%+ volume swings.',
-    samplePrimoAngle: 'DC throughput depends on dock choreography. One protocol scales with volume.',
+    samplePrimoAngle: 'DC production capacity depends on dock choreography. One standard scales with volume.',
   },
   pharma: {
     vertical: 'Pharma',

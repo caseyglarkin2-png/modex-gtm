@@ -1,5 +1,6 @@
 /**
- * YardFlow brand context — sourced from yardflow.ai and approved collateral.
+ * YardFlow brand context — sourced from yardflow.ai, the Order-of-Operations
+ * launch paper, and docs/canonical-product-suite.md (post-pivot canon).
  * Used by AI prompts to generate contextually accurate, on-brand content.
  */
 
@@ -9,7 +10,7 @@ export const YARDFLOW_BRAND = {
   fullName: 'YardFlow by FreightRoll',
   tagline: 'The First Yard Network System',
   subtag: 'Industrial Fluidity.',
-  positioning: 'A standardized operating protocol (not a YMS) that made each of over 20 sites at least $1M+ more profitable. Now rolling out to over 200 more.',
+  positioning: 'A role-first, system-first operating layer for the yard that made each of over 20 sites at least $1M+ more profitable. Now rolling out to over 200 more.',
   url: 'https://yardflow.ai',
   ctaLabel: 'Book a Network Audit',
   ctaMeeting: '30-minute Network Audit: facility mapping + board-ready ROI',
@@ -22,19 +23,27 @@ export const YARDFLOW_BRAND = {
 } as const;
 
 export const YARDFLOW_PRODUCT = {
-  what: 'YardFlow is a Yard Network System (YNS), not a YMS. It is a standardized operating protocol for deterministic throughput.',
-  coreInsight: 'The yard is where throughput dies. Manual check-in. Radio dispatching. Tribal knowledge at the gate. The yard consumes margin that never comes back.',
-  fix: 'YardFlow enforces one driver journey across every facility. Same steps. Same sequence. Same evidence. Variance dies. Throughput becomes calculable.',
-  protocolIsProduct: 'The protocol is the product. Six modules, one driver journey, network-wide control.',
+  what: 'YardFlow is a role-first, system-first operating layer for the yard. It standardizes the driver journey first, then layers flowYMS as the execution brain that turns that standard into scheduled, sequenced yard execution across a network.',
+  coreInsight: 'The yard is where production capacity leaks back out. Manual check-in. Radio dispatching. Tribal knowledge at the gate. The yard consumes margin that never comes back.',
+  fix: 'YardFlow standardizes one driver journey across every facility. Same steps. Same sequence. Same evidence. Variance dies. Production capacity becomes calculable, then flowYMS orchestrates it.',
+  protocolIsProduct: 'Driver journey first, automate last. Standardize the five yard roles, prove production capacity, then let flowYMS and flowAI orchestrate it network-wide.',
 
   modules: [
     {
       id: 'flowDRIVER',
       name: 'flowDRIVER',
-      shortName: 'Gate Check-in',
+      shortName: 'Driver Journey',
       verb: 'Verify',
-      description: 'Digital driver journey from check-in to check-out powered by FreightRoll ID and a standardized gate protocol.',
+      description: 'Digital driver journey from check-in to check-out powered by FreightRoll ID and a standardized gate protocol. This is the first thing deployed and where production-capacity gains show up before any automation.',
       bullets: ['QR + wallet identity verification', 'Algorithmic lane and dock direction', 'Check-in to check-out chain of custody'],
+    },
+    {
+      id: 'flowGATE',
+      name: 'flowGATE',
+      shortName: 'Gate Control',
+      verb: 'Admit',
+      description: 'Automated gate and access control. Appointment matching and self-service admit remove the staffed-lane bottleneck so check-in volume is no longer tied to a person at the gate.',
+      bullets: ['Self-service, appointment-matched admit', 'Access control and exception routing', 'Gate volume decoupled from staffing'],
     },
     {
       id: 'flowBOL',
@@ -45,28 +54,12 @@ export const YARDFLOW_PRODUCT = {
       bullets: ['Touchless BOL creation', 'Single source repository', 'Immutable timestamp trail'],
     },
     {
-      id: 'flowSPOTTER',
-      name: 'flowSPOTTER',
-      shortName: 'Yard Routing',
-      verb: 'Execute',
-      description: 'Spotter app for move execution, task queues, and rapid trailer repositioning without radio chaos.',
-      bullets: ['Move queue visibility', 'In-app dispatch and completion', 'Lower deadhead and wait time'],
-    },
-    {
       id: 'flowTWIN',
       name: 'flowTWIN',
-      shortName: 'Dock Assignment',
+      shortName: 'Digital Twin + Moves',
       verb: 'Map',
-      description: 'Machine vision and GPS-enabled digital twin of the yard for real-time location, dwell, and lane state.',
-      bullets: ['Live yard topology', 'Trailer and lane state awareness', 'Exception detection in real time'],
-    },
-    {
-      id: 'flowAI',
-      name: 'flowAI',
-      shortName: 'Orchestration',
-      verb: 'Orchestrate',
-      description: 'AI agent that uses flowTWIN and operational data to orchestrate flowDRIVER, flowSPOTTER, and flowBOL.',
-      bullets: ['Action recommendations by state', 'Escalation and exception routing', 'Continuous protocol optimization'],
+      description: 'Machine vision and GPS-enabled digital twin of the yard for real-time location, dwell, and lane state, with spotter move execution and task queues built in (the former flowSPOTTER is folded into flowTWIN).',
+      bullets: ['Live yard topology', 'Trailer and lane state awareness', 'In-app spotter move queue and completion'],
     },
     {
       id: 'flowNETWORK',
@@ -76,9 +69,25 @@ export const YARDFLOW_PRODUCT = {
       description: 'Yard network-wide command view with alerting, simulation, and cross-site performance intelligence.',
       bullets: ['Network-wide alerting', 'Scenario and rollout simulation', 'Cross-site pattern detection'],
     },
+    {
+      id: 'flowAI',
+      name: 'flowAI',
+      shortName: 'AI Copilot',
+      verb: 'Recommend',
+      description: 'AI agent that reads flowTWIN and operational data to recommend the next move, route exceptions, and continuously tune the standard. It rides on top of flowYMS, it does not replace it.',
+      bullets: ['Action recommendations by state', 'Escalation and exception routing', 'Continuous standard optimization'],
+    },
+    {
+      id: 'flowYMS',
+      name: 'flowYMS',
+      shortName: 'Execution Brain',
+      verb: 'Orchestrate',
+      description: 'The YMS execution brain. Appointment, dock, and move orchestration that turns the standardized driver journey into scheduled, sequenced execution across the yard and the network. A great YMS is the execution brain, and flowYMS is YardFlow\'s.',
+      bullets: ['Appointment and dock scheduling', 'Move planning and sequencing', 'Standard turned into orchestrated execution'],
+    },
   ],
 
-  /** The 4-step driver journey used in one-pagers (subset of 6 modules) */
+  /** The 4-step driver journey used in one-pagers (the role-first spine deployed first) */
   driverJourney: [
     { step: 1, title: 'Gate Check-in', description: 'Verified driver ID and a standard intake sequence every time' },
     { step: 2, title: 'Yard Routing', description: 'Automated lane and move logic replaces manual radio dispatching' },
@@ -126,13 +135,13 @@ export const YARDFLOW_MESSAGING = {
       'Manual gate check-in & radio dispatching under peak pressure',
       'Dwell depends on tribal knowledge, not a standard operating sequence',
       'Each facility runs its own yard playbook. Variance compounds network-wide',
-      'Dock-office friction, detention, & local workarounds hide lost throughput',
+      'Dock-office friction, detention, & local workarounds hide lost production capacity',
     ],
   },
 
   solutionFramework: {
-    header: 'Standardized Operating Protocol',
-    description: 'The 4-step driver journey that replaces manual chaos with deterministic flow.',
+    header: 'Standardized Driver Journey',
+    description: 'The 4-step driver journey that replaces manual chaos with deterministic flow, before any automation.',
   },
 
   outcomeFramework: {
@@ -163,15 +172,20 @@ Company: ${YARDFLOW_BRAND.fullName}
 Positioning: ${YARDFLOW_BRAND.tagline}. ${YARDFLOW_BRAND.positioning}
 Core insight: ${YARDFLOW_PRODUCT.coreInsight}
 The fix: ${YARDFLOW_PRODUCT.fix}
-Protocol: ${YARDFLOW_PRODUCT.protocolIsProduct}
+Operating philosophy: ${YARDFLOW_PRODUCT.protocolIsProduct}
 
-The 4-Step Driver Journey (standardized operating protocol):
+The 4-Step Driver Journey (deployed first, role-first spine):
 1. Gate Check-in: Verified driver ID and a standard intake sequence every time
 2. Yard Routing: Automated lane and move logic replaces manual radio dispatching
 3. Dock Assignment: Seamless dock handoff with timestamped direction and clear accountability
 4. BOL Proof: Touchless BOL capture with a defensible chain of custody from arrival to release
 
-Six Modules: flowDRIVER (verify), flowBOL (document), flowSPOTTER (execute), flowTWIN (map), flowAI (orchestrate), flowNETWORK (scale)
+The Suite: flowDRIVER (verify), flowGATE (admit), flowBOL (document), flowTWIN (map, with spotter moves folded in), flowNETWORK (scale), flowAI (recommend), and flowYMS (orchestrate — the execution brain). There is no standalone flowSPOTTER anymore; move execution lives inside flowTWIN.
+
+Product frame (post-pivot canon — do not contradict):
+- YardFlow is role-first and system-first. Standardize the yard roles and the driver journey first, prove production capacity, then automate.
+- YardFlow is PRO-YMS. A great YMS is the execution brain, and flowYMS is YardFlow's. Never say "not a YMS" or position against a YMS.
+- The driver-journey layer alone lifted production capacity at live sites before the YMS automation went in. Driver journey first, automate last.
 
 Proof from Live Deployment:
 - 24 facilities live, >200 contracted network
@@ -185,7 +199,7 @@ CRITICAL CLAIM ACCURACY RULES (never violate these):
 - YardFlow lets facilities capture more of the demand spike when it happens, without adding headcount. Even 5% more freight captured is massive at scale.
 - Do NOT invent volume percentages. The volume benefit is: same headcount handles more freight when demand spikes.
 - Do NOT say "ship twice as much" or any volume multiplier. The math is: faster turns = more dock availability = ability to absorb demand surges.
-- Approved phrasing: "capture more freight without adding headcount", "absorb demand spikes", "recover dock capacity", "faster truck turns", "$1M+ per site"
+- Approved phrasing: "capture more freight without adding headcount", "absorb demand spikes", "recover dock capacity", "faster truck turns", "grow production capacity", "$1M+ per site"
 - NEVER make up statistics that are not listed here. If you do not have a number, describe the outcome qualitatively.
 
 Verified Customer Quote: "${YARDFLOW_PROOF.customerQuote.text}" - ${YARDFLOW_PROOF.customerQuote.attribution}, ${YARDFLOW_PROOF.customerQuote.company}
@@ -194,7 +208,7 @@ Typical Reality (pain points to customize per account):
 - Manual gate check-in & radio dispatching under peak pressure
 - Dwell depends on tribal knowledge, not a standard operating sequence
 - Each facility runs its own yard playbook. Variance compounds network-wide
-- Dock-office friction, detention, & local workarounds hide lost throughput
+- Dock-office friction, detention, & local workarounds hide lost production capacity
 
 YardFlow Effect (outcomes to customize per account):
 - One standardized driver journey across facilities
@@ -207,10 +221,11 @@ CTA: ${YARDFLOW_BRAND.ctaMeeting}
 
 IMPORTANT LANGUAGE RULES:
 - Always say "YardFlow by FreightRoll" on first mention, then "YardFlow" thereafter
-- YardFlow is a "Yard Network System (YNS)". NEVER call it a "YMS" or "yard management system"
-- It is a "standardized operating protocol" — use this language, not "software" or "platform"
-- The protocol IS the product — emphasize standards, not features
-- "Deterministic throughput" and "variance" are core vocabulary
+- YardFlow is role-first and system-first. It standardizes the yard, then orchestrates it with flowYMS. It is PRO-YMS: never say "not a YMS" or "yard management system" as a foil
+- flowYMS is the product name for the YMS / execution-brain layer. Approve and use it
+- Emphasize the standard and the driver journey first, then the automation
+- The metric word is "production capacity" or "volume". NEVER use "throughput"
+- "production capacity", "variance", and "driver journey" are core vocabulary
 - Use "Ground Source Truth" when referencing evidence/proof capabilities
 - Reference the pipe/flow metaphor — tangled pipe (before) → straight pipe (after) → expanding funnel (YardFlow effect)
 `.trim();

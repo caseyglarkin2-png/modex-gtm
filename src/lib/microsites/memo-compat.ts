@@ -174,7 +174,7 @@ function buildComparable(data: AccountMicrositeData): ComparableSection {
     metrics: [
       { label: 'Detention spend', before: 'Pre-deployment baseline', after: '−31% network-wide', delta: 'measured' },
       { label: 'Spotter overtime', before: 'Pre-deployment baseline', after: '−22% network-wide', delta: 'measured' },
-      { label: 'Throughput recovery', before: 'Pre-deployment baseline', after: '+1 turn/day on top sites', delta: 'measured' },
+      { label: 'Production capacity recovery', before: 'Pre-deployment baseline', after: '+1 turn/day on top sites', delta: 'measured' },
     ],
     timeline: '30-60 days from kickoff to first measurable impact.',
     referenceAvailable: true,

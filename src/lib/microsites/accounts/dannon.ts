@@ -225,7 +225,7 @@ export const dannon: AccountMicrositeData = {
           { value: '< 6 mo', label: 'Payback', context: 'before rollout completes' },
         ],
         sizing:
-          'The per-site numbers are measured at Primo Brands — a multi-temp, multi-site beverage network running the hardest freight in CPG. Applied to Danone’s 13 U.S. plants at a conservative 50% turn-time improvement, the network prize lands between $15M and $25M a year in recovered throughput, avoided detention, and freed dock-office capacity.',
+          'The per-site numbers are measured at Primo Brands — a multi-temp, multi-site beverage network running the hardest freight in CPG. Applied to Danone’s 13 U.S. plants at a conservative 50% turn-time improvement, the network prize lands between $15M and $25M a year in recovered production capacity, avoided detention, and freed dock-office capacity.',
         note:
           'Every supply-chain project competes for the same capital. Against a SaaS cost, deployments like this model in roughly a 20–40% IRR — the range that wins that competition with robotics, TMS, and automation projects. We’ll build Danone’s exact number against your volumes and margins with your team.',
       },
