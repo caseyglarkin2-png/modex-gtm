@@ -31,6 +31,8 @@ vi.mock('@/lib/hubspot/deals', () => ({
   DEAL_STAGE_DISCOVERY: 'appointmentscheduled',
 }));
 // rate-limit + contact-standard are real; use a unique IP per test so it never trips.
+// booking-idempotency is real (that is what we exercise below); reset it per test.
+const { __resetBookingIdempotency } = await import('@/lib/concierge/booking-idempotency');
 
 const { POST } = await import('@/app/api/concierge/booked/route');
 
@@ -57,6 +59,7 @@ const validBody = {
 describe('POST /api/concierge/booked (dedup-safe)', () => {
   beforeEach(() => {
     vi.clearAllMocks();
+    __resetBookingIdempotency();
     delete process.env.CONCIERGE_WEBHOOK_SECRET;
     mockedUpsertContact.mockResolvedValue('contact-1');
     mockedSearchCompanyByDomain.mockResolvedValue(null);
@@ -198,5 +201,67 @@ describe('POST /api/concierge/booked (dedup-safe)', () => {
     expect(res.status).toBe(500);
     const payload = await res.json();
     expect(payload.ok).toBe(false);
+  });
+
+  it('concurrent double-tap (brand-new identity) creates exactly ONE deal', async () => {
+    // Brand-new identity: every dedup lookup misses (nothing indexed yet), so
+    // without the idempotency guard both requests would createBookingDeal.
+    mockedSearchCompanyByDomain.mockResolvedValue({ id: 'co-1', name: 'PepsiCo' });
+
+    const [res1, res2] = await Promise.all([
+      POST(buildRequest(validBody)),
+      POST(buildRequest(validBody)),
+    ]);
+    const [p1, p2] = await Promise.all([res1.json(), res2.json()]);
+
+    expect(res1.status).toBe(200);
+    expect(res2.status).toBe(200);
+    // Coalesced: exactly one find-or-create ran, one deal opened, one note written.
+    expect(mockedCreateBookingDeal).toHaveBeenCalledTimes(1);
+    expect(mockedCreateNote).toHaveBeenCalledTimes(1);
+    // Both callers get the same booking result.
+    expect(p1).toMatchObject({ ok: true, created: true, dealId: 'deal-new' });
+    expect(p2).toMatchObject({ ok: true, created: true, dealId: 'deal-new' });
+  });
+
+  it('fast sequential retry (same identity+slot) reuses the first result, no second deal', async () => {
+    mockedSearchCompanyByDomain.mockResolvedValue({ id: 'co-1', name: 'PepsiCo' });
+
+    const first = await (await POST(buildRequest(validBody))).json();
+    expect(first).toMatchObject({ created: true, dealId: 'deal-new' });
+    expect(mockedCreateBookingDeal).toHaveBeenCalledTimes(1);
+
+    // Retry inside the TTL window, even though HubSpot has not indexed the create
+    // yet (all dedup lookups still return null). Must NOT create a second deal.
+    const second = await (await POST(buildRequest(validBody))).json();
+    expect(second).toMatchObject({ created: true, dealId: 'deal-new' });
+    expect(mockedCreateBookingDeal).toHaveBeenCalledTimes(1);
+    // The find-or-create body did not run again either.
+    expect(mockedUpsertContact).toHaveBeenCalledTimes(1);
+  });
+
+  it('a different booking slot for the same person is NOT deduped by the guard', async () => {
+    mockedSearchCompanyByDomain.mockResolvedValue({ id: 'co-1', name: 'PepsiCo' });
+
+    await (await POST(buildRequest(validBody))).json();
+    await (await POST(buildRequest({ ...validBody, startTime: '2026-07-15T18:00:00Z' }))).json();
+
+    // Distinct slots => distinct idempotency keys => both run (deal-layer dedup is
+    // the backstop for the real CRM; the guard only collapses identical retries).
+    expect(mockedUpsertContact).toHaveBeenCalledTimes(2);
+  });
+
+  it('after a failed attempt is evicted, a retry re-runs the find-or-create', async () => {
+    mockedSearchCompanyByDomain.mockResolvedValue({ id: 'co-1', name: 'PepsiCo' });
+    mockedUpsertContact.mockRejectedValueOnce(new Error('hubspot down'));
+
+    const failed = await POST(buildRequest(validBody));
+    expect(failed.status).toBe(500);
+
+    // The guard evicts failures, so a genuine retry actually re-attempts.
+    const ok = await POST(buildRequest(validBody));
+    expect(ok.status).toBe(200);
+    expect(mockedCreateBookingDeal).toHaveBeenCalledTimes(1);
+    expect(mockedUpsertContact).toHaveBeenCalledTimes(2);
   });
 });

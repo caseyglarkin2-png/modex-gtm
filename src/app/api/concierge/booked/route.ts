@@ -14,6 +14,7 @@ import {
   DEAL_STAGE_DISCOVERY,
   type OpenDealRef,
 } from '@/lib/hubspot/deals';
+import { runBookingOnce, bookingIdempotencyKey } from '@/lib/concierge/booking-idempotency';
 
 /**
  * Paper Booking Concierge -> pipeline. Flow-State-'s Order of Operations paper
@@ -32,6 +33,13 @@ import {
  *      (never regress), note it -> { created:false }
  *   5. only if all miss: create exactly ONE deal at Discovery
  *      (appointmentscheduled), associated to both -> { created:true }
+ *
+ * The read-before-write in steps 3-5 is not atomic, and HubSpot's search +
+ * associations index lags several seconds behind a create — so for a brand-new
+ * identity a double-tap "book" or a fast client retry could each miss the dedup
+ * and open a second deal. `runBookingOnce` (keyed on email+booking-slot) closes
+ * that window locally: concurrent calls share one in-flight find-or-create and a
+ * fast retry reuses the first result, regardless of HubSpot index lag.
  *
  * Every HubSpot call is best-effort (no-ops when HubSpot is unconfigured); the
  * concierge UX never depends on this.
@@ -106,68 +114,76 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    // 1. Resolve the contact by email.
-    const contactId = await upsertContact({
-      email: body.email,
-      firstname: body.firstName,
-      company: body.company,
-      hs_lead_status: 'NEW',
-      lifecyclestage: 'salesqualifiedlead',
+    // Idempotency guard: coalesce concurrent bookings and short-circuit a fast
+    // retry for the same identity+slot, so the non-atomic find-or-create below can
+    // never open a second deal while HubSpot is still indexing the first write.
+    const idemKey = bookingIdempotencyKey(body.email, body.startTime);
+    const result = await runBookingOnce(idemKey, async () => {
+      // 1. Resolve the contact by email.
+      const contactId = await upsertContact({
+        email: body.email,
+        firstname: body.firstName,
+        company: body.company,
+        hs_lead_status: 'NEW',
+        lifecyclestage: 'salesqualifiedlead',
+      });
+
+      // 2. Resolve the company: by corporate email domain first, then by name.
+      const emailDomain = parseDomainFromEmail(body.email);
+      const corporateDomain = isFreeDomain(emailDomain) ? null : emailDomain;
+      let companyId: string | null = null;
+      let companyName: string | null = body.company?.trim() || null;
+
+      if (corporateDomain) {
+        const byDomain = await searchCompanyByDomain(corporateDomain);
+        if (byDomain) {
+          companyId = byDomain.id;
+          companyName = companyName ?? byDomain.name ?? null;
+        }
+      }
+      if (!companyId && companyName) {
+        const byName = await searchCompanyByName(companyName);
+        if (byName) companyId = byName.id;
+      }
+
+      // Account name for the dealname: resolved/provided company, else the
+      // corporate domain, else the email (never a free inbox as an "account").
+      const accountName = companyName ?? corporateDomain ?? body.email;
+
+      // 3. Find an existing OPEN deal by identity: contact -> company -> exact name.
+      let existing: OpenDealRef | null = null;
+      if (contactId) existing = await findOpenDealForObject('contacts', contactId);
+      if (!existing && companyId) existing = await findOpenDealForObject('companies', companyId);
+      if (!existing) existing = await findOpenDealByExactName(accountName);
+
+      let dealId: string | null = null;
+      let created = false;
+
+      if (existing) {
+        // 4. Attach to the deal already in flight — never a new one.
+        dealId = existing.id;
+        if (contactId) await associateDealToObject(dealId, 'contacts', contactId);
+        if (companyId) await associateDealToObject(dealId, 'companies', companyId);
+        // Advance forward only; a no-op for any deal already at/after Discovery.
+        await advanceDealStageForward(dealId, existing.dealstage, DEAL_STAGE_DISCOVERY);
+      } else {
+        // 5. No open deal anywhere — open exactly one at Discovery.
+        dealId = await createBookingDeal({ accountName, contactId, companyId });
+        created = !!dealId;
+      }
+
+      // Note either way (annotates a re-book instead of silently duplicating).
+      const noteBody = `Booked a call via the Order of Operations paper concierge for ${body.startTime}.`;
+      if (contactId) {
+        await createNote({ contactId, body: noteBody });
+      } else if (companyId) {
+        await createCompanyNote({ companyId, body: noteBody });
+      }
+
+      return { created, contactId, companyId, dealId };
     });
 
-    // 2. Resolve the company: by corporate email domain first, then by name.
-    const emailDomain = parseDomainFromEmail(body.email);
-    const corporateDomain = isFreeDomain(emailDomain) ? null : emailDomain;
-    let companyId: string | null = null;
-    let companyName: string | null = body.company?.trim() || null;
-
-    if (corporateDomain) {
-      const byDomain = await searchCompanyByDomain(corporateDomain);
-      if (byDomain) {
-        companyId = byDomain.id;
-        companyName = companyName ?? byDomain.name ?? null;
-      }
-    }
-    if (!companyId && companyName) {
-      const byName = await searchCompanyByName(companyName);
-      if (byName) companyId = byName.id;
-    }
-
-    // Account name for the dealname: resolved/provided company, else the
-    // corporate domain, else the email (never a free inbox as an "account").
-    const accountName = companyName ?? corporateDomain ?? body.email;
-
-    // 3. Find an existing OPEN deal by identity: contact -> company -> exact name.
-    let existing: OpenDealRef | null = null;
-    if (contactId) existing = await findOpenDealForObject('contacts', contactId);
-    if (!existing && companyId) existing = await findOpenDealForObject('companies', companyId);
-    if (!existing) existing = await findOpenDealByExactName(accountName);
-
-    let dealId: string | null = null;
-    let created = false;
-
-    if (existing) {
-      // 4. Attach to the deal already in flight — never a new one.
-      dealId = existing.id;
-      if (contactId) await associateDealToObject(dealId, 'contacts', contactId);
-      if (companyId) await associateDealToObject(dealId, 'companies', companyId);
-      // Advance forward only; a no-op for any deal already at/after Discovery.
-      await advanceDealStageForward(dealId, existing.dealstage, DEAL_STAGE_DISCOVERY);
-    } else {
-      // 5. No open deal anywhere — open exactly one at Discovery.
-      dealId = await createBookingDeal({ accountName, contactId, companyId });
-      created = !!dealId;
-    }
-
-    // Note either way (annotates a re-book instead of silently duplicating).
-    const noteBody = `Booked a call via the Order of Operations paper concierge for ${body.startTime}.`;
-    if (contactId) {
-      await createNote({ contactId, body: noteBody });
-    } else if (companyId) {
-      await createCompanyNote({ companyId, body: noteBody });
-    }
-
-    return NextResponse.json({ ok: true, created, contactId, companyId, dealId });
+    return NextResponse.json({ ok: true, ...result });
   } catch (err) {
     console.error('[concierge/booked] failed', err instanceof Error ? err.message : String(err));
     return NextResponse.json({ ok: false, error: 'internal_error' }, { status: 500 });
