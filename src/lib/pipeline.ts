@@ -65,19 +65,33 @@ export function advancePipelineStage(current: PipelineStage, proposed: PipelineS
   return PIPELINE_STAGES.indexOf(proposed) > PIPELINE_STAGES.indexOf(current) ? proposed : current;
 }
 
+/**
+ * Map a conceptual pipeline stage to a REAL HubSpot deal-stage id in the live
+ * "default" pipeline. Verified in-portal, earliest-first:
+ *   appointmentscheduled = Discovery
+ *   qualifiedtobuy       = Solution
+ *   presentationscheduled = Proposal
+ *   25153609             = Closed Won
+ *   25153610             = Closed Lost
+ *
+ * The live pipeline has only three OPEN stages, so the later conceptual stages
+ * collapse onto Proposal. The previous map returned `decisionmakerboughtin`,
+ * `contractsent`, and `closedwon` — none of which exist in this portal, so every
+ * write at those stages 400'd. Fixed to live ids here.
+ */
 export function pipelineStageToHubSpotDealStage(stage: PipelineStage): string {
   switch (stage) {
     case 'targeted':
-      return 'appointmentscheduled';
+      return 'appointmentscheduled'; // Discovery
     case 'contacted':
-      return 'qualifiedtobuy';
+      return 'qualifiedtobuy'; // Solution
     case 'engaged':
-      return 'presentationscheduled';
+      return 'presentationscheduled'; // Proposal
     case 'meeting':
-      return 'decisionmakerboughtin';
+      return 'presentationscheduled'; // Proposal (collapsed: no later open stage exists)
     case 'proposal':
-      return 'contractsent';
+      return 'presentationscheduled'; // Proposal
     case 'closed':
-      return 'closedwon';
+      return '25153609'; // Closed Won
   }
 }
