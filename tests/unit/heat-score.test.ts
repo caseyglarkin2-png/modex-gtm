@@ -267,7 +267,28 @@ describe('classifyTier is consistent with heatScore', () => {
   it('agrees on tier for a sampled signal', () => {
     const s: HeatSignals = { tam: 'in', tamTier: 'A', dockDoors: 900, intentScore: 65, lastIntentAt: daysAgo(2) };
     const r = heatScore(s, NOW);
-    const t = classifyTier(s, r.breakdown);
+    const t = classifyTier(s, r.breakdown, NOW);
     expect(t.tier).toBe(r.tier);
+  });
+});
+
+describe('stale intent (the 2026-07-08 adversarial-review findings)', () => {
+  it('a 400-day-old intent_score is NOT "Live intent" tier1', () => {
+    const r = heatScore({ tam: 'in', tamTier: 'A', dockDoors: 900, intentScore: 100, lastIntentAt: daysAgo(400) }, NOW);
+    expect(r.tier).not.toBe('tier1');
+    expect(r.reason).not.toContain('Live intent');
+  });
+  it('fresh intent is still tier1', () => {
+    const r = heatScore({ tam: 'in', tamTier: 'A', dockDoors: 900, intentScore: 65, lastIntentAt: daysAgo(2) }, NOW);
+    expect(r.tier).toBe('tier1');
+  });
+  it('fully-decayed intent does NOT suppress a fresh /for web signal', () => {
+    const r = heatScore({ tam: 'in', tamTier: 'A', dockDoors: 900, intentScore: 100, lastIntentAt: daysAgo(400), forViews: 40 }, NOW);
+    expect(r.breakdown.web.contribution).toBeGreaterThan(0);
+    expect(r.tier).toBe('tier2'); // web-engaged, no live-intent signal
+  });
+  it('live intent still suppresses the web component (no double count)', () => {
+    const r = heatScore({ tam: 'in', tamTier: 'A', dockDoors: 900, intentScore: 65, lastIntentAt: NOW, forViews: 40 }, NOW);
+    expect(r.breakdown.web.contribution).toBe(0);
   });
 });

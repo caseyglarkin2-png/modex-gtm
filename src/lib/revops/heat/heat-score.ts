@@ -280,10 +280,18 @@ interface TierDecision {
   reason: string;
 }
 
-export function classifyTier(s: HeatSignals, b: Record<keyof typeof HEAT_WEIGHTS, HeatComponent>): TierDecision {
-  const intent = (s.intentScore ?? 0) > 0;
+export function classifyTier(
+  s: HeatSignals,
+  b: Record<keyof typeof HEAT_WEIGHTS, HeatComponent>,
+  nowMs = Date.now(),
+): TierDecision {
+  // "Live intent" must actually be live: the same freshness window as pounce,
+  // or a 400-day-old intent_score would still be labeled tier1 "Live intent"
+  // while its heat contribution has decayed to zero (self-contradictory).
+  const freshFactor = Math.exp(-FRESH_POUNCE_DAYS / HALFLIFE_DAYS);
+  const intent = (s.intentScore ?? 0) > 0 && decayFactor(s.lastIntentAt, nowMs) >= freshFactor;
   const freshPounce =
-    (s.pounceScore ?? 0) > 0 && decayFactor(s.lastTriggerAt) >= Math.exp(-FRESH_POUNCE_DAYS / HALFLIFE_DAYS);
+    (s.pounceScore ?? 0) > 0 && decayFactor(s.lastTriggerAt, nowMs) >= freshFactor;
   const sql = (s.sqlCount ?? 0) >= 1;
   const mql = (s.mqlCount ?? 0) >= 1;
   const deckEngaged = (s.deckViews ?? 0) > 0 || (s.deckVisitors ?? 0) > 0;
@@ -340,12 +348,13 @@ export function heatScore(signals: HeatSignals, nowMs = Date.now()): HeatResult 
     web: mk(webRaw(signals), 'web'), // not decayed (no per-view timestamp)
   } as Record<keyof typeof HEAT_WEIGHTS, HeatComponent>;
 
-  // De-dupe /for behavior: when an account already carries an account-level
+  // De-dupe /for behavior: when an account carries a LIVE account-level
   // intent_score, the native /for tracker stamped it via /api/microsites/track,
   // so the same /for views are already scored through the 55-pt intent ceiling.
-  // Suppress the 25-pt web component here so one behavior is not double-counted.
-  // intent_score OWNS /for when present; web is the fallback otherwise.
-  if ((signals.intentScore ?? 0) > 0) {
+  // Suppress the 25-pt web component so one behavior is not double-counted.
+  // Gate on the DECAYED intent component, not the raw score: a fully-decayed
+  // historical intent_score must not mute a genuinely fresh /for signal forever.
+  if (breakdown.intent.value > 0) {
     breakdown.web = { ...breakdown.web, value: 0, contribution: 0 };
   }
 
@@ -360,7 +369,7 @@ export function heatScore(signals: HeatSignals, nowMs = Date.now()): HeatResult 
   const fit = fitMultiplier(signals.dockDoors, signals.tamTier, signals.partialPack);
   const heat = clamp(Math.round(base * fit));
 
-  const { tier, reason } = classifyTier(signals, breakdown);
+  const { tier, reason } = classifyTier(signals, breakdown, nowMs);
 
   return {
     heat,
