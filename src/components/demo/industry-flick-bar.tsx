@@ -241,7 +241,7 @@ export default function IndustryFlickBar({ currentSlug }: Props) {
           pointerEvents: collapsed ? 'none' : 'auto',
           transition: 'transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
         }}
-        className="fixed z-[55] inline-flex items-center gap-3 rounded-full border border-[#00B4FF]/[0.32] bg-[#050505]/85 px-3 py-2 shadow-[0_12px_40px_rgba(0,0,0,0.55)] backdrop-blur-md max-[480px]:!bottom-[calc(env(safe-area-inset-bottom,0px)+86px)]"
+        className="fixed z-[55] hidden items-center gap-3 rounded-full border border-[#00B4FF]/[0.32] bg-[#050505]/85 px-3 py-2 shadow-[0_12px_40px_rgba(0,0,0,0.55)] backdrop-blur-md md:inline-flex"
       >
         <Link
           href={prevHref}
