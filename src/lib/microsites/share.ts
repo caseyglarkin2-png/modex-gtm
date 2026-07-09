@@ -31,7 +31,11 @@ export function buildPublicShareMetadata({
     title,
     description,
     alternates: {
-      canonical: pathname,
+      // ABSOLUTE canonical. A relative value resolves against this app's
+      // metadataBase (the modex-gtm Vercel origin), so it published
+      // modex-gtm.vercel.app canonicals on pages served under yardflow.ai
+      // (2026-07-09 audit). The absolute yardflow.ai URL is the fix.
+      canonical: url,
     },
     robots: noIndex ? { index: false, follow: false } : undefined,
     openGraph: {

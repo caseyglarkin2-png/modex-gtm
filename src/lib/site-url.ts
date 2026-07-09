@@ -19,9 +19,17 @@ export function getSiteUrl(): string {
   return 'http://localhost:3000';
 }
 
-/** Get the base URL for public microsites (yardflow.ai or fallback to app URL). */
+/**
+ * Base URL for public prospect-facing routes (/for, /demo, /proposal). These
+ * are shown under yardflow.ai via the Flow-State- rewrite, so their canonical +
+ * OG URLs must be yardflow.ai, NOT the modex-gtm Vercel origin. Defaulting to
+ * getSiteUrl() (VERCEL_PROJECT_PRODUCTION_URL = modex-gtm.vercel.app) was
+ * publishing canonicals that pointed search authority at the preview origin and
+ * leaked it in shared unfurls (2026-07-09 audit). Default to the real public
+ * domain; NEXT_PUBLIC_MICROSITE_BASE_URL still overrides for previews/local.
+ */
 export function getMicrositeBaseUrl(): string {
-  return process.env.NEXT_PUBLIC_MICROSITE_BASE_URL || getSiteUrl();
+  return process.env.NEXT_PUBLIC_MICROSITE_BASE_URL || 'https://yardflow.ai';
 }
 
 /** Build a full microsite URL for an account slug. */

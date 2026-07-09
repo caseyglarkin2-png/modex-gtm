@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import Script from 'next/script';
+import { DemoChrome } from '@/components/demo/demo-chrome';
 
 /**
  * Demo subtree layout — loads HubSpot native tracking (portal 3819073) across
@@ -11,8 +12,10 @@ import Script from 'next/script';
  * powers HubSpot's own page-view analytics, de-anonymizes cookied known
  * contacts, and enables native "visited page" workflow triggers.
  *
- * This is a pass-through layout (no wrapper markup) so per-route layouts and
- * pages keep full control of their own chrome.
+ * DemoChrome (2026-07-09) wraps the subtree in the YardFlow site shell (slim
+ * header + footer, root-relative links) so proxied /demo pages are no longer
+ * navigational islands under yardflow.ai. Per-page content keeps full control
+ * of its own body; the chrome only frames it.
  */
 export default function DemoSubtreeLayout({ children }: { children: ReactNode }) {
   return (
@@ -22,7 +25,7 @@ export default function DemoSubtreeLayout({ children }: { children: ReactNode })
         strategy="afterInteractive"
         src="//js.hs-scripts.com/3819073.js"
       />
-      {children}
+      <DemoChrome>{children}</DemoChrome>
     </>
   );
 }
