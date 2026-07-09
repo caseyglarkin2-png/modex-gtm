@@ -89,3 +89,53 @@ describe('buildSqlAlert', () => {
     expect(msg).toContain('1 new SQL(s)');
   });
 });
+
+// ---------------------------------------------------------------------------
+// notifyDailyStats delta gate (2026-07-09 A+ Slack pass): quiet days are silent.
+// ---------------------------------------------------------------------------
+import { vi } from 'vitest';
+
+vi.mock('../../src/lib/microsites/intent-notifications', () => ({
+  sendSlackNotification: vi.fn(async () => true),
+}));
+
+describe('notifyDailyStats delta gate', () => {
+  const stats = (over: Record<string, unknown> = {}) => ({
+    scope: 'incremental',
+    sinceHours: 24,
+    contacts: 120,
+    counts: { none: 100, mql: 15, sql: 5 },
+    changes: 0,
+    applied: 0,
+    promoted: 0,
+    newSqls: 0,
+    warnings: [] as string[],
+    ...over,
+  });
+
+  it('stays silent on a zero-change day', async () => {
+    const { notifyDailyStats } = await import('../../src/lib/revops/qualification/notify');
+    const { sendSlackNotification } = await import('../../src/lib/microsites/intent-notifications');
+    vi.mocked(sendSlackNotification).mockClear();
+    const posted = await notifyDailyStats(stats());
+    expect(posted).toBe(false);
+    expect(sendSlackNotification).not.toHaveBeenCalled();
+  });
+
+  it('posts when verdicts changed', async () => {
+    const { notifyDailyStats } = await import('../../src/lib/revops/qualification/notify');
+    const { sendSlackNotification } = await import('../../src/lib/microsites/intent-notifications');
+    vi.mocked(sendSlackNotification).mockClear();
+    const posted = await notifyDailyStats(stats({ changes: 3, applied: 3 }));
+    expect(posted).toBe(true);
+    expect(sendSlackNotification).toHaveBeenCalledOnce();
+  });
+
+  it('posts when there are warnings even with zero changes', async () => {
+    const { notifyDailyStats } = await import('../../src/lib/revops/qualification/notify');
+    const { sendSlackNotification } = await import('../../src/lib/microsites/intent-notifications');
+    vi.mocked(sendSlackNotification).mockClear();
+    const posted = await notifyDailyStats(stats({ warnings: ['contact fetch capped'] }));
+    expect(posted).toBe(true);
+  });
+});

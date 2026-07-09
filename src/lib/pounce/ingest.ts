@@ -88,11 +88,17 @@ export async function ingestTriggers(
     const hot = t.score >= PING_THRESHOLD;
     if (!hot) continue;
 
-    // Slack — once, capped per call.
+    // Slack — once, capped per call. The spear link is registry-validated:
+    // EDGAR-sourced triggers arrive with ticker-derived slugs (pep, gis) that
+    // have no /for page, and unknown /for slugs 404 on yardflow.ai. Link the
+    // real spear when it exists, else the HubSpot company search, never a 404.
     if (ping && res.pinged < pingCap) {
       const date = (t.publishedAt ?? new Date().toISOString()).slice(0, 10);
+      const spear = getAccountMicrositeData(t.accountSlug)
+        ? `Spear: https://yardflow.ai/for/${t.accountSlug}/`
+        : `Account: https://app.hubspot.com/contacts/3819073/objects/0-2/views/all/list?query=${encodeURIComponent(t.accountName)}`;
       const ok = await sendSlackNotification(
-        `🎯 POUNCE — *${t.accountName}* _(${t.source})_\n"${t.title}"\n${date} · score ${t.score} [${t.categories.join(', ')}]\n${t.url}\nSpear: https://yardflow.ai/for/${t.accountSlug}/`,
+        `🎯 POUNCE · *${t.accountName}* _(${t.source})_\n"${t.title}"\n${date} · score ${t.score} [${t.categories.join(', ')}]\n${t.url}\n${spear}`,
       );
       if (ok) { res.pinged += 1; await prisma.pounceTrigger.update({ where: { id: row.id }, data: { slack_ping_at: new Date() } }); }
     }

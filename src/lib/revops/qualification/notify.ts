@@ -61,8 +61,8 @@ export interface DailyStatsInput {
 
 /**
  * Build the daily qualification health post for #yardflow-intent. Pure.
- * Posted on every apply run (quiet days included — silence would be indistinguishable
- * from a broken cron).
+ * Sent only on days with news (changes, new SQLs, or warnings) — see
+ * notifyDailyStats.
  */
 export function buildDailyStats(s: DailyStatsInput): string {
   const window = s.scope === 'incremental' ? ` (last ${s.sinceHours ?? '?'}h)` : ' (full sweep)';
@@ -76,7 +76,15 @@ export function buildDailyStats(s: DailyStatsInput): string {
   return lines.join('\n');
 }
 
-/** Post the daily stats summary. Returns false when SLACK_WEBHOOK_URL is unset. */
+/**
+ * Post the daily stats summary. Returns false when SLACK_WEBHOOK_URL is unset.
+ *
+ * Delta-gated as of 2026-07-09 (the A+ Slack pass): a zero-change day posts
+ * nothing. The channel's contract is "only messages Casey would act on"; cron
+ * health is visible in Vercel, so a quiet-day heartbeat is noise, not signal.
+ */
 export async function notifyDailyStats(s: DailyStatsInput): Promise<boolean> {
+  const hasNews = s.changes > 0 || s.newSqls > 0 || s.warnings.length > 0;
+  if (!hasNews) return false;
   return sendSlackNotification(buildDailyStats(s));
 }
