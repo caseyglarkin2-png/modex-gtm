@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { useState } from 'react';
 
 /**
  * DemoChrome, the YardFlow site shell for the proxied /demo subtree.
@@ -56,13 +59,15 @@ function Wordmark() {
 }
 
 export function DemoChrome({ children }: { children: React.ReactNode }) {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
     <div className="flex min-h-screen flex-col bg-[#05070a] text-white">
       <header className="sticky top-0 z-50 border-b border-[#00B4FF]/12 bg-[#05070a]/90 backdrop-blur-md">
-        <div className="mx-auto flex max-w-6xl items-center gap-4 px-5 py-3">
+        <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-5 py-3">
           <Wordmark />
-          {/* Sentence-case text-sm nav — mirrors the canonical Header exactly. */}
-          <nav aria-label="Primary" className="ml-auto hidden items-center gap-8 md:flex">
+          {/* Sentence-case text-sm nav — mirrors the canonical Header exactly
+              (same lg breakpoint, same hamburger idiom on phones). */}
+          <nav aria-label="Primary" className="hidden items-center gap-8 lg:flex">
             {NAV.map((n) => (
               <Link
                 key={n.href}
@@ -73,27 +78,53 @@ export function DemoChrome({ children }: { children: React.ReactNode }) {
               </Link>
             ))}
           </nav>
-          <Link
-            href="/contact?intent=audit"
-            className="ml-auto inline-flex items-center gap-1 whitespace-nowrap rounded-xl bg-[#00B4FF] px-4 py-2 text-sm font-semibold text-[#050505] no-underline transition-all hover:shadow-[0_0_24px_rgba(0,180,255,0.5)] md:ml-0"
-          >
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12L13 2z" /></svg>
-            Book a Yard Network Audit
-          </Link>
-        </div>
-        {/* Mobile nav row: the desktop links are hidden < md, so give phones a
-            scrollable strip instead of stranding them with only the logo + CTA. */}
-        <nav aria-label="Primary mobile" className="flex gap-5 overflow-x-auto border-t border-white/5 px-5 py-2 md:hidden">
-          {NAV.map((n) => (
+          <div className="flex items-center gap-3">
             <Link
-              key={n.href}
-              href={n.href}
-              className="whitespace-nowrap text-sm text-[#8A93A0] no-underline"
+              href="/contact?intent=audit"
+              className="hidden items-center gap-1 whitespace-nowrap rounded-xl bg-[#00B4FF] px-4 py-2 text-sm font-semibold text-[#050505] no-underline transition-all hover:shadow-[0_0_24px_rgba(0,180,255,0.5)] sm:inline-flex"
             >
-              {n.label}
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13 2 4.5 13.5H11L10 22l8.5-11.5H12L13 2z" /></svg>
+              Book a Yard Network Audit
             </Link>
-          ))}
-        </nav>
+            <button
+              className="p-2 text-[#00B4FF] lg:hidden"
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen(!menuOpen)}
+            >
+              <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                {menuOpen ? (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                ) : (
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                )}
+              </svg>
+            </button>
+          </div>
+        </div>
+        {menuOpen && (
+          <nav aria-label="Primary mobile" className="space-y-4 border-t border-[#00B4FF]/20 bg-[#10151c] px-6 py-4 lg:hidden">
+            {NAV.map((n) => (
+              <Link
+                key={n.href}
+                href={n.href}
+                onClick={() => setMenuOpen(false)}
+                className={`block py-2 text-lg no-underline transition-colors ${n.label === 'Demo' ? 'font-semibold text-[#00B4FF]' : 'text-[#8A93A0]'}`}
+              >
+                {n.label}
+              </Link>
+            ))}
+            <div className="border-t border-[#00B4FF]/10 pt-4">
+              <Link
+                href="/contact?intent=audit"
+                onClick={() => setMenuOpen(false)}
+                className="block w-full rounded-xl bg-[#00B4FF] px-4 py-3 text-center text-sm font-semibold text-[#050505] no-underline"
+              >
+                Book a Yard Network Audit
+              </Link>
+            </div>
+          </nav>
+        )}
       </header>
 
       <div className="flex-1">{children}</div>

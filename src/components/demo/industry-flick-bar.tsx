@@ -211,7 +211,10 @@ export default function IndustryFlickBar({ currentSlug }: Props) {
         className="sr-only"
       />
 
-      {/* E.T1, first-visit discovery hint, sits just above the bar. */}
+      {/* E.T1, first-visit discovery hint, sits just above the bar.
+          Keyboard-only affordance: hidden below md (a "press [ or ]" hint is
+          meaningless on touch, and it overlapped the lede on phones —
+          2026-07-09 panel). */}
       {showHint && !collapsed ? (
         <div
           data-flick-hint=""
@@ -220,7 +223,7 @@ export default function IndustryFlickBar({ currentSlug }: Props) {
             bottom: 'calc(env(safe-area-inset-bottom, 0px) + 64px)',
             right: 'calc(env(safe-area-inset-right, 0px) + 14px)',
           }}
-          className="motion-safe:animate-slide-up fixed z-[56] max-w-[260px] rounded-[10px] border border-[#00B4FF]/[0.32] bg-[#050505]/90 px-3 py-2 font-mono text-[10.5px] font-medium tracking-[0.04em] text-white/85 shadow-[0_12px_40px_rgba(0,0,0,0.55)] backdrop-blur-md"
+          className="motion-safe:animate-slide-up fixed z-[56] hidden max-w-[260px] rounded-[10px] border border-[#00B4FF]/[0.32] bg-[#050505]/90 px-3 py-2 font-mono text-[10.5px] font-medium tracking-[0.04em] text-white/85 shadow-[0_12px_40px_rgba(0,0,0,0.55)] backdrop-blur-md md:block"
         >
           Flick between industries: press <span className="text-[#00B4FF]">[</span> or{' '}
           <span className="text-[#00B4FF]">]</span>
@@ -238,7 +241,7 @@ export default function IndustryFlickBar({ currentSlug }: Props) {
           pointerEvents: collapsed ? 'none' : 'auto',
           transition: 'transform 0.25s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s cubic-bezier(0.4, 0, 0.2, 1)',
         }}
-        className="fixed z-[55] inline-flex items-center gap-3 rounded-full border border-[#00B4FF]/[0.32] bg-[#050505]/85 px-3 py-2 shadow-[0_12px_40px_rgba(0,0,0,0.55)] backdrop-blur-md"
+        className="fixed z-[55] inline-flex items-center gap-3 rounded-full border border-[#00B4FF]/[0.32] bg-[#050505]/85 px-3 py-2 shadow-[0_12px_40px_rgba(0,0,0,0.55)] backdrop-blur-md max-[480px]:!bottom-[calc(env(safe-area-inset-bottom,0px)+86px)]"
       >
         <Link
           href={prevHref}

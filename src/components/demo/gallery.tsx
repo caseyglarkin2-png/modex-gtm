@@ -469,6 +469,13 @@ function Hero({
           </span>
         </h1>
 
+        {/* Lede (beat 3), single paragraph, steel, no fluff. */}
+        <p className="mt-6 max-w-[660px] text-[16px] leading-[1.55] text-white/[0.72] max-[480px]:text-[15px]">
+          Each template runs the YardFlow protocol against an audited prospect&apos;s
+          facility data. The numbers below are real, public satellite imagery,
+          modeled geofences, classification rubric.
+        </p>
+
         {/* Proof row (Page Protocol beat 4): the audit receipts as bordered
             chips, mirroring Flow-State-'s ReceiptStrip idiom. Replaces the
             two loose stat lines that used to sit above the H1. */}
@@ -485,13 +492,6 @@ function Hero({
             </div>
           ))}
         </div>
-
-        {/* Lede (beat 3), single paragraph, steel, no fluff. */}
-        <p className="mt-6 max-w-[660px] text-[16px] leading-[1.55] text-white/[0.72] max-[480px]:text-[15px]">
-          Each template runs the YardFlow protocol against an audited prospect&apos;s
-          facility data. The numbers below are real, public satellite imagery,
-          modeled geofences, classification rubric.
-        </p>
 
         {/* CTA row (beat 5): ONE solid neon primary + one outline secondary,
             the site-wide .btn recipes mirrored from Flow-State- globals. */}

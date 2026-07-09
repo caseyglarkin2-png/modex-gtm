@@ -308,8 +308,11 @@ export function DemoSurface({
               <div className="font-mono text-[10px] uppercase tracking-[0.20em] text-[#00B4FF]/85">
                 {fromGallery ? `YardFlow · ${galleryIndustryLabel} template` : 'YardFlow · public yard audit'}
               </div>
-              <h1 className="mt-1 text-xl font-semibold tracking-[-0.01em] text-white">
+              {/* Page Protocol H1: black weight + the one neon payoff phrase
+                  ("audited" is the promise of the whole surface). */}
+              <h1 className="mt-1 text-2xl font-black tracking-[-0.02em] text-white md:text-3xl">
                 {fromGallery ? galleryHeadline : displayName}
+                <span className="text-[#00B4FF]">, audited.</span>
               </h1>
               <p className="mt-1 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-sm text-white/70">
                 <span className="tabular-nums whitespace-nowrap">{scopeBlurb}</span>
@@ -390,7 +393,7 @@ export function DemoSurface({
                 target="_blank"
                 rel="noopener noreferrer"
                 data-ms-cta-id={fromGallery ? 'gallery-pack-book-audit' : 'demo-book-audit'}
-                className="hidden min-h-[36px] items-center gap-1.5 rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.12] px-3 py-1.5 text-xs font-bold text-white transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.22] hover:shadow-[0_0_22px_rgba(0,180,255,0.32)] md:inline-flex"
+                className="hidden min-h-[36px] items-center gap-1.5 rounded-[10px] bg-[#00B4FF] px-3 py-1.5 text-xs font-bold text-[#050505] transition-all hover:shadow-[0_0_22px_rgba(0,180,255,0.45)] md:inline-flex"
               >
                 Start a conversation →
               </a>
@@ -424,7 +427,7 @@ export function DemoSurface({
             target="_blank"
             rel="noopener noreferrer"
             data-ms-cta-id="microsite-sticky-book-audit"
-            className="inline-flex min-h-[40px] flex-1 items-center justify-center rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.14] px-3 text-[13px] font-bold text-white"
+            className="inline-flex min-h-[40px] flex-1 items-center justify-center rounded-[10px] bg-[#00B4FF] px-3 text-[13px] font-bold text-[#050505]"
           >
             Start a conversation →
           </a>
@@ -583,7 +586,7 @@ export function DemoSurface({
                 target="_blank"
                 rel="noopener noreferrer"
                 data-ms-cta-id="demo-reply-start-conversation"
-                className="inline-flex min-h-[44px] items-center gap-1.5 rounded-[10px] border border-[#00B4FF]/55 bg-[#00B4FF]/[0.14] px-5 py-2.5 text-sm font-bold text-white transition-all hover:border-[#00B4FF]/90 hover:bg-[#00B4FF]/[0.24] hover:shadow-[0_0_22px_rgba(0,180,255,0.32)]"
+                className="inline-flex min-h-[44px] items-center gap-1.5 rounded-[10px] bg-[#00B4FF] px-5 py-2.5 text-sm font-bold text-[#050505] transition-all hover:shadow-[0_0_22px_rgba(0,180,255,0.45)]"
               >
                 Start a conversation →
               </a>
