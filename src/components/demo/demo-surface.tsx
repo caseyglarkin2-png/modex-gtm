@@ -248,8 +248,11 @@ export function DemoSurface({
       {/* Header — only in standalone mode */}
       {mode === 'standalone' && (
         <header className="shrink-0 border-b border-[#00B4FF]/[0.10] backdrop-blur-[2px]">
-          <div className="mx-auto flex max-w-5xl items-end justify-between gap-6 px-5 py-4">
-            <div>
+          {/* flex-wrap + min-w-0: at phone widths the title block otherwise
+              refuses to shrink below its min-content and the CTA cluster gets
+              pushed off-canvas (390px viewport scrolled 598px wide). */}
+          <div className="mx-auto flex max-w-5xl flex-wrap items-end justify-between gap-x-6 gap-y-3 px-5 py-4">
+            <div className="min-w-0">
               {/* E.T4 — persistent breadcrumb. Keeps every microsite one
                   click from the gallery and its archetype, so no microsite
                   is a dead-end. */}
