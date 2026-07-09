@@ -49,6 +49,15 @@ body {
   font-family: system-ui, -apple-system, sans-serif;
 }
 
+/* Kill stray horizontal scroll at the root (leaflet panes and other absolute
+   overlays can extend the document a few px past the viewport on phones).
+   `clip`, not `hidden`: it does not create a scroll container, so
+   position: sticky keeps working. Mirrors Flow-State- globals (2026-07-08). */
+html,
+body {
+  overflow-x: clip;
+}
+
 /* Animations */
 @keyframes fade-in {
   from { opacity: 0; }
