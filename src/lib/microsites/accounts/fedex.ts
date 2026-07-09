@@ -87,7 +87,7 @@ export const fedex: AccountMicrositeData = {
         { label: 'Avg truck turn time (shipper-side pilot)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact (shipper-side pilot)', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. For FedEx the two highest-leverage pilot configurations are different in kind. The first is a Network 2.0 consolidated hub currently being optimized, greenfield operating procedure, no existing yard process to displace, the consolidation absorbs the volume from multiple closed predecessor stations and the yard is the single queue that decides whether the next sort cycle starts on time. The second is a FedEx Freight service center on a high-volume LTL lane carrying the kind of freight a 237-facility CPG anchor moves, where the carrier-side dwell minute is the visible drag on the published transit-time promise and the standalone-company math is sharpest on each recovered minute. We would expect either configuration to produce a measurable carrier-scorecard signal within two quarters and a network operating model proposal across the relevant hubs within four.',
@@ -451,7 +451,7 @@ export const fedex: AccountMicrositeData = {
       type: 'metric',
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Measured across live deployments' },
-        { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across comparable verticals' },
+        { value: '260', label: 'Sites Committed', context: 'Contracted for rollout across comparable verticals' },
         { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at 3pl / logistics facilities' },
       ],
@@ -504,7 +504,7 @@ export const fedex: AccountMicrositeData = {
     { mark: 'FedEx Freight spin', body: 'June 1, 2026 · NYSE: FDXF · John Smith CEO · ~$600M pre-separation IT investment.' },
     { mark: 'LTL footprint at separation', body: '~323 terminals + ~13 relay locations · ~26,000 dock doors network-wide.' },
     { mark: 'Inside-the-hub AI', body: 'Dexterity AI sortation · +13% trailer utilization · >99% accuracy. Gate-to-sort-belt queue is the upstream rate-limiter.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same trailers crossing FedEx yards.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same trailers crossing FedEx yards.' },
   ],
 
   audioBrief: {

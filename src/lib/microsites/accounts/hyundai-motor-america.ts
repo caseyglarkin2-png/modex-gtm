@@ -122,7 +122,7 @@ export const hyundaiMotorAmerica: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         "30–60 days from kickoff to first measurable impact at the pilot site. The highest-leverage pilot in the Hyundai Motor America cluster is HMGMA Metaplant, and the reason is structural, not preferential. Greenfield yard-ops design at a $7.6B plant ramping toward 500,000 vehicles annually means no entrenched local routine to displace, the operating pattern is still inside the design window in the first three to four quarters after first production (October 2024), and every other node in the cluster, HMMA, Kia Georgia, Mobis Richmond Hill, the Glovis-coordinated outbound flow, has a structural reason to inherit a protocol that lands at the Metaplant first. The secondary pilot is HMMA Montgomery, because that's where any network-wide protocol ultimately has to prove out against twenty years of established site-level routine on the same flexible assembly line that builds five vehicle programs in mixed sequence. We would expect the network operating model to make sense of itself across the cluster within two to four quarters of the Metaplant pilot.",
@@ -493,7 +493,7 @@ export const hyundaiMotorAmerica: AccountMicrositeData = {
       type: 'metric',
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Measured across live deployments' },
-        { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across comparable verticals' },
+        { value: '260', label: 'Sites Committed', context: 'Contracted for rollout across comparable verticals' },
         { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at manufacturing facilities' },
       ],
@@ -550,7 +550,7 @@ export const hyundaiMotorAmerica: AccountMicrositeData = {
     { mark: 'Three-destination supplier', body: 'Mobis Richmond Hill · $926M · 1.2M sq ft · feeds HMGMA + HMMA + Kia Georgia simultaneously.' },
     { mark: 'Twenty-year inheritance', body: 'HMMA Montgomery · 2005 · twenty years of JIT discipline · ~358K vehicles in 2025.' },
     { mark: 'Outbound anchor', body: "Glovis America · Colonel's Island Brunswick + Savannah ~69,000 sq m consolidation center · EV-era finished-vehicle flow." },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same network shape, different vertical.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same network shape, different vertical.' },
   ],
 
   audioBrief: {

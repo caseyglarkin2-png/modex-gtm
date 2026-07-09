@@ -119,7 +119,7 @@ export const salsonLogistics: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The strongest pilot at SalSon is Newark, the 55-acre flagship campus with three yards, ~2,000 containers/week, and the existing site-level yard tracking system that the productized layer above sits on. The follow-on is Compton CA at go-live, greenfield embed where the yard-execution layer ships as part of the operating standard rather than retrofit. From there, the rollout cadence is replicating across the seven post-merger entities and every future tuck-in arriving on Fisk\'s $20–50M cadence.',
@@ -312,7 +312,7 @@ export const salsonLogistics: AccountMicrositeData = {
     { mark: 'Newark scoreboard', body: '55-acre flagship · 3 yards · ~2,000 containers/week · ~100,000/year.' },
     { mark: 'Greenfield', body: 'Compton CA · 260K sq ft · 66 dock doors · 20-acre secured yard · under construction.' },
     { mark: 'Fisk on the record', body: 'Revenue more than doubled since 2021 · $20–50M tuck-in cadence at mid-single-digit EBITDA multiples.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same coordinates, harder freight.' },
   ],
 
   audioBrief: {

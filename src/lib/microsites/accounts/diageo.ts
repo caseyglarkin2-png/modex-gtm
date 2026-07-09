@@ -90,7 +90,7 @@ import type { AccountMicrositeData } from '../schema';
  *           type: 'metric',
  *           stats: [
  *             { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol at comparable food & beverage operations' },
- *             { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar verticals' },
+ *             { value: '260', label: 'Sites Committed', context: 'Contracted for rollout across similar verticals' },
  *             { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
  *             { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at food & beverage facilities' },
  *           ],
@@ -208,7 +208,7 @@ export const diageo: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline: '30–60 days from kickoff to first measurable impact at the pilot site. The sites where this lands first are not the marquee Plainfield or Montgomery nodes, they are the smaller distribution facilities or Lebanon KY on its production restart, where the carrier yard is simplest to instrument and the displacement risk is lowest. Plainfield and Montgomery are where the proven model scales into the highest-production capacity nodes once the operating standard has its first 60-day proof; the Q4-surge dock surface is the second wave. If Primo\'s network operating layer runs cleanly on the hardest CPG freight in North America, the read-across into the Accelerate cost-and-efficiency model is the easier lift, not the harder one.',
       referenceAvailable: true,
@@ -543,7 +543,7 @@ export const diageo: AccountMicrositeData = {
       type: 'metric',
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Measured across live deployments' },
-        { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across comparable verticals' },
+        { value: '260', label: 'Sites Committed', context: 'Contracted for rollout across comparable verticals' },
         { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at food & beverage facilities' },
       ],
@@ -587,7 +587,7 @@ export const diageo: AccountMicrositeData = {
     { mark: 'Footprint moves', body: 'Plainfield IL $80M RTD expansion · Lebanon KY paused 2025 for efficiency · Montgomery AL $415M opened April 2026.' },
     { mark: 'Per-trailer math', body: '$500K+ of premium spirits per trailer. Yard variance hits working capital, not just opex.' },
     { mark: 'CEO seat', body: 'Debra Crew exit July 2025 · Nik Jhangiani interim · strategic review underway · Casamigos / Don Julio the named growth bet.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same coordinates, harder freight.' },
   ],
 
   audioBrief: {

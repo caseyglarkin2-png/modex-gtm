@@ -100,7 +100,7 @@ export const kroger: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: 'up to −50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         'Roughly 90 days kickoff-to-deployed-pilot, discovery, integration with whatever inbound/outbound transportation and DC systems are already in place, configuration to the chosen DC\'s multi-temp arbitration profile, and live deployment. Front-end cadence depends on Kroger resource availability. The first measurable impact is read inside 30-60 days of monitored post-deployment operation against the pre-deployment baseline. The pilot site we would suggest is a single multi-temp DC with high inbound vendor density and an outbound store-replenishment lane to a metro store cluster, explicitly not a CFC, not a perishable-only DC, and not a plant. Once the operating layer is proven at one DC, the network rollout is staged sequentially across the multi-temp DCs. This is not a platform commitment. It is a 90-day pilot.',
@@ -290,7 +290,7 @@ export const kroger: AccountMicrositeData = {
     { mark: 'Industry baseline', body: 'Even where site-level yard automation is in place, network-level operating variance, tribal knowledge, inconsistent SOPs, uneven visibility, dominates yard cycle-time loss across multi-site grocery and CPG.' },
     { mark: 'Capex envelope', body: 'FY2025 $3.6-3.8B · FY2026 guidance includes ~$400M e-commerce profitability + 30% more new builds.' },
     { mark: 'Network', body: '~2,730 stores · ~50 DCs · ~33 plants · ~2,000 tractors · ~20 banners.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed.' },
   ],
 
   audioBrief: {

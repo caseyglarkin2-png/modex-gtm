@@ -121,7 +121,7 @@ export const universalLogisticsHoldings: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The strongest pilot at ULH / LINC is one LINC-operated plant site, likely the Stellantis east-side Detroit Jeep parts sequencing plant or the GM Orion EV / Factory Zero value-added assembly facility, as a 90-day operating-model pilot with a joint readout into the next OEM pursuit response. The follow-on is one Parsec rail-terminal site to demonstrate the cross-segment operating layer tying rail moves to plant moves. Single-plant pilot footprint matches LINC\'s natural unit of work (one plant contract, one operating model).',
@@ -318,7 +318,7 @@ export const universalLogisticsHoldings: AccountMicrositeData = {
     { mark: 'GM Supplier of the Year', body: '2022 · 2023 · 2024, three consecutive years. LINC plant-side value-added operations are publicly tied to the award.' },
     { mark: 'Existing stack', body: 'AccuLinc WMS + TMS + YMS named publicly. Records layer exists; the execution + multi-tenant orchestration layer above is the gap.' },
     { mark: 'Morrish on the seat', body: 'LINC Business Development, the pre-sale solution-design door that decides what tools are in the next OEM RFP response.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · operating-model proof for the next OEM RFP response.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · operating-model proof for the next OEM RFP response.' },
   ],
 
   audioBrief: {

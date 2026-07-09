@@ -100,7 +100,7 @@ import { AUDIO_BRIEF_CHAPTERS } from '../audio-brief';
  *           type: 'metric',
  *           stats: [
  *             { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol at comparable food & beverage operations' },
- *             { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar verticals' },
+ *             { value: '260', label: 'Sites Committed', context: 'Contracted for rollout across similar verticals' },
  *             { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
  *             { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at food & beverage facilities' },
  *           ],
@@ -220,7 +220,7 @@ export const campbellS: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30-60 days from kickoff to first measurable impact at the pilot site. Two pilot candidates fit the Campbell\'s consolidation profile: (1) Maxton NC, where the $150M expansion is landing post-investment and the new production capacity can absorb a new operating standard from day one without unwinding legacy habits; and (2) a Sovos-flow site where Rao\'s premium-SLA execution is most visible against the underlying four-profile dock, the place the integration math is tightest. The Enterprise Transformation seat is the ownership; the soup-season Q4 surge is the timing driver; and the consolidation math (Maxton up, Hanover up, Tualatin out, Jeffersonville smaller, Sovos in) is the calendar that says the Transformation brief either reaches the yard now or stays a per-site negotiation. Primo is the proof that a network operating model can standardize execution across genuinely different freight profiles without forcing site-level convergence, the exact move the four-profile Campbell\'s dock needs as the consolidation compounds and the integration math runs its second year.',
@@ -400,7 +400,7 @@ export const campbellS: AccountMicrositeData = {
       type: 'metric',
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Measured at comparable food & beverage operations' },
-        { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across comparable verticals' },
+        { value: '260', label: 'Sites Committed', context: 'Contracted for rollout across comparable verticals' },
         { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at food & beverage facilities' },
       ],
@@ -458,7 +458,7 @@ export const campbellS: AccountMicrositeData = {
     { mark: 'ERP', body: 'SAP HANA on Azure · Sovos onto Campbell\'s environment in FY25 · S/4 HANA roadmap signaled.' },
     { mark: 'Network change', body: 'Maxton +$150M · Hanover Snyder\'s +$72M · Tualatin closed · Jeffersonville reduced.' },
     { mark: 'Four-profile dock', body: 'Shelf-stable · refrigerated premium · snacks · baked, different staging discipline, same doors.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed.' },
   ],
 
   audioBrief: {

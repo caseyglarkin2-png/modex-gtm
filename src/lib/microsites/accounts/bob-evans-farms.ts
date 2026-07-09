@@ -105,7 +105,7 @@ export const bobEvansFarms: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The cleanest first pilot at Bob Evans is the existing four-plant footprint, where the site-level yard automation already runs the records layer and the operating-model layer above it produces the marginal hour the site system can no longer extract on its own. The second move is Michael Foods at a single plant, same Refrigerated Retail segment leadership, same loaded-reefer dwell problem, same parent capex envelope. From there the rollout cadence into Crystal Farms, Potato Products of Idaho, and 8th Avenue is shape-replicating, not site-by-site reinvention.',
@@ -298,7 +298,7 @@ export const bobEvansFarms: AccountMicrositeData = {
     { mark: 'Segment portfolio', body: 'Bob Evans · Michael Foods · Crystal Farms · Potato Products of Idaho · 8th Avenue, no shared parent yard stack.' },
     { mark: 'New parent sponsor', body: 'EVP/COO in seat January 2026. Cross-portfolio operating wins is the mandate.' },
     { mark: 'FY26 capex envelope', body: '$350M–$390M total · $80M–$90M earmarked for cage-free + Norwalk · the residual is the operating-model slot.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed.' },
   ],
 
   audioBrief: {

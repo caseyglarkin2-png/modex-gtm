@@ -122,7 +122,7 @@ export const crowley: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The two highest-leverage pilot configurations at Crowley are different in kind from end-shipper pilots: (1) Isla Grande San Juan as the pilot terminal, Commitment Class ConRo discharge cadence is the operating context, three new gantry cranes set the production capacity baseline, and the yard surface behind the gantry is the cleanest single place to read a yard-execution operating model against post-modernization vessel economics; (2) one Jacksonville-side terminal-plus-warehouse pairing where the maritime call and the U.S. land-logistics service book meet under the same operating leader for the first time post-January-2026. From there, the rollout cadence is replicating across the Caribbean and Central American destination ports, and into the broader U.S. land-logistics footprint as the integrated operating standard rolls forward.',
@@ -425,7 +425,7 @@ export const crowley: AccountMicrositeData = {
     { mark: 'Avance Class', body: 'Quetzal · Copán · Tiscapa · LNG-powered containerships · Central America + Caribbean expansion out of Jacksonville.' },
     { mark: 'Government services', body: 'MSC T-AGOS/T-AGM ocean-surveillance fleet · $343M MPF contract · 100+ years of U.S. government partnership.' },
     { mark: '~125-year family-owned discipline', body: 'Founded 1892 · Tom Crowley Jr. Chairman and CEO since 1994 · fourth generation · long-horizon capex on family-stewardship time.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same coordinates, harder freight.' },
   ],
 
   audioBrief: {

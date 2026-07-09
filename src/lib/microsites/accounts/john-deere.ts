@@ -110,7 +110,7 @@ export const johnDeere: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The two highest-leverage pilot candidates at John Deere are different in kind: (1) Milan IL parts distribution, the 2.8M sq ft, 800,000-part, 80,000-line-per-day operating heart of Deere logistics, because outbound parts velocity makes yard variance immediately visible against a daily-pick baseline and the operating-model improvement is measurable inside one quarter; (2) Waterloo Tractor Operations as a single-plant pilot, because the built-to-order finished-machine flow on 7R/8R/9R/9RX tractors is the cleanest place to see whether yard sequencing actually changes dealer-delivery-window adherence. We would expect the network to make sense of itself within two to four quarters once the pilot reads as expected.',
@@ -540,7 +540,7 @@ export const johnDeere: AccountMicrositeData = {
       type: 'metric',
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Measured at comparable network operations' },
-        { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across comparable verticals' },
+        { value: '260', label: 'Sites Committed', context: 'Contracted for rollout across comparable verticals' },
         { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at comparable facilities' },
       ],
@@ -592,7 +592,7 @@ export const johnDeere: AccountMicrositeData = {
     { mark: 'Connected fleet', body: 'Operations Center · 1M+ connected machines · 500M engaged acres.' },
     { mark: 'Parts velocity', body: 'Milan IL · 2.8M sq ft · 800,000+ SKUs · ~80,000 lines per day.' },
     { mark: 'Coverage map', body: '5 Smart Industrial layers covered. 1 unfilled. The yard between the factory and the dealer.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same network shape, different freight.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same network shape, different freight.' },
   ],
 
   audioBrief: {

@@ -123,7 +123,7 @@ export const theHomeDepot: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The two highest-leverage pilot targets at Home Depot are different in kind: (1) a flagship Atlanta-region FDC where flatbed staging cycles against same-day contractor windows and where the yard-layer constraint on Pro-channel growth shows up as schedule slip rather than dwell, Relay is already operational in Atlanta, so the trailer-to-store-to-jobsite handoff is visible from the first week; (2) a high-volume MDO with mixed channel mix, appliance B2C plus Pro pickup plus inbound store replenishment all running through the same dock infrastructure, where the multi-channel arbitration cost is the cleanest measurement of the network-tier operating model. We would expect the network to make sense of itself within two to four quarters of the pilot, with the first 60-day proof landing inside the cost-savings cadence Deaton\'s organization is already accountable for.',
@@ -383,7 +383,7 @@ export const theHomeDepot: AccountMicrositeData = {
         'run-rate savings on cost-savings cadence',
       ],
       proofEmphasis:
-        'Primo is the public comparable, same network-coordination-across-flows shape, on the hardest CPG freight, already running the network-tier operating layer above existing site-level tooling. The 48-to-24 minute turn-time delta and the dock-office-headcount-held-flat result are the operator-language proof points. The "24 facilities live · >200 contracted" rollout cadence is the proof that the operating model ships at scale across heterogeneous sites, the read-across to the ~200+ HD-core + ~1,050+ SRS / GMS / Mingledorff\'s federation is the easier scaling problem, not the harder one. The directly-shaped reference (un-name-able 237-facility CPG anchor) is the credibility flex if peer reference becomes the topic.',
+        'Primo is the public comparable, same network-coordination-across-flows shape, on the hardest CPG freight, already running the network-tier operating layer above existing site-level tooling. The 48-to-24 minute turn-time delta and the dock-office-headcount-held-flat result are the operator-language proof points. The "24 facilities live · 260 committed" rollout cadence is the proof that the operating model ships at scale across heterogeneous sites, the read-across to the ~200+ HD-core + ~1,050+ SRS / GMS / Mingledorff\'s federation is the easier scaling problem, not the harder one. The directly-shaped reference (un-name-able 237-facility CPG anchor) is the credibility flex if peer reference becomes the topic.',
     },
     {
       person: {
@@ -559,7 +559,7 @@ export const theHomeDepot: AccountMicrositeData = {
         'standardized dock-door arbitration',
       ],
       proofEmphasis:
-        'The "24 facilities live · >200 contracted" rollout cadence from Primo is the program-language proof point. The operating model has shipped at scale; the question is what it looks like on retail multi-channel.',
+        'The "24 facilities live · 260 committed" rollout cadence from Primo is the program-language proof point. The operating model has shipped at scale; the question is what it looks like on retail multi-channel.',
     },
   ],
 
@@ -568,7 +568,7 @@ export const theHomeDepot: AccountMicrositeData = {
       type: 'metric',
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Measured across live deployments at a comparable multi-flow network' },
-        { value: '>200', label: 'Contracted Network', context: 'Contracted rollout cadence across comparable operating profiles' },
+        { value: '260', label: 'Sites Committed', context: 'Contracted rollout cadence across comparable operating profiles' },
         { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at comparable multi-channel facilities' },
       ],
@@ -620,7 +620,7 @@ export const theHomeDepot: AccountMicrositeData = {
     { mark: 'Pro-channel stack', body: 'SRS Sep 2024 · $18.25B · GMS Sep 2025 · $5.5B · Mingledorff\'s HVAC May 11, 2026 · 42 locations.' },
     { mark: 'Pro-customer TAM', body: '~$90B of $165B FY today · pre-SRS Pro TAM ~$700B · ~$1.2T post-Mingledorff\'s.' },
     { mark: 'Deaton\'s lineage', body: 'Architect of the 19-RDC rollout 2007 · EVP-level owner of the $500M cost-savings program 2023 · 19 years at HD.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same shape, harder freight.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same shape, harder freight.' },
   ],
 
   audioBrief: {

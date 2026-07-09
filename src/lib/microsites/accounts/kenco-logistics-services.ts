@@ -81,7 +81,7 @@ export const kencoLogisticsServices: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The two highest-leverage pilot candidates at Kenco are different in kind from end-shipper pilots: (1) the Innovation Lab in Chattanooga as a controlled test bed before any live-customer deployment, that is the public template for how new capabilities enter the Kenco operating standard, and yard-execution fits the same productization pattern as the existing Innovation Lab program; (2) one Drexel-acquired multi-client warehouse in London ON, because the campus is by design four multi-customer facilities with shared-gate appointment-window arbitration already in scope, and the Canadian operating standard is being scoped fresh post-close. We would expect the productization read to make sense inside two to four quarters once the lab pilot reads as expected.',
@@ -475,7 +475,7 @@ export const kencoLogisticsServices: AccountMicrositeData = {
     { mark: 'Contract Packaging Division', body: 'Launched July 2025 · GVP Rob Doyle · dock-and-stage steps inside the same facility footprint.' },
     { mark: 'IL Top 10 cohort', body: '12 consecutive years on the Inbound Logistics Top 10 3PL list. The peer set is the same set every year.' },
     { mark: '75-year operator discipline', body: 'Privately held, family-operated since 1950. Productization compounds at decade cadence, not quarter cadence.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same coordinates, harder freight.' },
   ],
 
   audioBrief: {

@@ -89,7 +89,7 @@ export const abInbev: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The sites where this lands first are not the marquee flagships, they are the highest-leverage proving grounds: Cartersville, a single facility producing ~48 SKUs into ~32 states with a $9.2M Brewing Futures capex lift landing on top of an unchanged yard layer; or the ABOne network specifically, where owned distribution avoids the franchise-negotiation overhead and one dock standard can be enforced end-to-end. The proof at either earns the right to operate the layer above the rest of the flagship breweries and the franchise-wholesaler dock surface in the wave that follows. We would expect the U.S. brewery network to agree with itself on dock-door logic, multi-fleet arbitration, and EV-charging-aware sequencing within two to four quarters of that first pilot.',
@@ -408,7 +408,7 @@ export const abInbev: AccountMicrositeData = {
       type: 'metric',
       stats: [
         { value: '24', label: 'Facilities Live' },
-        { value: '>200', label: 'Contracted Network' },
+        { value: '260', label: 'Sites Committed' },
         { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)' },
         { value: '$1M+', label: 'Per-Site Profit Impact' },
       ],
@@ -545,7 +545,7 @@ export const abInbev: AccountMicrositeData = {
     { mark: 'Named capex sites', body: 'Cartersville $9.2M · Houston $17M · Jacksonville $30M · LA $7.4M.' },
     { mark: 'Touchless scoreboard', body: 'o9 · 85% touchless U.S. demand · 99.5% service · OOS below 0.5%.' },
     { mark: 'Siqueira in his own words', body: '"Our supply chain KPIs are at an all-time high." Touchless reached planning and telemetry. Not the dock.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same coordinates, harder freight.' },
   ],
 
   audioBrief: {

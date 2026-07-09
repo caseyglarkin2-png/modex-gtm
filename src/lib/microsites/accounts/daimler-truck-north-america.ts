@@ -99,7 +99,7 @@ export const daimlerTruckNorthAmerica: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The two highest-leverage pilot targets at DTNA are different in kind: (1) Portland\'s eCascadia/eM2 series-production yard, where greenfield orchestration spec is materially cheaper than retrofit; (2) the Cleveland + Mt. Holly NC plant pair, where co-located network-tier coordination produces the cleanest A/B against the existing site-level baseline. Saltillo is explicitly not the right first pilot, 14-year incumbent emotional investment makes the original deployment site the wrong place to test the layer above it.',
@@ -292,7 +292,7 @@ export const daimlerTruckNorthAmerica: AccountMicrositeData = {
     { mark: 'Order intake', body: 'Q1 2026 Trucks NA orders +85% YoY · the ramp lands on the same dock-door count.' },
     { mark: 'Margin posture', body: 'Q1 2026 group EBIT halved · DTNA EBIT −73% · tariff overhang in low-triple-digit million euros.' },
     { mark: 'Greenfield', body: 'eCascadia + eM2 series production at Portland · new yard surfaces the 2012 config was never designed to track.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same network shape, different freight.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same network shape, different freight.' },
   ],
 
   audioBrief: {

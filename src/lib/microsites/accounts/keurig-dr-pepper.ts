@@ -93,7 +93,7 @@ export const keurigDrPepper: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The two highest-leverage pilot candidates at KDP are different in kind: (1) the newly acquired Arizona Kalil footprint, because the production plant + DSD distribution + sales operation under one roof in Tucson is the cleanest place to set a hybrid-distribution dock standard before legacy local routine hardens; (2) a K-Cup pod plant doing continuous warehouse-distribution outbound, because the production-stoppage cost of an unavailable dock is the most quantifiable single number in the network. We would expect the hybrid-distribution arbitration to become a measurable network metric within two to four quarters of the pilot.',
@@ -264,7 +264,7 @@ export const keurigDrPepper: AccountMicrositeData = {
       type: 'metric',
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Running the full network-level yard operating model at comparable beverage and CPG operations' },
-        { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across similar multi-site networks' },
+        { value: '260', label: 'Sites Committed', context: 'Contracted for rollout across similar multi-site networks' },
         { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at comparable beverage facilities' },
       ],
@@ -313,7 +313,7 @@ export const keurigDrPepper: AccountMicrositeData = {
     { mark: 'GHOST onto DSD', body: 'October 2024 announcement · up to $250M to transition GHOST Energy onto KDP-owned DSD starting mid-2025. A new LRB SKU set onto yards already running K-Cup continuous outbound.' },
     { mark: 'Cofer operating reset', body: 'CEO April 2024 · DSD growth + disciplined network optimization framed as the operating priorities.' },
     { mark: 'Killingsworth pedigree', body: 'SVP Logistics · prior at Nike (Global VP Logistics), Walmart, Manhattan Associates, Home Depot, i2 Technologies. A multi-channel operating-system arc the KDP coordination problem is shaped to recognize.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed.' },
   ],
 
   audioBrief: {

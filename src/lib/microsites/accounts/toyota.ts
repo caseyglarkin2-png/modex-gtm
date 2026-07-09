@@ -97,7 +97,7 @@ export const toyota: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         "30–60 days from kickoff to first measurable impact at the pilot site. The two highest-leverage pilot targets at Toyota are different in kind: (1) TBMNC in Liberty NC, because it is a greenfield with no entrenched yard-ops habit to displace and the receiving design is still being scoped while the cell-production ramp builds out; (2) Georgetown KY, because it is the highest-production capacity single assembly plant in the world, runs the most concurrent variant mix on one site, and is where any network-wide protocol ultimately has to prove out under the tightest JIT tolerance in the network. We would expect the operating model to make sense of itself across the assembly network within two to four quarters of the pilot.",
@@ -255,7 +255,7 @@ export const toyota: AccountMicrositeData = {
       type: 'metric',
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Measured across live deployments' },
-        { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across comparable verticals' },
+        { value: '260', label: 'Sites Committed', context: 'Contracted for rollout across comparable verticals' },
         { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at manufacturing facilities' },
       ],
@@ -307,7 +307,7 @@ export const toyota: AccountMicrositeData = {
     { mark: 'Inbound mix', body: 'Multi-pathway electrification, ICE + hybrid + PHEV + BEV on one line. Variance budget per supplier shrinks as supplier count grows.' },
     { mark: 'Line-side tolerance', body: 'TMNA assembly plants run line-side inventory in hours, not days. Yard variance lands on the line.' },
     { mark: 'Coverage map', body: '5 TPS tiles covered. 1 unfilled. The yard layer above the dock.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same network shape, different freight.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same network shape, different freight.' },
   ],
 
   audioBrief: {

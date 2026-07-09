@@ -71,7 +71,7 @@ export const constellationBrands: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '-50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The two highest-leverage pilot candidates at Constellation are different in kind: (1) Nava, because it carries the highest production capacity in the network and any yard-turn improvement at Nava shows up immediately in the cross-border outbound cadence; (2) Veracruz, because the brewery is ramping into commercial production now, the yard has no entrenched local SOPs to displace, and the operating standard installed there in 2026 is the one that defines the newest piece of the network for a decade. We would expect the network to make sense of itself within two to four quarters of either pilot.',
@@ -232,7 +232,7 @@ export const constellationBrands: AccountMicrositeData = {
       type: 'metric',
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Measured at comparable beverage operations' },
-        { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across comparable verticals' },
+        { value: '260', label: 'Sites Committed', context: 'Contracted for rollout across comparable verticals' },
         { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at beverage facilities' },
       ],
@@ -279,7 +279,7 @@ export const constellationBrands: AccountMicrositeData = {
     { mark: 'Category sensitivity', body: 'Modelo Especial #1 US beer by dollars · ~$5.2B · ~92% of imported-Mexican-beer dollars.' },
     { mark: 'Portfolio attention', body: 'Wine Group transaction closed June 2025 · ~$846M cash · beer-led retained portfolio claims SC bandwidth.' },
     { mark: 'Kester tenure', body: '~30 years in beer · Molson Coors · Rocky Mountain Bottle · Metal Container · Constellation since 2014 · ~$2B Beer Division spend.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, single-country freight.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same coordinates, single-country freight.' },
   ],
 
   audioBrief: {

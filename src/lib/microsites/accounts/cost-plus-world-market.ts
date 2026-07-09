@@ -107,7 +107,7 @@ export const costPlusWorldMarket: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The cleanest first pilot at Cost Plus is Stockton, west-coast DC, west-coast import-receiving anchor, and the site where the published hard-savings curve is most documented. Windsor follows as the east-coast mirror, with the bursty international-inbound Q4 seasonality as the natural cross-DC arbitration test. We would expect the network to make sense of itself within two to four quarters of the pilot.',
@@ -291,7 +291,7 @@ export const costPlusWorldMarket: AccountMicrositeData = {
     { mark: 'Site-level scoreboard', body: 'Yard-driver headcount cut to one-per-shift-per-facility · daily yard checks eliminated · fleet pool reduced · fuel out · cellphone coordination ended.' },
     { mark: 'Ownership clock', body: 'Kingswood Capital since January 2021 · $110M from BBBY · year 5 of PE hold = fresh-CIM hard-savings window.' },
     { mark: 'Direct-import shape', body: 'Ocean container → Port of Oakland / LA-Long Beach → Stockton · Norfolk / Savannah → Windsor. Bursty Q4 + Q1 + mid-summer inbound.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same coordinates, harder freight.' },
   ],
 
   audioBrief: {

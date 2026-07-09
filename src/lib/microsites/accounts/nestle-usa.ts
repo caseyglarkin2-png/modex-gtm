@@ -115,7 +115,7 @@ export const nestleUsa: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The two highest-leverage pilot targets at Nestlé USA are different in kind: (1) Glendale AZ as the greenfield embed, opened mid-2024, SOP still being written, no legacy yard workflow to displace; (2) Gaffney SC or Jonesboro AR as the consolidation-pressure embed, these are the sites absorbing Solon volume against the same dock surface, and the production capacity-per-dock math is most visible there. We would expect the network to make sense of itself within two to four quarters of the pilot, with the operating model feeding cleanly into the Nestlé Group SAP S/4HANA digital core via the yard-data layer the core does not directly host.',
@@ -312,7 +312,7 @@ export const nestleUsa: AccountMicrositeData = {
     { mark: 'Greenfield', body: 'Glendale AZ · $675M · 630K sq ft · 20th US factory · opened mid-2024.' },
     { mark: 'Consolidation', body: 'Solon Jan 2024 · 216 layoffs · volume rerouted to Gaffney + Jonesboro.' },
     { mark: 'Portfolio settled', body: 'Waters 2021 · US confectionery 2018 · US ice cream 2019 · global ice-cream tail Feb 2026.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same shape, harder freight.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same shape, harder freight.' },
   ],
 
   audioBrief: {

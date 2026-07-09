@@ -10,7 +10,7 @@ export const YARDFLOW_BRAND = {
   fullName: 'YardFlow by FreightRoll',
   tagline: 'The First Yard Network System',
   subtag: 'One yard network, one protocol.',
-  positioning: 'A role-first, system-first operating layer for the yard. One protocol took 24 Primo Brands sites from 48 to 24 minutes gate to gate, worth $1M+ per site modeled. Now scaling past 200 facilities.',
+  positioning: 'A role-first, system-first operating layer for the yard. One protocol took 24 Primo Brands sites from 48 to 24 minutes gate to gate, worth $1M+ per site modeled. The full 260-site network is committed.',
   url: 'https://yardflow.ai',
   ctaLabel: 'Book a Network Audit',
   ctaMeeting: '30-minute Network Audit: facility mapping + board-ready ROI',
@@ -98,7 +98,7 @@ export const YARDFLOW_PRODUCT = {
 
 export const YARDFLOW_PROOF = {
   facilitiesLive: '24',
-  contractedNetwork: '>200',
+  contractedNetwork: '260',
   headcountImpact: 'NEUTRAL',
   avgDropHook: '48→24',
   dropHookUnit: 'min',
@@ -114,7 +114,7 @@ export const YARDFLOW_PROOF = {
 
   stats: [
     { value: '24', label: 'Facilities Live', icon: 'facility' },
-    { value: '>200', label: 'Contracted Network', icon: 'network' },
+    { value: '260', label: 'Sites Committed (100% of network)', icon: 'network' },
     { value: 'NEUTRAL', label: 'Headcount Impact', icon: 'headcount' },
     { value: '48→24', label: 'Avg. Drop & Hook (min)', icon: 'clock' },
     { value: '$1M+', label: 'Per-site Profit Lift', icon: 'money' },
@@ -188,7 +188,7 @@ Product frame (post-pivot canon — do not contradict):
 - The driver-journey layer alone lifted production capacity at live sites before the YMS automation went in. Driver journey first, automate last.
 
 Proof from Live Deployment:
-- 24 facilities live, >200 contracted network
+- 24 facilities live; the full 260-site network committed (100% under contract)
 - Headcount neutral. Captured additional volume without adding a single person
 - Drop & hook time cut from 48 to 24 minutes. Trucks turn faster, freeing dock capacity
 - $1M+ per-site incremental profit (CEO-verified from operational data)

@@ -101,7 +101,7 @@ export const cjLogisticsAmerica: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The strongest pilot configurations at CJ Logistics America are different from end-shipper pilots: (1) one TES-pipeline site running a multi-customer DC, configured as a single-site OneTrack-cadence pilot with KPIs that match the Feb 2025 expansion-announcement format; (2) the Elwood Phase 2 mega-center as a greenfield yard-ops embed at go-live (H1 2026 timing makes the design conversation actionable now); (3) one of the new cold-chain sites (Gainesville GA or New Century KS) where multi-customer trailer contention is most acute against TES-aligned KPIs.',
@@ -305,7 +305,7 @@ export const cjLogisticsAmerica: AccountMicrositeData = {
     { mark: 'Greenfield window', body: 'Elwood IL Phase 2 · 1.1M sq ft · H1 2026 · Korea Ocean Business Corporation $457M co-investment.' },
     { mark: 'Adams on the record', body: 'WMS-agnostic by design. Blue Yonder + Korber + SAP EWM run in parallel per customer choice.' },
     { mark: 'Continuous Improvement', body: 'Adams\' January 2025 SVP scope addition · the operating-KPI scorecard for what TES productizes.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same coordinates, harder freight.' },
   ],
 
   audioBrief: {

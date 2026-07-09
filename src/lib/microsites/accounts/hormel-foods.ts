@@ -103,7 +103,7 @@ export const hormelFoods: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         "30–60 days from kickoff to first measurable impact at the pilot site. The two highest-leverage pilot targets at Hormel are different in kind: (1) the Austin MN flagship, because it is the largest single production capacity node in the network, runs the most concurrent product profiles at the same gate, and is where any network-wide operating standard ultimately has to prove out; (2) the busiest Planters-network shelf-stable plant, because it is the cleanest test of whether a unified yard operating layer can ride on top of plants whose pre-acquisition yard reflexes were not built at Hormel. We would expect the network to make sense of itself within two to four quarters of the pilot.",
@@ -470,7 +470,7 @@ export const hormelFoods: AccountMicrositeData = {
         'carrier mix by temperature regime',
       ],
       proofEmphasis:
-        'The Primo network-rollout cadence (24 live · >200 contracted) is the credibility flex on whether the operating model is actually deployable at scale, not just at one site.',
+        'The Primo network-rollout cadence (24 live · 260 committed) is the credibility flex on whether the operating model is actually deployable at scale, not just at one site.',
     },
     {
       person: {
@@ -523,7 +523,7 @@ export const hormelFoods: AccountMicrositeData = {
       type: 'metric',
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Measured across live deployments' },
-        { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across comparable verticals' },
+        { value: '260', label: 'Sites Committed', context: 'Contracted for rollout across comparable verticals' },
         { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at food & beverage facilities' },
       ],
@@ -579,7 +579,7 @@ export const hormelFoods: AccountMicrositeData = {
     { mark: 'Tucker reallocation', body: 'Bacon line shut Oct 2025 · production redistributed · trailer pressure at receivers.' },
     { mark: 'Bonifant arrives', body: 'CSCO effective March 9, 2026 · 15 years Hershey · 20-plant footprint · BCG · Navy submarine.' },
     { mark: 'Multi-temp at the dock', body: 'SPAM, Jennie-O, and Planters arbitrate the same gate at multi-temp plants.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same coordinates, harder freight.' },
   ],
 
   audioBrief: {

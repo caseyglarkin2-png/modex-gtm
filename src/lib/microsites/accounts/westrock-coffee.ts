@@ -137,7 +137,7 @@ export const westrockCoffee: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The cleanest first pilot at Westrock Coffee is the Conway AR campus, three major facilities (roast-to-RTD, DC, single-serve) standing up simultaneously is the cross-cadence yard problem the network-tier layer most directly addresses, and the operating-leverage ramp is the timing driver. The follow-on is extending into the Concord NC operation, where the existing site-level system continues to run as the records layer and the network-tier layer above coordinates across-state with Conway. Little Rock AR is the third leg.',
@@ -325,7 +325,7 @@ export const westrockCoffee: AccountMicrositeData = {
     { mark: 'Operating-leverage year', body: '2026 Adjusted EBITDA $90M–$100M · 29–44% YoY · "construction mode to daily operations."' },
     { mark: 'Concord scoreboard', body: '120–130 → ~400 trailers · acceptance-to-roasting ~45–50 min → ~15 min.' },
     { mark: 'Hinson on the record', body: '"You\'ll actually have software, not shelfware." Site-level discipline is the foundation. The layer above three states is unsolved.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same coordinates, harder freight.' },
   ],
 
   audioBrief: {

@@ -96,7 +96,7 @@ export const dhlSupplyChain: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The strongest pilot configurations at DHL are different from end-shipper pilots: (1) Diageo Plainfield as a joint DHL-customer-YardFlow scoping site, DHL operates the yard, Diageo measures the customer-experience surface, YardFlow is in conversation with both; (2) one ReTurn Network multi-customer returns facility, by-definition multi-tenant, by-definition new operating standard, by-definition the cleanest A/B against single-tenant legacy tools; (3) one IDS Fulfillment multi-customer e-commerce DC where shipper-specific appointment-window arbitration is the visible pain.',
@@ -302,7 +302,7 @@ export const dhlSupplyChain: AccountMicrositeData = {
     { mark: '2025 acquisitions', body: 'Inmar · 14 returns centers · IDS · 1.3M sq ft · CRYOPDP · 14+ yards in active SOP integration.' },
     { mark: 'ReTurn Network', body: '11 multi-customer returns facilities · launched Oct 2025 · DHL\'s first publicly named multi-tenant network product.' },
     { mark: 'Data-center logistics', body: '10 new sites · 7M+ sq ft · announced March 2026 · multi-hyperscaler by design.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same coordinates, harder freight.' },
   ],
 
   audioBrief: {

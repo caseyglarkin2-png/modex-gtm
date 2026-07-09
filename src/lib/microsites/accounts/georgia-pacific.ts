@@ -81,7 +81,7 @@ export const georgiaPacific: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '-50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The two highest-leverage pilot candidates at Georgia-Pacific are different in kind: (1) a tissue mill on the consumer-flow side, Brewton, Green Bay, or the Palatka complex once the new warehouse is online, where appointment-window discipline against a retailer DC schedule is the dominant variance driver; (2) a major plywood/OSB plant on the building-products side where contractor-bound walk-in carriers and distributor-bound appointment carriers compete for the same dock doors. The most analytically interesting pilot would be a site that runs both, if such a site exists in the network at material scale, because the dual-flow dock arbitration is where the operating layer above the yard pays back fastest. We would expect the network to make sense of itself within two to four quarters of either pilot.',
@@ -504,7 +504,7 @@ export const georgiaPacific: AccountMicrositeData = {
       type: 'metric',
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Measured at comparable manufacturing operations' },
-        { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across comparable verticals' },
+        { value: '260', label: 'Sites Committed', context: 'Contracted for rollout across comparable verticals' },
         { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at manufacturing facilities' },
       ],
@@ -560,7 +560,7 @@ export const georgiaPacific: AccountMicrositeData = {
     { mark: 'Three-segment outbound', body: 'Tissue / towel / tableware to retail DCs · plywood / OSB / gypsum to contractor walk-in and distributors · GP Cellulose pulp and specialty fibers to industrial converters with port cutoff windowing · sometimes the same mill.' },
     { mark: 'Capex landing now', body: 'Palatka $83M + 400,000 sq ft warehouse breaks ground Feb 2026 · $550M sustainable-packaging build closed 2025 · Anchor Packaging integrated Oct 2025.' },
     { mark: 'Leadership transition', body: 'Fischer retired Oct 2025 after 35 yrs · Luetters interim (9 yrs running building products) · permanent CEO named in 2026. The yard layer is a standard a permanent CEO ratifies on entry, not inherits mid-cycle.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight, single-customer-type (the multi-customer wrinkle is G-P-specific).' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same coordinates, harder freight, single-customer-type (the multi-customer wrinkle is G-P-specific).' },
   ],
 
   audioBrief: {

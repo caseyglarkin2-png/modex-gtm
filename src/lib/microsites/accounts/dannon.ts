@@ -114,7 +114,7 @@ const DANNON_FACILITY_COUNT = getFacilityCountLowerBound('Dannon', 13) ?? 13;
  *           type: 'metric',
  *           stats: [
  *             { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol today' },
- *             { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout' },
+ *             { value: '260', label: 'Sites Committed', context: 'Contracted for rollout' },
  *             { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
  *             { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured across live deployments' },
  *           ],
@@ -277,7 +277,7 @@ export const dannon: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30-60 days from kickoff to first measurable impact at the pilot site. The cleanest place this lands first is not the marquee Mount Crawford plant or the Minster expansion, it is the new Jacksonville Southeast distribution hub, where the yard standard can be embedded before local routines lock in and the displacement risk is closest to zero. Mount Crawford, Minster, and the co-manufacturer network are the second wave once the operating model has its first 60-day proof. We would expect the network to make sense of itself within two to four quarters of that first pilot.',
@@ -628,7 +628,7 @@ export const dannon: AccountMicrositeData = {
       type: 'metric',
       stats: [
         { value: '24', label: 'Facilities Live' },
-        { value: '>200', label: 'Contracted Network' },
+        { value: '260', label: 'Sites Committed' },
         { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)' },
         { value: '$1M+', label: 'Per-Site Profit Impact' },
       ],
@@ -756,7 +756,7 @@ export const dannon: AccountMicrositeData = {
     { mark: 'Production capacity pressure', body: 'Minster · +48,000 sq ft · 60% more milk over two years · Oikos +40% YoY 2024. More production capacity-out-the-door, same dock surface.' },
     { mark: 'Strategy anchor', body: 'Renew Danone names COGS productivity as an explicit pillar. Yard standardization is the productivity lever that does not require new dock capex.' },
     { mark: 'Gerling in his own words', body: 'Resilience is "structure, plans, agility, and foresight." Yard standardization is the resilience layer most fresh networks do not have yet.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted. The public network-operating-layer comparable for fresh-shape CPG.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed. The public network-operating-layer comparable for fresh-shape CPG.' },
   ],
 
   audioBrief: {

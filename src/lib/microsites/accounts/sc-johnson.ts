@@ -119,7 +119,7 @@ export const scJohnson: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The two highest-leverage pilot targets at SC Johnson are different in kind: (1) Waxdale Sturtevant WI as the criticality-concentration site, where the network-tier operating layer most directly protects the outsized brand-portfolio exposure; (2) one RDC node where the mixed-fleet outbound (hazmat aerosols + Ziploc + ambient liquids) interleaves with mass-retail MABD windows, so the operating-model impact lands directly in the carrier-experience metric Westfahl owns. We would expect the network to make sense of itself within two to four quarters of the pilot.',
@@ -311,7 +311,7 @@ export const scJohnson: AccountMicrositeData = {
     { mark: 'Four-modality outbound', body: 'Hazmat aerosols + cube-extreme Ziploc + ambient liquids + B2B Professional on shared yard surface at every plant.' },
     { mark: 'Brantford pressure', body: '$50M Glade investment · Canadian DC consolidation · March 2024 · more trailers through surviving yards.' },
     { mark: 'Family-ownership window', body: 'Fifth-generation Johnson family · ~$13B private · long-horizon capex posture, not quarterly-EPS pressure.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same coordinates, harder freight.' },
   ],
 
   audioBrief: {

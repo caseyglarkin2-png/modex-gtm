@@ -117,7 +117,7 @@ export const pactivEvergreen: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The highest-leverage pilot at Pactiv Evergreen / Novolex is the Temple TX mixing center or an equivalent regional mixing-center node, the orchestration math at a multi-destination outbound site is richer than at single-purpose manufacturing yards, and the proof point lands cleanly inside the synergy-capture scorecard. The follow-on is one Novolex-legacy site where the yard stack today is the least documented, that pair (one Pactiv-legacy mixing center + one Novolex-legacy site) makes the combined-network operating-layer case visible in one read.',
@@ -308,7 +308,7 @@ export const pactivEvergreen: AccountMicrositeData = {
     { mark: 'Synergy window', body: 'Apollo + CPP underwriting · April 2025–April 2027 · month 13 of 24 as of May 2026.' },
     { mark: 'Site-level case', body: '12 Pactiv yards · 2019 case study · 15–20 min spotter search eliminated · Aberdeen NC still hiring against it in 2026.' },
     { mark: 'Whittington in his own words', body: 'Built the PMO and IMO before he owned the CTO seat. Knows both sides of the integration line.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same coordinates, harder freight.' },
   ],
 
   audioBrief: {

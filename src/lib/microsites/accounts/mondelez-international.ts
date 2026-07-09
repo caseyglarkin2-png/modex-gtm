@@ -83,7 +83,7 @@ export const mondelezInternational: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30-60 days from kickoff to first measurable impact at the pilot site. Two pilot shapes make sense at Mondelez: (1) a flagship Oreo or Ritz NA plant where the seasonal-surge plus DSD-versus-warehouse complexity is most visible, so the operating model gets stress-tested on the highest-velocity case first; (2) a site that received Clif or Hu production after the acquisition, where the inherited yard SOPs from the acquired company are still visible against the legacy Mondelez baseline. The second shape is the one most likely to surface where post-acquisition integration is still leaking. We would expect the network to make sense of itself within two to four quarters of the pilot.',
@@ -249,7 +249,7 @@ export const mondelezInternational: AccountMicrositeData = {
       type: 'metric',
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Measured at comparable food & beverage operations' },
-        { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across comparable verticals' },
+        { value: '260', label: 'Sites Committed', context: 'Contracted for rollout across comparable verticals' },
         { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at food & beverage facilities' },
       ],
@@ -296,7 +296,7 @@ export const mondelezInternational: AccountMicrositeData = {
     { mark: 'Acquisition sequence', body: 'Tate\'s 2018 · Hu 2021 · Chipita Jan 2022 · Clif $2.9B Jun 2022 · Ricolino $1.3B May 2022.' },
     { mark: 'Network footprint', body: '130+ plants · 320 warehouses · ~160 countries · ~30 plants in North America.' },
     { mark: 'Seasonal surge', body: 'Halloween-to-Easter chocolate cycle · 2-4x baseline at chocolate plants.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same shape, harder freight.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same shape, harder freight.' },
   ],
 
   audioBrief: {

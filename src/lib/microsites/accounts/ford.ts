@@ -83,7 +83,7 @@ export const ford: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The Ford-shaped three-site starter pack the internal business case lands on is Chicago Auto Distribution Center (the high-VIN-velocity railhead, fastest place to prove unit-level tracking and lost-unit reduction), Louisville Assembly Plant (high outbound truck density, takt-time-sensitive, where carrier-dwell and yard-dog choreography land hardest), and Memphis PDC (LTL plus TL inbound clustering, the cleanest non-assembly node to prove door-assignment and load-queue logic). The network operating model makes sense of itself across the rest of the ~100 yards within two to four quarters of the pilot.',
@@ -239,7 +239,7 @@ export const ford: AccountMicrositeData = {
       type: 'metric',
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Measured at comparable multi-site network operations' },
-        { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across comparable verticals' },
+        { value: '260', label: 'Sites Committed', context: 'Contracted for rollout across comparable verticals' },
         { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at comparable network facilities' },
       ],
@@ -297,7 +297,7 @@ export const ford: AccountMicrositeData = {
     { mark: 'Lightning Rouge', body: 'F-150 Lightning paused indefinitely after the Novelis aluminum-plant fire, Dearborn inbound is reshuffling.' },
     { mark: 'CSCO tenure', body: 'Elizabeth Door · CSCO since June 2023 · ~$90B annual purchase value · ~20,000 suppliers · prior Whirlpool 6 yrs · GM 15 yrs.' },
     { mark: 'Ford+ tile', body: 'Ford Pro, Model e, Ford Blue, BlueOval Battery run to one strategy. The yard layer above the ~100 sites is the unfilled tile.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same network shape, different freight.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same network shape, different freight.' },
   ],
 
   audioBrief: {

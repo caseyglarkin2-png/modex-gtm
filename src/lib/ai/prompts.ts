@@ -363,7 +363,7 @@ Generate ONLY valid JSON matching this schema — no markdown, no commentary:
   ],
   "proofStats": [
     {"value": "24", "label": "Facilities Live"},
-    {"value": ">200", "label": "Contracted Network"},
+    {"value": "260", "label": "Sites Committed"},
     {"value": "NEUTRAL", "label": "Headcount Impact"},
     {"value": "48→24", "label": "Avg. Drop & Hook (min)"},
     {"value": "$1M+", "label": "Per-site Profit Lift"}

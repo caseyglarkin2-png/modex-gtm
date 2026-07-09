@@ -95,7 +95,7 @@ export const barnesNoble: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The highest-leverage pilot target at Barnes & Noble is the Monroe Township DC itself, the 115-dock-door, 1.2M sq ft building is doing the arbitration work today, and a single-site operating-model engagement at the primary hub is the cleanest place to land the wedge. The production capacity pressure is already measurable: 60 new stores a year on a flat dock-door count, e-commerce parcel cadence sitting next to truckload store replenishment, and a post-localization outbound batch profile that has compressed without the dock-door duty cycle being redesigned to match. We would expect the dock-tier operating model to make sense of itself within two to four quarters of the pilot, and the operating-model layer would survive any future regional-DC expansion as a network-tier standard rather than a one-building patch.',
@@ -490,7 +490,7 @@ export const barnesNoble: AccountMicrositeData = {
         'PMO sequencing',
       ],
       proofEmphasis:
-        'The "24 facilities live · >200 contracted" rollout cadence from Primo is the program-language proof point. The operating model has shipped at scale on top of mature site-level systems; the question is what it looks like on a single-hub retail DC.',
+        'The "24 facilities live · 260 committed" rollout cadence from Primo is the program-language proof point. The operating model has shipped at scale on top of mature site-level systems; the question is what it looks like on a single-hub retail DC.',
     },
   ],
 
@@ -499,7 +499,7 @@ export const barnesNoble: AccountMicrositeData = {
       type: 'metric',
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Measured across live deployments at comparable multi-channel operations' },
-        { value: '>200', label: 'Contracted Network', context: 'Contracted rollout cadence across comparable operating profiles' },
+        { value: '260', label: 'Sites Committed', context: 'Contracted rollout cadence across comparable operating profiles' },
         { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at comparable retail-DC facilities' },
       ],
@@ -548,7 +548,7 @@ export const barnesNoble: AccountMicrositeData = {
     { mark: 'Monroe Township hub', body: '1.2M sq ft · 73 acres · 115 dock doors · built 2005.' },
     { mark: 'Elliott take-private', body: '$683M all-cash · Aug 2019 · Daunt CEO at close · Waterstones same owner.' },
     { mark: 'Dock-tier seam', body: 'Store replen + e-com parcel + Nook + inbound publisher = 4 channels, 115 doors.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same coordinates, harder freight.' },
   ],
 
   audioBrief: {

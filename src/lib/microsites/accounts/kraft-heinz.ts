@@ -85,7 +85,7 @@ export const kraftHeinz: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: 'up to −50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         'Roughly 90 days kickoff-to-deployed-pilot, discovery, integration, configuration, and live deployment, with front-end cadence dependent on Kraft Heinz resource availability and the existing Kaleris footprint at the chosen site. The first measurable impact lands inside 30–60 days of monitored post-deployment operation; that\'s the window where the comparable network numbers were read against the pre-deployment baseline. The sites where this proves out first are not the marquee nodes, they are the smaller no-gate, no-YMS, urban-connectivity facilities where the carrier yard is simplest to instrument and the displacement risk is lowest. DeKalb 2027 is where the proven model expands into the highest-production capacity node in the U.S. portfolio; the $3B-modernized plants are the second wave once the network operating layer has its first post-deployment proof. We would expect the network to make sense of itself within two to four quarters of that first pilot\'s deployment.',
@@ -273,7 +273,7 @@ export const kraftHeinz: AccountMicrositeData = {
     { mark: 'Modernization', body: '$3B U.S. plant investment · ~30 sites · May 2025.' },
     { mark: 'Working capital', body: 'Agile@Scale cut inventory ~20%. Yard variance is now a working-capital line.' },
     { mark: 'Torres in his own words', body: 'Speed and scale reached planning and visibility. It has not yet reached the yard.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed.' },
   ],
 
   audioBrief: {

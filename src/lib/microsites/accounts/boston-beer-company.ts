@@ -107,7 +107,7 @@ export const bostonBeerCompany: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The cleanest first pilot at Boston Beer is the Sam Adams PA brewery, the largest in the network and the site Savastano personally ran for 18 months before promotion to CSCO. The follow-on is Cincinnati, where the 2020 $85M canning expansion concentrated 4× canning capacity into the same yard surface and where the packaging-density math compounds turn-time savings hardest. Milton DE (Dogfish Head) and the Jamaica Plain heritage site round out the rollout at network cadence rather than site-by-site reinvention.',
@@ -302,7 +302,7 @@ export const bostonBeerCompany: AccountMicrositeData = {
     { mark: 'Q1 2026 scoreboard', body: 'Gross margin 49.3% · +100 bps · attributed publicly to procurement + brewery efficiencies.' },
     { mark: 'Cincinnati canning', body: '$85M expansion · 4× canning capacity · the packaging-density anchor.' },
     { mark: 'Savastano on the floor', body: '18 months running the Sam Adams PA brewery before the CSCO seat. "What works at one plant should work at every plant", literally his career arc.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same coordinates, harder freight.' },
   ],
 
   audioBrief: {

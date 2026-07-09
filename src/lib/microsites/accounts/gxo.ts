@@ -132,7 +132,7 @@ export const gxo: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The strongest pilot configurations at GXO are different from end-shipper pilots: (1) one GXO Direct multi-customer DC where shipper-specific appointment-window arbitration is the visible pain, by-definition multi-tenant, by-definition the cleanest A/B against single-tenant legacy tools; (2) one Wincanton-side UK site currently in active SOP integration, where operating-standard rewrite is already in motion; (3) one Americas-region site Jacobs identifies inside his first-90-days operating-standard scoping window, configured as a single-site pilot with KPIs that match the operating-standard scorecard format. We would expect the network to make sense of itself within two to four quarters of that first pilot.',
@@ -391,7 +391,7 @@ export const gxo: AccountMicrositeData = {
     { mark: 'GXO IQ substrate', body: 'Launched June 2025 · Google Cloud + Snowflake · "GIL" AI agent · powering GXO Direct U.S. · the orchestration substrate the next operating-standard layer plugs into.' },
     { mark: 'Leadership window', body: 'Kelleher CEO Aug 19 2025 · ex-DHL Supply Chain NA CEO · ran Stretch + Locus. Jacobs Pres. Americas & Asia Pacific Nov 3 2025 · ex-Ferguson SVP Supply Chain · Dallas.' },
     { mark: 'Pure-play distinction', body: 'World\'s largest pure-play contract logistics provider since spin-off Aug 2 2021. No asset-based trucking. Unit of analysis is operating standard, not asset utilization.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same coordinates, harder freight.' },
   ],
 
   audioBrief: {

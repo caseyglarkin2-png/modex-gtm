@@ -124,7 +124,7 @@ export const unfi: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The cleanest first pilot at UNFI is one consolidation-receiving DC, Manchester PA (new-build, opened Q1 FY25) or one of the surviving Plains DCs absorbing the Billings/Bismarck volume re-allocation. Manchester is the new-build greenfield embed where the operating-model layer ships into the building rather than retrofitting. The Plains DC is the closure-pressure embed where the production capacity-per-dock math is most visible. Either approach lands inside The Great Consolidation operating narrative the CEO is selling Wall Street.',
@@ -317,7 +317,7 @@ export const unfi: AccountMicrositeData = {
     { mark: 'Closure cadence', body: 'Logan Township → Billings + Bismarck → Fort Wayne → Sturtevant → Allentown 2026. Same demand, fewer docks.' },
     { mark: 'Greenfield window', body: 'Manchester PA opened Q1 FY25 · Sarasota FL H1 FY26. The rare moment the operating-model layer ships into the building.' },
     { mark: 'Resilience screen', body: 'June 2024 cyberattack · $350M–$425M sales loss · cached-local, graceful-degradation is now the first filter every vendor passes.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed.' },
   ],
 
   audioBrief: {

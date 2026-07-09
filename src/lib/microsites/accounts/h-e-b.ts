@@ -121,7 +121,7 @@ export const hEB: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The two highest-leverage pilot targets at H-E-B are different in kind: (1) the San Antonio Super Regional Grocery Warehouse, where the dock-door count (~200) and the existing operating-standard discipline make the operating-model layer the cleanest second-order improvement on an already-modern building; (2) the Houston expansion (the existing Houston DC plus the Hempstead campus as it stands up), where the production capacity-into-the-yard ramp is the timing pressure and a greenfield yard-operations design avoids retrofitting an existing protocol. We would expect the network to make sense of itself within two to four quarters of the pilot.',
@@ -579,7 +579,7 @@ export const hEB: AccountMicrositeData = {
     { mark: 'Three-flow inbound', body: 'Own-manufacturing (13+ H-E-B-owned plants, dairy · bakery · tortilla · meat · ice cream · ready meals) · CPG-partner (appointment-and-detention cadence) · import (Texas ports + HEB Mexico cross-border through Laredo on customs-clearance cadence), same dock surface, three priority logics, three downstream costs of error.' },
     { mark: 'Vertical-integration asymmetry', body: 'A 90-minute CPG-partner delay is a detention line. A 90-minute own-manufacturing delay is an H-E-B-owned production-line problem upstream and an H-E-B fresh-shelf-life problem downstream, both costs land inside the enterprise.' },
     { mark: 'Hempstead accelerant', body: '~500-acre Hempstead TX distribution campus broke ground late 2024 · third Houston eCommerce FC opened early 2025 (~100,000 sq ft) · existing Houston DC absorbs production capacity uplift in the meantime. Largest single-region production capacity-add the network has run in years.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same multi-source-inbound-into-shared-dock shape, harder freight, single-banner (the multi-banner-against-three-inbound wrinkle is H-E-B-specific).' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same multi-source-inbound-into-shared-dock shape, harder freight, single-banner (the multi-banner-against-three-inbound wrinkle is H-E-B-specific).' },
   ],
 
   audioBrief: {

@@ -93,7 +93,7 @@ export const cocaCola: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The Coca-Cola pilot logic is different in kind from a single-operator pilot, because the network architecture is multi-tier: TCCC sets standards, the Global Supply Chain Council ratifies them, and the bottlers run them at site. The two highest-leverage starting points are: (1) one Coca-Cola Consolidated campus where the public detention anchor already names the cost, which means the business case is pre-written; (2) one Reyes Coca-Cola Bottling site in California, where the summer peak hits hardest and the broader Reyes logistics organization can carry the operating learning across other beverage and food businesses inside the parent group. Either pilot lands inside one bottler\'s operating sovereignty, ladders to a CCNA-endorsed system standard within two to four quarters, and becomes opt-in across the remaining ~60 franchisees over the following year. The orchestrated supply chain already knows how to execute this sequence, that is the precedent KORE established.',
@@ -433,7 +433,7 @@ export const cocaCola: AccountMicrositeData = {
       type: 'metric',
       stats: [
         { value: '24', label: 'Facilities Live' },
-        { value: '>200', label: 'Contracted Network' },
+        { value: '260', label: 'Sites Committed' },
         { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)' },
         { value: '$1M+', label: 'Per-Site Profit Impact' },
       ],
@@ -551,7 +551,7 @@ export const cocaCola: AccountMicrositeData = {
     { mark: 'KORE precedent', body: 'System-wide quality and safety standards land on yards Coca-Cola does not operate. The franchise agreement makes adherence non-optional.' },
     { mark: 'Public detention anchor', body: 'Coca-Cola Consolidated 10-K names the line at one bottler. The system-wide number is unaggregated by design.' },
     { mark: 'Succession signal', body: 'Henrique Braun, 30 years inside the bottling system, succeeds James Quincey as CEO in 2026.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed.' },
   ],
 
   audioBrief: {

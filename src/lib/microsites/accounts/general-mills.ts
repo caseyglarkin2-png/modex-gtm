@@ -109,7 +109,7 @@ const GENERAL_MILLS_FACILITY_COUNT = getFacilityCountLowerBound('General Mills',
  *       liveDeployment: {
  *         headline: 'Already proven in high-production capacity CPG networks',
  *         summary: 'The operating model is live today in multi-site CPG environments where dock-office teams took on additional volume while remaining headcount neutral. That is the exact posture General Mills needs as remaining facilities absorb more trailers.',
- *         badges: ['24 facilities live', '>200 network contracted', 'Headcount-neutral dock office'],
+ *         badges: ['24 facilities live', '260-site network committed', 'Headcount-neutral dock office'],
  *       },
  *       methodology: 'Proof metrics reflect measured truck-turn compression, dock-office leverage, and multi-site rollout performance in comparable CPG networks.',
  *       blocks: [
@@ -117,7 +117,7 @@ const GENERAL_MILLS_FACILITY_COUNT = getFacilityCountLowerBound('General Mills',
  *           type: 'metric',
  *           stats: [
  *             { value: '24', label: 'Facilities Live', context: 'Running the full YardFlow protocol today' },
- *             { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout' },
+ *             { value: '260', label: 'Sites Committed', context: 'Contracted for rollout' },
  *             { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
  *             { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured across live deployments' },
  *             { value: '30 min', label: 'Remote Deployment', context: 'From zero to live at a new facility' },
@@ -237,7 +237,7 @@ export const generalMills: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline: '30-60 days from kickoff to first measurable impact at the pilot site. Belvidere is the cleanest greenfield candidate; Cedar Rapids is the hardest-tested brownfield candidate. The first 60-day proof is what earns the right to author the yard-layer entry into the Accelerate operating standard the same way HMM and the Palantir digital twin entered it.',
       referenceAvailable: true,
@@ -673,7 +673,7 @@ export const generalMills: AccountMicrositeData = {
       type: 'metric',
       stats: [
         { value: '24', label: 'Facilities Live' },
-        { value: '>200', label: 'Contracted Network' },
+        { value: '260', label: 'Sites Committed' },
         { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)' },
         { value: '$1M+', label: 'Per-Site Profit Impact' },
       ],
@@ -812,7 +812,7 @@ export const generalMills: AccountMicrositeData = {
     { mark: 'Restructuring', body: '$82M program · 3 Missouri plants closing through 2026.' },
     { mark: 'Greenfield', body: 'Belvidere IL DC · opened April 2024 · Midwest hub, no legacy yard habits.' },
     { mark: 'Gallagher in his own words', body: 'Run, Improve, and Transform. The yard is the part of Transform the digital twin cannot see yet, the framework Jonathan Ness inherits.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed.' },
   ],
 
   audioBrief: {

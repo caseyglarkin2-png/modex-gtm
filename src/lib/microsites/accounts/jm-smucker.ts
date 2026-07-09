@@ -56,7 +56,7 @@ export const jmSmucker: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. Two pilot candidates fit the Smucker integration profile: (1) New Orleans, where the coffee network has just consolidated and the new production capacity is concentrated in a single high-volume site, the trailer-into-the-yard pressure there is the most calibrated baseline in the network; and (2) Columbus GA, where the $120M Hostess expansion lands through early 2027 and the yard around the expanded building is the layer that has to absorb the new production capacity without unwinding either the legacy Hostess workflow or the Smucker-side standard. The synergy clock is the timing driver, the meaningful share of the $100M target that lives at the dock-to-yard interface is recoverable on a one-to-two-quarter cycle once a pilot site is running.',
@@ -377,7 +377,7 @@ export const jmSmucker: AccountMicrositeData = {
       toneShift:
         'Cross-functional, supply-chain-and-procurement register. Amadeo has visibility into both sides of the seam (manufacturing-production capacity and carrier-procurement). Position the yard as the surface where the two halves of his brief intersect daily.',
       kpiLanguage: ['integration synergy realization', 'dock-to-stock cycle time', 'multi-profile dock sequencing', 'carrier cost-to-serve', 'network production capacity variance'],
-      proofEmphasis: 'The cross-network rollout cadence (24 live, >200 contracted) is the structural-credibility hook for a procurement-adjacent buyer.',
+      proofEmphasis: 'The cross-network rollout cadence (24 live, 260 committed) is the structural-credibility hook for a procurement-adjacent buyer.',
     },
     {
       person: {
@@ -456,7 +456,7 @@ export const jmSmucker: AccountMicrositeData = {
       type: 'metric',
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Measured across live deployments' },
-        { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across comparable verticals' },
+        { value: '260', label: 'Sites Committed', context: 'Contracted for rollout across comparable verticals' },
         { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at food & beverage facilities' },
       ],
@@ -464,7 +464,7 @@ export const jmSmucker: AccountMicrositeData = {
     {
       type: 'quote',
       quote: {
-        text: 'When a beverage manufacturer integrated >200 contracted facilities onto one yard platform, they absorbed 15% more volume without adding dock staff.',
+        text: 'When a beverage manufacturer integrated 260 committed facilities onto one yard platform, they absorbed 15% more volume without adding dock staff.',
         role: 'Operations Director',
         company: 'Multi-Site Food & Beverage Manufacturer',
       },
@@ -511,7 +511,7 @@ export const jmSmucker: AccountMicrositeData = {
     { mark: 'Columbus expansion', body: 'Hostess plant · $120M · new building + equipment · early 2027 production capacity.' },
     { mark: 'Org structure', body: 'CPSO role created Feb 2026 (Rob Ferguson) · COO eliminated · supply chain decoupled from manufacturing.' },
     { mark: 'Three-vertical mix', body: 'Coffee · peanut butter & fruit spreads · pet food · plus sweet baked goods inherited from Hostess.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed.' },
   ],
 
   audioBrief: {

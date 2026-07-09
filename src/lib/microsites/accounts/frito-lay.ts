@@ -91,7 +91,7 @@ export const fritoLay: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted · 30-min remote deployment', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed · 30-min remote deployment', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The sites where this lands first are not the marquee nodes, Perry, GA (~150 miles from Atlanta) and Topeka, KS are the simpler, lower-risk facilities where the carrier yard is most instrument-able, the displacement risk is lowest, and the operating model can be proven before it has to scale. Plano is where the proven model expands into the highest-visibility node in the U.S. portfolio; the digital-twin plants are the second wave once the network operating layer has its first 60-day proof, and the 200+ DCs are the third. We would expect the network to make sense of itself within two to four quarters of that first pilot.',
@@ -468,7 +468,7 @@ export const fritoLay: AccountMicrositeData = {
       type: 'metric',
       stats: [
         { value: '24', label: 'Facilities Live' },
-        { value: '>200', label: 'Contracted Network' },
+        { value: '260', label: 'Sites Committed' },
         { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)' },
         { value: '$1M+', label: 'Per-Site Profit Impact' },
       ],
@@ -594,7 +594,7 @@ export const fritoLay: AccountMicrositeData = {
     { mark: 'Plant twin', body: 'Siemens / NVIDIA digital twin · 20% production capacity lift · 10–15% capex reduction.' },
     { mark: 'Yard-side proof', body: 'Outrider autonomous yard-truck pilot · ~50% reduction in idle time at a Frito-Lay DC.' },
     { mark: 'Network rank', body: 'PepsiCo Foods · #1 supplier on Kantar PoweRanking, nine years running (2016–2024).' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed.' },
   ],
 
   audioBrief: {

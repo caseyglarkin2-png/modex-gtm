@@ -103,7 +103,7 @@ export const performanceFoodGroup: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         "30–60 days from kickoff to first measurable impact at the pilot site. The two highest-leverage pilot candidates at PFG are different in kind: (1) a flagship legacy Performance Foodservice broadline DC, the cleanest test of whether a unified yard operating model can land on a site where the in-building operating discipline is already mature and the dock-arbitration problem is the most concentrated; (2) a Cheney-acquired DC inside the three-year synergy window, the cleanest test of whether the operating standard can ride on top of a recently-integrated site where the pre-acquisition yard habits are still the dominant reflex. We would expect the network to make sense of itself within two to four quarters of the pilot.",
@@ -293,7 +293,7 @@ export const performanceFoodGroup: AccountMicrositeData = {
       type: 'metric',
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Measured across live deployments' },
-        { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across comparable verticals' },
+        { value: '260', label: 'Sites Committed', context: 'Contracted for rollout across comparable verticals' },
         { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at food & beverage facilities' },
       ],
@@ -348,7 +348,7 @@ export const performanceFoodGroup: AccountMicrositeData = {
     { mark: 'Segment mix', body: 'Foodservice ~53% · Convenience (Core-Mark) ~39% · Specialty ~8% · three operating-day shapes, one parent.' },
     { mark: 'McPherson in seat', body: 'Scott McPherson · CEO Jan 1, 2026 · Chief Field Operations Officer 2024 → President & COO 2025 → CEO 2026. Operations-native resume.' },
     { mark: 'Holm as Executive Chair', body: 'CEO 2008–2025 · stays close to McPherson on M&A, customer relationships, strategic direction. Author of the Cheney acquisition.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same coordinates, harder freight.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same coordinates, harder freight.' },
   ],
 
   audioBrief: {

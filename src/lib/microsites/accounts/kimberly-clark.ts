@@ -113,7 +113,7 @@ export const kimberlyClark: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The strongest pilot target at K-C is the single NA plant running the worst dock-cycle variance against the cube-heavy trailer-count baseline, same dock-door count, materially more in-yard execution friction, the binding-constraint problem that yard standardization specifically addresses. The cube-heavy math means a 24-minute turn-time reduction clears more trailers per shift here than the same reduction at an equivalent food-CPG plant, and the trailers it clears land inside the Powering Care productivity number the same week they clear.',
@@ -298,7 +298,7 @@ export const kimberlyClark: AccountMicrositeData = {
     { mark: 'Cube-heavy math', body: 'Diaper trailers cube out at ~25–30% of weight limit. Yard scale is multiplied.' },
     { mark: 'Suzano JV', body: '$3.4B EV · K-C 49% · closing mid-2026 · NA-retained entity becomes the margin surface.' },
     { mark: 'Fenske in her own words', body: 'Twenty-two years at 3M, end-to-end supply chain for US and Canada across every business group.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed.' },
   ],
 
   audioBrief: {

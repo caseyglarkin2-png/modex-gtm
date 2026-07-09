@@ -115,7 +115,7 @@ export const honda: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         "30-60 days from kickoff to first measurable impact at the pilot site. The two highest-leverage pilot targets at Honda are different in kind: (1) Marysville Auto Plant, because it is the flagship, the IPU sub-assembly is parked there, the L-H Battery cell inbound from Jeffersonville lands there, and the flex-line variant-mix arbitration is hardest there, making it the site where any network-wide standard ultimately has to prove out under the tightest JIT tolerance in the portfolio; (2) East Liberty Auto Plant, because the AFEELA-1 production cancellation in late March 2026 redirected the trial-build line and the operating pattern at the dock has not yet hardened, which makes it the cleanest place in the network to set a new yard-layer standard before the post-reversal flex-line cadence settles. The operating model makes sense of itself across the rest of the assembly footprint (Anna, Greensburg IN, Lincoln AL) within two to four quarters of the pilot.",
@@ -454,7 +454,7 @@ export const honda: AccountMicrositeData = {
         'cell-inbound staging exposure',
         'total cost of ownership at the yard layer',
       ],
-      proofEmphasis: "Primo is the public comparable, same multi-site, multi-input network shape, harder freight. The per-site profit impact ($1M+ measured) and the network-rollout cadence (24 live, >200 contracted) are the CFO-relevant proof points. The directly-shaped reference (the 237-facility CPG anchor) is available for peer calls when the conversation gets to who else has done this at our scale.",
+      proofEmphasis: "Primo is the public comparable, same multi-site, multi-input network shape, harder freight. The per-site profit impact ($1M+ measured) and the network-rollout cadence (24 live, 260 committed) are the CFO-relevant proof points. The directly-shaped reference (the 237-facility CPG anchor) is available for peer calls when the conversation gets to who else has done this at our scale.",
     },
   ],
 
@@ -463,7 +463,7 @@ export const honda: AccountMicrositeData = {
       type: 'metric',
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Measured across live deployments' },
-        { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across comparable verticals' },
+        { value: '260', label: 'Sites Committed', context: 'Contracted for rollout across comparable verticals' },
         { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at manufacturing facilities' },
       ],
@@ -519,7 +519,7 @@ export const honda: AccountMicrositeData = {
     { mark: 'L-H Battery JV', body: 'Jeffersonville OH · ~$3.5B build · cell production live since late 2025 · Feb 2026 sale-and-leaseback to Honda for ~$2.9B · single-source weight-heavy hazmat lane into Marysville IPU sub-assembly.' },
     { mark: 'AFEELA cancellation', body: 'Sony Honda Mobility cancelled AFEELA 1 production March 25, 2026 · East Liberty trial-build line redirected · fresh-paint operating pattern not yet hardened.' },
     { mark: 'Coverage map', body: '5 Ohio EV Hub plant tiles covered · 1 unfilled · the yard layer above the dock.' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · same network shape, harder freight, single-customer-type.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · same network shape, harder freight, single-customer-type.' },
   ],
 
   audioBrief: {

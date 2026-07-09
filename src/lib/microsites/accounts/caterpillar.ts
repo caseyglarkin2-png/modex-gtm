@@ -86,7 +86,7 @@ export const caterpillar: AccountMicrositeData = {
         { label: 'Avg truck turn time (drop-and-hook)', before: '48 min', after: '24 min', delta: '−50%' },
         { label: 'Per-site profit impact', before: 'Pre-deployment baseline', after: '$1M+ measured', delta: 'measured' },
         { label: 'Dock-office headcount during volume growth', before: 'Scaled with volume', after: 'Held flat while absorbing more volume', delta: 'qualitative' },
-        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · >200 contracted', delta: 'measured' },
+        { label: 'Network rollout cadence', before: 'Site-by-site reinvention', after: '24 facilities live · 260 committed', delta: 'measured' },
       ],
       timeline:
         '30–60 days from kickoff to first measurable impact at the pilot site. The two highest-leverage pilot candidates at Caterpillar are different in kind: (1) Morton IL parts distribution, because the 360,000-part 24/7 volume makes yard variance immediately visible against a daily-pick baseline and the operating-model improvement is measurable inside one quarter; (2) Griffin GA as a single-plant pilot, because the dealer-delivery flow on built-to-order machines is the cleanest place to see whether yard sequencing actually changes delivery-window adherence. We would expect the network to make sense of itself within two to four quarters once the pilot reads as expected.',
@@ -242,7 +242,7 @@ export const caterpillar: AccountMicrositeData = {
       type: 'metric',
       stats: [
         { value: '24', label: 'Facilities Live', context: 'Measured at comparable network operations' },
-        { value: '>200', label: 'Contracted Network', context: 'Contracted for rollout across comparable verticals' },
+        { value: '260', label: 'Sites Committed', context: 'Contracted for rollout across comparable verticals' },
         { value: '48-to-24', label: 'Truck Turn Time (drop-and-hook)', context: 'Average improvement in drop-hook cycle' },
         { value: '$1M+', label: 'Per-Site Profit Impact', context: 'Measured at comparable facilities' },
       ],
@@ -297,7 +297,7 @@ export const caterpillar: AccountMicrositeData = {
     { mark: 'Freight profile', body: 'D11-class dozers 5,000–400,000+ lbs · multiple parking spots per unit · per-LOAD-hardest, not per-case-hardest.' },
     { mark: 'Integrated-logistics signal', body: 'CEVA Supplier of the Year for Integrated Logistics, Sep 2025 · measured June 2024 – May 2025 scorecard · Margaret Poorman represented the function on stage.' },
     { mark: 'Coverage map', body: 'Six operating tiles · five covered (Cat Digital, In-Field Autonomy, Mining Baseline, Dealer Network, Parts Distribution) · one unfilled (Yard Network Ops).' },
-    { mark: 'Network rollout', body: 'Primo · 24 facilities live · >200 contracted · per-case-hardest CPG comparable, per-LOAD-hardest is the read-across.' },
+    { mark: 'Network rollout', body: 'Primo · 24 facilities live · 260 committed · per-case-hardest CPG comparable, per-LOAD-hardest is the read-across.' },
   ],
 
   audioBrief: {
